@@ -28,7 +28,7 @@
 "global.share" = "Compartir";
 "global.forward" = "Forward";
 "global.save" = "Save";
-"global.resend" = "Resend";
+"global.resend" = "Volver a enviar";
 "global.preview" = "Vista previa";
 
 // Scan

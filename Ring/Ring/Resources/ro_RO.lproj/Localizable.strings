@@ -282,8 +282,8 @@
 "linkDevice.hudMessage" = "Se verifică";
 
 //Contact Page
-"contactPage.startAudioCall" = "Începe un Apel Audio";
-"contactPage.startVideoCall" = "Începe un Apel Video";
+"contactPage.startAudioCall" = "Începe un apel audio";
+"contactPage.startVideoCall" = "Începe un apel video";
 "contactPage.sendMessage" = "Trimite un mesaj";
 "contactPage.clearConversation" = "Șterge discuția";
 "contactPage.blockContact" = "Blochează contactul";
