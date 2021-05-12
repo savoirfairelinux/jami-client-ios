@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "對話";
-"global.contactRequestsTabBarTitle" = "邀請";
-"global.meTabBarTitle" = "帳號";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "確定";
 "global.versionName" = "一起";
 "global.close" = "關閉";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨天";
-"smartlist.results" = "搜尋結果";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "對話";
 "smartlist.searching" = "正在搜尋...";
 "smartlist.noResults" = "沒有結果";
 "smartlist.noConversation" = "沒有對話";
 "smartlist.searchBarPlaceholder" = "輸入名字……";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "沒有網路連接";
 "smartlist.cellularAccess" = "確定在您的設定中已授權使用行動通訊";
 "smartlist.accountsTitle" = "帳號";
 "smartlist.addAccountButton" = "+ 新增帳號";
 "smartlist.noNumber" = "選定的連絡人沒有任何號碼";
 "smartlist.selectOneNumber" = "選取其中一個號碼";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "編寫訊息給";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "即時位置分享";
 
 //General Settings
-"generalSettings.title" = "一般設定";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "啟用視訊加速";
 
 //Migrate Account

@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Pogovori";
-"global.contactRequestsTabBarTitle" = "Povabila";
-"global.meTabBarTitle" = "Račun";
+"global.meTabBarTitle" = "Nastavitve računa";
 "global.ok" = "V redu";
 "global.versionName" = "Skupaj";
 "global.close" = "Zapri";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Včeraj";
-"smartlist.results" = "Rezultati iskanja";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Pogovori";
 "smartlist.searching" = "Iščem...";
 "smartlist.noResults" = "ni rezultata";
 "smartlist.noConversation" = "Ni pogovorov";
 "smartlist.searchBarPlaceholder" = "Vnesite ime...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Ni omrežne povezave";
 "smartlist.cellularAccess" = "Prepričajte se, da je v nastavitvah dovoljen dostop do mobilnega omrežja";
 "smartlist.accountsTitle" = "Računi";
 "smartlist.addAccountButton" = "+ Dodaj račun";
 "smartlist.noNumber" = "Izbrani stiki nimajo številke";
 "smartlist.selectOneNumber" = "Izberi eno od številk";
+"smartlist.invitations" = "Povabila";
+"smartlist.accountSettings" = "Nastavitve računa";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "O Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Deljenje lokacije v živo";
 
 //General Settings
-"generalSettings.title" = "Splošne nastavitve";
+"generalSettings.title" = "Napredne nastavitve";
 "generalSettings.videoAcceleration" = "Vklopi strojno pospeševanje videa";
 
 //Migrate Account

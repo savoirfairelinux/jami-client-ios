@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "ਗੱਲਾਂਬਾਤਾਂ";
-"global.contactRequestsTabBarTitle" = "ਸੱਦੇ";
-"global.meTabBarTitle" = "ਖਾਤਾ";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "ਠੀਕ ਹੈ";
 "global.versionName" = "Together";
 "global.close" = "Close";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "ਕੱਲ੍ਹ";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "ਗੱਲਾਂਬਾਤਾਂ";
 "smartlist.searching" = "ਖੋਜਿਆ ਜਾ ਰਿਹਾ ਹੈ...";
 "smartlist.noResults" = "ਕੋਈ ਨਤੀਜਾ ਨਹੀਂ";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "ਕੋਈ ਨੈੱਟਵਰਕ ਕਨੈਕਸ਼ਨ ਨਹੀਂ ਹੈ";
 "smartlist.cellularAccess" = "ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਆਪਣੀਆਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਸੈਲਿਊਲਰ ਪਹੁੰਚ ਦਿੱਤੀ ਹੋਵੇ";
 "smartlist.accountsTitle" = "ਖਾਤੇ";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "General settings";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account

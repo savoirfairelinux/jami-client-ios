@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Biseda";
-"global.contactRequestsTabBarTitle" = "Ftesa";
-"global.meTabBarTitle" = "Llogari";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "OK";
 "global.versionName" = "Tok";
 "global.close" = "Mbylle";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Dje";
-"smartlist.results" = "Përfundime Kërkimi";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Biseda";
 "smartlist.searching" = "Po kërkohet…";
 "smartlist.noResults" = "S’ka përfundime";
 "smartlist.noConversation" = "S’ka biseda";
 "smartlist.searchBarPlaceholder" = "Jepni emrin…";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
 "smartlist.cellularAccess" = "Sigurohuni qe te rregullimet tuaja i është dhënë hyrje te celulari";
 "smartlist.accountsTitle" = "Llogari";
 "smartlist.addAccountButton" = "+ Shtoni Llogari";
 "smartlist.noNumber" = "Kontakti i përzgjedhur s’ka ndonjë numër";
 "smartlist.selectOneNumber" = "Përzgjidhni një nga numrat";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Shkruani mesazh për";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Dhënie “live” e vendndodhjes";
 
 //General Settings
-"generalSettings.title" = "Rregullime të përgjithshme";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
 
 //Migrate Account

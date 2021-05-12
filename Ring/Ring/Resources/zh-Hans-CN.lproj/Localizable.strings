@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "会话";
-"global.contactRequestsTabBarTitle" = "邀请";
-"global.meTabBarTitle" = "账户";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "确定";
 "global.versionName" = "一起";
 "global.close" = "关闭";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨天";
-"smartlist.results" = "搜索结果";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "会话";
 "smartlist.searching" = "正在搜索…";
 "smartlist.noResults" = "无结果";
 "smartlist.noConversation" = "没有会话";
 "smartlist.searchBarPlaceholder" = "输入名字";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "无网络连接";
 "smartlist.cellularAccess" = "请确保蜂窝移动网络权限已开启";
 "smartlist.accountsTitle" = "账户";
 "smartlist.addAccountButton" = "+ 添加账户";
 "smartlist.noNumber" = "选定的连接没有任何数字";
 "smartlist.selectOneNumber" = "选择这些数字中的一个";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "实时位置分享";
 
 //General Settings
-"generalSettings.title" = "常规设置";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "启用视频加速";
 
 //Migrate Account

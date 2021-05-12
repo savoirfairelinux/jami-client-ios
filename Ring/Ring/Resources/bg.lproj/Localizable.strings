@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Разговори";
-"global.contactRequestsTabBarTitle" = "Покани";
-"global.meTabBarTitle" = "Профил";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Добре";
 "global.versionName" = "Together";
 "global.close" = "Затваряне";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Разговори";
 "smartlist.searching" = "Търсене...";
 "smartlist.noResults" = "Няма резултати";
 "smartlist.noConversation" = "Няма разговори";
 "smartlist.searchBarPlaceholder" = "Въведете име…";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Няма връзка с мрежата";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 "smartlist.accountsTitle" = "Профили";
 "smartlist.addAccountButton" = "Добавяне на профил";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "General settings";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account

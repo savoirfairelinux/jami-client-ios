@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Beszélgetések";
-"global.contactRequestsTabBarTitle" = "Meghívások";
-"global.meTabBarTitle" = "Fiók";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Rendben";
 "global.versionName" = "Együtt";
 "global.close" = "Bezárás";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
-"smartlist.results" = "Keresési eredmény";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Beszélgetések";
 "smartlist.searching" = "Keresés…";
 "smartlist.noResults" = "Nincs eredmény";
 "smartlist.noConversation" = "Beszélgetés nem található";
 "smartlist.searchBarPlaceholder" = "Név megadása…";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Nincs hálózati csatlakozás";
 "smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
 "smartlist.accountsTitle" = "Fiókok";
 "smartlist.addAccountButton" = "+ Fiók hozzáadása";
 "smartlist.noNumber" = "A kiválasztott kapcsolatnak nincs SIP-száma";
 "smartlist.selectOneNumber" = "Válasszon egy számot";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Üzenet írása következőknek:";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Valós idejű hely megosztása";
 
 //General Settings
-"generalSettings.title" = "Általános beállítások";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Videó gyorsítás engedélyezése";
 
 //Migrate Account

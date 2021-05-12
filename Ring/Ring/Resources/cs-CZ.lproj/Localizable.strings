@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Konverzace";
-"global.contactRequestsTabBarTitle" = "Pozvání";
-"global.meTabBarTitle" = "Účet";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "OK";
 "global.versionName" = "Together";
 "global.close" = "Zavřít";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Včera";
-"smartlist.results" = "Výsledky hledání";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Konverzace";
 "smartlist.searching" = "Hledá se...";
 "smartlist.noResults" = "Žádné výsledky";
 "smartlist.noConversation" = "Žádné konverzace";
 "smartlist.searchBarPlaceholder" = "Zadejte jméno...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Chybí připojení";
 "smartlist.cellularAccess" = "Ujistěte se, že je v nastavení zaručen buňkový (místní) přístup";
 "smartlist.accountsTitle" = "Účty";
 "smartlist.addAccountButton" = "+ Přidat účet";
 "smartlist.noNumber" = "Vybraný kontakt nemá žádné číslo.";
 "smartlist.selectOneNumber" = "Vyberte jedno z čísel.";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Sdílení aktuální polohy";
 
 //General Settings
-"generalSettings.title" = "Obecná nastavení";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Povolit zrychlení videa";
 
 //Migrate Account

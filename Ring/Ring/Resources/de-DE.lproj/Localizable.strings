@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Gespräche";
-"global.contactRequestsTabBarTitle" = "Einladungen";
-"global.meTabBarTitle" = "Konto";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Ok";
 "global.versionName" = "Gemeinsam";
 "global.close" = "Schließen";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Gestern";
-"smartlist.results" = "Suchergebnis";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Gespräche";
 "smartlist.searching" = "Suche...";
 "smartlist.noResults" = "Keine Ergebnisse";
 "smartlist.noConversation" = "Keine Unterhaltungen";
 "smartlist.searchBarPlaceholder" = "Name eingeben...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Keine Netzwerkkonnektivität";
 "smartlist.cellularAccess" = "Bitte stellen Sie sicher, dass in den Einstellungen Mobilfunkzugriff gewährt wurde.";
 "smartlist.accountsTitle" = "Konten";
 "smartlist.addAccountButton" = "+ Konto hinzufügen";
 "smartlist.noNumber" = "Der ausgewählte Kontakt hat keine Nummer";
 "smartlist.selectOneNumber" = "Wählen Sie eine der Zahlen";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Standort live mitteilen";
 
 //General Settings
-"generalSettings.title" = "Allgemeine Einstellungen";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Video-Beschleunigung einschalten";
 
 //Migrate Account

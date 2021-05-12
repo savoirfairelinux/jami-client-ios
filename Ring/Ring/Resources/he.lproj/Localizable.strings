@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "דיונים";
-"global.contactRequestsTabBarTitle" = "הזמנות";
-"global.meTabBarTitle" = "חשבון";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "אישור";
 "global.versionName" = "יחד";
 "global.close" = "סגירה";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "אתמול";
-"smartlist.results" = "תוצאת חיפוש";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "דיונים";
 "smartlist.searching" = "חפש...";
 "smartlist.noResults" = "אין תוצאות";
 "smartlist.noConversation" = "אין דיונים";
 "smartlist.searchBarPlaceholder" = "יש להזין שם...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "אין חיבור לרשת";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 "smartlist.accountsTitle" = "חשבונות";
 "smartlist.addAccountButton" = "+ הוספת חשבון";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "General settings";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account

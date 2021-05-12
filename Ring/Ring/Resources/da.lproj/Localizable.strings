@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Samtaler";
-"global.contactRequestsTabBarTitle" = "Invitationer";
-"global.meTabBarTitle" = "Konto";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Ok";
 "global.versionName" = "Together";
 "global.close" = "Luk";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.results" = "Søgeresultat";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Samtaler";
 "smartlist.searching" = "Søger...";
 "smartlist.noResults" = "Ingen resultater";
 "smartlist.noConversation" = "Ingen samtaler";
 "smartlist.searchBarPlaceholder" = "Indtast navn...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Ingen netværksforbindelse";
 "smartlist.cellularAccess" = "Kontroller at rettigheder til mobildata er givet i indstillinger";
 "smartlist.accountsTitle" = "Konti";
 "smartlist.addAccountButton" = "+Tilføj Konto";
 "smartlist.noNumber" = "Den valgte kontakt har ikke noget nummer";
 "smartlist.selectOneNumber" = "Vælg et af numrene";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Generelle indstillinger";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account

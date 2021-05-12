@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Pokalbiai";
-"global.contactRequestsTabBarTitle" = "Pakvietimai";
-"global.meTabBarTitle" = "Paskyra";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Gerai";
 "global.versionName" = "Together";
 "global.close" = "Užverti";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Vakar";
-"smartlist.results" = "Paieškos rezultatas";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Pokalbiai";
 "smartlist.searching" = "Ieškoma...";
 "smartlist.noResults" = "Jokių rezultatų";
 "smartlist.noConversation" = "Pokalbių nėra";
 "smartlist.searchBarPlaceholder" = "Įveskite vardą...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Nėra tinklo ryšio";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 "smartlist.accountsTitle" = "Paskyros";
 "smartlist.addAccountButton" = "+ Pridėti paskyrą";
 "smartlist.noNumber" = "Pasirinktas adresatas neturi numerio";
 "smartlist.selectOneNumber" = "Pasirinkite vieną iš numerių";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Bendri nustatymai";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Įjungti vaizdo spartinimą";
 
 //Migrate Account

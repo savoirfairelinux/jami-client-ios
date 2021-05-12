@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Conversații";
-"global.contactRequestsTabBarTitle" = "Invitații";
-"global.meTabBarTitle" = "Cont";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Ok";
 "global.versionName" = "Împreună";
 "global.close" = "Închide";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ieri";
-"smartlist.results" = "Rezultatele căutării";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Conversații";
 "smartlist.searching" = "Căutare...";
 "smartlist.noResults" = "Niciun rezultat";
 "smartlist.noConversation" = "Nicio conversație";
 "smartlist.searchBarPlaceholder" = "Introdu numele...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Nicio legătură la rețea";
 "smartlist.cellularAccess" = "Asigură-te că accesul la rețea este permis în reglările tale";
 "smartlist.accountsTitle" = "Conturi";
 "smartlist.addAccountButton" = "+ Adaugă un cont";
 "smartlist.noNumber" = "Contactul ales nu are niciun număr";
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Scrie pentru";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Distribuirea poziției în direct";
 
 //General Settings
-"generalSettings.title" = "Reglări generale";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Activează accelerarea video";
 
 //Migrate Account

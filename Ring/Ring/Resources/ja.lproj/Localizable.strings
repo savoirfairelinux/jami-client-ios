@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "会話";
-"global.contactRequestsTabBarTitle" = "招待";
-"global.meTabBarTitle" = "アカウント";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "OK";
 "global.versionName" = "Together";
 "global.close" = "閉じる";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨日";
-"smartlist.results" = "検索結果";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "会話";
 "smartlist.searching" = "検索中...";
 "smartlist.noResults" = "検索結果はありません";
 "smartlist.noConversation" = "会話はありません";
 "smartlist.searchBarPlaceholder" = "名前を入力...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "ネットワーク接続がありません";
 "smartlist.cellularAccess" = "設定から写真へのアクセスが許可されていることを確認してください";
 "smartlist.accountsTitle" = "アカウント";
 "smartlist.addAccountButton" = "+ アカウントを追加";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "一般設定";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account

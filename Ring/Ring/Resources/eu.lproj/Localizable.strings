@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Elkarrizketak";
-"global.contactRequestsTabBarTitle" = "Gonbidapenak";
-"global.meTabBarTitle" = "Kontua";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Ados";
 "global.versionName" = "Together";
 "global.close" = "Itxi";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Atzo";
-"smartlist.results" = "Search Result";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Elkarrizketak";
 "smartlist.searching" = "Bilatzen...";
 "smartlist.noResults" = "Emaitzarik ez";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Ez dago sare-konexiorik";
 "smartlist.cellularAccess" = "Egiaztatu sare mugikorrera sarbidea eman dela ezarpenetan";
 "smartlist.accountsTitle" = "Kontuak";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "General settings";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account

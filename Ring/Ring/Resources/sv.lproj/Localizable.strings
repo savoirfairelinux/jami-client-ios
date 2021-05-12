@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Konversationer";
-"global.contactRequestsTabBarTitle" = "Inbjudningar";
-"global.meTabBarTitle" = "Konto";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "OK";
 "global.versionName" = "Together";
 "global.close" = "Stäng";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.results" = "Sökresultat";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Konversationer";
 "smartlist.searching" = "Söker...";
 "smartlist.noResults" = "Inget resultat";
 "smartlist.noConversation" = "Inga konversationer";
 "smartlist.searchBarPlaceholder" = "Ange namn...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Ingen nätverksanslutning";
 "smartlist.cellularAccess" = "Tillse att mobilnätsåtkomst tillåts i dina inställningar";
 "smartlist.accountsTitle" = "Konton";
 "smartlist.addAccountButton" = "+ Lägg till konto";
 "smartlist.noNumber" = "Den valda kontakten har inget nummer";
 "smartlist.selectOneNumber" = "Välj ett nummer";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Allmänna inställningar";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Aktivera videoacceleration";
 
 //Migrate Account

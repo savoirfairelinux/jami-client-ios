@@ -20,15 +20,14 @@
 
 // Global
 "global.homeTabBarTitle" = "Keskustelu";
-"global.contactRequestsTabBarTitle" = "Kutsut";
-"global.meTabBarTitle" = "Tunnus";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Vahvista";
 "global.versionName" = "Yhdessä";
 "global.close" = "Sulje";
 "global.share" = "Jako";
-"global.forward" = "Forward";
+"global.forward" = "Välitä";
 "global.save" = "Tallenna";
-"global.resend" = "Resend";
+"global.resend" = "Uudelleen";
 "global.preview" = "Esikatselu";
 
 // Scan
@@ -37,24 +36,29 @@
 
 // Smartlist
 "smartlist.yesterday" = "Eilen";
-"smartlist.results" = "Hakutulos";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Keskustelu";
 "smartlist.searching" = "Etsitään...";
 "smartlist.noResults" = "Ei tuloksia";
 "smartlist.noConversation" = "Ei keskusteluja";
 "smartlist.searchBarPlaceholder" = "Syötä nimi...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Ei verkkoyhteyttä";
 "smartlist.cellularAccess" = "Varmista, että matkapuhelinverkon käyttö on sallittu asetuksissasi";
 "smartlist.accountsTitle" = "Tunnukset";
 "smartlist.addAccountButton" = "+ Lisää tunnus";
 "smartlist.noNumber" = "Valitulla yhteyshenkilöllä ei ole numeroa";
 "smartlist.selectOneNumber" = "Valitse yksi numeroista";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Kirjoita viesti";
 "conversation.explanationSendingLocationTo" = "Jaat sijaintisi tällä hetkellä";
 "conversation.explanationReceivingLocationFrom" = "Saat parhaillaan suoraa sijaintia";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "Kuvan tallennus galleriaan epäonnistui";
 
 //Invitations
 "invitations.noInvitations" = "Ei kutsuja";
@@ -88,7 +92,7 @@
 "createAccount.lookingForUsernameAvailability" = "etsitään saatavuutta…";
 "createAccount.invalidUsername" = "käyttäjätunnus ei kelpaa";
 "createAccount.usernameAlreadyTaken" = "käyttäjätunnus on jo varattu";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "Tunnus on saatavilla";
 "createAccount.loading" = "Ladataan";
 "createAccount.waitCreateAccountTitle" = "Lisätään tunnusta";
 "createAccount.RegisterAUsername" = "Rekisteröi käyttäjänimi";
@@ -185,10 +189,10 @@
 "calls.haghUp" = "katkaise puhelu";
 "calls.maximize" = "suurenna";
 "calls.minimize" = "pienennä";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "aseta valvoja";
+"calls.removeModerator" = "poista valvoja";
+"calls.muteAudio" = "mykistä ääni";
+"calls.unmuteAudio" = "poista mykistys";
 
 //Account Page
 "accountPage.devicesListHeader" = "Laitteet";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
 
 //General Settings
-"generalSettings.title" = "Yleiset asetukset";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Kytke videon laitteistokiihdytys";
 
 //Migrate Account

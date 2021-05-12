@@ -20,15 +20,14 @@
 
 // Global
 "global.homeTabBarTitle" = "Conversas";
-"global.contactRequestsTabBarTitle" = "Convites";
-"global.meTabBarTitle" = "Conta";
+"global.meTabBarTitle" = "Configurações da Conta";
 "global.ok" = "Ok";
 "global.versionName" = "Juntos";
 "global.close" = "Fechar";
 "global.share" = "Compartilhar";
-"global.forward" = "Forward";
+"global.forward" = "Encaminhar";
 "global.save" = "Salvar";
-"global.resend" = "Resend";
+"global.resend" = "Reenviar";
 "global.preview" = "Pré-visualização";
 
 // Scan
@@ -37,24 +36,29 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ontem";
-"smartlist.results" = "Resultado da Busca";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Conversas";
 "smartlist.searching" = "Buscando...";
 "smartlist.noResults" = "Nenhum resultado";
 "smartlist.noConversation" = "Nenhuma conversa";
 "smartlist.searchBarPlaceholder" = "Insira o nome...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Sem conectividade";
 "smartlist.cellularAccess" = "Verifique se o acesso via celular está autorizado em suas configurações";
 "smartlist.accountsTitle" = "Contas";
 "smartlist.addAccountButton" = "+ Adicionar uma conta";
 "smartlist.noNumber" = "O contato selecionado não tem nenhum número";
 "smartlist.selectOneNumber" = "Selecione um dos números";
+"smartlist.invitations" = "Convites";
+"smartlist.accountSettings" = "Configurações da Conta";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "Sobre Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Escrever mensagem para";
 "conversation.explanationSendingLocationTo" = "Atualmente você está compartilhando sua localização com";
 "conversation.explanationReceivingLocationFrom" = "Você está recebendo atualmente uma localização real de";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "Falha ao salvar a imagem na galeria";
 
 //Invitations
 "invitations.noInvitations" = "Sem convites";
@@ -88,7 +92,7 @@
 "createAccount.lookingForUsernameAvailability" = "buscando disponibilidade...";
 "createAccount.invalidUsername" = "nome de usuário inválido";
 "createAccount.usernameAlreadyTaken" = "nome de usuário já existente";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "Nome de usuário está disponível";
 "createAccount.loading" = "Carregando";
 "createAccount.waitCreateAccountTitle" = "Adicionando conta";
 "createAccount.RegisterAUsername" = "Registre um nome de usuário";
@@ -185,10 +189,10 @@
 "calls.haghUp" = "desligar";
 "calls.maximize" = "maximizar";
 "calls.minimize" = "minimizar";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "Definir moderador";
+"calls.removeModerator" = "Moderador não definido";
+"calls.muteAudio" = "Desligar áudio";
+"calls.unmuteAudio" = "Ligar áudio";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Compartilhamento de localização atual";
 
 //General Settings
-"generalSettings.title" = "Configurações gerais";
+"generalSettings.title" = "Configurações avançadas";
 "generalSettings.videoAcceleration" = "Ativar a aceleração de vídeo";
 
 //Migrate Account

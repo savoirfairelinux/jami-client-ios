@@ -20,8 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Разговоры";
-"global.contactRequestsTabBarTitle" = "Приглашения";
-"global.meTabBarTitle" = "Учётная запись";
+"global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Да";
 "global.versionName" = "Together";
 "global.close" = "Закрыть";
@@ -37,18 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Результаты поиска";
+"smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Разговоры";
 "smartlist.searching" = "Поиск...";
 "smartlist.noResults" = "Нет результатов";
 "smartlist.noConversation" = "Нет разговоров";
 "smartlist.searchBarPlaceholder" = "Введите имя...";
+"smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Отсутствует сетевое подключение";
 "smartlist.cellularAccess" = "Убедитесь, что сотовый доступ предоставляется в настройках";
 "smartlist.accountsTitle" = "Учетные записи";
 "smartlist.addAccountButton" = "+ Добавить аккаунт";
 "smartlist.noNumber" = "Выбранный контакт не имеет номера";
 "smartlist.selectOneNumber" = "Выберите один из номеров";
+"smartlist.invitations" = "Invitations";
+"smartlist.accountSettings" = "Account Settings";
+"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -331,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Основные настройки";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
