@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "remove1.png",
+      "filename" : "accept-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "remove2.png",
+      "filename" : "accept-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "remove3png.png",
+      "filename" : "accept.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

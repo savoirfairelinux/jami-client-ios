@@ -284,12 +284,10 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     func setupUI() {
         conversationBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 1, right: 5)
         requestsBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 2, right: 5)
+        conversationBadge.backgroundColor = UIColor.jamiMain
+        requestsBadge.backgroundColor = UIColor.jamiMain
         if #available(iOS 13.0, *) {
-            conversationBadge.backgroundColor = UIColor.tertiaryLabel
-            requestsBadge.backgroundColor = UIColor.tertiaryLabel
         } else {
-            conversationBadge.backgroundColor = UIColor.gray.lighten(by: 20)
-            requestsBadge.backgroundColor = UIColor.gray.lighten(by: 20)
             conversationsSegmentControl.tintColor = UIColor.gray.lighten(by: 10)
         }
         self.viewModel.updateSegmentControl.subscribe { [weak self] (messages, requests) in

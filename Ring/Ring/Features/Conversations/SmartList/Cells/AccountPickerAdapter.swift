@@ -62,6 +62,19 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
         let hideMigrationLabel = items[row].account.status != .errorNeedMigration
         accountView.needMigrateLabel.isHidden = hideMigrationLabel
         let profile = items[row].profileObservable
+        let account = items[row].account
+        let jamiId: String = { (account: AccountModel) -> String in
+        if !account.registeredName.isEmpty {
+            return account.registeredName
+        }
+        if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+            let accountName = userNameData[account.id] as? String,
+            !accountName.isEmpty {
+            return accountName
+        }
+        return account.jamiId
+        }(account)
+        accountView.idLabel.text = jamiId
         profile
             .map({ [weak self] accountProfile in
                 if let photo = accountProfile.photo,
@@ -83,22 +96,16 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
             .disposed(by: DisposeBag())
 
         profile
-            .map({ [weak self] accountProfile in
+            .map({ accountProfile -> String in
                 if let name = accountProfile.alias, !name.isEmpty {
                     return name
                 }
-                guard let account = self?.items[row].account else { return "" }
-                if !account.registeredName.isEmpty {
-                    return account.registeredName
-                }
-                if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-                    let accountName = userNameData[account.id] as? String,
-                    !accountName.isEmpty {
-                    return accountName
-                }
-                return account.jamiId
+                return jamiId
             })
-            .bind(to: accountView.nameLabel.rx.text)
+            .subscribe(onNext: { [weak accountView] (name) in
+                accountView?.idLabel.isHidden = name == jamiId
+                accountView?.nameLabel.text = name
+            })
             .disposed(by: DisposeBag())
         return accountView
     }

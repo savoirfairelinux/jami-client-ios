@@ -36,17 +36,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="klf-Xm-XH9">
-                                <rect key="frame" x="330" y="11" width="110" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="klf-Xm-XH9">
+                                <rect key="frame" x="308" y="9" width="132" height="34"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="feR-9F-sZM">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="F6k-BD-rff"/>
-                                            <constraint firstAttribute="height" constant="30" id="mgC-Pn-LLR"/>
+                                            <constraint firstAttribute="width" constant="34" id="F6k-BD-rff"/>
+                                            <constraint firstAttribute="height" constant="34" id="mgC-Pn-LLR"/>
                                         </constraints>
                                         <color key="tintColor" red="0.0" green="0.69803921568627447" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <state key="normal" image="done_icon">
+                                        <state key="normal" backgroundImage="accept">
                                             <color key="titleColor" red="0.0" green="0.69803921568627447" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -57,23 +57,23 @@
                                                 <color key="value" red="0.0" green="0.69803921568627447" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <integer key="value" value="2"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWB-HR-tae">
-                                        <rect key="frame" x="40" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="49" y="0.0" width="34" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="BU4-ED-Mry"/>
-                                            <constraint firstAttribute="height" constant="30" id="fQt-vU-mXY"/>
+                                            <constraint firstAttribute="width" constant="34" id="BU4-ED-Mry"/>
+                                            <constraint firstAttribute="height" constant="34" id="fQt-vU-mXY"/>
                                         </constraints>
                                         <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <state key="normal" image="remove">
+                                        <state key="normal" backgroundImage="refuse">
                                             <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <integer key="value" value="2"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -84,18 +84,18 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pni-bm-rkr">
-                                        <rect key="frame" x="80" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="98" y="0.0" width="34" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Bee-OT-mx8"/>
-                                            <constraint firstAttribute="width" constant="30" id="dsw-SF-fZe"/>
+                                            <constraint firstAttribute="height" constant="34" id="Bee-OT-mx8"/>
+                                            <constraint firstAttribute="width" constant="34" id="dsw-SF-fZe"/>
                                         </constraints>
                                         <color key="tintColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <state key="normal" image="close_icon">
+                                        <state key="normal" backgroundImage="block_icon">
                                             <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <integer key="value" value="2"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -103,11 +103,12 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <integer key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="Y0h-W8-ovK"/>
+                                    <constraint firstAttribute="width" constant="132" id="SA1-7h-Opo"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -135,8 +136,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="close_icon" width="24" height="24"/>
-        <image name="done_icon" width="24" height="24"/>
-        <image name="remove" width="24" height="24"/>
+        <image name="accept" width="18" height="18"/>
+        <image name="block_icon" width="24" height="24"/>
+        <image name="refuse" width="18" height="18"/>
     </resources>
 </document>
