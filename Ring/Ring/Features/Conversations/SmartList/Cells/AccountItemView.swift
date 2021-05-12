@@ -25,6 +25,7 @@ class AccountItemView: UIView {
     @IBOutlet var containerView: UIView!
     @IBOutlet weak var avatarView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var needMigrateLabel: UILabel!
 
     override init(frame: CGRect) {

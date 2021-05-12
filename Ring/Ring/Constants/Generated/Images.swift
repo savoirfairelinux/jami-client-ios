@@ -21,6 +21,7 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
+  internal static let accept = ImageAsset(name: "accept")
   internal static let accountIcon = ImageAsset(name: "account_icon")
   internal static let addAvatar = ImageAsset(name: "add_avatar")
   internal static let addPerson = ImageAsset(name: "add_person")
@@ -66,7 +67,7 @@ internal enum Asset {
   internal static let phoneBook = ImageAsset(name: "phone_book")
   internal static let qrCode = ImageAsset(name: "qr_code")
   internal static let qrCodeScan = ImageAsset(name: "qr_code_scan")
-  internal static let remove = ImageAsset(name: "remove")
+  internal static let refuse = ImageAsset(name: "refuse")
   internal static let revokeDevice = ImageAsset(name: "revoke_device")
   internal static let ringLogo = ImageAsset(name: "ring_logo")
   internal static let rowSelected = ColorAsset(name: "row_selected")
