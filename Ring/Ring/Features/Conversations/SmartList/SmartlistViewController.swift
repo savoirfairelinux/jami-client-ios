@@ -284,12 +284,10 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     func setupUI() {
         conversationBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 1, right: 5)
         requestsBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 2, right: 5)
+        conversationBadge.backgroundColor = UIColor.jamiMain
+        requestsBadge.backgroundColor = UIColor.jamiMain
         if #available(iOS 13.0, *) {
-            conversationBadge.backgroundColor = UIColor.tertiaryLabel
-            requestsBadge.backgroundColor = UIColor.tertiaryLabel
         } else {
-            conversationBadge.backgroundColor = UIColor.gray.lighten(by: 20)
-            requestsBadge.backgroundColor = UIColor.gray.lighten(by: 20)
             conversationsSegmentControl.tintColor = UIColor.gray.lighten(by: 10)
         }
         self.viewModel.updateSegmentControl.subscribe { [weak self] (messages, requests) in
@@ -331,13 +329,17 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         let imageSettings = UIImage(asset: Asset.moreSettings) as UIImage?
         let generalSettingsButton = UIButton(type: UIButton.ButtonType.system) as UIButton
-        generalSettingsButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        generalSettingsButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         generalSettingsButton.borderWidth = 2
         generalSettingsButton.borderColor = UIColor.jamiMain
         generalSettingsButton.setImage(imageSettings, for: .normal)
         generalSettingsButton.contentMode = .scaleAspectFill
         let settingsButtonItem = UIBarButtonItem(customView: generalSettingsButton)
-        generalSettingsButton.cornerRadius = 12.5
+        generalSettingsButton.cornerRadius = 17.5
+        generalSettingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 0)
+        generalSettingsButton.setBorderPadding(left: 10, right: 0, top: 5, bottom: 5)
+        generalSettingsButton.layoutIfNeeded()
+        generalSettingsButton.layer.masksToBounds = false
         generalSettingsButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.showContextualMenu()
@@ -369,9 +371,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let screenWidth = screenRect.size.width
         let window = UIApplication.shared.keyWindow
         let leftPadding: CGFloat = window?.safeAreaInsets.left ?? 0
-        let maxWidth: CGFloat = screenWidth - 45 - margin * 3 - leftPadding * 2
+        let maxWidth: CGFloat = screenWidth - generalSettingsButton.frame.width - margin * 4 - leftPadding * 2
         let accountNameX: CGFloat = accountButton.frame.origin.x + accountButton.frame.size.width + margin
-        let triangleViewX: CGFloat = maxWidth - triangleViewSize - 2
+        let triangleViewX: CGFloat = maxWidth - triangleViewSize
         let triangleViewY: CGFloat = size * 0.5
         let accountNameWidth: CGFloat = maxWidth - triangleViewSize - size - margin * 2
         let accountName = UILabel(frame: CGRect(x: accountNameX, y: 5, width: accountNameWidth, height: size))
@@ -445,21 +447,20 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let originY = frame.size.height
         let originX = frame.size.width - 120
         let marginX: CGFloat = 20
-        let marginY: CGFloat = 15
-        let itemHeight: CGFloat = 25
-        menu = UIView(frame: CGRect(x: originX, y: originY, width: 100, height: 155))
+        let itemHeight: CGFloat = 50
+        menu = UIView(frame: CGRect(x: originX, y: originY, width: 100, height: itemHeight * 3))
         menu.roundedCorners = true
         menu.cornerRadius = 15
         // labels
-        let accountSettings = UILabel(frame: CGRect(x: marginX, y: 0, width: 100, height: itemHeight))
+        let accountSettings = UILabel(frame: CGRect(x: marginX, y: 15, width: 100, height: itemHeight))
         accountSettings.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         accountSettings.text = L10n.Smartlist.accountSettings
         accountSettings.sizeToFit()
-        let advancedSettings = UILabel(frame: CGRect(x: marginX, y: 0, width: 100, height: itemHeight))
+        let advancedSettings = UILabel(frame: CGRect(x: marginX, y: 15, width: 100, height: itemHeight))
         advancedSettings.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         advancedSettings.text = L10n.Smartlist.advancedSettings
         advancedSettings.sizeToFit()
-        let about = UILabel(frame: CGRect(x: marginX, y: 0, width: 100, height: itemHeight))
+        let about = UILabel(frame: CGRect(x: marginX, y: 15, width: 100, height: itemHeight))
         about.text = L10n.Smartlist.aboutJami
         about.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         about.sizeToFit()
@@ -468,8 +469,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let viewWidth = maxWidth + marginX * 3 + 25
         let buttonOrigin = maxWidth + marginX * 2
 
-        let accountSettingsView = UIView.init(frame: CGRect(x: 0, y: marginY, width: viewWidth, height: itemHeight))
-        let accountImage = UIImageView.init(frame: CGRect(x: buttonOrigin + 2, y: 2, width: 20, height: 20))
+        let accountSettingsView = UIView.init(frame: CGRect(x: 0, y: 0, width: viewWidth, height: itemHeight))
+        let accountImage = UIImageView.init(frame: CGRect(x: buttonOrigin + 2, y: 17, width: 20, height: 20))
         accountImage.tintColor = UIColor.jamiMain
         accountImage.image = UIImage(asset: Asset.fallbackAvatar)
         accountImage.borderWidth = 1
@@ -488,8 +489,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: self.disposeBag)
         accountSettingsView.addSubview(accountSettingsButton)
 
-        let advancedSettingsView = UIView.init(frame: CGRect(x: 0, y: marginY + itemHeight * 2, width: viewWidth, height: itemHeight))
-        let advancedImage = UIImageView.init(frame: CGRect(x: buttonOrigin, y: 0, width: 25, height: 25))
+        let advancedSettingsView = UIView.init(frame: CGRect(x: 0, y: itemHeight, width: viewWidth, height: itemHeight))
+        let advancedImage = UIImageView.init(frame: CGRect(x: buttonOrigin, y: 15, width: 25, height: 25))
         advancedImage.tintColor = UIColor.jamiMain
         advancedImage.image = UIImage(asset: Asset.settings)
         advancedSettingsView.addSubview(advancedSettings)
@@ -505,8 +506,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: self.disposeBag)
         advancedSettingsView.addSubview(advancedSettingsButton)
 
-        let aboutView = UIView.init(frame: CGRect(x: 0, y: marginY + itemHeight * 4, width: viewWidth, height: itemHeight))
-        let aboutImage = UIImageView.init(frame: CGRect(x: buttonOrigin + 2, y: 2, width: 20, height: 20))
+        let aboutView = UIView.init(frame: CGRect(x: 0, y: itemHeight * 2, width: viewWidth, height: itemHeight))
+        let aboutImage = UIImageView.init(frame: CGRect(x: buttonOrigin + 2, y: 17, width: 20, height: 20))
         aboutImage.image = UIImage(asset: Asset.jamiIcon)
         aboutView.addSubview(about)
         aboutView.addSubview(aboutImage)
@@ -529,8 +530,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         menu.addSubview(accountSettingsView)
         menu.addSubview(advancedSettingsView)
         menu.addSubview(aboutView)
-        let firstLine = UIView.init(frame: CGRect(x: 0, y: itemHeight * 2, width: viewWidth, height: 1))
-        let secondLine = UIView.init(frame: CGRect(x: 0, y: itemHeight * 4, width: viewWidth, height: 1))
+        let firstLine = UIView.init(frame: CGRect(x: 0, y: itemHeight, width: viewWidth, height: 1))
+        let secondLine = UIView.init(frame: CGRect(x: 0, y: itemHeight * 2, width: viewWidth, height: 1))
         if #available(iOS 13.0, *) {
             firstLine.backgroundColor = UIColor.quaternaryLabel
             secondLine.backgroundColor = UIColor.quaternaryLabel
