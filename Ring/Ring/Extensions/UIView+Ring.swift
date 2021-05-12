@@ -191,6 +191,18 @@ extension UIView {
             subview.removeFromSuperview()
         }
     }
+
+    func setBorderPadding(left: CGFloat, right: CGFloat, top: CGFloat, bottom: CGFloat) {
+        let frame = self.bounds.inset(by: UIEdgeInsets(top: top, left: left, bottom: bottom, right: right))
+        let circlePath = UIBezierPath(roundedRect: frame, cornerRadius: self.cornerRadius)
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = self.borderColor.cgColor
+        shapeLayer.lineWidth = self.borderWidth
+        self.layer.addSublayer(shapeLayer)
+        self.borderWidth = 0
+    }
 }
 
 typealias GradientPoints = (startPoint: CGPoint, endPoint: CGPoint)

@@ -51,7 +51,23 @@ class ContactRequestCell: UITableViewCell, NibReusable {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        drawBanButtonImage()
         self.disposeBag = DisposeBag()
+    }
+
+    func drawBanButtonImage() {
+        let line = UIBezierPath()
+        line.move(to: CGPoint(x: banButton.bounds.width - 13, y: 13))
+        line.addLine(to: CGPoint(x: 13, y: banButton.bounds.height - 13))
+        line.close()
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = line.cgPath
+        shapeLayer.strokeColor = UIColor.red.cgColor
+        shapeLayer.lineWidth = 2
+        banButton.layer.addSublayer(shapeLayer)
+        acceptButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
+        banButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
+        discardButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
     }
 
     func configureFromItem(_ item: ContactRequestItem) {
