@@ -28,8 +28,7 @@ class CustomSearchBar: UISearchBar {
     let leading: CGFloat = 15
     let trailingEditing: CGFloat = -80
     let trailingEditing1: CGFloat = -80.5
-    let buttonOriginXOffset: CGFloat = -49
-    let buttonSize: CGFloat = 40
+    let buttonSize: CGFloat = 50
     let disposeBag = DisposeBag()
 
     var rightMargin: CGFloat {
@@ -78,7 +77,7 @@ class CustomSearchBar: UISearchBar {
     func sizeChanged(to size: CGFloat) {
         var buttonFrame = rightButton.frame
         let margin = rightMargin
-        buttonFrame.origin.x = size + buttonOriginXOffset + margin
+        buttonFrame.origin.x = size - buttonSize + margin
         rightButton.frame = buttonFrame
         if margin == 0 {
             searchFieldTrailing.constant = rightButton.isHidden ? currentTrailingEditing : currentTrailing
@@ -93,8 +92,8 @@ class CustomSearchBar: UISearchBar {
     }
 
     func configure(buttonImage: UIImage, buttonPressed: @escaping (() -> Void)) {
-        rightButton = UIButton(frame: CGRect(x: self.frame.size.width + buttonOriginXOffset, y: 3, width: buttonSize, height: buttonSize))
-        rightButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        rightButton = UIButton(frame: CGRect(x: self.frame.size.width - buttonSize - 10, y: 0, width: buttonSize, height: buttonSize))
+        rightButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         rightButton.setImage(buttonImage, for: .normal)
         rightButton.tintColor = UIColor.jamiMain
         self.addSubview(rightButton)
@@ -128,7 +127,6 @@ class CustomSearchBar: UISearchBar {
             }
         }
         rightButton.rx.tap
-            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { buttonPressed() })
             .disposed(by: self.disposeBag)
         self.rx.textDidBeginEditing

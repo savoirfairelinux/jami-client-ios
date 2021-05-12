@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,43 +14,48 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZ6-Cr-td2" userLabel="Upload Button">
-                    <rect key="frame" x="6" y="15" width="34" height="34"/>
+                    <rect key="frame" x="4" y="13" width="36" height="36"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="34" id="efZ-wn-OTj"/>
-                        <constraint firstAttribute="width" constant="34" id="i8S-m1-tB0"/>
+                        <constraint firstAttribute="height" constant="36" id="efZ-wn-OTj"/>
+                        <constraint firstAttribute="width" constant="36" id="i8S-m1-tB0"/>
                     </constraints>
+                    <inset key="imageEdgeInsets" minX="1" minY="1" maxX="1" maxY="1"/>
                     <state key="normal" image="share_button"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ifq-LQ-X1n" userLabel="Send Button">
-                    <rect key="frame" x="274" y="15" width="28" height="26"/>
+                    <rect key="frame" x="272" y="13" width="38" height="36"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="26" id="9PM-CR-8PT"/>
-                        <constraint firstAttribute="width" constant="28" id="cfz-1y-EkK"/>
+                        <constraint firstAttribute="height" constant="36" id="9PM-CR-8PT"/>
+                        <constraint firstAttribute="width" constant="38" id="cfz-1y-EkK"/>
                     </constraints>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="4" maxX="0.0" maxY="-4"/>
+                    <inset key="imageEdgeInsets" minX="6" minY="6" maxX="5" maxY="6"/>
                     <state key="normal" image="send_button">
                         <attributedString key="attributedTitle"/>
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2N-XG-vU1" userLabel="Emojis Button">
-                    <rect key="frame" x="271" y="15" width="30" height="34"/>
+                    <rect key="frame" x="264" y="13" width="46" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="46" id="r5p-e4-ejx"/>
+                    </constraints>
                     <state key="normal">
                         <attributedString key="attributedTitle">
                             <fragment content="👍">
                                 <attributes>
                                     <font key="NSFont" size="25" name="AppleColorEmoji"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
                         </attributedString>
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCm-fg-RY1">
-                    <rect key="frame" x="46" y="15" width="34" height="34"/>
+                    <rect key="frame" x="44" y="13" width="36" height="36"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="34" id="0I0-Zq-DPq"/>
-                        <constraint firstAttribute="width" constant="34" id="Cby-RM-6vW"/>
+                        <constraint firstAttribute="height" constant="36" id="0I0-Zq-DPq"/>
+                        <constraint firstAttribute="width" constant="36" id="Cby-RM-6vW"/>
                     </constraints>
+                    <inset key="imageEdgeInsets" minX="1" minY="1" maxX="1" maxY="1"/>
                     <state key="normal" image="camera"/>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pNY-Qf-lFT" customClass="GrowingTextView" customModule="Ring" customModuleProvider="target" colorLabel="IBBuiltInLabel-Red">
@@ -73,8 +78,8 @@
                 <constraint firstItem="Ifq-LQ-X1n" firstAttribute="top" secondItem="w2N-XG-vU1" secondAttribute="top" id="QD5-vj-Bmr"/>
                 <constraint firstAttribute="bottom" secondItem="eZ6-Cr-td2" secondAttribute="bottom" constant="11" id="Tp1-ul-mld"/>
                 <constraint firstItem="w2N-XG-vU1" firstAttribute="bottom" secondItem="pNY-Qf-lFT" secondAttribute="bottom" id="WH1-PP-VfU"/>
-                <constraint firstAttribute="trailing" secondItem="w2N-XG-vU1" secondAttribute="trailing" constant="14" id="Yyb-X2-nbp"/>
-                <constraint firstAttribute="trailing" secondItem="Ifq-LQ-X1n" secondAttribute="trailing" constant="13" id="a3L-Tj-DTf"/>
+                <constraint firstAttribute="trailing" secondItem="w2N-XG-vU1" secondAttribute="trailing" constant="5" id="Yyb-X2-nbp"/>
+                <constraint firstAttribute="trailing" secondItem="Ifq-LQ-X1n" secondAttribute="trailing" constant="5" id="a3L-Tj-DTf"/>
                 <constraint firstItem="w2N-XG-vU1" firstAttribute="bottom" secondItem="qCm-fg-RY1" secondAttribute="bottom" id="gxN-rs-CSX"/>
                 <constraint firstAttribute="leading" secondItem="eZ6-Cr-td2" secondAttribute="trailing" constant="-40" id="nXf-yT-cg0"/>
             </constraints>

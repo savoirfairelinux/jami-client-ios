@@ -124,11 +124,11 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
     func setEmojiButtonVisibility(hide: Bool) {
         UIView.animate(withDuration: 0.2, animations: {
             if hide {
-                self.emojisButtonTrailingConstraint.constant = -27
-                self.sendButtonLeftConstraint.constant = 13
+                self.emojisButtonTrailingConstraint.constant = -46
+                self.sendButtonLeftConstraint.constant = 5
                 self.sendButton.tintColor = UIColor.jamiMain
             } else {
-                self.emojisButtonTrailingConstraint.constant = 14
+                self.emojisButtonTrailingConstraint.constant = 5
                 self.sendButtonLeftConstraint.constant = 35
                 self.sendButton.tintColor = UIColor.jamiMsgTextFieldBackground
             }
