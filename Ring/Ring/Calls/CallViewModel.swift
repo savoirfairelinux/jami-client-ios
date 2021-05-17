@@ -84,6 +84,10 @@ class CallViewModel: Stateable, ViewModel {
             if oldValue != nil {
                 return
             }
+            if !(self.call?.isAudioOnly ?? true) {
+                self.videoService.startVideoCaptureBeforeCall()
+            }
+            self.subscribeToCallFinished()
             self.callService.currentConferenceEvent
                 .asObservable()
                 .filter({ [weak self] conference-> Bool in
@@ -103,8 +107,6 @@ class CallViewModel: Stateable, ViewModel {
                         }
                         let isModerator = self.callService.isModerator(participantId: account.jamiId, inConference: conf.conferenceID)
                         if isModerator != self.containerViewModel?.isConference {
-//                            guard let updatedCall = self.callService.call(callID: call.callId) else { return }
-//                            self.call = updatedCall
                             self.containerViewModel?.isConference = isModerator
                             self.conferenceMode.accept(isModerator)
                         }
@@ -183,9 +185,6 @@ class CallViewModel: Stateable, ViewModel {
 
     var rendererId = ""
     lazy var capturedFrame: Observable<UIImage?> = {
-        if !(self.call?.isAudioOnly ?? true) {
-            videoService.startVideoCaptureBeforeCall()
-        }
         return videoService.capturedVideoFrame.asObservable().map({ frame in
             return frame
         })
@@ -212,10 +211,6 @@ class CallViewModel: Stateable, ViewModel {
                         self?.callsProvider.stopCall(callUUID: call.callUUID)
                         return !hide
                     }
-                }
-                if hide {
-                    self?.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
-                    self?.callsProvider.stopCall(callUUID: call.callUUID)
                 }
                 return hide
             })
@@ -637,6 +632,21 @@ extension CallViewModel {
 
     func showDialpad() {
         self.stateSubject.onNext(ConversationState.showDialpad(inCall: true))
+    }
+
+    func subscribeToCallFinished() {
+        dismisVC
+            .share()
+            .filter { dismised in
+                return dismised
+            }
+            .subscribe { [weak self ] _ in
+                guard let self = self, let call = self.call else { return }
+                self.videoService.stopCapture()
+                self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
+                self.callsProvider.stopCall(callUUID: call.callUUID)
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 // MARK: conference layout
