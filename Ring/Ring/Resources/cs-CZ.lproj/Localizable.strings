@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Konverzace";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Nastavení účtu";
 "global.ok" = "OK";
 "global.versionName" = "Together";
 "global.close" = "Zavřít";
@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+ Přidat účet";
 "smartlist.noNumber" = "Vybraný kontakt nemá žádné číslo.";
 "smartlist.selectOneNumber" = "Vyberte jedno z čísel.";
-"smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
+"smartlist.invitations" = "Pozvání";
+"smartlist.accountSettings" = "Nastavení účtu";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "O Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Sdílení aktuální polohy";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Pokročilá nastavení";
 "generalSettings.videoAcceleration" = "Povolit zrychlení videa";
 
 //Migrate Account

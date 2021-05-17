@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "افزودن حساب...";
 "smartlist.noNumber" = "مخاطب انتخاب‌شده شماره‌ای ندارد";
 "smartlist.selectOneNumber" = "یکی از شماره‌ها را انتخاب کنید";
-"smartlist.invitations" = "Invitations";
+"smartlist.invitations" = "دعوت ها";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "درباره جمی";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "هم‌رسانی زنده مکان";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "تنظیمات پیشرفته";
 "generalSettings.videoAcceleration" = "فعال‌سازی شتاب‌دهی ویدیو";
 
 //Migrate Account

@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+ アカウントを追加";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Invitations";
+"smartlist.invitations" = "招待";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "Jamiについて";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "詳細設定";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account

@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+ Pridať účet";
 "smartlist.noNumber" = "Vybraný kontakt nemá žiadne číslo";
 "smartlist.selectOneNumber" = "Vyberte jedno z čísel";
-"smartlist.invitations" = "Invitations";
+"smartlist.invitations" = "Pozvánky";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "O programe Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Pokročilé nastavenia";
 "generalSettings.videoAcceleration" = "Povoliť akceleráciu videa";
 
 //Migrate Account

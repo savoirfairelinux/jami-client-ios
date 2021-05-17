@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Rozmowy";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Ustawienia Konta";
 "global.ok" = "Ok";
 "global.versionName" = "Together";
 "global.close" = "Zamknij";
@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
+"smartlist.invitations" = "Zaproszenia";
+"smartlist.accountSettings" = "Ustawienia Konta";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "O Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Ustawienia zaawansowane";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account

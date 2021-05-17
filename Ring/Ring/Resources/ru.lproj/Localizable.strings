@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Разговоры";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Настройки аккаунта";
 "global.ok" = "OK";
 "global.versionName" = "Вместе";
 "global.close" = "Закрыть";
@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+ Добавить аккаунт";
 "smartlist.noNumber" = "Выбранный контакт не имеет никакого номера";
 "smartlist.selectOneNumber" = "Выберите один из номеров";
-"smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
+"smartlist.invitations" = "Приглашения";
+"smartlist.accountSettings" = "Настройки аккаунта";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "О программе Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Дополнительные настройки";
 "generalSettings.videoAcceleration" = "Разрешить видео-ускорение";
 
 //Migrate Account

@@ -52,7 +52,7 @@
 "smartlist.invitations" = "Invitations";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "درباره جمی";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";

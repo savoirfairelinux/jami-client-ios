@@ -52,7 +52,7 @@
 "smartlist.invitations" = "Invitations";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "À propos de Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Paramètres avancés";
 "generalSettings.videoAcceleration" = "Activer l'accélération vidéo";
 
 //Migrate Account

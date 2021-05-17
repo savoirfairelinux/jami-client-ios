@@ -27,8 +27,8 @@
 "global.share" = "Podziel się";
 "global.forward" = "Forward";
 "global.save" = "Zapisz";
-"global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.resend" = "Wyślij ponownie";
+"global.preview" = "Podgląd";
 
 // Scan
 "scan.badQrCode" = "Niepoprawny kod QR";
@@ -115,7 +115,7 @@
 "linkToAccount.explanationPinMessage" = "By wygenerować kod PIN, wejdź w ustawienia zarządzania kontem na urządzeniu z twoim kontem. W ustawieniach urządzeń wybierz \"Połącz inne urządzenie z tym kontem\". Otrzymasz kod PIN potrzebny do uzupełnienia tego formularza. PIN ważny jest tylko przez 10 minut.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Zaloguj się";
 "linkToAccountManager.passwordPlaceholder" = "Hasło";
 "linkToAccountManager.passwordLabel" = "Wpisz hasło";
 "linkToAccountManager.usernamePlaceholder" = "Nazwa użytkownika";
@@ -175,7 +175,7 @@
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.stopLocationSharing" = "Zatrzymaj udostępnianie";
 
 //Calls
 "calls.callItemTitle" = "Dzwoń";
@@ -232,13 +232,13 @@
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
 "accountPage.registerNameTitle" = "Zarejestruj nazwę użytkownika";
-"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.passwordPlaceholder" = "Podaj hasło do konta";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Zarejestruj";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.createPassword" = "Utwórz hasło";
 "accountPage.changePassword" = "Zmień hasło";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Wprowadź nowe hasło";
@@ -320,7 +320,7 @@
 "dataTransfer.readableStatusSuccess" = "Ukończono";
 "dataTransfer.readableStatusAccept" = "Akceptuj";
 "dataTransfer.readableStatusCancel" = "Anuluj";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Naciśnij by zacząć nagrywać";
 "dataTransfer.sendMessage" = "Wyślij";
 
 

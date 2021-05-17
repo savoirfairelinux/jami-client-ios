@@ -32,27 +32,27 @@
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.search" = "Ricerca in corso...";
 
 // Smartlist
 "smartlist.yesterday" = "Ieri";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Cartella pubblica";
 "smartlist.conversations" = "Conversazioni";
 "smartlist.searching" = "Ricerca...";
 "smartlist.noResults" = "Nessun risultato";
 "smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBarPlaceholder" = "Inserisci il nome...";
+"smartlist.searchBar" = "Cerca contatto nuovo o esistente...";
 "smartlist.noNetworkConnectivity" = "Connessione di rete assente";
 "smartlist.cellularAccess" = "Assicurati che l'accesso cellulare sia garantito nelle tue impostazioni";
 "smartlist.accountsTitle" = "Account";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Invitations";
+"smartlist.invitations" = "inviti";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "Informazioni su Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Scrivi a";
@@ -183,7 +183,7 @@
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connessione in corso ...";
-"calls.searching" = "Searching…";
+"calls.searching" = "Ricerca in corso...";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Impostazioni avanzate";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account

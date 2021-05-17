@@ -20,14 +20,14 @@
 
 // Global
 "global.homeTabBarTitle" = "会话";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "账户设置";
 "global.ok" = "确定";
 "global.versionName" = "一起";
 "global.close" = "关闭";
 "global.share" = "共享";
-"global.forward" = "Forward";
+"global.forward" = "转发";
 "global.save" = "保存";
-"global.resend" = "Resend";
+"global.resend" = "重发";
 "global.preview" = "预览";
 
 // Scan
@@ -36,29 +36,29 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨天";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "公共目录";
 "smartlist.conversations" = "会话";
 "smartlist.searching" = "正在搜索…";
 "smartlist.noResults" = "无结果";
 "smartlist.noConversation" = "没有会话";
 "smartlist.searchBarPlaceholder" = "输入名字";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "搜索新的或者已存在的联系人...";
 "smartlist.noNetworkConnectivity" = "无网络连接";
 "smartlist.cellularAccess" = "请确保蜂窝移动网络权限已开启";
 "smartlist.accountsTitle" = "账户";
 "smartlist.addAccountButton" = "+ 添加账户";
 "smartlist.noNumber" = "选定的连接没有任何数字";
 "smartlist.selectOneNumber" = "选择这些数字中的一个";
-"smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
-"smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.invitations" = "邀请";
+"smartlist.accountSettings" = "账户设置";
+"smartlist.advancedSettings" = "高级设置";
+"smartlist.aboutJami" = "关于 Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "消息写入至";
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "保存至图库失败";
 
 //Invitations
 "invitations.noInvitations" = "没有邀请";
@@ -92,7 +92,7 @@
 "createAccount.lookingForUsernameAvailability" = "正在验证可用性";
 "createAccount.invalidUsername" = "无效的用户名";
 "createAccount.usernameAlreadyTaken" = "用户名已被他人使用";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "用户名可用";
 "createAccount.loading" = "载入中";
 "createAccount.waitCreateAccountTitle" = "添加账户";
 "createAccount.RegisterAUsername" = "注册一个用户名";
@@ -189,10 +189,10 @@
 "calls.haghUp" = "挂断";
 "calls.maximize" = "最大化";
 "calls.minimize" = "最小化";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "设置管理员";
+"calls.removeModerator" = "取消管理员";
+"calls.muteAudio" = "静音";
+"calls.unmuteAudio" = "取消静音";
 
 //Account Page
 "accountPage.devicesListHeader" = "设备";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "实时位置分享";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "高级设置";
 "generalSettings.videoAcceleration" = "启用视频加速";
 
 //Migrate Account

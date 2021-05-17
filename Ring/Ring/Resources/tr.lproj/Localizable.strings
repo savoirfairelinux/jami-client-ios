@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Konuşmalar";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Hesap Ayarları";
 "global.ok" = "Tamam";
 "global.versionName" = "Birlikte";
 "global.close" = "Kapat";
@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+ Hesap Ekle";
 "smartlist.noNumber" = "Seçilen kişinin numarası yok";
 "smartlist.selectOneNumber" = "Numaralardan birini seçin";
-"smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
+"smartlist.invitations" = "Davetiyeler";
+"smartlist.accountSettings" = "Hesap Ayarları";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "Jami Hakkında";
 
 //Conversation
 "conversation.messagePlaceholder" = "Şuna ileti yaz:";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Canlı konum paylaşımı";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Gelişmiş ayarlar";
 "generalSettings.videoAcceleration" = "Görüntü hızlandırmayı etkinleştir";
 
 //Migrate Account

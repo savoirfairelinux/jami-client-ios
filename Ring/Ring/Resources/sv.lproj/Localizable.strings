@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Konversationer";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Kontoinställningar";
 "global.ok" = "OK";
 "global.versionName" = "Together";
 "global.close" = "Stäng";
@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+ Lägg till konto";
 "smartlist.noNumber" = "Den valda kontakten har inget nummer";
 "smartlist.selectOneNumber" = "Välj ett nummer";
-"smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
+"smartlist.invitations" = "Inbjudningar";
+"smartlist.accountSettings" = "Kontoinställningar";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "Om Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Avancerade inställningar";
 "generalSettings.videoAcceleration" = "Aktivera videoacceleration";
 
 //Migrate Account

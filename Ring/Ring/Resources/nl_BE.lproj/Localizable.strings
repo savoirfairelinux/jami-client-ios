@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Gesprekken";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Accountinstellingen";
 "global.ok" = "Oké";
 "global.versionName" = "Together";
 "global.close" = "Sluiten";
@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+ Account toevoegen";
 "smartlist.noNumber" = "Het geselecteerde contact heeft geen nummer";
 "smartlist.selectOneNumber" = "Kies één van de nummers";
-"smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
+"smartlist.invitations" = "Uitnodigingen";
+"smartlist.accountSettings" = "Accountinstellingen";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "Over Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Geavanceerde instellingen";
 "generalSettings.videoAcceleration" = "Videoversnelling inschakelen";
 
 //Migrate Account

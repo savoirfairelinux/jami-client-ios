@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+ הוספת חשבון";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Invitations";
+"smartlist.invitations" = "הזמנות";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "על אודות Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";

@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Conversații";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Reglările Contului";
 "global.ok" = "Ok";
 "global.versionName" = "Împreună";
 "global.close" = "Închide";
@@ -36,23 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ieri";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Dosar public";
 "smartlist.conversations" = "Conversații";
 "smartlist.searching" = "Căutare...";
 "smartlist.noResults" = "Niciun rezultat";
 "smartlist.noConversation" = "Nicio conversație";
 "smartlist.searchBarPlaceholder" = "Introdu numele...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Caută un contact nou sau existent...";
 "smartlist.noNetworkConnectivity" = "Nicio legătură la rețea";
 "smartlist.cellularAccess" = "Asigură-te că accesul la rețea este permis în reglările tale";
 "smartlist.accountsTitle" = "Conturi";
 "smartlist.addAccountButton" = "+ Adaugă un cont";
 "smartlist.noNumber" = "Contactul ales nu are niciun număr";
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
-"smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
-"smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.invitations" = "Invitații";
+"smartlist.accountSettings" = "Reglările Contului";
+"smartlist.advancedSettings" = "Reglări avansate";
+"smartlist.aboutJami" = "Despre Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Scrie pentru";
@@ -330,12 +330,12 @@
 "generatedMessage.invitationAccepted" = "Invitație acceptată";
 "generatedMessage.outgoingCall" = "Apel efectuat";
 "generatedMessage.incomingCall" = "Apel primit";
-"generatedMessage.missedOutgoingCall" = "Apelul efectuat a fost pierdut";
+"generatedMessage.missedOutgoingCall" = "Apel efectuat nepreluat";
 "generatedMessage.missedIncomingCall" = "Apel pierdut";
 "generatedMessage.liveLocationSharing" = "Distribuirea poziției în direct";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Reglări avansate";
 "generalSettings.videoAcceleration" = "Activează accelerarea video";
 
 //Migrate Account

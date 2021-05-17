@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Keskustelu";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Tunnuksen asetukset";
 "global.ok" = "Vahvista";
 "global.versionName" = "Yhdessä";
 "global.close" = "Sulje";
@@ -36,23 +36,23 @@
 
 // Smartlist
 "smartlist.yesterday" = "Eilen";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Julkinen kansio";
 "smartlist.conversations" = "Keskustelu";
 "smartlist.searching" = "Etsitään...";
 "smartlist.noResults" = "Ei tuloksia";
 "smartlist.noConversation" = "Ei keskusteluja";
 "smartlist.searchBarPlaceholder" = "Syötä nimi...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Etsi uutta tai aiemmin luotua yhteystietoa...";
 "smartlist.noNetworkConnectivity" = "Ei verkkoyhteyttä";
 "smartlist.cellularAccess" = "Varmista, että matkapuhelinverkon käyttö on sallittu asetuksissasi";
 "smartlist.accountsTitle" = "Tunnukset";
 "smartlist.addAccountButton" = "+ Lisää tunnus";
 "smartlist.noNumber" = "Valitulla yhteyshenkilöllä ei ole numeroa";
 "smartlist.selectOneNumber" = "Valitse yksi numeroista";
-"smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
-"smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.invitations" = "Kutsut";
+"smartlist.accountSettings" = "Tunnuksen asetukset";
+"smartlist.advancedSettings" = "Lisäasetukset";
+"smartlist.aboutJami" = "Tietoa Jamista";
 
 //Conversation
 "conversation.messagePlaceholder" = "Kirjoita viesti";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Edistyneet asetukset";
 "generalSettings.videoAcceleration" = "Kytke videon laitteistokiihdytys";
 
 //Migrate Account

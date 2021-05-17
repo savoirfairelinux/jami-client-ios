@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Pokalbiai";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Paskyros nustatymai";
 "global.ok" = "Gerai";
 "global.versionName" = "Together";
 "global.close" = "Užverti";
@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+ Pridėti paskyrą";
 "smartlist.noNumber" = "Pasirinktas adresatas neturi numerio";
 "smartlist.selectOneNumber" = "Pasirinkite vieną iš numerių";
-"smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
+"smartlist.invitations" = "Pakvietimai";
+"smartlist.accountSettings" = "Paskyros nustatymai";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "Apie Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Išplėstiniai nustatymai";
 "generalSettings.videoAcceleration" = "Įjungti vaizdo spartinimą";
 
 //Migrate Account

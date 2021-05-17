@@ -49,10 +49,10 @@
 "smartlist.addAccountButton" = "+اضافة حساب";
 "smartlist.noNumber" = "لا تحتوى جهة الاتصال المحددة على أى رقم";
 "smartlist.selectOneNumber" = "حدد أحد الأرقام";
-"smartlist.invitations" = "Invitations";
+"smartlist.invitations" = "الدعوات";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "حول جامي";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -335,7 +335,7 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "إعدادات متقدمة";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
