@@ -336,8 +336,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         generalSettingsButton.contentMode = .scaleAspectFill
         let settingsButtonItem = UIBarButtonItem(customView: generalSettingsButton)
         generalSettingsButton.cornerRadius = 17.5
-        generalSettingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 0)
-        generalSettingsButton.setBorderPadding(left: 10, right: 0, top: 5, bottom: 5)
+        generalSettingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        generalSettingsButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
         generalSettingsButton.layoutIfNeeded()
         generalSettingsButton.layer.masksToBounds = false
         generalSettingsButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
@@ -371,7 +371,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let screenWidth = screenRect.size.width
         let window = UIApplication.shared.keyWindow
         let leftPadding: CGFloat = window?.safeAreaInsets.left ?? 0
-        let maxWidth: CGFloat = screenWidth - generalSettingsButton.frame.width - margin * 4 - leftPadding * 2
+        let navControllerMargin = self.navigationController?.systemMinimumLayoutMargins.leading ?? 20
+        let maxWidth: CGFloat = screenWidth - 32 - navControllerMargin * 3 - leftPadding * 2
         let accountNameX: CGFloat = accountButton.frame.origin.x + accountButton.frame.size.width + margin
         let triangleViewX: CGFloat = maxWidth - triangleViewSize
         let triangleViewY: CGFloat = size * 0.5
@@ -594,7 +595,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let screenWidth = screenRect.size.width
         let window = UIApplication.shared.keyWindow
         let leftPadding: CGFloat = window?.safeAreaInsets.left ?? 0
-        let maxWidth: CGFloat = screenWidth - 45 - margin * 3 - leftPadding * 2
+        let navControllerMargin = self.navigationController?.systemMinimumLayoutMargins.leading ?? 20
+        let maxWidth: CGFloat = screenWidth - 32 - navControllerMargin * 3 - leftPadding * 2
         accountWidth.constant = maxWidth
         var accountFrame = accountView.frame
         accountFrame.size.width = maxWidth
