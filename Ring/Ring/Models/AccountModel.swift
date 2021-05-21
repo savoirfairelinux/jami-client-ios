@@ -52,6 +52,9 @@ class AccountModel: Equatable {
                 self.enabled = newDetails
                     .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountEnable))
                     .boolValue
+                let managerConfModel = ConfigKeyModel(withKey: .managerUri)
+                let isJams = !newDetails.get(withConfigKeyModel: managerConfModel).isEmpty
+                self.isJams = isJams
             }
         }
     }
@@ -97,9 +100,6 @@ class AccountModel: Equatable {
                         ConfigKeyModel(withKey: .accountRegistrationStatus))) {
                     self.status = status
                 }
-
-                let managerConfModel = ConfigKeyModel(withKey: .managerUri)
-                self.isJams = !newDetails.get(withConfigKeyModel: managerConfModel).isEmpty
             }
         }
     }
