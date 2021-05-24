@@ -172,8 +172,8 @@
 "alerts.incomingCallAllertTitle" = "Apel primit de la";
 "alerts.incomingCallButtonAccept" = "Acceptă";
 "alerts.incomingCallButtonIgnore" = "Ignoră";
-"actions.startAudioCall" = "Apel Audio";
-"actions.startVideoCall" = "Apel Video";
+"actions.startAudioCall" = "Apel vocal";
+"actions.startVideoCall" = "Apel video";
 "actions.goToSettings" = "Du-te la Reglări";
 "actions.stopLocationSharing" = "Oprește distribuirea";
 
@@ -188,11 +188,11 @@
 "calls.currentCallWith" = "Apel în curs cu";
 "calls.haghUp" = "închide";
 "calls.maximize" = "mărește";
-"calls.minimize" = "micșorează";
+"calls.minimize" = "Minimizează";
 "calls.setModerator" = "Pune un moderator";
 "calls.removeModerator" = "Elimină moderatorul";
 "calls.muteAudio" = "Mut";
-"calls.unmuteAudio" = "sonor activat";
+"calls.unmuteAudio" = "activează";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aparate";
@@ -286,7 +286,7 @@
 "linkDevice.hudMessage" = "Se verifică";
 
 //Contact Page
-"contactPage.startAudioCall" = "Începe un apel audio";
+"contactPage.startAudioCall" = "Începe un apel vocal";
 "contactPage.startVideoCall" = "Începe un apel video";
 "contactPage.sendMessage" = "Trimite un mesaj";
 "contactPage.clearConversation" = "Șterge discuția";

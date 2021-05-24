@@ -191,8 +191,8 @@
 "calls.minimize" = "minimize";
 "calls.setModerator" = "Metti un moderatore";
 "calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "disattiva l'audio";
-"calls.unmuteAudio" = "attiva l'audio";
+"calls.muteAudio" = "disattiva microfono";
+"calls.unmuteAudio" = "attiva microfono";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivi";

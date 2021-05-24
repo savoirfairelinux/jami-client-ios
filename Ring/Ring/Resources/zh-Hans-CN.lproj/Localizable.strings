@@ -55,7 +55,7 @@
 "smartlist.aboutJami" = "关于 Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "消息写入至";
+"conversation.messagePlaceholder" = "写消息至";
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
 "conversation.errorSavingImage" = "保存至图库失败";

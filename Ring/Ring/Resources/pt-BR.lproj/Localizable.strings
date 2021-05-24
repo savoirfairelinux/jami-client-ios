@@ -36,13 +36,13 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ontem";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Diretório público";
 "smartlist.conversations" = "Conversas";
 "smartlist.searching" = "Buscando...";
 "smartlist.noResults" = "Nenhum resultado";
 "smartlist.noConversation" = "Nenhuma conversa";
 "smartlist.searchBarPlaceholder" = "Insira o nome...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Pesquisar por contatos novos ou existentes...";
 "smartlist.noNetworkConnectivity" = "Sem conectividade";
 "smartlist.cellularAccess" = "Verifique se o acesso via celular está autorizado em suas configurações";
 "smartlist.accountsTitle" = "Contas";
@@ -51,7 +51,7 @@
 "smartlist.selectOneNumber" = "Selecione um dos números";
 "smartlist.invitations" = "Convites";
 "smartlist.accountSettings" = "Configurações da Conta";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Configurações avançadas";
 "smartlist.aboutJami" = "Sobre Jami";
 
 //Conversation

@@ -55,7 +55,7 @@
 "smartlist.aboutJami" = "A Jami névjegye";
 
 //Conversation
-"conversation.messagePlaceholder" = "Üzenet írása következőknek:";
+"conversation.messagePlaceholder" = "Üzenet írása következőknek: ";
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
 "conversation.errorSavingImage" = "Nem sikerült menteni a képet a kepgyűjteménybe";
@@ -258,7 +258,7 @@
 "account.sipPassword" = "Jelszó";
 "account.sipServer" = "SIP-kiszolgáló";
 "account.port" = "Kikötő";
-"account.proxyServer" = "Proxy";
+"account.proxyServer" = "Meghatalmazás";
 "account.createSipAccount" = "SIP fiók létrehozása";
 "account.usernameLabel" = "Felhasználónév megadása";
 "account.passwordLabel" = "A jelszó megadása";
@@ -321,7 +321,7 @@
 "dataTransfer.readableStatusAccept" = "Elfogadás";
 "dataTransfer.readableStatusCancel" = "Mégse";
 "dataTransfer.infoMessage" = "Nyomja meg ezt a gombot a felvétel elindításához";
-"dataTransfer.sendMessage" = "Elküld";
+"dataTransfer.sendMessage" = "Küldés";
 
 
 //Generated Message
