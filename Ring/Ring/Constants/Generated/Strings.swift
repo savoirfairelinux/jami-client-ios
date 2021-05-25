@@ -475,7 +475,7 @@ internal enum L10n {
     internal static let save = L10n.tr("Localizable", "global.save")
     /// Share
     internal static let share = L10n.tr("Localizable", "global.share")
-    /// Together
+    /// Maloya
     internal static let versionName = L10n.tr("Localizable", "global.versionName")
   }
 
