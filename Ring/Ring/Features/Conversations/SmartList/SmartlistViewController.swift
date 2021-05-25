@@ -243,6 +243,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             requestsBadge.setTitle(String(requests), for: .normal)
             return
         }
+        if segmentControlContainer.isHidden {
+            conversationsSegmentControl.selectedSegmentIndex = 0
+        }
         segmentControlContainer.isHidden = false
         let unreadMessages = messages
         let unreadRequests = requests
