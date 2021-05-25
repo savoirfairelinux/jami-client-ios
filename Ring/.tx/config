@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[Localizable.strings]
+[jami.localizablestrings]
 file_filter = Ring/Resources/<lang>.lproj/Localizable.strings
 source_file = Ring/Resources/en.lproj/Localizable.strings
 source_lang = en
