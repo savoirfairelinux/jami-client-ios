@@ -240,16 +240,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func reloadDataFor(account: AccountModel) {
-        self.contactsService.loadContacts(withAccount: account)
-        self.contactsService.loadContactRequests(withAccount: account.id)
-        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
-        self.conversationManager?
-                .prepareConversationsForAccount(accountId: account.id)
+        let state = UIApplication.shared.applicationState
+        if state == .active {
+            self.contactsService.loadContacts(withAccount: account)
+            self.contactsService.loadContactRequests(withAccount: account.id)
+            self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+            self.conversationManager?
+                    .prepareConversationsForAccount(accountId: account.id)
+        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         self.log.warning("entering background")
         self.callService.muteCurrentCallVideoVideo( mute: true)
+        guard let account = self.accountService.currentAccount else { return }
+        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: false)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -257,6 +262,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.daemonService.connectivityChanged()
         self.updateNotificationAvailability()
         self.callService.muteCurrentCallVideoVideo( mute: false)
+        guard let account = self.accountService.currentAccount else { return }
+        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
