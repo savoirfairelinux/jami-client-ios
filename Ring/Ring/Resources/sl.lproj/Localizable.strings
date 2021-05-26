@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP strežnik";
 "account.port" = "Vrata";
 "account.proxyServer" = "Posredniški strežnik";
-"account.createSipAccount" = "Ustvari Sip račun";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Vnesite uporabniško ime";
 "account.passwordLabel" = "Vnesite geslo";
 "account.serverLabel" = "Vnesite naslov";

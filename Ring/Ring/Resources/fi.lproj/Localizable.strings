@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP-palvelin";
 "account.port" = "Portti";
 "account.proxyServer" = "Välityspalvelin";
-"account.createSipAccount" = "Luo Sip-tunnus";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Anna käyttäjänimi";
 "account.passwordLabel" = "Syötä salasana";
 "account.serverLabel" = "Anna osoite";

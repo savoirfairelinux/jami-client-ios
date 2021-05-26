@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP serveris";
 "account.port" = "Prievadas";
 "account.proxyServer" = "Įgaliotasis serveris";
-"account.createSipAccount" = "Create Sip Account";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Įveskite naudotojo adresą";
 "account.passwordLabel" = "Įveskite slaptažodį";
 "account.serverLabel" = "Įveskite adresą";

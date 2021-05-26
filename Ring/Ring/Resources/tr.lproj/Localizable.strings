@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP sunucusu";
 "account.port" = "Delik";
 "account.proxyServer" = "Vekil";
-"account.createSipAccount" = "SİP Hesabı Oluştur";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Kullanıcı Adını Girin";
 "account.passwordLabel" = "Parola Girin";
 "account.serverLabel" = "Adres Girin";

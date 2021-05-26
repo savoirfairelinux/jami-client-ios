@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Vytvoriť SIP účet";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Zadajte používateľské meno";
 "account.passwordLabel" = "Zadajte heslo";
 "account.serverLabel" = "Zadajte adresu";

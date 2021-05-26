@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
 "account.proxyServer" = "Pełnomocnik";
-"account.createSipAccount" = "Create Sip Account";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Wpisz hasło";
 "account.serverLabel" = "Enter Address";

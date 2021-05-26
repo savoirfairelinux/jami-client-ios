@@ -259,7 +259,7 @@
 "account.sipServer" = "خادم SIP";
 "account.port" = "نقطة عبور ( port )";
 "account.proxyServer" = "الوكيل";
-"account.createSipAccount" = "Create Sip Account";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "أدخِل كلمة المرور";
 "account.serverLabel" = "Enter Address";

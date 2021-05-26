@@ -259,7 +259,7 @@
 "account.sipServer" = "سرور SIP";
 "account.port" = "پرت";
 "account.proxyServer" = "پراکسی";
-"account.createSipAccount" = "ساخت حساب SIP";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "نام‌کاربری را وارد کنید";
 "account.passwordLabel" = "گذرواژه را وارد کنید";
 "account.serverLabel" = "آدرس را وارد کنید";

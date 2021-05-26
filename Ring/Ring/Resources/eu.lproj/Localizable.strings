@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Ataka";
 "account.proxyServer" = "Proxya";
-"account.createSipAccount" = "Create Sip Account";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Sartu pasahitza";
 "account.serverLabel" = "Enter Address";

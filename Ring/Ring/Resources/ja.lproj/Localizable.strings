@@ -259,7 +259,7 @@
 "account.sipServer" = "SIPサーバー";
 "account.port" = "ポート番号";
 "account.proxyServer" = "プロキシ";
-"account.createSipAccount" = "SIPアカウントを作成";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "ユーザー名を入力してください";
 "account.passwordLabel" = "パスワードを入力してください";
 "account.serverLabel" = "Enter Address";

@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
 "account.proxyServer" = "Stedfortræder";
-"account.createSipAccount" = "Create Sip Account";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Indtast Brugernavn";
 "account.passwordLabel" = "Indtast kodeord";
 "account.serverLabel" = "Enter Address";

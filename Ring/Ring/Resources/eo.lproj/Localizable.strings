@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Pordo";
 "account.proxyServer" = "Prokura Servilo";
-"account.createSipAccount" = "Create Sip Account";
+"account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Entajpu Pasvorton";
 "account.serverLabel" = "Enter Address";
