@@ -240,14 +240,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func reloadDataFor(account: AccountModel) {
-        let state = UIApplication.shared.applicationState
-        if state == .active {
-            self.contactsService.loadContacts(withAccount: account)
-            self.contactsService.loadContactRequests(withAccount: account.id)
-            self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
-            self.conversationManager?
-                    .prepareConversationsForAccount(accountId: account.id)
-        }
+        self.contactsService.loadContacts(withAccount: account)
+        self.contactsService.loadContactRequests(withAccount: account.id)
+        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+        self.conversationManager?
+            .prepareConversationsForAccount(accountId: account.id)
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
