@@ -90,7 +90,9 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 cell.acceptButton.rx.tap
                     .subscribe(onNext: { [weak self] in
                         self?.acceptButtonTapped(withItem: item)
-                        self?.view.isHidden = true
+                        if self?.tableView.numberOfRows(inSection: 0) ?? 0 <= 1 {
+                            self?.view.isHidden = true
+                        }
                     })
                     .disposed(by: cell.disposeBag)
 

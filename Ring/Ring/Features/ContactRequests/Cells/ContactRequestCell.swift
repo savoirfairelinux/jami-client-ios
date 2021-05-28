@@ -39,6 +39,11 @@ class ContactRequestCell: UITableViewCell, NibReusable {
         })
     }
 
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        drawBanButtonImage()
+    }
+
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if highlighted {
             self.backgroundColor = UIColor.jamiUITableViewCellSelection
@@ -51,7 +56,6 @@ class ContactRequestCell: UITableViewCell, NibReusable {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        drawBanButtonImage()
         self.disposeBag = DisposeBag()
     }
 
