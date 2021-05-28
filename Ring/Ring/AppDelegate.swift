@@ -129,12 +129,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // start monitoring for network changes
         self.networkService.monitorNetworkType()
 
-        // Observe connectivity changes and reconnect DHT
-        self.networkService.connectionStateObservable
-            .subscribe(onNext: { _ in
-                self.daemonService.connectivityChanged()
-            })
-            .disposed(by: self.disposeBag)
+//        // Observe connectivity changes and reconnect DHT
+//        self.networkService.connectionStateObservable
+//            .subscribe(onNext: { _ in
+//                self.daemonService.connectivityChanged()
+//            })
+//            .disposed(by: self.disposeBag)
 
         self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
                                                                 contactService: self.contactsService,
@@ -269,6 +269,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         self.clearBadgeNumber()
+        guard let account = self.accountService.currentAccount else { return }
+        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+    }
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        guard let account = self.accountService.currentAccount else { return }
+        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: false)
     }
 
     func prepareVideoAcceleration() {
