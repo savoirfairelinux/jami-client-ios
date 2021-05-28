@@ -57,6 +57,10 @@ class PresenceService {
     func subscribeBuddy(withAccountId accountId: String,
                         withUri uri: String,
                         withFlag flag: Bool) {
+        if flag && contactPresence[uri] != nil {
+            // already subscribed
+            return
+        }
         presenceAdapter.subscribeBuddy(withURI: uri, withAccountId: accountId, withFlag: flag)
         if !flag {
             contactPresence[uri] = nil
