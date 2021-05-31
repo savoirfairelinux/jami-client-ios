@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP-kiszolgáló";
 "account.port" = "Kikötő";
 "account.proxyServer" = "Meghatalmazás";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "SIP-fiók létrehozása";
 "account.usernameLabel" = "Felhasználónév megadása";
 "account.passwordLabel" = "A jelszó megadása";
 "account.serverLabel" = "Cím beírása";

@@ -45,7 +45,7 @@
 "smartlist.searchBar" = "Search for new or existing contact...";
 "smartlist.noNetworkConnectivity" = "Tidak ada jaringan internet";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
-"smartlist.accountsTitle" = "Accounts";
+"smartlist.accountsTitle" = "Akun";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
@@ -69,7 +69,7 @@
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
 "welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.createAccount" = "Buat akun Jami";
 "welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
@@ -84,23 +84,23 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
-"createAccount.enterNewUsernamePlaceholder" = "Username";
-"createAccount.newPasswordPlaceholder" = "Password";
+"createAccount.enterNewUsernamePlaceholder" = "Nama pengguna";
+"createAccount.newPasswordPlaceholder" = "Kata sandi";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
+"createAccount.passwordCharactersNumberError" = "Minimum 6 karakter";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.waitCreateAccountTitle" = "Menambahkan akun";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "Notifications";
 "createAccount.Recommended" = "(Recommended)";
-"createAccount.UsernameNotRegisteredTitle" = "Network error";
+"createAccount.UsernameNotRegisteredTitle" = "Galat jaringan";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
@@ -108,26 +108,26 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "Password";
+"linkToAccount.passwordPlaceholder" = "Kata sandi";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
+"linkToAccount.pinLabel" = "Masukkan PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "Password";
+"linkToAccountManager.passwordPlaceholder" = "Kata sandi";
 "linkToAccountManager.passwordLabel" = "Enter Password";
-"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.usernamePlaceholder" = "Nama pengguna";
 "linkToAccountManager.usernameLabel" = "Enter Username";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "Akun tidak ditemukan";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
+"alerts.accountNoNetworkTitle" = "Tidak dapat terhubung ke jaringan";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
@@ -164,7 +164,7 @@
 
 //Actions
 "actions.blockAction" = "Blokir";
-"actions.deleteAction" = "Delete";
+"actions.deleteAction" = "Hapus";
 "actions.cancelAction" = "Cancel";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Kembali";
@@ -197,11 +197,11 @@
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
 "accountPage.settingsHeader" = "Setelan";
-"accountPage.username" = "Username";
+"accountPage.username" = "Nama pengguna";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Blocked contacts";
+"accountPage.blockedContacts" = "Kontak yang diblokir";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -211,7 +211,7 @@
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Revoke device";
+"accountPage.revokeDeviceTitle" = "Hapus perangkat";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
@@ -236,7 +236,7 @@
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
-"accountPage.usernameRegisterAction" = "Register";
+"accountPage.usernameRegisterAction" = "Daftar";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 "accountPage.createPassword" = "Create password";
 "accountPage.changePassword" = "Change password";
@@ -255,10 +255,10 @@
 
 //Account
 "account.sipUsername" = "User Name";
-"account.sipPassword" = "Password";
+"account.sipPassword" = "Kata sandi";
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
-"account.proxyServer" = "Proxy";
+"account.proxyServer" = "Proksi";
 "account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Enter Password";
@@ -266,9 +266,9 @@
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
-"account.statusConnecting" = "Connecting";
+"account.statusOnline" = "Daring";
+"account.statusOffline" = "Luring";
+"account.statusConnecting" = "Menghubungkan";
 "account.statusUnknown" = "Tidak diketahui";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
@@ -335,14 +335,14 @@
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "Pengaturan lanjutan";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
+"migrateAccount.title" = "Migrasi akun";
 "migrateAccount.migrateButton" = "Migrate Account";
 "migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordPlaceholder" = "Masukan kata sandi";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";

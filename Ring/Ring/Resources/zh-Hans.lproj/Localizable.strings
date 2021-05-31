@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP 伺服器";
 "account.port" = "連接埠";
 "account.proxyServer" = "代理服務器";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "建立 SIP 帳號";
 "account.usernameLabel" = "輸入使用者名稱";
 "account.passwordLabel" = "輸入密碼";
 "account.serverLabel" = "輸入地址";

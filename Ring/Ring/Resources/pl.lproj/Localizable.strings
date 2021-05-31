@@ -251,7 +251,7 @@
 "accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 "accountPage.peerDiscovery" = "Automatycznie łącz się w sieci lokalnej";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Automatyczna rejestracja po wygaśnięciu";
 
 //Account
 "account.sipUsername" = "Nazwa Użytkownika";
@@ -259,7 +259,7 @@
 "account.sipServer" = "Serwer SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Pełnomocnik";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Stwórz konto SIP";
 "account.usernameLabel" = "Wprowadź Nazwę Użytkownika";
 "account.passwordLabel" = "Wpisz hasło";
 "account.serverLabel" = "Wprowadź Adres";

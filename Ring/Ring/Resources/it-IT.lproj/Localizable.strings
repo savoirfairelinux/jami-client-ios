@@ -149,7 +149,7 @@
 "alerts.noLocationPermissionsTitle" = "Accesso alla posizione non concesso";
 "alerts.errorWrongCredentials" = "Impossibile connettersi al gestore account fornito. Controlla le tue credenziali";
 "alerts.recordVideoMessage" = "Registra un videomessaggio";
-"alerts.recordAudioMessage" = "Registra un audiomessaggio";
+"alerts.recordAudioMessage" = "Registra un messaggio vocale";
 "alerts.uploadFile" = "Carica file";
 "alerts.uploadPhoto" = "Carica foto o film";
 "alerts.locationServiceIsDisabled" = "Attiva \"Servizi di localizzazione\" per consentire a \"Jami\" di determinare la tua posizione.";
@@ -172,7 +172,7 @@
 "alerts.incomingCallAllertTitle" = "Chiamata in arrivo da";
 "alerts.incomingCallButtonAccept" = "Accetta";
 "alerts.incomingCallButtonIgnore" = "Ignora";
-"actions.startAudioCall" = "Chiamata audio";
+"actions.startAudioCall" = "Chiamata vocale";
 "actions.startVideoCall" = "Videochiamata";
 "actions.goToSettings" = "Vai alle impostazioni";
 "actions.stopLocationSharing" = "Ferma condivisione";
@@ -189,7 +189,7 @@
 "calls.haghUp" = "riaggancia";
 "calls.maximize" = "massimizza";
 "calls.minimize" = "minimizza";
-"calls.setModerator" = "imposta moderatore";
+"calls.setModerator" = "metti moderatore";
 "calls.removeModerator" = "rimuovi moderatore";
 "calls.muteAudio" = "disattiva microfono";
 "calls.unmuteAudio" = "attiva microfono";
@@ -259,7 +259,7 @@
 "account.sipServer" = "Server SIP";
 "account.port" = "Porta";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Crea un account SIP";
 "account.usernameLabel" = "Inserire il nome utente";
 "account.passwordLabel" = "Inserire la password";
 "account.serverLabel" = "Inserisci indirizzo";
@@ -286,7 +286,7 @@
 "linkDevice.hudMessage" = "Verifica";
 
 //Contact Page
-"contactPage.startAudioCall" = "Avvia chiamata audio";
+"contactPage.startAudioCall" = "Avvia chiamata vocale";
 "contactPage.startVideoCall" = "Avvia una videochiamata";
 "contactPage.sendMessage" = "Invia messaggio";
 "contactPage.clearConversation" = "Cancella la chat";

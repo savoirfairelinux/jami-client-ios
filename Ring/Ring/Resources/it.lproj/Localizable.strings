@@ -148,8 +148,8 @@
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
+"alerts.recordVideoMessage" = "Registra un videomessaggio";
+"alerts.recordAudioMessage" = "Registra un messaggio vocale";
 "alerts.uploadFile" = "Upload file";
 "alerts.uploadPhoto" = "Upload photo or movie";
 "alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
@@ -172,8 +172,8 @@
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accetta";
 "alerts.incomingCallButtonIgnore" = "Ignora";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
+"actions.startAudioCall" = "Chiamata vocale";
+"actions.startVideoCall" = "Videochiamata";
 "actions.goToSettings" = "Go to Settings";
 "actions.stopLocationSharing" = "Ferma condivision";
 
@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Porta";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Crea un account SIP";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Inserisci Password";
 "account.serverLabel" = "Enter Address";
@@ -286,8 +286,8 @@
 "linkDevice.hudMessage" = "verifica";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
+"contactPage.startAudioCall" = "Avvia chiamata vocale";
+"contactPage.startVideoCall" = "Avvia videochiamata";
 "contactPage.sendMessage" = "Send Message";
 "contactPage.clearConversation" = "Clear Chat";
 "contactPage.blockContact" = "Block Contact";
@@ -336,7 +336,7 @@
 
 //General Settings
 "generalSettings.title" = "Impostazioni avanzate";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoAcceleration" = "Abilita l'accelerazione video";
 
 //Migrate Account
 "migrateAccount.title" = "Migrazione account";
