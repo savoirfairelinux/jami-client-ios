@@ -121,6 +121,16 @@ internal enum L10n {
     internal static let passwordPlaceholder = L10n.tr("Localizable", "accountPage.passwordPlaceholder")
     /// Auto connect on local network
     internal static let peerDiscovery = L10n.tr("Localizable", "accountPage.peerDiscovery")
+    /// Enable TURN
+    internal static let turnEnabled = L10n.tr("Localizable", "accountPage.turnEnabled")
+    /// TURN address
+    internal static let turnServer = L10n.tr("Localizable", "accountPage.turnServer")
+    /// TURN username
+    internal static let turnUsername = L10n.tr("Localizable", "accountPage.turnUsername")
+    /// TURN password
+    internal static let turnPassword = L10n.tr("Localizable", "accountPage.turnPassword")
+    /// TURN realm
+    internal static let turnRealm = L10n.tr("Localizable", "accountPage.turnRealm")
     /// Provide proxy address
     internal static let proxyAddressAlert = L10n.tr("Localizable", "accountPage.proxyAddressAlert")
     /// In order to receive notifications, please enable proxy
@@ -151,6 +161,8 @@ internal enum L10n {
     internal static let saveProxyAddress = L10n.tr("Localizable", "accountPage.saveProxyAddress")
     /// Settings
     internal static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader")
+    /// Connectivity
+    internal static let connectivityHeader = L10n.tr("Localizable", "accountPage.connectivityHeader")
     /// Share Account Details
     internal static let shareAccountDetails = L10n.tr("Localizable", "accountPage.shareAccountDetails")
     /// UNBLOCK

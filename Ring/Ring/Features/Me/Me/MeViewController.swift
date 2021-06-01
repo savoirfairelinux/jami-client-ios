@@ -493,6 +493,50 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         })
                         .disposed(by: cell.disposeBag)
                     return cell
+                case .turnEnabled:
+                    let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
+                    cell.textLabel?.text = L10n.AccountPage.turnEnabled
+                    let switchView = UISwitch()
+                    cell.selectionStyle = .none
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.accessoryView = switchView
+                    self.viewModel.turnEnabled
+                        .asObservable()
+                        .startWith(self.viewModel.turnEnabled.value)
+                        .observeOn(MainScheduler.instance)
+                        .bind(to: switchView.rx.value)
+                        .disposed(by: cell.disposeBag)
+                    switchView.rx
+                        .isOn.changed
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
+                        .distinctUntilChanged()
+                        .asObservable()
+                        .subscribe(onNext: {[weak self] enable in
+                            self?.viewModel.enableTurn(enable: enable)
+                        })
+                        .disposed(by: cell.disposeBag)
+                    return cell
+                case .turnServer(let value):
+                    let cell = self
+                        .configureTurnCell(cellType: .turnServer(value: value),
+                                                     value: value)
+                    return cell
+                case .turnUsername(let value):
+                    let cell = self
+                        .configureTurnCell(cellType: .turnUsername(value: value),
+                                                     value: value)
+                    return cell
+                case .turnPassword(let value):
+                    let cell = self
+                        .configureTurnCell(cellType: .turnPassword(value: value),
+                                                     value: value)
+                    return cell
+                case .turnRealm(let value):
+                    let cell = self
+                        .configureTurnCell(cellType: .turnRealm(value: value),
+                                                     value: value)
+                    return cell
                 case .sipUserName(let value):
                     let cell = self
                         .configureSipCredentialsCell(cellType: .sipUserName(value: value),
@@ -646,6 +690,70 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     func  configureSipCredentialsCell(cellType: SettingsSection.SectionRow,
+                                      value: String) -> UITableViewCell {
+        let cell = DisposableCell(style: .value1, reuseIdentifier: accountStateCell)
+        cell.backgroundColor = UIColor.jamiBackgroundColor
+        cell.selectionStyle = .none
+        let text = UITextField()
+        text.tag = self.sipCredentialsTAG
+        text.font = UIFont.preferredFont(forTextStyle: .callout)
+        text.returnKeyType = .done
+        text.text = value
+        text.sizeToFit()
+        text.rx.controlEvent(.editingDidEndOnExit)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.updateTurnSettings()
+            })
+            .disposed(by: cell.disposeBag)
+        switch cellType {
+        case .turnServer:
+            text.rx.text.orEmpty.distinctUntilChanged()
+                .bind(to: self.viewModel.turnServer)
+                .disposed(by: cell.disposeBag)
+            cell.textLabel?.text = L10n.AccountPage.turnServer
+        case .turnUsername:
+            text.rx.text.orEmpty.distinctUntilChanged()
+                .bind(to: self.viewModel.turnUsername)
+                .disposed(by: cell.disposeBag)
+            cell.textLabel?.text = L10n.AccountPage.turnUsername
+        case .turnPassword:
+            text.rx.text.orEmpty.distinctUntilChanged()
+                .bind(to: self.viewModel.turnPassword)
+                .disposed(by: cell.disposeBag)
+            cell.textLabel?.text = L10n.AccountPage.turnPassword
+        case .turnRealm:
+            text.rx.text.orEmpty.distinctUntilChanged()
+                .bind(to: self.viewModel.turnRealm)
+                .disposed(by: cell.disposeBag)
+            cell.textLabel?.text = L10n.AccountPage.turnRealm
+        default:
+            break
+        }
+        cell.textLabel?.sizeToFit()
+        cell.sizeToFit()
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        cell.detailTextLabel?.textColor = UIColor.clear
+        var frame = CGRect(x: self.sipCredentialsMargin, y: 0,
+                           width: self.view.frame.width - self.sipCredentialsMargin,
+                           height: cell.frame.height)
+        if self.view.frame.width - self.sipCredentialsMargin < text.frame.size.width {
+            let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
+            let size = text.frame.size
+            frame.origin = origin
+            frame.size = size
+            cell.detailTextLabel?.text = value
+        } else {
+            cell.detailTextLabel?.text = ""
+        }
+        cell.detailTextLabel?.sizeToFit()
+        text.frame = frame
+        cell.contentView.addSubview(text)
+        cell.sizeToFit()
+        return cell
+    }
+
+    func configureTurnCell(cellType: SettingsSection.SectionRow,
                                       value: String) -> UITableViewCell {
         let cell = DisposableCell(style: .value1, reuseIdentifier: sipAccountCredentialsCell)
         cell.backgroundColor = UIColor.jamiBackgroundColor

@@ -46,6 +46,11 @@ enum SettingsSection: SectionModelType {
         case jamiID(label: String)
         case jamiUserName(label: String)
         case notifications
+        case turnEnabled
+        case turnServer(value: String)
+        case turnUsername(value: String)
+        case turnPassword(value: String)
+        case turnRealm(value: String)
         case sipUserName(value: String)
         case sipPassword(value: String)
         case sipServer(value: String)
@@ -213,6 +218,32 @@ class MeViewModel: ViewModel, Stateable {
                                             .notifications]))
     }()
 
+    lazy var connectivitySettings: Observable<SettingsSection> = {
+        var server = ""
+        var username = ""
+        var password = ""
+        var realm = ""
+        if let account = self.accountService.currentAccount,
+           let details = account.details {
+            server = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnServer))
+            username = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnUsername))
+            password = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnPassword))
+            realm = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnRealm))
+            self.turnServer.accept(server)
+            self.turnUsername.accept(username)
+            self.turnPassword.accept(password)
+            self.turnRealm.accept(realm)
+        }
+
+        return Observable
+            .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.connectivityHeader),
+                                            .turnEnabled,
+                                            .turnServer(value: server),
+                                            .turnUsername(value: username),
+                                            .turnPassword(value: password),
+                                            .turnRealm(value: realm)]))
+    }()
+
     lazy var otherJamiSettings: Observable<SettingsSection> = {
         let items: [SettingsSection.SectionRow] = [.sectionHeader(title: L10n.AccountPage.other),
                                                    .peerDiscovery,
@@ -246,8 +277,9 @@ class MeViewModel: ViewModel, Stateable {
                                  linkNewDevice,
                                  linkedDevices,
                                  accountJamiSettings,
-                                 otherJamiSettings) { (credentials, linkNew, devices, settings, other) in
-            return [credentials, devices, linkNew, settings, other]
+                                 connectivitySettings,
+                                 otherJamiSettings) { (credentials, linkNew, devices, settings, connectivity, other) in
+            return [credentials, devices, linkNew, settings, connectivity, other]
         }
     }()
 
@@ -765,11 +797,56 @@ class MeViewModel: ViewModel, Stateable {
         peerDiscoveryEnabled.accept(enable)
     }
 
+    func enableTurn(enable: Bool) {
+        guard self.turnEnabled.value != enable,
+            let account = self.accountService.currentAccount else { return }
+        self.accountService.enableTurn(enable: enable, accountId: account.id)
+        turnEnabled.accept(enable)
+    }
+
     func enableKeepAlive(enable: Bool) {
         guard self.keepAliveEnabled.value != enable,
             let account = self.accountService.currentAccount else { return }
         self.accountService.enableKeepAlive(enable: enable, accountId: account.id)
         keepAliveEnabled.accept(enable)
+    }
+
+    // MARK: Connectivity
+    lazy var turnEnabled: BehaviorRelay<Bool> = {
+        if let account = self.accountService.currentAccount,
+            let details = account.details {
+            let enable = details.get(withConfigKeyModel:
+                ConfigKeyModel.init(withKey: .turnEnable)).boolValue
+            return BehaviorRelay<Bool>(value: enable)
+        }
+        return BehaviorRelay<Bool>(value: true)
+    }()
+
+
+    let turnServer = BehaviorRelay<String>(value: "")
+    let turnUsername = BehaviorRelay<String>(value: "")
+    let turnPassword = BehaviorRelay<String>(value: "")
+    let turnRealm = BehaviorRelay<String>(value: "")
+
+    func updateTurnSettings() {
+        guard let account = self.accountService.currentAccount, let details = account.details else { return }
+        if AccountModelHelper.init(withAccount: account).isAccountRing() {
+            return
+        }
+
+        let server = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnServer))
+        let username = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnUsername))
+        let password = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnPassword))
+        let realm = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnRealm))
+
+        if server == turnServer.value
+            && username == turnUsername.value
+            && password == turnPassword.value
+            && realm == turnRealm.value {
+            return
+        }
+
+        self.accountService.setTurnSettings(account.id, server, username, password, realm)
     }
 
     // MARK: Sip Credentials
