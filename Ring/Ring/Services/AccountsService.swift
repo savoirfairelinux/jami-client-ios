@@ -963,6 +963,10 @@ class AccountsService: AccountAdapterDelegate {
         self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery))
     }
 
+    func enableTurn(enable: Bool, accountId: String) {
+        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.turnEnable))
+    }
+
     func enableKeepAlive(enable: Bool, accountId: String) {
         self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.keepAliveEnabled))
     }

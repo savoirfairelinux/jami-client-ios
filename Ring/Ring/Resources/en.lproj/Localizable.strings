@@ -197,6 +197,8 @@
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
 "accountPage.settingsHeader" = "Settings";
+"accountPage.connectivityHeader" = "Connectivity";
+"accountPage.turnEnabled" = "Enable TURN";
 "accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";

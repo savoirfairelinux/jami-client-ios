@@ -493,6 +493,30 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         })
                         .disposed(by: cell.disposeBag)
                     return cell
+                case .turnEnabled:
+                    let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
+                    cell.textLabel?.text = L10n.AccountPage.turnEnabled
+                    let switchView = UISwitch()
+                    cell.selectionStyle = .none
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.accessoryView = switchView
+                    self.viewModel.turnEnabled
+                        .asObservable()
+                        .startWith(self.viewModel.turnEnabled.value)
+                        .observeOn(MainScheduler.instance)
+                        .bind(to: switchView.rx.value)
+                        .disposed(by: cell.disposeBag)
+                    switchView.rx
+                        .isOn.changed
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
+                        .distinctUntilChanged()
+                        .asObservable()
+                        .subscribe(onNext: {[weak self] enable in
+                            self?.viewModel.enableTurn(enable: enable)
+                        })
+                        .disposed(by: cell.disposeBag)
+                    return cell
                 case .sipUserName(let value):
                     let cell = self
                         .configureSipCredentialsCell(cellType: .sipUserName(value: value),

@@ -46,6 +46,7 @@ enum SettingsSection: SectionModelType {
         case jamiID(label: String)
         case jamiUserName(label: String)
         case notifications
+        case turnEnabled
         case sipUserName(value: String)
         case sipPassword(value: String)
         case sipServer(value: String)
@@ -213,6 +214,16 @@ class MeViewModel: ViewModel, Stateable {
                                             .notifications]))
     }()
 
+    lazy var connectivitySettings: Observable<SettingsSection> = {
+        return Observable
+            .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.connectivityHeader),
+                                            .turnEnabled
+                                            /*.turnAddress,
+                                            .turnUsername,
+                                            .turnPassword,
+                                            .turnRealm*/]))
+    }()
+
     lazy var otherJamiSettings: Observable<SettingsSection> = {
         let items: [SettingsSection.SectionRow] = [.sectionHeader(title: L10n.AccountPage.other),
                                                    .peerDiscovery,
@@ -246,8 +257,9 @@ class MeViewModel: ViewModel, Stateable {
                                  linkNewDevice,
                                  linkedDevices,
                                  accountJamiSettings,
-                                 otherJamiSettings) { (credentials, linkNew, devices, settings, other) in
-            return [credentials, devices, linkNew, settings, other]
+                                 connectivitySettings,
+                                 otherJamiSettings) { (credentials, linkNew, devices, settings, connectivity, other) in
+            return [credentials, devices, linkNew, settings, connectivity, other]
         }
     }()
 
@@ -741,6 +753,16 @@ class MeViewModel: ViewModel, Stateable {
         return BehaviorRelay<Bool>(value: true)
     }()
 
+    lazy var turnEnabled: BehaviorRelay<Bool> = {
+        if let account = self.accountService.currentAccount,
+            let details = account.details {
+            let enable = details.get(withConfigKeyModel:
+                ConfigKeyModel.init(withKey: .turnEnable)).boolValue
+            return BehaviorRelay<Bool>(value: enable)
+        }
+        return BehaviorRelay<Bool>(value: true)
+    }()
+
     lazy var keepAliveEnabled: BehaviorRelay<Bool> = {
         if let account = self.accountService.currentAccount,
             let details = account.details {
@@ -763,6 +785,13 @@ class MeViewModel: ViewModel, Stateable {
             let account = self.accountService.currentAccount else { return }
         self.accountService.enablePeerDiscovery(enable: enable, accountId: account.id)
         peerDiscoveryEnabled.accept(enable)
+    }
+
+    func enableTurn(enable: Bool) {
+        guard self.turnEnabled.value != enable,
+            let account = self.accountService.currentAccount else { return }
+        self.accountService.enableTurn(enable: enable, accountId: account.id)
+        turnEnabled.accept(enable)
     }
 
     func enableKeepAlive(enable: Bool) {
