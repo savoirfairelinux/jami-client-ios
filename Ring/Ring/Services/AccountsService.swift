@@ -963,6 +963,20 @@ class AccountsService: AccountAdapterDelegate {
         self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.dhtPeerDiscovery))
     }
 
+    func enableTurn(enable: Bool, accountId: String) {
+        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.turnEnable))
+    }
+
+    func setTurnSettings(server: String, username: String, password: String, realm: String) {
+        let details = self.accountService.getAccountDetails(fromAccountId: account.id)
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnServer), withValue: server)
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnUsername), withValue: username)
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnPassword), withValue: password)
+        details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnRealm), withValue: realm)
+        account.details = details
+        self.accountService.setAccountDetails(forAccountId: account.id, withDetails: details)
+    }
+
     func enableKeepAlive(enable: Bool, accountId: String) {
         self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.keepAliveEnabled))
     }
