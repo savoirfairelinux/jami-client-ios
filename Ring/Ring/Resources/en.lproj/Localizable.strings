@@ -197,6 +197,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
 "accountPage.settingsHeader" = "Settings";
+"accountPage.connectivityHeader" = "Connectivity";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnAddress" = "TURN address";
+"accountPage.turnUsername" = "TURN username";
+"accountPage.turnPassword" = "TURN password";
+"accountPage.turnRealm" = "TURN realm";
 "accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
