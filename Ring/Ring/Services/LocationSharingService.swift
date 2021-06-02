@@ -154,7 +154,6 @@ class LocationSharingService: NSObject {
 
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.allowsBackgroundLocationUpdates = true
         self.initialize()
     }
 
@@ -227,6 +226,7 @@ extension LocationSharingService {
         self.outgoingInstances.insertOrUpdate(instanceToInsert)
 
         self.locationManager.startUpdatingLocation()
+        self.locationManager.allowsBackgroundLocationUpdates = true
     }
 
     private func doShareLocationAction(_ location: CLLocation) {
@@ -247,6 +247,7 @@ extension LocationSharingService {
 
     func stopSharingLocation(accountId: String, contactUri: String) {
         self.outgoingInstances.get(accountId, contactUri)?.invalidate()
+        self.locationManager.allowsBackgroundLocationUpdates = false
         _ = self.outgoingInstances.remove(accountId, contactUri)
 
         if self.outgoingInstances.isEmpty {
