@@ -14,6 +14,9 @@ do
     --host=*)
       HOST="${1#--host=}"
     ;;
+    --release)
+    RELEASE=1
+    ;;
   esac
   shift
 done
