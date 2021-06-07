@@ -19,12 +19,12 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Conversations";
+"global.homeTabBarTitle" = "Obrolan";
 "global.meTabBarTitle" = "Account Settings";
-"global.ok" = "Ok";
+"global.ok" = "Oke";
 "global.versionName" = "Maloya";
-"global.close" = "Close";
-"global.share" = "Share";
+"global.close" = "Tutup";
+"global.share" = "Bagikan";
 "global.forward" = "Forward";
 "global.save" = "Save";
 "global.resend" = "Resend";
@@ -37,7 +37,7 @@
 // Smartlist
 "smartlist.yesterday" = "Kemarin";
 "smartlist.results" = "Public Directory";
-"smartlist.conversations" = "Conversations";
+"smartlist.conversations" = "Obrolan";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
@@ -49,7 +49,7 @@
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Invitations";
+"smartlist.invitations" = "Undangan";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
 "smartlist.aboutJami" = "Tentang Jami";
@@ -73,11 +73,11 @@
 "welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Lewat";
 "createProfile.profileCreated" = "Selanjutnya";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "Ketik nama";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
@@ -133,7 +133,7 @@
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "Batal";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
@@ -158,14 +158,14 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.mapInformation" = "Informasi peta";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
 //Actions
 "actions.blockAction" = "Blokir";
 "actions.deleteAction" = "Hapus";
-"actions.cancelAction" = "Cancel";
+"actions.cancelAction" = "Batal";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Kembali";
 "actions.doneAction" = "Done";
@@ -175,7 +175,7 @@
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.stopLocationSharing" = "Berhenti berbagi";
 
 //Calls
 "calls.callItemTitle" = "Call";
@@ -254,9 +254,9 @@
 "accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "Nama Pengguna";
 "account.sipPassword" = "Kata sandi";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "Peladen SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Proksi";
 "account.createSipAccount" = "Create a SIP Account";
@@ -303,7 +303,7 @@
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Terima";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "Batal";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
@@ -319,13 +319,13 @@
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Terima";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "Batal";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Kirim";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
+"generatedMessage.contactAdded" = "Kontak ditambahkan";
 "generatedMessage.invitationReceived" = "Invitation received";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
@@ -347,7 +347,7 @@
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "Batal";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

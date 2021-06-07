@@ -223,7 +223,7 @@
 "accountPage.deviceRevocationUnknownDevice" = "Dispositivo desconocido";
 "accountPage.deviceRevocationError" = "Error de revocación del dispositivo";
 "accountPage.namePlaceholder" = "Nombre";
-"accountPage.linkDeviceTitle" = "Vincula otro dispositivo";
+"accountPage.linkDeviceTitle" = "Vincular otro dispositivo";
 "accountPage.other" = "Otro";
 "accountPage.removeAccountTitle" = "Eliminar cuenta";
 "accountPage.removeAccountMessage" = "¡Al hacer clic en \"Eliminar\", eliminarás esta cuenta en este dispositivo! Esta acción no se puede deshacer. Además, tu nombre registrado puede perderse.";

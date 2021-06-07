@@ -180,7 +180,7 @@
 //Calls
 "calls.callItemTitle" = "Hívás";
 "calls.unknown" = "Ismeretlen";
-"calls.incomingCallInfo" = "beszélni akar Önnel";
+"calls.incomingCallInfo" = "szeretne Önnel beszélni";
 "calls.ringing" = "Csörögni…";
 "calls.connecting" = "Kapcsolódás…";
 "calls.searching" = "Keresés…";
@@ -237,7 +237,7 @@
 "accountPage.registerNameErrorMessage" = "A kért felhasználónév nem érhető.";
 "accountPage.usernameRegistering" = "Regisztráció…";
 "accountPage.usernameRegisterAction" = "Regisztráció";
-"accountPage.usernameRegistrationFailed" = "Regisztráció sikertelen. Kérjük, ellenőrizze a jelszót.";
+"accountPage.usernameRegistrationFailed" = "Bejegyeztetés sikertelen. Kérjük, ellenőrizze a jelszót.";
 "accountPage.createPassword" = "Jelszó létrehozása";
 "accountPage.changePassword" = "Jelszó megváltoztatása";
 "accountPage.oldPasswordPlaceholder" = "Adja meg a régi jelszót";
