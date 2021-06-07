@@ -175,7 +175,7 @@
 "actions.startAudioCall" = "Chiamata vocale";
 "actions.startVideoCall" = "Videochiamata";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Ferma condivision";
+"actions.stopLocationSharing" = "Ferma condivisione";
 
 //Calls
 "calls.callItemTitle" = "Chiama";
