@@ -617,7 +617,7 @@ extension ConversationViewModel {
 
     private func subscribePresenceServiceContactPresence() {
         // subscribe to presence updates for the conversation's associated contact
-        if let contactPresence = self.presenceService.contactPresence[self.conversation.value.hash] {
+        if let contactPresence = self.presenceService.getSubscriptionsForContact(contactId: self.conversation.value.hash) {
             self.contactPresence = contactPresence
         } else {
             self.contactPresence.accept(false)
@@ -637,7 +637,7 @@ extension ConversationViewModel {
 
     private func subscribePresence() {
         if let contactPresence = self.presenceService
-            .contactPresence[self.conversation.value.hash] {
+            .getSubscriptionsForContact(contactId: self.conversation.value.hash) {
             self.contactPresence = contactPresence
         } else {
             self.contactPresence.accept(false)

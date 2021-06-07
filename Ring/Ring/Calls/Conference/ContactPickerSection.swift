@@ -30,7 +30,7 @@ struct Contact {
 
     lazy var presenceStatus: BehaviorRelay<Bool>?  = {
          self.presenceService
-            .contactPresence[self.hash]
+            .getSubscriptionsForContact(contactId: self.hash)
     }()
 
     lazy var firstLine: String! = {

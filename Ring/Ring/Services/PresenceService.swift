@@ -26,7 +26,8 @@ class PresenceService {
 
     private let presenceAdapter: PresenceAdapter
     private let log = SwiftyBeaver.self
-    var contactPresence: [String: BehaviorRelay<Bool>]
+    private var contactPresence: [String: BehaviorRelay<Bool>]
+    private let presenceQueue = DispatchQueue(label: "com.presenceQueue", qos: .background)
 
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
@@ -41,41 +42,49 @@ class PresenceService {
         PresenceAdapter.delegate = self
     }
 
+    func getSubscriptionsForContact(contactId: String) -> BehaviorRelay<Bool>? {
+        var value: BehaviorRelay<Bool>?
+        presenceQueue.sync {[weak self] in
+            value = self?.contactPresence[contactId]
+        }
+        return value
+    }
+
     func subscribeBuddies(withAccount accountId: String,
                           withContacts contacts: [ContactModel],
                           subscribe: Bool) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else { return }
-            for contact in contacts where !contact.banned {
-                self.subscribeBuddy(withAccountId: accountId,
-                                    withUri: contact.hash,
-                                    withFlag: subscribe)
-            }
+        for contact in contacts where !contact.banned {
+            self.subscribeBuddy(withAccountId: accountId,
+                                withUri: contact.hash,
+                                withFlag: subscribe)
         }
     }
 
     func subscribeBuddy(withAccountId accountId: String,
                         withUri uri: String,
                         withFlag flag: Bool) {
-        if flag && contactPresence[uri] != nil {
-            // already subscribed
-            return
+        presenceQueue.async { [weak self] in
+            guard let self = self else { return }
+            if flag && self.contactPresence[uri] != nil {
+                // already subscribed
+                return
+            }
+            self.presenceAdapter.subscribeBuddy(withURI: uri, withAccountId: accountId, withFlag: flag)
+            if !flag {
+                self.contactPresence[uri] = nil
+                return
+            }
+            if let presenceForContact = self.contactPresence[uri] {
+                presenceForContact.accept(false)
+                return
+            }
+            let observableValue = BehaviorRelay<Bool>(value: false)
+            self.contactPresence[uri] = observableValue
+            var event = ServiceEvent(withEventType: .presenseSubscribed)
+            event.addEventInput(.accountId, value: accountId)
+            event.addEventInput(.uri, value: uri)
+            self.responseStream.onNext(event)
         }
-        presenceAdapter.subscribeBuddy(withURI: uri, withAccountId: accountId, withFlag: flag)
-        if !flag {
-            contactPresence[uri] = nil
-            return
-        }
-        if let presenceForContact = contactPresence[uri] {
-            presenceForContact.accept(false)
-            return
-        }
-        let observableValue = BehaviorRelay<Bool>(value: false)
-        contactPresence[uri] = observableValue
-        var event = ServiceEvent(withEventType: .presenseSubscribed)
-        event.addEventInput(.accountId, value: accountId)
-        event.addEventInput(.uri, value: uri)
-        self.responseStream.onNext(event)
     }
 }
 
@@ -84,13 +93,15 @@ extension PresenceService: PresenceAdapterDelegate {
                               withUri uri: String,
                               withStatus status: Int,
                               withLineStatus lineStatus: String) {
-        let value = status > 0 ? true : false
-        if let presenceForContact = contactPresence[uri] {
-            presenceForContact.accept(value)
-            return
+        presenceQueue.async {[weak self] in
+            guard let self = self else { return }
+            let value = status > 0 ? true : false
+            if let presenceForContact = self.contactPresence[uri] {
+                presenceForContact.accept(value)
+                return
+            }
+            let observableValue = BehaviorRelay<Bool>(value: value)
+            self.contactPresence[uri] = observableValue
         }
-        let observableValue = BehaviorRelay<Bool>(value: value)
-        contactPresence[uri] = observableValue
-        log.debug("newBuddyNotification: uri=\(uri), status=\(status)")
     }
 }
