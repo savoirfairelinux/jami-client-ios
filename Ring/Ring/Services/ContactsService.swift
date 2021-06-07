@@ -395,10 +395,10 @@ extension ContactsService: ContactsAdapterDelegate {
                 if let vCard = contactRequest.vCard {
                     single(.success(vCard))
                 } else {
-                    single(.error(ContactServiceError.loadVCardFailed))
+                    single(.failure(ContactServiceError.loadVCardFailed))
                 }
             } else {
-                single(.error(ContactServiceError.loadVCardFailed))
+                single(.failure(ContactServiceError.loadVCardFailed))
             }
             return Disposables.create { }
         })
