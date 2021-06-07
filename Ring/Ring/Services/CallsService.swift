@@ -350,7 +350,7 @@ class CallsService: CallsAdapterDelegate {
                 self.calls.accept(values)
                 single(.success(call))
             } else {
-                single(.error(CallServiceError.placeCallFailed))
+                single(.failure(CallServiceError.placeCallFailed))
             }
             return Disposables.create { }
         })

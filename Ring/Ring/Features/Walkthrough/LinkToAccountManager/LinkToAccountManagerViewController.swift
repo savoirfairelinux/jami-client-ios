@@ -112,7 +112,7 @@ var viewModel: LinkToAccountManagerViewModel!
                     self?.showLinkHUD()
                 case .success:
                     self?.hideHud()
-                case .error (let error):
+                case .error(let error):
                     self?.hideHud()
                     self?.showAccountCreationError(error: error)
                 default:

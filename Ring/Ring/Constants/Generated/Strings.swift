@@ -14,7 +14,7 @@ internal enum L10n {
   internal enum Account {
     /// Account Status
     internal static let accountStatus = L10n.tr("Localizable", "account.accountStatus")
-    /// Create Sip Account
+    /// Create a SIP Account
     internal static let createSipAccount = L10n.tr("Localizable", "account.createSipAccount")
     /// Enable Account
     internal static let enableAccount = L10n.tr("Localizable", "account.enableAccount")
