@@ -67,7 +67,7 @@ class ConversationCell: UITableViewCell, NibReusable {
         Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
                                                   item.bestName.asObservable()) { ($0, $1) }
             .startWith((item.profileImageData.value, item.userName.value))
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe({ [weak self] profileData in
                 guard let data = profileData.element?.1 else { return }
 
@@ -85,7 +85,7 @@ class ConversationCell: UITableViewCell, NibReusable {
         // presence
         if self.presenceIndicator != nil {
             item.contactPresence.asObservable()
-                .observeOn(MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
                 .map { value in !value }
                 .bind(to: self.presenceIndicator!.rx.isHidden)
                 .disposed(by: self.disposeBag)
@@ -93,7 +93,7 @@ class ConversationCell: UITableViewCell, NibReusable {
 
         // username
         item.bestName.asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .bind(to: self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
         self.nameLabel.lineBreakMode = .byTruncatingTail

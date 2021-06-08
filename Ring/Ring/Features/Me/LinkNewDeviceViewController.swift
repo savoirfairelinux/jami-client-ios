@@ -34,7 +34,7 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         super.viewDidLoad()
 
         self.viewModel.observableState
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (state) in
                 switch state {
                 case .generatingPin:

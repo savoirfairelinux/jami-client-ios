@@ -121,7 +121,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         qrCodeButton.setImage(imageQrCode, for: .normal)
         self.viewModel.isAccountSip
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak qrCodeButton](isSip) in
                 qrCodeButton?.isHidden = isSip
                 qrCodeButton?.isEnabled = !isSip
@@ -134,7 +134,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             })
             .disposed(by: self.disposeBag)
         self.viewModel.showActionState.asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self](action) in
                 switch action {
                 case .noAction:
@@ -156,12 +156,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: self.disposeBag)
         self.navigationItem.rightBarButtonItem = qrCodeButtonItem
 
-        //setup Table
+        // setup Table
         self.settingsTable.estimatedRowHeight = 35
         self.settingsTable.rowHeight = UITableView.automaticDimension
         self.settingsTable.tableFooterView = UIView()
 
-        //Register cell
+        // Register cell
         self.setUpDataSource()
         self.settingsTable.register(cellType: DeviceCell.self)
     }
@@ -278,7 +278,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     self.viewModel.keepAliveEnabled
                         .asObservable()
                         .startWith(self.viewModel.keepAliveEnabled.value)
-                        .observeOn(MainScheduler.instance)
+                        .observe(on: MainScheduler.instance)
                         .bind(to: switchView.rx.value)
                         .disposed(by: cell.disposeBag)
                     switchView.rx
@@ -455,7 +455,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
                     self.viewModel.notificationsEnabledObservable
-                        .observeOn(MainScheduler.instance)
+                        .observe(on: MainScheduler.instance)
                         .bind(to: switchView.rx.value)
                         .disposed(by: cell.disposeBag)
                     switchView.setOn(self.viewModel.notificationsEnabled, animated: false)
@@ -480,7 +480,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     self.viewModel.peerDiscoveryEnabled
                         .asObservable()
                         .startWith(self.viewModel.peerDiscoveryEnabled.value)
-                        .observeOn(MainScheduler.instance)
+                        .observe(on: MainScheduler.instance)
                         .bind(to: switchView.rx.value)
                         .disposed(by: cell.disposeBag)
                     switchView.rx
@@ -528,7 +528,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
                     cell.detailTextLabel?.text = state.value
                     state.asObservable()
-                        .observeOn(MainScheduler.instance)
+                        .observe(on: MainScheduler.instance)
                         .subscribe(onNext: { (status) in
                             cell.detailTextLabel?.text = status
                         })
@@ -551,7 +551,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.sizeToFit()
                     cell.layoutIfNeeded()
                     self.viewModel.switchBoothModeState
-                        .observeOn(MainScheduler.instance)
+                        .observe(on: MainScheduler.instance)
                         .bind(to: switchView.rx.value)
                         .disposed(by: self.disposeBag)
                     switchView.rx
@@ -581,7 +581,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                      animated: false)
                     self.viewModel.accountEnabled
                         .asObservable()
-                        .observeOn(MainScheduler.instance)
+                        .observe(on: MainScheduler.instance)
                         .bind(to: switchView.rx.value)
                         .disposed(by: cell.disposeBag)
                     switchView.rx
@@ -657,7 +657,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         text.text = value
         text.sizeToFit()
         text.rx.controlEvent(.editingDidEndOnExit)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.updateSipSettings()
             })
@@ -680,14 +680,14 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             cell.textLabel?.text = L10n.Account.sipServer
         case .sipPassword:
             cell.textLabel?.text = L10n.Account.sipPassword
-            //show password button
+            // show password button
             let rightButton = UIButton(type: .custom)
             var insets = rightButton.contentEdgeInsets
             insets.right = 20.0
             rightButton.contentEdgeInsets = insets
             self.viewModel.secureTextEntry
                 .asObservable()
-                .observeOn(MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { (secure) in
                     text.isSecureTextEntry = secure
                     if secure {
@@ -879,7 +879,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         }
         self.present(controller, animated: true, completion: nil)
         if self.viewModel.hasPassword() {
-            //remove border around text view
+            // remove border around text view
             controller.textFields?[1].superview?.backgroundColor = .clear
             controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
         }
@@ -915,11 +915,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         }
         controller.addAction(actionCancel)
         controller.addAction(actionRegister)
-        //username textfield
+        // username textfield
         controller.addTextField {(textField) in
             textField.placeholder = L10n.AccountPage.usernamePlaceholder
         }
-        //error rext field
+        // error rext field
         controller.addTextField {(textField) in
             textField.text = ""
             textField.isUserInteractionEnabled = false
@@ -929,7 +929,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             textField.backgroundColor = UIColor.clear
             textField.font = UIFont.systemFont(ofSize: 11, weight: .thin)
         }
-        //password text field
+        // password text field
         if self.viewModel.hasPassword() {
             controller.addTextField {(textField) in
                 textField.placeholder = L10n.AccountPage.passwordPlaceholder
@@ -939,9 +939,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.present(controller, animated: true, completion: nil)
         self.viewModel.subscribeForNameLokup(disposeBug: nameRegistrationBag)
         self.viewModel.usernameValidationState.asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak controller] (state) in
-                //update name lookup message
+                // update name lookup message
                 guard let textFields = controller?.textFields,
                       textFields.count >= 2 else { return }
                 textFields[1].text = state.message
@@ -998,7 +998,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 .bind(to: actionRegister.rx.isEnabled)
                 .disposed(by: nameRegistrationBag)
         }
-        //remove border around text view
+        // remove border around text view
         controller.textFields?[1].superview?.backgroundColor = .clear
         controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
     }
@@ -1069,7 +1069,7 @@ extension MeViewController: UITableViewDelegate {
         var size = self.view.bounds.size
         let screenSize = UIScreen.main.bounds.size
         if let height = navigationHeight {
-            //height for ihoneX
+            // height for ihoneX
             if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone,
                 screenSize.height == 812.0 {
                 size.height -= (height - 10)

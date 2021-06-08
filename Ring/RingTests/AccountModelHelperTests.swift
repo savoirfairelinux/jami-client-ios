@@ -32,7 +32,7 @@ class AccountModelHelperTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        //~ Dummy account
+        // ~ Dummy account
         account = AccountModel(withAccountId: "identifier")
     }
 

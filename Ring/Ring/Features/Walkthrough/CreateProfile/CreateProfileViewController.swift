@@ -91,7 +91,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
         self.applyL10n()
 
-        //bind view model to view
+        // bind view model to view
         tapGesture.rx.event
             .bind(onNext: { [weak self] _ in
                 self?.dismissInfoView()
@@ -129,7 +129,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
-        .observeOn(MainScheduler.instance)
+        .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] (_) in
             guard UIDevice.current.portraitOrLandscape else { return }
             self?.skipButton.updateGradientFrame()

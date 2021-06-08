@@ -38,18 +38,18 @@ class VCardUtils {
                 if let vCard = contactRequest.vCard {
                     single(.success(vCard))
                 } else {
-                    single(.error(ContactServiceError.loadVCardFailed))
+                    single(.failure(ContactServiceError.loadVCardFailed))
                 }
             } else if let directoryURL = VCardUtils.getFilePath(forFile: name, inFolder: folder, createIfNotExists: false) {
                 if let data = FileManager.default.contents(atPath: directoryURL.path) {
                     if let vCard = CNContactVCardSerialization.parseToVCard(data: data) {
                         single(.success(vCard))
                     } else {
-                        single(.error(ContactServiceError.loadVCardFailed))
+                        single(.failure(ContactServiceError.loadVCardFailed))
                     }
                 }
             } else {
-                single(.error(ContactServiceError.loadVCardFailed))
+                single(.failure(ContactServiceError.loadVCardFailed))
             }
             return Disposables.create { }
         })

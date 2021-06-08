@@ -55,7 +55,7 @@ class MeCoordinator: Coordinator, StateableResponsive {
         self.presentingVC[VCType.blockList.rawValue] = false
 
         self.stateSubject
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? MeState else { return }
                 switch state {

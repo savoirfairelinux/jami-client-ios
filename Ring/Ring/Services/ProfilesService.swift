@@ -39,7 +39,7 @@ enum ProfileNotificationsKeys: String {
 }
 
 struct Base64VCard {
-    var data: [Int: String] //The key is the number of vCard part
+    var data: [Int: String] // The key is the number of vCard part
     var partsReceived: Int
 }
 
@@ -118,7 +118,7 @@ class ProfilesService: ProfilesAdapterDelegate {
 
         if let vCardKey = message.keys.filter({ $0.hasPrefix(self.ringVCardMIMEType) }).first {
 
-            //Parse the key to get the number of parts and the current part number
+            // Parse the key to get the number of parts and the current part number
             let components = vCardKey.components(separatedBy: ",")
 
             guard let partComponent = components.filter({ $0.hasPrefix("part=") }).first else {
@@ -158,7 +158,7 @@ class ProfilesService: ProfilesAdapterDelegate {
                 }
             }
 
-            //Build the vCard when all data are appended
+            // Build the vCard when all data are appended
             if of == numberOfReceivedChunk {
                 self.buildVCardFromChunks(cardID: id, ringID: ringId, accountId: accountId)
             }
@@ -172,7 +172,7 @@ class ProfilesService: ProfilesAdapterDelegate {
 
         let vCardChunks = vcard.data
 
-        //Append data from sorted part numbers
+        // Append data from sorted part numbers
         var vCardData = Data()
         for currentPartNumber in vCardChunks.keys.sorted() {
             if let currentData = vCardChunks[currentPartNumber]?.data(using: String.Encoding.utf8) {
@@ -185,7 +185,7 @@ class ProfilesService: ProfilesAdapterDelegate {
             vCardData = dataUtf16
         }
 
-        //Create the vCard, save and db and emit a new event
+        // Create the vCard, save and db and emit a new event
         if let vCard = CNContactVCardSerialization.parseToVCard(data: vCardData) {
             let name = VCardUtils.getName(from: vCard)
             var stringImage: String?

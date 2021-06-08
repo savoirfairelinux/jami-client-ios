@@ -121,7 +121,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                                                               peerUri: peerUri,
                                                               accountId: accountId,
                                                               shouldRefreshConversations: shouldRefresh)
-                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe()
                     .disposed(by: self.disposeBag)
             })
@@ -377,7 +377,7 @@ class ConversationsManager: MessagesAdapterDelegate {
                 return lookupNameResponse.address != nil &&
                     lookupNameResponse.address == hash
             })
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] lookupNameResponse in
                 if let name = lookupNameResponse.name, !name.isEmpty {
                     data [NotificationUserInfoKeys.name.rawValue] = name

@@ -113,7 +113,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.createSipAccountButton.setTitleColor(UIColor.jamiTextBlue, for: .normal)
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.configureWalkrhroughNavigationBar()

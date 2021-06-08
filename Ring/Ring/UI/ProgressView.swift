@@ -165,7 +165,7 @@ class ProgressView: UIView {
         self.addSubview(statusLabel)
         disposeBug = DisposeBag()
         self.statusLabelValue
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak statusLabel] (text) in
                 statusLabel?.text = text
             })

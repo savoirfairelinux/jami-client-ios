@@ -269,7 +269,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
         self.accountService = injectionBag.accountService
         self.nameService = injectionBag.nameService
 
-        //Loookup name request observer
+        // Loookup name request observer
         self.username.asObservable()
             .subscribe(onNext: { [weak self] username in
                 self?.nameService.lookupName(withAccount: "", nameserver: "", name: username)

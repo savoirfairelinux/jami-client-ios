@@ -48,7 +48,7 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
         noBlockedContactLabel.text = L10n.BlockListPage.noBlockedContacts
 
         self.viewModel.contactListNotEmpty
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .bind(to: self.noBlockedContactLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.navigationController?.navigationBar
@@ -60,11 +60,11 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
         self.tableView.rowHeight = 64.0
         self.tableView.allowsSelection = false
 
-        //Register cell
+        // Register cell
         self.tableView.register(cellType: BannedContactCell.self)
         self.viewModel
             .blockedContactsItems
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: BannedContactCell.self)) { [weak self] _, item, cell in
                 cell.configureFromItem(item)
                 cell.unblockButton.rx.tap

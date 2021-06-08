@@ -51,7 +51,7 @@ extension StateableResponsive where Self: Coordinator {
         self.present(viewController: viewController, withStyle: style, withAnimation: animation, lockWhilePresenting: VCType, disposeBag: self.disposeBag)
 
         // bind the stateable to the inner state subject
-        stateable.state.takeUntil(viewController.rx.deallocated)
+        stateable.state.take(until: viewController.rx.deallocated)
             .subscribe(onNext: { [weak self] (state) in
                 self?.stateSubject.onNext(state)
             })

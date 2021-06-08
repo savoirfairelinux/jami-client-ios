@@ -73,7 +73,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                                                     return (profileImage, username)
         }
             .startWith((self.viewModel.profileImageData.value, self.viewModel.userName.value))
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe({ [weak self] profileData -> Void in
                 guard let data = profileData.element?.1 else { return }
                 self?.stretchyHeader
@@ -116,7 +116,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.stretchyHeader.jamiID.text = self.viewModel.conversation.hash
 
         self.viewModel.titleName
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
                 self?.titleView.text = name
             })
@@ -148,12 +148,12 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, ContactActions>>(configureCell: configureCell)
 
         self.viewModel.tableSection
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .bind(to: self.tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
         self.tableView.rx.itemSelected
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] indexPath in
                 if  self?.tableView.cellForRow(at: indexPath) != nil {
                     switch indexPath.row {
@@ -220,7 +220,7 @@ extension ContactViewController: UITableViewDelegate {
         var titlViewThreshold: CGFloat = 0
         let screenSize = UIScreen.main.bounds.size
         if let height = navigationHeight {
-            //height for iphoneX
+            // height for iphoneX
             if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone,
                 screenSize.height == 812.0 {
                 size.height -= (height - 10)

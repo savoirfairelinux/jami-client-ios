@@ -267,7 +267,7 @@ extension MessageCellLocationSharing {
         let shouldExpand = !self.locationTapped.value.1
 
         self.updateHeight(shouldExpand)
-        //self.updateWidth(shouldExpand) now in controller, for animation
+        // self.updateWidth(shouldExpand) now in controller, for animation
         self.toggleMaplyGesture(shouldExpand)
 
         if shouldExpand {

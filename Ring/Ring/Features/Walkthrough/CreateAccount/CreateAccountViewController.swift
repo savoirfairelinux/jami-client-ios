@@ -88,7 +88,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.createAccountButton.updateGradientFrame()
@@ -191,7 +191,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     private func bindViewModelToView() {
         // handle username registration visibility
         self.viewModel.registerUsername.asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (isOn) in
                 guard let self = self else { return }
                 UIView.animate(withDuration: 0.3, animations: {
@@ -220,29 +220,29 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
         // handle password error
         self.viewModel.passwordValidationState.map { $0.isValidated }
-            .skipUntil(self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
+            .skip(until: self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
             .bind(to: self.passwordErrorLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.passwordValidationState.map { $0.message }
-            .skipUntil(self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
+            .skip(until: self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
             .bind(to: self.passwordErrorLabel.rx.text)
             .disposed(by: self.disposeBag)
 
         // handle registration error
         self.viewModel.usernameValidationState.asObservable()
             .map { $0.isDefault }
-            .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
+            .skip(until: self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
             .bind(to: self.registerUsernameErrorLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.usernameValidationState.asObservable()
             .map { $0.message }
-            .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
+            .skip(until: self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
             .bind(to: self.registerUsernameErrorLabel.rx.text)
             .disposed(by: self.disposeBag)
         self.viewModel.usernameValidationState.asObservable()
             .map { $0.isAvailable }
-            .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
-            .observeOn(MainScheduler.instance)
+            .skip(until: self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] available in
                 self?.registerUsernameErrorLabel.textColor = available ? UIColor.jamiSuccess : UIColor.jamiFailure
             }
@@ -250,7 +250,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
         // handle creation state
         self.viewModel.createState
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (state) in
                 switch state {
                 case .started:

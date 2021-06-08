@@ -38,7 +38,7 @@ public enum PresentationStyle {
 }
 
 /// A Coordinator drives the navigation of a whole part of the application
-protocol Coordinator: class {
+protocol Coordinator: AnyObject {
 
     /// the root View Controller to display
     var rootViewController: UIViewController { get }
@@ -49,8 +49,8 @@ protocol Coordinator: class {
     /// Parent coordinator
     var parentCoordinator: Coordinator? { get set }
 
-    ///flag to be setting to true during particular viewController is presenting
-    ///this property is added to prevent controller to be presenting multiple times, caused by UI lag
+    /// flag to be setting to true during particular viewController is presenting
+    /// this property is added to prevent controller to be presenting multiple times, caused by UI lag
     var presentingVC: [String: Bool] { get set }
 
     /// Initializes a new Coordinator with a dependancy injection bag

@@ -77,11 +77,11 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                                      animated: false)
                     self.viewModel.hardwareAccelerationEnabled
                         .asObservable()
-                        .observeOn(MainScheduler.instance)
+                        .observe(on: MainScheduler.instance)
                         .bind(to: switchView.rx.value)
                         .disposed(by: cell.disposeBag)
                     switchView.rx.value
-                        .observeOn(MainScheduler.instance)
+                        .observe(on: MainScheduler.instance)
                         .subscribe(onNext: { [weak self] (enable) in
                             self?.viewModel.togleHardwareAcceleration(enable: enable)
                         })

@@ -29,7 +29,7 @@ import SwiftyBeaver
 import ContactsUI
 import QuartzCore
 
-//Constants
+// Constants
 struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 70.0
     static let tableHeaderViewHeight: CGFloat = 30.0
@@ -161,11 +161,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         guard let controller = contactRequestVC else { return }
         addChild(controller)
 
-        //make sure that the child view controller's view is the right size
+        // make sure that the child view controller's view is the right size
         controller.view.frame = containerView.bounds
         containerView.addSubview(controller.view)
 
-        //you must call this at the end per Apple's documentation
+        // you must call this at the end per Apple's documentation
         controller.didMove(toParent: self)
         controller.view.isHidden = true
         self.searchView.searchBar.rx.text.orEmpty
@@ -349,7 +349,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             })
             .disposed(by: self.disposeBag)
         self.viewModel.currentAccountChanged
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] currentAccount in
                 if let account = currentAccount {
                     let accountSip = account.type == AccountType.sip
@@ -360,7 +360,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: disposeBag)
 
         self.navigationItem.rightBarButtonItem = settingsButtonItem
-        //create accounts button
+        // create accounts button
         let accountButton = UIButton(type: .custom)
         self.viewModel.profileImage.bind(to: accountButton.rx.image(for: .normal))
             .disposed(by: disposeBag)
@@ -634,7 +634,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         accountPickerTextView.inputView = accounPicker
         accounPicker.backgroundColor = .jamiBackgroundSecondaryColor
         self.viewModel.accounts
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .bind(to: accounPicker.rx.items(adapter: accountsAdapter))
             .disposed(by: disposeBag)
         if let account = self.viewModel.currentAccount,
@@ -643,7 +643,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             dialpadButtonShadow.isHidden = account.type == AccountType.ring
         }
         self.viewModel.currentAccountChanged
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] currentAccount in
                 guard let self = self else { return }
                 if let account = currentAccount,
@@ -708,7 +708,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func setupDataSources() {
-        //Configure cells closure for the datasources
+        // Configure cells closure for the datasources
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item)
             -> UITableViewCell = {
                 (   _: TableViewSectionedDataSource<ConversationSection>,
@@ -721,26 +721,26 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 return cell
         }
 
-        //Create DataSources for conversations and filtered conversations
+        // Create DataSources for conversations and filtered conversations
         let conversationsDataSource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
-        //Allows to delete
+        // Allows to delete
         conversationsDataSource.canEditRowAtIndexPath = { _, _  in
             return true
         }
 
-        //Bind TableViews to DataSources
+        // Bind TableViews to DataSources
         self.viewModel.conversations
             .bind(to: self.conversationsTableView.rx.items(dataSource: conversationsDataSource))
             .disposed(by: disposeBag)
     }
 
     func setupTableView() {
-        //Set row height
+        // Set row height
         self.conversationsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
 
-        //Register Cell
+        // Register Cell
         self.conversationsTableView.register(cellType: SmartListCell.self)
-        //Deselect the rows
+        // Deselect the rows
         self.conversationsTableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.conversationsTableView.deselectRow(at: indexPath, animated: true)

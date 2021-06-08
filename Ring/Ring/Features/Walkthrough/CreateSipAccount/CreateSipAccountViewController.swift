@@ -56,7 +56,7 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.createAccountButton.updateGradientFrame()

@@ -157,7 +157,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 }
                 status
                     .asObservable()
-                    .observeOn(MainScheduler.instance)
+                    .observe(on: MainScheduler.instance)
                     .startWith(status.value)
                     .subscribe(onNext: { precence in
                         cell.presenceIndicator?.isHidden = !precence

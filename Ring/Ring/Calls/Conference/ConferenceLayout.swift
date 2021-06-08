@@ -36,7 +36,7 @@ class ConferenceLayout: UIView {
         self.conferenceLayoutHelper.setVideoSize(size: size)
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: {[weak self] (_) in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.updateViewSize()

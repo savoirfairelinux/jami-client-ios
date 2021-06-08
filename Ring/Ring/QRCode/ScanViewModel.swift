@@ -40,7 +40,7 @@ class ScanViewModel: ViewModel, Stateable {
         guard let currentAccount = self.injectionBag.accountService.currentAccount else {
             return
         }
-        //Create new converation
+        // Create new converation
         let conversation = ConversationModel(withParticipantUri: JamiURI.init(schema: URIType.ring,
                                                                               infoHach: recipientRingId),
                                              accountId: currentAccount.id)

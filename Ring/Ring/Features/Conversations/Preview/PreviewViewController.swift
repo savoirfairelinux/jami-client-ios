@@ -27,7 +27,7 @@ enum PrevewType {
     case image
 }
 
-protocol PreviewViewControllerDelegate: class {
+protocol PreviewViewControllerDelegate: AnyObject {
     func deleteFile()
     func shareFile()
     func forwardFile()
@@ -65,7 +65,7 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.gradientView.applyGradient(with: [UIColor(red: 0, green: 0, blue: 0, alpha: 1), UIColor(red: 0, green: 0, blue: 0, alpha: 0)], gradient: .vertical)
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.gradientView.layoutIfNeeded()

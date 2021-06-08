@@ -37,7 +37,7 @@ class JamiSearchViewModel {
 
     let log = SwiftyBeaver.self
 
-    //Services
+    // Services
     private let nameService: NameService
     private let accountsService: AccountsService
     private let injectionBag: InjectionBag
@@ -67,7 +67,7 @@ class JamiSearchViewModel {
                             }
                             return sections
             })
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
     }()
 
     private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
@@ -85,25 +85,25 @@ class JamiSearchViewModel {
         self.injectionBag = injectionBag
         self.dataSource = source
 
-        //Observes if the user is searching
+        // Observes if the user is searching
         self.isSearching = searchBarText.asObservable()
             .map({ text in
                 return !text.isEmpty
             })
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
 
-        //Observes search bar text
+        // Observes search bar text
         searchBarText.asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
                 self?.search(withText: text)
             })
             .disposed(by: disposeBag)
 
-        //Observe username lookup
+        // Observe username lookup
         self.nameService.usernameLookupStatus
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak injectionBag] lookupResponse in
                 guard let self = self else { return }
                 if lookupResponse.state == .found && (lookupResponse.name == self.searchBarText.value || lookupResponse.address == self.searchBarText.value) {
@@ -120,7 +120,7 @@ class JamiSearchViewModel {
                         let injectionBag = injectionBag {
 
                         let uri = JamiURI.init(schema: URIType.ring, infoHach: lookupResponse.address)
-                        //Create new converation
+                        // Create new converation
                         let conversation = ConversationModel(withParticipantUri: uri, accountId: account.id)
                         let newConversation = ConversationViewModel(with: injectionBag)
                         if lookupResponse.name == self.searchBarText.value {
@@ -143,7 +143,7 @@ class JamiSearchViewModel {
 
         self.nameService
             .userSearchResponseShared
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] nameSearchResponse in
                 guard let self = self,
                       let results = nameSearchResponse.results as? [[String: String]],
@@ -205,7 +205,7 @@ class JamiSearchViewModel {
 
         if text.isEmpty { return }
 
-        //Filter conversations
+        // Filter conversations
         let filteredConversations =
             self.dataSource.conversationViewModels
                 .filter({conversationViewModel in

@@ -527,12 +527,12 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
             } else {
                 // sent message status
                 item.status.asObservable()
-                    .observeOn(MainScheduler.instance)
+                    .observe(on: MainScheduler.instance)
                     .map { value in value == MessageStatus.sending ? true : false }
                     .bind(to: self.sendingIndicator.rx.isAnimating)
                     .disposed(by: self.disposeBag)
                 item.status.asObservable()
-                    .observeOn(MainScheduler.instance)
+                    .observe(on: MainScheduler.instance)
                     .map { value in value == MessageStatus.failure ? false : true }
                     .bind(to: self.failedStatusLabel.rx.isHidden)
                     .disposed(by: self.disposeBag)
@@ -638,7 +638,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         Observable<(Data?, String)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
                                                   conversationViewModel.bestName.asObservable()) { ($0, $1) }
             .startWith((conversationViewModel.profileImageData.value, conversationViewModel.userName.value))
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe({ [weak self] profileData in
                 guard let data = profileData.element?.1 else { return }
                 self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
@@ -655,7 +655,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         Observable<(Data?, String, Bool)>.combineLatest(conversationViewModel.profileImageData.asObservable(),
                                                         conversationViewModel.bestName.asObservable(),
                                                         item.displayReadIndicator.asObservable()) { ($0, $1, $2) }
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .startWith((conversationViewModel.profileImageData.value, conversationViewModel.userName.value, item.displayReadIndicator.value))
             .subscribe({ [weak self] profileData in
                 guard let bestName = profileData.element?.1 else { return }
@@ -704,13 +704,13 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
 
     func getMaxDimensionForTransfer() -> CGFloat {
         let screenWidth = UIScreen.main.bounds.width
-        //iPhone 5 width
+        // iPhone 5 width
         if screenWidth <= 320 {
             return 200
-            //iPhone 6, iPhone 6 Plus and iPhone XR width
+            // iPhone 6, iPhone 6 Plus and iPhone XR width
         } else if screenWidth > 320 && screenWidth <= 414 {
             return 250
-            //iPad width
+            // iPad width
         } else if screenWidth > 414 {
             return 300
         }
