@@ -18,8 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RealmSwift
-
 /**
  Errors that can be thrown when trying create an AccountCredentialsModel
 
@@ -35,10 +33,10 @@ enum CredentialsError: Error {
  Its responsability:
  - keep the credentials of an account.
  */
-class AccountCredentialsModel: Object {
-    @objc dynamic var username: String = ""
-    @objc dynamic var password: String = ""
-    @objc dynamic var accountRealm: String = ""
+class AccountCredentialsModel {
+    var username: String = ""
+    var password: String = ""
+    var accountRealm: String = ""
 
     /**
      Constructor.

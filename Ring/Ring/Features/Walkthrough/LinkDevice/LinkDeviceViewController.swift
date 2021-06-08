@@ -88,7 +88,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
                 case .success:
                     self?.hideHud()
                     self?.showLinkedSuccess()
-                case .error (let error):
+                case .error(let error):
                     self?.hideHud()
                     self?.showAccountCreationError(error: error)
                 default:

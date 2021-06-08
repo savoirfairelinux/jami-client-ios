@@ -516,11 +516,11 @@ class MeViewModel: ViewModel, Stateable {
                     case DeviceRevocationState.success.rawValue:
                         self.showActionState.accept(.deviceRevokedWithSuccess(deviceId: deviceID))
                     case DeviceRevocationState.wrongPassword.rawValue:
-                        self.showActionState.accept(.deviceRevokationError(deviceId:deviceID, errorMessage: L10n.AccountPage.deviceRevocationWrongPassword))
+                        self.showActionState.accept(.deviceRevokationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationWrongPassword))
                     case DeviceRevocationState.unknownDevice.rawValue:
-                        self.showActionState.accept(.deviceRevokationError(deviceId:deviceID, errorMessage: L10n.AccountPage.deviceRevocationUnknownDevice))
+                        self.showActionState.accept(.deviceRevokationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationUnknownDevice))
                     default:
-                        self.showActionState.accept(.deviceRevokationError(deviceId:deviceID, errorMessage: L10n.AccountPage.deviceRevocationError))
+                        self.showActionState.accept(.deviceRevokationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationError))
                     }
                 }
             })
