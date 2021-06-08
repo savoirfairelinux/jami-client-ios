@@ -83,7 +83,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     private let log = SwiftyBeaver.self
 
-    //contain image if transfering file is image type, othewise contain nil
+    // contain image if transfering file is image type, othewise contain nil
     typealias ImageTuple = (isImage: Bool, data: UIImage?)
     private var transferedImages = [String: ImageTuple]()
 
@@ -129,7 +129,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                 let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: info.totalSize, countStyle: .file)
                 let name = pathUrl.lastPathComponent + "\n" + fileSizeWithUnit
                 fileName = name
-                //update db
+                // update db
                 self.dbManager.updateFileName(interactionID: interactionID, name: name, accountId: accountID)
                     .subscribe(onCompleted: { [weak self] in
                         self?.log.debug("file name updated")

@@ -22,7 +22,7 @@ import UIKit
 import Reusable
 import RxSwift
 
-protocol ConferenceParticipantViewDelegate: class {
+protocol ConferenceParticipantViewDelegate: AnyObject {
     func addConferenceParticipantMenu(origin: CGPoint, displayName: String, participantId: String, callId: String?, hangup: @escaping (() -> Void))
     func removeConferenceParticipantMenu()
 }
@@ -81,7 +81,7 @@ class ConferenceParticipantView: UIView {
 
     private func bindViewToViewModel() {
         self.viewModel?.removeView?
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] remove in
                 if remove {
                     self?.delegate?.removeConferenceParticipantMenu()
@@ -90,7 +90,7 @@ class ConferenceParticipantView: UIView {
             })
             .disposed(by: self.disposeBag)
         self.viewModel?.avatarObservable
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe({ [weak self] profileData -> Void in
                 let photoData = NSData(base64Encoded: profileData.element?.0 ?? "", options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
                 let nameData = profileData.element?.1

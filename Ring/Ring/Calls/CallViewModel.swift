@@ -27,7 +27,7 @@ import Contacts
 import RxCocoa
 class CallViewModel: Stateable, ViewModel {
 
-    //stateable
+    // stateable
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
@@ -197,9 +197,9 @@ class CallViewModel: Stateable, ViewModel {
             })
             .map({ [weak self] call in
                 let hide = !call.isExists()
-                //if it was conference call switch to another running call
+                // if it was conference call switch to another running call
                 if hide && call.participantsCallId.count > 1 {
-                    //switch to another call
+                    // switch to another call
                     let anotherCalls = call.participantsCallId.filter { (callID) -> Bool in
                         self?.callService.call(callID: callID) != nil && callID != call.callId
                     }
@@ -230,7 +230,7 @@ class CallViewModel: Stateable, ViewModel {
 
     lazy var callDuration: Driver<String> = {
         let timer = Observable<Int>.interval(Durations.oneSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .takeUntil(currentCall
+            .take(until: currentCall
                 .filter { call in
                     !call.isExists()
                 })
@@ -435,8 +435,8 @@ class CallViewModel: Stateable, ViewModel {
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.audioService.startAudio()
-                //for outgoing calls ve create audio sesion with default parameters.
-                //for incoming call audio session is created, ve need to override it
+                // for outgoing calls ve create audio sesion with default parameters.
+                // for incoming call audio session is created, ve need to override it
                 let overrideOutput = self.call?.callTypeValue == CallType.incoming.rawValue
                 self.audioService.setDefaultOutput(toSpeaker: !self.isAudioOnly,
                                                    override: overrideOutput)
@@ -679,7 +679,7 @@ extension CallViewModel {
             guard let uri = participant.uri else { return }
             // master call
             if uri.isEmpty {
-                //check if master call is local or remote
+                // check if master call is local or remote
                 if !self.isHostCall {
                     participant.displayName = call.getDisplayName()
                 } else {

@@ -54,7 +54,7 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
         self.tabBarController?.tabBar.layer.zPosition = -1
         NotificationCenter.default.rx
             .notification(UIDevice.orientationDidChangeNotification)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: {[weak self](_) in
                 guard UIDevice.current.portraitOrLandscape else { return }
                 self?.placeVideoCall.updateGradientFrame()

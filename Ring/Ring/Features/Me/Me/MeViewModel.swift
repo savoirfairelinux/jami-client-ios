@@ -229,8 +229,8 @@ class MeViewModel: ViewModel, Stateable {
                 var items = items
                 if let currentAccount = self.accountService.currentAccount,
                     self.accountService.isJams(for: currentAccount.id) {
-                    items.remove(at: items.count - 2) //remove .boothMode
-                    items.remove(at: items.count - 2) //remove .changePassword
+                    items.remove(at: items.count - 2) // remove .boothMode
+                    items.remove(at: items.count - 2) // remove .changePassword
                 }
                 return SettingsSection.accountSettings(items: items)
             })
@@ -284,7 +284,7 @@ class MeViewModel: ViewModel, Stateable {
                 self.port.accept(port)
                 self.proxyServer.accept(proxyServer)
             }
-            //isIP2IP
+            // isIP2IP
             if server.isEmpty {
                 return .accountSettings( items: [.sectionHeader(title: ""),
                                                  .sipUserName(value: username),
@@ -420,7 +420,7 @@ class MeViewModel: ViewModel, Stateable {
     func showBlockedContacts() {
         self.stateSubject.onNext(MeState.blockedContacts)
     }
-    //rigistering username
+    // rigistering username
     let newUsername = BehaviorRelay<String>(value: "")
     let usernameValidationState = BehaviorRelay<UsernameValidationState>(value: .unknown)
 
@@ -516,11 +516,11 @@ class MeViewModel: ViewModel, Stateable {
                     case DeviceRevocationState.success.rawValue:
                         self.showActionState.accept(.deviceRevokedWithSuccess(deviceId: deviceID))
                     case DeviceRevocationState.wrongPassword.rawValue:
-                        self.showActionState.accept(.deviceRevokationError(deviceId:deviceID, errorMessage: L10n.AccountPage.deviceRevocationWrongPassword))
+                        self.showActionState.accept(.deviceRevokationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationWrongPassword))
                     case DeviceRevocationState.unknownDevice.rawValue:
-                        self.showActionState.accept(.deviceRevokationError(deviceId:deviceID, errorMessage: L10n.AccountPage.deviceRevocationUnknownDevice))
+                        self.showActionState.accept(.deviceRevokationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationUnknownDevice))
                     default:
-                        self.showActionState.accept(.deviceRevokationError(deviceId:deviceID, errorMessage: L10n.AccountPage.deviceRevocationError))
+                        self.showActionState.accept(.deviceRevokationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationError))
                     }
                 }
             })

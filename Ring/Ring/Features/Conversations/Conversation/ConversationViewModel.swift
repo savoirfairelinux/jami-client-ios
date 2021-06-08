@@ -33,7 +33,7 @@ class ConversationViewModel: Stateable, ViewModel {
     /// Logger
     private let log = SwiftyBeaver.self
 
-    //Services
+    // Services
     private let conversationsService: ConversationsService
     private let accountService: AccountsService
     private let nameService: NameService
@@ -193,14 +193,14 @@ class ConversationViewModel: Stateable, ViewModel {
         }
     }
 
-    //Displays the entire date ( for messages received before the current week )
+    // Displays the entire date ( for messages received before the current week )
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         return formatter
     }()
 
-    //Displays the hour of the message reception ( for messages received today )
+    // Displays the hour of the message reception ( for messages received today )
     private lazy var hourFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
@@ -224,13 +224,13 @@ class ConversationViewModel: Stateable, ViewModel {
 
         let dateToday = Date()
 
-        //Get components from today date
+        // Get components from today date
         let todayWeekOfYear = Calendar.current.component(.weekOfYear, from: dateToday)
         let todayDay = Calendar.current.component(.day, from: dateToday)
         let todayMonth = Calendar.current.component(.month, from: dateToday)
         let todayYear = Calendar.current.component(.year, from: dateToday)
 
-        //Get components from last message date
+        // Get components from last message date
         let weekOfYear = Calendar.current.component(.weekOfYear, from: lastMessageDate)
         let day = Calendar.current.component(.day, from: lastMessageDate)
         let month = Calendar.current.component(.month, from: lastMessageDate)
@@ -265,7 +265,7 @@ class ConversationViewModel: Stateable, ViewModel {
             receipientURI = contactURI
         }
         guard let account = self.accountService.currentAccount else { return }
-        //if in call send sip msg
+        // if in call send sip msg
         if let call = self.callService.call(participantHash: self.conversation.value.hash, accountID: self.conversation.value.accountId) {
             self.callService.sendTextMessage(callID: call.callId, message: content, accountId: account)
             return
@@ -540,7 +540,7 @@ extension ConversationViewModel {
                         return message!
                     })
             })
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] messageViewModels in
                 guard let self = self else { return }
                 var msg = messageViewModels

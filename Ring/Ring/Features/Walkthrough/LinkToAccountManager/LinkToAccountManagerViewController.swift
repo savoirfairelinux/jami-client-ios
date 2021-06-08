@@ -52,7 +52,7 @@ var viewModel: LinkToAccountManagerViewModel!
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
-        .observeOn(MainScheduler.instance)
+        .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] (_) in
             guard UIDevice.current.portraitOrLandscape else { return }
             self?.signInButton.updateGradientFrame()
@@ -105,14 +105,14 @@ var viewModel: LinkToAccountManagerViewModel!
             })
             .disposed(by: self.disposeBag)
         self.viewModel.createState
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (state) in
                 switch state {
                 case .started:
                     self?.showLinkHUD()
                 case .success:
                     self?.hideHud()
-                case .error (let error):
+                case .error(let error):
                     self?.hideHud()
                     self?.showAccountCreationError(error: error)
                 default:

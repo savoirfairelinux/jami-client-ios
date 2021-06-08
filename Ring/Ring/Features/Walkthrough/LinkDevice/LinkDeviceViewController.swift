@@ -65,7 +65,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
 
         self.applyL10n()
 
-        //bind view model to view
+        // bind view model to view
         self.pinInfoButton.rx.tap
             .subscribe(onNext: { [weak self] (_) in
                 self?.showPinInfo()
@@ -80,7 +80,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
 
         // handle linking state
         self.viewModel.createState
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (state) in
                 switch state {
                 case .started:
@@ -88,7 +88,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
                 case .success:
                     self?.hideHud()
                     self?.showLinkedSuccess()
-                case .error (let error):
+                case .error(let error):
                     self?.hideHud()
                     self?.showAccountCreationError(error: error)
                 default:
@@ -115,7 +115,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
-        .observeOn(MainScheduler.instance)
+        .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] (_) in
             guard UIDevice.current.portraitOrLandscape else { return }
             self?.linkButton.updateGradientFrame()

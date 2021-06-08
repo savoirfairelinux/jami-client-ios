@@ -45,7 +45,7 @@ enum ConversationState: State {
     case migrateAccount(accountId: String)
 }
 
-protocol ConversationNavigation: class {
+protocol ConversationNavigation: AnyObject {
 
     var injectionBag: InjectionBag { get }
 
@@ -64,7 +64,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.startOutgoingCall(contactRingId: contactRingId, userName: name)
                 case .startAudioCall(let contactRingId, let name):
                     self.startOutgoingCall(contactRingId: contactRingId, userName: name, isAudioOnly: true)
-                case .conversationDetail (let conversationViewModel):
+                case .conversationDetail(let conversationViewModel):
                     self.showConversation(withConversationViewModel: conversationViewModel)
                 case .contactDetail(let conversationModel):
                     self.presentContactInfo(conversation: conversationModel)

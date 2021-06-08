@@ -24,7 +24,7 @@ import UIKit
 
 /// We assume that every application ViewModel should be aware of the injection bag
 /// it allows the factorize a ViewModelBased UIViewController instantiation
-protocol ViewModel: class {
+protocol ViewModel: AnyObject {
 
     /// Initializes a new ViewModel with a dependancy injection bag
     ///
@@ -32,7 +32,7 @@ protocol ViewModel: class {
     init(with injectionBag: InjectionBag)
 }
 
-protocol ViewModelBased: class {
+protocol ViewModelBased: AnyObject {
     associatedtype VMType: ViewModel
 
     /// The viewModel that will be automagically instantiated by instantiate(with injectionBag: InjectionBag)

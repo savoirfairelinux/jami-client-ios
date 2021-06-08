@@ -49,7 +49,7 @@ enum VideoCodecs: String {
     case unknown
 }
 
-protocol FrameExtractorDelegate: class {
+protocol FrameExtractorDelegate: AnyObject {
     func captured(imageBuffer: CVImageBuffer?, image: UIImage)
     func updateDevicePosition(position: AVCaptureDevice.Position)
 }

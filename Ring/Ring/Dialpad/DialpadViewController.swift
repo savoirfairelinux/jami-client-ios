@@ -50,7 +50,7 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
         }
         self.viewModel.observableNumber
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .bind(to: numberLabel.rx.text)
         .disposed(by: self.disposeBag)
         placeCallButton.rx.tap
@@ -73,14 +73,14 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
             .disposed(by: self.disposeBag)
         self.viewModel.observableNumber
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { text in
                 self.clearButton.isHidden = text.isEmpty
             })
             .disposed(by: self.disposeBag)
         self.viewModel.playDefaultSound
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { play in
                 if !play { return }
                 AudioServicesPlaySystemSound(1057)

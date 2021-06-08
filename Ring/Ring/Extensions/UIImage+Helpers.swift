@@ -195,7 +195,7 @@ extension UIImage {
     }
 
     func drawText(text: String, backgroundColor: UIColor, textColor: UIColor, size: CGSize) -> UIImage? {
-        //Setups up the font attributes that will be later used to dictate how the text should be drawn
+        // Setups up the font attributes that will be later used to dictate how the text should be drawn
         let textFont = UIFont.systemFont(ofSize: 20, weight: .semibold)
         let textFontAttributes = [
             NSAttributedString.Key.font: textFont,
@@ -204,7 +204,7 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         backgroundColor.setFill()
         UIRectFill(rect)
-        //Put the image into a rectangle as large as the original image.
+        // Put the image into a rectangle as large as the original image.
         self.draw(in: rect)
         // Our drawing bounds
         let textSize = text.size(withAttributes: [NSAttributedString.Key.font: textFont])

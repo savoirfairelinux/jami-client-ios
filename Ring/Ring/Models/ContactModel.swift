@@ -38,7 +38,7 @@ class ContactModel: Equatable {
         self.hash = contactUri.hash ?? ""
     }
 
-    //only jami contacts
+    // only jami contacts
     init(withDictionary dictionary: [String: String]) {
         if let hash = dictionary["id"] {
             self.hash = hash

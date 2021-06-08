@@ -110,10 +110,10 @@ class ContactsService {
     }
 
     func loadJamiContacts(withAccount account: String) {
-        //Load contacts from daemon
+        // Load contacts from daemon
         let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: account)
 
-        //Serialize them
+        // Serialize them
         if let contacts = contactsDictionaries?.map({ contactDict in
             return ContactModel(withDictionary: contactDict)
         }) {
@@ -131,10 +131,10 @@ class ContactsService {
 
     func loadContactRequests(withAccount accountId: String) {
         self.contactRequests.accept([])
-        //Load trust requests from daemon
+        // Load trust requests from daemon
         let trustRequestsDictionaries = self.contactsAdapter.trustRequests(withAccountId: accountId)
 
-        //Create contact requests from daemon trust requests
+        // Create contact requests from daemon trust requests
         if let contactRequests = trustRequestsDictionaries?.map({ dictionary in
             return ContactRequestModel(withDictionary: dictionary, accountId: accountId)
         }) {
@@ -196,7 +196,7 @@ class ContactsService {
             let success = self.contactsAdapter.discardTrustRequest(fromContact: jamiId,
                                                                    withAccountId: accountId)
 
-            //Update the Contact request list
+            // Update the Contact request list
             self.removeContactRequest(withRingId: jamiId)
 
             if success {
@@ -319,7 +319,7 @@ extension ContactsService: ContactsAdapterDelegate {
         if validContact != nil {
             return
         }
-        //Update trust request list
+        // Update trust request list
         if self.contactRequest(withRingId: senderAccount) == nil {
             let contactRequest = ContactRequestModel(withRingId: senderAccount,
                                                      vCard: vCard,
@@ -345,7 +345,7 @@ extension ContactsService: ContactsAdapterDelegate {
     }
 
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool) {
-        //Update trust request list
+        // Update trust request list
         if let hash = JamiURI.init(schema: URIType.ring, infoHach: uri).hash {
             self.removeContactRequest(withRingId: hash)
         }
@@ -357,12 +357,12 @@ extension ContactsService: ContactsAdapterDelegate {
             }
             self.contactStatus.onNext(contact)
         }
-            //sync contacts with daemon contacts
+            // sync contacts with daemon contacts
         else {
 
             let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: accountId)
 
-            //Serialize them
+            // Serialize them
             if let contacts = contactsDictionaries?.map({ contactDict in
                 return ContactModel(withDictionary: contactDict)
             }) {
@@ -395,10 +395,10 @@ extension ContactsService: ContactsAdapterDelegate {
                 if let vCard = contactRequest.vCard {
                     single(.success(vCard))
                 } else {
-                    single(.error(ContactServiceError.loadVCardFailed))
+                    single(.failure(ContactServiceError.loadVCardFailed))
                 }
             } else {
-                single(.error(ContactServiceError.loadVCardFailed))
+                single(.failure(ContactServiceError.loadVCardFailed))
             }
             return Disposables.create { }
         })
@@ -406,7 +406,7 @@ extension ContactsService: ContactsAdapterDelegate {
 
     func getProfileForUri(uri: String, accountId: String) -> Observable<Profile> {
         return self.dbManager.profileObservable(for: uri, createIfNotExists: false, accountId: accountId)
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
 
     func getProfile(uri: String, accountId: String) -> Profile? {

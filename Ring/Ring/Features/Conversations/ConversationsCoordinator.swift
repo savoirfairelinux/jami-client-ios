@@ -55,7 +55,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.addLockFlags()
 
         self.stateSubject
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ConversationState else { return }
                 switch state {
@@ -91,7 +91,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
         self.callService.newCall
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { (call) in
                 self.showIncomingCall(call: call)
             })
@@ -260,7 +260,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         }
         let smartViewController = SmartlistViewController.instantiate(with: self.injectionBag)
         let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
-        contactRequestsViewController.viewModel.state.takeUntil(contactRequestsViewController.rx.deallocated)
+        contactRequestsViewController.viewModel.state.take(until: contactRequestsViewController.rx.deallocated)
                     .subscribe(onNext: { [weak self] (state) in
                         self?.stateSubject.onNext(state)
                     })

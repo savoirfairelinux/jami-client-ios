@@ -31,7 +31,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
 
     private let disposeBag = DisposeBag()
 
-    //Services
+    // Services
     private let accountService: AccountsService
     private let networkService: NetworkService
     private let contactService: ContactsService

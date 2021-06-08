@@ -547,7 +547,7 @@ class ConversationViewController: UIViewController,
                                                            self.viewModel.userName.asObservable()) { profileImage, displayName, username in
                                                             return (profileImage, displayName, username)
         }
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe({ [weak self] profileData -> Void in
                 self?.setupNavTitle(profileImageData: profileData.element?.0,
                                     displayName: profileData.element?.1,
@@ -559,7 +559,7 @@ class ConversationViewController: UIViewController,
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
 
-        //set navigation buttons - call and send contact request
+        // set navigation buttons - call and send contact request
         let inviteItem = UIBarButtonItem()
         inviteItem.image = UIImage(named: "add_person")
         inviteItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
@@ -605,14 +605,14 @@ class ConversationViewController: UIViewController,
                     }
                     return buttons
                 })
-                .observeOn(MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { [weak self] buttons in
                     self?.navigationItem.rightBarButtonItems = buttons
                 })
                 .disposed(by: self.disposeBag)
         }
         self.viewModel.showCallButton
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .startWith(self.viewModel.haveCurrentCall())
             .subscribe(onNext: { [weak self] show in
                 if show {
@@ -639,7 +639,7 @@ class ConversationViewController: UIViewController,
             .disposed(by: self.disposeBag)
         viewModel.bestName
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
                 guard !name.isEmpty else { return }
                 let placeholder = L10n.Conversation.messagePlaceholder + name
@@ -689,7 +689,7 @@ class ConversationViewController: UIViewController,
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.separatorStyle = .none
 
-        //Register cell
+        // Register cell
         self.tableView.register(cellType: MessageCellSent.self)
         self.tableView.register(cellType: MessageCellReceived.self)
         self.tableView.register(cellType: MessageCellDataTransferSent.self)
@@ -698,9 +698,9 @@ class ConversationViewController: UIViewController,
         self.tableView.register(cellType: MessageCellLocationSharingSent.self)
         self.tableView.register(cellType: MessageCellLocationSharingReceived.self)
 
-        //Bind the TableView to the ViewModel
+        // Bind the TableView to the ViewModel
         self.viewModel.messages.asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (messageViewModels) in
                 self?.messageViewModels = messageViewModels
                 self?.computeSequencing()
@@ -708,7 +708,7 @@ class ConversationViewController: UIViewController,
             })
             .disposed(by: self.disposeBag)
 
-        //Scroll to bottom when reloaded
+        // Scroll to bottom when reloaded
         self.tableView.rx.methodInvoked(#selector(UITableView.reloadData))
             .subscribe(onNext: { [weak self] _ in
                 self?.scrollToBottomIfNeed()
@@ -1104,7 +1104,7 @@ extension ConversationViewController: UITableViewDataSource {
 
     private func deleteCellSetup(_ cell: MessageCell) {
         cell.deleteMessage
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak cell] (shouldDelete) in
                 guard shouldDelete, let self = self, let cell = cell, let messageId = cell.messageId else { return }
 
@@ -1122,35 +1122,35 @@ extension ConversationViewController: UITableViewDataSource {
 
     private func messageCellActionsSetUp(_ cell: MessageCell, item: MessageViewModel) {
         cell.shareMessage
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak item] (shouldShare) in
                 guard shouldShare, let item = item else { return }
                 self?.showShareMenu(messageModel: item)
             })
             .disposed(by: cell.disposeBag)
         cell.forwardMessage
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak item] (shouldForward) in
                 guard shouldForward, let item = item else { return }
                 self?.viewModel.slectContactsToShareMessage(message: item)
             })
             .disposed(by: cell.disposeBag)
         cell.saveMessage
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak cell] (shouldSave) in
                 guard shouldSave, let cell = cell, let image = cell.transferedImage else { return }
                 self?.saveImageToGalery(image: image)
             })
             .disposed(by: cell.disposeBag)
         cell.resendMessage
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak item] (shouldResend) in
                 guard shouldResend, let item = item else { return }
                 self?.viewModel.resendMessage(message: item)
             })
             .disposed(by: cell.disposeBag)
         cell.previewMessage
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak item, weak cell] (shouldPreview) in
                 guard shouldPreview, let item = item, let cell = cell, let self = self, let initialFrame = cell.getInitialFrame() else { return }
                 let player = item.getPlayer(conversationViewModel: self.viewModel)
@@ -1167,7 +1167,7 @@ extension ConversationViewController: UITableViewDataSource {
 
     private func tapToShowTimeCellSetup(_ cell: MessageCell) {
         cell.tappedToShowTime
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak cell] (tappedToShowTime) in
                 guard tappedToShowTime, let self = self, let cell = cell else { return }
 
@@ -1187,7 +1187,7 @@ extension ConversationViewController: UITableViewDataSource {
         guard item.isLocationSharingBubble, let cell = cell as? MessageCellLocationSharing else { return }
 
         cell.locationTapped
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak cell] (locationTapped) in
                 guard locationTapped.0, let self = self, let cell = cell else { return }
 
@@ -1226,7 +1226,7 @@ extension ConversationViewController: UITableViewDataSource {
             item.lastTransferStatus = .unknown
             changeTransferStatus(cell, nil, item.message.transferStatus, item, viewModel)
             item.transferStatus.asObservable()
-                .observeOn(MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
                 .filter {
                     return $0 != DataTransferStatus.unknown && $0 != item.lastTransferStatus && $0 != item.initialTransferStatus
                 }
@@ -1277,7 +1277,7 @@ extension ConversationViewController: UITableViewDataSource {
             cell.playerHeight
                 .asObservable()
                 .share()
-                .observeOn(MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
                 .subscribe(onNext: {[weak tableView] height in
                     if height > 0 {
                         UIView.performWithoutAnimation {

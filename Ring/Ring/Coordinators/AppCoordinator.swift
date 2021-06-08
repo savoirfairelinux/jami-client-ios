@@ -95,9 +95,9 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     /// Starts the coordinator
     func start () {
-        //~ By default, always present the initial loading at start
+        // ~ By default, always present the initial loading at start
         self.stateSubject.onNext(AppState.initialLoading)
-        //~ Dispatch to the proper screen
+        // ~ Dispatch to the proper screen
         self.dispatchApplication()
     }
 

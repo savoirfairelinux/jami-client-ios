@@ -85,7 +85,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
                                                     return (profileImage, username)
         }
             .startWith((item.profileImageData.value, item.userName.value))
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe({ [weak self] profileData -> Void in
                 guard let data = profileData.element?.1 else {
                     return
@@ -103,7 +103,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
         // name
         item.bestName
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .bind(to: self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
 
