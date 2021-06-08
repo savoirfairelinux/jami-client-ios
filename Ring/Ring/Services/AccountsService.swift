@@ -335,7 +335,7 @@ class AccountsService: AccountAdapterDelegate {
                 let account = try self.buildAccountFromDaemon(accountId: accountId)
                 single(.success(account))
             } catch {
-                single(.error(error))
+                single(.failure(error))
             }
             return Disposables.create {
             }
@@ -423,7 +423,7 @@ class AccountsService: AccountAdapterDelegate {
                 let account = try self.buildAccountFromDaemon(accountId: accountId)
                 single(.success(account))
             } catch {
-                single(.error(error))
+                single(.failure(error))
             }
             return Disposables.create {
             }

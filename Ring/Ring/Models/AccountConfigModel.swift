@@ -18,7 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RealmSwift
 import SwiftyBeaver
 
 /**
@@ -64,7 +63,7 @@ enum AccountType: String {
  - expose a clear interface to manipulate the configuration of an account
  - keep this configuration
  */
-class AccountConfigModel: Object {
+class AccountConfigModel {
     /**
      The collection of configuration elements.
      */
