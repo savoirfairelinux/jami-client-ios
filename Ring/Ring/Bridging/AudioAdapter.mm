@@ -20,7 +20,7 @@
 
 #import "AudioAdapter.h"
 
-#import "dring/configurationmanager_interface.h"
+#import "jami/configurationmanager_interface.h"
 
 @implementation AudioAdapter
 

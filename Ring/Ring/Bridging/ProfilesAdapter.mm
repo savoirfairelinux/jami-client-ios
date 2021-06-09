@@ -19,7 +19,7 @@
 */
 
 #import "ProfilesAdapter.h"
-#import "dring/configurationmanager_interface.h"
+#import "jami/configurationmanager_interface.h"
 #import "Ring-Swift.h"
 
 using namespace DRing;

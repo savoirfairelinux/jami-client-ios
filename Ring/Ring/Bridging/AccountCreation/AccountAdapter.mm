@@ -24,7 +24,7 @@
 #import "AccountAdapter.h"
 #import "Utils.h"
 
-#import "dring/configurationmanager_interface.h"
+#import "jami/configurationmanager_interface.h"
 #import "RegistrationResponse.h"
 
 @implementation AccountAdapter
