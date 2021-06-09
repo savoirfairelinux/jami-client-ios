@@ -20,7 +20,7 @@
 
 #import "ContactsAdapter.h"
 #import "Utils.h"
-#import "dring/configurationmanager_interface.h"
+#import "jamid/configurationmanager_interface.h"
 #import "Ring-Swift.h"
 
 using namespace DRing;

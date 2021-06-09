@@ -22,7 +22,7 @@
 #import "Ring-Swift.h"
 #import "NameRegistrationAdapter.h"
 #import "Utils.h"
-#import "dring/configurationmanager_interface.h"
+#import "jamid/configurationmanager_interface.h"
 #import "LookupNameResponse.h"
 #import "NameRegistrationResponse.h"
 #import "UserSearchResponse.h"

@@ -21,7 +21,7 @@
 
 #import "CallsAdapter.h"
 #import "Utils.h"
-#import "dring/callmanager_interface.h"
+#import "jamid/callmanager_interface.h"
 #import "Ring-Swift.h"
 
 using namespace DRing;

@@ -21,7 +21,7 @@
 
 #import "FixtureFailStartDRingAdapter.h"
 
-#import "dring/dring.h"
+#import "jamid/jamid.h"
 
 @implementation FixtureFailStartDRingAdapter
 

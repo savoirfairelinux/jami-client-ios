@@ -22,7 +22,7 @@
 
 #import "SystemAdapter.h"
 
-#import "dring/configurationmanager_interface.h"
+#import "jamid/configurationmanager_interface.h"
 
 #import "Utils.h"
 

@@ -20,7 +20,7 @@
 
 #import "DataTransferAdapter.h"
 #import "Utils.h"
-#import "dring/datatransfer_interface.h"
+#import "jamid/datatransfer_interface.h"
 #import "Ring-Swift.h"
 
 @implementation NSDataTransferInfo

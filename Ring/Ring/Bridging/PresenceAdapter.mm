@@ -20,7 +20,7 @@
 
 #import "PresenceAdapter.h"
 #import "Utils.h"
-#import "dring/presencemanager_interface.h"
+#import "jamid/presencemanager_interface.h"
 #import "Ring-Swift.h"
 
 using namespace DRing;
