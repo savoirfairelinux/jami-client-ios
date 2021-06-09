@@ -23,8 +23,8 @@
 
 #import "DRingAdapter.h"
 
-#import "dring/dring.h"
-#import "dring/configurationmanager_interface.h"
+#import "jami/jami.h"
+#import "jami/configurationmanager_interface.h"
 
 @implementation DRingAdapter
 

@@ -20,8 +20,8 @@
 
 #import "VideoAdapter.h"
 #import "Utils.h"
-#import "dring/videomanager_interface.h"
-#import "dring/callmanager_interface.h"
+#import "jami/videomanager_interface.h"
+#import "jami/callmanager_interface.h"
 #import "Ring-Swift.h"
 #include <pthread.h>
 #include <functional>
