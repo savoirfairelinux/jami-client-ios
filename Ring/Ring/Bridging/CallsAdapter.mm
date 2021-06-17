@@ -23,6 +23,7 @@
 #import "Utils.h"
 #import "jami/callmanager_interface.h"
 #import "Ring-Swift.h"
+#import <os/log.h>
 
 using namespace DRing;
 
@@ -83,6 +84,7 @@ static id <CallsAdapterDelegate> _delegate;
                                                                                    const std::string& fromURI,
                                                                                    const std::vector<std::map<std::string, std::string>>& media) {
         if (CallsAdapter.delegate) {
+            os_log(OS_LOG_DEFAULT, "incoming call");
             NSString* accountIdString = [NSString stringWithUTF8String:accountId.c_str()];
             NSString* callIdString = [NSString stringWithUTF8String:callId.c_str()];
             NSString* fromURIString = [NSString stringWithUTF8String:fromURI.c_str()];
@@ -283,7 +285,7 @@ static id <CallsAdapterDelegate> _delegate;
 }
 
 - (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId {
-    hangupParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]));
+   // hangupParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]));
 }
 -(void)setHandRaised:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId state:(BOOL)state {
     raiseParticipantHand(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), state);

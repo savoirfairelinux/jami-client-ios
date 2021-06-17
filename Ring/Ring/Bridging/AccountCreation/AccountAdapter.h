@@ -77,9 +77,11 @@
 
 - (void)pushNotificationReceived:(NSString *) from message:(NSDictionary*) data;
 - (void)setPushNotificationToken: (NSString *) token;
+- (void)setPushNotificationTopic: (NSString *) topic;
 - (BOOL)passwordIsValid:(NSString *)accountId password:(NSString *)password;
 - (BOOL)changeAccountPassword:(NSString *)accountId
                   oldPassword:(NSString *)oldpassword
                   newPassword:(NSString *)newPassword;
+- (void)setAccountsActive:(BOOL) active;
 
 @end
