@@ -69,6 +69,7 @@ class ConversationsManager {
         self.subscribeCallsEvents()
         self.subscribeContactsEvents()
         self.subscribeLocationSharingEvent()
+        self.subscribeCallsProviderEvents()
     }
 
     private func subscribeContactsEvents() {
@@ -82,6 +83,33 @@ class ConversationsManager {
                       account.isJams
                 else { return }
                 self.conversationService.saveJamsConversation(for: jamiId, accountId: accountId)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeCallsProviderEvents() {
+        callsProvider.sharedResponseStream
+            .filter({serviceEvent in
+                guard serviceEvent.eventType == .callProviderAnswerCall ||
+                        serviceEvent.eventType == .callProviderCancelCall else {
+                    return false
+                }
+                return true
+            })
+            .subscribe(onNext: { [weak self] serviceEvent in
+                guard let self = self,
+                      let callUUID: String = serviceEvent
+                        .getEventInput(ServiceEventInput.callUUID),
+                      let call = self.callService.callByUUID(UUID: callUUID) else {
+                    return
+                }
+                if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
+                    if !self.callService.answerCall(call: call) {
+                        self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
+                    }
+                } else {
+                    self.callService.stopCall(call: call)
+                }
             })
             .disposed(by: self.disposeBag)
     }

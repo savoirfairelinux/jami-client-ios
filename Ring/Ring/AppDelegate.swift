@@ -29,6 +29,7 @@ import PushKit
 import ContactsUI
 
 // swiftlint:disable identifier_name
+// swiftlint:disable type_body_length
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
@@ -99,6 +100,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private let disposeBag = DisposeBag()
 
+    private let center = CFNotificationCenterGetDarwinNotifyCenter()
+    private static let notificationReceived = "com.savoirfairelinux.notificationExtension.receivedNotification" as CFString
+    private static let appIsActive = CFNotificationName(rawValue: "com.savoirfairelinux.jami.appActive" as CFString)
+    private let appGroupIdentifier = "group.com.savoirfairelinux.ring"
+    private static let shouldHandleNotification = NSNotification.Name("com.savoirfairelinux.jami.shouldHandleNotification")
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // ignore sigpipe
@@ -119,6 +126,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     #else
         log.removeAllDestinations()
     #endif
+
+        /// move files from the app container to the group container, so it could be accessed by notification extension
+        self.moveDataToGroupContainer()
+
+        self.addListenerForNotification()
 
         // starts the daemon
         SystemAdapter().registerConfigurationHandler()
@@ -160,6 +172,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         prepareVideoAcceleration()
         prepareAccounts()
+        if #available(iOS 14.5, *) {
+            UIApplication.shared.registerForRemoteNotifications()
+        }
         self.voipRegistry.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(registerVoipNotifications),
                                                name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
@@ -169,6 +184,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             setenv("CA_ROOT_FILE", path, 1)
         }
         return true
+    }
+
+    func moveDataToGroupContainer() {
+        guard let groupUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier) else {
+            return
+        }
+        let groupDocUrl = groupUrl.appendingPathComponent("Documents")
+        if !FileManager.default.fileExists(atPath: groupDocUrl.path),
+           let appDocURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            try? FileManager.default.moveItem(at: appDocURL, to: groupDocUrl)
+        }
+        let groupCachesUrl = groupUrl.appendingPathComponent("Library").appendingPathComponent("Caches")
+        if !FileManager.default.fileExists(atPath: groupCachesUrl.path),
+           let appLibrURL = try? FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            let appCacheDir = appLibrURL.appendingPathComponent("Caches")
+            try? FileManager.default.moveItem(at: appCacheDir, to: groupCachesUrl)
+        }
+    }
+
+    func addListenerForNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification),
+                                               name: AppDelegate.shouldHandleNotification,
+                                               object: nil)
+        CFNotificationCenterAddObserver(self.center,
+                                        nil, { (_, _, _, _, _) in
+                                            /// emit signal so notification could be handeled by daemon
+                                            NotificationCenter.default.post(name: AppDelegate.shouldHandleNotification, object: nil, userInfo: nil)
+                                            /// emit signal that app is active for notification extension
+                                            CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), AppDelegate.appIsActive, nil, nil, true)
+                                        },
+                                        AppDelegate.notificationReceived,
+                                        nil,
+                                        .deliverImmediately)
     }
 
     func certificatePath() -> String? {
@@ -255,6 +303,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         self.log.warning("entering background")
+        if let userDefaults = UserDefaults(suiteName: "group.com.savoirfairelinux.ring") {
+            userDefaults.set("false" as AnyObject, forKey: "appActive")
+            userDefaults.synchronize()
+        }
         self.callService.muteCurrentCallVideoVideo( mute: true)
         guard let account = self.accountService.currentAccount else { return }
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: false)
@@ -308,6 +360,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     private func stopDaemon() {
+        self.callsProvider.stop()
         do {
             try self.daemonService.stopDaemon()
         } catch StopDaemonError.daemonNotRunning {
@@ -336,6 +389,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 break
             }
         })
+    }
+
+    @objc
+    private func handleNotification() {
+        guard let userDefaults = UserDefaults(suiteName: appGroupIdentifier),
+              let notificationData = userDefaults.object(forKey: "notificationData") as? [[String: String]] else {
+            return
+        }
+        userDefaults.set([[String: String]](), forKey: "notificationData")
+        for data in notificationData {
+            self.accountService.pushNotificationReceived(data: data)
+        }
     }
 
     @objc
@@ -485,25 +550,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 }
 
+// MARK: user notifications (ios 14.5 +)
+extension AppDelegate {
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken
+                        deviceToken: Data) {
+        if #available(iOS 14.5, *) {
+            let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+            print(deviceTokenString)
+            self.accountService.setPushNotificationToken(token: deviceTokenString)
+        }
+    }
+}
+
+// MARK: PKPushRegistryDelegate
 extension AppDelegate: PKPushRegistryDelegate {
 
     func pushRegistry(_ registry: PKPushRegistry, didInvalidatePushTokenFor type: PKPushType) {
-        self.accountService.setPushNotificationToken(token: "")
+        guard #available(iOS 14.5, *) else {
+            self.accountService.setPushNotificationToken(token: "")
+            return
+        }
     }
 
+    /// before ios 11
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
-        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
+        if let data = payload.dictionaryPayload as? [String: Any] {
+            self.accountService.pushNotificationReceived(data: data)
+        }
     }
 
     @available(iOS 11.0, *)
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
-        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
+        /// before ios 14.5 this function is called by Apple, we should notify daemon. After ios 14.5 it called from notification extension. We must present Call screen
+        if #available(iOS 14.5, *) {
+            if let data = payload.dictionaryPayload as? [String: Any] {
+                self.accountService.pushNotificationReceived(data: data)
+            }
+            let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
+            let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
+            callsProvider.previewCall(peerId: peerId, withVideo: hasVideo.boolValue) { _ in
+                completion()
+            }
+        } else if let data = payload.dictionaryPayload as? [String: Any] {
+            self.accountService.pushNotificationReceived(data: data)
+        }
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
-        if type == PKPushType.voIP {
-            let deviceTokenString = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
-            self.accountService.setPushNotificationToken(token: deviceTokenString)
+        guard #available(iOS 14.5, *) else {
+            if type == PKPushType.voIP {
+                let deviceTokenString = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
+                self.accountService.setPushNotificationToken(token: deviceTokenString)
+            }
+            return
         }
     }
 }

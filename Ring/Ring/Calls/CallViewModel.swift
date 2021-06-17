@@ -436,23 +436,6 @@ class CallViewModel: Stateable, ViewModel {
         self.nameService = injectionBag.nameService
         self.injectionBag = injectionBag
         self.conversationService = injectionBag.conversationsService
-        callsProvider.sharedResponseStream
-            .filter({ [weak self] serviceEvent in
-                guard let callUUID: String = serviceEvent
-                    .getEventInput(ServiceEventInput.callUUID) else { return false }
-                return callUUID == self?.call?.callUUID.uuidString
-            })
-            .subscribe(onNext: { [weak self] serviceEvent in
-                guard let self = self else { return }
-                if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
-                    self.answerCall()
-                        .subscribe()
-                        .disposed(by: self.disposeBag)
-                } else if serviceEvent.eventType == ServiceEventType.callProviderCancellCall {
-                    self.cancelCall(stopProvider: false)
-                }
-            })
-            .disposed(by: self.disposeBag)
 
         callsProvider.sharedResponseStream
             .filter({ serviceEvent in
@@ -524,10 +507,10 @@ extension CallViewModel {
             return
         }
         if stopProvider {
-            self.callsProvider.stopCall(callUUID: call.callUUID)
+            self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
             call.participantsCallId.forEach { (callId) in
                 if let participantCall = self.callService.call(callID: callId) {
-                    self.callsProvider.stopCall(callUUID: participantCall.callUUID)
+                    self.callsProvider.stopCall(callUUID: participantCall.callUUID, participant: participantCall.paricipantHash())
                 }
             }
         }

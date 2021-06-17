@@ -45,7 +45,7 @@ enum ServiceEventType {
     case newIncomingMessage
     case nameRegistrationEnded
     case callProviderAnswerCall
-    case callProviderCancellCall
+    case callProviderCancelCall
     case audioActivated
     case newOutgoingMessage
     case messageTypingIndicator
