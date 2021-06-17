@@ -53,12 +53,6 @@ final class DBContainer {
     private let log = SwiftyBeaver.self
     private let dbVersions = [1, 2]
 
-    let documentsPath = {
-        return NSSearchPathForDirectoriesInDomains(
-            .documentDirectory, .userDomainMask, true
-            ).first
-    }()
-
     func removeDBForAccount(account: String, removeFolder: Bool) {
         connections[account] = nil
         if !removeFolder { return }
@@ -91,8 +85,8 @@ final class DBContainer {
     // MARK: paths
 
     private func accountFolderPath(accountId: String) -> String? {
-        guard let documents = documentsPath else { return nil }
-        return documents + "/" + "\(accountId)" + "/"
+        guard let documents = Constants.documentsPath else { return nil }
+        return documents.path + "/" + "\(accountId)" + "/"
     }
 
     private func accountDbPath(accountId: String) -> String? {
@@ -172,8 +166,8 @@ final class DBContainer {
     }
 
     private func removeDBNamed(dbName: String) {
-        guard let dbPath = documentsPath else { return }
-        let url = NSURL(fileURLWithPath: dbPath)
+        guard let dbPath = Constants.documentsPath else { return }
+        let url = NSURL(fileURLWithPath: dbPath.path)
         guard let pathComponent = url
             .appendingPathComponent("/" + dbName) else {
                 return
@@ -204,8 +198,8 @@ final class DBContainer {
 
     func copyDbToAccountFolder(for accountId: String) -> Bool {
         if isDbExists(accountId: accountId) { return true }
-        guard let dbPath = documentsPath else { return false }
-        let url = NSURL(fileURLWithPath: dbPath)
+        guard let dbPath = Constants.documentsPath else { return false }
+        let url = NSURL(fileURLWithPath: dbPath.path)
         guard let oldPath = url.appendingPathComponent("/" + "\(accountId).db") else { return false }
         guard let newPath = accountDbPath(accountId: accountId) else { return false }
         let fileManager = FileManager.default
