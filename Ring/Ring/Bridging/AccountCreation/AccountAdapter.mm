@@ -210,4 +210,11 @@ static id <AccountAdapterDelegate> _delegate;
                                  std::string([newPassword UTF8String]));
 }
 
+-(void)setAccountsActive:(BOOL) active {
+    auto accounts = getAccountList();
+    for(auto account: accounts) {
+        setAccountActive(account, active);
+    }
+}
+
 @end
