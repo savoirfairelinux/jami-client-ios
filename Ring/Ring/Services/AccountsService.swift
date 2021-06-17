@@ -762,9 +762,12 @@ class AccountsService: AccountAdapterDelegate {
         self.accountAdapter.removeAccount(id)
         self.loadAccountsFromDaemon()
         if self.getAccount(fromAccountId: id) == nil {
-            guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-                return
-            }
+//            guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+//                return
+//            }
+            let appGroupIdentifier = "group.com.savoirfairelinux.ring"
+            let groupUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)!
+            let documentsURL = groupUrl.appendingPathComponent("Documents")
             let downloadsURL = documentsURL.appendingPathComponent(Directories.downloads.rawValue)
                 .appendingPathComponent(id)
             try? FileManager.default.removeItem(atPath: downloadsURL.path)
@@ -875,7 +878,7 @@ class AccountsService: AccountAdapterDelegate {
         self.accountAdapter.setPushNotificationToken(token)
     }
 
-    func pushNotificationReceived(data: [AnyHashable: Any]) {
+    func pushNotificationReceived(data: [String: Any]) {
         var notificationData = [String: String]()
         for key in data.keys {
             if let value = data[key] {
@@ -925,6 +928,12 @@ class AccountsService: AccountAdapterDelegate {
             event.addEventInput(.accountId, value: accountID)
             self.responseStream.onNext(event)
         }
+    }
+
+    func setProxyAddress(accountID: String, proxy: String) {
+        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
+            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
+            self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
     }
 
     func hasAccountWithProxyEnabled() -> Bool {

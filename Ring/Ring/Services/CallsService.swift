@@ -23,6 +23,7 @@ import RxSwift
 import RxRelay
 import SwiftyBeaver
 import Contacts
+import os
 
 enum CallServiceError: Error {
     case acceptCallFailed
@@ -121,6 +122,12 @@ class CallsService: CallsAdapterDelegate {
 
     func call(callID: String) -> CallModel? {
         return self.calls.value[callID]
+    }
+
+    func callByUUID(UUID: String) -> CallModel? {
+        return self.calls.value.values.filter { call in
+            call.callUUID.uuidString == UUID
+        }.first
     }
 
     func getVideoCodec(call: CallModel) -> String? {
@@ -282,6 +289,13 @@ class CallsService: CallsAdapterDelegate {
         })
     }
 
+    func stopCall(call: CallModel) {
+        self.callsAdapter.hangUpCall(withId: call.callId, accountId: call.accountId)
+    }
+    func answerCall(call: CallModel) -> Bool {
+        self.callsAdapter.acceptCall(withId: call.callId, accountId: call.accountId, withMedia: call.mediaList)
+    }
+
     func hangUp(callId: String) -> Completable {
         return Completable.create(subscribe: { completable in
             var success: Bool
@@ -300,25 +314,25 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func hangUpCallOrConference(callId: String) -> Completable {
-            return Completable.create(subscribe: { completable in
-                guard let call = self.call(callID: callId) else {
-                    completable(.error(CallServiceError.hangUpCallFailed))
-                    return Disposables.create { }
-                }
-                var success: Bool
-                if call.participantsCallId.count < 2 {
-                    success = self.callsAdapter.hangUpCall(withId: callId, accountId: call.accountId)
-                } else {
-                    success = self.callsAdapter.hangUpConference(callId, accountId: call.accountId)
-                }
-                if success {
-                    completable(.completed)
-                } else {
-                    completable(.error(CallServiceError.hangUpCallFailed))
-                }
+        return Completable.create(subscribe: { completable in
+            guard let call = self.call(callID: callId) else {
+                completable(.error(CallServiceError.hangUpCallFailed))
                 return Disposables.create { }
-            })
-        }
+            }
+            var success: Bool
+            if call.participantsCallId.count < 2 {
+                success = self.callsAdapter.hangUpCall(withId: callId, accountId: call.accountId)
+            } else {
+                success = self.callsAdapter.hangUpConference(callId, accountId: call.accountId)
+            }
+            if success {
+                completable(.completed)
+            } else {
+                completable(.error(CallServiceError.hangUpCallFailed))
+            }
+            return Disposables.create { }
+        })
+    }
 
     func hold(callId: String) -> Completable {
         return Completable.create(subscribe: { completable in
@@ -529,13 +543,16 @@ class CallsService: CallsAdapterDelegate {
     // MARK: CallsAdapterDelegate
     // swiftlint:disable cyclomatic_complexity
     func didChangeCallState(withCallId callId: String, state: String, accountId: String, stateCode: NSInteger) {
+        os_log("***** call service change call state")
 
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) {
             // Add or update new call
             var call = self.calls.value[callId]
+            os_log("***** call service change call state1")
             call?.state = CallState(rawValue: state) ?? CallState.unknown
             // Remove from the cache if the call is over and save message to history
             if call?.state == .over || call?.state == .failure {
+                os_log("***** call service change call state2")
                 guard let finishedCall = call else { return }
                 var time = 0
                 if let startTime = finishedCall.dateReceived {
@@ -673,6 +690,7 @@ class CallsService: CallsAdapterDelegate {
     // swiftlint:enable cyclomatic_complexity
 
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String, withMedia mediaList: [[String: String]]) {
+        os_log("incoming call call service")
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) {
             var call = self.calls.value[callId]
             if call == nil {
