@@ -32,36 +32,12 @@ enum VCardFiles: String {
     case myProfile
 }
 class VCardUtils {
-//    class func loadVCard(named name: String, inFolder folder: String, contactService: ContactsService? = nil) -> Single<CNContact> {
-//        return Single.create(subscribe: { single in
-//            if let contactRequest = contactService?.contactRequest(withRingId: name) {
-//                if let vCard = contactRequest.vCard {
-//                    single(.success(vCard))
-//                } else {
-//                    single(.failure(ContactServiceError.loadVCardFailed))
-//                }
-//            } else if let directoryURL = VCardUtils.getFilePath(forFile: name, inFolder: folder, createIfNotExists: false) {
-//                if let data = FileManager.default.contents(atPath: directoryURL.path) {
-//                    if let vCard = CNContactVCardSerialization.parseToVCard(data: data) {
-//                        single(.success(vCard))
-//                    } else {
-//                        single(.failure(ContactServiceError.loadVCardFailed))
-//                    }
-//                }
-//            } else {
-//                single(.failure(ContactServiceError.loadVCardFailed))
-//            }
-//            return Disposables.create { }
-//        })
-//    }
 
     class func getFilePath(forFile fileName: String, inFolder folderName: String, createIfNotExists shouldCreate: Bool) -> URL? {
 
         var path: URL?
+        guard let documentsURL = Constants.documentsPath else { return path }
 
-        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return path
-        }
         let directoryURL = documentsURL.appendingPathComponent(folderName)
         var isDirectory = ObjCBool(true)
         let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
