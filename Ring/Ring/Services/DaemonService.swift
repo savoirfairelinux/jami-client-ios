@@ -67,12 +67,6 @@ class DaemonService {
     /// The DRingAdaptor making the c++ bridge between the deamon and the App Swift source code.
     private let dRingAdaptor: DRingAdapter
 
-    /// The time interval separating each poll.
-    private let pollingTimeInterval = 0.01
-
-    /// The timer scheduling the calls to the poll method.
-    private var pollingTimer: Timer?
-
     // MARK: Initialization
     init(dRingAdaptor: DRingAdapter) {
         self.dRingAdaptor = dRingAdaptor
@@ -114,7 +108,6 @@ class DaemonService {
         }
 
         log.debug("Stopping daemon...")
-        self.pollingTimer?.invalidate()
         self.dRingAdaptor.fini()
         self.daemonStarted = false
         log.debug("Daemon stopped.")

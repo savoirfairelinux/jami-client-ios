@@ -36,17 +36,26 @@ using namespace DRing;
     confHandlers.insert(exportable_callback<ConfigurationSignal::GetAppDataPath>([&](const std::string& name,
                                                                                      std::vector<std::string>* ret) {
         if (name == "cache") {
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            ret->push_back(std::string([documentsDirectory UTF8String]));
+            NSURL *appGroupDirectoryPath = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier: @"group.com.savoirfairelinux.ring"];
+            NSURL * groupDocUrl = [[appGroupDirectoryPath URLByAppendingPathComponent:@"Library"] URLByAppendingPathComponent:@"Caches"];
+            NSString* path = groupDocUrl.path;
+            ret->push_back(std::string([path UTF8String]));
         }
         else {
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            ret->push_back(std::string([documentsDirectory UTF8String]));
+            NSURL *appGroupDirectoryPath = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier: @"group.com.savoirfairelinux.ring"];
+            NSURL * groupDocUrl = [appGroupDirectoryPath URLByAppendingPathComponent:@"Documents"];
+            NSString* path = groupDocUrl.path;
+            ret->push_back(std::string([path UTF8String]));
         }
     }));
     registerSignalHandlers(confHandlers);
+}
+
+-(NSString *)groupPath {
+    NSURL *appGroupDirectoryPath = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier: @"group.com.savoirfairelinux.ring"];
+   NSString* path = appGroupDirectoryPath.path;
+
+   return path;
 }
 #pragma mark -
 
