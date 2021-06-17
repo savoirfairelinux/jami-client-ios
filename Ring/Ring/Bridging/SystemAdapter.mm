@@ -31,23 +31,22 @@
 using namespace DRing;
 
 #pragma mark Callbacks registration
-- (void)registerConfigurationHandler {
+- (void)registerConfigurationHandler
+{
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
-    confHandlers.insert(exportable_callback<ConfigurationSignal::GetAppDataPath>([&](const std::string& name,
-                                                                                     std::vector<std::string>* ret) {
-        if (name == "cache") {
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            ret->push_back(std::string([documentsDirectory UTF8String]));
-        }
-        else {
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            ret->push_back(std::string([documentsDirectory UTF8String]));
-        }
-    }));
+    confHandlers.insert(exportable_callback<ConfigurationSignal::GetAppDataPath>(
+        [&](const std::string& name, std::vector<std::string>* ret) {
+            if (name == "cache") {
+                auto path = [Constants cachesPath];
+                ret->push_back(std::string([path.path UTF8String]));
+            } else {
+                auto path = [Constants documentsPath];
+                ret->push_back(std::string([path.path UTF8String]));
+            }
+        }));
     registerSignalHandlers(confHandlers);
 }
+
 #pragma mark -
 
 @end

@@ -623,9 +623,7 @@ class ConversationsService {
 
     private func removeSavedFiles(accountId: String, conversationId: String) {
         let downloadsFolderName = Directories.downloads.rawValue
-        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return
-        }
+        guard let documentsURL = Constants.documentsPath else { return }
         let downloadsURL = documentsURL.appendingPathComponent(downloadsFolderName)
             .appendingPathComponent(accountId)
             .appendingPathComponent(conversationId)

@@ -198,6 +198,11 @@ static id <AccountAdapterDelegate> _delegate;
 - (void)setPushNotificationToken: (NSString*)token {
     setPushNotificationToken(std::string([token UTF8String]));
 }
+
+- (void)setPushNotificationTopic:(NSString*)topic {
+    setPushNotificationTopic(std::string([topic UTF8String]));
+}
+
 - (BOOL)passwordIsValid:(NSString *)accountId password:(NSString *)password {
     return isPasswordValid(std::string([accountId UTF8String]), std::string([password UTF8String]));
 }
@@ -208,6 +213,13 @@ static id <AccountAdapterDelegate> _delegate;
     return changeAccountPassword(std::string([accountId UTF8String]),
                                  std::string([oldpassword UTF8String]),
                                  std::string([newPassword UTF8String]));
+}
+
+-(void)setAccountsActive:(BOOL) active {
+    auto accounts = getAccountList();
+    for(auto account: accounts) {
+        setAccountActive(account, active);
+    }
 }
 
 @end

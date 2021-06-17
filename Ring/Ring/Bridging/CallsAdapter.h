@@ -29,7 +29,7 @@
 
 - (BOOL)acceptCallWithId:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList;
 - (BOOL)refuseCallWithId:(NSString*)callId accountId:(NSString*)accountId;
-- (BOOL)hangUpCallWithId:(NSString*)callId accountId:(NSString*)accountId;
+- (BOOL)hangUpCall:(NSString*)callId accountId:(NSString*)accountId;
 - (BOOL)holdCallWithId:(NSString*)callId accountId:(NSString*)accountId;
 - (BOOL)unholdCallWithId:(NSString*)callId accountId:(NSString*)accountId;
 - (void)playDTMF:(NSString*)code;

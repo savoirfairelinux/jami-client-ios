@@ -22,6 +22,7 @@
 import Foundation
 import RxSwift
 import SwiftyBeaver
+import os
 
 // swiftlint:disable type_body_length
 class ConversationsManager {
@@ -69,6 +70,7 @@ class ConversationsManager {
         self.subscribeCallsEvents()
         self.subscribeContactsEvents()
         self.subscribeLocationSharingEvent()
+        self.subscribeCallsProviderEvents()
     }
 
     private func subscribeContactsEvents() {
@@ -82,6 +84,37 @@ class ConversationsManager {
                       account.isJams
                 else { return }
                 self.conversationService.saveJamsConversation(for: jamiId, accountId: accountId)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeCallsProviderEvents() {
+        callsProvider.sharedResponseStream
+            .filter({serviceEvent in
+                guard serviceEvent.eventType == .callProviderAnswerCall ||
+                        serviceEvent.eventType == .callProviderCancelCall else {
+                    return false
+                }
+                return true
+            })
+            .subscribe(onNext: { [weak self] serviceEvent in
+                guard let self = self,
+                      let callUUID: String = serviceEvent
+                        .getEventInput(ServiceEventInput.callUUID),
+                      let call = self.callService.callByUUID(UUID: callUUID) else {
+                    return
+                }
+                if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
+                    if !self.callService.answerCall(call: call) {
+                        self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
+                    }
+                } else {
+                    self.callService.stopCall(call: call)
+                    let state = UIApplication.shared.applicationState
+                    if state == .background {
+                        self.accountsService.setAccountsActive(active: false)
+                    }
+                }
             })
             .disposed(by: self.disposeBag)
     }
@@ -158,6 +191,23 @@ class ConversationsManager {
     }
 
     private func subscribeCallsEvents() {
+        self.callService.sharedResponseStream
+            .filter({ (event) in
+                return  event.eventType == .callEnded
+            })
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self else { return }
+                guard let peerId: String = event.getEventInput(ServiceEventInput.peerUri),
+                      let uuidString: String = event.getEventInput(ServiceEventInput.callUUID) else { return }
+                self.callsProvider.stopCall(callUUID: UUID(uuidString: uuidString)!, participant: peerId.filterOutHost())
+                DispatchQueue.main.async { [weak self] in
+                    let state = UIApplication.shared.applicationState
+                    if state == .background {
+                        self?.accountsService.setAccountsActive(active: false)
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
         self.callService.newMessage
             .filter({ (event) in
                 return  event.eventType == ServiceEventType.newIncomingMessage
@@ -168,9 +218,9 @@ class ConversationsManager {
                     return
                 }
                 guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
-                    let messageContent: String = event.getEventInput(ServiceEventInput.content),
-                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
-                    else { return }
+                      let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
+                else { return }
+                guard let messageContent: String = event.getEventInput(ServiceEventInput.content) else { return }
                 self.handleNewMessage(from: peerUri,
                                       to: accountId,
                                       messageId: "",
@@ -189,10 +239,10 @@ class ConversationsManager {
                     return
                 }
                 guard let accountId: String = event.getEventInput(ServiceEventInput.accountId),
-                    let messageContent: String = event.getEventInput(ServiceEventInput.content),
-                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
-                    let accountURi: String = event.getEventInput(ServiceEventInput.accountUri)
-                    else { return }
+                      let messageContent: String = event.getEventInput(ServiceEventInput.content),
+                      let peerUri: String = event.getEventInput(ServiceEventInput.peerUri),
+                      let accountURi: String = event.getEventInput(ServiceEventInput.accountUri)
+                else { return }
                 let message = self.conversationService.createMessage(withId: "",
                                                                      withContent: messageContent,
                                                                      byAuthor: accountURi,

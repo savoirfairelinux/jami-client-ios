@@ -762,7 +762,7 @@ class AccountsService: AccountAdapterDelegate {
         self.accountAdapter.removeAccount(id)
         self.loadAccountsFromDaemon()
         if self.getAccount(fromAccountId: id) == nil {
-            guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            guard let documentsURL = Constants.documentsPath else {
                 return
             }
             let downloadsURL = documentsURL.appendingPathComponent(Directories.downloads.rawValue)
@@ -875,7 +875,11 @@ class AccountsService: AccountAdapterDelegate {
         self.accountAdapter.setPushNotificationToken(token)
     }
 
-    func pushNotificationReceived(data: [AnyHashable: Any]) {
+    func setPushNotificationTopic(topic: String) {
+        self.accountAdapter.setPushNotificationTopic(topic)
+    }
+
+    func pushNotificationReceived(data: [String: Any]) {
         var notificationData = [String: String]()
         for key in data.keys {
             if let value = data[key] {
@@ -927,6 +931,12 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    func setProxyAddress(accountID: String, proxy: String) {
+        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
+            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
+            self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
+    }
+
     func hasAccountWithProxyEnabled() -> Bool {
         for account in self.accounts {
             let accountDetails = self.getAccountDetails(fromAccountId: account.id)
@@ -967,6 +977,10 @@ class AccountsService: AccountAdapterDelegate {
         guard accountDetails.get(withConfigKeyModel: property) != state.toString() else { return }
         accountDetails.set(withConfigKeyModel: property, withValue: state.toString())
         self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
+    }
+
+    func setAccountsActive(active: Bool) {
+        self.accountAdapter.setAccountsActive(active)
     }
 
     // MARK: - observable account data
