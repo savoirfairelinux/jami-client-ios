@@ -103,6 +103,10 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
     let dbManager: DBManager
+    private static let appGroupIdentifier = "group.com.savoirfairelinux.ring"
+    private let documentsPath: URL? = {
+        return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?.appendingPathComponent("Documents")
+    }()
 
     init(withDataTransferAdapter dataTransferAdapter: DataTransferAdapter, dbManager: DBManager) {
         self.responseStream.disposed(by: disposeBag)
@@ -344,7 +348,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     /// get url for saved file for non swarm conversation. if file does not exists return nil
     func getFileUrlNonSwarm(fileName: String, inFolder: String, accountID: String, conversationID: String) -> URL? {
-        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard let documentsURL = documentsPath else {
             return nil
         }
         let pathUrl = documentsURL.appendingPathComponent(inFolder)
@@ -363,7 +367,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         let fileNameOnly = (fileName as NSString).deletingPathExtension
         let fileExtensionOnly = (fileName as NSString).pathExtension
         var filePathUrl: URL?
-        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard let documentsURL = documentsPath else {
             return nil
         }
         let directoryURL = documentsURL.appendingPathComponent(folderName)
@@ -423,7 +427,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     /// get url for saved file for swarm conversation. If file does not exists return nil
     func getFileUrlForSwarm(fileName: String, accountID: String, conversationID: String) -> URL? {
-        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard let documentsURL = documentsPath else {
             return nil
         }
         let pathUrl = documentsURL.appendingPathComponent(accountID)
@@ -440,7 +444,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     func createFileUrlForSwarm(fileName: String, accountID: String, conversationID: String) -> URL? {
         let fileNameOnly = (fileName as NSString).deletingPathExtension
         let fileExtensionOnly = (fileName as NSString).pathExtension
-        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard let documentsURL = documentsPath else {
             return nil
         }
         let directoryURL = documentsURL.appendingPathComponent(accountID)

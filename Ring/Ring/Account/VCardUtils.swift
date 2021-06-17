@@ -59,9 +59,13 @@ class VCardUtils {
 
         var path: URL?
 
-        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return path
-        }
+        let appGroupIdentifier = "group.com.savoirfairelinux.ring"
+        let groupUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)!
+        let documentsURL = groupUrl.appendingPathComponent("Documents")
+
+//        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+//            return path
+//        }
         let directoryURL = documentsURL.appendingPathComponent(folderName)
         var isDirectory = ObjCBool(true)
         let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
