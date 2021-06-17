@@ -265,9 +265,75 @@
 		26929FD425659E5F0052A601 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 26929FD125659E5F0052A601 /* cacert.pem */; };
 		269B849626151AC10015BC72 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269B849326151AC10015BC72 /* libgit2.a */; };
 		26A5CE3B26BD00E700E147EA /* Array+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5CE3826BD00E700E147EA /* Array+Helper.swift */; };
+		26A88C07266FFFC800888EED /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A88C06266FFFC800888EED /* NotificationService.swift */; };
+		26A88C0B266FFFC800888EED /* jamiNotificationExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		26A88C162670007400888EED /* libring.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C152670007400888EED /* libring.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		26A88C1A267000F000888EED /* Adapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26A88C19267000F000888EED /* Adapter.mm */; };
+		26A88C1B267008EE00888EED /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AA981262C724700DC34AD /* libfmt.a */; };
+		26A88C1C267008EE00888EED /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269B849326151AC10015BC72 /* libgit2.a */; };
+		26A88C1D267008EE00888EED /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */; };
+		26A88C47267008F000888EED /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C1E267008EE00888EED /* libjsoncpp.a */; };
+		26A88C48267008F000888EED /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C1F267008EF00888EED /* libspeex.a */; };
+		26A88C49267008F000888EED /* libpjlib-util.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C20267008EF00888EED /* libpjlib-util.a */; };
+		26A88C4A267008F000888EED /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C21267008EF00888EED /* libx264.a */; };
+		26A88C4B267008F000888EED /* libpjmedia-videodev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C22267008EF00888EED /* libpjmedia-videodev.a */; };
+		26A88C4C267008F000888EED /* libpjmedia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C23267008EF00888EED /* libpjmedia.a */; };
+		26A88C4D267008F000888EED /* libpjsip-ua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C24267008EF00888EED /* libpjsip-ua.a */; };
+		26A88C4E267008F000888EED /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C25267008EF00888EED /* libspeexdsp.a */; };
+		26A88C4F267008F000888EED /* libpjsua2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C26267008EF00888EED /* libpjsua2.a */; };
+		26A88C50267008F000888EED /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C27267008EF00888EED /* libupnp.a */; };
+		26A88C51267008F000888EED /* libyuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C28267008EF00888EED /* libyuv.a */; };
+		26A88C52267008F000888EED /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C29267008EF00888EED /* libvpx.a */; };
+		26A88C53267008F000888EED /* libpjnath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C2A267008EF00888EED /* libpjnath.a */; };
+		26A88C54267008F000888EED /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C2B267008EF00888EED /* libhttp_parser.a */; };
+		26A88C55267008F000888EED /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C2C267008EF00888EED /* libcrypto.a */; };
+		26A88C56267008F000888EED /* libhogweed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C2D267008EF00888EED /* libhogweed.a */; };
+		26A88C57267008F000888EED /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C2E267008EF00888EED /* libavcodec.a */; };
+		26A88C58267008F000888EED /* libpjmedia-codec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C2F267008EF00888EED /* libpjmedia-codec.a */; };
+		26A88C59267008F000888EED /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C30267008EF00888EED /* libswscale.a */; };
+		26A88C5A267008F000888EED /* libnettle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C31267008EF00888EED /* libnettle.a */; };
+		26A88C5B267008F000888EED /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C32267008EF00888EED /* libavutil.a */; };
+		26A88C5C267008F000888EED /* libtls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C33267008EF00888EED /* libtls.a */; };
+		26A88C5D267008F000888EED /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C34267008EF00888EED /* libavfilter.a */; };
+		26A88C5E267008F000888EED /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C35267008EF00888EED /* libssl.a */; };
+		26A88C5F267008F000888EED /* libpjmedia-audiodev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C36267008F000888EED /* libpjmedia-audiodev.a */; };
+		26A88C60267008F000888EED /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C37267008F000888EED /* libswresample.a */; };
+		26A88C61267008F000888EED /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C38267008F000888EED /* libixml.a */; };
+		26A88C62267008F000888EED /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C39267008F000888EED /* libopus.a */; };
+		26A88C63267008F000888EED /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C3A267008F000888EED /* libgmp.a */; };
+		26A88C64267008F100888EED /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C3B267008F000888EED /* libargon2.a */; };
+		26A88C65267008F100888EED /* libpj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C3C267008F000888EED /* libpj.a */; };
+		26A88C66267008F100888EED /* libgnutls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C3D267008F000888EED /* libgnutls.a */; };
+		26A88C67267008F100888EED /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C3E267008F000888EED /* libpjsip.a */; };
+		26A88C68267008F100888EED /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C3F267008F000888EED /* libsrtp.a */; };
+		26A88C69267008F100888EED /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C40267008F000888EED /* libavdevice.a */; };
+		26A88C6A267008F100888EED /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C41267008F000888EED /* libyaml-cpp.a */; };
+		26A88C6B267008F100888EED /* libmsgpackc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C42267008F000888EED /* libmsgpackc.a */; };
+		26A88C6C267008F100888EED /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C43267008F000888EED /* libopendht.a */; };
+		26A88C6D267008F100888EED /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C44267008F000888EED /* libavformat.a */; };
+		26A88C6E267008F100888EED /* libpjsip-simple.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C45267008F000888EED /* libpjsip-simple.a */; };
+		26A88C6F267008F100888EED /* libpjsua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C46267008F000888EED /* libpjsua.a */; };
+		26A88C702670098D00888EED /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A291D1C2DE300E99CD9 /* CoreMedia.framework */; };
+		26A88C712670099500888EED /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
+		26A88C722670099D00888EED /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043866201D218B1100E06CE2 /* AudioToolbox.framework */; };
+		26A88C73267009A700888EED /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A2B1D1C2DE900E99CD9 /* AVFoundation.framework */; };
+		26A88C75267009EC00888EED /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C74267009EC00888EED /* CoreVideo.framework */; };
+		26A88C7626700ABC00888EED /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A961D1C2F6100E99CD9 /* libz.tbd */; };
+		26A88C7726700B5F00888EED /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144524B4ACC8007203D5 /* libxml2.tbd */; };
+		26A88C7826700B7500888EED /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144124B4AC9F007203D5 /* libc++.tbd */; };
+		26A88C7926700BC500888EED /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A931D1C2F5800E99CD9 /* libiconv.tbd */; };
 		26B37339263C439B00E2EE28 /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B37337263C439B00E2EE28 /* CustomSearchController.swift */; };
 		26B37342263C4B3700E2EE28 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */; };
 		26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B708FD253610B0003974F2 /* OpenURLLabel.swift */; };
+		26BB437D267013F600019CF6 /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB437C267013F100019CF6 /* libz.1.1.3.tbd */; };
+		26BB437E267013FB00019CF6 /* libz.1.2.11.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C7A26700C0500888EED /* libz.1.2.11.tbd */; };
+		26BB43802670140600019CF6 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB437F2670140200019CF6 /* libz.1.2.5.tbd */; };
+		26BB43822670141100019CF6 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB43812670140D00019CF6 /* libz.1.tbd */; };
+		26BB43842670144800019CF6 /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB43832670144500019CF6 /* libz.1.2.8.tbd */; };
+		26BB43852670150E00019CF6 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A951D1C2F6100E99CD9 /* libbz2.tbd */; };
+		26BB4389267017D400019CF6 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26BB4388267017D400019CF6 /* Utils.mm */; };
+		26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438A2670191E00019CF6 /* AdapterDelegate.swift */; };
+		26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438C267019FC00019CF6 /* AdapterService.swift */; };
 		26CE5AB82523968500DE6F90 /* ConferenceActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */; };
 		26D08AB12693474300E37574 /* InvitationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26D08AB02693474300E37574 /* InvitationViewController.storyboard */; };
 		26D08AB52693480200E37574 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08AB42693480200E37574 /* InvitationViewController.swift */; };
@@ -373,6 +439,13 @@
 			remoteGlobalIDString = 043999F21D1C2D9D00E99CD9;
 			remoteInfo = Ring;
 		};
+		26A88C09266FFFC800888EED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 26A88C03266FFFC800888EED;
+			remoteInfo = jamiNotificationExtension;
+		};
 		6452143C24B4AB44007203D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6452143724B4AB43007203D5 /* WhirlyGlobeMaplyComponent.xcodeproj */;
@@ -390,6 +463,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		26A88C0C266FFFC800888EED /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				26A88C0B266FFFC800888EED /* jamiNotificationExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		645BDD6424B5FEFF009129B1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -665,6 +749,7 @@
 		263B715B246D96E5007044C4 /* IncognitoSmartListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncognitoSmartListCell.xib; sourceTree = "<group>"; };
 		2659F65727483656009107F1 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingAdapterDelegate.swift; sourceTree = "<group>"; };
+		265E976226E8F610008801C0 /* NotificationService-debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-debug.entitlements"; sourceTree = "<group>"; };
 		2662FC78246B1E1700FA7782 /* JamiSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiSearchView.swift; sourceTree = "<group>"; };
 		2662FC7A246B216B00FA7782 /* JamiSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiSearchViewModel.swift; sourceTree = "<group>"; };
 		2662FC7C246B78E800FA7782 /* IncognitoSmartListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncognitoSmartListViewController.swift; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -681,9 +766,71 @@
 		26929FD125659E5F0052A601 /* cacert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cacert.pem; sourceTree = "<group>"; };
 		269B849326151AC10015BC72 /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = ../DEPS/arm64/lib/libgit2.a; sourceTree = "<group>"; };
 		26A5CE3826BD00E700E147EA /* Array+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Helper.swift"; sourceTree = "<group>"; };
+		26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = jamiNotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		26A88C06266FFFC800888EED /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		26A88C08266FFFC800888EED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26A88C132670002800888EED /* libring.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libring.la; path = ../DEPS/arm64/lib/libring.la; sourceTree = "<group>"; };
+		26A88C152670007400888EED /* libring.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libring.a; path = ../DEPS/arm64/lib/libring.a; sourceTree = "<group>"; };
+		26A88C17267000F000888EED /* JamiNotificationExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JamiNotificationExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		26A88C18267000F000888EED /* Adapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Adapter.h; sourceTree = "<group>"; };
+		26A88C19267000F000888EED /* Adapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Adapter.mm; sourceTree = "<group>"; };
+		26A88C1E267008EE00888EED /* libjsoncpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjsoncpp.a; path = ../DEPS/arm64/lib/libjsoncpp.a; sourceTree = "<group>"; };
+		26A88C1F267008EF00888EED /* libspeex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspeex.a; path = ../DEPS/arm64/lib/libspeex.a; sourceTree = "<group>"; };
+		26A88C20267008EF00888EED /* libpjlib-util.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjlib-util.a"; path = "../DEPS/arm64/lib/libpjlib-util.a"; sourceTree = "<group>"; };
+		26A88C21267008EF00888EED /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libx264.a; path = ../DEPS/arm64/lib/libx264.a; sourceTree = "<group>"; };
+		26A88C22267008EF00888EED /* libpjmedia-videodev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-videodev.a"; path = "../DEPS/arm64/lib/libpjmedia-videodev.a"; sourceTree = "<group>"; };
+		26A88C23267008EF00888EED /* libpjmedia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjmedia.a; path = ../DEPS/arm64/lib/libpjmedia.a; sourceTree = "<group>"; };
+		26A88C24267008EF00888EED /* libpjsip-ua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-ua.a"; path = "../DEPS/arm64/lib/libpjsip-ua.a"; sourceTree = "<group>"; };
+		26A88C25267008EF00888EED /* libspeexdsp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libspeexdsp.a; path = ../DEPS/arm64/lib/libspeexdsp.a; sourceTree = "<group>"; };
+		26A88C26267008EF00888EED /* libpjsua2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsua2.a; path = ../DEPS/arm64/lib/libpjsua2.a; sourceTree = "<group>"; };
+		26A88C27267008EF00888EED /* libupnp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libupnp.a; path = ../DEPS/arm64/lib/libupnp.a; sourceTree = "<group>"; };
+		26A88C28267008EF00888EED /* libyuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyuv.a; path = ../DEPS/arm64/lib/libyuv.a; sourceTree = "<group>"; };
+		26A88C29267008EF00888EED /* libvpx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvpx.a; path = ../DEPS/arm64/lib/libvpx.a; sourceTree = "<group>"; };
+		26A88C2A267008EF00888EED /* libpjnath.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjnath.a; path = ../DEPS/arm64/lib/libpjnath.a; sourceTree = "<group>"; };
+		26A88C2B267008EF00888EED /* libhttp_parser.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhttp_parser.a; path = ../DEPS/arm64/lib/libhttp_parser.a; sourceTree = "<group>"; };
+		26A88C2C267008EF00888EED /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../DEPS/arm64/lib/libcrypto.a; sourceTree = "<group>"; };
+		26A88C2D267008EF00888EED /* libhogweed.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhogweed.a; path = ../DEPS/arm64/lib/libhogweed.a; sourceTree = "<group>"; };
+		26A88C2E267008EF00888EED /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../DEPS/arm64/lib/libavcodec.a; sourceTree = "<group>"; };
+		26A88C2F267008EF00888EED /* libpjmedia-codec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-codec.a"; path = "../DEPS/arm64/lib/libpjmedia-codec.a"; sourceTree = "<group>"; };
+		26A88C30267008EF00888EED /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ../DEPS/arm64/lib/libswscale.a; sourceTree = "<group>"; };
+		26A88C31267008EF00888EED /* libnettle.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnettle.a; path = ../DEPS/arm64/lib/libnettle.a; sourceTree = "<group>"; };
+		26A88C32267008EF00888EED /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ../DEPS/arm64/lib/libavutil.a; sourceTree = "<group>"; };
+		26A88C33267008EF00888EED /* libtls.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtls.a; path = ../DEPS/arm64/lib/libtls.a; sourceTree = "<group>"; };
+		26A88C34267008EF00888EED /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = ../DEPS/arm64/lib/libavfilter.a; sourceTree = "<group>"; };
+		26A88C35267008EF00888EED /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../DEPS/arm64/lib/libssl.a; sourceTree = "<group>"; };
+		26A88C36267008F000888EED /* libpjmedia-audiodev.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-audiodev.a"; path = "../DEPS/arm64/lib/libpjmedia-audiodev.a"; sourceTree = "<group>"; };
+		26A88C37267008F000888EED /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = ../DEPS/arm64/lib/libswresample.a; sourceTree = "<group>"; };
+		26A88C38267008F000888EED /* libixml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libixml.a; path = ../DEPS/arm64/lib/libixml.a; sourceTree = "<group>"; };
+		26A88C39267008F000888EED /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopus.a; path = ../DEPS/arm64/lib/libopus.a; sourceTree = "<group>"; };
+		26A88C3A267008F000888EED /* libgmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgmp.a; path = ../DEPS/arm64/lib/libgmp.a; sourceTree = "<group>"; };
+		26A88C3B267008F000888EED /* libargon2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libargon2.a; path = ../DEPS/arm64/lib/libargon2.a; sourceTree = "<group>"; };
+		26A88C3C267008F000888EED /* libpj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpj.a; path = ../DEPS/arm64/lib/libpj.a; sourceTree = "<group>"; };
+		26A88C3D267008F000888EED /* libgnutls.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgnutls.a; path = ../DEPS/arm64/lib/libgnutls.a; sourceTree = "<group>"; };
+		26A88C3E267008F000888EED /* libpjsip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsip.a; path = ../DEPS/arm64/lib/libpjsip.a; sourceTree = "<group>"; };
+		26A88C3F267008F000888EED /* libsrtp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsrtp.a; path = ../DEPS/arm64/lib/libsrtp.a; sourceTree = "<group>"; };
+		26A88C40267008F000888EED /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = ../DEPS/arm64/lib/libavdevice.a; sourceTree = "<group>"; };
+		26A88C41267008F000888EED /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../DEPS/arm64/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
+		26A88C42267008F000888EED /* libmsgpackc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmsgpackc.a; path = ../DEPS/arm64/lib/libmsgpackc.a; sourceTree = "<group>"; };
+		26A88C43267008F000888EED /* libopendht.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopendht.a; path = ../DEPS/arm64/lib/libopendht.a; sourceTree = "<group>"; };
+		26A88C44267008F000888EED /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ../DEPS/arm64/lib/libavformat.a; sourceTree = "<group>"; };
+		26A88C45267008F000888EED /* libpjsip-simple.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-simple.a"; path = "../DEPS/arm64/lib/libpjsip-simple.a"; sourceTree = "<group>"; };
+		26A88C46267008F000888EED /* libpjsua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpjsua.a; path = ../DEPS/arm64/lib/libpjsua.a; sourceTree = "<group>"; };
+		26A88C74267009EC00888EED /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		26A88C7A26700C0500888EED /* libz.1.2.11.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.11.tbd; path = usr/lib/libz.1.2.11.tbd; sourceTree = SDKROOT; };
+		26A88C7C26700C8C00888EED /* Xcode.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Xcode.app; path = ../../../../../../../Applications/Xcode.app; sourceTree = "<group>"; };
 		26B37337263C439B00E2EE28 /* CustomSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		26B708FD253610B0003974F2 /* OpenURLLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLLabel.swift; sourceTree = "<group>"; };
+		26BB437926700EEA00019CF6 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = ../DEPS/arm64/lib; sourceTree = "<group>"; };
+		26BB437C267013F100019CF6 /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
+		26BB437F2670140200019CF6 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		26BB43812670140D00019CF6 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
+		26BB43832670144500019CF6 /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
+		26BB4387267017D400019CF6 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		26BB4388267017D400019CF6 /* Utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
+		26BB438A2670191E00019CF6 /* AdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterDelegate.swift; sourceTree = "<group>"; };
+		26BB438C267019FC00019CF6 /* AdapterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterService.swift; sourceTree = "<group>"; };
+		26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationPrefixHeader.pch; sourceTree = "<group>"; };
 		26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceActionsMenu.swift; sourceTree = "<group>"; };
 		26D08AB02693474300E37574 /* InvitationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InvitationViewController.storyboard; sourceTree = "<group>"; };
 		26D08AB42693480200E37574 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
@@ -694,6 +841,7 @@
 		26D08ABD2696296300E37574 /* RequestsAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RequestsAdapter.mm; sourceTree = "<group>"; };
 		26DA813024B641A5006C6E23 /* ProfilesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilesAdapter.h; sourceTree = "<group>"; };
 		26DA813124B641A5006C6E23 /* ProfilesAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ProfilesAdapter.mm; sourceTree = "<group>"; };
+		26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "NotificationService-release.entitlements"; path = "../../../../../NotificationService-release.entitlements"; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
 		4430A66E236CBC6900747177 /* ContactPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerViewController.swift; sourceTree = "<group>"; };
@@ -926,6 +1074,73 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		26A88C01266FFFC800888EED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26BB43852670150E00019CF6 /* libbz2.tbd in Frameworks */,
+				26BB43842670144800019CF6 /* libz.1.2.8.tbd in Frameworks */,
+				26BB43822670141100019CF6 /* libz.1.tbd in Frameworks */,
+				26BB43802670140600019CF6 /* libz.1.2.5.tbd in Frameworks */,
+				26BB437E267013FB00019CF6 /* libz.1.2.11.tbd in Frameworks */,
+				26BB437D267013F600019CF6 /* libz.1.1.3.tbd in Frameworks */,
+				26A88C7926700BC500888EED /* libiconv.tbd in Frameworks */,
+				26A88C7826700B7500888EED /* libc++.tbd in Frameworks */,
+				26A88C7726700B5F00888EED /* libxml2.tbd in Frameworks */,
+				26A88C7626700ABC00888EED /* libz.tbd in Frameworks */,
+				26A88C75267009EC00888EED /* CoreVideo.framework in Frameworks */,
+				26A88C73267009A700888EED /* AVFoundation.framework in Frameworks */,
+				26A88C722670099D00888EED /* AudioToolbox.framework in Frameworks */,
+				26A88C712670099500888EED /* VideoToolbox.framework in Frameworks */,
+				26A88C702670098D00888EED /* CoreMedia.framework in Frameworks */,
+				26A88C47267008F000888EED /* libjsoncpp.a in Frameworks */,
+				26A88C48267008F000888EED /* libspeex.a in Frameworks */,
+				26A88C49267008F000888EED /* libpjlib-util.a in Frameworks */,
+				26A88C4A267008F000888EED /* libx264.a in Frameworks */,
+				26A88C4B267008F000888EED /* libpjmedia-videodev.a in Frameworks */,
+				26A88C4C267008F000888EED /* libpjmedia.a in Frameworks */,
+				26A88C4D267008F000888EED /* libpjsip-ua.a in Frameworks */,
+				26A88C4E267008F000888EED /* libspeexdsp.a in Frameworks */,
+				26A88C4F267008F000888EED /* libpjsua2.a in Frameworks */,
+				26A88C50267008F000888EED /* libupnp.a in Frameworks */,
+				26A88C51267008F000888EED /* libyuv.a in Frameworks */,
+				26A88C52267008F000888EED /* libvpx.a in Frameworks */,
+				26A88C53267008F000888EED /* libpjnath.a in Frameworks */,
+				26A88C54267008F000888EED /* libhttp_parser.a in Frameworks */,
+				26A88C55267008F000888EED /* libcrypto.a in Frameworks */,
+				26A88C56267008F000888EED /* libhogweed.a in Frameworks */,
+				26A88C57267008F000888EED /* libavcodec.a in Frameworks */,
+				26A88C58267008F000888EED /* libpjmedia-codec.a in Frameworks */,
+				26A88C59267008F000888EED /* libswscale.a in Frameworks */,
+				26A88C5A267008F000888EED /* libnettle.a in Frameworks */,
+				26A88C5B267008F000888EED /* libavutil.a in Frameworks */,
+				26A88C5C267008F000888EED /* libtls.a in Frameworks */,
+				26A88C5D267008F000888EED /* libavfilter.a in Frameworks */,
+				26A88C5E267008F000888EED /* libssl.a in Frameworks */,
+				26A88C5F267008F000888EED /* libpjmedia-audiodev.a in Frameworks */,
+				26A88C60267008F000888EED /* libswresample.a in Frameworks */,
+				26A88C61267008F000888EED /* libixml.a in Frameworks */,
+				26A88C62267008F000888EED /* libopus.a in Frameworks */,
+				26A88C63267008F000888EED /* libgmp.a in Frameworks */,
+				26A88C64267008F100888EED /* libargon2.a in Frameworks */,
+				26A88C65267008F100888EED /* libpj.a in Frameworks */,
+				26A88C66267008F100888EED /* libgnutls.a in Frameworks */,
+				26A88C67267008F100888EED /* libpjsip.a in Frameworks */,
+				26A88C68267008F100888EED /* libsrtp.a in Frameworks */,
+				26A88C69267008F100888EED /* libavdevice.a in Frameworks */,
+				26A88C6A267008F100888EED /* libyaml-cpp.a in Frameworks */,
+				26A88C6B267008F100888EED /* libmsgpackc.a in Frameworks */,
+				26A88C6C267008F100888EED /* libopendht.a in Frameworks */,
+				26A88C6D267008F100888EED /* libavformat.a in Frameworks */,
+				26A88C6E267008F100888EED /* libpjsip-simple.a in Frameworks */,
+				26A88C6F267008F100888EED /* libpjsua.a in Frameworks */,
+				26A88C1B267008EE00888EED /* libfmt.a in Frameworks */,
+				26A88C1C267008EE00888EED /* libgit2.a in Frameworks */,
+				26A88C1D267008EE00888EED /* libsecp256k1.a in Frameworks */,
+				26A88C162670007400888EED /* libring.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -951,6 +1166,57 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26BB43832670144500019CF6 /* libz.1.2.8.tbd */,
+				26BB43812670140D00019CF6 /* libz.1.tbd */,
+				26BB437F2670140200019CF6 /* libz.1.2.5.tbd */,
+				26BB437C267013F100019CF6 /* libz.1.1.3.tbd */,
+				26BB437926700EEA00019CF6 /* lib */,
+				26A88C7C26700C8C00888EED /* Xcode.app */,
+				26A88C7A26700C0500888EED /* libz.1.2.11.tbd */,
+				26A88C74267009EC00888EED /* CoreVideo.framework */,
+				26A88C3B267008F000888EED /* libargon2.a */,
+				26A88C2E267008EF00888EED /* libavcodec.a */,
+				26A88C40267008F000888EED /* libavdevice.a */,
+				26A88C34267008EF00888EED /* libavfilter.a */,
+				26A88C44267008F000888EED /* libavformat.a */,
+				26A88C32267008EF00888EED /* libavutil.a */,
+				26A88C2C267008EF00888EED /* libcrypto.a */,
+				26A88C3A267008F000888EED /* libgmp.a */,
+				26A88C3D267008F000888EED /* libgnutls.a */,
+				26A88C2D267008EF00888EED /* libhogweed.a */,
+				26A88C2B267008EF00888EED /* libhttp_parser.a */,
+				26A88C38267008F000888EED /* libixml.a */,
+				26A88C1E267008EE00888EED /* libjsoncpp.a */,
+				26A88C42267008F000888EED /* libmsgpackc.a */,
+				26A88C31267008EF00888EED /* libnettle.a */,
+				26A88C43267008F000888EED /* libopendht.a */,
+				26A88C39267008F000888EED /* libopus.a */,
+				26A88C3C267008F000888EED /* libpj.a */,
+				26A88C20267008EF00888EED /* libpjlib-util.a */,
+				26A88C36267008F000888EED /* libpjmedia-audiodev.a */,
+				26A88C2F267008EF00888EED /* libpjmedia-codec.a */,
+				26A88C22267008EF00888EED /* libpjmedia-videodev.a */,
+				26A88C23267008EF00888EED /* libpjmedia.a */,
+				26A88C2A267008EF00888EED /* libpjnath.a */,
+				26A88C45267008F000888EED /* libpjsip-simple.a */,
+				26A88C24267008EF00888EED /* libpjsip-ua.a */,
+				26A88C3E267008F000888EED /* libpjsip.a */,
+				26A88C46267008F000888EED /* libpjsua.a */,
+				26A88C26267008EF00888EED /* libpjsua2.a */,
+				26A88C1F267008EF00888EED /* libspeex.a */,
+				26A88C25267008EF00888EED /* libspeexdsp.a */,
+				26A88C3F267008F000888EED /* libsrtp.a */,
+				26A88C35267008EF00888EED /* libssl.a */,
+				26A88C37267008F000888EED /* libswresample.a */,
+				26A88C30267008EF00888EED /* libswscale.a */,
+				26A88C33267008EF00888EED /* libtls.a */,
+				26A88C27267008EF00888EED /* libupnp.a */,
+				26A88C29267008EF00888EED /* libvpx.a */,
+				26A88C21267008EF00888EED /* libx264.a */,
+				26A88C41267008F000888EED /* libyaml-cpp.a */,
+				26A88C28267008EF00888EED /* libyuv.a */,
+				26A88C152670007400888EED /* libring.a */,
+				26A88C132670002800888EED /* libring.la */,
 				262AA981262C724700DC34AD /* libfmt.a */,
 				269B849326151AC10015BC72 /* libgit2.a */,
 				266C1DB82539F3A300978E87 /* RxRelay.framework */,
@@ -1124,6 +1390,7 @@
 				043999F51D1C2D9D00E99CD9 /* Ring */,
 				04399A0F1D1C2D9D00E99CD9 /* RingTests */,
 				04399A1A1D1C2D9D00E99CD9 /* RingUITests */,
+				26A88C05266FFFC800888EED /* jamiNotificationExtension */,
 				043999F41D1C2D9D00E99CD9 /* Products */,
 				02AED8171DD4C4B000F740BA /* Frameworks */,
 			);
@@ -1135,6 +1402,7 @@
 				043999F31D1C2D9D00E99CD9 /* Ring.app */,
 				04399A0C1D1C2D9D00E99CD9 /* RingTests.xctest */,
 				04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */,
+				26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1721,6 +1989,25 @@
 			path = JamiSearchView;
 			sourceTree = "<group>";
 		};
+		26A88C05266FFFC800888EED /* jamiNotificationExtension */ = {
+			isa = PBXGroup;
+			children = (
+				265E976226E8F610008801C0 /* NotificationService-debug.entitlements */,
+				26A88C06266FFFC800888EED /* NotificationService.swift */,
+				26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */,
+				26A88C08266FFFC800888EED /* Info.plist */,
+				26A88C18267000F000888EED /* Adapter.h */,
+				26A88C19267000F000888EED /* Adapter.mm */,
+				26A88C17267000F000888EED /* JamiNotificationExtension-Bridging-Header.h */,
+				26BB4387267017D400019CF6 /* Utils.h */,
+				26BB4388267017D400019CF6 /* Utils.mm */,
+				26BB438A2670191E00019CF6 /* AdapterDelegate.swift */,
+				26BB438C267019FC00019CF6 /* AdapterService.swift */,
+				26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */,
+			);
+			path = jamiNotificationExtension;
+			sourceTree = "<group>";
+		};
 		4430A669236CB9F600747177 /* Conference */ = {
 			isa = PBXGroup;
 			children = (
@@ -1841,10 +2128,12 @@
 				043999F01D1C2D9D00E99CD9 /* Frameworks */,
 				043999F11D1C2D9D00E99CD9 /* Resources */,
 				645BDD6424B5FEFF009129B1 /* Embed Frameworks */,
+				26A88C0C266FFFC800888EED /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				26A88C0A266FFFC800888EED /* PBXTargetDependency */,
 			);
 			name = Ring;
 			productName = Ring;
@@ -1887,13 +2176,33 @@
 			productReference = 04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		26A88C03266FFFC800888EED /* jamiNotificationExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26A88C12266FFFC800888EED /* Build configuration list for PBXNativeTarget "jamiNotificationExtension" */;
+			buildPhases = (
+				26A88C00266FFFC800888EED /* Sources */,
+				26A88C01266FFFC800888EED /* Frameworks */,
+				26A88C02266FFFC800888EED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = jamiNotificationExtension;
+			productName = jamiNotificationExtension;
+			productReference = 26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		043999EB1D1C2D9D00E99CD9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				KnownAssetTags = (
+					New,
+				);
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Savoir-faire Linux";
 				TargetAttributes = {
@@ -1928,6 +2237,12 @@
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 043999F21D1C2D9D00E99CD9;
+					};
+					26A88C03266FFFC800888EED = {
+						CreatedOnToolsVersion = 12.5;
+						DevelopmentTeam = MSHYCBXK85;
+						LastSwiftMigration = 1250;
+						ProvisioningStyle = Automatic;
 					};
 					62366028200914C1002598C1 = {
 						CreatedOnToolsVersion = 9.2;
@@ -2004,6 +2319,7 @@
 				04399A0B1D1C2D9D00E99CD9 /* RingTests */,
 				04399A161D1C2D9D00E99CD9 /* RingUITests */,
 				62366028200914C1002598C1 /* libring */,
+				26A88C03266FFFC800888EED /* jamiNotificationExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2090,6 +2406,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		04399A151D1C2D9D00E99CD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26A88C02266FFFC800888EED /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2421,6 +2744,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		26A88C00266FFFC800888EED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */,
+				26BB4389267017D400019CF6 /* Utils.mm in Sources */,
+				26A88C07266FFFC800888EED /* NotificationService.swift in Sources */,
+				26A88C1A267000F000888EED /* Adapter.mm in Sources */,
+				26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2433,6 +2768,11 @@
 			isa = PBXTargetDependency;
 			target = 043999F21D1C2D9D00E99CD9 /* Ring */;
 			targetProxy = 04399A181D1C2D9D00E99CD9 /* PBXContainerItemProxy */;
+		};
+		26A88C0A266FFFC800888EED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 26A88C03266FFFC800888EED /* jamiNotificationExtension */;
+			targetProxy = 26A88C09266FFFC800888EED /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2608,6 +2948,7 @@
 		04399A211D1C2D9D00E99CD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "compiler-default";
@@ -2616,7 +2957,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2650,6 +2992,7 @@
 		04399A221D1C2D9D00E99CD9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "compiler-default";
@@ -2764,6 +3107,135 @@
 			};
 			name = Release;
 		};
+		26A88C0D266FFFC800888EED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "jamiNotificationExtension/NotificationService-debug.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+				);
+				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				NEW_SETTING = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiNotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "jamiNotificationExtension/jamiNotificationExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = Debug;
+		};
+		26A88C0E266FFFC800888EED /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "jamiNotificationExtension/NotificationService-debug.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+				);
+				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				NEW_SETTING = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiNotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "jamiNotificationExtension/jamiNotificationExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = Development;
+		};
+		26A88C0F266FFFC800888EED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "jamiNotificationExtension/NotificationService-release.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+				);
+				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				NEW_SETTING = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiNotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "jamiNotificationExtension/jamiNotificationExtension-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = Release;
+		};
 		6229B5A51FCDB006006937DF /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2826,6 +3298,7 @@
 		6229B5A61FCDB006006937DF /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "compiler-default";
@@ -2834,7 +3307,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2966,6 +3440,16 @@
 				04399A271D1C2D9D00E99CD9 /* Debug */,
 				6229B5A81FCDB006006937DF /* Development */,
 				04399A281D1C2D9D00E99CD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26A88C12266FFFC800888EED /* Build configuration list for PBXNativeTarget "jamiNotificationExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26A88C0D266FFFC800888EED /* Debug */,
+				26A88C0E266FFFC800888EED /* Development */,
+				26A88C0F266FFFC800888EED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

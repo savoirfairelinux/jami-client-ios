@@ -83,6 +83,21 @@ extension CallsProviderDelegate {
         }
     }
 
+    func reportIncomingCall1() {
+        let update = CXCallUpdate()
+        update.localizedCallerName = "name"
+        update.hasVideo = true
+        update.supportsGrouping = false
+        update.supportsUngrouping = false
+        update.supportsHolding = false
+        self.provider?.reportNewIncomingCall(with: UUID(),
+                                             update: update) { error in
+                                                if error == nil {
+                                                    return
+                                                }
+        }
+    }
+
     func startCall(account: AccountModel, call: CallModel) {
         let isJamiAccount = account.type == AccountType.ring
         guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
