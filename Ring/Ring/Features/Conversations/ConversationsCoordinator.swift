@@ -22,6 +22,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import os
 
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
 class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
@@ -131,59 +132,58 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     func showIncomingCall(call: CallModel) {
         guard let account = self.accountService
-            .getAccount(fromAccountId: call.accountId),
-            !call.callId.isEmpty else { return }
+                .getAccount(fromAccountId: call.accountId),
+              !call.callId.isEmpty else {
+            return
+        }
         if self.accountService.boothMode() {
             self.callService.refuse(callId: call.callId)
                 .subscribe()
                 .disposed(by: self.disposeBag)
             return
         }
-        let callViewController = CallViewController
-            .instantiate(with: self.injectionBag)
-        callViewController.viewModel.call = call
-
-        var tempBag = DisposeBag()
-        call.callUUID = UUID()
-        callsProvider
-            .reportIncomingCall(account: account, call: call, completion: nil)
         callsProvider.sharedResponseStream
-            .filter({ serviceEvent in
-                if serviceEvent.eventType != ServiceEventType.callProviderAnswerCall {
+            .filter({ [weak call] serviceEvent in
+                guard serviceEvent.eventType == .callProviderAnswerCall ||
+                        serviceEvent.eventType == .callProviderCancelCall else {
                     return false
                 }
                 guard let callUUID: String = serviceEvent
-                    .getEventInput(ServiceEventInput.callUUID) else { return false }
-                return callUUID == call.callUUID.uuidString
+                        .getEventInput(ServiceEventInput.callUUID) else {
+                    return false
+                }
+                return callUUID == call?.callUUID.uuidString
             })
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                if let topController = self.getTopController(),
-                   !topController.isKind(of: (CallViewController).self) {
-                       topController.dismiss(animated: false, completion: nil)
-                }
-                self.popToSmartList()
-                if account.id != call.accountId {
-                    self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
-                }
-                self.popToSmartList()
-                if let model = self.getConversationViewModel(participantUri: call.paricipantHash()) { self.showConversation(withConversationViewModel: model)
-                }
-                self.present(viewController: callViewController,
-                             withStyle: .appear,
-                             withAnimation: false,
-                             withStateable: callViewController.viewModel)
-                tempBag = DisposeBag()
-            })
-            .disposed(by: tempBag)
-        callViewController.viewModel.dismisVC
-            .share()
-            .subscribe(onNext: { hide in
-                if hide {
-                    tempBag = DisposeBag()
+            .take(1)
+            .subscribe(onNext: { [weak self, weak call] serviceEvent in
+                guard let self = self,
+                      let call = call else { return }
+                if serviceEvent.eventType == ServiceEventType.callProviderAnswerCall {
+                    self.presentCallScreen(call: call)
                 }
             })
-            .disposed(by: tempBag)
+            .disposed(by: self.disposeBag)
+        callsProvider.handleIncomingCall(account: account, call: call)
+    }
+
+    func presentCallScreen(call: CallModel) {
+        if let topController = self.getTopController(),
+           !topController.isKind(of: (CallViewController).self) {
+               topController.dismiss(animated: false, completion: nil)
+        }
+        self.popToSmartList()
+        if self.accountService.currentAccount?.id != call.accountId {
+            self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
+        }
+        if let model = self.getConversationViewModel(participantUri: call.paricipantHash()) {
+            self.showConversation(withConversationViewModel: model)
+        }
+        let controller = CallViewController.instantiate(with: self.injectionBag)
+        controller.viewModel.call = call
+        self.present(viewController: controller,
+                     withStyle: .appear,
+                     withAnimation: false,
+                     withStateable: controller.viewModel)
     }
 
     func createNewAccount() {
