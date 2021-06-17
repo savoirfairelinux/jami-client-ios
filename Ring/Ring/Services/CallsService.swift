@@ -23,6 +23,7 @@ import RxSwift
 import RxRelay
 import SwiftyBeaver
 import Contacts
+import os
 
 enum CallServiceError: Error {
     case acceptCallFailed
@@ -673,6 +674,7 @@ class CallsService: CallsAdapterDelegate {
     // swiftlint:enable cyclomatic_complexity
 
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String, withMedia mediaList: [[String: String]]) {
+        os_log("incoming call call service")
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) {
             var call = self.calls.value[callId]
             if call == nil {
