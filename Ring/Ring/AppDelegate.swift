@@ -159,6 +159,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         prepareVideoAcceleration()
         prepareAccounts()
+        UIApplication.shared.registerForRemoteNotifications()
+        let appGroupIdentifier = "group.com.savoirfairelinux.ring"
+        let groupUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)!
+        let groupDocUrl = groupUrl.appendingPathComponent("Documents")
+        if !FileManager.default.fileExists(atPath: groupDocUrl.path) {
+            let appDocURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            try? FileManager.default.copyItem(at: appDocURL, to: groupDocUrl)
+            let groupCachesUrl = groupUrl.appendingPathComponent("Caches")
+            let appLibrURL = try! FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let appCacheDir = appLibrURL.appendingPathComponent("Caches")
+            try? FileManager.default.copyItem(at: appCacheDir, to: groupCachesUrl)
+        }
         self.voipRegistry.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(registerVoipNotifications),
                                                name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
@@ -480,6 +492,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.findContactAndStartCall(hash: handle.hash, isVideo: handle.isVideo)
         return true
     }
+
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken
+                        deviceToken: Data) {
+        let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        self.accountService.setPushNotificationToken(token: deviceTokenString)
+    }
+
+    func application(_ application: UIApplication,
+                     didFailToRegisterForRemoteNotificationsWithError
+                        error: Error) {
+        // Try again later.
+    }
 }
 
 extension AppDelegate: PKPushRegistryDelegate {
@@ -494,13 +519,19 @@ extension AppDelegate: PKPushRegistryDelegate {
 
     @available(iOS 11.0, *)
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
-        self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
+        let call = CallModel()
+        let data = payload.dictionaryPayload
+        call.callId = data["callId"] as! String
+        call.accountId = data["accountId"] as! String
+        call.displayName = data["jamiId"] as! String
+        call.participantUri = data["jamiId"] as! String
+        self.appCoordinator.showIncomingCall(call: call)
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
-        if type == PKPushType.voIP {
-            let deviceTokenString = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
-            self.accountService.setPushNotificationToken(token: deviceTokenString)
-        }
+//        if type == PKPushType.voIP {
+//            let deviceTokenString = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
+//            self.accountService.setPushNotificationToken(token: deviceTokenString)
+//        }
     }
 }
