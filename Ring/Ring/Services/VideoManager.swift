@@ -54,7 +54,7 @@ class VideoManager {
                     return
                 }
                 guard let call = self.callService.call(participantHash: jamiId.filterOutHost(), accountID: accountID) else { return }
-                self.callsProvider.stopCall(callUUID: call.callUUID)
+                self.callsProvider.stopCall(callUUID: call.callUUID, participant: jamiId.filterOutHost())
                 self.videoService.stopCapture()
                 self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
             } onError: {_ in

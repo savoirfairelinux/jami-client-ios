@@ -176,6 +176,12 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         }
     }
 
+    func showIncomingCall(call: CallModel) {
+        if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
+            conversationCoordinator.showIncomingCall(call: call)
+        }
+    }
+
     func startCall(participant: String, name: String, isVideo: Bool) {
         DispatchQueue.main.async {
             for child in self.childCoordinators {
