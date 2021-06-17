@@ -524,10 +524,10 @@ extension CallViewModel {
             return
         }
         if stopProvider {
-            self.callsProvider.stopCall(callUUID: call.callUUID)
+            self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
             call.participantsCallId.forEach { (callId) in
                 if let participantCall = self.callService.call(callID: callId) {
-                    self.callsProvider.stopCall(callUUID: participantCall.callUUID)
+                    self.callsProvider.stopCall(callUUID: participantCall.callUUID, participant: participantCall.paricipantHash())
                 }
             }
         }

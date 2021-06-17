@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2019-2022 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -21,6 +21,31 @@
 import AVFoundation
 import CallKit
 import RxSwift
+import os
+
+enum UnhandeledCallState {
+    case answered
+    case declined
+    case awaiting
+}
+
+class UnhandeledCall: Equatable, Hashable {
+    let uuid = UUID()
+    let peerId: String
+    var state: UnhandeledCallState = .awaiting
+
+    init (peerId: String) {
+        self.peerId = peerId
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
+
+    static func == (lhs: UnhandeledCall, rhs: UnhandeledCall) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+}
 
 class CallsProviderDelegate: NSObject {
     private lazy var provider: CXProvider? = nil
@@ -28,6 +53,8 @@ class CallsProviderDelegate: NSObject {
     let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
     private let disposeBag = DisposeBag()
+    var unhandeledCalls = Set<UnhandeledCall>()
+    weak var timer: Timer?
 
     override init() {
         self.sharedResponseStream = responseStream.share()
@@ -48,9 +75,14 @@ class CallsProviderDelegate: NSObject {
 }
 
 extension CallsProviderDelegate {
-    func stopCall(callUUID: UUID) {
+    func stopCall(callUUID: UUID, participant: String) {
+        var uuid = callUUID
+        if let call = getUnhandeledCall(for: participant) {
+            uuid = call.uuid
+            unhandeledCalls.remove(call)
+        }
         let callController = CXCallController()
-        let endCallAction = CXEndCallAction(call: callUUID)
+        let endCallAction = CXEndCallAction(call: uuid)
         let transaction = CXTransaction(action: endCallAction)
         callController.request(transaction) { error in
             if let error = error {
@@ -83,6 +115,27 @@ extension CallsProviderDelegate {
         }
     }
 
+    func previewCall(peerId: String, withVideo: Bool,
+                     completion: ((Error?) -> Void)?) {
+        let update = CXCallUpdate()
+        let handleType = CXHandle.HandleType.phoneNumber
+        update.localizedCallerName = peerId
+        update.remoteHandle = CXHandle(type: handleType, value: peerId)
+        update.hasVideo = withVideo
+        update.supportsGrouping = false
+        update.supportsUngrouping = false
+        update.supportsHolding = false
+        let unhandeledCall = UnhandeledCall(peerId: peerId)
+        unhandeledCalls.insert(unhandeledCall)
+        self.provider?.reportNewIncomingCall(with: unhandeledCall.uuid,
+                                             update: update) { error in
+                                                if error == nil {
+                                                    return
+                                                }
+                                                completion?(error)
+        }
+    }
+
     func startCall(account: AccountModel, call: CallModel) {
         let isJamiAccount = account.type == AccountType.ring
         guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
@@ -94,6 +147,12 @@ extension CallsProviderDelegate {
         startCallAction.contactIdentifier = handleInfo.displayName
         let transaction = CXTransaction(action: startCallAction)
         requestTransaction(transaction)
+    }
+
+    func stop() {
+        unhandeledCalls.forEach { call in
+            stopCall(callUUID: call.uuid, participant: call.peerId)
+        }
     }
 
     func getHandleInfo(account: AccountModel, call: CallModel) -> (displayName: String, handle: String)? {
@@ -117,6 +176,17 @@ extension CallsProviderDelegate {
         return (name, contactHandle)
     }
 
+    func getUnhandeledCall(for UUID: UUID) -> UnhandeledCall? {
+        return self.unhandeledCalls.filter { call in
+            call.uuid == UUID
+        }.first
+    }
+    func getUnhandeledCall(for peerId: String) -> UnhandeledCall? {
+        return self.unhandeledCalls.filter { call in
+            call.peerId == peerId
+        }.first
+    }
+
     private func requestTransaction(_ transaction: CXTransaction) {
         callController.request(transaction) { error in
             if let error = error {
@@ -126,6 +196,28 @@ extension CallsProviderDelegate {
             }
         }
     }
+// MARK: - Timer
+    @objc
+    func timerHandler(_ timer: Timer) {
+        defer {
+            stopTimer()
+        }
+        guard let uuid = timer.userInfo as? UUID else { return }
+        // did not receive incoming call from daemon
+        if getUnhandeledCall(for: uuid) != nil {
+            stopCall(callUUID: uuid, participant: "")
+        }
+    }
+
+    func startTimer(callUUID: UUID) {
+        stopTimer()
+        let seconds = 4.0
+        timer = Timer.scheduledTimer(timeInterval: seconds, target: self, selector: #selector(timerHandler(_:)), userInfo: callUUID, repeats: false)
+    }
+
+    func stopTimer() {
+        timer?.invalidate()
+    }
 }
 // MARK: - CXProviderDelegate
 extension CallsProviderDelegate: CXProviderDelegate {
@@ -133,6 +225,12 @@ extension CallsProviderDelegate: CXProviderDelegate {
     }
 
     func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
+        if let call = getUnhandeledCall(for: action.callUUID) {
+            call.state = .answered
+            // answer from CallKit arrived earlier than the incoming call from the daemon. Start timer to cancel a call after timeout if not incoming call from the daemon
+            startTimer(callUUID: action.callUUID)
+            return
+        }
         let serviceEventType: ServiceEventType = .callProviderAnswerCall
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)
@@ -141,6 +239,10 @@ extension CallsProviderDelegate: CXProviderDelegate {
     }
 
     func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
+        if let call = getUnhandeledCall(for: action.callUUID) {
+            call.state = .declined
+            return
+        }
         let serviceEventType: ServiceEventType = .callProviderCancellCall
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)

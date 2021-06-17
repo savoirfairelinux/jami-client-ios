@@ -22,6 +22,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import os
 
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
 class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
@@ -132,58 +133,106 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     func showIncomingCall(call: CallModel) {
         guard let account = self.accountService
             .getAccount(fromAccountId: call.accountId),
-            !call.callId.isEmpty else { return }
+            !call.callId.isEmpty else {
+            return
+        }
         if self.accountService.boothMode() {
             self.callService.refuse(callId: call.callId)
                 .subscribe()
                 .disposed(by: self.disposeBag)
             return
         }
-        let callViewController = CallViewController
-            .instantiate(with: self.injectionBag)
-        callViewController.viewModel.call = call
 
         var tempBag = DisposeBag()
-        call.callUUID = UUID()
-        callsProvider
-            .reportIncomingCall(account: account, call: call, completion: nil)
+        let hash = call.paricipantHash()
+
+        if let unhandeledCall = callsProvider.getUnhandeledCall(for: hash) {
+            call.callUUID = unhandeledCall.uuid
+            if unhandeledCall.state == .answered {
+                tempBag = DisposeBag()
+                let callViewController = CallViewController
+                    .instantiate(with: self.injectionBag)
+                callViewController.viewModel.call = call
+                self.answerAndPresentCall(controller: callViewController)
+                callsProvider.unhandeledCalls.remove(unhandeledCall)
+                return
+            }
+            if unhandeledCall.state == .declined {
+                tempBag = DisposeBag()
+                let callViewController = CallViewController
+                    .instantiate(with: self.injectionBag)
+                callViewController.viewModel.call = call
+                callViewController.viewModel.cancelCall(stopProvider: false)
+                callsProvider.unhandeledCalls.remove(unhandeledCall)
+                return
+            }
+            callsProvider.unhandeledCalls.remove(unhandeledCall)
+        } else {
+            call.callUUID = UUID()
+            callsProvider
+                .reportIncomingCall(account: account, call: call, completion: nil)
+        }
         callsProvider.sharedResponseStream
             .filter({ serviceEvent in
                 if serviceEvent.eventType != ServiceEventType.callProviderAnswerCall {
                     return false
                 }
                 guard let callUUID: String = serviceEvent
-                    .getEventInput(ServiceEventInput.callUUID) else { return false }
+                    .getEventInput(ServiceEventInput.callUUID) else {
+                    return false
+                }
                 return callUUID == call.callUUID.uuidString
             })
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                if let topController = self.getTopController(),
-                   !topController.isKind(of: (CallViewController).self) {
-                       topController.dismiss(animated: false, completion: nil)
-                }
-                self.popToSmartList()
-                if account.id != call.accountId {
-                    self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
-                }
-                self.popToSmartList()
-                if let model = self.getConversationViewModel(participantUri: call.paricipantHash()) { self.showConversation(withConversationViewModel: model)
-                }
-                self.present(viewController: callViewController,
-                             withStyle: .appear,
-                             withAnimation: false,
-                             withStateable: callViewController.viewModel)
+                let callViewController = CallViewController
+                    .instantiate(with: self.injectionBag)
+                callViewController.viewModel.call = call
+                self.answerAndPresentCall(controller: callViewController)
                 tempBag = DisposeBag()
             })
             .disposed(by: tempBag)
-        callViewController.viewModel.dismisVC
-            .share()
-            .subscribe(onNext: { hide in
-                if hide {
-                    tempBag = DisposeBag()
+
+        callsProvider.sharedResponseStream
+            .filter({ serviceEvent in
+                if serviceEvent.eventType != ServiceEventType.callProviderCancellCall {
+                    return false
                 }
+                guard let callUUID: String = serviceEvent
+                    .getEventInput(ServiceEventInput.callUUID) else { return false }
+                return callUUID == call.callUUID.uuidString
+            })
+            .subscribe(onNext: { _ in
+                tempBag = DisposeBag()
             })
             .disposed(by: tempBag)
+    }
+
+    func answerAndPresentCall(controller: CallViewController) {
+        controller
+            .viewModel
+            .answerCall()
+            .subscribe()
+            .disposed(by: self.disposeBag)
+        self.presentCall(controller: controller)
+    }
+
+    func presentCall(controller: CallViewController) {
+        if let topController = self.getTopController(),
+           !topController.isKind(of: (CallViewController).self) {
+               topController.dismiss(animated: false, completion: nil)
+        }
+        guard let call = controller.viewModel.call else { return }
+        self.popToSmartList()
+        if self.accountService.currentAccount?.id != call.accountId {
+            self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
+        }
+        if let model = self.getConversationViewModel(participantUri: call.paricipantHash()) { self.showConversation(withConversationViewModel: model)
+        }
+        self.present(viewController: controller,
+                     withStyle: .appear,
+                     withAnimation: false,
+                     withStateable: controller.viewModel)
     }
 
     func createNewAccount() {
