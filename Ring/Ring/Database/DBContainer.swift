@@ -54,9 +54,7 @@ final class DBContainer {
     private let dbVersions = [1, 2]
 
     let documentsPath = {
-        return NSSearchPathForDirectoriesInDomains(
-            .documentDirectory, .userDomainMask, true
-            ).first
+        return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.savoirfairelinux.ring")!.appendingPathComponent("Documents").path
     }()
 
     func removeDBForAccount(account: String, removeFolder: Bool) {
@@ -91,7 +89,7 @@ final class DBContainer {
     // MARK: paths
 
     private func accountFolderPath(accountId: String) -> String? {
-        guard let documents = documentsPath else { return nil }
+        let documents = documentsPath
         return documents + "/" + "\(accountId)" + "/"
     }
 
@@ -172,7 +170,7 @@ final class DBContainer {
     }
 
     private func removeDBNamed(dbName: String) {
-        guard let dbPath = documentsPath else { return }
+        let dbPath = documentsPath
         let url = NSURL(fileURLWithPath: dbPath)
         guard let pathComponent = url
             .appendingPathComponent("/" + dbName) else {
@@ -204,7 +202,7 @@ final class DBContainer {
 
     func copyDbToAccountFolder(for accountId: String) -> Bool {
         if isDbExists(accountId: accountId) { return true }
-        guard let dbPath = documentsPath else { return false }
+        let dbPath = documentsPath
         let url = NSURL(fileURLWithPath: dbPath)
         guard let oldPath = url.appendingPathComponent("/" + "\(accountId).db") else { return false }
         guard let newPath = accountDbPath(accountId: accountId) else { return false }

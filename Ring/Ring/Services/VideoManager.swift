@@ -25,16 +25,13 @@ class VideoManager {
 
     let log = SwiftyBeaver.self
     private let callService: CallsService
-    private let callsProvider: CallsProviderDelegate
     private let videoService: VideoService
 
     private let disposeBag = DisposeBag()
 
     init(with callService: CallsService,
-         callsProvider: CallsProviderDelegate,
          videoService: VideoService) {
         self.callService = callService
-        self.callsProvider = callsProvider
         self.videoService = videoService
         self.subscribeCallsEvents()
         VideoAdapter.decodingDelegate = self
@@ -45,16 +42,8 @@ class VideoManager {
             .filter { event in
                 event.eventType == .callEnded
             }
-            .subscribe { [weak self] event in
+            .subscribe { [weak self] _ in
                 guard let self = self else { return }
-                guard let accountID: String = event.getEventInput(.accountId) else {
-                    return
-                }
-                guard let jamiId: String = event.getEventInput(.uri) else {
-                    return
-                }
-                guard let call = self.callService.call(participantHash: jamiId.filterOutHost(), accountID: accountID) else { return }
-                self.callsProvider.stopCall(callUUID: call.callUUID)
                 self.videoService.stopCapture()
                 self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
             } onError: {_ in
