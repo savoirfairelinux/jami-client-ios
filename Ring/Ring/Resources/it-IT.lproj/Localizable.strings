@@ -41,7 +41,7 @@
 "smartlist.searching" = "Ricerca in corso…";
 "smartlist.noResults" = "Nessun risultato";
 "smartlist.noConversation" = "Nessuna conversazione";
-"smartlist.searchBarPlaceholder" = "Inserisci nome…";
+"smartlist.searchBarPlaceholder" = "Inserire il nome…";
 "smartlist.searchBar" = "Cerca contatto nuovo o esistente...";
 "smartlist.noNetworkConnectivity" = "Assenza di connessione di rete";
 "smartlist.cellularAccess" = "Assicurati che l'accesso cellulare sia garantito nelle tue impostazioni";
@@ -50,7 +50,7 @@
 "smartlist.noNumber" = "Il contatto selezionato non ha nessun numero";
 "smartlist.selectOneNumber" = "Seleziona uno dei numeri";
 "smartlist.invitations" = "Inviti";
-"smartlist.accountSettings" = "Impostazioni dell 'account";
+"smartlist.accountSettings" = "Impostazioni dell'account";
 "smartlist.advancedSettings" = "Impostazioni avanzate";
 "smartlist.aboutJami" = "Informazioni su Jami";
 
@@ -76,8 +76,8 @@
 "createProfile.skipCreateProfile" = "Salta";
 "createProfile.profileCreated" = "Prossimo";
 "createProfile.title" = "Personalizza il tuo profilo";
-"createProfile.enterNameLabel" = "Inserisci nome di visualizzazione";
-"createProfile.enterNamePlaceholder" = "Inserisci nome";
+"createProfile.enterNameLabel" = "Inserire un nome da visualizzare";
+"createProfile.enterNamePlaceholder" = "Inserire il nome";
 "createProfile.subtitle" = "Il tuo profilo sarà condiviso con i tuoi contatti. Puoi cambiare questa impostazione in qualsiasi momento.";
 "createProfile.createYourAvatar" = "Crea il tuo profilo";
 
@@ -96,8 +96,8 @@
 "createAccount.loading" = "Caricamento in corso";
 "createAccount.waitCreateAccountTitle" = "Aggiungi account";
 "createAccount.RegisterAUsername" = "Registra un nome utente";
-"createAccount.ChooseAPassword" = "Crittografa il mio account";
-"createAccount.PasswordInformation" = "Scegliete una password per crittografare il tuo account locale. Non dimenticarla o non sarai in grado di recuperare il tuo account";
+"createAccount.ChooseAPassword" = "Cifrare il mio account";
+"createAccount.PasswordInformation" = "Scegliete una password per cifrare il tuo account locale. Non dimenticarla o non sarai in grado di recuperare il tuo account";
 "createAccount.EnableNotifications" = "Notifiche";
 "createAccount.Recommended" = "(Consigliato)";
 "createAccount.UsernameNotRegisteredTitle" = "Errore di rete";
@@ -121,7 +121,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Utente";
 "linkToAccountManager.usernameLabel" = "Inserire il nome utente";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Immettere l'URL JAMS";
+"linkToAccountManager.accountManagerLabel" = "Inserire l'URL JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Impossibile trovare l'account";
@@ -214,7 +214,7 @@
 "accountPage.revokeDeviceTitle" = "Revoca dispositivo";
 "accountPage.revokeDeviceMessage" = "Sei sicuro di voler revocare questo dispositivo? Questa azione non può essere annullata.";
 "accountPage.revokeDeviceButton" = "Revoca";
-"accountPage.revokeDevicePlaceholder" = "Inserisci password";
+"accountPage.revokeDevicePlaceholder" = "Inserisci la tua password";
 "accountPage.deviceRevoked" = "Revoca del dispositico completata";
 "accountPage.deviceRevocationProgress" = "Revoca...";
 "accountPage.deviceRevocationSuccess" = "Il dispositivo è stato revocato";
@@ -232,15 +232,15 @@
 "accountPage.contactMeOnJamiTitle" = "Contattami su Jami!";
 "accountPage.contactMeOnJamiContant" = "Contattami usando \"%s\" su Jami, una piattaforma distribuita di comunicazione: https://jami.net";
 "accountPage.registerNameTitle" = "Registra un nome utente";
-"accountPage.passwordPlaceholder" = "Inserisci la password dell'account";
+"accountPage.passwordPlaceholder" = "Inserire la password dell'account";
 "accountPage.usernamePlaceholder" = "Inserisci il nome utente desiderato";
 "accountPage.registerNameErrorMessage" = "Il nome utente scelto non è disponibile";
 "accountPage.usernameRegistering" = "Registrazione";
-"accountPage.usernameRegisterAction" = "Salva";
+"accountPage.usernameRegisterAction" = "Registrati";
 "accountPage.usernameRegistrationFailed" = "Registrazione fallita. Si prega di controllare la password.";
 "accountPage.createPassword" = "Crea password";
 "accountPage.changePassword" = "Cambia password";
-"accountPage.oldPasswordPlaceholder" = "Inserisci la vecchia password";
+"accountPage.oldPasswordPlaceholder" = "Inserire la vecchia password";
 "accountPage.newPasswordPlaceholder" = "Inserire nuova password";
 "accountPage.newPasswordConfirmPlaceholder" = "Conferma nuova password";
 "accountPage.changePasswordError" = "La password non è corretta";
@@ -262,8 +262,8 @@
 "account.createSipAccount" = "Crea un account SIP";
 "account.usernameLabel" = "Inserire il nome utente";
 "account.passwordLabel" = "Inserire la password";
-"account.serverLabel" = "Inserisci indirizzo";
-"account.portLabel" = "Inserisci porta numero";
+"account.serverLabel" = "Inserire l'indirizzo";
+"account.portLabel" = "Inserire il numero della porta";
 "account.accountStatus" = "Stato account";
 "account.enableAccount" = "Abilita account";
 "account.statusOnline" = "In linea";
@@ -342,7 +342,7 @@
 "migrateAccount.title" = "Migrazione account";
 "migrateAccount.migrateButton" = "Migra account";
 "migrateAccount.explanation" = "Questo account deve essere migrato";
-"migrateAccount.passwordPlaceholder" = "Inserire password";
+"migrateAccount.passwordPlaceholder" = "Inserire la password";
 "migrateAccount.passwordExplanation" = "Per procedere con la migrazione, è necessario inserire una password utilizzata per questo account";
 "migrateAccount.removeAccount" = "Rimuovi l'account";
 "migrateAccount.error" = "Migrazione account fallita. Puoi riprovare o cancellare l'account.";
