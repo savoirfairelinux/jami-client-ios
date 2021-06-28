@@ -72,7 +72,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
 
     var playerHeight = BehaviorRelay<CGFloat>(value: 0)
 
-    private(set) var messageId: Int64?
+    private(set) var messageId: String?
     private var isCopyable: Bool = false
     private var couldBeShared: Bool = false
     private var couldBeResend: Bool = false
@@ -265,7 +265,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         self.showTimeTap.accept(true)
     }
 
-    private func configureLongGesture(_ messageId: Int64, _ bubblePosition: BubblePosition, _ isTransfer: Bool, _ isLocationSharingBubble: Bool, isTransferSuccess: Bool, isError: Bool) {
+    private func configureLongGesture(_ messageId: String, _ bubblePosition: BubblePosition, _ isTransfer: Bool, _ isLocationSharingBubble: Bool, isTransferSuccess: Bool, isError: Bool) {
         self.messageId = messageId
         self.isCopyable = bubblePosition != .generated && !isTransfer && !isLocationSharingBubble
         self.couldBeShared = isTransfer && isTransferSuccess
@@ -601,7 +601,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         }
 
         if item.shouldDisplayTransferedImage {
-            self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.conversationId, accountId: conversationViewModel.conversation.value.accountId)
+            self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.id, accountId: conversationViewModel.conversation.value.accountId)
         }
 
         if let player = item.getPlayer(conversationViewModel: conversationViewModel) {

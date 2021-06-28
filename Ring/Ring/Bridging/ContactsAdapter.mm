@@ -42,27 +42,9 @@ static id <ContactsAdapterDelegate> _delegate;
 
 #pragma mark Callbacks registration
 - (void)registerConfigurationHandler {
-
+    
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
-
-    //Incoming trust request signal
-    confHandlers.insert(exportable_callback<ConfigurationSignal::IncomingTrustRequest>([&](const std::string& account_id,
-                                                                                           const std::string& from,
-                                                                                           const std::vector<uint8_t>& payload,
-                                                                                           time_t received) {
-        if(ContactsAdapter.delegate) {
-            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSString* senderAccount = [NSString stringWithUTF8String:from.c_str()];
-            NSData* payloadData = [Utils dataFromVectorOfUInt8:payload];
-            NSDate* receivedDate = [NSDate dateWithTimeIntervalSince1970:received];
-
-            [ContactsAdapter.delegate incomingTrustRequestReceivedFrom:senderAccount
-                                                                    to:accountId
-                                                           withPayload:payloadData
-                                                          receivedDate:receivedDate];
-        }
-    }));
-
+    
     //Contact added signal
     confHandlers.insert(exportable_callback<ConfigurationSignal::ContactAdded>([&](const std::string& account_id,
                                                                                    const std::string& uri,
@@ -73,7 +55,7 @@ static id <ContactsAdapterDelegate> _delegate;
             [ContactsAdapter.delegate contactAddedWithContact:uriString withAccountId:accountId confirmed:(BOOL)confirmed];
         }
     }));
-
+    
     //Contact removed signal
     confHandlers.insert(exportable_callback<ConfigurationSignal::ContactRemoved>([&](const std::string& account_id,
                                                                                      const std::string& uri,
@@ -84,26 +66,13 @@ static id <ContactsAdapterDelegate> _delegate;
             [ContactsAdapter.delegate contactRemovedWithContact:uriString withAccountId:accountId banned:(BOOL)banned];
         }
     }));
-
+    
     registerSignalHandlers(confHandlers);
 }
 
 #pragma mark -
 
 //Contact Requests
-- (NSArray<NSDictionary<NSString*,NSString*>*>*)trustRequestsWithAccountId:(NSString*)accountId {
-    std::vector<std::map<std::string,std::string>> trustRequestsVector = getTrustRequests(std::string([accountId UTF8String]));
-    NSArray* trustRequests = [Utils vectorOfMapsToArray:trustRequestsVector];
-    return trustRequests;
-}
-
-- (BOOL)acceptTrustRequestFromContact:(NSString*)ringId withAccountId:(NSString*)accountId {
-    return acceptTrustRequest(std::string([accountId UTF8String]), std::string([ringId UTF8String]));
-}
-
-- (BOOL)discardTrustRequestFromContact:(NSString*)ringId withAccountId:(NSString*)accountId {
-    return discardTrustRequest(std::string([accountId UTF8String]), std::string([ringId UTF8String]));
-}
 
 - (void)sendTrustRequestToContact:(NSString*)ringId payload:(NSData*)payloadData withAccountId:(NSString*)accountId {
     std::vector<uint8_t> payload = [Utils vectorOfUInt8FromData:payloadData];

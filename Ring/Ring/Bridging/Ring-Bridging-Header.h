@@ -37,6 +37,7 @@
 #import "PresenceAdapter.h"
 #import "VideoAdapter.h"
 #import "AudioAdapter.h"
+#import "RequestsAdapter.h"
 #import <CommonCrypto/CommonCrypto.h>
 #import <ContactsUI/ContactsUI.h>
 #import <UserNotifications/UserNotifications.h>

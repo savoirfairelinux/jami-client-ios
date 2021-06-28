@@ -163,7 +163,7 @@ class SendFileViewModel: Stateable, ViewModel {
         let dateString = dateFormatter.string(from: date)
         let random = String(arc4random_uniform(9999))
         let nameForRecordingFile = dateString + "_" + random
-        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile, accountID: conversation.accountId, conversationID: conversation.conversationId) else { return }
+        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile, accountID: conversation.accountId, conversationID: conversation.id) else { return }
         guard let name = self.videoService
             .startLocalRecorder(audioOnly: audioOnly, path: url.path) else {
                 return
