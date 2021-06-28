@@ -56,7 +56,10 @@ class MessageViewModel {
     private let accountService: AccountsService
     private let conversationsService: ConversationsService
     private let dataTransferService: DataTransferService
+    private let profileService: ProfilesService
     var message: MessageModel
+
+    var profileImageData = BehaviorRelay<Data?>(value: nil)
 
     var shouldShowTimeString: Bool = false
     lazy var timeStringShown: String = { [weak self] in
@@ -67,8 +70,8 @@ class MessageViewModel {
     var sequencing: MessageSequencing = .unknown
     var isComposingIndicator: Bool = false
 
-    var isLocationSharingBubble: Bool { return self.message.isLocationSharing }
-    var isText: Bool { return !self.message.isLocationSharing && !self.message.isGenerated && !self.message.isTransfer }
+    var isLocationSharingBubble: Bool { return self.message.type == .location }
+    var isText: Bool { return self.message.type == .text }
 
     private let disposeBag = DisposeBag()
     let injectBug: InjectionBag
@@ -78,15 +81,17 @@ class MessageViewModel {
         self.accountService = injectionBag.accountService
         self.conversationsService = injectionBag.conversationsService
         self.dataTransferService = injectionBag.dataTransferService
+        self.profileService = injectionBag.profileService
         self.injectBug = injectionBag
         self.message = message
         self.initialTransferStatus = message.transferStatus
         self.status.onNext(message.status)
         self.displayReadIndicator.accept(isLastDisplayed)
+        self.subscribeProfileServiceContactPhoto()
 
         if isTransfer {
-            if let transferId = daemonId,
-                self.conversationsService.dataTransferMessageMap[transferId] == nil {
+            let transferId = self.message.daemonId
+                if self.conversationsService.dataTransferMessageMap[transferId] == nil {
                 self.conversationsService.dataTransferMessageMap.removeValue(forKey: transferId)
                 switch self.initialTransferStatus {
                 case .awaiting:
@@ -100,12 +105,12 @@ class MessageViewModel {
             self.conversationsService
                 .sharedResponseStream
                 .filter({ [weak self] (transferEvent) in
-                    guard let transferId: UInt64 = transferEvent.getEventInput(ServiceEventInput.transferId) else { return false }
+                    guard let transferId1: String = transferEvent.getEventInput(ServiceEventInput.transferId) else { return false }
                     return  transferEvent.eventType == ServiceEventType.dataTransferMessageUpdated &&
-                        transferId == self?.daemonId
+                        transferId1 == transferId
                 })
                 .subscribe(onNext: { [weak self] transferEvent in
-                    guard   let transferId: UInt64 = transferEvent.getEventInput(ServiceEventInput.transferId),
+                    guard   let transferId: String = transferEvent.getEventInput(ServiceEventInput.transferId),
                         let transferStatus: DataTransferStatus = transferEvent.getEventInput(ServiceEventInput.state) else {
                         return
                     }
@@ -140,16 +145,30 @@ class MessageViewModel {
                     return event && message
                 })
                 .subscribe(onNext: { [weak self] messageUpdateEvent in
-                    if let oldMessage: Int64 = messageUpdateEvent.getEventInput(.oldDisplayedMessage),
+                    if let oldMessage: String = messageUpdateEvent.getEventInput(.oldDisplayedMessage),
                         oldMessage == self?.message.messageId {
                         self?.displayReadIndicator.accept(false)
-                    } else if let newMessage: Int64 = messageUpdateEvent.getEventInput(.newDisplayedMessage),
+                    } else if let newMessage: String = messageUpdateEvent.getEventInput(.newDisplayedMessage),
                         newMessage == self?.message.messageId {
                         self?.displayReadIndicator.accept(true)
                     }
                 })
                 .disposed(by: self.disposeBag)
         }
+    }
+
+    private func subscribeProfileServiceContactPhoto() {
+        self.profileService
+            .getProfile(uri: self.message.authorURI,
+                        createIfNotexists: false,
+                        accountId: "")
+            .subscribe(onNext: { [weak self] profile in
+                if let photo = profile.photo,
+                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    self?.profileImageData.accept(data)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     var content: String {
@@ -164,12 +183,12 @@ class MessageViewModel {
         return UInt64(self.message.daemonId)
     }
 
-    var messageId: Int64 {
+    var messageId: String {
         return self.message.messageId
     }
 
     var isTransfer: Bool {
-        return self.message.isTransfer
+        return self.message.type == .fileTransfer
     }
 
     var shouldDisplayTransferedImage: Bool {
@@ -197,7 +216,7 @@ class MessageViewModel {
     var initialTransferStatus: DataTransferStatus
 
     func bubblePosition() -> BubblePosition {
-        if self.message.isGenerated {
+        if self.message.type == .call || self.message.type == .contact {
             return .generated
         }
         if self.message.incoming {
@@ -234,37 +253,39 @@ class MessageViewModel {
         return self.dataTransferService.getFileURLFromPhotoLibrairy(identifier: identifier, completionHandler: completionHandler)
     }
 
-    func removeFile(conversationID: String, accountId: String) {
-        guard let url = self.transferedFile(conversationID: conversationID, accountId: accountId) else { return }
+    func removeFile(conversationID: String, accountId: String, isSwarm: Bool) {
+        guard let url = self.transferedFile(conversationID: conversationID, accountId: accountId, isSwarm: isSwarm) else { return }
         self.dataTransferService.removeFile(at: url)
     }
 
-    func transferedFile(conversationID: String, accountId: String) -> URL? {
-        guard let account = self.accountService.getAccount(fromAccountId: accountId) else { return nil }
+    func transferedFile(conversationID: String, accountId: String, isSwarm: Bool) -> URL? {
         if self.lastTransferStatus != .success &&
             self.message.transferStatus != .success {
             return nil
         }
         let transferInfo = transferFileData
+        if isSwarm {
+            return self.dataTransferService.getFileUrlForSwarm(fileName: transferInfo.fileName, accountID: accountId, conversationID: conversationID)
+        }
         if self.message.incoming {
             return self.dataTransferService
-                .getFileUrl(fileName: transferInfo.fileName,
-                            inFolder: Directories.downloads.rawValue,
-                            accountID: account.id,
-                            conversationID: conversationID)
+                .getFileUrlNonSwarm(fileName: transferInfo.fileName,
+                                    inFolder: Directories.downloads.rawValue,
+                                    accountID: accountId,
+                                    conversationID: conversationID)
         }
 
         let recorded = self.dataTransferService
-            .getFileUrl(fileName: transferInfo.fileName,
-                        inFolder: Directories.recorded.rawValue,
-                        accountID: account.id,
-                        conversationID: conversationID)
+            .getFileUrlNonSwarm(fileName: transferInfo.fileName,
+                                inFolder: Directories.recorded.rawValue,
+                                accountID: accountId,
+                                conversationID: conversationID)
         guard recorded == nil, recorded?.path.isEmpty ?? true else { return recorded }
         return self.dataTransferService
-            .getFileUrl(fileName: transferInfo.fileName,
-                        inFolder: Directories.downloads.rawValue,
-                        accountID: account.id,
-                        conversationID: conversationID)
+            .getFileUrlNonSwarm(fileName: transferInfo.fileName,
+                                inFolder: Directories.downloads.rawValue,
+                                accountID: accountId,
+                                conversationID: conversationID)
     }
 
     func getPlayer(conversationViewModel: ConversationViewModel) -> PlayerViewModel? {
@@ -282,23 +303,36 @@ class MessageViewModel {
             return nil
         }
         if fileExtension.isMediaExtension() {
+            if conversationViewModel.conversation.value.type != .nonSwarm {
+                let path = self.dataTransferService
+                    .getFileUrlForSwarm(fileName: name,
+                                        accountID: conversationViewModel.conversation.value.accountId,
+                                        conversationID: conversationViewModel.conversation.value.id)
+                let pathString = path?.path ?? ""
+                if pathString.isEmpty {
+                    return nil
+                }
+                let model = PlayerViewModel(injectionBag: injectBug, path: pathString)
+                conversationViewModel.setPlayer(messageID: String(self.messageId), player: model)
+                return model
+            }
             // first search for incoming video in downloads folder and for outgoing in recorded
             let folderName = self.message.incoming ? Directories.downloads.rawValue : Directories.recorded.rawValue
             var path = self.dataTransferService
-                .getFileUrl(fileName: name,
-                            inFolder: folderName,
-                            accountID: conversationViewModel.conversation.value.accountId,
-                            conversationID: conversationViewModel.conversation.value.conversationId)
+                .getFileUrlNonSwarm(fileName: name,
+                                    inFolder: folderName,
+                                    accountID: conversationViewModel.conversation.value.accountId,
+                                    conversationID: conversationViewModel.conversation.value.id)
             var pathString = path?.path ?? ""
             if pathString.isEmpty && self.message.incoming {
                 return nil
             } else if pathString.isEmpty {
                 // try to search outgoing video in downloads folder
                 path = self.dataTransferService
-                    .getFileUrl(fileName: name,
-                                inFolder: Directories.downloads.rawValue,
-                                accountID: conversationViewModel.conversation.value.accountId,
-                                conversationID: conversationViewModel.conversation.value.conversationId)
+                    .getFileUrlNonSwarm(fileName: name,
+                                        inFolder: Directories.downloads.rawValue,
+                                        accountID: conversationViewModel.conversation.value.accountId,
+                                        conversationID: conversationViewModel.conversation.value.id)
                 pathString = path?.path ?? ""
                 if pathString.isEmpty {
                     return nil
@@ -313,7 +347,8 @@ class MessageViewModel {
 
     func getTransferedImage(maxSize: CGFloat,
                             conversationID: String,
-                            accountId: String) -> UIImage? {
+                            accountId: String,
+                            isSwarm: Bool) -> UIImage? {
         guard let account = self.accountService
             .getAccount(fromAccountId: accountId) else { return nil }
         if self.message.incoming &&
@@ -322,12 +357,13 @@ class MessageViewModel {
             return nil
         }
         let transferInfo = transferFileData
+        let name = isSwarm && self.message.incoming ? self.message.daemonId : transferInfo.fileName
         return self.dataTransferService
-            .getImage(for: transferInfo.fileName,
+            .getImage(for: name,
                       maxSize: maxSize,
                       identifier: transferInfo.identifier,
                       accountID: account.id,
-                      conversationID: conversationID)
+                      conversationID: conversationID, isSwarm: isSwarm)
     }
 
     private static func getTimeLabelString(forTime time: Date) -> String {

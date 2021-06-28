@@ -35,6 +35,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
     private let accountService: AccountsService
     private let networkService: NetworkService
     private let contactService: ContactsService
+    private let requestsService: RequestsService
     let conversationService: ConversationsService
 
     lazy var currentAccount: AccountModel? = {
@@ -59,6 +60,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
         self.networkService = injectionBag.networkService
         self.contactService = injectionBag.contactsService
         self.conversationService = injectionBag.conversationsService
+        self.requestsService = injectionBag.requestsService
         self.injectionBag = injectionBag
         self.networkService.connectionStateObservable
             .subscribe(onNext: { [weak self] value in
@@ -87,7 +89,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
         }
         self.contactService.removeAllContacts(for: accountId)
         self.conversationService
-        .getConversationsForAccount(accountId: accountId)
+            .getConversationsForAccount(accountId: accountId, accountURI: "")
         .subscribe()
         .disposed(by: self.disposeBag)
         self.stateSubject.onNext(ConversationState.accountModeChanged)
@@ -100,9 +102,9 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
                 return
         }
         let username: String = lookupName.value ?? ""
-        self.contactService
-            .sendContactRequest(toContactRingId: self.contactFoundConversation.value!.conversation.value.hash,
-                                withAccount: currentAccount)
+        self.requestsService
+            .sendContactRequest(to: self.contactFoundConversation.value!.conversation.value.hash,
+                                withAccountId: currentAccount.id)
             .subscribe(onCompleted: { [weak self, weak conversation] in
                 guard let self = self, let conversation = conversation else {
                     return

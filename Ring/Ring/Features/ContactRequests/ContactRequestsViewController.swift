@@ -45,11 +45,11 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         noRequestsLabel.backgroundColor = UIColor.jamiBackgroundColor
         noRequestsLabel.textColor = UIColor.jamiLabelColor
         self.configureRingNavigationBar()
-        self.tableView.rx.modelSelected(ContactRequestItem.self)
+        self.tableView.rx.modelSelected(RequestItem.self)
             .subscribe({ [weak self] item in
                 guard let self = self else { return }
-                if let ringId = item.element?.contactRequest.ringId {
-                    self.viewModel.showConversation(forRingId: ringId)
+                if let request = item.element {
+                    self.viewModel.showConversation(forItem: request)
                 }
             })
             .disposed(by: disposeBag)
@@ -60,9 +60,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         super.viewWillAppear(animated)
         self.setupTableView()
         self.setupBindings()
-        self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
-                                    NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
     }
 
     func applyL10n() {
@@ -90,9 +87,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 cell.acceptButton.rx.tap
                     .subscribe(onNext: { [weak self] in
                         self?.acceptButtonTapped(withItem: item)
-                        if self?.tableView.numberOfRows(inSection: 0) ?? 0 <= 1 {
-                            self?.view.isHidden = true
-                        }
                     })
                     .disposed(by: cell.disposeBag)
 
@@ -101,7 +95,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 cell.discardButton.rx.tap
                     .subscribe(onNext: { [weak self] in
                         self?.discardButtonTapped(withItem: item)
-                        self?.view.isHidden = true
                     })
                     .disposed(by: cell.disposeBag)
 
@@ -110,7 +103,6 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 cell.banButton.rx.tap
                     .subscribe(onNext: { [weak self] in
                         self?.banButtonTapped(withItem: item)
-                        self?.view.isHidden = true
                     })
                     .disposed(by: cell.disposeBag)
             }
@@ -136,7 +128,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             .disposed(by: self.disposeBag)
     }
 
-    func acceptButtonTapped(withItem item: ContactRequestItem) {
+    func acceptButtonTapped(withItem item: RequestItem) {
         viewModel.accept(withItem: item)
             .subscribe(onError: { [weak self] error in
                 self?.log.error("Accept trust request failed")
@@ -146,7 +138,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             .disposed(by: self.disposeBag)
     }
 
-    func discardButtonTapped(withItem item: ContactRequestItem) {
+    func discardButtonTapped(withItem item: RequestItem) {
         viewModel.discard(withItem: item)
             .subscribe(onError: { [weak self] error in
                 self?.log.error("Discard trust request failed")
@@ -156,7 +148,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             .disposed(by: self.disposeBag)
     }
 
-    func banButtonTapped(withItem item: ContactRequestItem) {
+    func banButtonTapped(withItem item: RequestItem) {
         viewModel.ban(withItem: item)
             .subscribe(onError: { [weak self] error in
                 self?.log.error("Ban trust request failed")
