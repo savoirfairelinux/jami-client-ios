@@ -67,7 +67,7 @@ class LinkDeviceViewModel: Stateable, ViewModel {
                                       scheduler: MainScheduler.instance)
                     .subscribe(onNext: { [weak self] (_) in
                         guard let self = self else { return }
-                        self.contactService.saveContactsForLinkedAccount(accountId: account.id)
+                       // self.contactService.saveContactsForLinkedAccount(accountId: account.id)
                         self.accountService.currentAccount = account
                         UserDefaults.standard
                             .set(account.id, forKey: self.accountService.selectedAccountID)

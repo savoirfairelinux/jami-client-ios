@@ -154,9 +154,26 @@ enum InteractionType: String {
     case iTransfer  = "INCOMING_DATA_TRANSFER"
     case oTransfer  = "OUTGOING_DATA_TRANSFER"
     case location   = "LOCATION"
+
+    func toMessageType() -> MessageType {
+        switch self {
+        case .invalid, .text:
+            return .text
+        case .call:
+            return .call
+        case .contact:
+            return .contact
+        case .iTransfer:
+            return .fileTransfer
+        case .oTransfer:
+            return .fileTransfer
+        case .location:
+            return .location
+        }
+    }
 }
 
-typealias SavedMessageForConversation = (messageID: Int64, conversationID: Int64)
+typealias SavedMessageForConversation = (messageID: String, conversationID: String)
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
@@ -269,15 +286,17 @@ class DBManager {
         self.dbConnections.removeDBForAccount(account: accountId, removeFolder: removeFolder)
     }
 
-    func createConversationsFor(contactUri: String, accountId: String) {
+    func createConversationsFor(contactUri: String, accountId: String) -> String {
         guard let dataBase = self.dbConnections.forAccount(account: accountId) else {
-            return
+            return ""
         }
         do {
-            try _ = self.getConversationsFor(contactUri: contactUri,
-                                             createIfNotExists: true,
-                                             dataBase: dataBase, accountId: accountId)
+            let result = try self.getConversationsFor(contactUri: contactUri,
+                                                      createIfNotExists: true,
+                                                      dataBase: dataBase, accountId: accountId)
+            return "\(String(describing: result))"
         } catch {}
+        return ""
     }
 
     // swiftlint:disable:next function_parameter_count
@@ -302,7 +321,7 @@ class DBManager {
                                                     interactionType: interactionType, message: message,
                                                     duration: duration, dataBase: dataBase)
                     if let messageID = result {
-                        let savedMessage = SavedMessageForConversation(messageID, conversationID)
+                        let savedMessage = SavedMessageForConversation(messageID, String(conversationID))
                         observable.onNext(savedMessage)
                         observable.on(.completed)
                     } else {
@@ -371,11 +390,11 @@ class DBManager {
         return profiles
     }
 
-    func updateFileName(interactionID: Int64, name: String, accountId: String) -> Completable {
+    func updateFileName(interactionID: String, name: String, accountId: String) -> Completable {
         return Completable.create { [weak self] completable in
             if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 let success = self.interactionHepler
-                    .updateInteractionContentWithID(interactionID: interactionID, content: name, dataBase: dataBase)
+                    .updateInteractionContentWithID(interactionID: Int64(interactionID) ?? -1, content: name, dataBase: dataBase)
                 if success {
                     completable(.completed)
                 } else {
@@ -407,13 +426,13 @@ class DBManager {
         }
     }
 
-    func setMessagesAsRead(messagesIDs: [Int64], withStatus status: MessageStatus, accountId: String) -> Completable {
+    func setMessagesAsRead(messagesIDs: [String], withStatus status: MessageStatus, accountId: String) -> Completable {
         return Completable.create { [weak self] completable in
             if let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) {
                 var success = true
                 for messageId in messagesIDs {
                     if !self.interactionHepler
-                        .updateInteractionStatusWithID(interactionID: messageId,
+                        .updateInteractionStatusWithID(interactionID: Int64(messageId) ?? -1,
                                                        interactionStatus: InteractionStatus(status: status).rawValue,
                                                        dataBase: dataBase) {
                         success = false
@@ -612,10 +631,7 @@ class DBManager {
             let uri = JamiURI.init(schema: type, infoHach: participant)
             let conversationModel = ConversationModel(withParticipantUri: uri,
                                                       accountId: accountId)
-            if let participantProfile = try self.getProfile(for: participant, createIfNotExists: false, accountId: accountId) {
-                conversationModel.participantProfile = participantProfile
-            }
-            conversationModel.conversationId = String(conversationID)
+            conversationModel.id = String(conversationID)
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler
                 .selectInteractionsForConversation(
@@ -623,6 +639,7 @@ class DBManager {
                     dataBase: dataBase) else {
                         continue
             }
+            // let interaction = interactions[interactions.count - 1]
             for interaction in interactions {
                 let author = interaction.author == participant
                     ? participant : ""
@@ -630,7 +647,7 @@ class DBManager {
                     messages.append(message)
                     let displayedMessage = author.isEmpty && message.status == .displayed
                     let isLater = conversationModel
-                        .lastDisplayedMessage.id == -1 ||
+                        .lastDisplayedMessage.id.isEmpty ||
                         conversationModel
                             .lastDisplayedMessage.timestamp < message.receivedDate
                     if displayedMessage && isLater {
@@ -640,7 +657,7 @@ class DBManager {
                     }
                 }
             }
-            conversationModel.messages = messages
+            conversationModel.messages.accept(messages)
             conversationsToReturn.append(conversationModel)
         }
         return conversationsToReturn
@@ -664,6 +681,12 @@ class DBManager {
             interaction.type != InteractionType.location.rawValue {
             return nil
         }
+        if interaction.type == InteractionType.contact.rawValue {
+            let content1 = (interaction.type == InteractionType.call.rawValue
+            || interaction.type == InteractionType.contact.rawValue) ?
+                GeneratedMessage.init(from: interaction.body).toMessage(with: Int(interaction.duration))
+                : interaction.body
+        }
         let content = (interaction.type == InteractionType.call.rawValue
         || interaction.type == InteractionType.contact.rawValue) ?
             GeneratedMessage.init(from: interaction.body).toMessage(with: Int(interaction.duration))
@@ -676,13 +699,7 @@ class DBManager {
                                    incoming: interaction.incoming)
         let isTransfer = interaction.type == InteractionType.iTransfer.rawValue ||
                             interaction.type == InteractionType.oTransfer.rawValue
-        if  interaction.type == InteractionType.contact.rawValue ||
-            interaction.type == InteractionType.call.rawValue {
-            message.isGenerated = true
-        } else if isTransfer {
-            message.isGenerated = false
-            message.isTransfer = true
-        }
+        message.type = InteractionType(rawValue: interaction.type)?.toMessageType() ?? .text
         if let status: InteractionStatus = InteractionStatus(rawValue: interaction.status) {
             if isTransfer {
                 message.transferStatus = status.toDataTransferStatus()
@@ -690,10 +707,7 @@ class DBManager {
                 message.status = status.toMessageStatus()
             }
         }
-        if interaction.type == InteractionType.location.rawValue {
-            message.isLocationSharing = true
-        }
-        message.messageId = interaction.id
+        message.messageId = String(interaction.id)
         return message
     }
 
@@ -703,7 +717,7 @@ class DBManager {
                               interactionType: InteractionType,
                               message: MessageModel,
                               duration: Int,
-                              dataBase: Connection) -> Int64? {
+                              dataBase: Connection) -> String? {
         var status = InteractionStatus.unknown.rawValue
         if interactionType == .oTransfer {
             status = InteractionStatus(status: message.transferStatus).rawValue
@@ -714,7 +728,10 @@ class DBManager {
                                       message.content, interactionType.rawValue,
                                       status, message.daemonId,
                                       message.incoming)
-        return self.interactionHepler.insert(item: interaction, dataBase: dataBase)
+        if let result = self.interactionHepler.insert(item: interaction, dataBase: dataBase) {
+            return String(result)
+        }
+        return nil
     }
 
     func getProfile(for profileUri: String, createIfNotExists: Bool, accountId: String,
