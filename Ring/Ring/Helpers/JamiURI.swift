@@ -52,6 +52,19 @@ class JamiURI {
         self.parce(infoHach: infoHach)
     }
 
+    init(from uriString: String) {
+        let prefix = uriString
+            .replacingOccurrences(of: "<", with: "")
+            .replacingOccurrences(of: ">", with: "")
+            .prefix(3)
+        if prefix == URIType.sip.getString() {
+            self.schema = .sip
+        } else {
+            self.schema = .ring
+        }
+        self.parce(infoHach: uriString)
+    }
+
     private func parce(infoHach: String, account: AccountModel) {
         self.parce(infoHach: infoHach)
         if self.schema == .ring || self.userInfo.isEmpty {

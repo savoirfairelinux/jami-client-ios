@@ -109,13 +109,11 @@ class JamiSearchViewModel {
                 if lookupResponse.state == .found && (lookupResponse.name == self.searchBarText.value || lookupResponse.address == self.searchBarText.value) {
                     if let conversation = self.dataSource.conversationViewModels
                                                           .filter({ conversationViewModel in
-                                                              conversationViewModel.conversation.value.participantUri == lookupResponse.address ||
-                                                              conversationViewModel.conversation.value.hash == lookupResponse.address }).first {
+                                                                    conversationViewModel.conversation.value.containsParticipant(participant: lookupResponse.address) }).first {
                         self.contactFoundConversation.accept(conversation)
                         self.dataSource.conversationFound(conversation: conversation, name: self.searchBarText.value)
 
-                    } else if self.contactFoundConversation.value?.conversation.value.participantUri != lookupResponse.address &&
-                        self.contactFoundConversation.value?.conversation.value.hash != lookupResponse.address,
+                    } else if !(self.contactFoundConversation.value?.conversation.value.containsParticipant(participant: lookupResponse.address) ?? false),
                         let account = self.accountsService.currentAccount,
                         let injectionBag = injectionBag {
 
@@ -189,7 +187,7 @@ class JamiSearchViewModel {
             .filter({ [filteredResults] found -> Bool in
                 return filteredResults
                     .first(where: { (filtered) -> Bool in
-                        found.conversation.value.participantUri == filtered.conversation.value.participantUri
+                        found.conversation.value.getParticipants()[0].jamiId == filtered.conversation.value.getParticipants()[0].jamiId
                     }) == nil
             })
     }
@@ -210,9 +208,7 @@ class JamiSearchViewModel {
             self.dataSource.conversationViewModels
                 .filter({conversationViewModel in
                     conversationViewModel.conversation.value.accountId == currentAccount.id &&
-                        (conversationViewModel.conversation.value.participantUri == text ||
-                            conversationViewModel.conversation.value.hash == text ||
-                            conversationViewModel.userName.value.capitalized.contains(text.capitalized) ||
+                        (conversationViewModel.conversation.value.containsParticipant(participant: text) ||
                             (conversationViewModel.displayName.value ?? "").capitalized.contains(text.capitalized))
                 })
 
@@ -245,7 +241,7 @@ class JamiSearchViewModel {
             return
         }
 
-        if self.contactFoundConversation.value?.conversation.value.participantUri != text && self.contactFoundConversation.value?.conversation.value.hash != text {
+        if !(self.contactFoundConversation.value?.conversation.value.containsParticipant(participant: text) ?? true) {
             let uri = JamiURI.init(schema: URIType.ring, infoHach: text)
             let conversation = ConversationModel(withParticipantUri: uri,
                                                  accountId: currentAccount.id)
