@@ -87,7 +87,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
         }
         self.contactService.removeAllContacts(for: accountId)
         self.conversationService
-        .getConversationsForAccount(accountId: accountId)
+            .getConversationsForAccount(accountId: accountId, accountURI: "")
         .subscribe()
         .disposed(by: self.disposeBag)
         self.stateSubject.onNext(ConversationState.accountModeChanged)
@@ -102,7 +102,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
         let username: String = lookupName.value ?? ""
         self.contactService
             .sendContactRequest(toContactRingId: self.contactFoundConversation.value!.conversation.value.hash,
-                                withAccount: currentAccount)
+                                withAccount: currentAccount.id)
             .subscribe(onCompleted: { [weak self, weak conversation] in
                 guard let self = self, let conversation = conversation else {
                     return

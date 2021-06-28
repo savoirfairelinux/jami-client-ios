@@ -201,44 +201,38 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    private func loadDatabases() -> Bool {
-        for account in accountList {
-            if dbManager.isMigrationToDBv2Needed(accountId: account.id) {
-                if let accountURI = AccountModelHelper
-                    .init(withAccount: account).uri {
-                    if !dbManager.migrateToDbVersion2(accountId: account.id,
-                                                      accountURI: accountURI) { return false }
-                }
-            } else {
-                do {
-                    // return false if could not open database connection
-                    if try !dbManager.createDatabaseForAccount(accountId: account.id) {
-                        return false
-                    }
-                    // if tables already exist an exeption will be thrown
-                } catch { }
-            }
-        }
-        return true
-    }
+//    private func loadDatabases() -> Bool {
+//        for account in accountList {
+//            if dbManager.isMigrationToDBv2Needed(accountId: account.id) {
+//                if let accountURI = AccountModelHelper
+//                    .init(withAccount: account).uri {
+//                    if !dbManager.migrateToDbVersion2(accountId: account.id,
+//                                                      accountURI: accountURI) { return false }
+//                }
+//            } else {
+//                do {
+//                    // return false if could not open database connection
+//                    if try !dbManager.createDatabaseForAccount(accountId: account.id) {
+//                        return false
+//                    }
+//                    // if tables already exist an exeption will be thrown
+//                } catch { }
+//            }
+//        }
+//        return true
+//    }
 
     /// This function clears the temporary database entries
-    private func sanitizeDatabases() -> Bool {
-        let accountIds = self.accountList.map({ $0.id })
-        return self.dbManager.deleteAllLocationUpdates(accountIds: accountIds)
-    }
+//    private func sanitizeDatabases() -> Bool {
+//        let accountIds = self.accountList.map({ $0.id })
+//        return self.dbManager.deleteAllLocationUpdates(accountIds: accountIds)
+//    }
 
     func initialAccountsLoading() -> Completable {
         return Completable.create { [weak self] completable in
             guard let self = self else { return Disposables.create {} }
             self.loadAccountsFromDaemon()
-            if self.accountList.isEmpty {
-                completable(.completed)
-            } else if self.loadDatabases() && self.sanitizeDatabases() {
-                completable(.completed)
-            } else {
-                completable(.error(DataAccessError.databaseError))
-            }
+            completable(.completed)
             return Disposables.create {}
         }
     }

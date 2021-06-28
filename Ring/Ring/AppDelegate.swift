@@ -67,6 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private lazy var locationSharingService: LocationSharingService = {
         LocationSharingService(dbManager: self.dBManager)
     }()
+    private lazy var requestsService: RequestsService = {
+        RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: self.dBManager)
+    }()
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
@@ -84,7 +87,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withDataTransferService: self.dataTransferService,
                             withProfileService: self.profileService,
                             withCallsProvider: self.callsProvider,
-                            withLocationSharingService: self.locationSharingService)
+                            withLocationSharingService: self.locationSharingService,
+                            withRequestsService: self.requestsService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -239,11 +243,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func reloadDataFor(account: AccountModel) {
-        self.contactsService.loadContacts(withAccount: account)
-        self.contactsService.loadContactRequests(withAccount: account.id)
-        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+        self.requestsService.loadRequests(withAccount: account.id)
         self.conversationManager?
-            .prepareConversationsForAccount(accountId: account.id)
+            .prepareConversationsForAccount(accountId: account.id, accountURI: account.jamiId)
+        self.contactsService.loadContacts(withAccount: account)
+        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

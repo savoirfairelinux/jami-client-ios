@@ -35,10 +35,11 @@ class AvatarView: UIView {
         self.frame = CGRect(x: 0, y: 0, width: size, height: size)
 
         let avatarImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: size, height: size))
-        if let imageData = profileImageData, let image = UIImage(data: imageData) {
+        if let imageData = profileImageData {
+            if let image = UIImage(data: imageData) {
             (avatarImageView as UIImageView).image = image.circleMasked
             self.addSubview(avatarImageView)
-        } else {
+            } } else {
             // use fallback avatars
             let scanner = Scanner(string: username.toMD5HexString().prefixString())
             var index: UInt64 = 0
