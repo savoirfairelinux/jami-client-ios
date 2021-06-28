@@ -105,7 +105,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     func getTransferInfo(withId transferId: UInt64) -> NSDataTransferInfo? {
         let info = NSDataTransferInfo()
-        let err = self.dataTransferAdapter.dataTransferInfo(withId: transferId, with: info)
+        let err = self.dataTransferAdapter.dataTransferInfo(withId: "", accountId: "", with: info)
         if err != .success {
             self.log.error("DataTransferService: error getting transfer info for id: \(transferId)")
             return nil
@@ -388,35 +388,31 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     // MARK: DataTransferAdapter
 
-    private func dataTransferIdList() -> [UInt64]? {
-        return self.dataTransferAdapter.dataTransferList() as? [UInt64]
-    }
-
     private func sendFile(withId transferId: inout UInt64, withInfo info: NSDataTransferInfo) -> NSDataTransferError {
         var err: NSDataTransferError = .unknown
         let _id = UnsafeMutablePointer<UInt64>.allocate(capacity: 1)
-        err = self.dataTransferAdapter.sendFile(with: info, withTransferId: _id)
+       // err = self.dataTransferAdapter.sendFile(with: info, withTransferId: _id)
         transferId = _id.pointee
         return err
     }
 
     private func acceptFileTransfer(withId transferId: UInt64, withPath filePath: String, withOffset offset: Int64 = 0) -> NSDataTransferError {
-        return self.dataTransferAdapter.acceptFileTransfer(withId: transferId, withFilePath: filePath, withOffset: offset)
+        return self.dataTransferAdapter.acceptFileTransfer(withId: "", accountId: "", withFilePath: filePath)
     }
 
     private func cancelDataTransfer(withId transferId: UInt64) -> NSDataTransferError {
-        return self.dataTransferAdapter.cancelDataTransfer(withId: transferId)
+        return self.dataTransferAdapter.cancelDataTransfer(withId: "", accountId: "", conversationId: "")
     }
 
     private func dataTransferInfo(withId transferId: UInt64, withInfo info: inout NSDataTransferInfo) -> NSDataTransferError {
-        return self.dataTransferAdapter.dataTransferInfo(withId: transferId, with: info)
+        return self.dataTransferAdapter.dataTransferInfo(withId: "", accountId: "", with: info)
     }
 
     private func dataTransferBytesProgress(withId transferId: UInt64, withTotal total: inout Int64, withProgress progress: inout Int64) -> NSDataTransferError {
         var err: NSDataTransferError = .unknown
         let _total = UnsafeMutablePointer<Int64>.allocate(capacity: 1)
         let _progress = UnsafeMutablePointer<Int64>.allocate(capacity: 1)
-        err = self.dataTransferAdapter.dataTransferBytesProgress(withId: transferId, withTotal: _total, withProgress: _progress)
+       // err = self.dataTransferAdapter.dataTransferBytesProgress(withId: transferId, withTotal: _total, withProgress: _progress)
         total = _total.pointee
         progress = _progress.pointee
         return err
