@@ -37,6 +37,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     let nameService: NameService
     let presenceService: PresenceService
     let profileService: ProfilesService
+    let requestsService: RequestsService
 
     private let disposeBag = DisposeBag()
     private let log = SwiftyBeaver.self
@@ -50,20 +51,21 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         self.nameService = injectionBag.nameService
         self.presenceService = injectionBag.presenceService
         self.profileService = injectionBag.profileService
+        self.requestsService = injectionBag.requestsService
 
         self.injectionBag = injectionBag
     }
 
-    lazy var contactRequestItemsNotFiltered: Observable<[ContactRequestItem]> = {
-        return self.contactsService.contactRequests
+    lazy var contactRequestItemsNotFiltered: Observable<[RequestItem]> = {
+        return self.requestsService.requests
             .asObservable()
-            .map({ [weak self] contactRequests in
+            .map({ [weak self] requests in
                 guard let self = self else { return [] }
-                return contactRequests
+                return requests
                     .filter { $0.accountId == self.accountsService.currentAccount?.id }
                     .sorted { $0.receivedDate > $1.receivedDate }
                     .map { contactRequest in
-                        let item = ContactRequestItem(withContactRequest: contactRequest,
+                        let item = RequestItem(withRequest: contactRequest,
                                                       profileService: self.profileService,
                                                       contactService: self.contactsService)
                         self.lookupUserName(withItem: item)
@@ -74,9 +76,9 @@ class ContactRequestsViewModel: Stateable, ViewModel {
 
     let filter = BehaviorRelay(value: "")
 
-    lazy var contactRequestItems: Observable<[ContactRequestItem]> = {
+    lazy var contactRequestItems: Observable<[RequestItem]> = {
         return Observable
-            .combineLatest(contactRequestItemsNotFiltered, filter.asObservable()) { (requests, filter) -> [ContactRequestItem] in
+            .combineLatest(contactRequestItemsNotFiltered, filter.asObservable()) { (requests, filter) -> [RequestItem] in
                 return requests.filter { request in
                     return request.userName.value.contains(filter) || request.profileName.value.contains(filter) || filter.isEmpty
                 }
@@ -84,7 +86,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     }()
 
     lazy var hasInvitations: Observable<Bool> = {
-        return self.contactsService.contactRequests
+        return self.requestsService.requests
             .asObservable()
             .map({ [weak self] contactRequests in
                 return contactRequests
@@ -95,41 +97,56 @@ class ContactRequestsViewModel: Stateable, ViewModel {
             })
     }()
 
-    func accept(withItem item: ContactRequestItem) -> Observable<Void> {
-        let acceptCompleted = self.contactsService.accept(contactRequest: item.contactRequest, withAccount: self.accountsService.currentAccount!)
-        self.presenceService.subscribeBuddy(withAccountId: (self.accountsService.currentAccount?.id)!,
-                                            withUri: item.contactRequest.ringId,
-                                            withFlag: true)
-        return acceptCompleted.asObservable()
-    }
-
-    func discard(withItem item: ContactRequestItem) -> Observable<Void> {
-        return self.contactsService.discard(from: item.contactRequest.ringId,
-                                            withAccountId: item.contactRequest.accountId)
-    }
-
-    func ban(withItem item: ContactRequestItem) -> Observable<Void> {
-        let discardCompleted = self.contactsService.discard(from: item.contactRequest.ringId,
-                                                            withAccountId: item.contactRequest.accountId)
-        guard let uri = JamiURI.init(schema: URIType.ring,
-                                     infoHach: item.contactRequest.ringId)
-            .uriString else {
-                return discardCompleted
+    func accept(withItem item: RequestItem) -> Observable<Void> {
+        if item.request.isCoredialog() {
+            if let uri = item.request.participants.first?.uri, self.contactsService.contact(withUri: uri) == nil {
+                let acceptCompleted = self.requestsService.acceptContactRequest(jamiId: uri, withAccount: item.request.accountId)
+                self.presenceService.subscribeBuddy(withAccountId: item.request.accountId,
+                                                    withUri: uri,
+                                                    withFlag: true)
+                return acceptCompleted.asObservable()
+            }
         }
-        let removeCompleted = self.contactsService.removeContact(withUri: uri,
-                                                                 ban: true,
-                                                                 withAccountId: item.contactRequest.accountId)
-
-        return Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
-            return
-        }
+        return self.requestsService.acceptConverversationRequest(conversationId: item.request.conversationId, withAccount: item.request.accountId)
     }
 
-    private func lookupUserName(withItem item: ContactRequestItem) {
+    func discard(withItem item: RequestItem) -> Observable<Void> {
+        if item.request.isCoredialog() {
+            if let uri = item.request.participants.first?.uri, self.contactsService.contact(withUri: uri) == nil {
+                return self.requestsService.discardContactRequest(jamiId: uri, withAccount: item.request.accountId)
+            }
+        }
+        return self.requestsService.discardConverversationRequest(conversationId: item.request.conversationId, withAccount: item.request.accountId)
+    }
+
+    func ban(withItem item: RequestItem) -> Observable<Void> {
+        if item.request.isCoredialog() {
+            if let uri = item.request.participants.first?.uri, self.contactsService.contact(withUri: uri) == nil {
+                let discardCompleted = self.requestsService.discardContactRequest(jamiId: uri, withAccount: item.request.accountId)
+                guard let uri = JamiURI.init(schema: URIType.ring,
+                                             infoHach: uri)
+                    .uriString else {
+                        return discardCompleted
+                }
+                let removeCompleted = self.contactsService.removeContact(withUri: uri,
+                                                                         ban: true,
+                                                                         withAccountId: item.request.accountId)
+
+                return Observable<Void>.zip(discardCompleted, removeCompleted) { _, _ in
+                    return
+                }
+            }
+        }
+        return self.requestsService.discardConverversationRequest(conversationId: item.request.conversationId, withAccount: item.request.accountId)
+    }
+
+    private func lookupUserName(withItem item: RequestItem) {
+        if !item.request.isCoredialog() { return }
+        guard let jamiId = item.request.participants.first?.uri else { return }
 
         self.nameService.usernameLookupStatus.asObservable()
             .filter({ lookupNameResponse in
-                return lookupNameResponse.address == item.contactRequest.ringId
+                return lookupNameResponse.address == jamiId
             })
             .subscribe(onNext: { lookupNameResponse in
                 if lookupNameResponse.state == .found && !lookupNameResponse.name.isEmpty {
@@ -143,7 +160,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
 
         self.nameService.lookupAddress(withAccount: currentAccount.id,
                                        nameserver: "",
-                                       address: item.contactRequest.ringId)
+                                       address: jamiId)
     }
 
     func showConversation (forRingId ringId: String) {
@@ -152,13 +169,12 @@ class ContactRequestsViewModel: Stateable, ViewModel {
             return
         }
 
-        guard let uri = JamiURI(schema: URIType.ring, infoHach: ringId).uriString else {
-            return
-        }
+        let uri = JamiURI(schema: URIType.ring, infoHach: ringId)
+        let conversation = ConversationModel(withParticipantUri: uri, accountId: account.id)
 
-        guard let conversation = self.conversationService.findConversation(withUri: uri, withAccountId: account.id) else {
-            return
-        }
+//        guard let conversation = self.conversationService.findConversation(withUri: uri, withAccountId: account.id) else {
+//            return
+//        }
         conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: conversationViewModel))
     }

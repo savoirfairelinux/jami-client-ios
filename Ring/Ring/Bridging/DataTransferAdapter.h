@@ -75,11 +75,25 @@ typedef NS_ENUM(UInt32, NSDataTransferFlags)  {
 
 @property (class, nonatomic, weak) id <DataTransferAdapterDelegate> delegate;
 
-- (NSArray*)dataTransferList;
-- (NSDataTransferError) sendFileWithInfo:(NSDataTransferInfo*)info withTransferId:(UInt64*)transferId;
-- (NSDataTransferError) acceptFileTransferWithId:(UInt64)transferId withFilePath:(NSString*)filePath withOffset:(SInt64)offset;
-- (NSDataTransferError) cancelDataTransferWithId:(UInt64)transferId;
-- (NSDataTransferError) dataTransferInfoWithId:(UInt64)transferId withInfo:(NSDataTransferInfo*)info;
-- (NSDataTransferError) dataTransferBytesProgressWithId:(UInt64)transferId withTotal:(SInt64*)total withProgress:(SInt64*)progress;
+- (void)sendFileWithName:(NSString*)displayName
+               accountId:(NSString*)accountId
+          conversationId:(NSString*)conversationId
+            withFilePath:(NSString*)filePath
+            withFilePath:(NSString*)parent;
+- (NSDataTransferError)acceptFileTransferWithId:(NSString*)fileId
+                                      accountId:(NSString*)accountId
+                                   withFilePath:(NSString*)filePath;
+- (NSDataTransferError)cancelDataTransferWithId:(NSString*)fileId
+                                      accountId:(NSString*)accountId
+                                 conversationId:(NSString*)conversationId;
+- (NSDataTransferError)dataTransferInfoWithId:(NSString*)fileId
+                                    accountId:(NSString*)accountId
+                                     withInfo:(NSDataTransferInfo*)info;
+- (NSDataTransferError) dataTransferBytesProgressWithId:(NSString*)fileId
+                                              withTotal:(SInt64*)total
+                                           withProgress:(SInt64*)progress
+                                              accountId:(NSString*)accountId
+                                         conversationId:(NSString*)conversationId
+                                                   path:(NSString*)path;
 
 @end

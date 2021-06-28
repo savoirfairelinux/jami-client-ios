@@ -74,7 +74,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
         discardButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
     }
 
-    func configureFromItem(_ item: ContactRequestItem) {
+    func configureFromItem(_ item: RequestItem) {
         // avatar
         Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
                                                   item.userName.asObservable(),

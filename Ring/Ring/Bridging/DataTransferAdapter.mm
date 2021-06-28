@@ -58,61 +58,52 @@ static id <DataTransferAdapterDelegate> _delegate;
 #pragma mark Callbacks registration
 
 - (void)registerDataTransferHandlers {
-
+    
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> dataTransferHandlers;
-
-    dataTransferHandlers.insert(exportable_callback<DataTransferSignal::DataTransferEvent>([&](const DataTransferId& transferId, int eventCode) {
+    
+    dataTransferHandlers
+    .insert(exportable_callback<DataTransferSignal::DataTransferEvent>([&](const std::string& accountId,
+                                                                           const std::string& conversationId,
+                                                                           const std::string& interactionId,
+                                                                           const std::string& fileId,
+                                                                           int eventCode) {
         if(DataTransferAdapter.delegate) {
-            [DataTransferAdapter.delegate dataTransferEventWithTransferId:(UInt64)transferId withEventCode:(NSInteger)eventCode];
+            
         }
     }));
-
+    
     registerSignalHandlers(dataTransferHandlers);
 }
 
 #pragma mark API calls
 
-- (NSArray*) dataTransferList {
-    std::vector<DataTransferId> transferList = dataTransferList();
-    NSMutableArray *retVal = [[NSMutableArray alloc] init];
-    for(auto const& tid: transferList) {
-        [retVal addObject:[NSNumber numberWithUnsignedLongLong:tid]];
-    }
-    return [retVal copy];
+- (void)sendFileWithName:(NSString*)displayName
+               accountId:(NSString*)accountId
+          conversationId:(NSString*)conversationId
+            withFilePath:(NSString*)filePath
+            withFilePath:(NSString*)parent {
+    sendFile(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([filePath UTF8String]), std::string([displayName UTF8String]), std::string([parent UTF8String]));
 }
 
-- (NSDataTransferError) sendFileWithInfo:(NSDataTransferInfo*)info
-                        withTransferId:(UInt64*)transferId {
-    DataTransferInfo transferInfo = {
-        std::string([info->accountId UTF8String]),
-        (DataTransferEventCode)info->lastEvent,
-        static_cast<uint32_t>(info->flags),
-        static_cast<int64_t>(info->totalSize),
-        static_cast<int64_t>(info->bytesProgress),
-        std::string([info->peer UTF8String]),
-        std::string([info->displayName UTF8String]),
-        std::string([info->path UTF8String]),
-        std::string([info->mimetype UTF8String]),
-    };
-    return (NSDataTransferError)sendFile(transferInfo, *transferId);
+- (NSDataTransferError)acceptFileTransferWithId:(NSString*)fileId
+                                      accountId:(NSString*)accountId
+                                   withFilePath:(NSString*)filePath {
+    return (NSDataTransferError)acceptFileTransfer(std::string([accountId UTF8String]),
+                                                   std::string([fileId UTF8String]),
+                                                   std::string([filePath UTF8String]));
 }
 
-- (NSDataTransferError) acceptFileTransferWithId:(UInt64)transferId
-                                  withFilePath:(NSString*)filePath
-                                    withOffset:(SInt64)offset {
-    return (NSDataTransferError)acceptFileTransfer(transferId,
-                                                   std::string([filePath UTF8String]),
-                                                   offset);
+- (NSDataTransferError)cancelDataTransferWithId:(NSString*)fileId
+                                      accountId:(NSString*)accountId
+                                 conversationId:(NSString*)conversationId {
+    return (NSDataTransferError)cancelDataTransfer(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fileId UTF8String]));
 }
 
-- (NSDataTransferError) cancelDataTransferWithId:(UInt64)transferId {
-    return (NSDataTransferError)cancelDataTransfer(transferId);
-}
-
-- (NSDataTransferError) dataTransferInfoWithId:(UInt64)transferId
-                                    withInfo:(NSDataTransferInfo*)info {
+- (NSDataTransferError)dataTransferInfoWithId:(NSString*)fileId
+                                    accountId:(NSString*)accountId
+                                     withInfo:(NSDataTransferInfo*)info {
     DataTransferInfo transferInfo;
-    auto err = (NSDataTransferError)dataTransferInfo(transferId, transferInfo);
+    auto err = (NSDataTransferError)dataTransferInfo(std::string([accountId UTF8String]), std::string([fileId UTF8String]), transferInfo);
     info->accountId = [NSString stringWithUTF8String:transferInfo.accountId.c_str()];
     info->lastEvent = (NSDataTransferEventCode)transferInfo.lastEvent;
     info->flags = transferInfo.flags;
@@ -125,10 +116,14 @@ static id <DataTransferAdapterDelegate> _delegate;
     return err;
 }
 
-- (NSDataTransferError) dataTransferBytesProgressWithId:(UInt64)transferId
-                                            withTotal:(SInt64*)total
-                                         withProgress:(SInt64*)progress {
-    return (NSDataTransferError)dataTransferBytesProgress(transferId, *total, *progress);
+- (NSDataTransferError)dataTransferBytesProgressWithId:(NSString*)fileId
+                                             withTotal:(int64_t*)total
+                                          withProgress:(int64_t*)progress
+                                             accountId:(NSString*)accountId
+                                        conversationId:(NSString*)conversationId
+                                                  path:(NSString*)path {
+    std::string filePath = std::string([path UTF8String]);
+    return (NSDataTransferError)fileTransferInfo(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fileId UTF8String]), filePath, *total, *progress);
 }
 
 #pragma mark AccountAdapterDelegate

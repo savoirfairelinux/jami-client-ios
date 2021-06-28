@@ -23,6 +23,7 @@
 #import "Ring-Swift.h"
 #import "Utils.h"
 #import "dring/configurationmanager_interface.h"
+#import "dring/conversation_interface.h"
 
 @implementation MessagesAdapter
 
@@ -58,24 +59,69 @@ static id <MessagesAdapterDelegate> _delegate;
         }
     }));
 
-    confHandlers.insert(exportable_callback<ConfigurationSignal::AccountMessageStatusChanged>([&](const std::string& account_id, uint64_t message_id, const std::string& to, int state) {
+    confHandlers.insert(exportable_callback<ConfigurationSignal::AccountMessageStatusChanged>([&](const std::string& account_id, const std::string& conversation_id, const std::string& peer, const std::string message_id, int state) {
         if (MessagesAdapter.delegate) {
-            NSString* fromAccountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSString* toUri = [NSString stringWithUTF8String:to.c_str()];
-            [MessagesAdapter.delegate messageStatusChanged:(MessageStatus)state
-                                                       for:message_id from:fromAccountId
-                                                        to:toUri];
         }
     }));
 
-    confHandlers.insert(exportable_callback<ConfigurationSignal::ComposingStatusChanged>([&](const std::string& account_id, const std::string& from, int status) {
+    confHandlers.insert(exportable_callback<ConfigurationSignal::ComposingStatusChanged>([&](const std::string& account_id, const std::string& convId, const std::string& from, int status) {
         if (MessagesAdapter.delegate) {
             NSString* fromPeer =  [NSString stringWithUTF8String:from.c_str()];
             NSString* toAccount =  [NSString stringWithUTF8String:account_id.c_str()];
             [MessagesAdapter.delegate detectingMessageTyping:fromPeer for:toAccount status:status];
         }
     }));
-
+    
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationLoaded>([&](uint32_t id, const std::string& accountId, const std::string& conversationId, std::vector<std::map<std::string, std::string>> messages) {
+        if (MessagesAdapter.delegate) {
+            NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
+            NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
+            NSArray* interactions = [Utils vectorOfMapsToArray: messages];
+            [MessagesAdapter.delegate conversationLoadedWithConversationId: convId accountId: account messages: interactions];
+        }
+    }));
+    
+    confHandlers.insert(exportable_callback<ConversationSignal::MessageReceived>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> message) {
+        if (MessagesAdapter.delegate) {
+            NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
+            NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
+            NSMutableDictionary* interaction = [Utils mapToDictionnary: message];
+            [MessagesAdapter.delegate newInteractionWithConversationId: convId accountId: account message: interaction];
+        }
+    }));
+    
+//    confHandlers.insert(exportable_callback<ConversationSignal::ConversationRequestReceived>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> metadata) {
+//        if (MessagesAdapter.delegate) {
+//            NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
+//            NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
+//            NSMutableDictionary* info = [Utils mapToDictionnary: metadata];
+//            [MessagesAdapter.delegate conversationRequestReceivedWithConversationId: convId accountId: account metadata: info];
+//        }
+//    }));
+    
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationReady>([&](const std::string& accountId, const std::string& conversationId) {
+        if (MessagesAdapter.delegate) {
+            NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
+            NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
+            [MessagesAdapter.delegate conversationReadyWithConversationId: convId accountId: account];
+        }
+    }));
+    
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationRemoved>([&](const std::string& accountId, const std::string& conversationId) {
+        if (MessagesAdapter.delegate) {
+        }
+    }));
+    /* event 0 = add, 1 = joins, 2 = leave, 3 = banned */
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationMemberEvent>([&](const std::string& accountId, const std::string& conversationId, const std::string& memberUri, int event) {
+        if (MessagesAdapter.delegate) {
+        }
+    }));
+    
+    confHandlers.insert(exportable_callback<ConversationSignal::OnConversationError>([&](const std::string& accountId, const std::string& conversationId, int code, const std::string& what) {
+        if (MessagesAdapter.delegate) {
+        }
+    }));
+   
     registerSignalHandlers(confHandlers);
 }
 #pragma mark -
@@ -108,6 +154,40 @@ static id <MessagesAdapterDelegate> _delegate;
                         std::string([peer UTF8String]),
                         std::string([messageId UTF8String]),
                         status);
+}
+
+- (NSArray*)getSwarmConversationsForAccount:(NSString*) accountId {
+    return [Utils vectorToArray: getConversations(std::string([accountId UTF8String]))];
+}
+
+- (NSArray*)getSwarmRequestsForAccount:(NSString*) accountId {
+    return [Utils vectorOfMapsToArray: getConversationRequests(std::string([accountId UTF8String]))];
+}
+
+- (uint32_t)loadConversationMessages:(NSString*) accountId conversationId:(NSString*) conversationId from:(NSString*)fromMessage size:(NSInteger)size {
+    return loadConversationMessages(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fromMessage UTF8String]), size);
+}
+
+- (NSMutableDictionary*)getConversationInfoForAccount:(NSString*) accountId conversationId:(NSString*) conversationId {
+    return [Utils mapToDictionnary: conversationInfos(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+}
+
+- (NSArray*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId {
+    return [Utils vectorOfMapsToArray: getConversationMembers(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+}
+//- (void)acceptConversationRequest:(NSString*) accountId conversationId:(NSString*) conversationId {
+//    acceptConversationRequest(std::string([accountId UTF8String]), std::string([conversationId UTF8String]));
+//}
+//- (void)declineConversationRequest:(NSString*) accountId conversationId:(NSString*) conversationId {
+//    declineConversationRequest(std::string([accountId UTF8String]), std::string([conversationId UTF8String]));
+//}
+
+- (void)removeConversation:(NSString*) accountId conversationId:(NSString*) conversationId {
+    removeConversation(std::string([accountId UTF8String]), std::string([conversationId UTF8String]));
+}
+
+- (NSString*)startConversation:(NSString*) accountId {
+    return [NSString stringWithUTF8String: startConversation(std::string([accountId UTF8String])).c_str()];
 }
 
 #pragma mark AccountAdapterDelegate

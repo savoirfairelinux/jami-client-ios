@@ -38,7 +38,6 @@ class ContactsService {
     private let log = SwiftyBeaver.self
     private let disposeBag = DisposeBag()
 
-    let contactRequests = BehaviorRelay(value: [ContactRequestModel]())
     let contacts = BehaviorRelay(value: [ContactModel]())
 
     let contactStatus = PublishSubject<ContactModel>()
@@ -56,7 +55,7 @@ class ContactsService {
     }
 
     func contact(withUri uri: String) -> ContactModel? {
-        guard let contact = self.contacts.value.filter({ $0.uriString == uri }).first else {
+        guard let contact = self.contacts.value.filter({ $0.hash == uri }).first else {
             return nil
         }
         return contact
@@ -67,13 +66,6 @@ class ContactsService {
             return nil
         }
         return contact
-    }
-
-    func contactRequest(withRingId ringId: String) -> ContactRequestModel? {
-        guard let contactRequest = self.contactRequests.value.filter({ $0.ringId == ringId }).first else {
-            return nil
-        }
-        return contactRequest
     }
 
     func loadContacts(withAccount account: AccountModel) {
@@ -129,95 +121,12 @@ class ContactsService {
         }
     }
 
-    func loadContactRequests(withAccount accountId: String) {
-        self.contactRequests.accept([])
-        // Load trust requests from daemon
-        let trustRequestsDictionaries = self.contactsAdapter.trustRequests(withAccountId: accountId)
-
-        // Create contact requests from daemon trust requests
-        if let contactRequests = trustRequestsDictionaries?.map({ dictionary in
-            return ContactRequestModel(withDictionary: dictionary, accountId: accountId)
-        }) {
-            for contactRequest in contactRequests {
-                let validContact = self.contacts.value.filter { contact in
-                    contact.hash == contactRequest.ringId && !contact.banned
-                }.first
-                if validContact != nil {
-                    return
-                }
-                if self.contactRequest(withRingId: contactRequest.ringId) == nil {
-                    var values = self.contactRequests.value
-                    values.append(contactRequest)
-                    self.contactRequests.accept(values)
-                }
-            }
-        }
-    }
-
-    func accept(contactRequest: ContactRequestModel, withAccount account: AccountModel) -> Observable<Void> {
-        return Observable.create { [weak self] observable in
-            guard let self = self else { return Disposables.create { } }
-            let success = self.contactsAdapter.acceptTrustRequest(fromContact: contactRequest.ringId,
-                                                                  withAccountId: account.id)
-            if success {
-                self.removeContactRequest(withRingId: contactRequest.ringId)
-                var stringImage: String?
-                if let vCard = contactRequest.vCard, let image = vCard.imageData {
-                    stringImage = image.base64EncodedString()
-                }
-                let name = VCardUtils.getName(from: contactRequest.vCard)
-                let uri = JamiURI(schema: URIType.ring, infoHach: contactRequest.ringId)
-                let uriString = uri.uriString ?? contactRequest.ringId
-                _ = self.dbManager
-                    .createOrUpdateRingProfile(profileUri: uriString,
-                                               alias: name,
-                                               image: stringImage,
-                                               accountId: account.id)
-                var event = ServiceEvent(withEventType: .contactAdded)
-                event.addEventInput(.accountId, value: account.id)
-                event.addEventInput(.uri, value: contactRequest.ringId)
-                self.responseStream.onNext(event)
-                var data = [String: Any]()
-                data[ProfileNotificationsKeys.ringID.rawValue] = contactRequest.ringId
-                data[ProfileNotificationsKeys.accountId.rawValue] = account.id
-                NotificationCenter.default.post(name: NSNotification.Name(ProfileNotifications.contactAdded.rawValue), object: nil, userInfo: data)
-                observable.on(.completed)
-            } else {
-                observable.on(.error(ContactServiceError.acceptTrustRequestFailed))
-            }
-
-            return Disposables.create { }
-        }
-    }
-
-    func discard(from jamiId: String, withAccountId accountId: String) -> Observable<Void> {
-        return Observable.create { [weak self] observable in
-            guard let self = self else { return Disposables.create { } }
-            let success = self.contactsAdapter.discardTrustRequest(fromContact: jamiId,
-                                                                   withAccountId: accountId)
-
-            // Update the Contact request list
-            self.removeContactRequest(withRingId: jamiId)
-
-            if success {
-                var event = ServiceEvent(withEventType: .contactRequestDiscarded)
-                event.addEventInput(.accountId, value: accountId)
-                event.addEventInput(.uri, value: jamiId)
-                self.responseStream.onNext(event)
-                observable.on(.completed)
-            } else {
-                observable.on(.error(ContactServiceError.diacardTrusRequestFailed))
-            }
-            return Disposables.create { }
-        }
-    }
-
-    func sendContactRequest(toContactRingId ringId: String, withAccount account: AccountModel) -> Completable {
+    func sendContactRequest(toContactRingId ringId: String, withAccount accountId: String) -> Completable {
         return Completable.create { [weak self] completable in
             guard let self = self else { return Disposables.create { } }
             do {
                 var payload: Data?
-                if let accountProfile = self.dbManager.accountProfile(for: account.id) {
+                if let accountProfile = self.dbManager.accountProfile(for: accountId) {
                     let vCard = CNMutableContact()
                     var cardChanged = false
                     if let name = accountProfile.alias {
@@ -233,11 +142,11 @@ class ContactsService {
                         payload = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000, encoding: .utf8)
                     }
                 }
-                self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: account.id)
-                var event = ServiceEvent(withEventType: .contactAdded)
-                event.addEventInput(.accountId, value: account.id)
-                event.addEventInput(.uri, value: ringId)
-                self.responseStream.onNext(event)
+                self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: accountId)
+//                var event = ServiceEvent(withEventType: .contactAdded)
+//                event.addEventInput(.accountId, value: accountId)
+//                event.addEventInput(.uri, value: ringId)
+//                self.responseStream.onNext(event)
                 completable(.completed)
             } catch {
                 completable(.error(ContactServiceError.vCardSerializationFailed))
@@ -270,22 +179,22 @@ class ContactsService {
                 return Disposables.create { }
             }
             self.contactsAdapter.removeContact(withURI: hash, accountId: accountId, ban: ban)
-            self.removeContactRequest(withRingId: hash)
+           // self.removeContactRequest(withRingId: hash)
             observable.on(.completed)
             return Disposables.create { }
         }
     }
 
     private func removeContactRequest(withRingId ringId: String) {
-        guard let contactRequestToRemove = self.contactRequests.value.filter({ $0.ringId == ringId }).first else {
-            return
-        }
-        guard let index = self.contactRequests.value.firstIndex(where: { $0 === contactRequestToRemove }) else {
-            return
-        }
-        var values = self.contactRequests.value
-        values.remove(at: index)
-        self.contactRequests.accept(values)
+//        guard let contactRequestToRemove = self.contactRequests.value.filter({ $0.ringId == ringId }).first else {
+//            return
+//        }
+//        guard let index = self.contactRequests.value.firstIndex(where: { $0 === contactRequestToRemove }) else {
+//            return
+//        }
+//        var values = self.contactRequests.value
+//        values.remove(at: index)
+//        self.contactRequests.accept(values)
     }
 
     func unbanContact(contact: ContactModel, account: AccountModel) {
@@ -308,47 +217,47 @@ extension ContactsService: ContactsAdapterDelegate {
 
     func incomingTrustRequestReceived(from senderAccount: String, to accountId: String, withPayload payload: Data, receivedDate: Date) {
 
-        var vCard: CNContact?
-        if let contactVCard = CNContactVCardSerialization.parseToVCard(data: payload) {
-            vCard = contactVCard
-        }
-        // check if contact exists
-        let validContact = self.contacts.value.filter { contact in
-            contact.hash == senderAccount && !contact.banned
-        }.first
-        if validContact != nil {
-            return
-        }
-        // Update trust request list
-        if self.contactRequest(withRingId: senderAccount) == nil {
-            let contactRequest = ContactRequestModel(withRingId: senderAccount,
-                                                     vCard: vCard,
-                                                     receivedDate: receivedDate,
-                                                     accountId: accountId)
-            var values = self.contactRequests.value
-            values.append(contactRequest)
-            self.contactRequests.accept(values)
-            var event = ServiceEvent(withEventType: .contactRequestReceived)
-            event.addEventInput(.accountId, value: accountId)
-            event.addEventInput(.uri, value: senderAccount)
-            event.addEventInput(.date, value: receivedDate)
-            self.responseStream.onNext(event)
-        } else {
-            // If the contact request already exists, update it's relevant data
-            if let contactRequest = self.contactRequest(withRingId: senderAccount) {
-                contactRequest.vCard = vCard
-                contactRequest.receivedDate = receivedDate
-            }
-            log.debug("Incoming trust request received from :\(senderAccount)")
-        }
+//        var vCard: CNContact?
+//        if let contactVCard = CNContactVCardSerialization.parseToVCard(data: payload) {
+//            vCard = contactVCard
+//        }
+//        // check if contact exists
+//        let validContact = self.contacts.value.filter { contact in
+//            contact.hash == senderAccount && !contact.banned
+//        }.first
+//        if validContact != nil {
+//            return
+//        }
+//        // Update trust request list
+//        if self.contactRequest(withRingId: senderAccount) == nil {
+//            let contactRequest = ContactRequestModel(withRingId: senderAccount,
+//                                                     vCard: vCard,
+//                                                     receivedDate: receivedDate,
+//                                                     accountId: accountId)
+//            var values = self.contactRequests.value
+//            values.append(contactRequest)
+//            self.contactRequests.accept(values)
+////            var event = ServiceEvent(withEventType: .contactRequestReceived)
+////            event.addEventInput(.accountId, value: accountId)
+////            event.addEventInput(.uri, value: senderAccount)
+////            event.addEventInput(.date, value: receivedDate)
+////            self.responseStream.onNext(event)
+//        } else {
+//            // If the contact request already exists, update it's relevant data
+//            if let contactRequest = self.contactRequest(withRingId: senderAccount) {
+//                contactRequest.vCard = vCard
+//                contactRequest.receivedDate = receivedDate
+//            }
+//            log.debug("Incoming trust request received from :\(senderAccount)")
+//        }
 
     }
 
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool) {
         // Update trust request list
-        if let hash = JamiURI.init(schema: URIType.ring, infoHach: uri).hash {
-            self.removeContactRequest(withRingId: hash)
-        }
+//        if let hash = JamiURI.init(schema: URIType.ring, infoHach: uri).hash {
+//            self.removeContactRequest(withRingId: hash)
+//        }
         // update contact status
         if let contact = self.contact(withUri: uri) {
             self.contactStatus.onNext(contact)
@@ -389,20 +298,20 @@ extension ContactsService: ContactsAdapterDelegate {
         log.debug("Contact removed :\(uri)")
     }
 
-    func getContactRequestVCard(forContactWithRingId ringID: String) -> Single<CNContact> {
-        return Single.create(subscribe: { single in
-            if let contactRequest = self.contactRequest(withRingId: ringID) {
-                if let vCard = contactRequest.vCard {
-                    single(.success(vCard))
-                } else {
-                    single(.failure(ContactServiceError.loadVCardFailed))
-                }
-            } else {
-                single(.failure(ContactServiceError.loadVCardFailed))
-            }
-            return Disposables.create { }
-        })
-    }
+//    func getContactRequestVCard(forContactWithRingId ringID: String) -> Single<CNContact> {
+//        return Single.create(subscribe: { single in
+//            if let contactRequest = self.contactRequest(withRingId: ringID) {
+//                if let vCard = contactRequest.vCard {
+//                    single(.success(vCard))
+//                } else {
+//                    single(.failure(ContactServiceError.loadVCardFailed))
+//                }
+//            } else {
+//                single(.failure(ContactServiceError.loadVCardFailed))
+//            }
+//            return Disposables.create { }
+//        })
+//    }
 
     func getProfileForUri(uri: String, accountId: String) -> Observable<Profile> {
         return self.dbManager.profileObservable(for: uri, createIfNotExists: false, accountId: accountId)
@@ -431,10 +340,10 @@ extension ContactsService: ContactsAdapterDelegate {
                 self.contactsAdapter.removeContact(withURI: contact.hash, accountId: accountId, ban: false)
             }
             self.contacts.accept([])
-            self.contactRequests.value.forEach { (request) in
-                self.contactsAdapter.discardTrustRequest(fromContact: request.ringId, withAccountId: accountId)
-            }
-            self.contactRequests.accept([])
+//            self.contactRequests.value.forEach { (request) in
+//                self.contactsAdapter.discardTrustRequest(fromContact: request.ringId, withAccountId: accountId)
+//            }
+//            self.contactRequests.accept([])
             self.dbManager
                 .clearAllHistoryFor(accountId: accountId)
                 .subscribe()

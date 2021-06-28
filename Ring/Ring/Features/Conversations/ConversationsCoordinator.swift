@@ -166,8 +166,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
                 }
                 self.popToSmartList()
-                if let model = self.getConversationViewModel(participantUri: call.paricipantHash()) { self.showConversation(withConversationViewModel: model)
-                }
+//                if let model = self.getConversationViewModel(participantUri: call.paricipantHash()) { self.showConversation(withConversationViewModel: model)
+//                }
                 self.present(viewController: callViewController,
                              withStyle: .appear,
                              withAnimation: false,
@@ -222,9 +222,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func replaceCurrentWithConversationFor(participantUri: String) {
-        guard let model = getConversationViewModel(participantUri: participantUri) else { return }
-        self.popToSmartList()
-        self.showConversation(withConversationViewModel: model)
+//        guard let model = getConversationViewModel(participantUri: participantUri) else { return }
+//        self.popToSmartList()
+//        self.showConversation(withConversationViewModel: model)
     }
 
     func popToSmartList() {
@@ -232,22 +232,22 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func pushConversation(participantId: String) {
-        guard let account = accountService.currentAccount else {
-            return
-        }
-        guard let uriString = JamiURI(schema: URIType.ring, infoHach: participantId).uriString else {
-            return
-        }
-        if let model = getConversationViewModel(participantUri: uriString) {
-            self.pushConversation(withConversationViewModel: model)
-            return
-        }
-        guard let conversation = self.conversationService.findConversation(withUri: uriString, withAccountId: account.id) else {
-            return
-        }
-        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-        conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
-        self.pushConversation(withConversationViewModel: conversationViewModel)
+//        guard let account = accountService.currentAccount else {
+//            return
+//        }
+//        guard let uriString = JamiURI(schema: URIType.ring, infoHach: participantId).uriString else {
+//            return
+//        }
+//        if let model = getConversationViewModel(participantUri: uriString) {
+//            self.pushConversation(withConversationViewModel: model)
+//            return
+//        }
+//        guard let conversation = self.conversationService.findConversation(withUri: uriString, withAccountId: account.id) else {
+//            return
+//        }
+//        let conversationViewModel = ConversationViewModel(with: self.injectionBag)
+//        conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+//        self.pushConversation(withConversationViewModel: conversationViewModel)
     }
 
     func start() {
@@ -274,17 +274,17 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         navigationViewController = controller
     }
 
-    func getConversationViewModel(participantUri: String) -> ConversationViewModel? {
-        let viewControllers = self.navigationViewController.children
-        for controller in viewControllers {
-            if let smartController = controller as? SmartlistViewController {
-                for model in smartController.viewModel.conversationViewModels where model.conversation.value.participantUri == participantUri {
-                    return model
-                }
-            }
-        }
-        return nil
-    }
+//    func getConversationViewModel(participantUri: String) -> ConversationViewModel? {
+//        let viewControllers = self.navigationViewController.children
+//        for controller in viewControllers {
+//            if let smartController = controller as? SmartlistViewController {
+//                for model in smartController.viewModel.conversationViewModels where model.conversation.value.participantUri == participantUri {
+//                    return model
+//                }
+//            }
+//        }
+//        return nil
+//    }
 
     func addLockFlags() {
         presentingVC[VCType.contact.rawValue] = false
