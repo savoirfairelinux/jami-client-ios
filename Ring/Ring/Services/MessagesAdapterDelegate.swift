@@ -24,8 +24,11 @@
                            from senderAccount: String,
                            messageId: String,
                            to receiverAccountId: String)
-
-    func messageStatusChanged(_ status: MessageStatus, for messageId: UInt64, from accountId: String,
-                              to uri: String)
+    func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
+                              to jamiId: String, in conversationId: String)
     func detectingMessageTyping(_ from: String, for accountId: String, status: Int)
+    func conversationLoaded(conversationId: String, accountId: String, messages: [Any])
+    func newInteraction(conversationId: String, accountId: String, message: [String: String])
+    func conversationReady(conversationId: String, accountId: String)
+    func conversationRemoved(conversationId: String, accountId: String)
 }
