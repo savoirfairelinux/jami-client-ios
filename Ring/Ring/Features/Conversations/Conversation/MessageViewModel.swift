@@ -56,7 +56,10 @@ class MessageViewModel {
     private let accountService: AccountsService
     private let conversationsService: ConversationsService
     private let dataTransferService: DataTransferService
+    private let profileService: ProfilesService
     var message: MessageModel
+
+    var profileImageData = BehaviorRelay<Data?>(value: nil)
 
     var shouldShowTimeString: Bool = false
     lazy var timeStringShown: String = { [weak self] in
@@ -67,8 +70,8 @@ class MessageViewModel {
     var sequencing: MessageSequencing = .unknown
     var isComposingIndicator: Bool = false
 
-    var isLocationSharingBubble: Bool { return self.message.isLocationSharing }
-    var isText: Bool { return !self.message.isLocationSharing && !self.message.isGenerated && !self.message.isTransfer }
+    var isLocationSharingBubble: Bool { return self.message.type == .location }
+    var isText: Bool { return self.message.type == .text }
 
     private let disposeBag = DisposeBag()
     let injectBug: InjectionBag
@@ -78,11 +81,13 @@ class MessageViewModel {
         self.accountService = injectionBag.accountService
         self.conversationsService = injectionBag.conversationsService
         self.dataTransferService = injectionBag.dataTransferService
+        self.profileService = injectionBag.profileService
         self.injectBug = injectionBag
         self.message = message
         self.initialTransferStatus = message.transferStatus
         self.status.onNext(message.status)
         self.displayReadIndicator.accept(isLastDisplayed)
+        self.subscribeProfileServiceContactPhoto()
 
         if isTransfer {
             if let transferId = daemonId,
@@ -140,16 +145,30 @@ class MessageViewModel {
                     return event && message
                 })
                 .subscribe(onNext: { [weak self] messageUpdateEvent in
-                    if let oldMessage: Int64 = messageUpdateEvent.getEventInput(.oldDisplayedMessage),
+                    if let oldMessage: String = messageUpdateEvent.getEventInput(.oldDisplayedMessage),
                         oldMessage == self?.message.messageId {
                         self?.displayReadIndicator.accept(false)
-                    } else if let newMessage: Int64 = messageUpdateEvent.getEventInput(.newDisplayedMessage),
+                    } else if let newMessage: String = messageUpdateEvent.getEventInput(.newDisplayedMessage),
                         newMessage == self?.message.messageId {
                         self?.displayReadIndicator.accept(true)
                     }
                 })
                 .disposed(by: self.disposeBag)
         }
+    }
+
+    private func subscribeProfileServiceContactPhoto() {
+        self.profileService
+            .getProfile(uri: self.message.authorURI,
+                        createIfNotexists: false,
+                        accountId: "")
+            .subscribe(onNext: { [weak self] profile in
+                if let photo = profile.photo,
+                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    self?.profileImageData.accept(data)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     var content: String {
@@ -164,12 +183,12 @@ class MessageViewModel {
         return UInt64(self.message.daemonId)
     }
 
-    var messageId: Int64 {
+    var messageId: String {
         return self.message.messageId
     }
 
     var isTransfer: Bool {
-        return self.message.isTransfer
+        return self.message.type == .fileTransfer
     }
 
     var shouldDisplayTransferedImage: Bool {
@@ -197,7 +216,7 @@ class MessageViewModel {
     var initialTransferStatus: DataTransferStatus
 
     func bubblePosition() -> BubblePosition {
-        if self.message.isGenerated {
+        if self.message.type == .call || self.message.type == .contact {
             return .generated
         }
         if self.message.incoming {

@@ -243,7 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.contactsService.loadContactRequests(withAccount: account.id)
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
         self.conversationManager?
-            .prepareConversationsForAccount(accountId: account.id)
+            .prepareConversationsForAccount(accountId: account.id, accountURI: account.jamiId)
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

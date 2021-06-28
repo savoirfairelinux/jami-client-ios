@@ -152,17 +152,6 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         return self.conversationsForCurrentAccount.share()
             .map({ (conversations) in
                 return conversations
-                    .sorted(by: { conversation1, conversations2 in
-                        guard let lastMessage1 = conversation1.messages.last,
-                            let lastMessage2 = conversations2.messages.last else {
-                                return conversation1.messages.count > conversations2.messages.count
-                        }
-                        return lastMessage1.receivedDate > lastMessage2.receivedDate
-                    })
-                    .filter({ self.contactsService.contact(withUri: $0.participantUri) != nil
-                        || (!$0.messages.isEmpty &&
-                            (self.contactsService.contactRequest(withRingId: $0.hash) == nil))
-                    })
                     .compactMap({ conversationModel in
 
                         var conversationViewModel: ConversationViewModel?
@@ -198,7 +187,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             .map { conversations -> Int in
                 var result = 0
                 for conversation in conversations {
-                    result += conversation.messages.filter({ $0.status != .displayed && !$0.isTransfer && $0.incoming }).count
+                    result += conversation.messages.value.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
                 }
                 return result
             }
@@ -294,26 +283,26 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     func delete(conversationViewModel: ConversationViewModel) {
 
-        if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
-            cvm.conversation.value == conversationViewModel.conversation.value
-        })) {
-            conversationViewModel.closeAllPlayers()
-            let contactUri = conversationViewModel.conversation.value.participantUri
-            let accountId = conversationViewModel.conversation.value.accountId
-            self.contactsService
-                .removeContact(withUri: contactUri,
-                               ban: false,
-                               withAccountId: accountId)
-                .asObservable()
-                .subscribe(onCompleted: { [weak self, weak conversationViewModel] in
-                    guard let conversationViewModel = conversationViewModel else { return }
-                    self?.conversationsService
-                        .clearHistory(conversation: conversationViewModel.conversation.value,
-                                      keepConversation: false)
-                    self?.conversationViewModels.remove(at: index)
-                })
-                .disposed(by: self.disposeBag)
-        }
+//        if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
+//            cvm.conversation.value == conversationViewModel.conversation.value
+//        })) {
+//            conversationViewModel.closeAllPlayers()
+//            let contactUri = conversationViewModel.conversation.value.participantUri
+//            let accountId = conversationViewModel.conversation.value.accountId
+//            self.contactsService
+//                .removeContact(withUri: contactUri,
+//                               ban: false,
+//                               withAccountId: accountId)
+//                .asObservable()
+//                .subscribe(onCompleted: { [weak self, weak conversationViewModel] in
+//                    guard let conversationViewModel = conversationViewModel else { return }
+//                    self?.conversationsService
+//                        .clearHistory(conversation: conversationViewModel.conversation.value,
+//                                      keepConversation: false)
+//                    self?.conversationViewModels.remove(at: index)
+//                })
+//                .disposed(by: self.disposeBag)
+//        }
     }
 
     func clear(conversationViewModel: ConversationViewModel) {
@@ -331,24 +320,24 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     func blockConversationsContact(conversationViewModel: ConversationViewModel) {
-        if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
-            cvm.conversation.value == conversationViewModel.conversation.value
-        })) {
-            conversationViewModel.closeAllPlayers()
-            let contactUri = conversationViewModel.conversation.value.participantUri
-            let accountId = conversationViewModel.conversation.value.accountId
-            let removeCompleted = self.contactsService.removeContact(withUri: contactUri,
-                                                                     ban: true,
-                                                                     withAccountId: accountId)
-            removeCompleted.asObservable()
-                .subscribe(onCompleted: { [weak self] in
-                    self?.conversationsService
-                        .clearHistory(conversation: conversationViewModel.conversation.value,
-                                      keepConversation: false)
-                    self?.conversationViewModels.remove(at: index)
-                })
-                .disposed(by: self.disposeBag)
-        }
+//        if let index = self.conversationViewModels.firstIndex(where: ({ cvm in
+//            cvm.conversation.value == conversationViewModel.conversation.value
+//        })) {
+//            conversationViewModel.closeAllPlayers()
+//            let contactUri = conversationViewModel.conversation.value.participantUri
+//            let accountId = conversationViewModel.conversation.value.accountId
+//            let removeCompleted = self.contactsService.removeContact(withUri: contactUri,
+//                                                                     ban: true,
+//                                                                     withAccountId: accountId)
+//            removeCompleted.asObservable()
+//                .subscribe(onCompleted: { [weak self] in
+//                    self?.conversationsService
+//                        .clearHistory(conversation: conversationViewModel.conversation.value,
+//                                      keepConversation: false)
+//                    self?.conversationViewModels.remove(at: index)
+//                })
+//                .disposed(by: self.disposeBag)
+//        }
     }
 
     /// For FilterConversationDataSource protocol

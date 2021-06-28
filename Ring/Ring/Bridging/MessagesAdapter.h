@@ -46,5 +46,19 @@ typedef NS_ENUM(int, MessageStatus)  {
                       byAccount:(NSString*)accountID
                       messageId:(NSString*)messageId
                          status:(MessageStatus)status;
+- (NSArray*)getSwarmConversationsForAccount:(NSString*) accountId;
 
+- (NSArray*)getSwarmRequestsForAccount:(NSString*) accountId;
+
+- (NSMutableDictionary*)getConversationInfoForAccount:(NSString*) accountId conversationId:(NSString*) conversationId;
+
+- (NSArray*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId ;
+
+- (void)acceptConversationRequest:(NSString*) accountId conversationId:(NSString*) conversationId;
+- (void)declineConversationRequest:(NSString*) accountId conversationId:(NSString*) conversationId;
+
+- (void)removeConversation:(NSString*) accountId conversationId:(NSString*) conversationId;
+
+- (NSString*)startConversation:(NSString*) accountId;
+- (uint32_t)loadConversationMessages:(NSString*) accountId conversationId:(NSString*) conversationId from:(NSString*)fromMessage size:(NSInteger)size;
 @end

@@ -337,6 +337,24 @@ internal enum L10n {
     internal static let explanationSendingLocationTo = L10n.tr("Localizable", "conversation.explanationSendingLocationTo")
     /// Write message to 
     internal static let messagePlaceholder = L10n.tr("Localizable", "conversation.messagePlaceholder")
+    /// %s is not in your contact list.
+    internal static func notContact(_ p1: UnsafePointer<CChar>) -> String {
+      return L10n.tr("Localizable", "conversation.notContact", p1)
+    }
+    /// %s sent you a request for a conversation.
+    internal static func receivedRequest(_ p1: UnsafePointer<CChar>) -> String {
+      return L10n.tr("Localizable", "conversation.receivedRequest", p1)
+    }
+    /// Hello,/nWould you like to join the conversation?
+    internal static let requestMessage = L10n.tr("Localizable", "conversation.requestMessage")
+    /// Send him/her a contact request to be able to exchange together
+    internal static let sendRequest = L10n.tr("Localizable", "conversation.sendRequest")
+    /// We are waiting for %s connects to synchronize the conversation.
+    internal static func synchronizationMessage(_ p1: UnsafePointer<CChar>) -> String {
+      return L10n.tr("Localizable", "conversation.synchronizationMessage", p1)
+    }
+    /// You have accepted the conversation request.
+    internal static let synchronizationTitle = L10n.tr("Localizable", "conversation.synchronizationTitle")
   }
 
   internal enum CreateAccount {

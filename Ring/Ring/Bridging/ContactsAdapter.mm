@@ -42,27 +42,29 @@ static id <ContactsAdapterDelegate> _delegate;
 
 #pragma mark Callbacks registration
 - (void)registerConfigurationHandler {
-
+    
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
-
+    
     //Incoming trust request signal
-    confHandlers.insert(exportable_callback<ConfigurationSignal::IncomingTrustRequest>([&](const std::string& account_id,
-                                                                                           const std::string& from,
-                                                                                           const std::vector<uint8_t>& payload,
-                                                                                           time_t received) {
+    confHandlers
+    .insert(exportable_callback<ConfigurationSignal::IncomingTrustRequest>([&](const std::string& account_id,
+                                                                               const std::string& from,
+                                                                               const std::string& conversationId,
+                                                                               const std::vector<uint8_t>& payload,
+                                                                               time_t received) {
         if(ContactsAdapter.delegate) {
             NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
             NSString* senderAccount = [NSString stringWithUTF8String:from.c_str()];
             NSData* payloadData = [Utils dataFromVectorOfUInt8:payload];
             NSDate* receivedDate = [NSDate dateWithTimeIntervalSince1970:received];
-
+            
             [ContactsAdapter.delegate incomingTrustRequestReceivedFrom:senderAccount
                                                                     to:accountId
                                                            withPayload:payloadData
                                                           receivedDate:receivedDate];
         }
     }));
-
+    
     //Contact added signal
     confHandlers.insert(exportable_callback<ConfigurationSignal::ContactAdded>([&](const std::string& account_id,
                                                                                    const std::string& uri,
@@ -73,7 +75,7 @@ static id <ContactsAdapterDelegate> _delegate;
             [ContactsAdapter.delegate contactAddedWithContact:uriString withAccountId:accountId confirmed:(BOOL)confirmed];
         }
     }));
-
+    
     //Contact removed signal
     confHandlers.insert(exportable_callback<ConfigurationSignal::ContactRemoved>([&](const std::string& account_id,
                                                                                      const std::string& uri,
@@ -84,7 +86,7 @@ static id <ContactsAdapterDelegate> _delegate;
             [ContactsAdapter.delegate contactRemovedWithContact:uriString withAccountId:accountId banned:(BOOL)banned];
         }
     }));
-
+    
     registerSignalHandlers(confHandlers);
 }
 

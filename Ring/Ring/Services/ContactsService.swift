@@ -56,7 +56,7 @@ class ContactsService {
     }
 
     func contact(withUri uri: String) -> ContactModel? {
-        guard let contact = self.contacts.value.filter({ $0.uriString == uri }).first else {
+        guard let contact = self.contacts.value.filter({ $0.hash == uri }).first else {
             return nil
         }
         return contact
@@ -212,12 +212,12 @@ class ContactsService {
         }
     }
 
-    func sendContactRequest(toContactRingId ringId: String, withAccount account: AccountModel) -> Completable {
+    func sendContactRequest(toContactRingId ringId: String, withAccount accountId: String) -> Completable {
         return Completable.create { [weak self] completable in
             guard let self = self else { return Disposables.create { } }
             do {
                 var payload: Data?
-                if let accountProfile = self.dbManager.accountProfile(for: account.id) {
+                if let accountProfile = self.dbManager.accountProfile(for: accountId) {
                     let vCard = CNMutableContact()
                     var cardChanged = false
                     if let name = accountProfile.alias {
@@ -233,11 +233,11 @@ class ContactsService {
                         payload = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000, encoding: .utf8)
                     }
                 }
-                self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: account.id)
-                var event = ServiceEvent(withEventType: .contactAdded)
-                event.addEventInput(.accountId, value: account.id)
-                event.addEventInput(.uri, value: ringId)
-                self.responseStream.onNext(event)
+                self.contactsAdapter.sendTrustRequest(toContact: ringId, payload: payload, withAccountId: accountId)
+//                var event = ServiceEvent(withEventType: .contactAdded)
+//                event.addEventInput(.accountId, value: accountId)
+//                event.addEventInput(.uri, value: ringId)
+//                self.responseStream.onNext(event)
                 completable(.completed)
             } catch {
                 completable(.error(ContactServiceError.vCardSerializationFailed))
@@ -328,11 +328,11 @@ extension ContactsService: ContactsAdapterDelegate {
             var values = self.contactRequests.value
             values.append(contactRequest)
             self.contactRequests.accept(values)
-            var event = ServiceEvent(withEventType: .contactRequestReceived)
-            event.addEventInput(.accountId, value: accountId)
-            event.addEventInput(.uri, value: senderAccount)
-            event.addEventInput(.date, value: receivedDate)
-            self.responseStream.onNext(event)
+//            var event = ServiceEvent(withEventType: .contactRequestReceived)
+//            event.addEventInput(.accountId, value: accountId)
+//            event.addEventInput(.uri, value: senderAccount)
+//            event.addEventInput(.date, value: receivedDate)
+//            self.responseStream.onNext(event)
         } else {
             // If the contact request already exists, update it's relevant data
             if let contactRequest = self.contactRequest(withRingId: senderAccount) {

@@ -25,6 +25,24 @@ import SwiftyBeaver
 
 // swiftlint:disable type_body_length
 class ConversationsManager: MessagesAdapterDelegate {
+    func conversationRequestReceived(conversationId: String, accountId: String, metadata: [String: String]) {
+        self.conversationService.conversationRequestReceived(conversationId: conversationId, accountId: accountId, metadata: metadata)
+    }
+
+    func conversationReady(conversationId: String, accountId: String) {
+        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+        self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
+    }
+
+    func conversationLoaded(conversationId: String, accountId: String, messages: [Any]) {
+        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+        self.conversationService.conversationLoaded(conversationId: conversationId, accountId: accountId, messages: messages, accountURI: account.jamiId)
+    }
+
+    func newInteraction(conversationId: String, accountId: String, message: [String: String]) {
+        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+        self.conversationService.newInteraction(conversationId: conversationId, accountId: accountId, message: message, accountURI: account.jamiId)
+    }
 
     let log = SwiftyBeaver.self
 
@@ -243,9 +261,9 @@ class ConversationsManager: MessagesAdapterDelegate {
             .disposed(by: disposeBag)
     }
 
-    func prepareConversationsForAccount(accountId: String) {
+    func prepareConversationsForAccount(accountId: String, accountURI: String) {
       self.conversationService
-        .getConversationsForAccount(accountId: accountId)
+        .getConversationsForAccount(accountId: accountId, accountURI: accountURI)
         .subscribe()
         .disposed(by: self.disposeBag)
     }
