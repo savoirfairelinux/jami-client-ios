@@ -58,17 +58,12 @@ static id <MessagesAdapterDelegate> _delegate;
         }
     }));
 
-    confHandlers.insert(exportable_callback<ConfigurationSignal::AccountMessageStatusChanged>([&](const std::string& account_id, uint64_t message_id, const std::string& to, int state) {
+    confHandlers.insert(exportable_callback<ConfigurationSignal::AccountMessageStatusChanged>([&](const std::string& account_id, const std::string& conversation_id, const std::string& peer, const std::string message_id, int state) {
         if (MessagesAdapter.delegate) {
-            NSString* fromAccountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSString* toUri = [NSString stringWithUTF8String:to.c_str()];
-            [MessagesAdapter.delegate messageStatusChanged:(MessageStatus)state
-                                                       for:message_id from:fromAccountId
-                                                        to:toUri];
         }
     }));
 
-    confHandlers.insert(exportable_callback<ConfigurationSignal::ComposingStatusChanged>([&](const std::string& account_id, const std::string& from, int status) {
+    confHandlers.insert(exportable_callback<ConfigurationSignal::ComposingStatusChanged>([&](const std::string& account_id, const std::string& convId, const std::string& from, int status) {
         if (MessagesAdapter.delegate) {
             NSString* fromPeer =  [NSString stringWithUTF8String:from.c_str()];
             NSString* toAccount =  [NSString stringWithUTF8String:account_id.c_str()];
