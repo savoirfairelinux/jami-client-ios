@@ -72,14 +72,14 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
 
     var playerHeight = BehaviorRelay<CGFloat>(value: 0)
 
-    private(set) var messageId: Int64?
+    private(set) var messageId: String?
     private var isCopyable: Bool = false
     private var couldBeShared: Bool = false
     private var couldBeResend: Bool = false
     private var couldBeForward: Bool = false
     private var couldBeSaved: Bool = false
-    private let _deleteMessage = BehaviorRelay<Bool>(value: false)
-    var deleteMessage: Observable<Bool> { _deleteMessage.asObservable() }
+    // private let _deleteMessage = BehaviorRelay<Bool>(value: false)
+   // var deleteMessage: Observable<Bool> { _deleteMessage.asObservable() }
 
     var shareMessage = PublishSubject<Bool>()
     var forwardMessage = PublishSubject<Bool>()
@@ -142,7 +142,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         self.couldBeShared = false
         self.couldBeResend = false
         self.couldBeForward = false
-        self._deleteMessage.accept(false)
+       // self._deleteMessage.accept(false)
         if let longGestureRecognizer = longGestureRecognizer {
             self.bubble.removeGestureRecognizer(longGestureRecognizer)
             self.longGestureRecognizer = nil
@@ -194,9 +194,9 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
     @objc
     func updateProgressBar(timer: Timer) {
         guard let userInfoDict = timer.userInfo as? NSDictionary else { return }
-        guard let transferId = userInfoDict["transferId"] as? UInt64 else { return }
+        guard let transferId = userInfoDict["transferId"] as? String else { return }
         guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
-        if let progress = viewModel.getTransferProgress(transferId: transferId) {
+        if let progress = viewModel.getTransferProgress(transferId: transferId, accountId: viewModel.conversation.value.accountId) {
             DispatchQueue.main.async { [weak self] in
                 self?.progressBar.progress = progress
             }
@@ -206,9 +206,9 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
     @objc
     func updateOutgoigTransfer(timer: Timer) {
         guard let userInfoDict = timer.userInfo as? NSDictionary else { return }
-        guard let transferId = userInfoDict["transferId"] as? UInt64 else { return }
+        guard let transferId = userInfoDict["transferId"] as? String else { return }
         guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
-        if let progress = viewModel.getTransferProgress(transferId: transferId) {
+        if let progress = viewModel.getTransferProgress(transferId: transferId, accountId: viewModel.conversation.value.accountId) {
            DispatchQueue.main.async { [weak self] in
                 self?.transferProgressView.progress = CGFloat(progress * 100)
            }
@@ -265,7 +265,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         self.showTimeTap.accept(true)
     }
 
-    private func configureLongGesture(_ messageId: Int64, _ bubblePosition: BubblePosition, _ isTransfer: Bool, _ isLocationSharingBubble: Bool, isTransferSuccess: Bool, isError: Bool) {
+    private func configureLongGesture(_ messageId: String, _ bubblePosition: BubblePosition, _ isTransfer: Bool, _ isLocationSharingBubble: Bool, isTransferSuccess: Bool, isError: Bool) {
         self.messageId = messageId
         self.isCopyable = bubblePosition != .generated && !isTransfer && !isLocationSharingBubble
         self.couldBeShared = isTransfer && isTransferSuccess
@@ -319,7 +319,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
     }
 
     func deleteFile() {
-        _deleteMessage.accept(true)
+       // _deleteMessage.accept(true)
     }
 
     func shareFile() {
@@ -339,9 +339,9 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         UIMenuController.shared.setMenuVisible(false, animated: true)
     }
 
-    override func delete(_ sender: Any?) {
-        _deleteMessage.accept(true)
-    }
+//    override func delete(_ sender: Any?) {
+//        _deleteMessage.accept(true)
+//    }
 
     override var canBecomeFirstResponder: Bool {
         return true
@@ -601,7 +601,8 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         }
 
         if item.shouldDisplayTransferedImage {
-            self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.conversationId, accountId: conversationViewModel.conversation.value.accountId)
+            let isSwarm = conversationViewModel.conversation.value.isSwarm()
+            self.displayTransferedImage(message: item, conversationID: conversationViewModel.conversation.value.id, accountId: conversationViewModel.conversation.value.accountId, isSwarm: isSwarm)
         }
 
         if let player = item.getPlayer(conversationViewModel: conversationViewModel) {
@@ -726,13 +727,13 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
 
     // swiftlint:enable function_body_length
 
-    func displayTransferedImage(message: MessageViewModel, conversationID: String, accountId: String) {
+    func displayTransferedImage(message: MessageViewModel, conversationID: String, accountId: String, isSwarm: Bool) {
         let screenWidth = UIScreen.main.bounds.width
         let maxDimsion: CGFloat = getMaxDimensionForTransfer()
         let defaultSize = CGSize(width: maxDimsion, height: maxDimsion)
         if let image = message.getTransferedImage(maxSize: maxDimsion,
                                                   conversationID: conversationID,
-                                                  accountId: accountId) {
+                                                  accountId: accountId, isSwarm: isSwarm) {
             self.transferImageView.image = image
             let newSize = self.transferImageView.image?.getNewSize(of: defaultSize)
             let xOriginImageSend = screenWidth - 112 - (newSize?.width ?? 200)

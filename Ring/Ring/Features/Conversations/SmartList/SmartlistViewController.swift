@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
@@ -871,7 +871,7 @@ extension SmartlistViewController: UITableViewDelegate {
         }
         clear.backgroundColor = .magenta
 
-        return [clear, delete, block]
+        return [delete, block]
     }
 
     private func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
