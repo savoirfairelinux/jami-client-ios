@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
@@ -46,7 +46,7 @@ class ConversationViewController: UIViewController,
     let disposeBag = DisposeBag()
 
     var viewModel: ConversationViewModel!
-    var messageViewModels: [MessageViewModel]?
+    var messageViewModels = [MessageViewModel]()
     var textFieldShouldEndEditing = false
     private let messageGroupingInterval = 10 * 60 // 10 minutes
     var bottomHeight: CGFloat = 0.00
@@ -73,7 +73,6 @@ class ConversationViewController: UIViewController,
         self.setupUI()
         self.setupTableView()
         self.setupBindings()
-
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
          or disappears
@@ -154,7 +153,8 @@ class ConversationViewController: UIViewController,
         case .denied, .restricted :
             self.showNoPermissionsAlert(title: L10n.Alerts.noLibraryPermissionsTitle)
         case .notDetermined:
-            PHPhotoLibrary.requestAuthorization { status in
+            PHPhotoLibrary.requestAuthorization { [weak self] status in
+                guard let self = self else { return }
                 switch status {
                 case .authorized, .limited:
                     self.importImage()
@@ -253,7 +253,7 @@ class ConversationViewController: UIViewController,
         alert.addAction(recordVideoAction)
         alert.addAction(recordAudioAction)
         alert.addAction(documentsAction)
-        alert.addAction(locationSharingAction())
+       // alert.addAction(locationSharingAction())
         alert.addAction(cancelAction)
         alert.popoverPresentationController?.sourceView = self.view
         alert.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
@@ -514,7 +514,33 @@ class ConversationViewController: UIViewController,
     }
 
     func contactTapped() {
+        return
         self.viewModel.showContactInfo()
+    }
+
+    private func setRightNavigationButtons() {
+        let audioCallItem = UIBarButtonItem()
+        audioCallItem.image = UIImage(asset: Asset.callButton)
+        audioCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.placeAudioOnlyCall()
+            })
+            .disposed(by: self.disposeBag)
+
+        let videoCallItem = UIBarButtonItem()
+        videoCallItem.image = UIImage(asset: Asset.videoRunning)
+        videoCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.placeCall()
+            })
+            .disposed(by: self.disposeBag)
+
+        // Items are from right to left
+        if self.viewModel.isAccountSip {
+            self.navigationItem.rightBarButtonItem = audioCallItem
+        } else {
+            self.navigationItem.rightBarButtonItems = [videoCallItem, audioCallItem]
+        }
     }
 
    // swiftlint:disable function_body_length
@@ -559,58 +585,7 @@ class ConversationViewController: UIViewController,
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
 
-        // set navigation buttons - call and send contact request
-        let inviteItem = UIBarButtonItem()
-        inviteItem.image = UIImage(named: "add_person")
-        inviteItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.inviteItemTapped()
-            })
-            .disposed(by: self.disposeBag)
-
-        self.viewModel.inviteButtonIsAvailable.asObservable()
-            .bind(to: inviteItem.rx.isEnabled)
-            .disposed(by: disposeBag)
-
-        // call button
-        let audioCallItem = UIBarButtonItem()
-        audioCallItem.image = UIImage(asset: Asset.callButton)
-        audioCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.placeAudioOnlyCall()
-            })
-            .disposed(by: self.disposeBag)
-
-        let videoCallItem = UIBarButtonItem()
-        videoCallItem.image = UIImage(asset: Asset.videoRunning)
-        videoCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.placeCall()
-            })
-            .disposed(by: self.disposeBag)
-
-        // Items are from right to left
-        if self.viewModel.isAccountSip {
-            self.navigationItem.rightBarButtonItem = audioCallItem
-        } else {
-            self.navigationItem.rightBarButtonItems = [videoCallItem, audioCallItem, inviteItem]
-            self.viewModel.inviteButtonIsAvailable
-                .asObservable()
-                .map({ inviteButton in
-                    var buttons = [UIBarButtonItem]()
-                    buttons.append(videoCallItem)
-                    buttons.append(audioCallItem)
-                    if inviteButton {
-                        buttons.append(inviteItem)
-                    }
-                    return buttons
-                })
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { [weak self] buttons in
-                    self?.navigationItem.rightBarButtonItems = buttons
-                })
-                .disposed(by: self.disposeBag)
-        }
+        self.setRightNavigationButtons()
         self.viewModel.showCallButton
             .observe(on: MainScheduler.instance)
             .startWith(self.viewModel.haveCurrentCall())
@@ -648,10 +623,6 @@ class ConversationViewController: UIViewController,
             .disposed(by: self.disposeBag)
     }
 
-    func inviteItemTapped() {
-       self.viewModel?.sendContactRequest()
-    }
-
     func placeCall() {
         self.textFieldShouldEndEditing = true
         self.messageAccessoryView.messageTextView.resignFirstResponder()
@@ -682,6 +653,45 @@ class ConversationViewController: UIViewController,
         self.viewModel.setMessagesAsRead()
     }
 
+    func subscribeMessages() {
+        self.viewModel.conversation.value.messages.asObservable()
+            .observe(on: MainScheduler.instance)
+            .startWith(self.viewModel.conversation.value.messages.value)
+            .subscribe(onNext: { [weak self] messages in
+                guard let self = self else { return }
+                let oldNumber = self.messageViewModels.count
+                self.messageViewModels.removeAll()
+                for message in messages {
+                    let injBag = self.viewModel.injectionBag
+                    let lastDisplayed = self.viewModel.isLastDisplayed(messageId: message.messageId)
+                    self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: lastDisplayed))
+//                    if self.viewModel.peerComposingMessage {
+//                        let msgModel = MessageModel(withId: "",
+//                                                    receivedDate: Date(),
+//                                                    content: "       ",
+//                                                    authorURI: self.viewModel.conversation.value.participants[0].uri,
+//                                                    incoming: true)
+//                        let composingIndicator = MessageViewModel(withInjectionBag: injBag, withMessage: msgModel, isLastDisplayed: false)
+//                        composingIndicator.isComposingIndicator = true
+//                        self.messageViewModels.append(composingIndicator)
+//                    }
+                }
+                let newNumber = self.messageViewModels.count
+                self.computeSequencing()
+                if oldNumber == newNumber {
+                    return
+                }
+                if newNumber - oldNumber > 1 {
+                let range = NSRange(location: 0, length: self.tableView.numberOfSections)
+                let sections = NSIndexSet(indexesIn: range)
+                self.tableView.reloadSections(sections as IndexSet, with: .automatic)
+                } else {
+                    self.tableView.reloadData()
+                 }
+            })
+            .disposed(by: self.disposeBag)
+    }
+
     func setupTableView() {
         self.tableView.dataSource = self
 
@@ -697,16 +707,15 @@ class ConversationViewController: UIViewController,
         self.tableView.register(cellType: MessageCellGenerated.self)
         self.tableView.register(cellType: MessageCellLocationSharingSent.self)
         self.tableView.register(cellType: MessageCellLocationSharingReceived.self)
-
-        // Bind the TableView to the ViewModel
-        self.viewModel.messages.asObservable()
+        self.subscribeMessages()
+        self.viewModel.conversation
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (messageViewModels) in
-                self?.messageViewModels = messageViewModels
-                self?.computeSequencing()
-                self?.tableView.reloadData()
-            })
-            .disposed(by: self.disposeBag)
+            .subscribe { [weak self] _ in
+            self?.subscribeMessages()
+        } onError: { _ in
+
+            }
+        .disposed(by: self.disposeBag)
 
         // Scroll to bottom when reloaded
         self.tableView.rx.methodInvoked(#selector(UITableView.reloadData))
@@ -798,6 +807,22 @@ class ConversationViewController: UIViewController,
                 self?.messageAccessoryView.editingChanges()
             })
             .disposed(by: self.disposeBag)
+        self.viewModel.showInvitation
+            .observe(on: MainScheduler.instance)
+            .startWith(self.viewModel.showInvitation.value)
+            .subscribe { [weak self] show in
+                guard let self = self else { return }
+                if show {
+                    self.messageAccessoryView.isHidden = true
+                    self.navigationItem.rightBarButtonItems = []
+                    self.viewModel.openInvitationView(parentView: self)
+                } else {
+                    self.messageAccessoryView.isHidden = false
+                    self.setRightNavigationButtons()
+                }
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
     }
 
     // Avoid the keyboard to be hidden when the Send button is touched
@@ -808,7 +833,7 @@ class ConversationViewController: UIViewController,
     // MARK: - message formatting
     private func computeSequencing() {
         var lastMessageTime: Date?
-        for (index, messageViewModel) in self.messageViewModels!.enumerated() {
+        for (index, messageViewModel) in self.messageViewModels.enumerated() {
             // time labels
             let currentMessageTime = messageViewModel.receivedDate
             if index == 0 || messageViewModel.bubblePosition() == .generated || messageViewModel.isTransfer {
@@ -830,31 +855,30 @@ class ConversationViewController: UIViewController,
     }
 
     private func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
-        if let models = self.messageViewModels {
-            let messageItem = models[index]
+            let messageItem = self.messageViewModels[index]
             let msgOwner = messageItem.bubblePosition()
-            if models.count == 1 || index == 0 {
-                if models.count == index + 1 {
+            if self.messageViewModels.count == 1 || index == 0 {
+                if self.messageViewModels.count == index + 1 {
                     return MessageSequencing.singleMessage
                 }
-                let nextMessageItem = index + 1 <= models.count
-                    ? models[index + 1] : nil
+                let nextMessageItem = index + 1 <= self.messageViewModels.count
+                    ? self.messageViewModels[index + 1] : nil
                 if nextMessageItem != nil {
                     return msgOwner != nextMessageItem?.bubblePosition()
                         ? MessageSequencing.singleMessage : MessageSequencing.firstOfSequence
                 }
-            } else if models.count == index + 1 {
-                let lastMessageItem = index - 1 >= 0 && index - 1 < models.count
-                    ? models[index - 1] : nil
+            } else if self.messageViewModels.count == index + 1 {
+                let lastMessageItem = index - 1 >= 0 && index - 1 < self.messageViewModels.count
+                    ? self.messageViewModels[index - 1] : nil
                 if lastMessageItem != nil {
                     return msgOwner != lastMessageItem?.bubblePosition()
                         ? MessageSequencing.singleMessage : MessageSequencing.lastOfSequence
                 }
             }
-            let lastMessageItem = index - 1 >= 0 && index - 1 < models.count
-                ? models[index - 1] : nil
-            let nextMessageItem = index + 1 <= models.count
-                ? models[index + 1] : nil
+            let lastMessageItem = index - 1 >= 0 && index - 1 < self.messageViewModels.count
+                ? self.messageViewModels[index - 1] : nil
+            let nextMessageItem = index + 1 <= self.messageViewModels.count
+                ? self.messageViewModels[index + 1] : nil
             var sequencing = MessageSequencing.singleMessage
             if (lastMessageItem != nil) && (nextMessageItem != nil) {
                 if msgOwner != lastMessageItem?.bubblePosition() && msgOwner == nextMessageItem?.bubblePosition() {
@@ -866,8 +890,6 @@ class ConversationViewController: UIViewController,
                 }
             }
             return sequencing
-        }
-        return MessageSequencing.unknown
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -919,8 +941,8 @@ class ConversationViewController: UIViewController,
             cell.statusLabel.text = L10n.DataTransfer.readableStatusOngoing
             cell.statusLabel.textColor = UIColor.darkGray
             // start update progress timer process bar here
-            guard let transferId = item.daemonId else { return }
-            let progress = viewModel.getTransferProgress(transferId: transferId) ?? 0.0
+            let transferId = item.message.messageId
+            let progress = viewModel.getTransferProgress(transferId: transferId, accountId: viewModel.conversation.value.accountId) ?? 0.0
             cell.progressBar.progress = progress
             cell.progressBar.isHidden = false
             cell.startProgressMonitor(item, viewModel)
@@ -969,7 +991,7 @@ class ConversationViewController: UIViewController,
     // MARK: open file
 
     func openDocument(messageModel: MessageViewModel) {
-        let conversation = self.viewModel.conversation.value.conversationId
+        let conversation = self.viewModel.conversation.value.id
         let accountId = self.viewModel.conversation.value.accountId
         guard let url = messageModel.transferedFile(conversationID: conversation, accountId: accountId),
               FileManager().fileExists(atPath: url.path) else { return }
@@ -987,7 +1009,7 @@ class ConversationViewController: UIViewController,
 
     // MARK: open share menu
     func showShareMenu(messageModel: MessageViewModel) {
-        let conversation = self.viewModel.conversation.value.conversationId
+        let conversation = self.viewModel.conversation.value.id
         let accountId = self.viewModel.conversation.value.accountId
         if let file = messageModel.transferedFile(conversationID: conversation, accountId: accountId) {
             self.presentActivityControllerWithItems(items: [file])
@@ -1007,7 +1029,7 @@ class ConversationViewController: UIViewController,
     }
 
     func shareImage(messageModel: MessageViewModel) {
-        let conversationId = self.viewModel.conversation.value.conversationId
+        let conversationId = self.viewModel.conversation.value.id
         let accountId = self.viewModel.conversation.value.accountId
         if let image = messageModel.getTransferedImage(maxSize: 250,
                                                        conversationID: conversationId,
@@ -1053,15 +1075,16 @@ class ConversationViewController: UIViewController,
 // MARK: TableDataSource
 extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.messageViewModels?.count ?? 0
+        return self.messageViewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let item = self.messageViewModels?[indexPath.row] {
+        self.viewModel.itemLoadedForIndexPath(indexPath: indexPath)
+        let item = self.messageViewModels[indexPath.row]
 
             if item.message.incoming &&
                 item.message.status != .displayed &&
-                !item.message.isTransfer {
+                item.message.type == .text {
                 self.viewModel.setMessageAsRead(daemonId: item.message.daemonId,
                                                 messageId: item.message.messageId)
             }
@@ -1093,32 +1116,30 @@ extension ConversationViewController: UITableViewDataSource {
 
             self.transferCellSetup(item, cell, tableView, indexPath)
             self.locationCellSetup(item, cell)
-            self.deleteCellSetup(cell)
+           // self.deleteCellSetup(cell)
             self.messageCellActionsSetUp(cell, item: item)
             self.tapToShowTimeCellSetup(cell)
 
             return cell
-        }
-        return tableView.dequeueReusableCell(for: indexPath, cellType: MessageCellSent.self)
     }
 
-    private func deleteCellSetup(_ cell: MessageCell) {
-        cell.deleteMessage
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak cell] (shouldDelete) in
-                guard shouldDelete, let self = self, let cell = cell, let messageId = cell.messageId else { return }
-
-                if cell as? MessageCellLocationSharing != nil {
-                    self.tableView.isScrollEnabled = true
-                    if cell as? MessageCellLocationSharingSent != nil {
-                        self.viewModel.stopSendingLocation()
-                    }
-                }
-                self.isExecutingDeleteMessage = true
-                self.viewModel.deleteMessage(messageId: messageId)
-            })
-            .disposed(by: cell.disposeBag)
-    }
+//    private func deleteCellSetup(_ cell: MessageCell) {
+//        cell.deleteMessage
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self, weak cell] (shouldDelete) in
+//                guard shouldDelete, let self = self, let cell = cell, let messageId = cell.messageId else { return }
+//
+//                if cell as? MessageCellLocationSharing != nil {
+//                    self.tableView.isScrollEnabled = true
+//                    if cell as? MessageCellLocationSharingSent != nil {
+//                        self.viewModel.stopSendingLocation()
+//                    }
+//                }
+//                self.isExecutingDeleteMessage = true
+//                self.viewModel.deleteMessage(messageId: messageId)
+//            })
+//            .disposed(by: cell.disposeBag)
+//    }
 
     private func messageCellActionsSetUp(_ cell: MessageCell, item: MessageViewModel) {
         cell.shareMessage
@@ -1233,11 +1254,11 @@ extension ConversationViewController: UITableViewDataSource {
                 .subscribe(onNext: { [weak self, weak tableView, weak cell] status in
                     guard let cell = cell else { return }
                     guard let currentIndexPath = tableView?.indexPath(for: cell) else { return }
-                    guard let transferId = item.daemonId else { return }
+                    let transferId = item.message.daemonId
                     guard let model = self?.viewModel else { return }
                     self?.log.info("Transfer status change from: \(item.lastTransferStatus.description) to: \(status.description) for transferId: \(transferId) cell row: \(currentIndexPath.row)")
                     if item.bubblePosition() == .sent && item.shouldDisplayTransferedImage {
-                        cell.displayTransferedImage(message: item, conversationID: model.conversation.value.conversationId, accountId: model.conversation.value.accountId)
+                        cell.displayTransferedImage(message: item, conversationID: model.conversation.value.id, accountId: model.conversation.value.accountId)
                     } else {
                         self?.changeTransferStatus(cell, currentIndexPath, status, item, model)
                         cell.stopProgressMonitor()
@@ -1253,7 +1274,7 @@ extension ConversationViewController: UITableViewDataSource {
                     guard let cell = cell else { return }
                     guard let transferId = item.daemonId else { return }
                     self?.log.info("canceling transferId \(transferId)")
-                    _ = self?.viewModel.cancelTransfer(transferId: transferId)
+                   // _ = self?.viewModel.cancelTransfer(transferId: transferId)
                     item.initialTransferStatus = .canceled
                     item.message.transferStatus = .canceled
                     cell.stopProgressMonitor()
@@ -1303,8 +1324,8 @@ extension ConversationViewController: UITableViewDataSource {
                         guard let cell = cell else { return }
                         guard let transferId = item.daemonId else { return }
                         self?.log.info("accepting transferId \(transferId)")
-                        if self?.viewModel.acceptTransfer(transferId: transferId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
-                            _ = self?.viewModel.cancelTransfer(transferId: transferId)
+                        if self?.viewModel.acceptTransfer(transferId: item.message.daemonId, interactionID: item.messageId, messageContent: &item.message.content) != .success {
+                           // _ = self?.viewModel.cancelTransfer(transferId: transferId)
                             item.initialTransferStatus = .canceled
                             item.message.transferStatus = .canceled
                             cell.stopProgressMonitor()

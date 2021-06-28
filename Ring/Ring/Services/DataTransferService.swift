@@ -103,9 +103,9 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     }
     // MARK: public
 
-    func getTransferInfo(withId transferId: UInt64) -> NSDataTransferInfo? {
+    func getTransferInfo(withId transferId: String, accountId: String) -> NSDataTransferInfo? {
         let info = NSDataTransferInfo()
-        let err = self.dataTransferAdapter.dataTransferInfo(withId: transferId, with: info)
+        let err = self.dataTransferAdapter.dataTransferInfo(withId: transferId, accountId: accountId, with: info)
         if err != .success {
             self.log.error("DataTransferService: error getting transfer info for id: \(transferId)")
             return nil
@@ -113,12 +113,44 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return info
     }
 
-    func acceptTransfer(withId transferId: UInt64,
-                        interactionID: Int64,
+    func dataTransferInfoNew(withId fileId: String, accountId: String, conversationId: String) -> NSDataTransferInfo? {
+        if conversationId.isEmpty {
+            return self.getTransferInfo(withId: fileId, accountId: accountId)
+        }
+        let info = NSDataTransferInfo()
+        info.conversationId = conversationId
+        let err = self.dataTransferAdapter.dataTransferBytesProgress(withId: fileId, accountId: accountId, with: info)
+        if err != .success {
+            self.log.error("DataTransferService: error getting transfer info for id: \(fileId)")
+            return nil
+        }
+        return info
+    }
+
+//    - (bool)downloadTransferWithFileId:(NSString*)fileId
+//                             accountId:(NSString*)accountId
+//                        conversationId:(NSString*)conversationId
+//                         interactionId:(NSString*)interactionId
+//                          withFilePath:(NSString*)filePath
+
+    func downloadFile(withId transferId: String,
+                      interactionID: String,
+                      fileName: inout String,
+                      accountID: String,
+                      conversationID: String,
+                      name: String) {
+        guard let pathUrl = getFilePathForTransfer(forFile: name, accountID: accountID,
+                                                   conversationID: conversationID) else { return }
+        self.dataTransferAdapter.downloadTransfer(withFileId: transferId, accountId: accountID, conversationId: conversationID, interactionId: interactionID, withFilePath: pathUrl.path)
+    }
+
+    func acceptTransfer(withId transferId: String,
+                        interactionID: String,
                         fileName: inout String,
                         accountID: String,
-                        conversationID: String) -> NSDataTransferError {
-        guard let info = getTransferInfo(withId: transferId) else {
+                        conversationID: String,
+                        name: String) -> NSDataTransferError {
+        guard let info = dataTransferInfoNew(withId: String(transferId), accountId: accountID, conversationId: "") else {
             return NSDataTransferError.invalid_argument
         }
         // accept transfer
@@ -126,7 +158,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                                                 conversationID: conversationID) {
             // if file name was changed because the same name already exist, update db
             if pathUrl.lastPathComponent != info.displayName {
-                let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: info.totalSize, countStyle: .file)
+                let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(info.totalSize), countStyle: .file)
                 let name = pathUrl.lastPathComponent + "\n" + fileSizeWithUnit
                 fileName = name
                 // update db
@@ -139,7 +171,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                     .disposed(by: self.disposeBag)
             }
             self.log.debug("DataTransferService: saving file to: \(pathUrl.path))")
-            return acceptFileTransfer(withId: transferId, withPath: pathUrl.path)
+            return acceptFileTransfer(withId: transferId, withPath: pathUrl.path, accountId: accountID)
         } else {
             self.log.error("DataTransferService: saving file error: bad local path")
             return .io
@@ -246,8 +278,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return nil
     }
 
-    func isTransferImage(withId transferId: UInt64, accountID: String, conversationID: String) -> Bool? {
-        guard let info = getTransferInfo(withId: transferId) else { return nil }
+    func isTransferImage(withId transferId: String, accountID: String, conversationID: String) -> Bool? {
+        guard let info = dataTransferInfoNew(withId: transferId, accountId: accountID, conversationId: conversationID) else { return nil }
         guard let pathUrl = getFilePath(fileName: info.displayName,
                                         inFolder: Directories.downloads.rawValue,
                                         accountID: accountID,
@@ -259,7 +291,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage)
     }
 
-    func cancelTransfer(withId transferId: UInt64) -> NSDataTransferError {
+    func cancelTransfer(withId transferId: String) -> NSDataTransferError {
         let err = cancelDataTransfer(withId: transferId)
         if err != .success {
             self.log.error("couldn't cancel transfer with id: \(transferId)")
@@ -267,7 +299,16 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return err
     }
 
-    func sendFile(filePath: String, displayName: String, accountId: String, peerInfoHash: String, localIdentifier: String?) {
+    func sendFile(conversation: ConversationModel, filePath: String, displayName: String, localIdentifier: String?) {
+        if conversation.type == .nonSwarm {
+            guard let jamiId = conversation.getParticipants().first?.jamiId else { return }
+            self.sendFile(filePath: filePath, displayName: displayName, accountId: conversation.accountId, peerInfoHash: jamiId, localIdentifier: localIdentifier)
+        } else {
+            self.dataTransferAdapter.sendFile(withName: displayName, accountId: conversation.accountId, conversationId: conversation.id, withFilePath: filePath, parent: conversation.messages.value.last?.messageId)
+        }
+    }
+
+    private func sendFile(filePath: String, displayName: String, accountId: String, peerInfoHash: String, localIdentifier: String?) {
         var transferId: UInt64 = 0
         let info = NSDataTransferInfo()
         info.accountId = accountId
@@ -281,7 +322,10 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         } else {
             let serviceEventType: ServiceEventType = .dataTransferCreated
             var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-            serviceEvent.addEventInput(.transferId, value: transferId)
+            serviceEvent.addEventInput(.transferId, value: String(transferId))
+            serviceEvent.addEventInput(.accountId, value: accountId)
+            serviceEvent.addEventInput(.conversationId, value: "")
+            serviceEvent.addEventInput(.messageId, value: "")
             if let localIdentifier = localIdentifier {
                 serviceEvent.addEventInput(.localPhotolID, value: localIdentifier)
             }
@@ -289,7 +333,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         }
     }
 
-    func sendAndSaveFile(displayName: String,
+    private func sendAndSaveFile(displayName: String,
                          accountId: String,
                          peerInfoHash: String,
                          imageData: Data,
@@ -305,10 +349,24 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         self.sendFile(filePath: imagePath.path, displayName: imagePath.lastPathComponent, accountId: accountId, peerInfoHash: peerInfoHash, localIdentifier: nil)
     }
 
-    func getTransferProgress(withId transferId: UInt64) -> Float? {
+    func sendAndSaveFile(displayName: String,
+                         conversation: ConversationModel,
+                         imageData: Data) {
+        guard let imagePath = self.getFilePathForTransfer(forFile: displayName,
+                                                          accountID: conversation.accountId,
+                                                          conversationID: conversation.id) else { return }
+        do {
+            try imageData.write(to: URL(fileURLWithPath: imagePath.path), options: .atomic)
+        } catch {
+            self.log.error("couldn't copy image to cache")
+        }
+        self.sendFile(conversation: conversation, filePath: imagePath.path, displayName: displayName, localIdentifier: nil)
+    }
+
+    func getTransferProgress(withId transferId: String, accountId: String, conversationId: String) -> Float? {
         var total: Int64 = 0
         var progress: Int64 = 0
-        let err = dataTransferBytesProgress(withId: transferId, withTotal: &total, withProgress: &progress)
+        let err = dataTransferBytesProgress(withId: transferId, withTotal: &total, withProgress: &progress, accountId: accountId, conversationId: conversationId)
         if err != .success {
             return nil
         }
@@ -388,10 +446,6 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     // MARK: DataTransferAdapter
 
-    private func dataTransferIdList() -> [UInt64]? {
-        return self.dataTransferAdapter.dataTransferList() as? [UInt64]
-    }
-
     private func sendFile(withId transferId: inout UInt64, withInfo info: NSDataTransferInfo) -> NSDataTransferError {
         var err: NSDataTransferError = .unknown
         let _id = UnsafeMutablePointer<UInt64>.allocate(capacity: 1)
@@ -400,23 +454,24 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return err
     }
 
-    private func acceptFileTransfer(withId transferId: UInt64, withPath filePath: String, withOffset offset: Int64 = 0) -> NSDataTransferError {
-        return self.dataTransferAdapter.acceptFileTransfer(withId: transferId, withFilePath: filePath, withOffset: offset)
+    private func acceptFileTransfer(withId transferId: String, withPath filePath: String, withOffset offset: Int64 = 0, accountId: String) -> NSDataTransferError {
+        return self.dataTransferAdapter.acceptFileTransfer(withId: transferId, accountId: accountId, withFilePath: filePath)
     }
 
-    private func cancelDataTransfer(withId transferId: UInt64) -> NSDataTransferError {
-        return self.dataTransferAdapter.cancelDataTransfer(withId: transferId)
+    private func cancelDataTransfer(withId transferId: String) -> NSDataTransferError {
+        return self.dataTransferAdapter.cancelDataTransfer(withId: transferId, accountId: "", conversationId: "")
     }
 
-    private func dataTransferInfo(withId transferId: UInt64, withInfo info: inout NSDataTransferInfo) -> NSDataTransferError {
-        return self.dataTransferAdapter.dataTransferInfo(withId: transferId, with: info)
-    }
+//    private func dataTransferInfo(withId transferId: UInt64, withInfo info: inout NSDataTransferInfo) -> NSDataTransferError {
+//        return self.dataTransferAdapter.dataTransferInfo(withId: "", accountId: "", with: info)
+//    }
 
-    private func dataTransferBytesProgress(withId transferId: UInt64, withTotal total: inout Int64, withProgress progress: inout Int64) -> NSDataTransferError {
+    private func dataTransferBytesProgress(withId transferId: String, withTotal total: inout Int64, withProgress progress: inout Int64, accountId: String, conversationId: String) -> NSDataTransferError {
         var err: NSDataTransferError = .unknown
         let _total = UnsafeMutablePointer<Int64>.allocate(capacity: 1)
         let _progress = UnsafeMutablePointer<Int64>.allocate(capacity: 1)
-        err = self.dataTransferAdapter.dataTransferBytesProgress(withId: transferId, withTotal: _total, withProgress: _progress)
+        let path = String()
+//        err = self.dataTransferAdapter.dataTransferBytesProgress(withId: transferId, withTotal: _total, withProgress: _progress, accountId: accountId, conversationId: conversationId, path: path)
         total = _total.pointee
         progress = _progress.pointee
         return err
@@ -424,14 +479,14 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     // MARK: DataTransferAdapterDelegate
 
-    func dataTransferEvent(withTransferId transferId: UInt64, withEventCode eventCode: Int) {
+    func dataTransferEvent(withTransferId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String) {
         guard let event = NSDataTransferEventCode(rawValue: UInt32(eventCode)) else {
             self.log.error("DataTransferService: can't get transfer code")
             return
         }
 
         self.log.info("DataTransferService: event: \(stringFromEventCode(with: event))")
-        let info = getTransferInfo(withId: transferId)
+        let info = dataTransferInfoNew(withId: transferId, accountId: accountId, conversationId: conversationId)
         // do not emit an created event for outgoing transfer, since it already saved in db
         if event == .created && info?.flags != 1 {
           return
@@ -441,6 +496,9 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         let serviceEventType: ServiceEventType = event == .created ? .dataTransferCreated : .dataTransferChanged
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.transferId, value: transferId)
+        serviceEvent.addEventInput(.conversationId, value: conversationId)
+        serviceEvent.addEventInput(.messageId, value: interactionId)
+        serviceEvent.addEventInput(.accountId, value: accountId)
         self.responseStream.onNext(serviceEvent)
     }
 

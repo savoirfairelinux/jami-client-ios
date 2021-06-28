@@ -87,7 +87,6 @@ class CallViewModel: Stateable, ViewModel {
             if !(self.call?.isAudioOnly ?? true) {
                 self.videoService.startVideoCaptureBeforeCall()
             }
-            self.subscribeToCallFinished()
             self.callService.currentConferenceEvent
                 .asObservable()
                 .filter({ [weak self] conference-> Bool in
@@ -208,7 +207,6 @@ class CallViewModel: Stateable, ViewModel {
                         if anotherCall.participantsCallId.count == 1 {
                             self?.rendererId = anotherCallid
                         }
-                        self?.callsProvider.stopCall(callUUID: call.callUUID)
                         return !hide
                     }
                 }
@@ -566,11 +564,11 @@ extension CallViewModel {
         guard let call = self.call else {
             return
         }
-        guard let uri = JamiURI(schema: URIType.ring, infoHach: call.participantUri).uriString else {
+        guard let jamiId = JamiURI(schema: URIType.ring, infoHach: call.participantUri).hash else {
             return
         }
 
-        guard let conversation = self.conversationService.findConversation(withUri: uri, withAccountId: call.accountId) else {
+        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId, accontId: call.accountId) else {
             return
         }
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
@@ -634,20 +632,6 @@ extension CallViewModel {
         self.stateSubject.onNext(ConversationState.showDialpad(inCall: true))
     }
 
-    func subscribeToCallFinished() {
-        dismisVC
-            .share()
-            .filter { dismised in
-                return dismised
-            }
-            .subscribe { [weak self ] _ in
-                guard let self = self, let call = self.call else { return }
-                self.videoService.stopCapture()
-                self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
-                self.callsProvider.stopCall(callUUID: call.callUUID)
-            }
-            .disposed(by: self.disposeBag)
-    }
 }
 // MARK: conference layout
 extension CallViewModel {

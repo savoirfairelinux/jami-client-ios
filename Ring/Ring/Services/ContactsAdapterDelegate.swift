@@ -19,10 +19,6 @@
  */
 
 @objc protocol ContactsAdapterDelegate {
-    func incomingTrustRequestReceived(from senderAccount: String,
-                                      to accountId: String,
-                                      withPayload payload: Data,
-                                      receivedDate: Date)
     func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool)
     func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool)
 }

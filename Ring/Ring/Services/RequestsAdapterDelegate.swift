@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2018-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2021 Savoir-faire Linux Inc.
  *
- *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,6 +18,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-@objc protocol DataTransferAdapterDelegate {
-    func dataTransferEvent(withTransferId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String)
+@objc protocol RequestsAdapterDelegate {
+    func incomingTrustRequestReceived(from jamiId: String,
+                                      to accountId: String,
+                                      conversationId: String,
+                                      withPayload payload: Data,
+                                      receivedDate: Date)
+    func conversationRequestReceived(conversationId: String, accountId: String, metadata: [String: String])
 }
