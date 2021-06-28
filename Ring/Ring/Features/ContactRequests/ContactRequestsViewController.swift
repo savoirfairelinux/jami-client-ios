@@ -45,11 +45,11 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         noRequestsLabel.backgroundColor = UIColor.jamiBackgroundColor
         noRequestsLabel.textColor = UIColor.jamiLabelColor
         self.configureRingNavigationBar()
-        self.tableView.rx.modelSelected(ContactRequestItem.self)
+        self.tableView.rx.modelSelected(RequestItem.self)
             .subscribe({ [weak self] item in
                 guard let self = self else { return }
-                if let ringId = item.element?.contactRequest.ringId {
-                    self.viewModel.showConversation(forRingId: ringId)
+                if let request = item.element {
+                    self.viewModel.showConversation(forItem: request)
                 }
             })
             .disposed(by: disposeBag)
@@ -136,7 +136,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             .disposed(by: self.disposeBag)
     }
 
-    func acceptButtonTapped(withItem item: ContactRequestItem) {
+    func acceptButtonTapped(withItem item: RequestItem) {
         viewModel.accept(withItem: item)
             .subscribe(onError: { [weak self] error in
                 self?.log.error("Accept trust request failed")
@@ -146,7 +146,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             .disposed(by: self.disposeBag)
     }
 
-    func discardButtonTapped(withItem item: ContactRequestItem) {
+    func discardButtonTapped(withItem item: RequestItem) {
         viewModel.discard(withItem: item)
             .subscribe(onError: { [weak self] error in
                 self?.log.error("Discard trust request failed")
@@ -156,7 +156,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
             .disposed(by: self.disposeBag)
     }
 
-    func banButtonTapped(withItem item: ContactRequestItem) {
+    func banButtonTapped(withItem item: RequestItem) {
         viewModel.ban(withItem: item)
             .subscribe(onError: { [weak self] error in
                 self?.log.error("Ban trust request failed")

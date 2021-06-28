@@ -31,6 +31,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var discardButton: UIButton!
     @IBOutlet weak var banButton: UIButton!
+    @IBOutlet weak var buttonsContainer: UIStackView!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         self.backgroundColor = UIColor.jamiUITableViewCellSelection
@@ -74,7 +75,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
         discardButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
     }
 
-    func configureFromItem(_ item: ContactRequestItem) {
+    func configureFromItem(_ item: RequestItem) {
         // avatar
         Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
                                                   item.userName.asObservable(),
@@ -105,6 +106,16 @@ class ContactRequestCell: UITableViewCell, NibReusable {
             .asObservable()
             .observe(on: MainScheduler.instance)
             .bind(to: self.nameLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        item.request.inSynchronization
+            .startWith(item.request.inSynchronization.value)
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe { inSynchronization in
+                self.buttonsContainer.isHidden = inSynchronization
+            } onError: { _ in
+
+            }
             .disposed(by: self.disposeBag)
 
         self.selectionStyle = .none

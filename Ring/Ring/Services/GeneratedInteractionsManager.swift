@@ -72,13 +72,15 @@ class GeneratedInteractionsManager {
                 var message = ""
                 switch contactRequestEvent.eventType {
                 case ServiceEventType.contactAdded:
-                    message = GeneratedMessage.contactAdded.toString()
+                    return
+                    // message = GeneratedMessage.contactAdded.toString()
                 case ServiceEventType.contactRequestReceived:
-                    message = GeneratedMessage.invitationReceived.toString()
+                    return
+                    // message = GeneratedMessage.invitationReceived.toString()
                 case ServiceEventType.contactRequestDiscarded:
-                    self.removeConversation(accountId: account.id,
-                                            contactRingId: uriString,
-                                            shouldUpdateConversation: shouldUpdateConversations)
+//                    self.removeConversation(accountId: account.id,
+//                                            contactRingId: uriString,
+//                                            shouldUpdateConversation: shouldUpdateConversations)
                     return
                 default:
                     return
@@ -100,12 +102,12 @@ class GeneratedInteractionsManager {
         guard let conversation = self.conversationService.findConversation(withUri: contactRingId, withAccountId: accountId) else {
             return
         }
-        // remove conversation if it contain only generated messages
-        let messagesNotGenerated = conversation.messages.filter({ !$0.isGenerated })
-
-        if !messagesNotGenerated.isEmpty {
-            return
-        }
+//        // remove conversation if it contain only generated messages
+//        let messagesNotGenerated = conversation.messages.value.filter({ !$0.isGenerated })
+//
+//        if !messagesNotGenerated.isEmpty {
+//            return
+//        }
         self.conversationService.clearHistory(conversation: conversation, keepConversation: false)
     }
 

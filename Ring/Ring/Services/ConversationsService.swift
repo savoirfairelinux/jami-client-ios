@@ -24,6 +24,15 @@ import RxSwift
 import RxRelay
 import SwiftyBeaver
 
+enum ConversationNotifications: String {
+    case conversationReady
+}
+
+enum ConversationNotificationsKeys: String {
+    case conversationId
+    case accountId
+}
+
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class ConversationsService {
@@ -42,10 +51,11 @@ class ConversationsService {
     var sharedResponseStream: Observable<ServiceEvent>
 
     var conversations = BehaviorRelay(value: [ConversationModel]())
+    var conversationReady = BehaviorRelay(value: "")
 
     var messagesSemaphore = DispatchSemaphore(value: 1)
 
-    typealias SavedMessageForConversation = (messageID: Int64, conversationID: Int64)
+    typealias SavedMessageForConversation = (messageID: String, conversationID: String)
 
     var dataTransferMessageMap = [UInt64: SavedMessageForConversation]()
 
@@ -64,11 +74,144 @@ class ConversationsService {
 
     func getConversationIdForParticipant(participantUri: String) -> String? {
         return self.conversations.value.filter { conversation in
-            conversation.participantUri == participantUri
+            conversation.getParticipants().first?.jamiId == participantUri
         }.first?.conversationId
     }
 
-    func getConversationsForAccount(accountId: String) -> Observable<[ConversationModel]> {
+    func getConversationForId(conversationId: String, accountId: String) -> ConversationModel? {
+        return self.conversations.value.filter { conversation in
+            conversation.conversationId == conversationId && conversation.accountId == accountId
+        }.first
+    }
+
+    func insertMessages(conversationId: String, accountId: String, messages: [[String: String]], accountURI: String) {
+        guard let conversation = self.conversations.value
+                .filter({ conversation in
+                    return conversation.conversationId == conversationId && conversation.accountId == accountId
+                })
+                .first else { return }
+        var currentInteractions = conversation.messages.value
+        var numberOfNewMessages = 0
+        messages.forEach { messageInfo in
+            // do not add interaction that already exists
+            guard let messageId = messageInfo["id"] else { return }
+            if currentInteractions.contains(where: { message in
+                message.messageId == messageId
+            }) { return }
+
+            let newMessage = MessageModel(withInfo: messageInfo, accountURI: accountURI)
+            if newMessage.type == .merge {
+                return
+            }
+            // find parent to insert interaction after
+            numberOfNewMessages += 1
+            if let index = currentInteractions.firstIndex(where: { message in
+                message.messageId == newMessage.parentId
+            }) {
+                currentInteractions.insert(newMessage, at: index + 1)
+            } else {
+                currentInteractions.append(newMessage)
+                // save message without parent to dictionary, so if we receive parent later we could move message
+                conversation.parentsId[newMessage.parentId] = newMessage.messageId
+            }
+            // if a new message is a parent for previously added message move it to keep ordered
+            if conversation.parentsId.keys.contains(where: { parentId in
+                parentId == newMessage.messageId
+            }), let childId = conversation.parentsId[newMessage.messageId] {
+                moveInteraction(interactionId: childId, after: newMessage.messageId, messages: &currentInteractions)
+            }
+        }
+        if numberOfNewMessages == 0 {
+            return
+        }
+        conversation.messages.accept(currentInteractions)
+        // check if conversation order changed
+        if let firstDate = currentInteractions.last?.receivedDate, let secondDate = self.conversations.value.first?.messages.value.last?.receivedDate {
+            if firstDate > secondDate {
+                let currentConversations = self.conversations.value
+                let sorted = currentConversations.sorted(by: { conversation1, conversations2 in
+                                        guard let lastMessage1 = conversation1.messages.value.last,
+                                              let lastMessage2 = conversations2.messages.value.last else {
+                                            return conversation1.messages.value.count > conversations2.messages.value.count
+                                        }
+                                        return lastMessage1.receivedDate > lastMessage2.receivedDate
+                                    })
+                self.conversations.accept(sorted)
+            }
+        }
+    }
+
+    func conversationReady(conversationId: String, accountId: String, accountURI: String) {
+        if let conv = self.getConversationForId(conversationId: conversationId, accountId: accountId) {
+
+        } else {
+            var currentConversations = self.conversations.value
+            if let info = messageAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
+               let participantsInfo = messageAdapter.getConversationMembers(accountId, conversationId: conversationId) as? [[String: String]] {
+                let conversation = ConversationModel(withId: conversationId, accountId: accountId, info: info)
+                conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
+                currentConversations.append(conversation)
+                let sorted = currentConversations.sorted(by: { conversation1, conversations2 in
+                                        guard let lastMessage1 = conversation1.messages.value.last,
+                                              let lastMessage2 = conversations2.messages.value.last else {
+                                            return conversation1.messages.value.count > conversations2.messages.value.count
+                                        }
+                                        return lastMessage1.receivedDate > lastMessage2.receivedDate
+                                    })
+                self.conversations.accept(sorted)
+                var data = [String: Any]()
+                data[ConversationNotificationsKeys.conversationId.rawValue] = conversationId
+                data[ConversationNotificationsKeys.accountId.rawValue] = accountId
+                NotificationCenter.default.post(name: NSNotification.Name(ConversationNotifications.conversationReady.rawValue), object: nil, userInfo: data)
+            }
+        }
+        self.conversationReady.accept(conversationId)
+    }
+
+    func conversationLoaded(conversationId: String, accountId: String, messages: [Any], accountURI: String) {
+        guard let messagesDictionary = messages as? [[String: String]] else { return }
+        self.insertMessages(conversationId: conversationId, accountId: accountId, messages: messagesDictionary, accountURI: accountURI)
+    }
+
+    func newInteraction(conversationId: String, accountId: String, message: [String: String], accountURI: String) {
+        self.insertMessages(conversationId: conversationId, accountId: accountId, messages: [message], accountURI: accountURI)
+    }
+
+    func moveInteraction(interactionId: String, after parentId: String, messages: inout [MessageModel]) {
+        if let index = messages.firstIndex(where: { messge in
+            messge.messageId == interactionId
+        }), let parentIndex = messages.firstIndex(where: { messge in
+            messge.messageId == parentId
+        }), parentIndex < messages.count - 1 {
+            // if interaction we are going to move is parent for next interaction we should move next interaction as well
+            let interactionToMove = messages[index]
+            if index < messages.count - 1 {
+                let nextInteraction = messages[index + 1]
+                let moveNextInteraction = interactionToMove.messageId == nextInteraction.parentId
+                messages.insert(messages.remove(at: index), at: parentIndex + 1)
+                if !moveNextInteraction {
+                    return
+                }
+                moveInteraction(interactionId: nextInteraction.messageId, after: interactionToMove.messageId, messages: &messages)
+            } else {
+                messages.insert(messages.remove(at: index), at: parentIndex + 1)
+            }
+        }
+    }
+
+    func getConversationInfo(for conversationId: String, accountId: String) -> [String: String]? {
+        return messageAdapter.getConversationMembers(accountId, conversationId: conversationId) as? [String: String]
+    }
+
+    func removeConversation(conversationId: String, accountId: String) {
+        self.messageAdapter.removeConversation(accountId, conversationId: conversationId)
+    }
+
+    func startConversation(accountId: String) {
+        self.messageAdapter.startConversation(accountId)
+    }
+
+    func getConversationsForAccount(accountId: String, accountURI: String) -> Observable<[ConversationModel]> {
         /* if we don't have conversation that could mean the app
         just launched and we need symchronize messages status
         */
@@ -76,10 +219,38 @@ class ConversationsService {
         if self.conversations.value.first != nil {
             shouldUpdateMessagesStatus = false
         }
+        // get swarms conversdations
+        log.warning("getConversationsForAccount: \(accountURI)")
+        var currentConversations = [ConversationModel]()
+        if let swarmIds = messageAdapter.getSwarmConversations(forAccount: accountId) as? [String] {
+            for swarmId in swarmIds {
+                if let info = messageAdapter.getConversationInfo(forAccount: accountId, conversationId: swarmId) as? [String: String],
+                   let participantsInfo = messageAdapter.getConversationMembers(accountId, conversationId: swarmId) as? [[String: String]] {
+                    let conversation = ConversationModel(withId: swarmId, accountId: accountId, info: info)
+                    conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
+                    messageAdapter.loadConversationMessages(accountId, conversationId: swarmId, from: "", size: 3)
+                    currentConversations.append(conversation)
+                }
+            }
+        }
+        // get conversations from db
         dbManager.getConversationsObservable(for: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [weak self] conversationsModels in
-                self?.conversations.accept(conversationsModels)
+                currentConversations.append(contentsOf: conversationsModels)
+                let sorted = currentConversations.sorted(by: { conversation1, conversations2 in
+                                        guard let lastMessage1 = conversation1.messages.value.last,
+                                              let lastMessage2 = conversations2.messages.value.last else {
+                                            return conversation1.messages.value.count > conversations2.messages.value.count
+                                        }
+                                        return lastMessage1.receivedDate > lastMessage2.receivedDate
+                                    })
+                self?.conversations.accept(sorted)
+                if let swarmIds = self?.messageAdapter.getSwarmConversations(forAccount: accountId) as? [String] {
+                    for swarmId in swarmIds {
+                        self?.messageAdapter.loadConversationMessages(accountId, conversationId: swarmId, from: "", size: 3)
+                    }
+                }
                 if shouldUpdateMessagesStatus {
                     self?.updateMessagesStatus(accountId: accountId)
                 }
@@ -98,7 +269,7 @@ class ConversationsService {
          are considered for updating.
          */
         for conversation in self.conversations.value {
-            for message in (conversation.messages) {
+            for message in (conversation.messages.value) {
                 if !message.daemonId.isEmpty && (message.status == .unknown || message.status == .sending ) {
                     let updatedMessageStatus = self.status(forMessageId: message.daemonId)
                     if (updatedMessageStatus.rawValue > message.status.rawValue && updatedMessageStatus != .failure) ||
@@ -158,9 +329,9 @@ class ConversationsService {
                        generated: Bool?,
                        incoming: Bool) -> MessageModel {
         let message = MessageModel(withId: messageId, receivedDate: Date(), content: content, authorURI: author, incoming: incoming)
-        if let generated = generated {
-            message.isGenerated = generated
-        }
+//        if let generated = generated {
+//            message.isGenerated = generated
+//        }
         return message
     }
 
@@ -179,7 +350,7 @@ class ConversationsService {
                           shouldRefreshConversations: Bool,
                           interactionType: InteractionType = InteractionType.text) -> Completable {
 
-        return Completable.create(subscribe: { [weak self] completable in
+        return Completable.create(subscribe: { [weak self] _ in
             guard let self = self else { return Disposables.create { } }
             self.messagesSemaphore.wait()
             self.dbManager.saveMessage(for: toAccountId,
@@ -189,28 +360,28 @@ class ConversationsService {
                                        interactionType: interactionType, duration: 0)
                 .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { [weak self] _ in
-                    guard let self = self else { return }
-                    // append new message so it can be found if a status update is received before the DB finishes reload
-                    self.conversations.value
-                        .filter({ conversation in
-                            return conversation.participantUri == recipientRingId &&
-                                conversation.accountId == toAccountId
-                        })
-                        .first?.messages
-                        .append(message)
-                    self.messagesSemaphore.signal()
-                    if shouldRefreshConversations {
-                        self.dbManager.getConversationsObservable(for: toAccountId)
-                            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                            .subscribe(onNext: { [weak self] conversationsModels in
-                                self?.conversations.accept(conversationsModels)
-                            })
-                            .disposed(by: (self.disposeBag))
-                    }
-                    completable(.completed)
-                    }, onError: { error in
-                        self.messagesSemaphore.signal()
-                        completable(.error(error))
+//                    guard let self = self else { return }
+//                    // append new message so it can be found if a status update is received before the DB finishes reload
+//                    self.conversations.value
+//                        .filter({ conversation in
+//                            return conversation.participantUri == recipientRingId &&
+//                                conversation.accountId == toAccountId
+//                        })
+//                        .first?.messages
+//                        .append(message)
+//                    self.messagesSemaphore.signal()
+//                    if shouldRefreshConversations {
+//                        self.dbManager.getConversationsObservable(for: toAccountId)
+//                            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//                            .subscribe(onNext: { [weak self] conversationsModels in
+//                                self?.conversations.accept(conversationsModels)
+//                            })
+//                            .disposed(by: (self.disposeBag))
+//                    }
+//                    completable(.completed)
+//                    }, onError: { error in
+//                        self.messagesSemaphore.signal()
+//                        completable(.error(error))
                 })
                 .disposed(by: self.disposeBag)
 
@@ -222,7 +393,7 @@ class ConversationsService {
                           withAccountId accountId: String) -> ConversationModel? {
         return self.conversations.value
             .filter({ conversation in
-                return conversation.participantUri == uri && conversation.accountId == accountId
+                return conversation.getParticipants().first?.jamiId == uri.replacingOccurrences(of: "ring:", with: "")
             })
             .first
     }
@@ -249,24 +420,24 @@ class ConversationsService {
                          date: Date,
                          interactionType: InteractionType,
                          shouldUpdateConversation: Bool) {
-        let message = MessageModel(withId: "", receivedDate: date, content: messageContent, authorURI: "", incoming: false)
-        message.isGenerated = true
-
-        self.dbManager.saveMessage(for: accountId, with: contactUri, message: message, incoming: false, interactionType: interactionType, duration: Int(duration))
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                if shouldUpdateConversation {
-                    self.dbManager.getConversationsObservable(for: accountId)
-                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                        .subscribe(onNext: { conversationsModels in
-                            self.conversations.accept(conversationsModels)
-                        })
-                        .disposed(by: (self.disposeBag))
-                }
-                }, onError: { _ in
-            })
-            .disposed(by: self.disposeBag)
+//        let message = MessageModel(withId: "", receivedDate: date, content: messageContent, authorURI: "", incoming: false)
+//       // message.isGenerated = true
+//
+//        self.dbManager.saveMessage(for: accountId, with: contactUri, message: message, incoming: false, interactionType: interactionType, duration: Int(duration))
+//            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//            .subscribe(onNext: { [weak self] _ in
+//                guard let self = self else { return }
+//                if shouldUpdateConversation {
+//                    self.dbManager.getConversationsObservable(for: accountId)
+//                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//                        .subscribe(onNext: { conversationsModels in
+//                            self.conversations.accept(conversationsModels)
+//                        })
+//                        .disposed(by: (self.disposeBag))
+//                }
+//                }, onError: { _ in
+//            })
+//            .disposed(by: self.disposeBag)
     }
 
     func generateDataTransferMessage(transferId: UInt64,
@@ -296,37 +467,37 @@ class ConversationsService {
                                        receivedDate: date, content: messageContent,
                                        authorURI: author, incoming: isIncoming)
             message.transferStatus = isIncoming ? .awaiting : .created
-            message.isGenerated = false
-            message.isTransfer = true
+           // message.isGenerated = false
+            message.type = .fileTransfer
 
             self.messagesSemaphore.wait()
-            self.dbManager.saveMessage(for: accountId, with: contactUri,
-                                       message: message, incoming: isIncoming,
-                                       interactionType: interactionType, duration: 0)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onNext: { [weak self] message in
-                    guard let self = self else { return }
-                    self.dataTransferMessageMap[transferId] = message
-                    self.dbManager.getConversationsObservable(for: accountId)
-                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                        .subscribe(onNext: { conversationsModels in
-                            if updateConversation {
-                                self.conversations.accept(conversationsModels)
-                            }
-                            let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
-                            var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-                            serviceEvent.addEventInput(.transferId, value: transferId)
-                            self.responseStream.onNext(serviceEvent)
-
-                            self.messagesSemaphore.signal()
-                            completable(.completed)
-                        })
-                        .disposed(by: (self.disposeBag))
-                    }, onError: { [weak self] error in
-                        self?.messagesSemaphore.signal()
-                        completable(.error(error))
-                })
-                .disposed(by: self.disposeBag)
+//            self.dbManager.saveMessage(for: accountId, with: contactUri,
+//                                       message: message, incoming: isIncoming,
+//                                       interactionType: interactionType, duration: 0)
+//                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//                .subscribe(onNext: { [weak self] message in
+//                    guard let self = self else { return }
+//                    self.dataTransferMessageMap[transferId] = message
+//                    self.dbManager.getConversationsObservable(for: accountId)
+//                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//                        .subscribe(onNext: { conversationsModels in
+//                            if updateConversation {
+//                                self.conversations.accept(conversationsModels)
+//                            }
+//                            let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
+//                            var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+//                            serviceEvent.addEventInput(.transferId, value: transferId)
+//                            self.responseStream.onNext(serviceEvent)
+//
+//                            self.messagesSemaphore.signal()
+//                            completable(.completed)
+//                        })
+//                        .disposed(by: (self.disposeBag))
+//                    }, onError: { [weak self] error in
+//                        self?.messagesSemaphore.signal()
+//                        completable(.error(error))
+//                })
+//                .disposed(by: self.disposeBag)
             return Disposables.create { }
         })
     }
@@ -336,7 +507,7 @@ class ConversationsService {
         return self.messageAdapter.status(forMessageId: status)
     }
 
-    func setMessageAsRead(daemonId: String, messageID: Int64,
+    func setMessageAsRead(daemonId: String, messageID: String,
                           from: String, accountId: String, accountURI: String) {
         self.messageAdapter
             .setMessageDisplayedFrom(from,
@@ -354,15 +525,15 @@ class ConversationsService {
 
     func setMessagesAsRead(forConversation conversation: ConversationModel, accountId: String, accountURI: String) -> Completable {
 
-        return Completable.create(subscribe: { [weak self] completable in
+        return Completable.create(subscribe: { [weak self] _ in
             guard let self = self else { return Disposables.create { } }
 
             // Filter out read, outgoing, and transfer messages
-            let unreadMessages = conversation.messages.filter({ messages in
-                return messages.status != .displayed && messages.incoming && !messages.isTransfer
+            let unreadMessages = conversation.messages.value.filter({ messages in
+                return messages.status != .displayed && messages.incoming && messages.type == .text
             })
 
-            let messagesIds = unreadMessages.map({ $0.messageId }).filter({ $0 >= 0 })
+            let messagesIds = unreadMessages.map({ $0.messageId }).filter({ !$0.isEmpty })
             let messagesDaemonIds = unreadMessages.map({ $0.daemonId }).filter({ !$0.isEmpty })
             messagesDaemonIds.forEach { (msgId) in
                 self.messageAdapter
@@ -371,24 +542,24 @@ class ConversationsService {
                                              messageId: msgId,
                                              status: .displayed)
             }
-            self.dbManager
-                .setMessagesAsRead(messagesIDs: messagesIds,
-                                   withStatus: .displayed,
-                                   accountId: accountId)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onCompleted: { [weak self] in
-                    guard let self = self else { return }
-                    self.dbManager.getConversationsObservable(for: accountId)
-                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                        .subscribe(onNext: { [weak self] conversationsModels in
-                            self?.conversations.accept(conversationsModels)
-                        })
-                        .disposed(by: (self.disposeBag))
-                    completable(.completed)
-                }, onError: { error in
-                    completable(.error(error))
-                })
-                .disposed(by: self.disposeBag)
+//            self.dbManager
+//                .setMessagesAsRead(messagesIDs: messagesIds,
+//                                   withStatus: .displayed,
+//                                   accountId: accountId)
+//                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//                .subscribe(onCompleted: { [weak self] in
+//                    guard let self = self else { return }
+//                    self.dbManager.getConversationsObservable(for: accountId)
+//                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//                        .subscribe(onNext: { [weak self] conversationsModels in
+//                            self?.conversations.accept(conversationsModels)
+//                        })
+//                        .disposed(by: (self.disposeBag))
+//                    completable(.completed)
+//                }, onError: { error in
+//                    completable(.error(error))
+//                })
+//                .disposed(by: self.disposeBag)
             return Disposables.create { }
         })
     }
@@ -410,22 +581,22 @@ class ConversationsService {
     }
 
     func clearHistory(conversation: ConversationModel, keepConversation: Bool) {
-        self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: conversation.participantUri, keepConversation: keepConversation)
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe(onCompleted: { [weak self] in
-                guard let self = self else { return }
-                self.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.conversationId)
-                self.dbManager
-                    .getConversationsObservable(for: conversation.accountId)
-                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                    .subscribe(onNext: { [weak self] conversationsModels in
-                        self?.conversations.accept(conversationsModels)
-                    })
-                    .disposed(by: (self.disposeBag))
-                }, onError: { error in
-                    self.log.error(error)
-            })
-            .disposed(by: self.disposeBag)
+//        self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: conversation.participantUri, keepConversation: keepConversation)
+//            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//            .subscribe(onCompleted: { [weak self] in
+//                guard let self = self else { return }
+//                self.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.conversationId)
+//                self.dbManager
+//                    .getConversationsObservable(for: conversation.accountId)
+//                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//                    .subscribe(onNext: { [weak self] conversationsModels in
+//                        self?.conversations.accept(conversationsModels)
+//                    })
+//                    .disposed(by: (self.disposeBag))
+//                }, onError: { error in
+//                    self.log.error(error)
+//            })
+//            .disposed(by: self.disposeBag)
     }
 
     func removeSavedFiles(accountId: String, conversationId: String) {
@@ -448,58 +619,58 @@ class ConversationsService {
                               for messageId: UInt64,
                               fromAccount account: AccountModel,
                               to uri: String) {
-        self.messagesSemaphore.wait()
-        // Get conversations for this sender
-        let conversation = self.conversations.value.filter({ conversation in
-            return  conversation.participantUri == uri &&
-                    conversation.accountId == account.id
-        }).first
-
-        // Find message
-        if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
-            return  !message.daemonId.isEmpty && message.daemonId == String(messageId) &&
-                    ((status.rawValue > message.status.rawValue && status != .failure) ||
-                    (status == .failure && message.status == .sending))
-        }) {
-            if let message = messages.first {
-                let displayedMessage = status == .displayed && !message.incoming
-                let oldDisplayedMessage = conversation?.lastDisplayedMessage.id
-                let isLater = (conversation?.lastDisplayedMessage.id ?? 0) < Int64(0) || conversation?.lastDisplayedMessage.timestamp ?? Date() < message.receivedDate
-                if  displayedMessage && isLater {
-                    conversation?.lastDisplayedMessage = (message.messageId, message.receivedDate)
-                    var event = ServiceEvent(withEventType: .lastDisplayedMessageUpdated)
-                    event.addEventInput(.oldDisplayedMessage, value: oldDisplayedMessage)
-                    event.addEventInput(.newDisplayedMessage, value: message.messageId)
-                    self.responseStream.onNext(event)
-                }
-                self.dbManager
-                    .updateMessageStatus(daemonID: message.daemonId,
-                                         withStatus: status,
-                                         accountId: account.id)
-                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                    .subscribe(onCompleted: { [weak self] in
-                        guard let self = self else { return }
-                        self.messagesSemaphore.signal()
-                        self.log.info("messageStatusChanged: Message status updated")
-                        var event = ServiceEvent(withEventType: .messageStateChanged)
-                        event.addEventInput(.messageStatus, value: status)
-                        event.addEventInput(.messageId, value: String(messageId))
-                        event.addEventInput(.id, value: account.id)
-                        event.addEventInput(.uri, value: uri)
-                        self.responseStream.onNext(event)
-                    }, onError: { _ in
-                        self.messagesSemaphore.signal()
-                    })
-                    .disposed(by: self.disposeBag)
-            } else {
-                self.log.warning("messageStatusChanged: Message not found")
-                self.messagesSemaphore.signal()
-            }
-        } else {
-            self.messagesSemaphore.signal()
-        }
-
-        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(account.id) to: \(uri)")
+//        self.messagesSemaphore.wait()
+//        // Get conversations for this sender
+//        let conversation = self.conversations.value.filter({ conversation in
+//            return  conversation.participantUri == uri &&
+//                    conversation.accountId == account.id
+//        }).first
+//
+//        // Find message
+//        if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
+//            return  !message.daemonId.isEmpty && message.daemonId == String(messageId) &&
+//                    ((status.rawValue > message.status.rawValue && status != .failure) ||
+//                    (status == .failure && message.status == .sending))
+//        }) {
+//            if let message = messages.first {
+//                let displayedMessage = status == .displayed && !message.incoming
+//                let oldDisplayedMessage = conversation?.lastDisplayedMessage.id
+//                let isLater = (conversation?.lastDisplayedMessage.id ?? 0) < Int64(0) || conversation?.lastDisplayedMessage.timestamp ?? Date() < message.receivedDate
+//                if  displayedMessage && isLater {
+//                    conversation?.lastDisplayedMessage = (message.messageId, message.receivedDate)
+//                    var event = ServiceEvent(withEventType: .lastDisplayedMessageUpdated)
+//                    event.addEventInput(.oldDisplayedMessage, value: oldDisplayedMessage)
+//                    event.addEventInput(.newDisplayedMessage, value: message.messageId)
+//                    self.responseStream.onNext(event)
+//                }
+//                self.dbManager
+//                    .updateMessageStatus(daemonID: message.daemonId,
+//                                         withStatus: status,
+//                                         accountId: account.id)
+//                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//                    .subscribe(onCompleted: { [weak self] in
+//                        guard let self = self else { return }
+//                        self.messagesSemaphore.signal()
+//                        self.log.info("messageStatusChanged: Message status updated")
+//                        var event = ServiceEvent(withEventType: .messageStateChanged)
+//                        event.addEventInput(.messageStatus, value: status)
+//                        event.addEventInput(.messageId, value: String(messageId))
+//                        event.addEventInput(.id, value: account.id)
+//                        event.addEventInput(.uri, value: uri)
+//                        self.responseStream.onNext(event)
+//                    }, onError: { _ in
+//                        self.messagesSemaphore.signal()
+//                    })
+//                    .disposed(by: self.disposeBag)
+//            } else {
+//                self.log.warning("messageStatusChanged: Message not found")
+//                self.messagesSemaphore.signal()
+//            }
+//        } else {
+//            self.messagesSemaphore.signal()
+//        }
+//
+//        log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(account.id) to: \(uri)")
     }
 
     func transferStatusChanged(_ transferStatus: DataTransferStatus,
@@ -607,24 +778,24 @@ extension ConversationsService {
     }
 
     func deleteLocationUpdate(incoming: Bool, peerUri: String, accountId: String, shouldRefreshConversations: Bool) -> Completable {
-        return Completable.create(subscribe: { [weak self] completable in
+        return Completable.create(subscribe: { [weak self] _ in
             guard let self = self else { return Disposables.create { } }
-            self.dbManager.deleteLocationUpdates(incoming: incoming, peerUri: peerUri, accountId: accountId)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onCompleted: {
-                    if shouldRefreshConversations {
-                        self.dbManager.getConversationsObservable(for: accountId)
-                            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                            .subscribe(onNext: { [weak self] conversationsModels in
-                                self?.conversations.accept(conversationsModels)
-                            })
-                            .disposed(by: (self.disposeBag))
-                    }
-                    completable(.completed)
-                }, onError: { (error) in
-                    completable(.error(error))
-                })
-                .disposed(by: self.disposeBag)
+//            self.dbManager.deleteLocationUpdates(incoming: incoming, peerUri: peerUri, accountId: accountId)
+//                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//                .subscribe(onCompleted: {
+//                    if shouldRefreshConversations {
+//                        self.dbManager.getConversationsObservable(for: accountId)
+//                            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+//                            .subscribe(onNext: { [weak self] conversationsModels in
+//                                self?.conversations.accept(conversationsModels)
+//                            })
+//                            .disposed(by: (self.disposeBag))
+//                    }
+//                    completable(.completed)
+//                }, onError: { (error) in
+//                    completable(.error(error))
+//                })
+                // .disposed(by: self.disposeBag)
             return Disposables.create { }
         })
     }
