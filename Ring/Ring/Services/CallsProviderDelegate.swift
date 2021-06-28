@@ -100,7 +100,7 @@ extension CallsProviderDelegate {
         let type = account.type == AccountType.ring ? URIType.ring : URIType.sip
         let uri = JamiURI.init(schema: type, infoHach: call.participantUri, account: account)
         guard var handle = uri.hash else { return nil }
-        //for sip contact if account and contact have different host name add contact host name
+        // for sip contact if account and contact have different host name add contact host name
         if account.type == AccountType.sip {
             let accountHostname = account.details?
                 .get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountHostname)) ?? ""

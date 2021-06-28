@@ -36,6 +36,8 @@ class MessageCellLocationSharing: MessageCell {
     var myPositionButton: UIButton?
 
     let locationTapped = BehaviorRelay<(Bool, Bool)>(value: (false, false)) // (shouldAnimate, expanding)
+    var loader: MaplyQuadImageLoader!
+    var fetcher: MaplyRemoteTileFetcher!
 
     var maplyViewController: MaplyBaseViewController? // protected in Swift?
     /// The usage of this variable allows for the view to not be refreshed on reuse (e.g. when scrolling)
@@ -107,22 +109,40 @@ class MessageCellLocationSharing: MessageCell {
     }
 
     private func displayMapTile() {
-        self.maplyViewController!.clearColor = UIColor.white
+       // self.maplyViewController!.clearColor = UIColor.white
 
         // thirty fps if we can get it
         self.maplyViewController!.frameInterval = 2
+        let baseCacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+        let tilesCacheDir = "\(baseCacheDir)/openstreetmap/"
+        let maxZoom = Int32(19)
+        let info = MaplyRemoteTileFetchInfo()
+        let request = URLRequest(url: URL(string: MessageCellLocationSharing.remoteTileSourceBaseUrl)!)
+        info.urlReq = request as URLRequest
+        // info.cacheDir = tilesCacheDir
 
-        if let layer = MessageCellLocationSharing.getMaplyLayer() {
-            layer.handleEdges = false
-            layer.coverPoles = false
-            layer.requireElev = false
-            layer.waitLoad = false
-            layer.drawPriority = 0
-            layer.singleLevelLoading = false
-            self.maplyViewController!.add(layer)
-        } else {
-            self.log.error("[MessageCellLocationSharing] Could not get the layer")
-        }
+        let tileSource =
+                MaplyRemoteTileInfoNew(baseURL: MessageCellLocationSharing.remoteTileSourceBaseUrl,
+                                  minZoom: 0,
+                                  maxZoom: maxZoom)
+        tileSource.cacheDir = tilesCacheDir
+        fetcher = MaplyRemoteTileFetcher(name: "fetcher", connections: 2)
+            // MaplyMBTileFetcher(name: MessageCellLocationSharing.remoteTileSourceBaseUrl, minZoom: 0, maxZoom: maxZoom)
+        loader = MaplyQuadImageLoader(params: samplingParams, tileInfo: tileSource, viewC: maplyViewController!)
+        loader?.setTileFetcher(fetcher)
+
+//        if let layer = MessageCellLocationSharing.getMaplyLayer() {
+//            layer.handleEdges = false
+//            layer.coverPoles = false
+//            layer.requireElev = false
+//            layer.waitLoad = false
+//            layer.drawPriority = 0
+//            layer.singleLevelLoading = false
+//            self.maplyViewController!.add(layer)
+//        } else {
+//            self.log.error("[MessageCellLocationSharing] Could not get the layer")
+//        }
+       // self.addSubview((maplyViewController?.view)!!)
 
         if let mapViewC = self.maplyViewController as? MaplyViewController {
             self.toggleMaplyGesture(false)
@@ -141,24 +161,37 @@ class MessageCellLocationSharing: MessageCell {
         }
     }
 
-    private static func getMaplyLayer() -> MaplyQuadImageTilesLayer? {
-        let layer: MaplyQuadImageTilesLayer
+    lazy var samplingParams: MaplySamplingParams = {
+               let samplingParams = MaplySamplingParams()
+               samplingParams.coverPoles = true
+               samplingParams.edgeMatching = false
+               samplingParams.singleLevel = false
+        samplingParams.coverPoles = false
+//        layer.handleEdges = false
+//        layer.coverPoles = false
+//        layer.requireElev = false
+//        layer.waitLoad = false
+//        layer.drawPriority = 0
+//        layer.singleLevelLoading = false
+               return samplingParams
+           }()
 
-        // Because this is a remote tile set, we'll want a cache directory
-        let baseCacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-        let tilesCacheDir = "\(baseCacheDir)/openstreetmap/"
-        let maxZoom = Int32(19)
-
-        guard let tileSource =
-            MaplyRemoteTileSource(baseURL: MessageCellLocationSharing.remoteTileSourceBaseUrl,
-                                  ext: "png",
-                                  minZoom: 0,
-                                  maxZoom: maxZoom) else { return nil }
-        tileSource.cacheDir = tilesCacheDir
-        layer = MaplyQuadImageTilesLayer(tileSource: tileSource)!
-
-        return layer
-    }
+//    private static func getMaplyLayer() -> MaplyQuadImageTilesLayer? {
+//        // Because this is a remote tile set, we'll want a cache directory
+//        let baseCacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+//        let tilesCacheDir = "\(baseCacheDir)/openstreetmap/"
+//        let maxZoom = Int32(19)
+//
+//        let tileSource =
+//                MaplyRemoteTileInfoNew(baseURL: MessageCellLocationSharing.remoteTileSourceBaseUrl,
+//                                  minZoom: 0,
+//                                  maxZoom: maxZoom)
+//        tileSource.cacheDir = tilesCacheDir
+//        let layer: MaplyQuadImageTilesLayertileSource, viewC: <#T##MaplyRenderControllerProtocol#>)
+//        layer = MaplyQuadImageTilesLayer(tileSource: tileSource)!
+//
+//        return layer
+//    }
 
     private static func getBaseURL() -> String {
         // OpenStreetMap Tiles, © OpenStreetMap contributors
@@ -267,7 +300,7 @@ extension MessageCellLocationSharing {
         let shouldExpand = !self.locationTapped.value.1
 
         self.updateHeight(shouldExpand)
-        //self.updateWidth(shouldExpand) now in controller, for animation
+        // self.updateWidth(shouldExpand) now in controller, for animation
         self.toggleMaplyGesture(shouldExpand)
 
         if shouldExpand {

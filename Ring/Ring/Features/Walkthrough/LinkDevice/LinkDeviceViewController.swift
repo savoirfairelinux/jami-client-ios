@@ -65,7 +65,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
 
         self.applyL10n()
 
-        //bind view model to view
+        // bind view model to view
         self.pinInfoButton.rx.tap
             .subscribe(onNext: { [weak self] (_) in
                 self?.showPinInfo()

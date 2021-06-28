@@ -24,7 +24,7 @@ import RxSwift
 
 class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
 
-    //Outlets
+    // Outlets
     @IBOutlet var containerView: UIView!
     @IBOutlet  weak var container: UIView!
     @IBOutlet weak var stackView: UIStackView!
@@ -35,13 +35,13 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
     @IBOutlet  weak var pageControl: UIPageControl!
     @IBOutlet  weak var scrollView: UIScrollView!
 
-    //Constraints
+    // Constraints
     @IBOutlet weak var cancelButtonWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var cancelButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cancelButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
 
-    //Buttons
+    // Buttons
     var muteAudioButton: UIButton!
     var muteVideoButton: UIButton!
     var pauseCallButton: UIButton!
@@ -159,7 +159,7 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         } else {
             let screenRect = UIScreen.main.bounds
             let screenWidth: CGFloat = screenRect.size.width
-            let buttonsWidth: CGFloat = 7 * 50 + 30 * 6 //540
+            let buttonsWidth: CGFloat = 7 * 50 + 30 * 6 // 540
             havePages = screenWidth < buttonsWidth
             firstPageStackView.removeSubviews()
             secondPageStackView.removeSubviews()

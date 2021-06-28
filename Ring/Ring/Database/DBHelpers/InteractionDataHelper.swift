@@ -48,12 +48,12 @@ final class InteractionDataHelper {
     let daemonId = Expression<String>("daemon_id")
     let incoming = Expression<Bool>("incoming")
 
-    //foreign keys references
+    // foreign keys references
     let tableProfiles = Table("profiles")
     let tableConversations = Table("conversations")
     let uri = Expression<String>("uri")
 
-    //migrations from legacy db
+    // migrations from legacy db
     let authorId = Expression<Int64>("author_id")
     let conversationId = Expression<Int64>("conversation_id")
 
@@ -82,7 +82,7 @@ final class InteractionDataHelper {
     func migrateMessageBody(body: String, type: String) -> (body: String, duration: Int64) {
         switch type {
         case InteractionType.call.rawValue:
-            //check if have call duration
+            // check if have call duration
             if let index = body.firstIndex(of: "-") {
                 let timeIndex = body.index(index, offsetBy: 2)
                 let durationString = body.suffix(from: timeIndex)

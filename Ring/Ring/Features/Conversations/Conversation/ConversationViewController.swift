@@ -559,7 +559,7 @@ class ConversationViewController: UIViewController,
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
 
-        //set navigation buttons - call and send contact request
+        // set navigation buttons - call and send contact request
         let inviteItem = UIBarButtonItem()
         inviteItem.image = UIImage(named: "add_person")
         inviteItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
@@ -689,7 +689,7 @@ class ConversationViewController: UIViewController,
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.separatorStyle = .none
 
-        //Register cell
+        // Register cell
         self.tableView.register(cellType: MessageCellSent.self)
         self.tableView.register(cellType: MessageCellReceived.self)
         self.tableView.register(cellType: MessageCellDataTransferSent.self)
@@ -698,7 +698,7 @@ class ConversationViewController: UIViewController,
         self.tableView.register(cellType: MessageCellLocationSharingSent.self)
         self.tableView.register(cellType: MessageCellLocationSharingReceived.self)
 
-        //Bind the TableView to the ViewModel
+        // Bind the TableView to the ViewModel
         self.viewModel.messages.asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (messageViewModels) in
@@ -708,7 +708,7 @@ class ConversationViewController: UIViewController,
             })
             .disposed(by: self.disposeBag)
 
-        //Scroll to bottom when reloaded
+        // Scroll to bottom when reloaded
         self.tableView.rx.methodInvoked(#selector(UITableView.reloadData))
             .subscribe(onNext: { [weak self] _ in
                 self?.scrollToBottomIfNeed()

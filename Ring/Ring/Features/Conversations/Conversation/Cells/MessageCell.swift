@@ -704,13 +704,13 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
 
     func getMaxDimensionForTransfer() -> CGFloat {
         let screenWidth = UIScreen.main.bounds.width
-        //iPhone 5 width
+        // iPhone 5 width
         if screenWidth <= 320 {
             return 200
-            //iPhone 6, iPhone 6 Plus and iPhone XR width
+            // iPhone 6, iPhone 6 Plus and iPhone XR width
         } else if screenWidth > 320 && screenWidth <= 414 {
             return 250
-            //iPad width
+            // iPad width
         } else if screenWidth > 414 {
             return 300
         }

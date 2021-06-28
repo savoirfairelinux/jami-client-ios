@@ -141,7 +141,7 @@ class PlayerView: UIView {
 
     func bindViews() {
         self.viewModel.playBackFrame
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
                 if let image = frame {
                     DispatchQueue.main.async {
@@ -151,14 +151,14 @@ class PlayerView: UIView {
             })
             .disposed(by: self.disposeBag)
         self.viewModel.playerPosition
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] position in
                 self?.progressSlider.value = position
             })
             .disposed(by: self.disposeBag)
         self.viewModel.playerDuration
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] duration in
                 let durationString = self?.durationString(microcec: duration) ?? ""
                 self?.durationLabel.text = durationString
@@ -166,7 +166,7 @@ class PlayerView: UIView {
             .disposed(by: self.disposeBag)
         self.viewModel.pause
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] pause in
                 if #available(iOS 13.0, *) {
                     var image = UIImage(systemName: "pause.fill")
@@ -186,7 +186,7 @@ class PlayerView: UIView {
 
         self.viewModel.audioMuted
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] muted in
                 var image = UIImage(asset: Asset.audioOn)
                 if muted {
@@ -198,7 +198,7 @@ class PlayerView: UIView {
 
         self.viewModel.hasVideo
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] hasVideo in
                 self?.muteAudio.isHidden = !hasVideo
             })

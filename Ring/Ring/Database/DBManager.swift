@@ -285,7 +285,7 @@ class DBManager {
                      message: MessageModel, incoming: Bool,
                      interactionType: InteractionType, duration: Int) -> Observable<SavedMessageForConversation> {
 
-        //create completable which will be executed on background thread
+        // create completable which will be executed on background thread
         return Observable.create { [weak self] observable in
             do {
                 guard let dataBase = self?.dbConnections.forAccount(account: accountId) else {

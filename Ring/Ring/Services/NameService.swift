@@ -74,7 +74,7 @@ class NameService {
     /// Make a username lookup request to the daemon
     func lookupName(withAccount account: String, nameserver: String, name: String) {
 
-        //Cancel previous lookups...
+        // Cancel previous lookups...
         delayedLookupNameCall?.cancel()
 
         if name.isEmpty {
@@ -82,7 +82,7 @@ class NameService {
         } else {
             usernameValidationStatus.onNext(.lookingUp)
 
-            //Fire a delayed lookup...
+            // Fire a delayed lookup...
             delayedLookupNameCall = DispatchWorkItem {
                 self.nameRegistrationAdapter.lookupName(withAccount: account, nameserver: nameserver, name: name)
             }

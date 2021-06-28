@@ -220,7 +220,7 @@ extension ContactViewController: UITableViewDelegate {
         var titlViewThreshold: CGFloat = 0
         let screenSize = UIScreen.main.bounds.size
         if let height = navigationHeight {
-            //height for iphoneX
+            // height for iphoneX
             if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone,
                 screenSize.height == 812.0 {
                 size.height -= (height - 10)

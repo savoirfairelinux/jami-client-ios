@@ -31,7 +31,7 @@ enum RecordingState {
 }
 
 class SendFileViewModel: Stateable, ViewModel {
-    //stateable
+    // stateable
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
@@ -183,7 +183,7 @@ class SendFileViewModel: Stateable, ViewModel {
     func stopRecording() {
         self.videoService.stopLocalRecorder(path: fileName)
         recordingState.accept(.recorded)
-        //create player after delay so recording could be finished
+        // create player after delay so recording could be finished
         DispatchQueue.main.asyncAfter(deadline: (.now() + 1)) { [weak self] in
             self?.createPlayer()
         }
@@ -230,13 +230,13 @@ class SendFileViewModel: Stateable, ViewModel {
         self.videoService.switchCamera()
     }
 
-    //player
+    // player
     var player: PlayerViewModel?
 
     var playerDuration = BehaviorRelay<Float>(value: 0)
     var playerPosition = PublishSubject<Float>()
 
-    var seekTimeVariable = BehaviorRelay<Float>(value: 0) //player position set by user
+    var seekTimeVariable = BehaviorRelay<Float>(value: 0) // player position set by user
     let playBackFrame = PublishSubject<UIImage?>()
 
     var pause = BehaviorRelay<Bool>(value: true)

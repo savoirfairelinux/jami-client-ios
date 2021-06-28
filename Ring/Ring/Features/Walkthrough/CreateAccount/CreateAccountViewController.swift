@@ -220,29 +220,29 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
         // handle password error
         self.viewModel.passwordValidationState.map { $0.isValidated }
-            .skipUntil(self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
+            .skip(until: self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
             .bind(to: self.passwordErrorLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.passwordValidationState.map { $0.message }
-            .skipUntil(self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
+            .skip(until: self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
             .bind(to: self.passwordErrorLabel.rx.text)
             .disposed(by: self.disposeBag)
 
         // handle registration error
         self.viewModel.usernameValidationState.asObservable()
             .map { $0.isDefault }
-            .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
+            .skip(until: self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
             .bind(to: self.registerUsernameErrorLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
         self.viewModel.usernameValidationState.asObservable()
             .map { $0.message }
-            .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
+            .skip(until: self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
             .bind(to: self.registerUsernameErrorLabel.rx.text)
             .disposed(by: self.disposeBag)
         self.viewModel.usernameValidationState.asObservable()
             .map { $0.isAvailable }
-            .skipUntil(self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
-            .observeOn(MainScheduler.instance)
+            .skip(until: self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] available in
                 self?.registerUsernameErrorLabel.textColor = available ? UIColor.jamiSuccess : UIColor.jamiFailure
             }

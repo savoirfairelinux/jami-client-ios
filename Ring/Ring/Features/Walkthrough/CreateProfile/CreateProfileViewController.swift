@@ -91,7 +91,7 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
 
         self.applyL10n()
 
-        //bind view model to view
+        // bind view model to view
         tapGesture.rx.event
             .bind(onNext: { [weak self] _ in
                 self?.dismissInfoView()

@@ -156,12 +156,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: self.disposeBag)
         self.navigationItem.rightBarButtonItem = qrCodeButtonItem
 
-        //setup Table
+        // setup Table
         self.settingsTable.estimatedRowHeight = 35
         self.settingsTable.rowHeight = UITableView.automaticDimension
         self.settingsTable.tableFooterView = UIView()
 
-        //Register cell
+        // Register cell
         self.setUpDataSource()
         self.settingsTable.register(cellType: DeviceCell.self)
     }
@@ -680,7 +680,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             cell.textLabel?.text = L10n.Account.sipServer
         case .sipPassword:
             cell.textLabel?.text = L10n.Account.sipPassword
-            //show password button
+            // show password button
             let rightButton = UIButton(type: .custom)
             var insets = rightButton.contentEdgeInsets
             insets.right = 20.0
@@ -879,7 +879,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         }
         self.present(controller, animated: true, completion: nil)
         if self.viewModel.hasPassword() {
-            //remove border around text view
+            // remove border around text view
             controller.textFields?[1].superview?.backgroundColor = .clear
             controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
         }
@@ -915,11 +915,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         }
         controller.addAction(actionCancel)
         controller.addAction(actionRegister)
-        //username textfield
+        // username textfield
         controller.addTextField {(textField) in
             textField.placeholder = L10n.AccountPage.usernamePlaceholder
         }
-        //error rext field
+        // error rext field
         controller.addTextField {(textField) in
             textField.text = ""
             textField.isUserInteractionEnabled = false
@@ -929,7 +929,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             textField.backgroundColor = UIColor.clear
             textField.font = UIFont.systemFont(ofSize: 11, weight: .thin)
         }
-        //password text field
+        // password text field
         if self.viewModel.hasPassword() {
             controller.addTextField {(textField) in
                 textField.placeholder = L10n.AccountPage.passwordPlaceholder
@@ -941,7 +941,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.viewModel.usernameValidationState.asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak controller] (state) in
-                //update name lookup message
+                // update name lookup message
                 guard let textFields = controller?.textFields,
                       textFields.count >= 2 else { return }
                 textFields[1].text = state.message
@@ -998,7 +998,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 .bind(to: actionRegister.rx.isEnabled)
                 .disposed(by: nameRegistrationBag)
         }
-        //remove border around text view
+        // remove border around text view
         controller.textFields?[1].superview?.backgroundColor = .clear
         controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
     }
@@ -1069,7 +1069,7 @@ extension MeViewController: UITableViewDelegate {
         var size = self.view.bounds.size
         let screenSize = UIScreen.main.bounds.size
         if let height = navigationHeight {
-            //height for ihoneX
+            // height for ihoneX
             if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone,
                 screenSize.height == 812.0 {
                 size.height -= (height - 10)

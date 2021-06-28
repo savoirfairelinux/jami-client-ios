@@ -101,7 +101,7 @@ class JamiSearchView: NSObject {
         searchResultsDatasource.titleForHeaderInSection = { dataSource, index in
             return dataSource.sectionModels[index].header
         }
-        //search status label
+        // search status label
         self.viewModel.searchStatus
             .observeOn(MainScheduler.instance)
             .bind(to: self.searchingLabel.rx.text)
@@ -124,7 +124,7 @@ class JamiSearchView: NSObject {
             .bind(to: self.viewModel.searchBarText)
             .disposed(by: disposeBag)
 
-        //Show Cancel button
+        // Show Cancel button
         self.searchBar.rx.textDidBeginEditing
             .subscribe(onNext: { [weak self] in
                 self?.editSearch.onNext(true)
@@ -132,7 +132,7 @@ class JamiSearchView: NSObject {
             })
             .disposed(by: disposeBag)
 
-        //Hide Cancel button
+        // Hide Cancel button
         self.searchBar.rx.textDidEndEditing
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
@@ -144,14 +144,14 @@ class JamiSearchView: NSObject {
             })
             .disposed(by: disposeBag)
 
-        //Cancel button event
+        // Cancel button event
         self.searchBar.rx.cancelButtonClicked
             .subscribe(onNext: { [weak self] in
                 self?.cancelSearch()
             })
             .disposed(by: disposeBag)
 
-        //Search button event
+        // Search button event
         self.searchBar.rx.searchButtonClicked
             .subscribe(onNext: { [weak self] in
                 self?.searchBar.resignFirstResponder()

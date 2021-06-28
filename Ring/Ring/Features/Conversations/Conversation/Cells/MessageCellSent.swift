@@ -23,7 +23,7 @@ import UIKit
 import Reusable
 
 class MessageCellSent: MessageCell {
-    //Constraints
+    // Constraints
     @IBOutlet weak var messageLabelTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabelLeadingConstraint: NSLayoutConstraint!
 

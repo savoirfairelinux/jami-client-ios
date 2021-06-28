@@ -67,7 +67,7 @@ class PlayerViewModel {
         self.pause.accept(true)
         self.playerPosition.onNext(0)
         // subscribe for frame playback
-        //get first frame, pause player and seek back to first frame
+        // get first frame, pause player and seek back to first frame
         self.playBackDisposeBag = DisposeBag()
         self.incomingFrame.filter {  [weak self] (render) -> Bool in
             render?.rendererId == self?.playerId
@@ -123,7 +123,7 @@ class PlayerViewModel {
                 self?.audioMuted.accept(true)
                 self?.videoService.mutePlayerAudio(playerId: player.playerId,
                                                    mute: self?.audioMuted.value ?? true)
-                //unpause player to get first video frame
+                // unpause player to get first video frame
                 self?.toglePause()
             })
             .disposed(by: self.playBackDisposeBag)

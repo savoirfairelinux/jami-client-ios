@@ -75,17 +75,17 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         self.tableView.allowsSelection = true
         self.tableView.tableFooterView = UIView()
 
-        //Register cell
+        // Register cell
         self.tableView.register(cellType: ContactRequestCell.self)
 
-        //Bind the TableView to the ViewModel
+        // Bind the TableView to the ViewModel
         self.viewModel
             .contactRequestItems
             .observeOn(MainScheduler.instance)
             .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier, cellType: ContactRequestCell.self)) { [weak self] _, item, cell in
                 cell.configureFromItem(item)
 
-                //Accept button
+                // Accept button
                 cell.acceptButton.backgroundColor = UIColor.clear
                 cell.acceptButton.rx.tap
                     .subscribe(onNext: { [weak self] in
@@ -96,7 +96,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     })
                     .disposed(by: cell.disposeBag)
 
-                //Discard button
+                // Discard button
                 cell.discardButton.backgroundColor = UIColor.clear
                 cell.discardButton.rx.tap
                     .subscribe(onNext: { [weak self] in
@@ -105,7 +105,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     })
                     .disposed(by: cell.disposeBag)
 
-                //Ban button
+                // Ban button
                 cell.banButton.backgroundColor = UIColor.clear
                 cell.banButton.rx.tap
                     .subscribe(onNext: { [weak self] in

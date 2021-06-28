@@ -39,11 +39,11 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
     typealias VMType = ScanViewModel
 
     var scannedQrCode: Bool = false
-    //captureSession manages capture activity and coordinates between input device and captures outputs
+    // captureSession manages capture activity and coordinates between input device and captures outputs
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var viewModel: ScanViewModel!
-    //Empty Rectangle with border to outline detected QR or BarCode
+    // Empty Rectangle with border to outline detected QR or BarCode
     lazy var codeFrame: UIView = {
         let cFrame = UIView()
         cFrame.layer.borderColor = UIColor.cyan.cgColor
@@ -74,7 +74,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             self.bottomMarginTitleConstraint.constant = 35
             self.bottomCloseButtonConstraint.constant = 25
         }
-        //AVCaptureDevice allows us to reference a physical capture device (video in our case)
+        // AVCaptureDevice allows us to reference a physical capture device (video in our case)
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
 
         if let captureDevice = captureDevice {
@@ -91,14 +91,14 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 let captureMetadataOutput = AVCaptureMetadataOutput()
                 captureSession?.addOutput(captureMetadataOutput)
 
-                //We tell our Output the expected Meta-data type
+                // We tell our Output the expected Meta-data type
                 captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
                 captureMetadataOutput.metadataObjectTypes = [.code128, .qr, .ean13, .ean8, .code39, .upce, .aztec, .pdf417]
-                //AVMetadataObject.ObjectType
+                // AVMetadataObject.ObjectType
 
                 captureSession?.startRunning()
 
-                //The videoPreviewLayer displays video in conjunction with the captureSession
+                // The videoPreviewLayer displays video in conjunction with the captureSession
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
                 if videoPreviewLayer?.connection?.isVideoMirroringSupported ?? false {
                     videoPreviewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
@@ -160,12 +160,12 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
             view.addSubview(codeFrame)
 
-            //transformedMetaDataObject returns layer coordinates/height/width from visual properties
+            // transformedMetaDataObject returns layer coordinates/height/width from visual properties
             guard let metaDataCoordinates = videoPreviewLayer?.transformedMetadataObject(for: metaDataObject) else {
                 return
             }
 
-            //Those coordinates are assigned to our codeFrame
+            // Those coordinates are assigned to our codeFrame
             codeFrame.frame = metaDataCoordinates.bounds
 
             guard let ringId = stringCodeValue.components(separatedBy: "http://").last else {

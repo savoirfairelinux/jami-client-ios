@@ -41,7 +41,7 @@ enum NotificationCallTitle: String {
     }
 }
 
-//L10n.Calls.connecting
+// L10n.Calls.connecting
 
 enum CallAcition: String {
     case accept = "ACCEPT_ACTION"

@@ -142,14 +142,14 @@ class AccountsService: AccountAdapterDelegate {
             if currentAccount != newValue {
                 currentWillChange.onNext(currentAccount)
             }
-            //Get the current account from account list if already exists
+            // Get the current account from account list if already exists
             let currentAccount = self.accountList.filter({ account in
                 return account == newValue
             }).first
 
             guard let newAccount = newValue else { return }
 
-            //If current account already exists in the list, move it to the first index
+            // If current account already exists in the list, move it to the first index
             if let currentAccount = currentAccount,
                 let index = self.accountList.firstIndex(of: currentAccount) {
                 if index != 0 {
@@ -169,13 +169,13 @@ class AccountsService: AccountAdapterDelegate {
 
         self.responseStream.disposed(by: disposeBag)
 
-        //~ Create a shared stream based on the responseStream one.
+        // ~ Create a shared stream based on the responseStream one.
         self.sharedResponseStream = responseStream.share()
 
         self.accountAdapter = accountAdapter
         self.dbManager = dbManager
-        //~ Registering to the accountAdatpter with self as delegate in order to receive delegation
-        //~ callbacks.
+        // ~ Registering to the accountAdatpter with self as delegate in order to receive delegation
+        // ~ callbacks.
         AccountAdapter.delegate = self
     }
 
@@ -215,7 +215,7 @@ class AccountsService: AccountAdapterDelegate {
                     if try !dbManager.createDatabaseForAccount(accountId: account.id) {
                         return false
                     }
-                    //if tables already exist an exeption will be thrown
+                    // if tables already exist an exeption will be thrown
                 } catch { }
             }
         }
@@ -232,13 +232,7 @@ class AccountsService: AccountAdapterDelegate {
         return Completable.create { [weak self] completable in
             guard let self = self else { return Disposables.create {} }
             self.loadAccountsFromDaemon()
-            if self.accountList.isEmpty {
-                completable(.completed)
-            } else if self.loadDatabases() && self.sanitizeDatabases() {
-                completable(.completed)
-            } else {
-                completable(.error(DataAccessError.databaseError))
-            }
+            completable(.completed)
             return Disposables.create {}
         }
     }
@@ -316,7 +310,7 @@ class AccountsService: AccountAdapterDelegate {
     ///   - password: the required password for the new account
     /// - Returns: an observable of an AccountModel: the created one
     func addRingAccount(username: String?, password: String, enable: Bool) -> Observable<AccountModel> {
-        //~ Single asking the daemon to add a new account with the associated metadata
+        // ~ Single asking the daemon to add a new account with the associated metadata
         var newAccountId = ""
         let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
             do {
@@ -341,7 +335,7 @@ class AccountsService: AccountAdapterDelegate {
             }
         })
 
-        //~ Filter the daemon signals to isolate the "account created" one.
+        // ~ Filter the daemon signals to isolate the "account created" one.
         let filteredDaemonSignals = self.sharedResponseStream
             .filter({ (serviceEvent) -> Bool in
                 if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId { return false }
@@ -356,7 +350,7 @@ class AccountsService: AccountAdapterDelegate {
                 return isRegistrationStateChanged && (isRegistered || notRegistered)
             })
 
-        //~ Make sure that we have the correct account added in the daemon, and return it.
+        // ~ Make sure that we have the correct account added in the daemon, and return it.
         return Observable
             .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, serviceEvent) -> AccountModel in
                 guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
@@ -409,7 +403,7 @@ class AccountsService: AccountAdapterDelegate {
 
     func linkToRingAccount(withPin pin: String, password: String, enable: Bool) -> Observable<AccountModel> {
         var newAccountId = ""
-        //~ Single asking the daemon to add a new account with the associated metadata
+        // ~ Single asking the daemon to add a new account with the associated metadata
         let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
             do {
                 var ringDetails = try self.getRingInitialAccountDetails()
@@ -428,7 +422,7 @@ class AccountsService: AccountAdapterDelegate {
             return Disposables.create {
             }
         })
-        //~ Filter the daemon signals to isolate the "account created" one.
+        // ~ Filter the daemon signals to isolate the "account created" one.
         let filteredDaemonSignals = self.sharedResponseStream.filter { (serviceEvent) -> Bool in
             if serviceEvent.getEventInput(ServiceEventInput.accountId) != newAccountId { return false }
             if serviceEvent.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric {
@@ -440,7 +434,7 @@ class AccountsService: AccountAdapterDelegate {
             let isRegistered = serviceEvent.getEventInput(ServiceEventInput.registrationState) == Registered
             return isRegistrationStateChanged && isRegistered
         }
-        //~ Make sure that we have the correct account added in the daemon, and return it.
+        // ~ Make sure that we have the correct account added in the daemon, and return it.
         return Observable
             .combineLatest(createAccountSingle.asObservable(), filteredDaemonSignals.asObservable()) { (accountModel, serviceEvent) -> AccountModel in
                 guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {

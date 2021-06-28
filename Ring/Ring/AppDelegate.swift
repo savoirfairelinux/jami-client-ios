@@ -97,7 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // ignore sigpipe
-        // swiftlint:disable nesting
         typealias SigHandler = @convention(c) (Int32) -> Void
         let SIG_IGN = unsafeBitCast(OpaquePointer(bitPattern: 1), to: SigHandler.self)
         signal(SIGPIPE, SIG_IGN)
@@ -196,7 +195,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             .disposed(by: self.disposeBag)
         self.accountService.initialAccountsLoading()
             .subscribe(onCompleted: {
-                //set selected account if exists
+                // set selected account if exists
                 self.appCoordinator.start()
                 if self.accountService.hasAccountWithProxyEnabled() {
                     self.registerVoipNotifications()
@@ -209,7 +208,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
                 guard let currentAccount = self.accountService.currentAccount else {
                     self.log.error("Can't get current account!")
-                    //if we don't have any account means it is first run, so enable hardware acceleration
+                    // if we don't have any account means it is first run, so enable hardware acceleration
                     self.videoService.setHardwareAccelerated(withState: true)
                     UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
                     return
@@ -405,13 +404,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func findContactAndStartCall(hash: String, isVideo: Bool) {
-        //if saved jami hash
+        // if saved jami hash
         if hash.isSHA1() {
             let contactUri = JamiURI(schema: URIType.ring, infoHach: hash)
             self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
             return
         }
-        //if saved jami registered name
+        // if saved jami registered name
         self.nameService.usernameLookupStatus
             .observeOn(MainScheduler.instance)
             .filter({ usernameLookupStatus in
@@ -424,7 +423,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     let contactUri = JamiURI(schema: URIType.ring, infoHach: address)
                     self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
                 } else {
-                    //if saved sip contact
+                    // if saved sip contact
                     let contactUri = JamiURI(schema: URIType.sip, infoHach: hash)
                     self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.sip)
                 }

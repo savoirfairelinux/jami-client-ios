@@ -325,7 +325,7 @@ class CallsService: CallsAdapterDelegate {
                    userName: String,
                    isAudioOnly: Bool = false) -> Single<CallModel> {
 
-        //Create and emit the call
+        // Create and emit the call
         var callDetails = [String: String]()
         callDetails[CallDetailKey.callTypeKey.rawValue] = String(describing: CallType.outgoing)
         callDetails[CallDetailKey.displayNameKey.rawValue] = userName
@@ -434,10 +434,10 @@ class CallsService: CallsAdapterDelegate {
     func didChangeCallState(withCallId callId: String, state: String, stateCode: NSInteger) {
 
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
-            //Add or update new call
+            // Add or update new call
             var call = self.calls.value[callId]
             call?.state = CallState(rawValue: state) ?? CallState.unknown
-            //Remove from the cache if the call is over and save message to history
+            // Remove from the cache if the call is over and save message to history
             if call?.state == .over || call?.state == .failure {
                 guard let finichedCall = call else { return }
                 var time = 0
@@ -480,7 +480,7 @@ class CallsService: CallsAdapterDelegate {
                 call?.update(withDictionary: callDictionary)
             }
             guard let newCall = call else { return }
-            //send vCard
+            // send vCard
             if (newCall.state == .ringing && newCall.callType == .outgoing) ||
                 (newCall.state == .current && newCall.callType == .incoming) {
                 self.sendVCard(callID: callId, accountID: newCall.accountId)
@@ -501,7 +501,7 @@ class CallsService: CallsAdapterDelegate {
                 }
             }
 
-            //Emit the call to the observers
+            // Emit the call to the observers
             self.currentCallsEvents.onNext(newCall)
         }
     }
@@ -551,7 +551,7 @@ class CallsService: CallsAdapterDelegate {
                 } else {
                     call?.update(withDictionary: callDictionary)
                 }
-                //Emit the call to the observers
+                // Emit the call to the observers
                 guard let newCall = call else { return }
                 self.newCall.accept(newCall)
             } else {
@@ -610,8 +610,8 @@ class CallsService: CallsAdapterDelegate {
             }
             let callId = pending.key
             var values = pending.value
-            //update pending conferences
-            //replace callID by new Conference ID, and remove calls that was already added to onference
+            // update pending conferences
+            // replace callID by new Conference ID, and remove calls that was already added to onference
             values.subtract(conferenceCalls)
             self.pendingConferences[callId] = nil
             if !values.isEmpty {

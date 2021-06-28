@@ -29,7 +29,7 @@ import SwiftyBeaver
 // swiftlint:disable file_length
 class CallViewController: UIViewController, StoryboardBased, ViewModelBased, ContactPickerDelegate {
 
-    //preview screen
+    // preview screen
     @IBOutlet private weak var profileImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var durationLabel: UILabel!
@@ -40,7 +40,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
     @IBOutlet private weak var mainView: UIView!
 
-    //video screen
+    // video screen
     @IBOutlet private weak var callView: UIView!
     @IBOutlet private weak var incomingVideo: UIImageView!
     @IBOutlet weak var beforeIncomingVideo: UIView!
@@ -55,7 +55,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var infoBlurEffect: UIVisualEffectView!
     @IBOutlet weak var leftArrow: UIImageView!
 
-    //Constraints
+    // Constraints
     @IBOutlet weak var capturedVideoWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var capturedVideoTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var capturedVideoTopConstraint: NSLayoutConstraint!
@@ -196,7 +196,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
     @objc
     func hideCapturedVideo() {
-        //if self.isMenuShowed { return }
+        // if self.isMenuShowed { return }
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             if self?.capturedVideoBlurEffect.alpha == 0 {
                 self?.isVideoHidden = true
@@ -205,7 +205,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self?.isVideoHidden = false
                 self?.capturedVideoBlurEffect.alpha = 0
             }
-            //guard let hidden = self?.infoContainer.isHidden else {return}
+            // guard let hidden = self?.infoContainer.isHidden else {return}
             self?.resizeCapturedVideo(withInfoContainer: false)
             self?.view.layoutIfNeeded()
         })
@@ -306,7 +306,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self.viewModel.showContactPickerVC()
             })
             .disposed(by: self.disposeBag)
-        //Data bindings
+        // Data bindings
         self.viewModel.videoButtonState
             .observeOn(MainScheduler.instance)
             .bind(to: self.buttonsContainer.muteVideoButton.rx.image())
@@ -611,7 +611,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 if dontShow && (!(self?.isCallStarted ?? false)) {
                     self?.isCallStarted = true
                     let device = UIDevice.modelName
-                    //Reduce the cancel button for small iPhone
+                    // Reduce the cancel button for small iPhone
                     switch device {
                     case "iPhone 5", "iPhone 5c", "iPhone 5s", "iPhone SE" :
                         self?.buttonsContainer.cancelButtonWidthConstraint.constant = 50
@@ -668,7 +668,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         DispatchQueue.global(qos: .background).async {
             sleep(UInt32(0.5))
             DispatchQueue.main.async { [weak self] in
-                //guard let hidden = self?.infoContainer.isHidden else {return}
+                // guard let hidden = self?.infoContainer.isHidden else {return}
                 self?.resizeCapturedVideo(withInfoContainer: false)
                 self?.buttonsContainer.updateView()
                 if UIDevice.current.hasNotch && (UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft) && self?.infoContainer.isHidden == false {
@@ -685,7 +685,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         if self.viewModel.call?.state != .current {
             return
         }
-        //Don't change anything if the orientation change to portraitUpsideDown, faceUp or faceDown
+        // Don't change anything if the orientation change to portraitUpsideDown, faceUp or faceDown
         if  UIDevice.current.orientation.rawValue != 5 && UIDevice.current.orientation.rawValue != 6 && UIDevice.current.orientation.rawValue != 2 {
             self.orientation = UIDevice.current.orientation
         }
@@ -707,7 +707,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                     self.capturedVideoTopConstraint.constant = -15
                 }
             } else {
-                //Keep the 4:3 format of the video
+                // Keep the 4:3 format of the video
                 let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20) / 3) * 4
                 self.capturedVideoHeightConstraint.constant = conference ? -UIScreen.main.bounds.height : -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + widthCapturedVideo
@@ -733,7 +733,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                     self.capturedVideoTopConstraint.constant = -5
                 }
             } else {
-                //Keep the 4:3 format of the video
+                // Keep the 4:3 format of the video
                 let widthCapturedVideo = ((self.infoContainerHeightConstraint.constant - 20) / 4) * 3
                 self.capturedVideoHeightConstraint.constant = conference ? -UIScreen.main.bounds.height : -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + widthCapturedVideo

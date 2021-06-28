@@ -89,7 +89,7 @@ class AccountConfigModel {
                     let configKeyModel = ConfigKeyModel(withKey: confKey)
                     configValues.updateValue(value, forKey: configKeyModel)
                 } else {
-                    //~ The key given in parameter is not known from Ring.
+                    // ~ The key given in parameter is not known from Ring.
                     log.warning("Can't find key: \(key)")
                 }
             }

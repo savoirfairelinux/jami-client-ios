@@ -38,7 +38,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     private let disposeBag = DisposeBag()
     private var tempBag = DisposeBag()
 
-    //Services
+    // Services
     private let conversationsService: ConversationsService
     private let nameService: NameService
     private let accountsService: AccountsService
@@ -64,7 +64,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                             }
                             return false
             })
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
     }()
 
     var connectionState = PublishSubject<ConnectionType>()
@@ -90,7 +90,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     let injectionBag: InjectionBag
-    //Values need to be updated when selected account changed
+    // Values need to be updated when selected account changed
     var profileImageForCurrentAccount = PublishSubject<Profile>()
 
     lazy var profileImage: Observable<UIImage> = { [weak self] in
@@ -138,11 +138,11 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     lazy var conversations: Observable<[ConversationSection]> = { [weak self] in
         guard let self = self else { return Observable.empty() }
-        //get initial value
+        // get initial value
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
             self.conversationsService
                 .conversationsForCurrentAccount
-                .observeOn(MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { (conversations) in
                     self.conversationsForCurrentAccount.onNext(conversations)
                 })
@@ -229,7 +229,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                            resultSelector: {(messages, requests) -> BageValues in
                             return (messages, requests)
             })
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
         }()
 
     var conversationsForCurrentAccount = PublishSubject<[ConversationModel]>()
@@ -242,7 +242,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             })
             .disposed(by: self.tempBag)
         self.conversationsService.conversationsForCurrentAccount
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] conversations in
                 self?.conversationsForCurrentAccount.onNext(conversations)
             })
@@ -265,7 +265,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
         self.callService.newCall
             .asObservable()
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.closeAllPlayers()
             })

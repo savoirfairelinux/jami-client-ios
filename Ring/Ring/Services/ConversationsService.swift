@@ -253,12 +253,12 @@ class ConversationsService {
         message.isGenerated = true
 
         self.dbManager.saveMessage(for: accountId, with: contactUri, message: message, incoming: false, interactionType: interactionType, duration: Int(duration))
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 if shouldUpdateConversation {
                     self.dbManager.getConversationsObservable(for: accountId)
-                        .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe(onNext: { conversationsModels in
                             self.conversations.accept(conversationsModels)
                         })
@@ -303,12 +303,12 @@ class ConversationsService {
             self.dbManager.saveMessage(for: accountId, with: contactUri,
                                        message: message, incoming: isIncoming,
                                        interactionType: interactionType, duration: 0)
-                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onNext: { [weak self] message in
                     guard let self = self else { return }
                     self.dataTransferMessageMap[transferId] = message
                     self.dbManager.getConversationsObservable(for: accountId)
-                        .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe(onNext: { conversationsModels in
                             if updateConversation {
                                 self.conversations.accept(conversationsModels)
@@ -347,7 +347,7 @@ class ConversationsService {
             .setMessagesAsRead(messagesIDs: [messageID],
                                withStatus: .displayed,
                                accountId: accountId)
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe()
             .disposed(by: self.disposeBag)
     }
@@ -357,7 +357,7 @@ class ConversationsService {
         return Completable.create(subscribe: { [weak self] completable in
             guard let self = self else { return Disposables.create { } }
 
-            //Filter out read, outgoing, and transfer messages
+            // Filter out read, outgoing, and transfer messages
             let unreadMessages = conversation.messages.filter({ messages in
                 return messages.status != .displayed && messages.incoming && !messages.isTransfer
             })
@@ -375,11 +375,11 @@ class ConversationsService {
                 .setMessagesAsRead(messagesIDs: messagesIds,
                                    withStatus: .displayed,
                                    accountId: accountId)
-                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onCompleted: { [weak self] in
                     guard let self = self else { return }
                     self.dbManager.getConversationsObservable(for: accountId)
-                        .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe(onNext: { [weak self] conversationsModels in
                             self?.conversations.accept(conversationsModels)
                         })
@@ -398,7 +398,7 @@ class ConversationsService {
             guard let self = self else { return Disposables.create { } }
             self.dbManager
                 .deleteMessage(messagesId: messagesId, accountId: accountId)
-                .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onCompleted: { completable(.completed) }, onError: { error in completable(.error(error)) })
                 .disposed(by: self.disposeBag)
             return Disposables.create { }
@@ -411,7 +411,7 @@ class ConversationsService {
 
     func clearHistory(conversation: ConversationModel, keepConversation: Bool) {
         self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: conversation.participantUri, keepConversation: keepConversation)
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onCompleted: { [weak self] in
                 guard let self = self else { return }
                 self.removeSavedFiles(accountId: conversation.accountId, conversationId: conversation.conversationId)
@@ -449,13 +449,13 @@ class ConversationsService {
                               fromAccount account: AccountModel,
                               to uri: String) {
         self.messagesSemaphore.wait()
-        //Get conversations for this sender
+        // Get conversations for this sender
         let conversation = self.conversations.value.filter({ conversation in
             return  conversation.participantUri == uri &&
                     conversation.accountId == account.id
         }).first
 
-        //Find message
+        // Find message
         if let messages: [MessageModel] = conversation?.messages.filter({ (message) -> Bool in
             return  !message.daemonId.isEmpty && message.daemonId == String(messageId) &&
                     ((status.rawValue > message.status.rawValue && status != .failure) ||
@@ -476,7 +476,7 @@ class ConversationsService {
                     .updateMessageStatus(daemonID: message.daemonId,
                                          withStatus: status,
                                          accountId: account.id)
-                    .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe(onCompleted: { [weak self] in
                         guard let self = self else { return }
                         self.messagesSemaphore.signal()
@@ -511,7 +511,7 @@ class ConversationsService {
             .updateTransferStatus(daemonID: String(transferId),
                                   withStatus: transferStatus,
                                   accountId: accountId)
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onCompleted: { [weak self] in
                 guard let self = self else { return }
                 self.messagesSemaphore.signal()

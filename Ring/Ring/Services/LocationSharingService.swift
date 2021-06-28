@@ -30,13 +30,13 @@ enum SerializableLocationTypes: String {
 // swiftlint:enable redundant_string_enum_value
 
 struct SerializableLocation: Codable {
-    var type: String?   //position (optional) and stop
-    var lat: Double?    //position
-    var long: Double?   //position
-    var alt: Double?    //position
-    var time: Int64     //position and stop
-    var bearing: Float? //position (optional)
-    var speed: Float?   //position (optional)
+    var type: String?   // position (optional) and stop
+    var lat: Double?    // position
+    var long: Double?   // position
+    var alt: Double?    // position
+    var time: Int64     // position and stop
+    var bearing: Float? // position (optional)
+    var speed: Float?   // position (optional)
 }
 
 private class LocationSharingInstanceDictionary<T: LocationSharingInstance> {

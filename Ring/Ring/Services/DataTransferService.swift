@@ -83,7 +83,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     private let log = SwiftyBeaver.self
 
-    //contain image if transfering file is image type, othewise contain nil
+    // contain image if transfering file is image type, othewise contain nil
     typealias ImageTuple = (isImage: Bool, data: UIImage?)
     private var transferedImages = [String: ImageTuple]()
 
@@ -105,11 +105,11 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     func getTransferInfo(withId transferId: UInt64) -> NSDataTransferInfo? {
         let info = NSDataTransferInfo()
-        let err = self.dataTransferAdapter.dataTransferInfo(withId: transferId, with: info)
-        if err != .success {
-            self.log.error("DataTransferService: error getting transfer info for id: \(transferId)")
-            return nil
-        }
+       // let err = self.dataTransferAdapter.dataTransferInfo(withId: transferId, with: info)
+//        if err != .success {
+//            self.log.error("DataTransferService: error getting transfer info for id: \(transferId)")
+//            return nil
+//        }
         return info
     }
 
@@ -129,7 +129,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                 let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: info.totalSize, countStyle: .file)
                 let name = pathUrl.lastPathComponent + "\n" + fileSizeWithUnit
                 fileName = name
-                //update db
+                // update db
                 self.dbManager.updateFileName(interactionID: interactionID, name: name, accountId: accountID)
                     .subscribe(onCompleted: { [weak self] in
                         self?.log.debug("file name updated")
@@ -389,34 +389,37 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     // MARK: DataTransferAdapter
 
     private func dataTransferIdList() -> [UInt64]? {
-        return self.dataTransferAdapter.dataTransferList() as? [UInt64]
+        return nil// self.dataTransferAdapter.dataTransferList() as? [UInt64]
     }
 
     private func sendFile(withId transferId: inout UInt64, withInfo info: NSDataTransferInfo) -> NSDataTransferError {
         var err: NSDataTransferError = .unknown
         let _id = UnsafeMutablePointer<UInt64>.allocate(capacity: 1)
-        err = self.dataTransferAdapter.sendFile(with: info, withTransferId: _id)
+       // err = self.dataTransferAdapter.sendFile(with: info, withTransferId: _id)
         transferId = _id.pointee
         return err
     }
 
     private func acceptFileTransfer(withId transferId: UInt64, withPath filePath: String, withOffset offset: Int64 = 0) -> NSDataTransferError {
-        return self.dataTransferAdapter.acceptFileTransfer(withId: transferId, withFilePath: filePath, withOffset: offset)
+        return .unknown
+       // return self.dataTransferAdapter.acceptFileTransfer(withId: transferId, withFilePath: filePath, withOffset: offset)
     }
 
     private func cancelDataTransfer(withId transferId: UInt64) -> NSDataTransferError {
-        return self.dataTransferAdapter.cancelDataTransfer(withId: transferId)
+        return .unknown
+        // return self.dataTransferAdapter.cancelDataTransfer(withId: transferId)
     }
 
     private func dataTransferInfo(withId transferId: UInt64, withInfo info: inout NSDataTransferInfo) -> NSDataTransferError {
-        return self.dataTransferAdapter.dataTransferInfo(withId: transferId, with: info)
+        return .unknown
+        // return self.dataTransferAdapter.dataTransferInfo(withId: transferId, with: info)
     }
 
     private func dataTransferBytesProgress(withId transferId: UInt64, withTotal total: inout Int64, withProgress progress: inout Int64) -> NSDataTransferError {
         var err: NSDataTransferError = .unknown
         let _total = UnsafeMutablePointer<Int64>.allocate(capacity: 1)
         let _progress = UnsafeMutablePointer<Int64>.allocate(capacity: 1)
-        err = self.dataTransferAdapter.dataTransferBytesProgress(withId: transferId, withTotal: _total, withProgress: _progress)
+        // err = self.dataTransferAdapter.dataTransferBytesProgress(withId: transferId, withTotal: _total, withProgress: _progress)
         total = _total.pointee
         progress = _progress.pointee
         return err

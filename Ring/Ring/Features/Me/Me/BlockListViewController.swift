@@ -60,7 +60,7 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
         self.tableView.rowHeight = 64.0
         self.tableView.allowsSelection = false
 
-        //Register cell
+        // Register cell
         self.tableView.register(cellType: BannedContactCell.self)
         self.viewModel
             .blockedContactsItems
