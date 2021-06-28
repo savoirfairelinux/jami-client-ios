@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -129,6 +129,7 @@
                 <outlet property="acceptButton" destination="feR-9F-sZM" id="N3u-Ww-sE5"/>
                 <outlet property="avatarView" destination="9NG-xW-Y5g" id="aDt-m2-cB5"/>
                 <outlet property="banButton" destination="Pni-bm-rkr" id="v1p-37-zfP"/>
+                <outlet property="buttonsContainer" destination="klf-Xm-XH9" id="bik-xo-AVS"/>
                 <outlet property="discardButton" destination="fWB-HR-tae" id="ZMu-NC-hE4"/>
                 <outlet property="nameLabel" destination="Dla-OF-biH" id="tO5-og-I3P"/>
             </connections>
