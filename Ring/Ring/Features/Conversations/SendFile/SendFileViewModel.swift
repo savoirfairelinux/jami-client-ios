@@ -163,7 +163,7 @@ class SendFileViewModel: Stateable, ViewModel {
         let dateString = dateFormatter.string(from: date)
         let random = String(arc4random_uniform(9999))
         let nameForRecordingFile = dateString + "_" + random
-        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile, accountID: conversation.accountId, conversationID: conversation.conversationId) else { return }
+        guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile, accountID: conversation.accountId, conversationID: conversation.id, isSwarm: self.conversation.isSwarm()) else { return }
         guard let name = self.videoService
             .startLocalRecorder(audioOnly: audioOnly, path: url.path) else {
                 return
@@ -202,12 +202,7 @@ class SendFileViewModel: Stateable, ViewModel {
         player?.closePlayer()
         self.player = nil
         let name = fileUrl.lastPathComponent
-        guard let accountId = self.accountService.currentAccount?.id else { return }
-        self.fileTransferService.sendFile(filePath: self.fileName,
-                                          displayName: name,
-                                          accountId: accountId,
-                                          peerInfoHash: self.conversation.hash,
-                                          localIdentifier: nil)
+        self.fileTransferService.sendFile(conversation: self.conversation, filePath: self.fileName, displayName: name, localIdentifier: nil)
         self.videoService.videRecordingFinished()
         self.recordingState.accept(.sent)
     }
