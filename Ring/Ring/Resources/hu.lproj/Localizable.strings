@@ -267,7 +267,7 @@
 "account.accountStatus" = "Fiók állapota";
 "account.enableAccount" = "Fiók engedélyezése";
 "account.statusOnline" = "Elérhető";
-"account.statusOffline" = "Nem érhető el";
+"account.statusOffline" = "Nem elérhető";
 "account.statusConnecting" = "Kapcsolódás";
 "account.statusUnknown" = "Ismeretlen";
 "account.statusConnectionerror" = "Csatlakozási hiba";

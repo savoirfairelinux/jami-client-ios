@@ -55,10 +55,10 @@
 "smartlist.aboutJami" = "Jamiについて";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.messagePlaceholder" = "メッセージを送信";
+"conversation.explanationSendingLocationTo" = "現在地の共有相手: ";
+"conversation.explanationReceivingLocationFrom" = "現在地を受信している相手: ";
+"conversation.errorSavingImage" = "画像一覧に画像を保存できませんでした";
 
 //Invitations
 "invitations.noInvitations" = "招待はありません";
@@ -67,48 +67,48 @@
 
 //Welcome Screen
 "welcome.title" = "Jamiへようこそ！";
-"welcome.text" = "Jamiは、世界中のユーザーと繋がることができる、ユーザーの自由とプライバシーを尊重したフリーソフトウェアです。";
+"welcome.text" = "Jamiは世界中の利用者と繋がることができる自由ソフトウェアであり，利用者の自由と私事権とを尊重しています。";
 "welcome.linkDevice" = "このデバイスをアカウントへリンク";
 "welcome.createAccount" = "Jamiアカウントを作成";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "JAMSサーバーに接続";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "スキップ";
 "createProfile.profileCreated" = "次へ";
-"createProfile.title" = "Personalise your profile";
+"createProfile.title" = "個人情報を設定する";
 "createProfile.enterNameLabel" = "表示名を入力";
 "createProfile.enterNamePlaceholder" = "名前を入力";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.createYourAvatar" = "アバターを作成";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "アカウントを作成";
 "createAccount.chooseStrongPassword" = "あなたのJamiアカウントを守るために強固なパスワードを設定してください。また、このパスワードを忘れないでください。";
-"createAccount.enterNewUsernamePlaceholder" = "ユーザー名";
-"createAccount.newPasswordPlaceholder" = "パスワード";
-"createAccount.repeatPasswordPlaceholder" = "パスワードの再入力";
-"createAccount.passwordCharactersNumberError" = "6文字以上";
-"createAccount.passwordNotMatchingError" = "パスワードが一致しません";
+"createAccount.enterNewUsernamePlaceholder" = "利用者名";
+"createAccount.newPasswordPlaceholder" = "暗証語";
+"createAccount.repeatPasswordPlaceholder" = "暗証語の再入力";
+"createAccount.passwordCharactersNumberError" = "最低6文字";
+"createAccount.passwordNotMatchingError" = "暗証語が一致しません";
 "createAccount.lookingForUsernameAvailability" = "利用可能か確認しています…";
-"createAccount.invalidUsername" = "不正なユーザー名";
-"createAccount.usernameAlreadyTaken" = "このユーザー名は既に取得されています。";
-"createAccount.usernameValid" = "username is available";
+"createAccount.invalidUsername" = "不正な利用者名";
+"createAccount.usernameAlreadyTaken" = "この利用者名は既に取得されています。";
+"createAccount.usernameValid" = "この利用者名は利用可能です";
 "createAccount.loading" = "読み込み中";
 "createAccount.waitCreateAccountTitle" = "アカウントを追加";
-"createAccount.RegisterAUsername" = "ユーザー名を登録";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.RegisterAUsername" = "利用者名を登録";
+"createAccount.ChooseAPassword" = "アカウントを暗号化";
+"createAccount.PasswordInformation" = "アカウントを暗号化する暗証語を選んでください。アカウントが復旧できなくなりますので，暗証語は大切にお控えください。";
 "createAccount.EnableNotifications" = "通知";
 "createAccount.Recommended" = "(推奨)";
 "createAccount.UsernameNotRegisteredTitle" = "ネットワークエラー";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
+"createAccount.timeoutTitle" = "アカウントを作成しました";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "アカウントを連結しています";
-"linkToAccount.linkButtonTitle" = "デバイスをリンク";
-"linkToAccount.passwordPlaceholder" = "パスワード";
+"linkToAccount.waitLinkToAccountTitle" = "アカウントを関連付けています";
+"linkToAccount.linkButtonTitle" = "機器を関連付ける";
+"linkToAccount.passwordPlaceholder" = "暗証語";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "パスワードを入力してください";
 "linkToAccount.pinLabel" = "PINを入力してください";
@@ -120,7 +120,7 @@
 "linkToAccountManager.passwordLabel" = "パスワードを入力してください";
 "linkToAccountManager.usernamePlaceholder" = "ユーザー名";
 "linkToAccountManager.usernameLabel" = "ユーザー名を入力してください";
-"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMSのURL";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
@@ -250,7 +250,7 @@
 "accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
 "accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
-"accountPage.peerDiscovery" = "Auto connect on local network";
+"accountPage.peerDiscovery" = "局所通信網に自動的に接続";
 "accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account

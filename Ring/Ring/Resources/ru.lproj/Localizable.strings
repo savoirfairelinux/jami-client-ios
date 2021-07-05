@@ -22,12 +22,12 @@
 "global.homeTabBarTitle" = "Разговоры";
 "global.meTabBarTitle" = "Настройки аккаунта";
 "global.ok" = "OK";
-"global.versionName" = "Maloya";
+"global.versionName" = "Малоя";
 "global.close" = "Закрыть";
 "global.share" = "Поделиться";
-"global.forward" = "Forward";
+"global.forward" = "Переслать";
 "global.save" = "Сохранить";
-"global.resend" = "Resend";
+"global.resend" = "Отправить повторно";
 "global.preview" = "Предпросмотр";
 
 // Scan
@@ -36,13 +36,13 @@
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Публичный Каталог";
 "smartlist.conversations" = "Разговоры";
 "smartlist.searching" = "Поиск…";
 "smartlist.noResults" = "Нет результатов";
 "smartlist.noConversation" = "Нет разговоров";
 "smartlist.searchBarPlaceholder" = "Введите имя...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Поиск нового или существующего контакта";
 "smartlist.noNetworkConnectivity" = "Нет подключения к сети";
 "smartlist.cellularAccess" = "Убедитесь, что доступ через сеть сотовой связи разрешен";
 "smartlist.accountsTitle" = "Аккаунты";
@@ -51,14 +51,14 @@
 "smartlist.selectOneNumber" = "Выберите один из номеров";
 "smartlist.invitations" = "Приглашения";
 "smartlist.accountSettings" = "Настройки аккаунта";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Расширенные настройки";
 "smartlist.aboutJami" = "О программе Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Написать сообщение";
 "conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
 "conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "Не удалось сохранить изображение в галерею";
 
 //Invitations
 "invitations.noInvitations" = "Приглашений нет";
@@ -92,7 +92,7 @@
 "createAccount.lookingForUsernameAvailability" = "проверка доступности…";
 "createAccount.invalidUsername" = "недопустимое имя пользователя";
 "createAccount.usernameAlreadyTaken" = "имя пользователя уже занято";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "имя пользователя доступно";
 "createAccount.loading" = "Загрузка";
 "createAccount.waitCreateAccountTitle" = "Добавление аккаунта";
 "createAccount.RegisterAUsername" = "Зарегистрировать имя пользователя";
@@ -121,7 +121,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Имя пользователя";
 "linkToAccountManager.usernameLabel" = "Введите имя пользователя";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Введите URL-адрес JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не удалось найти аккаунт";
@@ -189,10 +189,10 @@
 "calls.haghUp" = "повесить трубку";
 "calls.maximize" = "максимизировать";
 "calls.minimize" = "минимизировать";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "установить модератора";
+"calls.removeModerator" = "отключить модератора";
+"calls.muteAudio" = "отключить звук";
+"calls.unmuteAudio" = "включить звук";
 
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
@@ -259,7 +259,7 @@
 "account.sipServer" = "Сервер SIP";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Создать SIP Аккаунт";
 "account.usernameLabel" = "Введите имя пользователя";
 "account.passwordLabel" = "Введите пароль";
 "account.serverLabel" = "Введите адрес";
