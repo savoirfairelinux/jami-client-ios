@@ -238,7 +238,7 @@
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Registruoti";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.createPassword" = "Sukurti slaptažodį";
 "accountPage.changePassword" = "Pakeisti slaptažodį";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";

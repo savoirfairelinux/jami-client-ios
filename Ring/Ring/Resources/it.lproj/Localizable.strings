@@ -88,7 +88,7 @@
 "createAccount.newPasswordPlaceholder" = "Password";
 "createAccount.repeatPasswordPlaceholder" = "Confermare password";
 "createAccount.passwordCharactersNumberError" = "6 caratteri minimo";
-"createAccount.passwordNotMatchingError" = "le passwords non corrispondono";
+"createAccount.passwordNotMatchingError" = "le password non corrispondono";
 "createAccount.lookingForUsernameAvailability" = "ricerca disponibilità...";
 "createAccount.invalidUsername" = "nome utente non valido";
 "createAccount.usernameAlreadyTaken" = "nome utente già utilizzato";
@@ -128,7 +128,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Aggiunto";
 "alerts.accountNoNetworkTitle" = "Impossibile connettersi alla rete";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Impossibile aggiungere account perché Jami non è riuscito a connettersi alla rete distribuita. Controlla la connettività del dispositivo.";
 "alerts.accountDefaultErrorTitle" = "Errore sconosciuto";
 "alerts.accountDefaultErrorMessage" = "Non è stato possibile creare l'account.";
 "alerts.profileTakePhoto" = "Scattare una foto";

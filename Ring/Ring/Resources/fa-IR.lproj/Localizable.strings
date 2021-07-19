@@ -20,14 +20,14 @@
 
 // Global
 "global.homeTabBarTitle" = "گفتگو‌ها";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "تنظیمات حساب";
 "global.ok" = "قبول";
 "global.versionName" = "Maloya";
 "global.close" = "بستن";
 "global.share" = "هم‌رسانی";
-"global.forward" = "Forward";
+"global.forward" = "ارسال کردن";
 "global.save" = "ذخیره";
-"global.resend" = "Resend";
+"global.resend" = "ارسال مجدد";
 "global.preview" = "پیش‌نمایش";
 
 // Scan
@@ -36,13 +36,13 @@
 
 // Smartlist
 "smartlist.yesterday" = "دیروز";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "دایرکتوری عمومی";
 "smartlist.conversations" = "گفتگو‌ها";
 "smartlist.searching" = "در حال جستجو...";
 "smartlist.noResults" = "بدون نتیجه";
 "smartlist.noConversation" = "بدون گفتگو";
 "smartlist.searchBarPlaceholder" = "نام را وارد کنید...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "جستجو برای مخاطب جدید یا موجود...";
 "smartlist.noNetworkConnectivity" = "بدون اتصال شبکه";
 "smartlist.cellularAccess" = "اطمینان حاصل کنید که دسترسی به تلفن همراه در تنظیمات شما اعمال شده";
 "smartlist.accountsTitle" = "حساب‌ها";
@@ -50,15 +50,15 @@
 "smartlist.noNumber" = "مخاطب انتخاب‌شده شماره‌ای ندارد";
 "smartlist.selectOneNumber" = "یکی از شماره‌ها را انتخاب کنید";
 "smartlist.invitations" = "دعوت ها";
-"smartlist.accountSettings" = "Account Settings";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.accountSettings" = "تنظیمات حساب";
+"smartlist.advancedSettings" = "تنظیمات پیشرفته";
 "smartlist.aboutJami" = "درباره جمی";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "پیام بنویسید به";
 "conversation.explanationSendingLocationTo" = "در حال حاضر مکان خود را به اشتراک می‌گذارید";
 "conversation.explanationReceivingLocationFrom" = "در حال حاضر مکان زنده را دریافت می‌کنید از";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "ذخیره تصویر در گالری انجام نشد";
 
 //Invitations
 "invitations.noInvitations" = "بدون دعوت‌نامه";
@@ -92,7 +92,7 @@
 "createAccount.lookingForUsernameAvailability" = "بررسی در‌دسترس بودن…";
 "createAccount.invalidUsername" = "نام کاربری نامعتبر";
 "createAccount.usernameAlreadyTaken" = "نام کاربری قبلاً برداشته شده";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "نام کاربری دردسترس است";
 "createAccount.loading" = "بارگذاری...";
 "createAccount.waitCreateAccountTitle" = "در حال افزودن حساب";
 "createAccount.RegisterAUsername" = "ثبت یک نام‌کاربری";
@@ -121,7 +121,7 @@
 "linkToAccountManager.usernamePlaceholder" = "نام کاربری";
 "linkToAccountManager.usernameLabel" = "نام‌کاربری را وارد کنید";
 "linkToAccountManager.accountManagerPlaceholder" = "آدرس JAMS";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "آدرس JAMS را وارد کنید.";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "نمی توان حساب را پیدا کرد";
@@ -189,10 +189,10 @@
 "calls.haghUp" = "قطع‌کردن";
 "calls.maximize" = "به حداکثر رساندن";
 "calls.minimize" = "به‌حداقل‌رساندن";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "تعیین مدیر";
+"calls.removeModerator" = "لغو میدیریت";
+"calls.muteAudio" = "قطع صدا";
+"calls.unmuteAudio" = "برقراری صدا";
 
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";
@@ -259,7 +259,7 @@
 "account.sipServer" = "سرور SIP";
 "account.port" = "پرت";
 "account.proxyServer" = "پراکسی";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "ایجاد یک حساب SIP";
 "account.usernameLabel" = "نام‌کاربری را وارد کنید";
 "account.passwordLabel" = "گذرواژه را وارد کنید";
 "account.serverLabel" = "آدرس را وارد کنید";

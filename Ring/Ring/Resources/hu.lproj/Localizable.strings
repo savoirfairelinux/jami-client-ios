@@ -55,7 +55,7 @@
 "smartlist.aboutJami" = "A Jami névjegye";
 
 //Conversation
-"conversation.messagePlaceholder" = "Üzenet írása következőknek: ";
+"conversation.messagePlaceholder" = "Üzenet írása következő(k)nek: ";
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
 "conversation.errorSavingImage" = "Nem sikerült menteni a képet a kepgyűjteménybe";
