@@ -248,8 +248,8 @@ final class InteractionDataHelper {
         }
     }
 
-    func updateInteractionContentWithID(interactionID: Int64, content: String, dataBase: Connection) -> Bool {
-        let query = table.filter(id == interactionID)
+    func updateInteractionContentWithID(daemonID: String, content: String, dataBase: Connection) -> Bool {
+        let query = table.filter(daemonId == daemonID)
         do {
             if try dataBase.run(query.update(body <- content)) > 0 {
                 return true

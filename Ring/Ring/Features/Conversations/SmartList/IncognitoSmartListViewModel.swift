@@ -35,6 +35,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
     private let accountService: AccountsService
     private let networkService: NetworkService
     private let contactService: ContactsService
+    private let requestsService: RequestsService
     let conversationService: ConversationsService
 
     lazy var currentAccount: AccountModel? = {
@@ -59,6 +60,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
         self.networkService = injectionBag.networkService
         self.contactService = injectionBag.contactsService
         self.conversationService = injectionBag.conversationsService
+        self.requestsService = injectionBag.requestsService
         self.injectionBag = injectionBag
         self.networkService.connectionStateObservable
             .subscribe(onNext: { [weak self] value in
@@ -87,7 +89,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
         }
         self.contactService.removeAllContacts(for: accountId)
         self.conversationService
-        .getConversationsForAccount(accountId: accountId)
+            .getConversationsForAccount(accountId: accountId, accountURI: "")
         .subscribe()
         .disposed(by: self.disposeBag)
         self.stateSubject.onNext(ConversationState.accountModeChanged)
@@ -95,24 +97,15 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
     }
 
     func startCall(audioOnly: Bool) {
-        guard let currentAccount = self.accountService.currentAccount,
-            let conversation = self.contactFoundConversation.value?.conversation.value else {
+        guard let conversation = self.contactFoundConversation.value?.conversation.value,
+              let participantId = conversation.getParticipants().first?.jamiId else {
                 return
         }
         let username: String = lookupName.value ?? ""
-        self.contactService
-            .sendContactRequest(toContactRingId: self.contactFoundConversation.value!.conversation.value.hash,
-                                withAccount: currentAccount)
-            .subscribe(onCompleted: { [weak self, weak conversation] in
-                guard let self = self, let conversation = conversation else {
-                    return
-                }
-                if audioOnly {
-                    self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: conversation.hash, userName: username))
-                    return
-                }
-                self.stateSubject.onNext(ConversationState.startCall(contactRingId: conversation.hash, userName: username))
-            })
-            .disposed(by: self.disposeBag)
+        if audioOnly {
+            self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: participantId, userName: username))
+            return
+        }
+        self.stateSubject.onNext(ConversationState.startCall(contactRingId: participantId, userName: username))
     }
 }

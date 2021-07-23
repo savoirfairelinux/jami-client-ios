@@ -90,6 +90,21 @@ static id <CallsAdapterDelegate> _delegate;
         }
     }));
 
+    callHandlers.insert(exportable_callback<CallSignal::IncomingCallWithMedia>([&](const std::string& accountId,
+                                                                                   const std::string& callId,
+                                                                                   const std::string& fromURI,
+                                                                                   const std::vector<std::map<std::string, std::string>>& media) {
+        if (CallsAdapter.delegate) {
+            NSString* accountIdString = [NSString stringWithUTF8String:accountId.c_str()];
+            NSString* callIdString = [NSString stringWithUTF8String:callId.c_str()];
+            NSString* fromURIString = [NSString stringWithUTF8String:fromURI.c_str()];
+            [CallsAdapter.delegate receivingCallWithAccountId:accountIdString
+                                                       callId:callIdString
+                                                      fromURI:fromURIString];
+        }
+    }));
+
+
     //Peer place call on hold signal
     callHandlers.insert(exportable_callback<CallSignal::PeerHold>([&](const std::string& callId,
                                                                       bool holding) {
