@@ -31,12 +31,13 @@
 #import "UserSearchResponse.h"
 #import "RegistrationResponse.h"
 #import "NameRegistrationResponse.h"
-#import "MessagesAdapter.h"
+#import "ConversationsAdapter.h"
 #import "ContactsAdapter.h"
 #import "ProfilesAdapter.h"
 #import "PresenceAdapter.h"
 #import "VideoAdapter.h"
 #import "AudioAdapter.h"
+#import "RequestsAdapter.h"
 #import <CommonCrypto/CommonCrypto.h>
 #import <ContactsUI/ContactsUI.h>
 #import <UserNotifications/UserNotifications.h>

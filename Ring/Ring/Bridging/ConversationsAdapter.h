@@ -30,9 +30,12 @@ typedef NS_ENUM(int, MessageStatus)  {
 
 @protocol MessagesAdapterDelegate;
 
-@interface MessagesAdapter : NSObject
+@protocol ConversationsAdapterDelegate;
 
-@property (class, nonatomic, weak) id <MessagesAdapterDelegate> delegate;
+@interface ConversationsAdapter : NSObject
+
+@property (class, nonatomic, weak) id <MessagesAdapterDelegate> messagesDelegate;
+@property (class, nonatomic, weak) id <ConversationsAdapterDelegate> conversationsDelegate;
 
 - (NSUInteger)sendMessageWithContent:(NSDictionary*)content withAccountId:(NSString*)accountId
                        to:(NSString*)toAccountId;
@@ -42,9 +45,21 @@ typedef NS_ENUM(int, MessageStatus)  {
                    fromAccount:(NSString*)accountID
                    isComposing:(BOOL)isComposing;
 
-- (void)setMessageDisplayedFrom:(NSString*)peer
+- (void)setMessageDisplayedFrom:(NSString*)conversationUri
                       byAccount:(NSString*)accountID
                       messageId:(NSString*)messageId
                          status:(MessageStatus)status;
+- (uint32_t)countInteractions:(NSString*)accountId conversationId:(NSString*)conversationId from:(NSString*)messageFrom to:(NSString*)messsageTo authorUri:(NSString*)authorUri;
+- (NSArray*)getSwarmConversationsForAccount:(NSString*) accountId;
 
+- (NSMutableDictionary<NSString*,NSString*>*)getConversationInfoForAccount:(NSString*) accountId conversationId:(NSString*) conversationId;
+
+- (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId;
+
+- (void)removeConversation:(NSString*) accountId conversationId:(NSString*) conversationId;
+
+- (NSString*)startConversation:(NSString*) accountId;
+- (uint32_t)loadConversationMessages:(NSString*) accountId conversationId:(NSString*) conversationId from:(NSString*)fromMessage size:(NSInteger)size;
+
+- (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId;
 @end
