@@ -19,5 +19,5 @@
  */
 
 @objc protocol DataTransferAdapterDelegate {
-    func dataTransferEvent(withTransferId transferId: UInt64, withEventCode eventCode: Int)
+    func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String)
 }
