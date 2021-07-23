@@ -62,10 +62,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             dbManager: self.dBManager)
     }()
     private lazy var conversationsService: ConversationsService = {
-        ConversationsService(withMessageAdapter: MessagesAdapter(), dbManager: self.dBManager)
+        ConversationsService(withConversationsAdapter: ConversationsAdapter(), dbManager: self.dBManager)
     }()
     private lazy var locationSharingService: LocationSharingService = {
         LocationSharingService(dbManager: self.dBManager)
+    }()
+    private lazy var requestsService: RequestsService = {
+        RequestsService(withRequestsAdapter: RequestsAdapter(), dbManager: self.dBManager)
     }()
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
@@ -84,7 +87,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withDataTransferService: self.dataTransferService,
                             withProfileService: self.profileService,
                             withCallsProvider: self.callsProvider,
-                            withLocationSharingService: self.locationSharingService)
+                            withLocationSharingService: self.locationSharingService,
+                            withRequestsService: self.requestsService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -136,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             .disposed(by: self.disposeBag)
 
         self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
-                                                                contactService: self.contactsService,
+                                                                requestsService: self.requestsService,
                                                                 conversationService: self.conversationsService,
                                                                 callService: self.callService)
 
@@ -147,7 +151,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         nameService: self.nameService,
                                                         dataTransferService: self.dataTransferService,
                                                         callService: self.callService,
-                                                        locationSharingService: self.locationSharingService)
+                                                        locationSharingService: self.locationSharingService, contactsService: self.contactsService,
+                                                        callsProvider: self.callsProvider,
+                                                        videoService: self.videoService, requestsService: self.requestsService)
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()
 
@@ -239,11 +245,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func reloadDataFor(account: AccountModel) {
-        self.contactsService.loadContacts(withAccount: account)
-        self.contactsService.loadContactRequests(withAccount: account.id)
-        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
+        self.requestsService.loadRequests(withAccount: account.id, accountURI: account.jamiId)
         self.conversationManager?
-            .prepareConversationsForAccount(accountId: account.id)
+            .prepareConversationsForAccount(accountId: account.id, accountURI: account.jamiId)
+        self.contactsService.loadContacts(withAccount: account)
+        self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: true)
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -323,6 +329,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 if !enabled { LocalNotificationsHelper.setNotification(enable: true) }
             case .provisional:
                 if !enabled { LocalNotificationsHelper.setNotification(enable: true) }
+            case .ephemeral:
+                if enabled { LocalNotificationsHelper.setNotification(enable: false) }
             @unknown default:
                 break
             }

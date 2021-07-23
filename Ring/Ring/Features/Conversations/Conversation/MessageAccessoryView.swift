@@ -24,7 +24,7 @@ import Reusable
 import RxSwift
 import RxRelay
 
-protocol MessageAccessoryViewDelegate: class {
+protocol MessageAccessoryViewDelegate: AnyObject {
     func setIsComposing(isComposing: Bool)
 }
 
