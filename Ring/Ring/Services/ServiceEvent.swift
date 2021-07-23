@@ -74,6 +74,7 @@ enum ServiceEventInput {
     case callType
     case callTime
     case transferId
+    case conversationId
     case localPhotolID
     case proxyAddress
     case deviceId

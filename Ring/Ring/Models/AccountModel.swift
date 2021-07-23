@@ -1,9 +1,10 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
  *
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

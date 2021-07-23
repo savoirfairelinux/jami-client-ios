@@ -23,9 +23,9 @@ import RxCocoa
 import Contacts
 import SwiftyBeaver
 
-class ContactRequestItem {
+class RequestItem {
 
-    let contactRequest: ContactRequestModel
+    let request: RequestModel
 
     let userName = BehaviorRelay(value: "")
     let profileName = BehaviorRelay(value: "")
@@ -43,28 +43,28 @@ class ContactRequestItem {
 
     let disposeBag = DisposeBag()
 
-    init(withContactRequest contactRequest: ContactRequestModel, profileService: ProfilesService,
+    init(withRequest request: RequestModel, profileService: ProfilesService,
          contactService: ContactsService) {
-        self.contactRequest = contactRequest
-        self.userName.accept(contactRequest.ringId)
-        self.profileImageData.accept(self.contactRequest.vCard?.imageData)
-        self.profileName.accept(VCardUtils.getName(from: self.contactRequest.vCard))
-        guard let uri = JamiURI(schema: URIType.ring,
-                                infoHach: contactRequest.ringId)
-            .uriString else { return }
-        profileService.getProfile(uri: uri,
-                                  createIfNotexists: false,
-                                  accountId: contactRequest.accountId)
-            .subscribe(onNext: { [weak self] profile in
-                if let photo = profile.photo, !photo.isEmpty,
-                    let data = NSData(base64Encoded: photo,
-                                      options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    self?.profileImageData.accept(data)
-                }
-                if let name = profile.alias, !name.isEmpty {
-                    self?.profileName.accept(name)
-                }
-            })
-            .disposed(by: self.disposeBag)
+        self.request = request
+        self.userName.accept(request.name)
+        self.profileImageData.accept(self.request.avatar)
+        self.profileName.accept(request.name)
+//        guard let uri = JamiURI(schema: URIType.ring,
+//                                infoHach: contactRequest.ringId)
+//            .uriString else { return }
+//        profileService.getProfile(uri: uri,
+//                                  createIfNotexists: false,
+//                                  accountId: contactRequest.accountId)
+//            .subscribe(onNext: { [weak self] profile in
+//                if let photo = profile.photo, !photo.isEmpty,
+//                    let data = NSData(base64Encoded: photo,
+//                                      options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+//                    self?.profileImageData.accept(data)
+//                }
+//                if let name = profile.alias, !name.isEmpty {
+//                    self?.profileName.accept(name)
+//                }
+//            })
+//            .disposed(by: self.disposeBag)
     }
 }
