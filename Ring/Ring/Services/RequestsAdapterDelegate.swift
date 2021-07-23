@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2021 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-@objc protocol ContactsAdapterDelegate {
-    func contactAdded(contact uri: String, withAccountId accountId: String, confirmed: Bool)
-    func contactRemoved(contact uri: String, withAccountId accountId: String, banned: Bool)
+@objc protocol RequestsAdapterDelegate {
+    func incomingTrustRequestReceived(from jamiId: String,
+                                      to accountId: String,
+                                      conversationId: String,
+                                      withPayload payload: Data,
+                                      receivedDate: Date)
+    func conversationRequestReceived(conversationId: String, accountId: String, metadata: [String: String])
 }
