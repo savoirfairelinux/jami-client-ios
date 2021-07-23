@@ -22,16 +22,20 @@
 import Foundation
 import RxSwift
 
+/*
+ This class generates interactions for contact and call events. Only for non swarm conversations
+ */
+
 class GeneratedInteractionsManager {
     let accountService: AccountsService
-    let contactService: ContactsService
+    let requestsService: RequestsService
     let conversationService: ConversationsService
     let callService: CallsService
     let disposeBag = DisposeBag()
 
-    init(accountService: AccountsService, contactService: ContactsService, conversationService: ConversationsService, callService: CallsService) {
+    init(accountService: AccountsService, requestsService: RequestsService, conversationService: ConversationsService, callService: CallsService) {
         self.accountService = accountService
-        self.contactService = contactService
+        self.requestsService = requestsService
         self.conversationService = conversationService
         self.callService = callService
         self.subscribeToContactEvents()
@@ -40,7 +44,7 @@ class GeneratedInteractionsManager {
 
     // swiftlint:disable cyclomatic_complexity
     private func subscribeToContactEvents() {
-        self.contactService
+        self.requestsService
             .sharedResponseStream
             .subscribe(onNext: { [weak self] contactRequestEvent in
                 guard let self = self else { return }
@@ -50,15 +54,16 @@ class GeneratedInteractionsManager {
                 guard let accountID: String = contactRequestEvent.getEventInput(.accountId) else {
                     return
                 }
-                guard let contactUri: String = contactRequestEvent.getEventInput(.uri) else {
+                guard let jamiId: String = contactRequestEvent.getEventInput(.uri) else {
                     return
                 }
                 guard let account = self.accountService.getAccount(fromAccountId: accountID) else {
                     return
                 }
+
                 let type = AccountModelHelper.init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
                 guard let uriString = JamiURI.init(schema: type,
-                                                   infoHach: contactUri,
+                                                   infoHach: jamiId,
                                                    account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
@@ -72,14 +77,15 @@ class GeneratedInteractionsManager {
                 var message = ""
                 switch contactRequestEvent.eventType {
                 case ServiceEventType.contactAdded:
-                    message = GeneratedMessage.contactAdded.toString()
+                    let conversation = ConversationModel(withParticipantUri: JamiURI(schema: .ring, infoHach: jamiId), accountId: accountID)
+                    self.conversationService.saveLegacyConversation(conversation: conversation, isExisting: false)
+                    return
                 case ServiceEventType.contactRequestReceived:
-                    message = GeneratedMessage.invitationReceived.toString()
+                     message = GeneratedMessage.invitationReceived.toString()
                 case ServiceEventType.contactRequestDiscarded:
                     self.removeConversation(accountId: account.id,
                                             contactRingId: uriString,
                                             shouldUpdateConversation: shouldUpdateConversations)
-                    return
                 default:
                     return
                 }
@@ -97,16 +103,16 @@ class GeneratedInteractionsManager {
                                     contactRingId: String,
                                     shouldUpdateConversation: Bool) {
 
-        guard let conversation = self.conversationService.findConversation(withUri: contactRingId, withAccountId: accountId) else {
+        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: contactRingId, accontId: accountId) else {
             return
         }
-        // remove conversation if it contain only generated messages
-        let messagesNotGenerated = conversation.messages.filter({ !$0.isGenerated })
+        // remove conversation if it contain only contact messages
+        let messages = conversation.messages.value.filter({ $0.type != .contact })
 
-        if !messagesNotGenerated.isEmpty {
+        if !messages.isEmpty {
             return
         }
-        self.conversationService.clearHistory(conversation: conversation, keepConversation: false)
+        self.conversationService.removeConversationFromDB(conversation: conversation, keepConversation: false)
     }
 
     private func subscribeToCallEvents() {
@@ -121,8 +127,19 @@ class GeneratedInteractionsManager {
                     return
                 }
 
-                guard let contactUri: String = callEvent.getEventInput(.uri) else {
+                guard let jamiId: String = callEvent.getEventInput(.uri) else {
                     return
+                }
+
+                guard let account = self.accountService.getAccount(fromAccountId: accountID) else { return }
+
+                if account.type != .sip {
+                    // we should generate messages only for non swarm conversations
+                    guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId.filterOutHost(), accontId: accountID), !conversation.isSwarm() else { return }
+                } else {
+                    // ensure sip conversation exists
+                    guard let uri = JamiURI.init(schema: .sip, infoHach: jamiId, account: account).uriString else { return }
+                    self.conversationService.createSipConversation(uri: uri, accountId: accountID)
                 }
 
                 guard let time: Int = callEvent.getEventInput(.callTime) else {
@@ -133,13 +150,10 @@ class GeneratedInteractionsManager {
                     return
                 }
 
-                guard let account = self.accountService.getAccount(fromAccountId: accountID) else {
-                    return
-                }
                 let type = AccountModelHelper
                     .init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
                 guard let stringUri = JamiURI.init(schema: type,
-                                                   infoHach: contactUri,
+                                                   infoHach: jamiId,
                                                    account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,

@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
@@ -20,38 +20,183 @@
  */
 
 import Foundation
+import RxSwift
+import RxRelay
+
+enum ConversationType: Int {
+    case oneToOne
+    case adminInvitesOnly
+    case invitesOnly
+    case publicChat
+    case nonSwarm
+    case sip
+    case jams
+}
+
+enum ConversationSchema: Int {
+    case jami
+    case swarm
+}
+
+enum ConversationAttributes: String {
+    case title = "title"
+    case description = "description"
+    case avatar = "avatar"
+    case mode = "mode"
+    case conversationId = "id"
+//    case from = "from"
+//    case received = "received"
+}
+
+enum ParticipantRole: Int {
+    case invited
+    case admin
+    case member
+    case banned
+}
+
+struct ConversationParticipant: Equatable {
+    var jamiId: String = ""
+    var role: ParticipantRole = .member
+    var lastReadMessage: String = ""
+    var isLocal: Bool = false
+
+    init (info: [String: String], isLocal: Bool) {
+        self.isLocal = isLocal
+        if let jamiId = info["uri"], !jamiId.isEmpty {
+            self.jamiId = jamiId.replacingOccurrences(of: "ring:", with: "")
+        }
+        if let role = info["role"],
+                          let typeInt = Int(role),
+           let memberRole = ParticipantRole(rawValue: typeInt) {
+            self.role = memberRole
+        }
+        if let lastRead = info["lastRead"] {
+            self.lastReadMessage = lastRead
+        }
+    }
+
+    init (jamiId: String) {
+        self.jamiId = jamiId.replacingOccurrences(of: "ring:", with: "")
+    }
+
+    static func == (lhs: ConversationParticipant, rhs: ConversationParticipant) -> Bool {
+        return lhs.jamiId == rhs.jamiId
+    }
+}
 
 class ConversationModel: Equatable {
-
-    var messages = [MessageModel]()
-    var participantUri: String = ""
-    var hash = ""
+    var messages = BehaviorRelay<[MessageModel]>(value: [MessageModel]())
+    private var participants = [ConversationParticipant]()
+    var hash = ""// contact hash for dialog, conversation title for multiparticipants
     var accountId: String = ""
-    var participantProfile: Profile?
-    var conversationId: String = ""
-    var lastDisplayedMessage: (id: Int64, timestamp: Date) = (-1, Date())
+    var accountURI: String = ""
+    var id: String = ""
+    var lastDisplayedMessage: (id: String, timestamp: Date) = ("", Date())
+    var type: ConversationType = .nonSwarm
+    var needsSyncing = false
+    var parentsId = [String: String]()
 
     convenience init(withParticipantUri participantUri: JamiURI, accountId: String) {
         self.init()
-        self.participantUri = participantUri.uriString ?? ""
+        self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "")]
         self.hash = participantUri.hash ?? ""
         self.accountId = accountId
     }
 
     convenience init (withParticipantUri participantUri: JamiURI, accountId: String, hash: String) {
-    self.init()
-    self.participantUri = participantUri.uriString ?? ""
-    self.hash = hash
-    self.accountId = accountId
+        self.init()
+        self.participants = [ConversationParticipant(jamiId: participantUri.hash ?? "")]
+        self.hash = hash
+        self.accountId = accountId
+    }
+
+    convenience init (withId conversationId: String, accountId: String) {
+        self.init()
+        self.id = conversationId
+        self.accountId = accountId
+    }
+
+    convenience init (withId conversationId: String, accountId: String, info: [String: String]) {
+        self.init()
+        self.id = conversationId
+        self.accountId = accountId
+        if let hash = info[ConversationAttributes.title.rawValue], !hash.isEmpty {
+            self.hash = hash
+        }
+        if let type = info[ConversationAttributes.mode.rawValue],
+                          let typeInt = Int(type),
+           let conversationType = ConversationType(rawValue: typeInt) {
+            self.type = conversationType
+        }
     }
 
     static func == (lhs: ConversationModel, rhs: ConversationModel) -> Bool {
-        return (lhs.participantUri == rhs.participantUri && lhs.accountId == rhs.accountId)
+        if !lhs.isSwarm() && !rhs.isSwarm() || lhs.id.isEmpty || rhs.id.isEmpty {
+            return (lhs.participants[0] == rhs.participants[0] && lhs.accountId == rhs.accountId && lhs.participants.count == rhs.participants.count)
+        }
+        return lhs.id == rhs.id
     }
 
     func getMessage(withDaemonID daemonID: String) -> MessageModel? {
-        return self.messages.filter({ message in
+        return self.messages.value.filter({ message in
            return message.daemonId == daemonID
         }).first
+    }
+
+    func addParticipantsFromArray(participantsInfo: [[String: String]], accountURI: String) {
+        participantsInfo.forEach { participantInfo in
+            guard let uri = participantInfo["uri"], !uri.isEmpty else { return }
+            let isLocal = uri.replacingOccurrences(of: "ring:", with: "") == accountURI.replacingOccurrences(of: "ring:", with: "")
+            let participant = ConversationParticipant(info: participantInfo, isLocal: isLocal)
+            self.participants.append(participant)
+        }
+    }
+
+    func isCoredialog() -> Bool {
+        return self.type == .nonSwarm || self.type == .oneToOne || self.type != .sip || self.type != .jams
+    }
+
+    func getParticipants() -> [ConversationParticipant] {
+        return self.participants.filter { participant in
+            !participant.isLocal
+        }
+    }
+
+    func isDialog() -> Bool {
+        return self.participants.filter { participant in
+            !participant.isLocal
+        }.count == 1
+    }
+
+    func containsParticipant(participant: String) -> Bool {
+        return self.getParticipants()
+            .map { participant in
+                return participant.jamiId
+            }
+            .contains(participant)
+    }
+
+    func getConversationURI() -> String? {
+        if self.type == .nonSwarm {
+            guard let jamiId = self.getParticipants().first?.jamiId else { return nil }
+            return "jami:" + jamiId
+        }
+        return "swarm:" + self.id
+    }
+
+    func allMessagesLoaded() -> Bool {
+        guard let firstMessage = self.messages.value.first else { return false }
+        return firstMessage.parentId.isEmpty
+    }
+
+    func appendNonSwarm(message: MessageModel) {
+        var values = self.messages.value
+        values.append(message)
+        self.messages.accept(values)
+    }
+
+    func isSwarm() -> Bool {
+        return self.type != .nonSwarm && self.type != .sip && self.type != .jams
     }
 }
