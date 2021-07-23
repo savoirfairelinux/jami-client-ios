@@ -173,5 +173,6 @@ extension UIViewController {
         willMove(toParent: nil)
         view.removeFromSuperview()
         removeFromParent()
+        print("removed invitation view")
     }
 }
