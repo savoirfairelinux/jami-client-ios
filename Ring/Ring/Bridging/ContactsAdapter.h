@@ -26,12 +26,6 @@
 
 @property (class, nonatomic, weak) id <ContactsAdapterDelegate> delegate;
 
-//Contact Requests
-- (NSArray<NSDictionary<NSString*,NSString*>*>*)trustRequestsWithAccountId:(NSString*)accountId;
-- (BOOL)acceptTrustRequestFromContact:(NSString*)ringId withAccountId:(NSString*)accountId;
-- (BOOL)discardTrustRequestFromContact:(NSString*)ringId withAccountId:(NSString*)accountId;
-- (void)sendTrustRequestToContact:(NSString*)ringId payload:(NSData*)payload withAccountId:(NSString*)accountId;
-
 //Contacts
 - (void)addContactWithURI:(NSString*)uri accountId:(NSString*)accountId;
 - (void)removeContactWithURI:(NSString*)uri accountId:(NSString*)accountId ban:(BOOL)ban;
