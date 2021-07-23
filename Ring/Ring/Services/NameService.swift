@@ -96,7 +96,9 @@ class NameService {
 
     /// Make an address lookup request to the daemon
     func lookupAddress(withAccount account: String, nameserver: String, address: String) {
-        self.nameRegistrationAdapter.lookupAddress(withAccount: account, nameserver: nameserver, address: address)
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.nameRegistrationAdapter.lookupAddress(withAccount: account, nameserver: nameserver, address: address)
+        }
     }
 
     /// Register the username into the the blockchain
