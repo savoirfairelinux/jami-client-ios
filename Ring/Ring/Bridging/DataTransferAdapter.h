@@ -51,21 +51,23 @@ typedef NS_ENUM(UInt32, NSDataTransferFlags)  {
     NSString* accountId;
     NSDataTransferEventCode lastEvent;
     UInt32 flags;
-    SInt64 totalSize;
-    SInt64 bytesProgress;
+    int64_t totalSize;
+    int64_t bytesProgress;
     NSString* peer;
     NSString* displayName;
     NSString* path;
     NSString* mimetype;
+    NSString* conversationId;
 }
 @property (strong, nonatomic) NSString* accountId;
 @property (nonatomic) NSDataTransferEventCode lastEvent;
 @property (nonatomic) UInt32 flags;
-@property (nonatomic) SInt64 totalSize;
-@property (nonatomic) SInt64 bytesProgress;
+@property (nonatomic) int64_t totalSize;
+@property (nonatomic) int64_t bytesProgress;
 @property (strong, nonatomic) NSString* peer;
 @property (strong, nonatomic) NSString* displayName;
 @property (strong, nonatomic) NSString* path;
+@property (strong, nonatomic) NSString* conversationId;
 @property (strong, nonatomic) NSString* mimetype;
 @end
 
@@ -75,11 +77,34 @@ typedef NS_ENUM(UInt32, NSDataTransferFlags)  {
 
 @property (class, nonatomic, weak) id <DataTransferAdapterDelegate> delegate;
 
-- (NSArray*)dataTransferList;
-- (NSDataTransferError) sendFileWithInfo:(NSDataTransferInfo*)info withTransferId:(UInt64*)transferId;
-- (NSDataTransferError) acceptFileTransferWithId:(UInt64)transferId withFilePath:(NSString*)filePath withOffset:(SInt64)offset;
-- (NSDataTransferError) cancelDataTransferWithId:(UInt64)transferId;
-- (NSDataTransferError) dataTransferInfoWithId:(UInt64)transferId withInfo:(NSDataTransferInfo*)info;
-- (NSDataTransferError) dataTransferBytesProgressWithId:(UInt64)transferId withTotal:(SInt64*)total withProgress:(SInt64*)progress;
+///swarm conversations
+- (void)sendSwarmFileWithName:(NSString*)displayName
+                    accountId:(NSString*)accountId
+               conversationId:(NSString*)conversationId
+                 withFilePath:(NSString*)filePath
+                       parent:(NSString*)parent;
 
+- (NSDataTransferError) swarmTransferProgressWithId:(NSString*)fileId
+                                          accountId:(NSString*)accountId
+                                           withInfo:(NSDataTransferInfo*)info;
+
+- (bool)downloadSwarmTransferWithFileId:(NSString*)fileId
+                              accountId:(NSString*)accountId
+                         conversationId:(NSString*)conversationId
+                          interactionId:(NSString*)interactionId
+                           withFilePath:(NSString*)filePath;
+
+///non swarm conversations
+- (NSDataTransferError)sendNonSwarmFileWithInfo:(NSDataTransferInfo*)info withTransferId:(UInt64*)transferId;
+- (NSDataTransferError)acceptNonSwarmTransferWithId:(NSString*)fileId
+                                          accountId:(NSString*)accountId
+                                       withFilePath:(NSString*)filePath;
+- (NSDataTransferError)nonSwarmTransferInfoWithId:(NSString*)fileId
+                                        accountId:(NSString*)accountId
+                                         withInfo:(NSDataTransferInfo*)info;
+
+///swarm and non swarm conversations
+- (NSDataTransferError)cancelDataTransferWithId:(NSString*)fileId
+                                      accountId:(NSString*)accountId
+                                 conversationId:(NSString*)conversationId;
 @end
