@@ -150,6 +150,13 @@ final class DBContainer {
         return isFileExists(path: path)
     }
 
+    func removeProfile(accountId: String, profileURI: String) {
+        guard let path = contactProfilePath(accountId: accountId, profileURI: profileURI, createifNotExists: false) else { return }
+        do {
+            try FileManager.default.removeItem(atPath: path)
+        } catch _ as NSError {}
+    }
+
     func isMigrationToDBv2Needed(for accountId: String) -> Bool {
         if !isDbExists(accountId: accountId) { return true }
         guard let dbase = self.forAccount(account: accountId) else {
