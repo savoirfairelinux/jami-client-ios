@@ -101,6 +101,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     func needToOnboard() {
         if let parent = self.parentCoordinator as? AppCoordinator {
+            self.navigationViewController.popViewController(animated: false)
             parent.stateSubject.onNext(AppState.needToOnboard(animated: false, isFirstAccount: true))
         }
     }
@@ -232,6 +233,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func pushConversation(participantId: String) {
+        self.popToSmartList()
         guard let account = accountService.currentAccount else {
             return
         }
@@ -242,7 +244,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             self.pushConversation(withConversationViewModel: model)
             return
         }
-        guard let conversation = self.conversationService.findConversation(withUri: uriString, withAccountId: account.id) else {
+        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: participantId, accontId: account.id) else {
             return
         }
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
@@ -278,7 +280,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         let viewControllers = self.navigationViewController.children
         for controller in viewControllers {
             if let smartController = controller as? SmartlistViewController {
-                for model in smartController.viewModel.conversationViewModels where model.conversation.value.participantUri == participantUri {
+                for model in smartController.viewModel.conversationViewModels where
+                    model.conversation.value.isCoredialog() && model.conversation.value.getParticipants().first?.jamiId == participantUri {
                     return model
                 }
             }
