@@ -298,7 +298,7 @@
 "dataTransfer.readableStatusError" = "Hiba";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
-"dataTransfer.readableStatusOngoing" = "Hívás átadása";
+"dataTransfer.readableStatusOngoing" = "Fájlküldés";
 "dataTransfer.readableStatusCanceled" = "Törölve";
 "dataTransfer.sendingFailed" = "Nem sikerült elküldeni";
 "dataTransfer.readableStatusSuccess" = "Kész";
@@ -315,7 +315,7 @@
 "notifications.locationSharingStopped" = "Bejövő tartózkodási hely megosztása leállítva";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
-"dataTransfer.readableStatusOngoing" = "Hívás átadása";
+"dataTransfer.readableStatusOngoing" = "Fájlküldés";
 "dataTransfer.readableStatusCanceled" = "Törölve";
 "dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.readableStatusAccept" = "Elfogadás";

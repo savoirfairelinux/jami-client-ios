@@ -133,7 +133,7 @@
 "alerts.accountDefaultErrorMessage" = "Contul nu a putut fi creat";
 "alerts.profileTakePhoto" = "Fă o poză";
 "alerts.profileUploadPhoto" = "Încarcă o poză";
-"alerts.profileCancelPhoto" = "Anulează";
+"alerts.profileCancelPhoto" = "Renunță";
 "alerts.accountLinkedTitle" = "Se asociază contul";
 "alerts.dbFailedTitle" = "O eroare s-a produs cînd Jami se deschidea";
 "alerts.dbFailedMessage" = "Închide aplicația și încearcă să o deschizi din nou";
@@ -165,7 +165,7 @@
 //Actions
 "actions.blockAction" = "Blochează";
 "actions.deleteAction" = "Șterge";
-"actions.cancelAction" = "Anulează";
+"actions.cancelAction" = "Renunță";
 "actions.clearAction" = "Șterge";
 "actions.backAction" = "Înapoi";
 "actions.doneAction" = "Făcut";
@@ -303,7 +303,7 @@
 "dataTransfer.sendingFailed" = "Trimitere nereușită";
 "dataTransfer.readableStatusSuccess" = "Terminat";
 "dataTransfer.readableStatusAccept" = "Acceptă";
-"dataTransfer.readableStatusCancel" = "Anulează";
+"dataTransfer.readableStatusCancel" = "Renunță";
 
 //Notifications
 "notifications.incomingCall" = "Apel primit";
@@ -319,7 +319,7 @@
 "dataTransfer.readableStatusCanceled" = "Anulat";
 "dataTransfer.readableStatusSuccess" = "Terminat";
 "dataTransfer.readableStatusAccept" = "Acceptă";
-"dataTransfer.readableStatusCancel" = "Anulează";
+"dataTransfer.readableStatusCancel" = "Renunță";
 "dataTransfer.infoMessage" = "Apasă pentru a începe înregistrarea";
 "dataTransfer.sendMessage" = "Trimite";
 
@@ -347,7 +347,7 @@
 "migrateAccount.removeAccount" = "Elimină contul";
 "migrateAccount.error" = "Transferul contului tău nu a reușit. Poți încerca din nou sau șterge acest cont.";
 "migrateAccount.migrating" = "Se transferă...";
-"migrateAccount.cancel" = "Anulează";
+"migrateAccount.cancel" = "Renunță";
 "migrateAccount.migrateAnother" = "Transferă alt cont";
 
 
