@@ -60,7 +60,7 @@ class CallsService: CallsAdapterDelegate {
     private let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
 
     let currentCallsEvents = ReplaySubject<CallModel>.create(bufferSize: 1)
-    let newCall = BehaviorRelay<CallModel>(value: CallModel(withCallId: "", callDetails: [:]))
+    let newCall = BehaviorRelay<CallModel>(value: CallModel(withCallId: "", callDetails: [:], withMedia: [[:]]))
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
     private let newMessagesStream = PublishSubject<ServiceEvent>()
@@ -235,8 +235,8 @@ class CallsService: CallsAdapterDelegate {
                                withAccount account: AccountModel,
                                userName: String,
                                isAudioOnly: Bool = false) -> Observable<CallModel> {
-        let palceCall = self.placeCall(withAccount: account, toRingId: contactId, userName: userName, isAudioOnly: isAudioOnly).asObservable().publish()
-        palceCall
+        let placeCall = self.placeCall(withAccount: account, toRingId: contactId, userName: userName, isAudioOnly: isAudioOnly).asObservable().publish()
+        placeCall
             .subscribe(onNext: { (callModel) in
                 self.inConferenceCalls.onNext(callModel)
                 if let pending = self.pendingConferences[callId], !pending.isEmpty {
@@ -246,8 +246,8 @@ class CallsService: CallsAdapterDelegate {
                 }
             })
             .disposed(by: self.disposeBag)
-        palceCall.connect().disposed(by: self.disposeBag)
-        return palceCall
+        placeCall.connect().disposed(by: self.disposeBag)
+        return placeCall
     }
 
     func refuse(callId: String) -> Completable {
@@ -332,15 +332,29 @@ class CallsService: CallsAdapterDelegate {
         callDetails[CallDetailKey.accountIdKey.rawValue] = account.id
         callDetails[CallDetailKey.audioOnlyKey.rawValue] = isAudioOnly.toString()
         callDetails[CallDetailKey.timeStampStartKey.rawValue] = ""
-        let call = CallModel(withCallId: ringId, callDetails: callDetails)
+
+        var mediaList = [[String: String]]()
+        var mediaAttribute = [String: String]()
+        mediaAttribute[MediaAttributeKey.MEDIATYPE.rawValue] = MediaAttributeValue.AUDIO.rawValue
+        mediaAttribute[MediaAttributeKey.LABEL.rawValue] = "audio_0"
+        mediaAttribute[MediaAttributeKey.ENABLED.rawValue] = MediaAttributeValue.TRUE.rawValue
+        mediaAttribute[MediaAttributeKey.MUTED.rawValue] = MediaAttributeValue.FALSE.rawValue
+        mediaList.append(mediaAttribute)
+        if !isAudioOnly {
+            mediaAttribute[MediaAttributeKey.MEDIATYPE.rawValue] = MediaAttributeValue.VIDEO.rawValue
+            mediaAttribute[MediaAttributeKey.LABEL.rawValue] = "video_0"
+            mediaList.append(mediaAttribute)
+        }
+
+        let call = CallModel(withCallId: ringId, callDetails: callDetails, withMedia: mediaList)
         call.state = .unknown
         call.callType = .outgoing
         return Single<CallModel>.create(subscribe: { [weak self] single in
             if let self = self, let callId = self.callsAdapter.placeCall(withAccountId: account.id,
                                                                          toRingId: ringId,
-                                                                         details: callDetails),
+                                                                         withMedia: mediaList),
                 let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
-                call.update(withDictionary: callDictionary)
+                call.update(withDictionary: callDictionary, withMedia: mediaList)
                 call.callId = callId
                 call.participantsCallId.removeAll()
                 call.participantsCallId.insert(callId)
@@ -439,18 +453,18 @@ class CallsService: CallsAdapterDelegate {
             call?.state = CallState(rawValue: state) ?? CallState.unknown
             // Remove from the cache if the call is over and save message to history
             if call?.state == .over || call?.state == .failure {
-                guard let finichedCall = call else { return }
+                guard let finishedCall = call else { return }
                 var time = 0
-                if let startTime = finichedCall.dateReceived {
+                if let startTime = finishedCall.dateReceived {
                     time = Int(Date().timeIntervalSince1970 - startTime.timeIntervalSince1970)
                 }
                 var event = ServiceEvent(withEventType: .callEnded)
-                event.addEventInput(.uri, value: finichedCall.participantUri)
-                event.addEventInput(.accountId, value: finichedCall.accountId)
-                event.addEventInput(.callType, value: finichedCall.callType.rawValue)
+                event.addEventInput(.uri, value: finishedCall.participantUri)
+                event.addEventInput(.accountId, value: finishedCall.accountId)
+                event.addEventInput(.callType, value: finishedCall.callType.rawValue)
                 event.addEventInput(.callTime, value: time)
                 self.responseStream.onNext(event)
-                self.currentCallsEvents.onNext(finichedCall)
+                self.currentCallsEvents.onNext(finishedCall)
                 var values = self.calls.value
                 values[callId] = nil
                 self.calls.accept(values)
@@ -471,13 +485,14 @@ class CallsService: CallsAdapterDelegate {
                 self.updateConferences(callId: callId)
                 return
             }
+            let mediaList = [[String: String]]()
             if call == nil {
-                call = CallModel(withCallId: callId, callDetails: callDictionary)
+                call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
                 var values = self.calls.value
                 values[callId] = call
                 self.calls.accept(values)
             } else {
-                call?.update(withDictionary: callDictionary)
+                call?.update(withDictionary: callDictionary, withMedia: mediaList)
             }
             guard let newCall = call else { return }
             // send vCard
@@ -503,6 +518,15 @@ class CallsService: CallsAdapterDelegate {
 
             // Emit the call to the observers
             self.currentCallsEvents.onNext(newCall)
+        }
+    }
+
+    func didChangeMediaNegotiationStatus(withCallId callId: String, event: String, withMedia: [[String: String]]) {
+        let call = self.calls.value[callId]
+        if call != nil {
+            if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
+                call?.update(withDictionary: callDictionary, withMedia: withMedia)
+            }
         }
     }
 
@@ -541,15 +565,15 @@ class CallsService: CallsAdapterDelegate {
     }
     // swiftlint:enable cyclomatic_complexity
 
-    func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String) {
+    func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String, withMedia mediaList: [[String: String]]) {
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
 
             if !isCurrentCall() {
                 var call = self.calls.value[callId]
                 if call == nil {
-                    call = CallModel(withCallId: callId, callDetails: callDictionary)
+                    call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
                 } else {
-                    call?.update(withDictionary: callDictionary)
+                    call?.update(withDictionary: callDictionary, withMedia: mediaList)
                 }
                 // Emit the call to the observers
                 guard let newCall = call else { return }
@@ -625,7 +649,8 @@ class CallsService: CallsAdapterDelegate {
             guard var callDetails = self.callsAdapter.getConferenceDetails(conferenceID) else { return }
             callDetails[CallDetailKey.accountIdKey.rawValue] = self.call(callID: callId)?.accountId
             callDetails[CallDetailKey.audioOnlyKey.rawValue] = self.call(callID: callId)?.isAudioOnly.toString()
-            let conf = CallModel(withCallId: conferenceID, callDetails: callDetails)
+            let mediaList = [[String: String]]()
+            let conf = CallModel(withCallId: conferenceID, callDetails: callDetails, withMedia: mediaList)
             conf.participantsCallId = conferenceCalls
             var value = self.calls.value
             value[conferenceID] = conf
