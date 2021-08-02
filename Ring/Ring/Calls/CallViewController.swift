@@ -79,6 +79,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     var isCallStarted: Bool = false
     var isMenuShowed = false
     var isVideoHidden = false
+    var localAudioOnly = true
     var orientation = UIDevice.current.orientation
     var conferenceParticipantMenu: UIView?
 
@@ -271,13 +272,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             })
             .disposed(by: self.disposeBag)
 
-        if !(self.viewModel.call?.isAudioOnly ?? false) {
-            self.buttonsContainer.muteVideoButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    self?.viewModel.toggleMuteVideo()
-                })
-                .disposed(by: self.disposeBag)
-        }
+        self.buttonsContainer.muteVideoButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.toggleMuteVideo()
+            })
+            .disposed(by: self.disposeBag)
 
         self.buttonsContainer.pauseCallButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -312,8 +311,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .bind(to: self.buttonsContainer.muteVideoButton.rx.image())
             .disposed(by: self.disposeBag)
 
-        self.buttonsContainer.muteVideoButton.isEnabled = !(self.viewModel.call?.isAudioOnly ?? false)
-
         self.viewModel.audioButtonState
             .observe(on: MainScheduler.instance)
             .bind(to: self.buttonsContainer.muteAudioButton.rx.image())
@@ -333,6 +330,19 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     // swiftlint:disable function_body_length
     // swiftlint:disable cyclomatic_complexity
     func setupBindings() {
+
+        self.viewModel.audioOnly
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isAudioOnly in
+                if isAudioOnly != self?.localAudioOnly {
+                    self?.localAudioOnly = isAudioOnly
+                    self?.setAvatarView(isAudioOnly)
+                    if !isAudioOnly {
+                        self?.resizeCapturedFrame()
+                    }
+                    UIDevice.current.isProximityMonitoringEnabled = isAudioOnly
+                }
+            })
 
         self.viewModel.contactImageData?.asObservable()
             .observe(on: MainScheduler.instance)
@@ -440,6 +450,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         if !self.viewModel.isAudioOnly {
             self.resizeCapturedFrame()
         }
+
         self.viewModel.videoMuted
             .observe(on: MainScheduler.instance)
             .bind(to: self.capturedVideo.rx.isHidden)
@@ -455,14 +466,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .bind(to: self.leftArrow.rx.isHidden)
             .disposed(by: self.disposeBag)
 
-        if !self.viewModel.isAudioOnly {
-            self.viewModel.callPaused
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { [weak self] show in
+        self.viewModel.callPaused
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] show in
+                if !(self?.localAudioOnly ?? false) {
                     self?.setAvatarView(show)
-                })
-                .disposed(by: self.disposeBag)
-        }
+                }
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.conferenceMode
             .asObservable()
@@ -579,7 +590,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 } else {
                     self.buttonsContainerBottomConstraint.constant = 10
                 }
-                if self.viewModel.isAudioOnly {
+                if self.localAudioOnly {
                     let device = UIDevice.modelName
                     if device == "iPhone 5" || device == "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
                         self.durationLabel.isHidden = true
@@ -593,7 +604,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 } else {
                     self.avatarViewImageTopConstraint.constant = 85
                 }
-                if self.viewModel.isAudioOnly || self.viewModel.call?.state != .current {
+                if self.localAudioOnly || self.viewModel.call?.state != .current {
                     self.profileImageViewWidthConstraint.constant = 160
                     self.profileImageViewHeightConstraint.constant = 160
                     self.profileImageView.cornerRadius = 80
