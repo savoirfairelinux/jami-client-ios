@@ -317,6 +317,16 @@ class CallViewModel: Stateable, ViewModel {
             })
     }()
 
+    lazy var audioOnly: Observable<Bool> = {
+        return currentCall
+            .filter({ call in
+                call.state == .current
+            })
+            .map({call in
+                return call.isAudioOnly
+            })
+    }()
+
     lazy var audioButtonState: Observable<UIImage?> = {
         let onImage = UIImage(asset: Asset.audioRunning)
         let offImage = UIImage(asset: Asset.audioMuted)
@@ -604,7 +614,11 @@ extension CallViewModel {
             return
         }
         let mute = !call.audioMuted
-        self.callService.muteAudio(call: call.callId, mute: mute)
+        if self.isHostCall {
+            self.callService.hostMuteAudio(conferenceId: self.rendererId, mute: mute, localCallId: call.callId)
+        } else {
+            self.callService.requestMediaChange(call: call.callId, mediaLabel: "audio_0")
+        }
     }
 
     func toggleMuteVideo() {
@@ -612,7 +626,11 @@ extension CallViewModel {
             return
         }
         let mute = !call.videoMuted
-        self.callService.muteVideo(call: call.callId, mute: mute)
+        if self.isHostCall {
+            self.callService.hostMuteVideo(conferenceId: self.rendererId, mute: mute, localCallId: call.callId)
+        } else {
+            self.callService.requestMediaChange(call: call.callId, mediaLabel: "video_0")
+        }
     }
 
     func switchCamera() {

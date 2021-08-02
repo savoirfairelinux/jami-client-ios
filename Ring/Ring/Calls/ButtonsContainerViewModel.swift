@@ -66,7 +66,8 @@ class ButtonsContainerViewModel {
             .filter({ call in
                 return call.state == .current
             })
-            .map({_ in
+            .map({[weak self] call in
+                self?.isAudioOnly = call.isAudioOnly
                 return true
             })
 

@@ -60,7 +60,7 @@ class CallsService: CallsAdapterDelegate {
     private let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
 
     let currentCallsEvents = ReplaySubject<CallModel>.create(bufferSize: 1)
-    let newCall = BehaviorRelay<CallModel>(value: CallModel(withCallId: "", callDetails: [:]))
+    let newCall = BehaviorRelay<CallModel>(value: CallModel(withCallId: "", callDetails: [:], withMedia: [[:]]))
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
     private let newMessagesStream = PublishSubject<ServiceEvent>()
@@ -137,7 +137,7 @@ class CallsService: CallsAdapterDelegate {
                 completable(.error(CallServiceError.acceptCallFailed))
                 return Disposables.create { }
             }
-            let success = self.callsAdapter.acceptCall(withId: callId)
+            let success = self.callsAdapter.acceptCall(withId: callId, withMedia: call?.mediaList)
             if success {
                 completable(.completed)
             } else {
@@ -235,8 +235,9 @@ class CallsService: CallsAdapterDelegate {
                                withAccount account: AccountModel,
                                userName: String,
                                isAudioOnly: Bool = false) -> Observable<CallModel> {
-        let palceCall = self.placeCall(withAccount: account, toRingId: contactId, userName: userName, isAudioOnly: isAudioOnly).asObservable().publish()
-        palceCall
+        let call = self.calls.value[callId]
+        let placeCall = self.placeCall(withAccount: account, toRingId: contactId, userName: userName, isAudioOnly: isAudioOnly, withMedia: call?.mediaList ?? [[String: String]]()).asObservable().publish()
+        placeCall
             .subscribe(onNext: { (callModel) in
                 self.inConferenceCalls.onNext(callModel)
                 if let pending = self.pendingConferences[callId], !pending.isEmpty {
@@ -246,8 +247,8 @@ class CallsService: CallsAdapterDelegate {
                 }
             })
             .disposed(by: self.disposeBag)
-        palceCall.connect().disposed(by: self.disposeBag)
-        return palceCall
+        placeCall.connect().disposed(by: self.disposeBag)
+        return placeCall
     }
 
     func refuse(callId: String) -> Completable {
@@ -323,7 +324,8 @@ class CallsService: CallsAdapterDelegate {
     func placeCall(withAccount account: AccountModel,
                    toRingId ringId: String,
                    userName: String,
-                   isAudioOnly: Bool = false) -> Single<CallModel> {
+                   isAudioOnly: Bool = false,
+                   withMedia: [[String: String]] = [[String: String]]()) -> Single<CallModel> {
 
         // Create and emit the call
         var callDetails = [String: String]()
@@ -332,15 +334,31 @@ class CallsService: CallsAdapterDelegate {
         callDetails[CallDetailKey.accountIdKey.rawValue] = account.id
         callDetails[CallDetailKey.audioOnlyKey.rawValue] = isAudioOnly.toString()
         callDetails[CallDetailKey.timeStampStartKey.rawValue] = ""
-        let call = CallModel(withCallId: ringId, callDetails: callDetails)
+
+        var mediaList = withMedia
+        if mediaList.isEmpty {
+            var mediaAttribute = [String: String]()
+            mediaAttribute[MediaAttributeKey.mediaType.rawValue] = MediaAttributeValue.audio.rawValue
+            mediaAttribute[MediaAttributeKey.label.rawValue] = "audio_0"
+            mediaAttribute[MediaAttributeKey.enabled.rawValue] = "true"
+            mediaAttribute[MediaAttributeKey.muted.rawValue] = "false"
+            mediaList.append(mediaAttribute)
+            if !isAudioOnly {
+                mediaAttribute[MediaAttributeKey.mediaType.rawValue] = MediaAttributeValue.video.rawValue
+                mediaAttribute[MediaAttributeKey.label.rawValue] = "video_0"
+                mediaList.append(mediaAttribute)
+            }
+        }
+
+        let call = CallModel(withCallId: ringId, callDetails: callDetails, withMedia: mediaList)
         call.state = .unknown
         call.callType = .outgoing
         return Single<CallModel>.create(subscribe: { [weak self] single in
             if let self = self, let callId = self.callsAdapter.placeCall(withAccountId: account.id,
                                                                          toRingId: ringId,
-                                                                         details: callDetails),
+                                                                         withMedia: mediaList),
                 let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
-                call.update(withDictionary: callDictionary)
+                call.update(withDictionary: callDictionary, withMedia: mediaList)
                 call.callId = callId
                 call.participantsCallId.removeAll()
                 call.participantsCallId.insert(callId)
@@ -356,18 +374,58 @@ class CallsService: CallsAdapterDelegate {
         })
     }
 
-    func muteAudio(call callId: String, mute: Bool) {
-        self.callsAdapter
-            .muteMedia(callId,
+    func hostMuteAudio(conferenceId: String, mute: Bool, localCallId: String) {
+        let success = self.callsAdapter
+            .muteMedia(conferenceId,
                        mediaType: String(describing: MediaType.audio),
                        muted: mute)
+        guard let call = self.calls.value[localCallId], success else {
+            return
+        }
+        call.audioMuted = mute
+        self.currentCallsEvents.onNext(call)
     }
 
-    func muteVideo(call callId: String, mute: Bool) {
-        self.callsAdapter
-            .muteMedia(callId,
+    func hostMuteVideo(conferenceId: String, mute: Bool, localCallId: String) {
+        let success = self.callsAdapter
+            .muteMedia(conferenceId,
                        mediaType: String(describing: MediaType.video),
                        muted: mute)
+        guard let call = self.calls.value[localCallId], success else {
+            return
+        }
+        call.videoMuted = mute
+        self.currentCallsEvents.onNext(call)
+    }
+
+    func requestMediaChange(call callId: String, mediaLabel: String) {
+        guard let call = self.calls.value[callId] else {
+            return
+        }
+        var mediaList = call.mediaList
+        let medias = mediaList.count
+        var found = false
+        for index in 0..<medias where mediaList[index][MediaAttributeKey.label.rawValue] == mediaLabel {
+            mediaList[index][MediaAttributeKey.enabled.rawValue] = "true"
+            let muted = mediaList[index][MediaAttributeKey.muted.rawValue]
+            mediaList[index][MediaAttributeKey.muted.rawValue] = muted == "true" ? "false" : "true"
+            found = true
+            break
+        }
+        if !found && mediaLabel == "video_0" {
+            var media = [String: String]()
+            media[MediaAttributeKey.mediaType.rawValue] = MediaAttributeValue.video.rawValue
+            media[MediaAttributeKey.enabled.rawValue] = "true"
+            media[MediaAttributeKey.muted.rawValue] = "false"
+            media[MediaAttributeKey.source.rawValue] = ""
+            media[MediaAttributeKey.label.rawValue] = mediaLabel
+            mediaList.append(media)
+        }
+        self.callsAdapter.requestMediaChange(callId, withMedia: mediaList)
+        if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
+            call.update(withDictionary: callDictionary, withMedia: mediaList)
+            self.currentCallsEvents.onNext(call)
+        }
     }
 
     func muteCurrentCallVideoVideo(mute: Bool) {
@@ -439,18 +497,18 @@ class CallsService: CallsAdapterDelegate {
             call?.state = CallState(rawValue: state) ?? CallState.unknown
             // Remove from the cache if the call is over and save message to history
             if call?.state == .over || call?.state == .failure {
-                guard let finichedCall = call else { return }
+                guard let finishedCall = call else { return }
                 var time = 0
-                if let startTime = finichedCall.dateReceived {
+                if let startTime = finishedCall.dateReceived {
                     time = Int(Date().timeIntervalSince1970 - startTime.timeIntervalSince1970)
                 }
                 var event = ServiceEvent(withEventType: .callEnded)
-                event.addEventInput(.uri, value: finichedCall.participantUri)
-                event.addEventInput(.accountId, value: finichedCall.accountId)
-                event.addEventInput(.callType, value: finichedCall.callType.rawValue)
+                event.addEventInput(.uri, value: finishedCall.participantUri)
+                event.addEventInput(.accountId, value: finishedCall.accountId)
+                event.addEventInput(.callType, value: finishedCall.callType.rawValue)
                 event.addEventInput(.callTime, value: time)
                 self.responseStream.onNext(event)
-                self.currentCallsEvents.onNext(finichedCall)
+                self.currentCallsEvents.onNext(finishedCall)
                 var values = self.calls.value
                 values[callId] = nil
                 self.calls.accept(values)
@@ -471,13 +529,14 @@ class CallsService: CallsAdapterDelegate {
                 self.updateConferences(callId: callId)
                 return
             }
+            let mediaList = [[String: String]]()
             if call == nil {
-                call = CallModel(withCallId: callId, callDetails: callDictionary)
+                call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
                 var values = self.calls.value
                 values[callId] = call
                 self.calls.accept(values)
             } else {
-                call?.update(withDictionary: callDictionary)
+                call?.update(withDictionary: callDictionary, withMedia: mediaList)
             }
             guard let newCall = call else { return }
             // send vCard
@@ -504,6 +563,39 @@ class CallsService: CallsAdapterDelegate {
             // Emit the call to the observers
             self.currentCallsEvents.onNext(newCall)
         }
+    }
+
+    func didChangeMediaNegotiationStatus(withCallId callId: String, event: String, withMedia: [[String: String]]) {
+        guard let call = self.calls.value[callId],
+              let callDictionary = self.callsAdapter.callDetails(withCallId: callId) else { return }
+        call.update(withDictionary: callDictionary, withMedia: withMedia)
+        self.currentCallsEvents.onNext(call)
+    }
+
+    func didReceiveMediaChangeRequest(withAccountId accountId: String, callId: String, withMedia: [[String: String]]) {
+        guard let call = self.calls.value[callId] else { return }
+        var currentMediaLabels = [String]()
+        for media in call.mediaList where media[MediaAttributeKey.label.rawValue] != nil {
+            currentMediaLabels.append(media[MediaAttributeKey.label.rawValue]!)
+        }
+
+        var answerMedias = [[String: String]]()
+        for media in withMedia {
+            let label = media[MediaAttributeKey.label.rawValue] ?? ""
+            let index = currentMediaLabels.firstIndex(of: label ) ?? -1
+            if index >= 0 {
+                var answerMedia = media
+                answerMedia[MediaAttributeKey.muted.rawValue] = call.mediaList[index][MediaAttributeKey.muted.rawValue]
+                answerMedia[MediaAttributeKey.enabled.rawValue] = call.mediaList[index][MediaAttributeKey.enabled.rawValue]
+                answerMedias.append(answerMedia)
+            } else {
+                var answerMedia = media
+                answerMedia[MediaAttributeKey.muted.rawValue] = "true"
+                answerMedia[MediaAttributeKey.enabled.rawValue] = "true"
+                answerMedias.append(answerMedia)
+            }
+        }
+        self.callsAdapter.answerMediaChangeResquest(callId, withMedia: answerMedias)
     }
 
     func shouldCallBeAddedToConference(callId: String) -> String? {
@@ -541,15 +633,15 @@ class CallsService: CallsAdapterDelegate {
     }
     // swiftlint:enable cyclomatic_complexity
 
-    func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String) {
+    func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String, withMedia mediaList: [[String: String]]) {
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId) {
 
             if !isCurrentCall() {
                 var call = self.calls.value[callId]
                 if call == nil {
-                    call = CallModel(withCallId: callId, callDetails: callDictionary)
+                    call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
                 } else {
-                    call?.update(withDictionary: callDictionary)
+                    call?.update(withDictionary: callDictionary, withMedia: mediaList)
                 }
                 // Emit the call to the observers
                 guard let newCall = call else { return }
@@ -625,7 +717,8 @@ class CallsService: CallsAdapterDelegate {
             guard var callDetails = self.callsAdapter.getConferenceDetails(conferenceID) else { return }
             callDetails[CallDetailKey.accountIdKey.rawValue] = self.call(callID: callId)?.accountId
             callDetails[CallDetailKey.audioOnlyKey.rawValue] = self.call(callID: callId)?.isAudioOnly.toString()
-            let conf = CallModel(withCallId: conferenceID, callDetails: callDetails)
+            let mediaList = [[String: String]]()
+            let conf = CallModel(withCallId: conferenceID, callDetails: callDetails, withMedia: mediaList)
             conf.participantsCallId = conferenceCalls
             var value = self.calls.value
             value[conferenceID] = conf
