@@ -27,13 +27,16 @@
 
 @property (class, nonatomic, weak) id <CallsAdapterDelegate> delegate;
 
-- (BOOL)acceptCallWithId:(NSString*)callId;
+- (BOOL)acceptCallWithId:(NSString*)callId withMedia:(NSArray*)mediaList;
 - (BOOL)refuseCallWithId:(NSString*)callId;
 - (BOOL)hangUpCallWithId:(NSString*)callId;
 - (BOOL)holdCallWithId:(NSString*)callId;
 - (BOOL)unholdCallWithId:(NSString*)callId;
 
-- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId details:(NSDictionary*)details;
+- (BOOL)requestMediaChange:(NSString*)callId withMedia: (NSArray*)mediaList;
+- (void)answerMediaChangeResquest:(NSString*)callId withMedia: (NSArray*)mediaList;
+
+- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId withMedia: (NSArray*)mediaList;
 - (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId;
 - (NSArray<NSString*>*)calls;
 - (void) sendTextMessageWithCallID:(NSString*)callId message:(NSDictionary*)message accountId:(NSString*)accountId sMixed:(bool)isMixed;

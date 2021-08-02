@@ -70,6 +70,25 @@ enum CallDetailKey: String {
     case confID = "CONF_ID"
 }
 
+enum MediaAttributeKey: String {
+    case mediaType = "MEDIA_TYPE"
+    case enabled = "ENABLED"
+    case muted = "MUTED"
+    case source = "SOURCE"
+    case sourceType = "SOURCE_TYPE"
+    case label = "LABEL"
+    case onHold = "ON_HOLD"
+}
+
+enum MediaAttributeValue: String {
+    case audio = "MEDIA_TYPE_AUDIO"
+    case video = "MEDIA_TYPE_VIDEO"
+    case srcTypeNone = "NONE"
+    case srcTypeCapturedDevice = "CAPTURE_DEVICE"
+    case srcTypeDisplay = "DISPLAY"
+    case srcTypeFile = "FILE"
+}
+
 enum CallLayout: Int32 {
     case grid
     case oneWithSmal
@@ -95,6 +114,7 @@ public class CallModel {
     lazy var paricipantHash = {
         self.participantUri.filterOutHost()
     }
+    var mediaList: [[String: String]] = [[String: String]]()
 
     var stateValue = CallState.unknown.rawValue
     var callTypeValue = CallType.missed.rawValue
@@ -126,7 +146,7 @@ public class CallModel {
     init() {
     }
 
-    init(withCallId callId: String, callDetails dictionary: [String: String]) {
+    init(withCallId callId: String, callDetails dictionary: [String: String], withMedia mediaList: [[String: String]]) {
         self.callId = callId
 
         if let fromRingId = dictionary[CallDetailKey.peerNumberKey.rawValue] {
@@ -145,14 +165,28 @@ public class CallModel {
             }
         }
 
-        self.update(withDictionary: dictionary)
+        self.update(withDictionary: dictionary, withMedia: mediaList)
         self.participantsCallId.insert(callId)
     }
 
-    func update(withDictionary dictionary: [String: String]) {
+    func checkDeviceMediaMuted(media: [String: String]) -> Bool {
+        if media[MediaAttributeKey.sourceType.rawValue] == MediaAttributeValue.srcTypeCapturedDevice.rawValue {
+            if media[MediaAttributeKey.muted.rawValue] == "true" || media[MediaAttributeKey.enabled.rawValue] == "false" {
+                    return true
+            }
+        }
+        return false
+    }
+
+    // swiftlint:disable cyclomatic_complexity
+    func update(withDictionary dictionary: [String: String], withMedia mediaList: [[String: String]]) {
 
         if self.state == .current && self.dateReceived == nil {
             self.dateReceived = Date()
+        }
+
+        if !mediaList.isEmpty {
+            self.mediaList = mediaList
         }
 
         if let displayName = dictionary[CallDetailKey.displayNameKey.rawValue], !displayName.isEmpty {
@@ -163,12 +197,22 @@ public class CallModel {
             self.registeredName = registeredName
         }
 
-        if let videoMuted = dictionary[CallDetailKey.videoMutedKey.rawValue]?.toBool() {
-            self.videoMuted = videoMuted
+        self.isAudioOnly = true
+        self.videoMuted = true
+        for (item) in self.mediaList where item[MediaAttributeKey.mediaType.rawValue] == MediaAttributeValue.video.rawValue {
+            self.isAudioOnly = false
+            if !checkDeviceMediaMuted(media: item) {
+                self.videoMuted = false
+                break
+            }
         }
 
-        if let audioMuted = dictionary[CallDetailKey.audioMutedKey.rawValue]?.toBool() {
-            self.audioMuted = audioMuted
+        self.audioMuted = true
+        for (item) in self.mediaList where item[MediaAttributeKey.mediaType.rawValue] == MediaAttributeValue.audio.rawValue {
+            if !checkDeviceMediaMuted(media: item) {
+                self.audioMuted = false
+                break
+            }
         }
 
         if let participantRingId = dictionary[CallDetailKey.peerNumberKey.rawValue] {
@@ -181,10 +225,6 @@ public class CallModel {
 
         if let peerHolding = dictionary[CallDetailKey.peerHoldingKey.rawValue]?.toBool() {
             self.peerHolding = peerHolding
-        }
-
-        if let isAudioOnly = dictionary[CallDetailKey.audioOnlyKey.rawValue]?.toBool() {
-            self.isAudioOnly = isAudioOnly
         }
     }
 
