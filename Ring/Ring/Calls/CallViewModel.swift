@@ -25,6 +25,12 @@ import RxRelay
 import SwiftyBeaver
 import Contacts
 import RxCocoa
+
+enum CallViewMode {
+    case audio
+    case videoWithSpiner
+    case video
+}
 class CallViewModel: Stateable, ViewModel {
 
     // stateable
@@ -122,8 +128,7 @@ class CallViewModel: Stateable, ViewModel {
                 .disposed(by: self.disposeBag)
             self.rendererId = call.callId
             containerViewModel =
-                ButtonsContainerViewModel(isAudioOnly: self.isAudioOnly,
-                                          with: self.callService,
+                ButtonsContainerViewModel(with: self.callService,
                                           audioService: self.audioService,
                                           callID: call.callId,
                                           isSipCall: type,
@@ -171,13 +176,16 @@ class CallViewModel: Stateable, ViewModel {
             })
     }()
 
+    private var hasIncomigVideo = BehaviorRelay<Bool>(value: false)
+
     lazy var incomingFrame: Observable<UIImage?> = {
         return videoService.incomingVideoFrame.asObservable()
             .filter({[weak self] renderer -> Bool in
                 (renderer?.rendererId == self?
                     .rendererId)
             })
-            .map({ renderer in
+            .map({ [weak self] renderer in
+                self?.hasIncomigVideo.accept(renderer?.running ?? false)
                 return renderer?.data
         })
     }()
@@ -288,7 +296,7 @@ class CallViewModel: Stateable, ViewModel {
                 return call.isActive()
             })
             .map({ call in
-                call.state == .current
+                call.state == .current && !call.videoMuted
             })
     }()
 
@@ -315,6 +323,26 @@ class CallViewModel: Stateable, ViewModel {
             .map({call in
                 return call.videoMuted
             })
+    }()
+
+    private lazy var hasLocalVideo: Observable<Bool> = {
+        return currentCall
+            .filter({ call in
+                call.state == .current
+            })
+            .map({call in
+                return !call.isAudioOnly && !call.videoMuted
+            })
+    }()
+
+    lazy var callViewMode: Observable<CallViewMode> = {
+        return Observable.combineLatest(self.hasIncomigVideo.asObservable(),
+                                        self.hasLocalVideo) {(hasIncomigVideo, hasLocalVideo) in
+            if !hasIncomigVideo && !hasLocalVideo {
+                return .audio
+            }
+            return .video
+        }
     }()
 
     lazy var audioButtonState: Observable<UIImage?> = {
@@ -604,7 +632,11 @@ extension CallViewModel {
             return
         }
         let mute = !call.audioMuted
-        self.callService.muteAudio(call: call.callId, mute: mute)
+        if self.isHostCall {
+            self.callService.hostMuteAudio(conferenceId: self.rendererId, mute: mute, localCallId: call.callId)
+        } else {
+            self.callService.requestMediaChange(call: call.callId, mediaLabel: "audio_0")
+        }
     }
 
     func toggleMuteVideo() {
@@ -612,7 +644,11 @@ extension CallViewModel {
             return
         }
         let mute = !call.videoMuted
-        self.callService.muteVideo(call: call.callId, mute: mute)
+        if self.isHostCall {
+            self.callService.hostMuteVideo(conferenceId: self.rendererId, mute: mute, localCallId: call.callId)
+        } else {
+            self.callService.requestMediaChange(call: call.callId, mediaLabel: "video_0")
+        }
     }
 
     func switchCamera() {
