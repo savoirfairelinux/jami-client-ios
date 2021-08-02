@@ -76,9 +76,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var conferenceCallsTop: NSLayoutConstraint!
 
     var viewModel: CallViewModel!
-    var isCallStarted: Bool = false
+    var callViewMode: CallViewMode = .audio
     var isMenuShowed = false
-    var isVideoHidden = false
+    var needToCleanIncomingFrame = false
+    var isCapturedVideoHidden = false
     var orientation = UIDevice.current.orientation
     var conferenceParticipantMenu: UIView?
 
@@ -92,7 +93,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         super.viewDidLoad()
         self.beforeIncomingVideo.backgroundColor = UIColor.jamiBackgroundColor
         let callCurrent = self.viewModel.call?.state == .current
-        self.setAvatarView(!callCurrent || self.viewModel.isAudioOnly)
+        self.setAvatarView(!callCurrent || callViewMode == .audio)
         self.capturedVideoBlurEffect.isHidden = callCurrent
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         let tapCapturedVideo = UITapGestureRecognizer(target: self, action: #selector(hideCapturedVideo))
@@ -110,14 +111,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         nameLabel.textColor = UIColor.jamiLabelColor
         durationLabel.textColor = UIColor.jamiLabelColor
         infoBottomLabel.textColor = UIColor.jamiLabelColor
-        if self.viewModel.isAudioOnly {
-            // The durationLabel and buttonsContainer alpha is set here to 0, and to 1 (with a duration) when appear on the screen to have a fade in animation
-            self.durationLabel.alpha = 0
-            self.buttonsContainer.stackView.alpha = 0
-            self.showAllInfo()
-            self.setWhiteAvatarView()
-        }
-        UIDevice.current.isProximityMonitoringEnabled = self.viewModel.isAudioOnly
         UIApplication.shared.isIdleTimerDisabled = true
         initCallAnimation()
         self.configureConferenceLayout()
@@ -189,23 +182,21 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @objc
     func capturedVideoSwipped(gesture: UISwipeGestureRecognizer) {
         if self.avatarView.isHidden == false { return }
-        if gesture.direction == UISwipeGestureRecognizer.Direction.left && (self.isVideoHidden == false) { return }
-        if gesture.direction == UISwipeGestureRecognizer.Direction.right && (self.isVideoHidden == true) { return }
+        if gesture.direction == UISwipeGestureRecognizer.Direction.left && (self.isCapturedVideoHidden == false) { return }
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right && (self.isCapturedVideoHidden == true) { return }
         self.hideCapturedVideo()
     }
 
     @objc
     func hideCapturedVideo() {
-        // if self.isMenuShowed { return }
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             if self?.capturedVideoBlurEffect.alpha == 0 {
-                self?.isVideoHidden = true
+                self?.isCapturedVideoHidden = true
                 self?.capturedVideoBlurEffect.alpha = 1
             } else {
-                self?.isVideoHidden = false
+                self?.isCapturedVideoHidden = false
                 self?.capturedVideoBlurEffect.alpha = 0
             }
-            // guard let hidden = self?.infoContainer.isHidden else {return}
             self?.resizeCapturedVideo(withInfoContainer: false)
             self?.view.layoutIfNeeded()
         })
@@ -271,13 +262,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             })
             .disposed(by: self.disposeBag)
 
-        if !(self.viewModel.call?.isAudioOnly ?? false) {
-            self.buttonsContainer.muteVideoButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    self?.viewModel.toggleMuteVideo()
-                })
-                .disposed(by: self.disposeBag)
-        }
+        self.buttonsContainer.muteVideoButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.toggleMuteVideo()
+            })
+            .disposed(by: self.disposeBag)
 
         self.buttonsContainer.pauseCallButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -312,8 +301,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .bind(to: self.buttonsContainer.muteVideoButton.rx.image())
             .disposed(by: self.disposeBag)
 
-        self.buttonsContainer.muteVideoButton.isEnabled = !(self.viewModel.call?.isAudioOnly ?? false)
-
         self.viewModel.audioButtonState
             .observe(on: MainScheduler.instance)
             .bind(to: self.buttonsContainer.muteAudioButton.rx.image())
@@ -333,6 +320,23 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     // swiftlint:disable function_body_length
     // swiftlint:disable cyclomatic_complexity
     func setupBindings() {
+        self.viewModel.callViewMode
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] callViewMode in
+                guard let self = self else { return }
+                if callViewMode == self.callViewMode {
+                    return
+                }
+                self.callViewMode = callViewMode
+                switch callViewMode {
+                case .audio:
+                    self.setUpAudioView()
+                case .video, .videoWithSpiner:
+                    self.spinner.startAnimating()
+                    self.setUpVideoView()
+                }
+            })
+            .disposed(by: self.disposeBag)
 
         self.viewModel.contactImageData?.asObservable()
             .observe(on: MainScheduler.instance)
@@ -368,7 +372,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 if self?.durationLabel.text != "" {
-                    if self?.viewModel.isAudioOnly ?? true {
+                    if self?.callViewMode == .audio {
                         self?.buttonContainerHeightConstraint.constant = 200
                         self?.buttonsContainer.containerHeightConstraint.constant = 200
                         UIView.animate(withDuration: 0.3, animations: {
@@ -391,19 +395,28 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.viewModel.incomingFrame
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] frame in
-                if let image = frame {
-                    self?.spinner.stopAnimating()
-                    self?.isCallStarted = true
-                    if self?.beforeIncomingVideo.alpha != 0 {
-                        UIView.animate(withDuration: 0.4, animations: {
-                            self?.beforeIncomingVideo.alpha = 0
-                            }, completion: { [weak self] _ in
-                                self?.beforeIncomingVideo.isHidden = true
-                        })
+                guard let self = self else { return }
+                guard let image = frame else {
+                    if self.needToCleanIncomingFrame {
+                        self.needToCleanIncomingFrame = false
+                        DispatchQueue.main.async { [weak self] in
+                            self?.incomingVideo.image = UIImage()
+                        }
                     }
-                    DispatchQueue.main.async {
-                        self?.incomingVideo.image = image
-                    }
+                    return
+                }
+                self.needToCleanIncomingFrame = true
+                self.setAvatarView(false)
+                self.spinner.stopAnimating()
+                if self.beforeIncomingVideo.alpha != 0 {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.beforeIncomingVideo.alpha = 0
+                    }, completion: { [weak self] _ in
+                        self?.beforeIncomingVideo.isHidden = true
+                    })
+                }
+                DispatchQueue.main.async { [weak self] in
+                    self?.incomingVideo.image = image
                 }
             })
             .disposed(by: self.disposeBag)
@@ -437,9 +450,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             })
             .disposed(by: self.disposeBag)
 
-        if !self.viewModel.isAudioOnly {
-            self.resizeCapturedFrame()
-        }
         self.viewModel.videoMuted
             .observe(on: MainScheduler.instance)
             .bind(to: self.capturedVideo.rx.isHidden)
@@ -454,15 +464,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .observe(on: MainScheduler.instance)
             .bind(to: self.leftArrow.rx.isHidden)
             .disposed(by: self.disposeBag)
-
-        if !self.viewModel.isAudioOnly {
-            self.viewModel.callPaused
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { [weak self] show in
-                    self?.setAvatarView(show)
-                })
-                .disposed(by: self.disposeBag)
-        }
 
         self.viewModel.conferenceMode
             .asObservable()
@@ -547,12 +548,39 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
         self.viewModel.callPaused
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] show in
-                if show {
-                    self?.showCallOptions()
+            .subscribe(onNext: { [weak self] paused in
+                guard let self = self else { return }
+                if paused {
+                    self.setUpAudioView()
+                    self.showCallOptions()
+                    return
+                }
+                switch self.callViewMode {
+                case .audio:
+                    return
+                default:
+                    self.setUpVideoView()
                 }
             })
             .disposed(by: self.disposeBag)
+    }
+
+    func setUpAudioView() {
+        UIDevice.current.isProximityMonitoringEnabled = false
+        self.setWhiteAvatarView()
+        self.buttonsContainer.callViewMode = .audio
+        self.buttonsContainer.updateView()
+        self.setAvatarView(true)
+    }
+
+    func setUpVideoView() {
+        UIDevice.current.isProximityMonitoringEnabled = true
+        self.buttonsContainer.callViewMode = .video
+        self.buttonsContainer.updateView()
+        self.setAvatarView(false)
+        self.isCapturedVideoHidden = false
+        self.capturedVideoBlurEffect.alpha = 0
+        self.resizeCapturedFrame()
     }
 
     func setAvatarView(_ show: Bool) {
@@ -579,7 +607,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 } else {
                     self.buttonsContainerBottomConstraint.constant = 10
                 }
-                if self.viewModel.isAudioOnly {
+                if self.callViewMode == .audio {
                     let device = UIDevice.modelName
                     if device == "iPhone 5" || device == "iPhone 5c" || device == "iPhone 5s" || device == "iPhone SE" {
                         self.durationLabel.isHidden = true
@@ -593,7 +621,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 } else {
                     self.avatarViewImageTopConstraint.constant = 85
                 }
-                if self.viewModel.isAudioOnly || self.viewModel.call?.state != .current {
+                if self.callViewMode == .audio || self.viewModel.call?.state != .current {
                     self.profileImageViewWidthConstraint.constant = 160
                     self.profileImageViewHeightConstraint.constant = 160
                     self.profileImageView.cornerRadius = 80
@@ -608,8 +636,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.viewModel.showCapturedFrame
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] dontShow in
-                if dontShow && (!(self?.isCallStarted ?? false)) {
-                    self?.isCallStarted = true
+                if dontShow {
                     let device = UIDevice.modelName
                     // Reduce the cancel button for small iPhone
                     switch device {

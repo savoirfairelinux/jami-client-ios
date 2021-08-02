@@ -126,6 +126,7 @@ static id <VideoAdapterDelegate> _delegate;
                                                                                int h,
                                                                                bool is_mixer) {
         if(VideoAdapter.delegate) {
+            NSLog(@"&&&&&&&&&decoder started");
             NSString* rendererId = [NSString stringWithUTF8String:renderer_id.c_str()];
             NSString* codecName = @"";
             std::map<std::string, std::string> callDetails = getCallDetails(renderer_id);
@@ -140,6 +141,7 @@ static id <VideoAdapterDelegate> _delegate;
                                                                                const std::string& shm_path,
                                                                                bool is_mixer) {
         if(VideoAdapter.delegate) {
+            NSLog(@"&&&&&&&&&decoder stopped");
             NSString* rendererId = [NSString stringWithUTF8String:renderer_id.c_str()];
             [VideoAdapter.delegate decodingStoppedWithRendererId:rendererId];
         }

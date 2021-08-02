@@ -32,7 +32,6 @@ class ButtonsContainerViewModel {
     let audioService: AudioService
     let callID: String
     let disposeBag = DisposeBag()
-    var isAudioOnly: Bool
     var isSipCall: Bool
     var isIncoming: Bool
     var isConference = false
@@ -43,11 +42,10 @@ class ButtonsContainerViewModel {
         return self.avalaibleCallOptions.asObservable()
     }()
 
-    init(isAudioOnly: Bool, with callService: CallsService, audioService: AudioService, callID: String, isSipCall: Bool, isIncoming: Bool) {
+    init(with callService: CallsService, audioService: AudioService, callID: String, isSipCall: Bool, isIncoming: Bool) {
         self.callService = callService
         self.audioService = audioService
         self.callID = callID
-        self.isAudioOnly = isAudioOnly
         self.isSipCall = isSipCall
         self.isIncoming = isIncoming
         checkCallOptions()
@@ -66,7 +64,7 @@ class ButtonsContainerViewModel {
             .filter({ call in
                 return call.state == .current
             })
-            .map({_ in
+            .map({[weak self] _ in
                 return true
             })
 

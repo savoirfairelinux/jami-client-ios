@@ -53,6 +53,7 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
 
     let disposeBag = DisposeBag()
     var isCallStarted: Bool = false
+    var callViewMode: CallViewMode = .audio
 
     var viewModel: ButtonsContainerViewModel? {
         didSet {
@@ -138,7 +139,7 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         cancelButton.isHidden = true
         switchSpeakerButton.isEnabled = enable
         let isSip = self.viewModel?.isSipCall ?? false
-        let audioOnly = self.viewModel?.isAudioOnly ?? false
+        let audioOnly = self.callViewMode == .audio
         var havePages = false
         if isSip {
             firstPageStackView.removeSubviews()
@@ -149,13 +150,23 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
             firstPageStackView.addArrangedSubview(switchSpeakerButton)
             firstPageStackView.addArrangedSubview(dialpadButton)
         } else if audioOnly {
+            let screenRect = UIScreen.main.bounds
+            let screenWidth: CGFloat = screenRect.size.width
+            let buttonsWidth: CGFloat = 6 * 50 + 30 * 5
+            havePages = screenWidth < buttonsWidth
             firstPageStackView.removeSubviews()
             secondPageStackView.removeSubviews()
             firstPageStackView.addArrangedSubview(stopButton)
             firstPageStackView.addArrangedSubview(pauseCallButton)
-            firstPageStackView.addArrangedSubview(muteAudioButton)
             firstPageStackView.addArrangedSubview(switchSpeakerButton)
             firstPageStackView.addArrangedSubview(addParticipantButton)
+            if havePages {
+                secondPageStackView.addArrangedSubview(muteAudioButton)
+                secondPageStackView.addArrangedSubview(muteVideoButton)
+            } else {
+                firstPageStackView.addArrangedSubview(muteAudioButton)
+                firstPageStackView.addArrangedSubview(muteVideoButton)
+            }
         } else {
             let screenRect = UIScreen.main.bounds
             let screenWidth: CGFloat = screenRect.size.width
@@ -178,8 +189,8 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         }
         pageControl.isHidden = !havePages
         scrollView.isScrollEnabled = havePages
-        if self.viewModel?.isAudioOnly ?? false {
-            cancelButtonBottomConstraint.constant = 20
+        if self.callViewMode == .audio {
+            cancelButtonBottomConstraint.constant = 80
         } else {
             cancelButtonBottomConstraint.constant = 80
         }
@@ -197,19 +208,31 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
     }
 
     func setButtonsColor() {
-        if self.viewModel?.isAudioOnly ?? false {
-            pauseCallButton.tintColor = UIColor.gray
-            pauseCallButton.borderColor = UIColor.gray
-            muteAudioButton.tintColor = UIColor.gray
-            muteAudioButton.borderColor = UIColor.gray
-            addParticipantButton.tintColor = UIColor.gray
-            addParticipantButton.borderColor = UIColor.gray
-            dialpadButton.tintColor = UIColor.gray
-            dialpadButton.borderColor = UIColor.gray
-            switchSpeakerButton.tintColor = UIColor.gray
-            switchSpeakerButton.borderColor = UIColor.gray
+        if self.callViewMode == .audio {
+            updateColorForAudio()
             return
         }
+        updateColorForVideo()
+    }
+
+    func updateColorForAudio() {
+        pageControl.currentPageIndicatorTintColor = UIColor.gray
+        pauseCallButton.tintColor = UIColor.gray
+        pauseCallButton.borderColor = UIColor.gray
+        muteAudioButton.tintColor = UIColor.gray
+        muteAudioButton.borderColor = UIColor.gray
+        muteVideoButton.tintColor = UIColor.gray
+        muteVideoButton.borderColor = UIColor.gray
+        addParticipantButton.tintColor = UIColor.gray
+        addParticipantButton.borderColor = UIColor.gray
+        dialpadButton.tintColor = UIColor.gray
+        dialpadButton.borderColor = UIColor.gray
+        switchSpeakerButton.tintColor = UIColor.gray
+        switchSpeakerButton.borderColor = UIColor.gray
+    }
+
+    func updateColorForVideo() {
+        pageControl.currentPageIndicatorTintColor = UIColor.white
         pauseCallButton.tintColor = UIColor.white
         pauseCallButton.borderColor = UIColor.white
         muteAudioButton.tintColor = UIColor.white

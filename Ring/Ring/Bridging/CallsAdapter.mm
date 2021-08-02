@@ -75,21 +75,7 @@ static id <CallsAdapterDelegate> _delegate;
                                                        message:messageDict];
         }
     }));
-
-    //Incoming call signal
-    callHandlers.insert(exportable_callback<CallSignal::IncomingCall>([&](const std::string& accountId,
-                                                                          const std::string& callId,
-                                                                          const std::string& fromURI) {
-        if (CallsAdapter.delegate) {
-            NSString* accountIdString = [NSString stringWithUTF8String:accountId.c_str()];
-            NSString* callIdString = [NSString stringWithUTF8String:callId.c_str()];
-            NSString* fromURIString = [NSString stringWithUTF8String:fromURI.c_str()];
-            [CallsAdapter.delegate receivingCallWithAccountId:accountIdString
-                                                       callId:callIdString
-                                                      fromURI:fromURIString];
-        }
-    }));
-
+    
     callHandlers.insert(exportable_callback<CallSignal::IncomingCallWithMedia>([&](const std::string& accountId,
                                                                                    const std::string& callId,
                                                                                    const std::string& fromURI,
@@ -98,12 +84,37 @@ static id <CallsAdapterDelegate> _delegate;
             NSString* accountIdString = [NSString stringWithUTF8String:accountId.c_str()];
             NSString* callIdString = [NSString stringWithUTF8String:callId.c_str()];
             NSString* fromURIString = [NSString stringWithUTF8String:fromURI.c_str()];
+            NSArray* mediaList = [Utils vectorOfMapsToArray:media];
             [CallsAdapter.delegate receivingCallWithAccountId:accountIdString
                                                        callId:callIdString
-                                                      fromURI:fromURIString];
+                                                      fromURI:fromURIString
+                                                    withMedia:mediaList];
         }
     }));
-
+    
+    callHandlers.insert(exportable_callback<CallSignal::MediaNegotiationStatus>([&](const std::string& callId,
+                                                                                   const std::string& event,
+                                                                                   const std::vector<std::map<std::string, std::string>>& media) {
+        if (CallsAdapter.delegate) {
+            NSString* eventString = [NSString stringWithUTF8String:event.c_str()];
+            NSString* callIdString = [NSString stringWithUTF8String:callId.c_str()];
+            NSArray* mediaList = [Utils vectorOfMapsToArray:media];
+            [CallsAdapter.delegate didChangeMediaNegotiationStatusWithCallId:callIdString
+                                                                       event:eventString
+                                                                   withMedia:mediaList];
+        }
+    }));
+    
+    callHandlers.insert(exportable_callback<CallSignal::MediaChangeRequested>([&](const std::string& accountId,
+                                                                                   const std::string& callId,
+                                                                                   const std::vector<std::map<std::string, std::string>>& media) {
+        if (CallsAdapter.delegate) {
+            NSString* callIdString = [NSString stringWithUTF8String:callId.c_str()];
+            NSString* accountIdString = [NSString stringWithUTF8String:accountId.c_str()];
+            NSArray* mediaList = [Utils vectorOfMapsToArray:media];
+            [CallsAdapter.delegate didReceiveMediaChangeRequestWithAccountId:accountIdString callId:callIdString withMedia:mediaList];
+        }
+    }));
 
     //Peer place call on hold signal
     callHandlers.insert(exportable_callback<CallSignal::PeerHold>([&](const std::string& callId,
@@ -164,8 +175,8 @@ static id <CallsAdapterDelegate> _delegate;
 
 #pragma mark -
 
-- (BOOL)acceptCallWithId:(NSString*)callId {
-    return accept(std::string([callId UTF8String]));
+- (BOOL)acceptCallWithId:(NSString*)callId withMedia:(NSArray*)mediaList {
+    return acceptWithMedia(std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
 }
 
 - (BOOL)refuseCallWithId:(NSString*)callId {
@@ -188,9 +199,18 @@ static id <CallsAdapterDelegate> _delegate;
     playDTMF(std::string([code UTF8String]));
 }
 
-- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId details:(NSDictionary*)details {
+- (BOOL)requestMediaChange:(NSString*)callId withMedia: (NSArray*)mediaList {
+    requestMediaChange(std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
+    return false;
+}
+
+- (void)answerMediaChangeResquest:(NSString*)callId withMedia: (NSArray*)mediaList {
+    answerMediaChangeRequest(std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
+}
+
+- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId withMedia:(NSArray*)mediaList {
     std::string callId;
-    callId = placeCall(std::string([accountId UTF8String]), std::string([ringId UTF8String]), [Utils dictionnaryToMap:details]);
+    callId = placeCallWithMedia(std::string([accountId UTF8String]), std::string([ringId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap:mediaList]);
     return [NSString stringWithUTF8String:callId.c_str()];
 }
 

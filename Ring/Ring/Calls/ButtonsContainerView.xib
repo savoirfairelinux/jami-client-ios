@@ -128,6 +128,7 @@
                         </button>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" defersCurrentPageDisplay="YES" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="p1T-pp-N9T">
                             <rect key="frame" x="198.5" y="172.5" width="103.5" height="27.5"/>
+                            <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </pageControl>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

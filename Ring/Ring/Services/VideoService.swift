@@ -269,7 +269,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
-typealias RendererTuple = (rendererId: String, data: UIImage?)
+typealias RendererTuple = (rendererId: String, data: UIImage?, running: Bool)
 
 class VideoService: FrameExtractorDelegate {
 
@@ -444,6 +444,7 @@ extension VideoService: VideoAdapterDelegate {
 
     func decodingStopped(withRendererId rendererId: String) {
         self.log.debug("Decoding stopped...")
+        self.incomingVideoFrame.onNext(RendererTuple(rendererId, nil, false))
         videoAdapter.removeSinkTarget(withSinkId: rendererId)
     }
 
@@ -481,7 +482,7 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func writeFrame(withImage image: UIImage?, forCallId: String) {
-        self.incomingVideoFrame.onNext(RendererTuple(forCallId, image))
+        self.incomingVideoFrame.onNext(RendererTuple(forCallId, image, true))
     }
 
     func getImageOrienation() -> UIImage.Orientation {
