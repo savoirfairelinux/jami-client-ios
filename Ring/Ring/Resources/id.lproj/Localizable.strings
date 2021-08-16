@@ -28,7 +28,7 @@
 "global.forward" = "Forward";
 "global.save" = "Save";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Cuplikan";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -275,10 +275,10 @@
 "account.me" = "Saya";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Tidak ada kontak yang diblokir";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Hubungkan perangkat baru";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "A network error occured during the export";
 "linkDevice.defaultError" = "An error occured during the export";
@@ -326,7 +326,7 @@
 
 //Generated Message
 "generatedMessage.contactAdded" = "Kontak ditambahkan";
-"generatedMessage.invitationReceived" = "Invitation received";
+"generatedMessage.invitationReceived" = "Undangan diterima";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
 "generatedMessage.incomingCall" = "Panggilan masuk";

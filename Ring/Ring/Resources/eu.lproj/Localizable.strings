@@ -28,7 +28,7 @@
 "global.forward" = "Forward";
 "global.save" = "Save";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Aurrebista";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -275,10 +275,10 @@
 "account.me" = "Ni";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Ez dago kontakturik blokeatuta";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Estekatu gailu berria";
 "linkDevice.passwordError" = "Sartu duzun pasahitzak ez du kontu hau desblokeatzen";
 "linkDevice.networkError" = "Sare errore bat gertatu da esportazioan";
 "linkDevice.defaultError" = "Errore bat gertatu da esportazioan";
