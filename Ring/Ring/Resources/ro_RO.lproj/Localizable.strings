@@ -36,7 +36,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ieri";
-"smartlist.results" = "Dosar public";
+"smartlist.results" = "Lista publică";
 "smartlist.conversations" = "Conversații";
 "smartlist.searching" = "Căutare...";
 "smartlist.noResults" = "Niciun rezultat";

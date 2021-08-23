@@ -36,7 +36,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "Ieri";
-"smartlist.results" = "Cartella pubblica";
+"smartlist.results" = "Elenco pubblico";
 "smartlist.conversations" = "Conversazioni";
 "smartlist.searching" = "Ricerca...";
 "smartlist.noResults" = "Nessun risultato";

@@ -131,7 +131,7 @@
 "alerts.accountNoNetworkMessage" = "Nem sikerült hozzáadni a fiókot, mert a Jami nem tudott csatlakozni az elosztott hálózathoz. Ellenőrizze az eszköz kapcsolatát.";
 "alerts.accountDefaultErrorTitle" = "Ismeretlen hiba";
 "alerts.accountDefaultErrorMessage" = "A fiókot nem lehet létrehozni.";
-"alerts.profileTakePhoto" = "Fotó készítése";
+"alerts.profileTakePhoto" = "Fénykép készítése";
 "alerts.profileUploadPhoto" = "Fénykép feltöltése";
 "alerts.profileCancelPhoto" = "Mégse";
 "alerts.accountLinkedTitle" = "Fiók összekapcsolása…";
@@ -145,13 +145,13 @@
 "alerts.confirmClearConversation" = "Biztos, hogy törli akarja a beszélgetést ezzel a kapcsolattal?";
 "alerts.confirmClearConversationTitle" = "Beszélgetés törlése";
 "alerts.noMediaPermissionsTitle" = "A média engedélyét nem adták meg";
-"alerts.noLibraryPermissionsTitle" = "A fotókönyvtárhoz való hozzáférést nem adták meg";
+"alerts.noLibraryPermissionsTitle" = "Fényképkönyvtár hozzáférése nem engedélyezett";
 "alerts.noLocationPermissionsTitle" = "Hozzáférés a tartózkodási hely nincs engedélyezve";
 "alerts.errorWrongCredentials" = "Nem lehet csatlakozni a megadott fiókkezelőhöz. Kérjük, ellenőrizze hitelesítő adatait.";
 "alerts.recordVideoMessage" = "Videoüzenet felvétele";
 "alerts.recordAudioMessage" = "Hangüzenet felvétele";
 "alerts.uploadFile" = "Fájl feltöltése";
-"alerts.uploadPhoto" = "Fénykép vagy film feltöltése";
+"alerts.uploadPhoto" = "Fénykép vagy mozgókép feltöltése";
 "alerts.locationServiceIsDisabled" = "Helymeghatározási szolgáltatások bekapcsolása, hogy a „Jami” meghatározhassa a tartózkodási helyét.";
 "alerts.locationSharing" = "Saját tartózkodási hely megosztása";
 "alerts.alreadylocationSharing" = "Tartózkodási hely már megosztva ezzel a felhasználóval.";
