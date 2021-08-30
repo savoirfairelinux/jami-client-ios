@@ -166,7 +166,7 @@
 "actions.blockAction" = "Bloquar";
 "actions.deleteAction" = "Eliminar";
 "actions.cancelAction" = "Cancelar";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Limpar";
 "actions.backAction" = "Atrás";
 "actions.doneAction" = "Feito";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
