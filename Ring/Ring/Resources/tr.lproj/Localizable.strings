@@ -27,7 +27,7 @@
 "global.share" = "Paylaş";
 "global.forward" = "İlet";
 "global.save" = "Kaydet";
-"global.resend" = "Resend";
+"global.resend" = "Yeniden gönder";
 "global.preview" = "Önizle";
 
 // Scan
@@ -36,13 +36,13 @@
 
 // Smartlist
 "smartlist.yesterday" = "Dün";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Genel Dizin";
 "smartlist.conversations" = "Konuşmalar";
 "smartlist.searching" = "Arama yapılıyor...";
 "smartlist.noResults" = "Sonuç yok";
 "smartlist.noConversation" = "Konuşma yok";
 "smartlist.searchBarPlaceholder" = "Ad girin...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Yeni ya da mevcut bir kişiyi arayın...";
 "smartlist.noNetworkConnectivity" = "Ağ bağlantısı yok";
 "smartlist.cellularAccess" = "Ayarlarınızda hücresel erişim izni olduğundan emin olun.";
 "smartlist.accountsTitle" = "Hesaplar";
@@ -51,14 +51,14 @@
 "smartlist.selectOneNumber" = "Numaralardan birini seçin";
 "smartlist.invitations" = "Davetiyeler";
 "smartlist.accountSettings" = "Hesap Ayarları";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Gelişmiş Ayarlar";
 "smartlist.aboutJami" = "Jami Hakkında";
 
 //Conversation
 "conversation.messagePlaceholder" = "Şuna ileti yaz:";
 "conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
 "conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "Fotoğraf galeriye kaydedilemedi";
 
 //Invitations
 "invitations.noInvitations" = "Davetiye yok";
@@ -92,7 +92,7 @@
 "createAccount.lookingForUsernameAvailability" = "kullanılabilirliğine bakılıyor...";
 "createAccount.invalidUsername" = "geçersiz kullanıcı adı";
 "createAccount.usernameAlreadyTaken" = "kullanıcı adı önceden alınmış";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "Kullanıcı adı kullanılabilir";
 "createAccount.loading" = "Yükleniyor";
 "createAccount.waitCreateAccountTitle" = "Hesap ekleniyor";
 "createAccount.RegisterAUsername" = "Kullanıcı adı kaydet";
@@ -188,11 +188,11 @@
 "calls.currentCallWith" = "İle ara";
 "calls.haghUp" = "Aramayı sonlandır";
 "calls.maximize" = "ekranı kapla";
-"calls.minimize" = "minimize";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.minimize" = "küçült";
+"calls.setModerator" = "moderatör olarak ayarla";
+"calls.removeModerator" = "moderatör ayarını kaldır";
+"calls.muteAudio" = "sesi kıs";
+"calls.unmuteAudio" = "sesi aç";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";
@@ -244,14 +244,14 @@
 "accountPage.newPasswordPlaceholder" = "Yeni parolayı girin";
 "accountPage.newPasswordConfirmPlaceholder" = "Yeni parolayı doğrulayın";
 "accountPage.changePasswordError" = "Parola yanlış";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
+"accountPage.enableBoothMode" = "Kabin Modunu Etkinleştir";
+"accountPage.disableBoothMode" = "Kabin Modunu Devre Dışı Bırak";
 "accountPage.disableBoothModeExplanation" = "Lütfen hesap parolanızı sağlayın";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.boothModeExplanation" = "Kabin modunda konuşma geçmişiniz kaydedilmez ve jami'nin işlevleri giden aramalar ile kısıtlandırılır. Kabin modunu etkinleştirdiğinizde tüm konuşmalarınız kaldırılacaktır.";
+"accountPage.noBoothMode" = "Kabin modunu etkinleştirmek için önce bir hesap parolası oluşturmanız gerekir.";
+"accountPage.boothModeAlertMessage" = "Kabin modunu etkinleştirdikten sonra tüm konuşmalarınız kaldırılacaktır.";
 "accountPage.peerDiscovery" = "Yerel ağda kendiliğinden bağlan";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Son geçerlilik tarihi dolduktan sonra otomatik kayıt";
 
 //Account
 "account.sipUsername" = "Kullanıcı Adı";
@@ -259,7 +259,7 @@
 "account.sipServer" = "SIP sunucusu";
 "account.port" = "Delik";
 "account.proxyServer" = "Vekil";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Bir SIP Hesabı oluşturun";
 "account.usernameLabel" = "Kullanıcı Adını Girin";
 "account.passwordLabel" = "Parola Girin";
 "account.serverLabel" = "Adres Girin";
