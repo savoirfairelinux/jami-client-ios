@@ -70,7 +70,7 @@
 "welcome.text" = "Jami es un logicial liure per comunicacions universalas que respèctan la libertat e la vida privada de sos utilizaires.";
 "welcome.linkDevice" = "Associar aqueste aparelh a un compte";
 "welcome.createAccount" = "Crear un compte Jami";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Connexion a un servidor JAMS";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Saultar";
