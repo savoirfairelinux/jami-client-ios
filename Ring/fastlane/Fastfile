@@ -41,6 +41,7 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   lane :beta do
     ensure_git_status_clean
+    app_identifier = ENV['APP_IDENTIFIER']
     unlock_keychain
     api_key = app_store_connect_api_key(
       key_id: "#{ENV["KEY_ID"]}",
@@ -58,6 +59,12 @@ platform :ios do
       clean: true,
       configuration: "Release",
       export_method: 'app-store',
+      export_options: {
+        provisioningProfiles: {
+          app_identifier => ENV[APP_PROVISIONING_PROFILE],
+          "#{app_identifier}.jamiNotificationServiceExtension" => ENV[NOTIFICATION_EXTENSION_PROVISIONING_PROFILE]
+        }
+      }
     )
     pilot(
       api_key: api_key,
