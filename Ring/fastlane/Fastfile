@@ -58,6 +58,12 @@ platform :ios do
       clean: true,
       configuration: "Release",
       export_method: 'app-store',
+      export_options: {
+        provisioningProfiles: {
+          "#{ENV["APP_IDENTIFIER"]}" => "#{ENV["APP_PROVISIONING_PROFILE"]}",
+          "#{ENV["APP_IDENTIFIER"]}.jamiNotificationExtension" => "#{ENV["NOTIFICATION_EXTENSION_PROVISIONING_PROFILE"]}"
+        }
+      }
     )
     pilot(
       api_key: api_key,
