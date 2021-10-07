@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3c2bdbb_40da1c2c",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2021-10-07T18:58:37Z",
+      "side": 1,
+      "message": "we should not modify service events from view model, only listen. If we need emit this signal we could do it from service when receive callback from daemon.",
+      "revId": "ce97ad9267cb731d5e4f73749cbdcf2c3b6f521c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56ebf535_88c37bfa",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2021-10-07T18:58:37Z",
+      "side": 1,
+      "message": "same",
+      "revId": "ce97ad9267cb731d5e4f73749cbdcf2c3b6f521c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8179d74a_09f11ad1",
+        "filename": "Ring/Ring/Services/CallsService.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2021-10-07T18:58:37Z",
+      "side": 1,
+      "message": "Do we need this?",
+      "revId": "ce97ad9267cb731d5e4f73749cbdcf2c3b6f521c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}

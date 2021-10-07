@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6376c36_9d363e4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2021-10-07T18:58:37Z",
+      "side": 1,
+      "message": "I could not unpause outgoing audio only call.",
+      "revId": "b5f0ed19fcdf80c6077d9252836b67e94f4cc9bf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
