@@ -59,6 +59,12 @@
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 "conversation.errorSavingImage" = "Impossibile salvare l'immagine nella galleria";
+"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.requestMessage" = "Ciao, \nVuoi partecipare alla conversazione?";
+"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.synchronizationTitle" = "Hai accettato la richiesta di conversazione.";
+"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";
@@ -333,6 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "Chiamata in uscita persa";
 "generatedMessage.missedIncomingCall" = "Chiamata in arrivo persa";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.contactLeftConversation" = "Il contatto ha chiuso la conversazione";
 
 //General Settings
 "generalSettings.title" = "Impostazioni avanzate";

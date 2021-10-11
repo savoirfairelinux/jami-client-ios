@@ -59,6 +59,12 @@
 "conversation.explanationSendingLocationTo" = "現在地の共有相手: ";
 "conversation.explanationReceivingLocationFrom" = "現在地を受信している相手: ";
 "conversation.errorSavingImage" = "画像一覧に画像を保存できませんでした";
+"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
+"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.synchronizationTitle" = "You have accepted the conversation request.";
+"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "招待はありません";
@@ -333,6 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "不在発信";
 "generatedMessage.missedIncomingCall" = "不在着信";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.contactLeftConversation" = "Contact left conversation";
 
 //General Settings
 "generalSettings.title" = "詳細設定";

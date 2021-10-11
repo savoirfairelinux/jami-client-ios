@@ -59,6 +59,12 @@
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 "conversation.errorSavingImage" = "S’u arrit të dërgohet figurë te galeri";
+"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
+"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.synchronizationTitle" = "Keni pranuar kërkesën për bisedë.";
+"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "S’ka ftesa";
@@ -333,6 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie “live” e vendndodhjes";
+"generatedMessage.contactLeftConversation" = "Kontakti e braktisi bisedën";
 
 //General Settings
 "generalSettings.title" = "Rregullime të mëtejshme";

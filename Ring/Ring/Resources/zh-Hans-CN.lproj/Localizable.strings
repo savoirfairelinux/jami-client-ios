@@ -59,6 +59,12 @@
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
 "conversation.errorSavingImage" = "保存至图库失败";
+"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
+"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.synchronizationTitle" = "You have accepted the conversation request.";
+"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "没有邀请";
@@ -333,6 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "去电未接";
 "generatedMessage.missedIncomingCall" = "未接来电";
 "generatedMessage.liveLocationSharing" = "实时位置分享";
+"generatedMessage.contactLeftConversation" = "Contact left conversation";
 
 //General Settings
 "generalSettings.title" = "高级设置";

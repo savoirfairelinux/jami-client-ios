@@ -59,6 +59,12 @@
 "conversation.explanationSendingLocationTo" = "Jaat sijaintisi tällä hetkellä";
 "conversation.explanationReceivingLocationFrom" = "Saat parhaillaan suoraa sijaintia";
 "conversation.errorSavingImage" = "Kuvan tallennus galleriaan epäonnistui";
+"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.requestMessage" = "Hei,\nHaluatko liittyä keskusteluun?";
+"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.synchronizationTitle" = "Olet hyväksynyt keskustelupyynnön.";
+"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Ei kutsuja";
@@ -333,6 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
+"generatedMessage.contactLeftConversation" = "Kontakti poistui keskustelusta";
 
 //General Settings
 "generalSettings.title" = "Edistyneet asetukset";

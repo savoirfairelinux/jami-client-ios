@@ -59,6 +59,12 @@
 "conversation.explanationSendingLocationTo" = "در حال حاضر مکان خود را به اشتراک می‌گذارید";
 "conversation.explanationReceivingLocationFrom" = "در حال حاضر مکان زنده را دریافت می‌کنید از";
 "conversation.errorSavingImage" = "ذخیره تصویر در گالری انجام نشد";
+"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
+"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.synchronizationTitle" = "شما درخواست مکالمه را پذیرفته‌اید.";
+"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "بدون دعوت‌نامه";
@@ -333,6 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "تماس خروجی از‌دست‌رفته";
 "generatedMessage.missedIncomingCall" = "تماس ورودی از‌دست‌رفته";
 "generatedMessage.liveLocationSharing" = "هم‌رسانی زنده مکان";
+"generatedMessage.contactLeftConversation" = "مخاطب گفتگو را ترک کرد";
 
 //General Settings
 "generalSettings.title" = "تنظیمات پیشرفته";

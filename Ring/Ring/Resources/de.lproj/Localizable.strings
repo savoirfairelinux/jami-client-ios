@@ -25,9 +25,9 @@
 "global.versionName" = "Maloya";
 "global.close" = "Schließen";
 "global.share" = "Teilen";
-"global.forward" = "Forward";
+"global.forward" = "Weiterleiten";
 "global.save" = "Speichern";
-"global.resend" = "Resend";
+"global.resend" = "Erneut senden";
 "global.preview" = "Vorschau";
 
 // Scan
@@ -36,13 +36,13 @@
 
 // Smartlist
 "smartlist.yesterday" = "Gestern";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Öffentliches Verzeichnis";
 "smartlist.conversations" = "Unterhaltungen";
 "smartlist.searching" = "Suchen...";
 "smartlist.noResults" = "Keine Ergebnisse";
 "smartlist.noConversation" = "Keine Unterhaltungen";
 "smartlist.searchBarPlaceholder" = "Namen eingeben…";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Nach neuen oder bestehenden Kontakten suchen...";
 "smartlist.noNetworkConnectivity" = "Keine Netzwerkverbindung";
 "smartlist.cellularAccess" = "Vergewissern Sie sich, dass der Mobilfunkzugang in Ihren Einstellungen erlaubt ist.";
 "smartlist.accountsTitle" = "Konten";
@@ -51,14 +51,20 @@
 "smartlist.selectOneNumber" = "Eine der Nummern auswählen";
 "smartlist.invitations" = "Einladungen";
 "smartlist.accountSettings" = "Kontoeinstellungen";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Erweiterte Einstellungen";
 "smartlist.aboutJami" = "Über Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Nachricht schreiben an";
 "conversation.explanationSendingLocationTo" = "Sie teilen Ihren Standort derzeit mit";
 "conversation.explanationReceivingLocationFrom" = "Sie erhalten derzeit einen Live-Standort von";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "Fehler beim Speichern des Bildes in der Galerie";
+"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.requestMessage" = "Hallo,\nMöchten Sie dem Gespräch beitreten?";
+"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.synchronizationTitle" = "Sie haben die Gesprächsanfrage angenommen.";
+"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Keine Einladungen";
@@ -92,7 +98,7 @@
 "createAccount.lookingForUsernameAvailability" = "Verfügbarkeit des Benutzernamens wird geprüft …";
 "createAccount.invalidUsername" = "Ungültiger Benutzername";
 "createAccount.usernameAlreadyTaken" = "Dieser Benutzername ist bereits vergeben";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "Benutzername ist verfügbar";
 "createAccount.loading" = "Lade";
 "createAccount.waitCreateAccountTitle" = "Konto hinzufügen";
 "createAccount.RegisterAUsername" = "Benutzername registrieren";
@@ -189,10 +195,10 @@
 "calls.haghUp" = "auflegen";
 "calls.maximize" = "maximieren";
 "calls.minimize" = "minimieren";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.setModerator" = "Moderator einstellen";
+"calls.removeModerator" = "Moderator deaktivieren";
+"calls.muteAudio" = "Audio stumm schalten";
+"calls.unmuteAudio" = "Audio lautschalten";
 
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";
@@ -251,7 +257,7 @@
 "accountPage.noBoothMode" = "Um den Geheim-Modus zu aktivieren, müssen Sie zuerst ein Passwort für Ihr Konto erstellen.";
 "accountPage.boothModeAlertMessage" = "Nach der Aktivierung des Geheim-Modus werden alle Ihre Gespräche entfernt.";
 "accountPage.peerDiscovery" = "In lokalem Netzwerk automatisch verbinden";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Automatische Registrierung nach Ablauf";
 
 //Account
 "account.sipUsername" = "Benutzername";
@@ -259,7 +265,7 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Erstellen eines SIP-Kontos";
 "account.usernameLabel" = "Benutzername eingeben";
 "account.passwordLabel" = "Passwort eingeben";
 "account.serverLabel" = "Adresse eingeben";
@@ -333,6 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "Ausgehender Anruf fehlgeschlagen";
 "generatedMessage.missedIncomingCall" = "Verpasster eingehender Anruf";
 "generatedMessage.liveLocationSharing" = "Live-Standortfreigabe";
+"generatedMessage.contactLeftConversation" = "Kontakt hat die Unterhaltung verlassen.";
 
 //General Settings
 "generalSettings.title" = "Erweiterte Einstellungen";

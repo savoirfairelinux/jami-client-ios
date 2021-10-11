@@ -59,6 +59,12 @@
 "conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
 "conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
 "conversation.errorSavingImage" = "Не удалось сохранить изображение в галерею";
+"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.requestMessage" = "Привет,\nВы хотите присоединиться к разговору?";
+"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.synchronizationTitle" = "Вы приняли запрос на беседу.";
+"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Приглашений нет";
@@ -333,6 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "Непринятый исходящий звонок";
 "generatedMessage.missedIncomingCall" = "Пропущенный входящий звонок";
 "generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
+"generatedMessage.contactLeftConversation" = "Контакт покинул разговор";
 
 //General Settings
 "generalSettings.title" = "Дополнительные настройки";
