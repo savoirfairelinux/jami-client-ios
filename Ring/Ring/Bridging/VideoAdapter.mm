@@ -184,13 +184,19 @@ static id <VideoAdapterDelegate> _delegate;
           withWidth:(NSInteger)w
          withHeight:(NSInteger)h{
     auto _sinkId = std::string([sinkId UTF8String]);
-    auto renderer = std::make_shared<Renderer>();
-    renderer->width = static_cast<int>(w);
-    renderer->height = static_cast<int>(h);
-    renderer->rendererId = sinkId;
-    renderer->bindAVSinkFunctions();
-    DRing::registerAVSinkTarget(_sinkId, renderer->avtarget);
-    renderers.insert(std::make_pair(_sinkId, renderer));
+    auto renderer = renderers.find(_sinkId);
+    if (renderer != renderers.end()) {
+        renderer->second->width = static_cast<int>(w);
+        renderer->second->height = static_cast<int>(h);
+        return;
+    }
+    auto newRenderer = std::make_shared<Renderer>();
+    newRenderer->width = static_cast<int>(w);
+    newRenderer->height = static_cast<int>(h);
+    newRenderer->rendererId = sinkId;
+    newRenderer->bindAVSinkFunctions();
+    DRing::registerAVSinkTarget(_sinkId, newRenderer->avtarget);
+    renderers.insert(std::make_pair(_sinkId, newRenderer));
 }
 
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId {
