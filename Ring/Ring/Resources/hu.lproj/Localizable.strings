@@ -59,12 +59,12 @@
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
 "conversation.errorSavingImage" = "Nem sikerült menteni a képet a kepgyűjteménybe";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.receivedRequest" = "\%s\ kérelmet küldött Önnek egy beszélgetésre.";
+"conversation.requestMessage" = "Üdv!\nSzeretne csatlakozni a beszélgetéshez?";
+"conversation.notContact" = "A(z) \%s\ nem szerepel a kapcsolatlistában.";
+"conversation.sendRequest" = "Küldjön neki kapcsolatfelvételi kérelmet, hogy együtt képes legyenek megosztani";
+"conversation.synchronizationTitle" = "Elfogadta a beszélgetési kérelmet.";
+"conversation.synchronizationMessage" = "Várjuk, hogy a(z) \%s\ csatlakozzon a beszélgetés összehangolásához.";
 
 //Invitations
 "invitations.noInvitations" = "Nincs meghívás";
@@ -339,7 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "Nem fogadott kimenő hívás";
 "generatedMessage.missedIncomingCall" = "Nem fogadott bejövő hívás";
 "generatedMessage.liveLocationSharing" = "Valós idejű hely megosztása";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "Kapcsolat kilépett a beszélgetésből";
 
 //General Settings
 "generalSettings.title" = "Haladó beállítások";

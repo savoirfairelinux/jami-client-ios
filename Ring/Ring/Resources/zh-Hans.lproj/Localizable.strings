@@ -59,12 +59,12 @@
 "conversation.explanationSendingLocationTo" = "您目前正在分享您的位置，與";
 "conversation.explanationReceivingLocationFrom" = "您正收到即時位置，從";
 "conversation.errorSavingImage" = "將圖片儲存到相簿失敗";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%s\ 向您傳送了對話請求。";
 "conversation.requestMessage" = "您好，\n您想要加入對話嗎？";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.notContact" = "\%s\ 不在您的聯絡人清單中。";
+"conversation.sendRequest" = "向他／她傳送聯絡人請求，如此才能一起交流";
 "conversation.synchronizationTitle" = "您已接受對話請求。";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "我們正在等待 \%s\ 連線以同步對話。";
 
 //Invitations
 "invitations.noInvitations" = "沒有邀請";

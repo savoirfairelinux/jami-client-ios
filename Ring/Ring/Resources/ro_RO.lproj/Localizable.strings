@@ -59,12 +59,12 @@
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la";
 "conversation.errorSavingImage" = "Salvarea imaginii nu a reușit";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%s\ ți-a trimis o invitație la o conversație.";
 "conversation.requestMessage" = "Vrei să participi la conversație?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.notContact" = "\%s\ nu este în contactele tale.";
+"conversation.sendRequest" = "Trimite-i o cerere de contact pentru a conversa împreună.";
 "conversation.synchronizationTitle" = "Ai acceptat invitația la conversație.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Se așteaptă ca \%s\ să se conecteze pentru a sincroniza conversația.";
 
 //Invitations
 "invitations.noInvitations" = "Nu sînt invitații";

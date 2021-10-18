@@ -59,12 +59,12 @@
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 "conversation.errorSavingImage" = "S’u arrit të dërgohet figurë te galeri";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%s\ ju dërgoi një kërkesë për bisedë.";
 "conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.notContact" = "\%s\ s’gjendet te lista e kontakteve tuaja.";
+"conversation.sendRequest" = "Dërgojini një kërkesë kontakti, që të jeni në gjendje të shkëmbeni me njëri-tjetrin";
 "conversation.synchronizationTitle" = "Keni pranuar kërkesën për bisedë.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Po presim që \%s\ të lidhet, pa të njëkohësojmë bisedën.";
 
 //Invitations
 "invitations.noInvitations" = "S’ka ftesa";

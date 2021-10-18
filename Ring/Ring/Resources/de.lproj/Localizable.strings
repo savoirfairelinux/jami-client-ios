@@ -59,12 +59,12 @@
 "conversation.explanationSendingLocationTo" = "Sie teilen Ihren Standort derzeit mit";
 "conversation.explanationReceivingLocationFrom" = "Sie erhalten derzeit einen Live-Standort von";
 "conversation.errorSavingImage" = "Fehler beim Speichern des Bildes in der Galerie";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%s\ hat Ihnen eine Gesprächsanfrage gesendet.";
 "conversation.requestMessage" = "Hallo,\nMöchten Sie dem Gespräch beitreten?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.notContact" = "\%s\ befindet sich nicht in Ihrer Kontaktliste.";
+"conversation.sendRequest" = "Senden Sie ihm/ihr eine Kontaktanfrage, um sich gemeinsam austauschen zu können";
 "conversation.synchronizationTitle" = "Sie haben die Gesprächsanfrage angenommen.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Wir warten auf \%s\ Verbindungen, um die Konversation zu synchronisieren.";
 
 //Invitations
 "invitations.noInvitations" = "Keine Einladungen";
