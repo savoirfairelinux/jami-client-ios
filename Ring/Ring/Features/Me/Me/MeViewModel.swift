@@ -48,6 +48,7 @@ enum SettingsSection: SectionModelType {
         case jamiUserName(label: String)
         case notifications
         case sipUserName(value: String)
+        case proxy(value: String)
         case sipPassword(value: String)
         case sipServer(value: String)
         case port(value: String)
@@ -215,10 +216,18 @@ class MeViewModel: ViewModel, Stateable {
     }()
 
     lazy var otherJamiSettings: Observable<SettingsSection> = {
+        var proxyServer = ""
+        if let account = self.accountService.currentAccount,
+            let details = account.details {
+            proxyServer = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: ConfigKey.proxyServer))
+            self.proxyAddress.accept(proxyServer)
+        }
         let items: [SettingsSection.SectionRow] = [.sectionHeader(title: L10n.AccountPage.other),
                                                    .peerDiscovery,
                                                    .blockedList,
                                                    .troubleshootingView,
+                                                   .proxy(value: proxyServer),
+                                                   SettingsSection.SectionRow
                                                    .accountState(state: self.accountStatus),
                                                    .enableAccount,
                                                    .changePassword,
@@ -769,6 +778,16 @@ class MeViewModel: ViewModel, Stateable {
             let account = self.accountService.currentAccount else { return }
         self.accountService.enablePeerDiscovery(enable: enable, accountId: account.id)
         peerDiscoveryEnabled.accept(enable)
+    }
+
+    let proxyAddress = BehaviorRelay<String>(value: "")
+
+    func changeProxy(proxyServer: String) {
+        guard let accountId = self.accountService.currentAccount?.id else {
+            return
+        }
+        self.accountService.setProxyAddress(accountID: accountId, proxy: proxyServer)
+        self.proxyAddress.accept(proxyServer)
     }
 
     func enableKeepAlive(enable: Bool) {

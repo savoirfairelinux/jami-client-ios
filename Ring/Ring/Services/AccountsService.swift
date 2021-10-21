@@ -795,6 +795,12 @@ class AccountsService: AccountAdapterDelegate {
         debugMessageReceived.onNext(message)
     }
 
+    func setProxyAddress(accountID: String, proxy: String) {
+        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
+        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
+        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
+    }
+
     func monitor(enable: Bool) {
         self.accountAdapter.monitorEnable(enable)
     }
