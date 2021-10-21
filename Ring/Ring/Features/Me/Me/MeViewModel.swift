@@ -50,6 +50,7 @@ enum SettingsSection: SectionModelType {
         case jamiUserName(label: String)
         case notifications
         case sipUserName(value: String)
+        case proxy
         case sipPassword(value: String)
         case sipServer(value: String)
         case port(value: String)
@@ -233,9 +234,17 @@ class MeViewModel: ViewModel, Stateable {
     }()
 
     lazy var otherJamiSettings: Observable<SettingsSection> = {
+        var proxyServer = ""
+        if let account = self.accountService.currentAccount,
+           let details = account.details {
+            proxyServer = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: ConfigKey.proxyServer))
+            self.proxyAddress.accept(proxyServer)
+        }
         let items: [SettingsSection.SectionRow] = [.peerDiscovery,
                                                    .blockedList,
-                                                   .accountState(state: self.accountStatus),
+                                                   .proxy,
+                                                   SettingsSection.SectionRow
+                                                    .accountState(state: self.accountStatus),
                                                    .enableAccount,
                                                    .changePassword,
                                                    .boothMode]
@@ -473,7 +482,6 @@ class MeViewModel: ViewModel, Stateable {
             self.showActionState.accept(.hideLoading)
             return
         }
-
         self.nameService
             .registerNameObservable(withAccount: accountId,
                                     password: password,
@@ -791,6 +799,15 @@ class MeViewModel: ViewModel, Stateable {
               let account = self.accountService.currentAccount else { return }
         self.accountService.enableTurn(enable: enable, accountId: account.id)
         turnEnabled.accept(enable)
+    }
+    let proxyAddress = BehaviorRelay<String>(value: "")
+
+    func changeProxy(proxyServer: String) {
+        guard let accountId = self.accountService.currentAccount?.id else {
+            return
+        }
+        self.accountService.setProxyAddress(accountID: accountId, proxy: proxyServer)
+        self.proxyAddress.accept(proxyServer)
     }
 
     func enableUpnp(enable: Bool) {
