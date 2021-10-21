@@ -790,6 +790,12 @@ class AccountsService: AccountAdapterDelegate {
         self.responseStream.onNext(event)
     }
 
+    func setProxyAddress(accountID: String, proxy: String) {
+        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
+        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
+        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtProxyListUrl), withValue: "")
+        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
+    }
     func registrationStateChanged(with response: RegistrationResponse) {
         var event = ServiceEvent(withEventType: .registrationStateChanged)
         event.addEventInput(.registrationState, value: response.state)
@@ -929,12 +935,6 @@ class AccountsService: AccountAdapterDelegate {
             event.addEventInput(.accountId, value: accountID)
             self.responseStream.onNext(event)
         }
-    }
-
-    func setProxyAddress(accountID: String, proxy: String) {
-        let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
-            self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
     }
 
     func hasAccountWithProxyEnabled() -> Bool {

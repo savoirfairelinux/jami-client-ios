@@ -47,6 +47,7 @@ enum SettingsSection: SectionModelType {
         case jamiUserName(label: String)
         case notifications
         case sipUserName(value: String)
+        case proxy(value: String)
         case sipPassword(value: String)
         case sipServer(value: String)
         case port(value: String)
@@ -214,9 +215,17 @@ class MeViewModel: ViewModel, Stateable {
     }()
 
     lazy var otherJamiSettings: Observable<SettingsSection> = {
+        var proxyServer = ""
+        if let account = self.accountService.currentAccount,
+            let details = account.details {
+            proxyServer = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: ConfigKey.proxyServer))
+            self.proxyAddress.accept(proxyServer)
+        }
         let items: [SettingsSection.SectionRow] = [.sectionHeader(title: L10n.AccountPage.other),
                                                    .peerDiscovery,
                                                    .blockedList,
+                                                   .proxy(value: proxyServer),
+                                                   SettingsSection.SectionRow
                                                    .accountState(state: self.accountStatus),
                                                    .enableAccount,
                                                    .changePassword,
@@ -454,27 +463,6 @@ class MeViewModel: ViewModel, Stateable {
             self.showActionState.accept(.hideLoading)
             return
         }
-        self.accountService.setProxyAddress(accountID: accountId, proxy: username)
-        self.showActionState.accept(.usernameRegistered)
-
-//        self.nameService
-//            .registerNameObservable(withAccount: accountId,
-//                                    password: password,
-//                                    name: username)
-//            .subscribe(onNext: { registered in
-//                if registered {
-//                    if let account = self.accountService.getAccount(fromAccountId: accountId) {
-//                        self.currentAccountUserName
-//                            .onNext(self.userNameForAccount(account: account))
-//                    }
-//                    self.showActionState.accept(.usernameRegistered)
-//                } else {
-//                    self.showActionState.accept(.usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed))
-//                }
-//            }, onError: { _ in
-//                self.showActionState.accept(.usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed))
-//            })
-//            .disposed(by: self.disposeBag)
     }
 
     func changePassword(oldPassword: String, newPassword: String) -> Bool {
@@ -765,6 +753,16 @@ class MeViewModel: ViewModel, Stateable {
             let account = self.accountService.currentAccount else { return }
         self.accountService.enablePeerDiscovery(enable: enable, accountId: account.id)
         peerDiscoveryEnabled.accept(enable)
+    }
+
+    let proxyAddress = BehaviorRelay<String>(value: "")
+
+    func changeProxy(proxyServer: String) {
+        guard let accountId = self.accountService.currentAccount?.id else {
+            return
+        }
+        self.accountService.setProxyAddress(accountID: accountId, proxy: proxyServer)
+        self.proxyAddress.accept(proxyServer)
     }
 
     func enableKeepAlive(enable: Bool) {
