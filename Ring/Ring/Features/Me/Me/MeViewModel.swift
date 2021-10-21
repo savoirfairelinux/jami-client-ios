@@ -39,6 +39,7 @@ enum SettingsSection: SectionModelType {
         case device(device: DeviceModel)
         case linkNew
         case blockedList
+        case troubleshootingView
         case removeAccount
         case shareAccountDetails
         case sectionHeader(title: String)
@@ -217,6 +218,7 @@ class MeViewModel: ViewModel, Stateable {
         let items: [SettingsSection.SectionRow] = [.sectionHeader(title: L10n.AccountPage.other),
                                                    .peerDiscovery,
                                                    .blockedList,
+                                                   .troubleshootingView,
                                                    .accountState(state: self.accountStatus),
                                                    .enableAccount,
                                                    .changePassword,
@@ -415,6 +417,10 @@ class MeViewModel: ViewModel, Stateable {
 
     func linkDevice() {
         self.stateSubject.onNext(MeState.linkNewDevice)
+    }
+
+    func showTroubleshootingView() {
+        self.stateSubject.onNext(MeState.troubleshootingView)
     }
 
     func showBlockedContacts() {

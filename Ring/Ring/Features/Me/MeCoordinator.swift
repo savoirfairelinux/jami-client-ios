@@ -27,6 +27,7 @@ import RxSwift
 public enum MeState: State {
     case linkNewDevice
     case blockedContacts
+    case troubleshootingView
     case needToOnboard
     case accountRemoved
     case accountModeChanged
@@ -63,6 +64,8 @@ class MeCoordinator: Coordinator, StateableResponsive {
                     self.showLinkDeviceWindow()
                 case .blockedContacts:
                     self.showBlockedContacts()
+                case . troubleshootingView:
+                    self.showTroubleshootingView()
                 case .needToOnboard:
                     self.needToOnboard()
                 case .accountRemoved:
@@ -121,6 +124,19 @@ class MeCoordinator: Coordinator, StateableResponsive {
                      withStyle: .show,
                      withAnimation: true,
                      lockWhilePresenting: VCType.blockList.rawValue,
+                     disposeBag: self.disposeBag)
+    }
+
+    private func showTroubleshootingView() {
+        if let flag = self.presentingVC[VCType.troubleshoot.rawValue], flag {
+            return
+        }
+        self.presentingVC[VCType.troubleshoot.rawValue] = true
+        let troubleshootViewController = TroubleshootViewController.instantiate(with: self.injectionBag)
+        self.present(viewController: troubleshootViewController,
+                     withStyle: .show,
+                     withAnimation: true,
+                     lockWhilePresenting: VCType.troubleshoot.rawValue,
                      disposeBag: self.disposeBag)
     }
 

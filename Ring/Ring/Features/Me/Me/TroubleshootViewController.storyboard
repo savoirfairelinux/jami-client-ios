@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Troubleshoot View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="TroubleshootViewController" customModule="Ring" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ad2-vl-Hiq">
+                                <rect key="frame" x="0.0" y="74" width="414" height="788"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OaS-pY-RJW">
+                                        <rect key="frame" x="20" y="0.0" width="374" height="30"/>
+                                        <subviews>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="Enable log" translatesAutoresizingMaskIntoConstraints="NO" id="WQD-e0-ukm">
+                                                <rect key="frame" x="0.0" y="0.0" width="51" height="30"/>
+                                            </switch>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8w-SE-iza">
+                                                <rect key="frame" x="49" y="0.0" width="285" height="30"/>
+                                                <state key="normal" title="Clear"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjO-3N-WXc">
+                                                <rect key="frame" x="334" y="0.0" width="40" height="30"/>
+                                                <state key="normal" title="Share"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="A0v-HJ-Wjc"/>
+                                        </constraints>
+                                    </stackView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QR6-m3-fSJ">
+                                        <rect key="frame" x="20" y="50" width="374" height="738"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="QR6-m3-fSJ" secondAttribute="bottom" id="1QP-BY-0g2"/>
+                                    <constraint firstAttribute="trailing" secondItem="QR6-m3-fSJ" secondAttribute="trailing" constant="20" id="JQ5-et-z0d"/>
+                                    <constraint firstItem="OaS-pY-RJW" firstAttribute="leading" secondItem="ad2-vl-Hiq" secondAttribute="leading" constant="20" id="LMr-IA-ytB"/>
+                                    <constraint firstItem="QR6-m3-fSJ" firstAttribute="top" secondItem="OaS-pY-RJW" secondAttribute="bottom" constant="20" id="P9p-KG-BLy"/>
+                                    <constraint firstAttribute="trailing" secondItem="OaS-pY-RJW" secondAttribute="trailing" constant="20" id="aR3-uV-xam"/>
+                                    <constraint firstItem="QR6-m3-fSJ" firstAttribute="leading" secondItem="ad2-vl-Hiq" secondAttribute="leading" constant="20" id="xhZ-r5-ulh"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ad2-vl-Hiq" secondAttribute="bottom" id="5pI-wY-9be"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ad2-vl-Hiq" secondAttribute="trailing" id="A6O-lS-pv2"/>
+                            <constraint firstItem="ad2-vl-Hiq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="EYq-xm-gGf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="top" secondItem="ad2-vl-Hiq" secondAttribute="top" constant="-30" id="eE9-ER-h9p"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cleanButton" destination="L8w-SE-iza" id="9eJ-tA-7E0"/>
+                        <outlet property="logSwitch" destination="WQD-e0-ukm" id="0oT-Wk-8AL"/>
+                        <outlet property="shareButton" destination="YjO-3N-WXc" id="BkI-8N-e3M"/>
+                        <outlet property="textView" destination="QR6-m3-fSJ" id="d9R-CJ-SWZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="66.666666666666671" y="32.8125"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

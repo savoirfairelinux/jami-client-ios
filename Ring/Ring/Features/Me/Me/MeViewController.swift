@@ -170,6 +170,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.viewModel.showBlockedContacts()
     }
 
+    private func openTroubleshootingView() {
+        self.viewModel.showTroubleshootingView()
+    }
+
     private func showLoadingView() {
         HUD.show(.labeledProgress(title: L10n.AccountPage.deviceRevocationProgress, subtitle: nil))
     }
@@ -347,6 +351,25 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     button.rx.tap
                         .subscribe(onNext: { [weak self] in
                             self?.openBlockedList()
+                        })
+                        .disposed(by: cell.disposeBag)
+                    return cell
+
+                case .troubleshootingView:
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = "Open troubleshooting view"
+                    cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.selectionStyle = .none
+                    cell.sizeToFit()
+                    let button = UIButton.init(frame: cell.frame)
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
+                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    button.frame.size = size
+                    cell.addSubview(button)
+                    button.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            self?.openTroubleshootingView()
                         })
                         .disposed(by: cell.disposeBag)
                     return cell

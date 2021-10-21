@@ -82,4 +82,6 @@
                   oldPassword:(NSString *)oldpassword
                   newPassword:(NSString *)newPassword;
 
+- (void)monitorEnable:(BOOL)enable;
+
 @end

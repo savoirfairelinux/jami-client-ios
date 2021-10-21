@@ -107,6 +107,13 @@ static id <AccountAdapterDelegate> _delegate;
                [AccountAdapter.delegate migrationEndedFor:accountId status:migaretionStatus];
            }
        }));
+    
+    confHandlers.insert(exportable_callback<ConfigurationSignal::MessageSend>([&](const std::string& message) {
+        if (AccountAdapter.delegate) {
+            NSString* debugMessage = [NSString stringWithUTF8String:message.c_str()];
+            [AccountAdapter.delegate debugMessageReceivedWithMessage:debugMessage];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 #pragma mark -
@@ -149,6 +156,10 @@ static id <AccountAdapterDelegate> _delegate;
 
 - (void)removeAccount:(NSString *)accountID {
     removeAccount(std::string([accountID UTF8String]));
+}
+
+- (void)monitorEnable:(BOOL)enable {
+    monitor(enable);
 }
 
 - (NSMutableDictionary *)getAccountTemplate:(NSString *)accountType {

@@ -42,11 +42,7 @@
 }
 
 - (BOOL) initDaemonInternal {
-#if DEBUG
-    int flag = DRing::DRING_FLAG_CONSOLE_LOG | DRing::DRING_FLAG_DEBUG;
-#else
-    int flag = 0;
-#endif
+    int flag = DRing::DRING_FLAG_DEBUG;
     return DRing::init(static_cast<DRing::InitFlag>(flag));
 }
 

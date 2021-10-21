@@ -27,4 +27,5 @@
     func deviceRevocationEnded(for account: String, state: Int, deviceId: String)
     func receivedAccountProfile(for account: String, displayName: String, photo: String)
     func migrationEnded(for account: String, status: String)
+    func debugMessageReceived(message: String)
 }

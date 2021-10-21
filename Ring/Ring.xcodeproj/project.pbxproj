@@ -274,6 +274,9 @@
 		26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */; };
 		26D08ABE2696296300E37574 /* RequestsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABD2696296300E37574 /* RequestsAdapter.mm */; };
 		26DA813224B641A5006C6E23 /* ProfilesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26DA813124B641A5006C6E23 /* ProfilesAdapter.mm */; };
+		26DFA7A42721D6B200EA9D11 /* TroubleshootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DFA7A32721D6B200EA9D11 /* TroubleshootViewController.swift */; };
+		26DFA7A62721D6CA00EA9D11 /* TroubleshootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DFA7A52721D6CA00EA9D11 /* TroubleshootViewModel.swift */; };
+		26DFA7A82721D6EE00EA9D11 /* TroubleshootViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26DFA7A72721D6EE00EA9D11 /* TroubleshootViewController.storyboard */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
 		4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66E236CBC6900747177 /* ContactPickerViewController.swift */; };
@@ -690,6 +693,9 @@
 		26D08ABD2696296300E37574 /* RequestsAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RequestsAdapter.mm; sourceTree = "<group>"; };
 		26DA813024B641A5006C6E23 /* ProfilesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilesAdapter.h; sourceTree = "<group>"; };
 		26DA813124B641A5006C6E23 /* ProfilesAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ProfilesAdapter.mm; sourceTree = "<group>"; };
+		26DFA7A32721D6B200EA9D11 /* TroubleshootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroubleshootViewController.swift; sourceTree = "<group>"; };
+		26DFA7A52721D6CA00EA9D11 /* TroubleshootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TroubleshootViewModel.swift; sourceTree = "<group>"; };
+		26DFA7A72721D6EE00EA9D11 /* TroubleshootViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TroubleshootViewController.storyboard; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
 		4430A66E236CBC6900747177 /* ContactPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerViewController.swift; sourceTree = "<group>"; };
@@ -1603,6 +1609,7 @@
 		1A2D18D91F2918F300B2C785 /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				26DFA7A02721D66300EA9D11 /* Troubleshout */,
 				0E36979B20322D4D009A68CA /* BlockList */,
 				0E5AFE0A1F8EBC040040D539 /* Cells */,
 				1A2D18EC1F2919D800B2C785 /* MeViewController.storyboard */,
@@ -1713,6 +1720,16 @@
 				2662FC7A246B216B00FA7782 /* JamiSearchViewModel.swift */,
 			);
 			path = JamiSearchView;
+			sourceTree = "<group>";
+		};
+		26DFA7A02721D66300EA9D11 /* Troubleshout */ = {
+			isa = PBXGroup;
+			children = (
+				26DFA7A32721D6B200EA9D11 /* TroubleshootViewController.swift */,
+				26DFA7A52721D6CA00EA9D11 /* TroubleshootViewModel.swift */,
+				26DFA7A72721D6EE00EA9D11 /* TroubleshootViewController.storyboard */,
+			);
+			name = Troubleshout;
 			sourceTree = "<group>";
 		};
 		4430A669236CB9F600747177 /* Conference */ = {
@@ -2057,6 +2074,7 @@
 				1A5DC0381F35675E0075E8EF /* ContactRequestCell.xib in Resources */,
 				0ECA56812433948E0055D31E /* MigrateAccountViewController.storyboard in Resources */,
 				1A0C4EDA1F1D4B1B00550433 /* WelcomeViewController.storyboard in Resources */,
+				26DFA7A82721D6EE00EA9D11 /* TroubleshootViewController.storyboard in Resources */,
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
 				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
 				446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */,
@@ -2291,6 +2309,7 @@
 				62AD584C2056DB2700AF0701 /* MessageCellDataTransferSent.swift in Sources */,
 				0ECA5683243394960055D31E /* MigrateAccountViewController.swift in Sources */,
 				1A2041821F1E906B00C08435 /* CreateProfileViewModel.swift in Sources */,
+				26DFA7A42721D6B200EA9D11 /* TroubleshootViewController.swift in Sources */,
 				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,
 				0E3BD4262044778100A50DDF /* ContactViewModel.swift in Sources */,
 				0EF49A9F23828C960064CD98 /* ConferenceParticipantView.swift in Sources */,
@@ -2377,6 +2396,7 @@
 				1A2D18C31F29180700B2C785 /* AccountModel.swift in Sources */,
 				62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */,
 				1A2D18EB1F29197100B2C785 /* MessageViewModel.swift in Sources */,
+				26DFA7A62721D6CA00EA9D11 /* TroubleshootViewModel.swift in Sources */,
 				02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */,
 				62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */,
 				645BDD8124B74BCB009129B1 /* LocationSharingService.swift in Sources */,

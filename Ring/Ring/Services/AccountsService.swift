@@ -95,6 +95,7 @@ class AccountsService: AccountAdapterDelegate {
     private let responseStream = PublishSubject<ServiceEvent>()
     let dbManager: DBManager
     let needMigrateCurrentAccount = PublishSubject<String>()
+    let debugMessageReceived = PublishSubject<String>()
 
     // MARK: - Public members
     /**
@@ -788,6 +789,14 @@ class AccountsService: AccountAdapterDelegate {
         event.addEventInput(.state, value: status)
         event.addEventInput(.accountId, value: account)
         self.responseStream.onNext(event)
+    }
+
+    func debugMessageReceived(message: String) {
+        debugMessageReceived.onNext(message)
+    }
+
+    func monitor(enable: Bool) {
+        self.accountAdapter.monitorEnable(enable)
     }
 
     func registrationStateChanged(with response: RegistrationResponse) {
