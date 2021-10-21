@@ -118,6 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     #else
         log.removeAllDestinations()
     #endif
+        let file = FileDestination()
+        log.addDestination(file)
 
         // starts the daemon
         SystemAdapter().registerConfigurationHandler()
@@ -488,10 +490,12 @@ extension AppDelegate: PKPushRegistryDelegate {
 
     func pushRegistry(_ registry: PKPushRegistry, didInvalidatePushTokenFor type: PKPushType) {
         self.accountService.setPushNotificationToken(token: "")
+        log.debug("***push tocken invalidated")
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
         self.accountService.pushNotificationReceived(data: payload.dictionaryPayload)
+        log.debug("***received notification")
     }
 
     @available(iOS 11.0, *)
@@ -502,6 +506,7 @@ extension AppDelegate: PKPushRegistryDelegate {
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
         if type == PKPushType.voIP {
             let deviceTokenString = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
+            log.debug("***received notification token: %s", deviceTokenString)
             self.accountService.setPushNotificationToken(token: deviceTokenString)
         }
     }

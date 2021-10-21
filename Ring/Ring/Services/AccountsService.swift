@@ -899,6 +899,7 @@ class AccountsService: AccountAdapterDelegate {
                 notificationData[keyString] = valueString
             }
         }
+        log.debug("***pushNotificationReceived: \(notificationData as AnyObject)")
         self.accountAdapter.pushNotificationReceived("", message: notificationData)
     }
 
