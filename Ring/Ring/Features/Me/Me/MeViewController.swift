@@ -512,6 +512,45 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         })
                         .disposed(by: cell.disposeBag)
                     return cell
+                case .proxy:
+                    let cell = DisposableCell(style: .value1, reuseIdentifier: self.sipAccountCredentialsCell)
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
+                    cell.selectionStyle = .none
+                    let text = UITextField()
+                    text.autocorrectionType = .no
+                    text.font = UIFont.preferredFont(forTextStyle: .callout)
+                    text.returnKeyType = .done
+                    text.text = self.viewModel.proxyAddress.value
+                    text.sizeToFit()
+                    text.rx.controlEvent(.editingDidEndOnExit)
+                        .observe(on: MainScheduler.instance)
+                        .subscribe(onNext: { [weak self] _ in
+                            guard let text = text.text else { return }
+                            self?.viewModel.changeProxy(proxyServer: text)
+                        })
+                        .disposed(by: cell.disposeBag)
+                    cell.textLabel?.text = "Proxy server"
+                    cell.textLabel?.sizeToFit()
+                    cell.sizeToFit()
+                    cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+                    cell.detailTextLabel?.textColor = UIColor.clear
+                    var frame = CGRect(x: self.sipCredentialsMargin, y: 0,
+                                       width: self.view.frame.width - self.sipCredentialsMargin,
+                                       height: cell.frame.height)
+                    if self.view.frame.width - self.sipCredentialsMargin < text.frame.size.width {
+                        let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
+                        let size = text.frame.size
+                        frame.origin = origin
+                        frame.size = size
+                        cell.detailTextLabel?.text = self.viewModel.proxyAddress.value
+                    } else {
+                        cell.detailTextLabel?.text = ""
+                    }
+                    cell.detailTextLabel?.sizeToFit()
+                    text.frame = frame
+                    cell.contentView.addSubview(text)
+                    cell.sizeToFit()
+                    return cell
                 case .sipUserName(let value):
                     let cell = self
                         .configureSipCredentialsCell(cellType: .sipUserName(value: value),
