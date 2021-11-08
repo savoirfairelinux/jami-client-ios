@@ -106,7 +106,7 @@
 "createAccount.PasswordInformation" = "Choisissez un mot de passe pour crypter votre compte local. Ne l'oubliez pas sinon vous ne pourrez pas récupérer votre compte";
 "createAccount.EnableNotifications" = "Notifications";
 "createAccount.Recommended" = "(Recommandé)";
-"createAccount.UsernameNotRegisteredTitle" = "Network error";
+"createAccount.UsernameNotRegisteredTitle" = "Erreur de réseau";
 "createAccount.UsernameNotRegisteredMessage" = "Le compte a été créé mais le nom d'utilisateur n'a pas été enregistré";
 "createAccount.timeoutTitle" = "Compte créé";
 "createAccount.timeoutMessage" = "L'enregistrement du nom d'utilisateur est en cours... Cela peut prendre quelque temps.";
