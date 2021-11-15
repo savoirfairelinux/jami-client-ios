@@ -102,8 +102,8 @@
 "createAccount.loading" = "Chargement";
 "createAccount.waitCreateAccountTitle" = "Ajout du compte";
 "createAccount.RegisterAUsername" = "Enregistrer un nom d'utilisateur";
-"createAccount.ChooseAPassword" = "Encrypter mon compte";
-"createAccount.PasswordInformation" = "Choisissez un mot de passe pour encrypter votre compte localement. Ne l'oubliez pas ! Il sera impossible de récupérer votre compte sans lui";
+"createAccount.ChooseAPassword" = "Chiffrer mon compte";
+"createAccount.PasswordInformation" = "Choisissez un mot de passe pour chiffrer votre compte localement. Ne l'oubliez pas ! Il sera impossible de récupérer votre compte sans lui";
 "createAccount.EnableNotifications" = "Notifications";
 "createAccount.Recommended" = "(recommandé)";
 "createAccount.UsernameNotRegisteredTitle" = "Erreur de réseau";

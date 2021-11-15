@@ -27,7 +27,7 @@
 "global.share" = "Partager";
 "global.forward" = "Forward";
 "global.save" = "Save";
-"global.resend" = "Resend";
+"global.resend" = "Renvoyer";
 "global.preview" = "Prévisualisation";
 
 // Scan
@@ -102,8 +102,8 @@
 "createAccount.loading" = "Chargement en cours";
 "createAccount.waitCreateAccountTitle" = "Ajout du compte";
 "createAccount.RegisterAUsername" = "Enregistrer un nom d'utilisateur";
-"createAccount.ChooseAPassword" = "Crypter mon compte";
-"createAccount.PasswordInformation" = "Choisissez un mot de passe pour crypter votre compte local. Ne l'oubliez pas sinon vous ne pourrez pas récupérer votre compte";
+"createAccount.ChooseAPassword" = "Chiffrer mon compte";
+"createAccount.PasswordInformation" = "Choisissez un mot de passe pour chiffrer votre compte local. Ne l'oubliez pas sinon vous ne pourrez pas récupérer votre compte";
 "createAccount.EnableNotifications" = "Notifications";
 "createAccount.Recommended" = "(Recommandé)";
 "createAccount.UsernameNotRegisteredTitle" = "Erreur de réseau";
