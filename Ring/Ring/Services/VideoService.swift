@@ -286,13 +286,14 @@ class VideoService: FrameExtractorDelegate {
     private var hardwareAccelerationEnabledByUser = true
     var angle: Int = 0
     var switchInputRequested: Bool = false
+    var currentDeviceId = ""
 
     private let disposeBag = DisposeBag()
 
     init(withVideoAdapter videoAdapter: VideoAdapter) {
         self.videoAdapter = videoAdapter
         currentOrientation = camera.getOrientation
-        VideoAdapter.delegate = self
+        VideoAdapter.videoDelegate = self
         self.hardwareAccelerationEnabledByUser = videoAdapter.getEncodingAccelerated()
         camera.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.restoreDefaultDevice),
@@ -388,12 +389,14 @@ class VideoService: FrameExtractorDelegate {
 }
 
 extension VideoService: VideoAdapterDelegate {
-    func switchInput(toDevice device: String, callID: String?) {
+    func switchInput(toDevice device: String, callID: String?, accountId: String) {
         if let call = callID {
-            videoAdapter.switchInput(device, forCall: call)
+            videoAdapter.switchInput(device, accountId: accountId, forCall: call)
             return
         }
-        videoAdapter.switchInput(device)
+        let current = self.videoAdapter.getDefaultDevice()
+        self.videoAdapter.closeVideoInput(current)
+        self.videoAdapter.openVideoInput(device)
     }
 
     func setDecodingAccelerated(withState state: Bool) {
@@ -423,19 +426,20 @@ extension VideoService: VideoAdapterDelegate {
         }
     }
 
-    func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codecId: String) {
-        if !codecId.isEmpty {
+    func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?, withaAccountId accountId: String) {
+        if let codecId = codec, !codecId.isEmpty {
             // we do not support hardware acceleration with VP8 codec. In this case software
             // encoding will be used. Downgrate resolution if needed. After call finished
             // resolution will be restored in restoreDefaultDevice()
             let codec = VideoCodecs(rawValue: codecId) ?? VideoCodecs.unknown
             if !supportHardware(codec: codec) && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
                 self.videoAdapter.setDefaultDevice(camera.namePortrait)
-                self.videoAdapter.switchInput("camera://" + camera.namePortrait, forCall: rendererId)
+                self.videoAdapter.switchInput(self.videoAdapter.getDefaultDevice(), accountId: accountId, forCall: rendererId)
             }
         }
         self.log.debug("Decoding started...")
         videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height)
+        self.currentDeviceId = self.videoAdapter.getDefaultDevice()
     }
 
     func supportHardware(codec: VideoCodecs) -> Bool {
@@ -465,14 +469,14 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startCamera() {
-        self.videoAdapter.startCamera()
+        self.videoAdapter.openVideoInput("")
     }
 
     func videRecordingFinished() {
         if self.cameraPosition == .back {
             self.switchCamera()
         }
-        self.videoAdapter.stopCamera()
+        self.videoAdapter.closeVideoInput("")
         self.stopAudioDevice()
     }
 
@@ -513,7 +517,7 @@ extension VideoService: VideoAdapterDelegate {
                                 orientation: self.getImageOrienation()))
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
-                                        angle: Int32(self.angle))
+                                        angle: Int32(self.angle), videoInputId: "camera://" + self.currentDeviceId)
     }
 
     func updateDevicePosition(position: AVCaptureDevice.Position) {

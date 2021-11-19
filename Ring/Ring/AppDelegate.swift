@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let callsProvider: CallsProviderDelegate = CallsProviderDelegate()
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
+    private var videoManager: VideoManager?
     private lazy var callService: CallsService = {
         CallsService(withCallsAdapter: CallsAdapter(), dbManager: self.dBManager)
     }()
@@ -152,8 +153,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         dataTransferService: self.dataTransferService,
                                                         callService: self.callService,
                                                         locationSharingService: self.locationSharingService, contactsService: self.contactsService,
-                                                        callsProvider: self.callsProvider,
-                                                        videoService: self.videoService, requestsService: self.requestsService)
+                                                        callsProvider: self.callsProvider, requestsService: self.requestsService)
+        self.videoManager = VideoManager(with: self.callService, callsProvider: self.callsProvider, videoService: self.videoService)
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()
 
