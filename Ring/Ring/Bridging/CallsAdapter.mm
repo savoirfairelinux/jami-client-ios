@@ -48,7 +48,7 @@ static id <CallsAdapterDelegate> _delegate;
     std::map<std::string, std::shared_ptr<CallbackWrapperBase>> callHandlers;
 
     //State changed signal
-    callHandlers.insert(exportable_callback<CallSignal::StateChange>([&](const std::string& callId,
+    callHandlers.insert(exportable_callback<CallSignal::StateChange>([&](const std::string& accountId, const std::string& callId,
                                                                          const std::string& state,
                                                                          int errorCode) {
         if (CallsAdapter.delegate) {
@@ -56,12 +56,14 @@ static id <CallsAdapterDelegate> _delegate;
             NSString* stateString = [NSString stringWithUTF8String:state.c_str()];
             [CallsAdapter.delegate didChangeCallStateWithCallId:callIdString
                                                           state:stateString
+                                                      accountId:[NSString stringWithUTF8String:accountId.c_str()]
                                                       stateCode:errorCode];
         }
     }));
 
     //Incoming message signal
-    callHandlers.insert(exportable_callback<CallSignal::IncomingMessage>([&](const std::string& callId,
+    callHandlers.insert(exportable_callback<CallSignal::IncomingMessage>([&](const std::string& accountId,
+                                                                             const std::string& callId,
                                                                              const std::string& fromURI,
                                                                              const std::map<std::string,
                                                                              std::string>& message) {
@@ -75,7 +77,7 @@ static id <CallsAdapterDelegate> _delegate;
                                                        message:messageDict];
         }
     }));
-    
+
     callHandlers.insert(exportable_callback<CallSignal::IncomingCallWithMedia>([&](const std::string& accountId,
                                                                                    const std::string& callId,
                                                                                    const std::string& fromURI,
@@ -141,22 +143,22 @@ static id <CallsAdapterDelegate> _delegate;
         }
     }));
 
-    callHandlers.insert(exportable_callback<CallSignal::ConferenceCreated>([&](const std::string& confId) {
+    callHandlers.insert(exportable_callback<CallSignal::ConferenceCreated>([&](const std::string& accountId, const std::string& confId) {
         if (CallsAdapter.delegate) {
             NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
-            [CallsAdapter.delegate conferenceCreatedWithConference: confIdString];
+            [CallsAdapter.delegate conferenceCreatedWithConference: confIdString accountId:[NSString stringWithUTF8String:accountId.c_str()] ];
         }
     }));
 
-    callHandlers.insert(exportable_callback<CallSignal::ConferenceChanged>([&](const std::string& confId, const std::string& state) {
+    callHandlers.insert(exportable_callback<CallSignal::ConferenceChanged>([&](const std::string& accountId, const std::string& confId, const std::string& state) {
         if (CallsAdapter.delegate) {
             NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
             NSString* stateString = [NSString stringWithUTF8String:state.c_str()];
-            [CallsAdapter.delegate conferenceChangedWithConference: confIdString state: stateString];
+            [CallsAdapter.delegate conferenceChangedWithConference: confIdString accountId: [NSString stringWithUTF8String:accountId.c_str()] state: stateString];
         }
     }));
 
-    callHandlers.insert(exportable_callback<CallSignal::ConferenceRemoved>([&](const std::string& confId) {
+    callHandlers.insert(exportable_callback<CallSignal::ConferenceRemoved>([&](const std::string& accountId, const std::string& confId) {
            if (CallsAdapter.delegate) {
                NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
                [CallsAdapter.delegate conferenceRemovedWithConference: confIdString];
@@ -175,114 +177,115 @@ static id <CallsAdapterDelegate> _delegate;
 
 #pragma mark -
 
-- (BOOL)acceptCallWithId:(NSString*)callId withMedia:(NSArray*)mediaList {
-    return acceptWithMedia(std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
+- (BOOL)acceptCallWithId:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList {
+    return acceptWithMedia(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
 }
 
-- (BOOL)refuseCallWithId:(NSString*)callId {
-    return refuse(std::string([callId UTF8String]));
+- (BOOL)refuseCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
+    return refuse(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
-- (BOOL)hangUpCallWithId:(NSString*)callId {
-    return hangUp(std::string([callId UTF8String]));
+- (BOOL)hangUpCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
+    return hangUp(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
-- (BOOL)holdCallWithId:(NSString*)callId {
-    return hold(std::string([callId UTF8String]));
+- (BOOL)holdCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
+    return hold(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
-- (BOOL)unholdCallWithId:(NSString*)callId {
-    return unhold(std::string([callId UTF8String]));
+- (BOOL)unholdCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
+    return unhold(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
-- (void) playDTMF:(NSString*)code {
+- (void)playDTMF:(NSString*)code {
     playDTMF(std::string([code UTF8String]));
 }
 
-- (BOOL)requestMediaChange:(NSString*)callId withMedia: (NSArray*)mediaList {
-    requestMediaChange(std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
+- (BOOL)requestMediaChange:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList {
+    requestMediaChange(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
     return false;
 }
 
-- (void)answerMediaChangeResquest:(NSString*)callId withMedia: (NSArray*)mediaList {
-    answerMediaChangeRequest(std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
+- (void)answerMediaChangeResquest:(NSString*)callId accountId:(NSString*)accountId withMedia: (NSArray*)mediaList {
+    answerMediaChangeRequest(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
 }
 
-- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId withMedia:(NSArray*)mediaList {
+- (NSString*)placeCallWithAccountId:(NSString*)accountId toParticipantId:(NSString*)participantId withMedia:(NSArray*)mediaList {
     std::string callId;
-    callId = placeCallWithMedia(std::string([accountId UTF8String]), std::string([ringId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap:mediaList]);
+    callId = placeCallWithMedia(std::string([accountId UTF8String]), std::string([participantId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap:mediaList]);
     return [NSString stringWithUTF8String:callId.c_str()];
 }
 
-- (void)sendTextMessageWithCallID:(NSString*)callId message:(NSDictionary*)message accountId:(NSString*)accountId sMixed:(bool)isMixed {
-    sendTextMessage(std::string([callId UTF8String]), [Utils dictionnaryToMap:message], std::string([accountId UTF8String]), isMixed);
-}
-
-- (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId {
-    std::map<std::string, std::string> callDetails = getCallDetails(std::string([callId UTF8String]));
+- (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId accountId:(NSString*)accountId {
+    std::map<std::string, std::string> callDetails = getCallDetails(std::string([accountId UTF8String]), std::string([callId UTF8String]));
     return [Utils mapToDictionnary:callDetails];
 }
 
-- (NSArray<NSString*>*)calls {
-    std::vector<std::string> calls = getCallList();
+- (NSArray<NSString*>*)callsForAccountId:(NSString*)accountId  {
+    std::vector<std::string> calls = getCallList(std::string([accountId UTF8String]));
     return [Utils vectorToArray:calls];
 }
 
-- (BOOL)muteMedia:(NSString*)callId mediaType:(NSString*)media muted:(bool)muted {
-    return muteLocalMedia(std::string([callId UTF8String]), std::string([media UTF8String]), muted);
+- (void)sendTextMessageWithCallID:(NSString*)callId accountId:(NSString*)accountId message:(NSDictionary*)message from:(NSString*)jamiId isMixed:(bool)isMixed {
+    sendTextMessage(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils dictionnaryToMap:message], std::string([jamiId UTF8String]), isMixed);
 }
 
-- (BOOL)joinConference:(NSString*)confID call:(NSString*)callID {
-    return addParticipant(std::string([callID UTF8String]), std::string([confID UTF8String]));
+- (BOOL)muteMedia:(NSString*)callId accountId:(NSString*)accountId mediaType:(NSString*)media muted:(bool)muted {
+    return muteLocalMedia(std::string([accountId UTF8String]), std::string([callId UTF8String]), std::string([media UTF8String]), muted);
 }
 
-- (BOOL)joinCall:(NSString*)firstCall second:(NSString*)secondCall {
-    return joinParticipant(std::string([firstCall UTF8String]), std::string([secondCall UTF8String]));
+- (BOOL)joinConference:(NSString*)confID call:(NSString*)callID accountId:(NSString*)accountId account2Id:(NSString*)account2Id {
+    return addParticipant(std::string([accountId UTF8String]), std::string([callID UTF8String]), std::string([account2Id UTF8String]), std::string([confID UTF8String]));
 }
 
-- (BOOL)joinConferences:(NSString*)firstConf secondConference:(NSString*)secondConf {
-    return joinConference(std::string([firstConf UTF8String]), std::string([secondConf UTF8String]));
+- (BOOL)joinConferences:(NSString*)firstConf secondConference:(NSString*)secondConf accountId:(NSString*)accountId account2Id:(NSString*)account2Id {
+    return joinConference(std::string([accountId UTF8String]), std::string([firstConf UTF8String]), std::string([account2Id UTF8String]), std::string([secondConf UTF8String]));
 }
 
-- (BOOL)hangUpConference:(NSString*)conferenceId {
-    return hangUpConference(std::string([conferenceId UTF8String]));
+- (BOOL)joinCall:(NSString*)firstCall second:(NSString*)secondCall accountId:(NSString*)accountId account2Id:(NSString*)account2Id {
+    return joinParticipant(std::string([accountId UTF8String]), std::string([firstCall UTF8String]), std::string([account2Id UTF8String]), std::string([secondCall UTF8String]));
 }
 
-- (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId {
-    setActiveParticipant(std::string([conferenceId UTF8String]), std::string([callId UTF8String]));
-}
-
-- (void)setConferenceLayout:(int)layout forConference:(NSString*)conferenceId {
-    setConferenceLayout(std::string([conferenceId UTF8String]), layout);
-}
-
-- (void)setConferenceModerator:(NSString*)participantId forConference:(NSString*)conferenceId active:(BOOL)isActive {
-    setModerator(std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), isActive);
-}
-
-- (void)muteConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId active:(BOOL)isActive {
-    muteParticipant(std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), isActive);
-}
-
-- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId {
-    hangupParticipant(std::string([conferenceId UTF8String]), std::string([participantId UTF8String]));
-}
-
-- (NSArray*)getConferenceInfo:(NSString*)conferenceId {
-    auto result = getConferenceInfos(std::string([conferenceId UTF8String]));
+- (NSArray*)getConferenceInfo:(NSString*)conferenceId accountId:(NSString*)accountId {
+    auto result = getConferenceInfos(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]));
     NSArray* arrayResult = [Utils vectorOfMapsToArray:result];
     return arrayResult;
 }
 
-- (NSDictionary<NSString*,NSString*>*)getConferenceDetails:(NSString*)conferenceId {
-    std::map<std::string, std::string> confDetails = getConferenceDetails(std::string([conferenceId UTF8String]));
+- (NSDictionary<NSString*,NSString*>*)getConferenceDetails:(NSString*)conferenceId accountId:(NSString*)accountId {
+    std::map<std::string, std::string> confDetails = getConferenceDetails(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]));
     return [Utils mapToDictionnary:confDetails];
 }
 
-- (NSArray<NSString*>*)getConferenceCalls:(NSString*)conferenceId {
-    std::vector<std::string> calls = getParticipantList(std::string([conferenceId UTF8String]));
+- (NSArray<NSString*>*)getConferenceCalls:(NSString*)conferenceId accountId:(NSString*)accountId {
+    std::vector<std::string> calls = getParticipantList(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]));
     return [Utils vectorToArray:calls];
 }
+
+- (BOOL)hangUpConference:(NSString*)conferenceId accountId:(NSString*)accountId {
+    return hangUpConference(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]));
+}
+
+- (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId accountId:(NSString*)accountId {
+    setActiveParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([callId UTF8String]));
+}
+
+- (void)setConferenceLayout:(int)layout forConference:(NSString*)conferenceId accountId:(NSString*)accountId  {
+    setConferenceLayout(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), layout);
+}
+
+- (void)setConferenceModerator:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId active:(BOOL)isActive {
+    setModerator(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), isActive);
+}
+
+- (void)muteConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId active:(BOOL)isActive {
+    muteParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), isActive);
+}
+
+- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId {
+    hangupParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]));
+}
+
 
 #pragma mark AccountAdapterDelegate
 

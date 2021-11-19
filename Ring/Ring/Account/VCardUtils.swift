@@ -102,7 +102,7 @@ class VCardUtils {
         return name
     }
 
-    class func sendVCard(card: CNContact, callID: String, accountID: String, sender: CallsService) {
+    class func sendVCard(card: CNContact, callID: String, accountID: String, sender: CallsService, from: String) {
         do {
             let vCard = card
             guard let vCardData = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000, encoding: .utf8),
@@ -131,7 +131,7 @@ class VCardUtils {
                     chunk[key] = vCardString
                 }
                 i += 1
-                sender.sendChunk(callID: callID, message: chunk, accountId: accountID)
+                sender.sendChunk(callID: callID, message: chunk, accountId: accountID, from: from)
             }
         } catch {
             print(error)

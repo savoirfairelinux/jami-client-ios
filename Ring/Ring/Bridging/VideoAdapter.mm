@@ -46,14 +46,14 @@ struct Renderer
 
     void bindAVSinkFunctions() {
         avtarget.push = [this](std::unique_ptr<DRing::VideoFrame> frame) {
-            if(!VideoAdapter.delegate) {
+            if(!VideoAdapter.videoDelegate) {
                 return;
             }
             @autoreleasepool {
                 UIImage *image = [Utils
                                   convertHardwareDecodedFrameToImage: std::move(frame->pointer())];
                 isRendering = true;
-                [VideoAdapter.delegate writeFrameWithImage: image forCallId: rendererId];
+                [VideoAdapter.videoDelegate writeFrameWithImage: image forCallId: rendererId];
                 isRendering = false;
             }
         };
@@ -72,7 +72,7 @@ struct Renderer
         target.push = [this](DRing::SinkTarget::FrameBufferPtr buf) {
             std::lock_guard<std::mutex> lk(renderMutex);
             daemonFramePtr_ = std::move(buf);
-            if(VideoAdapter.delegate) {
+            if(VideoAdapter.videoDelegate) {
                 @autoreleasepool {
                     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
                     CGContextRef bitmapContext = CGBitmapContextCreate((void *)daemonFramePtr_->ptr,
@@ -88,7 +88,7 @@ struct Renderer
                     UIImage* image = [UIImage imageWithCGImage:cgImage];
                     CGImageRelease(cgImage);
                     isRendering = true;
-                    [VideoAdapter.delegate writeFrameWithImage: image forCallId: rendererId];
+                    [VideoAdapter.videoDelegate writeFrameWithImage: image forCallId: rendererId];
                     isRendering = false;
                 }
             }
@@ -101,8 +101,9 @@ struct Renderer
     std::map<std::string, std::shared_ptr<Renderer>> renderers;
 }
 
-// Static delegate that will receive the propagated daemon events
-static id <VideoAdapterDelegate> _delegate;
+// Static delegates that will receive the propagated daemon events
+static id <VideoAdapterDelegate> _videoDelegate;
+static id <DecodingAdapterDelegate> _decodingDelegate;
 
 #pragma mark Init
 
@@ -125,44 +126,39 @@ static id <VideoAdapterDelegate> _delegate;
                                                                                int w,
                                                                                int h,
                                                                                bool is_mixer) {
-        if(VideoAdapter.delegate) {
+        if(VideoAdapter.decodingDelegate) {
             NSString* rendererId = [NSString stringWithUTF8String:renderer_id.c_str()];
-            NSString* codecName = @"";
-            std::map<std::string, std::string> callDetails = getCallDetails(renderer_id);
-            if (callDetails.find("VIDEO_CODEC") != callDetails.end()) {
-                codecName = [NSString stringWithUTF8String: callDetails["VIDEO_CODEC"].c_str()];
-            }
-            [VideoAdapter.delegate decodingStartedWithRendererId:rendererId withWidth:(NSInteger)w withHeight:(NSInteger)h withCodec: codecName];
+            [VideoAdapter.decodingDelegate decodingStartedWithRendererId:rendererId withWidth:(NSInteger)w withHeight:(NSInteger)h];
         }
     }));
 
     videoHandlers.insert(exportable_callback<VideoSignal::DecodingStopped>([&](const std::string& renderer_id,
                                                                                const std::string& shm_path,
                                                                                bool is_mixer) {
-        if(VideoAdapter.delegate) {
+        if(VideoAdapter.decodingDelegate) {
             NSString* rendererId = [NSString stringWithUTF8String:renderer_id.c_str()];
-            [VideoAdapter.delegate decodingStoppedWithRendererId:rendererId];
+            [VideoAdapter.decodingDelegate decodingStoppedWithRendererId:rendererId];
         }
     }));
 
     videoHandlers.insert(exportable_callback<VideoSignal::StartCapture>([&](const std::string& device) {
-        if(VideoAdapter.delegate) {
+        if(VideoAdapter.videoDelegate) {
             NSString* deviceString = [NSString stringWithUTF8String:device.c_str()];
-            [VideoAdapter.delegate startCaptureWithDevice:deviceString];
+            [VideoAdapter.videoDelegate startCaptureWithDevice:deviceString];
         }
     }));
 
-    videoHandlers.insert(exportable_callback<VideoSignal::StopCapture>([&]() {
-        if(VideoAdapter.delegate) {
-            [VideoAdapter.delegate stopCapture];
+    videoHandlers.insert(exportable_callback<VideoSignal::StopCapture>([&](const std::string& deviceId) {
+        if(VideoAdapter.videoDelegate) {
+            [VideoAdapter.videoDelegate stopCapture];
         }
     }));
 
     videoHandlers.insert(exportable_callback<MediaPlayerSignal::FileOpened>([&](const std::string& playerId, std::map<std::string, std::string> playerInfo) {
-        if(VideoAdapter.delegate) {
+        if(VideoAdapter.videoDelegate) {
             NSString* player = @(playerId.c_str());
             NSMutableDictionary* info = [Utils mapToDictionnary:playerInfo];
-            [VideoAdapter.delegate fileOpenedFor:player fileInfo:info];
+            [VideoAdapter.videoDelegate fileOpenedFor:player fileInfo:info];
         }
     }));
 
@@ -211,8 +207,10 @@ static id <VideoAdapterDelegate> _delegate;
 }
 
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
-                               angle:(int)angle{
-    auto frame = DRing::getNewFrame();
+                               angle:(int)angle
+                        videoInputId:(NSString*)videoInputId
+{
+    auto frame = DRing::getNewFrame(std::string([videoInputId UTF8String]));
     if(!frame) {
         return;
     }
@@ -221,7 +219,7 @@ static id <VideoAdapterDelegate> _delegate;
               fromImageBuffer:image
                         angle:(int) angle];
 
-    DRing::publishFrame();
+    DRing::publishFrame(std::string([videoInputId UTF8String]));
 }
 
 - (void)addVideoDeviceWithName:(NSString*)deviceName withDevInfo:(NSDictionary*)deviceInfoDict {
@@ -254,20 +252,16 @@ static id <VideoAdapterDelegate> _delegate;
     return DRing::getEncodingAccelerated();
 }
 
-- (void)switchInput:(NSString*)deviceName {
-    DRing::switchInput(std::string([deviceName UTF8String]));
-}
-
-- (void)switchInput:(NSString*)deviceName forCall:(NSString*) callID {
-    DRing::switchInput(std::string([callID UTF8String]), std::string([deviceName UTF8String]));
+- (void)switchInput:(NSString*)videoInputId accountId:(NSString*)accountId forCall:(NSString*)callID {
+    DRing::switchInput(std::string([accountId UTF8String]), std::string([callID UTF8String]), std::string([videoInputId UTF8String]));
 }
 
 - (void)stopAudioDevice {
     DRing::stopAudioDevice();
 }
 
-- (NSString* )startLocalRecording:(NSString*) path audioOnly:(BOOL)audioOnly {
-    return @(DRing::startLocalRecorder(audioOnly, std::string([path UTF8String])).c_str());
+- (NSString*)startLocalRecording:(NSString*)videoInputId path:(NSString*)path {
+    return @(DRing::startLocalMediaRecorder(std::string([videoInputId UTF8String]), std::string([path UTF8String])).c_str());
 }
 
 - (void)stopLocalRecording:(NSString*) path {
@@ -281,8 +275,8 @@ static id <VideoAdapterDelegate> _delegate;
     return DRing::pausePlayer(std::string([playerId UTF8String]), pause);
 }
 
-- (bool)closePlayer:(NSString*)playerId {
-    return DRing::closePlayer(std::string([playerId UTF8String]));
+-(bool)closePlayer:(NSString*)playerId {
+    return DRing::closeMediaPlayer(std::string([playerId UTF8String]));
 }
 
 - (bool)mutePlayerAudio:(NSString*)playerId mute:(BOOL)mute {
@@ -297,22 +291,32 @@ static id <VideoAdapterDelegate> _delegate;
     return DRing::getPlayerPosition(std::string([playerId UTF8String]));
 }
 
-- (void)startCamera {
-    DRing::startCamera();
+- (void)openVideoInput:(NSString*)path {
+    DRing::openVideoInput(std::string([path UTF8String]));
 }
 
-- (void)stopCamera {
-    DRing::stopCamera();
+- (void)closeVideoInput:(NSString*)path {
+    DRing::closeVideoInput(std::string([path UTF8String]));
 }
 
-#pragma mark PresenceAdapterDelegate
+#pragma mark VideoAdapterDelegate
 
-+ (id <VideoAdapterDelegate>)delegate {
-    return _delegate;
++ (id <VideoAdapterDelegate>)videoDelegate {
+    return _videoDelegate;
 }
 
-+ (void) setDelegate:(id<VideoAdapterDelegate>)delegate {
-    _delegate = delegate;
++ (void) setVideoDelegate:(id<VideoAdapterDelegate>)videoDelegate {
+    _videoDelegate = videoDelegate;
+}
+
+#pragma mark DecodingAdapterDelegate
+
++ (id <DecodingAdapterDelegate>)decodingDelegate {
+    return _decodingDelegate;
+}
+
++ (void) setDecodingDelegate:(id<DecodingAdapterDelegate>)decodingDelegate {
+    _decodingDelegate = decodingDelegate;
 }
 
 #pragma mark -

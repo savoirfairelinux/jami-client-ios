@@ -23,10 +23,12 @@
 #import <AVFoundation/AVFoundation.h>
 
 @protocol VideoAdapterDelegate;
+@protocol DecodingAdapterDelegate;
 
 @interface VideoAdapter : NSObject
 
-@property (class, nonatomic, weak) id <VideoAdapterDelegate> delegate;
+@property (class, nonatomic, weak) id <VideoAdapterDelegate> videoDelegate;
+@property (class, nonatomic, weak) id <DecodingAdapterDelegate> decodingDelegate;
 
 - (void)addVideoDeviceWithName:(NSString*)deviceName withDevInfo:(NSDictionary*)deviceInfoDict;
 - (void)setDefaultDevice:(NSString*)deviceName;
@@ -36,18 +38,18 @@
                           withHeight:(NSInteger)h;
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId;
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
-                               angle:(int)angle;
+                               angle:(int)angle
+                        videoInputId:(NSString*)videoInputId;
 - (void)setDecodingAccelerated:(BOOL)state;
 - (BOOL)getDecodingAccelerated;
-- (void)switchInput:(NSString*)deviceName;
-- (void)switchInput:(NSString*)deviceName forCall:(NSString*) callID;
+- (void)switchInput:(NSString*)videoInputId accountId:(NSString*)accountId forCall:(NSString*)callID;
 - (void)setEncodingAccelerated:(BOOL)state;
 - (BOOL)getEncodingAccelerated;
 - (void)stopAudioDevice;
-- (NSString*)startLocalRecording:(NSString*) path audioOnly:(BOOL)audioOnly;
+- (NSString*)startLocalRecording:(NSString*)videoInputId path:(NSString*)path;
 - (void)stopLocalRecording:(NSString*) path;
-- (void)startCamera;
-- (void)stopCamera;
+- (void)openVideoInput:(NSString*)path;
+- (void)closeVideoInput:(NSString*)path;
 - (NSString*)createMediaPlayer:(NSString*)path;
 - (bool)pausePlayer:(NSString*)playerId pause:(BOOL)pause;
 - (bool)closePlayer:(NSString*)playerId;
