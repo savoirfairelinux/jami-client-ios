@@ -27,32 +27,32 @@
 
 @property (class, nonatomic, weak) id <CallsAdapterDelegate> delegate;
 
-- (BOOL)acceptCallWithId:(NSString*)callId withMedia:(NSArray*)mediaList;
-- (BOOL)refuseCallWithId:(NSString*)callId;
-- (BOOL)hangUpCallWithId:(NSString*)callId;
-- (BOOL)holdCallWithId:(NSString*)callId;
-- (BOOL)unholdCallWithId:(NSString*)callId;
-
-- (BOOL)requestMediaChange:(NSString*)callId withMedia: (NSArray*)mediaList;
-- (void)answerMediaChangeResquest:(NSString*)callId withMedia: (NSArray*)mediaList;
-
-- (NSString*)placeCallWithAccountId:(NSString*)accountId toRingId:(NSString*)ringId withMedia: (NSArray*)mediaList;
-- (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId;
-- (NSArray<NSString*>*)calls;
-- (void) sendTextMessageWithCallID:(NSString*)callId message:(NSDictionary*)message accountId:(NSString*)accountId sMixed:(bool)isMixed;
-- (BOOL) muteMedia:(NSString*)callId mediaType:(NSString*)media muted:(bool)muted;
+- (BOOL)acceptCallWithId:(NSString*)callId forAccountId:(NSString*)accountId withMedia:(NSArray*)mediaList;
+- (BOOL)refuseCallWithId:(NSString*)callId accountId:(NSString*)accountId;
+- (BOOL)hangUpCallWithId:(NSString*)callId accountId:(NSString*)accountId;
+- (BOOL)holdCallWithId:(NSString*)callId accountId:(NSString*)accountId;
+- (BOOL)unholdCallWithId:(NSString*)callId accountId:(NSString*)accountId;
 - (void) playDTMF:(NSString*)code;
 
-- (BOOL)joinConference:(NSString*)confID call:(NSString*)callID;
-- (BOOL)joinConferences:(NSString*)firstConf secondConference:(NSString*)secondConf;
-- (BOOL)joinCall:(NSString*)firstCall second:(NSString*)secondCall;
-- (NSDictionary<NSString*,NSString*>*)getConferenceDetails:(NSString*)conferenceId;
-- (NSArray<NSString*>*)getConferenceCalls:(NSString*)conferenceId;
-- (BOOL)hangUpConference:(NSString*)conferenceId;
-- (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId;
-- (void)setConferenceLayout:(int)layout forConference:(NSString*)conferenceId;
-- (NSArray*)getConferenceInfo:(NSString*)conferenceId;
-- (void)setConferenceModerator:(NSString*)participantId forConference:(NSString*)conferenceId active:(BOOL)isActive;
-- (void)muteConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId active:(BOOL)isActive;
-- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId;
+- (BOOL)requestMediaChange:(NSString*)callId forAccountId:(NSString*)accountId withMedia:(NSArray*)mediaList;
+- (void)answerMediaChangeResquest:(NSString*)callId forAccountId:(NSString*)accountId withMedia: (NSArray*)mediaList;
+
+- (NSString*)placeCallWithAccountId:(NSString*)accountId toParticipantId:(NSString*)participantId withMedia: (NSArray*)mediaList;
+- (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId forAccountId:(NSString*)accountId;
+- (NSArray<NSString*>*)callsForAccountId:(NSString*)accountId;
+- (void)sendTextMessageWithCallID:(NSString*)callId accountId:(NSString*)accountId message:(NSDictionary*)message from:(NSString*)jamiId isMixed:(bool)isMixed;
+- (BOOL)muteMedia:(NSString*)callId accountId:(NSString*)accountId mediaType:(NSString*)media muted:(bool)muted;
+
+- (BOOL)joinConference:(NSString*)confID call:(NSString*)callID accountId:(NSString*)accountId account2Id:(NSString*)account2Id;
+- (BOOL)joinConferences:(NSString*)firstConf secondConference:(NSString*)secondConf accountId:(NSString*)accountId account2Id:(NSString*)account2Id;
+- (BOOL)joinCall:(NSString*)firstCall second:(NSString*)secondCall accountId:(NSString*)accountId account2Id:(NSString*)account2Id;
+- (NSArray*)getConferenceInfo:(NSString*)conferenceId accountId:(NSString*)accountId;
+- (NSDictionary<NSString*,NSString*>*)getConferenceDetails:(NSString*)conferenceId accountId:(NSString*)accountId;
+- (NSArray<NSString*>*)getConferenceCalls:(NSString*)conferenceId accountId:(NSString*)accountId;
+- (BOOL)hangUpConference:(NSString*)conferenceId accountId:(NSString*)accountId;
+- (void)setActiveParticipant:(NSString*)callId forConference:(NSString*)conferenceId accountId:(NSString*)accountId;
+- (void)setConferenceLayout:(int)layout forConference:(NSString*)conferenceId accountId:(NSString*)accountId;
+- (void)setConferenceModerator:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId active:(BOOL)isActive;
+- (void)muteConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId active:(BOOL)isActive;
+- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId;
 @end

@@ -20,15 +20,15 @@
  */
 
 @objc protocol CallsAdapterDelegate {
-    func didChangeCallState(withCallId callId: String, state: String, stateCode: NSInteger)
+    func didChangeCallState(withCallId callId: String, state: String, accountId: String, stateCode: NSInteger)
     func didReceiveMediaChangeRequest(withAccountId accountId: String, callId: String, withMedia: [[String: String]])
     func didReceiveMessage(withCallId callId: String, fromURI uri: String, message: [String: String])
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String, withMedia: [[String: String]])
     func callPlacedOnHold(withCallId callId: String, holding: Bool)
     func audioMuted(call callId: String, mute: Bool)
     func videoMuted(call callId: String, mute: Bool)
-    func conferenceCreated(conference conferenceID: String)
-    func conferenceChanged(conference conferenceID: String, state: String)
+    func conferenceCreated(conference conferenceID: String, accountId: String)
+    func conferenceChanged(conference conferenceID: String, accountId: String, state: String)
     func conferenceRemoved(conference conferenceID: String)
     func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]])
     func didChangeMediaNegotiationStatus(withCallId callId: String, event: String, withMedia: [[String: String]])
