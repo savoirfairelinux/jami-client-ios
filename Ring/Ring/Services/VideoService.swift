@@ -465,14 +465,14 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func startCamera() {
-        self.videoAdapter.startCamera()
+        self.videoAdapter.openVideoInput("")
     }
 
     func videRecordingFinished() {
         if self.cameraPosition == .back {
             self.switchCamera()
         }
-        self.videoAdapter.stopCamera()
+        self.videoAdapter.closeVideoInput("")
         self.stopAudioDevice()
     }
 
@@ -513,7 +513,7 @@ extension VideoService: VideoAdapterDelegate {
                                 orientation: self.getImageOrienation()))
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
-                                        angle: Int32(self.angle))
+                                        angle: Int32(self.angle), videoInputId: "camera://" + camera.namePortrait)
     }
 
     func updateDevicePosition(position: AVCaptureDevice.Position) {

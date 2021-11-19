@@ -128,10 +128,6 @@ static id <VideoAdapterDelegate> _delegate;
         if(VideoAdapter.delegate) {
             NSString* rendererId = [NSString stringWithUTF8String:renderer_id.c_str()];
             NSString* codecName = @"";
-            std::map<std::string, std::string> callDetails = getCallDetails(renderer_id);
-            if (callDetails.find("VIDEO_CODEC") != callDetails.end()) {
-                codecName = [NSString stringWithUTF8String: callDetails["VIDEO_CODEC"].c_str()];
-            }
             [VideoAdapter.delegate decodingStartedWithRendererId:rendererId withWidth:(NSInteger)w withHeight:(NSInteger)h withCodec: codecName];
         }
     }));
@@ -152,7 +148,7 @@ static id <VideoAdapterDelegate> _delegate;
         }
     }));
 
-    videoHandlers.insert(exportable_callback<VideoSignal::StopCapture>([&]() {
+    videoHandlers.insert(exportable_callback<VideoSignal::StopCapture>([&](const std::string& deviceId) {
         if(VideoAdapter.delegate) {
             [VideoAdapter.delegate stopCapture];
         }
@@ -211,8 +207,10 @@ static id <VideoAdapterDelegate> _delegate;
 }
 
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
-                               angle:(int)angle{
-    auto frame = DRing::getNewFrame();
+                               angle:(int)angle
+                        videoInputId:(NSString*)videoInputId
+{
+    auto frame = DRing::getNewFrame(std::string([videoInputId UTF8String]));
     if(!frame) {
         return;
     }
@@ -221,7 +219,7 @@ static id <VideoAdapterDelegate> _delegate;
               fromImageBuffer:image
                         angle:(int) angle];
 
-    DRing::publishFrame();
+    DRing::publishFrame(std::string([videoInputId UTF8String]));
 }
 
 - (void)addVideoDeviceWithName:(NSString*)deviceName withDevInfo:(NSDictionary*)deviceInfoDict {
@@ -254,20 +252,16 @@ static id <VideoAdapterDelegate> _delegate;
     return DRing::getEncodingAccelerated();
 }
 
-- (void)switchInput:(NSString*)deviceName {
-    DRing::switchInput(std::string([deviceName UTF8String]));
-}
-
-- (void)switchInput:(NSString*)deviceName forCall:(NSString*) callID {
-    DRing::switchInput(std::string([callID UTF8String]), std::string([deviceName UTF8String]));
+- (void)switchInput:(NSString*)deviceName accountId:(NSString*)accountId forCall:(NSString*) callID {
+    DRing::switchInput(std::string([accountId UTF8String]), std::string([callID UTF8String]), std::string([deviceName UTF8String]));
 }
 
 - (void)stopAudioDevice {
     DRing::stopAudioDevice();
 }
 
-- (NSString* )startLocalRecording:(NSString*) path audioOnly:(BOOL)audioOnly {
-    return @(DRing::startLocalRecorder(audioOnly, std::string([path UTF8String])).c_str());
+- (NSString*)startLocalRecording:(NSString*)videoInputId path:(NSString*)path {
+    return @(DRing::startLocalMediaRecorder(std::string([videoInputId UTF8String]), std::string([path UTF8String])).c_str());
 }
 
 - (void)stopLocalRecording:(NSString*) path {
@@ -281,8 +275,8 @@ static id <VideoAdapterDelegate> _delegate;
     return DRing::pausePlayer(std::string([playerId UTF8String]), pause);
 }
 
-- (bool)closePlayer:(NSString*)playerId {
-    return DRing::closePlayer(std::string([playerId UTF8String]));
+-(NSString*)closePlayer:(NSString*)playerId {
+    return @(DRing::closeMediaPlayer(std::string([playerId UTF8String])).c_str());
 }
 
 - (bool)mutePlayerAudio:(NSString*)playerId mute:(BOOL)mute {
@@ -297,12 +291,12 @@ static id <VideoAdapterDelegate> _delegate;
     return DRing::getPlayerPosition(std::string([playerId UTF8String]));
 }
 
-- (void)startCamera {
-    DRing::startCamera();
+- (void)openVideoInput:(NSString*)path {
+    DRing::openVideoInput(std::string([path UTF8String]));
 }
 
-- (void)stopCamera {
-    DRing::stopCamera();
+- (void)closeVideoInput:(NSString*)path {
+    DRing::closeVideoInput(std::string([path UTF8String]));
 }
 
 #pragma mark PresenceAdapterDelegate

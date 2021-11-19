@@ -36,7 +36,8 @@
                           withHeight:(NSInteger)h;
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId;
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
-                               angle:(int)angle;
+                               angle:(int)angle
+                        videoInputId:(NSString*)videoInputId;
 - (void)setDecodingAccelerated:(BOOL)state;
 - (BOOL)getDecodingAccelerated;
 - (void)switchInput:(NSString*)deviceName;
@@ -46,11 +47,11 @@
 - (void)stopAudioDevice;
 - (NSString*)startLocalRecording:(NSString*) path audioOnly:(BOOL)audioOnly;
 - (void)stopLocalRecording:(NSString*) path;
-- (void)startCamera;
-- (void)stopCamera;
+- (void)openVideoInput:(NSString*)path;
+- (void)closeVideoInput:(NSString*)path;
 - (NSString*)createMediaPlayer:(NSString*)path;
 - (bool)pausePlayer:(NSString*)playerId pause:(BOOL)pause;
-- (bool)closePlayer:(NSString*)playerId;
+-(NSString*)closePlayer:(NSString*)playerId;
 - (bool)mutePlayerAudio:(NSString*)playerId mute:(BOOL)mute;
 - (bool)playerSeekToTime:(int)time playerId:(NSString*)playerId;
 - (int64_t)getPlayerPosition:(NSString*)playerId;
