@@ -36,7 +36,6 @@ class ConversationsManager {
     private let callService: CallsService
     private let locationSharingService: LocationSharingService
     private let callsProvider: CallsProviderDelegate
-    private let videoService: VideoService
     private let requestService: RequestsService
 
     private let disposeBag = DisposeBag()
@@ -54,7 +53,6 @@ class ConversationsManager {
          locationSharingService: LocationSharingService,
          contactsService: ContactsService,
          callsProvider: CallsProviderDelegate,
-         videoService: VideoService,
          requestsService: RequestsService) {
         self.conversationService = conversationService
         self.accountsService = accountsService
@@ -64,7 +62,6 @@ class ConversationsManager {
         self.locationSharingService = locationSharingService
         self.contactsService = contactsService
         self.callsProvider = callsProvider
-        self.videoService = videoService
         self.requestService = requestsService
 
         ConversationsAdapter.messagesDelegate = self
@@ -161,26 +158,6 @@ class ConversationsManager {
     }
 
     private func subscribeCallsEvents() {
-        self.callService.sharedResponseStream
-            .filter { event in
-                event.eventType == .callEnded
-            }
-            .subscribe { [weak self] event in
-                guard let self = self else { return }
-                guard let accountID: String = event.getEventInput(.accountId) else {
-                    return
-                }
-                guard let jamiId: String = event.getEventInput(.uri) else {
-                    return
-                }
-                guard let call = self.callService.call(participantHash: jamiId.filterOutHost(), accountID: accountID) else { return }
-                self.callsProvider.stopCall(callUUID: call.callUUID)
-                self.videoService.stopCapture()
-                self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
-            } onError: { _ in
-            }
-            .disposed(by: disposeBag)
-
         self.callService.newMessage
             .filter({ (event) in
                 return  event.eventType == ServiceEventType.newIncomingMessage

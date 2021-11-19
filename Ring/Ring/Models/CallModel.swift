@@ -68,6 +68,7 @@ enum CallDetailKey: String {
     case videoSourceKey = "VIDEO_SOURCE"
     case audioOnlyKey = "AUDIO_ONLY"
     case confID = "CONF_ID"
+    case videoCodec = "VIDEO_CODEC"
 }
 
 enum MediaAttributeKey: String {

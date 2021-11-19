@@ -131,7 +131,7 @@ class SendFileViewModel: Stateable, ViewModel {
         self.injectionBag = injectionBag
         if !audioOnly {
             videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
-            videoService.startCamera()
+            videoService.startMediumCamera()
         }
         videoService.capturedVideoFrame.asObservable()
             .subscribe(onNext: { [weak self] frame in

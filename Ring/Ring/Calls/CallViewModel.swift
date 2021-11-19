@@ -581,7 +581,7 @@ extension CallViewModel {
             }
             guard let secondCall = self.callService.call(callID: contact.conferenceID) else { return }
             if call.participantsCallId.count == 1 {
-                self.callService.joinCall(firstCall: call.callId, secondCall: secondCall.callId)
+                self.callService.joinCall(firstCallId: call.callId, secondCallId: secondCall.callId)
             } else {
                 self.callService.joinConference(confID: contact.conferenceID, callID: self.rendererId)
             }
@@ -752,10 +752,9 @@ extension CallViewModel {
         guard let account = self.accountService.currentAccount else { return false }
         return self.callService.isModerator(participantId: account.jamiId, inConference: self.rendererId)
     }
-
     func getItemsForConferenceMenu(participantId: String, callId: String) -> [MenuItem] {
         let conference = self.callService.call(callID: self.rendererId)
-        let active = self.callService.isParticipant(participantURI: participantId, activeIn: self.rendererId)
+        let active = self.callService.isParticipant(participantURI: participantId, activeIn: self.rendererId, accountId: conference?.accountId ?? "")
         // menu for local call
         if self.isLocalCall(participantId: participantId) || participantId.isEmpty {
             return menuItemsManager.getMenuItemsForLocalCall(conference: conference, active: active)

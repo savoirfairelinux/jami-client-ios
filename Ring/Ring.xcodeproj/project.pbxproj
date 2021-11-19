@@ -247,6 +247,8 @@
 		263B7158246D9390007044C4 /* SmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7157246D9390007044C4 /* SmartListCell.swift */; };
 		263B715A246D9556007044C4 /* IncognitoSmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */; };
 		263B715C246D96E5007044C4 /* IncognitoSmartListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263B715B246D96E5007044C4 /* IncognitoSmartListCell.xib */; };
+		2659F65827483656009107F1 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65727483656009107F1 /* VideoManager.swift */; };
+		2659F65C27483A27009107F1 /* DecodingAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */; };
 		2662FC79246B1E1700FA7782 /* JamiSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662FC78246B1E1700FA7782 /* JamiSearchView.swift */; };
 		2662FC7B246B216B00FA7782 /* JamiSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662FC7A246B216B00FA7782 /* JamiSearchViewModel.swift */; };
 		2662FC7D246B78E800FA7782 /* IncognitoSmartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662FC7C246B78E800FA7782 /* IncognitoSmartListViewController.swift */; };
@@ -661,6 +663,8 @@
 		263B7157246D9390007044C4 /* SmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListCell.swift; sourceTree = "<group>"; };
 		263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncognitoSmartListCell.swift; sourceTree = "<group>"; };
 		263B715B246D96E5007044C4 /* IncognitoSmartListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncognitoSmartListCell.xib; sourceTree = "<group>"; };
+		2659F65727483656009107F1 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
+		2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingAdapterDelegate.swift; sourceTree = "<group>"; };
 		2662FC78246B1E1700FA7782 /* JamiSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiSearchView.swift; sourceTree = "<group>"; };
 		2662FC7A246B216B00FA7782 /* JamiSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiSearchViewModel.swift; sourceTree = "<group>"; };
 		2662FC7C246B78E800FA7782 /* IncognitoSmartListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IncognitoSmartListViewController.swift; path = Ring/Features/Conversations/SmartList/IncognitoSmartListViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -1015,6 +1019,8 @@
 				645BDD8024B74BCB009129B1 /* LocationSharingService.swift */,
 				26D08AB8269628F400E37574 /* RequestsService.swift */,
 				26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */,
+				2659F65727483656009107F1 /* VideoManager.swift */,
+				2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2217,6 +2223,7 @@
 				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
 				66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */,
 				0E6D959A2407115800996A28 /* LinkToAccountManagerViewController.swift in Sources */,
+				2659F65C27483A27009107F1 /* DecodingAdapterDelegate.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* ConversationsAdapter.mm in Sources */,
 				0E438A9A204F47E700402900 /* SettingsTableView.swift in Sources */,
 				0E49096A1FEAB156005CAA50 /* CallsAdapter.mm in Sources */,
@@ -2286,6 +2293,7 @@
 				1A20417C1F1E56FF00C08435 /* WelcomeViewModel.swift in Sources */,
 				1A5DC03D1F35678D0075E8EF /* RequestItem.swift in Sources */,
 				0E403F811F7D797300C80BC2 /* MessageCellGenerated.swift in Sources */,
+				2659F65827483656009107F1 /* VideoManager.swift in Sources */,
 				64F8127A24BBC19C00A7DE6A /* MessageCellLocationSharing.swift in Sources */,
 				0E6D959C2407116E00996A28 /* LinkToAccountManagerViewModel.swift in Sources */,
 				62AD584C2056DB2700AF0701 /* MessageCellDataTransferSent.swift in Sources */,
