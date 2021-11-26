@@ -753,6 +753,7 @@ extension CallViewModel {
         return self.callService.isModerator(participantId: account.jamiId, inConference: self.rendererId)
     }
     func getItemsForConferenceMenu(participantId: String, callId: String) -> [MenuItem] {
+        guard let participant = self.getConferencePartisipant(participantId: participantId) else { return [MenuItem]() }
         let conference = self.callService.call(callID: self.rendererId)
         let active = self.callService.isParticipant(participantURI: participantId, activeIn: self.rendererId, accountId: conference?.accountId ?? "")
         // menu for local call
@@ -768,6 +769,19 @@ extension CallViewModel {
             role = RoleInCall.moderator
         }
         let participantCall = isModerator ? call : self.callService.call(callID: callId)
-        return menuItemsManager.getMenuItemsFor(call: participantCall, isHost: callIsHost, conference: conference, active: active, role: role)
+        return menuItemsManager.getMenuItemsFor(call: participantCall, isHost: callIsHost, conference: conference, active: active, role: role, isHandRised: participant.isHandRaised)
+    }
+
+    func raiseHandFor(participantId: String) {
+        self.callService.setRaiseHand(confId: self.rendererId, participantId: participantId, state: false)
+    }
+
+    func togleRaiseHand() {
+        guard let account = self.accountService.currentAccount else { return }
+        guard let partisipant = self.getConferenceParticipants()?.filter({ participant in
+            participant.displayName == L10n.Account.me
+        }).first else { return }
+        let state = !partisipant.isHandRaised
+        self.callService.setRaiseHand(confId: self.rendererId, participantId: account.jamiId, state: state)
     }
 }

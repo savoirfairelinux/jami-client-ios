@@ -27,9 +27,12 @@ class ConferenceLayout: UIView {
     private var participants: [ConferenceParticipant] = [ConferenceParticipant]()
     private let textSize: CGFloat = 16
     private let labelHight: CGFloat = 30
+    private let controlSize: CGFloat = 25
     private let margin: CGFloat = 15
     private let minWidth: CGFloat = 50
     private let conferenceLayoutHelper: ConferenceLayoutHelper = ConferenceLayoutHelper()
+    private var isCurrentModerator: Bool = false
+    var raiseHandClickedCB: ((_ participant: ConferenceParticipant) -> Void)?
     private let disposeBag = DisposeBag()
 
     func setUpWithVideoSize(size: CGSize) {
@@ -46,12 +49,13 @@ class ConferenceLayout: UIView {
         self.updateViewSize()
     }
 
-    func setParticipants(participants: [ConferenceParticipant]?) {
+    func setParticipants(participants: [ConferenceParticipant]?, isCurrentModerator: Bool) {
         if let participants = participants {
             self.participants = participants
         } else {
             self.participants.removeAll()
         }
+        self.isCurrentModerator = isCurrentModerator
         self.layoutParticipantsViews()
     }
 
@@ -81,6 +85,7 @@ class ConferenceLayout: UIView {
         let origX: CGFloat = participant.originX * widthRatio
         let origY: CGFloat = participant.originY * heightRatio
         let width: CGFloat = participant.width * widthRatio
+        let height: CGFloat = participant.height * heightRatio
         // do not add labels when view width is too small
         if width < minWidth { return }
         let background = UIView(frame: CGRect(x: origX, y: origY, width: width, height: self.labelHight))
@@ -95,5 +100,23 @@ class ConferenceLayout: UIView {
         label.font = label.font.withSize(self.textSize)
         self.addSubview(background)
         self.addSubview(label)
+        if !participant.isHandRaised || !self.isCurrentModerator {
+            return
+        }
+        let raisedHandImage = UIButton(frame: CGRect(x: origX + width - self.controlSize, y: origY + height - self.controlSize, width: self.controlSize, height: self.controlSize))
+        let image = UIImage(asset: Asset.raiseHand)?.withRenderingMode(.alwaysTemplate)
+        raisedHandImage.setImage(image, for: .normal)
+        raisedHandImage.tintColor = UIColor.white
+        raisedHandImage.backgroundColor = UIColor.conferenceRaiseHand
+        raisedHandImage.layer.cornerRadius = 4
+        raisedHandImage.layer.maskedCorners = [.layerMinXMinYCorner]
+        raisedHandImage.rx.tap
+            .subscribe(onNext: { [weak self] in
+                print("*****hand raised")
+                guard let self = self, let callback = self.raiseHandClickedCB  else { return }
+                callback(participant)
+            })
+            .disposed(by: self.disposeBag)
+        self.addSubview(raisedHandImage)
     }
 }

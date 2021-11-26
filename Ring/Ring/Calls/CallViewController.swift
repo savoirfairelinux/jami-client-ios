@@ -148,7 +148,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 guard let self = self, updated else { return }
                 self.updateconferenceLayoutSize()
                 let participants = self.viewModel.getConferenceParticipants()
-                self.conferenceLayout.setParticipants(participants: participants)
+                self.conferenceLayout.setParticipants(participants: participants, isCurrentModerator: self.viewModel.isCurrentModerator() || self.viewModel.isHostCall )
+
                 guard let unwrapParticipants = participants, self.viewModel.isCurrentModerator(), !self.viewModel.isHostCall else { return }
                 self.conferenceCalls.arrangedSubviews.forEach({ (view) in
                     view.removeFromSuperview()
@@ -293,6 +294,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                     return
                 }
                 self.viewModel.showContactPickerVC()
+            })
+            .disposed(by: self.disposeBag)
+        self.buttonsContainer.raiseHandButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.togleRaiseHand()
             })
             .disposed(by: self.disposeBag)
         // Data bindings
@@ -905,6 +911,10 @@ extension CallViewController: ConferenceParticipantViewDelegate {
         menuView.addMuteAction { [weak self] in
             self?.removeConferenceParticipantMenu()
             self?.viewModel.muteParticipant(participantId: participantId, active: !isAudioMuted)
+        }
+        menuView.addLowerHandAction { [weak self] in
+            self?.removeConferenceParticipantMenu()
+            self?.viewModel.raiseHandFor(participantId: participantId)
         }
 
         let point = conferenceCallsScrolView.convert(menuView.frame.origin, to: self.view)
