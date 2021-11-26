@@ -27,6 +27,7 @@ class ConferenceLayout: UIView {
     private var participants: [ConferenceParticipant] = [ConferenceParticipant]()
     private let textSize: CGFloat = 16
     private let labelHight: CGFloat = 30
+    private let controlSize: CGFloat = 25
     private let margin: CGFloat = 15
     private let minWidth: CGFloat = 50
     private let conferenceLayoutHelper: ConferenceLayoutHelper = ConferenceLayoutHelper()
@@ -81,6 +82,7 @@ class ConferenceLayout: UIView {
         let origX: CGFloat = participant.originX * widthRatio
         let origY: CGFloat = participant.originY * heightRatio
         let width: CGFloat = participant.width * widthRatio
+        let height: CGFloat = participant.height * heightRatio
         // do not add labels when view width is too small
         if width < minWidth { return }
         let background = UIView(frame: CGRect(x: origX, y: origY, width: width, height: self.labelHight))
@@ -95,5 +97,17 @@ class ConferenceLayout: UIView {
         label.font = label.font.withSize(self.textSize)
         self.addSubview(background)
         self.addSubview(label)
+        if !participant.isHandRaised {
+            return
+        }
+        let raisedHandImage = UIImageView(frame: CGRect(x: 4, y: 4, width: self.controlSize - 8, height: self.controlSize - 8))
+        let raisedHandBackground = UIView(frame: CGRect(x: origX + width - self.controlSize, y: origY + height - self.controlSize, width: self.controlSize, height: self.controlSize))
+        raisedHandImage.image = UIImage(asset: Asset.raiseHand)?.withRenderingMode(.alwaysTemplate)
+        raisedHandImage.tintColor = UIColor.white
+        raisedHandBackground.addSubview(raisedHandImage)
+        raisedHandBackground.backgroundColor = UIColor.conferenceRaiseHand
+        raisedHandBackground.layer.cornerRadius = 4
+        raisedHandBackground.layer.maskedCorners = [.layerMinXMinYCorner]
+        self.addSubview(raisedHandBackground)
     }
 }
