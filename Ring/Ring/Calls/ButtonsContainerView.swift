@@ -50,6 +50,7 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
     var switchCameraButton: UIButton!
     var switchSpeakerButton: UIButton!
     var addParticipantButton: UIButton!
+    var raiseHandButton: UIButton!
 
     private let disposeBag = DisposeBag()
     var callViewMode: CallViewMode = .audio
@@ -103,6 +104,7 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         switchCameraButton = configureButton(image: UIImage(asset: Asset.switchCamera))
         switchSpeakerButton = configureButton(image: UIImage(asset: Asset.enableSpeakerphone))
         addParticipantButton = configureButton(image: UIImage(asset: Asset.addPerson))
+        raiseHandButton = configureButton(image: UIImage(asset: Asset.raiseHand)?.withRenderingMode(.alwaysTemplate))
         pageControl.addTarget(self, action: #selector(changePage), for: UIControl.Event.valueChanged)
     }
 
@@ -138,6 +140,7 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         cancelButton.isHidden = true
         switchSpeakerButton.isEnabled = enable
         let isSip = self.viewModel?.isSipCall ?? false
+        let isConference = self.viewModel?.isConference ?? false
         let audioOnly = self.callViewMode == .audio
         var havePages = false
         if isSip {
@@ -151,7 +154,7 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         } else if audioOnly {
             let screenRect = UIScreen.main.bounds
             let screenWidth: CGFloat = screenRect.size.width
-            let buttonsWidth: CGFloat = 6 * 50 + 30 * 5
+            let buttonsWidth: CGFloat = 7 * 50 + 30 * 6
             havePages = screenWidth < buttonsWidth
             firstPageStackView.removeSubviews()
             secondPageStackView.removeSubviews()
@@ -162,14 +165,20 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
             if havePages {
                 secondPageStackView.addArrangedSubview(muteAudioButton)
                 secondPageStackView.addArrangedSubview(muteVideoButton)
+                if isConference {
+                    secondPageStackView.addArrangedSubview(raiseHandButton)
+                }
             } else {
                 firstPageStackView.addArrangedSubview(muteAudioButton)
                 firstPageStackView.addArrangedSubview(muteVideoButton)
+                if isConference {
+                    firstPageStackView.addArrangedSubview(raiseHandButton)
+                }
             }
         } else {
             let screenRect = UIScreen.main.bounds
             let screenWidth: CGFloat = screenRect.size.width
-            let buttonsWidth: CGFloat = 7 * 50 + 30 * 6 // 540
+            let buttonsWidth: CGFloat = 8 * 50 + 30 * 7 // 540
             havePages = screenWidth < buttonsWidth
             firstPageStackView.removeSubviews()
             secondPageStackView.removeSubviews()
@@ -181,9 +190,15 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
             if havePages {
                 secondPageStackView.addArrangedSubview(muteAudioButton)
                 secondPageStackView.addArrangedSubview(muteVideoButton)
+                if isConference {
+                    secondPageStackView.addArrangedSubview(raiseHandButton)
+                }
             } else {
                 firstPageStackView.addArrangedSubview(muteAudioButton)
                 firstPageStackView.addArrangedSubview(muteVideoButton)
+                if isConference {
+                    firstPageStackView.addArrangedSubview(raiseHandButton)
+                }
             }
         }
         pageControl.isHidden = !havePages
@@ -228,6 +243,7 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         dialpadButton.borderColor = UIColor.gray
         switchSpeakerButton.tintColor = UIColor.gray
         switchSpeakerButton.borderColor = UIColor.gray
+        raiseHandButton.tintColor = UIColor.gray
     }
 
     func updateColorForVideo() {
@@ -245,6 +261,7 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         muteVideoButton.tintColor = UIColor.white
         muteVideoButton.borderColor = UIColor.white
         switchCameraButton.tintColor = UIColor.white
+        raiseHandButton.tintColor = UIColor.white
     }
 
     @objc
