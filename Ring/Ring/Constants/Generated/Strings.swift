@@ -293,6 +293,8 @@ internal enum L10n {
     internal static let haghUp = L10n.tr("Localizable", "calls.haghUp")
     /// wants to talk to you
     internal static let incomingCallInfo = L10n.tr("Localizable", "calls.incomingCallInfo")
+    /// lower hand
+    internal static let lowerHand = L10n.tr("Localizable", "calls.lowerHand")
     /// maximize
     internal static let maximize = L10n.tr("Localizable", "calls.maximize")
     /// minimize

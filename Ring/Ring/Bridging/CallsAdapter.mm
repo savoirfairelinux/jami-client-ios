@@ -285,7 +285,9 @@ static id <CallsAdapterDelegate> _delegate;
 - (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId {
     hangupParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]));
 }
-
+-(void)setHandRaised:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId state:(BOOL)state {
+    raiseParticipantHand(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), state);
+}
 
 #pragma mark AccountAdapterDelegate
 
