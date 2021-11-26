@@ -28,6 +28,7 @@ enum MenuItem {
     case maximize
     case setModerator
     case muteAudio
+    case lowerHand
 }
 
 class ConferenceActionMenu: UIView {
@@ -42,6 +43,7 @@ class ConferenceActionMenu: UIView {
     private var minimizeButton: UIButton?
     private var setModeratorButton: UIButton?
     private var muteAudioButton: UIButton?
+    private var lowerHandButton: UIButton?
     private let disposeBag = DisposeBag()
     private var muteLabelText: String = ""
     private var moderatorLabelText: String = ""
@@ -81,6 +83,8 @@ class ConferenceActionMenu: UIView {
             self.addHangUpButton(positionY: positionY)
         case .name:
             break
+        case .lowerHand:
+            self.addLowerHandButton(positionY: positionY)
         }
     }
 
@@ -88,6 +92,13 @@ class ConferenceActionMenu: UIView {
         guard let button = hangUpButton else { return }
         button.rx.tap
             .subscribe(onNext: { hangup() })
+            .disposed(by: self.disposeBag)
+    }
+
+    func addLowerHandAction(lowerHand: @escaping (() -> Void)) {
+        guard let button = lowerHandButton else { return }
+        button.rx.tap
+            .subscribe(onNext: { lowerHand() })
             .disposed(by: self.disposeBag)
     }
 
@@ -147,6 +158,17 @@ class ConferenceActionMenu: UIView {
         self.hangUpButton = UIButton(frame: hangUpLabel.frame)
         self.addSubview(hangUpLabel)
         self.addSubview(self.hangUpButton!)
+    }
+
+    private func addLowerHandButton(positionY: CGFloat) {
+        let lowerHandLabel = UILabel(frame: CGRect(x: marginX, y: positionY, width: menuItemWidth, height: menuItemHight))
+        lowerHandLabel.font = lowerHandLabel.font.withSize(self.textSize)
+        lowerHandLabel.text = L10n.Calls.lowerHand
+        lowerHandLabel.sizeToFit()
+        lowerHandLabel.textAlignment = .center
+        self.lowerHandButton = UIButton(frame: lowerHandLabel.frame)
+        self.addSubview(lowerHandLabel)
+        self.addSubview(self.lowerHandButton!)
     }
 
     private func addMaximizeButton(positionY: CGFloat) {
