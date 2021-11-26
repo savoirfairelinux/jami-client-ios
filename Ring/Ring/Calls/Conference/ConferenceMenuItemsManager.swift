@@ -23,7 +23,7 @@ enum RoleInCall {
     case regular
 }
 class ConferenceMenuItemsManager {
-    func getMenuItemsForLocalCall(conference: CallModel?, active: Bool?) -> [MenuItem] {
+    func getMenuItemsForLocalCall(conference: CallModel?, active: Bool?, isHandRised: Bool) -> [MenuItem] {
         var menu = [MenuItem]()
         menu.append(.name)
         guard let conference = conference else {
@@ -31,6 +31,9 @@ class ConferenceMenuItemsManager {
         }
         guard let active = active else {
             return menu
+        }
+        if isHandRised {
+            menu.append(.lowerHand)
         }
         switch conference.layout {
         case .grid:
@@ -51,7 +54,8 @@ class ConferenceMenuItemsManager {
         return menu
     }
 
-    func getMenuItemsFor(call: CallModel?, isHost: Bool, conference: CallModel?, active: Bool?, role: RoleInCall) -> [MenuItem] {
+    // swiftlint:disable cyclomatic_complexity
+    func getMenuItemsFor(call: CallModel?, isHost: Bool, conference: CallModel?, active: Bool?, role: RoleInCall, isHandRised: Bool) -> [MenuItem] {
         var menu = [MenuItem]()
         menu.append(.name)
         guard let conference = conference,
@@ -64,6 +68,9 @@ class ConferenceMenuItemsManager {
         }
         guard let active = active else {
             return menu
+        }
+        if isHandRised {
+            menu.append(.lowerHand)
         }
         switch conference.layout {
         case .grid:
