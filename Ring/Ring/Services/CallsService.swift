@@ -674,26 +674,15 @@ class CallsService: CallsAdapterDelegate {
 
     func receivingCall(withAccountId accountId: String, callId: String, fromURI uri: String, withMedia mediaList: [[String: String]]) {
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) {
-
-            if !isCurrentCall() {
-                var call = self.calls.value[callId]
-                if call == nil {
-                    call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
-                } else {
-                    call?.update(withDictionary: callDictionary, withMedia: mediaList)
-                }
-                // Emit the call to the observers
-                guard let newCall = call else { return }
-                self.newCall.accept(newCall)
+            var call = self.calls.value[callId]
+            if call == nil {
+                call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
             } else {
-                self.refuse(callId: callId)
-                    .subscribe(onCompleted: { [weak self] in
-                        self?.log.debug("call refused")
-                        }, onError: { [weak self] _ in
-                            self?.log.debug("Could not to refuse a call")
-                    })
-                    .disposed(by: self.disposeBag)
+                call?.update(withDictionary: callDictionary, withMedia: mediaList)
             }
+            // Emit the call to the observers
+            guard let newCall = call else { return }
+            self.newCall.accept(newCall)
         }
     }
 

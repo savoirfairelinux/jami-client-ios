@@ -139,10 +139,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 .disposed(by: self.disposeBag)
             return
         }
-        guard let topController = getTopController(),
-            !topController.isKind(of: (CallViewController).self) else {
-                return
-        }
         let callViewController = CallViewController
             .instantiate(with: self.injectionBag)
         callViewController.viewModel.call = call
@@ -160,8 +156,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     .getEventInput(ServiceEventInput.callUUID) else { return false }
                 return callUUID == call.callUUID.uuidString
             })
-            .subscribe(onNext: { _ in
-                topController.dismiss(animated: false, completion: nil)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                if let topController = self.getTopController(),
+                   !topController.isKind(of: (CallViewController).self) {
+                       topController.dismiss(animated: false, completion: nil)
+                }
                 self.popToSmartList()
                 if account.id != call.accountId {
                     self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
