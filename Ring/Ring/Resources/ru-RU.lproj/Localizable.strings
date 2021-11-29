@@ -172,7 +172,7 @@
 "actions.blockAction" = "Заблокировать";
 "actions.deleteAction" = "Удалить";
 "actions.cancelAction" = "Отмена";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Очистить";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Ок";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";

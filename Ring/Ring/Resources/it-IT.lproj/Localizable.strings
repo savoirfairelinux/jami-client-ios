@@ -272,7 +272,7 @@
 "account.portLabel" = "Inserire il numero della porta";
 "account.accountStatus" = "Stato account";
 "account.enableAccount" = "Abilita account";
-"account.statusOnline" = "In linea";
+"account.statusOnline" = "Connesso";
 "account.statusOffline" = "Disconnesso";
 "account.statusConnecting" = "Collegamento";
 "account.statusUnknown" = "Sconosciuto";
