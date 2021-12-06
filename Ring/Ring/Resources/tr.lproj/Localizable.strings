@@ -199,6 +199,7 @@
 "calls.removeModerator" = "moderatör ayarını kaldır";
 "calls.muteAudio" = "sesi kıs";
 "calls.unmuteAudio" = "sesi aç";
+"calls.lowerHand" = "lower hand";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";

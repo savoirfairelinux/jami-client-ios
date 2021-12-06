@@ -199,6 +199,7 @@
 "calls.removeModerator" = "Moderador não definido";
 "calls.muteAudio" = "Desligar áudio";
 "calls.unmuteAudio" = "Ligar áudio";
+"calls.lowerHand" = "lower hand";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";

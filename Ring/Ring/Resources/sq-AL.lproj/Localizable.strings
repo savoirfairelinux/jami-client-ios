@@ -199,6 +199,7 @@
 "calls.removeModerator" = "hiqe nga moderator";
 "calls.muteAudio" = "hiqi zërin";
 "calls.unmuteAudio" = "ktheji zërin";
+"calls.lowerHand" = "lower hand";
 
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";

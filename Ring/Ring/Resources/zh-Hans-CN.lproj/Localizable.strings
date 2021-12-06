@@ -199,6 +199,7 @@
 "calls.removeModerator" = "取消管理员";
 "calls.muteAudio" = "静音";
 "calls.unmuteAudio" = "取消静音";
+"calls.lowerHand" = "lower hand";
 
 //Account Page
 "accountPage.devicesListHeader" = "设备";

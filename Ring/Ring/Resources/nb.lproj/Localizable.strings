@@ -199,6 +199,7 @@
 "calls.removeModerator" = "unset moderator";
 "calls.muteAudio" = "mute audio";
 "calls.unmuteAudio" = "unmute audio";
+"calls.lowerHand" = "lower hand";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";

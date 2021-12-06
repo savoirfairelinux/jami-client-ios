@@ -199,6 +199,7 @@
 "calls.removeModerator" = "Moderator deaktivieren";
 "calls.muteAudio" = "Audio stumm schalten";
 "calls.unmuteAudio" = "Audio lautschalten";
+"calls.lowerHand" = "lower hand";
 
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";

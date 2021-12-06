@@ -199,6 +199,7 @@
 "calls.removeModerator" = "لغو میدیریت";
 "calls.muteAudio" = "قطع صدا";
 "calls.unmuteAudio" = "برقراری صدا";
+"calls.lowerHand" = "lower hand";
 
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";
