@@ -424,12 +424,16 @@ extension ConversationViewModel {
 
     private func subscribeLocationServiceLocationReceived() {
         self.locationSharingService
-            .peerUriAndLocationReceived
+            .locationReceived
+            .filter({ [weak self] contactLocation in
+                contactLocation.conversationId == self?.conversation.value.id
+            })
             .subscribe(onNext: { [weak self] tuple in
-                guard let self = self, let peerUri = tuple.0, let conversation = self.conversation,
+                guard let self = self, let contactUri = tuple.contactUri,
+                      let conversation = self.conversation,
                       let jamiId = conversation.value.getParticipants().first?.jamiId else { return }
-                let coordinates = tuple.1
-                let hash = JamiURI(from: peerUri).hash
+                let coordinates = tuple.location
+                let hash = JamiURI(from: contactUri).hash
                 if hash == jamiId {
                     self.myContactsLocation.onNext(coordinates)
                 }
@@ -577,7 +581,7 @@ extension ConversationViewModel {
         guard let account = self.accountService.currentAccount,
               let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
         return self.locationSharingService.isAlreadySharing(accountId: account.id,
-                                                            contactUri: jamiId)
+                                                            contactUri: jamiId, conversationId: self.conversation.value.id)
     }
 
     func startSendingLocation(duration: TimeInterval) {
@@ -585,14 +589,14 @@ extension ConversationViewModel {
               let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
         self.locationSharingService.startSharingLocation(from: account.id,
                                                          to: jamiId,
-                                                         duration: duration)
+                                                         duration: duration, conversationId: self.conversation.value.id)
     }
 
     func stopSendingLocation() {
         guard let account = self.accountService.currentAccount,
               let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
         self.locationSharingService.stopSharingLocation(accountId: account.id,
-                                                        contactUri: jamiId)
+                                                        contactUri: jamiId, conversationId: self.conversation.value.id)
     }
 
     func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
@@ -754,7 +758,10 @@ extension ConversationViewModel {
     }
 
     func getTransferSize(transferId: String, accountId: String) -> Int64? {
-        guard let info = self.dataTransferService.dataTransferInfo(withId: transferId, accountId: accountId, conversationId: self.conversation.value.id, isSwarm: self.conversation.value.isSwarm()) else { return nil }
+        guard let info = self.dataTransferService.dataTransferInfo(withId: transferId,
+                                                                   accountId: accountId,
+                                                                   conversationId: self.conversation.value.id,
+                                                                   isSwarm: self.conversation.value.isSwarm()) else { return nil }
         return info.totalSize
     }
 }

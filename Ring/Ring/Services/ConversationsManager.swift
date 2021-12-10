@@ -115,7 +115,7 @@ class ConversationsManager {
                       let (content, shouldTryToSave): (String, Bool) = event.getEventInput(ServiceEventInput.content),
                       let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                       let account = self.accountsService.getAccount(fromAccountId: accountId),
-                      let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
+                      let conversationId: String = event.getEventInput(ServiceEventInput.conversationId)
                       else { return }
 
                 let shouldRefresh = currentAccount.id == accountId
@@ -123,7 +123,7 @@ class ConversationsManager {
                 self.conversationService
                     .sendLocation(withContent: content,
                                   from: account,
-                                  recipientUri: peerUri,
+                                  conversationId: conversationId,
                                   shouldRefreshConversations: shouldRefresh,
                                   shouldTryToSave: shouldTryToSave)
                     .subscribe(onCompleted: { [weak self] in
@@ -289,7 +289,8 @@ class ConversationsManager {
     // MARK: Message Adapter delegate
     private func handleReceivedLocationUpdate(from peerId: String, to accountId: String, messageId: String, locationJSON content: String) {
         guard let currentAccount = self.accountsService.currentAccount,
-            let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+            let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId),
+            let conversation = conversationService.getConversationForParticipant(jamiId: peerId, accontId: accountId) else { return }
 
         let type = AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() ? URIType.sip : URIType.ring
         guard let peerUri = JamiURI.init(schema: type, infoHach: peerId, account: accountForMessage).uriString else { return }
@@ -316,7 +317,7 @@ class ConversationsManager {
         }
 
         // Tell the location sharing service
-        self.locationSharingService.handleReceivedLocationUpdate(from: peerUri, to: accountId, messageId: messageId, locationJSON: content)
+        self.locationSharingService.handleReceivedLocationUpdate(from: peerUri, to: accountId, messageId: messageId, locationJSON: content, conversationId: conversation.id)
     }
 
     func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String, peerName: String?) {
@@ -508,6 +509,13 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         let newMessage = MessageModel(withInfo: message, accountJamiId: account.jamiId)
         if newMessage.type == .fileTransfer {
             newMessage.transferStatus = newMessage.incoming ? .awaiting : .success
+        }
+        if newMessage.type == .location {
+            self.handleReceivedLocationUpdate(from: newMessage.authorId,
+                                              to: accountId,
+                                              messageId: newMessage.id,
+                                              locationJSON: newMessage.content)
+
         }
         /// if new message was inserted check if we need to present notification
         if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, conversationId: conversationId, fromLoaded: false) {
