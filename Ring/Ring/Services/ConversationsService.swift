@@ -964,21 +964,26 @@ extension ConversationsService {
 
     // TODO: Possible extraction with sendMessage
     func sendLocation(withContent content: String, from senderAccount: AccountModel,
-                      recipientUri: String, shouldRefreshConversations: Bool,
+                      conversationId: String, shouldRefreshConversations: Bool,
                       shouldTryToSave: Bool) -> Completable {
 
         return Completable.create(subscribe: { [weak self] completable in
-            guard let self = self else { return Disposables.create { } }
+            guard let self = self,
+                  let conversation = self.getConversationForId(conversationId: conversationId, accountId: senderAccount.id),
+                  let participntId = conversation.getParticipants().first?.jamiId else {
+                return Disposables.create { }
+            }
+            let sendTo = conversation.isSwarm() ? conversationId : participntId
             let contentDict = [self.geoLocationMIMEType: content]
-            let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri))
+            let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: sendTo))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
             let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
-            let contactUri = JamiURI.init(schema: type, infoHach: recipientUri, account: senderAccount)
+            let contactUri = JamiURI.init(schema: type, infoHach: participntId, account: senderAccount)
             guard let stringUri = contactUri.uriString else {
                 completable(.completed)
                 return Disposables.create {}
             }
-            if shouldTryToSave, let uri = accountHelper.uri, uri != recipientUri {
+            if shouldTryToSave, let uri = accountHelper.uri, uri != participntId {
                 let message = self.createLocation(withId: messageId,
                                                   byAuthor: uri,
                                                   incoming: false)
@@ -986,7 +991,7 @@ extension ConversationsService {
                                   toConversationWith: stringUri,
                                   toAccountId: senderAccount.id,
                                   shouldRefreshConversations: shouldRefreshConversations,
-                                  contactUri: recipientUri)
+                                  contactUri: participntId)
                     .subscribe(onCompleted: { [weak self] in
                         self?.log.debug("Location saved")
                     })

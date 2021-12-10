@@ -115,7 +115,7 @@ class ConversationsManager {
                       let (content, shouldTryToSave): (String, Bool) = event.getEventInput(ServiceEventInput.content),
                       let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                       let account = self.accountsService.getAccount(fromAccountId: accountId),
-                      let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
+                      let conversationId: String = event.getEventInput(ServiceEventInput.conversationId)
                       else { return }
 
                 let shouldRefresh = currentAccount.id == accountId
@@ -123,7 +123,7 @@ class ConversationsManager {
                 self.conversationService
                     .sendLocation(withContent: content,
                                   from: account,
-                                  recipientUri: peerUri,
+                                  conversationId: conversationId,
                                   shouldRefreshConversations: shouldRefresh,
                                   shouldTryToSave: shouldTryToSave)
                     .subscribe(onCompleted: { [weak self] in
@@ -316,7 +316,7 @@ class ConversationsManager {
         }
 
         // Tell the location sharing service
-        self.locationSharingService.handleReceivedLocationUpdate(from: peerUri, to: accountId, messageId: messageId, locationJSON: content)
+        self.locationSharingService.handleReceivedLocationUpdate(from: peerUri, to: accountId, messageId: messageId, locationJSON: content, conversationId: "")
     }
 
     func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String, peerName: String?) {
