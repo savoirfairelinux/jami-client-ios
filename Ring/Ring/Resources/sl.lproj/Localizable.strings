@@ -57,7 +57,7 @@
 //Conversation
 "conversation.messagePlaceholder" = "Napiši sporočilo za";
 "conversation.explanationSendingLocationTo" = "Trenutno v živo delite svojo lokacijo z ";
-"conversation.explanationReceivingLocationFrom" = "Trenutno v živo dobivate podatek o lokaciji od";
+"conversation.explanationReceivingLocationFrom" = "Trenutno v živo pridobivate podatek o lokaciji od";
 "conversation.errorSavingImage" = "Shranjevanje slike v galerijo je spodletelo";
 "conversation.receivedRequest" = "\%s\ vam je poslal zahtevo za pogovor.";
 "conversation.requestMessage" = "Pozdravljeni, \nse želite pridružiti pogovoru?";
@@ -73,7 +73,7 @@
 
 //Welcome Screen
 "welcome.title" = "Dobrodošli v Jami!";
-"welcome.text" = "Jami je brezplačen univerzalna komunikacijska platforma, ki spoštuje svobodo in zasebnost svojih uporabnikov.";
+"welcome.text" = "Jami je prosta in brezplačna univerzalna komunikacijska platforma, ki spoštuje svobodo in zasebnost svojih uporabnikov.";
 "welcome.linkDevice" = "Poveži napravo z računom";
 "welcome.createAccount" = "Ustvari račun Jami";
 "welcome.connectToManager" = "Poveži se z strežnikom JAMS";
@@ -89,7 +89,7 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Ustvari svoj račun";
-"createAccount.chooseStrongPassword" = "Izberite močno geslo, ki si ga boste zapomnili in z njim zaščitili svoj Jami račun.";
+"createAccount.chooseStrongPassword" = "Izberite močno geslo, ki si ga boste zapomnili in z njim zaščitili svoj račun Jami.";
 "createAccount.enterNewUsernamePlaceholder" = "Uporabniško ime";
 "createAccount.newPasswordPlaceholder" = "Geslo";
 "createAccount.repeatPasswordPlaceholder" = "Potrdite geslo";
@@ -109,7 +109,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Napaka na omrežju";
 "createAccount.UsernameNotRegisteredMessage" = "Račun je bil ustvarjen, vendar uporabniško ime ni bilo registrirano";
 "createAccount.timeoutTitle" = "Račun je ustvarjen";
-"createAccount.timeoutMessage" = "Registravija uporabnišega imena poteka... To lahko traja nekaj trenutkov.";
+"createAccount.timeoutMessage" = "Registracija uporabniškega imena poteka ... To lahko traja nekaj trenutkov.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Povezovanje računa";
@@ -118,7 +118,7 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Vnesite geslo";
 "linkToAccount.pinLabel" = "Vnesite PIN";
-"linkToAccount.explanationPinMessage" = "Za generiranje PIN kode pojdite v nastavitve računa na napravi, ki ima račun, ki ga želite uporabiti. Izberite \"Poveži drugo napravo s tem računom\". Dobili boste potreben PIN za vnos v ta obrazec. PIN velja 10 minut.";
+"linkToAccount.explanationPinMessage" = "Za generiranje PIN-kode pojdite v nastavitve računa na napravi z računom, ki ga želite uporabiti. Izberite »Poveži drugo napravo s tem računom«. Dobili boste potreben PIN za vnos v ta obrazec. PIN velja 10 minut.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Vpis";
@@ -131,7 +131,7 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Računa ni mogoče najti";
-"alerts.accountCannotBeFoundMessage" = "Računa ni bilo mogoče najti v Jami omrežju.Preverite ali je bilo izvoženo na Jami iz obstoječe naprave in da so bili posredovani pravi podatki.";
+"alerts.accountCannotBeFoundMessage" = "Računa v omrežju Jami ni bilo mogoče najti. Preverite, da je bilo izvoženo na Jami iz obstoječe naprave in da so bili posredovani pravi podatki.";
 "alerts.accountAddedTitle" = "Račun je dodan";
 "alerts.accountNoNetworkTitle" = "Povezave z omrežjem ni mogoče vzpostaviti";
 "alerts.accountNoNetworkMessage" = "Računa ni bilo mogoče dodati, ker se Jami ni mogel povezati z razpršenim omrežjem. Preverite povezavo.";
@@ -142,7 +142,7 @@
 "alerts.profileCancelPhoto" = "Prekliči";
 "alerts.accountLinkedTitle" = "Povezovanje računa";
 "alerts.dbFailedTitle" = "Ob zagonu Jami se je zgodila napaka";
-"alerts.dbFailedMessage" = "Zaprite aplikacijo in jo ponovno zaženite";
+"alerts.dbFailedMessage" = "Zaprite program in ga ponovno zaženite";
 "alerts.confirmBlockContact" = "Ali ste prepričani, da želite blokirati ta stik? Zgodovina pogovorov s tem stikom bo trajsno izbrisana.";
 "alerts.confirmBlockContactTitle" = "Blokiraj stik";
 "alerts.confirmDeleteConversation" = "Ali ste prepričani, da želite trajno izbrisati ta pogovor?";
@@ -153,12 +153,12 @@
 "alerts.noMediaPermissionsTitle" = "Dovoljenje za medij ni podano";
 "alerts.noLibraryPermissionsTitle" = "Dostop do fotoalbuma ni bil dodeljen";
 "alerts.noLocationPermissionsTitle" = "Dostop do lokacije ni odobren";
-"alerts.errorWrongCredentials" = "Ne morem se povezati s podanim urpavljalnikom računa. Preverite podatke";
-"alerts.recordVideoMessage" = "Snemanje zvočnega sporočila";
-"alerts.recordAudioMessage" = "Snemanje zvočnega sporočila";
+"alerts.errorWrongCredentials" = "S podanim upravljalnikom računa se ni mogoče povezati. Preverite poverilnice";
+"alerts.recordVideoMessage" = "Posnemi video sporočilo";
+"alerts.recordAudioMessage" = "Posnemi zvočno sporočilo";
 "alerts.uploadFile" = "Naloži datoteko";
 "alerts.uploadPhoto" = "Naloži sliko ali film";
-"alerts.locationServiceIsDisabled" = "Vklopite \"Location services\", da omogočite Jamiju, da določi vašo lokacijo.";
+"alerts.locationServiceIsDisabled" = "Vklopite »Location services«, da omogočite Jami, da določi vašo lokacijo.";
 "alerts.locationSharing" = "Deli mojo lokacijo";
 "alerts.alreadylocationSharing" = "S tem uporabnikom že delim lokacijo";
 "alerts.locationSharingDurationTitle" = "Koliko časa naj delim lokacijo?";
@@ -199,7 +199,7 @@
 "calls.removeModerator" = "odstavi moderatorja";
 "calls.muteAudio" = "izklopi zvok";
 "calls.unmuteAudio" = "vključi zvok";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "spusti roko";
 
 //Account Page
 "accountPage.devicesListHeader" = "Naprave";
@@ -216,37 +216,37 @@
 "accountPage.saveProxyAddress" = "Shrani";
 "accountPage.proxyPaceholder" = "Naslov posredniškega strežnika";
 "accountPage.enableNotifications" = "Vklopi obveščanje";
-"accountPage.proxyDisabledAlertTitle" = "Posredniški strežnik je onomeogočen";
+"accountPage.proxyDisabledAlertTitle" = "Posredniški strežnik je onemogočen";
 "accountPage.proxyDisabledAlertBody" = "Če želite prejemati obvestila, omogočite posredniški strežnik";
-"accountPage.revokeDeviceTitle" = "Odpokliči napravoOdstrani napravo";
+"accountPage.revokeDeviceTitle" = "Odpokliči napravo";
 "accountPage.revokeDeviceMessage" = "Ali ste prepričani, da želite odstraniti to napravo? Tega dejanja ni mogoče razveljaviti.";
-"accountPage.revokeDeviceButton" = "Odstrani";
+"accountPage.revokeDeviceButton" = "Odpokliči";
 "accountPage.revokeDevicePlaceholder" = "Vnesite geslo";
-"accountPage.deviceRevoked" = "Odstranjevanje naprave je uspelo";
-"accountPage.deviceRevocationProgress" = "Odstranjevanje ...";
-"accountPage.deviceRevocationSuccess" = "Naprava je bila odstranjena";
+"accountPage.deviceRevoked" = "Odpoklic naprave je uspel";
+"accountPage.deviceRevocationProgress" = "Odpoklic je v teku ...";
+"accountPage.deviceRevocationSuccess" = "Naprava je bila odpoklicana";
 "accountPage.deviceRevocationTryAgain" = "Poskusi znova";
 "accountPage.deviceRevocationWrongPassword" = "Nepravilno geslo";
 "accountPage.deviceRevocationUnknownDevice" = "Neznana naprava";
-"accountPage.deviceRevocationError" = "Napak pri odstranjevanju naprave";
+"accountPage.deviceRevocationError" = "Napaka pri odpoklicu naprave";
 "accountPage.namePlaceholder" = "Ime";
 "accountPage.linkDeviceTitle" = "Poveži še eno napravo";
 "accountPage.other" = "Drugo";
 "accountPage.removeAccountTitle" = "Odstrani račun";
-"accountPage.removeAccountMessage" = "S klikom na \"Odstrani\" boste odstranili račun s te naprave! Tega dejanja ni mogoče razveljaviti. Poleg tega lahko izgubite svoje registrirano ime.";
+"accountPage.removeAccountMessage" = "S klikom »Odstrani« boste odstranili račun s te naprave! Tega dejanja ni mogoče razveljaviti. Poleg tega lahko izgubite svoje registrirano ime.";
 "accountPage.removeAccountButton" = "Odstrani";
 "accountPage.shareAccountDetails" = "Deli podrobnosti računa";
 "accountPage.contactMeOnJamiTitle" = "Kontaktiraj me na Jamiju!";
-"accountPage.contactMeOnJamiContant" = "Kontaktiraj me z uporabo '%s' na Jami razpršeni komunikacijski platformi: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Kontaktiraj me z uporabo »%s« na razpršeni komunikacijski platformi Jami: https://jami.net";
 "accountPage.registerNameTitle" = "Registriraj uporabniško ime";
 "accountPage.passwordPlaceholder" = "Vnesite geslo računa";
-"accountPage.usernamePlaceholder" = "Vnesite željeno uporabniško ime";
+"accountPage.usernamePlaceholder" = "Vnesite želeno uporabniško ime";
 "accountPage.registerNameErrorMessage" = "Izbrano uporabniško ime ni na voljo";
 "accountPage.usernameRegistering" = "Registracija";
-"accountPage.usernameRegisterAction" = "Registracija";
+"accountPage.usernameRegisterAction" = "Registriraj";
 "accountPage.usernameRegistrationFailed" = "Registracija ni uspela. Preverite geslo.";
 "accountPage.createPassword" = "Ustvarite geslo";
-"accountPage.changePassword" = "Sprememba gesla";
+"accountPage.changePassword" = "Spremeni geslo";
 "accountPage.oldPasswordPlaceholder" = "Vnesite staro geslo";
 "accountPage.newPasswordPlaceholder" = "Vnesite novo geslo";
 "accountPage.newPasswordConfirmPlaceholder" = "Potrdite novo geslo";
@@ -254,16 +254,16 @@
 "accountPage.enableBoothMode" = "Vklopi način govorilnice";
 "accountPage.disableBoothMode" = "Izklopi način govorilnice";
 "accountPage.disableBoothModeExplanation" = "Vnesite geslo računa";
-"accountPage.boothModeExplanation" = "V načinu govorilnice se zgodvina pogovora ne shranjuje, funkcionalnost Jamija pa je omejena na izhodne klice. Ob vklopu tega načina se odstranijo vsi pogovori.";
+"accountPage.boothModeExplanation" = "V načinu govorilnice se zgodvina pogovora ne shranjuje, funkcionalnost Jamija pa je omejena na odhodne klice. Ob vklopu tega načina se odstranijo vsi pogovori.";
 "accountPage.noBoothMode" = "Za vklop načina govorilnice morate najprej ustvariti geslo računa.";
 "accountPage.boothModeAlertMessage" = "Ob vklopu načina govorilnice bodo odstranjeni vsi vaši pogovori.";
-"accountPage.peerDiscovery" = "Samodejno povezovanje v lokalnem omrežju";
+"accountPage.peerDiscovery" = "Samodejno povezovanje v krajevnem omrežju";
 "accountPage.autoRegistration" = "Samodejna registracija po izteku";
 
 //Account
 "account.sipUsername" = "Uporabniško ime";
 "account.sipPassword" = "Geslo";
-"account.sipServer" = "SIP strežnik";
+"account.sipServer" = "Strežnik SIP";
 "account.port" = "Vrata";
 "account.proxyServer" = "Posredniški strežnik";
 "account.createSipAccount" = "Ustvari račun SIP";
@@ -286,10 +286,10 @@
 
 //Link New Device
 "linkDevice.title" = "Poveži novo napravo";
-"linkDevice.passwordError" = "Vnesšeno geslo ne odklepa tega računa";
+"linkDevice.passwordError" = "Vneseno geslo ne odklepa tega računa";
 "linkDevice.networkError" = "Med izvažanjem se je pojavila omrežna napaka";
 "linkDevice.defaultError" = "Med izvažanjem se je zgodila napaka";
-"linkDevice.explanationMessage" = "Za dokončanje postopka morate odpreti Jami na novi napravi in izbrati opcijo \"Poveži to napravo z računom\". Vaš PIN je veljaven 10 minut.";
+"linkDevice.explanationMessage" = "Za dokončanje postopka morate odpreti Jami na novi napravi in izbrati opcijo »Poveži to napravo z računom«. Vaš PIN je veljaven 10 minut.";
 "linkDevice.hudMessage" = "Preverjanje";
 
 //Contact Page
@@ -301,9 +301,9 @@
 "contactPage.removeConversation" = "Odstrani pogovor";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Vzpostavljanje...";
+"dataTransfer.readableStatusCreated" = "Vzpostavljanje ...";
 "dataTransfer.readableStatusError" = "Napaka";
-"dataTransfer.readableStatusAwaiting" = "Čakam...";
+"dataTransfer.readableStatusAwaiting" = "Na čakanju ...";
 "dataTransfer.readableStatusRefuse" = "Zavrni";
 "dataTransfer.readableStatusOngoing" = "Prenos";
 "dataTransfer.readableStatusCanceled" = "Preklicano";
@@ -320,7 +320,7 @@
 "notifications.newFile" = "Nova datoteka";
 "notifications.locationSharingStarted" = "Dohodno deljenje lokacije se je začelo";
 "notifications.locationSharingStopped" = "Dohodno deljenje lokacije je bilo ustavljeno";
-"dataTransfer.readableStatusAwaiting" = "Čakam...";
+"dataTransfer.readableStatusAwaiting" = "Na čakanju ...";
 "dataTransfer.readableStatusRefuse" = "Zavrni";
 "dataTransfer.readableStatusOngoing" = "Prenos";
 "dataTransfer.readableStatusCanceled" = "Preklicano";
@@ -333,7 +333,7 @@
 
 //Generated Message
 "generatedMessage.contactAdded" = "Stik je dodan";
-"generatedMessage.invitationReceived" = "Povabilo je sprejeto";
+"generatedMessage.invitationReceived" = "Povabilo je prejeto";
 "generatedMessage.invitationAccepted" = "Povabilo je sprejeto";
 "generatedMessage.outgoingCall" = "Odhodni klic";
 "generatedMessage.incomingCall" = "Dohodni klic";
@@ -351,9 +351,9 @@
 "migrateAccount.migrateButton" = "Preseli račun";
 "migrateAccount.explanation" = "Ta račun je potrebno preseliti";
 "migrateAccount.passwordPlaceholder" = "Vnesi geslo";
-"migrateAccount.passwordExplanation" = "Za nadaljevanje selitve morate vnesti geslo, ki je bilo uporabljeno za ta račun.";
+"migrateAccount.passwordExplanation" = "Za nadaljevanje selitve morate vnesti geslo, uporabljeno za ta račun.";
 "migrateAccount.removeAccount" = "Odstrani račun";
-"migrateAccount.error" = "Selitev računa ni uspela. Lahko poskusite ponovnoizbrišete račun.";
+"migrateAccount.error" = "Selitev računa ni uspela. Lahko poskusite ponovno izbrisati račun.";
 "migrateAccount.migrating" = "Selitev ...";
 "migrateAccount.cancel" = "Prekliči";
 "migrateAccount.migrateAnother" = "Preseli še en račun";

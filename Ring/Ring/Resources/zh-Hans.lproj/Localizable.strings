@@ -199,7 +199,7 @@
 "calls.removeModerator" = "取消設定主持人";
 "calls.muteAudio" = "靜音";
 "calls.unmuteAudio" = "取消靜音";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "放下手";
 
 //Account Page
 "accountPage.devicesListHeader" = "裝置";
