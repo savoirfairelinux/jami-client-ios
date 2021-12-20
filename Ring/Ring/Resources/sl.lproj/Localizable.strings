@@ -75,7 +75,7 @@
 "welcome.text" = "Jami je prosta in brezplačna univerzalna komunikacijska platforma, ki spoštuje svobodo in zasebnost svojih uporabnikov.";
 "welcome.linkDevice" = "Poveži napravo z računom";
 "welcome.createAccount" = "Ustvari račun Jami";
-"welcome.connectToManager" = "Poveži se z strežnikom JAMS";
+"welcome.connectToManager" = "Poveži se s strežnikom JAMS";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Preskoči";
@@ -235,8 +235,8 @@
 "accountPage.removeAccountMessage" = "S klikom »Odstrani« boste odstranili račun s te naprave! Tega dejanja ni mogoče razveljaviti. Poleg tega lahko izgubite svoje registrirano ime.";
 "accountPage.removeAccountButton" = "Odstrani";
 "accountPage.shareAccountDetails" = "Deli podrobnosti računa";
-"accountPage.contactMeOnJamiTitle" = "Kontaktiraj me na Jamiju!";
-"accountPage.contactMeOnJamiContant" = "Kontaktiraj me z uporabo »%s« na razpršeni komunikacijski platformi Jami: https://jami.net";
+"accountPage.contactMeOnJamiTitle" = "Poišči me na Jami-ju!";
+"accountPage.contactMeOnJamiContant" = "Stopi v stik z menoj z uporabo »%s« na razpršeni komunikacijski platformi Jami: https://jami.net";
 "accountPage.registerNameTitle" = "Registriraj uporabniško ime";
 "accountPage.passwordPlaceholder" = "Vnesite geslo računa";
 "accountPage.usernamePlaceholder" = "Vnesite želeno uporabniško ime";

@@ -198,7 +198,7 @@
 "calls.removeModerator" = "desasignar moderador";
 "calls.muteAudio" = "silenciar audio";
 "calls.unmuteAudio" = "reactivar audio";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "bajar la mano";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
