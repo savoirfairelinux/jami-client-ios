@@ -58,12 +58,12 @@
 "conversation.explanationSendingLocationTo" = "Atualmente você está compartilhando sua localização com";
 "conversation.explanationReceivingLocationFrom" = "Você está recebendo atualmente uma localização real de";
 "conversation.errorSavingImage" = "Falha ao salvar a imagem na galeria";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.receivedRequest" = "%s te enviou um pedido para uma conversação";
+"conversation.requestMessage" = "Olá,\nVocê gostaria de entrar na conversação?";
+"conversation.notContact" = "%s não está em sua lista de contatos.";
+"conversation.sendRequest" = "Envie para ele/ela o seu pedido de contato, para que vocês possam interagir";
 "conversation.synchronizationTitle" = "Você aceitou o pedido de conversa.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Nós estamos aguardando %s se conectar para sincronizar a conversação.";
 
 //Invitations
 "invitations.noInvitations" = "Sem convites";
@@ -198,7 +198,7 @@
 "calls.removeModerator" = "Moderador não definido";
 "calls.muteAudio" = "Desligar áudio";
 "calls.unmuteAudio" = "Ligar áudio";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "abaixar a mão";
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
@@ -265,7 +265,7 @@
 "account.sipServer" = "Servidor SIP";
 "account.port" = "Porta";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Criar uma conta SIP";
 "account.usernameLabel" = "Digite o nome de usuário";
 "account.passwordLabel" = "Digite a Senha";
 "account.serverLabel" = "Digite o endereço";

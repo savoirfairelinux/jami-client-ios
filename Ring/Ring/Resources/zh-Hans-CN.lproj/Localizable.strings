@@ -62,7 +62,7 @@
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
+"conversation.synchronizationTitle" = "您已接受会话请求。";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
@@ -339,7 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "去电未接";
 "generatedMessage.missedIncomingCall" = "未接来电";
 "generatedMessage.liveLocationSharing" = "实时位置分享";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "联系人离开了会话";
 
 //General Settings
 "generalSettings.title" = "高级设置";
