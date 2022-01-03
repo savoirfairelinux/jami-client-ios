@@ -172,7 +172,7 @@
 "actions.deleteAction" = "Delete";
 "actions.cancelAction" = "Cancel";
 "actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
+"actions.backAction" = "Tagasi";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accept";

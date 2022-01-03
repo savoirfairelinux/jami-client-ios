@@ -58,12 +58,12 @@
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
 "conversation.errorSavingImage" = "保存至图库失败";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.receivedRequest" = "\%s\ 向您发送了对话请求。";
+"conversation.requestMessage" = "您好，\n您想要加入会话吗？";
+"conversation.notContact" = "\%s\ 不在您的通讯录中。";
+"conversation.sendRequest" = "向他/她发送联系人请求以开始互相交流";
 "conversation.synchronizationTitle" = "您已接受会话请求。";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "我们正在等待 \%s\ 连接以同步对话。";
 
 //Invitations
 "invitations.noInvitations" = "没有邀请";
@@ -198,7 +198,7 @@
 "calls.removeModerator" = "取消管理员";
 "calls.muteAudio" = "静音";
 "calls.unmuteAudio" = "取消静音";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "放下手";
 
 //Account Page
 "accountPage.devicesListHeader" = "设备";

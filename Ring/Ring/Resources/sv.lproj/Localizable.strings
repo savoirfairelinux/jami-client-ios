@@ -35,7 +35,7 @@
 
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Offentlig mapp";
 "smartlist.conversations" = "Konversationer";
 "smartlist.searching" = "Söker...";
 "smartlist.noResults" = "Inget resultat";
@@ -50,19 +50,19 @@
 "smartlist.selectOneNumber" = "Välj ett nummer";
 "smartlist.invitations" = "Inbjudningar";
 "smartlist.accountSettings" = "Kontoinställningar";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Avancerade inställningar";
 "smartlist.aboutJami" = "Om Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Skriv meddelanden till";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 "conversation.errorSavingImage" = "Failed to save image to galery";
 "conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.notContact" = "\%s\ finns inte i din kontaktlista";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
+"conversation.synchronizationTitle" = "Du har accepterat konversationsförfrågan.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
@@ -97,7 +97,7 @@
 "createAccount.lookingForUsernameAvailability" = "söker tillgänglighet...";
 "createAccount.invalidUsername" = "Ogiltigt användarnamn";
 "createAccount.usernameAlreadyTaken" = "Användarnamnet är upptaget";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "användarnamnet är tillgängligt";
 "createAccount.loading" = "Läser in";
 "createAccount.waitCreateAccountTitle" = "Lägger till konto";
 "createAccount.RegisterAUsername" = "Registrera ett användarnamn";
@@ -120,7 +120,7 @@
 "linkToAccount.explanationPinMessage" = "För att generera PIN-koden, går du till kontohanteringen på den enhet som innehåller det konto du vill använda. I enhetsinställningarna väljer du \"Länka en annan enhet till detta konto\". Du får då den nödvändiga PIN-koden för att slutföra detta formulär. Pin-koden är endast giltig i 10 minuter.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Logga in";
 "linkToAccountManager.passwordPlaceholder" = "Lösenord";
 "linkToAccountManager.passwordLabel" = "Ange lösenord";
 "linkToAccountManager.usernamePlaceholder" = "Användarnamn";
@@ -153,17 +153,17 @@
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.recordVideoMessage" = "Spela in ett videomeddelande";
+"alerts.recordAudioMessage" = "Spela in ett ljudmeddelande";
+"alerts.uploadFile" = "Ladda upp fil";
+"alerts.uploadPhoto" = "Ladda upp foto eller film";
 "alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
+"alerts.locationSharing" = "Dela min plats";
 "alerts.alreadylocationSharing" = "Already sharing location with this user";
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.locationSharingDuration10min" = "10 minuter";
+"alerts.locationSharingDuration1hour" = "1 timme";
+"alerts.mapInformation" = "Kartinformation";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Läs mer";
 
@@ -177,10 +177,10 @@
 "alerts.incomingCallAllertTitle" = "Inkommande samtal från";
 "alerts.incomingCallButtonAccept" = "Acceptera";
 "alerts.incomingCallButtonIgnore" = "Ignorera";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
-"actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.startAudioCall" = "Röstsamtal";
+"actions.startVideoCall" = "Videosamtal";
+"actions.goToSettings" = "Gå till Inställningar";
+"actions.stopLocationSharing" = "Sluta dela";
 
 //Calls
 "calls.callItemTitle" = "Samtal";
@@ -191,9 +191,9 @@
 "calls.searching" = "Söker...";
 "calls.callFinished" = "Samtalet avslutat";
 "calls.currentCallWith" = "Ring upp med";
-"calls.haghUp" = "hang up";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.haghUp" = "lägg på";
+"calls.maximize" = "maximera";
+"calls.minimize" = "minimera";
 "calls.setModerator" = "set moderator";
 "calls.removeModerator" = "unset moderator";
 "calls.muteAudio" = "mute audio";
@@ -238,17 +238,17 @@
 "accountPage.contactMeOnJamiTitle" = "Kontakta mig på Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
 "accountPage.registerNameTitle" = "Registrera ett användarnamn";
-"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.passwordPlaceholder" = "Ange kontolösenord";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegistering" = "Registrerar";
 "accountPage.usernameRegisterAction" = "Registrera";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.createPassword" = "Skapa lösenord";
 "accountPage.changePassword" = "Byt lösenord";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
+"accountPage.oldPasswordPlaceholder" = "Ange gammalt lösenord";
+"accountPage.newPasswordPlaceholder" = "Ange nytt lösenord";
+"accountPage.newPasswordConfirmPlaceholder" = "Bekräfta nytt lösenord";
 "accountPage.changePasswordError" = "Password incorrect";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
@@ -265,7 +265,7 @@
 "account.sipServer" = "SIP-server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Skapa ett SIP-konto";
 "account.usernameLabel" = "Ange användarnamn";
 "account.passwordLabel" = "Ange lösenord";
 "account.serverLabel" = "Ange adress";
@@ -306,7 +306,7 @@
 "dataTransfer.readableStatusRefuse" = "Neka";
 "dataTransfer.readableStatusOngoing" = "Överför";
 "dataTransfer.readableStatusCanceled" = "Avbruten";
-"dataTransfer.sendingFailed" = "Failed to send";
+"dataTransfer.sendingFailed" = "Misslyckades att skicka";
 "dataTransfer.readableStatusSuccess" = "Slutförd";
 "dataTransfer.readableStatusAccept" = "Acceptera";
 "dataTransfer.readableStatusCancel" = "Avbryt";
@@ -326,7 +326,7 @@
 "dataTransfer.readableStatusSuccess" = "Slutförd";
 "dataTransfer.readableStatusAccept" = "Acceptera";
 "dataTransfer.readableStatusCancel" = "Avbryt";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Tryck för att starta inspelning";
 "dataTransfer.sendMessage" = "Skicka";
 
 
@@ -339,7 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "Missat utgående samtal";
 "generatedMessage.missedIncomingCall" = "Missat inkommande samtal";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "Kontakt lämnade konversationen";
 
 //General Settings
 "generalSettings.title" = "Avancerade inställningar";
@@ -347,13 +347,13 @@
 
 //Migrate Account
 "migrateAccount.title" = "Kontodelning";
-"migrateAccount.migrateButton" = "Migrate Account";
+"migrateAccount.migrateButton" = "Migrera konto";
 "migrateAccount.explanation" = "This account needs to be migrated";
 "migrateAccount.passwordPlaceholder" = "Ange lösenord";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
 "migrateAccount.removeAccount" = "Ta bort konto";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.migrating" = "Migrerar...";
 "migrateAccount.cancel" = "Avbryt";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
