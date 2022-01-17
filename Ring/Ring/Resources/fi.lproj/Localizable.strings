@@ -198,7 +198,7 @@
 "calls.removeModerator" = "poista valvoja";
 "calls.muteAudio" = "mykistä ääni";
 "calls.unmuteAudio" = "poista mykistys";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "laskettu käsi";
 
 //Account Page
 "accountPage.devicesListHeader" = "Laitteet";
