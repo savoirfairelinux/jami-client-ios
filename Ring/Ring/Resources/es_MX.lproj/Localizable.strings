@@ -23,11 +23,11 @@
 "global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Ok";
 "global.close" = "Close";
-"global.share" = "Share";
+"global.share" = "Compartir";
 "global.forward" = "Forward";
 "global.save" = "Save";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Pevisualizar";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -51,7 +51,7 @@
 "smartlist.invitations" = "Invitaciones";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "Acerca de Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -202,7 +202,7 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
-"accountPage.settingsHeader" = "Settings";
+"accountPage.settingsHeader" = "Configuraciones";
 "accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
@@ -327,17 +327,17 @@
 "dataTransfer.readableStatusAccept" = "Accept";
 "dataTransfer.readableStatusCancel" = "Cancelar";
 "dataTransfer.infoMessage" = "Press to start recording";
-"dataTransfer.sendMessage" = "Send";
+"dataTransfer.sendMessage" = "Envíar";
 
 
 //Generated Message
 "generatedMessage.contactAdded" = "Contact added";
 "generatedMessage.invitationReceived" = "Invitation received";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
-"generatedMessage.outgoingCall" = "Outgoing call";
-"generatedMessage.incomingCall" = "Incoming call";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.outgoingCall" = "Lllamando a ";
+"generatedMessage.incomingCall" = "Llamada entrante";
+"generatedMessage.missedOutgoingCall" = "Lllamada saliente perdida";
+"generatedMessage.missedIncomingCall" = "Llamada entrante perdida";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 "generatedMessage.contactLeftConversation" = "Contact left conversation";
 

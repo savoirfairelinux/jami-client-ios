@@ -198,7 +198,7 @@
 "calls.removeModerator" = "отключить модератора";
 "calls.muteAudio" = "отключить звук";
 "calls.unmuteAudio" = "включить звук";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "опущенная рука";
 
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
