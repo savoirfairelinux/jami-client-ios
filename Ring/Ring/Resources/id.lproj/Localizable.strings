@@ -171,7 +171,7 @@
 "actions.blockAction" = "Blokir";
 "actions.deleteAction" = "Hapus";
 "actions.cancelAction" = "Batal";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Bersihkan";
 "actions.backAction" = "Kembali";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";

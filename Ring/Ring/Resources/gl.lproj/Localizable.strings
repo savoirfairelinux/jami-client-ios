@@ -72,7 +72,7 @@
 
 //Welcome Screen
 "welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.text" = "Jami é unha plataforma de comunicación libre e universal que coida a privacidade e liberdades das persoas.";
 "welcome.linkDevice" = "Ligar este dispositivo a unha conta";
 "welcome.createAccount" = "Crear conta Jami";
 "welcome.connectToManager" = "Conectar a un servidor JAMS";
