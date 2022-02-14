@@ -339,7 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "Nieodebrane połączenie wychodzące";
 "generatedMessage.missedIncomingCall" = "Nieodebrane połączenie przychodzące";
 "generatedMessage.liveLocationSharing" = "Udostępnianie lokalizacji na żywo";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "Kontakt opuścił konwersacje";
 
 //General Settings
 "generalSettings.title" = "Ustawienia zaawansowane";
