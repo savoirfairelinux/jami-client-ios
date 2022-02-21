@@ -25,12 +25,12 @@
 "global.close" = "Chiudi";
 "global.share" = "Condividi";
 "global.forward" = "Inoltra";
-"global.save" = "Salvare";
+"global.save" = "Salva";
 "global.resend" = "Invia di nuovo";
 "global.preview" = "Anteprima";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
+"scan.badQrCode" = "Codice QR errato";
 "scan.search" = "Ricerca in corso...";
 
 // Smartlist
@@ -39,24 +39,24 @@
 "smartlist.conversations" = "Conversazioni";
 "smartlist.searching" = "Ricerca...";
 "smartlist.noResults" = "Nessun risultato";
-"smartlist.noConversation" = "No conversations";
+"smartlist.noConversation" = "Nessuna conversazione";
 "smartlist.searchBarPlaceholder" = "Inserire il nome...";
 "smartlist.searchBar" = "Cerca contatto nuovo o esistente...";
-"smartlist.noNetworkConnectivity" = "Connessione di rete assente";
+"smartlist.noNetworkConnectivity" = "Nessuna connessione di rete";
 "smartlist.cellularAccess" = "Assicurati che l'accesso cellulare sia garantito nelle tue impostazioni";
 "smartlist.accountsTitle" = "Account";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "inviti";
+"smartlist.addAccountButton" = "+ Aggiungi account";
+"smartlist.noNumber" = "Il contatto selezionato non ha nessun numero";
+"smartlist.selectOneNumber" = "Seleziona uno dei numeri";
+"smartlist.invitations" = "Inviti";
 "smartlist.accountSettings" = "Impostazioni account";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Impostazioni avanzate";
 "smartlist.aboutJami" = "Informazioni su Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Scrivi a";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.messagePlaceholder" = "Scrivi a ";
+"conversation.explanationSendingLocationTo" = "Stai condividendo la tua posizione con ";
+"conversation.explanationReceivingLocationFrom" = "Stai ricevendo una posizione dal vivo da ";
 "conversation.errorSavingImage" = "Impossibile salvare l'immagine nella galleria";
 "conversation.receivedRequest" = "\%s\ ti ha inviato una richiesta di conversazione.";
 "conversation.requestMessage" = "Ciao, \nVuoi partecipare alla conversazione?";
@@ -83,7 +83,7 @@
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Inserire un nome da visualizzare";
 "createProfile.enterNamePlaceholder" = "Inserire il nome";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.subtitle" = "Il tuo profilo sarà condiviso con i tuoi contatti. Puoi cambiare questa impostazione in qualsiasi momento.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
@@ -99,7 +99,7 @@
 "createAccount.usernameAlreadyTaken" = "nome utente già utilizzato";
 "createAccount.usernameValid" = "il nome utente è disponibile";
 "createAccount.loading" = "Caricamento";
-"createAccount.waitCreateAccountTitle" = "Aggiunta account ";
+"createAccount.waitCreateAccountTitle" = "Aggiunta dell'account";
 "createAccount.RegisterAUsername" = "Registra un nome utente";
 "createAccount.ChooseAPassword" = "Cifrare il mio account";
 "createAccount.PasswordInformation" = "Scegliete una password per cifrare il tuo account locale. Non dimenticarla o non sarai in grado di recuperare il tuo account";
@@ -133,7 +133,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Aggiunto";
 "alerts.accountNoNetworkTitle" = "Impossibile connettersi alla rete";
-"alerts.accountNoNetworkMessage" = "Impossibile aggiungere account perché Jami non è riuscito a connettersi alla rete distribuita. Controlla la connettività del dispositivo.";
+"alerts.accountNoNetworkMessage" = "Impossibile aggiungere l'account perché Jami non riesce a connettersi alla rete. Controlla la tua connessione di rete.";
 "alerts.accountDefaultErrorTitle" = "Errore sconosciuto";
 "alerts.accountDefaultErrorMessage" = "Non è stato possibile creare l'account.";
 "alerts.profileTakePhoto" = "Scattare una foto";
@@ -142,12 +142,12 @@
 "alerts.accountLinkedTitle" = "Collegamento dell'account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Chiudi l'applicazione e prova ad aprirla di nuovo";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
+"alerts.confirmBlockContact" = "Sei sicuro di voler bloccare questo contatto? Anche la cronologia delle conversazioni con questo contatto verrà eliminata in modo permanente.";
+"alerts.confirmBlockContactTitle" = "Blocca contatto";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
+"alerts.confirmDeleteConversationFromContact" = "Sei sicuro di voler eliminare la conversazione con questo contatto?";
 "alerts.confirmDeleteConversationTitle" = "Delete Conversation";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversation" = "Sei sicuro di voler cancellare la conversazione con questo contatto?";
 "alerts.confirmClearConversationTitle" = "Clear Conversation";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
@@ -209,7 +209,7 @@
 "accountPage.enableProxy" = "Attiva proxy";
 "accountPage.blockedContacts" = "Contatti bloccati";
 "accountPage.unblockContact" = "UNBLOCK";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
+"accountPage.proxyAddressAlert" = "Inserire indirizzo proxy";
 "accountPage.enableProxy" = "Attiva proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "Salvare";
@@ -235,8 +235,8 @@
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Rimuovi";
 "accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiTitle" = "Contattami su Jami!";
+"accountPage.contactMeOnJamiContant" = "Contattami usando \"%s\" su Jami, una piattaforma distribuita di comunicazione: https://jami.net";
 "accountPage.registerNameTitle" = "Registra un nome utente";
 "accountPage.passwordPlaceholder" = "Inserire la password dell'account";
 "accountPage.usernamePlaceholder" = "Inserisci il nome utente desiderato";
@@ -296,7 +296,7 @@
 "contactPage.startVideoCall" = "Avvia videochiamata";
 "contactPage.sendMessage" = "Send Message";
 "contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
+"contactPage.blockContact" = "Blocca contatto";
 "contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer

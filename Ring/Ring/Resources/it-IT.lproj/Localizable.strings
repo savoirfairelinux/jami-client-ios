@@ -42,7 +42,7 @@
 "smartlist.noConversation" = "Nessuna conversazione";
 "smartlist.searchBarPlaceholder" = "Inserire il nome…";
 "smartlist.searchBar" = "Cerca contatto nuovo o esistente...";
-"smartlist.noNetworkConnectivity" = "Assenza di connessione di rete";
+"smartlist.noNetworkConnectivity" = "Nessuna connessione di rete";
 "smartlist.cellularAccess" = "Assicurati che l'accesso cellulare sia garantito nelle tue impostazioni";
 "smartlist.accountsTitle" = "Account";
 "smartlist.addAccountButton" = "+ Aggiungi account";
@@ -54,9 +54,9 @@
 "smartlist.aboutJami" = "Informazioni su Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Scrivi a";
-"conversation.explanationSendingLocationTo" = "Stai attualmente condividendo la tua posizione con";
-"conversation.explanationReceivingLocationFrom" = "Stai attualmente ricevendo una posizione dal vivo da";
+"conversation.messagePlaceholder" = "Scrivi a ";
+"conversation.explanationSendingLocationTo" = "Stai condividendo la tua posizione con ";
+"conversation.explanationReceivingLocationFrom" = "Stai ricevendo una posizione dal vivo da ";
 "conversation.errorSavingImage" = "Impossibile salvare l'immagine nella galleria";
 "conversation.receivedRequest" = "\%s\ ti ha inviato una richiesta di conversazione.";
 "conversation.requestMessage" = "Ciao, \nVuoi partecipare alla conversazione?";
@@ -99,7 +99,7 @@
 "createAccount.usernameAlreadyTaken" = "nome utente già utilizzato";
 "createAccount.usernameValid" = "il nome utente è disponibile";
 "createAccount.loading" = "Caricamento in corso";
-"createAccount.waitCreateAccountTitle" = "Aggiungi account";
+"createAccount.waitCreateAccountTitle" = "Aggiunta dell'account";
 "createAccount.RegisterAUsername" = "Registra un nome utente";
 "createAccount.ChooseAPassword" = "Cifrare il mio account";
 "createAccount.PasswordInformation" = "Scegliete una password per cifrare il tuo account locale. Non dimenticarla o non sarai in grado di recuperare il tuo account";
@@ -133,7 +133,7 @@
 "alerts.accountCannotBeFoundMessage" = "L'account non è stato trovato sulla rete Jami. Assicurati che sia stato esportato su Jami da un dispositivo esistente e che le credenziali fornite siano corrette.";
 "alerts.accountAddedTitle" = "Account aggiunto";
 "alerts.accountNoNetworkTitle" = "Impossibile collegarsi alla rete";
-"alerts.accountNoNetworkMessage" = "Impossibile aggiungere account perché Jami non è riuscito a connettersi alla rete distribuita. Controlla la connettività del dispositivo.";
+"alerts.accountNoNetworkMessage" = "Impossibile aggiungere l'account perché Jami non riesce a connettersi alla rete. Controlla la tua connessione di rete.";
 "alerts.accountDefaultErrorTitle" = "Errore sconosciuto";
 "alerts.accountDefaultErrorMessage" = "Non è stato possibile creare l'account.";
 "alerts.profileTakePhoto" = "Scatta una foto";

@@ -54,9 +54,9 @@
 "smartlist.aboutJami" = "Despre Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Scrie pentru";
-"conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către";
-"conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la";
+"conversation.messagePlaceholder" = "Scrie pentru ";
+"conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către ";
+"conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
 "conversation.errorSavingImage" = "Salvarea imaginii nu a reușit";
 "conversation.receivedRequest" = "\%s\ ți-a trimis o invitație la o conversație.";
 "conversation.requestMessage" = "Vrei să participi la conversație?";
