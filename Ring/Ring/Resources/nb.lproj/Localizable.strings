@@ -26,7 +26,7 @@
 "global.share" = "Del";
 "global.forward" = "Forward";
 "global.save" = "Lagre";
-"global.resend" = "Resend";
+"global.resend" = "Send igjen";
 "global.preview" = "Forhåndsvisning";
 
 // Scan
@@ -62,7 +62,7 @@
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
+"conversation.synchronizationTitle" = "Du har takket ja til samtaleforespørselen.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
@@ -339,7 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "Tapt utgående anrop";
 "generatedMessage.missedIncomingCall" = "Tapt innkommende anrop";
 "generatedMessage.liveLocationSharing" = "Live posisjonsdeling";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "Kontakten har forlatt samtalen";
 
 //General Settings
 "generalSettings.title" = "Avanserte innstillinger";
