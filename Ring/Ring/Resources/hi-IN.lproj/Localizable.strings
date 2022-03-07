@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Conversations";
 "global.meTabBarTitle" = "Account Settings";
-"global.ok" = "Ok";
+"global.ok" = "ठीक";
 "global.close" = "बंद करे";
 "global.share" = "बाटें ";
 "global.forward" = "Forward";
@@ -305,7 +305,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "रद्द किया गया";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
@@ -322,7 +322,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "रद्द किया गया";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
 "dataTransfer.readableStatusCancel" = "रद्द करें";

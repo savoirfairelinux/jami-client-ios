@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Групові чати";
 "global.meTabBarTitle" = "Account Settings";
-"global.ok" = "Ок";
+"global.ok" = "Гаразд";
 "global.close" = "Закрити";
 "global.share" = "Поділитися";
 "global.forward" = "Forward";
@@ -138,7 +138,7 @@
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Зняти фото";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Відміна";
+"alerts.profileCancelPhoto" = "Скасувати";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "Під час запуску Джамі сталася помилка";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
@@ -170,7 +170,7 @@
 //Actions
 "actions.blockAction" = "Заблокувати";
 "actions.deleteAction" = "Видалити";
-"actions.cancelAction" = "Відміна";
+"actions.cancelAction" = "Скасувати";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
@@ -305,11 +305,11 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Скидання";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Скасовано";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Прийняти";
-"dataTransfer.readableStatusCancel" = "Відміна";
+"dataTransfer.readableStatusCancel" = "Скасувати";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
@@ -322,10 +322,10 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Скидання";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Скасовано";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Прийняти";
-"dataTransfer.readableStatusCancel" = "Відміна";
+"dataTransfer.readableStatusCancel" = "Скасувати";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Відправити";
 
@@ -354,7 +354,7 @@
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Відміна";
+"migrateAccount.cancel" = "Скасувати";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

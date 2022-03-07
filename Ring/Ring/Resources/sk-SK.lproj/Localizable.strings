@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Konverzácie";
 "global.meTabBarTitle" = "Account Settings";
-"global.ok" = "OK";
+"global.ok" = "V poriadku";
 "global.close" = "Zavrieť";
 "global.share" = "Zdieľať";
 "global.forward" = "Forward";

@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Разговоры";
 "global.meTabBarTitle" = "Настройки аккаунта";
-"global.ok" = "OK";
+"global.ok" = "В порядке";
 "global.close" = "Закрыть";
 "global.share" = "Поделиться";
 "global.forward" = "Переслать";
@@ -222,8 +222,8 @@
 "accountPage.revokeDeviceButton" = "Отвязать";
 "accountPage.revokeDevicePlaceholder" = "Введите ваш пароль";
 "accountPage.deviceRevoked" = "Отзыв устройства завершенно";
-"accountPage.deviceRevocationProgress" = "Отзыв...";
-"accountPage.deviceRevocationSuccess" = "Устройство было отозвано ";
+"accountPage.deviceRevocationProgress" = "Отзыв…";
+"accountPage.deviceRevocationSuccess" = "Устройство было отозвано";
 "accountPage.deviceRevocationTryAgain" = "Попробуйте снова";
 "accountPage.deviceRevocationWrongPassword" = "Неверный пароль";
 "accountPage.deviceRevocationUnknownDevice" = "Неизвестное устройство";

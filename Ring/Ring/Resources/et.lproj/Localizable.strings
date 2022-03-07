@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Vestlused";
 "global.meTabBarTitle" = "Account Settings";
-"global.ok" = "Ok";
+"global.ok" = "Sobib";
 "global.close" = "Close";
 "global.share" = "Share";
 "global.forward" = "Forward";
@@ -138,7 +138,7 @@
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "Tühista";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
@@ -170,7 +170,7 @@
 //Actions
 "actions.blockAction" = "Block";
 "actions.deleteAction" = "Delete";
-"actions.cancelAction" = "Cancel";
+"actions.cancelAction" = "Tühista";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Tagasi";
 "actions.doneAction" = "Done";
@@ -305,11 +305,11 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Tühistatud";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "Tühista";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
@@ -322,10 +322,10 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Tühistatud";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "Tühista";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Send";
 
@@ -354,7 +354,7 @@
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "Tühista";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

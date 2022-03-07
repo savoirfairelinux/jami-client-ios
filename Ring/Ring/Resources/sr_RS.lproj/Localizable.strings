@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Konverzacija";
 "global.meTabBarTitle" = "Account Settings";
-"global.ok" = "Ok";
+"global.ok" = "U redu";
 "global.close" = "Close";
 "global.share" = "Podeli";
 "global.forward" = "Forward";
@@ -138,7 +138,7 @@
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "Otkaži";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
@@ -170,7 +170,7 @@
 //Actions
 "actions.blockAction" = "Blokiraj";
 "actions.deleteAction" = "Izbriši";
-"actions.cancelAction" = "Cancel";
+"actions.cancelAction" = "Otkaži";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Nazad";
 "actions.doneAction" = "Done";
@@ -305,11 +305,11 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Odbij";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Otkazan";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Prihvati";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "Otkaži";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
@@ -322,10 +322,10 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Odbij";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Otkazan";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Prihvati";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "Otkaži";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Pošalji";
 
@@ -354,7 +354,7 @@
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "Otkaži";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

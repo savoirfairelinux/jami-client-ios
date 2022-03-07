@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Conversations";
 "global.meTabBarTitle" = "Account Settings";
-"global.ok" = "Ok";
+"global.ok" = "خب";
 "global.close" = "Close";
 "global.share" = "Share";
 "global.forward" = "Forward";
@@ -94,7 +94,7 @@
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
 "createAccount.passwordCharactersNumberError" = "6 characters minimum";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "بررسی در‌دسترس بودن…";
 "createAccount.invalidUsername" = "invalid username";
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.usernameValid" = "username is available";
@@ -114,7 +114,7 @@
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
 "linkToAccount.passwordPlaceholder" = "Password";
-"linkToAccount.pinPlaceholder" = "PIN";
+"linkToAccount.pinPlaceholder" = "کد پین";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "Enter PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -138,7 +138,7 @@
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "لغو";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
@@ -170,7 +170,7 @@
 //Actions
 "actions.blockAction" = "Block";
 "actions.deleteAction" = "Delete";
-"actions.cancelAction" = "Cancel";
+"actions.cancelAction" = "لغو";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Back";
 "actions.doneAction" = "Done";
@@ -217,13 +217,13 @@
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Revoke device";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceTitle" = "باطل کردن دستگاه";
+"accountPage.revokeDeviceMessage" = "اطمینان دارید که می‌خواهید دسترسی این دستگاه را باطل کنید؟ این عمل قابل برگشت نیست.";
+"accountPage.revokeDeviceButton" = "باطل کردن";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
 "accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationProgress" = "در حال ابطال…";
+"accountPage.deviceRevocationSuccess" = "دسترسی دستگاه باطل شد";
 "accountPage.deviceRevocationTryAgain" = "Try again";
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
@@ -305,11 +305,11 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "لغو شده";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "لغو";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
@@ -322,10 +322,10 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "لغو شده";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "لغو";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Send";
 
@@ -354,7 +354,7 @@
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "لغو";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

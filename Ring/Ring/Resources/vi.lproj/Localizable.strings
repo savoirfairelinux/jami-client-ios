@@ -114,7 +114,7 @@
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
 "linkToAccount.passwordPlaceholder" = "Password";
-"linkToAccount.pinPlaceholder" = "PIN";
+"linkToAccount.pinPlaceholder" = "GHIM";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "Enter PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -138,7 +138,7 @@
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
 "alerts.profileUploadPhoto" = "Upload photo";
-"alerts.profileCancelPhoto" = "Cancel";
+"alerts.profileCancelPhoto" = "Hủy bỏ";
 "alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
@@ -170,7 +170,7 @@
 //Actions
 "actions.blockAction" = "Block";
 "actions.deleteAction" = "Delete";
-"actions.cancelAction" = "Cancel";
+"actions.cancelAction" = "Hủy bỏ";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Back";
 "actions.doneAction" = "Done";
@@ -305,11 +305,11 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Đã hủy bỏ";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "Hủy bỏ";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
@@ -322,10 +322,10 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Đã hủy bỏ";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Accept";
-"dataTransfer.readableStatusCancel" = "Cancel";
+"dataTransfer.readableStatusCancel" = "Hủy bỏ";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Send";
 
@@ -354,7 +354,7 @@
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Cancel";
+"migrateAccount.cancel" = "Hủy bỏ";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

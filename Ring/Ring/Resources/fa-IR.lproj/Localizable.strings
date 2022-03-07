@@ -222,7 +222,7 @@
 "accountPage.revokeDeviceButton" = "باطل کردن";
 "accountPage.revokeDevicePlaceholder" = "گذرواژه خود را وارد کنید";
 "accountPage.deviceRevoked" = "ابطال دستگاه تکمیل شد";
-"accountPage.deviceRevocationProgress" = "در حال ابطال...";
+"accountPage.deviceRevocationProgress" = "در حال ابطال…";
 "accountPage.deviceRevocationSuccess" = "دسترسی دستگاه باطل شد";
 "accountPage.deviceRevocationTryAgain" = "تلاش دوباره";
 "accountPage.deviceRevocationWrongPassword" = "گذرواژه ناصحیح";

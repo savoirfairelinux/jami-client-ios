@@ -24,7 +24,7 @@
 "global.ok" = "OK";
 "global.close" = "Lukk";
 "global.share" = "Del";
-"global.forward" = "Forward";
+"global.forward" = "Fremover";
 "global.save" = "Lagre";
 "global.resend" = "Send igjen";
 "global.preview" = "Forhåndsvisning";
@@ -35,13 +35,13 @@
 
 // Smartlist
 "smartlist.yesterday" = "Igår";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Offentlig katalog";
 "smartlist.conversations" = "Samtaler";
 "smartlist.searching" = "Søker…";
 "smartlist.noResults" = "Ingen resultater";
 "smartlist.noConversation" = "Ingen samtaler";
 "smartlist.searchBarPlaceholder" = "Tast inn navn...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Let etter ny eller eksisterende kontakt";
 "smartlist.noNetworkConnectivity" = "Mangler nettverksforbindelse";
 "smartlist.cellularAccess" = "Forsikre deg om at telefonnettverkstilgang er innvilget i dine innstillinger";
 "smartlist.accountsTitle" = "Kontoer";
@@ -50,20 +50,20 @@
 "smartlist.selectOneNumber" = "Velg et av nummerne";
 "smartlist.invitations" = "Invitasjoner";
 "smartlist.accountSettings" = "Kontoinnstillinger";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Innstillinger for viderekommende";
 "smartlist.aboutJami" = "Om Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Skriv melding til";
 "conversation.explanationSendingLocationTo" = "Du deler for tiden din lokasjon med";
 "conversation.explanationReceivingLocationFrom" = "Du mottar for øyeblikket en live lokasjon fra";
-"conversation.errorSavingImage" = "Failed to save image to galery";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.errorSavingImage" = "Klarte ikke å lagre bilde i galleriet";
+"conversation.receivedRequest" = "\%s\ har sent en samtaleforespørsel.";
+"conversation.requestMessage" = "Hei\nVil du bli med i samtalen?";
+"conversation.notContact" = "\%s\ står ikke i kontaktlisten.";
+"conversation.sendRequest" = "Send vedkommende en kontaktforespørsel for å kunne snakke sammen.";
 "conversation.synchronizationTitle" = "Du har takket ja til samtaleforespørselen.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Vi venter på \%s\ tilkoblinger for å synkronisere samtalen.";
 
 //Invitations
 "invitations.noInvitations" = "Ingen invitasjoner";
@@ -97,7 +97,7 @@
 "createAccount.lookingForUsernameAvailability" = "leter etter tilgjengelighet...";
 "createAccount.invalidUsername" = "ugyldig brukernavn";
 "createAccount.usernameAlreadyTaken" = "brukernavn allerede i bruk";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "ledig brukernavn";
 "createAccount.loading" = "Laster";
 "createAccount.waitCreateAccountTitle" = "Legger til konto";
 "createAccount.RegisterAUsername" = "Registrer et brukernavn";
@@ -126,7 +126,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Brukernavn";
 "linkToAccountManager.usernameLabel" = "Tast inn brukernavn";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Skriv inn JAMS-URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan ikke finne konto";
@@ -165,7 +165,7 @@
 "alerts.locationSharingDuration1hour" = "1 time";
 "alerts.mapInformation" = "Kartinformasjon";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap bidragsytere";
-"alerts.openStreetMapCopyrightMoreInfo" = "Lær mer";
+"alerts.openStreetMapCopyrightMoreInfo" = "Få vite mer";
 
 //Actions
 "actions.blockAction" = "Blokker";
@@ -194,11 +194,11 @@
 "calls.haghUp" = "legg på";
 "calls.maximize" = "maksimer";
 "calls.minimize" = "minimer";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
-"calls.lowerHand" = "lower hand";
+"calls.setModerator" = "angi ordstyrer";
+"calls.removeModerator" = "avløs ordstyrer";
+"calls.muteAudio" = "koble ut lyden";
+"calls.unmuteAudio" = "koble inn lyden";
+"calls.lowerHand" = "Ta ned hånden";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
@@ -238,12 +238,12 @@
 "accountPage.contactMeOnJamiTitle" = "Kontakt meg på Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontakt meg via \"%s\" på den distribuerte kommunikasjonsplattformen Jami: https://jami.net";
 "accountPage.registerNameTitle" = "Registrer et brukernavn";
-"accountPage.passwordPlaceholder" = "Tast inn konto passord";
+"accountPage.passwordPlaceholder" = "Tast inn kontopassord";
 "accountPage.usernamePlaceholder" = "Tast inn ønsket brukernavn";
-"accountPage.registerNameErrorMessage" = "Valgt brukernavn er ikke tilgjengelig";
+"accountPage.registerNameErrorMessage" = "Valgt brukernavn er ikke ledig";
 "accountPage.usernameRegistering" = "Registrerer";
 "accountPage.usernameRegisterAction" = "Registrer";
-"accountPage.usernameRegistrationFailed" = "Registrering feilet. Vennligst kontroller passord.";
+"accountPage.usernameRegistrationFailed" = "Registrering mislyktes. Vennligst kontroller passord.";
 "accountPage.createPassword" = "Opprett passord";
 "accountPage.changePassword" = "Endre passord";
 "accountPage.oldPasswordPlaceholder" = "Tast inn gammelt passord";
@@ -252,7 +252,7 @@
 "accountPage.changePasswordError" = "Feil passord";
 "accountPage.enableBoothMode" = "Aktiver messemodus";
 "accountPage.disableBoothMode" = "Deaktiver messemodus";
-"accountPage.disableBoothModeExplanation" = "Vennligst oppgi ditt konto passord";
+"accountPage.disableBoothModeExplanation" = "Vennligst oppgi kontopassord";
 "accountPage.boothModeExplanation" = "I messemodus lagres ikke samtalelogg og jami funksjonaliteten begrenses ved utgående samtaler. Når du aktiverer messemodus vil alle dine samtaler bli slettet.";
 "accountPage.noBoothMode" = "For å aktivere messemodus må du opprette et kontopassord først.";
 "accountPage.boothModeAlertMessage" = "Etter å ha aktiver messemodus vil alle dine samtaler bli slettet.";
@@ -265,7 +265,7 @@
 "account.sipServer" = "SIP-tjener";
 "account.port" = "Port";
 "account.proxyServer" = "Mellomtjener";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Opprett SIP-konto";
 "account.usernameLabel" = "Tast inn brukernavn";
 "account.passwordLabel" = "Skriv inn passord";
 "account.serverLabel" = "Tast inn adresse";

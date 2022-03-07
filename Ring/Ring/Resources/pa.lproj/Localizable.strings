@@ -305,7 +305,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "ਨਾ-ਮਨਜ਼ੂਰ ਕਰੋ";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "ਰੱਦ ਕੀਤਾ ਗਿਆ";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "ਮਨਜ਼ੂਰ ਕਰੋ";
@@ -322,7 +322,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "ਨਾ-ਮਨਜ਼ੂਰ ਕਰੋ";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "ਰੱਦ ਕੀਤਾ ਗਿਆ";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "ਮਨਜ਼ੂਰ ਕਰੋ";
 "dataTransfer.readableStatusCancel" = "ਰੱਦ ਕਰੋ";

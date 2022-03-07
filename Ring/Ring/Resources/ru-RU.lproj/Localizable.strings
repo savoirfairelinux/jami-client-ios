@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Разговоры";
 "global.meTabBarTitle" = "Account Settings";
-"global.ok" = "Да";
+"global.ok" = "В порядке";
 "global.close" = "Закрыть";
 "global.share" = "Поделится";
 "global.forward" = "Forward";
@@ -94,7 +94,7 @@
 "createAccount.repeatPasswordPlaceholder" = "Подтверждение пароля";
 "createAccount.passwordCharactersNumberError" = "Минимум 6 символов";
 "createAccount.passwordNotMatchingError" = "пароли не совпадают";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "проверка доступности…";
 "createAccount.invalidUsername" = "неверное имя пользователя ";
 "createAccount.usernameAlreadyTaken" = "имя пользователя уже занято";
 "createAccount.usernameValid" = "username is available";
@@ -218,12 +218,12 @@
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 "accountPage.revokeDeviceTitle" = "Отозвать устройство";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceMessage" = "Ты уверен, что хотите отозвать это устройство? Это действие не может быть отменено.";
 "accountPage.revokeDeviceButton" = "Отозвать";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
 "accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationProgress" = "Отзыв…";
+"accountPage.deviceRevocationSuccess" = "Устройство было отозвано";
 "accountPage.deviceRevocationTryAgain" = "Try again";
 "accountPage.deviceRevocationWrongPassword" = "Неверный пароль";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
@@ -305,7 +305,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Отказать";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Отменено";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Принять";
@@ -322,7 +322,7 @@
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusRefuse" = "Отказать";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Canceled";
+"dataTransfer.readableStatusCanceled" = "Отменено";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";

@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Conversaciones";
 "global.meTabBarTitle" = "Configuración de la cuenta";
-"global.ok" = "Okay";
+"global.ok" = "Aceptar";
 "global.close" = "Cerrar";
 "global.share" = "Compartir";
 "global.forward" = "Derivar";

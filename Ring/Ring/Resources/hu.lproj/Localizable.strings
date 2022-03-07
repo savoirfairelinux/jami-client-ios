@@ -158,7 +158,7 @@
 "alerts.uploadFile" = "Fájl feltöltése";
 "alerts.uploadPhoto" = "Fénykép vagy mozgókép feltöltése";
 "alerts.locationServiceIsDisabled" = "Helymeghatározási szolgáltatások bekapcsolása, hogy a „Jami” meghatározhassa a tartózkodási helyét.";
-"alerts.locationSharing" = "Saját tartózkodási hely megosztása";
+"alerts.locationSharing" = "Tartózkodási hely megosztása";
 "alerts.alreadylocationSharing" = "Tartózkodási hely már megosztva ezzel a felhasználóval.";
 "alerts.locationSharingDurationTitle" = "Mennyi ideig engedélyezi a tartózkodási hely megosztása?";
 "alerts.locationSharingDuration10min" = "10 perc";
@@ -305,7 +305,7 @@
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
 "dataTransfer.readableStatusOngoing" = "Fájlküldés";
-"dataTransfer.readableStatusCanceled" = "Törölve";
+"dataTransfer.readableStatusCanceled" = "Megszakítva";
 "dataTransfer.sendingFailed" = "Nem sikerült elküldeni";
 "dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.readableStatusAccept" = "Elfogadás";
@@ -322,7 +322,7 @@
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
 "dataTransfer.readableStatusRefuse" = "Elutasítás";
 "dataTransfer.readableStatusOngoing" = "Fájlküldés";
-"dataTransfer.readableStatusCanceled" = "Törölve";
+"dataTransfer.readableStatusCanceled" = "Megszakítva";
 "dataTransfer.readableStatusSuccess" = "Kész";
 "dataTransfer.readableStatusAccept" = "Elfogadás";
 "dataTransfer.readableStatusCancel" = "Mégse";
