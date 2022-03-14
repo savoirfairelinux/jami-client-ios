@@ -92,7 +92,7 @@
 "createAccount.enterNewUsernamePlaceholder" = "Korisničko ime";
 "createAccount.newPasswordPlaceholder" = "šifra";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
+"createAccount.passwordCharactersNumberError" = "Minimalna dužina 6 karaktera";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
 "createAccount.invalidUsername" = "invalid username";
@@ -105,7 +105,7 @@
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "Notifications";
 "createAccount.Recommended" = "(Recommended)";
-"createAccount.UsernameNotRegisteredTitle" = "Network error";
+"createAccount.UsernameNotRegisteredTitle" = "Greška na mreži";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
@@ -116,7 +116,7 @@
 "linkToAccount.passwordPlaceholder" = "šifra";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
+"linkToAccount.pinLabel" = "Unesi PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
@@ -129,11 +129,11 @@
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "Ne može se pronaći nalog";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkTitle" = "Nije moguće povezati se na mrežu";
+"alerts.accountNoNetworkMessage" = "Nije moguće dodati nalog jer se Jami nije mogao povezati na distribuiranu mrežu. Proverite da li je vaš uređaj povezan.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
@@ -171,7 +171,7 @@
 "actions.blockAction" = "Blokiraj";
 "actions.deleteAction" = "Izbriši";
 "actions.cancelAction" = "Otkaži";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Jasno";
 "actions.backAction" = "Nazad";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
@@ -184,7 +184,7 @@
 
 //Calls
 "calls.callItemTitle" = "Call";
-"calls.unknown" = "Unknown";
+"calls.unknown" = "Nepoznat";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
@@ -272,10 +272,10 @@
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
-"account.statusConnecting" = "Connecting";
-"account.statusUnknown" = "Unknown";
+"account.statusOnline" = "Na vezi";
+"account.statusOffline" = "Nije na vezi";
+"account.statusConnecting" = "Povezivanje";
+"account.statusUnknown" = "Nepoznat";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
 "account.me" = "Me";
@@ -346,10 +346,10 @@
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
+"migrateAccount.title" = "Selidba naloga";
 "migrateAccount.migrateButton" = "Migrate Account";
 "migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.passwordPlaceholder" = "Unesi lozinku";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";

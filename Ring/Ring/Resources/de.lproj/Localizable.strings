@@ -80,7 +80,7 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Überspringen";
 "createProfile.profileCreated" = "Weiter";
-"createProfile.title" = "Personalisiere dein Profil";
+"createProfile.title" = "Personalisieren Sie Ihr Profil";
 "createProfile.enterNameLabel" = "Anzeigenamen eingeben";
 "createProfile.enterNamePlaceholder" = "Namen eingeben";
 "createProfile.subtitle" = "Ihr Profil wird nur mit Ihren Kontakten geteilt. Sie können es jederzeit ändern.";
@@ -142,10 +142,10 @@
 "alerts.accountLinkedTitle" = "Verknüpfe Konto";
 "alerts.dbFailedTitle" = "Beim Start von Jami ist ein Fehler aufgetreten";
 "alerts.dbFailedMessage" = "Bitte schließen Sie die Anwendung und versuchen Sie, sie erneut zu öffnen";
-"alerts.confirmBlockContact" = "Sicher, dass sie diesen Kontakt sperren wollen? Auch der Gesprächsverlauf mit diesem Kontakt wird unwiderruflich gelöscht.";
+"alerts.confirmBlockContact" = "Sicher, dass Sie diesen Kontakt sperren wollen? Auch der Gesprächsverlauf mit diesem Kontakt wird unwiderruflich gelöscht.";
 "alerts.confirmBlockContactTitle" = "Kontakt sperren";
 "alerts.confirmDeleteConversation" = "Sicher, dass Sie diese Unterhaltung unwiderruflich löschen wollen?";
-"alerts.confirmDeleteConversationFromContact" = "Sicher, dass sie die Unterhaltung mit diesem Kontakt löschen wollen?";
+"alerts.confirmDeleteConversationFromContact" = "Sicher, dass Sie die Unterhaltung mit diesem Kontakt löschen wollen?";
 "alerts.confirmDeleteConversationTitle" = "Unterhaltung löschen";
 "alerts.confirmClearConversation" = "Sicher, dass sie den Gesprächsverlauf mit diesem Kontakt löschen wollen?";
 "alerts.confirmClearConversationTitle" = "Gesprächsverlauf löschen";
@@ -196,8 +196,8 @@
 "calls.minimize" = "minimieren";
 "calls.setModerator" = "Moderator einstellen";
 "calls.removeModerator" = "Moderator deaktivieren";
-"calls.muteAudio" = "Audio stumm schalten";
-"calls.unmuteAudio" = "Audio lautschalten";
+"calls.muteAudio" = "Audio stummschalten";
+"calls.unmuteAudio" = "Stummschaltung aufheben";
 "calls.lowerHand" = "Hand senken";
 
 //Account Page
@@ -248,7 +248,7 @@
 "accountPage.changePassword" = "Passwort ändern";
 "accountPage.oldPasswordPlaceholder" = "Altes Passwort eingeben";
 "accountPage.newPasswordPlaceholder" = "Neues Passwort eingeben";
-"accountPage.newPasswordConfirmPlaceholder" = "Bestätige neues Passwort";
+"accountPage.newPasswordConfirmPlaceholder" = "Neues Passwort bestätigen";
 "accountPage.changePasswordError" = "Falsches Passwort";
 "accountPage.enableBoothMode" = "Geheim-Modus aktivieren";
 "accountPage.disableBoothMode" = "Geheim-Modus deaktivieren";
@@ -303,12 +303,12 @@
 "dataTransfer.readableStatusCreated" = "Initialisiere...";
 "dataTransfer.readableStatusError" = "Fehler";
 "dataTransfer.readableStatusAwaiting" = "Ausstehend …";
-"dataTransfer.readableStatusRefuse" = "Verweigern";
+"dataTransfer.readableStatusRefuse" = "Ablehnen";
 "dataTransfer.readableStatusOngoing" = "Übertrage";
 "dataTransfer.readableStatusCanceled" = "Abgebrochen";
 "dataTransfer.sendingFailed" = "Senden fehlgeschlagen";
 "dataTransfer.readableStatusSuccess" = "Abgeschlossen";
-"dataTransfer.readableStatusAccept" = "Akzeptieren";
+"dataTransfer.readableStatusAccept" = "Annehmen";
 "dataTransfer.readableStatusCancel" = "Abbrechen";
 
 //Notifications
@@ -320,11 +320,11 @@
 "notifications.locationSharingStarted" = "Eingehende Standortfreigabe gestartet";
 "notifications.locationSharingStopped" = "Eingehende Standortfreigabe gestoppt";
 "dataTransfer.readableStatusAwaiting" = "Ausstehend …";
-"dataTransfer.readableStatusRefuse" = "Verweigern";
+"dataTransfer.readableStatusRefuse" = "Ablehnen";
 "dataTransfer.readableStatusOngoing" = "Übertrage";
 "dataTransfer.readableStatusCanceled" = "Abgebrochen";
 "dataTransfer.readableStatusSuccess" = "Abgeschlossen";
-"dataTransfer.readableStatusAccept" = "Akzeptieren";
+"dataTransfer.readableStatusAccept" = "Annehmen";
 "dataTransfer.readableStatusCancel" = "Abbrechen";
 "dataTransfer.infoMessage" = "Zum Starten der Aufnahme drücken";
 "dataTransfer.sendMessage" = "Senden";
