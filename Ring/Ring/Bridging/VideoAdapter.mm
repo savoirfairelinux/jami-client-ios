@@ -39,7 +39,6 @@ struct Renderer
     std::mutex renderMutex;
     AVSinkTarget avtarget;
     SinkTarget target;
-    SinkTarget::FrameBufferPtr daemonFramePtr_;
     int width;
     int height;
     NSString* rendererId;
@@ -56,43 +55,6 @@ struct Renderer
                 [VideoAdapter.videoDelegate writeFrameWithImage: image forCallId: rendererId];
                 isRendering = false;
             }
-        };
-    }
-    void bindSinkFunctions() {
-        target.pull = [this](std::size_t bytes) {
-            std::lock_guard<std::mutex> lk(renderMutex);
-            if (!daemonFramePtr_)
-                daemonFramePtr_.reset(new DRing::FrameBuffer);
-            daemonFramePtr_->storage.resize(bytes);
-            daemonFramePtr_->ptr = daemonFramePtr_->storage.data();
-            daemonFramePtr_->ptrSize = bytes;
-            return std::move(daemonFramePtr_);
-        };
-
-        target.push = [this](DRing::SinkTarget::FrameBufferPtr buf) {
-            std::lock_guard<std::mutex> lk(renderMutex);
-            daemonFramePtr_ = std::move(buf);
-            if(VideoAdapter.videoDelegate) {
-                @autoreleasepool {
-                    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-                    CGContextRef bitmapContext = CGBitmapContextCreate((void *)daemonFramePtr_->ptr,
-                                                                       daemonFramePtr_->width,
-                                                                       daemonFramePtr_->height,
-                                                                       8,
-                                                                       4 * width,
-                                                                       colorSpace,
-                                                                       kCGBitmapByteOrder32Host | kCGImageAlphaPremultipliedFirst);
-                    CFRelease(colorSpace);
-                    CGImageRef cgImage=CGBitmapContextCreateImage(bitmapContext);
-                    CGContextRelease(bitmapContext);
-                    UIImage* image = [UIImage imageWithCGImage:cgImage];
-                    CGImageRelease(cgImage);
-                    isRendering = true;
-                    [VideoAdapter.videoDelegate writeFrameWithImage: image forCallId: rendererId];
-                    isRendering = false;
-                }
-            }
-
         };
     }
 };
