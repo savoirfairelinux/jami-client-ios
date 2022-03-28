@@ -27,7 +27,7 @@
 "global.forward" = "Forward";
 "global.save" = "Spara";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "Förhandsvisa";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";
