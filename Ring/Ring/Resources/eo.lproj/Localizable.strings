@@ -51,7 +51,7 @@
 "smartlist.invitations" = "Invitoj";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "Pri Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";

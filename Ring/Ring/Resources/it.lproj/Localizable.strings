@@ -219,7 +219,7 @@
 "accountPage.proxyDisabledAlertBody" = "Attiva il proxy, per ricevere le notifiche";
 "accountPage.revokeDeviceTitle" = "Revoca dispositivo";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceButton" = "Revoca";
 "accountPage.revokeDevicePlaceholder" = "Inserisci la tua password";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
