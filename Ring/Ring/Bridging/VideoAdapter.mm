@@ -37,20 +37,19 @@ struct Renderer
     std::condition_variable frameCv;
     bool isRendering;
     std::mutex renderMutex;
-    AVSinkTarget avtarget;
     SinkTarget target;
     int width;
     int height;
     NSString* rendererId;
 
     void bindAVSinkFunctions() {
-        avtarget.push = [this](std::unique_ptr<DRing::VideoFrame> frame) {
+        target.push = [this](FrameBuffer frame) {
             if(!VideoAdapter.videoDelegate) {
                 return;
             }
             @autoreleasepool {
                 UIImage *image = [Utils
-                                  convertHardwareDecodedFrameToImage: std::move(frame->pointer())];
+                                  convertHardwareDecodedFrameToImage: std::move(frame.get())];
                 isRendering = true;
                 [VideoAdapter.videoDelegate writeFrameWithImage: image forCallId: rendererId];
                 isRendering = false;
@@ -153,7 +152,7 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
     newRenderer->height = static_cast<int>(h);
     newRenderer->rendererId = sinkId;
     newRenderer->bindAVSinkFunctions();
-    DRing::registerAVSinkTarget(_sinkId, newRenderer->avtarget);
+    DRing::registerSinkTarget(_sinkId, newRenderer->target);
     renderers.insert(std::make_pair(_sinkId, newRenderer));
 }
 
