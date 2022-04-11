@@ -84,7 +84,7 @@
 "createProfile.enterNameLabel" = "Introdu un nume de arătat";
 "createProfile.enterNamePlaceholder" = "Introdu numele";
 "createProfile.subtitle" = "Profilul tău va fi distribuit contactelor tale. Poți schimba asta cînd vrei.";
-"createProfile.createYourAvatar" = "Creează profilul tău";
+"createProfile.createYourAvatar" = "Creează poza de profil";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Creează contul tău";
@@ -140,8 +140,8 @@
 "alerts.profileUploadPhoto" = "Încarcă o poză";
 "alerts.profileCancelPhoto" = "Renunță";
 "alerts.accountLinkedTitle" = "Se asociază contul";
-"alerts.dbFailedTitle" = "O eroare s-a produs cînd Jami se deschidea";
-"alerts.dbFailedMessage" = "Închide aplicația și încearcă să o deschizi din nou";
+"alerts.dbFailedTitle" = "S-a produs o eroare la pornirea lui Jami";
+"alerts.dbFailedMessage" = "Închide aplicația și încearcă să o repornești";
 "alerts.confirmBlockContact" = "Sigur vrei să blochezi acest contact? Conversația cu acest contact va fi ștearsă definitiv.";
 "alerts.confirmBlockContactTitle" = "Blochează contactul";
 "alerts.confirmDeleteConversation" = "Chiar vrei să ștergi această conversație?";
@@ -174,7 +174,7 @@
 "actions.clearAction" = "Șterge";
 "actions.backAction" = "Înapoi";
 "actions.doneAction" = "Făcut";
-"alerts.incomingCallAllertTitle" = "Apel primit de la";
+"alerts.incomingCallAllertTitle" = "Apel primit de la ";
 "alerts.incomingCallButtonAccept" = "Acceptă";
 "alerts.incomingCallButtonIgnore" = "Ignoră";
 "actions.startAudioCall" = "Apel vocal";
@@ -190,7 +190,7 @@
 "calls.connecting" = "Se conectează...";
 "calls.searching" = "Căutare...";
 "calls.callFinished" = "Apel terminat";
-"calls.currentCallWith" = "Apel în curs cu";
+"calls.currentCallWith" = "Apel cu ";
 "calls.haghUp" = "închide";
 "calls.maximize" = "Maximizează";
 "calls.minimize" = "Minimizează";
