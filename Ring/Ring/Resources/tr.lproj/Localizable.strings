@@ -58,12 +58,12 @@
 "conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
 "conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
 "conversation.errorSavingImage" = "Fotoğraf galeriye kaydedilemedi";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.receivedRequest" = "\%s\ size bir konuşma için istek yolladı.";
+"conversation.requestMessage" = "Merhaba,\nKonuşmaya katılmak ister misin?";
+"conversation.notContact" = "\%s\ kişi listenizde yok.";
+"conversation.sendRequest" = "Birlikte iletişim kurmak için ona bir kişi isteği gönderin";
 "conversation.synchronizationTitle" = "Görüşme isteğini kabul ettiniz.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Sohbeti senkronize etmek için \%s\ bağlanmasını bekliyoruz.";
 
 //Invitations
 "invitations.noInvitations" = "Davetiye yok";
@@ -198,7 +198,7 @@
 "calls.removeModerator" = "moderatör ayarını kaldır";
 "calls.muteAudio" = "sesi kıs";
 "calls.unmuteAudio" = "sesi aç";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "elini indir";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aygıtlar";
