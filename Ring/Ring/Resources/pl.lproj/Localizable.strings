@@ -191,7 +191,7 @@
 "calls.searching" = "Szukanie...";
 "calls.callFinished" = "Rozmowa zakończona";
 "calls.currentCallWith" = "Zadzwoń z";
-"calls.haghUp" = "hang up";
+"calls.haghUp" = "Rozłącz";
 "calls.maximize" = "maksymalizuj";
 "calls.minimize" = "minimalizuj";
 "calls.setModerator" = "set moderator";

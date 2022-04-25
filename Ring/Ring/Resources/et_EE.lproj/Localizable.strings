@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Conversations";
+"global.homeTabBarTitle" = "Vestlused";
 "global.meTabBarTitle" = "Account Settings";
 "global.ok" = "Sobib";
 "global.close" = "Close";
@@ -36,7 +36,7 @@
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";
-"smartlist.conversations" = "Conversations";
+"smartlist.conversations" = "Vestlused";
 "smartlist.searching" = "Searching...";
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
@@ -172,7 +172,7 @@
 "actions.deleteAction" = "Delete";
 "actions.cancelAction" = "Tühista";
 "actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
+"actions.backAction" = "Tagasi";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Accept";
@@ -183,7 +183,7 @@
 "actions.stopLocationSharing" = "Stop sharing";
 
 //Calls
-"calls.callItemTitle" = "Call";
+"calls.callItemTitle" = "Helista";
 "calls.unknown" = "Unknown";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";

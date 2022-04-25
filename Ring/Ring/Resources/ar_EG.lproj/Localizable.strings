@@ -19,44 +19,44 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Conversations";
+"global.homeTabBarTitle" = "محادثات";
 "global.meTabBarTitle" = "Account Settings";
 "global.ok" = "موافق";
-"global.close" = "Close";
-"global.share" = "Share";
+"global.close" = "إغلاق";
+"global.share" = "مشاركة";
 "global.forward" = "Forward";
-"global.save" = "Save";
+"global.save" = "سجل";
 "global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.preview" = "معاينة";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "رمز QR غير صالح";
+"scan.search" = "يتم البحث...";
 
 // Smartlist
-"smartlist.yesterday" = "Yesterday";
+"smartlist.yesterday" = "البارحة";
 "smartlist.results" = "Public Directory";
-"smartlist.conversations" = "Conversations";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
+"smartlist.conversations" = "محادثات";
+"smartlist.searching" = "جاري البحث...";
+"smartlist.noResults" = "لا يوجد نتائج";
+"smartlist.noConversation" = "لا يوجد محادثات";
+"smartlist.searchBarPlaceholder" = "ادخال اسم...";
 "smartlist.searchBar" = "Search for new or existing contact...";
-"smartlist.noNetworkConnectivity" = "No network connectivity";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
-"smartlist.accountsTitle" = "Accounts";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Invitations";
+"smartlist.noNetworkConnectivity" = "لا يوجد اتصال بالشبكة";
+"smartlist.cellularAccess" = "تأكد من السماح للوصول النقال الخلوي في إعدادتك";
+"smartlist.accountsTitle" = "حسابات";
+"smartlist.addAccountButton" = "+اضافة حساب";
+"smartlist.noNumber" = "لا تحتوى جهة الاتصال المحددة على أى رقم";
+"smartlist.selectOneNumber" = "حدد أحد الأرقام";
+"smartlist.invitations" = "الدعوات";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "About Jami";
+"smartlist.aboutJami" = "حول جامي";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
+"conversation.explanationSendingLocationTo" = "أنت تشارك موقعك حاليًا مع";
+"conversation.explanationReceivingLocationFrom" = "أنت تتلقى حاليًا موقعًا مباشرًا من";
 "conversation.errorSavingImage" = "Failed to save image to galery";
 "conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
@@ -66,82 +66,82 @@
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "لم تــرد أي دعوة";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Jami account";
+"welcome.title" = "مرحبا بك في چامى!";
+"welcome.text" = "چامى هو منصة اتصال حرة وعالمية تحفظ خصوصية المستخدمين وحرياتهم";
+"welcome.linkDevice" = "اربط هذا الجهاز مع حساب";
+"welcome.createAccount" = "إنشاء حساب جامي";
 "welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
-"createProfile.profileCreated" = "Next";
+"createProfile.skipCreateProfile" = "تخطي";
+"createProfile.profileCreated" = "التالي";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "أدخِل اسم";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your account";
+"createAccount.createAccountFormTitle" = "أنشئ حسابك";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
-"createAccount.enterNewUsernamePlaceholder" = "Username";
-"createAccount.newPasswordPlaceholder" = "Password";
+"createAccount.enterNewUsernamePlaceholder" = "اسم المستخدم";
+"createAccount.newPasswordPlaceholder" = "كلمة السر";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
+"createAccount.passwordCharactersNumberError" = "6 محارف على الأقل";
+"createAccount.passwordNotMatchingError" = "كلمات المرور غير متطابقة";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
+"createAccount.invalidUsername" = "اسم المستخدم غير صالح";
+"createAccount.usernameAlreadyTaken" = "هذا الاسم غير متوفر";
 "createAccount.usernameValid" = "username is available";
-"createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Adding account";
+"createAccount.loading" = "جاري التحميل";
+"createAccount.waitCreateAccountTitle" = "في طور إضافة حساب";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "الإشعارات";
 "createAccount.Recommended" = "(Recommended)";
-"createAccount.UsernameNotRegisteredTitle" = "Network error";
+"createAccount.UsernameNotRegisteredTitle" = "خطأ في الشبكة";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "Password";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
-"linkToAccount.pinLabel" = "Enter PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.waitLinkToAccountTitle" = "ربط الحساب";
+"linkToAccount.linkButtonTitle" = "اربط جهاز";
+"linkToAccount.passwordPlaceholder" = "كلمة السر";
+"linkToAccount.pinPlaceholder" = "رمز الأمان";
+"linkToAccount.passwordLabel" = "أدخِل كلمة المرور";
+"linkToAccount.pinLabel" = "أدخِل رمز الأمان";
+"linkToAccount.explanationPinMessage" = "لتوليد رمز الأمان اذهب إلى إعدادات إدارة الحساب في الجهاز الذي يحتوي على الحساب الذي تريد استخدامه. في إعدادات الجهاز اختر \"ربط جهاز آخر مع هذا الحساب\". ستحصل عل رمز الأمان اللازم لإكمال العملية. تنتهي صلاحية رمز الأمان بعد 10 دقائق فقط.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "Password";
-"linkToAccountManager.passwordLabel" = "Enter Password";
-"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.signIn" = "تسجيل الدخول";
+"linkToAccountManager.passwordPlaceholder" = "كلمة السر";
+"linkToAccountManager.passwordLabel" = "أدخِل كلمة المرور";
+"linkToAccountManager.usernamePlaceholder" = "اسم المستخدم";
 "linkToAccountManager.usernameLabel" = "Enter Username";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "لا يستطيع  العثور على الحساب";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.accountAddedTitle" = "تمت إضافة الحساب";
+"alerts.accountNoNetworkTitle" = "لا يستطيع الاتصال بالشبكة";
+"alerts.accountNoNetworkMessage" = "تعذرت إضافة حساب لأن جامي لم يتمكن من الاتصال بالشبكة الموزعة. تحقق من اتصال جهازك.";
+"alerts.accountDefaultErrorTitle" = "خطأ غير معروف";
+"alerts.accountDefaultErrorMessage" = "لا يمكن إنشاء الحساب";
+"alerts.profileTakePhoto" = "التقاط صورة";
+"alerts.profileUploadPhoto" = "تحميل صورة";
 "alerts.profileCancelPhoto" = "إلغاء الأمر";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.accountLinkedTitle" = "جاري ربط الحساب";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.dbFailedMessage" = "الرجاء إغلاق التطبيق ومحاولة فتحه مرة ثانية";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -153,8 +153,8 @@
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
+"alerts.recordVideoMessage" = "تسجيل رسالة فيديو";
+"alerts.recordAudioMessage" = "تسجيل رسالة صوتية";
 "alerts.uploadFile" = "Upload file";
 "alerts.uploadPhoto" = "Upload photo or movie";
 "alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
@@ -163,32 +163,32 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.mapInformation" = "خريطة المعلومات";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
 //Actions
-"actions.blockAction" = "Block";
-"actions.deleteAction" = "Delete";
+"actions.blockAction" = "حظر";
+"actions.deleteAction" = "حذف";
 "actions.cancelAction" = "إلغاء الأمر";
 "actions.clearAction" = "Clear";
-"actions.backAction" = "Back";
-"actions.doneAction" = "Done";
+"actions.backAction" = "السابق";
+"actions.doneAction" = "منجز";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "Accept";
-"alerts.incomingCallButtonIgnore" = "Ignore";
+"alerts.incomingCallButtonAccept" = "اقبل";
+"alerts.incomingCallButtonIgnore" = "تجاهل";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.stopLocationSharing" = "إيقاف المشاركة";
 
 //Calls
-"calls.callItemTitle" = "Call";
-"calls.unknown" = "Unknown";
+"calls.callItemTitle" = "مكالمة";
+"calls.unknown" = "مجهول";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
-"calls.searching" = "Searching…";
+"calls.connecting" = "اتصال جاري...";
+"calls.searching" = "يتم البحث...";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -201,20 +201,20 @@
 "calls.lowerHand" = "lower hand";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Settings";
-"accountPage.username" = "Username";
+"accountPage.devicesListHeader" = "الأجهزة";
+"accountPage.settingsHeader" = "الإعدادات";
+"accountPage.username" = "اسم المستخدم";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Blocked contacts";
+"accountPage.blockedContacts" = "جهات إتصال محظورة";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
-"accountPage.saveProxyAddress" = "Save";
+"accountPage.saveProxyAddress" = "سجل";
 "accountPage.proxyPaceholder" = "Proxy address";
-"accountPage.enableNotifications" = "Enable Notifications";
+"accountPage.enableNotifications" = "فعل الإخطارات";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 "accountPage.revokeDeviceTitle" = "إبطال جهاز";
@@ -228,24 +228,24 @@
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Name";
-"accountPage.linkDeviceTitle" = "Link another device";
-"accountPage.other" = "Other";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.namePlaceholder" = "إسم";
+"accountPage.linkDeviceTitle" = "اربط جهازاً آخر";
+"accountPage.other" = "آخر";
+"accountPage.removeAccountTitle" = "إزالة الحساب";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-"accountPage.removeAccountButton" = "Remove";
+"accountPage.removeAccountButton" = "احذف";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
 "accountPage.registerNameTitle" = "Register a username";
-"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.passwordPlaceholder" = "أدخل كلمة مرور الحساب";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
-"accountPage.usernameRegisterAction" = "Register";
+"accountPage.usernameRegisterAction" = "سجل";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Change password";
+"accountPage.createPassword" = "إنشاء كلمة مرور";
+"accountPage.changePassword" = "تغيير كلمة المرور";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
@@ -260,36 +260,36 @@
 "accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
-"account.sipUsername" = "User Name";
-"account.sipPassword" = "Password";
-"account.sipServer" = "SIP Server";
-"account.port" = "Port";
-"account.proxyServer" = "Proxy";
+"account.sipUsername" = "اسم المستخدم";
+"account.sipPassword" = "كلمة السر";
+"account.sipServer" = "خادم SIP";
+"account.port" = "منفذ عبور";
+"account.proxyServer" = "الوكيل";
 "account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "Enter Password";
+"account.passwordLabel" = "أدخِل كلمة المرور";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Online";
-"account.statusOffline" = "Offline";
-"account.statusConnecting" = "Connecting";
-"account.statusUnknown" = "Unknown";
+"account.statusOnline" = "نشط";
+"account.statusOffline" = "خامل";
+"account.statusConnecting" = "يتم الإتصال";
+"account.statusUnknown" = "مجهول";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
-"account.me" = "Me";
+"account.me" = "شخصي";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "لا توجد جهات إتصال محظورة";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
+"linkDevice.title" = "ربط جهاز جديد";
+"linkDevice.passwordError" = "كلمة المرور التي أدخلتها لا تفتح هذا الحساب";
+"linkDevice.networkError" = "حدث خطأ في الشبكة أثناء التصدير";
+"linkDevice.defaultError" = "حدث خطأ أثناء التصدير";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "جاري التحقق";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
@@ -301,14 +301,14 @@
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
-"dataTransfer.readableStatusError" = "Error";
+"dataTransfer.readableStatusError" = "خطأ";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusRefuse" = "أرفض";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "تم الإلغاء";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "اقبل";
 "dataTransfer.readableStatusCancel" = "إلغاء الأمر";
 
 //Notifications
@@ -320,38 +320,38 @@
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusRefuse" = "أرفض";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "تم الإلغاء";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "اقبل";
 "dataTransfer.readableStatusCancel" = "إلغاء الأمر";
-"dataTransfer.infoMessage" = "Press to start recording";
-"dataTransfer.sendMessage" = "Send";
+"dataTransfer.infoMessage" = "اضغط لبدء التسجيل";
+"dataTransfer.sendMessage" = "إرسال";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
-"generatedMessage.invitationReceived" = "Invitation received";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
-"generatedMessage.outgoingCall" = "Outgoing call";
-"generatedMessage.incomingCall" = "Incoming call";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
-"generatedMessage.missedIncomingCall" = "Missed incoming call";
+"generatedMessage.contactAdded" = "تم إضافة جهة إتصال";
+"generatedMessage.invitationReceived" = "تم تلقي دعوة";
+"generatedMessage.invitationAccepted" = "تم قبول الدعوة";
+"generatedMessage.outgoingCall" = "مكالمة صادرة";
+"generatedMessage.incomingCall" = "مكالمة واردة";
+"generatedMessage.missedOutgoingCall" = "مكالمة صادرة فائتة";
+"generatedMessage.missedIncomingCall" = "مكالمة واردة فائتة";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 "generatedMessage.contactLeftConversation" = "Contact left conversation";
 
 //General Settings
-"generalSettings.title" = "Advanced settings";
+"generalSettings.title" = "إعدادات متقدمة";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
-"migrateAccount.title" = "Account migration";
+"migrateAccount.title" = "هجرة الحساب";
 "migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enter password";
+"migrateAccount.explanation" = "يجب ترحيل هذا الحساب";
+"migrateAccount.passwordPlaceholder" = "أدخِل كلمة المرور";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "إزالة الحساب";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
 "migrateAccount.cancel" = "إلغاء الأمر";

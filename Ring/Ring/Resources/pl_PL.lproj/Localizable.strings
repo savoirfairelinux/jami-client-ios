@@ -24,40 +24,40 @@
 "global.ok" = "Ok";
 "global.close" = "Zamknij";
 "global.share" = "Podziel się";
-"global.forward" = "Forward";
-"global.save" = "Save";
-"global.resend" = "Resend";
-"global.preview" = "Preview";
+"global.forward" = "Przekaż";
+"global.save" = "Zapisz";
+"global.resend" = "Wyślij ponownie";
+"global.preview" = "Podgląd";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
+"scan.badQrCode" = "Niepoprawny kod QR";
 "scan.search" = "Szukanie";
 
 // Smartlist
 "smartlist.yesterday" = "Wczoraj";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Publiczny Katalog";
 "smartlist.conversations" = "Rozmowy";
 "smartlist.searching" = "Szukam...";
 "smartlist.noResults" = "Brak rezultatów";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.noConversation" = "Brak konwersacji";
+"smartlist.searchBarPlaceholder" = "Wprowadź nazwę...";
+"smartlist.searchBar" = "Szukaj nowego lub istniejącego kontaktu...";
 "smartlist.noNetworkConnectivity" = "Brak połączenia z siecią";
 "smartlist.cellularAccess" = "Upewnij się, że dostęp do sieci komórkowej jest dozwolony w ustawieniach";
 "smartlist.accountsTitle" = "Konta";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.addAccountButton" = "+ Dodaj Konto";
+"smartlist.noNumber" = "Zaznaczony kontakt nie ma żadnego numeru";
+"smartlist.selectOneNumber" = "Wybierz jeden z numerów";
 "smartlist.invitations" = "Zaproszenia";
 "smartlist.accountSettings" = "Ustawienia Konta";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Ustawienia Zaawansowane";
 "smartlist.aboutJami" = "O Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.messagePlaceholder" = "Napisz wiadomość do";
+"conversation.explanationSendingLocationTo" = "Udostępniasz teraz lokalizację dla ";
+"conversation.explanationReceivingLocationFrom" = "Otrzymujesz teraz lokalizację na żywo od";
+"conversation.errorSavingImage" = "Nie udało się zapisać obrazu do galerii";
 "conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
@@ -66,49 +66,49 @@
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "Brak zaproszeń";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "Witaj w Jami !";
+"welcome.text" = "Ring jest wolnym oprogramowaniem do uniwersalnej komunikacji, respektującym wolności i prywatność swoich użytkowników";
 "welcome.linkDevice" = "Połącz to urządzenie z kontem";
 "welcome.createAccount" = "Utwórz konto Jami";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Połącz z serwerem JAMS";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Pomiń";
 "createProfile.profileCreated" = "Następne";
-"createProfile.title" = "Personalise your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.title" = "Personalizuj swój profil";
+"createProfile.enterNameLabel" = "Wprowadź nazwę, która będzie wyświetlana";
 "createProfile.enterNamePlaceholder" = "Wprowadź nazwę";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.subtitle" = "Twój profil będzie udostępniany twoim kontaktom. Możesz zmienić to kiedy chcesz.";
+"createProfile.createYourAvatar" = "Stwórz swój awatar";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Stwórz konto";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.chooseStrongPassword" = "Wybierz silne hasło, które zapamiętasz, by chronić swoje konto Jami.";
 "createAccount.enterNewUsernamePlaceholder" = "Nazwa użytkownika";
 "createAccount.newPasswordPlaceholder" = "Hasło";
 "createAccount.repeatPasswordPlaceholder" = "Potwierdź hasło";
 "createAccount.passwordCharactersNumberError" = "minimum 6 znaków";
 "createAccount.passwordNotMatchingError" = "hasła nie pasują";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "sprawdzanie dostępności...";
 "createAccount.invalidUsername" = "niepoprawna nazwa użytkownika";
 "createAccount.usernameAlreadyTaken" = "nazwa użytkownika jest już zajęta";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "nazwa użytkownika jest dostępna";
 "createAccount.loading" = "Ładowanie";
 "createAccount.waitCreateAccountTitle" = "Dodawanie konta";
-"createAccount.RegisterAUsername" = "Register a username";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.RegisterAUsername" = "Zarejestruj nazwę użytkownika";
+"createAccount.ChooseAPassword" = "Zaszyfruj moje konto";
+"createAccount.PasswordInformation" = "Wybierz hasło do zaszyfrowania twojego lokalnego konta. Nie zapomnij go, ponieważ w przeciwnym wypadku nie będziesz w stanie odzyskać konta";
 "createAccount.EnableNotifications" = "Powiadomienia";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.Recommended" = "(Rekomendowane)";
 "createAccount.UsernameNotRegisteredTitle" = "Błąd sieci";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.UsernameNotRegisteredMessage" = "Konto zostało stworzone, ale nazwa użytkownika nie została zarejestrowana";
+"createAccount.timeoutTitle" = "Konto Stworzone";
+"createAccount.timeoutMessage" = "Rejestrowanie nazwy użytkownika w toku... To może zająć chwilę";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Łączenie konta";
@@ -120,210 +120,210 @@
 "linkToAccount.explanationPinMessage" = "By wygenerować kod PIN, wejdź w ustawienia zarządzania kontem na urządzeniu z twoim kontem. W ustawieniach urządzeń wybierz \"Połącz inne urządzenie z tym kontem\". Otrzymasz kod PIN potrzebny do uzupełnienia tego formularza. PIN ważny jest tylko przez 10 minut.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Zaloguj się";
 "linkToAccountManager.passwordPlaceholder" = "Hasło";
 "linkToAccountManager.passwordLabel" = "Wpisz hasło";
 "linkToAccountManager.usernamePlaceholder" = "Nazwa użytkownika";
-"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.usernameLabel" = "Wprowadź Nazwę Użytkownika";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Wprowadź JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nie można znaleźć konta";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Konto nie mogło zostać znalezione w sieci Jami. Upewnij się, że zostało wyeksportowane z istniejącego urządzenia i, że wprowadzone dane dostępowe są poprawne.";
 "alerts.accountAddedTitle" = "Konto zostało dodane";
 "alerts.accountNoNetworkTitle" = "Nie można połączyć z siecią";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Nie można dodać konta, ponieważ Jami nie może połączyć się z siecią rozproszoną. Sprawdź stan połączenia swojego urządzenia.";
 "alerts.accountDefaultErrorTitle" = "Nieoczekiwany błąd";
 "alerts.accountDefaultErrorMessage" = "Konto nie mogło zostać utworzone.";
 "alerts.profileTakePhoto" = "Zrób zdjęcie";
 "alerts.profileUploadPhoto" = "Udostępnij zdjęcie";
 "alerts.profileCancelPhoto" = "Anuluj";
 "alerts.accountLinkedTitle" = "Łączenie konta";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "Wystąpił błąd podczas uruchamiania Jami";
 "alerts.dbFailedMessage" = "Spróbuj uruchomić ponownie aplikację";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
+"alerts.confirmBlockContact" = "Jesteś pewny(a), że chcesz zablokować ten kontakt? Historia rozmowy zostanie usunięta bezpowrotnie.";
+"alerts.confirmBlockContactTitle" = "Blokuj kontakt";
+"alerts.confirmDeleteConversation" = "Jesteś pewny(a), że chcesz usunąć tą rozmowę bezpowrotnie?";
+"alerts.confirmDeleteConversationFromContact" = "Czy jesteś pewny(a), że chcesz usunąć rozmowę z tym kontaktem?";
+"alerts.confirmDeleteConversationTitle" = "Usuń rozmowę";
+"alerts.confirmClearConversation" = "Czy jesteś pewny(-a), że chcesz usunąć rozmowę z tym kontaktem?";
+"alerts.confirmClearConversationTitle" = "Wyczyść Rozmowę";
+"alerts.noMediaPermissionsTitle" = "Uprawnienia multimediów nieprzyznane";
 "alerts.noLibraryPermissionsTitle" = "Dostęp do galerii zdjęć nie został nadany";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.noLocationPermissionsTitle" = "Nie udzielono dostępu do lokalizacji";
+"alerts.errorWrongCredentials" = "Nie można połączyć się z podanym menedżerem konta. Sprawdź swoje poświadczenia.";
+"alerts.recordVideoMessage" = "Nagraj wiadomość wideo";
+"alerts.recordAudioMessage" = "Nagraj wiadomość głosową";
+"alerts.uploadFile" = "Prześlij plik";
+"alerts.uploadPhoto" = "Prześlij zdjęcie lub film";
+"alerts.locationServiceIsDisabled" = "Włącz \"Usługi lokalizacyjne\", aby pozwolić \"Jami\" na określenie Twojej lokalizacji.";
+"alerts.locationSharing" = "Udostępnij moją lokalizację";
+"alerts.alreadylocationSharing" = "Już udostępniasz lokalizację temu użytkownikowi";
+"alerts.locationSharingDurationTitle" = "Jak długo powinno trwać udostępnianie lokalizacji?";
 "alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.locationSharingDuration1hour" = "1 godzina";
+"alerts.mapInformation" = "Informacje o mapie";
+"alerts.openStreetMapCopyright" = "© współautorzy OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "Dowiedz się więcej";
 
 //Actions
 "actions.blockAction" = "Blokuj";
 "actions.deleteAction" = "Usuń";
 "actions.cancelAction" = "Anuluj";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Wyczyść";
 "actions.backAction" = "Wstecz";
 "actions.doneAction" = "Gotowe";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Połączenie przychodzące od";
 "alerts.incomingCallButtonAccept" = "Akceptuj";
 "alerts.incomingCallButtonIgnore" = "Zignoruj";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
-"actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.startAudioCall" = "Połączenie Głosowe";
+"actions.startVideoCall" = "Połączenie Wideo";
+"actions.goToSettings" = "Idź do Ustawień";
+"actions.stopLocationSharing" = "Zatrzymaj udostępnianie";
 
 //Calls
 "calls.callItemTitle" = "Dzwoń";
 "calls.unknown" = "Nieznane";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "Ringing…";
+"calls.incomingCallInfo" = "chce z tobą rozmawiać";
+"calls.ringing" = "Dzwonienie...";
 "calls.connecting" = "Łączenie...";
 "calls.searching" = "Szukanie";
-"calls.callFinished" = "Call finished";
-"calls.currentCallWith" = "Call with ";
+"calls.callFinished" = "Rozmowa zakończona";
+"calls.currentCallWith" = "Zadzwoń z";
 "calls.haghUp" = "Rozłącz";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "maksymalizuj";
+"calls.minimize" = "minimalizuj";
 "calls.setModerator" = "set moderator";
 "calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.muteAudio" = "wycisz dźwięk";
+"calls.unmuteAudio" = "wyłącz wyciszenie dźwięku";
 "calls.lowerHand" = "lower hand";
 
 //Account Page
 "accountPage.devicesListHeader" = "Urządzenia";
 "accountPage.settingsHeader" = "Ustawienia";
 "accountPage.username" = "Nazwa użytkownika";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.usernameNotRegistered" = "nazwa użytkownika: nie zarejestrowana";
+"accountPage.credentialsHeader" = "Szczegóły konta";
+"accountPage.enableProxy" = "Włącz proxy";
 "accountPage.blockedContacts" = "Zablokowane kontakty";
-"accountPage.unblockContact" = "UNBLOCK";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
-"accountPage.saveProxyAddress" = "Save";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.unblockContact" = "ODBLOKUJ";
+"accountPage.proxyAddressAlert" = "Dostarcz adres proxy";
+"accountPage.enableProxy" = "Włącz proxy";
+"accountPage.noProxyExplanationLabel" = "Twoje urządzenie nie będzie otrzymywać powiadomień, gdy proxy jest wyłączone";
+"accountPage.saveProxyAddress" = "Zapisz";
+"accountPage.proxyPaceholder" = "Adres proxy";
 "accountPage.enableNotifications" = "Włącz powiadomienia";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertTitle" = "Serwer proxy wyłączony";
+"accountPage.proxyDisabledAlertBody" = "Włącz proxy, by otrzymywać powiadomienia";
 "accountPage.revokeDeviceTitle" = "Odwołaj urządzenie";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
-"accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.revokeDeviceMessage" = "Czy jesteś pewny, że chcesz odwołać to urządzenie? Nie można tego cofnąć.";
+"accountPage.revokeDeviceButton" = "Odwołaj";
+"accountPage.revokeDevicePlaceholder" = "Wpisz swoje hasło";
+"accountPage.deviceRevoked" = "Odwoływanie urządzenia ukończone";
+"accountPage.deviceRevocationProgress" = "Odwoływanie...";
+"accountPage.deviceRevocationSuccess" = "Urządzenie zostało odwołane";
+"accountPage.deviceRevocationTryAgain" = "Spróbuj ponownie";
 "accountPage.deviceRevocationWrongPassword" = "Nieprawidłowe hasło";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.deviceRevocationUnknownDevice" = "Nieznane urządzenie";
+"accountPage.deviceRevocationError" = "Błąd odwoływania urządzenia";
 "accountPage.namePlaceholder" = "Imię";
 "accountPage.linkDeviceTitle" = "Połącz nowe urządzenie";
 "accountPage.other" = "Inne";
 "accountPage.removeAccountTitle" = "Usuń konto";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "Klikając \"Usuń\", usuniesz to konto z tego urządzenia! Nie można cofnąć tej operacji. Dodatkowo twoja zarejestrowana nazwa użytkownika może zostać utracona.";
 "accountPage.removeAccountButton" = "Usuń";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "Register a username";
-"accountPage.passwordPlaceholder" = "Enter account password";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.shareAccountDetails" = "Udostępnij Szczegóły Konta";
+"accountPage.contactMeOnJamiTitle" = "Skontaktuj się ze mną na Jami!";
+"accountPage.contactMeOnJamiContant" = "Skontaktuj się ze mną używając \"%s\" w rozproszonej platformie komunikacyjnej Jami: https://jami.net";
+"accountPage.registerNameTitle" = "Zarejestruj nazwę użytkownika";
+"accountPage.passwordPlaceholder" = "Podaj hasło do konta";
+"accountPage.usernamePlaceholder" = "Wpisz żądaną nazwę użytkownika";
+"accountPage.registerNameErrorMessage" = "Wybrana nazwa użytkownika jest niedostępna";
+"accountPage.usernameRegistering" = "Rejestracja";
 "accountPage.usernameRegisterAction" = "Zarejestruj";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.usernameRegistrationFailed" = "Rejestracja nie powiodła się. Sprawdź swoje hasło.";
+"accountPage.createPassword" = "Utwórz hasło";
 "accountPage.changePassword" = "Zmień hasło";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
+"accountPage.oldPasswordPlaceholder" = "Wprowadź stare hasło";
+"accountPage.newPasswordPlaceholder" = "Wprowadź nowe hasło";
+"accountPage.newPasswordConfirmPlaceholder" = "Potwierdź nowe hasło";
+"accountPage.changePasswordError" = "Hasło niepoprawne";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
+"accountPage.disableBoothModeExplanation" = "Proszę wprowadź swoje hasło do konta";
 "accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
 "accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
-"accountPage.peerDiscovery" = "Auto connect on local network";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.peerDiscovery" = "Automatycznie łącz się w sieci lokalnej";
+"accountPage.autoRegistration" = "Automatyczna rejestracja po wygaśnięciu";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "Nazwa Użytkownika";
 "account.sipPassword" = "Hasło";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "Serwer SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Pełnomocnik";
-"account.createSipAccount" = "Create a SIP Account";
-"account.usernameLabel" = "Enter Username";
+"account.createSipAccount" = "Stwórz konto SIP";
+"account.usernameLabel" = "Wprowadź Nazwę Użytkownika";
 "account.passwordLabel" = "Wpisz hasło";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.serverLabel" = "Wprowadź Adres";
+"account.portLabel" = "Wprowadź Numer Portu";
+"account.accountStatus" = "Status Konta";
+"account.enableAccount" = "Włącz Konto";
 "account.statusOnline" = "Online";
 "account.statusOffline" = "Offline";
 "account.statusConnecting" = "Łączenie";
 "account.statusUnknown" = "Nieznane";
-"account.statusConnectionerror" = "Connection Error";
-"account.needMigration" = "account need to be migrated";
+"account.statusConnectionerror" = "Błąd Połączenia";
+"account.needMigration" = "konto musi zostać przeniesione";
 "account.me" = "Ja";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Brak zablokowanych kontaktów";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Połącz nowe urządzenie";
 "linkDevice.passwordError" = "Hasło, które zostało wpisane, nie odblokowuje tego konta";
 "linkDevice.networkError" = "Wystąpił błąd sieci podczas eksportowania";
 "linkDevice.defaultError" = "Wystąpił błąd podczas eksportowania.";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Aby dokończyć proces, musisz otworzyć Jami na nowym urządzeniu. Stwórz nowe konto wybierając opcję \"Połącz to urządzenie z kontem\". Twój PIN jest aktywny przez 10 minut.";
 "linkDevice.hudMessage" = "Weryfikowanie";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.startAudioCall" = "Rozpocznij połączenie głosowe";
+"contactPage.startVideoCall" = "Rozpocznij połączenie wideo";
+"contactPage.sendMessage" = "Wyślij wiadomość";
+"contactPage.clearConversation" = "Wyczyść chat";
+"contactPage.blockContact" = "Blokuj kontakt";
+"contactPage.removeConversation" = "Usuń rozmowę";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inicjalizacja...";
 "dataTransfer.readableStatusError" = "Błąd";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "W toku...";
 "dataTransfer.readableStatusRefuse" = "Odmów";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "Wysyłanie";
 "dataTransfer.readableStatusCanceled" = "Anulowano";
 "dataTransfer.sendingFailed" = "Wysyłanie nie powiodło się";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusSuccess" = "Ukończono";
 "dataTransfer.readableStatusAccept" = "Akceptuj";
 "dataTransfer.readableStatusCancel" = "Anuluj";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
-"notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
-"notifications.newFile" = "New file";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"notifications.incomingCall" = "Przychodzące Połączenie";
+"notifications.missedCall" = "Nieodebrane połączenie";
+"notifications.acceptCall" = "ODBIERZ";
+"notifications.refuseCall" = "ODMÓW";
+"notifications.newFile" = "Nowy plik";
+"notifications.locationSharingStarted" = "Przychodzące udostępnianie lokalizacji rozpoczęte";
+"notifications.locationSharingStopped" = "Przychodzące udostępnianie lokalizacji zakończone";
+"dataTransfer.readableStatusAwaiting" = "W toku...";
 "dataTransfer.readableStatusRefuse" = "Odmów";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "Wysyłanie";
 "dataTransfer.readableStatusCanceled" = "Anulowano";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusSuccess" = "Ukończono";
 "dataTransfer.readableStatusAccept" = "Akceptuj";
 "dataTransfer.readableStatusCancel" = "Anuluj";
 "dataTransfer.infoMessage" = "Naciśnij aby rozpocząć nagrywanie";
@@ -338,23 +338,23 @@
 "generatedMessage.incomingCall" = "Połączenie przychodzące";
 "generatedMessage.missedOutgoingCall" = "Nieodebrane połączenie wychodzące";
 "generatedMessage.missedIncomingCall" = "Nieodebrane połączenie przychodzące";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.liveLocationSharing" = "Udostępnianie lokalizacji na żywo";
+"generatedMessage.contactLeftConversation" = "Kontakt opuścił konwersacje";
 
 //General Settings
 "generalSettings.title" = "Ustawienia zaawansowane";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoAcceleration" = "Włącz przyspieszenie video";
 
 //Migrate Account
 "migrateAccount.title" = "Przenoszenie konta";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.migrateButton" = "Przenieś Konto";
+"migrateAccount.explanation" = "To konto musi zostać przeniesione";
 "migrateAccount.passwordPlaceholder" = "Wprowadź hasło";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.passwordExplanation" = "Aby kontynuować przenoszenie, musisz wprowadzić hasło, które zostało użytego do tego konta.";
 "migrateAccount.removeAccount" = "Usuń konto";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.error" = "Nie udało się przenieść twojego konta. Możesz spróbować ponownie albo usunąć swoje konto.";
+"migrateAccount.migrating" = "Przenoszenie...";
 "migrateAccount.cancel" = "Anuluj";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "Przenieś Inne Konto";
 
 
