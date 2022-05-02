@@ -58,12 +58,12 @@
 "conversation.explanationSendingLocationTo" = "Sie teilen Ihren aktuellen Standort mit ";
 "conversation.explanationReceivingLocationFrom" = "Sie erhalten derzeit den aktuellen Standort von";
 "conversation.errorSavingImage" = "Bild konnte nicht in der Galerie gespeichert werden";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.receivedRequest" = "\%s\ hat Ihnen eine Gesprächsanfrage gesendet.";
+"conversation.requestMessage" = "Hallo,\nMöchten Sie dem Gespräch beitreten?";
+"conversation.notContact" = "\%s\ befindet sich nicht in Ihrer Kontaktliste.";
+"conversation.sendRequest" = "Senden Sie ihm/ihr eine Kontaktanfrage, um sich gemeinsam austauschen zu können";
 "conversation.synchronizationTitle" = "Du haben die Unterhaltungsanfrage angenommen.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Wir warten auf \%s\ Verbindungen, um die Konversation zu synchronisieren.";
 
 //Invitations
 "invitations.noInvitations" = "Keine Einladungen";
@@ -198,7 +198,7 @@
 "calls.removeModerator" = "Moderator freistellen";
 "calls.muteAudio" = "Stummschalten";
 "calls.unmuteAudio" = "Stummschaltung aufheben";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "Hand senken";
 
 //Account Page
 "accountPage.devicesListHeader" = "Geräte";

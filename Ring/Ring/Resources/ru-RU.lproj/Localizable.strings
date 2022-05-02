@@ -20,13 +20,13 @@
 
 // Global
 "global.homeTabBarTitle" = "Разговоры";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Настройки аккаунта";
 "global.ok" = "В порядке";
 "global.close" = "Закрыть";
 "global.share" = "Поделится";
-"global.forward" = "Forward";
+"global.forward" = "Переслать";
 "global.save" = "Сохранить";
-"global.resend" = "Resend";
+"global.resend" = "Отправить повторно";
 "global.preview" = "Предпросмотр";
 
 // Scan
@@ -35,13 +35,13 @@
 
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Публичный Каталог";
 "smartlist.conversations" = "Разговоры";
 "smartlist.searching" = "Поиск...";
 "smartlist.noResults" = "Нет результатов";
 "smartlist.noConversation" = "Нет разговоров";
 "smartlist.searchBarPlaceholder" = "Введите имя...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Поиск нового или существующего контакта";
 "smartlist.noNetworkConnectivity" = "Отсутствует сетевое подключение";
 "smartlist.cellularAccess" = "Убедитесь, что сотовый доступ предоставляется в настройках";
 "smartlist.accountsTitle" = "Учетные записи";
@@ -49,46 +49,46 @@
 "smartlist.noNumber" = "Выбранный контакт не имеет номера";
 "smartlist.selectOneNumber" = "Выберите один из номеров";
 "smartlist.invitations" = "Приглашения";
-"smartlist.accountSettings" = "Account Settings";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.accountSettings" = "Настройки аккаунта";
+"smartlist.advancedSettings" = "Расширенные настройки";
 "smartlist.aboutJami" = "О Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.messagePlaceholder" = "Написать сообщение";
+"conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
+"conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
+"conversation.errorSavingImage" = "Не удалось сохранить изображение в галерею";
+"conversation.receivedRequest" = "\%s\ отправил вам запрос для разговора.";
+"conversation.requestMessage" = "Привет,\nВы хотите присоединиться к разговору?";
+"conversation.notContact" = "\%s\ нет в вашем списке контактов.";
+"conversation.sendRequest" = "Отправьте ему/ей запрос контакта, чтобы иметь возможность совместного обмена";
+"conversation.synchronizationTitle" = "Вы приняли запрос на беседу.";
+"conversation.synchronizationMessage" = "Мы ждем \%s\ подключения для синхронизации разговора.";
 
 //Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "Приглашений нет";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
-"welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
+"welcome.title" = "Добро пожаловать в Jami !";
+"welcome.text" = "Jami - это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
 "welcome.linkDevice" = "Привязать это устройство к аккаунту";
 "welcome.createAccount" = "Создать учётную запись Jami";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Подключиться к JAMS серверу";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустить";
 "createProfile.profileCreated" = "Далее";
-"createProfile.title" = "Personalise your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.title" = "Персонализируйте свой профиль";
+"createProfile.enterNameLabel" = "Введите отображаемое имя";
 "createProfile.enterNamePlaceholder" = "Введите имя";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.subtitle" = "Ваш профиль будет доступен только вашим контактам. Вы можете изменить это в любое время.";
+"createProfile.createYourAvatar" = "Создайте свой аватар";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your account";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.createAccountFormTitle" = "Создайте свой аккаунт";
+"createAccount.chooseStrongPassword" = "Выберите надёжный пароль, который вы запомните, чтобы защитить ваш аккаунт Jami.";
 "createAccount.enterNewUsernamePlaceholder" = "Имя пользователя";
 "createAccount.newPasswordPlaceholder" = "Пароль";
 "createAccount.repeatPasswordPlaceholder" = "Подтверждение пароля";
@@ -97,18 +97,18 @@
 "createAccount.lookingForUsernameAvailability" = "проверка доступности…";
 "createAccount.invalidUsername" = "неверное имя пользователя ";
 "createAccount.usernameAlreadyTaken" = "имя пользователя уже занято";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "имя пользователя доступно";
 "createAccount.loading" = "Загрузка";
 "createAccount.waitCreateAccountTitle" = "Добавление аккаунта";
-"createAccount.RegisterAUsername" = "Register a username";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
+"createAccount.RegisterAUsername" = "Зарегистрировать имя пользователя";
+"createAccount.ChooseAPassword" = "Зашифровать мой аккаунт";
+"createAccount.PasswordInformation" = "Выберите пароль для шифрования вашего локального аккаунта. Не забывайте его или вы не сможете восстановить свой аккаунт";
 "createAccount.EnableNotifications" = "Уведомления";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.Recommended" = "(Рекомендовано)";
 "createAccount.UsernameNotRegisteredTitle" = "Ошибка сети";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.UsernameNotRegisteredMessage" = "Аккаунт был создан но имя пользователя не было зарегистрировано";
+"createAccount.timeoutTitle" = "Аккаунт создан";
+"createAccount.timeoutMessage" = "Регистрация имени пользователя в процессе.... Это может занять некоторое время.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Привязка аккаунта";
@@ -120,17 +120,17 @@
 "linkToAccount.explanationPinMessage" = "Чтобы сгенерировать PIN-код, перейдите к настройкам управления аккаунтами на устройстве, содержащий аккаунт, которую вы хотите использовать. В настройках устройства выберите \"связать другое устройство с этим аккаунтом\". Вы получите необходимый PIN-код для заполнения этой формы. PIN-код действителен только в течение 10 минут.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Войти";
 "linkToAccountManager.passwordPlaceholder" = "Пароль";
 "linkToAccountManager.passwordLabel" = "Введите пароль";
 "linkToAccountManager.usernamePlaceholder" = "Имя пользователя";
-"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.usernameLabel" = "Введите имя пользователя";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Введите URL-адрес JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не удаётся найти аккаунт";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Не удалось найти аккаунт в сети Jami. Удостоверьтесь, что он был экспортирован в сеть Jami с существующего устройства, и что предоставленные идентификационные данные верны.";
 "alerts.accountAddedTitle" = "Аккаунт добавлен";
 "alerts.accountNoNetworkTitle" = "Не удаётся соединиться к сети";
 "alerts.accountNoNetworkMessage" = "Не удалось добавить учетную запись, поскольку Jami не удалось подключиться к распределенной сети. Проверьте подключение устройства.";
@@ -140,32 +140,32 @@
 "alerts.profileUploadPhoto" = "Загрузить фото";
 "alerts.profileCancelPhoto" = "Отмена";
 "alerts.accountLinkedTitle" = "Привязать аккаунт";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "Произошла ошибка при запуске Jami";
 "alerts.dbFailedMessage" = "Пожалуйста, закройте приложение и попробуйте открыть его снова";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
-"alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
+"alerts.confirmBlockContact" = "Вы уверены, что хотите заблокировать этот контакт? История разговоров с этим контактом также будет безвозвратно удалена.";
+"alerts.confirmBlockContactTitle" = "Заблокировать контакт";
+"alerts.confirmDeleteConversation" = "Вы уверены, что хотите безвозвратно удалить этот разговор?";
+"alerts.confirmDeleteConversationFromContact" = "Вы уверены, что хотите удалить разговор с этим контактом?";
+"alerts.confirmDeleteConversationTitle" = "Удалить разговор";
+"alerts.confirmClearConversation" = "Вы уверены, что хотите удалить разговор с этим контактом?";
+"alerts.confirmClearConversationTitle" = "Очистить разговор";
+"alerts.noMediaPermissionsTitle" = "Не прав доступа к медиа";
+"alerts.noLibraryPermissionsTitle" = "Не предоставлен доступ к библиотеке фотографий";
+"alerts.noLocationPermissionsTitle" = "Доступ к местоположению не предоставлен";
+"alerts.errorWrongCredentials" = "Не удалось подключиться к предоставленному менеджеру учетных записей. Пожалуйста, проверьте Ваши учетные данные.";
+"alerts.recordVideoMessage" = "Записать видео-сообщение";
+"alerts.recordAudioMessage" = "Записать голосовое сообщение";
+"alerts.uploadFile" = "Загрузить файл";
+"alerts.uploadPhoto" = "Загрузить фото или видео";
+"alerts.locationServiceIsDisabled" = "Включите «Службы определения местоположения», чтобы позволить \"Jami\" определять ваше местоположение.";
+"alerts.locationSharing" = "Транслировать мое местоположение";
+"alerts.alreadylocationSharing" = "Местоположением с этим пользователем уже поделился";
+"alerts.locationSharingDurationTitle" = "Как долго должен продолжаться обмен местоположением?";
+"alerts.locationSharingDuration10min" = "10 мин";
+"alerts.locationSharingDuration1hour" = "1 час";
+"alerts.mapInformation" = "Информация о карте";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap авторы";
+"alerts.openStreetMapCopyrightMoreInfo" = "Узнать больше";
 
 //Actions
 "actions.blockAction" = "Заблокировать";
@@ -174,90 +174,90 @@
 "actions.clearAction" = "Очистить";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Ок";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Входящий вызов от";
 "alerts.incomingCallButtonAccept" = "Принять";
 "alerts.incomingCallButtonIgnore" = "Игнорировать";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
-"actions.goToSettings" = "Go to Settings";
+"actions.startAudioCall" = "Голосовой звонок";
+"actions.startVideoCall" = "Видео звонок";
+"actions.goToSettings" = "Перейти к настройкам";
 "actions.stopLocationSharing" = "Прекратить делиться";
 
 //Calls
 "calls.callItemTitle" = "Вызов";
 "calls.unknown" = "Неизвестно";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "Ringing…";
+"calls.incomingCallInfo" = "хочет поговорить с вами";
+"calls.ringing" = "Вызов…";
 "calls.connecting" = "Соединение…";
 "calls.searching" = "Поиск...";
-"calls.callFinished" = "Call finished";
-"calls.currentCallWith" = "Call with ";
-"calls.haghUp" = "hang up";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
-"calls.lowerHand" = "lower hand";
+"calls.callFinished" = "Вызов завершен";
+"calls.currentCallWith" = "Вызов с";
+"calls.haghUp" = "повесить трубку";
+"calls.maximize" = "максимизировать";
+"calls.minimize" = "минимизировать";
+"calls.setModerator" = "установить модератора";
+"calls.removeModerator" = "отключить модератора";
+"calls.muteAudio" = "отключить звук";
+"calls.unmuteAudio" = "включить звук";
+"calls.lowerHand" = "опущенная рука";
 
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
 "accountPage.settingsHeader" = "Настройки";
 "accountPage.username" = "Имя пользователя";
-"accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
+"accountPage.usernameNotRegistered" = "имя пользователя: не зарегистрировано";
+"accountPage.credentialsHeader" = "Информация об аккаунте";
 "accountPage.enableProxy" = "Включить Прокси";
 "accountPage.blockedContacts" = "Заблокированные контакты";
-"accountPage.unblockContact" = "UNBLOCK";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
+"accountPage.unblockContact" = "РАЗБЛОКИРОВАТЬ";
+"accountPage.proxyAddressAlert" = "Укажите адрес прокси";
 "accountPage.enableProxy" = "Включить Прокси";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.noProxyExplanationLabel" = "Ваше устройство не будет получать уведомлений если прокси выключен";
 "accountPage.saveProxyAddress" = "Сохранить";
-"accountPage.proxyPaceholder" = "Proxy address";
-"accountPage.enableNotifications" = "Enable Notifications";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyPaceholder" = "Адрес прокси";
+"accountPage.enableNotifications" = "Включить Уведомления";
+"accountPage.proxyDisabledAlertTitle" = "Прокси-сервер выключен";
+"accountPage.proxyDisabledAlertBody" = "Для получения уведомлений, пожалуйста, включите прокси";
 "accountPage.revokeDeviceTitle" = "Отозвать устройство";
 "accountPage.revokeDeviceMessage" = "Ты уверен, что хотите отозвать это устройство? Это действие не может быть отменено.";
 "accountPage.revokeDeviceButton" = "Отозвать";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
-"accountPage.deviceRevoked" = "Device revocation completed";
+"accountPage.revokeDevicePlaceholder" = "Введите ваш пароль";
+"accountPage.deviceRevoked" = "Отзыв устройства завершенно";
 "accountPage.deviceRevocationProgress" = "Отзыв…";
 "accountPage.deviceRevocationSuccess" = "Устройство было отозвано";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationTryAgain" = "Попробуйте снова";
 "accountPage.deviceRevocationWrongPassword" = "Неверный пароль";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.deviceRevocationUnknownDevice" = "Неизвестное устройство";
+"accountPage.deviceRevocationError" = "Ошибка отзыва устройства";
 "accountPage.namePlaceholder" = "Имя";
 "accountPage.linkDeviceTitle" = "Привязать другое устройство";
 "accountPage.other" = "Другие";
-"accountPage.removeAccountTitle" = "Remove account";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountTitle" = "Удаление учетной записи";
+"accountPage.removeAccountMessage" = "Нажав кнопку \"Удалить\", вы удалите эту учетную запись на этом устройстве! Это действие не может быть отменено. Кроме того, ваше зарегистрированное имя может быть утеряно.";
 "accountPage.removeAccountButton" = "Убрать";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "Register a username";
-"accountPage.passwordPlaceholder" = "Enter account password";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.shareAccountDetails" = "Поделиться информацией об учетной записи";
+"accountPage.contactMeOnJamiTitle" = "Свяжитесь со мной в Jami!";
+"accountPage.contactMeOnJamiContant" = "Свяжитесь со мной, используя \"%s\" на распределенной коммуникационной платформе Jami: https://jami.net";
+"accountPage.registerNameTitle" = "Зарегистрировать имя пользователя";
+"accountPage.passwordPlaceholder" = "Введите пароль вашего аккаунта";
+"accountPage.usernamePlaceholder" = "Введите желаемое имя пользователя";
+"accountPage.registerNameErrorMessage" = "Выбранное имя пользователя недоступно";
+"accountPage.usernameRegistering" = "Регистрация";
 "accountPage.usernameRegisterAction" = "Зарегистрировать";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.usernameRegistrationFailed" = "Ошибка регистрации. Пожалуйста, проверьте пароль.";
+"accountPage.createPassword" = "Создать пароль";
 "accountPage.changePassword" = "Изменить пароль";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.oldPasswordPlaceholder" = "Введите старый пароль";
+"accountPage.newPasswordPlaceholder" = "Введите новый пароль";
+"accountPage.newPasswordConfirmPlaceholder" = "Подтвердите новый пароль";
+"accountPage.changePasswordError" = "Пароль неверный ";
+"accountPage.enableBoothMode" = "Включить режим кабинки";
+"accountPage.disableBoothMode" = "Выключить режим кабинки";
+"accountPage.disableBoothModeExplanation" = "Пожалуйста, укажите пароль вашей учетной записи";
+"accountPage.boothModeExplanation" = "В режиме кабинки история разговоров не сохраняется, а функциональность Jami ограничена исходящими звонками. Когда вы включите режим кабинки, все ваши разговоры будут удалены.";
+"accountPage.noBoothMode" = "Для включения режима кабинки необходимо сначала создать пароль учетной записи.";
+"accountPage.boothModeAlertMessage" = "После включения режима кабинки все ваши разговоры будут удалены.";
 "accountPage.peerDiscovery" = "Автоматическое соединение в локальной сети";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Автоматическая регистрация после истечения срока действия";
 
 //Account
 "account.sipUsername" = "Имя пользователя";
@@ -265,68 +265,68 @@
 "account.sipServer" = "SIP-сервер";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
-"account.createSipAccount" = "Create a SIP Account";
-"account.usernameLabel" = "Enter Username";
+"account.createSipAccount" = "Создать SIP Аккаунт";
+"account.usernameLabel" = "Введите имя пользователя";
 "account.passwordLabel" = "Введите пароль";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.serverLabel" = "Введите адрес";
+"account.portLabel" = "Введите номер порта";
+"account.accountStatus" = "Статус аккаунта";
+"account.enableAccount" = "Включить аккаунт";
 "account.statusOnline" = "В сети";
 "account.statusOffline" = "Не в сети";
 "account.statusConnecting" = "Подключение";
 "account.statusUnknown" = "Неизвестно";
-"account.statusConnectionerror" = "Connection Error";
-"account.needMigration" = "account need to be migrated";
+"account.statusConnectionerror" = "Ошибка подключения";
+"account.needMigration" = "аккаунт нуждается в переносе";
 "account.me" = "Я";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Нет заблокированных контактов";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Привязать новое устройство";
 "linkDevice.passwordError" = "Введенный пароль не разблокирует этот аккаунт";
 "linkDevice.networkError" = "Во время экспорта произошла сетевая ошибка";
 "linkDevice.defaultError" = "Во время экспорта произошла ошибка";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "Для завершения процесса Вам необходимо запустить Jami на новом устройстве и выбрать пункт \"Привязать это устройство к аккаунту\". Ваш PIN действителен в течение 10 минут";
 "linkDevice.hudMessage" = "Верификация";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.startAudioCall" = "Сделать аудиозвонок";
+"contactPage.startVideoCall" = "Сделать видеозвонок";
+"contactPage.sendMessage" = "Отправить сообщение";
+"contactPage.clearConversation" = "Очистить чат";
+"contactPage.blockContact" = "Заблокировать контакт";
+"contactPage.removeConversation" = "Удалить диалог";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Инициализация…";
 "dataTransfer.readableStatusError" = "Ошибка";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "Ожидание…";
 "dataTransfer.readableStatusRefuse" = "Отказать";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "Передача…";
 "dataTransfer.readableStatusCanceled" = "Отменено";
-"dataTransfer.sendingFailed" = "Failed to send";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.sendingFailed" = "Не удалось отправить";
+"dataTransfer.readableStatusSuccess" = "Завершено";
 "dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
-"notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
-"notifications.newFile" = "New file";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"notifications.incomingCall" = "Входящий вызов";
+"notifications.missedCall" = "Пропущенный вызов";
+"notifications.acceptCall" = "ПРИНЯТЬ";
+"notifications.refuseCall" = "ОТКАЗАТЬ";
+"notifications.newFile" = "Новый файл";
+"notifications.locationSharingStarted" = "Начался обмен местоположениями";
+"notifications.locationSharingStopped" = "Входящий обмен местоположением остановился";
+"dataTransfer.readableStatusAwaiting" = "Ожидание…";
 "dataTransfer.readableStatusRefuse" = "Отказать";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "Передача…";
 "dataTransfer.readableStatusCanceled" = "Отменено";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusSuccess" = "Завершено";
 "dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Нажмите, чтобы начать запись";
 "dataTransfer.sendMessage" = "Отправть";
 
 
@@ -338,23 +338,23 @@
 "generatedMessage.incomingCall" = "Входящий вызов";
 "generatedMessage.missedOutgoingCall" = "Пропущенный исходящий";
 "generatedMessage.missedIncomingCall" = "Пропущенный входящий";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
+"generatedMessage.contactLeftConversation" = "Контакт покинул разговор";
 
 //General Settings
 "generalSettings.title" = "Дополнительные настройки";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoAcceleration" = "Разрешить видео-ускорение";
 
 //Migrate Account
 "migrateAccount.title" = "Миграция аккаунта";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.migrateButton" = "Перенос аккаунта";
+"migrateAccount.explanation" = "Этот аккаунт должен быть перенесен";
 "migrateAccount.passwordPlaceholder" = "Введите пароль";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.passwordExplanation" = "Чтобы завершить перенос, необходимо ввести пароль, используемый для этого аккаунта";
+"migrateAccount.removeAccount" = "Удаление учетной записи";
+"migrateAccount.error" = "Ошибка при переносе Вашего аккаунта. Вы можете попробовать повторно или удалить Ваш аккаунт.";
+"migrateAccount.migrating" = "Перенос...";
 "migrateAccount.cancel" = "Отмена";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "Перенос другого аккаунта";
 
 

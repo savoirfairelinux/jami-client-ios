@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Conversations";
+"global.homeTabBarTitle" = "대화";
 "global.meTabBarTitle" = "Account Settings";
 "global.ok" = "확인";
 "global.close" = "Close";
@@ -36,8 +36,8 @@
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";
-"smartlist.conversations" = "Conversations";
-"smartlist.searching" = "Searching...";
+"smartlist.conversations" = "대화";
+"smartlist.searching" = "검색 중...";
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
@@ -73,13 +73,13 @@
 //Welcome Screen
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
+"welcome.linkDevice" = "이 장치를 계정에 연결하기";
 "welcome.createAccount" = "Create a Jami account";
 "welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
-"createProfile.profileCreated" = "Next";
+"createProfile.profileCreated" = "다음";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
 "createProfile.enterNamePlaceholder" = "Enter name";
@@ -87,11 +87,11 @@
 "createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your account";
+"createAccount.createAccountFormTitle" = "계정 생성하기";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
-"createAccount.enterNewUsernamePlaceholder" = "Username";
-"createAccount.newPasswordPlaceholder" = "Password";
-"createAccount.repeatPasswordPlaceholder" = "Confirm password";
+"createAccount.enterNewUsernamePlaceholder" = "사용자명";
+"createAccount.newPasswordPlaceholder" = "암호";
+"createAccount.repeatPasswordPlaceholder" = "암호 확인";
 "createAccount.passwordCharactersNumberError" = "6 characters minimum";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
@@ -113,7 +113,7 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
 "linkToAccount.linkButtonTitle" = "Link device";
-"linkToAccount.passwordPlaceholder" = "Password";
+"linkToAccount.passwordPlaceholder" = "암호";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Enter Password";
 "linkToAccount.pinLabel" = "Enter PIN";
@@ -121,9 +121,9 @@
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "Password";
+"linkToAccountManager.passwordPlaceholder" = "암호";
 "linkToAccountManager.passwordLabel" = "Enter Password";
-"linkToAccountManager.usernamePlaceholder" = "Username";
+"linkToAccountManager.usernamePlaceholder" = "사용자명";
 "linkToAccountManager.usernameLabel" = "Enter Username";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
@@ -136,7 +136,7 @@
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
-"alerts.profileTakePhoto" = "Take photo";
+"alerts.profileTakePhoto" = "사진 찍기";
 "alerts.profileUploadPhoto" = "Upload photo";
 "alerts.profileCancelPhoto" = "취소";
 "alerts.accountLinkedTitle" = "Linking account";
@@ -175,15 +175,15 @@
 "actions.backAction" = "Back";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "Accept";
-"alerts.incomingCallButtonIgnore" = "Ignore";
+"alerts.incomingCallButtonAccept" = "수락";
+"alerts.incomingCallButtonIgnore" = "무시";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
 "actions.stopLocationSharing" = "Stop sharing";
 
 //Calls
-"calls.callItemTitle" = "Call";
+"calls.callItemTitle" = "통화";
 "calls.unknown" = "Unknown";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
@@ -201,9 +201,9 @@
 "calls.lowerHand" = "lower hand";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "Settings";
-"accountPage.username" = "Username";
+"accountPage.devicesListHeader" = "장치";
+"accountPage.settingsHeader" = "설정";
+"accountPage.username" = "사용자명";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
@@ -228,7 +228,7 @@
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Name";
+"accountPage.namePlaceholder" = "이름";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Other";
 "accountPage.removeAccountTitle" = "Remove account";
@@ -261,10 +261,10 @@
 
 //Account
 "account.sipUsername" = "User Name";
-"account.sipPassword" = "Password";
+"account.sipPassword" = "암호";
 "account.sipServer" = "SIP Server";
-"account.port" = "Port";
-"account.proxyServer" = "Proxy";
+"account.port" = "포트";
+"account.proxyServer" = "프록시";
 "account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Enter Password";
@@ -308,7 +308,7 @@
 "dataTransfer.readableStatusCanceled" = "취소됨";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "수락";
 "dataTransfer.readableStatusCancel" = "취소";
 
 //Notifications
@@ -324,7 +324,7 @@
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "취소됨";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
+"dataTransfer.readableStatusAccept" = "수락";
 "dataTransfer.readableStatusCancel" = "취소";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Send";

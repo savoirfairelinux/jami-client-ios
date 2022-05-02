@@ -21,11 +21,11 @@
 // Global
 "global.homeTabBarTitle" = "對話";
 "global.meTabBarTitle" = "帳號設定";
-"global.ok" = "確定";
+"global.ok" = "确定";
 "global.close" = "關閉";
 "global.share" = "分享";
 "global.forward" = "转发";
-"global.save" = "儲存";
+"global.save" = "保存";
 "global.resend" = "重发";
 "global.preview" = "預覽";
 
@@ -44,7 +44,7 @@
 "smartlist.searchBar" = "搜索新的或者已存在的联系人...";
 "smartlist.noNetworkConnectivity" = "无网络连接";
 "smartlist.cellularAccess" = "確定在您的設定中已授權使用行動通訊";
-"smartlist.accountsTitle" = "帳號";
+"smartlist.accountsTitle" = "账户";
 "smartlist.addAccountButton" = "+ 添加账户";
 "smartlist.noNumber" = "选定的连接没有任何数字";
 "smartlist.selectOneNumber" = "選取其中一個號碼";
@@ -87,10 +87,10 @@
 "createProfile.createYourAvatar" = "创建您的头像";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "创建你的账户";
+"createAccount.createAccountFormTitle" = "创建您的账户";
 "createAccount.chooseStrongPassword" = "选择一个强密码并记住它来保护您的 Jami 账户。";
 "createAccount.enterNewUsernamePlaceholder" = "使用者名";
-"createAccount.newPasswordPlaceholder" = "密码";
+"createAccount.newPasswordPlaceholder" = "密碼";
 "createAccount.repeatPasswordPlaceholder" = "确认密码";
 "createAccount.passwordCharactersNumberError" = "最少 6 字符";
 "createAccount.passwordNotMatchingError" = "两次输入的密码不匹配";
@@ -113,7 +113,7 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "关联账户";
 "linkToAccount.linkButtonTitle" = "关联设备";
-"linkToAccount.passwordPlaceholder" = "密码";
+"linkToAccount.passwordPlaceholder" = "密碼";
 "linkToAccount.pinPlaceholder" = "PIN 碼";
 "linkToAccount.passwordLabel" = "输入密码";
 "linkToAccount.pinLabel" = "输入 PIN";
@@ -121,7 +121,7 @@
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "注册";
-"linkToAccountManager.passwordPlaceholder" = "密码";
+"linkToAccountManager.passwordPlaceholder" = "密碼";
 "linkToAccountManager.passwordLabel" = "输入密码";
 "linkToAccountManager.usernamePlaceholder" = "使用者名";
 "linkToAccountManager.usernameLabel" = "输入用户名";
@@ -212,9 +212,9 @@
 "accountPage.proxyAddressAlert" = "提供代理地址";
 "accountPage.enableProxy" = "启用代理";
 "accountPage.noProxyExplanationLabel" = "代理禁用后您将无法收到通知";
-"accountPage.saveProxyAddress" = "儲存";
+"accountPage.saveProxyAddress" = "保存";
 "accountPage.proxyPaceholder" = "代理地址";
-"accountPage.enableNotifications" = "啟用通知";
+"accountPage.enableNotifications" = "启用通知";
 "accountPage.proxyDisabledAlertTitle" = "代理服务器已禁用";
 "accountPage.proxyDisabledAlertBody" = "为了接受通知，请开启代理";
 "accountPage.revokeDeviceTitle" = "吊销设备";
@@ -261,10 +261,10 @@
 
 //Account
 "account.sipUsername" = "用户名";
-"account.sipPassword" = "密码";
+"account.sipPassword" = "密碼";
 "account.sipServer" = "SIP 伺服器";
 "account.port" = "埠";
-"account.proxyServer" = "代理";
+"account.proxyServer" = "代理服務器";
 "account.createSipAccount" = "创建 SIP 账户";
 "account.usernameLabel" = "输入用户名";
 "account.passwordLabel" = "输入密码";
@@ -287,7 +287,7 @@
 "linkDevice.title" = "关联新设备";
 "linkDevice.passwordError" = "您输入的密码无法解锁该账户";
 "linkDevice.networkError" = "當匯出時遇到網路錯誤";
-"linkDevice.defaultError" = "輸出時發生錯誤";
+"linkDevice.defaultError" = "當匯出時遇到錯誤";
 "linkDevice.explanationMessage" = "要完成关联过程，请在您的新设备上打开 Jami 并选择“将这台设备关联到账户”。PIN 码有效期为 10 分钟。";
 "linkDevice.hudMessage" = "正在驗證";
 
@@ -303,7 +303,7 @@
 "dataTransfer.readableStatusCreated" = "正在初始化…";
 "dataTransfer.readableStatusError" = "错误";
 "dataTransfer.readableStatusAwaiting" = "验证中";
-"dataTransfer.readableStatusRefuse" = "拒絕";
+"dataTransfer.readableStatusRefuse" = "拒接";
 "dataTransfer.readableStatusOngoing" = "传递中";
 "dataTransfer.readableStatusCanceled" = "已取消";
 "dataTransfer.sendingFailed" = "发送失败";
@@ -320,14 +320,14 @@
 "notifications.locationSharingStarted" = "传入位置分享已开始";
 "notifications.locationSharingStopped" = "传入位置分享已停止";
 "dataTransfer.readableStatusAwaiting" = "验证中";
-"dataTransfer.readableStatusRefuse" = "拒絕";
+"dataTransfer.readableStatusRefuse" = "拒接";
 "dataTransfer.readableStatusOngoing" = "传递中";
 "dataTransfer.readableStatusCanceled" = "已取消";
 "dataTransfer.readableStatusSuccess" = "完成";
 "dataTransfer.readableStatusAccept" = "接受";
 "dataTransfer.readableStatusCancel" = "取消";
 "dataTransfer.infoMessage" = "按下开始录音";
-"dataTransfer.sendMessage" = "發送";
+"dataTransfer.sendMessage" = "发送";
 
 
 //Generated Message
@@ -335,7 +335,7 @@
 "generatedMessage.invitationReceived" = "已接受邀请";
 "generatedMessage.invitationAccepted" = "已接受邀請";
 "generatedMessage.outgoingCall" = "撥出電話";
-"generatedMessage.incomingCall" = "來電";
+"generatedMessage.incomingCall" = "来电";
 "generatedMessage.missedOutgoingCall" = "未接去電";
 "generatedMessage.missedIncomingCall" = "未接來電";
 "generatedMessage.liveLocationSharing" = "实时位置分享";
