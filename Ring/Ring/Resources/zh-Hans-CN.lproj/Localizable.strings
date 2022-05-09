@@ -74,7 +74,7 @@
 "welcome.title" = "欢迎来到Jami！";
 "welcome.text" = "Ring 是一个保护用户的隐私和自由的通用自由软件。";
 "welcome.linkDevice" = "将此设备与一个账户进行关联";
-"welcome.createAccount" = "创建一个Jami账户";
+"welcome.createAccount" = "创建 Jami 账户";
 "welcome.connectToManager" = "连接到 JAMS 服务器";
 
 //Creation Profile Screen
@@ -130,7 +130,7 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "无法找到账户";
-"alerts.accountCannotBeFoundMessage" = "无法在Jami网络中找到账户。 请确保它是从现有设备的Jami上导出的，并且提供的凭证是有效的。";
+"alerts.accountCannotBeFoundMessage" = "无法在 Jami 网络中找到账户。 请确保它是从现有设备的 Jami 上导出的，并且提供的凭证是有效的。";
 "alerts.accountAddedTitle" = "用户已添加";
 "alerts.accountNoNetworkTitle" = "无法连接至网络";
 "alerts.accountNoNetworkMessage" = "因 Jami 无法连接到分布式网络而无法添加账户。检查您设备的网络连接。";
