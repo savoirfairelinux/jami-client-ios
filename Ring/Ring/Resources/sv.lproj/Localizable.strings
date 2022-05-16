@@ -24,9 +24,9 @@
 "global.ok" = "OK";
 "global.close" = "Stäng";
 "global.share" = "Dela";
-"global.forward" = "Forward";
+"global.forward" = "Framåt";
 "global.save" = "Spara";
-"global.resend" = "Resend";
+"global.resend" = "Skicka igen";
 "global.preview" = "Förhandsvisa";
 
 // Scan
@@ -41,7 +41,7 @@
 "smartlist.noResults" = "Inget resultat";
 "smartlist.noConversation" = "Inga konversationer";
 "smartlist.searchBarPlaceholder" = "Ange namn...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Sök efter nya eller existerande kontakter...";
 "smartlist.noNetworkConnectivity" = "Ingen nätverksanslutning";
 "smartlist.cellularAccess" = "Tillse att mobilnätsåtkomst tillåts i dina inställningar";
 "smartlist.accountsTitle" = "Konton";
@@ -55,15 +55,15 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "Skriv meddelanden till";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
+"conversation.explanationSendingLocationTo" = "Du delar nu din plats med ";
+"conversation.explanationReceivingLocationFrom" = "Du tar emot en live sändning från ";
+"conversation.errorSavingImage" = "Misslyckades spara till galleriet ";
+"conversation.receivedRequest" = "\%s\ har skickat en förfrågan om konversation";
+"conversation.requestMessage" = "Hej! \nVill du gå med i konversationen? ";
 "conversation.notContact" = "\%s\ finns inte i din kontaktlista";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequest" = "Skicka en kontaktförfrågan för att kunna ha ett utbyte ";
 "conversation.synchronizationTitle" = "Du har accepterat konversationsförfrågan.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Vi väntar på att \1%s\ ansluter och synkroniserar konversationen ";
 
 //Invitations
 "invitations.noInvitations" = "Inga inbjudningar";
@@ -126,7 +126,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Användarnamn";
 "linkToAccountManager.usernameLabel" = "Ange användarnamn";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Ange JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan inte hitta kontot";
@@ -149,22 +149,22 @@
 "alerts.confirmDeleteConversationTitle" = "Ta bort konversation";
 "alerts.confirmClearConversation" = "Vill du verkligen ta bort konversationen med den här kontakten?";
 "alerts.confirmClearConversationTitle" = "Ta bort konversation";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.noMediaPermissionsTitle" = "Mediabegäran inte tillåten";
+"alerts.noLibraryPermissionsTitle" = "Begäran om access till bildmapp inte godkänd";
+"alerts.noLocationPermissionsTitle" = "Begäran om access till plats inte godkänd";
+"alerts.errorWrongCredentials" = "Kan inte ansluta till kontoinställningar. Vänligen kontrollera dina uppgifter. ";
 "alerts.recordVideoMessage" = "Spela in ett videomeddelande";
 "alerts.recordAudioMessage" = "Spela in ett ljudmeddelande";
 "alerts.uploadFile" = "Ladda upp fil";
 "alerts.uploadPhoto" = "Ladda upp foto eller film";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
+"alerts.locationServiceIsDisabled" = "Slå på \"Lokala tjänster\" för att tillåta Jami hitta din plats. ";
 "alerts.locationSharing" = "Dela min plats";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.alreadylocationSharing" = "Du delar redan platsinformation med denna användare";
+"alerts.locationSharingDurationTitle" = "Hur länge ska platsdata delas?";
 "alerts.locationSharingDuration10min" = "10 minuter";
 "alerts.locationSharingDuration1hour" = "1 timme";
 "alerts.mapInformation" = "Kartinformation";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap bidragsgivare ";
 "alerts.openStreetMapCopyrightMoreInfo" = "Läs mer";
 
 //Actions
@@ -194,11 +194,11 @@
 "calls.haghUp" = "lägg på";
 "calls.maximize" = "maximera";
 "calls.minimize" = "minimera";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
-"calls.lowerHand" = "lower hand";
+"calls.setModerator" = "ange moderator";
+"calls.removeModerator" = "ta bort ange moderator";
+"calls.muteAudio" = "tysta ljud";
+"calls.unmuteAudio" = "tillåt ljud";
+"calls.lowerHand" = "ta ned handen";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
@@ -236,28 +236,28 @@
 "accountPage.removeAccountButton" = "Ta bort";
 "accountPage.shareAccountDetails" = "Dela kontoinformation";
 "accountPage.contactMeOnJamiTitle" = "Kontakta mig på Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Kontakta genom %s på Jami kommunikationsplattformen: https://jami.net ";
 "accountPage.registerNameTitle" = "Registrera ett användarnamn";
 "accountPage.passwordPlaceholder" = "Ange kontolösenord";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.usernamePlaceholder" = "Ange önskat användanamn";
+"accountPage.registerNameErrorMessage" = "Valt användarnamn inte tillgängligt";
 "accountPage.usernameRegistering" = "Registrerar";
 "accountPage.usernameRegisterAction" = "Registrera";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
+"accountPage.usernameRegistrationFailed" = "Registrering misslyckade. Kontrollera lösenord. ";
 "accountPage.createPassword" = "Skapa lösenord";
 "accountPage.changePassword" = "Byt lösenord";
 "accountPage.oldPasswordPlaceholder" = "Ange gammalt lösenord";
 "accountPage.newPasswordPlaceholder" = "Ange nytt lösenord";
 "accountPage.newPasswordConfirmPlaceholder" = "Bekräfta nytt lösenord";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.changePasswordError" = "Felaktigt lösenord";
+"accountPage.enableBoothMode" = "Aktivera uppstartsläge";
+"accountPage.disableBoothMode" = "Avaktivera uppstartsläge";
+"accountPage.disableBoothModeExplanation" = "Ange ditt kontolösenord";
+"accountPage.boothModeExplanation" = "I uppstartsläge sparas inte konversationshistorik och Jami begränsas genom utgående samtal. I uppstartsläge raderas alla dina konversationer. ";
+"accountPage.noBoothMode" = "Uppstartsläge kräver du skapar ett kontolösenord. ";
+"accountPage.boothModeAlertMessage" = "När uppstartsläge är aktiverat försvinner tidigare konversationer. ";
 "accountPage.peerDiscovery" = "Anslut automatiskt på lokalt nätverk";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Registrera automatiskt efter tiden går ut";
 
 //Account
 "account.sipUsername" = "Användarnamn";
@@ -277,7 +277,7 @@
 "account.statusConnecting" = "Ansluter";
 "account.statusUnknown" = "Okänd";
 "account.statusConnectionerror" = "Anslutningsfel";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "Kontot måste migreras";
 "account.me" = "Jag";
 
 //Block List Page
@@ -317,8 +317,8 @@
 "notifications.acceptCall" = "ACCEPTERA";
 "notifications.refuseCall" = "NEKA";
 "notifications.newFile" = "Ny fil";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.locationSharingStarted" = "Inkommande platsdelning startad";
+"notifications.locationSharingStopped" = "Inkommande platsdelning avslutad";
 "dataTransfer.readableStatusAwaiting" = "Väntar...";
 "dataTransfer.readableStatusRefuse" = "Neka";
 "dataTransfer.readableStatusOngoing" = "Överför";
@@ -338,7 +338,7 @@
 "generatedMessage.incomingCall" = "Inkommande samtal";
 "generatedMessage.missedOutgoingCall" = "Missat utgående samtal";
 "generatedMessage.missedIncomingCall" = "Missat inkommande samtal";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
+"generatedMessage.liveLocationSharing" = "Live platsdelning ";
 "generatedMessage.contactLeftConversation" = "Kontakt lämnade konversationen";
 
 //General Settings
@@ -348,13 +348,13 @@
 //Migrate Account
 "migrateAccount.title" = "Kontodelning";
 "migrateAccount.migrateButton" = "Migrera konto";
-"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.explanation" = "Detta konto behöver migreras";
 "migrateAccount.passwordPlaceholder" = "Ange lösenord";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.passwordExplanation" = "För att fortsätta migrering behöver du ange lösenordet till detta konto\n ";
 "migrateAccount.removeAccount" = "Ta bort konto";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
+"migrateAccount.error" = "82%match\nKunde inte migrera ditt konto. Du kan försöka igen genom att klicka OK, eller radera ditt konto.";
 "migrateAccount.migrating" = "Migrerar...";
 "migrateAccount.cancel" = "Avbryt";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "Migrera ett annat konto";
 
 
