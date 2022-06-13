@@ -37,8 +37,8 @@
 "smartlist.yesterday" = "Χθες";
 "smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Συνομιλίες";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
+"smartlist.searching" = "Αναζήτηση...";
+"smartlist.noResults" = "Χωρίς αποτελέσματα";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.searchBar" = "Search for new or existing contact...";
@@ -48,7 +48,7 @@
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Invitations";
+"smartlist.invitations" = "Προσκλήσεις";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
 "smartlist.aboutJami" = "Σχετικά με το Jami";
@@ -78,7 +78,7 @@
 "welcome.connectToManager" = "Σύνδεση σε έναν  διακομιστή JAMS";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
+"createProfile.skipCreateProfile" = "Παράληψη";
 "createProfile.profileCreated" = "Επόμενο";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
@@ -92,18 +92,18 @@
 "createAccount.enterNewUsernamePlaceholder" = "Όνομα χρήστη";
 "createAccount.newPasswordPlaceholder" = "Συνθηματικό";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
-"createAccount.passwordCharactersNumberError" = "6 characters minimum";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
+"createAccount.passwordCharactersNumberError" = "το ελάχιστο 6 χαρακτήρες";
+"createAccount.passwordNotMatchingError" = "τα συνθηματικά δεν ταιριάζουν";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
+"createAccount.invalidUsername" = "Μη έγκυρο όνομα χρήστη";
+"createAccount.usernameAlreadyTaken" = "Το όνομα χρήστη ήδη χρησιμοποιείται";
 "createAccount.usernameValid" = "username is available";
-"createAccount.loading" = "Loading";
+"createAccount.loading" = "Ανεβαίνει";
 "createAccount.waitCreateAccountTitle" = "Εισαγωγή λογαριασμού";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
+"createAccount.EnableNotifications" = "Ειδοποιήσεις";
 "createAccount.Recommended" = "(Recommended)";
 "createAccount.UsernameNotRegisteredTitle" = "Σφάλμα δικτύου";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
@@ -111,35 +111,35 @@
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.waitLinkToAccountTitle" = "Σύνδεση λογαριασμού";
+"linkToAccount.linkButtonTitle" = "Σύνδεση συσκευής";
 "linkToAccount.passwordPlaceholder" = "Συνθηματικό";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.passwordLabel" = "Καταχώρηση Συνθηματικού";
 "linkToAccount.pinLabel" = "Εισάγετε PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
 "linkToAccountManager.passwordPlaceholder" = "Συνθηματικό";
-"linkToAccountManager.passwordLabel" = "Enter Password";
+"linkToAccountManager.passwordLabel" = "Καταχώρηση Συνθηματικού";
 "linkToAccountManager.usernamePlaceholder" = "Όνομα χρήστη";
 "linkToAccountManager.usernameLabel" = "Enter Username";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Can't find account";
+"alerts.accountCannotBeFoundTitle" = "Μη δυνατή η εύρεση λογαριασμού";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Account Added";
-"alerts.accountNoNetworkTitle" = "Can't connect to the network";
+"alerts.accountAddedTitle" = "Ο Λογαριασμός Προστέθηκε";
+"alerts.accountNoNetworkTitle" = "Αδύνατη η σύνδεση στο δύκτιο";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountDefaultErrorTitle" = "Άγνωστο σφάλμα";
+"alerts.accountDefaultErrorMessage" = "Ο λογαριασμός δεν μπόρεσε να δημιουργηθεί.";
 "alerts.profileTakePhoto" = "Λήψη φωτογραφίας";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileUploadPhoto" = "Ανέβασε φωτογραφία";
 "alerts.profileCancelPhoto" = "Ακύρωση";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.accountLinkedTitle" = "Σύνδεση λογαριασμού";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
@@ -163,7 +163,7 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.mapInformation" = "Στοιχεία χάρτη";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Μάθετε περισσότερα";
 
@@ -171,7 +171,7 @@
 "actions.blockAction" = "Μπλοκάρισμα";
 "actions.deleteAction" = "Διαγραφή";
 "actions.cancelAction" = "Ακύρωση";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Εκκαθάριση";
 "actions.backAction" = "Πίσω";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
@@ -180,7 +180,7 @@
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.stopLocationSharing" = "Τερματισμός κοινοποίησης";
 
 //Calls
 "calls.callItemTitle" = "Κλήση";
@@ -267,7 +267,7 @@
 "account.proxyServer" = "Διαμεσολαβητής";
 "account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "Enter Password";
+"account.passwordLabel" = "Καταχώρηση Συνθηματικού";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
@@ -281,15 +281,15 @@
 "account.me" = "Εγώ";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Μη αποκλεισμένες επαφές";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Σύνδεση νέας συσκευής";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
-"linkDevice.defaultError" = "An error occured during the export";
+"linkDevice.networkError" = "Συνέβη σφάλμα κατά την διάρκεια της εξαγωγής";
+"linkDevice.defaultError" = "Συνέβη σφάλμα κατά την διάρκεια της εξαγωγής";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "Επαλήθευση";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
@@ -332,7 +332,7 @@
 
 //Generated Message
 "generatedMessage.contactAdded" = "Η επαφή προστέθηκε";
-"generatedMessage.invitationReceived" = "Invitation received";
+"generatedMessage.invitationReceived" = "Η πρόσκληση παραλήφθηκε";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
 "generatedMessage.outgoingCall" = "Εξερχόμενη κλήση";
 "generatedMessage.incomingCall" = "Εισερχόμενη κλήση";

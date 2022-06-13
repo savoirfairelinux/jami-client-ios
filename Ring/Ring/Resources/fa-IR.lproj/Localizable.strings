@@ -58,11 +58,11 @@
 "conversation.explanationSendingLocationTo" = "در حال حاضر مکان خود را به اشتراک می‌گذارید";
 "conversation.explanationReceivingLocationFrom" = "در حال حاضر مکان زنده را دریافت می‌کنید از";
 "conversation.errorSavingImage" = "ذخیره تصویر در گالری انجام نشد";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.receivedRequest" = "\%s\ برایتان درخواست گفت‌وگویی فرستاده.";
+"conversation.requestMessage" = "درود،\nمی‌خواهید به گفت‌وگو بپیوندید؟";
+"conversation.notContact" = "\%s\ در سیاههٔ آشنایانتان نیست.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.synchronizationTitle" = "شما درخواست مکالمه را پذیرفته‌اید.";
+"conversation.synchronizationTitle" = "درخواست گفت‌وگو را پذیرفته‌اید.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
