@@ -37,7 +37,7 @@
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
 "smartlist.conversations" = "Conversații";
-"smartlist.searching" = "Căutare...";
+"smartlist.searching" = "Se caută...";
 "smartlist.noResults" = "Niciun rezultat";
 "smartlist.noConversation" = "Nicio conversație";
 "smartlist.searchBarPlaceholder" = "Introdu numele...";
@@ -66,7 +66,7 @@
 "conversation.synchronizationMessage" = "Se așteaptă ca \%s\ să se conecteze pentru a sincroniza conversația.";
 
 //Invitations
-"invitations.noInvitations" = "Nu sînt invitații";
+"invitations.noInvitations" = "Nicio invitație";
 
 // Walkthrough
 
@@ -83,7 +83,7 @@
 "createProfile.title" = "Personalizează-ți profilul";
 "createProfile.enterNameLabel" = "Introdu un nume de arătat";
 "createProfile.enterNamePlaceholder" = "Introdu numele";
-"createProfile.subtitle" = "Profilul tău va fi distribuit contactelor tale. Poți schimba asta cînd vrei.";
+"createProfile.subtitle" = "Profilul tău va fi distribuit contactelor tale. Poți schimba asta când vrei.";
 "createProfile.createYourAvatar" = "Creează poza de profil";
 
 //Create Account form
@@ -96,8 +96,8 @@
 "createAccount.passwordNotMatchingError" = "parolele nu se potrivesc";
 "createAccount.lookingForUsernameAvailability" = "caut disponibilitatea...";
 "createAccount.invalidUsername" = "nume greșit";
-"createAccount.usernameAlreadyTaken" = "nume de utilizator ales deja";
-"createAccount.usernameValid" = "nume de utilizator disponibil";
+"createAccount.usernameAlreadyTaken" = "nume ales deja";
+"createAccount.usernameValid" = "nume disponibil";
 "createAccount.loading" = "Se încarcă";
 "createAccount.waitCreateAccountTitle" = "Se adaugă contul";
 "createAccount.RegisterAUsername" = "Înscrie un nume de utilizator";
@@ -108,7 +108,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Eroare de rețea";
 "createAccount.UsernameNotRegisteredMessage" = "Contul a fost creat, dar numele de utilizator nu a fost înscris";
 "createAccount.timeoutTitle" = "Cont creat";
-"createAccount.timeoutMessage" = "Înscriere în curs a numelui de utilizator... Poate dura cîteva clipe.";
+"createAccount.timeoutMessage" = "Înscriere în curs a numelui de utilizator... Poate dura câteva clipe.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asocierea contului";
@@ -130,7 +130,7 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nu pot găsi contul";
-"alerts.accountCannotBeFoundMessage" = "Contul nu poate fi găsit în rețeaua Jami. Asigură-te că a fost exportat pe Jami dintr-un aparat existent și datele de autentificare sînt corecte.";
+"alerts.accountCannotBeFoundMessage" = "Contul nu poate fi găsit în rețeaua Jami. Asigură-te că a fost exportat pe Jami dintr-un aparat existent și datele de autentificare sunt corecte.";
 "alerts.accountAddedTitle" = "Cont adăugat";
 "alerts.accountNoNetworkTitle" = "Nu mă pot conecta la rețea";
 "alerts.accountNoNetworkMessage" = "Contul nu poate fi adăugat deoarece Jami nu se poate conecta la rețea. Verifică conectarea la rețea.";
@@ -159,8 +159,8 @@
 "alerts.uploadPhoto" = "Încarcă o poză sau un video";
 "alerts.locationServiceIsDisabled" = "Activează „Localizarea” pentru ca Jami să poată stabili poziția ta.";
 "alerts.locationSharing" = "Distribuie poziția mea";
-"alerts.alreadylocationSharing" = "Acestui utilizator i-am trimis deja poziția mea";
-"alerts.locationSharingDurationTitle" = "Cît timp trebuie să distribui poziția?";
+"alerts.alreadylocationSharing" = "Se trimite deja poziția către acest utilizator";
+"alerts.locationSharingDurationTitle" = "Cât timp trebuie să distribui poziția?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 oră";
 "alerts.mapInformation" = "Detalii pe hartă";
@@ -177,28 +177,28 @@
 "alerts.incomingCallAllertTitle" = "Apel primit de la ";
 "alerts.incomingCallButtonAccept" = "Acceptă";
 "alerts.incomingCallButtonIgnore" = "Ignoră";
-"actions.startAudioCall" = "Apel vocal";
-"actions.startVideoCall" = "Apel video";
+"actions.startAudioCall" = "  Apel vocal";
+"actions.startVideoCall" = "  Apel video";
 "actions.goToSettings" = "Du-te la Reglări";
 "actions.stopLocationSharing" = "Oprește distribuirea";
 
 //Calls
-"calls.callItemTitle" = "Apel";
+"calls.callItemTitle" = "Apelează";
 "calls.unknown" = "Necunoscut";
 "calls.incomingCallInfo" = "vrea să vorbească cu tine";
 "calls.ringing" = "Sună...";
 "calls.connecting" = "Se conectează...";
-"calls.searching" = "Căutare...";
+"calls.searching" = "Se caută...";
 "calls.callFinished" = "Apel terminat";
 "calls.currentCallWith" = "Apel cu ";
 "calls.haghUp" = "închide";
-"calls.maximize" = "Maximizează";
-"calls.minimize" = "Minimizează";
-"calls.setModerator" = "Pune un moderator";
-"calls.removeModerator" = "Elimină moderatorul";
+"calls.maximize" = "maximizează";
+"calls.minimize" = "minimizează";
+"calls.setModerator" = "pune un moderator";
+"calls.removeModerator" = "elimină moderatorul";
 "calls.muteAudio" = "oprește microfonul";
 "calls.unmuteAudio" = "pornește microfonul";
-"calls.lowerHand" = "Coboară mîna";
+"calls.lowerHand" = "mâna jos";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aparate";
@@ -232,7 +232,7 @@
 "accountPage.linkDeviceTitle" = "Asociază alt aparat";
 "accountPage.other" = "Altul";
 "accountPage.removeAccountTitle" = "Elimină contul";
-"accountPage.removeAccountMessage" = "Făcînd clic pe „Elimină” vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
+"accountPage.removeAccountMessage" = "Făcând clic pe „Elimină” vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
 "accountPage.removeAccountButton" = "Elimină";
 "accountPage.shareAccountDetails" = "Distribuie detaliile contului";
 "accountPage.contactMeOnJamiTitle" = "Contactează-mă pe Jami!";
@@ -254,7 +254,7 @@
 "accountPage.disableBoothMode" = "Dezactivează „Modul Cabină”";
 "accountPage.disableBoothModeExplanation" = "Introdu parola contului tău";
 "accountPage.boothModeExplanation" = "În „Modul Cabină” cronologia conversațiilor nu e salvată și Jami este limitat la efectuarea de apeluri. Dacă activezi „Modul Cabină”, toate conversațiile tale vor fi șterse.";
-"accountPage.noBoothMode" = "Pentru a activa „Modul Cabină”, trebuie mai întîi să creezi parola contului.";
+"accountPage.noBoothMode" = "Pentru a activa „Modul Cabină”, trebuie mai întâi să creezi parola contului.";
 "accountPage.boothModeAlertMessage" = "După activarea modului cabină, toate conversațiile tale vor fi șterse.";
 "accountPage.peerDiscovery" = "Conectare automată la rețeaua locală";
 "accountPage.autoRegistration" = "Înscriere automată după expirare";
@@ -284,7 +284,7 @@
 "blockListPage.noBlockedContacts" = "Niciun contact blocat";
 
 //Link New Device
-"linkDevice.title" = "Asociază un nou aparat";
+"linkDevice.title" = "Asociază alt aparat";
 "linkDevice.passwordError" = "Parola introdusă nu deblochează acest cont";
 "linkDevice.networkError" = "O eroare de rețea a apărut în timpul exportării";
 "linkDevice.defaultError" = "O eroare a apărut în timpul exportării";
@@ -302,7 +302,7 @@
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inițializare...";
 "dataTransfer.readableStatusError" = "Eroare";
-"dataTransfer.readableStatusAwaiting" = "Așteaptă...";
+"dataTransfer.readableStatusAwaiting" = "În așteptare…";
 "dataTransfer.readableStatusRefuse" = "Refuză";
 "dataTransfer.readableStatusOngoing" = "Se transferă";
 "dataTransfer.readableStatusCanceled" = "Anulat";
@@ -319,7 +319,7 @@
 "notifications.newFile" = "Fișier nou";
 "notifications.locationSharingStarted" = "Distribuirea poziției primite a început";
 "notifications.locationSharingStopped" = "Distribuirea poziției primite s-a oprit";
-"dataTransfer.readableStatusAwaiting" = "Așteaptă...";
+"dataTransfer.readableStatusAwaiting" = "În așteptare…";
 "dataTransfer.readableStatusRefuse" = "Refuză";
 "dataTransfer.readableStatusOngoing" = "Se transferă";
 "dataTransfer.readableStatusCanceled" = "Anulat";

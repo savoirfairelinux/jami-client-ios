@@ -201,7 +201,7 @@
 "calls.lowerHand" = "lower hand";
 
 //Account Page
-"accountPage.devicesListHeader" = "Devices";
+"accountPage.devicesListHeader" = "Perangkat";
 "accountPage.settingsHeader" = "Setelan";
 "accountPage.username" = "Nama pengguna";
 "accountPage.usernameNotRegistered" = "username: not registered";

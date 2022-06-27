@@ -183,7 +183,7 @@
 "actions.stopLocationSharing" = "Ferma condivisione";
 
 //Calls
-"calls.callItemTitle" = "Chiamata";
+"calls.callItemTitle" = "Chiama";
 "calls.unknown" = "Sconosciuto";
 "calls.incomingCallInfo" = "vuole parlare con te";
 "calls.ringing" = "Squilla...";
