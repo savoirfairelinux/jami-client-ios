@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936fba5d_f4340b68",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 220
+      },
+      "writtenOn": "2022-07-07T19:30:54Z",
+      "side": 1,
+      "message": "do we need that from daemon if we already decrypt it from notifications?",
+      "range": {
+        "startLine": 123,
+        "startChar": 34,
+        "endLine": 123,
+        "endChar": 76
+      },
+      "revId": "73d76359ecb88f2f950f79f323349ea9f7f9b4b7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44e47efa_ca7cb3d6",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 220
+      },
+      "writtenOn": "2022-07-07T19:30:54Z",
+      "side": 1,
+      "message": "no way to use directly opendht\u0027s code?",
+      "range": {
+        "startLine": 288,
+        "startChar": 34,
+        "endLine": 292,
+        "endChar": 34
+      },
+      "revId": "73d76359ecb88f2f950f79f323349ea9f7f9b4b7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
