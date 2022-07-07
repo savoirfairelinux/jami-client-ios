@@ -45,6 +45,29 @@
       },
       "revId": "73d76359ecb88f2f950f79f323349ea9f7f9b4b7",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f048cd2_3531a0b5",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-07-07T20:14:54Z",
+      "side": 1,
+      "message": "could now be replaced by\n\n   return v.decrypt(key)",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 1
+      },
+      "revId": "73d76359ecb88f2f950f79f323349ea9f7f9b4b7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
