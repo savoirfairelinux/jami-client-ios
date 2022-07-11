@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45ea6ec3_dcbd9711",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-07-11T16:46:57Z",
+      "side": 1,
+      "message": "It is for the case when call is received from dht listener while account in extension is active because wait for conversation synchronization",
+      "parentUuid": "936fba5d_f4340b68",
+      "range": {
+        "startLine": 123,
+        "startChar": 34,
+        "endLine": 123,
+        "endChar": 76
+      },
+      "revId": "73d76359ecb88f2f950f79f323349ea9f7f9b4b7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44e47efa_ca7cb3d6",
         "filename": "Ring/jamiNotificationExtension/Adapter.mm",
         "patchSetId": 20
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-07T19:30:54Z",
       "side": 1,
       "message": "no way to use directly opendht\u0027s code?",
+      "range": {
+        "startLine": 288,
+        "startChar": 34,
+        "endLine": 292,
+        "endChar": 34
+      },
+      "revId": "73d76359ecb88f2f950f79f323349ea9f7f9b4b7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c93f01f_402bb1b9",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-07-11T16:46:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44e47efa_ca7cb3d6",
       "range": {
         "startLine": 288,
         "startChar": 34,
@@ -60,6 +108,30 @@
       "writtenOn": "2022-07-07T20:14:54Z",
       "side": 1,
       "message": "could now be replaced by\n\n   return v.decrypt(key)",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 1
+      },
+      "revId": "73d76359ecb88f2f950f79f323349ea9f7f9b4b7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8565c43_1575c9f6",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-07-11T16:46:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f048cd2_3531a0b5",
       "range": {
         "startLine": 278,
         "startChar": 0,

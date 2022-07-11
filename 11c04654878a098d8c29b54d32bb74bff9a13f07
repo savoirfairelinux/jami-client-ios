@@ -41,6 +41,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d32bcc_737addff",
+        "filename": "Ring/Ring/Services/CallsService.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-07-11T16:46:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3106eac8_85b3bee8",
+      "range": {
+        "startLine": 294,
+        "startChar": 58,
+        "endLine": 294,
+        "endChar": 69
+      },
+      "revId": "11c04654878a098d8c29b54d32bb74bff9a13f07",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4efb0f49_16b9b125",
@@ -64,6 +88,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0615222f_39cd2d19",
+        "filename": "Ring/Ring/Services/ConversationsService.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-07-11T16:46:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0f49_16b9b125",
+      "range": {
+        "startLine": 626,
+        "startChar": 20,
+        "endLine": 628,
+        "endChar": 11
+      },
+      "revId": "11c04654878a098d8c29b54d32bb74bff9a13f07",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9f64229_581a2092",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-06-20T17:55:09Z",
       "side": 1,
       "message": "copyright",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "11c04654878a098d8c29b54d32bb74bff9a13f07",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "481253b5_22076057",
+        "filename": "Ring/jamiNotificationExtension/Adapter.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-07-11T16:46:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9f64229_581a2092",
       "range": {
         "startLine": 2,
         "startChar": 18,
@@ -123,6 +195,30 @@
       "writtenOn": "2022-06-20T17:55:09Z",
       "side": 1,
       "message": "you should configure your editor to avoid trailing",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 4
+      },
+      "revId": "11c04654878a098d8c29b54d32bb74bff9a13f07",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb0b3f2_8f91e04e",
+        "filename": "Ring/jamiNotificationExtension/Adapter.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-07-11T16:46:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e9199be_c5218d9c",
       "range": {
         "startLine": 302,
         "startChar": 0,
