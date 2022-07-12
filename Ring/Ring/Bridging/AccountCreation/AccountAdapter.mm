@@ -134,7 +134,7 @@ static id <AccountAdapterDelegate> _delegate;
 
 - (void)setAccountActive:(NSString *)accountID
                   active:(bool)active {
-    setAccountActive(std::string([accountID UTF8String]), active);
+    setAccountActive(std::string([accountID UTF8String]), active, true);
 }
 
 - (NSArray *)getAccountList {
@@ -218,7 +218,7 @@ static id <AccountAdapterDelegate> _delegate;
 -(void)setAccountsActive:(BOOL) active {
     auto accounts = getAccountList();
     for(auto account: accounts) {
-        setAccountActive(account, active);
+        setAccountActive(account, active, true);
     }
 }
 

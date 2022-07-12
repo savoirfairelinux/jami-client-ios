@@ -196,7 +196,7 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 {
     auto accounts = getAccountList();
     for (auto account : accounts) {
-        setAccountActive(account, active);
+        setAccountActive(account, active, true);
     }
 }
 
