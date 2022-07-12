@@ -55,7 +55,6 @@
 		04399AED1D1C341A00E99CD9 /* libhogweed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABB1D1C341A00E99CD9 /* libhogweed.a */; };
 		04399AEF1D1C341A00E99CD9 /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABD1D1C341A00E99CD9 /* libixml.a */; };
 		04399AF01D1C341A00E99CD9 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */; };
-		04399AF11D1C341A00E99CD9 /* libmsgpackc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABF1D1C341A00E99CD9 /* libmsgpackc.a */; };
 		04399AF21D1C341A00E99CD9 /* libnettle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC01D1C341A00E99CD9 /* libnettle.a */; };
 		04399AF41D1C341A00E99CD9 /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC21D1C341A00E99CD9 /* libopendht.a */; };
 		04399AF51D1C341A00E99CD9 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC31D1C341A00E99CD9 /* libopus.a */; };
@@ -310,7 +309,6 @@
 		26A88C68267008F100888EED /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C3F267008F000888EED /* libsrtp.a */; };
 		26A88C69267008F100888EED /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C40267008F000888EED /* libavdevice.a */; };
 		26A88C6A267008F100888EED /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C41267008F000888EED /* libyaml-cpp.a */; };
-		26A88C6B267008F100888EED /* libmsgpackc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C42267008F000888EED /* libmsgpackc.a */; };
 		26A88C6C267008F100888EED /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C43267008F000888EED /* libopendht.a */; };
 		26A88C6D267008F100888EED /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C44267008F000888EED /* libavformat.a */; };
 		26A88C6E267008F100888EED /* libpjsip-simple.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C45267008F000888EED /* libpjsip-simple.a */; };
@@ -1029,7 +1027,6 @@
 				04399AED1D1C341A00E99CD9 /* libhogweed.a in Frameworks */,
 				04399AEF1D1C341A00E99CD9 /* libixml.a in Frameworks */,
 				04399AF01D1C341A00E99CD9 /* libjsoncpp.a in Frameworks */,
-				04399AF11D1C341A00E99CD9 /* libmsgpackc.a in Frameworks */,
 				04399AF21D1C341A00E99CD9 /* libnettle.a in Frameworks */,
 				04399AF41D1C341A00E99CD9 /* libopendht.a in Frameworks */,
 				04399AF51D1C341A00E99CD9 /* libopus.a in Frameworks */,
@@ -1133,7 +1130,6 @@
 				26A88C68267008F100888EED /* libsrtp.a in Frameworks */,
 				26A88C69267008F100888EED /* libavdevice.a in Frameworks */,
 				26A88C6A267008F100888EED /* libyaml-cpp.a in Frameworks */,
-				26A88C6B267008F100888EED /* libmsgpackc.a in Frameworks */,
 				26A88C6C267008F100888EED /* libopendht.a in Frameworks */,
 				26A88C6D267008F100888EED /* libavformat.a in Frameworks */,
 				26A88C6E267008F100888EED /* libpjsip-simple.a in Frameworks */,
