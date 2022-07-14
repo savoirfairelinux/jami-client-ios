@@ -219,17 +219,16 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
         return {};
     }
     try {
-        dht::Value decrypted = decryptDhtValue(dhtKey, dhtValue);
-        auto unpacked = msgpack::unpack((const char*) decrypted.data.data(), decrypted.data.size());
+        dht::Sp<dht::Value> decrypted = dhtValue.decrypt(dhtKey);
+        auto unpacked = msgpack::unpack((const char*) decrypted->data.data(), decrypted->data.size());
         auto peerCR = unpacked.get().as<PeerConnectionRequest>();
         if (isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String])) {
             return {};
         }
-        auto certPath = [[Constants documentsPath] URLByAppendingPathComponent:certificates]
-                            .path.UTF8String;
+        auto certPath = [[Constants documentsPath] URLByAppendingPathComponent:certificates].path.UTF8String;
         auto crlPath = [[Constants documentsPath] URLByAppendingPathComponent:crls].path.UTF8String;
         auto ocspPath = [[Constants documentsPath] URLByAppendingPathComponent:ocsp].path.UTF8String;
-        std::string peerId = getPeerId(decrypted.owner->getId().toString(),
+        std::string peerId = getPeerId(decrypted->owner->getId().toString(),
                                        certPath,
                                        crlPath,
                                        ocspPath);
@@ -283,12 +282,6 @@ toJson(NSDictionary* value)
         goto error; \
     val <<= 6; \
     val |= (*(unsigned char*) p) & 0x3f;
-
-dht::Value
-decryptDhtValue(const dht::crypto::PrivateKey& key, dht::Value& v)
-{
-    return v.decrypt(key);
-}
 
 template<typename ID = dht::Value::Id>
 bool

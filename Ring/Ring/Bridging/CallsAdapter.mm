@@ -187,7 +187,7 @@ static id <CallsAdapterDelegate> _delegate;
     return refuse(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
-- (BOOL)hangUpCallWithId:(NSString*)callId accountId:(NSString*)accountId  {
+- (BOOL)hangUpCall:(NSString*)callId accountId:(NSString*)accountId  {
     return hangUp(std::string([accountId UTF8String]), std::string([callId UTF8String]));
 }
 
