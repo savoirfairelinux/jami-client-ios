@@ -284,8 +284,8 @@ static id <CallsAdapterDelegate> _delegate;
     muteParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), isActive);
 }
 
-- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId {
-    hangupParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]));
+- (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId {
+    hangupParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), std::string([deviceId UTF8String]));
 }
 -(void)setHandRaised:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId state:(BOOL)state {
     raiseParticipantHand(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), state);

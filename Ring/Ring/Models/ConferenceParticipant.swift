@@ -31,6 +31,7 @@ class ConferenceParticipant {
     var isAudioMuted: Bool = false
     var isVideoMuted: Bool = false
     var isHandRaised: Bool = false
+    var device: String = ""
 
     init (info: [String: String], onlyURIAndActive: Bool) {
         self.uri = info["uri"]
@@ -66,6 +67,9 @@ class ConferenceParticipant {
         }
         if let isHandRaised = info["handRaised"] {
             self.isHandRaised = isHandRaised.boolValue
+        }
+        if let device = info["device"] {
+            self.device = device
         }
     }
 }

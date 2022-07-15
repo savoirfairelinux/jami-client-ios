@@ -830,9 +830,9 @@ class CallsService: CallsAdapterDelegate {
         self.callsAdapter.setConferenceModerator(participantId, forConference: confId, accountId: conference.accountId, active: active)
     }
 
-    func hangupParticipant(confId: String, participantId: String) {
+    func hangupParticipant(confId: String, participantId: String, device: String) {
         guard let conference = call(callID: confId) else { return }
-        self.callsAdapter.hangupConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId)
+        self.callsAdapter.hangupConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId, deviceId: device)
     }
 
     func setRaiseHand(confId: String, participantId: String, state: Bool) {

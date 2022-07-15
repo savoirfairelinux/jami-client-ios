@@ -670,8 +670,8 @@ extension CallViewModel {
         self.callService.setModeratorParticipant(confId: self.rendererId, participantId: participantId.filterOutHost(), active: active)
     }
 
-    func hangupParticipant(participantId: String) {
-        self.callService.hangupParticipant(confId: self.rendererId, participantId: participantId.filterOutHost())
+    func hangupParticipant(participantId: String, device: String) {
+        self.callService.hangupParticipant(confId: self.rendererId, participantId: participantId.filterOutHost(), device: device)
     }
 
     func getConferenceParticipants() -> [ConferenceParticipant]? {

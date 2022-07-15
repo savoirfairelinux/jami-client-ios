@@ -871,6 +871,7 @@ extension CallViewController: ConferenceParticipantViewDelegate {
         var isModerator = false
         var isAudioMuted = false
         var pending = true
+        var deviceId = ""
 
         if let participant = self.viewModel.getConferencePartisipant(participantId: participantId) {
             muteEnabled = !participant.isAudioLocalyMuted
@@ -879,6 +880,7 @@ extension CallViewController: ConferenceParticipantViewDelegate {
             isModerator = participant.isModerator
             isAudioMuted = participant.isAudioMuted
             pending = false
+            deviceId = participant.device
         }
 
         menuView.configureWith(items: self.viewModel.getItemsForConferenceMenu(participantId: participantId, callId: callId ?? ""),
@@ -890,7 +892,7 @@ extension CallViewController: ConferenceParticipantViewDelegate {
             if pending {
                 hangup()
             } else {
-                self?.viewModel.hangupParticipant(participantId: participantId)
+                self?.viewModel.hangupParticipant(participantId: participantId, device: deviceId)
             }
             self?.removeConferenceParticipantMenu()
         }
