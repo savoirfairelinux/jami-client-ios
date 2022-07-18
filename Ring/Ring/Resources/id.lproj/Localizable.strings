@@ -133,7 +133,7 @@
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
 "alerts.accountAddedTitle" = "Account Added";
 "alerts.accountNoNetworkTitle" = "Tidak dapat terhubung ke jaringan";
-"alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
+"alerts.accountNoNetworkMessage" = "Tidak dapat menambahkan akun karena Jami tidak dapat terhubung ke jaringan terdistribusi. Periksa konektivitas perangkat Anda.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
 "alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
 "alerts.profileTakePhoto" = "Take photo";
@@ -153,8 +153,8 @@
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.noLocationPermissionsTitle" = "Access to location not granted";
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
+"alerts.recordVideoMessage" = "Rekam pesan video";
+"alerts.recordAudioMessage" = "Rekam pesan suara";
 "alerts.uploadFile" = "Upload file";
 "alerts.uploadPhoto" = "Upload photo or movie";
 "alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
@@ -314,8 +314,8 @@
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
 "notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
+"notifications.acceptCall" = "TERIMA";
+"notifications.refuseCall" = "TOLAK";
 "notifications.newFile" = "New file";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
