@@ -583,8 +583,10 @@ class AccountsService: AccountAdapterDelegate {
      - Parameter newDetails: the new details to set for the account.
      */
     func setAccountDetails(forAccountId id: String, withDetails newDetails: AccountConfigModel) {
-        let details = newDetails.toDetails()
-        accountAdapter.setAccountDetails(id, details: details)
+        DispatchQueue.global(qos: .background).async {
+            let details = newDetails.toDetails()
+            self.accountAdapter.setAccountDetails(id, details: details)
+        }
     }
     /**
      Sets credentials of an account in the daemon.
