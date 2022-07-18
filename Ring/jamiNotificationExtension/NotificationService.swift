@@ -74,8 +74,11 @@ class NotificationService: UNNotificationServiceExtension {
 
         /// app is not active. Querry value from dht
         guard let proxyURL = getProxyCaches(data: requestData),
-              let proxy = try? String(contentsOf: proxyURL, encoding: .utf8) else {
+              var proxy = try? String(contentsOf: proxyURL, encoding: .utf8) else {
             return
+        }
+        if !proxy.hasPrefix("http://") {
+            proxy = "http://" + proxy
         }
         guard let urlPrpxy = URL(string: proxy),
               let url = getRequestURL(data: requestData, proxyURL: urlPrpxy) else {
