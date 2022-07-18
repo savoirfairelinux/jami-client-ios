@@ -52,6 +52,18 @@ platform :ios do
       api_key: api_key,
       type: "appstore",
     )
+    profile_path = ENV["sigh_com.savoirfairelinux.ring_appstore_profile-path"]
+    profile_path_extension = ENV["sigh_com.savoirfairelinux.ring.jamiNotificationExtension_appstore_profile-path"]
+    update_project_provisioning(
+       target_filter: "jamiNotificationExtension",
+       build_configuration: "Release",
+       profile: profile_path_extension
+    )
+    update_project_provisioning(
+       target_filter: "Ring",
+       build_configuration: "Release",
+       profile: profile_path
+    )
     increment_build_number
     gym(
       scheme: "Ring",
