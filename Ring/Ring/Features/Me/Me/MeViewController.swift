@@ -998,9 +998,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 .bind(to: actionRegister.rx.isEnabled)
                 .disposed(by: nameRegistrationBag)
         }
-         remove border around text view
+        // remove border around text view
         controller.textFields?[1].superview?.backgroundColor = .clear
-         controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
+        controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
     }
 
     func confirmRevokeDeviceAlert(deviceID: String) {

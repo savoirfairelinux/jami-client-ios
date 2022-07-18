@@ -99,6 +99,7 @@ enum ConfigKey: String {
     case accountDeviceName = "Account.deviceName"
     case proxyEnabled = "Account.proxyEnabled"
     case proxyServer = "Account.proxyServer"
+    case dhtProxyListUrl = "Account.dhtProxyListUrl"
     case devicePushToken = "Account.proxyPushToken"
     case archiveHasPassword = "Account.archiveHasPassword"
     case dhtPeerDiscovery = "Account.peerDiscovery"
