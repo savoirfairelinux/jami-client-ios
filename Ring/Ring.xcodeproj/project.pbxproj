@@ -3232,6 +3232,7 @@
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "OPENDHT_JSONCPP=1";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../fat/include",
 					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
