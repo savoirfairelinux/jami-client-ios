@@ -933,8 +933,9 @@ class AccountsService: AccountAdapterDelegate {
 
     func setProxyAddress(accountID: String, proxy: String) {
         let accountDetails = self.getAccountDetails(fromAccountId: accountID)
-            accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
-            self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
+        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.proxyServer), withValue: proxy)
+        accountDetails.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.dhtProxyListUrl), withValue: "")
+        self.setAccountDetails(forAccountId: accountID, withDetails: accountDetails)
     }
 
     func hasAccountWithProxyEnabled() -> Bool {

@@ -454,27 +454,25 @@ class MeViewModel: ViewModel, Stateable {
             self.showActionState.accept(.hideLoading)
             return
         }
-        self.accountService.setProxyAddress(accountID: accountId, proxy: username)
-        self.showActionState.accept(.usernameRegistered)
 
-//        self.nameService
-//            .registerNameObservable(withAccount: accountId,
-//                                    password: password,
-//                                    name: username)
-//            .subscribe(onNext: { registered in
-//                if registered {
-//                    if let account = self.accountService.getAccount(fromAccountId: accountId) {
-//                        self.currentAccountUserName
-//                            .onNext(self.userNameForAccount(account: account))
-//                    }
-//                    self.showActionState.accept(.usernameRegistered)
-//                } else {
-//                    self.showActionState.accept(.usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed))
-//                }
-//            }, onError: { _ in
-//                self.showActionState.accept(.usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed))
-//            })
-//            .disposed(by: self.disposeBag)
+        self.nameService
+            .registerNameObservable(withAccount: accountId,
+                                    password: password,
+                                    name: username)
+            .subscribe(onNext: { registered in
+                if registered {
+                    if let account = self.accountService.getAccount(fromAccountId: accountId) {
+                        self.currentAccountUserName
+                            .onNext(self.userNameForAccount(account: account))
+                    }
+                    self.showActionState.accept(.usernameRegistered)
+                } else {
+                    self.showActionState.accept(.usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed))
+                }
+            }, onError: { _ in
+                self.showActionState.accept(.usernameRegistrationFailed(errorMessage: L10n.AccountPage.usernameRegistrationFailed))
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func changePassword(oldPassword: String, newPassword: String) -> Bool {

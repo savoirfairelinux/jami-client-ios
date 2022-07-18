@@ -937,70 +937,70 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             }
         }
         self.present(controller, animated: true, completion: nil)
-//        self.viewModel.subscribeForNameLokup(disposeBug: nameRegistrationBag)
-//        self.viewModel.usernameValidationState.asObservable()
-//            .observe(on: MainScheduler.instance)
-//            .subscribe(onNext: { [weak controller] (state) in
-//                // update name lookup message
-//                guard let textFields = controller?.textFields,
-//                      textFields.count >= 2 else { return }
-//                textFields[1].text = state.message
-//                textFields[1].textColor = state.isAvailable ? UIColor.jamiSuccess : UIColor.jamiFailure
-//            }, onError: { (_) in
-//            })
-//            .disposed(by: nameRegistrationBag)
-//        guard let textFields = controller.textFields else {
-//            return
-//        }
-//        if textFields.count < 2 {
-//            return
-//        }
-//        textFields[0].rx.text.orEmpty.distinctUntilChanged().bind(to: self.viewModel.newUsername).disposed(by: nameRegistrationBag)
-//        let userNameEmptyObservable = textFields[0]
-//            .rx.text.map({text -> Bool in
-//                if let text = text {
-//                    return text.isEmpty
-//                }
-//                return true
-//            })
-//        // do not have a password could register when username not empty and valid
-//        if textFields.count == 2 {
-//            Observable
-//                .combineLatest(self.viewModel
-//                    .usernameValidationState.asObservable(),
-//                               userNameEmptyObservable) {(state, usernameEmpty) -> Bool in
-//                                if state.isAvailable && !usernameEmpty {
-//                                    return true
-//                                }
-//                                return false
-//                }
-//                .bind(to: actionRegister.rx.isEnabled)
-//                .disposed(by: nameRegistrationBag)
-//        } else if textFields.count == 3 {
-//            // have a password. Could register when username not empty and valid and password not empty
-//            let passwordEmptyObservable = textFields[2]
-//                .rx.text.map({text -> Bool in
-//                    if let text = text {
-//                        return text.isEmpty
-//                    }
-//                    return true
-//                })
-//            Observable
-//                .combineLatest(self.viewModel
-//                    .usernameValidationState.asObservable(),
-//                               userNameEmptyObservable,
-//                               passwordEmptyObservable) {(state, nameEmpty, passwordEmpty) -> Bool in
-//                                if state.isAvailable && !nameEmpty && !passwordEmpty {
-//                                    return true
-//                                }
-//                                return false
-//                }
-//                .bind(to: actionRegister.rx.isEnabled)
-//                .disposed(by: nameRegistrationBag)
-//        }
-        // remove border around text view
-       // controller.textFields?[1].superview?.backgroundColor = .clear
-        // controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
+        self.viewModel.subscribeForNameLokup(disposeBug: nameRegistrationBag)
+        self.viewModel.usernameValidationState.asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak controller] (state) in
+                // update name lookup message
+                guard let textFields = controller?.textFields,
+                      textFields.count >= 2 else { return }
+                textFields[1].text = state.message
+                textFields[1].textColor = state.isAvailable ? UIColor.jamiSuccess : UIColor.jamiFailure
+            }, onError: { (_) in
+            })
+            .disposed(by: nameRegistrationBag)
+        guard let textFields = controller.textFields else {
+            return
+        }
+        if textFields.count < 2 {
+            return
+        }
+        textFields[0].rx.text.orEmpty.distinctUntilChanged().bind(to: self.viewModel.newUsername).disposed(by: nameRegistrationBag)
+        let userNameEmptyObservable = textFields[0]
+            .rx.text.map({text -> Bool in
+                if let text = text {
+                    return text.isEmpty
+                }
+                return true
+            })
+        // do not have a password could register when username not empty and valid
+        if textFields.count == 2 {
+            Observable
+                .combineLatest(self.viewModel
+                    .usernameValidationState.asObservable(),
+                               userNameEmptyObservable) {(state, usernameEmpty) -> Bool in
+                                if state.isAvailable && !usernameEmpty {
+                                    return true
+                                }
+                                return false
+                }
+                .bind(to: actionRegister.rx.isEnabled)
+                .disposed(by: nameRegistrationBag)
+        } else if textFields.count == 3 {
+            // have a password. Could register when username not empty and valid and password not empty
+            let passwordEmptyObservable = textFields[2]
+                .rx.text.map({text -> Bool in
+                    if let text = text {
+                        return text.isEmpty
+                    }
+                    return true
+                })
+            Observable
+                .combineLatest(self.viewModel
+                    .usernameValidationState.asObservable(),
+                               userNameEmptyObservable,
+                               passwordEmptyObservable) {(state, nameEmpty, passwordEmpty) -> Bool in
+                                if state.isAvailable && !nameEmpty && !passwordEmpty {
+                                    return true
+                                }
+                                return false
+                }
+                .bind(to: actionRegister.rx.isEnabled)
+                .disposed(by: nameRegistrationBag)
+        }
+         remove border around text view
+        controller.textFields?[1].superview?.backgroundColor = .clear
+         controller.textFields?[1].superview?.superview?.subviews[0].removeFromSuperview()
     }
 
     func confirmRevokeDeviceAlert(deviceID: String) {
