@@ -97,7 +97,13 @@ do
 
   SDKROOT=`xcode-select -print-path`/Platforms/${IOS_TARGET_PLATFORM}.platform/Developer/SDKs/${IOS_TARGET_PLATFORM}${SDK_VERSION}.sdk
 
-  SDK="`echo "print '${IOS_TARGET_PLATFORM}'.lower()" | python`"
+  host=$(sw_vers -productVersion)
+  if [ "12.0" \> $host ]
+  then
+      SDK="`echo "print '${IOS_TARGET_PLATFORM}'.lower()" | python`"
+  else
+      SDK="`echo "print('${IOS_TARGET_PLATFORM}'.lower())" | python3`"
+  fi
 
   CC="xcrun -sdk $SDK clang"
   CXX="xcrun -sdk $SDK clang++"
