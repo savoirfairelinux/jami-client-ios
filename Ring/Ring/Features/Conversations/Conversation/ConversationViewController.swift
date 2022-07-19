@@ -223,7 +223,10 @@ class ConversationViewController: UIViewController,
         alert.addAction(recordVideoAction)
         alert.addAction(recordAudioAction)
         alert.addAction(documentsAction)
-        alert.addAction(locationSharingAction())
+        //TODO: fix location sharing with a new API
+        if false {
+            alert.addAction(locationSharingAction())
+        }
         alert.addAction(cancelAction)
         alert.popoverPresentationController?.sourceView = self.view
         alert.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()

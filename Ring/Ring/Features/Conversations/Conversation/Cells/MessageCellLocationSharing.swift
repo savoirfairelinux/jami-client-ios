@@ -31,6 +31,8 @@ class MessageCellLocationSharing: MessageCell {
 
     @IBOutlet weak var locationSharingMessageTextView: UITextView!
     @IBOutlet weak var bubbleHeight: NSLayoutConstraint!
+    var loader: MaplyQuadImageLoader!
+    var fetcher: MaplyRemoteTileFetcher!
 
     var xButton: UIButton?
     var myPositionButton: UIButton?
@@ -106,23 +108,34 @@ class MessageCellLocationSharing: MessageCell {
         self.maplyViewController!.view.frame = self.bubble.bounds
     }
 
+    lazy var samplingParams: MaplySamplingParams = {
+        let samplingParams = MaplySamplingParams()
+        samplingParams.coverPoles = true
+        samplingParams.edgeMatching = false
+        samplingParams.singleLevel = false
+        samplingParams.coverPoles = false
+        return samplingParams
+    }()
+
     private func displayMapTile() {
+        //TODO: implement location map with a new API
         self.maplyViewController!.clearColor = UIColor.white
 
         // thirty fps if we can get it
         self.maplyViewController!.frameInterval = 2
-
-        if let layer = MessageCellLocationSharing.getMaplyLayer() {
-            layer.handleEdges = false
-            layer.coverPoles = false
-            layer.requireElev = false
-            layer.waitLoad = false
-            layer.drawPriority = 0
-            layer.singleLevelLoading = false
-            self.maplyViewController!.add(layer)
-        } else {
-            self.log.error("[MessageCellLocationSharing] Could not get the layer")
-        }
+        let baseCacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+        let tilesCacheDir = "\(baseCacheDir)/openstreetmap/"
+        let maxZoom = Int32(19)
+        let info = MaplyRemoteTileFetchInfo()
+        let request = URLRequest(url: URL(string: MessageCellLocationSharing.remoteTileSourceBaseUrl)!)
+        info.urlReq = request as URLRequest
+        let tileSource = MaplyRemoteTileInfoNew(baseURL: MessageCellLocationSharing.remoteTileSourceBaseUrl,
+                                                minZoom: 0,
+                                                maxZoom: maxZoom)
+        tileSource.cacheDir = tilesCacheDir
+        fetcher = MaplyRemoteTileFetcher(name: "fetcher", connections: 2)
+        loader = MaplyQuadImageLoader(params: samplingParams, tileInfo: tileSource, viewC: maplyViewController!)
+        loader?.setTileFetcher(fetcher)
 
         if let mapViewC = self.maplyViewController as? MaplyViewController {
             self.toggleMaplyGesture(false)
@@ -139,25 +152,6 @@ class MessageCellLocationSharing: MessageCell {
             mapViewC.doubleTapDragGesture = value
             mapViewC.doubleTapZoomGesture = value
         }
-    }
-
-    private static func getMaplyLayer() -> MaplyQuadImageTilesLayer? {
-        let layer: MaplyQuadImageTilesLayer
-
-        // Because this is a remote tile set, we'll want a cache directory
-        let baseCacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-        let tilesCacheDir = "\(baseCacheDir)/openstreetmap/"
-        let maxZoom = Int32(19)
-
-        guard let tileSource =
-            MaplyRemoteTileSource(baseURL: MessageCellLocationSharing.remoteTileSourceBaseUrl,
-                                  ext: "png",
-                                  minZoom: 0,
-                                  maxZoom: maxZoom) else { return nil }
-        tileSource.cacheDir = tilesCacheDir
-        layer = MaplyQuadImageTilesLayer(tileSource: tileSource)!
-
-        return layer
     }
 
     private static func getBaseURL() -> String {

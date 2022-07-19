@@ -69,7 +69,10 @@ class ConversationsManager {
         self.subscribeFileTransferEvents()
         self.subscribeCallsEvents()
         self.subscribeContactsEvents()
-        self.subscribeLocationSharingEvent()
+        //TODO: fix location sharing with a new API
+        if false {
+            self.subscribeLocationSharingEvent()
+        }
         self.subscribeCallsProviderEvents()
     }
 
