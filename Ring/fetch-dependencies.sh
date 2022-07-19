@@ -5,7 +5,7 @@
 ####################################
 
 # Bootstrap Carthage
-./carthage.sh bootstrap --platform iOS --no-use-binaries --cache-builds
+carthage update --use-xcframeworks --platform iOS --no-use-binaries --cache-builds
 
 ############################################
 ## DOWNLOAD WHIRLYGLOBEMAPLY DEPENDENCIES ##
