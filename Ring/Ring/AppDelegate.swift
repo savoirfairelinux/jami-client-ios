@@ -125,7 +125,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     #endif
 
         /// move files from the app container to the group container, so it could be accessed by notification extension
-        self.moveDataToGroupContainer()
+        if !self.moveDataToGroupContainer() {
+            self.window?.rootViewController = self.appCoordinator.rootViewController
+            self.window?.makeKeyAndVisible()
+            let alertController = UIAlertController(title: "There was an error starting Jami", message: "Please try again", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default)
+            alertController.addAction(okAction)
+            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+            return true
+        }
 
         self.addListenerForNotification()
 
@@ -181,22 +189,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
 
-    func moveDataToGroupContainer() {
-        guard let groupDocUrl = Constants.documentsPath else {
-            return
+    func moveDataToGroupContainer() -> Bool {
+        let usingGroupConatinerKey = "usingGroupConatiner"
+        if UserDefaults.standard.bool(forKey: usingGroupConatinerKey) {
+            return true
         }
-        if !FileManager.default.fileExists(atPath: groupDocUrl.path),
-           let appDocURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-            try? FileManager.default.moveItem(at: appDocURL, to: groupDocUrl)
+        guard let groupDocUrl = Constants.documentsPath,
+              let groupCachesUrl = Constants.cachesPath,
+              let appDocURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false),
+              let appLibrURL = try? FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
+            return false
         }
-        guard let groupCachesUrl = Constants.documentsPath else {
-            return
+        if FileManager.default.fileExists(atPath: groupDocUrl.path) {
+            try? FileManager.default.removeItem(atPath: groupDocUrl.path)
         }
-        if !FileManager.default.fileExists(atPath: groupCachesUrl.path),
-           let appLibrURL = try? FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-            let appCacheDir = appLibrURL.appendingPathComponent("Caches")
-            try? FileManager.default.moveItem(at: appCacheDir, to: groupCachesUrl)
+        if FileManager.default.fileExists(atPath: groupCachesUrl.path) {
+            try? FileManager.default.removeItem(atPath: groupCachesUrl.path)
         }
+        let appCacheDir = appLibrURL.appendingPathComponent("Caches")
+        do {
+            try FileManager.default.copyItem(at: appDocURL, to: groupDocUrl)
+            try FileManager.default.copyItem(at: appCacheDir, to: groupCachesUrl)
+        } catch {
+            print(error.localizedDescription)
+            try? FileManager.default.removeItem(atPath: groupDocUrl.path)
+            try? FileManager.default.removeItem(atPath: groupCachesUrl.path)
+            return false
+        }
+        if let fileURLs = try? FileManager.default.contentsOfDirectory(at: appDocURL,
+                                                                       includingPropertiesForKeys: nil,
+                                                                       options: .skipsHiddenFiles) {
+            for fileURL in fileURLs {
+                try? FileManager.default.removeItem(at: fileURL)
+            }
+        }
+        UserDefaults.standard.setValue(true, forKey: usingGroupConatinerKey)
+        return UserDefaults.standard.bool(forKey: usingGroupConatinerKey)
     }
 
     func addListenerForNotification() {
