@@ -356,6 +356,7 @@ extension NotificationService {
     }
 
     private func presentMessageNotification(from: String, body: String) {
+        os_log("present message notification")
         let content = UNMutableNotificationContent()
         content.title = "Incoming message"
         content.subtitle = from
@@ -367,6 +368,7 @@ extension NotificationService {
         let notificationRequest = UNNotificationRequest(identifier: "\(identifier)", content: content, trigger: notificationTrigger)
         UNUserNotificationCenter.current().add(notificationRequest) { (error) in
             if let error = error {
+                os_log("Unable to Add Notification Request %@", "\(error.localizedDescription))")
                 print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
             }
         }
