@@ -356,6 +356,7 @@ extension NotificationService {
     }
 
     private func presentMessageNotification(from: String, body: String) {
+        os_log("present message notification")
         let content = UNMutableNotificationContent()
         content.title = "Incoming message"
         content.subtitle = from
@@ -363,10 +364,19 @@ extension NotificationService {
         content.sound = UNNotificationSound.default
         setNotificationCount(notification: content)
         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-        let identifier = Int64(arc4random_uniform(10000000))
-        let notificationRequest = UNNotificationRequest(identifier: "\(identifier)", content: content, trigger: notificationTrigger)
+        let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: notificationTrigger)
+        UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (settings) in
+            if settings.authorizationStatus == .notDetermined {
+                os_log("Notification permission notDetermined")
+            } else if settings.authorizationStatus == .denied {
+                os_log("Notification permission denied")
+            } else if settings.authorizationStatus == .authorized {
+                os_log("Notification permission authorized")
+            }
+        })
         UNUserNotificationCenter.current().add(notificationRequest) { (error) in
             if let error = error {
+                os_log("Unable to Add Notification Request %@", "\(error.localizedDescription))")
                 print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
             }
         }
