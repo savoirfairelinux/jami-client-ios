@@ -675,8 +675,11 @@ extension AppDelegate: PKPushRegistryDelegate {
             /// if we present call kit early, there are will be no call from the daemon. And if a user answer fast there will be a time gap before call screen could be presented
             /// sleep for 2 second to give time for the daemon to receive a call.
             sleep(2)
-            let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
+            //let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
             let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
+            let fromExtension = payload.dictionaryPayload["fromExtension"] as? String ?? "true"
+            let fromExt = fromExtension == "true" ? true : false
+            let peerId: String = fromExt ? "call from the extension" : "call received directly from push server"
             callsProvider.previewCall(peerId: peerId, withVideo: hasVideo.boolValue) { _ in
                 completion()
             }
