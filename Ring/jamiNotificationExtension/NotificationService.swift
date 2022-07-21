@@ -114,6 +114,8 @@ class NotificationService: UNNotificationServiceExtension {
                             var info = request.content.userInfo
                             info["peerId"] = peerId
                             info["hasVideo"] = hasVideo
+                            info["fromExtension"] = "true"
+                            os_log("call provider report incoming call")
                             CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
                                 print("NotificationService", "Did report voip notification, error: \(String(describing: error))")
                             })
@@ -122,6 +124,7 @@ class NotificationService: UNNotificationServiceExtension {
                     }
                     switch result {
                     case .call(let peerId, let hasVideo):
+                        os_log("incoming call 1")
                         handleCall(peerId, "\(hasVideo)")
                     case .gitMessage:
                         /// check if account already acive
@@ -148,6 +151,7 @@ class NotificationService: UNNotificationServiceExtension {
                             case .fileTransferInProgress:
                                 self.numberOfFiles += 1
                             case .call:
+                                os_log("incoming call 2")
                                 handleCall(eventData.jamiId, eventData.content)
                             }
                         }

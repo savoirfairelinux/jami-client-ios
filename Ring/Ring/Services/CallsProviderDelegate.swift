@@ -125,6 +125,7 @@ extension CallsProviderDelegate {
         update.supportsGrouping = false
         update.supportsUngrouping = false
         update.supportsHolding = false
+        os_log("call provider delegate report incoming call")
         self.provider?.reportNewIncomingCall(with: call.callUUID,
                                              update: update) { error in
                                                 if error == nil {
@@ -146,6 +147,7 @@ extension CallsProviderDelegate {
         update.supportsHolding = false
         let unhandeledCall = UnhandeledCall(peerId: peerId)
         unhandeledCalls.insert(unhandeledCall)
+        os_log("call provider delegate preview call")
         self.provider?.reportNewIncomingCall(with: unhandeledCall.uuid,
                                              update: update) { error in
                                                 if error == nil {

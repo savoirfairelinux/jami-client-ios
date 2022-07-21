@@ -668,6 +668,10 @@ extension AppDelegate: PKPushRegistryDelegate {
         /// before ios 14.5 this function is called by Apple, we should notify daemon. After ios 14.5 it called from notification extension. We must present Call screen
         if #available(iOS 14.5, *) {
             /// called from the notification extension. Account is not active at this point
+            let fromExtension = payload.dictionaryPayload["fromExtension"] as? String ?? "false"
+            if fromExtension.boolValue == false {
+                return
+            }
             self.accountService.setAccountsActive(active: true)
             if let data = payload.dictionaryPayload as? [String: Any] {
                 self.accountService.pushNotificationReceived(data: data)
