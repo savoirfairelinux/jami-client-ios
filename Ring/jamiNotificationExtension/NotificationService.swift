@@ -41,7 +41,7 @@ class NotificationService: UNNotificationServiceExtension {
 
     private static let localNotification = Notification.Name("com.savoirfairelinux.jami.appActive.internal")
 
-    private let notificationTimeout = DispatchTimeInterval.seconds(7)
+    private let notificationTimeout = DispatchTimeInterval.seconds(9)
 
     private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
 
@@ -53,6 +53,7 @@ class NotificationService: UNNotificationServiceExtension {
     private var accountIsActive = false
     var tasksCompleted = false /// all values from dht parsed, conversation synchronized if needed and files downloaded
     var numberOfFiles = 0 /// number of files need to be downloaded
+    var numberOfMessages = 0 /// number of scheduled messages
     var syncCompleted = false
     private let tasksGroup = DispatchGroup()
     // swiftlint:disable cyclomatic_complexity
@@ -132,13 +133,15 @@ class NotificationService: UNNotificationServiceExtension {
                             }
                             switch event {
                             case .message:
+                                self.numberOfMessages += 1
                                 self.presentMessageNotification(from: eventData.jamiId, body: eventData.content)
                             case .fileTransferDone:
                                 if let url = URL(string: eventData.content) {
                                     self.presentFileNotification(from: eventData.jamiId, url: url)
+                                } else {
+                                    self.numberOfFiles -= 1
+                                    self.verifyTasksStatus()
                                 }
-                                self.numberOfFiles -= 1
-                                self.verifyTasksStatus()
                             case .syncCompleted:
                                 self.syncCompleted = true
                                 self.verifyTasksStatus()
@@ -170,7 +173,7 @@ class NotificationService: UNNotificationServiceExtension {
         /// We could finish in two cases:
         /// 1. we did not start account we are not waiting for the signals from the daemon
         /// 2. conversation synchronization completed and all files downloaded
-        if !self.accountIsActive || (self.syncCompleted && self.numberOfFiles == 0) {
+        if !self.accountIsActive || (self.syncCompleted && self.numberOfFiles == 0 && self.numberOfMessages == 0) {
             self.tasksCompleted = true
             self.tasksGroup.leave()
         }
@@ -346,9 +349,10 @@ extension NotificationService {
         content.sound = UNNotificationSound.default
         setNotificationCount(notification: content)
         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-        let identifier = Int64(arc4random_uniform(10000000))
-        let notificationRequest = UNNotificationRequest(identifier: "\(identifier)", content: content, trigger: notificationTrigger)
-        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+        let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: notificationTrigger)
+        UNUserNotificationCenter.current().add(notificationRequest) { [weak self] (error) in
+            self?.numberOfFiles -= 1
+            self?.verifyTasksStatus()
             if let error = error {
                 print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
             }
@@ -363,9 +367,10 @@ extension NotificationService {
         content.sound = UNNotificationSound.default
         setNotificationCount(notification: content)
         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-        let identifier = Int64(arc4random_uniform(10000000))
-        let notificationRequest = UNNotificationRequest(identifier: "\(identifier)", content: content, trigger: notificationTrigger)
-        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+        let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: notificationTrigger)
+        UNUserNotificationCenter.current().add(notificationRequest) { [weak self] (error) in
+            self?.numberOfMessages -= 1
+            self?.verifyTasksStatus()
             if let error = error {
                 print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
             }
