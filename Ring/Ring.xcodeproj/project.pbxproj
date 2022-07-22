@@ -341,6 +341,7 @@
 		446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 446FAF182373424700519C4F /* SendFileViewController.storyboard */; };
 		446FAF1B2373425E00519C4F /* SendFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446FAF1A2373425E00519C4F /* SendFileViewController.swift */; };
 		446FAF1D2373427100519C4F /* SendFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446FAF1C2373427100519C4F /* SendFileViewModel.swift */; };
+		44BF3029288B066A008A98A0 /* BackgroundTasks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44BF3028288B0665008A98A0 /* BackgroundTasks.framework */; };
 		44DFB39A2887048E0023878C /* PKHUD.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38A2887044A0023878C /* PKHUD.xcframework */; };
 		44DFB39B2887048E0023878C /* PKHUD.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38A2887044A0023878C /* PKHUD.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB39C2887048F0023878C /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38B2887044E0023878C /* RxSwift.xcframework */; };
@@ -885,6 +886,7 @@
 		446FAF182373424700519C4F /* SendFileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SendFileViewController.storyboard; sourceTree = "<group>"; };
 		446FAF1A2373425E00519C4F /* SendFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFileViewController.swift; sourceTree = "<group>"; };
 		446FAF1C2373427100519C4F /* SendFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFileViewModel.swift; sourceTree = "<group>"; };
+		44BF3028288B0665008A98A0 /* BackgroundTasks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BackgroundTasks.framework; path = System/Library/Frameworks/BackgroundTasks.framework; sourceTree = SDKROOT; };
 		44DFB38A2887044A0023878C /* PKHUD.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PKHUD.xcframework; path = Carthage/Build/PKHUD.xcframework; sourceTree = "<group>"; };
 		44DFB38B2887044E0023878C /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
 		44DFB38C288704530023878C /* SwiftyBeaver.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftyBeaver.xcframework; path = Carthage/Build/SwiftyBeaver.xcframework; sourceTree = "<group>"; };
@@ -1087,6 +1089,7 @@
 				44DFB3A8288704900023878C /* Differentiator.xcframework in Frameworks */,
 				04399AFB1D1C341A00E99CD9 /* libpjmedia-codec.a in Frameworks */,
 				04399AFC1D1C341A00E99CD9 /* libpjmedia-videodev.a in Frameworks */,
+				44BF3029288B066A008A98A0 /* BackgroundTasks.framework in Frameworks */,
 				04399AFD1D1C341A00E99CD9 /* libpjmedia.a in Frameworks */,
 				04399AFE1D1C341A00E99CD9 /* libpjnath.a in Frameworks */,
 				04399AFF1D1C341A00E99CD9 /* libpjsip-simple.a in Frameworks */,
@@ -1218,6 +1221,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44BF3028288B0665008A98A0 /* BackgroundTasks.framework */,
 				44DFB394288704750023878C /* AMPopTip.xcframework */,
 				44DFB391288704690023878C /* Differentiator.xcframework */,
 				44DFB393288704710023878C /* GSKStretchyHeaderView.xcframework */,

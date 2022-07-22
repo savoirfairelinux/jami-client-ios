@@ -20,5 +20,9 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>0</string>
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>com.savoirfairelinux.ring.resubscribe.listeners</string>
+    </array>
 </dict>
 </plist>
