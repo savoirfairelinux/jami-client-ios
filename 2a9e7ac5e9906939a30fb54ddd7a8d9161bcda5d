@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87c9a5dd_c3e0f718",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-07-22T16:31:11Z",
+      "side": 1,
+      "message": "I do not think we need it for App Store version.",
+      "revId": "2a9e7ac5e9906939a30fb54ddd7a8d9161bcda5d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
