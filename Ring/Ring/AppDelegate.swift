@@ -631,7 +631,7 @@ extension AppDelegate {
             self.accountService.setAccountsActive(active: true)
         }
         self.accountService.pushNotificationReceived(data: dictionary)
-        sleep(5)
+        sleep(2)
         state = UIApplication.shared.applicationState
         if state == .background {
             self.accountService.setAccountsActive(active: false)
