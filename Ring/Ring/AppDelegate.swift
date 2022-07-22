@@ -28,6 +28,7 @@ import RxSwift
 import PushKit
 import ContactsUI
 import os
+import BackgroundTasks
 
 // swiftlint:disable identifier_name
 @UIApplicationMain
@@ -102,6 +103,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private let center = CFNotificationCenterGetDarwinNotifyCenter()
     private static let shouldHandleNotification = NSNotification.Name("com.savoirfairelinux.jami.shouldHandleNotification")
+    private let backgroundTaskIdentifier = "com.savoirfairelinux.ring.resubscribe.listeners"
+    private var notificationData = [[String: String]]()
+    private let backgrounTaskQueue = DispatchQueue(label: "backgrounTaskQueue")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -136,6 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
 
         self.addListenerForNotification()
+        self.registerBackgroundTask()
 
         // starts the daemon
         SystemAdapter().registerConfigurationHandler()
@@ -187,6 +192,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         os_log("&&&&&&&didFinishLaunchingWithOptions")
         return true
+    }
+    
+    private func registerBackgroundTask() {
+        if #available(iOS 13.0, *) {
+            let backgroundAppRefreshTaskSchedulerIdentifier = backgroundTaskIdentifier
+            BGTaskScheduler.shared.register(forTaskWithIdentifier: backgroundAppRefreshTaskSchedulerIdentifier, using: backgrounTaskQueue) { [weak self](task) in
+                guard let self = self else {
+                    task.setTaskCompleted(success: false)
+                    return
+                }
+                task.expirationHandler = {
+                    task.setTaskCompleted(success: false)
+                }
+                for notification in self.notificationData {
+                    self.accountService.pushNotificationReceived(data: notification)
+                }
+                self.notificationData = [[String: String]]()
+                sleep(5)
+                DispatchQueue.main.async {[weak self] in
+                    let state = UIApplication.shared.applicationState
+                    if state == .background {
+                        self?.accountService.setAccountsActive(active: false)
+                    }
+                    task.setTaskCompleted(success: true)
+                }
+            }
+        }
     }
 
     func moveDataToGroupContainer() -> Bool {
@@ -614,27 +646,34 @@ extension AppDelegate {
         didReceiveRemoteNotification userInfo: [AnyHashable: Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
     ) {
-        var dictionary = [String: String]()
-        for key in userInfo.keys {
-            /// "aps" is a field added for alert notification type, so it could be received in the extension. This field is not needed by dht
-            if String(describing: key) == "content-available" {
-                continue
+        if #available(iOS 13.0, *) {
+            var dictionary  = [String: String]()
+            for key in userInfo.keys {
+                /// "aps" is a field added for alert notification type, so it could be received in the extension. This field is not needed by dht
+                if String(describing: key) == "content-available" {
+                    continue
+                }
+                if let value = userInfo[key] {
+                    let keyString = String(describing: key)
+                    let valueString = String(describing: value)
+                    dictionary[keyString] = valueString
+                }
             }
-            if let value = userInfo[key] {
-                let keyString = String(describing: key)
-                let valueString = String(describing: value)
-                dictionary[keyString] = valueString
+            if UIApplication.shared.applicationState == .background {
+                backgrounTaskQueue.async {[weak self] in
+                    self?.notificationData.append(dictionary)
+                }
+                self.accountService.setAccountsActive(active: true)
+                // submit background task to resubscribe for notifications
+                do {
+                    let backgroundTask = BGProcessingTaskRequest(identifier: backgroundTaskIdentifier)
+                    try BGTaskScheduler.shared.submit(backgroundTask)
+                } catch {
+                    print("Failed to submit background task")
+                }
+            } else {
+                self.accountService.pushNotificationReceived(data: dictionary)
             }
-        }
-        var state = UIApplication.shared.applicationState
-        if state == .background {
-            self.accountService.setAccountsActive(active: true)
-        }
-        self.accountService.pushNotificationReceived(data: dictionary)
-        sleep(5)
-        state = UIApplication.shared.applicationState
-        if state == .background {
-            self.accountService.setAccountsActive(active: false)
         }
         completionHandler(.newData)
     }
