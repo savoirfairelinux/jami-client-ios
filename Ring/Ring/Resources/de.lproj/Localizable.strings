@@ -175,7 +175,7 @@
 "actions.backAction" = "Zurück";
 "actions.doneAction" = "Erledigt";
 "alerts.incomingCallAllertTitle" = "Eingehender Anruf von ";
-"alerts.incomingCallButtonAccept" = "Akzeptieren";
+"alerts.incomingCallButtonAccept" = "Annehmen";
 "alerts.incomingCallButtonIgnore" = "Ignorieren";
 "actions.startAudioCall" = "Audio-Anruf";
 "actions.startVideoCall" = "Video-Anruf";
