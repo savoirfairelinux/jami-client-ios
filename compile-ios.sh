@@ -172,6 +172,7 @@ do
   rsync -ar $DAEMON_DIR/contrib/$HOST/include/gnutls $IOS_TOP_DIR/DEPS/$ARCH/include/
   rsync -ar $DAEMON_DIR/contrib/$HOST/include/json $IOS_TOP_DIR/DEPS/$ARCH/include/
   rsync -ar $DAEMON_DIR/contrib/$HOST/include/msgpack $IOS_TOP_DIR/DEPS/$ARCH/include/
+  rsync -ar $DAEMON_DIR/contrib/$HOST/include/yaml-cpp $IOS_TOP_DIR/DEPS/$ARCH/include/
   cd $IOS_TOP_DIR/DEPS/$ARCH/lib/
   for i in *.a ; do mv "$i" "${i/-$HOST.a/.a}" ; done
 

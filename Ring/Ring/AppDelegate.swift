@@ -698,7 +698,8 @@ extension AppDelegate: PKPushRegistryDelegate {
             sleep(2)
             let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
             let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
-            callsProvider.previewCall(peerId: peerId, withVideo: hasVideo.boolValue) { _ in
+            let displayName = payload.dictionaryPayload["displayName"] as? String ?? ""
+            callsProvider.previewCall(peerId: peerId, withVideo: hasVideo.boolValue, displayName: displayName) { _ in
                 completion()
             }
         } else if let data = payload.dictionaryPayload as? [String: Any] {

@@ -231,6 +231,7 @@
 		1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DA1F0D915100D36361 /* Localizable.strings */; };
 		1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DD1F0D91A800D36361 /* LaunchScreen.storyboard */; };
 		1ABE07E21F0D924700D36361 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07E11F0D924700D36361 /* Strings.swift */; };
+		260302B32891808A00D5D077 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C41267008F000888EED /* libyaml-cpp.a */; };
 		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
 		26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* PreviewViewController.swift */; };
 		26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */; };
@@ -1141,6 +1142,7 @@
 				26A88C7826700B7500888EED /* libc++.tbd in Frameworks */,
 				26A88C7726700B5F00888EED /* libxml2.tbd in Frameworks */,
 				26A88C7626700ABC00888EED /* libz.tbd in Frameworks */,
+				260302B32891808A00D5D077 /* libyaml-cpp.a in Frameworks */,
 				26A88C75267009EC00888EED /* CoreVideo.framework in Frameworks */,
 				26A88C73267009A700888EED /* AVFoundation.framework in Frameworks */,
 				26A88C722670099D00888EED /* AudioToolbox.framework in Frameworks */,

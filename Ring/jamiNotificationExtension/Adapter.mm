@@ -31,6 +31,7 @@
 #define MSGPACK_DISABLE_LEGACY_NIL
 #import "opendht/crypto.h"
 #import "opendht/default_types.h"
+#import "yaml-cpp/yaml.h"
 
 #import "json/json.h"
 #import "fstream"
@@ -60,8 +61,14 @@ const std::string fileSeparator = "/";
 NSString* const certificates = @"certificates";
 NSString* const crls = @"crls";
 NSString* const ocsp = @"ocsp";
+NSString* const nameCache = @"namecache";
+NSString* const defaultNameServer = @"ns.jami.net";
+std::string const nameServerConfiguration = "RingNS.uri";
+NSString* const accountConfig = @"config.yml";
 
 std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
+std::map<std::string, std::string> cachedNames;
+std::map<std::string, std::string> nameServers;
 
 #pragma mark Callbacks registration
 - (void)registerSignals
@@ -238,6 +245,15 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
     return {};
 }
 
+-(NSString*)getNameFor:(NSString*)address accountId:(NSString*)accountId {
+    return @(getName(std::string([address UTF8String]), std::string([accountId UTF8String])).c_str());
+}
+
+-(NSString*)nameServerForAccountId:(NSString*)accountId; {
+    auto nameServer = getNameServer(std::string([accountId UTF8String]));
+    return nameServer.empty() ? defaultNameServer : @(nameServer.c_str());
+}
+
 Json::Value
 toJson(NSDictionary* value)
 {
@@ -258,6 +274,57 @@ toJson(NSDictionary* value)
         }
     }
     return val;
+}
+
+std::string getName(std::string addres, std::string accountId)
+{
+    auto name = cachedNames.find(addres);
+    if (name != cachedNames.end()) {
+        return name->second;
+    }
+
+    auto ns = getNameServer(accountId);
+    NSString* nameServer = ns.empty() ? defaultNameServer : @(ns.c_str());
+    std::string namesPath = [[[Constants cachesPath] URLByAppendingPathComponent: nameCache] URLByAppendingPathComponent: nameServer].path.UTF8String;
+
+    msgpack::unpacker pac;
+    // read file
+    std::ifstream file = std::ifstream(namesPath, std::ios_base::in);
+    if (!file.is_open()) {
+        return "";
+    }
+    std::string line;
+    while (std::getline(file, line)) {
+        pac.reserve_buffer(line.size());
+        memcpy(pac.buffer(), line.data(), line.size());
+        pac.buffer_consumed(line.size());
+    }
+
+    // load values
+    msgpack::object_handle oh;
+    if (pac.next(oh))
+        oh.get().convert(cachedNames);
+    auto cacheRes = cachedNames.find(addres);
+    return cacheRes != cachedNames.end() ? cacheRes->second : std::string {};
+}
+
+std::string getNameServer(std::string accountId) {
+    auto it = nameServers.find(accountId);
+    if (it != nameServers.end()) {
+        return it->second;
+    }
+    std::string nameServer {};
+    auto accountConfigPath = [[[Constants documentsPath] URLByAppendingPathComponent: @(accountId.c_str())] URLByAppendingPathComponent: accountConfig].path.UTF8String;
+    try {
+        std::ifstream file = std::ifstream(accountConfigPath, std::ios_base::in);
+        YAML::Node node = YAML::Load(file);
+        file.close();
+        nameServer = node[nameServerConfiguration].as<std::string>();
+        if (!nameServer.empty()) {
+            nameServers.insert(std::pair<std::string, std::string>(accountId, nameServer));
+        }
+    } catch (const std::exception& e) {}
+    return nameServer;
 }
 
 #pragma mark functions copied from the daemon

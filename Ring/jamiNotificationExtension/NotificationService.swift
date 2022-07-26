@@ -25,6 +25,7 @@ import Foundation
 import CoreFoundation
 import os
 import Darwin
+import Contacts
 
 protocol DarwinNotificationHandler {
     func listenToMainAppResponse(completion: @escaping (Bool) -> Void)
@@ -37,9 +38,14 @@ enum NotificationField: String {
     case aps
 }
 
+enum LocalNotificationType: String {
+    case message
+    case file
+}
+
 class NotificationService: UNNotificationServiceExtension {
 
-    private static let localNotification = Notification.Name("com.savoirfairelinux.jami.appActive.internal")
+    private static let localNotificationName = Notification.Name("com.savoirfairelinux.jami.appActive.internal")
 
     private let notificationTimeout = DispatchTimeInterval.seconds(9)
 
@@ -56,6 +62,12 @@ class NotificationService: UNNotificationServiceExtension {
     var numberOfMessages = 0 /// number of scheduled messages
     var syncCompleted = false
     private let tasksGroup = DispatchGroup()
+
+    typealias LocalNotification = (content: UNMutableNotificationContent, type: LocalNotificationType)
+
+    private var pendingLocalNotifications = [String: [LocalNotification]]() /// local notification waiting for name lookup
+    private var pendingCalls = [String: [AnyHashable: Any]]() /// calls waiting for name lookup
+    private var names = [String: String]() /// map of peerId and best name
     // swiftlint:disable cyclomatic_complexity
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
@@ -72,6 +84,8 @@ class NotificationService: UNNotificationServiceExtension {
         if appIsActive() {
             return
         }
+
+        guard let accountId = requestData[NotificationField.accountId.rawValue] else { return }
 
         /// app is not active. Querry value from dht
         guard let proxyURL = getProxyCaches(data: requestData),
@@ -114,9 +128,15 @@ class NotificationService: UNNotificationServiceExtension {
                             var info = request.content.userInfo
                             info["peerId"] = peerId
                             info["hasVideo"] = hasVideo
-                            CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
-                                print("NotificationService", "Did report voip notification, error: \(String(describing: error))")
-                            })
+                            let name = self.bestName(accountId: accountId, contactId: peerId)
+                            if name.isEmpty {
+                                info["displayName"] = peerId
+                                self.pendingCalls[peerId] = info
+                                self.startAddressLookup(address: peerId, accountId: accountId)
+                                return
+                            }
+                            info["displayName"] = name
+                            self.presentCall(info: info)
                             self.verifyTasksStatus()
                         }
                     }
@@ -134,10 +154,10 @@ class NotificationService: UNNotificationServiceExtension {
                             switch event {
                             case .message:
                                 self.numberOfMessages += 1
-                                self.presentMessageNotification(from: eventData.jamiId, body: eventData.content)
+                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: accountId)
                             case .fileTransferDone:
                                 if let url = URL(string: eventData.content) {
-                                    self.presentFileNotification(from: eventData.jamiId, url: url)
+                                    self.configureFileNotification(from: eventData.jamiId, url: url, accountId: accountId)
                                 } else {
                                     self.numberOfFiles -= 1
                                     self.verifyTasksStatus()
@@ -170,6 +190,10 @@ class NotificationService: UNNotificationServiceExtension {
 
     private func verifyTasksStatus() {
         guard !self.tasksCompleted else { return } /// we already left taskGroup
+        /// waiting for lookup
+        if !pendingCalls.isEmpty || !pendingLocalNotifications.isEmpty {
+            return
+        }
         /// We could finish in two cases:
         /// 1. we did not start account we are not waiting for the signals from the daemon
         /// 2. conversation synchronization completed and all files downloaded
@@ -184,6 +208,18 @@ class NotificationService: UNNotificationServiceExtension {
             self.accountIsActive = false
             self.adapterService.stop()
         }
+        /// cleanup pending notifications
+        if !self.pendingCalls.isEmpty, let info = self.pendingCalls.first?.value {
+            self.presentCall(info: info)
+        } else {
+            for notifications in pendingLocalNotifications {
+                for notification in notifications.value {
+                    self.presentLocalNotification(notification: notification)
+                }
+            }
+        }
+        self.pendingCalls.removeAll()
+        self.pendingLocalNotifications.removeAll()
         if let contentHandler = contentHandler {
             contentHandler(self.bestAttemptContent)
         }
@@ -257,6 +293,84 @@ class NotificationService: UNNotificationServiceExtension {
         }
         return valueIds.values.contains("\(id)")
     }
+
+    private func bestName(accountId: String, contactId: String) -> String {
+        if let name = self.names[contactId], !name.isEmpty {
+            return name
+        }
+        if let contactProfileName = self.contactProfileName(accountId: accountId, contactId: contactId),
+           !contactProfileName.isEmpty {
+            self.names[contactId] = contactProfileName
+            return contactProfileName
+        }
+        let registeredName = self.adapterService.getNameFor(address: contactId, accountId: accountId)
+        if !registeredName.isEmpty {
+            self.names[contactId] = registeredName
+        }
+        return registeredName
+    }
+
+    private func startAddressLookup(address: String, accountId: String) {
+        var nameServer = self.adapterService.getNameServerFor(accountId: accountId)
+        if !nameServer.hasPrefix("http://") {
+            nameServer = "http://" + nameServer
+        }
+        let urlString = nameServer + "/addr/" + address
+        guard let url = URL(string: urlString) else { return }
+        let task = URLSession.shared.dataTask(with: url) {[weak self](data, response, _) in
+            guard let self = self else { return }
+            var name: String?
+            defer {
+                self.lookupCompleted(address: address, name: name)
+            }
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
+                  let data = data else {
+                return
+            }
+            do {
+                guard let map = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: String] else { return }
+                if map["name"] != nil {
+                    name = map["name"]
+                    self.names[address] = name
+                }
+            } catch {
+                print("serialization failed , \(error)")
+            }
+        }
+        task.resume()
+    }
+
+    private func lookupCompleted(address: String, name: String?) {
+        for call in pendingCalls where call.key == address {
+            var info = call.value
+            if let name = name {
+                info["displayName"] = name
+            }
+            presentCall(info: info)
+            pendingCalls.removeValue(forKey: address)
+            return
+        }
+        for pending in pendingLocalNotifications where pending.key == address {
+            let notifications = pending.value
+            for notification in notifications {
+                if let name = name {
+                    notification.content.title = name
+                }
+                presentLocalNotification(notification: notification)
+            }
+            pendingLocalNotifications.removeValue(forKey: address)
+        }
+    }
+
+    private func needUpdateNotification(notification: LocalNotification, peerId: String, accountId: String) {
+        if var pending = pendingLocalNotifications[peerId] {
+            pending.append(notification)
+            pendingLocalNotifications[peerId] = pending
+        } else {
+            pendingLocalNotifications[peerId] = [notification]
+        }
+        startAddressLookup(address: peerId, accountId: accountId)
+    }
 }
 // MARK: paths
 extension NotificationService {
@@ -291,6 +405,18 @@ extension NotificationService {
         }
         return cachesPath.appendingPathComponent(accountId).appendingPathComponent("dhtproxy")
     }
+
+    private func contactProfileName(accountId: String, contactId: String) -> String? {
+        guard let documents = Constants.documentsPath else { return nil }
+        let profileURI = "ring:" + contactId
+        let profilePath = documents.path + "/" + "\(accountId)" + "/profiles/" + "\(Data(profileURI.utf8).base64EncodedString()).vcf"
+        if !FileManager.default.fileExists(atPath: profilePath) { return nil }
+
+        guard let data = FileManager.default.contents(atPath: profilePath),
+              let vCards = try? CNContactVCardSerialization.contacts(with: data),
+                  let vCard = vCards.first else { return nil }
+        return vCard.familyName.isEmpty ? vCard.givenName : vCard.familyName
+    }
 }
 
 // MARK: DarwinNotificationHandler
@@ -299,14 +425,14 @@ extension NotificationService: DarwinNotificationHandler {
         let observer = Unmanaged.passUnretained(self).toOpaque()
         CFNotificationCenterAddObserver(notificationCenter,
                                         observer, { (_, _, _, _, _) in
-                                            NotificationCenter.default.post(name: NotificationService.localNotification,
+                                            NotificationCenter.default.post(name: NotificationService.localNotificationName,
                                                                             object: nil,
                                                                             userInfo: nil)
                                         },
                                         Constants.notificationAppIsActive,
                                         nil,
                                         .deliverImmediately)
-        NotificationCenter.default.addObserver(forName: NotificationService.localNotification, object: nil, queue: nil) { _ in
+        NotificationCenter.default.addObserver(forName: NotificationService.localNotificationName, object: nil, queue: nil) { _ in
             completion(true)
         }
     }
@@ -314,7 +440,7 @@ extension NotificationService: DarwinNotificationHandler {
     func removeObserver() {
         let observer = Unmanaged.passUnretained(self).toOpaque()
         CFNotificationCenterRemoveEveryObserver(notificationCenter, observer)
-        NotificationCenter.default.removeObserver(self, name: NotificationService.localNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NotificationService.localNotificationName, object: nil)
     }
 
 }
@@ -337,21 +463,49 @@ extension NotificationService {
         return nil
     }
 
-    private func presentFileNotification(from: String, url: URL) {
+    private func configureFileNotification(from: String, url: URL, accountId: String) {
         let content = UNMutableNotificationContent()
-        content.title = "Incoming file"
+        content.sound = UNNotificationSound.default
         let imageName = url.lastPathComponent
-        content.subtitle = from
         content.body = imageName
         if let image = UIImage(contentsOfFile: url.path), let attachement = createAttachment(identifier: imageName, image: image, options: nil) {
             content.attachments = [ attachement ]
         }
+        let title = self.bestName(accountId: accountId, contactId: from)
+        if title.isEmpty {
+            content.title = from
+            needUpdateNotification(notification: LocalNotification(content, .file), peerId: from, accountId: accountId)
+        } else {
+            content.title = title
+            presentLocalNotification(notification: LocalNotification(content, .file))
+        }
+    }
+
+    private func configureMessageNotification(from: String, body: String, accountId: String) {
+        let content = UNMutableNotificationContent()
+        content.body = body
         content.sound = UNNotificationSound.default
+        let title = self.bestName(accountId: accountId, contactId: from)
+        if title.isEmpty {
+            content.title = from
+            needUpdateNotification(notification: LocalNotification(content, .message), peerId: from, accountId: accountId)
+        } else {
+            content.title = title
+            presentLocalNotification(notification: LocalNotification(content, .message))
+        }
+    }
+
+    private func presentLocalNotification(notification: LocalNotification) {
+        let content = notification.content
         setNotificationCount(notification: content)
         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
         let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: notificationTrigger)
         UNUserNotificationCenter.current().add(notificationRequest) { [weak self] (error) in
-            self?.numberOfFiles -= 1
+            if notification.type == .message {
+                self?.numberOfMessages -= 1
+            } else {
+                self?.numberOfFiles -= 1
+            }
             self?.verifyTasksStatus()
             if let error = error {
                 print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
@@ -359,21 +513,12 @@ extension NotificationService {
         }
     }
 
-    private func presentMessageNotification(from: String, body: String) {
-        let content = UNMutableNotificationContent()
-        content.title = "Incoming message"
-        content.subtitle = from
-        content.body = body
-        content.sound = UNNotificationSound.default
-        setNotificationCount(notification: content)
-        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
-        let notificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: notificationTrigger)
-        UNUserNotificationCenter.current().add(notificationRequest) { [weak self] (error) in
-            self?.numberOfMessages -= 1
-            self?.verifyTasksStatus()
-            if let error = error {
-                print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
-            }
+    private func presentCall(info: [AnyHashable: Any]) {
+        if #available(iOSApplicationExtension 14.5, *) {
+            CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
+                print("NotificationService", "Did report voip notification, error: \(String(describing: error))")
+            })
         }
+        self.verifyTasksStatus()
     }
 }

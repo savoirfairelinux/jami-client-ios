@@ -34,5 +34,7 @@
                  interactionId:(NSString*)interactionId
                   withFilePath:(NSString*)filePath;
 - (NSDictionary<NSString*, NSString*>*)decrypt:(NSString*)keyPath treated:(NSString*)treatedMessagesPath value: (NSDictionary*)value;
+-(NSString*)getNameFor:(NSString*)address accountId:(NSString*)accountId;
+-(NSString*)nameServerForAccountId:(NSString*)accountId;
 
 @end

@@ -134,11 +134,11 @@ extension CallsProviderDelegate {
         }
     }
 
-    func previewCall(peerId: String, withVideo: Bool,
+    func previewCall(peerId: String, withVideo: Bool, displayName: String,
                      completion: ((Error?) -> Void)?) {
         let update = CXCallUpdate()
         let handleType = CXHandle.HandleType.phoneNumber
-        update.localizedCallerName = peerId
+        update.localizedCallerName = displayName
         update.remoteHandle = CXHandle(type: handleType, value: peerId)
         update.hasVideo = withVideo
         update.supportsGrouping = false
