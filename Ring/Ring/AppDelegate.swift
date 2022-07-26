@@ -236,8 +236,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                         nil, { (_, _, _, _, _) in
                                             /// emit signal so notification could be handeled by daemon
                                             NotificationCenter.default.post(name: AppDelegate.shouldHandleNotification, object: nil, userInfo: nil)
-                                            /// emit signal that app is active for notification extension
-                                            CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFNotificationName(Constants.notificationAppIsActive), nil, nil, true)
                                         },
                                         Constants.notificationReceived,
                                         nil,
@@ -419,13 +417,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     @objc
     private func handleNotification() {
-        guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier),
-              let notificationData = userDefaults.object(forKey: Constants.notificationData) as? [[String: String]] else {
-            return
-        }
-        userDefaults.set([[String: String]](), forKey: Constants.notificationData)
-        for data in notificationData {
-            self.accountService.pushNotificationReceived(data: data)
+        DispatchQueue.main.async {[weak self] in
+            /// if app is in the background extension should handle notification
+            if UIApplication.shared.applicationState == .background {
+                return
+            }
+            /// emit signal that app is active for notification extension
+            CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFNotificationName(Constants.notificationAppIsActive), nil, nil, true)
+
+            guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier),
+                  let notificationData = userDefaults.object(forKey: Constants.notificationData) as? [[String: String]] else {
+                return
+            }
+            userDefaults.set([[String: String]](), forKey: Constants.notificationData)
+            for data in notificationData {
+                self?.accountService.pushNotificationReceived(data: data)
+            }
         }
     }
 
