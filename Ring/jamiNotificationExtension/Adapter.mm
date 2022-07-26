@@ -60,6 +60,7 @@ const std::string fileSeparator = "/";
 NSString* const certificates = @"certificates";
 NSString* const crls = @"crls";
 NSString* const ocsp = @"ocsp";
+NSString* const nameCache = @"namecache";
 
 std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 
@@ -236,6 +237,10 @@ std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
     } catch (std::runtime_error error) {
     }
     return {};
+}
+
+-(NSString*)getNameFor:(NSString*)address {
+    return @(getName(std::string([address UTF8String])).c_str());
 }
 
 Json::Value
@@ -550,6 +555,32 @@ fast_validate(const char* str)
     }
 
     return p;
+}
+
+std::string getName(std::string addres)
+{
+    std::string cachePath = [[Constants cachesPath] URLByAppendingPathComponent: nameCache].path.UTF8String;
+    std::map<std::string, std::string> nameCache {};
+    msgpack::unpacker pac;
+
+    // read file
+    std::ifstream file = std::ifstream(cachePath, std::ios_base::in);
+    if (!file.is_open()) {
+        return "";
+    }
+    std::string line;
+    while (std::getline(file, line)) {
+        pac.reserve_buffer(line.size());
+        memcpy(pac.buffer(), line.data(), line.size());
+        pac.buffer_consumed(line.size());
+    }
+
+    // load values
+    msgpack::object_handle oh;
+    if (pac.next(oh))
+        oh.get().convert(nameCache);
+    auto cacheRes = nameCache.find(addres);
+    return cacheRes != nameCache.end() ? cacheRes->second : std::string {};
 }
 
 static const char*

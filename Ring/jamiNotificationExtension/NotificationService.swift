@@ -25,6 +25,7 @@ import Foundation
 import CoreFoundation
 import os
 import Darwin
+import Contacts
 
 protocol DarwinNotificationHandler {
     func listenToMainAppResponse(completion: @escaping (Bool) -> Void)
@@ -73,6 +74,8 @@ class NotificationService: UNNotificationServiceExtension {
             return
         }
 
+        guard let accountId = requestData[NotificationField.accountId.rawValue] else { return }
+
         /// app is not active. Querry value from dht
         guard let proxyURL = getProxyCaches(data: requestData),
               var proxy = try? String(contentsOf: proxyURL, encoding: .utf8) else {
@@ -112,6 +115,12 @@ class NotificationService: UNNotificationServiceExtension {
                                 self.adapterService.stop()
                             }
                             var info = request.content.userInfo
+                            if let contactProfileName = self.contactProfileName(accountId: accountId, contactId: peerId),
+                               !contactProfileName.isEmpty {
+                                info["displayName"] = contactProfileName
+                            } else {
+                                info["displayName"] = self.adapterService.getNameFor(address: peerId)
+                            }
                             info["peerId"] = peerId
                             info["hasVideo"] = hasVideo
                             CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
@@ -290,6 +299,18 @@ extension NotificationService {
             return nil
         }
         return cachesPath.appendingPathComponent(accountId).appendingPathComponent("dhtproxy")
+    }
+
+    private func contactProfileName(accountId: String, contactId: String) -> String? {
+        guard let documents = Constants.documentsPath else { return nil }
+        let profileURI = "ring:" + contactId
+        let profilePath = documents.path + "/" + "\(accountId)" + "/profiles/" + "\(Data(profileURI.utf8).base64EncodedString()).vcf"
+        if !FileManager.default.fileExists(atPath: profilePath) { return nil }
+        
+        guard let data = FileManager.default.contents(atPath: profilePath),
+              let vCards = try? CNContactVCardSerialization.contacts(with: data),
+                  let vCard = vCards.first else { return nil }
+        return vCard.familyName
     }
 }
 

@@ -123,6 +123,10 @@ class AdapterService {
         self.adapter.stop()
     }
 
+    func getNameFor(address: String) -> String {
+        return adapter.getNameFor(address)
+    }
+
     private func fileAlreadyDownloaded(fileName: String, accountId: String, conversationId: String) -> Bool {
         guard let url = getFileUrlFor(fileName: fileName, accountId: accountId, conversationId: conversationId) else {
             return false
