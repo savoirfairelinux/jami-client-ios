@@ -102,6 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private let center = CFNotificationCenterGetDarwinNotifyCenter()
     private static let shouldHandleNotification = NSNotification.Name("com.savoirfairelinux.jami.shouldHandleNotification")
+    private let backgrounTaskQueue = DispatchQueue(label: "backgrounTaskQueue")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -616,25 +617,38 @@ extension AppDelegate {
     ) {
         var dictionary = [String: String]()
         for key in userInfo.keys {
-            /// "aps" is a field added for alert notification type, so it could be received in the extension. This field is not needed by dht
-            if String(describing: key) == "content-available" {
-                continue
-            }
             if let value = userInfo[key] {
                 let keyString = String(describing: key)
                 let valueString = String(describing: value)
                 dictionary[keyString] = valueString
             }
         }
-        var state = UIApplication.shared.applicationState
-        if state == .background {
-            self.accountService.setAccountsActive(active: true)
-        }
-        self.accountService.pushNotificationReceived(data: dictionary)
-        sleep(5)
-        state = UIApplication.shared.applicationState
-        if state == .background {
-            self.accountService.setAccountsActive(active: false)
+        if UIApplication.shared.applicationState == .background {
+            backgrounTaskQueue.async {[weak self] in
+                var taskId = UIBackgroundTaskIdentifier.invalid
+                taskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+                    if UIApplication.shared.applicationState == .background {
+                        self?.accountService.setAccountsActive(active: false)
+                    }
+                    UIApplication.shared.endBackgroundTask(taskId)
+                })
+                self?.accountService.setAccountsActive(active: true)
+                self?.accountService.pushNotificationReceived(data: dictionary)
+                sleep(5)
+                let group = DispatchGroup()
+                group.enter()
+                DispatchQueue.main.async { [weak self] in
+                    if UIApplication.shared.applicationState == .background {
+                        self?.accountService.setAccountsActive(active: false)
+                    }
+                    group.leave()
+                }
+                group.wait()
+                UIApplication.shared.endBackgroundTask(taskId)
+                taskId = UIBackgroundTaskIdentifier.invalid
+            }
+        } else {
+            self.accountService.pushNotificationReceived(data: dictionary)
         }
         completionHandler(.newData)
     }
