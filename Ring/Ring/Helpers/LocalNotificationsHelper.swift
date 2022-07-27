@@ -20,14 +20,6 @@
 import Foundation
 import RxSwift
 
-enum NotificationUserInfoKeys: String {
-    case callID
-    case name
-    case messageContent
-    case participantID
-    case accountID
-}
-
 enum NotificationCallTitle: String {
     case incomingCall = "Incoming Call"
     case missedCall = "Missed Call"
@@ -69,8 +61,8 @@ class LocalNotificationsHelper {
     }
 
     func presentMessageNotification(data: [String: String]) {
-        guard let title = data [NotificationUserInfoKeys.name.rawValue],
-            let body = data [NotificationUserInfoKeys.messageContent.rawValue] else {
+        guard let title = data [Constants.NotificationUserInfoKeys.name.rawValue],
+              let body = data [Constants.NotificationUserInfoKeys.messageContent.rawValue] else {
                 return
         }
         let content = UNMutableNotificationContent()
@@ -106,13 +98,13 @@ class LocalNotificationsHelper {
     @objc
     func cancelCall(timer: Timer) {
         guard let info = timer.userInfo as? [String: String],
-            let callID = info[NotificationUserInfoKeys.callID.rawValue] else {
+              let callID = info[Constants.NotificationUserInfoKeys.callID.rawValue] else {
                 self.timer?.invalidate()
                 self.timer = nil
                 return
         }
         var data = [String: String]()
-        data[NotificationUserInfoKeys.callID.rawValue] = callID
+        data[Constants.NotificationUserInfoKeys.callID.rawValue] = callID
         NotificationCenter.default.post(name: NSNotification.Name(NotificationName.refuseCallFromNotifications.rawValue), object: nil, userInfo: data)
         self.timer?.invalidate()
         self.timer = nil

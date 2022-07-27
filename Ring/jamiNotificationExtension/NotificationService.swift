@@ -154,10 +154,10 @@ class NotificationService: UNNotificationServiceExtension {
                             switch event {
                             case .message:
                                 self.numberOfMessages += 1
-                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: accountId)
+                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: accountId, conversationId: eventData.conversationId)
                             case .fileTransferDone:
                                 if let url = URL(string: eventData.content) {
-                                    self.configureFileNotification(from: eventData.jamiId, url: url, accountId: accountId)
+                                    self.configureFileNotification(from: eventData.jamiId, url: url, accountId: accountId, conversationId: eventData.conversationId)
                                 } else {
                                     self.numberOfFiles -= 1
                                     self.verifyTasksStatus()
@@ -463,11 +463,16 @@ extension NotificationService {
         return nil
     }
 
-    private func configureFileNotification(from: String, url: URL, accountId: String) {
+    private func configureFileNotification(from: String, url: URL, accountId: String, conversationId: String) {
         let content = UNMutableNotificationContent()
         content.sound = UNNotificationSound.default
         let imageName = url.lastPathComponent
         content.body = imageName
+        var data = [String: String]()
+        data[Constants.NotificationUserInfoKeys.participantID.rawValue] = from
+        data[Constants.NotificationUserInfoKeys.accountID.rawValue] = accountId
+        data[Constants.NotificationUserInfoKeys.conversationID.rawValue] = conversationId
+        content.userInfo = data
         if let image = UIImage(contentsOfFile: url.path), let attachement = createAttachment(identifier: imageName, image: image, options: nil) {
             content.attachments = [ attachement ]
         }
@@ -481,10 +486,15 @@ extension NotificationService {
         }
     }
 
-    private func configureMessageNotification(from: String, body: String, accountId: String) {
+    private func configureMessageNotification(from: String, body: String, accountId: String, conversationId: String) {
         let content = UNMutableNotificationContent()
         content.body = body
         content.sound = UNNotificationSound.default
+        var data = [String: String]()
+        data[Constants.NotificationUserInfoKeys.participantID.rawValue] = from
+        data[Constants.NotificationUserInfoKeys.accountID.rawValue] = accountId
+        data[Constants.NotificationUserInfoKeys.conversationID.rawValue] = conversationId
+        content.userInfo = data
         let title = self.bestName(accountId: accountId, contactId: from)
         if title.isEmpty {
             content.title = from

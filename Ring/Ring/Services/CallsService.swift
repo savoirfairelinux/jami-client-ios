@@ -104,7 +104,7 @@ class CallsService: CallsAdapterDelegate {
 
     @objc
     func refuseUnansweredCall(_ notification: NSNotification) {
-        guard let callId = notification.userInfo?[NotificationUserInfoKeys.callID.rawValue] as? String else {
+        guard let callId = notification.userInfo?[Constants.NotificationUserInfoKeys.callID.rawValue] as? String else {
             return
         }
         guard let call = self.call(callID: callId) else {

@@ -32,4 +32,13 @@ public class Constants: NSObject {
     @objc public static let cachesPath: URL? = {
         return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?.appendingPathComponent("Library").appendingPathComponent("Caches")
     }()
+
+    enum NotificationUserInfoKeys: String {
+        case callID
+        case name
+        case messageContent
+        case participantID
+        case accountID
+        case conversationID
+    }
 }

@@ -126,11 +126,11 @@ class ConversationsManager {
             .subscribe(onNext: { [weak self] event in
                 guard let self = self else { return }
                 var data = [String: String]()
-                data[NotificationUserInfoKeys.messageContent.rawValue] = event.getEventInput(ServiceEventInput.content)
-                data[NotificationUserInfoKeys.participantID.rawValue] = event.getEventInput(ServiceEventInput.peerUri)
-                data[NotificationUserInfoKeys.accountID.rawValue] = event.getEventInput(ServiceEventInput.accountId)
+                data[Constants.NotificationUserInfoKeys.messageContent.rawValue] = event.getEventInput(ServiceEventInput.content)
+                data[Constants.NotificationUserInfoKeys.participantID.rawValue] = event.getEventInput(ServiceEventInput.peerUri)
+                data[Constants.NotificationUserInfoKeys.accountID.rawValue] = event.getEventInput(ServiceEventInput.accountId)
 
-                guard let contactUri = data[NotificationUserInfoKeys.participantID.rawValue],
+                guard let contactUri = data[Constants.NotificationUserInfoKeys.participantID.rawValue],
                       let hash = JamiURI(schema: URIType.ring, infoHach: contactUri).hash else { return }
 
                 DispatchQueue.main.async { [weak self] in
@@ -400,11 +400,11 @@ class ConversationsManager {
                 AccountModelHelper.init(withAccount: account).isAccountRing(),
                 self.accountsService.getCurrentProxyState(accountID: account.id) else { return }
             var data = [String: String]()
-            data [NotificationUserInfoKeys.messageContent.rawValue] = content
-            data [NotificationUserInfoKeys.participantID.rawValue] = peerUri
-            data [NotificationUserInfoKeys.accountID.rawValue] = account.id
+            data [Constants.NotificationUserInfoKeys.messageContent.rawValue] = content
+            data [Constants.NotificationUserInfoKeys.participantID.rawValue] = peerUri
+            data [Constants.NotificationUserInfoKeys.accountID.rawValue] = account.id
             if let name = peerName {
-                data [NotificationUserInfoKeys.name.rawValue] = name
+                data [Constants.NotificationUserInfoKeys.name.rawValue] = name
                 self.notificationHandler.presentMessageNotification(data: data)
                 return
             }
@@ -439,7 +439,7 @@ class ConversationsManager {
     func searchNameAndPresentNotification(data: [String: String], hash: String) {
         var data = data
         var accountId = ""
-        if let getAccountFromDictionary = data[NotificationUserInfoKeys.accountID.rawValue] {
+        if let getAccountFromDictionary = data[Constants.NotificationUserInfoKeys.accountID.rawValue] {
             accountId = getAccountFromDictionary
         }
         self.nameService.usernameLookupStatus.single()
@@ -450,10 +450,10 @@ class ConversationsManager {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] lookupNameResponse in
                 if let name = lookupNameResponse.name, !name.isEmpty {
-                    data [NotificationUserInfoKeys.name.rawValue] = name
+                    data [Constants.NotificationUserInfoKeys.name.rawValue] = name
                     self?.notificationHandler.presentMessageNotification(data: data)
                 } else if let address = lookupNameResponse.address {
-                    data [NotificationUserInfoKeys.name.rawValue] = address
+                    data [Constants.NotificationUserInfoKeys.name.rawValue] = address
                     self?.notificationHandler.presentMessageNotification(data: data)
                 }
             })
