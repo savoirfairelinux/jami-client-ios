@@ -137,12 +137,12 @@ class NotificationService: UNNotificationServiceExtension {
                             }
                             info["displayName"] = name
                             self.presentCall(info: info)
-                            self.verifyTasksStatus()
                         }
                     }
                     switch result {
                     case .call(let peerId, let hasVideo):
                         handleCall(peerId, "\(hasVideo)")
+                        return
                     case .gitMessage:
                         /// check if account already acive
                         guard !self.accountIsActive else { break }
@@ -217,9 +217,8 @@ class NotificationService: UNNotificationServiceExtension {
                     self.presentLocalNotification(notification: notification)
                 }
             }
+            pendingLocalNotifications.removeAll()
         }
-        self.pendingCalls.removeAll()
-        self.pendingLocalNotifications.removeAll()
         if let contentHandler = contentHandler {
             contentHandler(self.bestAttemptContent)
         }
@@ -347,7 +346,6 @@ class NotificationService: UNNotificationServiceExtension {
                 info["displayName"] = name
             }
             presentCall(info: info)
-            pendingCalls.removeValue(forKey: address)
             return
         }
         for pending in pendingLocalNotifications where pending.key == address {
@@ -529,6 +527,8 @@ extension NotificationService {
                 print("NotificationService", "Did report voip notification, error: \(String(describing: error))")
             })
         }
+        self.pendingCalls.removeAll()
+        self.pendingLocalNotifications.removeAll()
         self.verifyTasksStatus()
     }
 }
