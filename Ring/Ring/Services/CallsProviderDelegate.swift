@@ -81,7 +81,9 @@ extension CallsProviderDelegate {
             uuid = call.uuid
             unhandeledCalls.remove(call)
         }
-        os_log("&&&&&&CallsProviderDelegate stopCall")
+        if let call = getUnhandeledCall(for: callUUID) {
+            unhandeledCalls.remove(call)
+        }
         let callController = CXCallController()
         let endCallAction = CXEndCallAction(call: uuid)
         let transaction = CXTransaction(action: endCallAction)
@@ -153,6 +155,7 @@ extension CallsProviderDelegate {
                                                 }
                                                 completion?(error)
         }
+        startTimer(callUUID: unhandeledCall.uuid)
     }
 
     func startCall(account: AccountModel, call: CallModel) {
@@ -230,7 +233,7 @@ extension CallsProviderDelegate {
 
     func startTimer(callUUID: UUID) {
         stopTimer()
-        let seconds = 10.0
+        let seconds = 5.0
         timer = Timer.scheduledTimer(timeInterval: seconds, target: self, selector: #selector(timerHandler(_:)), userInfo: callUUID, repeats: false)
     }
 
@@ -246,8 +249,6 @@ extension CallsProviderDelegate: CXProviderDelegate {
     func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
         if let call = getUnhandeledCall(for: action.callUUID) {
             call.state = .answered
-            // answer from CallKit arrived earlier than the incoming call from the daemon. Start timer to cancel a call after timeout if not incoming call from the daemon
-            startTimer(callUUID: action.callUUID)
             return
         }
         let serviceEventType: ServiceEventType = .callProviderAnswerCall
