@@ -136,6 +136,9 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
               !call.callId.isEmpty else {
             return
         }
+        if call.state != .incoming {
+            return
+        }
         if self.accountService.boothMode() {
             self.callService.refuse(callId: call.callId)
                 .subscribe()
