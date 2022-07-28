@@ -81,8 +81,6 @@ extension CallsProviderDelegate {
             uuid = call.uuid
             unhandeledCalls.remove(call)
         }
-        os_log("&&&&&&CallsProviderDelegate stopCall")
-        let callController = CXCallController()
         let endCallAction = CXEndCallAction(call: uuid)
         let transaction = CXTransaction(action: endCallAction)
         callController.request(transaction) { error in
@@ -92,6 +90,10 @@ extension CallsProviderDelegate {
                 print("Requested transaction successfully")
             }
         }
+    }
+
+    func hasPendingTransactions() -> Bool {
+        return self.callController.callObserver.calls.isEmpty
     }
 
     func handleIncomingCall(account: AccountModel, call: CallModel) {
