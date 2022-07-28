@@ -94,6 +94,10 @@ extension CallsProviderDelegate {
         }
     }
 
+    func hasPendingTransactions() {
+        return !self.provider?.pendingTransactions.isEmpty
+    }
+
     func handleIncomingCall(account: AccountModel, call: CallModel) {
         if let unhandeledCall = getUnhandeledCall(for: call.paricipantHash()) {
             defer {
