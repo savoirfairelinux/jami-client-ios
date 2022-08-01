@@ -329,7 +329,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         self.log.warning("entering background")
-        self.accountService.setAccountsActive(active: false)
         self.callService.muteCurrentCallVideoVideo( mute: true)
         guard let account = self.accountService.currentAccount else { return }
         self.presenceService.subscribeBuddies(withAccount: account.id, withContacts: self.contactsService.contacts.value, subscribe: false)
@@ -337,7 +336,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         self.log.warning("entering foreground")
-        self.accountService.setAccountsActive(active: true)
         self.daemonService.connectivityChanged()
         self.updateNotificationAvailability()
         self.callService.muteCurrentCallVideoVideo( mute: false)
@@ -688,18 +686,10 @@ extension AppDelegate: PKPushRegistryDelegate {
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
         /// before ios 14.5 this function is called by Apple, we should notify daemon. After ios 14.5 it called from notification extension. We must present Call screen
         if #available(iOS 14.5, *) {
-            /// called from the notification extension. Account is not active at this point
-            self.accountService.setAccountsActive(active: true)
-            if let data = payload.dictionaryPayload as? [String: Any] {
-                self.accountService.pushNotificationReceived(data: data)
-            }
-            /// if we present call kit early, there are will be no call from the daemon. And if a user answer fast there will be a time gap before call screen could be presented
-            /// sleep for 2 second to give time for the daemon to receive a call.
-            sleep(2)
             let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
             let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
             let displayName = payload.dictionaryPayload["displayName"] as? String ?? ""
-            callsProvider.previewCall(peerId: peerId, withVideo: hasVideo.boolValue, displayName: displayName) { _ in
+            callsProvider.previewPendingCall(peerId: peerId, withVideo: hasVideo.boolValue, displayName: displayName) { _ in
                 completion()
             }
         } else if let data = payload.dictionaryPayload as? [String: Any] {

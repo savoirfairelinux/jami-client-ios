@@ -540,6 +540,12 @@ class CallsService: CallsAdapterDelegate {
                                           isMixed: true)
     }
 
+    func updateCallUUID(callId: String, callUUID: String) {
+        if let call = self.call(callID: callId), let uuid = UUID(uuidString: callUUID) {
+            call.callUUID = uuid
+        }
+    }
+
     // MARK: CallsAdapterDelegate
     // swiftlint:disable cyclomatic_complexity
     func didChangeCallState(withCallId callId: String, state: String, accountId: String, stateCode: NSInteger) {
