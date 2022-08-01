@@ -180,6 +180,7 @@ static id <CallsAdapterDelegate> _delegate;
 #pragma mark -
 
 - (BOOL)acceptCallWithId:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList {
+    NSLog(@"acceptCallWithId %@", callId);
     return acceptWithMedia(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
 }
 

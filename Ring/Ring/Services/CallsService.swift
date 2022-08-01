@@ -293,7 +293,8 @@ class CallsService: CallsAdapterDelegate {
         self.callsAdapter.hangUpCall(call.callId, accountId: call.accountId)
     }
     func answerCall(call: CallModel) -> Bool {
-        self.callsAdapter.acceptCall(withId: call.callId, accountId: call.accountId, withMedia: call.mediaList)
+        NSLog("call service answerCall %@", call.callId);
+        return self.callsAdapter.acceptCall(withId: call.callId, accountId: call.accountId, withMedia: call.mediaList)
     }
 
     func hangUp(callId: String) -> Completable {
@@ -538,6 +539,12 @@ class CallsService: CallsAdapterDelegate {
                                           message: message,
                                           from: from,
                                           isMixed: true)
+    }
+
+    func updateCallUUID(callId: String, callUUID: String) {
+        if let call = self.call(callID: callId), let uuid = UUID(uuidString: callUUID) {
+            call.callUUID = uuid
+        }
     }
 
     // MARK: CallsAdapterDelegate
