@@ -77,11 +77,12 @@ class CallsProviderDelegate: NSObject {
 extension CallsProviderDelegate {
     func stopCall(callUUID: UUID, participant: String) {
         var uuid = callUUID
-        if let call = getUnhandeledCall(for: participant) {
+        if let call = getUnhandeledCall(for: callUUID) {
+             unhandeledCalls.remove(call)
+        } else if let call = getUnhandeledCall(for: participant) {
             uuid = call.uuid
             unhandeledCalls.remove(call)
         }
-        os_log("&&&&&&CallsProviderDelegate stopCall")
         let callController = CXCallController()
         let endCallAction = CXEndCallAction(call: uuid)
         let transaction = CXTransaction(action: endCallAction)
@@ -93,6 +94,9 @@ extension CallsProviderDelegate {
             }
         }
     }
+    func hasPendingTransactions() -> Bool {
+        return !self.callController.callObserver.calls.isEmpty
+    }
 
     func handleIncomingCall(account: AccountModel, call: CallModel) {
         if let unhandeledCall = getUnhandeledCall(for: call.paricipantHash()) {
@@ -101,6 +105,7 @@ extension CallsProviderDelegate {
             }
             call.callUUID = unhandeledCall.uuid
             if unhandeledCall.state != .awaiting {
+                ///CallKit already received user action before call received from the daemon. Notify call view about the action
                 let serviceEventType: ServiceEventType = unhandeledCall.state == .answered ? .callProviderAnswerCall : .callProviderCancelCall
                 var serviceEvent = ServiceEvent(withEventType: serviceEventType)
                 serviceEvent.addEventInput(.callUUID, value: call.callUUID.uuidString)
@@ -110,6 +115,11 @@ extension CallsProviderDelegate {
             call.callUUID = UUID()
             reportIncomingCall(account: account, call: call, completion: nil)
         }
+        let serviceEventType: ServiceEventType = .callProviderUpdatedUUID
+        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        serviceEvent.addEventInput(.callId, value: call.callId)
+        serviceEvent.addEventInput(.callUUID, value: call.callUUID.uuidString)
+        self.responseStream.onNext(serviceEvent)
     }
 
     private func reportIncomingCall(account: AccountModel, call: CallModel,
@@ -134,7 +144,7 @@ extension CallsProviderDelegate {
         }
     }
 
-    func previewCall(peerId: String, withVideo: Bool, displayName: String,
+    func previewPendingCall(peerId: String, withVideo: Bool, displayName: String,
                      completion: ((Error?) -> Void)?) {
         let update = CXCallUpdate()
         let handleType = CXHandle.HandleType.phoneNumber
@@ -153,6 +163,11 @@ extension CallsProviderDelegate {
                                                 }
                                                 completion?(error)
         }
+        let serviceEventType: ServiceEventType = .callProviderPreviewPendingCall
+        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        serviceEvent.addEventInput(.callUUID, value: unhandeledCall.uuid.uuidString)
+        self.responseStream.onNext(serviceEvent)
+        startTimer(callUUID: unhandeledCall.uuid)
     }
 
     func startCall(account: AccountModel, call: CallModel) {
@@ -230,7 +245,7 @@ extension CallsProviderDelegate {
 
     func startTimer(callUUID: UUID) {
         stopTimer()
-        let seconds = 10.0
+        let seconds = 6.0
         timer = Timer.scheduledTimer(timeInterval: seconds, target: self, selector: #selector(timerHandler(_:)), userInfo: callUUID, repeats: false)
     }
 
@@ -246,8 +261,6 @@ extension CallsProviderDelegate: CXProviderDelegate {
     func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
         if let call = getUnhandeledCall(for: action.callUUID) {
             call.state = .answered
-            // answer from CallKit arrived earlier than the incoming call from the daemon. Start timer to cancel a call after timeout if not incoming call from the daemon
-            startTimer(callUUID: action.callUUID)
             return
         }
         let serviceEventType: ServiceEventType = .callProviderAnswerCall
