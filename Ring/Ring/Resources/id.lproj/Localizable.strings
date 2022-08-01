@@ -24,45 +24,45 @@
 "global.ok" = "Oke";
 "global.close" = "Tutup";
 "global.share" = "Bagikan";
-"global.forward" = "Forward";
-"global.save" = "Save";
-"global.resend" = "Resend";
+"global.forward" = "Teruskan";
+"global.save" = "Simpan";
+"global.resend" = "Kirim ulang";
 "global.preview" = "Cuplikan";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "Kode QR yang buruk";
+"scan.search" = "Mencari...";
 
 // Smartlist
 "smartlist.yesterday" = "Kemarin";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Direktori Publik";
 "smartlist.conversations" = "Obrolan";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searching" = "Mencari...";
+"smartlist.noResults" = "Tidak ketemu";
+"smartlist.noConversation" = "Tidak ada obrolan";
+"smartlist.searchBarPlaceholder" = "Masukkan nama...";
+"smartlist.searchBar" = "Cari kontak baru atau yang sudah ada...";
 "smartlist.noNetworkConnectivity" = "Tidak ada jaringan internet";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Pastikan akses seluler diberikan dalam pengaturan Anda";
 "smartlist.accountsTitle" = "Akun";
-"smartlist.addAccountButton" = "+ Add Account";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.addAccountButton" = "+ Tambah Akun";
+"smartlist.noNumber" = "Kontak yang dipilih tidak memiliki nomor";
+"smartlist.selectOneNumber" = "Pilih salah satu nomor";
 "smartlist.invitations" = "Undangan";
 "smartlist.accountSettings" = "Pengaturan Akun";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Pengaturan Lanjutan";
 "smartlist.aboutJami" = "Tentang Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.messagePlaceholder" = "Tulis pesan ke";
+"conversation.explanationSendingLocationTo" = "Anda saat ini berbagi lokasi Anda dengan";
+"conversation.explanationReceivingLocationFrom" = "Saat ini Anda sedang menerima lokasi langsung dari";
+"conversation.errorSavingImage" = "Gagal menyimpan gambar ke galeri";
+"conversation.receivedRequest" = "\%s\ mengirimi Anda permintaan untuk percakapan.";
+"conversation.requestMessage" = "Halo, \nApakah Anda ingin bergabung dalam percakapan?";
+"conversation.notContact" = "\%s\ tidak ada dalam daftar kontak Anda.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
+"conversation.synchronizationTitle" = "Anda telah menerima permintaan percakapan.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
 //Invitations
@@ -125,7 +125,7 @@
 "linkToAccountManager.passwordLabel" = "Enter Password";
 "linkToAccountManager.usernamePlaceholder" = "Nama pengguna";
 "linkToAccountManager.usernameLabel" = "Enter Username";
-"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
+"linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
@@ -188,7 +188,7 @@
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
-"calls.searching" = "Searching…";
+"calls.searching" = "Mencari...";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -212,14 +212,14 @@
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
-"accountPage.saveProxyAddress" = "Save";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.saveProxyAddress" = "Simpan";
+"accountPage.proxyPaceholder" = "Alamat proksi";
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
 "accountPage.revokeDeviceTitle" = "Hapus perangkat";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
-"accountPage.revokeDeviceButton" = "Revoke";
+"accountPage.revokeDeviceButton" = "Cabut";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
@@ -229,7 +229,7 @@
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.namePlaceholder" = "Nama";
-"accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.linkDeviceTitle" = "Tautkan perangkat lain";
 "accountPage.other" = "Lainnya";
 "accountPage.removeAccountTitle" = "Buang akun";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
