@@ -46,6 +46,7 @@ enum ServiceEventType {
     case nameRegistrationEnded
     case callProviderAnswerCall
     case callProviderCancelCall
+    case callProviderPreviewPendingCall
     case audioActivated
     case newOutgoingMessage
     case messageTypingIndicator
@@ -55,6 +56,8 @@ enum ServiceEventType {
     case sendLocation
     case deleteLocation
     case stopLocationSharing
+    case appEnterBackground
+    case appEnterForeground
 }
 
 /**

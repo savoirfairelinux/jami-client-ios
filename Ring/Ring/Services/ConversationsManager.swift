@@ -21,8 +21,8 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import SwiftyBeaver
-import os
 
 // swiftlint:disable type_body_length
 class ConversationsManager {
@@ -44,6 +44,7 @@ class ConversationsManager {
     private let geoLocationMIMEType = "application/geo"
     private let maxSizeForAutoaccept = 20 * 1024 * 1024
     private let notificationHandler = LocalNotificationsHelper()
+    private let appState = BehaviorRelay<ServiceEventType>(value: .appEnterForeground)
 
     // swiftlint:disable cyclomatic_complexity
     init(with conversationService: ConversationsService,
@@ -71,6 +72,61 @@ class ConversationsManager {
         self.subscribeContactsEvents()
         self.subscribeLocationSharingEvent()
         self.subscribeCallsProviderEvents()
+        self.controlAccountsState()
+    }
+
+    ///when application is not active, accounts also should be not active. Except when when handling incoming call.
+    private func controlAccountsState() {
+        ///subscribe to app state changes
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification,object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedForeground), name: UIApplication.willEnterForegroundNotification,object: nil)
+        /// calls events
+        let callProviderEvents = callsProvider.sharedResponseStream
+            .filter({ (event) in
+                return event.eventType == .callProviderCancelCall ||
+                event.eventType == .callProviderPreviewPendingCall
+            }).map { event in
+                event.eventType
+            }
+        let callEndedEvents = self.callService.sharedResponseStream
+            .filter({ (event) in
+                return  event.eventType == .callEnded
+            }).map { event in
+                event.eventType
+            }
+        Observable.of(callProviderEvents.asObservable(),
+                      callEndedEvents.asObservable(),
+                      appState.asObservable()).merge().subscribe { [weak self] eventType in
+            guard let self = self else { return }
+            switch eventType {
+            case .appEnterBackground:
+                if !self.callsProvider.hasPendingTransactions() {
+                    self.accountsService.setAccountsActive(active: false)
+                }
+            case .appEnterForeground, .callProviderPreviewPendingCall:
+                self.accountsService.setAccountsActive(active: true)
+            case .callEnded, .callProviderCancelCall:
+                DispatchQueue.main.async {
+                    let state = UIApplication.shared.applicationState
+                    if state == .background {
+                        self.accountsService.setAccountsActive(active: false)
+                    }
+                }
+            default:
+                break
+            }
+        } onError: { _ in }
+            .disposed(by: self.disposeBag)
+    }
+
+    @objc
+    func appMovedToBackground() {
+        appState.accept(.appEnterBackground)
+    }
+
+    @objc
+    func appMovedForeground() {
+        appState.accept(.appEnterForeground)
     }
 
     private func subscribeContactsEvents() {
@@ -110,10 +166,6 @@ class ConversationsManager {
                     }
                 } else {
                     self.callService.stopCall(call: call)
-                    let state = UIApplication.shared.applicationState
-                    if state == .background {
-                        self.accountsService.setAccountsActive(active: false)
-                    }
                 }
             })
             .disposed(by: self.disposeBag)
@@ -200,12 +252,6 @@ class ConversationsManager {
                 guard let peerId: String = event.getEventInput(ServiceEventInput.peerUri),
                       let uuidString: String = event.getEventInput(ServiceEventInput.callUUID) else { return }
                 self.callsProvider.stopCall(callUUID: UUID(uuidString: uuidString)!, participant: peerId.filterOutHost())
-                DispatchQueue.main.async { [weak self] in
-                    let state = UIApplication.shared.applicationState
-                    if state == .background {
-                        self?.accountsService.setAccountsActive(active: false)
-                    }
-                }
             })
             .disposed(by: disposeBag)
         self.callService.newMessage
