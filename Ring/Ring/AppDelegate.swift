@@ -624,7 +624,11 @@ extension AppDelegate {
                 dictionary[keyString] = valueString
             }
         }
+        let isResubscribe = dictionary["timeout"] != nil
         if UIApplication.shared.applicationState == .background {
+            if !isResubscribe {
+                return
+            }
             backgrounTaskQueue.async {[weak self] in
                 var taskId = UIBackgroundTaskIdentifier.invalid
                 taskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {
