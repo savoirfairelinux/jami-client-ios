@@ -38,25 +38,11 @@ class CustomSearchBar: UISearchBar {
     }
 
     var currentTrailing: CGFloat {
-        if #available(iOS 13.0, *) {
-            return trailing
-        }
-        let trailingConst = searchFieldTrailing.constant
-        if trailingConst == trailing {
-            return trailing1
-        }
         return trailing
     }
 
     var currentTrailingEditing: CGFloat {
-        if #available(iOS 13.0, *) {
-            return trailingEditing
-        }
-        let trailingConst = searchFieldTrailing.constant
-        if trailingConst == trailingEditing {
-            return trailingEditing1
-        }
-        return trailingEditing
+        trailingEditing
     }
 
     var leftMargin: CGFloat {
@@ -98,34 +84,12 @@ class CustomSearchBar: UISearchBar {
         rightButton.tintColor = UIColor.jamiMain
         self.addSubview(rightButton)
         rightButton.translatesAutoresizingMaskIntoConstraints = true
-        if #available(iOS 13.0, *) {
-            self.searchTextField.translatesAutoresizingMaskIntoConstraints = false
-            searchFieldTrailing = self.searchTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: currentTrailing)
-            searchFieldTrailing.isActive = true
-            searchFieldLeading = self.searchTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: leading)
-            searchFieldLeading.isActive = true
-            self.searchTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 7).isActive = true
-        } else {
-            for view in subviews {
-                if let searchField = view as? UITextField {
-                    searchField.translatesAutoresizingMaskIntoConstraints = false
-                    searchFieldTrailing = searchField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: currentTrailing)
-                    searchFieldTrailing.isActive = true
-                    searchField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-                    searchField.topAnchor.constraint(equalTo: self.topAnchor, constant: 7).isActive = true
-                } else {
-                    for sView in view.subviews {
-                        if let searchField = sView as? UITextField {
-                            searchField.translatesAutoresizingMaskIntoConstraints = false
-                            searchFieldTrailing = searchField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: currentTrailing)
-                            searchFieldTrailing.isActive = true
-                            searchField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-                            searchField.topAnchor.constraint(equalTo: self.topAnchor, constant: 7).isActive = true
-                        }
-                    }
-                }
-            }
-        }
+        self.searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        searchFieldTrailing = self.searchTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: currentTrailing)
+        searchFieldTrailing.isActive = true
+        searchFieldLeading = self.searchTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: leading)
+        searchFieldLeading.isActive = true
+        self.searchTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 7).isActive = true
         rightButton.rx.tap
             .subscribe(onNext: { buttonPressed() })
             .disposed(by: self.disposeBag)

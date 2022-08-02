@@ -439,19 +439,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     @objc
     private func registerNotifications() {
         self.requestNotificationAuthorization()
-        if #available(iOS 14.5, *) {
-            DispatchQueue.main.async {
-                UIApplication.shared.registerForRemoteNotifications()
-            }
+        DispatchQueue.main.async {
+            UIApplication.shared.registerForRemoteNotifications()
         }
         self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
     }
 
     private func unregisterNotifications() {
-        if #available(iOS 14.5, *) {
-            DispatchQueue.main.async {
-                UIApplication.shared.unregisterForRemoteNotifications()
-            }
+        DispatchQueue.main.async {
+            UIApplication.shared.unregisterForRemoteNotifications()
         }
         self.voipRegistry.desiredPushTypes = nil
         self.accountService.setPushNotificationToken(token: "")
@@ -606,15 +602,13 @@ extension AppDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken
-                        deviceToken: Data) {
-        if #available(iOS 14.5, *) {
-            let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-            print(deviceTokenString)
-            if let bundleIdentifier = Bundle.main.bundleIdentifier {
-                self.accountService.setPushNotificationTopic(topic: bundleIdentifier)
-            }
-            self.accountService.setPushNotificationToken(token: deviceTokenString)
+                     deviceToken: Data) {
+        let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print(deviceTokenString)
+        if let bundleIdentifier = Bundle.main.bundleIdentifier {
+            self.accountService.setPushNotificationTopic(topic: bundleIdentifier)
         }
+        self.accountService.setPushNotificationToken(token: deviceTokenString)
     }
 
     func application(
@@ -663,47 +657,23 @@ extension AppDelegate {
 
 // MARK: PKPushRegistryDelegate
 extension AppDelegate: PKPushRegistryDelegate {
-
-    /// Used only for ios before 14.5
-    func pushRegistry(_ registry: PKPushRegistry, didInvalidatePushTokenFor type: PKPushType) {
-        guard #available(iOS 14.5, *) else {
-            self.accountService.setPushNotificationToken(token: "")
-            return
-        }
-    }
-
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
-        guard #available(iOS 14.5, *) else {
-            if type == PKPushType.voIP {
-                let deviceTokenString = pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()
-                if let bundleIdentifier = Bundle.main.bundleIdentifier {
-                    self.accountService.setPushNotificationTopic(topic: bundleIdentifier + ".voip")
-                }
-                self.accountService.setPushNotificationToken(token: deviceTokenString)
-            }
-            return
-        }
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
-        /// before ios 14.5 this function is called by Apple, we should notify daemon. After ios 14.5 it called from notification extension. We must present Call screen
-        if #available(iOS 14.5, *) {
-            /// called from the notification extension. Account is not active at this point
-            self.accountService.setAccountsActive(active: true)
-            if let data = payload.dictionaryPayload as? [String: Any] {
-                self.accountService.pushNotificationReceived(data: data)
-            }
-            /// if we present call kit early, there are will be no call from the daemon. And if a user answer fast there will be a time gap before call screen could be presented
-            /// sleep for 2 second to give time for the daemon to receive a call.
-            sleep(2)
-            let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
-            let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
-            let displayName = payload.dictionaryPayload["displayName"] as? String ?? ""
-            callsProvider.previewCall(peerId: peerId, withVideo: hasVideo.boolValue, displayName: displayName) { _ in
-                completion()
-            }
-        } else if let data = payload.dictionaryPayload as? [String: Any] {
+        /// called from the notification extension. Account is not active at this point
+        self.accountService.setAccountsActive(active: true)
+        if let data = payload.dictionaryPayload as? [String: Any] {
             self.accountService.pushNotificationReceived(data: data)
+        }
+        /// if we present call kit early, there are will be no call from the daemon. And if a user answer fast there will be a time gap before call screen could be presented
+        /// sleep for 2 second to give time for the daemon to receive a call.
+        sleep(2)
+        let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
+        let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
+        let displayName = payload.dictionaryPayload["displayName"] as? String ?? ""
+        callsProvider.previewCall(peerId: peerId, withVideo: hasVideo.boolValue, displayName: displayName) { _ in
+            completion()
         }
     }
 }

@@ -72,27 +72,6 @@ final class TitleView: UIView {
         sizeToFit()
     }
 
-    private func layoutSubviewsBefore11() {
-        let margin: CGFloat = 10
-        guard let navBar = typedSuperview() as? UINavigationBar else { return }
-        let center = convert(navBar.center, from: navBar)
-        let sizeLabel = label.sizeThatFits(bounds.size)
-        let sizeImage = avatarImage.sizeThatFits(bounds.size)
-        let totalWidth: CGFloat = sizeLabel.width + sizeImage.width + margin
-        let x = max(bounds.minX, center.x - totalWidth * 0.5)
-        let y: CGFloat
-
-        if contentOffset == 0 {
-            y = bounds.maxY
-        } else {
-            y = titleVerticalPositionAdjusted(by: contentOffset)
-        }
-
-        avatarView.frame = CGRect(x: 0, y: 0, width: sizeImage.width, height: sizeImage.height)
-        label.frame = CGRect(x: sizeImage.width + margin, y: 0, width: sizeLabel.width, height: sizeImage.height)
-        containerView.frame = CGRect(x: x, y: y, width: totalWidth, height: sizeImage.height)
-    }
-
     private func layoutSubviews11() {
         let margin: CGFloat = 10
         let maxNameWidth: CGFloat = 120.0
@@ -118,12 +97,7 @@ final class TitleView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        if #available(iOS 11.0, *) {
-            layoutSubviews11()
-        } else {
-            layoutSubviewsBefore11()
-        }
+        layoutSubviews11()
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView, threshold: CGFloat = 0) {

@@ -47,21 +47,15 @@ class MessageAccessoryView: UIView, NibLoadable, GrowingTextViewDelegate {
     override func didMoveToWindow() {
         self.setupMessageTextView()
         super.didMoveToWindow()
-        if #available(iOS 11.0, *) {
-            guard let window = self.window else {
-                return
-            }
-            self.bottomAnchor
-                .constraint(lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor,
-                            multiplier: 1)
-                .isActive = true
+        guard let window = self.window else {
+            return
         }
+        self.bottomAnchor
+            .constraint(lessThanOrEqualToSystemSpacingBelow: window.safeAreaLayoutGuide.bottomAnchor,
+                        multiplier: 1)
+            .isActive = true
         blurEffect?.removeFromSuperview()
-        if #available(iOS 13.0, *) {
-            blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
-        } else {
-            blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
-        }
+        blurEffect = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
         self.backgroundColor = UIColor.jamiBackgroundColor
         if blurEffect != nil {
             blurEffect!.frame = self.bounds

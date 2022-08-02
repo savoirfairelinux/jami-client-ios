@@ -149,40 +149,16 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
         searchBarShadow.layer.masksToBounds = false
         searchBarShadow.superview?.bringSubviewToFront(searchBarShadow)
 
-        if #available(iOS 13.0, *) {
-            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
-            visualEffectView.frame = searchBarShadow.bounds
-            visualEffectView.isUserInteractionEnabled = false
-            searchBarShadow.insertSubview(visualEffectView, at: 0)
-            visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-            visualEffectView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
-            visualEffectView.trailingAnchor.constraint(equalTo: searchBarShadow.trailingAnchor, constant: 0).isActive = true
-            visualEffectView.leadingAnchor.constraint(equalTo: searchBarShadow.leadingAnchor, constant: 0).isActive = true
-            visualEffectView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-            visualEffectView.bottomAnchor.constraint(equalTo: searchBarShadow.bottomAnchor, constant: 0).isActive = true
-        } else {
-            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-            visualEffectView.frame = searchBarShadow.bounds
-            visualEffectView.isUserInteractionEnabled = false
-            let background = UIView()
-            background.frame = searchBarShadow.bounds
-            background.backgroundColor = UIColor(red: 245, green: 245, blue: 245, alpha: 1.0)
-            background.alpha = 0.7
-            searchBarShadow.insertSubview(background, at: 0)
-            searchBarShadow.insertSubview(visualEffectView, at: 0)
-            background.translatesAutoresizingMaskIntoConstraints = false
-            visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-            visualEffectView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
-            background.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
-            visualEffectView.trailingAnchor.constraint(equalTo: searchBarShadow.trailingAnchor, constant: 0).isActive = true
-            background.trailingAnchor.constraint(equalTo: searchBarShadow.trailingAnchor, constant: 0).isActive = true
-            visualEffectView.leadingAnchor.constraint(equalTo: searchBarShadow.leadingAnchor, constant: 0).isActive = true
-            background.leadingAnchor.constraint(equalTo: searchBarShadow.leadingAnchor, constant: 0).isActive = true
-            visualEffectView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-            background.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-            visualEffectView.bottomAnchor.constraint(equalTo: searchBarShadow.bottomAnchor, constant: 0).isActive = true
-            background.bottomAnchor.constraint(equalTo: searchBarShadow.bottomAnchor, constant: 0).isActive = true
-        }
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+        visualEffectView.frame = searchBarShadow.bounds
+        visualEffectView.isUserInteractionEnabled = false
+        searchBarShadow.insertSubview(visualEffectView, at: 0)
+        visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+        visualEffectView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
+        visualEffectView.trailingAnchor.constraint(equalTo: searchBarShadow.trailingAnchor, constant: 0).isActive = true
+        visualEffectView.leadingAnchor.constraint(equalTo: searchBarShadow.leadingAnchor, constant: 0).isActive = true
+        visualEffectView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        visualEffectView.bottomAnchor.constraint(equalTo: searchBarShadow.bottomAnchor, constant: 0).isActive = true
         logoView.superview?.bringSubviewToFront(logoView)
     }
 

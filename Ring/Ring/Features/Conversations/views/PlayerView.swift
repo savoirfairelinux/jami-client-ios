@@ -168,19 +168,11 @@ class PlayerView: UIView {
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] pause in
-                if #available(iOS 13.0, *) {
-                    var image = UIImage(systemName: "pause.fill")
-                    if pause {
-                        image = UIImage(systemName: "play.fill")
-                    }
-                    self?.togglePause.setBackgroundImage(image, for: .normal)
-                } else {
-                    var image = UIImage(asset: Asset.pauseCall)
-                    if pause {
-                        image = UIImage(asset: Asset.unpauseCall)
-                    }
-                    self?.togglePause.setBackgroundImage(image, for: .normal)
+                var image = UIImage(systemName: "pause.fill")
+                if pause {
+                    image = UIImage(systemName: "play.fill")
                 }
+                self?.togglePause.setBackgroundImage(image, for: .normal)
             })
             .disposed(by: self.disposeBag)
 
@@ -265,11 +257,7 @@ class PlayerView: UIView {
                                              backgroundColor: UIColor.white)
             self.progressSlider.setThumbImage(circleImage, for: .normal)
             self.progressSlider.setThumbImage(circleImage, for: .highlighted)
-            if #available(iOS 13.0, *) {
-                self.backgroundView.backgroundColor = UIColor.placeholderText
-            } else {
-                self.backgroundView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.8)
-            }
+            self.backgroundView.backgroundColor = UIColor.placeholderText
             self.bottomGradientViewHeight.constant = MINBOTTOMGRADIENTSIZE
             self.topGradientViewHeight.constant = MINTOPGRADIENTSIZE
             self.topConstraint.constant = MINCONSTRAINT

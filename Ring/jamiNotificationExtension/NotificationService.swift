@@ -119,26 +119,24 @@ class NotificationService: UNNotificationServiceExtension {
                         guard let self = self else {
                             return
                         }
-                        if #available(iOSApplicationExtension 14.5, *) {
-                            /// jami will be started. Set accounts to not active state
-                            if self.accountIsActive {
-                                self.accountIsActive = false
-                                self.adapterService.stop()
-                            }
-                            var info = request.content.userInfo
-                            info["peerId"] = peerId
-                            info["hasVideo"] = hasVideo
-                            let name = self.bestName(accountId: accountId, contactId: peerId)
-                            if name.isEmpty {
-                                info["displayName"] = peerId
-                                self.pendingCalls[peerId] = info
-                                self.startAddressLookup(address: peerId, accountId: accountId)
-                                return
-                            }
-                            info["displayName"] = name
-                            self.presentCall(info: info)
-                            self.verifyTasksStatus()
+                        /// jami will be started. Set accounts to not active state
+                        if self.accountIsActive {
+                            self.accountIsActive = false
+                            self.adapterService.stop()
                         }
+                        var info = request.content.userInfo
+                        info["peerId"] = peerId
+                        info["hasVideo"] = hasVideo
+                        let name = self.bestName(accountId: accountId, contactId: peerId)
+                        if name.isEmpty {
+                            info["displayName"] = peerId
+                            self.pendingCalls[peerId] = info
+                            self.startAddressLookup(address: peerId, accountId: accountId)
+                            return
+                        }
+                        info["displayName"] = name
+                        self.presentCall(info: info)
+                        self.verifyTasksStatus()
                     }
                     switch result {
                     case .call(let peerId, let hasVideo):
@@ -524,11 +522,9 @@ extension NotificationService {
     }
 
     private func presentCall(info: [AnyHashable: Any]) {
-        if #available(iOSApplicationExtension 14.5, *) {
-            CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
-                print("NotificationService", "Did report voip notification, error: \(String(describing: error))")
-            })
-        }
+        CXProvider.reportNewIncomingVoIPPushPayload(info, completion: { error in
+            print("NotificationService", "Did report voip notification, error: \(String(describing: error))")
+        })
         self.verifyTasksStatus()
     }
 }

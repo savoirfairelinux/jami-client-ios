@@ -29,12 +29,7 @@ public extension UIDevice {
     }
 
     var hasNotch: Bool {
-        var bottom: CGFloat = 0
-        if #available(iOS 11.0, *) {
-            bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-        } else {
-            bottom = 0
-        }
+        var bottom: CGFloat = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
         return bottom > 0
     }
     static let modelName: String = {

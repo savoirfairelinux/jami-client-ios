@@ -145,44 +145,14 @@ class ConversationViewController: UIViewController,
 
     // MARK: photo library
 
-    func checkPhotoLibraryPermission() {
-        let status = PHPhotoLibrary.authorizationStatus()
-        switch status {
-        case .authorized, .limited:
-            self.importImage()
-        case .denied, .restricted :
-            self.showNoPermissionsAlert(title: L10n.Alerts.noLibraryPermissionsTitle)
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization { [weak self] status in
-                guard let self = self else { return }
-                switch status {
-                case .authorized, .limited:
-                    self.importImage()
-                case .denied, .restricted:
-                    self.showNoPermissionsAlert(title: L10n.Alerts.noLibraryPermissionsTitle)
-                case .notDetermined:
-                    break
-                @unknown default:
-                    break
-                }
-            }
-        @unknown default:
-            break
-        }
-    }
-
     func selectItemsFromPhotoLibrary() {
-        if #available(iOS 14, *) {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                var config = PHPickerConfiguration()
-                config.selectionLimit = 0
-                let pickerViewController = PHPickerViewController(configuration: config)
-                pickerViewController.delegate = self
-                self.present(pickerViewController, animated: true, completion: nil)
-            }
-        } else {
-            self.checkPhotoLibraryPermission()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            var config = PHPickerConfiguration()
+            config.selectionLimit = 0
+            let pickerViewController = PHPickerViewController(configuration: config)
+            pickerViewController.delegate = self
+            self.present(pickerViewController, animated: true, completion: nil)
         }
     }
 
@@ -292,7 +262,6 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    @available(iOS 14, *)
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
         results.forEach { (result) in
@@ -318,7 +287,6 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    @available(iOS 14, *)
     private func getAssetTypeFrom(itemProvider: NSItemProvider) -> PHAssetMediaType {
         if itemProvider.canLoadObject(ofClass: UIImage.self) {
             return .image

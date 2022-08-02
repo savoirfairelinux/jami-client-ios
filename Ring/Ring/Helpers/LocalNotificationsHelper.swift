@@ -61,8 +61,8 @@ class LocalNotificationsHelper {
     }
 
     func presentMessageNotification(data: [String: String]) {
-        guard let title = data [Constants.NotificationUserInfoKeys.name.rawValue],
-              let body = data [Constants.NotificationUserInfoKeys.messageContent.rawValue] else {
+        guard let title = data[Constants.NotificationUserInfoKeys.name.rawValue],
+              let body = data[Constants.NotificationUserInfoKeys.messageContent.rawValue] else {
                 return
         }
         let content = UNMutableNotificationContent()

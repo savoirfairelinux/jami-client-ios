@@ -19,6 +19,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 import RxSwift
+import UIKit
 
 enum CallOptions {
     case none
@@ -64,16 +65,14 @@ class ButtonsContainerViewModel {
             .filter({ call in
                 return call.state == .current
             })
-            .map({[weak self] _ in
-                return true
-            })
+            .map({ _ in return true })
 
         callIsActive
             .subscribe(onNext: { [weak self] active in
                 if !active {
                     return
                 }
-                if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+                if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
                     self?.avalaibleCallOptions.onNext(.optionsWithoutSpeakerphone)
                     return
                 }

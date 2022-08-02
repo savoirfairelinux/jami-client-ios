@@ -140,11 +140,7 @@ extension UIViewController {
         let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
-        if #available(iOS 13.0, *) {
-            self.navigationController?.navigationBar.barTintColor = UIColor.systemBackground
-        } else {
-            self.navigationController?.navigationBar.barTintColor = UIColor.white
-        }
+        self.navigationController?.navigationBar.barTintColor = UIColor.systemBackground
     }
 
     func configureWalkrhroughNavigationBar() {

@@ -210,11 +210,7 @@ class ConferenceActionMenu: UIView {
         muteAudioLabel.text = muteLabelText
         muteAudioLabel.sizeToFit()
         muteAudioLabel.textAlignment = .center
-        if #available(iOS 13.0, *) {
-            muteAudioLabel.textColor = muteButtonEnabled ? UIColor.label : UIColor.quaternaryLabel
-        } else {
-            muteAudioLabel.textColor = muteButtonEnabled ? UIColor.white : UIColor.lightText
-        }
+        muteAudioLabel.textColor = muteButtonEnabled ? UIColor.label : UIColor.quaternaryLabel
         self.addSubview(muteAudioLabel)
         if !muteButtonEnabled { return }
         self.muteAudioButton = UIButton(frame: muteAudioLabel.frame)

@@ -400,11 +400,11 @@ class ConversationsManager {
                 AccountModelHelper.init(withAccount: account).isAccountRing(),
                 self.accountsService.getCurrentProxyState(accountID: account.id) else { return }
             var data = [String: String]()
-            data [Constants.NotificationUserInfoKeys.messageContent.rawValue] = content
-            data [Constants.NotificationUserInfoKeys.participantID.rawValue] = peerUri
-            data [Constants.NotificationUserInfoKeys.accountID.rawValue] = account.id
+            data[Constants.NotificationUserInfoKeys.messageContent.rawValue] = content
+            data[Constants.NotificationUserInfoKeys.participantID.rawValue] = peerUri
+            data[Constants.NotificationUserInfoKeys.accountID.rawValue] = account.id
             if let name = peerName {
-                data [Constants.NotificationUserInfoKeys.name.rawValue] = name
+                data[Constants.NotificationUserInfoKeys.name.rawValue] = name
                 self.notificationHandler.presentMessageNotification(data: data)
                 return
             }
@@ -450,10 +450,10 @@ class ConversationsManager {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] lookupNameResponse in
                 if let name = lookupNameResponse.name, !name.isEmpty {
-                    data [Constants.NotificationUserInfoKeys.name.rawValue] = name
+                    data[Constants.NotificationUserInfoKeys.name.rawValue] = name
                     self?.notificationHandler.presentMessageNotification(data: data)
                 } else if let address = lookupNameResponse.address {
-                    data [Constants.NotificationUserInfoKeys.name.rawValue] = address
+                    data[Constants.NotificationUserInfoKeys.name.rawValue] = address
                     self?.notificationHandler.presentMessageNotification(data: data)
                 }
             })

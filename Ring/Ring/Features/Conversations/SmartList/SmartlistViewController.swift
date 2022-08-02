@@ -129,10 +129,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 if self.menu.superview != nil {
                     self.showContextualMenu()
                 }
-                if #available(iOS 13.0, *) {
-                } else {
-                    self.navigationController?.setNavigationBarHidden(false, animated: false)
-                }
                 self.searchController.sizeChanged(to: size.width)
             }
         }
@@ -183,11 +179,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if #available(iOS 13.0, *) {
-            self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
-        } else {
-            self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
-        }
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
                                     NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
@@ -195,23 +187,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        if #available(iOS 13.0, *) {
-        } else {
-           self.searchController.hideButton(hide: false)
-        }
         self.searchController.sizeChanged(to: self.view.frame.size.width)
         super.viewDidAppear(animated)
         viewContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.navigationController?.setNavigationBarHidden(false, animated: false)
-        }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if #available(iOS 13.0, *) {
-        } else {
-            self.searchController.hideButton(hide: true)
         }
     }
 
@@ -289,10 +269,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         requestsBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 2, right: 5)
         conversationBadge.backgroundColor = UIColor.jamiMain
         requestsBadge.backgroundColor = UIColor.jamiMain
-        if #available(iOS 13.0, *) {
-        } else {
-            conversationsSegmentControl.tintColor = UIColor.gray.lighten(by: 10)
-        }
         self.viewModel.updateSegmentControl.subscribe { [weak self] (messages, requests) in
             self?.setUpSegmemtControl(messages: messages, requests: requests)
         }
@@ -536,31 +512,15 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         menu.addSubview(aboutView)
         let firstLine = UIView.init(frame: CGRect(x: 0, y: itemHeight, width: viewWidth, height: 1))
         let secondLine = UIView.init(frame: CGRect(x: 0, y: itemHeight * 2, width: viewWidth, height: 1))
-        if #available(iOS 13.0, *) {
-            firstLine.backgroundColor = UIColor.quaternaryLabel
-            secondLine.backgroundColor = UIColor.quaternaryLabel
-        } else {
-            firstLine.backgroundColor = UIColor.gray.lighten(by: 40)
-            secondLine.backgroundColor = UIColor.gray.lighten(by: 40)
-        }
+        firstLine.backgroundColor = UIColor.quaternaryLabel
+        secondLine.backgroundColor = UIColor.quaternaryLabel
         menu.addSubview(firstLine)
         menu.addSubview(secondLine)
-        if #available(iOS 13.0, *) {
-            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
-            visualEffectView.frame = menu.bounds
-            visualEffectView.isUserInteractionEnabled = false
-            visualEffectView.alpha = 0.97
-            menu.insertSubview(visualEffectView, at: 0)
-        } else {
-            let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-            visualEffectView.frame = menu.bounds
-            visualEffectView.isUserInteractionEnabled = false
-            let background = UIView()
-            background.frame = menu.bounds
-            background.backgroundColor = UIColor(red: 245, green: 245, blue: 245, alpha: 0.5)
-            menu.insertSubview(background, at: 0)
-            menu.insertSubview(visualEffectView, at: 0)
-        }
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
+        visualEffectView.frame = menu.bounds
+        visualEffectView.isUserInteractionEnabled = false
+        visualEffectView.alpha = 0.97
+        menu.insertSubview(visualEffectView, at: 0)
         self.navigationController?.view.addSubview(menu)
     }
 

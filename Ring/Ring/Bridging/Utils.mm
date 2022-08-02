@@ -168,11 +168,7 @@ extern "C" {
         auto rotation = av_display_rotation_get(data);
         auto uiImageOrientation = [Utils uimageOrientationFromRotation:rotation];
         auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
-        if (@available(iOS 11.0, *)) {
-            image = [image imageByApplyingCGOrientation: ciImageOrientation];
-        } else {
-            image = [image imageByApplyingOrientation:static_cast<int>(ciImageOrientation)];
-        }
+        image = [image imageByApplyingCGOrientation: ciImageOrientation];
         UIImage * imageUI = [UIImage imageWithCIImage:image scale:1 orientation: uiImageOrientation];
         return imageUI;
     }
