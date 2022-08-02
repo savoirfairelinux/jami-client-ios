@@ -62,6 +62,7 @@ class NotificationService: UNNotificationServiceExtension {
     var numberOfMessages = 0 /// number of scheduled messages
     var syncCompleted = false
     private let tasksGroup = DispatchGroup()
+    var accountId = ""
 
     typealias LocalNotification = (content: UNMutableNotificationContent, type: LocalNotificationType)
 
@@ -85,7 +86,8 @@ class NotificationService: UNNotificationServiceExtension {
             return
         }
 
-        guard let accountId = requestData[NotificationField.accountId.rawValue] else { return }
+        guard let account = requestData[NotificationField.accountId.rawValue] else { return }
+        accountId = account
 
         /// app is not active. Querry value from dht
         guard let proxyURL = getProxyCaches(data: requestData),
@@ -127,11 +129,11 @@ class NotificationService: UNNotificationServiceExtension {
                         var info = request.content.userInfo
                         info["peerId"] = peerId
                         info["hasVideo"] = hasVideo
-                        let name = self.bestName(accountId: accountId, contactId: peerId)
+                        let name = self.bestName(accountId: self.accountId, contactId: peerId)
                         if name.isEmpty {
                             info["displayName"] = peerId
                             self.pendingCalls[peerId] = info
-                            self.startAddressLookup(address: peerId, accountId: accountId)
+                            self.startAddressLookup(address: peerId, accountId: self.accountId)
                             return
                         }
                         info["displayName"] = name
@@ -145,17 +147,17 @@ class NotificationService: UNNotificationServiceExtension {
                         /// check if account already acive
                         guard !self.accountIsActive else { break }
                         self.accountIsActive = true
-                        self.adapterService.startAccountsWithListener { [weak self] event, eventData in
+                        self.adapterService.startAccountsWithListener(accountId: self.accountId) { [weak self] event, eventData in
                             guard let self = self else {
                                 return
                             }
                             switch event {
                             case .message:
                                 self.numberOfMessages += 1
-                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: accountId, conversationId: eventData.conversationId)
+                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId)
                             case .fileTransferDone:
                                 if let url = URL(string: eventData.content) {
-                                    self.configureFileNotification(from: eventData.jamiId, url: url, accountId: accountId, conversationId: eventData.conversationId)
+                                    self.configureFileNotification(from: eventData.jamiId, url: url, accountId: self.accountId, conversationId: eventData.conversationId)
                                 } else {
                                     self.numberOfFiles -= 1
                                     self.verifyTasksStatus()

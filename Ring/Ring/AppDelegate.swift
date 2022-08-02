@@ -625,26 +625,31 @@ extension AppDelegate {
             }
         }
         let isResubscribe = dictionary["timeout"] != nil
+        guard let accountId = dictionary["to"] else {
+            completionHandler(.newData)
+            return
+        }
         if UIApplication.shared.applicationState == .background {
             if !isResubscribe {
+                completionHandler(.newData)
                 return
             }
             backgrounTaskQueue.async {[weak self] in
                 var taskId = UIBackgroundTaskIdentifier.invalid
                 taskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {
                     if UIApplication.shared.applicationState == .background {
-                        self?.accountService.setAccountsActive(active: false)
+                        self?.accountService.setAccountActive(active: false, accountId: accountId)
                     }
                     UIApplication.shared.endBackgroundTask(taskId)
                 })
-                self?.accountService.setAccountsActive(active: true)
+                self?.accountService.setAccountActive(active: true, accountId: accountId)
                 self?.accountService.pushNotificationReceived(data: dictionary)
                 sleep(5)
                 let group = DispatchGroup()
                 group.enter()
                 DispatchQueue.main.async { [weak self] in
                     if UIApplication.shared.applicationState == .background {
-                        self?.accountService.setAccountsActive(active: false)
+                        self?.accountService.setAccountActive(active: false, accountId: accountId)
                     }
                     group.leave()
                 }

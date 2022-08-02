@@ -93,9 +93,9 @@ class AdapterService {
         Adapter.delegate = self
     }
 
-    func startAccountsWithListener(listener: @escaping (EventType, EventData) -> Void) {
+    func startAccountsWithListener(accountId: String, listener: @escaping (EventType, EventData) -> Void) {
         self.eventHandler = listener
-        start()
+        start(accountId: accountId)
     }
 
     func decrypt(keyPath: String, messagesPath: String, value: [String: Any]) -> PeerConnectionRequestType {
@@ -115,8 +115,8 @@ class AdapterService {
         }
     }
 
-    func start() {
-        self.adapter.start()
+    func start(accountId: String) {
+        self.adapter.start(accountId)
     }
 
     func stop() {

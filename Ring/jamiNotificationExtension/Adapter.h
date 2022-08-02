@@ -27,7 +27,7 @@
 @property (class, nonatomic, weak) id <AdapterDelegate> delegate;
 
 - (void)stop;
-- (BOOL)start;
+- (BOOL)start:(NSString*)accountId;
 - (bool)downloadFileWithFileId:(NSString*)fileId
                      accountId:(NSString*)accountId
                 conversationId:(NSString*)conversationId
