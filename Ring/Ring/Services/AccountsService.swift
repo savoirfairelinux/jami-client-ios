@@ -984,6 +984,10 @@ class AccountsService: AccountAdapterDelegate {
         self.accountAdapter.setAccountsActive(active)
     }
 
+    func setAccountActive(active: Bool, accountId: String) {
+        self.accountAdapter.setAccountActive(accountId, active: active)
+    }
+
     // MARK: - observable account data
 
     func devicesObservable(account: AccountModel) -> Observable<[DeviceModel]> {

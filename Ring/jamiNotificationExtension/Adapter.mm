@@ -162,11 +162,11 @@ std::map<std::string, std::string> nameServers;
                         std::string([filePath UTF8String]));
 }
 
-- (BOOL)start
+- (BOOL)start:(NSString*)accountId
 {
     [self registerSignals];
     if (DRing::initialized() == true) {
-        [self setAccountsActive:true];
+        setAccountActive(std::string([accountId UTF8String]), true);
         return true;
     }
 #if DEBUG
