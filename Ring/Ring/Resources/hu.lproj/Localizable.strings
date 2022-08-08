@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Beszélgetések";
-"global.meTabBarTitle" = "Fiók beállítások";
+"global.meTabBarTitle" = "Fiókbeállítások";
 "global.ok" = "Rendben";
 "global.close" = "Bezárás";
 "global.share" = "Megosztás ";
@@ -49,7 +49,7 @@
 "smartlist.noNumber" = "A kiválasztott kapcsolatnak nincs SIP-száma";
 "smartlist.selectOneNumber" = "Válasszon egy számot";
 "smartlist.invitations" = "Meghívások";
-"smartlist.accountSettings" = "Fiók beállítások";
+"smartlist.accountSettings" = "Fiókbeállítások";
 "smartlist.advancedSettings" = "Haladó beállítások";
 "smartlist.aboutJami" = "A Jami névjegye";
 

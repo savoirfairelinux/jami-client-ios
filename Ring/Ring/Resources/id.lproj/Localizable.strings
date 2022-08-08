@@ -95,10 +95,10 @@
 "createAccount.passwordCharactersNumberError" = "Minimum 6 karakter";
 "createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
+"createAccount.invalidUsername" = "Nama pengguna tidak valid";
+"createAccount.usernameAlreadyTaken" = "Nama pengguna sudah diambil";
 "createAccount.usernameValid" = "username is available";
-"createAccount.loading" = "Loading";
+"createAccount.loading" = "Harap tunggu";
 "createAccount.waitCreateAccountTitle" = "Menambahkan akun";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
@@ -165,7 +165,7 @@
 "alerts.locationSharingDuration1hour" = "1 hour";
 "alerts.mapInformation" = "Informasi peta";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
-"alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
+"alerts.openStreetMapCopyrightMoreInfo" = "Pelajari lebih lanjut";
 
 //Actions
 "actions.blockAction" = "Blokir";
@@ -173,7 +173,7 @@
 "actions.cancelAction" = "Batal";
 "actions.clearAction" = "Bersihkan";
 "actions.backAction" = "Kembali";
-"actions.doneAction" = "Done";
+"actions.doneAction" = "Selesai";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonAccept" = "Terima";
 "alerts.incomingCallButtonIgnore" = "Ignore";
@@ -183,7 +183,7 @@
 "actions.stopLocationSharing" = "Berhenti berbagi";
 
 //Calls
-"calls.callItemTitle" = "Call";
+"calls.callItemTitle" = "Telepon";
 "calls.unknown" = "Tidak diketahui";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
