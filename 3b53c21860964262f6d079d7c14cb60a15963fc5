@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c1adba8_e3b36fb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2022-08-11T19:14:41Z",
+      "side": 1,
+      "message": "the gitlab issue doesn\u0027t exist for me",
+      "revId": "3b53c21860964262f6d079d7c14cb60a15963fc5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e425dfb6_38bec7dd",
