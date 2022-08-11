@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e425dfb6_38bec7dd",
+        "filename": "Ring/.tx/config",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2022-08-11T19:13:49Z",
+      "side": 1,
+      "message": "is the semicolon a valid delimiter here? looks like it should be , ro_RO: ro-RO",
+      "range": {
+        "startLine": 9,
+        "startChar": 268,
+        "endLine": 9,
+        "endChar": 275
+      },
+      "revId": "3b53c21860964262f6d079d7c14cb60a15963fc5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
