@@ -47,7 +47,7 @@ class NotificationService: UNNotificationServiceExtension {
 
     private static let localNotificationName = Notification.Name("com.savoirfairelinux.jami.appActive.internal")
 
-    private let notificationTimeout = DispatchTimeInterval.seconds(9)
+    private let notificationTimeout = DispatchTimeInterval.seconds(25)
 
     private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
 
@@ -163,6 +163,7 @@ class NotificationService: UNNotificationServiceExtension {
                                     self.verifyTasksStatus()
                                 }
                             case .syncCompleted:
+                                sleep(2)
                                 self.syncCompleted = true
                                 self.verifyTasksStatus()
                             case .fileTransferInProgress:
