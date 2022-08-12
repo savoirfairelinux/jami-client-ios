@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f92f0c31_6bb980ae",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 220
+      },
+      "writtenOn": "2022-08-12T14:46:41Z",
+      "side": 1,
+      "message": "still necessary?",
+      "range": {
+        "startLine": 166,
+        "startChar": 32,
+        "endLine": 166,
+        "endChar": 40
+      },
+      "revId": "ac6f69b1da90e9ab22d76fa87819549f1cd141c3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
