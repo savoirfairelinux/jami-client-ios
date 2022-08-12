@@ -47,7 +47,7 @@ class NotificationService: UNNotificationServiceExtension {
 
     private static let localNotificationName = Notification.Name("com.savoirfairelinux.jami.appActive.internal")
 
-    private let notificationTimeout = DispatchTimeInterval.seconds(9)
+    private let notificationTimeout = DispatchTimeInterval.seconds(25)
 
     private let notificationCenter = CFNotificationCenterGetDarwinNotifyCenter()
 
@@ -106,6 +106,7 @@ class NotificationService: UNNotificationServiceExtension {
         let task = defaultSession.dataTask(with: url) {[weak self] (data, _, _) in
             guard let self = self,
                   let data = data else {
+                self?.verifyTasksStatus()
                 return
             }
             let str = String(decoding: data, as: UTF8.self)
@@ -116,7 +117,9 @@ class NotificationService: UNNotificationServiceExtension {
                           let map = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any],
                           let keyPath = self.getKeyPath(data: requestData),
                           let treatedMessages = self.getTreatedMessagesPath(data: requestData) else {
-                        return }
+                        self.verifyTasksStatus()
+                        return
+                    }
                     let result = self.adapterService.decrypt(keyPath: keyPath.path, messagesPath: treatedMessages.path, value: map)
                     let handleCall: (String, String) -> Void = { [weak self] (peerId, hasVideo) in
                         guard let self = self else {
@@ -316,7 +319,10 @@ class NotificationService: UNNotificationServiceExtension {
             nameServer = "http://" + nameServer
         }
         let urlString = nameServer + "/addr/" + address
-        guard let url = URL(string: urlString) else { return }
+        guard let url = URL(string: urlString) else {
+            self.lookupCompleted(address: address, name: nil)
+            return
+        }
         let defaultSession = URLSession(configuration: .default)
         let task = defaultSession.dataTask(with: url) {[weak self](data, response, _) in
             guard let self = self else { return }
