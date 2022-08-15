@@ -102,7 +102,8 @@ class NotificationService: UNNotificationServiceExtension {
             return
         }
         tasksGroup.enter()
-        let task = URLSession.shared.dataTask(with: url) {[weak self] (data, _, _) in
+        let defaultSession = URLSession(configuration: .default)
+        let task = defaultSession.dataTask(with: url) {[weak self] (data, _, _) in
             guard let self = self,
                   let data = data else {
                 return
@@ -316,7 +317,8 @@ class NotificationService: UNNotificationServiceExtension {
         }
         let urlString = nameServer + "/addr/" + address
         guard let url = URL(string: urlString) else { return }
-        let task = URLSession.shared.dataTask(with: url) {[weak self](data, response, _) in
+        let defaultSession = URLSession(configuration: .default)
+        let task = defaultSession.dataTask(with: url) {[weak self](data, response, _) in
             guard let self = self else { return }
             var name: String?
             defer {
