@@ -22,6 +22,30 @@
       },
       "revId": "ac6f69b1da90e9ab22d76fa87819549f1cd141c3",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d5f0ee_14646054",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-08-15T14:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f92f0c31_6bb980ae",
+      "range": {
+        "startLine": 166,
+        "startChar": 32,
+        "endLine": 166,
+        "endChar": 40
+      },
+      "revId": "ac6f69b1da90e9ab22d76fa87819549f1cd141c3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
