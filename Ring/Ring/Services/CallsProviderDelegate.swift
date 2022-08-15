@@ -245,7 +245,7 @@ extension CallsProviderDelegate {
 
     func startTimer(callUUID: UUID) {
         stopTimer()
-        let seconds = 6.0
+        let seconds = 15.0
         timer = Timer.scheduledTimer(timeInterval: seconds, target: self, selector: #selector(timerHandler(_:)), userInfo: callUUID, repeats: false)
     }
 
