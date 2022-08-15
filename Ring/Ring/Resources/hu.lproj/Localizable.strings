@@ -277,7 +277,7 @@
 "account.statusConnecting" = "Kapcsolódás";
 "account.statusUnknown" = "Ismeretlen";
 "account.statusConnectionerror" = "Csatlakozási hiba";
-"account.needMigration" = "Fiók áttelepítés szükséges";
+"account.needMigration" = "Fiókáttelepítés szükséges";
 "account.me" = "Én";
 
 //Block List Page
@@ -347,14 +347,14 @@
 
 //Migrate Account
 "migrateAccount.title" = "Fiók áttelepítése";
-"migrateAccount.migrateButton" = "Fiók áttelepítés";
-"migrateAccount.explanation" = "Fiók áttelepítés szükséges";
+"migrateAccount.migrateButton" = "Fiókáttelepítés";
+"migrateAccount.explanation" = "Fiókáttelepítés szükséges";
 "migrateAccount.passwordPlaceholder" = "Adja meg a jelszót";
 "migrateAccount.passwordExplanation" = "Adja meg a fiók jelszavát az áttelepítés folytatásához";
 "migrateAccount.removeAccount" = "Fiók eltávolítása";
-"migrateAccount.error" = "Nem sikerült a fiók áttelepítése. Megpróbálhatja újra vagy törölheti fiókját.";
+"migrateAccount.error" = "Fiókáttelepítés nem sikerült. Megpróbálhatja újra vagy törölheti fiókját.";
 "migrateAccount.migrating" = "Áttelepítése…";
 "migrateAccount.cancel" = "Mégse";
-"migrateAccount.migrateAnother" = "Másik fiók áttelepítése";
+"migrateAccount.migrateAnother" = "Másik fiókáttelepítés";
 
 

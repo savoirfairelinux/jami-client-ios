@@ -155,7 +155,7 @@
 "alerts.errorWrongCredentials" = "Nu mă pot conecta la Administrare cont. Verifică datele de autentificare.";
 "alerts.recordVideoMessage" = "Înregistrează un mesaj video";
 "alerts.recordAudioMessage" = "Înregistrează un mesaj vocal";
-"alerts.uploadFile" = "Încarcă fișierul";
+"alerts.uploadFile" = "Încarcă un fișier";
 "alerts.uploadPhoto" = "Încarcă o poză sau un video";
 "alerts.locationServiceIsDisabled" = "Activează „Localizarea” pentru ca Jami să poată stabili poziția ta.";
 "alerts.locationSharing" = "Distribuie poziția mea";
@@ -230,7 +230,7 @@
 "accountPage.deviceRevocationError" = "Eroare la eliminarea aparatului";
 "accountPage.namePlaceholder" = "Nume";
 "accountPage.linkDeviceTitle" = "Asociază alt aparat";
-"accountPage.other" = "Altul";
+"accountPage.other" = "Altele";
 "accountPage.removeAccountTitle" = "Elimină contul";
 "accountPage.removeAccountMessage" = "Făcând clic pe „Elimină” vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
 "accountPage.removeAccountButton" = "Elimină";
