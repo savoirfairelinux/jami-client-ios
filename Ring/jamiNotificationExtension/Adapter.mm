@@ -212,6 +212,7 @@ std::map<std::string, std::string> nameServers;
                                          value:(NSDictionary*)value
 {
     if (![[NSFileManager defaultManager] fileExistsAtPath:keyPath]) {
+        NSLog(@"*****could not find a key");
         return {};
     }
 
@@ -223,6 +224,7 @@ std::map<std::string, std::string> nameServers;
     dht::Value dhtValue(jsonValue);
 
     if (!dhtValue.isEncrypted()) {
+        NSLog(@"*****value is not encrypted");
         return {};
     }
     try {
@@ -230,6 +232,7 @@ std::map<std::string, std::string> nameServers;
         auto unpacked = msgpack::unpack((const char*) decrypted->data.data(), decrypted->data.size());
         auto peerCR = unpacked.get().as<PeerConnectionRequest>();
         if (isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String])) {
+            NSLog(@"*****message is treated");
             return {};
         }
         auto certPath = [[Constants documentsPath] URLByAppendingPathComponent:certificates].path.UTF8String;
@@ -241,6 +244,7 @@ std::map<std::string, std::string> nameServers;
                                        ocspPath);
         return @{@(peerId.c_str()): @(peerCR.connType.c_str())};
     } catch (std::runtime_error error) {
+        NSLog(@"*****decryp faield");
     }
     return {};
 }

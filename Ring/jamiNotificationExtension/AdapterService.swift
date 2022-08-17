@@ -102,6 +102,7 @@ class AdapterService {
         let result = adapter.decrypt(keyPath, treated: messagesPath, value: value)
         guard let peerId = result?.keys.first,
               let type = result?.values.first else {
+            os_log("*****value: no type or peerId")
             return .unknown}
         switch type {
         case "videoCall":
@@ -111,6 +112,7 @@ class AdapterService {
         case "text/plain", "application/im-gitmessage-id":
             return PeerConnectionRequestType.gitMessage
         default:
+            os_log("*****unknown value type")
             return .unknown
         }
     }
