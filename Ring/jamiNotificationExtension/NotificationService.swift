@@ -70,6 +70,7 @@ class NotificationService: UNNotificationServiceExtension {
     private var pendingCalls = [String: [AnyHashable: Any]]() /// calls waiting for name lookup
     private var names = [String: String]() /// map of peerId and best name
     // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable function_body_length
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         defer {
@@ -103,16 +104,38 @@ class NotificationService: UNNotificationServiceExtension {
         }
         tasksGroup.enter()
         let defaultSession = URLSession(configuration: .default)
-        let task = defaultSession.dataTask(with: url) {[weak self] (data, _, _) in
-            guard let self = self,
-                  let data = data else {
+        // swiftlint:disable closure_body_length
+        let task = defaultSession.dataTask(with: url) {[weak self] (data, response, error) in
+            if let error = error {
+                os_log("get values returns error %@", "\(error.localizedDescription)")
                 self?.verifyTasksStatus()
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                os_log("get values no httpResponse")
+                self?.verifyTasksStatus()
+                return
+            }
+            guard (200...299).contains(httpResponse.statusCode) else {
+                os_log("get values failed %@", "\(httpResponse.statusCode)")
+                self?.verifyTasksStatus()
+                return
+            }
+            guard let self = self else {
+                os_log("get values extension destroyed")
+                self?.verifyTasksStatus()
+                return
+            }
+            guard let data = data else {
+                os_log("get values no data")
+                self.verifyTasksStatus()
                 return
             }
             let str = String(decoding: data, as: UTF8.self)
             let lines = str.split(whereSeparator: \.isNewline)
             for line in lines {
                 do {
+                    os_log("value: %@", "\(line)")
                     guard let jsonData = line.data(using: .utf8),
                           let map = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any],
                           let keyPath = self.getKeyPath(data: requestData),
@@ -179,6 +202,7 @@ class NotificationService: UNNotificationServiceExtension {
                         break
                     }
                 } catch {
+                    os_log("serialization failed %@", "\(error.localizedDescription))")
                     print("serialization failed , \(error)")
                 }
             }
