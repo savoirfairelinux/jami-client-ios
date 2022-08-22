@@ -198,7 +198,7 @@
 "calls.removeModerator" = "elimină moderatorul";
 "calls.muteAudio" = "oprește microfonul";
 "calls.unmuteAudio" = "pornește microfonul";
-"calls.lowerHand" = "mâna jos";
+"calls.lowerHand" = "Coboară mâna";
 
 //Account Page
 "accountPage.devicesListHeader" = "Aparate";
