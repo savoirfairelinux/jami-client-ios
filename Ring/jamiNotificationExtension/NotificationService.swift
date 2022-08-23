@@ -94,9 +94,7 @@ class NotificationService: UNNotificationServiceExtension {
               var proxy = try? String(contentsOf: proxyURL, encoding: .utf8) else {
             return
         }
-        if !proxy.hasPrefix("http://") {
-            proxy = "http://" + proxy
-        }
+        proxy = ensureURLPrefix(urlString: proxy)
         guard let urlPrpxy = URL(string: proxy),
               let url = getRequestURL(data: requestData, proxyURL: urlPrpxy) else {
             return
@@ -315,9 +313,7 @@ class NotificationService: UNNotificationServiceExtension {
 
     private func startAddressLookup(address: String, accountId: String) {
         var nameServer = self.adapterService.getNameServerFor(accountId: accountId)
-        if !nameServer.hasPrefix("http://") {
-            nameServer = "http://" + nameServer
-        }
+        nameServer = ensureURLPrefix(urlString: nameServer)
         let urlString = nameServer + "/addr/" + address
         guard let url = URL(string: urlString) else {
             self.lookupCompleted(address: address, name: nil)
@@ -345,6 +341,14 @@ class NotificationService: UNNotificationServiceExtension {
             }
         }
         task.resume()
+    }
+
+    private func ensureURLPrefix(urlString: String) -> String {
+        var urlWithPrefix = urlString
+        if !urlWithPrefix.hasPrefix("http://") && !urlWithPrefix.hasPrefix("https://") {
+            urlWithPrefix = "http://" + urlWithPrefix
+        }
+        return urlWithPrefix
     }
 
     private func lookupCompleted(address: String, name: String?) {

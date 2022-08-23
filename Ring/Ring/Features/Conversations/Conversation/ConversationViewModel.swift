@@ -166,9 +166,13 @@ class ConversationViewModel: Stateable, ViewModel {
                 if let contact = self.contactsService.contact(withHash: filterParicipants.first?.jamiId ?? "") {
                     if let profile = self.contactsService.getProfile(uri: "ring:" + (filterParicipants.first?.jamiId ?? ""), accountId: self.conversation.value.accountId),
                        let alias = profile.alias, let photo = profile.photo {
-                        self.displayName.accept(alias)
-                        let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? // {
-                        self.profileImageData.accept(data)
+                        if !alias.isEmpty {
+                            self.displayName.accept(alias)
+                        }
+                        if !photo.isEmpty {
+                            let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? // {
+                            self.profileImageData.accept(data)
+                        }
                     }
 
                     if let contactUserName = contact.userName {

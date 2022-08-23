@@ -284,7 +284,9 @@ std::string getName(std::string addres, std::string accountId)
     }
 
     auto ns = getNameServer(accountId);
-    NSString* nameServer = ns.empty() ? defaultNameServer : @(ns.c_str());
+    NSURL *url = [NSURL URLWithString: @(ns.c_str())];
+    NSString* host = [url host];
+    NSString* nameServer = host.length == 0 ? defaultNameServer : host;
     std::string namesPath = [[[Constants cachesPath] URLByAppendingPathComponent: nameCache] URLByAppendingPathComponent: nameServer].path.UTF8String;
 
     msgpack::unpacker pac;
