@@ -46,4 +46,17 @@
     return vector;
 }
 
++ (NSArray*)vectorOfMapsToArray:
+(const std::vector<std::map<std::string, std::string>>&)vectorOfMaps {
+    NSMutableArray* array = [[NSMutableArray alloc] initWithCapacity:vectorOfMaps.size()];
+
+    std::for_each(
+                  vectorOfMaps.begin(), vectorOfMaps.end(), ^(std::map<std::string, std::string> map) {
+                      NSDictionary *dictionary = [Utils mapToDictionnary:map];
+                      [array addObject:dictionary];
+                  });
+
+    return [NSArray arrayWithArray:array];
+}
+
 @end
