@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSMutableDictionary*)mapToDictionnary:
     (const std::map<std::string, std::string>&)map;
 + (std::vector<uint8_t>)vectorOfUInt8FromData:(NSData*)data;
++ (NSArray*)vectorOfMapsToArray: (const std::vector<std::map<std::string, std::string>>&)vectorOfMaps;
 
 @end
 
