@@ -47,15 +47,6 @@ else
   esac
 fi
 
-if [ ! `which gas-preprocessor.pl` ]
-then
-  echo 'gas-preprocessor.pl not found. Trying to install...'
-  (curl -L https://github.com/libav/gas-preprocessor/raw/master/gas-preprocessor.pl \
-    -o /usr/local/bin/gas-preprocessor.pl \
-    && chmod +x /usr/local/bin/gas-preprocessor.pl) \
-    || exit 1
-fi
-
 IOS_TOP_DIR="$(pwd)"
 
 if [ -z "$DAEMON_DIR" ]; then
@@ -69,6 +60,15 @@ if [ ! -d "$DAEMON_DIR" ]; then
   echo "You can also use our meta repo which contains both:
         https://gerrit-ring.savoirfairelinux.com/#/admin/projects/ring-project"
   exit 1
+fi
+
+if [ ! `which gas-preprocessor.pl` ]
+then
+  echo 'gas-preprocessor.pl not found. Trying to install...'
+  (curl -L https://github.com/libav/gas-preprocessor/raw/master/gas-preprocessor.pl \
+    -o "$DAEMON_DIR/extras/tools/build/bin/gas-preprocessor.pl" \
+    && chmod +x "$DAEMON_DIR/extras/tools/build/bin/gas-preprocessor.pl") \
+  export PATH="$DAEMON_DIR"/extras/tools/build/bin:$PATH
 fi
 
 if [ -z "$NPROC"  ]; then
