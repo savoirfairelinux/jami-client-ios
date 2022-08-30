@@ -42,6 +42,8 @@ class AdapterService {
     enum InteractionType: String {
         case message = "text/plain"
         case fileTransfer = "application/data-transfer+json"
+        case contact = "member"
+        case initial = "initial"
     }
 
     enum EventType: Int {
@@ -215,6 +217,25 @@ extension AdapterService: AdapterDelegate {
                 self.loadingFiles[fileId] = data
                 handler(.fileTransferInProgress, data)
             }
+        case .contact:
+            if from.isEmpty { return }
+            if let action = message[InteractionAttributes.action.rawValue] {
+                switch action {
+                case "add":
+                    handler(.message, EventData(accountId, from, conversationId,  "an invitation received"))
+                case "remove":
+                    handler(.message, EventData(accountId, from, conversationId, "left conversation"))
+                case "join":
+                    handler(.message, EventData(accountId, from, conversationId, "invitation accepted"))
+                default:
+                    break
+                }
+                handler(.message, EventData(accountId, from, conversationId, content))
+            }
+        case .initial:
+            if from.isEmpty { return }
+            let contentMessage = "an invitation received"
+            handler(.message, EventData(accountId, from, conversationId, contentMessage))
         }
     }
 }
