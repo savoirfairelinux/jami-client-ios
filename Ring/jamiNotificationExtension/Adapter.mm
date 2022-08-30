@@ -135,6 +135,25 @@ std::map<std::string, std::string> nameServers;
                                                                     hasVideo:hasVideo];
             }
         }));
+    //Contact added signal
+    confHandlers.insert(exportable_callback<ConfigurationSignal::ContactAdded>([&](const std::string& accountId,
+                                                                                   const std::string& uri,
+                                                                                   bool confirmed) {
+        if(Adapter.delegate) {
+            NSString* accountIdStr = [NSString stringWithUTF8String:accountId.c_str()];
+            NSString* uriStr = [NSString stringWithUTF8String:uri.c_str()];
+            [Adapter.delegate receivedContactRequestWithAccountId: accountIdStr peerId: uriStr];
+        }
+    }));
+
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationRequestReceived>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> metadata) {
+        if(Adapter.delegate) {
+            NSString* accountIdStr = [NSString stringWithUTF8String:accountId.c_str()];
+            NSString* convIdStr = [NSString stringWithUTF8String:conversationId.c_str()];
+            NSMutableDictionary* info = [Utils mapToDictionnary: metadata];
+            [Adapter.delegate receivedConversationRequestWithAccountId: accountIdStr conversationId: convIdStr metadata:info];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 
@@ -229,6 +248,18 @@ std::map<std::string, std::string> nameServers;
         dht::Sp<dht::Value> decrypted = dhtValue.decrypt(dhtKey);
         auto unpacked = msgpack::unpack((const char*) decrypted->data.data(), decrypted->data.size());
         auto peerCR = unpacked.get().as<PeerConnectionRequest>();
+        if (peerCR.connType.empty()) {
+            // this value is not a PeerConnectionRequest
+            // check if it a TrustRequest
+            auto conversationRequest = unpacked.get().as<dht::TrustRequest>();
+            if (!conversationRequest.conversationId.empty()) {
+                if (conversationRequest.service == "cx.ring") {
+                    // return git message type to start daemon
+                    return @{@"": @"application/im-gitmessage-id"};
+                }
+            }
+            return {};
+        }
         if (isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String])) {
             return {};
         }
@@ -252,6 +283,10 @@ std::map<std::string, std::string> nameServers;
 -(NSString*)nameServerForAccountId:(NSString*)accountId; {
     auto nameServer = getNameServer(std::string([accountId UTF8String]));
     return nameServer.empty() ? defaultNameServer : @(nameServer.c_str());
+}
+
+- (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId {
+    return [Utils vectorOfMapsToArray: getConversationMembers(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
 }
 
 Json::Value

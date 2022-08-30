@@ -36,5 +36,6 @@
 - (NSDictionary<NSString*, NSString*>*)decrypt:(NSString*)keyPath treated:(NSString*)treatedMessagesPath value: (NSDictionary*)value;
 -(NSString*)getNameFor:(NSString*)address accountId:(NSString*)accountId;
 -(NSString*)nameServerForAccountId:(NSString*)accountId;
+-(NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId;
 
 @end
