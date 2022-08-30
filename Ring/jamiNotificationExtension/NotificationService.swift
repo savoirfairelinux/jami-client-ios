@@ -156,7 +156,7 @@ class NotificationService: UNNotificationServiceExtension {
                             switch event {
                             case .message:
                                 self.numberOfMessages += 1
-                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId)
+                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId, groupTitle: "")
                             case .fileTransferDone:
                                 if let url = URL(string: eventData.content) {
                                     self.configureFileNotification(from: eventData.jamiId, url: url, accountId: self.accountId, conversationId: eventData.conversationId)
@@ -171,6 +171,10 @@ class NotificationService: UNNotificationServiceExtension {
                                 self.numberOfFiles += 1
                             case .call:
                                 handleCall(eventData.jamiId, eventData.content)
+                            case .invitation:
+                                self.syncCompleted = true
+                                self.numberOfMessages += 1
+                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
                             }
                         }
                     case .unknown:
@@ -496,7 +500,7 @@ extension NotificationService {
         }
     }
 
-    private func configureMessageNotification(from: String, body: String, accountId: String, conversationId: String) {
+    private func configureMessageNotification(from: String, body: String, accountId: String, conversationId: String, groupTitle: String) {
         let content = UNMutableNotificationContent()
         content.body = body
         content.sound = UNNotificationSound.default
@@ -505,7 +509,7 @@ extension NotificationService {
         data[Constants.NotificationUserInfoKeys.accountID.rawValue] = accountId
         data[Constants.NotificationUserInfoKeys.conversationID.rawValue] = conversationId
         content.userInfo = data
-        let title = self.bestName(accountId: accountId, contactId: from)
+        let title = !groupTitle.isEmpty ? groupTitle : self.bestName(accountId: accountId, contactId: from)
         if title.isEmpty {
             content.title = from
             needUpdateNotification(notification: LocalNotification(content, .message), peerId: from, accountId: accountId)
