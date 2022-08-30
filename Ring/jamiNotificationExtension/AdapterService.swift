@@ -42,6 +42,9 @@ class AdapterService {
     enum InteractionType: String {
         case message = "text/plain"
         case fileTransfer = "application/data-transfer+json"
+        case contact = "member"
+        case initial = "initial"
+        case invite = "application/invite+json"
     }
 
     enum EventType: Int {
@@ -50,6 +53,7 @@ class AdapterService {
         case fileTransferInProgress
         case syncCompleted
         case call
+        case invitation
     }
 
     enum PeerConnectionRequestType {
@@ -184,6 +188,28 @@ extension AdapterService: AdapterDelegate {
         handler(.call, EventData(accountId, peerId, "", "\(hasVideo)"))
     }
 
+    func receivedContactRequest(accountId: String, peerId: String) {
+        guard let handler = self.eventHandler else {
+            return
+        }
+        let contentMessage = "an invitation received"
+        handler(.invitation, EventData(accountId, peerId, "", contentMessage))
+    }
+
+    func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String]) {
+        var group = ""
+        if let title = metadata["title"], !title.isEmpty {
+            group = title
+        } else if let from = metadata["from"] {
+            group = from
+        }
+        guard let handler = self.eventHandler else {
+            return
+        }
+        let contentMessage = "an invitation received"
+        handler(.invitation, EventData(accountId, group, "", contentMessage))
+    }
+
     func newInteraction(conversationId: String, accountId: String, message: [String: String]) {
         guard let handler = self.eventHandler else {
             return
@@ -215,6 +241,32 @@ extension AdapterService: AdapterDelegate {
                 self.loadingFiles[fileId] = data
                 handler(.fileTransferInProgress, data)
             }
+        case .contact:
+            os_log("*************received contact message")
+            if from.isEmpty { return }
+            if let action = message[InteractionAttributes.action.rawValue] {
+                switch action {
+                case "add":
+                    handler(.message, EventData(accountId, from, conversationId, "an invitation received"))
+                case "remove":
+                    handler(.message, EventData(accountId, from, conversationId, "left conversation"))
+                case "join":
+                    handler(.message, EventData(accountId, from, conversationId, "invitation accepted"))
+                default:
+                    break
+                }
+                handler(.message, EventData(accountId, from, conversationId, content))
+            }
+        case .initial:
+            os_log("*************received initial message")
+            if from.isEmpty { return }
+            let contentMessage = "an invitation received"
+            handler(.message, EventData(accountId, from, conversationId, contentMessage))
+        case .invite:
+            if from.isEmpty { return }
+            let contentMessage = "an invitation received"
+            handler(.message, EventData(accountId, from, conversationId, contentMessage))
+            os_log("*************received invite message")
         }
     }
 }

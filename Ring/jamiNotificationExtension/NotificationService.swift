@@ -61,6 +61,7 @@ class NotificationService: UNNotificationServiceExtension {
     var numberOfFiles = 0 /// number of files need to be downloaded
     var numberOfMessages = 0 /// number of scheduled messages
     var syncCompleted = false
+    var invitationReceived = false
     private let tasksGroup = DispatchGroup()
     var accountId = ""
 
@@ -171,6 +172,25 @@ class NotificationService: UNNotificationServiceExtension {
                                 self.numberOfFiles += 1
                             case .call:
                                 handleCall(eventData.jamiId, eventData.content)
+                            case .invitation:
+                                os_log("*********notification cervice invitation received")
+                                self.invitationReceived = true
+                                self.verifyTasksStatus()
+                                let content = UNMutableNotificationContent()
+                                content.title = "invitation"
+                                content.subtitle = "invitation1"
+                                content.sound = UNNotificationSound.default
+
+                                // show this notification five seconds from now
+                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.01, repeats: false)
+
+                                // choose a random identifier
+                                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                                // add our notification request
+                                UNUserNotificationCenter.current().add(request)
+                            //                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId)
+                            // self.verifyTasksStatus()
                             }
                         }
                     case .unknown:
@@ -199,7 +219,7 @@ class NotificationService: UNNotificationServiceExtension {
         /// We could finish in two cases:
         /// 1. we did not start account we are not waiting for the signals from the daemon
         /// 2. conversation synchronization completed and all files downloaded
-        if !self.accountIsActive || (self.syncCompleted && self.numberOfFiles == 0 && self.numberOfMessages == 0) {
+        if !self.accountIsActive || (self.syncCompleted && self.numberOfFiles == 0 && self.numberOfMessages == 0) || self.invitationReceived {
             self.tasksCompleted = true
             self.tasksGroup.leave()
         }

@@ -135,6 +135,29 @@ std::map<std::string, std::string> nameServers;
                                                                     hasVideo:hasVideo];
             }
         }));
+    //Contact added signal
+    confHandlers.insert(exportable_callback<ConfigurationSignal::ContactAdded>([&](const std::string& account_id,
+                                                                                   const std::string& uri,
+                                                                                   bool confirmed) {
+        if(Adapter.delegate) {
+            NSLog(@"********** request received1");
+            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+            NSString* uriString = [NSString stringWithUTF8String:uri.c_str()];
+            [Adapter.delegate receivedContactRequestWithAccountId:accountId peerId:uriString];
+            //[ContactsAdapter.delegate re
+        }
+    }));
+
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationRequestReceived>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> metadata) {
+        if(Adapter.delegate) {
+            NSLog(@"********** request received2");
+            NSString* account_Id = [NSString stringWithUTF8String:accountId.c_str()];
+            NSString* conv = [NSString stringWithUTF8String:conversationId.c_str()];
+            NSMutableDictionary* info = [Utils mapToDictionnary: metadata];
+            [Adapter.delegate receivedConversationRequestWithAccountId:account_Id conversationId: conv metadata:info];
+            //[ContactsAdapter.delegate re
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 
@@ -223,13 +246,32 @@ std::map<std::string, std::string> nameServers;
     dht::Value dhtValue(jsonValue);
 
     if (!dhtValue.isEncrypted()) {
+        NSLog(@"******not encrypted");
         return {};
     }
     try {
         dht::Sp<dht::Value> decrypted = dhtValue.decrypt(dhtKey);
         auto unpacked = msgpack::unpack((const char*) decrypted->data.data(), decrypted->data.size());
         auto peerCR = unpacked.get().as<PeerConnectionRequest>();
+        if (peerCR.connType.empty()) {
+            // this value is not a PeerConnectionRequest
+            // check if it a TrustRequest
+            auto trustRequest = unpacked.get().as<dht::TrustRequest>();
+            if (!trustRequest.conversationId.empty()) {
+                if (trustRequest.service != "cx.ring") {
+                    return {};
+                }
+                NSLog(@"*******got TrustRequest from, %@", @(trustRequest.from.toString().c_str()));
+                return @{@(trustRequest.conversationId.c_str()): @"application/im-gitmessage-id"};
+            }
+            return {};
+
+        }
+        auto trustRequest = unpacked.get().as<dht::TrustRequest>();
+        auto conv = @(trustRequest.conversationId.c_str());
+        NSLog(@"******trustRequest, %@", conv);
         if (isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String])) {
+            NSLog(@"******treated");
             return {};
         }
         auto certPath = [[Constants documentsPath] URLByAppendingPathComponent:certificates].path.UTF8String;
@@ -239,8 +281,10 @@ std::map<std::string, std::string> nameServers;
                                        certPath,
                                        crlPath,
                                        ocspPath);
+        NSLog(@"******connection type, %@", @(peerCR.connType.c_str()));
         return @{@(peerId.c_str()): @(peerCR.connType.c_str())};
     } catch (std::runtime_error error) {
+        NSLog(@"******decrypt error");
     }
     return {};
 }
