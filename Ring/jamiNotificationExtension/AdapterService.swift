@@ -50,6 +50,7 @@ class AdapterService {
         case fileTransferInProgress
         case syncCompleted
         case call
+        case invitation
     }
 
     enum PeerConnectionRequestType {
@@ -80,9 +81,10 @@ class AdapterService {
             }
         }
     }
+
     private let maxSizeForAutoaccept = 20 * 1024 * 1024
 
-    typealias EventData = (accountId: String, jamiId: String, conversationId: String, content: String)
+    typealias EventData = (accountId: String, jamiId: String, conversationId: String, content: String, groupTitle: String)
 
     private let adapter: Adapter
     var eventHandler: ((EventType, EventData) -> Void)?
@@ -158,7 +160,7 @@ extension AdapterService: AdapterDelegate {
                            to receiverAccountId: String) {
         guard let content = message["text/plain"],
               let handler = self.eventHandler else { return }
-        handler(.message, EventData(receiverAccountId, senderAccount, "", content))
+        handler(.message, EventData(receiverAccountId, senderAccount, "", content, ""))
     }
 
     func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String) {
@@ -174,14 +176,40 @@ extension AdapterService: AdapterDelegate {
         guard let handler = self.eventHandler else {
             return
         }
-        handler(.syncCompleted, EventData(accountId, "", "", ""))
+        handler(.syncCompleted, EventData(accountId, "", "", "", ""))
     }
 
     func receivedCallConnectionRequest(accountId: String, peerId: String, hasVideo: Bool) {
         guard let handler = self.eventHandler else {
             return
         }
-        handler(.call, EventData(accountId, peerId, "", "\(hasVideo)"))
+        handler(.call, EventData(accountId, peerId, "", "\(hasVideo)", ""))
+    }
+
+    func receivedContactRequest(accountId: String, peerId: String) {
+        guard let handler = self.eventHandler else {
+            return
+        }
+        let contentMessage = "an invitation received"
+        handler(.invitation, EventData(accountId, peerId, "", contentMessage, ""))
+    }
+
+    func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String]) {
+        guard let handler = self.eventHandler else {
+            return
+        }
+        let contentMessage = L10n.GeneratedMessage.invitationReceived
+        var groupTitle = ""
+        var peerId = ""
+        if let title = metadata["title"], !title.isEmpty {
+            groupTitle = title
+        }
+        if let from = metadata["from"] {
+            peerId = from
+        }
+        if !peerId.isEmpty || !groupTitle.isEmpty {
+            handler(.invitation, EventData(accountId, peerId, conversationId, contentMessage, groupTitle))
+        }
     }
 
     func newInteraction(conversationId: String, accountId: String, message: [String: String]) {
@@ -196,14 +224,14 @@ extension AdapterService: AdapterDelegate {
         let content = message[InteractionAttributes.body.rawValue] ?? ""
         switch interactionType {
         case .message:
-            handler(.message, EventData(accountId, from, conversationId, content))
+            handler(.message, EventData(accountId, from, conversationId, content, ""))
         case.fileTransfer:
             guard let fileId = message[InteractionAttributes.fileId.rawValue],
                   let url = self.getFileUrlFor(fileName: fileId, accountId: accountId, conversationId: conversationId) else {
                 return
             }
-            let data = EventData(accountId, from, conversationId, url.path)
-            /// check if the file has already been downloaded. If no, download the file if filesize is less than a downloading limit
+            let data = EventData(accountId, from, conversationId, url.path, "")
+            // check if the file has already been downloaded. If no, download the file if filesize is less than a downloading limit
             if fileAlreadyDownloaded(fileName: fileId, accountId: accountId, conversationId: conversationId) {
                 handler(.fileTransferDone, data)
             } else {
