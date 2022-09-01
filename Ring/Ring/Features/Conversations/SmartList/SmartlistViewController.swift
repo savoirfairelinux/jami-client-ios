@@ -321,7 +321,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         generalSettingsButton.layer.masksToBounds = false
         generalSettingsButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
+                if self?.menu.superview == nil {
                 self?.showContextualMenu()
+                } else {
+                    self?.menu.removeFromSuperview()
+                }
             })
             .disposed(by: self.disposeBag)
         self.viewModel.currentAccountChanged
