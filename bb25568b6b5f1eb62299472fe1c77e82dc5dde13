@@ -16,6 +16,24 @@
       "message": "wrong indent. I guess one day we should do like other projects and add a hook to lint the code",
       "revId": "bb25568b6b5f1eb62299472fe1c77e82dc5dde13",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02818927_3d2b9c6e",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-02T14:40:39Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "1ea1a698_1acb63f5",
+      "revId": "bb25568b6b5f1eb62299472fe1c77e82dc5dde13",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
