@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a05bebb3_209d0c42",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 220
+      },
+      "writtenOn": "2022-09-02T14:11:57Z",
+      "side": 1,
+      "message": "fyi, not mandatory but generally we link patches to tickets on GitLab via\n\nGitLab: #Number in the commit message.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 30
+      },
+      "revId": "489b7963652a494d94e7160ce8b733709cd3b2b5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
