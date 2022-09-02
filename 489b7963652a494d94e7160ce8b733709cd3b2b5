@@ -22,6 +22,30 @@
       },
       "revId": "489b7963652a494d94e7160ce8b733709cd3b2b5",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a34a215f_1ed2776a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 220
+      },
+      "writtenOn": "2022-09-02T14:13:42Z",
+      "side": 1,
+      "message": "In this case GitLab: #142",
+      "parentUuid": "a05bebb3_209d0c42",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 30
+      },
+      "revId": "489b7963652a494d94e7160ce8b733709cd3b2b5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
