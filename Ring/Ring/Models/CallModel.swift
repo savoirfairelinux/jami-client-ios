@@ -171,9 +171,9 @@ public class CallModel {
     }
 
     func checkDeviceMediaMuted(media: [String: String]) -> Bool {
-        if media[MediaAttributeKey.sourceType.rawValue] == MediaAttributeValue.srcTypeCapturedDevice.rawValue {
+        if media[MediaAttributeKey.sourceType.rawValue] != MediaAttributeValue.srcTypeFile.rawValue && media[MediaAttributeKey.sourceType.rawValue] != MediaAttributeValue.srcTypeDisplay.rawValue {
             if media[MediaAttributeKey.muted.rawValue] == "true" || media[MediaAttributeKey.enabled.rawValue] == "false" {
-                    return true
+                return true
             }
         }
         return false
