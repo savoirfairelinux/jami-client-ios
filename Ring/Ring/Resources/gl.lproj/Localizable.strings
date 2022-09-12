@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Conversas";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Axustes da Conta";
 "global.ok" = "Aceptar";
 "global.close" = "Close";
 "global.share" = "Compartir";
@@ -49,7 +49,7 @@
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
 "smartlist.invitations" = "Convites";
-"smartlist.accountSettings" = "Account Settings";
+"smartlist.accountSettings" = "Axustes da Conta";
 "smartlist.advancedSettings" = "Advanced Settings";
 "smartlist.aboutJami" = "Acerca de Jami";
 
