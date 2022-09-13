@@ -129,12 +129,9 @@ extension CallsProviderDelegate {
         guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
         let handleType = (isJamiAccount
                             || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
-        update.localizedCallerName = handleInfo.displayName
+        // update.localizedCallerName = handleInfo.displayName
         update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
-        update.hasVideo = !call.isAudioOnly
-        update.supportsGrouping = false
-        update.supportsUngrouping = false
-        update.supportsHolding = false
+        self.setUpCallUpdate(update: update, localizedCallerName: handleInfo.displayName, videoFlag: !call.isAudioOnly)
         self.provider?.reportNewIncomingCall(with: call.callUUID,
                                              update: update) { error in
             if error == nil {
@@ -144,16 +141,24 @@ extension CallsProviderDelegate {
         }
     }
 
+    func updateRegisteredName(account: AccountModel, call: CallModel) {
+        let update = CXCallUpdate()
+        let isJamiAccount = account.type == AccountType.ring
+        guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
+        let handleType = (isJamiAccount
+                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
+
+        update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
+        self.setUpCallUpdate(update: update, localizedCallerName: call.registeredName, videoFlag: !call.isAudioOnly)
+        self.provider?.reportCall(with: call.callUUID, updated: update)
+    }
+
     func previewPendingCall(peerId: String, withVideo: Bool, displayName: String,
                             completion: ((Error?) -> Void)?) {
         let update = CXCallUpdate()
         let handleType = CXHandle.HandleType.phoneNumber
-        update.localizedCallerName = displayName
         update.remoteHandle = CXHandle(type: handleType, value: peerId)
-        update.hasVideo = withVideo
-        update.supportsGrouping = false
-        update.supportsUngrouping = false
-        update.supportsHolding = false
+        self.setUpCallUpdate(update: update, localizedCallerName: displayName, videoFlag: withVideo)
         let unhandeledCall = UnhandeledCall(peerId: peerId)
         unhandeledCalls.insert(unhandeledCall)
         self.provider?.reportNewIncomingCall(with: unhandeledCall.uuid,
@@ -168,6 +173,13 @@ extension CallsProviderDelegate {
         serviceEvent.addEventInput(.callUUID, value: unhandeledCall.uuid.uuidString)
         self.responseStream.onNext(serviceEvent)
         startTimer(callUUID: unhandeledCall.uuid)
+    }
+    func setUpCallUpdate(update: CXCallUpdate, localizedCallerName: String, videoFlag: Bool) {
+        update.localizedCallerName = localizedCallerName
+        update.hasVideo = videoFlag
+        update.supportsGrouping = false
+        update.supportsUngrouping = false
+        update.supportsHolding = false
     }
 
     func startCall(account: AccountModel, call: CallModel) {
