@@ -144,6 +144,22 @@ extension CallsProviderDelegate {
         }
     }
 
+    func updateRegisteredName(account: AccountModel, call: CallModel) {
+        let update = CXCallUpdate()
+        let isJamiAccount = account.type == AccountType.ring
+        guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
+        let handleType = (isJamiAccount
+                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
+
+        update.localizedCallerName = call.registeredName
+        update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
+        update.hasVideo = !call.isAudioOnly
+        update.supportsGrouping = false
+        update.supportsUngrouping = false
+        update.supportsHolding = false
+        self.provider?.reportCall(with: call.callUUID, updated: update)
+    }
+
     func previewPendingCall(peerId: String, withVideo: Bool, displayName: String,
                             completion: ((Error?) -> Void)?) {
         let update = CXCallUpdate()
