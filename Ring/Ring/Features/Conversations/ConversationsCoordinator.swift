@@ -45,12 +45,14 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     let accountService: AccountsService
     let conversationService: ConversationsService
     let callsProvider: CallsProviderDelegate
+    let nameService: NameService
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
 
         self.callService = injectionBag.callService
         self.accountService = injectionBag.accountService
+        self.nameService = injectionBag.nameService
         self.conversationService = injectionBag.conversationsService
         self.callsProvider = injectionBag.callsProvider
         self.addLockFlags()
@@ -126,8 +128,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             .take(1)
             .subscribe(onNext: { [weak self, weak meCoordinator] (_) in
                 self?.removeChildCoordinator(childCoordinator: meCoordinator)
-        })
-        .disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func showIncomingCall(call: CallModel) {
@@ -164,12 +166,28 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             })
             .disposed(by: self.disposeBag)
         callsProvider.handleIncomingCall(account: account, call: call)
+        guard call.getDisplayName() == call.paricipantHash() else { return }
+        self.nameService.usernameLookupStatus
+            .filter({ [weak call] lookupNameResponse in
+                return lookupNameResponse.address != nil &&
+                    lookupNameResponse.address == call?.paricipantHash()
+            })
+            .subscribe(onNext: { [weak call] lookupNameResponse in
+                // if we have a registered name then we should update the value for it
+                if let name = lookupNameResponse.name, !name.isEmpty, let call = call {
+                    call.registeredName = name
+                    self.callsProvider.updateRegisteredName(account: account, call: call)
+                }
+            })
+            .disposed(by: self.disposeBag)
+        self.nameService.lookupAddress(withAccount: self.accountService.currentAccount?.id ?? "", nameserver: "", address: call.participantUri.filterOutHost())
+
     }
 
     func presentCallScreen(call: CallModel) {
         if let topController = self.getTopController(),
            !topController.isKind(of: (CallViewController).self) {
-               topController.dismiss(animated: false, completion: nil)
+            topController.dismiss(animated: false, completion: nil)
         }
         self.popToSmartList()
         if self.accountService.currentAccount?.id != call.accountId {
@@ -263,10 +281,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         let smartViewController = SmartlistViewController.instantiate(with: self.injectionBag)
         let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
         contactRequestsViewController.viewModel.state.take(until: contactRequestsViewController.rx.deallocated)
-                    .subscribe(onNext: { [weak self] (state) in
-                        self?.stateSubject.onNext(state)
-                    })
-                    .disposed(by: self.disposeBag)
+            .subscribe(onNext: { [weak self] (state) in
+                self?.stateSubject.onNext(state)
+            })
+            .disposed(by: self.disposeBag)
         smartViewController.addContactRequestVC(controller: contactRequestsViewController)
         self.present(viewController: smartViewController, withStyle: .show, withAnimation: true, withStateable: smartViewController.viewModel)
         smartListViewController = smartViewController
