@@ -72,7 +72,7 @@ class ConversationParticipant: Equatable {
             self.jamiId = jamiId.replacingOccurrences(of: "ring:", with: "")
         }
         if let role = info["role"],
-                          let typeInt = Int(role),
+           let typeInt = Int(role),
            let memberRole = ParticipantRole(rawValue: typeInt) {
             self.role = memberRole
         }
@@ -134,7 +134,7 @@ class ConversationModel: Equatable {
             self.hash = hash
         }
         if let type = info[ConversationAttributes.mode.rawValue],
-                          let typeInt = Int(type),
+           let typeInt = Int(type),
            let conversationType = ConversationType(rawValue: typeInt) {
             self.type = conversationType
         }
@@ -144,7 +144,7 @@ class ConversationModel: Equatable {
     static func == (lhs: ConversationModel, rhs: ConversationModel) -> Bool {
         if !lhs.isSwarm() && !rhs.isSwarm() || lhs.id.isEmpty || rhs.id.isEmpty {
             if let rParticipant = rhs.participants.first, let lParticipant = lhs.participants.first {
-            return (lParticipant == rParticipant && lhs.accountId == rhs.accountId && lhs.participants.count == rhs.participants.count)
+                return (lParticipant == rParticipant && lhs.accountId == rhs.accountId && lhs.participants.count == rhs.participants.count)
             }
         }
         return lhs.id == rhs.id
@@ -165,7 +165,7 @@ class ConversationModel: Equatable {
 
     func getMessage(withDaemonID daemonID: String) -> MessageModel? {
         return self.messages.value.filter({ message in
-           return message.daemonId == daemonID
+            return message.daemonId == daemonID
         }).first
     }
 

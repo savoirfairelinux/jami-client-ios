@@ -123,7 +123,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: {[weak self] (_) in
                 guard let self = self,
-                UIDevice.current.portraitOrLandscape else {
+                      UIDevice.current.portraitOrLandscape else {
                     return
                 }
                 self.setAvatarView(!self.avatarView.isHidden)
@@ -157,8 +157,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 for participant in unwrapParticipants {
                     let callView =
                         ConferenceParticipantView(frame:
-                            CGRect(x: 0, y: 0,
-                                   width: inConfViewWidth, height: inConfViewHeight))
+                                                    CGRect(x: 0, y: 0,
+                                                           width: inConfViewWidth, height: inConfViewHeight))
                     let injectionBag = self.viewModel.injectionBag
                     let isLocal = self.viewModel.isLocalCall(participantId: participant.uri ?? "")
                     let pendingCallViewModel =
@@ -536,8 +536,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 if self.viewModel.isCurrentModerator() { return }
                 let callView =
                     ConferenceParticipantView(frame:
-                        CGRect(x: 0, y: 0,
-                               width: inConfViewWidth, height: inConfViewHeight))
+                                                CGRect(x: 0, y: 0,
+                                                       width: inConfViewWidth, height: inConfViewHeight))
                 let injectionBag = self.viewModel.injectionBag
                 let name = call.displayName.isEmpty ? call.registeredName.isEmpty ? call.participantUri.filterOutHost() : call.registeredName : call.displayName
                 let pendingCallViewModel =
@@ -646,11 +646,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                     let device = UIDevice.modelName
                     // Reduce the cancel button for small iPhone
                     switch device {
-                    case "iPhone 5", "iPhone 5c", "iPhone 5s", "iPhone SE" :
+                    case "iPhone 5", "iPhone 5c", "iPhone 5s", "iPhone SE":
                         self?.buttonsContainer.cancelButtonWidthConstraint.constant = 50
                         self?.buttonsContainer.cancelButtonHeightConstraint.constant = 50
                         self?.buttonsContainer.cancelButton.cornerRadius = 25
-                    default : break
+                    default: break
                     }
                     UIView.animate(withDuration: 0.4, animations: {
                         self?.beforeIncomingVideo.backgroundColor = UIColor.darkGray
@@ -771,7 +771,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self.capturedVideoHeightConstraint.constant = conference ? -UIScreen.main.bounds.height : -UIScreen.main.bounds.height + self.infoContainerHeightConstraint.constant - 20
                 self.capturedVideoWidthConstraint.constant = -UIScreen.main.bounds.width + widthCapturedVideo
                 let leftPointInfoContainer = self.infoBlurEffect?.convert((self.infoBlurEffect?
-                    .frame.origin)!, to: nil).x ?? 0
+                                                                            .frame.origin)!, to: nil).x ?? 0
                 self.capturedVideoTrailingConstraint.constant = leftPointInfoContainer + 10
                 self.capturedVideoTopConstraint.constant = -20
                 self.viewCapturedVideo.cornerRadius = 25
@@ -820,13 +820,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             self?.buttonsContainerBottomConstraint.constant = -200
             self?.conferenceCallsTop.constant = -400
             self?.view.layoutIfNeeded()
-            }, completion: { [weak self] _ in
-                if !(self?.viewModel.conferenceMode.value ?? false) {
-                    self?.infoContainer.isHidden = true
-                } else {
-                    self?.conferenceCallsScrolView.isHidden = true
-                }
-                self?.buttonsContainer.isHidden = true
+        }, completion: { [weak self] _ in
+            if !(self?.viewModel.conferenceMode.value ?? false) {
+                self?.infoContainer.isHidden = true
+            } else {
+                self?.conferenceCallsScrolView.isHidden = true
+            }
+            self?.buttonsContainer.isHidden = true
         })
     }
 
@@ -848,7 +848,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             contactPickerVC.view.frame = newFrame
             self.mainView.removeGestureRecognizer(self.tapGestureRecognizer)
             self.view.layoutIfNeeded()
-            }, completion: {  _ in
+        }, completion: {  _ in
         })
     }
 

@@ -64,22 +64,22 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
         let profile = items[row].profileObservable
         let account = items[row].account
         let jamiId: String = { (account: AccountModel) -> String in
-        if !account.registeredName.isEmpty {
-            return account.registeredName
-        }
-        if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-            let accountName = userNameData[account.id] as? String,
-            !accountName.isEmpty {
-            return accountName
-        }
-        return account.jamiId
+            if !account.registeredName.isEmpty {
+                return account.registeredName
+            }
+            if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+               let accountName = userNameData[account.id] as? String,
+               !accountName.isEmpty {
+                return accountName
+            }
+            return account.jamiId
         }(account)
         accountView.idLabel.text = jamiId
         profile
             .map({ [weak self] accountProfile in
                 if let photo = accountProfile.photo,
-                    let data = NSData(base64Encoded: photo,
-                                      options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                   let data = NSData(base64Encoded: photo,
+                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
                     return UIImage(data: data) ?? UIImage(asset: Asset.fallbackAvatar)!
                 }
                 guard let account = self?.items[row].account else {

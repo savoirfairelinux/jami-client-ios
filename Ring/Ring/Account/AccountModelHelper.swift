@@ -53,8 +53,8 @@ struct AccountModelHelper {
     func isAccountSip() -> Bool {
         let sipString = AccountType.sip.rawValue
         guard let accountType = self.account.details?
-            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType)) else {
-                return false
+                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType)) else {
+            return false
         }
         return sipString.compare(accountType) == ComparisonResult.orderedSame
     }
@@ -67,8 +67,8 @@ struct AccountModelHelper {
     func isAccountRing() -> Bool {
         let ringString = AccountType.ring.rawValue
         guard let accountType = self.account.details?
-            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType)) else {
-                return false
+                .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountType)) else {
+            return false
         }
         return ringString.compare(accountType) == ComparisonResult.orderedSame
     }
@@ -81,7 +81,7 @@ struct AccountModelHelper {
     func isEnabled() -> Bool {
         guard let details = self.account.details else { return false }
         return (details
-            .getBool(forConfigKeyModel: ConfigKeyModel.init(withKey: .accountEnable)))
+                    .getBool(forConfigKeyModel: ConfigKeyModel.init(withKey: .accountEnable)))
     }
 
     /**
@@ -92,7 +92,7 @@ struct AccountModelHelper {
     func getRegistrationState() -> String {
         guard let details = self.account.volatileDetails else { return "" }
         return (details
-            .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountRegistrationStatus)))
+                    .get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountRegistrationStatus)))
     }
 
     /**

@@ -1,22 +1,22 @@
 /*
-*  Copyright (C) 2020 Savoir-faire Linux Inc.
-*
-*  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
-*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*  This program is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program; if not, write to the Free Software
-*  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
-*/
+ *  Copyright (C) 2020 Savoir-faire Linux Inc.
+ *
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
 
 import RxSwift
 import RxCocoa
@@ -164,7 +164,7 @@ class LocationSharingService: NSObject {
                 guard let self = self, let location = location else { return }
                 self.doShareLocationAction(location)
             })
-        .disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
     }
 
     private static func serializeLocation(location: SerializableLocation) -> String? {
@@ -193,12 +193,12 @@ class LocationSharingService: NSObject {
     }
 
     private func triggerDeleteLocation(accountId: String, peerUri: String, incoming: Bool, shouldRefreshConversations: Bool) {
-         var event = ServiceEvent(withEventType: .deleteLocation)
-         event.addEventInput(.accountId, value: accountId)
-         event.addEventInput(.peerUri, value: peerUri)
-         event.addEventInput(.content, value: (incoming, shouldRefreshConversations))
-         self.locationServiceEventStream.onNext(event)
-     }
+        var event = ServiceEvent(withEventType: .deleteLocation)
+        event.addEventInput(.accountId, value: accountId)
+        event.addEventInput(.peerUri, value: peerUri)
+        event.addEventInput(.content, value: (incoming, shouldRefreshConversations))
+        self.locationServiceEventStream.onNext(event)
+    }
 
     private func triggerStopSharing(accountId: String, peerUri: String, content: String) {
         var event = ServiceEvent(withEventType: .stopLocationSharing)
@@ -346,7 +346,7 @@ extension LocationSharingService: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         self.currentLocation.accept(location)
-     }
+    }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         self.log.debug("[LocationSharingService] didFailWithError: \(error)")
     }

@@ -151,7 +151,7 @@ class CallViewModel: Stateable, ViewModel {
 
     lazy var contactImageData: Observable<Data?>? = {
         guard let call = self.call,
-            let account = self.accountService.getAccount(fromAccountId: call.accountId) else {
+              let account = self.accountService.getAccount(fromAccountId: call.accountId) else {
             return nil
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
@@ -187,7 +187,7 @@ class CallViewModel: Stateable, ViewModel {
             .map({ [weak self] renderer in
                 self?.hasIncomigVideo.accept(renderer?.running ?? false)
                 return renderer?.data
-        })
+            })
     }()
 
     var rendererId = ""
@@ -237,9 +237,9 @@ class CallViewModel: Stateable, ViewModel {
     lazy var callDuration: Driver<String> = {
         let timer = Observable<Int>.interval(Durations.oneSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .take(until: currentCall
-                .filter { call in
-                    !call.isExists()
-                })
+                    .filter { call in
+                        !call.isExists()
+                    })
             .map({ [weak self] (elapsed) -> String in
                 var time = elapsed
                 if let startTime = self?.call?.dateReceived {
@@ -271,7 +271,7 @@ class CallViewModel: Stateable, ViewModel {
 
     lazy var isActiveVideoCall: Observable<Bool> = { [weak self] in
         return currentCall
-              .map({ call in
+            .map({ call in
                 return call.state == .current && !(self?.isAudioOnly ?? false)
             })
     }()
@@ -288,7 +288,7 @@ class CallViewModel: Stateable, ViewModel {
             .map({ call in
                 return call.state == .connecting || call.state == .ringing
             })
-        }()
+    }()
 
     lazy var showCapturedFrame: Observable<Bool> = {
         return currentCall
@@ -410,7 +410,7 @@ class CallViewModel: Stateable, ViewModel {
             })
             .map({call in
                 if  call.state == .hold ||
-                    (call.state == .current && call.peerHolding) {
+                        (call.state == .current && call.peerHolding) {
                     return true
                 }
                 return false
@@ -547,10 +547,10 @@ extension CallViewModel {
     func showContactPickerVC() {
         self.stateSubject.onNext(ConversationState.showContactPicker(callID: rendererId, contactSelectedCB: { [weak self] (contacts) in
             guard let self = self,
-                let contact = contacts.first,
-                let contactToAdd = contact.contacts.first,
-                let account = self.accountService.getAccount(fromAccountId: contactToAdd.accountID),
-                let call = self.callService.call(callID: self.rendererId) else { return }
+                  let contact = contacts.first,
+                  let contactToAdd = contact.contacts.first,
+                  let account = self.accountService.getAccount(fromAccountId: contactToAdd.accountID),
+                  let call = self.callService.call(callID: self.rendererId) else { return }
             if contact.conferenceID.isEmpty {
                 self.callService
                     .callAndAddParticipant(participant: contactToAdd.uri,
@@ -595,16 +595,16 @@ extension CallViewModel {
             self.callService.hold(callId: call.callId)
                 .subscribe(onCompleted: { [weak self] in
                     self?.log.info("call paused")
-                    }, onError: { [weak self](error) in
-                        self?.log.info(error)
+                }, onError: { [weak self](error) in
+                    self?.log.info(error)
                 })
                 .disposed(by: self.disposeBag)
         } else if call.state == .hold {
             self.callService.unhold(callId: call.callId)
                 .subscribe(onCompleted: { [weak self] in
                     self?.log.info("call unpaused")
-                    }, onError: { [weak self](error) in
-                        self?.log.info(error)
+                }, onError: { [weak self](error) in
+                    self?.log.info(error)
                 })
                 .disposed(by: self.disposeBag)
         }
@@ -676,8 +676,8 @@ extension CallViewModel {
 
     func getConferenceParticipants() -> [ConferenceParticipant]? {
         guard let account = self.accountService.currentAccount,
-            let participants = self.callService.getConferenceParticipants(for: self.rendererId),
-            let call = self.call else { return nil }
+              let participants = self.callService.getConferenceParticipants(for: self.rendererId),
+              let call = self.call else { return nil }
         participants.forEach { participant in
             guard let uri = participant.uri else { return }
             // master call

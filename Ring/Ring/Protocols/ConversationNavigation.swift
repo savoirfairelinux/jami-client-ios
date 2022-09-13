@@ -83,7 +83,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 case .openFullScreenPreview(let parentView, let viewModel, let image, let initialFrame, let delegate):
                     self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate)
                 case .openIncomingInvitationView(let displayName, let request, let parentView, let invitationHandeledCB):
-                self.openIncomingInvitationView(displayName: displayName, request: request, parentView: parentView, invitationHandeledCB: invitationHandeledCB)
+                    self.openIncomingInvitationView(displayName: displayName, request: request, parentView: parentView, invitationHandeledCB: invitationHandeledCB)
                 case .openOutgoingInvitationView(let displayName, let alias, let avatar, let contactJamiId, let accountId, let parentView, let invitationHandeledCB):
                     self.openOutgoingInvitationView(displayName: displayName, alias: alias, avatar: avatar, contactJamiId: contactJamiId, accountId: accountId, parentView: parentView, invitationHandeledCB: invitationHandeledCB)
                 default:
@@ -176,44 +176,44 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         guard let navigationController = self.rootViewController as? UINavigationController else { return }
         let controllers = navigationController.children
         for controller in controllers
-            where controller.isKind(of: (ConversationViewController).self) {
-                if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation.value == conversationViewModel.conversation.value {
-                    navigationController.popToViewController(conversationController, animated: true)
-                    conversationController.becomeFirstResponder()
-                    return
-                }
+        where controller.isKind(of: (ConversationViewController).self) {
+            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation.value == conversationViewModel.conversation.value {
+                navigationController.popToViewController(conversationController, animated: true)
+                conversationController.becomeFirstResponder()
+                return
+            }
         }
         self.showConversation(withConversationViewModel: conversationViewModel)
     }
 
     func pushConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
         self.showConversation(withConversationViewModel: conversationViewModel)
-//        if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
-//            return
-//        }
-//        self.presentingVC[VCType.conversation.rawValue] = true
-//        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
-//        conversationViewController.viewModel = conversationViewModel
-//        self.present(viewController: conversationViewController,
-//                     withStyle: .push,
-//                     withAnimation: false,
-//                     withStateable: conversationViewController.viewModel,
-//                     lockWhilePresenting: VCType.conversation.rawValue)
+        //        if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
+        //            return
+        //        }
+        //        self.presentingVC[VCType.conversation.rawValue] = true
+        //        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
+        //        conversationViewController.viewModel = conversationViewModel
+        //        self.present(viewController: conversationViewController,
+        //                     withStyle: .push,
+        //                     withAnimation: false,
+        //                     withStateable: conversationViewController.viewModel,
+        //                     lockWhilePresenting: VCType.conversation.rawValue)
     }
 
     func navigateToCall (call: CallModel) {
         guard let navController = self.rootViewController as? UINavigationController else { return }
         let controllers = navController.children
         for controller in controllers
-            where controller.isKind(of: (CallViewController).self) {
-                if let callcontroller = controller as? CallViewController, callcontroller.viewModel.call?.callId == call.callId {
-                    navController.popToViewController(callcontroller, animated: true)
-                    return
-                }
+        where controller.isKind(of: (CallViewController).self) {
+            if let callcontroller = controller as? CallViewController, callcontroller.viewModel.call?.callId == call.callId {
+                navController.popToViewController(callcontroller, animated: true)
+                return
+            }
         }
         guard let topController = getTopController(),
-            !topController.isKind(of: (CallViewController).self) else {
-                return
+              !topController.isKind(of: (CallViewController).self) else {
+            return
         }
         topController.dismiss(animated: false, completion: nil)
         let callViewController = CallViewController
@@ -227,8 +227,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
 
     func getTopController() -> UIViewController? {
         guard var topController = UIApplication.shared
-            .keyWindow?.rootViewController else {
-                return nil
+                .keyWindow?.rootViewController else {
+            return nil
         }
         while let presentedViewController = topController.presentedViewController {
             topController = presentedViewController
@@ -238,8 +238,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
 
     func startOutgoingCall(contactRingId: String, userName: String, isAudioOnly: Bool = false) {
         guard let topController = getTopController(),
-            !topController.isKind(of: (CallViewController).self) else {
-                return
+              !topController.isKind(of: (CallViewController).self) else {
+            return
         }
         DispatchQueue.main.async {
             topController.dismiss(animated: false, completion: nil)

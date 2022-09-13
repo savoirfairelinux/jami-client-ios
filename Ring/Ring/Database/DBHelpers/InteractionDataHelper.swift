@@ -297,8 +297,8 @@ final class InteractionDataHelper {
 
     func insertIfNotExist(item: Interaction, dataBase: Connection) -> Int64? {
         let querySelect = table.filter(conversation == item.conversation &&
-            body == item.body &&
-            type == item.type)
+                                        body == item.body &&
+                                        type == item.type)
         let queryInsert = table.insert(author <- item.author,
                                        conversation <- item.conversation,
                                        timestamp <- item.timestamp,

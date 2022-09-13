@@ -80,26 +80,26 @@ class ContactRequestCell: UITableViewCell, NibReusable {
         Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
                                                   item.userName.asObservable(),
                                                   item.profileName.asObservable()) { profileImage, username, profileName in
-                                                    if !profileName.isEmpty {
-                                                        return (profileImage, profileName)
-                                                    }
-                                                    return (profileImage, username)
+            if !profileName.isEmpty {
+                return (profileImage, profileName)
+            }
+            return (profileImage, username)
         }
-            .startWith((item.profileImageData.value, item.userName.value))
-            .observe(on: MainScheduler.instance)
-            .subscribe({ [weak self] profileData -> Void in
-                guard let data = profileData.element?.1 else {
-                    return
-                }
-                self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
-                self?.avatarView
-                    .addSubview(
-                        AvatarView(profileImageData: profileData.element?.0,
-                                   username: data,
-                                   size: 50))
+        .startWith((item.profileImageData.value, item.userName.value))
+        .observe(on: MainScheduler.instance)
+        .subscribe({ [weak self] profileData -> Void in
+            guard let data = profileData.element?.1 else {
                 return
-            })
-            .disposed(by: self.disposeBag)
+            }
+            self?.avatarView.subviews.forEach({ $0.removeFromSuperview() })
+            self?.avatarView
+                .addSubview(
+                    AvatarView(profileImageData: profileData.element?.0,
+                               username: data,
+                               size: 50))
+            return
+        })
+        .disposed(by: self.disposeBag)
 
         // name
         item.bestName

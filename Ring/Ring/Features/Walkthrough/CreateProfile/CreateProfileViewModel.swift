@@ -33,7 +33,7 @@ class CreateProfileViewModel: Stateable, ViewModel {
     var profileName = BehaviorRelay<String>(value: "")
     var profilePhoto = BehaviorRelay<UIImage?>(value: nil)
 
-    lazy var profileExists: Observable<Bool>  = {
+    lazy var profileExists: Observable<Bool> = {
 
         return Observable.combineLatest(self.profileName.asObservable(),
                                         self.profilePhoto.asObservable()) {(username, image) -> Bool in

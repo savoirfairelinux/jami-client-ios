@@ -66,7 +66,7 @@ class ContactsService {
 
     private func loadSipContacts(withAccount account: AccountModel) {
         guard let profiles = self.dbManager
-            .getProfilesForAccount(accountId: account.id) else { return }
+                .getProfilesForAccount(accountId: account.id) else { return }
         let contacts = profiles.map({ profile in
             return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHach: profile.uri))
         })
@@ -109,7 +109,7 @@ class ContactsService {
         }
     }
     /**
-    Create a conversations for a linked account. If a conversation is swarm, conversationReady signal will be received and conversation for contact should be removed from the db.
+     Create a conversations for a linked account. If a conversation is swarm, conversationReady signal will be received and conversation for contact should be removed from the db.
      */
     func saveContactsForLinkedAccount(accountId: String) {
         loadJamiContacts(withAccountId: accountId)

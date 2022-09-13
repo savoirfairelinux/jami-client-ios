@@ -1,21 +1,21 @@
 /*
-*  Copyright (C) 2019 Savoir-faire Linux Inc.
-*
-*  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
-*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*  This program is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program; if not, write to the Free Software
-*  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ *  Copyright (C) 2019 Savoir-faire Linux Inc.
+ *
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import RxDataSources
@@ -28,15 +28,15 @@ struct Contact {
     var registeredName: String
     var hash: String
 
-    lazy var presenceStatus: BehaviorRelay<Bool>?  = {
-         self.presenceService
+    lazy var presenceStatus: BehaviorRelay<Bool>? = {
+        self.presenceService
             .getSubscriptionsForContact(contactId: self.hash)
     }()
 
     lazy var firstLine: String! = {
         if let contactProfile = profile,
-            let profileAlias = contactProfile.alias,
-            !profileAlias.isEmpty {
+           let profileAlias = contactProfile.alias,
+           !profileAlias.isEmpty {
             return profileAlias
         }
         return registeredName.isEmpty ? hash : registeredName
@@ -68,8 +68,8 @@ struct Contact {
 
     static func == (lhs: Contact, rhs: Contact) -> Bool {
         return (lhs.uri == rhs.uri &&
-            lhs.accountID == rhs.accountID &&
-            lhs.registeredName == rhs.registeredName)
+                    lhs.accountID == rhs.accountID &&
+                    lhs.registeredName == rhs.registeredName)
     }
 }
 

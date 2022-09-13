@@ -107,8 +107,8 @@ extension String {
 
         var fileIsMedia = false
         if let value = uti?.takeRetainedValue(),
-            UTTypeConformsTo(value, kUTTypeMovie) || UTTypeConformsTo(value, kUTTypeVideo)
-                || UTTypeConformsTo(value, kUTTypeAudio) {
+           UTTypeConformsTo(value, kUTTypeMovie) || UTTypeConformsTo(value, kUTTypeVideo)
+            || UTTypeConformsTo(value, kUTTypeAudio) {
             fileIsMedia = true
         }
         let mediaExtension = ["ogg", "webm"]
@@ -126,7 +126,7 @@ extension String {
 
         var fileIsImage = false
         if let value = uti?.takeRetainedValue(),
-            UTTypeConformsTo(value, kUTTypeImage) {
+           UTTypeConformsTo(value, kUTTypeImage) {
             fileIsImage = true
         }
         return fileIsImage

@@ -169,8 +169,8 @@ final class DBContainer {
         guard let dbPath = Constants.documentsPath else { return }
         let url = NSURL(fileURLWithPath: dbPath.path)
         guard let pathComponent = url
-            .appendingPathComponent("/" + dbName) else {
-                return
+                .appendingPathComponent("/" + dbName) else {
+            return
         }
         let filePath = pathComponent.path
         let filemManager = FileManager.default
@@ -232,7 +232,7 @@ extension Connection {
     public var userVersion: Int? {
         get {
             if let version = try? scalar("PRAGMA user_version"),
-                let intVersion = version as? Int64 { return Int(intVersion) }
+               let intVersion = version as? Int64 { return Int(intVersion) }
             return nil
         }
         set {

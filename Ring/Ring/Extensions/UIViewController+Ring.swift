@@ -101,7 +101,7 @@ extension UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self, weak tableView] (height) in
                 guard let self = self, let tableView = tableView else { return }
-                let trueHeight = height > 0  ? height + 100 : 0.0
+                let trueHeight = height > 0 ? height + 100 : 0.0
                 // reset insets if they were changed before
                 if tableView.contentInset.bottom > 0 && trueHeight <= 0 {
                     var contentInsets = tableView.contentInset
@@ -151,7 +151,7 @@ extension UIViewController {
         let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
         self.navigationController?
             .navigationBar.titleTextAttributes = isPortrait ?
-                attrPortrait : attrLandscape
+            attrPortrait : attrLandscape
     }
 
     @objc

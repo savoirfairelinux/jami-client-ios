@@ -1,22 +1,22 @@
 /*
-*  Copyright (C) 2020 Savoir-faire Linux Inc.
-*
-*  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
-*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*  This program is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program; if not, write to the Free Software
-*  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
-*/
+ *  Copyright (C) 2020 Savoir-faire Linux Inc.
+ *
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
 
 import RxSwift
 import RxCocoa
@@ -90,11 +90,11 @@ class PlayerViewModel {
                 render?.rendererId == self?.playerId
             } ?? Observable.just(renderer)
         })
-            .merge()
-            .subscribe(onNext: {  [weak self] (renderer) in
-                self?.playBackFrame.onNext(renderer?.data)
-            })
-            .disposed(by: self.playBackDisposeBag)
+        .merge()
+        .subscribe(onNext: {  [weak self] (renderer) in
+            self?.playBackFrame.onNext(renderer?.data)
+        })
+        .disposed(by: self.playBackDisposeBag)
 
         // subscribe for fileInfo
         self.videoService.playerInfo
@@ -105,11 +105,11 @@ class PlayerViewModel {
             .take(1)
             .subscribe(onNext: {  [weak self] player in
                 guard let duration = Float(player.duration),
-                    duration > 0 else {
-                        DispatchQueue.main.async {
-                            self?.videoService.closePlayer(playerId: self?.playerId ?? "")
-                        }
-                        return
+                      duration > 0 else {
+                    DispatchQueue.main.async {
+                        self?.videoService.closePlayer(playerId: self?.playerId ?? "")
+                    }
+                    return
                 }
                 self?.playerDuration.accept(duration)
                 self?.hasVideo.accept(player.hasVideo)

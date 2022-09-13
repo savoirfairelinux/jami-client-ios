@@ -71,7 +71,7 @@ class ConversationsManager {
         self.subscribeFileTransferEvents()
         self.subscribeCallsEvents()
         self.subscribeContactsEvents()
-        //TODO: fix location sharing with a new API
+        // TODO: fix location sharing with a new API
         if false {
             self.subscribeLocationSharingEvent()
         }
@@ -88,7 +88,7 @@ class ConversationsManager {
         let callProviderEvents = callsProvider.sharedResponseStream
             .filter({ (event) in
                 return event.eventType == .callProviderCancelCall ||
-                event.eventType == .callProviderPreviewPendingCall
+                    event.eventType == .callProviderPreviewPendingCall
             })
             .map { event in
                 event.eventType
@@ -103,34 +103,34 @@ class ConversationsManager {
         Observable.of(callProviderEvents.asObservable(),
                       callEndedEvents.asObservable(),
                       appState
-            .asObservable())
-        .merge()
-        .subscribe { [weak self] eventType in
-            guard let self = self else { return }
-            switch eventType {
-            case .appEnterBackground:
-                if !self.callsProvider.hasPendingTransactions() {
-                    self.accountsService.setAccountsActive(active: false)
-                }
-                self.callService.muteCurrentCallVideoVideo( mute: true)
-            case .appEnterForeground:
-                self.accountsService.setAccountsActive(active: true)
-                self.callService.muteCurrentCallVideoVideo( mute: false)
-            case .callProviderPreviewPendingCall:
-                self.accountsService.setAccountsActive(active: true)
-            case .callEnded, .callProviderCancelCall:
-                DispatchQueue.main.async {
-                    let state = UIApplication.shared.applicationState
-                    if state == .background {
+                        .asObservable())
+            .merge()
+            .subscribe { [weak self] eventType in
+                guard let self = self else { return }
+                switch eventType {
+                case .appEnterBackground:
+                    if !self.callsProvider.hasPendingTransactions() {
                         self.accountsService.setAccountsActive(active: false)
                     }
+                    self.callService.muteCurrentCallVideoVideo( mute: true)
+                case .appEnterForeground:
+                    self.accountsService.setAccountsActive(active: true)
+                    self.callService.muteCurrentCallVideoVideo( mute: false)
+                case .callProviderPreviewPendingCall:
+                    self.accountsService.setAccountsActive(active: true)
+                case .callEnded, .callProviderCancelCall:
+                    DispatchQueue.main.async {
+                        let state = UIApplication.shared.applicationState
+                        if state == .background {
+                            self.accountsService.setAccountsActive(active: false)
+                        }
+                    }
+                default:
+                    break
                 }
-            default:
-                break
+            } onError: { _ in
             }
-        } onError: { _ in
-        }
-        .disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
     }
 
     @objc
@@ -234,7 +234,7 @@ class ConversationsManager {
                       let accountId: String = event.getEventInput(ServiceEventInput.accountId),
                       let account = self.accountsService.getAccount(fromAccountId: accountId),
                       let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
-                      else { return }
+                else { return }
 
                 let shouldRefresh = currentAccount.id == accountId
 
@@ -256,11 +256,11 @@ class ConversationsManager {
             .filter({ $0.eventType == ServiceEventType.deleteLocation })
             .subscribe(onNext: { [weak self] event in
                 guard let self = self,
-                    let currentAccount = self.accountsService.currentAccount,
-                    let (incoming, shouldRefreshConversations): (Bool, Bool) = event.getEventInput(ServiceEventInput.content),
-                    let accountId: String = event.getEventInput(ServiceEventInput.accountId),
-                    let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
-                    else { return }
+                      let currentAccount = self.accountsService.currentAccount,
+                      let (incoming, shouldRefreshConversations): (Bool, Bool) = event.getEventInput(ServiceEventInput.content),
+                      let accountId: String = event.getEventInput(ServiceEventInput.accountId),
+                      let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
+                else { return }
 
                 let shouldRefresh = currentAccount.id == accountId && shouldRefreshConversations
 
@@ -353,9 +353,9 @@ class ConversationsManager {
                       let conversationId: String = event.getEventInput(ServiceEventInput.conversationId),
                       let messageId: String = event.getEventInput(ServiceEventInput.messageId),
                       let transferInfo = self.dataTransferService.dataTransferInfo(withId: transferId, accountId: accountId, conversationId: conversationId, isSwarm: !conversationId.isEmpty),
-                    let currentAccount = self.accountsService.currentAccount else {
-                        self.log.error("ConversationsManager: can't find transferInfo")
-                        return
+                      let currentAccount = self.accountsService.currentAccount else {
+                    self.log.error("ConversationsManager: can't find transferInfo")
+                    return
                 }
                 switch event.eventType {
                 case .dataTransferCreated:
@@ -380,25 +380,25 @@ class ConversationsManager {
                         dtEvent = transferInfo.lastEvent
                     }
                     self.log.debug("ConversationsManager: dataTransferChanged - id:\(transferId) status:\(stringFromEventCode(with: dtEvent))")
-                        var status: DataTransferStatus = .unknown
-                        switch dtEvent {
-                        case .closed_by_host, .closed_by_peer:
-                            status = DataTransferStatus.canceled
-                        case .invalid, .unsupported, .invalid_pathname, .unjoinable_peer:
-                            status = DataTransferStatus.error
-                        case .wait_peer_acceptance, .wait_host_acceptance:
-                            status = DataTransferStatus.awaiting
-                            self.createTransferNotification(info: transferInfo, conversationId: conversationId, accountId: accountId)
-                            self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: accountId, conversationId: conversationId)
-                        case .ongoing:
-                            status = DataTransferStatus.ongoing
-                        case .finished:
-                            status = DataTransferStatus.success
-                        case .created:
-                            break
-                        @unknown default:
-                            break
-                        }
+                    var status: DataTransferStatus = .unknown
+                    switch dtEvent {
+                    case .closed_by_host, .closed_by_peer:
+                        status = DataTransferStatus.canceled
+                    case .invalid, .unsupported, .invalid_pathname, .unjoinable_peer:
+                        status = DataTransferStatus.error
+                    case .wait_peer_acceptance, .wait_host_acceptance:
+                        status = DataTransferStatus.awaiting
+                        self.createTransferNotification(info: transferInfo, conversationId: conversationId, accountId: accountId)
+                        self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: accountId, conversationId: conversationId)
+                    case .ongoing:
+                        status = DataTransferStatus.ongoing
+                    case .finished:
+                        status = DataTransferStatus.success
+                    case .created:
+                        break
+                    @unknown default:
+                        break
+                    }
                     let peer = !conversationId.isEmpty ? "" : transferInfo.peer
                     self.conversationService.transferStatusChanged(status, for: transferId, conversationId: conversationId, interactionId: messageId, accountId: accountId, to: peer ?? "")
                 default:
@@ -409,16 +409,16 @@ class ConversationsManager {
     }
 
     func prepareConversationsForAccount(accountId: String, accountURI: String) {
-      self.conversationService
-        .getConversationsForAccount(accountId: accountId, accountURI: accountURI)
-        .subscribe()
-        .disposed(by: self.disposeBag)
+        self.conversationService
+            .getConversationsForAccount(accountId: accountId, accountURI: accountURI)
+            .subscribe()
+            .disposed(by: self.disposeBag)
     }
 
     // MARK: Message Adapter delegate
     private func handleReceivedLocationUpdate(from peerId: String, to accountId: String, messageId: String, locationJSON content: String) {
         guard let currentAccount = self.accountsService.currentAccount,
-            let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+              let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
 
         let type = AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() ? URIType.sip : URIType.ring
         guard let peerUri = JamiURI.init(schema: type, infoHach: peerId, account: accountForMessage).uriString else { return }
@@ -450,7 +450,7 @@ class ConversationsManager {
 
     func handleNewMessage(from peerUri: String, to accountId: String, messageId: String, message content: String, peerName: String?) {
         guard let currentAccount = self.accountsService.currentAccount,
-            let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+              let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         self.presentNotification(from: peerUri, to: accountForMessage, message: content, peerName: peerName)
         let shouldUpdateConversationsList = currentAccount.id == accountForMessage.id
 
@@ -475,9 +475,9 @@ class ConversationsManager {
     private func presentNotification(from peerUri: String, to account: AccountModel, message content: String, peerName: String?) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self,
-                UIApplication.shared.applicationState != .active,
-                AccountModelHelper.init(withAccount: account).isAccountRing(),
-                self.accountsService.getCurrentProxyState(accountID: account.id) else { return }
+                  UIApplication.shared.applicationState != .active,
+                  AccountModelHelper.init(withAccount: account).isAccountRing(),
+                  self.accountsService.getCurrentProxyState(accountID: account.id) else { return }
             var data = [String: String]()
             data[Constants.NotificationUserInfoKeys.messageContent.rawValue] = content
             data[Constants.NotificationUserInfoKeys.participantID.rawValue] = peerUri
@@ -496,8 +496,8 @@ class ConversationsManager {
 
     func createTransferNotification(info: NSDataTransferInfo, conversationId: String, accountId: String) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId),
-            AccountModelHelper.init(withAccount: account).isAccountRing(),
-            self.accountsService.getCurrentProxyState(accountID: accountId) else { return }
+              AccountModelHelper.init(withAccount: account).isAccountRing(),
+              self.accountsService.getCurrentProxyState(accountID: accountId) else { return }
         var message = L10n.Notifications.newFile + " "
         if let path = info.path {
             if let name = path.split(separator: "/").last {

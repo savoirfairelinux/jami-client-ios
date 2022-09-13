@@ -213,9 +213,9 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         guard let transferId = userInfoDict["transferId"] as? String else { return }
         guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
         if let progress = viewModel.getTransferProgress(transferId: transferId, accountId: viewModel.conversation.value.accountId) {
-           DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.transferProgressView.progress = CGFloat(progress * 100)
-           }
+            }
         }
     }
 
@@ -354,7 +354,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return action == #selector(UIResponderStandardEditActions.copy) && self.isCopyable ||
-           // (action == #selector(UIResponderStandardEditActions.delete) && self.couldBeDeleted) ||
+            // (action == #selector(UIResponderStandardEditActions.delete) && self.couldBeDeleted) ||
             (action == NSSelectorFromString("forward") && self.couldBeForward) ||
             (action == NSSelectorFromString("share") && self.couldBeShared) ||
             (action == NSSelectorFromString("resend") && self.couldBeResend) ||
@@ -420,7 +420,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
                 self.bubbleTopConstraint.constant = 32
 
                 if indexPath.row == items.count - 1 {
-                    adjustedSequencing =  .singleMessage
+                    adjustedSequencing = .singleMessage
                 } else if adjustedSequencing != .singleMessage && adjustedSequencing != .lastOfSequence {
                     adjustedSequencing = .firstOfSequence
                 } else {
@@ -617,7 +617,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
             var origin = CGPoint(x: 0, y: 0)
             // if have video update size to keep video ratio
             if let firstImage = player.firstFrame,
-                let frameSize = firstImage.getNewSize(of: CGSize(width: getMaxDimensionForTransfer(), height: getMaxDimensionForTransfer())) {
+               let frameSize = firstImage.getNewSize(of: CGSize(width: getMaxDimensionForTransfer(), height: getMaxDimensionForTransfer())) {
                 defaultSize = frameSize
                 let xOriginImageSend = screenWidth - 112 - (defaultSize.width)
                 if item.bubblePosition() == .sent {
@@ -653,7 +653,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
                 }
             })
             .disposed(by: self.disposeBag)
-     }
+    }
 
     private func configureMessageReadAvatar(_ item: MessageViewModel, _ conversationViewModel: ConversationViewModel) {
         guard self.messageReadIndicator != nil else { return }

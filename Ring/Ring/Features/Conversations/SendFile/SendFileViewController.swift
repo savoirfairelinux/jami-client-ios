@@ -54,10 +54,10 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
         sliderDisposeBag = DisposeBag()
         self.viewModel.userStartSeeking()
         progressSlider.rx.value
-        .subscribe(onNext: { [weak self] (value) in
-            self?.viewModel.seekTimeVariable.accept(Float(value))
-        })
-        .disposed(by: self.sliderDisposeBag)
+            .subscribe(onNext: { [weak self] (value) in
+                self?.viewModel.seekTimeVariable.accept(Float(value))
+            })
+            .disposed(by: self.sliderDisposeBag)
     }
 
     @IBAction func stopSeekFrame(_ sender: UISlider) {
@@ -77,7 +77,7 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
                 guard let self = self,
-                UIDevice.current.portraitOrLandscape else { return }
+                      UIDevice.current.portraitOrLandscape else { return }
                 self.viewModel
                     .setCameraOrientation(orientation: UIDevice.current.orientation)
             })
@@ -255,9 +255,9 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
                                .repeat],
                      animations: { [weak self] in
                         self?.recordButton.alpha = 0.1
-                },
+                     },
                      completion: { [weak self] _ in
                         self?.recordButton.alpha = 1.0
-            })
+                     })
     }
 }

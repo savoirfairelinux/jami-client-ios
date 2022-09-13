@@ -53,7 +53,7 @@ class GeneralSettingsViewModel: ViewModel {
     lazy var generalSettings: Observable<[GeneralSettingsSection]> = {
         return Observable
             .just([GeneralSettingsSection.generalSettings(items:
-                [.hardwareAcceleration])])
+                                                            [.hardwareAcceleration])])
     }()
 
     var hardwareAccelerationEnabled: BehaviorRelay<Bool>

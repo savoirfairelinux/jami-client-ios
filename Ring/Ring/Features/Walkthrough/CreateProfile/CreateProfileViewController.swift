@@ -128,14 +128,14 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
-        .observe(on: MainScheduler.instance)
-        .subscribe(onNext: { [weak self] (_) in
-            guard UIDevice.current.portraitOrLandscape else { return }
-            self?.skipButton.updateGradientFrame()
-            self?.self.configureWalkrhroughNavigationBar()
-        })
-        .disposed(by: self.disposeBag)
+        NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (_) in
+                guard UIDevice.current.portraitOrLandscape else { return }
+                self?.skipButton.updateGradientFrame()
+                self?.self.configureWalkrhroughNavigationBar()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func adaptToSystemColor() {
@@ -214,8 +214,8 @@ class CreateProfileViewController: EditProfileViewController, StoryboardBased, V
                 self.infoProfileImage.layer.add(shadow2Animation, forKey: shadow2Animation.keyPath)
                 self.infoProfileImage.layer.shadowOpacity = 0.5
                 UIView.animate(withDuration: 0.2, animations: {
-                self.profileImageViewHeightConstraint.constant = 120
-                self.view.layoutIfNeeded()
+                    self.profileImageViewHeightConstraint.constant = 120
+                    self.view.layoutIfNeeded()
                 })
             }
         }

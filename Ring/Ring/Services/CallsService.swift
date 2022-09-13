@@ -293,7 +293,7 @@ class CallsService: CallsAdapterDelegate {
         self.callsAdapter.hangUpCall(call.callId, accountId: call.accountId)
     }
     func answerCall(call: CallModel) -> Bool {
-        NSLog("call service answerCall %@", call.callId);
+        NSLog("call service answerCall %@", call.callId)
         return self.callsAdapter.acceptCall(withId: call.callId, accountId: call.accountId, withMedia: call.mediaList)
     }
 
@@ -481,11 +481,11 @@ class CallsService: CallsAdapterDelegate {
 
     func muteCurrentCallVideoVideo(mute: Bool) {
         for call in self.calls.value.values where call.state == .current {
-                self.callsAdapter
-                    .muteMedia(call.callId, accountId: call.accountId,
-                               mediaType: String(describing: MediaType.video),
-                               muted: mute)
-                return
+            self.callsAdapter
+                .muteMedia(call.callId, accountId: call.accountId,
+                           mediaType: String(describing: MediaType.video),
+                           muted: mute)
+            return
         }
     }
 
@@ -577,8 +577,8 @@ class CallsService: CallsAdapterDelegate {
                     self.pendingConferences[callId] = nil
                 }
                 if let confId = shouldCallBeAddedToConference(callId: callId),
-                    var pendingCalls = self.pendingConferences[confId],
-                    let index = pendingCalls.firstIndex(of: callId) {
+                   var pendingCalls = self.pendingConferences[confId],
+                   let index = pendingCalls.firstIndex(of: callId) {
                     pendingCalls.remove(at: index)
                     if pendingCalls.isEmpty {
                         self.pendingConferences[confId] = nil
@@ -662,7 +662,7 @@ class CallsService: CallsAdapterDelegate {
         var confId: String?
         self.pendingConferences.keys.forEach { [weak self] (initialCall) in
             guard let self = self, let pendigs = self.pendingConferences[initialCall], !pendigs.isEmpty
-                else { return }
+            else { return }
             if pendigs.contains(callId) {
                 confId = initialCall
             }
@@ -810,7 +810,7 @@ class CallsService: CallsAdapterDelegate {
         var values = self.calls.value
         values[conferenceID] = nil
         self.calls.accept(values)
-     }
+    }
 
     func updateConferences(callId: String) {
         let conferences = self.calls.value.keys.filter { (callID) -> Bool in

@@ -1,21 +1,21 @@
 /*
-*  Copyright (C) 2019 Savoir-faire Linux Inc.
-*
-*  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
-*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*  This program is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program; if not, write to the Free Software
-*  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ *  Copyright (C) 2019 Savoir-faire Linux Inc.
+ *
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import UIKit
@@ -91,13 +91,13 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             self.view.frame = initialFrame
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.view.layoutIfNeeded()
-            }, completion: { [weak self] _ in
-                if let parent = self?.parent as? ContactPickerDelegate {
-                    parent.contactPickerDismissed()
-                }
-                self?.didMove(toParent: nil)
-                self?.view.removeFromSuperview()
-                self?.removeFromParent()
+        }, completion: { [weak self] _ in
+            if let parent = self?.parent as? ContactPickerDelegate {
+                parent.contactPickerDismissed()
+            }
+            self?.didMove(toParent: nil)
+            self?.view.removeFromSuperview()
+            self?.removeFromParent()
         })
     }
 
@@ -105,9 +105,9 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ContactPickerSection.Item)
             -> UITableViewCell = {
                 (   _: TableViewSectionedDataSource<ContactPickerSection>,
-                tableView: UITableView,
-                indexPath: IndexPath,
-                contactItem: ContactPickerSection.Item) in
+                    tableView: UITableView,
+                    indexPath: IndexPath,
+                    contactItem: ContactPickerSection.Item) in
 
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
                 cell.selectionContainer?.isHidden = self.type == .forCall
@@ -141,7 +141,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
                 var imageData: Data?
                 if let contactProfile = contact.profile, let photo = contactProfile.photo,
-                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                   let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
                     imageData = data
                 }
                 cell.avatarView
@@ -160,7 +160,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                     })
                     .disposed(by: cell.disposeBag)
                 return cell
-        }
+            }
         let contactDataSource = RxTableViewSectionedReloadDataSource<ContactPickerSection>(configureCell: configureCell)
         self.viewModel.searchResultItems
             .bind(to: self.tableView.rx.items(dataSource: contactDataSource))
@@ -178,7 +178,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         self.tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self,
-                    let rowSelectionHandler = self.rowSelectionHandler else { return }
+                      let rowSelectionHandler = self.rowSelectionHandler else { return }
                 rowSelectionHandler(indexPath)
             })
             .disposed(by: disposeBag)

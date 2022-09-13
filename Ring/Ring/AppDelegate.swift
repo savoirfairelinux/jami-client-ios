@@ -119,11 +119,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // initialize log format
         let console = ConsoleDestination()
         console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
-    #if DEBUG
+        #if DEBUG
         log.addDestination(console)
-    #else
+        #else
         log.removeAllDestinations()
-    #endif
+        #endif
 
         /// move files from the app container to the group container, so it could be accessed by notification extension
         if !self.moveDataToGroupContainer() {
@@ -284,7 +284,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     self.unregisterNotifications()
                 }
                 if let selectedAccountId = UserDefaults.standard.string(forKey: self.accountService.selectedAccountID),
-                    let account = self.accountService.getAccount(fromAccountId: selectedAccountId) {
+                   let account = self.accountService.getAccount(fromAccountId: selectedAccountId) {
                     self.accountService.currentAccount = account
                 }
                 guard let currentAccount = self.accountService.currentAccount else {
@@ -488,9 +488,9 @@ extension AppDelegate {
 
     func handleNotificationActions(data: [AnyHashable: Any], responseIdentifier: String) {
         guard let currentAccount = self.accountService
-            .currentAccount,
+                .currentAccount,
               let accountId = data[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String,
-            let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
+              let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
         if currentAccount.id != accountId && responseIdentifier != CallAcition.refuse.rawValue {
             self.accountService.currentAccount = account
         }
@@ -552,7 +552,7 @@ extension AppDelegate {
 
     func findAccountAndStartCall(uri: JamiURI, isVideo: Bool, type: AccountType) {
         guard let currentAccount = self.accountService
-            .currentAccount else { return }
+                .currentAccount else { return }
         var hash = uri.hash ?? ""
         var uriString = uri.uriString ?? ""
         for account in self.accountService.accounts where account.type == type {
@@ -598,7 +598,7 @@ extension AppDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken
-                     deviceToken: Data) {
+                        deviceToken: Data) {
         let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print(deviceTokenString)
         if let bundleIdentifier = Bundle.main.bundleIdentifier {

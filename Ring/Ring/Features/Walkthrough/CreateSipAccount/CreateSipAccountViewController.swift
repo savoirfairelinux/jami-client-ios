@@ -171,7 +171,7 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
 
     func applyL10n() {
         self.createAccountButton
-        .setTitle(L10n.Account.createSipAccount, for: .normal)
+            .setTitle(L10n.Account.createSipAccount, for: .normal)
         self.navigationItem.title = L10n.Account.createSipAccount
         self.userNameLabel.text = L10n.Account.usernameLabel
         self.passwordLabel.text = L10n.Account.passwordLabel

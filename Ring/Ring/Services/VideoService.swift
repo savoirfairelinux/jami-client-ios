@@ -514,7 +514,7 @@ extension VideoService: VideoAdapterDelegate {
         if let cgImage = image.cgImage {
             self.capturedVideoFrame
                 .onNext(UIImage(cgImage: cgImage,
-                                scale: 1.0 ,
+                                scale: 1.0,
                                 orientation: self.getImageOrienation()))
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
@@ -562,40 +562,40 @@ enum PlayerInfo: String {
 
 extension VideoService {
     func createPlayer(path: String) -> String {
-           let player = self.videoAdapter.createMediaPlayer(path)
-           return player ?? ""
-       }
+        let player = self.videoAdapter.createMediaPlayer(path)
+        return player ?? ""
+    }
 
-       func pausePlayer(playerId: String, pause: Bool) {
-           self.videoAdapter.pausePlayer(playerId, pause: pause)
-       }
+    func pausePlayer(playerId: String, pause: Bool) {
+        self.videoAdapter.pausePlayer(playerId, pause: pause)
+    }
 
-       func mutePlayerAudio(playerId: String, mute: Bool) {
-           self.videoAdapter.mutePlayerAudio(playerId, mute: mute)
-       }
+    func mutePlayerAudio(playerId: String, mute: Bool) {
+        self.videoAdapter.mutePlayerAudio(playerId, mute: mute)
+    }
 
-       func seekToTime(time: Int, playerId: String) {
-           self.videoAdapter.playerSeek(toTime: Int32(time), playerId: playerId)
-       }
+    func seekToTime(time: Int, playerId: String) {
+        self.videoAdapter.playerSeek(toTime: Int32(time), playerId: playerId)
+    }
 
-       func closePlayer(playerId: String) {
-           self.videoAdapter.closePlayer(playerId)
-       }
+    func closePlayer(playerId: String) {
+        self.videoAdapter.closePlayer(playerId)
+    }
 
-       func fileOpened(for playerId: String, fileInfo: [String: String]) {
-           let duration: String = fileInfo[PlayerInfo.duration.rawValue] ?? "0"
-           let audioStream: Int = Int(fileInfo[PlayerInfo.audio_stream.rawValue] ?? "-1") ?? -1
-           let videoStream: Int = Int(fileInfo[PlayerInfo.video_stream.rawValue] ?? "-1") ?? -1
-           let hasAudio = audioStream >= 0
-           let hasVideo = videoStream >= 0
-           let player = Player(playerId: playerId,
-                               duration: duration,
-                               hasAudio: hasAudio,
-                               hasVideo: hasVideo)
-           playerInfo.onNext(player)
-       }
+    func fileOpened(for playerId: String, fileInfo: [String: String]) {
+        let duration: String = fileInfo[PlayerInfo.duration.rawValue] ?? "0"
+        let audioStream: Int = Int(fileInfo[PlayerInfo.audio_stream.rawValue] ?? "-1") ?? -1
+        let videoStream: Int = Int(fileInfo[PlayerInfo.video_stream.rawValue] ?? "-1") ?? -1
+        let hasAudio = audioStream >= 0
+        let hasVideo = videoStream >= 0
+        let player = Player(playerId: playerId,
+                            duration: duration,
+                            hasAudio: hasAudio,
+                            hasVideo: hasVideo)
+        playerInfo.onNext(player)
+    }
 
-       func getPlayerPosition(playerId: String) -> Int64 {
-           return self.videoAdapter.getPlayerPosition(playerId)
-       }
+    func getPlayerPosition(playerId: String) -> Int64 {
+        return self.videoAdapter.getPlayerPosition(playerId)
+    }
 }

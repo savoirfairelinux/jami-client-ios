@@ -28,7 +28,7 @@ import RxRelay
  - receive only a contact request. When the other side does not support swarm.
  - receive only a conversation request. When the other side does support swarm and we already added contact for the peer.
  - receive both: a conversation request and a contact request. When the other side does support swarm and we do not have contact for the peer. In this case, we will keep only a conversation request.
-  This class responsible for saving contacts vcard when contact request accepted or sent
+ This class responsible for saving contacts vcard when contact request accepted or sent
  */
 
 enum RequestServiceError: Error {
@@ -337,7 +337,7 @@ class RequestsService {
 
 extension RequestsService: RequestsAdapterDelegate {
     /**
-       incomingTrustRequestReceived signal emmited for a newly received contact request
+     incomingTrustRequestReceived signal emmited for a newly received contact request
      */
     func incomingTrustRequestReceived(from jamiId: String, to accountId: String, conversationId: String, withPayload payload: Data, receivedDate: Date) {
         /// add a request if it not added yet.
@@ -372,7 +372,7 @@ extension RequestsService: RequestsAdapterDelegate {
         }
     }
     /**
-       conversationRequestReceived signal emmited in 2 cases:
+     conversationRequestReceived signal emmited in 2 cases:
      - for a newly  received conversation request
      - at the beggining of application  for all requests that was accepted but not synchronized yet. At this case profile for participant should be  already      saved
      */

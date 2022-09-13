@@ -50,12 +50,12 @@ class AudioService {
     @objc
     private func audioRouteChangeListener(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
-            let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt else {
-                return
+              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt else {
+            return
         }
         guard let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue),
-            (reason == .newDeviceAvailable || reason == .oldDeviceUnavailable || reason == .categoryChange) else {
-                return
+              (reason == .newDeviceAvailable || reason == .oldDeviceUnavailable || reason == .categoryChange) else {
+            return
         }
         overrideAudioRoute()
     }
@@ -126,8 +126,8 @@ class AudioService {
         let outputs = AVAudioSession.sharedInstance().currentRoute.outputs
         for output in outputs {
             if  output.portType == AVAudioSession.Port.bluetoothA2DP ||
-                output.portType == AVAudioSession.Port.bluetoothHFP ||
-                output.portType == AVAudioSession.Port.bluetoothLE {
+                    output.portType == AVAudioSession.Port.bluetoothHFP ||
+                    output.portType == AVAudioSession.Port.bluetoothLE {
                 return true
             }
         }

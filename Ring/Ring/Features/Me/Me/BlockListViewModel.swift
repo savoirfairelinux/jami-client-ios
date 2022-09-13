@@ -81,7 +81,7 @@ class BlockListViewModel: ViewModel {
                             guard let data = NSData(base64Encoded: photo,
                                                     options: NSData.Base64DecodingOptions
                                                         .ignoreUnknownCharacters) as Data? else {
-                                                            return
+                                return
                             }
                             item.image = data
                         })

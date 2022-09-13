@@ -1,22 +1,22 @@
 /*
-*  Copyright (C) 2020 Savoir-faire Linux Inc.
-*
-*  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
-*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*  This program is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program; if not, write to the Free Software
-*  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
-*/
+ *  Copyright (C) 2020 Savoir-faire Linux Inc.
+ *
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
 
 import RxSwift
 import RxCocoa
@@ -45,7 +45,7 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
                            self.password.asObservable(),
                            self.manager.asObservable(),
                            self.createState) {( name: String, password: String, manager: String, state: AccountCreationState) -> Bool in
-            return !name.isEmpty && !password.isEmpty && !manager.isEmpty && !state.isInProgress
+                return !name.isEmpty && !password.isEmpty && !manager.isEmpty && !state.isInProgress
             }
     }()
 
@@ -67,12 +67,12 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
                 DispatchQueue.main.async {
                     self.stateSubject.onNext(WalkthroughState.profileCreated)
                 }
-                }, onError: { [weak self] (error) in
-                    if let error = error as? AccountCreationError {
-                        self?.accountCreationState.accept(.error(error: error))
-                    } else {
-                        self?.accountCreationState.accept(.error(error: AccountCreationError.wrongCredentials))
-                    }
+            }, onError: { [weak self] (error) in
+                if let error = error as? AccountCreationError {
+                    self?.accountCreationState.accept(.error(error: error))
+                } else {
+                    self?.accountCreationState.accept(.error(error: AccountCreationError.wrongCredentials))
+                }
             })
             .disposed(by: self.disposeBag)
     }

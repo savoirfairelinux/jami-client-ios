@@ -83,19 +83,19 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         let actionCancel =
             UIAlertAction(title: L10n.Actions.cancelAction,
                           style: .cancel) { [weak self] _ in
-            self?.dismiss(animated: true, completion: nil)
+                self?.dismiss(animated: true, completion: nil)
             }
         let actionLink =
             UIAlertAction(title: L10n.Global.ok,
                           style: .default) {[weak self] _ in
-                            guard let self = self else { return }
-                            if !self.viewModel.hasPassord {
-                                self.viewModel.linkDevice(with: "")
-                                return
-                            }
-                            if let textFields = alert.textFields {
-                                self.viewModel.linkDevice(with: textFields[0].text)
-                            }
+                guard let self = self else { return }
+                if !self.viewModel.hasPassord {
+                    self.viewModel.linkDevice(with: "")
+                    return
+                }
+                if let textFields = alert.textFields {
+                    self.viewModel.linkDevice(with: textFields[0].text)
+                }
             }
         alert.addAction(actionCancel)
         alert.addAction(actionLink)

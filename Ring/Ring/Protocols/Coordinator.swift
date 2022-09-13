@@ -122,12 +122,12 @@ extension Coordinator {
             viewController.rx.viewDidLoad
                 .subscribe(onNext: { [weak self] _ in
                     self?.presentingVC[viewControllerType] = false
-                    }, onError: { [weak self] _ in
-                        self?.presentingVC[viewControllerType] = false
-                    }, onCompleted: { [weak self] in
-                        self?.presentingVC[viewControllerType] = false
-                    }, onDisposed: {  [weak self] in
-                        self?.presentingVC[viewControllerType] = false
+                }, onError: { [weak self] _ in
+                    self?.presentingVC[viewControllerType] = false
+                }, onCompleted: { [weak self] in
+                    self?.presentingVC[viewControllerType] = false
+                }, onDisposed: {  [weak self] in
+                    self?.presentingVC[viewControllerType] = false
                 })
                 .disposed(by: disposeBag)
         }

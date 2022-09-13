@@ -87,7 +87,7 @@ class MessageViewModel {
         self.initialTransferStatus = message.transferStatus
         self.status.onNext(message.status)
         self.displayReadIndicator = BehaviorRelay<Bool>(value: isLastDisplayed)
-       // self.displayReadIndicator.accept(isLastDisplayed)
+        // self.displayReadIndicator.accept(isLastDisplayed)
         self.subscribeProfileServiceContactPhoto()
 
         if isTransfer {
@@ -100,7 +100,7 @@ class MessageViewModel {
                 })
                 .subscribe(onNext: { [weak self] transferEvent in
                     guard let transferId: String = transferEvent.getEventInput(ServiceEventInput.transferId),
-                        let transferStatus: DataTransferStatus = transferEvent.getEventInput(ServiceEventInput.state) else {
+                          let transferStatus: DataTransferStatus = transferEvent.getEventInput(ServiceEventInput.state) else {
                         return
                     }
                     self?.log.debug("MessageViewModel: dataTransferMessageUpdated - id:\(transferId) status:\(transferStatus)")
@@ -129,17 +129,17 @@ class MessageViewModel {
                     let event = messageUpdateEvent.eventType == ServiceEventType.lastDisplayedMessageUpdated
                     let message = messageUpdateEvent
                         .getEventInput(.oldDisplayedMessage) == self?.message.id ||
-                    messageUpdateEvent
+                        messageUpdateEvent
                         .getEventInput(.newDisplayedMessage) == self?.message.id
                     return event && message
                 })
                 .subscribe(onNext: { [weak self] messageUpdateEvent in
                     if let oldMessage: String = messageUpdateEvent.getEventInput(.oldDisplayedMessage),
-                        oldMessage == self?.message.id {
+                       oldMessage == self?.message.id {
                         print("@@@@@last displayed removed", message.id)
                         self?.displayReadIndicator.accept(false)
                     } else if let newMessage: String = messageUpdateEvent.getEventInput(.newDisplayedMessage),
-                        newMessage == self?.message.id {
+                              newMessage == self?.message.id {
                         print("@@@@@last displayed added", message.id)
                         self?.displayReadIndicator.accept(true)
                     }
@@ -158,7 +158,7 @@ class MessageViewModel {
                         accountId: "")
             .subscribe(onNext: { [weak self] profile in
                 if let photo = profile.photo,
-                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                   let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
                     self?.profileImageData.accept(data)
                 }
             })
@@ -191,7 +191,7 @@ class MessageViewModel {
         }
         if !self.message.incoming &&
             (   self.message.transferStatus != .error ||
-                self.message.transferStatus != .canceled) {
+                    self.message.transferStatus != .canceled) {
             return true
         }
 
@@ -344,7 +344,7 @@ class MessageViewModel {
                             accountId: String,
                             isSwarm: Bool) -> UIImage? {
         guard let account = self.accountService
-            .getAccount(fromAccountId: accountId) else { return nil }
+                .getAccount(fromAccountId: accountId) else { return nil }
         if self.message.incoming &&
             self.lastTransferStatus != .success &&
             self.message.transferStatus != .success {
@@ -361,27 +361,27 @@ class MessageViewModel {
     }
 
     private static func getTimeLabelString(forTime time: Date) -> String {
-         // get the current time
-         let currentDateTime = Date()
+        // get the current time
+        let currentDateTime = Date()
 
-         // prepare formatter
-         let dateFormatter = DateFormatter()
+        // prepare formatter
+        let dateFormatter = DateFormatter()
 
-         if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
-             // age: [0, received the previous day[
-             dateFormatter.dateFormat = "h:mma"
-         } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
-             // age: [received the previous day, received 7 days ago[
-             dateFormatter.dateFormat = "E h:mma"
-         } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
-             // age: [received 7 days ago, received the previous year[
-             dateFormatter.dateFormat = "MMM d, h:mma"
-         } else {
-             // age: [received the previous year, inf[
-             dateFormatter.dateFormat = "MMM d, yyyy h:mma"
-         }
+        if Calendar.current.compare(currentDateTime, to: time, toGranularity: .day) == .orderedSame {
+            // age: [0, received the previous day[
+            dateFormatter.dateFormat = "h:mma"
+        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .weekOfYear) == .orderedSame {
+            // age: [received the previous day, received 7 days ago[
+            dateFormatter.dateFormat = "E h:mma"
+        } else if Calendar.current.compare(currentDateTime, to: time, toGranularity: .year) == .orderedSame {
+            // age: [received 7 days ago, received the previous year[
+            dateFormatter.dateFormat = "MMM d, h:mma"
+        } else {
+            // age: [received the previous year, inf[
+            dateFormatter.dateFormat = "MMM d, yyyy h:mma"
+        }
 
-         // generate the string containing the message time
-         return dateFormatter.string(from: time).uppercased()
-     }
+        // generate the string containing the message time
+        return dateFormatter.string(from: time).uppercased()
+    }
 }

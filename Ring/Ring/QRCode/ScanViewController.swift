@@ -118,7 +118,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: {[weak self] (_) in
                 guard let self = self,
-                UIDevice.current.portraitOrLandscape else { return }
+                      UIDevice.current.portraitOrLandscape else { return }
                 self.videoPreviewLayer?.frame = self.view.bounds
                 self.updateOrientation()
                 self.view.layoutSubviews()

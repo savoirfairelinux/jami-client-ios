@@ -52,7 +52,7 @@ class DialpadViewController: UIViewController, StoryboardBased, ViewModelBased {
             .asObservable()
             .observe(on: MainScheduler.instance)
             .bind(to: numberLabel.rx.text)
-        .disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
         placeCallButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.dismiss(animated: false)
@@ -107,7 +107,7 @@ extension DialpadViewController: UICollectionViewDelegate, UICollectionViewDataS
         return 1
     }
 
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 12
     }
 
@@ -125,9 +125,9 @@ extension DialpadViewController: UICollectionViewDelegate, UICollectionViewDataS
         label.font = UIFont.systemFont(ofSize: 25, weight: .light)
         label.textColor = UIColor.jamiSecondary
         label.text = self.items[indexPath.item]
-               if label.text == String("﹡") {
-                   label.font = UIFont.systemFont(ofSize: 35, weight: .light)
-               }
+        if label.text == String("﹡") {
+            label.font = UIFont.systemFont(ofSize: 35, weight: .light)
+        }
         cell.contentView.addSubview(label)
         label.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true

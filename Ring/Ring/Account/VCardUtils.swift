@@ -82,7 +82,7 @@ class VCardUtils {
         do {
             let vCard = card
             guard let vCardData = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000, encoding: .utf8),
-                var vCardString = String(data: vCardData, encoding: String.Encoding.utf8) else {
+                  var vCardString = String(data: vCardData, encoding: String.Encoding.utf8) else {
                 return
             }
             var vcardLength = vCardString.count

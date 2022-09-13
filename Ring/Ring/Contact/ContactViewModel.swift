@@ -41,21 +41,21 @@ class ContactViewModel: ViewModel, Stateable {
     private let accountService: AccountsService
     private let conversationService: ConversationsService
     private let nameService: NameService
-    lazy var tableSection: Observable<[SectionModel<String, ContactActions>]>  = {
+    lazy var tableSection: Observable<[SectionModel<String, ContactActions>]> = {
         let jamiSettings =
             [SectionModel(model: "ProfileInfoCell",
                           items:
-                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
-                  ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
-                  ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon)])]
+                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton),
+                              ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
+                              ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon)])]
         let sipSettings =
             [SectionModel(model: "ProfileInfoCell",
                           items:
-                [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton)])]
+                            [ ContactActions(title: L10n.ContactPage.startAudioCall, image: Asset.callButton)])]
         guard let account = self.accountService.currentAccount,
-            account.type == AccountType.ring else {
-                return Observable<[SectionModel<String, ContactActions>]>
-                    .just(sipSettings)
+              account.type == AccountType.ring else {
+            return Observable<[SectionModel<String, ContactActions>]>
+                .just(sipSettings)
         }
         return Observable<[SectionModel<String, ContactActions>]>
             .just(jamiSettings)
@@ -134,10 +134,10 @@ class ContactViewModel: ViewModel, Stateable {
     lazy var titleName: Observable<String> = {
         return Observable.combineLatest(userName.asObservable(),
                                         displayName.asObservable()) {(userName, displayname) in
-                                            if displayname.isEmpty {
-                                                return userName
-                                            }
-                                            return displayname
+            if displayname.isEmpty {
+                return userName
+            }
+            return displayname
         }
     }()
     var profileImageData = BehaviorRelay<Data?>(value: nil)
@@ -152,14 +152,14 @@ class ContactViewModel: ViewModel, Stateable {
     func startCall() {
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
         self.stateSubject.onNext(ConversationState
-            .startCall(contactRingId: jamiId,
-                       userName: self.userName.value))
+                                    .startCall(contactRingId: jamiId,
+                                               userName: self.userName.value))
     }
     func startAudioCall() {
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
         self.stateSubject.onNext(ConversationState
-            .startAudioCall(contactRingId: jamiId,
-                            userName: self.userName.value))
+                                    .startAudioCall(contactRingId: jamiId,
+                                                    userName: self.userName.value))
     }
 
     func deleteConversation() {
@@ -179,13 +179,13 @@ class ContactViewModel: ViewModel, Stateable {
                         .removeConversationFromDB(conversation: conversation,
                                                   keepConversation: false)
                     self.stateSubject.onNext(ConversationState
-                        .returnToSmartList)
+                                                .returnToSmartList)
                 })
                 .disposed(by: self.disposeBag)
         } else {
             self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
             self.stateSubject.onNext(ConversationState
-                .returnToSmartList)
+                                        .returnToSmartList)
         }
     }
 
@@ -206,13 +206,13 @@ class ContactViewModel: ViewModel, Stateable {
                         .removeConversationFromDB(conversation: conversation,
                                                   keepConversation: false)
                     self.stateSubject.onNext(ConversationState
-                        .returnToSmartList)
+                                                .returnToSmartList)
                 })
                 .disposed(by: self.disposeBag)
         } else {
             self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
             self.stateSubject.onNext(ConversationState
-                .returnToSmartList)
+                                        .returnToSmartList)
         }
     }
 }

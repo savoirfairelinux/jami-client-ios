@@ -54,7 +54,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         guard let nibViews = Bundle.main.loadNibNamed("ProfileHeaderView",
                                                       owner: self,
                                                       options: nil) else {
-                                                        return
+            return
         }
         guard let headerView = nibViews.first as? ProfileHeaderView else {
             return
@@ -70,30 +70,30 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         // avatar
         Observable<(Data?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
                                                   self.viewModel.displayName.asObservable()) { profileImage, username in
-                                                    return (profileImage, username)
+            return (profileImage, username)
         }
-            .startWith((self.viewModel.profileImageData.value, self.viewModel.userName.value))
-            .observe(on: MainScheduler.instance)
-            .subscribe({ [weak self] profileData -> Void in
-                guard let data = profileData.element?.1 else { return }
-                self?.stretchyHeader
-                    .avatarView?.subviews
-                    .forEach({ $0.removeFromSuperview() })
-                self?.stretchyHeader
-                    .avatarView?.addSubview(
-                        AvatarView(profileImageData:
-                            profileData.element?.0,
-                                   username: data,
-                                   size: 100,
-                                   labelFontSize: 44))
-                self?.titleView.avatarImage =
-                    AvatarView(profileImageData: profileData.element?.0,
+        .startWith((self.viewModel.profileImageData.value, self.viewModel.userName.value))
+        .observe(on: MainScheduler.instance)
+        .subscribe({ [weak self] profileData -> Void in
+            guard let data = profileData.element?.1 else { return }
+            self?.stretchyHeader
+                .avatarView?.subviews
+                .forEach({ $0.removeFromSuperview() })
+            self?.stretchyHeader
+                .avatarView?.addSubview(
+                    AvatarView(profileImageData:
+                                profileData.element?.0,
                                username: data,
-                               size: 36)
+                               size: 100,
+                               labelFontSize: 44))
+            self?.titleView.avatarImage =
+                AvatarView(profileImageData: profileData.element?.0,
+                           username: data,
+                           size: 36)
 
-                return
-            })
-            .disposed(by: self.disposeBag)
+            return
+        })
+        .disposed(by: self.disposeBag)
 
         let maxLabelWidth = UIScreen.main.bounds.size.width * 0.90
         self.stretchyHeader.jamiID.preferredMaxLayoutWidth = maxLabelWidth
@@ -129,9 +129,9 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, SectionModel<String, ContactActions>.Item)
             -> UITableViewCell = {
                 (dataSource: TableViewSectionedDataSource<SectionModel<String, ContactActions>>,
-                tableView: UITableView,
-                indexPath: IndexPath,
-                conversationItem: SectionModel<String, ContactActions>.Item) in
+                 tableView: UITableView,
+                 indexPath: IndexPath,
+                 conversationItem: SectionModel<String, ContactActions>.Item) in
 
                 let model = dataSource.sectionModels
                 if model[indexPath.section].model == self.cellIdentifier {
@@ -144,7 +144,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
                     return cell!
                 }
                 return UITableViewCell()
-        }
+            }
 
         let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, ContactActions>>(configureCell: configureCell)
 
@@ -210,7 +210,7 @@ extension ContactViewController: UITableViewDelegate {
         if let height = navigationHeight {
             // height for iphoneX
             if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone,
-                screenSize.height == 812.0 {
+               screenSize.height == 812.0 {
                 size.height -= (height - 10)
             }
             titlViewThreshold = height

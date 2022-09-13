@@ -94,12 +94,12 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
                 default:
                     self?.hideHud()
                 }
-                }, onError: { [weak self] (error) in
-                    self?.hideHud()
+            }, onError: { [weak self] (error) in
+                self?.hideHud()
 
-                    if let error = error as? AccountCreationError {
-                        self?.showAccountCreationError(error: error)
-                    }
+                if let error = error as? AccountCreationError {
+                    self?.showAccountCreationError(error: error)
+                }
             })
             .disposed(by: self.disposeBag)
 
@@ -114,14 +114,14 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         // handle keyboard
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
-        .observe(on: MainScheduler.instance)
-        .subscribe(onNext: { [weak self] (_) in
-            guard UIDevice.current.portraitOrLandscape else { return }
-            self?.linkButton.updateGradientFrame()
-            self?.configureWalkrhroughNavigationBar()
-        })
-        .disposed(by: self.disposeBag)
+        NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (_) in
+                guard UIDevice.current.portraitOrLandscape else { return }
+                self?.linkButton.updateGradientFrame()
+                self?.configureWalkrhroughNavigationBar()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func adaptToSystemColor() {
@@ -145,9 +145,9 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         }
         let device = UIDevice.modelName
         switch device {
-        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR":
             self.containerViewBottomConstraint.constant = -40
-        default :
+        default:
             self.containerViewBottomConstraint.constant = -65
         }
     }

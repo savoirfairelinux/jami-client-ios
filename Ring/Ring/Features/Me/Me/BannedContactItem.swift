@@ -25,6 +25,6 @@ class BannedContactItem {
     var displayName: String?
 
     init(withContact contact: ContactModel) {
-       self.contact = contact
+        self.contact = contact
     }
 }

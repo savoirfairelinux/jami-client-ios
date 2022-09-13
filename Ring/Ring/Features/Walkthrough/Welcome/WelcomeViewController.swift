@@ -47,7 +47,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.view.layoutIfNeeded()
         self.applyL10n()
         if self.viewModel.isAnimatable {
-           self.initialAnimation()
+            self.initialAnimation()
         } else {
             self.ringLogoBottomConstraint.constant = -220
             self.welcomeTextLabel.alpha = 1
@@ -153,7 +153,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         self.linkDeviceButton.updateGradientFrame()
         self.connectToAccountManagerButton.updateGradientFrame()
         self.view.layoutIfNeeded()
-   }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.tintColor = UIColor.jamiSecondary

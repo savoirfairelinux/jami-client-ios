@@ -1,21 +1,21 @@
 /*
-*  Copyright (C) 2019 Savoir-faire Linux Inc.
-*
-*  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
-*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*  This program is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program; if not, write to the Free Software
-*  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ *  Copyright (C) 2019 Savoir-faire Linux Inc.
+ *
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
 import RxSwift
@@ -33,18 +33,18 @@ class ContactPickerViewModel: ViewModel {
             return self.contactsService.contacts.asObservable().map { [weak self] contacts in
                 var sections = [ContactPickerSection]()
                 self?.addContactsToContactPickerSections(contacts: contacts, sections: &sections)
-                    return sections
+                return sections
             }
         }
         return Observable
             .combineLatest(self.contactsService.contacts.asObservable(),
                            self.callService.calls.asObservable()) {[weak self] (contacts, calls) -> [ContactPickerSection] in
-                            var sections = [ContactPickerSection]()
-                            guard let self = self else { return sections }
-                            guard let currentCall = self.callService.call(callID: self.currentCallId) else { return sections }
-                            let callURIs = self.addCallsToContactPickerSections(calls: calls, sections: &sections)
-                            self.addContactsToContactPickerSections(contacts: contacts, sections: &sections, urlToExclude: callURIs)
-                                return sections
+                var sections = [ContactPickerSection]()
+                guard let self = self else { return sections }
+                guard let currentCall = self.callService.call(callID: self.currentCallId) else { return sections }
+                let callURIs = self.addCallsToContactPickerSections(calls: calls, sections: &sections)
+                self.addContactsToContactPickerSections(contacts: contacts, sections: &sections, urlToExclude: callURIs)
+                return sections
             }
     }()
 
@@ -67,9 +67,9 @@ class ContactPickerViewModel: ViewModel {
                             let searchLowercased = search.lowercased()
                             return mutableContact.firstLine.lowercased().contains(searchLowercased) ||
                                 mutableContact.secondLine.lowercased()
-                                    .contains(searchLowercased) ||
+                                .contains(searchLowercased) ||
                                 mutableContact.hash.lowercased()
-                                    .contains(searchLowercased)
+                                .contains(searchLowercased)
                         }
                         mutabeItem.contacts = newContacts
                         return mutabeItem
@@ -81,7 +81,7 @@ class ContactPickerViewModel: ViewModel {
                     return sectionVariable
                 }
                 .filter { (section: ContactPickerSection) -> Bool in
-                        return !section.items.isEmpty
+                    return !section.items.isEmpty
                 }
                 return result
             })

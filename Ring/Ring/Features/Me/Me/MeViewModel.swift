@@ -112,7 +112,7 @@ class MeViewModel: ViewModel, Stateable {
     let contactService: ContactsService
     let presenceService: PresenceService
 
-     // MARK: - configure table sections
+    // MARK: - configure table sections
 
     var showActionState = BehaviorRelay<ActionsState>(value: .noAction)
 
@@ -131,8 +131,8 @@ class MeViewModel: ViewModel, Stateable {
                                                            .jamiID(label: ringID)]
                 items.append(.jamiUserName(label: name))
                 items.append(.shareAccountDetails)
-            return SettingsSection
-                .credentials(items: items)
+                return SettingsSection
+                    .credentials(items: items)
             }
     }()
 
@@ -142,7 +142,7 @@ class MeViewModel: ViewModel, Stateable {
         var nameToContact = ""
         if self.isAccountSip.value {
             guard let accountDetails = account.details,
-                let credentials = account.credentialDetails.first else { return nil }
+                  let credentials = account.credentialDetails.first else { return nil }
             if AccountModelHelper.init(withAccount: account).isAccountRing() {
                 return nil
             }
@@ -156,8 +156,8 @@ class MeViewModel: ViewModel, Stateable {
         if !account.registeredName.isEmpty {
             nameToContact = account.registeredName
         } else if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-            let accountName = userNameData[account.id] as? String,
-            !accountName.isEmpty {
+                  let accountName = userNameData[account.id] as? String,
+                  !accountName.isEmpty {
             nameToContact = accountName
         }
         if nameToContact.isEmpty {
@@ -183,22 +183,22 @@ class MeViewModel: ViewModel, Stateable {
         Observable
             .combineLatest(accountState,
                            accountEnabled.asObservable()) { (state, enabled) -> String in
-                            if !enabled {
-                                return L10n.Account.statusOffline
-                            }
-                            switch state {
-                            case .registered:
-                                return L10n.Account.statusOnline
-                            case .trying:
-                                return L10n.Account.statusConnecting
-                            case .errorRequestTimeout, .errorNotAcceptable,
-                                 .errorServiceUnavailable, .errorExistStun,
-                                 .errorConfStun, .errorHost,
-                                 .errorNetwork, .errorAuth, .error:
-                                return L10n.Account.statusConnectionerror
-                            default:
-                                return L10n.Account.statusUnknown
-                            }
+                if !enabled {
+                    return L10n.Account.statusOffline
+                }
+                switch state {
+                case .registered:
+                    return L10n.Account.statusOnline
+                case .trying:
+                    return L10n.Account.statusConnecting
+                case .errorRequestTimeout, .errorNotAcceptable,
+                     .errorServiceUnavailable, .errorExistStun,
+                     .errorConfStun, .errorHost,
+                     .errorNetwork, .errorAuth, .error:
+                    return L10n.Account.statusConnectionerror
+                default:
+                    return L10n.Account.statusUnknown
+                }
             }
             .subscribe(onNext: { status in
                 accStatus.accept(status)
@@ -226,14 +226,14 @@ class MeViewModel: ViewModel, Stateable {
         return Observable.combineLatest(Observable.just(items),
                                         self.accountService.currentAccountChanged.asObservable().startWith(nil),
                                         resultSelector: { (items, _) in
-                var items = items
-                if let currentAccount = self.accountService.currentAccount,
-                    self.accountService.isJams(for: currentAccount.id) {
-                    items.remove(at: items.count - 2) // remove .boothMode
-                    items.remove(at: items.count - 2) // remove .changePassword
-                }
-                return SettingsSection.accountSettings(items: items)
-            })
+                                            var items = items
+                                            if let currentAccount = self.accountService.currentAccount,
+                                               self.accountService.isJams(for: currentAccount.id) {
+                                                items.remove(at: items.count - 2) // remove .boothMode
+                                                items.remove(at: items.count - 2) // remove .changePassword
+                                            }
+                                            return SettingsSection.accountSettings(items: items)
+                                        })
     }()
 
     func hasPassword() -> Bool {
@@ -271,8 +271,8 @@ class MeViewModel: ViewModel, Stateable {
             var port = ""
             var proxyServer = ""
             if let account = self.accountService.currentAccount,
-                let details = account.details,
-                let credentials = account.credentialDetails.first {
+               let details = account.details,
+               let credentials = account.credentialDetails.first {
                 username = credentials.username
                 password = credentials.password
                 server = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
@@ -305,7 +305,7 @@ class MeViewModel: ViewModel, Stateable {
     lazy var sipSettings: Observable<[SettingsSection]> = {
         Observable.combineLatest(sipCredentials,
                                  otherSipSettings) { (credentials, other) in
-                                    return [credentials, other]
+            return [credentials, other]
         }
     }()
 
@@ -322,10 +322,10 @@ class MeViewModel: ViewModel, Stateable {
         }
         return Observable.combineLatest(jamiSettings, sipSettings,
                                         isAccountSip.asObservable()) {(jami, sip, isSip) in
-                                            if isSip == true {
-                                                return sip
-                                            }
-                                            return jami
+            if isSip == true {
+                return sip
+            }
+            return jami
         }
     }()
 
@@ -346,16 +346,16 @@ class MeViewModel: ViewModel, Stateable {
         self.accountService.sharedResponseStream
             .filter({ serviceEvent in
                 guard let _: String = serviceEvent
-                    .getEventInput(ServiceEventInput.registrationState) else { return false }
+                        .getEventInput(ServiceEventInput.registrationState) else { return false }
                 guard let accountId: String = serviceEvent
-                    .getEventInput(ServiceEventInput.accountId),
-                    accountId == account.id else { return false }
+                        .getEventInput(ServiceEventInput.accountId),
+                      accountId == account.id else { return false }
                 return true
             })
             .subscribe(onNext: { serviceEvent in
                 guard let state: String = serviceEvent
-                    .getEventInput(ServiceEventInput.registrationState),
-                    let accountState = AccountState(rawValue: state) else { return }
+                        .getEventInput(ServiceEventInput.registrationState),
+                      let accountState = AccountState(rawValue: state) else { return }
                 self.currentAccountState.onNext(accountState)
             })
             .disposed(by: self.tempBag)
@@ -377,7 +377,7 @@ class MeViewModel: ViewModel, Stateable {
                     self.currentAccountUserName
                         .onNext(self.userNameForAccount(account: account))
                 }
-                }, onError: { _ in
+            }, onError: { _ in
             })
             .disposed(by: self.tempBag)
         self.currentAccountUserName
@@ -403,11 +403,11 @@ class MeViewModel: ViewModel, Stateable {
 
     func userNameForAccount(account: AccountModel) -> String {
         if let accountName = account.volatileDetails?.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountRegisteredName)),
-            !accountName.isEmpty {
+           !accountName.isEmpty {
             return accountName
         } else if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-            let accountName = userNameData[account.id] as? String,
-            !accountName.isEmpty {
+                  let accountName = userNameData[account.id] as? String,
+                  !accountName.isEmpty {
             return accountName
         }
         return ""
@@ -511,7 +511,7 @@ class MeViewModel: ViewModel, Stateable {
             })
             .subscribe(onNext: { [weak self] deviceEvent in
                 if let self = self, let state: Int = deviceEvent.getEventInput(.state),
-                    let deviceID: String = deviceEvent.getEventInput(.deviceId) {
+                   let deviceID: String = deviceEvent.getEventInput(.deviceId) {
                     switch state {
                     case DeviceRevocationState.success.rawValue:
                         self.showActionState.accept(.deviceRevokedWithSuccess(deviceId: deviceID))
@@ -542,16 +542,16 @@ class MeViewModel: ViewModel, Stateable {
             self.accountService.sharedResponseStream
                 .filter({ serviceEvent in
                     guard let _: String = serviceEvent
-                        .getEventInput(ServiceEventInput.registrationState) else { return false }
+                            .getEventInput(ServiceEventInput.registrationState) else { return false }
                     guard let accountId: String = serviceEvent
-                        .getEventInput(ServiceEventInput.accountId),
-                        accountId == account.id else { return false }
+                            .getEventInput(ServiceEventInput.accountId),
+                          accountId == account.id else { return false }
                     return true
                 })
                 .subscribe(onNext: { serviceEvent in
                     guard let state: String = serviceEvent
-                        .getEventInput(ServiceEventInput.registrationState),
-                        let accountState = AccountState(rawValue: state) else { return }
+                            .getEventInput(ServiceEventInput.registrationState),
+                          let accountState = AccountState(rawValue: state) else { return }
                     self.currentAccountState.onNext(accountState)
                 })
                 .disposed(by: self.tempBag)
@@ -565,8 +565,8 @@ class MeViewModel: ViewModel, Stateable {
             if !account.registeredName.isEmpty {
                 initialValue = account.registeredName
             } else if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-                let accountName = userNameData[account.id] as? String,
-                !accountName.isEmpty {
+                      let accountName = userNameData[account.id] as? String,
+                      !accountName.isEmpty {
                 initialValue = accountName
             }
         }
@@ -605,17 +605,17 @@ class MeViewModel: ViewModel, Stateable {
                         rows!.append(.device(device: device))
                     }
                 } else if let account = self.accountService.currentAccount,
-                    let details = account.details {
+                          let details = account.details {
                     let deviceId = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountDeviceId))
                     let deviceName = details.get(withConfigKeyModel:
-                        ConfigKeyModel.init(withKey: .accountDeviceName))
+                                                    ConfigKeyModel.init(withKey: .accountDeviceName))
                     if deviceId.isEmpty {
                         return empptySection
                     }
                     rows = [.device(device:
-                        DeviceModel(withDeviceId: deviceId,
-                                    deviceName: deviceName,
-                                    isCurrent: true))]
+                                        DeviceModel(withDeviceId: deviceId,
+                                                    deviceName: deviceName,
+                                                    isCurrent: true))]
                 }
                 if rows != nil {
                     rows?.insert(.sectionHeader(title: L10n.AccountPage.devicesListHeader), at: 0)
@@ -624,7 +624,7 @@ class MeViewModel: ViewModel, Stateable {
                 }
                 return empptySection
             }
-        }()
+    }()
 
     lazy var proxyEnabled: Observable<Bool> = { [weak self] in
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
@@ -647,7 +647,7 @@ class MeViewModel: ViewModel, Stateable {
     lazy var notificationsEnabledObservable: Observable<Bool> = {
         return Observable.combineLatest(self.notificationsPermitted.asObservable(),
                                         self.proxyEnabled.asObservable()) { (notifications, proxy) in
-                                            return  proxy && notifications
+            return  proxy && notifications
         }
     }()
 
@@ -711,11 +711,11 @@ class MeViewModel: ViewModel, Stateable {
 
         for nextAccount in allAccounts where
             (nextAccount != account && !accountService.needAccountMigration(accountId: nextAccount.id)) {
-                UserDefaults.standard.set(nextAccount.id, forKey: self.accountService.selectedAccountID)
-                self.accountService.currentAccount = nextAccount
-                self.accountService.removeAccount(id: account.id)
-                self.stateSubject.onNext(MeState.accountRemoved)
-                return
+            UserDefaults.standard.set(nextAccount.id, forKey: self.accountService.selectedAccountID)
+            self.accountService.currentAccount = nextAccount
+            self.accountService.removeAccount(id: account.id)
+            self.stateSubject.onNext(MeState.accountRemoved)
+            return
         }
         self.accountService.removeAccount(id: account.id)
         self.stateSubject.onNext(MeState.needAccountMigration(accountId: allAccounts[1].id))
@@ -723,9 +723,9 @@ class MeViewModel: ViewModel, Stateable {
 
     lazy var accountEnabled: BehaviorRelay<Bool> = {
         if let account = self.accountService.currentAccount,
-            let details = account.details {
+           let details = account.details {
             let enable = details.get(withConfigKeyModel:
-                ConfigKeyModel.init(withKey: .accountEnable)).boolValue
+                                        ConfigKeyModel.init(withKey: .accountEnable)).boolValue
             return BehaviorRelay<Bool>(value: enable)
         }
         return BehaviorRelay<Bool>(value: true)
@@ -733,9 +733,9 @@ class MeViewModel: ViewModel, Stateable {
 
     lazy var peerDiscoveryEnabled: BehaviorRelay<Bool> = {
         if let account = self.accountService.currentAccount,
-            let details = account.details {
+           let details = account.details {
             let enable = details.get(withConfigKeyModel:
-                ConfigKeyModel.init(withKey: .dhtPeerDiscovery)).boolValue
+                                        ConfigKeyModel.init(withKey: .dhtPeerDiscovery)).boolValue
             return BehaviorRelay<Bool>(value: enable)
         }
         return BehaviorRelay<Bool>(value: true)
@@ -743,9 +743,9 @@ class MeViewModel: ViewModel, Stateable {
 
     lazy var keepAliveEnabled: BehaviorRelay<Bool> = {
         if let account = self.accountService.currentAccount,
-            let details = account.details {
+           let details = account.details {
             let enable = details.get(withConfigKeyModel:
-                ConfigKeyModel.init(withKey: .keepAliveEnabled)).boolValue
+                                        ConfigKeyModel.init(withKey: .keepAliveEnabled)).boolValue
             return BehaviorRelay<Bool>(value: enable)
         }
         return BehaviorRelay<Bool>(value: true)
@@ -760,14 +760,14 @@ class MeViewModel: ViewModel, Stateable {
 
     func enablePeerDiscovery(enable: Bool) {
         guard self.peerDiscoveryEnabled.value != enable,
-            let account = self.accountService.currentAccount else { return }
+              let account = self.accountService.currentAccount else { return }
         self.accountService.enablePeerDiscovery(enable: enable, accountId: account.id)
         peerDiscoveryEnabled.accept(enable)
     }
 
     func enableKeepAlive(enable: Bool) {
         guard self.keepAliveEnabled.value != enable,
-            let account = self.accountService.currentAccount else { return }
+              let account = self.accountService.currentAccount else { return }
         self.accountService.enableKeepAlive(enable: enable, accountId: account.id)
         keepAliveEnabled.accept(enable)
     }
@@ -788,7 +788,7 @@ class MeViewModel: ViewModel, Stateable {
         let password = credentials.password
         let server = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
         let port = details.get(withConfigKeyModel:
-            ConfigKeyModel.init(withKey: .localPort))
+                                ConfigKeyModel.init(withKey: .localPort))
         let proxy = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountRouteSet))
         if username == sipUsername.value
             && password == sipPassword.value
