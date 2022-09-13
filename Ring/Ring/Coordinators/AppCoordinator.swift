@@ -114,7 +114,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         if self.injectionBag.accountService.accounts.isEmpty {
             self.stateSubject.onNext(AppState.needToOnboard(animated: true, isFirstAccount: true))
         } else {
-             self.stateSubject.onNext(AppState.allSet)
+            self.stateSubject.onNext(AppState.allSet)
         }
     }
 
@@ -161,7 +161,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
         if !self.childCoordinators.isEmpty,
            self.childCoordinators[0] as? ConversationsCoordinator != nil {
-           return
+            return
         }
         let conversationsCoordinator = ConversationsCoordinator(with: self.injectionBag)
         conversationsCoordinator.parentCoordinator = self
@@ -183,12 +183,12 @@ final class AppCoordinator: Coordinator, StateableResponsive {
                     if isVideo {
                         childCoordinattor.stateSubject
                             .onNext(ConversationState
-                                .startCall(contactRingId: participant, userName: name))
+                                        .startCall(contactRingId: participant, userName: name))
                         return
                     }
                     childCoordinattor.stateSubject
                         .onNext(ConversationState
-                            .startAudioCall(contactRingId: participant, userName: name))
+                                    .startAudioCall(contactRingId: participant, userName: name))
                     return
                 }
             }

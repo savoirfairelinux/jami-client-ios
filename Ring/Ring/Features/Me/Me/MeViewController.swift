@@ -87,9 +87,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     private func addHeaderView() {
         guard let nibViews = Bundle.main
-            .loadNibNamed("AccountHeader", owner: self, options: nil) else {
-                supportEditProfile()
-                return
+                .loadNibNamed("AccountHeader", owner: self, options: nil) else {
+            supportEditProfile()
+            return
         }
         guard let headerView = nibViews.first as? AccountHeader else {
             supportEditProfile()
@@ -187,7 +187,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                              style: .cancel)
             let actionAgain = UIAlertAction(title: L10n.AccountPage.deviceRevocationTryAgain,
                                             style: .default) { [weak self] _ in
-                                                self?.confirmRevokeDeviceAlert(deviceID: deviceId)
+                self?.confirmRevokeDeviceAlert(deviceID: deviceId)
             }
             alert.addAction(actionCancel)
             alert.addAction(actionAgain)
@@ -262,9 +262,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, SettingsSection.Item)
             -> UITableViewCell = {
                 ( dataSource: TableViewSectionedDataSource<SettingsSection>,
-                tableView: UITableView,
-                indexPath: IndexPath,
-                _: SettingsSection.Item) in
+                  tableView: UITableView,
+                  indexPath: IndexPath,
+                  _: SettingsSection.Item) in
                 switch dataSource[indexPath] {
 
                 case .autoRegistration:
@@ -500,8 +500,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .sipPassword(let value):
                     let cell = self
-                    .configureSipCredentialsCell(cellType: .sipPassword(value: value),
-                                                 value: value)
+                        .configureSipCredentialsCell(cellType: .sipPassword(value: value),
+                                                     value: value)
                     return cell
                 case .sipServer(let value):
                     let cell = self
@@ -509,10 +509,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                                      value: value)
                     return cell
                 case .proxyServer(let value):
-                let cell = self
-                    .configureSipCredentialsCell(cellType: .proxyServer(value: value),
-                                                 value: value)
-                return cell
+                    let cell = self
+                        .configureSipCredentialsCell(cellType: .proxyServer(value: value),
+                                                     value: value)
+                    return cell
                 case .port(let value):
                     let cell = self
                         .configureSipCredentialsCell(cellType: .port(value: value),
@@ -595,7 +595,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .disposed(by: cell.disposeBag)
                     return cell
                 }
-        }
+            }
 
         let settingsItemDataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: configureCell)
         self.viewModel.settings
@@ -749,7 +749,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     func calculateSipCredentialsMargin() {
         let margin: CGFloat = 30
         var usernameLength, passwordLength,
-        sipServerLength, portLength, proxyLength: CGFloat
+            sipServerLength, portLength, proxyLength: CGFloat
         let username = L10n.Account.sipUsername
         let password = L10n.Account.sipPassword
         let sipServer = L10n.Account.port
@@ -783,7 +783,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             return
         }
         guard let activeField = self
-            .findActiveTextField(in: settingsTable) else { return }
+                .findActiveTextField(in: settingsTable) else { return }
         activeField.resignFirstResponder()
         if activeField.tag != sipCredentialsTAG { return }
         self.viewModel.updateSipSettings()
@@ -806,29 +806,29 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                          style: .cancel)
         let actionChange = UIAlertAction(title: L10n.Actions.doneAction,
                                          style: .default) { [weak self] _ in
-                                            guard let textFields = controller.textFields else {
-                                                return
-                                            }
-                                            self?.showLoadingViewWithoutText()
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                                if textFields.count == 2, let password = textFields[1].text {
-                                                    _ = self?.viewModel
-                                                        .changePassword(oldPassword: "",
-                                                                        newPassword: password)
-                                                    self?.stopLoadingView()
-                                                } else if textFields.count == 4,
-                                                    let oldPassword = textFields[0].text, !oldPassword.isEmpty,
-                                                    let password = textFields[2].text {
-                                                    let result = self?.viewModel.changePassword(oldPassword: oldPassword, newPassword: password)
-                                                    if result ?? true {
-                                                        self?.stopLoadingView()
-                                                        return
-                                                    }
-                                                    self?.present(controller, animated: true, completion: nil)
-                                                    textFields[1].text = L10n.AccountPage.changePasswordError
-                                                    self?.stopLoadingView()
-                                                }
-                                            }
+            guard let textFields = controller.textFields else {
+                return
+            }
+            self?.showLoadingViewWithoutText()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if textFields.count == 2, let password = textFields[1].text {
+                    _ = self?.viewModel
+                        .changePassword(oldPassword: "",
+                                        newPassword: password)
+                    self?.stopLoadingView()
+                } else if textFields.count == 4,
+                          let oldPassword = textFields[0].text, !oldPassword.isEmpty,
+                          let password = textFields[2].text {
+                    let result = self?.viewModel.changePassword(oldPassword: oldPassword, newPassword: password)
+                    if result ?? true {
+                        self?.stopLoadingView()
+                        return
+                    }
+                    self?.present(controller, animated: true, completion: nil)
+                    textFields[1].text = L10n.AccountPage.changePasswordError
+                    self?.stopLoadingView()
+                }
+            }
         }
         controller.addAction(actionCancel)
         controller.addAction(actionChange)
@@ -863,7 +863,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 Observable
                     .combineLatest(textFields[3].rx.text,
                                    textFields[2].rx.text) {(text1, text2) -> Bool in
-                                    return text1 == text2
+                        return text1 == text2
                     }
                     .bind(to: actionChange.rx.isEnabled)
                     .disposed(by: self.disposeBag)
@@ -871,7 +871,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 Observable
                     .combineLatest(textFields[0].rx.text,
                                    textFields[1].rx.text) {(text1, text2) -> Bool in
-                                    return text1 == text2
+                        return text1 == text2
                     }
                     .bind(to: actionChange.rx.isEnabled)
                     .disposed(by: self.disposeBag)
@@ -894,24 +894,24 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                            preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
                                          style: .cancel) { [weak self] _ in
-                                            self?.nameRegistrationBag = DisposeBag()
+            self?.nameRegistrationBag = DisposeBag()
         }
         let actionRegister = UIAlertAction(title: L10n.AccountPage.usernameRegisterAction,
                                            style: .default) { [weak self, weak controller] _ in
-                                            self?.nameRegistrationBag = DisposeBag()
-                                            self?.showNameRegistration()
-                                            guard let textFields = controller?.textFields else {
-                                                self?.stopLoadingView()
-                                                return
-                                            }
-                                            if textFields.count == 2, let name = textFields[0].text,
-                                                !name.isEmpty {
-                                                self?.viewModel.registerUsername(username: name, password: "")
-                                            } else if textFields.count == 3, let name = textFields[0].text,
-                                                !name.isEmpty, let password = textFields[2].text,
-                                                !password.isEmpty {
-                                                self?.viewModel.registerUsername(username: name, password: password)
-                                            }
+            self?.nameRegistrationBag = DisposeBag()
+            self?.showNameRegistration()
+            guard let textFields = controller?.textFields else {
+                self?.stopLoadingView()
+                return
+            }
+            if textFields.count == 2, let name = textFields[0].text,
+               !name.isEmpty {
+                self?.viewModel.registerUsername(username: name, password: "")
+            } else if textFields.count == 3, let name = textFields[0].text,
+                      !name.isEmpty, let password = textFields[2].text,
+                      !password.isEmpty {
+                self?.viewModel.registerUsername(username: name, password: password)
+            }
         }
         controller.addAction(actionCancel)
         controller.addAction(actionRegister)
@@ -967,12 +967,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         if textFields.count == 2 {
             Observable
                 .combineLatest(self.viewModel
-                    .usernameValidationState.asObservable(),
+                                .usernameValidationState.asObservable(),
                                userNameEmptyObservable) {(state, usernameEmpty) -> Bool in
-                                if state.isAvailable && !usernameEmpty {
-                                    return true
-                                }
-                                return false
+                    if state.isAvailable && !usernameEmpty {
+                        return true
+                    }
+                    return false
                 }
                 .bind(to: actionRegister.rx.isEnabled)
                 .disposed(by: nameRegistrationBag)
@@ -987,13 +987,13 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 })
             Observable
                 .combineLatest(self.viewModel
-                    .usernameValidationState.asObservable(),
+                                .usernameValidationState.asObservable(),
                                userNameEmptyObservable,
                                passwordEmptyObservable) {(state, nameEmpty, passwordEmpty) -> Bool in
-                                if state.isAvailable && !nameEmpty && !passwordEmpty {
-                                    return true
-                                }
-                                return false
+                    if state.isAvailable && !nameEmpty && !passwordEmpty {
+                        return true
+                    }
+                    return false
                 }
                 .bind(to: actionRegister.rx.isEnabled)
                 .disposed(by: nameRegistrationBag)
@@ -1011,18 +1011,18 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                          style: .cancel)
         let actionConfirm = UIAlertAction(title: L10n.AccountPage.revokeDeviceButton,
                                           style: .default) { [weak self] _ in
-                                            self?.showLoadingView()
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                                if let textFields = alert.textFields,
-                                                    !textFields.isEmpty,
-                                                    let text = textFields[0].text,
-                                                    !text.isEmpty {
-                                                    self?.viewModel.revokeDevice(deviceId: deviceID, accountPassword: text)
-                                                } else {
-                                                    self?.viewModel.revokeDevice(deviceId: deviceID, accountPassword: "")
-                                                    self?.stopLoadingView()
-                                                }
-                                            }
+            self?.showLoadingView()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if let textFields = alert.textFields,
+                   !textFields.isEmpty,
+                   let text = textFields[0].text,
+                   !text.isEmpty {
+                    self?.viewModel.revokeDevice(deviceId: deviceID, accountPassword: text)
+                } else {
+                    self?.viewModel.revokeDevice(deviceId: deviceID, accountPassword: "")
+                    self?.stopLoadingView()
+                }
+            }
         }
         alert.addAction(actionCancel)
         alert.addAction(actionConfirm)
@@ -1071,7 +1071,7 @@ extension MeViewController: UITableViewDelegate {
         if let height = navigationHeight {
             // height for ihoneX
             if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone,
-                screenSize.height == 812.0 {
+               screenSize.height == 812.0 {
                 size.height -= (height - 10)
             }
         }
@@ -1127,18 +1127,18 @@ extension MeViewController: UITableViewDelegate {
 
 extension MeViewController: BoothModeConfirmationPresenter {
     func enableBoothMode(enable: Bool, password: String) -> Bool {
-          return self.viewModel.enableBoothMode(enable: enable, password: password)
-      }
+        return self.viewModel.enableBoothMode(enable: enable, password: password)
+    }
 
-      func switchBoothModeState(state: Bool) {
-          self.viewModel.switchBoothModeState.onNext(state)
-      }
+    func switchBoothModeState(state: Bool) {
+        self.viewModel.switchBoothModeState.onNext(state)
+    }
 
-      internal func stopLoadingView() {
-          HUD.hide(animated: false)
-      }
+    internal func stopLoadingView() {
+        HUD.hide(animated: false)
+    }
 
-      internal func showLoadingViewWithoutText() {
-          HUD.show(.labeledProgress(title: "", subtitle: nil))
-      }
+    internal func showLoadingViewWithoutText() {
+        HUD.show(.labeledProgress(title: "", subtitle: nil))
+    }
 }

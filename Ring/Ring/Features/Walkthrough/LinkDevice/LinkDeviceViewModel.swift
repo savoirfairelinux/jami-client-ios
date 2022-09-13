@@ -37,7 +37,7 @@ class LinkDeviceViewModel: Stateable, ViewModel {
         return self.accountCreationState.asObservable()
     }()
 
-    lazy var linkButtonEnabledState: Observable<Bool>  = {
+    lazy var linkButtonEnabledState: Observable<Bool> = {
         return self.pin.asObservable().map({ pin in
             return !pin.isEmpty
         })
@@ -75,12 +75,12 @@ class LinkDeviceViewModel: Stateable, ViewModel {
                         self.stateSubject.onNext(WalkthroughState.deviceLinked)
                     })
                     .disposed(by: self.disposeBag)
-                }, onError: { [weak self] (error) in
-                    if let error = error as? AccountCreationError {
-                        self?.accountCreationState.accept(.error(error: error))
-                    } else {
-                        self?.accountCreationState.accept(.error(error: AccountCreationError.unknown))
-                    }
+            }, onError: { [weak self] (error) in
+                if let error = error as? AccountCreationError {
+                    self?.accountCreationState.accept(.error(error: error))
+                } else {
+                    self?.accountCreationState.accept(.error(error: AccountCreationError.unknown))
+                }
             })
             .disposed(by: self.disposeBag)
     }

@@ -78,7 +78,7 @@ extension CallsProviderDelegate {
     func stopCall(callUUID: UUID, participant: String) {
         var uuid = callUUID
         if let call = getUnhandeledCall(for: callUUID) {
-             unhandeledCalls.remove(call)
+            unhandeledCalls.remove(call)
         } else if let call = getUnhandeledCall(for: participant) {
             uuid = call.uuid
             unhandeledCalls.remove(call)
@@ -128,7 +128,7 @@ extension CallsProviderDelegate {
         let isJamiAccount = account.type == AccountType.ring
         guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
         let handleType = (isJamiAccount
-            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
+                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
         update.localizedCallerName = handleInfo.displayName
         update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
         update.hasVideo = !call.isAudioOnly
@@ -137,15 +137,15 @@ extension CallsProviderDelegate {
         update.supportsHolding = false
         self.provider?.reportNewIncomingCall(with: call.callUUID,
                                              update: update) { error in
-                                                if error == nil {
-                                                    return
-                                                }
-                                                completion?(error)
+            if error == nil {
+                return
+            }
+            completion?(error)
         }
     }
 
     func previewPendingCall(peerId: String, withVideo: Bool, displayName: String,
-                     completion: ((Error?) -> Void)?) {
+                            completion: ((Error?) -> Void)?) {
         let update = CXCallUpdate()
         let handleType = CXHandle.HandleType.phoneNumber
         update.localizedCallerName = displayName
@@ -158,10 +158,10 @@ extension CallsProviderDelegate {
         unhandeledCalls.insert(unhandeledCall)
         self.provider?.reportNewIncomingCall(with: unhandeledCall.uuid,
                                              update: update) { error in
-                                                if error == nil {
-                                                    return
-                                                }
-                                                completion?(error)
+            if error == nil {
+                return
+            }
+            completion?(error)
         }
         let serviceEventType: ServiceEventType = .callProviderPreviewPendingCall
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
@@ -174,7 +174,7 @@ extension CallsProviderDelegate {
         let isJamiAccount = account.type == AccountType.ring
         guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
         let handleType = (isJamiAccount
-            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
+                            || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
         let contactHandle = CXHandle(type: handleType, value: handleInfo.handle)
         let startCallAction = CXStartCallAction(call: call.callUUID, handle: contactHandle)
         startCallAction.isVideo = !call.isAudioOnly
@@ -203,7 +203,7 @@ extension CallsProviderDelegate {
         }
         let name = !call.displayName.isEmpty ? call.displayName : !call.registeredName.isEmpty ? call.registeredName : handle
         let contactHandle = (account.type == AccountType.sip
-            || call.registeredName.isEmpty) ? handle : call.registeredName
+                                || call.registeredName.isEmpty) ? handle : call.registeredName
         if name == contactHandle {
             return ("", contactHandle)
         }
@@ -230,7 +230,7 @@ extension CallsProviderDelegate {
             }
         }
     }
-// MARK: - Timer
+    // MARK: - Timer
     @objc
     func timerHandler(_ timer: Timer) {
         defer {

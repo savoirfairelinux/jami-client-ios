@@ -1,22 +1,22 @@
 /*
-*  Copyright (C) 2020 Savoir-faire Linux Inc.
-*
-*  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
-*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*  This program is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program; if not, write to the Free Software
-*  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
-*/
+ *  Copyright (C) 2020 Savoir-faire Linux Inc.
+ *
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
 
 import UIKit
 import Reusable
@@ -24,7 +24,7 @@ import RxSwift
 import PKHUD
 
 class LinkToAccountManagerViewController: UIViewController, StoryboardBased, ViewModelBased {
-var viewModel: LinkToAccountManagerViewModel!
+    var viewModel: LinkToAccountManagerViewModel!
 
     @IBOutlet weak var signInButton: DesignableButton!
     @IBOutlet weak var passwordTextField: DesignableTextField!
@@ -51,14 +51,14 @@ var viewModel: LinkToAccountManagerViewModel!
         configureWalkrhroughNavigationBar()
         self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
-        .observe(on: MainScheduler.instance)
-        .subscribe(onNext: { [weak self] (_) in
-            guard UIDevice.current.portraitOrLandscape else { return }
-            self?.signInButton.updateGradientFrame()
-            self?.configureWalkrhroughNavigationBar()
-        })
-        .disposed(by: self.disposeBag)
+        NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (_) in
+                guard UIDevice.current.portraitOrLandscape else { return }
+                self?.signInButton.updateGradientFrame()
+                self?.configureWalkrhroughNavigationBar()
+            })
+            .disposed(by: self.disposeBag)
         adaptToSystemColor()
     }
 
@@ -118,12 +118,12 @@ var viewModel: LinkToAccountManagerViewModel!
                 default:
                     self?.hideHud()
                 }
-                }, onError: { [weak self] (error) in
-                    self?.hideHud()
+            }, onError: { [weak self] (error) in
+                self?.hideHud()
 
-                    if let error = error as? AccountCreationError {
-                        self?.showAccountCreationError(error: error)
-                    }
+                if let error = error as? AccountCreationError {
+                    self?.showAccountCreationError(error: error)
+                }
             })
             .disposed(by: self.disposeBag)
         self.viewModel.canLink.bind(to: self.signInButton.rx.isEnabled)

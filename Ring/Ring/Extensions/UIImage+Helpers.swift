@@ -99,7 +99,7 @@ extension UIImage {
     }
 
     public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
-	let rect = CGRect(origin: .zero, size: size)
+        let rect = CGRect(origin: .zero, size: size)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
         color.setFill()
         UIRectFill(rect)
@@ -126,9 +126,9 @@ extension UIImage {
         } else if ratio < 1, ratio != 0 {
             // android image orientation bug?
             if  self.imageOrientation == UIImage.Orientation.right ||
-                self.imageOrientation == UIImage.Orientation.left ||
-                self.imageOrientation == UIImage.Orientation.rightMirrored ||
-                self.imageOrientation == UIImage.Orientation.leftMirrored {
+                    self.imageOrientation == UIImage.Orientation.left ||
+                    self.imageOrientation == UIImage.Orientation.rightMirrored ||
+                    self.imageOrientation == UIImage.Orientation.leftMirrored {
                 newHeight *= ratio
             } else {
                 newWidth = newHeight * ratio
@@ -173,9 +173,9 @@ extension UIImage {
         } else if ratio < 1, ratio != 0 {
             // android image orientation bug?
             if  self.imageOrientation == UIImage.Orientation.right ||
-                self.imageOrientation == UIImage.Orientation.left ||
-                self.imageOrientation == UIImage.Orientation.rightMirrored ||
-                self.imageOrientation == UIImage.Orientation.leftMirrored {
+                    self.imageOrientation == UIImage.Orientation.left ||
+                    self.imageOrientation == UIImage.Orientation.rightMirrored ||
+                    self.imageOrientation == UIImage.Orientation.leftMirrored {
                 newHeight *= ratio
             } else {
                 newWidth = newHeight * ratio
@@ -231,10 +231,10 @@ extension UIImage {
             .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
         var name: String? = (profileName != nil) ? profileName :
             !account.registeredName.isEmpty ?
-                account.registeredName : nil
+            account.registeredName : nil
         if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-            let accountName = userNameData[account.id] as? String,
-            !accountName.isEmpty {
+           let accountName = userNameData[account.id] as? String,
+           !accountName.isEmpty {
             name = accountName
         }
         guard let username = name else { return image }

@@ -126,8 +126,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             .take(1)
             .subscribe(onNext: { [weak self, weak meCoordinator] (_) in
                 self?.removeChildCoordinator(childCoordinator: meCoordinator)
-        })
-        .disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func showIncomingCall(call: CallModel) {
@@ -169,7 +169,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     func presentCallScreen(call: CallModel) {
         if let topController = self.getTopController(),
            !topController.isKind(of: (CallViewController).self) {
-               topController.dismiss(animated: false, completion: nil)
+            topController.dismiss(animated: false, completion: nil)
         }
         self.popToSmartList()
         if self.accountService.currentAccount?.id != call.accountId {
@@ -263,10 +263,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         let smartViewController = SmartlistViewController.instantiate(with: self.injectionBag)
         let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
         contactRequestsViewController.viewModel.state.take(until: contactRequestsViewController.rx.deallocated)
-                    .subscribe(onNext: { [weak self] (state) in
-                        self?.stateSubject.onNext(state)
-                    })
-                    .disposed(by: self.disposeBag)
+            .subscribe(onNext: { [weak self] (state) in
+                self?.stateSubject.onNext(state)
+            })
+            .disposed(by: self.disposeBag)
         smartViewController.addContactRequestVC(controller: contactRequestsViewController)
         self.present(viewController: smartViewController, withStyle: .show, withAnimation: true, withStateable: smartViewController.viewModel)
         smartListViewController = smartViewController

@@ -1,22 +1,22 @@
 /*
-*  Copyright (C) 2020 Savoir-faire Linux Inc.
-*
-*  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
-*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*  This program is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program; if not, write to the Free Software
-*  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
-*/
+ *  Copyright (C) 2020 Savoir-faire Linux Inc.
+ *
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
 
 import UIKit
 import Reusable
@@ -35,23 +35,23 @@ protocol PreviewViewControllerDelegate: AnyObject {
 }
 
 class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
-// MARK: - outlets
-@IBOutlet weak var playerView: PlayerView!
-@IBOutlet weak var imageView: UIImageView!
-@IBOutlet private weak var hideButton: UIButton!
-@IBOutlet weak var imageLeadingConstraint: NSLayoutConstraint!
-@IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
-@IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
-@IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
-@IBOutlet weak var backgroundView: UIView!
-@IBOutlet weak var gradientView: UIView!
-@IBOutlet weak var shareButton: UIButton!
-@IBOutlet weak var deleteButton: UIButton!
-@IBOutlet weak var forwardButton: UIButton!
-@IBOutlet weak var saveButton: UIButton!
-@IBOutlet weak var buttonsContainer: UIStackView!
+    // MARK: - outlets
+    @IBOutlet weak var playerView: PlayerView!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet private weak var hideButton: UIButton!
+    @IBOutlet weak var imageLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var gradientView: UIView!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var forwardButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var buttonsContainer: UIStackView!
 
-// MARK: - members
+    // MARK: - members
     let disposeBag = DisposeBag()
     var viewModel: PreviewControllerModel!
     var tapGestureRecognizer: UITapGestureRecognizer!
@@ -124,12 +124,12 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     @objc
-     private func startZooming(_ sender: UIPinchGestureRecognizer) {
-       let scaleResult = sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale)
-       guard let scale = scaleResult, scale.a > 1, scale.d > 1 else { return }
-       sender.view?.transform = scale
-       sender.scale = 1
-     }
+    private func startZooming(_ sender: UIPinchGestureRecognizer) {
+        let scaleResult = sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale)
+        guard let scale = scaleResult, scale.a > 1, scale.d > 1 else { return }
+        sender.view?.transform = scale
+        sender.scale = 1
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -172,7 +172,7 @@ class PreviewViewController: UIViewController, StoryboardBased, ViewModelBased {
                         self.imageBottomConstraint.constant = 0
                         self.backgroundView.alpha = 1
                         self.view.layoutIfNeeded()
-            }, completion: nil)
+                       }, completion: nil)
     }
     func share() {
         if let delegate = self.delegate {

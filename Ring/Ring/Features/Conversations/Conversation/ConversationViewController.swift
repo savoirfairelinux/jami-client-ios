@@ -93,7 +93,7 @@ class ConversationViewController: UIViewController,
             sleep(UInt32(0.5))
             DispatchQueue.main.async { [weak self] in
                 guard let self = self,
-                UIDevice.current.portraitOrLandscape else { return }
+                      UIDevice.current.portraitOrLandscape else { return }
                 self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                                    displayName: self.viewModel.displayName.value,
                                    username: self.viewModel.userName.value)
@@ -223,7 +223,7 @@ class ConversationViewController: UIViewController,
         alert.addAction(recordVideoAction)
         alert.addAction(recordAudioAction)
         alert.addAction(documentsAction)
-        //TODO: fix location sharing with a new API
+        // TODO: fix location sharing with a new API
         if false {
             alert.addAction(locationSharingAction())
         }
@@ -321,7 +321,7 @@ class ConversationViewController: UIViewController,
             return
         }
         guard picker.sourceType == UIImagePickerController.SourceType.photoLibrary,
-            let phAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
+              let phAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset else { return }
         let imageFileName = phAsset.value(forKey: "filename") as? String ?? "Unknown"
         // image from library
         if phAsset.mediaType == .image {
@@ -342,11 +342,11 @@ class ConversationViewController: UIViewController,
                             options: PHVideoRequestOptions(),
                             resultHandler: { (asset, _, _) -> Void in
                                 guard let asset = asset as? AVURLAsset,
-                                let videoData = NSData(contentsOf: asset.url) else {
+                                      let videoData = NSData(contentsOf: asset.url) else {
                                     return
                                 }
                                 self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: videoData as Data)
-            })
+                            })
     }
 
     func saveImageToGalery (image: UIImage) {
@@ -515,7 +515,7 @@ class ConversationViewController: UIViewController,
         }
     }
 
-   // swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length
     func setupUI() {
         self.messageAccessoryView.sendButton.contentVerticalAlignment = .fill
         self.messageAccessoryView.sendButton.contentHorizontalAlignment = .fill
@@ -543,16 +543,16 @@ class ConversationViewController: UIViewController,
         Observable<(Data?, String?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
                                                            self.viewModel.displayName.asObservable(),
                                                            self.viewModel.userName.asObservable()) { profileImage, displayName, username in
-                                                            return (profileImage, displayName, username)
+            return (profileImage, displayName, username)
         }
-            .observe(on: MainScheduler.instance)
-            .subscribe({ [weak self] profileData -> Void in
-                self?.setupNavTitle(profileImageData: profileData.element?.0,
-                                    displayName: profileData.element?.1,
-                                    username: profileData.element?.2)
-                return
-            })
-            .disposed(by: self.disposeBag)
+        .observe(on: MainScheduler.instance)
+        .subscribe({ [weak self] profileData -> Void in
+            self?.setupNavTitle(profileImageData: profileData.element?.0,
+                                displayName: profileData.element?.1,
+                                username: profileData.element?.2)
+            return
+        })
+        .disposed(by: self.disposeBag)
 
         self.tableView.contentInset.bottom = messageAccessoryView.frame.size.height
         self.tableView.scrollIndicatorInsets.bottom = messageAccessoryView.frame.size.height
@@ -622,7 +622,7 @@ class ConversationViewController: UIViewController,
         super.viewWillDisappear(animated)
         self.viewModel.setIsComposingMsg(isComposing: false)
         self.textFieldShouldEndEditing = true
-       // self.viewModel.setMessagesAsRead()
+        // self.viewModel.setMessagesAsRead()
     }
 
     func subscribeMessages() {
@@ -639,21 +639,21 @@ class ConversationViewController: UIViewController,
                 for message in messages {
                     let injBag = self.viewModel.injectionBag
                     if let jamiId = self.viewModel.conversation.value.getParticipants().first?.jamiId {
-                    let isLastDisplayed = self.viewModel.isLastDisplayed(messageId: message.id, peerJamiId: jamiId)
-                    self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: isLastDisplayed))
+                        let isLastDisplayed = self.viewModel.isLastDisplayed(messageId: message.id, peerJamiId: jamiId)
+                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: isLastDisplayed))
                     } else {
                         self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: false))
                     }
-//                    if self.viewModel.peerComposingMessage {
-//                        let msgModel = MessageModel(withId: "",
-//                                                    receivedDate: Date(),
-//                                                    content: "       ",
-//                                                    authorURI: self.viewModel.conversation.value.participants[0].uri,
-//                                                    incoming: true)
-//                        let composingIndicator = MessageViewModel(withInjectionBag: injBag, withMessage: msgModel, isLastDisplayed: false)
-//                        composingIndicator.isComposingIndicator = true
-//                        self.messageViewModels.append(composingIndicator)
-//                    }
+                    //                    if self.viewModel.peerComposingMessage {
+                    //                        let msgModel = MessageModel(withId: "",
+                    //                                                    receivedDate: Date(),
+                    //                                                    content: "       ",
+                    //                                                    authorURI: self.viewModel.conversation.value.participants[0].uri,
+                    //                                                    incoming: true)
+                    //                        let composingIndicator = MessageViewModel(withInjectionBag: injBag, withMessage: msgModel, isLastDisplayed: false)
+                    //                        composingIndicator.isComposingIndicator = true
+                    //                        self.messageViewModels.append(composingIndicator)
+                    //                    }
                 }
                 let newNumber = self.messageViewModels.count
                 self.computeSequencing()
@@ -702,11 +702,11 @@ class ConversationViewController: UIViewController,
         self.viewModel.conversation
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] _ in
-            self?.subscribeMessages()
-        } onError: { _ in
+                self?.subscribeMessages()
+            } onError: { _ in
 
             }
-        .disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
 
         // Scroll to bottom when reloaded
         self.tableView.rx.methodInvoked(#selector(UITableView.reloadData))
@@ -745,7 +745,7 @@ class ConversationViewController: UIViewController,
         let numberOfRows = self.tableView.numberOfRows(inSection: 0)
         let visibleIndexes = self.tableView.indexPathsForVisibleRows
         guard let number = self.tableView.indexPathsForVisibleRows?.count,
-        let last = visibleIndexes?.first?.row else { return false }
+              let last = visibleIndexes?.first?.row else { return false }
         return last < numberOfRows - number * 2
     }
 
@@ -856,41 +856,41 @@ class ConversationViewController: UIViewController,
     }
 
     private func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
-            let messageItem = self.messageViewModels[index]
-            let msgOwner = messageItem.bubblePosition()
-            if self.messageViewModels.count == 1 || index == 0 {
-                if self.messageViewModels.count == index + 1 {
-                    return MessageSequencing.singleMessage
-                }
-                let nextMessageItem = index + 1 <= self.messageViewModels.count
-                    ? self.messageViewModels[index + 1] : nil
-                if nextMessageItem != nil {
-                    return msgOwner != nextMessageItem?.bubblePosition()
-                        ? MessageSequencing.singleMessage : MessageSequencing.firstOfSequence
-                }
-            } else if self.messageViewModels.count == index + 1 {
-                let lastMessageItem = index - 1 >= 0 && index - 1 < self.messageViewModels.count
-                    ? self.messageViewModels[index - 1] : nil
-                if lastMessageItem != nil {
-                    return msgOwner != lastMessageItem?.bubblePosition()
-                        ? MessageSequencing.singleMessage : MessageSequencing.lastOfSequence
-                }
+        let messageItem = self.messageViewModels[index]
+        let msgOwner = messageItem.bubblePosition()
+        if self.messageViewModels.count == 1 || index == 0 {
+            if self.messageViewModels.count == index + 1 {
+                return MessageSequencing.singleMessage
             }
-            let lastMessageItem = index - 1 >= 0 && index - 1 < self.messageViewModels.count
-                ? self.messageViewModels[index - 1] : nil
             let nextMessageItem = index + 1 <= self.messageViewModels.count
                 ? self.messageViewModels[index + 1] : nil
-            var sequencing = MessageSequencing.singleMessage
-            if (lastMessageItem != nil) && (nextMessageItem != nil) {
-                if msgOwner != lastMessageItem?.bubblePosition() && msgOwner == nextMessageItem?.bubblePosition() {
-                    sequencing = MessageSequencing.firstOfSequence
-                } else if msgOwner != nextMessageItem?.bubblePosition() && msgOwner == lastMessageItem?.bubblePosition() {
-                    sequencing = MessageSequencing.lastOfSequence
-                } else if msgOwner == nextMessageItem?.bubblePosition() && msgOwner == lastMessageItem?.bubblePosition() {
-                    sequencing = MessageSequencing.middleOfSequence
-                }
+            if nextMessageItem != nil {
+                return msgOwner != nextMessageItem?.bubblePosition()
+                    ? MessageSequencing.singleMessage : MessageSequencing.firstOfSequence
             }
-            return sequencing
+        } else if self.messageViewModels.count == index + 1 {
+            let lastMessageItem = index - 1 >= 0 && index - 1 < self.messageViewModels.count
+                ? self.messageViewModels[index - 1] : nil
+            if lastMessageItem != nil {
+                return msgOwner != lastMessageItem?.bubblePosition()
+                    ? MessageSequencing.singleMessage : MessageSequencing.lastOfSequence
+            }
+        }
+        let lastMessageItem = index - 1 >= 0 && index - 1 < self.messageViewModels.count
+            ? self.messageViewModels[index - 1] : nil
+        let nextMessageItem = index + 1 <= self.messageViewModels.count
+            ? self.messageViewModels[index + 1] : nil
+        var sequencing = MessageSequencing.singleMessage
+        if (lastMessageItem != nil) && (nextMessageItem != nil) {
+            if msgOwner != lastMessageItem?.bubblePosition() && msgOwner == nextMessageItem?.bubblePosition() {
+                sequencing = MessageSequencing.firstOfSequence
+            } else if msgOwner != nextMessageItem?.bubblePosition() && msgOwner == lastMessageItem?.bubblePosition() {
+                sequencing = MessageSequencing.lastOfSequence
+            } else if msgOwner == nextMessageItem?.bubblePosition() && msgOwner == lastMessageItem?.bubblePosition() {
+                sequencing = MessageSequencing.middleOfSequence
+            }
+        }
+        return sequencing
     }
 
     func changeTransferStatus(_ cell: MessageCell,
@@ -1027,7 +1027,7 @@ class ConversationViewController: UIViewController,
                                         }
                                         guard let messageModel = messageModel else { return }
                                         self?.shareImage(messageModel: messageModel)
-            }) { return }
+                                    }) { return }
         self.shareImage(messageModel: messageModel)
     }
 
@@ -1066,7 +1066,7 @@ class ConversationViewController: UIViewController,
             guard let self = self else { return }
             contactPickerVC.view.frame = newFrame
             self.inputAccessoryView.isHidden = true
-            }, completion: {  _ in
+        }, completion: {  _ in
         })
     }
 
@@ -1106,45 +1106,45 @@ extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.messageViewModels[indexPath.row]
 
-            if item.message.incoming &&
-                item.message.status != .displayed &&
-                item.message.type == .text {
-                self.viewModel.setMessageAsRead(daemonId: item.message.daemonId,
-                                                messageId: item.message.id)
-            }
+        if item.message.incoming &&
+            item.message.status != .displayed &&
+            item.message.type == .text {
+            self.viewModel.setMessageAsRead(daemonId: item.message.daemonId,
+                                            messageId: item.message.id)
+        }
 
-            let cellType = { (bubblePosition: BubblePosition, isTransfer: Bool, isLocationSharing: Bool) -> MessageCell.Type in
-                switch bubblePosition {
-                case .received:
-                    if isLocationSharing {
-                        return MessageCellLocationSharingReceived.self
-                    } else if isTransfer {
-                        return MessageCellDataTransferReceived.self
-                    } else {
-                        return MessageCellReceived.self
-                    }
-                case .sent:
-                    if isLocationSharing {
-                        return MessageCellLocationSharingSent.self
-                    } else if isTransfer {
-                        return MessageCellDataTransferSent.self
-                    } else {
-                        return MessageCellSent.self
-                    }
-                case .generated: return MessageCellGenerated.self
+        let cellType = { (bubblePosition: BubblePosition, isTransfer: Bool, isLocationSharing: Bool) -> MessageCell.Type in
+            switch bubblePosition {
+            case .received:
+                if isLocationSharing {
+                    return MessageCellLocationSharingReceived.self
+                } else if isTransfer {
+                    return MessageCellDataTransferReceived.self
+                } else {
+                    return MessageCellReceived.self
                 }
-            }(item.bubblePosition(), item.isTransfer, item.isLocationSharingBubble)
+            case .sent:
+                if isLocationSharing {
+                    return MessageCellLocationSharingSent.self
+                } else if isTransfer {
+                    return MessageCellDataTransferSent.self
+                } else {
+                    return MessageCellSent.self
+                }
+            case .generated: return MessageCellGenerated.self
+            }
+        }(item.bubblePosition(), item.isTransfer, item.isLocationSharingBubble)
 
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: cellType)
-            cell.configureFromItem(viewModel, self.messageViewModels, cellForRowAt: indexPath)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: cellType)
+        cell.configureFromItem(viewModel, self.messageViewModels, cellForRowAt: indexPath)
 
-            self.transferCellSetup(item, cell, tableView, indexPath)
-            self.locationCellSetup(item, cell)
-            self.deleteCellSetup(cell)
-            self.messageCellActionsSetUp(cell, item: item)
-            self.tapToShowTimeCellSetup(cell)
+        self.transferCellSetup(item, cell, tableView, indexPath)
+        self.locationCellSetup(item, cell)
+        self.deleteCellSetup(cell)
+        self.messageCellActionsSetUp(cell, item: item)
+        self.tapToShowTimeCellSetup(cell)
 
-            return cell
+        return cell
     }
 
     private func deleteCellSetup(_ cell: MessageCell) {
@@ -1297,7 +1297,7 @@ extension ConversationViewController: UITableViewDataSource {
                     guard let cell = cell else { return }
                     let transferId = item.daemonId
                     self?.log.info("canceling transferId \(transferId)")
-                   // _ = self?.viewModel.cancelTransfer(transferId: transferId)
+                    // _ = self?.viewModel.cancelTransfer(transferId: transferId)
                     item.initialTransferStatus = .canceled
                     item.message.transferStatus = .canceled
                     cell.stopProgressMonitor()
@@ -1307,7 +1307,7 @@ extension ConversationViewController: UITableViewDataSource {
             cell.openPreview
                 .subscribe(onNext: { [weak self, weak item, weak cell] open in
                     guard let self = self, open, let cell = cell, let item = item,
-                        let initialFrame = cell.getInitialFrame() else { return }
+                          let initialFrame = cell.getInitialFrame() else { return }
                     let player = item.getPlayer(conversationViewModel: self.viewModel)
                     let image = cell.transferedImage
                     if player == nil && image == nil {
@@ -1326,7 +1326,7 @@ extension ConversationViewController: UITableViewDataSource {
                     if height > 0 {
                         UIView.performWithoutAnimation {
                             guard let sectionNumber = tableView?.numberOfSections,
-                                let rowNumber = tableView?.numberOfRows(inSection: indexPath.section) else { return }
+                                  let rowNumber = tableView?.numberOfRows(inSection: indexPath.section) else { return }
                             if indexPath.section < sectionNumber && indexPath.section >= 0 {
                                 if indexPath.row < rowNumber &&
                                     indexPath.row >= 0 &&

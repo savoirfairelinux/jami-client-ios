@@ -19,9 +19,9 @@
  */
 
 /* Work around to avoid table view move down when keyboard
-* is shown. This problem arrive when adding text field to
-* GSKStretchyHeaderView
-*/
+ * is shown. This problem arrive when adding text field to
+ * GSKStretchyHeaderView
+ */
 
 final class SettingsTableView: UITableView {
     override func scrollRectToVisible(_ rect: CGRect, animated: Bool) {

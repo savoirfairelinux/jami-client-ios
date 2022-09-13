@@ -97,8 +97,8 @@ class AccountModel: Equatable {
                     self.registeredName = newDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: .accountRegisteredName))
                 }
                 if let status = AccountState(rawValue:
-                    newDetails.get(withConfigKeyModel:
-                        ConfigKeyModel(withKey: .accountRegistrationStatus))) {
+                                                newDetails.get(withConfigKeyModel:
+                                                                ConfigKeyModel(withKey: .accountRegistrationStatus))) {
                     self.status = status
                 }
             }

@@ -35,7 +35,7 @@ extension NSUserActivity {
                 let contact = intent.contacts?.first,
                 let handle = contact.personHandle,
                 let value = handle.value else {
-                    return nil
+                return nil
             }
             return(value, true)
         }
@@ -44,7 +44,7 @@ extension NSUserActivity {
             let contact = intent.contacts?.first,
             let handle = contact.personHandle,
             let value = handle.value else {
-                return nil
+            return nil
         }
         return(value, false)
     }

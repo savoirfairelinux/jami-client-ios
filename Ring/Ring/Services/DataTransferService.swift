@@ -75,19 +75,19 @@ func stringFromEventCode(with code: NSDataTransferEventCode) -> String {
     case .invalid_pathname: return "invalid pathname"
     case .unjoinable_peer: return "unjoinable peer"
     @unknown default:
-       return "Invalid"
+        return "Invalid"
     }
 }
 // swiftlint:enable cyclomatic_complexity
 
 /*
-Manage sent and received files
+ Manage sent and received files
 
-files stored in next locations:
-- non swarm:
-   sent/received file: /.../AppData/Documents/downloads/accountId/conversationId/fileName
-   recorded file: /.../AppData/Documents/recorded/accountId/conversationId/fileName
-- swarm:  /.../AppData/Documents/accountId/conversation_data/conversationId/fileName. For received files it default path for demon. For sent files we need to save file to this direction
+ files stored in next locations:
+ - non swarm:
+ sent/received file: /.../AppData/Documents/downloads/accountId/conversationId/fileName
+ recorded file: /.../AppData/Documents/recorded/accountId/conversationId/fileName
+ - swarm:  /.../AppData/Documents/accountId/conversation_data/conversationId/fileName. For received files it default path for demon. For sent files we need to save file to this direction
  */
 public final class DataTransferService: DataTransferAdapterDelegate {
 
@@ -170,8 +170,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                 self.dbManager.updateFileName(daemonID: transferId, name: name, accountId: accountID)
                     .subscribe(onCompleted: { [weak self] in
                         self?.log.debug("file name updated")
-                        }, onError: { [weak self] _ in
-                            self?.log.error("update name failed")
+                    }, onError: { [weak self] _ in
+                        self?.log.error("update name failed")
                     })
                     .disposed(by: self.disposeBag)
             }
@@ -257,7 +257,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
      to avoid creating images multiple time keep images in dictionary
      images saved in app document folder referenced by conversationId concatinated with image name
      images from photo librairy referenced by local identifier
-    */
+     */
 
     func getImage(for name: String, maxSize: CGFloat, identifier: String? = nil,
                   accountID: String, conversationID: String, isSwarm: Bool) -> UIImage? {
@@ -485,7 +485,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         let info = dataTransferInfo(withId: transferId, accountId: accountId, conversationId: conversationId, isSwarm: isSwarm)
         /// do not emit an created event for outgoing transfer, since it already saved in db for non swarm conversation. For swarm conversation message created when interaction received
         if event == .created && info?.flags != 1 {
-          return
+            return
         }
         /// we aggregate all non-create type transfer events into the update category
         /// emit service event

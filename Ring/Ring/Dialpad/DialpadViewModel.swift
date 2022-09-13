@@ -61,6 +61,6 @@ class DialpadViewModel: ViewModel, Stateable {
         }
         let name = phoneNumber.replacingOccurrences(of: String("﹡"), with: "*")
         self.stateSubject.onNext(ConversationState
-            .startAudioCall(contactRingId: name, userName: name))
+                                    .startAudioCall(contactRingId: name, userName: name))
     }
 }

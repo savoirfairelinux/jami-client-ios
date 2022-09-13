@@ -47,10 +47,10 @@ class ProgressView: UIView {
             }), progressVariable
                 .asObservable()
                 .map({ progressValue in
-                return floor(progressValue)
-                    .description.dropLast(2)
-                    .description + " %"
-            }))
+                    return floor(progressValue)
+                        .description.dropLast(2)
+                        .description + " %"
+                }))
     }()
 
     var target: CGFloat = 100
@@ -93,11 +93,11 @@ class ProgressView: UIView {
         let hightValue = self.bounds.size.height / valueForSide
         let value = floor((progress + startValue - 1 ) / valueForSide)
         switch value {
-        case 0 :
+        case 0:
             return CGPoint(x: widthValue * (progress + startValue), y: 0)
         case 1:
             return CGPoint(x: self.frame.width, y: hightValue * (progress - startValue))
-        case 2 :
+        case 2:
             return CGPoint(x: widthValue * (62.5 - progress), y: self.frame.height)
         case 3:
             return CGPoint(x: 0, y: hightValue * (87.5 - progress))

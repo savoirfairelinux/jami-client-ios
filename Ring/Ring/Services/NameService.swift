@@ -132,7 +132,7 @@ class NameService {
         return Observable
             .combineLatest(registerName.asObservable(), filteredDaemonSignals.asObservable()) { (_, serviceEvent) -> Bool in
                 guard let status: NameRegistrationState = serviceEvent.getEventInput(ServiceEventInput.state)
-                    else { return false }
+                else { return false }
                 switch status {
                 case .success:
                     return true

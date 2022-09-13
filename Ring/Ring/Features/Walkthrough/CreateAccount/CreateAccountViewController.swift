@@ -138,9 +138,9 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         }
         let device = UIDevice.modelName
         switch device {
-        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR" :
+        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR":
             self.containerViewBottomConstraint.constant = 100
-        default :
+        default:
             self.containerViewBottomConstraint.constant = 70
         }
     }
@@ -176,7 +176,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
     private func applyL10n() {
         self.createAccountButton
-        .setTitle(self.viewModel.createAccountButton, for: .normal)
+            .setTitle(self.viewModel.createAccountButton, for: .normal)
         self.usernameTextField.placeholder = self.viewModel.usernameTitle
         self.passwordTextField.placeholder = self.viewModel.passwordTitle
         self.confirmPasswordTextField.placeholder = self.viewModel.confirmPasswordTitle
@@ -266,12 +266,12 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
                 default:
                     self?.hideAccountCreationHud()
                 }
-                }, onError: { [weak self] (error) in
-                    self?.hideAccountCreationHud()
+            }, onError: { [weak self] (error) in
+                self?.hideAccountCreationHud()
 
-                    if let error = error as? AccountCreationError {
-                        self?.showAccountCreationError(error: error)
-                    }
+                if let error = error as? AccountCreationError {
+                    self?.showAccountCreationError(error: error)
+                }
             })
             .disposed(by: self.disposeBag)
     }
@@ -367,7 +367,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         let okAction =
             UIAlertAction(title: L10n.Global.ok,
                           style: .default) { [weak self](_: UIAlertAction!) -> Void in
-                            self?.viewModel.finish()
+                self?.viewModel.finish()
             }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
@@ -381,7 +381,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         let okAction =
             UIAlertAction(title: L10n.Global.ok,
                           style: .default) { [weak self](_: UIAlertAction!) -> Void in
-                            self?.viewModel.finish()
+                self?.viewModel.finish()
             }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)

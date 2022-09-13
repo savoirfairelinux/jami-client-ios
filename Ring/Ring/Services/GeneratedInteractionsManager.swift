@@ -67,7 +67,7 @@ class GeneratedInteractionsManager {
                                                    account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
-                    currentAccount.id == account.id {
+                   currentAccount.id == account.id {
                     shouldUpdateConversations = true
                 }
                 var date = Date()
@@ -81,7 +81,7 @@ class GeneratedInteractionsManager {
                     self.conversationService.saveLegacyConversation(conversation: conversation, isExisting: false)
                     return
                 case ServiceEventType.contactRequestReceived:
-                     message = GeneratedMessage.invitationReceived.toString()
+                    message = GeneratedMessage.invitationReceived.toString()
                 case ServiceEventType.contactRequestDiscarded:
                     self.removeConversation(accountId: account.id,
                                             contactRingId: uriString,
@@ -157,12 +157,12 @@ class GeneratedInteractionsManager {
                                                    account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
-                    currentAccount.id == account.id {
+                   currentAccount.id == account.id {
                     shouldUpdateConversations = true
                 }
                 let message = callType == CallType.incoming.rawValue
-                ? (time > 0) ?  GeneratedMessage.incomingCall.toString() : GeneratedMessage.missedIncomingCall.toString() :
-                (time > 0) ?  GeneratedMessage.outgoingCall.toString() :
+                    ? (time > 0) ? GeneratedMessage.incomingCall.toString() : GeneratedMessage.missedIncomingCall.toString() :
+                    (time > 0) ? GeneratedMessage.outgoingCall.toString() :
                     GeneratedMessage.missedOutgoingCall.toString()
                 self.conversationService
                     .generateMessage(messageContent: message,

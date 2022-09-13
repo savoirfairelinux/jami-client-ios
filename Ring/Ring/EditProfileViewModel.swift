@@ -45,8 +45,8 @@ class EditProfileViewModel {
         return profileForCurrentAccount.share()
             .map({ profile in
                 if let photo = profile.photo,
-                    let data = NSData(base64Encoded: photo,
-                                      options: NSData.Base64DecodingOptions
+                   let data = NSData(base64Encoded: photo,
+                                     options: NSData.Base64DecodingOptions
                                         .ignoreUnknownCharacters) as Data? {
                     self?.image = UIImage(data: data)
                     guard let image = UIImage(data: data) else {
@@ -56,7 +56,7 @@ class EditProfileViewModel {
                 }
                 return UIImage(named: "add_avatar")!
             })
-        }()
+    }()
 
     var profileForCurrentAccount = PublishSubject<Profile>()
 
@@ -78,7 +78,7 @@ class EditProfileViewModel {
                 }
                 return ""
             })
-        }()
+    }()
 
     init(profileService: ProfilesService, accountService: AccountsService) {
         self.profileService = profileService
@@ -90,7 +90,7 @@ class EditProfileViewModel {
                 }
             })
             .disposed(by: self.disposeBag)
-      }
+    }
 
     func updateProfileInfoFor(accountId: String) {
         self.profileService.getAccountProfile(accountId: accountId)
@@ -104,7 +104,7 @@ class EditProfileViewModel {
         guard let account = self.accountService.currentAccount else { return }
         var photo: String?
         if let image = self.image, !image.isEqual(defaultImage),
-            let imageData = image.pngData() {
+           let imageData = image.pngData() {
             photo = imageData.base64EncodedString()
         }
         let details = self.accountService.getAccountDetails(fromAccountId: account.id)

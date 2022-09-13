@@ -72,8 +72,8 @@ class ProfilesService: ProfilesAdapterDelegate {
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
         let uri = JamiURI(schema: URIType.ring, infoHach: uri)
         guard let uriString = uri.uriString,
-            let data = FileManager.default.contents(atPath: path),
-            let vCard = CNContactVCardSerialization.parseToVCard(data: data) else { return }
+              let data = FileManager.default.contents(atPath: path),
+              let vCard = CNContactVCardSerialization.parseToVCard(data: data) else { return }
         let name = VCardUtils.getName(from: vCard)
         var stringImage: String?
         if let image = vCard.imageData {
@@ -181,7 +181,7 @@ class ProfilesService: ProfilesAdapterDelegate {
         }
 
         if let datautf8 = String(data: vCardData, encoding: .utf8),
-            let dataUtf16 = datautf8.data(using: String.Encoding.utf16) {
+           let dataUtf16 = datautf8.data(using: String.Encoding.utf16) {
             vCardData = dataUtf16
         }
 

@@ -245,24 +245,24 @@ class CreateAccountViewModel: Stateable, ViewModel {
                                         self.username.asObservable(),
                                         self.createState,
                                         resultSelector:
-            { ( passwordValidationState: PasswordValidationState,
-                usernameValidationState: UsernameValidationState,
-                registerUsername: Bool,
-                username: String,
-                creationState: AccountCreationState) -> Bool in
+                                            { ( passwordValidationState: PasswordValidationState,
+                                                usernameValidationState: UsernameValidationState,
+                                                registerUsername: Bool,
+                                                username: String,
+                                                creationState: AccountCreationState) -> Bool in
 
-                var canAsk = true
+                                                var canAsk = true
 
-                if registerUsername {
-                    canAsk = canAsk && usernameValidationState.isAvailable && !username.isEmpty
-                }
+                                                if registerUsername {
+                                                    canAsk = canAsk && usernameValidationState.isAvailable && !username.isEmpty
+                                                }
 
-                canAsk = canAsk && passwordValidationState.isValidated
+                                                canAsk = canAsk && passwordValidationState.isValidated
 
-                canAsk = canAsk && !creationState.isInProgress
+                                                canAsk = canAsk && !creationState.isInProgress
 
-                return canAsk
-        })
+                                                return canAsk
+                                            })
     }()
 
     required init (with injectionBag: InjectionBag) {
@@ -337,13 +337,13 @@ class CreateAccountViewModel: Stateable, ViewModel {
                         }
                         self.accountCreationState.accept(.timeOut)
                     }
-                }, onError: { [weak self] (error) in
-                    guard let self = self else { return }
-                    if let error = error as? AccountCreationError {
-                        self.accountCreationState.accept(.error(error: error))
-                    } else {
-                        self.accountCreationState.accept(.error(error: AccountCreationError.unknown))
-                    }
+            }, onError: { [weak self] (error) in
+                guard let self = self else { return }
+                if let error = error as? AccountCreationError {
+                    self.accountCreationState.accept(.error(error: error))
+                } else {
+                    self.accountCreationState.accept(.error(error: AccountCreationError.unknown))
+                }
             })
             .disposed(by: self.disposeBag)
         self.enablePushNotifications(enable: self.notificationSwitch.value)

@@ -151,7 +151,7 @@ class AccountsService: AccountAdapterDelegate {
 
             // If current account already exists in the list, move it to the first index
             if let currentAccount = currentAccount,
-                let index = self.accountList.firstIndex(of: currentAccount) {
+               let index = self.accountList.firstIndex(of: currentAccount) {
                 if index != 0 {
                     self.accountList.remove(at: index)
                     self.accountList.insert(currentAccount, at: 0)
@@ -195,33 +195,33 @@ class AccountsService: AccountAdapterDelegate {
                 return account == selectedAccount
             }).first
             if let currentAccount = currentAccount,
-                let index = self.accountList.firstIndex(of: currentAccount) {
+               let index = self.accountList.firstIndex(of: currentAccount) {
                 self.accountList.remove(at: index)
                 self.accountList.insert(currentAccount, at: 0)
             }
         }
     }
 
-//    private func loadDatabases() -> Bool {
-//        for account in accountList {
-//            if dbManager.isMigrationToDBv2Needed(accountId: account.id) {
-//                if let accountURI = AccountModelHelper
-//                    .init(withAccount: account).uri {
-//                    if !dbManager.migrateToDbVersion2(accountId: account.id,
-//                                                      accountURI: accountURI) { return false }
-//                }
-//            } else {
-//                do {
-//                    // return false if could not open database connection
-//                    if try !dbManager.createDatabaseForAccount(accountId: account.id) {
-//                        return false
-//                    }
-//                    // if tables already exist an exeption will be thrown
-//                } catch { }
-//            }
-//        }
-//        return true
-//    }
+    //    private func loadDatabases() -> Bool {
+    //        for account in accountList {
+    //            if dbManager.isMigrationToDBv2Needed(accountId: account.id) {
+    //                if let accountURI = AccountModelHelper
+    //                    .init(withAccount: account).uri {
+    //                    if !dbManager.migrateToDbVersion2(accountId: account.id,
+    //                                                      accountURI: accountURI) { return false }
+    //                }
+    //            } else {
+    //                do {
+    //                    // return false if could not open database connection
+    //                    if try !dbManager.createDatabaseForAccount(accountId: account.id) {
+    //                        return false
+    //                    }
+    //                    // if tables already exist an exeption will be thrown
+    //                } catch { }
+    //            }
+    //        }
+    //        return true
+    //    }
 
     /// This function clears the temporary database entries
     private func sanitizeDatabases() -> Bool {
@@ -242,7 +242,7 @@ class AccountsService: AccountAdapterDelegate {
         return Single<[AccountModel]>.just({
             loadAccountsFromDaemon()
             return accountList
-            }())
+        }())
     }
 
     // MARK: - Methods
@@ -294,8 +294,8 @@ class AccountsService: AccountAdapterDelegate {
         }
         let details = self.getAccountDetails(fromAccountId: accountId)
         details
-        .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword),
-             withValue: (!newPassword.isEmpty).toString())
+            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.archiveHasPassword),
+                 withValue: (!newPassword.isEmpty).toString())
         setAccountDetails(forAccountId: accountId, withDetails: details)
         return true
     }
@@ -477,11 +477,11 @@ class AccountsService: AccountAdapterDelegate {
                     accountState.accept(ConnectAccountState.networkError)
                     newAccountId.accept("")
                 } else if event.eventType == ServiceEventType.registrationStateChanged,
-                    event.getEventInput(ServiceEventInput.registrationState) == Registered {
+                          event.getEventInput(ServiceEventInput.registrationState) == Registered {
                     accountState.accept(ConnectAccountState.created)
                 } else if event.getEventInput(ServiceEventInput.registrationState) == ErrorGeneric ||
-                    event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth ||
-                    event.getEventInput(ServiceEventInput.registrationState) == ErrorNeedMigration {
+                            event.getEventInput(ServiceEventInput.registrationState) == ErrorAuth ||
+                            event.getEventInput(ServiceEventInput.registrationState) == ErrorNeedMigration {
                     accountState.accept(ConnectAccountState.error)
                     newAccountId.accept("")
                 }
@@ -491,21 +491,21 @@ class AccountsService: AccountAdapterDelegate {
 
         let result = Observable
             .combineLatest(accountState.asObservable()
-                .filter({ (state) -> Bool in
-                    state != ConnectAccountState.initializinzg
-                }),
+                            .filter({ (state) -> Bool in
+                                state != ConnectAccountState.initializinzg
+                            }),
                            newAccountId.asObservable()) {(accountState, accountId) -> AccountModel in
-                            if accountState == ConnectAccountState.networkError {
-                                throw AccountCreationError.network
-                            } else if accountState == ConnectAccountState.error {
-                                throw AccountCreationError.wrongCredentials
-                            } else if !accountId.isEmpty && accountState == ConnectAccountState.created {
-                                self.loadAccountsFromDaemon()
-                                let account = try self.buildAccountFromDaemon(accountId: accountId)
-                                return account
-                            } else {
-                                throw AddAccountError.unknownError
-                            }
+                if accountState == ConnectAccountState.networkError {
+                    throw AccountCreationError.network
+                } else if accountState == ConnectAccountState.error {
+                    throw AccountCreationError.wrongCredentials
+                } else if !accountId.isEmpty && accountState == ConnectAccountState.created {
+                    self.loadAccountsFromDaemon()
+                    let account = try self.buildAccountFromDaemon(accountId: accountId)
+                    return account
+                } else {
+                    throw AddAccountError.unknownError
+                }
             }
             .take(1)
             .flatMap({ [weak self] (accountModel) -> Observable<AccountModel> in
@@ -516,7 +516,7 @@ class AccountsService: AccountAdapterDelegate {
             })
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-           do {
+            do {
                 var ringDetails = try self.getRingInitialAccountDetails()
                 ringDetails.updateValue(username, forKey: ConfigKey.managerUsername.rawValue)
                 ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
@@ -744,8 +744,8 @@ class AccountsService: AccountAdapterDelegate {
         return Observable
             .combineLatest(saveAccount.asObservable(), filteredDaemonSignals.asObservable()) { (_, serviceEvent) -> Bool in
                 guard let status: String = serviceEvent.getEventInput(ServiceEventInput.state),
-                let migrationStatus = MigrationState(rawValue: status)
-                    else { return false }
+                      let migrationStatus = MigrationState(rawValue: status)
+                else { return false }
                 switch migrationStatus {
                 case .SUCCESS:
                     return true
@@ -799,8 +799,8 @@ class AccountsService: AccountAdapterDelegate {
             account.volatileDetails = self.getVolatileAccountDetails(fromAccountId: response.accountId)
         }
         if let currentAccount = self.currentAccount,
-            response.state == ErrorNeedMigration,
-            response.accountId == currentAccount.id {
+           response.state == ErrorNeedMigration,
+           response.accountId == currentAccount.id {
             needMigrateCurrentAccount.onNext(currentAccount.id)
         }
     }
@@ -813,19 +813,19 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func exportOnRing(withPassword password: String) -> Completable {
-            return Completable.create { [weak self] completable in
-                guard let self = self else {
-                    completable(.error(LinkNewDeviceError.unknownError))
-                    return Disposables.create {}
-                }
-                let export = self.accountAdapter.export(onRing: self.currentAccount?.id, password: password)
-                if export {
-                    completable(.completed)
-                } else {
-                    completable(.error(LinkNewDeviceError.unknownError))
-                }
-                return Disposables.create { }
+        return Completable.create { [weak self] completable in
+            guard let self = self else {
+                completable(.error(LinkNewDeviceError.unknownError))
+                return Disposables.create {}
             }
+            let export = self.accountAdapter.export(onRing: self.currentAccount?.id, password: password)
+            if export {
+                completable(.completed)
+            } else {
+                completable(.error(LinkNewDeviceError.unknownError))
+            }
+            return Disposables.create { }
+        }
     }
 
     func exportOnRingEnded(for account: String, state: Int, pin: String) {
@@ -861,8 +861,8 @@ class AccountsService: AccountAdapterDelegate {
         self.getAccountFromDaemon(fromAccountId: account)
             .subscribe(onSuccess: { [weak self] accountToUpdate in
                 guard let self = self, let accountURI = AccountModelHelper
-                    .init(withAccount: accountToUpdate).uri else {
-                        return
+                        .init(withAccount: accountToUpdate).uri else {
+                    return
                 }
                 _ = self.dbManager.saveAccountProfile(alias: name, photo: photo, accountId: account, accountURI: accountURI)
             })

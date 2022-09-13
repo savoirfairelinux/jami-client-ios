@@ -85,10 +85,10 @@ class SendFileViewModel: Stateable, ViewModel {
         let durationTimer = Observable<Int>
             .interval(Durations.oneSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .take(until: self.recordingState
-                .asObservable()
-                .filter { state in
-                    return state == .recorded
-                })
+                    .asObservable()
+                    .filter { state in
+                        return state == .recorded
+                    })
             .map({ interval -> String in
                 let seconds = interval % 60
                 let minutes = (interval / 60) % 60
@@ -168,8 +168,8 @@ class SendFileViewModel: Stateable, ViewModel {
                                                                           conversationID: conversation.id,
                                                                           isSwarm: self.conversation.isSwarm()) else { return }
         guard let name = self.videoService
-            .startLocalRecorder(audioOnly: audioOnly, path: url.path) else {
-                return
+                .startLocalRecorder(audioOnly: audioOnly, path: url.path) else {
+            return
         }
         recordingState.accept(.recording)
         fileName = name
@@ -179,7 +179,7 @@ class SendFileViewModel: Stateable, ViewModel {
         return Observable
             .combineLatest(playerReady.asObservable(),
                            readyToSend.asObservable()) {(playerReady, fileReady) in
-                            return (playerReady && fileReady)
+                return (playerReady && fileReady)
             }
     }()
 

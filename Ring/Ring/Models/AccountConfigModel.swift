@@ -71,7 +71,7 @@ class AccountConfigModel {
 
     /**
      logguer
-    */
+     */
     private let log = SwiftyBeaver.self
 
     /**

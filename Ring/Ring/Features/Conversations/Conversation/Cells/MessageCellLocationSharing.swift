@@ -118,7 +118,7 @@ class MessageCellLocationSharing: MessageCell {
     }()
 
     private func displayMapTile() {
-        //TODO: implement location map with a new API
+        // TODO: implement location map with a new API
         self.maplyViewController!.clearColor = UIColor.white
 
         // thirty fps if we can get it
@@ -181,7 +181,7 @@ extension MessageCellLocationSharing {
             } else {
                 marker.image = AvatarView(profileImageData: nil, username: username ?? "", size: 24).convertToImage()
             }
-             marker.size = CGSize(width: 24, height: 24)
+            marker.size = CGSize(width: 24, height: 24)
         }
 
         let maplyCoordonate = MaplyCoordinateMakeWithDegrees(Float(location.longitude), Float(location.latitude))

@@ -123,7 +123,7 @@ extension UIView {
 
     private func retrieveGradientColor(for anchor: GradientAnchor) -> UIColor {
         if let layer = self.layer.sublayers?[0] as? CAGradientLayer,
-            let colors = layer.colors as? [CGColor] {
+           let colors = layer.colors as? [CGColor] {
             if anchor == .start && !colors.isEmpty {
                 return UIColor(cgColor: colors[0])
             }
@@ -175,12 +175,12 @@ extension UIView {
                        options: [.curveEaseInOut,
                                  .autoreverse,
                                  .repeat],
-            animations: { [weak self] in
-                self?.alpha = 0.4
-            },
-            completion: { [weak self] _ in
-                self?.alpha = 1.0
-        })
+                       animations: { [weak self] in
+                        self?.alpha = 0.4
+                       },
+                       completion: { [weak self] _ in
+                        self?.alpha = 1.0
+                       })
     }
 
     func removeSubviews(recursive: Bool = false) {

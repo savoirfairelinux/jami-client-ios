@@ -45,7 +45,7 @@ enum GeneratedMessage: Int {
         if let intValue = Int(from) {
             self = GeneratedMessage(rawValue: intValue) ?? .unknown
         } else {
-            self =  .unknown
+            self = .unknown
         }
     }
     func toMessage(with duration: Int) -> String {
@@ -315,7 +315,7 @@ class DBManager {
                     guard let conversationID = try self?.getConversationsFor(contactUri: contactUri,
                                                                              createIfNotExists: true,
                                                                              dataBase: dataBase, accountId: accountId) else {
-                            throw DBBridgingError.saveMessageFailed
+                        throw DBBridgingError.saveMessageFailed
                     }
                     let result = self?.addMessageTo(conversation: conversationID, author: author,
                                                     interactionType: interactionType, message: message,
@@ -488,7 +488,7 @@ class DBManager {
             }
             return Disposables.create { }
         }
-   }
+    }
 
     func clearHistoryFor(accountId: String,
                          and participantUri: String,
@@ -505,13 +505,13 @@ class DBManager {
                     guard let conversationsId = try self.getConversationsFor(contactUri: participantUri,
                                                                              createIfNotExists: true,
                                                                              dataBase: dataBase, accountId: accountId) else {
-                            throw DBBridgingError.deleteConversationFailed
+                        throw DBBridgingError.deleteConversationFailed
                     }
                     guard let interactions = try self.interactionHepler
-                        .selectInteractionsForConversation(
-                            conv: conversationsId,
-                            dataBase: dataBase) else {
-                                throw DBBridgingError.deleteConversationFailed
+                            .selectInteractionsForConversation(
+                                conv: conversationsId,
+                                dataBase: dataBase) else {
+                        throw DBBridgingError.deleteConversationFailed
                     }
                     if !interactions.isEmpty {
                         if !self.interactionHepler
@@ -574,7 +574,7 @@ class DBManager {
 
     func accountVCard(for accountId: String) -> CNContact? {
         guard let path = self.dbConnections.accountProfilePath(accountId: accountId),
-            let data = FileManager.default.contents(atPath: path) else { return nil }
+              let data = FileManager.default.contents(atPath: path) else { return nil }
         return CNContactVCardSerialization.parseToVCard(data: data)
     }
 
@@ -618,15 +618,15 @@ class DBManager {
         var conversationsToReturn = [ConversationModel]()
 
         guard let conversations = try self.conversationHelper.selectAll(dataBase: dataBase),
-            !conversations.isEmpty else {
-                // if there is no conversation for account return empty list
-                return conversationsToReturn
+              !conversations.isEmpty else {
+            // if there is no conversation for account return empty list
+            return conversationsToReturn
         }
         for conversationID in conversations.map({ $0.id }) {
             guard let participants = try self.getParticipantsForConversation(conversationID: conversationID,
                                                                              dataBase: dataBase),
-                let participant = participants.first else {
-                    continue
+                  let participant = participants.first else {
+                continue
             }
             let type = participant.contains("ring:") ? URIType.ring : URIType.sip
             let uri = JamiURI.init(schema: type, infoHach: participant)
@@ -638,10 +638,10 @@ class DBManager {
             conversationModel.id = String(conversationID)
             var messages = [MessageModel]()
             guard let interactions = try self.interactionHepler
-                .selectInteractionsForConversation(
-                    conv: conversationID,
-                    dataBase: dataBase) else {
-                        continue
+                    .selectInteractionsForConversation(
+                        conv: conversationID,
+                        dataBase: dataBase) else {
+                continue
             }
             // let interaction = interactions[interactions.count - 1]
             for interaction in interactions {
@@ -653,7 +653,7 @@ class DBManager {
                     let isLater = conversationModel
                         .lastDisplayedMessage.id.isEmpty ||
                         conversationModel
-                            .lastDisplayedMessage.timestamp < message.receivedDate
+                        .lastDisplayedMessage.timestamp < message.receivedDate
                     if displayedMessage && isLater {
                         conversationModel
                             .lastDisplayedMessage = (message.id,
@@ -669,8 +669,8 @@ class DBManager {
 
     private func getParticipantsForConversation(conversationID: Int64, dataBase: Connection) throws -> [String]? {
         guard let conversations = try self.conversationHelper
-            .selectConversations(conversationId: conversationID,
-                                 dataBase: dataBase) else {
+                .selectConversations(conversationId: conversationID,
+                                     dataBase: dataBase) else {
             return nil
         }
         return conversations.map({ $0.participant })
@@ -686,7 +686,7 @@ class DBManager {
             return nil
         }
         let content = (interaction.type == InteractionType.call.rawValue
-        || interaction.type == InteractionType.contact.rawValue) ?
+                        || interaction.type == InteractionType.contact.rawValue) ?
             GeneratedMessage.init(from: interaction.body).toMessage(with: Int(interaction.duration))
             : interaction.body
         let date = Date(timeIntervalSince1970: TimeInterval(interaction.timestamp))
@@ -696,7 +696,7 @@ class DBManager {
                                    authorURI: author,
                                    incoming: interaction.incoming)
         let isTransfer = interaction.type == InteractionType.iTransfer.rawValue ||
-                            interaction.type == InteractionType.oTransfer.rawValue
+            interaction.type == InteractionType.oTransfer.rawValue
         message.type = InteractionType(rawValue: interaction.type)?.toMessageType() ?? .text
         if let status: InteractionStatus = InteractionStatus(rawValue: interaction.status) {
             if isTransfer {
@@ -739,9 +739,9 @@ class DBManager {
             self.dbConnections.createAccountfolder(for: accountId)
         }
         guard let profilePath = self.dbConnections
-            .contactProfilePath(accountId: accountId,
-                                profileURI: profileUri,
-                                createifNotExists: createIfNotExists) else { return nil }
+                .contactProfilePath(accountId: accountId,
+                                    profileURI: profileUri,
+                                    createifNotExists: createIfNotExists) else { return nil }
         if self.dbConnections
             .isContactProfileExists(accountId: accountId,
                                     profileURI: profileUri) || !createIfNotExists {
@@ -754,8 +754,8 @@ class DBManager {
 
     private func getProfileFromPath(path: String) -> Profile? {
         guard let data = FileManager.default.contents(atPath: path),
-            let vCard = CNContactVCardSerialization.parseToVCard(data: data) else {
-                return nil
+              let vCard = CNContactVCardSerialization.parseToVCard(data: data) else {
+            return nil
         }
         let profileURI = vCard.phoneNumbers.isEmpty ? "" : vCard.phoneNumbers[0].value.stringValue
         let type = profileURI.contains("ring") ? ProfileType.ring : ProfileType.sip
@@ -788,7 +788,7 @@ class DBManager {
         }
         if let contactConversations = try self.conversationHelper
             .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase),
-            let conv = contactConversations.first {
+           let conv = contactConversations.first {
             return conv.id
         }
         return nil
@@ -798,7 +798,7 @@ class DBManager {
                                      createIfNotExists: Bool, dataBase: Connection, accountId: String) throws -> Int64? {
         if let contactConversations = try self.conversationHelper
             .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase),
-            let conv = contactConversations.first {
+           let conv = contactConversations.first {
             return conv.id
         }
         if !createIfNotExists {
@@ -806,7 +806,7 @@ class DBManager {
         }
         let conversationID = Int64(arc4random_uniform(10000000))
         do {
-        _ = try self.getProfile(for: contactUri, createIfNotExists: true, accountId: accountId)
+            _ = try self.getProfile(for: contactUri, createIfNotExists: true, accountId: accountId)
         } catch {}
         let conversationForContact = Conversation(conversationID, contactUri)
         if !self.conversationHelper.insert(item: conversationForContact, dataBase: dataBase) {
@@ -842,8 +842,8 @@ class DBManager {
                 let conversationId = try self.getConversationsFor(contactUri: peerUri, createIfNotExists: true, dataBase: dataBase, accountId: accountId)
 
                 let predicat: Expression<Bool> = (self.interactionHepler.conversation == conversationId! &&
-                                                  self.interactionHepler.type == InteractionType.location.rawValue &&
-                                                  self.interactionHepler.incoming == incoming)
+                                                    self.interactionHepler.type == InteractionType.location.rawValue &&
+                                                    self.interactionHepler.incoming == incoming)
 
                 _ = try self.interactionHepler.deleteInteractions(where: predicat, dataBase: dataBase)
                 completable(.completed)

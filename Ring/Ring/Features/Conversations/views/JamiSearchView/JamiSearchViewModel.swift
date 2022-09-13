@@ -1,23 +1,23 @@
 /*
-*  Copyright (C) 2020 Savoir-faire Linux Inc.
-*
-*  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
-*  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
-*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 3 of the License, or
-*  (at your option) any later version.
-*
-*  This program is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program; if not, write to the Free Software
-*  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
-*/
+ *  Copyright (C) 2020 Savoir-faire Linux Inc.
+ *
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
 
 import Foundation
 import RxSwift
@@ -66,7 +66,7 @@ class JamiSearchViewModel {
                                 sections.append(ConversationSection(header: L10n.Smartlist.conversations, items: filteredResults))
                             }
                             return sections
-            })
+                           })
             .observe(on: MainScheduler.instance)
     }()
 
@@ -108,14 +108,14 @@ class JamiSearchViewModel {
                 guard let self = self else { return }
                 if lookupResponse.state == .found && (lookupResponse.name == self.searchBarText.value || lookupResponse.address == self.searchBarText.value) {
                     if let conversation = self.dataSource.conversationViewModels
-                                                          .filter({ conversationViewModel in
-                                                                    conversationViewModel.conversation.value.containsParticipant(participant: lookupResponse.address) }).first {
+                        .filter({ conversationViewModel in
+                                    conversationViewModel.conversation.value.containsParticipant(participant: lookupResponse.address) }).first {
                         self.contactFoundConversation.accept(conversation)
                         self.dataSource.conversationFound(conversation: conversation, name: self.searchBarText.value)
 
                     } else if !(self.contactFoundConversation.value?.conversation.value.containsParticipant(participant: lookupResponse.address) ?? false),
-                        let account = self.accountsService.currentAccount,
-                        let injectionBag = injectionBag {
+                              let account = self.accountsService.currentAccount,
+                              let injectionBag = injectionBag {
 
                         let uri = JamiURI.init(schema: URIType.ring, infoHach: lookupResponse.address)
                         // Create new converation
@@ -151,7 +151,7 @@ class JamiSearchViewModel {
                     guard let username = dictionary["username"], let firstName = dictionary["firstName"],
                           let lastName = dictionary["lastName"], let organization = dictionary["organization"],
                           let jamiId = dictionary["id"] ?? dictionary["jamiId"], let base64Encoded = dictionary["profilePicture"]
-                        else { return nil }
+                    else { return nil }
 
                     return UserSearchModel(username: username, firstName: firstName,
                                            lastName: lastName, organization: organization, jamiId: jamiId,
@@ -208,11 +208,11 @@ class JamiSearchViewModel {
         // Filter conversations
         let filteredConversations =
             self.dataSource.conversationViewModels
-                .filter({conversationViewModel in
-                    conversationViewModel.conversation.value.accountId == currentAccount.id &&
-                        (conversationViewModel.conversation.value.containsParticipant(participant: text) ||
-                            (conversationViewModel.displayName.value ?? "").capitalized.contains(text.capitalized))
-                })
+            .filter({conversationViewModel in
+                conversationViewModel.conversation.value.accountId == currentAccount.id &&
+                    (conversationViewModel.conversation.value.containsParticipant(participant: text) ||
+                        (conversationViewModel.displayName.value ?? "").capitalized.contains(text.capitalized))
+            })
 
         if !filteredConversations.isEmpty {
             self.filteredResults.accept(filteredConversations)

@@ -42,9 +42,9 @@ class AccountCredentialsModel {
      Constructor.
 
      - Parameters:
-        - username: the username of the account
-        - password: the password of the account
-        - accountRealm : the realm of the account
+     - username: the username of the account
+     - password: the password of the account
+     - accountRealm : the realm of the account
      */
     convenience init(withUsername username: String, password: String, accountRealm: String) {
         self.init()

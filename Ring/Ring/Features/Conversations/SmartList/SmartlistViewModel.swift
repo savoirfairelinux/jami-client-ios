@@ -64,7 +64,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                                 return !convf.items.isEmpty
                             }
                             return false
-            })
+                           })
             .observe(on: MainScheduler.instance)
     }()
 
@@ -107,8 +107,8 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         return profileImageForCurrentAccount.share()
             .map({ profile in
                 if let photo = profile.photo,
-                    let data = NSData(base64Encoded: photo,
-                                      options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                   let data = NSData(base64Encoded: photo,
+                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
                     guard let image = UIImage(data: data) else {
                         return UIImage(asset: Asset.icContactPicture)!
                     }
@@ -122,7 +122,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 return UIImage.defaultJamiAvatarFor(profileName: profileName, account: account)
             })
             .startWith(UIImage(asset: Asset.icContactPicture)!)
-        }()
+    }()
     lazy var accountName: Observable<String> = { [weak self] in
         return profileImageForCurrentAccount.share()
             .map({ profile in
@@ -135,7 +135,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 return account.registeredName.isEmpty ? account.jamiId : account.registeredName
             })
             .startWith("")
-        }()
+    }()
 
     lazy var conversations: Observable<[ConversationSection]> = { [weak self] in
         guard let self = self else { return Observable.empty() }
@@ -179,7 +179,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             .map({ conversationsViewModels in
                 return [ConversationSection(header: "", items: conversationsViewModels)]
             })
-        }()
+    }()
 
     lazy var unreadMessages: Observable<Int> = {[weak self] in
         guard let self = self else {
@@ -219,9 +219,9 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                            self.unhandeledRequests,
                            resultSelector: {(messages, requests) -> BageValues in
                             return (messages, requests)
-            })
+                           })
             .observe(on: MainScheduler.instance)
-        }()
+    }()
 
     var conversationsForCurrentAccount = PublishSubject<[ConversationModel]>()
 
@@ -333,7 +333,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
-        conversationViewModel))
+                                                                        conversationViewModel))
     }
 
     func showAccountSettings() {
@@ -348,8 +348,8 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     func showSipConversation(withNumber number: String) {
         guard let account = self.accountsService
-            .currentAccount else {
-                return
+                .currentAccount else {
+            return
         }
         let uri = JamiURI.init(schema: URIType.sip,
                                infoHach: number,
@@ -362,8 +362,8 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
         self.stateSubject
             .onNext(ConversationState
-                .conversationDetail(conversationViewModel:
-                    newConversation))
+                        .conversationDetail(conversationViewModel:
+                                                newConversation))
     }
 
     func showQRCode() {

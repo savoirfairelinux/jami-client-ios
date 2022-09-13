@@ -61,9 +61,9 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, GeneralSettingsSection.Item)
             -> UITableViewCell = {
                 ( dataSource: TableViewSectionedDataSource<GeneralSettingsSection>,
-                _: UITableView,
-                indexPath: IndexPath,
-                _: GeneralSettingsSection.Item) in
+                  _: UITableView,
+                  indexPath: IndexPath,
+                  _: GeneralSettingsSection.Item) in
                 switch dataSource[indexPath] {
 
                 case .hardwareAcceleration:
@@ -96,7 +96,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                     cell.heightAnchor.constraint(equalToConstant: 35).isActive = true
                     return cell
                 }
-        }
+            }
         let settingsItemDataSource = RxTableViewSectionedReloadDataSource<GeneralSettingsSection>(configureCell: configureCell)
         self.viewModel.generalSettings
             .bind(to: settingsTable.rx.items(dataSource: settingsItemDataSource))

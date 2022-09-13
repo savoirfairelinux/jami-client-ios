@@ -15,13 +15,13 @@ extension UnicodeScalar {
 
         switch value {
         case 0x1F000...0x1FFFF, // Emoticons
-        0x2600...0x26FF,   // Misc symbols
-        0x2700...0x27BF,   // Dingbats
-        0xFE00...0xFE0F,   // Variation Selectors
-        127000...127600, // Various asian characters
-        65024...65039, // Variation selector
-        9100...9300, // Misc items
-        8400...8447: // Combining Diacritical Marks for Symbols
+             0x2600...0x26FF,   // Misc symbols
+             0x2700...0x27BF,   // Dingbats
+             0xFE00...0xFE0F,   // Variation Selectors
+             127000...127600, // Various asian characters
+             65024...65039, // Variation selector
+             9100...9300, // Misc items
+             8400...8447: // Combining Diacritical Marks for Symbols
             return true
 
         default: return false

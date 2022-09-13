@@ -63,7 +63,7 @@ class LocalNotificationsHelper {
     func presentMessageNotification(data: [String: String]) {
         guard let title = data[Constants.NotificationUserInfoKeys.name.rawValue],
               let body = data[Constants.NotificationUserInfoKeys.messageContent.rawValue] else {
-                return
+            return
         }
         let content = UNMutableNotificationContent()
         content.title = title
@@ -99,9 +99,9 @@ class LocalNotificationsHelper {
     func cancelCall(timer: Timer) {
         guard let info = timer.userInfo as? [String: String],
               let callID = info[Constants.NotificationUserInfoKeys.callID.rawValue] else {
-                self.timer?.invalidate()
-                self.timer = nil
-                return
+            self.timer?.invalidate()
+            self.timer = nil
+            return
         }
         var data = [String: String]()
         data[Constants.NotificationUserInfoKeys.callID.rawValue] = callID

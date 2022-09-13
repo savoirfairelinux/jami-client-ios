@@ -299,7 +299,7 @@ class ConversationsService {
             }) {
                 moveInteraction(interactionId: newMessage.id, after: newMessage.parentId, messages: &currentInteractions)
                 if let ind = conversation.unorderedInteractions.firstIndex(of: newMessage.parentId) {
-                conversation.unorderedInteractions.remove(at: ind)
+                    conversation.unorderedInteractions.remove(at: ind)
                 }
             }
         }
@@ -472,14 +472,14 @@ class ConversationsService {
                         /// for location sharing we should just update message if if exists
                         if message.type == .location,
                            let existingMessage = conversation.messages.value.filter({ $0.type == .location && $0.incoming == message.incoming }).first {
-                               existingMessage.content = content
-                               conversation.messages.accept(conversation.messages.value)
-                           } else {
-                               message.content = content
-                               message.id = savedMessage.messageID
-                               conversation.appendNonSwarm(message: message)
-                               self.sortIfNeeded()
-                           }
+                            existingMessage.content = content
+                            conversation.messages.accept(conversation.messages.value)
+                        } else {
+                            message.content = content
+                            message.id = savedMessage.messageID
+                            conversation.appendNonSwarm(message: message)
+                            self.sortIfNeeded()
+                        }
                     }
                     completable(.completed)
                 }, onError: { error in

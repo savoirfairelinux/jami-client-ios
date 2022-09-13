@@ -424,7 +424,7 @@ extension NotificationService {
 
         guard let data = FileManager.default.contents(atPath: profilePath),
               let vCards = try? CNContactVCardSerialization.contacts(with: data),
-                  let vCard = vCards.first else { return nil }
+              let vCard = vCards.first else { return nil }
         return vCard.familyName.isEmpty ? vCard.givenName : vCard.familyName
     }
 }

@@ -47,11 +47,11 @@ enum StopDaemonError: Error {
 /**
  A service managing the daemon main features and lifecycle.
  Its responsabilities:
-    - start the deamon
-    - stop the daemon
-    - orchestrate the poll events calls of the deamon
+ - start the deamon
+ - stop the daemon
+ - orchestrate the poll events calls of the deamon
  Its callbacks:
-    - does not currently expose any signal or callback of any kind.
+ - does not currently expose any signal or callback of any kind.
  */
 class DaemonService {
     // MARK: Private members

@@ -121,7 +121,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             sleep(UInt32(0.5))
             DispatchQueue.main.async { [weak self] in
                 guard let self = self,
-                UIDevice.current.portraitOrLandscape else { return }
+                      UIDevice.current.portraitOrLandscape else { return }
                 self.updateAccountItemSize()
                 let messages: Int = Int(self.conversationBadge.title(for: .normal) ?? "0") ?? 0
                 let requests: Int = Int(self.requestsBadge.title(for: .normal) ?? "0") ?? 0
@@ -390,8 +390,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 var frame = accountName.frame
                 frame.size.width = min(frame.size.width, maxWidth - 70)
                 accountName.frame = frame
-        })
-        .disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         accountView = UIView(frame: CGRect(x: 0, y: 0, width: maxWidth, height: size))
         accountView.addSubview(accountButton)
         accountView.addSubview(accountName)
@@ -402,8 +402,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .customView?
             .translatesAutoresizingMaskIntoConstraints = false
         accountButtonItem.customView?
-                .heightAnchor
-                .constraint(equalToConstant: size).isActive = true
+            .heightAnchor
+            .constraint(equalToConstant: size).isActive = true
         accountWidth = accountView
             .widthAnchor
             .constraint(equalToConstant: maxWidth)
@@ -535,8 +535,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             dateFormatter.dateFormat = "YYYYMMdd"
             let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as? String ?? "Info.plist"
             if let infoPath = Bundle.main.path(forResource: bundleName, ofType: nil),
-                let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
-                let infoDate = infoAttr[FileAttributeKey.creationDate] as? Date {
+               let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
+               let infoDate = infoAttr[FileAttributeKey.creationDate] as? Date {
                 return dateFormatter.string(from: infoDate)
             }
             return dateDefault
@@ -602,7 +602,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .bind(to: accounPicker.rx.items(adapter: accountsAdapter))
             .disposed(by: disposeBag)
         if let account = self.viewModel.currentAccount,
-            let row = accountsAdapter.rowForAccountId(account: account) {
+           let row = accountsAdapter.rowForAccountId(account: account) {
             accounPicker.selectRow(row, inComponent: 0, animated: true)
             dialpadButtonShadow.isHidden = account.type == AccountType.ring
         }
@@ -611,7 +611,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .subscribe(onNext: { [weak self] currentAccount in
                 guard let self = self else { return }
                 if let account = currentAccount,
-                    let row = self.accountsAdapter.rowForAccountId(account: account) {
+                   let row = self.accountsAdapter.rowForAccountId(account: account) {
                     self.accounPicker.selectRow(row, inComponent: 0, animated: true)
                 }
             })
@@ -683,7 +683,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
                 cell.configureFromItem(conversationItem)
                 return cell
-        }
+            }
 
         // Create DataSources for conversations and filtered conversations
         let conversationsDataSource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)

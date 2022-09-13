@@ -34,7 +34,7 @@ extension Reactive where Base: UIView {
                 UIView.animate(withDuration: 0.3, delay: 0.5, options: .curveEaseOut,
                                animations: { view.alpha = 1 },
                                completion: { _ in view.isHidden = false
-                })
+                               })
             }
         }.asObserver()
     }

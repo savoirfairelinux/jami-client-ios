@@ -132,8 +132,8 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         viewModel.accept(withItem: item)
             .subscribe(onError: { [weak self] error in
                 self?.log.error("Accept trust request failed")
-                }, onCompleted: { [weak self] in
-                    self?.log.info("Accept trust request done")
+            }, onCompleted: { [weak self] in
+                self?.log.info("Accept trust request done")
             })
             .disposed(by: self.disposeBag)
     }
@@ -142,8 +142,8 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         viewModel.discard(withItem: item)
             .subscribe(onError: { [weak self] error in
                 self?.log.error("Discard trust request failed")
-                }, onCompleted: { [weak self] in
-                    self?.log.info("Discard trust request done")
+            }, onCompleted: { [weak self] in
+                self?.log.info("Discard trust request done")
             })
             .disposed(by: self.disposeBag)
     }
@@ -152,8 +152,8 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         viewModel.ban(withItem: item)
             .subscribe(onError: { [weak self] error in
                 self?.log.error("Ban trust request failed")
-                }, onCompleted: { [weak self] in
-                    self?.log.info("Ban trust request done")
+            }, onCompleted: { [weak self] in
+                self?.log.info("Ban trust request done")
             })
             .disposed(by: self.disposeBag)
     }

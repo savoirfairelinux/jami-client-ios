@@ -70,8 +70,8 @@ extension CNContactVCardSerialization {
         if let compressionSize = compressedSize {
             // compress image before sending vCard
             guard let compressedImage = UIImage(data: image)?
-                .convertToData(ofMaxSize: compressionSize) else {
-                    return vCardString.data(using: encoding)
+                    .convertToData(ofMaxSize: compressionSize) else {
+                return vCardString.data(using: encoding)
             }
 
             image = compressedImage
@@ -90,7 +90,7 @@ extension CNContactVCardSerialization {
         do {
             try ObjCHandler.try {
                 guard let vCards = try? CNContactVCardSerialization.contacts(with: data),
-                    let vCard = vCards.first else { return }
+                      let vCard = vCards.first else { return }
                 var stringData = String(data: data, encoding: .utf16)
                 if stringData == nil {
                     stringData = String(data: data, encoding: .utf8)

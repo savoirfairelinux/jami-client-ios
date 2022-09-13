@@ -51,6 +51,6 @@ class ScanViewModel: ViewModel, Stateable {
 
     func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
-            conversationViewModel))
+                                                                        conversationViewModel))
     }
 }

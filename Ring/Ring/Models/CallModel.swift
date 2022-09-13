@@ -35,15 +35,15 @@ enum CallState: String {
 
     func toString() -> String {
         switch self {
-        case .connecting :
+        case .connecting:
             return L10n.Calls.connecting
-        case .ringing :
+        case .ringing:
             return L10n.Calls.ringing
-        case .over :
+        case .over:
             return L10n.Calls.callFinished
-        case .unknown :
+        case .unknown:
             return L10n.Calls.searching
-        default :
+        default:
             return ""
         }
     }

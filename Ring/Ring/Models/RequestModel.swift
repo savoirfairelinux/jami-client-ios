@@ -97,7 +97,7 @@ class RequestModel {
                 self.participants.append(ConversationParticipant(jamiId: from))
             }
             if let title = dictionary[RequestKey.title.rawValue] {
-               self.name = title
+                self.name = title
             }
             if let avatar = dictionary[RequestKey.avatar.rawValue], !avatar.isEmpty {
                 self.avatar = Data(base64Encoded: avatar,
