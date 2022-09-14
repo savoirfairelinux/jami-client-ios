@@ -22,6 +22,29 @@
       },
       "revId": "66c15be8f7be713b2d2d96492253f053b492c330",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d7e315_415c150f",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-14T13:36:35Z",
+      "side": 1,
+      "message": "we do not need to keep subscription after name found. We could add .take(1) before .subscribe to complete.",
+      "range": {
+        "startLine": 175,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 66
+      },
+      "revId": "66c15be8f7be713b2d2d96492253f053b492c330",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
