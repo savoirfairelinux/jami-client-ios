@@ -1,9 +1,10 @@
 [main]
 host = https://www.transifex.com
 
-[jami.localizablestrings]
+[o:savoirfairelinux:p:jami:r:localizablestrings]
 file_filter = Ring/Resources/<lang>.lproj/Localizable.strings
 source_file = Ring/Resources/en.lproj/Localizable.strings
 source_lang = en
-type = STRINGS
-lang_map = cs_CZ: cs-CZ, da_DK: da-DK, de_DE: de-DE, fa_IR: fa-IR, fr_BE: fr-BE, fr_CA: fr-CA, fr_CH: fr-CH, fr_FR: fr-FR, hi_IN: hi-IN, it_IT: it-IT, ko_KR: ko-KR, nl_NL: nl-NL, pt_BR: pt-BR, ru_RU: ru-RU, sk_SK: sk-SK, sq_AL: sq-AL, zh_CN: zh-Hans-CN, zh_TW: zh-Hans, ro_RO: ro-RO
+type        = STRINGS
+lang_map    = fa_IR: fa-IR, zh_CN: zh-Hans-CN, ko_KR: ko-KR, pt_BR: pt-BR, sq_AL: sq-AL, cs_CZ: cs-CZ, de_DE: de-DE, it_IT: it-IT, ru_RU: ru-RU, sk_SK: sk-SK, ro_RO: ro-RO, fr_BE: fr-BE, fr_CA: fr-CA, fr_FR: fr-FR, nl_NL: nl-NL, zh_TW: zh-Hans, da_DK: da-DK, fr_CH: fr-CH, hi_IN: hi-IN
+
