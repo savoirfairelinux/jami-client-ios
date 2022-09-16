@@ -19,6 +19,7 @@
  */
 import Foundation
 import Contacts
+import CoreGraphics
 /*
  *This extension adds fields UID and PHOTO to vCard  provided by default
  *It also provides image compression that mostly could be useful when sending contact request
@@ -56,17 +57,15 @@ extension CNContactVCardSerialization {
 
         var photofieldName = VCardFields.photoPNG
 
-        // if we need smallest image first scale it and than compress
+        //  if we need smallest image first scale it and than compress
         var scaledImage: UIImage?
         if compressedSize != nil {
             scaledImage = UIImage(data: image)?
-                .convert(toSize: CGSize(width: 200.0, height: 200.0), scale: 1)
+                .resizeImage(imageSize: UIImage(data: image)!.size, targetSize: CGSize(width: 400.0, height: 400.0))
         }
-
         if let scaledImage = scaledImage, let data = scaledImage.pngData() {
             image = data
         }
-
         if let compressionSize = compressedSize {
             // compress image before sending vCard
             guard let compressedImage = UIImage(data: image)?
