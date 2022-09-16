@@ -22,10 +22,9 @@ import Foundation
 import UIKit
 
 class AvatarView: UIView {
-
     init(profileImageData: Data?,
          username: String,
-         size: CGFloat = 32.0,
+         size: CGFloat = 50.0,
          offset: CGPoint = CGPoint(x: 0.0, y: 0.0),
          labelFontSize: CGFloat? = nil) {
 
@@ -37,7 +36,11 @@ class AvatarView: UIView {
         let avatarImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: size, height: size))
         if let imageData = profileImageData, !imageData.isEmpty {
             if let image = UIImage(data: imageData) {
-                (avatarImageView as UIImageView).image = image.circleMasked
+                (avatarImageView as UIImageView).image = image
+                avatarImageView.layer.masksToBounds = false
+                avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
+                avatarImageView.clipsToBounds = true
+                avatarImageView.contentMode = .scaleAspectFill
                 self.addSubview(avatarImageView)
             }
         } else {
