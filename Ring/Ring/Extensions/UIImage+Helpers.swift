@@ -70,9 +70,21 @@ extension UIImage {
     }
 
     // convenience function in UIImage extension to resize a given image
-    func convert(toSize size: CGSize, scale: CGFloat) -> UIImage {
-        let imgRect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: size)
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+    func convert(toSize targetSize: CGSize, scale: CGFloat) -> UIImage {
+        let widthRatio  = targetSize.width / size.width
+        let heightRatio = targetSize.height / size.height
+
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if widthRatio > heightRatio {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+
+        // This is the rect that we've calculated out and this is what is actually used below
+        let imgRect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: newSize)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, scale)
         self.draw(in: imgRect)
         guard let copied = UIGraphicsGetImageFromCurrentImageContext() else {
             return self

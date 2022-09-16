@@ -60,9 +60,8 @@ extension CNContactVCardSerialization {
         var scaledImage: UIImage?
         if compressedSize != nil {
             scaledImage = UIImage(data: image)?
-                .convert(toSize: CGSize(width: 200.0, height: 200.0), scale: 1)
+                .convert(toSize: CGSize(width: 400.0, height: 400.0), scale: 1.0)
         }
-
         if let scaledImage = scaledImage, let data = scaledImage.pngData() {
             image = data
         }
