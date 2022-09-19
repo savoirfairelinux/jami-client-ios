@@ -16,6 +16,40 @@
       "message": "For the Subscription I have added .take(1) and Yes RegisteredName doesn\u0027t exist in response",
       "revId": "6763ea3a5bb38ece47980252330114bc7289b48a",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f6eeac7_863ca00b",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-19T14:29:56Z",
+      "side": 1,
+      "message": "for lookup we should use account that receiving a call(see line 136) instead of self.accountService.currentAccount",
+      "revId": "6763ea3a5bb38ece47980252330114bc7289b48a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae4ae637_1bf120bb",
+        "filename": "Ring/Ring/Services/CallsProviderDelegate.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-19T14:29:56Z",
+      "side": 1,
+      "message": "parameter name \"flag\" is not clear. We could use videoFlag, or hasVideo, etc., to indicate that this parameter is responsible for video",
+      "revId": "6763ea3a5bb38ece47980252330114bc7289b48a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
