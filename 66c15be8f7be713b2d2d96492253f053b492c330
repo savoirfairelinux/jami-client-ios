@@ -48,6 +48,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc5c2c33_6afc9936",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-19T18:02:51Z",
+      "side": 1,
+      "message": "Yes call.registeredName doesn\u0027t exists",
+      "parentUuid": "7c5c5d06_e7c500e2",
+      "range": {
+        "startLine": 170,
+        "startChar": 13,
+        "endLine": 170,
+        "endChar": 24
+      },
+      "revId": "66c15be8f7be713b2d2d96492253f053b492c330",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4d7e315_415c150f",
