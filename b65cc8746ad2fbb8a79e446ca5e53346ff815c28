@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0206823b_84a7a747",
+        "filename": "Ring/Ring/Extensions/CNContactVCardSerialization+Helpers.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-19T16:33:06Z",
+      "side": 1,
+      "message": "Removed...",
+      "parentUuid": "acaefa87_9df3b9b0",
+      "revId": "b65cc8746ad2fbb8a79e446ca5e53346ff815c28",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f41aa9aa_4208eded",
         "filename": "Ring/Ring/Extensions/CNContactVCardSerialization+Helpers.swift",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2022-09-19T14:49:42Z",
       "side": 1,
       "message": "we need to fix existing function rather then create a new one",
+      "revId": "b65cc8746ad2fbb8a79e446ca5e53346ff815c28",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c99237b_7e8089a9",
+        "filename": "Ring/Ring/Extensions/CNContactVCardSerialization+Helpers.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-19T16:33:06Z",
+      "side": 1,
+      "message": "Yes...Changes has been made in existing function.",
+      "parentUuid": "f41aa9aa_4208eded",
       "revId": "b65cc8746ad2fbb8a79e446ca5e53346ff815c28",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac0bbe0e_05485229",
+        "filename": "Ring/Ring/Extensions/CNContactVCardSerialization+Helpers.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-19T16:33:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d0d6fbd_979fdf22",
+      "revId": "b65cc8746ad2fbb8a79e446ca5e53346ff815c28",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2268e4b4_0ef234d3",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-09-19T14:49:42Z",
       "side": 1,
       "message": "is it necessary change?",
+      "revId": "b65cc8746ad2fbb8a79e446ca5e53346ff815c28",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fb64f5a_4a9e07cc",
+        "filename": "Ring/Ring/Helpers/AvatarView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-19T16:33:06Z",
+      "side": 1,
+      "message": "Updated size to original size which is 32.0",
+      "parentUuid": "2268e4b4_0ef234d3",
       "revId": "b65cc8746ad2fbb8a79e446ca5e53346ff815c28",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
