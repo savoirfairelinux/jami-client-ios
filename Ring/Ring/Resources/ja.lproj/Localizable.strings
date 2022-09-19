@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "会話";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "アカウント設定";
 "global.ok" = "わかった";
 "global.close" = "閉じる";
 "global.share" = "共有";
@@ -35,22 +35,22 @@
 
 // Smartlist
 "smartlist.yesterday" = "昨日";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "公開ディレクトリー";
 "smartlist.conversations" = "会話";
 "smartlist.searching" = "検索中...";
 "smartlist.noResults" = "検索結果はありません";
 "smartlist.noConversation" = "会話はありません";
 "smartlist.searchBarPlaceholder" = "名前を入力...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "新規または既存の連絡先を検索…";
 "smartlist.noNetworkConnectivity" = "ネットワーク接続がありません";
 "smartlist.cellularAccess" = "設定から写真へのアクセスが許可されていることを確認してください";
 "smartlist.accountsTitle" = "アカウント";
 "smartlist.addAccountButton" = "+ アカウントを追加";
-"smartlist.noNumber" = "Selected contact does not have any number";
+"smartlist.noNumber" = "この連絡先には番号が登録されていません";
 "smartlist.selectOneNumber" = "Select one of the numbers";
 "smartlist.invitations" = "招待";
-"smartlist.accountSettings" = "Account Settings";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.accountSettings" = "アカウント設定";
+"smartlist.advancedSettings" = "詳細設定";
 "smartlist.aboutJami" = "Jamiについて";
 
 //Conversation
@@ -59,11 +59,11 @@
 "conversation.explanationReceivingLocationFrom" = "現在地を受信している相手: ";
 "conversation.errorSavingImage" = "画像一覧に画像を保存できませんでした";
 "conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
+"conversation.requestMessage" = "こんにちは\n会話に参加しませんか？";
+"conversation.notContact" = "%sは連絡先に未登録です ";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationTitle" = "会話への参加が許可されました";
+"conversation.synchronizationMessage" = "会話を同期するために%sの接続を待っています";
 
 //Invitations
 "invitations.noInvitations" = "招待はありません";
@@ -83,7 +83,7 @@
 "createProfile.title" = "個人情報を設定する";
 "createProfile.enterNameLabel" = "表示名を入力";
 "createProfile.enterNamePlaceholder" = "名前を入力";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
+"createProfile.subtitle" = "プロフィール情報は連絡先と共有されます。設定の変更はいつでも可能です。";
 "createProfile.createYourAvatar" = "アバターを作成";
 
 //Create Account form
@@ -106,9 +106,9 @@
 "createAccount.EnableNotifications" = "通知";
 "createAccount.Recommended" = "(推奨)";
 "createAccount.UsernameNotRegisteredTitle" = "ネットワークエラー";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
+"createAccount.UsernameNotRegisteredMessage" = "アカウントは作成されましたが、ユーザー名がまだ登録されていません";
 "createAccount.timeoutTitle" = "アカウントを作成しました";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.timeoutMessage" = "ユーザー名を登録しています... しばらくお待ち下さい。";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "アカウントを関連付けています";
@@ -130,7 +130,7 @@
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "アカウントが見つかりません";
-"alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
+"alerts.accountCannotBeFoundMessage" = "Jamiネットワーク上でアカウントが見つかりませんでした。 Jami接続する既存のデバイスから正しい認証情報がエクスポートされたことを確認してください。";
 "alerts.accountAddedTitle" = "アカウントを追加しました";
 "alerts.accountNoNetworkTitle" = "ネットワークに接続できません";
 "alerts.accountNoNetworkMessage" = "Jamiが分散ネットワークに接続できなかったためアカウントを追加できませんでした。デバイスのネットワーク接続を確認してください。";
@@ -140,29 +140,29 @@
 "alerts.profileUploadPhoto" = "写真のアップロード";
 "alerts.profileCancelPhoto" = "キャンセル";
 "alerts.accountLinkedTitle" = "アカウントをリンクしています";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "Jami起動中にエラーが発生しました";
 "alerts.dbFailedMessage" = "アプリケーションを終了し、起動し直してください";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
+"alerts.confirmBlockContact" = "本当にこの連絡先をブロックしますか？ブロックするとこの連絡先との会話履歴が永久に削除されます。";
 "alerts.confirmBlockContactTitle" = "連絡先をブロック";
 "alerts.confirmDeleteConversation" = "この会話を完全に削除してもよろしいですか？";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
+"alerts.confirmDeleteConversationFromContact" = "本当にこの連絡先との会話履歴を削除しても良いですか？";
 "alerts.confirmDeleteConversationTitle" = "会話を消去";
 "alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
 "alerts.confirmClearConversationTitle" = "会話履歴を削除";
 "alerts.noMediaPermissionsTitle" = "Media permission not granted";
 "alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
 "alerts.noLocationPermissionsTitle" = "Access to location not granted";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.errorWrongCredentials" = "ご指定のアカウント管理機能に接続できません。資格情報をご確認ください。";
 "alerts.recordVideoMessage" = "ビデオメッセージを録画";
 "alerts.recordAudioMessage" = "音声メッセージを録音";
 "alerts.uploadFile" = "ファイルをアップロード";
 "alerts.uploadPhoto" = "Upload photo or movie";
 "alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
 "alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
+"alerts.alreadylocationSharing" = "このユーザーと既に位置情報を共有済みです";
+"alerts.locationSharingDurationTitle" = "いつまで位置情報を共有しますか？";
+"alerts.locationSharingDuration10min" = "10分";
+"alerts.locationSharingDuration1hour" = "1時間";
 "alerts.mapInformation" = "地図情報";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "詳細情報";
@@ -171,7 +171,7 @@
 "actions.blockAction" = "ブロック";
 "actions.deleteAction" = "削除";
 "actions.cancelAction" = "キャンセル";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "クリア";
 "actions.backAction" = "戻る";
 "actions.doneAction" = "完了";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
@@ -179,7 +179,7 @@
 "alerts.incomingCallButtonIgnore" = "無視";
 "actions.startAudioCall" = "  音声通話";
 "actions.startVideoCall" = "  ビデオ通話";
-"actions.goToSettings" = "Go to Settings";
+"actions.goToSettings" = "設定へ移動";
 "actions.stopLocationSharing" = "共有を停止";
 
 //Calls
@@ -192,12 +192,12 @@
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "通話終了";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
+"calls.maximize" = "最大";
+"calls.minimize" = "最小";
 "calls.setModerator" = "set moderator";
 "calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
+"calls.muteAudio" = "ミュート";
+"calls.unmuteAudio" = "ミュート解除";
 "calls.lowerHand" = "lower hand";
 
 //Account Page
@@ -205,29 +205,29 @@
 "accountPage.settingsHeader" = "設定";
 "accountPage.username" = "ユーザー名";
 "accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
+"accountPage.credentialsHeader" = "アカウント詳細";
 "accountPage.enableProxy" = "プロキシを有効にする";
 "accountPage.blockedContacts" = "着信拒否した連絡先";
-"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.unblockContact" = "ブロック解除";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "プロキシを有効にする";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.noProxyExplanationLabel" = "お使いの端末のプロキシを無効にすると通知が受取れません";
 "accountPage.saveProxyAddress" = "保存";
 "accountPage.proxyPaceholder" = "プロキシアドレス";
 "accountPage.enableNotifications" = "通知を有効化";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertBody" = "通知を有効にするため、プロキシを有効にしてください。";
 "accountPage.revokeDeviceTitle" = "デバイスを取り消し";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceMessage" = "本当にこの端末を無効にしますか？この操作は取り消せません。";
 "accountPage.revokeDeviceButton" = "破棄";
 "accountPage.revokeDevicePlaceholder" = "パスワードを入力";
-"accountPage.deviceRevoked" = "Device revocation completed";
+"accountPage.deviceRevoked" = "デバイスの無効化が完了しました";
 "accountPage.deviceRevocationProgress" = "取り消し中...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationSuccess" = "無効なデバイス";
 "accountPage.deviceRevocationTryAgain" = "もう一度やり直す";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
+"accountPage.deviceRevocationWrongPassword" = "パスワードが一致しません";
 "accountPage.deviceRevocationUnknownDevice" = "未知のデバイス";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.deviceRevocationError" = "端末無効化エラー";
 "accountPage.namePlaceholder" = "名前";
 "accountPage.linkDeviceTitle" = "別のデバイスをリンク";
 "accountPage.other" = "その他";

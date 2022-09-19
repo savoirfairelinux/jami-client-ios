@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "Разговоры";
 "global.meTabBarTitle" = "Настройки аккаунта";
-"global.ok" = "В порядке";
+"global.ok" = "Хорошо";
 "global.close" = "Закрыть";
 "global.share" = "Поделиться";
 "global.forward" = "Переслать";
@@ -71,10 +71,10 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Добро пожаловать в Jami !";
+"welcome.title" = "Добро пожаловать в Jami!";
 "welcome.text" = "Jami - это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
 "welcome.linkDevice" = "Привязать это устройство к аккаунту";
-"welcome.createAccount" = "Создать учётную запись Jami";
+"welcome.createAccount" = "Создать аккаунт Jami";
 "welcome.connectToManager" = "Подключиться к JAMS серверу";
 
 //Creation Profile Screen
@@ -117,7 +117,7 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Введите пароль";
 "linkToAccount.pinLabel" = "Введите PIN";
-"linkToAccount.explanationPinMessage" = "Чтобы получить PIN код, перейдите в настройки управления аккаунтом на устройстве, содержащем необходимый аккаунт. В настройках устройств выберите \"Привязать другое устройство к этому аккаунту\". Вы получите необходимый PIN код для завершения процедуры. PIN код действителен в течение 10 минут.";
+"linkToAccount.explanationPinMessage" = "Чтобы получить PIN-код, перейдите в настройки управления аккаунтом на устройстве, содержащем необходимый аккаунт. В настройках устройств выберите «Привязать другое устройство к этому аккаунту» Вы получите необходимый PIN для завершения процедуры. PIN действителен в течение 10 минут.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Войти";
@@ -231,8 +231,8 @@
 "accountPage.namePlaceholder" = "Имя";
 "accountPage.linkDeviceTitle" = "Привязать другое устройство";
 "accountPage.other" = "Другой";
-"accountPage.removeAccountTitle" = "Удаление учетной записи";
-"accountPage.removeAccountMessage" = "Нажав кнопку \"Удалить\", вы удалите эту учетную запись на этом устройстве! Это действие не может быть отменено. Кроме того, ваше зарегистрированное имя может быть утеряно.";
+"accountPage.removeAccountTitle" = "Удалить аккаунт";
+"accountPage.removeAccountMessage" = "Нажав кнопку «Удалить», вы удалите этот аккаунт на этом устройстве! Это действие не может быть отменено. Кроме того, ваше зарегистрированное имя может быть утеряно.";
 "accountPage.removeAccountButton" = "Удалить";
 "accountPage.shareAccountDetails" = "Поделиться информацией об учетной записи";
 "accountPage.contactMeOnJamiTitle" = "Свяжитесь со мной в Jami!";
@@ -252,9 +252,9 @@
 "accountPage.changePasswordError" = "Пароль неверный ";
 "accountPage.enableBoothMode" = "Включить режим кабинки";
 "accountPage.disableBoothMode" = "Выключить режим кабинки";
-"accountPage.disableBoothModeExplanation" = "Пожалуйста, укажите пароль вашей учетной записи";
+"accountPage.disableBoothModeExplanation" = "Пожалуйста, укажите пароль вашего аккаунта";
 "accountPage.boothModeExplanation" = "В режиме кабинки история разговоров не сохраняется, а функциональность Jami ограничена исходящими звонками. Когда вы включите режим кабинки, все ваши разговоры будут удалены.";
-"accountPage.noBoothMode" = "Для включения режима кабинки необходимо сначала создать пароль учетной записи.";
+"accountPage.noBoothMode" = "Для включения режима Кабинки необходимо сначала создать пароль аккаунту.";
 "accountPage.boothModeAlertMessage" = "После включения режима кабинки все ваши разговоры будут удалены.";
 "accountPage.peerDiscovery" = "Авто-подключение к локальной сети";
 "accountPage.autoRegistration" = "Автоматическая регистрация после истечения срока действия";
@@ -265,7 +265,7 @@
 "account.sipServer" = "Сервер SIP";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
-"account.createSipAccount" = "Создать SIP Аккаунт";
+"account.createSipAccount" = "Создать SIP-аккаунт";
 "account.usernameLabel" = "Введите имя пользователя";
 "account.passwordLabel" = "Введите пароль";
 "account.serverLabel" = "Введите адрес";
@@ -348,10 +348,10 @@
 //Migrate Account
 "migrateAccount.title" = "Перенос аккаунта";
 "migrateAccount.migrateButton" = "Перенос аккаунта";
-"migrateAccount.explanation" = "Этот аккаунт должен быть перенесен";
+"migrateAccount.explanation" = "Этот аккаунт должен быть перенесён";
 "migrateAccount.passwordPlaceholder" = "Введите пароль";
 "migrateAccount.passwordExplanation" = "Чтобы завершить перенос, необходимо ввести пароль, используемый для этого аккаунта";
-"migrateAccount.removeAccount" = "Удаление учетной записи";
+"migrateAccount.removeAccount" = "Удалить аккаунт";
 "migrateAccount.error" = "Ошибка при переносе Вашего аккаунта. Вы можете попробовать повторно или удалить Ваш аккаунт.";
 "migrateAccount.migrating" = "Перенос...";
 "migrateAccount.cancel" = "Отмена";
