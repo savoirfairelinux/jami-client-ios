@@ -175,6 +175,24 @@
       "parentUuid": "2268e4b4_0ef234d3",
       "revId": "b65cc8746ad2fbb8a79e446ca5e53346ff815c28",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c44b59_dd2b0793",
+        "filename": "Ring/Ring/Helpers/AvatarView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-19T16:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fb64f5a_4a9e07cc",
+      "revId": "b65cc8746ad2fbb8a79e446ca5e53346ff815c28",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
