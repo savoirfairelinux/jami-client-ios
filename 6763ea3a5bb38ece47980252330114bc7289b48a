@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0dade780_e0cd6f0e",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-19T18:00:15Z",
+      "side": 1,
+      "message": "Ok I changed to account from self.accountService.currentAccount",
+      "parentUuid": "8f6eeac7_863ca00b",
+      "revId": "6763ea3a5bb38ece47980252330114bc7289b48a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae4ae637_1bf120bb",
         "filename": "Ring/Ring/Services/CallsProviderDelegate.swift",
         "patchSetId": 8
@@ -48,6 +66,24 @@
       "writtenOn": "2022-09-19T14:29:56Z",
       "side": 1,
       "message": "parameter name \"flag\" is not clear. We could use videoFlag, or hasVideo, etc., to indicate that this parameter is responsible for video",
+      "revId": "6763ea3a5bb38ece47980252330114bc7289b48a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85360fe2_20382691",
+        "filename": "Ring/Ring/Services/CallsProviderDelegate.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-19T18:00:15Z",
+      "side": 1,
+      "message": "Ok I have updated to videoFlag",
+      "parentUuid": "ae4ae637_1bf120bb",
       "revId": "6763ea3a5bb38ece47980252330114bc7289b48a",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
