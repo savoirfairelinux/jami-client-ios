@@ -89,6 +89,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d3d1ebb_37e3cb1b",
+        "filename": "Ring/Ring/Extensions/CNContactVCardSerialization+Helpers.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-19T16:36:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c99237b_7e8089a9",
+      "revId": "b65cc8746ad2fbb8a79e446ca5e53346ff815c28",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d0d6fbd_979fdf22",
