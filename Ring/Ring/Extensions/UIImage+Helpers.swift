@@ -95,16 +95,12 @@ extension UIImage {
     }
 
     func convertToData(ofMaxSize maxSize: Int) -> Data? {
-        guard let imageData = self.jpegData(compressionQuality: 0.9) else {
-            return nil
-        }
-        var fileSize = imageData.count
+        var imageData: Data?
+        var fileSize = maxSize + 1
         var i = 10
         while fileSize > maxSize && i >= 0 {
-            guard let imageData = self.jpegData(compressionQuality: CGFloat(0.1 * Double(i))) else {
-                return nil
-            }
-            fileSize = imageData.count
+            imageData = self.jpegData(compressionQuality: CGFloat(0.1 * Double(i)))
+            fileSize = imageData?.count ?? maxSize
             i -= 1
         }
         return imageData
