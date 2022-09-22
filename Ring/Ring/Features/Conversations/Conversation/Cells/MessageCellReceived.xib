@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -56,13 +56,21 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8m-fP-dEw">
+                                <rect key="frame" x="0.0" y="0.0" width="219.5" height="31"/>
+                                <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="1Kj-UZ-gu7"/>
                             <constraint firstItem="lyR-7c-S2k" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="14" id="8m5-sR-xnh"/>
+                            <constraint firstItem="f8m-fP-dEw" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" id="Htr-J4-1lS"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="UWN-H4-Sh9"/>
+                            <constraint firstAttribute="trailing" secondItem="f8m-fP-dEw" secondAttribute="trailing" id="dRv-9f-ZaP"/>
                             <constraint firstAttribute="bottom" secondItem="lyR-7c-S2k" secondAttribute="bottom" constant="7" id="gwN-uX-PWd"/>
+                            <constraint firstItem="f8m-fP-dEw" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" id="oRg-rM-G0v"/>
+                            <constraint firstAttribute="bottom" secondItem="f8m-fP-dEw" secondAttribute="bottom" id="tkx-Ld-ETx"/>
                             <constraint firstAttribute="trailing" secondItem="lyR-7c-S2k" secondAttribute="trailing" constant="14" id="uzV-kG-oGN"/>
                             <constraint firstItem="lyR-7c-S2k" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" constant="7" id="ycc-WI-Jk6"/>
                         </constraints>
@@ -73,21 +81,21 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuX-zz-1Qq" userLabel="Left Divider">
-                        <rect key="frame" x="31" y="19" width="131" height="1"/>
+                        <rect key="frame" x="32" y="19" width="131" height="1"/>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="OBa-HX-Vts"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eza-Ni-w3g" userLabel="Right Divider">
-                        <rect key="frame" x="348" y="19" width="131" height="1"/>
+                        <rect key="frame" x="347.5" y="19" width="130.5" height="1"/>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="7z5-Mi-Abp"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11/14/2016 12:34PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhg-uK-iD9" userLabel="Message Time">
-                        <rect key="frame" x="178" y="9" width="154" height="21"/>
+                        <rect key="frame" x="179" y="9" width="152.5" height="21"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -127,6 +135,7 @@
                 <outlet property="bubbleBottomConstraint" destination="1QQ-bu-6Bl" id="a4F-pf-cXL"/>
                 <outlet property="bubbleHeightConstraint" destination="1Kj-UZ-gu7" id="oAb-CU-Qui"/>
                 <outlet property="bubbleTopConstraint" destination="jhd-A8-c1o" id="40k-2d-6rW"/>
+                <outlet property="bubbleWidthConstraint" destination="UWN-H4-Sh9" id="FFX-aq-hAf"/>
                 <outlet property="leftDivider" destination="zuX-zz-1Qq" id="9Jc-cV-VTA"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
                 <outlet property="messageLabelLeadingConstraint" destination="8m5-sR-xnh" id="piI-w5-04J"/>
@@ -135,6 +144,7 @@
                 <outlet property="rightDivider" destination="eza-Ni-w3g" id="Jfy-s9-5t7"/>
                 <outlet property="timeLabel" destination="mhg-uK-iD9" id="x8D-vK-F6G"/>
                 <outlet property="topCorner" destination="WBd-CS-7Qv" id="GCm-Hv-5Ei"/>
+                <outlet property="webLinkView" destination="f8m-fP-dEw" id="6XT-zX-qHv"/>
             </connections>
             <point key="canvasLocation" x="-411" y="-132.5"/>
         </tableViewCell>
