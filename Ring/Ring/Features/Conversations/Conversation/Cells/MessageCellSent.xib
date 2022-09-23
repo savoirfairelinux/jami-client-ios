@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -51,21 +50,21 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCJ-gp-flF">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGS-F6-Lya">
                                 <rect key="frame" x="0.0" y="0.0" width="219.33333333333334" height="31"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="1Kj-UZ-gu7"/>
                             <constraint firstItem="lyR-7c-S2k" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="14" id="8m5-sR-xnh"/>
-                            <constraint firstAttribute="trailing" secondItem="nCJ-gp-flF" secondAttribute="trailing" id="8vp-8d-pa7"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="BZE-kP-hPK"/>
-                            <constraint firstAttribute="bottom" secondItem="nCJ-gp-flF" secondAttribute="bottom" id="dQL-ur-Qrv"/>
+                            <constraint firstItem="xGS-F6-Lya" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" id="G7B-hX-C0g"/>
+                            <constraint firstAttribute="trailing" secondItem="xGS-F6-Lya" secondAttribute="trailing" id="Okg-HZ-wIt"/>
+                            <constraint firstAttribute="bottom" secondItem="xGS-F6-Lya" secondAttribute="bottom" id="Z2D-Cc-PDf"/>
                             <constraint firstAttribute="bottom" secondItem="lyR-7c-S2k" secondAttribute="bottom" constant="7" id="gwN-uX-PWd"/>
-                            <constraint firstItem="nCJ-gp-flF" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" id="hfg-AL-hwY"/>
-                            <constraint firstItem="nCJ-gp-flF" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" id="sq9-JZ-jx8"/>
+                            <constraint firstItem="xGS-F6-Lya" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" id="taw-qa-QJ4"/>
                             <constraint firstAttribute="trailing" secondItem="lyR-7c-S2k" secondAttribute="trailing" constant="14" id="uzV-kG-oGN"/>
                             <constraint firstItem="lyR-7c-S2k" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" constant="7" id="ycc-WI-Jk6"/>
                         </constraints>
@@ -166,14 +165,9 @@
                 <outlet property="sendingIndicator" destination="78h-fZ-7yf" id="GrK-FT-q39"/>
                 <outlet property="timeLabel" destination="ogn-wv-fZy" id="7yt-vi-cSp"/>
                 <outlet property="topCorner" destination="EMh-bG-ilg" id="nHl-hn-BZ1"/>
-                <outlet property="webLinkView" destination="nCJ-gp-flF" id="PTj-0r-aWd"/>
+                <outlet property="webLinkView" destination="xGS-F6-Lya" id="qX8-y4-hxl"/>
             </connections>
             <point key="canvasLocation" x="-411.59420289855075" y="-132.92410714285714"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

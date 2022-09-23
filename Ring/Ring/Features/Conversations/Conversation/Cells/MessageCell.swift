@@ -120,6 +120,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         self.playerView?.removeFromSuperview()
         self.composingMsg.removeFromSuperview()
         self.transferImageView.image = nil
+        linkMetaDataView = LPLinkView(metadata: LPLinkMetadata())
         self.webLinkView?.removeSubviews()
         bubbleHeightConstraint?.constant = 31
         bubbleWidthConstraint?.constant = 34
@@ -421,20 +422,24 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         } else {
             if item.content.isValidURL {
                 self.webLinkView?.isHidden = false
-                bubbleHeightConstraint?.constant = 350
-                bubbleWidthConstraint?.constant = 219.5
-                self.topCorner?.backgroundColor = .clear
-                self.bottomCorner?.backgroundColor = .clear
+                let maxDimension: CGFloat = getMaxDimensionForTransfer()
+                bubbleHeightConstraint?.constant = maxDimension
+                bubbleWidthConstraint?.constant = maxDimension
+                self.topCorner?.backgroundColor = UIColor.jamiMsgCellWebLink
+                self.bottomCorner?.backgroundColor = UIColor.jamiMsgCellWebLink
+                self.bubble.backgroundColor = UIColor.jamiMsgCellWebLink
+
                 let metaDataProvider = LPMetadataProvider()
                 metaDataProvider.startFetchingMetadata(for: URL(string: item.content)!) { [weak self](metaDataObj, error) in
                     if let metaDataObj = metaDataObj,
                        error == nil {
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self = self else {return}
-                            self.linkMetaDataView.frame = CGRect(x: 0, y: 0, width: self.bubble.frame.width, height: self.bubble.frame.height)
+                        DispatchQueue.main.async { [weak self, weak metaDataObj] in
+                            guard let self = self, let metaDataObj = metaDataObj else {return}
                             self.linkMetaDataView.metadata = metaDataObj
+                            self.linkMetaDataView.frame = CGRect(x: 0, y: 0, width: maxDimension, height: maxDimension)
                             self.webLinkView?.addSubview(self.linkMetaDataView)
-                            self.webLinkView?.sizeToFit()
+                            self.webLinkView?.contentMode = .scaleAspectFill
+                            self.linkMetaDataView.contentMode = .scaleAspectFill
                         }
                     }
                 }
@@ -496,7 +501,6 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         self.backgroundColor = UIColor.clear
         self.bubbleViewMask?.backgroundColor = UIColor.jamiMsgBackground
         self.transferImageView.backgroundColor = UIColor.jamiMsgBackground
-        self.webLinkView?.backgroundColor = UIColor.jamiMsgBackground
 
         let cellBgColor: UIColor = { (containsOnlyEmoji: Bool, bubblePosition: BubblePosition) -> UIColor in
             switch bubblePosition {
@@ -627,7 +631,6 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
     private func configureTransferCell(_ item: MessageViewModel, _ conversationViewModel: ConversationViewModel) {
         guard item.isTransfer else {
             if item.content.isValidURL {
-                // self.webLinkView?.frame = CGRect(x: 0, y: 0, width: 250, height: 300)
                 self.bubble.heightAnchor.constraint(equalTo: self.webLinkView!.heightAnchor, constant: 1).isActive = true
                 self.bubble.widthAnchor.constraint(equalTo: self.webLinkView!.widthAnchor, constant: 1).isActive = true
             }
