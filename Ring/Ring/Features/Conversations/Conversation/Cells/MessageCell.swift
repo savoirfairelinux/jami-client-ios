@@ -27,6 +27,7 @@ import Reusable
 import RxSwift
 import RxCocoa
 import SwiftyBeaver
+import LinkPresentation
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
@@ -410,7 +411,28 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         } else {
             self.messageLabel?.isUserInteractionEnabled = true
             self.messageLabel?.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
-            self.messageLabel?.handleURLTap()
+            if let urls = self.messageLabel?.handleURLTap() {
+                urls.forEach { url in
+                    LPMetadataProvider().startFetchingMetadata(for: url) { (linkMetadata, _) in
+                        guard let linkMetadata = linkMetadata else { return }
+                        DispatchQueue.main.async {[weak self, weak linkMetadata] in
+                            guard let self = self, let linkMetadata = linkMetadata else { return }
+                            let linkView = LPLinkView(metadata: linkMetadata)
+                            self.messageLabel?.text = ""
+                            linkView.frame = CGRect(x: 0, y: 0, width: 400.0, height: 400.0)
+                            self.bubble.addSubview(linkView)
+                            linkView.sizeToFit()
+                            self.bubbleViewMask?.isHidden = false
+                            self.bottomCorner.isHidden = true
+                            self.topCorner.isHidden = true
+                            linkView.topAnchor.constraint(equalTo: self.bubble.topAnchor, constant: 0).isActive = true
+                            linkView.bottomAnchor.constraint(equalTo: self.bubble.bottomAnchor, constant: 0).isActive = true
+                            linkView.leadingAnchor.constraint(equalTo: self.bubble.leadingAnchor, constant: 0).isActive = true
+                            linkView.trailingAnchor.constraint(equalTo: self.bubble.trailingAnchor, constant: 0).isActive = true
+                        }
+                    }
+                }
+            }
         }
 
         item.sequencing = { (item: MessageViewModel) -> MessageSequencing in
