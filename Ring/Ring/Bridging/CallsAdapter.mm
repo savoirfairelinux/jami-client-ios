@@ -144,6 +144,13 @@ static id <CallsAdapterDelegate> _delegate;
             [CallsAdapter.delegate audioMutedWithCall: callIdString mute: muted];
         }
     }));
+    
+    callHandlers.insert(exportable_callback<CallSignal::RemoteRecordingChanged>([&](const std::string& callId,const std::string peerId, bool status){
+        if (CallsAdapter.delegate) {
+            NSString* callIdString = [NSString stringWithUTF8String:callId.c_str()];
+            [CallsAdapter.delegate remoteRecordingChangedWithCall:callIdString record:status];
+        }
+    }));
 
     callHandlers.insert(exportable_callback<CallSignal::ConferenceCreated>([&](const std::string& accountId, const std::string& confId) {
         if (CallsAdapter.delegate) {

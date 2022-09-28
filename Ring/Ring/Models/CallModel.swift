@@ -107,6 +107,7 @@ public class CallModel {
     var registeredName: String = ""
     var accountId: String = ""
     var audioMuted: Bool = false
+    var callRecorded: Bool = false
     var videoMuted: Bool = false
     var peerHolding: Bool = false
     var speakerActive: Bool = false
@@ -203,6 +204,7 @@ public class CallModel {
         for (item) in self.mediaList where item[MediaAttributeKey.mediaType.rawValue] == MediaAttributeValue.video.rawValue {
             self.isAudioOnly = false
             if !checkDeviceMediaMuted(media: item) {
+                self.callRecorded = false
                 self.videoMuted = false
                 break
             }
@@ -211,6 +213,7 @@ public class CallModel {
         self.audioMuted = true
         for (item) in self.mediaList where item[MediaAttributeKey.mediaType.rawValue] == MediaAttributeValue.audio.rawValue {
             if !checkDeviceMediaMuted(media: item) {
+                self.callRecorded = false
                 self.audioMuted = false
                 break
             }

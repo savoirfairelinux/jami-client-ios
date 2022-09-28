@@ -733,6 +733,13 @@ class CallsService: CallsAdapterDelegate {
         call.audioMuted = mute
         self.currentCallsEvents.onNext(call)
     }
+    func remoteRecordingChanged(call callId: String, record: Bool) {
+        guard let call = self.calls.value[callId] else {
+            return
+        }
+        call.callRecorded = record
+        self.currentCallsEvents.onNext(call)
+    }
 
     func videoMuted(call callId: String, mute: Bool) {
         guard let call = self.calls.value[callId] else {

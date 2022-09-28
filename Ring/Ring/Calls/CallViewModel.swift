@@ -149,6 +149,19 @@ class CallViewModel: Stateable, ViewModel {
 
     var layoutUpdated = BehaviorRelay<Bool>(value: false)
 
+    lazy var showRecordImage: Observable<Bool> = {
+        return self.callService
+            .currentCallsEvents
+            .asObservable()
+            .map({[weak self] call in
+                guard let self = self else { return false }
+                let showStatus = call.callRecorded
+                self.callRecordStatus.accept(showStatus)
+                return showStatus
+            })
+    }()
+    let callRecordStatus = BehaviorRelay<Bool>(value: false)
+
     lazy var contactImageData: Observable<Data?>? = {
         guard let call = self.call,
               let account = self.accountService.getAccount(fromAccountId: call.accountId) else {

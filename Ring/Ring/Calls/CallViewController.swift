@@ -33,6 +33,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet private weak var profileImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var durationLabel: UILabel!
+    @IBOutlet weak var displayAudioRecording: UIView!
     @IBOutlet private weak var infoBottomLabel: UILabel!
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var avatarViewBlurEffect: UIVisualEffectView!
@@ -51,6 +52,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet private weak var infoContainer: UIView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
+    @IBOutlet weak var displayVideoRecording: UIView!
     @IBOutlet private weak var buttonsContainer: ButtonsContainerView!
     @IBOutlet weak var infoBlurEffect: UIVisualEffectView!
     @IBOutlet weak var leftArrow: UIImageView!
@@ -322,10 +324,31 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .bind(to: self.buttonsContainer.pauseCallButton.rx.image())
             .disposed(by: self.disposeBag)
     }
+    func showViewRecording(viewToShow: UIView) {
+        viewToShow.blink()
+        viewToShow.roundedCorners = true
+        viewToShow.isHidden = false
+    }
 
     // swiftlint:disable function_body_length
     // swiftlint:disable cyclomatic_complexity
     func setupBindings() {
+        self.viewModel.showRecordImage
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] flagStatus in
+                guard let self = self else { return }
+                if flagStatus {
+                    if self.callViewMode == .audio {
+                        self.showViewRecording(viewToShow: self.displayAudioRecording)
+                    } else {
+                        self.showViewRecording(viewToShow: self.displayVideoRecording)
+                    }
+                } else {
+                    self.displayAudioRecording.isHidden = true
+                    self.displayVideoRecording.isHidden = true
+                }
+            })
+            .disposed(by: disposeBag)
         self.viewModel.callViewMode
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] callViewMode in

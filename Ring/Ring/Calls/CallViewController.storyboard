@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -116,13 +117,23 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="highlightedColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </label>
+                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rH0-Y4-Mjq">
+                                                        <rect key="frame" x="100" y="51.666666666666671" width="20" height="20"/>
+                                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="Bgc-yk-j67"/>
+                                                            <constraint firstAttribute="height" constant="20" id="RID-ma-v7V"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="fac-lR-4on" firstAttribute="top" secondItem="MdN-dF-4x3" secondAttribute="bottom" constant="20" id="1ja-6Q-FJk"/>
                                                     <constraint firstItem="MdN-dF-4x3" firstAttribute="top" secondItem="z3c-S7-uGw" secondAttribute="top" id="TVu-Mv-p0D"/>
                                                     <constraint firstItem="cgd-Wa-clf" firstAttribute="leading" secondItem="MdN-dF-4x3" secondAttribute="trailing" constant="20" id="VIE-lK-GeA"/>
+                                                    <constraint firstItem="rH0-Y4-Mjq" firstAttribute="leading" secondItem="fac-lR-4on" secondAttribute="trailing" constant="27" id="XYR-1g-gcv"/>
                                                     <constraint firstItem="fac-lR-4on" firstAttribute="leading" secondItem="MdN-dF-4x3" secondAttribute="leading" id="cJ6-kf-a3T"/>
+                                                    <constraint firstItem="rH0-Y4-Mjq" firstAttribute="top" secondItem="MdN-dF-4x3" secondAttribute="bottom" constant="21.5" id="iNo-De-wrt"/>
                                                     <constraint firstItem="cgd-Wa-clf" firstAttribute="centerY" secondItem="MdN-dF-4x3" secondAttribute="centerY" id="unp-V8-eN9"/>
                                                 </constraints>
                                             </view>
@@ -279,6 +290,14 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mAh-HX-dsf">
+                                        <rect key="frame" x="212.66666666666666" y="338.66666666666669" width="20" height="20"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="Xfj-6A-p4b"/>
+                                            <constraint firstAttribute="height" constant="20" id="uc7-EJ-8Ku"/>
+                                        </constraints>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdV-jx-Mla">
                                         <rect key="frame" x="187.66666666666666" y="652" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -295,6 +314,7 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="73Y-N1-Yga" secondAttribute="trailing" constant="20" id="E64-Eo-ffn"/>
                                     <constraint firstItem="73Y-N1-Yga" firstAttribute="bottom" secondItem="fnt-PQ-Q6P" secondAttribute="bottom" constant="45" id="ExS-S7-RrD"/>
                                     <constraint firstItem="73Y-N1-Yga" firstAttribute="centerX" secondItem="fnt-PQ-Q6P" secondAttribute="centerX" id="HBR-dG-PgV"/>
+                                    <constraint firstItem="mAh-HX-dsf" firstAttribute="top" secondItem="fnt-PQ-Q6P" secondAttribute="bottom" constant="58.5" id="Il5-uL-m7g"/>
                                     <constraint firstItem="Dj8-CK-PQm" firstAttribute="height" secondItem="fnt-PQ-Q6P" secondAttribute="height" constant="-20" id="JQ8-d6-nUa"/>
                                     <constraint firstItem="qNx-tt-eZo" firstAttribute="centerX" secondItem="fnt-PQ-Q6P" secondAttribute="centerX" id="MJR-K4-qEg"/>
                                     <constraint firstItem="fnt-PQ-Q6P" firstAttribute="centerX" secondItem="5E0-lB-SkS" secondAttribute="centerX" id="Me2-uR-EQh"/>
@@ -305,6 +325,7 @@
                                     <constraint firstItem="Dj8-CK-PQm" firstAttribute="centerX" secondItem="5E0-lB-SkS" secondAttribute="centerX" id="izi-2p-nAy"/>
                                     <constraint firstItem="Dj8-CK-PQm" firstAttribute="width" secondItem="qNx-tt-eZo" secondAttribute="width" multiplier="1.3" id="kjC-Tu-oKb"/>
                                     <constraint firstItem="uC8-vY-dHO" firstAttribute="width" secondItem="5E0-lB-SkS" secondAttribute="width" id="pAd-aZ-0Mj"/>
+                                    <constraint firstItem="mAh-HX-dsf" firstAttribute="leading" secondItem="zMN-6z-uXT" secondAttribute="trailing" constant="25" id="s8b-Oc-3hj"/>
                                     <constraint firstItem="zMN-6z-uXT" firstAttribute="centerX" secondItem="fnt-PQ-Q6P" secondAttribute="centerX" id="w8O-3h-Axl"/>
                                     <constraint firstItem="73Y-N1-Yga" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5E0-lB-SkS" secondAttribute="leading" constant="20" id="yRj-S6-9PE"/>
                                 </constraints>
@@ -378,6 +399,8 @@
                         <outlet property="conferenceCallsScrolView" destination="bij-Xb-EKH" id="YxK-ru-kO4"/>
                         <outlet property="conferenceCallsTop" destination="pgr-29-Lef" id="Wug-zj-y0Q"/>
                         <outlet property="conferenceLayout" destination="BOE-du-fSU" id="tCL-dC-2dy"/>
+                        <outlet property="displayAudioRecording" destination="mAh-HX-dsf" id="1A5-Gq-3u2"/>
+                        <outlet property="displayVideoRecording" destination="rH0-Y4-Mjq" id="9b1-DB-ZGf"/>
                         <outlet property="durationLabel" destination="zMN-6z-uXT" id="Uuf-ph-lrC"/>
                         <outlet property="incomingVideo" destination="DMu-Or-dd7" id="ogh-ft-54u"/>
                         <outlet property="infoBlurEffect" destination="zuX-Zf-IN1" id="hAl-Rg-hPM"/>
@@ -405,5 +428,8 @@
         <image name="ic_back" width="24" height="24"/>
         <image name="ic_contact_picture" width="170.66667175292969" height="170.66667175292969"/>
         <image name="left_arrow" width="48" height="48"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
