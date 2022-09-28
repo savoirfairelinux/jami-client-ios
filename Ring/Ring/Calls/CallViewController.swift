@@ -33,6 +33,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet private weak var profileImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var durationLabel: UILabel!
+    @IBOutlet weak var blinkAudioRecordView: UIView!
+    @IBOutlet weak var audioRecordView: UIView!
     @IBOutlet private weak var infoBottomLabel: UILabel!
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var avatarViewBlurEffect: UIVisualEffectView!
@@ -51,6 +53,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet private weak var infoContainer: UIView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
+    @IBOutlet weak var blinkVideoRecordView: UIView!
+    @IBOutlet weak var videoRecordView: UIView!
     @IBOutlet private weak var buttonsContainer: ButtonsContainerView!
     @IBOutlet weak var infoBlurEffect: UIVisualEffectView!
     @IBOutlet weak var leftArrow: UIImageView!
@@ -322,10 +326,31 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .bind(to: self.buttonsContainer.pauseCallButton.rx.image())
             .disposed(by: self.disposeBag)
     }
+    func showViewRecording(viewToShow: UIView, viewToBlink: UIView) {
+        viewToBlink.blink()
+        viewToBlink.roundedCorners = true
+        viewToShow.isHidden = false
+    }
 
     // swiftlint:disable function_body_length
     // swiftlint:disable cyclomatic_complexity
     func setupBindings() {
+        self.viewModel.showRecordImage
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] flagStatus in
+                guard let self = self else { return }
+                if flagStatus {
+                    if self.callViewMode == .audio {
+                        self.showViewRecording(viewToShow: self.audioRecordView, viewToBlink: self.blinkAudioRecordView)
+                    } else {
+                        self.showViewRecording(viewToShow: self.videoRecordView, viewToBlink: self.blinkVideoRecordView)
+                    }
+                } else {
+                    self.audioRecordView.isHidden = true
+                    self.videoRecordView.isHidden = true
+                }
+            })
+            .disposed(by: disposeBag)
         self.viewModel.callViewMode
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] callViewMode in
