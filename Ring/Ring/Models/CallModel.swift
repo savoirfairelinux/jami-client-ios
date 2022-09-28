@@ -107,6 +107,7 @@ public class CallModel {
     var registeredName: String = ""
     var accountId: String = ""
     var audioMuted: Bool = false
+    var callRecorded: Bool = false
     var videoMuted: Bool = false
     var peerHolding: Bool = false
     var speakerActive: Bool = false
