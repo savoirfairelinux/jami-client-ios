@@ -49,8 +49,8 @@ enum GeneratedMessageType: String {
     case outgoingCall = "Outgoing call"
 }
 
-class MessageViewModel {
-
+class MessageViewModel: Identifiable {
+    var id: String
     private let log = SwiftyBeaver.self
 
     private let accountService: AccountsService
@@ -58,8 +58,10 @@ class MessageViewModel {
     private let dataTransferService: DataTransferService
     private let profileService: ProfilesService
     var message: MessageModel
+    var messageContent: MessageContentModel
 
-    var profileImageData = BehaviorRelay<Data?>(value: nil)
+    var conversationId: String = ""
+    var accountId: String = ""
 
     var shouldShowTimeString: Bool = false
     lazy var timeStringShown: String = { [weak self] in
@@ -67,7 +69,11 @@ class MessageViewModel {
         return MessageViewModel.getTimeLabelString(forTime: self.receivedDate)
     }()
 
-    var sequencing: MessageSequencing = .unknown
+    var sequencing: MessageSequencing = .unknown {
+        didSet {
+            self.messageContent.setSequencing(sequencing: sequencing)
+        }
+    }
     var isComposingIndicator: Bool = false
 
     var isLocationSharingBubble: Bool { return self.message.type == .location }
@@ -77,7 +83,7 @@ class MessageViewModel {
     let injectBug: InjectionBag
 
     init(withInjectionBag injectionBag: InjectionBag,
-         withMessage message: MessageModel, isLastDisplayed: Bool) {
+         withMessage message: MessageModel, isLastDisplayed: Bool, convId: String, accountId: String) {
         self.accountService = injectionBag.accountService
         self.conversationsService = injectionBag.conversationsService
         self.dataTransferService = injectionBag.dataTransferService
@@ -87,6 +93,9 @@ class MessageViewModel {
         self.initialTransferStatus = message.transferStatus
         self.status.onNext(message.status)
         self.displayReadIndicator = BehaviorRelay<Bool>(value: isLastDisplayed)
+        self.id = message.id
+        self.messageContent = MessageContentModel(message: message)
+        self.messageContent.image = self.getTransferedImage(maxSize: 450, conversationID: convId, accountId: accountId, isSwarm: true)
         // self.displayReadIndicator.accept(isLastDisplayed)
         self.subscribeProfileServiceContactPhoto()
 
@@ -106,6 +115,7 @@ class MessageViewModel {
                     self?.log.debug("MessageViewModel: dataTransferMessageUpdated - id:\(transferId) status:\(transferStatus)")
                     self?.message.transferStatus = transferStatus
                     self?.transferStatus.onNext(transferStatus)
+                    self?.messageContent.setTransferStatus(transferStatus: transferStatus)
                 })
                 .disposed(by: disposeBag)
         } else {
@@ -159,7 +169,7 @@ class MessageViewModel {
             .subscribe(onNext: { [weak self] profile in
                 if let photo = profile.photo,
                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    self?.profileImageData.accept(data)
+                    // self?.profileImageData.accept(data)
                 }
             })
             .disposed(by: disposeBag)
@@ -384,4 +394,5 @@ class MessageViewModel {
         // generate the string containing the message time
         return dateFormatter.string(from: time).uppercased()
     }
+
 }

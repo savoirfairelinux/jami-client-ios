@@ -225,7 +225,7 @@ class ConversationsService {
     // MARK: swarm interactions management
 
     func loadConversationMessages(conversationId: String, accountId: String, from: String) {
-        self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: 40)
+        self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: 10)
     }
 
     func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
