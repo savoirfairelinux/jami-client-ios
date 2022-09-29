@@ -23,8 +23,8 @@ import RxCocoa
 
 class LinkToAccountManagerViewModel: Stateable, ViewModel {
 
-    private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
+    private let stateSubject = PublishSubject<State1>()
+    lazy var state: Observable<State1> = {
         return self.stateSubject.asObservable()
     }()
 

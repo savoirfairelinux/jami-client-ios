@@ -128,9 +128,9 @@ class ConversationsService {
             }
             let conversation = ConversationModel(withId: conversationId, accountId: accountId, info: info)
             conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-            if let lastDisplayed = conversation.getLastDisplayedMessageForDialog() {
-                conversation.lastDisplayedMessage = (lastDisplayed, Date())
-            }
+            //            if let lastDisplayed = conversation.getLastDisplayedMessageForDialog() {
+            //                conversation.lastDisplayedMessage = (lastDisplayed, Date())
+            //            }
             if let lastRead = conversation.getLastReadMessage() {
                 let unreadInteractions = conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: accountURI)
                 conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
@@ -225,7 +225,7 @@ class ConversationsService {
     // MARK: swarm interactions management
 
     func loadConversationMessages(conversationId: String, accountId: String, from: String) {
-        self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: 40)
+        self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: 10)
     }
 
     func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
@@ -255,6 +255,7 @@ class ConversationsService {
             self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: messages.first?.id ?? "")
             return false
         }
+
         messages.forEach { newMessage in
             /// filter out merge interaction
             if newMessage.type == .merge { return }
@@ -911,16 +912,16 @@ class ConversationsService {
         }).first {
             message.status = status
             self.updateUnreadMessages(conversationId: conversationId, accountId: accountId)
-            let displayedMessage = status == .displayed && !message.incoming
-            let oldDisplayedMessage = conversation.lastDisplayedMessage.id
-            let isLater = conversation.lastDisplayedMessage.timestamp < message.receivedDate
-            if  displayedMessage && isLater {
-                conversation.lastDisplayedMessage = (message.id, message.receivedDate)
-                var event = ServiceEvent(withEventType: .lastDisplayedMessageUpdated)
-                event.addEventInput(.oldDisplayedMessage, value: oldDisplayedMessage)
-                event.addEventInput(.newDisplayedMessage, value: message.id)
-                self.responseStream.onNext(event)
-            }
+            //            let displayedMessage = status == .displayed && !message.incoming
+            //            let oldDisplayedMessage = conversation.lastDisplayedMessage.id
+            //            let isLater = conversation.lastDisplayedMessage.timestamp < message.receivedDate
+            //            if  displayedMessage && isLater {
+            //                conversation.lastDisplayedMessage = (message.id, message.receivedDate)
+            //                var event = ServiceEvent(withEventType: .lastDisplayedMessageUpdated)
+            //                event.addEventInput(.oldDisplayedMessage, value: oldDisplayedMessage)
+            //                event.addEventInput(.newDisplayedMessage, value: message.id)
+            //                self.responseStream.onNext(event)
+            //            }
             var event = ServiceEvent(withEventType: .messageStateChanged)
             event.addEventInput(.messageStatus, value: status)
             event.addEventInput(.messageId, value: messageId)

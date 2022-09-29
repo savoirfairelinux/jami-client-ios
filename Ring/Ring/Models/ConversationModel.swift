@@ -90,13 +90,16 @@ class ConversationParticipant: Equatable {
     }
 }
 
+typealias OrderedMessage = (message: MessageModel, index: Int)
+
 class ConversationModel: Equatable {
     var messages = BehaviorRelay<[MessageModel]>(value: [MessageModel]())
     private var participants = [ConversationParticipant]()
+    // var messages = [MessageModel]()
     var hash = ""/// contact hash for dialog, conversation title for multiparticipants
     var accountId: String = ""
     var id: String = ""
-    var lastDisplayedMessage: (id: String, timestamp: Date) = ("", Date())
+    // var lastDisplayedMessage: (id: String, timestamp: Date) = ("", Date())
     var type: ConversationType = .nonSwarm
     var needsSyncing = false
     var unorderedInteractions = [String]()/// array ofr interaction id with child not currently present in messages
@@ -152,7 +155,7 @@ class ConversationModel: Equatable {
 
     private func subscribeUnreadMessages() {
         if self.isSwarm() { return }
-        self.messages.asObservable()
+        self.messages.asObservable().share()
             .subscribe { [weak self] messages in
                 guard let self = self else { return }
                 let number = messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
@@ -292,10 +295,10 @@ class ConversationModel: Equatable {
         return self.type != .nonSwarm && self.type != .sip && self.type != .jams
     }
 
-    func isLastDisplayed(messageId: String, peerJamiId: String) -> Bool {
-        if self.isSwarm() {
-            return self.getLastDisplayedMessageForDialog() == messageId
-        }
-        return lastDisplayedMessage.id == messageId
-    }
+    //    func isLastDisplayed(messageId: String, peerJamiId: String) -> Bool {
+    //        if self.isSwarm() {
+    //            return self.getLastDisplayedMessageForDialog() == messageId
+    //        }
+    //        return lastDisplayedMessage.id == messageId
+    //    }
 }
