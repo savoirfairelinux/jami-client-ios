@@ -28,7 +28,7 @@ import RxSwift
 /// - initialLoading: the app should display the loading interface as navigation root
 /// - needToOnboard: user has to onboard because he has no account
 /// - allSet: everything is set, the app should display its main interface
-public enum AppState: State {
+public enum AppState: State1 {
     case initialLoading
     case needToOnboard(animated: Bool, isFirstAccount: Bool)
     case addAccount
@@ -59,7 +59,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
     // MARK: StateableResponsive
     let disposeBag = DisposeBag()
 
-    let stateSubject = PublishSubject<State>()
+    let stateSubject = PublishSubject<State1>()
     // MARK: -
 
     // MARK: Private members

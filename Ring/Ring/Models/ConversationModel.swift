@@ -90,9 +90,12 @@ class ConversationParticipant: Equatable {
     }
 }
 
+typealias OrderedMessage = (message: MessageModel, index: Int)
+
 class ConversationModel: Equatable {
     var messages = BehaviorRelay<[MessageModel]>(value: [MessageModel]())
     private var participants = [ConversationParticipant]()
+    //var messages = [MessageModel]()
     var hash = ""/// contact hash for dialog, conversation title for multiparticipants
     var accountId: String = ""
     var id: String = ""

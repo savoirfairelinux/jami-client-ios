@@ -29,6 +29,7 @@ import Reusable
 import SwiftyBeaver
 import Photos
 import MobileCoreServices
+import SwiftUI
 
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
@@ -46,7 +47,7 @@ class ConversationViewController: UIViewController,
     let disposeBag = DisposeBag()
 
     var viewModel: ConversationViewModel!
-    var messageViewModels = [MessageViewModel]()
+    @Published var messageViewModels = [MessageViewModel]()
     var textFieldShouldEndEditing = false
     private let messageGroupingInterval = 10 * 60 // 10 minutes
     var bottomHeight: CGFloat = 0.00
@@ -85,6 +86,14 @@ class ConversationViewController: UIViewController,
                                                object: nil)
 
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let childView = UIHostingController(rootView: MessagesList(list: MessagesListModel(messages: self.viewModel.conversation.value.messages.asObservable(),
+                                                                                           bag: self.viewModel.injectionBag,
+                                                                                           convId: self.viewModel.conversation.value.id,
+                                                                                           accountId: self.viewModel.conversation.value.accountId, conversation: self.viewModel)))
+        addChild(childView)
+        childView.view.frame = self.view.frame
+        self.view.addSubview(childView.view)
+        childView.didMove(toParent: self)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -637,13 +646,13 @@ class ConversationViewController: UIViewController,
                 let oldNumber = self.messageViewModels.count
                 self.messageViewModels.removeAll()
                 for message in messages {
-                    let injBag = self.viewModel.injectionBag
-                    if let jamiId = self.viewModel.conversation.value.getParticipants().first?.jamiId {
-                        let isLastDisplayed = self.viewModel.isLastDisplayed(messageId: message.id, peerJamiId: jamiId)
-                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: isLastDisplayed))
-                    } else {
-                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: false))
-                    }
+                    //                    let injBag = self.viewModel.injectionBag
+                    //                    if let jamiId = self.viewModel.conversation.value.getParticipants().first?.jamiId {
+                    //                        let isLastDisplayed = self.viewModel.isLastDisplayed(messageId: message.id, peerJamiId: jamiId)
+                    //                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: isLastDisplayed, convId: "", ))
+                    //                    } else {
+                    //                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: false))
+                    // }
                     //                    if self.viewModel.peerComposingMessage {
                     //                        let msgModel = MessageModel(withId: "",
                     //                                                    receivedDate: Date(),
@@ -851,6 +860,7 @@ class ConversationViewController: UIViewController,
             }
             lastMessageTime = currentMessageTime
             // sequencing
+            print("&&&&&&&&set sequensing: \(messageViewModel.sequencing)")
             messageViewModel.sequencing = getMessageSequencing(forIndex: index)
         }
     }
@@ -890,6 +900,24 @@ class ConversationViewController: UIViewController,
                 sequencing = MessageSequencing.middleOfSequence
             }
         }
+
+        //        if messageItem.shouldShowTimeString {
+        //            if index == messageViewModels.count - 1 {
+        //                sequencing = .singleMessage
+        //            } else if sequencing != .singleMessage && sequencing != .lastOfSequence {
+        //                sequencing = .firstOfSequence
+        //            } else {
+        //                sequencing = .singleMessage
+        //            }
+        //        }
+        //
+        //        if index + 1 < messageViewModels.count && messageViewModels[index + 1].shouldShowTimeString {
+        //            switch sequencing {
+        //            case .firstOfSequence: sequencing = .singleMessage
+        //            case .middleOfSequence: sequencing = .lastOfSequence
+        //            default: break
+        //            }
+        //        }
         return sequencing
     }
 

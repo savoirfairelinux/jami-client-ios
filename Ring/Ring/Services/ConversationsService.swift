@@ -225,7 +225,7 @@ class ConversationsService {
     // MARK: swarm interactions management
 
     func loadConversationMessages(conversationId: String, accountId: String, from: String) {
-        self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: 40)
+        self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: 10)
     }
 
     func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
@@ -255,6 +255,7 @@ class ConversationsService {
             self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: messages.first?.id ?? "")
             return false
         }
+
         messages.forEach { newMessage in
             /// filter out merge interaction
             if newMessage.type == .merge { return }
