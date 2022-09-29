@@ -303,6 +303,9 @@
 		269DA08128D0D634007D51D6 /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05128D0D2ED007D51D6 /* libfmt.a */; };
 		269DA08228D0D68F007D51D6 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB61D1C341A00E99CD9 /* libavutil.a */; };
 		269DA08628D0DFE3007D51D6 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
+		269DA09928E23D37007D51D6 /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09828E23D37007D51D6 /* MessageRow.swift */; };
+		269DA09D28E23F57007D51D6 /* MessagesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09C28E23F57007D51D6 /* MessagesList.swift */; };
+		269DA09F28E244F1007D51D6 /* MessagesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09E28E244F1007D51D6 /* MessagesListModel.swift */; };
 		26A5CE3B26BD00E700E147EA /* Array+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5CE3826BD00E700E147EA /* Array+Helper.swift */; };
 		26A88C07266FFFC800888EED /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A88C06266FFFC800888EED /* NotificationService.swift */; };
 		26A88C0B266FFFC800888EED /* jamiNotificationExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -336,6 +339,11 @@
 		26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */; };
 		26D08ABE2696296300E37574 /* RequestsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABD2696296300E37574 /* RequestsAdapter.mm */; };
 		26DA813224B641A5006C6E23 /* ProfilesAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26DA813124B641A5006C6E23 /* ProfilesAdapter.mm */; };
+		26EF35DF28E24E9300D97E14 /* TestMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35DE28E24E9300D97E14 /* TestMessageModel.swift */; };
+		26EF35E728E3401800D97E14 /* ReplyHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35E628E3401800D97E14 /* ReplyHistory.swift */; };
+		26EF35E928E3847100D97E14 /* MessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35E828E3847100D97E14 /* MessageContent.swift */; };
+		26EF35EB28E38DA200D97E14 /* MessageContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EA28E38DA200D97E14 /* MessageContentModel.swift */; };
+		26EF35EF29075A5300D97E14 /* MessageStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EE29075A5300D97E14 /* MessageStackView.swift */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
 		4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66E236CBC6900747177 /* ContactPickerViewController.swift */; };
@@ -808,6 +816,9 @@
 		269DA05128D0D2ED007D51D6 /* libfmt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmt.a; path = ../fat/lib/libfmt.a; sourceTree = "<group>"; };
 		269DA05228D0D2EF007D51D6 /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = ../fat/lib/libgit2.a; sourceTree = "<group>"; };
 		269DA08428D0DA18007D51D6 /* libyaml-cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyaml-cpp.a"; path = "../DEPS/x86_64/lib/libyaml-cpp.a"; sourceTree = "<group>"; };
+		269DA09828E23D37007D51D6 /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
+		269DA09C28E23F57007D51D6 /* MessagesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesList.swift; sourceTree = "<group>"; };
+		269DA09E28E244F1007D51D6 /* MessagesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListModel.swift; sourceTree = "<group>"; };
 		26A5CE3826BD00E700E147EA /* Array+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Helper.swift"; sourceTree = "<group>"; };
 		26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = jamiNotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		26A88C06266FFFC800888EED /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -884,6 +895,11 @@
 		26D08ABD2696296300E37574 /* RequestsAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RequestsAdapter.mm; sourceTree = "<group>"; };
 		26DA813024B641A5006C6E23 /* ProfilesAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilesAdapter.h; sourceTree = "<group>"; };
 		26DA813124B641A5006C6E23 /* ProfilesAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ProfilesAdapter.mm; sourceTree = "<group>"; };
+		26EF35DE28E24E9300D97E14 /* TestMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMessageModel.swift; sourceTree = "<group>"; };
+		26EF35E628E3401800D97E14 /* ReplyHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyHistory.swift; sourceTree = "<group>"; };
+		26EF35E828E3847100D97E14 /* MessageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContent.swift; sourceTree = "<group>"; };
+		26EF35EA28E38DA200D97E14 /* MessageContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentModel.swift; sourceTree = "<group>"; };
+		26EF35EE29075A5300D97E14 /* MessageStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStackView.swift; sourceTree = "<group>"; };
 		26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-release.entitlements"; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
@@ -1935,6 +1951,9 @@
 				26D08AB02693474300E37574 /* InvitationViewController.storyboard */,
 				26D08AB42693480200E37574 /* InvitationViewController.swift */,
 				26D08AB62693481C00E37574 /* InvitationViewModel.swift */,
+				269DA09C28E23F57007D51D6 /* MessagesList.swift */,
+				269DA09E28E244F1007D51D6 /* MessagesListModel.swift */,
+				26EF35DE28E24E9300D97E14 /* TestMessageModel.swift */,
 			);
 			path = Conversation;
 			sourceTree = "<group>";
@@ -1990,6 +2009,11 @@
 				645BDD6C24B7415A009129B1 /* MessageCellLocationSharingSent.xib */,
 				64F8127324B8AA5200A7DE6A /* MessageCellLocationSharingReceived.swift */,
 				64F8127624B8AA5200A7DE6A /* MessageCellLocationSharingReceived.xib */,
+				269DA09828E23D37007D51D6 /* MessageRow.swift */,
+				26EF35E628E3401800D97E14 /* ReplyHistory.swift */,
+				26EF35E828E3847100D97E14 /* MessageContent.swift */,
+				26EF35EA28E38DA200D97E14 /* MessageContentModel.swift */,
+				26EF35EE29075A5300D97E14 /* MessageStackView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2562,10 +2586,12 @@
 				621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */,
 				1A2D18AC1F29149D00B2C785 /* MeCoordinator.swift in Sources */,
 				1A2D18C51F29180700B2C785 /* ContactModel.swift in Sources */,
+				269DA09928E23D37007D51D6 /* MessageRow.swift in Sources */,
 				648AF76D24ED7CA90004D727 /* UITextView+Helpers.swift in Sources */,
 				0E3697A8203243D3009A68CA /* BannedContactCell.swift in Sources */,
 				1A2D18F71F292D7200B2C785 /* MessageCellSent.swift in Sources */,
 				26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */,
+				269DA09D28E23F57007D51D6 /* MessagesList.swift in Sources */,
 				446FAF1B2373425E00519C4F /* SendFileViewController.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
 				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,
@@ -2607,10 +2633,12 @@
 				1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */,
 				1A5DC01E1F355DA70075E8EF /* ContactsAdapterDelegate.swift in Sources */,
 				0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */,
+				26EF35EB28E38DA200D97E14 /* MessageContentModel.swift in Sources */,
 				26B37342263C4B3700E2EE28 /* CustomSearchBar.swift in Sources */,
 				0E3BD4362044B39F00A50DDF /* ProfileHeaderView.swift in Sources */,
 				1A20418D1F1EABCC00C08435 /* StateableResponsive.swift in Sources */,
 				1A0C4EE51F1D67DF00550433 /* WalkthroughCoordinator.swift in Sources */,
+				26EF35E728E3401800D97E14 /* ReplyHistory.swift in Sources */,
 				1A2D18DD1F29192D00B2C785 /* MessableBubble.swift in Sources */,
 				0E96ED77225D06380016C07D /* GeneralSettingsViewController.swift in Sources */,
 				0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */,
@@ -2625,6 +2653,7 @@
 				1A2D18C11F29180700B2C785 /* AccountConfigModel.swift in Sources */,
 				1A3D28A71F0EB9DB00B524EE /* Bool+String.swift in Sources */,
 				5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */,
+				26EF35E928E3847100D97E14 /* MessageContent.swift in Sources */,
 				1ABE07D31F0D8FE800D36361 /* Storyboards.swift in Sources */,
 				62AA15CA1FFD3D7E0064A063 /* VideoService.swift in Sources */,
 				26D08AB9269628F400E37574 /* RequestsService.swift in Sources */,
@@ -2662,6 +2691,7 @@
 				64F8127A24BBC19C00A7DE6A /* MessageCellLocationSharing.swift in Sources */,
 				0E6D959C2407116E00996A28 /* LinkToAccountManagerViewModel.swift in Sources */,
 				62AD584C2056DB2700AF0701 /* MessageCellDataTransferSent.swift in Sources */,
+				26EF35DF28E24E9300D97E14 /* TestMessageModel.swift in Sources */,
 				0ECA5683243394960055D31E /* MigrateAccountViewController.swift in Sources */,
 				1A2041821F1E906B00C08435 /* CreateProfileViewModel.swift in Sources */,
 				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,
@@ -2721,6 +2751,7 @@
 				62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */,
 				627F11F120348FBF006560B5 /* AvatarView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,
+				269DA09F28E244F1007D51D6 /* MessagesListModel.swift in Sources */,
 				26D08ABE2696296300E37574 /* RequestsAdapter.mm in Sources */,
 				1A2D18F51F292D7200B2C785 /* MessageCellReceived.swift in Sources */,
 				26B37339263C439B00E2EE28 /* CustomSearchController.swift in Sources */,
@@ -2733,6 +2764,7 @@
 				66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */,
 				2673D63225267785000C56CB /* ConferenceLayoutHelper.swift in Sources */,
 				0E5A668322F0B1F100AA6820 /* ProgressView.swift in Sources */,
+				26EF35EF29075A5300D97E14 /* MessageStackView.swift in Sources */,
 				0E96ED79225D06480016C07D /* GeneralSettingsViewModel.swift in Sources */,
 				1A2041801F1E903B00C08435 /* CreateProfileViewController.swift in Sources */,
 				66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */,

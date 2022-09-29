@@ -64,8 +64,8 @@ class ConversationViewModel: Stateable, ViewModel {
 
     let showInvitation = BehaviorRelay<Bool>(value: false)
 
-    private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
+    private let stateSubject = PublishSubject<State1>()
+    lazy var state: Observable<State1> = {
         return self.stateSubject.asObservable()
     }()
 
@@ -281,12 +281,13 @@ class ConversationViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: jamiId, userName: self.displayName.value ?? self.userName.value))
     }
 
-    func loadMoreMessages() {
-        if self.conversation.value.allMessagesLoaded() { return }
+    func loadMoreMessages() -> Bool {
+        if self.conversation.value.allMessagesLoaded() { return false }
         self.conversationsService
             .loadConversationMessages(conversationId: self.conversation.value.id,
                                       accountId: self.conversation.value.accountId,
                                       from: self.conversation.value.messages.value.first?.id ?? "")
+        return true
     }
 
     func startAudioCall() {
