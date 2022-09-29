@@ -50,7 +50,7 @@ enum ContactAction: String {
     case banned
 }
 
-class MessageModel {
+public class MessageModel {
 
     var id: String = ""
     /// daemonId for dht messages, file transfer id for datatransfer

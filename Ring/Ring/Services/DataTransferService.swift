@@ -41,13 +41,13 @@ enum Directories: String {
 enum DataTransferStatus: CustomStringConvertible {
     var description: String {
         switch self {
-        case .created: return "created"
-        case .awaiting: return "awaiting"
-        case .canceled: return "canceled"
-        case .ongoing: return "ongoing"
-        case .success: return "success"
-        case .error: return "error"
-        case .unknown: return "unknown"
+        case .created: return ""
+        case .awaiting: return ""
+        case .canceled: return "Canceled"
+        case .ongoing: return "Transferring"
+        case .success: return "Complete"
+        case .error: return ""
+        case .unknown: return ""
         }
     }
 
@@ -229,7 +229,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                                                    accountId: conversation.accountId,
                                                    conversationId: conversation.id,
                                                    withFilePath: filePath,
-                                                   parent: conversation.messages.value.last?.id)
+                                                   parent: conversation.lastMessage?.id)
         }
     }
 
