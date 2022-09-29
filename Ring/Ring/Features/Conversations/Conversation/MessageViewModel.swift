@@ -50,36 +50,104 @@ enum GeneratedMessageType: String {
     case outgoingCall = "Outgoing call"
 }
 
-class MessageViewModel {
-
+class MessageViewModel: Identifiable {
+    var id: String
     private let log = SwiftyBeaver.self
 
-    private let accountService: AccountsService
-    private let conversationsService: ConversationsService
-    private let dataTransferService: DataTransferService
-    private let profileService: ProfilesService
+    private var accountService: AccountsService?
+    private var conversationsService: ConversationsService?
+    private var dataTransferService: DataTransferService?
+    private var profileService: ProfilesService?
     var message: MessageModel
     var metaData: LPLinkMetadata?
+    var messageContent: MessageContentModel
+    var messageSwiftUI: MessageSwiftUIModel
+    var historyModel: MessageHistoryModel
+    var stackViewModel: MessageStackViewModel
+    var conversationId: String = ""
+    var accountId: String = ""
+    var player: PlayerViewModel? {
+        didSet {
+            self.messageContent.player = self.player
+        }
+    }
+    var replyTo: String?
+    var getAvatar: ((String) -> Void)? {
+        didSet {
+            self.messageSwiftUI.getAvatar = self.getAvatar
+        }
+    }
 
-    var profileImageData = BehaviorRelay<Data?>(value: nil)
+    var getlastRead: ((String) -> Void)? {
+        didSet {
+            self.messageSwiftUI.getlastRead = self.getlastRead
+        }
+    }
 
-    var shouldShowTimeString: Bool = false
+    func updateRead(avatars: [UIImage]?) {
+        self.messageSwiftUI.read = avatars
+    }
+
+    func updateAvatar(image: UIImage) {
+        self.messageSwiftUI.avatarImage = image
+    }
+
+    func updateUsername(name: String) {
+        self.stackViewModel.username = name
+    }
+
+    var getName: ((String) -> Void)? {
+        didSet {
+            self.stackViewModel.getName = self.getName
+        }
+    }
+
+    var shouldShowTimeString: Bool = false {
+        didSet {
+            self.messageSwiftUI.timeString = shouldShowTimeString ? MessageViewModel.getTimeLabelString(forTime: self.receivedDate) : nil
+            self.stackViewModel.shouldDisplayName = self.shouldShowTimeString
+        }
+    }
+
+    var shouldDisplayName: Bool = false {
+        didSet {
+            self.stackViewModel.shouldDisplayName = self.shouldDisplayName
+        }
+    }
     lazy var timeStringShown: String = { [weak self] in
         guard let self = self else { return "" }
         return MessageViewModel.getTimeLabelString(forTime: self.receivedDate)
     }()
 
-    var sequencing: MessageSequencing = .unknown
+    var sequencing: MessageSequencing = .unknown {
+        didSet {
+            self.messageContent.setSequencing(sequencing: sequencing)
+            if sequencing == .lastOfSequence || sequencing == .singleMessage {
+                self.messageSwiftUI.shouldDisplayAavatar = true
+            }
+        }
+    }
     var isComposingIndicator: Bool = false
 
     var isLocationSharingBubble: Bool { return self.message.type == .location }
     var isText: Bool { return self.message.type == .text }
 
-    private let disposeBag = DisposeBag()
-    let injectBug: InjectionBag
+    let disposeBag = DisposeBag()
+    var injectBug: InjectionBag?
+
+    init() {
+        self.id = ""
+        self.historyModel = MessageHistoryModel()
+        self.stackViewModel = MessageStackViewModel()
+        self.messageSwiftUI = MessageSwiftUIModel()
+        self.message = MessageModel(withInfo: [String: String](), accountJamiId: "")
+        self.displayReadIndicator = BehaviorRelay(value: true)
+        self.messageContent = MessageContentModel(message: message, sequensing: self.sequencing)
+        self.initialTransferStatus = .unknown
+    }
 
     init(withInjectionBag injectionBag: InjectionBag,
-         withMessage message: MessageModel, isLastDisplayed: Bool) {
+         withMessage message: MessageModel, isLastDisplayed: Bool, convId: String, accountId: String) {
         self.accountService = injectionBag.accountService
         self.conversationsService = injectionBag.conversationsService
         self.dataTransferService = injectionBag.dataTransferService
@@ -89,11 +157,23 @@ class MessageViewModel {
         self.initialTransferStatus = message.transferStatus
         self.status.onNext(message.status)
         self.displayReadIndicator = BehaviorRelay<Bool>(value: isLastDisplayed)
+        self.id = message.id
+        self.historyModel = MessageHistoryModel()
+        self.stackViewModel = MessageStackViewModel()
+        self.stackViewModel.incoming = self.message.incoming
+        self.stackViewModel.partisipantId = self.message.authorId
+        self.messageContent = MessageContentModel(message: message, sequensing: self.sequencing)
+        self.messageSwiftUI = MessageSwiftUIModel()
+        self.messageSwiftUI.timeString = MessageViewModel.getTimeLabelString(forTime: self.message.receivedDate)
+        self.messageSwiftUI.incoming = self.message.incoming
+        self.messageSwiftUI.partisipantId = self.message.authorId
+        self.messageSwiftUI.messageId = self.messageId
+        self.messageContent.image = self.getTransferedImage(maxSize: 450, conversationID: convId, accountId: accountId, isSwarm: true)
         // self.displayReadIndicator.accept(isLastDisplayed)
-        self.subscribeProfileServiceContactPhoto()
+        // self.subscribeProfileServiceContactPhoto()
 
         if isTransfer {
-            self.conversationsService
+            self.conversationsService?
                 .sharedResponseStream
                 .filter({ [weak self] (transferEvent) in
                     guard let transferId: String = transferEvent.getEventInput(ServiceEventInput.transferId) else { return false }
@@ -108,11 +188,12 @@ class MessageViewModel {
                     self?.log.debug("MessageViewModel: dataTransferMessageUpdated - id:\(transferId) status:\(transferStatus)")
                     self?.message.transferStatus = transferStatus
                     self?.transferStatus.onNext(transferStatus)
+                    self?.messageContent.setTransferStatus(transferStatus: transferStatus)
                 })
                 .disposed(by: disposeBag)
         } else {
             // subscribe to message status updates for outgoing messages
-            self.conversationsService
+            self.conversationsService?
                 .sharedResponseStream
                 .filter({ [weak self] messageUpdateEvent in
                     return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
@@ -125,7 +206,7 @@ class MessageViewModel {
                     }
                 })
                 .disposed(by: self.disposeBag)
-            self.conversationsService
+            self.conversationsService?
                 .sharedResponseStream
                 .filter({ [weak self] messageUpdateEvent in
                     let event = messageUpdateEvent.eventType == ServiceEventType.lastDisplayedMessageUpdated
@@ -151,17 +232,23 @@ class MessageViewModel {
     }
 
     private func subscribeProfileServiceContactPhoto() {
-        guard let account = self.accountService.currentAccount else { return }
+        guard let account = self.accountService?.currentAccount else { return }
         let schema: URIType = account.type == .sip ? .sip : .ring
         guard let contactURI = JamiURI(schema: schema, infoHach: self.message.authorId).uriString else { return }
-        self.profileService
+        self.profileService?
             .getProfile(uri: contactURI,
                         createIfNotexists: false,
                         accountId: account.id)
             .subscribe(onNext: { [weak self] profile in
                 if let photo = profile.photo,
-                   let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    self?.profileImageData.accept(data)
+                   let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?,
+                   let image = UIImage(data: data) {
+                    self?.messageSwiftUI.avatarImage = image
+                    // self?.profileImageData.accept(data)
+                }
+                if let name = profile.alias, !name.isEmpty {
+                    self?.stackViewModel.username = name
+                    // self?.profileImageData.accept(data)
                 }
             })
             .disposed(by: disposeBag)
@@ -246,12 +333,12 @@ class MessageViewModel {
         if self.lastTransferStatus != .success &&
             self.message.transferStatus != .success { return false }
         guard let identifier = transferFileData.identifier else { return false }
-        return self.dataTransferService.getFileURLFromPhotoLibrairy(identifier: identifier, completionHandler: completionHandler)
+        return self.dataTransferService!.getFileURLFromPhotoLibrairy(identifier: identifier, completionHandler: completionHandler)
     }
 
     func removeFile(conversationID: String, accountId: String, isSwarm: Bool) {
         guard let url = self.transferedFile(conversationID: conversationID, accountId: accountId, isSwarm: isSwarm) else { return }
-        self.dataTransferService.removeFile(at: url)
+        self.dataTransferService?.removeFile(at: url)
     }
 
     func transferedFile(conversationID: String, accountId: String, isSwarm: Bool) -> URL? {
@@ -261,23 +348,23 @@ class MessageViewModel {
         }
         let transferInfo = transferFileData
         if isSwarm {
-            return self.dataTransferService.getFileUrlForSwarm(fileName: self.message.daemonId, accountID: accountId, conversationID: conversationID)
+            return self.dataTransferService!.getFileUrlForSwarm(fileName: self.message.daemonId, accountID: accountId, conversationID: conversationID)
         }
         if self.message.incoming {
-            return self.dataTransferService
+            return self.dataTransferService!
                 .getFileUrlNonSwarm(fileName: transferInfo.fileName,
                                     inFolder: Directories.downloads.rawValue,
                                     accountID: accountId,
                                     conversationID: conversationID)
         }
 
-        let recorded = self.dataTransferService
+        let recorded = self.dataTransferService!
             .getFileUrlNonSwarm(fileName: transferInfo.fileName,
                                 inFolder: Directories.recorded.rawValue,
                                 accountID: accountId,
                                 conversationID: conversationID)
         guard recorded == nil, recorded?.path.isEmpty ?? true else { return recorded }
-        return self.dataTransferService
+        return self.dataTransferService!
             .getFileUrlNonSwarm(fileName: transferInfo.fileName,
                                 inFolder: Directories.downloads.rawValue,
                                 accountID: accountId,
@@ -300,7 +387,7 @@ class MessageViewModel {
         }
         if fileExtension.isMediaExtension() {
             if conversationViewModel.conversation.value.isSwarm() {
-                let path = self.dataTransferService
+                let path = self.dataTransferService!
                     .getFileUrlForSwarm(fileName: self.message.daemonId,
                                         accountID: conversationViewModel.conversation.value.accountId,
                                         conversationID: conversationViewModel.conversation.value.id)
@@ -308,13 +395,13 @@ class MessageViewModel {
                 if pathString.isEmpty {
                     return nil
                 }
-                let model = PlayerViewModel(injectionBag: injectBug, path: pathString)
+                let model = PlayerViewModel(injectionBag: injectBug!, path: pathString)
                 conversationViewModel.setPlayer(messageID: String(self.messageId), player: model)
                 return model
             }
             // first search for incoming video in downloads folder and for outgoing in recorded
             let folderName = self.message.incoming ? Directories.downloads.rawValue : Directories.recorded.rawValue
-            var path = self.dataTransferService
+            var path = self.dataTransferService!
                 .getFileUrlNonSwarm(fileName: name,
                                     inFolder: folderName,
                                     accountID: conversationViewModel.conversation.value.accountId,
@@ -324,7 +411,7 @@ class MessageViewModel {
                 return nil
             } else if pathString.isEmpty {
                 // try to search outgoing video in downloads folder
-                path = self.dataTransferService
+                path = self.dataTransferService!
                     .getFileUrlNonSwarm(fileName: name,
                                         inFolder: Directories.downloads.rawValue,
                                         accountID: conversationViewModel.conversation.value.accountId,
@@ -334,7 +421,7 @@ class MessageViewModel {
                     return nil
                 }
             }
-            let model = PlayerViewModel(injectionBag: injectBug, path: pathString)
+            let model = PlayerViewModel(injectionBag: injectBug!, path: pathString)
             conversationViewModel.setPlayer(messageID: String(self.messageId), player: model)
             return model
         }
@@ -345,7 +432,7 @@ class MessageViewModel {
                             conversationID: String,
                             accountId: String,
                             isSwarm: Bool) -> UIImage? {
-        guard let account = self.accountService
+        guard let account = self.accountService?
                 .getAccount(fromAccountId: accountId) else { return nil }
         if self.message.incoming &&
             self.lastTransferStatus != .success &&
@@ -354,7 +441,7 @@ class MessageViewModel {
         }
         let transferInfo = transferFileData
         let name = isSwarm ? self.message.daemonId : transferInfo.fileName
-        return self.dataTransferService
+        return self.dataTransferService!
             .getImage(for: name,
                       maxSize: maxSize,
                       identifier: transferInfo.identifier,
@@ -362,7 +449,7 @@ class MessageViewModel {
                       conversationID: conversationID, isSwarm: isSwarm)
     }
 
-    private static func getTimeLabelString(forTime time: Date) -> String {
+    static func getTimeLabelString(forTime time: Date) -> String {
         // get the current time
         let currentDateTime = Date()
 
@@ -386,4 +473,5 @@ class MessageViewModel {
         // generate the string containing the message time
         return dateFormatter.string(from: time).uppercased()
     }
+
 }

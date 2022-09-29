@@ -107,7 +107,7 @@ class GeneratedInteractionsManager {
             return
         }
         // remove conversation if it contain only contact messages
-        let messages = conversation.messages.value.filter({ $0.type != .contact })
+        let messages = conversation.messages.filter({ $0.type != .contact })
 
         if !messages.isEmpty {
             return

@@ -64,8 +64,8 @@ class ConversationViewModel: Stateable, ViewModel {
 
     let showInvitation = BehaviorRelay<Bool>(value: false)
 
-    private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
+    private let stateSubject = PublishSubject<State1>()
+    lazy var state: Observable<State1> = {
         return self.stateSubject.asObservable()
     }()
 
@@ -146,7 +146,6 @@ class ConversationViewModel: Stateable, ViewModel {
             self.subscribeUnreadMessages()
             self.subscribeLocationServiceLocationReceived()
             self.subscribeProfileServiceMyPhoto()
-            self.subscribeMessagesUpdate()
 
             guard let account = self.accountService.getAccount(fromAccountId: self.conversation.value.accountId) else { return }
             if account.type == AccountType.sip {
@@ -215,7 +214,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var hideNewMessagesLabel = BehaviorRelay<Bool>(value: true)
 
-    var hideDate: Bool { self.conversation.value.messages.value.isEmpty }
+    var hideDate: Bool { self.conversation.value.messages.isEmpty }
 
     func sendMessage(withContent content: String, contactURI: String? = nil) {
         let conversation = self.conversation.value
@@ -268,7 +267,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func deleteLocationMessage(messageId: String) {
-        guard let message = self.conversation.value.messages.value.filter({ $0.id == messageId }).first,
+        guard let message = self.conversation.value.messages.filter({ $0.id == messageId }).first,
               let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
         self.conversationsService.deleteLocationUpdate(incoming: message.incoming, peerUri: jamiId, accountId: self.conversation.value.accountId, shouldRefreshConversations: true)
             .subscribe()
@@ -281,12 +280,11 @@ class ConversationViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: jamiId, userName: self.displayName.value ?? self.userName.value))
     }
 
-    func loadMoreMessages() {
-        if self.conversation.value.allMessagesLoaded() { return }
+    func loadMoreMessages(messageId: String) {
         self.conversationsService
             .loadConversationMessages(conversationId: self.conversation.value.id,
                                       accountId: self.conversation.value.accountId,
-                                      from: self.conversation.value.messages.value.first?.id ?? "")
+                                      from: messageId)
     }
 
     func startAudioCall() {
@@ -413,10 +411,6 @@ class ConversationViewModel: Stateable, ViewModel {
         //        self.messages.accept(conversationsMsg)
     }
 
-    func isLastDisplayed(messageId: String, peerJamiId: String) -> Bool {
-        return self.conversation.value.isLastDisplayed(messageId: messageId, peerJamiId: peerJamiId)
-    }
-
     var myLocation: Observable<CLLocation?> { return self.locationSharingService.currentLocation.asObservable() }
 
     var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
@@ -477,45 +471,6 @@ extension ConversationViewModel {
                 .disposed(by: self.disposeBag)
             self.presenceService.subscribeBuddy(withAccountId: self.conversation.value.accountId, withUri: self.conversation.value.getParticipants().first!.jamiId, withFlag: true)
         }
-    }
-
-    private func subscribeMessagesUpdate() {
-        conversation.value.messages
-            .subscribe { [weak self] messages in
-                guard let self = self else { return }
-                // update last message
-                guard let lastMessage = messages.last else { return }
-                self.lastMessage.accept(lastMessage.content)
-                // update last message date
-                let lastMessageDate = lastMessage.receivedDate
-                let dateToday = Date()
-                var dateString = ""
-
-                // Get components from today date
-                let todayWeekOfYear = Calendar.current.component(.weekOfYear, from: dateToday)
-                let todayDay = Calendar.current.component(.day, from: dateToday)
-                let todayMonth = Calendar.current.component(.month, from: dateToday)
-                let todayYear = Calendar.current.component(.year, from: dateToday)
-
-                // Get components from last message date
-                let weekOfYear = Calendar.current.component(.weekOfYear, from: lastMessageDate)
-                let day = Calendar.current.component(.day, from: lastMessageDate)
-                let month = Calendar.current.component(.month, from: lastMessageDate)
-                let year = Calendar.current.component(.year, from: lastMessageDate)
-
-                if todayDay == day && todayMonth == month && todayYear == year {
-                    dateString = self.hourFormatter.string(from: lastMessageDate)
-                } else if day == todayDay - 1 {
-                    dateString = L10n.Smartlist.yesterday
-                } else if todayYear == year && todayWeekOfYear == weekOfYear {
-                    dateString = lastMessageDate.dayOfWeek()
-                } else {
-                    dateString = self.dateFormatter.string(from: lastMessageDate)
-                }
-                self.lastMessageReceivedDate.accept(dateString)
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
     }
 
     private func subscribeUnreadMessages() {
@@ -673,18 +628,18 @@ extension ConversationViewModel {
         let conversationId = self.conversation.value.id
         let accountId = self.conversation.value.accountId
         // to send file we need to have file url or image
-        let url = message.transferedFile(conversationID: conversationId, accountId: accountId, isSwarm: self.conversation.value.isSwarm())
-        let image = url == nil ? message.getTransferedImage(maxSize: 200, conversationID: conversationId, accountId: accountId, isSwarm: self.conversation.value.isSwarm()) : nil
-        var fileName = message.content
-        if message.content.contains("\n") {
-            guard let substring = message.content.split(separator: "\n").first else { return }
-            fileName = String(substring)
-        }
-        selectedContacts.forEach { (item) in
-            guard let contact = item.contacts.first else { return }
-            self.shareMessage(message: message, with: contact, fileURL: url, image: image, fileName: fileName)
-        }
-        self.changeConversationIfNeeded(items: selectedContacts)
+        //        let url = message.transferedFile(conversationID: conversationId, accountId: accountId, isSwarm: self.conversation.value.isSwarm())
+        //        let image = url == nil ? message.getTransferedImage(maxSize: 200, conversationID: conversationId, accountId: accountId, isSwarm: self.conversation.value.isSwarm()) : nil
+        //        var fileName = message.content
+        //        if message.content.contains("\n") {
+        //            guard let substring = message.content.split(separator: "\n").first else { return }
+        //            fileName = String(substring)
+        //        }
+        //        selectedContacts.forEach { (item) in
+        //            guard let contact = item.contacts.first else { return }
+        //            self.shareMessage(message: message, with: contact, fileURL: url, image: image, fileName: fileName)
+        //        }
+        //        self.changeConversationIfNeeded(items: selectedContacts)
     }
 
     func resendMessage(message: MessageViewModel) {
@@ -701,15 +656,15 @@ extension ConversationViewModel {
             fileName = String(substring)
         }
         let isSwarm = self.conversation.value.isSwarm()
-        if let url = message.transferedFile(conversationID: conversationId, accountId: accountId, isSwarm: isSwarm) {
-            self.sendFile(filePath: url.path, displayName: fileName, contactHash: self.conversation.value.hash)
-            return
-        }
-        if let image = message.getTransferedImage(maxSize: 200, conversationID: conversationId, accountId: accountId, isSwarm: isSwarm) {
-            if let data = image.jpegData(compressionQuality: 100) {
-                self.sendAndSaveFile(displayName: fileName, imageData: data)
-            }
-        }
+        //        if let url = message.transferedFile(conversationID: conversationId, accountId: accountId, isSwarm: isSwarm) {
+        //            self.sendFile(filePath: url.path, displayName: fileName, contactHash: self.conversation.value.hash)
+        //            return
+        //        }
+        //        if let image = message.getTransferedImage(maxSize: 200, conversationID: conversationId, accountId: accountId, isSwarm: isSwarm) {
+        //            if let data = image.jpegData(compressionQuality: 100) {
+        //                self.sendAndSaveFile(displayName: fileName, imageData: data)
+        //            }
+        //        }
     }
 
     func slectContactsToShareMessage(message: MessageViewModel) {

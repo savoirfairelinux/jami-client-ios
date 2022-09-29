@@ -29,6 +29,7 @@ import Reusable
 import SwiftyBeaver
 import Photos
 import MobileCoreServices
+import SwiftUI
 
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
@@ -46,7 +47,7 @@ class ConversationViewController: UIViewController,
     let disposeBag = DisposeBag()
 
     var viewModel: ConversationViewModel!
-    var messageViewModels = [MessageViewModel]()
+    @Published var messageViewModels = [MessageViewModel]()
     var textFieldShouldEndEditing = false
     private let messageGroupingInterval = 10 * 60 // 10 minutes
     var bottomHeight: CGFloat = 0.00
@@ -85,22 +86,23 @@ class ConversationViewController: UIViewController,
                                                object: nil)
 
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    }
+        let list = MessagesList(list: MessagesListModel(bag: self.viewModel.injectionBag,
+                                                        convId: self.viewModel.conversation.value.id,
+                                                        accountId: self.viewModel.conversation.value.accountId, conversation: self.viewModel, presentPlayerCB: { player in
+                                                            self.viewModel.openFullScreenPreview(parentView: self, viewModel: player, image: nil, initialFrame: CGRect.zero, delegate: player)
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        // Waiting for screen size change
-        DispatchQueue.global(qos: .background).async {
-            sleep(UInt32(0.5))
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self,
-                      UIDevice.current.portraitOrLandscape else { return }
-                self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
-                                   displayName: self.viewModel.displayName.value,
-                                   username: self.viewModel.userName.value)
-                self.tableView.reloadData()
-            }
-        }
-        super.viewWillTransition(to: size, with: coordinator)
+                                                        }))
+        let childView = UIHostingController(rootView: list)
+        addChild(childView)
+        childView.view.frame = self.view.frame
+        self.view.addSubview(childView.view)
+        childView.view.translatesAutoresizingMaskIntoConstraints = false
+        childView.view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        childView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        childView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        childView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        childView.didMove(toParent: self)
+        self.view.sendSubviewToBack(childView.view)
     }
 
     @objc
@@ -622,63 +624,7 @@ class ConversationViewController: UIViewController,
         super.viewWillDisappear(animated)
         self.viewModel.setIsComposingMsg(isComposing: false)
         self.textFieldShouldEndEditing = true
-        // self.viewModel.setMessagesAsRead()
-    }
-
-    func subscribeMessages() {
-        self.viewModel.conversation.value.messages.asObservable()
-            .observe(on: MainScheduler.instance)
-            .startWith(self.viewModel.conversation.value.messages.value)
-            .subscribe(onNext: { [weak self] messages in
-                guard let self = self else {
-                    return
-                }
-                self.viewModel.setMessagesAsRead()
-                let oldNumber = self.messageViewModels.count
-                self.messageViewModels.removeAll()
-                for message in messages {
-                    let injBag = self.viewModel.injectionBag
-                    if let jamiId = self.viewModel.conversation.value.getParticipants().first?.jamiId {
-                        let isLastDisplayed = self.viewModel.isLastDisplayed(messageId: message.id, peerJamiId: jamiId)
-                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: isLastDisplayed))
-                    } else {
-                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: false))
-                    }
-                    //                    if self.viewModel.peerComposingMessage {
-                    //                        let msgModel = MessageModel(withId: "",
-                    //                                                    receivedDate: Date(),
-                    //                                                    content: "       ",
-                    //                                                    authorURI: self.viewModel.conversation.value.participants[0].uri,
-                    //                                                    incoming: true)
-                    //                        let composingIndicator = MessageViewModel(withInjectionBag: injBag, withMessage: msgModel, isLastDisplayed: false)
-                    //                        composingIndicator.isComposingIndicator = true
-                    //                        self.messageViewModels.append(composingIndicator)
-                    //                    }
-                }
-                let newNumber = self.messageViewModels.count
-                self.computeSequencing()
-                if oldNumber == newNumber {
-                    self.loadingMessages = false
-                    return
-                }
-                let numberOfRowsAdded = abs(newNumber - oldNumber)
-                if numberOfRowsAdded > 1 {
-                    let initialOffset = self.tableView.contentOffset.y
-                    self.tableView.alwaysBounceVertical = false
-                    self.tableView.isScrollEnabled = false
-                    self.tableView.reloadData()
-                    if numberOfRowsAdded < self.tableView.numberOfRows(inSection: 0) {
-                        self.tableView.scrollToRow(at: NSIndexPath(row: numberOfRowsAdded, section: 0) as IndexPath, at: .top, animated: false)
-                    }
-                    self.tableView.alwaysBounceVertical = true
-                    self.tableView.isScrollEnabled = true
-                    self.tableView.contentOffset.y += initialOffset
-                } else {
-                    self.tableView.reloadData()
-                }
-                self.loadingMessages = false
-            })
-            .disposed(by: self.disposeBag)
+        self.viewModel.setMessagesAsRead()
     }
 
     var cellHeights: [IndexPath: CGFloat] = [:]
@@ -698,15 +644,6 @@ class ConversationViewController: UIViewController,
         self.tableView.register(cellType: MessageCellGenerated.self)
         self.tableView.register(cellType: MessageCellLocationSharingSent.self)
         self.tableView.register(cellType: MessageCellLocationSharingReceived.self)
-        self.subscribeMessages()
-        self.viewModel.conversation
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] _ in
-                self?.subscribeMessages()
-            } onError: { _ in
-
-            }
-            .disposed(by: self.disposeBag)
 
         // Scroll to bottom when reloaded
         self.tableView.rx.methodInvoked(#selector(UITableView.reloadData))
@@ -851,6 +788,7 @@ class ConversationViewController: UIViewController,
             }
             lastMessageTime = currentMessageTime
             // sequencing
+            // print("&&&&&&&&set sequensing: \(messageViewModel.sequencing)")
             messageViewModel.sequencing = getMessageSequencing(forIndex: index)
         }
     }
@@ -888,6 +826,24 @@ class ConversationViewController: UIViewController,
                 sequencing = MessageSequencing.lastOfSequence
             } else if msgOwner == nextMessageItem?.bubblePosition() && msgOwner == lastMessageItem?.bubblePosition() {
                 sequencing = MessageSequencing.middleOfSequence
+            }
+        }
+
+        if messageItem.shouldShowTimeString {
+            if index == messageViewModels.count - 1 {
+                sequencing = .singleMessage
+            } else if sequencing != .singleMessage && sequencing != .lastOfSequence {
+                sequencing = .firstOfSequence
+            } else {
+                sequencing = .singleMessage
+            }
+        }
+
+        if index + 1 < messageViewModels.count && messageViewModels[index + 1].shouldShowTimeString {
+            switch sequencing {
+            case .firstOfSequence: sequencing = .singleMessage
+            case .middleOfSequence: sequencing = .lastOfSequence
+            default: break
             }
         }
         return sequencing
@@ -1034,11 +990,11 @@ class ConversationViewController: UIViewController,
     func shareImage(messageModel: MessageViewModel) {
         let conversation = self.viewModel.conversation.value
         let accountId = conversation.accountId
-        if let image = messageModel.getTransferedImage(maxSize: 250,
-                                                       conversationID: conversation.id,
-                                                       accountId: accountId, isSwarm: conversation.isSwarm()) {
-            self.presentActivityControllerWithItems(items: [image])
-        }
+        //        if let image = messageModel.getTransferedImage(maxSize: 250,
+        //                                                       conversationID: conversation.id,
+        //                                                       accountId: accountId, isSwarm: conversation.isSwarm()) {
+        //            self.presentActivityControllerWithItems(items: [image])
+        //        }
     }
 
     func presentActivityControllerWithItems(items: [Any]) {
@@ -1079,10 +1035,10 @@ class ConversationViewController: UIViewController,
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let visibleIndexes = self.tableView.indexPathsForVisibleRows
         guard let first = visibleIndexes?.first?.row else { return }
-        if first < 1 && !loadingMessages {
-            loadingMessages = true
-            self.viewModel.loadMoreMessages()
-        }
+        //        if first < 1 && !loadingMessages {
+        //            loadingMessages = true
+        //            self.viewModel.loadMoreMessages()
+        //        }
     }
 }
 

@@ -24,7 +24,7 @@ import RxSwift
 /// A StateableResponsive can react to Stateable that expose Observable<State>
 protocol StateableResponsive {
     /// The Rx subject that will be feed by each Stateable
-    var stateSubject: PublishSubject<State> { get }
+    var stateSubject: PublishSubject<State1> { get }
 
     /// The Rx bag that will be used for stateSubject subscriptions
     var disposeBag: DisposeBag { get }

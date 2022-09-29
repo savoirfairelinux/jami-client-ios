@@ -90,13 +90,16 @@ class ConversationParticipant: Equatable {
     }
 }
 
+typealias OrderedMessage = (message: MessageModel, index: Int)
+
 class ConversationModel: Equatable {
-    var messages = BehaviorRelay<[MessageModel]>(value: [MessageModel]())
+    var newMessages = BehaviorRelay<[MessageModel]>(value: [MessageModel]())
     private var participants = [ConversationParticipant]()
+    var messages = [MessageModel]()
     var hash = ""/// contact hash for dialog, conversation title for multiparticipants
     var accountId: String = ""
     var id: String = ""
-    var lastDisplayedMessage: (id: String, timestamp: Date) = ("", Date())
+    var lastMessage: MessageModel?
     var type: ConversationType = .nonSwarm
     var needsSyncing = false
     var unorderedInteractions = [String]()/// array ofr interaction id with child not currently present in messages
@@ -151,20 +154,20 @@ class ConversationModel: Equatable {
     }
 
     private func subscribeUnreadMessages() {
-        if self.isSwarm() { return }
-        self.messages.asObservable()
-            .subscribe { [weak self] messages in
-                guard let self = self else { return }
-                let number = messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
-                self.numberOfUnreadMessages.accept(number)
-
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
+        //        if self.isSwarm() { return }
+        //        self.messages.asObservable().share()
+        //            .subscribe { [weak self] messages in
+        //                guard let self = self else { return }
+        //                let number = messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
+        //                self.numberOfUnreadMessages.accept(number)
+        //
+        //            } onError: { _ in
+        //            }
+        //            .disposed(by: self.disposeBag)
     }
 
     func getMessage(withDaemonID daemonID: String) -> MessageModel? {
-        return self.messages.value.filter({ message in
+        return self.messages.filter({ message in
             return message.daemonId == daemonID
         }).first
     }
@@ -179,13 +182,13 @@ class ConversationModel: Equatable {
         let last = self.participants.filter { participant in
             !participant.isLocal
         }.first?.lastDisplayed
-        if let message = self.messages.value.filter({ ($0.id == last) }).first {
+        if let message = self.messages.filter({ ($0.id == last) }).first {
             if !message.incoming {
                 return last
-            } else if let index = self.messages.value.firstIndex(where: { message in
+            } else if let index = self.messages.firstIndex(where: { message in
                 message.id == last
             }) {
-                if let newMessage = self.messages.value[0..<index].reversed().filter({ !$0.incoming }).first {
+                if let newMessage = self.messages[0..<index].reversed().filter({ !$0.incoming }).first {
                     return newMessage.id
                 }
             }
@@ -204,26 +207,26 @@ class ConversationModel: Equatable {
     }
 
     func setMessageAsRead(messageId: String, daemonId: String) {
-        if let message = self.messages.value.filter({ messageModel in
+        if let message = self.messages.filter({ messageModel in
             messageModel.id == messageId && messageModel.daemonId == daemonId
         }).first {
             message.status = .displayed
         }
         if !self.isSwarm() {
-            let number = self.messages.value.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
+            let number = self.messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
             self.numberOfUnreadMessages.accept(number)
         }
     }
 
     func setAllMessagesAsRead() {
-        let unreadMessages = self.messages.value.filter({ messages in
+        let unreadMessages = self.messages.filter({ messages in
             return messages.status != .displayed && messages.incoming && messages.type == .text
         })
         unreadMessages.forEach { message in
             message.status = .displayed
         }
         if !self.isSwarm() {
-            let number = self.messages.value.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
+            let number = self.messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
             self.numberOfUnreadMessages.accept(number)
         }
     }
@@ -278,24 +281,15 @@ class ConversationModel: Equatable {
     }
 
     func allMessagesLoaded() -> Bool {
-        guard let firstMessage = self.messages.value.first else { return false }
+        guard let firstMessage = self.messages.first else { return false }
         return firstMessage.parentId.isEmpty
     }
 
     func appendNonSwarm(message: MessageModel) {
-        var values = self.messages.value
-        values.append(message)
-        self.messages.accept(values)
+        self.messages.append(message)
     }
 
     func isSwarm() -> Bool {
         return self.type != .nonSwarm && self.type != .sip && self.type != .jams
-    }
-
-    func isLastDisplayed(messageId: String, peerJamiId: String) -> Bool {
-        if self.isSwarm() {
-            return self.getLastDisplayedMessageForDialog() == messageId
-        }
-        return lastDisplayedMessage.id == messageId
     }
 }

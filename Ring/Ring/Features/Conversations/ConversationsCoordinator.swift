@@ -40,7 +40,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     let injectionBag: InjectionBag
     let disposeBag = DisposeBag()
 
-    let stateSubject = PublishSubject<State>()
+    let stateSubject = PublishSubject<State1>()
     let callService: CallsService
     let accountService: AccountsService
     let conversationService: ConversationsService
