@@ -27,6 +27,7 @@ import Reusable
 import RxSwift
 import RxCocoa
 import SwiftyBeaver
+import LinkPresentation
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
@@ -37,6 +38,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
 
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var bubble: MessageBubble!
+    @IBOutlet weak var webLinkView: UIView?
     @IBOutlet weak var bubbleBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bubbleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageLabelMarginConstraint: NSLayoutConstraint!
@@ -49,6 +51,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var buttonsHeightConstraint: NSLayoutConstraint?
     @IBOutlet weak var bubbleHeightConstraint: NSLayoutConstraint?
+    @IBOutlet weak var bubbleWidthConstraint: NSLayoutConstraint?
     @IBOutlet weak var bottomCorner: UIView!
     @IBOutlet weak var topCorner: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -62,6 +65,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
     private var transferImageView = UIImageView()
     private var transferProgressView = ProgressView()
     private var composingMsg = UIView()
+    private var linkMetaDataView: LPLinkView = LPLinkView(metadata: LPLinkMetadata())
 
     var dataTransferProgressUpdater: Timer?
     var outgoingImageProgressUpdater: Timer?
@@ -116,6 +120,11 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         self.playerView?.removeFromSuperview()
         self.composingMsg.removeFromSuperview()
         self.transferImageView.image = nil
+        linkMetaDataView = LPLinkView(metadata: LPLinkMetadata())
+        self.webLinkView?.removeSubviews()
+        bubbleHeightConstraint?.constant = 31
+        bubbleWidthConstraint?.constant = 34
+        self.messageLabel?.text = ""
         self.playerHeight.accept(0)
         self.disposeBag = DisposeBag()
         openPreview.accept(false)
@@ -386,6 +395,20 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
             self.setCellTimeLabelVisibility(hide: false)
         }
     }
+    func showMessageLabel(content: String) {
+        self.webLinkView?.isHidden = true
+        self.messageLabel?.isUserInteractionEnabled = true
+        self.messageLabel?.setTextWithLineSpacing(withText: content, withLineSpacing: 2)
+        self.messageLabel?.handleURLTap()
+    }
+    func showWebLinkView(metadata: LPLinkMetadata) {
+        self.topCorner?.backgroundColor = .clear
+        self.bottomCorner?.backgroundColor = .clear
+        self.linkMetaDataView.metadata = metadata
+        self.webLinkView?.addSubview(self.linkMetaDataView)
+        self.webLinkView?.contentMode = .scaleAspectFill
+        self.linkMetaDataView.contentMode = .scaleAspectFill
+    }
 
     // bubble grouping for cell
     // swiftlint:disable cyclomatic_complexity
@@ -396,8 +419,11 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
 
         self.topCorner.isHidden = true
         self.bottomCorner.isHidden = true
+        self.webLinkView?.isHidden = true
         self.bubbleBottomConstraint.constant = 8
         self.bubbleTopConstraint.constant = 8
+        bubbleHeightConstraint?.constant = 31
+        bubbleWidthConstraint?.constant = 34
 
         if item.isTransfer {
             let contentArr = item.content.components(separatedBy: "\n")
@@ -408,9 +434,38 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
                 self.messageLabel?.text = item.content
             }
         } else {
-            self.messageLabel?.isUserInteractionEnabled = true
-            self.messageLabel?.setTextWithLineSpacing(withText: item.content, withLineSpacing: 2)
-            self.messageLabel?.handleURLTap()
+            if item.content.isValidURL {
+                guard let url = URL(string: item.content) else {
+                    self.showMessageLabel(content: item.content)
+                    return
+                }
+                self.webLinkView?.isHidden = false
+                self.bubble.backgroundColor = UIColor.jamiMsgCellWebLink
+                let maxDimension: CGFloat = getMaxDimensionForTransfer()
+                bubbleHeightConstraint?.constant = maxDimension
+                bubbleWidthConstraint?.constant = maxDimension
+                self.topCorner?.backgroundColor = .jamiMsgCellWebLink
+                self.bottomCorner?.backgroundColor = .jamiMsgCellWebLink
+                self.linkMetaDataView.frame = CGRect(x: 0, y: 0, width: maxDimension, height: maxDimension)
+                if let storedMetaData = item.metaData {
+                    self.showWebLinkView(metadata: storedMetaData)
+                } else {
+                    let metaDataProvider = LPMetadataProvider()
+                    metaDataProvider.startFetchingMetadata(for: url) {(metaDataObj, error) in
+                        DispatchQueue.main.async { [weak self, weak metaDataObj, weak item] in
+                            guard let self = self, let item = item else { return }
+                            guard error == nil, let metaDataObj = metaDataObj else {
+                                self.showMessageLabel(content: item.content)
+                                return
+                            }
+                            item.metaData = metaDataObj
+                            self.showWebLinkView(metadata: metaDataObj)
+                        }
+                    }
+                }
+            } else {
+                self.showMessageLabel(content: item.content)
+            }
         }
 
         item.sequencing = { (item: MessageViewModel) -> MessageSequencing in
@@ -593,7 +648,6 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
 
     private func configureTransferCell(_ item: MessageViewModel, _ conversationViewModel: ConversationViewModel) {
         guard item.isTransfer else { return }
-
         self.messageLabel?.lineBreakMode = .byTruncatingMiddle
 
         if item.bubblePosition() == .received {
