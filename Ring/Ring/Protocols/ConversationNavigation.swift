@@ -21,7 +21,7 @@
 
 import RxSwift
 
-enum ConversationState: State {
+enum ConversationState: State1 {
     case startCall(contactRingId: String, userName: String)
     case startAudioCall(contactRingId: String, userName: String)
     case conversationDetail(conversationViewModel: ConversationViewModel)
