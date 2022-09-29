@@ -25,6 +25,7 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 import MobileCoreServices
+import LinkPresentation
 
 enum BubblePosition {
     case received
@@ -58,6 +59,7 @@ class MessageViewModel {
     private let dataTransferService: DataTransferService
     private let profileService: ProfilesService
     var message: MessageModel
+    var metaData: LPLinkMetadata?
 
     var profileImageData = BehaviorRelay<Data?>(value: nil)
 
