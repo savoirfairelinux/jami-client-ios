@@ -29,6 +29,7 @@ import Reusable
 import SwiftyBeaver
 import Photos
 import MobileCoreServices
+import SwiftUI
 
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
@@ -46,7 +47,7 @@ class ConversationViewController: UIViewController,
     let disposeBag = DisposeBag()
 
     var viewModel: ConversationViewModel!
-    var messageViewModels = [MessageViewModel]()
+    @Published var messageViewModels = [MessageViewModel]()
     var textFieldShouldEndEditing = false
     private let messageGroupingInterval = 10 * 60 // 10 minutes
     var bottomHeight: CGFloat = 0.00
@@ -85,22 +86,22 @@ class ConversationViewController: UIViewController,
                                                object: nil)
 
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-    }
+        let list = MessagesList(list: MessagesListModel(bag: self.viewModel.injectionBag,
+                                                        convId: self.viewModel.conversation.value.id,
+                                                        accountId: self.viewModel.conversation.value.accountId, conversation: self.viewModel, presentPlayerCB: { player in
+                                                            self.viewModel.openFullScreenPreview(parentView: self, viewModel: player, image: nil, initialFrame: CGRect.zero, delegate: player)
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        // Waiting for screen size change
-        DispatchQueue.global(qos: .background).async {
-            sleep(UInt32(0.5))
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self,
-                      UIDevice.current.portraitOrLandscape else { return }
-                self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
-                                   displayName: self.viewModel.displayName.value,
-                                   username: self.viewModel.userName.value)
-                self.tableView.reloadData()
-            }
-        }
-        super.viewWillTransition(to: size, with: coordinator)
+                                                        }))
+        let childView = UIHostingController(rootView: list)
+        addChild(childView)
+        childView.view.frame = self.view.frame
+        self.view.addSubview(childView.view)
+        childView.view.translatesAutoresizingMaskIntoConstraints = false
+        childView.view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        childView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        childView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        childView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        childView.didMove(toParent: self)
     }
 
     @objc
@@ -637,13 +638,13 @@ class ConversationViewController: UIViewController,
                 let oldNumber = self.messageViewModels.count
                 self.messageViewModels.removeAll()
                 for message in messages {
-                    let injBag = self.viewModel.injectionBag
-                    if let jamiId = self.viewModel.conversation.value.getParticipants().first?.jamiId {
-                        let isLastDisplayed = self.viewModel.isLastDisplayed(messageId: message.id, peerJamiId: jamiId)
-                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: isLastDisplayed))
-                    } else {
-                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: false))
-                    }
+                    //                    let injBag = self.viewModel.injectionBag
+                    //                    if let jamiId = self.viewModel.conversation.value.getParticipants().first?.jamiId {
+                    //                        let isLastDisplayed = self.viewModel.isLastDisplayed(messageId: message.id, peerJamiId: jamiId)
+                    //                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: isLastDisplayed, convId: "", ))
+                    //                    } else {
+                    //                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: false))
+                    // }
                     //                    if self.viewModel.peerComposingMessage {
                     //                        let msgModel = MessageModel(withId: "",
                     //                                                    receivedDate: Date(),
@@ -851,6 +852,7 @@ class ConversationViewController: UIViewController,
             }
             lastMessageTime = currentMessageTime
             // sequencing
+            // print("&&&&&&&&set sequensing: \(messageViewModel.sequencing)")
             messageViewModel.sequencing = getMessageSequencing(forIndex: index)
         }
     }
@@ -888,6 +890,24 @@ class ConversationViewController: UIViewController,
                 sequencing = MessageSequencing.lastOfSequence
             } else if msgOwner == nextMessageItem?.bubblePosition() && msgOwner == lastMessageItem?.bubblePosition() {
                 sequencing = MessageSequencing.middleOfSequence
+            }
+        }
+
+        if messageItem.shouldShowTimeString {
+            if index == messageViewModels.count - 1 {
+                sequencing = .singleMessage
+            } else if sequencing != .singleMessage && sequencing != .lastOfSequence {
+                sequencing = .firstOfSequence
+            } else {
+                sequencing = .singleMessage
+            }
+        }
+
+        if index + 1 < messageViewModels.count && messageViewModels[index + 1].shouldShowTimeString {
+            switch sequencing {
+            case .firstOfSequence: sequencing = .singleMessage
+            case .middleOfSequence: sequencing = .lastOfSequence
+            default: break
             }
         }
         return sequencing
@@ -1034,11 +1054,11 @@ class ConversationViewController: UIViewController,
     func shareImage(messageModel: MessageViewModel) {
         let conversation = self.viewModel.conversation.value
         let accountId = conversation.accountId
-        if let image = messageModel.getTransferedImage(maxSize: 250,
-                                                       conversationID: conversation.id,
-                                                       accountId: accountId, isSwarm: conversation.isSwarm()) {
-            self.presentActivityControllerWithItems(items: [image])
-        }
+        //        if let image = messageModel.getTransferedImage(maxSize: 250,
+        //                                                       conversationID: conversation.id,
+        //                                                       accountId: accountId, isSwarm: conversation.isSwarm()) {
+        //            self.presentActivityControllerWithItems(items: [image])
+        //        }
     }
 
     func presentActivityControllerWithItems(items: [Any]) {

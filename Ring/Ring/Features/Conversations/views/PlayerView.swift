@@ -113,6 +113,7 @@ class PlayerView: UIView {
         Bundle.main.loadNibNamed("PlayerView", owner: self, options: nil)
         addSubview(containerView)
         containerView.frame = self.bounds
+        containerView.backgroundColor = .black
         let circleImage = makeCircleWith(size: CGSize(width: 15, height: 15),
                                          backgroundColor: UIColor.white)
         progressSlider.setThumbImage(circleImage, for: .normal)

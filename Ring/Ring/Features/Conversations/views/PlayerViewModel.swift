@@ -25,7 +25,23 @@ protocol PlayerDelegate: AnyObject {
     func extractedVideoFrame(with height: CGFloat)
 }
 
-class PlayerViewModel {
+class PlayerViewModel: PreviewViewControllerDelegate {
+    func deleteFile() {
+
+    }
+
+    func shareFile() {
+
+    }
+
+    func forwardFile() {
+
+    }
+
+    func saveFile() {
+
+    }
+
     var hasVideo = BehaviorRelay<Bool>(value: true)
     var playerDuration = BehaviorRelay<Float>(value: 0)
     var playerPosition = PublishSubject<Float>()
@@ -81,6 +97,7 @@ class PlayerViewModel {
             self?.seekToTime(time: 0)
             self?.startTimer()
             self?.playerReady.accept(true)
+            self?.playBackFrame.onNext(self?.firstFrame)
             if let image = renderer?.data {
                 DispatchQueue.main.async {
                     self?.delegate?.extractedVideoFrame(with: image.size.height)

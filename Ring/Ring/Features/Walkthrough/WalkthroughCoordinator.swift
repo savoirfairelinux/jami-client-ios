@@ -38,7 +38,7 @@ public enum WalkthroughType {
 /// - profileCreated: profile has been created
 /// - accountCreated: account has finish creating
 /// - deviceLinked: linking has finished
-public enum WalkthroughState: State {
+public enum WalkthroughState: State1 {
     case welcomeDone(withType: WalkthroughType)
     case profileCreated
     case accountCreated
@@ -61,7 +61,7 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
     private let injectionBag: InjectionBag
     let disposeBag = DisposeBag()
 
-    let stateSubject = PublishSubject<State>()
+    let stateSubject = PublishSubject<State1>()
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
