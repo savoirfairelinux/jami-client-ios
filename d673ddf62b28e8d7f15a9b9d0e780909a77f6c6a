@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bd91368_6fb7944c",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-29T16:48:43Z",
+      "side": 1,
+      "message": "empty space",
+      "revId": "d673ddf62b28e8d7f15a9b9d0e780909a77f6c6a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dae5e05_020f45b3",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-29T16:48:43Z",
+      "side": 1,
+      "message": "do we need it?",
+      "revId": "d673ddf62b28e8d7f15a9b9d0e780909a77f6c6a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae178fcd_96fd3f8a",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-29T16:48:43Z",
+      "side": 1,
+      "message": "if recording stopped after changing media the signal should be emitted from the daemon",
+      "revId": "d673ddf62b28e8d7f15a9b9d0e780909a77f6c6a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84dcc5a_d20cb78e",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-29T16:48:43Z",
+      "side": 1,
+      "message": "same",
+      "revId": "d673ddf62b28e8d7f15a9b9d0e780909a77f6c6a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
