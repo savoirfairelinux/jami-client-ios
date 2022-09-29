@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fdfbbac_b36d0ced",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-29T15:36:01Z",
+      "side": 1,
+      "message": "Do not apply message sequencing style to preview",
+      "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f91ecaa_33d0e197",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-29T15:36:01Z",
+      "side": 1,
+      "message": "use safe unwrap for URL",
+      "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16d86fe9_017b1d3e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-29T15:36:01Z",
+      "side": 1,
+      "message": "we should handle the case of error or no metadata",
+      "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32944525_acc4d281",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-29T15:36:01Z",
+      "side": 1,
+      "message": "This is not transfer, this part could be in the applyBubbleStyleToCell",
+      "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
