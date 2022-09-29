@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32621da5_a626ab0a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-09-29T15:44:44Z",
+      "side": 1,
+      "message": "we could cache metadata to avoid fetching on scroll",
+      "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f91ecaa_33d0e197",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
         "patchSetId": 3
