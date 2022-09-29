@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5831df8c_4ad4c964",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-29T15:46:15Z",
+      "side": 1,
+      "message": "What class could hold the data?",
+      "parentUuid": "32621da5_a626ab0a",
+      "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f91ecaa_33d0e197",
         "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
         "patchSetId": 3
