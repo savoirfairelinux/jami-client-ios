@@ -90,9 +90,12 @@ class ConversationParticipant: Equatable {
     }
 }
 
+typealias OrderedMessage = (message: MessageModel, index: Int)
+
 class ConversationModel: Equatable {
     var messages = BehaviorRelay<[MessageModel]>(value: [MessageModel]())
     private var participants = [ConversationParticipant]()
+    // var messages = [MessageModel]()
     var hash = ""/// contact hash for dialog, conversation title for multiparticipants
     var accountId: String = ""
     var id: String = ""
@@ -152,7 +155,7 @@ class ConversationModel: Equatable {
 
     private func subscribeUnreadMessages() {
         if self.isSwarm() { return }
-        self.messages.asObservable()
+        self.messages.asObservable().share()
             .subscribe { [weak self] messages in
                 guard let self = self else { return }
                 let number = messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
