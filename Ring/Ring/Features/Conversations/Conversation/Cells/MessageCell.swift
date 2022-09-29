@@ -60,7 +60,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
     @IBOutlet weak var messageReadIndicator: UIView?
 
     private var transferImageView = UIImageView()
-    private var transferProgressView = ProgressView()
+    private var transferProgressView = ProgressView1()
     private var composingMsg = UIView()
 
     var dataTransferProgressUpdater: Timer?

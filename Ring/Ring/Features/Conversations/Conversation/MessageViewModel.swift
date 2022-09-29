@@ -49,8 +49,8 @@ enum GeneratedMessageType: String {
     case outgoingCall = "Outgoing call"
 }
 
-class MessageViewModel {
-
+class MessageViewModel: Identifiable {
+    var id: String
     private let log = SwiftyBeaver.self
 
     private let accountService: AccountsService
@@ -87,6 +87,7 @@ class MessageViewModel {
         self.initialTransferStatus = message.transferStatus
         self.status.onNext(message.status)
         self.displayReadIndicator = BehaviorRelay<Bool>(value: isLastDisplayed)
+        self.id = message.id
         // self.displayReadIndicator.accept(isLastDisplayed)
         self.subscribeProfileServiceContactPhoto()
 

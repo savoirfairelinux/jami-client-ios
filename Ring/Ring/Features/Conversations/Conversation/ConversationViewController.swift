@@ -29,6 +29,7 @@ import Reusable
 import SwiftyBeaver
 import Photos
 import MobileCoreServices
+import SwiftUI
 
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
@@ -46,7 +47,7 @@ class ConversationViewController: UIViewController,
     let disposeBag = DisposeBag()
 
     var viewModel: ConversationViewModel!
-    var messageViewModels = [MessageViewModel]()
+    @Published var messageViewModels = [MessageViewModel]()
     var textFieldShouldEndEditing = false
     private let messageGroupingInterval = 10 * 60 // 10 minutes
     var bottomHeight: CGFloat = 0.00
@@ -85,6 +86,11 @@ class ConversationViewController: UIViewController,
                                                object: nil)
 
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let childView = UIHostingController(rootView: MessagesList(list: MessagesListModel(messages: self.viewModel.conversation.value.messages.asObservable(), bag: self.viewModel.injectionBag)))
+        addChild(childView)
+        childView.view.frame = self.view.frame
+        self.view.addSubview(childView.view)
+        childView.didMove(toParent: self)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
