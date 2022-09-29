@@ -24,7 +24,7 @@ import RxSwift
 /// Represents Me navigation state
 ///
 /// -linkDevice: link new device to account
-public enum MeState: State {
+public enum MeState: State1 {
     case linkNewDevice
     case blockedContacts
     case needToOnboard
@@ -48,7 +48,7 @@ class MeCoordinator: Coordinator, StateableResponsive {
     private let injectionBag: InjectionBag
     let disposeBag = DisposeBag()
 
-    let stateSubject = PublishSubject<State>()
+    let stateSubject = PublishSubject<State1>()
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
