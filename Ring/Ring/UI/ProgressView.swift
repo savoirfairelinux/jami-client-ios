@@ -22,7 +22,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ProgressView: UIView {
+class ProgressView1: UIView {
     var maximumValue: CGFloat = 100
 
     var imageView: UIVisualEffectView = UIVisualEffectView()

@@ -63,7 +63,7 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
     @IBOutlet weak var messageReadIndicator: UIView?
 
     private var transferImageView = UIImageView()
-    private var transferProgressView = ProgressView()
+    private var transferProgressView = ProgressView1()
     private var composingMsg = UIView()
     private var linkMetaDataView: LPLinkView = LPLinkView(metadata: LPLinkMetadata())
 
@@ -206,26 +206,26 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
 
     @objc
     func updateProgressBar(timer: Timer) {
-        guard let userInfoDict = timer.userInfo as? NSDictionary else { return }
-        guard let transferId = userInfoDict["transferId"] as? String else { return }
-        guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
-        if let progress = viewModel.getTransferProgress(transferId: transferId, accountId: viewModel.conversation.value.accountId) {
-            DispatchQueue.main.async { [weak self] in
-                self?.progressBar.progress = progress
-            }
-        }
+        //        guard let userInfoDict = timer.userInfo as? NSDictionary else { return }
+        //        guard let transferId = userInfoDict["transferId"] as? String else { return }
+        //        guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
+        //        if let progress = viewModel.getTransferProgress(transferId: transferId, accountId: viewModel.conversation.value.accountId) {
+        //            DispatchQueue.main.async { [weak self] in
+        //                self?.progressBar.progress = progress
+        //            }
+        //        }
     }
 
     @objc
     func updateOutgoigTransfer(timer: Timer) {
-        guard let userInfoDict = timer.userInfo as? NSDictionary else { return }
-        guard let transferId = userInfoDict["transferId"] as? String else { return }
-        guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
-        if let progress = viewModel.getTransferProgress(transferId: transferId, accountId: viewModel.conversation.value.accountId) {
-            DispatchQueue.main.async { [weak self] in
-                self?.transferProgressView.progress = CGFloat(progress * 100)
-            }
-        }
+        //        guard let userInfoDict = timer.userInfo as? NSDictionary else { return }
+        //        guard let transferId = userInfoDict["transferId"] as? String else { return }
+        //        guard let viewModel = userInfoDict["conversationViewModel"] as? ConversationViewModel else { return }
+        //        if let progress = viewModel.getTransferProgress(transferId: transferId, accountId: viewModel.conversation.value.accountId) {
+        //            DispatchQueue.main.async { [weak self] in
+        //                self?.transferProgressView.progress = CGFloat(progress * 100)
+        //            }
+        //        }
     }
 
     // MARK: Configure
@@ -492,7 +492,6 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
             }
             return adjustedSequencing
         }(item)
-
         switch item.sequencing {
         case .firstOfSequence:
             self.bottomCorner.isHidden = item.isTransfer

@@ -27,10 +27,13 @@ enum MessageAttributes: String {
     case displayName = "displayName"
     case body = "body"
     case author = "author"
+    case uri = "uri"
     case timestamp = "timestamp"
     case parent = "linearizedParent"
     case action = "action"
     case duration = "duration"
+    case reply = "reply-to"
+    case react = "react-to"
 }
 
 enum MessageType: String {
@@ -41,6 +44,7 @@ enum MessageType: String {
     case location = "location"
     case merge = "merge"
     case initial = "initial"
+    case profile = "application/update-profile"
 }
 
 enum ContactAction: String {
@@ -48,9 +52,10 @@ enum ContactAction: String {
     case remove
     case join
     case banned
+    case unban
 }
 
-class MessageModel {
+public class MessageModel {
 
     var id: String = ""
     /// daemonId for dht messages, file transfer id for datatransfer
@@ -60,11 +65,14 @@ class MessageModel {
     var content: String = ""
     /// jamiId for sender. For outgoing message authorId is empty
     var authorId: String = ""
+    var uri: String = ""
     var status: MessageStatus = .unknown
     var transferStatus: DataTransferStatus = .unknown
     var incoming: Bool
     var parentId: String = ""
     var type: MessageType = .text
+    var reply: String = ""
+    var react: String = ""
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -81,6 +89,9 @@ class MessageModel {
         if let author = info[MessageAttributes.author.rawValue], author != accountJamiId {
             self.authorId = author
         }
+        if let uri = info[MessageAttributes.uri.rawValue] {
+            self.uri = uri
+        }
         if let type = info[MessageAttributes.type.rawValue],
            let messageType = MessageType(rawValue: type) {
             self.type = messageType
@@ -88,7 +99,13 @@ class MessageModel {
         if let content = info[MessageAttributes.body.rawValue], self.type == .text {
             self.content = content
         }
-        incoming = !self.authorId.isEmpty
+        if let reply = info[MessageAttributes.reply.rawValue] {
+            self.reply = reply
+        }
+        if let react = info[MessageAttributes.react.rawValue] {
+            self.react = react
+        }
+        incoming = self.uri != accountJamiId
         if let parent = info[MessageAttributes.parent.rawValue] {
             self.parentId = parent
         }
@@ -120,13 +137,16 @@ class MessageModel {
                let contactAction = ContactAction(rawValue: action) {
                 switch contactAction {
                 case .add:
-                    self.content = self.incoming ? L10n.GeneratedMessage.invitationReceived : L10n.GeneratedMessage.contactAdded
+                    self.content = self.incoming ? L10n.GeneratedMessage.invitationReceived :
+                        L10n.GeneratedMessage.contactAdded
                 case .join:
-                    self.content = L10n.GeneratedMessage.invitationAccepted
+                    self.content = self.incoming ? L10n.GeneratedMessage.invitationAccepted : L10n.GeneratedMessage.youJoined
                 case .remove:
                     self.content = L10n.GeneratedMessage.contactLeftConversation
-                default:
-                    break
+                case.banned:
+                    self.content = L10n.GeneratedMessage.contactBanned
+                case .unban:
+                    self.content = L10n.GeneratedMessage.contactReAdded
                 }
             }
         case .fileTransfer:
@@ -137,8 +157,8 @@ class MessageModel {
                 self.content = displayName
             }
         case .initial:
-            self.type = .contact
-            self.content = self.incoming ? "Invitation received" : "Contact added"
+            self.type = .initial
+            self.content = L10n.GeneratedMessage.swarmCreated
         default:
             break
         }

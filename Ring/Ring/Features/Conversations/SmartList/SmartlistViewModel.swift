@@ -341,7 +341,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     func closeAllPlayers() {
-        self.conversationViewModels.forEach { (conversationModel) in
+        self.conversationViewModels.forEach { conversationModel in
             conversationModel.closeAllPlayers()
         }
     }

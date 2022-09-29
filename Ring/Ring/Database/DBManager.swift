@@ -547,6 +547,8 @@ class DBManager {
                                                      accountId: accountId) {
                     observable.onNext(profile)
                     observable.on(.completed)
+                } else {
+                    observable.on(.error(DBBridgingError.getProfileFailed))
                 }
             } catch {
                 observable.on(.error(DBBridgingError.getProfileFailed))
@@ -649,19 +651,20 @@ class DBManager {
                     ? participant : ""
                 if let message = self.convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
-                    let displayedMessage = author.isEmpty && message.status == .displayed
-                    let isLater = conversationModel
-                        .lastDisplayedMessage.id.isEmpty ||
-                        conversationModel
-                        .lastDisplayedMessage.timestamp < message.receivedDate
-                    if displayedMessage && isLater {
-                        conversationModel
-                            .lastDisplayedMessage = (message.id,
-                                                     message.receivedDate)
-                    }
+                    //                    let displayedMessage = author.isEmpty && message.status == .displayed
+                    //                    let isLater = conversationModel
+                    //                        .lastDisplayedMessage.id.isEmpty ||
+                    //                        conversationModel
+                    //                        .lastDisplayedMessage.timestamp < message.receivedDate
+                    //                    if displayedMessage && isLater {
+                    //                        conversationModel
+                    //                            .lastDisplayedMessage = (message.id,
+                    //                                                     message.receivedDate)
+                    //                    }
                 }
             }
-            conversationModel.messages.accept(messages)
+            conversationModel.messages = messages
+            // conversationModel.messages.accept(messages)
             conversationsToReturn.append(conversationModel)
         }
         return conversationsToReturn
