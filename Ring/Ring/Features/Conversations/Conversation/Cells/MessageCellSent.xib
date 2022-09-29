@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -50,13 +50,21 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGS-F6-Lya">
+                                <rect key="frame" x="0.0" y="0.0" width="219.33333333333334" height="31"/>
+                                <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="1Kj-UZ-gu7"/>
                             <constraint firstItem="lyR-7c-S2k" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" constant="14" id="8m5-sR-xnh"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="BZE-kP-hPK"/>
+                            <constraint firstItem="xGS-F6-Lya" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" id="G7B-hX-C0g"/>
+                            <constraint firstAttribute="trailing" secondItem="xGS-F6-Lya" secondAttribute="trailing" id="Okg-HZ-wIt"/>
+                            <constraint firstAttribute="bottom" secondItem="xGS-F6-Lya" secondAttribute="bottom" id="Z2D-Cc-PDf"/>
                             <constraint firstAttribute="bottom" secondItem="lyR-7c-S2k" secondAttribute="bottom" constant="7" id="gwN-uX-PWd"/>
+                            <constraint firstItem="xGS-F6-Lya" firstAttribute="leading" secondItem="kZJ-Ay-LTR" secondAttribute="leading" id="taw-qa-QJ4"/>
                             <constraint firstAttribute="trailing" secondItem="lyR-7c-S2k" secondAttribute="trailing" constant="14" id="uzV-kG-oGN"/>
                             <constraint firstItem="lyR-7c-S2k" firstAttribute="top" secondItem="kZJ-Ay-LTR" secondAttribute="top" constant="7" id="ycc-WI-Jk6"/>
                         </constraints>
@@ -67,21 +75,21 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8N-aw-5lV" userLabel="Right Divider">
-                        <rect key="frame" x="348" y="19" width="126" height="1"/>
+                        <rect key="frame" x="347.33333333333331" y="19" width="126.66666666666669" height="1"/>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="3h1-r8-Nis"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2U4-l3-KET" userLabel="Left Divider">
-                        <rect key="frame" x="36" y="19" width="126" height="1"/>
+                        <rect key="frame" x="36" y="19" width="127" height="1"/>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="gla-pJ-IsN"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11/14/2016 12:34PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogn-wv-fZy" userLabel="Message Time">
-                        <rect key="frame" x="178" y="9" width="154" height="21"/>
+                        <rect key="frame" x="179" y="9" width="152.33333333333337" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -145,6 +153,7 @@
                 <outlet property="bubbleBottomConstraint" destination="1QQ-bu-6Bl" id="woo-UQ-wXK"/>
                 <outlet property="bubbleHeightConstraint" destination="1Kj-UZ-gu7" id="VMV-Ea-Je4"/>
                 <outlet property="bubbleTopConstraint" destination="jhd-A8-c1o" id="cll-eA-OC5"/>
+                <outlet property="bubbleWidthConstraint" destination="BZE-kP-hPK" id="aIk-EN-p36"/>
                 <outlet property="failedStatusLabel" destination="P5a-HI-uhr" id="6Sq-NU-j0d"/>
                 <outlet property="leftDivider" destination="2U4-l3-KET" id="y4j-CT-gez"/>
                 <outlet property="messageLabel" destination="lyR-7c-S2k" id="hd3-pz-Pwh"/>
@@ -156,8 +165,9 @@
                 <outlet property="sendingIndicator" destination="78h-fZ-7yf" id="GrK-FT-q39"/>
                 <outlet property="timeLabel" destination="ogn-wv-fZy" id="7yt-vi-cSp"/>
                 <outlet property="topCorner" destination="EMh-bG-ilg" id="nHl-hn-BZ1"/>
+                <outlet property="webLinkView" destination="xGS-F6-Lya" id="qX8-y4-hxl"/>
             </connections>
-            <point key="canvasLocation" x="-411" y="-132.5"/>
+            <point key="canvasLocation" x="-411.59420289855075" y="-132.92410714285714"/>
         </tableViewCell>
     </objects>
 </document>
