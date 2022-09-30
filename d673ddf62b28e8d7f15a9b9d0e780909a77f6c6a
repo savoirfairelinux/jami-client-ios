@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f4f9f9e_f388127c",
+        "filename": "Ring/Ring/Bridging/CallsAdapter.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-30T21:41:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bd91368_6fb7944c",
+      "revId": "d673ddf62b28e8d7f15a9b9d0e780909a77f6c6a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dae5e05_020f45b3",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-09-29T16:48:43Z",
       "side": 1,
       "message": "do we need it?",
+      "revId": "d673ddf62b28e8d7f15a9b9d0e780909a77f6c6a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3fd770_4b683a70",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-30T21:41:03Z",
+      "side": 1,
+      "message": "Removed..",
+      "parentUuid": "5dae5e05_020f45b3",
       "revId": "d673ddf62b28e8d7f15a9b9d0e780909a77f6c6a",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9087b675_5d0ab8b3",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-30T21:41:03Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "ae178fcd_96fd3f8a",
+      "revId": "d673ddf62b28e8d7f15a9b9d0e780909a77f6c6a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f84dcc5a_d20cb78e",
         "filename": "Ring/Ring/Models/CallModel.swift",
         "patchSetId": 1
@@ -65,6 +119,24 @@
       "writtenOn": "2022-09-29T16:48:43Z",
       "side": 1,
       "message": "same",
+      "revId": "d673ddf62b28e8d7f15a9b9d0e780909a77f6c6a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b4db39_2792661c",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-30T21:41:03Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "f84dcc5a_d20cb78e",
       "revId": "d673ddf62b28e8d7f15a9b9d0e780909a77f6c6a",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

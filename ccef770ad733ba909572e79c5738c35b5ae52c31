@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "190c9e68_0d784a2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-09-30T21:41:03Z",
+      "side": 1,
+      "message": "I have added \"REC\" text with blink view in both audio and video call.",
+      "revId": "ccef770ad733ba909572e79c5738c35b5ae52c31",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
