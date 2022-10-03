@@ -58,12 +58,12 @@
 "conversation.explanationSendingLocationTo" = "Sie teilen Ihren Standort derzeit mit";
 "conversation.explanationReceivingLocationFrom" = "Sie erhalten derzeit einen Live-Standort von";
 "conversation.errorSavingImage" = "Fehler beim Speichern des Bildes in der Galerie";
-"conversation.receivedRequest" = "\%s\ hat Ihnen eine Gesprächsanfrage gesendet.";
-"conversation.requestMessage" = "Hallo,\nMöchten Sie dem Gespräch beitreten?";
+"conversation.receivedRequest" = "\%s\ hat Ihnen eine Unterhaltungsanfrage gesendet.";
+"conversation.requestMessage" = "Hallo,\nMöchten Sie der Unterhaltung beitreten?";
 "conversation.notContact" = "\%s\ befindet sich nicht in Ihrer Kontaktliste.";
 "conversation.sendRequest" = "Senden Sie ihm/ihr eine Kontaktanfrage, um sich gemeinsam austauschen zu können";
-"conversation.synchronizationTitle" = "Sie haben die Gesprächsanfrage angenommen.";
-"conversation.synchronizationMessage" = "Wir warten auf \%s\ Verbindungen, um die Konversation zu synchronisieren.";
+"conversation.synchronizationTitle" = "Sie haben die Unterhaltungsanfrage angenommen.";
+"conversation.synchronizationMessage" = "Wir warten auf \%s\ Verbindungen, um die Unterhaltung zu synchronisieren.";
 
 //Invitations
 "invitations.noInvitations" = "Keine Einladungen";
@@ -142,13 +142,13 @@
 "alerts.accountLinkedTitle" = "Verknüpfe Konto";
 "alerts.dbFailedTitle" = "Beim Start von Jami ist ein Fehler aufgetreten";
 "alerts.dbFailedMessage" = "Bitte schließen Sie die Anwendung und versuchen Sie, sie erneut zu öffnen";
-"alerts.confirmBlockContact" = "Sicher, dass Sie diesen Kontakt sperren wollen? Auch der Gesprächsverlauf mit diesem Kontakt wird unwiderruflich gelöscht.";
-"alerts.confirmBlockContactTitle" = "Kontakt sperren";
+"alerts.confirmBlockContact" = "Sicher, dass Sie diesen Kontakt blockieren wollen? Auch der Unterhaltungsverlauf mit diesem Kontakt wird unwiderruflich gelöscht.";
+"alerts.confirmBlockContactTitle" = "Kontakt blockieren";
 "alerts.confirmDeleteConversation" = "Sicher, dass Sie diese Unterhaltung unwiderruflich löschen wollen?";
 "alerts.confirmDeleteConversationFromContact" = "Sicher, dass Sie die Unterhaltung mit diesem Kontakt löschen wollen?";
 "alerts.confirmDeleteConversationTitle" = "Unterhaltung löschen";
 "alerts.confirmClearConversation" = "Sicher, dass sie den Gesprächsverlauf mit diesem Kontakt löschen wollen?";
-"alerts.confirmClearConversationTitle" = "Gesprächsverlauf löschen";
+"alerts.confirmClearConversationTitle" = "Unterhaltungsverlauf löschen";
 "alerts.noMediaPermissionsTitle" = "Medienzugriff nicht gewährt";
 "alerts.noLibraryPermissionsTitle" = "Zugriff auf die Bildergalerie nicht gewährt";
 "alerts.noLocationPermissionsTitle" = "Zugang zum Standort nicht gewährt";
@@ -168,7 +168,7 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Mehr erfahren";
 
 //Actions
-"actions.blockAction" = "Sperren";
+"actions.blockAction" = "Blockieren";
 "actions.deleteAction" = "Löschen";
 "actions.cancelAction" = "Abbrechen";
 "actions.clearAction" = "Löschen";
@@ -208,7 +208,7 @@
 "accountPage.credentialsHeader" = "Kontodetails";
 "accountPage.enableProxy" = "Proxy aktivieren";
 "accountPage.blockedContacts" = "Blockierte Kontakte";
-"accountPage.unblockContact" = "ENTSPERREN";
+"accountPage.unblockContact" = "Blockierung aufheben";
 "accountPage.proxyAddressAlert" = "Proxy Adresse angeben";
 "accountPage.enableProxy" = "Proxy aktivieren";
 "accountPage.noProxyExplanationLabel" = "Ihr Gerät wird keine Benachrichtigungen erhalten, wenn Proxy deaktiviert ist";
@@ -281,7 +281,7 @@
 "account.me" = "Ich";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "Keine gesperrten Kontakte";
+"blockListPage.noBlockedContacts" = "Keine blockierten Kontakte";
 
 //Link New Device
 "linkDevice.title" = "Verbinde ein neues Gerät";
@@ -296,7 +296,7 @@
 "contactPage.startVideoCall" = "Videoanruf starten";
 "contactPage.sendMessage" = "Nachricht senden";
 "contactPage.clearConversation" = "Chat löschen";
-"contactPage.blockContact" = "Kontakt sperren";
+"contactPage.blockContact" = "Kontakt blockieren";
 "contactPage.removeConversation" = "Unterhaltung entfernen";
 
 //DataTransfer

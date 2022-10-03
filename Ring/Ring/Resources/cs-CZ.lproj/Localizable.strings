@@ -24,9 +24,9 @@
 "global.ok" = "V pořádku";
 "global.close" = "Zavřít";
 "global.share" = "Sdílet";
-"global.forward" = "Forward";
+"global.forward" = "Dopředu";
 "global.save" = "Uložit";
-"global.resend" = "Resend";
+"global.resend" = "Znovu odeslat";
 "global.preview" = "Náhled";
 
 // Scan
@@ -35,13 +35,13 @@
 
 // Smartlist
 "smartlist.yesterday" = "Včera";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Veřejný adresář";
 "smartlist.conversations" = "Konverzace";
 "smartlist.searching" = "Hledá se...";
 "smartlist.noResults" = "Žádné výsledky";
 "smartlist.noConversation" = "Žádné konverzace";
 "smartlist.searchBarPlaceholder" = "Zadejte jméno...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Vyhledávání nových nebo stávajících kontaktů...";
 "smartlist.noNetworkConnectivity" = "Chybí připojení";
 "smartlist.cellularAccess" = "Ujistěte se, že je v nastavení zaručen buňkový (místní) přístup";
 "smartlist.accountsTitle" = "Účty";
@@ -50,20 +50,20 @@
 "smartlist.selectOneNumber" = "Vyberte jedno z čísel.";
 "smartlist.invitations" = "Pozvání";
 "smartlist.accountSettings" = "Nastavení účtu";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Pokročilá nastavení";
 "smartlist.aboutJami" = "O Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Napsat zprávu";
 "conversation.explanationSendingLocationTo" = "Právě sdílíte svou polohu s ";
 "conversation.explanationReceivingLocationFrom" = "Právě přijímáte aktuální polohu od ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
-"conversation.receivedRequest" = "\%s\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%s\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.errorSavingImage" = "Nepodařilo se uložit obrázek do galerie";
+"conversation.receivedRequest" = "\%s\ vám poslal žádost o konverzaci.";
+"conversation.requestMessage" = "Dobrý den,\nChcete se připojit ke konverzaci?";
+"conversation.notContact" = "\%s\ není ve vašich kontaktech.";
+"conversation.sendRequest" = "Pošlete mu/jí žádost o kontakt, abyste si mohli společně vyměňovat.";
+"conversation.synchronizationTitle" = "Přijali jste žádost o konverzaci.";
+"conversation.synchronizationMessage" = "Čekáme, až se \%s\ připojí, aby mohlo dokjít k synchronizaci konverzace.";
 
 //Invitations
 "invitations.noInvitations" = "Žádná pozvání";
@@ -97,7 +97,7 @@
 "createAccount.lookingForUsernameAvailability" = "Zjišťuje se dostupnost…";
 "createAccount.invalidUsername" = "Neplatné uživatelské jméno";
 "createAccount.usernameAlreadyTaken" = "Uživatelské jméno již zabráno";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "Uživatelské jméno není dostupné";
 "createAccount.loading" = "Nahrávání";
 "createAccount.waitCreateAccountTitle" = "Přidávám účet";
 "createAccount.RegisterAUsername" = "Zaregistrovat uživatelské jméno";
@@ -126,7 +126,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Uživatelské jméno";
 "linkToAccountManager.usernameLabel" = "Zadejte uživatelské jméno.";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Zadejte adresu URL služby JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nelze nalézt účet";
@@ -192,13 +192,13 @@
 "calls.callFinished" = "Hovor ukončen";
 "calls.currentCallWith" = "Volat s ";
 "calls.haghUp" = "Zavěsit";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
-"calls.lowerHand" = "lower hand";
+"calls.maximize" = "maximalizovat";
+"calls.minimize" = "minimalizovat";
+"calls.setModerator" = "Nastavit moderátora";
+"calls.removeModerator" = "Nenastavený moderátor";
+"calls.muteAudio" = "Ztlumit zvuk";
+"calls.unmuteAudio" = "Zrušení ztlumení zvuku";
+"calls.lowerHand" = "ruka položena";
 
 //Account Page
 "accountPage.devicesListHeader" = "Zařízení";
@@ -257,7 +257,7 @@
 "accountPage.noBoothMode" = "Pro umožnění režimu budky je nejdříve potřeba vytvořit heslo účtu.";
 "accountPage.boothModeAlertMessage" = "Po umožnění režimu budky budou všechny vaše konverzace odstraněny.";
 "accountPage.peerDiscovery" = "Automatické připojení na místní síti";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Automatická registrace po vypršení platnosti";
 
 //Account
 "account.sipUsername" = "Uživatelské jméno";
@@ -265,7 +265,7 @@
 "account.sipServer" = "Server SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Vytvoření účtu SIP";
 "account.usernameLabel" = "Zadejte uživatelské jméno.";
 "account.passwordLabel" = "Zadejte heslo";
 "account.serverLabel" = "Zadejte adresu.";
@@ -339,7 +339,7 @@
 "generatedMessage.missedOutgoingCall" = "Nepřijatý odchozí hovor";
 "generatedMessage.missedIncomingCall" = "Zmeškaný příchozí hovor";
 "generatedMessage.liveLocationSharing" = "Sdílení aktuální polohy";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "Kontakt opustil konverzaci";
 
 //General Settings
 "generalSettings.title" = "Pokročilá nastavení";
