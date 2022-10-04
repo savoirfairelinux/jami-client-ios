@@ -70,6 +70,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f4cbbd8_19c8be30",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-10-04T15:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f91ecaa_33d0e197",
+      "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16d86fe9_017b1d3e",
@@ -87,6 +105,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26b7533a_88d0ad43",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-10-04T15:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16d86fe9_017b1d3e",
+      "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32944525_acc4d281",
@@ -100,6 +136,24 @@
       "writtenOn": "2022-09-29T15:36:01Z",
       "side": 1,
       "message": "This is not transfer, this part could be in the applyBubbleStyleToCell",
+      "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3536ee04_ad434dbf",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-10-04T15:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32944525_acc4d281",
       "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
