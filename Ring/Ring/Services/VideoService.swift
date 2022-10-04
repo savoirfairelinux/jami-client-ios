@@ -50,7 +50,7 @@ enum VideoCodecs: String {
 }
 
 protocol FrameExtractorDelegate: AnyObject {
-    func captured(imageBuffer: CVImageBuffer?, image: UIImage)
+    func captured(imageBuffer: CVImageBuffer?, image: UIImage, objSampleBuffer: CMSampleBuffer?)
     func updateDevicePosition(position: AVCaptureDevice.Position)
 }
 
@@ -264,7 +264,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
         DispatchQueue.main.async { [weak self] in
-            self?.delegate?.captured(imageBuffer: imageBuffer, image: uiImage)
+            self?.delegate?.captured(imageBuffer: imageBuffer, image: uiImage, objSampleBuffer: sampleBuffer)
         }
     }
 }
@@ -272,6 +272,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 typealias RendererTuple = (rendererId: String, data: UIImage?, running: Bool)
 
 class VideoService: FrameExtractorDelegate {
+    var bufferDisplayLayer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
 
     private let videoAdapter: VideoAdapter
     private let camera = FrameExtractor()
@@ -510,12 +511,15 @@ extension VideoService: VideoAdapterDelegate {
         }
     }
 
-    func captured(imageBuffer: CVImageBuffer?, image: UIImage) {
+    func captured(imageBuffer: CVImageBuffer?, image: UIImage, objSampleBuffer: CMSampleBuffer?) {
         if let cgImage = image.cgImage {
             self.capturedVideoFrame
                 .onNext(UIImage(cgImage: cgImage,
                                 scale: 1.0,
                                 orientation: self.getImageOrienation()))
+        }
+        if let buffer = objSampleBuffer {
+            bufferDisplayLayer.enqueue(buffer)
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
                                         angle: Int32(self.angle), videoInputId: "camera://" + self.currentDeviceId)
