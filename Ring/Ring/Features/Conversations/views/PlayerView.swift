@@ -41,7 +41,7 @@ class PlayerView: UIView {
     let MINSIZE: CGFloat = 30
 
     @IBOutlet var containerView: UIView!
-    @IBOutlet weak var incomingImage: UIImageView!
+    @IBOutlet weak var incomingVideo: UIView!
     @IBOutlet weak var togglePause: UIButton!
     @IBOutlet weak var muteAudio: UIButton!
     @IBOutlet weak var progressSlider: UISlider!
@@ -75,6 +75,7 @@ class PlayerView: UIView {
     @IBOutlet weak var imageBottomConstraint: NSLayoutConstraint!
 
     var viewModel: PlayerViewModel!
+    var incomingVideoLayer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
     let disposeBag = DisposeBag()
     var sliderDisposeBag = DisposeBag()
 
@@ -145,12 +146,16 @@ class PlayerView: UIView {
     }
 
     func bindViews() {
+        self.incomingVideo.layer.addSublayer(self.incomingVideoLayer)
         self.viewModel.playBackFrame
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] frame in
-                if let image = frame {
+            .subscribe(onNext: { [weak self] buffer in
+                guard let self = self else { return }
+                if let buffer = buffer {
                     DispatchQueue.main.async {
-                        self?.incomingImage.image = image
+                        self.incomingVideoLayer.enqueue(buffer)
+                        self.incomingVideoLayer.frame = self.incomingVideo.bounds
+                        self.incomingVideoLayer.videoGravity = .resizeAspect
                     }
                 }
             })

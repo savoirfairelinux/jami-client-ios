@@ -48,10 +48,18 @@ struct Renderer
                 return;
             }
             @autoreleasepool {
-                UIImage *image = [Utils
-                                  convertHardwareDecodedFrameToImage: std::move(frame.get())];
+                CVPixelBufferRef buffer = nullptr;
+                UIImage *image;
+                if (@available(iOS 15.0, *)) {
+                    buffer = [Utils getCVPixelBufferFromAVFrame:std::move(frame.get())];
+                }else {
+                    image = [Utils convertHardwareDecodedFrameToImage: std::move(frame.get())];
+                }
                 isRendering = true;
-                [VideoAdapter.videoDelegate writeFrameWithImage: image forCallId: rendererId];
+                [VideoAdapter.videoDelegate writeFrameWithImage: image forCallId: rendererId forbuffer: buffer];
+                if (@available(iOS 15.0, *)){
+                    CFRelease(buffer);
+                }
                 isRendering = false;
             }
         };

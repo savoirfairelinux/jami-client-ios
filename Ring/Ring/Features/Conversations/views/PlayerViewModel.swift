@@ -20,6 +20,8 @@
 
 import RxSwift
 import RxCocoa
+import CoreVideo
+import AVFoundation
 
 protocol PlayerDelegate: AnyObject {
     func extractedVideoFrame(with height: CGFloat)
@@ -31,14 +33,14 @@ class PlayerViewModel {
     var playerDuration = BehaviorRelay<Float>(value: 0)
     var playerPosition = PublishSubject<Float>()
     let seekTimeVariable = BehaviorRelay<Float>(value: 0)
-    let playBackFrame = PublishSubject<UIImage?>()
+    let playBackFrame = PublishSubject<CMSampleBuffer?>()
 
     let pause = BehaviorRelay<Bool>(value: true)
     let audioMuted = BehaviorRelay<Bool>(value: true)
     let playerReady = BehaviorRelay<Bool>(value: false)
     weak var delegate: PlayerDelegate?
 
-    var firstFrame: UIImage?
+    var firstFrame: CMSampleBuffer?
 
     private let disposeBag = DisposeBag()
     private var playBackDisposeBag = DisposeBag()
@@ -75,7 +77,7 @@ class PlayerViewModel {
         }
         .take(1)
         .map({[weak self] (renderer) -> Observable<RendererTuple?>  in
-            self?.firstFrame = renderer?.data
+            self?.firstFrame = renderer?.buffer
             self?.playerPosition.onNext(0)
             self?.toglePause()
             self?.muteAudio()
@@ -83,9 +85,11 @@ class PlayerViewModel {
             self?.startTimer()
             self?.playerReady.accept(true)
             self?.playBackFrame.onNext(self?.firstFrame)
-            if let image = renderer?.data {
+            if let sampleBuffer = renderer?.buffer,
+               let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
+                let imageHeight: CGFloat = CGFloat(CVPixelBufferGetHeight(imageBuffer))
                 DispatchQueue.main.async {
-                    self?.delegate?.extractedVideoFrame(with: image.size.height)
+                    self?.delegate?.extractedVideoFrame(with: imageHeight)
                 }
             }
             return self?.incomingFrame.filter {  [weak self] (render) -> Bool in
@@ -94,7 +98,7 @@ class PlayerViewModel {
         })
         .merge()
         .subscribe(onNext: {  [weak self] (renderer) in
-            self?.playBackFrame.onNext(renderer?.data)
+            self?.playBackFrame.onNext(renderer?.buffer)
         })
         .disposed(by: self.playBackDisposeBag)
 
