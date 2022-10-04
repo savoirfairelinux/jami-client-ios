@@ -24,7 +24,6 @@ import SwiftyBeaver
 import RxSwift
 import RxRelay
 import UIKit
-import AVFoundation
 
 // swiftlint:disable identifier_name
 
@@ -270,6 +269,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 }
 
 typealias RendererTuple = (rendererId: String, data: UIImage?, running: Bool)
+typealias PeerTuple = (rendererId: String, buffer: CMSampleBuffer?, running: Bool)
 
 class VideoService: FrameExtractorDelegate {
 
@@ -278,7 +278,9 @@ class VideoService: FrameExtractorDelegate {
 
     var cameraPosition = AVCaptureDevice.Position.front
     let incomingVideoFrame = PublishSubject<RendererTuple?>()
+    let peerVideoFrame = PublishSubject<PeerTuple?>()
     let capturedVideoFrame = PublishSubject<UIImage?>()
+    // let deviceVideoFrame = PublishSubject<CMSampleBuffer?>()
     let playerInfo = PublishSubject<Player>()
     var currentOrientation: AVCaptureVideoOrientation
 
@@ -459,6 +461,9 @@ extension VideoService: VideoAdapterDelegate {
     func decodingStopped(withRendererId rendererId: String) {
         self.log.debug("Decoding stopped...")
         self.incomingVideoFrame.onNext(RendererTuple(rendererId, nil, false))
+        if #available(iOS 15.0, *) {
+            self.peerVideoFrame.onNext(PeerTuple(rendererId, nil, false))
+        }
         videoAdapter.removeSinkTarget(withSinkId: rendererId)
     }
 
@@ -495,8 +500,131 @@ extension VideoService: VideoAdapterDelegate {
         self.camera.stopCapturing()
     }
 
-    func writeFrame(withImage image: UIImage?, forCallId: String) {
-        self.incomingVideoFrame.onNext(RendererTuple(forCallId, image, true))
+    func writeFrame(withImage image: UIImage?, forCallId: String, forbuffer: CVPixelBuffer?) {
+        if #available(iOS 15.0, *) {
+            //            guard let image = image else { return }
+            //            let loadBuffer = self.makeBuffer(from: image)
+
+            let sampleBuffer = self.createSampleBufferFrom(pixelBuffer: forbuffer)
+            guard let sampleBuffer = sampleBuffer else {return}
+            let buffer = self.setSampleBufferAttachments(sampleBuffer)
+            self.peerVideoFrame.onNext(PeerTuple(forCallId, buffer, true))
+        } else {
+            self.incomingVideoFrame.onNext(RendererTuple(forCallId, image, true))
+        }
+    }
+    /* func makeBuffer(from image: UIImage) -> CVPixelBuffer? {
+     let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+     var pixelBuffer: CVPixelBuffer?
+     let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(image.size.width), Int(image.size.height), kCVPixelFormatType_32ARGB, attrs, &pixelBuffer)
+     guard status == kCVReturnSuccess else {
+     return nil
+     }
+
+     CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+     let pData = CVPixelBufferGetBaseAddress(pixelBuffer!)
+
+     let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+     let iWidth = image.size.width
+     let iHeight = image.size.height
+     let context = CGContext(data: pData, width: Int(iWidth), height: Int(iHeight), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
+
+     context?.translateBy(x: 0, y: image.size.height)
+     context?.scaleBy(x: 1.0, y: -1.0)
+
+     UIGraphicsPushContext(context!)
+     image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+     UIGraphicsPopContext()
+     CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+
+     return pixelBuffer
+     }*/
+    // swiftlint:disable cyclomatic_complexity
+    func createSampleBufferFrom(pixelBuffer: CVPixelBuffer?) -> CMSampleBuffer? {
+        var sampleBuffer: CMSampleBuffer?
+
+        var timimgInfo = CMSampleTimingInfo()
+        var formatDescription: CMFormatDescription?
+        guard let pixelBuffer = pixelBuffer else { return nil }
+        CMVideoFormatDescriptionCreateForImageBuffer(allocator: kCFAllocatorDefault, imageBuffer: pixelBuffer, formatDescriptionOut: &formatDescription)
+
+        let osStatus = CMSampleBufferCreateReadyWithImageBuffer(
+            allocator: kCFAllocatorDefault,
+            imageBuffer: pixelBuffer,
+            formatDescription: formatDescription!,
+            sampleTiming: &timimgInfo,
+            sampleBufferOut: &sampleBuffer
+        )
+
+        // Print out errors
+        if osStatus == kCMSampleBufferError_AllocationFailed {
+            print("osStatus == kCMSampleBufferError_AllocationFailed")
+        }
+        if osStatus == kCMSampleBufferError_RequiredParameterMissing {
+            print("osStatus == kCMSampleBufferError_RequiredParameterMissing")
+        }
+        if osStatus == kCMSampleBufferError_AlreadyHasDataBuffer {
+            print("osStatus == kCMSampleBufferError_AlreadyHasDataBuffer")
+        }
+        if osStatus == kCMSampleBufferError_BufferNotReady {
+            print("osStatus == kCMSampleBufferError_BufferNotReady")
+        }
+        if osStatus == kCMSampleBufferError_SampleIndexOutOfRange {
+            print("osStatus == kCMSampleBufferError_SampleIndexOutOfRange")
+        }
+        if osStatus == kCMSampleBufferError_BufferHasNoSampleSizes {
+            print("osStatus == kCMSampleBufferError_BufferHasNoSampleSizes")
+        }
+        if osStatus == kCMSampleBufferError_BufferHasNoSampleTimingInfo {
+            print("osStatus == kCMSampleBufferError_BufferHasNoSampleTimingInfo")
+        }
+        if osStatus == kCMSampleBufferError_ArrayTooSmall {
+            print("osStatus == kCMSampleBufferError_ArrayTooSmall")
+        }
+        if osStatus == kCMSampleBufferError_InvalidEntryCount {
+            print("osStatus == kCMSampleBufferError_InvalidEntryCount")
+        }
+        if osStatus == kCMSampleBufferError_CannotSubdivide {
+            print("osStatus == kCMSampleBufferError_CannotSubdivide")
+        }
+        if osStatus == kCMSampleBufferError_SampleTimingInfoInvalid {
+            print("osStatus == kCMSampleBufferError_SampleTimingInfoInvalid")
+        }
+        if osStatus == kCMSampleBufferError_InvalidMediaTypeForOperation {
+            print("osStatus == kCMSampleBufferError_InvalidMediaTypeForOperation")
+        }
+        if osStatus == kCMSampleBufferError_InvalidSampleData {
+            print("osStatus == kCMSampleBufferError_InvalidSampleData")
+        }
+        if osStatus == kCMSampleBufferError_InvalidMediaFormat {
+            print("osStatus == kCMSampleBufferError_InvalidMediaFormat")
+        }
+        if osStatus == kCMSampleBufferError_Invalidated {
+            print("osStatus == kCMSampleBufferError_Invalidated")
+        }
+        if osStatus == kCMSampleBufferError_DataFailed {
+            print("osStatus == kCMSampleBufferError_DataFailed")
+        }
+        if osStatus == kCMSampleBufferError_DataCanceled {
+            print("osStatus == kCMSampleBufferError_DataCanceled")
+        }
+
+        guard let buffer = sampleBuffer else {
+            print("Cannot create sample buffer")
+            return nil
+        }
+
+        return buffer
+    }
+
+    func setSampleBufferAttachments(_ sampleBuffer: CMSampleBuffer) -> CMSampleBuffer {
+        let attachments: CFArray! = CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, createIfNecessary: true)
+        let dictionary = unsafeBitCast(CFArrayGetValueAtIndex(attachments, 0),
+                                       to: CFMutableDictionary.self)
+        let key = Unmanaged.passUnretained(kCMSampleAttachmentKey_DisplayImmediately).toOpaque()
+        let value = Unmanaged.passUnretained(kCFBooleanTrue).toOpaque()
+        CFDictionarySetValue(dictionary, key, value)
+        return sampleBuffer
     }
 
     func getImageOrienation() -> UIImage.Orientation {
@@ -526,6 +654,7 @@ extension VideoService: VideoAdapterDelegate {
                                 scale: 1.0,
                                 orientation: self.getImageOrienation()))
         }
+
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
                                         angle: Int32(self.angle), videoInputId: self.getVideoSource())
     }

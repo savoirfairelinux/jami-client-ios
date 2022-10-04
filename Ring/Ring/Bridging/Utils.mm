@@ -175,8 +175,48 @@ extern "C" {
     UIImage * imageUI = [UIImage imageWithCIImage:image];
     return imageUI;
 }
++(CVPixelBufferRef)getCVPixelBufferFromAVFrame:(const AVFrame *)frame {
+    CIImage *image;
+    CIContext *context = nil;
+    //CGColorSpaceRef rgbColorSpace = NULL;
+    CIImage *inputImage;
+    if ((CVPixelBufferRef)frame->data[3]) {
+        return (CVPixelBufferRef)frame->data[3];
+    } else {
+        auto buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
+        if (buffer == NULL) {
+            return NULL;
+        }
+        image = [CIImage imageWithCVPixelBuffer: buffer];
+        if (!image) {
+            return NULL;
+        }
+        if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
+            const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
+            auto rotation = av_display_rotation_get(data);
+            auto uiImageOrientation = [Utils uimageOrientationFromRotation:rotation];
+            auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
+            image = [image imageByApplyingCGOrientation: ciImageOrientation];
+            UIImage * imageUI = [UIImage imageWithCIImage:image scale:1 orientation: uiImageOrientation];
+            inputImage = imageUI.CIImage;
+            context = [CIContext contextWithCGContext:UIGraphicsGetCurrentContext() options:nil];
+
+//            if (context == nil) {
+//                rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+//                context = [CIContext contextWithOptions:@{kCIContextWorkingColorSpace: (__bridge id)rgbColorSpace,
+//                                                           kCIContextOutputColorSpace : (__bridge id)rgbColorSpace}];
+//            }
+        }
+        
+        [context render:inputImage toCVPixelBuffer:buffer];
+        return  buffer;
+    }
+}
 
 +(CVPixelBufferRef)converCVPixelBufferRefFromAVFrame:(const AVFrame *)frame {
+    if ((CVPixelBufferRef)frame->data[3]) {
+        return (CVPixelBufferRef)frame->data[3];
+    }
     if (!frame || !frame->data[0]) {
         return NULL;
     }
