@@ -52,6 +52,33 @@ extension UIImage {
 
         return result
     }
+    var cvPixelBuffer: CVPixelBuffer? {
+        let attrs = [
+            String(kCVPixelBufferCGImageCompatibilityKey): kCFBooleanTrue!,
+            String(kCVPixelBufferCGBitmapContextCompatibilityKey): kCFBooleanTrue!
+        ] as [String: Any]
+        var buffer: CVPixelBuffer?
+        let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(self.size.width), Int(self.size.height), kCVPixelFormatType_32ARGB, attrs as CFDictionary, &buffer)
+        guard status == kCVReturnSuccess else {
+            return nil
+        }
+
+        CVPixelBufferLockBaseAddress(buffer!, CVPixelBufferLockFlags(rawValue: 0))
+        let pData = CVPixelBufferGetBaseAddress(buffer!)
+
+        let cSpace = CGColorSpaceCreateDeviceRGB()
+        let context = CGContext(data: pData, width: Int(self.size.width), height: Int(self.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(buffer!), space: cSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
+
+        context?.translateBy(x: 0, y: self.size.height)
+        context?.scaleBy(x: 1.0, y: -1.0)
+
+        UIGraphicsPushContext(context!)
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        UIGraphicsPopContext()
+        CVPixelBufferUnlockBaseAddress(buffer!, CVPixelBufferLockFlags(rawValue: 0))
+
+        return buffer
+    }
 
     func setRoundCorner(radius: CGFloat, offset: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0)

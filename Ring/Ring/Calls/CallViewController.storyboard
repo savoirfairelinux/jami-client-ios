@@ -25,6 +25,18 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDj-CM-JeT">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hpr-bx-ZG4">
+                                        <rect key="frame" x="235" y="-500" width="120" height="160"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="7F6-wv-RAa"/>
+                                            <constraint firstAttribute="height" constant="160" id="Beg-sK-CDk"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOE-du-fSU" customClass="ConferenceLayout" customModule="Ring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <constraints>
@@ -189,7 +201,7 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CfE-DF-buX" userLabel="CapturedVideo">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="857"/>
                                             </imageView>
-                                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rt7-JS-vjg" userLabel="Blur Effect">
+                                            <visualEffectView opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rt7-JS-vjg" userLabel="Blur Effect">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="857"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="PYX-1b-sbf">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="857"/>
@@ -223,27 +235,31 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="2Lu-4b-uBO"/>
+                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="centerX" secondItem="DMu-Or-dd7" secondAttribute="centerX" id="12K-Al-4vm"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3RN-4M-qR4" secondAttribute="trailing" identifier="InfoContainerTrailingConstraint" id="5V0-5o-h5c"/>
-                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="height" secondItem="DMu-Or-dd7" secondAttribute="height" id="6ZM-UX-wEQ"/>
-                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="9tF-Ne-Pxj"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hpr-bx-ZG4" secondAttribute="trailing" constant="20" symbolic="YES" id="60N-UY-6ZE"/>
+                                    <constraint firstItem="fDj-CM-JeT" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="7Tf-RA-vyc"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZK1-Be-lcD" secondAttribute="trailing" id="9x1-VE-ej7"/>
                                     <constraint firstItem="BOE-du-fSU" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="AXr-7F-wPq"/>
-                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="width" secondItem="DMu-Or-dd7" secondAttribute="width" id="HHk-TU-w9h"/>
+                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="width" secondItem="DMu-Or-dd7" secondAttribute="width" id="Dzv-2n-lAo"/>
+                                    <constraint firstItem="fDj-CM-JeT" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="Kn0-6V-ybJ"/>
+                                    <constraint firstItem="fDj-CM-JeT" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="Nr2-0o-rEy"/>
                                     <constraint firstItem="3RN-4M-qR4" firstAttribute="leading" secondItem="ZVy-nB-bKJ" secondAttribute="leading" id="OAx-Xw-x6r"/>
                                     <constraint firstItem="3RN-4M-qR4" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="PNs-gW-YZp"/>
+                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="centerY" secondItem="DMu-Or-dd7" secondAttribute="centerY" id="Qrf-PJ-r3t"/>
+                                    <constraint firstItem="fDj-CM-JeT" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" id="S6n-Z3-nax"/>
                                     <constraint firstItem="BOE-du-fSU" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="TXL-am-F3x"/>
-                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" id="Xd0-GB-gSC"/>
-                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="width" secondItem="DMu-Or-dd7" secondAttribute="width" id="ZZ0-hX-Nwm"/>
-                                    <constraint firstItem="ZK1-Be-lcD" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" constant="45" id="Zyu-M5-fjh"/>
-                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="centerY" secondItem="DMu-Or-dd7" secondAttribute="centerY" id="cTk-Hv-nxM"/>
-                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="centerX" secondItem="DMu-Or-dd7" secondAttribute="centerX" id="f1S-rO-Hld"/>
-                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="height" secondItem="DMu-Or-dd7" secondAttribute="height" id="grY-ie-rVw"/>
+                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" id="VsL-cb-PVq"/>
+                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="centerX" secondItem="DMu-Or-dd7" secondAttribute="centerX" id="X2e-gl-aMT"/>
+                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="centerY" secondItem="DMu-Or-dd7" secondAttribute="centerY" id="YPw-HG-RmR"/>
+                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="width" secondItem="DMu-Or-dd7" secondAttribute="width" id="e81-pd-34j"/>
                                     <constraint firstItem="CfE-DF-buX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cgd-Wa-clf" secondAttribute="trailing" priority="750" constant="7" id="hmN-pb-JlG"/>
-                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="centerX" secondItem="DMu-Or-dd7" secondAttribute="centerX" id="oCc-Yp-7Ay"/>
-                                    <constraint firstItem="ZK1-Be-lcD" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="uTd-rs-MJH"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZK1-Be-lcD" secondAttribute="trailing" id="ugJ-SF-Enn"/>
-                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="centerY" secondItem="DMu-Or-dd7" secondAttribute="centerY" id="vuz-oT-1VO"/>
-                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="yFh-zq-lXh"/>
+                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="k7G-iF-3lB"/>
+                                    <constraint firstItem="Hpr-bx-ZG4" firstAttribute="top" secondItem="ZVy-nB-bKJ" secondAttribute="top" constant="-500" id="lCX-UY-kDJ"/>
+                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="height" secondItem="DMu-Or-dd7" secondAttribute="height" id="oSo-tj-he5"/>
+                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="height" secondItem="DMu-Or-dd7" secondAttribute="height" id="pGc-BN-t5W"/>
+                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="rjU-U1-pND"/>
+                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="yA2-Bu-Tst"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bij-Xb-EKH">
@@ -403,8 +419,10 @@
                             <constraint firstItem="LK6-u0-eLU" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="FbU-xz-BkQ"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="top" secondItem="3RN-4M-qR4" secondAttribute="top" id="G1C-hv-89U"/>
                             <constraint firstItem="5E0-lB-SkS" firstAttribute="centerX" secondItem="lZI-X0-bkP" secondAttribute="centerX" id="INh-Ix-uWw"/>
+                            <constraint firstItem="ZK1-Be-lcD" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="INy-1p-atS"/>
                             <constraint firstItem="5E0-lB-SkS" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" id="KFS-O1-Acs"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="top" secondItem="QpJ-Sx-9dG" secondAttribute="top" id="NrK-DR-BPG"/>
+                            <constraint firstItem="ZK1-Be-lcD" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" constant="45" id="U8s-yX-fkD"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="top" secondItem="ZK1-Be-lcD" secondAttribute="top" constant="45" id="Uew-ao-q8k"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="trailing" secondItem="bij-Xb-EKH" secondAttribute="trailing" id="W2C-XA-mUT"/>
                             <constraint firstItem="SdV-jx-Mla" firstAttribute="bottom" secondItem="LK6-u0-eLU" secondAttribute="top" constant="40" id="YIc-Oj-lc8"/>
@@ -447,10 +465,10 @@
                         <outlet property="callView" destination="ZVy-nB-bKJ" id="Sah-TI-SVz"/>
                         <outlet property="capturedVideo" destination="CfE-DF-buX" id="Hm5-ya-ijN"/>
                         <outlet property="capturedVideoBlurEffect" destination="rt7-JS-vjg" id="Swb-Mg-nfK"/>
-                        <outlet property="capturedVideoHeightConstraint" destination="Zyu-M5-fjh" id="8c1-Us-gvl"/>
+                        <outlet property="capturedVideoHeightConstraint" destination="U8s-yX-fkD" id="kIZ-sm-3jU"/>
                         <outlet property="capturedVideoTopConstraint" destination="Uew-ao-q8k" id="tzK-s5-FwX"/>
-                        <outlet property="capturedVideoTrailingConstraint" destination="ugJ-SF-Enn" id="Xlm-dP-U9Y"/>
-                        <outlet property="capturedVideoWidthConstraint" destination="uTd-rs-MJH" id="4Fc-ot-W4i"/>
+                        <outlet property="capturedVideoTrailingConstraint" destination="9x1-VE-ej7" id="r50-BL-h6L"/>
+                        <outlet property="capturedVideoWidthConstraint" destination="INy-1p-atS" id="5DU-4k-XrI"/>
                         <outlet property="conferenceCalls" destination="7G0-Fp-Xc3" id="KSO-wf-OJy"/>
                         <outlet property="conferenceCallsScrolView" destination="bij-Xb-EKH" id="YxK-ru-kO4"/>
                         <outlet property="conferenceCallsTop" destination="pgr-29-Lef" id="Wug-zj-y0Q"/>
@@ -465,6 +483,7 @@
                         <outlet property="leftArrow" destination="gWE-IS-b5p" id="Kxj-Fb-zuK"/>
                         <outlet property="mainView" destination="QpJ-Sx-9dG" id="0y9-R4-q5W"/>
                         <outlet property="nameLabel" destination="73Y-N1-Yga" id="XcQ-V6-ZrF"/>
+                        <outlet property="peerPipView" destination="fDj-CM-JeT" id="oM5-Hu-ajR"/>
                         <outlet property="profileImageView" destination="fnt-PQ-Q6P" id="MgB-Ev-bTc"/>
                         <outlet property="profileImageViewHeightConstraint" destination="V9c-7W-Frv" id="0iC-TD-RuH"/>
                         <outlet property="profileImageViewWidthConstraint" destination="Miw-Nd-4Fa" id="OSp-7J-TGC"/>
@@ -491,6 +510,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
