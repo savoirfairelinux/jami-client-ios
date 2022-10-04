@@ -53,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6bf8019_561a4f9f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCell.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-10-04T15:37:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5831df8c_4ad4c964",
+      "revId": "e105c33b10a830dc30b31b438c90cb01e48658e4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f91ecaa_33d0e197",
