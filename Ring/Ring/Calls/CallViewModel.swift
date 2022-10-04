@@ -34,7 +34,7 @@ enum CallViewMode {
 class CallViewModel: Stateable, ViewModel {
 
     // stateable
-    private let stateSubject = PublishSubject<State>()
+    let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
@@ -42,7 +42,7 @@ class CallViewModel: Stateable, ViewModel {
     let callService: CallsService
     private let contactsService: ContactsService
     private let accountService: AccountsService
-    private let videoService: VideoService
+    let videoService: VideoService
     private let audioService: AudioService
     private let profileService: ProfilesService
     private let conversationService: ConversationsService
@@ -198,6 +198,16 @@ class CallViewModel: Stateable, ViewModel {
             .map({ [weak self] renderer in
                 self?.hasIncomigVideo.accept(renderer?.running ?? false)
                 return renderer?.data
+            })
+    }()
+    lazy var peerFrame: Observable<CMSampleBuffer?> = {
+        return videoService.peerVideoFrame.asObservable()
+            .filter({[weak self] peer -> Bool in
+                (peer?.rendererId == self?.rendererId)
+            })
+            .map({[weak self] peer in
+                self?.hasIncomigVideo.accept(peer?.running ?? false)
+                return peer?.buffer
             })
     }()
 
