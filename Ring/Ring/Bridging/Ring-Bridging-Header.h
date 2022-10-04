@@ -49,3 +49,5 @@
 #import "DataTransferAdapter.h"
 #import "../../WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/MaplyBridge.h"
 #import "ObjCHandler.h"
+#import <AVKit/AVPictureInPictureController.h>
+#import <AVKit/AVPictureInPictureController_AVSampleBufferDisplayLayerSupport.h>

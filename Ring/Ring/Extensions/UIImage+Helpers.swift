@@ -52,7 +52,6 @@ extension UIImage {
 
         return result
     }
-
     func setRoundCorner(radius: CGFloat, offset: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0)
         let bounds = CGRect(origin: .zero, size: self.size)

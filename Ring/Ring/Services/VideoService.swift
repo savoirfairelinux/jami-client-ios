@@ -24,7 +24,6 @@ import SwiftyBeaver
 import RxSwift
 import RxRelay
 import UIKit
-import AVFoundation
 
 // swiftlint:disable identifier_name
 
@@ -270,6 +269,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 }
 
 typealias RendererTuple = (rendererId: String, data: UIImage?, running: Bool)
+typealias PeerTuple = (rendererId: String, buffer: CMSampleBuffer?, running: Bool)
 
 class VideoService: FrameExtractorDelegate {
 
@@ -278,7 +278,9 @@ class VideoService: FrameExtractorDelegate {
 
     var cameraPosition = AVCaptureDevice.Position.front
     let incomingVideoFrame = PublishSubject<RendererTuple?>()
+    let peerVideoFrame = PublishSubject<PeerTuple?>()
     let capturedVideoFrame = PublishSubject<UIImage?>()
+    // let deviceVideoFrame = PublishSubject<CMSampleBuffer?>()
     let playerInfo = PublishSubject<Player>()
     var currentOrientation: AVCaptureVideoOrientation
 
@@ -459,6 +461,9 @@ extension VideoService: VideoAdapterDelegate {
     func decodingStopped(withRendererId rendererId: String) {
         self.log.debug("Decoding stopped...")
         self.incomingVideoFrame.onNext(RendererTuple(rendererId, nil, false))
+        if #available(iOS 15.0, *) {
+            self.peerVideoFrame.onNext(PeerTuple(rendererId, nil, false))
+        }
         videoAdapter.removeSinkTarget(withSinkId: rendererId)
     }
 
@@ -495,8 +500,47 @@ extension VideoService: VideoAdapterDelegate {
         self.camera.stopCapturing()
     }
 
-    func writeFrame(withImage image: UIImage?, forCallId: String) {
-        self.incomingVideoFrame.onNext(RendererTuple(forCallId, image, true))
+    func writeFrame(withImage image: UIImage?, forCallId: String, forbuffer: CVPixelBuffer?) {
+        if #available(iOS 15.0, *) {
+            let sampleBuffer = self.createSampleBufferFrom(pixelBuffer: forbuffer)
+            guard let sampleBuffer = sampleBuffer else {return}
+            let buffer = self.setSampleBufferAttachments(sampleBuffer)
+            self.peerVideoFrame.onNext(PeerTuple(forCallId, buffer, true))
+        } else {
+            self.incomingVideoFrame.onNext(RendererTuple(forCallId, image, true))
+        }
+    }
+    func createSampleBufferFrom(pixelBuffer: CVPixelBuffer?) -> CMSampleBuffer? {
+        var sampleBuffer: CMSampleBuffer?
+
+        var timimgInfo = CMSampleTimingInfo()
+        var formatDescription: CMFormatDescription?
+        guard let pixelBuffer = pixelBuffer else { return nil }
+        CMVideoFormatDescriptionCreateForImageBuffer(allocator: kCFAllocatorDefault, imageBuffer: pixelBuffer, formatDescriptionOut: &formatDescription)
+
+        CMSampleBufferCreateReadyWithImageBuffer(
+            allocator: kCFAllocatorDefault,
+            imageBuffer: pixelBuffer,
+            formatDescription: formatDescription!,
+            sampleTiming: &timimgInfo,
+            sampleBufferOut: &sampleBuffer
+        )
+        guard let buffer = sampleBuffer else {
+            print("Cannot create sample buffer")
+            return nil
+        }
+
+        return buffer
+    }
+
+    func setSampleBufferAttachments(_ sampleBuffer: CMSampleBuffer) -> CMSampleBuffer {
+        let attachments: CFArray! = CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, createIfNecessary: true)
+        let dictionary = unsafeBitCast(CFArrayGetValueAtIndex(attachments, 0),
+                                       to: CFMutableDictionary.self)
+        let key = Unmanaged.passUnretained(kCMSampleAttachmentKey_DisplayImmediately).toOpaque()
+        let value = Unmanaged.passUnretained(kCFBooleanTrue).toOpaque()
+        CFDictionarySetValue(dictionary, key, value)
+        return sampleBuffer
     }
 
     func getImageOrienation() -> UIImage.Orientation {
