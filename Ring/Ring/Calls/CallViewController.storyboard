@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,10 +20,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVy-nB-bKJ" userLabel="CallView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DMu-Or-dd7">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7q-Qg-tdn">
+                                        <rect key="frame" x="0.0" y="5" width="375" height="812"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DMu-Or-dd7">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOE-du-fSU" customClass="ConferenceLayout" customModule="Ring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <constraints>
@@ -185,27 +193,20 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="2Lu-4b-uBO"/>
+                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="0Po-bu-nUz"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3RN-4M-qR4" secondAttribute="trailing" identifier="InfoContainerTrailingConstraint" id="5V0-5o-h5c"/>
-                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="height" secondItem="DMu-Or-dd7" secondAttribute="height" id="6ZM-UX-wEQ"/>
-                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="9tF-Ne-Pxj"/>
                                     <constraint firstItem="BOE-du-fSU" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="AXr-7F-wPq"/>
-                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="width" secondItem="DMu-Or-dd7" secondAttribute="width" id="HHk-TU-w9h"/>
                                     <constraint firstItem="3RN-4M-qR4" firstAttribute="leading" secondItem="ZVy-nB-bKJ" secondAttribute="leading" id="OAx-Xw-x6r"/>
                                     <constraint firstItem="3RN-4M-qR4" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="PNs-gW-YZp"/>
+                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" id="SyH-KY-CTa"/>
                                     <constraint firstItem="BOE-du-fSU" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="TXL-am-F3x"/>
-                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" id="Xd0-GB-gSC"/>
-                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="width" secondItem="DMu-Or-dd7" secondAttribute="width" id="ZZ0-hX-Nwm"/>
-                                    <constraint firstItem="ZK1-Be-lcD" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" constant="45" id="Zyu-M5-fjh"/>
-                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="centerY" secondItem="DMu-Or-dd7" secondAttribute="centerY" id="cTk-Hv-nxM"/>
-                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="centerX" secondItem="DMu-Or-dd7" secondAttribute="centerX" id="f1S-rO-Hld"/>
-                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="height" secondItem="DMu-Or-dd7" secondAttribute="height" id="grY-ie-rVw"/>
+                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="a6A-uq-wF5"/>
+                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="bNY-QI-scI"/>
+                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" id="dHe-wR-Ti6"/>
                                     <constraint firstItem="CfE-DF-buX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cgd-Wa-clf" secondAttribute="trailing" priority="750" constant="7" id="hmN-pb-JlG"/>
-                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="centerX" secondItem="DMu-Or-dd7" secondAttribute="centerX" id="oCc-Yp-7Ay"/>
-                                    <constraint firstItem="ZK1-Be-lcD" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="uTd-rs-MJH"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZK1-Be-lcD" secondAttribute="trailing" id="ugJ-SF-Enn"/>
-                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="centerY" secondItem="DMu-Or-dd7" secondAttribute="centerY" id="vuz-oT-1VO"/>
-                                    <constraint firstItem="DMu-Or-dd7" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="yFh-zq-lXh"/>
+                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="uqm-N6-YIc"/>
+                                    <constraint firstItem="K0W-KI-Ul4" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="usb-iz-qJ2"/>
+                                    <constraint firstItem="Zmp-OX-Cez" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="zu0-sz-QrZ"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bij-Xb-EKH">
@@ -322,6 +323,7 @@
                             <constraint firstItem="ZK1-Be-lcD" firstAttribute="leading" relation="lessThanOrEqual" secondItem="lZI-X0-bkP" secondAttribute="trailing" constant="-25" id="5UD-4Q-iDL"/>
                             <constraint firstItem="LK6-u0-eLU" firstAttribute="leading" secondItem="QpJ-Sx-9dG" secondAttribute="leading" id="6Ed-ct-5WE"/>
                             <constraint firstItem="bij-Xb-EKH" firstAttribute="leading" secondItem="ZVy-nB-bKJ" secondAttribute="leading" id="77F-7w-YAb"/>
+                            <constraint firstItem="O7q-Qg-tdn" firstAttribute="centerY" secondItem="lZI-X0-bkP" secondAttribute="centerY" id="AWq-Rn-RzR"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" id="DB0-aS-tKo"/>
                             <constraint firstItem="LK6-u0-eLU" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="Eep-Jy-4aG"/>
                             <constraint firstItem="3RN-4M-qR4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZVy-nB-bKJ" secondAttribute="leading" id="ElV-U4-tpk"/>
@@ -329,14 +331,20 @@
                             <constraint firstItem="LK6-u0-eLU" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="FbU-xz-BkQ"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="top" secondItem="3RN-4M-qR4" secondAttribute="top" id="G1C-hv-89U"/>
                             <constraint firstItem="5E0-lB-SkS" firstAttribute="centerX" secondItem="lZI-X0-bkP" secondAttribute="centerX" id="INh-Ix-uWw"/>
+                            <constraint firstItem="ZK1-Be-lcD" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="INy-1p-atS"/>
+                            <constraint firstItem="O7q-Qg-tdn" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" id="JvR-Ag-dt9"/>
                             <constraint firstItem="5E0-lB-SkS" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" id="KFS-O1-Acs"/>
+                            <constraint firstItem="O7q-Qg-tdn" firstAttribute="centerX" secondItem="lZI-X0-bkP" secondAttribute="centerX" id="KzZ-eY-ixv"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="top" secondItem="QpJ-Sx-9dG" secondAttribute="top" id="NrK-DR-BPG"/>
+                            <constraint firstItem="ZK1-Be-lcD" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" constant="45" id="U8s-yX-fkD"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="top" secondItem="ZK1-Be-lcD" secondAttribute="top" constant="45" id="Uew-ao-q8k"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="trailing" secondItem="bij-Xb-EKH" secondAttribute="trailing" id="W2C-XA-mUT"/>
                             <constraint firstItem="SdV-jx-Mla" firstAttribute="bottom" secondItem="LK6-u0-eLU" secondAttribute="top" constant="40" id="YIc-Oj-lc8"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerY" secondItem="QpJ-Sx-9dG" secondAttribute="centerY" id="bAN-gX-nPE"/>
                             <constraint firstAttribute="bottom" secondItem="LK6-u0-eLU" secondAttribute="bottom" id="dXj-zI-fQb"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerX" secondItem="lZI-X0-bkP" secondAttribute="centerX" id="ff0-Nw-f2Y"/>
+                            <constraint firstItem="lZI-X0-bkP" firstAttribute="trailing" secondItem="ZK1-Be-lcD" secondAttribute="trailing" id="m1U-eN-vwB"/>
+                            <constraint firstItem="O7q-Qg-tdn" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="mDx-h0-UX4"/>
                             <constraint firstItem="bij-Xb-EKH" firstAttribute="top" secondItem="ZK1-Be-lcD" secondAttribute="bottom" constant="-50" id="pgr-29-Lef"/>
                             <constraint firstItem="5E0-lB-SkS" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="rOQ-In-yON"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="sCh-Gw-iu0"/>
@@ -370,10 +378,10 @@
                         <outlet property="callView" destination="ZVy-nB-bKJ" id="Sah-TI-SVz"/>
                         <outlet property="capturedVideo" destination="CfE-DF-buX" id="Hm5-ya-ijN"/>
                         <outlet property="capturedVideoBlurEffect" destination="rt7-JS-vjg" id="Swb-Mg-nfK"/>
-                        <outlet property="capturedVideoHeightConstraint" destination="Zyu-M5-fjh" id="8c1-Us-gvl"/>
+                        <outlet property="capturedVideoHeightConstraint" destination="U8s-yX-fkD" id="kIZ-sm-3jU"/>
                         <outlet property="capturedVideoTopConstraint" destination="Uew-ao-q8k" id="tzK-s5-FwX"/>
-                        <outlet property="capturedVideoTrailingConstraint" destination="ugJ-SF-Enn" id="Xlm-dP-U9Y"/>
-                        <outlet property="capturedVideoWidthConstraint" destination="uTd-rs-MJH" id="4Fc-ot-W4i"/>
+                        <outlet property="capturedVideoTrailingConstraint" destination="m1U-eN-vwB" id="0qB-Yq-hFX"/>
+                        <outlet property="capturedVideoWidthConstraint" destination="INy-1p-atS" id="5DU-4k-XrI"/>
                         <outlet property="conferenceCalls" destination="7G0-Fp-Xc3" id="KSO-wf-OJy"/>
                         <outlet property="conferenceCallsScrolView" destination="bij-Xb-EKH" id="YxK-ru-kO4"/>
                         <outlet property="conferenceCallsTop" destination="pgr-29-Lef" id="Wug-zj-y0Q"/>
@@ -394,6 +402,7 @@
                         <outlet property="sendMessageButton" destination="GF7-hD-E63" id="YbY-mz-xvx"/>
                         <outlet property="spinner" destination="nwA-ao-thv" id="bJo-Wq-QmV"/>
                         <outlet property="viewCapturedVideo" destination="ZK1-Be-lcD" id="Go0-ab-yLg"/>
+                        <outlet property="viewIncomingVideo" destination="O7q-Qg-tdn" id="Sii-Zi-nP5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OFk-0u-Pap" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -405,5 +414,8 @@
         <image name="ic_back" width="24" height="24"/>
         <image name="ic_contact_picture" width="170.66667175292969" height="170.66667175292969"/>
         <image name="left_arrow" width="48" height="48"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

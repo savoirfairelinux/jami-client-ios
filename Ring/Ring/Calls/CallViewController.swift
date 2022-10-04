@@ -24,10 +24,12 @@ import UIKit
 import RxSwift
 import Reusable
 import SwiftyBeaver
+import AVKit
+import AVFoundation
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class CallViewController: UIViewController, StoryboardBased, ViewModelBased, ContactPickerDelegate {
+class CallViewController: UIViewController, StoryboardBased, ViewModelBased, ContactPickerDelegate, AVPictureInPictureSampleBufferPlaybackDelegate, AVPictureInPictureControllerDelegate {
 
     // preview screen
     @IBOutlet private weak var profileImageView: UIImageView!
@@ -39,7 +41,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet private weak var callPulse: UIView!
 
     @IBOutlet private weak var mainView: UIView!
-
     // video screen
     @IBOutlet private weak var callView: UIView!
     @IBOutlet private weak var incomingVideo: UIImageView!
@@ -48,6 +49,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var capturedVideo: UIImageView!
     @IBOutlet weak var capturedVideoBlurEffect: UIVisualEffectView!
     @IBOutlet weak var viewCapturedVideo: UIView!
+    @IBOutlet weak var viewIncomingVideo: UIView!
     @IBOutlet private weak var infoContainer: UIView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
@@ -107,6 +109,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
         self.setUpCallButtons()
         self.setupBindings()
+        self.setupPIP()
         self.profileImageView.tintColor = UIColor.jamiDefaultAvatar
         nameLabel.textColor = UIColor.jamiLabelColor
         durationLabel.textColor = UIColor.jamiLabelColor
@@ -133,6 +136,41 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         sendMessageButton.isHidden = self.viewModel.isBoothMode()
         sendMessageButton.isEnabled = !self.viewModel.isBoothMode()
         buttonsStackView.isHidden = self.viewModel.isBoothMode()
+    }
+    func setupPIP() {
+        //        let bufferDisplayLayer = self.viewModel.videoService.bufferDisplayLayer
+        //        bufferDisplayLayer.frame = self.view.bounds
+        //        bufferDisplayLayer.videoGravity = .resizeAspect
+        //        sourceView.layer.addSublayer(bufferDisplayLayer)
+        if #available(iOS 15.0, *) {
+            let pipVideoCallViewController = AVPictureInPictureVideoCallViewController()
+            incomingVideo.frame = self.view.bounds
+            incomingVideo.contentMode = .scaleAspectFit
+            //Uncomment me and Capture video will be disturbed
+
+            // viewCapturedVideo.frame = incomingVideo.bounds
+            // capturedVideo.contentMode = .scaleAspectFit
+            pipVideoCallViewController.view.addSubview(viewIncomingVideo)
+                //Uncomment me and Capture video will be disturbed
+            // pipVideoCallViewController.view.addSubview(viewCapturedVideo)
+            let pipContentSource = AVPictureInPictureController.ContentSource(
+                activeVideoCallSourceView: viewCapturedVideo,
+                contentViewController: pipVideoCallViewController)
+            pipVideoCallViewController.preferredContentSize = self.view.bounds.size
+            let pipController = AVPictureInPictureController(contentSource: pipContentSource)
+            pipController.canStartPictureInPictureAutomaticallyFromInline = true
+            pipController.delegate = self
+            /*            _ = pipController.observe(\AVPictureInPictureController.isPictureInPicturePossible,
+             //                                      options: [.initial, .new]) { [weak self] _, change in
+             //                print("isPictureInPicturePossible: \(change.newValue ?? false)")
+             //}
+             */
+            pipController.startPictureInPicture()
+            self.view.addSubview(pipVideoCallViewController.view)
+        } else {
+            // Fallback on earlier versions
+        }
+
     }
 
     func addTapGesture() {
@@ -854,6 +892,51 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
     func contactPickerDismissed() {
         self.addTapGesture()
+    }
+
+    // MARK: - AVPictureInPictureSampleBufferPlaybackDelegate
+
+    @objc
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, setPlaying playing: Bool) {
+        print("\(#function)")
+    }
+
+    @objc
+    func pictureInPictureControllerTimeRangeForPlayback(_ pictureInPictureController: AVPictureInPictureController) -> CMTimeRange {
+        print("\(#function)")
+        return CMTimeRange(start: .negativeInfinity, duration: .positiveInfinity)
+    }
+
+    @objc
+    func pictureInPictureControllerIsPlaybackPaused(_ pictureInPictureController: AVPictureInPictureController) -> Bool {
+        print("\(#function)")
+        return false
+    }
+
+    @objc
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, didTransitionToRenderSize newRenderSize: CMVideoDimensions) {
+        print("\(#function)")
+    }
+
+    @objc(pictureInPictureController:skipByInterval:completionHandler:)
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, skipByInterval skipInterval: CMTime, completion completionHandler: @escaping () -> Void) {
+        print("\(#function)")
+        completionHandler()
+    }
+
+    // MARK: - AVPictureInPictureControllerDelegate
+
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: Error) {
+        print("\(#function)")
+        print("pip error: \(error)")
+    }
+
+    func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
+        print("\(#function)")
+    }
+
+    func pictureInPictureControllerWillStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
+        print("\(#function)")
     }
 }
 
