@@ -42,7 +42,7 @@ class CallViewModel: Stateable, ViewModel {
     let callService: CallsService
     private let contactsService: ContactsService
     private let accountService: AccountsService
-    private let videoService: VideoService
+    let videoService: VideoService
     private let audioService: AudioService
     private let profileService: ProfilesService
     private let conversationService: ConversationsService
@@ -200,6 +200,16 @@ class CallViewModel: Stateable, ViewModel {
                 return renderer?.data
             })
     }()
+    lazy var peerFrame: Observable<CMSampleBuffer?> = {
+        return videoService.peerVideoFrame.asObservable()
+            .filter({[weak self] peer -> Bool in
+                (peer?.rendererId == self?.rendererId)
+            })
+            .map({[weak self] peer in
+                self?.hasIncomigVideo.accept(peer?.running ?? false)
+                return peer?.buffer
+            })
+    }()
 
     var rendererId = ""
     lazy var capturedFrame: Observable<UIImage?> = {
@@ -207,6 +217,11 @@ class CallViewModel: Stateable, ViewModel {
             return frame
         })
     }()
+    //    lazy var deviceFrame: Observable<CMSampleBuffer?> = {
+    //        return videoService.deviceVideoFrame.asObservable().map({ buffer in
+    //            return buffer
+    //        })
+    //    }()
 
     lazy var dismisVC: Observable<Bool> = {
         return currentCall
