@@ -177,6 +177,9 @@ extern "C" {
 }
 
 +(CVPixelBufferRef)converCVPixelBufferRefFromAVFrame:(const AVFrame *)frame {
+    if ((CVPixelBufferRef)frame->data[3]) {
+        return (CVPixelBufferRef)frame->data[3];
+    }
     if (!frame || !frame->data[0]) {
         return NULL;
     }

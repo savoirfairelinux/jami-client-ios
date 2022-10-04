@@ -42,7 +42,7 @@ class CallViewModel: Stateable, ViewModel {
     let callService: CallsService
     private let contactsService: ContactsService
     private let accountService: AccountsService
-    private let videoService: VideoService
+    let videoService: VideoService
     private let audioService: AudioService
     private let profileService: ProfilesService
     private let conversationService: ConversationsService

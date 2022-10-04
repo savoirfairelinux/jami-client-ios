@@ -50,7 +50,7 @@ enum VideoCodecs: String {
 }
 
 protocol FrameExtractorDelegate: AnyObject {
-    func captured(imageBuffer: CVImageBuffer?, image: UIImage)
+    func captured(imageBuffer: CVImageBuffer?, image: UIImage, objSampleBuffer: CMSampleBuffer?)
     func updateDevicePosition(position: AVCaptureDevice.Position)
 }
 
@@ -264,7 +264,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
         DispatchQueue.main.async { [weak self] in
-            self?.delegate?.captured(imageBuffer: imageBuffer, image: uiImage)
+            self?.delegate?.captured(imageBuffer: imageBuffer, image: uiImage, objSampleBuffer: sampleBuffer)
         }
     }
 }
@@ -272,6 +272,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 typealias RendererTuple = (rendererId: String, data: UIImage?, running: Bool)
 
 class VideoService: FrameExtractorDelegate {
+    var bufferDisplayLayer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
+    var bufferPeerLayer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
 
     private let videoAdapter: VideoAdapter
     private let camera = FrameExtractor()
@@ -486,9 +488,112 @@ extension VideoService: VideoAdapterDelegate {
         self.camera.stopCapturing()
     }
 
-    func writeFrame(withImage image: UIImage?, forCallId: String) {
+    func writeFrame(withImage image: UIImage?, forCallId: String, forbuffer: CVPixelBuffer?) {
+        if #available(iOS 15.0, *) {
+
+            let sampleBuffer = self.createSampleBufferFrom(pixelBuffer: forbuffer)
+            //            if sampleBuffer == nil {
+            //                print("Check Check")
+            //            }
+            if let buffer = sampleBuffer {
+                bufferPeerLayer.enqueue(buffer)
+            }
+        }
         self.incomingVideoFrame.onNext(RendererTuple(forCallId, image, true))
     }
+    // swiftlint:disable cyclomatic_complexity
+    func createSampleBufferFrom(pixelBuffer: CVPixelBuffer?) -> CMSampleBuffer? {
+        var sampleBuffer: CMSampleBuffer?
+
+        var timimgInfo = CMSampleTimingInfo()
+        var formatDescription: CMFormatDescription?
+        guard let pixelBuffer = pixelBuffer else { return nil }
+        CMVideoFormatDescriptionCreateForImageBuffer(allocator: kCFAllocatorDefault, imageBuffer: pixelBuffer, formatDescriptionOut: &formatDescription)
+
+        let osStatus = CMSampleBufferCreateReadyWithImageBuffer(
+            allocator: kCFAllocatorDefault,
+            imageBuffer: pixelBuffer,
+            formatDescription: formatDescription!,
+            sampleTiming: &timimgInfo,
+            sampleBufferOut: &sampleBuffer
+        )
+
+        // Print out errors
+        if osStatus == kCMSampleBufferError_AllocationFailed {
+            print("osStatus == kCMSampleBufferError_AllocationFailed")
+        }
+        if osStatus == kCMSampleBufferError_RequiredParameterMissing {
+            print("osStatus == kCMSampleBufferError_RequiredParameterMissing")
+        }
+        if osStatus == kCMSampleBufferError_AlreadyHasDataBuffer {
+            print("osStatus == kCMSampleBufferError_AlreadyHasDataBuffer")
+        }
+        if osStatus == kCMSampleBufferError_BufferNotReady {
+            print("osStatus == kCMSampleBufferError_BufferNotReady")
+        }
+        if osStatus == kCMSampleBufferError_SampleIndexOutOfRange {
+            print("osStatus == kCMSampleBufferError_SampleIndexOutOfRange")
+        }
+        if osStatus == kCMSampleBufferError_BufferHasNoSampleSizes {
+            print("osStatus == kCMSampleBufferError_BufferHasNoSampleSizes")
+        }
+        if osStatus == kCMSampleBufferError_BufferHasNoSampleTimingInfo {
+            print("osStatus == kCMSampleBufferError_BufferHasNoSampleTimingInfo")
+        }
+        if osStatus == kCMSampleBufferError_ArrayTooSmall {
+            print("osStatus == kCMSampleBufferError_ArrayTooSmall")
+        }
+        if osStatus == kCMSampleBufferError_InvalidEntryCount {
+            print("osStatus == kCMSampleBufferError_InvalidEntryCount")
+        }
+        if osStatus == kCMSampleBufferError_CannotSubdivide {
+            print("osStatus == kCMSampleBufferError_CannotSubdivide")
+        }
+        if osStatus == kCMSampleBufferError_SampleTimingInfoInvalid {
+            print("osStatus == kCMSampleBufferError_SampleTimingInfoInvalid")
+        }
+        if osStatus == kCMSampleBufferError_InvalidMediaTypeForOperation {
+            print("osStatus == kCMSampleBufferError_InvalidMediaTypeForOperation")
+        }
+        if osStatus == kCMSampleBufferError_InvalidSampleData {
+            print("osStatus == kCMSampleBufferError_InvalidSampleData")
+        }
+        if osStatus == kCMSampleBufferError_InvalidMediaFormat {
+            print("osStatus == kCMSampleBufferError_InvalidMediaFormat")
+        }
+        if osStatus == kCMSampleBufferError_Invalidated {
+            print("osStatus == kCMSampleBufferError_Invalidated")
+        }
+        if osStatus == kCMSampleBufferError_DataFailed {
+            print("osStatus == kCMSampleBufferError_DataFailed")
+        }
+        if osStatus == kCMSampleBufferError_DataCanceled {
+            print("osStatus == kCMSampleBufferError_DataCanceled")
+        }
+
+        guard let buffer = sampleBuffer else {
+            print("Cannot create sample buffer")
+            return nil
+        }
+
+        return buffer
+    }
+    //    func createCMSampleBuffer(cvPixelBuffer: CVPixelBuffer?) -> CMSampleBuffer? {
+    //        let pixelBuffer = cvPixelBuffer
+    //        var newSampleBuffer: CMSampleBuffer?
+    //        var timimgInfo: CMSampleTimingInfo?
+    //        var videoInfo: CMVideoFormatDescription?
+    //        CMVideoFormatDescriptionCreateForImageBuffer(allocator: nil, imageBuffer: pixelBuffer!, formatDescriptionOut: &videoInfo)
+    //        CMSampleBufferCreateForImageBuffer(allocator: kCFAllocatorDefault,
+    //                                           imageBuffer: pixelBuffer!,
+    //                                           dataReady: true,
+    //                                           makeDataReadyCallback: nil,
+    //                                           refcon: nil,
+    //                                           formatDescription: videoInfo!,
+    //                                           sampleTiming: &timimgInfo,
+    //                                           sampleBufferOut: &newSampleBuffer)
+    //        return newSampleBuffer!
+    //    }
 
     func getImageOrienation() -> UIImage.Orientation {
         let shouldMirror = cameraPosition == AVCaptureDevice.Position.front
@@ -510,12 +615,15 @@ extension VideoService: VideoAdapterDelegate {
         }
     }
 
-    func captured(imageBuffer: CVImageBuffer?, image: UIImage) {
+    func captured(imageBuffer: CVImageBuffer?, image: UIImage, objSampleBuffer: CMSampleBuffer?) {
         if let cgImage = image.cgImage {
             self.capturedVideoFrame
                 .onNext(UIImage(cgImage: cgImage,
                                 scale: 1.0,
                                 orientation: self.getImageOrienation()))
+        }
+        if let buffer = objSampleBuffer {
+            bufferDisplayLayer.enqueue(buffer)
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
                                         angle: Int32(self.angle), videoInputId: "camera://" + self.currentDeviceId)

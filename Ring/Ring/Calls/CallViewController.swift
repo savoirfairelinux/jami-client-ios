@@ -24,10 +24,12 @@ import UIKit
 import RxSwift
 import Reusable
 import SwiftyBeaver
+import AVKit
+import AVFoundation
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class CallViewController: UIViewController, StoryboardBased, ViewModelBased, ContactPickerDelegate {
+class CallViewController: UIViewController, StoryboardBased, ViewModelBased, ContactPickerDelegate, AVPictureInPictureSampleBufferPlaybackDelegate, AVPictureInPictureControllerDelegate {
 
     // preview screen
     @IBOutlet private weak var profileImageView: UIImageView!
@@ -41,7 +43,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet private weak var callPulse: UIView!
 
     @IBOutlet private weak var mainView: UIView!
-
     // video screen
     @IBOutlet private weak var callView: UIView!
     @IBOutlet private weak var incomingVideo: UIImageView!
@@ -50,6 +51,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var capturedVideo: UIImageView!
     @IBOutlet weak var capturedVideoBlurEffect: UIVisualEffectView!
     @IBOutlet weak var viewCapturedVideo: UIView!
+    @IBOutlet weak var viewIncomingVideo: UIView!
+    @IBOutlet weak var tryView: UIView!
+    @IBOutlet weak var sourceView: UIView!
     @IBOutlet private weak var infoContainer: UIView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
@@ -63,6 +67,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var capturedVideoWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var capturedVideoTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var capturedVideoTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sourceVTrail: NSLayoutConstraint!
+    @IBOutlet weak var sourceVTop: NSLayoutConstraint!
     @IBOutlet weak var capturedVideoHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var infoContainerTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonsContainerBottomConstraint: NSLayoutConstraint!
@@ -80,6 +86,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var conferenceCallsTop: NSLayoutConstraint!
 
     var viewModel: CallViewModel!
+    var pipController: AVPictureInPictureController! = nil
     private var callViewMode: CallViewMode = .audio
     private var isMenuShowed = false
     private var needToCleanIncomingFrame = false
@@ -109,6 +116,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.viewCapturedVideo.addGestureRecognizer(swipeLeftCapturedVideo)
         self.viewCapturedVideo.addGestureRecognizer(swipeRightCapturedVideo)
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
+        self.setupPIP()
         self.setUpCallButtons()
         self.setupBindings()
         self.profileImageView.tintColor = UIColor.jamiDefaultAvatar
@@ -137,6 +145,40 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         sendMessageButton.isHidden = self.viewModel.isBoothMode()
         sendMessageButton.isEnabled = !self.viewModel.isBoothMode()
         buttonsStackView.isHidden = self.viewModel.isBoothMode()
+    }
+    func setupPIP() {
+        guard AVPictureInPictureController.isPictureInPictureSupported() else { return }
+
+        let bufferDisplayLayer = self.viewModel.videoService.bufferDisplayLayer
+        bufferDisplayLayer.frame = self.sourceView.bounds
+        bufferDisplayLayer.videoGravity = .resizeAspectFill
+        self.sourceView.layer.addSublayer(bufferDisplayLayer)
+        let rads = 90 / 180.0 * .pi
+        self.sourceView.layer.transform = CATransform3DMakeRotation(rads, 0, 0, 1)
+        self.sourceView.cornerRadius = 15
+
+        let bufferPeerLayer = self.viewModel.videoService.bufferPeerLayer
+        bufferPeerLayer.frame = self.tryView.bounds
+        bufferPeerLayer.videoGravity = .resizeAspectFill
+        self.tryView.layer.addSublayer(bufferPeerLayer)
+
+        if #available(iOS 15.0, *) {
+            incomingVideo.frame = self.view.bounds
+            incomingVideo.contentMode = .scaleAspectFit
+            let contentSource = AVPictureInPictureController.ContentSource(sampleBufferDisplayLayer: bufferPeerLayer, playbackDelegate: self)
+
+            pipController = AVPictureInPictureController(contentSource: contentSource)
+            pipController.delegate = self
+            /*            _ = pipController.observe(\AVPictureInPictureController.isPictureInPicturePossible,
+             //                                      options: [.initial, .new]) { [weak self] _, change in
+             //                print("isPictureInPicturePossible: \(change.newValue ?? false)")
+             //}
+             */
+            self.capturedVideo.isHidden = true
+        } else {
+            // Fallback on earlier versions
+        }
+
     }
 
     func addTapGesture() {
@@ -251,6 +293,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.sendMessageButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showConversations()
+                self?.pipController.canStartPictureInPictureAutomaticallyFromInline = true
+                self?.pipController.startPictureInPicture()
                 self?.dismiss(animated: false, completion: nil)
             })
             .disposed(by: self.disposeBag)
@@ -480,11 +524,17 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 }
             })
             .disposed(by: self.disposeBag)
-
-        self.viewModel.videoMuted
-            .observe(on: MainScheduler.instance)
-            .bind(to: self.capturedVideo.rx.isHidden)
-            .disposed(by: self.disposeBag)
+        if #available(iOS 15.0, *) {
+            self.viewModel.videoMuted
+                .observe(on: MainScheduler.instance)
+                .bind(to: self.sourceView.rx.isHidden)
+                .disposed(by: self.disposeBag)
+        } else {
+            self.viewModel.videoMuted
+                .observe(on: MainScheduler.instance)
+                .bind(to: self.capturedVideo.rx.isHidden)
+                .disposed(by: self.disposeBag)
+        }
 
         self.viewModel.videoMuted
             .observe(on: MainScheduler.instance)
@@ -879,6 +929,55 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
     func contactPickerDismissed() {
         self.addTapGesture()
+    }
+
+    // MARK: - AVPictureInPictureSampleBufferPlaybackDelegate
+
+    @objc
+    func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
+        print("check")
+    }
+    @objc
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, setPlaying playing: Bool) {
+        print("\(#function)")
+    }
+
+    @objc
+    func pictureInPictureControllerTimeRangeForPlayback(_ pictureInPictureController: AVPictureInPictureController) -> CMTimeRange {
+        print("\(#function)")
+        return CMTimeRange(start: .negativeInfinity, duration: .positiveInfinity)
+    }
+
+    @objc
+    func pictureInPictureControllerIsPlaybackPaused(_ pictureInPictureController: AVPictureInPictureController) -> Bool {
+        print("\(#function)")
+        return false
+    }
+
+    @objc
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, didTransitionToRenderSize newRenderSize: CMVideoDimensions) {
+        print("\(#function)")
+    }
+
+    @objc(pictureInPictureController:skipByInterval:completionHandler:)
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, skipByInterval skipInterval: CMTime, completion completionHandler: @escaping () -> Void) {
+        print("\(#function)")
+        completionHandler()
+    }
+
+    // MARK: - AVPictureInPictureControllerDelegate
+
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: Error) {
+        print("\(#function)")
+        print("pip error: \(error)")
+    }
+
+    func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
+        print("\(#function)")
+    }
+
+    func pictureInPictureControllerWillStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
+        print("\(#function)")
     }
 }
 
