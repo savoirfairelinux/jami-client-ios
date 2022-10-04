@@ -175,6 +175,55 @@ extern "C" {
     UIImage * imageUI = [UIImage imageWithCIImage:image];
     return imageUI;
 }
++(CVPixelBufferRef)getCVPixelBufferFromAVFrame:(const AVFrame *)frame {
+    CIImage *image;
+    CIContext *context = nil;
+    CVPixelBufferRef finalBuffer = nil;
+    CGFloat height = frame->height;
+    CGFloat width = frame->width;
+    CVPixelBufferRef buffer = nil;
+    BOOL flagDisableHardwareAccelaration = NO;
+    if ((CVPixelBufferRef)frame->data[3]) {
+        buffer = (CVPixelBufferRef)frame->data[3];
+    } else {
+        buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
+        flagDisableHardwareAccelaration = YES;
+    }
+    if (buffer == NULL) {
+        return NULL;
+    }
+    image = [CIImage imageWithCVPixelBuffer: buffer];
+    if (!image) {
+        if (flagDisableHardwareAccelaration) {
+            CFRelease(buffer);
+        }
+        return NULL;
+    }
+        if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
+            if (flagDisableHardwareAccelaration) {
+                CFRelease(buffer);
+            }
+            const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
+            auto rotation = av_display_rotation_get(data);
+            auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
+            image = [image imageByApplyingCGOrientation: ciImageOrientation];
+            context = [CIContext context];
+            CGFloat newWidth = ciImageOrientation == kCGImagePropertyOrientationDown || ciImageOrientation == kCGImagePropertyOrientationUp ? width : height;
+            CGFloat newHeight = ciImageOrientation == kCGImagePropertyOrientationDown || ciImageOrientation == kCGImagePropertyOrientationUp ? height : width;
+            NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     [NSDictionary dictionary], kCVPixelBufferIOSurfacePropertiesKey,
+                                     nil];
+            CVPixelBufferCreate(kCFAllocatorDefault,
+                                newWidth,
+                                newHeight,
+                                kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange,
+                                (__bridge CFDictionaryRef)(options),
+                                &finalBuffer);
+            [context render:image toCVPixelBuffer: finalBuffer];
+            return  finalBuffer;
+        }
+    return buffer;
+}
 
 +(CVPixelBufferRef)converCVPixelBufferRefFromAVFrame:(const AVFrame *)frame {
     if (!frame || !frame->data[0]) {
