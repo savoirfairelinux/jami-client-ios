@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,6 +24,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLZ-yF-bRo">
+                                        <rect key="frame" x="37.666666666666657" y="56" width="300" height="700"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="ccH-7C-9QR"/>
+                                            <constraint firstAttribute="height" constant="700" id="fcy-Wd-TUq"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOE-du-fSU" customClass="ConferenceLayout" customModule="Ring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <constraints>
@@ -185,6 +194,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="zLZ-yF-bRo" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="290-CF-eCS"/>
                                     <constraint firstItem="DMu-Or-dd7" firstAttribute="centerX" secondItem="ZVy-nB-bKJ" secondAttribute="centerX" id="2Lu-4b-uBO"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3RN-4M-qR4" secondAttribute="trailing" identifier="InfoContainerTrailingConstraint" id="5V0-5o-h5c"/>
                                     <constraint firstItem="Zmp-OX-Cez" firstAttribute="height" secondItem="DMu-Or-dd7" secondAttribute="height" id="6ZM-UX-wEQ"/>
@@ -198,6 +208,7 @@
                                     <constraint firstItem="K0W-KI-Ul4" firstAttribute="width" secondItem="DMu-Or-dd7" secondAttribute="width" id="ZZ0-hX-Nwm"/>
                                     <constraint firstItem="ZK1-Be-lcD" firstAttribute="height" secondItem="ZVy-nB-bKJ" secondAttribute="height" constant="45" id="Zyu-M5-fjh"/>
                                     <constraint firstItem="K0W-KI-Ul4" firstAttribute="centerY" secondItem="DMu-Or-dd7" secondAttribute="centerY" id="cTk-Hv-nxM"/>
+                                    <constraint firstItem="zLZ-yF-bRo" firstAttribute="centerY" secondItem="ZVy-nB-bKJ" secondAttribute="centerY" id="df8-pj-eBg"/>
                                     <constraint firstItem="Zmp-OX-Cez" firstAttribute="centerX" secondItem="DMu-Or-dd7" secondAttribute="centerX" id="f1S-rO-Hld"/>
                                     <constraint firstItem="K0W-KI-Ul4" firstAttribute="height" secondItem="DMu-Or-dd7" secondAttribute="height" id="grY-ie-rVw"/>
                                     <constraint firstItem="CfE-DF-buX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cgd-Wa-clf" secondAttribute="trailing" priority="750" constant="7" id="hmN-pb-JlG"/>
@@ -393,6 +404,7 @@
                         <outlet property="profileImageViewWidthConstraint" destination="Miw-Nd-4Fa" id="OSp-7J-TGC"/>
                         <outlet property="sendMessageButton" destination="GF7-hD-E63" id="YbY-mz-xvx"/>
                         <outlet property="spinner" destination="nwA-ao-thv" id="bJo-Wq-QmV"/>
+                        <outlet property="videoContainerView" destination="zLZ-yF-bRo" id="MvW-TD-l1U"/>
                         <outlet property="viewCapturedVideo" destination="ZK1-Be-lcD" id="Go0-ab-yLg"/>
                     </connections>
                 </viewController>
@@ -405,5 +417,8 @@
         <image name="ic_back" width="24" height="24"/>
         <image name="ic_contact_picture" width="170.66667175292969" height="170.66667175292969"/>
         <image name="left_arrow" width="48" height="48"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
