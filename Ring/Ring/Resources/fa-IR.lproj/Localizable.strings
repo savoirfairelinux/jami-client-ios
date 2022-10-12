@@ -61,9 +61,9 @@
 "conversation.receivedRequest" = "\%s\ برایتان درخواست گفت‌وگویی فرستاده.";
 "conversation.requestMessage" = "درود،\nمی‌خواهید به گفت‌وگو بپیوندید؟";
 "conversation.notContact" = "\%s\ در سیاههٔ آشنایانتان نیست.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequest" = "برای او درخواست ارتباط بفرستید تا بتواند با هم تبادل کنید";
 "conversation.synchronizationTitle" = "درخواست گفت‌وگو را پذیرفته‌اید.";
-"conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "ما منتظر اتصال \%s\ برای همگام‌سازی گفتگو هستیم.";
 
 //Invitations
 "invitations.noInvitations" = "بدون دعوت‌نامه";
@@ -198,7 +198,7 @@
 "calls.removeModerator" = "لغو میدیریت";
 "calls.muteAudio" = "قطع صدا";
 "calls.unmuteAudio" = "برقراری صدا";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "نامطلوب";
 
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";
