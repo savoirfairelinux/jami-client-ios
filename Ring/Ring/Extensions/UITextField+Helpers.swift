@@ -27,4 +27,17 @@ extension UITextField {
         self.leftViewMode = .always
         self.rightViewMode = .always
     }
+
+    func addCloseToolbar() {
+        let bar = UIToolbar()
+        let doneButton = UIBarButtonItem(title: L10n.Global.close, style: .plain, target: self, action: #selector(hideKeyboard))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        bar.items = [spacer, doneButton]
+        bar.sizeToFit()
+        self.inputAccessoryView = bar
+    }
+
+    @objc private func hideKeyboard() {
+        self.resignFirstResponder()
+    }
 }
