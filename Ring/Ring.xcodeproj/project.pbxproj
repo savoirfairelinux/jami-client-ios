@@ -442,6 +442,7 @@
 		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
 		66E6381221764C2C005EA2B0 /* GrowingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6381121764C2C005EA2B0 /* GrowingTextView.swift */; };
 		66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F295DD2166A5930044ED6F /* Devices+Helpers.swift */; };
+		BB90263528F0918700B85859 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB90263428F0918700B85859 /* PaddingTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1039,6 +1040,7 @@
 		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		66E6381121764C2C005EA2B0 /* GrowingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingTextView.swift; sourceTree = "<group>"; };
 		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
+		BB90263428F0918700B85859 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1432,6 +1434,7 @@
 				26B708FD253610B0003974F2 /* OpenURLLabel.swift */,
 				26B37337263C439B00E2EE28 /* CustomSearchController.swift */,
 				26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */,
+				BB90263428F0918700B85859 /* PaddingTextField.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2555,6 +2558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */,
+				BB90263528F0918700B85859 /* PaddingTextField.swift in Sources */,
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
 				263B7158246D9390007044C4 /* SmartListCell.swift in Sources */,
 				0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */,

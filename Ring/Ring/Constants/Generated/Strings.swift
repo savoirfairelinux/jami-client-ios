@@ -445,12 +445,23 @@ internal enum L10n {
     internal static let sendMessage = L10n.tr("Localizable", "dataTransfer.sendMessage")
   }
 
-  internal enum GeneralSettings {
-    /// Advanced settings
-    internal static let title = L10n.tr("Localizable", "generalSettings.title")
-    /// Enable video acceleration
-    internal static let videoAcceleration = L10n.tr("Localizable", "generalSettings.videoAcceleration")
-  }
+    internal enum GeneralSettings {
+        /// Advanced settings
+        internal static let title = L10n.tr("Localizable", "generalSettings.title")
+        /// Enable video acceleration
+        internal static let videoAcceleration = L10n.tr("Localizable", "generalSettings.videoAcceleration")
+        /// File transfer
+        internal static let fileTransfer = L10n.tr("Localizable", "generalSettings.fileTransfer")
+        
+        internal enum FileTransfer {
+            /// Automatically accept incoming files
+            internal static let automaticAcceptIncomingFiles = L10n.tr("Localizable", "generalSettings.fileTransfer.automaticAcceptIncomingCalls")
+            /// Accept transfer limit
+            internal static let acceptTransferLimit = L10n.tr("Localizable", "generalSettings.fileTransfer.acceptTransferLimit")
+            /// Accept transfer limit description
+            internal static let acceptTransferLimitDescription = L10n.tr("Localizable", "generalSettings.fileTransfer.acceptTransferLimitDescription")
+        }
+    }
 
   internal enum GeneratedMessage {
     /// Contact added
