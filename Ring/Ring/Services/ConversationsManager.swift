@@ -43,7 +43,9 @@ class ConversationsManager {
     private let disposeBag = DisposeBag()
     private let textPlainMIMEType = "text/plain"
     private let geoLocationMIMEType = "application/geo"
-    private let maxSizeForAutoaccept = 20 * 1024 * 1024
+    private var maxSizeForAutoaccept: Int {
+        return UserDefaults.standard.integer(forKey: acceptTransferLimitKey) * 1024 * 1024
+    }
     private let notificationHandler = LocalNotificationsHelper()
     private let appState = BehaviorRelay<ServiceEventType>(value: .appEnterForeground)
 
@@ -642,13 +644,23 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, conversationId: conversationId, fromLoaded: false) {
             /// check if file saved
             let image = self.dataTransferService.getImage(for: newMessage.daemonId, maxSize: 200, accountID: accountId, conversationID: conversationId, isSwarm: true)
+
             /// download if file not saved yet
             if let size = message["totalSize"],
                image == nil,
-               (newMessage.transferStatus == .awaiting || newMessage.transferStatus == .success),
-               Int(size) ?? 30 * 1024 * 1024 <= maxSizeForAutoaccept {
-                var filename = ""
-                self.dataTransferService.downloadFile(withId: newMessage.daemonId, interactionID: newMessage.id, fileName: &filename, accountID: accountId, conversationID: conversationId)
+               (newMessage.transferStatus == .awaiting || newMessage.transferStatus == .success) {
+
+                let isReceiving = message[MessageAttributes.author.rawValue] != account.jamiId
+
+                let isAutomaticDownloadEnabled = UserDefaults.standard.bool(forKey: automaticDownloadFilesKey)
+
+                if isReceiving && Int(size) ?? 30 * 1024 * 1024 <= maxSizeForAutoaccept && isAutomaticDownloadEnabled {
+                    var filename = ""
+                    self.dataTransferService.downloadFile(withId: newMessage.daemonId, interactionID: newMessage.id, fileName: &filename, accountID: accountId, conversationID: conversationId)
+                } else if !isReceiving {
+                    var filename = ""
+                    self.dataTransferService.downloadFile(withId: newMessage.daemonId, interactionID: newMessage.id, fileName: &filename, accountID: accountId, conversationID: conversationId)
+                }
             }
             if let type = message[MessageAttributes.type.rawValue],
                let body = message[MessageAttributes.body.rawValue],

@@ -344,6 +344,10 @@
 //General Settings
 "generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.fileTransfer" = "File transfer";
+"generalSettings.fileTransfer.allowUnkownIncomingCall" = "Allow incoming files from unknown contacts";
+"generalSettings.fileTransfer.automaticAcceptIncomingCalls" = "Automatically accept incoming files";
+"generalSettings.fileTransfer.acceptTransferLimit" = "Accept transfer limit";
 
 //Migrate Account
 "migrateAccount.title" = "Account migration";

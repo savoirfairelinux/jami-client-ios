@@ -24,12 +24,16 @@ import RxCocoa
 import RxDataSources
 
 let hardareAccelerationKey = "HARDWARE_ACCELERATION_KEY"
+let automaticDownloadFilesKey = "ALLOW_INCOMING_FILES_UNKOWN_CONTACT_KEY"
+let acceptTransferLimitKey = "ACCEPT_TRANSFER_LIMIT_KEY"
 
 enum GeneralSettingsSection: SectionModelType {
     typealias Item = SectionRow
     case generalSettings(items: [SectionRow])
     enum SectionRow {
         case hardwareAcceleration
+        case automaticallyAcceptIncomingFiles
+        case acceptTransferLimit
         case sectionHeader(title: String)
     }
 
@@ -53,10 +57,17 @@ class GeneralSettingsViewModel: ViewModel {
     lazy var generalSettings: Observable<[GeneralSettingsSection]> = {
         return Observable
             .just([GeneralSettingsSection.generalSettings(items:
-                                                            [.hardwareAcceleration])])
+                                                            [
+                                                                .hardwareAcceleration,
+                                                                .sectionHeader(title: L10n.GeneralSettings.fileTransfer),
+                                                                .automaticallyAcceptIncomingFiles,
+                                                                .acceptTransferLimit
+                                                            ])])
     }()
 
     var hardwareAccelerationEnabled: BehaviorRelay<Bool>
+    var automaticAcceptIncomingFiles: BehaviorRelay<Bool>
+    var acceptTransferLimit: BehaviorRelay<Int>
 
     let videoService: VideoService
 
@@ -69,6 +80,12 @@ class GeneralSettingsViewModel: ViewModel {
             injectionBag.videoService.setHardwareAccelerated(withState: accelerationEnabled)
         }
         hardwareAccelerationEnabled = BehaviorRelay<Bool>(value: accelerationEnabled)
+
+        let isAutomaticDownloadEnabled = UserDefaults.standard.bool(forKey: automaticDownloadFilesKey)
+        automaticAcceptIncomingFiles = BehaviorRelay<Bool>(value: isAutomaticDownloadEnabled)
+
+        let acceptTransferLimitValue = UserDefaults.standard.integer(forKey: acceptTransferLimitKey)
+        acceptTransferLimit = BehaviorRelay<Int>(value: acceptTransferLimitValue)
     }
 
     func togleHardwareAcceleration(enable: Bool) {
@@ -78,6 +95,22 @@ class GeneralSettingsViewModel: ViewModel {
         self.videoService.setHardwareAccelerated(withState: enable)
         UserDefaults.standard.set(enable, forKey: hardareAccelerationKey)
         hardwareAccelerationEnabled.accept(enable)
+    }
+
+    func togleAcceptingUnkownIncomingFiles(enable: Bool) {
+        if automaticAcceptIncomingFiles.value == enable {
+            return
+        }
+        UserDefaults.standard.set(enable, forKey: automaticDownloadFilesKey)
+        automaticAcceptIncomingFiles.accept(enable)
+    }
+
+    func changeTransferLimit(value: Int) {
+        if acceptTransferLimit.value == value {
+            return
+        }
+        UserDefaults.standard.set(value, forKey: acceptTransferLimitKey)
+        acceptTransferLimit.accept(value)
     }
 
     func hardwareAccelerationEnabledSettings() -> Bool {
