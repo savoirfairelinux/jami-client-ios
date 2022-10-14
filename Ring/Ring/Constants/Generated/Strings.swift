@@ -432,10 +432,20 @@ internal enum L10n {
     internal static let sendMessage = L10n.tr("Localizable", "dataTransfer.sendMessage", fallback: "Send")
   }
   internal enum GeneralSettings {
+    /// Accept transfer limit
+    internal static let acceptTransferLimit = L10n.tr("Localizable", "generalSettings.acceptTransferLimit", fallback: "Accept transfer limit")
+    /// (in MB, 0 = unlimited)
+    internal static let acceptTransferLimitDescription = L10n.tr("Localizable", "generalSettings.acceptTransferLimitDescription", fallback: "(in MB, 0 = unlimited)")
+    /// Automatically accept incoming files
+    internal static let automaticAcceptIncomingFiles = L10n.tr("Localizable", "generalSettings.automaticAcceptIncomingFiles", fallback: "Automatically accept incoming files")
+    /// File transfer
+    internal static let fileTransfer = L10n.tr("Localizable", "generalSettings.fileTransfer", fallback: "File transfer")
     /// Advanced settings
     internal static let title = L10n.tr("Localizable", "generalSettings.title", fallback: "Advanced settings")
     /// Enable video acceleration
     internal static let videoAcceleration = L10n.tr("Localizable", "generalSettings.videoAcceleration", fallback: "Enable video acceleration")
+    /// Video Settings
+    internal static let videoSettings = L10n.tr("Localizable", "generalSettings.videoSettings", fallback: "Video Settings")
   }
   internal enum GeneratedMessage {
     /// You received inviation
