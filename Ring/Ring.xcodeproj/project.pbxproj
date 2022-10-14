@@ -422,8 +422,8 @@
 		62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
 		642AD48424EC64CE00521127 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AD48324EC64CE00521127 /* CopyableLabel.swift */; };
 		6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144324B4ACA7007203D5 /* CoreLocation.framework */; };
-		645BDD6224B5FEFE009129B1 /* WhirlyGlobeMaplyComponent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */; };
-		645BDD6324B5FEFF009129B1 /* WhirlyGlobeMaplyComponent.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		645BDD6224B5FEFE009129B1 /* WhirlyGlobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobe.framework */; };
+		645BDD6324B5FEFF009129B1 /* WhirlyGlobe.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobe.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		645BDD7724B7415A009129B1 /* MessageCellLocationSharingSent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 645BDD6C24B7415A009129B1 /* MessageCellLocationSharingSent.xib */; };
 		645BDD7B24B7415A009129B1 /* MessageCellLocationSharingSent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BDD7024B7415A009129B1 /* MessageCellLocationSharingSent.swift */; };
 		645BDD8124B74BCB009129B1 /* LocationSharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BDD8024B74BCB009129B1 /* LocationSharingService.swift */; };
@@ -442,6 +442,7 @@
 		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
 		66E6381221764C2C005EA2B0 /* GrowingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6381121764C2C005EA2B0 /* GrowingTextView.swift */; };
 		66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F295DD2166A5930044ED6F /* Devices+Helpers.swift */; };
+		BB90263528F0918700B85859 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB90263428F0918700B85859 /* PaddingTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -513,7 +514,7 @@
 				44DFB39F2887048F0023878C /* SwiftyBeaver.xcframework in Embed Frameworks */,
 				44DFB3B1288704910023878C /* Reusable.xcframework in Embed Frameworks */,
 				44DFB3B7288704910023878C /* SQLite.xcframework in Embed Frameworks */,
-				645BDD6324B5FEFF009129B1 /* WhirlyGlobeMaplyComponent.framework in Embed Frameworks */,
+				645BDD6324B5FEFF009129B1 /* WhirlyGlobe.framework in Embed Frameworks */,
 				44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */,
 				44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */,
 				44DFB3AB288704900023878C /* Realm.xcframework in Embed Frameworks */,
@@ -1038,6 +1039,7 @@
 		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		66E6381121764C2C005EA2B0 /* GrowingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingTextView.swift; sourceTree = "<group>"; };
 		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
+		BB90263428F0918700B85859 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1112,7 +1114,7 @@
 				04399A971D1C2F6100E99CD9 /* libbz2.tbd in Frameworks */,
 				269DA06428D0D366007D51D6 /* libopus.a in Frameworks */,
 				269DA06128D0D366007D51D6 /* libjsoncpp.a in Frameworks */,
-				645BDD6224B5FEFE009129B1 /* WhirlyGlobeMaplyComponent.framework in Frameworks */,
+				645BDD6224B5FEFE009129B1 /* WhirlyGlobe.framework in Frameworks */,
 				04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */,
 				04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */,
 				269DA07728D0D366007D51D6 /* libswresample.a in Frameworks */,
@@ -1430,6 +1432,7 @@
 				26B708FD253610B0003974F2 /* OpenURLLabel.swift */,
 				26B37337263C439B00E2EE28 /* CustomSearchController.swift */,
 				26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */,
+				BB90263428F0918700B85859 /* PaddingTextField.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2180,7 +2183,7 @@
 		6452143824B4AB43007203D5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */,
+				6452143D24B4AB44007203D5 /* WhirlyGlobe.framework */,
 				6452143F24B4AB44007203D5 /* WhirlyGlobeMaplyComponentTests.xctest */,
 			);
 			name = Products;
@@ -2406,10 +2409,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */ = {
+		6452143D24B4AB44007203D5 /* WhirlyGlobe.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = WhirlyGlobeMaplyComponent.framework;
+			path = WhirlyGlobe.framework;
 			remoteRef = 6452143C24B4AB44007203D5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -2553,6 +2556,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */,
+				BB90263528F0918700B85859 /* PaddingTextField.swift in Sources */,
 				557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */,
 				263B7158246D9390007044C4 /* SmartListCell.swift in Sources */,
 				0586C94B1F684DF600613517 /* UIImage+Helpers.swift in Sources */,
