@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Групові чати";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Налаштування облікового запису";
 "global.ok" = "Гаразд";
 "global.close" = "Закрити";
 "global.share" = "Поділитися";
@@ -45,13 +45,13 @@
 "smartlist.noNetworkConnectivity" = "Відсутнє з’єднання з мережею";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
 "smartlist.accountsTitle" = "Облікові записи";
-"smartlist.addAccountButton" = "+ Add Account";
+"smartlist.addAccountButton" = "+ Додати обліковий запис";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
 "smartlist.invitations" = "Invitations";
-"smartlist.accountSettings" = "Account Settings";
-"smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "Про Джамі";
+"smartlist.accountSettings" = "Налаштування облікового запису";
+"smartlist.advancedSettings" = "Розширені налаштування";
+"smartlist.aboutJami" = "Про Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -71,10 +71,10 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Вітаємо в Джамі!";
+"welcome.title" = "Вітаємо в Jami!";
 "welcome.text" = "Джамі — це вільна та універсальна платформа для зв'язку, яка оберігає приватність і свободи користувачів";
 "welcome.linkDevice" = "Прив'язати цей пристрій до облікового запису";
-"welcome.createAccount" = "Створити обліковий запис Джамі";
+"welcome.createAccount" = "Створити обліковий запис Jami";
 "welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
@@ -99,7 +99,7 @@
 "createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "Loading";
-"createAccount.waitCreateAccountTitle" = "Додання аккаунту";
+"createAccount.waitCreateAccountTitle" = "Додавання облікового запису";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
@@ -107,7 +107,7 @@
 "createAccount.Recommended" = "(Recommended)";
 "createAccount.UsernameNotRegisteredTitle" = "Збій мережі";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
-"createAccount.timeoutTitle" = "Account Created";
+"createAccount.timeoutTitle" = "Обліковий запис створено";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
@@ -131,7 +131,7 @@
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не можу знайти обліковий запис";
 "alerts.accountCannotBeFoundMessage" = "Не вдалося знайти обліковий запис у мережі Джамі. Переконайтеся, що його було вивантажено в Джамі з одного з наявних пристроїв, і що надані відомості для підтвердження особи правильні.";
-"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountAddedTitle" = "Обліковий запис додано";
 "alerts.accountNoNetworkTitle" = "Не можу з'єднатися з мережею";
 "alerts.accountNoNetworkMessage" = "Не вдалося додати обліковий запис, оскільки Джамі не вдалося з'єднатися до розподіленої мережі. Перевірте зв'язок пристрою з мережею.";
 "alerts.accountDefaultErrorTitle" = "Unknown error";
@@ -171,7 +171,7 @@
 "actions.blockAction" = "Заблокувати";
 "actions.deleteAction" = "Видалити";
 "actions.cancelAction" = "Скасувати";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Очистити";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
@@ -205,7 +205,7 @@
 "accountPage.settingsHeader" = "Налаштування";
 "accountPage.username" = "Ім’я";
 "accountPage.usernameNotRegistered" = "username: not registered";
-"accountPage.credentialsHeader" = "Account Details";
+"accountPage.credentialsHeader" = "Відомості про обліковий запис";
 "accountPage.enableProxy" = "Enable Proxy";
 "accountPage.blockedContacts" = "Заблоковані контакти";
 "accountPage.unblockContact" = "UNBLOCK";
@@ -231,7 +231,7 @@
 "accountPage.namePlaceholder" = "Ім’я";
 "accountPage.linkDeviceTitle" = "Прив'язати інший пристрій";
 "accountPage.other" = "Інше";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.removeAccountTitle" = "Вилучити обліковий запис";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Видалити";
 "accountPage.shareAccountDetails" = "Share Account Details";
@@ -244,7 +244,7 @@
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "Зареєструватися";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.createPassword" = "Створити пароль";
 "accountPage.changePassword" = "Змінити пароль";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
@@ -265,13 +265,13 @@
 "account.sipServer" = "Сервер SIP";
 "account.port" = "Порт";
 "account.proxyServer" = "Проксі";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Створити обліковий запис SIP";
 "account.usernameLabel" = "Enter Username";
 "account.passwordLabel" = "Enter Password";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.accountStatus" = "Стан облікового запису";
+"account.enableAccount" = "Дозволити обліковий запис";
 "account.statusOnline" = "У мережі";
 "account.statusOffline" = "Поза мережею";
 "account.statusConnecting" = "З'єднання";
@@ -351,7 +351,7 @@
 "migrateAccount.explanation" = "This account needs to be migrated";
 "migrateAccount.passwordPlaceholder" = "Ввести пароль";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "Вилучити обліковий запис";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
 "migrateAccount.cancel" = "Скасувати";

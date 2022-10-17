@@ -82,7 +82,7 @@
 "createProfile.profileCreated" = "Endavant";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Enter name";
+"createProfile.enterNamePlaceholder" = "Introdueix el nom";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
@@ -163,15 +163,15 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
+"alerts.mapInformation" = "Informació al mapa";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
-"alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
+"alerts.openStreetMapCopyrightMoreInfo" = "Saber-ne més";
 
 //Actions
 "actions.blockAction" = "Bloca";
 "actions.deleteAction" = "Suprimeix";
 "actions.cancelAction" = "Cancel·la";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "Neteja";
 "actions.backAction" = "Enrere";
 "actions.doneAction" = "Fet";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
@@ -281,10 +281,10 @@
 "account.me" = "Jo";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "No blocked contacts";
+"blockListPage.noBlockedContacts" = "Sense contactes blocats";
 
 //Link New Device
-"linkDevice.title" = "Link a new device";
+"linkDevice.title" = "Enllaça un nou dispositiu";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
 "linkDevice.networkError" = "S'ha produït un error durant l'exportació";
 "linkDevice.defaultError" = "An error occured during the export";
