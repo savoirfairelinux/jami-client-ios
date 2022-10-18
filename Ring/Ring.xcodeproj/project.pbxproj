@@ -246,7 +246,6 @@
 		269DA04028D0D2E5007D51D6 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACF1D1C341A00E99CD9 /* libpjsip.a */; };
 		269DA04128D0D2E5007D51D6 /* libpjsua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD01D1C341A00E99CD9 /* libpjsua.a */; };
 		269DA04228D0D2E5007D51D6 /* libpjsua2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD11D1C341A00E99CD9 /* libpjsua2.a */; };
-		269DA04328D0D2E6007D51D6 /* libring.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD41D1C341A00E99CD9 /* libring.a */; };
 		269DA04428D0D2E6007D51D6 /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD71D1C341A00E99CD9 /* libspeex.a */; };
 		269DA04528D0D2E6007D51D6 /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD81D1C341A00E99CD9 /* libspeexdsp.a */; };
 		269DA04628D0D2E6007D51D6 /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD91D1C341A00E99CD9 /* libsrtp.a */; };
@@ -286,7 +285,6 @@
 		269DA06E28D0D366007D51D6 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACF1D1C341A00E99CD9 /* libpjsip.a */; };
 		269DA06F28D0D366007D51D6 /* libpjsua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD01D1C341A00E99CD9 /* libpjsua.a */; };
 		269DA07028D0D366007D51D6 /* libpjsua2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD11D1C341A00E99CD9 /* libpjsua2.a */; };
-		269DA07128D0D366007D51D6 /* libring.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD41D1C341A00E99CD9 /* libring.a */; };
 		269DA07228D0D366007D51D6 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05028D0D2EA007D51D6 /* libsecp256k1.a */; };
 		269DA07328D0D366007D51D6 /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD71D1C341A00E99CD9 /* libspeex.a */; };
 		269DA07428D0D366007D51D6 /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD81D1C341A00E99CD9 /* libspeexdsp.a */; };
@@ -379,6 +377,8 @@
 		44DFB3B7288704910023878C /* SQLite.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB398288704860023878C /* SQLite.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3B8288704910023878C /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3992887048A0023878C /* RealmSwift.xcframework */; };
 		44DFB3B9288704920023878C /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3992887048A0023878C /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		44EDA53E28FE232400BEB99A /* libjami.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EDA53D28FE22FD00BEB99A /* libjami.a */; };
+		44EDA53F28FE234500BEB99A /* libjami.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EDA53D28FE22FD00BEB99A /* libjami.a */; };
 		5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
 		5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */; };
 		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
@@ -422,8 +422,8 @@
 		62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
 		642AD48424EC64CE00521127 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AD48324EC64CE00521127 /* CopyableLabel.swift */; };
 		6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144324B4ACA7007203D5 /* CoreLocation.framework */; };
-		645BDD6224B5FEFE009129B1 /* WhirlyGlobeMaplyComponent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */; };
-		645BDD6324B5FEFF009129B1 /* WhirlyGlobeMaplyComponent.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		645BDD6224B5FEFE009129B1 /* WhirlyGlobe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobe.framework */; };
+		645BDD6324B5FEFF009129B1 /* WhirlyGlobe.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6452143D24B4AB44007203D5 /* WhirlyGlobe.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		645BDD7724B7415A009129B1 /* MessageCellLocationSharingSent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 645BDD6C24B7415A009129B1 /* MessageCellLocationSharingSent.xib */; };
 		645BDD7B24B7415A009129B1 /* MessageCellLocationSharingSent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BDD7024B7415A009129B1 /* MessageCellLocationSharingSent.swift */; };
 		645BDD8124B74BCB009129B1 /* LocationSharingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645BDD8024B74BCB009129B1 /* LocationSharingService.swift */; };
@@ -513,7 +513,7 @@
 				44DFB39F2887048F0023878C /* SwiftyBeaver.xcframework in Embed Frameworks */,
 				44DFB3B1288704910023878C /* Reusable.xcframework in Embed Frameworks */,
 				44DFB3B7288704910023878C /* SQLite.xcframework in Embed Frameworks */,
-				645BDD6324B5FEFF009129B1 /* WhirlyGlobeMaplyComponent.framework in Embed Frameworks */,
+				645BDD6324B5FEFF009129B1 /* WhirlyGlobe.framework in Embed Frameworks */,
 				44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */,
 				44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */,
 				44DFB3AB288704900023878C /* Realm.xcframework in Embed Frameworks */,
@@ -908,6 +908,7 @@
 		44DFB397288704820023878C /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
 		44DFB398288704860023878C /* SQLite.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SQLite.xcframework; path = Carthage/Build/SQLite.xcframework; sourceTree = "<group>"; };
 		44DFB3992887048A0023878C /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
+		44EDA53D28FE22FD00BEB99A /* libjami.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjami.a; path = ../fat/lib/libjami.a; sourceTree = "<group>"; };
 		5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModelHelper.swift; sourceTree = "<group>"; };
 		5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModelHelperTests.swift; sourceTree = "<group>"; };
 		557086501E8ADB9D001A7CE4 /* SystemAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemAdapter.h; sourceTree = "<group>"; };
@@ -1065,6 +1066,7 @@
 				44DFB3AC288704900023878C /* GSKStretchyHeaderView.xcframework in Frameworks */,
 				0ECB4E2A22B2D4BB0097CD7B /* CallKit.framework in Frameworks */,
 				269DA05628D0D366007D51D6 /* libavfilter.a in Frameworks */,
+				44EDA53E28FE232400BEB99A /* libjami.a in Frameworks */,
 				0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */,
 				44DFB3A22887048F0023878C /* Reachability.xcframework in Frameworks */,
 				269DA07D28D0D367007D51D6 /* libyaml-cpp.a in Frameworks */,
@@ -1073,7 +1075,6 @@
 				269DA07528D0D366007D51D6 /* libsrtp.a in Frameworks */,
 				44DFB3B0288704910023878C /* Reusable.xcframework in Frameworks */,
 				269DA07A28D0D367007D51D6 /* libupnp.a in Frameworks */,
-				269DA07128D0D366007D51D6 /* libring.a in Frameworks */,
 				269DA05428D0D366007D51D6 /* libavcodec.a in Frameworks */,
 				269DA06F28D0D366007D51D6 /* libpjsua.a in Frameworks */,
 				269DA07328D0D366007D51D6 /* libspeex.a in Frameworks */,
@@ -1112,7 +1113,7 @@
 				04399A971D1C2F6100E99CD9 /* libbz2.tbd in Frameworks */,
 				269DA06428D0D366007D51D6 /* libopus.a in Frameworks */,
 				269DA06128D0D366007D51D6 /* libjsoncpp.a in Frameworks */,
-				645BDD6224B5FEFE009129B1 /* WhirlyGlobeMaplyComponent.framework in Frameworks */,
+				645BDD6224B5FEFE009129B1 /* WhirlyGlobe.framework in Frameworks */,
 				04399A941D1C2F5800E99CD9 /* libiconv.tbd in Frameworks */,
 				04399A2C1D1C2DE900E99CD9 /* AVFoundation.framework in Frameworks */,
 				269DA07728D0D366007D51D6 /* libswresample.a in Frameworks */,
@@ -1143,6 +1144,7 @@
 				269DA04A28D0D2E6007D51D6 /* libtls.a in Frameworks */,
 				269DA03D28D0D2E5007D51D6 /* libpjnath.a in Frameworks */,
 				26BB43852670150E00019CF6 /* libbz2.tbd in Frameworks */,
+				44EDA53F28FE234500BEB99A /* libjami.a in Frameworks */,
 				269DA03228D0D2E5007D51D6 /* libixml.a in Frameworks */,
 				26BB43842670144800019CF6 /* libz.1.2.8.tbd in Frameworks */,
 				26BB43822670141100019CF6 /* libz.1.tbd in Frameworks */,
@@ -1190,7 +1192,6 @@
 				269DA04528D0D2E6007D51D6 /* libspeexdsp.a in Frameworks */,
 				269DA02A28D0D2E5007D51D6 /* libavfilter.a in Frameworks */,
 				26A88C702670098D00888EED /* CoreMedia.framework in Frameworks */,
-				269DA04328D0D2E6007D51D6 /* libring.a in Frameworks */,
 				269DA03A28D0D2E5007D51D6 /* libpjmedia-codec.a in Frameworks */,
 				269DA04028D0D2E5007D51D6 /* libpjsip.a in Frameworks */,
 				269DA03F28D0D2E5007D51D6 /* libpjsip-ua.a in Frameworks */,
@@ -1225,6 +1226,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44EDA53D28FE22FD00BEB99A /* libjami.a */,
 				269DA08428D0DA18007D51D6 /* libyaml-cpp.a */,
 				269DA05128D0D2ED007D51D6 /* libfmt.a */,
 				269DA05228D0D2EF007D51D6 /* libgit2.a */,
@@ -2180,7 +2182,7 @@
 		6452143824B4AB43007203D5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */,
+				6452143D24B4AB44007203D5 /* WhirlyGlobe.framework */,
 				6452143F24B4AB44007203D5 /* WhirlyGlobeMaplyComponentTests.xctest */,
 			);
 			name = Products;
@@ -2406,10 +2408,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6452143D24B4AB44007203D5 /* WhirlyGlobeMaplyComponent.framework */ = {
+		6452143D24B4AB44007203D5 /* WhirlyGlobe.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = WhirlyGlobeMaplyComponent.framework;
+			path = WhirlyGlobe.framework;
 			remoteRef = 6452143C24B4AB44007203D5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

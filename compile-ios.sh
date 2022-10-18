@@ -58,7 +58,7 @@ if [ ! -d "$DAEMON_DIR" ]; then
   echo 'If you cloned the daemon in a custom location override' \
        'use DAEMON_DIR to point to it'
   echo "You can also use our meta repo which contains both:
-        https://gerrit-ring.savoirfairelinux.com/#/admin/projects/ring-project"
+        https://review.jami.net/admin/repos/jami-project"
   exit 1
 fi
 
@@ -138,7 +138,7 @@ do
   mkdir -p "build-ios-$ARCH"
   cd build-ios-$ARCH
 
-  RING_CONF="--host=$HOST \
+  JAMI_CONF="--host=$HOST \
              --without-dbus \
              --disable-plugin \
              --disable-libarchive \
@@ -148,10 +148,10 @@ do
 
   if [ "$RELEASE" = "0" ]
   then
-    RING_CONF+=" --enable-debug"
+    JAMI_CONF+=" --enable-debug"
   fi
 
-  $DAEMON_DIR/configure $RING_CONF \
+  $DAEMON_DIR/configure $JAMI_CONF \
                         CC="$CC $CFLAGS" \
                         CXX="$CXX $CXXFLAGS" \
                         OBJCXX="$CXX $CXXFLAGS" \
