@@ -244,15 +244,17 @@ class JamiSearchViewModel {
             return
         }
 
-        if !(self.contactFoundConversation.value?.conversation.value.containsParticipant(participant: text) ?? true) {
-            let uri = JamiURI.init(schema: URIType.ring, infoHach: text)
-            let conversation = ConversationModel(withParticipantUri: uri,
-                                                 accountId: currentAccount.id)
-            let newConversation = ConversationViewModel(with: self.injectionBag)
-            newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
-            self.contactFoundConversation.accept(newConversation)
-            self.dataSource.conversationFound(conversation: newConversation, name: self.searchBarText.value)
+        // check if conversation already exists
+        if let existingConversation = self.contactFoundConversation.value, existingConversation.conversation.value.containsParticipant(participant: text) {
+            return
         }
+        let uri = JamiURI.init(schema: URIType.ring, infoHach: text)
+        let conversation = ConversationModel(withParticipantUri: uri,
+                                             accountId: currentAccount.id)
+        let newConversation = ConversationViewModel(with: self.injectionBag)
+        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+        self.contactFoundConversation.accept(newConversation)
+        self.dataSource.conversationFound(conversation: newConversation, name: self.searchBarText.value)
     }
 
     func showConversation(conversation: ConversationViewModel) {
