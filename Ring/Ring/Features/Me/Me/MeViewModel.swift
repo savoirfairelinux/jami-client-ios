@@ -57,6 +57,12 @@ enum SettingsSection: SectionModelType {
         case boothMode
         case peerDiscovery
         case autoRegistration
+        // Connectivity Settings
+        case turnEnabled
+        case turnServer
+        case turnUsername
+        case turnPassword
+        case turnRealm
     }
 
     var items: [SectionRow] {
@@ -88,7 +94,7 @@ enum SettingsSection: SectionModelType {
 
 enum ActionsState {
     case deviceRevokedWithSuccess(deviceId: String)
-    case deviceRevokationError(deviceId: String, errorMessage: String)
+    case deviceRevocationError(deviceId: String, errorMessage: String)
     case showLoading
     case hideLoading
     case usernameRegistered
@@ -213,6 +219,31 @@ class MeViewModel: ViewModel, Stateable {
                                             .notifications]))
     }()
 
+    lazy var connectivitySettings: Observable<SettingsSection> = {
+        var server = ""
+        var username = ""
+        var password = ""
+        var realm = ""
+        if let account = self.accountService.currentAccount,
+           let details = account.details {
+            server = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnServer))
+            username = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnUsername))
+            password = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnPassword))
+            realm = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnRealm))
+            self.turnServer.accept(server)
+            self.turnUsername.accept(username)
+            self.turnPassword.accept(password)
+            self.turnRealm.accept(realm)
+        }
+        return Observable
+            .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.connectivityHeader),
+                                            .turnEnabled,
+                                            .turnServer,
+                                            .turnUsername,
+                                            .turnPassword,
+                                            .turnRealm]))
+    }()
+
     lazy var otherJamiSettings: Observable<SettingsSection> = {
         let items: [SettingsSection.SectionRow] = [.sectionHeader(title: L10n.AccountPage.other),
                                                    .peerDiscovery,
@@ -246,8 +277,9 @@ class MeViewModel: ViewModel, Stateable {
                                  linkNewDevice,
                                  linkedDevices,
                                  accountJamiSettings,
-                                 otherJamiSettings) { (credentials, linkNew, devices, settings, other) in
-            return [credentials, devices, linkNew, settings, other]
+                                 connectivitySettings,
+                                 otherJamiSettings) { (credentials, linkNew, devices, settings, connectivity, other) in
+            return [credentials, devices, linkNew, settings, connectivity, other]
         }
     }()
 
@@ -516,11 +548,11 @@ class MeViewModel: ViewModel, Stateable {
                     case DeviceRevocationState.success.rawValue:
                         self.showActionState.accept(.deviceRevokedWithSuccess(deviceId: deviceID))
                     case DeviceRevocationState.wrongPassword.rawValue:
-                        self.showActionState.accept(.deviceRevokationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationWrongPassword))
+                        self.showActionState.accept(.deviceRevocationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationWrongPassword))
                     case DeviceRevocationState.unknownDevice.rawValue:
-                        self.showActionState.accept(.deviceRevokationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationUnknownDevice))
+                        self.showActionState.accept(.deviceRevocationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationUnknownDevice))
                     default:
-                        self.showActionState.accept(.deviceRevokationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationError))
+                        self.showActionState.accept(.deviceRevocationError(deviceId: deviceID, errorMessage: L10n.AccountPage.deviceRevocationError))
                     }
                 }
             })
@@ -765,11 +797,52 @@ class MeViewModel: ViewModel, Stateable {
         peerDiscoveryEnabled.accept(enable)
     }
 
+    func enableTurn(enable: Bool) {
+        guard self.turnEnabled.value != enable,
+              let account = self.accountService.currentAccount else { return }
+        self.accountService.enableTurn(enable: enable, accountId: account.id)
+        turnEnabled.accept(enable)
+    }
+
     func enableKeepAlive(enable: Bool) {
         guard self.keepAliveEnabled.value != enable,
               let account = self.accountService.currentAccount else { return }
         self.accountService.enableKeepAlive(enable: enable, accountId: account.id)
         keepAliveEnabled.accept(enable)
+    }
+
+    // MARK: Connectivity
+    lazy var turnEnabled: BehaviorRelay<Bool> = {
+        if let account = self.accountService.currentAccount,
+           let details = account.details {
+            let enable = details.get(withConfigKeyModel:
+                                        ConfigKeyModel.init(withKey: .turnEnable)).boolValue
+            return BehaviorRelay<Bool>(value: enable)
+        }
+        return BehaviorRelay<Bool>(value: true)
+    }()
+    let turnServer = BehaviorRelay<String>(value: "")
+    let turnUsername = BehaviorRelay<String>(value: "")
+    let turnPassword = BehaviorRelay<String>(value: "")
+    let turnRealm = BehaviorRelay<String>(value: "")
+
+    func updateTurnSettings() {
+        guard let account = self.accountService.currentAccount, let details = account.details else { return }
+        let server = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnServer))
+        let username = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnUsername))
+        let password = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnPassword))
+        let realm = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .turnRealm))
+        if server == turnServer.value
+            && username == turnUsername.value
+            && password == turnPassword.value
+            && realm == turnRealm.value {
+            return
+        }
+        self.accountService.setTurnSettings(accountId: account.id, server: turnServer.value, username: turnUsername.value, password: turnPassword.value, realm: turnRealm.value)
+        //        if realm != turnRealm.value {
+        //            turnRealm.accept(turnRealm.value)
+        //        }
+
     }
 
     // MARK: Sip Credentials
