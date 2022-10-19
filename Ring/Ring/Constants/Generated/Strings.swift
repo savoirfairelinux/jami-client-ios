@@ -63,6 +63,8 @@ internal enum L10n {
     internal static let changePassword = L10n.tr("Localizable", "accountPage.changePassword", fallback: "Change password")
     /// Password incorrect
     internal static let changePasswordError = L10n.tr("Localizable", "accountPage.changePasswordError", fallback: "Password incorrect")
+    /// Connectivity
+    internal static let connectivityHeader = L10n.tr("Localizable", "accountPage.connectivityHeader", fallback: "Connectivity")
     /// Contact me using "%s" on the Jami distributed communication platform: https://jami.net
     internal static func contactMeOnJamiContant(_ p1: UnsafePointer<CChar>) -> String {
       return L10n.tr("Localizable", "accountPage.contactMeOnJamiContant", p1, fallback: "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net")
@@ -149,6 +151,16 @@ internal enum L10n {
     internal static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader", fallback: "Settings")
     /// Share Account Details
     internal static let shareAccountDetails = L10n.tr("Localizable", "accountPage.shareAccountDetails", fallback: "Share Account Details")
+    /// Enable TURN
+    internal static let turnEnabled = L10n.tr("Localizable", "accountPage.turnEnabled", fallback: "Enable TURN")
+    /// TURN password
+    internal static let turnPassword = L10n.tr("Localizable", "accountPage.turnPassword", fallback: "TURN password")
+    /// TURN realm
+    internal static let turnRealm = L10n.tr("Localizable", "accountPage.turnRealm", fallback: "TURN realm")
+    /// TURN address
+    internal static let turnServer = L10n.tr("Localizable", "accountPage.turnServer", fallback: "TURN address")
+    /// TURN username
+    internal static let turnUsername = L10n.tr("Localizable", "accountPage.turnUsername", fallback: "TURN username")
     /// UNBLOCK
     internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact", fallback: "UNBLOCK")
     /// Username
@@ -664,8 +676,8 @@ internal enum L10n {
     internal static let identifier = L10n.tr("Localizable", "swarm.identifier", fallback: "Identifier")
     /// Ignore the swarm
     internal static let ignoreSwarm = L10n.tr("Localizable", "swarm.ignoreSwarm", fallback: "Ignore the swarm")
-    /// Others
-    internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Others")
+    /// Invited
+    internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Invited")
     /// Private group swarm
     internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private group swarm")
     /// Leave the conversation
