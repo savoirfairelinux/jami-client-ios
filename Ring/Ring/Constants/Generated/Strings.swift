@@ -146,7 +146,13 @@ internal enum L10n {
     /// Save
     internal static let saveProxyAddress = L10n.tr("Localizable", "accountPage.saveProxyAddress", fallback: "Save")
     /// Settings
+<<<<<<< HEAD
     internal static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader", fallback: "Settings")
+=======
+    internal static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader")
+    /// Connectivity
+    internal static let connectivityHeader = L10n.tr("Localizable", "accountPage.connectivityHeader")
+>>>>>>> 1893bac4 (settings: add connectivity settings (TURN))
     /// Share Account Details
     internal static let shareAccountDetails = L10n.tr("Localizable", "accountPage.shareAccountDetails", fallback: "Share Account Details")
     /// UNBLOCK
