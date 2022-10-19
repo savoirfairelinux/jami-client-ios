@@ -37,7 +37,8 @@ extension UITextField {
         self.inputAccessoryView = bar
     }
 
-    @objc private func hideKeyboard() {
+    @objc
+    private func hideKeyboard() {
         self.resignFirstResponder()
     }
 }
