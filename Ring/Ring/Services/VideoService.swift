@@ -299,7 +299,6 @@ class VideoService: FrameExtractorDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.restoreDefaultDevice),
                                                name: NSNotification.Name(rawValue: NotificationName.restoreDefaultVideoDevice.rawValue),
                                                object: nil)
-        self.currentDeviceId = self.videoAdapter.getDefaultDevice()
     }
 
     @objc
@@ -323,6 +322,10 @@ class VideoService: FrameExtractorDelegate {
         camera.checkPermission()
     }
 
+    func getVideoSource() -> String {
+        return "camera://" + self.currentDeviceId
+    }
+
     func enumerateVideoInputDevices() {
         do {
             try camera.configureSession(withPosition: AVCaptureDevice.Position.front, withOrientation: camera.getOrientation)
@@ -337,7 +340,13 @@ class VideoService: FrameExtractorDelegate {
                                         withDevInfo: frontPortraitCameraDevInfo)
             videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
                                         withDevInfo: hd1280x720Device)
-
+            let accelerated = self.videoAdapter.getEncodingAccelerated()
+            if accelerated {
+                self.videoAdapter.setDefaultDevice(camera.nameDevice1280_720)
+            } else {
+                self.videoAdapter.setDefaultDevice(camera.namePortrait)
+            }
+            self.currentDeviceId = self.videoAdapter.getDefaultDevice()
         } catch let e as VideoError {
             self.log.error("Error during capture device enumeration: \(e)")
         } catch {
@@ -518,7 +527,7 @@ extension VideoService: VideoAdapterDelegate {
                                 orientation: self.getImageOrienation()))
         }
         videoAdapter.writeOutgoingFrame(with: imageBuffer,
-                                        angle: Int32(self.angle), videoInputId: "camera://" + self.currentDeviceId)
+                                        angle: Int32(self.angle), videoInputId: self.getVideoSource())
     }
 
     func updateDevicePosition(position: AVCaptureDevice.Position) {
