@@ -539,9 +539,11 @@ extension CallViewModel {
         guard let account = self.accountService.currentAccount else {
             return
         }
+
         self.callService.placeCall(withAccount: account,
                                    toRingId: uri,
                                    userName: userName,
+                                   videoSource: self.videoService.getVideoSource(),
                                    isAudioOnly: isAudioOnly)
             .subscribe(onSuccess: { [weak self] callModel in
                 callModel.callUUID = UUID()
@@ -568,6 +570,7 @@ extension CallViewModel {
                                            toCall: self.rendererId,
                                            withAccount: account,
                                            userName: contactToAdd.registeredName,
+                                           videSource: self.videoService.getVideoSource(),
                                            isAudioOnly: call.isAudioOnly)
                     .subscribe()
                     .disposed(by: self.disposeBag)

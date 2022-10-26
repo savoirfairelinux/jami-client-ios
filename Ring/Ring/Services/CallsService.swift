@@ -250,11 +250,13 @@ class CallsService: CallsAdapterDelegate {
                                toCall callId: String,
                                withAccount account: AccountModel,
                                userName: String,
+                               videSource: String,
                                isAudioOnly: Bool = false) -> Observable<CallModel> {
         let call = self.calls.value[callId]
         let placeCall = self.placeCall(withAccount: account,
                                        toRingId: contactId,
                                        userName: userName,
+                                       videoSource: videSource,
                                        isAudioOnly: isAudioOnly,
                                        withMedia: call?.mediaList ?? [[String: String]]())
             .asObservable()
@@ -370,6 +372,7 @@ class CallsService: CallsAdapterDelegate {
     func placeCall(withAccount account: AccountModel,
                    toRingId ringId: String,
                    userName: String,
+                   videoSource: String,
                    isAudioOnly: Bool = false,
                    withMedia: [[String: String]] = [[String: String]]()) -> Single<CallModel> {
 
@@ -392,6 +395,7 @@ class CallsService: CallsAdapterDelegate {
             if !isAudioOnly {
                 mediaAttribute[MediaAttributeKey.mediaType.rawValue] = MediaAttributeValue.video.rawValue
                 mediaAttribute[MediaAttributeKey.label.rawValue] = "video_0"
+                mediaAttribute[MediaAttributeKey.source.rawValue] = videoSource
                 mediaList.append(mediaAttribute)
             }
         }
