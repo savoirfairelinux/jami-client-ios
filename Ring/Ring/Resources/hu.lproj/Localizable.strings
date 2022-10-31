@@ -80,15 +80,15 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Átugrani";
 "createProfile.profileCreated" = "Tovább";
-"createProfile.title" = "Profil testreszabása";
+"createProfile.title" = "Névjegy testreszabása";
 "createProfile.enterNameLabel" = "Adja meg a megjelenítési nevet";
 "createProfile.enterNamePlaceholder" = "Név megadása";
-"createProfile.subtitle" = "A profilja a kapcsolataival kerül megosztásra. Bármikor megváltoztathatja.";
-"createProfile.createYourAvatar" = "Megtestesüléskép létrehozása";
+"createProfile.subtitle" = "A névjegyed csak a kapcsolataival kerül megosztásra. Bármikor megváltoztathatja.";
+"createProfile.createYourAvatar" = "Névjegykép létrehozása";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Fiók létrehozása";
-"createAccount.chooseStrongPassword" = "Válasszon erős jelszót, amelyre emlékezni fog, hogy megvédje a Jami fiókját.";
+"createAccount.chooseStrongPassword" = "Válasszon erős jelszót, amelyre emlékezni fog, hogy megvédje a Jami-fiókját.";
 "createAccount.enterNewUsernamePlaceholder" = "Felhasználónév";
 "createAccount.newPasswordPlaceholder" = "Jelszó";
 "createAccount.repeatPasswordPlaceholder" = "Jelszó megerősítése";

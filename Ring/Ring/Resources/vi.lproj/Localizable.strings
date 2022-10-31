@@ -228,7 +228,7 @@
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Name";
+"accountPage.namePlaceholder" = "Tên";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Other";
 "accountPage.removeAccountTitle" = "Remove account";
