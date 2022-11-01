@@ -99,6 +99,7 @@ enum CallLayout: Int32 {
 public class CallModel {
 
     var callId: String = ""
+    var peerJamiId: String = ""
     var participantsCallId: Set<String> = Set<String>()
     var callUUID: UUID = UUID()
     var dateReceived: Date?

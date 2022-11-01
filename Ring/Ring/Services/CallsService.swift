@@ -410,6 +410,7 @@ class CallsService: CallsAdapterDelegate {
                let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: account.id) {
                 call.update(withDictionary: callDictionary, withMedia: mediaList)
                 call.callId = callId
+                call.peerJamiId = ringId
                 call.participantsCallId.removeAll()
                 call.participantsCallId.insert(callId)
                 self.currentCallsEvents.onNext(call)

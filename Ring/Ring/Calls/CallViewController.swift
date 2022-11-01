@@ -369,6 +369,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             })
             .disposed(by: self.disposeBag)
 
+        if let profileImage = self.viewModel.profileImage {
+            if let image = UIImage(data: profileImage) {
+                self.profileImageView.image = image
+            }
+        }
         self.viewModel.contactImageData?.asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] dataOrNil in

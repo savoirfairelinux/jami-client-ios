@@ -187,6 +187,18 @@ class CallViewModel: Stateable, ViewModel {
             })
     }()
 
+    var profileImage: Data? {
+        guard let call = self.call
+        else { return nil }
+        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: call.peerJamiId, accontId: call.accountId) else { return nil }
+        if let profile = self.contactsService.getProfile(uri: "ring:" + call.peerJamiId, accountId: conversation.accountId), let alias = profile.alias, let photo = profile.photo {
+            if !alias.isEmpty {
+                self.call?.displayName = alias
+            }
+            if !photo.isEmpty { return NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? }
+        }
+        return nil
+    }
     private var hasIncomigVideo = BehaviorRelay<Bool>(value: false)
 
     lazy var incomingFrame: Observable<UIImage?> = {
