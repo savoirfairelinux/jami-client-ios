@@ -157,7 +157,7 @@ class MessageViewModel {
         self.profileService
             .getProfile(uri: contactURI,
                         createIfNotexists: false,
-                        accountId: "")
+                        accountId: account.id)
             .subscribe(onNext: { [weak self] profile in
                 if let photo = profile.photo,
                    let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
