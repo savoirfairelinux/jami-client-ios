@@ -254,7 +254,7 @@ class CallsService: CallsAdapterDelegate {
                                isAudioOnly: Bool = false) -> Observable<CallModel> {
         let call = self.calls.value[callId]
         let placeCall = self.placeCall(withAccount: account,
-                                       toRingId: contactId,
+                                       toParticipantId: contactId,
                                        userName: userName,
                                        videoSource: videSource,
                                        isAudioOnly: isAudioOnly,
@@ -370,7 +370,7 @@ class CallsService: CallsAdapterDelegate {
     }
 
     func placeCall(withAccount account: AccountModel,
-                   toRingId ringId: String,
+                   toParticipantId participantId: String,
                    userName: String,
                    videoSource: String,
                    isAudioOnly: Bool = false,
@@ -400,15 +400,17 @@ class CallsService: CallsAdapterDelegate {
             }
         }
 
-        let call = CallModel(withCallId: ringId, callDetails: callDetails, withMedia: mediaList)
+        let call = CallModel(withCallId: participantId, callDetails: callDetails, withMedia: mediaList)
         call.state = .unknown
         call.callType = .outgoing
+        call.participantUri = participantId
         return Single<CallModel>.create(subscribe: { [weak self] single in
             if let self = self, let callId = self.callsAdapter.placeCall(withAccountId: account.id,
-                                                                         toParticipantId: ringId,
+                                                                         toParticipantId: participantId,
                                                                          withMedia: mediaList),
                let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: account.id) {
                 call.update(withDictionary: callDictionary, withMedia: mediaList)
+                call.participantUri = participantId
                 call.callId = callId
                 call.participantsCallId.removeAll()
                 call.participantsCallId.insert(callId)

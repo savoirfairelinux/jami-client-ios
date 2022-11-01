@@ -541,7 +541,7 @@ extension CallViewModel {
         }
 
         self.callService.placeCall(withAccount: account,
-                                   toRingId: uri,
+                                   toParticipantId: uri,
                                    userName: userName,
                                    videoSource: self.videoService.getVideoSource(),
                                    isAudioOnly: isAudioOnly)
