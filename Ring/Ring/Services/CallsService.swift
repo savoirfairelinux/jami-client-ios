@@ -403,12 +403,14 @@ class CallsService: CallsAdapterDelegate {
         let call = CallModel(withCallId: ringId, callDetails: callDetails, withMedia: mediaList)
         call.state = .unknown
         call.callType = .outgoing
+        call.participantUri = ringId
         return Single<CallModel>.create(subscribe: { [weak self] single in
             if let self = self, let callId = self.callsAdapter.placeCall(withAccountId: account.id,
                                                                          toParticipantId: ringId,
                                                                          withMedia: mediaList),
                let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: account.id) {
                 call.update(withDictionary: callDictionary, withMedia: mediaList)
+                call.participantUri = ringId
                 call.callId = callId
                 call.participantsCallId.removeAll()
                 call.participantsCallId.insert(callId)
