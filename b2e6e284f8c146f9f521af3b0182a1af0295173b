@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dca32f5a_6bb52617",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-11-02T14:56:21Z",
+      "side": 1,
+      "message": "observeOn deprecated",
+      "revId": "b2e6e284f8c146f9f521af3b0182a1af0295173b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dc4c237_315adaa9",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-11-02T14:56:21Z",
+      "side": 1,
+      "message": "observeOn renamed to observe(on:)",
+      "revId": "b2e6e284f8c146f9f521af3b0182a1af0295173b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ef6a090_84b9ecad",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-11-02T14:56:21Z",
+      "side": 1,
+      "message": "margin is not used",
+      "revId": "b2e6e284f8c146f9f521af3b0182a1af0295173b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "215965bb_9ce69beb",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-11-02T14:56:21Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "b2e6e284f8c146f9f521af3b0182a1af0295173b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
