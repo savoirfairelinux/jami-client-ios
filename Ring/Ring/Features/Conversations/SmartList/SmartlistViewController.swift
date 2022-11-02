@@ -792,7 +792,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     private func showBlockContactConfirmation(atIndex: IndexPath) {
         let alert = UIAlertController(title: L10n.Alerts.confirmBlockContactTitle, message: L10n.Alerts.confirmBlockContact, preferredStyle: .alert)
-        let blockAction = UIAlertAction(title: L10n.Actions.blockAction, style: .destructive) { (_: UIAlertAction!) -> Void in
+        let blockAction = UIAlertAction(title: L10n.Global.block, style: .destructive) { (_: UIAlertAction!) -> Void in
             if let conversation: ConversationViewModel = try? self.conversationsTableView.rx.model(at: atIndex) {
                 self.viewModel.blockConversationsContact(conversationViewModel: conversation)
             }
