@@ -661,7 +661,9 @@ class DBManager {
                     }
                 }
             }
-            conversationModel.messages.accept(messages)
+            conversationModel.messages = messages
+
+            // conversationModel.messages.accept(messages)
             conversationsToReturn.append(conversationModel)
         }
         return conversationsToReturn

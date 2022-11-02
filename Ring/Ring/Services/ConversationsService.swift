@@ -97,7 +97,7 @@ class ConversationsService {
                 }
                 /// filter out contact requests
                 var conversationsFromDB = conversationsModels.filter { conversation in
-                    !(conversation.messages.value.count == 1 && conversation.messages.value.first!.content == L10n.GeneratedMessage.invitationReceived)
+                    !(conversation.messages.count == 1 && conversation.messages.first!.content == L10n.GeneratedMessage.invitationReceived)
                 }
                 /// After location sharing we could have both: swarm and non swarm conversation for same contact.
                 /// Filter out conversations that already added to swarm
@@ -144,9 +144,9 @@ class ConversationsService {
     private func sortAndUpdate(conversations: inout [ConversationModel]) {
         /// sort conversaton by last message date
         let sorted = conversations.sorted(by: { conversation1, conversations2 in
-            guard let lastMessage1 = conversation1.messages.value.last,
-                  let lastMessage2 = conversations2.messages.value.last else {
-                return conversation1.messages.value.count > conversations2.messages.value.count
+            guard let lastMessage1 = conversation1.messages.last,
+                  let lastMessage2 = conversations2.messages.last else {
+                return conversation1.messages.count > conversations2.messages.count
             }
             return lastMessage1.receivedDate > lastMessage2.receivedDate
         })
@@ -174,7 +174,7 @@ class ConversationsService {
      */
     private func sortIfNeeded() {
         if !self.conversations.value.map({ conv in
-            return conv.messages.value.last?.receivedDate ?? Date()
+            return conv.messages.last?.receivedDate ?? Date()
         })
         .isAscending() {
             var currentConversations = self.conversations.value
@@ -247,71 +247,78 @@ class ConversationsService {
                     return conversation.id == conversationId && conversation.accountId == accountId
                 })
                 .first else { return false }
-        var currentInteractions = conversation.messages.value
-        var numberOfNewMessages = 0
+        //    var currentInteractions = conversation.messages
+        //  var numberOfNewMessages = 0
         // if all loaded messages are of type .merge, we need to load next messages
         let numberOfInteractions = messages.filter { $0.type != .merge }.count
         if fromLoaded && numberOfInteractions == 0 {
-            self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: messages.first?.id ?? "")
+            let ifmrgr = messages.first?.id ?? ""
+            print("*******load more from insertMessages \(ifmrgr)")
+            self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: ifmrgr)
             return false
         }
+
+        var newMessages = [MessageModel]()
 
         messages.forEach { newMessage in
             /// filter out merge interaction
             if newMessage.type == .merge { return }
             /// filter out existing messages
-            if currentInteractions.contains(where: { message in
+            if conversation.messages.contains(where: { message in
                 message.id == newMessage.id
             }) { return }
             if fromLoaded {
                 newMessage.status = .displayed
             }
-            numberOfNewMessages += 1
-            /// find child mesage
-            if let index = currentInteractions.firstIndex(where: { message in
-                message.parentId == newMessage.id
-            }) {
-                if index > 1 {
-                    currentInteractions.insert(newMessage, at: index - 1)
-                } else {
-                    currentInteractions.insert(newMessage, at: 0)
-                }
-            } else if let parentIndex = currentInteractions.firstIndex(where: { message in
-                message.id == newMessage.parentId
-            }) {
-                if parentIndex > currentInteractions.count - 1 {
-                    currentInteractions.insert(newMessage, at: parentIndex + 1)
-                } else {
-                    currentInteractions.append(newMessage)
-                }
-            } else {
-                /// no child or parent found. Just add interaction to begining for loaded and to the end for new
-                if fromLoaded {
-                    currentInteractions.insert(newMessage, at: 0)
-                } else {
-                    currentInteractions.append(newMessage)
-                }
-                /// save message without parent to dictionary, so if we receive parent later we could move message
-                conversation.unorderedInteractions.append(newMessage.id)
-            }
-            /// if a new message is a parent for previously added message change messages order
-            if conversation.unorderedInteractions.contains(where: { parentId in
-                parentId == newMessage.parentId
-            }) {
-                moveInteraction(interactionId: newMessage.id, after: newMessage.parentId, messages: &currentInteractions)
-                if let ind = conversation.unorderedInteractions.firstIndex(of: newMessage.parentId) {
-                    conversation.unorderedInteractions.remove(at: ind)
-                }
-            }
+            newMessages.append(newMessage)
+            conversation.messages.append(newMessage)
+            //            numberOfNewMessages += 1
+            //            /// find child mesage
+            //            if let index = currentInteractions.firstIndex(where: { message in
+            //                message.parentId == newMessage.id
+            //            }) {
+            //                if index > 1 {
+            //                    currentInteractions.insert(newMessage, at: index - 1)
+            //                } else {
+            //                    currentInteractions.insert(newMessage, at: 0)
+            //                }
+            //            } else if let parentIndex = currentInteractions.firstIndex(where: { message in
+            //                message.id == newMessage.parentId
+            //            }) {
+            //                if parentIndex > currentInteractions.count - 1 {
+            //                    currentInteractions.insert(newMessage, at: parentIndex + 1)
+            //                } else {
+            //                    currentInteractions.append(newMessage)
+            //                }
+            //            } else {
+            //                /// no child or parent found. Just add interaction to begining for loaded and to the end for new
+            //                if fromLoaded {
+            //                    currentInteractions.insert(newMessage, at: 0)
+            //                } else {
+            //                    currentInteractions.append(newMessage)
+            //                }
+            //                /// save message without parent to dictionary, so if we receive parent later we could move message
+            //                conversation.unorderedInteractions.append(newMessage.id)
+            //            }
+            //            /// if a new message is a parent for previously added message change messages order
+            //            if conversation.unorderedInteractions.contains(where: { parentId in
+            //                parentId == newMessage.parentId
+            //            }) {
+            //                moveInteraction(interactionId: newMessage.id, after: newMessage.parentId, messages: &currentInteractions)
+            //                if let ind = conversation.unorderedInteractions.firstIndex(of: newMessage.parentId) {
+            //                    conversation.unorderedInteractions.remove(at: ind)
+            //                }
+            //            }
         }
-        if numberOfNewMessages == 0 {
-            return false
-        }
-        /// emit signal for conversation messages
-        conversation.messages.accept(currentInteractions)
-        /// check if conversation order changed. In this case we need emit new signal for conversation
-        sortIfNeeded()
-        self.updateUnreadMessages(conversationId: conversationId, accountId: accountId)
+        conversation.newMessages.accept(newMessages)
+        //        if numberOfNewMessages == 0 {
+        //            return false
+        //        }
+        //        /// emit signal for conversation messages
+        //        // conversation.messages.accept(currentInteractions)
+        //        /// check if conversation order changed. In this case we need emit new signal for conversation
+        //        sortIfNeeded()
+        //        self.updateUnreadMessages(conversationId: conversationId, accountId: accountId)
         return true
     }
 
@@ -397,7 +404,7 @@ class ConversationsService {
          */
         for conversation in conversations where !conversation.isSwarm() {
             var updatedMessages = 0
-            for message in (conversation.messages.value) {
+            for message in (conversation.messages) {
                 if !message.daemonId.isEmpty && (message.status == .unknown || message.status == .sending ) {
                     let updatedMessageStatus = self.status(forMessageId: message.daemonId)
                     if (updatedMessageStatus.rawValue > message.status.rawValue && updatedMessageStatus != .failure) ||
@@ -431,7 +438,7 @@ class ConversationsService {
                 }
             }
             if updatedMessages > 0 {
-                conversation.messages.accept(conversation.messages.value)
+                // conversation.messages.accept(conversation.messages)
             }
         }
     }
@@ -472,9 +479,9 @@ class ConversationsService {
                             : message.content
                         /// for location sharing we should just update message if if exists
                         if message.type == .location,
-                           let existingMessage = conversation.messages.value.filter({ $0.type == .location && $0.incoming == message.incoming }).first {
+                           let existingMessage = conversation.messages.filter({ $0.type == .location && $0.incoming == message.incoming }).first {
                             existingMessage.content = content
-                            conversation.messages.accept(conversation.messages.value)
+                            // conversation.messages.accept(conversation.messages.value)
                         } else {
                             message.content = content
                             message.id = savedMessage.messageID
@@ -559,7 +566,7 @@ class ConversationsService {
         if let hash = JamiURI(from: contactUri).hash,
            interactionType == .contact,
            let conversation = self.getConversationForParticipant(jamiId: hash, accontId: accountId),
-           conversation.messages.value.map({ ($0.content) }).contains(messageContent) {
+           conversation.messages.map({ ($0.content) }).contains(messageContent) {
             return
 
         }
@@ -793,13 +800,13 @@ class ConversationsService {
             conversationUnwraped = self.getConversationForParticipant(jamiId: jamiId, accontId: accountId)
         }
         guard let conversation = conversationUnwraped else { return }
-        let messages = conversation.messages.value
+        let messages = conversation.messages
         if let message = messages.first(where: { messageModel in
             messageModel.id == interactionId
         }) {
             message.transferStatus = transferStatus
         }
-        conversation.messages.accept(messages)
+        // conversation.messages.accept(messages)
         let serviceEventType: ServiceEventType = .dataTransferMessageUpdated
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.transferId, value: transferId)
@@ -847,7 +854,7 @@ class ConversationsService {
                   let conversationURI = conversation.getConversationURI() else { return Disposables.create { } }
 
             /// Filter out read, outgoing, and transfer messages
-            let unreadMessages = conversation.messages.value.filter({ messages in
+            let unreadMessages = conversation.messages.filter({ messages in
                 return messages.status != .displayed && messages.incoming && messages.type == .text
             })
 
@@ -878,7 +885,7 @@ class ConversationsService {
                     .disposed(by: self.disposeBag)
             } else {
                 /// for swarm set last message displayed, to get right number of unread messages
-                if let lastId = conversation.messages.value.map({ $0.id }).filter({ !$0.isEmpty }).last {
+                if let lastId = conversation.messages.map({ $0.id }).filter({ !$0.isEmpty }).last {
                     self.conversationsAdapter
                         .setMessageDisplayedFrom(conversationURI,
                                                  byAccount: accountId,
@@ -904,7 +911,7 @@ class ConversationsService {
         }).first else { return }
 
         /// Find message
-        if let message: MessageModel = conversation.messages.value.filter({ (message) -> Bool in
+        if let message: MessageModel = conversation.messages.filter({ (message) -> Bool in
             let messageIDSame = !conversation.isSwarm() ? !message.daemonId.isEmpty && message.daemonId == messageId : message.id == messageId
             return messageIDSame &&
                 ((status.rawValue > message.status.rawValue && status != .failure) ||
@@ -1037,12 +1044,12 @@ extension ConversationsService {
                                 conversation.accountId == accountId
                         })
                         .first {
-                        var messages = conversation.messages.value
+                        var messages = conversation.messages
                         if let index = messages.firstIndex(where: { message in
                             message.type == .location && message.incoming == incoming
                         }) {
                             messages.remove(at: index)
-                            conversation.messages.accept(messages)
+                            // conversation.messages.accept(messages)
                         }
                     }
                     completable(.completed)

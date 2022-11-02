@@ -229,7 +229,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                                                    accountId: conversation.accountId,
                                                    conversationId: conversation.id,
                                                    withFilePath: filePath,
-                                                   parent: conversation.messages.value.last?.id)
+                                                   parent: conversation.messages.last?.id)
         }
     }
 

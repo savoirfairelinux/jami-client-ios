@@ -215,7 +215,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var hideNewMessagesLabel = BehaviorRelay<Bool>(value: true)
 
-    var hideDate: Bool { self.conversation.value.messages.value.isEmpty }
+    var hideDate: Bool { self.conversation.value.messages.isEmpty }
 
     func sendMessage(withContent content: String, contactURI: String? = nil) {
         let conversation = self.conversation.value
@@ -268,7 +268,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func deleteLocationMessage(messageId: String) {
-        guard let message = self.conversation.value.messages.value.filter({ $0.id == messageId }).first,
+        guard let message = self.conversation.value.messages.filter({ $0.id == messageId }).first,
               let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
         self.conversationsService.deleteLocationUpdate(incoming: message.incoming, peerUri: jamiId, accountId: self.conversation.value.accountId, shouldRefreshConversations: true)
             .subscribe()
@@ -281,12 +281,12 @@ class ConversationViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: jamiId, userName: self.displayName.value ?? self.userName.value))
     }
 
-    func loadMoreMessages() -> Bool {
-        if self.conversation.value.allMessagesLoaded() { return false }
+    func loadMoreMessages(messageId: String) -> Bool {
+        // if self.conversation.value.allMessagesLoaded() { return false }
         self.conversationsService
             .loadConversationMessages(conversationId: self.conversation.value.id,
                                       accountId: self.conversation.value.accountId,
-                                      from: self.conversation.value.messages.value.first?.id ?? "")
+                                      from: messageId)
         return true
     }
 
@@ -481,42 +481,42 @@ extension ConversationViewModel {
     }
 
     private func subscribeMessagesUpdate() {
-        conversation.value.messages
-            .subscribe { [weak self] messages in
-                guard let self = self else { return }
-                // update last message
-                guard let lastMessage = messages.last else { return }
-                self.lastMessage.accept(lastMessage.content)
-                // update last message date
-                let lastMessageDate = lastMessage.receivedDate
-                let dateToday = Date()
-                var dateString = ""
-
-                // Get components from today date
-                let todayWeekOfYear = Calendar.current.component(.weekOfYear, from: dateToday)
-                let todayDay = Calendar.current.component(.day, from: dateToday)
-                let todayMonth = Calendar.current.component(.month, from: dateToday)
-                let todayYear = Calendar.current.component(.year, from: dateToday)
-
-                // Get components from last message date
-                let weekOfYear = Calendar.current.component(.weekOfYear, from: lastMessageDate)
-                let day = Calendar.current.component(.day, from: lastMessageDate)
-                let month = Calendar.current.component(.month, from: lastMessageDate)
-                let year = Calendar.current.component(.year, from: lastMessageDate)
-
-                if todayDay == day && todayMonth == month && todayYear == year {
-                    dateString = self.hourFormatter.string(from: lastMessageDate)
-                } else if day == todayDay - 1 {
-                    dateString = L10n.Smartlist.yesterday
-                } else if todayYear == year && todayWeekOfYear == weekOfYear {
-                    dateString = lastMessageDate.dayOfWeek()
-                } else {
-                    dateString = self.dateFormatter.string(from: lastMessageDate)
-                }
-                self.lastMessageReceivedDate.accept(dateString)
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
+        //        conversation.value.messages
+        //            .subscribe { [weak self] messages in
+        //                guard let self = self else { return }
+        //                // update last message
+        //                guard let lastMessage = messages.last else { return }
+        //                self.lastMessage.accept(lastMessage.content)
+        //                // update last message date
+        //                let lastMessageDate = lastMessage.receivedDate
+        //                let dateToday = Date()
+        //                var dateString = ""
+        //
+        //                // Get components from today date
+        //                let todayWeekOfYear = Calendar.current.component(.weekOfYear, from: dateToday)
+        //                let todayDay = Calendar.current.component(.day, from: dateToday)
+        //                let todayMonth = Calendar.current.component(.month, from: dateToday)
+        //                let todayYear = Calendar.current.component(.year, from: dateToday)
+        //
+        //                // Get components from last message date
+        //                let weekOfYear = Calendar.current.component(.weekOfYear, from: lastMessageDate)
+        //                let day = Calendar.current.component(.day, from: lastMessageDate)
+        //                let month = Calendar.current.component(.month, from: lastMessageDate)
+        //                let year = Calendar.current.component(.year, from: lastMessageDate)
+        //
+        //                if todayDay == day && todayMonth == month && todayYear == year {
+        //                    dateString = self.hourFormatter.string(from: lastMessageDate)
+        //                } else if day == todayDay - 1 {
+        //                    dateString = L10n.Smartlist.yesterday
+        //                } else if todayYear == year && todayWeekOfYear == weekOfYear {
+        //                    dateString = lastMessageDate.dayOfWeek()
+        //                } else {
+        //                    dateString = self.dateFormatter.string(from: lastMessageDate)
+        //                }
+        //                self.lastMessageReceivedDate.accept(dateString)
+        //            } onError: { _ in
+        //            }
+        //            .disposed(by: self.disposeBag)
     }
 
     private func subscribeUnreadMessages() {

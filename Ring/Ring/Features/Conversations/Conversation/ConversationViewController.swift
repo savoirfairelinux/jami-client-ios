@@ -86,8 +86,7 @@ class ConversationViewController: UIViewController,
                                                object: nil)
 
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        let childView = UIHostingController(rootView: MessagesList(list: MessagesListModel(messages: self.viewModel.conversation.value.messages.asObservable(),
-                                                                                           bag: self.viewModel.injectionBag,
+        let childView = UIHostingController(rootView: MessagesList(list: MessagesListModel(bag: self.viewModel.injectionBag,
                                                                                            convId: self.viewModel.conversation.value.id,
                                                                                            accountId: self.viewModel.conversation.value.accountId, conversation: self.viewModel)))
         addChild(childView)
@@ -635,59 +634,59 @@ class ConversationViewController: UIViewController,
     }
 
     func subscribeMessages() {
-        self.viewModel.conversation.value.messages.asObservable()
-            .observe(on: MainScheduler.instance)
-            .startWith(self.viewModel.conversation.value.messages.value)
-            .subscribe(onNext: { [weak self] messages in
-                guard let self = self else {
-                    return
-                }
-                self.viewModel.setMessagesAsRead()
-                let oldNumber = self.messageViewModels.count
-                self.messageViewModels.removeAll()
-                for message in messages {
-                    //                    let injBag = self.viewModel.injectionBag
-                    //                    if let jamiId = self.viewModel.conversation.value.getParticipants().first?.jamiId {
-                    //                        let isLastDisplayed = self.viewModel.isLastDisplayed(messageId: message.id, peerJamiId: jamiId)
-                    //                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: isLastDisplayed, convId: "", ))
-                    //                    } else {
-                    //                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: false))
-                    // }
-                    //                    if self.viewModel.peerComposingMessage {
-                    //                        let msgModel = MessageModel(withId: "",
-                    //                                                    receivedDate: Date(),
-                    //                                                    content: "       ",
-                    //                                                    authorURI: self.viewModel.conversation.value.participants[0].uri,
-                    //                                                    incoming: true)
-                    //                        let composingIndicator = MessageViewModel(withInjectionBag: injBag, withMessage: msgModel, isLastDisplayed: false)
-                    //                        composingIndicator.isComposingIndicator = true
-                    //                        self.messageViewModels.append(composingIndicator)
-                    //                    }
-                }
-                let newNumber = self.messageViewModels.count
-                self.computeSequencing()
-                if oldNumber == newNumber {
-                    self.loadingMessages = false
-                    return
-                }
-                let numberOfRowsAdded = abs(newNumber - oldNumber)
-                if numberOfRowsAdded > 1 {
-                    let initialOffset = self.tableView.contentOffset.y
-                    self.tableView.alwaysBounceVertical = false
-                    self.tableView.isScrollEnabled = false
-                    self.tableView.reloadData()
-                    if numberOfRowsAdded < self.tableView.numberOfRows(inSection: 0) {
-                        self.tableView.scrollToRow(at: NSIndexPath(row: numberOfRowsAdded, section: 0) as IndexPath, at: .top, animated: false)
-                    }
-                    self.tableView.alwaysBounceVertical = true
-                    self.tableView.isScrollEnabled = true
-                    self.tableView.contentOffset.y += initialOffset
-                } else {
-                    self.tableView.reloadData()
-                }
-                self.loadingMessages = false
-            })
-            .disposed(by: self.disposeBag)
+        //        self.viewModel.conversation.value.messages.asObservable()
+        //            .observe(on: MainScheduler.instance)
+        //            .startWith(self.viewModel.conversation.value.messages.value)
+        //            .subscribe(onNext: { [weak self] messages in
+        //                guard let self = self else {
+        //                    return
+        //                }
+        //                self.viewModel.setMessagesAsRead()
+        //                let oldNumber = self.messageViewModels.count
+        //                self.messageViewModels.removeAll()
+        //                for message in messages {
+        //                    //                    let injBag = self.viewModel.injectionBag
+        //                    //                    if let jamiId = self.viewModel.conversation.value.getParticipants().first?.jamiId {
+        //                    //                        let isLastDisplayed = self.viewModel.isLastDisplayed(messageId: message.id, peerJamiId: jamiId)
+        //                    //                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: isLastDisplayed, convId: "", ))
+        //                    //                    } else {
+        //                    //                        self.messageViewModels.append(MessageViewModel(withInjectionBag: injBag, withMessage: message, isLastDisplayed: false))
+        //                    // }
+        //                    //                    if self.viewModel.peerComposingMessage {
+        //                    //                        let msgModel = MessageModel(withId: "",
+        //                    //                                                    receivedDate: Date(),
+        //                    //                                                    content: "       ",
+        //                    //                                                    authorURI: self.viewModel.conversation.value.participants[0].uri,
+        //                    //                                                    incoming: true)
+        //                    //                        let composingIndicator = MessageViewModel(withInjectionBag: injBag, withMessage: msgModel, isLastDisplayed: false)
+        //                    //                        composingIndicator.isComposingIndicator = true
+        //                    //                        self.messageViewModels.append(composingIndicator)
+        //                    //                    }
+        //                }
+        //                let newNumber = self.messageViewModels.count
+        //                self.computeSequencing()
+        //                if oldNumber == newNumber {
+        //                    self.loadingMessages = false
+        //                    return
+        //                }
+        //                let numberOfRowsAdded = abs(newNumber - oldNumber)
+        //                if numberOfRowsAdded > 1 {
+        //                    let initialOffset = self.tableView.contentOffset.y
+        //                    self.tableView.alwaysBounceVertical = false
+        //                    self.tableView.isScrollEnabled = false
+        //                    self.tableView.reloadData()
+        //                    if numberOfRowsAdded < self.tableView.numberOfRows(inSection: 0) {
+        //                        self.tableView.scrollToRow(at: NSIndexPath(row: numberOfRowsAdded, section: 0) as IndexPath, at: .top, animated: false)
+        //                    }
+        //                    self.tableView.alwaysBounceVertical = true
+        //                    self.tableView.isScrollEnabled = true
+        //                    self.tableView.contentOffset.y += initialOffset
+        //                } else {
+        //                    self.tableView.reloadData()
+        //                }
+        //                self.loadingMessages = false
+        //            })
+        //            .disposed(by: self.disposeBag)
     }
 
     var cellHeights: [IndexPath: CGFloat] = [:]
@@ -1105,12 +1104,12 @@ class ConversationViewController: UIViewController,
     var loadingMessages = false
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let visibleIndexes = self.tableView.indexPathsForVisibleRows
-        guard let first = visibleIndexes?.first?.row else { return }
-        if first < 1 && !loadingMessages {
-            loadingMessages = true
-            self.viewModel.loadMoreMessages()
-        }
+        //        let visibleIndexes = self.tableView.indexPathsForVisibleRows
+        //        guard let first = visibleIndexes?.first?.row else { return }
+        //        if first < 1 && !loadingMessages {
+        //            loadingMessages = true
+        //            self.viewModel.loadMoreMessages()
+        //        }
     }
 }
 

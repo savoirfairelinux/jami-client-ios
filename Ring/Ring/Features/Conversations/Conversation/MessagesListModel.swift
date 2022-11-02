@@ -8,57 +8,263 @@
 
 import Foundation
 import RxSwift
+import SwiftUI
+
+struct Location: Identifiable, Equatable {
+    var id: UUID = UUID()
+    var name: String
+}
 
 class MessagesListModel: ObservableObject {
 
-    @Published var messagesModels = [MessageViewModel]()
+    var messagesModels = [MessageViewModel]()
     @Published var lastId = ""
     @Published var messagesCount = 0
     @Published var scrollEnabled = true
     let disposeBag = DisposeBag()
     var conversationModel: ConversationViewModel?
+    var lastUUID: UUID = UUID()
+    @Published var locationsCount = 0
+
+    @Published var locations = [Location(name: "Beach1"), Location(name: "Beach2"), Location(name: "Beach3"), Location(name: "Beach4"), Location(name: "Beach5"),
+                                Location(name: "Beach6"), Location(name: "Beach7"), Location(name: "Beac8h"),
+                                Location(name: "Beach9"), Location(name: "BeachA"), Location(name: "BeachM"), Location(name: "BeachW"), Location(name: "BeachE"),
+                                Location(name: "BeachT"), Location(name: "BeachY"), Location(name: "BeachU"), Location(name: "BeachD"),
+                                Location(name: "BeachR"),
+                                Location(name: "BeachP"), Location(name: "BeachF"),
+                                Location(name: "BeachE"), Location(name: "BeachW"),
+                                Location(name: "BeachH"), Location(name: "BeachC"),
+                                Location(name: "BeachB"), Location(name: "BeachZ"), Location(name: "BeachA"), Location(name: "Beach"),
+                                Location(name: "Beach?"), Location(name: "Beach/"), Location(name: "Beach,"), Location(name: "BeachQ")]
 
     var visibleRows = [String]()
 
-    init (messages: Observable<[MessageModel]>, bag: InjectionBag, convId: String, accountId: String, conversation: ConversationViewModel) {
+    func updateLocations() {
+        self.sortVisibleLocations()
+        print("^^^^^^^^^^^ number of visible rows \(self.sortedLocations.count)")
+        let lastIndex = self.sortedLocations.count - 3
+        lastUUID = self.sortedLocations[lastIndex].location.id
+        print("^^^^^^^^^^^lastVisibleRow \(self.sortedLocations[lastIndex].location.name)")
+        print("^^^^^^^^^^^all viseble locations")
+        self.sortedLocations.forEach { location in
+            print("^^^^^^^^^^^ \(location.location.name)")
+        }
+        self.locations.insert(Location(name: "NEW location"), at: 0)
+        self.locationsCount = self.locations.count
+    }
+
+    init (bag: InjectionBag, convId: String, accountId: String, conversation: ConversationViewModel) {
         self.conversationModel = conversation
-        messages
+        var models = [MessageViewModel]()
+        for message in conversation.conversation.value.messages {
+            models.append(MessageViewModel(withInjectionBag: bag, withMessage: message, isLastDisplayed: false, convId: convId, accountId: accountId))
+            conversation.conversation.value.unorderedInteractions.append(message.id)
+        }
+        print("*******initial ammount os messges: \(models.count)")
+        messagesModels = models
+        self.loadMore()
+        //        self.lastId = self.messagesModels.last?.id ?? ""
+        //        print("******* content will update message count: \(models.count)")
+        //        self.messagesCount = self.messagesModels.count
+        conversation.conversation.value.newMessages.asObservable()
             .observe(on: MainScheduler.instance)
-            .startWith(conversation.conversation.value.messages.value)
-            .subscribe { messages in
-                var models = [MessageViewModel]()
-                // print("*****update all messages")
-                for message in messages {
-                    models.append(MessageViewModel(withInjectionBag: bag, withMessage: message, isLastDisplayed: false, convId: convId, accountId: accountId))
-                }
-                if self.shouldScroll() {
-                    if !self.loading {
-                        self.lastId = models.last?.id ?? ""
+            .subscribe { messages1 in
+                // self.scrollEnabled = false
+                // var models = [MessageViewModel]()
+                print("*******new messages received \(messages1.count)")
+                messages1.forEach { newMessage in
+                    if newMessage.type == .merge { return }
+                    /// filter out existing messages
+                    if self.messagesModels.contains(where: { message in
+                        message.message.id == newMessage.id
+                    }) { return }
+                    let newModel = MessageViewModel(withInjectionBag: bag, withMessage: newMessage, isLastDisplayed: false, convId: convId, accountId: accountId)
+                    /// find child mesage
+                    if let index = self.messagesModels.firstIndex(where: { message in
+                        message.message.parentId == newMessage.id
+                    }) {
+                        if index > 1 {
+                            self.messagesModels.insert(newModel, at: index - 1)
+                        } else {
+                            self.messagesModels.insert(newModel, at: 0)
+                        }
+                    } else if let parentIndex = self.messagesModels.firstIndex(where: { message in
+                        message.message.id == newMessage.parentId
+                    }) {
+                        if parentIndex > self.messagesModels.count - 1 {
+                            self.messagesModels.insert(newModel, at: parentIndex + 1)
+                        } else {
+                            self.messagesModels.append(newModel)
+                        }
                     } else {
-                        self.lastId = self.visibleRows.last ?? ""
-                        // self.loading = false
-                        // self.scrollEnabled = false
+                        /// no child or parent found. Just add interaction to begining for loaded and to the end for new
+                        //                                    if fromLoaded {
+                        self.messagesModels.insert(newModel, at: 0)
+                        //                                    } else {
+                        // self.messagesModels.append(newModel)
+                        // }
+                        /// save message without parent to dictionary, so if we receive parent later we could move message
+                        conversation.conversation.value.unorderedInteractions.append(newMessage.id)
                     }
-                    self.messagesCount = models.count
-                } else {
-                    if self.loading {
-                        self.lastId = self.visibleRows.last ?? ""
-                        self.messagesCount = models.count
-                        // self.scrollEnabled = false
-                        //                        self.visibleRows.forEach { row in
-                        //                            self.lastId = row
-                        //                        }
-                        //                        self.messagesCount = models.count
-                    }
+                    /// if a new message is a parent for previously added message change messages order
+                    //                    if conversation.conversation.value.unorderedInteractions.contains(where: { parentId in
+                    //                        parentId == newMessage.parentId
+                    //                    }) {
+                    //                        self.moveInteraction(interactionId: newMessage.id, after: newMessage.parentId)
+                    //                        if let ind = conversation.conversation.value.unorderedInteractions.firstIndex(of: newMessage.parentId) {
+                    //                            conversation.conversation.value.unorderedInteractions.remove(at: ind)
+                    //                        }
+                    //                    }
                 }
-                print("*******set loading to false")
+                // self.loading = false
+                //                if self.shouldScroll() {
+                //                    //                    if !self.loading {
+                //                    //                        let fvgr = self.messagesModels.last?.id ?? ""
+                //                    //                        print("*******should scroll will but not loaing scroll to \(fvgr)")
+                //                    //                        self.lastId = self.messagesModels.last?.id ?? ""
+                //                    //                    } else {
+                //                    //                        let fvgr = self.visibleRows.last ?? ""
+                //                    //                        print("*******self.loading and should scroll will scroll to \(fvgr)")
+                //                    //                        self.lastId = self.visibleRows.last ?? ""
+                //                    //                    }
+                //                    self.messagesCount = self.messagesModels.count
+                //                }
+                //                else {
+                //                    if self.loading {
+                //                        let fvgr = self.visibleRows.last ?? ""
+                //                        print("*******self.loading will scroll to \(fvgr)")
+                //                        self.lastId = self.visibleRows.last ?? ""
+                //                        self.messagesCount = self.messagesModels.count
+                //
+                //                    }
+                //                }
+                print("*******new messages proceed")
                 self.loading = false
-                self.messagesModels = models
-                self.computeSequencing()
+                // DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                // self.scrollEnabled = true
+                // if self.shouldScroll() {
+                // self.lastId = self.messagesModels.last?.id ?? ""
+                // print("*******will scroll to \(self.lastId)")
+                //                    if !self.loading {
+                //                        let fvgr = self.messagesModels.last?.id ?? ""
+                //                        print("*******should scroll will but not loaing scroll to \(fvgr)")
+                //                        self.lastId = self.messagesModels.last?.id ?? ""
+                //                    } else {
+                //                        let fvgr = self.visibleRows.last ?? ""
+                //                        print("*******self.loading and should scroll will scroll to \(fvgr)")
+                //                        self.lastId = self.visibleRows.last ?? ""
+                //                    }
+                //                self.messagesCount = self.messagesModels.count
+                // print("******* content will update message count: \(self.messagesModels.count)")
+                // self.messagesCount = self.messagesModels.count
+                // }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                    self.loadMore()
+                }
+                // self.messagesModels.append(contentsOf: models)
             } onError: { _ in
 
             }
             .disposed(by: self.disposeBag)
+    }
+
+    /**
+     move child interaction when found parent interaction
+     */
+    private func moveInteraction(interactionId: String, after parentId: String) {
+        if let index = messagesModels.firstIndex(where: { messge in
+            messge.id == interactionId
+        }), let parentIndex = messagesModels.firstIndex(where: { messge in
+            messge.id == parentId
+        }) {
+            if index == parentIndex + 1 {
+                /// alredy on right place
+                return
+            }
+            if parentIndex < messagesModels.count - 1 {
+                let interactionToMove = messagesModels[index]
+                if index < messagesModels.count - 1 {
+                    /// if interaction we are going to move is parent for next interaction we should move next interaction as well
+                    let nextInteraction = messagesModels[index + 1]
+                    let moveNextInteraction = interactionToMove.id == nextInteraction.message.parentId
+                    messagesModels.insert(messagesModels.remove(at: index), at: parentIndex + 1)
+                    if !moveNextInteraction {
+                        return
+                    }
+                    moveInteraction(interactionId: nextInteraction.id, after: interactionToMove.id)
+                } else {
+                    /// message we are going to move is last in the list, we do not need to check child interactions
+                    messagesModels.insert(messagesModels.remove(at: index), at: parentIndex + 1)
+                }
+            } else if parentIndex == messagesModels.count - 1 {
+                let interactionToMove = messagesModels[index]
+                let nextInteraction = messagesModels[index + 1]
+                let moveNextInteraction = interactionToMove.id == nextInteraction.message.parentId
+                messagesModels.append(messagesModels.remove(at: index))
+                if !moveNextInteraction {
+                    return
+                }
+                moveInteraction(interactionId: nextInteraction.id, after: interactionToMove.id)
+            }
+        }
+    }
+
+    init (messages: Observable<[MessageModel]>, bag: InjectionBag, convId: String, accountId: String, conversation: ConversationViewModel) {
+        self.conversationModel = conversation
+        var models = [MessageViewModel]()
+        for message in conversation.conversation.value.messages {
+            models.append(MessageViewModel(withInjectionBag: bag, withMessage: message, isLastDisplayed: false, convId: convId, accountId: accountId))
+        }
+        messagesModels = models
+        conversation.conversation.value.newMessages
+            .observe(on: MainScheduler.instance)
+            .subscribe { messages in
+                var models = [MessageViewModel]()
+                for message in messages {
+                    models.append(MessageViewModel(withInjectionBag: bag, withMessage: message, isLastDisplayed: false, convId: convId, accountId: accountId))
+                }
+                self.messagesModels.append(contentsOf: models)
+            } onError: { _ in
+
+            }
+            .disposed(by: self.disposeBag)
+        //        messages
+        //            .observe(on: MainScheduler.instance)
+        //            .startWith(conversation.conversation.value.messages.value)
+        //            .subscribe { messages in
+        //                var models = [MessageViewModel]()
+        //                // print("*****update all messages")
+        //                for message in messages {
+        //                    models.append(MessageViewModel(withInjectionBag: bag, withMessage: message, isLastDisplayed: false, convId: convId, accountId: accountId))
+        //                }
+        //                if self.shouldScroll() {
+        //                    if !self.loading {
+        //                        self.lastId = models.last?.id ?? ""
+        //                    } else {
+        //                        self.lastId = self.visibleRows.last ?? ""
+        //                        // self.loading = false
+        //                        // self.scrollEnabled = false
+        //                    }
+        //                    self.messagesCount = models.count
+        //                } else {
+        //                    if self.loading {
+        //                        self.lastId = self.visibleRows.last ?? ""
+        //                        self.messagesCount = models.count
+        //                        // self.scrollEnabled = false
+        //                        //                        self.visibleRows.forEach { row in
+        //                        //                            self.lastId = row
+        //                        //                        }
+        //                        //                        self.messagesCount = models.count
+        //                    }
+        //                }
+        //                print("*******set loading to false")
+        //                self.loading = false
+        //                self.messagesModels = models
+        //                self.computeSequencing()
+        //            } onError: { _ in
+        //
+        //            }
+        //            .disposed(by: self.disposeBag)
     }
 
     init() {
@@ -148,12 +354,61 @@ class MessagesListModel: ObservableObject {
 
     func messagesAddedToScreen(messageId: String) {
         self.visibleRows.insert(messageId, at: 0)
-        if self.messagesModels.first?.id == messageId {
-            self.loadMore()
-        }
+        print("******messger added to screen \(messageId)")
+        //        if self.messagesModels.first?.id == messageId {
+        //            print("*******first message load more")
+        //            self.loadMore()
+        //        }
     }
     func messagesremovedFromScreen(messageId: String) {
+        print("******messger removed from to screen \(messageId)")
         self.visibleRows.remove(at: self.visibleRows.firstIndex(of: messageId) ?? self.visibleRows.count)
+    }
+
+    var visibleLocations = [UUID]()
+    var sortedLocations = [SortedLocation]()
+
+    func locationAddedToScreen(messageId: UUID) {
+        self.visibleLocations.insert(messageId, at: 0)
+        // sortVisibleLocations()
+    }
+    func locationremovedFromScreen(messageId: UUID) {
+        if let index = self.visibleLocations.firstIndex(of: messageId) {
+            self.visibleLocations.remove(at: index)
+            // sortVisibleLocations()
+        }
+    }
+
+    struct SortedLocation {
+        var location: Location
+        var indexL: Int
+    }
+
+    func sortVisibleLocations() {
+        var temp = locations.filter({ location in
+            return visibleLocations.contains(location.id)
+        })
+        .map { location -> SortedLocation in
+            let index: Int = self.locations.firstIndex(of: location)!
+            return SortedLocation(location: location, indexL: index)
+        }
+        temp.sort {
+            $0.indexL <= $1.indexL
+        }
+
+        sortedLocations = temp
+
+    }
+
+    var tableSize: CGFloat = 0
+
+    func updateSize(tableSize1: CGFloat) {
+        let screen = UIScreen.main.bounds.height
+        if screen > tableSize {
+            tableSize = 0
+        } else {
+            self.tableSize = tableSize1 - screen
+        }
     }
 
     func shouldScroll() -> Bool {
@@ -165,17 +420,27 @@ class MessagesListModel: ObservableObject {
 
     var number = 0
 
+    func allLoaded() -> Bool {
+        guard let firstMessage = self.messagesModels.first else { return false }
+        return firstMessage.message.parentId.isEmpty
+    }
+
     func loadMore() {
-        if loading {
+        if loading || allLoaded() {
             return
         }
+        number += 1
+        if number > 4 {
+            return}
+        // if self.conversationModel?.conversation.value.allMessagesLoaded() { return }
         if let conversation = self.conversationModel {
-            if conversation.loadMoreMessages() {
-                number += 1
-                if number > 2 {
-                    self.scrollEnabled = false
-                }
-                print("*******set loading to true")
+            let messgId = self.messagesModels.first?.id ?? ""
+            if conversation.loadMoreMessages(messageId: messgId) {
+                //                number += 1
+                //                if number > 2 {
+                //                    self.scrollEnabled = false
+                //                }
+                print("*******start loading more messages from \(messgId)")
                 loading = true
             }
         }
