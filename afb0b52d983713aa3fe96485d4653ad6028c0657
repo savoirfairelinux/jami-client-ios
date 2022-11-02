@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2397a73f_b66d1553",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-11-02T15:57:14Z",
+      "side": 1,
+      "message": "ParticipantUri coming up blank sometimes so ContactImage is returning without data. So through ProfileImage the data is being loaded if peer is not in active connection",
+      "parentUuid": "6aa14b19_c689ed36",
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04af9420_604af3eb",
         "filename": "Ring/Ring/Calls/CallViewModel.swift",
         "patchSetId": 1
@@ -71,6 +89,24 @@
       "writtenOn": "2022-11-02T15:50:04Z",
       "side": 1,
       "message": "we already have participantUri and paricipantHash. We should only set participantUri and paricipantHash will be computed.",
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "482630fc_339c4348",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-11-02T15:57:14Z",
+      "side": 1,
+      "message": "participantUri is coming blank at the starting of call sometimes....",
+      "parentUuid": "11bbe7c5_75509553",
       "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
