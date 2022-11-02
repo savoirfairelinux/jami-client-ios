@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf73ef1e_2dcf72df",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-11-02T16:10:31Z",
+      "side": 1,
+      "message": "we should check why ParticipantUri is empty",
+      "parentUuid": "2397a73f_b66d1553",
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04af9420_604af3eb",
         "filename": "Ring/Ring/Calls/CallViewModel.swift",
         "patchSetId": 1
@@ -125,6 +143,24 @@
       "side": 1,
       "message": "participantUri is coming blank at the starting of call sometimes....",
       "parentUuid": "11bbe7c5_75509553",
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8471476_103853b3",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-11-02T16:10:31Z",
+      "side": 1,
+      "message": "uri format is: schema:hash@host:port. Check JamiURI class. For Jami account hash is jamiId. So we already have participantUri and paricipantHash, we do not need to add a new parameter to the class. But rather check why participantUri is empty",
+      "parentUuid": "482630fc_339c4348",
       "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
