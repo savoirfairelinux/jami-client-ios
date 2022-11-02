@@ -352,6 +352,14 @@ internal enum L10n {
     internal static let requestMessage = L10n.tr("Localizable", "conversation.requestMessage")
     /// Send him/her a contact request to be able to exchange together
     internal static let sendRequest = L10n.tr("Localizable", "conversation.sendRequest")
+    ///Accept
+    internal static let acceptRequest = L10n.tr("Localizable", "conversation.acceptRequest")
+    ///Refuse
+    internal static let refuseRequest = L10n.tr("Localizable", "conversation.refuseRequest")
+    ///Block
+    internal static let blockRequest = L10n.tr("Localizable", "conversation.blockRequest")
+    ///Send Contact Request
+    internal static let sendContactRequest = L10n.tr("Localizable", "conversation.sendRequestTitle")
     /// We are waiting for %s connects to synchronize the conversation.
     internal static func synchronizationMessage(_ p1: UnsafePointer<CChar>) -> String {
       return L10n.tr("Localizable", "conversation.synchronizationMessage", p1)
