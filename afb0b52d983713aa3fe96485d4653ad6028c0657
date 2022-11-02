@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04af9420_604af3eb",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 220
+      },
+      "writtenOn": "2022-11-02T13:34:23Z",
+      "side": 1,
+      "message": "note that ideally we should never add \"ring:\" (we now fully support \"jami:\")",
+      "range": {
+        "startLine": 194,
+        "startChar": 62,
+        "endLine": 194,
+        "endChar": 70
+      },
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "902a7d76_0606f652",
+        "filename": "Ring/Ring/Services/CallsService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 220
+      },
+      "writtenOn": "2022-11-02T13:34:23Z",
+      "side": 1,
+      "message": "same, ideally all of that should be homogeneized (I see callId, peerJamiId, ParticipantId, ringId)\n\nhttps://docs.jami.net/developer/jami-identifiers.html#jami-identifiers",
+      "range": {
+        "startLine": 413,
+        "startChar": 34,
+        "endLine": 413,
+        "endChar": 40
+      },
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
