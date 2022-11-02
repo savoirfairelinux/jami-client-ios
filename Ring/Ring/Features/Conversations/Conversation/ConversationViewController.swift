@@ -933,7 +933,7 @@ class ConversationViewController: UIViewController,
                 // hide status
                 cell.statusLabel.isHidden = true
                 cell.acceptButton?.isHidden = false
-                cell.cancelButton.setTitle(L10n.DataTransfer.readableStatusRefuse, for: .normal)
+                cell.cancelButton.setTitle(L10n.Global.refuse, for: .normal)
             }
         case .ongoing:
             // status
@@ -1267,7 +1267,7 @@ extension ConversationViewController: UITableViewDataSource {
     // swiftlint:disable cyclomatic_complexity
     private func transferCellSetup(_ item: MessageViewModel, _ cell: MessageCell, _ tableView: UITableView, _ indexPath: IndexPath) {
         if item.isTransfer {
-            cell.acceptButton?.setTitle(L10n.DataTransfer.readableStatusAccept, for: .normal)
+            cell.acceptButton?.setTitle(L10n.Global.accept, for: .normal)
             item.lastTransferStatus = .unknown
             changeTransferStatus(cell, nil, item.message.transferStatus, item, viewModel)
             item.transferStatus.asObservable()
