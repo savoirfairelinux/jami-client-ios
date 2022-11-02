@@ -116,6 +116,7 @@ class InvitationViewController: UIViewController, StoryboardBased, ViewModelBase
         invitationLabel3.isHidden = false
         invitationLabel2.text = L10n.Conversation.notContact(self.viewModel.displayName.value)
         invitationLabel3.text = L10n.Conversation.sendRequest
+        inviteButton.setTitle(L10n.Conversation.sendContactRequest, for: .normal)
     }
     private func setPendingContactView() {
         buttonsContainer.isHidden = false
@@ -124,6 +125,9 @@ class InvitationViewController: UIViewController, StoryboardBased, ViewModelBase
         invitationLabel1.text = L10n.Conversation.receivedRequest(self.viewModel.displayName.value)
         invitationLabel2.text = L10n.Conversation.requestMessage
         invitationLabel3.isHidden = true
+        acceptButton.setTitle(L10n.Conversation.acceptRequest, for: .normal)
+        refuseButton.setTitle(L10n.Conversation.refuseRequest, for: .normal)
+        banButton.setTitle(L10n.Conversation.blockRequest, for: .normal)
     }
     private func setSynchronizationContactView() {
         buttonsContainer.isHidden = true
