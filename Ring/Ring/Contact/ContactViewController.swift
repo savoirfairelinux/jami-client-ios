@@ -190,7 +190,7 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     private func showBlockContactConfirmation() {
         let alert = UIAlertController(title: L10n.Alerts.confirmBlockContactTitle, message: L10n.Alerts.confirmBlockContact, preferredStyle: .alert)
-        let blockAction = UIAlertAction(title: L10n.Actions.blockAction, style: .destructive) { [weak self] (_: UIAlertAction!) -> Void in
+        let blockAction = UIAlertAction(title: L10n.Global.block, style: .destructive) { [weak self] (_: UIAlertAction!) -> Void in
             self?.viewModel.blockContact()
             _ = self?.navigationController?.popToRootViewController(animated: false)
         }

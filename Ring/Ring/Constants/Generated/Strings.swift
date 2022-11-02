@@ -172,8 +172,6 @@ internal enum L10n {
   internal enum Actions {
     /// Back
     internal static let backAction = L10n.tr("Localizable", "actions.backAction")
-    /// Block
-    internal static let blockAction = L10n.tr("Localizable", "actions.blockAction")
     /// Cancel
     internal static let cancelAction = L10n.tr("Localizable", "actions.cancelAction")
     /// Clear
@@ -233,8 +231,6 @@ internal enum L10n {
     internal static let errorWrongCredentials = L10n.tr("Localizable", "alerts.errorWrongCredentials")
     /// Incoming call from 
     internal static let incomingCallAllertTitle = L10n.tr("Localizable", "alerts.incomingCallAllertTitle")
-    /// Accept
-    internal static let incomingCallButtonAccept = L10n.tr("Localizable", "alerts.incomingCallButtonAccept")
     /// Ignore
     internal static let incomingCallButtonIgnore = L10n.tr("Localizable", "alerts.incomingCallButtonIgnore")
     /// Turn on "Location Services" to allow "Jami" to determine your location.
@@ -352,6 +348,8 @@ internal enum L10n {
     internal static let requestMessage = L10n.tr("Localizable", "conversation.requestMessage")
     /// Send him/her a contact request to be able to exchange together
     internal static let sendRequest = L10n.tr("Localizable", "conversation.sendRequest")
+    ///Send Contact Request
+    internal static let sendContactRequest = L10n.tr("Localizable", "conversation.sendRequestTitle")
     /// We are waiting for %s connects to synchronize the conversation.
     internal static func synchronizationMessage(_ p1: UnsafePointer<CChar>) -> String {
       return L10n.tr("Localizable", "conversation.synchronizationMessage", p1)
@@ -427,8 +425,6 @@ internal enum L10n {
   internal enum DataTransfer {
     /// Press to start recording
     internal static let infoMessage = L10n.tr("Localizable", "dataTransfer.infoMessage")
-    /// Accept
-    internal static let readableStatusAccept = L10n.tr("Localizable", "dataTransfer.readableStatusAccept")
     /// Pending…
     internal static let readableStatusAwaiting = L10n.tr("Localizable", "dataTransfer.readableStatusAwaiting")
     /// Cancel
@@ -441,8 +437,6 @@ internal enum L10n {
     internal static let readableStatusError = L10n.tr("Localizable", "dataTransfer.readableStatusError")
     /// Transferring
     internal static let readableStatusOngoing = L10n.tr("Localizable", "dataTransfer.readableStatusOngoing")
-    /// Refuse
-    internal static let readableStatusRefuse = L10n.tr("Localizable", "dataTransfer.readableStatusRefuse")
     /// Complete
     internal static let readableStatusSuccess = L10n.tr("Localizable", "dataTransfer.readableStatusSuccess")
     /// Failed to send
@@ -498,6 +492,12 @@ internal enum L10n {
     internal static let save = L10n.tr("Localizable", "global.save")
     /// Share
     internal static let share = L10n.tr("Localizable", "global.share")
+    /// Accept
+    internal static let accept = L10n.tr("Localizable", "global.accept")
+    /// Refuse
+    internal static let refuse = L10n.tr("Localizable", "global.refuse")
+    /// Block
+    internal static let block = L10n.tr("Localizable", "global.block")
   }
 
   internal enum Invitations {
@@ -578,8 +578,6 @@ internal enum L10n {
   }
 
   internal enum Notifications {
-    /// ACCEPT
-    internal static let acceptCall = L10n.tr("Localizable", "notifications.acceptCall")
     /// Incoming Call
     internal static let incomingCall = L10n.tr("Localizable", "notifications.incomingCall")
     /// Incoming location sharing started
@@ -590,8 +588,6 @@ internal enum L10n {
     internal static let missedCall = L10n.tr("Localizable", "notifications.missedCall")
     /// New file
     internal static let newFile = L10n.tr("Localizable", "notifications.newFile")
-    /// REFUSE
-    internal static let refuseCall = L10n.tr("Localizable", "notifications.refuseCall")
   }
 
   internal enum Scan {

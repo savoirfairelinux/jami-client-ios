@@ -42,9 +42,11 @@ enum CallAcition: String {
     func title() -> String {
         switch self {
         case .accept:
-            return L10n.Notifications.acceptCall
+            let acceptString = L10n.Global.accept
+            return acceptString.uppercased()
         case .refuse:
-            return L10n.Notifications.refuseCall
+            let refuseString = L10n.Global.refuse
+            return refuseString.uppercased()
         }
     }
 }
