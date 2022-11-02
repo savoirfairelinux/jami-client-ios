@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f51a1e4d_3c66ca52",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-11-02T15:50:04Z",
+      "side": 1,
+      "message": "we already subscribe to contactImageData. Why do we need profileImage?",
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa14b19_c689ed36",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-11-02T15:50:04Z",
+      "side": 1,
+      "message": "Why do we need this? We have contactImageData.",
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04af9420_604af3eb",
         "filename": "Ring/Ring/Calls/CallViewModel.swift",
         "patchSetId": 1
@@ -20,6 +54,23 @@
         "endLine": 194,
         "endChar": 70
       },
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11bbe7c5_75509553",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-11-02T15:50:04Z",
+      "side": 1,
+      "message": "we already have participantUri and paricipantHash. We should only set participantUri and paricipantHash will be computed.",
       "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
