@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70db09e5_9fbcde55",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 220
+      },
+      "writtenOn": "2022-11-02T15:59:16Z",
+      "side": 1,
+      "message": "Note that for a callview, it\u0027s not the contact, but the conversation you want to show (even if for 1:1 it\u0027s the same) (you can call a group-swarm in the future)",
+      "parentUuid": "2397a73f_b66d1553",
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04af9420_604af3eb",
         "filename": "Ring/Ring/Calls/CallViewModel.swift",
         "patchSetId": 1
