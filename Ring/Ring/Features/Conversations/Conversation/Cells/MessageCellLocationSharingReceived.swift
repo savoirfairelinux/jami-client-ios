@@ -23,11 +23,6 @@ import Reusable
 
 class MessageCellLocationSharingReceived: MessageCellLocationSharing {
 
-    /// Primary location
-    private var myContactsLocation: MarkerAndComponentObject = (marker: MaplyScreenMarker(), componentObject: nil)
-    /// Secondary location
-    private var myLocation: MarkerAndComponentObject = (marker: MaplyScreenMarker(), componentObject: nil)
-
     @IBOutlet weak var receivedBubbleLeading: NSLayoutConstraint!
     @IBOutlet weak var receivedBubbleTrailling: NSLayoutConstraint!
 
@@ -37,33 +32,14 @@ class MessageCellLocationSharingReceived: MessageCellLocationSharing {
         // Primary location
         conversationViewModel.myContactsLocation
             .subscribe(onNext: { [weak self, weak conversationViewModel] location in
-                guard let self = self, let location = location else { return }
-
-                self.myContactsLocation.componentObject = self.updateLocationAndMarker(location: location,
-                                                                                       imageData: conversationViewModel?.profileImageData.value,
-                                                                                       username: conversationViewModel?.userName.value,
-                                                                                       marker: self.myContactsLocation.marker,
-                                                                                       markerDump: self.myContactsLocation.componentObject)
+                // TODO: implement location map with a new API
             })
             .disposed(by: self.disposeBag)
 
         // Secondary location
         conversationViewModel.myLocation
             .subscribe(onNext: { [weak self, weak conversationViewModel] location in
-                guard let self = self else { return }
-
-                if let location = location?.coordinate {
-                    self.myLocation.componentObject = self.updateLocationAndMarker(location: location,
-                                                                                   imageData: conversationViewModel?.myOwnProfileImageData,
-                                                                                   username: conversationViewModel?.userName.value,
-                                                                                   marker: self.myLocation.marker,
-                                                                                   markerDump: self.myLocation.componentObject,
-                                                                                   tryToAnimateToMarker: false)
-                } else if let componentObject = self.myLocation.componentObject,
-                          let maplyViewController = self.maplyViewController {
-                    maplyViewController.remove(componentObject)
-                    self.myLocation.componentObject = nil
-                }
+                // TODO: implement location map with a new API
             })
             .disposed(by: self.disposeBag)
     }
