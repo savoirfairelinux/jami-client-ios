@@ -22,6 +22,30 @@
       },
       "revId": "55a2d4d776d1c0c04fcf0d7fff281f498788bf01",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc318366_e42d0ce8",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-11-03T16:05:59Z",
+      "side": 1,
+      "message": "Grouped Accept, Block and Refuse and also handled caps where it was used",
+      "parentUuid": "cb60e826_e6a19c50",
+      "range": {
+        "startLine": 65,
+        "startChar": 32,
+        "endLine": 65,
+        "endChar": 38
+      },
+      "revId": "55a2d4d776d1c0c04fcf0d7fff281f498788bf01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
