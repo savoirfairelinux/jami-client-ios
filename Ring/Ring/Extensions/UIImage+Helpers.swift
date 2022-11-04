@@ -179,15 +179,7 @@ extension UIImage {
         if ratio > 1 {
             newHeight = newWidth / ratio
         } else if ratio < 1, ratio != 0 {
-            // android image orientation bug?
-            if  self.imageOrientation == UIImage.Orientation.right ||
-                    self.imageOrientation == UIImage.Orientation.left ||
-                    self.imageOrientation == UIImage.Orientation.rightMirrored ||
-                    self.imageOrientation == UIImage.Orientation.leftMirrored {
-                newHeight *= ratio
-            } else {
-                newWidth = newHeight * ratio
-            }
+            newWidth = newHeight * ratio
         }
 
         let newSize = CGSize(width: newWidth, height: newHeight)
