@@ -175,7 +175,7 @@ class MeViewModel: ViewModel, Stateable {
     lazy var removeAccount: Observable<SettingsSection> = {
         return Observable
             .just(.accountSettings( items: [.sectionHeader(title: ""),
-                                            .ordinary(label: L10n.AccountPage.removeAccountTitle)]))
+                                            .ordinary(label: L10n.Global.removeAccount)]))
     }()
 
     lazy var accountStatus: BehaviorRelay<String> = {

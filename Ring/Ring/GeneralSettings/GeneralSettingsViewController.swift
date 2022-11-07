@@ -54,7 +54,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
     }
 
     func applyL10n() {
-        self.navigationItem.title = L10n.GeneralSettings.title
+        self.navigationItem.title = L10n.Global.advancedSettings
     }
 
     private func setUpDataSource() {

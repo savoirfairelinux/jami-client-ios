@@ -81,7 +81,7 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                                       message: nil,
                                       preferredStyle: .alert)
         let actionCancel =
-            UIAlertAction(title: L10n.Actions.cancelAction,
+            UIAlertAction(title: L10n.Global.cancel,
                           style: .cancel) { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
             }
@@ -103,7 +103,7 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
         if self.viewModel.hasPassord {
             alert.addTextField { (textField) in
                 textField.isSecureTextEntry = true
-                textField.placeholder = L10n.LinkToAccount.passwordLabel
+                textField.placeholder = L10n.Global.enterPassword
             }
         }
         self.present(alert, animated: true, completion: nil)

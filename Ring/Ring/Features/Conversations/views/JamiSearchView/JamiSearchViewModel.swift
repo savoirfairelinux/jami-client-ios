@@ -220,7 +220,7 @@ class JamiSearchViewModel {
 
         if self.accountsService.isJams(for: currentAccount.id) {
             self.nameService.searchUser(withAccount: currentAccount.id, query: text)
-            self.searchStatus.onNext(L10n.Smartlist.searching)
+            self.searchStatus.onNext(L10n.Global.search)
             return
         }
 
@@ -240,7 +240,7 @@ class JamiSearchViewModel {
 
         if !text.isSHA1() {
             self.nameService.lookupName(withAccount: currentAccount.id, nameserver: "", name: text)
-            self.searchStatus.onNext(L10n.Smartlist.searching)
+            self.searchStatus.onNext(L10n.Global.search)
             return
         }
 

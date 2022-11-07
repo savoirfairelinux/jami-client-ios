@@ -217,7 +217,7 @@ class ConversationViewController: UIViewController,
             self.importDocument()
         }
 
-        let cancelAction = UIAlertAction(title: L10n.Alerts.profileCancelPhoto, style: UIAlertAction.Style.cancel)
+        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: UIAlertAction.Style.cancel)
 
         alert.addAction(pictureAction)
         alert.addAction(recordVideoAction)
@@ -906,7 +906,7 @@ class ConversationViewController: UIViewController,
                 cell.statusLabel.textColor = UIColor.darkGray
                 cell.progressBar.isHidden = true
                 cell.cancelButton.isHidden = false
-                cell.cancelButton.setTitle(L10n.DataTransfer.readableStatusCancel, for: .normal)
+                cell.cancelButton.setTitle(L10n.Global.cancel, for: .normal)
                 cell.buttonsHeightConstraint?.constant = 24.0
             }
         case .error:
@@ -928,7 +928,7 @@ class ConversationViewController: UIViewController,
                 cell.statusLabel.isHidden = false
                 cell.statusLabel.text = L10n.DataTransfer.readableStatusAwaiting
                 cell.statusLabel.textColor = UIColor.jamiSuccess
-                cell.cancelButton.setTitle(L10n.DataTransfer.readableStatusCancel, for: .normal)
+                cell.cancelButton.setTitle(L10n.Global.cancel, for: .normal)
             } else if item.bubblePosition() == .received {
                 // hide status
                 cell.statusLabel.isHidden = true
@@ -949,7 +949,7 @@ class ConversationViewController: UIViewController,
             // hide accept button only
             cell.acceptButton?.isHidden = true
             cell.cancelButton.isHidden = false
-            cell.cancelButton.setTitle(L10n.DataTransfer.readableStatusCancel, for: .normal)
+            cell.cancelButton.setTitle(L10n.Global.cancel, for: .normal)
             cell.buttonsHeightConstraint?.constant = 24.0
         case .canceled:
             // status
@@ -1387,7 +1387,7 @@ extension ConversationViewController {
         alert.addAction(.init(title: L10n.Alerts.locationSharingDuration1hour, style: .default, handler: { [weak self] _ in
             self?.viewModel.startSendingLocation(duration: 60 * 60)
         }))
-        alert.addAction(.init(title: L10n.Alerts.profileCancelPhoto, style: UIAlertAction.Style.cancel))
+        alert.addAction(.init(title: L10n.Global.cancel, style: UIAlertAction.Style.cancel))
 
         self.present(alert, animated: true, completion: nil)
     }
@@ -1423,7 +1423,7 @@ extension ConversationViewController {
             }
         }))
 
-        alertController.addAction(UIAlertAction(title: L10n.Actions.cancelAction, style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel, handler: nil))
 
         self.present(alertController, animated: true, completion: nil)
     }

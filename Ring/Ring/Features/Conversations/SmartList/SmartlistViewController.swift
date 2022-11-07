@@ -438,11 +438,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         // labels
         let accountSettings = UILabel(frame: CGRect(x: marginX, y: 15, width: 100, height: itemHeight))
         accountSettings.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        accountSettings.text = L10n.Smartlist.accountSettings
+        accountSettings.text = L10n.Global.accountSettings
         accountSettings.sizeToFit()
         let advancedSettings = UILabel(frame: CGRect(x: marginX, y: 15, width: 100, height: itemHeight))
         advancedSettings.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        advancedSettings.text = L10n.Smartlist.advancedSettings
+        advancedSettings.text = L10n.Global.advancedSettings
         advancedSettings.sizeToFit()
         let about = UILabel(frame: CGRect(x: marginX, y: 15, width: 100, height: itemHeight))
         about.text = L10n.Smartlist.aboutJami
@@ -784,20 +784,20 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 self.viewModel.delete(conversationViewModel: convToDelete)
             }
         }
-        let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction, style: .default) { (_: UIAlertAction!) -> Void in }
+        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
 
     private func showBlockContactConfirmation(atIndex: IndexPath) {
-        let alert = UIAlertController(title: L10n.Alerts.confirmBlockContactTitle, message: L10n.Alerts.confirmBlockContact, preferredStyle: .alert)
+        let alert = UIAlertController(title: L10n.Global.blockContact, message: L10n.Alerts.confirmBlockContact, preferredStyle: .alert)
         let blockAction = UIAlertAction(title: L10n.Actions.blockAction, style: .destructive) { (_: UIAlertAction!) -> Void in
             if let conversation: ConversationViewModel = try? self.conversationsTableView.rx.model(at: atIndex) {
                 self.viewModel.blockConversationsContact(conversationViewModel: conversation)
             }
         }
-        let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction, style: .default) { (_: UIAlertAction!) -> Void in }
+        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
         alert.addAction(blockAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
@@ -860,7 +860,7 @@ extension SmartlistViewController: CNContactPickerDelegate {
                 }
                 alert.addAction(contactAction)
             }
-            let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction,
+            let cancelAction = UIAlertAction(title: L10n.Global.cancel,
                                              style: .default) { (_: UIAlertAction!) -> Void in }
             alert.addAction(cancelAction)
             dismiss(animated: true)

@@ -208,7 +208,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         } else {
             cell.selectionIndicator?.backgroundColor = UIColor.jamiTextBlue
         }
-        let title = self.tableView.indexPathsForSelectedRows?.isEmpty ?? true ? L10n.Actions.cancelAction : L10n.DataTransfer.sendMessage
+        let title = self.tableView.indexPathsForSelectedRows?.isEmpty ?? true ? L10n.Global.cancel : L10n.DataTransfer.sendMessage
         self.doneButton.setTitle(title, for: .normal)
     }
 
@@ -232,7 +232,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         case .forConversation:
             self.searchBar.backgroundImage = UIImage()
             self.searchBar.backgroundColor = UIColor.clear
-            self.doneButton.setTitle(L10n.Actions.cancelAction, for: .normal)
+            self.doneButton.setTitle(L10n.Global.cancel, for: .normal)
             self.doneButton.setTitleColor(UIColor.jamiTextBlue, for: .normal)
             topSpace.constant = 50
             self.doneButton.rx.tap

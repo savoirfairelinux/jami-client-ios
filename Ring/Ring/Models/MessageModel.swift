@@ -106,11 +106,11 @@ class MessageModel {
             if let duration = info[MessageAttributes.duration.rawValue],
                let durationDouble = Double(duration) {
                 if durationDouble < 0 {
-                    self.content = self.incoming ? L10n.GeneratedMessage.incomingCall : L10n.GeneratedMessage.outgoingCall
+                    self.content = self.incoming ? L10n.Global.incomingCall : L10n.GeneratedMessage.outgoingCall
                 } else {
                     let durationSeconds = durationDouble * 0.001
                     let time = Date.convertSecondsToTimeString(seconds: durationSeconds)
-                    self.content = self.incoming ? L10n.GeneratedMessage.incomingCall + " - " + time : L10n.GeneratedMessage.outgoingCall + " - " + time
+                    self.content = self.incoming ? L10n.Global.incomingCall + " - " + time : L10n.GeneratedMessage.outgoingCall + " - " + time
                 }
             } else {
                 self.content = self.incoming ? L10n.GeneratedMessage.missedIncomingCall : L10n.GeneratedMessage.missedOutgoingCall

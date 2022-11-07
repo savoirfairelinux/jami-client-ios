@@ -81,7 +81,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     func applyL10n() {
-        self.navigationItem.title = L10n.Global.meTabBarTitle
+        self.navigationItem.title = L10n.Global.accountSettings
         self.profileName.placeholder = L10n.AccountPage.namePlaceholder
     }
 
@@ -183,7 +183,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             let alert = UIAlertController(title: errorMessage,
                                           message: nil,
                                           preferredStyle: .alert)
-            let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+            let actionCancel = UIAlertAction(title: L10n.Global.cancel,
                                              style: .cancel)
             let actionAgain = UIAlertAction(title: L10n.AccountPage.deviceRevocationTryAgain,
                                             style: .default) { [weak self] _ in
@@ -361,7 +361,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .removeAccount:
                     let cell = DisposableCell()
                     cell.backgroundColor = UIColor.jamiBackgroundColor
-                    cell.textLabel?.text = L10n.AccountPage.removeAccountTitle
+                    cell.textLabel?.text = L10n.Global.removeAccount
                     cell.textLabel?.textColor = UIColor.jamiMain
                     cell.textLabel?.textAlignment = .center
                     cell.selectionStyle = .none
@@ -378,12 +378,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .jamiUserName(let label):
                     if !label.isEmpty {
-                        return self.configureCellWithEnableTextCopy(text: L10n.AccountPage.username,
+                        return self.configureCellWithEnableTextCopy(text: L10n.Global.username,
                                                                     secondaryText: label,
                                                                     style: .callout)
                     }
                     let cell = DisposableCell()
-                    cell.textLabel?.text = L10n.AccountPage.registerNameTitle
+                    cell.textLabel?.text = L10n.Global.registerAUsername
                     cell.textLabel?.textColor = UIColor.jamiMain
                     cell.textLabel?.textAlignment = .center
                     cell.sizeToFit()
@@ -679,7 +679,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.Account.sipServer
         case .sipPassword:
-            cell.textLabel?.text = L10n.Account.sipPassword
+            cell.textLabel?.text = L10n.Global.password
             // show password button
             let rightButton = UIButton(type: .custom)
             var insets = rightButton.contentEdgeInsets
@@ -751,7 +751,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         var usernameLength, passwordLength,
             sipServerLength, portLength, proxyLength: CGFloat
         let username = L10n.Account.sipUsername
-        let password = L10n.Account.sipPassword
+        let password = L10n.Global.password
         let sipServer = L10n.Account.port
         let port = L10n.Account.sipServer
         let proxy = L10n.Account.proxyServer
@@ -802,7 +802,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         let controller = UIAlertController(title: title,
                                            message: nil,
                                            preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+        let actionCancel = UIAlertAction(title: L10n.Global.cancel,
                                          style: .cancel)
         let actionChange = UIAlertAction(title: L10n.Actions.doneAction,
                                          style: .default) { [weak self] _ in
@@ -889,10 +889,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     func registerUsername() {
         nameRegistrationBag = DisposeBag()
-        let controller = UIAlertController(title: L10n.AccountPage.registerNameTitle,
+        let controller = UIAlertController(title: L10n.Global.registerAUsername,
                                            message: nil,
                                            preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+        let actionCancel = UIAlertAction(title: L10n.Global.cancel,
                                          style: .cancel) { [weak self] _ in
             self?.nameRegistrationBag = DisposeBag()
         }
@@ -1007,7 +1007,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         let alert = UIAlertController(title: L10n.AccountPage.revokeDeviceTitle,
                                       message: L10n.AccountPage.revokeDeviceMessage,
                                       preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+        let actionCancel = UIAlertAction(title: L10n.Global.cancel,
                                          style: .cancel)
         let actionConfirm = UIAlertAction(title: L10n.AccountPage.revokeDeviceButton,
                                           style: .default) { [weak self] _ in
@@ -1048,10 +1048,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     func confirmRemoveAccountAlert() {
-        let alert = UIAlertController(title: L10n.AccountPage.removeAccountTitle,
+        let alert = UIAlertController(title: L10n.Global.removeAccount,
                                       message: L10n.AccountPage.removeAccountMessage,
                                       preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+        let actionCancel = UIAlertAction(title: L10n.Global.cancel,
                                          style: .cancel)
         let actionConfirm = UIAlertAction(title: L10n.AccountPage.removeAccountButton,
                                           style: .destructive) { [weak self] _ in

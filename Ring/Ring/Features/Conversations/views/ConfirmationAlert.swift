@@ -38,7 +38,7 @@ class ConfirmationAlert {
         alert = UIAlertController(title: title,
                                   message: msg,
                                   preferredStyle: .alert)
-        let actionCancel = UIAlertAction(title: L10n.Actions.cancelAction,
+        let actionCancel = UIAlertAction(title: L10n.Global.cancel,
                                          style: .cancel) { [weak presenter] _ in
             presenter?.switchBoothModeState(state: !enable)
         }
@@ -68,7 +68,7 @@ class ConfirmationAlert {
         alert.addAction(actionCancel)
         alert.addAction(actionConfirm)
         alert.addTextField {(textField) in
-            textField.placeholder = L10n.Account.passwordLabel
+            textField.placeholder = L10n.Global.enterPassword
             textField.isSecureTextEntry = true
         }
         alert.addTextField {(textField) in
