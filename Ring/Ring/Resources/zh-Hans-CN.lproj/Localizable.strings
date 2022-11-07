@@ -71,8 +71,8 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "欢迎来到Jami！";
-"welcome.text" = "Ring 是一个保护用户的隐私和自由的通用自由软件。";
+"welcome.title" = "欢迎使用 Jami！";
+"welcome.text" = "Jami 是一个保护用户的隐私和自由的通用自由软件。";
 "welcome.linkDevice" = "将此设备与一个账户进行关联";
 "welcome.createAccount" = "创建 Jami 账户";
 "welcome.connectToManager" = "连接到 JAMS 服务器";
@@ -92,7 +92,7 @@
 "createAccount.enterNewUsernamePlaceholder" = "用户名";
 "createAccount.newPasswordPlaceholder" = "密码";
 "createAccount.repeatPasswordPlaceholder" = "确认密码";
-"createAccount.passwordCharactersNumberError" = "最少6字符";
+"createAccount.passwordCharactersNumberError" = "最少 6 字符";
 "createAccount.passwordNotMatchingError" = "两次输入的密码不匹配";
 "createAccount.lookingForUsernameAvailability" = "正在验证可用性";
 "createAccount.invalidUsername" = "无效的用户名";
