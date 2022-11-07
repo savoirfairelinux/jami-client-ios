@@ -42,7 +42,7 @@ enum CallState: String {
         case .over:
             return L10n.Calls.callFinished
         case .unknown:
-            return L10n.Calls.searching
+            return L10n.Global.search
         default:
             return ""
         }

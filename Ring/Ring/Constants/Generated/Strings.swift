@@ -22,8 +22,6 @@ internal enum L10n {
     internal static let me = L10n.tr("Localizable", "account.me")
     /// account need to be migrated
     internal static let needMigration = L10n.tr("Localizable", "account.needMigration")
-    /// Enter Password
-    internal static let passwordLabel = L10n.tr("Localizable", "account.passwordLabel")
     /// Port
     internal static let port = L10n.tr("Localizable", "account.port")
     /// Enter Port Number
@@ -32,8 +30,6 @@ internal enum L10n {
     internal static let proxyServer = L10n.tr("Localizable", "account.proxyServer")
     /// Enter Address
     internal static let serverLabel = L10n.tr("Localizable", "account.serverLabel")
-    /// Password
-    internal static let sipPassword = L10n.tr("Localizable", "account.sipPassword")
     /// SIP Server
     internal static let sipServer = L10n.tr("Localizable", "account.sipServer")
     /// User Name
@@ -48,8 +44,6 @@ internal enum L10n {
     internal static let statusOnline = L10n.tr("Localizable", "account.statusOnline")
     /// Unknown
     internal static let statusUnknown = L10n.tr("Localizable", "account.statusUnknown")
-    /// Enter Username
-    internal static let usernameLabel = L10n.tr("Localizable", "account.usernameLabel")
   }
 
   internal enum AccountPage {
@@ -99,8 +93,6 @@ internal enum L10n {
     internal static let enableBoothMode = L10n.tr("Localizable", "accountPage.enableBoothMode")
     /// Enable Notifications
     internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications")
-    /// Enable Proxy
-    internal static let enableProxy = L10n.tr("Localizable", "accountPage.enableProxy")
     /// Link another device
     internal static let linkDeviceTitle = L10n.tr("Localizable", "accountPage.linkDeviceTitle")
     /// Name
@@ -131,14 +123,10 @@ internal enum L10n {
     internal static let proxyPaceholder = L10n.tr("Localizable", "accountPage.proxyPaceholder")
     /// Choosen username is not available
     internal static let registerNameErrorMessage = L10n.tr("Localizable", "accountPage.registerNameErrorMessage")
-    /// Register a username
-    internal static let registerNameTitle = L10n.tr("Localizable", "accountPage.registerNameTitle")
     /// Remove
     internal static let removeAccountButton = L10n.tr("Localizable", "accountPage.removeAccountButton")
     /// By clicking "Remove" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.
     internal static let removeAccountMessage = L10n.tr("Localizable", "accountPage.removeAccountMessage")
-    /// Remove account
-    internal static let removeAccountTitle = L10n.tr("Localizable", "accountPage.removeAccountTitle")
     /// Revoke
     internal static let revokeDeviceButton = L10n.tr("Localizable", "accountPage.revokeDeviceButton")
     /// Are you sure you want to revoke this device? This action could not be undone.
@@ -147,16 +135,12 @@ internal enum L10n {
     internal static let revokeDevicePlaceholder = L10n.tr("Localizable", "accountPage.revokeDevicePlaceholder")
     /// Revoke device
     internal static let revokeDeviceTitle = L10n.tr("Localizable", "accountPage.revokeDeviceTitle")
-    /// Save
-    internal static let saveProxyAddress = L10n.tr("Localizable", "accountPage.saveProxyAddress")
     /// Settings
     internal static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader")
     /// Share Account Details
     internal static let shareAccountDetails = L10n.tr("Localizable", "accountPage.shareAccountDetails")
     /// UNBLOCK
     internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact")
-    /// Username
-    internal static let username = L10n.tr("Localizable", "accountPage.username")
     /// username: not registered
     internal static let usernameNotRegistered = L10n.tr("Localizable", "accountPage.usernameNotRegistered")
     /// Enter desired username
@@ -174,8 +158,6 @@ internal enum L10n {
     internal static let backAction = L10n.tr("Localizable", "actions.backAction")
     /// Block
     internal static let blockAction = L10n.tr("Localizable", "actions.blockAction")
-    /// Cancel
-    internal static let cancelAction = L10n.tr("Localizable", "actions.cancelAction")
     /// Clear
     internal static let clearAction = L10n.tr("Localizable", "actions.clearAction")
     /// Delete
@@ -213,8 +195,6 @@ internal enum L10n {
     internal static let alreadylocationSharing = L10n.tr("Localizable", "alerts.alreadylocationSharing")
     /// Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.
     internal static let confirmBlockContact = L10n.tr("Localizable", "alerts.confirmBlockContact")
-    /// Block Contact
-    internal static let confirmBlockContactTitle = L10n.tr("Localizable", "alerts.confirmBlockContactTitle")
     /// Are you sure you want to clear the conversation with this contact?
     internal static let confirmClearConversation = L10n.tr("Localizable", "alerts.confirmClearConversation")
     /// Clear Conversation
@@ -259,8 +239,6 @@ internal enum L10n {
     internal static let openStreetMapCopyright = L10n.tr("Localizable", "alerts.openStreetMapCopyright")
     /// Learn more
     internal static let openStreetMapCopyrightMoreInfo = L10n.tr("Localizable", "alerts.openStreetMapCopyrightMoreInfo")
-    /// Cancel
-    internal static let profileCancelPhoto = L10n.tr("Localizable", "alerts.profileCancelPhoto")
     /// Take photo
     internal static let profileTakePhoto = L10n.tr("Localizable", "alerts.profileTakePhoto")
     /// Upload photo
@@ -305,19 +283,13 @@ internal enum L10n {
     internal static let removeModerator = L10n.tr("Localizable", "calls.removeModerator")
     /// Ringing…
     internal static let ringing = L10n.tr("Localizable", "calls.ringing")
-    /// Searching…
-    internal static let searching = L10n.tr("Localizable", "calls.searching")
     /// set moderator
     internal static let setModerator = L10n.tr("Localizable", "calls.setModerator")
-    /// Unknown
-    internal static let unknown = L10n.tr("Localizable", "calls.unknown")
     /// unmute audio
     internal static let unmuteAudio = L10n.tr("Localizable", "calls.unmuteAudio")
   }
 
   internal enum ContactPage {
-    /// Block Contact
-    internal static let blockContact = L10n.tr("Localizable", "contactPage.blockContact")
     /// Clear Chat
     internal static let clearConversation = L10n.tr("Localizable", "contactPage.clearConversation")
     /// Remove Conversation
@@ -369,16 +341,12 @@ internal enum L10n {
     internal static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle")
     /// Notifications
     internal static let enableNotifications = L10n.tr("Localizable", "createAccount.EnableNotifications")
-    /// Username
-    internal static let enterNewUsernamePlaceholder = L10n.tr("Localizable", "createAccount.enterNewUsernamePlaceholder")
     /// invalid username
     internal static let invalidUsername = L10n.tr("Localizable", "createAccount.invalidUsername")
     /// Loading
     internal static let loading = L10n.tr("Localizable", "createAccount.loading")
     /// looking for availability…
     internal static let lookingForUsernameAvailability = L10n.tr("Localizable", "createAccount.lookingForUsernameAvailability")
-    /// Password
-    internal static let newPasswordPlaceholder = L10n.tr("Localizable", "createAccount.newPasswordPlaceholder")
     /// 6 characters minimum
     internal static let passwordCharactersNumberError = L10n.tr("Localizable", "createAccount.passwordCharactersNumberError")
     /// Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account
@@ -387,8 +355,6 @@ internal enum L10n {
     internal static let passwordNotMatchingError = L10n.tr("Localizable", "createAccount.passwordNotMatchingError")
     /// (Recommended)
     internal static let recommended = L10n.tr("Localizable", "createAccount.Recommended")
-    /// Register a username
-    internal static let registerAUsername = L10n.tr("Localizable", "createAccount.RegisterAUsername")
     /// Confirm password
     internal static let repeatPasswordPlaceholder = L10n.tr("Localizable", "createAccount.repeatPasswordPlaceholder")
     /// Username registration in progress... It could take a few moments.
@@ -431,8 +397,6 @@ internal enum L10n {
     internal static let readableStatusAccept = L10n.tr("Localizable", "dataTransfer.readableStatusAccept")
     /// Pending…
     internal static let readableStatusAwaiting = L10n.tr("Localizable", "dataTransfer.readableStatusAwaiting")
-    /// Cancel
-    internal static let readableStatusCancel = L10n.tr("Localizable", "dataTransfer.readableStatusCancel")
     /// Canceled
     internal static let readableStatusCanceled = L10n.tr("Localizable", "dataTransfer.readableStatusCanceled")
     /// Initializing…
@@ -452,8 +416,6 @@ internal enum L10n {
   }
 
   internal enum GeneralSettings {
-    /// Advanced settings
-    internal static let title = L10n.tr("Localizable", "generalSettings.title")
     /// Enable video acceleration
     internal static let videoAcceleration = L10n.tr("Localizable", "generalSettings.videoAcceleration")
   }
@@ -484,10 +446,28 @@ internal enum L10n {
     internal static let close = L10n.tr("Localizable", "global.close")
     /// Forward
     internal static let forward = L10n.tr("Localizable", "global.forward")
-    /// Conversations
-    internal static let homeTabBarTitle = L10n.tr("Localizable", "global.homeTabBarTitle")
     /// Account Settings
-    internal static let meTabBarTitle = L10n.tr("Localizable", "global.meTabBarTitle")
+    internal static let accountSettings = L10n.tr("Localizable", "global.accountSettings")
+    /// Advanced Settings
+    internal static let advancedSettings = L10n.tr("Localizable", "global.advancedSettings")
+    /// Username
+    internal static let username = L10n.tr("Localizable", "global.username")
+    /// Password
+    internal static let password = L10n.tr("Localizable", "global.password")
+    /// Register a username
+    internal static let registerAUsername = L10n.tr("Localizable", "global.registerAUsername")
+    /// Enter Password
+    internal static let enterPassword = L10n.tr("Localizable", "global.enterPassword")
+    /// Enter Username
+    internal static let enterUsername = L10n.tr("Localizable", "global.enterUsername")
+    /// Cancel
+    internal static let cancel = L10n.tr("Localizable", "global.cancel")
+    /// Block Contact
+    internal static let blockContact = L10n.tr("Localizable", "global.blockContact")
+    /// Remove Account
+    internal static let removeAccount = L10n.tr("Localizable", "global.removeAccount")
+    /// Incoming Call
+    internal static let incomingCall = L10n.tr("Localizable", "global.incomingCall")
     /// Ok
     internal static let ok = L10n.tr("Localizable", "global.ok")
     /// Preview
@@ -498,6 +478,8 @@ internal enum L10n {
     internal static let save = L10n.tr("Localizable", "global.save")
     /// Share
     internal static let share = L10n.tr("Localizable", "global.share")
+    /// Searching...
+    internal static let search = L10n.tr("Localizable", "global.search")
   }
 
   internal enum Invitations {
@@ -525,10 +507,6 @@ internal enum L10n {
     internal static let explanationPinMessage = L10n.tr("Localizable", "linkToAccount.explanationPinMessage")
     /// Link device
     internal static let linkButtonTitle = L10n.tr("Localizable", "linkToAccount.linkButtonTitle")
-    /// Enter Password
-    internal static let passwordLabel = L10n.tr("Localizable", "linkToAccount.passwordLabel")
-    /// Password
-    internal static let passwordPlaceholder = L10n.tr("Localizable", "linkToAccount.passwordPlaceholder")
     /// Enter PIN
     internal static let pinLabel = L10n.tr("Localizable", "linkToAccount.pinLabel")
     /// PIN
@@ -542,21 +520,11 @@ internal enum L10n {
     internal static let accountManagerLabel = L10n.tr("Localizable", "linkToAccountManager.accountManagerLabel")
     /// JAMS URL
     internal static let accountManagerPlaceholder = L10n.tr("Localizable", "linkToAccountManager.accountManagerPlaceholder")
-    /// Enter Password
-    internal static let passwordLabel = L10n.tr("Localizable", "linkToAccountManager.passwordLabel")
-    /// Password
-    internal static let passwordPlaceholder = L10n.tr("Localizable", "linkToAccountManager.passwordPlaceholder")
     /// Sign In
     internal static let signIn = L10n.tr("Localizable", "linkToAccountManager.signIn")
-    /// Enter Username
-    internal static let usernameLabel = L10n.tr("Localizable", "linkToAccountManager.usernameLabel")
-    /// Username
-    internal static let usernamePlaceholder = L10n.tr("Localizable", "linkToAccountManager.usernamePlaceholder")
   }
 
   internal enum MigrateAccount {
-    /// Cancel
-    internal static let cancel = L10n.tr("Localizable", "migrateAccount.cancel")
     /// Failed to migrate your account. You can retry or delete your account.
     internal static let error = L10n.tr("Localizable", "migrateAccount.error")
     /// This account needs to be migrated
@@ -569,10 +537,6 @@ internal enum L10n {
     internal static let migrating = L10n.tr("Localizable", "migrateAccount.migrating")
     /// To proceed with the migration, you need to enter a password that was used for this account
     internal static let passwordExplanation = L10n.tr("Localizable", "migrateAccount.passwordExplanation")
-    /// Enter password
-    internal static let passwordPlaceholder = L10n.tr("Localizable", "migrateAccount.passwordPlaceholder")
-    /// Remove account
-    internal static let removeAccount = L10n.tr("Localizable", "migrateAccount.removeAccount")
     /// Account migration
     internal static let title = L10n.tr("Localizable", "migrateAccount.title")
   }
@@ -597,21 +561,15 @@ internal enum L10n {
   internal enum Scan {
     /// Bad QR code
     internal static let badQrCode = L10n.tr("Localizable", "scan.badQrCode")
-    /// Searching…
-    internal static let search = L10n.tr("Localizable", "scan.search")
   }
 
   internal enum Smartlist {
     /// About Jami
     internal static let aboutJami = L10n.tr("Localizable", "smartlist.aboutJami")
-    /// Account Settings
-    internal static let accountSettings = L10n.tr("Localizable", "smartlist.accountSettings")
     /// Accounts
     internal static let accountsTitle = L10n.tr("Localizable", "smartlist.accountsTitle")
     /// + Add Account
     internal static let addAccountButton = L10n.tr("Localizable", "smartlist.addAccountButton")
-    /// Advanced Settings
-    internal static let advancedSettings = L10n.tr("Localizable", "smartlist.advancedSettings")
     /// Be sure cellular access is granted in your settings
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess")
     /// Conversations
@@ -632,8 +590,6 @@ internal enum L10n {
     internal static let searchBar = L10n.tr("Localizable", "smartlist.searchBar")
     /// Enter name...
     internal static let searchBarPlaceholder = L10n.tr("Localizable", "smartlist.searchBarPlaceholder")
-    /// Searching...
-    internal static let searching = L10n.tr("Localizable", "smartlist.searching")
     /// Select one of the numbers
     internal static let selectOneNumber = L10n.tr("Localizable", "smartlist.selectOneNumber")
     /// Yesterday

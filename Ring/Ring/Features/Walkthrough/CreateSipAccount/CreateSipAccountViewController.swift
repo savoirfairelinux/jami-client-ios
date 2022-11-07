@@ -173,11 +173,11 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
         self.createAccountButton
             .setTitle(L10n.Account.createSipAccount, for: .normal)
         self.navigationItem.title = L10n.Account.createSipAccount
-        self.userNameLabel.text = L10n.Account.usernameLabel
-        self.passwordLabel.text = L10n.Account.passwordLabel
+        self.userNameLabel.text = L10n.Global.enterUsername
+        self.passwordLabel.text = L10n.Global.enterPassword
         self.serverLabel.text = L10n.Account.serverLabel
         self.portLabel.text = L10n.Account.portLabel
-        self.passwordTextField.placeholder = L10n.Account.sipPassword
+        self.passwordTextField.placeholder = L10n.Global.password
         self.userNameTextField.placeholder = L10n.Account.sipUsername
         self.serverTextField.placeholder = L10n.Account.sipServer
         self.portTextField.placeholder = L10n.Account.port

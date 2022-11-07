@@ -106,7 +106,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 }
                 videoPreviewLayer?.videoGravity = .resizeAspectFill
                 videoPreviewLayer?.frame = view.bounds
-                self.searchTitle.text = L10n.Scan.search
+                self.searchTitle.text = L10n.Global.search
                 view.layer.addSublayer(videoPreviewLayer!)
                 view.bringSubviewToFront(header)
                 view.bringSubviewToFront(self.scanImage)

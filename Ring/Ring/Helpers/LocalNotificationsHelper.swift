@@ -26,7 +26,7 @@ enum NotificationCallTitle: String {
     func getString() -> String {
         switch self {
         case .incomingCall:
-            return L10n.Notifications.incomingCall
+            return L10n.Global.incomingCall
         case .missedCall:
             return L10n.Notifications.missedCall
         }

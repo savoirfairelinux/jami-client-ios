@@ -64,7 +64,7 @@ enum GeneratedMessage: Int {
         case .outgoingCall:
             return L10n.GeneratedMessage.outgoingCall + " - " + time
         case .incomingCall:
-            return L10n.GeneratedMessage.incomingCall + " - " + time
+            return L10n.Global.incomingCall + " - " + time
         default:
             return ""
         }
