@@ -88,7 +88,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
             self.importPicture()
         }
 
-        let cancelAction = UIAlertAction(title: L10n.Alerts.profileCancelPhoto, style: UIAlertAction.Style.cancel)
+        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: UIAlertAction.Style.cancel)
 
         alert.addAction(cameraAction)
         alert.addAction(pictureAction)

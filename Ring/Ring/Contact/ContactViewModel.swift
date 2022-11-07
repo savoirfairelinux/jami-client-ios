@@ -79,7 +79,7 @@ class ContactViewModel: ViewModel, Stateable {
                                                   ContactActions(title: L10n.ContactPage.startVideoCall, image: Asset.videoRunning),
                                                   ContactActions(title: L10n.ContactPage.sendMessage, image: Asset.conversationIcon),
                                                   ContactActions(title: L10n.ContactPage.removeConversation, image: Asset.icConversationRemove),
-                                                  ContactActions(title: L10n.ContactPage.blockContact, image: Asset.blockIcon)])])
+                                                  ContactActions(title: L10n.Global.blockContact, image: Asset.blockIcon)])])
                 } else {
                     self.tableSection = Observable<[SectionModel<String, ContactActions>]>
                         .just([SectionModel(model: "ProfileInfoCell",

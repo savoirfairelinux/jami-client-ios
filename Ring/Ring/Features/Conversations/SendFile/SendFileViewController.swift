@@ -86,7 +86,7 @@ class SendFileViewController: UIViewController, StoryboardBased, ViewModelBased 
 
     func applyL10() {
         self.sendButton.setTitle(L10n.DataTransfer.sendMessage, for: .normal)
-        self.cancelButton.setTitle(L10n.Actions.cancelAction, for: .normal)
+        self.cancelButton.setTitle(L10n.Global.cancel, for: .normal)
         self.infoLabel.text = L10n.DataTransfer.infoMessage
     }
 

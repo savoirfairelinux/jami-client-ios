@@ -150,11 +150,11 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
     func applyL10() {
         signInButton.setTitle(L10n.LinkToAccountManager.signIn, for: .normal)
         self.navigationItem.title = L10n.LinkToAccountManager.signIn
-        passwordTextField.placeholder = L10n.LinkToAccountManager.passwordPlaceholder
-        userNameTextField.placeholder = L10n.LinkToAccountManager.usernamePlaceholder
+        passwordTextField.placeholder = L10n.Global.password
+        userNameTextField.placeholder = L10n.Global.username
         accountManagerTextField.placeholder = L10n.LinkToAccountManager.accountManagerPlaceholder
-        userNameLabel.text = L10n.LinkToAccountManager.usernameLabel
-        passwordLabel.text = L10n.LinkToAccountManager.passwordLabel
+        userNameLabel.text = L10n.Global.enterUsername
+        passwordLabel.text = L10n.Global.enterPassword
         accountManagerLabel.text = L10n.LinkToAccountManager.accountManagerLabel
         self.enableNotificationsLabel.text = L10n.CreateAccount.enableNotifications
     }

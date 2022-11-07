@@ -168,7 +168,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 self.tableView.reloadData()
             }
         }
-        let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction, style: .default) { (_: UIAlertAction!) -> Void in }
+        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)

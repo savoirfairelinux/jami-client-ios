@@ -216,11 +216,11 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
     func applyL10n() {
         titleLabel.text = L10n.MigrateAccount.title
         migrateButton.setTitle(L10n.MigrateAccount.migrateButton, for: .normal)
-        removeAccountButton.setTitle(L10n.MigrateAccount.removeAccount, for: .normal)
+        removeAccountButton.setTitle(L10n.Global.removeAccount, for: .normal)
         explanationLabel.text = L10n.MigrateAccount.explanation
-        passwordField.placeholder = L10n.MigrateAccount.passwordPlaceholder
+        passwordField.placeholder = L10n.Global.enterPassword
         passwordExplanationLabel.text = L10n.MigrateAccount.passwordExplanation
-        cancelButton.setTitle(L10n.MigrateAccount.cancel, for: .normal)
+        cancelButton.setTitle(L10n.Global.cancel, for: .normal)
         migrateOtherAccountButton.setTitle(L10n.MigrateAccount.migrateAnother, for: .normal)
     }
 
