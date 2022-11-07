@@ -185,9 +185,9 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     private func applyL10n() {
         self.linkButton.setTitle(L10n.LinkToAccount.linkButtonTitle, for: .normal)
         self.pinLabel.text = L10n.LinkToAccount.pinLabel
-        self.passwordLabel.text = L10n.LinkToAccount.passwordLabel
+        self.passwordLabel.text = L10n.Global.enterPassword
         self.pinTextField.placeholder = L10n.LinkToAccount.pinPlaceholder
-        self.passwordTextField.placeholder = L10n.LinkToAccount.passwordPlaceholder
+        self.passwordTextField.placeholder = L10n.Global.password
         self.navigationItem.title = L10n.LinkToAccount.linkButtonTitle
         self.enableNotificationsLabel.text = self.viewModel.enableNotificationsTitle
     }

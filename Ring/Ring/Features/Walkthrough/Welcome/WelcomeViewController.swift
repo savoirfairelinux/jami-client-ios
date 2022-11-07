@@ -72,7 +72,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             let cancelButton = UIButton(type: .custom)
             cancelButton.setTitleColor(.jamiMain, for: .normal)
             cancelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 25)
-            cancelButton.setTitle(L10n.Actions.cancelAction, for: .normal)
+            cancelButton.setTitle(L10n.Global.cancel, for: .normal)
             cancelButton.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
             let buttonItem = UIBarButtonItem(customView: cancelButton)
             cancelButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)

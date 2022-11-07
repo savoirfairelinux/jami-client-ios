@@ -283,7 +283,7 @@ class ConversationViewController: UIViewController,
             self.importDocument()
         }
 
-        let cancelAction = UIAlertAction(title: L10n.Alerts.profileCancelPhoto, style: UIAlertAction.Style.cancel)
+        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: UIAlertAction.Style.cancel)
 
         alert.addAction(pictureAction)
         alert.addAction(recordVideoAction)
@@ -883,7 +883,7 @@ extension ConversationViewController {
             }
         }))
 
-        alertController.addAction(UIAlertAction(title: L10n.Actions.cancelAction, style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: L10n.Global.cancel, style: .cancel, handler: nil))
 
         self.present(alertController, animated: true, completion: nil)
     }

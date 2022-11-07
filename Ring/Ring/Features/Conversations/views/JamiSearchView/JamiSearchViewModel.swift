@@ -34,7 +34,7 @@ enum SearchStatus {
         case .notSearching:
             return ""
         case .searching:
-            return L10n.Smartlist.searching
+            return L10n.Global.search
         case .noResult:
             return L10n.Smartlist.noResults
         }
