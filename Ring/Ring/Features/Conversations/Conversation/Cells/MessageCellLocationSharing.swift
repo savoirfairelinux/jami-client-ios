@@ -24,22 +24,22 @@ import RxCocoa
 
 class MessageCellLocationSharing: MessageCell {
 
-    typealias MarkerAndComponentObject = (marker: MaplyScreenMarker, componentObject: MaplyComponentObject?)
+    // typealias MarkerAndComponentObject = (marker: MaplyScreenMarker, componentObject: MaplyComponentObject?)
 
     private static let osmCopyrightAndLicenseURL = "https://www.openstreetmap.org/copyright"
     private static let remoteTileSourceBaseUrl = MessageCellLocationSharing.getBaseURL()
 
     @IBOutlet weak var locationSharingMessageTextView: UITextView!
     @IBOutlet weak var bubbleHeight: NSLayoutConstraint!
-    var loader: MaplyQuadImageLoader!
-    var fetcher: MaplyRemoteTileFetcher!
+    //    var loader: MaplyQuadImageLoader!
+    //    var fetcher: MaplyRemoteTileFetcher!
 
     var xButton: UIButton?
     var myPositionButton: UIButton?
 
     let locationTapped = BehaviorRelay<(Bool, Bool)>(value: (false, false)) // (shouldAnimate, expanding)
 
-    var maplyViewController: MaplyBaseViewController? // protected in Swift?
+    //  var maplyViewController: MaplyBaseViewController? // protected in Swift?
     /// The usage of this variable allows for the view to not be refreshed on reuse (e.g. when scrolling)
     private var preventUnnecessaryReuseCounter = 0
 
@@ -58,17 +58,17 @@ class MessageCellLocationSharing: MessageCell {
 
         self.shrink()
 
-        if self.maplyViewController as? MaplyViewController == nil || preventUnnecessaryReuseCounter < 2 {
-            self.setupMaply()
-            self.displayMapTile()
-
-            self.configureTapGesture()
-            self.setupOSMCopyrightButton()
-            let name = (conversationViewModel.displayName.value != nil && !conversationViewModel.displayName.value!.isEmpty) ?
-                conversationViewModel.displayName.value! : conversationViewModel.userName.value
-            self.setUplocationSharingMessageTextView(username: name)
-            preventUnnecessaryReuseCounter += 1
-        }
+        //        if self.maplyViewController as? MaplyViewController == nil || preventUnnecessaryReuseCounter < 2 {
+        //            self.setupMaply()
+        //            self.displayMapTile()
+        //
+        //            self.configureTapGesture()
+        //            self.setupOSMCopyrightButton()
+        //            let name = (conversationViewModel.displayName.value != nil && !conversationViewModel.displayName.value!.isEmpty) ?
+        //                conversationViewModel.displayName.value! : conversationViewModel.userName.value
+        //            self.setUplocationSharingMessageTextView(username: name)
+        //            preventUnnecessaryReuseCounter += 1
+        //        }
     }
 
     func setUplocationSharingMessageTextView(username: String) {
@@ -92,66 +92,66 @@ class MessageCellLocationSharing: MessageCell {
     }
 
     private func removeTapDefaultGestureFromMaply() {
-        if let whirlyKitEAGLView = (self.maplyViewController as? MaplyViewController)?.view.subviews[0],
-           let gesture = whirlyKitEAGLView.gestureRecognizers?.first(where: { (gesture) -> Bool in gesture is UITapGestureRecognizer }) {
-            whirlyKitEAGLView.removeGestureRecognizer(gesture)
-        }
+        //        if let whirlyKitEAGLView = (self.maplyViewController as? MaplyViewController)?.view.subviews[0],
+        //           let gesture = whirlyKitEAGLView.gestureRecognizers?.first(where: { (gesture) -> Bool in gesture is UITapGestureRecognizer }) {
+        //            whirlyKitEAGLView.removeGestureRecognizer(gesture)
     }
-
-    private func setupMaply() {
-        self.maplyViewController?.view.removeFromSuperview()
-
-        self.maplyViewController = MaplyViewController(mapType: .typeFlat)
-        self.removeTapDefaultGestureFromMaply()
-
-        self.bubble.addSubview(self.maplyViewController!.view)
-        self.maplyViewController!.view.frame = self.bubble.bounds
-    }
-
-    lazy var samplingParams: MaplySamplingParams = {
-        let samplingParams = MaplySamplingParams()
-        samplingParams.coverPoles = true
-        samplingParams.edgeMatching = false
-        samplingParams.singleLevel = false
-        samplingParams.coverPoles = false
-        return samplingParams
-    }()
+    //    }
+    //
+    //    private func setupMaply() {
+    //        self.maplyViewController?.view.removeFromSuperview()
+    //
+    //        self.maplyViewController = MaplyViewController(mapType: .typeFlat)
+    //        self.removeTapDefaultGestureFromMaply()
+    //
+    //        self.bubble.addSubview(self.maplyViewController!.view)
+    //        self.maplyViewController!.view.frame = self.bubble.bounds
+    //    }
+    //
+    //    lazy var samplingParams: MaplySamplingParams = {
+    //        let samplingParams = MaplySamplingParams()
+    //        samplingParams.coverPoles = true
+    //        samplingParams.edgeMatching = false
+    //        samplingParams.singleLevel = false
+    //        samplingParams.coverPoles = false
+    //        return samplingParams
+    // }()
 
     private func displayMapTile() {
-        // TODO: implement location map with a new API
-        self.maplyViewController!.clearColor = UIColor.white
-
-        // thirty fps if we can get it
-        self.maplyViewController!.frameInterval = 2
-        let baseCacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-        let tilesCacheDir = "\(baseCacheDir)/openstreetmap/"
-        let maxZoom = Int32(19)
-        let info = MaplyRemoteTileFetchInfo()
-        let request = URLRequest(url: URL(string: MessageCellLocationSharing.remoteTileSourceBaseUrl)!)
-        info.urlReq = request as URLRequest
-        let tileSource = MaplyRemoteTileInfoNew(baseURL: MessageCellLocationSharing.remoteTileSourceBaseUrl,
-                                                minZoom: 0,
-                                                maxZoom: maxZoom)
-        tileSource.cacheDir = tilesCacheDir
-        fetcher = MaplyRemoteTileFetcher(name: "fetcher", connections: 2)
-        loader = MaplyQuadImageLoader(params: samplingParams, tileInfo: tileSource, viewC: maplyViewController!)
-        loader?.setTileFetcher(fetcher)
-
-        if let mapViewC = self.maplyViewController as? MaplyViewController {
-            self.toggleMaplyGesture(false)
-            mapViewC.height = 0.0001
-        }
+        //        // TODO: implement location map with a new API
+        //        self.maplyViewController!.clearColor = UIColor.white
+        //
+        //        // thirty fps if we can get it
+        //        self.maplyViewController!.frameInterval = 2
+        //        let baseCacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+        //        let tilesCacheDir = "\(baseCacheDir)/openstreetmap/"
+        //        let maxZoom = Int32(19)
+        //        let info = MaplyRemoteTileFetchInfo()
+        //        let request = URLRequest(url: URL(string: MessageCellLocationSharing.remoteTileSourceBaseUrl)!)
+        //        info.urlReq = request as URLRequest
+        //        let tileSource = MaplyRemoteTileInfoNew(baseURL: MessageCellLocationSharing.remoteTileSourceBaseUrl,
+        //                                                minZoom: 0,
+        //                                                maxZoom: maxZoom)
+        //        tileSource.cacheDir = tilesCacheDir
+        //        fetcher = MaplyRemoteTileFetcher(name: "fetcher", connections: 2)
+        //        loader = MaplyQuadImageLoader(params: samplingParams, tileInfo: tileSource, viewC: maplyViewController!)
+        //        loader?.setTileFetcher(fetcher)
+        //
+        //        if let mapViewC = self.maplyViewController as? MaplyViewController {
+        //            self.toggleMaplyGesture(false)
+        //            mapViewC.height = 0.0001
+        //        }
     }
 
     private func toggleMaplyGesture(_ value: Bool) {
-        if let mapViewC = self.maplyViewController as? MaplyViewController {
-            mapViewC.panGesture = value
-            mapViewC.pinchGesture = value
-            mapViewC.rotateGesture = value
-            mapViewC.twoFingerTapGesture = value
-            mapViewC.doubleTapDragGesture = value
-            mapViewC.doubleTapZoomGesture = value
-        }
+        //        if let mapViewC = self.maplyViewController as? MaplyViewController {
+        //            mapViewC.panGesture = value
+        //            mapViewC.pinchGesture = value
+        //            mapViewC.rotateGesture = value
+        //            mapViewC.twoFingerTapGesture = value
+        //            mapViewC.doubleTapDragGesture = value
+        //            mapViewC.doubleTapZoomGesture = value
+        //        }
     }
 
     private static func getBaseURL() -> String {
@@ -170,38 +170,38 @@ extension MessageCellLocationSharing {
     func updateLocationAndMarker(location: CLLocationCoordinate2D,
                                  imageData: Data?,
                                  username: String?,
-                                 marker: MaplyScreenMarker,
+                                 //   marker: MaplyScreenMarker,
                                  markerDump: MaplyComponentObject?,
                                  tryToAnimateToMarker: Bool = true) -> MaplyComponentObject? {
         // only the first time
-        if markerDump == nil {
-            marker.layoutImportance = MAXFLOAT
-            if let imageData = imageData, let circledImage = UIImage(data: imageData)?.circleMasked {
-                marker.image = circledImage
-            } else {
-                marker.image = AvatarView(profileImageData: nil, username: username ?? "", size: 24).convertToImage()
-            }
-            marker.size = CGSize(width: 24, height: 24)
-        }
-
-        let maplyCoordonate = MaplyCoordinateMakeWithDegrees(Float(location.longitude), Float(location.latitude))
-
-        marker.loc.x = maplyCoordonate.x
-        marker.loc.y = maplyCoordonate.y
-
-        var dumpToReturn: MaplyComponentObject?
-
-        if let mapViewC = self.maplyViewController as? MaplyViewController {
-            if markerDump != nil {
-                self.maplyViewController!.remove(markerDump!)
-            }
-            dumpToReturn = self.maplyViewController!.addScreenMarkers([marker], desc: nil)
-
-            if tryToAnimateToMarker && !locationTapped.value.1 {
-                mapViewC.animate(toPosition: maplyCoordonate, time: 0.1)
-            }
-        }
-        return dumpToReturn
+        //        if markerDump == nil {
+        //            marker.layoutImportance = MAXFLOAT
+        //            if let imageData = imageData, let circledImage = UIImage(data: imageData)?.circleMasked {
+        //                marker.image = circledImage
+        //            } else {
+        //                marker.image = AvatarView(profileImageData: nil, username: username ?? "", size: 24).convertToImage()
+        //            }
+        //            marker.size = CGSize(width: 24, height: 24)
+        //        }
+        //
+        //        let maplyCoordonate = MaplyCoordinateMakeWithDegrees(Float(location.longitude), Float(location.latitude))
+        //
+        //        marker.loc.x = maplyCoordonate.x
+        //        marker.loc.y = maplyCoordonate.y
+        //
+        //        var dumpToReturn: MaplyComponentObject?
+        //
+        //        if let mapViewC = self.maplyViewController as? MaplyViewController {
+        //            if markerDump != nil {
+        //                self.maplyViewController!.remove(markerDump!)
+        //            }
+        //            dumpToReturn = self.maplyViewController!.addScreenMarkers([marker], desc: nil)
+        //
+        //            if tryToAnimateToMarker && !locationTapped.value.1 {
+        //                mapViewC.animate(toPosition: maplyCoordonate, time: 0.1)
+        //            }
+        //        }
+        return nil
     }
 }
 
