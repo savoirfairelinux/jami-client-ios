@@ -54,7 +54,7 @@ class SwarmInfo {
         if let avatar = info[ConversationAttributes.avatar.rawValue] {
             self.avatar.accept(self.imageFrom(string: avatar))
         }
-        if let title = info[ConversationAttributes.title.rawValue], !title.isEmpty  {
+        if let title = info[ConversationAttributes.title.rawValue], !title.isEmpty {
             self.name.accept(title)
         }
         if let description = info[ConversationAttributes.description.rawValue] {
@@ -103,7 +103,7 @@ class SwarmInfo {
         self.nameService.usernameLookupStatus
             .filter({ lookupNameResponse in
                 return lookupNameResponse.address != nil &&
-                lookupNameResponse.address == participant.jamiId
+                    lookupNameResponse.address == participant.jamiId
             })
             .asObservable()
             .take(1)
