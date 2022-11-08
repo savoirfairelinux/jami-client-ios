@@ -24,10 +24,10 @@ import RxCocoa
 
 class MessageCellLocationSharingSent: MessageCellLocationSharing {
 
-    /// Primary location
-    private var myLocation: MarkerAndComponentObject = (marker: MaplyScreenMarker(), componentObject: nil)
-    /// Secondary location
-    private var myContactsLocation: MarkerAndComponentObject = (marker: MaplyScreenMarker(), componentObject: nil)
+    //    /// Primary location
+    //    private var myLocation: MarkerAndComponentObject = (marker: MaplyScreenMarker(), componentObject: nil)
+    //    /// Secondary location
+    //    private var myContactsLocation: MarkerAndComponentObject = (marker: MaplyScreenMarker(), componentObject: nil)
 
     @IBOutlet weak var sentBubbleLeading: NSLayoutConstraint!
 
@@ -42,35 +42,12 @@ class MessageCellLocationSharingSent: MessageCellLocationSharing {
 
         // Primary location
         conversationViewModel.myLocation
-            .subscribe(onNext: { [weak self, weak conversationViewModel] location in
-                guard let self = self, let location = location?.coordinate else { return }
-
-                self.myLocation.componentObject = self.updateLocationAndMarker(location: location,
-                                                                               imageData: conversationViewModel?.myOwnProfileImageData,
-                                                                               username: conversationViewModel?.userName.value,
-                                                                               marker: self.myLocation.marker,
-                                                                               markerDump: self.myLocation.componentObject)
-            })
+            .subscribe(onNext: { [weak self, weak conversationViewModel] _ in })
             .disposed(by: self.disposeBag)
 
         // Secondary location
         conversationViewModel.myContactsLocation
-            .subscribe(onNext: { [weak self, weak conversationViewModel] location in
-                guard let self = self else { return }
-
-                if let location = location {
-                    self.myContactsLocation.componentObject = self.updateLocationAndMarker(location: location,
-                                                                                           imageData: conversationViewModel?.profileImageData.value,
-                                                                                           username: conversationViewModel?.userName.value,
-                                                                                           marker: self.myContactsLocation.marker,
-                                                                                           markerDump: self.myContactsLocation.componentObject,
-                                                                                           tryToAnimateToMarker: false)
-                } else if let componentObject = self.myContactsLocation.componentObject,
-                          let maplyViewController = self.maplyViewController {
-                    maplyViewController.remove(componentObject)
-                    self.myContactsLocation.componentObject = nil
-                }
-            })
+            .subscribe(onNext: { [weak self, weak conversationViewModel] _ in })
             .disposed(by: self.disposeBag)
 
         self.setupStopSharingButton()
@@ -90,9 +67,9 @@ class MessageCellLocationSharingSent: MessageCellLocationSharing {
     }
 
     override func myPositionButtonAction(sender: UIButton!) {
-        if let mapViewC = self.maplyViewController as? MaplyViewController {
-            mapViewC.animate(toPosition: self.myLocation.marker.loc, time: 0.5)
-        }
+        //        if let mapViewC = self.maplyViewController as? MaplyViewController {
+        //            mapViewC.animate(toPosition: self.myLocation.marker.loc, time: 0.5)
+        //        }
     }
 
     override func updateWidth(_ shouldExpand: Bool) {

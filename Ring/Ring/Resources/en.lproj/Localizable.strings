@@ -36,6 +36,8 @@
 "scan.badQrCode" = "Bad QR code";
 "scan.search" = "Searching…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create a Swarm";
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";

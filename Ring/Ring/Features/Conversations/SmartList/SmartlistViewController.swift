@@ -92,6 +92,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBAction func openScan() {
         self.viewModel.showQRCode()
     }
+    @IBAction func createGroup() {
+        self.viewModel.createGroup()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -730,6 +733,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         guard let buttonImage = image else { return }
         searchController.updateSearchBar(image: buttonImage)
     }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if let container = self.searchController.searchBar.superview {
+            container.frame = CGRect(x: container.frame.origin.x, y: container.frame.origin.y, width: self.view.frame.size.width - 100, height: container.frame.size.height)
+        }
+    }
 
     func setupSearchBar() {
         guard let account = self.viewModel.currentAccount else { return }
@@ -737,7 +745,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let image = accountSip ? UIImage(asset: Asset.phoneBook) : UIImage(asset: Asset.qrCode)
         guard let buttonImage = image else { return }
         searchController
-            .configureSearchBar(image: buttonImage,
+            .configureSearchBar(image: buttonImage, position: 0,
                                 buttonPressed: { [weak self] in
                                     guard let self = self else { return }
                                     guard let account = self.viewModel.currentAccount else { return }
@@ -747,6 +755,21 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                                         self.present(self.contactPicker, animated: true, completion: nil)
                                     } else {
                                         self.openScan()
+                                    }
+                                })
+        let image1 = UIImage(asset: Asset.addPerson)
+        guard let buttonImage1 = image1 else { return }
+        searchController
+            .configureSearchBar(image: buttonImage1, position: 1,
+                                buttonPressed: { [weak self] in
+                                    guard let self = self else { return }
+                                    guard let account = self.viewModel.currentAccount else { return }
+                                    let accountSip = account.type == AccountType.sip
+                                    if accountSip {
+                                        self.contactPicker.delegate = self
+                                        self.present(self.contactPicker, animated: true, completion: nil)
+                                    } else {
+                                        self.createGroup()
                                     }
                                 })
         navigationItem.searchController = searchController
