@@ -36,6 +36,11 @@
 "scan.badQrCode" = "Bad QR code";
 "scan.search" = "Searching…";
 
+<<<<<<< HEAD
+=======
+// ContactList
+"contactList.title" = "Create a Swarm";
+>>>>>>> 189bd0c8 (swarm: add button to create a group)
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";
