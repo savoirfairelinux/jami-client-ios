@@ -60,6 +60,12 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<Ring.CallViewController>(storyboard: CallViewController.self)
   }
+
+    internal enum SwarmCreationViewController: StoryboardType {
+      internal static let storyboardName = "SwarmCreationViewController"
+
+      internal static let initialScene = InitialSceneType<Ring.SwarmCreationViewController>(storyboard: SwarmCreationViewController.self)
+    }
   internal enum ContactRequestsViewController: StoryboardType {
     internal static let storyboardName = "ContactRequestsViewController"
 
