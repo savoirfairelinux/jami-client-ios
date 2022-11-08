@@ -25,8 +25,8 @@ class CustomSearchController: UISearchController {
         return customSearchBar
     }
 
-    func configureSearchBar(image: UIImage, buttonPressed: @escaping (() -> Void)) {
-        customSearchBar.configure(buttonImage: image, buttonPressed: buttonPressed)
+    func configureSearchBar(image: UIImage, position: CGFloat, buttonPressed: @escaping (() -> Void)) {
+        customSearchBar.configure(buttonImage: image, position: position, buttonPressed: buttonPressed)
     }
 
     func updateSearchBar(image: UIImage) {
