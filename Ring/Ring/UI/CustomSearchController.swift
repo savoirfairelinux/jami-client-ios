@@ -25,15 +25,15 @@ class CustomSearchController: UISearchController {
         return customSearchBar
     }
 
-    func configureSearchBar(image: UIImage, buttonPressed: @escaping (() -> Void)) {
-        customSearchBar.configure(buttonImage: image, buttonPressed: buttonPressed)
+    func configureSearchBar(image: UIImage, position: CGFloat,                                                                                 buttonPressed: @escaping (() -> Void)) {
+        customSearchBar.configure(buttonImage: image, position: position, buttonPressed: buttonPressed)
     }
 
     func updateSearchBar(image: UIImage) {
         customSearchBar.updateImage(buttonImage: image)
     }
-    func sizeChanged(to size: CGFloat) {
-        customSearchBar.sizeChanged(to: size)
+    func sizeChanged(to size: CGFloat, totalItems: CGFloat) {
+        customSearchBar.sizeChanged(to: size, totalItems: totalItems)
     }
     func hideButton(hide: Bool) {
         customSearchBar.hideButton(hide: hide)
