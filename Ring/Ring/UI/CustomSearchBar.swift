@@ -23,6 +23,7 @@ import RxSwift
 
 class CustomSearchBar: UISearchBar {
     var rightButton = UIButton()
+    var buttonView = UIView()
     let trailing: CGFloat = -50
     let trailing1: CGFloat = -50.5
     let leading: CGFloat = 15
@@ -59,14 +60,15 @@ class CustomSearchBar: UISearchBar {
     }
     init() {
         super.init(frame: CGRect.zero)
+        buttonView = UIView(frame: CGRect(x: self.frame.size.width - buttonSize, y: 0, width: buttonSize, height: buttonSize))
     }
-    func sizeChanged(to size: CGFloat) {
-        var buttonFrame = rightButton.frame
+    func sizeChanged(to size: CGFloat, totalItems: CGFloat) {
+        var buttonFrame = buttonView.frame
         let margin = rightMargin
-        buttonFrame.origin.x = size - buttonSize + margin
-        rightButton.frame = buttonFrame
+        buttonFrame.origin.x = size - (buttonSize * totalItems) + margin
+        buttonView.frame = CGRect(x: buttonFrame.origin.x, y: buttonFrame.origin.y, width: (buttonSize * totalItems), height: buttonSize)
         if margin == 0 {
-            searchFieldTrailing.constant = rightButton.isHidden ? currentTrailingEditing : currentTrailing
+            searchFieldTrailing.constant = rightButton.isHidden ? currentTrailingEditing : (currentTrailing * totalItems)
         } else {
             searchFieldTrailing.constant += margin
         }
@@ -77,12 +79,13 @@ class CustomSearchBar: UISearchBar {
         rightButton.setImage(buttonImage, for: .normal)
     }
 
-    func configure(buttonImage: UIImage, buttonPressed: @escaping (() -> Void)) {
-        rightButton = UIButton(frame: CGRect(x: self.frame.size.width - buttonSize - 10, y: 0, width: buttonSize, height: buttonSize))
+    func configure(buttonImage: UIImage, position: CGFloat, buttonPressed: @escaping (() -> Void)) {
+        rightButton = UIButton(frame: CGRect(x: (buttonSize * position) - buttonSize, y: 0, width: buttonSize, height: buttonSize))
         rightButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         rightButton.setImage(buttonImage, for: .normal)
         rightButton.tintColor = UIColor.jamiMain
-        self.addSubview(rightButton)
+        buttonView.addSubview(rightButton)
+        self.addSubview(buttonView)
         rightButton.translatesAutoresizingMaskIntoConstraints = true
         self.searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchFieldTrailing = self.searchTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: currentTrailing)
