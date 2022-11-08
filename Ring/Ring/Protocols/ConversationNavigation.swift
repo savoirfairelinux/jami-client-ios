@@ -143,6 +143,16 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withAnimation: true,
                      withStateable: scanViewController.viewModel)
     }
+<<<<<<< HEAD
+=======
+    func contactList() {
+        let swarmCreationViewController = SwarmCreationViewController.instantiate(with: self.injectionBag)
+        self.present(viewController: swarmCreationViewController,
+                     withStyle: .show,
+                     withAnimation: true,
+                     withStateable: swarmCreationViewController.viewModel)
+    }
+>>>>>>> 189bd0c8 (swarm: add button to create a group)
 
     func presentContactInfo(conversation: ConversationModel) {
         if let flag = self.presentingVC[VCType.contact.rawValue], flag {
