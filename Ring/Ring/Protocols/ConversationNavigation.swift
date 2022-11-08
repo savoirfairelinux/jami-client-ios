@@ -27,6 +27,7 @@ enum ConversationState: State {
     case conversationDetail(conversationViewModel: ConversationViewModel)
     case contactDetail(conversationViewModel: ConversationModel)
     case qrCode
+    case contactList
     case createNewAccount
     case showDialpad(inCall: Bool)
     case showGeneralSettings
@@ -72,6 +73,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.presentContactInfo(conversation: conversationModel)
                 case .qrCode:
                     self.openQRCode()
+                case .contactList:
+                    self.contactList()
                 case .recordFile(let conversation, let audioOnly):
                     self.openRecordFile(conversation: conversation, audioOnly: audioOnly)
                 case .fromCallToConversation(let conversation):
@@ -142,6 +145,13 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStyle: .present,
                      withAnimation: true,
                      withStateable: scanViewController.viewModel)
+    }
+    func contactList() {
+        let swarmCreationViewController = SwarmCreationViewController.instantiate(with: self.injectionBag)
+        self.present(viewController: swarmCreationViewController,
+                     withStyle: .show,
+                     withAnimation: true,
+                     withStateable: swarmCreationViewController.viewModel)
     }
 
     func presentContactInfo(conversation: ConversationModel) {
