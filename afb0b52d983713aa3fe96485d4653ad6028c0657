@@ -36,6 +36,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37680ea7_f527bbe2",
+        "filename": "Ring/Ring/Calls/CallViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-11-08T19:53:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15c02b6b_55f8d5ef",
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aa14b19_c689ed36",
@@ -107,6 +125,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d98acf2_36011553",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-11-08T19:53:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf73ef1e_2dcf72df",
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04af9420_604af3eb",
@@ -144,6 +180,30 @@
       "side": 1,
       "message": "This is a big change and need to refactor the code. In future this thing will be implemented.",
       "parentUuid": "04af9420_604af3eb",
+      "range": {
+        "startLine": 194,
+        "startChar": 62,
+        "endLine": 194,
+        "endChar": 70
+      },
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e99396fc_2cecf9f6",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-11-08T19:53:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "857ebebc_fd186b24",
       "range": {
         "startLine": 194,
         "startChar": 62,
@@ -225,6 +285,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a138a0a_27d3a7a9",
+        "filename": "Ring/Ring/Models/CallModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-11-08T19:53:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44915f1d_3c05125d",
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "902a7d76_0606f652",
@@ -262,6 +340,30 @@
       "side": 1,
       "message": "Now  it is passed as partcipantId not refactored completely as it gives huge impact.",
       "parentUuid": "902a7d76_0606f652",
+      "range": {
+        "startLine": 413,
+        "startChar": 34,
+        "endLine": 413,
+        "endChar": 40
+      },
+      "revId": "afb0b52d983713aa3fe96485d4653ad6028c0657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b82ea326_c8d32c9d",
+        "filename": "Ring/Ring/Services/CallsService.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-11-08T19:53:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90734d5e_d727af18",
       "range": {
         "startLine": 413,
         "startChar": 34,
