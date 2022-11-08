@@ -194,6 +194,12 @@
 		1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DA1F0D915100D36361 /* Localizable.strings */; };
 		1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DD1F0D91A800D36361 /* LaunchScreen.storyboard */; };
 		1ABE07E21F0D924700D36361 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07E11F0D924700D36361 /* Strings.swift */; };
+		1D4EE844291EF9E000ED2010 /* SwarmCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EE843291EF9E000ED2010 /* SwarmCreation.swift */; };
+		1D4EE84D29252AD000ED2010 /* SwarmCreationUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EE84C29252AD000ED2010 /* SwarmCreationUIModel.swift */; };
+		1DE93593291B119900E426CF /* SwarmCreationUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE9358D291B119700E426CF /* SwarmCreationUI.swift */; };
+		1DE93594291B119900E426CF /* SwarmCreationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DE93590291B119700E426CF /* SwarmCreationViewController.storyboard */; };
+		1DE93595291B119900E426CF /* SwarmCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE93591291B119700E426CF /* SwarmCreationViewController.swift */; };
+		1DE93596291B119900E426CF /* SwarmCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE93592291B119900E426CF /* SwarmCreationViewModel.swift */; };
 		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
 		26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* PreviewViewController.swift */; };
 		26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */; };
@@ -774,6 +780,12 @@
 		1ABE07DB1F0D915100D36361 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1ABE07DD1F0D91A800D36361 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ABE07E11F0D924700D36361 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		1D4EE843291EF9E000ED2010 /* SwarmCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmCreation.swift; sourceTree = "<group>"; };
+		1D4EE84C29252AD000ED2010 /* SwarmCreationUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmCreationUIModel.swift; sourceTree = "<group>"; };
+		1DE9358D291B119700E426CF /* SwarmCreationUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmCreationUI.swift; sourceTree = "<group>"; };
+		1DE93590291B119700E426CF /* SwarmCreationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SwarmCreationViewController.storyboard; sourceTree = "<group>"; };
+		1DE93591291B119700E426CF /* SwarmCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmCreationViewController.swift; sourceTree = "<group>"; };
+		1DE93592291B119900E426CF /* SwarmCreationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmCreationViewModel.swift; sourceTree = "<group>"; };
 		26069B6524C9FCE8002361A3 /* ObjCHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCHandler.h; sourceTree = "<group>"; };
 		26069B6624C9FCE8002361A3 /* ObjCHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCHandler.m; sourceTree = "<group>"; };
 		26074FD824F7FF9500374570 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
@@ -1927,6 +1939,12 @@
 		1A2D18AE1F29153F00B2C785 /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
+				1D4EE840291EF98800ED2010 /* SwarmCreationModel */,
+				1DE9358D291B119700E426CF /* SwarmCreationUI.swift */,
+				1DE93590291B119700E426CF /* SwarmCreationViewController.storyboard */,
+				1DE93591291B119700E426CF /* SwarmCreationViewController.swift */,
+				1DE93592291B119900E426CF /* SwarmCreationViewModel.swift */,
+				1D4EE84C29252AD000ED2010 /* SwarmCreationUIModel.swift */,
 				1A2D18F01F292D6100B2C785 /* Cells */,
 				1A2D18B21F2915C500B2C785 /* ConversationViewController.storyboard */,
 				1A2D18CC1F29182500B2C785 /* ConversationViewController.swift */,
@@ -2054,6 +2072,14 @@
 				04399A021D1C2D9D00E99CD9 /* Images.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		1D4EE840291EF98800ED2010 /* SwarmCreationModel */ = {
+			isa = PBXGroup;
+			children = (
+				1D4EE843291EF9E000ED2010 /* SwarmCreation.swift */,
+			);
+			path = SwarmCreationModel;
 			sourceTree = "<group>";
 		};
 		26074FD524F7FF5B00374570 /* Preview */ = {
@@ -2478,6 +2504,7 @@
 				1A2D18B31F2915C500B2C785 /* ConversationViewController.storyboard in Resources */,
 				0E7CF4DF2017918300CD967D /* ButtonsContainerView.xib in Resources */,
 				1A2D18A01F27A6D600B2C785 /* LinkDeviceViewController.storyboard in Resources */,
+				1DE93594291B119900E426CF /* SwarmCreationViewController.storyboard in Resources */,
 				0E3697A9203243D3009A68CA /* BannedContactCell.xib in Resources */,
 				0E6D95982407113900996A28 /* LinkToAccountManagerViewController.storyboard in Resources */,
 				0E36979F20322E6F009A68CA /* BlockListViewController.storyboard in Resources */,
@@ -2571,6 +2598,7 @@
 				26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */,
 				446FAF1B2373425E00519C4F /* SendFileViewController.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
+				1D4EE84D29252AD000ED2010 /* SwarmCreationUIModel.swift in Sources */,
 				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,
 				0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */,
 				0E6F544F223C0ED600ECC3CE /* AccountPickerAdapter.swift in Sources */,
@@ -2632,6 +2660,7 @@
 				62AA15CA1FFD3D7E0064A063 /* VideoService.swift in Sources */,
 				26D08AB9269628F400E37574 /* RequestsService.swift in Sources */,
 				0EDE34C71F868E1200FFA15C /* EditProfileViewController.swift in Sources */,
+				1DE93596291B119900E426CF /* SwarmCreationViewModel.swift in Sources */,
 				62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */,
 				0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */,
 				1A2D18E51F29197100B2C785 /* MessageAccessoryView.swift in Sources */,
@@ -2645,6 +2674,7 @@
 				0ED2B6FC1F96A158001572F0 /* LinkNewDeviceViewController.swift in Sources */,
 				1ABE07E21F0D924700D36361 /* Strings.swift in Sources */,
 				0E6F544D223BFE3E00ECC3CE /* DisposableCell.swift in Sources */,
+				1DE93595291B119900E426CF /* SwarmCreationViewController.swift in Sources */,
 				621231FB1F8D6FEE009B86F0 /* MessageCell.swift in Sources */,
 				2662FC7D246B78E800FA7782 /* IncognitoSmartListViewController.swift in Sources */,
 				56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */,
@@ -2722,6 +2752,7 @@
 				0E5806F323BE42EC007D1F5D /* PlayerView.swift in Sources */,
 				1A2D18C41F29180700B2C785 /* ConfigKeyModel.swift in Sources */,
 				62B60AFB2048A437001BEACF /* DataTransferAdapterDelegate.swift in Sources */,
+				1DE93593291B119900E426CF /* SwarmCreationUI.swift in Sources */,
 				62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */,
 				627F11F120348FBF006560B5 /* AvatarView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,
@@ -2736,6 +2767,7 @@
 				263B715A246D9556007044C4 /* IncognitoSmartListCell.swift in Sources */,
 				66266FC021557D2F002757A6 /* ScanViewModel.swift in Sources */,
 				2673D63225267785000C56CB /* ConferenceLayoutHelper.swift in Sources */,
+				1D4EE844291EF9E000ED2010 /* SwarmCreation.swift in Sources */,
 				0E5A668322F0B1F100AA6820 /* ProgressView.swift in Sources */,
 				0E96ED79225D06480016C07D /* GeneralSettingsViewModel.swift in Sources */,
 				1A2041801F1E903B00C08435 /* CreateProfileViewController.swift in Sources */,
