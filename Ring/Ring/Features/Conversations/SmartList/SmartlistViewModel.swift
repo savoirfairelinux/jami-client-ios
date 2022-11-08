@@ -370,6 +370,10 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         self.stateSubject.onNext(ConversationState.qrCode)
     }
 
+    func createGroup() {
+        self.stateSubject.onNext(ConversationState.contactList)
+    }
+
     func createAccount() {
         self.stateSubject.onNext(ConversationState.createNewAccount)
     }

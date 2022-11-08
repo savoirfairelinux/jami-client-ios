@@ -36,6 +36,8 @@
 "scan.badQrCode" = "Bad QR code";
 "scan.search" = "Searching…";
 
+// ContactList
+"contactList.title" = "Create a group";
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";

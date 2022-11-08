@@ -452,6 +452,10 @@ internal enum L10n {
     internal static let videoAcceleration = L10n.tr("Localizable", "generalSettings.videoAcceleration")
   }
 
+  internal enum ContactList {
+    ///  Create a group
+        internal static let title = L10n.tr("Localizable", "contactList.title")
+    }
   internal enum GeneratedMessage {
     /// Contact added
     internal static let contactAdded = L10n.tr("Localizable", "generatedMessage.contactAdded")
