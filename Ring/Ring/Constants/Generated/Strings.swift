@@ -51,6 +51,14 @@ internal enum L10n {
     /// Enter Username
     internal static let usernameLabel = L10n.tr("Localizable", "account.usernameLabel")
   }
+  internal enum SwarmCreation {
+        /// Create a Swarm
+    internal static let title = L10n.tr("Localizable", "swarmcreation.title")
+      /// Search for contact
+    internal static let searchBar = L10n.tr("Localizable", "swarmcreation.searchBar")
+      /// Create the Swarm
+    internal static let createTheSwarm = L10n.tr("Localizable", "swarmcreation.createTheSwarm")
+    }
 
   internal enum AccountPage {
     /// Auto register after expiration

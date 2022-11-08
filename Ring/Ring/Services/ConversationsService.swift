@@ -396,8 +396,8 @@ class ConversationsService {
         self.conversationsAdapter.removeConversation(accountId, conversationId: conversationId)
     }
 
-    func startConversation(accountId: String) {
-        self.conversationsAdapter.startConversation(accountId)
+    func startConversation(accountId: String) -> String {
+        return self.conversationsAdapter.startConversation(accountId)
     }
 
     // MARK: legacy support for non swarm conversations
