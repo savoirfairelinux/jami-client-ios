@@ -144,6 +144,14 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStateable: scanViewController.viewModel)
     }
 
+    func contactList() {
+        let swarmCreationViewController = SwarmCreationViewController.instantiate(with: self.injectionBag)
+        self.present(viewController: swarmCreationViewController,
+                     withStyle: .show,
+                     withAnimation: true,
+                     withStateable: swarmCreationViewController.viewModel)
+    }
+
     func presentContactInfo(conversation: ConversationModel) {
         if let flag = self.presentingVC[VCType.contact.rawValue], flag {
             return
