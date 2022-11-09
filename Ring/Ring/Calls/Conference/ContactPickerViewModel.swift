@@ -28,8 +28,13 @@ class ContactPickerViewModel: ViewModel {
     var contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?
 
     var currentCallId = ""
+    var participants: [String]?
     lazy var conferensableItems: Observable<[ContactPickerSection]> = {
-        if contactsOnly {
+        if let participants = participants, !participants.isEmpty {
+            var sections = [ContactPickerSection]()
+            self.addParticipantsToContactPickerSections(participants: participants, sections: &sections)
+            return Observable.just(sections)
+        } else if contactsOnly {
             return self.contactsService.contacts.asObservable().map { [weak self] contacts in
                 var sections = [ContactPickerSection]()
                 self?.addContactsToContactPickerSections(contacts: contacts, sections: &sections)
@@ -139,6 +144,33 @@ extension ContactPickerViewModel {
         }
         if !contactItems.isEmpty {
             sections.append(ContactPickerSection(header: "contacts", items: contactItems))
+        }
+    }
+
+    func addParticipantsToContactPickerSections(participants: [String], sections: inout [ContactPickerSection], urlToExclude: [String] = [String]()) {
+        guard let currentAccount = self.accountService.currentAccount else {
+            return
+        }
+        var contactItems = [ConferencableItem]()
+        participants.forEach { participant in
+            guard let contact = self.contactsService.contact(withHash: participant) else { return }
+            guard let contactUri = contact.uriString else { return }
+            if urlToExclude.contains(contactUri) {
+                return
+            }
+            let profile = self.contactsService.getProfile(uri: contactUri, accountId: currentAccount.id)
+            var contactToAdd = Contact(contactUri: contactUri,
+                                       accountId: currentAccount.id,
+                                       registrName: contact.userName ?? "",
+                                       presService: self.presenceService,
+                                       contactProfile: profile)
+
+            contactToAdd.hash = contact.hash
+            let contactItem = ConferencableItem(conferenceID: "", contacts: [contactToAdd])
+            contactItems.append(contactItem)
+        }
+        if !contactItems.isEmpty {
+            sections.append(ContactPickerSection(header: "", items: contactItems))
         }
     }
 
