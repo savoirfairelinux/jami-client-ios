@@ -187,11 +187,7 @@ extension AdapterService: AdapterDelegate {
     }
 
     func receivedContactRequest(accountId: String, peerId: String) {
-        guard let handler = self.eventHandler else {
-            return
-        }
-        let contentMessage = "an invitation received"
-        handler(.invitation, EventData(accountId, peerId, "", contentMessage, ""))
+        /// TODO add invitation notification
     }
 
     func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String]) {
