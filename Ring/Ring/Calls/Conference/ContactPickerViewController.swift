@@ -28,6 +28,8 @@ import SwiftyBeaver
 enum ContactPickerType {
     case forConversation
     case forCall
+    case forSwarmCreation
+    case forSwarmInfo
 }
 
 class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelBased, UITableViewDelegate, UIGestureRecognizerDelegate {
@@ -253,6 +255,10 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 guard let cell = self?.tableView.cellForRow(at: row) as? SmartListCell else { return }
                 self?.updateButtonsOnSelectionChange(cell: cell, indexPath: row)
             }
+            case .forSwarmCreation:
+                break
+            case.forSwarmInfo:
+                break
         }
     }
 }
