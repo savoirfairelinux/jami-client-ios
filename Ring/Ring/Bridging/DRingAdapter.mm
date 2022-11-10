@@ -28,6 +28,8 @@
 
 @implementation DRingAdapter
 
+using namespace libjami;
+
 - (BOOL)initDaemon {
     if (![[NSThread currentThread] isMainThread]) {
         __block bool success;
@@ -43,11 +45,11 @@
 
 - (BOOL) initDaemonInternal {
 #if DEBUG
-    int flag = DRing::DRING_FLAG_CONSOLE_LOG | DRing::DRING_FLAG_DEBUG;
+    int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG;
 #else
     int flag = 0;
 #endif
-    return DRing::init(static_cast<DRing::InitFlag>(flag));
+    return init(static_cast<InitFlag>(flag));
 }
 
 - (BOOL)startDaemon {
@@ -64,28 +66,28 @@
 }
 
 - (BOOL)startDaemonInternal {
-    return DRing::start();
+    return start();
 }
 
 - (void)fini {
     if (![[NSThread currentThread] isMainThread]) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            DRing::fini();
+            fini();
         });
     }
     else {
-        DRing::fini();
+        fini();
     }
 }
 
 - (void)connectivityChanged {
     if (![[NSThread currentThread] isMainThread]) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            DRing::connectivityChanged();
+            connectivityChanged();
         });
     }
     else {
-        DRing::connectivityChanged();
+        connectivityChanged();
     }
 }
 
@@ -93,12 +95,12 @@
     if (![[NSThread currentThread] isMainThread]) {
         __block NSString *version;
         dispatch_sync(dispatch_get_main_queue(), ^{
-            version = [NSString stringWithUTF8String:DRing::version()];
+            version = [NSString stringWithUTF8String:libjami::version()];
         });
         return version;
     }
     else {
-        return [NSString stringWithUTF8String:DRing::version()];
+        return [NSString stringWithUTF8String:version()];
     }
 }
 

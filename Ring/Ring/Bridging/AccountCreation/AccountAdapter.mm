@@ -29,7 +29,7 @@
 
 @implementation AccountAdapter
 
-using namespace DRing;
+using namespace libjami;
 
 /// Static delegate that will receive the propagated daemon events
 static id <AccountAdapterDelegate> _delegate;

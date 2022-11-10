@@ -29,7 +29,7 @@
 #include <mutex>
 #import "Utils.h"
 
-using namespace DRing;
+using namespace libjami;
 
 struct Renderer
 {
@@ -152,7 +152,7 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
     newRenderer->height = static_cast<int>(h);
     newRenderer->rendererId = sinkId;
     newRenderer->bindAVSinkFunctions();
-    DRing::registerSinkTarget(_sinkId, newRenderer->target);
+    registerSinkTarget(_sinkId, newRenderer->target);
     renderers.insert(std::make_pair(_sinkId, newRenderer));
 }
 
@@ -171,7 +171,7 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
                                angle:(int)angle
                         videoInputId:(NSString*)videoInputId
 {
-    auto frame = DRing::getNewFrame(std::string([videoInputId UTF8String]));
+    auto frame = getNewFrame(std::string([videoInputId UTF8String]));
     if(!frame) {
         return;
     }
@@ -180,84 +180,84 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
               fromImageBuffer:image
                         angle:(int) angle];
 
-    DRing::publishFrame(std::string([videoInputId UTF8String]));
+    publishFrame(std::string([videoInputId UTF8String]));
 }
 
 - (void)addVideoDeviceWithName:(NSString*)deviceName withDevInfo:(NSDictionary*)deviceInfoDict {
     std::vector<std::map<std::string, std::string>> devInfo;
     auto setting = [Utils dictionnaryToMap:deviceInfoDict];
     devInfo.emplace_back(setting);
-    DRing::addVideoDevice(std::string([deviceName UTF8String]), devInfo);
+    addVideoDevice(std::string([deviceName UTF8String]), devInfo);
 }
 
 - (void)setDefaultDevice:(NSString*)deviceName {
-    DRing::setDefaultDevice(std::string([deviceName UTF8String]));
+    setDefaultDevice(std::string([deviceName UTF8String]));
 }
 - (NSString*)getDefaultDevice {
-    return @(DRing::getDefaultDevice().c_str());
+    return @(getDefaultDevice().c_str());
 }
 
 - (void)setDecodingAccelerated:(BOOL)state {
-    DRing::setDecodingAccelerated(state);
+    setDecodingAccelerated(state);
 }
 
 - (BOOL)getDecodingAccelerated {
-    return DRing::getDecodingAccelerated();
+    return getDecodingAccelerated();
 }
 
 - (void)setEncodingAccelerated:(BOOL)state {
-    DRing::setEncodingAccelerated(state);
+    setEncodingAccelerated(state);
 }
 
 - (BOOL)getEncodingAccelerated {
-    return DRing::getEncodingAccelerated();
+    return getEncodingAccelerated();
 }
 
 - (void)switchInput:(NSString*)videoInputId accountId:(NSString*)accountId forCall:(NSString*)callID {
-    DRing::switchInput(std::string([accountId UTF8String]), std::string([callID UTF8String]), std::string([videoInputId UTF8String]));
+    switchInput(std::string([accountId UTF8String]), std::string([callID UTF8String]), std::string([videoInputId UTF8String]));
 }
 
 - (void)stopAudioDevice {
-    DRing::stopAudioDevice();
+    stopAudioDevice();
 }
 
 - (NSString*)startLocalRecording:(NSString*)videoInputId path:(NSString*)path {
-    return @(DRing::startLocalMediaRecorder(std::string([videoInputId UTF8String]), std::string([path UTF8String])).c_str());
+    return @(startLocalMediaRecorder(std::string([videoInputId UTF8String]), std::string([path UTF8String])).c_str());
 }
 
 - (void)stopLocalRecording:(NSString*) path {
-    DRing::stopLocalRecorder(std::string([path UTF8String]));
+    stopLocalRecorder(std::string([path UTF8String]));
 }
 - (NSString*)createMediaPlayer:(NSString*)path {
-    return @(DRing::createMediaPlayer(std::string([path UTF8String])).c_str());
+    return @(createMediaPlayer(std::string([path UTF8String])).c_str());
 }
 
 -(bool)pausePlayer:(NSString*)playerId pause:(BOOL)pause {
-    return DRing::pausePlayer(std::string([playerId UTF8String]), pause);
+    return pausePlayer(std::string([playerId UTF8String]), pause);
 }
 
 -(bool)closePlayer:(NSString*)playerId {
-    return DRing::closeMediaPlayer(std::string([playerId UTF8String]));
+    return closeMediaPlayer(std::string([playerId UTF8String]));
 }
 
 - (bool)mutePlayerAudio:(NSString*)playerId mute:(BOOL)mute {
-    return DRing::mutePlayerAudio(std::string([playerId UTF8String]), mute);
+    return mutePlayerAudio(std::string([playerId UTF8String]), mute);
 
 }
 - (bool)playerSeekToTime:(int)time playerId:(NSString*)playerId {
-    return DRing::playerSeekToTime(std::string([playerId UTF8String]), time);
+    return playerSeekToTime(std::string([playerId UTF8String]), time);
 }
 
 -(int64_t)getPlayerPosition:(NSString*)playerId {
-    return DRing::getPlayerPosition(std::string([playerId UTF8String]));
+    return getPlayerPosition(std::string([playerId UTF8String]));
 }
 
 - (void)openVideoInput:(NSString*)path {
-    DRing::openVideoInput(std::string([path UTF8String]));
+    openVideoInput(std::string([path UTF8String]));
 }
 
 - (void)closeVideoInput:(NSString*)path {
-    DRing::closeVideoInput(std::string([path UTF8String]));
+    closeVideoInput(std::string([path UTF8String]));
 }
 
 #pragma mark VideoAdapterDelegate

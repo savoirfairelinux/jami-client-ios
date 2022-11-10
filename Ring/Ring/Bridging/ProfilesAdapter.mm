@@ -22,7 +22,7 @@
 #import "jami/configurationmanager_interface.h"
 #import "Ring-Swift.h"
 
-using namespace DRing;
+using namespace libjami;
 
 // Static delegate that will receive the propagated daemon events
 static id <ProfilesAdapterDelegate> _delegate;

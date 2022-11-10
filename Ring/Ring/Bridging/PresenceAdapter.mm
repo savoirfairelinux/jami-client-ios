@@ -23,7 +23,7 @@
 #import "jami/presencemanager_interface.h"
 #import "Ring-Swift.h"
 
-using namespace DRing;
+using namespace libjami;
 
 @implementation PresenceAdapter
 
@@ -66,7 +66,7 @@ static id <PresenceAdapterDelegate> _delegate;
 #pragma mark -
 
 - (void)subscribeBuddyWithURI:(NSString*)uri WithAccountId:(NSString*)accountId WithFlag:(BOOL)flag {
-    DRing::subscribeBuddy(std::string([accountId UTF8String]), std::string([uri UTF8String]), (bool)flag);
+    subscribeBuddy(std::string([accountId UTF8String]), std::string([uri UTF8String]), (bool)flag);
 }
 
 #pragma mark PresenceAdapterDelegate

@@ -28,7 +28,7 @@
 
 @implementation SystemAdapter
 
-using namespace DRing;
+using namespace libjami;
 
 #pragma mark Callbacks registration
 - (void)registerConfigurationHandler

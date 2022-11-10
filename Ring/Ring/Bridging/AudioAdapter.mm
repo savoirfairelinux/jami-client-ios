@@ -24,19 +24,21 @@
 
 @implementation AudioAdapter
 
+using namespace libjami;
+
 - (void)setAudioOutputDevice:(NSInteger)index {
-    DRing::setAudioOutputDevice((int32_t)index);
+    setAudioOutputDevice((int32_t)index);
 }
 
 - (void)setAudioInputDevice:(NSInteger)index {
-    DRing::setAudioInputDevice((int32_t)index);
+    setAudioInputDevice((int32_t)index);
 }
 
 - (void)setAudioRingtoneDevice:(NSInteger)index {
-    DRing::setAudioRingtoneDevice((int32_t)index);
+    setAudioRingtoneDevice((int32_t)index);
 }
 - (void)startAudio {
-    DRing::startAudio();
+    startAudio();
 }
 
 @end

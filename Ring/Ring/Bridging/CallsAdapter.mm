@@ -25,7 +25,7 @@
 #import "Ring-Swift.h"
 #import <os/log.h>
 
-using namespace DRing;
+using namespace libjami;
 
 @implementation CallsAdapter
 /// Static delegate that will receive the propagated daemon events

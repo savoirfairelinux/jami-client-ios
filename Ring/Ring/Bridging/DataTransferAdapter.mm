@@ -38,7 +38,7 @@
 
 @end
 
-using namespace DRing;
+using namespace libjami;
 
 @implementation DataTransferAdapter
 

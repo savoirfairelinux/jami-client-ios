@@ -41,7 +41,7 @@
 
 static id<AdapterDelegate> _delegate;
 
-using namespace DRing;
+using namespace libjami;
 
 struct PeerConnectionRequest : public dht::EncryptedValue<PeerConnectionRequest>
 {
@@ -184,19 +184,19 @@ std::map<std::string, std::string> nameServers;
 - (BOOL)start:(NSString*)accountId
 {
     [self registerSignals];
-    if (DRing::initialized() == true) {
+    if (initialized() == true) {
         setAccountActive(std::string([accountId UTF8String]), true);
         return true;
     }
 #if DEBUG
-    int flag = DRing::DRING_FLAG_CONSOLE_LOG | DRing::DRING_FLAG_DEBUG | DRing::DRING_FLAG_IOS_EXTENSION;
+    int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_IOS_EXTENSION;
 #else
-    int flag = DRing::DRING_FLAG_IOS_EXTENSION;;
+    int flag = LIBJAMI_FLAG_IOS_EXTENSION;;
 #endif
     if (![[NSThread currentThread] isMainThread]) {
         __block bool success;
         dispatch_sync(dispatch_get_main_queue(), ^{
-            if (init(static_cast<DRing::InitFlag>(flag))) {
+            if (init(static_cast<InitFlag>(flag))) {
                 success = start({});
             } else {
                 success = false;
@@ -204,7 +204,7 @@ std::map<std::string, std::string> nameServers;
         });
         return success;
     } else {
-        if (init(static_cast<DRing::InitFlag>(flag))) {
+        if (init(static_cast<InitFlag>(flag))) {
             return start({});
         }
         return false;
