@@ -348,8 +348,8 @@ internal enum L10n {
     internal static let requestMessage = L10n.tr("Localizable", "conversation.requestMessage")
     /// Send him/her a contact request to be able to exchange together
     internal static let sendRequest = L10n.tr("Localizable", "conversation.sendRequest")
-    ///Send Contact Request
-    internal static let sendContactRequest = L10n.tr("Localizable", "conversation.sendRequestTitle")
+    /// Send Contact Request
+    internal static let sendRequestTitle = L10n.tr("Localizable", "conversation.sendRequestTitle")
     /// We are waiting for %s connects to synchronize the conversation.
     internal static func synchronizationMessage(_ p1: UnsafePointer<CChar>) -> String {
       return L10n.tr("Localizable", "conversation.synchronizationMessage", p1)
@@ -474,6 +474,10 @@ internal enum L10n {
   }
 
   internal enum Global {
+    /// Accept
+    internal static let accept = L10n.tr("Localizable", "global.accept")
+    /// Block
+    internal static let block = L10n.tr("Localizable", "global.block")
     /// Close
     internal static let close = L10n.tr("Localizable", "global.close")
     /// Forward
@@ -486,18 +490,14 @@ internal enum L10n {
     internal static let ok = L10n.tr("Localizable", "global.ok")
     /// Preview
     internal static let preview = L10n.tr("Localizable", "global.preview")
+    /// Refuse
+    internal static let refuse = L10n.tr("Localizable", "global.refuse")
     /// Resend
     internal static let resend = L10n.tr("Localizable", "global.resend")
     /// Save
     internal static let save = L10n.tr("Localizable", "global.save")
     /// Share
     internal static let share = L10n.tr("Localizable", "global.share")
-    /// Accept
-    internal static let accept = L10n.tr("Localizable", "global.accept")
-    /// Refuse
-    internal static let refuse = L10n.tr("Localizable", "global.refuse")
-    /// Block
-    internal static let block = L10n.tr("Localizable", "global.block")
   }
 
   internal enum Invitations {

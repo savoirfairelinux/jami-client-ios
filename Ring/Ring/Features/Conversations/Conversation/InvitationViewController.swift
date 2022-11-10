@@ -116,7 +116,7 @@ class InvitationViewController: UIViewController, StoryboardBased, ViewModelBase
         invitationLabel3.isHidden = false
         invitationLabel2.text = L10n.Conversation.notContact(self.viewModel.displayName.value)
         invitationLabel3.text = L10n.Conversation.sendRequest
-        inviteButton.setTitle(L10n.Conversation.sendContactRequest, for: .normal)
+        inviteButton.setTitle(L10n.Conversation.sendRequestTitle, for: .normal)
     }
     private func setPendingContactView() {
         buttonsContainer.isHidden = false
