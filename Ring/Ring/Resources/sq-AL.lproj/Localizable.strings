@@ -28,6 +28,9 @@
 "global.save" = "Ruaje";
 "global.resend" = "Ridërgoje";
 "global.preview" = "Paraparje";
+"global.accept" = "Pranoje";
+"global.block" = "Bllokoje";
+"global.refuse" = "Hidhe tej";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
 "conversation.notContact" = "\%s\ s’gjendet te lista e kontakteve tuaja.";
 "conversation.sendRequest" = "Dërgojini një kërkesë kontakti, që të jeni në gjendje të shkëmbeni me njëri-tjetrin";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Keni pranuar kërkesën për bisedë.";
 "conversation.synchronizationMessage" = "Po presim që \%s\ të lidhet, pa të njëkohësojmë bisedën.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Mësoni më tepër";
 
 //Actions
-"actions.blockAction" = "Bllokoje";
 "actions.deleteAction" = "Fshije";
 "actions.cancelAction" = "Anuloje";
 "actions.clearAction" = "Spastroje";
 "actions.backAction" = "Mbrapsht";
 "actions.doneAction" = "U bë";
 "alerts.incomingCallAllertTitle" = "Thirrje nga";
-"alerts.incomingCallButtonAccept" = "Pranoje";
 "alerts.incomingCallButtonIgnore" = "Shpërfille";
 "actions.startAudioCall" = "Thirrje Audio";
 "actions.startVideoCall" = "Thirrje Video";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Po gatitet…";
 "dataTransfer.readableStatusError" = "Gabim";
 "dataTransfer.readableStatusAwaiting" = "Pezull…";
-"dataTransfer.readableStatusRefuse" = "Hidhe tej";
 "dataTransfer.readableStatusOngoing" = "Po shpërngulet";
 "dataTransfer.readableStatusCanceled" = "U anulua";
 "dataTransfer.sendingFailed" = "S’u arrit të dërgohej";
 "dataTransfer.readableStatusSuccess" = "E plotë";
-"dataTransfer.readableStatusAccept" = "Pranoje";
 "dataTransfer.readableStatusCancel" = "Anuloje";
 
 //Notifications
 "notifications.incomingCall" = "Thirrje Ardhëse";
 "notifications.missedCall" = "Thirrje të Humbura";
-"notifications.acceptCall" = "PRANOJE";
-"notifications.refuseCall" = "HIDHE POSHTË";
 "notifications.newFile" = "Kartelë e re";
 "notifications.locationSharingStarted" = "Nisi dhënia e vendndodhjes për thirrje ardhëse";
 "notifications.locationSharingStopped" = "Reshti dhënia e vendndodhjes për thirrje ardhëse";
 "dataTransfer.readableStatusAwaiting" = "Pezull…";
-"dataTransfer.readableStatusRefuse" = "Hidhe tej";
 "dataTransfer.readableStatusOngoing" = "Po shpërngulet";
 "dataTransfer.readableStatusCanceled" = "U anulua";
 "dataTransfer.readableStatusSuccess" = "E plotë";
-"dataTransfer.readableStatusAccept" = "Pranoje";
 "dataTransfer.readableStatusCancel" = "Anuloje";
 "dataTransfer.infoMessage" = "Shtypeni që të fillojë regjistrimi";
 "dataTransfer.sendMessage" = "Dërgoje";

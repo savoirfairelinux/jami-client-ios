@@ -28,6 +28,9 @@
 "global.save" = "Speichern";
 "global.resend" = "Erneut senden";
 "global.preview" = "Vorschau";
+"global.accept" = "Accept";
+"global.block" = "Block";
+"global.refuse" = "Refuse";
 
 // Scan
 "scan.badQrCode" = "QR-Code ungültig";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hallo,\nMöchten Sie der Unterhaltung beitreten?";
 "conversation.notContact" = "\%s\ befindet sich nicht in Ihrer Kontaktliste.";
 "conversation.sendRequest" = "Senden Sie ihm/ihr eine Kontaktanfrage, um sich gemeinsam austauschen zu können";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Sie haben die Unterhaltungsanfrage angenommen.";
 "conversation.synchronizationMessage" = "Wir warten auf \%s\ Verbindungen, um die Unterhaltung zu synchronisieren.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Mehr erfahren";
 
 //Actions
-"actions.blockAction" = "Blockieren";
 "actions.deleteAction" = "Löschen";
 "actions.cancelAction" = "Abbrechen";
 "actions.clearAction" = "Löschen";
 "actions.backAction" = "Zurück";
 "actions.doneAction" = "Erledigt";
 "alerts.incomingCallAllertTitle" = "Eingehender Anruf von ";
-"alerts.incomingCallButtonAccept" = "Annehmen";
 "alerts.incomingCallButtonIgnore" = "Ignorieren";
 "actions.startAudioCall" = "Audio-Anruf";
 "actions.startVideoCall" = "Video-Anruf";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Initialisiere...";
 "dataTransfer.readableStatusError" = "Fehler";
 "dataTransfer.readableStatusAwaiting" = "Ausstehend …";
-"dataTransfer.readableStatusRefuse" = "Ablehnen";
 "dataTransfer.readableStatusOngoing" = "Übertrage";
 "dataTransfer.readableStatusCanceled" = "Abgebrochen";
 "dataTransfer.sendingFailed" = "Senden fehlgeschlagen";
 "dataTransfer.readableStatusSuccess" = "Abgeschlossen";
-"dataTransfer.readableStatusAccept" = "Annehmen";
 "dataTransfer.readableStatusCancel" = "Abbrechen";
 
 //Notifications
 "notifications.incomingCall" = "Eingehender Anruf";
 "notifications.missedCall" = "Verpasster Anruf";
-"notifications.acceptCall" = "ANNEHMEN";
-"notifications.refuseCall" = "ABLEHNEN";
 "notifications.newFile" = "Neue Datei";
 "notifications.locationSharingStarted" = "Eingehende Standortfreigabe gestartet";
 "notifications.locationSharingStopped" = "Eingehende Standortfreigabe gestoppt";
 "dataTransfer.readableStatusAwaiting" = "Ausstehend …";
-"dataTransfer.readableStatusRefuse" = "Ablehnen";
 "dataTransfer.readableStatusOngoing" = "Übertrage";
 "dataTransfer.readableStatusCanceled" = "Abgebrochen";
 "dataTransfer.readableStatusSuccess" = "Abgeschlossen";
-"dataTransfer.readableStatusAccept" = "Annehmen";
 "dataTransfer.readableStatusCancel" = "Abbrechen";
 "dataTransfer.infoMessage" = "Zum Starten der Aufnahme drücken";
 "dataTransfer.sendMessage" = "Senden";

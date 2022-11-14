@@ -28,6 +28,9 @@
 "global.save" = "Salvează";
 "global.resend" = "Trimite din nou";
 "global.preview" = "Previzualizare";
+"global.accept" = "Acceptă";
+"global.block" = "Blochează";
+"global.refuse" = "Refuză";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Vrei să participi la conversație?";
 "conversation.notContact" = "\%s\ nu este în contactele tale.";
 "conversation.sendRequest" = "Trimite-i o cerere de contact pentru a conversa împreună.";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Ai acceptat invitația la conversație.";
 "conversation.synchronizationMessage" = "Se așteaptă ca \%s\ să se conecteze pentru a sincroniza conversația.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Află mai multe";
 
 //Actions
-"actions.blockAction" = "Blochează";
 "actions.deleteAction" = "Șterge";
 "actions.cancelAction" = "Renunță";
 "actions.clearAction" = "Șterge";
 "actions.backAction" = "Înapoi";
 "actions.doneAction" = "Făcut";
 "alerts.incomingCallAllertTitle" = "Apel primit de la ";
-"alerts.incomingCallButtonAccept" = "Acceptă";
 "alerts.incomingCallButtonIgnore" = "Ignoră";
 "actions.startAudioCall" = "  Apel vocal";
 "actions.startVideoCall" = "  Apel video";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Inițializare...";
 "dataTransfer.readableStatusError" = "Eroare";
 "dataTransfer.readableStatusAwaiting" = "În așteptare…";
-"dataTransfer.readableStatusRefuse" = "Refuză";
 "dataTransfer.readableStatusOngoing" = "Se transferă";
 "dataTransfer.readableStatusCanceled" = "Anulat";
 "dataTransfer.sendingFailed" = "Trimitere nereușită";
 "dataTransfer.readableStatusSuccess" = "Terminat";
-"dataTransfer.readableStatusAccept" = "Acceptă";
 "dataTransfer.readableStatusCancel" = "Renunță";
 
 //Notifications
 "notifications.incomingCall" = "Apel primit";
 "notifications.missedCall" = "Apel pierdut";
-"notifications.acceptCall" = "ACCEPTĂ";
-"notifications.refuseCall" = "REFUZĂ";
 "notifications.newFile" = "Fișier nou";
 "notifications.locationSharingStarted" = "Distribuirea poziției primite a început";
 "notifications.locationSharingStopped" = "Distribuirea poziției primite s-a oprit";
 "dataTransfer.readableStatusAwaiting" = "În așteptare…";
-"dataTransfer.readableStatusRefuse" = "Refuză";
 "dataTransfer.readableStatusOngoing" = "Se transferă";
 "dataTransfer.readableStatusCanceled" = "Anulat";
 "dataTransfer.readableStatusSuccess" = "Terminat";
-"dataTransfer.readableStatusAccept" = "Acceptă";
 "dataTransfer.readableStatusCancel" = "Renunță";
 "dataTransfer.infoMessage" = "Apasă pentru a începe înregistrarea";
 "dataTransfer.sendMessage" = "Trimite";

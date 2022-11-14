@@ -28,6 +28,9 @@
 "global.save" = "Save";
 "global.resend" = "Resend";
 "global.preview" = "Preview";
+"global.accept" = "Accept";
+"global.block" = "Block";
+"global.refuse" = "Refuse";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
 //Actions
-"actions.blockAction" = "Block";
 "actions.deleteAction" = "Delete";
 "actions.cancelAction" = "રદ કરો";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Back";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "Accept";
 "alerts.incomingCallButtonIgnore" = "Ignore";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Initializing…";
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "રદ થયેલ છે";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
 "dataTransfer.readableStatusCancel" = "રદ કરો";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
 "notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
 "notifications.newFile" = "New file";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Refuse";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "રદ થયેલ છે";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Accept";
 "dataTransfer.readableStatusCancel" = "રદ કરો";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Send";

@@ -28,6 +28,9 @@
 "global.save" = "Lagre";
 "global.resend" = "Send igjen";
 "global.preview" = "Forhåndsvisning";
+"global.accept" = "Aksepter";
+"global.block" = "Blokker";
+"global.refuse" = "Avslå";
 
 // Scan
 "scan.badQrCode" = "Ugyldig QR kode";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hei\nVil du bli med i samtalen?";
 "conversation.notContact" = "\%s\ står ikke i kontaktlisten.";
 "conversation.sendRequest" = "Send vedkommende en kontaktforespørsel for å kunne snakke sammen.";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Du har takket ja til samtaleforespørselen.";
 "conversation.synchronizationMessage" = "Vi venter på \%s\ tilkoblinger for å synkronisere samtalen.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Få vite mer";
 
 //Actions
-"actions.blockAction" = "Blokker";
 "actions.deleteAction" = "Slett";
 "actions.cancelAction" = "Avbryt";
 "actions.clearAction" = "Slett";
 "actions.backAction" = "Tilbake";
 "actions.doneAction" = "Ferdig";
 "alerts.incomingCallAllertTitle" = "Innkommende anrop fra";
-"alerts.incomingCallButtonAccept" = "Aksepter";
 "alerts.incomingCallButtonIgnore" = "Ignorer";
 "actions.startAudioCall" = "Lydsamtale";
 "actions.startVideoCall" = "Videosamtale";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Starter…";
 "dataTransfer.readableStatusError" = "Feil";
 "dataTransfer.readableStatusAwaiting" = "Venter…";
-"dataTransfer.readableStatusRefuse" = "Avslå";
 "dataTransfer.readableStatusOngoing" = "Overfører";
 "dataTransfer.readableStatusCanceled" = "Avbrutt";
 "dataTransfer.sendingFailed" = "Sending feilet";
 "dataTransfer.readableStatusSuccess" = "Fullført";
-"dataTransfer.readableStatusAccept" = "Aksepter";
 "dataTransfer.readableStatusCancel" = "Avbryt";
 
 //Notifications
 "notifications.incomingCall" = "Innkommende anrop";
 "notifications.missedCall" = "Tapt anrop";
-"notifications.acceptCall" = "AKSEPTER";
-"notifications.refuseCall" = "AVVIS";
 "notifications.newFile" = "Ny fil";
 "notifications.locationSharingStarted" = "Innkommende deling av posisjon startet";
 "notifications.locationSharingStopped" = "Innkommende posisjonsdeling stoppet";
 "dataTransfer.readableStatusAwaiting" = "Venter…";
-"dataTransfer.readableStatusRefuse" = "Avslå";
 "dataTransfer.readableStatusOngoing" = "Overfører";
 "dataTransfer.readableStatusCanceled" = "Avbrutt";
 "dataTransfer.readableStatusSuccess" = "Fullført";
-"dataTransfer.readableStatusAccept" = "Aksepter";
 "dataTransfer.readableStatusCancel" = "Avbryt";
 "dataTransfer.infoMessage" = "Trykk for å starte opptak";
 "dataTransfer.sendMessage" = "Send";

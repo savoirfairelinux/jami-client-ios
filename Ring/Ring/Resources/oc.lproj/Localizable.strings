@@ -28,6 +28,9 @@
 "global.save" = "Save";
 "global.resend" = "Resend";
 "global.preview" = "Preview";
+"global.accept" = "Acceptar";
+"global.block" = "Blocar";
+"global.refuse" = "Refusar";
 
 // Scan
 "scan.badQrCode" = "Marrit QR còdi";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
 //Actions
-"actions.blockAction" = "Blocar";
 "actions.deleteAction" = "Suprimir";
 "actions.cancelAction" = "anullar";
 "actions.clearAction" = "Escafar";
 "actions.backAction" = "Tornar";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Sonada de";
-"alerts.incomingCallButtonAccept" = "Acceptar";
 "alerts.incomingCallButtonIgnore" = "Ignorar";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Aviada…";
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "En espèra…";
-"dataTransfer.readableStatusRefuse" = "Refusar";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "Fracàs del mandadís";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Acceptar";
 "dataTransfer.readableStatusCancel" = "anullar";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
 "notifications.missedCall" = "Sonada mancada";
-"notifications.acceptCall" = "ACCEPTAR";
-"notifications.refuseCall" = "REFUSAR";
 "notifications.newFile" = "Fichièr novèl";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "En espèra…";
-"dataTransfer.readableStatusRefuse" = "Refusar";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Acceptar";
 "dataTransfer.readableStatusCancel" = "anullar";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Enviar";

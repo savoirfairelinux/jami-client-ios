@@ -28,6 +28,9 @@
 "global.save" = "Spremi";
 "global.resend" = "Resend";
 "global.preview" = "Preview";
+"global.accept" = "Prihvati";
+"global.block" = "Blokiraj";
+"global.refuse" = "Odbij";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
 //Actions
-"actions.blockAction" = "Blokiraj";
 "actions.deleteAction" = "Izbriši";
 "actions.cancelAction" = "Otkaži";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "Natrag";
 "actions.doneAction" = "Učinjeno";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "Prihvati";
 "alerts.incomingCallButtonIgnore" = "Ignoriraj";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Initializing…";
 "dataTransfer.readableStatusError" = "Greška";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Odbij";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Otkazano";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Prihvati";
 "dataTransfer.readableStatusCancel" = "Otkaži";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
 "notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
 "notifications.newFile" = "New file";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "Odbij";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Otkazano";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Prihvati";
 "dataTransfer.readableStatusCancel" = "Otkaži";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Pošalji";

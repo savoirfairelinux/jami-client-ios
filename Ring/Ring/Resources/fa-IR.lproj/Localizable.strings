@@ -28,6 +28,9 @@
 "global.save" = "ذخیره";
 "global.resend" = "ارسال مجدد";
 "global.preview" = "پیش‌نمایش";
+"global.accept" = "پذیرش";
+"global.block" = "مسدود";
+"global.refuse" = "Refuse";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "درود،\nمی‌خواهید به گفت‌وگو بپیوندید؟";
 "conversation.notContact" = "\%s\ در سیاههٔ آشنایانتان نیست.";
 "conversation.sendRequest" = "برای او درخواست ارتباط بفرستید تا بتواند با هم تبادل کنید";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "درخواست گفت‌وگو را پذیرفته‌اید.";
 "conversation.synchronizationMessage" = "ما منتظر اتصال \%s\ برای همگام‌سازی گفتگو هستیم.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "اطلاعات بیشتر";
 
 //Actions
-"actions.blockAction" = "مسدود";
 "actions.deleteAction" = "حذف";
 "actions.cancelAction" = "لغو";
 "actions.clearAction" = "پاک‌سازی";
 "actions.backAction" = "بازگشت";
 "actions.doneAction" = "انجام شد";
 "alerts.incomingCallAllertTitle" = "تماس دریافتی از";
-"alerts.incomingCallButtonAccept" = "پذیرش";
 "alerts.incomingCallButtonIgnore" = "رد";
 "actions.startAudioCall" = "تماس صوتی";
 "actions.startVideoCall" = "تماس تصویری";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "آغازِ فرایند...";
 "dataTransfer.readableStatusError" = "خطا";
 "dataTransfer.readableStatusAwaiting" = "در انتظار...";
-"dataTransfer.readableStatusRefuse" = "رد کردن";
 "dataTransfer.readableStatusOngoing" = "در حال انتقال";
 "dataTransfer.readableStatusCanceled" = "لغو شده";
 "dataTransfer.sendingFailed" = "ارسال موفق نبود";
 "dataTransfer.readableStatusSuccess" = "کامل شد";
-"dataTransfer.readableStatusAccept" = "پذیرش";
 "dataTransfer.readableStatusCancel" = "لغو";
 
 //Notifications
 "notifications.incomingCall" = "تماس ورودی";
 "notifications.missedCall" = "تماس از‌دست‌رفته";
-"notifications.acceptCall" = "پذیرفتن";
-"notifications.refuseCall" = "رد کردن";
 "notifications.newFile" = "فایل جدید";
 "notifications.locationSharingStarted" = "اشتراک مکان ورودی شروع شد";
 "notifications.locationSharingStopped" = "اشتراک مکان ورودی متوقف شد";
 "dataTransfer.readableStatusAwaiting" = "در انتظار...";
-"dataTransfer.readableStatusRefuse" = "رد کردن";
 "dataTransfer.readableStatusOngoing" = "در حال انتقال";
 "dataTransfer.readableStatusCanceled" = "لغو شده";
 "dataTransfer.readableStatusSuccess" = "کامل شد";
-"dataTransfer.readableStatusAccept" = "پذیرش";
 "dataTransfer.readableStatusCancel" = "لغو";
 "dataTransfer.infoMessage" = "برای شروع ضبط فشار دهید";
 "dataTransfer.sendMessage" = "ارسال";

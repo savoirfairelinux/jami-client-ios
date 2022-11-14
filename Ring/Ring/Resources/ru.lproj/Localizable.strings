@@ -28,6 +28,9 @@
 "global.save" = "Сохранить";
 "global.resend" = "Отправить повторно";
 "global.preview" = "Предпросмотр";
+"global.accept" = "Принять";
+"global.block" = "Заблокировать";
+"global.refuse" = "Отказать";
 
 // Scan
 "scan.badQrCode" = "Некорректный QR-код";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Привет,\nВы хотите присоединиться к разговору?";
 "conversation.notContact" = "\%s\ нет в вашем списке контактов.";
 "conversation.sendRequest" = "Отправьте ему/ей запрос контакта, чтобы иметь возможность совместного обмена";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Вы приняли запрос на беседу.";
 "conversation.synchronizationMessage" = "Мы ждем \%s\ подключения для синхронизации разговора.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Узнать больше";
 
 //Actions
-"actions.blockAction" = "Заблокировать";
 "actions.deleteAction" = "Удалить";
 "actions.cancelAction" = "Отмена";
 "actions.clearAction" = "Очистить";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
 "alerts.incomingCallAllertTitle" = "Входящий вызов от";
-"alerts.incomingCallButtonAccept" = "Принять";
 "alerts.incomingCallButtonIgnore" = "Игнорировать";
 "actions.startAudioCall" = "Голосовой звонок";
 "actions.startVideoCall" = "Видео звонок";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Инициализация…";
 "dataTransfer.readableStatusError" = "Ошибка";
 "dataTransfer.readableStatusAwaiting" = "Ожидание…";
-"dataTransfer.readableStatusRefuse" = "Отказать";
 "dataTransfer.readableStatusOngoing" = "Передача…";
 "dataTransfer.readableStatusCanceled" = "Отменено";
 "dataTransfer.sendingFailed" = "Не удалось отправить";
 "dataTransfer.readableStatusSuccess" = "Завершено";
-"dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";
 
 //Notifications
 "notifications.incomingCall" = "Входящий вызов";
 "notifications.missedCall" = "Пропущенный вызов";
-"notifications.acceptCall" = "ПРИНЯТЬ";
-"notifications.refuseCall" = "ОТКАЗАТЬ";
 "notifications.newFile" = "Новый файл";
 "notifications.locationSharingStarted" = "Начался обмен местоположениями";
 "notifications.locationSharingStopped" = "Входящий обмен местоположением остановился";
 "dataTransfer.readableStatusAwaiting" = "Ожидание…";
-"dataTransfer.readableStatusRefuse" = "Отказать";
 "dataTransfer.readableStatusOngoing" = "Передача…";
 "dataTransfer.readableStatusCanceled" = "Отменено";
 "dataTransfer.readableStatusSuccess" = "Завершено";
-"dataTransfer.readableStatusAccept" = "Принять";
 "dataTransfer.readableStatusCancel" = "Отмена";
 "dataTransfer.infoMessage" = "Нажмите, чтобы начать запись";
 "dataTransfer.sendMessage" = "Отправить";

@@ -28,6 +28,9 @@
 "global.save" = "Sauvegarder";
 "global.resend" = "Renvoyer";
 "global.preview" = "Prévisualisation";
+"global.accept" = "Accepter";
+"global.block" = "Bloquer";
+"global.refuse" = "Refuser";
 
 // Scan
 "scan.badQrCode" = "Code QR incorrect";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Bonjour,\nSouhaitez-vous rejoindre la conversation ?";
 "conversation.notContact" = "\%s\ ne fait pas partie de votre liste de contact.";
 "conversation.sendRequest" = "Envoyer lui une demande de contact afin de pouvoir discuter ensemble";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Vous avez accepté la demande de conversation";
 "conversation.synchronizationMessage" = "Nous attendons que \%s\ se connecte pour synchroniser la conversation.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "En savoir plus";
 
 //Actions
-"actions.blockAction" = "Bloquer";
 "actions.deleteAction" = "Supprimer";
 "actions.cancelAction" = "Annuler";
 "actions.clearAction" = "Effacer";
 "actions.backAction" = "Retour";
 "actions.doneAction" = "Effectué";
 "alerts.incomingCallAllertTitle" = "Appel entrant de";
-"alerts.incomingCallButtonAccept" = "Accepter";
 "alerts.incomingCallButtonIgnore" = "Ignorer";
 "actions.startAudioCall" = "Appel audio";
 "actions.startVideoCall" = "Appel vidéo";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Initialisation ...";
 "dataTransfer.readableStatusError" = "Erreur";
 "dataTransfer.readableStatusAwaiting" = "En attente ...";
-"dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transfert en cours";
 "dataTransfer.readableStatusCanceled" = "Annulé";
 "dataTransfer.sendingFailed" = "Échec de l'envoi";
 "dataTransfer.readableStatusSuccess" = "Terminé";
-"dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuler";
 
 //Notifications
 "notifications.incomingCall" = "Appel entrant";
 "notifications.missedCall" = "Appel manqué";
-"notifications.acceptCall" = "ACCEPTER";
-"notifications.refuseCall" = "REFUSER";
 "notifications.newFile" = "Nouveau fichier";
 "notifications.locationSharingStarted" = "Le partage de position entrant a démarré";
 "notifications.locationSharingStopped" = "Le partage de position entrant s'est terminé";
 "dataTransfer.readableStatusAwaiting" = "En attente ...";
-"dataTransfer.readableStatusRefuse" = "Refuser";
 "dataTransfer.readableStatusOngoing" = "Transfert en cours";
 "dataTransfer.readableStatusCanceled" = "Annulé";
 "dataTransfer.readableStatusSuccess" = "Terminé";
-"dataTransfer.readableStatusAccept" = "Accepter";
 "dataTransfer.readableStatusCancel" = "Annuler";
 "dataTransfer.infoMessage" = "Appuyer pour démarrer l'enregistrement";
 "dataTransfer.sendMessage" = "Envoyer";

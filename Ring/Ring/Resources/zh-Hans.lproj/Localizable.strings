@@ -28,6 +28,9 @@
 "global.save" = "儲存";
 "global.resend" = "重新傳送";
 "global.preview" = "預覽";
+"global.accept" = "接聽";
+"global.block" = "阻擋";
+"global.refuse" = "拒絕";
 
 // Scan
 "scan.badQrCode" = "不正確的 QR code";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "您好，\n您想要加入對話嗎？";
 "conversation.notContact" = "\%s\ 不在您的聯絡人清單中。";
 "conversation.sendRequest" = "向他／她傳送聯絡人請求，如此才能一起交流";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "您已接受對話請求。";
 "conversation.synchronizationMessage" = "我們正在等待 \%s\ 連線以同步對話。";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "詳細資訊";
 
 //Actions
-"actions.blockAction" = "阻擋";
 "actions.deleteAction" = "刪除";
 "actions.cancelAction" = "取消";
 "actions.clearAction" = "清除";
 "actions.backAction" = "前一個";
 "actions.doneAction" = "完成";
 "alerts.incomingCallAllertTitle" = "來電從";
-"alerts.incomingCallButtonAccept" = "接聽";
 "alerts.incomingCallButtonIgnore" = "忽略";
 "actions.startAudioCall" = "音訊通話";
 "actions.startVideoCall" = "視訊通話";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "正在初始化……";
 "dataTransfer.readableStatusError" = "錯誤";
 "dataTransfer.readableStatusAwaiting" = "擱置中……";
-"dataTransfer.readableStatusRefuse" = "拒絕";
 "dataTransfer.readableStatusOngoing" = "正在傳輸";
 "dataTransfer.readableStatusCanceled" = "已取消";
 "dataTransfer.sendingFailed" = "傳送失敗";
 "dataTransfer.readableStatusSuccess" = "完成";
-"dataTransfer.readableStatusAccept" = "接聽";
 "dataTransfer.readableStatusCancel" = "取消";
 
 //Notifications
 "notifications.incomingCall" = "來電";
 "notifications.missedCall" = "漏接的通話";
-"notifications.acceptCall" = "接聽";
-"notifications.refuseCall" = "拒接";
 "notifications.newFile" = "新檔案";
 "notifications.locationSharingStarted" = "傳來的位置分享已開始";
 "notifications.locationSharingStopped" = "傳來的位置分享已停止";
 "dataTransfer.readableStatusAwaiting" = "擱置中……";
-"dataTransfer.readableStatusRefuse" = "拒絕";
 "dataTransfer.readableStatusOngoing" = "正在傳輸";
 "dataTransfer.readableStatusCanceled" = "已取消";
 "dataTransfer.readableStatusSuccess" = "完成";
-"dataTransfer.readableStatusAccept" = "接聽";
 "dataTransfer.readableStatusCancel" = "取消";
 "dataTransfer.infoMessage" = "按下以開始錄製";
 "dataTransfer.sendMessage" = "傳送";

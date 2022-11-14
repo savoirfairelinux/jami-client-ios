@@ -28,6 +28,9 @@
 "global.save" = "Uložiť";
 "global.resend" = "Resend";
 "global.preview" = "Náhľad";
+"global.accept" = "Prijať";
+"global.block" = "Blokovať";
+"global.refuse" = "Odmietnuť";
 
 // Scan
 "scan.badQrCode" = "Zlý QR kód";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Zistiť viac";
 
 //Actions
-"actions.blockAction" = "Blokovať";
 "actions.deleteAction" = "Vymazať";
 "actions.cancelAction" = "Zrušiť";
 "actions.clearAction" = "Vyčistiť";
 "actions.backAction" = "Späť";
 "actions.doneAction" = "Hotovo";
 "alerts.incomingCallAllertTitle" = "Prichádzajúci hovor od";
-"alerts.incomingCallButtonAccept" = "Prijať";
 "alerts.incomingCallButtonIgnore" = "Ignorovať";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Inicializácia...";
 "dataTransfer.readableStatusError" = "Chyba";
 "dataTransfer.readableStatusAwaiting" = "Čaká sa...";
-"dataTransfer.readableStatusRefuse" = "Odmietnuť";
 "dataTransfer.readableStatusOngoing" = "Prenáša sa";
 "dataTransfer.readableStatusCanceled" = "Zrušené";
 "dataTransfer.sendingFailed" = "Odoslanie zlyhalo";
 "dataTransfer.readableStatusSuccess" = "Dokončiť";
-"dataTransfer.readableStatusAccept" = "Prijať";
 "dataTransfer.readableStatusCancel" = "Zrušiť";
 
 //Notifications
 "notifications.incomingCall" = "Prichádzajúci hovor";
 "notifications.missedCall" = "Zmeškaný hovor";
-"notifications.acceptCall" = "PRIJAŤ";
-"notifications.refuseCall" = "ODMIETNUŤ";
 "notifications.newFile" = "Nový súbor";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Čaká sa...";
-"dataTransfer.readableStatusRefuse" = "Odmietnuť";
 "dataTransfer.readableStatusOngoing" = "Prenáša sa";
 "dataTransfer.readableStatusCanceled" = "Zrušené";
 "dataTransfer.readableStatusSuccess" = "Dokončiť";
-"dataTransfer.readableStatusAccept" = "Prijať";
 "dataTransfer.readableStatusCancel" = "Zrušiť";
 "dataTransfer.infoMessage" = "Kliknite pre začatie nahrávania";
 "dataTransfer.sendMessage" = "Poslať";

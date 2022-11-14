@@ -28,6 +28,9 @@
 "global.save" = "Spara";
 "global.resend" = "Skicka igen";
 "global.preview" = "Förhandsvisa";
+"global.accept" = "Acceptera";
+"global.block" = "Blockera";
+"global.refuse" = "Neka";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hej! \nVill du gå med i konversationen? ";
 "conversation.notContact" = "\%s\ finns inte i din kontaktlista";
 "conversation.sendRequest" = "Skicka en kontaktförfrågan för att kunna ha ett utbyte ";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Du har accepterat konversationsförfrågan.";
 "conversation.synchronizationMessage" = "Vi väntar på att \1%s\ ansluter och synkroniserar konversationen ";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Läs mer";
 
 //Actions
-"actions.blockAction" = "Blockera";
 "actions.deleteAction" = "Ta bort";
 "actions.cancelAction" = "Avbryt";
 "actions.clearAction" = "Ta bort";
 "actions.backAction" = "Tillbaka";
 "actions.doneAction" = "Klar";
 "alerts.incomingCallAllertTitle" = "Inkommande samtal från";
-"alerts.incomingCallButtonAccept" = "Acceptera";
 "alerts.incomingCallButtonIgnore" = "Ignorera";
 "actions.startAudioCall" = "Röstsamtal";
 "actions.startVideoCall" = "Videosamtal";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Startar...";
 "dataTransfer.readableStatusError" = "Fel";
 "dataTransfer.readableStatusAwaiting" = "Väntar...";
-"dataTransfer.readableStatusRefuse" = "Neka";
 "dataTransfer.readableStatusOngoing" = "Överför";
 "dataTransfer.readableStatusCanceled" = "Avbruten";
 "dataTransfer.sendingFailed" = "Misslyckades att skicka";
 "dataTransfer.readableStatusSuccess" = "Slutförd";
-"dataTransfer.readableStatusAccept" = "Acceptera";
 "dataTransfer.readableStatusCancel" = "Avbryt";
 
 //Notifications
 "notifications.incomingCall" = "Inkommande samtal";
 "notifications.missedCall" = "Missat samtal";
-"notifications.acceptCall" = "ACCEPTERA";
-"notifications.refuseCall" = "NEKA";
 "notifications.newFile" = "Ny fil";
 "notifications.locationSharingStarted" = "Inkommande platsdelning startad";
 "notifications.locationSharingStopped" = "Inkommande platsdelning avslutad";
 "dataTransfer.readableStatusAwaiting" = "Väntar...";
-"dataTransfer.readableStatusRefuse" = "Neka";
 "dataTransfer.readableStatusOngoing" = "Överför";
 "dataTransfer.readableStatusCanceled" = "Avbruten";
 "dataTransfer.readableStatusSuccess" = "Slutförd";
-"dataTransfer.readableStatusAccept" = "Acceptera";
 "dataTransfer.readableStatusCancel" = "Avbryt";
 "dataTransfer.infoMessage" = "Tryck för att starta inspelning";
 "dataTransfer.sendMessage" = "Skicka";

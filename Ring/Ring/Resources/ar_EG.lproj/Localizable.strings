@@ -28,6 +28,9 @@
 "global.save" = "سجل";
 "global.resend" = "Resend";
 "global.preview" = "معاينة";
+"global.accept" = "Accept";
+"global.block" = "Block";
+"global.refuse" = "Refuse";
 
 // Scan
 "scan.badQrCode" = "رمز QR غير صالح";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
 //Actions
-"actions.blockAction" = "حظر";
 "actions.deleteAction" = "حذف";
 "actions.cancelAction" = "إلغاء الأمر";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "السابق";
 "actions.doneAction" = "منجز";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "اقبل";
 "alerts.incomingCallButtonIgnore" = "تجاهل";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Initializing…";
 "dataTransfer.readableStatusError" = "خطأ";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "أرفض";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "تم الإلغاء";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "اقبل";
 "dataTransfer.readableStatusCancel" = "إلغاء الأمر";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
 "notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
 "notifications.newFile" = "New file";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "أرفض";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "تم الإلغاء";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "اقبل";
 "dataTransfer.readableStatusCancel" = "إلغاء الأمر";
 "dataTransfer.infoMessage" = "اضغط لبدء التسجيل";
 "dataTransfer.sendMessage" = "إرسال";

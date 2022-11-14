@@ -28,6 +28,9 @@
 "global.save" = "Įrašyti";
 "global.resend" = "Resend";
 "global.preview" = "Peržiūra";
+"global.accept" = "Priimti";
+"global.block" = "Užblokuoti";
+"global.refuse" = "Atmesti";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Sužinoti daugiau";
 
 //Actions
-"actions.blockAction" = "Užblokuoti";
 "actions.deleteAction" = "Ištrinti";
 "actions.cancelAction" = "Atsisakyti";
 "actions.clearAction" = "Išvalyti";
 "actions.backAction" = "Atgal";
 "actions.doneAction" = "Atlikta";
 "alerts.incomingCallAllertTitle" = "Gaunamasis skambutis nuo ";
-"alerts.incomingCallButtonAccept" = "Priimti";
 "alerts.incomingCallButtonIgnore" = "Nepaisyti";
 "actions.startAudioCall" = "Garso skambutis";
 "actions.startVideoCall" = "Vaizdo skambutis";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Inicijuojama…";
 "dataTransfer.readableStatusError" = "Klaida";
 "dataTransfer.readableStatusAwaiting" = "Laukiama…";
-"dataTransfer.readableStatusRefuse" = "Atmesti";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Atsisakyta";
 "dataTransfer.sendingFailed" = "Nepavyko išsiųsti";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Priimti";
 "dataTransfer.readableStatusCancel" = "Atsisakyti";
 
 //Notifications
 "notifications.incomingCall" = "Gaunamasis skambutis";
 "notifications.missedCall" = "Praleistas skambutis";
-"notifications.acceptCall" = "ATSILIEPTI";
-"notifications.refuseCall" = "ATMESTI";
 "notifications.newFile" = "Naujas failas";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Laukiama…";
-"dataTransfer.readableStatusRefuse" = "Atmesti";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "Atsisakyta";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "Priimti";
 "dataTransfer.readableStatusCancel" = "Atsisakyti";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Siųsti";

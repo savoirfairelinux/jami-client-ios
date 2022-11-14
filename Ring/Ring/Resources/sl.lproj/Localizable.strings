@@ -28,6 +28,9 @@
 "global.save" = "Shrani";
 "global.resend" = "Ponovno pošlji";
 "global.preview" = "Predogled";
+"global.accept" = "Sprejmi";
+"global.block" = "Blokiraj";
+"global.refuse" = "Zavrni";
 
 // Scan
 "scan.badQrCode" = "Napačna QR-koda";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Pozdravljeni, \nse želite pridružiti pogovoru?";
 "conversation.notContact" = "\%s\ ni na seznamu vaših stikov.";
 "conversation.sendRequest" = "Pošljite ji/mu zahtevo za stik, da si bosta lahko medsebojno izmenjevala.";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Sprejeli ste zahtevo za pogovor.";
 "conversation.synchronizationMessage" = "Čakamo, da se \%s\ poveže, da sinhroniziramo pogovor.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Več o tem";
 
 //Actions
-"actions.blockAction" = "Blokiraj";
 "actions.deleteAction" = "Izbriši";
 "actions.cancelAction" = "Prekliči";
 "actions.clearAction" = "Počisti";
 "actions.backAction" = "Nazaj";
 "actions.doneAction" = "Opravljeno";
 "alerts.incomingCallAllertTitle" = "Dohodni klic od";
-"alerts.incomingCallButtonAccept" = "Sprejmi";
 "alerts.incomingCallButtonIgnore" = "Prezri";
 "actions.startAudioCall" = "Zvočni klic";
 "actions.startVideoCall" = "Videoklic";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Vzpostavljanje ...";
 "dataTransfer.readableStatusError" = "Napaka";
 "dataTransfer.readableStatusAwaiting" = "Na čakanju ...";
-"dataTransfer.readableStatusRefuse" = "Zavrni";
 "dataTransfer.readableStatusOngoing" = "Prenos";
 "dataTransfer.readableStatusCanceled" = "Preklicano";
 "dataTransfer.sendingFailed" = "Neuspešno pošiljanje";
 "dataTransfer.readableStatusSuccess" = "Dokončano";
-"dataTransfer.readableStatusAccept" = "Sprejmi";
 "dataTransfer.readableStatusCancel" = "Prekliči";
 
 //Notifications
 "notifications.incomingCall" = "Dohodni klic";
 "notifications.missedCall" = "Zgrešen klic";
-"notifications.acceptCall" = "SPREJEMI";
-"notifications.refuseCall" = "ZAVRNI";
 "notifications.newFile" = "Nova datoteka";
 "notifications.locationSharingStarted" = "Dohodno deljenje lokacije se je začelo";
 "notifications.locationSharingStopped" = "Dohodno deljenje lokacije je bilo ustavljeno";
 "dataTransfer.readableStatusAwaiting" = "Na čakanju ...";
-"dataTransfer.readableStatusRefuse" = "Zavrni";
 "dataTransfer.readableStatusOngoing" = "Prenos";
 "dataTransfer.readableStatusCanceled" = "Preklicano";
 "dataTransfer.readableStatusSuccess" = "Dokončano";
-"dataTransfer.readableStatusAccept" = "Sprejmi";
 "dataTransfer.readableStatusCancel" = "Prekliči";
 "dataTransfer.infoMessage" = "Pritisnite za začetek snemanja";
 "dataTransfer.sendMessage" = "Pošlji";

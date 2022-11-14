@@ -28,6 +28,9 @@
 "global.save" = "Simpan";
 "global.resend" = "Kirim ulang";
 "global.preview" = "Cuplikan";
+"global.accept" = "Terima";
+"global.block" = "Blokir";
+"global.refuse" = "Tolak";
 
 // Scan
 "scan.badQrCode" = "Kode QR yang buruk";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Halo, \nApakah Anda ingin bergabung dalam percakapan?";
 "conversation.notContact" = "\%s\ tidak ada dalam daftar kontak Anda.";
 "conversation.sendRequest" = "Kirimkan permintaan kontak kepadanya agar Anda bisa saling bertukar pikiran.";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Anda telah menerima permintaan percakapan.";
 "conversation.synchronizationMessage" = "Kami menunggu %s terhubung untuk menyinkronkan percakapan.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Pelajari lebih lanjut";
 
 //Actions
-"actions.blockAction" = "Blokir";
 "actions.deleteAction" = "Hapus";
 "actions.cancelAction" = "Batal";
 "actions.clearAction" = "Bersihkan";
 "actions.backAction" = "Kembali";
 "actions.doneAction" = "Selesai";
 "alerts.incomingCallAllertTitle" = "Panggilan masuk dari";
-"alerts.incomingCallButtonAccept" = "Terima";
 "alerts.incomingCallButtonIgnore" = "Abaikan";
 "actions.startAudioCall" = "Panggilan suara";
 "actions.startVideoCall" = "Panggilan video";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Memulai...";
 "dataTransfer.readableStatusError" = "Galat";
 "dataTransfer.readableStatusAwaiting" = "Tertunda...";
-"dataTransfer.readableStatusRefuse" = "Tolak";
 "dataTransfer.readableStatusOngoing" = "Mengirimkan";
 "dataTransfer.readableStatusCanceled" = "Dibatalkan";
 "dataTransfer.sendingFailed" = "Gagal mengirim";
 "dataTransfer.readableStatusSuccess" = "Selesai";
-"dataTransfer.readableStatusAccept" = "Terima";
 "dataTransfer.readableStatusCancel" = "Batal";
 
 //Notifications
 "notifications.incomingCall" = "Panggilan masuk";
 "notifications.missedCall" = "Panggilan tak terjawab";
-"notifications.acceptCall" = "TERIMA";
-"notifications.refuseCall" = "TOLAK";
 "notifications.newFile" = "File baru";
 "notifications.locationSharingStarted" = "Berbagi lokasi masuk dimulai";
 "notifications.locationSharingStopped" = "Berbagi lokasi masuk dihentikan";
 "dataTransfer.readableStatusAwaiting" = "Tertunda...";
-"dataTransfer.readableStatusRefuse" = "Tolak";
 "dataTransfer.readableStatusOngoing" = "Mengirimkan";
 "dataTransfer.readableStatusCanceled" = "Dibatalkan";
 "dataTransfer.readableStatusSuccess" = "Selesai";
-"dataTransfer.readableStatusAccept" = "Terima";
 "dataTransfer.readableStatusCancel" = "Batal";
 "dataTransfer.infoMessage" = "Tekan untuk mulai merekam";
 "dataTransfer.sendMessage" = "Kirim";

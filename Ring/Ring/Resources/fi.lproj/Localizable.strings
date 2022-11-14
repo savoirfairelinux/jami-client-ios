@@ -28,6 +28,9 @@
 "global.save" = "Tallenna";
 "global.resend" = "Uudelleen";
 "global.preview" = "Esikatselu";
+"global.accept" = "Hyväksy";
+"global.block" = "Estä";
+"global.refuse" = "Refuse";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hei,\nHaluatko liittyä keskusteluun?";
 "conversation.notContact" = "\%s\ ei ole yhteystiedoissasi.";
 "conversation.sendRequest" = "Lähetä hänelle yhteydenottopyyntö, jotta hän voi vaihtaa tietoja.";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Olet hyväksynyt keskustelupyynnön.";
 "conversation.synchronizationMessage" = "Odotamme, että \%s\ tahdistaa keskustelun.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Lue lisää";
 
 //Actions
-"actions.blockAction" = "Estä";
 "actions.deleteAction" = "Poista";
 "actions.cancelAction" = "Peruuta";
 "actions.clearAction" = "Tyhjennä";
 "actions.backAction" = "Takaisin";
 "actions.doneAction" = "Valmis";
 "alerts.incomingCallAllertTitle" = "Saapuva puhelu";
-"alerts.incomingCallButtonAccept" = "Hyväksy";
 "alerts.incomingCallButtonIgnore" = "Sivuuta";
 "actions.startAudioCall" = "Äänipuhelu";
 "actions.startVideoCall" = "Videopuhelu";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Valmistellaan...";
 "dataTransfer.readableStatusError" = "Virhe";
 "dataTransfer.readableStatusAwaiting" = "Odottaa...";
-"dataTransfer.readableStatusRefuse" = "Kieltäydy";
 "dataTransfer.readableStatusOngoing" = "Lähettää";
 "dataTransfer.readableStatusCanceled" = "Peruttu";
 "dataTransfer.sendingFailed" = "Lähetys epäonnistui";
 "dataTransfer.readableStatusSuccess" = "Valmis";
-"dataTransfer.readableStatusAccept" = "Hyväksy";
 "dataTransfer.readableStatusCancel" = "Peruuta";
 
 //Notifications
 "notifications.incomingCall" = "Saapuva puhelu";
 "notifications.missedCall" = "Vastaamaton puhelu";
-"notifications.acceptCall" = "HYVÄKSY";
-"notifications.refuseCall" = "KIELTÄYDY";
 "notifications.newFile" = "Uusi tiedosto";
 "notifications.locationSharingStarted" = "Saapuvan sijainnin jakaminen alkoi";
 "notifications.locationSharingStopped" = "Saapuvan sijainnin jakaminen loppui";
 "dataTransfer.readableStatusAwaiting" = "Odottaa...";
-"dataTransfer.readableStatusRefuse" = "Kieltäydy";
 "dataTransfer.readableStatusOngoing" = "Lähettää";
 "dataTransfer.readableStatusCanceled" = "Peruttu";
 "dataTransfer.readableStatusSuccess" = "Valmis";
-"dataTransfer.readableStatusAccept" = "Hyväksy";
 "dataTransfer.readableStatusCancel" = "Peruuta";
 "dataTransfer.infoMessage" = "Aloita tallennus painamalla";
 "dataTransfer.sendMessage" = "Lähetä";

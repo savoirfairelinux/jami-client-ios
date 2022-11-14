@@ -28,6 +28,9 @@
 "global.save" = "Uložit";
 "global.resend" = "Znovu odeslat";
 "global.preview" = "Náhled";
+"global.accept" = "Accept";
+"global.block" = "Block";
+"global.refuse" = "Refuse";
 
 // Scan
 "scan.badQrCode" = "Špatný kód QR";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Dobrý den,\nChcete se připojit ke konverzaci?";
 "conversation.notContact" = "\%s\ není ve vašich kontaktech.";
 "conversation.sendRequest" = "Pošlete mu/jí žádost o kontakt, abyste si mohli společně vyměňovat.";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Přijali jste žádost o konverzaci.";
 "conversation.synchronizationMessage" = "Čekáme, až se \%s\ připojí, aby mohlo dokjít k synchronizaci konverzace.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Naučit se více";
 
 //Actions
-"actions.blockAction" = "Blokovat";
 "actions.deleteAction" = "Odstranit";
 "actions.cancelAction" = "Zrušit";
 "actions.clearAction" = "Vyprázdnit";
 "actions.backAction" = "Zpět";
 "actions.doneAction" = "Hotovo";
 "alerts.incomingCallAllertTitle" = "Příchozí hovor od";
-"alerts.incomingCallButtonAccept" = "Přijmout";
 "alerts.incomingCallButtonIgnore" = "Přehlížet";
 "actions.startAudioCall" = "Audio hovor";
 "actions.startVideoCall" = "Video hovor";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Inicializuje se…";
 "dataTransfer.readableStatusError" = "Chyba";
 "dataTransfer.readableStatusAwaiting" = "Čeká na vyřízení…";
-"dataTransfer.readableStatusRefuse" = "Odmítnout";
 "dataTransfer.readableStatusOngoing" = "Přenáší se";
 "dataTransfer.readableStatusCanceled" = "Zrušeno";
 "dataTransfer.sendingFailed" = "Odeslání selhalo";
 "dataTransfer.readableStatusSuccess" = "Dokončeno";
-"dataTransfer.readableStatusAccept" = "Přijmout";
 "dataTransfer.readableStatusCancel" = "Zrušit";
 
 //Notifications
 "notifications.incomingCall" = "Příchozí hovor";
 "notifications.missedCall" = "Zmeškaný hovor";
-"notifications.acceptCall" = "PŘIJMOUT";
-"notifications.refuseCall" = "ODMÍTNOUT";
 "notifications.newFile" = "Nový soubor";
 "notifications.locationSharingStarted" = "Začalo příchozí sdílení polohy.";
 "notifications.locationSharingStopped" = "Přestalo příchozí sdílení polohy.";
 "dataTransfer.readableStatusAwaiting" = "Čeká na vyřízení…";
-"dataTransfer.readableStatusRefuse" = "Odmítnout";
 "dataTransfer.readableStatusOngoing" = "Přenáší se";
 "dataTransfer.readableStatusCanceled" = "Zrušeno";
 "dataTransfer.readableStatusSuccess" = "Dokončeno";
-"dataTransfer.readableStatusAccept" = "Přijmout";
 "dataTransfer.readableStatusCancel" = "Zrušit";
 "dataTransfer.infoMessage" = "Stiskněte pro začátek nahrávání.";
 "dataTransfer.sendMessage" = "Odeslat";

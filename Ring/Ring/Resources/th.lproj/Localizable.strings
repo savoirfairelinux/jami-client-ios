@@ -28,6 +28,9 @@
 "global.save" = "Save";
 "global.resend" = "Resend";
 "global.preview" = "ดูตัวอย่าง";
+"global.accept" = "ยอมรับ";
+"global.block" = "ปิดกั้น";
+"global.refuse" = "ปฏิเสธ";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
 //Actions
-"actions.blockAction" = "ปิดกั้น";
 "actions.deleteAction" = "ลบ";
 "actions.cancelAction" = "ยกเลิก";
 "actions.clearAction" = "ชัดเจน";
 "actions.backAction" = "กลับ";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "ยอมรับ";
 "alerts.incomingCallButtonIgnore" = "Ignore";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Initializing…";
 "dataTransfer.readableStatusError" = "ข้อผิดพลาด";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "ปฏิเสธ";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "ยกเลิกแล้ว";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "ยอมรับ";
 "dataTransfer.readableStatusCancel" = "ยกเลิก";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
 "notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
 "notifications.newFile" = "New file";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "ปฏิเสธ";
 "dataTransfer.readableStatusOngoing" = "Transferring";
 "dataTransfer.readableStatusCanceled" = "ยกเลิกแล้ว";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusAccept" = "ยอมรับ";
 "dataTransfer.readableStatusCancel" = "ยกเลิก";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "ส่ง";

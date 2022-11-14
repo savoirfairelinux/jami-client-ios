@@ -28,6 +28,9 @@
 "global.save" = "Mentés";
 "global.resend" = "Újraküldés";
 "global.preview" = "Előnézet";
+"global.accept" = "Elfogadás";
+"global.block" = "Letiltás";
+"global.refuse" = "Elutasítás";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Üdv!\nSzeretne csatlakozni a beszélgetéshez?";
 "conversation.notContact" = "A(z) \%s\ nem szerepel a kapcsolatlistában.";
 "conversation.sendRequest" = "Küldjön neki kapcsolatfelvételi kérelmet, hogy együtt képes legyenek megosztani";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Elfogadta a beszélgetési kérelmet.";
 "conversation.synchronizationMessage" = "Várjuk, hogy a(z) \%s\ csatlakozzon a beszélgetés összehangolásához.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Tudjon meg többet";
 
 //Actions
-"actions.blockAction" = "Letiltás";
 "actions.deleteAction" = "Törlés";
 "actions.cancelAction" = "Mégse";
 "actions.clearAction" = "Törlés";
 "actions.backAction" = "Vissza";
 "actions.doneAction" = "Kész";
 "alerts.incomingCallAllertTitle" = "Bejövő hívás -tól/-től";
-"alerts.incomingCallButtonAccept" = "Elfogadás";
 "alerts.incomingCallButtonIgnore" = "Figyelmen kívül hagy";
 "actions.startAudioCall" = "Hanghívás";
 "actions.startVideoCall" = "Videohívás";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Előkészítés…";
 "dataTransfer.readableStatusError" = "Hiba";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
-"dataTransfer.readableStatusRefuse" = "Elutasítás";
 "dataTransfer.readableStatusOngoing" = "Fájlküldés";
 "dataTransfer.readableStatusCanceled" = "Megszakítva";
 "dataTransfer.sendingFailed" = "Nem sikerült elküldeni";
 "dataTransfer.readableStatusSuccess" = "Kész";
-"dataTransfer.readableStatusAccept" = "Elfogadás";
 "dataTransfer.readableStatusCancel" = "Mégse";
 
 //Notifications
 "notifications.incomingCall" = "Bejövő hívás";
 "notifications.missedCall" = "Nem fogadott hívás";
-"notifications.acceptCall" = "ELFOGADÁS";
-"notifications.refuseCall" = "ELUTASÍTÁS";
 "notifications.newFile" = "Új fájl";
 "notifications.locationSharingStarted" = "Bejövő tartózkodási hely megosztása elindítva";
 "notifications.locationSharingStopped" = "Bejövő tartózkodási hely megosztása leállítva";
 "dataTransfer.readableStatusAwaiting" = "Függőben levő…";
-"dataTransfer.readableStatusRefuse" = "Elutasítás";
 "dataTransfer.readableStatusOngoing" = "Fájlküldés";
 "dataTransfer.readableStatusCanceled" = "Megszakítva";
 "dataTransfer.readableStatusSuccess" = "Kész";
-"dataTransfer.readableStatusAccept" = "Elfogadás";
 "dataTransfer.readableStatusCancel" = "Mégse";
 "dataTransfer.infoMessage" = "Nyomja meg ezt a gombot a felvétel elindításához";
 "dataTransfer.sendMessage" = "Küldés";

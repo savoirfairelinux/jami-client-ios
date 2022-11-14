@@ -28,6 +28,9 @@
 "global.save" = "Kaydet";
 "global.resend" = "Yeniden gönder";
 "global.preview" = "Önizle";
+"global.accept" = "Kabul et";
+"global.block" = "Engelleme";
+"global.refuse" = "Geri Çevir";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Merhaba,\nKonuşmaya katılmak ister misin?";
 "conversation.notContact" = "\%s\ kişi listenizde yok.";
 "conversation.sendRequest" = "Birlikte iletişim kurmak için ona bir kişi isteği gönderin";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Görüşme isteğini kabul ettiniz.";
 "conversation.synchronizationMessage" = "Sohbeti senkronize etmek için \%s\ bağlanmasını bekliyoruz.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Daha çok  öğren";
 
 //Actions
-"actions.blockAction" = "Engelleme";
 "actions.deleteAction" = "Sil";
 "actions.cancelAction" = "İptal";
 "actions.clearAction" = "Temizle";
 "actions.backAction" = "Geri";
 "actions.doneAction" = "Tamam";
 "alerts.incomingCallAllertTitle" = "Adlı kişiden gelen çağrı";
-"alerts.incomingCallButtonAccept" = "Kabul et";
 "alerts.incomingCallButtonIgnore" = "Göz ardı et";
 "actions.startAudioCall" = "Sesli Arama";
 "actions.startVideoCall" = "Görüntülü Arama";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Başlatılıyor...";
 "dataTransfer.readableStatusError" = "Hata";
 "dataTransfer.readableStatusAwaiting" = "Bekliyor...";
-"dataTransfer.readableStatusRefuse" = "Geri Çevir";
 "dataTransfer.readableStatusOngoing" = "Aktarıyor";
 "dataTransfer.readableStatusCanceled" = "İptal edildi";
 "dataTransfer.sendingFailed" = "Gönderme başarısız";
 "dataTransfer.readableStatusSuccess" = "Tam";
-"dataTransfer.readableStatusAccept" = "Kabul et";
 "dataTransfer.readableStatusCancel" = "İptal";
 
 //Notifications
 "notifications.incomingCall" = "Gelen Arama";
 "notifications.missedCall" = "Yanıtsız Arama";
-"notifications.acceptCall" = "KABUL ET";
-"notifications.refuseCall" = "REDDET";
 "notifications.newFile" = "Yeni dosya";
 "notifications.locationSharingStarted" = "Gelen konum paylaşımı başlatıldı";
 "notifications.locationSharingStopped" = "Gelen konum paylaşımı durduruldu";
 "dataTransfer.readableStatusAwaiting" = "Bekliyor...";
-"dataTransfer.readableStatusRefuse" = "Geri Çevir";
 "dataTransfer.readableStatusOngoing" = "Aktarıyor";
 "dataTransfer.readableStatusCanceled" = "İptal edildi";
 "dataTransfer.readableStatusSuccess" = "Tam";
-"dataTransfer.readableStatusAccept" = "Kabul et";
 "dataTransfer.readableStatusCancel" = "İptal";
 "dataTransfer.infoMessage" = "Kaydı başlatmak için basın";
 "dataTransfer.sendMessage" = "Gönder";

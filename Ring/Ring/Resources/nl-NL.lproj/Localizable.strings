@@ -28,6 +28,9 @@
 "global.save" = "Opslaan";
 "global.resend" = "Resend";
 "global.preview" = "Voorbeeld";
+"global.accept" = "Aanvaarden";
+"global.block" = "Blokkeren";
+"global.refuse" = "Afwijzen";
 
 // Scan
 "scan.badQrCode" = "Verkeerde QR-code";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
 "conversation.notContact" = "\%s\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for \%s\ connects to synchronize the conversation.";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Meer informatie";
 
 //Actions
-"actions.blockAction" = "Blokkeren";
 "actions.deleteAction" = "Verwijderen";
 "actions.cancelAction" = "Annuleren";
 "actions.clearAction" = "Wissen";
 "actions.backAction" = "Terug";
 "actions.doneAction" = "Klaar";
 "alerts.incomingCallAllertTitle" = "Inkomende oproep van";
-"alerts.incomingCallButtonAccept" = "Aanvaarden";
 "alerts.incomingCallButtonIgnore" = "Negeren";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "Bezig met initialiseren…";
 "dataTransfer.readableStatusError" = "Fout";
 "dataTransfer.readableStatusAwaiting" = "In afwachting…";
-"dataTransfer.readableStatusRefuse" = "Afwijzen";
 "dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
 "dataTransfer.readableStatusCanceled" = "Geannuleerd";
 "dataTransfer.sendingFailed" = "Versturen mislukt";
 "dataTransfer.readableStatusSuccess" = "Voltooid";
-"dataTransfer.readableStatusAccept" = "Aanvaarden";
 "dataTransfer.readableStatusCancel" = "Annuleren";
 
 //Notifications
 "notifications.incomingCall" = "Inkomende oproep";
 "notifications.missedCall" = "Gemiste oproep";
-"notifications.acceptCall" = "AANVAARDEN";
-"notifications.refuseCall" = "AFWIJZEN";
 "notifications.newFile" = "Nieuw bestand";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "In afwachting…";
-"dataTransfer.readableStatusRefuse" = "Afwijzen";
 "dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
 "dataTransfer.readableStatusCanceled" = "Geannuleerd";
 "dataTransfer.readableStatusSuccess" = "Voltooid";
-"dataTransfer.readableStatusAccept" = "Aanvaarden";
 "dataTransfer.readableStatusCancel" = "Annuleren";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Versturen";

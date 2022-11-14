@@ -28,6 +28,9 @@
 "global.save" = "保存";
 "global.resend" = "Resend";
 "global.preview" = "プレビュー";
+"global.accept" = "受け入れ";
+"global.block" = "ブロック";
+"global.refuse" = "拒否";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";
@@ -62,6 +65,7 @@
 "conversation.requestMessage" = "こんにちは\n会話に参加しませんか？";
 "conversation.notContact" = "%sは連絡先に未登録です ";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "会話への参加が許可されました";
 "conversation.synchronizationMessage" = "会話を同期するために%sの接続を待っています";
 
@@ -168,14 +172,12 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "詳細情報";
 
 //Actions
-"actions.blockAction" = "ブロック";
 "actions.deleteAction" = "削除";
 "actions.cancelAction" = "キャンセル";
 "actions.clearAction" = "クリア";
 "actions.backAction" = "戻る";
 "actions.doneAction" = "完了";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonAccept" = "受け入れ";
 "alerts.incomingCallButtonIgnore" = "無視";
 "actions.startAudioCall" = "  音声通話";
 "actions.startVideoCall" = "  ビデオ通話";
@@ -303,28 +305,22 @@
 "dataTransfer.readableStatusCreated" = "初期化中…";
 "dataTransfer.readableStatusError" = "エラー";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "拒否";
 "dataTransfer.readableStatusOngoing" = "転送中";
 "dataTransfer.readableStatusCanceled" = "キャンセルしました";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "完了";
-"dataTransfer.readableStatusAccept" = "受け入れ";
 "dataTransfer.readableStatusCancel" = "キャンセル";
 
 //Notifications
 "notifications.incomingCall" = "着信";
 "notifications.missedCall" = "Missed Call";
-"notifications.acceptCall" = "ACCEPT";
-"notifications.refuseCall" = "REFUSE";
 "notifications.newFile" = "新しいファイル";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusRefuse" = "拒否";
 "dataTransfer.readableStatusOngoing" = "転送中";
 "dataTransfer.readableStatusCanceled" = "キャンセルしました";
 "dataTransfer.readableStatusSuccess" = "完了";
-"dataTransfer.readableStatusAccept" = "受け入れ";
 "dataTransfer.readableStatusCancel" = "キャンセル";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "送信";
