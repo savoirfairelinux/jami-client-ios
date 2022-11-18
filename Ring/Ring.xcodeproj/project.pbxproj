@@ -328,6 +328,7 @@
 		26BB4389267017D400019CF6 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26BB4388267017D400019CF6 /* Utils.mm */; };
 		26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438A2670191E00019CF6 /* AdapterDelegate.swift */; };
 		26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438C267019FC00019CF6 /* AdapterService.swift */; };
+		26C6A2602927EC4E007786B8 /* SwarmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */; };
 		26CE5AB82523968500DE6F90 /* ConferenceActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */; };
 		26D08AB12693474300E37574 /* InvitationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26D08AB02693474300E37574 /* InvitationViewController.storyboard */; };
 		26D08AB52693480200E37574 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08AB42693480200E37574 /* InvitationViewController.swift */; };
@@ -873,6 +874,7 @@
 		26BB4388267017D400019CF6 /* Utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
 		26BB438A2670191E00019CF6 /* AdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterDelegate.swift; sourceTree = "<group>"; };
 		26BB438C267019FC00019CF6 /* AdapterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterService.swift; sourceTree = "<group>"; };
+		26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfo.swift; sourceTree = "<group>"; };
 		26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationPrefixHeader.pch; sourceTree = "<group>"; };
 		26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceActionsMenu.swift; sourceTree = "<group>"; };
 		26D08AB02693474300E37574 /* InvitationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InvitationViewController.storyboard; sourceTree = "<group>"; };
@@ -1770,6 +1772,7 @@
 			children = (
 				0EDE34C61F868E1200FFA15C /* EditProfileViewController.swift */,
 				0EDE34C81F8691BB00FFA15C /* EditProfileViewModel.swift */,
+				26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -2634,6 +2637,7 @@
 				1A2D18E51F29197100B2C785 /* MessageAccessoryView.swift in Sources */,
 				0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */,
 				0E6F545822403B0300ECC3CE /* CreateSipAccountViewController.swift in Sources */,
+				26C6A2602927EC4E007786B8 /* SwarmInfo.swift in Sources */,
 				0EE1B54E1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift in Sources */,
 				268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */,
 				0E0FF1AA1FC3843E003898C2 /* DBContainer.swift in Sources */,
