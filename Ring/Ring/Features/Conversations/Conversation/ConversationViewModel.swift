@@ -107,6 +107,7 @@ class ConversationViewModel: Stateable, ViewModel {
     var myOwnProfileImageData: Data?
 
     var contactPresence = BehaviorRelay<Bool>(value: false)
+    var swarmInfo: SwarmInfo?
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -143,6 +144,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var conversation: BehaviorRelay<ConversationModel>! {
         didSet {
+            self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value)
             self.subscribeUnreadMessages()
             self.subscribeLocationServiceLocationReceived()
             self.subscribeProfileServiceMyPhoto()

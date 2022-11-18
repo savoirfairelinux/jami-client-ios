@@ -149,6 +149,15 @@ extension String {
         return Data(self.utf8).base64EncodedString()
     }
 
+    func toImage() -> UIImage? {
+        guard !self.isEmpty, let data = self.toData() else { return nil }
+        return UIImage(data: data)
+    }
+
+    func toData() -> Data? {
+        return NSData(base64Encoded: self, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data
+    }
+
     func filterOutHost() -> String {
         return self.replacingOccurrences(of: "@ring.dht", with: "")
     }
