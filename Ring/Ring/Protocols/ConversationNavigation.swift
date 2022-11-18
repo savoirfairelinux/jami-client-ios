@@ -149,13 +149,26 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             return
         }
         self.presentingVC[VCType.contact.rawValue] = true
-        let contactViewController = ContactViewController.instantiate(with: self.injectionBag)
-        contactViewController.viewModel.conversation = conversation
-        self.present(viewController: contactViewController,
-                     withStyle: .show,
-                     withAnimation: true,
-                     withStateable: contactViewController.viewModel,
-                     lockWhilePresenting: VCType.contact.rawValue)
+        let isGroupConversation = conversation.getParticipants().count > 1
+        //        let isGroupConversation = conversation.type == .invitesOnly
+
+        if isGroupConversation {
+            let swarmInfoViewController = SwarmInfoViewController.instantiate(with: self.injectionBag)
+            swarmInfoViewController.viewModel.conversation = conversation
+            self.present(viewController: swarmInfoViewController,
+                         withStyle: .show,
+                         withAnimation: true,
+                         withStateable: swarmInfoViewController.viewModel,
+                         lockWhilePresenting: VCType.contact.rawValue)
+        } else {
+            let contactViewController = ContactViewController.instantiate(with: self.injectionBag)
+            contactViewController.viewModel.conversation = conversation
+            self.present(viewController: contactViewController,
+                         withStyle: .show,
+                         withAnimation: true,
+                         withStateable: contactViewController.viewModel,
+                         lockWhilePresenting: VCType.contact.rawValue)
+        }
     }
 
     func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {

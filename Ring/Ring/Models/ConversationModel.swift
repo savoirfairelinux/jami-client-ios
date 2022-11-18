@@ -60,11 +60,13 @@ enum ParticipantRole: Int {
     case banned
 }
 
-class ConversationParticipant: Equatable {
+class ConversationParticipant: Equatable, Hashable {
     var jamiId: String = ""
     var role: ParticipantRole = .member
     var lastDisplayed: String = ""
     var isLocal: Bool = false
+    
+    
 
     init (info: [String: String], isLocal: Bool) {
         self.isLocal = isLocal
@@ -88,6 +90,10 @@ class ConversationParticipant: Equatable {
     static func == (lhs: ConversationParticipant, rhs: ConversationParticipant) -> Bool {
         return lhs.jamiId == rhs.jamiId
     }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(jamiId)
+    }
 }
 
 class ConversationModel: Equatable {
@@ -101,7 +107,12 @@ class ConversationModel: Equatable {
     var needsSyncing = false
     var unorderedInteractions = [String]()/// array ofr interaction id with child not currently present in messages
     let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
+    var title: String = ""
+    var avatar: String = ""
+    var description: String = ""
     let disposeBag = DisposeBag()
+    
+    
 
     convenience init(withParticipantUri participantUri: JamiURI, accountId: String) {
         self.init()
@@ -137,6 +148,15 @@ class ConversationModel: Equatable {
            let typeInt = Int(type),
            let conversationType = ConversationType(rawValue: typeInt) {
             self.type = conversationType
+        }
+        if let avatar = info[ConversationAttributes.avatar.rawValue] {
+            self.avatar = avatar
+        }
+        if let title = info[ConversationAttributes.title.rawValue] {
+            self.title = title
+        }
+        if let description = info[ConversationAttributes.description.rawValue] {
+            self.description = description
         }
         self.subscribeUnreadMessages()
     }
