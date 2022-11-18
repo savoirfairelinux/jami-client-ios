@@ -22,7 +22,8 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class ParticipantInfo {
+class ParticipantInfo: Equatable, Hashable {
+    
     var jamiId: String
     var role: ParticipantRole
     var avatar: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
@@ -48,18 +49,30 @@ class ParticipantInfo {
             }
             .disposed(by: self.disposeBag)
     }
+    
+    static func == (lhs: ParticipantInfo, rhs: ParticipantInfo) -> Bool {
+        return rhs.jamiId == lhs.jamiId
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(jamiId)
+    }
 }
 
 class SwarmInfo {
     var avatar: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     var title = BehaviorRelay(value: "")
+    var type = BehaviorRelay(value: ConversationType.oneToOne)
     var description = BehaviorRelay(value: "")
     var participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
     var participantsAvatars: BehaviorRelay<[UIImage]> = BehaviorRelay(value: [UIImage()])
 
     var avatarHeight: CGFloat = 40
     var avatarSpacing: CGFloat = 2
-
+    var id: String {
+        return conversation?.id ?? ""
+    }
+    
     lazy var finalTitle: Observable<String> = {
         return Observable
             .combineLatest(self.title.asObservable().startWith(self.title.value),
@@ -70,11 +83,12 @@ class SwarmInfo {
             }
     }()
 
-    lazy var finalAvatar: Observable<UIImage?> = {
+    lazy var finalAvatar: Observable<UIImage> = {
         return Observable
             .combineLatest(self.avatar.asObservable().startWith(self.avatar.value),
-                           self.participantsAvatars.asObservable().startWith(self.participantsAvatars.value)) { [weak self] (avatar: UIImage?, avatars: [UIImage]) -> UIImage? in
-                guard let self = self else { return nil }
+                           self.participantsAvatars.asObservable().startWith(self.participantsAvatars.value)) { [weak self] (avatar: UIImage?, avatars: [UIImage]) -> UIImage in
+                guard let self = self else { return UIImage(asset: Asset.icContactPicture)!
+                    .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)) }
                 if let avatar = avatar { return avatar }
                 return self.buildAvatarFrom(avatars: avatars)
             }
@@ -87,17 +101,20 @@ class SwarmInfo {
     private let profileService: ProfilesService
     private let conversationsService: ConversationsService
     private let contactsService: ContactsService
+    private let accountsService: AccountsService
     private let accountId: String
     private var conversation: ConversationModel?
     private let disposeBag = DisposeBag()
     private var tempBag = DisposeBag()
 
     // to get info during swarm creation
-    init(injectionBag: InjectionBag, accountId: String) {
+    init(injectionBag: InjectionBag, accountId: String, avatarHeight: CGFloat = 40) {
+        self.avatarHeight = avatarHeight
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
         self.conversationsService = injectionBag.conversationsService
         self.contactsService = injectionBag.contactsService
+        self.accountsService = injectionBag.accountService
         self.accountId = accountId
         self.participants
             .subscribe {[weak self] _ in
@@ -109,8 +126,8 @@ class SwarmInfo {
     }
 
     // to get info for existing swarm
-    convenience init(injectionBag: InjectionBag, conversation: ConversationModel) {
-        self.init(injectionBag: injectionBag, accountId: conversation.accountId)
+    convenience init(injectionBag: InjectionBag, conversation: ConversationModel, avatarHeight: CGFloat = 40) {
+        self.init(injectionBag: injectionBag, accountId: conversation.accountId, avatarHeight: avatarHeight)
         self.conversation = conversation
         self.subscribeConversationEvents()
         self.updateInfo()
@@ -183,9 +200,9 @@ class SwarmInfo {
             .disposed(by: self.tempBag)
         // filter out default avatars
         let avatarsObservable = participants.value
-            .filter({ participantInfo in
-                participantInfo.jamiId != participantInfo.name.value
-            })
+//            .filter({ participantInfo in
+//                participantInfo.jamiId == participantInfo.name.value
+//            })
             .map({ participantInfo in
                 return participantInfo.avatar.share().asObservable()
             })
@@ -235,7 +252,7 @@ class SwarmInfo {
         if let avatar = info[ConversationAttributes.avatar.rawValue] {
             self.avatar.accept(avatar.createImage())
         }
-        if let title = info[ConversationAttributes.title.rawValue], !title.isEmpty {
+        if let title = info[ConversationAttributes.title.rawValue] {
             self.title.accept(title)
         }
         if let description = info[ConversationAttributes.description.rawValue] {
@@ -247,9 +264,12 @@ class SwarmInfo {
         guard let conversation = self.conversation else { return }
         var participantsInfo = [ParticipantInfo]()
         self.insertAndSortParticipants(participants: participantsInfo)
-        conversation.getParticipants().forEach { participant in
-            if let participantInfo = createParticipant(jamiId: participant.jamiId, role: participant.role) {
-                participantsInfo.append(participantInfo)
+        if let uri = accountsService.getAccount(fromAccountId: accountId)?.jamiId {
+            let memberList = conversationsService.getSwarmMembers(conversationId: conversation.id, accountId: accountId, accountURI: uri)
+            memberList.forEach { participant in
+                if let participantInfo = createParticipant(jamiId: participant.jamiId, role: participant.role) {
+                    participantsInfo.append(participantInfo)
+                }
             }
         }
         if participantsInfo.isEmpty { return }
@@ -318,18 +338,40 @@ class SwarmInfo {
     private func insertAndSortParticipants(participants: [ParticipantInfo]) {
         var currentValue = self.participants.value
         currentValue.append(contentsOf: participants)
-        self.participants.accept(currentValue.sorted(by: { $0.name.value > $1.name.value }))
+        currentValue = currentValue.filter({[.invited, .member, .admin].contains($0.role)})
+        currentValue.sort { participant1, participant2 in
+            if participant1.role == participant2.role {
+                return participant1.name.value > participant2.name.value
+            } else {
+                switch participant1.role {
+                case .admin:
+                    return true
+                case .member:
+                    if participant2.role == .admin {
+                        return false
+                    } else {
+                        return true
+                    }
+                default:
+                    return false
+                }
+            }
+        }
+
+        self.participants.accept(currentValue)
     }
 
-    private func buildAvatarFrom(avatars: [UIImage]) -> UIImage? {
-        let participantsCount = self.participants.value.count
-        if participantsCount == 1 {
-            return self.participants.value.first?.avatar.value
+    private func buildAvatarFrom(avatars: [UIImage]) -> UIImage {
+        switch avatars.count {
+        case 0:
+            return UIImage(asset: Asset.icContactPicture)!
+                .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        case 1 ... 2:
+            return avatars.first ?? UIImage(asset: Asset.icContactPicture)!
+                    .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        default:
+            return UIImage.mergeImages(image1: avatars[0], image2: avatars[1], spacing: avatarSpacing, height: avatarHeight)
         }
-        if avatars.count < 2 {
-            return nil
-        }
-        return UIImage.mergeImages(image1: avatars[0], image2: avatars[1], spacing: avatarSpacing, height: avatarHeight)
     }
 
     private func buildTitleFrom(names: [String]) -> String {
@@ -347,8 +389,10 @@ class SwarmInfo {
         let otherParticipantsCount = participantsCount - numberOfDisplayedNames
         let titleEnd = otherParticipantsCount > 0 ? ", + \(otherParticipantsCount)" : ""
         finalTitle = names[0]
-        for index in 0..<(numberOfDisplayedNames - 1) {
-            finalTitle += " , " + names[index]
+        if numberOfDisplayedNames != 1 {
+            for index in 1...(numberOfDisplayedNames - 1) {
+                finalTitle += " , " + names[index]
+            }
         }
         finalTitle += titleEnd
         return finalTitle
