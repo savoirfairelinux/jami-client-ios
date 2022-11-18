@@ -21,6 +21,7 @@
 import RxSwift
 import RxCocoa
 import SwiftyBeaver
+import CoreLocation
 
 // swiftlint:disable redundant_string_enum_value
 enum SerializableLocationTypes: String {
