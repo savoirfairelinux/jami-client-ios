@@ -29,30 +29,30 @@ import CoreImage
 extension UIImage {
     var circleMasked: UIImage? {
         let newSize = self.size
-
+        
         let minEdge = min(newSize.height, newSize.width)
         let size = CGSize(width: minEdge, height: minEdge)
-
+        
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
-
+        
         self.draw(in: CGRect(origin: CGPoint.zero, size: size), blendMode: .copy, alpha: 1.0)
-
+        
         context.setBlendMode(.copy)
         context.setFillColor(UIColor.clear.cgColor)
-
+        
         let rectPath = UIBezierPath(rect: CGRect(origin: CGPoint.zero, size: size))
         let circlePath = UIBezierPath(ovalIn: CGRect(origin: CGPoint.zero, size: size))
         rectPath.append(circlePath)
         rectPath.usesEvenOddFillRule = true
         rectPath.fill()
-
+        
         let result = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
+        
         return result
     }
-
+    
     func setRoundCorner(radius: CGFloat, offset: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0)
         let bounds = CGRect(origin: .zero, size: self.size)
@@ -68,12 +68,12 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return roundedImage
     }
-
+    
     // convenience function in UIImage extension to resize a given image
     func convert(toSize targetSize: CGSize, scale: CGFloat) -> UIImage {
         let widthRatio  = targetSize.width / size.width
         let heightRatio = targetSize.height / size.height
-
+        
         // Figure out what our orientation is, and use that to form the rectangle
         var newSize: CGSize
         if widthRatio > heightRatio {
@@ -81,7 +81,7 @@ extension UIImage {
         } else {
             newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
         }
-
+        
         // This is the rect that we've calculated out and this is what is actually used below
         let imgRect = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: newSize)
         UIGraphicsBeginImageContextWithOptions(newSize, false, scale)
@@ -90,10 +90,10 @@ extension UIImage {
             return self
         }
         UIGraphicsEndImageContext()
-
+        
         return copied
     }
-
+    
     func convertToData(ofMaxSize maxSize: Int) -> Data? {
         var imageData: Data?
         var fileSize = maxSize + 1
@@ -105,7 +105,7 @@ extension UIImage {
         }
         return imageData
     }
-
+    
     public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
         let rect = CGRect(origin: .zero, size: size)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
@@ -113,11 +113,11 @@ extension UIImage {
         UIRectFill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
+        
         guard let cgImage = image?.cgImage else { return nil }
         self.init(cgImage: cgImage)
     }
-
+    
     func resizeIntoRectangle(of size: CGSize) -> UIImage? {
         if self.size.width < size.width && self.size.height < size.height {
             return self
@@ -127,7 +127,7 @@ extension UIImage {
         }
         var newWidth = size.width
         var newHeight = size.height
-
+        
         let ratio = self.size.width / self.size.height
         if ratio > 1 {
             newHeight = newWidth / ratio
@@ -142,14 +142,14 @@ extension UIImage {
                 newWidth = newHeight * ratio
             }
         }
-
+        
         let newSize = CGSize(width: newWidth, height: newHeight)
         guard let cgImage = self.cgImage else { return self.resizeImageWith(newSize: newSize) }
         let bitsPerComponent = cgImage.bitsPerComponent
         let bytesPerRow = cgImage.bytesPerRow
         guard let colorSpace = cgImage.colorSpace else { return self.resizeImageWith(newSize: newSize) }
         let bitmapInfo = cgImage.bitmapInfo
-
+        
         guard let context = CGContext(data: nil,
                                       width: Int(newWidth),
                                       height: Int(newHeight),
@@ -157,7 +157,7 @@ extension UIImage {
                                       bytesPerRow: bytesPerRow,
                                       space: colorSpace,
                                       bitmapInfo: bitmapInfo.rawValue) else { return self.resizeImageWith(newSize: newSize) }
-
+        
         context.interpolationQuality = .high
         context.draw(cgImage, in: CGRect(origin: .zero, size: CGSize(width: newWidth, height: newHeight)))
         let image = context.makeImage().flatMap { UIImage(cgImage: $0, scale: self.scale, orientation: self.imageOrientation) }
@@ -166,26 +166,26 @@ extension UIImage {
         }
         return self.resizeImageWith(newSize: newSize)
     }
-
+    
     func getNewSize(of size: CGSize) -> CGSize? {
-
+        
         if self.size.height == 0 {
             return nil
         }
         var newWidth = size.width
         var newHeight = size.height
-
+        
         let ratio = self.size.width / self.size.height
         if ratio > 1 {
             newHeight = newWidth / ratio
         } else if ratio < 1, ratio != 0 {
             newWidth = newHeight * ratio
         }
-
+        
         let newSize = CGSize(width: newWidth, height: newHeight)
         return newSize
     }
-
+    
     func resizeImageWith(newSize: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
         draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
@@ -193,7 +193,7 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage
     }
-
+    
     func drawText(text: String, backgroundColor: UIColor, textColor: UIColor, size: CGSize) -> UIImage? {
         // Setups up the font attributes that will be later used to dictate how the text should be drawn
         let textFont = UIFont.systemFont(ofSize: 20, weight: .semibold)
@@ -215,7 +215,7 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
-
+    
     func drawBackground(color: UIColor, size: CGSize) -> UIImage? {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
@@ -225,13 +225,13 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
-
+    
     class func defaultJamiAvatarFor(profileName: String?, account: AccountModel) -> UIImage {
         let image = UIImage(asset: Asset.icContactPicture)!
             .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
         var name: String? = (profileName != nil) ? profileName :
-            !account.registeredName.isEmpty ?
-            account.registeredName : nil
+        !account.registeredName.isEmpty ?
+        account.registeredName : nil
         if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
            let accountName = userNameData[account.id] as? String,
            !accountName.isEmpty {
@@ -249,5 +249,39 @@ extension UIImage {
             }
         }
         return image
+    }
+    
+    class func mergeImages(image1: UIImage, image2: UIImage, spacing: CGFloat = 6, height: CGFloat) -> UIImage {
+        let leftImage = image1.splitImage(keepLeft: true)
+        let rightImage = image2.splitImage(keepLeft: false)
+        
+        let height = max(leftImage.size.height, rightImage.size.height)
+        let width = spacing + leftImage.size.width + rightImage.size.width
+        
+        let size = CGSize(width: width, height: height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        leftImage.draw(in: CGRect(x: 0, y: 0, width: leftImage.size.width, height: height))
+        rightImage.draw(in: CGRect(x: spacing + leftImage.size.width, y: 0, width: rightImage.size.width, height: height))
+        
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
+    func splitImage(keepLeft: Bool) -> UIImage {
+        let imgWidth = self.size.width / 2
+        let imgHeight = self.size.height
+        
+        let left = CGRect(x: 0, y: 0, width: imgWidth, height: imgHeight)
+        let right = CGRect(x: imgWidth, y: 0, width: imgWidth, height: imgHeight)
+        
+        if keepLeft {
+            return UIImage(cgImage: self.cgImage!.cropping(to: left)!)
+        } else {
+            return UIImage(cgImage: self.cgImage!.cropping(to: right)!)
+        }
+        
     }
 }
