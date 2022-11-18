@@ -26,6 +26,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SwiftyBeaver
+import CoreLocation
 
 // swiftlint:disable file_length
 class ConversationViewModel: Stateable, ViewModel {

@@ -119,6 +119,28 @@ class ConversationsService {
         return self.conversations.asObservable()
     }
 
+    func getSwarmInfo(conversationId: String, accountId: String, accountURI: String) -> ConversationModel? {
+        if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
+           let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
+
+            if let syncing = info["syncing"], syncing == "true" {
+                /// request in synchronization
+                return nil
+            }
+            let conversation = ConversationModel(withId: conversationId, accountId: accountId, info: info)
+            conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
+            if let lastDisplayed = conversation.getLastDisplayedMessageForDialog() {
+                conversation.lastDisplayedMessage = (lastDisplayed, Date())
+            }
+            if let lastRead = conversation.getLastReadMessage() {
+                let unreadInteractions = conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: accountURI)
+                conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
+            }
+            return conversation
+        }
+        return nil
+    }
+
     private func addSwarm(conversationId: String, accountId: String, accountURI: String, to conversations: inout [ConversationModel]) {
         if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
            let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
