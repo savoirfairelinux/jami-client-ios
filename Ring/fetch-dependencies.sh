@@ -11,6 +11,6 @@ carthage bootstrap --use-xcframeworks --platform iOS --no-use-binaries --cache-b
 ## DOWNLOAD WHIRLYGLOBEMAPLY DEPENDENCIES ##
 ############################################
 
-cd WhirlyGlobeMaply
-git submodule init
-git submodule update
+#cd WhirlyGlobeMaply
+#git submodule init
+#git submodule update
