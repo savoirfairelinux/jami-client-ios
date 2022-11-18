@@ -349,6 +349,10 @@ class ConversationsService {
         }
     }
 
+    func getConversationInfo(conversationId: String, accountId: String) -> [String: String] {
+        return conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String] ?? [String: String]()
+    }
+
     func saveJamsConversation(for jamiId: String, accountId: String) {
         if self.getConversationForParticipant(jamiId: jamiId, accontId: accountId) != nil { return }
         let contactUri = JamiURI(schema: .ring, infoHach: jamiId)

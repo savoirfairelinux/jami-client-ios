@@ -58,6 +58,7 @@ enum ParticipantRole: Int {
     case admin
     case member
     case banned
+    case unknown
 }
 
 class ConversationParticipant: Equatable {
