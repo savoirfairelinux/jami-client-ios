@@ -24,6 +24,13 @@ import Foundation
 import MobileCoreServices
 
 extension String {
+    func createImage() -> UIImage? {
+        if let data = NSData(base64Encoded: self, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data {
+            return UIImage(data: data)
+        }
+        return nil
+    }
+
     func toBool() -> Bool? {
         switch self.lowercased() {
         case "true", "yes", "1":
