@@ -31,6 +31,21 @@ enum ConversationType: Int {
     case nonSwarm
     case sip
     case jams
+    
+    var stringValue: String {
+        switch self {
+        case .oneToOne:
+            return "Private swarm"
+        case .adminInvitesOnly:
+            return "Admin invites only"
+        case .invitesOnly:
+            return "Private group swarm"
+        case .publicChat:
+            return "Public group swarm"
+        default:
+            return "Others"
+        }
+    }
 }
 
 enum ConversationMemberEvent: Int {
@@ -64,6 +79,21 @@ enum ParticipantRole: Int {
     case member
     case banned
     case unknown
+    
+    var stringValue: String {
+        switch self {
+        case .member:
+            return "member"
+        case .invited:
+            return "invited"
+        case .admin:
+            return "admin"
+        case .banned:
+            return "banned"
+        case .unknown:
+            return "unknown"
+        }
+    }
 }
 
 struct ConversationPreferences {
@@ -80,7 +110,7 @@ struct ConversationPreferences {
     }
 }
 
-class ConversationParticipant: Equatable {
+class ConversationParticipant: Equatable, Hashable {
     var jamiId: String = ""
     var role: ParticipantRole = .member
     var lastDisplayed: String = ""
@@ -107,6 +137,10 @@ class ConversationParticipant: Equatable {
 
     static func == (lhs: ConversationParticipant, rhs: ConversationParticipant) -> Bool {
         return lhs.jamiId == rhs.jamiId
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(jamiId)
     }
 }
 

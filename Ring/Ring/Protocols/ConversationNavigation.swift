@@ -20,6 +20,7 @@
  */
 
 import RxSwift
+import RxRelay
 
 enum ConversationState: State {
     case startCall(contactRingId: String, userName: String)
@@ -149,13 +150,25 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
             return
         }
         self.presentingVC[VCType.contact.rawValue] = true
-        let contactViewController = ContactViewController.instantiate(with: self.injectionBag)
-        contactViewController.viewModel.conversation = conversation
-        self.present(viewController: contactViewController,
-                     withStyle: .show,
-                     withAnimation: true,
-                     withStateable: contactViewController.viewModel,
-                     lockWhilePresenting: VCType.contact.rawValue)
+        let isSwarmConversation = conversation.type != .nonSwarm
+
+        if isSwarmConversation {
+            let swarmInfoViewController = SwarmInfoViewController.instantiate(with: self.injectionBag)
+            swarmInfoViewController.viewModel.conversation = BehaviorRelay(value: conversation)
+            self.present(viewController: swarmInfoViewController,
+                         withStyle: .show,
+                         withAnimation: true,
+                         withStateable: swarmInfoViewController.viewModel,
+                         lockWhilePresenting: VCType.contact.rawValue)
+        } else {
+            let contactViewController = ContactViewController.instantiate(with: self.injectionBag)
+            contactViewController.viewModel.conversation = conversation
+            self.present(viewController: contactViewController,
+                         withStyle: .show,
+                         withAnimation: true,
+                         withStateable: contactViewController.viewModel,
+                         lockWhilePresenting: VCType.contact.rawValue)
+        }
     }
 
     func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
