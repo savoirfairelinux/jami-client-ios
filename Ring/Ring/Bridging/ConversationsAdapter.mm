@@ -133,7 +133,24 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
         if (ConversationsAdapter.messagesDelegate) {
         }
     }));
-   
+
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationProfileUpdated>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> profile) {
+        if (ConversationsAdapter.messagesDelegate) {
+            NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
+            NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
+            NSMutableDictionary* profileDictionary = [Utils mapToDictionnary: profile];
+            [ConversationsAdapter.messagesDelegate conversationProfileUpdatedWithConversationId:convId accountId:account profile:profileDictionary];
+        }
+    }));
+
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationPreferencesUpdated>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> preferences) {
+        if (ConversationsAdapter.messagesDelegate) {
+            NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
+            NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
+            NSMutableDictionary* preferencesDictionary = [Utils mapToDictionnary: preferences];
+            [ConversationsAdapter.messagesDelegate conversationPreferencesUpdatedWithConversationId:convId accountId:account preferences: preferencesDictionary];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 
@@ -187,12 +204,32 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
     return [Utils mapToDictionnary: conversationInfos(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
 }
 
+- (NSMutableDictionary<NSString*,NSString*>*)getConversationPreferencesForAccount:(NSString*)accountId conversationId:(NSString*)conversationId {
+    return [Utils mapToDictionnary: getConversationPreferences(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+}
+
+- (void)updateConversationInfosFor:(NSString*)accountId conversationId:(NSString*)conversationId infos:(NSDictionary<NSString*,NSString*>*)infos {
+    updateConversationInfos(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), [Utils dictionnaryToMap: infos]);
+}
+
+- (void)updateConversationPreferencesFor:(NSString*)accountId conversationId:(NSString*)conversationId prefs:(NSDictionary<NSString*,NSString*>*)prefs {
+    setConversationPreferences(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), [Utils dictionnaryToMap: prefs]);
+}
+
 - (NSArray*)getSwarmConversationsForAccount:(NSString*) accountId {
     return [Utils vectorToArray: getConversations(std::string([accountId UTF8String]))];
 }
 
 - (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId {
     return [Utils vectorOfMapsToArray: getConversationMembers(std::string([accountId UTF8String]), std::string([conversationId UTF8String]))];
+}
+
+- (void)addConversationMemberFor:(NSString*)accountId conversationId:(NSString*)conversationId memberId:(NSString*)memberId {
+    libjami::addConversationMember(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([memberId UTF8String]));
+}
+
+- (void)removeConversationMemberFor:(NSString*)accountId conversationId:(NSString*)conversationId memberId:(NSString*)memberId {
+    libjami::removeConversationMember(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([memberId UTF8String]));
 }
 
 - (void)removeConversation:(NSString*) accountId conversationId:(NSString*) conversationId {
