@@ -28,9 +28,9 @@
 "global.save" = "Savi";
 "global.resend" = "Resend";
 "global.preview" = "Preview";
-"global.accept" = "Accept";
+"global.accept" = "Akcepti";
 "global.block" = "Block";
-"global.refuse" = "Refuse";
+"global.refuse" = "Rifuzi";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

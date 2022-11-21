@@ -65,7 +65,7 @@
 "conversation.requestMessage" = "Vrei să participi la conversație?";
 "conversation.notContact" = "\%s\ nu este în contactele tale.";
 "conversation.sendRequest" = "Trimite-i o cerere de contact pentru a conversa împreună.";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "Trimite o cerere de contact";
 "conversation.synchronizationTitle" = "Ai acceptat invitația la conversație.";
 "conversation.synchronizationMessage" = "Se așteaptă ca \%s\ să se conecteze pentru a sincroniza conversația.";
 

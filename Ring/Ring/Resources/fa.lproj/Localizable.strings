@@ -30,7 +30,7 @@
 "global.preview" = "پیش‌نمایش";
 "global.accept" = "پذیرش";
 "global.block" = "مسدود";
-"global.refuse" = "Refuse";
+"global.refuse" = "رد کردن";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";

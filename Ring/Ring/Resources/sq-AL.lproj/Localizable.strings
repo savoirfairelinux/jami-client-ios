@@ -65,7 +65,7 @@
 "conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
 "conversation.notContact" = "\%s\ s’gjendet te lista e kontakteve tuaja.";
 "conversation.sendRequest" = "Dërgojini një kërkesë kontakti, që të jeni në gjendje të shkëmbeni me njëri-tjetrin";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "Dërgo Kërkesë Kontakti";
 "conversation.synchronizationTitle" = "Keni pranuar kërkesën për bisedë.";
 "conversation.synchronizationMessage" = "Po presim që \%s\ të lidhet, pa të njëkohësojmë bisedën.";
 

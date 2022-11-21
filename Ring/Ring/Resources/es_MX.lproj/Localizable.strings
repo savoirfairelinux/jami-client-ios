@@ -30,7 +30,7 @@
 "global.preview" = "Pevisualizar";
 "global.accept" = "Aceptar";
 "global.block" = "Bloquear";
-"global.refuse" = "Refuse";
+"global.refuse" = "Rechazar";
 
 // Scan
 "scan.badQrCode" = "Código QR erróneo";

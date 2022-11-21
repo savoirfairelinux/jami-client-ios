@@ -28,9 +28,9 @@
 "global.save" = "Gem";
 "global.resend" = "Resend";
 "global.preview" = "Forvisning";
-"global.accept" = "Accept";
-"global.block" = "Block";
-"global.refuse" = "Refuse";
+"global.accept" = "Accepter";
+"global.block" = "Blokér";
+"global.refuse" = "Afvis";
 
 // Scan
 "scan.badQrCode" = "Ugyldigt QR-kode";

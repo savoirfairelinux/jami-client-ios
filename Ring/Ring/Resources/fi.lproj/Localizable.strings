@@ -30,7 +30,7 @@
 "global.preview" = "Esikatselu";
 "global.accept" = "Hyväksy";
 "global.block" = "Estä";
-"global.refuse" = "Refuse";
+"global.refuse" = "Kieltäydy";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";

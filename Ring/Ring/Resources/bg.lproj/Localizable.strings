@@ -28,9 +28,9 @@
 "global.save" = "Запазване";
 "global.resend" = "Resend";
 "global.preview" = "Preview";
-"global.accept" = "Accept";
-"global.block" = "Block";
-"global.refuse" = "Refuse";
+"global.accept" = "Приемане";
+"global.block" = "Блокиране";
+"global.refuse" = "Отказ";
 
 // Scan
 "scan.badQrCode" = "Грешен QR-код";

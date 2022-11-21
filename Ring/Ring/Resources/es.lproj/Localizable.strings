@@ -28,9 +28,9 @@
 "global.save" = "Guardar";
 "global.resend" = "Reenviar";
 "global.preview" = "Previsualización";
-"global.accept" = "Accept";
-"global.block" = "Block";
-"global.refuse" = "Refuse";
+"global.accept" = "Aceptar";
+"global.block" = "Bloquear";
+"global.refuse" = "No aceptar";
 
 // Scan
 "scan.badQrCode" = "Código QR incorrecto";

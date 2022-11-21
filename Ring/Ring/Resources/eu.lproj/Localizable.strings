@@ -30,7 +30,7 @@
 "global.preview" = "Aurrebista";
 "global.accept" = "Onartu";
 "global.block" = "Bloketu";
-"global.refuse" = "Refuse";
+"global.refuse" = "Ukatu";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
