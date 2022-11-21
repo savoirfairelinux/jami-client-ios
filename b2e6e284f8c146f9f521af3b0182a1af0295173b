@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea34962_c85db736",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-11-21T14:30:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dca32f5a_6bb52617",
+      "revId": "b2e6e284f8c146f9f521af3b0182a1af0295173b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6dc4c237_315adaa9",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-02T14:56:21Z",
       "side": 1,
       "message": "observeOn renamed to observe(on:)",
+      "revId": "b2e6e284f8c146f9f521af3b0182a1af0295173b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2091f7d1_6f336558",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-11-21T14:30:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dc4c237_315adaa9",
       "revId": "b2e6e284f8c146f9f521af3b0182a1af0295173b",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "229b079d_493aef8d",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-11-21T14:30:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ef6a090_84b9ecad",
+      "revId": "b2e6e284f8c146f9f521af3b0182a1af0295173b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "215965bb_9ce69beb",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-11-02T14:56:21Z",
       "side": 1,
       "message": "commented code",
+      "revId": "b2e6e284f8c146f9f521af3b0182a1af0295173b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87507f0_b1927993",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-11-21T14:30:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "215965bb_9ce69beb",
       "revId": "b2e6e284f8c146f9f521af3b0182a1af0295173b",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
