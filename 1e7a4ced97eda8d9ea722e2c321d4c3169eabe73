@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91625810_388772c6",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-11-21T15:21:48Z",
+      "side": 1,
+      "message": "it is in line 344 of Localizable English",
+      "parentUuid": "5d73b213_7f38197c",
+      "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53c2de07_212d4f5c",
         "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewModel.swift",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "writtenOn": "2022-11-02T13:56:34Z",
       "side": 1,
       "message": "the value for this key is unclear because it is not files from unknown contact",
+      "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0402fab0_3ab852bf",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-11-21T15:21:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53c2de07_212d4f5c",
       "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -69,6 +105,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7551ae04_7b72e4b9",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-11-21T15:21:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aed0b9a6_b4a6a0ff",
+      "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8607691e_db4524db",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-11-02T13:56:34Z",
       "side": 1,
       "message": "this condition would we wrong when maximum size is 0, because when maximum size is 0 it means unlimited download",
+      "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c0839a9_3b2bac44",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-11-21T15:21:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8607691e_db4524db",
       "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -103,6 +175,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26bf0dd7_886d6d50",
+        "filename": "Ring/Ring/UI/PaddingTextField.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-11-21T15:21:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10f3a0ed_9ddbbc6f",
+      "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81b4b784_ca65a576",
@@ -116,6 +206,24 @@
       "writtenOn": "2022-11-02T13:56:34Z",
       "side": 1,
       "message": "maybe we could use padding as a parameter for initializer, so it could be controlled when PaddingTextField created?",
+      "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff28356_597dd7a1",
+        "filename": "Ring/Ring/UI/PaddingTextField.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-11-21T15:21:48Z",
+      "side": 1,
+      "message": "That is useful for future usage, I added it",
+      "parentUuid": "81b4b784_ca65a576",
       "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
