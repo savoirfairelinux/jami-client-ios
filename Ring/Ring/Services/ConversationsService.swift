@@ -944,6 +944,50 @@ class ConversationsService {
         }
     }
 
+    func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {
+        guard let conversation = self.conversations.value.filter({ conversation in
+            return  conversation.id == conversationId && conversation.accountId == accountId
+        }).first else { return }
+        conversation.updateProfile(profile: profile)
+        let serviceEventType: ServiceEventType = .conversationProfileUpdated
+        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        serviceEvent.addEventInput(.conversationId, value: conversationId)
+        serviceEvent.addEventInput(.accountId, value: accountId)
+        self.responseStream.onNext(serviceEvent)
+    }
+
+    func conversationPreferencesUpdated(conversationId: String, accountId: String, preferences: [String: String]) {
+        guard let conversation = self.conversations.value.filter({ conversation in
+            return  conversation.id == conversationId && conversation.accountId == accountId
+        }).first else { return }
+        conversation.updatePreferences(preferences: preferences)
+        let serviceEventType: ServiceEventType = .conversationPreferencesUpdated
+        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        serviceEvent.addEventInput(.conversationId, value: conversationId)
+        serviceEvent.addEventInput(.accountId, value: accountId)
+        self.responseStream.onNext(serviceEvent)
+    }
+
+    func getConversationPreferences(accountId: String, conversationId: String) -> [String: String]? {
+        return self.conversationsAdapter.getConversationPreferences(forAccount: accountId, conversationId: conversationId) as? [String: String]
+    }
+
+    func updateConversationInfos(accountId: String, conversationId: String, infos: [String: String]) {
+        self.conversationsAdapter.updateConversationInfos(for: accountId, conversationId: conversationId, infos: infos)
+    }
+
+    func updateConversationPrefs(accountId: String, conversationId: String, prefs: [String: String]) {
+        self.conversationsAdapter.updateConversationPreferences(for: accountId, conversationId: conversationId, prefs: prefs)
+    }
+
+    func addConversationMember(accountId: String, conversationId: String, memberId: String) {
+        self.conversationsAdapter.addConversationMember(for: accountId, conversationId: conversationId, memberId: memberId)
+    }
+
+    func removeConversationMember(accountId: String, conversationId: String, memberId: String) {
+        self.conversationsAdapter.removeConversationMember(for: accountId, conversationId: conversationId, memberId: memberId)
+    }
+
     // MARK: typing indicator
 
     func setIsComposingMsg(to peer: String, from account: String, isComposing: Bool) {

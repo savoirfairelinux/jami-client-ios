@@ -35,8 +35,8 @@ class ParticipantInfo {
         self.role = role
         self.name.subscribe { [weak self] name in
             guard let self = self else { return }
-            //when profile does not have an avatar, contact image
-            //should be updated each time when name changed.
+            // when profile does not have an avatar, contact image
+            // should be updated each time when name changed.
             if !self.hasProfileAvatar {
                 self.avatar.accept(UIImage.createContactAvatar(username: name))
             }

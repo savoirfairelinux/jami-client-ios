@@ -53,12 +53,31 @@ enum ConversationAttributes: String {
     case conversationId = "id"
 }
 
+enum ConversationPreferenceAttributes: String {
+    case color = "color"
+    case ignoreNotifications = "ignoreNotifications"
+}
+
 enum ParticipantRole: Int {
     case invited
     case admin
     case member
     case banned
     case unknown
+}
+
+struct ConversationPreferences {
+    var color: String = "jamiMain"
+    var ignoreNotifications: Bool = false
+
+    mutating func update(info: [String: String]) {
+        if let color = info[ConversationPreferenceAttributes.color.rawValue] {
+            self.color = color
+        }
+        if let ignoreNotifications = info[ConversationPreferenceAttributes.ignoreNotifications.rawValue] {
+            self.ignoreNotifications = (ignoreNotifications as NSString).boolValue
+        }
+    }
 }
 
 class ConversationParticipant: Equatable {
@@ -103,6 +122,10 @@ class ConversationModel: Equatable {
     var unorderedInteractions = [String]()/// array ofr interaction id with child not currently present in messages
     let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
     let disposeBag = DisposeBag()
+    var avatar: String = ""
+    var title: String = ""
+    var description: String = ""
+    var preferences = ConversationPreferences()
 
     convenience init(withParticipantUri participantUri: JamiURI, accountId: String) {
         self.init()
@@ -139,7 +162,24 @@ class ConversationModel: Equatable {
            let conversationType = ConversationType(rawValue: typeInt) {
             self.type = conversationType
         }
+        updateProfile(profile: info)
         self.subscribeUnreadMessages()
+    }
+
+    func updateProfile(profile: [String: String]) {
+        if let avatar = profile[ConversationAttributes.avatar.rawValue] {
+            self.avatar = avatar
+        }
+        if let title = profile[ConversationAttributes.title.rawValue] {
+            self.title = title
+        }
+        if let description = profile[ConversationAttributes.description.rawValue] {
+            self.description = description
+        }
+    }
+
+    func updatePreferences(preferences: [String: String]) {
+        self.preferences.update(info: preferences)
     }
 
     static func == (lhs: ConversationModel, rhs: ConversationModel) -> Bool {
