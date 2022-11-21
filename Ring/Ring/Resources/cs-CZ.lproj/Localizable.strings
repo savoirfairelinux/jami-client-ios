@@ -28,9 +28,9 @@
 "global.save" = "Uložit";
 "global.resend" = "Znovu odeslat";
 "global.preview" = "Náhled";
-"global.accept" = "Accept";
-"global.block" = "Block";
-"global.refuse" = "Refuse";
+"global.accept" = "Přijmout";
+"global.block" = "Blokovat";
+"global.refuse" = "Odmítnout";
 
 // Scan
 "scan.badQrCode" = "Špatný kód QR";

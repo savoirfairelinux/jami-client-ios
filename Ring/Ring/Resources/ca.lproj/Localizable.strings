@@ -28,9 +28,9 @@
 "global.save" = "Desa";
 "global.resend" = "Resend";
 "global.preview" = "Previsualitzar";
-"global.accept" = "Accept";
-"global.block" = "Block";
-"global.refuse" = "Refuse";
+"global.accept" = "Accepta";
+"global.block" = "Bloca";
+"global.refuse" = "Rebutja";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

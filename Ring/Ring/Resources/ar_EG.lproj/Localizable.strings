@@ -28,9 +28,9 @@
 "global.save" = "سجل";
 "global.resend" = "Resend";
 "global.preview" = "معاينة";
-"global.accept" = "Accept";
-"global.block" = "Block";
-"global.refuse" = "Refuse";
+"global.accept" = "اقبل";
+"global.block" = "حظر";
+"global.refuse" = "أرفض";
 
 // Scan
 "scan.badQrCode" = "رمز QR غير صالح";

@@ -19,42 +19,42 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Συνομιλίες";
+"global.homeTabBarTitle" = "Conversations";
 "global.meTabBarTitle" = "Account Settings";
-"global.ok" = "Εντάξει";
-"global.close" = "Κλείσιμο";
-"global.share" = "Κοινοποίηση";
+"global.ok" = "Ok";
+"global.close" = "Close";
+"global.share" = "Share";
 "global.forward" = "Forward";
-"global.save" = "Αποθήκευση";
+"global.save" = "Save";
 "global.resend" = "Resend";
-"global.preview" = "Προεπισκόπηση";
-"global.accept" = "Αποδοχή";
-"global.block" = "Μπλοκάρισμα";
-"global.refuse" = "Άρνηση";
+"global.preview" = "Preview";
+"global.accept" = "Aceptar";
+"global.block" = "Bloquear";
+"global.refuse" = "Rechazar";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
 "scan.search" = "Searching…";
 
 // Smartlist
-"smartlist.yesterday" = "Χθες";
+"smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";
-"smartlist.conversations" = "Συνομιλίες";
-"smartlist.searching" = "Αναζήτηση...";
-"smartlist.noResults" = "Χωρίς αποτελέσματα";
+"smartlist.conversations" = "Conversations";
+"smartlist.searching" = "Searching...";
+"smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.searchBar" = "Search for new or existing contact...";
-"smartlist.noNetworkConnectivity" = "Καμία σύνδεση στο δίκτυο";
+"smartlist.noNetworkConnectivity" = "No network connectivity";
 "smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
-"smartlist.accountsTitle" = "Λογαριασμοί";
+"smartlist.accountsTitle" = "Accounts";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Προσκλήσεις";
+"smartlist.invitations" = "Invitations";
 "smartlist.accountSettings" = "Account Settings";
 "smartlist.advancedSettings" = "Advanced Settings";
-"smartlist.aboutJami" = "Σχετικά με το Jami";
+"smartlist.aboutJami" = "About Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -77,73 +77,73 @@
 //Welcome Screen
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Σύνδεση αυτής της συσκευής με ένα λογαριασμό";
-"welcome.createAccount" = "Δημιουργία λογαριασμού Jami";
-"welcome.connectToManager" = "Σύνδεση σε έναν  διακομιστή JAMS";
+"welcome.linkDevice" = "Link this device to an account";
+"welcome.createAccount" = "Create a Jami account";
+"welcome.connectToManager" = "Connect to a JAMS server";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Παράληψη";
-"createProfile.profileCreated" = "Επόμενο";
+"createProfile.skipCreateProfile" = "Skip";
+"createProfile.profileCreated" = "Next";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
-"createProfile.enterNamePlaceholder" = "Εισάγετε όνομα";
+"createProfile.enterNamePlaceholder" = "Enter name";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
 "createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
-"createAccount.enterNewUsernamePlaceholder" = "Όνομα χρήστη";
-"createAccount.newPasswordPlaceholder" = "Συνθηματικό";
-"createAccount.repeatPasswordPlaceholder" = "Επιβεβαίωση κωδικού";
-"createAccount.passwordCharactersNumberError" = "το ελάχιστο 6 χαρακτήρες";
-"createAccount.passwordNotMatchingError" = "τα συνθηματικά δεν ταιριάζουν";
+"createAccount.enterNewUsernamePlaceholder" = "Username";
+"createAccount.newPasswordPlaceholder" = "Password";
+"createAccount.repeatPasswordPlaceholder" = "Confirm password";
+"createAccount.passwordCharactersNumberError" = "6 characters minimum";
+"createAccount.passwordNotMatchingError" = "passwords do not match";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "Μη έγκυρο όνομα χρήστη";
-"createAccount.usernameAlreadyTaken" = "Το όνομα χρήστη ήδη χρησιμοποιείται";
+"createAccount.invalidUsername" = "invalid username";
+"createAccount.usernameAlreadyTaken" = "username already taken";
 "createAccount.usernameValid" = "username is available";
-"createAccount.loading" = "Ανεβαίνει";
-"createAccount.waitCreateAccountTitle" = "Εισαγωγή λογαριασμού";
+"createAccount.loading" = "Loading";
+"createAccount.waitCreateAccountTitle" = "Adding account";
 "createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Ειδοποιήσεις";
+"createAccount.EnableNotifications" = "Notifications";
 "createAccount.Recommended" = "(Recommended)";
-"createAccount.UsernameNotRegisteredTitle" = "Σφάλμα δικτύου";
+"createAccount.UsernameNotRegisteredTitle" = "Network error";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Σύνδεση λογαριασμού";
-"linkToAccount.linkButtonTitle" = "Σύνδεση συσκευής";
-"linkToAccount.passwordPlaceholder" = "Συνθηματικό";
+"linkToAccount.waitLinkToAccountTitle" = "Account linking";
+"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.passwordPlaceholder" = "Password";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Καταχώρηση Συνθηματικού";
-"linkToAccount.pinLabel" = "Εισάγετε PIN";
+"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.pinLabel" = "Enter PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "Συνθηματικό";
-"linkToAccountManager.passwordLabel" = "Καταχώρηση Συνθηματικού";
-"linkToAccountManager.usernamePlaceholder" = "Όνομα χρήστη";
+"linkToAccountManager.passwordPlaceholder" = "Password";
+"linkToAccountManager.passwordLabel" = "Enter Password";
+"linkToAccountManager.usernamePlaceholder" = "Username";
 "linkToAccountManager.usernameLabel" = "Enter Username";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Μη δυνατή η εύρεση λογαριασμού";
+"alerts.accountCannotBeFoundTitle" = "Can't find account";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Ο Λογαριασμός Προστέθηκε";
-"alerts.accountNoNetworkTitle" = "Αδύνατη η σύνδεση στο δύκτιο";
+"alerts.accountAddedTitle" = "Account Added";
+"alerts.accountNoNetworkTitle" = "Can't connect to the network";
 "alerts.accountNoNetworkMessage" = "Could not add account because Jami couldn't connect to the distributed network. Check your device connectivity.";
-"alerts.accountDefaultErrorTitle" = "Άγνωστο σφάλμα";
-"alerts.accountDefaultErrorMessage" = "Ο λογαριασμός δεν μπόρεσε να δημιουργηθεί.";
-"alerts.profileTakePhoto" = "Λήψη φωτογραφίας";
-"alerts.profileUploadPhoto" = "Ανέβασε φωτογραφία";
-"alerts.profileCancelPhoto" = "Ακύρωση";
-"alerts.accountLinkedTitle" = "Σύνδεση λογαριασμού";
+"alerts.accountDefaultErrorTitle" = "Unknown error";
+"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.profileTakePhoto" = "Take photo";
+"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileCancelPhoto" = "Cancel";
+"alerts.accountLinkedTitle" = "Linking account";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "Please close application and try to open it again";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
@@ -167,26 +167,26 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Στοιχεία χάρτη";
+"alerts.mapInformation" = "Map information";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
-"alerts.openStreetMapCopyrightMoreInfo" = "Μάθετε περισσότερα";
+"alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
 //Actions
-"actions.deleteAction" = "Διαγραφή";
-"actions.cancelAction" = "Ακύρωση";
-"actions.clearAction" = "Εκκαθάριση";
-"actions.backAction" = "Πίσω";
+"actions.deleteAction" = "Delete";
+"actions.cancelAction" = "Cancel";
+"actions.clearAction" = "Clear";
+"actions.backAction" = "Back";
 "actions.doneAction" = "Done";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
 "alerts.incomingCallButtonIgnore" = "Ignore";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Τερματισμός κοινοποίησης";
+"actions.stopLocationSharing" = "Stop sharing";
 
 //Calls
-"calls.callItemTitle" = "Κλήση";
-"calls.unknown" = "Άγνωστοι";
+"calls.callItemTitle" = "Call";
+"calls.unknown" = "Unknown";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
@@ -203,23 +203,23 @@
 "calls.lowerHand" = "lower hand";
 
 //Account Page
-"accountPage.devicesListHeader" = "Συσκευές";
-"accountPage.settingsHeader" = "Ρυθμίσεις";
-"accountPage.username" = "Όνομα χρήστη";
+"accountPage.devicesListHeader" = "Devices";
+"accountPage.settingsHeader" = "Settings";
+"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Μπλοκαρισμένες επαφές";
+"accountPage.blockedContacts" = "Blocked contacts";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
-"accountPage.saveProxyAddress" = "Αποθήκευση";
+"accountPage.saveProxyAddress" = "Save";
 "accountPage.proxyPaceholder" = "Proxy address";
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Αφαίρεση συσκευής";
+"accountPage.revokeDeviceTitle" = "Revoke device";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
@@ -230,9 +230,9 @@
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Όνομα";
-"accountPage.linkDeviceTitle" = "Συνδέστε άλλη συσκευή";
-"accountPage.other" = "Άλλα";
+"accountPage.namePlaceholder" = "Name";
+"accountPage.linkDeviceTitle" = "Link another device";
+"accountPage.other" = "Other";
 "accountPage.removeAccountTitle" = "Remove account";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Remove";
@@ -244,10 +244,10 @@
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
-"accountPage.usernameRegisterAction" = "Εγγραφή";
+"accountPage.usernameRegisterAction" = "Register";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
 "accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Αλλαγή κωδικού";
+"accountPage.changePassword" = "Change password";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
 "accountPage.newPasswordPlaceholder" = "Enter new password";
 "accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
@@ -262,36 +262,36 @@
 "accountPage.autoRegistration" = "Auto register after expiration";
 
 //Account
-"account.sipUsername" = "Όνομα Χρήστη";
-"account.sipPassword" = "Συνθηματικό";
+"account.sipUsername" = "User Name";
+"account.sipPassword" = "Password";
 "account.sipServer" = "SIP Server";
-"account.port" = "Θύρα";
-"account.proxyServer" = "Διαμεσολαβητής";
+"account.port" = "Port";
+"account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "Καταχώρηση Συνθηματικού";
+"account.passwordLabel" = "Enter Password";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Συνδεδεμένος";
+"account.statusOnline" = "Online";
 "account.statusOffline" = "Offline";
-"account.statusConnecting" = "Συνδέεται";
-"account.statusUnknown" = "Άγνωστοι";
+"account.statusConnecting" = "Connecting";
+"account.statusUnknown" = "Unknown";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
-"account.me" = "Εγώ";
+"account.me" = "Me";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "Μη αποκλεισμένες επαφές";
+"blockListPage.noBlockedContacts" = "No blocked contacts";
 
 //Link New Device
-"linkDevice.title" = "Σύνδεση νέας συσκευής";
+"linkDevice.title" = "Link a new device";
 "linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "Συνέβη σφάλμα κατά την διάρκεια της εξαγωγής";
-"linkDevice.defaultError" = "Συνέβη σφάλμα κατά την διάρκεια της εξαγωγής";
+"linkDevice.networkError" = "A network error occured during the export";
+"linkDevice.defaultError" = "An error occured during the export";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Επαλήθευση";
+"linkDevice.hudMessage" = "Verifying";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
@@ -303,13 +303,13 @@
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
-"dataTransfer.readableStatusError" = "Σφάλμα";
+"dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Ακυρώθηκε";
+"dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusCancel" = "Ακύρωση";
+"dataTransfer.readableStatusCancel" = "Cancel";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
@@ -319,38 +319,38 @@
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Ακυρώθηκε";
+"dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusCancel" = "Ακύρωση";
+"dataTransfer.readableStatusCancel" = "Cancel";
 "dataTransfer.infoMessage" = "Press to start recording";
-"dataTransfer.sendMessage" = "Αποστολή";
+"dataTransfer.sendMessage" = "Send";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Η επαφή προστέθηκε";
-"generatedMessage.invitationReceived" = "Η πρόσκληση παραλήφθηκε";
+"generatedMessage.contactAdded" = "Contact added";
+"generatedMessage.invitationReceived" = "Invitation received";
 "generatedMessage.invitationAccepted" = "Invitation accepted";
-"generatedMessage.outgoingCall" = "Εξερχόμενη κλήση";
-"generatedMessage.incomingCall" = "Εισερχόμενη κλήση";
-"generatedMessage.missedOutgoingCall" = "Αναπάντητη εξερχόμενη κλήση";
-"generatedMessage.missedIncomingCall" = "Αναπάντητη εισερχόμενη κλήση";
+"generatedMessage.outgoingCall" = "Outgoing call";
+"generatedMessage.incomingCall" = "Incoming call";
+"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
+"generatedMessage.missedIncomingCall" = "Missed incoming call";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 "generatedMessage.contactLeftConversation" = "Contact left conversation";
 
 //General Settings
-"generalSettings.title" = "Προχωρημένες ρυθμίσεις";
+"generalSettings.title" = "Advanced settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 
 //Migrate Account
 "migrateAccount.title" = "Account migration";
 "migrateAccount.migrateButton" = "Migrate Account";
 "migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Εισάγετε τον κωδικό πρόσβασης";
+"migrateAccount.passwordPlaceholder" = "Enter password";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
 "migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Ακύρωση";
+"migrateAccount.cancel" = "Cancel";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 

@@ -65,7 +65,7 @@
 "conversation.requestMessage" = "Ciao, \nVuoi partecipare alla conversazione?";
 "conversation.notContact" = "\%s\ non è nei tuoi contatti.";
 "conversation.sendRequest" = "Mandagli una richiesta di contatto per poter conversare insieme.";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "Invia richiesta di contatto";
 "conversation.synchronizationTitle" = "Hai accettato la richiesta di conversazione.";
 "conversation.synchronizationMessage" = "In attesa che \%s\ si connetta per sincronizzare la conversazione.";
 
