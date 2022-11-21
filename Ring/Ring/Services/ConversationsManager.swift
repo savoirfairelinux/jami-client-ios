@@ -580,12 +580,14 @@ class ConversationsManager {
 
 extension  ConversationsManager: MessagesAdapterDelegate {
     func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: Int) {
-        let conversationEvent = ConversationMemberEvent(rawValue: event)
+        guard let conversationEvent = ConversationMemberEvent(rawValue: event) else { return }
+        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         /// check if we leave conversation on another device. In this case remove conversation
         if conversationEvent == .leave,
-           let account = self.accountsService.getAccount(fromAccountId: accountId),
            account.jamiId == memberUri {
             self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
+        } else {
+            self.conversationService.conversationMemberEvent(conversationId: conversationId, accountId: accountId, memberUri: memberUri, event: conversationEvent, accountURI: account.jamiId)
         }
     }
 

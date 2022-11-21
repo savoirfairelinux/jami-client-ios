@@ -61,6 +61,7 @@ enum ServiceEventType {
     case appEnterForeground
     case conversationProfileUpdated
     case conversationPreferencesUpdated
+    case conversationMemberEvent
 }
 
 /**

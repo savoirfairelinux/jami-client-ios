@@ -377,6 +377,19 @@ class ConversationsService {
         self.conversations.accept(conversations)
     }
 
+    func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: ConversationMemberEvent, accountURI: String) {
+        guard let conversation = self.conversations.value.filter({ conversation in
+            return  conversation.id == conversationId && conversation.accountId == accountId
+        }).first,
+        let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) else { return }
+        conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
+        let serviceEventType: ServiceEventType = .conversationMemberEvent
+        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        serviceEvent.addEventInput(.conversationId, value: conversationId)
+        serviceEvent.addEventInput(.accountId, value: accountId)
+        self.responseStream.onNext(serviceEvent)
+    }
+
     // MARK: conversations management
 
     func removeConversation(conversationId: String, accountId: String) {

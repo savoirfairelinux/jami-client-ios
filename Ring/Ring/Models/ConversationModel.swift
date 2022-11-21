@@ -54,8 +54,8 @@ enum ConversationAttributes: String {
 }
 
 enum ConversationPreferenceAttributes: String {
-    case color = "color"
-    case ignoreNotifications = "ignoreNotifications"
+    case color
+    case ignoreNotifications
 }
 
 enum ParticipantRole: Int {

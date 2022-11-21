@@ -79,7 +79,9 @@ class SwarmInfo {
 
     private let nameService: NameService
     private let profileService: ProfilesService
+    private let conversationsService: ConversationsService
     private let accountId: String
+    private var conversation: ConversationModel?
     private let disposeBag = DisposeBag()
     private var tempBag = DisposeBag()
 
@@ -87,6 +89,7 @@ class SwarmInfo {
     init(injectionBag: InjectionBag, accountId: String) {
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
+        self.conversationsService = injectionBag.conversationsService
         self.accountId = accountId
         self.participants
             .subscribe {[weak self] _ in
@@ -100,24 +103,10 @@ class SwarmInfo {
     // to get info for existing swarm
     convenience init(injectionBag: InjectionBag, conversation: ConversationModel) {
         self.init(injectionBag: injectionBag, accountId: conversation.accountId)
-        let info = injectionBag.conversationsService.getConversationInfo(conversationId: conversation.id, accountId: conversation.accountId)
-        if let avatar = info[ConversationAttributes.avatar.rawValue] {
-            self.avatar.accept(avatar.createImage())
-        }
-        if let title = info[ConversationAttributes.title.rawValue], !title.isEmpty {
-            self.title.accept(title)
-        }
-        if let description = info[ConversationAttributes.description.rawValue] {
-            self.description.accept(description)
-        }
-        var participantsInfo = [ParticipantInfo]()
-        conversation.getParticipants().forEach { participant in
-            if let participantInfo = createParticipant(jamiId: participant.jamiId, role: participant.role) {
-                participantsInfo.append(participantInfo)
-            }
-        }
-        if participantsInfo.isEmpty { return }
-        self.insertAndSortParticipants(participants: participantsInfo)
+        self.conversation = conversation
+        self.subscribeConversationEvents()
+        self.updateInfo()
+        self.updateParticipants()
     }
 
     func addContacts(contacts: [ContactModel]) {
@@ -202,6 +191,59 @@ class SwarmInfo {
             } onError: { _ in
             }
             .disposed(by: self.tempBag)
+    }
+
+    private func subscribeConversationEvents() {
+        self.conversationsService
+            .sharedResponseStream
+            .filter({ [weak self] (event) -> Bool in
+                return event.eventType == ServiceEventType.conversationProfileUpdated &&
+                    event.getEventInput(ServiceEventInput.accountId) == self?.accountId &&
+                    event.getEventInput(ServiceEventInput.conversationId) == self?.conversation?.id
+            })
+            .subscribe {[weak self] _ in
+                self?.updateInfo()
+            } onError: { _ in
+            }.disposed(by: self.disposeBag)
+
+        self.conversationsService
+            .sharedResponseStream
+            .filter({ [weak self] (event) -> Bool in
+                return event.eventType == ServiceEventType.conversationMemberEvent &&
+                    event.getEventInput(ServiceEventInput.accountId) == self?.accountId &&
+                    event.getEventInput(ServiceEventInput.conversationId) == self?.conversation?.id
+            })
+            .subscribe {[weak self] _ in
+                self?.updateParticipants()
+            } onError: { _ in
+            }.disposed(by: self.disposeBag)
+    }
+
+    private func updateInfo() {
+        guard let conversation = self.conversation else { return }
+        let info = self.conversationsService.getConversationInfo(conversationId: conversation.id, accountId: self.accountId)
+        if let avatar = info[ConversationAttributes.avatar.rawValue] {
+            self.avatar.accept(avatar.createImage())
+        }
+        if let title = info[ConversationAttributes.title.rawValue], !title.isEmpty {
+            self.title.accept(title)
+        }
+        if let description = info[ConversationAttributes.description.rawValue] {
+            self.description.accept(description)
+        }
+    }
+
+    private func updateParticipants() {
+        guard let conversation = self.conversation else { return }
+        var participantsInfo = [ParticipantInfo]()
+        self.insertAndSortParticipants(participants: participantsInfo)
+        conversation.getParticipants().forEach { participant in
+            if let participantInfo = createParticipant(jamiId: participant.jamiId, role: participant.role) {
+                participantsInfo.append(participantInfo)
+            }
+        }
+        if participantsInfo.isEmpty { return }
+        self.insertAndSortParticipants(participants: participantsInfo)
     }
 
     private func createParticipant(jamiId: String, role: ParticipantRole) -> ParticipantInfo? {
