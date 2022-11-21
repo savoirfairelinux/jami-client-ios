@@ -51,7 +51,17 @@ typedef NS_ENUM(int, MessageStatus)  {
 
 - (NSMutableDictionary<NSString*,NSString*>*)getConversationInfoForAccount:(NSString*) accountId conversationId:(NSString*) conversationId;
 
-- (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*) accountId conversationId:(NSString*) conversationId;
+- (NSMutableDictionary<NSString*,NSString*>*)getConversationPreferencesForAccount:(NSString*)accountId conversationId:(NSString*)conversationId;
+
+- (void)updateConversationInfosFor:(NSString*)accountId conversationId:(NSString*)conversationId infos:(NSDictionary<NSString*,NSString*>*)infos;
+
+- (void)updateConversationPreferencesFor:(NSString*)accountId conversationId:(NSString*)conversationId prefs:(NSDictionary<NSString*,NSString*>*)prefs;
+
+- (NSArray<NSDictionary<NSString*,NSString*>*>*)getConversationMembers:(NSString*)accountId conversationId:(NSString*)conversationId;
+
+- (void)addConversationMemberFor:(NSString*)accountId conversationId:(NSString*)conversationId memberId:(NSString*)memberId;
+
+- (void)removeConversationMemberFor:(NSString*)accountId conversationId:(NSString*)conversationId memberId:(NSString*)memberId;
 
 - (void)removeConversation:(NSString*) accountId conversationId:(NSString*) conversationId;
 

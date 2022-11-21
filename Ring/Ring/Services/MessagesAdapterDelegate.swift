@@ -33,4 +33,6 @@
     func conversationRemoved(conversationId: String, accountId: String)
     func conversationDeclined(conversationId: String, accountId: String)
     func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: Int)
+    func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String])
+    func conversationPreferencesUpdated(conversationId: String, accountId: String, preferences: [String: String])
 }

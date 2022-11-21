@@ -59,6 +59,8 @@ enum ServiceEventType {
     case stopLocationSharing
     case appEnterBackground
     case appEnterForeground
+    case conversationProfileUpdated
+    case conversationPreferencesUpdated
 }
 
 /**

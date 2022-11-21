@@ -568,6 +568,14 @@ class ConversationsManager {
     func detectingMessageTyping(_ from: String, for accountId: String, status: Int) {
         conversationService.detectingMessageTyping(from, for: accountId, status: status)
     }
+
+    func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {
+        conversationService.conversationProfileUpdated(conversationId: conversationId, accountId: accountId, profile: profile)
+    }
+
+    func conversationPreferencesUpdated(conversationId: String, accountId: String, preferences: [String: String]) {
+        conversationService.conversationPreferencesUpdated(conversationId: conversationId, accountId: accountId, preferences: preferences)
+    }
 }
 
 extension  ConversationsManager: MessagesAdapterDelegate {
