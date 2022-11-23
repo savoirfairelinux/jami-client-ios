@@ -443,6 +443,7 @@
 		66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66ACB42F214AE28C00A94162 /* ScanViewController.swift */; };
 		66E6381221764C2C005EA2B0 /* GrowingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6381121764C2C005EA2B0 /* GrowingTextView.swift */; };
 		66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F295DD2166A5930044ED6F /* Devices+Helpers.swift */; };
+		BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB91FAA9292EA26900BB41C1 /* EventData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1041,6 +1042,7 @@
 		66ACB42F214AE28C00A94162 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		66E6381121764C2C005EA2B0 /* GrowingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingTextView.swift; sourceTree = "<group>"; };
 		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
+		BB91FAA9292EA26900BB41C1 /* EventData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2089,6 +2091,7 @@
 				26BB4388267017D400019CF6 /* Utils.mm */,
 				26BB438A2670191E00019CF6 /* AdapterDelegate.swift */,
 				26BB438C267019FC00019CF6 /* AdapterService.swift */,
+				BB91FAA9292EA26900BB41C1 /* EventData.swift */,
 				26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */,
 			);
 			path = jamiNotificationExtension;
@@ -2800,6 +2803,7 @@
 				26A88C07266FFFC800888EED /* NotificationService.swift in Sources */,
 				26A88C1A267000F000888EED /* Adapter.mm in Sources */,
 				26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */,
+				BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */,
 				449E736728D9F86A00CBF564 /* Strings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
