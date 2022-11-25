@@ -364,14 +364,17 @@ class SwarmInfo {
                 }
             }
         }
-
         self.participants.accept(currentValue)
     }
 
     private func buildAvatarFrom(avatars: [UIImage]) -> UIImage {
         let participantsCount = self.participants.value.count
-        if participantsCount == 1, let avater = self.participants.value.first?.avatar.value {
-            return avater
+        // for one to one conversation return contact avatar
+        if participantsCount == 2, let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId,
+           let avatar = self.participants.value.filter({ info in
+            return info.jamiId != localJamiId
+           }).first?.avatar.value {
+            return avatar
         }
         switch avatars.count {
         case 0:
@@ -384,13 +387,17 @@ class SwarmInfo {
     }
 
     private func buildTitleFrom(names: [String]) -> String {
-        let names = Array(Set(names))
         // title format: "name1, name2, name3 + number of other participants"
         let participantsCount = self.participants.value.count
-        var finalTitle = ""
-        if participantsCount == 1, let name = self.participants.value.first?.name.value {
+        // for one to one conversation return contact name
+        if participantsCount == 2, let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId,
+           let name = self.participants.value.filter({ info in
+            return info.jamiId != localJamiId
+           }).first?.name.value {
             return name
         }
+        let names = Array(Set(names))
+        var finalTitle = ""
         if names.isEmpty { return finalTitle }
         // maximum 3 names could be displayed
         let numberOfDisplayedNames: Int = names.count < 3 ? names.count : 3

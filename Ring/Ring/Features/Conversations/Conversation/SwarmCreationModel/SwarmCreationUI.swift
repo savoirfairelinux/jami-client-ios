@@ -99,7 +99,7 @@ struct SwarmCreationUI: View {
                 VStack {
                     TextField(L10n.Global.name, text: $list.swarmName)
                         .font(.system(size: 18.0, weight: .semibold, design: .default))
-                    TextField(L10n.SwarmCreation.addADescription, text: $list.swarmDescription)
+                    TextField(L10n.Swarmcreation.addADescription, text: $list.swarmDescription)
                         .font(.system(size: 17.0, weight: .regular, design: .default))
                 }
                 Spacer()
@@ -125,16 +125,14 @@ struct SwarmCreationUI: View {
         .frame(width: nil, height: nil, alignment: .leading)
         .accentColor(Color.black)
         if !list.selections.isEmpty {
-
-            Button(L10n.SwarmCreation.createTheSwarm) {
+            Button(L10n.Swarmcreation.createTheSwarm) {
                 list.createTheSwarm()
             }
-            .frame(maxWidth: .infinity, maxHeight: 60.0)
+            .frame(width: 300, height: 60, alignment: .center)
             .background(Color(UIColor.jamiButtonDark))
             .foregroundColor(.white)
-
+            .cornerRadius(20)
         }
-
     }
 }
 struct ImagePicker: UIViewControllerRepresentable {
