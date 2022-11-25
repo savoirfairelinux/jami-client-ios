@@ -51,6 +51,16 @@ internal enum L10n {
     /// Enter Username
     internal static let usernameLabel = L10n.tr("Localizable", "account.usernameLabel")
   }
+  internal enum SwarmCreation {
+        /// Create a Swarm
+    internal static let title = L10n.tr("Localizable", "swarmcreation.title")
+      /// Search for contact
+    internal static let searchBar = L10n.tr("Localizable", "swarmcreation.searchBar")
+      /// Create the Swarm
+    internal static let createTheSwarm = L10n.tr("Localizable", "swarmcreation.createTheSwarm")
+      /// Add a description
+    internal static let addADescription = L10n.tr("Localizable", "swarmcreation.addADescription")
+    }
 
   internal enum AccountPage {
     /// Auto register after expiration
@@ -103,8 +113,6 @@ internal enum L10n {
     internal static let enableProxy = L10n.tr("Localizable", "accountPage.enableProxy")
     /// Link another device
     internal static let linkDeviceTitle = L10n.tr("Localizable", "accountPage.linkDeviceTitle")
-    /// Name
-    internal static let namePlaceholder = L10n.tr("Localizable", "accountPage.namePlaceholder")
     /// Confirm new password
     internal static let newPasswordConfirmPlaceholder = L10n.tr("Localizable", "accountPage.newPasswordConfirmPlaceholder")
     /// Enter new password
@@ -498,6 +506,8 @@ internal enum L10n {
     internal static let save = L10n.tr("Localizable", "global.save")
     /// Share
     internal static let share = L10n.tr("Localizable", "global.share")
+    /// Name
+    internal static let name = L10n.tr("Localizable", "global.name")
   }
 
   internal enum Invitations {
