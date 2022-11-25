@@ -118,6 +118,32 @@ class ConversationsService {
             .disposed(by: self.disposeBag)
         return self.conversations.asObservable()
     }
+    
+    func getSwarmMembers(conversationId: String, accountId: String, accountURI: String) -> [ParticipantInfo] {
+        if let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
+            return participantsInfo.compactMap({ info in
+                if let jamiId = info["uri"],
+                   let roleText = info["role"] {
+                    var role = ParticipantRole.member
+                    switch roleText {
+                    case "admin":
+                        role = .admin
+                    case "member":
+                        role = .member
+                    case "invited":
+                        role = .invited
+                    case "banned":
+                        role = .banned
+                    default:
+                        role = .unknown
+                    }
+                    return ParticipantInfo(jamiId: jamiId, role: role)
+                }
+                return nil
+            })
+        }
+        return []
+    }
 
     private func addSwarm(conversationId: String, accountId: String, accountURI: String, to conversations: inout [ConversationModel]) {
         if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
