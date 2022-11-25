@@ -82,7 +82,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     func applyL10n() {
         self.navigationItem.title = L10n.Global.meTabBarTitle
-        self.profileName.placeholder = L10n.AccountPage.namePlaceholder
+        self.profileName.placeholder = L10n.Global.name
     }
 
     private func addHeaderView() {
