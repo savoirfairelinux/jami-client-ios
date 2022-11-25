@@ -31,7 +31,7 @@ class SwarmCreationUIModel: ObservableObject {
     private let accountId: String
     private let conversationService: ConversationsService
     private var swarmInfo: SwarmInfo
-    var swarmCreated: (() -> Void)
+    var swarmCreated: ((Bool) -> Void)
 
     @Published var swarmName: String = ""
     @Published var swarmDescription: String = ""
@@ -39,7 +39,7 @@ class SwarmCreationUIModel: ObservableObject {
     @Published var selections: [String] = []
     @Published var maximumLimit: Int = 8
 
-    required init(with injectionBag: InjectionBag, accountId: String, swarmCreated: @escaping (() -> Void)) {
+    required init(with injectionBag: InjectionBag, accountId: String, swarmCreated: @escaping ((Bool) -> Void)) {
         self.swarmCreated = swarmCreated
         self.conversationService = injectionBag.conversationsService
         self.accountId = accountId
@@ -103,7 +103,7 @@ class SwarmCreationUIModel: ObservableObject {
             self.conversationService.addConversationMember(accountId: accountId, conversationId: conversationId, memberId: participant)
 
         }
-        // self.swarmCreated()
+        _ = self.swarmCreated(true)
     }
 
 }
