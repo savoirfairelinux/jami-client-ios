@@ -4,6 +4,7 @@
  *  Author: Hadrien De Sousa <hadrien.desousa@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -92,6 +93,22 @@ extension UIImage {
         UIGraphicsEndImageContext()
 
         return copied
+    }
+
+    class func createContactAvatar(username: String) -> UIImage {
+        let image = UIImage(asset: Asset.icContactPicture)!
+            .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        let scanner = Scanner(string: username.toMD5HexString().prefixString())
+        var index: UInt64 = 0
+        if scanner.scanHexInt64(&index) {
+            let fbaBGColor = avatarColors[Int(index)]
+            if !username.isSHA1() && !username.isEmpty {
+                if let avatar = image.drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: CGSize(width: 40, height: 40)) {
+                    return avatar
+                }
+            }
+        }
+        return image
     }
 
     func convertToData(ofMaxSize maxSize: Int) -> Data? {
