@@ -101,6 +101,7 @@ class SwarmInfo {
     private let conversationsService: ConversationsService
     private let contactsService: ContactsService
     private let accountsService: AccountsService
+    private let requestsService: RequestsService
     private let accountId: String
     private var conversation: ConversationModel?
     private let disposeBag = DisposeBag()
@@ -114,6 +115,7 @@ class SwarmInfo {
         self.conversationsService = injectionBag.conversationsService
         self.contactsService = injectionBag.contactsService
         self.accountsService = injectionBag.accountService
+        self.requestsService = injectionBag.requestsService
         self.accountId = accountId
         self.participants
             .subscribe {[weak self] _ in
@@ -135,9 +137,15 @@ class SwarmInfo {
 
     func addContacts(contacts: [ContactModel]) {
         var contactsInfo = [ParticipantInfo]()
+        let requests = self.requestsService.requests.value
         contacts.forEach { contact in
-            // filter out banned contacts
-            if contact.banned { return }
+            let requestIndex = requests.firstIndex(where: { request in
+                request.participants.contains { participant in
+                    participant.jamiId == contact.hash
+                }
+            })
+            // filter out banned and pending contacts
+            if contact.banned || requestIndex != nil { return }
             // filter out contact that is already added to swarm participants
             if self.participants.value.filter({ participantInfo in
                 participantInfo.jamiId == contact.hash
