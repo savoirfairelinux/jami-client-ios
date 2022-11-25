@@ -40,13 +40,13 @@ class ConversationViewModel: Stateable, ViewModel {
     private let contactsService: ContactsService
     private let presenceService: PresenceService
     private let profileService: ProfilesService
-    private let dataTransferService: DataTransferService
     private let callService: CallsService
     private let locationSharingService: LocationSharingService
+    let dataTransferService: DataTransferService
 
     let injectionBag: InjectionBag
 
-    private let disposeBag = DisposeBag()
+    internal let disposeBag = DisposeBag()
 
     private var players = [String: PlayerViewModel]()
 
@@ -148,7 +148,6 @@ class ConversationViewModel: Stateable, ViewModel {
             self.subscribeUnreadMessages()
             self.subscribeLocationServiceLocationReceived()
             self.subscribeProfileServiceMyPhoto()
-            self.subscribeMessagesUpdate()
 
             guard let account = self.accountService.getAccount(fromAccountId: self.conversation.value.accountId) else { return }
             if account.type == AccountType.sip {
@@ -162,9 +161,22 @@ class ConversationViewModel: Stateable, ViewModel {
                 self.showInvitation.accept(showInv)
             }
 
-            let filterParicipants = conversation.value.getParticipants()
-            if conversation.value.isDialog() {
-                self.subscribePresenceServiceContactPresence()
+            self.subscribePresenceServiceContactPresence()
+            if conversation.value.isSwarm() {
+                self.swarmInfo!.finalAvatar.share()
+                    .subscribe { [weak self] image in
+                        self?.profileImageData.accept(image.pngData())
+                    } onError: { _ in
+                    }
+                    .disposed(by: self.disposeBag)
+                self.swarmInfo!.finalTitle.share()
+                    .subscribe { [weak self] name in
+                        self?.userName.accept(name)
+                    } onError: { _ in
+                    }
+                    .disposed(by: self.disposeBag)
+            } else {
+                let filterParicipants = conversation.value.getParticipants()
                 if let contact = self.contactsService.contact(withHash: filterParicipants.first?.jamiId ?? "") {
                     if let profile = self.contactsService.getProfile(uri: "ring:" + (filterParicipants.first?.jamiId ?? ""), accountId: self.conversation.value.accountId),
                        let alias = profile.alias, let photo = profile.photo {
@@ -176,24 +188,53 @@ class ConversationViewModel: Stateable, ViewModel {
                             self.profileImageData.accept(data)
                         }
                     }
-
                     if let contactUserName = contact.userName {
                         self.userName.accept(contactUserName)
                     } else if self.userName.value.isEmpty {
                         self.userName.accept(filterParicipants.first?.jamiId ?? "")
-
+                        self.subscribeUserServiceLookupStatus()
+                        self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
+                    } else if self.userName.value.isEmpty {
+                        self.userName.accept(filterParicipants.first?.jamiId ?? "")
                         self.subscribeUserServiceLookupStatus()
                         self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
                     }
-                } else if self.userName.value.isEmpty {
-                    self.userName.accept(filterParicipants.first?.jamiId ?? "")
-
-                    self.subscribeUserServiceLookupStatus()
-                    self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
                 }
             }
+            subscribeLastMessagesUpdate()
             // self.subscribeConversationServiceTypingIndicator()
         }
+    }
+
+    private func subscribeLastMessagesUpdate() {
+        conversation.value.newMessages
+            .subscribe { [weak self] _ in
+                guard let self = self, let lastMessage = self.conversation.value.lastMessage else { return }
+                self.lastMessage.accept(lastMessage.content)
+                let lastMessageDate = lastMessage.receivedDate
+                let dateToday = Date()
+                var dateString = ""
+                let todayWeekOfYear = Calendar.current.component(.weekOfYear, from: dateToday)
+                let todayDay = Calendar.current.component(.day, from: dateToday)
+                let todayMonth = Calendar.current.component(.month, from: dateToday)
+                let todayYear = Calendar.current.component(.year, from: dateToday)
+                let weekOfYear = Calendar.current.component(.weekOfYear, from: lastMessageDate)
+                let day = Calendar.current.component(.day, from: lastMessageDate)
+                let month = Calendar.current.component(.month, from: lastMessageDate)
+                let year = Calendar.current.component(.year, from: lastMessageDate)
+                if todayDay == day && todayMonth == month && todayYear == year {
+                    dateString = self.hourFormatter.string(from: lastMessageDate)
+                } else if day == todayDay - 1 {
+                    dateString = L10n.Smartlist.yesterday
+                } else if todayYear == year && todayWeekOfYear == weekOfYear {
+                    dateString = lastMessageDate.dayOfWeek()
+                } else {
+                    dateString = self.dateFormatter.string(from: lastMessageDate)
+                }
+                self.lastMessageReceivedDate.accept(dateString)
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
     }
 
     /// Displays the entire date ( for messages received before the current week )
@@ -202,7 +243,6 @@ class ConversationViewModel: Stateable, ViewModel {
         formatter.dateStyle = .medium
         return formatter
     }()
-
     /// Displays the hour of the message reception ( for messages received today )
     private lazy var hourFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -217,9 +257,9 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var hideNewMessagesLabel = BehaviorRelay<Bool>(value: true)
 
-    var hideDate: Bool { self.conversation.value.messages.value.isEmpty }
+    var hideDate: Bool { self.conversation.value.messages.isEmpty }
 
-    func sendMessage(withContent content: String, contactURI: String? = nil) {
+    func sendMessage(withContent content: String, contactURI: String? = nil, parentId: String = "") {
         let conversation = self.conversation.value
         if !conversation.isSwarm() {
             /// send not swarm message
@@ -244,7 +284,7 @@ class ConversationViewModel: Stateable, ViewModel {
             return
         }
         /// send swarm message
-        self.conversationsService.sendSwarmMessage(conversationId: conversation.id, accountId: conversation.accountId, message: content, parentId: "")
+        self.conversationsService.sendSwarmMessage(conversationId: conversation.id, accountId: conversation.accountId, message: content, parentId: parentId)
     }
 
     func setMessagesAsRead() {
@@ -270,7 +310,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func deleteLocationMessage(messageId: String) {
-        guard let message = self.conversation.value.messages.value.filter({ $0.id == messageId }).first,
+        guard let message = self.conversation.value.messages.filter({ $0.id == messageId }).first,
               let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
         self.conversationsService.deleteLocationUpdate(incoming: message.incoming, peerUri: jamiId, accountId: self.conversation.value.accountId, shouldRefreshConversations: true)
             .subscribe()
@@ -283,12 +323,11 @@ class ConversationViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: jamiId, userName: self.displayName.value ?? self.userName.value))
     }
 
-    func loadMoreMessages() {
-        if self.conversation.value.allMessagesLoaded() { return }
+    func loadMoreMessages(messageId: String) {
         self.conversationsService
             .loadConversationMessages(conversationId: self.conversation.value.id,
                                       accountId: self.conversation.value.accountId,
-                                      from: self.conversation.value.messages.value.first?.id ?? "")
+                                      from: messageId)
     }
 
     func startAudioCall() {
@@ -415,14 +454,43 @@ class ConversationViewModel: Stateable, ViewModel {
         //        self.messages.accept(conversationsMsg)
     }
 
-    func isLastDisplayed(messageId: String, peerJamiId: String) -> Bool {
-        return self.conversation.value.isLastDisplayed(messageId: messageId, peerJamiId: peerJamiId)
-    }
-
     var myLocation: Observable<CLLocation?> { return self.locationSharingService.currentLocation.asObservable() }
 
     var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
     let shouldDismiss = BehaviorRelay<Bool>(value: false)
+    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
+        self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate))
+    }
+
+    func openInvitationView(parentView: UIViewController) {
+        let name = self.displayName.value?.isEmpty ?? true ? self.userName.value : self.displayName.value ?? ""
+        let handler: ((String) -> Void) = { [weak self] conversationId in
+            guard let self = self else { return }
+            guard let conversation = self.conversationsService.getConversationForId(conversationId: conversationId, accountId: self.conversation.value.accountId),
+                  !conversationId.isEmpty else {
+                self.shouldDismiss.accept(true)
+                return
+            }
+            self.request = nil
+            self.conversation.accept(conversation)
+            if self.showInvitation.value {
+                self.showInvitation.accept(false)
+            }
+        }
+        if let request = self.request {
+            // show incoming request
+            self.stateSubject.onNext(ConversationState.openIncomingInvitationView(displayName: name, request: request, parentView: parentView, invitationHandeledCB: handler))
+        } else if self.conversation.value.id.isEmpty {
+            // send invitation for search result
+            let alias = (self.conversation.value.type == .jams ? self.displayName.value : "") ?? ""
+            self.stateSubject.onNext(ConversationState
+                                        .openOutgoingInvitationView(displayName: name, alias: alias, avatar: self.profileImageData.value,
+                                                                    contactJamiId: self.conversation.value.hash,
+                                                                    accountId: self.conversation.value.accountId,
+                                                                    parentView: parentView,
+                                                                    invitationHandeledCB: handler))
+        }
+    }
 }
 
 // MARK: Conversation didSet functions
@@ -479,45 +547,6 @@ extension ConversationViewModel {
                 .disposed(by: self.disposeBag)
             self.presenceService.subscribeBuddy(withAccountId: self.conversation.value.accountId, withUri: self.conversation.value.getParticipants().first!.jamiId, withFlag: true)
         }
-    }
-
-    private func subscribeMessagesUpdate() {
-        conversation.value.messages
-            .subscribe { [weak self] messages in
-                guard let self = self else { return }
-                // update last message
-                guard let lastMessage = messages.last else { return }
-                self.lastMessage.accept(lastMessage.content)
-                // update last message date
-                let lastMessageDate = lastMessage.receivedDate
-                let dateToday = Date()
-                var dateString = ""
-
-                // Get components from today date
-                let todayWeekOfYear = Calendar.current.component(.weekOfYear, from: dateToday)
-                let todayDay = Calendar.current.component(.day, from: dateToday)
-                let todayMonth = Calendar.current.component(.month, from: dateToday)
-                let todayYear = Calendar.current.component(.year, from: dateToday)
-
-                // Get components from last message date
-                let weekOfYear = Calendar.current.component(.weekOfYear, from: lastMessageDate)
-                let day = Calendar.current.component(.day, from: lastMessageDate)
-                let month = Calendar.current.component(.month, from: lastMessageDate)
-                let year = Calendar.current.component(.year, from: lastMessageDate)
-
-                if todayDay == day && todayMonth == month && todayYear == year {
-                    dateString = self.hourFormatter.string(from: lastMessageDate)
-                } else if day == todayDay - 1 {
-                    dateString = L10n.Smartlist.yesterday
-                } else if todayYear == year && todayWeekOfYear == weekOfYear {
-                    dateString = lastMessageDate.dayOfWeek()
-                } else {
-                    dateString = self.dateFormatter.string(from: lastMessageDate)
-                }
-                self.lastMessageReceivedDate.accept(dateString)
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
     }
 
     private func subscribeUnreadMessages() {
@@ -600,40 +629,6 @@ extension ConversationViewModel {
         self.locationSharingService.stopSharingLocation(accountId: account.id,
                                                         contactUri: jamiId)
     }
-
-    func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
-        self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate))
-    }
-
-    func openInvitationView(parentView: UIViewController) {
-        let name = self.displayName.value?.isEmpty ?? true ? self.userName.value : self.displayName.value ?? ""
-        let handler: ((String) -> Void) = { [weak self] conversationId in
-            guard let self = self else { return }
-            guard let conversation = self.conversationsService.getConversationForId(conversationId: conversationId, accountId: self.conversation.value.accountId),
-                  !conversationId.isEmpty else {
-                self.shouldDismiss.accept(true)
-                return
-            }
-            self.request = nil
-            self.conversation.accept(conversation)
-            if self.showInvitation.value {
-                self.showInvitation.accept(false)
-            }
-        }
-        if let request = self.request {
-            // show incoming request
-            self.stateSubject.onNext(ConversationState.openIncomingInvitationView(displayName: name, request: request, parentView: parentView, invitationHandeledCB: handler))
-        } else if self.conversation.value.id.isEmpty {
-            // send invitation for search result
-            let alias = (self.conversation.value.type == .jams ? self.displayName.value : "") ?? ""
-            self.stateSubject.onNext(ConversationState
-                                        .openOutgoingInvitationView(displayName: name, alias: alias, avatar: self.profileImageData.value,
-                                                                    contactJamiId: self.conversation.value.hash,
-                                                                    accountId: self.conversation.value.accountId,
-                                                                    parentView: parentView,
-                                                                    invitationHandeledCB: handler))
-        }
-    }
 }
 
 // MARK: share message
@@ -650,8 +645,8 @@ extension ConversationViewModel {
         self.stateSubject.onNext(ConversationState.replaceCurrentWithConversationFor(participantUri: selectedItemURI))
     }
 
-    private func shareMessage(message: MessageViewModel, with contact: Contact, fileURL: URL?, image: UIImage?, fileName: String) {
-        if !message.isTransfer {
+    private func shareMessage(message: MessageContentVM, with contact: Contact, fileURL: URL?, image: UIImage?, fileName: String) {
+        if message.type != .fileTransfer {
             self.sendMessage(withContent: message.content, contactURI: contact.uri)
             return
         }
@@ -671,12 +666,10 @@ extension ConversationViewModel {
         self.sendAndSaveFile(displayName: fileName, imageData: data, conversationId: convId, accountId: contact.accountID)
     }
 
-    private func shareMessage(message: MessageViewModel, with selectedContacts: [ConferencableItem]) {
-        let conversationId = self.conversation.value.id
-        let accountId = self.conversation.value.accountId
+    private func shareMessage(message: MessageContentVM, with selectedContacts: [ConferencableItem]) {
         // to send file we need to have file url or image
-        let url = message.transferedFile(conversationID: conversationId, accountId: accountId, isSwarm: self.conversation.value.isSwarm())
-        let image = url == nil ? message.getTransferedImage(maxSize: 200, conversationID: conversationId, accountId: accountId, isSwarm: self.conversation.value.isSwarm()) : nil
+        let url = message.url
+        let image = url == nil ? message.image : nil
         var fileName = message.content
         if message.content.contains("\n") {
             guard let substring = message.content.split(separator: "\n").first else { return }
@@ -689,32 +682,7 @@ extension ConversationViewModel {
         self.changeConversationIfNeeded(items: selectedContacts)
     }
 
-    func resendMessage(message: MessageViewModel) {
-        guard message.message.type == .text || message.message.type == .fileTransfer else { return }
-        if message.message.type == .text {
-            self.sendMessage(withContent: message.content)
-            return
-        }
-        let conversationId = self.conversation.value.id
-        let accountId = self.conversation.value.accountId
-        var fileName = message.content
-        if message.content.contains("\n") {
-            guard let substring = message.content.split(separator: "\n").first else { return }
-            fileName = String(substring)
-        }
-        let isSwarm = self.conversation.value.isSwarm()
-        if let url = message.transferedFile(conversationID: conversationId, accountId: accountId, isSwarm: isSwarm) {
-            self.sendFile(filePath: url.path, displayName: fileName, contactHash: self.conversation.value.hash)
-            return
-        }
-        if let image = message.getTransferedImage(maxSize: 200, conversationID: conversationId, accountId: accountId, isSwarm: isSwarm) {
-            if let data = image.jpegData(compressionQuality: 100) {
-                self.sendAndSaveFile(displayName: fileName, imageData: data)
-            }
-        }
-    }
-
-    func slectContactsToShareMessage(message: MessageViewModel) {
+    func slectContactsToShareMessage(message: MessageContentVM) {
         guard message.message.type == .text || message.message.type == .fileTransfer else { return }
         self.stateSubject.onNext(ConversationState.showContactPicker(callID: "", contactSelectedCB: {[weak self] (selectedItems) in
             self?.shareMessage(message: message, with: selectedItems)
@@ -737,30 +705,5 @@ extension ConversationViewModel {
         } else {
             self.dataTransferService.sendAndSaveFile(displayName: displayName, conversation: self.conversation.value, imageData: imageData)
         }
-    }
-
-    func acceptTransfer(transferId: String, messageContent: inout String, interactionId: String) -> NSDataTransferError {
-        guard let accountId = accountService.currentAccount?.id else { return .unknown }
-        if !self.conversation.value.isSwarm() {
-            return self.dataTransferService.acceptTransfer(withId: transferId,
-                                                           fileName: &messageContent, accountID: accountId,
-                                                           conversationID: self.conversation.value.id, name: messageContent)
-        }
-        var fileName = ""
-        self.dataTransferService.downloadFile(withId: transferId, interactionID: interactionId, fileName: &fileName, accountID: accountId, conversationID: self.conversation.value.id)
-        return .success
-    }
-
-    func cancelTransfer(transferId: String) -> NSDataTransferError {
-        return self.dataTransferService.cancelTransfer(withId: transferId, accountId: self.conversation.value.accountId, conversationId: self.conversation.value.id)
-    }
-
-    func getTransferProgress(transferId: String, accountId: String) -> Float? {
-        return self.dataTransferService.getTransferProgress(withId: transferId, accountId: accountId, conversationId: self.conversation.value.id, isSwarm: self.conversation.value.isSwarm())
-    }
-
-    func getTransferSize(transferId: String, accountId: String) -> Int64? {
-        guard let info = self.dataTransferService.dataTransferInfo(withId: transferId, accountId: accountId, conversationId: self.conversation.value.id, isSwarm: self.conversation.value.isSwarm()) else { return nil }
-        return info.totalSize
     }
 }

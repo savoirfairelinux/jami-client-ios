@@ -49,3 +49,4 @@
 #import "DataTransferAdapter.h"
 #import "../../WhirlyGlobeMaply/ios/library/WhirlyGlobe-MaplyComponent/include/MaplyBridge.h"
 #import "ObjCHandler.h"
+#import "LinkPresentation/LinkPresentation.h"
