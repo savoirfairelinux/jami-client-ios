@@ -33,16 +33,20 @@ class ParticipantInfo {
     init(jamiId: String, role: ParticipantRole) {
         self.jamiId = jamiId
         self.role = role
-        self.name.subscribe { [weak self] name in
-            guard let self = self else { return }
-            // when profile does not have an avatar, contact image
-            // should be updated each time when name changed.
-            if !self.hasProfileAvatar {
-                self.avatar.accept(UIImage.createContactAvatar(username: name))
+        self.name.share()
+            .subscribe { [weak self] name in
+                guard let self = self else { return }
+                // when profile does not have an avatar, contact image
+                // should be updated each time when name changed.
+                if !self.hasProfileAvatar, !name.isEmpty {
+                    if jamiId == name && self.avatar.value != nil {
+                        return
+                    }
+                    self.avatar.accept(UIImage.createContactAvatar(username: name, size: CGSize(width: 40, height: 40)))
+                }
+            } onError: { _ in
             }
-        } onError: { _ in
-        }
-        .disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -58,17 +62,19 @@ class SwarmInfo {
 
     lazy var finalTitle: Observable<String> = {
         return Observable
-            .combineLatest(self.title.asObservable(), self.participantsNames.asObservable()) { [weak self] (title: String, names: [String]) -> String in
+            .combineLatest(self.title.asObservable().startWith(self.title.value),
+                           self.participantsNames.asObservable().startWith(self.participantsNames.value)) { [weak self] (title: String, names: [String]) -> String in
                 guard let self = self else { return "" }
                 if !title.isEmpty { return title }
                 return self.buildTitleFrom(names: names)
             }
     }()
 
-    lazy var finalAvatar: Observable<UIImage> = {
+    lazy var finalAvatar: Observable<UIImage?> = {
         return Observable
-            .combineLatest(self.avatar.asObservable(), self.participantsAvatars.asObservable()) { [weak self] (avatar: UIImage?, avatars: [UIImage]) -> UIImage in
-                guard let self = self else { return UIImage() }
+            .combineLatest(self.avatar.asObservable().startWith(self.avatar.value),
+                           self.participantsAvatars.asObservable().startWith(self.participantsAvatars.value)) { [weak self] (avatar: UIImage?, avatars: [UIImage]) -> UIImage? in
+                guard let self = self else { return nil }
                 if let avatar = avatar { return avatar }
                 return self.buildAvatarFrom(avatars: avatars)
             }
@@ -80,6 +86,7 @@ class SwarmInfo {
     private let nameService: NameService
     private let profileService: ProfilesService
     private let conversationsService: ConversationsService
+    private let contactsService: ContactsService
     private let accountId: String
     private var conversation: ConversationModel?
     private let disposeBag = DisposeBag()
@@ -90,6 +97,7 @@ class SwarmInfo {
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
         self.conversationsService = injectionBag.conversationsService
+        self.contactsService = injectionBag.contactsService
         self.accountId = accountId
         self.participants
             .subscribe {[weak self] _ in
@@ -159,7 +167,7 @@ class SwarmInfo {
     private func subscribeParticipantsInfo() {
         tempBag = DisposeBag()
         let namesObservable = participants.value.map({ participantInfo in
-            return participantInfo.name.asObservable()
+            return participantInfo.name.share().asObservable()
         })
         Observable
             .combineLatest(namesObservable) { (items: [String]) -> [String] in
@@ -169,7 +177,7 @@ class SwarmInfo {
             }
             .subscribe { [weak self] names in
                 guard let self = self else { return }
-                self.participantsNames.accept(names)
+                self.participantsNames.accept(Array(Set(names)))
             } onError: { _ in
             }
             .disposed(by: self.tempBag)
@@ -179,7 +187,7 @@ class SwarmInfo {
                 participantInfo.jamiId != participantInfo.name.value
             })
             .map({ participantInfo in
-                return participantInfo.avatar.asObservable()
+                return participantInfo.avatar.share().asObservable()
             })
         Observable
             .combineLatest(avatarsObservable) { (items: [UIImage?]) -> [UIImage] in
@@ -204,7 +212,8 @@ class SwarmInfo {
             .subscribe {[weak self] _ in
                 self?.updateInfo()
             } onError: { _ in
-            }.disposed(by: self.disposeBag)
+            }
+            .disposed(by: self.disposeBag)
 
         self.conversationsService
             .sharedResponseStream
@@ -216,7 +225,8 @@ class SwarmInfo {
             .subscribe {[weak self] _ in
                 self?.updateParticipants()
             } onError: { _ in
-            }.disposed(by: self.disposeBag)
+            }
+            .disposed(by: self.disposeBag)
     }
 
     private func updateInfo() {
@@ -250,25 +260,32 @@ class SwarmInfo {
         let participantInfo = ParticipantInfo(jamiId: jamiId, role: role)
         let uri = JamiURI.init(schema: .ring, infoHach: jamiId)
         guard let uriString = uri.uriString else { return nil}
-        // subscribe for profile updates for participant
-        self.profileService
-            .getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
-            .subscribe { [weak self, weak participantInfo] profile in
-                guard let self = self, let participantInfo = participantInfo else { return }
-                if let imageString = profile.photo, let image = imageString.createImage() {
-                    participantInfo.avatar.accept(image)
-                    participantInfo.hasProfileAvatar = true
+        if self.contactsService.contact(withHash: jamiId) != nil {
+            // subscribe for profile updates for participant
+            self.profileService
+                .getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
+                .subscribe { [weak self, weak participantInfo] profile in
+                    guard let self = self, let participantInfo = participantInfo else { return }
+                    if let imageString = profile.photo, let image = imageString.createImage() {
+                        participantInfo.avatar.accept(image)
+                        participantInfo.hasProfileAvatar = true
+                    }
+                    if let profileName = profile.alias, !profileName.isEmpty {
+                        participantInfo.name.accept(profileName)
+                    }
+                    if participantInfo.avatar.value == nil || participantInfo.name.value.isEmpty {
+                        self.lookupNameFor(participant: participantInfo)
+                    }
+                    if participantInfo.name.value.isEmpty {
+                        participantInfo.name.accept(jamiId)
+                    }
+                } onError: { _ in
                 }
-                if let profileName = profile.alias, !profileName.isEmpty {
-                    participantInfo.name.accept(profileName)
-                }
-                if participantInfo.avatar.value == nil || participantInfo.name.value.isEmpty {
-                    participantInfo.name.accept(jamiId)
-                    self.lookupNameFor(participant: participantInfo)
-                }
-            } onError: { _ in
-            }
-            .disposed(by: participantInfo.disposeBag)
+                .disposed(by: participantInfo.disposeBag)
+        } else {
+            participantInfo.name.accept(jamiId)
+            self.lookupNameFor(participant: participantInfo)
+        }
         return participantInfo
     }
 
@@ -304,18 +321,25 @@ class SwarmInfo {
         self.participants.accept(currentValue.sorted(by: { $0.name.value > $1.name.value }))
     }
 
-    private func buildAvatarFrom(avatars: [UIImage]) -> UIImage {
+    private func buildAvatarFrom(avatars: [UIImage]) -> UIImage? {
+        let participantsCount = self.participants.value.count
+        if participantsCount == 1 {
+            return self.participants.value.first?.avatar.value
+        }
         if avatars.count < 2 {
-            UIImage(asset: Asset.icContactPicture)!
-                .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+            return nil
         }
         return UIImage.mergeImages(image1: avatars[0], image2: avatars[1], spacing: avatarSpacing, height: avatarHeight)
     }
 
     private func buildTitleFrom(names: [String]) -> String {
+        let names = Array(Set(names))
         // title format: "name1, name2, name3 + number of other participants"
         let participantsCount = self.participants.value.count
         var finalTitle = ""
+        if participantsCount == 1, let name = self.participants.value.first?.name.value {
+            return name
+        }
         if names.isEmpty { return finalTitle }
         // maximum 3 names could be displayed
         let numberOfDisplayedNames: Int = names.count < 3 ? names.count : 3
@@ -323,7 +347,7 @@ class SwarmInfo {
         let otherParticipantsCount = participantsCount - numberOfDisplayedNames
         let titleEnd = otherParticipantsCount > 0 ? ", + \(otherParticipantsCount)" : ""
         finalTitle = names[0]
-        for index in 1...(numberOfDisplayedNames - 1) {
+        for index in 0..<(numberOfDisplayedNames - 1) {
             finalTitle += " , " + names[index]
         }
         finalTitle += titleEnd
