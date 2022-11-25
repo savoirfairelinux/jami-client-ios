@@ -284,19 +284,37 @@ extension UIImage {
         }
     }
 
-    class func createContactAvatar(username: String) -> UIImage {
-        let image = UIImage(asset: Asset.icContactPicture)!
-            .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+    class func createContactAvatar(username: String, size: CGSize) -> UIImage {
+        let image = UIImage(asset: Asset.fallbackAvatar)!
         let scanner = Scanner(string: username.toMD5HexString().prefixString())
         var index: UInt64 = 0
         if scanner.scanHexInt64(&index) {
             let fbaBGColor = avatarColors[Int(index)]
             if !username.isSHA1() && !username.isEmpty {
-                if let avatar = image.drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: CGSize(width: 40, height: 40)) {
+                if let avatar = UIImage().drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: size) {
                     return avatar
+                }
+            } else {
+                if let masked = image.maskWithColor(color: fbaBGColor, size: size) {
+                    return masked
                 }
             }
         }
         return image
+    }
+
+    func maskWithColor(color: UIColor, size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, true, scale)
+
+        guard let ctx = UIGraphicsGetCurrentContext(), let image = cgImage else { return self }
+        defer { UIGraphicsEndImageContext() }
+
+        let rect = CGRect(origin: .zero, size: size)
+        ctx.setFillColor(color.cgColor)
+        ctx.fill(rect)
+        ctx.concatenate(CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: size.height))
+        ctx.draw(image, in: rect)
+
+        return UIGraphicsGetImageFromCurrentImageContext() ?? self
     }
 }
