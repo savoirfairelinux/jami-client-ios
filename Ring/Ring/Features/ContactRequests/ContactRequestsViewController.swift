@@ -130,7 +130,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     func acceptButtonTapped(withItem item: RequestItem) {
         viewModel.accept(withItem: item)
-            .subscribe(onError: { [weak self] error in
+            .subscribe(onError: { [weak self] _ in
                 self?.log.error("Accept trust request failed")
             }, onCompleted: { [weak self] in
                 self?.log.info("Accept trust request done")
@@ -140,7 +140,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     func discardButtonTapped(withItem item: RequestItem) {
         viewModel.discard(withItem: item)
-            .subscribe(onError: { [weak self] error in
+            .subscribe(onError: { [weak self] _ in
                 self?.log.error("Discard trust request failed")
             }, onCompleted: { [weak self] in
                 self?.log.info("Discard trust request done")
@@ -150,7 +150,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
 
     func banButtonTapped(withItem item: RequestItem) {
         viewModel.ban(withItem: item)
-            .subscribe(onError: { [weak self] error in
+            .subscribe(onError: { [weak self] _ in
                 self?.log.error("Ban trust request failed")
             }, onCompleted: { [weak self] in
                 self?.log.info("Ban trust request done")

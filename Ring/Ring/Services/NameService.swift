@@ -106,7 +106,7 @@ class NameService {
         self.nameRegistrationAdapter.registerName(withAccount: account, password: password, name: name)
     }
 
-    func registerNameObservable(withAccount account: String, password: String, name: String)-> Observable<Bool> {
+    func registerNameObservable(withAccount account: String, password: String, name: String) -> Observable<Bool> {
         let registerName: Single<Bool> =
             Single.create(subscribe: { (single) -> Disposable in
                 let dispatchQueue = DispatchQueue(label: "nameRegistration", qos: .background)
