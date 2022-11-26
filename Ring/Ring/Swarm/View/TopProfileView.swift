@@ -87,16 +87,16 @@ public struct TopProfileView: View {
                 }
 
                 if viewmodel.isAdmin {
-                    TitleTextField
+                    titleTextField
                 } else {
-                    TitleLabel
+                    titleLabel
                 }
 
                 Group {
                     if viewmodel.isAdmin {
-                        DescriptionTextField
+                        descriptionTextField
                     } else {
-                        DescriptionLabel
+                        descriptionLabel
                     }
                 }
             }
@@ -135,7 +135,7 @@ public struct TopProfileView: View {
 }
 
 private extension TopProfileView {
-    var TitleLabel: some View {
+    var titleLabel: some View {
         Text(viewmodel.finalTitle)
             .font(.system(.title, design: .serif))
             .multilineTextAlignment(.center)
@@ -146,11 +146,11 @@ private extension TopProfileView {
             .padding()
     }
 
-    var TitleTextField: some View {
+    var titleTextField: some View {
         TextField(
             "",
-            text: $titleTextFieldInput
-            , onCommit: {
+            text: $titleTextFieldInput,
+            onCommit: {
                 viewmodel.title = titleTextFieldInput
             })
             // Text color.
@@ -162,7 +162,7 @@ private extension TopProfileView {
             .padding()
     }
 
-    var DescriptionLabel: some View {
+    var descriptionLabel: some View {
         Text(viewmodel.swarmInfo.description.value)
             .font(.system(.body, design: .serif))
             .multilineTextAlignment(.center)
@@ -172,7 +172,7 @@ private extension TopProfileView {
             .accentColor(.white)
     }
 
-    var DescriptionTextField: some View {
+    var descriptionTextField: some View {
         TextField(
             "Add Description",
             text: $descriptionTextFieldInput,

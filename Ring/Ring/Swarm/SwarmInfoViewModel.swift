@@ -119,7 +119,7 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
 
     }
 
-    func IgnoreSwarm(isOn: Bool) {
+    func ignoreSwarm(isOn: Bool) {
 
     }
 }
