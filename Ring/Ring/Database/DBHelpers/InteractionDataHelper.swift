@@ -21,18 +21,18 @@
 
 import SQLite
 
-typealias Interaction = (
-    id: Int64,
-    author: String?,
-    conversation: Int64,
-    timestamp: Int64,
-    duration: Int64,
-    body: String,
-    type: String,
-    status: String,
-    daemonID: String,
-    incoming: Bool
-)
+struct Interaction {
+    var id: Int64
+    var author: String?
+    var conversation: Int64
+    var timestamp: Int64
+    var duration: Int64
+    var body: String
+    var type: String
+    var status: String
+    var daemonID: String
+    var incoming: Bool
+}
 
 final class InteractionDataHelper {
 

@@ -21,12 +21,12 @@
 import SQLite
 import SwiftyBeaver
 
-typealias Profile = (
-    uri: String,
-    alias: String?,
-    photo: String?,
-    type: String
-)
+struct Profile {
+    var uri: String
+    var alias: String?
+    var photo: String?
+    var type: String
+}
 
 final class ProfileDataHelper {
     let contactsProfileTable = Table("profiles")
@@ -58,7 +58,7 @@ final class ProfileDataHelper {
             guard let row = try dataBase.pluck(accountProfileTable) else { return nil }
             // account profile saved in db does not have uri and type,
             // return default values that need to be updated by function caller
-            return Profile("", row[alias], row[photo], ProfileType.ring.rawValue)
+            return Profile(uri: "", alias: row[alias], photo: row[photo], type: ProfileType.ring.rawValue)
         } catch {
             return nil
         }

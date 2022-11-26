@@ -240,7 +240,7 @@ class InvitationViewModel: ViewModel {
                                 alias: self.alias)
             .subscribe(onCompleted: { [weak self] in
                 self?.log.info("contact request sent")
-            }, onError: { [weak self] (error) in
+            }, onError: { [weak self] (_) in
                 self?.log.error("error sending contact request")
             })
             .disposed(by: self.disposeBag)
