@@ -207,9 +207,9 @@ class SwarmInfo {
             .disposed(by: self.tempBag)
         // filter out default avatars
         let avatarsObservable = participants.value
-            .filter({ participantInfo in
-                participantInfo.jamiId != participantInfo.name.value
-            })
+            //            .filter({ participantInfo in
+            //                participantInfo.jamiId == participantInfo.name.value
+            //            })
             .map({ participantInfo in
                 return participantInfo.avatar.share().asObservable()
             })
@@ -259,7 +259,7 @@ class SwarmInfo {
         if let avatar = info[ConversationAttributes.avatar.rawValue] {
             self.avatar.accept(avatar.createImage())
         }
-        if let title = info[ConversationAttributes.title.rawValue], !title.isEmpty {
+        if let title = info[ConversationAttributes.title.rawValue] {
             self.title.accept(title)
         }
         if let description = info[ConversationAttributes.description.rawValue] {
@@ -398,8 +398,10 @@ class SwarmInfo {
         let otherParticipantsCount = participantsCount - numberOfDisplayedNames
         let titleEnd = otherParticipantsCount > 0 ? ", + \(otherParticipantsCount)" : ""
         finalTitle = names[0]
-        for index in 0..<(numberOfDisplayedNames - 1) {
-            finalTitle += " , " + names[index]
+        if numberOfDisplayedNames != 1 {
+            for index in 1...(numberOfDisplayedNames - 1) {
+                finalTitle += " , " + names[index]
+            }
         }
         finalTitle += titleEnd
         return finalTitle
