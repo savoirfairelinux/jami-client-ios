@@ -273,7 +273,7 @@ class DBManager {
         }
         guard let path = self.dbConnections.accountProfilePath(accountId: accountId) else { return false }
         let type = accountURI.contains("ring:") ? URIType.ring : URIType.sip
-        let profile = Profile(accountURI, accountProfile.alias, accountProfile.photo, type.getString())
+        let profile = Profile(uri: accountURI, alias: accountProfile.alias, photo: accountProfile.photo, type: type.getString())
         try self.saveProfile(profile: profile, path: path)
         if !self.dbConnections.isAccountProfileExists(accountId: accountId) {
             return false
@@ -587,7 +587,7 @@ class DBManager {
         }
         guard let path = self.dbConnections.contactProfilePath(accountId: accountId, profileURI: profileUri, createifNotExists: true) else { return false }
 
-        let profile = Profile(profileUri, alias, image, type.rawValue)
+        let profile = Profile(uri: profileUri, alias: alias, photo: image, type: type.rawValue)
 
         do {
             try self.saveProfile(profile: profile, path: path)
@@ -603,7 +603,7 @@ class DBManager {
             self.dbConnections.createAccountfolder(for: accountId)
         }
         guard let path = self.dbConnections.accountProfilePath(accountId: accountId) else { return false }
-        let profile = Profile(accountURI, alias, photo, type.rawValue)
+        let profile = Profile(uri: accountURI, alias: alias, photo: photo, type: type.rawValue)
         do {
             try self.saveProfile(profile: profile, path: path)
             return self.dbConnections.isAccountProfileExists(accountId: accountId)
@@ -712,11 +712,11 @@ class DBManager {
             status = InteractionStatus(status: message.transferStatus).rawValue
         }
         let timeInterval = message.receivedDate.timeIntervalSince1970
-        let interaction = Interaction(defaultID, author,
-                                      conversationID, Int64(timeInterval), Int64(duration),
-                                      message.content, interactionType.rawValue,
-                                      status, message.daemonId,
-                                      message.incoming)
+        let interaction = Interaction(id: defaultID, author: author,
+                                      conversation: conversationID, timestamp: Int64(timeInterval), duration: Int64(duration),
+                                      body: message.content, type: interactionType.rawValue,
+                                      status: status, daemonID: message.daemonId,
+                                      incoming: message.incoming)
         if let result = self.interactionHepler.insert(item: interaction, dataBase: dataBase) {
             return String(result)
         }
@@ -738,7 +738,7 @@ class DBManager {
                                     profileURI: profileUri) || !createIfNotExists {
             return getProfileFromPath(path: profilePath)
         }
-        let profile = Profile(profileUri, alias, photo, type.rawValue)
+        let profile = Profile(uri: profileUri, alias: alias, photo: photo, type: type.rawValue)
         try self.saveProfile(profile: profile, path: profilePath)
         return getProfileFromPath(path: profilePath)
     }
@@ -754,7 +754,7 @@ class DBManager {
             guard let data = data else { return "" }
             return data.base64EncodedString()
         }(vCard.imageData)
-        let profile = Profile(profileURI, vCard.familyName, imageString, type.rawValue)
+        let profile = Profile(uri: profileURI, alias: vCard.familyName, photo: imageString, type: type.rawValue)
         return profile
     }
 

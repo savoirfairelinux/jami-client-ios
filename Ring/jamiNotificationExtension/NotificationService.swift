@@ -141,45 +141,7 @@ class NotificationService: UNNotificationServiceExtension {
                         info["displayName"] = name
                         self.presentCall(info: info)
                     }
-                    switch result {
-                    case .call(let peerId, let hasVideo):
-                        handleCall(peerId, "\(hasVideo)")
-                        return
-                    case .gitMessage:
-                        /// check if account already acive
-                        guard !self.accountIsActive else { break }
-                        self.accountIsActive = true
-                        self.adapterService.startAccountsWithListener(accountId: self.accountId) { [weak self] event, eventData in
-                            guard let self = self else {
-                                return
-                            }
-                            switch event {
-                            case .message:
-                                self.numberOfMessages += 1
-                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId, groupTitle: "")
-                            case .fileTransferDone:
-                                if let url = URL(string: eventData.content) {
-                                    self.configureFileNotification(from: eventData.jamiId, url: url, accountId: self.accountId, conversationId: eventData.conversationId)
-                                } else {
-                                    self.numberOfFiles -= 1
-                                    self.verifyTasksStatus()
-                                }
-                            case .syncCompleted:
-                                self.syncCompleted = true
-                                self.verifyTasksStatus()
-                            case .fileTransferInProgress:
-                                self.numberOfFiles += 1
-                            case .call:
-                                handleCall(eventData.jamiId, eventData.content)
-                            case .invitation:
-                                self.syncCompleted = true
-                                self.numberOfMessages += 1
-                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
-                            }
-                        }
-                    case .unknown:
-                        break
-                    }
+                    self.handleResult(result: result, handleCall: handleCall)
                 } catch {
                     print("serialization failed , \(error)")
                 }
@@ -192,6 +154,48 @@ class NotificationService: UNNotificationServiceExtension {
 
     override func serviceExtensionTimeWillExpire() {
         finish()
+    }
+
+    private func handleResult(result: AdapterService.PeerConnectionRequestType, handleCall: @escaping (String, String) -> Void) {
+        switch result {
+        case .call(let peerId, let hasVideo):
+            handleCall(peerId, "\(hasVideo)")
+            return
+        case .gitMessage:
+            /// check if account already acive
+            guard !self.accountIsActive else { break }
+            self.accountIsActive = true
+            self.adapterService.startAccountsWithListener(accountId: self.accountId) { [weak self] event, eventData in
+                guard let self = self else {
+                    return
+                }
+                switch event {
+                case .message:
+                    self.numberOfMessages += 1
+                    self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId, groupTitle: "")
+                case .fileTransferDone:
+                    if let url = URL(string: eventData.content) {
+                        self.configureFileNotification(from: eventData.jamiId, url: url, accountId: self.accountId, conversationId: eventData.conversationId)
+                    } else {
+                        self.numberOfFiles -= 1
+                        self.verifyTasksStatus()
+                    }
+                case .syncCompleted:
+                    self.syncCompleted = true
+                    self.verifyTasksStatus()
+                case .fileTransferInProgress:
+                    self.numberOfFiles += 1
+                case .call:
+                    handleCall(eventData.jamiId, eventData.content)
+                case .invitation:
+                    self.syncCompleted = true
+                    self.numberOfMessages += 1
+                    self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
+                }
+            }
+        case .unknown:
+            break
+        }
     }
 
     private func verifyTasksStatus() {

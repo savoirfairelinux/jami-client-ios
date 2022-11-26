@@ -108,7 +108,7 @@ class ContactViewModel: ViewModel, Stateable {
             }
             let schema: URIType = account.type == .sip ? .sip : .ring
             guard let contactURI = JamiURI(schema: schema, infoHach: jamiId).uriString else { return }
-            var initialProfile = Profile(jamiId, "", "", schema.getString())
+            var initialProfile = Profile(uri: jamiId, alias: "", photo: "", type: schema.getString())
             if let profile = self.contactService.getProfile(uri: contactURI, accountId: conversation.accountId) {
                 initialProfile = profile
             }
