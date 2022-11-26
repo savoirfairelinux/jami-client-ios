@@ -139,7 +139,7 @@ class LinkNewDeviceViewModel: ViewModel, Stateable {
                 } else {
                     self.generatingState.accept(GeneratingPinState.error(error: PinError.defaultError))
                 }
-            }, onError: { error in
+            }, onError: { _ in
                 self.generatingState.accept(GeneratingPinState.error(error: PinError.passwordError))
             })
             .disposed(by: self.disposeBag)

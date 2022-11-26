@@ -257,7 +257,7 @@ extension ProfilesService {
             .subscribe(onNext: { profile in
                 profileObservable.onNext(profile)
             }, onError: { (_) in
-                profileObservable.onNext(Profile("", nil, nil, ""))
+                profileObservable.onNext(Profile(uri: "", alias: nil, photo: nil, type: ""))
             })
             .disposed(by: self.disposeBag)
     }
