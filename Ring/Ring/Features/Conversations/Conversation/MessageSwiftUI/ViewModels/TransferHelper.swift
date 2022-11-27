@@ -44,11 +44,6 @@ class TransferHelper {
     }
 
     func acceptTransfer(conversation: ConversationModel, message: MessageModel) -> NSDataTransferError {
-        if !conversation.isSwarm() {
-            return self.dataTransferService.acceptTransfer(withId: message.daemonId,
-                                                           fileName: &message.content, accountID: conversation.accountId,
-                                                           conversationID: conversation.id, name: message.content)
-        }
         var fileName = ""
         self.dataTransferService.downloadFile(withId: message.daemonId, interactionID: message.id, fileName: &fileName, accountID: conversation.accountId, conversationID: conversation.id)
         return .success
