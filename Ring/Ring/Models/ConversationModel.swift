@@ -35,15 +35,15 @@ enum ConversationType: Int {
     var stringValue: String {
         switch self {
         case .oneToOne:
-            return "Private swarm"
+            return L10n.Swarm.oneToOne
         case .adminInvitesOnly:
-            return "Admin invites only"
+            return L10n.Swarm.adminInvitesOnly
         case .invitesOnly:
-            return "Private group swarm"
+            return L10n.Swarm.invitesOnly
         case .publicChat:
-            return "Public group swarm"
+            return L10n.Swarm.publicChat
         default:
-            return "Others"
+            return L10n.Swarm.others
         }
     }
 }
@@ -83,15 +83,15 @@ enum ParticipantRole: Int {
     var stringValue: String {
         switch self {
         case .member:
-            return "member"
+            return L10n.Swarm.member
         case .invited:
-            return "invited"
+            return L10n.Swarm.invited
         case .admin:
-            return "admin"
+            return L10n.Swarm.admin
         case .banned:
-            return "banned"
+            return L10n.Swarm.banned
         case .unknown:
-            return "unknown"
+            return L10n.Swarm.unknown
         }
     }
 }
