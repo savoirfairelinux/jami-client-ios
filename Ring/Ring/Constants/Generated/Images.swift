@@ -52,7 +52,6 @@ internal enum Asset {
   internal static let editSwarmImage = ImageAsset(name: "editSwarmImage")
   internal static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
   internal static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
-  internal static let group = ImageAsset(name: "group")
   internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icContactPicture = ImageAsset(name: "ic_contact_picture")
   internal static let icConversationRemove = ImageAsset(name: "ic_conversation_remove")

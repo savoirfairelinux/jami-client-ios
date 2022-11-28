@@ -637,6 +637,44 @@ internal enum L10n {
     /// Yesterday
     internal static let yesterday = L10n.tr("Localizable", "smartlist.yesterday", fallback: "Yesterday")
   }
+  internal enum Swarm {
+    /// About
+    internal static let about = L10n.tr("Localizable", "swarm.about", fallback: "About")
+    /// Add Description
+    internal static let addDescription = L10n.tr("Localizable", "swarm.addDescription", fallback: "Add Description")
+    /// Administrator
+    internal static let admin = L10n.tr("Localizable", "swarm.admin", fallback: "Administrator")
+    /// Admin invites only
+    internal static let adminInvitesOnly = L10n.tr("Localizable", "swarm.adminInvitesOnly", fallback: "Admin invites only")
+    /// Banned
+    internal static let banned = L10n.tr("Localizable", "swarm.banned", fallback: "Banned")
+    /// Choose a color
+    internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor", fallback: "Choose a color")
+    /// Identifier
+    internal static let identifier = L10n.tr("Localizable", "swarm.identifier", fallback: "Identifier")
+    /// Ignore the swarm
+    internal static let ignoreSwarm = L10n.tr("Localizable", "swarm.ignoreSwarm", fallback: "Ignore the swarm")
+    /// Others
+    internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Others")
+    /// Private group swarm
+    internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private group swarm")
+    /// Leave the conversation
+    internal static let leaveConversation = L10n.tr("Localizable", "swarm.leaveConversation", fallback: "Leave the conversation")
+    /// Member
+    internal static let member = L10n.tr("Localizable", "swarm.member", fallback: "Member")
+    /// Members
+    internal static let members = L10n.tr("Localizable", "swarm.members", fallback: "Members")
+    /// Private swarm
+    internal static let oneToOne = L10n.tr("Localizable", "swarm.oneToOne", fallback: "Private swarm")
+    /// Others
+    internal static let others = L10n.tr("Localizable", "swarm.others", fallback: "Others")
+    /// Public group swarm
+    internal static let publicChat = L10n.tr("Localizable", "swarm.publicChat", fallback: "Public group swarm")
+    /// Type of swarm
+    internal static let typeOfSwarm = L10n.tr("Localizable", "swarm.typeOfSwarm", fallback: "Type of swarm")
+    /// Unkown
+    internal static let unknown = L10n.tr("Localizable", "swarm.unknown", fallback: "Unkown")
+  }
   internal enum Swarmcreation {
     /// Add a description
     internal static let addADescription = L10n.tr("Localizable", "swarmcreation.addADescription", fallback: "Add a description")

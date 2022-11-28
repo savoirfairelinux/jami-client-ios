@@ -33,7 +33,10 @@ protocol FilterConversationDataSource {
 
 class JamiSearchViewModel {
 
-    typealias UserSearchModel = (username: String, firstName: String, lastName: String, organization: String, jamiId: String, profilePicture: Data?)
+    struct UserSearchModel {
+        var username, firstName, lastName, organization, jamiId: String
+        var profilePicture: Data?
+    }
 
     let log = SwiftyBeaver.self
 
