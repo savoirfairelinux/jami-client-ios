@@ -606,6 +606,45 @@ internal enum L10n {
     /// Searching…
     internal static let search = L10n.tr("Localizable", "scan.search")
   }
+    
+    internal enum Swarm {
+        /// Ignore the swarm
+        internal static let ignoreSwarm = L10n.tr("Localizable", "swarm.ignoreSwarm")
+        /// Leave the conversation
+        internal static let leaveConversation = L10n.tr("Localizable", "swarm.leaveConversation")
+        /// Choose a color
+        internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor")
+        /// Type of swarm
+        internal static let typeOfSwarm = L10n.tr("Localizable", "swarm.typeOfSwarm")
+        /// Identifier
+        internal static let identifier = L10n.tr("Localizable", "swarm.identifier")
+        /// About
+        internal static let about = L10n.tr("Localizable", "swarm.about")
+        /// Members
+        internal static let members = L10n.tr("Localizable", "swarm.members")
+        /// Add Description
+        internal static let addDescription = L10n.tr("Localizable", "swarm.addDescription")
+        /// Private swarm
+        internal static let oneToOne = L10n.tr("Localizable", "swarm.oneToOne")
+        /// Admin invites only
+        internal static let adminInvitesOnly = L10n.tr("Localizable", "swarm.adminInvitesOnly")
+        /// Private group swarm
+        internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly")
+        /// Public group swarm
+        internal static let publicChat = L10n.tr("Localizable", "swarm.publicChat")
+        /// Others
+        internal static let others = L10n.tr("Localizable", "swarm.others")
+        /// Member
+        internal static let member = L10n.tr("Localizable", "swarm.member")
+        /// Others
+        internal static let invited = L10n.tr("Localizable", "swarm.invited")
+        /// Administrator
+        internal static let admin = L10n.tr("Localizable", "swarm.admin")
+        /// Banned
+        internal static let banned = L10n.tr("Localizable", "swarm.banned")
+        /// Unkown
+        internal static let unknown = L10n.tr("Localizable", "swarm.unknown")
+    }
 
   internal enum Smartlist {
     /// About Jami

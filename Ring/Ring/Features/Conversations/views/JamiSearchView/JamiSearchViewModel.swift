@@ -37,7 +37,7 @@ class JamiSearchViewModel {
         var username, firstName, lastName, organization, jamiId: String
         var profilePicture: Data?
     }
-    
+
     let log = SwiftyBeaver.self
 
     // Services
