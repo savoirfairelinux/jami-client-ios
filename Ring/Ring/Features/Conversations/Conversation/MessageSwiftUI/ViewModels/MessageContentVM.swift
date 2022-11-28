@@ -149,7 +149,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     var textColor: Color
     var secondaryColor: Color
     var hasBorder: Bool
-    var corners: UIRectCorner = .allCorners
+    var corners: UIRectCorner = [.allCorners]
     let cornerRadius: CGFloat = 15
     var textInset: CGFloat = 15
     var textVerticalInset: CGFloat = 10
@@ -159,23 +159,13 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     var isIncoming: Bool
     var isHistory: Bool
     var type: MessageType = .text
+    var followEmogiMessage = false
+    var followingByEmogiMessage = false
 
     private var sequencing: MessageSequencing = .unknown {
         didSet {
             guard !isHistory else { return }
-            guard type == .text else { return }
-            switch sequencing {
-            case .firstOfSequence:
-                self.corners = isIncoming ? [.topLeft, .topRight, .bottomRight] : [.topLeft, .topRight, .bottomLeft]
-            case .lastOfSequence:
-                self.corners = isIncoming ? [.topRight, .bottomLeft, .bottomRight] : [.topLeft, .bottomLeft, .bottomRight]
-            case .middleOfSequence:
-                self.corners = isIncoming ? [.topRight, .bottomRight] : [.topLeft, .bottomLeft ]
-            case .singleMessage:
-                corners = [.allCorners]
-            case .unknown:
-                break
-            }
+            self.corners = self.updatedCorners()
             // text need to be updated to trigger view redrowing
             let oldContent = self.content
             self.content = oldContent
@@ -212,6 +202,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
             self.backgroundColor = .clear
             self.textFont = Font(UIFont.systemFont(ofSize: 40.0, weight: UIFont.Weight.medium))
             self.textInset = 0
+            self.textVerticalInset = 2
         }
         if self.type == .fileTransfer {
             self.fileName = message.content
@@ -241,6 +232,36 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         if self.transferStatus != transferStatus {
             self.transferStatus = transferStatus
             self.updateTransferInfo()
+        }
+    }
+
+    private func updatedCorners() -> UIRectCorner {
+        if self.followEmogiMessage && self.followingByEmogiMessage {
+            return .allCorners
+        }
+        switch sequencing {
+        case .firstOfSequence:
+            if followingByEmogiMessage {
+                return [.allCorners]
+            } else {
+                return isIncoming ? [.topLeft, .topRight, .bottomRight] : [.topLeft, .topRight, .bottomLeft]
+            }
+        case .lastOfSequence:
+            if followEmogiMessage {
+                return [.allCorners]
+            } else {
+                return isIncoming ? [.topRight, .bottomLeft, .bottomRight] : [.topLeft, .bottomLeft, .bottomRight]
+            }
+        case .middleOfSequence:
+            if self.followEmogiMessage {
+                return isIncoming ? [.topRight, .topLeft, .bottomRight] : [.topRight, .topLeft, .bottomLeft ]
+            } else if self.followingByEmogiMessage {
+                return isIncoming ? [.topRight, .bottomRight, .bottomLeft] : [.topLeft, .bottomLeft, .bottomRight]
+            } else {
+                return isIncoming ? [.topRight, .bottomRight] : [.topLeft, .bottomLeft]
+            }
+        case .singleMessage, .unknown:
+            return [.allCorners]
         }
     }
 
