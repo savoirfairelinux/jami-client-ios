@@ -31,11 +31,17 @@
 "global.accept" = "Hyväksy";
 "global.block" = "Estä";
 "global.refuse" = "Kieltäydy";
+"global.name" = "Nimi";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";
 "scan.search" = "Etsitään...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "Eilen";
 "smartlist.results" = "Julkinen kansio";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Väärä salasana";
 "accountPage.deviceRevocationUnknownDevice" = "Tuntematon laite";
 "accountPage.deviceRevocationError" = "Laitteen peruuttamisvirhe";
-"accountPage.namePlaceholder" = "Nimi";
 "accountPage.linkDeviceTitle" = "Linkitä toinen laite";
 "accountPage.other" = "Muu";
 "accountPage.removeAccountTitle" = "Poista tili";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Yhteystieto lisätty";
-"generatedMessage.invitationReceived" = "Kutsu vastaanotettu";
-"generatedMessage.invitationAccepted" = "Kutsu hyväksytty";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Parvi luotiin";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Lähtevä puhelu";
 "generatedMessage.incomingCall" = "Saapuva puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
-"generatedMessage.contactLeftConversation" = "Kontakti poistui keskustelusta";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Edistyneet asetukset";

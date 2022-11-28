@@ -31,11 +31,17 @@
 "global.accept" = "Acceptera";
 "global.block" = "Blockera";
 "global.refuse" = "Neka";
+"global.name" = "Namn";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";
 "scan.search" = "Söker...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Offentlig mapp";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Felaktigt lösenord";
 "accountPage.deviceRevocationUnknownDevice" = "Okänd enhet";
 "accountPage.deviceRevocationError" = "Kunde inte återkalla enheten";
-"accountPage.namePlaceholder" = "Namn";
 "accountPage.linkDeviceTitle" = "Koppla en annan enhet";
 "accountPage.other" = "Annat";
 "accountPage.removeAccountTitle" = "Ta bort konto";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Kontakt tillagt";
-"generatedMessage.invitationReceived" = "Inbjudan mottagen";
-"generatedMessage.invitationAccepted" = "Inbjudan accepterad";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Svärm skapad ";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Utgående samtal";
 "generatedMessage.incomingCall" = "Inkommande samtal";
 "generatedMessage.missedOutgoingCall" = "Missat utgående samtal";
 "generatedMessage.missedIncomingCall" = "Missat inkommande samtal";
 "generatedMessage.liveLocationSharing" = "Live platsdelning ";
-"generatedMessage.contactLeftConversation" = "Kontakt lämnade konversationen";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Avancerade inställningar";

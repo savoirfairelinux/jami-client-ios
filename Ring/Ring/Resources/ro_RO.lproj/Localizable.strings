@@ -31,11 +31,17 @@
 "global.accept" = "Acceptă";
 "global.block" = "Blochează";
 "global.refuse" = "Refuză";
+"global.name" = "Nume";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
 "scan.search" = "Căutare...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Adaugă o descriere";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Parolă greșită";
 "accountPage.deviceRevocationUnknownDevice" = "Aparat necunoscut";
 "accountPage.deviceRevocationError" = "Eroare la eliminarea aparatului";
-"accountPage.namePlaceholder" = "Nume";
 "accountPage.linkDeviceTitle" = "Asociază alt aparat";
 "accountPage.other" = "Altele";
 "accountPage.removeAccountTitle" = "Elimină contul";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact adăugat";
-"generatedMessage.invitationReceived" = "Invitație primită";
-"generatedMessage.invitationAccepted" = "Invitație acceptată";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Grup creat";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Apel efectuat";
 "generatedMessage.incomingCall" = "Apel primit";
 "generatedMessage.missedOutgoingCall" = "Apel efectuat nepreluat";
 "generatedMessage.missedIncomingCall" = "Apel pierdut";
 "generatedMessage.liveLocationSharing" = "Distribuirea poziției în direct";
-"generatedMessage.contactLeftConversation" = "Contactul a întrerupt conversația";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Reglări avansate";

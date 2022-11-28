@@ -31,11 +31,17 @@
 "global.accept" = "Kabul et";
 "global.block" = "Engelleme";
 "global.refuse" = "Geri Çevir";
+"global.name" = "Ad";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";
 "scan.search" = "Arıyor...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "Dün";
 "smartlist.results" = "Genel Dizin";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Geçersiz parola";
 "accountPage.deviceRevocationUnknownDevice" = "Bilinmeyen aygıt";
 "accountPage.deviceRevocationError" = "Aygıt iptal hatası";
-"accountPage.namePlaceholder" = "Ad";
 "accountPage.linkDeviceTitle" = "Diğer aygıtı bağla";
 "accountPage.other" = "Diğer";
 "accountPage.removeAccountTitle" = "Hesabı Kaldır";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Kişi eklendi";
-"generatedMessage.invitationReceived" = "Davetiye alındı";
-"generatedMessage.invitationAccepted" = "Davetiye alındı";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Küme oluşturuldu";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Giden arama";
 "generatedMessage.incomingCall" = "Gelen arama";
 "generatedMessage.missedOutgoingCall" = "Yanıtsız giden arama";
 "generatedMessage.missedIncomingCall" = "Yanıtsız gelen arama";
 "generatedMessage.liveLocationSharing" = "Canlı konum paylaşımı";
-"generatedMessage.contactLeftConversation" = "Hesap görüşmeden ayrıldı";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Gelişmiş ayarlar";

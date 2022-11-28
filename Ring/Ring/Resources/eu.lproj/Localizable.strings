@@ -31,11 +31,17 @@
 "global.accept" = "Onartu";
 "global.block" = "Bloketu";
 "global.refuse" = "Ukatu";
+"global.name" = "Izena";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
 "scan.search" = "Searching…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "Atzo";
 "smartlist.results" = "Public Directory";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Izena";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Other";
 "accountPage.removeAccountTitle" = "Remove account";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Kontaktua gehituta";
-"generatedMessage.invitationReceived" = "Gonbidapena jasota";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Irteera-deia";
 "generatedMessage.incomingCall" = "Sarrera-deia";
 "generatedMessage.missedOutgoingCall" = "Galdutako irteera-deia";
 "generatedMessage.missedIncomingCall" = "Galdutako sarrera-deia";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Ezarpen aurreratuak";

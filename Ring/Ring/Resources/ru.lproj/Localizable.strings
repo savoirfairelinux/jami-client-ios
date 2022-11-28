@@ -31,11 +31,17 @@
 "global.accept" = "Принять";
 "global.block" = "Заблокировать";
 "global.refuse" = "Отказать";
+"global.name" = "Имя";
 
 // Scan
 "scan.badQrCode" = "Некорректный QR-код";
 "scan.search" = "Поиск…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Публичный Каталог";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Неверный пароль";
 "accountPage.deviceRevocationUnknownDevice" = "Неизвестное устройство";
 "accountPage.deviceRevocationError" = "Ошибка отзыва устройства";
-"accountPage.namePlaceholder" = "Имя";
 "accountPage.linkDeviceTitle" = "Привязать другое устройство";
 "accountPage.other" = "Другой";
 "accountPage.removeAccountTitle" = "Удалить аккаунт";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Контакт добавлен";
-"generatedMessage.invitationReceived" = "Получено приглашение";
-"generatedMessage.invitationAccepted" = "Приглашение принято";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Исходящий вызов";
 "generatedMessage.incomingCall" = "Входящий звонок";
 "generatedMessage.missedOutgoingCall" = "Непринятый исходящий звонок";
 "generatedMessage.missedIncomingCall" = "Пропущенный входящий звонок";
 "generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
-"generatedMessage.contactLeftConversation" = "Контакт покинул разговор";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Дополнительные настройки";
