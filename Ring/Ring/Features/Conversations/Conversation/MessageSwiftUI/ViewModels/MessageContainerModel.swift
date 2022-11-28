@@ -64,9 +64,18 @@ class MessageContainerModel: Identifiable {
     var sequencing: MessageSequencing = .unknown {
         didSet {
             self.messageContent.setSequencing(sequencing: sequencing)
-            if sequencing == .lastOfSequence || sequencing == .singleMessage {
-                self.messageRow.shouldDisplayAavatar = true
-            }
+            self.messageRow.sequencing = sequencing
+        }
+    }
+
+    var followEmogiMessage = false {
+        didSet {
+            self.messageContent.followEmogiMessage = followEmogiMessage
+        }
+    }
+    var followingByEmogiMessage = false {
+        didSet {
+            self.messageContent.followingByEmogiMessage = followingByEmogiMessage
         }
     }
 

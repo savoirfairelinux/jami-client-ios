@@ -149,7 +149,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     var textColor: Color
     var secondaryColor: Color
     var hasBorder: Bool
-    var corners: UIRectCorner = .allCorners
+    var corners: UIRectCorner = [.allCorners]
     let cornerRadius: CGFloat = 15
     var textInset: CGFloat = 15
     var textVerticalInset: CGFloat = 10
@@ -159,11 +159,12 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     var isIncoming: Bool
     var isHistory: Bool
     var type: MessageType = .text
+    var followEmogiMessage = false
+    var followingByEmogiMessage = false
 
     private var sequencing: MessageSequencing = .unknown {
         didSet {
             guard !isHistory else { return }
-            guard type == .text else { return }
             switch sequencing {
             case .firstOfSequence:
                 self.corners = isIncoming ? [.topLeft, .topRight, .bottomRight] : [.topLeft, .topRight, .bottomLeft]

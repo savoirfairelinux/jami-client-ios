@@ -53,7 +53,7 @@ struct MessageContentView: View {
                     .lineLimit(1)
                     .background(model.backgroundColor)
                     .font(model.textFont)
-                    .cornerRadius(20)
+                    .cornerRadius(radius: model.cornerRadius, corners: model.corners)
             } else if model.type == .fileTransfer {
                 if model.shouldUpdateTransferView {
                     switch model.transferViewType {
@@ -61,20 +61,23 @@ struct MessageContentView: View {
                         DefaultTransferView(model: model)
                     case .playerView(let player):
                         PlayerSwiftUI(model: model, player: player)
+                            .cornerRadius(radius: model.cornerRadius, corners: model.corners)
                     case .imageView(let image):
                         Image(uiImage: image)
                             .resizable()
                             .scaledToFit()
                             .frame(minHeight: 50, maxHeight: 300)
-                            .cornerRadius(20)
+                            .cornerRadius(radius: model.cornerRadius, corners: model.corners)
                     }
                 }
             } else if model.type == .text {
                 if let metadata = model.metadata {
                     URLPreview(metadata: metadata, maxDimension: model.maxDimension)
+                        .cornerRadius(radius: model.cornerRadius, corners: model.corners)
                 } else if model.content.isValidURL, let url = URL(string: model.content) {
                     Link(model.content, destination: url)
                         .padding(model.textInset)
+                        .cornerRadius(radius: model.cornerRadius, corners: model.corners)
                 } else {
                     Text(model.content)
                         .padding(.top, model.textVerticalInset)

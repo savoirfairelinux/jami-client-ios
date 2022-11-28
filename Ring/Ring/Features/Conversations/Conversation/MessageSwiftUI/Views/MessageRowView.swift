@@ -69,19 +69,19 @@ struct MessageRowView: View {
     @StateObject var model: MessageRowVM
     var body: some View {
         VStack(alignment: .leading) {
+            Spacer()
+                .frame(height: model.topSpace)
             if model.shouldShowTimeString {
-                Spacer()
-                    .frame(height: 20)
                 Text(model.timeString)
                     .font(.footnote)
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
-                Spacer()
-                    .frame(height: 20)
+                    .padding(10)
             }
             if model.centeredMessage {
                 ContactMessageView(model: messageModel.contactViewModel)
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(10)
             } else if model.incoming {
                 HStack(alignment: .bottom) {
                     if let avatar = model.avatarImage {
@@ -104,23 +104,25 @@ struct MessageRowView: View {
                     MessageStackView(messageModel: messageModel)
                 }.padding(.leading, 50)
             }
-            if let readImages = model.read {
-                Spacer()
-                    .frame(height: 10)
-                HStack(alignment: .top, spacing: -3) {
-                    Spacer()
-                    ForEach(0..<readImages.count, id: \.self) { index in
-                        Image(uiImage: readImages[index])
-                            .resizable()
-                            .frame(width: 15, height: 15)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                            .zIndex(Double(readImages.count - index))
-                    }
-                }
-                Spacer()
-                    .frame(height: 10)
-            }
+                        if let readImages = model.read, !readImages.isEmpty {
+                            Spacer()
+                                .frame(height: 10)
+                            HStack(alignment: .top, spacing: -3) {
+                                Spacer()
+                                ForEach(0..<readImages.count, id: \.self) { index in
+                                    Image(uiImage: readImages[index])
+                                        .resizable()
+                                        .frame(width: 15, height: 15)
+                                        .clipShape(Circle())
+                                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                                        .zIndex(Double(readImages.count - index))
+                                }
+                            }
+                            Spacer()
+                                .frame(height: 10)
+                        }
+            Spacer()
+                .frame(height: model.bottomSpace)
         }.onAppear(perform: {
             model.fetchLastRead()
         })
