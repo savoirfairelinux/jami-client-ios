@@ -28,9 +28,13 @@ class MessageRowVM: ObservableObject {
     @Published var avatarImage: UIImage?
     @Published var read: [UIImage]?
     @Published var timeString: String = ""
+    @Published var topSpace: CGFloat = 0
+    @Published var bottomSpace: CGFloat = 0
     var incoming: Bool
     var infoState: PublishSubject<State>
     var centeredMessage: Bool
+    var followEmogiMessage = false
+    var followingByEmogiMessage = false
 
     var message: MessageModel
 
@@ -46,6 +50,25 @@ class MessageRowVM: ObservableObject {
             if self.shouldDisplayAavatar {
                 self.infoState.onNext(MessageInfo.updateAvatar(jamiId: jamiId))
             }
+        }
+    }
+
+    var sequencing: MessageSequencing = .unknown {
+        didSet {
+            var extraTopSpaceForText: Bool = false
+            var extraBottomSpaceForText: Bool = false
+            if self.message.type == .text && !self.message.content.isSingleEmoji {
+                if self.followEmogiMessage {
+                    extraTopSpaceForText = true
+                }
+                if self.followingByEmogiMessage {
+                    extraBottomSpaceForText = true
+                }
+            }
+            topSpace = (sequencing == .singleMessage || sequencing == .firstOfSequence || extraTopSpaceForText) ? 10 : 0
+            bottomSpace = (sequencing == .singleMessage || sequencing == .lastOfSequence || extraBottomSpaceForText) ? 10 : 0
+            let shouldDisplayAavatar = (sequencing == .lastOfSequence || sequencing == .singleMessage) && self.message.incoming
+            self.shouldDisplayAavatar = shouldDisplayAavatar
         }
     }
 

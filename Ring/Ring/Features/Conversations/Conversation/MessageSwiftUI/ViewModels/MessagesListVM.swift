@@ -407,7 +407,7 @@ class MessagesListVM: ObservableObject {
         var lastMessageTime: Date?
         for (index, model) in self.messagesModels.enumerated() {
             let currentMessageTime = model.message.receivedDate
-            if index == 0 || model.message.type != .text {
+            if index == 0 {
                 // always show first message's time
                 model.shouldShowTimeString = true
             } else {
@@ -419,70 +419,57 @@ class MessagesListVM: ObservableObject {
         }
         for (index, model) in self.messagesModels.enumerated() {
             model.sequencing = getMessageSequencing(forIndex: index)
-            if model.sequencing == .firstOfSequence || model.sequencing == .singleMessage {
-                model.shouldDisplayName = true
-            } else {
-                model.shouldDisplayName = false
-            }
+            let shouldDisplayName = (model.sequencing == .firstOfSequence || model.sequencing == .singleMessage) && model.message.incoming
+            model.shouldDisplayName = shouldDisplayName
         }
     }
 
     private let messageGroupingInterval = 10 * 60 // 10 minutes
 
-    // swiftlint:disable cyclomatic_complexity
+    private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
+        return message.uri != secondMessage.uri
+            || message.type == .contact || message.type == .initial || message.authorId != secondMessage.authorId
+    }
+
     private func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
         let messageItem = self.messagesModels[index]
-        let msgOwner = messageItem.message.incoming
         if self.messagesModels.count == 1 || index == 0 {
-            if self.messagesModels.count == index + 1 {
-                return MessageSequencing.singleMessage
-            }
-            let nextMessageItem = index + 1 <= self.messagesModels.count
-                ? self.messagesModels[index + 1] : nil
-            if nextMessageItem != nil {
-                return msgOwner != nextMessageItem?.message.incoming
-                    ? MessageSequencing.singleMessage : MessageSequencing.firstOfSequence
-            }
-        } else if self.messagesModels.count == index + 1 {
-            let lastMessageItem = index - 1 >= 0 && index - 1 < self.messagesModels.count
-                ? self.messagesModels[index - 1] : nil
-            if lastMessageItem != nil {
-                return msgOwner != lastMessageItem?.message.incoming
-                    ? MessageSequencing.singleMessage : MessageSequencing.lastOfSequence
-            }
+            return .singleMessage
         }
-        let lastMessageItem = index - 1 >= 0 && index - 1 < self.messagesModels.count
-            ? self.messagesModels[index - 1] : nil
-        let nextMessageItem = index + 1 <= self.messagesModels.count
-            ? self.messagesModels[index + 1] : nil
-        var sequencing = MessageSequencing.singleMessage
-        if (lastMessageItem != nil) && (nextMessageItem != nil) {
-            if msgOwner != lastMessageItem?.message.incoming && msgOwner == nextMessageItem?.message.incoming {
-                sequencing = MessageSequencing.firstOfSequence
-            } else if msgOwner != nextMessageItem?.message.incoming && msgOwner == lastMessageItem?.message.incoming {
-                sequencing = MessageSequencing.lastOfSequence
-            } else if msgOwner == nextMessageItem?.message.incoming && msgOwner == lastMessageItem?.message.incoming {
-                sequencing = MessageSequencing.middleOfSequence
-            }
-        }
-        if messageItem.shouldShowTimeString {
-            if index == messagesModels.count - 1 {
-                sequencing = .singleMessage
-            } else if sequencing != .singleMessage && sequencing != .lastOfSequence {
-                sequencing = .firstOfSequence
-            } else {
-                sequencing = .singleMessage
-            }
-        }
+        let nextMessageItem = index + 1 < self.messagesModels.count ? self.messagesModels[index + 1] : nil
+        let previousMessageItem = index - 1 >= 0 ? self.messagesModels[index - 1] : nil
 
-        if index + 1 < messagesModels.count && messagesModels[index + 1].shouldShowTimeString {
-            switch sequencing {
-            case .firstOfSequence: sequencing = .singleMessage
-            case .middleOfSequence: sequencing = .lastOfSequence
-            default: break
+        if nextMessageItem == nil {
+            if let previousMessageItem = previousMessageItem {
+                messageItem.followEmogiMessage = previousMessageItem.message.content.isSingleEmoji
+                let isNewSequence = messageItem.shouldShowTimeString || self.isBreakingSequence(message: previousMessageItem.message, secondMessage: messageItem.message)
+                return isNewSequence ? .singleMessage : .lastOfSequence
+            } else {
+                return .singleMessage
             }
         }
-        return sequencing
+        if previousMessageItem == nil {
+            return .singleMessage
+        }
+        if let next = nextMessageItem, let previous = previousMessageItem {
+            let isNewSequence = messageItem.shouldShowTimeString || self.isBreakingSequence(message: previous.message, secondMessage: messageItem.message)
+            let changingSequenceAfter = next.shouldShowTimeString || self.isBreakingSequence(message: next.message, secondMessage: messageItem.message)
+            messageItem.followingByEmogiMessage = next.message.content.isSingleEmoji
+            messageItem.followEmogiMessage = previous.message.content.isSingleEmoji
+            if isNewSequence && changingSequenceAfter {
+                return .singleMessage
+            }
+            if !isNewSequence && changingSequenceAfter {
+                return .lastOfSequence
+            }
+            if isNewSequence && !changingSequenceAfter {
+                return .firstOfSequence
+            }
+            if !isNewSequence && !changingSequenceAfter {
+                return .middleOfSequence
+            }
+        }
+        return .singleMessage
     }
 
     // MARK: participant information

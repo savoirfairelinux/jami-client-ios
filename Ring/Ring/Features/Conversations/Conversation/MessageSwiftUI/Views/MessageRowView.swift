@@ -70,15 +70,14 @@ struct MessageRowView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if model.shouldShowTimeString {
-                Spacer()
-                    .frame(height: 20)
                 Text(model.timeString)
                     .font(.footnote)
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
-                Spacer()
-                    .frame(height: 20)
+                    .padding(10)
             }
+            Spacer()
+                .frame(height: model.topSpace)
             if model.centeredMessage {
                 ContactMessageView(model: messageModel.contactViewModel)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -104,7 +103,7 @@ struct MessageRowView: View {
                     MessageStackView(messageModel: messageModel)
                 }.padding(.leading, 50)
             }
-            if let readImages = model.read {
+            if let readImages = model.read, !readImages.isEmpty {
                 Spacer()
                     .frame(height: 10)
                 HStack(alignment: .top, spacing: -3) {
@@ -121,6 +120,8 @@ struct MessageRowView: View {
                 Spacer()
                     .frame(height: 10)
             }
+            Spacer()
+                .frame(height: model.bottomSpace)
         }.onAppear(perform: {
             model.fetchLastRead()
         })
