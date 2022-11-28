@@ -108,9 +108,9 @@ public struct TopProfileView: View {
                 ForEach(swarmViews, id: \.self) {
                     switch $0 {
                     case .about:
-                        Text("About")
+                        Text(L10n.Swarm.about)
                     case .memberList:
-                        Text("\(viewmodel.swarmInfo.participants.value.count) Members")
+                        Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
                     }
                 }
             }
@@ -174,7 +174,7 @@ private extension TopProfileView {
 
     var descriptionTextField: some View {
         TextField(
-            "Add Description",
+            L10n.Swarm.addDescription,
             text: $descriptionTextFieldInput,
             onCommit: {
                 viewmodel.description = descriptionTextFieldInput
