@@ -31,11 +31,17 @@
 "global.accept" = "接受";
 "global.block" = "屏蔽";
 "global.refuse" = "拒接";
+"global.name" = "姓名";
 
 // Scan
 "scan.badQrCode" = "无效的二维码";
 "scan.search" = "正在搜索…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "添加描述";
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公共目录";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "密码错误";
 "accountPage.deviceRevocationUnknownDevice" = "未知设备";
 "accountPage.deviceRevocationError" = "设备吊销出错";
-"accountPage.namePlaceholder" = "姓名";
 "accountPage.linkDeviceTitle" = "关联另一台设备";
 "accountPage.other" = "其他";
 "accountPage.removeAccountTitle" = "移除账户";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "已加入通讯录";
-"generatedMessage.invitationReceived" = "已接受邀请";
-"generatedMessage.invitationAccepted" = "已接受邀請";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "已建立 Swarm";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "撥出電話";
 "generatedMessage.incomingCall" = "来电";
 "generatedMessage.missedOutgoingCall" = "未接去電";
 "generatedMessage.missedIncomingCall" = "未接來電";
 "generatedMessage.liveLocationSharing" = "实时位置分享";
-"generatedMessage.contactLeftConversation" = "联系人离开了会话";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "進階設定";

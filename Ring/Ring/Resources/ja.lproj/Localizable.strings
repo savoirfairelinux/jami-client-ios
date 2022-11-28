@@ -31,11 +31,17 @@
 "global.accept" = "受け入れ";
 "global.block" = "ブロック";
 "global.refuse" = "拒否";
+"global.name" = "名前";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";
 "scan.search" = "検索中…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "昨日";
 "smartlist.results" = "公開ディレクトリー";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "パスワードが一致しません";
 "accountPage.deviceRevocationUnknownDevice" = "未知のデバイス";
 "accountPage.deviceRevocationError" = "端末無効化エラー";
-"accountPage.namePlaceholder" = "名前";
 "accountPage.linkDeviceTitle" = "別のデバイスをリンク";
 "accountPage.other" = "その他";
 "accountPage.removeAccountTitle" = "アカウントを削除";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "連絡先を追加しました";
-"generatedMessage.invitationReceived" = "招待を受信しました";
-"generatedMessage.invitationAccepted" = "招待を受け入れました";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "発信";
 "generatedMessage.incomingCall" = "着信";
 "generatedMessage.missedOutgoingCall" = "不在発信";
 "generatedMessage.missedIncomingCall" = "不在着信";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "詳細設定";

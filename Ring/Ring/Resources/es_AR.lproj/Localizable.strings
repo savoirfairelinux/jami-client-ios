@@ -31,11 +31,17 @@
 "global.accept" = "Aceptar";
 "global.block" = "Bloquear";
 "global.refuse" = "Rechazar";
+"global.name" = "Nombre";
 
 // Scan
 "scan.badQrCode" = "Código QR erróneo";
 "scan.search" = "Buscando...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Añadir descripción";
 // Smartlist
 "smartlist.yesterday" = "Ayer";
 "smartlist.results" = "Directorio Público";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Contraseña incorrecta";
 "accountPage.deviceRevocationUnknownDevice" = "Dispositivo desconocido";
 "accountPage.deviceRevocationError" = "Error de revocación del dispositivo";
-"accountPage.namePlaceholder" = "Nombre";
 "accountPage.linkDeviceTitle" = "Vincular otro dispositivo";
 "accountPage.other" = "Otro";
 "accountPage.removeAccountTitle" = "Eliminar cuenta";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contacto añadido";
-"generatedMessage.invitationReceived" = "Invitación recibida";
-"generatedMessage.invitationAccepted" = "Invitación aceptada";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Enjambre creado";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Llamada saliente";
 "generatedMessage.incomingCall" = "Llamada entrante";
 "generatedMessage.missedOutgoingCall" = "Llamada saliente perdida";
 "generatedMessage.missedIncomingCall" = "Llamada entrante perdida";
 "generatedMessage.liveLocationSharing" = "Compartición de ubicación en vivo";
-"generatedMessage.contactLeftConversation" = "El contacto abandonó la conversación";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Opciones avanzadas";

@@ -31,11 +31,17 @@
 "global.accept" = "Aceptar";
 "global.block" = "Bloquear";
 "global.refuse" = "Rexeitar";
+"global.name" = "Nome";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
 "scan.search" = "Buscando...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Engadir descrición";
 // Smartlist
 "smartlist.yesterday" = "Onte";
 "smartlist.results" = "Public Directory";
@@ -53,7 +59,7 @@
 "smartlist.selectOneNumber" = "Select one of the numbers";
 "smartlist.invitations" = "Convites";
 "smartlist.accountSettings" = "Axustes da Conta";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.advancedSettings" = "Axustes Avanzados";
 "smartlist.aboutJami" = "Acerca de Jami";
 
 //Conversation
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Nome";
 "accountPage.linkDeviceTitle" = "Ligar outro dispositivo";
 "accountPage.other" = "Other";
 "accountPage.removeAccountTitle" = "Eliminar conta";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contacto engadido";
-"generatedMessage.invitationReceived" = "Convite recibido";
-"generatedMessage.invitationAccepted" = "Convite aceptado";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Chamada saínte";
 "generatedMessage.incomingCall" = "Chamada entrante";
 "generatedMessage.missedOutgoingCall" = "Chamada sen resposta";
 "generatedMessage.missedIncomingCall" = "Chamada entrante perdida";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "O contacto deixou a conversa";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Axustes avanzados";
