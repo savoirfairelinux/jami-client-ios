@@ -39,7 +39,7 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
     }()
 
     override func viewDidLoad() {
-        self.navigationItem.title = L10n.Swarmcreation.title
+        self.navigationItem.title = L10n.Swarmcreation.createTheSwarm
         super.viewDidLoad()
         guard let accountId = self.viewModel.currentAccount?.id else { return }
 

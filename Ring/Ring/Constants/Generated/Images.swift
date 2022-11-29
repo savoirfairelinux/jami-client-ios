@@ -48,6 +48,7 @@ internal enum Asset {
   internal static let disableSpeakerphone = ImageAsset(name: "disable_speakerphone")
   internal static let doneIcon = ImageAsset(name: "done_icon")
   internal static let downloadIcon = ImageAsset(name: "download_icon")
+  internal static let editSwarmImage = ImageAsset(name: "editSwarmImage")
   internal static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
   internal static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   internal static let icBack = ImageAsset(name: "ic_back")
