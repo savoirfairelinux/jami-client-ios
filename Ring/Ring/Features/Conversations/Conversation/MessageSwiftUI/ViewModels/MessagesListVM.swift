@@ -260,7 +260,7 @@ class MessagesListVM: ObservableObject {
                 viewModel.url = self.transferHelper.getFileURL(conversation: self.conversation, message: viewModel.message)
             case .getPlayer(let viewModel):
                 if viewModel.player != nil { return }
-                viewModel.player = self.transferHelper.getPlayer(conversation: self.conversation, message: viewModel.message)
+                viewModel.updatePlayer(player: self.transferHelper.getPlayer(conversation: self.conversation, message: viewModel.message))
             }
         } onError: { _ in
         }
@@ -491,7 +491,6 @@ class MessagesListVM: ObservableObject {
                 }
                 let newValue = values.isEmpty ? nil : values
                 message.updateRead(avatars: newValue)
-
             }
         }
     }
@@ -512,7 +511,8 @@ class MessagesListVM: ObservableObject {
                 } else {
                     self.updateName(name: id, id: id, message: message)
                 }
-                if let username = self.names.get(key: id) as? String {
+                if let username = self.names.get(key: id) as? String,
+                   (self.avatars.get(key: id) as? UIImage) == nil {
                     let image = UIImage.createContactAvatar(username: username, size: CGSize(width: 30, height: 30))
                     self.updateAvatar(image: image, id: id, message: message)
                 }

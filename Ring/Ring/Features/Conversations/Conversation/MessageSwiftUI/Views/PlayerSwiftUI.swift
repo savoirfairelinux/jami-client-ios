@@ -44,6 +44,5 @@ struct PlayerSwiftUI: View {
         PlayerViewWrapper.init(viewModel: player, width: model.playerWidth, height: model.playerHeight)
             .frame(height: model.playerHeight)
             .frame(width: model.playerWidth)
-            .cornerRadius(20)
     }
 }

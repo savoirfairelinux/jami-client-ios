@@ -29,7 +29,9 @@ class ContactMessageVM: ObservableObject {
     var backgroundColor: Color
     var textColor: Color
     let cornerRadius: CGFloat = 20
+    let avatarSize: CGFloat = 30
     var inset: CGFloat
+    var height: CGFloat
     var textFont: Font = .body
 
     var message: MessageModel
@@ -48,7 +50,8 @@ class ContactMessageVM: ObservableObject {
         self.infoState = infoState
         self.textColor = Color(UIColor.label)
         self.backgroundColor = Color(UIColor.clear)
-        self.inset = message.type == .initial ? 0 : 5
+        self.inset = message.type == .initial ? 0 : 7
+        self.height = message.type == .initial ? 25 : 45
         self.borderColor = message.type == .initial ? Color(UIColor.clear) : Color(UIColor.secondaryLabel)
         self.content = message.content
         if message.type == .contact && message.incoming {
