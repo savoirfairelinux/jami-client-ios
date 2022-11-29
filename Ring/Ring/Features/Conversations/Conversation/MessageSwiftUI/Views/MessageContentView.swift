@@ -55,20 +55,17 @@ struct MessageContentView: View {
                     .font(model.textFont)
                     .cornerRadius(radius: model.cornerRadius, corners: model.corners)
             } else if model.type == .fileTransfer {
-                if model.shouldUpdateTransferView {
-                    switch model.transferViewType {
-                    case .defaultView:
-                        DefaultTransferView(model: model)
-                    case .playerView(let player):
-                        PlayerSwiftUI(model: model, player: player)
-                            .cornerRadius(radius: model.cornerRadius, corners: model.corners)
-                    case .imageView(let image):
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(minHeight: 50, maxHeight: 300)
-                            .cornerRadius(radius: model.cornerRadius, corners: model.corners)
-                    }
+                if let player = self.model.player {
+                    PlayerSwiftUI(model: model, player: player)
+                        .cornerRadius(radius: model.cornerRadius, corners: model.corners)
+                } else if let image = self.model.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(minHeight: 50, maxHeight: 300)
+                        .cornerRadius(radius: model.cornerRadius, corners: model.corners)
+                } else {
+                    DefaultTransferView(model: model)
                 }
             } else if model.type == .text {
                 if let metadata = model.metadata {
@@ -107,11 +104,6 @@ struct MessageContentView: View {
                 }
             }
         }
-        .onChange(of: model.shouldUpdateTransferView, perform: { update in
-            if update {
-                model.shouldUpdateTransferView = false
-            }
-        })
         .onAppear {
             self.model.onAppear()
         }

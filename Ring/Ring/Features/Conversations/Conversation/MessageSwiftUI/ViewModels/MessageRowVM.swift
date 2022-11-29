@@ -23,6 +23,7 @@
 
 import Foundation
 import RxSwift
+import SwiftUI
 
 class MessageRowVM: ObservableObject {
     @Published var avatarImage: UIImage?
@@ -30,6 +31,7 @@ class MessageRowVM: ObservableObject {
     @Published var timeString: String = ""
     @Published var topSpace: CGFloat = 0
     @Published var bottomSpace: CGFloat = 0
+    @Published var readBorderColor: Color
     var incoming: Bool
     var infoState: PublishSubject<State>
     var centeredMessage: Bool
@@ -81,6 +83,7 @@ class MessageRowVM: ObservableObject {
         self.incoming = message.incoming
         self.infoState = infoState
         self.centeredMessage = message.type == .contact || message.type == .initial
+        self.readBorderColor = Color(UIColor.systemBackground)
         self.timeString = getTimeLabelString()
     }
 
