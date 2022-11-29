@@ -35,7 +35,6 @@ struct ParticipantListCell: View {
     @ViewBuilder
     var body: some View {
         Button(action: self.action) {
-
             HStack(alignment: .center, spacing: nil) {
                 Image(uiImage: participant.imageDataFinal)
                     .resizable()
@@ -45,6 +44,8 @@ struct ParticipantListCell: View {
                 Text(participant.name)
                     .font(.system(size: 15.0, weight: .bold, design: .default))
                     .padding(.leading, 8.0)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
                 HStack {
                     if self.isSelected {
                         Spacer()
@@ -60,6 +61,7 @@ struct SwarmCreationUI: View {
     @ObservedObject var list: SwarmCreationUIModel
     @SwiftUI.State private var showingOptions = false
     @SwiftUI.State private var showingType: PhotoSheetType?
+    @SwiftUI.State private var swarmImage: UIImage = UIImage(asset: Asset.editSwarmImage)!
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -67,13 +69,23 @@ struct SwarmCreationUI: View {
                 Button(action: {
                     showingOptions = true
                 }) {
-                    Image(uiImage: UIImage(data: list.imageData)!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 70, height: 70, alignment: .center)
-                        .clipShape(Circle())
-                        .padding(.leading, 20)
+                    if !list.imageData.isEmpty {
+                        Image(uiImage: UIImage(data: list.imageData)!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    } else {
+                        Image(uiImage: swarmImage)
+                            .resizable()
+                            .renderingMode(.template)
+                            .aspectRatio(contentMode: .fill)
+                            .foregroundColor(Color.white)
+                            .frame(width: 30, height: 30, alignment: .center)
+                    }
                 }
+                .frame(width: 70, height: 70, alignment: .center)
+                .background(Color(UIColor.jamiButtonDark))
+                .clipShape(Circle())
+                .padding(.leading, 20)
                 .actionSheet(isPresented: $showingOptions) {
                     ActionSheet(
                         title: Text(""),
@@ -104,37 +116,60 @@ struct SwarmCreationUI: View {
                 }
                 Spacer()
             }
-            if !list.selections.isEmpty && (list.maximumLimit - list.selections.count) > 0 {
+            if (list.maximumLimit - list.selections.count) > 0 {
                 Text("You can add \(list.maximumLimit - list.selections.count) more people in the Swarm ")
                     .padding(.leading, 20)
                     .font(.system(size: 15.0, weight: .regular, design: .default))
             }
+        }.onTapGesture {
+            self.hideKeyboard()
         }
-        List {
-            ForEach(list.participantsRows) { contact in
-                ParticipantListCell(participant: contact, isSelected: list.selections.contains(contact.id)) {
-                    if list.selections.contains(contact.id) {
-                        list.selections.removeAll(where: { $0 == contact.id })
-                    } else {
-                        list.selections.append(contact.id)
+        ZStack(alignment: .bottomTrailing) {
+            List {
+                ForEach(list.participantsRows) { contact in
+                    ParticipantListCell(participant: contact, isSelected: list.selections.contains(contact.id)) {
+                        if list.selections.contains(contact.id) {
+                            list.selections.removeAll(where: { $0 == contact.id })
+                        } else {
+                            list.selections.append(contact.id)
+                            self.hideKeyboard()
+                        }
                     }
                 }
+                if #available(iOS 15.0, *) {
+                    Spacer()
+                        .frame(height: 60)
+                        .listRowSeparator(.hidden)
+                } else {
+                    Spacer()
+                        .frame(height: 60)
+                }
             }
-        }
-        .listStyle(PlainListStyle())
-        .frame(width: nil, height: nil, alignment: .leading)
-        .accentColor(Color.black)
-        if !list.selections.isEmpty {
-            Button(L10n.Swarmcreation.createTheSwarm) {
-                list.createTheSwarm()
+            .listStyle(PlainListStyle())
+            .frame(width: nil, height: nil, alignment: .leading)
+            .accentColor(Color.black)
+            if !list.selections.isEmpty {
+                createTheSwarm()
             }
-            .frame(width: 300, height: 60, alignment: .center)
-            .background(Color(UIColor.jamiButtonDark))
-            .foregroundColor(.white)
-            .cornerRadius(20)
         }
     }
+    func createTheSwarm() -> some View {
+        return Button(action: { list.createTheSwarm() }) {
+            Text(L10n.Swarmcreation.createTheSwarm)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .font(.system(size: 18))
+                .padding()
+                .foregroundColor(.white)
+        }
+        .background(Color(UIColor.jamiButtonDark))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.all, 15.0)
+    }
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
+
 struct ImagePicker: UIViewControllerRepresentable {
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
