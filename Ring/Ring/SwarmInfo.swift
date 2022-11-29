@@ -103,6 +103,7 @@ class SwarmInfo {
     private let accountsService: AccountsService
     private let requestsService: RequestsService
     private let accountId: String
+    private let localJamiId: String?
     private var conversation: ConversationModel?
     private let disposeBag = DisposeBag()
     private var tempBag = DisposeBag()
@@ -117,6 +118,7 @@ class SwarmInfo {
         self.accountsService = injectionBag.accountService
         self.requestsService = injectionBag.requestsService
         self.accountId = accountId
+        self.localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId
         self.participants
             .subscribe {[weak self] _ in
                 guard let self = self else { return }
@@ -190,9 +192,10 @@ class SwarmInfo {
 
     private func subscribeParticipantsInfo() {
         tempBag = DisposeBag()
-        let namesObservable = participants.value.map({ participantInfo in
-            return participantInfo.name.share().asObservable()
-        })
+        let namesObservable = participants.value
+            .map({ participantInfo in
+                return participantInfo.name.share().asObservable()
+            })
         Observable
             .combineLatest(namesObservable) { (items: [String]) -> [String] in
                 return items.filter { name in
@@ -207,9 +210,9 @@ class SwarmInfo {
             .disposed(by: self.tempBag)
         // filter out default avatars
         let avatarsObservable = participants.value
-            //            .filter({ participantInfo in
-            //                participantInfo.jamiId == participantInfo.name.value
-            //            })
+            .filter({ participantInfo in
+                participantInfo.jamiId != participantInfo.name.value
+            })
             .map({ participantInfo in
                 return participantInfo.avatar.share().asObservable()
             })
@@ -271,8 +274,8 @@ class SwarmInfo {
         guard let conversation = self.conversation else { return }
         var participantsInfo = [ParticipantInfo]()
         self.insertAndSortParticipants(participants: participantsInfo)
-        if let uri = accountsService.getAccount(fromAccountId: accountId)?.jamiId {
-            let memberList = conversationsService.getSwarmMembers(conversationId: conversation.id, accountId: accountId, accountURI: uri)
+        if let localJamiId = self.localJamiId {
+            let memberList = conversationsService.getSwarmMembers(conversationId: conversation.id, accountId: accountId, accountURI: localJamiId)
             memberList.forEach { participant in
                 if let participantInfo = createParticipant(jamiId: participant.jamiId, role: participant.role) {
                     participantsInfo.append(participantInfo)
@@ -285,12 +288,17 @@ class SwarmInfo {
 
     private func createParticipant(jamiId: String, role: ParticipantRole) -> ParticipantInfo? {
         let participantInfo = ParticipantInfo(jamiId: jamiId, role: role)
+        if let localJamiId = self.localJamiId, jamiId == localJamiId {
+            participantInfo.name.accept("me")
+            return participantInfo
+        }
         let uri = JamiURI.init(schema: .ring, infoHach: jamiId)
         guard let uriString = uri.uriString else { return nil}
         if self.contactsService.contact(withHash: jamiId) != nil {
             // subscribe for profile updates for participant
             self.profileService
                 .getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
+                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe { [weak self, weak participantInfo] profile in
                     guard let self = self, let participantInfo = participantInfo else { return }
                     if let imageString = profile.photo, let image = imageString.createImage() {
@@ -318,6 +326,7 @@ class SwarmInfo {
 
     private func lookupNameFor(participant: ParticipantInfo) {
         self.nameService.usernameLookupStatus
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .filter({ lookupNameResponse in
                 return lookupNameResponse.address != nil &&
                     lookupNameResponse.address == participant.jamiId
@@ -390,7 +399,7 @@ class SwarmInfo {
         // title format: "name1, name2, name3 + number of other participants"
         let participantsCount = self.participants.value.count
         // for one to one conversation return contact name
-        if participantsCount == 2, let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId,
+        if participantsCount == 2, let localJamiId = self.localJamiId,
            let name = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
            }).first?.name.value {
@@ -407,7 +416,7 @@ class SwarmInfo {
         finalTitle = names[0]
         if numberOfDisplayedNames != 1 {
             for index in 1...(numberOfDisplayedNames - 1) {
-                finalTitle += " , " + names[index]
+                finalTitle += ", " + names[index]
             }
         }
         finalTitle += titleEnd
