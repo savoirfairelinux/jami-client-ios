@@ -30,7 +30,9 @@ class ParticipantRow: Identifiable, ObservableObject {
 
     init(participantData: ParticipantInfo) {
         self.id = participantData.jamiId
+        self.name = participantData.name.value
         participantData.name
+            .observe(on: MainScheduler.instance)
             .startWith(participantData.name.value)
             .subscribe {[weak self] name in
                 guard let self = self else { return }
@@ -41,6 +43,7 @@ class ParticipantRow: Identifiable, ObservableObject {
             .disposed(by: self.disposeBag)
 
         participantData.avatar
+            .observe(on: MainScheduler.instance)
             .startWith(participantData.avatar.value)
             .subscribe {[weak self] avatar in
                 guard let self = self, let avatar = avatar else { return }

@@ -34,9 +34,12 @@ class ParticipantInfo: Equatable, Hashable {
     init(jamiId: String, role: ParticipantRole) {
         self.jamiId = jamiId
         self.role = role
-        self.name.share()
+        self.name
             .subscribe { [weak self] name in
                 guard let self = self else { return }
+                if name == "kdfd" {
+                    print("bgrd found")
+                }
                 // when profile does not have an avatar, contact image
                 // should be updated each time when name changed.
                 if !self.hasProfileAvatar, !name.isEmpty {
@@ -56,6 +59,26 @@ class ParticipantInfo: Equatable, Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(jamiId)
+    }
+
+    func lookupName(nameService: NameService, accountId: String) {
+        nameService.usernameLookupStatus.share()
+            // .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .filter({ [weak self] lookupNameResponse in
+                guard let self = self else { return false}
+                return lookupNameResponse.address != nil &&
+                    lookupNameResponse.address == self.jamiId
+            })
+            .asObservable()
+            .take(1)
+            .subscribe(onNext: { [weak self] lookupNameResponse in
+                guard let self = self else { return }
+                if let name = lookupNameResponse.name, !name.isEmpty, self.name.value != name {
+                    self.name.accept(name)
+                }
+            })
+            .disposed(by: self.disposeBag)
+        nameService.lookupAddress(withAccount: accountId, nameserver: "", address: self.jamiId)
     }
 }
 
@@ -294,7 +317,7 @@ class SwarmInfo {
         }
         let uri = JamiURI.init(schema: .ring, infoHach: jamiId)
         guard let uriString = uri.uriString else { return nil}
-        if self.contactsService.contact(withHash: jamiId) != nil {
+         if self.contactsService.contact(withHash: jamiId) != nil {
             // subscribe for profile updates for participant
             self.profileService
                 .getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
@@ -309,46 +332,71 @@ class SwarmInfo {
                         participantInfo.name.accept(profileName)
                     }
                     if participantInfo.avatar.value == nil || participantInfo.name.value.isEmpty {
-                        self.lookupNameFor(participant: participantInfo)
+                        if participantInfo.name.value.isEmpty {
+                            participantInfo.name.accept(jamiId)
+                        }
+                        participantInfo.lookupName(nameService: self.nameService, accountId: self.accountId)
+                        // self.lookupNameFor(participant: participantInfo)
                     }
-                    if participantInfo.name.value.isEmpty {
-                        participantInfo.name.accept(jamiId)
-                    }
+                    //                    if jamiId == "9425b227dcbf8832d99fd55c76fa2b82b3bc1596" {
+                    //                        print("$$$$adding 6")
+                    //                    }
+                    //                    if participantInfo.name.value.isEmpty {
+                    //                        participantInfo.name.accept(jamiId)
+                    //                    }
                 } onError: { _ in
                 }
                 .disposed(by: participantInfo.disposeBag)
         } else {
             participantInfo.name.accept(jamiId)
-            self.lookupNameFor(participant: participantInfo)
+            participantInfo.lookupName(nameService: self.nameService, accountId: self.accountId)
+            // self.lookupNameFor(participant: participantInfo)
         }
         return participantInfo
     }
 
-    private func lookupNameFor(participant: ParticipantInfo) {
-        self.nameService.usernameLookupStatus
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .filter({ lookupNameResponse in
-                return lookupNameResponse.address != nil &&
-                    lookupNameResponse.address == participant.jamiId
-            })
-            .asObservable()
-            .take(1)
-            .subscribe(onNext: { [weak participant] lookupNameResponse in
-                guard let participant = participant else { return }
-                if let name = lookupNameResponse.name, !name.isEmpty {
-                    participant.name.accept(name)
-                } else {
-                    participant.name.accept(participant.jamiId)
-                }
-            })
-            .disposed(by: participant.disposeBag)
-        self.nameService.lookupAddress(withAccount: accountId, nameserver: "", address: participant.jamiId)
-    }
+    //    private func lookupNameFor(participant: ParticipantInfo) {
+    //        if participant.jamiId == "9425b227dcbf8832d99fd55c76fa2b82b3bc1596" {
+    //            print("$$$$adding 8")
+    //        }
+    //        let jamiId = participant.jamiId
+    //        self.nameService.usernameLookupStatus
+    //            // .observe(on: MainScheduler.instance)
+    //            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+    //            .filter({ lookupNameResponse in
+    //                return lookupNameResponse.address != nil &&
+    //                    lookupNameResponse.address == jamiId
+    //            })
+    //            .asObservable()
+    //            // .take(1)
+    //            .subscribe(onNext: { lookupNameResponse in
+    //                guard let participant = self.participants.value.filter({ info1 in
+    //                    info1.jamiId == jamiId
+    //                }).first else { return }
+    //                if participant.jamiId == "9425b227dcbf8832d99fd55c76fa2b82b3bc1596" {
+    //                    print("$$$$adding 9")
+    //                }
+    //                if let name = lookupNameResponse.name, !name.isEmpty {
+    //                    if name == "bgrd" {
+    //                        print("bgrd found2")
+    //                        print("bgrd jamiId: \(participant.jamiId)" )
+    //                    }
+    //                    participant.name.accept(name)
+    //                } else {
+    //                    participant.name.accept(participant.jamiId)
+    //                }
+    //            })
+    //            .disposed(by: participant.disposeBag)
+    //        self.nameService.lookupAddress(withAccount: accountId, nameserver: "", address: participant.jamiId)
+    //    }
 
     private func insertAndSortContacts(contacts: [ParticipantInfo]) {
         var currentValue = self.contacts.value
         currentValue.append(contentsOf: contacts)
-        self.contacts.accept(currentValue.sorted(by: { $0.name.value > $1.name.value }))
+        //        currentValue.sort { participant1, participant2 in
+        //            participant1.name.value > participant2.name.value
+        //        }
+        self.contacts.accept(currentValue)
     }
 
     private func insertAndSortParticipants(participants: [ParticipantInfo]) {
