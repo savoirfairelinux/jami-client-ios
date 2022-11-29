@@ -113,7 +113,7 @@ struct MessageRowView: View {
                             .resizable()
                             .frame(width: 15, height: 15)
                             .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                            .overlay(Circle().stroke(model.readBorderColor, lineWidth: 2))
                             .zIndex(Double(readImages.count - index))
                     }
                 }

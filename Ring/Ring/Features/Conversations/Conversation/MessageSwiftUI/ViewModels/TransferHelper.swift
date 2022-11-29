@@ -58,7 +58,10 @@ class TransferHelper {
     }
 
     func getTransferSize(conversation: ConversationModel, message: MessageModel) -> Int64? {
-        guard let info = self.dataTransferService.dataTransferInfo(withId: message.daemonId, accountId: conversation.accountId, conversationId: conversation.id, isSwarm: conversation.isSwarm()) else { return nil }
+        guard let info = self.dataTransferService.dataTransferInfo(withId: message.daemonId,
+                                                                   accountId: conversation.accountId,
+                                                                   conversationId: conversation.id,
+                                                                   isSwarm: conversation.isSwarm()) else { return nil }
         return info.totalSize
     }
 

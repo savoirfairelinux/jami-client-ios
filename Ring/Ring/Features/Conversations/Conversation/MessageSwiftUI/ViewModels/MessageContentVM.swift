@@ -119,23 +119,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     @Published var fileProgress: CGFloat = 0
     @Published var transferActions = [TransferAction]()
     @Published var showProgress: Bool = true
-    var transferViewType: TransferViewType = .defaultView
-    var shouldUpdateTransferView = true
     @Published var playerHeight: CGFloat = 100
     @Published var playerWidth: CGFloat = 250
-    var image: UIImage? {
-        didSet {
-            updateTransferViewType()
-        }
-    }
-    var player: PlayerViewModel? {
-        didSet {
-            if player != nil {
-                self.player!.delegate = self
-                self.updateTransferViewType()
-            }
-        }
-    }
+    var image: UIImage?
+    var player: PlayerViewModel?
     var url: URL?
     var fileSize: Int64 = 0
     var transferStatus: DataTransferStatus = .unknown
@@ -313,24 +300,6 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         if (self.transferStatus == .success || !self.message.incoming), self.url == nil {
             self.transferState.onNext(TransferState.getURL(viewModel: self))
         }
-        self.updateTransferViewType()
-    }
-
-    private func updateTransferViewType() {
-        guard self.message.type == .fileTransfer else { return }
-        var newType: TransferViewType = .defaultView
-        if let image = self.image {
-            newType = .imageView(image: image)
-        } else if let player = self.player {
-            newType = .playerView(player: player)
-        }
-        if newType != self.transferViewType {
-            DispatchQueue.main.async {[weak self] in
-                guard let self = self else { return }
-                self.transferViewType = newType
-                self.shouldUpdateTransferView = true
-            }
-        }
     }
 
     private func updateTransferActions() {
@@ -403,6 +372,17 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         } else {
             playerHeight = height
         }
+    }
+
+    func updatePlayer(player: PlayerViewModel?) {
+        guard let plyer = player else { return }
+        if let firstImage = plyer.firstFrame,
+           let frameSize = firstImage.getNewSize(of: CGSize(width: maxDimension, height: maxDimension)) {
+            playerHeight = frameSize.height
+            playerWidth = frameSize.width
+        }
+        self.player = player
+        self.player!.delegate = self
     }
 
     var maxDimension: CGFloat {

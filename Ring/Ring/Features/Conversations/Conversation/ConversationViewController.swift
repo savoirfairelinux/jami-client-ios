@@ -111,6 +111,8 @@ class ConversationViewController: UIViewController,
                 case .preview(let message):
                     if message.image == nil && message.player == nil { return }
                     self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: message.image, initialFrame: CGRect.zero, delegate: message)
+                    self.messageAccessoryView.frame.size.height = 0
+                    self.messageAccessoryView.isHidden = true
                 case .forward(let message):
                     self.viewModel.slectContactsToShareMessage(message: message)
                 case .share(let items):
@@ -517,6 +519,10 @@ class ConversationViewController: UIViewController,
     }
 
     private func setRightNavigationButtons() {
+        // do not show call buttons for swarm with multiple participants
+        if self.viewModel.conversation.value.getParticipants().count > 1 {
+            return
+        }
         let audioCallItem = UIBarButtonItem()
         audioCallItem.image = UIImage(asset: Asset.callButton)
         audioCallItem.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
@@ -541,7 +547,6 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    // swiftlint:disable function_body_length
     func setupUI() {
         self.messageAccessoryView.sendButton.contentVerticalAlignment = .fill
         self.messageAccessoryView.sendButton.contentHorizontalAlignment = .fill

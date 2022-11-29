@@ -28,8 +28,8 @@ struct ContactMessageView: View {
                 Image(uiImage: avatar)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 30, height: 30)
-                    .cornerRadius(15)
+                    .frame(width: model.avatarSize, height: model.avatarSize)
+                    .clipShape(Circle())
             }
             Spacer()
                 .frame(width: model.inset)
@@ -40,7 +40,8 @@ struct ContactMessageView: View {
                 .font(model.textFont)
                 .truncationMode(.middle)
         }
-        .padding(model.inset)
+        .padding(.horizontal, model.inset)
+        .frame(minHeight: model.height)
         .overlay(
             RoundedRectangle(cornerRadius: model.cornerRadius)
                 .stroke(model.borderColor, lineWidth: 1))
