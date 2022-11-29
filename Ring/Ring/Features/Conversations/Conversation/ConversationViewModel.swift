@@ -50,7 +50,9 @@ class ConversationViewModel: Stateable, ViewModel {
 
     private var players = [String: PlayerViewModel]()
 
-    func getPlayer(messageID: String) -> PlayerViewModel? { return players[messageID] }
+    func getPlayer(messageID: String) -> PlayerViewModel? {
+        return players[messageID]
+    }
     func setPlayer(messageID: String, player: PlayerViewModel) { players[messageID] = player }
     func closeAllPlayers() {
         let queue = DispatchQueue.global(qos: .default)
@@ -123,7 +125,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     private func setConversation(_ conversation: ConversationModel) {
-        self.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+        self.conversation.accept(conversation)
     }
 
     convenience init(with injectionBag: InjectionBag, conversation: ConversationModel, user: JamiSearchViewModel.UserSearchModel) {
@@ -144,7 +146,6 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var conversation: BehaviorRelay<ConversationModel>! {
         didSet {
-            self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value)
             self.subscribeUnreadMessages()
             self.subscribeLocationServiceLocationReceived()
             self.subscribeProfileServiceMyPhoto()
@@ -162,7 +163,8 @@ class ConversationViewModel: Stateable, ViewModel {
             }
 
             self.subscribePresenceServiceContactPresence()
-            if conversation.value.isSwarm() {
+            if conversation.value.isSwarm() && self.swarmInfo == nil {
+                self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value)
                 self.swarmInfo!.finalAvatar.share()
                     .subscribe { [weak self] image in
                         self?.profileImageData.accept(image.pngData())
@@ -175,7 +177,7 @@ class ConversationViewModel: Stateable, ViewModel {
                     } onError: { _ in
                     }
                     .disposed(by: self.disposeBag)
-            } else {
+            } else if !conversation.value.isSwarm() {
                 let filterParicipants = conversation.value.getParticipants()
                 if let contact = self.contactsService.contact(withHash: filterParicipants.first?.jamiId ?? "") {
                     if let profile = self.contactsService.getProfile(uri: "ring:" + (filterParicipants.first?.jamiId ?? ""), accountId: self.conversation.value.accountId),
