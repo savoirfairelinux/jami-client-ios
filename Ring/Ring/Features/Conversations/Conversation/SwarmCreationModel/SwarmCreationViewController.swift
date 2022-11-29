@@ -47,7 +47,7 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
             self.navigationController?.popViewController(animated: true)
             self.dismiss(animated: true, completion: nil)
         })
-        let contentView = UIHostingController(rootView: SwarmCreationUI(list: model))
+        let contentView = UIHostingController(rootView: SwarmCreationUI(list: self.model))
         addChild(contentView)
         view.addSubview(contentView.view)
         contentView.view.translatesAutoresizingMaskIntoConstraints = false

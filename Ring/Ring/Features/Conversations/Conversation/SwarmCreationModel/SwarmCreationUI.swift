@@ -24,18 +24,18 @@ enum PhotoSheetType: Identifiable {
     var id: UUID {
         UUID()
     }
+
     case gallery
     case picture
 }
 struct ParticipantListCell: View {
-    var participant: ParticipantRow
+    @StateObject var participant: ParticipantRow
     var isSelected: Bool
     var action: () -> Void
 
     @ViewBuilder
     var body: some View {
         Button(action: self.action) {
-
             HStack(alignment: .center, spacing: nil) {
                 Image(uiImage: participant.imageDataFinal)
                     .resizable()
@@ -57,7 +57,7 @@ struct ParticipantListCell: View {
     }
 }
 struct SwarmCreationUI: View {
-    @ObservedObject var list: SwarmCreationUIModel
+    @StateObject var list: SwarmCreationUIModel
     @SwiftUI.State private var showingOptions = false
     @SwiftUI.State private var showingType: PhotoSheetType?
 
