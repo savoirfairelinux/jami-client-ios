@@ -30,10 +30,19 @@ class ParticipantRow: Identifiable, ObservableObject {
 
     init(participantData: ParticipantInfo) {
         self.id = participantData.jamiId
+        self.name = participantData.name.value
+        if participantData.jamiId == "9425b227dcbf8832d99fd55c76fa2b82b3bc1596" {
+            print("******** name already added")
+            print("\(participantData)")
+        }
         participantData.name
+            .observe(on: MainScheduler.instance)
             .startWith(participantData.name.value)
             .subscribe {[weak self] name in
                 guard let self = self else { return }
+                if name == "bgrd" {
+                    print("bgrd found")
+                }
                 self.name = name
             } onError: { _ in
 
@@ -41,6 +50,7 @@ class ParticipantRow: Identifiable, ObservableObject {
             .disposed(by: self.disposeBag)
 
         participantData.avatar
+            .observe(on: MainScheduler.instance)
             .startWith(participantData.avatar.value)
             .subscribe {[weak self] avatar in
                 guard let self = self, let avatar = avatar else { return }

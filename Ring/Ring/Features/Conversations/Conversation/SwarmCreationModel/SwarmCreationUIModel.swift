@@ -58,17 +58,19 @@ class SwarmCreationUIModel: ObservableObject {
         }
         .disposed(by: disposeBag)
 
-        self.swarmInfo.contacts.subscribe { infos in
-            self.participantsRows = [ParticipantRow]()
-            for info in infos {
-                let participant = ParticipantRow(participantData: info)
-                self.participantsRows.append(participant)
-                self.filteredArray.append(participant)
-            }
-        } onError: { _ in
+        self.swarmInfo.contacts
+            .observe(on: MainScheduler.instance)
+            .subscribe { infos in
+                self.participantsRows = [ParticipantRow]()
+                for info in infos {
+                    let participant = ParticipantRow(participantData: info)
+                    self.participantsRows.append(participant)
+                    self.filteredArray.append(participant)
+                }
+            } onError: { _ in
 
-        }
-        .disposed(by: self.disposeBag)
+            }
+            .disposed(by: self.disposeBag)
         injectionBag
             .contactsService
             .contacts
