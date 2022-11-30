@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "qr_code_scan@.png",
+      "filename" : "createSwarm.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "qr-code_scan@2x.png",
+      "filename" : "createSwarm@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "qr_code_scan@3x.png",
+      "filename" : "createSwarm@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

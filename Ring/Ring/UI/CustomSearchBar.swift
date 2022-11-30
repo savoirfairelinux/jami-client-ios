@@ -71,7 +71,6 @@ class CustomSearchBar: UISearchBar {
         buttonView.frame = CGRect(x: buttonFrame.origin.x, y: buttonFrame.origin.y, width: (buttonSize * totalItems), height: buttonSize)
         if margin == 0 {
             searchFieldTrailing.constant = rightButton.isHidden ? currentTrailingEditing : (currentTrailing * totalItems)
-            print("Trailing value----->\(searchFieldTrailing.constant)")
         } else {
             searchFieldTrailing.constant += margin
         }
@@ -84,7 +83,7 @@ class CustomSearchBar: UISearchBar {
 
     func configure(buttonImage: UIImage, position: CGFloat, buttonPressed: @escaping (() -> Void)) {
         rightButton = UIButton(frame: CGRect(x: (buttonSize * position) - buttonSize, y: 0, width: buttonSize, height: buttonSize))
-        rightButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        rightButton.imageEdgeInsets = UIEdgeInsets(top: 12, left: position == 2 ? 8 : 16, bottom: 12, right: position == 2 ? 16 : 8)
         rightButton.setImage(buttonImage, for: .normal)
         rightButton.tintColor = UIColor.jamiMain
         buttonView.addSubview(rightButton)
