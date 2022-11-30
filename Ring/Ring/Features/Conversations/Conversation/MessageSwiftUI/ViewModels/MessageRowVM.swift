@@ -51,6 +51,8 @@ class MessageRowVM: ObservableObject {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             if self.shouldDisplayAavatar {
                 self.infoState.onNext(MessageInfo.updateAvatar(jamiId: jamiId))
+            } else {
+                self.avatarImage = nil
             }
         }
     }
