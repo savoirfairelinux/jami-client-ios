@@ -134,6 +134,7 @@ class ConversationViewController: UIViewController,
         swiftUIView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         swiftUIView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
         swiftUIView.didMove(toParent: self)
+        self.view.backgroundColor = UIColor.systemBackground
         self.view.sendSubviewToBack(swiftUIView.view)
     }
 
@@ -421,7 +422,6 @@ class ConversationViewController: UIViewController,
     func updateMessagesOffset() {
         self.bottomHeight = self.messageAccessoryView.frame.height + 10
         self.bottomAnchor?.constant = -self.bottomHeight
-        swiftUIModel?.scrollIfNeed()
     }
 
     @objc

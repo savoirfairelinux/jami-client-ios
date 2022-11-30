@@ -39,6 +39,8 @@ class MessageStackVM {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             if shouldDisplayName {
                 self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
+            } else {
+                self.username = ""
             }
         }
     }
