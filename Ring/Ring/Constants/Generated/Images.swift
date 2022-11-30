@@ -42,6 +42,7 @@ internal enum Asset {
   internal static let closeIcon = ImageAsset(name: "close_icon")
   internal static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
   internal static let conversationIcon = ImageAsset(name: "conversation_icon")
+  internal static let createSwarm = ImageAsset(name: "createSwarm")
   internal static let cross = ImageAsset(name: "cross")
   internal static let device = ImageAsset(name: "device")
   internal static let dialpad = ImageAsset(name: "dialpad")

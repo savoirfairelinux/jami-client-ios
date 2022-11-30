@@ -732,6 +732,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let image = accountSip ? UIImage(asset: Asset.phoneBook) : UIImage(asset: Asset.qrCode)
         guard let buttonImage = image else { return }
         searchController.updateSearchBar(image: buttonImage)
+        if !accountSip {
+            let image1 = UIImage(asset: Asset.createSwarm)
+            guard let buttonImage = image1 else { return }
+            searchController.updateSearchBar(image: buttonImage)
+        }
     }
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         // -100 from total width as number of buttons in navigation items are 2
@@ -758,21 +763,23 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                                         self.openScan()
                                     }
                                 })
-        let image1 = UIImage(asset: Asset.addPerson)
-        guard let buttonImage1 = image1 else { return }
-        searchController
-            .configureSearchBar(image: buttonImage1, position: 2,
-                                buttonPressed: { [weak self] in
-                                    guard let self = self else { return }
-                                    guard let account = self.viewModel.currentAccount else { return }
-                                    let accountSip = account.type == AccountType.sip
-                                    if accountSip {
-                                        self.contactPicker.delegate = self
-                                        self.present(self.contactPicker, animated: true, completion: nil)
-                                    } else {
+        if !accountSip {
+            let image1 = UIImage(asset: Asset.createSwarm)
+            guard let buttonImage1 = image1 else { return }
+            searchController
+                .configureSearchBar(image: buttonImage1, position: 2,
+                                    buttonPressed: { [weak self] in
+                                        guard let self = self else { return }
+                                        //                                        guard let account = self.viewModel.currentAccount else { return }
+                                        //                                        let accountSip = account.type == AccountType.sip
+                                        //                                        if accountSip {
+                                        //                                            self.contactPicker.delegate = self
+                                        //                                            self.present(self.contactPicker, animated: true, completion: nil)
+                                        //                                        } else {
                                         self.createGroup()
-                                    }
-                                })
+                                        //                                        }
+                                    })
+        }
         navigationItem.searchController = searchController
 
         navigationItem.hidesSearchBarWhenScrolling = false
