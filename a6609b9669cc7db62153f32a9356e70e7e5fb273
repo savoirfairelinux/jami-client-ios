@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146900b8_2f9d51cc",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/SwarmCreationModel/SwarmCreationUIModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-11-30T01:40:43Z",
+      "side": 1,
+      "message": "we have same variable in SwarmCreationUI",
+      "revId": "a6609b9669cc7db62153f32a9356e70e7e5fb273",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
