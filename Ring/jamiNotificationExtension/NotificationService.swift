@@ -91,12 +91,7 @@ class NotificationService: UNNotificationServiceExtension {
 
         /// app is not active. Querry value from dht
         guard let proxyURL = getProxyCaches(data: requestData),
-              var proxy = try? String(contentsOf: proxyURL, encoding: .utf8) else {
-            return
-        }
-        proxy = ensureURLPrefix(urlString: proxy)
-        guard let urlPrpxy = URL(string: proxy),
-              let url = getRequestURL(data: requestData, proxyURL: urlPrpxy) else {
+              let url = getRequestURL(data: requestData, path: proxyURL) else {
             return
         }
         tasksGroup.enter()
@@ -174,7 +169,11 @@ class NotificationService: UNNotificationServiceExtension {
                             case .invitation:
                                 self.syncCompleted = true
                                 self.numberOfMessages += 1
-                                self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
+                                self.configureMessageNotification(from: eventData.jamiId,
+                                                                  body: eventData.content,
+                                                                  accountId: self.accountId,
+                                                                  conversationId: eventData.conversationId,
+                                                                  groupTitle: eventData.groupTitle)
                             }
                         }
                     case .unknown:
@@ -394,6 +393,21 @@ extension NotificationService {
             return nil
         }
         return proxyURL.appendingPathComponent(key)
+    }
+
+    private func getRequestURL(data: [String: String], path: URL) -> URL? {
+        guard let key = data[NotificationField.key.rawValue],
+              let jsonData = NSData(contentsOf: path) as? Data else {
+            return nil
+        }
+        guard let map = try? JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: String],
+              var proxyAddress = map[key] else {
+            return nil
+        }
+
+        proxyAddress = ensureURLPrefix(urlString: proxyAddress)
+        guard let urlPrpxy = URL(string: proxyAddress) else { return nil }
+        return urlPrpxy.appendingPathComponent(key)
     }
 
     private func getKeyPath(data: [String: String]) -> URL? {
