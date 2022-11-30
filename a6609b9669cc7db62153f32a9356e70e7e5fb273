@@ -16,6 +16,24 @@
       "message": "we have same variable in SwarmCreationUI",
       "revId": "a6609b9669cc7db62153f32a9356e70e7e5fb273",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b85b008f_0cf19845",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/SwarmCreationModel/SwarmCreationUIModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2022-11-30T15:07:53Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "146900b8_2f9d51cc",
+      "revId": "a6609b9669cc7db62153f32a9356e70e7e5fb273",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
