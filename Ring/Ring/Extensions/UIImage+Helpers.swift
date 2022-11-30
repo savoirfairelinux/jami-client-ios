@@ -331,7 +331,7 @@ extension UIImage {
                 }
             } else {
                 if let image = UIImage(asset: Asset.fallbackAvatar)?.withColor(.white),
-                   let masked = image.maskWithColor(color: UIColor(hexString: "#9e9e9e")!, size: size) {
+                   let masked = image.maskWithColor(color: fbaBGColor, size: size) {
                     return masked
                 }
             }
