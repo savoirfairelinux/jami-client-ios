@@ -71,7 +71,6 @@ class CustomSearchBar: UISearchBar {
         buttonView.frame = CGRect(x: buttonFrame.origin.x, y: buttonFrame.origin.y, width: (buttonSize * totalItems), height: buttonSize)
         if margin == 0 {
             searchFieldTrailing.constant = rightButton.isHidden ? currentTrailingEditing : (currentTrailing * totalItems)
-            print("Trailing value----->\(searchFieldTrailing.constant)")
         } else {
             searchFieldTrailing.constant += margin
         }
