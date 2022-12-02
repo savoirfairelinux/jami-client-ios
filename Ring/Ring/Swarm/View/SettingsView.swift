@@ -38,16 +38,15 @@ struct SettingsView: View {
                 //                        })
                 //                }
                 //
-                //                Button(action: {
-                //                    viewmodel.leaveSwarm()
-                //                }, label: {
-                //                    HStack {
-                //                        Text("Leave the conversation")
-                //                            .multilineTextAlignment(.leading)
-                //                            .foregroundColor(.black)
-                //                        Spacer()
-                //                    }
-                //                })
+                //                                Button(action: {
+                //                                    viewmodel.leaveSwarm()
+                //                                }, label: {
+                //                                    HStack {
+                //                                        Text(L10n.Swarm.leaveConversation)
+                //                                            .multilineTextAlignment(.leading)
+                //                                        Spacer()
+                //                                    }
+                //                                })
 
                 ColorPicker("Choose a color", selection: $swarmColor)
 
@@ -55,7 +54,6 @@ struct SettingsView: View {
                     Text("Type of swarm")
                     Spacer()
                     Text(swarmType)
-                        .foregroundColor(.black)
                 }
 
                 HStack {
@@ -63,7 +61,6 @@ struct SettingsView: View {
                         .padding(.trailing, 30)
                     Spacer()
                     Text(id)
-                        .foregroundColor(.black)
                         .multilineTextAlignment(.trailing)
                         .truncationMode(.tail)
                         .lineLimit(1)

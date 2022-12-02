@@ -31,6 +31,7 @@ enum CallViewMode {
     case videoWithSpiner
     case video
 }
+// swiftlint:disable type_body_length
 class CallViewModel: Stateable, ViewModel {
 
     // stateable
@@ -95,7 +96,7 @@ class CallViewModel: Stateable, ViewModel {
             }
             self.callService.currentConferenceEvent
                 .asObservable()
-                .filter({ [weak self] conference-> Bool in
+                .filter({ [weak self] conference -> Bool in
                     guard let self = self else { return false }
                     return conference.calls.contains(self.call?.callId ?? "") ||
                         conference.conferenceID == self.rendererId
