@@ -57,7 +57,7 @@
 "swarm.publicChat" = "Public group swarm";
 "swarm.others" = "Others";
 "swarm.member" = "Member";
-"swarm.invited" = "Others";
+"swarm.invited" = "Invited";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Banned";
 "swarm.unknown" = "Unkown";
