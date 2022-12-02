@@ -664,8 +664,8 @@ internal enum L10n {
     internal static let identifier = L10n.tr("Localizable", "swarm.identifier", fallback: "Identifier")
     /// Ignore the swarm
     internal static let ignoreSwarm = L10n.tr("Localizable", "swarm.ignoreSwarm", fallback: "Ignore the swarm")
-    /// Others
-    internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Others")
+    /// Invited
+    internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Invited")
     /// Private group swarm
     internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private group swarm")
     /// Leave the conversation
