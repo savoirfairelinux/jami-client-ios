@@ -33,7 +33,6 @@ public struct TopProfileView: View {
     @SwiftUI.State private var showingOptions = false
     @SwiftUI.State private var showingType: PhotoSheetType?
     @SwiftUI.State private var image: UIImage?
-    @AppStorage("SWARM_COLOR") var swarmColor = Color.blue
     var swarmViews: [SwarmSettingView] {
         if viewmodel.swarmInfo.participants.value.count == 2 {
             return [.about]
@@ -101,43 +100,46 @@ public struct TopProfileView: View {
                     }
                 }
                 .padding([.vertical, .horizontal], 30)
-                .background(swarmColor)
+                .background(viewmodel.finalColor)
                 .onTapGesture {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }
+            }
 
-                Picker("", selection: $selectedView) {
-                    ForEach(swarmViews, id: \.self) {
-                        switch $0 {
-                        case .about:
-                            Text(L10n.Swarm.about)
-                        case .memberList:
-                            Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
-                        }
+            Picker("", selection: $selectedView) {
+                ForEach(swarmViews, id: \.self) {
+                    switch $0 {
+                    case .about:
+                        Text(L10n.Swarm.about)
+                    case .memberList:
+                        Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
                     }
                 }
-                .pickerStyle(.segmented)
-                .padding(.all, 20)
+            }
+            .pickerStyle(.segmented)
+            .padding(.all, 20)
 
-                switch selectedView {
-                case .about:
-                    SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
-                case .memberList:
-                    MemberList(members: viewmodel.swarmInfo.participants.value)
-                }
+            switch selectedView {
+            case .about:
+                SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
+            case .memberList:
+                MemberList(members: viewmodel.swarmInfo.participants.value)
             }
-            .onLoad {
-                descriptionTextFieldInput = viewmodel.swarmInfo.description.value
-                titleTextFieldInput = viewmodel.finalTitle
-            }
-            .onChange(of: viewmodel.finalTitle) { _ in
-                titleTextFieldInput = viewmodel.finalTitle
-            }
+        }
+        .onLoad {
+            descriptionTextFieldInput = viewmodel.swarmInfo.description.value
+            titleTextFieldInput = viewmodel.finalTitle
+        }
+        .onChange(of: viewmodel.finalTitle) { _ in
+            titleTextFieldInput = viewmodel.finalTitle
         }
     }
 }
 
 private extension TopProfileView {
+    var lightOrDarkColor: Color {
+        return viewmodel.finalColor.isLight(threshold: 0.5) ?? true ? Color.black : Color.white
+    }
     var titleLabel: some View {
         Text(viewmodel.finalTitle)
             .font(Font.title3.weight(.semibold))
@@ -157,9 +159,9 @@ private extension TopProfileView {
                 viewmodel.title = titleTextFieldInput
             })
             // Text color.
-            .foregroundColor(.white)
+            .foregroundColor(lightOrDarkColor)
             // Cursor color.
-            .accentColor(.white)
+            .accentColor(lightOrDarkColor)
             .font(Font.title3.weight(.semibold))
             .multilineTextAlignment(.center)
             .padding()
@@ -170,23 +172,39 @@ private extension TopProfileView {
             .font(.body)
             .multilineTextAlignment(.center)
             // Text color.
-            .foregroundColor(.white)
+            .foregroundColor(lightOrDarkColor)
             // Cursor color.
-            .accentColor(.white)
+            .accentColor(lightOrDarkColor)
     }
 
     var descriptionTextField: some View {
         TextField(
-            L10n.Swarm.addDescription,
+            "",
             text: $descriptionTextFieldInput,
             onCommit: {
                 viewmodel.description = descriptionTextFieldInput
             })
+            .placeholder(when: descriptionTextFieldInput.isEmpty) {
+                Text(L10n.Swarm.addDescription).foregroundColor(.gray)
+            }
             // Cursor color.
-            .accentColor(.white)
+            .accentColor(lightOrDarkColor)
             // Text color.
-            .foregroundColor(.white)
+            .foregroundColor(lightOrDarkColor)
             .font(.body)
             .multilineTextAlignment(.center)
+    }
+}
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .center,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
     }
 }
