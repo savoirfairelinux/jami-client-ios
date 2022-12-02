@@ -31,15 +31,15 @@ class SwarmCreationUIModel: ObservableObject {
     private let accountId: String
     private let conversationService: ConversationsService
     private var swarmInfo: SwarmInfo
-    var swarmCreated: (() -> Void)
+    var swarmCreated: ((Bool) -> Void)
 
     @Published var swarmName: String = ""
     @Published var swarmDescription: String = ""
-    @Published var imageData: Data = (UIImage(asset: Asset.addAvatar)?.convertToData(ofMaxSize: 1))!
+    @Published var imageData: Data = Data()
     @Published var selections: [String] = []
     @Published var maximumLimit: Int = 8
 
-    required init(with injectionBag: InjectionBag, accountId: String, swarmCreated: @escaping (() -> Void)) {
+    required init(with injectionBag: InjectionBag, accountId: String, swarmCreated: @escaping ((Bool) -> Void)) {
         self.swarmCreated = swarmCreated
         self.conversationService = injectionBag.conversationsService
         self.accountId = accountId
@@ -58,17 +58,19 @@ class SwarmCreationUIModel: ObservableObject {
         }
         .disposed(by: disposeBag)
 
-        self.swarmInfo.contacts.subscribe { infos in
-            self.participantsRows = [ParticipantRow]()
-            for info in infos {
-                let participant = ParticipantRow(participantData: info)
-                self.participantsRows.append(participant)
-                self.filteredArray.append(participant)
-            }
-        } onError: { _ in
+        self.swarmInfo.contacts
+            .observe(on: MainScheduler.instance)
+            .subscribe { infos in
+                self.participantsRows = [ParticipantRow]()
+                for info in infos {
+                    let participant = ParticipantRow(participantData: info)
+                    self.participantsRows.append(participant)
+                    self.filteredArray.append(participant)
+                }
+            } onError: { _ in
 
-        }
-        .disposed(by: self.disposeBag)
+            }
+            .disposed(by: self.disposeBag)
         injectionBag
             .contactsService
             .contacts
@@ -84,11 +86,9 @@ class SwarmCreationUIModel: ObservableObject {
     func createTheSwarm() {
         var info = [String: String]()
         let conversationId = self.conversationService.startConversation(accountId: accountId)
-        let defaultImageData = UIImage(asset: Asset.addAvatar)?.convertToData(ofMaxSize: 1)
-        let strImage = imageData.base64EncodedString()
 
-        if !strImage.isEmpty && imageData != defaultImageData {
-            info[ConversationAttributes.avatar.rawValue] = strImage
+        if !imageData.isEmpty {
+            info[ConversationAttributes.avatar.rawValue] = imageData.base64EncodedString()
         }
         if !swarmName.isEmpty {
             info[ConversationAttributes.title.rawValue] = swarmName
@@ -103,7 +103,7 @@ class SwarmCreationUIModel: ObservableObject {
             self.conversationService.addConversationMember(accountId: accountId, conversationId: conversationId, memberId: participant)
 
         }
-        // self.swarmCreated()
+        _ = self.swarmCreated(true)
     }
 
 }

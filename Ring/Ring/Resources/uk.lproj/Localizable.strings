@@ -31,11 +31,17 @@
 "global.accept" = "Прийняти";
 "global.block" = "Заблокувати";
 "global.refuse" = "Скидання";
+"global.name" = "Ім’я";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
 "scan.search" = "Пошук…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Додати опис";
 // Smartlist
 "smartlist.yesterday" = "Вчора";
 "smartlist.results" = "Public Directory";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Ім’я";
 "accountPage.linkDeviceTitle" = "Прив'язати інший пристрій";
 "accountPage.other" = "Інше";
 "accountPage.removeAccountTitle" = "Вилучити обліковий запис";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Контакт додано";
-"generatedMessage.invitationReceived" = "Отримано запрошення";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Вихідний виклик";
 "generatedMessage.incomingCall" = "Вхідний виклик";
 "generatedMessage.missedOutgoingCall" = "Пропущений вихідний виклик";
 "generatedMessage.missedIncomingCall" = "Пропущений вхідний виклик";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Розширені налаштування";

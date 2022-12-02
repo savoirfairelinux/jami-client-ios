@@ -111,44 +111,6 @@ static id <DataTransferAdapterDelegate> _delegate;
     return downloadFile(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([interactionId UTF8String]), std::string([fileId UTF8String]), std::string([filePath UTF8String]));
 }
 
-///non swarm conversations
-- (NSDataTransferError)sendNonSwarmFileWithInfo:(NSDataTransferInfo*)info withTransferId:(UInt64*)transferId {
-    DataTransferInfo transferInfo;
-    transferInfo.accountId = std::string([info->accountId UTF8String]);
-    transferInfo.peer = std::string([info->peer UTF8String]);
-    transferInfo.path = std::string([info->path UTF8String]);
-    transferInfo.conversationId = "";
-    transferInfo.displayName = std::string([info->displayName UTF8String]);
-    transferInfo.bytesProgress = 0;
-    return (NSDataTransferError)sendFileLegacy(transferInfo, *transferId);
-}
-
-- (NSDataTransferError)acceptNonSwarmTransferWithId:(NSString*)fileId
-                                          accountId:(NSString*)accountId
-                                       withFilePath:(NSString*)filePath {
-    return (NSDataTransferError)acceptFileTransfer(std::string([accountId UTF8String]),
-                                                   std::string([fileId UTF8String]),
-                                                   std::string([filePath UTF8String]));
-}
-
-- (NSDataTransferError)nonSwarmTransferInfoWithId:(NSString*)fileId
-                                        accountId:(NSString*)accountId
-                                         withInfo:(NSDataTransferInfo*)info {
-    DataTransferInfo transferInfo;
-    auto err = (NSDataTransferError)dataTransferInfo(std::string([accountId UTF8String]), std::string([fileId UTF8String]), transferInfo);
-    info->accountId = [NSString stringWithUTF8String:transferInfo.accountId.c_str()];
-    info->lastEvent = (NSDataTransferEventCode)transferInfo.lastEvent;
-    info->flags = transferInfo.flags;
-    info->totalSize = transferInfo.totalSize;
-    info->bytesProgress = transferInfo.bytesProgress;
-    info->peer = [NSString stringWithUTF8String:transferInfo.peer.c_str()];
-    info->displayName = [NSString stringWithUTF8String:transferInfo.displayName.c_str()];
-    info->path =[NSString stringWithUTF8String:transferInfo.path.c_str()];
-    info->mimetype = [NSString stringWithUTF8String:transferInfo.mimetype.c_str()];
-    info->conversationId = [NSString stringWithUTF8String:transferInfo.conversationId.c_str()];
-    return err;
-}
-
 ///swarm  and non swarm conversations
 - (NSDataTransferError)cancelDataTransferWithId:(NSString*)fileId
                                       accountId:(NSString*)accountId

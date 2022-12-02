@@ -94,15 +94,6 @@ typedef NS_ENUM(UInt32, NSDataTransferFlags)  {
                           interactionId:(NSString*)interactionId
                            withFilePath:(NSString*)filePath;
 
-///non swarm conversations
-- (NSDataTransferError)sendNonSwarmFileWithInfo:(NSDataTransferInfo*)info withTransferId:(UInt64*)transferId;
-- (NSDataTransferError)acceptNonSwarmTransferWithId:(NSString*)fileId
-                                          accountId:(NSString*)accountId
-                                       withFilePath:(NSString*)filePath;
-- (NSDataTransferError)nonSwarmTransferInfoWithId:(NSString*)fileId
-                                        accountId:(NSString*)accountId
-                                         withInfo:(NSDataTransferInfo*)info;
-
 ///swarm and non swarm conversations
 - (NSDataTransferError)cancelDataTransferWithId:(NSString*)fileId
                                       accountId:(NSString*)accountId

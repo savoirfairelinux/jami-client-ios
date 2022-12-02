@@ -153,15 +153,14 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
         return self.conversationsForCurrentAccount.share()
             .map({ (conversations) in
-                self.conversationViewModels = [ConversationViewModel]()
                 return conversations
                     .compactMap({ conversationModel in
-
                         var conversationViewModel: ConversationViewModel?
                         if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
                             return conversationViewModel.conversation.value == conversationModel
                         }).first {
                             conversationViewModel = foundConversationViewModel
+                            conversationViewModel?.conversation.accept(conversationModel)
                         } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
                             conversationViewModel = contactFound
                             self.conversationViewModels.append(contactFound)
@@ -341,7 +340,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     func closeAllPlayers() {
-        self.conversationViewModels.forEach { (conversationModel) in
+        self.conversationViewModels.forEach { conversationModel in
             conversationModel.closeAllPlayers()
         }
     }

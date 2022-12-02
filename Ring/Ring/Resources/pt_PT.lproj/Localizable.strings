@@ -31,11 +31,17 @@
 "global.accept" = "Aceitar";
 "global.block" = "Bloquear";
 "global.refuse" = "Recusar";
+"global.name" = "Nome";
 
 // Scan
 "scan.badQrCode" = "Código QR inválido";
 "scan.search" = "A pesquisar…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "Ontem";
 "smartlist.results" = "Diretório público";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Palavra-chave incorreta";
 "accountPage.deviceRevocationUnknownDevice" = "Dispositivo desconhecido";
 "accountPage.deviceRevocationError" = "Erro ao desvincular o dispositivo";
-"accountPage.namePlaceholder" = "Nome";
 "accountPage.linkDeviceTitle" = "Associar outro dispositivo";
 "accountPage.other" = "Outro";
 "accountPage.removeAccountTitle" = "Remover conta";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contacto adicionado";
-"generatedMessage.invitationReceived" = "Convite recebido";
-"generatedMessage.invitationAccepted" = "Convite aceite";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Chamada efetuada";
 "generatedMessage.incomingCall" = "Chamada recebida";
 "generatedMessage.missedOutgoingCall" = "Chamadas efetuadas perdidas";
 "generatedMessage.missedIncomingCall" = "Chamadas recebidas perdidas";
 "generatedMessage.liveLocationSharing" = "Compartilhamento de localização atual";
-"generatedMessage.contactLeftConversation" = "Contato saiu da conversa";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Configurações avançadas";

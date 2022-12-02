@@ -41,13 +41,13 @@ enum Directories: String {
 enum DataTransferStatus: CustomStringConvertible {
     var description: String {
         switch self {
-        case .created: return "created"
-        case .awaiting: return "awaiting"
-        case .canceled: return "canceled"
-        case .ongoing: return "ongoing"
-        case .success: return "success"
-        case .error: return "error"
-        case .unknown: return "unknown"
+        case .created: return ""
+        case .awaiting: return ""
+        case .canceled: return "Canceled"
+        case .ongoing: return "Transferring"
+        case .success: return "Completed"
+        case .error: return ""
+        case .unknown: return ""
         }
     }
 
@@ -117,12 +117,8 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     func dataTransferInfo(withId fileId: String, accountId: String, conversationId: String, isSwarm: Bool) -> NSDataTransferInfo? {
         let info = NSDataTransferInfo()
         var err: NSDataTransferError
-        if !isSwarm {
-            err = self.dataTransferAdapter.nonSwarmTransferInfo(withId: fileId, accountId: accountId, with: info)
-        } else {
-            info.conversationId = conversationId
-            err = self.dataTransferAdapter.swarmTransferProgress(withId: fileId, accountId: accountId, with: info)
-        }
+        info.conversationId = conversationId
+        err = self.dataTransferAdapter.swarmTransferProgress(withId: fileId, accountId: accountId, with: info)
         if err != .success {
             self.log.error("DataTransferService: error getting transfer info for id: \(fileId)")
             return nil
@@ -148,68 +144,6 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         self.dataTransferAdapter.downloadSwarmTransfer(withFileId: transferId, accountId: accountID, conversationId: conversationID, interactionId: interactionID, withFilePath: path)
     }
 
-    // MARK: non swarm transfer actions
-
-    func acceptTransfer(withId transferId: String,
-                        fileName: inout String,
-                        accountID: String,
-                        conversationID: String,
-                        name: String) -> NSDataTransferError {
-        guard let info = dataTransferInfo(withId: String(transferId), accountId: accountID, conversationId: conversationID, isSwarm: false) else {
-            return NSDataTransferError.invalid_argument
-        }
-        // accept transfer
-        if let pathUrl = getFilePathForTransfer(forFile: info.displayName, accountID: accountID,
-                                                conversationID: conversationID) {
-            // if file name was changed because the same name already exist, update db
-            if pathUrl.lastPathComponent != info.displayName {
-                let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(info.totalSize), countStyle: .file)
-                let name = pathUrl.lastPathComponent + "\n" + fileSizeWithUnit
-                fileName = name
-                // update db
-                self.dbManager.updateFileName(daemonID: transferId, name: name, accountId: accountID)
-                    .subscribe(onCompleted: { [weak self] in
-                        self?.log.debug("file name updated")
-                    }, onError: { [weak self] _ in
-                        self?.log.error("update name failed")
-                    })
-                    .disposed(by: self.disposeBag)
-            }
-            self.log.debug("DataTransferService: saving file to: \(pathUrl.path))")
-            return self.dataTransferAdapter.acceptNonSwarmTransfer(withId: transferId, accountId: accountID, withFilePath: pathUrl.path)
-        } else {
-            self.log.error("DataTransferService: saving file error: bad local path")
-            return .io
-        }
-    }
-
-    private func sendNonSwarmFile(filePath: String, displayName: String, accountId: String, peerInfoHash: String, localIdentifier: String?) {
-        var transferId: UInt64 = 0
-        let info = NSDataTransferInfo()
-        info.accountId = accountId
-        info.peer = peerInfoHash
-        info.path = filePath
-        info.mimetype = ""
-        info.displayName = displayName
-        let _id = UnsafeMutablePointer<UInt64>.allocate(capacity: 1)
-        let err = self.dataTransferAdapter.sendNonSwarmFile(with: info, withTransferId: _id)
-        transferId = _id.pointee
-        if err != .success {
-            self.log.error("sendFile failed")
-        } else {
-            let serviceEventType: ServiceEventType = .dataTransferCreated
-            var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-            serviceEvent.addEventInput(.transferId, value: String(transferId))
-            serviceEvent.addEventInput(.accountId, value: accountId)
-            serviceEvent.addEventInput(.conversationId, value: "")
-            serviceEvent.addEventInput(.messageId, value: "")
-            if let localIdentifier = localIdentifier {
-                serviceEvent.addEventInput(.localPhotolID, value: localIdentifier)
-            }
-            self.responseStream.onNext(serviceEvent)
-        }
-    }
-
     // MARK: swarm and non swarm transfer actions
 
     func cancelTransfer(withId transferId: String, accountId: String, conversationId: String) -> NSDataTransferError {
@@ -221,16 +155,11 @@ public final class DataTransferService: DataTransferAdapterDelegate {
     }
 
     func sendFile(conversation: ConversationModel, filePath: String, displayName: String, localIdentifier: String?) {
-        if !conversation.isSwarm() {
-            guard let jamiId = conversation.getParticipants().first?.jamiId else { return }
-            self.sendNonSwarmFile(filePath: filePath, displayName: displayName, accountId: conversation.accountId, peerInfoHash: jamiId, localIdentifier: localIdentifier)
-        } else {
-            self.dataTransferAdapter.sendSwarmFile(withName: displayName,
-                                                   accountId: conversation.accountId,
-                                                   conversationId: conversation.id,
-                                                   withFilePath: filePath,
-                                                   parent: conversation.messages.value.last?.id)
-        }
+        self.dataTransferAdapter.sendSwarmFile(withName: displayName,
+                                               accountId: conversation.accountId,
+                                               conversationId: conversation.id,
+                                               withFilePath: filePath,
+                                               parent: conversation.lastMessage?.id)
     }
 
     func sendAndSaveFile(displayName: String,

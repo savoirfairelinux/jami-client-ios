@@ -31,11 +31,17 @@
 "global.accept" = "Pranoje";
 "global.block" = "Bllokoje";
 "global.refuse" = "Hidhe tej";
+"global.name" = "Emër";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
 "scan.search" = "Po kërkohet…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Shtoni një përshkrim";
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori Publike";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Fjalëkalim i pasaktë";
 "accountPage.deviceRevocationUnknownDevice" = "Pajisje e panjohur";
 "accountPage.deviceRevocationError" = "Gabim shfuqizimi pajisjeje";
-"accountPage.namePlaceholder" = "Emër";
 "accountPage.linkDeviceTitle" = "Lidhni një pajisje tjetër";
 "accountPage.other" = "Tjetër";
 "accountPage.removeAccountTitle" = "Hiqe llogarinë";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Kontakti u shtua";
-"generatedMessage.invitationReceived" = "Ftesa u mor";
-"generatedMessage.invitationAccepted" = "Ftesa u pranua";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Zgjoi u krijua";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Thirrje për";
 "generatedMessage.incomingCall" = "Thirrje ardhëse";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie “live” e vendndodhjes";
-"generatedMessage.contactLeftConversation" = "Kontakti e braktisi bisedën";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Rregullime të mëtejshme";

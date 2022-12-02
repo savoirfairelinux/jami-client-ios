@@ -8,6 +8,9 @@
 #elseif os(tvOS) || os(watchOS)
   import UIKit
 #endif
+#if canImport(SwiftUI)
+  import SwiftUI
+#endif
 
 // Deprecated typealiases
 @available(*, deprecated, renamed: "ColorAsset.Color", message: "This typealias will be removed in SwiftGen 7.0")
@@ -39,12 +42,14 @@ internal enum Asset {
   internal static let closeIcon = ImageAsset(name: "close_icon")
   internal static let contactRequestIcon = ImageAsset(name: "contact_request_icon")
   internal static let conversationIcon = ImageAsset(name: "conversation_icon")
+  internal static let createSwarm = ImageAsset(name: "createSwarm")
   internal static let cross = ImageAsset(name: "cross")
   internal static let device = ImageAsset(name: "device")
   internal static let dialpad = ImageAsset(name: "dialpad")
   internal static let disableSpeakerphone = ImageAsset(name: "disable_speakerphone")
   internal static let doneIcon = ImageAsset(name: "done_icon")
   internal static let downloadIcon = ImageAsset(name: "download_icon")
+  internal static let editSwarmImage = ImageAsset(name: "editSwarmImage")
   internal static let enableSpeakerphone = ImageAsset(name: "enable_speakerphone")
   internal static let fallbackAvatar = ImageAsset(name: "fallback_avatar")
   internal static let icBack = ImageAsset(name: "ic_back")
@@ -117,6 +122,13 @@ internal final class ColorAsset {
   }
   #endif
 
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  internal private(set) lazy var swiftUIColor: SwiftUI.Color = {
+    SwiftUI.Color(asset: self)
+  }()
+  #endif
+
   fileprivate init(name: String) {
     self.name = name
   }
@@ -135,6 +147,16 @@ internal extension ColorAsset.Color {
     #endif
   }
 }
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+internal extension SwiftUI.Color {
+  init(asset: ColorAsset) {
+    let bundle = BundleToken.bundle
+    self.init(asset.name, bundle: bundle)
+  }
+}
+#endif
 
 internal struct ImageAsset {
   internal fileprivate(set) var name: String
@@ -172,6 +194,13 @@ internal struct ImageAsset {
     return result
   }
   #endif
+
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  internal var swiftUIImage: SwiftUI.Image {
+    SwiftUI.Image(asset: self)
+  }
+  #endif
 }
 
 internal extension ImageAsset.Image {
@@ -189,6 +218,26 @@ internal extension ImageAsset.Image {
     #endif
   }
 }
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+internal extension SwiftUI.Image {
+  init(asset: ImageAsset) {
+    let bundle = BundleToken.bundle
+    self.init(asset.name, bundle: bundle)
+  }
+
+  init(asset: ImageAsset, label: Text) {
+    let bundle = BundleToken.bundle
+    self.init(asset.name, bundle: bundle, label: label)
+  }
+
+  init(decorative asset: ImageAsset) {
+    let bundle = BundleToken.bundle
+    self.init(decorative: asset.name, bundle: bundle)
+  }
+}
+#endif
 
 // swiftlint:disable convenience_type
 private final class BundleToken {

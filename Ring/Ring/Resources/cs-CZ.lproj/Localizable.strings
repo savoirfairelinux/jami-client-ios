@@ -31,11 +31,17 @@
 "global.accept" = "Přijmout";
 "global.block" = "Blokovat";
 "global.refuse" = "Odmítnout";
+"global.name" = "Name";
 
 // Scan
 "scan.badQrCode" = "Špatný kód QR";
 "scan.search" = "Hledá se…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "Včera";
 "smartlist.results" = "Veřejný adresář";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Nesprávné heslo";
 "accountPage.deviceRevocationUnknownDevice" = "Neznámé zařízení";
 "accountPage.deviceRevocationError" = "Chyba při odebrání zařízení";
-"accountPage.namePlaceholder" = "Jméno";
 "accountPage.linkDeviceTitle" = "Připojit další zařízení";
 "accountPage.other" = "Ostatní";
 "accountPage.removeAccountTitle" = "Odstranit účet";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Spojení přidáno";
-"generatedMessage.invitationReceived" = "Pozvání přijato";
-"generatedMessage.invitationAccepted" = "Pozvání přijato";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Odchozí hovor";
 "generatedMessage.incomingCall" = "Příchozí hovor";
 "generatedMessage.missedOutgoingCall" = "Nepřijatý odchozí hovor";
 "generatedMessage.missedIncomingCall" = "Zmeškaný příchozí hovor";
 "generatedMessage.liveLocationSharing" = "Sdílení aktuální polohy";
-"generatedMessage.contactLeftConversation" = "Kontakt opustil konverzaci";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Pokročilá nastavení";

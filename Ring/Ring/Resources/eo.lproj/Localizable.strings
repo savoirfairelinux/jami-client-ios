@@ -31,11 +31,17 @@
 "global.accept" = "Akcepti";
 "global.block" = "Block";
 "global.refuse" = "Rifuzi";
+"global.name" = "Nomo";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
 "scan.search" = "Searching…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "Hieraŭ";
 "smartlist.results" = "Public Directory";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Nomo";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Alia";
 "accountPage.removeAccountTitle" = "Remove account";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact added";
-"generatedMessage.invitationReceived" = "Invitation received";
-"generatedMessage.invitationAccepted" = "Invitation accepted";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Eliranta voko";
 "generatedMessage.incomingCall" = "Eniranta voko";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Missed incoming call";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Advanced settings";

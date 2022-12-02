@@ -39,14 +39,15 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
     }()
 
     override func viewDidLoad() {
-        self.navigationItem.title = L10n.SwarmCreation.title
+        self.navigationItem.title = L10n.Swarmcreation.createTheSwarm
         super.viewDidLoad()
         guard let accountId = self.viewModel.currentAccount?.id else { return }
 
-        model = SwarmCreationUIModel(with: self.viewModel.injectionBag, accountId: accountId, swarmCreated: {
-            self.dismiss(animated: false)
+        model = SwarmCreationUIModel(with: self.viewModel.injectionBag, accountId: accountId, swarmCreated: {_ in
+            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
         })
-        let contentView = UIHostingController(rootView: SwarmCreationUI(list: model))
+        let contentView = UIHostingController(rootView: SwarmCreationUI(list: self.model))
         addChild(contentView)
         view.addSubview(contentView.view)
         contentView.view.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +82,7 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
     }
     func setupSearchBar() {
         searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = L10n.SwarmCreation.searchBar
+        searchController.searchBar.placeholder = L10n.Swarmcreation.searchBar
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
