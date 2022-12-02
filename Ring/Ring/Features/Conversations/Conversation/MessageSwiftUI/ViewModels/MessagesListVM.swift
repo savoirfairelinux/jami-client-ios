@@ -30,6 +30,7 @@ enum MessageInfo: State {
     case updateDisplayname(jamiId: String)
 }
 
+// swiftlint:disable type_body_length
 class MessagesListVM: ObservableObject {
 
     private let contextStateSubject = PublishSubject<State>()

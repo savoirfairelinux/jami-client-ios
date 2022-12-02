@@ -44,7 +44,6 @@ struct SettingsView: View {
                 //                                    HStack {
                 //                                        Text(L10n.Swarm.leaveConversation)
                 //                                            .multilineTextAlignment(.leading)
-                //                                            .foregroundColor(.black)
                 //                                        Spacer()
                 //                                    }
                 //                                })
@@ -55,7 +54,6 @@ struct SettingsView: View {
                     Text(L10n.Swarm.typeOfSwarm)
                     Spacer()
                     Text(swarmType)
-                        .foregroundColor(.black)
                 }
 
                 HStack {
@@ -63,7 +61,6 @@ struct SettingsView: View {
                         .padding(.trailing, 30)
                     Spacer()
                     Text(id)
-                        .foregroundColor(.black)
                         .multilineTextAlignment(.trailing)
                         .truncationMode(.tail)
                         .lineLimit(1)
@@ -75,11 +72,3 @@ struct SettingsView: View {
         .padding()
     }
 }
-
-// struct SettingsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingsView(id: "98239828928932899898298298329833", swarmType: "Others")
-//            .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
-//            .previewDisplayName("iPhone 12")
-//    }
-// }
