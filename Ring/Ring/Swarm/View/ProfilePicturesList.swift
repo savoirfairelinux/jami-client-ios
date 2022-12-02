@@ -24,7 +24,7 @@ struct MemberList: View {
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 20) {
                 ForEach(members, id: \.self) {
                     ProfileItem(image: $0.avatar.value, name: $0.name.value.isEmpty ? $0.jamiId : $0.name.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
                 }
@@ -40,25 +40,26 @@ struct ProfileItem: View {
     var isInvited: Bool
 
     var body: some View {
-        HStack(spacing: 12) {
-            Image(uiImage: image ?? UIImage())
+        HStack(alignment: .center) {
+            Image(uiImage: image ?? UIImage(asset: Asset.fallbackAvatar)!)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 45, height: 45, alignment: .center)
+                .frame(width: 50, height: 50, alignment: .center)
                 .clipShape(Circle())
-
+            Text(name)
+                .font(.system(size: 15.0, weight: .regular, design: .default))
+                .padding(.leading, 8.0)
+                .lineLimit(1)
+                .truncationMode(.tail)
+            Spacer()
             HStack {
-                Text(name)
-                    .font(.system(.title2, design: .rounded))
-                Spacer()
                 Text(role)
                     .font(.system(.callout, design: .rounded))
                     .fontWeight(.light)
+                    .frame(width: nil, height: nil, alignment: .trailing)
             }
-
-            Spacer()
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal, 20)
         .opacity(isInvited ? 0.5 : 1)
     }
 }

@@ -23,6 +23,7 @@ enum SwarmSettingView: String {
     case memberList
 }
 
+// swiftlint:disable closure_body_length
 public struct TopProfileView: View {
 
     @StateObject var viewmodel: SwarmInfoViewModel
@@ -42,94 +43,96 @@ public struct TopProfileView: View {
     }
 
     public var body: some View {
-        VStack {
+        ScrollView {
             VStack {
-                HStack {
-                    Spacer()
-                }
-                Button {
+                VStack {
+                    HStack {
+                        Spacer()
+                    }
+                    Button {
+                        if viewmodel.isAdmin {
+                            showingOptions = true
+                        }
+                    } label: {
+                        Image(uiImage: viewmodel.finalAvatar)
+                            .renderingMode(.original)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: viewmodel.swarmInfo.avatarHeight, height: viewmodel.swarmInfo.avatarHeight, alignment: .center)
+                            .clipShape(Circle())
+                    }
+                    .padding(.vertical)
+                    .actionSheet(isPresented: $showingOptions) {
+                        ActionSheet(
+                            title: Text(""),
+                            buttons: [
+                                .default(Text(L10n.Alerts.profileTakePhoto)) {
+                                    showingType = .picture
+                                },
+                                .default(Text(L10n.Alerts.profileUploadPhoto)) {
+                                    showingType = .gallery
+                                },
+                                .cancel()
+                            ]
+                        )
+                    }
+                    .sheet(item: $showingType) { type in
+                        if type == .gallery {
+                            ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
+                        } else {
+                            ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
+                        }
+                    }
+                    .onChange(of: image) { _ in
+                        viewmodel.updateSwarmAvatar(image: image)
+                    }
+
                     if viewmodel.isAdmin {
-                        showingOptions = true
-                    }
-                } label: {
-                    Image(uiImage: viewmodel.finalAvatar)
-                        .renderingMode(.original)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: viewmodel.swarmInfo.avatarHeight, height: viewmodel.swarmInfo.avatarHeight, alignment: .center)
-                        .clipShape(Circle())
-                }
-                .padding(.vertical)
-                .actionSheet(isPresented: $showingOptions) {
-                    ActionSheet(
-                        title: Text(""),
-                        buttons: [
-                            .default(Text(L10n.Alerts.profileTakePhoto)) {
-                                showingType = .picture
-                            },
-                            .default(Text(L10n.Alerts.profileUploadPhoto)) {
-                                showingType = .gallery
-                            },
-                            .cancel()
-                        ]
-                    )
-                }
-                .sheet(item: $showingType) { type in
-                    if type == .gallery {
-                        ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
+                        titleTextField
                     } else {
-                        ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
+                        titleLabel
+                    }
+                    Group {
+                        if viewmodel.isAdmin {
+                            descriptionTextField
+                        } else {
+                            descriptionLabel
+                        }
                     }
                 }
-                .onChange(of: image) { _ in
-                    print("Avatar changed to \(String(describing: image))!")
-                    viewmodel.updateSwarmAvatar(image: image)
+                .padding([.vertical, .horizontal], 30)
+                .background(swarmColor)
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }
 
-                if viewmodel.isAdmin {
-                    titleTextField
-                } else {
-                    titleLabel
-                }
-
-                Group {
-                    if viewmodel.isAdmin {
-                        descriptionTextField
-                    } else {
-                        descriptionLabel
+                Picker("", selection: $selectedView) {
+                    ForEach(swarmViews, id: \.self) {
+                        switch $0 {
+                        case .about:
+                            Text(L10n.Swarm.about)
+                        case .memberList:
+                            Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
+                        }
                     }
                 }
-            }
-            .padding(.vertical, 30)
-            .padding(.horizontal, 30)
-            .background(swarmColor)
+                .pickerStyle(.segmented)
+                .padding(.all, 20)
 
-            Picker("", selection: $selectedView) {
-                ForEach(swarmViews, id: \.self) {
-                    switch $0 {
-                    case .about:
-                        Text(L10n.Swarm.about)
-                    case .memberList:
-                        Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
-                    }
+                switch selectedView {
+                case .about:
+                    SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
+                case .memberList:
+                    MemberList(members: viewmodel.swarmInfo.participants.value)
                 }
             }
-            .pickerStyle(.segmented)
-            .padding(.all, 20)
-
-            switch selectedView {
-            case .about:
-                SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
-            case .memberList:
-                MemberList(members: viewmodel.swarmInfo.participants.value)
+            .onLoad {
+                descriptionTextFieldInput = viewmodel.swarmInfo.description.value
+                titleTextFieldInput = viewmodel.finalTitle
             }
-        }
-        .onLoad {
-            descriptionTextFieldInput = viewmodel.swarmInfo.description.value
-            titleTextFieldInput = viewmodel.finalTitle
-        }
-        .onChange(of: viewmodel.finalTitle) { _ in
-            titleTextFieldInput = viewmodel.finalTitle
+            .onChange(of: viewmodel.finalTitle) { _ in
+                titleTextFieldInput = viewmodel.finalTitle
+            }
         }
     }
 }
@@ -137,7 +140,7 @@ public struct TopProfileView: View {
 private extension TopProfileView {
     var titleLabel: some View {
         Text(viewmodel.finalTitle)
-            .font(.system(.title, design: .serif))
+            .font(.system(.title3, design: .serif))
             .multilineTextAlignment(.center)
             // Text color.
             .foregroundColor(.white)
@@ -157,7 +160,7 @@ private extension TopProfileView {
             .foregroundColor(.white)
             // Cursor color.
             .accentColor(.white)
-            .font(.system(.title, design: .serif))
+            .font(.system(.title3, design: .serif))
             .multilineTextAlignment(.center)
             .padding()
     }
