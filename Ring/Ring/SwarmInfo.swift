@@ -81,6 +81,7 @@ class ParticipantInfo: Equatable, Hashable {
 class SwarmInfo {
     var avatar: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     var title = BehaviorRelay(value: "")
+    var color = BehaviorRelay<String>(value: "")
     var type = BehaviorRelay(value: ConversationType.oneToOne)
     var description = BehaviorRelay(value: "")
     var participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
@@ -154,6 +155,7 @@ class SwarmInfo {
         self.subscribeConversationEvents()
         self.updateInfo()
         self.updateParticipants()
+        self.updateColorPreference()
     }
 
     func addContacts(contacts: [ContactModel]) {
@@ -285,7 +287,14 @@ class SwarmInfo {
             self.description.accept(description)
         }
     }
-
+    private func updateColorPreference() {
+        guard let conversation = self.conversation else { return }
+        let info = self.conversationsService.getConversationPreferences(accountId: self.accountId, conversationId: conversation.id)
+        guard let info = info else { return }
+        if let color = info[ConversationPreferenceAttributes.color.rawValue] {
+            self.color.accept(color)
+        }
+    }
     private func updateParticipants() {
         guard let conversation = self.conversation else { return }
         var participantsInfo = [ParticipantInfo]()

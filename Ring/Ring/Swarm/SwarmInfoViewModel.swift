@@ -20,6 +20,7 @@ import UIKit
 import RxSwift
 import RxRelay
 import RxCocoa
+import SwiftUI
 
 class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
 
@@ -50,6 +51,15 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
                 .subscribe(onNext: { [weak self] newValue in
                     DispatchQueue.main.async {
                         self?.finalTitle = newValue
+                    }
+                })
+                .disposed(by: disposeBag)
+            self.swarmInfo.color
+                .subscribe(onNext: { [weak self] newValue in
+                    DispatchQueue.main.async {
+                        self?.finalColor = Color(hex: newValue) ?? Color(UIColor.systemBackground)
+                        self?.navBarColor.accept(newValue)
+                        self?.lightOrDarkColorCheck.accept(self?.finalColor.isLight() ?? true)
                     }
                 })
                 .disposed(by: disposeBag)
@@ -86,6 +96,9 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
     private var shouldTriggerDescriptionDidSet: Bool = false
     @Published var finalAvatar: UIImage = UIImage()
     @Published var finalTitle: String = ""
+    @Published var finalColor: Color = Color(UIColor.systemBackground)
+    var navBarColor = BehaviorRelay<String>(value: "")
+    var lightOrDarkColorCheck = BehaviorRelay<Bool>(value: true)
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -112,6 +125,18 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
             conversationInfo[ConversationAttributes.avatar.rawValue] = imageData.base64EncodedString()
             self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
             self.finalAvatar = UIImage(data: imageData)!
+        }
+    }
+    func updateSwarmColor(pickerColor: Color) {
+        let colorString: String = "#\(pickerColor.toHex()!)"
+        if let conversationId = conversation?.value.id,
+           let accountId = conversation?.value.accountId {
+            let prefsInfo = conversationService.getConversationPreferences(accountId: accountId, conversationId: conversationId)
+            guard var prefsInfo = prefsInfo else { return }
+            prefsInfo[ConversationPreferenceAttributes.color.rawValue] = colorString
+            self.conversationService.updateConversationPrefs(accountId: accountId, conversationId: conversationId, prefs: prefsInfo)
+            navBarColor.accept(colorString)
+            lightOrDarkColorCheck.accept(pickerColor.isLight() ?? true)
         }
     }
 
