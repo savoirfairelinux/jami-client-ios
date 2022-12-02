@@ -109,7 +109,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
 
     func makeAutoDownloadFilesCell() -> DisposableCell {
         let cell = DisposableCell()
-        cell.textLabel?.text = L10n.GeneralSettings.FileTransfer.automaticAcceptIncomingFiles
+        cell.textLabel?.text = L10n.GeneralSettings.automaticAcceptIncomingFiles
         let switchView = UISwitch()
         cell.selectionStyle = .none
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
@@ -150,8 +150,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         let normalAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: titleLabel.font.withSize(17)]
         let smallAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: titleLabel.font.withSize(13)]
 
-        let partOne = NSMutableAttributedString(string: L10n.GeneralSettings.FileTransfer.acceptTransferLimit, attributes: normalAttributes)
-        let partTwo = NSMutableAttributedString(string: " " + L10n.GeneralSettings.FileTransfer.acceptTransferLimitDescription, attributes: smallAttributes)
+        let partOne = NSMutableAttributedString(string: L10n.GeneralSettings.acceptTransferLimit, attributes: normalAttributes)
+        let partTwo = NSMutableAttributedString(string: " " + L10n.GeneralSettings.acceptTransferLimitDescription, attributes: smallAttributes)
 
         partOne.append(partTwo)
 
