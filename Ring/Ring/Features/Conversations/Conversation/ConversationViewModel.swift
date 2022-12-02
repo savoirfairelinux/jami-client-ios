@@ -166,12 +166,14 @@ class ConversationViewModel: Stateable, ViewModel {
             if conversation.value.isSwarm() && self.swarmInfo == nil {
                 self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value)
                 self.swarmInfo!.finalAvatar.share()
+                    .observe(on: MainScheduler.instance)
                     .subscribe { [weak self] image in
                         self?.profileImageData.accept(image.pngData())
                     } onError: { _ in
                     }
                     .disposed(by: self.disposeBag)
                 self.swarmInfo!.finalTitle.share()
+                    .observe(on: MainScheduler.instance)
                     .subscribe { [weak self] name in
                         self?.userName.accept(name)
                     } onError: { _ in

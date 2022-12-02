@@ -80,12 +80,16 @@ class ConversationCell: UITableViewCell, NibReusable {
 
         // unread messages
         if let unreadMessages = self.newMessagesLabel {
-            item.unreadMessages.startWith(item.unreadMessages.value)
+            item.unreadMessages
+                .observe(on: MainScheduler.instance)
+                .startWith(item.unreadMessages.value)
                 .bind(to: unreadMessages.rx.text)
                 .disposed(by: self.disposeBag)
         }
         if let unreadMessagesIndicator = self.newMessagesIndicator {
-            item.hideNewMessagesLabel.startWith(item.hideNewMessagesLabel.value)
+            item.hideNewMessagesLabel
+                .observe(on: MainScheduler.instance)
+                .startWith(item.hideNewMessagesLabel.value)
                 .bind(to: unreadMessagesIndicator.rx.isHidden)
                 .disposed(by: self.disposeBag)
         }
@@ -107,7 +111,9 @@ class ConversationCell: UITableViewCell, NibReusable {
         self.nameLabel.lineBreakMode = .byTruncatingTail
         // last message date
         if let lastMessageTime = self.lastMessageDateLabel {
-            item.lastMessageReceivedDate.startWith(item.lastMessageReceivedDate.value)
+            item.lastMessageReceivedDate
+                .observe(on: MainScheduler.instance)
+                .startWith(item.lastMessageReceivedDate.value)
                 .bind(to: lastMessageTime.rx.text)
                 .disposed(by: self.disposeBag)
         }
@@ -115,7 +121,9 @@ class ConversationCell: UITableViewCell, NibReusable {
         // last message preview
         if let lastMessage = self.lastMessagePreviewLabel {
             lastMessage.lineBreakMode = .byTruncatingTail
-            item.lastMessage.startWith(item.lastMessage.value)
+            item.lastMessage
+                .observe(on: MainScheduler.instance)
+                .startWith(item.lastMessage.value)
                 .bind(to: lastMessage.rx.text)
                 .disposed(by: self.disposeBag)
         }
