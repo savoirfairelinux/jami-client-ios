@@ -31,11 +31,17 @@
 "global.accept" = "Elfogadás";
 "global.block" = "Letiltás";
 "global.refuse" = "Elutasítás";
+"global.name" = "Név";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
 "scan.search" = "Keresés…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Leírás hozzáadása";
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Nyilvános címtár";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Hibás jelszó";
 "accountPage.deviceRevocationUnknownDevice" = "Ismeretlen eszköz";
 "accountPage.deviceRevocationError" = "Eszköz visszavonási hiba";
-"accountPage.namePlaceholder" = "Név";
 "accountPage.linkDeviceTitle" = "Eszköz összekapcsolása fiókhoz";
 "accountPage.other" = "Másik";
 "accountPage.removeAccountTitle" = "Fiók eltávolítása";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Kapcsolat hozzáadva";
-"generatedMessage.invitationReceived" = "Meghívás megérkezett";
-"generatedMessage.invitationAccepted" = "Meghívás elfogadott";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Rajcsoport létrehozva";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Kimenő hívás";
 "generatedMessage.incomingCall" = "Bejövő hívás";
 "generatedMessage.missedOutgoingCall" = "Nem fogadott kimenő hívás";
 "generatedMessage.missedIncomingCall" = "Nem fogadott bejövő hívás";
 "generatedMessage.liveLocationSharing" = "Valós idejű hely megosztása";
-"generatedMessage.contactLeftConversation" = "Kapcsolat kilépett a beszélgetésből";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Haladó beállítások";

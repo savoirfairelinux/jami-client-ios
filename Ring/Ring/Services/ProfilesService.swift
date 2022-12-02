@@ -211,9 +211,11 @@ class ProfilesService: ProfilesAdapterDelegate {
         }
         self.dbManager
             .profileObservable(for: uri, createIfNotExists: createIfNotexists, accountId: accountId)
-            .subscribe(onNext: {profile in
+            .subscribe { profile in
                 profileObservable.onNext(profile)
-            })
+            } onError: { error in
+                profileObservable.onError(error)
+            }
             .disposed(by: self.disposeBag)
     }
 

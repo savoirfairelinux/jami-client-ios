@@ -31,11 +31,17 @@
 "global.accept" = "Accepter";
 "global.block" = "Bloquer";
 "global.refuse" = "Refuser";
+"global.name" = "Nom";
 
 // Scan
 "scan.badQrCode" = "Code QR incorrect";
 "scan.search" = "Recherche...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Ajouter une description";
 // Smartlist
 "smartlist.yesterday" = "Hier";
 "smartlist.results" = "Annuaire public";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Mot de passe incorrecte";
 "accountPage.deviceRevocationUnknownDevice" = "Appareil inconnu";
 "accountPage.deviceRevocationError" = "Erreur de révocation d'appareil";
-"accountPage.namePlaceholder" = "Nom";
 "accountPage.linkDeviceTitle" = "Lier autre appareil";
 "accountPage.other" = "Autre";
 "accountPage.removeAccountTitle" = "Supprimer le compte";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contact ajouté";
-"generatedMessage.invitationReceived" = "Invitation reçue";
-"generatedMessage.invitationAccepted" = "Invitation acceptée";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Le Swarm a été créé";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Appel sortant";
 "generatedMessage.incomingCall" = "Appel entrant";
 "generatedMessage.missedOutgoingCall" = "Appel sortant manqué";
 "generatedMessage.missedIncomingCall" = "Appel entrant manqué";
 "generatedMessage.liveLocationSharing" = "Partage de position en temps réel";
-"generatedMessage.contactLeftConversation" = "Le contact a quitté la conversation";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Réglages avancés";

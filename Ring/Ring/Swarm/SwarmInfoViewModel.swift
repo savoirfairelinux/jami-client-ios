@@ -38,7 +38,7 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
     @Published var swarmInfo: SwarmInfo!
     var conversation: BehaviorRelay<ConversationModel>! {
         didSet {
-            self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value, avatarHeight: 100)
+            self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value, avatarHeight: 70)
             self.swarmInfo.finalAvatar
                 .subscribe(onNext: { [weak self] newValue in
                     DispatchQueue.main.async {

@@ -41,15 +41,17 @@ struct ProfileItem: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            Image(uiImage: image ?? UIImage())
+            Image(uiImage: image ?? UIImage(asset: Asset.fallbackAvatar)!)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 45, height: 45, alignment: .center)
+                .frame(width: 50, height: 50, alignment: .center)
                 .clipShape(Circle())
 
             HStack {
                 Text(name)
-                    .font(.system(.title2, design: .rounded))
+                    .font(.system(size: 15, weight: .bold))
+                    .lineLimit(1)
+                    .truncationMode(.tail)
                 Spacer()
                 Text(role)
                     .font(.system(.callout, design: .rounded))

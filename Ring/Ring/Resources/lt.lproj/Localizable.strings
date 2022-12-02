@@ -31,11 +31,17 @@
 "global.accept" = "Priimti";
 "global.block" = "Užblokuoti";
 "global.refuse" = "Atmesti";
+"global.name" = "Vardas";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";
 "scan.search" = "Ieškoma…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "Vakar";
 "smartlist.results" = "Public Directory";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Neteisingas slaptažodis";
 "accountPage.deviceRevocationUnknownDevice" = "Nežinomas įrenginys";
 "accountPage.deviceRevocationError" = "Įrenginio panaikinimo klaida";
-"accountPage.namePlaceholder" = "Vardas";
 "accountPage.linkDeviceTitle" = "Susieti kitą įrenginį";
 "accountPage.other" = "Kita";
 "accountPage.removeAccountTitle" = "Šalinti paskyrą";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Adresatas pridėtas";
-"generatedMessage.invitationReceived" = "Gautas pakvietimas";
-"generatedMessage.invitationAccepted" = "Pakvietimas priimtas";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Išsiunčiamasis skambutis";
 "generatedMessage.incomingCall" = "Gaunamasis skambutis";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Praleistas gaunamasis skambutis";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Išplėstiniai nustatymai";

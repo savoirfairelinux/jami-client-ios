@@ -31,11 +31,17 @@
 "global.accept" = "Acceptar";
 "global.block" = "Blocar";
 "global.refuse" = "Refusar";
+"global.name" = "Nom";
 
 // Scan
 "scan.badQrCode" = "Marrit QR còdi";
 "scan.search" = "Recèrca…";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "Ièr";
 "smartlist.results" = "Public Directory";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Marrit senhal";
 "accountPage.deviceRevocationUnknownDevice" = "Aparelh desconegut";
 "accountPage.deviceRevocationError" = "Device revocation error";
-"accountPage.namePlaceholder" = "Nom";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Autre";
 "accountPage.removeAccountTitle" = "Suprimir compte";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contacte ajustat";
-"generatedMessage.invitationReceived" = "Invitacion recebuda";
-"generatedMessage.invitationAccepted" = "Invitacion acceptada";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Outgoing call";
 "generatedMessage.incomingCall" = "Incoming call";
 "generatedMessage.missedOutgoingCall" = "Sonada sortissenta mancada";
 "generatedMessage.missedIncomingCall" = "Sonada dintrada mancada";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "Contact left conversation";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Paramètres avançats";

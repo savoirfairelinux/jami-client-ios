@@ -31,11 +31,17 @@
 "global.accept" = "Accetta";
 "global.block" = "Blocca";
 "global.refuse" = "Rifiuta";
+"global.name" = "Nome";
 
 // Scan
 "scan.badQrCode" = "Codice QR errato";
 "scan.search" = "Ricerca in corso...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Aggiungi una descrizione";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Elenco pubblico";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Password errata";
 "accountPage.deviceRevocationUnknownDevice" = "Dispositivo sconosciuto";
 "accountPage.deviceRevocationError" = "Errore di revoca del dispositivo";
-"accountPage.namePlaceholder" = "Nome";
 "accountPage.linkDeviceTitle" = "Collega un altro dispositivo";
 "accountPage.other" = "Altro";
 "accountPage.removeAccountTitle" = "Rimuovi l'account";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Contatto aggiunto";
-"generatedMessage.invitationReceived" = "Invito ricevuto";
-"generatedMessage.invitationAccepted" = "Invito accettato";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Gruppo creato";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Chiamata in uscita";
 "generatedMessage.incomingCall" = "Chiamata in arrivo";
 "generatedMessage.missedOutgoingCall" = "Chiamata in uscita persa";
 "generatedMessage.missedIncomingCall" = "Chiamata in arrivo persa";
 "generatedMessage.liveLocationSharing" = "Condivisione della posizione in diretta";
-"generatedMessage.contactLeftConversation" = "Il contatto ha chiuso la conversazione";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Impostazioni avanzate";

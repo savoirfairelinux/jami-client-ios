@@ -320,6 +320,37 @@ extension UIImage {
         return image
     }
 
+    class func createGroupAvatar(username: String, size: CGSize) -> UIImage {
+        let scanner = Scanner(string: username.toMD5HexString().prefixString())
+        var index: UInt64 = 0
+        if scanner.scanHexInt64(&index) {
+            let fbaBGColor = avatarColors[Int(index)]
+            if !username.isSHA1() && !username.isEmpty {
+                if let avatar = UIImage().drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: size) {
+                    return avatar
+                }
+            } else {
+                if let image = UIImage(asset: Asset.fallbackAvatar)?.withColor(.white),
+                   let masked = image.maskWithColor(color: fbaBGColor, size: size) {
+                    return masked
+                }
+            }
+        }
+        return UIImage()
+    }
+
+    func withColor(_ color: UIColor) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        let drawRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        color.setFill()
+        UIRectFill(drawRect)
+        draw(in: drawRect, blendMode: .destinationIn, alpha: 1)
+
+        let tintedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return tintedImage!
+    }
+
     func maskWithColor(color: UIColor, size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, true, scale)
 

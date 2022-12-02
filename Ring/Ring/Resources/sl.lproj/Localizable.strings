@@ -31,11 +31,17 @@
 "global.accept" = "Sprejmi";
 "global.block" = "Blokiraj";
 "global.refuse" = "Zavrni";
+"global.name" = "Ime";
 
 // Scan
 "scan.badQrCode" = "Napačna QR-koda";
 "scan.search" = "Iskanje ...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Dodajte opis";
 // Smartlist
 "smartlist.yesterday" = "Včeraj";
 "smartlist.results" = "Javni imenik";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Nepravilno geslo";
 "accountPage.deviceRevocationUnknownDevice" = "Neznana naprava";
 "accountPage.deviceRevocationError" = "Napaka pri odpoklicu naprave";
-"accountPage.namePlaceholder" = "Ime";
 "accountPage.linkDeviceTitle" = "Poveži še eno napravo";
 "accountPage.other" = "Drugo";
 "accountPage.removeAccountTitle" = "Odstrani račun";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Stik je dodan";
-"generatedMessage.invitationReceived" = "Povabilo je prejeto";
-"generatedMessage.invitationAccepted" = "Povabilo je sprejeto";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Roj ustvarjen";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Odhodni klic";
 "generatedMessage.incomingCall" = "Dohodni klic";
 "generatedMessage.missedOutgoingCall" = "Zgrešen odhodni klic";
 "generatedMessage.missedIncomingCall" = "Zgrešen dohodni klic";
 "generatedMessage.liveLocationSharing" = "Deljenje lokacije v živo";
-"generatedMessage.contactLeftConversation" = "Stik je zapustil pogovor";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Napredne nastavitve";

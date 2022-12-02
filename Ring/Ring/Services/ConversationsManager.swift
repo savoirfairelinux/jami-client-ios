@@ -367,11 +367,7 @@ class ConversationsManager {
                                                      photoIdentifier: photoIdentifier,
                                                      updateConversation: currentAccount.id == transferInfo.accountId,
                                                      conversationId: conversationId, messageId: messageId)
-                        .subscribe(onCompleted: {
-                            guard let transferInfo = self.dataTransferService
-                                    .dataTransferInfo(withId: transferId, accountId: accountId, conversationId: conversationId, isSwarm: false) else { return }
-                            self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: transferInfo.accountId, conversationId: conversationId)
-                        })
+                        .subscribe()
                         .disposed(by: self.disposeBag)
                 case .dataTransferChanged:
                     guard let eventCode: Int = event.getEventInput(ServiceEventInput.state),
@@ -389,7 +385,6 @@ class ConversationsManager {
                     case .wait_peer_acceptance, .wait_host_acceptance:
                         status = DataTransferStatus.awaiting
                         self.createTransferNotification(info: transferInfo, conversationId: conversationId, accountId: accountId)
-                        self.autoAcceptTransfer(transferInfo: transferInfo, transferId: transferId, accountId: accountId, conversationId: conversationId)
                     case .ongoing:
                         status = DataTransferStatus.ongoing
                     case .finished:
@@ -547,22 +542,6 @@ class ConversationsManager {
                                                       from: accountId,
                                                       to: jamiId,
                                                       in: conversationId)
-    }
-
-    func autoAcceptTransfer(transferInfo: NSDataTransferInfo, transferId: String, accountId: String, conversationId: String) {
-        // for swarm we download message when receive interaction
-        if !conversationId.isEmpty { return }
-        if transferInfo.flags != 1 || transferInfo.totalSize > maxSizeForAutoaccept ||
-            (transferInfo.lastEvent != .wait_peer_acceptance && transferInfo.lastEvent != .wait_host_acceptance) {
-            return
-        }
-        guard let conversation = self.conversationService.getConversationForParticipant(jamiId: transferInfo.peer, accontId: accountId) else { return }
-        var filename = ""
-        if self.dataTransferService.acceptTransfer(withId: transferId,
-                                                   fileName: &filename, accountID: accountId,
-                                                   conversationID: conversation.id, name: "") != .success {
-            self.log.debug("ConversationsManager: accept transfer failed")
-        }
     }
 
     func detectingMessageTyping(_ from: String, for accountId: String, status: Int) {

@@ -31,11 +31,17 @@
 "global.accept" = "پذیرش";
 "global.block" = "مسدود";
 "global.refuse" = "رد کردن";
+"global.name" = "نام";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
 "scan.search" = "در حال جستجو...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "دیروز";
 "smartlist.results" = "دایرکتوری عمومی";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "گذرواژه ناصحیح";
 "accountPage.deviceRevocationUnknownDevice" = "دستگاه ناشناس";
 "accountPage.deviceRevocationError" = "خطا در ابطال دستگاه";
-"accountPage.namePlaceholder" = "نام";
 "accountPage.linkDeviceTitle" = "پیوند یک دستگاه دیگر";
 "accountPage.other" = "دیگر";
 "accountPage.removeAccountTitle" = "حذف حساب";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "مخاطب افزوده شد";
-"generatedMessage.invitationReceived" = "دعوت‌نامه دریافت شد";
-"generatedMessage.invitationAccepted" = "دعوت پذیرفته شد";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "تماس خروجی";
 "generatedMessage.incomingCall" = "تماس ورودی";
 "generatedMessage.missedOutgoingCall" = "تماس خروجی بی پاسخ";
 "generatedMessage.missedIncomingCall" = "تماس ورودی بی پاسخ";
 "generatedMessage.liveLocationSharing" = "هم‌رسانی زنده مکان";
-"generatedMessage.contactLeftConversation" = "مخاطب گفتگو را ترک کرد";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "تنظیمات پیشرفته";

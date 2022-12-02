@@ -31,11 +31,17 @@
 "global.accept" = "Terima";
 "global.block" = "Blokir";
 "global.refuse" = "Tolak";
+"global.name" = "Nama";
 
 // Scan
 "scan.badQrCode" = "Kode QR yang buruk";
 "scan.search" = "Mencari...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Tambah deskripsi";
 // Smartlist
 "smartlist.yesterday" = "Kemarin";
 "smartlist.results" = "Direktori Publik";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Kata sandi salah";
 "accountPage.deviceRevocationUnknownDevice" = "Perangkat tidak diketahui";
 "accountPage.deviceRevocationError" = "Pencabutan perangkat error";
-"accountPage.namePlaceholder" = "Nama";
 "accountPage.linkDeviceTitle" = "Tautkan perangkat lain";
 "accountPage.other" = "Lainnya";
 "accountPage.removeAccountTitle" = "Buang akun";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Kontak ditambahkan";
-"generatedMessage.invitationReceived" = "Undangan diterima";
-"generatedMessage.invitationAccepted" = "Undangan diterima";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Kawanan dibuat";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
 "generatedMessage.incomingCall" = "Panggilan masuk";
 "generatedMessage.missedOutgoingCall" = "Panggilan keluar tidak terjawab";
 "generatedMessage.missedIncomingCall" = "Panggilan masuk tidak terjawab";
 "generatedMessage.liveLocationSharing" = "Berbagi lokasi secara live";
-"generatedMessage.contactLeftConversation" = "Kontak meninggalkan percakapan";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Pengaturan lanjutan";

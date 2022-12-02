@@ -31,11 +31,17 @@
 "global.accept" = "Aksepter";
 "global.block" = "Blokker";
 "global.refuse" = "Avslå";
+"global.name" = "Navn";
 
 // Scan
 "scan.badQrCode" = "Ugyldig QR kode";
 "scan.search" = "Søker...";
 
+// SwarmCreation
+"swarmcreation.title" = "Create the Swarm";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.addADescription" = "Add a description";
 // Smartlist
 "smartlist.yesterday" = "Igår";
 "smartlist.results" = "Offentlig katalog";
@@ -230,7 +236,6 @@
 "accountPage.deviceRevocationWrongPassword" = "Feil passord";
 "accountPage.deviceRevocationUnknownDevice" = "Ukjent enhet";
 "accountPage.deviceRevocationError" = "Feil ved tilbakekalling av enhet";
-"accountPage.namePlaceholder" = "Navn";
 "accountPage.linkDeviceTitle" = "Tilknytt ny enhet";
 "accountPage.other" = "Andre";
 "accountPage.removeAccountTitle" = "Slett konto";
@@ -327,15 +332,19 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Kontakt lagt til";
-"generatedMessage.invitationReceived" = "Invitasjon mottatt";
-"generatedMessage.invitationAccepted" = "Invitasjon godtatt";
+"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Utgående samtale";
 "generatedMessage.incomingCall" = "Innkommende samtale";
 "generatedMessage.missedOutgoingCall" = "Tapt utgående anrop";
 "generatedMessage.missedIncomingCall" = "Tapt innkommende anrop";
 "generatedMessage.liveLocationSharing" = "Live posisjonsdeling";
-"generatedMessage.contactLeftConversation" = "Kontakten har forlatt samtalen";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
 "generalSettings.title" = "Avanserte innstillinger";
