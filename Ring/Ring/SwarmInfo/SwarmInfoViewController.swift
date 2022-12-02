@@ -27,6 +27,7 @@ class SwarmInfoViewController: UIViewController, StoryboardBased, ViewModelBased
     var viewModel: SwarmInfoViewModel!
     let disposeBag = DisposeBag()
     var contentView: UIHostingController<TopProfileView>! = nil
+    var appearance = UINavigationBarAppearance()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,26 @@ class SwarmInfoViewController: UIViewController, StoryboardBased, ViewModelBased
         addChild(contentView)
         view.addSubview(contentView.view)
         setupConstraints()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
+        self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
+        viewModel.navBarColor
+            .subscribe(onNext: {[weak self] newColorValue in
+                self?.appearance.configureWithOpaqueBackground()
+                self?.appearance.backgroundColor = newColorValue.isEmpty ? UIColor.systemBackground : UIColor.init(hexString: newColorValue)
+                self?.navigationController?.navigationBar.standardAppearance = self!.appearance
+                self?.navigationController?.navigationBar.scrollEdgeAppearance = self!.appearance
+                if !newColorValue.isEmpty {
+                    self?.navigationController?.navigationBar.tintColor = (UIColor(hexString: newColorValue)?.isLight())! ? .black : .white
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.appearance.configureWithOpaqueBackground()
+        self.appearance.backgroundColor = UIColor.systemBackground
+        self.navigationController?.navigationBar.standardAppearance = self.appearance
+        self.navigationController?.navigationBar.scrollEdgeAppearance = self.appearance
     }
 
     func setupConstraints() {
