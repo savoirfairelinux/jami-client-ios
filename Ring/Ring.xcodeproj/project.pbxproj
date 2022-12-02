@@ -467,7 +467,7 @@
 		66E6381221764C2C005EA2B0 /* GrowingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6381121764C2C005EA2B0 /* GrowingTextView.swift */; };
 		66F295DE2166A5930044ED6F /* Devices+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F295DD2166A5930044ED6F /* Devices+Helpers.swift */; };
 		BB1E8C7129159DFC005AE1D6 /* TopProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C6C29159DEE005AE1D6 /* TopProfileView.swift */; };
-		BB1E8C7329159DFC005AE1D6 /* ProfilePicturesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C6E29159DF6005AE1D6 /* ProfilePicturesList.swift */; };
+		BB1E8C7329159DFC005AE1D6 /* MembersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C6E29159DF6005AE1D6 /* MembersList.swift */; };
 		BB1E8C7529159DFC005AE1D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */; };
 		BB1E8C7729159E1F005AE1D6 /* SwarmInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7629159E1F005AE1D6 /* SwarmInfoViewController.swift */; };
 		BB1E8C7A29159E3E005AE1D6 /* SwarmInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7929159E3E005AE1D6 /* SwarmInfoViewModel.swift */; };
@@ -1098,7 +1098,7 @@
 		66E6381121764C2C005EA2B0 /* GrowingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingTextView.swift; sourceTree = "<group>"; };
 		66F295DD2166A5930044ED6F /* Devices+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Devices+Helpers.swift"; sourceTree = "<group>"; };
 		BB1E8C6C29159DEE005AE1D6 /* TopProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopProfileView.swift; sourceTree = "<group>"; };
-		BB1E8C6E29159DF6005AE1D6 /* ProfilePicturesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicturesList.swift; sourceTree = "<group>"; };
+		BB1E8C6E29159DF6005AE1D6 /* MembersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersList.swift; sourceTree = "<group>"; };
 		BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BB1E8C7629159E1F005AE1D6 /* SwarmInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoViewController.swift; sourceTree = "<group>"; };
 		BB1E8C7929159E3E005AE1D6 /* SwarmInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoViewModel.swift; sourceTree = "<group>"; };
@@ -1859,7 +1859,7 @@
 		1A0C4EBC1F1D48AA00550433 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				BB1E8C6B29159DDE005AE1D6 /* Swarm */,
+				BB1E8C6B29159DDE005AE1D6 /* SwarmInfo */,
 				0ECA567F243394660055D31E /* MigrateAccount */,
 				0E96ED73225D05F70016C07D /* GeneralSettings */,
 				0E320D4E224ADF570070B515 /* Dialpad */,
@@ -2326,7 +2326,7 @@
 			path = QRCode;
 			sourceTree = "<group>";
 		};
-		BB1E8C6B29159DDE005AE1D6 /* Swarm */ = {
+		BB1E8C6B29159DDE005AE1D6 /* SwarmInfo */ = {
 			isa = PBXGroup;
 			children = (
 				BB1E8C7829159E2B005AE1D6 /* View */,
@@ -2334,13 +2334,13 @@
 				BB3E5814291C138600E85BEA /* SwarmInfoViewController.storyboard */,
 				BB1E8C7929159E3E005AE1D6 /* SwarmInfoViewModel.swift */,
 			);
-			path = Swarm;
+			path = SwarmInfo;
 			sourceTree = "<group>";
 		};
 		BB1E8C7829159E2B005AE1D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BB1E8C6E29159DF6005AE1D6 /* ProfilePicturesList.swift */,
+				BB1E8C6E29159DF6005AE1D6 /* MembersList.swift */,
 				BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */,
 				BB3AB06929316FA0006906BA /* ViewDidLoadModifier.swift */,
 				BB1E8C6C29159DEE005AE1D6 /* TopProfileView.swift */,
@@ -2916,7 +2916,7 @@
 				26EF35EF29075A5300D97E14 /* MessageStackView.swift in Sources */,
 				0E96ED79225D06480016C07D /* GeneralSettingsViewModel.swift in Sources */,
 				1A2041801F1E903B00C08435 /* CreateProfileViewController.swift in Sources */,
-				BB1E8C7329159DFC005AE1D6 /* ProfilePicturesList.swift in Sources */,
+				BB1E8C7329159DFC005AE1D6 /* MembersList.swift in Sources */,
 				66266FC4215C18F8002757A6 /* Emoji+Helpers.swift in Sources */,
 				0E0FF1B71FC398B3003898C2 /* ConversationDataHepler.swift in Sources */,
 				62DFAB2E1F9FF0D0002D6F9C /* NetworkService.swift in Sources */,
