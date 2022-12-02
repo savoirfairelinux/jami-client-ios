@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d9f5e20_70da2954",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-12-02T22:42:39Z",
+      "side": 1,
+      "message": "I think when TURN is disabled all turn options should be hidden",
+      "revId": "b4800fb4e8383ecdb4b3b097b8e028af40ba1634",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
