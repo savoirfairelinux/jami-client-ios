@@ -16,6 +16,24 @@
       "message": "handleCall could be moved inside handleResult, as it related to handleResult",
       "revId": "8154e1f6c7e54bd09504ddb4164a6e623befdba4",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5564328a_00e26da2",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-12-02T18:21:40Z",
+      "side": 1,
+      "message": "handle call is related to response",
+      "parentUuid": "2f84b1ea_04ee8f06",
+      "revId": "8154e1f6c7e54bd09504ddb4164a6e623befdba4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
