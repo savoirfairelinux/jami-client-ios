@@ -36,6 +36,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60013148_c5fd610e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-12-02T20:42:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3ff67bb_43c34f43",
+      "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d73b213_7f38197c",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "it is in line 344 of Localizable English",
       "parentUuid": "5d73b213_7f38197c",
+      "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edfdbcbd_da167305",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-12-02T20:42:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91625810_388772c6",
       "revId": "1e7a4ced97eda8d9ea722e2c321d4c3169eabe73",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
