@@ -69,6 +69,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecce363b_217d91e0",
+        "filename": "Ring/Ring/Swarm/View/SettingsView.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-12-03T18:21:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53013928_c0e9a382",
+      "revId": "4a7d3c0ed4006e6f665bd4fd7ea25abe8a74aefb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f94a2c12_a1ba43d7",
