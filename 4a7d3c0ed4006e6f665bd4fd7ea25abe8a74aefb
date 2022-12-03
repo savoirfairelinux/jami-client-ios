@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1b548b2_d94fa35f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-12-03T01:37:47Z",
+      "side": 1,
+      "message": "I think Swarm group could be renamed to SwarmInfo. We already have SwarmCreation group. And ProfilePicturesList could be renamed to SwarmMembers or SwarmParticipants",
+      "revId": "4a7d3c0ed4006e6f665bd4fd7ea25abe8a74aefb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2420db28_f713355d",
+        "filename": "Ring/Ring/Swarm/View/SettingsView.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-12-03T01:37:47Z",
+      "side": 1,
+      "message": "ise spacing 20, like for padding",
+      "revId": "4a7d3c0ed4006e6f665bd4fd7ea25abe8a74aefb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc0229e_54d446ec",
+        "filename": "Ring/Ring/Swarm/View/SettingsView.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-12-03T01:37:47Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "4a7d3c0ed4006e6f665bd4fd7ea25abe8a74aefb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53013928_c0e9a382",
+        "filename": "Ring/Ring/Swarm/View/SettingsView.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-12-03T01:37:47Z",
+      "side": 1,
+      "message": "remove commented code, if it does not work now",
+      "revId": "4a7d3c0ed4006e6f665bd4fd7ea25abe8a74aefb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f94a2c12_a1ba43d7",
+        "filename": "Ring/Ring/Swarm/View/TopProfileView.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-12-03T01:37:47Z",
+      "side": 1,
+      "message": "do we need it?",
+      "revId": "4a7d3c0ed4006e6f665bd4fd7ea25abe8a74aefb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a866a4d6_3ea39b31",
+        "filename": "Ring/Ring/Swarm/View/TopProfileView.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-12-03T01:37:47Z",
+      "side": 1,
+      "message": "use default system font, semibold (.font(Font.title3.weight(.semibold)))",
+      "revId": "4a7d3c0ed4006e6f665bd4fd7ea25abe8a74aefb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "845e497f_180fe9de",
+        "filename": "Ring/Ring/Swarm/View/TopProfileView.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-12-03T01:37:47Z",
+      "side": 1,
+      "message": "use default font (.font(.body))",
+      "revId": "4a7d3c0ed4006e6f665bd4fd7ea25abe8a74aefb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b08de7e_e5325524",
+        "filename": "Ring/Ring/Swarm/View/TopProfileView.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-12-03T01:37:47Z",
+      "side": 1,
+      "message": "do we need it? it is not editable",
+      "revId": "4a7d3c0ed4006e6f665bd4fd7ea25abe8a74aefb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
