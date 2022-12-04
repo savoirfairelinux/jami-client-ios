@@ -408,8 +408,6 @@ class ConversationsManager {
     func prepareConversationsForAccount(accountId: String, accountURI: String) {
         self.conversationService
             .getConversationsForAccount(accountId: accountId, accountURI: accountURI)
-            .subscribe()
-            .disposed(by: self.disposeBag)
     }
 
     // MARK: Message Adapter delegate

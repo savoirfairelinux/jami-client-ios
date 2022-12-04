@@ -90,8 +90,6 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
         self.contactService.removeAllContacts(for: accountId)
         self.conversationService
             .getConversationsForAccount(accountId: accountId, accountURI: "")
-            .subscribe()
-            .disposed(by: self.disposeBag)
         self.stateSubject.onNext(ConversationState.accountModeChanged)
         return true
     }

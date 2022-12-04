@@ -139,20 +139,14 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     lazy var conversations: Observable<[ConversationSection]> = { [weak self] in
         guard let self = self else { return Observable.empty() }
-        // get initial value
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
-            self.conversationsService
-                .conversationsForCurrentAccount
-                .share()
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { (conversations) in
-                    self.conversationsForCurrentAccount.onNext(conversations)
-                })
-                .disposed(by: self.tempBag)
-        })
-
-        return self.conversationsForCurrentAccount.share()
+        return self.conversationsService
+            .conversations
+            .share()
+            .startWith(self.conversationsService.conversations.value)
             .map({ (conversations) in
+                if conversations.isEmpty {
+                    self.conversationViewModels = [ConversationViewModel]()
+                }
                 return conversations
                     .compactMap({ conversationModel in
                         var conversationViewModel: ConversationViewModel?
@@ -184,7 +178,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         guard let self = self else {
             return Observable.just(0)
         }
-        return self.conversationsService.conversationsForCurrentAccount
+        return self.conversationsService.conversations
             .share()
             .flatMap { conversations -> Observable<[Int]> in
                 return Observable.combineLatest(conversations.map({ $0.numberOfUnreadMessages }))
@@ -222,20 +216,11 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             .observe(on: MainScheduler.instance)
     }()
 
-    var conversationsForCurrentAccount = PublishSubject<[ConversationModel]>()
-
     func reloadDataFor(accountId: String) {
         tempBag = DisposeBag()
         self.profileService.getAccountProfile(accountId: accountId)
             .subscribe(onNext: { [weak self] profile in
                 self?.profileImageForCurrentAccount.onNext(profile)
-            })
-            .disposed(by: self.tempBag)
-        self.conversationsService.conversationsForCurrentAccount
-            .share()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] conversations in
-                self?.conversationsForCurrentAccount.onNext(conversations)
             })
             .disposed(by: self.tempBag)
     }
@@ -275,6 +260,21 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         self.networkService.connectionStateObservable
             .subscribe(onNext: { [weak self] value in
                 self?.connectionState.onNext(value)
+            })
+            .disposed(by: self.disposeBag)
+
+        // Observe conversation removed
+        self.conversationsService.sharedResponseStream
+            .filter({ event in
+                event.eventType == .conversationRemoved && event.getEventInput(.accountId) == self.currentAccount?.id
+            })
+            .subscribe(onNext: { [weak self] event in
+                guard let conversationId: String = event.getEventInput(.conversationId),
+                      let accountId: String = event.getEventInput(.accountId) else { return }
+                guard let index = self?.conversationViewModels.firstIndex(where: { conversationModel in
+                    conversationModel.conversation.value.id == conversationId && conversationModel.conversation.value.accountId == accountId
+                }) else { return }
+                self?.conversationViewModels.remove(at: index)
             })
             .disposed(by: self.disposeBag)
     }
