@@ -54,10 +54,6 @@ class ConversationsService {
     var conversations = BehaviorRelay(value: [ConversationModel]())
     var conversationReady = BehaviorRelay(value: "")
 
-    lazy var conversationsForCurrentAccount: Observable<[ConversationModel]> = {
-        return self.conversations.asObservable()
-    }()
-
     let dbManager: DBManager
 
     // MARK: initial loading
@@ -71,7 +67,8 @@ class ConversationsService {
     /**
      Called when application starts and when  account changed
      */
-    func getConversationsForAccount(accountId: String, accountURI: String) -> Observable<[ConversationModel]> {
+    func getConversationsForAccount(accountId: String, accountURI: String) {
+        self.conversations.accept([ConversationModel]())
         /* if we don't have conversation that could mean the app
          just launched and we need symchronize messages status
          */
@@ -116,7 +113,6 @@ class ConversationsService {
                 }
             })
             .disposed(by: self.disposeBag)
-        return self.conversations.asObservable()
     }
 
     func getSwarmMembers(conversationId: String, accountId: String, accountURI: String) -> [ParticipantInfo] {
@@ -323,6 +319,11 @@ class ConversationsService {
         var conversations = self.conversations.value
         conversations.remove(at: index)
         self.conversations.accept(conversations)
+        let serviceEventType: ServiceEventType = .conversationRemoved
+        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
+        serviceEvent.addEventInput(.conversationId, value: conversationId)
+        serviceEvent.addEventInput(.accountId, value: accountId)
+        self.responseStream.onNext(serviceEvent)
     }
 
     func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: ConversationMemberEvent, accountURI: String) {

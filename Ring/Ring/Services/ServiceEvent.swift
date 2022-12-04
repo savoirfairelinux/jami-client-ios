@@ -62,6 +62,7 @@ enum ServiceEventType {
     case conversationProfileUpdated
     case conversationPreferencesUpdated
     case conversationMemberEvent
+    case conversationRemoved
 }
 
 /**
