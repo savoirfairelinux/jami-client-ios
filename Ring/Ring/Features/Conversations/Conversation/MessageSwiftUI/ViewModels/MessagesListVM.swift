@@ -38,13 +38,50 @@ class MessagesListVM: ObservableObject {
     }()
 
     let disposeBag = DisposeBag()
+    var messagesDisposeBag = DisposeBag()
 
     @Published var messagesModels = [MessageContainerModel]()
     @Published var needScroll = false
     var lastMessageOnScreen = ""
     var visibleRows: Set = [""]
+    var initialLoadingCompleted: Bool = true
 
-    var conversation: ConversationModel
+    var conversation: ConversationModel {
+        didSet {
+            messagesDisposeBag = DisposeBag()
+            conversation.newMessages.share()
+                .startWith(conversation.messages)
+                .observe(on: MainScheduler.instance)
+                .subscribe { [weak self] messages in
+                    guard let self = self else { return }
+                    var insertionCount = 0
+                    for newMessage in messages where self.insert(message: newMessage) == true {
+                        insertionCount += 1
+                    }
+                    if insertionCount == 0 {
+                        return
+                    }
+                    self.computeSequencing()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        if self.shouldScroll() {
+                            if !self.loading || self.lastMessageOnScreen == "" {
+                                self.lastMessageOnScreen = self.messagesModels.last?.message.id ?? ""
+                            }
+                            self.needScroll = true
+                        }
+                        self.loading = false
+                        if self.messagesModels.count < 40 && !self.allLoaded() {
+                            self.loadMore()
+                        }
+                        self.initialLoadingCompleted = false
+                    }
+                } onError: { _ in
+
+                }
+                .disposed(by: self.messagesDisposeBag)
+            self.updateLastDisplayed()
+        }
+    }
 
     var accountService: AccountsService
     var profileService: ProfilesService
@@ -66,7 +103,11 @@ class MessagesListVM: ObservableObject {
     var transferHelper: TransferHelper
 
     init (injectionBag: InjectionBag, conversation: ConversationModel, transferHelper: TransferHelper) {
-        self.conversation = conversation
+        defer {
+            self.conversation = conversation
+            self.subscribeMessagesStatus()
+        }
+        self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
         self.profileService = injectionBag.profileService
         self.dataTransferService = injectionBag.dataTransferService
@@ -74,47 +115,6 @@ class MessagesListVM: ObservableObject {
         self.contactsService = injectionBag.contactsService
         self.nameService = injectionBag.nameService
         self.transferHelper = transferHelper
-        for message in conversation.messages {
-            _ = insert(message: message)
-        }
-        self.computeSequencing()
-        self.updateLastDisplayed()
-        self.lastMessageOnScreen = self.messagesModels.last?.message.id ?? ""
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            guard let self = self else { return }
-            self.loading = false
-            if self.messagesModels.count < 40 {
-                self.loadMore()
-            } else {
-                self.needScroll = true
-            }
-        }
-        conversation.newMessages.share()
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] messages in
-                guard let self = self else { return }
-                var insertionCount = 0
-                for newMessage in messages where self.insert(message: newMessage) == true {
-                    insertionCount += 1
-                }
-                if insertionCount == 0 {
-                    return
-                }
-                self.computeSequencing()
-                if self.shouldScroll() {
-                    if !self.loading {
-                        self.lastMessageOnScreen = self.messagesModels.last?.message.id ?? ""
-                    }
-                    self.needScroll = true
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.loading = false
-                }
-            } onError: { _ in
-
-            }
-            .disposed(by: self.disposeBag)
-        self.subscribeMessagesStatus()
     }
 
     private func insert(message: MessageModel) -> Bool {
@@ -338,6 +338,10 @@ class MessagesListVM: ObservableObject {
          2. when a new message received while previous last message for conversation
          was visible on the screen
          */
+
+        if initialLoadingCompleted {
+            return false
+        }
 
         if visibleRows.isEmpty || self.loading { return true }
 

@@ -163,7 +163,7 @@ class ConversationViewModel: Stateable, ViewModel {
             }
 
             self.subscribePresenceServiceContactPresence()
-            if conversation.value.isSwarm() && self.swarmInfo == nil {
+            if conversation.value.isSwarm() && self.swarmInfo == nil && !self.conversation.value.id.isEmpty {
                 self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value)
                 self.swarmInfo!.finalAvatar.share()
                     .observe(on: MainScheduler.instance)
@@ -179,7 +179,7 @@ class ConversationViewModel: Stateable, ViewModel {
                     } onError: { _ in
                     }
                     .disposed(by: self.disposeBag)
-            } else if !conversation.value.isSwarm() {
+            } else {
                 let filterParicipants = conversation.value.getParticipants()
                 if let contact = self.contactsService.contact(withHash: filterParicipants.first?.jamiId ?? "") {
                     if let profile = self.contactsService.getProfile(uri: "ring:" + (filterParicipants.first?.jamiId ?? ""), accountId: self.conversation.value.accountId),
@@ -203,6 +203,10 @@ class ConversationViewModel: Stateable, ViewModel {
                         self.subscribeUserServiceLookupStatus()
                         self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
                     }
+                } else {
+                    self.userName.accept(filterParicipants.first?.jamiId ?? "")
+                    self.subscribeUserServiceLookupStatus()
+                    self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
                 }
             }
             subscribeLastMessagesUpdate()
@@ -466,6 +470,8 @@ class ConversationViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate))
     }
 
+    var conversationCreated = BehaviorRelay(value: true)
+
     func openInvitationView(parentView: UIViewController) {
         let name = self.displayName.value?.isEmpty ?? true ? self.userName.value : self.displayName.value ?? ""
         let handler: ((String) -> Void) = { [weak self] conversationId in
@@ -477,6 +483,7 @@ class ConversationViewModel: Stateable, ViewModel {
             }
             self.request = nil
             self.conversation.accept(conversation)
+            self.conversationCreated.accept(true)
             if self.showInvitation.value {
                 self.showInvitation.accept(false)
             }

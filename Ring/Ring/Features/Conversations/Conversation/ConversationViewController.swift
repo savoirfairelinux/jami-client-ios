@@ -122,7 +122,7 @@ class ConversationViewController: UIViewController,
                 }
             })
             .disposed(by: self.disposeBag)
-        let messageListView = MessagesListView(list: swiftUIModel!)
+        let messageListView = MessagesListView(list: self.swiftUIModel!)
         let swiftUIView = UIHostingController(rootView: messageListView)
         addChild(swiftUIView)
         swiftUIView.view.frame = self.view.frame
@@ -724,6 +724,15 @@ class ConversationViewController: UIViewController,
                     self.messageAccessoryView.isHidden = false
                     self.setRightNavigationButtons()
                 }
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.conversationCreated
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] update in
+                guard let self = self, update else { return }
+                self.swiftUIModel?.conversation = self.viewModel.conversation.value
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)

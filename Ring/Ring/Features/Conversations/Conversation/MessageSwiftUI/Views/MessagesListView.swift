@@ -21,9 +21,7 @@
 import SwiftUI
 
 struct MessagesListView: View {
-    @ObservedObject var list: MessagesListVM
-    @SwiftUI.State private var username: String = ""
-    @SwiftUI.State private var keyboardHeight: CGFloat = 0
+    @StateObject var list: MessagesListVM
     var body: some View {
         ScrollViewReader { scrollView in
             ScrollView {
@@ -35,7 +33,7 @@ struct MessagesListView: View {
                     }
                 }
                 .listRowBackground(Color.clear)
-                .onChange(of: list.needScroll, perform: { updated in
+                .onReceive(list.$needScroll, perform: { (updated) in
                     if updated {
                         scrollView.scrollTo(list.lastMessageOnScreen)
                         list.needScroll = false
