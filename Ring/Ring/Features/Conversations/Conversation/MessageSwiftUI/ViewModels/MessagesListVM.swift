@@ -38,13 +38,45 @@ class MessagesListVM: ObservableObject {
     }()
 
     let disposeBag = DisposeBag()
+    var messagesDisposeBag = DisposeBag()
 
     @Published var messagesModels = [MessageContainerModel]()
     @Published var needScroll = false
     var lastMessageOnScreen = ""
     var visibleRows: Set = [""]
 
-    var conversation: ConversationModel
+    var conversation: ConversationModel {
+        didSet {
+            messagesDisposeBag = DisposeBag()
+            conversation.newMessages.share()
+                .startWith(conversation.messages)
+                .observe(on: MainScheduler.instance)
+                .subscribe { [weak self] messages in
+                    guard let self = self else { return }
+                    var insertionCount = 0
+                    for newMessage in messages where self.insert(message: newMessage) == true {
+                        insertionCount += 1
+                    }
+                    if insertionCount == 0 {
+                        return
+                    }
+                    self.computeSequencing()
+                    if self.shouldScroll() {
+                        if !self.loading {
+                            self.lastMessageOnScreen = self.messagesModels.last?.message.id ?? ""
+                        }
+                        self.needScroll = true
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.loading = false
+                    }
+                } onError: { _ in
+
+                }
+                .disposed(by: self.messagesDisposeBag)
+            self.updateLastDisplayed()
+        }
+    }
 
     var accountService: AccountsService
     var profileService: ProfilesService
@@ -78,7 +110,6 @@ class MessagesListVM: ObservableObject {
             _ = insert(message: message)
         }
         self.computeSequencing()
-        self.updateLastDisplayed()
         self.lastMessageOnScreen = self.messagesModels.last?.message.id ?? ""
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             guard let self = self else { return }
@@ -89,31 +120,6 @@ class MessagesListVM: ObservableObject {
                 self.needScroll = true
             }
         }
-        conversation.newMessages.share()
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] messages in
-                guard let self = self else { return }
-                var insertionCount = 0
-                for newMessage in messages where self.insert(message: newMessage) == true {
-                    insertionCount += 1
-                }
-                if insertionCount == 0 {
-                    return
-                }
-                self.computeSequencing()
-                if self.shouldScroll() {
-                    if !self.loading {
-                        self.lastMessageOnScreen = self.messagesModels.last?.message.id ?? ""
-                    }
-                    self.needScroll = true
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.loading = false
-                }
-            } onError: { _ in
-
-            }
-            .disposed(by: self.disposeBag)
         self.subscribeMessagesStatus()
     }
 

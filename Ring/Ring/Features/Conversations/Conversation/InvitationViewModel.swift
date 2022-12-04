@@ -71,7 +71,8 @@ class InvitationViewModel: ViewModel {
         self.contactJamiId = contactJamiId
         self.accountId = accountId
         self.alias = alias
-        self.displayName.accept(displayName)
+        let initialDisplayName = displayName.isEmpty ? contactJamiId : displayName
+        self.displayName.accept(initialDisplayName)
         self.profileImageData.accept(avatar)
         invitationStatus.accept(.temporary)
         self.listenConversationStatusForContact()
@@ -233,6 +234,7 @@ class InvitationViewModel: ViewModel {
 
     func sendRequest() {
         let avatar = self.profileImageData.value != nil ? String(data: self.profileImageData.value!.base64EncodedData(), encoding: .utf8) : nil
+
         self.requestsService
             .sendContactRequest(to: self.contactJamiId,
                                 withAccountId: self.accountId,

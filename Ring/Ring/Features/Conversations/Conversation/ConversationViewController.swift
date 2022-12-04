@@ -727,6 +727,15 @@ class ConversationViewController: UIViewController,
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
+
+        self.viewModel.conversationCreated
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] update in
+                guard let self = self, update else { return }
+                self.swiftUIModel?.conversation = self.viewModel.conversation.value
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
     }
 
     // Avoid the keyboard to be hidden when the Send button is touched
