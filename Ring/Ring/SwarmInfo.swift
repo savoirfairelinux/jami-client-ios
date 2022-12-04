@@ -289,6 +289,7 @@ class SwarmInfo {
     private func updateParticipants() {
         guard let conversation = self.conversation else { return }
         var participantsInfo = [ParticipantInfo]()
+        self.participants.accept(participantsInfo)
         self.insertAndSortParticipants(participants: participantsInfo)
         if let localJamiId = self.localJamiId {
             let memberList = conversationsService.getSwarmMembers(conversationId: conversation.id, accountId: accountId, accountURI: localJamiId)
@@ -416,18 +417,18 @@ class SwarmInfo {
         let sorted = namesVariable.sorted { name1, name2 in
             name1.count < name2.count
         }
-        let names2 = Array(Set(sorted))
+        let namesSet = Array(Set(sorted))
         var finalTitle = ""
-        if names2.isEmpty { return finalTitle }
+        if namesSet.isEmpty { return finalTitle }
         // maximum 3 names could be displayed
-        let numberOfDisplayedNames: Int = names2.count < 3 ? names2.count : 3
+        let numberOfDisplayedNames: Int = namesSet.count < 3 ? namesSet.count : 3
         // number of participants not included in title
         let otherParticipantsCount = participantsCount - numberOfDisplayedNames
         let titleEnd = otherParticipantsCount > 0 ? ", + \(otherParticipantsCount)" : ""
-        finalTitle = names2[0]
+        finalTitle = namesSet[0]
         if numberOfDisplayedNames != 1 {
             for index in 1...(numberOfDisplayedNames - 1) {
-                finalTitle += ", " + names2[index]
+                finalTitle += ", " + namesSet[index]
             }
         }
         finalTitle += titleEnd
