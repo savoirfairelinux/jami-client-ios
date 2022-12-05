@@ -31,7 +31,7 @@ public struct TopProfileView: View {
     @SwiftUI.State private var titleTextFieldInput: String = ""
     @SwiftUI.State private var showingOptions = false
     @SwiftUI.State private var showingType: PhotoSheetType?
-    @SwiftUI.State private var imageData: Data = Data()
+    @SwiftUI.State private var image: UIImage?
     @AppStorage("SWARM_COLOR") var swarmColor = Color.blue
     var swarmViews: [SwarmSettingView] {
         if viewmodel.swarmInfo.participants.value.count == 2 {
@@ -76,14 +76,14 @@ public struct TopProfileView: View {
                 }
                 .sheet(item: $showingType) { type in
                     if type == .gallery {
-                        ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $imageData)
+                        ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
                     } else {
-                        ImagePicker(sourceType: .camera, showingType: $showingType, image: $imageData)
+                        ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
                     }
                 }
-                .onChange(of: imageData) { _ in
-                    print("Avatar changed to \(imageData)!")
-                    viewmodel.updateSwarmAvatar(imageData: imageData)
+                .onChange(of: image) { _ in
+                    print("Avatar changed to \(String(describing: image))!")
+                    viewmodel.updateSwarmAvatar(image: image)
                 }
 
                 if viewmodel.isAdmin {
