@@ -316,7 +316,8 @@ class ConversationModel: Equatable {
     }
 
     func isCoredialog() -> Bool {
-        return self.type == .nonSwarm || self.type == .oneToOne || self.type != .sip || self.type != .jams
+        if self.participants.count > 2 { return false }
+        return self.type == .nonSwarm || self.type == .oneToOne || self.type == .sip || self.type == .jams
     }
 
     func getParticipants() -> [ConversationParticipant] {
