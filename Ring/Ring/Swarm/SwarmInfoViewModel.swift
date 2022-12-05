@@ -105,13 +105,14 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
         }
     }
 
-    func updateSwarmAvatar(imageData: Data) {
+    func updateSwarmAvatar(image: UIImage?) {
+        guard let image = image, let data = image.convertToDataForSwarm() else { return }
         if let conversationId = conversation?.value.id,
            let accountId = conversation?.value.accountId {
             var conversationInfo = conversationService.getConversationInfo(conversationId: conversationId, accountId: accountId)
-            conversationInfo[ConversationAttributes.avatar.rawValue] = imageData.base64EncodedString()
+            conversationInfo[ConversationAttributes.avatar.rawValue] = data.base64EncodedString()
             self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
-            self.finalAvatar = UIImage(data: imageData)!
+            self.finalAvatar = image
         }
     }
 
