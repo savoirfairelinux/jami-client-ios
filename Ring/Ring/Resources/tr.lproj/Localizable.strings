@@ -38,10 +38,28 @@
 "scan.search" = "Arıyor...";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.createTheSwarm" = "Create the swarm";
 "swarmcreation.addADescription" = "Add a description";
+// Swarm
+"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Choose a color";
+"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.identifier" = "Tanımlayıcı";
+"swarm.about" = "Hakkında";
+"swarm.members" = "Üyeler";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Özel küme";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Member";
+"swarm.invited" = "Invited";
+"swarm.admin" = "Administrator";
+"swarm.banned" = "Banned";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Dün";
 "smartlist.results" = "Genel Dizin";
@@ -348,7 +366,12 @@
 
 //General Settings
 "generalSettings.title" = "Gelişmiş ayarlar";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Görüntü hızlandırmayı etkinleştir";
+"generalSettings.fileTransfer" = "Dosya aktarımı";
+"generalSettings.automaticAcceptIncomingFiles" = "Gelen dosyaları kendiliğinden kabul et";
+"generalSettings.acceptTransferLimit" = "Aktarma sınırını kabul et";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Hesap taşıma";

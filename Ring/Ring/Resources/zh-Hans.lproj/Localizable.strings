@@ -38,10 +38,28 @@
 "scan.search" = "正在搜尋……";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.createTheSwarm" = "Create the swarm";
 "swarmcreation.addADescription" = "添加描述";
+// Swarm
+"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "选择一个颜色";
+"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.identifier" = "識別碼";
+"swarm.about" = "關於";
+"swarm.members" = "成員";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "私人 swarm";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "成员";
+"swarm.invited" = "已邀请";
+"swarm.admin" = "管理员";
+"swarm.banned" = "已屏蔽";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公開目錄";
@@ -348,7 +366,12 @@
 
 //General Settings
 "generalSettings.title" = "進階設定";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "啟用視訊加速";
+"generalSettings.fileTransfer" = "檔案傳輸";
+"generalSettings.automaticAcceptIncomingFiles" = "自動接受傳來的檔案";
+"generalSettings.acceptTransferLimit" = "接受傳輸限制";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "帳號遷移";

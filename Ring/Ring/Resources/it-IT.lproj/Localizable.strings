@@ -38,10 +38,28 @@
 "scan.search" = "Ricerca in corso…";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.searchBar" = "Cerca contatto...";
+"swarmcreation.createTheSwarm" = "Crea il gruppo";
 "swarmcreation.addADescription" = "Aggiungi una descrizione";
+// Swarm
+"swarm.ignoreSwarm" = "Ignora il gruppo";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Scegli un colore";
+"swarm.typeOfSwarm" = "Tipo di gruppo";
+"swarm.identifier" = "Identificatore";
+"swarm.about" = "Info";
+"swarm.members" = "Membri";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Private swarm";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Membro";
+"swarm.invited" = "Invitato";
+"swarm.admin" = "Administrator";
+"swarm.banned" = "Bloccato";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Elenco pubblico";
@@ -332,23 +350,28 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Hai ricevuto un invito";
 "generatedMessage.swarmCreated" = "Gruppo creato";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "è stato invitato a partecipare";
+"generatedMessage.invitationAccepted" = "partecipa alla conversazione";
+"generatedMessage.youJoined" = "Partecipi alla conversazione";
+"generatedMessage.contactBanned" = "è stato espulso";
+"generatedMessage.contactReAdded" = "è stato riammesso";
 "generatedMessage.outgoingCall" = "Chiamata in uscita";
 "generatedMessage.incomingCall" = "Chiamata in arrivo";
 "generatedMessage.missedOutgoingCall" = "Chiamata in uscita persa";
 "generatedMessage.missedIncomingCall" = "Chiamata in arrivo persa";
 "generatedMessage.liveLocationSharing" = "Condivisione della posizione in diretta";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "è uscito";
 
 //General Settings
 "generalSettings.title" = "Impostazioni avanzate";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Attiva l'accelerazione video";
+"generalSettings.fileTransfer" = "Trasferimento file";
+"generalSettings.automaticAcceptIncomingFiles" = "Accetta automaticamente i file in arrivo";
+"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Migrazione account";

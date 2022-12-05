@@ -38,10 +38,28 @@
 "scan.search" = "検索中…";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.createTheSwarm" = "Create the swarm";
 "swarmcreation.addADescription" = "Add a description";
+// Swarm
+"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Choose a color";
+"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.identifier" = "Identifier";
+"swarm.about" = "アプリについて";
+"swarm.members" = "要員";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Private swarm";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Member";
+"swarm.invited" = "Invited";
+"swarm.admin" = "Administrator";
+"swarm.banned" = "Banned";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "昨日";
 "smartlist.results" = "公開ディレクトリー";
@@ -348,7 +366,12 @@
 
 //General Settings
 "generalSettings.title" = "詳細設定";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.fileTransfer" = "ファイル転送";
+"generalSettings.automaticAcceptIncomingFiles" = "ファイルの受信を自動的に許可";
+"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "アカウントの移行";

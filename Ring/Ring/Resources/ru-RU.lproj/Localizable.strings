@@ -38,10 +38,28 @@
 "scan.search" = "Поиск...";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.createTheSwarm" = "Create the swarm";
 "swarmcreation.addADescription" = "Add a description";
+// Swarm
+"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Choose a color";
+"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.identifier" = "Идентификатор";
+"swarm.about" = "О продукте";
+"swarm.members" = "Участники";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Частный рой";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Member";
+"swarm.invited" = "Invited";
+"swarm.admin" = "Administrator";
+"swarm.banned" = "Banned";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Публичный Каталог";
@@ -348,7 +366,12 @@
 
 //General Settings
 "generalSettings.title" = "Дополнительные настройки";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Разрешить видео-ускорение";
+"generalSettings.fileTransfer" = "Передача файлов";
+"generalSettings.automaticAcceptIncomingFiles" = "Автоматически принимать входящие файлы";
+"generalSettings.acceptTransferLimit" = "Принять лимит на передачу";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Миграция аккаунта";

@@ -38,10 +38,28 @@
 "scan.search" = "Căutare...";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.searchBar" = "Caută un contact...";
+"swarmcreation.createTheSwarm" = "Creează grupul";
 "swarmcreation.addADescription" = "Adaugă o descriere";
+// Swarm
+"swarm.ignoreSwarm" = "Ignoră grupul";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Alege o culoare";
+"swarm.typeOfSwarm" = "Tipul grupului";
+"swarm.identifier" = "Identificator";
+"swarm.about" = "Despre";
+"swarm.members" = "Membri";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Grup privat";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Membru";
+"swarm.invited" = "Invitat";
+"swarm.admin" = "Administrator";
+"swarm.banned" = "Blocat";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
@@ -332,23 +350,28 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Ai primit o invitație";
 "generatedMessage.swarmCreated" = "Grup creat";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "a fost invitat să participe";
+"generatedMessage.invitationAccepted" = "participă la conversație";
+"generatedMessage.youJoined" = "Participi la conversație";
+"generatedMessage.contactBanned" = "a fost dat afară";
+"generatedMessage.contactReAdded" = "a fost reprimit";
 "generatedMessage.outgoingCall" = "Apel efectuat";
 "generatedMessage.incomingCall" = "Apel primit";
 "generatedMessage.missedOutgoingCall" = "Apel efectuat nepreluat";
 "generatedMessage.missedIncomingCall" = "Apel pierdut";
 "generatedMessage.liveLocationSharing" = "Distribuirea poziției în direct";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "a ieșit";
 
 //General Settings
 "generalSettings.title" = "Reglări avansate";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Activează accelerarea video";
+"generalSettings.fileTransfer" = "Transfer de fișiere";
+"generalSettings.automaticAcceptIncomingFiles" = "Acceptă automat fișierele primite";
+"generalSettings.acceptTransferLimit" = "Limita transferului acceptat";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Transferul contului";

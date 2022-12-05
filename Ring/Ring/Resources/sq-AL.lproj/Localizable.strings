@@ -38,10 +38,28 @@
 "scan.search" = "Po kërkohet…";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.searchBar" = "Kërkoni për kontakt…";
+"swarmcreation.createTheSwarm" = "Krijoje zgjoin";
 "swarmcreation.addADescription" = "Shtoni një përshkrim";
+// Swarm
+"swarm.ignoreSwarm" = "Shpërfille zgjuan";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Zgjidhni një ngjyrë";
+"swarm.typeOfSwarm" = "Lloj zgjoi";
+"swarm.identifier" = "Identifikues";
+"swarm.about" = "Mbi";
+"swarm.members" = "Anëtarë";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Zgjua privat";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Anëtar";
+"swarm.invited" = "Ftuar";
+"swarm.admin" = "Përgjegjës";
+"swarm.banned" = "Dëbuar";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori Publike";
@@ -332,23 +350,28 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Morët ftesë";
 "generatedMessage.swarmCreated" = "Zgjoi u krijua";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "u ftua të marrë pjesë";
+"generatedMessage.invitationAccepted" = "hyri në bisedë";
+"generatedMessage.youJoined" = "Hytë në bisedë";
+"generatedMessage.contactBanned" = "u përzu";
+"generatedMessage.contactReAdded" = "u rishtua";
 "generatedMessage.outgoingCall" = "Thirrje për";
 "generatedMessage.incomingCall" = "Thirrje ardhëse";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie “live” e vendndodhjes";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "iku";
 
 //General Settings
 "generalSettings.title" = "Rregullime të mëtejshme";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
+"generalSettings.fileTransfer" = "Shpërngulje kartelash";
+"generalSettings.automaticAcceptIncomingFiles" = "Prano automatikisht kartela ardhëse";
+"generalSettings.acceptTransferLimit" = "Prano kufi shpërnguljesh";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Migrim llogarie";

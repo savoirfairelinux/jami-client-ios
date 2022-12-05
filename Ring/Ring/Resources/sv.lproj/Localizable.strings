@@ -38,10 +38,28 @@
 "scan.search" = "Söker...";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.createTheSwarm" = "Create the swarm";
 "swarmcreation.addADescription" = "Add a description";
+// Swarm
+"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Choose a color";
+"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.identifier" = "identifierare";
+"swarm.about" = "Om";
+"swarm.members" = "Medlemmar";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Privat \"swarm\"";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Member";
+"swarm.invited" = "Invited";
+"swarm.admin" = "Administrator";
+"swarm.banned" = "Banned";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Offentlig mapp";
@@ -348,7 +366,12 @@
 
 //General Settings
 "generalSettings.title" = "Avancerade inställningar";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Aktivera videoacceleration";
+"generalSettings.fileTransfer" = "Filöverföring";
+"generalSettings.automaticAcceptIncomingFiles" = "Acceptera inkommande filer automatiskt";
+"generalSettings.acceptTransferLimit" = "Ange gräns för överföring";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Kontodelning";

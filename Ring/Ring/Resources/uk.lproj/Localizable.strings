@@ -38,10 +38,28 @@
 "scan.search" = "Пошук…";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.createTheSwarm" = "Create the swarm";
 "swarmcreation.addADescription" = "Додати опис";
+// Swarm
+"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Обрати колір";
+"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.identifier" = "Ідентифікатор";
+"swarm.about" = "Про программу";
+"swarm.members" = "Учасники";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Private swarm";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Member";
+"swarm.invited" = "Invited";
+"swarm.admin" = "Адміністратор";
+"swarm.banned" = "Banned";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Вчора";
 "smartlist.results" = "Public Directory";
@@ -348,7 +366,12 @@
 
 //General Settings
 "generalSettings.title" = "Розширені налаштування";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.fileTransfer" = "Передача файлів";
+"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
+"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Переведення облікового запису";

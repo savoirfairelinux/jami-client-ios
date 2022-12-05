@@ -38,10 +38,28 @@
 "scan.search" = "Iskanje ...";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.createTheSwarm" = "Ustvarite roj";
 "swarmcreation.addADescription" = "Dodajte opis";
+// Swarm
+"swarm.ignoreSwarm" = "Prezri roj";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Izberite barvo";
+"swarm.typeOfSwarm" = "Vrsta roja";
+"swarm.identifier" = "identifikator";
+"swarm.about" = "O programu";
+"swarm.members" = "Člani";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Zasebni roj";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Član";
+"swarm.invited" = "Povabljeni";
+"swarm.admin" = "Skrbnik";
+"swarm.banned" = "Izključen/a";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Včeraj";
 "smartlist.results" = "Javni imenik";
@@ -348,7 +366,12 @@
 
 //General Settings
 "generalSettings.title" = "Napredne nastavitve";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Vklopi strojno pospeševanje videa";
+"generalSettings.fileTransfer" = "Prenos datoteke";
+"generalSettings.automaticAcceptIncomingFiles" = "Samodejno sprejmi dohodne datoteke";
+"generalSettings.acceptTransferLimit" = "Sprejmi omejitev prenosa";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Selitev računa";

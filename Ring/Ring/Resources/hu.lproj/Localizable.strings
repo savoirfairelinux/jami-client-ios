@@ -38,10 +38,28 @@
 "scan.search" = "Keresés…";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.searchBar" = "Kapcsolat keresése…";
+"swarmcreation.createTheSwarm" = "Rajcsoport létrehozása";
 "swarmcreation.addADescription" = "Leírás hozzáadása";
+// Swarm
+"swarm.ignoreSwarm" = "Rajcsoport figyelmen kívül hagyása";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Színválasztás";
+"swarm.typeOfSwarm" = "Rajcsoporttípus";
+"swarm.identifier" = "Azonosító";
+"swarm.about" = "Névjegy";
+"swarm.members" = "Members";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Private swarm";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Member";
+"swarm.invited" = "Meghívott";
+"swarm.admin" = "Administrator";
+"swarm.banned" = "Letiltva";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Nyilvános címtár";
@@ -332,23 +350,28 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Meghívás megérkezett";
 "generatedMessage.swarmCreated" = "Rajcsoport létrehozva";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "meghívást kapott a csatlakozásra";
+"generatedMessage.invitationAccepted" = "csatlakozott a beszélgetéshez";
+"generatedMessage.youJoined" = "Ön csatlakozott a beszélgetéshez";
+"generatedMessage.contactBanned" = "eltávolítva lett";
+"generatedMessage.contactReAdded" = "újra hozzáadva";
 "generatedMessage.outgoingCall" = "Kimenő hívás";
 "generatedMessage.incomingCall" = "Bejövő hívás";
 "generatedMessage.missedOutgoingCall" = "Nem fogadott kimenő hívás";
 "generatedMessage.missedIncomingCall" = "Nem fogadott bejövő hívás";
 "generatedMessage.liveLocationSharing" = "Valós idejű hely megosztása";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "kilépett";
 
 //General Settings
 "generalSettings.title" = "Haladó beállítások";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Videó gyorsítás engedélyezése";
+"generalSettings.fileTransfer" = "Fájlküldés";
+"generalSettings.automaticAcceptIncomingFiles" = "A bejövő fájlok önműködő elfogadása";
+"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Fiók áttelepítése";

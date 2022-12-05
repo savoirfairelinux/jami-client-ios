@@ -38,10 +38,28 @@
 "scan.search" = "A pesquisar…";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.createTheSwarm" = "Create the swarm";
 "swarmcreation.addADescription" = "Add a description";
+// Swarm
+"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Choose a color";
+"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.identifier" = "Identificador";
+"swarm.about" = "Sobre";
+"swarm.members" = "Membros";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "swarm privado";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Member";
+"swarm.invited" = "Invited";
+"swarm.admin" = "Administrator";
+"swarm.banned" = "Banned";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Ontem";
 "smartlist.results" = "Diretório público";
@@ -348,7 +366,12 @@
 
 //General Settings
 "generalSettings.title" = "Configurações avançadas";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Ativar aceleração de vídeo";
+"generalSettings.fileTransfer" = "Transferência de ficheiro";
+"generalSettings.automaticAcceptIncomingFiles" = "Aceitar automaticamente os novos arquivos ";
+"generalSettings.acceptTransferLimit" = "Aceitar o limite de transferência";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Migração de conta";

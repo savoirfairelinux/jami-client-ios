@@ -38,10 +38,28 @@
 "scan.search" = "Mencari...";
 
 // SwarmCreation
-"swarmcreation.title" = "Create the Swarm";
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the Swarm";
+"swarmcreation.createTheSwarm" = "Buat kawanan";
 "swarmcreation.addADescription" = "Tambah deskripsi";
+// Swarm
+"swarm.ignoreSwarm" = "Abaikan kawanan";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Pilih warna";
+"swarm.typeOfSwarm" = "Jenis kawanan";
+"swarm.identifier" = "Pengidentifikasi";
+"swarm.about" = "Tentang";
+"swarm.members" = "Members";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Private swarm";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private group swarm";
+"swarm.publicChat" = "Public group swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Member";
+"swarm.invited" = "Diundang";
+"swarm.admin" = "Administrator";
+"swarm.banned" = "Dibanned";
+"swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Kemarin";
 "smartlist.results" = "Direktori Publik";
@@ -348,7 +366,12 @@
 
 //General Settings
 "generalSettings.title" = "Pengaturan lanjutan";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Aktifkan akselerasi video";
+"generalSettings.fileTransfer" = "Mengirim berkas";
+"generalSettings.automaticAcceptIncomingFiles" = "Secara otomatis menerima file yang masuk";
+"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
 "migrateAccount.title" = "Migrasi akun";
