@@ -32,19 +32,39 @@ enum MessageInfo: State {
 
 class MessagesListVM: ObservableObject {
 
+    // view properties
+    @Published var messagesModels = [MessageContainerModel]()
+    @Published var needScroll = false
+
+    var lastMessageOnScreen = ""
+    var visibleRows: Set = [""]
+
+    var accountService: AccountsService
+    var profileService: ProfilesService
+    var dataTransferService: DataTransferService
+    var conversationService: ConversationsService
+    var contactsService: ContactsService
+    var nameService: NameService
+    var transferHelper: TransferHelper
+
+    // state
     private let contextStateSubject = PublishSubject<State>()
     lazy var contextMenuState: Observable<State> = {
         return self.contextStateSubject.asObservable()
     }()
-
     let disposeBag = DisposeBag()
     var messagesDisposeBag = DisposeBag()
 
-    @Published var messagesModels = [MessageContainerModel]()
-    @Published var needScroll = false
-    var lastMessageOnScreen = ""
-    var visibleRows: Set = [""]
-    var initialLoadingCompleted: Bool = true
+    var loading = true // to avoid a new loading while previous one still executing
+    var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: UIImage]())
+    var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: UIImage]())
+    // last read
+    // dictionary of participant id and last read message Id
+    var lastReadMessageForParticipant = ConcurentDictionary(name: "com.ReadMessageForParticipantAccesDictionary",
+                                                            dictionary: [String: String]())
+    // dictionary of message id and array of participants for whom the message is last read
+    var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
+                                       dictionary: [String: [String: UIImage]]())
 
     var conversation: ConversationModel {
         didSet {
@@ -61,6 +81,16 @@ class MessagesListVM: ObservableObject {
                     if insertionCount == 0 {
                         return
                     }
+                    // load more messages if conversation just opened for first time
+                    if self.messagesModels.count < 40 && !self.allLoaded() {
+                        if let messageId = self.messagesModels.first?.id {
+                            self.conversationService
+                                .loadConversationMessages(conversationId: self.conversation.id,
+                                                          accountId: self.conversation.accountId,
+                                                          from: messageId)
+                            return
+                        }
+                    }
                     self.computeSequencing()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         if self.shouldScroll() {
@@ -70,10 +100,6 @@ class MessagesListVM: ObservableObject {
                             self.needScroll = true
                         }
                         self.loading = false
-                        if self.messagesModels.count < 40 && !self.allLoaded() {
-                            self.loadMore()
-                        }
-                        self.initialLoadingCompleted = false
                     }
                 } onError: { _ in
 
@@ -82,25 +108,6 @@ class MessagesListVM: ObservableObject {
             self.updateLastDisplayed()
         }
     }
-
-    var accountService: AccountsService
-    var profileService: ProfilesService
-    var dataTransferService: DataTransferService
-    var conversationService: ConversationsService
-    var contactsService: ContactsService
-    var nameService: NameService
-
-    var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: UIImage]())
-    var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: UIImage]())
-    // last read
-    // dictionary of participant id and last read message Id
-    var lastReadMessageForParticipant = ConcurentDictionary(name: "com.ReadMessageForParticipantAccesDictionary",
-                                                            dictionary: [String: String]())
-    // dictionary of message id and array of participants for whom the message is last read
-    var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
-                                       dictionary: [String: [String: UIImage]]())
-
-    var transferHelper: TransferHelper
 
     init (injectionBag: InjectionBag, conversation: ConversationModel, transferHelper: TransferHelper) {
         defer {
@@ -331,18 +338,12 @@ class MessagesListVM: ObservableObject {
     }
 
     private func shouldScroll() -> Bool {
-
         /*
          scroll should be performed in two cases:
          1. when loadin more messages
          2. when a new message received while previous last message for conversation
          was visible on the screen
          */
-
-        if initialLoadingCompleted {
-            return false
-        }
-
         if visibleRows.isEmpty || self.loading { return true }
 
         // check if previous message was visible on screen
@@ -352,8 +353,6 @@ class MessagesListVM: ObservableObject {
         let previousMessage = self.messagesModels[self.messagesModels.count - 2]
         return visibleRows.contains(previousMessage.message.id)
     }
-
-    var loading = true
 
     private func sortVisibleRows() -> [String] {
         var temporary = [String: Int]()
