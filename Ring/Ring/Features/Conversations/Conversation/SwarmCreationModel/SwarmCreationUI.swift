@@ -70,8 +70,8 @@ struct SwarmCreationUI: View {
                 Button(action: {
                     showingOptions = true
                 }) {
-                    if !list.imageData.isEmpty {
-                        Image(uiImage: UIImage(data: list.imageData)!)
+                    if let image = list.image {
+                        Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                     } else {
@@ -103,9 +103,9 @@ struct SwarmCreationUI: View {
                 }
                 .sheet(item: $showingType) { type in
                     if type == .gallery {
-                        ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $list.imageData)
+                        ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $list.image)
                     } else {
-                        ImagePicker(sourceType: .camera, showingType: $showingType, image: $list.imageData)
+                        ImagePicker(sourceType: .camera, showingType: $showingType, image: $list.image)
 
                     }
                 }
@@ -177,7 +177,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
     @Binding var showingType: PhotoSheetType?
-    @Binding var image: Data
+    @Binding var image: UIImage?
 
     func makeCoordinator() -> ImagePicker.Coordinator {
         return ImagePicker.Coordinator(self)
@@ -209,8 +209,7 @@ struct ImagePicker: UIViewControllerRepresentable {
             guard let image = info[.originalImage] as? UIImage else {
                 return
             }
-            let data = image.jpegData(compressionQuality: 0.45)
-            self.picker.image = data!
+            self.picker.image = image
             self.picker.showingType = nil
         }
     }

@@ -35,7 +35,7 @@ class SwarmCreationUIModel: ObservableObject {
 
     @Published var swarmName: String = ""
     @Published var swarmDescription: String = ""
-    @Published var imageData: Data = Data()
+    @Published var image: UIImage?
     @Published var selections: [String] = []
     @Published var maximumLimit: Int = 8
 
@@ -87,8 +87,8 @@ class SwarmCreationUIModel: ObservableObject {
         var info = [String: String]()
         let conversationId = self.conversationService.startConversation(accountId: accountId)
 
-        if !imageData.isEmpty {
-            info[ConversationAttributes.avatar.rawValue] = imageData.base64EncodedString()
+        if let image = self.image, let data = image.convertToDataForSwarm() {
+            info[ConversationAttributes.avatar.rawValue] = data.base64EncodedString()
         }
         if !swarmName.isEmpty {
             info[ConversationAttributes.title.rawValue] = swarmName
