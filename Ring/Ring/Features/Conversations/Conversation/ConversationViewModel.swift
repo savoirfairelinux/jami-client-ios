@@ -125,7 +125,11 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     private func setConversation(_ conversation: ConversationModel) {
-        self.conversation.accept(conversation)
+        if self.conversation != nil {
+            self.conversation.accept(conversation)
+        } else {
+            self.conversation = BehaviorRelay(value: conversation)
+        }
     }
 
     convenience init(with injectionBag: InjectionBag, conversation: ConversationModel, user: JamiSearchViewModel.UserSearchModel) {
