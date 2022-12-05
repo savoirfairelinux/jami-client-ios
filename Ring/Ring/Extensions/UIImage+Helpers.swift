@@ -112,8 +112,8 @@ extension UIImage {
     }
 
     func convertToData(ofMaxSize maxSize: Int) -> Data? {
-        var imageData: Data?
-        var fileSize = maxSize + 1
+        var imageData = self.jpegData(compressionQuality: 1)
+        var fileSize = imageData?.count ?? maxSize
         var i = 10
         while fileSize > maxSize && i >= 0 {
             imageData = self.jpegData(compressionQuality: CGFloat(0.1 * Double(i)))
@@ -121,6 +121,11 @@ extension UIImage {
             i -= 1
         }
         return imageData
+    }
+
+    func convertToDataForSwarm() -> Data? {
+        return self.convert(toSize: CGSize(width: 1000, height: 1000), scale: 1)
+            .convertToData(ofMaxSize: 40000)
     }
 
     public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
