@@ -16,6 +16,24 @@
       "message": "use padding 20, same as for picker view",
       "revId": "b162e895f439d508fd9ba9e67f88f6b5bd928e9b",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "303df6b6_7dc22902",
+        "filename": "Ring/Ring/Swarm/View/SettingsView.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2022-12-06T22:35:37Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "04e25e76_b85a29bf",
+      "revId": "b162e895f439d508fd9ba9e67f88f6b5bd928e9b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
