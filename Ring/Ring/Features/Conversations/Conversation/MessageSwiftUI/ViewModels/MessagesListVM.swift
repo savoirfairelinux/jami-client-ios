@@ -253,18 +253,20 @@ class MessagesListVM: ObservableObject {
                 _ = self.transferHelper.cancelTransfer(conversation: self.conversation, message: viewModel.message)
             case .getProgress(let viewModel):
                 if let progress = self.transferHelper.getTransferProgress(conversation: self.conversation, message: viewModel.message) {
-                    viewModel.fileProgress = CGFloat(progress)
+                    viewModel.updateProgress(progress: CGFloat(progress))
                 }
             case .getSize(let viewModel):
                 if let size = self.transferHelper.getTransferSize(conversation: self.conversation, message: viewModel.message) {
-                    viewModel.fileSize = size
+                    viewModel.updateFileSize(size: size)
                 }
             case .getImage(let viewModel):
                 if viewModel.image != nil { return }
-                viewModel.image = self.transferHelper.getTransferedImage(maxSize: 450, conversation: self.conversation, message: viewModel.message)
+                let image = self.transferHelper.getTransferedImage(maxSize: 450, conversation: self.conversation, message: viewModel.message)
+                viewModel.updateImage(image: image)
             case .getURL(let viewModel):
                 if viewModel.url != nil { return }
-                viewModel.url = self.transferHelper.getFileURL(conversation: self.conversation, message: viewModel.message)
+                let url = self.transferHelper.getFileURL(conversation: self.conversation, message: viewModel.message)
+                viewModel.updateFileURL(url: url)
             case .getPlayer(let viewModel):
                 if viewModel.player != nil { return }
                 viewModel.updatePlayer(player: self.transferHelper.getPlayer(conversation: self.conversation, message: viewModel.message))
