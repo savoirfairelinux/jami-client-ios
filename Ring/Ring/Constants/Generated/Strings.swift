@@ -482,6 +482,8 @@ internal enum L10n {
     internal static let block = L10n.tr("Localizable", "global.block", fallback: "Block")
     /// Close
     internal static let close = L10n.tr("Localizable", "global.close", fallback: "Close")
+    /// Copy
+    internal static let copy = L10n.tr("Localizable", "global.copy", fallback: "Copy")
     /// Forward
     internal static let forward = L10n.tr("Localizable", "global.forward", fallback: "Forward")
     /// *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
@@ -512,6 +514,8 @@ internal enum L10n {
     internal static let preview = L10n.tr("Localizable", "global.preview", fallback: "Preview")
     /// Refuse
     internal static let refuse = L10n.tr("Localizable", "global.refuse", fallback: "Refuse")
+    /// Reply
+    internal static let reply = L10n.tr("Localizable", "global.reply", fallback: "Reply")
     /// Resend
     internal static let resend = L10n.tr("Localizable", "global.resend", fallback: "Resend")
     /// Save
@@ -664,8 +668,8 @@ internal enum L10n {
     internal static let identifier = L10n.tr("Localizable", "swarm.identifier", fallback: "Identifier")
     /// Ignore the swarm
     internal static let ignoreSwarm = L10n.tr("Localizable", "swarm.ignoreSwarm", fallback: "Ignore the swarm")
-    /// Others
-    internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Others")
+    /// Invited
+    internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Invited")
     /// Private group swarm
     internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private group swarm")
     /// Leave the conversation

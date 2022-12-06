@@ -76,17 +76,17 @@ enum ContextualMenuItem: Identifiable {
     func toString() -> String {
         switch self {
         case .preview:
-            return "Preview"
+            return L10n.Global.preview
         case .forward:
-            return "Forward"
+            return L10n.Global.forward
         case .share:
-            return "Share"
+            return L10n.Global.share
         case .save:
-            return "Save"
+            return L10n.Global.save
         case .copy:
-            return "Copy"
+            return L10n.Global.copy
         case .reply:
-            return "Reply"
+            return L10n.Global.reply
         }
     }
 

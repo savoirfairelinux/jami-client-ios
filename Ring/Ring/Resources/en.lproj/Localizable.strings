@@ -32,6 +32,8 @@
 "global.block" = "Block";
 "global.refuse" = "Refuse";
 "global.name" = "Name";
+"global.copy" = "Copy";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
