@@ -119,6 +119,11 @@ class PlayerView: UIView {
         progressSlider.setThumbImage(circleImage, for: .highlighted)
     }
 
+    func frameUpdated() {
+        containerView.frame = self.bounds
+        containerView.setNeedsDisplay()
+    }
+
     private func makeCircleWith(size: CGSize, backgroundColor: UIColor) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         let context = UIGraphicsGetCurrentContext()

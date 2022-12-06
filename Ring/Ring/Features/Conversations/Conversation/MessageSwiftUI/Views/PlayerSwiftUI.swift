@@ -34,7 +34,11 @@ struct PlayerViewWrapper: UIViewRepresentable {
         return player
     }
 
-    func updateUIView(_ uiView: PlayerView, context: Context) {}
+    func updateUIView(_ uiView: PlayerView, context: Context) {
+        let newFrame = CGRect(x: 0, y: 0, width: width, height: height)
+        uiView.frame = newFrame
+        uiView.frameUpdated()
+    }
 }
 
 struct PlayerSwiftUI: View {
