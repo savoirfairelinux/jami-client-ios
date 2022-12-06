@@ -29,12 +29,18 @@ struct PlayerViewWrapper: UIViewRepresentable {
 
     func makeUIView(context: Context) -> PlayerView {
         let frame = CGRect(x: 0, y: 0, width: width, height: height)
+
         let player = PlayerView(frame: frame)
+        player.translatesAutoresizingMaskIntoConstraints = true
         player.viewModel = viewModel
         return player
     }
 
-    func updateUIView(_ uiView: PlayerView, context: Context) {}
+    func updateUIView(_ uiView: PlayerView, context: Context) {
+        let newFrame = CGRect(x: 0, y: 0, width: width, height: height)
+        uiView.frame = newFrame
+        uiView.frameUpdated()
+    }
 }
 
 struct PlayerSwiftUI: View {
