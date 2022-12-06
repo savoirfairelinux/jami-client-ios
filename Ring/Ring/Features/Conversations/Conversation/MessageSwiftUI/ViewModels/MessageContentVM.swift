@@ -119,16 +119,16 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     @Published var fileProgress: CGFloat = 0
     @Published var transferActions = [TransferAction]()
     @Published var showProgress: Bool = true
-    @Published var playerHeight: CGFloat = 100
-    @Published var playerWidth: CGFloat = 250
-    var image: UIImage?
-    var player: PlayerViewModel?
+    @Published var playerHeight: CGFloat = 200
+    @Published var playerWidth: CGFloat = 500
+    @Published var image: UIImage?
+    @Published var player: PlayerViewModel?
+    @Published var corners: UIRectCorner = [.allCorners]
+    @Published var menuItems = [ContextualMenuItem]()
     var url: URL?
     var fileSize: Int64 = 0
     var transferStatus: DataTransferStatus = .unknown
     var dataTransferProgressUpdater: Timer?
-
-    @Published var menuItems = [ContextualMenuItem]()
 
     // view parameters
     var borderColor: Color
@@ -136,7 +136,6 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     var textColor: Color
     var secondaryColor: Color
     var hasBorder: Bool
-    var corners: UIRectCorner = [.allCorners]
     let cornerRadius: CGFloat = 15
     var textInset: CGFloat = 15
     var textVerticalInset: CGFloat = 10
@@ -303,7 +302,8 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     }
 
     private func updateTransferActions() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             switch self.transferStatus {
             case .created, .awaiting:
                 self.transferActions = !self.isIncoming ? [.cancel] : [.accept, .cancel]
@@ -338,7 +338,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     }
 
     private func startProgressMonitor() {
-        self.showProgress = true
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.showProgress = true
+        }
         if self.dataTransferProgressUpdater != nil {
             return
         }
@@ -353,7 +356,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     }
 
     private func stopProgressMonitor() {
-        self.showProgress = false
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.showProgress = false
+        }
         guard let updater = self.dataTransferProgressUpdater else { return }
         updater.invalidate()
         self.dataTransferProgressUpdater = nil
@@ -365,24 +371,56 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     }
 
     func extractedVideoFrame(with height: CGFloat) {
-        if let player = player, let firstImage = player.firstFrame,
-           let frameSize = firstImage.getNewSize(of: CGSize(width: maxDimension, height: maxDimension)) {
-            playerHeight = frameSize.height
-            playerWidth = frameSize.width
-        } else {
-            playerHeight = height
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if let player = self.player, let firstImage = player.firstFrame,
+               let frameSize = firstImage.getNewSize(of: CGSize(width: self.maxDimension, height: self.maxDimension)) {
+                self.playerHeight = frameSize.height
+                self.playerWidth = frameSize.width
+            } else {
+                self.playerHeight = height
+            }
         }
     }
 
     func updatePlayer(player: PlayerViewModel?) {
-        guard let plyer = player else { return }
-        if let firstImage = plyer.firstFrame,
+        guard let player = player else { return }
+        var playerSize = CGSize(width: playerWidth, height: playerHeight)
+        if let firstImage = player.firstFrame,
            let frameSize = firstImage.getNewSize(of: CGSize(width: maxDimension, height: maxDimension)) {
+            playerSize = frameSize
             playerHeight = frameSize.height
             playerWidth = frameSize.width
         }
-        self.player = player
-        self.player!.delegate = self
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.playerHeight = playerSize.height
+            self.playerWidth = playerSize.width
+            self.player = player
+            self.player!.delegate = self
+        }
+    }
+
+    func updateImage(image: UIImage?) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.image = image
+        }
+    }
+
+    func updateFileSize(size: Int64) {
+        self.fileSize = size
+    }
+
+    func updateProgress(progress: CGFloat) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.fileProgress = progress
+        }
+    }
+
+    func updateFileURL(url: URL?) {
+        self.url = url
     }
 
     var maxDimension: CGFloat {
