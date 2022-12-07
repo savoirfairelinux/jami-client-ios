@@ -65,9 +65,6 @@ class ConversationViewController: UIViewController,
     @IBOutlet weak var currentCallLabel: UILabel!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
-
-    var swiftUIModel: MessagesListVM?
-
     var bottomAnchor: NSLayoutConstraint?
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
 
@@ -101,10 +98,10 @@ class ConversationViewController: UIViewController,
     private func addSwiftUIView() {
         let transferHelper = TransferHelper(dataTransferService: self.viewModel.dataTransferService,
                                             conversationViewModel: self.viewModel)
-        swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
-                                      conversation: self.viewModel.conversation.value,
-                                      transferHelper: transferHelper)
-        swiftUIModel?.contextMenuState
+        let swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
+                                          conversation: self.viewModel.conversation.value,
+                                          transferHelper: transferHelper)
+        swiftUIModel.contextMenuState
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ContextMenu else { return }
                 switch state {
@@ -122,7 +119,15 @@ class ConversationViewController: UIViewController,
                 }
             })
             .disposed(by: self.disposeBag)
-        let messageListView = MessagesListView(list: self.swiftUIModel!)
+        self.viewModel.conversationCreated
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self, weak swiftUIModel] update in
+                guard let self = self, let swiftUIModel = swiftUIModel, update else { return }
+                swiftUIModel.conversation = self.viewModel.conversation.value
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
+        let messageListView = MessagesListView(list: swiftUIModel)
         let swiftUIView = UIHostingController(rootView: messageListView)
         addChild(swiftUIView)
         swiftUIView.view.frame = self.view.frame
@@ -724,15 +729,6 @@ class ConversationViewController: UIViewController,
                     self.messageAccessoryView.isHidden = false
                     self.setRightNavigationButtons()
                 }
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
-
-        self.viewModel.conversationCreated
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] update in
-                guard let self = self, update else { return }
-                self.swiftUIModel?.conversation = self.viewModel.conversation.value
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
