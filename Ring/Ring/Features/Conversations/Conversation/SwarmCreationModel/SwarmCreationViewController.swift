@@ -55,6 +55,7 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
         contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         contentView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         contentView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        self.configureRingNavigationBar()
         self.setupSearchBar()
     }
     override func viewWillAppear(_ animated: Bool) {

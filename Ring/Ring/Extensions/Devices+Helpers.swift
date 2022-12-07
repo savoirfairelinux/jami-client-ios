@@ -29,8 +29,8 @@ public extension UIDevice {
     }
 
     var hasNotch: Bool {
-        var bottom: CGFloat = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-        return bottom > 0
+        let bottom: CGFloat = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first?.safeAreaInsets.bottom ?? 0
+        return bottom > 20
     }
     static let modelName: String = {
         var systemInfo = utsname()

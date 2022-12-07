@@ -141,6 +141,9 @@ extension UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
         self.navigationController?.navigationBar.barTintColor = UIColor.systemBackground
+        if #available(iOS 16.0, *) {
+            navigationItem.preferredSearchBarPlacement = .stacked
+        }
     }
 
     func configureWalkrhroughNavigationBar() {
