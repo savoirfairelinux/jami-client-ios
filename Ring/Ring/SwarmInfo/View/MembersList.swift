@@ -21,14 +21,42 @@ import SwiftUI
 struct MemberList: View {
 
     @SwiftUI.State var members = [ParticipantInfo]()
-
+    @SwiftUI.State var showSheet = false
     var body: some View {
-        ScrollView(.vertical, showsIndicators: true) {
-            VStack(alignment: .leading, spacing: 20) {
-                ForEach(members, id: \.self) {
-                    MemberItem(image: $0.avatar.value, name: $0.name.value.isEmpty ? $0.jamiId : $0.name.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
+        ZStack(alignment: .bottomTrailing) {
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(alignment: .leading, spacing: 20) {
+                    ForEach(members, id: \.self) {
+                        MemberItem(image: $0.avatar.value, name: $0.name.value.isEmpty ? $0.jamiId : $0.name.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
+                    }
                 }
             }
+            Button(action: {
+                showSheet = true
+                print("Hi")
+            }, label: {
+                Text("+")
+                    .font(.system(.largeTitle))
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(Color.white)
+                    .padding(.bottom, 7)
+            })
+            .background(Color.blue)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .padding()
+            .shadow(color: Color.black.opacity(0.3),
+                    radius: 3,
+                    x: 3,
+                    y: 3)
+            .sheet(isPresented: $showSheet, content: {
+                List {
+                    Text("Hello World from Sheet!")
+                    Text("Hello World from Sheet!")
+                    Text("Hello World from Sheet!")
+                    Text("Hello World from Sheet!")
+                    Text("Hello World from Sheet!")
+                }
+            })
         }
     }
 }
