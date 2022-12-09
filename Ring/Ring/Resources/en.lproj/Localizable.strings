@@ -62,6 +62,8 @@
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Banned";
 "swarm.unknown" = "Unkown";
+"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.Leave" = "Leave";
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";

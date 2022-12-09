@@ -664,6 +664,8 @@ internal enum L10n {
     internal static let banned = L10n.tr("Localizable", "swarm.banned", fallback: "Banned")
     /// Choose a color
     internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor", fallback: "Choose a color")
+    /// Are you sure you want to leave this swarm?
+    internal static let confirmLeaveSwarm = L10n.tr("Localizable", "swarm.confirmLeaveSwarm", fallback: "Are you sure you want to leave this swarm?")
     /// Identifier
     internal static let identifier = L10n.tr("Localizable", "swarm.identifier", fallback: "Identifier")
     /// Ignore the swarm
@@ -672,6 +674,8 @@ internal enum L10n {
     internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Invited")
     /// Private group swarm
     internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private group swarm")
+    /// Leave
+    internal static let leave = L10n.tr("Localizable", "swarm.Leave", fallback: "Leave")
     /// Leave the conversation
     internal static let leaveConversation = L10n.tr("Localizable", "swarm.leaveConversation", fallback: "Leave the conversation")
     /// Member
