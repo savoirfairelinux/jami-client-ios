@@ -1,0 +1,85 @@
+/*
+ *  Copyright (C) 2023 Savoir-faire Linux Inc.
+ *
+ *  Author: Binal Ahiya <binal.ahiya@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+import SwiftUI
+
+struct AddMoreParticipantsInSwarm: View {
+    @StateObject var viewmodel: SwarmInfoViewModel
+    @SwiftUI.State var showAddMember = false
+    @SwiftUI.State private var addMorePeople: UIImage = UIImage(asset: Asset.addPeopleInSwarm)!
+
+    var body: some View {
+        Button(action: {
+            viewmodel.selections.removeAll()
+            showAddMember = true
+            viewmodel.showColorSheet = false
+            viewmodel.updateContactList()
+        }, label: {
+            Image(uiImage: addMorePeople)
+                .resizable()
+                .renderingMode(.template)
+                .aspectRatio(contentMode: .fill)
+                .foregroundColor(Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiButtonDark) : Color.white)
+                .frame(width: 30, height: 30, alignment: .center)
+
+        })
+        .frame(width: 50, height: 50, alignment: .center)
+        .background(Color(hex: viewmodel.finalColor))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding()
+        .sheet(isPresented: $showAddMember, onDismiss: {
+            viewmodel.removeExistingSubscription()
+        }, content: {
+            let currentCount = viewmodel.addMemberCount - viewmodel.selections.count
+            Text(L10n.Swarm.addMorePeople(viewmodel.selections.isEmpty ? viewmodel.addMemberCount : currentCount))
+                .opacity(currentCount > 0 ? 1 : 0)
+                .padding(.top, 20)
+                .font(.system(size: 15.0, weight: .semibold, design: .default))
+            List {
+                ForEach(viewmodel.participantsRows) { contact in
+                    ParticipantListCell(participant: contact, isSelected: viewmodel.selections.contains(contact.id)) {
+                        if viewmodel.selections.contains(contact.id) {
+                            viewmodel.selections.removeAll(where: { $0 == contact.id })
+                        } else {
+                            if viewmodel.selections.count < viewmodel.addMemberCount {
+                                viewmodel.selections.append(contact.id)
+                            }
+                        }
+                    }
+                }
+            }
+            .listStyle(PlainListStyle())
+            .frame(width: nil, height: nil, alignment: .leading)
+            if !viewmodel.selections.isEmpty {
+                addMember()
+            }
+        })
+    }
+
+    func addMember() -> some View {
+        return Button(action: {
+                        showAddMember = false
+                        viewmodel.addMember()}) {
+            Text(L10n.Swarm.addMember)
+                .swarmButtonTextStyle()
+        }
+        .swarmButtonStyle()
+    }
+}

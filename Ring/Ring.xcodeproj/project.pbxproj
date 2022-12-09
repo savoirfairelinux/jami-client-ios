@@ -200,6 +200,10 @@
 		1DE93594291B119900E426CF /* SwarmCreationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DE93590291B119700E426CF /* SwarmCreationViewController.storyboard */; };
 		1DE93595291B119900E426CF /* SwarmCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE93591291B119700E426CF /* SwarmCreationViewController.swift */; };
 		1DE93596291B119900E426CF /* SwarmCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE93592291B119900E426CF /* SwarmCreationViewModel.swift */; };
+		1DF75ABE296E07890055EA87 /* Text+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75ABD296E07890055EA87 /* Text+Helpers.swift */; };
+		1DF75AC2296E09240055EA87 /* Button+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC1296E09240055EA87 /* Button+Helpers.swift */; };
+		1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC3296E0A940055EA87 /* View+Helpers.swift */; };
+		1DF75AC6296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */; };
 		26069B6724C9FCE8002361A3 /* ObjCHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 26069B6624C9FCE8002361A3 /* ObjCHandler.m */; };
 		26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* PreviewViewController.swift */; };
 		26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */; };
@@ -815,6 +819,10 @@
 		1DE93590291B119700E426CF /* SwarmCreationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SwarmCreationViewController.storyboard; sourceTree = "<group>"; };
 		1DE93591291B119700E426CF /* SwarmCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmCreationViewController.swift; sourceTree = "<group>"; };
 		1DE93592291B119900E426CF /* SwarmCreationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmCreationViewModel.swift; sourceTree = "<group>"; };
+		1DF75ABD296E07890055EA87 /* Text+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Helpers.swift"; sourceTree = "<group>"; };
+		1DF75AC1296E09240055EA87 /* Button+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Helpers.swift"; sourceTree = "<group>"; };
+		1DF75AC3296E0A940055EA87 /* View+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Helpers.swift"; sourceTree = "<group>"; };
+		1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoreParticipantsInSwarm.swift; sourceTree = "<group>"; };
 		26069B6524C9FCE8002361A3 /* ObjCHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCHandler.h; sourceTree = "<group>"; };
 		26069B6624C9FCE8002361A3 /* ObjCHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCHandler.m; sourceTree = "<group>"; };
 		26074FD824F7FF9500374570 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
@@ -1532,6 +1540,9 @@
 				0E13A91B22B844B100A12A54 /* NSUserActivity+Call.swift */,
 				648AF76C24ED7CA90004D727 /* UITextView+Helpers.swift */,
 				BB4C6E2529229131001C901A /* ColorExtension.swift */,
+				1DF75ABD296E07890055EA87 /* Text+Helpers.swift */,
+				1DF75AC1296E09240055EA87 /* Button+Helpers.swift */,
+				1DF75AC3296E0A940055EA87 /* View+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2350,6 +2361,7 @@
 				BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */,
 				BB3AB06929316FA0006906BA /* ViewDidLoadModifier.swift */,
 				BB1E8C6C29159DEE005AE1D6 /* TopProfileView.swift */,
+				1DF75AC5296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2737,6 +2749,7 @@
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
 				1A5DC0201F355DCF0075E8EF /* ContactsService.swift in Sources */,
 				26A5CE3B26BD00E700E147EA /* Array+Helper.swift in Sources */,
+				1DF75ABE296E07890055EA87 /* Text+Helpers.swift in Sources */,
 				0ECB4E2822B2D4840097CD7B /* CallsProviderDelegate.swift in Sources */,
 				26DA813224B641A5006C6E23 /* ProfilesAdapter.mm in Sources */,
 				26A072FD295A7145006D8163 /* ContextMenuVM.swift in Sources */,
@@ -2746,6 +2759,7 @@
 				6661C73A216D2EA300E48D94 /* Gif+Helpers.swift in Sources */,
 				1A2D18A11F27A6D600B2C785 /* LinkDeviceViewController.swift in Sources */,
 				0E5806F523BE4307007D1F5D /* PlayerViewModel.swift in Sources */,
+				1DF75AC2296E09240055EA87 /* Button+Helpers.swift in Sources */,
 				1A0C4EDC1F1D4B7E00550433 /* WelcomeViewController.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
@@ -2819,6 +2833,7 @@
 				2662FC7D246B78E800FA7782 /* IncognitoSmartListViewController.swift in Sources */,
 				56AC650E1E85694D00EA1AA9 /* DesignableTextField.swift in Sources */,
 				1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */,
+				1DF75AC4296E0A940055EA87 /* View+Helpers.swift in Sources */,
 				2662FC79246B1E1700FA7782 /* JamiSearchView.swift in Sources */,
 				0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */,
 				2673D630252657B0000C56CB /* ConferenceLayout.swift in Sources */,
@@ -2857,6 +2872,7 @@
 				1A2D18C21F29180700B2C785 /* AccountCredentialsModel.swift in Sources */,
 				1A2D18FF1F29352D00B2C785 /* MeViewModel.swift in Sources */,
 				62A88D391F6C323500F8AB18 /* PresenceAdapter.mm in Sources */,
+				1DF75AC6296E0C2A0055EA87 /* AddMoreParticipantsInSwarm.swift in Sources */,
 				1A2D18B71F29164700B2C785 /* SmartlistViewModel.swift in Sources */,
 				62AA15C31FFC39C80064A063 /* VideoAdapterDelegate.swift in Sources */,
 				04399AAE1D1C304300E99CD9 /* Utils.mm in Sources */,
