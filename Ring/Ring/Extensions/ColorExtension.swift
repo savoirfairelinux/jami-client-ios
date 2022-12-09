@@ -61,7 +61,7 @@ extension Color: RawRepresentable {
 
         self.init(red: red, green: green, blue: blue, opacity: alpha)
     }
-    public func isLight(threshold: Float = 0.5) -> Bool? {
+    public func isLight(threshold: Float) -> Bool? {
         let originalCGColor = self.cgColor
         guard let originalCGColor = originalCGColor else { return nil }
 
