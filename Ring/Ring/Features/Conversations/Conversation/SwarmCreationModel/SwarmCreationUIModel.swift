@@ -30,20 +30,22 @@ class SwarmCreationUIModel: ObservableObject {
     let strSearchText = BehaviorRelay<String>(value: "")
     private let accountId: String
     private let conversationService: ConversationsService
-    private var swarmInfo: SwarmInfo
+    @Published var swarmInfo: SwarmInfo
     var swarmCreated: ((Bool) -> Void)
 
     @Published var swarmName: String = ""
     @Published var swarmDescription: String = ""
     @Published var image: UIImage?
     @Published var selections: [String] = []
-    @Published var maximumLimit: Int = 8
+    @Published var memberLimit = 0
 
     required init(with injectionBag: InjectionBag, accountId: String, swarmCreated: @escaping ((Bool) -> Void)) {
         self.swarmCreated = swarmCreated
         self.conversationService = injectionBag.conversationsService
         self.accountId = accountId
         self.swarmInfo = SwarmInfo(injectionBag: injectionBag, accountId: accountId)
+        // 1 member is administrtor so remove 1 from maximum limit
+        memberLimit = self.swarmInfo.maximumLimit - 1
         self.strSearchText.subscribe { searchText in
             if !searchText.isEmpty {
                 let flatArr = self.filteredArray.compactMap { $0 }

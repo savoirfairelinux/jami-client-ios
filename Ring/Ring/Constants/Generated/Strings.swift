@@ -656,6 +656,10 @@ internal enum L10n {
     internal static let about = L10n.tr("Localizable", "swarm.about", fallback: "About")
     /// Add Description
     internal static let addDescription = L10n.tr("Localizable", "swarm.addDescription", fallback: "Add Description")
+    /// You can add %d more people in this swarm
+    internal static func addMorePeople(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "swarm.addMorePeople", p1, fallback: "You can add %d more people in this swarm")
+    }
     /// Administrator
     internal static let admin = L10n.tr("Localizable", "swarm.admin", fallback: "Administrator")
     /// Admin invites only
@@ -692,6 +696,10 @@ internal enum L10n {
   internal enum Swarmcreation {
     /// Add a description
     internal static let addADescription = L10n.tr("Localizable", "swarmcreation.addADescription", fallback: "Add a description")
+    /// You can add %d more people in the swarm
+    internal static func addPeople(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "swarmcreation.addPeople", p1, fallback: "You can add %d more people in the swarm")
+    }
     /// Create the swarm
     internal static let createTheSwarm = L10n.tr("Localizable", "swarmcreation.createTheSwarm", fallback: "Create the swarm")
     /// Search for contact...
