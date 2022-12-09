@@ -23,6 +23,7 @@ struct SettingsView: View {
     @SwiftUI.State var viewmodel: SwarmInfoViewModel!
     @SwiftUI.State private var ignoreSwarm = true
     @SwiftUI.State private var shouldShowColorPannel = false
+    @SwiftUI.State private var showAlert = false
     @AppStorage("SWARM_COLOR") var swarmColor = Color.blue
     var id: String!
     var swarmType: String!
@@ -30,23 +31,30 @@ struct SettingsView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 20) {
-                //                                HStack {
-                //                                    Toggle(L10n.Swarm.ignoreSwarm, isOn: $ignoreSwarm)
-                //                                        .onChange(of: ignoreSwarm, perform: { value in
-                //                                            print("Value has changed : \(value)")
-                //                                            viewmodel.IgnoreSwarm(isOn: value)
-                //                                        })
-                //                                }
-                //
-                //                                Button(action: {
-                //                                    viewmodel.leaveSwarm()
-                //                                }, label: {
-                //                                    HStack {
-                //                                        Text(L10n.Swarm.leaveConversation)
-                //                                            .multilineTextAlignment(.leading)
-                //                                        Spacer()
-                //                                    }
-                //                                })
+                //                HStack {
+                //                    Toggle(L10n.Swarm.ignoreSwarm, isOn: $ignoreSwarm)
+                //                        .onChange(of: ignoreSwarm, perform: { value in
+                //                            print("Value has changed : \(value)")
+                //                            viewmodel.IgnoreSwarm(isOn: value)
+                //                        })
+                //                    }
+                Button(action: {
+                    showAlert = true
+                }, label: {
+                    HStack {
+                        Text(L10n.Swarm.leaveConversation)
+                            .multilineTextAlignment(.leading)
+                        Spacer()
+                    }
+                }) .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text(L10n.Swarm.confirmLeaveSwarm),
+                        primaryButton: .destructive(Text(L10n.Swarm.leave)) {
+                            viewmodel.leaveSwarm()
+                        },
+                        secondaryButton: .cancel()
+                    )
+                            }
 
                 ColorPicker(L10n.Swarm.chooseColor, selection: $swarmColor)
 
