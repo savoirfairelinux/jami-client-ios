@@ -65,6 +65,8 @@
 "swarm.unknown" = "Unkown";
 "swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
 "swarm.addMember" = "Add Member";
+"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.Leave" = "Leave";
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";

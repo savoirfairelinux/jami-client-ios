@@ -23,12 +23,30 @@ struct SettingsView: View {
     @StateObject var viewmodel: SwarmInfoViewModel
     @SwiftUI.State private var ignoreSwarm = true
     @SwiftUI.State private var shouldShowColorPannel = false
+    @SwiftUI.State private var showAlert = false
     var id: String!
     var swarmType: String!
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 20) {
+                Button(action: {
+                    showAlert = true
+                }, label: {
+                    HStack {
+                        Text(L10n.Swarm.leaveConversation)
+                            .multilineTextAlignment(.leading)
+                        Spacer()
+                    }
+                }) .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text(L10n.Swarm.confirmLeaveSwarm),
+                        primaryButton: .destructive(Text(L10n.Swarm.leave)) {
+                            viewmodel.leaveSwarm()
+                        },
+                        secondaryButton: .cancel()
+                    )
+                            }
                 HStack {
                     Text(L10n.Swarm.chooseColor)
                     Spacer()
