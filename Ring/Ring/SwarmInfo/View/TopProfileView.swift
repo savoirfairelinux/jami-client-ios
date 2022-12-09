@@ -33,6 +33,8 @@ public struct TopProfileView: View {
     @SwiftUI.State private var showingOptions = false
     @SwiftUI.State private var showingType: PhotoSheetType?
     @SwiftUI.State private var image: UIImage?
+    @SwiftUI.State var showSheet = false
+    @SwiftUI.State private var addMorePeople: UIImage = UIImage(asset: Asset.addPeopleInSwarm)!
     @AppStorage("SWARM_COLOR") var swarmColor = Color.blue
     var swarmViews: [SwarmSettingView] {
         if viewmodel.swarmInfo.participants.value.count == 2 {
@@ -43,97 +45,163 @@ public struct TopProfileView: View {
     }
 
     public var body: some View {
-        ScrollView {
-            VStack {
+        ZStack(alignment: .bottomTrailing) {
+            ScrollView {
                 VStack {
-                    HStack {
-                        Spacer()
-                    }
-                    Button {
+                    VStack {
+                        HStack {
+                            Spacer()
+                        }
+                        Button {
+                            if viewmodel.isAdmin {
+                                showingOptions = true
+                            }
+                        } label: {
+                            Image(uiImage: viewmodel.finalAvatar)
+                                .renderingMode(.original)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: viewmodel.swarmInfo.avatarHeight, height: viewmodel.swarmInfo.avatarHeight, alignment: .center)
+                                .clipShape(Circle())
+                        }
+                        .padding(.vertical)
+                        .actionSheet(isPresented: $showingOptions) {
+                            ActionSheet(
+                                title: Text(""),
+                                buttons: [
+                                    .default(Text(L10n.Alerts.profileTakePhoto)) {
+                                        showingType = .picture
+                                    },
+                                    .default(Text(L10n.Alerts.profileUploadPhoto)) {
+                                        showingType = .gallery
+                                    },
+                                    .cancel()
+                                ]
+                            )
+                        }
+                        .sheet(item: $showingType) { type in
+                            if type == .gallery {
+                                ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
+                            } else {
+                                ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
+                            }
+                        }
+                        .onChange(of: image) { _ in
+                            viewmodel.updateSwarmAvatar(image: image)
+                        }
+
                         if viewmodel.isAdmin {
-                            showingOptions = true
-                        }
-                    } label: {
-                        Image(uiImage: viewmodel.finalAvatar)
-                            .renderingMode(.original)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: viewmodel.swarmInfo.avatarHeight, height: viewmodel.swarmInfo.avatarHeight, alignment: .center)
-                            .clipShape(Circle())
-                    }
-                    .padding(.vertical)
-                    .actionSheet(isPresented: $showingOptions) {
-                        ActionSheet(
-                            title: Text(""),
-                            buttons: [
-                                .default(Text(L10n.Alerts.profileTakePhoto)) {
-                                    showingType = .picture
-                                },
-                                .default(Text(L10n.Alerts.profileUploadPhoto)) {
-                                    showingType = .gallery
-                                },
-                                .cancel()
-                            ]
-                        )
-                    }
-                    .sheet(item: $showingType) { type in
-                        if type == .gallery {
-                            ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
+                            titleTextField
                         } else {
-                            ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
+                            titleLabel
+                        }
+                        Group {
+                            if viewmodel.isAdmin {
+                                descriptionTextField
+                            } else {
+                                descriptionLabel
+                            }
                         }
                     }
-                    .onChange(of: image) { _ in
-                        viewmodel.updateSwarmAvatar(image: image)
+                    .padding([.vertical, .horizontal], 30)
+                    .background(swarmColor)
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }
 
-                    if viewmodel.isAdmin {
-                        titleTextField
-                    } else {
-                        titleLabel
-                    }
-                    Group {
-                        if viewmodel.isAdmin {
-                            descriptionTextField
-                        } else {
-                            descriptionLabel
+                    Picker("", selection: $selectedView) {
+                        ForEach(swarmViews, id: \.self) {
+                            switch $0 {
+                            case .about:
+                                Text(L10n.Swarm.about)
+                            case .memberList:
+                                Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
+                            }
                         }
                     }
-                }
-                .padding([.vertical, .horizontal], 30)
-                .background(swarmColor)
-                .onTapGesture {
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                }
+                    .pickerStyle(.segmented)
+                    .padding(.all, 20)
 
-                Picker("", selection: $selectedView) {
-                    ForEach(swarmViews, id: \.self) {
-                        switch $0 {
-                        case .about:
-                            Text(L10n.Swarm.about)
-                        case .memberList:
-                            Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
-                        }
+                    switch selectedView {
+                    case .about:
+                        SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
+                    case .memberList:
+                        MemberList(members: viewmodel.swarmInfo.participants.value)
                     }
                 }
-                .pickerStyle(.segmented)
-                .padding(.all, 20)
-
-                switch selectedView {
-                case .about:
-                    SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
-                case .memberList:
-                    MemberList(members: viewmodel.swarmInfo.participants.value)
+                .onLoad {
+                    descriptionTextFieldInput = viewmodel.swarmInfo.description.value
+                    titleTextFieldInput = viewmodel.finalTitle
+                }
+                .onChange(of: viewmodel.finalTitle) { _ in
+                    titleTextFieldInput = viewmodel.finalTitle
                 }
             }
-            .onLoad {
-                descriptionTextFieldInput = viewmodel.swarmInfo.description.value
-                titleTextFieldInput = viewmodel.finalTitle
+            if viewmodel.swarmInfo.participants.value.count < viewmodel.swarmInfo.maximumLimit && viewmodel.swarmInfo.participants.value.count != 2 {
+                Button(action: {
+                    showSheet = true
+                    viewmodel.getMembersList()
+                }, label: {
+                    Image(uiImage: addMorePeople)
+                        .resizable()
+                        .renderingMode(.template)
+                        .aspectRatio(contentMode: .fill)
+                        .foregroundColor(Color.white)
+                        .frame(width: 30, height: 30, alignment: .center)
+                })
+                .frame(width: 50, height: 50, alignment: .center)
+                .background(Color(UIColor.jamiButtonDark))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .padding()
+                .shadow(color: Color.black.opacity(0.3),
+                        radius: 3,
+                        x: 3,
+                        y: 3)
+                .sheet(isPresented: $showSheet, content: {
+                    let currentCount = viewmodel.memberCount - viewmodel.selections.count
+                    if currentCount > 0 {
+                        Text(L10n.Swarm.addMorePeople(viewmodel.selections.isEmpty ? viewmodel.memberCount : currentCount))
+                            .padding(.top, 20)
+                            .font(.system(size: 15.0, weight: .semibold, design: .default))
+                    }
+                    List {
+                        ForEach(viewmodel.participantsRows) { contact in
+                            ParticipantListCell(participant: contact, isSelected: viewmodel.selections.contains(contact.id)) {
+                                if viewmodel.selections.contains(contact.id) {
+                                    viewmodel.selections.removeAll(where: { $0 == contact.id })
+                                } else {
+                                    if viewmodel.selections.count < viewmodel.memberCount {
+                                        viewmodel.selections.append(contact.id)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .listStyle(PlainListStyle())
+                    .frame(width: nil, height: nil, alignment: .leading)
+                    .accentColor(Color.black)
+                    if !viewmodel.selections.isEmpty {
+                        addMember()
+                    }
+                })
             }
-            .onChange(of: viewmodel.finalTitle) { _ in
-                titleTextFieldInput = viewmodel.finalTitle
-            }
+
         }
+    }
+
+    func addMember() -> some View {
+        return Button(action: {
+                        showSheet = false
+                        viewmodel.addMember()}) {
+            Text("Add Member")
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .font(.system(size: 18))
+                .padding()
+                .foregroundColor(.white)
+        }
+        .background(Color(UIColor.jamiButtonDark))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.all, 15.0)
     }
 }
 
