@@ -89,6 +89,7 @@ class SwarmInfo {
 
     var avatarHeight: CGFloat = 40
     var avatarSpacing: CGFloat = 2
+    var maximumLimit: Int = 8
     var id: String {
         return conversation?.id ?? ""
     }
@@ -347,7 +348,7 @@ class SwarmInfo {
     }
 
     private func insertAndSortContacts(contacts: [ParticipantInfo]) {
-        var currentValue = self.contacts.value
+        var currentValue = [ParticipantInfo]()
         currentValue.append(contentsOf: contacts)
         self.contacts.accept(currentValue)
     }
