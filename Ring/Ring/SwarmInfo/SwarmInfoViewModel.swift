@@ -35,6 +35,7 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
     private let nameService: NameService
     private let profileService: ProfilesService
     private let conversationService: ConversationsService
+    private let contactsService: ContactsService
 
     @Published var swarmInfo: SwarmInfo!
     @Published var participantsRows = [ParticipantRow]()
@@ -111,6 +112,7 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
         self.conversationService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
         self.profileService = injectionBag.profileService
+        self.contactsService = injectionBag.contactsService
     }
 
     func updateSwarmInfo() {
@@ -187,6 +189,25 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
     }
 
     func leaveSwarm() {
+        let conversationId = conversation.value.id
+        let accountId = conversation.value.accountId
+        if conversation.value.isCoredialog(),
+           let participantId = conversation.value.getParticipants().first?.jamiId {
+            self.contactsService
+                .removeContact(withId: participantId,
+                               ban: true,
+                               withAccountId: accountId)
+                .asObservable()
+                .subscribe(onCompleted: { [weak self] in
+                    self?.conversationService
+                        .removeConversationFromDB(conversation: (self?.conversation.value)!,
+                                                  keepConversation: false)
+                })
+                .disposed(by: self.disposeBag)
+        } else {
+            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+        }
+        self.stateSubject.onNext(ConversationState.accountRemoved)
 
     }
 
