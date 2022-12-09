@@ -36,9 +36,14 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
     private let conversationService: ConversationsService
 
     @Published var swarmInfo: SwarmInfo!
+    @Published var participantsRows = [ParticipantRow]()
+    @Published var selections: [String] = []
+    @Published var memberCount: Int = 0
     var conversation: BehaviorRelay<ConversationModel>! {
         didSet {
             self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value, avatarHeight: 70)
+            // number of member to be added to this swarm
+            memberCount = self.swarmInfo.maximumLimit - self.swarmInfo.participants.value.count
             self.swarmInfo.finalAvatar
                 .subscribe(onNext: { [weak self] newValue in
                     DispatchQueue.main.async {
@@ -114,6 +119,38 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
             self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
             self.finalAvatar = image
         }
+    }
+    func getMembersList () {
+        memberCount = self.swarmInfo.maximumLimit - self.swarmInfo.participants.value.count
+        self.swarmInfo.contacts
+            .subscribe { newValue in
+                DispatchQueue.main.async {
+                    self.participantsRows = [ParticipantRow]()
+                    for info in newValue {
+                        let participant = ParticipantRow(participantData: info)
+                        self.participantsRows.append(participant)
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+        injectionBag
+            .contactsService
+            .contacts
+            .asObservable()
+            .subscribe { contacts in
+                self.swarmInfo.addContacts(contacts: contacts)
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
+    }
+    func addMember() {
+        for participant in selections {
+            if let conversationId = conversation?.value.id,
+               let accountId = conversation?.value.accountId {
+                self.conversationService.addConversationMember(accountId: accountId, conversationId: conversationId, memberId: participant)
+            }
+        }
+        selections.removeAll()
     }
 
     func leaveSwarm() {
