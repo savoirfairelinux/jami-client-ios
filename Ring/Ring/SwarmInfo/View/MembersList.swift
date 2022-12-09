@@ -21,7 +21,6 @@ import SwiftUI
 struct MemberList: View {
 
     @SwiftUI.State var members = [ParticipantInfo]()
-
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack(alignment: .leading, spacing: 20) {

@@ -117,8 +117,8 @@ struct SwarmCreationUI: View {
                 }
                 Spacer()
             }
-            if (list.maximumLimit - list.selections.count) > 0 {
-                Text("You can add \(list.maximumLimit - list.selections.count) more people in the swarm ")
+            if (list.swarmInfo.maximumLimit - list.selections.count) > 0 {
+                Text("You can add \(list.swarmInfo.maximumLimit - list.selections.count) more people in the swarm ")
                     .padding(.leading, 20)
                     .font(.system(size: 15.0, weight: .semibold, design: .default))
             }
@@ -132,7 +132,9 @@ struct SwarmCreationUI: View {
                         if list.selections.contains(contact.id) {
                             list.selections.removeAll(where: { $0 == contact.id })
                         } else {
-                            list.selections.append(contact.id)
+                            if list.selections.count < list.swarmInfo.maximumLimit {
+                                list.selections.append(contact.id)
+                            }
                         }
                         self.hideKeyboard()
                     }

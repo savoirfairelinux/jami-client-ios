@@ -36,9 +36,15 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
     private let conversationService: ConversationsService
 
     @Published var swarmInfo: SwarmInfo!
+    @Published var participantsRows = [ParticipantRow]()
+    @Published var selections: [String] = []
+    @Published var memberCount: Int = 0
+    var backToConversationDetail = BehaviorRelay<Bool>(value: false)
     var conversation: BehaviorRelay<ConversationModel>! {
         didSet {
             self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value, avatarHeight: 70)
+            // number of member to be added to this swarm
+            memberCount = self.swarmInfo.maximumLimit - self.swarmInfo.participants.value.count
             self.swarmInfo.finalAvatar
                 .subscribe(onNext: { [weak self] newValue in
                     DispatchQueue.main.async {
@@ -53,6 +59,26 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
                     }
                 })
                 .disposed(by: disposeBag)
+            self.swarmInfo.contacts
+                .subscribe { newValue in
+                    DispatchQueue.main.async {
+                        self.participantsRows = [ParticipantRow]()
+                        for info in newValue {
+                            let participant = ParticipantRow(participantData: info)
+                            self.participantsRows.append(participant)
+                        }
+                    }
+                }
+                .disposed(by: disposeBag)
+            injectionBag
+                .contactsService
+                .contacts
+                .asObservable()
+                .subscribe { contacts in
+                    self.swarmInfo.addContacts(contacts: contacts)
+                } onError: { _ in
+                }
+                .disposed(by: self.disposeBag)
             if !shouldTriggerDescriptionDidSet {
                 description = swarmInfo.description.value
                 title = swarmInfo.title.value
@@ -113,6 +139,18 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
             conversationInfo[ConversationAttributes.avatar.rawValue] = data.base64EncodedString()
             self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
             self.finalAvatar = image
+        }
+    }
+    func addMember() {
+        for participant in selections {
+            if let conversationId = conversation?.value.id,
+               let accountId = conversation?.value.accountId {
+                self.conversationService.addConversationMember(accountId: accountId, conversationId: conversationId, memberId: participant)
+                backToConversationDetail.accept(true)
+                //                let conversationViewModel = ConversationViewModel(with: self.injectionBag)
+                //                conversationViewModel.conversation = conversation// ConversationModel(withId: conversationId, accountId: accountId)
+                //                self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: conversationViewModel))
+            }
         }
     }
 

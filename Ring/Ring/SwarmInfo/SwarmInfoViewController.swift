@@ -34,6 +34,13 @@ class SwarmInfoViewController: UIViewController, StoryboardBased, ViewModelBased
         addChild(contentView)
         view.addSubview(contentView.view)
         setupConstraints()
+        viewModel.backToConversationDetail
+            .subscribe(onNext: { newValue in
+                if newValue {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     func setupConstraints() {
