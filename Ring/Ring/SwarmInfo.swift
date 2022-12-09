@@ -367,7 +367,7 @@ class SwarmInfo {
     }
 
     private func insertAndSortContacts(contacts: [ParticipantInfo]) {
-        var currentValue = self.contacts.value
+        var currentValue = [ParticipantInfo]()
         currentValue.append(contentsOf: contacts)
         self.contacts.accept(currentValue)
     }

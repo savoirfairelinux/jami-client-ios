@@ -62,7 +62,8 @@ class SwarmCreationUIModel: ObservableObject {
 
         self.swarmInfo.contacts
             .observe(on: MainScheduler.instance)
-            .subscribe { infos in
+            .subscribe { [weak self] infos in
+                guard let self = self else { return }
                 self.participantsRows = [ParticipantRow]()
                 for info in infos {
                     let participant = ParticipantRow(participantData: info)
@@ -77,7 +78,8 @@ class SwarmCreationUIModel: ObservableObject {
             .contactsService
             .contacts
             .asObservable()
-            .subscribe { contacts in
+            .subscribe { [weak self] contacts in
+                guard let self = self else { return }
                 self.swarmInfo.addContacts(contacts: contacts)
             } onError: { _ in
             }

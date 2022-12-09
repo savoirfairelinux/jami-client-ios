@@ -118,7 +118,7 @@ struct SwarmCreationUI: View {
                 Spacer()
             }
             if (list.memberLimit - list.selections.count) > 0 {
-                Text(L10n.Swarmcreation.addMorePeople(list.memberLimit - list.selections.count))
+                Text(L10n.Swarmcreation.addPeople(list.memberLimit - list.selections.count))
                     .padding(.leading, 20)
                     .font(.system(size: 15.0, weight: .semibold, design: .default))
             }
@@ -160,14 +160,9 @@ struct SwarmCreationUI: View {
                         self.hideKeyboard()
                         list.createTheSwarm() }) {
             Text(L10n.Swarmcreation.createTheSwarm)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .font(.system(size: 18))
-                .padding()
-                .foregroundColor(.white)
+                .swarmButtonTextStyle()
         }
-        .background(Color(UIColor.jamiButtonDark))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .padding(.all, 15.0)
+        .swarmButtonStyle()
     }
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

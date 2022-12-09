@@ -35,7 +35,7 @@ public struct TopProfileView: View {
     @SwiftUI.State private var image: UIImage?
     @SwiftUI.State private var offset: CGFloat = .zero
     var swarmViews: [SwarmSettingView] {
-        if viewmodel.swarmInfo.participants.value.count == 2 {
+        if viewmodel.conversation.value.isCoredialog() {
             return [.about]
         } else {
             return [.about, .memberList]
@@ -127,7 +127,7 @@ public struct TopProfileView: View {
                         case .about:
                             SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
                         case .memberList:
-                            MemberList(members: viewmodel.swarmInfo.participants.value)
+                            MemberList(viewmodel: viewmodel)
                         }
                     }
                     .background(Color(UIColor.systemBackground))
@@ -160,22 +160,26 @@ public struct TopProfileView: View {
             .onChange(of: viewmodel.finalTitle) { _ in
                 titleTextFieldInput = viewmodel.finalTitle
             }
+            if viewmodel.swarmInfo.participants.value.count < viewmodel.swarmInfo.maximumLimit && !viewmodel.conversation.value.isCoredialog() {
+                AddMoreParticipantsInSwarm(viewmodel: viewmodel)
+            }
             if viewmodel.showColorSheet {
-                Rectangle()
-                    .foregroundColor(.black.opacity(0.5))
-                    .onTapGesture {
-                        viewmodel.showColorSheet = false
-                        viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
-                    }
-                    .ignoresSafeArea()
-                CustomColorPicker(selectedColor: $viewmodel.finalColor)
-                    .padding([.top, .bottom], 5)
-                    .frame(height: 70)
-                    .background(Color(UIColor.systemGray4))
-                    .onChange(of: viewmodel.finalColor) { _ in
-                        viewmodel.showColorSheet = false
-                        viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
-                    }
+                ZStack(alignment: .bottom) {
+                    Rectangle()
+                        .foregroundColor(.black.opacity(0.5))
+                        .onTapGesture {
+                            viewmodel.showColorSheet = false
+                            viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
+                        }
+                        .ignoresSafeArea()
+                    CustomColorPicker(selectedColor: $viewmodel.finalColor)
+                        .frame(height: 70)
+                        .background(Color.white)
+                        .onChange(of: viewmodel.finalColor) { _ in
+                            viewmodel.showColorSheet = false
+                            viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
+                        }
+                }
             }
         }
         .ignoresSafeArea(edges: [.top, .leading, .trailing])
@@ -184,7 +188,7 @@ public struct TopProfileView: View {
 
 private extension TopProfileView {
     var lightOrDarkColor: Color {
-        return Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color.black : Color.white
+        return Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiMain) : Color.white
     }
 
     var placeholderColor: Color {
@@ -245,18 +249,5 @@ private extension TopProfileView {
             .foregroundColor(lightOrDarkColor)
             .font(.body)
             .multilineTextAlignment(.center)
-    }
-}
-
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .center,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
-        }
     }
 }
