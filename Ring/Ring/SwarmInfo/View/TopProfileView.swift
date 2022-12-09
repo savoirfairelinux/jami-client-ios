@@ -33,8 +33,9 @@ public struct TopProfileView: View {
     @SwiftUI.State private var showingOptions = false
     @SwiftUI.State private var showingType: PhotoSheetType?
     @SwiftUI.State private var image: UIImage?
-    @SwiftUI.State private var flagScrollPosition: Bool = true
     @SwiftUI.State private var offset: CGFloat = .zero
+    @SwiftUI.State var showSheet = false
+    @SwiftUI.State private var addMorePeople: UIImage = UIImage(asset: Asset.addPeopleInSwarm)!
     var swarmViews: [SwarmSettingView] {
         if viewmodel.swarmInfo.participants.value.count == 2 {
             return [.about]
@@ -44,7 +45,7 @@ public struct TopProfileView: View {
     }
 
     public var body: some View {
-        ZStack(alignment: .top) {
+        ZStack(alignment: .bottomTrailing) {
             ScrollView {
                 ZStack {
                     VStack {
@@ -159,16 +160,60 @@ public struct TopProfileView: View {
                 titleTextFieldInput = viewmodel.finalTitle
             }
             .gesture(
-                DragGesture().onChanged { value in
+                DragGesture().onChanged { _ in
                     viewmodel.showColorSheet = false
-                    if value.translation.height > 0 {
-                        self.flagScrollPosition = true
-                    } else {
-                        self.flagScrollPosition = false
-
-                    }
                 }
             )
+            if viewmodel.swarmInfo.participants.value.count < viewmodel.swarmInfo.maximumLimit && viewmodel.swarmInfo.participants.value.count != 2 {
+                Button(action: {
+                    showSheet = true
+                    viewmodel.showColorSheet = false
+                    viewmodel.getMembersList()
+                }, label: {
+                    Image(uiImage: addMorePeople)
+                        .resizable()
+                        .renderingMode(.template)
+                        .aspectRatio(contentMode: .fill)
+                        .foregroundColor(Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.5) ?? true ? Color.black : Color.white)
+                        .frame(width: 30, height: 30, alignment: .center)
+
+                })
+                .frame(width: 50, height: 50, alignment: .center)
+                .background(Color(hex: viewmodel.finalColor))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .padding()
+                .shadow(color: Color.black.opacity(0.3),
+                        radius: 3,
+                        x: 3,
+                        y: 3)
+                .sheet(isPresented: $showSheet, content: {
+                    let currentCount = viewmodel.memberCount - viewmodel.selections.count
+                    if currentCount > 0 {
+                        Text(L10n.Swarm.addMorePeople(viewmodel.selections.isEmpty ? viewmodel.memberCount : currentCount))
+                            .padding(.top, 20)
+                            .font(.system(size: 15.0, weight: .semibold, design: .default))
+                    }
+                    List {
+                        ForEach(viewmodel.participantsRows) { contact in
+                            ParticipantListCell(participant: contact, isSelected: viewmodel.selections.contains(contact.id)) {
+                                if viewmodel.selections.contains(contact.id) {
+                                    viewmodel.selections.removeAll(where: { $0 == contact.id })
+                                } else {
+                                    if viewmodel.selections.count < viewmodel.memberCount {
+                                        viewmodel.selections.append(contact.id)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .listStyle(PlainListStyle())
+                    .frame(width: nil, height: nil, alignment: .leading)
+                    .accentColor(Color.black)
+                    if !viewmodel.selections.isEmpty {
+                        addMember()
+                    }
+                })
+            }
         }
         .ignoresSafeArea(edges: [.top, .leading, .trailing])
         if viewmodel.showColorSheet {
@@ -180,6 +225,21 @@ public struct TopProfileView: View {
                     .opacity(0.8)
             }
         }
+    }
+
+    func addMember() -> some View {
+        return Button(action: {
+                        showSheet = false
+                        viewmodel.addMember()}) {
+            Text("Add Member")
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .font(.system(size: 18))
+                .padding()
+                .foregroundColor(.white)
+        }
+        .background(Color(UIColor.jamiButtonDark))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.all, 15.0)
     }
 }
 

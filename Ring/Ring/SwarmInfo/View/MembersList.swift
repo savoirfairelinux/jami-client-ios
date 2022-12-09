@@ -29,6 +29,7 @@ struct MemberList: View {
                     MemberItem(image: $0.avatar.value, name: $0.name.value.isEmpty ? $0.jamiId : $0.name.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
                 }
             }
+            .padding(.bottom, 20)
         }
     }
 }
