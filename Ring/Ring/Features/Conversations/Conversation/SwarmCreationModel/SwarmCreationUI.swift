@@ -118,7 +118,7 @@ struct SwarmCreationUI: View {
                 Spacer()
             }
             if (list.memberLimit - list.selections.count) > 0 {
-                Text(L10n.Swarmcreation.addMorePeople(list.memberLimit - list.selections.count))
+                Text(L10n.Swarmcreation.addPeople(list.memberLimit - list.selections.count))
                     .padding(.leading, 20)
                     .font(.system(size: 15.0, weight: .semibold, design: .default))
             }

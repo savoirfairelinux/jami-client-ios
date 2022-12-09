@@ -34,8 +34,10 @@ public struct TopProfileView: View {
     @SwiftUI.State private var showingType: PhotoSheetType?
     @SwiftUI.State private var image: UIImage?
     @SwiftUI.State private var offset: CGFloat = .zero
+    @SwiftUI.State var showAddMember = false
+    @SwiftUI.State private var addMorePeople: UIImage = UIImage(asset: Asset.addPeopleInSwarm)!
     var swarmViews: [SwarmSettingView] {
-        if viewmodel.swarmInfo.participants.value.count == 2 {
+        if viewmodel.conversation.value.isCoredialog() {
             return [.about]
         } else {
             return [.about, .memberList]
@@ -127,7 +129,7 @@ public struct TopProfileView: View {
                         case .about:
                             SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
                         case .memberList:
-                            MemberList(members: viewmodel.swarmInfo.participants.value)
+                            MemberList(viewmodel: viewmodel)
                         }
                     }
                     .background(Color(UIColor.systemBackground))
@@ -168,6 +170,69 @@ public struct TopProfileView: View {
                         viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
                     }
                     .ignoresSafeArea()
+                    .gesture(
+                        DragGesture().onChanged { _ in
+                            viewmodel.showColorSheet = false
+                        }
+                    )
+            }
+            if viewmodel.swarmInfo.participants.value.count < viewmodel.swarmInfo.maximumLimit && !viewmodel.conversation.value.isCoredialog() {
+                Button(action: {
+                    viewmodel.selections.removeAll()
+                    showAddMember = true
+                    viewmodel.showColorSheet = false
+                    viewmodel.updateContactList()
+                }, label: {
+                    Image(uiImage: addMorePeople)
+                        .resizable()
+                        .renderingMode(.template)
+                        .aspectRatio(contentMode: .fill)
+                        .foregroundColor(Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.5) ?? true ? Color.black : Color.white)
+                        .frame(width: 30, height: 30, alignment: .center)
+
+                })
+                .frame(width: 50, height: 50, alignment: .center)
+                .background(Color(hex: viewmodel.finalColor))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .padding()
+                .shadow(color: Color.black.opacity(0.3),
+                        radius: 3,
+                        x: 3,
+                        y: 3)
+                .sheet(isPresented: $showAddMember, onDismiss: {
+                    viewmodel.removeExistingSubscription()
+                }, content: {
+                    let currentCount = viewmodel.addMemberCount - viewmodel.selections.count
+                    if currentCount > 0 {
+                        Text(L10n.Swarm.addMorePeople(viewmodel.selections.isEmpty ? viewmodel.addMemberCount : currentCount))
+                            .padding(.top, 20)
+                            .font(.system(size: 15.0, weight: .semibold, design: .default))
+                    }
+                    List {
+                        ForEach(viewmodel.participantsRows) { contact in
+                            ParticipantListCell(participant: contact, isSelected: viewmodel.selections.contains(contact.id)) {
+                                if viewmodel.selections.contains(contact.id) {
+                                    viewmodel.selections.removeAll(where: { $0 == contact.id })
+                                } else {
+                                    if viewmodel.selections.count < viewmodel.addMemberCount {
+                                        viewmodel.selections.append(contact.id)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .listStyle(PlainListStyle())
+                    .frame(width: nil, height: nil, alignment: .leading)
+                    .accentColor(Color.black)
+                    if !viewmodel.selections.isEmpty {
+                        addMember()
+                    }
+                })
+            }
+        }
+        .ignoresSafeArea(edges: [.top, .leading, .trailing])
+        if viewmodel.showColorSheet {
+            ZStack(alignment: .leading) {
                 CustomColorPicker(selectedColor: $viewmodel.finalColor)
                     .padding([.top, .bottom], 5)
                     .frame(height: 70)
@@ -178,13 +243,27 @@ public struct TopProfileView: View {
                     }
             }
         }
-        .ignoresSafeArea(edges: [.top, .leading, .trailing])
+    }
+
+    func addMember() -> some View {
+        return Button(action: {
+                        showAddMember = false
+                        viewmodel.addMember()}) {
+            Text(L10n.Swarm.addMember)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .font(.system(size: 18))
+                .padding()
+                .foregroundColor(.white)
+        }
+        .background(Color(UIColor.jamiButtonDark))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.all, 15.0)
     }
 }
 
 private extension TopProfileView {
     var lightOrDarkColor: Color {
-        return Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color.black : Color.white
+        return Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiMain) : Color.white
     }
 
     var placeholderColor: Color {

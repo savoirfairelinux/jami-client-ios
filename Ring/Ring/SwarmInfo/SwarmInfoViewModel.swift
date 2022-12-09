@@ -24,6 +24,7 @@ import RxCocoa
 class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
 
     private let disposeBag = DisposeBag()
+    private var tempDisposeBag = DisposeBag()
     // MARK: - Rx Stateable
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
@@ -36,9 +37,15 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
     private let conversationService: ConversationsService
 
     @Published var swarmInfo: SwarmInfo!
+    @Published var participantsRows = [ParticipantRow]()
+    @Published var selections: [String] = []
+    @Published var addMemberCount: Int = 0
     var conversation: BehaviorRelay<ConversationModel>! {
         didSet {
             self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value, avatarHeight: 70)
+            // number of member to be added to this swarm
+            addMemberCount = self.swarmInfo.maximumLimit - self.swarmInfo.participants.value.count
+            print("Swarm Type :-\(swarmInfo.type.value.stringValue)")
             self.swarmInfo.finalAvatar
                 .subscribe(onNext: { [weak self] newValue in
                     DispatchQueue.main.async {
@@ -141,6 +148,43 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
     }
     func hideShowBackButton(colorPicker: Bool) {
         colorPickerStatus.accept(colorPicker)
+    }
+    func updateContactList () {
+        addMemberCount = self.swarmInfo.maximumLimit - self.swarmInfo.participants.value.count
+        self.swarmInfo.contacts
+            .subscribe { newValue in
+                DispatchQueue.main.async {
+                    self.participantsRows = [ParticipantRow]()
+                    for info in newValue {
+                        let participant = ParticipantRow(participantData: info)
+                        self.participantsRows.append(participant)
+                    }
+                }
+            }
+            .disposed(by: self.tempDisposeBag)
+        injectionBag
+            .contactsService
+            .contacts
+            .asObservable()
+            .subscribe { contacts in
+                self.swarmInfo.addContacts(contacts: contacts)
+            } onError: { _ in
+            }
+            .disposed(by: self.tempDisposeBag)
+    }
+
+    func removeExistingSubscription() {
+        self.tempDisposeBag = DisposeBag()
+    }
+
+    func addMember() {
+        for participant in selections {
+            if let conversationId = conversation?.value.id,
+               let accountId = conversation?.value.accountId {
+                self.conversationService.addConversationMember(accountId: accountId, conversationId: conversationId, memberId: participant)
+            }
+        }
+        selections.removeAll()
     }
 
     func leaveSwarm() {

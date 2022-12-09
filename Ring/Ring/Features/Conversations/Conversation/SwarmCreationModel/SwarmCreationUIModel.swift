@@ -30,7 +30,7 @@ class SwarmCreationUIModel: ObservableObject {
     let strSearchText = BehaviorRelay<String>(value: "")
     private let accountId: String
     private let conversationService: ConversationsService
-    private var swarmInfo: SwarmInfo
+    var swarmInfo: SwarmInfo
     var swarmCreated: ((Bool) -> Void)
 
     @Published var swarmName: String = ""
