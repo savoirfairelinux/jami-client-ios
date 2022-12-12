@@ -32,6 +32,8 @@
 "global.block" = "Block";
 "global.refuse" = "Rifuzi";
 "global.name" = "Nomo";
+"global.copy" = "Copy";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -47,8 +49,8 @@
 "swarm.chooseColor" = "Choose a color";
 "swarm.typeOfSwarm" = "Type of swarm";
 "swarm.identifier" = "Identifier";
-"swarm.about" = "About";
-"swarm.members" = "Members";
+"swarm.about" = "Pri";
+"swarm.members" = "Anoj";
 "swarm.addDescription" = "Add Description";
 "swarm.oneToOne" = "Private swarm";
 "swarm.adminInvitesOnly" = "Admin invites only";

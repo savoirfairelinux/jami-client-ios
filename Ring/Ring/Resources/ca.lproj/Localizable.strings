@@ -32,6 +32,8 @@
 "global.block" = "Bloca";
 "global.refuse" = "Rebutja";
 "global.name" = "Nom";
+"global.copy" = "Copy";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -47,10 +49,10 @@
 "swarm.chooseColor" = "Choose a color";
 "swarm.typeOfSwarm" = "Type of swarm";
 "swarm.identifier" = "Identifier";
-"swarm.about" = "About";
-"swarm.members" = "Members";
+"swarm.about" = "Quant a";
+"swarm.members" = "Membres";
 "swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
+"swarm.oneToOne" = "Swarm privat";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";
@@ -368,8 +370,8 @@
 "generalSettings.title" = "Preferències avançades";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
-"generalSettings.fileTransfer" = "File transfer";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
+"generalSettings.fileTransfer" = "Transferència de fitxers";
+"generalSettings.automaticAcceptIncomingFiles" = "Accepta automàticament fitxers entrants";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 

@@ -32,6 +32,8 @@
 "global.block" = "Blokir";
 "global.refuse" = "Tolak";
 "global.name" = "Nama";
+"global.copy" = "Salin";
+"global.reply" = "Balas";
 
 // Scan
 "scan.badQrCode" = "Kode QR yang buruk";
@@ -48,14 +50,14 @@
 "swarm.typeOfSwarm" = "Jenis kawanan";
 "swarm.identifier" = "Pengidentifikasi";
 "swarm.about" = "Tentang";
-"swarm.members" = "Members";
+"swarm.members" = "Anggota";
 "swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
+"swarm.oneToOne" = "Kolam privat";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";
 "swarm.others" = "Others";
-"swarm.member" = "Member";
+"swarm.member" = "Anggota";
 "swarm.invited" = "Diundang";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Dibanned";
@@ -370,7 +372,7 @@
 "generalSettings.videoAcceleration" = "Aktifkan akselerasi video";
 "generalSettings.fileTransfer" = "Mengirim berkas";
 "generalSettings.automaticAcceptIncomingFiles" = "Secara otomatis menerima file yang masuk";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.acceptTransferLimit" = "Terima batas transfer";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account

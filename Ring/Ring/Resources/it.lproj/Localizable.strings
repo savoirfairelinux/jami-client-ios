@@ -32,6 +32,8 @@
 "global.block" = "Blocca";
 "global.refuse" = "Rifiuta";
 "global.name" = "Nome";
+"global.copy" = "Copia";
+"global.reply" = "Rispondi";
 
 // Scan
 "scan.badQrCode" = "Codice QR errato";
@@ -43,23 +45,23 @@
 "swarmcreation.addADescription" = "Aggiungi una descrizione";
 // Swarm
 "swarm.ignoreSwarm" = "Ignora il gruppo";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.leaveConversation" = "Lascia la conversazione";
 "swarm.chooseColor" = "Scegli un colore";
 "swarm.typeOfSwarm" = "Tipo di gruppo";
 "swarm.identifier" = "Identificatore";
 "swarm.about" = "Info";
 "swarm.members" = "Membri";
-"swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private group swarm";
-"swarm.publicChat" = "Public group swarm";
-"swarm.others" = "Others";
+"swarm.addDescription" = "Aggiungi descrizione";
+"swarm.oneToOne" = "Gruppo privato";
+"swarm.adminInvitesOnly" = "Solo invitati dall'amministratore";
+"swarm.invitesOnly" = "Gruppo privato";
+"swarm.publicChat" = "Gruppo pubblico";
+"swarm.others" = "Altri";
 "swarm.member" = "Membro";
 "swarm.invited" = "Invitato";
-"swarm.admin" = "Administrator";
+"swarm.admin" = "Amministratore";
 "swarm.banned" = "Bloccato";
-"swarm.unknown" = "Unkown";
+"swarm.unknown" = "Sconosciuto";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Elenco pubblico";
@@ -366,12 +368,12 @@
 
 //General Settings
 "generalSettings.title" = "Impostazioni avanzate";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Impostazioni video";
 "generalSettings.videoAcceleration" = "Attiva l'accelerazione video";
 "generalSettings.fileTransfer" = "Trasferimento file";
 "generalSettings.automaticAcceptIncomingFiles" = "Accetta automaticamente i file in arrivo";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.acceptTransferLimit" = "Limite del trasferimento accettato";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = illimitato)";
 
 //Migrate Account
 "migrateAccount.title" = "Migrazione account";

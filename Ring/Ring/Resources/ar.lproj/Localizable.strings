@@ -32,6 +32,8 @@
 "global.block" = "حظر";
 "global.refuse" = "أرفض";
 "global.name" = "إسم";
+"global.copy" = "Copy";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "رمز QR غير صالح";
@@ -47,10 +49,10 @@
 "swarm.chooseColor" = "Choose a color";
 "swarm.typeOfSwarm" = "Type of swarm";
 "swarm.identifier" = "Identifier";
-"swarm.about" = "About";
-"swarm.members" = "Members";
+"swarm.about" = "عن RING";
+"swarm.members" = "الأعضاء";
 "swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
+"swarm.oneToOne" = "سرب خاص";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";
@@ -368,7 +370,7 @@
 "generalSettings.title" = "إعدادات متقدمة";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
-"generalSettings.fileTransfer" = "File transfer";
+"generalSettings.fileTransfer" = "نقل ملف";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";

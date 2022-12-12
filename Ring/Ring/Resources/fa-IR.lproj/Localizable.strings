@@ -32,6 +32,8 @@
 "global.block" = "مسدود";
 "global.refuse" = "رد کردن";
 "global.name" = "نام";
+"global.copy" = "کپی";
+"global.reply" = "پاسخ";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
@@ -48,9 +50,9 @@
 "swarm.typeOfSwarm" = "Type of swarm";
 "swarm.identifier" = "Identifier";
 "swarm.about" = "درباره";
-"swarm.members" = "Members";
+"swarm.members" = "اعضا";
 "swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
+"swarm.oneToOne" = "Swarm خصوصی";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";
@@ -368,8 +370,8 @@
 "generalSettings.title" = "تنظیمات پیشرفته";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "فعال‌سازی شتاب‌دهی ویدیو";
-"generalSettings.fileTransfer" = "File transfer";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
+"generalSettings.fileTransfer" = "انتقال فایل";
+"generalSettings.automaticAcceptIncomingFiles" = "پذیرش فایل‌های ورودی به صورت خودکار";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 

@@ -32,6 +32,8 @@
 "global.block" = "Bloquear";
 "global.refuse" = "Rechazar";
 "global.name" = "Nombre";
+"global.copy" = "Copiar";
+"global.reply" = "Responder";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -39,25 +41,25 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
+"swarmcreation.createTheSwarm" = "Crear enjambre";
 "swarmcreation.addADescription" = "Añadir descripción";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.ignoreSwarm" = "Ignorar enjambre";
 "swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
+"swarm.chooseColor" = "Elegir color";
 "swarm.typeOfSwarm" = "Tipo de enjambre";
 "swarm.identifier" = "Identificador";
-"swarm.about" = "About";
-"swarm.members" = "Members";
+"swarm.about" = "Acerca de";
+"swarm.members" = "Miembros";
 "swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
+"swarm.oneToOne" = "Enjambre privado";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";
 "swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
+"swarm.member" = "Miembro";
+"swarm.invited" = "Invitado";
+"swarm.admin" = "Administrador";
 "swarm.banned" = "Bloqueado";
 "swarm.unknown" = "Unkown";
 // Smartlist
@@ -368,9 +370,9 @@
 "generalSettings.title" = "Advanced settings";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
-"generalSettings.fileTransfer" = "File transfer";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.fileTransfer" = "Transferencia de archivo";
+"generalSettings.automaticAcceptIncomingFiles" = "Aceptar automáticamente los archivos entrantes";
+"generalSettings.acceptTransferLimit" = "Aceptar límite de transferencia";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account

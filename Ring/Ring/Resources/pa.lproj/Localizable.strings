@@ -32,6 +32,8 @@
 "global.block" = "ਬੰਦਸ਼ ਲਗਾਓ";
 "global.refuse" = "ਨਾ-ਮਨਜ਼ੂਰ ਕਰੋ";
 "global.name" = "ਨਾਂ";
+"global.copy" = "ਨਕਲ ਲਾਹੋ";
+"global.reply" = "ਜਵਾਬ ਦਿਓ";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

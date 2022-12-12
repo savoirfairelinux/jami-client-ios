@@ -32,6 +32,8 @@
 "global.block" = "ปิดกั้น";
 "global.refuse" = "ปฏิเสธ";
 "global.name" = "ชื่อ";
+"global.copy" = "สำเนา";
+"global.reply" = "ตอบกลับ";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

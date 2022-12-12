@@ -32,6 +32,8 @@
 "global.block" = "Letiltás";
 "global.refuse" = "Elutasítás";
 "global.name" = "Név";
+"global.copy" = "Másolás";
+"global.reply" = "Válasz";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
@@ -43,23 +45,23 @@
 "swarmcreation.addADescription" = "Leírás hozzáadása";
 // Swarm
 "swarm.ignoreSwarm" = "Rajcsoport figyelmen kívül hagyása";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.leaveConversation" = "Kilépés a beszélgetésből";
 "swarm.chooseColor" = "Színválasztás";
 "swarm.typeOfSwarm" = "Rajcsoporttípus";
 "swarm.identifier" = "Azonosító";
 "swarm.about" = "Névjegy";
-"swarm.members" = "Members";
-"swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private group swarm";
-"swarm.publicChat" = "Public group swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
+"swarm.members" = "Tagok";
+"swarm.addDescription" = "Leírás hozzáadása";
+"swarm.oneToOne" = "Személyes rajcsoport";
+"swarm.adminInvitesOnly" = "Csak rendszergazdai meghívók";
+"swarm.invitesOnly" = "Személyes rajcsoport";
+"swarm.publicChat" = "Nyilvános rajcsoport";
+"swarm.others" = "Egyebek";
+"swarm.member" = "Tag";
 "swarm.invited" = "Meghívott";
-"swarm.admin" = "Administrator";
+"swarm.admin" = "Rendszergazda";
 "swarm.banned" = "Letiltva";
-"swarm.unknown" = "Unkown";
+"swarm.unknown" = "Ismeretlen";
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Nyilvános címtár";
@@ -366,12 +368,12 @@
 
 //General Settings
 "generalSettings.title" = "Haladó beállítások";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Videóbeállítások";
 "generalSettings.videoAcceleration" = "Videó gyorsítás engedélyezése";
 "generalSettings.fileTransfer" = "Fájlküldés";
 "generalSettings.automaticAcceptIncomingFiles" = "A bejövő fájlok önműködő elfogadása";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.acceptTransferLimit" = "Fájlküldési korlátozás elfogadása";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = korlátlan)";
 
 //Migrate Account
 "migrateAccount.title" = "Fiók áttelepítése";

@@ -32,6 +32,8 @@
 "global.block" = "חסימה";
 "global.refuse" = "לדחות";
 "global.name" = "שם";
+"global.copy" = "העתקה";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

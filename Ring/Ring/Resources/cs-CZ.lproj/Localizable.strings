@@ -32,6 +32,8 @@
 "global.block" = "Blokovat";
 "global.refuse" = "Odmítnout";
 "global.name" = "Jméno";
+"global.copy" = "Copy";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "Špatný kód QR";
@@ -39,26 +41,26 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
+"swarmcreation.createTheSwarm" = "Vytvořit swarm";
 "swarmcreation.addADescription" = "Přidejte popis";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.ignoreSwarm" = "Ignorovat swarm";
 "swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
-"swarm.identifier" = "Identifier";
-"swarm.about" = "About";
-"swarm.members" = "Members";
+"swarm.chooseColor" = "Vyber barvu";
+"swarm.typeOfSwarm" = "Typ swarmu";
+"swarm.identifier" = "Identifikátor";
+"swarm.about" = "O aplikaci";
+"swarm.members" = "Členové";
 "swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
+"swarm.oneToOne" = "Soukromý swarm";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";
 "swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
+"swarm.member" = "Člen";
+"swarm.invited" = "Pozvaný";
+"swarm.admin" = "Správce";
+"swarm.banned" = "Zakázaný";
 "swarm.unknown" = "Unkown";
 // Smartlist
 "smartlist.yesterday" = "Včera";
@@ -368,9 +370,9 @@
 "generalSettings.title" = "Pokročilá nastavení";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Povolit zrychlení videa";
-"generalSettings.fileTransfer" = "File transfer";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.fileTransfer" = "Přenos souboru";
+"generalSettings.automaticAcceptIncomingFiles" = "Automaticky přijmout příchozí soubory";
+"generalSettings.acceptTransferLimit" = "Přijmout limit přenosu";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account

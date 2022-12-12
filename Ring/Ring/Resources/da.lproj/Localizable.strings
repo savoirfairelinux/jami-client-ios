@@ -32,6 +32,8 @@
 "global.block" = "Blokér";
 "global.refuse" = "Afvis";
 "global.name" = "Navn";
+"global.copy" = "Copy";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "Ugyldigt QR-kode";
@@ -47,7 +49,7 @@
 "swarm.chooseColor" = "Choose a color";
 "swarm.typeOfSwarm" = "Type of swarm";
 "swarm.identifier" = "Identifier";
-"swarm.about" = "About";
+"swarm.about" = "Om";
 "swarm.members" = "Members";
 "swarm.addDescription" = "Add Description";
 "swarm.oneToOne" = "Private swarm";
@@ -368,7 +370,7 @@
 "generalSettings.title" = "Avancerede indstillinger";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
-"generalSettings.fileTransfer" = "File transfer";
+"generalSettings.fileTransfer" = "Filoverførsler";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";

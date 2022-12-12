@@ -32,6 +32,8 @@
 "global.block" = "Bloquer";
 "global.refuse" = "Refuser";
 "global.name" = "Nom";
+"global.copy" = "Copier";
+"global.reply" = "Répondre";
 
 // Scan
 "scan.badQrCode" = "Code QR incorrect";
@@ -42,22 +44,22 @@
 "swarmcreation.createTheSwarm" = "Créer le swarm";
 "swarmcreation.addADescription" = "Ajouter une description";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.ignoreSwarm" = "Ignorer le swarm";
 "swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
+"swarm.chooseColor" = "Choisissez une couleur";
 "swarm.typeOfSwarm" = "Type de swarm";
 "swarm.identifier" = "Identifiant ";
 "swarm.about" = "A propos ";
-"swarm.members" = "Members";
+"swarm.members" = "Membres";
 "swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
+"swarm.oneToOne" = "Swarm privé";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";
 "swarm.others" = "Others";
-"swarm.member" = "Member";
+"swarm.member" = "Membre";
 "swarm.invited" = "Invités";
-"swarm.admin" = "Administrator";
+"swarm.admin" = "Administrateur";
 "swarm.banned" = "Bloqué";
 "swarm.unknown" = "Unkown";
 // Smartlist
@@ -368,9 +370,9 @@
 "generalSettings.title" = "Paramètres avancés";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Activer l'accélération vidéo";
-"generalSettings.fileTransfer" = "File transfer";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.fileTransfer" = "Transfert de fichier";
+"generalSettings.automaticAcceptIncomingFiles" = "Accepter automatiquement les fichiers entrants";
+"generalSettings.acceptTransferLimit" = "Taille maximum des fichiers automatiquement acceptés";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account

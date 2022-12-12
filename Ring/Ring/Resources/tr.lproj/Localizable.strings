@@ -32,6 +32,8 @@
 "global.block" = "Engelleme";
 "global.refuse" = "Geri Çevir";
 "global.name" = "Ad";
+"global.copy" = "Kopyala";
+"global.reply" = "Yanıtla";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";
@@ -40,7 +42,7 @@
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact...";
 "swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
+"swarmcreation.addADescription" = "Açıklama ekle";
 // Swarm
 "swarm.ignoreSwarm" = "Ignore the swarm";
 "swarm.leaveConversation" = "Leave the conversation";
@@ -68,7 +70,7 @@
 "smartlist.noResults" = "Sonuç yok";
 "smartlist.noConversation" = "Konuşma yok";
 "smartlist.searchBarPlaceholder" = "Ad girin...";
-"smartlist.searchBar" = "Yeni ya da mevcut bir kişiyi arayın...";
+"smartlist.searchBar" = "Yeni ya da var olan kişiyi ara...";
 "smartlist.noNetworkConnectivity" = "Ağ bağlantısı yok";
 "smartlist.cellularAccess" = "Ayarlarınızda hücresel erişim izni olduğundan emin olun.";
 "smartlist.accountsTitle" = "Hesaplar";
@@ -181,10 +183,10 @@
 "alerts.noLibraryPermissionsTitle" = "Fotoğraf kitaplığına erişim izni verilmedi";
 "alerts.noLocationPermissionsTitle" = "Konum erişim izni verilmedi";
 "alerts.errorWrongCredentials" = "Sağlanan hesap yöneticisine bağlanılamıyor. Lütfen kimlik bilgilerinizi denetleyin";
-"alerts.recordVideoMessage" = "Video mesajı kaydet ";
-"alerts.recordAudioMessage" = "Sesli mesaj kaydet ";
+"alerts.recordVideoMessage" = "Görüntülü ileti kaydet ";
+"alerts.recordAudioMessage" = "Sesli ileti kaydet ";
 "alerts.uploadFile" = "Dosya yükle";
-"alerts.uploadPhoto" = "Fotoğraf veya video yükle";
+"alerts.uploadPhoto" = "Fotoğraf ya da film yükle";
 "alerts.locationServiceIsDisabled" = "\"Jami\"nin konumunuzu saptaması için \"Konum Servisleri\"ni açın.";
 "alerts.locationSharing" = "Konumumu paylaş";
 "alerts.alreadylocationSharing" = "Bu kullanıcıyla hâlihazırda konum paylaşılıyor";
@@ -275,14 +277,14 @@
 "accountPage.newPasswordPlaceholder" = "Yeni parolayı girin";
 "accountPage.newPasswordConfirmPlaceholder" = "Yeni parolayı doğrulayın";
 "accountPage.changePasswordError" = "Parola yanlış";
-"accountPage.enableBoothMode" = "Kabin Modunu Etkinleştir";
-"accountPage.disableBoothMode" = "Kabin Modunu Devre Dışı Bırak";
+"accountPage.enableBoothMode" = "Kabin Kipini Etkinleştir";
+"accountPage.disableBoothMode" = "Kabin Kipini Devre Dışı Bırak";
 "accountPage.disableBoothModeExplanation" = "Lütfen hesap parolanızı sağlayın";
-"accountPage.boothModeExplanation" = "Kabin modunda konuşma geçmişiniz kaydedilmez ve jami'nin işlevleri giden aramalar ile kısıtlandırılır. Kabin modunu etkinleştirdiğinizde tüm konuşmalarınız kaldırılacaktır.";
-"accountPage.noBoothMode" = "Kabin modunu etkinleştirmek için önce bir hesap parolası oluşturmanız gerekir.";
-"accountPage.boothModeAlertMessage" = "Kabin modunu etkinleştirdikten sonra tüm konuşmalarınız kaldırılacaktır.";
+"accountPage.boothModeExplanation" = "Kabin kipinde konuşma geçmişiniz kaydedilmez ve jami'nin işlevleri giden aramalar ile kısıtlandırılır. Kabin kipini etkinleştirdiğinizde tüm konuşmalarınız kaldırılacaktır.";
+"accountPage.noBoothMode" = "Kabin kipini etkinleştirmek için önce hesap parolası oluşturmanız gerekir.";
+"accountPage.boothModeAlertMessage" = "Kabin kipini etkinleştirdikten sonra tüm konuşmalarınız kaldırılacaktır.";
 "accountPage.peerDiscovery" = "Yerel ağda kendiliğinden bağlan";
-"accountPage.autoRegistration" = "Son geçerlilik tarihi dolduktan sonra otomatik kayıt";
+"accountPage.autoRegistration" = "Geçerlilik bittiğinde kendiliğinden kaydol";
 
 //Account
 "account.sipUsername" = "Kullanıcı Adı";
@@ -294,7 +296,7 @@
 "account.usernameLabel" = "Kullanıcı Adını Girin";
 "account.passwordLabel" = "Parola Girin";
 "account.serverLabel" = "Adres Girin";
-"account.portLabel" = "Port numarası girin";
+"account.portLabel" = "Bağlantı Noktası Numarası Gir";
 "account.accountStatus" = "Hesap Durumu";
 "account.enableAccount" = "Hesabı etkinleştir";
 "account.statusOnline" = "Çevrim İçi";

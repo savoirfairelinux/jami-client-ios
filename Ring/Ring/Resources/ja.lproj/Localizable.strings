@@ -32,6 +32,8 @@
 "global.block" = "ブロック";
 "global.refuse" = "拒否";
 "global.name" = "名前";
+"global.copy" = "コピー";
+"global.reply" = "返信";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";
@@ -50,7 +52,7 @@
 "swarm.about" = "アプリについて";
 "swarm.members" = "要員";
 "swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
+"swarm.oneToOne" = "非公開の会合";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";

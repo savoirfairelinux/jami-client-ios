@@ -32,6 +32,8 @@
 "global.block" = "Blochează";
 "global.refuse" = "Refuză";
 "global.name" = "Nume";
+"global.copy" = "Copiază";
+"global.reply" = "Răspunde";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
@@ -43,23 +45,23 @@
 "swarmcreation.addADescription" = "Adaugă o descriere";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoră grupul";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.leaveConversation" = "Termină conversația";
 "swarm.chooseColor" = "Alege o culoare";
 "swarm.typeOfSwarm" = "Tipul grupului";
 "swarm.identifier" = "Identificator";
 "swarm.about" = "Despre";
 "swarm.members" = "Membri";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Adaugă o descriere";
 "swarm.oneToOne" = "Grup privat";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private group swarm";
-"swarm.publicChat" = "Public group swarm";
-"swarm.others" = "Others";
+"swarm.adminInvitesOnly" = "Doar invitat de administrator";
+"swarm.invitesOnly" = "Grup privat";
+"swarm.publicChat" = "Grup public";
+"swarm.others" = "Alții";
 "swarm.member" = "Membru";
 "swarm.invited" = "Invitat";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Blocat";
-"swarm.unknown" = "Unkown";
+"swarm.unknown" = "Necunoscut";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
@@ -366,12 +368,12 @@
 
 //General Settings
 "generalSettings.title" = "Reglări avansate";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Reglări video";
 "generalSettings.videoAcceleration" = "Activează accelerarea video";
 "generalSettings.fileTransfer" = "Transfer de fișiere";
 "generalSettings.automaticAcceptIncomingFiles" = "Acceptă automat fișierele primite";
 "generalSettings.acceptTransferLimit" = "Limita transferului acceptat";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.acceptTransferLimitDescription" = "(în Mo, 0 = nelimitat)";
 
 //Migrate Account
 "migrateAccount.title" = "Transferul contului";

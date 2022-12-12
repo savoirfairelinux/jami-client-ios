@@ -32,6 +32,8 @@
 "global.block" = "Blocar";
 "global.refuse" = "Refusar";
 "global.name" = "Nom";
+"global.copy" = "Copiar";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "Marrit QR còdi";

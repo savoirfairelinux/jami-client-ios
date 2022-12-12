@@ -32,6 +32,8 @@
 "global.block" = "阻擋";
 "global.refuse" = "拒絕";
 "global.name" = "名稱";
+"global.copy" = "複製";
+"global.reply" = "回覆";
 
 // Scan
 "scan.badQrCode" = "不正確的 QR code";

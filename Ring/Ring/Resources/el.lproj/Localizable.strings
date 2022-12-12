@@ -32,6 +32,8 @@
 "global.block" = "Μπλοκάρισμα";
 "global.refuse" = "Άρνηση";
 "global.name" = "Όνομα";
+"global.copy" = "Copy";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -47,8 +49,8 @@
 "swarm.chooseColor" = "Choose a color";
 "swarm.typeOfSwarm" = "Type of swarm";
 "swarm.identifier" = "Identifier";
-"swarm.about" = "About";
-"swarm.members" = "Members";
+"swarm.about" = "Περί";
+"swarm.members" = "Μέλη";
 "swarm.addDescription" = "Add Description";
 "swarm.oneToOne" = "Private swarm";
 "swarm.adminInvitesOnly" = "Admin invites only";
@@ -368,7 +370,7 @@
 "generalSettings.title" = "Προχωρημένες ρυθμίσεις";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
-"generalSettings.fileTransfer" = "File transfer";
+"generalSettings.fileTransfer" = "Μεταφορά Αρχείων";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";

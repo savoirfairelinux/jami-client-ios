@@ -32,6 +32,8 @@
 "global.block" = "Blokiraj";
 "global.refuse" = "Odbij";
 "global.name" = "Ime";
+"global.copy" = "Kopiraj";
+"global.reply" = "Odgovori";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -48,7 +50,7 @@
 "swarm.typeOfSwarm" = "Type of swarm";
 "swarm.identifier" = "Identifier";
 "swarm.about" = "O programu";
-"swarm.members" = "Members";
+"swarm.members" = "Članovi";
 "swarm.addDescription" = "Add Description";
 "swarm.oneToOne" = "Private swarm";
 "swarm.adminInvitesOnly" = "Admin invites only";

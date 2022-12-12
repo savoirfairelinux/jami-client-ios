@@ -32,6 +32,8 @@
 "global.block" = "Blokiraj";
 "global.refuse" = "Zavrni";
 "global.name" = "Ime";
+"global.copy" = "Kopiraj";
+"global.reply" = "Odgovori";
 
 // Scan
 "scan.badQrCode" = "Napačna QR-koda";

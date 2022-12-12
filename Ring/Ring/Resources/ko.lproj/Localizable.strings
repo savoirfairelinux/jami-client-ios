@@ -32,6 +32,8 @@
 "global.block" = "Block";
 "global.refuse" = "Refuse";
 "global.name" = "이름";
+"global.copy" = "복사하기";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

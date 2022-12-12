@@ -32,6 +32,8 @@
 "global.block" = "Estä";
 "global.refuse" = "Kieltäydy";
 "global.name" = "Nimi";
+"global.copy" = "Kopioi";
+"global.reply" = "Vastaa";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";
@@ -48,9 +50,9 @@
 "swarm.typeOfSwarm" = "Type of swarm";
 "swarm.identifier" = "Tunniste";
 "swarm.about" = "Tietoa";
-"swarm.members" = "Members";
+"swarm.members" = "Jäsenet";
 "swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
+"swarm.oneToOne" = "Yksityinen parvi";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";
@@ -368,9 +370,9 @@
 "generalSettings.title" = "Edistyneet asetukset";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Kytke videon laitteistokiihdytys";
-"generalSettings.fileTransfer" = "File transfer";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.fileTransfer" = "Tiedostonsiirto";
+"generalSettings.automaticAcceptIncomingFiles" = "Hyväksy saapuvat tiedostot automaattisesti";
+"generalSettings.acceptTransferLimit" = "Hyväksy siirtoraja";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account

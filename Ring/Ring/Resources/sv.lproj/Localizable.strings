@@ -32,6 +32,8 @@
 "global.block" = "Blockera";
 "global.refuse" = "Neka";
 "global.name" = "Namn";
+"global.copy" = "Kopiera";
+"global.reply" = "Svara";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";

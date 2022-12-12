@@ -32,6 +32,8 @@
 "global.block" = "Užblokuoti";
 "global.refuse" = "Atmesti";
 "global.name" = "Vardas";
+"global.copy" = "Kopijuoti";
+"global.reply" = "Atsakyti";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";

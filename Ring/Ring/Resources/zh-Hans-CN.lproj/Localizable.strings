@@ -32,6 +32,8 @@
 "global.block" = "屏蔽";
 "global.refuse" = "拒接";
 "global.name" = "姓名";
+"global.copy" = "复制";
+"global.reply" = "回复";
 
 // Scan
 "scan.badQrCode" = "无效的二维码";

@@ -32,34 +32,36 @@
 "global.block" = "Blockieren";
 "global.refuse" = "Ablehnen";
 "global.name" = "Name";
+"global.copy" = "Copy";
+"global.reply" = "Reply";
 
 // Scan
 "scan.badQrCode" = "QR-Code ungültig";
 "scan.search" = "Suchen…";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
+"swarmcreation.searchBar" = "Nach Kontakt suchen...";
+"swarmcreation.createTheSwarm" = "Den Schwarm erstellen";
 "swarmcreation.addADescription" = "Eine Beschreibung hinzufügen";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
+"swarm.ignoreSwarm" = "Den Schwarm ignorieren";
+"swarm.leaveConversation" = "Die Unterhaltung verlassen";
+"swarm.chooseColor" = "Eine Farbe wählen";
 "swarm.typeOfSwarm" = "Typ des Schwarms";
-"swarm.identifier" = "Identifier";
-"swarm.about" = "About";
-"swarm.members" = "Members";
-"swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private group swarm";
-"swarm.publicChat" = "Public group swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
+"swarm.identifier" = "Identifikator";
+"swarm.about" = "Über";
+"swarm.members" = "Mitglieder";
+"swarm.addDescription" = "Beschreibung hinzufügen";
+"swarm.oneToOne" = "privater Schwarm";
+"swarm.adminInvitesOnly" = "Nur Admin-Einladungen";
+"swarm.invitesOnly" = "Privater Gruppenschwarm";
+"swarm.publicChat" = "Öffentlicher Gruppenschwarm";
+"swarm.others" = "Andere";
+"swarm.member" = "Mitglied";
+"swarm.invited" = "Eingeladen";
 "swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
+"swarm.banned" = "gesperrt";
+"swarm.unknown" = "Unbekannt";
 // Smartlist
 "smartlist.yesterday" = "Gestern";
 "smartlist.results" = "Öffentliches Verzeichnis";
@@ -350,28 +352,28 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Sie haben eine Einladung erhalten";
 "generatedMessage.swarmCreated" = "Schwarm erstellt";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "wurde eingeladen beizutreten";
+"generatedMessage.invitationAccepted" = "ist der Unterhaltung beigetreten";
+"generatedMessage.youJoined" = "Sie sind der Unterhaltung beigetreten";
+"generatedMessage.contactBanned" = "wurde hinausgeworfen";
+"generatedMessage.contactReAdded" = "wurde erneut hinzugefügt";
 "generatedMessage.outgoingCall" = "Ausgehender Anruf";
 "generatedMessage.incomingCall" = "Eingehender Anruf";
 "generatedMessage.missedOutgoingCall" = "Ausgehender Anruf fehlgeschlagen";
 "generatedMessage.missedIncomingCall" = "Verpasster eingehender Anruf";
 "generatedMessage.liveLocationSharing" = "Live-Standortfreigabe";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "Unterhaltung verlassen";
 
 //General Settings
 "generalSettings.title" = "Erweiterte Einstellungen";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Video-Einstellungen";
 "generalSettings.videoAcceleration" = "Videobeschleunigung aktivieren";
-"generalSettings.fileTransfer" = "File transfer";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.fileTransfer" = "Dateitransfer";
+"generalSettings.automaticAcceptIncomingFiles" = "Eingehende Dateien automatisch annehmen";
+"generalSettings.acceptTransferLimit" = "Annahmelimit Datentransfer";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unbegrenzt)";
 
 //Migrate Account
 "migrateAccount.title" = "Kontomigration";

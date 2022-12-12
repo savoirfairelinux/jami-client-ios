@@ -32,6 +32,8 @@
 "global.block" = "Заблокувати";
 "global.refuse" = "Скидання";
 "global.name" = "Ім’я";
+"global.copy" = "Копіювати";
+"global.reply" = "Відповісти";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

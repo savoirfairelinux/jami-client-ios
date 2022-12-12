@@ -32,6 +32,8 @@
 "global.block" = "Blokkeren";
 "global.refuse" = "Afwijzen";
 "global.name" = "Naam";
+"global.copy" = "Kopiëren";
+"global.reply" = "Beantwoorden";
 
 // Scan
 "scan.badQrCode" = "Verkeerde QR-code";

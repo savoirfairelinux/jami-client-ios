@@ -32,6 +32,8 @@
 "global.block" = "Bloquear";
 "global.refuse" = "Rexeitar";
 "global.name" = "Nome";
+"global.copy" = "Copiar";
+"global.reply" = "Responder";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -48,9 +50,9 @@
 "swarm.typeOfSwarm" = "Type of swarm";
 "swarm.identifier" = "Identificador";
 "swarm.about" = "Acerca de";
-"swarm.members" = "Members";
+"swarm.members" = "Membresía";
 "swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
+"swarm.oneToOne" = "Swarm privado";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";
@@ -370,7 +372,7 @@
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 "generalSettings.fileTransfer" = "Transferencia de ficheiro";
 "generalSettings.automaticAcceptIncomingFiles" = "Aceptar automáticamente ficheiros entrantes";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
+"generalSettings.acceptTransferLimit" = "Límite para transferencias";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Migrate Account
