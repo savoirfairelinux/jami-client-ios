@@ -2,6 +2,7 @@
  *  Copyright (C) 2022 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -43,6 +44,7 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
     }
 }
 
+// swiftlint:disable closure_body_length
 struct MessagesListView: View {
     @StateObject var model: MessagesListVM
     @SwiftUI.State var showScrollToLatestButton = false
@@ -57,7 +59,7 @@ struct MessagesListView: View {
     @SwiftUI.State private var screenHeight: CGFloat = 0
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        ZStack(alignment: .center) {
             ScrollViewReader { scrollView in
                 ScrollView(showsIndicators: false) {
                     // update scroll offset
@@ -116,6 +118,11 @@ struct MessagesListView: View {
             .flipped()
             if !model.atTheBottom {
                 createScrollToBottmView()
+            }
+
+            if model.shouldShowMap {
+                LocationSharingView(model: model, coordinates: model.coordinates)
+                    .flipped()
             }
         }
         .overlay(showContextMenu && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
