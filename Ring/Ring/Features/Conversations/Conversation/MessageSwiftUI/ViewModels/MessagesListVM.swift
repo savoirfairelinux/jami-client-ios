@@ -5,6 +5,7 @@
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
+ * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,6 +25,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
 
 enum MessageInfo: State {
     case updateAvatar(jamiId: String)
@@ -46,10 +48,18 @@ class MessagesListVM: ObservableObject {
         }
     }
     @Published var numberOfNewMessages: Int = 0
+    @Published var needScroll = false
+    @Published var myContactsLocation: CLLocationCoordinate2D?
+    @Published var myCoordinate: CLLocationCoordinate2D?
+    var myLocation: Observable<CLLocation?> { return self.locationSharingService.currentLocation.asObservable() }
+
+    var lastMessageOnScreen = ""
+    var visibleRows: Set = [""]
 
     var accountService: AccountsService
     var profileService: ProfilesService
     var dataTransferService: DataTransferService
+    var locationSharingService: LocationSharingService
     var conversationService: ConversationsService
     var contactsService: ContactsService
     var nameService: NameService
@@ -129,6 +139,42 @@ class MessagesListVM: ObservableObject {
         self.contactsService = injectionBag.contactsService
         self.nameService = injectionBag.nameService
         self.transferHelper = transferHelper
+        self.locationSharingService = injectionBag.locationSharingService
+        self.subscribeLocationServiceLocationReceived()
+    }
+
+    func subscribeLocationServiceLocationReceived() {
+        self.locationSharingService
+            .peerUriAndLocationReceived
+            .subscribe(onNext: { [weak self] tuple in
+                guard let self = self else { return }
+                // TODO: Check conversation id instead of JamiId here for location sharing feature
+                //    let conversation = self.conversation ,  let peerUri = tuple.0, let jamiId = conversation.value.getParticipants().first?.jamiId else { return }
+                DispatchQueue.main.async {
+                    if let coordinates = tuple.1 {
+                        //                let hash = JamiURI(from: peerUri).hash
+                        //                if hash == jamiId {
+                        self.myContactsLocation = coordinates
+                        //                }
+                    } else {
+                        self.myContactsLocation = nil
+                    }
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.myLocation
+            .subscribe(onNext: { [weak self] myCurrentLocation in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    if let myCurrentLocation = myCurrentLocation {
+                        self.myCoordinate = myCurrentLocation.coordinate
+                    } else {
+                        self.myCoordinate = nil
+                    }
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func insert(newMessage: MessageModel) -> Bool {
@@ -532,5 +578,31 @@ class MessagesListVM: ObservableObject {
         }
         let newValue = values.isEmpty ? nil : values
         messageModel.updateRead(avatars: newValue)
+    }
+}
+
+// MARK: Location sharing
+extension MessagesListVM {
+
+    func isAlreadySharingLocation() -> Bool {
+        guard let account = self.accountService.currentAccount,
+              let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
+        return self.locationSharingService.isAlreadySharing(accountId: account.id,
+                                                            contactUri: jamiId)
+    }
+
+    func startSendingLocation(duration: TimeInterval) {
+        guard let account = self.accountService.currentAccount,
+              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        self.locationSharingService.startSharingLocation(from: account.id,
+                                                         to: jamiId,
+                                                         duration: duration)
+    }
+
+    func stopSendingLocation() {
+        guard let account = self.accountService.currentAccount,
+              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        self.locationSharingService.stopSharingLocation(accountId: account.id,
+                                                        contactUri: jamiId)
     }
 }

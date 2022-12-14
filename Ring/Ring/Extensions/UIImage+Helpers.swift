@@ -282,7 +282,7 @@ extension UIImage {
         let width = spacing + leftImage.size.width + rightImage.size.width
 
         let size = CGSize(width: width, height: height)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
 
         leftImage.draw(in: CGRect(x: 0, y: 0, width: leftImage.size.width, height: height))
         rightImage.draw(in: CGRect(x: spacing + leftImage.size.width, y: 0, width: rightImage.size.width, height: height))

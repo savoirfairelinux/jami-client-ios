@@ -2,6 +2,7 @@
  *  Copyright (C) 2022 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -43,6 +44,7 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
     }
 }
 
+// swiftlint:disable closure_body_length
 struct MessagesListView: View {
     @StateObject var model: MessagesListVM
     @SwiftUI.State var showScrollToLatestButton = false
@@ -55,67 +57,177 @@ struct MessagesListView: View {
     @SwiftUI.State private var messageFrame: CGRect?
     var contextMenuModel = ContextMenuVM()
     @SwiftUI.State private var screenHeight: CGFloat = 0
+    @SwiftUI.State var isMapOpened: Bool = false
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            ScrollViewReader { scrollView in
-                ScrollView(showsIndicators: false) {
-                    // update scroll offset
-                    GeometryReader { proxy in
-                        let offset = proxy.frame(in: .named("scroll")).minY
-                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
-                    }
-                    LazyVStack(spacing: 0) {
-                        // scroll to the bottom
-                        Text("")
-                            .id("lastMessage")
-                        // messages
-                        ForEach(model.messagesModels) { message in
-                            MessageRowView(messageModel: message, onLongPress: {(frame, message) in
-                                if showContextMenu == true {
-                                    return
+            GeometryReader { geometry in
+                ScrollViewReader { scrollView in
+                    ZStack(alignment: isMapOpened ? .top : .bottom) {
+                        ScrollView(showsIndicators: false) {
+                            // update scroll offset
+                            GeometryReader { proxy in
+                                let offset = proxy.frame(in: .named("scroll")).minY
+                                Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
+                            }
+                            LazyVStack(spacing: 0) {
+                                // scroll to the bottom
+                                Text("")
+                                    .id("lastMessage")
+                                // messages
+                                ForEach(model.messagesModels) { message in
+                                    MessageRowView(messageModel: message, onLongPress: {(frame, message) in
+                                        if showContextMenu == true {
+                                            return
+                                        }
+                                        model.hideNavigationBar.accept(true)
+                                        contextMenuModel.presentingMessage = message
+                                        contextMenuModel.messageFrame = frame
+                                        if let topController = topVC() {
+                                            contextMenuModel.currentSnapshot = UIImage.makeSnapshot(from: topController.view)
+                                        }
+                                        showContextMenu = true
+                                    }, model: message.messageRow)
                                 }
-                                model.hideNavigationBar.accept(true)
-                                contextMenuModel.presentingMessage = message
-                                contextMenuModel.messageFrame = frame
-                                if let topController = topVC() {
-                                    contextMenuModel.currentSnapshot = UIImage.makeSnapshot(from: topController.view)
+                                .flipped()
+                                // load more
+                                Text("")
+                                    .onAppear(perform: {
+                                        DispatchQueue.global(qos: .background)
+                                            .asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 10)) {
+                                                self.model.loadMore()
+                                            }
+                                    })
+                            }
+                            .listRowBackground(Color.clear)
+                            .onReceive(model.$scrollToId, perform: { (scrollToId) in
+                                guard scrollToId != nil else { return }
+                                scrollView.scrollTo("lastMessage")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    model.scrollToId = nil
                                 }
-                                showContextMenu = true
-                            }, model: message.messageRow)
-                        }
-                        .flipped()
-                        // load more
-                        Text("")
-                            .onAppear(perform: {
-                                DispatchQueue.global(qos: .background)
-                                    .asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 10)) {
-                                        self.model.loadMore()
-                                    }
                             })
-                    }
-                    .listRowBackground(Color.clear)
-                    .onReceive(model.$scrollToId, perform: { (scrollToId) in
-                        guard scrollToId != nil else { return }
-                        scrollView.scrollTo("lastMessage")
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            model.scrollToId = nil
                         }
-                    })
-                }
-                .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-                    DispatchQueue.main.async {
-                        let scrollOffset = value ?? 0
-                        let atTheBottom = scrollOffset < scrollReserved
-                        if atTheBottom != model.atTheBottom {
-                            model.atTheBottom = atTheBottom
+                        .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
+                            DispatchQueue.main.async {
+                                let scrollOffset = value ?? 0
+                                let atTheBottom = scrollOffset < scrollReserved
+                                if atTheBottom != model.atTheBottom {
+                                    model.atTheBottom = atTheBottom
+                                }
+                            }
+                        }
+
+                        let myContactsLocation = model.myContactsLocation
+                        let myLocation = model.myCoordinate
+                        if model.myCoordinate != nil || model.myContactsLocation != nil {
+                            let coordinates = [CLLocationCoordinate2D]()
+                            if let myContactsLocation = model.myContactsLocation {
+                                coordinates.append(myContactsLocation)
+                            }
+                            if let myLocation = model.myCoordinate {
+                                coordinates.append(myLocation)
+                            }
+
+                            [myContactsLocation, myLocation]
+
+                            if isMapOpened {
+                                VStack {
+
+                                    ZStack(alignment: .center) {
+                                        VStack(spacing: 0) {
+                                            HStack {
+                                                Button {
+                                                    isMapOpened = false
+                                                } label: {
+                                                    Image(systemName: "xmark")
+                                                        .foregroundColor(.white)
+                                                        .padding()
+                                                }
+                                                Text("Location Sharing")
+                                                    .fontWeight(.semibold)
+                                                    .font(.title3)
+                                                    .foregroundColor(.white)
+                                                Spacer()
+                                            }
+                                            .frame(width: UIScreen.main.bounds.size.width, height: 50)
+                                            .background(Color.gray)
+                                            .cornerRadius(radius: 20, corners: [.topLeft, .topRight])
+                                            MapView(coordinates: [myContactsLocation, myLocation])
+                                        }
+
+                                        VStack {
+                                            Spacer()
+                                            Button {
+
+                                            } label: {
+                                                Text("10 mins")
+                                                    .fontWeight(.semibold)
+                                                    .font(.caption)
+                                                    .padding([.leading, .trailing], 15)
+                                                    .padding([.top, .bottom], 5)
+                                                    .background(Color.black)
+                                                    .foregroundColor(.white)
+                                                    .cornerRadius(8)
+                                            }
+
+                                            Button {
+                                                isMapOpened = false
+                                            } label: {
+                                                HStack {
+                                                    Image(systemName: "paperplane.fill")
+                                                        .foregroundColor(.black)
+                                                    Text("Stop Sharing")
+                                                        .font(.callout)
+                                                }
+                                                .padding([.leading, .trailing], 15)
+                                                .padding([.top, .bottom], 15)
+                                                .background(Color.red)
+                                                .foregroundColor(.black)
+                                                .cornerRadius(20)
+                                            }
+                                            .padding(.bottom, geometry.size.height / 8)
+
+                                        }
+                                    }
+                                    .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 120)
+                                }
+                                .flipped()
+                            } else {
+                                ZStack(alignment: .center) {
+                                    MapView(coordinates: [myContactsLocation, myLocation])
+                                        .frame(width: 250, height: 150)
+                                        .cornerRadius(15)
+                                        .onTapGesture {
+                                            isMapOpened = true
+                                        }
+                                    VStack {
+                                        Spacer()
+                                        Button {
+
+                                        } label: {
+                                            Text("Stop Sharing")
+                                                .fontWeight(.semibold)
+                                                .font(.caption)
+                                                .padding([.leading, .trailing], 15)
+                                                .padding([.top, .bottom], 5)
+                                                .background(Color.red)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(8)
+                                        }
+                                        .padding(.all, 10)
+                                    }
+                                }
+                                .frame(width: 200, height: 150)
+                                .flipped()
+                            }
                         }
                     }
                 }
-            }
-            .flipped()
-            if !model.atTheBottom {
-                createScrollToBottmView()
+                .flipped()
+                if !model.atTheBottom {
+                    createScrollToBottmView()
+                }
             }
         }
         .overlay(showContextMenu && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
