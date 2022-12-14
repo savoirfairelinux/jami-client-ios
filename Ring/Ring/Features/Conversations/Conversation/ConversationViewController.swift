@@ -263,10 +263,7 @@ class ConversationViewController: UIViewController,
         alert.addAction(recordVideoAction)
         alert.addAction(recordAudioAction)
         alert.addAction(documentsAction)
-        // TODO: fix location sharing with a new API
-        if false {
-            alert.addAction(locationSharingAction())
-        }
+        alert.addAction(locationSharingAction())
         alert.addAction(cancelAction)
         alert.popoverPresentationController?.sourceView = self.view
         alert.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
@@ -802,9 +799,9 @@ extension ConversationViewController {
 
                 if cell as? MessageCellLocationSharing != nil {
                     self.tableView.isScrollEnabled = true
-                    if cell as? MessageCellLocationSharingSent != nil {
-                        self.viewModel.stopSendingLocation()
-                    }
+                    //                    if cell as? MessageCellLocationSharingSent != nil {
+                    //                        self.viewModel.stopSendingLocation()
+                    //                    }
                 }
                 self.isExecutingDeleteMessage = true
                 self.viewModel.deleteLocationMessage(messageId: messageId)
