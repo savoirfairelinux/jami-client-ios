@@ -27,7 +27,7 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 
-// swiftlint:disable file_length
+// swiftlint:disable file_length, type_body_length
 class ConversationViewModel: Stateable, ViewModel {
 
     /// Logger
@@ -151,7 +151,6 @@ class ConversationViewModel: Stateable, ViewModel {
     var conversation: BehaviorRelay<ConversationModel>! {
         didSet {
             self.subscribeUnreadMessages()
-            self.subscribeLocationServiceLocationReceived()
             self.subscribeProfileServiceMyPhoto()
 
             guard let account = self.accountService.getAccount(fromAccountId: self.conversation.value.accountId) else { return }
@@ -473,8 +472,6 @@ class ConversationViewModel: Stateable, ViewModel {
         //        self.messages.accept(conversationsMsg)
     }
 
-    var myLocation: Observable<CLLocation?> { return self.locationSharingService.currentLocation.asObservable() }
-
     var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
     let shouldDismiss = BehaviorRelay<Bool>(value: false)
     func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
@@ -517,21 +514,6 @@ class ConversationViewModel: Stateable, ViewModel {
 
 // MARK: Conversation didSet functions
 extension ConversationViewModel {
-
-    private func subscribeLocationServiceLocationReceived() {
-        self.locationSharingService
-            .peerUriAndLocationReceived
-            .subscribe(onNext: { [weak self] tuple in
-                guard let self = self, let peerUri = tuple.0, let conversation = self.conversation,
-                      let jamiId = conversation.value.getParticipants().first?.jamiId else { return }
-                let coordinates = tuple.1
-                let hash = JamiURI(from: peerUri).hash
-                if hash == jamiId {
-                    self.myContactsLocation.onNext(coordinates)
-                }
-            })
-            .disposed(by: self.disposeBag)
-    }
 
     private func subscribeProfileServiceMyPhoto() {
         guard let account = self.accountService.currentAccount else { return }
@@ -633,8 +615,8 @@ extension ConversationViewModel {
     func isAlreadySharingLocation() -> Bool {
         guard let account = self.accountService.currentAccount,
               let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
-        return self.locationSharingService.isAlreadySharing(accountId: account.id,
-                                                            contactUri: jamiId)
+        return self.locationSharingService.isAlreadySharingMyLocation(accountId: account.id,
+                                                                      contactUri: jamiId)
     }
 
     func startSendingLocation(duration: TimeInterval) {
