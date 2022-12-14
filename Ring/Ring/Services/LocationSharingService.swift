@@ -22,10 +22,9 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 
-// swiftlint:disable redundant_string_enum_value
 enum SerializableLocationTypes: String {
-    case position = "position"
-    case stop = "stop"
+    case position = "Position"
+    case stop = "Stop"
 }
 // swiftlint:enable redundant_string_enum_value
 
@@ -45,19 +44,19 @@ private class LocationSharingInstanceDictionary<T: LocationSharingInstance> {
     var isEmpty: Bool { return self.instances.isEmpty }
 
     private func key(_ accountId: String, _ contactUri: String) -> String {
-        return accountId + contactUri
+        return accountId + contactUri.replacingOccurrences(of: "ring:", with: "")
     }
 
     func get(_ accountId: String, _ contactUri: String) -> T? {
-        return self.instances[key(accountId, contactUri)]
+        return self.instances[key(accountId, contactUri.replacingOccurrences(of: "ring:", with: ""))]
     }
 
     func insertOrUpdate(_ instance: T) {
-        self.instances[key(instance.accountId, instance.contactUri)] = instance
+        self.instances[key(instance.accountId, instance.contactUri.replacingOccurrences(of: "ring:", with: ""))] = instance
     }
 
     func remove(_ accountId: String, _ contactUri: String) -> T? {
-        return self.instances.removeValue(forKey: key(accountId, contactUri))
+        return self.instances.removeValue(forKey: key(accountId, contactUri.replacingOccurrences(of: "ring:", with: "")))
     }
 
     func asArray() -> [T] {
@@ -213,6 +212,10 @@ class LocationSharingService: NSObject {
 extension LocationSharingService {
 
     func isAlreadySharing(accountId: String, contactUri: String) -> Bool {
+        return self.incomingInstances.get(accountId, contactUri) != nil
+    }
+
+    func isAlreadySharingMyLocation(accountId: String, contactUri: String) -> Bool {
         return self.outgoingInstances.get(accountId, contactUri) != nil
     }
 
