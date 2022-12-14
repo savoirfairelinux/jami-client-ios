@@ -3,6 +3,7 @@
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
+ * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -72,10 +73,7 @@ class ConversationsManager {
         self.subscribeFileTransferEvents()
         self.subscribeCallsEvents()
         self.subscribeContactsEvents()
-        // TODO: fix location sharing with a new API
-        if false {
-            self.subscribeLocationSharingEvent()
-        }
+        self.subscribeLocationSharingEvent()
         self.subscribeCallsProviderEvents()
         self.controlAccountsState()
     }

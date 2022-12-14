@@ -22,10 +22,9 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 
-// swiftlint:disable redundant_string_enum_value
 enum SerializableLocationTypes: String {
-    case position = "position"
-    case stop = "stop"
+    case position = "Position"
+    case stop = "Stop"
 }
 // swiftlint:enable redundant_string_enum_value
 
@@ -45,19 +44,19 @@ private class LocationSharingInstanceDictionary<T: LocationSharingInstance> {
     var isEmpty: Bool { return self.instances.isEmpty }
 
     private func key(_ accountId: String, _ contactUri: String) -> String {
-        return accountId + contactUri
+        return accountId + contactUri.replacingOccurrences(of: "ring:", with: "")
     }
 
     func get(_ accountId: String, _ contactUri: String) -> T? {
-        return self.instances[key(accountId, contactUri)]
+        return self.instances[key(accountId, contactUri.replacingOccurrences(of: "ring:", with: ""))]
     }
 
     func insertOrUpdate(_ instance: T) {
-        self.instances[key(instance.accountId, instance.contactUri)] = instance
+        self.instances[key(instance.accountId, instance.contactUri.replacingOccurrences(of: "ring:", with: ""))] = instance
     }
 
     func remove(_ accountId: String, _ contactUri: String) -> T? {
-        return self.instances.removeValue(forKey: key(accountId, contactUri))
+        return self.instances.removeValue(forKey: key(accountId, contactUri.replacingOccurrences(of: "ring:", with: "")))
     }
 
     func asArray() -> [T] {
@@ -79,6 +78,11 @@ private class OutgoingLocationSharingInstance: LocationSharingInstance {
 
     private let locationSharingService: LocationSharingService
     let duration: TimeInterval
+    var remainingTime: Int {
+        let nowTime = Date()
+        guard let sharingTime = endSharingTimer?.fireDate else { return 0 }
+        return Int(round(sharingTime.timeIntervalSince(nowTime) / 60))
+    }
 
     private var endSharingTimer: Timer?
 
@@ -136,7 +140,7 @@ class LocationSharingService: NSObject {
     private let outgoingInstances = LocationSharingInstanceDictionary<OutgoingLocationSharingInstance>()
 
     // Receiving my contact's location
-    let peerUriAndLocationReceived = BehaviorRelay<(String?, CLLocationCoordinate2D?)>(value: (nil, nil))
+    let peerUriAndLocationReceived = BehaviorRelay<(String?, CLLocationCoordinate2D?, Int?)>(value: (nil, nil, nil))
     private let incomingInstances = LocationSharingInstanceDictionary<IncomingLocationSharingInstance>()
 
     var receivingService: Disposable?
@@ -213,7 +217,15 @@ class LocationSharingService: NSObject {
 extension LocationSharingService {
 
     func isAlreadySharing(accountId: String, contactUri: String) -> Bool {
+        return self.incomingInstances.get(accountId, contactUri) != nil
+    }
+
+    func isAlreadySharingMyLocation(accountId: String, contactUri: String) -> Bool {
         return self.outgoingInstances.get(accountId, contactUri) != nil
+    }
+
+    func getMyLocationSharingRemainedTime(accountId: String, contactUri: String) -> Int {
+        return Int(self.outgoingInstances.get(accountId, contactUri)?.remainingTime ?? 0)
     }
 
     func startSharingLocation(from accountId: String, to recipientUri: String, duration: TimeInterval) {
@@ -298,7 +310,7 @@ extension LocationSharingService {
 
         if incomingData.type == nil || incomingData.type == SerializableLocationTypes.position.rawValue {
             // TODO: altitude?
-            let peerUriAndData = (peerUri, CLLocationCoordinate2D(latitude: incomingData.lat!, longitude: incomingData.long!))
+            let peerUriAndData = (peerUri, CLLocationCoordinate2D(latitude: incomingData.lat!, longitude: incomingData.long!), Int(incomingData.time) / 60000)
             self.peerUriAndLocationReceived.accept(peerUriAndData)
 
         } else if incomingData.type == SerializableLocationTypes.stop.rawValue {
@@ -307,7 +319,7 @@ extension LocationSharingService {
     }
 
     func stopReceivingLocation(accountId: String, contactUri: String) {
-        self.peerUriAndLocationReceived.accept((contactUri, nil))
+        self.peerUriAndLocationReceived.accept((contactUri, nil, nil))
 
         self.triggerDeleteLocation(accountId: accountId, peerUri: contactUri, incoming: true, shouldRefreshConversations: true)
 
