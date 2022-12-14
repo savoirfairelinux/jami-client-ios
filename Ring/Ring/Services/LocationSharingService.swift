@@ -22,10 +22,9 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 
-// swiftlint:disable redundant_string_enum_value
 enum SerializableLocationTypes: String {
-    case position = "position"
-    case stop = "stop"
+    case position = "Position"
+    case stop = "Stop"
 }
 // swiftlint:enable redundant_string_enum_value
 
@@ -213,7 +212,11 @@ class LocationSharingService: NSObject {
 extension LocationSharingService {
 
     func isAlreadySharing(accountId: String, contactUri: String) -> Bool {
-        return self.outgoingInstances.get(accountId, contactUri) != nil
+        return self.incomingInstances.get(accountId, contactUri) != nil
+    }
+
+    func isAlreadySharingMyLocation(accountId: String, contactUri: String) -> Bool {
+        return self.outgoingInstances.get(accountId, contactUri.replacingOccurrences(of: "ring:", with: "")) != nil
     }
 
     func startSharingLocation(from accountId: String, to recipientUri: String, duration: TimeInterval) {
