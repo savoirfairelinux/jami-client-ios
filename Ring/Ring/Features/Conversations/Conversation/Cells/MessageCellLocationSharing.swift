@@ -21,25 +21,22 @@
 import UIKit
 import Reusable
 import RxCocoa
+import MapKit
 
 class MessageCellLocationSharing: MessageCell {
-
-    typealias MarkerAndComponentObject = (marker: MaplyScreenMarker, componentObject: MaplyComponentObject?)
 
     private static let osmCopyrightAndLicenseURL = "https://www.openstreetmap.org/copyright"
     private static let remoteTileSourceBaseUrl = MessageCellLocationSharing.getBaseURL()
 
     @IBOutlet weak var locationSharingMessageTextView: UITextView!
     @IBOutlet weak var bubbleHeight: NSLayoutConstraint!
-    var loader: MaplyQuadImageLoader!
-    var fetcher: MaplyRemoteTileFetcher!
 
     var xButton: UIButton?
     var myPositionButton: UIButton?
 
     let locationTapped = BehaviorRelay<(Bool, Bool)>(value: (false, false)) // (shouldAnimate, expanding)
 
-    var maplyViewController: MaplyBaseViewController? // protected in Swift?
+    var maplyViewController: MKMapView? // protected in Swift?
     /// The usage of this variable allows for the view to not be refreshed on reuse (e.g. when scrolling)
     private var preventUnnecessaryReuseCounter = 0
 
@@ -58,7 +55,7 @@ class MessageCellLocationSharing: MessageCell {
 
         self.shrink()
 
-        if self.maplyViewController as? MaplyViewController == nil || preventUnnecessaryReuseCounter < 2 {
+        if self.maplyViewController == nil || preventUnnecessaryReuseCounter < 2 {
             self.setupMaply()
             self.displayMapTile()
 
@@ -92,65 +89,65 @@ class MessageCellLocationSharing: MessageCell {
     }
 
     private func removeTapDefaultGestureFromMaply() {
-        if let whirlyKitEAGLView = (self.maplyViewController as? MaplyViewController)?.view.subviews[0],
-           let gesture = whirlyKitEAGLView.gestureRecognizers?.first(where: { (gesture) -> Bool in gesture is UITapGestureRecognizer }) {
-            whirlyKitEAGLView.removeGestureRecognizer(gesture)
-        }
+        //        if let whirlyKitEAGLView = (self.maplyViewController as? MaplyViewController)?.view.subviews[0],
+        //           let gesture = whirlyKitEAGLView.gestureRecognizers?.first(where: { (gesture) -> Bool in gesture is UITapGestureRecognizer }) {
+        //            whirlyKitEAGLView.removeGestureRecognizer(gesture)
+        //        }
     }
 
     private func setupMaply() {
-        self.maplyViewController?.view.removeFromSuperview()
+        self.maplyViewController?.removeFromSuperview()
 
-        self.maplyViewController = MaplyViewController(mapType: .typeFlat)
+        self.maplyViewController = MKMapView(frame: self.frame)
         self.removeTapDefaultGestureFromMaply()
 
-        self.bubble.addSubview(self.maplyViewController!.view)
-        self.maplyViewController!.view.frame = self.bubble.bounds
+        self.bubble.addSubview(self.maplyViewController!)
+        self.maplyViewController!.frame = self.bubble.bounds
     }
 
-    lazy var samplingParams: MaplySamplingParams = {
-        let samplingParams = MaplySamplingParams()
-        samplingParams.coverPoles = true
-        samplingParams.edgeMatching = false
-        samplingParams.singleLevel = false
-        samplingParams.coverPoles = false
-        return samplingParams
-    }()
+    //    lazy var samplingParams: MaplySamplingParams = {
+    //        let samplingParams = MaplySamplingParams()
+    //        samplingParams.coverPoles = true
+    //        samplingParams.edgeMatching = false
+    //        samplingParams.singleLevel = false
+    //        samplingParams.coverPoles = false
+    //        return samplingParams
+    //    }()
 
     private func displayMapTile() {
         // TODO: implement location map with a new API
-        self.maplyViewController!.clearColor = UIColor.white
+        //        self.maplyViewController!.clearColor = UIColor.white
+        //
+        //        // thirty fps if we can get it
+        //        self.maplyViewController!.frameInterval = 2
+        //        let baseCacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+        //        let tilesCacheDir = "\(baseCacheDir)/openstreetmap/"
+        //        let maxZoom = Int32(19)
+        //        let info = MaplyRemoteTileFetchInfo()
+        //        let request = URLRequest(url: URL(string: MessageCellLocationSharing.remoteTileSourceBaseUrl)!)
+        //        info.urlReq = request as URLRequest
+        //        let tileSource = MaplyRemoteTileInfoNew(baseURL: MessageCellLocationSharing.remoteTileSourceBaseUrl,
+        //                                                minZoom: 0,
+        //                                                maxZoom: maxZoom)
+        //        tileSource.cacheDir = tilesCacheDir
+        //        fetcher = MaplyRemoteTileFetcher(name: "fetcher", connections: 2)
+        //        loader = MaplyQuadImageLoader(params: samplingParams, tileInfo: tileSource, viewC: maplyViewController!)
+        //        loader?.setTileFetcher(fetcher)
 
-        // thirty fps if we can get it
-        self.maplyViewController!.frameInterval = 2
-        let baseCacheDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-        let tilesCacheDir = "\(baseCacheDir)/openstreetmap/"
-        let maxZoom = Int32(19)
-        let info = MaplyRemoteTileFetchInfo()
-        let request = URLRequest(url: URL(string: MessageCellLocationSharing.remoteTileSourceBaseUrl)!)
-        info.urlReq = request as URLRequest
-        let tileSource = MaplyRemoteTileInfoNew(baseURL: MessageCellLocationSharing.remoteTileSourceBaseUrl,
-                                                minZoom: 0,
-                                                maxZoom: maxZoom)
-        tileSource.cacheDir = tilesCacheDir
-        fetcher = MaplyRemoteTileFetcher(name: "fetcher", connections: 2)
-        loader = MaplyQuadImageLoader(params: samplingParams, tileInfo: tileSource, viewC: maplyViewController!)
-        loader?.setTileFetcher(fetcher)
-
-        if let mapViewC = self.maplyViewController as? MaplyViewController {
+        if let mapViewC = self.maplyViewController {
             self.toggleMaplyGesture(false)
-            mapViewC.height = 0.0001
+            //            mapViewC.height = 0.0001
         }
     }
 
     private func toggleMaplyGesture(_ value: Bool) {
-        if let mapViewC = self.maplyViewController as? MaplyViewController {
-            mapViewC.panGesture = value
-            mapViewC.pinchGesture = value
-            mapViewC.rotateGesture = value
-            mapViewC.twoFingerTapGesture = value
-            mapViewC.doubleTapDragGesture = value
-            mapViewC.doubleTapZoomGesture = value
+        if let mapViewC = self.maplyViewController {
+            //            mapViewC.panGesture = value
+            //            mapViewC.pinchGesture = value
+            //            mapViewC.rotateGesture = value
+            //            mapViewC.twoFingerTapGesture = value
+            //            mapViewC.doubleTapDragGesture = value
+            //            mapViewC.doubleTapZoomGesture = value
         }
     }
 
@@ -170,38 +167,38 @@ extension MessageCellLocationSharing {
     func updateLocationAndMarker(location: CLLocationCoordinate2D,
                                  imageData: Data?,
                                  username: String?,
-                                 marker: MaplyScreenMarker,
-                                 markerDump: MaplyComponentObject?,
-                                 tryToAnimateToMarker: Bool = true) -> MaplyComponentObject? {
+                                 //                                 marker: MaplyScreenMarker,
+                                 //                                 markerDump: MaplyComponentObject?,
+                                 tryToAnimateToMarker: Bool = true) {
         // only the first time
-        if markerDump == nil {
-            marker.layoutImportance = MAXFLOAT
-            if let imageData = imageData, let circledImage = UIImage(data: imageData)?.circleMasked {
-                marker.image = circledImage
-            } else {
-                marker.image = AvatarView(profileImageData: nil, username: username ?? "", size: 24).convertToImage()
-            }
-            marker.size = CGSize(width: 24, height: 24)
-        }
-
-        let maplyCoordonate = MaplyCoordinateMakeWithDegrees(Float(location.longitude), Float(location.latitude))
-
-        marker.loc.x = maplyCoordonate.x
-        marker.loc.y = maplyCoordonate.y
-
-        var dumpToReturn: MaplyComponentObject?
-
-        if let mapViewC = self.maplyViewController as? MaplyViewController {
-            if markerDump != nil {
-                self.maplyViewController!.remove(markerDump!)
-            }
-            dumpToReturn = self.maplyViewController!.addScreenMarkers([marker], desc: nil)
-
-            if tryToAnimateToMarker && !locationTapped.value.1 {
-                mapViewC.animate(toPosition: maplyCoordonate, time: 0.1)
-            }
-        }
-        return dumpToReturn
+        //        if markerDump == nil {
+        //            marker.layoutImportance = MAXFLOAT
+        //            if let imageData = imageData, let circledImage = UIImage(data: imageData)?.circleMasked {
+        //                marker.image = circledImage
+        //            } else {
+        //                marker.image = AvatarView(profileImageData: nil, username: username ?? "", size: 24).convertToImage()
+        //            }
+        //            marker.size = CGSize(width: 24, height: 24)
+        //        }
+        //
+        //        let maplyCoordonate = MaplyCoordinateMakeWithDegrees(Float(location.longitude), Float(location.latitude))
+        //
+        //        marker.loc.x = maplyCoordonate.x
+        //        marker.loc.y = maplyCoordonate.y
+        //
+        //        var dumpToReturn: MaplyComponentObject?
+        //
+        //        if let mapViewC = self.maplyViewController as? MaplyViewController {
+        //            if markerDump != nil {
+        //                self.maplyViewController!.remove(markerDump!)
+        //            }
+        //            dumpToReturn = self.maplyViewController!.addScreenMarkers([marker], desc: nil)
+        //
+        //            if tryToAnimateToMarker && !locationTapped.value.1 {
+        //                mapViewC.animate(toPosition: maplyCoordonate, time: 0.1)
+        //            }
+        //        }
+        //        return dumpToReturn
     }
 }
 
@@ -375,47 +372,47 @@ extension MessageCellLocationSharing {
 
 extension MessageCellLocationSharing {
     private func setupMyPositionButton() {
-        if self as? MessageCellLocationSharingSent != nil {
-            self.myPositionButton = UIButton()
-            let myLocation = self.myPositionButton!
-            myLocation.setImage(UIImage(asset: Asset.myLocation)!, for: .normal)
-            myLocation.tintColor = UIColor.jamiTextBlue
-            myLocation.backgroundColor = UIColor.jamiBackgroundColor.withAlphaComponent(0.75)
-            myLocation.cornerRadius = 16
-            self.bubble.addSubview(myLocation)
-
-            myLocation.translatesAutoresizingMaskIntoConstraints = false
-            let constraintX = NSLayoutConstraint(item: myLocation,
-                                                 attribute: NSLayoutConstraint.Attribute.centerX,
-                                                 relatedBy: NSLayoutConstraint.Relation.equal,
-                                                 toItem: self.bubble,
-                                                 attribute: NSLayoutConstraint.Attribute.right,
-                                                 multiplier: 1,
-                                                 constant: -28)
-            let constraintY = NSLayoutConstraint(item: myLocation,
-                                                 attribute: NSLayoutConstraint.Attribute.centerY,
-                                                 relatedBy: NSLayoutConstraint.Relation.equal,
-                                                 toItem: self.bubble,
-                                                 attribute: NSLayoutConstraint.Attribute.bottom,
-                                                 multiplier: 1,
-                                                 constant: -70)
-            let height = NSLayoutConstraint(item: myLocation,
-                                            attribute: NSLayoutConstraint.Attribute.height,
-                                            relatedBy: NSLayoutConstraint.Relation.equal,
-                                            toItem: nil,
-                                            attribute: NSLayoutConstraint.Attribute.notAnAttribute,
-                                            multiplier: 1,
-                                            constant: 32)
-            let width = NSLayoutConstraint(item: myLocation,
-                                           attribute: NSLayoutConstraint.Attribute.width,
-                                           relatedBy: NSLayoutConstraint.Relation.equal,
-                                           toItem: nil,
-                                           attribute: NSLayoutConstraint.Attribute.notAnAttribute,
-                                           multiplier: 1,
-                                           constant: 32)
-            NSLayoutConstraint.activate([constraintX, constraintY, height, width])
-            myLocation.addTarget(self, action: #selector(myPositionButtonAction), for: .touchUpInside)
-        }
+        //        if self as? MessageCellLocationSharingSent != nil {
+        //            self.myPositionButton = UIButton()
+        //            let myLocation = self.myPositionButton!
+        //            myLocation.setImage(UIImage(asset: Asset.myLocation)!, for: .normal)
+        //            myLocation.tintColor = UIColor.jamiTextBlue
+        //            myLocation.backgroundColor = UIColor.jamiBackgroundColor.withAlphaComponent(0.75)
+        //            myLocation.cornerRadius = 16
+        //            self.bubble.addSubview(myLocation)
+        //
+        //            myLocation.translatesAutoresizingMaskIntoConstraints = false
+        //            let constraintX = NSLayoutConstraint(item: myLocation,
+        //                                                 attribute: NSLayoutConstraint.Attribute.centerX,
+        //                                                 relatedBy: NSLayoutConstraint.Relation.equal,
+        //                                                 toItem: self.bubble,
+        //                                                 attribute: NSLayoutConstraint.Attribute.right,
+        //                                                 multiplier: 1,
+        //                                                 constant: -28)
+        //            let constraintY = NSLayoutConstraint(item: myLocation,
+        //                                                 attribute: NSLayoutConstraint.Attribute.centerY,
+        //                                                 relatedBy: NSLayoutConstraint.Relation.equal,
+        //                                                 toItem: self.bubble,
+        //                                                 attribute: NSLayoutConstraint.Attribute.bottom,
+        //                                                 multiplier: 1,
+        //                                                 constant: -70)
+        //            let height = NSLayoutConstraint(item: myLocation,
+        //                                            attribute: NSLayoutConstraint.Attribute.height,
+        //                                            relatedBy: NSLayoutConstraint.Relation.equal,
+        //                                            toItem: nil,
+        //                                            attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+        //                                            multiplier: 1,
+        //                                            constant: 32)
+        //            let width = NSLayoutConstraint(item: myLocation,
+        //                                           attribute: NSLayoutConstraint.Attribute.width,
+        //                                           relatedBy: NSLayoutConstraint.Relation.equal,
+        //                                           toItem: nil,
+        //                                           attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+        //                                           multiplier: 1,
+        //                                           constant: 32)
+        //            NSLayoutConstraint.activate([constraintX, constraintY, height, width])
+        //            myLocation.addTarget(self, action: #selector(myPositionButtonAction), for: .touchUpInside)
+        //        }
     }
 
     private func removeMyPositionButton() {
