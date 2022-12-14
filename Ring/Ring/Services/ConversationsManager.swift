@@ -3,6 +3,7 @@
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
+ * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -72,10 +73,7 @@ class ConversationsManager {
         self.subscribeFileTransferEvents()
         self.subscribeCallsEvents()
         self.subscribeContactsEvents()
-        // TODO: fix location sharing with a new API
-        if false {
-            self.subscribeLocationSharingEvent()
-        }
+        self.subscribeLocationSharingEvent()
         self.subscribeCallsProviderEvents()
         self.controlAccountsState()
     }
@@ -396,6 +394,7 @@ class ConversationsManager {
 
         let type = AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() ? URIType.sip : URIType.ring
         guard let peerUri = JamiURI.init(schema: type, infoHach: peerId, account: accountForMessage).uriString else { return }
+        //        let peerUri = peerId
 
         if self.conversationService.isBeginningOfLocationSharing(incoming: true, contactUri: peerUri, accountId: accountId) {
             let shouldRefresh = currentAccount.id == accountId
