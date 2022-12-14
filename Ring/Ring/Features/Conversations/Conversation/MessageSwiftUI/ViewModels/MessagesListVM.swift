@@ -5,6 +5,7 @@
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
  *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
+ * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,6 +25,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
 
 enum MessageInfo: State {
     case updateAvatar(jamiId: String)
@@ -53,10 +55,19 @@ class MessagesListVM: ObservableObject {
         }
     }
     @Published var numberOfNewMessages: Int = 0
+    @Published var shouldShowMap: Bool = false
+    @Published var coordinates = [(CLLocationCoordinate2D, UIImage)]()
+    @Published var isMapOpened = false
+    var contactAvatar: UIImage = UIImage()
+    var currentAccountAvatar: UIImage = UIImage()
+    var myLocation: Observable<CLLocation?> { return self.locationSharingService.currentLocation.asObservable() }
+    var myContactsLocation: CLLocationCoordinate2D?
+    var myCoordinate: CLLocationCoordinate2D?
 
     var accountService: AccountsService
     var profileService: ProfilesService
     var dataTransferService: DataTransferService
+    var locationSharingService: LocationSharingService
     var conversationService: ConversationsService
     var contactsService: ContactsService
     var nameService: NameService
@@ -138,6 +149,61 @@ class MessagesListVM: ObservableObject {
         self.contactsService = injectionBag.contactsService
         self.nameService = injectionBag.nameService
         self.transferHelper = transferHelper
+        self.locationSharingService = injectionBag.locationSharingService
+        self.subscribeLocationEvents()
+    }
+
+    func subscribeLocationEvents() {
+        self.locationSharingService
+            .peerUriAndLocationReceived
+            .subscribe(onNext: { [weak self] tuple in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    if let coordinates = tuple.1 {
+                        self.myContactsLocation = coordinates
+                    } else {
+                        self.myContactsLocation = nil
+                    }
+                    self.updateCoordinatesList()
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.myLocation
+            .subscribe(onNext: { [weak self] myCurrentLocation in
+                guard let self = self else { return }
+                if let myCurrentLocation = myCurrentLocation {
+                    self.myCoordinate = myCurrentLocation.coordinate
+                } else {
+                    self.myCoordinate = nil
+                }
+                self.updateCoordinatesList()
+            })
+            .disposed(by: self.disposeBag)
+        self.subscribeUserAvatarForLocationSharing()
+    }
+
+    func subscribeUserAvatarForLocationSharing() {
+        profileService.getAccountProfile(accountId: self.conversation.accountId)
+            .subscribe(onNext: { [weak self] profile in
+                guard let self = self else { return }
+                let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId)
+                self.currentAccountAvatar = UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account)
+                self.updateCoordinatesList()
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func updateCoordinatesList() {
+        var coordinates = [(CLLocationCoordinate2D, UIImage)]()
+        if let myContactsLocation = self.myContactsLocation {
+            coordinates.append((myContactsLocation, self.contactAvatar))
+        }
+        if let myLocation = self.myCoordinate {
+            coordinates.append((myLocation, self.currentAccountAvatar))
+        }
+        self.coordinates = coordinates
+        self.shouldShowMap = self.isAlreadySharingLocation()
     }
 
     private func insert(newMessage: MessageModel) -> Bool {
@@ -468,6 +534,7 @@ class MessagesListVM: ObservableObject {
 
     private func updateAvatar(image: UIImage, id: String, message: MessageContainerModel) {
         self.avatars.set(value: image, for: id)
+        self.updateContacLocationSharingImage()
         message.updateAvatar(image: image)
         if var lastReadAvatars = self.lastRead.get(key: message.id) as? [String: UIImage] {
             if var _ = lastReadAvatars[id] {
@@ -504,7 +571,7 @@ class MessagesListVM: ObservableObject {
                     self.updateAvatar(image: image, id: id, message: message)
                 }
             })
-            .disposed(by: message.disposeBag)
+            .disposed(by: disposeBag)
         self.nameService.lookupAddress(withAccount: self.conversation.accountId, nameserver: "", address: id)
     }
 
@@ -563,5 +630,78 @@ class MessagesListVM: ObservableObject {
         }
         let newValue = values.isEmpty ? nil : values
         messageModel.updateRead(avatars: newValue)
+    }
+}
+
+// MARK: Location sharing
+// swiftlint:disable body_length
+extension MessagesListVM {
+
+    func updateContacLocationSharingImage() {
+        if let jamiId = self.conversation.getParticipants().first?.jamiId {
+            if let avatar = self.avatars.get(key: jamiId) as? UIImage {
+                DispatchQueue.main.async { [weak self] in
+                    self?.contactAvatar = avatar
+                    self?.updateCoordinatesList()
+                }
+            }
+        }
+    }
+
+    func isAlreadySharingLocation() -> Bool {
+        guard let account = self.accountService.currentAccount,
+              let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
+        return self.locationSharingService.isAlreadySharing(accountId: account.id,
+                                                            contactUri: jamiId) || self.locationSharingService.isAlreadySharingMyLocation(accountId: account.id, contactUri: jamiId)
+    }
+
+    func isAlreadySharingMyLocation() -> Bool {
+        guard let account = self.accountService.currentAccount,
+              let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
+        return self.locationSharingService.isAlreadySharingMyLocation(accountId: account.id, contactUri: jamiId)
+    }
+
+    func startSendingLocation(duration: TimeInterval) {
+        guard let account = self.accountService.currentAccount,
+              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        self.locationSharingService.startSharingLocation(from: account.id,
+                                                         to: jamiId,
+                                                         duration: duration)
+    }
+
+    func stopSendingLocation() {
+        guard let account = self.accountService.currentAccount,
+              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
+        self.locationSharingService.stopSharingLocation(accountId: account.id,
+                                                        contactUri: jamiId)
+    }
+
+    func getMyLocationSharingRemainedTime() -> Int {
+        guard let account = self.accountService.currentAccount,
+              let jamiId = self.conversation.getParticipants().first?.jamiId else { return 0}
+        return self.locationSharingService.getMyLocationSharingRemainedTime(accountId: account.id, contactUri: jamiId)
+    }
+
+    func getMyLocationSharingRemainedTimeText() -> String {
+        let remainingTime = getMyLocationSharingRemainedTime()
+        let hours = remainingTime / 60
+        let minutes = remainingTime % 60
+
+        let hourString = hours == 1 ? "hour" : "hours"
+        let minuteString = minutes == 1 ? "minute" : "minutes"
+
+        if hours == 0 {
+            if minutes == 0 {
+                return "0 minutes"
+            } else {
+                return "\(minutes) \(minuteString)"
+            }
+        } else {
+            if minutes == 0 {
+                return "\(hours) \(hourString)"
+            } else {
+                return "\(hours) \(hourString), \(minutes) \(minuteString)"
+            }
+        }
     }
 }
