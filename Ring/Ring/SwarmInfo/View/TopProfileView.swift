@@ -35,10 +35,10 @@ public struct TopProfileView: View {
     @SwiftUI.State private var image: UIImage?
     @AppStorage("SWARM_COLOR") var swarmColor = Color.blue
     var swarmViews: [SwarmSettingView] {
-        if viewmodel.swarmInfo.participants.value.count == 2 {
-            return [.about]
-        } else {
+        if viewmodel.swarmInfo.participants.value.count > 2 {
             return [.about, .memberList]
+        } else {
+            return [.about]
         }
     }
 
