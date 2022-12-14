@@ -280,10 +280,7 @@ class ConversationViewController: UIViewController,
         alert.addAction(recordVideoAction)
         alert.addAction(recordAudioAction)
         alert.addAction(documentsAction)
-        // TODO: fix location sharing with a new API
-        if false {
-            alert.addAction(locationSharingAction())
-        }
+        alert.addAction(locationSharingAction())
         alert.addAction(cancelAction)
         alert.popoverPresentationController?.sourceView = self.view
         alert.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
@@ -818,12 +815,12 @@ extension ConversationViewController {
             .subscribe(onNext: { [weak self, weak cell] (shouldDelete) in
                 guard shouldDelete, let self = self, let cell = cell, let messageId = cell.messageId else { return }
 
-                if cell as? MessageCellLocationSharing != nil {
-                    self.tableView.isScrollEnabled = true
-                    if cell as? MessageCellLocationSharingSent != nil {
-                        self.viewModel.stopSendingLocation()
-                    }
-                }
+                //                if cell as? MessageCellLocationSharing != nil {
+                //                    self.tableView.isScrollEnabled = true
+                //                    if cell as? MessageCellLocationSharingSent != nil {
+                //                        self.viewModel.stopSendingLocation()
+                //                    }
+                //                }
                 self.isExecutingDeleteMessage = true
                 self.viewModel.deleteLocationMessage(messageId: messageId)
             })
@@ -848,41 +845,41 @@ extension ConversationViewController {
             .disposed(by: cell.disposeBag)
     }
 
-    private func locationCellSetup(_ item: MessageViewModel, _ cell: MessageCell) {
-        guard item.isLocationSharingBubble, let cell = cell as? MessageCellLocationSharing else { return }
-
-        cell.locationTapped
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak cell] (locationTapped) in
-                guard locationTapped.0, let self = self, let cell = cell else { return }
-
-                let expanding = locationTapped.1
-
-                if let index = self.tableView.indexPath(for: cell) {
-                    cell.expandHeight(expanding,
-                                      self.tableView.frame.height - self.tableView.contentInset.top - self.tableView.contentInset.bottom)
-                    self.tableView.performBatchUpdates({
-                        self.tableView.updateConstraintsIfNeeded()
-                        UIView.animate(withDuration: 0.4) {
-                            cell.updateWidth(expanding)
-                            cell.layoutIfNeeded()
-                        }
-                    }, completion: { [weak cell] _ in cell?.onAnimationCompletion() })
-
-                    if expanding {
-                        self.tableView.scrollToRow(at: index, at: UITableView.ScrollPosition.top, animated: true)
-                    }
-                    self.tableView.isScrollEnabled = !expanding
-
-                    cell.locationTapped.accept((false, expanding))
-                } else {
-                    self.log.warning("[ConversationViewController] locationCellSetup, something went weird, let's retry")
-                    self.tableView.isScrollEnabled = true
-                    cell.locationTapped.accept((true, expanding)) // retry
-                }
-            })
-            .disposed(by: cell.disposeBag)
-    }
+    //    private func locationCellSetup(_ item: MessageViewModel, _ cell: MessageCell) {
+    //        guard item.isLocationSharingBubble, let cell = cell as? MessageCellLocationSharing else { return }
+    //
+    //        cell.locationTapped
+    //            .observe(on: MainScheduler.instance)
+    //            .subscribe(onNext: { [weak self, weak cell] (locationTapped) in
+    //                guard locationTapped.0, let self = self, let cell = cell else { return }
+    //
+    //                let expanding = locationTapped.1
+    //
+    //                if let index = self.tableView.indexPath(for: cell) {
+    //                    cell.expandHeight(expanding,
+    //                                      self.tableView.frame.height - self.tableView.contentInset.top - self.tableView.contentInset.bottom)
+    //                    self.tableView.performBatchUpdates({
+    //                        self.tableView.updateConstraintsIfNeeded()
+    //                        UIView.animate(withDuration: 0.4) {
+    //                            cell.updateWidth(expanding)
+    //                            cell.layoutIfNeeded()
+    //                        }
+    //                    }, completion: { [weak cell] _ in cell?.onAnimationCompletion() })
+    //
+    //                    if expanding {
+    //                        self.tableView.scrollToRow(at: index, at: UITableView.ScrollPosition.top, animated: true)
+    //                    }
+    //                    self.tableView.isScrollEnabled = !expanding
+    //
+    //                    cell.locationTapped.accept((false, expanding))
+    //                } else {
+    //                    self.log.warning("[ConversationViewController] locationCellSetup, something went weird, let's retry")
+    //                    self.tableView.isScrollEnabled = true
+    //                    cell.locationTapped.accept((true, expanding)) // retry
+    //                }
+    //            })
+    //            .disposed(by: cell.disposeBag)
+    //    }
 }
 
 // MARK: Location sharing
