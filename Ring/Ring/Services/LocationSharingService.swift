@@ -22,10 +22,9 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 
-// swiftlint:disable redundant_string_enum_value
 enum SerializableLocationTypes: String {
-    case position = "position"
-    case stop = "stop"
+    case position = "Position"
+    case stop = "Stop"
 }
 // swiftlint:enable redundant_string_enum_value
 
