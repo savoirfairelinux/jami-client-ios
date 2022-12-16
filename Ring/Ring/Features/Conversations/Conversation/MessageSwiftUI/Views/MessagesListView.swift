@@ -23,23 +23,28 @@ import SwiftUI
 struct MessagesListView: View {
     @StateObject var list: MessagesListVM
     var body: some View {
+        // ScrollView {
         ScrollViewReader { scrollView in
-            ScrollView {
-                LazyVStack {
+            VStack {
+                Button("Jump to #50") {
+                    // proxy.scrollTo(5, anchor: .top)
+                }
+                List {
                     ForEach(list.messagesModels) { message in
                         MessageRowView(messageModel: message, model: message.messageRow)
                             .onAppear { self.list.messagesAddedToScreen(messageId: message.id) }
                             .onDisappear { self.list.messagesremovedFromScreen(messageId: message.id) }
                     }
                 }
-                .listRowBackground(Color.clear)
-                .onReceive(list.$needScroll, perform: { (updated) in
-                    if updated {
-                        scrollView.scrollTo(list.lastMessageOnScreen)
-                        list.needScroll = false
-                    }
-                })
             }
+            .listRowBackground(Color.clear)
+            .onReceive(list.$needScroll, perform: { (updated) in
+                if updated {
+                    scrollView.scrollTo(list.lastMessageOnScreen)
+                    list.needScroll = false
+                }
+            })
         }
+        // }
     }
 }
