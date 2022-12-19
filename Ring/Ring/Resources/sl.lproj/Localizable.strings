@@ -40,28 +40,28 @@
 "scan.search" = "Iskanje ...";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.searchBar" = "Poišči stik ...";
 "swarmcreation.createTheSwarm" = "Ustvarite roj";
 "swarmcreation.addADescription" = "Dodajte opis";
 // Swarm
 "swarm.ignoreSwarm" = "Prezri roj";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.leaveConversation" = "Zapusti pogovor";
 "swarm.chooseColor" = "Izberite barvo";
 "swarm.typeOfSwarm" = "Vrsta roja";
 "swarm.identifier" = "identifikator";
 "swarm.about" = "O programu";
 "swarm.members" = "Člani";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Dodaj opis";
 "swarm.oneToOne" = "Zasebni roj";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private group swarm";
-"swarm.publicChat" = "Public group swarm";
-"swarm.others" = "Others";
+"swarm.adminInvitesOnly" = "Samo na povabilo skrbnika";
+"swarm.invitesOnly" = "Zasebni roj skupine";
+"swarm.publicChat" = "Javni roj skupine";
+"swarm.others" = "Drugi";
 "swarm.member" = "Član";
 "swarm.invited" = "Povabljeni";
 "swarm.admin" = "Skrbnik";
 "swarm.banned" = "Izključen/a";
-"swarm.unknown" = "Unkown";
+"swarm.unknown" = "Neznano";
 // Smartlist
 "smartlist.yesterday" = "Včeraj";
 "smartlist.results" = "Javni imenik";
@@ -352,28 +352,28 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Prejeli ste povabilo";
 "generatedMessage.swarmCreated" = "Roj ustvarjen";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "je vabljen_a, da se pridruži";
+"generatedMessage.invitationAccepted" = "se je pridružil_a pogovoru";
+"generatedMessage.youJoined" = "Pridružili ste se pogovoru";
+"generatedMessage.contactBanned" = "je izvržen_a";
+"generatedMessage.contactReAdded" = "je ponovno dodan_a";
 "generatedMessage.outgoingCall" = "Odhodni klic";
 "generatedMessage.incomingCall" = "Dohodni klic";
 "generatedMessage.missedOutgoingCall" = "Zgrešen odhodni klic";
 "generatedMessage.missedIncomingCall" = "Zgrešen dohodni klic";
 "generatedMessage.liveLocationSharing" = "Deljenje lokacije v živo";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "je odšel_a";
 
 //General Settings
 "generalSettings.title" = "Napredne nastavitve";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Nastavitve videa";
 "generalSettings.videoAcceleration" = "Vklopi strojno pospeševanje videa";
 "generalSettings.fileTransfer" = "Prenos datoteke";
 "generalSettings.automaticAcceptIncomingFiles" = "Samodejno sprejmi dohodne datoteke";
 "generalSettings.acceptTransferLimit" = "Sprejmi omejitev prenosa";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.acceptTransferLimitDescription" = "(v MB, 0 = neomejeno)";
 
 //Migrate Account
 "migrateAccount.title" = "Selitev računa";

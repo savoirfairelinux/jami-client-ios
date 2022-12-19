@@ -324,7 +324,7 @@
 "contactPage.sendMessage" = "Trimite un mesaj";
 "contactPage.clearConversation" = "Șterge discuția";
 "contactPage.blockContact" = "Blochează contactul";
-"contactPage.removeConversation" = "Șterge conversația";
+"contactPage.removeConversation" = "Elimină conversația";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inițializare...";

@@ -32,8 +32,8 @@
 "global.block" = "حظر";
 "global.refuse" = "أرفض";
 "global.name" = "إسم";
-"global.copy" = "Copy";
-"global.reply" = "Reply";
+"global.copy" = "نسخ";
+"global.reply" = "رد";
 
 // Scan
 "scan.badQrCode" = "رمز QR غير صالح";
