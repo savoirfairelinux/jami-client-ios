@@ -32,8 +32,8 @@
 "global.block" = "Blokovat";
 "global.refuse" = "Odmítnout";
 "global.name" = "Jméno";
-"global.copy" = "Copy";
-"global.reply" = "Reply";
+"global.copy" = "Zkopírovat";
+"global.reply" = "Odpovědět";
 
 // Scan
 "scan.badQrCode" = "Špatný kód QR";

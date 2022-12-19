@@ -32,8 +32,8 @@
 "global.block" = "Bloca";
 "global.refuse" = "Rebutja";
 "global.name" = "Nom";
-"global.copy" = "Copy";
-"global.reply" = "Reply";
+"global.copy" = "Copia";
+"global.reply" = "Respon";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

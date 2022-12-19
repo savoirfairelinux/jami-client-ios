@@ -32,8 +32,8 @@
 "global.block" = "Блокиране";
 "global.refuse" = "Отказ";
 "global.name" = "Име";
-"global.copy" = "Copy";
-"global.reply" = "Reply";
+"global.copy" = "Копиране";
+"global.reply" = "Отговор";
 
 // Scan
 "scan.badQrCode" = "Грешен QR-код";
