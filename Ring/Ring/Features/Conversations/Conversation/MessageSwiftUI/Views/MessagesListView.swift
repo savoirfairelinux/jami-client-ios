@@ -22,23 +22,73 @@ import SwiftUI
 
 struct MessagesListView: View {
     @StateObject var list: MessagesListVM
+    @SwiftUI.State var temporaryMessagesModels = [MessageContainerModel]()
+    @SwiftUI.State var isHidingList = false
+    @SwiftUI.State var couldLoad = false
     var body: some View {
+        if isHidingList {
+            listView
+        } else {
+            listView
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        couldLoad = true
+                    }
+                }
+        }
+    }
+
+    private var listView: some View {
         ScrollViewReader { scrollView in
             ScrollView {
                 LazyVStack {
-                    ForEach(list.messagesModels) { message in
-                        MessageRowView(messageModel: message, model: message.messageRow)
-                            .onAppear { self.list.messagesAddedToScreen(messageId: message.id) }
-                            .onDisappear { self.list.messagesremovedFromScreen(messageId: message.id) }
+                    if isHidingList {
+                        ForEach(temporaryMessagesModels) { message in
+                            MessageRowView(messageModel: message, model: message.messageRow)
+                                .id(message.id)
+                        }
+                    } else {
+                        Text("")
+                            .onAppear {
+                                if couldLoad {
+                                    list.loadMore()
+                                }
+                            }
+                        ForEach(list.messagesModels) { message in
+                            withAnimation {
+                                MessageRowView(messageModel: message, model: message.messageRow)
+                                    .onAppear { self.list.messagesAddedToScreen(messageId: message.id) }
+                                    .onDisappear { self.list.messagesremovedFromScreen(messageId: message.id) }
+                                    .id(message.id)
+
+                            }
+                        }
                     }
                 }
                 .listRowBackground(Color.clear)
-                .onReceive(list.$needScroll, perform: { (updated) in
-                    if updated {
-                        scrollView.scrollTo(list.lastMessageOnScreen)
-                        list.needScroll = false
+                .onReceive(list.$loading) { newValue in
+                    if newValue == isHidingList {
+                        return
                     }
-                })
+                    if newValue {
+                        self.temporaryMessagesModels = self.list.messagesModels
+                        couldLoad = false
+                    }
+                    DispatchQueue.main.async {
+                        isHidingList = newValue
+                    }
+                }
+                .onAppear {
+                    scrollView.scrollTo(list.lastMessageOnScreen)
+                }
+                                .onReceive(list.$needScroll, perform: { (updated) in
+                                    if updated {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                            scrollView.scrollTo(list.lastMessageOnScreen)
+                                            list.needScroll = false
+                                        }
+                                    }
+                                })
             }
         }
     }

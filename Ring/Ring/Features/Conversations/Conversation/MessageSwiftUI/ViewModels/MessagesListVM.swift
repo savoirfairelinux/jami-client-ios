@@ -56,7 +56,7 @@ class MessagesListVM: ObservableObject {
     let disposeBag = DisposeBag()
     var messagesDisposeBag = DisposeBag()
 
-    var loading = true // to avoid a new loading while previous one still executing
+    @Published var loading = true // to avoid a new loading while previous one still executing
     var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: UIImage]())
     var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: UIImage]())
     // last read
@@ -93,13 +93,14 @@ class MessagesListVM: ObservableObject {
                         }
                     }
                     self.computeSequencing()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        if self.shouldScroll() {
-                            if !self.loading || self.lastMessageOnScreen == "" {
-                                self.lastMessageOnScreen = self.messagesModels.last?.message.id ?? ""
-                            }
-                            self.needScroll = true
+                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    if self.shouldScroll() {
+                        if !self.loading || self.lastMessageOnScreen == "" {
+                            self.lastMessageOnScreen = self.messagesModels.last?.message.id ?? ""
                         }
+                        self.needScroll = true
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         self.loading = false
                     }
                 } onError: { _ in
@@ -322,9 +323,9 @@ class MessagesListVM: ObservableObject {
 
     func messagesAddedToScreen(messageId: String) {
         self.visibleRows.insert(messageId)
-        if self.messagesModels.first?.id == messageId {
-            self.loadMore()
-        }
+        //        if self.messagesModels.first?.id == messageId {
+        //            self.loadMore()
+        //        }
     }
     func messagesremovedFromScreen(messageId: String) {
         if let index = visibleRows.firstIndex(of: messageId) {
@@ -393,7 +394,7 @@ class MessagesListVM: ObservableObject {
         }
     }
 
-    private func loadMore() {
+    func loadMore() {
         if self.loading || self.allLoaded() {
             return
         }
