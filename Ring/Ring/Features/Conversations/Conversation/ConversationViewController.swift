@@ -55,7 +55,6 @@ class ConversationViewController: UIViewController,
     @IBOutlet weak var spinnerView: UIView!
 
     var viewModel: ConversationViewModel!
-    @Published var messageViewModels = [MessageViewModel]()
     var textFieldShouldEndEditing = false
     private let messageGroupingInterval = 10 * 60 // 10 minutes
     var bottomHeight: CGFloat = 0.00
@@ -127,7 +126,7 @@ class ConversationViewController: UIViewController,
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
-        let messageListView = MessagesListView(list: swiftUIModel)
+        let messageListView = MessagesListView(model: swiftUIModel)
         let swiftUIView = UIHostingController(rootView: messageListView)
         addChild(swiftUIView)
         swiftUIView.view.frame = self.view.frame
@@ -425,7 +424,7 @@ class ConversationViewController: UIViewController,
     }
 
     func updateMessagesOffset() {
-        self.bottomHeight = self.messageAccessoryView.frame.height + 10
+        self.bottomHeight = self.messageAccessoryView.frame.height
         self.bottomAnchor?.constant = -self.bottomHeight
     }
 
