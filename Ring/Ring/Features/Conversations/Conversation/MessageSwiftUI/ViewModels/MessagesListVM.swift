@@ -35,10 +35,8 @@ class MessagesListVM: ObservableObject {
 
     // view properties
     @Published var messagesModels = [MessageContainerModel]()
-    @Published var needScroll = false
-
-    var lastMessageOnScreen = ""
-    var visibleRows: Set = [""]
+    @Published var scrollToId: String?
+    @Published var atTheBottom = true
 
     var accountService: AccountsService
     var profileService: ProfilesService
@@ -76,7 +74,7 @@ class MessagesListVM: ObservableObject {
                 .subscribe { [weak self] messages in
                     guard let self = self else { return }
                     var insertionCount = 0
-                    for newMessage in messages where self.insert(message: newMessage) == true {
+                    for newMessage in messages where self.insert(newMessage: newMessage) == true {
                         insertionCount += 1
                     }
                     if insertionCount == 0 {
@@ -84,7 +82,7 @@ class MessagesListVM: ObservableObject {
                     }
                     // load more messages if conversation just opened for first time
                     if self.messagesModels.count < 40 && !self.allLoaded() {
-                        if let messageId = self.messagesModels.first?.id {
+                        if let messageId = self.messagesModels.last?.id {
                             self.conversationService
                                 .loadConversationMessages(conversationId: self.conversation.id,
                                                           accountId: self.conversation.accountId,
@@ -93,13 +91,11 @@ class MessagesListVM: ObservableObject {
                         }
                     }
                     self.computeSequencing()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        if self.shouldScroll() {
-                            if !self.loading || self.lastMessageOnScreen == "" {
-                                self.lastMessageOnScreen = self.messagesModels.last?.message.id ?? ""
-                            }
-                            self.needScroll = true
-                        }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                        guard let self = self else { return }
+                        //                        if self.atTheBottom {
+                        //                            self.scrollToTheBottom()
+                        //                        }
                         self.loading = false
                     }
                 } onError: { _ in
@@ -125,31 +121,33 @@ class MessagesListVM: ObservableObject {
         self.transferHelper = transferHelper
     }
 
-    private func insert(message: MessageModel) -> Bool {
+    private func insert(newMessage: MessageModel) -> Bool {
         if self.messagesModels.contains(where: { messageModel in
-            messageModel.message.id == message.id
+            messageModel.message.id == newMessage.id
         }) { return false}
-        let container = MessageContainerModel(message: message, contextMenuState: self.contextStateSubject)
+        let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject)
         self.subscribeMessage(container: container)
+        // first try to fing child
         if let index = self.messagesModels.firstIndex(where: { message in
-            message.message.parentId == message.id
+            message.message.parentId == newMessage.id
         }) {
-            if index > 1 {
-                self.messagesModels.insert(container, at: index - 1)
-            } else {
-                self.messagesModels.insert(container, at: 0)
-            }
-        } else if let parentIndex = self.messagesModels.firstIndex(where: { messageModel in
-            messageModel.message.id == message.parentId
-        }) {
-            if parentIndex > self.messagesModels.count - 1 {
-                self.messagesModels.insert(container, at: parentIndex + 1)
+            if index < self.messagesModels.count - 1 {
+                self.messagesModels.insert(container, at: index + 1)
             } else {
                 self.messagesModels.append(container)
             }
+            // try to find parent
+        } else if let parentIndex = self.messagesModels.firstIndex(where: { messageModel in
+            messageModel.message.id == newMessage.parentId
+        }) {
+            if parentIndex > 0 {
+                self.messagesModels.insert(container, at: parentIndex - 1)
+            } else {
+                self.messagesModels.insert(container, at: 0)
+            }
         } else {
-            self.messagesModels.insert(container, at: 0)
-            conversation.unorderedInteractions.append(message.id)
+            self.messagesModels.append(container)
+            conversation.unorderedInteractions.append(newMessage.id)
         }
         return true
     }
@@ -318,93 +316,26 @@ class MessagesListVM: ObservableObject {
         }
     }
 
-    // MARK: view actions
-
-    func messagesAddedToScreen(messageId: String) {
-        self.visibleRows.insert(messageId)
-        if self.messagesModels.first?.id == messageId {
-            self.loadMore()
-        }
-    }
-    func messagesremovedFromScreen(messageId: String) {
-        if let index = visibleRows.firstIndex(of: messageId) {
-            visibleRows.remove(at: index)
-        }
-    }
-
-    // MARK: loading
-
-    func scrollIfNeed() {
-        if shouldScroll() {
-            self.needScroll = true
-        }
-    }
-
-    private func shouldScroll() -> Bool {
-        /*
-         scroll should be performed in two cases:
-         1. when loadin more messages
-         2. when a new message received while previous last message for conversation
-         was visible on the screen
-         */
-        if visibleRows.isEmpty || self.loading { return true }
-
-        // check if previous message was visible on screen
-        if self.messagesModels.count < 3 {
-            return true
-        }
-        let previousMessage = self.messagesModels[self.messagesModels.count - 2]
-        return visibleRows.contains(previousMessage.message.id)
-    }
-
-    private func sortVisibleRows() -> [String] {
-        var temporary = [String: Int]()
-        for row in visibleRows {
-            if row == "" {
-                continue
-            }
-            let index = messagesModels.firstIndex { message in
-                message.id == row
-            }!
-            temporary[row] = index
-        }
-        let sorted = temporary.sorted { firstRow, secondRow in
-            firstRow.value < secondRow.value
-        }
-        .map { element in
-            return element.key
-        }
-        return sorted
-    }
-
     private func allLoaded() -> Bool {
-        guard let firstMessage = self.messagesModels.first else { return false }
+        guard let firstMessage = self.messagesModels.last else { return false }
         return firstMessage.message.parentId.isEmpty
     }
 
-    private func updateLastVisibleRow() {
-        let sortedRows = sortVisibleRows()
-        if sortedRows.count > 2 {
-            self.lastMessageOnScreen = sortedRows[sortedRows.count - 2]
-        } else  if sortedRows.count > 1 {
-            self.lastMessageOnScreen = sortedRows[sortedRows.count - 1]
-        } else if let lastRow = sortedRows.last {
-            self.lastMessageOnScreen = lastRow
-        }
-    }
-
-    private func loadMore() {
+    func loadMore() {
         if self.loading || self.allLoaded() {
             return
         }
-        self.updateLastVisibleRow()
-        if let messageId = self.messagesModels.first?.id {
+        if let messageId = self.messagesModels.last?.id {
             self.conversationService
                 .loadConversationMessages(conversationId: self.conversation.id,
                                           accountId: self.conversation.accountId,
                                           from: messageId)
             self.loading = true
         }
+    }
+
+    func scrollToTheBottom() {
+        self.scrollToId = self.messagesModels.first?.message.id
     }
 
     // MARK: sequencing
@@ -442,8 +373,8 @@ class MessagesListVM: ObservableObject {
         if self.messagesModels.count == 1 || index == 0 {
             return .singleMessage
         }
-        let nextMessageItem = index + 1 < self.messagesModels.count ? self.messagesModels[index + 1] : nil
-        let previousMessageItem = index - 1 >= 0 ? self.messagesModels[index - 1] : nil
+        let previousMessageItem = index + 1 < self.messagesModels.count ? self.messagesModels[index + 1] : nil
+        let nextMessageItem = index - 1 >= 0 ? self.messagesModels[index - 1] : nil
 
         if nextMessageItem == nil {
             if let previousMessageItem = previousMessageItem {
