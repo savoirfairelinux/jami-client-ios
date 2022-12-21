@@ -20,26 +20,50 @@
 
 import SwiftUI
 
+struct Flipped: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .rotationEffect(.radians(Double.pi))
+            .scaleEffect(x: -1, y: 1, anchor: .center)
+    }
+}
+
+extension View {
+    func flipped() -> some View {
+        modifier(Flipped())
+    }
+}
+
 struct MessagesListView: View {
     @StateObject var list: MessagesListVM
     var body: some View {
         ScrollViewReader { scrollView in
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 LazyVStack {
                     ForEach(list.messagesModels) { message in
                         MessageRowView(messageModel: message, model: message.messageRow)
                             .onAppear { self.list.messagesAddedToScreen(messageId: message.id) }
                             .onDisappear { self.list.messagesremovedFromScreen(messageId: message.id) }
                     }
+                    .flipped()
+                    Text("")
+                        .onAppear(perform: {
+                            DispatchQueue.global(qos: .background)
+                                .asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 10)) {
+                                    self.list.loadMore()
+                                }
+                        })
                 }
                 .listRowBackground(Color.clear)
-                .onReceive(list.$needScroll, perform: { (updated) in
-                    if updated {
-                        scrollView.scrollTo(list.lastMessageOnScreen)
-                        list.needScroll = false
+                .onReceive(list.$scrollToId, perform: { (scrollToId) in
+                    guard scrollToId != nil else { return }
+                    scrollView.scrollTo(scrollToId)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        list.scrollToId = nil
                     }
                 })
             }
         }
+        .flipped()
     }
 }
