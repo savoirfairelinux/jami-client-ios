@@ -125,8 +125,8 @@ struct MessageRowView: View {
         }.onAppear(perform: {
             model.fetchLastRead()
         })
-        .padding(.top, -3)
-        .padding(.bottom, -3)
+        .padding(.top, 1)
+        .padding(.bottom, 1)
         .padding(.leading, 15)
         .padding(.trailing, 15)
     }
