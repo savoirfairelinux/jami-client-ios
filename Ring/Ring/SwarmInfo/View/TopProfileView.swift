@@ -34,6 +34,8 @@ public struct TopProfileView: View {
     @SwiftUI.State private var showingType: PhotoSheetType?
     @SwiftUI.State private var image: UIImage?
     @SwiftUI.State private var offset: CGFloat = .zero
+    @SwiftUI.State private var topViewHeight: CGFloat = 200
+    @SwiftUI.State private var minimizedTopView: Bool = false // for lanscape for iphone
     var swarmViews: [SwarmSettingView] {
         if viewmodel.conversation.value.isCoredialog() {
             return [.about]
@@ -44,115 +46,98 @@ public struct TopProfileView: View {
 
     public var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            ScrollView {
-                ZStack {
-                    VStack {
-                        VStack {
-                            HStack {
-                                Spacer()
-                                    .frame(height: 20)
-                            }
-                            Button {
-                                if viewmodel.isAdmin {
-                                    showingOptions = true
-                                }
-                            } label: {
-                                Image(uiImage: viewmodel.finalAvatar)
-                                    .renderingMode(.original)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: viewmodel.swarmInfo.avatarHeight, height: viewmodel.swarmInfo.avatarHeight, alignment: .center)
-                                    .clipShape(Circle())
-                            }
-                            .padding(.vertical)
-                            .actionSheet(isPresented: $showingOptions) {
-                                ActionSheet(
-                                    title: Text(""),
-                                    buttons: [
-                                        .default(Text(L10n.Alerts.profileTakePhoto)) {
-                                            showingType = .picture
-                                        },
-                                        .default(Text(L10n.Alerts.profileUploadPhoto)) {
-                                            showingType = .gallery
-                                        },
-                                        .cancel()
-                                    ]
-                                )
-                            }
-                            .sheet(item: $showingType) { type in
-                                if type == .gallery {
-                                    ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
-                                } else {
-                                    ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
-                                }
-                            }
-                            .onChange(of: image) { _ in
-                                viewmodel.updateSwarmAvatar(image: image)
-                            }
-                            if viewmodel.isAdmin {
-                                titleTextField
-                            } else {
-                                titleLabel
-                            }
-                            Group {
-                                if viewmodel.isAdmin {
-                                    descriptionTextField
-                                } else {
-                                    descriptionLabel
-                                }
-                            }
-                        }
-                        .padding([.vertical, .horizontal], 30)
-                        .background(Color(hex: viewmodel.finalColor))
-                        .onTapGesture {
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        }
-                        Picker("", selection: $selectedView) {
-                            ForEach(swarmViews, id: \.self) {
-                                switch $0 {
-                                case .about:
-                                    Text(L10n.Swarm.about)
-                                case .memberList:
-                                    Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
-                                }
-                            }
-                        }
-                        .onChange(of: selectedView, perform: { _ in
-                            viewmodel.showColorSheet = false
-                        })
-                        .pickerStyle(.segmented)
-                        .padding(.all, 20)
-
-                        switch selectedView {
-                        case .about:
-                            SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
-                        case .memberList:
-                            MemberList(viewmodel: viewmodel)
-                        }
-                    }
-                    .background(Color(UIColor.systemBackground))
-                    GeometryReader { proxy in
-                        let offset = proxy.frame(in: .named("scroll")).minY
-                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
-                    }
-                }
-            }
-            .coordinateSpace(name: "scroll")
-            .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-                if let value = value {
-                    offset = value
-                }
-            }
-            .background(
-                VStack(spacing: 0) {
+            VStack {
+                if minimizedTopView {
                     Color(hex: viewmodel.finalColor)
-                        .frame(
-                            height: max(offset + (UIScreen.main.bounds.height / 4), 0),
-                            alignment: .top)
-                    Color(UIColor.systemBackground)
+                        .frame(height: 50)
+                        .ignoresSafeArea(edges: [.top, .leading, .trailing])
+                } else {
+                    VStack {
+                        HStack {
+                            Spacer()
+                                .frame(height: 20)
+                        }
+                        Button {
+                            if viewmodel.isAdmin {
+                                showingOptions = true
+                            }
+                        } label: {
+                            Image(uiImage: viewmodel.finalAvatar)
+                                .renderingMode(.original)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: viewmodel.swarmInfo.avatarHeight, height: viewmodel.swarmInfo.avatarHeight, alignment: .center)
+                                .clipShape(Circle())
+                        }
+                        .padding(.vertical)
+                        .actionSheet(isPresented: $showingOptions) {
+                            ActionSheet(
+                                title: Text(""),
+                                buttons: [
+                                    .default(Text(L10n.Alerts.profileTakePhoto)) {
+                                        showingType = .picture
+                                    },
+                                    .default(Text(L10n.Alerts.profileUploadPhoto)) {
+                                        showingType = .gallery
+                                    },
+                                    .cancel()
+                                ]
+                            )
+                        }
+                        .sheet(item: $showingType) { type in
+                            if type == .gallery {
+                                ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
+                            } else {
+                                ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
+                            }
+                        }
+                        .onChange(of: image) { _ in
+                            viewmodel.updateSwarmAvatar(image: image)
+                        }
+                        if viewmodel.isAdmin {
+                            titleTextField
+                        } else {
+                            titleLabel
+                        }
+                        Group {
+                            if viewmodel.isAdmin {
+                                descriptionTextField
+                            } else {
+                                descriptionLabel
+                            }
+                        }
+                    }
+                    .frame(height: topViewHeight)
+                    .padding([.vertical, .horizontal], 30)
+                    .background(Color(hex: viewmodel.finalColor))
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+                    .ignoresSafeArea(edges: [.top, .leading, .trailing])
                 }
-                .ignoresSafeArea()
-            )
+                Picker("", selection: $selectedView) {
+                    ForEach(swarmViews, id: \.self) {
+                        switch $0 {
+                        case .about:
+                            Text(L10n.Swarm.about)
+                        case .memberList:
+                            Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
+                        }
+                    }
+                }
+                .onChange(of: selectedView, perform: { _ in
+                    viewmodel.showColorSheet = false
+                })
+                .pickerStyle(.segmented)
+                .padding(.all, 20)
+
+                switch selectedView {
+                case .about:
+                    SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
+                case .memberList:
+                    MemberList(viewmodel: viewmodel)
+                }
+            }
             .onLoad {
                 descriptionTextFieldInput = viewmodel.swarmInfo.description.value
                 titleTextFieldInput = viewmodel.finalTitle
@@ -179,10 +164,21 @@ public struct TopProfileView: View {
                             viewmodel.showColorSheet = false
                             viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
                         }
+                        .ignoresSafeArea()
                 }
             }
         }
-        .ignoresSafeArea(edges: [.top, .leading, .trailing])
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            minimizedTopView = shouldMinimizeTop()
+        }
+        .onAppear(perform: {
+            minimizedTopView = shouldMinimizeTop()
+        })
+        .ignoresSafeArea(edges: [.top])
+    }
+
+    func shouldMinimizeTop() -> Bool {
+        return UIDevice.current.orientation.isLandscape && UIDevice.current.userInterfaceIdiom == .phone
     }
 }
 
@@ -220,7 +216,6 @@ private extension TopProfileView {
             .accentColor(lightOrDarkColor)
             .font(Font.title3.weight(.semibold))
             .multilineTextAlignment(.center)
-            .padding()
     }
 
     var descriptionLabel: some View {
