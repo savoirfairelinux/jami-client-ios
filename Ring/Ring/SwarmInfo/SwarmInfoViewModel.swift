@@ -63,6 +63,7 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
                 .subscribe(onNext: { [weak self] newValue in
                     DispatchQueue.main.async {
                         self?.finalColor = newValue
+                        print("Check Final Color --->\(newValue)")
                         self?.navBarColor.accept(newValue)
                     }
                 })
@@ -173,6 +174,16 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
             }
         }
         selections.removeAll()
+    }
+    func removeMember(indexOffset: IndexSet) {
+        let idDelete = indexOffset.map { swarmInfo.participants.value[$0].jamiId }
+        if let conversationId = conversation?.value.id,
+           let accountId = conversation?.value.accountId {
+            _ = idDelete.compactMap { memberID in
+                print(memberID)
+                conversationService.removeConversationMember(accountId: accountId, conversationId: conversationId, memberId: memberID)
+            }
+        }
     }
 
     func leaveSwarm() {
