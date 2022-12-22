@@ -21,16 +21,35 @@ import SwiftUI
 struct MemberList: View {
 
     @StateObject var viewmodel: SwarmInfoViewModel
+    @SwiftUI.State private var editMode = EditMode.inactive
 
     var body: some View {
-        ScrollView(.vertical, showsIndicators: true) {
-            VStack(alignment: .leading, spacing: 20) {
-                ForEach(viewmodel.swarmInfo.participants.value, id: \.self) {
-                    MemberItem(image: $0.avatar.value, name: $0.name.value.isEmpty ? $0.jamiId : $0.name.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
-                }
+        List {
+            ForEach(viewmodel.swarmInfo.participants.value, id: \.self) {
+                MemberItem(image: $0.avatar.value, name: $0.name.value.isEmpty ? $0.jamiId : $0.name.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
+                    .deleteDisabled($0.role == .admin)
             }
-            .padding(.bottom, 20)
+            .onDelete(perform: viewmodel.isAdmin ? delete : nil)
+            if #available(iOS 15.0, *) {
+                Spacer()
+                    .frame(height: 60)
+                    .listRowSeparator(.hidden)
+            } else {
+                Spacer()
+                    .frame(height: 60)
+            }
         }
+        .environment(\.editMode, $editMode)
+        .onChange(of: viewmodel.swarmInfo.participants.value) { _ in
+            if editMode == .active {
+                editMode = .inactive
+            }
+        }
+        .listStyle(PlainListStyle())
+    }
+
+    func delete(at indexSet: IndexSet) {
+        viewmodel.removeMember(indexOffset: indexSet)
     }
 }
 
@@ -60,7 +79,6 @@ struct MemberItem: View {
                     .frame(width: nil, height: nil, alignment: .trailing)
             }
         }
-        .padding(.horizontal, 20)
         .opacity(isInvited ? 0.5 : 1)
     }
 }
