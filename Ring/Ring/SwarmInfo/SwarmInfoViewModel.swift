@@ -115,6 +115,16 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
             self.finalAvatar = image
         }
     }
+    func removeMember(indexOffset: IndexSet) {
+        let idDelete = indexOffset.map { swarmInfo.participants.value[$0].jamiId }
+        if let conversationId = conversation?.value.id,
+           let accountId = conversation?.value.accountId {
+            _ = idDelete.compactMap { memberID in
+                print(memberID)
+                conversationService.removeConversationMember(accountId: accountId, conversationId: conversationId, memberId: memberID)
+            }
+        }
+    }
 
     func leaveSwarm() {
 
