@@ -42,7 +42,7 @@
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact...";
 "swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
+"swarmcreation.addADescription" = "توضیحی اضافه کنید";
 // Swarm
 "swarm.ignoreSwarm" = "Ignore the swarm";
 "swarm.leaveConversation" = "Leave the conversation";

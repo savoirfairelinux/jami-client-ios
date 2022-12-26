@@ -40,20 +40,20 @@
 "scan.search" = "正在搜尋……";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
+"swarmcreation.searchBar" = "搜索联系人";
+"swarmcreation.createTheSwarm" = "创建群聊";
 "swarmcreation.addADescription" = "添加描述";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.ignoreSwarm" = "忽略群聊";
+"swarm.leaveConversation" = "离开该会话";
 "swarm.chooseColor" = "选择一个颜色";
-"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.typeOfSwarm" = "群聊类型";
 "swarm.identifier" = "識別碼";
 "swarm.about" = "關於";
 "swarm.members" = "成員";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "添加描述";
 "swarm.oneToOne" = "私人 swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "仅可管理员邀请";
 "swarm.invitesOnly" = "Private group swarm";
 "swarm.publicChat" = "Public group swarm";
 "swarm.others" = "Others";
@@ -355,7 +355,7 @@
 "generatedMessage.contactAdded" = "You received inviation";
 "generatedMessage.swarmCreated" = "已建立 Swarm";
 "generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.invitationAccepted" = "加入该对话";
 "generatedMessage.youJoined" = "You joined the conversation";
 "generatedMessage.contactBanned" = "was kicked";
 "generatedMessage.contactReAdded" = "was re-added";
