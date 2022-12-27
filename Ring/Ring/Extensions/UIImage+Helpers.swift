@@ -24,6 +24,7 @@
 import Foundation
 import UIKit
 import CoreImage
+import SwiftUI
 
 // swiftlint:disable identifier_name
 
@@ -370,5 +371,33 @@ extension UIImage {
         ctx.draw(image, in: rect)
 
         return UIGraphicsGetImageFromCurrentImageContext() ?? self
+    }
+
+    class func makeSnapshot(from view: UIView) -> UIImage? {
+        let currentSnapshot: UIImage?
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, UIScreen.main.scale)
+        if let currentGraphicsContext = UIGraphicsGetCurrentContext() {
+            view.layer.render(in: currentGraphicsContext)
+            currentSnapshot = UIGraphicsGetImageFromCurrentImageContext()
+        } else {
+            currentSnapshot = nil
+        }
+        UIGraphicsEndImageContext()
+        return currentSnapshot
+    }
+
+    func fillPartOfImage(frame: CGRect, with color: UIColor) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.main.scale)
+        if let context = UIGraphicsGetCurrentContext() {
+            let rect = CGRect(origin: .zero, size: size)
+            // context.setFillColor(color.cgColor)
+            self.draw(in: rect)
+            context.setBlendMode(CGBlendMode.normal)
+            context.setFillColor(color.cgColor)
+            context.fill(frame)
+        }
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result
     }
 }

@@ -23,6 +23,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 enum MessageInfo: State {
     case updateAvatar(jamiId: String)
@@ -59,6 +60,8 @@ class MessagesListVM: ObservableObject {
     lazy var contextMenuState: Observable<State> = {
         return self.contextStateSubject.asObservable()
     }()
+
+    var hideNavigationBar = BehaviorRelay(value: false)
     let disposeBag = DisposeBag()
     var messagesDisposeBag = DisposeBag()
 
