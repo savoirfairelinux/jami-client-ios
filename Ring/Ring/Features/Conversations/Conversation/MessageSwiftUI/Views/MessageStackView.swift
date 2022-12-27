@@ -25,11 +25,9 @@ struct MessageStackView: View {
     var model: MessageStackVM {
         return messageModel.stackViewModel
     }
+    var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
     var body: some View {
         VStack(alignment: model.horizontalAllignment) {
-            //            if messageModel.replyTo != nil {
-            //                ReplyHistory(messageModel: messageModel)
-            //            }
             if model.shouldDisplayName {
                 Text(model.username)
                     .font(.footnote)
@@ -38,7 +36,7 @@ struct MessageStackView: View {
                 Spacer()
                     .frame(height: 4)
             }
-            MessageContentView(messageModel: messageModel, model: messageModel.messageContent)
+            MessageContentView(messageModel: messageModel, model: messageModel.messageContent, onLongPress: onLongPress)
                 .frame(maxWidth: .infinity, alignment: model.alignment)
         }
     }

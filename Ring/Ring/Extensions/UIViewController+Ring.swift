@@ -141,11 +141,11 @@ extension UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = textAttributes
         self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
         self.navigationController?.navigationBar.barTintColor = UIColor.systemBackground
-#if swift(>=5.7)
+        #if swift(>=5.7)
         if #available(iOS 16.0, *) {
             navigationItem.preferredSearchBarPlacement = .stacked
         }
-#endif
+        #endif
     }
 
     func configureWalkrhroughNavigationBar() {
@@ -174,5 +174,13 @@ extension UIViewController {
         willMove(toParent: nil)
         view.removeFromSuperview()
         removeFromParent()
+    }
+}
+
+extension UINavigationController {
+    public static func navBarHeight() -> CGFloat {
+        let nVc = UINavigationController(rootViewController: UIViewController(nibName: nil, bundle: nil))
+        let navBarHeight = nVc.navigationBar.frame.size.height
+        return navBarHeight
     }
 }
