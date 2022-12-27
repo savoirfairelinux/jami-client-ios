@@ -323,6 +323,8 @@
 		269DA09928E23D37007D51D6 /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09828E23D37007D51D6 /* MessageRowView.swift */; };
 		269DA09D28E23F57007D51D6 /* MessagesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09C28E23F57007D51D6 /* MessagesListView.swift */; };
 		269DA09F28E244F1007D51D6 /* MessagesListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09E28E244F1007D51D6 /* MessagesListVM.swift */; };
+		26A072F92959F461006D8163 /* ContextMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072F82959F461006D8163 /* ContextMenuView.swift */; };
+		26A072FD295A7145006D8163 /* ContextMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A072FC295A7145006D8163 /* ContextMenuVM.swift */; };
 		26A5CE3B26BD00E700E147EA /* Array+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5CE3826BD00E700E147EA /* Array+Helper.swift */; };
 		26A88C07266FFFC800888EED /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A88C06266FFFC800888EED /* NotificationService.swift */; };
 		26A88C0B266FFFC800888EED /* jamiNotificationExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -860,6 +862,8 @@
 		269DA09828E23D37007D51D6 /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
 		269DA09C28E23F57007D51D6 /* MessagesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListView.swift; sourceTree = "<group>"; };
 		269DA09E28E244F1007D51D6 /* MessagesListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListVM.swift; sourceTree = "<group>"; };
+		26A072F82959F461006D8163 /* ContextMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuView.swift; sourceTree = "<group>"; };
+		26A072FC295A7145006D8163 /* ContextMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuVM.swift; sourceTree = "<group>"; };
 		26A5CE3826BD00E700E147EA /* Array+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Helper.swift"; sourceTree = "<group>"; };
 		26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = jamiNotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		26A88C06266FFFC800888EED /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -2170,6 +2174,7 @@
 				265DFB08292FD25000834B97 /* DefaultTransferView.swift */,
 				265DFB0A292FD41100834B97 /* PlayerSwiftUI.swift */,
 				265DFB1029302A8700834B97 /* ContactMessageView.swift */,
+				26A072F82959F461006D8163 /* ContextMenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2186,6 +2191,7 @@
 				265DFB06292FBC4200834B97 /* TransferHelper.swift */,
 				26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */,
 				2679E42B29328352007E4639 /* ConcurrentDictionary.swift */,
+				26A072FC295A7145006D8163 /* ContextMenuVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2733,6 +2739,7 @@
 				26A5CE3B26BD00E700E147EA /* Array+Helper.swift in Sources */,
 				0ECB4E2822B2D4840097CD7B /* CallsProviderDelegate.swift in Sources */,
 				26DA813224B641A5006C6E23 /* ProfilesAdapter.mm in Sources */,
+				26A072FD295A7145006D8163 /* ContextMenuVM.swift in Sources */,
 				1A2D18C71F29180700B2C785 /* DeviceModel.swift in Sources */,
 				1A20418F1F1EAC0E00C08435 /* Coordinator.swift in Sources */,
 				0E49097C1FEACA4B005CAA50 /* CallViewModel.swift in Sources */,
@@ -2793,6 +2800,7 @@
 				0EDE34C71F868E1200FFA15C /* EditProfileViewController.swift in Sources */,
 				1DE93596291B119900E426CF /* SwarmCreationViewModel.swift in Sources */,
 				2679E42C29328352007E4639 /* ConcurrentDictionary.swift in Sources */,
+				26A072F92959F461006D8163 /* ContextMenuView.swift in Sources */,
 				62A88D3B1F6C3ACC00F8AB18 /* PresenceService.swift in Sources */,
 				0E0FF1B51FC3947B003898C2 /* DBManager.swift in Sources */,
 				1A2D18E51F29197100B2C785 /* MessageAccessoryView.swift in Sources */,
