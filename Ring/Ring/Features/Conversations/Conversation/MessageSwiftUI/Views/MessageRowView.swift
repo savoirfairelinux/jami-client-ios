@@ -66,6 +66,7 @@ extension View {
 
 struct MessageRowView: View {
     let messageModel: MessageContainerModel
+    var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
     @StateObject var model: MessageRowVM
     var body: some View {
         VStack(alignment: .leading) {
@@ -95,12 +96,12 @@ struct MessageRowView: View {
                     }
                     Spacer()
                         .frame(width: 10)
-                    MessageStackView(messageModel: messageModel)
+                    MessageStackView(messageModel: messageModel, onLongPress: onLongPress)
                 }.padding(.trailing, 50)
             } else {
                 HStack(alignment: .bottom) {
                     Spacer()
-                    MessageStackView(messageModel: messageModel)
+                    MessageStackView(messageModel: messageModel, onLongPress: onLongPress)
                 }.padding(.leading, 50)
             }
             if let readImages = model.read, !readImages.isEmpty {
