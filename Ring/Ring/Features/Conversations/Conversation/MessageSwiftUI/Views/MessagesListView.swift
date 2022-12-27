@@ -19,6 +19,7 @@
  */
 
 import SwiftUI
+import UIKit
 
 struct Flipped: ViewModifier {
     func body(content: Content) -> some View {
@@ -46,6 +47,15 @@ struct MessagesListView: View {
     @StateObject var model: MessagesListVM
     @SwiftUI.State var showScrollToLatestButton = false
     let scrollReserved = UIScreen.main.bounds.height * 1.5
+
+    // context menu
+    @SwiftUI.State private var showContextMenu = false
+    @SwiftUI.State private var currentSnapshot: UIImage?
+    @SwiftUI.State private var presentingMessage: MessageContentView?
+    @SwiftUI.State private var messageFrame: CGRect?
+    var contextMenuModel = ContextMenuVM()
+    @SwiftUI.State private var screenHeight: CGFloat = 0
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             ScrollViewReader { scrollView in
@@ -61,7 +71,18 @@ struct MessagesListView: View {
                             .id("lastMessage")
                         // messages
                         ForEach(model.messagesModels) { message in
-                            MessageRowView(messageModel: message, model: message.messageRow)
+                            MessageRowView(messageModel: message, onLongPress: {(frame, message) in
+                                if showContextMenu == true {
+                                    return
+                                }
+                                model.hideNavigationBar.accept(true)
+                                contextMenuModel.presentingMessage = message
+                                contextMenuModel.messageFrame = frame
+                                if let topController = topVC() {
+                                    contextMenuModel.currentSnapshot = UIImage.makeSnapshot(from: topController.view)
+                                }
+                                showContextMenu = true
+                            }, model: message.messageRow)
                         }
                         .flipped()
                         // load more
@@ -97,6 +118,25 @@ struct MessagesListView: View {
                 createScrollToBottmView()
             }
         }
+        .overlay(showContextMenu && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
+        // hide navigation bar when presenting context menu
+        .onChange(of: showContextMenu) { newValue in
+            model.hideNavigationBar.accept(newValue)
+        }
+        // hide context menu overly when device is rotated
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
+                screenHeight = UIScreen.main.bounds.size.height
+                showContextMenu = false
+            }
+        }
+        .onAppear(perform: {
+            screenHeight = UIScreen.main.bounds.size.height
+        })
+    }
+
+    func makeOverlay() -> some View {
+        return ContextMenuView(model: contextMenuModel, showContextMenu: $showContextMenu)
     }
 
     func createScrollToBottmView() -> some View {
@@ -132,5 +172,32 @@ struct MessagesListView: View {
         .padding(.leading, 15.0)
         .padding(.top, 0.0)
         .padding(.bottom, 5.0)
+        .ignoresSafeArea(.container, edges: [])
     }
+}
+
+func topVC() -> UIViewController? {
+    let keyWindow = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+
+    if var topController = keyWindow?.rootViewController {
+        while let presentedViewController = topController.presentedViewController {
+            topController = presentedViewController
+        }
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let children = topController.children
+            if !children.isEmpty {
+                let splitVC = children[0]
+                let sideVCs = splitVC.children
+                if sideVCs.count > 1 {
+                    topController = sideVCs[1]
+                    return topController
+                }
+            }
+        }
+
+        return topController
+    }
+
+    return nil
 }

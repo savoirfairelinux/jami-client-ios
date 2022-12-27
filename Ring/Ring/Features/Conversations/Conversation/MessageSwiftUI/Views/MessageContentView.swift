@@ -44,6 +44,9 @@ struct URLPreview: UIViewRepresentable {
 struct MessageContentView: View {
     let messageModel: MessageContainerModel
     @StateObject var model: MessageContentVM
+    @SwiftUI.State private var presentMenu = false
+    @SwiftUI.State private var frame: CGRect = .zero
+    var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
     var body: some View {
         VStack(alignment: .leading) {
             if model.type == .call {
@@ -95,17 +98,30 @@ struct MessageContentView: View {
                         }
                 }
             }
-        }.contextMenu {
-            ForEach(model.menuItems) { item in
-                Button {
-                    model.contextMenuSelect(item: item)
-                } label: {
-                    Label(item.toString(), systemImage: item.image())
-                }
-            }
         }
+        .onLongPressGesture(minimumDuration: 0.5, perform: {
+            if model.menuItems.isEmpty { return }
+            presentMenu = true
+        })
+        .background(
+            GeometryReader { proxy in
+                Rectangle().fill(Color.clear)
+                    .onChange(of: presentMenu, perform: { _ in
+                        DispatchQueue.main.async {
+                            let frame = proxy.frame(in: .global)
+                            presentMenu = false
+                            onLongPress(frame, self)
+                        }
+                    })
+            }
+        )
         .onAppear {
             self.model.onAppear()
         }
+    }
+
+    private var contentWidth: CGFloat {
+        let padding: CGFloat = 20
+        return UIScreen.main.bounds.size.width - padding * 2
     }
 }

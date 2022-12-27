@@ -100,6 +100,24 @@ class ConversationViewController: UIViewController,
         let swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
                                           conversation: self.viewModel.conversation.value,
                                           transferHelper: transferHelper)
+        swiftUIModel.hideNavigationBar
+            .subscribe(onNext: { [weak self] (hide) in
+                guard let self = self else { return }
+                if self.navigationItem.rightBarButtonItems?.isEmpty == hide { return }
+                if hide {
+                    self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+                    self.navigationItem.titleView = UIView()
+                    self.navigationItem.rightBarButtonItems = []
+                    self.navigationItem.setHidesBackButton(true, animated: false)
+                } else {
+                    self.configureRingNavigationBar()
+                    self.setRightNavigationButtons()
+                    self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
+                                       displayName: self.viewModel.displayName.value,
+                                       username: self.viewModel.userName.value)
+                }
+            })
+            .disposed(by: self.disposeBag)
         swiftUIModel.contextMenuState
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ContextMenu else { return }
@@ -448,6 +466,7 @@ class ConversationViewController: UIViewController,
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back_button")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back_button")
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
+        self.navigationItem.setHidesBackButton(false, animated: false)
 
         let titleView: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: totalHeight))
 
