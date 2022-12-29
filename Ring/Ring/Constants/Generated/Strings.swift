@@ -325,13 +325,13 @@ internal enum L10n {
     internal static let explanationSendingLocationTo = L10n.tr("Localizable", "conversation.explanationSendingLocationTo", fallback: "You are currently sharing your location with ")
     /// Write message to 
     internal static let messagePlaceholder = L10n.tr("Localizable", "conversation.messagePlaceholder", fallback: "Write message to ")
-    /// %s is not in your contact list.
-    internal static func notContact(_ p1: UnsafePointer<CChar>) -> String {
-      return L10n.tr("Localizable", "conversation.notContact", p1, fallback: "%s is not in your contact list.")
+    /// %@ is not in your contact list.
+    internal static func notContact(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "conversation.notContact", String(describing: p1), fallback: "%@ is not in your contact list.")
     }
-    /// %s sent you a request for a conversation.
-    internal static func receivedRequest(_ p1: UnsafePointer<CChar>) -> String {
-      return L10n.tr("Localizable", "conversation.receivedRequest", p1, fallback: "%s sent you a request for a conversation.")
+    /// %@ sent you a request for a conversation.
+    internal static func receivedRequest(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "conversation.receivedRequest", String(describing: p1), fallback: "%@ sent you a request for a conversation.")
     }
     /// Hello,
     /// Would you like to join the conversation?
@@ -340,9 +340,9 @@ internal enum L10n {
     internal static let sendRequest = L10n.tr("Localizable", "conversation.sendRequest", fallback: "Send him/her a contact request to be able to exchange together")
     /// Send Contact Request
     internal static let sendRequestTitle = L10n.tr("Localizable", "conversation.sendRequestTitle", fallback: "Send Contact Request")
-    /// We are waiting for %s connects to synchronize the conversation.
-    internal static func synchronizationMessage(_ p1: UnsafePointer<CChar>) -> String {
-      return L10n.tr("Localizable", "conversation.synchronizationMessage", p1, fallback: "We are waiting for %s connects to synchronize the conversation.")
+    /// We are waiting for %@ connects to synchronize the conversation.
+    internal static func synchronizationMessage(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "conversation.synchronizationMessage", String(describing: p1), fallback: "We are waiting for %@ connects to synchronize the conversation.")
     }
     /// You have accepted the conversation request.
     internal static let synchronizationTitle = L10n.tr("Localizable", "conversation.synchronizationTitle", fallback: "You have accepted the conversation request.")
