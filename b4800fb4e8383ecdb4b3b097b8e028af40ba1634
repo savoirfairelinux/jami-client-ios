@@ -16,6 +16,24 @@
       "message": "I think when TURN is disabled all turn options should be hidden",
       "revId": "b4800fb4e8383ecdb4b3b097b8e028af40ba1634",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc79309a_b903e9bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2022-12-30T14:45:02Z",
+      "side": 1,
+      "message": "there is a bug in this part they are getting hodden but the bug is view is not updating you have to reopen it in order to update the view",
+      "parentUuid": "1d9f5e20_70da2954",
+      "revId": "b4800fb4e8383ecdb4b3b097b8e028af40ba1634",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
