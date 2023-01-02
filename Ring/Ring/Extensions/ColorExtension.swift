@@ -31,6 +31,51 @@ extension Color: RawRepresentable {
             self = .black
         }
     }
+    init?(hex: String) {
+        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
+        var rgb: UInt64 = 0
+        var red: CGFloat = 0.0
+        var green: CGFloat = 0.0
+        var blue: CGFloat = 0.0
+        var alpha: CGFloat = 1.0
+
+        let length = hexSanitized.count
+
+        guard Scanner(string: hexSanitized).scanHexInt64(&rgb) else { return nil }
+
+        if length == 6 {
+            red = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
+            green = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
+            blue = CGFloat(rgb & 0x0000FF) / 255.0
+
+        } else if length == 8 {
+            red = CGFloat((rgb & 0xFF000000) >> 24) / 255.0
+            green = CGFloat((rgb & 0x00FF0000) >> 16) / 255.0
+            blue = CGFloat((rgb & 0x0000FF00) >> 8) / 255.0
+            alpha = CGFloat(rgb & 0x000000FF) / 255.0
+
+        } else {
+            return nil
+        }
+
+        self.init(red: red, green: green, blue: blue, opacity: alpha)
+    }
+    public func isLight(threshold: Float = 0.5) -> Bool? {
+        let originalCGColor = self.cgColor
+        guard let originalCGColor = originalCGColor else { return nil }
+
+        let RGBCGColor = originalCGColor.converted(to: CGColorSpaceCreateDeviceRGB(), intent: .defaultIntent, options: nil)
+        guard let components = RGBCGColor?.components else {
+            return nil
+        }
+        guard components.count >= 3 else {
+            return nil
+        }
+
+        let brightness = Float(((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000)
+        return (brightness > threshold)
+    }
 
     public var rawValue: String {
         do {

@@ -30,10 +30,22 @@ class SwarmInfoViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = .white
         contentView = UIHostingController(rootView: TopProfileView(viewmodel: self.viewModel))
         addChild(contentView)
         view.addSubview(contentView.view)
         setupConstraints()
+        viewModel.colorPickerStatus
+            .subscribe(onNext: {[weak self] statusValue in
+                guard let self = self else { return }
+                self.navigationItem.setHidesBackButton(statusValue, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
     }
 
     func setupConstraints() {
