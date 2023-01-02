@@ -2,7 +2,7 @@
  * Copyright (C) 2022 Savoir-faire Linux Inc. *
  *
  * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
- *
+ * Author: Binal Ahiya binal.ahiya@savoirfairelinux.com *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
@@ -20,36 +20,37 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    @SwiftUI.State var viewmodel: SwarmInfoViewModel!
+    @StateObject var viewmodel: SwarmInfoViewModel
     @SwiftUI.State private var ignoreSwarm = true
     @SwiftUI.State private var shouldShowColorPannel = false
-    @AppStorage("SWARM_COLOR") var swarmColor = Color.blue
     var id: String!
     var swarmType: String!
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 20) {
-                //                                HStack {
-                //                                    Toggle(L10n.Swarm.ignoreSwarm, isOn: $ignoreSwarm)
-                //                                        .onChange(of: ignoreSwarm, perform: { value in
-                //                                            print("Value has changed : \(value)")
-                //                                            viewmodel.IgnoreSwarm(isOn: value)
-                //                                        })
-                //                                }
-                //
-                //                                Button(action: {
-                //                                    viewmodel.leaveSwarm()
-                //                                }, label: {
-                //                                    HStack {
-                //                                        Text(L10n.Swarm.leaveConversation)
-                //                                            .multilineTextAlignment(.leading)
-                //                                        Spacer()
-                //                                    }
-                //                                })
-
-                ColorPicker(L10n.Swarm.chooseColor, selection: $swarmColor)
-
+                HStack {
+                    Text(L10n.Swarm.chooseColor)
+                    Spacer()
+                    ZStack {
+                        Circle()
+                            .fill(viewmodel.finalColor.isEmpty ? Color(hex: viewmodel.swarmInfo.defaultColor)! : Color(hex: viewmodel.finalColor)!)
+                            .frame(width: 20, height: 20)
+                            .onTapGesture(perform: {
+                                withAnimation {
+                                    viewmodel.showColorSheet.toggle()
+                                    viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
+                                }
+                            })
+                            .onChange(of: viewmodel.finalColor, perform: { newValue in
+                                viewmodel.updateSwarmColor(selectedColor: newValue)
+                            })
+                            .padding(10)
+                        Circle()
+                            .stroke(viewmodel.finalColor.isEmpty ? Color(hex: viewmodel.swarmInfo.defaultColor)! : Color(hex: viewmodel.finalColor)!, lineWidth: 5)
+                            .frame(width: 30, height: 30)
+                    }
+                }
                 HStack {
                     Text(L10n.Swarm.typeOfSwarm)
                     Spacer()
@@ -68,6 +69,45 @@ struct SettingsView: View {
 
             }
             .padding(.horizontal, 20)
+        }
+    }
+}
+struct CustomColorPicker: View {
+    @Binding var selectedColor: String
+    var body: some View {
+        let colors: [String] = ["#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#00BCD4", "#009688",
+                                "#4CAF50", "#8BC34A", "#9E9E9E", "#CDDC39", "#FFC107", "#FF5722", "#795548", "#607D8B"]
+        GeometryReader { geometry in
+            ScrollView(.horizontal) {
+                HStack(spacing: 10) {
+                    ForEach(colors, id: \.self) { color in
+                        CircleView(colorString: color, selectedColor: $selectedColor)
+                    }
+                }
+                .padding()
+                .frame(minWidth: geometry.size.width, minHeight: geometry.size.height)
+            }
+        }
+    }
+}
+struct CircleView: View {
+    @SwiftUI.State var colorString: String
+    @Binding var selectedColor: String
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(Color(hex: colorString)!)
+                .frame(width: 40, height: 40)
+                .onTapGesture(perform: {
+                    selectedColor = colorString
+                })
+                .padding(5)
+            if selectedColor == colorString {
+                Circle()
+                    .stroke(Color(hex: colorString)!, lineWidth: 5)
+                    .frame(width: 50, height: 50)
+            }
         }
     }
 }
