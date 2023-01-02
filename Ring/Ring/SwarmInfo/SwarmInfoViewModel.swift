@@ -42,14 +42,25 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
             self.swarmInfo.finalAvatar
                 .subscribe(onNext: { [weak self] newValue in
                     DispatchQueue.main.async {
-                        self?.finalAvatar = newValue
+                        guard let self = self else { return }
+                        self.finalAvatar = newValue
                     }
                 })
                 .disposed(by: disposeBag)
             self.swarmInfo.finalTitle
                 .subscribe(onNext: { [weak self] newValue in
                     DispatchQueue.main.async {
-                        self?.finalTitle = newValue
+                        guard let self = self else { return }
+                        self.finalTitle = newValue
+                    }
+                })
+                .disposed(by: disposeBag)
+            self.swarmInfo.color
+                .subscribe(onNext: { [weak self] newValue in
+                    DispatchQueue.main.async {
+                        guard let self = self else { return }
+                        self.finalColor = newValue.isEmpty ? self.swarmInfo.defaultColor : newValue
+                        self.navBarColor.accept(newValue)
                     }
                 })
                 .disposed(by: disposeBag)
@@ -86,6 +97,10 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
     private var shouldTriggerDescriptionDidSet: Bool = false
     @Published var finalAvatar: UIImage = UIImage()
     @Published var finalTitle: String = ""
+    @Published var finalColor: String = String()
+    @Published var showColorSheet = false
+    var colorPickerStatus = BehaviorRelay<Bool>(value: false)
+    var navBarColor = BehaviorRelay<String>(value: "")
 
     required init(with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -114,6 +129,18 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
             self.conversationService.updateConversationInfos(accountId: accountId, conversationId: conversationId, infos: conversationInfo)
             self.finalAvatar = image
         }
+    }
+    func updateSwarmColor(selectedColor: String) {
+        if let conversationId = conversation?.value.id,
+           let accountId = conversation?.value.accountId {
+            let prefsInfo = conversationService.getConversationPreferences(accountId: accountId, conversationId: conversationId)
+            guard var prefsInfo = prefsInfo else { return }
+            prefsInfo[ConversationPreferenceAttributes.color.rawValue] = selectedColor
+            self.conversationService.updateConversationPrefs(accountId: accountId, conversationId: conversationId, prefs: prefsInfo)
+        }
+    }
+    func hideShowBackButton(colorPicker: Bool) {
+        colorPickerStatus.accept(colorPicker)
     }
 
     func leaveSwarm() {
