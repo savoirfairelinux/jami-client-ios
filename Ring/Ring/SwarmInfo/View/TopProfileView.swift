@@ -33,7 +33,7 @@ public struct TopProfileView: View {
     @SwiftUI.State private var showingOptions = false
     @SwiftUI.State private var showingType: PhotoSheetType?
     @SwiftUI.State private var image: UIImage?
-    @AppStorage("SWARM_COLOR") var swarmColor = Color.blue
+    @SwiftUI.State private var offset: CGFloat = .zero
     var swarmViews: [SwarmSettingView] {
         if viewmodel.swarmInfo.participants.value.count == 2 {
             return [.about]
@@ -43,89 +43,116 @@ public struct TopProfileView: View {
     }
 
     public var body: some View {
-        ScrollView {
-            VStack {
-                VStack {
-                    HStack {
-                        Spacer()
-                    }
-                    Button {
-                        if viewmodel.isAdmin {
-                            showingOptions = true
+        ZStack(alignment: .top) {
+            ScrollView {
+                ZStack {
+                    VStack {
+                        VStack {
+                            HStack {
+                                Spacer()
+                                    .frame(height: 20)
+                            }
+                            Button {
+                                if viewmodel.isAdmin {
+                                    showingOptions = true
+                                }
+                            } label: {
+                                Image(uiImage: viewmodel.finalAvatar)
+                                    .renderingMode(.original)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: viewmodel.swarmInfo.avatarHeight, height: viewmodel.swarmInfo.avatarHeight, alignment: .center)
+                                    .clipShape(Circle())
+                            }
+                            .padding(.vertical)
+                            .actionSheet(isPresented: $showingOptions) {
+                                ActionSheet(
+                                    title: Text(""),
+                                    buttons: [
+                                        .default(Text(L10n.Alerts.profileTakePhoto)) {
+                                            showingType = .picture
+                                        },
+                                        .default(Text(L10n.Alerts.profileUploadPhoto)) {
+                                            showingType = .gallery
+                                        },
+                                        .cancel()
+                                    ]
+                                )
+                            }
+                            .sheet(item: $showingType) { type in
+                                if type == .gallery {
+                                    ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
+                                } else {
+                                    ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
+                                }
+                            }
+                            .onChange(of: image) { _ in
+                                viewmodel.updateSwarmAvatar(image: image)
+                            }
+                            if viewmodel.isAdmin {
+                                titleTextField
+                            } else {
+                                titleLabel
+                            }
+                            Group {
+                                if viewmodel.isAdmin {
+                                    descriptionTextField
+                                } else {
+                                    descriptionLabel
+                                }
+                            }
                         }
-                    } label: {
-                        Image(uiImage: viewmodel.finalAvatar)
-                            .renderingMode(.original)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: viewmodel.swarmInfo.avatarHeight, height: viewmodel.swarmInfo.avatarHeight, alignment: .center)
-                            .clipShape(Circle())
-                    }
-                    .padding(.vertical)
-                    .actionSheet(isPresented: $showingOptions) {
-                        ActionSheet(
-                            title: Text(""),
-                            buttons: [
-                                .default(Text(L10n.Alerts.profileTakePhoto)) {
-                                    showingType = .picture
-                                },
-                                .default(Text(L10n.Alerts.profileUploadPhoto)) {
-                                    showingType = .gallery
-                                },
-                                .cancel()
-                            ]
-                        )
-                    }
-                    .sheet(item: $showingType) { type in
-                        if type == .gallery {
-                            ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $image)
-                        } else {
-                            ImagePicker(sourceType: .camera, showingType: $showingType, image: $image)
+                        .padding([.vertical, .horizontal], 30)
+                        .background(Color(hex: viewmodel.finalColor))
+                        .onTapGesture {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         }
-                    }
-                    .onChange(of: image) { _ in
-                        viewmodel.updateSwarmAvatar(image: image)
-                    }
+                        Picker("", selection: $selectedView) {
+                            ForEach(swarmViews, id: \.self) {
+                                switch $0 {
+                                case .about:
+                                    Text(L10n.Swarm.about)
+                                case .memberList:
+                                    Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
+                                }
+                            }
+                        }
+                        .onChange(of: selectedView, perform: { _ in
+                            viewmodel.showColorSheet = false
+                        })
+                        .pickerStyle(.segmented)
+                        .padding(.all, 20)
 
-                    if viewmodel.isAdmin {
-                        titleTextField
-                    } else {
-                        titleLabel
-                    }
-                    Group {
-                        if viewmodel.isAdmin {
-                            descriptionTextField
-                        } else {
-                            descriptionLabel
-                        }
-                    }
-                }
-                .padding([.vertical, .horizontal], 30)
-                .background(swarmColor)
-                .onTapGesture {
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                }
-
-                Picker("", selection: $selectedView) {
-                    ForEach(swarmViews, id: \.self) {
-                        switch $0 {
+                        switch selectedView {
                         case .about:
-                            Text(L10n.Swarm.about)
+                            SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
                         case .memberList:
-                            Text("\(viewmodel.swarmInfo.participants.value.count) \(L10n.Swarm.members)")
+                            MemberList(members: viewmodel.swarmInfo.participants.value)
                         }
                     }
-                }
-                .pickerStyle(.segmented)
-                .padding(.all, 20)
-
-                switch selectedView {
-                case .about:
-                    SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
-                case .memberList:
-                    MemberList(members: viewmodel.swarmInfo.participants.value)
+                    .background(Color(UIColor.systemBackground))
+                    GeometryReader { proxy in
+                        let offset = proxy.frame(in: .named("scroll")).minY
+                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
+                    }
                 }
             }
+            .coordinateSpace(name: "scroll")
+            .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
+                if let value = value {
+                    offset = value
+                }
+            }
+            .background(
+                VStack(spacing: 0) {
+                    Color(hex: viewmodel.finalColor)
+                        .frame(
+                            height: max(offset + (UIScreen.main.bounds.height / 2), 0),
+                            alignment: .top)
+                    Color(UIColor.systemBackground)
+                }
+                .ignoresSafeArea()
+            )
             .onLoad {
                 descriptionTextFieldInput = viewmodel.swarmInfo.description.value
                 titleTextFieldInput = viewmodel.finalTitle
@@ -133,19 +160,41 @@ public struct TopProfileView: View {
             .onChange(of: viewmodel.finalTitle) { _ in
                 titleTextFieldInput = viewmodel.finalTitle
             }
+            .gesture(
+                DragGesture().onChanged { _ in
+                    viewmodel.showColorSheet = false
+                }
+            )
+        }
+        .ignoresSafeArea(edges: [.top, .leading, .trailing])
+        if viewmodel.showColorSheet {
+            ZStack(alignment: .leading) {
+                CustomColorPicker(selectedColor: $viewmodel.finalColor)
+                    .padding([.top, .bottom], 5)
+                    .frame(height: 70)
+                    .background(Color(UIColor.systemGray4))
+                    .opacity(0.8)
+            }
         }
     }
 }
 
 private extension TopProfileView {
+    var lightOrDarkColor: Color {
+        if viewmodel.finalColor.isEmpty {
+            return Color(UIColor.jamiMain)
+        } else {
+            return Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.5) ?? true ? Color.black : Color.white
+        }
+    }
     var titleLabel: some View {
         Text(viewmodel.finalTitle)
             .font(Font.title3.weight(.semibold))
             .multilineTextAlignment(.center)
             // Text color.
-            .foregroundColor(.white)
+            .foregroundColor(lightOrDarkColor)
             // Cursor color.
-            .accentColor(.white)
+            .accentColor(lightOrDarkColor)
             .padding()
     }
 
@@ -157,9 +206,9 @@ private extension TopProfileView {
                 viewmodel.title = titleTextFieldInput
             })
             // Text color.
-            .foregroundColor(.white)
+            .foregroundColor(lightOrDarkColor)
             // Cursor color.
-            .accentColor(.white)
+            .accentColor(lightOrDarkColor)
             .font(Font.title3.weight(.semibold))
             .multilineTextAlignment(.center)
             .padding()
@@ -170,23 +219,39 @@ private extension TopProfileView {
             .font(.body)
             .multilineTextAlignment(.center)
             // Text color.
-            .foregroundColor(.white)
+            .foregroundColor(lightOrDarkColor)
             // Cursor color.
-            .accentColor(.white)
+            .accentColor(lightOrDarkColor)
     }
 
     var descriptionTextField: some View {
         TextField(
-            L10n.Swarm.addDescription,
+            "",
             text: $descriptionTextFieldInput,
             onCommit: {
                 viewmodel.description = descriptionTextFieldInput
             })
+            .placeholder(when: descriptionTextFieldInput.isEmpty) {
+                Text(L10n.Swarm.addDescription).foregroundColor(.gray)
+            }
             // Cursor color.
-            .accentColor(.white)
+            .accentColor(lightOrDarkColor)
             // Text color.
-            .foregroundColor(.white)
+            .foregroundColor(lightOrDarkColor)
             .font(.body)
             .multilineTextAlignment(.center)
+    }
+}
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .center,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
     }
 }
