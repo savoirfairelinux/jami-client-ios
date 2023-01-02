@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c7510fd_6e33532a",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "unwrap optional values before using",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "621e6fc2_3464d5a8",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "do we need this?",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bc57e56_977fc514",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "maybe newColor or selectedColor for parameter name?",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2143f11_85793456",
+        "filename": "Ring/Ring/SwarmInfo/View/SettingsView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "remove commented code",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8e8d2c9_31d30f76",
+        "filename": "Ring/Ring/SwarmInfo/View/SettingsView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "need to be discussed what to do when no color is selected. Keep current implementation or use default jami color or choose random color like in qt client",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "258e673e_3b2f5e49",
+        "filename": "Ring/Ring/SwarmInfo/View/SettingsView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "new line for a command",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ed8ec32_191b819a",
+        "filename": "Ring/Ring/SwarmInfo/View/SettingsView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "put extension in a new file in extensions group",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7048053e_5146413a",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "do we need drag gesture? Maybe dismiss color picker on tap? Also color picker should be dismissed when open participant list view",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e2bd53e_8ffde28c",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "do we need this ZStack container?",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc9b89df_e75233ca",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "default color for text need to be discussed, depending on what will be implemented when no swarm color is selected",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bb7aeca_53d0ab62",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:15:01Z",
+      "side": 1,
+      "message": "update color for placeholder depending of selected color for swarm conversation(so it visible either selected color lite or dark)",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
