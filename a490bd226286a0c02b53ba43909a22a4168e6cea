@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "944b6a78_ff93190e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/SwarmCreationModel/SwarmCreationUIModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T21:19:19Z",
+      "side": 1,
+      "message": "Does it need to be @Published?",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e4d965b_28f5348e",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T21:19:19Z",
+      "side": 1,
+      "message": "why there are to identical strings?",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c62353_8daa1834",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T21:19:19Z",
+      "side": 1,
+      "message": "maybe couldAdd for property name?",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99305638_b66d137a",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T21:19:19Z",
+      "side": 1,
+      "message": "updateContactList() for name of the function?",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "863482eb_b7a5b1cf",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T21:19:19Z",
+      "side": 1,
+      "message": "we should consider to cancel subscription once contact list is not present anymore",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0dfc92a_13cd8426",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T21:19:19Z",
+      "side": 1,
+      "message": "we should consider to cancel subscription once contact list is not present anymore",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c6d0c01_24353967",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T21:19:19Z",
+      "side": 1,
+      "message": "showAddMember for the property name",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f4206c2_478ea0df",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T21:19:19Z",
+      "side": 1,
+      "message": "we could have swarm private swarm with two participants. Instead of participants count check if is a core dialog",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "262ad692_6f03aa85",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T21:19:19Z",
+      "side": 1,
+      "message": "for this button we should have same style as for \"Create swarm\" on swarm creation view",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e5d3633_4727d3e6",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T21:19:19Z",
+      "side": 1,
+      "message": "text should be translatable",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
