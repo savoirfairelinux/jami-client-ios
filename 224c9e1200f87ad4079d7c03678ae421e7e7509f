@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2591a1bc_672ff580",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:39:06Z",
+      "side": 1,
+      "message": "Also we need to listen to signal when other contacts update color and change color accordingly. And currently when we change color other contacts does not update color(tested with qt-client)",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c7510fd_6e33532a",
@@ -133,6 +150,24 @@
       "writtenOn": "2023-01-02T15:15:01Z",
       "side": 1,
       "message": "do we need drag gesture? Maybe dismiss color picker on tap? Also color picker should be dismissed when open participant list view",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21832c1e_69d0a63e",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-02T15:39:06Z",
+      "side": 1,
+      "message": "second part is done. So only one question is left is why we dismiss color picker when drag and not when tap screen",
+      "parentUuid": "7048053e_5146413a",
       "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
