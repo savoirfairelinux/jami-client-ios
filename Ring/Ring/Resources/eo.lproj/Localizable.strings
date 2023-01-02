@@ -32,8 +32,8 @@
 "global.block" = "Block";
 "global.refuse" = "Rifuzi";
 "global.name" = "Nomo";
-"global.copy" = "Copy";
-"global.reply" = "Reply";
+"global.copy" = "Kopii";
+"global.reply" = "Respondo";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

@@ -40,18 +40,18 @@
 "scan.search" = "Recherche...";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.searchBar" = "Chercher un contact";
 "swarmcreation.createTheSwarm" = "Créer le swarm";
 "swarmcreation.addADescription" = "Ajouter une description";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorer le swarm";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.leaveConversation" = "Quitter la conversation";
 "swarm.chooseColor" = "Choisissez une couleur";
 "swarm.typeOfSwarm" = "Type de swarm";
 "swarm.identifier" = "Identifiant ";
 "swarm.about" = "A propos ";
 "swarm.members" = "Membres";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Rajouter une description";
 "swarm.oneToOne" = "Swarm privé";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private group swarm";
@@ -91,7 +91,7 @@
 "conversation.requestMessage" = "Bonjour,\nSouhaitez-vous rejoindre la conversation ?";
 "conversation.notContact" = "\%s\ ne fait pas partie de votre liste de contact.";
 "conversation.sendRequest" = "Envoyer lui une demande de contact afin de pouvoir discuter ensemble";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "Envoyer une invitation";
 "conversation.synchronizationTitle" = "Vous avez accepté la demande de conversation";
 "conversation.synchronizationMessage" = "Nous attendons que \%s\ se connecte pour synchroniser la conversation.";
 
@@ -352,11 +352,11 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Vous avez reçu une invitation";
 "generatedMessage.swarmCreated" = "Le Swarm a été créé";
 "generatedMessage.invitationReceived" = "was invited to join";
 "generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.youJoined" = "Vous avez rejoint la conversation";
 "generatedMessage.contactBanned" = "was kicked";
 "generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Appel sortant";
@@ -364,11 +364,11 @@
 "generatedMessage.missedOutgoingCall" = "Appel sortant manqué";
 "generatedMessage.missedIncomingCall" = "Appel entrant manqué";
 "generatedMessage.liveLocationSharing" = "Partage de position en temps réel";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "Gauche";
 
 //General Settings
 "generalSettings.title" = "Réglages avancés";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Paramètres vidéo ";
 "generalSettings.videoAcceleration" = "Activer l'accélération vidéo";
 "generalSettings.fileTransfer" = "Transfert de fichier";
 "generalSettings.automaticAcceptIncomingFiles" = "Accepter automatiquement les fichiers entrants";

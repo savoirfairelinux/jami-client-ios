@@ -32,8 +32,8 @@
 "global.block" = "Μπλοκάρισμα";
 "global.refuse" = "Άρνηση";
 "global.name" = "Όνομα";
-"global.copy" = "Copy";
-"global.reply" = "Reply";
+"global.copy" = "Αντιγραφή";
+"global.reply" = "Απάντηση";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

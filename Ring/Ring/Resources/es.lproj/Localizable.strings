@@ -32,8 +32,8 @@
 "global.block" = "Bloquear";
 "global.refuse" = "No aceptar";
 "global.name" = "Nombre";
-"global.copy" = "Copy";
-"global.reply" = "Reply";
+"global.copy" = "Copiar";
+"global.reply" = "Responder";
 
 // Scan
 "scan.badQrCode" = "Código QR incorrecto";

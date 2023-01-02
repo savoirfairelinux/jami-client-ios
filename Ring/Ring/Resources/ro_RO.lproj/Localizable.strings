@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Conversații";
-"global.meTabBarTitle" = "Reglările Contului";
+"global.meTabBarTitle" = "Reglările contului";
 "global.ok" = "Bine";
 "global.close" = "Închide";
 "global.share" = "Distribuie";
@@ -78,7 +78,7 @@
 "smartlist.noNumber" = "Contactul ales nu are niciun număr";
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
 "smartlist.invitations" = "Invitații";
-"smartlist.accountSettings" = "Reglările Contului";
+"smartlist.accountSettings" = "Reglările contului";
 "smartlist.advancedSettings" = "Reglări avansate";
 "smartlist.aboutJami" = "Despre Jami";
 

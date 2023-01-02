@@ -32,8 +32,8 @@
 "global.block" = "Blokér";
 "global.refuse" = "Afvis";
 "global.name" = "Navn";
-"global.copy" = "Copy";
-"global.reply" = "Reply";
+"global.copy" = "Kopiér";
+"global.reply" = "Svar";
 
 // Scan
 "scan.badQrCode" = "Ugyldigt QR-kode";
