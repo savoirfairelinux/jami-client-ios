@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8a429f9_7d4ecbd9",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-03T19:27:50Z",
+      "side": 1,
+      "message": "view from cell should not be properly of view controller. You bind isUserInteractionEnabled to viewModel.automaticAcceptIncomingFiles",
+      "revId": "bcaa3da87a59191397e1f005f434d07747ce0bd0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fc57fe6_970e3f5e",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-03T19:27:50Z",
+      "side": 1,
+      "message": "This lines will be called only if user open settings view. It should be placed in AppDellegate in application(_:didFinishLaunchingWithOptions:) so it will be called when application starts.",
+      "revId": "bcaa3da87a59191397e1f005f434d07747ce0bd0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
