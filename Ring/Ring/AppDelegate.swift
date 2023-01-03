@@ -115,6 +115,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        if UserDefaults.standard.value(forKey: automaticDownloadFilesKey) == nil {
+            UserDefaults.standard.set(true, forKey: automaticDownloadFilesKey)
+        }
         UNUserNotificationCenter.current().delegate = self
         // initialize log format
         let console = ConsoleDestination()
