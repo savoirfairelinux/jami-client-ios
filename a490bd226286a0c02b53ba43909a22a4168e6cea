@@ -139,6 +139,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d837805a_e3a0a9b9",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-03T14:55:03Z",
+      "side": 1,
+      "message": "use jami color instead of black",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f3213b_038ee00e",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-03T14:55:03Z",
+      "side": 1,
+      "message": "to be discussed what if no color is selected for conversation",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15b9d2df_51fae6ce",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-03T14:55:03Z",
+      "side": 1,
+      "message": "when we close contacts listvselections should be cleared",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "262ad692_6f03aa85",
         "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
         "patchSetId": 12
