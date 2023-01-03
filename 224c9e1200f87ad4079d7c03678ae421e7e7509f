@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e79d742_8435505a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-03T14:39:27Z",
+      "side": 1,
+      "message": "Just tested conversation between client-qt and android. The color not updated as well",
+      "parentUuid": "2591a1bc_672ff580",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c7510fd_6e33532a",
