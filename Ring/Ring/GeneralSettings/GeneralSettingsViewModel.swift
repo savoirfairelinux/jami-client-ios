@@ -81,6 +81,9 @@ class GeneralSettingsViewModel: ViewModel {
         }
         hardwareAccelerationEnabled = BehaviorRelay<Bool>(value: accelerationEnabled)
 
+        if UserDefaults.standard.value(forKey: automaticDownloadFilesKey) == nil {
+            UserDefaults.standard.set(true, forKey: automaticDownloadFilesKey)
+        }
         let isAutomaticDownloadEnabled = UserDefaults.standard.bool(forKey: automaticDownloadFilesKey)
         automaticAcceptIncomingFiles = BehaviorRelay<Bool>(value: isAutomaticDownloadEnabled)
 

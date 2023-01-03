@@ -27,6 +27,7 @@ import RxDataSources
 class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: GeneralSettingsViewModel!
     let disposeBag = DisposeBag()
+    let textField = PaddingTextField(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
 
     @IBOutlet weak var settingsTable: UITableView!
 
@@ -124,6 +125,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (enabled) in
                 self?.viewModel.togleAcceptingUnkownIncomingFiles(enable: enabled)
+                self?.textField.isUserInteractionEnabled = enabled
             })
             .disposed(by: cell.disposeBag)
         return cell
@@ -147,8 +149,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        let normalAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: titleLabel.font.withSize(17)]
-        let smallAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray, NSAttributedString.Key.font: titleLabel.font.withSize(13)]
+        let normalAttributes = [NSAttributedString.Key.font: titleLabel.font.withSize(17)]
+        let smallAttributes = [NSAttributedString.Key.font: titleLabel.font.withSize(10)]
 
         let partOne = NSMutableAttributedString(string: L10n.GeneralSettings.acceptTransferLimit, attributes: normalAttributes)
         let partTwo = NSMutableAttributedString(string: " " + L10n.GeneralSettings.acceptTransferLimitDescription, attributes: smallAttributes)
@@ -160,10 +162,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
 
         stackView.addArrangedSubview(titleLabel)
 
-        let textField = PaddingTextField(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.text = viewModel.acceptTransferLimit.value.description
-        textField.backgroundColor = UIColor(red: 242, green: 242, blue: 242, alpha: 1)
         textField.cornerRadius = 5
         textField.borderColor = UIColor(red: 51, green: 51, blue: 51, alpha: 1)
         textField.borderWidth = 1
