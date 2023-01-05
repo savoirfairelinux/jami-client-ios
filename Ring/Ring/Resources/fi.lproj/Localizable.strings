@@ -87,13 +87,13 @@
 "conversation.explanationSendingLocationTo" = "Jaat sijaintisi tällä hetkellä";
 "conversation.explanationReceivingLocationFrom" = "Saat parhaillaan suoraa sijaintia";
 "conversation.errorSavingImage" = "Kuvan tallennus galleriaan epäonnistui";
-"conversation.receivedRequest" = "\%s\ on lähettänyt sinulle keskustelupyynnön.";
+"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Hei,\nHaluatko liittyä keskusteluun?";
-"conversation.notContact" = "\%s\ ei ole yhteystiedoissasi.";
+"conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Lähetä hänelle yhteydenottopyyntö, jotta hän voi vaihtaa tietoja.";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Olet hyväksynyt keskustelupyynnön.";
-"conversation.synchronizationMessage" = "Odotamme, että \%s\ tahdistaa keskustelun.";
+"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Ei kutsuja";

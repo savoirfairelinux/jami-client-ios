@@ -87,13 +87,13 @@
 "conversation.explanationSendingLocationTo" = "Du deler for tiden din lokasjon med";
 "conversation.explanationReceivingLocationFrom" = "Du mottar for øyeblikket en live lokasjon fra";
 "conversation.errorSavingImage" = "Klarte ikke å lagre bilde i galleriet";
-"conversation.receivedRequest" = "\%s\ har sent en samtaleforespørsel.";
+"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Hei\nVil du bli med i samtalen?";
-"conversation.notContact" = "\%s\ står ikke i kontaktlisten.";
+"conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Send vedkommende en kontaktforespørsel for å kunne snakke sammen.";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Du har takket ja til samtaleforespørselen.";
-"conversation.synchronizationMessage" = "Vi venter på \%s\ tilkoblinger for å synkronisere samtalen.";
+"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Ingen invitasjoner";

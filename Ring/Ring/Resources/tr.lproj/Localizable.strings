@@ -87,13 +87,13 @@
 "conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
 "conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
 "conversation.errorSavingImage" = "Fotoğraf galeriye kaydedilemedi";
-"conversation.receivedRequest" = "\%s\ size bir konuşma için istek yolladı.";
+"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Merhaba,\nKonuşmaya katılmak ister misin?";
-"conversation.notContact" = "\%s\ kişi listenizde yok.";
+"conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Birlikte iletişim kurmak için ona bir kişi isteği gönderin";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Görüşme isteğini kabul ettiniz.";
-"conversation.synchronizationMessage" = "Sohbeti senkronize etmek için \%s\ bağlanmasını bekliyoruz.";
+"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Davetiye yok";

@@ -87,13 +87,13 @@
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
 "conversation.errorSavingImage" = "保存至图库失败";
-"conversation.receivedRequest" = "\%s\ 向您发送了对话请求。";
+"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.requestMessage" = "您好，\n您想要加入会话吗？";
-"conversation.notContact" = "\%s\ 不在您的通讯录中。";
+"conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "向他/她发送联系人请求以开始互相交流";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "您已接受会话请求。";
-"conversation.synchronizationMessage" = "我们正在等待 \%s\ 连接以同步对话。";
+"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "没有邀请";

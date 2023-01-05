@@ -42,7 +42,7 @@
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact...";
 "swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
+"swarmcreation.addADescription" = "Adicionar uma descrição";
 // Swarm
 "swarm.ignoreSwarm" = "Ignore the swarm";
 "swarm.leaveConversation" = "Leave the conversation";
@@ -87,13 +87,13 @@
 "conversation.explanationSendingLocationTo" = "Atualmente você está compartilhando sua localização com";
 "conversation.explanationReceivingLocationFrom" = "Você está recebendo atualmente uma localização real de";
 "conversation.errorSavingImage" = "Falha ao salvar a imagem na galeria";
-"conversation.receivedRequest" = "%s te enviou um pedido para uma conversação";
+"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Olá,\nVocê gostaria de entrar na conversação?";
-"conversation.notContact" = "%s não está em sua lista de contatos.";
+"conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Envie para ele/ela o seu pedido de contato, para que vocês possam interagir";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Você aceitou o pedido de conversa.";
-"conversation.synchronizationMessage" = "Nós estamos aguardando %s se conectar para sincronizar a conversação.";
+"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Sem convites";

@@ -87,13 +87,13 @@
 "conversation.explanationSendingLocationTo" = "Právě sdílíte svou polohu s ";
 "conversation.explanationReceivingLocationFrom" = "Právě přijímáte aktuální polohu od ";
 "conversation.errorSavingImage" = "Nepodařilo se uložit obrázek do galerie";
-"conversation.receivedRequest" = "\%s\ vám poslal žádost o konverzaci.";
+"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Dobrý den,\nChcete se připojit ke konverzaci?";
-"conversation.notContact" = "\%s\ není ve vašich kontaktech.";
+"conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Pošlete mu/jí žádost o kontakt, abyste si mohli společně vyměňovat.";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Přijali jste žádost o konverzaci.";
-"conversation.synchronizationMessage" = "Čekáme, až se \%s\ připojí, aby mohlo dokjít k synchronizaci konverzace.";
+"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Žádná pozvání";

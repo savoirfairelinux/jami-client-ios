@@ -87,13 +87,13 @@
 "conversation.explanationSendingLocationTo" = "Vous partagez actuellement votre position avec";
 "conversation.explanationReceivingLocationFrom" = "Vous recevez actuellement la position de ";
 "conversation.errorSavingImage" = "Impossible de sauvegarder l'image dans la galerie";
-"conversation.receivedRequest" = "\%s\ vous a envoyé une invitation à discuter.";
+"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Bonjour,\nSouhaitez-vous rejoindre la conversation ?";
-"conversation.notContact" = "\%s\ ne fait pas partie de votre liste de contact.";
+"conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Envoyer lui une demande de contact afin de pouvoir discuter ensemble";
 "conversation.sendRequestTitle" = "Envoyer une invitation";
 "conversation.synchronizationTitle" = "Vous avez accepté la demande de conversation";
-"conversation.synchronizationMessage" = "Nous attendons que \%s\ se connecte pour synchroniser la conversation.";
+"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Aucune invitation";

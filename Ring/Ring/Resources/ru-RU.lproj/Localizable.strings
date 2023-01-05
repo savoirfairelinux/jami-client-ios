@@ -87,13 +87,13 @@
 "conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
 "conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
 "conversation.errorSavingImage" = "Не удалось сохранить изображение в галерею";
-"conversation.receivedRequest" = "\%s\ отправил вам запрос для разговора.";
+"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Привет,\nВы хотите присоединиться к разговору?";
-"conversation.notContact" = "\%s\ нет в вашем списке контактов.";
+"conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Отправьте ему/ей запрос контакта, чтобы иметь возможность совместного обмена";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Вы приняли запрос на беседу.";
-"conversation.synchronizationMessage" = "Мы ждем \%s\ подключения для синхронизации разговора.";
+"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Приглашений нет";

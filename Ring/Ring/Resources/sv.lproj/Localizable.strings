@@ -87,13 +87,13 @@
 "conversation.explanationSendingLocationTo" = "Du delar nu din plats med ";
 "conversation.explanationReceivingLocationFrom" = "Du tar emot en live sändning från ";
 "conversation.errorSavingImage" = "Misslyckades spara till galleriet ";
-"conversation.receivedRequest" = "\%s\ har skickat en förfrågan om konversation";
+"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Hej! \nVill du gå med i konversationen? ";
-"conversation.notContact" = "\%s\ finns inte i din kontaktlista";
+"conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Skicka en kontaktförfrågan för att kunna ha ett utbyte ";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Du har accepterat konversationsförfrågan.";
-"conversation.synchronizationMessage" = "Vi väntar på att \1%s\ ansluter och synkroniserar konversationen ";
+"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Inga inbjudningar";

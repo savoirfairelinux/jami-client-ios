@@ -87,13 +87,13 @@
 "conversation.explanationSendingLocationTo" = "Anda saat ini berbagi lokasi Anda dengan";
 "conversation.explanationReceivingLocationFrom" = "Saat ini Anda sedang menerima lokasi langsung dari";
 "conversation.errorSavingImage" = "Gagal menyimpan gambar ke galeri";
-"conversation.receivedRequest" = "\%s\ mengirimi Anda permintaan untuk percakapan.";
+"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.requestMessage" = "Halo, \nApakah Anda ingin bergabung dalam percakapan?";
-"conversation.notContact" = "\%s\ tidak ada dalam daftar kontak Anda.";
+"conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Kirimkan permintaan kontak kepadanya agar Anda bisa saling bertukar pikiran.";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Anda telah menerima permintaan percakapan.";
-"conversation.synchronizationMessage" = "Kami menunggu %s terhubung untuk menyinkronkan percakapan.";
+"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "Tidak ada undangan";
