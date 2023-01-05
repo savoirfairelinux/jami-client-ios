@@ -53,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2497a735_5d97ad90",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c7510fd_6e33532a",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "621e6fc2_3464d5a8",
@@ -66,6 +84,24 @@
       "writtenOn": "2023-01-02T15:15:01Z",
       "side": 1,
       "message": "do we need this?",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a51264b7_53edfbf5",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "621e6fc2_3464d5a8",
       "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -87,6 +123,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fa56c78_e7fd094e",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bc57e56_977fc514",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2143f11_85793456",
@@ -100,6 +154,24 @@
       "writtenOn": "2023-01-02T15:15:01Z",
       "side": 1,
       "message": "remove commented code",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f778bf3_fb78586a",
+        "filename": "Ring/Ring/SwarmInfo/View/SettingsView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2143f11_85793456",
       "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -121,6 +193,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9016f99_e0be3b1d",
+        "filename": "Ring/Ring/SwarmInfo/View/SettingsView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8e8d2c9_31d30f76",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "258e673e_3b2f5e49",
@@ -138,6 +228,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3ce3a1c_97145f69",
+        "filename": "Ring/Ring/SwarmInfo/View/SettingsView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "258e673e_3b2f5e49",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ed8ec32_191b819a",
@@ -151,6 +259,24 @@
       "writtenOn": "2023-01-02T15:15:01Z",
       "side": 1,
       "message": "put extension in a new file in extensions group",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "984f4d3f_80c0f8f2",
+        "filename": "Ring/Ring/SwarmInfo/View/SettingsView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed8ec32_191b819a",
       "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -190,6 +316,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55faafbe_3b4a1248",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21832c1e_69d0a63e",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e2bd53e_8ffde28c",
@@ -203,6 +347,24 @@
       "writtenOn": "2023-01-02T15:15:01Z",
       "side": 1,
       "message": "do we need this ZStack container?",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28f4d110_11b7ffff",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e2bd53e_8ffde28c",
       "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -224,6 +386,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfce6b02_7ecc420c",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc9b89df_e75233ca",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bb7aeca_53d0ab62",
@@ -237,6 +417,24 @@
       "writtenOn": "2023-01-02T15:15:01Z",
       "side": 1,
       "message": "update color for placeholder depending of selected color for swarm conversation(so it visible either selected color lite or dark)",
+      "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35067ef6_db5468d3",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-05T21:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bb7aeca_53d0ab62",
       "revId": "224c9e1200f87ad4079d7c03678ae421e7e7509f",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
