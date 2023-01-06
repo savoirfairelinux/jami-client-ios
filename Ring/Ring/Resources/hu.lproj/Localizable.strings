@@ -43,6 +43,7 @@
 "swarmcreation.searchBar" = "Kapcsolat keresése…";
 "swarmcreation.createTheSwarm" = "Rajcsoport létrehozása";
 "swarmcreation.addADescription" = "Leírás hozzáadása";
+"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Rajcsoport figyelmen kívül hagyása";
 "swarm.leaveConversation" = "Kilépés a beszélgetésből";
@@ -55,7 +56,7 @@
 "swarm.oneToOne" = "Személyes rajcsoport";
 "swarm.adminInvitesOnly" = "Csak rendszergazdai meghívók";
 "swarm.invitesOnly" = "Személyes rajcsoport";
-"swarm.publicChat" = "Nyilvános rajcsoport";
+"swarm.publicChat" = "Public swarm";
 "swarm.others" = "Egyebek";
 "swarm.member" = "Tag";
 "swarm.invited" = "Meghívott";

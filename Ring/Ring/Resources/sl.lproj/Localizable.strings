@@ -43,6 +43,7 @@
 "swarmcreation.searchBar" = "Poišči stik ...";
 "swarmcreation.createTheSwarm" = "Ustvarite roj";
 "swarmcreation.addADescription" = "Dodajte opis";
+"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Prezri roj";
 "swarm.leaveConversation" = "Zapusti pogovor";
@@ -54,8 +55,8 @@
 "swarm.addDescription" = "Dodaj opis";
 "swarm.oneToOne" = "Zasebni roj";
 "swarm.adminInvitesOnly" = "Samo na povabilo skrbnika";
-"swarm.invitesOnly" = "Zasebni roj skupine";
-"swarm.publicChat" = "Javni roj skupine";
+"swarm.invitesOnly" = "Zasebni roj";
+"swarm.publicChat" = "Public swarm";
 "swarm.others" = "Drugi";
 "swarm.member" = "Član";
 "swarm.invited" = "Povabljeni";

@@ -43,6 +43,7 @@
 "swarmcreation.searchBar" = "Chercher un contact";
 "swarmcreation.createTheSwarm" = "Créer le swarm";
 "swarmcreation.addADescription" = "Ajouter une description";
+"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorer le swarm";
 "swarm.leaveConversation" = "Quitter la conversation";
@@ -54,8 +55,8 @@
 "swarm.addDescription" = "Rajouter une description";
 "swarm.oneToOne" = "Swarm privé";
 "swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private group swarm";
-"swarm.publicChat" = "Public group swarm";
+"swarm.invitesOnly" = "Swarm privé";
+"swarm.publicChat" = "Public swarm";
 "swarm.others" = "Others";
 "swarm.member" = "Membre";
 "swarm.invited" = "Invités";

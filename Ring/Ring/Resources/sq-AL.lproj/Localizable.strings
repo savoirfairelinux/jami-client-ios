@@ -43,6 +43,7 @@
 "swarmcreation.searchBar" = "Kërkoni për kontakt…";
 "swarmcreation.createTheSwarm" = "Krijoje zgjoin";
 "swarmcreation.addADescription" = "Shtoni një përshkrim";
+"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Shpërfille zgjuan";
 "swarm.leaveConversation" = "Braktiseni bisedën";
@@ -54,8 +55,8 @@
 "swarm.addDescription" = "Shtoni Përshkrim";
 "swarm.oneToOne" = "Zgjua privat";
 "swarm.adminInvitesOnly" = "Vetëm me ftesa nga përgjegjësi";
-"swarm.invitesOnly" = "Zgjua grupi privat";
-"swarm.publicChat" = "Zgjua grupi publik";
+"swarm.invitesOnly" = "Zgjua privat";
+"swarm.publicChat" = "Public swarm";
 "swarm.others" = "Të tjerë";
 "swarm.member" = "Anëtar";
 "swarm.invited" = "Ftuar";

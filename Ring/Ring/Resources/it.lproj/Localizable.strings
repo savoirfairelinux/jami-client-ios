@@ -43,6 +43,7 @@
 "swarmcreation.searchBar" = "Cerca contatto...";
 "swarmcreation.createTheSwarm" = "Crea il gruppo";
 "swarmcreation.addADescription" = "Aggiungi una descrizione";
+"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Ignora il gruppo";
 "swarm.leaveConversation" = "Lascia la conversazione";
@@ -55,7 +56,7 @@
 "swarm.oneToOne" = "Gruppo privato";
 "swarm.adminInvitesOnly" = "Solo invitati dall'amministratore";
 "swarm.invitesOnly" = "Gruppo privato";
-"swarm.publicChat" = "Gruppo pubblico";
+"swarm.publicChat" = "Public swarm";
 "swarm.others" = "Altri";
 "swarm.member" = "Membro";
 "swarm.invited" = "Invitato";
@@ -87,13 +88,13 @@
 "conversation.explanationSendingLocationTo" = "Stai condividendo la tua posizione con ";
 "conversation.explanationReceivingLocationFrom" = "Stai ricevendo una posizione in diretta da ";
 "conversation.errorSavingImage" = "Impossibile salvare l'immagine nella galleria";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%@\ ti ha inviato una richiesta di conversazione.";
 "conversation.requestMessage" = "Ciao, \nVuoi partecipare alla conversazione?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "\%@\ non è nei tuoi contatti.";
 "conversation.sendRequest" = "Mandagli una richiesta di contatto per poter conversare insieme.";
 "conversation.sendRequestTitle" = "Invia richiesta di contatto";
 "conversation.synchronizationTitle" = "Hai accettato la richiesta di conversazione.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "In attesa che \%@\ si connetta per sincronizzare la conversazione.";
 
 //Invitations
 "invitations.noInvitations" = "Nessun invito";

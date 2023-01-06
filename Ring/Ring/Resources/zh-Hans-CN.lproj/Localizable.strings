@@ -43,6 +43,7 @@
 "swarmcreation.searchBar" = "搜索联系人";
 "swarmcreation.createTheSwarm" = "创建群聊";
 "swarmcreation.addADescription" = "添加描述";
+"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
 // Swarm
 "swarm.ignoreSwarm" = "忽略群聊";
 "swarm.leaveConversation" = "离开该对话";
@@ -54,8 +55,8 @@
 "swarm.addDescription" = "添加描述";
 "swarm.oneToOne" = "私人 swarm";
 "swarm.adminInvitesOnly" = "仅可管理员邀请";
-"swarm.invitesOnly" = "Private group swarm";
-"swarm.publicChat" = "Public group swarm";
+"swarm.invitesOnly" = "私人 swarm";
+"swarm.publicChat" = "Public swarm";
 "swarm.others" = "Others";
 "swarm.member" = "成员";
 "swarm.invited" = "已邀请";
