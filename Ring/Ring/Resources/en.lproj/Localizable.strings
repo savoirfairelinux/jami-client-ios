@@ -43,6 +43,7 @@
 "swarmcreation.searchBar" = "Search for contact...";
 "swarmcreation.createTheSwarm" = "Create the swarm";
 "swarmcreation.addADescription" = "Add a description";
+"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Ignore the swarm";
 "swarm.leaveConversation" = "Leave the conversation";
