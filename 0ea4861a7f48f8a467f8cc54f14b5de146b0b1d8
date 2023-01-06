@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "505bfdce_dc8bb3df",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-06T21:27:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05e3cedd_2f7b9ad9",
+      "revId": "0ea4861a7f48f8a467f8cc54f14b5de146b0b1d8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c777adc_c6929d2e",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-06T20:40:12Z",
       "side": 1,
       "message": "if it disabled we should reflect it in UI and grey out this settings. Use UIColor.tertiaryLabel",
+      "revId": "0ea4861a7f48f8a467f8cc54f14b5de146b0b1d8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "485822a1_7446e0af",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-06T21:27:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c777adc_c6929d2e",
       "revId": "0ea4861a7f48f8a467f8cc54f14b5de146b0b1d8",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
