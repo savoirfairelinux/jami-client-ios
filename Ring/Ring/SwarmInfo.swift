@@ -88,6 +88,7 @@ class SwarmInfo {
 
     var avatarHeight: CGFloat = 40
     var avatarSpacing: CGFloat = 2
+    var maximumLimit: Int = 8
     var id: String {
         return conversation?.id ?? ""
     }

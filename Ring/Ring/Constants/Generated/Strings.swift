@@ -670,8 +670,8 @@ internal enum L10n {
     internal static let ignoreSwarm = L10n.tr("Localizable", "swarm.ignoreSwarm", fallback: "Ignore the swarm")
     /// Invited
     internal static let invited = L10n.tr("Localizable", "swarm.invited", fallback: "Invited")
-    /// Private group swarm
-    internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private group swarm")
+    /// Private swarm
+    internal static let invitesOnly = L10n.tr("Localizable", "swarm.invitesOnly", fallback: "Private swarm")
     /// Leave the conversation
     internal static let leaveConversation = L10n.tr("Localizable", "swarm.leaveConversation", fallback: "Leave the conversation")
     /// Member
@@ -682,8 +682,8 @@ internal enum L10n {
     internal static let oneToOne = L10n.tr("Localizable", "swarm.oneToOne", fallback: "Private swarm")
     /// Others
     internal static let others = L10n.tr("Localizable", "swarm.others", fallback: "Others")
-    /// Public group swarm
-    internal static let publicChat = L10n.tr("Localizable", "swarm.publicChat", fallback: "Public group swarm")
+    /// Public swarm
+    internal static let publicChat = L10n.tr("Localizable", "swarm.publicChat", fallback: "Public swarm")
     /// Type of swarm
     internal static let typeOfSwarm = L10n.tr("Localizable", "swarm.typeOfSwarm", fallback: "Type of swarm")
     /// Unkown
@@ -692,6 +692,10 @@ internal enum L10n {
   internal enum Swarmcreation {
     /// Add a description
     internal static let addADescription = L10n.tr("Localizable", "swarmcreation.addADescription", fallback: "Add a description")
+    /// You can add %d more people in this swarm
+    internal static func addMorePeople(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "swarmcreation.addMorePeople", p1, fallback: "You can add %d more people in this swarm")
+    }
     /// Create the swarm
     internal static let createTheSwarm = L10n.tr("Localizable", "swarmcreation.createTheSwarm", fallback: "Create the swarm")
     /// Search for contact...
