@@ -54,8 +54,8 @@
 "swarm.addDescription" = "Add Description";
 "swarm.oneToOne" = "Private swarm";
 "swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private group swarm";
-"swarm.publicChat" = "Public group swarm";
+"swarm.invitesOnly" = "Private swarm";
+"swarm.publicChat" = "Public swarm";
 "swarm.others" = "Others";
 "swarm.member" = "Member";
 "swarm.invited" = "Invited";
