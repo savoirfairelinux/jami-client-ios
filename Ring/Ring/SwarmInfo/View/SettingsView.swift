@@ -52,7 +52,7 @@ struct SettingsView: View {
                     Spacer()
                     ZStack {
                         Circle()
-                            .fill(viewmodel.finalColor.isEmpty ? Color(hex: viewmodel.swarmInfo.defaultColor)! : Color(hex: viewmodel.finalColor)!)
+                            .fill(Color(hex: viewmodel.finalColor)!)
                             .frame(width: 20, height: 20)
                             .onTapGesture(perform: {
                                 withAnimation {
@@ -60,12 +60,12 @@ struct SettingsView: View {
                                     viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
                                 }
                             })
-                            .onChange(of: viewmodel.finalColor, perform: { newValue in
+                            .onChange(of: viewmodel.selectedColor, perform: { newValue in
                                 viewmodel.updateSwarmColor(selectedColor: newValue)
                             })
                             .padding(10)
                         Circle()
-                            .stroke(viewmodel.finalColor.isEmpty ? Color(hex: viewmodel.swarmInfo.defaultColor)! : Color(hex: viewmodel.finalColor)!, lineWidth: 5)
+                            .stroke(Color(hex: viewmodel.finalColor)!, lineWidth: 5)
                             .frame(width: 30, height: 30)
                     }
                 }
@@ -92,6 +92,7 @@ struct SettingsView: View {
 }
 struct CustomColorPicker: View {
     @Binding var selectedColor: String
+    @Binding var currentColor: String
     var body: some View {
         let colors: [String] = ["#E91E63", "#9C27B0", "#673AB7", "#3F51B5", "#2196F3", "#00BCD4", "#009688",
                                 "#4CAF50", "#8BC34A", "#9E9E9E", "#CDDC39", "#FFC107", "#FF5722", "#795548", "#607D8B"]

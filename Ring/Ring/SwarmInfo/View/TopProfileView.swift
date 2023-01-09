@@ -157,7 +157,7 @@ public struct TopProfileView: View {
                             viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
                         }
                         .ignoresSafeArea()
-                    CustomColorPicker(selectedColor: $viewmodel.finalColor)
+                    CustomColorPicker(selectedColor: $viewmodel.selectedColor, currentColor: $viewmodel.finalColor)
                         .frame(height: 70)
                         .background(Color.white)
                         .onChange(of: viewmodel.finalColor) { _ in

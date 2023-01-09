@@ -25,14 +25,14 @@ import RxSwift
 class ContactMessageVM: ObservableObject {
     @Published var avatarImage: UIImage?
     @Published var content: String
-    var borderColor: Color
-    var backgroundColor: Color
-    var textColor: Color
+    @Published var borderColor: Color
+    @Published var backgroundColor: Color
+    @Published var textColor: Color
     let cornerRadius: CGFloat = 20
     let avatarSize: CGFloat = 30
     var inset: CGFloat
     var height: CGFloat
-    var textFont: Font = .body
+    var textFont: Font = Font.callout.weight(.medium)
 
     var message: MessageModel
     var username = "" {
@@ -58,6 +58,14 @@ class ContactMessageVM: ObservableObject {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             self.infoState.onNext(MessageInfo.updateAvatar(jamiId: jamiId))
             self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
+        }
+    }
+
+    func swarmColorUpdated(color: UIColor) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.textColor = self.message.type == .initial ? Color(color) : Color(UIColor.label)
+            self.borderColor = self.message.type != .initial ? Color(color) : Color(UIColor.clear)
         }
     }
 }

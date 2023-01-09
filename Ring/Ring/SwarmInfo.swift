@@ -90,7 +90,6 @@ class SwarmInfo {
     var avatarHeight: CGFloat = 40
     var avatarSpacing: CGFloat = 2
     var maximumLimit: Int = 8
-    var defaultColor = "#00BCD4"
     var id: String {
         return conversation?.id ?? ""
     }
@@ -257,9 +256,7 @@ class SwarmInfo {
                     event.getEventInput(ServiceEventInput.conversationId) == self?.conversation?.id
             })
             .subscribe {[weak self] _ in
-                DispatchQueue.global(qos: .background).async {
-                    self?.updateColorPreference()
-                }
+                self?.updateColorPreference()
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
@@ -309,11 +306,7 @@ class SwarmInfo {
     }
     private func updateColorPreference() {
         guard let conversation = self.conversation else { return }
-        let info = self.conversationsService.getConversationPreferences(accountId: self.accountId, conversationId: conversation.id)
-        guard let info = info else { return }
-        if let color = info[ConversationPreferenceAttributes.color.rawValue] {
-            self.color.accept(color)
-        }
+        self.color.accept(conversation.preferences.color)
     }
     private func updateParticipants() {
         guard let conversation = self.conversation else { return }

@@ -149,6 +149,9 @@ class ConversationsService {
                 return
             }
             let conversation = ConversationModel(withId: conversationId, accountId: accountId, info: info)
+            if let prefsInfo = getConversationPreferences(accountId: accountId, conversationId: conversationId) {
+                conversation.updatePreferences(preferences: prefsInfo)
+            }
             conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
             if let lastRead = conversation.getLastReadMessage() {
                 let unreadInteractions = conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: accountURI)

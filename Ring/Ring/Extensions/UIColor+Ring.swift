@@ -146,4 +146,7 @@ extension UIColor {
     static let jamiSuccess = UIColor(hex: 0x00b20b, alpha: 1.0)
     static let jamiFailure = UIColor(hex: 0xf00000, alpha: 1.0)
     static let jamiWarning = UIColor.orange
+
+    static let defaultSwarm = "#00BCD4"
+    static let defaultSwarmColor = UIColor(hexString: "#00BCD4")!
 }
