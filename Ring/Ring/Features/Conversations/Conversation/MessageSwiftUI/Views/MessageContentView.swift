@@ -57,16 +57,19 @@ struct MessageContentView: View {
                     .background(model.backgroundColor)
                     .font(model.textFont)
                     .cornerRadius(radius: model.cornerRadius, corners: model.corners)
+                    .cornerRadius(3)
             } else if model.type == .fileTransfer {
                 if let player = self.model.player {
                     PlayerSwiftUI(model: model, player: player)
                         .cornerRadius(radius: model.cornerRadius, corners: model.corners)
+                        .cornerRadius(5)
                 } else if let image = self.model.image {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
                         .frame(minHeight: 50, maxHeight: 300)
                         .cornerRadius(radius: model.cornerRadius, corners: model.corners)
+                        .cornerRadius(3)
                 } else {
                     DefaultTransferView(model: model)
                 }
@@ -96,6 +99,7 @@ struct MessageContentView: View {
                         .if(!model.hasBorder) { view in
                             view.cornerRadius(radius: model.cornerRadius, corners: model.corners)
                         }
+                        .cornerRadius(3)
                 }
             }
         }
