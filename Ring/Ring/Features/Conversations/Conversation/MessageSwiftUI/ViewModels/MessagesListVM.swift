@@ -37,6 +37,13 @@ class MessagesListVM: ObservableObject {
     // view properties
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
+    @Published var swarmColor = UIColor.defaultSwarmColor {
+        didSet {
+            self.messagesModels.forEach { message in
+                message.swarmColorUpdated(color: swarmColor)
+            }
+        }
+    }
     @Published var atTheBottom = true {
         didSet {
             lastMessageBeforeScroll = atTheBottom ? nil : self.messagesModels.first?.message.id
@@ -120,6 +127,8 @@ class MessagesListVM: ObservableObject {
         defer {
             self.conversation = conversation
             self.subscribeMessagesStatus()
+            self.subscribeSwarmPreferences()
+            self.updateColorPreference()
         }
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
@@ -159,6 +168,7 @@ class MessagesListVM: ObservableObject {
             self.messagesModels.append(container)
             conversation.unorderedInteractions.append(newMessage.id)
         }
+        container.swarmColorUpdated(color: self.swarmColor)
         return true
     }
 
@@ -283,6 +293,27 @@ class MessagesListVM: ObservableObject {
         } onError: { _ in
         }
         .disposed(by: container.disposeBag)
+    }
+
+    private func subscribeSwarmPreferences() {
+        self.conversationService
+            .sharedResponseStream
+            .filter({ [weak self] (event) -> Bool in
+                return event.eventType == ServiceEventType.conversationPreferencesUpdated &&
+                    event.getEventInput(ServiceEventInput.accountId) == self?.conversation.accountId &&
+                    event.getEventInput(ServiceEventInput.conversationId) == self?.conversation.id
+            })
+            .subscribe(onNext: { [weak self] _ in
+                self?.updateColorPreference()
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    private func updateColorPreference() {
+        guard let color = UIColor(hexString: self.conversation.preferences.color) else { return }
+        DispatchQueue.main.async { [weak self] in
+            self?.swarmColor = color
+        }
     }
 
     // MARK: last read message

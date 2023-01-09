@@ -139,7 +139,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     let cornerRadius: CGFloat = 15
     var textInset: CGFloat = 15
     var textVerticalInset: CGFloat = 10
-    var textFont: Font = .body
+    var textFont: Font = Font.body.weight(.regular)
 
     var message: MessageModel
     var isIncoming: Bool
@@ -186,7 +186,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         }
         if self.content.containsOnlyEmoji {
             self.backgroundColor = .clear
-            self.textFont = Font(UIFont.systemFont(ofSize: 40.0, weight: UIFont.Weight.medium))
+            self.textFont = Font(UIFont.systemFont(ofSize: 38.0, weight: UIFont.Weight.medium))
             self.textInset = 0
             self.textVerticalInset = 2
         }
@@ -503,5 +503,15 @@ extension MessageContentVM: PlayerDelegate {
     func saveFile() {
         guard let image = self.image else { return }
         self.contextMenuState.onNext(ContextMenu.save(image: image))
+    }
+
+    func swarmColorUpdated(color: UIColor) {
+        if self.message.incoming || self.content.containsOnlyEmoji {
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.backgroundColor = Color(color)
+        }
     }
 }
