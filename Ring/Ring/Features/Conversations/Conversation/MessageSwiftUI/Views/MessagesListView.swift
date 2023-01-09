@@ -146,11 +146,15 @@ struct MessagesListView: View {
                     .font(.callout)
                     .padding(.trailing, 6.0)
                     .padding(.leading, 6.0)
-                    .padding(.top, 1.0)
-                    .padding(.bottom, 1.0)
-                    .background(Color(UIColor.jamiButtonDark))
+                    .padding(.top, 0.0)
+                    .padding(.bottom, 0.0)
+                    .background(Color(model.swarmColor))
+                    .cornerRadius(9)
                     .foregroundColor(Color.white)
-                    .cornerRadius(radius: 8, corners: .allCorners)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.white, lineWidth: 1)
+                    )
                     .zIndex(1)
             }
             Button(action: {
@@ -160,19 +164,20 @@ struct MessagesListView: View {
                     .frame(width: 45, height: 45)
                     .overlay(
                         Circle()
-                            .stroke(Color(UIColor.jamiButtonDark), lineWidth: 1)
+                            .stroke(Color(model.swarmColor), lineWidth: 1)
                     )
                     .background(Color.white)
                     .clipShape(Circle())
-                    .foregroundColor(Color(UIColor.jamiButtonDark))
+                    .foregroundColor(Color(model.swarmColor))
                     .zIndex(0)
             }
         }
-        .padding(.trailing, 15.0)
+        .padding(.trailing, 5.0)
         .padding(.leading, 15.0)
         .padding(.top, 0.0)
         .padding(.bottom, 5.0)
         .ignoresSafeArea(.container, edges: [])
+        .shadow(color: Color(UIColor.quaternaryLabel), radius: 2, x: 1, y: 2)
     }
 }
 

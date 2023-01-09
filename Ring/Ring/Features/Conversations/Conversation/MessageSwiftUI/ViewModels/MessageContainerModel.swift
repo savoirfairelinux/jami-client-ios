@@ -129,4 +129,9 @@ class MessageContainerModel: Identifiable {
             }
         }
     }
+
+    func swarmColorUpdated(color: UIColor) {
+        self.messageContent.swarmColorUpdated(color: color)
+        self.contactViewModel.swarmColorUpdated(color: color)
+    }
 }
