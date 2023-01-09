@@ -58,8 +58,8 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
             self.swarmInfo.color
                 .subscribe(onNext: { [weak self] newValue in
                     DispatchQueue.main.async {
-                        guard let self = self else { return }
-                        self.finalColor = newValue.isEmpty ? self.swarmInfo.defaultColor : newValue
+                        guard let self = self, !newValue.isEmpty else { return }
+                        self.finalColor = newValue
                         self.navBarColor.accept(newValue)
                     }
                 })
@@ -97,7 +97,8 @@ class SwarmInfoViewModel: Stateable, ViewModel, ObservableObject {
     private var shouldTriggerDescriptionDidSet: Bool = false
     @Published var finalAvatar: UIImage = UIImage()
     @Published var finalTitle: String = ""
-    @Published var finalColor: String = String()
+    @Published var finalColor: String = UIColor.defaultSwarm
+    @Published var selectedColor: String = String()
     @Published var showColorSheet = false
     var colorPickerStatus = BehaviorRelay<Bool>(value: false)
     var navBarColor = BehaviorRelay<String>(value: "")

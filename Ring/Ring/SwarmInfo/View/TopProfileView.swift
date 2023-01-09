@@ -168,7 +168,7 @@ public struct TopProfileView: View {
                         viewmodel.hideShowBackButton(colorPicker: viewmodel.showColorSheet)
                     }
                     .ignoresSafeArea()
-                CustomColorPicker(selectedColor: $viewmodel.finalColor)
+                CustomColorPicker(selectedColor: $viewmodel.selectedColor, currentColor: $viewmodel.finalColor)
                     .padding([.top, .bottom], 5)
                     .frame(height: 70)
                     .background(Color(UIColor.systemGray4))
