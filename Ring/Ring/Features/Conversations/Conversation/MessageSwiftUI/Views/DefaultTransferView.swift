@@ -69,5 +69,6 @@ struct DefaultTransferView: View {
         .padding(model.textInset)
         .background(model.backgroundColor)
         .cornerRadius(radius: model.cornerRadius, corners: model.corners)
+        .cornerRadius(3)
     }
 }
