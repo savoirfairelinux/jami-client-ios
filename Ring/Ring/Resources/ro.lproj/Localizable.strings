@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Caută un contact...";
 "swarmcreation.createTheSwarm" = "Creează grupul";
 "swarmcreation.addADescription" = "Adaugă o descriere";
-"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
+"swarmcreation.addMorePeople" = "Poți adăuga încă \%d\ persoane în acest grup";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoră grupul";
 "swarm.leaveConversation" = "Termină conversația";
@@ -56,7 +56,7 @@
 "swarm.oneToOne" = "Grup privat";
 "swarm.adminInvitesOnly" = "Doar invitat de administrator";
 "swarm.invitesOnly" = "Grup privat";
-"swarm.publicChat" = "Public swarm";
+"swarm.publicChat" = "Grup public";
 "swarm.others" = "Alții";
 "swarm.member" = "Membru";
 "swarm.invited" = "Invitat";

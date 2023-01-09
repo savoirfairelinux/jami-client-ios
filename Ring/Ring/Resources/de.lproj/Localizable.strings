@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Nach Kontakt suchen...";
 "swarmcreation.createTheSwarm" = "Den Schwarm erstellen";
 "swarmcreation.addADescription" = "Eine Beschreibung hinzufügen";
-"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
+"swarmcreation.addMorePeople" = "Sie können diesem Schwarm \%d\ weitere Personen hinzufügen";
 // Swarm
 "swarm.ignoreSwarm" = "Den Schwarm ignorieren";
 "swarm.leaveConversation" = "Die Unterhaltung verlassen";
@@ -56,7 +56,7 @@
 "swarm.oneToOne" = "privater Schwarm";
 "swarm.adminInvitesOnly" = "Nur Admin-Einladungen";
 "swarm.invitesOnly" = "privater Schwarm";
-"swarm.publicChat" = "Public swarm";
+"swarm.publicChat" = "Öffentlicher Schwarm";
 "swarm.others" = "Andere";
 "swarm.member" = "Mitglied";
 "swarm.invited" = "Eingeladen";
@@ -88,13 +88,13 @@
 "conversation.explanationSendingLocationTo" = "Sie teilen Ihren Standort derzeit mit";
 "conversation.explanationReceivingLocationFrom" = "Sie erhalten derzeit einen Live-Standort von";
 "conversation.errorSavingImage" = "Fehler beim Speichern des Bildes in der Galerie";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%@\ hat Ihnen eine Unterhaltungsanfrage gesendet.";
 "conversation.requestMessage" = "Hallo,\nMöchten Sie der Unterhaltung beitreten?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "\%@\ befindet sich nicht in Ihrer Kontaktliste.";
 "conversation.sendRequest" = "Senden Sie ihm/ihr eine Kontaktanfrage, um sich gemeinsam austauschen zu können";
 "conversation.sendRequestTitle" = "Kontaktanfrage senden";
 "conversation.synchronizationTitle" = "Sie haben die Unterhaltungsanfrage angenommen.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Wir warten dass sich \%@\ verbindet, um die Unterhaltung zu synchronisieren.";
 
 //Invitations
 "invitations.noInvitations" = "Keine Einladungen";

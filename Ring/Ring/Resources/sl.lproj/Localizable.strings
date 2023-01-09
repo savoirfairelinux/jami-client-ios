@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Poišči stik ...";
 "swarmcreation.createTheSwarm" = "Ustvarite roj";
 "swarmcreation.addADescription" = "Dodajte opis";
-"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
+"swarmcreation.addMorePeople" = "V ta roj lahko dodate še \%d\ oseb";
 // Swarm
 "swarm.ignoreSwarm" = "Prezri roj";
 "swarm.leaveConversation" = "Zapusti pogovor";
@@ -56,7 +56,7 @@
 "swarm.oneToOne" = "Zasebni roj";
 "swarm.adminInvitesOnly" = "Samo na povabilo skrbnika";
 "swarm.invitesOnly" = "Zasebni roj";
-"swarm.publicChat" = "Public swarm";
+"swarm.publicChat" = "Javni roj";
 "swarm.others" = "Drugi";
 "swarm.member" = "Član";
 "swarm.invited" = "Povabljeni";
@@ -88,13 +88,13 @@
 "conversation.explanationSendingLocationTo" = "Trenutno v živo delite svojo lokacijo z ";
 "conversation.explanationReceivingLocationFrom" = "Trenutno v živo pridobivate podatek o lokaciji od";
 "conversation.errorSavingImage" = "Shranjevanje slike v galerijo je spodletelo";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%@\ vam je poslal zahtevo za pogovor.";
 "conversation.requestMessage" = "Pozdravljeni, \nse želite pridružiti pogovoru?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "\%@\ ni na seznamu vaših stikov.";
 "conversation.sendRequest" = "Pošljite ji/mu zahtevo za stik, da si bosta lahko medsebojno izmenjevala.";
 "conversation.sendRequestTitle" = "Pošlji zahtevo za stik";
 "conversation.synchronizationTitle" = "Sprejeli ste zahtevo za pogovor.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Čakamo, da se \%@\ poveže, da sinhroniziramo pogovor.";
 
 //Invitations
 "invitations.noInvitations" = "Ni povabil";

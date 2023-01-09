@@ -55,7 +55,7 @@
 "swarm.addDescription" = "Add Description";
 "swarm.oneToOne" = "سرب خاص";
 "swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private swarm";
+"swarm.invitesOnly" = "سرب خاص";
 "swarm.publicChat" = "Public swarm";
 "swarm.others" = "Others";
 "swarm.member" = "Member";
