@@ -71,6 +71,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5a76129_b7e2a082",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:34:22Z",
+      "side": 1,
+      "message": "why do we need drag gesture?",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72f3d579_bf516c07",
         "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
         "patchSetId": 13
