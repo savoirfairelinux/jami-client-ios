@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf2bdcb_a36eafd3",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/SwarmCreationModel/SwarmCreationUIModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "why it is not private?",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fb43e7c_9fcc557a",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "use name related to purpose. For example contactsSubscriptionsDisposeBag",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06ad335_8a64ce09",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "use weak self",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94c43841_64f2f2f2",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "weak self",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72f3d579_bf516c07",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "\"add participant\" button should be covered by overlay when color picker is present",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12ff828f_4dc1039d",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "we could create a new file for it AddSwarmParticipants",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd726ee6_66a26607",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "for others views we have threshold 0.8",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfa792eb_6bf21624",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "maybe use jami dark blue color instead of black",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ff2dbba_45d6c845",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "in dark mode there is no shadow",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d6497e3_1fcb32ea",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "we should keep space on top even if we do not display a text to keep top padding and avoid view jumping when hiding a text",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afff54e0_98af6515",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "why do we need accentColor?",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d71a756e_f31592c1",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "do we need ZStack?",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7517a25_69fa5cf3",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-10T17:25:04Z",
+      "side": 1,
+      "message": "this is identical to createTheSwarm() button. We could reuse this view component instead of creating a new one",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
