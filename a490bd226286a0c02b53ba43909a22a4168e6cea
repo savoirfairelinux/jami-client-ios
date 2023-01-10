@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c67f180_54da5d2c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/SwarmCreationModel/SwarmCreationUIModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "944b6a78_ff93190e",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e4d965b_28f5348e",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-02T21:19:19Z",
       "side": 1,
       "message": "why there are to identical strings?",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc4f409c_edf9c03c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "The difference is only one word \"the\" and \"this\"",
+      "parentUuid": "5e4d965b_28f5348e",
       "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37415066_6a9f2815",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8c62353_8daa1834",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99305638_b66d137a",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-01-02T21:19:19Z",
       "side": 1,
       "message": "updateContactList() for name of the function?",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8570cad5_3ff9665c",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99305638_b66d137a",
       "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -86,6 +158,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c222021_4735a6b9",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "863482eb_b7a5b1cf",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0dfc92a_13cd8426",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-01-02T21:19:19Z",
       "side": 1,
       "message": "we should consider to cancel subscription once contact list is not present anymore",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf91f6b_04d562ef",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0dfc92a_13cd8426",
       "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -120,6 +228,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c3f6f2_1743dd7c",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c6d0c01_24353967",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f4206c2_478ea0df",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-01-02T21:19:19Z",
       "side": 1,
       "message": "we could have swarm private swarm with two participants. Instead of participants count check if is a core dialog",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ad38d4b_ebac7dc9",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f4206c2_478ea0df",
       "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -154,6 +298,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "202704e7_8c097b1e",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d837805a_e3a0a9b9",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22f3213b_038ee00e",
@@ -167,6 +329,24 @@
       "writtenOn": "2023-01-03T14:55:03Z",
       "side": 1,
       "message": "to be discussed what if no color is selected for conversation",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a32cd0f1_6233243f",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22f3213b_038ee00e",
       "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -188,6 +368,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b6ae41c_ab09d242",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15b9d2df_51fae6ce",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "262ad692_6f03aa85",
@@ -205,6 +403,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f100c375_afb915a5",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Yup.. The style is same",
+      "parentUuid": "262ad692_6f03aa85",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e5d3633_4727d3e6",
@@ -218,6 +434,24 @@
       "writtenOn": "2023-01-02T21:19:19Z",
       "side": 1,
       "message": "text should be translatable",
+      "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d3cd26_80e21ba9",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T16:34:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e5d3633_4727d3e6",
       "revId": "a490bd226286a0c02b53ba43909a22a4168e6cea",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
