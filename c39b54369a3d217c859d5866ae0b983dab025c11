@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b8f9a2_7e74bb7f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/SwarmCreationModel/SwarmCreationUIModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcf2bdcb_a36eafd3",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fb43e7c_9fcc557a",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-10T17:25:04Z",
       "side": 1,
       "message": "use name related to purpose. For example contactsSubscriptionsDisposeBag",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e70f379e_0904c2cc",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fb43e7c_9fcc557a",
       "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e7c7623_74d322ab",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c06ad335_8a64ce09",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94c43841_64f2f2f2",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-01-10T17:25:04Z",
       "side": 1,
       "message": "weak self",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de3f2587_3a1d12cd",
+        "filename": "Ring/Ring/SwarmInfo/SwarmInfoViewModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94c43841_64f2f2f2",
       "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -86,6 +158,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab6f5ce_452e4f05",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5a76129_b7e2a082",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72f3d579_bf516c07",
@@ -103,6 +193,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba8ac8ad_b7407e2d",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72f3d579_bf516c07",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12ff828f_4dc1039d",
@@ -116,6 +224,24 @@
       "writtenOn": "2023-01-10T17:25:04Z",
       "side": 1,
       "message": "we could create a new file for it AddSwarmParticipants",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2762187_c1ef3856",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12ff828f_4dc1039d",
       "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -154,6 +280,42 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e65dc1b_e3624394",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd726ee6_66a26607",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "630cd707_864657e3",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfa792eb_6bf21624",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ff2dbba_45d6c845",
@@ -167,6 +329,24 @@
       "writtenOn": "2023-01-10T17:25:04Z",
       "side": 1,
       "message": "in dark mode there is no shadow",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc8e5431_94040e4b",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Removing shadow at all as in dark mode I tried to put white shadow and doesn\u0027t look good",
+      "parentUuid": "3ff2dbba_45d6c845",
       "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -188,6 +368,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f120d751_2d39523c",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d6497e3_1fcb32ea",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afff54e0_98af6515",
@@ -201,6 +399,24 @@
       "writtenOn": "2023-01-10T17:25:04Z",
       "side": 1,
       "message": "why do we need accentColor?",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e6e166f_cbeb373d",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "afff54e0_98af6515",
       "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -222,6 +438,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "200d135a_165bb332",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d71a756e_f31592c1",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7517a25_69fa5cf3",
@@ -235,6 +469,24 @@
       "writtenOn": "2023-01-10T17:25:04Z",
       "side": 1,
       "message": "this is identical to createTheSwarm() button. We could reuse this view component instead of creating a new one",
+      "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "090312db_612c697a",
+        "filename": "Ring/Ring/SwarmInfo/View/TopProfileView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-10T22:34:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7517a25_69fa5cf3",
       "revId": "c39b54369a3d217c859d5866ae0b983dab025c11",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
