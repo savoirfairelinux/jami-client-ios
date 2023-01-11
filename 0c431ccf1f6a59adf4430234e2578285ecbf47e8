@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01dab001_54c99190",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContactMessageVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-11T17:26:02Z",
+      "side": 1,
+      "message": "Small avatar in front of message is missing for some participants",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 75
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5376e1f1_8dd25fd0",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-11T17:26:02Z",
+      "side": 1,
+      "message": "Color is not reflecting on weblink",
+      "range": {
+        "startLine": 43,
+        "startChar": 48,
+        "endLine": 43,
+        "endChar": 49
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c6e54c_f39a2fd8",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-11T17:26:02Z",
+      "side": 1,
+      "message": "Few Message cell are showing selected color and some of them are showing default color\nYou could reproduce by creating swarm with minimum 3 members and member\u0027s status is invited and try to send message it shows default color",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 60
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31a63325_761e8b45",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-11T17:26:02Z",
+      "side": 1,
+      "message": "Corners are missing in message cell right after creating swarm and member status is invited",
+      "range": {
+        "startLine": 131,
+        "startChar": 12,
+        "endLine": 131,
+        "endChar": 38
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08e8c213_a2db6648",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-11T17:26:02Z",
+      "side": 1,
+      "message": "Swarm created and other partcipants are invited and admin changes color of swarm  -\u003e Coming from conversationList to conversation detail resets color to default color",
+      "range": {
+        "startLine": 131,
+        "startChar": 12,
+        "endLine": 131,
+        "endChar": 38
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
