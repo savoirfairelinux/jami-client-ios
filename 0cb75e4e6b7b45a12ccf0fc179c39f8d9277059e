@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2aeeb02_6906a4a5",
+        "filename": "Ring/Ring/Extensions/Button+Helpers.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-11T18:51:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4890b58b_9231aa61",
+      "revId": "0cb75e4e6b7b45a12ccf0fc179c39f8d9277059e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "096095b0_992d568f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-11T17:19:48Z",
       "side": 1,
       "message": "Copyright",
+      "revId": "0cb75e4e6b7b45a12ccf0fc179c39f8d9277059e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e9e0d92_545f1d1d",
+        "filename": "Ring/Ring/Extensions/Text+Helpers.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-11T18:51:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "096095b0_992d568f",
       "revId": "0cb75e4e6b7b45a12ccf0fc179c39f8d9277059e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6895c1c1_a14a5c8f",
+        "filename": "Ring/Ring/Extensions/View+Helpers.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-11T18:51:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32342fe3_bfa6d900",
+      "revId": "0cb75e4e6b7b45a12ccf0fc179c39f8d9277059e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "788d2a59_cc3f67a0",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-01-11T17:19:48Z",
       "side": 1,
       "message": "Copyright",
+      "revId": "0cb75e4e6b7b45a12ccf0fc179c39f8d9277059e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf1e7b2_b7796e7e",
+        "filename": "Ring/Ring/SwarmInfo/View/AddMoreParticipantsInSwarm.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-11T18:51:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "788d2a59_cc3f67a0",
       "revId": "0cb75e4e6b7b45a12ccf0fc179c39f8d9277059e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
