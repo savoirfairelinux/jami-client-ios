@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4890b58b_9231aa61",
+        "filename": "Ring/Ring/Extensions/Button+Helpers.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-11T17:19:48Z",
+      "side": 1,
+      "message": "Copyright",
+      "revId": "0cb75e4e6b7b45a12ccf0fc179c39f8d9277059e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "096095b0_992d568f",
+        "filename": "Ring/Ring/Extensions/Text+Helpers.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-11T17:19:48Z",
+      "side": 1,
+      "message": "Copyright",
+      "revId": "0cb75e4e6b7b45a12ccf0fc179c39f8d9277059e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32342fe3_bfa6d900",
+        "filename": "Ring/Ring/Extensions/View+Helpers.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-11T17:19:48Z",
+      "side": 1,
+      "message": "Copyright",
+      "revId": "0cb75e4e6b7b45a12ccf0fc179c39f8d9277059e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "788d2a59_cc3f67a0",
+        "filename": "Ring/Ring/SwarmInfo/View/AddMoreParticipantsInSwarm.swift",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-11T17:19:48Z",
+      "side": 1,
+      "message": "Copyright",
+      "revId": "0cb75e4e6b7b45a12ccf0fc179c39f8d9277059e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
