@@ -146,7 +146,7 @@ class MessagesListVM: ObservableObject {
         }) { return false}
         let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject)
         self.subscribeMessage(container: container)
-        // first try to fing child
+        // first try to find child
         if let index = self.messagesModels.firstIndex(where: { message in
             message.message.parentId == newMessage.id
         }) {
@@ -165,8 +165,21 @@ class MessagesListVM: ObservableObject {
                 self.messagesModels.insert(container, at: 0)
             }
         } else {
-            self.messagesModels.append(container)
+            if let last = self.messagesModels.last, last.message.parentId.isEmpty {
+                self.messagesModels.insert(container, at: 0)
+            } else {
+                self.messagesModels.append(container)
+            }
             conversation.unorderedInteractions.append(newMessage.id)
+        }
+        /// if a new message is a parent for previously added message change messages order
+        if conversation.unorderedInteractions.contains(where: { parentId in
+            parentId == newMessage.parentId
+        }) {
+            moveInteraction(interactionId: newMessage.id, after: newMessage.parentId)
+            if let ind = conversation.unorderedInteractions.firstIndex(of: newMessage.parentId) {
+                conversation.unorderedInteractions.remove(at: ind)
+            }
         }
         container.swarmColorUpdated(color: self.swarmColor)
         return true
@@ -181,34 +194,25 @@ class MessagesListVM: ObservableObject {
         }), let parentIndex = messagesModels.firstIndex(where: { messge in
             messge.id == parentId
         }) {
-            if index == parentIndex + 1 {
-                /// alredy on right place
+            if index == parentIndex - 1 {
+                // alredy on the right place
                 return
             }
-            if parentIndex < messagesModels.count - 1 {
-                let interactionToMove = messagesModels[index]
-                if index < messagesModels.count - 1 {
-                    /// if interaction we are going to move is parent for next interaction we should move next interaction as well
-                    let nextInteraction = messagesModels[index + 1]
-                    let moveNextInteraction = interactionToMove.id == nextInteraction.message.parentId
-                    messagesModels.insert(messagesModels.remove(at: index), at: parentIndex + 1)
-                    if !moveNextInteraction {
-                        return
-                    }
-                    moveInteraction(interactionId: nextInteraction.id, after: interactionToMove.id)
-                } else {
-                    /// message we are going to move is last in the list, we do not need to check child interactions
-                    messagesModels.insert(messagesModels.remove(at: index), at: parentIndex + 1)
-                }
-            } else if parentIndex == messagesModels.count - 1 {
-                let interactionToMove = messagesModels[index]
-                let nextInteraction = messagesModels[index + 1]
-                let moveNextInteraction = interactionToMove.id == nextInteraction.message.parentId
-                messagesModels.append(messagesModels.remove(at: index))
-                if !moveNextInteraction {
+
+            let interactionToMove = messagesModels[index]
+            let moveToIndex = parentIndex > 0 ? parentIndex - 1 : 0
+            if index > 0 {
+                // if interaction we are going to move is parent for next interaction we should move next interaction as well
+                let childInteraction = messagesModels[index - 1]
+                let moveChildInteraction = interactionToMove.id == childInteraction.message.parentId
+                messagesModels.insert(messagesModels.remove(at: index), at: moveToIndex)
+                if !moveChildInteraction {
                     return
                 }
-                moveInteraction(interactionId: nextInteraction.id, after: interactionToMove.id)
+                moveInteraction(interactionId: childInteraction.id, after: interactionToMove.id)
+            } else {
+                // message we are going to move is last in the first, we do not need to check child interactions
+                messagesModels.insert(messagesModels.remove(at: index), at: moveToIndex)
             }
         }
     }
