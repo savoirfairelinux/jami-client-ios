@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f23df25_3cb2ca36",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContactMessageVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-12T18:17:52Z",
+      "side": 1,
+      "message": "create a ticket for it",
+      "parentUuid": "01dab001_54c99190",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 75
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5376e1f1_8dd25fd0",
         "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
         "patchSetId": 4
@@ -70,6 +94,54 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36d66ed_deff3110",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-12T18:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7c6e54c_f39a2fd8",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 60
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae67d935_35c8bd47",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-12T18:17:52Z",
+      "side": 1,
+      "message": "we do not have design for weblink. It is not updating on qt-client. If changing color for weblink without preview it looks too similar to regular message",
+      "parentUuid": "5376e1f1_8dd25fd0",
+      "range": {
+        "startLine": 43,
+        "startChar": 48,
+        "endLine": 43,
+        "endChar": 49
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31a63325_761e8b45",
@@ -106,6 +178,54 @@
       "writtenOn": "2023-01-11T17:26:02Z",
       "side": 1,
       "message": "Swarm created and other partcipants are invited and admin changes color of swarm  -\u003e Coming from conversationList to conversation detail resets color to default color",
+      "range": {
+        "startLine": 131,
+        "startChar": 12,
+        "endLine": 131,
+        "endChar": 38
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c79c0c3a_d002a8f6",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-12T18:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08e8c213_a2db6648",
+      "range": {
+        "startLine": 131,
+        "startChar": 12,
+        "endLine": 131,
+        "endChar": 38
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "801d73ef_9e26002a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-12T18:17:52Z",
+      "side": 1,
+      "message": "fixed in https://review.jami.net/c/jami-client-ios/+/23659",
+      "parentUuid": "31a63325_761e8b45",
       "range": {
         "startLine": 131,
         "startChar": 12,
