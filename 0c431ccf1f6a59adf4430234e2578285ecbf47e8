@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa3f9fff_5db6f696",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContactMessageVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-12T20:29:51Z",
+      "side": 1,
+      "message": "https://git.jami.net/savoirfairelinux/jami-client-ios/-/issues/232",
+      "parentUuid": "5f23df25_3cb2ca36",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 75
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5376e1f1_8dd25fd0",
         "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
         "patchSetId": 4
@@ -144,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4341b91a_716cc9dd",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-12T20:29:51Z",
+      "side": 1,
+      "message": "Ok..",
+      "parentUuid": "ae67d935_35c8bd47",
+      "range": {
+        "startLine": 43,
+        "startChar": 48,
+        "endLine": 43,
+        "endChar": 49
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31a63325_761e8b45",
         "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
         "patchSetId": 4
@@ -226,6 +274,30 @@
       "side": 1,
       "message": "fixed in https://review.jami.net/c/jami-client-ios/+/23659",
       "parentUuid": "31a63325_761e8b45",
+      "range": {
+        "startLine": 131,
+        "startChar": 12,
+        "endLine": 131,
+        "endChar": 38
+      },
+      "revId": "0c431ccf1f6a59adf4430234e2578285ecbf47e8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeb72975_0d66a97e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-12T20:29:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "801d73ef_9e26002a",
       "range": {
         "startLine": 131,
         "startChar": 12,
