@@ -116,6 +116,7 @@ class SwarmInfo {
 
     var participants = BehaviorRelay(value: [ParticipantInfo]()) // particiapnts already added to swarm
     var contacts = BehaviorRelay(value: [ParticipantInfo]()) // contacts that could be added to swarm
+    var conversation: ConversationModel?
 
     private let nameService: NameService
     private let profileService: ProfilesService
@@ -125,7 +126,6 @@ class SwarmInfo {
     private let requestsService: RequestsService
     private let accountId: String
     private let localJamiId: String?
-    private var conversation: ConversationModel?
     private let disposeBag = DisposeBag()
     private var tempBag = DisposeBag()
 

@@ -21,7 +21,7 @@
 import SwiftUI
 
 struct AddMoreParticipantsInSwarm: View {
-    @StateObject var viewmodel: SwarmInfoViewModel
+    @StateObject var viewmodel: SwarmInfoVM
     @SwiftUI.State var showAddMember = false
     @SwiftUI.State private var addMorePeople: UIImage = UIImage(asset: Asset.addPeopleInSwarm)!
 

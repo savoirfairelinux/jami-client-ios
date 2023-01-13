@@ -47,6 +47,7 @@ enum ConversationState: State {
     case needToOnboard
     case returnToSmartList
     case migrateAccount(accountId: String)
+    case presentSwarmInfo(swarmInfo: SwarmInfo)
 }
 
 protocol ConversationNavigation: AnyObject {
@@ -90,6 +91,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.openIncomingInvitationView(displayName: displayName, request: request, parentView: parentView, invitationHandeledCB: invitationHandeledCB)
                 case .openOutgoingInvitationView(let displayName, let alias, let avatar, let contactJamiId, let accountId, let parentView, let invitationHandeledCB):
                     self.openOutgoingInvitationView(displayName: displayName, alias: alias, avatar: avatar, contactJamiId: contactJamiId, accountId: accountId, parentView: parentView, invitationHandeledCB: invitationHandeledCB)
+                case .presentSwarmInfo(let swarmInfo):
+                    self.presentSwarmInfo(swarmInfo: swarmInfo)
                 default:
                     break
                 }
@@ -155,30 +158,32 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStateable: swarmCreationViewController.viewModel)
     }
 
+    func presentSwarmInfo(swarmInfo: SwarmInfo) {
+        if let flag = self.presentingVC[VCType.contact.rawValue], flag {
+            return
+        }
+        self.presentingVC[VCType.contact.rawValue] = true
+        let swarmInfoViewController = SwarmInfoViewController.instantiate(with: self.injectionBag)
+        swarmInfoViewController.viewModel.swarmInfo = swarmInfo
+        self.present(viewController: swarmInfoViewController,
+                     withStyle: .show,
+                     withAnimation: true,
+                     withStateable: swarmInfoViewController.viewModel,
+                     lockWhilePresenting: VCType.contact.rawValue)
+    }
+
     func presentContactInfo(conversation: ConversationModel) {
         if let flag = self.presentingVC[VCType.contact.rawValue], flag {
             return
         }
         self.presentingVC[VCType.contact.rawValue] = true
-        let isSwarmConversation = conversation.type != .nonSwarm
-
-        if isSwarmConversation {
-            let swarmInfoViewController = SwarmInfoViewController.instantiate(with: self.injectionBag)
-            swarmInfoViewController.viewModel.conversation = BehaviorRelay(value: conversation)
-            self.present(viewController: swarmInfoViewController,
-                         withStyle: .show,
-                         withAnimation: true,
-                         withStateable: swarmInfoViewController.viewModel,
-                         lockWhilePresenting: VCType.contact.rawValue)
-        } else {
-            let contactViewController = ContactViewController.instantiate(with: self.injectionBag)
-            contactViewController.viewModel.conversation = conversation
-            self.present(viewController: contactViewController,
-                         withStyle: .show,
-                         withAnimation: true,
-                         withStateable: contactViewController.viewModel,
-                         lockWhilePresenting: VCType.contact.rawValue)
-        }
+        let contactViewController = ContactViewController.instantiate(with: self.injectionBag)
+        contactViewController.viewModel.conversation = conversation
+        self.present(viewController: contactViewController,
+                     withStyle: .show,
+                     withAnimation: true,
+                     withStateable: contactViewController.viewModel,
+                     lockWhilePresenting: VCType.contact.rawValue)
     }
 
     func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {

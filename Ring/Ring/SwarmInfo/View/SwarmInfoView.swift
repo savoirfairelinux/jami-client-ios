@@ -1,7 +1,8 @@
 /*
  * Copyright (C) 2022 Savoir-faire Linux Inc. *
  *
- * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
+ * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com
+ * Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,9 +25,9 @@ enum SwarmSettingView: String {
 }
 
 // swiftlint:disable closure_body_length
-public struct TopProfileView: View {
+public struct SwarmInfoView: View {
 
-    @StateObject var viewmodel: SwarmInfoViewModel
+    @StateObject var viewmodel: SwarmInfoVM
     @SwiftUI.State private var selectedView: SwarmSettingView = .about
     @SwiftUI.State private var descriptionTextFieldInput: String = ""
     @SwiftUI.State private var titleTextFieldInput: String = ""
@@ -37,7 +38,7 @@ public struct TopProfileView: View {
     @SwiftUI.State private var topViewHeight: CGFloat = 200
     @SwiftUI.State private var minimizedTopView: Bool = false // for lanscape for iphone
     var swarmViews: [SwarmSettingView] {
-        if viewmodel.conversation.value.isCoredialog() {
+        if let conversation = viewmodel.conversation, conversation.isCoredialog() {
             return [.about]
         } else {
             return [.about, .memberList]
@@ -52,7 +53,7 @@ public struct TopProfileView: View {
                         .frame(height: 50)
                         .ignoresSafeArea(edges: [.top, .leading, .trailing])
                 } else {
-                    VStack {
+                    VStack(spacing: 15) {
                         HStack {
                             Spacer()
                                 .frame(height: 20)
@@ -66,10 +67,9 @@ public struct TopProfileView: View {
                                 .renderingMode(.original)
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: viewmodel.swarmInfo.avatarHeight, height: viewmodel.swarmInfo.avatarHeight, alignment: .center)
+                                .frame(width: 80, height: 80, alignment: .center)
                                 .clipShape(Circle())
                         }
-                        .padding(.vertical)
                         .actionSheet(isPresented: $showingOptions) {
                             ActionSheet(
                                 title: Text(""),
@@ -134,8 +134,14 @@ public struct TopProfileView: View {
                 switch selectedView {
                 case .about:
                     SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
+                        .onTapGesture {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
                 case .memberList:
                     MemberList(viewmodel: viewmodel)
+                        .onTapGesture {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
                 }
             }
             .onLoad {
@@ -145,7 +151,7 @@ public struct TopProfileView: View {
             .onChange(of: viewmodel.finalTitle) { _ in
                 titleTextFieldInput = viewmodel.finalTitle
             }
-            if viewmodel.swarmInfo.participants.value.count < viewmodel.swarmInfo.maximumLimit && !viewmodel.conversation.value.isCoredialog() {
+            if viewmodel.swarmInfo.participants.value.count < viewmodel.swarmInfo.maximumLimit && !(viewmodel.conversation?.isCoredialog() ?? true) {
                 AddMoreParticipantsInSwarm(viewmodel: viewmodel)
             }
             if viewmodel.showColorSheet {
@@ -182,7 +188,7 @@ public struct TopProfileView: View {
     }
 }
 
-private extension TopProfileView {
+private extension SwarmInfoView {
     var lightOrDarkColor: Color {
         return Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiMain) : Color.white
     }
@@ -200,7 +206,6 @@ private extension TopProfileView {
             .foregroundColor(lightOrDarkColor)
             // Cursor color.
             .accentColor(lightOrDarkColor)
-            .padding()
     }
 
     var titleTextField: some View {

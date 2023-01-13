@@ -353,7 +353,14 @@ class ConversationViewModel: Stateable, ViewModel {
             return
         }
         self.closeAllPlayers()
-        self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation.value))
+        let isSwarmConversation = conversation.value.type != .nonSwarm && conversation.value.type != .sip
+        if isSwarmConversation {
+            if let swarmInfo = self.swarmInfo {
+                self.stateSubject.onNext(ConversationState.presentSwarmInfo(swarmInfo: swarmInfo))
+            }
+        } else {
+            self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation.value))
+        }
     }
 
     func recordVideoFile() {

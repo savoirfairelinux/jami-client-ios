@@ -20,7 +20,7 @@ import SwiftUI
 
 struct MemberList: View {
 
-    @StateObject var viewmodel: SwarmInfoViewModel
+    @StateObject var viewmodel: SwarmInfoVM
     @SwiftUI.State private var editMode = EditMode.inactive
 
     var body: some View {

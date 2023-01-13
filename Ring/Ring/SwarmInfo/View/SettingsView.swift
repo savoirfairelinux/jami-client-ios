@@ -20,7 +20,7 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    @StateObject var viewmodel: SwarmInfoViewModel
+    @StateObject var viewmodel: SwarmInfoVM
     @SwiftUI.State private var ignoreSwarm = true
     @SwiftUI.State private var shouldShowColorPannel = false
     @SwiftUI.State private var showAlert = false
@@ -30,23 +30,32 @@ struct SettingsView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 20) {
-                Button(action: {
-                    showAlert = true
-                }, label: {
-                    HStack {
-                        Text(L10n.Swarm.leaveConversation)
-                            .multilineTextAlignment(.leading)
-                        Spacer()
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(L10n.Swarm.identifier)
+                        .padding(.trailing, 30)
+                    if #available(iOS 15.0, *) {
+                        Text(id)
+                            .font(.footnote)
+                            .multilineTextAlignment(.trailing)
+                            .truncationMode(.tail)
+                            .lineLimit(1)
+                            .foregroundColor(Color(UIColor.secondaryLabel))
+                            .textSelection(.enabled)
+                    } else {
+                        Text(id)
+                            .font(.footnote)
+                            .multilineTextAlignment(.trailing)
+                            .truncationMode(.tail)
+                            .lineLimit(1)
+                            .foregroundColor(Color(UIColor.secondaryLabel))
                     }
-                }) .alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text(L10n.Swarm.confirmLeaveSwarm),
-                        primaryButton: .destructive(Text(L10n.Swarm.leave)) {
-                            viewmodel.leaveSwarm()
-                        },
-                        secondaryButton: .cancel()
-                    )
-                            }
+                }
+                HStack {
+                    Text(L10n.Swarm.typeOfSwarm)
+                    Spacer()
+                    Text(swarmType)
+                        .foregroundColor(Color(UIColor.secondaryLabel))
+                }
                 HStack {
                     Text(L10n.Swarm.chooseColor)
                     Spacer()
@@ -69,22 +78,24 @@ struct SettingsView: View {
                             .frame(width: 30, height: 30)
                     }
                 }
-                HStack {
-                    Text(L10n.Swarm.typeOfSwarm)
-                    Spacer()
-                    Text(swarmType)
+                Button(action: {
+                    showAlert = true
+                }, label: {
+                    HStack {
+                        Text(L10n.Swarm.leaveConversation)
+                            .multilineTextAlignment(.leading)
+                        Spacer()
+                    }
+                })
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text(L10n.Swarm.confirmLeaveSwarm),
+                        primaryButton: .destructive(Text(L10n.Swarm.leave)) {
+                            viewmodel.leaveSwarm()
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
-
-                HStack {
-                    Text(L10n.Swarm.identifier)
-                        .padding(.trailing, 30)
-                    Spacer()
-                    Text(id)
-                        .multilineTextAlignment(.trailing)
-                        .truncationMode(.tail)
-                        .lineLimit(1)
-                }
-
             }
             .padding(.horizontal, 20)
         }
