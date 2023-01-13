@@ -22,26 +22,28 @@ import RxSwift
 import RxCocoa
 import SwiftUI
 
-class SwarmInfoViewController: UIViewController, StoryboardBased, ViewModelBased {
+class SwarmInfoViewController: UIViewController, ViewModelBased, StoryboardBased {
 
     var viewModel: SwarmInfoViewModel!
     let disposeBag = DisposeBag()
-    var contentView: UIHostingController<TopProfileView>! = nil
+    var contentView: UIHostingController<SwarmInfoView>! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView = UIHostingController(rootView: TopProfileView(viewmodel: self.viewModel))
+        guard let swarmInfo = self.viewModel.swarmInfo else { return }
+        let swiftUIVM = SwarmInfoVM(with: self.viewModel.injectionBag, swarmInfo: swarmInfo)
+        contentView = UIHostingController(rootView: SwarmInfoView(viewmodel: swiftUIVM))
         addChild(contentView)
         view.addSubview(contentView.view)
         setupConstraints()
-        viewModel.navBarColor
+        swiftUIVM.navBarColor
             .subscribe(onNext: {[weak self] newColorValue in
                 guard let self = self, let color = UIColor(hexString: newColorValue) else { return }
                 let isLight: Bool = color.isLight(threshold: 0.8) ?? true
                 self.navigationController?.navigationBar.tintColor = isLight ? UIColor.jamiMain : .white
             })
             .disposed(by: disposeBag)
-        viewModel.colorPickerStatus
+        swiftUIVM.colorPickerStatus
             .subscribe(onNext: {[weak self] statusValue in
                 guard let self = self else { return }
                 self.navigationItem.setHidesBackButton(statusValue, animated: true)

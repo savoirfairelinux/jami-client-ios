@@ -26,8 +26,8 @@ import RxRelay
 
 class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardBased, UISearchResultsUpdating {
     var viewModel: SwarmCreationViewModel!
-    var model: SwarmCreationUIModel!
     private let disposeBag = DisposeBag()
+    let strSearchText = BehaviorRelay<String>(value: "")
 
     let searchController: CustomSearchController = {
         let searchController = CustomSearchController(searchResultsController: nil)
@@ -43,11 +43,11 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
         super.viewDidLoad()
         guard let accountId = self.viewModel.currentAccount?.id else { return }
 
-        model = SwarmCreationUIModel(with: self.viewModel.injectionBag, accountId: accountId, swarmCreated: {_ in
-            self.navigationController?.popViewController(animated: true)
-            self.dismiss(animated: true, completion: nil)
+        let model = SwarmCreationUIModel(with: self.viewModel.injectionBag, accountId: accountId, strSearchText: strSearchText, swarmCreated: {[weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+            self?.dismiss(animated: true, completion: nil)
         })
-        let contentView = UIHostingController(rootView: SwarmCreationUI(list: self.model))
+        let contentView = UIHostingController(rootView: SwarmCreationUI(list: model))
         addChild(contentView)
         view.addSubview(contentView.view)
         contentView.view.translatesAutoresizingMaskIntoConstraints = false
@@ -89,6 +89,6 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
     }
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
-        model.strSearchText.accept(searchText)
+        self.strSearchText.accept(searchText)
     }
 }

@@ -20,7 +20,7 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    @StateObject var viewmodel: SwarmInfoViewModel
+    @StateObject var viewmodel: SwarmInfoVM
     @SwiftUI.State private var ignoreSwarm = true
     @SwiftUI.State private var shouldShowColorPannel = false
     @SwiftUI.State private var showAlert = false

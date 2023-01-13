@@ -24,9 +24,9 @@ enum SwarmSettingView: String {
 }
 
 // swiftlint:disable closure_body_length
-public struct TopProfileView: View {
+public struct SwarmInfoView: View {
 
-    @StateObject var viewmodel: SwarmInfoViewModel
+    @StateObject var viewmodel: SwarmInfoVM
     @SwiftUI.State private var selectedView: SwarmSettingView = .about
     @SwiftUI.State private var descriptionTextFieldInput: String = ""
     @SwiftUI.State private var titleTextFieldInput: String = ""
@@ -37,7 +37,7 @@ public struct TopProfileView: View {
     @SwiftUI.State private var topViewHeight: CGFloat = 200
     @SwiftUI.State private var minimizedTopView: Bool = false // for lanscape for iphone
     var swarmViews: [SwarmSettingView] {
-        if viewmodel.conversation.value.isCoredialog() {
+        if let conversation = viewmodel.conversation, conversation.isCoredialog() {
             return [.about]
         } else {
             return [.about, .memberList]
@@ -145,7 +145,7 @@ public struct TopProfileView: View {
             .onChange(of: viewmodel.finalTitle) { _ in
                 titleTextFieldInput = viewmodel.finalTitle
             }
-            if viewmodel.swarmInfo.participants.value.count < viewmodel.swarmInfo.maximumLimit && !viewmodel.conversation.value.isCoredialog() {
+            if viewmodel.swarmInfo.participants.value.count < viewmodel.swarmInfo.maximumLimit && !(viewmodel.conversation?.isCoredialog() ?? true) {
                 AddMoreParticipantsInSwarm(viewmodel: viewmodel)
             }
             if viewmodel.showColorSheet {
@@ -182,7 +182,7 @@ public struct TopProfileView: View {
     }
 }
 
-private extension TopProfileView {
+private extension SwarmInfoView {
     var lightOrDarkColor: Color {
         return Color(hex: viewmodel.finalColor)?.isLight(threshold: 0.8) ?? true ? Color(UIColor.jamiMain) : Color.white
     }
