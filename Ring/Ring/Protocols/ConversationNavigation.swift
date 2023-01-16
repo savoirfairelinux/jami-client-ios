@@ -214,21 +214,6 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         self.showConversation(withConversationViewModel: conversationViewModel)
     }
 
-    func pushConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
-        self.showConversation(withConversationViewModel: conversationViewModel)
-        //        if let flag = self.presentingVC[VCType.conversation.rawValue], flag {
-        //            return
-        //        }
-        //        self.presentingVC[VCType.conversation.rawValue] = true
-        //        let conversationViewController = ConversationViewController.instantiate(with: self.injectionBag)
-        //        conversationViewController.viewModel = conversationViewModel
-        //        self.present(viewController: conversationViewController,
-        //                     withStyle: .push,
-        //                     withAnimation: false,
-        //                     withStateable: conversationViewController.viewModel,
-        //                     lockWhilePresenting: VCType.conversation.rawValue)
-    }
-
     func navigateToCall (call: CallModel) {
         guard let navController = self.rootViewController as? UINavigationController else { return }
         let controllers = navController.children

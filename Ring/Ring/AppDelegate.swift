@@ -498,8 +498,12 @@ extension AppDelegate {
             self.accountService.currentAccount = account
         }
         // if notification contains messageContent this is message notification
-        if let participantID = data[Constants.NotificationUserInfoKeys.participantID.rawValue] as? String {
-            self.appCoordinator.openConversation(participantID: participantID)
+        if data[Constants.NotificationUserInfoKeys.messageContent.rawValue] is String {
+            if let conversationID = data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String {
+                self.appCoordinator.openConversation(conversationId: conversationID, accountId: accountId)
+            } else if let participantID = data[Constants.NotificationUserInfoKeys.participantID.rawValue] as? String {
+                self.appCoordinator.openConversation(participantID: participantID)
+            }
             return
         }
         guard let callID = data[Constants.NotificationUserInfoKeys.callID.rawValue] as? String else {

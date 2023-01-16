@@ -170,9 +170,15 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         self.addChildCoordinator(childCoordinator: conversationsCoordinator)
     }
 
-    func openConversation (participantID: String) {
+    func openConversation(participantID: String) {
         if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
             conversationCoordinator.pushConversation(participantId: participantID)
+        }
+    }
+
+    func openConversation(conversationId: String, accountId: String) {
+        if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
+            conversationCoordinator.openConversation(conversationId: conversationId, accountId: accountId)
         }
     }
 
