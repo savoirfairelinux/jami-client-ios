@@ -151,26 +151,25 @@ class SwarmInfoVM: ObservableObject {
     func updateContactList () {
         addMemberCount = self.swarmInfo.maximumLimit - self.swarmInfo.participants.value.count
         self.swarmInfo.contacts
-            .subscribe { [weak self] newValue in
-                guard let self = self else { return }
+            .subscribe(onNext: { [weak self] newValue in
                 DispatchQueue.main.async {
+                    guard let self = self else { return }
                     self.participantsRows = [ParticipantRow]()
                     for info in newValue {
                         let participant = ParticipantRow(participantData: info)
                         self.participantsRows.append(participant)
                     }
                 }
-            }
-            .disposed(by: self.contactsSubscriptionsDisposeBag)
+            })
+            .disposed(by: contactsSubscriptionsDisposeBag)
         injectionBag
             .contactsService
             .contacts
             .asObservable()
-            .subscribe { [weak self] contacts in
+            .subscribe(onNext: { [weak self] contacts in
                 guard let self = self else { return }
                 self.swarmInfo.addContacts(contacts: contacts)
-            } onError: { _ in
-            }
+            })
             .disposed(by: self.contactsSubscriptionsDisposeBag)
     }
 
