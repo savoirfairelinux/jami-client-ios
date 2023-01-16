@@ -32,6 +32,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
     @IBOutlet weak var discardButton: UIButton!
     @IBOutlet weak var banButton: UIButton!
     @IBOutlet weak var buttonsContainer: UIStackView!
+    var deletable = false
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         self.backgroundColor = UIColor.jamiUITableViewCellSelection
@@ -113,6 +114,7 @@ class ContactRequestCell: UITableViewCell, NibReusable {
             .observe(on: MainScheduler.instance)
             .subscribe { inSynchronization in
                 self.buttonsContainer.isHidden = inSynchronization
+                self.deletable = inSynchronization
             } onError: { _ in
 
             }
