@@ -141,6 +141,13 @@ class ConversationsService {
         return []
     }
 
+    func updateConversationMessages(conversationId: String) {
+        for conversation in self.conversations.value where conversation.id == conversationId {
+            conversation.clearMessages()
+            self.conversationsAdapter.loadConversationMessages(conversation.accountId, conversationId: conversationId, from: "", size: 2)
+        }
+    }
+
     private func addSwarm(conversationId: String, accountId: String, accountURI: String, to conversations: inout [ConversationModel]) {
         if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
            let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {

@@ -252,6 +252,14 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         navigationViewController.popToViewController(smartListViewController, animated: false)
     }
 
+    func openConversation(conversationId: String, accountId: String) {
+        self.popToSmartList()
+        if let model = getConversationViewModel(conversationId: conversationId) {
+            self.showConversation(withConversationViewModel: model)
+            return
+        }
+    }
+
     func pushConversation(participantId: String) {
         self.popToSmartList()
         guard let account = accountService.currentAccount else {
@@ -261,7 +269,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             return
         }
         if let model = getConversationViewModel(participantUri: uriString) {
-            self.pushConversation(withConversationViewModel: model)
+            self.showConversation(withConversationViewModel: model)
             return
         }
         guard let conversation = self.conversationService.getConversationForParticipant(jamiId: participantId, accontId: account.id) else {
@@ -269,7 +277,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         }
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
         conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
-        self.pushConversation(withConversationViewModel: conversationViewModel)
+        self.showConversation(withConversationViewModel: conversationViewModel)
     }
 
     func start() {
@@ -302,6 +310,19 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             if let smartController = controller as? SmartlistViewController {
                 for model in smartController.viewModel.conversationViewModels where
                     model.conversation.value.isCoredialog() && model.conversation.value.getParticipants().first?.jamiId == participantUri {
+                    return model
+                }
+            }
+        }
+        return nil
+    }
+
+    func getConversationViewModel(conversationId: String) -> ConversationViewModel? {
+        let viewControllers = self.navigationViewController.children
+        for controller in viewControllers {
+            if let smartController = controller as? SmartlistViewController {
+                for model in smartController.viewModel.conversationViewModels where
+                    model.conversation.value.id == conversationId {
                     return model
                 }
             }
