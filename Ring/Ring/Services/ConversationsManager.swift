@@ -666,6 +666,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
     }
 
     func conversationRemoved(conversationId: String, accountId: String) {
+        self.requestService.conversationRemoved(conversationId: conversationId, accountId: accountId)
         guard let conversation = self.conversationService.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
         if conversation.type != .oneToOne {
             self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
