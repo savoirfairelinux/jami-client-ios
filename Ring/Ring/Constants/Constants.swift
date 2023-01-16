@@ -40,5 +40,13 @@ public class Constants: NSObject {
         case participantID
         case accountID
         case conversationID
+        case notificationType
+    }
+
+    enum NotificationType: String {
+        case call
+        case file
+        case message
+        case contact
     }
 }

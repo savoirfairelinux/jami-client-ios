@@ -500,6 +500,7 @@ extension NotificationService {
         data[Constants.NotificationUserInfoKeys.participantID.rawValue] = from
         data[Constants.NotificationUserInfoKeys.accountID.rawValue] = accountId
         data[Constants.NotificationUserInfoKeys.conversationID.rawValue] = conversationId
+        data[Constants.NotificationUserInfoKeys.notificationType.rawValue] = Constants.NotificationType.file.rawValue
         content.userInfo = data
         if let image = UIImage(contentsOfFile: url.path), let attachement = createAttachment(identifier: imageName, image: image, options: nil) {
             content.attachments = [ attachement ]
@@ -522,6 +523,7 @@ extension NotificationService {
         data[Constants.NotificationUserInfoKeys.participantID.rawValue] = from
         data[Constants.NotificationUserInfoKeys.accountID.rawValue] = accountId
         data[Constants.NotificationUserInfoKeys.conversationID.rawValue] = conversationId
+        data[Constants.NotificationUserInfoKeys.notificationType.rawValue] = Constants.NotificationType.message.rawValue
         content.userInfo = data
         let title = !groupTitle.isEmpty ? groupTitle : self.bestName(accountId: accountId, contactId: from)
         if title.isEmpty {
