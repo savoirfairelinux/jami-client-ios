@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Poišči stik ...";
 "swarmcreation.createTheSwarm" = "Ustvarite roj";
 "swarmcreation.addADescription" = "Dodajte opis";
-"swarmcreation.addMorePeople" = "V ta roj lahko dodate še \%d\ oseb";
+"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Prezri roj";
 "swarm.leaveConversation" = "Zapusti pogovor";
@@ -63,6 +63,10 @@
 "swarm.admin" = "Skrbnik";
 "swarm.banned" = "Izključen/a";
 "swarm.unknown" = "Neznano";
+"swarm.addMorePeople" = "V ta roj lahko dodate še \%d\ oseb";
+"swarm.addMember" = "Add Member";
+"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.Leave" = "Zapusti";
 // Smartlist
 "smartlist.yesterday" = "Včeraj";
 "smartlist.results" = "Javni imenik";

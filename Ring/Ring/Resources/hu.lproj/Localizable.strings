@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Kapcsolat keresése…";
 "swarmcreation.createTheSwarm" = "Rajcsoport létrehozása";
 "swarmcreation.addADescription" = "Leírás hozzáadása";
-"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
+"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Rajcsoport figyelmen kívül hagyása";
 "swarm.leaveConversation" = "Kilépés a beszélgetésből";
@@ -63,6 +63,10 @@
 "swarm.admin" = "Rendszergazda";
 "swarm.banned" = "Letiltva";
 "swarm.unknown" = "Ismeretlen";
+"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
+"swarm.addMember" = "Add Member";
+"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.Leave" = "Elhagyás";
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Nyilvános címtár";

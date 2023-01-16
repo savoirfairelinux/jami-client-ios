@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Caută un contact...";
 "swarmcreation.createTheSwarm" = "Creează grupul";
 "swarmcreation.addADescription" = "Adaugă o descriere";
-"swarmcreation.addMorePeople" = "Poți adăuga încă \%d\ persoane în acest grup";
+"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoră grupul";
 "swarm.leaveConversation" = "Termină conversația";
@@ -63,6 +63,10 @@
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Blocat";
 "swarm.unknown" = "Necunoscut";
+"swarm.addMorePeople" = "Poți adăuga încă \%d\ persoane în acest grup";
+"swarm.addMember" = "Add Member";
+"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.Leave" = "Părăsește";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
@@ -373,7 +377,7 @@
 "generalSettings.videoAcceleration" = "Activează accelerarea video";
 "generalSettings.fileTransfer" = "Transfer de fișiere";
 "generalSettings.automaticAcceptIncomingFiles" = "Acceptă automat fișierele primite";
-"generalSettings.acceptTransferLimit" = "Limita transferului acceptat";
+"generalSettings.acceptTransferLimit" = "Limita fișierului acceptat";
 "generalSettings.acceptTransferLimitDescription" = "(în Mo, 0 = nelimitat)";
 
 //Migrate Account

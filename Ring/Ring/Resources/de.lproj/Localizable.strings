@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Nach Kontakt suchen...";
 "swarmcreation.createTheSwarm" = "Den Schwarm erstellen";
 "swarmcreation.addADescription" = "Eine Beschreibung hinzufügen";
-"swarmcreation.addMorePeople" = "Sie können diesem Schwarm \%d\ weitere Personen hinzufügen";
+"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Den Schwarm ignorieren";
 "swarm.leaveConversation" = "Die Unterhaltung verlassen";
@@ -63,6 +63,10 @@
 "swarm.admin" = "Administrator";
 "swarm.banned" = "gesperrt";
 "swarm.unknown" = "Unbekannt";
+"swarm.addMorePeople" = "Sie können diesem Schwarm \%d\ weitere Personen hinzufügen";
+"swarm.addMember" = "Add Member";
+"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.Leave" = "Verlassen";
 // Smartlist
 "smartlist.yesterday" = "Gestern";
 "smartlist.results" = "Öffentliches Verzeichnis";

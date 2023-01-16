@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Cerca contatto...";
 "swarmcreation.createTheSwarm" = "Crea il gruppo";
 "swarmcreation.addADescription" = "Aggiungi una descrizione";
-"swarmcreation.addMorePeople" = "Puoi aggiungere altre \%d\ persone in questo gruppo";
+"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Ignora il gruppo";
 "swarm.leaveConversation" = "Lascia la conversazione";
@@ -63,6 +63,10 @@
 "swarm.admin" = "Amministratore";
 "swarm.banned" = "Bloccato";
 "swarm.unknown" = "Sconosciuto";
+"swarm.addMorePeople" = "Puoi aggiungere altre \%d\ persone in questo gruppo";
+"swarm.addMember" = "Add Member";
+"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.Leave" = "Lascia";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Elenco pubblico";
@@ -373,7 +377,7 @@
 "generalSettings.videoAcceleration" = "Attiva l'accelerazione video";
 "generalSettings.fileTransfer" = "Trasferimento file";
 "generalSettings.automaticAcceptIncomingFiles" = "Accetta automaticamente i file in arrivo";
-"generalSettings.acceptTransferLimit" = "Limite del trasferimento accettato";
+"generalSettings.acceptTransferLimit" = "Limite del file accettato";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = illimitato)";
 
 //Migrate Account

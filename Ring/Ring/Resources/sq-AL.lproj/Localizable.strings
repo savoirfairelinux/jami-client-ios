@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Kërkoni për kontakt…";
 "swarmcreation.createTheSwarm" = "Krijoje zgjoin";
 "swarmcreation.addADescription" = "Shtoni një përshkrim";
-"swarmcreation.addMorePeople" = "You can add \%d\ more people in this swarm";
+"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Shpërfille zgjuan";
 "swarm.leaveConversation" = "Braktiseni bisedën";
@@ -63,6 +63,10 @@
 "swarm.admin" = "Përgjegjës";
 "swarm.banned" = "Dëbuar";
 "swarm.unknown" = "I panjohur";
+"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
+"swarm.addMember" = "Add Member";
+"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.Leave" = "Braktise";
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori Publike";
