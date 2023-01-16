@@ -160,6 +160,7 @@ class SwarmInfoVM: ObservableObject {
                         self.participantsRows.append(participant)
                     }
                 }
+            } onError: { _ in
             }
             .disposed(by: self.contactsSubscriptionsDisposeBag)
         injectionBag
