@@ -107,6 +107,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
+        self.tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
 
     func setupBindings() {
@@ -156,5 +157,37 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 self?.log.info("Ban trust request done")
             })
             .disposed(by: self.disposeBag)
+    }
+    private func removeContactFromInvitationList(atIndex: IndexPath) {
+        let alert = UIAlertController(title: L10n.Alerts.confirmDeleteConversationTitle, message: L10n.Alerts.confirmDeleteConversation, preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction, style: .destructive) { (_: UIAlertAction!) -> Void in
+            if let reqToDelete: RequestItem = try? self.tableView.rx.model(at: atIndex) {
+                self.viewModel.deleteRequest(item: reqToDelete)
+                self.tableView.reloadData()
+            }
+        }
+        let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction, style: .default) { (_: UIAlertAction!) -> Void in }
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+extension ContactRequestsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if let cell = tableView.cellForRow(at: indexPath) as? ContactRequestCell {
+            if cell.flagDeleteRequest {
+                let delete = UIContextualAction(style: .normal, title: "Delete") { (_, _, _) in
+                    self.removeContactFromInvitationList(atIndex: indexPath)
+                }
+                delete.backgroundColor = .red
+                let swipeActions = UISwipeActionsConfiguration(actions: [delete])
+                return swipeActions
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
     }
 }
