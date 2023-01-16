@@ -132,6 +132,11 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         }
         return self.requestsService.discardConverversationRequest(conversationId: item.request.conversationId, withAccount: item.request.accountId)
     }
+    func deleteRequest(item: RequestItem) {
+        let accountId = item.request.accountId
+        let conversationId = item.request.conversationId
+        self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+    }
 
     private func lookupUserName(withItem item: RequestItem) {
         if !item.request.isCoredialog() { return }
