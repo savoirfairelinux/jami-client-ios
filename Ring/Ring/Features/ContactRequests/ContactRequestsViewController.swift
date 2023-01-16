@@ -107,6 +107,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                     .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
+        self.tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
 
     func setupBindings() {
@@ -156,5 +157,45 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
                 self?.log.info("Ban trust request done")
             })
             .disposed(by: self.disposeBag)
+    }
+    private func removeItem(atIndex: IndexPath) {
+        let alert = UIAlertController(title: L10n.Alerts.confirmDeleteConversationTitle, message: L10n.Alerts.confirmDeleteConversation, preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction, style: .destructive) { (_: UIAlertAction!) -> Void in
+            if let convToDelete: ConversationViewModel = try? self.tableView.rx.model(at: atIndex) {
+                self.viewModel.delete(conversationViewModel: convToDelete)
+            }
+        }
+        let cancelAction = UIAlertAction(title: L10n.Actions.cancelAction, style: .default) { (_: UIAlertAction!) -> Void in }
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+extension ContactRequestsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var indexPathValue = -1
+        viewModel.contactRequestItems
+            .subscribe(onNext: { requestItem in
+                let item = requestItem[indexPath.row]
+                print("Check Binal \(item.userName.value) \(item.request.synchronizing.value)")
+                if item.request.synchronizing.value {
+                   indexPathValue = indexPath.row
+                }
+            })
+            .disposed(by: disposeBag)
+        if indexPath.row == indexPathValue {
+            let delete = UIContextualAction(style: .normal, title: "Delete") { (_, _, _) in
+            // self.removeItem(atIndex: indexPath)
+                print("Done")
+            }
+            delete.backgroundColor = .red
+            let swipeActions = UISwipeActionsConfiguration(actions: [delete])
+            return swipeActions
+        }
+        else {
+                return nil
+        }
+
     }
 }

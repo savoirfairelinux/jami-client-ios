@@ -132,6 +132,28 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         }
         return self.requestsService.discardConverversationRequest(conversationId: item.request.conversationId, withAccount: item.request.accountId)
     }
+    func delete(conversationViewModel: ConversationViewModel) {
+        conversationViewModel.closeAllPlayers()
+        let accountId = conversationViewModel.conversation.value.accountId
+        let conversationId = conversationViewModel.conversation.value.id
+        if conversationViewModel.conversation.value.isCoredialog(),
+           let participantId = conversationViewModel.conversation.value.getParticipants().first?.jamiId {
+            self.contactsService
+                .removeContact(withId: participantId,
+                               ban: false,
+                               withAccountId: accountId)
+                .asObservable()
+                .subscribe(onCompleted: { [weak self, weak conversationViewModel] in
+                    guard let conversationViewModel = conversationViewModel else { return }
+                    self?.conversationService
+                        .removeConversationFromDB(conversation: conversationViewModel.conversation.value,
+                                                  keepConversation: false)
+                })
+                .disposed(by: self.disposeBag)
+        } else {
+            self.conversationService.removeConversation(conversationId: conversationId, accountId: accountId)
+        }
+    }
 
     private func lookupUserName(withItem item: RequestItem) {
         if !item.request.isCoredialog() { return }
