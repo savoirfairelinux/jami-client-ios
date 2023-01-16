@@ -366,4 +366,12 @@ class ConversationModel: Equatable {
     func isSwarm() -> Bool {
         return self.type != .nonSwarm && self.type != .sip && self.type != .jams
     }
+
+    func clearMessages() {
+        messages = [MessageModel]()
+        newMessages.accept([MessageModel]())
+        lastMessage = nil
+        unorderedInteractions = [String]()
+        numberOfUnreadMessages.accept(0)
+    }
 }
