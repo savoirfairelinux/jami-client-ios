@@ -185,7 +185,11 @@ class NotificationService: UNNotificationServiceExtension {
                 case .invitation:
                     self.syncCompleted = true
                     self.numberOfMessages += 1
-                    self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId, groupTitle: eventData.groupTitle)
+                    self.configureMessageNotification(from: eventData.jamiId,
+                                                      body: eventData.content,
+                                                      accountId: self.accountId,
+                                                      conversationId: eventData.conversationId,
+                                                      groupTitle: eventData.groupTitle)
                 }
             }
         case .unknown:

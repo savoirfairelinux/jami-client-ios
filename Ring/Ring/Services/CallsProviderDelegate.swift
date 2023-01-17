@@ -59,8 +59,7 @@ class CallsProviderDelegate: NSObject {
     override init() {
         self.sharedResponseStream = responseStream.share()
         super.init()
-        let providerConfiguration = CXProviderConfiguration(localizedName: "Jami")
-
+        let providerConfiguration = CXProviderConfiguration()
         providerConfiguration.supportsVideo = true
         providerConfiguration.supportedHandleTypes = [.generic, .phoneNumber]
         providerConfiguration.ringtoneSound = "default.wav"
