@@ -40,6 +40,7 @@ public enum VCType: String {
     case conversation
     case contact
     case blockList
+    case log
 }
 
 /// This Coordinator drives the global navigation of the app: it can present the main interface, the

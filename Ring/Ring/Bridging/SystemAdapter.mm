@@ -28,6 +28,17 @@
 
 @implementation SystemAdapter
 
+static id <SystemAdapterDelegate> _delegate;
+
+#pragma mark Init
+
+- (id)init {
+    if (self = [super init]) {
+        [self registerConfigurationHandler];
+    }
+    return self;
+}
+
 using namespace libjami;
 
 #pragma mark Callbacks registration
@@ -44,9 +55,30 @@ using namespace libjami;
                 ret->push_back(std::string([path.path UTF8String]));
             }
         }));
+
+    confHandlers.insert(exportable_callback<ConfigurationSignal::MessageSend>(
+       [&](const std::string& message) {
+           NSString* messageStr = [NSString stringWithUTF8String:message.c_str()];
+           [SystemAdapter.delegate messageReceivedWithMessage: messageStr];
+
+    }));
+
     registerSignalHandlers(confHandlers);
 }
 
 #pragma mark -
+
+-(void)triggerLog:(BOOL)trigger {
+    monitor(trigger);
+}
+
+#pragma mark SystemAdapterDelegate
++ (id <SystemAdapterDelegate>)delegate {
+    return _delegate;
+}
+
++ (void) setDelegate:(id<SystemAdapterDelegate>)delegate {
+    _delegate = delegate;
+}
 
 @end

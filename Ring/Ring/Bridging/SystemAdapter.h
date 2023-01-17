@@ -20,8 +20,14 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol SystemAdapterDelegate;
+
 @interface SystemAdapter : NSObject
 
+@property (class, nonatomic, weak) id <SystemAdapterDelegate> delegate;
+
 - (void)registerConfigurationHandler;
+
+-(void)triggerLog:(BOOL)trigger;
 
 @end

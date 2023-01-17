@@ -35,6 +35,7 @@ enum GeneralSettingsSection: SectionModelType {
         case automaticallyAcceptIncomingFiles
         case acceptTransferLimit
         case sectionHeader(title: String)
+        case log
     }
 
     var items: [SectionRow] {
@@ -52,16 +53,24 @@ enum GeneralSettingsSection: SectionModelType {
     }
 }
 
-class GeneralSettingsViewModel: ViewModel {
+class GeneralSettingsViewModel: ViewModel, Stateable {
+    // MARK: - Rx Stateable
+    private let stateSubject = PublishSubject<State>()
+    lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
 
     lazy var generalSettings: Observable<[GeneralSettingsSection]> = {
         return Observable
             .just([GeneralSettingsSection.generalSettings(items:
                                                             [
+                                                                .sectionHeader(title: L10n.GeneralSettings.videoSettings),
                                                                 .hardwareAcceleration,
                                                                 .sectionHeader(title: L10n.GeneralSettings.fileTransfer),
                                                                 .automaticallyAcceptIncomingFiles,
-                                                                .acceptTransferLimit
+                                                                .acceptTransferLimit,
+                                                                .sectionHeader(title: L10n.LogView.title),
+                                                                .log
                                                             ])])
     }()
 
@@ -103,6 +112,10 @@ class GeneralSettingsViewModel: ViewModel {
         }
         UserDefaults.standard.set(enable, forKey: automaticDownloadFilesKey)
         automaticAcceptIncomingFiles.accept(enable)
+    }
+
+    func openLog() {
+        self.stateSubject.onNext(SettingsState.openLog)
     }
 
     func changeTransferLimit(value: String) {
