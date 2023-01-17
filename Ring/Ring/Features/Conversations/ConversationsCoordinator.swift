@@ -238,8 +238,17 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func showGeneralSettings() {
-        let settingsViewController = GeneralSettingsViewController.instantiate(with: self.injectionBag)
-        self.present(viewController: settingsViewController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
+        let generalSettingsCoordinator = GeneralSettingsCoordinator(with: self.injectionBag)
+        generalSettingsCoordinator.parentCoordinator = self
+        generalSettingsCoordinator.setNavigationController(controller: self.navigationViewController)
+        self.addChildCoordinator(childCoordinator: generalSettingsCoordinator)
+        generalSettingsCoordinator.start()
+        self.smartListViewController.rx.viewWillAppear
+            .take(1)
+            .subscribe(onNext: { [weak self, weak generalSettingsCoordinator] (_) in
+                self?.removeChildCoordinator(childCoordinator: generalSettingsCoordinator)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func replaceCurrentWithConversationFor(participantUri: String) {
