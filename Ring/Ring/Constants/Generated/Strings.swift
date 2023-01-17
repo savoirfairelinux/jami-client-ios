@@ -573,6 +573,20 @@ internal enum L10n {
     /// Username
     internal static let usernamePlaceholder = L10n.tr("Localizable", "linkToAccountManager.usernamePlaceholder", fallback: "Username")
   }
+  internal enum LogView {
+    /// Open diagnostic log settings
+    internal static let description = L10n.tr("Localizable", "logView.description", fallback: "Open diagnostic log settings")
+    /// Failed to save file
+    internal static let saveError = L10n.tr("Localizable", "logView.saveError", fallback: "Failed to save file")
+    /// Failed to share file
+    internal static let shareError = L10n.tr("Localizable", "logView.shareError", fallback: "Failed to share file")
+    /// Start Logging
+    internal static let startLogging = L10n.tr("Localizable", "logView.startLogging", fallback: "Start Logging")
+    /// Stop Logging
+    internal static let stopLogging = L10n.tr("Localizable", "logView.stopLogging", fallback: "Stop Logging")
+    /// Diagnostics
+    internal static let title = L10n.tr("Localizable", "logView.title", fallback: "Diagnostics")
+  }
   internal enum MigrateAccount {
     /// Cancel
     internal static let cancel = L10n.tr("Localizable", "migrateAccount.cancel", fallback: "Cancel")
