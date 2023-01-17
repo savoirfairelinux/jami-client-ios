@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2023 Savoir-faire Linux Inc.
  *
- *  Author: Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,16 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Foundation/Foundation.h>
+import Foundation
 
-@protocol SystemAdapterDelegate;
-
-@interface SystemAdapter : NSObject
-
-@property (class, nonatomic, weak) id <SystemAdapterDelegate> delegate;
-
-- (void)registerConfigurationHandler;
-
--(void)triggerLog:(BOOL)trigger;
-
-@end
+@objc protocol SystemAdapterDelegate {
+    func messageReceived(message: String)
+}

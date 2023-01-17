@@ -99,6 +99,25 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                     return self.makeAcceptTransferLimitCell()
                 case .automaticallyAcceptIncomingFiles:
                     return self.makeAutoDownloadFilesCell()
+                case .log:
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = "Open diagnostic log settings"
+                    cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.selectionStyle = .none
+                    cell.sizeToFit()
+                    let button = UIButton.init(frame: cell.frame)
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
+                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    button.frame.size = size
+                    cell.addSubview(button)
+                    button.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            self?.viewModel.openLog()
+                        })
+                        .disposed(by: cell.disposeBag)
+                    return cell
+
                 }
             }
         let settingsItemDataSource = RxTableViewSectionedReloadDataSource<GeneralSettingsSection>(configureCell: configureCell)
