@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 2023 Savoir-faire Linux Inc.
  *
- *  Author: Binal Ahiya <binal.ahiya@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,23 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import SwiftUI
+import Foundation
 
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .center,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
-        }
-    }
-
-    func menuItemStyle() -> some View {
-        self
-            .frame(width: 22, height: 22)
-            .foregroundColor(Color(UIColor.jamiButtonLight))
-    }
+@objc protocol SystemAdapterDelegate {
+    func messageReceived(message: String)
 }
