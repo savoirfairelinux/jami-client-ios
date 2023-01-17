@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let presenceService = PresenceService(withPresenceAdapter: PresenceAdapter())
     private let videoService = VideoService(withVideoAdapter: VideoAdapter())
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
+    private let systemService = SystemService(withSystemAdapter: SystemAdapter())
     private let networkService = NetworkService()
     private let callsProvider: CallsProviderDelegate = CallsProviderDelegate()
     private var conversationManager: ConversationsManager?
@@ -90,7 +91,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             withProfileService: self.profileService,
                             withCallsProvider: self.callsProvider,
                             withLocationSharingService: self.locationSharingService,
-                            withRequestsService: self.requestsService)
+                            withRequestsService: self.requestsService,
+                            withSystemService: self.systemService)
     }()
     private lazy var appCoordinator: AppCoordinator = {
         return AppCoordinator(with: self.injectionBag)
@@ -142,7 +144,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.addListenerForNotification()
 
         // starts the daemon
-        SystemAdapter().registerConfigurationHandler()
         self.startDaemon()
 
         // requests permission to use the camera

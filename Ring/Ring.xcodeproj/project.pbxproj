@@ -216,6 +216,12 @@
 		263B715A246D9556007044C4 /* IncognitoSmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */; };
 		263B715C246D96E5007044C4 /* IncognitoSmartListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263B715B246D96E5007044C4 /* IncognitoSmartListCell.xib */; };
 		264EA8722971EF4700B6FB6F /* SwarmInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA8712971EF4600B6FB6F /* SwarmInfoViewModel.swift */; };
+		264EA87E2977080300B6FB6F /* LogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA87D2977080300B6FB6F /* LogViewModel.swift */; };
+		264EA8802977082A00B6FB6F /* LogUIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA87F2977082A00B6FB6F /* LogUIViewModel.swift */; };
+		264EA8842977085C00B6FB6F /* LogUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA8832977085C00B6FB6F /* LogUI.swift */; };
+		264EA8862977089C00B6FB6F /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA8852977089C00B6FB6F /* LogViewController.swift */; };
+		264FB66229775B1C00BEFBBF /* SystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FB66129775B1C00BEFBBF /* SystemService.swift */; };
+		264FB66629775B9B00BEFBBF /* SystemAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */; };
 		2659F65827483656009107F1 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65727483656009107F1 /* VideoManager.swift */; };
 		2659F65C27483A27009107F1 /* DecodingAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */; };
 		265C436A286254C900B4BE73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C4369286254C900B4BE73 /* Constants.swift */; };
@@ -343,6 +349,8 @@
 		26A88C7726700B5F00888EED /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144524B4ACC8007203D5 /* libxml2.tbd */; };
 		26A88C7826700B7500888EED /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6452144124B4AC9F007203D5 /* libc++.tbd */; };
 		26A88C7926700BC500888EED /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A931D1C2F5800E99CD9 /* libiconv.tbd */; };
+		26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26AF9F3C2977126500C7069A /* LogViewController.storyboard */; };
+		26AF9F3F29771C8E00C7069A /* GeneralSettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF9F3E29771C8E00C7069A /* GeneralSettingsCoordinator.swift */; };
 		26B37339263C439B00E2EE28 /* CustomSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B37337263C439B00E2EE28 /* CustomSearchController.swift */; };
 		26B37342263C4B3700E2EE28 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */; };
 		26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B708FD253610B0003974F2 /* OpenURLLabel.swift */; };
@@ -837,6 +845,12 @@
 		263B7159246D9556007044C4 /* IncognitoSmartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncognitoSmartListCell.swift; sourceTree = "<group>"; };
 		263B715B246D96E5007044C4 /* IncognitoSmartListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncognitoSmartListCell.xib; sourceTree = "<group>"; };
 		264EA8712971EF4600B6FB6F /* SwarmInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoViewModel.swift; sourceTree = "<group>"; };
+		264EA87D2977080300B6FB6F /* LogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewModel.swift; sourceTree = "<group>"; };
+		264EA87F2977082A00B6FB6F /* LogUIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUIViewModel.swift; sourceTree = "<group>"; };
+		264EA8832977085C00B6FB6F /* LogUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUI.swift; sourceTree = "<group>"; };
+		264EA8852977089C00B6FB6F /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		264FB66129775B1C00BEFBBF /* SystemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemService.swift; sourceTree = "<group>"; };
+		264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAdapterDelegate.swift; sourceTree = "<group>"; };
 		2659F65727483656009107F1 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingAdapterDelegate.swift; sourceTree = "<group>"; };
 		265C4369286254C900B4BE73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -927,6 +941,8 @@
 		26A88C74267009EC00888EED /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		26A88C7A26700C0500888EED /* libz.1.2.11.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.11.tbd; path = usr/lib/libz.1.2.11.tbd; sourceTree = SDKROOT; };
 		26A88C7C26700C8C00888EED /* Xcode.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Xcode.app; path = ../../../../../../../Applications/Xcode.app; sourceTree = "<group>"; };
+		26AF9F3C2977126500C7069A /* LogViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogViewController.storyboard; sourceTree = "<group>"; };
+		26AF9F3E29771C8E00C7069A /* GeneralSettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsCoordinator.swift; sourceTree = "<group>"; };
 		26B37337263C439B00E2EE28 /* CustomSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchController.swift; sourceTree = "<group>"; };
 		26B37341263C4B3700E2EE28 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		26B708FD253610B0003974F2 /* OpenURLLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLLabel.swift; sourceTree = "<group>"; };
@@ -1451,6 +1467,8 @@
 				26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */,
 				2659F65727483656009107F1 /* VideoManager.swift */,
 				2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */,
+				264FB66129775B1C00BEFBBF /* SystemService.swift */,
+				264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1828,6 +1846,8 @@
 				0E96ED74225D06250016C07D /* GeneralSettingsViewController.storyboard */,
 				0E96ED76225D06380016C07D /* GeneralSettingsViewController.swift */,
 				0E96ED78225D06480016C07D /* GeneralSettingsViewModel.swift */,
+				26AF9F3E29771C8E00C7069A /* GeneralSettingsCoordinator.swift */,
+				264EA8782977078C00B6FB6F /* Diagnostic */,
 			);
 			path = GeneralSettings;
 			sourceTree = "<group>";
@@ -2165,6 +2185,18 @@
 				26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */,
 			);
 			path = Preview;
+			sourceTree = "<group>";
+		};
+		264EA8782977078C00B6FB6F /* Diagnostic */ = {
+			isa = PBXGroup;
+			children = (
+				264EA87D2977080300B6FB6F /* LogViewModel.swift */,
+				264EA87F2977082A00B6FB6F /* LogUIViewModel.swift */,
+				264EA8832977085C00B6FB6F /* LogUI.swift */,
+				264EA8852977089C00B6FB6F /* LogViewController.swift */,
+				26AF9F3C2977126500C7069A /* LogViewController.storyboard */,
+			);
+			path = Diagnostic;
 			sourceTree = "<group>";
 		};
 		265DFAFF292EB91F00834B97 /* MessageSwiftUI */ = {
@@ -2624,6 +2656,7 @@
 				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
 				62AD58482056DA6800AF0701 /* MessageCellDataTransferReceived.xib in Resources */,
 				1A2041841F1EA0FC00C08435 /* CreateAccountViewController.storyboard in Resources */,
+				26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */,
 				1A2D18ED1F2919D800B2C785 /* MeViewController.storyboard in Resources */,
 				26D08AB12693474300E37574 /* InvitationViewController.storyboard in Resources */,
 				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
@@ -2745,6 +2778,7 @@
 				269DA09D28E23F57007D51D6 /* MessagesListView.swift in Sources */,
 				446FAF1B2373425E00519C4F /* SendFileViewController.swift in Sources */,
 				04399AAC1D1C304300E99CD9 /* AccountAdapter.mm in Sources */,
+				264EA8862977089C00B6FB6F /* LogViewController.swift in Sources */,
 				1D4EE84D29252AD000ED2010 /* SwarmCreationUIModel.swift in Sources */,
 				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,
 				0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */,
@@ -2764,6 +2798,7 @@
 				0E5806F523BE4307007D1F5D /* PlayerViewModel.swift in Sources */,
 				1DF75AC2296E09240055EA87 /* Button+Helpers.swift in Sources */,
 				1A0C4EDC1F1D4B7E00550433 /* WelcomeViewController.swift in Sources */,
+				26AF9F3F29771C8E00C7069A /* GeneralSettingsCoordinator.swift in Sources */,
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
 				66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */,
@@ -2798,6 +2833,7 @@
 				1A2D18DD1F29192D00B2C785 /* MessableBubble.swift in Sources */,
 				260C73F329196C6C005C513F /* MessageStackVM.swift in Sources */,
 				0E96ED77225D06380016C07D /* GeneralSettingsViewController.swift in Sources */,
+				264FB66229775B1C00BEFBBF /* SystemService.swift in Sources */,
 				0E99F1A022417A0400CF8BD6 /* JamiURI.swift in Sources */,
 				1A5DC02E1F3565640075E8EF /* ConversationViewModel.swift in Sources */,
 				0EBB72A92034F44200D88F46 /* ProfilesService.swift in Sources */,
@@ -2845,6 +2881,7 @@
 				0E48F9D31FDF150700D6CC08 /* GeneratedInteractionsManager.swift in Sources */,
 				0E7CF4DD20165BFB00CD967D /* ButtonsContainerViewModel.swift in Sources */,
 				265C436A286254C900B4BE73 /* Constants.swift in Sources */,
+				264EA87E2977080300B6FB6F /* LogViewModel.swift in Sources */,
 				62B60AF92048A40D001BEACF /* DataTransferAdapter.mm in Sources */,
 				1A5DC0371F35675E0075E8EF /* ContactRequestCell.swift in Sources */,
 				1A20417C1F1E56FF00C08435 /* WelcomeViewModel.swift in Sources */,
@@ -2882,6 +2919,8 @@
 				26B708FE253610B0003974F2 /* OpenURLLabel.swift in Sources */,
 				56BBC9A31ED714DF00CDAF8B /* ConversationsService.swift in Sources */,
 				642AD48424EC64CE00521127 /* CopyableLabel.swift in Sources */,
+				264EA8802977082A00B6FB6F /* LogUIViewModel.swift in Sources */,
+				264EA8842977085C00B6FB6F /* LogUI.swift in Sources */,
 				2662FC7B246B216B00FA7782 /* JamiSearchViewModel.swift in Sources */,
 				2662FC7F246B790400FA7782 /* IncognitoSmartListViewModel.swift in Sources */,
 				446FAF1D2373427100519C4F /* SendFileViewModel.swift in Sources */,
@@ -2972,6 +3011,7 @@
 				0E6F5453223C3C7500ECC3CE /* AccountItemView.swift in Sources */,
 				0EF49AA123828CBC0064CD98 /* ConferenceParticipantViewModel.swift in Sources */,
 				0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */,
+				264FB66629775B9B00BEFBBF /* SystemAdapterDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
