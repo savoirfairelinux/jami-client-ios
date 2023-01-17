@@ -417,11 +417,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     @objc
     private func handleNotification() {
         DispatchQueue.main.async {[weak self] in
-            /// if app is in the background extension should handle notification
+            // if app is in the background extension should handle notification
             if UIApplication.shared.applicationState == .background {
                 return
             }
-            /// emit signal that app is active for notification extension
+            // emit signal that app is active for notification extension
             CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFNotificationName(Constants.notificationAppIsActive), nil, nil, true)
 
             guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier),
@@ -485,44 +485,22 @@ extension AppDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let data = response.notification.request.content.userInfo
-        self.handleNotificationActions(data: data, responseIdentifier: response.actionIdentifier)
+        self.handleNotificationActions(data: data)
         completionHandler()
     }
 
-    func handleNotificationActions(data: [AnyHashable: Any], responseIdentifier: String) {
+    func handleNotificationActions(data: [AnyHashable: Any]) {
         guard let currentAccount = self.accountService
                 .currentAccount,
               let accountId = data[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String,
               let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
-        if currentAccount.id != accountId && responseIdentifier != CallAcition.refuse.rawValue {
+        if currentAccount.id != accountId {
             self.accountService.currentAccount = account
         }
         if let conversationID = data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String {
             self.appCoordinator.openConversation(conversationId: conversationID, accountId: accountId)
-            return
         } else if let participantID = data[Constants.NotificationUserInfoKeys.participantID.rawValue] as? String {
             self.appCoordinator.openConversation(participantID: participantID)
-            return
-        }
-        guard let callID = data[Constants.NotificationUserInfoKeys.callID.rawValue] as? String else {
-            return
-        }
-        switch responseIdentifier {
-        case CallAcition.accept.rawValue:
-            NotificationCenter.default.post(name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue),
-                                            object: nil,
-                                            userInfo: data)
-        case CallAcition.refuse.rawValue:
-            self.callService.refuse(callId: callID)
-                .subscribe({_ in
-                    print("Call ignored")
-                })
-                .disposed(by: self.disposeBag)
-        default:
-            // automatically answer call when user tap the notifications
-            NotificationCenter.default.post(name: NSNotification.Name(NotificationName.answerCallFromNotifications.rawValue),
-                                            object: nil,
-                                            userInfo: data)
         }
     }
 
@@ -599,7 +577,7 @@ extension AppDelegate {
     }
 }
 
-// MARK: user notifications (ios 14.5 +)
+// MARK: user notifications
 extension AppDelegate {
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken
