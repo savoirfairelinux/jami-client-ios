@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -50,7 +50,7 @@
                             </userDefinedRuntimeAttributes>
                         </visualEffectView>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLe-dt-klX">
-                            <rect key="frame" x="0.0" y="117.5" width="500" height="50"/>
+                            <rect key="frame" x="0.0" y="119" width="500" height="50"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="RHx-cL-CV5">
                                     <rect key="frame" x="0.0" y="0.0" width="1000" height="50"/>
@@ -58,26 +58,31 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOd-SD-lPc">
                                             <rect key="frame" x="0.0" y="0.0" width="500" height="50"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="U7m-9X-3Ld">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="U7m-9X-3Ld">
                                                     <rect key="frame" x="225" y="0.0" width="50" height="50"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="U7m-9X-3Ld" firstAttribute="centerX" secondItem="TOd-SD-lPc" secondAttribute="centerX" id="3XX-PX-9qd"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="U7m-9X-3Ld" secondAttribute="trailing" constant="225" id="3e9-m0-1Nz"/>
                                                 <constraint firstAttribute="bottom" secondItem="U7m-9X-3Ld" secondAttribute="bottom" id="DkW-WO-xTN"/>
-                                                <constraint firstItem="U7m-9X-3Ld" firstAttribute="centerX" secondItem="TOd-SD-lPc" secondAttribute="centerX" id="fci-9p-kSg"/>
+                                                <constraint firstItem="U7m-9X-3Ld" firstAttribute="leading" secondItem="TOd-SD-lPc" secondAttribute="leading" constant="225" id="fRS-ut-UfR"/>
+                                                <constraint firstItem="U7m-9X-3Ld" firstAttribute="leading" relation="lessThanOrEqual" secondItem="TOd-SD-lPc" secondAttribute="leading" constant="225" id="p9X-3x-maA"/>
                                                 <constraint firstItem="U7m-9X-3Ld" firstAttribute="top" secondItem="TOd-SD-lPc" secondAttribute="top" id="yAX-QO-Qeh"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UX6-cQ-hKT">
                                             <rect key="frame" x="500" y="0.0" width="500" height="50"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dc9-Dy-TLI">
-                                                    <rect key="frame" x="225" y="0.0" width="50" height="50"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dc9-Dy-TLI">
+                                                    <rect key="frame" x="250" y="0.0" width="0.0" height="50"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="dc9-Dy-TLI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UX6-cQ-hKT" secondAttribute="leading" constant="225" id="86I-wA-vmu"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dc9-Dy-TLI" secondAttribute="trailing" constant="225" id="92p-sY-OQM"/>
+                                                <constraint firstItem="dc9-Dy-TLI" firstAttribute="centerX" secondItem="UX6-cQ-hKT" secondAttribute="centerX" id="C6W-16-Eth"/>
                                                 <constraint firstAttribute="bottom" secondItem="dc9-Dy-TLI" secondAttribute="bottom" id="DAZ-5I-XBd"/>
-                                                <constraint firstItem="dc9-Dy-TLI" firstAttribute="centerX" secondItem="UX6-cQ-hKT" secondAttribute="centerX" id="ggB-b8-vvm"/>
                                                 <constraint firstItem="dc9-Dy-TLI" firstAttribute="top" secondItem="UX6-cQ-hKT" secondAttribute="top" id="ki1-hv-jbk"/>
                                             </constraints>
                                         </view>
@@ -127,7 +132,7 @@
                             </userDefinedRuntimeAttributes>
                         </button>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" defersCurrentPageDisplay="YES" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="p1T-pp-N9T">
-                            <rect key="frame" x="199" y="172.5" width="102.5" height="27.5"/>
+                            <rect key="frame" x="201" y="174" width="98.5" height="26"/>
                             <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </pageControl>
                     </subviews>
