@@ -64,9 +64,9 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
                     case .none:
                         self?.withoutOptions()
                     case .optionsWithoutSpeakerphone:
-                        self?.update(withSpeakerEnable: false)
+                        self?.update(withSpeakerShow: true)
                     case .optionsWithSpeakerphone:
-                        self?.update(withSpeakerEnable: true)
+                        self?.update(withSpeakerShow: false)
                     }
                 })
                 .disposed(by: self.disposeBag)
@@ -135,10 +135,12 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         scrollView.isScrollEnabled = false
     }
 
-    func update(withSpeakerEnable enable: Bool) {
+    func update(withSpeakerShow status: Bool) {
         self.backgroundBlurEffect.isHidden = false
         cancelButton.isHidden = true
-        switchSpeakerButton.isEnabled = enable
+        // Hide speaker button when speaker is disabled
+        switchSpeakerButton.isHidden = status
+        // switchSpeakerButton.isEnabled = enable
         let isSip = self.viewModel?.isSipCall ?? false
         let isConference = self.viewModel?.isConference ?? false
         let audioOnly = self.callViewMode == .audio
@@ -214,10 +216,8 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
     func updateView() {
         if firstPageStackView.subviews.isEmpty {
             self.withoutOptions()
-        } else if switchSpeakerButton.isEnabled && !switchSpeakerButton.isHidden {
-            self.update(withSpeakerEnable: true)
         } else if !switchSpeakerButton.isHidden {
-            self.update(withSpeakerEnable: false)
+            self.update(withSpeakerShow: false)
         }
     }
 
