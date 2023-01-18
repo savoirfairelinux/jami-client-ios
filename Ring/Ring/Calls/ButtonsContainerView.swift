@@ -51,6 +51,9 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
     var switchSpeakerButton: UIButton!
     var addParticipantButton: UIButton!
     var raiseHandButton: UIButton!
+    let buttonHeightWidth: CGFloat = 50
+    let buttonSpacing: CGFloat = 20
+    var numberOfButtons: CGFloat = 0
 
     private let disposeBag = DisposeBag()
     var callViewMode: CallViewMode = .audio
@@ -64,9 +67,9 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
                     case .none:
                         self?.withoutOptions()
                     case .optionsWithoutSpeakerphone:
-                        self?.update(withSpeakerEnable: false)
+                        self?.update(withSpeakerShow: true)
                     case .optionsWithSpeakerphone:
-                        self?.update(withSpeakerEnable: true)
+                        self?.update(withSpeakerShow: false)
                     }
                 })
                 .disposed(by: self.disposeBag)
@@ -135,89 +138,72 @@ class ButtonsContainerView: UIView, NibLoadable, UIScrollViewDelegate {
         scrollView.isScrollEnabled = false
     }
 
-    func update(withSpeakerEnable enable: Bool) {
+    func update(withSpeakerShow status: Bool) {
         self.backgroundBlurEffect.isHidden = false
         cancelButton.isHidden = true
-        switchSpeakerButton.isEnabled = enable
+        // Hide speaker button when speaker is disabled
+        switchSpeakerButton.isHidden = status
         let isSip = self.viewModel?.isSipCall ?? false
         let isConference = self.viewModel?.isConference ?? false
         let audioOnly = self.callViewMode == .audio
         var havePages = false
+        let screenRect = UIScreen.main.bounds
+        let screenWidth: CGFloat = screenRect.size.width
         if isSip {
-            firstPageStackView.removeSubviews()
-            secondPageStackView.removeSubviews()
-            firstPageStackView.addArrangedSubview(stopButton)
-            firstPageStackView.addArrangedSubview(pauseCallButton)
+            self.commonButtonsInStackView()
             firstPageStackView.addArrangedSubview(muteAudioButton)
-            firstPageStackView.addArrangedSubview(switchSpeakerButton)
+            if !switchSpeakerButton.isHidden { firstPageStackView.addArrangedSubview(switchSpeakerButton) }
             firstPageStackView.addArrangedSubview(dialpadButton)
-        } else if audioOnly {
-            let screenRect = UIScreen.main.bounds
-            let screenWidth: CGFloat = screenRect.size.width
-            let buttonsWidth: CGFloat = 7 * 50 + 30 * 6
-            havePages = screenWidth < buttonsWidth
-            firstPageStackView.removeSubviews()
-            secondPageStackView.removeSubviews()
-            firstPageStackView.addArrangedSubview(stopButton)
-            firstPageStackView.addArrangedSubview(pauseCallButton)
-            firstPageStackView.addArrangedSubview(switchSpeakerButton)
-            firstPageStackView.addArrangedSubview(addParticipantButton)
-            if havePages {
-                secondPageStackView.addArrangedSubview(muteAudioButton)
-                secondPageStackView.addArrangedSubview(muteVideoButton)
-                if isConference {
-                    secondPageStackView.addArrangedSubview(raiseHandButton)
-                }
-            } else {
-                firstPageStackView.addArrangedSubview(muteAudioButton)
-                firstPageStackView.addArrangedSubview(muteVideoButton)
-                if isConference {
-                    firstPageStackView.addArrangedSubview(raiseHandButton)
-                }
-            }
         } else {
-            let screenRect = UIScreen.main.bounds
-            let screenWidth: CGFloat = screenRect.size.width
-            let buttonsWidth: CGFloat = 8 * 50 + 30 * 7 // 540
-            havePages = screenWidth < buttonsWidth
-            firstPageStackView.removeSubviews()
-            secondPageStackView.removeSubviews()
-            firstPageStackView.addArrangedSubview(stopButton)
-            firstPageStackView.addArrangedSubview(pauseCallButton)
-            firstPageStackView.addArrangedSubview(switchCameraButton)
-            firstPageStackView.addArrangedSubview(switchSpeakerButton)
-            firstPageStackView.addArrangedSubview(addParticipantButton)
-            if havePages {
-                secondPageStackView.addArrangedSubview(muteAudioButton)
-                secondPageStackView.addArrangedSubview(muteVideoButton)
-                if isConference {
-                    secondPageStackView.addArrangedSubview(raiseHandButton)
-                }
+            var flagVideo = false
+            if audioOnly {
+                numberOfButtons = 5  // fix buttons (stop, pause, addPartcipants, muteAudio, mutoVideo)
             } else {
-                firstPageStackView.addArrangedSubview(muteAudioButton)
-                firstPageStackView.addArrangedSubview(muteVideoButton)
-                if isConference {
-                    firstPageStackView.addArrangedSubview(raiseHandButton)
-                }
+                numberOfButtons = 6  // fix buttons (stop, pause ,switchCamera ,addPartcipants, muteAudio, mutoVideo)
+                flagVideo = true
             }
+            numberOfButtons = isConference ? numberOfButtons + 1 : numberOfButtons // check call is conference or not!
+            numberOfButtons = !switchSpeakerButton.isHidden ? numberOfButtons + 1 : numberOfButtons // check if device has speaker or not
+            let buttonsWidth: CGFloat = numberOfButtons * buttonHeightWidth + buttonSpacing * (numberOfButtons - 1)
+            havePages = screenWidth < buttonsWidth
+            self.addButtonsInStackView(isSpeaker: !switchSpeakerButton.isHidden, isPage: havePages, isConf: isConference, isVideo: flagVideo)
         }
         pageControl.isHidden = !havePages
         scrollView.isScrollEnabled = havePages
-        if self.callViewMode == .audio {
-            cancelButtonBottomConstraint.constant = 80
-        } else {
-            cancelButtonBottomConstraint.constant = 80
-        }
+        if self.callViewMode == .audio { cancelButtonBottomConstraint.constant = 80 }
+        else { cancelButtonBottomConstraint.constant = 80 }
         setButtonsColor()
     }
-
+    func addButtonsInStackView(isSpeaker: Bool, isPage: Bool, isConf: Bool, isVideo: Bool) {
+        self.commonButtonsInStackView()
+        if isVideo { firstPageStackView.addArrangedSubview(switchCameraButton) }
+        if isSpeaker { firstPageStackView.addArrangedSubview(switchSpeakerButton) }
+        firstPageStackView.addArrangedSubview(addParticipantButton)
+        if isPage { self.addButtonsToSelectedStackView(selectedStackView: secondPageStackView, isConf: isConf) }
+        else {
+            self.addButtonsToSelectedStackView(selectedStackView: firstPageStackView, isConf: isConf)
+            self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
+            pageControl.currentPage = 0
+        }
+    }
+    func addButtonsToSelectedStackView(selectedStackView: UIStackView, isConf: Bool) {
+        selectedStackView.addArrangedSubview(muteAudioButton)
+        selectedStackView.addArrangedSubview(muteVideoButton)
+        if isConf { selectedStackView.addArrangedSubview(raiseHandButton) }
+    }
+    func commonButtonsInStackView() {
+        firstPageStackView.removeSubviews()
+        secondPageStackView.removeSubviews()
+        firstPageStackView.addArrangedSubview(stopButton)
+        firstPageStackView.addArrangedSubview(pauseCallButton)
+    }
     func updateView() {
         if firstPageStackView.subviews.isEmpty {
             self.withoutOptions()
-        } else if switchSpeakerButton.isEnabled && !switchSpeakerButton.isHidden {
-            self.update(withSpeakerEnable: true)
         } else if !switchSpeakerButton.isHidden {
-            self.update(withSpeakerEnable: false)
+            self.update(withSpeakerShow: false)
+        } else if switchSpeakerButton.isHidden {
+            self.update(withSpeakerShow: true)
         }
     }
 
