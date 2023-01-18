@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20a7c52b_37c84262",
+        "filename": "Ring/Ring/Features/ContactRequests/Cells/ContactRequestCell.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-18T22:16:25Z",
+      "side": 1,
+      "message": "deletable or couldBeDeleted",
+      "revId": "c409c36257b23b0ddcbae66318068bb163d6c454",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90ade90c_6085da81",
+        "filename": "Ring/Ring/Features/ContactRequests/ContactRequestsViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-18T22:16:25Z",
+      "side": 1,
+      "message": "[weak self]",
+      "revId": "c409c36257b23b0ddcbae66318068bb163d6c454",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3de714f_e12a6588",
+        "filename": "Ring/Ring/Features/ContactRequests/ContactRequestsViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-18T22:16:25Z",
+      "side": 1,
+      "message": "[weak self]",
+      "revId": "c409c36257b23b0ddcbae66318068bb163d6c454",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8e9d7f_a7d91b35",
+        "filename": "Ring/Ring/Features/ContactRequests/ContactRequestsViewModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-18T22:16:25Z",
+      "side": 1,
+      "message": "we should not create conversation or conversation model at this point. RequestItem has all information we need",
+      "revId": "c409c36257b23b0ddcbae66318068bb163d6c454",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
