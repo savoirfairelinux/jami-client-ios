@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac260e73_1e967c41",
+        "filename": "Ring/Ring/Features/ContactRequests/ContactRequestsViewModel.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-19T19:39:22Z",
+      "side": 1,
+      "message": "we should also remove contact if it is a core dialog",
+      "revId": "7c2dfb07a70ffff631d88ee37b115b2b8e9c471d",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
