@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4997283d_ac612be1",
+        "filename": "Ring/Ring/Features/ContactRequests/Cells/ContactRequestCell.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-19T18:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20a7c52b_37c84262",
+      "revId": "c409c36257b23b0ddcbae66318068bb163d6c454",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90ade90c_6085da81",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-18T22:16:25Z",
       "side": 1,
       "message": "[weak self]",
+      "revId": "c409c36257b23b0ddcbae66318068bb163d6c454",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13b4fbd8_d5d6af3e",
+        "filename": "Ring/Ring/Features/ContactRequests/ContactRequestsViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-19T18:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90ade90c_6085da81",
       "revId": "c409c36257b23b0ddcbae66318068bb163d6c454",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e99a267_9de6204c",
+        "filename": "Ring/Ring/Features/ContactRequests/ContactRequestsViewController.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-19T18:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3de714f_e12a6588",
+      "revId": "c409c36257b23b0ddcbae66318068bb163d6c454",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b8e9d7f_a7d91b35",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-01-18T22:16:25Z",
       "side": 1,
       "message": "we should not create conversation or conversation model at this point. RequestItem has all information we need",
+      "revId": "c409c36257b23b0ddcbae66318068bb163d6c454",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6944a695_c5f79371",
+        "filename": "Ring/Ring/Features/ContactRequests/ContactRequestsViewModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-19T18:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b8e9d7f_a7d91b35",
       "revId": "c409c36257b23b0ddcbae66318068bb163d6c454",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
