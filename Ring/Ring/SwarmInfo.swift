@@ -61,7 +61,7 @@ class ParticipantInfo: Equatable, Hashable {
     func lookupName(nameService: NameService, accountId: String) {
         nameService.usernameLookupStatus.share()
             .filter({ [weak self] lookupNameResponse in
-                guard let self = self else { return false}
+                guard let self = self else { return false }
                 return lookupNameResponse.address != nil &&
                     lookupNameResponse.address == self.jamiId
             })
@@ -328,7 +328,7 @@ class SwarmInfo {
     private func createParticipant(jamiId: String, role: ParticipantRole) -> ParticipantInfo? {
         let participantInfo = ParticipantInfo(jamiId: jamiId, role: role)
         let uri = JamiURI.init(schema: .ring, infoHach: jamiId)
-        guard let uriString = uri.uriString else { return nil}
+        guard let uriString = uri.uriString else { return nil }
         if self.contactsService.contact(withHash: jamiId) != nil {
             // subscribe for profile updates for participant
             self.profileService

@@ -667,7 +667,7 @@ extension ConversationViewModel {
         self.stateSubject.onNext(ConversationState.replaceCurrentWithConversationFor(participantUri: selectedItemURI))
     }
 
-    private func shareMessage(message: MessageContentVM, with contact: Contact, fileURL: URL?, image: UIImage?, fileName: String) {
+    private func shareMessage(message: MessageContentVM, with contact: Contact, fileURL: URL?, fileName: String) {
         if message.type != .fileTransfer {
             self.sendMessage(withContent: message.content, contactURI: contact.uri)
             return
@@ -682,16 +682,11 @@ extension ConversationViewModel {
             }
             return
         }
-        guard let image = image else { return }
-        guard let data = image.jpegData(compressionQuality: 100),
-              let convId = self.conversationsService.getConversationForParticipant(jamiId: contact.uri, accontId: contact.accountID)?.id else { return }
-        self.sendAndSaveFile(displayName: fileName, imageData: data, conversationId: convId, accountId: contact.accountID)
     }
 
     private func shareMessage(message: MessageContentVM, with selectedContacts: [ConferencableItem]) {
         // to send file we need to have file url or image
         let url = message.url
-        let image = url == nil ? message.image : nil
         var fileName = message.content
         if message.content.contains("\n") {
             guard let substring = message.content.split(separator: "\n").first else { return }
@@ -699,7 +694,7 @@ extension ConversationViewModel {
         }
         selectedContacts.forEach { (item) in
             guard let contact = item.contacts.first else { return }
-            self.shareMessage(message: message, with: contact, fileURL: url, image: image, fileName: fileName)
+            self.shareMessage(message: message, with: contact, fileURL: url, fileName: fileName)
         }
         self.changeConversationIfNeeded(items: selectedContacts)
     }

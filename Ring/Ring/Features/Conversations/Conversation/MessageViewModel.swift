@@ -243,10 +243,7 @@ class MessageViewModel {
     }
 
     func getURLFromPhotoLibrary(conversationID: String, completionHandler: @escaping (URL?) -> Void) -> Bool {
-        if self.lastTransferStatus != .success &&
-            self.message.transferStatus != .success { return false }
-        guard let identifier = transferFileData.identifier else { return false }
-        return self.dataTransferService.getFileURLFromPhotoLibrairy(identifier: identifier, completionHandler: completionHandler)
+        return false
     }
 
     func removeFile(conversationID: String, accountId: String, isSwarm: Bool) {
@@ -344,7 +341,7 @@ class MessageViewModel {
     func getTransferedImage(maxSize: CGFloat,
                             conversationID: String,
                             accountId: String,
-                            isSwarm: Bool) -> UIImage? {
+                            isSwarm: Bool) -> URL? {
         guard let account = self.accountService
                 .getAccount(fromAccountId: accountId) else { return nil }
         if self.message.incoming &&
@@ -355,11 +352,7 @@ class MessageViewModel {
         let transferInfo = transferFileData
         let name = isSwarm ? self.message.daemonId : transferInfo.fileName
         return self.dataTransferService
-            .getImage(for: name,
-                      maxSize: maxSize,
-                      identifier: transferInfo.identifier,
-                      accountID: account.id,
-                      conversationID: conversationID, isSwarm: isSwarm)
+            .getFileUrlForSwarm(fileName: name, accountID: account.id, conversationID: conversationID)
     }
 
     private static func getTimeLabelString(forTime time: Date) -> String {
