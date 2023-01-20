@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "Aceitar o limite de transferência";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
+//Log View
+"logView.title" = "Diagnósticos";
+"logView.description" = "Abrir as configurações dos logs de diagnóstico";
+"logView.startLogging" = "Começar a logar";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "Migração de conta";
 "migrateAccount.migrateButton" = "Migrar a conta";

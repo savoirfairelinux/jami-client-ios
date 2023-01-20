@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
+//Log View
+"logView.title" = "診断";
+"logView.description" = "診断記録設定を開く";
+"logView.startLogging" = "記録を開始する";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "アカウントの移行";
 "migrateAccount.migrateButton" = "アカウントを移行";

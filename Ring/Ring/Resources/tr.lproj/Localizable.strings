@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "Aktarma sınırını kabul et";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
+//Log View
+"logView.title" = "Tanılama";
+"logView.description" = "Tanılama günlüğü ayarlarını aç";
+"logView.startLogging" = "Günlükle";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "Hesap taşıma";
 "migrateAccount.migrateButton" = "Hesap Taşıma";

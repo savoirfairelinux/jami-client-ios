@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "接受傳輸限制";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
+//Log View
+"logView.title" = "診斷";
+"logView.description" = "開啟診斷紀錄檔設定";
+"logView.startLogging" = "開始記錄";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "帳號遷移";
 "migrateAccount.migrateButton" = "遷移帳號";

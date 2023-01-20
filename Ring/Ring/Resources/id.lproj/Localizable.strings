@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "Terima batas transfer";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
+//Log View
+"logView.title" = "Diagnostik";
+"logView.description" = "Buka pengaturan log diagnostik";
+"logView.startLogging" = "Mulai logging";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "Migrasi akun";
 "migrateAccount.migrateButton" = "Migrasi akun";

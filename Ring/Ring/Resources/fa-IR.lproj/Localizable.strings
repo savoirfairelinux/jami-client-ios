@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
+//Log View
+"logView.title" = "عیب‌یابی";
+"logView.description" = "نتظیمات گزارش عیب‌یابی را باز کن";
+"logView.startLogging" = "شروع گزارش‌گیری";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "مهاجرت حساب";
 "migrateAccount.migrateButton" = "انتقال حساب";

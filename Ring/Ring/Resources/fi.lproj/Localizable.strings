@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "Hyväksy siirtoraja";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
+//Log View
+"logView.title" = "Diagnostiikka";
+"logView.description" = "Avaa diagnostiikan lokin asetukset";
+"logView.startLogging" = "Aloita kirjaaminen";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "Tilin siirto";
 "migrateAccount.migrateButton" = "Siirrä tunnus";
