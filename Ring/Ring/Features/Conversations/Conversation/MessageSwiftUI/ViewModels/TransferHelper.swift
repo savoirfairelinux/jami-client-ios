@@ -29,7 +29,6 @@ enum TransferState: State {
     case cancel(viewModel: MessageContentVM)
     case getProgress(viewModel: MessageContentVM)
     case getSize(viewModel: MessageContentVM)
-    case getImage(viewModel: MessageContentVM)
     case getURL(viewModel: MessageContentVM)
     case getPlayer(viewModel: MessageContentVM)
 }
@@ -63,20 +62,6 @@ class TransferHelper {
                                                                    conversationId: conversation.id,
                                                                    isSwarm: conversation.isSwarm()) else { return nil }
         return info.totalSize
-    }
-
-    func getTransferedImage(maxSize: CGFloat,
-                            conversation: ConversationModel,
-                            message: MessageModel) -> UIImage? {
-        let transferInfo = self.getTransferFileData(content: message.content)
-        let name = conversation.isSwarm() ? message.daemonId : transferInfo.fileName
-        return self.dataTransferService
-            .getImage(for: name,
-                      maxSize: maxSize,
-                      identifier: transferInfo.identifier,
-                      accountID: conversation.accountId,
-                      conversationID: conversation.id,
-                      isSwarm: conversation.isSwarm())
     }
 
     func getFileURL(conversation: ConversationModel, message: MessageModel) -> URL? {

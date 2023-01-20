@@ -36,6 +36,7 @@ enum ContextMenu: State {
     case forward(message: MessageContentVM)
     case share(items: [Any])
     case save(image: UIImage)
+    case saveGIF(url: URL)
 }
 
 // swiftlint:disable file_length
@@ -123,8 +124,13 @@ class ConversationViewController: UIViewController,
                 guard let self = self, let state = state as? ContextMenu else { return }
                 switch state {
                 case .preview(let message):
-                    if message.image == nil && message.player == nil { return }
-                    self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: message.image, initialFrame: CGRect.zero, delegate: message)
+                    if message.imageURL == nil && message.player == nil { return }
+                    if let imageURL = message.imageURL, message.isGIF {
+                        self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: UIImage.gifImageWithUrl(imageURL), initialFrame: CGRect.zero, delegate: message)
+                    } else {
+                        let image = UIImage.unWrapImageFromURL(url: message.imageURL)
+                        self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: image, initialFrame: CGRect.zero, delegate: message)
+                    }
                     self.messageAccessoryView.frame.size.height = 0
                     self.messageAccessoryView.isHidden = true
                 case .forward(let message):
@@ -133,6 +139,8 @@ class ConversationViewController: UIViewController,
                     self.presentActivityControllerWithItems(items: items)
                 case .save(let image):
                     self.saveImageToGalery(image: image)
+                case .saveGIF(let url):
+                    self.saveGIF(url: url)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -328,6 +336,12 @@ class ConversationViewController: UIViewController,
             let imageFileName: String = result.itemProvider.suggestedName ?? "file"
             let provider = result.itemProvider
             switch self.getAssetTypeFrom(itemProvider: provider) {
+            case .gif:
+                provider.loadDataRepresentation(forTypeIdentifier: UTType.gif.identifier) { [weak self] (data, _) in
+                    guard let self = self,
+                          let data = data else { return }
+                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".gif", imageData: data)
+                }
             case .image:
                 provider.loadObject(ofClass: UIImage.self) { [weak self] (object, _) in
                     guard let self = self,
@@ -347,16 +361,18 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    private func getAssetTypeFrom(itemProvider: NSItemProvider) -> PHAssetMediaType {
-        if itemProvider.canLoadObject(ofClass: UIImage.self) {
+    private func getAssetTypeFrom(itemProvider: NSItemProvider) -> FileTransferType {
+        if itemProvider.hasItemConformingToTypeIdentifier(UTType.gif.identifier) {
+            return .gif
+        } else if itemProvider.canLoadObject(ofClass: UIImage.self) {
             return .image
-        }
-        if itemProvider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
+        } else if itemProvider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
             return .video
+        } else {
+            return .unknown
         }
-        return .unknown
     }
-
+    // swiftlint:disable cyclomatic_complexity
     internal func imagePickerController(_ picker: UIImagePickerController,
                                         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
@@ -410,12 +426,27 @@ class ConversationViewController: UIViewController,
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
 
+    func saveGIF(url: URL) {
+        PHPhotoLibrary.shared().performChanges({
+            let request = PHAssetCreationRequest.forAsset()
+            request.addResource(with: .photo, fileURL: url, options: nil)
+        }
+        ) {
+            (_, error) in
+            if let error = error {
+                self.showAlert(error: error)
+            }
+        }
+    }
+    func showAlert(error: Error) {
+        let allert = UIAlertController(title: L10n.Conversation.errorSavingImage, message: error.localizedDescription, preferredStyle: .alert)
+        allert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(allert, animated: true)
+    }
     @objc
     func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-            let allert = UIAlertController(title: L10n.Conversation.errorSavingImage, message: error.localizedDescription, preferredStyle: .alert)
-            allert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(allert, animated: true)
+            self.showAlert(error: error)
         }
     }
 

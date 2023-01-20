@@ -55,6 +55,13 @@ enum ConversationMemberEvent: Int {
     case banned
 }
 
+enum FileTransferType: Int {
+    case audio
+    case video
+    case image
+    case gif
+    case unknown
+}
 enum ConversationSchema: Int {
     case jami
     case swarm
