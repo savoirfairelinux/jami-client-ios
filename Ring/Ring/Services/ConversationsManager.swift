@@ -512,8 +512,8 @@ extension  ConversationsManager: MessagesAdapterDelegate {
                 /// check if we need to download file for transfer
                 if let transferInfo = self.dataTransferService.dataTransferInfo(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true) {
                     newMessage.transferStatus = transferInfo.bytesProgress == 0 ? .awaiting : transferInfo.bytesProgress == transferInfo.totalSize ? .success : .ongoing
-                    let image = self.dataTransferService.getImage(for: newMessage.daemonId, maxSize: 200, accountID: accountId, conversationID: conversationId, isSwarm: true)
-                    if newMessage.transferStatus == .awaiting, transferInfo.totalSize <= maxSizeForAutoaccept, image == nil {
+                    let imageURL = self.dataTransferService.getImage(for: newMessage.daemonId, accountID: accountId, conversationID: conversationId, isSwarm: true)
+                    if newMessage.transferStatus == .awaiting, transferInfo.totalSize <= maxSizeForAutoaccept, imageURL == nil {
                         var filename = ""
                         self.dataTransferService.downloadFile(withId: newMessage.daemonId,
                                                               interactionID: newMessage.id,
@@ -538,11 +538,11 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         /// if new message was inserted check if we need to present notification
         if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, conversationId: conversationId, fromLoaded: false) {
             /// check if file saved
-            let image = self.dataTransferService.getImage(for: newMessage.daemonId, maxSize: 200, accountID: accountId, conversationID: conversationId, isSwarm: true)
+            let imageURL = self.dataTransferService.getImage(for: newMessage.daemonId, accountID: accountId, conversationID: conversationId, isSwarm: true)
 
             /// download if file not saved yet
             if let size = message["totalSize"],
-               image == nil,
+               imageURL == nil,
                (newMessage.transferStatus == .awaiting || newMessage.transferStatus == .success) {
 
                 let isReceiving = message[MessageAttributes.author.rawValue] != account.jamiId

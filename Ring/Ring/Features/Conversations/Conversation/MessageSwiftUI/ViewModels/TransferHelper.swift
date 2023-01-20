@@ -67,13 +67,11 @@ class TransferHelper {
 
     func getTransferedImage(maxSize: CGFloat,
                             conversation: ConversationModel,
-                            message: MessageModel) -> UIImage? {
+                            message: MessageModel) -> URL? {
         let transferInfo = self.getTransferFileData(content: message.content)
         let name = conversation.isSwarm() ? message.daemonId : transferInfo.fileName
         return self.dataTransferService
             .getImage(for: name,
-                      maxSize: maxSize,
-                      identifier: transferInfo.identifier,
                       accountID: conversation.accountId,
                       conversationID: conversation.id,
                       isSwarm: conversation.isSwarm())

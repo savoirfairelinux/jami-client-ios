@@ -344,7 +344,7 @@ class MessageViewModel {
     func getTransferedImage(maxSize: CGFloat,
                             conversationID: String,
                             accountId: String,
-                            isSwarm: Bool) -> UIImage? {
+                            isSwarm: Bool) -> URL? {
         guard let account = self.accountService
                 .getAccount(fromAccountId: accountId) else { return nil }
         if self.message.incoming &&
@@ -356,8 +356,6 @@ class MessageViewModel {
         let name = isSwarm ? self.message.daemonId : transferInfo.fileName
         return self.dataTransferService
             .getImage(for: name,
-                      maxSize: maxSize,
-                      identifier: transferInfo.identifier,
                       accountID: account.id,
                       conversationID: conversationID, isSwarm: isSwarm)
     }
