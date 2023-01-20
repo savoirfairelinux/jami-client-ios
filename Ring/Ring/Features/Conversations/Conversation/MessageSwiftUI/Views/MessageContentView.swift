@@ -41,6 +41,34 @@ struct URLPreview: UIViewRepresentable {
     func updateUIView(_ uiView: CustomLinkView, context: Context) {}
 }
 
+class ScaledImageView: UIImageView {
+    var maxHeight: CGFloat = 300
+    var maxWidth: CGFloat = 250
+    override var intrinsicContentSize: CGSize {
+        if let imageSize = self.image?.size {
+            if imageSize.width < maxWidth && imageSize.height < maxHeight {
+                return imageSize
+            }
+            let widthRatio = maxWidth / imageSize.width
+            let heightRatio = maxHeight / imageSize.height
+            let ratio = min(widthRatio, heightRatio)
+            return CGSize(width: imageSize.width * ratio, height: imageSize.height * ratio)
+        }
+        return CGSize(width: -1, height: -1)
+    }
+}
+
+struct ScaledImageViewWrapper: UIViewRepresentable {
+    let imageToShow: UIImage
+
+    func makeUIView(context: Context) -> ScaledImageView {
+        let imageView = ScaledImageView()
+        imageView.image = imageToShow
+        return imageView
+    }
+    func updateUIView(_ uiView: UIViewType, context: Context) {}
+}
+
 struct MessageTextStyle: ViewModifier {
     @StateObject var model: MessageContentVM
 
@@ -112,19 +140,28 @@ struct MessageContentView: View {
                         PlayerSwiftUI(model: model, player: player, onLongGesture: receivedLongPress())
                             .modifier(MessageCornerRadius(model: model))
                     }
-                } else if let image = self.model.image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(minHeight: 50, maxHeight: 300)
-                        /*
-                         Views with long press tap gesture prevent table from receiving
-                         tap gesture and it causing scroll issue.
-                         Adding empty onTapGesture fixes this.
-                         */
-                        .onTapGesture {}
-                        .modifier(MessageCornerRadius(model: model))
-                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                } else if let image = model.getImage() {
+                    if !model.isGifImage() {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(minHeight: 50, maxHeight: 300)
+                            /*
+                             Views with long press tap gesture prevent table from receiving
+                             tap gesture and it causing scroll issue.
+                             Adding empty onTapGesture fixes this.
+                             */
+                            .onTapGesture {}
+                            .modifier(MessageCornerRadius(model: model))
+                            .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                    } else {
+                        ScaledImageViewWrapper(imageToShow: image)
+                            .scaledToFit()
+                            .frame(maxHeight: 300)
+                            .onTapGesture {}
+                            .modifier(MessageCornerRadius(model: model))
+                            .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                    }
                 } else {
                     DefaultTransferView(model: model, onLongGesture: receivedLongPress())
                         .modifier(MessageCornerRadius(model: model))
