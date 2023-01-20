@@ -391,10 +391,10 @@ extension RequestsService: RequestsAdapterDelegate {
             } else { return }
         }
         /**
-         if it conversation with one participant check profile.
+         if it is a core dialog check profile.
          If profile exists it means we already accepted request and now request synchronizing.
          */
-        if conversationRequest.isDialog(),
+        if conversationRequest.isCoredialog(),
            let profile = self.getProfile(with: "ring:" + conversationRequest.participants.first!.jamiId, accountId: accountId) {
             if let alias = profile.alias, !alias.isEmpty {
                 conversationRequest.name = alias
