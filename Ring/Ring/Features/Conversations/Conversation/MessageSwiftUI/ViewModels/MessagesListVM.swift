@@ -283,9 +283,9 @@ class MessagesListVM: ObservableObject {
                     viewModel.updateFileSize(size: size)
                 }
             case .getImage(let viewModel):
-                if viewModel.image != nil { return }
-                let image = self.transferHelper.getTransferedImage(maxSize: 450, conversation: self.conversation, message: viewModel.message)
-                viewModel.updateImage(image: image)
+                if viewModel.imageURL != nil { return }
+                let imageURL = self.transferHelper.getTransferedImage(maxSize: 450, conversation: self.conversation, message: viewModel.message)
+                viewModel.updateImage(url: imageURL)
             case .getURL(let viewModel):
                 if viewModel.url != nil { return }
                 let url = self.transferHelper.getFileURL(conversation: self.conversation, message: viewModel.message)

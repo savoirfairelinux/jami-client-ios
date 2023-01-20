@@ -691,7 +691,7 @@ extension ConversationViewModel {
     private func shareMessage(message: MessageContentVM, with selectedContacts: [ConferencableItem]) {
         // to send file we need to have file url or image
         let url = message.url
-        let image = url == nil ? message.image : nil
+        let image = url == nil ? UIImage.unWrapImageFromURL(url: message.imageURL) : nil
         var fileName = message.content
         if message.content.contains("\n") {
             guard let substring = message.content.split(separator: "\n").first else { return }
