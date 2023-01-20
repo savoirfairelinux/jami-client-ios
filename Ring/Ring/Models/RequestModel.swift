@@ -89,7 +89,11 @@ class RequestModel {
                 self.conversationId = conversationId
             }
         } else {
-            self.conversationType = .oneToOne
+            if let type = dictionary[ConversationAttributes.mode.rawValue],
+               let typeInt = Int(type),
+               let conversationType = ConversationType(rawValue: typeInt) {
+                self.conversationType = conversationType
+            }
             if let conversationId = dictionary[RequestKey.conversationId.rawValue] {
                 self.conversationId = conversationId
             }
