@@ -122,6 +122,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     @Published var playerHeight: CGFloat = 100
     @Published var playerWidth: CGFloat = 250
     @Published var image: UIImage?
+    @Published var imageURL: URL?
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
@@ -419,10 +420,11 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         }
     }
 
-    func updateImage(image: UIImage?) {
+    func updateImage(image: UIImage?, url: URL?) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.image = image
+            self.imageURL = url
         }
     }
 
