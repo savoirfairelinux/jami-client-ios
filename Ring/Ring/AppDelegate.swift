@@ -572,10 +572,10 @@ extension AppDelegate {
             return false
         }
         /*
-        This method could be called when activating camera from CallKit.
-        In this case we will have existing call with CallKit.
-        Othervise it was called from Contacts app.
-        We need find contact and start a call
+         This method could be called when activating camera from CallKit.
+         In this case we will have existing call with CallKit.
+         Othervise it was called from Contacts app.
+         We need find contact and start a call
          */
         if self.callsProvider.hasPendingTransactions() { return false }
         guard let handle = userActivity.startCallHandle else {

@@ -40,6 +40,16 @@ struct URLPreview: UIViewRepresentable {
 
     func updateUIView(_ uiView: CustomLinkView, context: Context) {}
 }
+struct GIFView: UIViewRepresentable {
+    let imageToShow: UIImage?
+
+    func makeUIView(context: Context) -> some UIView {
+        let imageView = UIImageView()
+        imageView.image = imageToShow
+        return imageView
+    }
+    func updateUIView(_ uiView: UIViewType, context: Context) {}
+}
 
 struct MessageTextStyle: ViewModifier {
     @StateObject var model: MessageContentVM
@@ -112,11 +122,17 @@ struct MessageContentView: View {
                         PlayerSwiftUI(model: model, player: player, onLongGesture: receivedLongPress())
                             .modifier(MessageCornerRadius(model: model))
                     }
-                } else if let image = self.model.image {
+                } else if let image = self.model.image, self.model.imageURL == nil {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
                         .frame(minHeight: 50, maxHeight: 300)
+                        .modifier(MessageCornerRadius(model: model))
+                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                } else if let image = self.model.image, self.model.imageURL != nil {
+                    GIFView(imageToShow: image)
+                        .scaledToFit()
+                        .frame(minWidth: 50, maxWidth: image.size.width, minHeight: 50, maxHeight: image.size.height)
                         .modifier(MessageCornerRadius(model: model))
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 } else {

@@ -328,6 +328,12 @@ class ConversationViewController: UIViewController,
             let imageFileName: String = result.itemProvider.suggestedName ?? "file"
             let provider = result.itemProvider
             switch self.getAssetTypeFrom(itemProvider: provider) {
+            case .gif:
+                provider.loadDataRepresentation(forTypeIdentifier: UTType.gif.identifier) { [weak self] (data, _) in
+                    guard let self = self,
+                          let data = data else { return }
+                    self.viewModel.sendAndSaveFile(displayName: imageFileName + ".gif", imageData: data)
+                }
             case .image:
                 provider.loadObject(ofClass: UIImage.self) { [weak self] (object, _) in
                     guard let self = self,
@@ -347,16 +353,18 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    private func getAssetTypeFrom(itemProvider: NSItemProvider) -> PHAssetMediaType {
-        if itemProvider.canLoadObject(ofClass: UIImage.self) {
+    private func getAssetTypeFrom(itemProvider: NSItemProvider) -> FileTransferType {
+        if itemProvider.hasItemConformingToTypeIdentifier(UTType.gif.identifier) {
+            return .gif
+        } else if itemProvider.canLoadObject(ofClass: UIImage.self) {
             return .image
-        }
-        if itemProvider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
+        } else if itemProvider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
             return .video
+        } else {
+            return .unknown
         }
-        return .unknown
     }
-
+    // swiftlint:disable cyclomatic_complexity
     internal func imagePickerController(_ picker: UIImagePickerController,
                                         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
