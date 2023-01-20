@@ -607,42 +607,6 @@ class ConversationsService {
         try? FileManager.default.removeItem(atPath: recordedURL.path)
     }
 
-    /**
-     When sending swarm conversation request to peer who does not have app with swarm support
-     swarm conversation will be removed an non swarm conversation should be created
-     */
-    func saveLegacyConversation(conversation: ConversationModel, isExisting: Bool) {
-        guard let participantId = conversation.getParticipants().first?.jamiId else { return }
-        /// we need to create uri to save conversation to db. saveLegacyConversation called when swarm conversation failed. In this case uri schema should be ring
-        guard let participantURI = JamiURI(schema: .ring, infoHach: participantId).uriString else { return }
-        /// create db. Return if opening db failed
-        do {
-            /// return false if could not open database connection
-            if try !dbManager.createDatabaseForAccount(accountId: conversation.accountId) {
-                return
-            }
-            /// if tables already exist an exeption will be thrown
-        } catch { }
-        /// add conversation to db
-        let conversationId = dbManager.createConversationsFor(contactUri: participantURI, accountId: conversation.accountId)
-        /// update conversation list
-        conversation.id = conversationId
-        conversation.type = .nonSwarm
-        var value = self.conversations.value
-        if !isExisting {
-            value.append(conversation)
-        }
-        self.conversations.accept(value)
-        /// add contact message
-        self.generateMessage(messageContent: GeneratedMessage.invitationAccepted.toString(),
-                             contactUri: participantURI,
-                             accountId: conversation.accountId,
-                             date: Date(),
-                             interactionType: InteractionType.contact,
-                             shouldUpdateConversation: true)
-        self.conversationReady.accept(conversationId)
-    }
-
     func createSipConversation(uri: String, accountId: String) {
         /// create db. Return if opening db failed
         do {
