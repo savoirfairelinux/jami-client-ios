@@ -121,7 +121,6 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     @Published var showProgress: Bool = true
     @Published var playerHeight: CGFloat = 100
     @Published var playerWidth: CGFloat = 250
-    @Published var image: UIImage?
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
@@ -136,6 +135,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     var textColor: Color
     var secondaryColor: Color
     var hasBorder: Bool
+    var finalImage: UIImage?
     let cornerRadius: CGFloat = 15
     var textInset: CGFloat = 15
     var textVerticalInset: CGFloat = 10
@@ -282,11 +282,9 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
             }
             guard self.type == .fileTransfer else { return }
             if self.url != nil {
-                if self.image != nil {
-                    self.menuItems = [.save, .forward, .preview, .share]
-                } else {
-                    self.menuItems = [.forward, .preview, .share]
-                }
+                self.menuItems = [.save, .forward, .preview, .share]
+            } else {
+                self.menuItems = [.forward, .preview, .share]
             }
         }
     }
@@ -305,8 +303,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         } else {
             self.stopProgressMonitor()
         }
-        if (self.transferStatus == .success || !self.message.incoming), self.image == nil, self.player == nil {
-            self.transferState.onNext(TransferState.getImage(viewModel: self))
+        if (self.transferStatus == .success || !self.message.incoming), self.url == nil, self.player == nil {
             self.transferState.onNext(TransferState.getPlayer(viewModel: self))
         }
         if (self.transferStatus == .success || !self.message.incoming), self.url == nil {
@@ -415,13 +412,6 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         }
     }
 
-    func updateImage(image: UIImage?) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.image = image
-        }
-    }
-
     func updateFileSize(size: Int64) {
         self.fileSize = size
     }
@@ -435,6 +425,17 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
 
     func updateFileURL(url: URL?) {
         self.url = url
+    }
+
+    func isGifImage() -> Bool {
+        return self.url?.pathExtension == "gif"
+    }
+
+    func getImage() -> UIImage? {
+        if let image = self.finalImage { return image }
+        guard let url = url else { return nil }
+        self.finalImage = isGifImage() ? UIImage.gifImageWithUrl(url) : UIImage.getImagefromURL(url: url)
+        return self.finalImage
     }
 
     var maxDimension: CGFloat {
@@ -456,7 +457,6 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
 
     func onAppear() {
         if self.type == .fileTransfer {
-            self.transferState.onNext(TransferState.getImage(viewModel: self))
             self.transferState.onNext(TransferState.getPlayer(viewModel: self))
             self.transferState.onNext(TransferState.getURL(viewModel: self))
         }
@@ -479,19 +479,13 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         case .preview:
             self.contextMenuState.onNext(ContextMenu.preview(message: self))
         case .forward:
-            self.contextMenuState.onNext(ContextMenu.forward(message: self))
+            forwardFile()
         case .share:
-            let item: Any? = self.url != nil ? self.url : self.image
-            guard let item = item else {
-                return
-            }
-            self.contextMenuState.onNext(ContextMenu.share(items: [item]))
+            shareFile()
         case .save:
-            guard let image = self.image else { return }
-            self.contextMenuState.onNext(ContextMenu.save(image: image))
+            saveFile()
         case .reply:
             break
-        // self.contextMenuState.onNext(ContextMenu.reply(messageId: self.message.id))
         }
     }
 }
@@ -500,7 +494,8 @@ extension MessageContentVM: PlayerDelegate {
     func deleteFile() {}
 
     func shareFile() {
-        let item: Any? = self.url != nil ? self.url : self.image
+        guard let url = self.url else { return }
+        let item: Any? = url
         guard let item = item else {
             return
         }
@@ -512,8 +507,8 @@ extension MessageContentVM: PlayerDelegate {
     }
 
     func saveFile() {
-        guard let image = self.image else { return }
-        self.contextMenuState.onNext(ContextMenu.save(image: image))
+        guard let imageURL = self.url else { return }
+        self.contextMenuState.onNext(ContextMenu.saveGIFOrImage(url: imageURL))
     }
 
     func swarmColorUpdated(color: UIColor) {

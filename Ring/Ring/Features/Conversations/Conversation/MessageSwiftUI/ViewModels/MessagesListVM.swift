@@ -143,7 +143,7 @@ class MessagesListVM: ObservableObject {
     private func insert(newMessage: MessageModel) -> Bool {
         if self.messagesModels.contains(where: { messageModel in
             messageModel.message.id == newMessage.id
-        }) { return false}
+        }) { return false }
         let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject)
         self.subscribeMessage(container: container)
         // first try to find child
@@ -282,10 +282,6 @@ class MessagesListVM: ObservableObject {
                 if let size = self.transferHelper.getTransferSize(conversation: self.conversation, message: viewModel.message) {
                     viewModel.updateFileSize(size: size)
                 }
-            case .getImage(let viewModel):
-                if viewModel.image != nil { return }
-                let image = self.transferHelper.getTransferedImage(maxSize: 450, conversation: self.conversation, message: viewModel.message)
-                viewModel.updateImage(image: image)
             case .getURL(let viewModel):
                 if viewModel.url != nil { return }
                 let url = self.transferHelper.getFileURL(conversation: self.conversation, message: viewModel.message)

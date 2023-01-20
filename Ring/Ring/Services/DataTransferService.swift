@@ -93,10 +93,6 @@ public final class DataTransferService: DataTransferAdapterDelegate {
 
     private let log = SwiftyBeaver.self
 
-    // contain image if transfering file is image type, othewise contain nil
-    typealias ImageTuple = (isImage: Bool, data: UIImage?)
-    private var transferedImages = [String: ImageTuple]()
-
     private let dataTransferAdapter: DataTransferAdapter
 
     private let disposeBag = DisposeBag()
@@ -178,93 +174,6 @@ public final class DataTransferService: DataTransferAdapterDelegate {
             self.log.error("couldn't copy image to cache")
         }
         self.sendFile(conversation: conversation, filePath: imagePath.path, displayName: displayName, localIdentifier: nil)
-    }
-
-    // MARK: get image file
-
-    /*
-     to avoid creating images multiple time keep images in dictionary
-     images saved in app document folder referenced by conversationId concatinated with image name
-     images from photo librairy referenced by local identifier
-     */
-
-    func getImage(for name: String, maxSize: CGFloat, identifier: String? = nil,
-                  accountID: String, conversationID: String, isSwarm: Bool) -> UIImage? {
-        if let localImageIdentifier = identifier {
-            if let image = self.transferedImages[localImageIdentifier] {
-                return image.data
-            }
-            return self.getImageFromPhotoLibrairy(identifier: localImageIdentifier, maxSize: maxSize, name: name)
-        }
-        if let image = self.transferedImages[conversationID + name], let data = image.data {
-            return data
-        }
-        return self.getImageFromFile(for: name, maxSize: maxSize, accountID: accountID,
-                                     conversationID: conversationID, isSwarm: isSwarm)
-    }
-
-    private func getImageFromFile(for name: String,
-                                  maxSize: CGFloat,
-                                  accountID: String,
-                                  conversationID: String,
-                                  isSwarm: Bool) -> UIImage? {
-        var fileUrl: URL?
-        if isSwarm {
-            fileUrl = self.getFileUrlForSwarm(fileName: name, accountID: accountID, conversationID: conversationID)
-        } else {
-            fileUrl = getFileUrlNonSwarm(fileName: name, inFolder: Directories.downloads.rawValue, accountID: accountID, conversationID: conversationID)
-        }
-        guard let pathUrl = fileUrl else { return nil }
-        let fileExtension = pathUrl.pathExtension as CFString
-        guard let uti = UTTypeCreatePreferredIdentifierForTag(
-                kUTTagClassFilenameExtension,
-                fileExtension,
-                nil) else { return nil }
-        if UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage) {
-            let fileManager = FileManager.default
-            if fileManager.fileExists(atPath: pathUrl.path) {
-                if fileExtension as String == "gif" {
-                    let image = UIImage.gifImageWithUrl(pathUrl)
-                    return image
-                }
-                let image = UIImage(contentsOfFile: pathUrl.path)
-                self.transferedImages[conversationID + name] = (true, image)
-                return image
-            }
-        } else {
-            self.transferedImages[conversationID + name] = (false, nil)
-        }
-        return nil
-    }
-
-    // MARK: get image from library. Only for non swarm conversations
-
-    func getImageFromPhotoLibrairy(identifier: String, maxSize: CGFloat, name: String) -> UIImage? {
-        let imageManager = PHImageManager.default()
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.resizeMode = PHImageRequestOptionsResizeMode.exact
-        requestOptions.isSynchronous = true
-        var photo: UIImage?
-        guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: PHFetchOptions()).firstObject else {
-            return photo
-        }
-        imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: requestOptions, resultHandler: {(result, _) -> Void in
-            guard let image = result else { return }
-            self.transferedImages[identifier] = (true, image)
-            photo = image
-        })
-        return photo
-    }
-
-    func getFileURLFromPhotoLibrairy(identifier: String, completionHandler: @escaping (URL?) -> Void) -> Bool {
-        guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: PHFetchOptions()).firstObject else {
-            return false
-        }
-        let option = PHContentEditingInputRequestOptions()
-        asset.requestContentEditingInput(with: option) { contentEditingInput, _ in
-            completionHandler(contentEditingInput?.fullSizeImageURL)
-        }
-        return true
     }
 
     // MARK: file path non swarm
