@@ -194,6 +194,8 @@
 		1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DA1F0D915100D36361 /* Localizable.strings */; };
 		1ABE07DF1F0D91A800D36361 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABE07DD1F0D91A800D36361 /* LaunchScreen.storyboard */; };
 		1ABE07E21F0D924700D36361 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07E11F0D924700D36361 /* Strings.swift */; };
+		1D268F22298477A7001DBCFB /* Gifu.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D268F1F2984779F001DBCFB /* Gifu.xcframework */; };
+		1D268F23298477A8001DBCFB /* Gifu.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D268F1F2984779F001DBCFB /* Gifu.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1D4EE844291EF9E000ED2010 /* SwarmCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EE843291EF9E000ED2010 /* SwarmCreation.swift */; };
 		1D4EE84D29252AD000ED2010 /* SwarmCreationUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4EE84C29252AD000ED2010 /* SwarmCreationUIModel.swift */; };
 		1DE93593291B119900E426CF /* SwarmCreationUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE9358D291B119700E426CF /* SwarmCreationUI.swift */; };
@@ -565,6 +567,7 @@
 				44DFB3B7288704910023878C /* SQLite.xcframework in Embed Frameworks */,
 				44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */,
 				44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */,
+				1D268F23298477A8001DBCFB /* Gifu.xcframework in Embed Frameworks */,
 				44DFB3AB288704900023878C /* Realm.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -822,6 +825,7 @@
 		1ABE07DB1F0D915100D36361 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1ABE07DD1F0D91A800D36361 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ABE07E11F0D924700D36361 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		1D268F1F2984779F001DBCFB /* Gifu.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Gifu.xcframework; path = Carthage/Build/Gifu.xcframework; sourceTree = "<group>"; };
 		1D4EE843291EF9E000ED2010 /* SwarmCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmCreation.swift; sourceTree = "<group>"; };
 		1D4EE84C29252AD000ED2010 /* SwarmCreationUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmCreationUIModel.swift; sourceTree = "<group>"; };
 		1DE9358D291B119700E426CF /* SwarmCreationUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmCreationUI.swift; sourceTree = "<group>"; };
@@ -1200,6 +1204,7 @@
 				44DFB39C2887048F0023878C /* RxSwift.xcframework in Frameworks */,
 				269DA07628D0D366007D51D6 /* libssl.a in Frameworks */,
 				44DFB3A8288704900023878C /* Differentiator.xcframework in Frameworks */,
+				1D268F22298477A7001DBCFB /* Gifu.xcframework in Frameworks */,
 				44DFB3AA288704900023878C /* Realm.xcframework in Frameworks */,
 				269DA07C28D0D367007D51D6 /* libx264.a in Frameworks */,
 				269DA07928D0D367007D51D6 /* libtls.a in Frameworks */,
@@ -1324,6 +1329,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D268F1F2984779F001DBCFB /* Gifu.xcframework */,
 				44EDA53D28FE22FD00BEB99A /* libjami.a */,
 				269DA08428D0DA18007D51D6 /* libyaml-cpp.a */,
 				269DA05128D0D2ED007D51D6 /* libfmt.a */,

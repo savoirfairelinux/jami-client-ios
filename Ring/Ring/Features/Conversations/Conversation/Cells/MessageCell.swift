@@ -774,9 +774,10 @@ class MessageCell: UITableViewCell, NibReusable, PlayerDelegate, PreviewViewCont
         let screenWidth = UIScreen.main.bounds.width
         let maxDimsion: CGFloat = getMaxDimensionForTransfer()
         let defaultSize = CGSize(width: maxDimsion, height: maxDimsion)
-        if let image = message.getTransferedImage(maxSize: maxDimsion,
-                                                  conversationID: conversationID,
-                                                  accountId: accountId, isSwarm: isSwarm) {
+        let imageTuple = message.getTransferedImage(maxSize: maxDimsion,
+                                                    conversationID: conversationID,
+                                                    accountId: accountId, isSwarm: isSwarm)
+        if let image = imageTuple.0 {
             self.transferImageView.image = image
             let newSize = self.transferImageView.image?.getNewSize(of: defaultSize)
             let xOriginImageSend = screenWidth - 112 - (newSize?.width ?? 200)
