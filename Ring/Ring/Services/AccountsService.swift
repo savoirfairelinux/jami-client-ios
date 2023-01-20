@@ -386,7 +386,7 @@ class AccountsService: AccountAdapterDelegate {
             accountDetails.updateValue(sipServer, forKey: ConfigKey.accountHostname.rawValue)
             accountDetails.updateValue(password, forKey: ConfigKey.accountPassword.rawValue)
             if !port.isEmpty {
-                accountDetails.updateValue(password, forKey: ConfigKey.localPort.rawValue)
+                accountDetails.updateValue(port, forKey: ConfigKey.localPort.rawValue)
             }
             guard let account = self.accountAdapter.addAccount(accountDetails) else { return false }
             _ = try self.dbManager.createDatabaseForAccount(accountId: account, createFolder: true)
