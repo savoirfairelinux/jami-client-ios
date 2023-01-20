@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "Fájlküldési korlátozás elfogadása";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = korlátlan)";
 
+//Log View
+"logView.title" = "Diagnosztika";
+"logView.description" = "Diagnosztikai naplóbeállítások megnyitása";
+"logView.startLogging" = "Naplózás indítása";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "Fiók áttelepítése";
 "migrateAccount.migrateButton" = "Fiókáttelepítés";

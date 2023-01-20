@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
+//Log View
+"logView.title" = "การวินิจฉัย";
+"logView.description" = "เปิดการตั้งค่าบันทึกการวินิจฉัย";
+"logView.startLogging" = "เริ่มการบันทึก";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "Account migration";
 "migrateAccount.migrateButton" = "Migrate Account";

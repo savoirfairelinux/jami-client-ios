@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Kërkoni për kontakt…";
 "swarmcreation.createTheSwarm" = "Krijoje zgjoin";
 "swarmcreation.addADescription" = "Shtoni një përshkrim";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Mundeni të shtoni \%d\persona më tepër te zgjoi";
 // Swarm
 "swarm.ignoreSwarm" = "Shpërfille zgjuan";
 "swarm.leaveConversation" = "Braktiseni bisedën";
@@ -56,16 +56,16 @@
 "swarm.oneToOne" = "Zgjua privat";
 "swarm.adminInvitesOnly" = "Vetëm me ftesa nga përgjegjësi";
 "swarm.invitesOnly" = "Zgjua privat";
-"swarm.publicChat" = "Public swarm";
+"swarm.publicChat" = "Zgjua publik";
 "swarm.others" = "Të tjerë";
 "swarm.member" = "Anëtar";
 "swarm.invited" = "Ftuar";
 "swarm.admin" = "Përgjegjës";
 "swarm.banned" = "Dëbuar";
 "swarm.unknown" = "I panjohur";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.addMorePeople" = "Mundeni të shtoni \%d\persona më tepër te ky zgjua";
+"swarm.addMember" = "Shtoni Anëtar";
+"swarm.confirmLeaveSwarm" = "Jeni i sigurt se doni të braktisni këtë zgjua?";
 "swarm.Leave" = "Braktise";
 // Smartlist
 "smartlist.yesterday" = "Dje";
@@ -92,13 +92,13 @@
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 "conversation.errorSavingImage" = "S’u arrit të dërgohet figurë te galeri";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%@\ ju dërgoi një kërkesë për një bisedë.";
 "conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "\%@\ s’gjendet te lista e kontakteve tuaj.";
 "conversation.sendRequest" = "Dërgojini një kërkesë kontakti, që të jeni në gjendje të shkëmbeni me njëri-tjetrin";
 "conversation.sendRequestTitle" = "Dërgo Kërkesë Kontakti";
 "conversation.synchronizationTitle" = "Keni pranuar kërkesën për bisedë.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Po presim që \%@\ të lidhet, për të njëkohësuar bisedën.";
 
 //Invitations
 "invitations.noInvitations" = "S’ka ftesa";
@@ -379,6 +379,14 @@
 "generalSettings.automaticAcceptIncomingFiles" = "Prano automatikisht kartela ardhëse";
 "generalSettings.acceptTransferLimit" = "Prano kufi shpërnguljesh";
 "generalSettings.acceptTransferLimitDescription" = "(në MB, 0 = e pakufizuar)";
+
+//Log View
+"logView.title" = "Diagnostikime";
+"logView.description" = "Hapni rregullime regjistrash diagnostikimi";
+"logView.startLogging" = "Fillo Regjistrim";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
 
 //Migrate Account
 "migrateAccount.title" = "Migrim llogarie";

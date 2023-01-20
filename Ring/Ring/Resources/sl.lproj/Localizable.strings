@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "Sprejmi omejitev prenosa";
 "generalSettings.acceptTransferLimitDescription" = "(v MB, 0 = neomejeno)";
 
+//Log View
+"logView.title" = "Diagnostika";
+"logView.description" = "Odpri nastavitve diagnostičnih zapisnikov";
+"logView.startLogging" = "Začni beležiti";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "Selitev računa";
 "migrateAccount.migrateButton" = "Preseli račun";

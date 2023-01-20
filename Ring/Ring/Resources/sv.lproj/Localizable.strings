@@ -380,6 +380,14 @@
 "generalSettings.acceptTransferLimit" = "Ange gräns för överföring";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
+//Log View
+"logView.title" = "Diagnostik";
+"logView.description" = "Öppna inställningar för diagnostiklogg";
+"logView.startLogging" = "Starta loggning";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
+
 //Migrate Account
 "migrateAccount.title" = "Kontodelning";
 "migrateAccount.migrateButton" = "Migrera konto";

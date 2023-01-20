@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Cerca contatto...";
 "swarmcreation.createTheSwarm" = "Crea il gruppo";
 "swarmcreation.addADescription" = "Aggiungi una descrizione";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Puoi aggiungere altre \%d\ persone nel gruppo";
 // Swarm
 "swarm.ignoreSwarm" = "Ignora il gruppo";
 "swarm.leaveConversation" = "Lascia la conversazione";
@@ -64,8 +64,8 @@
 "swarm.banned" = "Bloccato";
 "swarm.unknown" = "Sconosciuto";
 "swarm.addMorePeople" = "Puoi aggiungere altre \%d\ persone in questo gruppo";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.addMember" = "Aggiungi membro";
+"swarm.confirmLeaveSwarm" = "Sei sicuro di voler lasciare questo gruppo?";
 "swarm.Leave" = "Lascia";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
@@ -379,6 +379,14 @@
 "generalSettings.automaticAcceptIncomingFiles" = "Accetta automaticamente i file in arrivo";
 "generalSettings.acceptTransferLimit" = "Limite del file accettato";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = illimitato)";
+
+//Log View
+"logView.title" = "Diagnostica";
+"logView.description" = "Apri le impostazioni di diagnostica";
+"logView.startLogging" = "Inizia la diagnostica";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
 
 //Migrate Account
 "migrateAccount.title" = "Migrazione account";

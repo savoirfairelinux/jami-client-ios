@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Caută un contact...";
 "swarmcreation.createTheSwarm" = "Creează grupul";
 "swarmcreation.addADescription" = "Adaugă o descriere";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Poți adăuga încă \%d\ persoane în grup";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoră grupul";
 "swarm.leaveConversation" = "Termină conversația";
@@ -64,8 +64,8 @@
 "swarm.banned" = "Blocat";
 "swarm.unknown" = "Necunoscut";
 "swarm.addMorePeople" = "Poți adăuga încă \%d\ persoane în acest grup";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.addMember" = "Adaugă un membru";
+"swarm.confirmLeaveSwarm" = "Sigur vrei să părăsești acest grup?";
 "swarm.Leave" = "Părăsește";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
@@ -379,6 +379,14 @@
 "generalSettings.automaticAcceptIncomingFiles" = "Acceptă automat fișierele primite";
 "generalSettings.acceptTransferLimit" = "Limita fișierului acceptat";
 "generalSettings.acceptTransferLimitDescription" = "(în Mo, 0 = nelimitat)";
+
+//Log View
+"logView.title" = "Diagnoză";
+"logView.description" = "Deschide reglările diagnozei";
+"logView.startLogging" = "Pornește diagnoza";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
 
 //Migrate Account
 "migrateAccount.title" = "Transferul contului";
