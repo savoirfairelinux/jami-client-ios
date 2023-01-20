@@ -40,6 +40,16 @@ struct URLPreview: UIViewRepresentable {
 
     func updateUIView(_ uiView: CustomLinkView, context: Context) {}
 }
+struct GIFView: UIViewRepresentable {
+    let imageToShow: UIImage?
+
+    func makeUIView(context: Context) -> some UIView {
+        let imageView = UIImageView()
+        imageView.image = imageToShow
+        return imageView
+    }
+    func updateUIView(_ uiView: UIViewType, context: Context) {}
+}
 
 struct MessageTextStyle: ViewModifier {
     @StateObject var model: MessageContentVM
@@ -113,8 +123,7 @@ struct MessageContentView: View {
                             .modifier(MessageCornerRadius(model: model))
                     }
                 } else if let image = self.model.image {
-                    Image(uiImage: image)
-                        .resizable()
+                    GIFView(imageToShow: image)
                         .scaledToFit()
                         .frame(minHeight: 50, maxHeight: 300)
                         .modifier(MessageCornerRadius(model: model))
