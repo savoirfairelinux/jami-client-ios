@@ -500,7 +500,6 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
     }
-
     func conversationLoaded(conversationId: String, accountId: String, messages: [[String: String]]) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         /// convert array of dictionaries to messages
@@ -508,15 +507,17 @@ extension  ConversationsManager: MessagesAdapterDelegate {
             let newMessage = MessageModel(withInfo: dictionary, accountJamiId: account.jamiId)
             if newMessage.type == .fileTransfer {
                 /// check if we need to download file for transfer
-                let progress = self.dataTransferService.getTransferProgress(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true)
-                newMessage.transferStatus = progress == 0 ? .awaiting : progress == newMessage.totalSize ? .success : .ongoing
-                let image = self.dataTransferService.getImage(for: newMessage.daemonId, maxSize: 200, accountID: accountId, conversationID: conversationId, isSwarm: true)
-                if newMessage.transferStatus == .awaiting, newMessage.totalSize <= maxSizeForAutoaccept, image == nil {
-                    var filename = ""
-                    self.dataTransferService.downloadFile(withId: newMessage.daemonId,
-                                                          interactionID: newMessage.id,
-                                                          fileName: &filename, accountID: accountId,
-                                                          conversationID: conversationId)
+                if let transferInfo = self.dataTransferService.dataTransferInfo(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true) {
+                    newMessage.transferStatus = transferInfo.bytesProgress == 0 ? .awaiting : transferInfo.bytesProgress == transferInfo.totalSize ? .success : .ongoing
+                    if newMessage.transferStatus == .awaiting, transferInfo.totalSize <= maxSizeForAutoaccept {
+                        var filename = ""
+                        self.dataTransferService.downloadFile(withId: newMessage.daemonId,
+                                                              interactionID: newMessage.id,
+                                                              fileName: &filename, accountID: accountId,
+                                                              conversationID: conversationId)
+                    }
+                } else {
+                    newMessage.transferStatus = .success
                 }
             }
             return newMessage
@@ -532,12 +533,8 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         }
         /// if new message was inserted check if we need to present notification
         if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, conversationId: conversationId, fromLoaded: false) {
-            /// check if file saved
-            let image = self.dataTransferService.getImage(for: newMessage.daemonId, maxSize: 200, accountID: accountId, conversationID: conversationId, isSwarm: true)
-
             /// download if file not saved yet
             if let size = message["totalSize"],
-               image == nil,
                (newMessage.transferStatus == .awaiting || newMessage.transferStatus == .success) {
 
                 let isReceiving = message[MessageAttributes.author.rawValue] != account.jamiId
