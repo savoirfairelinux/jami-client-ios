@@ -20,6 +20,7 @@
 
 import SwiftUI
 import LinkPresentation
+import Gifu
 
 class CustomLinkView: LPLinkView {
     override var intrinsicContentSize: CGSize { CGSize(width: 0, height: super.intrinsicContentSize.height) }
@@ -39,6 +40,17 @@ struct URLPreview: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: CustomLinkView, context: Context) {}
+}
+struct GIFPreview: UIViewRepresentable {
+    let imageURL: URL?
+
+    func makeUIView(context: Context) -> GIFImageView {
+        let viewImage = GIFImageView()
+        viewImage.animate(withGIFURL: imageURL!)
+        viewImage.contentMode = .scaleAspectFit
+        return viewImage
+    }
+    func updateUIView(_ uiView: UIViewType, context: Context) {}
 }
 
 struct MessageTextStyle: ViewModifier {
@@ -117,6 +129,12 @@ struct MessageContentView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(minHeight: 50, maxHeight: 300)
+                        .modifier(MessageCornerRadius(model: model))
+                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                } else if let finalURL = self.model.url {
+                    GIFPreview(imageURL: finalURL)
+                        .scaledToFit()
+                        .frame(minWidth: 50, maxWidth: 300, minHeight: 50, maxHeight: 400)
                         .modifier(MessageCornerRadius(model: model))
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 } else {

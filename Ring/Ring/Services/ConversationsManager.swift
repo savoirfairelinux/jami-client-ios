@@ -513,7 +513,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
                 if let transferInfo = self.dataTransferService.dataTransferInfo(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true) {
                     newMessage.transferStatus = transferInfo.bytesProgress == 0 ? .awaiting : transferInfo.bytesProgress == transferInfo.totalSize ? .success : .ongoing
                     let image = self.dataTransferService.getImage(for: newMessage.daemonId, maxSize: 200, accountID: accountId, conversationID: conversationId, isSwarm: true)
-                    if newMessage.transferStatus == .awaiting, transferInfo.totalSize <= maxSizeForAutoaccept, image == nil {
+                    if newMessage.transferStatus == .awaiting, transferInfo.totalSize <= maxSizeForAutoaccept, image.0 == nil {
                         var filename = ""
                         self.dataTransferService.downloadFile(withId: newMessage.daemonId,
                                                               interactionID: newMessage.id,
@@ -542,7 +542,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
 
             /// download if file not saved yet
             if let size = message["totalSize"],
-               image == nil,
+               image.0 == nil,
                (newMessage.transferStatus == .awaiting || newMessage.transferStatus == .success) {
 
                 let isReceiving = message[MessageAttributes.author.rawValue] != account.jamiId

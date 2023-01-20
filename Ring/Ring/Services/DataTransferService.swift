@@ -189,15 +189,15 @@ public final class DataTransferService: DataTransferAdapterDelegate {
      */
 
     func getImage(for name: String, maxSize: CGFloat, identifier: String? = nil,
-                  accountID: String, conversationID: String, isSwarm: Bool) -> UIImage? {
+                  accountID: String, conversationID: String, isSwarm: Bool) -> (UIImage?, URL?) {
         if let localImageIdentifier = identifier {
             if let image = self.transferedImages[localImageIdentifier] {
-                return image.data
+                return (image.data, nil)
             }
-            return self.getImageFromPhotoLibrairy(identifier: localImageIdentifier, maxSize: maxSize, name: name)
+            return (self.getImageFromPhotoLibrairy(identifier: localImageIdentifier, maxSize: maxSize, name: name), nil)
         }
         if let image = self.transferedImages[conversationID + name], let data = image.data {
-            return data
+            return (data, nil)
         }
         return self.getImageFromFile(for: name, maxSize: maxSize, accountID: accountID,
                                      conversationID: conversationID, isSwarm: isSwarm)
@@ -207,34 +207,33 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                                   maxSize: CGFloat,
                                   accountID: String,
                                   conversationID: String,
-                                  isSwarm: Bool) -> UIImage? {
+                                  isSwarm: Bool) -> (UIImage?, URL?) {
         var fileUrl: URL?
         if isSwarm {
             fileUrl = self.getFileUrlForSwarm(fileName: name, accountID: accountID, conversationID: conversationID)
         } else {
             fileUrl = getFileUrlNonSwarm(fileName: name, inFolder: Directories.downloads.rawValue, accountID: accountID, conversationID: conversationID)
         }
-        guard let pathUrl = fileUrl else { return nil }
+        guard let pathUrl = fileUrl else { return (nil, nil) }
         let fileExtension = pathUrl.pathExtension as CFString
         guard let uti = UTTypeCreatePreferredIdentifierForTag(
                 kUTTagClassFilenameExtension,
                 fileExtension,
-                nil) else { return nil }
+                nil) else { return (nil, nil) }
         if UTTypeConformsTo(uti.takeRetainedValue(), kUTTypeImage) {
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: pathUrl.path) {
                 if fileExtension as String == "gif" {
-                    let image = UIImage.gifImageWithUrl(pathUrl)
-                    return image
+                    return (nil, pathUrl)
                 }
                 let image = UIImage(contentsOfFile: pathUrl.path)
                 self.transferedImages[conversationID + name] = (true, image)
-                return image
+                return (image, pathUrl)
             }
         } else {
             self.transferedImages[conversationID + name] = (false, nil)
         }
-        return nil
+        return (nil, nil)
     }
 
     // MARK: get image from library. Only for non swarm conversations

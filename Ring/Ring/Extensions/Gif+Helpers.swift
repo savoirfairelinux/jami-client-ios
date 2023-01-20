@@ -24,25 +24,6 @@ private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 extension UIImage {
 
-    public class func gifImageWithData(_ data: Data) -> UIImage? {
-        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
-            print("image doesn't exist")
-            return nil
-        }
-
-        return UIImage.animatedImageWithSource(source)
-    }
-
-    public class func gifImageWithUrl(_ url: URL) -> UIImage? {
-
-        guard let imageData = try? Data(contentsOf: url) else {
-            print("SwiftGif: Cannot turn image named \"\(url.path)\" into NSData")
-            return nil
-        }
-
-        return gifImageWithData(imageData)
-    }
-
     class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
 
