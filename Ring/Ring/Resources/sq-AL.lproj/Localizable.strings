@@ -384,9 +384,9 @@
 "logView.title" = "Diagnostikime";
 "logView.description" = "Hapni rregullime regjistrash diagnostikimi";
 "logView.startLogging" = "Fillo Regjistrim";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Ndale Regjistrimin";
+"logView.saveError" = "S’u arrit të ruhej kartelë";
+"logView.shareError" = "S’u arrit të jepej kartelë";
 
 //Migrate Account
 "migrateAccount.title" = "Migrim llogarie";

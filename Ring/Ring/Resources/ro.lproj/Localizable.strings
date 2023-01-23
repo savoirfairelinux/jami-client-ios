@@ -384,9 +384,9 @@
 "logView.title" = "Diagnoză";
 "logView.description" = "Deschide reglările diagnozei";
 "logView.startLogging" = "Pornește diagnoza";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Oprește diagnoza";
+"logView.saveError" = "Salvare nereușită";
+"logView.shareError" = "Distribuire nereușită";
 
 //Migrate Account
 "migrateAccount.title" = "Transferul contului";

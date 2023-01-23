@@ -384,9 +384,9 @@
 "logView.title" = "Diagnostica";
 "logView.description" = "Apri le impostazioni di diagnostica";
 "logView.startLogging" = "Inizia la diagnostica";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Ferma la diagnostica";
+"logView.saveError" = "Impossibile salvare il file";
+"logView.shareError" = "Impossibile condividere il file";
 
 //Migrate Account
 "migrateAccount.title" = "Migrazione account";

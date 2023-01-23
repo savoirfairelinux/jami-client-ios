@@ -384,9 +384,9 @@
 "logView.title" = "Diagnose";
 "logView.description" = "Diagnoseprotokolleinstellungen öffnen";
 "logView.startLogging" = "Protokollierung starten";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Protokollierung stoppen";
+"logView.saveError" = "Fehler beim Speichern der Datei";
+"logView.shareError" = "Fehler beim Freigeben der Datei";
 
 //Migrate Account
 "migrateAccount.title" = "Kontomigration";

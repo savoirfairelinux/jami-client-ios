@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Chercher un contact";
 "swarmcreation.createTheSwarm" = "Créer le swarm";
 "swarmcreation.addADescription" = "Ajouter une description";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Vous pouvez ajouter  \%d\ personne(s) de plus dans le Swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorer le swarm";
 "swarm.leaveConversation" = "Quitter la conversation";
@@ -63,9 +63,9 @@
 "swarm.admin" = "Administrateur";
 "swarm.banned" = "Bloqué";
 "swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.addMorePeople" = "Vous pouvez ajouter \%d\ personne(s) de plus dans le Swarm";
+"swarm.addMember" = "Ajouter un membre";
+"swarm.confirmLeaveSwarm" = "Êtes-vous certain de vouloir quitter le Swarm ?";
 "swarm.Leave" = "Quitter";
 // Smartlist
 "smartlist.yesterday" = "Hier";
@@ -92,13 +92,13 @@
 "conversation.explanationSendingLocationTo" = "Vous partagez actuellement votre position avec";
 "conversation.explanationReceivingLocationFrom" = "Vous recevez actuellement la position de ";
 "conversation.errorSavingImage" = "Impossible de sauvegarder l'image dans la galerie";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%@\ vous a envoyé une invitation.";
 "conversation.requestMessage" = "Bonjour,\nSouhaitez-vous rejoindre la conversation ?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = " \%@\ ne fait pas partie de vos contacts.";
 "conversation.sendRequest" = "Envoyer lui une demande de contact afin de pouvoir discuter ensemble";
 "conversation.sendRequestTitle" = "Envoyer une invitation";
 "conversation.synchronizationTitle" = "Vous avez accepté la demande de conversation";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Nous attendons que  \%@\  se connecte afin de se synchroniser.";
 
 //Invitations
 "invitations.noInvitations" = "Aucune invitation";
@@ -359,8 +359,8 @@
 //Generated Message
 "generatedMessage.contactAdded" = "Vous avez reçu une invitation";
 "generatedMessage.swarmCreated" = "Le Swarm a été créé";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.invitationReceived" = "a été invité";
+"generatedMessage.invitationAccepted" = " a rejoint la conversation";
 "generatedMessage.youJoined" = "Vous avez rejoint la conversation";
 "generatedMessage.contactBanned" = "was kicked";
 "generatedMessage.contactReAdded" = "was re-added";
