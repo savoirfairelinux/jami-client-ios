@@ -158,6 +158,14 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         }
     }
 
+    func getURL() -> URL? {
+        var withPrefix = content
+        if !withPrefix.hasPrefix("http://") && !withPrefix.hasPrefix("https://") {
+            withPrefix = "http://" + withPrefix
+        }
+        return URL(string: withPrefix)
+    }
+
     // state
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>

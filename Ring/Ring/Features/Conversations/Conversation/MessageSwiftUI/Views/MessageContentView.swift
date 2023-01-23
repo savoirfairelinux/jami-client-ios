@@ -44,8 +44,8 @@ struct URLPreview: UIViewRepresentable {
 struct MessageContentView: View {
     let messageModel: MessageContainerModel
     @StateObject var model: MessageContentVM
-    @SwiftUI.State private var presentMenu = false
     @SwiftUI.State private var frame: CGRect = .zero
+    @SwiftUI.State private var presentMenu = false
     var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
     var body: some View {
         VStack(alignment: .leading) {
@@ -60,9 +60,14 @@ struct MessageContentView: View {
                     .cornerRadius(3)
             } else if model.type == .fileTransfer {
                 if let player = self.model.player {
-                    PlayerSwiftUI(model: model, player: player)
-                        .cornerRadius(radius: model.cornerRadius, corners: model.corners)
-                        .cornerRadius(5)
+                    PlayerSwiftUI(model: model, player: player, onLongGesture: {
+                        if model.menuItems.isEmpty { return }
+                        presentMenu = true
+                    })
+                    //                    .overlay(
+                    //                        CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
+                    //                            .stroke(Color(UIColor.quaternaryLabel), lineWidth: 2))
+                    .cornerRadius(3)
                 } else if let image = self.model.image {
                     Image(uiImage: image)
                         .resizable()
@@ -70,16 +75,24 @@ struct MessageContentView: View {
                         .frame(minHeight: 50, maxHeight: 300)
                         .cornerRadius(radius: model.cornerRadius, corners: model.corners)
                         .cornerRadius(3)
+                        .onLongPressGesture(minimumDuration: 0.2, perform: {
+                            if model.menuItems.isEmpty { return }
+                            presentMenu = true
+                        })
                 } else {
-                    DefaultTransferView(model: model)
+                    DefaultTransferView(model: model, onLongGesture: {
+                        if model.menuItems.isEmpty { return }
+                        presentMenu = true
+                    })
                 }
             } else if model.type == .text {
                 if let metadata = model.metadata {
                     URLPreview(metadata: metadata, maxDimension: model.maxDimension)
                         .cornerRadius(radius: model.cornerRadius, corners: model.corners)
-                } else if model.content.isValidURL, let url = URL(string: model.content) {
+                } else if model.content.isValidURL, let url = model.getURL() {
                     Link(model.content, destination: url)
                         .padding(model.textInset)
+                        .background(model.backgroundColor)
                         .cornerRadius(radius: model.cornerRadius, corners: model.corners)
                 } else {
                     Text(model.content)
@@ -100,18 +113,20 @@ struct MessageContentView: View {
                             view.cornerRadius(radius: model.cornerRadius, corners: model.corners)
                         }
                         .cornerRadius(3)
+                        .onLongPressGesture(minimumDuration: 0.2, perform: {
+                            if model.menuItems.isEmpty { return }
+                            presentMenu = true
+                        })
                 }
             }
         }
-        .onTapGesture { }
-        .onLongPressGesture(minimumDuration: 0.4, perform: {
-            if model.menuItems.isEmpty { return }
-            presentMenu = true
-        })
         .background(
             GeometryReader { proxy in
                 Rectangle().fill(Color.clear)
                     .onChange(of: presentMenu, perform: { _ in
+                        if !presentMenu {
+                            return
+                        }
                         DispatchQueue.main.async {
                             let frame = proxy.frame(in: .global)
                             presentMenu = false

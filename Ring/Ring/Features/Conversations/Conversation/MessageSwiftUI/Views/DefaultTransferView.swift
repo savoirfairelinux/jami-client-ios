@@ -22,37 +22,50 @@ import SwiftUI
 
 struct DefaultTransferView: View {
     @StateObject var model: MessageContentVM
+    let onLongGesture: () -> Void
     var body: some View {
         HStack(alignment: .top) {
-            Spacer()
-                .frame(width: 1)
-            Image(systemName: "doc")
-                .resizable()
-                .foregroundColor(model.textColor)
-                .scaledToFit()
-                .frame(width: 20, height: 20)
-            Spacer()
-                .frame(width: 10)
-            VStack(alignment: .leading) {
-                Text(model.fileName)
-                    .lineLimit(1)
-                    .truncationMode(.middle)
-                    .foregroundColor(model.textColor)
-                    .background(model.backgroundColor)
-                    .font(.headline)
+            HStack(alignment: .top) {
                 Spacer()
-                    .frame(height: 10)
-                Text(model.fileInfo)
+                    .frame(width: 1)
+                Image(systemName: "doc")
+                    .resizable()
                     .foregroundColor(model.textColor)
-                    .background(model.backgroundColor)
-                    .font(.footnote)
-                if model.showProgress {
-                    Spacer()
-                        .frame(height: 15)
-                    SwiftUI.ProgressView(value: model.fileProgress, total: 1)
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+                Spacer()
+                    .frame(width: 10)
+            }
+            .highPriorityGesture(TapGesture()
+                                    .onEnded { _ in
+                                        onLongGesture()
+                                    })
+            VStack(alignment: .leading) {
+                VStack(alignment: .leading) {
+                    Text(model.fileName)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                        .foregroundColor(model.textColor)
+                        .background(model.backgroundColor)
+                        .font(.headline)
                     Spacer()
                         .frame(height: 10)
+                    Text(model.fileInfo)
+                        .foregroundColor(model.textColor)
+                        .background(model.backgroundColor)
+                        .font(.footnote)
+                    if model.showProgress {
+                        Spacer()
+                            .frame(height: 15)
+                        SwiftUI.ProgressView(value: model.fileProgress, total: 1)
+                        Spacer()
+                            .frame(height: 10)
+                    }
                 }
+                .highPriorityGesture(TapGesture()
+                                        .onEnded { _ in
+                                            onLongGesture()
+                                        })
                 if !model.transferActions.isEmpty {
                     HStack {
                         ForEach(model.transferActions) { action in
