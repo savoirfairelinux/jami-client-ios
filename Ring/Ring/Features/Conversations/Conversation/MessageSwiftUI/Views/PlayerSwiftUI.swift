@@ -19,6 +19,7 @@
  */
 
 import SwiftUI
+import RxSwift
 
 struct PlayerViewWrapper: UIViewRepresentable {
     typealias UIViewType = PlayerView
@@ -26,11 +27,25 @@ struct PlayerViewWrapper: UIViewRepresentable {
     var viewModel: PlayerViewModel
     var width: CGFloat
     var height: CGFloat
+    let onLongGesture: () -> Void
+    let disposeBag = DisposeBag()
+    let longGestureRecognizer = UILongPressGestureRecognizer()
 
     func makeUIView(context: Context) -> PlayerView {
         let frame = CGRect(x: 0, y: 0, width: width, height: height)
         let player = PlayerView(frame: frame)
         player.viewModel = viewModel
+        longGestureRecognizer.rx
+            .event
+            .filter({ event in
+                event.state == UIGestureRecognizer.State.began
+            })
+            .bind(onNext: { _ in
+                self.onLongGesture()
+            })
+            .disposed(by: self.disposeBag)
+        longGestureRecognizer.minimumPressDuration = 0.2
+        player.addGestureRecognizer(longGestureRecognizer)
         return player
     }
 
@@ -44,8 +59,9 @@ struct PlayerViewWrapper: UIViewRepresentable {
 struct PlayerSwiftUI: View {
     @StateObject var model: MessageContentVM
     var player: PlayerViewModel
+    let onLongGesture: () -> Void
     var body: some View {
-        PlayerViewWrapper.init(viewModel: player, width: model.playerWidth, height: model.playerHeight)
+        PlayerViewWrapper.init(viewModel: player, width: model.playerWidth, height: model.playerHeight, onLongGesture: onLongGesture)
             .frame(height: model.playerHeight)
             .frame(width: model.playerWidth)
     }
