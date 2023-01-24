@@ -76,10 +76,6 @@ class GeneratedInteractionsManager {
                 }
                 var message = ""
                 switch contactRequestEvent.eventType {
-                case ServiceEventType.contactAdded:
-                    let conversation = ConversationModel(withParticipantUri: JamiURI(schema: .ring, infoHach: jamiId), accountId: accountID)
-                    self.conversationService.saveLegacyConversation(conversation: conversation, isExisting: false)
-                    return
                 case ServiceEventType.contactRequestReceived:
                     message = GeneratedMessage.invitationReceived.toString()
                 case ServiceEventType.contactRequestDiscarded:

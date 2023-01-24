@@ -49,7 +49,7 @@ class ContextMenuVM {
     let menuImageSize: CGFloat = 18
     let menuItemFont = Font.callout
     let screenPadding: CGFloat = 100
-    let menuCornerRadius: CGFloat = 12
+    let menuCornerRadius: CGFloat = 3
     var bottomOffset: CGFloat = 0 // move message up
     var menuOffsetX: CGFloat = 0
     var menuOffsetY: CGFloat = 0

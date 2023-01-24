@@ -41,11 +41,55 @@ struct URLPreview: UIViewRepresentable {
     func updateUIView(_ uiView: CustomLinkView, context: Context) {}
 }
 
+struct MessageTextStyle: ViewModifier {
+    @StateObject var model: MessageContentVM
+
+    func body(content: Content) -> some View {
+        content
+            .padding(.top, model.textVerticalInset)
+            .padding(.bottom, model.textVerticalInset)
+            .padding(.leading, model.textInset)
+            .padding(.trailing, model.textInset)
+            .foregroundColor(model.textColor)
+            .background(model.backgroundColor)
+            .font(model.textFont)
+            .if(model.hasBorder) { view in
+                view.overlay(
+                    CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
+                        .stroke(model.borderColor, lineWidth: 2))
+            }
+            .modifier(MessageCornerRadius(model: model))
+    }
+}
+
+struct MessageLongPress: ViewModifier {
+    var longPressCb: (() -> Void)
+
+    func body(content: Content) -> some View {
+        content
+            .onLongPressGesture(minimumDuration: 0.2, perform: longPressCb)
+    }
+}
+
+struct MessageCornerRadius: ViewModifier {
+    @StateObject var model: MessageContentVM
+
+    func body(content: Content) -> some View {
+        content
+            .if(!model.hasBorder) { view in
+                view.cornerRadius(radius: model.cornerRadius, corners: model.corners)
+            }
+            .cornerRadius(3)
+    }
+}
+
 struct MessageContentView: View {
     let messageModel: MessageContainerModel
     @StateObject var model: MessageContentVM
-    @SwiftUI.State private var presentMenu = false
     @SwiftUI.State private var frame: CGRect = .zero
+    @SwiftUI.State private var presentMenu = false
+    @Environment(\.openURL) var openURL
+    @Environment(\.colorScheme) var colorScheme
     var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
     var body: some View {
         VStack(alignment: .leading) {
@@ -56,62 +100,55 @@ struct MessageContentView: View {
                     .lineLimit(1)
                     .background(model.backgroundColor)
                     .font(model.textFont)
-                    .cornerRadius(radius: model.cornerRadius, corners: model.corners)
-                    .cornerRadius(3)
+                    .modifier(MessageCornerRadius(model: model))
             } else if model.type == .fileTransfer {
                 if let player = self.model.player {
-                    PlayerSwiftUI(model: model, player: player)
-                        .cornerRadius(radius: model.cornerRadius, corners: model.corners)
-                        .cornerRadius(5)
+                    ZStack(alignment: .center) {
+                        if colorScheme == .dark {
+                            model.borderColor
+                                .modifier(MessageCornerRadius(model: model))
+                                .frame(width: model.playerWidth + 2, height: model.playerHeight + 2)
+                        }
+                        PlayerSwiftUI(model: model, player: player, onLongGesture: receivedLongPress())
+                            .modifier(MessageCornerRadius(model: model))
+                    }
                 } else if let image = self.model.image {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
                         .frame(minHeight: 50, maxHeight: 300)
-                        .cornerRadius(radius: model.cornerRadius, corners: model.corners)
-                        .cornerRadius(3)
+                        .modifier(MessageCornerRadius(model: model))
+                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 } else {
-                    DefaultTransferView(model: model)
+                    DefaultTransferView(model: model, onLongGesture: receivedLongPress())
+                        .modifier(MessageCornerRadius(model: model))
                 }
             } else if model.type == .text {
                 if let metadata = model.metadata {
                     URLPreview(metadata: metadata, maxDimension: model.maxDimension)
-                        .cornerRadius(radius: model.cornerRadius, corners: model.corners)
-                } else if model.content.isValidURL, let url = URL(string: model.content) {
-                    Link(model.content, destination: url)
-                        .padding(model.textInset)
-                        .cornerRadius(radius: model.cornerRadius, corners: model.corners)
+                        .modifier(MessageCornerRadius(model: model))
+                } else if model.content.isValidURL, let url = model.getURL() {
+                    Text(model.content)
+                        .applyTextStyle(model: model)
+                        .onTapGesture(perform: {
+                            openURL(url)
+                        })
+                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 } else {
                     Text(model.content)
-                        .padding(.top, model.textVerticalInset)
-                        .padding(.bottom, model.textVerticalInset)
-                        .padding(.leading, model.textInset)
-                        .padding(.trailing, model.textInset)
-                        .foregroundColor(model.textColor)
+                        .applyTextStyle(model: model)
                         .lineLimit(nil)
-                        .background(model.backgroundColor)
-                        .font(model.textFont)
-                        .if(model.hasBorder) { view in
-                            view.overlay(
-                                CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
-                                    .stroke(model.borderColor, lineWidth: 2))
-                        }
-                        .if(!model.hasBorder) { view in
-                            view.cornerRadius(radius: model.cornerRadius, corners: model.corners)
-                        }
-                        .cornerRadius(3)
+                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
             }
         }
-        .onTapGesture { }
-        .onLongPressGesture(minimumDuration: 0.4, perform: {
-            if model.menuItems.isEmpty { return }
-            presentMenu = true
-        })
         .background(
             GeometryReader { proxy in
                 Rectangle().fill(Color.clear)
                     .onChange(of: presentMenu, perform: { _ in
+                        if !presentMenu {
+                            return
+                        }
                         DispatchQueue.main.async {
                             let frame = proxy.frame(in: .global)
                             presentMenu = false
@@ -122,6 +159,13 @@ struct MessageContentView: View {
         )
         .onAppear {
             self.model.onAppear()
+        }
+    }
+
+    private func receivedLongPress() -> (() -> Void) {
+        return {
+            if model.menuItems.isEmpty { return }
+            presentMenu = true
         }
     }
 

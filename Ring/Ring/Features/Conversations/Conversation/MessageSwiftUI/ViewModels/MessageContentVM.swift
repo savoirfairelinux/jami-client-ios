@@ -158,6 +158,14 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         }
     }
 
+    func getURL() -> URL? {
+        var withPrefix = content
+        if !withPrefix.hasPrefix("http://") && !withPrefix.hasPrefix("https://") {
+            withPrefix = "http://" + withPrefix
+        }
+        return URL(string: withPrefix)
+    }
+
     // state
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
@@ -193,6 +201,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         if self.type == .fileTransfer {
             self.fileName = message.content
             self.textColor = Color(UIColor.label)
+            self.borderColor = Color(UIColor.clear)
             self.updateTransferInfo()
         }
         if self.type == .contact {
@@ -253,6 +262,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
 
     private func fetchMetadata() {
         guard self.type == .text, self.content.isValidURL, let url = URL(string: self.content) else { return }
+        self.textColor = .blue
         LPMetadataProvider().startFetchingMetadata(for: url) {(metaDataObj, error) in
             DispatchQueue.main.async { [weak self, weak metaDataObj] in
                 guard let self = self else { return }
@@ -383,6 +393,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
             } else {
                 self.playerHeight = height
             }
+            self.borderColor = Color(UIColor.tertiaryLabel)
         }
     }
 
