@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55dc59bd_2df7e01b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T16:50:48Z",
+      "side": 1,
+      "message": "UIImageWrapper for struct name?",
+      "revId": "c1af40c88d769bfb9adb217160ef032591cef1ca",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "233da95a_a143191e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T16:50:48Z",
+      "side": 1,
+      "message": "sizes for image are broken",
+      "revId": "c1af40c88d769bfb9adb217160ef032591cef1ca",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
