@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb7d7e1_4b982387",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharing.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 0,
+      "message": "we could remove this file",
+      "revId": "7b11b1ee407aa32cb4df2d105aa55c608eb37aa1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e41eb1_45fac390",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharingReceived.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 0,
+      "message": "we could remove this file",
+      "revId": "7b11b1ee407aa32cb4df2d105aa55c608eb37aa1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1778c8d7_aeb77c54",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharingSent.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 0,
+      "message": "we could remove this file",
+      "revId": "7b11b1ee407aa32cb4df2d105aa55c608eb37aa1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}

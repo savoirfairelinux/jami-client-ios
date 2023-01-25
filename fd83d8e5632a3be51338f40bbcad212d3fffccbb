@@ -1,0 +1,633 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d575ddb_9974169b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "we could remove it. After location merged all code related to cells and table will be removed",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c869126_b1aca801",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "we could remove it",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "998d2e25_8518efd5",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c5afa5e_d3bd25ad",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "does it need to be @Published?",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10535b40_98218370",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "does it need to be @Published?",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1496d058_913a21ab",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "same for next properties. Why they are @Published?",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb05e000_1397ade6",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "not used. It probably was not removed during rebasing",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7be2f606_3e371673",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "not used. It probably was not removed during rebasing",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4facb118_35538afd",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "subscribeLocationEvents()",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37bab882_bf0cd825",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "for now we need to filter by jamiId",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7398446a_e5959049",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "only updateCoordinatesList() need to be on the main thread. We could switch to main thread inside this function",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94a99cc6_f5ad03c3",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "we could add this observer when starting sharing location. Not in the init",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "908ea1bd_e5db50ef",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "how do we know that we are sharing location in this conversation",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a2a9fc_33cb1445",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "only updateCoordinatesList() need to be on the main thread",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b9bbcfc_ac1dde62",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "should be in different function. It is not location event. And we could start profile observing after we start location sharing",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79e991c5_4ef46b4d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "this way we will receive updates for messages that are already destroyed",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63618633_08d6983f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "updateContacLocationSharingImage() for function name",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073ecfac_ab3c26d9",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "[weak self]",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f5a613_88afad8d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "with this condition we would not be able to start location sharing if contact already sharing location",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c970ce9d_b22c5ae7",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "copyright",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe8f7b5_e2c0e734",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "we also need to add button to display copyright information for OpenStreetMap",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f3de4a_cf062065",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "translate text",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5253651_490f2d54",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "try height 60",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd67567_73d18e2f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "maybe darker color for background, because text is white",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7307e888_1d486a90",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "bind text to actual value. Time should be min(like \"10 min\" )",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c42c595d_6d9d4ef3",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "- the same button is used when isMapOpened true and false. We could move button creation in separate function. \n- we do not need this button when the peer share location. But in this case we could have button \"Remove\" to remove map from the view",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "648cc76b_c5b81e55",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "- this view could overlap navigation bar. We need either present full screen map or ensure that it does not cover navigation bar.\n- also we need to hide message input view when full screen map is present.\n- full screen map has wrong size after rotation",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8986e79_28abd392",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MapView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "2022-2023",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c413b1_110b706e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MapView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "we should use soft unwrap for coordinates.first",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d138bb41_ddc0d97d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MapView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "why Coordinator is inside MapView extension?",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93ac9f11_029fa505",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MapView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "do we need parent",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e65dc064_5a97d5e2",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MapView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08aad282_1cf068c3",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "full screen or smaller map already handled in LocationSharingView",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de85094d_d1f6b603",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "do we need to set frame? it is already set in LocationSharingView",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "257d6777_5f97e8ba",
+        "filename": "Ring/Ring/LocationSharing.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "2022-2023",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "583312e2_15cb9cd0",
+        "filename": "Ring/Ring/LocationSharing.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "do we use it?",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b060a9_719988e7",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-01-25T19:53:41Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
