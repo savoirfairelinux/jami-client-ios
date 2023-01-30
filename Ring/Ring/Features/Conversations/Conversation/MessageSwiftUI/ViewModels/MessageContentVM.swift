@@ -263,13 +263,17 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     private func fetchMetadata() {
         guard self.type == .text, self.content.isValidURL, let url = URL(string: self.content) else { return }
         self.textColor = .blue
-        LPMetadataProvider().startFetchingMetadata(for: url) {(metaDataObj, error) in
-            DispatchQueue.main.async { [weak self, weak metaDataObj] in
-                guard let self = self else { return }
-                guard error == nil, let metaDataObj = metaDataObj else {
+        DispatchQueue.global(qos: .background).async {
+            LPMetadataProvider().startFetchingMetadata(for: url) {(metaDataObj, error) in
+                guard error == nil else {
                     return
                 }
-                self.metadata = metaDataObj
+                DispatchQueue.main.async { [weak self, weak metaDataObj] in
+                    guard let self = self, let metaDataObj = metaDataObj else {
+                        return
+                    }
+                    self.metadata = metaDataObj
+                }
             }
         }
     }
