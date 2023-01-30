@@ -571,6 +571,7 @@ extension AppDelegate {
         if self.accountService.boothMode() {
             return false
         }
+        if self.callsProvider.hasPendingTransactions() { return false}
         guard let handle = userActivity.startCallHandle else {
             return false
         }
