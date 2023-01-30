@@ -387,6 +387,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         openButton.frame = CGRect(x: 0, y: 0, width: maxWidth, height: size)
         openButton.tag = openAccountTag
         self.viewModel.accountName
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { name in
                 accountName.text = name
                 accountName.sizeToFit()
