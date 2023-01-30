@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "Poišči stik ...";
 "swarmcreation.createTheSwarm" = "Ustvarite roj";
 "swarmcreation.addADescription" = "Dodajte opis";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "V ta roj lahko dodate še \%d\ oseb";
 // Swarm
 "swarm.ignoreSwarm" = "Prezri roj";
 "swarm.leaveConversation" = "Zapusti pogovor";
@@ -64,8 +64,8 @@
 "swarm.banned" = "Izključen/a";
 "swarm.unknown" = "Neznano";
 "swarm.addMorePeople" = "V ta roj lahko dodate še \%d\ oseb";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.addMember" = "Dodaj člana";
+"swarm.confirmLeaveSwarm" = "Ali ste prepričani, da želite zapustiti ta roj?";
 "swarm.Leave" = "Zapusti";
 // Smartlist
 "smartlist.yesterday" = "Včeraj";
@@ -384,9 +384,9 @@
 "logView.title" = "Diagnostika";
 "logView.description" = "Odpri nastavitve diagnostičnih zapisnikov";
 "logView.startLogging" = "Začni beležiti";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Prenehaj beležiti";
+"logView.saveError" = "Shranjevanje datoteke je spodletelo";
+"logView.shareError" = "Skupna raba datoteke je spodletela";
 
 //Migrate Account
 "migrateAccount.title" = "Selitev računa";
