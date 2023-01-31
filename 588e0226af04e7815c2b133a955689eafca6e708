@@ -52,6 +52,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c65977b_9bb388cc",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-31T17:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "305c697a_8d5b5584",
+      "revId": "588e0226af04e7815c2b133a955689eafca6e708",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4e0e20d_d731bb58",
@@ -69,6 +87,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b32966c_38c20008",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-31T17:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4e0e20d_d731bb58",
+      "revId": "588e0226af04e7815c2b133a955689eafca6e708",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afb827c8_ebcfff85",
@@ -82,6 +118,24 @@
       "writtenOn": "2023-01-30T20:46:27Z",
       "side": 1,
       "message": "or image.1 \u003d\u003d nil",
+      "revId": "588e0226af04e7815c2b133a955689eafca6e708",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31930291_669187f5",
+        "filename": "Ring/Ring/Services/ConversationsManager.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-01-31T17:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afb827c8_ebcfff85",
       "revId": "588e0226af04e7815c2b133a955689eafca6e708",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
