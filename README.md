@@ -9,7 +9,7 @@ This repository is for the porting of Jami to iOS.
 - Homebrew (instructions could be found on https://brew.sh)
 - Carthage (brew install carthage)
 
-## Buil instructions
+## Build instructions
 
 Supported archs are: arm64
 Minimum supported version is: 14.5
