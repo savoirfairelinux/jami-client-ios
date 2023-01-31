@@ -56,7 +56,7 @@ class LinkDeviceViewModel: Stateable, ViewModel {
     func linkDevice () {
         self.accountCreationState.accept(.started)
         self.accountService
-            .linkToRingAccount(withPin: self.pin.value,
+            .linkToJamiAccount(withPin: self.pin.value,
                                password: self.password.value,
                                enable: self.notificationSwitch.value)
             .subscribe(onNext: { [weak self] (account) in
