@@ -301,7 +301,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
         let password = self.password.value
 
         self.accountService
-            .addRingAccount(username: username,
+            .addJamiAccount(username: username,
                             password: password,
                             enable: self.notificationSwitch.value)
             .subscribe(onNext: { [weak self] (account) in

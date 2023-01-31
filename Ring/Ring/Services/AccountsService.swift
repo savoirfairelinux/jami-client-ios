@@ -304,26 +304,26 @@ class AccountsService: AccountAdapterDelegate {
         return self.dbManager.accountProfile(for: accountId)
     }
 
-    /// Adds a new Ring account.
+    /// Adds a new Jami account.
     ///
     /// - Parameters:
     ///   - username: an optional username for the new account
     ///   - password: the required password for the new account
     /// - Returns: an observable of an AccountModel: the created one
-    func addRingAccount(username: String?, password: String, enable: Bool) -> Observable<AccountModel> {
+    func addJamiAccount(username: String?, password: String, enable: Bool) -> Observable<AccountModel> {
         // ~ Single asking the daemon to add a new account with the associated metadata
         var newAccountId = ""
         let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
             do {
-                var ringDetails = try self.getRingInitialAccountDetails()
+                var details = try self.getJamiInitialAccountDetails()
                 if let username = username {
-                    ringDetails.updateValue(username, forKey: ConfigKey.accountRegisteredName.rawValue)
+                    details.updateValue(username, forKey: ConfigKey.accountRegisteredName.rawValue)
                 }
                 if !password.isEmpty {
-                    ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+                    details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
                 }
-                ringDetails.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
-                guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
+                details.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
+                guard let accountId = self.accountAdapter.addAccount(details) else {
                     throw AddAccountError.unknownError
                 }
                 newAccountId = accountId
@@ -402,16 +402,16 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    func linkToRingAccount(withPin pin: String, password: String, enable: Bool) -> Observable<AccountModel> {
+    func linkToJamiAccount(withPin pin: String, password: String, enable: Bool) -> Observable<AccountModel> {
         var newAccountId = ""
         // ~ Single asking the daemon to add a new account with the associated metadata
         let createAccountSingle: Single<AccountModel> = Single.create(subscribe: { (single) -> Disposable in
             do {
-                var ringDetails = try self.getRingInitialAccountDetails()
-                ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
-                ringDetails.updateValue(pin, forKey: ConfigKey.archivePIN.rawValue)
-                ringDetails.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
-                guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
+                var details = try self.getJamiInitialAccountDetails()
+                details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+                details.updateValue(pin, forKey: ConfigKey.archivePIN.rawValue)
+                details.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
+                guard let accountId = self.accountAdapter.addAccount(details) else {
                     throw AddAccountError.unknownError
                 }
                 newAccountId = accountId
@@ -517,12 +517,12 @@ class AccountsService: AccountAdapterDelegate {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             do {
-                var ringDetails = try self.getRingInitialAccountDetails()
-                ringDetails.updateValue(username, forKey: ConfigKey.managerUsername.rawValue)
-                ringDetails.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
-                ringDetails.updateValue(emableNotifications.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
-                ringDetails.updateValue(serverUri, forKey: ConfigKey.managerUri.rawValue)
-                guard let accountId = self.accountAdapter.addAccount(ringDetails) else {
+                var details = try self.getJamiInitialAccountDetails()
+                details.updateValue(username, forKey: ConfigKey.managerUsername.rawValue)
+                details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
+                details.updateValue(emableNotifications.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
+                details.updateValue(serverUri, forKey: ConfigKey.managerUri.rawValue)
+                guard let accountId = self.accountAdapter.addAccount(details) else {
                     throw AccountCreationError.wrongCredentials
                 }
                 newAccountId.accept(accountId)
@@ -685,19 +685,17 @@ class AccountsService: AccountAdapterDelegate {
             throw AddAccountError.templateNotConform
         }
         accountDetails!.updateValue("oversip", forKey: ConfigKey.accountDTMFType.rawValue)
-        accountDetails!.updateValue("true", forKey: ConfigKey.videoEnabled.rawValue)
         accountDetails!.updateValue(accountType, forKey: ConfigKey.accountType.rawValue)
-        accountDetails!.updateValue("true", forKey: ConfigKey.accountUpnpEnabled.rawValue)
         accountDetails!.updateValue("false", forKey: ConfigKey.ringtoneEnabled.rawValue)
         return accountDetails!
     }
 
     /**
-     Gathers all the initial default details contained in a Ring accounts.
+     Gathers all the initial default details contained in a Jami accounts.
 
      - Returns the details.
      */
-    private func getRingInitialAccountDetails() throws -> [String: String] {
+    private func getJamiInitialAccountDetails() throws -> [String: String] {
         do {
             let defaultDetails = try getInitialAccountDetails(accountType: AccountType.ring.rawValue)
             return defaultDetails
