@@ -404,6 +404,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .subscribe(onNext: { [weak self] _ in
                 if self?.durationLabel.text != "" {
                     if self?.callViewMode == .audio {
+                        self?.spinner.stopAnimating()
                         self?.buttonContainerHeightConstraint.constant = 200
                         self?.buttonsContainer.containerHeightConstraint.constant = 200
                         UIView.animate(withDuration: 0.3, animations: {
@@ -438,6 +439,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 }
                 self.needToCleanIncomingFrame = true
                 self.setAvatarView(false)
+                self.callInfoTimerLabel.isHidden = false
                 self.spinner.stopAnimating()
                 if self.beforeIncomingVideo.alpha != 0 {
                     UIView.animate(withDuration: 0.4, animations: {
@@ -458,6 +460,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 if let image = frame {
                     DispatchQueue.main.async {
                         self?.capturedVideo.image = image
+                        self?.spinner.stopAnimating()
                     }
                 }
             })
@@ -623,8 +626,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self.avatarView.isHidden = false
                 return
             }
-            let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
-            if !isPortrait {
+            let isLandscape = UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft
+            let isPortrait = UIDevice.current.orientation == .portrait
+            if isLandscape {
                 self.profileImageViewWidthConstraint.constant = 90
                 self.profileImageViewHeightConstraint.constant = 90
                 self.profileImageView.cornerRadius = 45
@@ -646,7 +650,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                     }
                     self.buttonsContainer.backgroundBlurEffect.alpha = 0
                 }
-            } else {
+            } else if isPortrait {
                 if UIDevice.current.hasNotch {
                     self.avatarViewImageTopConstraint.constant = 120
                 } else {
