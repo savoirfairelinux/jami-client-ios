@@ -143,6 +143,8 @@ do
              --disable-plugin \
              --disable-libarchive \
              --enable-static \
+             --without-upnp \
+             --without-natpmp \
              --disable-shared \
              --prefix=$IOS_TOP_DIR/DEPS/$ARCH"
 

@@ -257,7 +257,6 @@
 		269DA02F28D0D2E5007D51D6 /* libgnutls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB91D1C341A00E99CD9 /* libgnutls.a */; };
 		269DA03028D0D2E5007D51D6 /* libhogweed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABB1D1C341A00E99CD9 /* libhogweed.a */; };
 		269DA03128D0D2E5007D51D6 /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4A51CB23282BCC00357AFC /* libhttp_parser.a */; };
-		269DA03228D0D2E5007D51D6 /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABD1D1C341A00E99CD9 /* libixml.a */; };
 		269DA03328D0D2E5007D51D6 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */; };
 		269DA03428D0D2E5007D51D6 /* libnettle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC01D1C341A00E99CD9 /* libnettle.a */; };
 		269DA03528D0D2E5007D51D6 /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC21D1C341A00E99CD9 /* libopendht.a */; };
@@ -281,7 +280,6 @@
 		269DA04828D0D2E6007D51D6 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADA1D1C341A00E99CD9 /* libswresample.a */; };
 		269DA04928D0D2E6007D51D6 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADB1D1C341A00E99CD9 /* libswscale.a */; };
 		269DA04A28D0D2E6007D51D6 /* libtls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCC206BF4730009C44C /* libtls.a */; };
-		269DA04B28D0D2E6007D51D6 /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADD1D1C341A00E99CD9 /* libupnp.a */; };
 		269DA04C28D0D2E6007D51D6 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
 		269DA04D28D0D2E6007D51D6 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		269DA05328D0D366007D51D6 /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */; };
@@ -296,7 +294,6 @@
 		269DA05D28D0D366007D51D6 /* libgnutls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB91D1C341A00E99CD9 /* libgnutls.a */; };
 		269DA05E28D0D366007D51D6 /* libhogweed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABB1D1C341A00E99CD9 /* libhogweed.a */; };
 		269DA05F28D0D366007D51D6 /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4A51CB23282BCC00357AFC /* libhttp_parser.a */; };
-		269DA06028D0D366007D51D6 /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABD1D1C341A00E99CD9 /* libixml.a */; };
 		269DA06128D0D366007D51D6 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */; };
 		269DA06228D0D366007D51D6 /* libnettle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC01D1C341A00E99CD9 /* libnettle.a */; };
 		269DA06328D0D366007D51D6 /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC21D1C341A00E99CD9 /* libopendht.a */; };
@@ -321,7 +318,6 @@
 		269DA07728D0D366007D51D6 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADA1D1C341A00E99CD9 /* libswresample.a */; };
 		269DA07828D0D366007D51D6 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADB1D1C341A00E99CD9 /* libswscale.a */; };
 		269DA07928D0D367007D51D6 /* libtls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCC206BF4730009C44C /* libtls.a */; };
-		269DA07A28D0D367007D51D6 /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADD1D1C341A00E99CD9 /* libupnp.a */; };
 		269DA07B28D0D367007D51D6 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
 		269DA07C28D0D367007D51D6 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
 		269DA07D28D0D367007D51D6 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
@@ -1152,7 +1148,6 @@
 				269DA06328D0D366007D51D6 /* libopendht.a in Frameworks */,
 				269DA07028D0D366007D51D6 /* libpjsua2.a in Frameworks */,
 				269DA05728D0D366007D51D6 /* libavformat.a in Frameworks */,
-				269DA06028D0D366007D51D6 /* libixml.a in Frameworks */,
 				04399A981D1C2F6100E99CD9 /* libz.tbd in Frameworks */,
 				269DA07228D0D366007D51D6 /* libsecp256k1.a in Frameworks */,
 				649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */,
@@ -1173,7 +1168,6 @@
 				44DFB3B4288704910023878C /* RxRelay.xcframework in Frameworks */,
 				269DA07528D0D366007D51D6 /* libsrtp.a in Frameworks */,
 				44DFB3B0288704910023878C /* Reusable.xcframework in Frameworks */,
-				269DA07A28D0D367007D51D6 /* libupnp.a in Frameworks */,
 				269DA05428D0D366007D51D6 /* libavcodec.a in Frameworks */,
 				269DA06F28D0D366007D51D6 /* libpjsua.a in Frameworks */,
 				269DA07328D0D366007D51D6 /* libspeex.a in Frameworks */,
@@ -1243,7 +1237,6 @@
 				269DA03D28D0D2E5007D51D6 /* libpjnath.a in Frameworks */,
 				26BB43852670150E00019CF6 /* libbz2.tbd in Frameworks */,
 				44EDA53F28FE234500BEB99A /* libjami.a in Frameworks */,
-				269DA03228D0D2E5007D51D6 /* libixml.a in Frameworks */,
 				26BB43842670144800019CF6 /* libz.1.2.8.tbd in Frameworks */,
 				26BB43822670141100019CF6 /* libz.1.tbd in Frameworks */,
 				26BB43802670140600019CF6 /* libz.1.2.5.tbd in Frameworks */,
@@ -1256,7 +1249,6 @@
 				269DA03428D0D2E5007D51D6 /* libnettle.a in Frameworks */,
 				269DA02928D0D2E5007D51D6 /* libavdevice.a in Frameworks */,
 				269DA08628D0DFE3007D51D6 /* libyaml-cpp.a in Frameworks */,
-				269DA04B28D0D2E6007D51D6 /* libupnp.a in Frameworks */,
 				269DA03028D0D2E5007D51D6 /* libhogweed.a in Frameworks */,
 				26BB437E267013FB00019CF6 /* libz.1.2.11.tbd in Frameworks */,
 				26BB437D267013F600019CF6 /* libz.1.1.3.tbd in Frameworks */,
