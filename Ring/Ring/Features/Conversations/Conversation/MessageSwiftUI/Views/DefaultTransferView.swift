@@ -37,9 +37,9 @@ struct DefaultTransferView: View {
                     .frame(width: 10)
             }
             .highPriorityGesture(LongPressGesture(minimumDuration: 0.2)
-                .onEnded { _ in
-                    onLongGesture()
-                })
+                                    .onEnded { _ in
+                                        onLongGesture()
+                                    })
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
                     Text(model.fileName)
@@ -63,9 +63,9 @@ struct DefaultTransferView: View {
                     }
                 }
                 .highPriorityGesture(LongPressGesture(minimumDuration: 0.2)
-                    .onEnded { _ in
-                        onLongGesture()
-                    })
+                                        .onEnded { _ in
+                                            onLongGesture()
+                                        })
                 if !model.transferActions.isEmpty {
                     HStack {
                         ForEach(model.transferActions) { action in
