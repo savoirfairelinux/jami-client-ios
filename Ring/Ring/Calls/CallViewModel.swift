@@ -176,7 +176,9 @@ class CallViewModel: Stateable, ViewModel {
             .filter({ [weak self] profile in
                 guard let self = self else { return false }
                 if let alias = profile.alias {
-                    self.call?.displayName = alias
+                    if !alias.isEmpty {
+                        self.call?.displayName = alias
+                    }
                 }
                 guard let photo = profile.photo else {
                     return false
