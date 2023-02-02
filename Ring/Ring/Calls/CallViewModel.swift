@@ -641,11 +641,11 @@ extension CallViewModel {
         guard let call = self.call else {
             return
         }
-        var finalCallId = call.callId
+        var callId = call.callId
         if self.isHostCall {
-            finalCallId = self.rendererId
+            callId = self.rendererId
         }
-        self.callService.requestMediaChange(call: finalCallId, mediaLabel: "video_0")
+        self.callService.requestMediaChange(call: callId, mediaLabel: "video_0")
     }
 
     func switchCamera() {
