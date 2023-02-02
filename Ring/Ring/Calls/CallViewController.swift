@@ -113,6 +113,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.setupBindings()
         self.profileImageView.tintColor = UIColor.jamiDefaultAvatar
         nameLabel.textColor = UIColor.jamiLabelColor
+        callNameLabel.textColor = UIColor.jamiLabelColor
+        sendMessageButton.tintColor = UIColor.jamiLabelColor
         durationLabel.textColor = UIColor.jamiLabelColor
         infoBottomLabel.textColor = UIColor.jamiLabelColor
         UIApplication.shared.isIdleTimerDisabled = true
@@ -460,6 +462,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 if let image = frame {
                     DispatchQueue.main.async {
                         self?.capturedVideo.image = image
+                        self?.callInfoTimerLabel.isHidden = false
                         self?.spinner.stopAnimating()
                     }
                 }
@@ -603,6 +606,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         UIDevice.current.isProximityMonitoringEnabled = false
         self.setWhiteAvatarView()
         self.buttonsContainer.callViewMode = .audio
+        self.callInfoTimerLabel.isHidden = true
+        callNameLabel.textColor = UIColor.jamiLabelColor
+        sendMessageButton.tintColor = UIColor.jamiLabelColor
         self.buttonsContainer.updateView()
         self.setAvatarView(true)
     }
@@ -614,6 +620,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.setAvatarView(false)
         self.isCapturedVideoHidden = false
         self.capturedVideoBlurEffect.alpha = 0
+        callNameLabel.textColor = UIColor.white
+        sendMessageButton.tintColor = UIColor.white
         self.resizeCapturedFrame()
     }
 
