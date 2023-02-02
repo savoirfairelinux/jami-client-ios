@@ -78,16 +78,16 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                                 <subviews>
                                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MdN-dF-4x3">
-                                                        <rect key="frame" x="20" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="20" y="0.0" width="0.0" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GF7-hD-E63">
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GF7-hD-E63">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="30" id="hq4-4B-hxi"/>
                                                                     <constraint firstAttribute="height" constant="30" id="uyC-ZH-E3S"/>
                                                                 </constraints>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" backgroundImage="ic_back"/>
+                                                                <state key="normal" backgroundImage="back_button"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -107,7 +107,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgd-Wa-clf">
-                                                        <rect key="frame" x="70" y="15" width="0.0" height="0.0"/>
+                                                        <rect key="frame" x="40" y="15" width="0.0" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -389,6 +389,28 @@
                                     <constraint firstAttribute="height" constant="200" id="r58-OO-QqE"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F79-SX-Txp">
+                                <rect key="frame" x="20" y="20" width="30" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Pr1-jM-hpd"/>
+                                    <constraint firstAttribute="width" constant="30" id="Zgi-mR-vYK"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="back_button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lZI-X0-bkP"/>
                         <constraints>
@@ -409,6 +431,8 @@
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="trailing" secondItem="bij-Xb-EKH" secondAttribute="trailing" id="W2C-XA-mUT"/>
                             <constraint firstItem="SdV-jx-Mla" firstAttribute="bottom" secondItem="LK6-u0-eLU" secondAttribute="top" constant="40" id="YIc-Oj-lc8"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerY" secondItem="QpJ-Sx-9dG" secondAttribute="centerY" id="bAN-gX-nPE"/>
+                            <constraint firstItem="F79-SX-Txp" firstAttribute="top" secondItem="QpJ-Sx-9dG" secondAttribute="top" constant="20" id="bXp-US-6IM"/>
+                            <constraint firstItem="F79-SX-Txp" firstAttribute="leading" secondItem="QpJ-Sx-9dG" secondAttribute="leading" constant="20" id="cze-sA-qCJ"/>
                             <constraint firstAttribute="bottom" secondItem="LK6-u0-eLU" secondAttribute="bottom" id="dXj-zI-fQb"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerX" secondItem="lZI-X0-bkP" secondAttribute="centerX" id="ff0-Nw-f2Y"/>
                             <constraint firstItem="bij-Xb-EKH" firstAttribute="top" secondItem="ZK1-Be-lcD" secondAttribute="bottom" constant="-50" id="pgr-29-Lef"/>
@@ -434,6 +458,8 @@
                         <outlet property="avatarView" destination="5E0-lB-SkS" id="zDj-oM-twh"/>
                         <outlet property="avatarViewBlurEffect" destination="uC8-vY-dHO" id="lJD-lK-7CI"/>
                         <outlet property="avatarViewImageTopConstraint" destination="82d-fj-m0F" id="z3A-J5-tFD"/>
+                        <outlet property="backButtonAudioCall" destination="F79-SX-Txp" id="21h-UZ-iLa"/>
+                        <outlet property="backButtonAudioCallTopConstraint" destination="bXp-US-6IM" id="RHv-wq-uZb"/>
                         <outlet property="beforeIncomingVideo" destination="K0W-KI-Ul4" id="qrt-Kd-7S8"/>
                         <outlet property="blinkAudioRecordView" destination="mAh-HX-dsf" id="PDT-NT-1zQ"/>
                         <outlet property="blinkVideoRecordView" destination="rH0-Y4-Mjq" id="bht-JK-10P"/>
@@ -480,12 +506,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_back" width="24" height="24"/>
+        <image name="back_button" width="29" height="29"/>
         <image name="ic_contact_picture" width="170.66667175292969" height="170.66667175292969"/>
         <image name="left_arrow" width="48" height="48"/>
         <namedColor name="systemRedColor">
             <color red="1" green="0.27099999785423279" blue="0.22699999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

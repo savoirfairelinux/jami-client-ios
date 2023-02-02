@@ -68,6 +68,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var buttonsContainerBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var infoContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var backButtonAudioCallTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var avatarViewImageTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageViewHeightConstraint: NSLayoutConstraint!
@@ -76,6 +77,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var buttonsStackView: UIStackView!
     @IBOutlet weak var conferenceLayout: ConferenceLayout!
 
+    @IBOutlet weak var backButtonAudioCall: UIButton!
     @IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var conferenceCallsTop: NSLayoutConstraint!
 
@@ -95,6 +97,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        sendMessageButton.isHidden = self.viewModel.isBoothMode()
+        sendMessageButton.isEnabled = !self.viewModel.isBoothMode()
+        buttonsStackView.isHidden = self.viewModel.isBoothMode()
+        backButtonAudioCall.tintColor = UIColor.jamiLabelColor
         self.beforeIncomingVideo.backgroundColor = UIColor.jamiBackgroundColor
         let callCurrent = self.viewModel.call?.state == .current
         self.setAvatarView(!callCurrent || callViewMode == .audio)
@@ -134,9 +140,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self.callPulse.layer.cornerRadius = (self.profileImageViewWidthConstraint.constant - 20) * 0.5
             })
             .disposed(by: self.disposeBag)
-        sendMessageButton.isHidden = self.viewModel.isBoothMode()
-        sendMessageButton.isEnabled = !self.viewModel.isBoothMode()
-        buttonsStackView.isHidden = self.viewModel.isBoothMode()
     }
 
     func addTapGesture() {
@@ -249,6 +252,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             })
             .disposed(by: self.disposeBag)
         self.sendMessageButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.showConversations()
+                self?.dismiss(animated: false, completion: nil)
+            })
+            .disposed(by: self.disposeBag)
+
+        self.backButtonAudioCall.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showConversations()
                 self?.dismiss(animated: false, completion: nil)
@@ -439,7 +449,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 }
                 self.needToCleanIncomingFrame = true
                 self.setAvatarView(false)
-                self.callInfoTimerLabel.isHidden = false
                 self.spinner.stopAnimating()
                 if self.beforeIncomingVideo.alpha != 0 {
                     UIView.animate(withDuration: 0.4, animations: {
@@ -603,6 +612,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         UIDevice.current.isProximityMonitoringEnabled = false
         self.setWhiteAvatarView()
         self.buttonsContainer.callViewMode = .audio
+        self.callInfoTimerLabel.isHidden = true
+        self.backButtonAudioCall.isHidden = false
+        self.sendMessageButton.isHidden = true
         self.buttonsContainer.updateView()
         self.setAvatarView(true)
     }
@@ -610,6 +622,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     func setUpVideoView() {
         UIDevice.current.isProximityMonitoringEnabled = true
         self.buttonsContainer.callViewMode = .video
+        self.callInfoTimerLabel.isHidden = false
+        self.backButtonAudioCall.isHidden = true
+        self.callNameLabel.isHidden = false
+        self.sendMessageButton.isHidden = false
         self.buttonsContainer.updateView()
         self.setAvatarView(false)
         self.isCapturedVideoHidden = false
@@ -620,14 +636,16 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     func setAvatarView(_ show: Bool) {
         if !show {
             self.avatarView.isHidden = true
+            self.backButtonAudioCall.isHidden = true
         } else {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 self.avatarViewImageTopConstraint.constant = 200
                 self.avatarView.isHidden = false
+                self.backButtonAudioCall.isHidden = false
                 return
             }
             let isLandscape = UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft
-            let isPortrait = UIDevice.current.orientation == .portrait
+            let isPortrait = UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .faceUp
             if isLandscape {
                 self.profileImageViewWidthConstraint.constant = 90
                 self.profileImageViewHeightConstraint.constant = 90
@@ -639,8 +657,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 }
                 if UIDevice.current.hasNotch {
                     self.buttonsContainerBottomConstraint.constant = 0
+                    self.backButtonAudioCallTopConstraint.constant = 20
                 } else {
                     self.buttonsContainerBottomConstraint.constant = 10
+                    self.backButtonAudioCallTopConstraint.constant = 10
                 }
                 if self.callViewMode == .audio {
                     let device = UIDevice.modelName
@@ -653,8 +673,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             } else if isPortrait {
                 if UIDevice.current.hasNotch {
                     self.avatarViewImageTopConstraint.constant = 120
+                    self.backButtonAudioCallTopConstraint.constant = 40
                 } else {
                     self.avatarViewImageTopConstraint.constant = 85
+                    self.backButtonAudioCallTopConstraint.constant = 10
                 }
                 if self.callViewMode == .audio || self.viewModel.call?.state != .current {
                     self.profileImageViewWidthConstraint.constant = 160
@@ -664,6 +686,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self.buttonsContainerBottomConstraint.constant = 10
             }
             self.avatarView.isHidden = false
+            self.backButtonAudioCall.isHidden = false
+            self.sendMessageButton.isHidden = true
+            self.callNameLabel.isHidden = true
         }
     }
 
