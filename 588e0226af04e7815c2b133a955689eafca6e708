@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ba80d1a_bbc19a18",
+        "filename": "Ring/Ring/Extensions/Gif+Helpers.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-03T22:34:48Z",
+      "side": 1,
+      "message": "we need this file as “gifImageWithUrl” is being used",
+      "parentUuid": "5792a92d_1cedc304",
+      "revId": "588e0226af04e7815c2b133a955689eafca6e708",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfbb602f_7c70159f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-30T20:46:27Z",
       "side": 1,
       "message": "does it needs to be optional?",
+      "revId": "588e0226af04e7815c2b133a955689eafca6e708",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e602b976_bed22b24",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-03T22:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfbb602f_7c70159f",
       "revId": "588e0226af04e7815c2b133a955689eafca6e708",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },

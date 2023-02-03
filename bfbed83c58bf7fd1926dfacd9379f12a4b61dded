@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df8fd23e_f5b9e499",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-03T22:34:48Z",
+      "side": 1,
+      "message": "GIF -\u003e case save(image: UIImage) saved as an image (without animation)\nGIF -\u003e case saveGIF(url: URL) saved as a GIF (with animation)",
+      "parentUuid": "e3165679_c489fe2b",
+      "revId": "bfbed83c58bf7fd1926dfacd9379f12a4b61dded",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6226285a_09885c3d",
@@ -35,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "125d9bd1_1fc8fe18",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-03T22:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6226285a_09885c3d",
+      "revId": "bfbed83c58bf7fd1926dfacd9379f12a4b61dded",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca80a58f_8f64855f",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-02-03T02:00:27Z",
       "side": 1,
       "message": "if gif could be saved same way as image we do not need to return url",
+      "revId": "bfbed83c58bf7fd1926dfacd9379f12a4b61dded",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "242d02c5_73c9345e",
+        "filename": "Ring/Ring/Services/DataTransferService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-03T22:34:48Z",
+      "side": 1,
+      "message": "As discussed the implementation has changed",
+      "parentUuid": "ca80a58f_8f64855f",
       "revId": "bfbed83c58bf7fd1926dfacd9379f12a4b61dded",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
