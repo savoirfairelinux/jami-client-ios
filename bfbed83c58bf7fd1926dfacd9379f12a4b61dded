@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3165679_c489fe2b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-03T02:00:27Z",
+      "side": 1,
+      "message": "do we need different approach to save gif file? Would save works also for gif?",
+      "revId": "bfbed83c58bf7fd1926dfacd9379f12a4b61dded",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6226285a_09885c3d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-03T02:00:27Z",
+      "side": 1,
+      "message": "It is not just gif view. Maybe UIImageViewWrapper for file name?",
+      "revId": "bfbed83c58bf7fd1926dfacd9379f12a4b61dded",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca80a58f_8f64855f",
+        "filename": "Ring/Ring/Services/DataTransferService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-03T02:00:27Z",
+      "side": 1,
+      "message": "if gif could be saved same way as image we do not need to return url",
+      "revId": "bfbed83c58bf7fd1926dfacd9379f12a4b61dded",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
