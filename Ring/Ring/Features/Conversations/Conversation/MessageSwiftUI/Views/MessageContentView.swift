@@ -117,6 +117,12 @@ struct MessageContentView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(minHeight: 50, maxHeight: 300)
+                        /*
+                         Views with long press tap gesture prevent table from receiving
+                         tap gesture and it causing scroll issue.
+                         Adding empty onTapGesture fixes this.
+                         */
+                        .onTapGesture {}
                         .modifier(MessageCornerRadius(model: model))
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 } else {
@@ -138,6 +144,8 @@ struct MessageContentView: View {
                     Text(model.content)
                         .applyTextStyle(model: model)
                         .lineLimit(nil)
+                        // add onTapGesture to fix scroll
+                        .onTapGesture {}
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
             }
