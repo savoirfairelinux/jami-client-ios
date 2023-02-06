@@ -426,35 +426,6 @@ class CallsService: CallsAdapterDelegate {
         })
     }
 
-    func hostMuteAudio(conferenceId: String, mute: Bool, localCallId: String) {
-        guard let conference = call(callID: conferenceId) else { return }
-        let success = self.callsAdapter
-            .muteMedia(conferenceId,
-                       accountId: conference.accountId,
-                       mediaType: String(describing: MediaType.audio),
-                       muted: mute)
-        guard let call = self.calls.value[localCallId], success else {
-            return
-        }
-        call.audioMuted = mute
-        self.currentCallsEvents.onNext(call)
-    }
-
-    func hostMuteVideo(conferenceId: String, mute: Bool, localCallId: String) {
-        guard let conference = self.calls.value[conferenceId] else {
-            return
-        }
-        let success = self.callsAdapter
-            .muteMedia(conferenceId, accountId: conference.accountId,
-                       mediaType: String(describing: MediaType.video),
-                       muted: mute)
-        guard let call = self.calls.value[localCallId], success else {
-            return
-        }
-        call.videoMuted = mute
-        self.currentCallsEvents.onNext(call)
-    }
-
     func requestMediaChange(call callId: String, mediaLabel: String) {
         guard let call = self.calls.value[callId] else {
             return
@@ -485,15 +456,15 @@ class CallsService: CallsAdapterDelegate {
         }
     }
 
-    func muteCurrentCallVideoVideo(mute: Bool) {
-        for call in self.calls.value.values where call.state == .current {
-            self.callsAdapter
-                .muteMedia(call.callId, accountId: call.accountId,
-                           mediaType: String(describing: MediaType.video),
-                           muted: mute)
-            return
-        }
-    }
+    //    func muteCurrentCallVideoVideo(mute: Bool) {
+    //        for call in self.calls.value.values where call.state == .current {
+    //            self.callsAdapter
+    //                .muteMedia(call.callId, accountId: call.accountId,
+    //                           mediaType: String(describing: MediaType.video),
+    //                           muted: mute)
+    //            return
+    //        }
+    //    }
 
     func playDTMF(code: String) {
         self.callsAdapter.playDTMF(code)

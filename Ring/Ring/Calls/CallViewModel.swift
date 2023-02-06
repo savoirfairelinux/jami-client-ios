@@ -630,24 +630,24 @@ extension CallViewModel {
         guard let call = self.call else {
             return
         }
-        let mute = !call.audioMuted
+        // let mute = !call.audioMuted
+        var finalCallId = call.callId
         if self.isHostCall {
-            self.callService.hostMuteAudio(conferenceId: self.rendererId, mute: mute, localCallId: call.callId)
-        } else {
-            self.callService.requestMediaChange(call: call.callId, mediaLabel: "audio_0")
+            finalCallId = self.rendererId
         }
+        self.callService.requestMediaChange(call: finalCallId, mediaLabel: "audio_0")
     }
 
     func toggleMuteVideo() {
         guard let call = self.call else {
             return
         }
-        let mute = !call.videoMuted
+        // let mute = !call.videoMuted
+        var finalCallId = call.callId
         if self.isHostCall {
-            self.callService.hostMuteVideo(conferenceId: self.rendererId, mute: mute, localCallId: call.callId)
-        } else {
-            self.callService.requestMediaChange(call: call.callId, mediaLabel: "video_0")
+            finalCallId = self.rendererId
         }
+        self.callService.requestMediaChange(call: finalCallId, mediaLabel: "video_0")
     }
 
     func switchCamera() {
