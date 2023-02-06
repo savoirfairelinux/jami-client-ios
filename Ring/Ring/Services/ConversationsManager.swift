@@ -113,10 +113,8 @@ class ConversationsManager {
                     if !self.callsProvider.hasPendingTransactions() {
                         self.accountsService.setAccountsActive(active: false)
                     }
-                    self.callService.muteCurrentCallVideoVideo( mute: true)
                 case .appEnterForeground:
                     self.accountsService.setAccountsActive(active: true)
-                    self.callService.muteCurrentCallVideoVideo( mute: false)
                 case .callProviderPreviewPendingCall:
                     self.accountsService.setAccountsActive(active: true)
                 case .callEnded, .callProviderCancelCall:
