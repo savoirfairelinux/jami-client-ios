@@ -77,7 +77,7 @@
 "smartlist.searchBarPlaceholder" = "Inserire il nome…";
 "smartlist.searchBar" = "Cerca contatto nuovo o esistente...";
 "smartlist.noNetworkConnectivity" = "Nessuna connessione di rete";
-"smartlist.cellularAccess" = "Assicurati che l'accesso cellulare sia garantito nelle tue impostazioni";
+"smartlist.cellularAccess" = "Assicurati che l'accesso alla rete sia consentito";
 "smartlist.accountsTitle" = "Account";
 "smartlist.addAccountButton" = "+ Aggiungi account";
 "smartlist.noNumber" = "Il contatto selezionato non ha nessun numero";

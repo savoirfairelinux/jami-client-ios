@@ -77,7 +77,7 @@
 "smartlist.searchBarPlaceholder" = "Introdu numele...";
 "smartlist.searchBar" = "Caută un contact nou sau existent...";
 "smartlist.noNetworkConnectivity" = "Nu există conectare la rețea";
-"smartlist.cellularAccess" = "Asigură-te că accesul la rețea este permis în reglările tale";
+"smartlist.cellularAccess" = "Asigură-te că accesul la rețea este permis";
 "smartlist.accountsTitle" = "Conturi";
 "smartlist.addAccountButton" = "+ Adaugă un cont";
 "smartlist.noNumber" = "Contactul ales nu are niciun număr";
