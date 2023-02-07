@@ -84,7 +84,7 @@ typedef NS_ENUM(UInt32, NSDataTransferFlags)  {
                  withFilePath:(NSString*)filePath
                        parent:(NSString*)parent;
 
-- (NSDataTransferError) swarmTransferProgressWithId:(NSString*)fileId
+- (NSDataTransferError) dataTransferInfoWithId:(NSString*)fileId
                                           accountId:(NSString*)accountId
                                            withInfo:(NSDataTransferInfo*)info;
 

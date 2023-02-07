@@ -510,18 +510,15 @@ extension  ConversationsManager: MessagesAdapterDelegate {
             let newMessage = MessageModel(withInfo: dictionary, accountJamiId: account.jamiId)
             if newMessage.type == .fileTransfer {
                 /// check if we need to download file for transfer
-                if let transferInfo = self.dataTransferService.dataTransferInfo(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true) {
-                    newMessage.transferStatus = transferInfo.bytesProgress == 0 ? .awaiting : transferInfo.bytesProgress == transferInfo.totalSize ? .success : .ongoing
-                    let image = self.dataTransferService.getImage(for: newMessage.daemonId, maxSize: 200, accountID: accountId, conversationID: conversationId, isSwarm: true)
-                    if newMessage.transferStatus == .awaiting, transferInfo.totalSize <= maxSizeForAutoaccept, image == nil {
-                        var filename = ""
-                        self.dataTransferService.downloadFile(withId: newMessage.daemonId,
-                                                              interactionID: newMessage.id,
-                                                              fileName: &filename, accountID: accountId,
-                                                              conversationID: conversationId)
-                    }
-                } else {
-                    newMessage.transferStatus = .success
+                let progress = self.dataTransferService.getTransferProgress(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true)
+                newMessage.transferStatus = progress == 0 ? .awaiting : progress == newMessage.totalSize ? .success : .ongoing
+                let image = self.dataTransferService.getImage(for: newMessage.daemonId, maxSize: 200, accountID: accountId, conversationID: conversationId, isSwarm: true)
+                if newMessage.transferStatus == .awaiting, newMessage.totalSize <= maxSizeForAutoaccept, image == nil {
+                    var filename = ""
+                    self.dataTransferService.downloadFile(withId: newMessage.daemonId,
+                                                          interactionID: newMessage.id,
+                                                          fileName: &filename, accountID: accountId,
+                                                          conversationID: conversationId)
                 }
             }
             return newMessage

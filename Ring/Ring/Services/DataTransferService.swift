@@ -118,7 +118,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         let info = NSDataTransferInfo()
         var err: NSDataTransferError
         info.conversationId = conversationId
-        err = self.dataTransferAdapter.swarmTransferProgress(withId: fileId, accountId: accountId, with: info)
+        err = self.dataTransferAdapter.dataTransferInfo(withId: fileId, accountId: accountId, with: info)
         if err != .success {
             self.log.error("DataTransferService: error getting transfer info for id: \(fileId)")
             return nil
@@ -126,11 +126,11 @@ public final class DataTransferService: DataTransferAdapterDelegate {
         return info
     }
 
-    func getTransferProgress(withId transferId: String, accountId: String, conversationId: String, isSwarm: Bool) -> Float? {
-        guard let info = self.dataTransferInfo(withId: transferId, accountId: accountId, conversationId: conversationId, isSwarm: isSwarm) else {
-            return nil }
-        let progressValue = Float(info.bytesProgress) / Float(info.totalSize)
-        return progressValue
+    func getTransferProgress(withId transferId: String, accountId: String, conversationId: String, isSwarm: Bool) -> Int {
+        let info = NSDataTransferInfo()
+        info.conversationId = conversationId
+        _ = self.dataTransferAdapter.dataTransferInfo(withId: transferId, accountId: accountId, with: info)
+        return Int(info.bytesProgress)
     }
 
     // MARK: swarm transfer actions
