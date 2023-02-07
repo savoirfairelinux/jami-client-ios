@@ -90,7 +90,7 @@ static id <DataTransferAdapterDelegate> _delegate;
     sendFile(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([filePath UTF8String]), std::string([displayName UTF8String]), std::string([parent UTF8String]));
 }
 
-- (NSDataTransferError)swarmTransferProgressWithId:(NSString*)fileId
+- (NSDataTransferError)dataTransferInfoWithId:(NSString*)fileId
                                          accountId:(NSString*)accountId
                                           withInfo:(NSDataTransferInfo*)info {
     std::string filePath;

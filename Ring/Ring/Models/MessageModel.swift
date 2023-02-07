@@ -34,6 +34,7 @@ enum MessageAttributes: String {
     case duration = "duration"
     case reply = "reply-to"
     case react = "react-to"
+    case totalSize = "totalSize"
 }
 
 enum MessageType: String {
@@ -73,6 +74,7 @@ public class MessageModel {
     var type: MessageType = .text
     var reply: String = ""
     var react: String = ""
+    var totalSize: Int = 0
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -108,6 +110,10 @@ public class MessageModel {
         incoming = self.uri.isEmpty ? !self.authorId.isEmpty : self.uri != accountJamiId
         if let parent = info[MessageAttributes.parent.rawValue] {
             self.parentId = parent
+        }
+        if let totalSizeString = info[MessageAttributes.totalSize.rawValue],
+           let totalSize = Int(totalSizeString) {
+            self.totalSize = totalSize
         }
         if let timestamp = info[MessageAttributes.timestamp.rawValue],
            let timestampDouble = Double(timestamp) {
