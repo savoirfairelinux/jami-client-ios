@@ -54,7 +54,8 @@ class TransferHelper {
     }
 
     func getTransferProgress(conversation: ConversationModel, message: MessageModel) -> Float? {
-        return self.dataTransferService.getTransferProgress(withId: message.daemonId, accountId: conversation.accountId, conversationId: conversation.id, isSwarm: conversation.isSwarm())
+        let progress = self.dataTransferService.getTransferProgress(withId: message.daemonId, accountId: conversation.accountId, conversationId: conversation.id, isSwarm: conversation.isSwarm())
+        return message.totalSize > 0 ? Float(progress) / Float(message.totalSize) : Float(progress)
     }
 
     func getTransferSize(conversation: ConversationModel, message: MessageModel) -> Int64? {
