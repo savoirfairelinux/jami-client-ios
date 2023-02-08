@@ -751,6 +751,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "301d955a_99a535e2",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T18:07:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2f3de4a_cf062065",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5253651_490f2d54",
