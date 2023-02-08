@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ebce4ce_80bce38a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "will it work also for images? If so we should keep one method to save both image and .gif",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c88227c4_209fd618",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "[weak self]",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02de81b5_a0b5f3e3",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "we do not need provide image anymore. Just url is ok",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0266d038_1b0e7035",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "we already have url",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c0d81e9_d4848f6e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "do not use unWrapImageFromURL",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45df9cc7_2344ce4d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "We should not use unWrapImageFromURL for this case. This function return an empty image if image loading failed. But we do not want to send empty image.",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebc5dd02_ea9e5c76",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "do we need this verification? Could we use same method to save both .gif and image?",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053dea9c_0d419cf2",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "we do not need anymore .getImage case",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "372e8dc4_01118688",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/TransferHelper.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "We do not need this function anymore, could use getFileURL",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8438d393_ed93eb86",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "we should have function getImage() in view model. And It will return appropriate image for .gif or not animated image. Because with current implementation we load image twice.",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea9bb4aa_4a9bf0bf",
+        "filename": "Ring/Ring/Services/DataTransferService.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "we should remove this comment, it is not valid anymore",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16b43326_52e56f05",
+        "filename": "Ring/Ring/Services/DataTransferService.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T18:43:37Z",
+      "side": 1,
+      "message": "I think we do not need this function anymore. It returning url and we already have getFileUrlForSwarm",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
