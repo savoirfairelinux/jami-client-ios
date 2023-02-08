@@ -184,34 +184,6 @@ class SwarmInfo {
         self.insertAndSortContacts(contacts: contactsInfo)
     }
 
-    func addContactToParticipantsList(jamiId: String, role: ParticipantRole) {
-        // remove from contacts list
-        var contactsValue = contacts.value
-        if let index = contactsValue.firstIndex(where: { contactInfo in
-            contactInfo.jamiId == jamiId
-        }) {
-            contactsValue.remove(at: index)
-            contacts.accept(contactsValue)
-        }
-        // add to participants list
-        guard let participantInfo = createParticipant(jamiId: jamiId, role: role) else { return }
-        insertAndSortParticipants(participants: [participantInfo])
-    }
-
-    func addContactToParticipantsList(participantInfo: ParticipantInfo, role: ParticipantRole) {
-        // remove from contacts list
-        var contactsValue = contacts.value
-        if let index = contactsValue.firstIndex(where: { contactInfo in
-            contactInfo.jamiId == participantInfo.jamiId
-        }) {
-            contactsValue.remove(at: index)
-            contacts.accept(contactsValue.sorted(by: { $0.name.value > $1.name.value }))
-        }
-        // add to participants list
-        participantInfo.role = role
-        insertAndSortParticipants(participants: [participantInfo])
-    }
-
     private func subscribeParticipantsInfo() {
         tempBag = DisposeBag()
         let namesObservable = participants.value
@@ -366,7 +338,7 @@ class SwarmInfo {
     }
 
     private func insertAndSortParticipants(participants: [ParticipantInfo]) {
-        var currentValue = self.participants.value
+        var currentValue = [ParticipantInfo]()
         currentValue.append(contentsOf: participants)
         currentValue = currentValue.filter({ [.invited, .member, .admin].contains($0.role) })
         currentValue.sort { participant1, participant2 in
