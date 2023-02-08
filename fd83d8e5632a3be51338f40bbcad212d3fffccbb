@@ -157,6 +157,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2855bc10_56a44f6d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T17:37:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c5afa5e_d3bd25ad",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10535b40_98218370",
@@ -174,6 +192,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c33de2_58464c89",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T17:37:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10535b40_98218370",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1496d058_913a21ab",
@@ -187,6 +223,24 @@
       "writtenOn": "2023-01-25T19:53:41Z",
       "side": 1,
       "message": "same for next properties. Why they are @Published?",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9c3bafb_89634dc5",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T17:37:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1496d058_913a21ab",
       "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -327,6 +381,24 @@
       "side": 1,
       "message": "So should I uncomment it?",
       "parentUuid": "37bab882_bf0cd825",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ba62f41_db7ab56b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T17:37:28Z",
+      "side": 1,
+      "message": "Call Subscribes in the current time and dispose when not needed",
+      "parentUuid": "9c9fc04f_7a56262f",
       "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -483,6 +555,24 @@
       "writtenOn": "2023-01-25T19:53:41Z",
       "side": 1,
       "message": "this way we will receive updates for messages that are already destroyed",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9176bc3_5a943e9b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T17:37:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79e991c5_4ef46b4d",
       "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -709,6 +799,24 @@
       "writtenOn": "2023-01-25T19:53:41Z",
       "side": 1,
       "message": "maybe darker color for background, because text is white",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "850daacb_a0bce21d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T17:37:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfd67567_73d18e2f",
       "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
