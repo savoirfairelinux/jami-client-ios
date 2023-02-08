@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15a020e2_1693aa96",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-08T22:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ebce4ce_80bce38a",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c88227c4_209fd618",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-08T18:43:37Z",
       "side": 1,
       "message": "[weak self]",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e9dba1f_35f6e798",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-08T22:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c88227c4_209fd618",
       "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8198057_352d2eb0",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-08T22:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02de81b5_a0b5f3e3",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0266d038_1b0e7035",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-02-08T18:43:37Z",
       "side": 1,
       "message": "we already have url",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3726802_0fc289f7",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-08T22:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0266d038_1b0e7035",
       "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -86,6 +158,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53975479_fb9e6b2e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-08T22:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c0d81e9_d4848f6e",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45df9cc7_2344ce4d",
@@ -103,6 +193,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26aef2ac_f85f817a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-08T22:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45df9cc7_2344ce4d",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebc5dd02_ea9e5c76",
@@ -116,6 +224,24 @@
       "writtenOn": "2023-02-08T18:43:37Z",
       "side": 1,
       "message": "do we need this verification? Could we use same method to save both .gif and image?",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a81e0ffd_5147eadb",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContentVM.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-08T22:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebc5dd02_ea9e5c76",
       "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -203,6 +329,24 @@
       "writtenOn": "2023-02-08T18:43:37Z",
       "side": 1,
       "message": "we should have function getImage() in view model. And It will return appropriate image for .gif or not animated image. Because with current implementation we load image twice.",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "970008e9_f064a9fd",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessageContentView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 959
+      },
+      "writtenOn": "2023-02-08T22:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8438d393_ed93eb86",
       "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
