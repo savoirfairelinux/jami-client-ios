@@ -366,7 +366,7 @@ class SwarmInfo {
     }
 
     private func insertAndSortParticipants(participants: [ParticipantInfo]) {
-        var currentValue = self.participants.value
+        var currentValue = [ParticipantInfo]()
         currentValue.append(contentsOf: participants)
         currentValue = currentValue.filter({ [.invited, .member, .admin].contains($0.role) })
         currentValue.sort { participant1, participant2 in
