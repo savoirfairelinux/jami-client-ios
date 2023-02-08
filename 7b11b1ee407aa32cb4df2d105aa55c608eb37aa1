@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06d06e2d_e5839dcc",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharing.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T10:42:26Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "deb7d7e1_4b982387",
+      "revId": "7b11b1ee407aa32cb4df2d105aa55c608eb37aa1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1e41eb1_45fac390",
@@ -35,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c93a81f_cb7e07a7",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharingReceived.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T10:42:26Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "d1e41eb1_45fac390",
+      "revId": "7b11b1ee407aa32cb4df2d105aa55c608eb37aa1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1778c8d7_aeb77c54",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-01-25T19:53:41Z",
       "side": 0,
       "message": "we could remove this file",
+      "revId": "7b11b1ee407aa32cb4df2d105aa55c608eb37aa1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56611816_a9f9e7b4",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/Cells/MessageCellLocationSharingSent.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T10:42:26Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "1778c8d7_aeb77c54",
       "revId": "7b11b1ee407aa32cb4df2d105aa55c608eb37aa1",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
