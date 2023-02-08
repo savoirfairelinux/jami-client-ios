@@ -137,6 +137,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0342c0c3_05c16355",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T19:56:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "053dea9c_0d419cf2",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "372e8dc4_01118688",
@@ -150,6 +168,24 @@
       "writtenOn": "2023-02-08T18:43:37Z",
       "side": 1,
       "message": "We do not need this function anymore, could use getFileURL",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4f18905_6cf78b08",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/TransferHelper.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T19:56:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "372e8dc4_01118688",
       "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -188,6 +224,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e0c39fd_edfce11c",
+        "filename": "Ring/Ring/Services/DataTransferService.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T19:56:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea9bb4aa_4a9bf0bf",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16b43326_52e56f05",
@@ -201,6 +255,24 @@
       "writtenOn": "2023-02-08T18:43:37Z",
       "side": 1,
       "message": "I think we do not need this function anymore. It returning url and we already have getFileUrlForSwarm",
+      "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17ab1d9d_af317be0",
+        "filename": "Ring/Ring/Services/DataTransferService.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T19:56:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16b43326_52e56f05",
       "revId": "c86f97ca7602a49a1be1bb868008ca703a56c459",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
