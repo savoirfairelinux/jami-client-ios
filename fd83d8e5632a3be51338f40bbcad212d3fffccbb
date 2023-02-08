@@ -873,6 +873,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d708b1bb_70ef7f52",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T17:54:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42c595d_6d9d4ef3",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "648cc76b_c5b81e55",
@@ -886,6 +904,24 @@
       "writtenOn": "2023-01-25T19:53:41Z",
       "side": 1,
       "message": "- this view could overlap navigation bar. We need either present full screen map or ensure that it does not cover navigation bar.\n- also we need to hide message input view when full screen map is present.\n- full screen map has wrong size after rotation",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf87db46_569a8727",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-08T17:54:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "648cc76b_c5b81e55",
       "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
