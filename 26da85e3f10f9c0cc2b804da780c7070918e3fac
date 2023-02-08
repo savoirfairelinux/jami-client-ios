@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "816169cb_9acbdef7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-08T20:12:04Z",
+      "side": 1,
+      "message": "- back button not showed for outgoing call\n- extra contact name is added on top for audio call\n- for video call contact name overlapping outgoing image",
+      "revId": "26da85e3f10f9c0cc2b804da780c7070918e3fac",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
