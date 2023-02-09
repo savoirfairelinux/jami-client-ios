@@ -39,6 +39,30 @@
       },
       "revId": "507e88aa78e0aad8130d875872d7922392b1be09",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3de16e6_ca2eacf0",
+        "filename": "Ring/Ring/Calls/CallViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 859
+      },
+      "writtenOn": "2023-02-09T10:27:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "69085e00_9c0a59ca",
+      "range": {
+        "startLine": 644,
+        "startChar": 12,
+        "endLine": 644,
+        "endChar": 23
+      },
+      "revId": "507e88aa78e0aad8130d875872d7922392b1be09",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ],
   "submitRequirementResults": []
