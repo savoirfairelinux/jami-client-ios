@@ -110,9 +110,6 @@ public struct SwarmInfoView: View {
                     .frame(height: topViewHeight)
                     .padding([.vertical, .horizontal], 30)
                     .background(Color(hex: viewmodel.finalColor))
-                    .onTapGesture {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    }
                     .ignoresSafeArea(edges: [.top, .leading, .trailing])
                 }
                 Picker("", selection: $selectedView) {
@@ -134,14 +131,8 @@ public struct SwarmInfoView: View {
                 switch selectedView {
                 case .about:
                     SettingsView(viewmodel: viewmodel, id: viewmodel.swarmInfo.id, swarmType: viewmodel.swarmInfo.type.value.stringValue)
-                        .onTapGesture {
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        }
                 case .memberList:
                     MemberList(viewmodel: viewmodel)
-                        .onTapGesture {
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        }
                 }
             }
             .onLoad {
