@@ -139,9 +139,6 @@ public struct SwarmInfoView: View {
                         }
                 case .memberList:
                     MemberList(viewmodel: viewmodel)
-                        .onTapGesture {
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        }
                 }
             }
             .onLoad {
