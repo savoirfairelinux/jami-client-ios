@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7350300_b3ee969d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-09T17:16:00Z",
+      "side": 1,
+      "message": "- A new empty message is added to conversation when sharing location\n- Incoming location has “stop sharing” button. When click this button nothing happens\n- Receive incoming location. Go go to smart list and return back.  Map is present but without location.\n- Full size map overlaps half of navigation bar.\n",
+      "revId": "0e035c11f40da92b02b63c6246adfe8456922ca4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
