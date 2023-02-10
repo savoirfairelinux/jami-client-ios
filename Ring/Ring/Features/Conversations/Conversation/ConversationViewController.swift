@@ -225,6 +225,7 @@ class ConversationViewController: UIViewController,
         let recordVideoAction = UIAlertAction(title: L10n.Alerts.recordVideoMessage, style: UIAlertAction.Style.default) {[weak self] _ in
             if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
                 if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
+                    self?.messageAccessoryView.messageTextView.resignFirstResponder()
                     self?.viewModel.recordVideoFile()
                 } else {
                     AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
