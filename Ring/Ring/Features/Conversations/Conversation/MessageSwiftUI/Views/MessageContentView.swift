@@ -140,7 +140,7 @@ struct MessageContentView: View {
                         PlayerSwiftUI(model: model, player: player, onLongGesture: receivedLongPress())
                             .modifier(MessageCornerRadius(model: model))
                     }
-                } else if let image = model.getImage() {
+                } else if let image = model.finalImage {
                     if !model.isGifImage() {
                         Image(uiImage: image)
                             .resizable()
