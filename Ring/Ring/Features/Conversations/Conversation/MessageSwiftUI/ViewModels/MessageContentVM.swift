@@ -125,6 +125,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
     @Published var backgroundColor: Color
+    @Published var finalImage: UIImage?
     var url: URL?
     var fileSize: Int64 = 0
     var transferStatus: DataTransferStatus = .unknown
@@ -135,7 +136,6 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     var textColor: Color
     var secondaryColor: Color
     var hasBorder: Bool
-    var finalImage: UIImage?
     let cornerRadius: CGFloat = 15
     var textInset: CGFloat = 15
     var textVerticalInset: CGFloat = 10
@@ -303,12 +303,16 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         } else {
             self.stopProgressMonitor()
         }
-        if (self.transferStatus == .success || !self.message.incoming), self.url == nil, self.player == nil {
+        if self.transferStatus != .success {
+            return
+        }
+        if self.player == nil {
             self.transferState.onNext(TransferState.getPlayer(viewModel: self))
         }
-        if (self.transferStatus == .success || !self.message.incoming), self.url == nil {
+        if self.url == nil {
             self.transferState.onNext(TransferState.getURL(viewModel: self))
         }
+        _ = getImage()
     }
 
     private func updateTransferActions() {
@@ -432,7 +436,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     }
 
     func getImage() -> UIImage? {
-        if let image = self.finalImage { return image }
+        if let image = self.finalImage { return image}
         guard let url = url else { return nil }
         self.finalImage = isGifImage() ? UIImage.gifImageWithUrl(url) : UIImage.getImagefromURL(url: url)
         return self.finalImage
@@ -459,6 +463,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         if self.type == .fileTransfer {
             self.transferState.onNext(TransferState.getPlayer(viewModel: self))
             self.transferState.onNext(TransferState.getURL(viewModel: self))
+            _ = getImage()
         }
         updateMenuitems()
     }
