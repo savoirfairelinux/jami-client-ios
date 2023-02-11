@@ -303,12 +303,16 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         } else {
             self.stopProgressMonitor()
         }
-        if (self.transferStatus == .success || !self.message.incoming), self.url == nil, self.player == nil {
+        if !self.message.incoming || self.transferStatus != .success {
+            return
+        }
+        if self.player == nil {
             self.transferState.onNext(TransferState.getPlayer(viewModel: self))
         }
-        if (self.transferStatus == .success || !self.message.incoming), self.url == nil {
+        if self.url == nil {
             self.transferState.onNext(TransferState.getURL(viewModel: self))
         }
+        _ = getImage()
     }
 
     private func updateTransferActions() {
@@ -459,6 +463,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         if self.type == .fileTransfer {
             self.transferState.onNext(TransferState.getPlayer(viewModel: self))
             self.transferState.onNext(TransferState.getURL(viewModel: self))
+            _ = getImage()
         }
         updateMenuitems()
     }
