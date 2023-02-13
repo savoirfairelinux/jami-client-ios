@@ -381,7 +381,7 @@
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Log View
-"logView.title" = "Diagnostics";
+"logView.title" = "Diagnòstics";
 "logView.description" = "Obre les opcions de diagnòstic";
 "logView.startLogging" = "Inicia les traces";
 "logView.stopLogging" = "Stop Logging";

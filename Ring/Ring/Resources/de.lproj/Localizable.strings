@@ -61,7 +61,7 @@
 "swarm.member" = "Mitglied";
 "swarm.invited" = "Eingeladen";
 "swarm.admin" = "Administrator";
-"swarm.banned" = "gesperrt";
+"swarm.banned" = "Blockiert";
 "swarm.unknown" = "Unbekannt";
 "swarm.addMorePeople" = "Sie können diesem Schwarm \%d\ weitere Personen hinzufügen";
 "swarm.addMember" = "Mitglied hinzufügen";

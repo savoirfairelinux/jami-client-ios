@@ -56,8 +56,8 @@
 "swarm.oneToOne" = "Swarm privé";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Swarm privé";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
+"swarm.publicChat" = "Swarm public";
+"swarm.others" = "Autres";
 "swarm.member" = "Membre";
 "swarm.invited" = "Invités";
 "swarm.admin" = "Administrateur";
@@ -362,8 +362,8 @@
 "generatedMessage.invitationReceived" = "a été invité";
 "generatedMessage.invitationAccepted" = " a rejoint la conversation";
 "generatedMessage.youJoined" = "Vous avez rejoint la conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.contactBanned" = "a été renvoyé";
+"generatedMessage.contactReAdded" = "a été réajouté";
 "generatedMessage.outgoingCall" = "Appel sortant";
 "generatedMessage.incomingCall" = "Appel entrant";
 "generatedMessage.missedOutgoingCall" = "Appel sortant manqué";
@@ -378,15 +378,15 @@
 "generalSettings.fileTransfer" = "Transfert de fichier";
 "generalSettings.automaticAcceptIncomingFiles" = "Accepter automatiquement les fichiers entrants";
 "generalSettings.acceptTransferLimit" = "Taille maximum des fichiers automatiquement acceptés";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.acceptTransferLimitDescription" = "(en MB, 0 = illimité)";
 
 //Log View
 "logView.title" = "Diagnostiques";
 "logView.description" = "Ouvrir les paramètres  des journaux de diagnostiques";
 "logView.startLogging" = "Démarrer la journalisation";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Arrêter la journalisation";
+"logView.saveError" = "La sauvegarde du fichier a échoué";
+"logView.shareError" = "Le partage du fichier a échoué";
 
 //Migrate Account
 "migrateAccount.title" = "Migration du compte";

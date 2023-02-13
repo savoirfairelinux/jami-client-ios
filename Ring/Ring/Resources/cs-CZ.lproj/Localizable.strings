@@ -381,7 +381,7 @@
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Log View
-"logView.title" = "Diagnostics";
+"logView.title" = "Diagnostika";
 "logView.description" = "Otevření nastavení diagnostického protokolu";
 "logView.startLogging" = "Spuštění záznamu";
 "logView.stopLogging" = "Stop Logging";
