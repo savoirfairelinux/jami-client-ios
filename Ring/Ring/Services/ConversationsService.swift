@@ -68,12 +68,12 @@ class ConversationsService {
      Called when application starts and when  account changed
      */
     func getConversationsForAccount(accountId: String, accountURI: String) {
-        self.conversations.accept([ConversationModel]())
         /* if we don't have conversation that could mean the app
          just launched and we need symchronize messages status
          */
         let shouldUpdateMessagesStatus = self.conversations.value.first == nil
         var currentConversations = [ConversationModel]()
+        self.conversations.accept(currentConversations)
         var conversationToLoad = [String]() // list of swarm conversation we need to load first message
         // get swarms conversations
         if let swarmIds = conversationsAdapter.getSwarmConversations(forAccount: accountId) as? [String] {
@@ -82,6 +82,7 @@ class ConversationsService {
                 self.addSwarm(conversationId: swarmId, accountId: accountId, accountURI: accountURI, to: &currentConversations)
             }
         }
+        self.conversations.accept(currentConversations)
         // get conversations from db
         dbManager.getConversationsObservable(for: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -164,6 +165,7 @@ class ConversationsService {
                 let unreadInteractions = conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: accountURI)
                 conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
             }
+            self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 1)
             conversations.append(conversation)
         }
     }
