@@ -120,45 +120,31 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 cell.newMessagesLabel?.isHidden = true
                 cell.lastMessageDateLabel?.isHidden = true
                 cell.presenceIndicator?.isHidden = true
-                if contactItem.contacts.count > 1 {
-                    cell.avatarView.isHidden = true
-                    var name = ""
-                    contactItem.contacts.forEach { contact in
-                        var mutableContact = contact
-                        name += mutableContact.firstLine
-                        if contactItem.contacts.last! == contact {
-                            return
-                        }
-                        name += " ,"
+                cell.avatarView.isHidden = contactItem.contacts.count > 1
+                let contacts = contactItem.contacts
+                contacts.forEach { contact in
+                    contact.firstLine.asObservable()
+                        .startWith(contact.firstLine.value)
+                        .observe(on: MainScheduler.instance)
+                        .subscribe(onNext: { [weak self, weak cell] _ in
+                            self?.updateCell(cell: cell, contacts: contacts)
+                        }, onError: { (_) in
+                        })
+                        .disposed(by: cell.disposeBag)
+                }
+                if contacts.count == 1, let contact = contacts.first {
+                    guard let status = contact.presenceStatus else {
+                        return cell
                     }
-                    cell.nameLabel.text = name
-                    return cell
+                    status
+                        .asObservable()
+                        .observe(on: MainScheduler.instance)
+                        .startWith(status.value)
+                        .subscribe(onNext: { precence in
+                            cell.presenceIndicator?.isHidden = !precence
+                        })
+                        .disposed(by: cell.disposeBag)
                 }
-
-                var contact = contactItem.contacts.first!
-                cell.nameLabel.text = contact.firstLine
-                cell.lastMessagePreviewLabel?.isHidden = true
-
-                var imageData: Data?
-                if let contactProfile = contact.profile, let photo = contactProfile.photo,
-                   let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    imageData = data
-                }
-                cell.avatarView
-                    .addSubview(
-                        AvatarView(profileImageData: imageData,
-                                   username: contact.firstLine, size: 40))
-                guard let status = contact.presenceStatus else {
-                    return cell
-                }
-                status
-                    .asObservable()
-                    .observe(on: MainScheduler.instance)
-                    .startWith(status.value)
-                    .subscribe(onNext: { precence in
-                        cell.presenceIndicator?.isHidden = !precence
-                    })
-                    .disposed(by: cell.disposeBag)
                 return cell
             }
         let contactDataSource = RxTableViewSectionedReloadDataSource<ContactPickerSection>(configureCell: configureCell)
@@ -254,5 +240,35 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 self?.updateButtonsOnSelectionChange(cell: cell, indexPath: row)
             }
         }
+    }
+
+    func updateCell(cell: SmartListCell?, contacts: [Contact]) {
+        guard let cell = cell else { return }
+        if contacts.count > 1 {
+            var name = ""
+            contacts.forEach { contact in
+                name += contact.firstLine.value
+                if contacts.last! == contact {
+                    return
+                }
+                name += " ,"
+            }
+            cell.nameLabel.text = name
+            return
+        }
+
+        guard let contact = contacts.first else { return }
+        cell.nameLabel.text = contact.firstLine.value
+        cell.lastMessagePreviewLabel?.isHidden = true
+
+        var imageData: Data?
+        if let contactProfile = contact.profile, let photo = contactProfile.photo,
+           let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+            imageData = data
+        }
+        cell.avatarView
+            .addSubview(
+                AvatarView(profileImageData: imageData,
+                           username: contact.firstLine.value, size: 40))
     }
 }
