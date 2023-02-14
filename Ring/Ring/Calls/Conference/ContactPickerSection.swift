@@ -22,7 +22,7 @@ import RxDataSources
 import RxSwift
 import RxCocoa
 
-struct Contact {
+class Contact {
     var uri: String
     var accountID: String
     var registeredName: String
@@ -33,37 +33,53 @@ struct Contact {
             .getSubscriptionsForContact(contactId: self.hash)
     }()
 
-    lazy var firstLine: String! = {
-        if let contactProfile = profile,
-           let profileAlias = contactProfile.alias,
-           !profileAlias.isEmpty {
-            return profileAlias
-        }
-        return registeredName.isEmpty ? hash : registeredName
-    }()
-
-    lazy var secondLine: String! = {
-        if firstLine == hash {
-            return ""
-        }
-        if firstLine == registeredName {
-            return hash
-        }
-        return registeredName.isEmpty ? hash : registeredName
-    }()
+    var firstLine: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var secondLine: String = ""
 
     var profile: Profile?
     var presenceService: PresenceService
 
     init (contactUri: String, accountId: String,
-          registrName: String, presService: PresenceService,
-          contactProfile: Profile?) {
-        uri = contactUri
-        presenceService = presService
-        accountID = accountId
-        registeredName = registrName
-        profile = contactProfile
-        hash = ""
+          registeredName: String, presService: PresenceService,
+          contactProfile: Profile?, hash: String) {
+        self.uri = contactUri
+        self.presenceService = presService
+        self.accountID = accountId
+        self.registeredName = registeredName
+        self.profile = contactProfile
+        self.hash = hash
+        self.updateFirestLine()
+        self.updateSecondLine()
+    }
+
+    func registeredNameFound(name: String) {
+        self.registeredName = name
+        self.updateFirestLine()
+        self.updateSecondLine()
+    }
+
+    private func updateFirestLine() {
+        self.firstLine.accept({
+            if let contactProfile = profile,
+               let profileAlias = contactProfile.alias,
+               !profileAlias.isEmpty {
+                return profileAlias
+            }
+            return registeredName.isEmpty ? hash : registeredName
+        }())
+
+    }
+
+    private func updateSecondLine() {
+        self.secondLine = {
+            if firstLine.value == hash {
+                return ""
+            }
+            if firstLine.value == registeredName {
+                return hash
+            }
+            return registeredName.isEmpty ? hash : registeredName
+        }()
     }
 
     static func == (lhs: Contact, rhs: Contact) -> Bool {
