@@ -125,7 +125,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                     var name = ""
                     contactItem.contacts.forEach { contact in
                         var mutableContact = contact
-                        name += mutableContact.firstLine
+                        name += mutableContact.firstLine.value
                         if contactItem.contacts.last! == contact {
                             return
                         }
@@ -136,7 +136,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 }
 
                 var contact = contactItem.contacts.first!
-                cell.nameLabel.text = contact.firstLine
+                cell.nameLabel.text = contact.firstLine.value
                 cell.lastMessagePreviewLabel?.isHidden = true
 
                 var imageData: Data?
@@ -147,7 +147,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 cell.avatarView
                     .addSubview(
                         AvatarView(profileImageData: imageData,
-                                   username: contact.firstLine, size: 40))
+                                   username: contact.firstLine.value, size: 40))
                 guard let status = contact.presenceStatus else {
                     return cell
                 }

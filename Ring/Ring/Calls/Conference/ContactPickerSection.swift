@@ -25,7 +25,7 @@ import RxCocoa
 struct Contact {
     var uri: String
     var accountID: String
-    var registeredName: String
+    var registeredName = BehaviorRelay(value: "")
     var hash: String
 
     lazy var presenceStatus: BehaviorRelay<Bool>? = {
@@ -33,23 +33,23 @@ struct Contact {
             .getSubscriptionsForContact(contactId: self.hash)
     }()
 
-    lazy var firstLine: String! = {
+    lazy var firstLine: BehaviorRelay<String> = {
         if let contactProfile = profile,
            let profileAlias = contactProfile.alias,
            !profileAlias.isEmpty {
-            return profileAlias
+            return BehaviorRelay<String>(value: profileAlias)
         }
-        return registeredName.isEmpty ? hash : registeredName
+        return registeredName.value.isEmpty ? BehaviorRelay<String>(value: hash) : registeredName
     }()
 
     lazy var secondLine: String! = {
-        if firstLine == hash {
+        if firstLine.value == hash {
             return ""
         }
-        if firstLine == registeredName {
+        if firstLine.value == registeredName.value {
             return hash
         }
-        return registeredName.isEmpty ? hash : registeredName
+        return registeredName.value.isEmpty ? hash : registeredName.value
     }()
 
     var profile: Profile?
@@ -61,7 +61,7 @@ struct Contact {
         uri = contactUri
         presenceService = presService
         accountID = accountId
-        registeredName = registrName
+        registeredName.accept(registrName)
         profile = contactProfile
         hash = ""
     }
@@ -69,7 +69,7 @@ struct Contact {
     static func == (lhs: Contact, rhs: Contact) -> Bool {
         return (lhs.uri == rhs.uri &&
                     lhs.accountID == rhs.accountID &&
-                    lhs.registeredName == rhs.registeredName)
+                    lhs.registeredName.value == rhs.registeredName.value)
     }
 }
 
