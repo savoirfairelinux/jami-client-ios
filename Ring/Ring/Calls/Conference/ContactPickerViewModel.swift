@@ -19,6 +19,7 @@
  */
 
 import RxSwift
+import RxRelay
 import SwiftyBeaver
 
 class ContactPickerViewModel: ViewModel {
@@ -88,6 +89,7 @@ class ContactPickerViewModel: ViewModel {
     }()
 
     let search = PublishSubject<String>()
+    let registeredName = BehaviorRelay(value: "")
     private let disposeBag = DisposeBag()
 
     private let contactsService: ContactsService
@@ -96,6 +98,7 @@ class ContactPickerViewModel: ViewModel {
     private let accountService: AccountsService
     private let presenceService: PresenceService
     private let videoService: VideoService
+    private let nameService: NameService
 
     required init(with injectionBag: InjectionBag) {
         self.contactsService = injectionBag.contactsService
@@ -104,6 +107,7 @@ class ContactPickerViewModel: ViewModel {
         self.accountService = injectionBag.accountService
         self.presenceService = injectionBag.presenceService
         self.videoService = injectionBag.videoService
+        self.nameService = injectionBag.nameService
     }
 
     func contactSelected(contacts: [ConferencableItem]) {
@@ -111,6 +115,21 @@ class ContactPickerViewModel: ViewModel {
         if contactSelectedCB != nil {
             contactSelectedCB!(contacts)
         }
+    }
+    func lookupUserName(jamiId: String) {
+        self.nameService.usernameLookupStatus.single()
+            .subscribe(onNext: { lookupNameResponse in
+                if let name = lookupNameResponse.name, !name.isEmpty {
+                    self.registeredName.accept(lookupNameResponse.name)
+                } else {
+                    self.registeredName.accept(jamiId)
+                }
+            })
+            .disposed(by: self.disposeBag)
+        guard let currentAccount = accountService.currentAccount else { return }
+        self.nameService.lookupAddress(withAccount: currentAccount.id,
+                                       nameserver: "",
+                                       address: jamiId)
     }
 }
 

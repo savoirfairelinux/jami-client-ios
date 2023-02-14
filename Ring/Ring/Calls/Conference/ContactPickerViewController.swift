@@ -136,7 +136,19 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 }
 
                 var contact = contactItem.contacts.first!
-                cell.nameLabel.text = contact.firstLine
+                let name = contact.firstLine
+                cell.nameLabel.text = name
+                if name == contact.hash {
+                    self.viewModel.lookupUserName(jamiId: contact.hash)
+                    self.viewModel.registeredName
+                        .observe(on: MainScheduler.instance)
+                        .take(1)
+                        .asObservable()
+                        .subscribe { username in
+                            cell.nameLabel.text = username
+                        }
+                        .disposed(by: self.disposeBag)
+                }
                 cell.lastMessagePreviewLabel?.isHidden = true
 
                 var imageData: Data?
