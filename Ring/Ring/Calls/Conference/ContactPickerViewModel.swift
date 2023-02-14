@@ -96,6 +96,7 @@ class ContactPickerViewModel: ViewModel {
     private let accountService: AccountsService
     private let presenceService: PresenceService
     private let videoService: VideoService
+    private let nameService: NameService
 
     required init(with injectionBag: InjectionBag) {
         self.contactsService = injectionBag.contactsService
@@ -104,6 +105,7 @@ class ContactPickerViewModel: ViewModel {
         self.accountService = injectionBag.accountService
         self.presenceService = injectionBag.presenceService
         self.videoService = injectionBag.videoService
+        self.nameService = injectionBag.nameService
     }
 
     func contactSelected(contacts: [ConferencableItem]) {
@@ -132,7 +134,20 @@ extension ContactPickerViewModel {
                                        registrName: contact.userName ?? "",
                                        presService: self.presenceService,
                                        contactProfile: profile)
-
+            if contact.userName == nil || contact.userName! == "" {
+                self.nameService.usernameLookupStatus.single()
+                    .filter({ lookupNameResponse in
+                        return lookupNameResponse.address != nil &&
+                            lookupNameResponse.address == contact.hash
+                    })
+                    .subscribe(onNext: {lookupNameResponse in
+                        if let name = lookupNameResponse.name, !name.isEmpty {
+                            contactToAdd.registeredName.accept(name)
+                        }
+                    })
+                    .disposed(by: self.disposeBag)
+                self.nameService.lookupAddress(withAccount: currentAccount.id, nameserver: "", address: contact.hash)
+            }
             contactToAdd.hash = contact.hash
             let contactItem = ConferencableItem(conferenceID: "", contacts: [contactToAdd])
             contactItems.append(contactItem)

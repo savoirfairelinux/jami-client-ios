@@ -571,7 +571,7 @@ extension CallViewModel {
                     .callAndAddParticipant(participant: contactToAdd.uri,
                                            toCall: self.rendererId,
                                            withAccount: account,
-                                           userName: contactToAdd.registeredName,
+                                           userName: contactToAdd.registeredName.value,
                                            videSource: self.videoService.getVideoSource(),
                                            isAudioOnly: call.isAudioOnly)
                     .subscribe()
