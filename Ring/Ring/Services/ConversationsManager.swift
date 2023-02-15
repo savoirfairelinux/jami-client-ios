@@ -113,6 +113,11 @@ class ConversationsManager {
                     }
                 case .appEnterForeground:
                     self.accountsService.setAccountsActive(active: true)
+                    // reload requests, since they may be handeled by notification extension
+                    // and Jami may not have up to date requests when entering foreground
+                    if let currentAccount = self.accountsService.currentAccount {
+                        self.requestService.updateConversationsRequests(withAccount: currentAccount.id)
+                    }
                 case .callProviderPreviewPendingCall:
                     self.accountsService.setAccountsActive(active: true)
                 case .callEnded, .callProviderCancelCall:

@@ -46,6 +46,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     let conversationService: ConversationsService
     let callsProvider: CallsProviderDelegate
     let nameService: NameService
+    let requestsService: RequestsService
 
     required init (with injectionBag: InjectionBag) {
         self.injectionBag = injectionBag
@@ -55,6 +56,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.nameService = injectionBag.nameService
         self.conversationService = injectionBag.conversationsService
         self.callsProvider = injectionBag.callsProvider
+        self.requestsService = injectionBag.requestsService
         self.addLockFlags()
 
         self.stateSubject
@@ -265,7 +267,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         self.popToSmartList()
         if let model = getConversationViewModel(conversationId: conversationId) {
             self.showConversation(withConversationViewModel: model)
-            return
+        } else if let request = self.requestsService.getRequest(withId: conversationId, accountId: accountId) {
+            let conversationViewModel = ConversationViewModel(with: self.injectionBag)
+            let conversation = ConversationModel(request: request)
+            conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+            conversationViewModel.request = request
+            self.showConversation(withConversationViewModel: conversationViewModel)
         }
     }
 
