@@ -54,6 +54,7 @@ class InvitationViewModel: ViewModel {
     private let contactsService: ContactsService
     private let requestsService: RequestsService
     private let conversationsService: ConversationsService
+    private let nameService: NameService
 
     private let disposeBag = DisposeBag()
     private let log = SwiftyBeaver.self
@@ -62,6 +63,7 @@ class InvitationViewModel: ViewModel {
         self.contactsService = injectionBag.contactsService
         self.conversationsService = injectionBag.conversationsService
         self.requestsService = injectionBag.requestsService
+        self.nameService = injectionBag.nameService
     }
 
     // MARK: set initial info
@@ -81,11 +83,12 @@ class InvitationViewModel: ViewModel {
     func setInfoForRequest(request: RequestModel, displayName: String, invitationHandeledCB: @escaping ((_ conversationId: String) -> Void)) {
         self.invitationHandeledCB = invitationHandeledCB
         self.accountId = request.accountId
-        self.displayName.accept(displayName)
+        let name = request.name.isEmpty ? displayName : request.name
+        self.displayName.accept(name)
         self.request = request
         self.conversationId = request.conversationId
-        if displayName.isEmpty {
-            self.displayName.accept(request.name)
+        if displayName.isEmpty || self.displayName.value == request.participants.first?.jamiId {
+            self.lookupUserName(request: request)
         }
         self.profileImageData.accept(request.avatar)
         if let participantId = request.participants.first?.jamiId, request.isDialog() {
@@ -108,6 +111,26 @@ class InvitationViewModel: ViewModel {
             }, onError: { _ in
             })
             .disposed(by: self.disposeBag)
+    }
+
+    private func lookupUserName(request: RequestModel) {
+        guard let jamiId = request.participants.first?.jamiId else { return }
+
+        self.nameService.usernameLookupStatus.asObservable()
+            .filter({ lookupNameResponse in
+                return lookupNameResponse.address == jamiId
+            })
+            .take(1)
+            .subscribe(onNext: { [weak self] lookupNameResponse in
+                if lookupNameResponse.state == .found && !lookupNameResponse.name.isEmpty {
+                    self?.displayName.accept(lookupNameResponse.name)
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.nameService.lookupAddress(withAccount: request.accountId,
+                                       nameserver: "",
+                                       address: jamiId)
     }
 
     // MARK: listen conversation ready

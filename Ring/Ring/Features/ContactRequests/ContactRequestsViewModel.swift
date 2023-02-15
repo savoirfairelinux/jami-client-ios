@@ -153,7 +153,6 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     }
 
     private func lookupUserName(withItem item: RequestItem) {
-        if !item.request.isCoredialog() { return }
         guard let jamiId = item.request.participants.first?.jamiId else { return }
 
         self.nameService.usernameLookupStatus.asObservable()
