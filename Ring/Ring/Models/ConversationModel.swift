@@ -192,6 +192,17 @@ class ConversationModel: Equatable {
         self.subscribeUnreadMessages()
     }
 
+    convenience init (request: RequestModel) {
+        self.init()
+        self.id = request.conversationId
+        self.accountId = request.accountId
+        self.participants = request.participants
+        self.type = request.conversationType
+        self.avatar = request.avatar?.base64EncodedString() ?? ""
+        self.title = request.name
+        self.subscribeUnreadMessages()
+    }
+
     convenience init (withId conversationId: String, accountId: String, info: [String: String]) {
         self.init()
         self.id = conversationId

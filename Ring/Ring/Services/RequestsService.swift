@@ -66,6 +66,22 @@ class RequestsService {
                                                object: nil)
     }
 
+    func updateConversationsRequests(withAccount accountId: String) {
+        let conversationRequestsDictionaries = self.requestsAdapter.getSwarmRequests(forAccount: accountId)
+        if let conversationRequests = conversationRequestsDictionaries?.map({ dictionary in
+            return RequestModel(withDictionary: dictionary, accountId: accountId, type: .conversation)
+        })
+        .filter({ newModel in
+            !self.requests.value.contains { existingModel in
+                existingModel.conversationId == newModel.conversationId
+            }
+        }), !conversationRequests.isEmpty {
+            var value = self.requests.value
+            value.append(contentsOf: conversationRequests)
+            self.requests.accept(value)
+        }
+    }
+
     /**
      Called when application starts and when  account changed
      */
@@ -143,14 +159,14 @@ class RequestsService {
         }
     }
 
-    // MARK: Private helpers
-
-    private func getRequest(withId conversationId: String, accountId: String) -> RequestModel? {
+    func getRequest(withId conversationId: String, accountId: String) -> RequestModel? {
         guard let request = self.requests.value.filter({ $0.conversationId == conversationId && $0.accountId == accountId }).first else {
             return nil
         }
         return request
     }
+
+    // MARK: Private helpers
 
     private func getRequest(withJamiId participantId: String, accountId: String) -> RequestModel? {
         guard let request = self.requests.value.filter({ $0.participants.first?.jamiId == participantId && $0.accountId == accountId && $0.participants.count == 1 }).first else {
