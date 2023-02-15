@@ -323,6 +323,8 @@ internal enum L10n {
     internal static let explanationReceivingLocationFrom = L10n.tr("Localizable", "conversation.explanationReceivingLocationFrom", fallback: "You are currently receiving a live location from ")
     /// You are currently sharing your location with 
     internal static let explanationSendingLocationTo = L10n.tr("Localizable", "conversation.explanationSendingLocationTo", fallback: "You are currently sharing your location with ")
+    /// Sent you a request for a conversation.
+    internal static let incomingRequest = L10n.tr("Localizable", "conversation.incomingRequest", fallback: "Sent you a request for a conversation.")
     /// Write message to 
     internal static let messagePlaceholder = L10n.tr("Localizable", "conversation.messagePlaceholder", fallback: "Write message to ")
     /// %@ is not in your contact list.
