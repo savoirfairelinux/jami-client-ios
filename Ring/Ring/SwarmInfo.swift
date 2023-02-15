@@ -155,7 +155,7 @@ class SwarmInfo {
         self.conversation = conversation
         self.subscribeConversationEvents()
         self.updateInfo()
-        self.updateParticipants()
+        self.setParticipants()
         self.updateColorPreference()
     }
 
@@ -280,6 +280,20 @@ class SwarmInfo {
         guard let conversation = self.conversation else { return }
         self.color.accept(conversation.preferences.color)
     }
+
+    private func setParticipants() {
+        guard let conversation = self.conversation else { return }
+        var participantsInfo = [ParticipantInfo]()
+        let memberList = conversation.getParticipants()
+        memberList.forEach { participant in
+            if let participantInfo = createParticipant(jamiId: participant.jamiId, role: participant.role) {
+                participantsInfo.append(participantInfo)
+            }
+        }
+        if participantsInfo.isEmpty { return }
+        self.insertAndSortParticipants(participants: participantsInfo)
+    }
+
     private func updateParticipants() {
         guard let conversation = self.conversation else { return }
         var participantsInfo = [ParticipantInfo]()

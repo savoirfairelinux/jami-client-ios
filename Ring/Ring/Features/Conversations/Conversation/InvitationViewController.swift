@@ -122,7 +122,12 @@ class InvitationViewController: UIViewController, StoryboardBased, ViewModelBase
         buttonsContainer.isHidden = false
         inviteButton.isHidden = true
         invitationLabel1.isHidden = false
-        invitationLabel1.text = L10n.Conversation.receivedRequest(self.viewModel.displayName.value)
+        self.viewModel.displayName
+            .asObservable()
+            .subscribe(onNext: { [weak self] name in
+                self?.invitationLabel1.text = L10n.Conversation.receivedRequest(name)
+            })
+            .disposed(by: self.disposeBag)
         invitationLabel2.text = L10n.Conversation.requestMessage
         invitationLabel3.isHidden = true
         acceptButton.setTitle(L10n.Global.accept, for: .normal)
@@ -135,7 +140,12 @@ class InvitationViewController: UIViewController, StoryboardBased, ViewModelBase
         invitationLabel1.isHidden = true
         invitationLabel3.isHidden = false
         invitationLabel2.text = L10n.Conversation.synchronizationTitle
-        invitationLabel3.text = L10n.Conversation.synchronizationMessage(self.viewModel.displayName.value)
+        self.viewModel.displayName
+            .asObservable()
+            .subscribe(onNext: { [weak self] name in
+                self?.invitationLabel3.text = L10n.Conversation.synchronizationMessage(name)
+            })
+            .disposed(by: self.disposeBag)
     }
 
 }
