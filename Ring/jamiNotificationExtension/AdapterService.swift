@@ -192,7 +192,7 @@ extension AdapterService: AdapterDelegate {
         guard let handler = self.eventHandler else {
             return
         }
-        let contentMessage = L10n.GeneratedMessage.invitationReceived
+        let contentMessage = L10n.Conversation.incomingRequest
         var groupTitle = ""
         var peerId = ""
         if let title = metadata["title"], !title.isEmpty {
