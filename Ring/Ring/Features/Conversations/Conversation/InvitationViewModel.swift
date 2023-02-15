@@ -54,6 +54,7 @@ class InvitationViewModel: ViewModel {
     private let contactsService: ContactsService
     private let requestsService: RequestsService
     private let conversationsService: ConversationsService
+    private let nameService: NameService
 
     private let disposeBag = DisposeBag()
     private let log = SwiftyBeaver.self
@@ -62,6 +63,7 @@ class InvitationViewModel: ViewModel {
         self.contactsService = injectionBag.contactsService
         self.conversationsService = injectionBag.conversationsService
         self.requestsService = injectionBag.requestsService
+        self.nameService = injectionBag.nameService
     }
 
     // MARK: set initial info
@@ -87,6 +89,9 @@ class InvitationViewModel: ViewModel {
         if displayName.isEmpty {
             self.displayName.accept(request.name)
         }
+        if self.displayName.value == request.participants.first?.jamiId {
+            self.lookupUserName(request: request)
+        }
         self.profileImageData.accept(request.avatar)
         if let participantId = request.participants.first?.jamiId, request.isDialog() {
             self.contactJamiId = participantId
@@ -108,6 +113,26 @@ class InvitationViewModel: ViewModel {
             }, onError: { _ in
             })
             .disposed(by: self.disposeBag)
+    }
+
+    private func lookupUserName(request: RequestModel) {
+        guard let jamiId = request.participants.first?.jamiId else { return }
+
+        self.nameService.usernameLookupStatus.asObservable()
+            .filter({ lookupNameResponse in
+                return lookupNameResponse.address == jamiId
+            })
+            .take(1)
+            .subscribe(onNext: { [weak self] lookupNameResponse in
+                if lookupNameResponse.state == .found && !lookupNameResponse.name.isEmpty {
+                    self?.displayName.accept(lookupNameResponse.name)
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.nameService.lookupAddress(withAccount: request.accountId,
+                                       nameserver: "",
+                                       address: jamiId)
     }
 
     // MARK: listen conversation ready
