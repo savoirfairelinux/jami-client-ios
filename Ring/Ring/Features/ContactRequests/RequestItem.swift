@@ -49,22 +49,5 @@ class RequestItem {
         self.userName.accept(request.name)
         self.profileImageData.accept(self.request.avatar)
         self.profileName.accept(request.name)
-        //        guard let uri = JamiURI(schema: URIType.ring,
-        //                                infoHach: contactRequest.ringId)
-        //            .uriString else { return }
-        //        profileService.getProfile(uri: uri,
-        //                                  createIfNotexists: false,
-        //                                  accountId: contactRequest.accountId)
-        //            .subscribe(onNext: { [weak self] profile in
-        //                if let photo = profile.photo, !photo.isEmpty,
-        //                    let data = NSData(base64Encoded: photo,
-        //                                      options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-        //                    self?.profileImageData.accept(data)
-        //                }
-        //                if let name = profile.alias, !name.isEmpty {
-        //                    self?.profileName.accept(name)
-        //                }
-        //            })
-        //            .disposed(by: self.disposeBag)
     }
 }
