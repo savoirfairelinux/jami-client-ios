@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec9368c3_67cae72c",
+        "filename": "Ring/Ring/Calls/Conference/ContactPickerSection.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-15T16:03:25Z",
+      "side": 1,
+      "message": "firstLine should be observable now, because name lookup could arrive after it is initialized",
+      "revId": "bc12528d765b9f2756cf8b1a3c185826bca2afd8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b08fa01c_10a64087",
+        "filename": "Ring/Ring/Calls/Conference/ContactPickerViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-15T16:03:25Z",
+      "side": 1,
+      "message": "[weak contact]",
+      "revId": "bc12528d765b9f2756cf8b1a3c185826bca2afd8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d112c0_8a97f11d",
+        "filename": "Ring/Ring/Calls/Conference/ContactPickerViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-15T16:03:25Z",
+      "side": 1,
+      "message": "[weak contactToAdd]",
+      "revId": "bc12528d765b9f2756cf8b1a3c185826bca2afd8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5404b7b8_57abd98d",
+        "filename": "Ring/Ring/Calls/Conference/ContactPickerViewModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-15T16:03:25Z",
+      "side": 1,
+      "message": ".take(1)",
+      "revId": "bc12528d765b9f2756cf8b1a3c185826bca2afd8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
