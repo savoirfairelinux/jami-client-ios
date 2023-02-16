@@ -157,11 +157,11 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
 #pragma mark interactions
 
 - (NSUInteger)sendMessageWithContent:(NSDictionary*)content withAccountId:(NSString*)accountId
-                       to:(NSString*)toAccountId {
+                       to:(NSString*)toAccountId flag:(int)flag {
 
     return (NSUInteger) sendAccountTextMessage(std::string([accountId UTF8String]),
                            std::string([toAccountId UTF8String]),
-                           [Utils dictionnaryToMap:content]);
+                           [Utils dictionnaryToMap:content], flag);
 }
 
 - (MessageStatus)statusForMessageId:(uint64_t)messageId {

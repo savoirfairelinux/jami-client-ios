@@ -471,7 +471,7 @@ class ConversationsService {
         return Completable.create(subscribe: { [weak self] completable in
             guard let self = self else { return Disposables.create { } }
             let contentDict = [self.textPlainMIMEType: content]
-            let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: jamiId))
+            let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: jamiId, flag: 0))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
             let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
             let contactUri = JamiURI.init(schema: type, infoHach: jamiId, account: senderAccount)
@@ -945,7 +945,7 @@ extension ConversationsService {
         return Completable.create(subscribe: { [weak self] completable in
             guard let self = self else { return Disposables.create { } }
             let contentDict = [self.geoLocationMIMEType: content]
-            let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri))
+            let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri, flag: 1))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
             let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
             let contactUri = JamiURI.init(schema: type, infoHach: recipientUri, account: senderAccount)

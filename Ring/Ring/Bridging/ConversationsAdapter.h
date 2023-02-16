@@ -35,7 +35,7 @@ typedef NS_ENUM(int, MessageStatus)  {
 @property (class, nonatomic, weak) id <MessagesAdapterDelegate> messagesDelegate;
 
 - (NSUInteger)sendMessageWithContent:(NSDictionary*)content withAccountId:(NSString*)accountId
-                       to:(NSString*)toAccountId;
+                       to:(NSString*)toAccountId flag:(int)flag;
 
 - (MessageStatus)statusForMessageId:(uint64_t)messageId;
 - (void)setComposingMessageTo:(NSString*)peer
