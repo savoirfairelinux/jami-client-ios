@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa90ddc_ba33f0e4",
+        "filename": "Ring/Ring/Calls/Conference/ContactPickerSection.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-16T23:13:29Z",
+      "side": 1,
+      "message": "this variable does not emit any signal after initialization. Does it need to be observable?",
+      "revId": "d0940d75700be25121c52b00565bf2bfd6522f02",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
