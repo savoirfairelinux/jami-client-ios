@@ -403,6 +403,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "991bf74d_88a331d4",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-16T02:52:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ba62f41_db7ab56b",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7398446a_e5959049",
@@ -730,6 +748,24 @@
       "writtenOn": "2023-01-25T19:53:41Z",
       "side": 1,
       "message": "we also need to add button to display copyright information for OpenStreetMap",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e813d45_292e8643",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/LocationSharingView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-16T02:52:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbe8f7b5_e2c0e734",
       "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -1150,6 +1186,24 @@
       "side": 1,
       "message": "I\u0027m using it here for frame issue and sizing I can separate them in to two different SwiftUI View",
       "parentUuid": "08aad282_1cf068c3",
+      "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "730cd4f5_6ff097fe",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-02-16T02:52:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f8624b1_aa33d5e5",
       "revId": "fd83d8e5632a3be51338f40bbcad212d3fffccbb",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
