@@ -113,6 +113,9 @@ class ConversationsService {
                 }
             }, onError: { [weak self] _ in
                 self?.conversations.accept(currentConversations)
+                for swarmId in conversationToLoad {
+                    self?.conversationsAdapter.loadConversationMessages(accountId, conversationId: swarmId, from: "", size: 1)
+                }
             })
             .disposed(by: self.disposeBag)
     }
@@ -166,7 +169,6 @@ class ConversationsService {
                 let unreadInteractions = conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: accountURI)
                 conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
             }
-            self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 1)
             conversations.append(conversation)
         }
     }
