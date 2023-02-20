@@ -82,7 +82,6 @@ class ConversationsService {
                 self.addSwarm(conversationId: swarmId, accountId: accountId, accountURI: accountURI, to: &currentConversations)
             }
         }
-        self.conversations.accept(currentConversations)
         // get conversations from db
         dbManager.getConversationsObservable(for: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -112,6 +111,8 @@ class ConversationsService {
                 for swarmId in conversationToLoad {
                     self?.conversationsAdapter.loadConversationMessages(accountId, conversationId: swarmId, from: "", size: 1)
                 }
+            }, onError: { [weak self] _ in
+                self?.conversations.accept(currentConversations)
             })
             .disposed(by: self.disposeBag)
     }
