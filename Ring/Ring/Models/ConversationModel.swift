@@ -344,6 +344,10 @@ class ConversationModel: Equatable {
         }
     }
 
+    func getAllParticipants() -> [ConversationParticipant] {
+        return self.participants
+    }
+
     func getLocalParticipants() -> ConversationParticipant? {
         return self.participants.filter { participant in
             participant.isLocal

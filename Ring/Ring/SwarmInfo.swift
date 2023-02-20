@@ -284,7 +284,7 @@ class SwarmInfo {
     private func setParticipants() {
         guard let conversation = self.conversation else { return }
         var participantsInfo = [ParticipantInfo]()
-        let memberList = conversation.getParticipants()
+        let memberList = conversation.getAllParticipants()
         memberList.forEach { participant in
             if let participantInfo = createParticipant(jamiId: participant.jamiId, role: participant.role) {
                 participantsInfo.append(participantInfo)
@@ -378,7 +378,10 @@ class SwarmInfo {
 
     private func buildAvatar() -> UIImage {
         let participantsCount = self.participants.value.count
-        // for one to one conversation return contact avatar
+        // for conversation with one participant return contact avatar
+        if participantsCount == 1, let avatar = self.participants.value.first?.avatar.value {
+            return avatar
+        }
         if participantsCount == 2, let localJamiId = accountsService.getAccount(fromAccountId: accountId)?.jamiId,
            let avatar = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
