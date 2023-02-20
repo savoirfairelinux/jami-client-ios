@@ -210,6 +210,7 @@ class MessagesListVM: ObservableObject {
         if self.messagesModels.contains(where: { messageModel in
             messageModel.message.id == newMessage.id
         }) { return false }
+        if newMessage.type == .location { return false }
         let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject)
         self.subscribeMessage(container: container)
         // first try to find child
