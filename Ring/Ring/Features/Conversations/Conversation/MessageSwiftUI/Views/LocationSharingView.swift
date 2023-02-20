@@ -66,18 +66,18 @@ struct LocationSharingView: View {
                             }
                         }
 
-                        VStack {
-                            Spacer()
-                            Text(model.getMyLocationSharingRemainedTimeText())
-                                .fontWeight(.semibold)
-                                .font(.caption)
-                                .padding([.leading, .trailing], 15)
-                                .padding([.top, .bottom], 5)
-                                .background(Color.black)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
+                        if model.isAlreadySharingMyLocation() {
+                            VStack {
+                                Spacer()
+                                Text(model.getMyLocationSharingRemainedTimeText())
+                                    .fontWeight(.semibold)
+                                    .font(.caption)
+                                    .padding([.leading, .trailing], 15)
+                                    .padding([.top, .bottom], 5)
+                                    .background(Color.black)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(8)
 
-                            if model.isAlreadySharingMyLocation() {
                                 Button {
                                     model.stopSendingLocation()
                                     model.isMapOpened = false
