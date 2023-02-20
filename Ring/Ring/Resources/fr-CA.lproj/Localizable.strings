@@ -93,6 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Vous recevez actuellement la position de ";
 "conversation.errorSavingImage" = "Impossible de sauvegarder l'image dans la galerie";
 "conversation.receivedRequest" = "\%@\ vous a envoyé une invitation.";
+"conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Bonjour,\nSouhaitez-vous rejoindre la conversation ?";
 "conversation.notContact" = " \%@\ ne fait pas partie de vos contacts.";
 "conversation.sendRequest" = "Envoyer lui une demande de contact afin de pouvoir discuter ensemble";

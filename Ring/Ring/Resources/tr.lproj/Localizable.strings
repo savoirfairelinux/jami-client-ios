@@ -93,6 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
 "conversation.errorSavingImage" = "Fotoğraf galeriye kaydedilemedi";
 "conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Merhaba,\nKonuşmaya katılmak ister misin?";
 "conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Birlikte iletişim kurmak için ona bir kişi isteği gönderin";

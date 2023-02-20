@@ -93,6 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Právě přijímáte aktuální polohu od ";
 "conversation.errorSavingImage" = "Nepodařilo se uložit obrázek do galerie";
 "conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Dobrý den,\nChcete se připojit ke konverzaci?";
 "conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Pošlete mu/jí žádost o kontakt, abyste si mohli společně vyměňovat.";

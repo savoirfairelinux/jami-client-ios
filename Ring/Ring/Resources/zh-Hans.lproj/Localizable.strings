@@ -93,6 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "您正收到即時位置，從";
 "conversation.errorSavingImage" = "將圖片儲存到相簿失敗";
 "conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "您好，\n您想要加入對話嗎？";
 "conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "向他／她傳送聯絡人請求，如此才能一起交流";

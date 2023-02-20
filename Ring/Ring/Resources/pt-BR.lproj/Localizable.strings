@@ -93,6 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Você está recebendo atualmente uma localização real de";
 "conversation.errorSavingImage" = "Falha ao salvar a imagem na galeria";
 "conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Olá,\nVocê gostaria de entrar na conversação?";
 "conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Envie para ele/ela o seu pedido de contato, para que vocês possam interagir";

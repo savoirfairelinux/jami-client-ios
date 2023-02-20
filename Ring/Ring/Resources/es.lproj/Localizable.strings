@@ -93,6 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Estás recibiendo una ubicación en vivo desde";
 "conversation.errorSavingImage" = "No se pudo guardar la imagen en la galería";
 "conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Hola,\n¿Te gustaría unirte a la conversación?";
 "conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Enviarle una solicitud de contacto para poder interactuar";

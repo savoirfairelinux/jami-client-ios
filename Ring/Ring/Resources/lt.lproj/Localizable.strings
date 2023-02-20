@@ -26,7 +26,7 @@
 "global.share" = "Bendrinti";
 "global.forward" = "Forward";
 "global.save" = "Įrašyti";
-"global.resend" = "Resend";
+"global.resend" = "Siųsti iš naujo";
 "global.preview" = "Peržiūra";
 "global.accept" = "Priimti";
 "global.block" = "Užblokuoti";
@@ -52,7 +52,7 @@
 "swarm.identifier" = "Identifier";
 "swarm.about" = "Apie";
 "swarm.members" = "Members";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Pridėti aprašą";
 "swarm.oneToOne" = "Private swarm";
 "swarm.adminInvitesOnly" = "Admin invites only";
 "swarm.invitesOnly" = "Private swarm";
@@ -60,7 +60,7 @@
 "swarm.others" = "Others";
 "swarm.member" = "Member";
 "swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
+"swarm.admin" = "Administratorius";
 "swarm.banned" = "Banned";
 "swarm.unknown" = "Unkown";
 "swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
@@ -93,7 +93,8 @@
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 "conversation.errorSavingImage" = "Failed to save image to galery";
 "conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
+"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.requestMessage" = "Sveiki,\nAr norėtumėte prisijungti prie pokalbio?";
 "conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
 "conversation.sendRequestTitle" = "Send Contact Request";
@@ -196,10 +197,10 @@
 "alerts.locationSharing" = "Share my location";
 "alerts.alreadylocationSharing" = "Already sharing location with this user";
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.locationSharingDuration10min" = "10 min.";
+"alerts.locationSharingDuration1hour" = "1 val.";
+"alerts.mapInformation" = "Informacija apie žemėlapį";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap talkininkai";
 "alerts.openStreetMapCopyrightMoreInfo" = "Sužinoti daugiau";
 
 //Actions
@@ -266,7 +267,7 @@
 "accountPage.removeAccountTitle" = "Šalinti paskyrą";
 "accountPage.removeAccountMessage" = "Spustelėję \"Šalinti\", pašalinsite šią paskyrą šiame įrenginyje! Šio veiksmo negalima bus atšaukti. Be to, galite prarasti savo registruotą vardą.";
 "accountPage.removeAccountButton" = "Šalinti";
-"accountPage.shareAccountDetails" = "Share Account Details";
+"accountPage.shareAccountDetails" = "Bendrinti informaciją apie paskyrą";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
 "accountPage.registerNameTitle" = "Register a username";
@@ -373,7 +374,7 @@
 
 //General Settings
 "generalSettings.title" = "Išplėstiniai nustatymai";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Vaizdo nustatymai";
 "generalSettings.videoAcceleration" = "Įjungti vaizdo spartinimą";
 "generalSettings.fileTransfer" = "Failų persiuntimas";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
@@ -381,12 +382,12 @@
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 
 //Log View
-"logView.title" = "Diagnostics";
-"logView.description" = "Open diagnostic log settings";
+"logView.title" = "Diagnostika";
+"logView.description" = "Atverti diagnostikos žurnalo nustatymus";
 "logView.startLogging" = "Start Logging";
 "logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.saveError" = "Nepavyko įrašyti failo";
+"logView.shareError" = "Nepavyko bendrinti failo";
 
 //Migrate Account
 "migrateAccount.title" = "Paskyros perkėlimas";

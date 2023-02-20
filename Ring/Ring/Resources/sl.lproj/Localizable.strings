@@ -93,6 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Trenutno v živo pridobivate podatek o lokaciji od";
 "conversation.errorSavingImage" = "Shranjevanje slike v galerijo je spodletelo";
 "conversation.receivedRequest" = "\%@\ vam je poslal zahtevo za pogovor.";
+"conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Pozdravljeni, \nse želite pridružiti pogovoru?";
 "conversation.notContact" = "\%@\ ni na seznamu vaših stikov.";
 "conversation.sendRequest" = "Pošljite ji/mu zahtevo za stik, da si bosta lahko medsebojno izmenjevala.";

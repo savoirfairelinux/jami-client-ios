@@ -93,6 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "現在地を受信している相手: ";
 "conversation.errorSavingImage" = "画像一覧に画像を保存できませんでした";
 "conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "こんにちは\n会話に参加しませんか？";
 "conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
