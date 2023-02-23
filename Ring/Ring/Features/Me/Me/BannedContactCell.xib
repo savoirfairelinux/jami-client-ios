@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="71.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swh-nI-ECy" userLabel="Fallback Avatar">
@@ -69,31 +67,22 @@
                             <color key="titleColor" red="0.0" green="0.29964192708333331" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hik-h4-XBB">
-                        <rect key="frame" x="64" y="16" width="0.0" height="0.0"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dZ-bK-85e">
-                        <rect key="frame" x="64" y="56" width="0.0" height="0.0"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="71" y="36" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="1dZ-bK-85e" firstAttribute="leading" secondItem="swh-nI-ECy" secondAttribute="trailing" constant="8" id="98C-0J-HmI"/>
                     <constraint firstItem="a37-VQ-Ddu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="D9v-96-V0h"/>
-                    <constraint firstItem="a37-VQ-Ddu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1dZ-bK-85e" secondAttribute="trailing" constant="20" id="HIW-ph-KNY"/>
                     <constraint firstItem="swh-nI-ECy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="M9p-Od-bYQ"/>
-                    <constraint firstItem="Hik-h4-XBB" firstAttribute="leading" secondItem="swh-nI-ECy" secondAttribute="trailing" constant="8" id="QOj-yK-xtk"/>
-                    <constraint firstItem="1dZ-bK-85e" firstAttribute="bottom" secondItem="YZy-Ew-WGd" secondAttribute="bottom" id="QYG-dh-yJn"/>
                     <constraint firstItem="Exq-jK-jxm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="T8f-qb-lGM"/>
+                    <constraint firstItem="a37-VQ-Ddu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1dZ-bK-85e" secondAttribute="trailing" constant="15" id="VS6-Kd-qYf"/>
                     <constraint firstItem="Exq-jK-jxm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="W5g-cz-PBA"/>
-                    <constraint firstItem="a37-VQ-Ddu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hik-h4-XBB" secondAttribute="trailing" constant="20" id="YbE-T6-0fc"/>
+                    <constraint firstItem="1dZ-bK-85e" firstAttribute="leading" secondItem="YZy-Ew-WGd" secondAttribute="trailing" constant="15" id="Wee-4W-f7g"/>
                     <constraint firstItem="YZy-Ew-WGd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="fdt-e2-2aE"/>
-                    <constraint firstItem="Hik-h4-XBB" firstAttribute="top" secondItem="YZy-Ew-WGd" secondAttribute="top" id="gta-qQ-G03"/>
+                    <constraint firstItem="1dZ-bK-85e" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hC3-Cj-rSK"/>
                     <constraint firstItem="YZy-Ew-WGd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="i4J-dL-dEq"/>
                     <constraint firstAttribute="trailing" secondItem="a37-VQ-Ddu" secondAttribute="trailing" constant="10" id="ljc-2e-5QH"/>
                     <constraint firstItem="swh-nI-ECy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="zBN-3Z-bIs"/>
@@ -101,16 +90,16 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="displayNameLabel" destination="Hik-h4-XBB" id="VZd-fj-VsS"/>
                 <outlet property="fallbackAvatar" destination="swh-nI-ECy" id="q7Z-yD-0ic"/>
                 <outlet property="fallbackAvatarImage" destination="Exq-jK-jxm" id="LhB-oS-z7p"/>
                 <outlet property="profileImageView" destination="YZy-Ew-WGd" id="9c1-7E-uR4"/>
                 <outlet property="unblockButton" destination="a37-VQ-Ddu" id="h8m-6N-NAM"/>
                 <outlet property="userNameLabel" destination="1dZ-bK-85e" id="kWa-9i-lHi"/>
             </connections>
+            <point key="canvasLocation" x="-30" y="21"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fallback_avatar" width="82" height="82"/>
+        <image name="fallback_avatar" width="60" height="60"/>
     </resources>
 </document>
