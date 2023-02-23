@@ -29,12 +29,13 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wN6-Fz-tau"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="eGc-th-VK5" firstAttribute="top" secondItem="YKN-B2-7X7" secondAttribute="top" id="5Nj-Mt-QeY"/>
                             <constraint firstItem="nUo-eH-a0f" firstAttribute="top" secondItem="YKN-B2-7X7" secondAttribute="top" id="6YC-L1-UO0"/>
                             <constraint firstItem="nUo-eH-a0f" firstAttribute="leading" secondItem="wN6-Fz-tau" secondAttribute="leading" id="7G3-4b-v8w"/>
                             <constraint firstItem="nUo-eH-a0f" firstAttribute="trailing" secondItem="wN6-Fz-tau" secondAttribute="trailing" id="DwO-qn-bYX"/>
                             <constraint firstItem="nUo-eH-a0f" firstAttribute="bottom" secondItem="eGc-th-VK5" secondAttribute="bottom" id="GcN-Wl-7s4"/>
+                            <constraint firstItem="eGc-th-VK5" firstAttribute="top" secondItem="wN6-Fz-tau" secondAttribute="top" id="S6X-E4-8jc"/>
                             <constraint firstAttribute="bottom" secondItem="eGc-th-VK5" secondAttribute="bottom" id="Zty-gx-bJ1"/>
                             <constraint firstItem="eGc-th-VK5" firstAttribute="trailing" secondItem="wN6-Fz-tau" secondAttribute="trailing" id="uq4-pz-rcL"/>
                             <constraint firstItem="eGc-th-VK5" firstAttribute="leading" secondItem="wN6-Fz-tau" secondAttribute="leading" id="xU3-rh-8zX"/>

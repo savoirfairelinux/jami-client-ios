@@ -28,7 +28,6 @@ class BannedContactCell: UITableViewCell, NibReusable {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var fallbackAvatarImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var unblockButton: UIButton!
 
     var disposeBag = DisposeBag()
@@ -45,11 +44,9 @@ class BannedContactCell: UITableViewCell, NibReusable {
                                                     username: item.displayName ?? (item.contact.userName ?? item.contact.hash),
                                                     size: 40))
 
-        if let displayName = item.displayName {
-            self.displayNameLabel.text = displayName
-        }
-
-        if let name = item.contact.userName {
+        if let displayName = item.displayName, !displayName.isEmpty {
+            self.userNameLabel.text = displayName
+        } else if let name = item.contact.userName, !name.isEmpty {
             self.userNameLabel.text = name
         } else {
             self.userNameLabel.text = item.contact.hash
