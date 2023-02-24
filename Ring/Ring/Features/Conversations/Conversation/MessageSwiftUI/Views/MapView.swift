@@ -40,6 +40,7 @@ class MapViewWrapper: NSObject {
 
 struct MapView: UIViewRepresentable {
     @Binding var coordinates: [(CLLocationCoordinate2D, UIImage)]
+    var isLoadingFirstTime: Bool = false
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -52,6 +53,13 @@ struct MapView: UIViewRepresentable {
         mapView.addOverlay(overlay, level: .aboveLabels)
 
         addPinsAndZoom(mapView: mapView)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            if let firstCoordinate = coordinates.first {
+                let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                let region = MKCoordinateRegion(center: firstCoordinate.0, span: span)
+                mapView.setRegion(region, animated: true)
+            }
+        }
         return mapView
     }
 
@@ -65,11 +73,6 @@ struct MapView: UIViewRepresentable {
             let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
             annotation.avatar = coordinate.1
             mapView.addAnnotation(annotation)
-        }
-        if let firstCoordinate = coordinates.first {
-            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-            let region = MKCoordinateRegion(center: firstCoordinate.0, span: span)
-            mapView.setRegion(region, animated: true)
         }
     }
 }
