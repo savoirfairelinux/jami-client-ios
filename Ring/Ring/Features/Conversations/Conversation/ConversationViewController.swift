@@ -901,7 +901,7 @@ extension ConversationViewController {
     }
 
     private func canShareLocation() -> Bool {
-        if CLLocationManager.locationServicesEnabled() {
+        if checkLocationAuthorization() {
             return checkLocationAuthorization()
         } else {
             self.showGoToSettingsAlert(title: L10n.Alerts.locationServiceIsDisabled)
@@ -924,7 +924,7 @@ extension ConversationViewController {
     }
 
     private func checkLocationAuthorization() -> Bool {
-        switch CLLocationManager.authorizationStatus() {
+        switch CLLocationManager().authorizationStatus {
         case .notDetermined: locationManager.requestWhenInUseAuthorization()
         case .restricted, .denied: self.showGoToSettingsAlert(title: L10n.Alerts.noLocationPermissionsTitle)
         case .authorizedAlways, .authorizedWhenInUse: return true
