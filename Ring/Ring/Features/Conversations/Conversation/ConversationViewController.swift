@@ -826,14 +826,51 @@ class ConversationViewController: UIViewController,
     }
 }
 
+extension ConversationViewController {
+
+    private func deleteCellSetup(_ cell: MessageCell) {
+        cell.deleteMessage
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak cell] (shouldDelete) in
+                guard shouldDelete, let self = self, let cell = cell, let messageId = cell.messageId else { return }
+
+                self.isExecutingDeleteMessage = true
+                self.viewModel.deleteLocationMessage(messageId: messageId)
+            })
+            .disposed(by: cell.disposeBag)
+    }
+
+    private func tapToShowTimeCellSetup(_ cell: MessageCell) {
+        cell.tappedToShowTime
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak cell] (tappedToShowTime) in
+                guard tappedToShowTime, let self = self, let cell = cell else { return }
+
+                let hide = !(cell.timeLabel!.isHidden)
+                if hide {
+                    cell.toggleCellTimeLabelVisibility()
+                }
+
+                self.tableView.performBatchUpdates({
+                    self.tableView.updateConstraintsIfNeeded()
+                }, completion: { _ in if !hide { cell.toggleCellTimeLabelVisibility() } })
+            })
+            .disposed(by: cell.disposeBag)
+    }
+}
+
 // MARK: Location sharing
 extension ConversationViewController {
     private func locationSharingAction() -> UIAlertAction {
         return UIAlertAction(title: L10n.Alerts.locationSharing, style: .default) { [weak self] _ in
             guard let self = self else { return }
+            let canShareLocation = self.checkLocationAuthorization()
 
-            if self.canShareLocation() && self.isNotAlreadySharingWithThisContact() {
+            if canShareLocation && self.isNotAlreadySharingWithThisContact() {
                 self.askLocationSharingDuration()
+            }
+            if !canShareLocation {
+                self.showGoToSettingsAlert(title: L10n.Alerts.locationServiceIsDisabled)
             }
         }
     }
@@ -867,15 +904,6 @@ extension ConversationViewController {
         return true
     }
 
-    private func canShareLocation() -> Bool {
-        if CLLocationManager.locationServicesEnabled() {
-            return checkLocationAuthorization()
-        } else {
-            self.showGoToSettingsAlert(title: L10n.Alerts.locationServiceIsDisabled)
-            return false
-        }
-    }
-
     private func showGoToSettingsAlert(title: String) {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
 
@@ -891,7 +919,7 @@ extension ConversationViewController {
     }
 
     private func checkLocationAuthorization() -> Bool {
-        switch CLLocationManager.authorizationStatus() {
+        switch CLLocationManager().authorizationStatus {
         case .notDetermined: locationManager.requestWhenInUseAuthorization()
         case .restricted, .denied: self.showGoToSettingsAlert(title: L10n.Alerts.noLocationPermissionsTitle)
         case .authorizedAlways, .authorizedWhenInUse: return true
