@@ -832,7 +832,7 @@ extension ConversationViewController {
         return UIAlertAction(title: L10n.Alerts.locationSharing, style: .default) { [weak self] _ in
             guard let self = self else { return }
 
-            if self.canShareLocation() && self.isNotAlreadySharingWithThisContact() {
+            if self.checkLocationAuthorization() && self.isNotAlreadySharingWithThisContact() {
                 self.askLocationSharingDuration()
             }
         }
@@ -867,15 +867,6 @@ extension ConversationViewController {
         return true
     }
 
-    private func canShareLocation() -> Bool {
-        if CLLocationManager.locationServicesEnabled() {
-            return checkLocationAuthorization()
-        } else {
-            self.showGoToSettingsAlert(title: L10n.Alerts.locationServiceIsDisabled)
-            return false
-        }
-    }
-
     private func showGoToSettingsAlert(title: String) {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
 
@@ -891,13 +882,12 @@ extension ConversationViewController {
     }
 
     private func checkLocationAuthorization() -> Bool {
-        switch CLLocationManager.authorizationStatus() {
+        switch CLLocationManager().authorizationStatus {
         case .notDetermined: locationManager.requestWhenInUseAuthorization()
         case .restricted, .denied: self.showGoToSettingsAlert(title: L10n.Alerts.noLocationPermissionsTitle)
         case .authorizedAlways, .authorizedWhenInUse: return true
         @unknown default: break
         }
-
         return false
     }
 }
