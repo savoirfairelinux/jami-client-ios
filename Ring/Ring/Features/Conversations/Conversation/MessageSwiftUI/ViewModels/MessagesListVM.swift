@@ -203,7 +203,7 @@ class MessagesListVM: ObservableObject {
             coordinates.append((myLocation, self.currentAccountAvatar))
         }
         self.coordinates = coordinates
-        self.shouldShowMap = self.isAlreadySharingLocation()
+        self.shouldShowMap = self.isAlreadySharingLocation() && !coordinates.isEmpty
     }
 
     private func insert(newMessage: MessageModel) -> Bool {
