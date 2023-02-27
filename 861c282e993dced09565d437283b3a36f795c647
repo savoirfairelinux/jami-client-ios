@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4714954_057b9189",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-02-27T14:08:05Z",
+      "side": 1,
+      "message": "at this point could we remove canShareLocation() at all? Because it is doing the same as checkLocationAuthorization()",
+      "revId": "861c282e993dced09565d437283b3a36f795c647",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
