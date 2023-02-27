@@ -100,6 +100,8 @@ extension CNContactVCardSerialization {
                 if let nameRow = contentArr.filter({ String($0.prefix(3)) == VCardFields.fullName.rawValue }).first {
                     let name = String(nameRow.suffix(nameRow.count - 3))
                     vcard.familyName = name
+                } else if !vCard.givenName.isEmpty {
+                    vcard.familyName = vCard.givenName
                 }
                 vcard.phoneNumbers = vCard.phoneNumbers
                 vcard.imageData = vCard.imageData
