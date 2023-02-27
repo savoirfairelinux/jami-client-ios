@@ -93,7 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
 "conversation.errorSavingImage" = "Salvarea imaginii nu a reușit";
 "conversation.receivedRequest" = "\%@\ ți-a trimis o invitație la o conversație.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.incomingRequest" = "Ți-a trimis o invitație la o conversație.";
 "conversation.requestMessage" = "Vrei să participi la conversație?";
 "conversation.notContact" = "\%@\ nu este în contactele tale.";
 "conversation.sendRequest" = "Trimite-i o cerere de contact pentru a conversa împreună.";

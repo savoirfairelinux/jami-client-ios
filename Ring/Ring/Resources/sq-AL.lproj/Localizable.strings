@@ -93,7 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 "conversation.errorSavingImage" = "S’u arrit të dërgohet figurë te galeri";
 "conversation.receivedRequest" = "\%@\ ju dërgoi një kërkesë për një bisedë.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.incomingRequest" = "Ju dërgoi një kërkesë për bisedë.";
 "conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
 "conversation.notContact" = "\%@\ s’gjendet te lista e kontakteve tuaj.";
 "conversation.sendRequest" = "Dërgojini një kërkesë kontakti, që të jeni në gjendje të shkëmbeni me njëri-tjetrin";

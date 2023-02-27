@@ -93,7 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
 "conversation.errorSavingImage" = "Nem sikerült menteni a képet a kepgyűjteménybe";
 "conversation.receivedRequest" = "\%@\ kérelmet küldött Önnek egy beszélgetésre.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.incomingRequest" = "Beszélgetési kérelmet küldött.";
 "conversation.requestMessage" = "Üdv!\nSzeretne csatlakozni a beszélgetéshez?";
 "conversation.notContact" = "A(z) \%@\ nem szerepel a kapcsolatlistában.";
 "conversation.sendRequest" = "Kapcsolatfelvételi kérelem elküldése, hogy együtt képesek legyenek megosztani.";
