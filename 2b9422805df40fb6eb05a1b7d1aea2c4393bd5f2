@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1802f158_5f51ea2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-01T19:57:52Z",
+      "side": 1,
+      "message": "commit message summary should be less than 50 characters.",
+      "revId": "2b9422805df40fb6eb05a1b7d1aea2c4393bd5f2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65c11d10_6de1c681",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-01T19:57:52Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "2b9422805df40fb6eb05a1b7d1aea2c4393bd5f2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
