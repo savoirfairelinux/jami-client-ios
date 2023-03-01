@@ -396,4 +396,8 @@ class ConversationModel: Equatable {
         unorderedInteractions = [String]()
         numberOfUnreadMessages.accept(0)
     }
+
+    func isCoreDilaog(for jamiId: String) -> Bool {
+        return self .. isCoredialog() && self.getParticipants().first?.jamiId == text
+    }
 }

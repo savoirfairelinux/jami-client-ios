@@ -634,6 +634,10 @@ extension ConversationViewModel {
         self.locationSharingService.stopSharingLocation(accountId: account.id,
                                                         contactUri: jamiId)
     }
+
+    func model() -> ConversationModel {
+        return self.conversation.value
+    }
 }
 
 // MARK: share message
@@ -705,5 +709,11 @@ extension ConversationViewModel {
         } else {
             self.dataTransferService.sendAndSaveFile(displayName: displayName, conversation: self.conversation.value, imageData: imageData)
         }
+    }
+}
+
+extension ConversationViewModel: Equatable {
+    static func == (lhs: ConversationViewModel, rhs: ConversationViewModel) -> Bool {
+        lhs.conversation.value == rhs.conversation.value
     }
 }
