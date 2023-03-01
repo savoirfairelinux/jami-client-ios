@@ -29,7 +29,7 @@ class SwarmCreationUIModel: ObservableObject {
     let disposeBag = DisposeBag()
     private let accountId: String
     private let conversationService: ConversationsService
-    private var swarmInfo: SwarmInfo
+    private var swarmInfo: SwarmInfoProtocol
     var swarmCreated: ((Bool) -> Void)
 
     @Published var swarmName: String = ""

@@ -18,20 +18,25 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import Foundation
-import RxSwift
+import XCTest
+@testable import Ring
 
-class SwarmInfoViewModel: Stateable, ViewModel {
-    private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+final class SwarmInfoTests: XCTestCase {
 
-    var swarmInfo: SwarmInfoProtocol?
-
-    let injectionBag: InjectionBag
-
-    required init(with injectionBag: InjectionBag) {
-        self.injectionBag = injectionBag
+    override func setUpWithError() throws {
+        try super.setUpWithError()
     }
+
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+    }
+
+    func createParticipant(jamiId: String, role: ParticipantRole, registeredName: String,
+                           profileName: String) -> ParticipantInfo {
+        let participant = ParticipantInfo(jamiId: jamiId, role: role)
+        participant.registeredName.accept(registeredName)
+        participant.profileName.accept(profileName)
+        return participant
+    }
+
 }

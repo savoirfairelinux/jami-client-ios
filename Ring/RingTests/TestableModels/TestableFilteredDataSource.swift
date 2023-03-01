@@ -19,19 +19,13 @@
  */
 
 import Foundation
-import RxSwift
+@testable import Ring
 
-class SwarmInfoViewModel: Stateable, ViewModel {
-    private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
+class TestableFilteredDataSource: FilterConversationDataSource {
 
-    var swarmInfo: SwarmInfoProtocol?
+    var conversationViewModels: [Ring.ConversationViewModel]
 
-    let injectionBag: InjectionBag
-
-    required init(with injectionBag: InjectionBag) {
-        self.injectionBag = injectionBag
+    init(conversations: [Ring.ConversationViewModel]) {
+        self.conversationViewModels = conversations
     }
 }
