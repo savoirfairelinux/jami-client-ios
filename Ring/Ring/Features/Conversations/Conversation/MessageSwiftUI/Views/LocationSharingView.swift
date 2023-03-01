@@ -60,9 +60,9 @@ struct LocationSharingView: View {
                             .background(Color(UIColor.darkGray))
                             .cornerRadius(radius: viewCornerRadius, corners: [.topLeft, .topRight])
                             ZStack(alignment: .bottom) {
-                                MapView(coordinates: $coordinates)
+                                MapView(coordinates: $coordinates, shouldShowZoomButton: true)
                                 createCopyrigtButton()
-                                    .padding(.all, 5)
+                                    .padding(.all, 10)
                             }
                         }
 
@@ -89,12 +89,12 @@ struct LocationSharingView: View {
                                             .font(.callout)
                                     }
                                     .padding([.leading, .trailing], 15)
-                                    .padding([.top, .bottom], 15)
+                                    .frame(height: 50)
                                     .background(Color.red)
                                     .foregroundColor(.black)
-                                    .cornerRadius(20)
+                                    .cornerRadius(16)
                                 }
-                                .padding(.bottom, 10)
+                                .padding(.bottom, 15)
                             }
                         }
                     }
