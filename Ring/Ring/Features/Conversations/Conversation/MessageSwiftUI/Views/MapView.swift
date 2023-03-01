@@ -30,20 +30,15 @@ class LocationSharingAnnotation: NSObject, MKAnnotation {
     }
 }
 
-class MapViewWrapper: NSObject {
-    let mapView: MapView
-
-    init(mapView: MapView) {
-        self.mapView = mapView
-    }
-}
-
 struct MapView: UIViewRepresentable {
-    @Binding var coordinates: [(CLLocationCoordinate2D, UIImage)]
+    @Binding var coordinates: [(CLLocationCoordinate2D, UIImage)] {
+        didSet {
+            zoomMap(mapView: mapView)
+        }
+    }
+    let mapView = MKMapView()
 
     func makeUIView(context: Context) -> MKMapView {
-        let mapView = MKMapView()
-
         mapView.delegate = context.coordinator
         // Add an OpenStreetMap tile overlay to the map view.
         let urlTemplate = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -51,21 +46,25 @@ struct MapView: UIViewRepresentable {
         overlay.canReplaceMapContent = true
         mapView.addOverlay(overlay, level: .aboveLabels)
 
-        addPinsAndZoom(mapView: mapView)
+        addPins(mapView: mapView)
+        zoomMap(mapView: mapView)
         return mapView
     }
 
     func updateUIView(_ view: MKMapView, context: Context) {
-        addPinsAndZoom(mapView: view)
+        addPins(mapView: view)
     }
 
-    func addPinsAndZoom(mapView: MKMapView) {
+    func addPins(mapView: MKMapView) {
         mapView.removeAnnotations(mapView.annotations)
         for coordinate in coordinates {
             let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
             annotation.avatar = coordinate.1
             mapView.addAnnotation(annotation)
         }
+    }
+
+    func zoomMap(mapView: MKMapView) {
         if let firstCoordinate = coordinates.first {
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegion(center: firstCoordinate.0, span: span)
