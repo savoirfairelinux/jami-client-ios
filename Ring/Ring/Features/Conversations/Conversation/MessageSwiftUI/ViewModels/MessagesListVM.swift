@@ -60,7 +60,7 @@ class MessagesListVM: ObservableObject {
     @Published var isMapOpened = false
     var contactAvatar: UIImage = UIImage()
     var currentAccountAvatar: UIImage = UIImage()
-    var myLocation: Observable<CLLocation?> { return self.locationSharingService.currentLocation.asObservable() }
+    //    var myLocation: Observable<CLLocation?> { return self.locationSharingService.currentLocation.asObservable() }
     var myContactsLocation: CLLocationCoordinate2D?
     var myCoordinate: CLLocationCoordinate2D?
 
@@ -169,7 +169,7 @@ class MessagesListVM: ObservableObject {
             })
             .disposed(by: self.disposeBag)
 
-        self.myLocation
+        self.locationSharingService.currentLocation
             .subscribe(onNext: { [weak self] myCurrentLocation in
                 guard let self = self else { return }
                 if let myCurrentLocation = myCurrentLocation {
