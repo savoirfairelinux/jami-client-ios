@@ -27,7 +27,7 @@ class SwarmInfoViewModel: Stateable, ViewModel {
         return self.stateSubject.asObservable()
     }()
 
-    var swarmInfo: SwarmInfo?
+    var swarmInfo: SwarmInfoProtocol?
 
     let injectionBag: InjectionBag
 

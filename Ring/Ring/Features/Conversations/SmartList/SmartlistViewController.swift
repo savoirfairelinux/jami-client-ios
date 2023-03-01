@@ -113,7 +113,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.setupSearchBar()
-        searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: false)
+        searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: false, delegate: viewModel)
         self.setUpContactRequest()
         conversationsSegmentControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
     }

@@ -166,4 +166,8 @@ extension String {
             .replacingOccurrences(of: "(", with: "")
             .replacingOccurrences(of: ")", with: "")
     }
+
+    func containsCaseInsentative(string: String) -> Bool {
+        return self.range(of: string, options: .caseInsensitive) != nil
+    }
 }

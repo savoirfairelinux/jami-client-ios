@@ -202,6 +202,10 @@
 		26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FD824F7FF9500374570 /* PreviewViewController.swift */; };
 		26074FDB24F7FFC100374570 /* PreviewContollerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */; };
 		26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */; };
+		260AE62529B65A4B00D66D5E /* ContactsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62429B65A4B00D66D5E /* ContactsUtils.swift */; };
+		260AE62729B8E89300D66D5E /* JamiSearchViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62629B8E89300D66D5E /* JamiSearchViewModelTest.swift */; };
+		260AE62929B8ECA400D66D5E /* TestableFilteredDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */; };
+		260AE62B29B8F97300D66D5E /* TestableSwarmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE62A29B8F97300D66D5E /* TestableSwarmInfo.swift */; };
 		260C73F129196B66005C513F /* MessageHistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C73F029196B66005C513F /* MessageHistoryVM.swift */; };
 		260C73F329196C6C005C513F /* MessageStackVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C73F229196C6C005C513F /* MessageStackVM.swift */; };
 		263B7158246D9390007044C4 /* SmartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B7157246D9390007044C4 /* SmartListCell.swift */; };
@@ -214,6 +218,7 @@
 		264EA8862977089C00B6FB6F /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA8852977089C00B6FB6F /* LogViewController.swift */; };
 		264FB66229775B1C00BEFBBF /* SystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FB66129775B1C00BEFBBF /* SystemService.swift */; };
 		264FB66629775B9B00BEFBBF /* SystemAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */; };
+		26581F3129AFEA2400552BEC /* SmartListSearchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26581F3029AFEA2400552BEC /* SmartListSearchingTests.swift */; };
 		2659F65827483656009107F1 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65727483656009107F1 /* VideoManager.swift */; };
 		2659F65C27483A27009107F1 /* DecodingAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */; };
 		265C436A286254C900B4BE73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C4369286254C900B4BE73 /* Constants.swift */; };
@@ -796,6 +801,10 @@
 		26074FD824F7FF9500374570 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		26074FDA24F7FFC100374570 /* PreviewContollerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContollerModel.swift; sourceTree = "<group>"; };
 		26074FDC24F7FFF500374570 /* PreviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewViewController.storyboard; sourceTree = "<group>"; };
+		260AE62429B65A4B00D66D5E /* ContactsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUtils.swift; sourceTree = "<group>"; };
+		260AE62629B8E89300D66D5E /* JamiSearchViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiSearchViewModelTest.swift; sourceTree = "<group>"; };
+		260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableFilteredDataSource.swift; sourceTree = "<group>"; };
+		260AE62A29B8F97300D66D5E /* TestableSwarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableSwarmInfo.swift; sourceTree = "<group>"; };
 		260C73F029196B66005C513F /* MessageHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHistoryVM.swift; sourceTree = "<group>"; };
 		260C73F229196C6C005C513F /* MessageStackVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStackVM.swift; sourceTree = "<group>"; };
 		262AA981262C724700DC34AD /* libfmt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfmt.a; path = ../DEPS/arm64/lib/libfmt.a; sourceTree = "<group>"; };
@@ -810,6 +819,7 @@
 		264EA8852977089C00B6FB6F /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		264FB66129775B1C00BEFBBF /* SystemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemService.swift; sourceTree = "<group>"; };
 		264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAdapterDelegate.swift; sourceTree = "<group>"; };
+		26581F3029AFEA2400552BEC /* SmartListSearchingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartListSearchingTests.swift; sourceTree = "<group>"; };
 		2659F65727483656009107F1 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingAdapterDelegate.swift; sourceTree = "<group>"; };
 		265C4369286254C900B4BE73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -1575,6 +1585,10 @@
 				04399A101D1C2D9D00E99CD9 /* RingTests.swift */,
 				04399A121D1C2D9D00E99CD9 /* Info.plist */,
 				2673D62925261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift */,
+				26581F3029AFEA2400552BEC /* SmartListSearchingTests.swift */,
+				260AE62629B8E89300D66D5E /* JamiSearchViewModelTest.swift */,
+				260AE62829B8ECA400D66D5E /* TestableFilteredDataSource.swift */,
+				260AE62A29B8F97300D66D5E /* TestableSwarmInfo.swift */,
 			);
 			path = RingTests;
 			sourceTree = "<group>";
@@ -1715,6 +1729,7 @@
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
 				0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */,
 				0E99F19F22417A0400CF8BD6 /* JamiURI.swift */,
+				260AE62429B65A4B00D66D5E /* ContactsUtils.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2651,6 +2666,7 @@
 				4430A671236CBC7A00747177 /* ContactPickerViewModel.swift in Sources */,
 				621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */,
 				1A2D18AC1F29149D00B2C785 /* MeCoordinator.swift in Sources */,
+				260AE62529B65A4B00D66D5E /* ContactsUtils.swift in Sources */,
 				1A2D18C51F29180700B2C785 /* ContactModel.swift in Sources */,
 				BB4C6E2629229131001C901A /* ColorExtension.swift in Sources */,
 				269DA09928E23D37007D51D6 /* MessageRowView.swift in Sources */,
@@ -2897,9 +2913,13 @@
 			files = (
 				2673D62A25261DD9000C56CB /* ConferenceMenuItemsManagerTest.swift in Sources */,
 				024B61311DF7656A00C4F9DE /* FixtureFailInitDRingAdapter.mm in Sources */,
+				260AE62B29B8F97300D66D5E /* TestableSwarmInfo.swift in Sources */,
+				26581F3129AFEA2400552BEC /* SmartListSearchingTests.swift in Sources */,
 				5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */,
 				04399A111D1C2D9D00E99CD9 /* RingTests.swift in Sources */,
 				029CE9D71E1D8C860000C8E1 /* ServiceEventTests.swift in Sources */,
+				260AE62929B8ECA400D66D5E /* TestableFilteredDataSource.swift in Sources */,
+				260AE62729B8E89300D66D5E /* JamiSearchViewModelTest.swift in Sources */,
 				024B612C1DF7654F00C4F9DE /* DaemonServiceTests.swift in Sources */,
 				024B61321DF7656A00C4F9DE /* FixtureFailStartDRingAdapter.mm in Sources */,
 			);
@@ -3205,6 +3225,7 @@
 					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
 				);
 				INFOPLIST_FILE = RingTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3230,6 +3251,7 @@
 					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
 				);
 				INFOPLIST_FILE = RingTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3538,6 +3560,7 @@
 					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
 				);
 				INFOPLIST_FILE = RingTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

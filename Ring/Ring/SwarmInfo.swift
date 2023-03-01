@@ -22,29 +22,74 @@ import Foundation
 import RxSwift
 import RxRelay
 
+protocol SwarmInfoProtocol {
+    var avatar: BehaviorRelay<UIImage?> { get set }
+    var title: BehaviorRelay<String> { get set }
+    var color: BehaviorRelay<String> { get set }
+    var type: BehaviorRelay<ConversationType> { get set }
+    var description: BehaviorRelay<String> { get set }
+    var participantsNames: BehaviorRelay<[String]> { get set }
+    var participantsAvatars: BehaviorRelay<[UIImage]> { get set }
+
+    var avatarHeight: CGFloat { get set }
+    var avatarSpacing: CGFloat { get set }
+    var maximumLimit: Int { get set }
+
+    var finalTitle: Observable<String> { get set }
+
+    var finalAvatar: Observable<UIImage> { get set }
+
+    var participants: BehaviorRelay<[ParticipantInfo]> { get set }
+    var contacts: BehaviorRelay<[ParticipantInfo]> { get set }
+    var conversation: ConversationModel? { get set }
+    var id: String { get set }
+
+    func addContacts(contacts: [ContactModel])
+    func hasParticipantWithRegisteredName(name: String) -> Bool
+
+    func hasParticipantWithProfileName(name: String) -> Bool
+
+    func hasParticipantWithRegisteredNameContains(name: String) -> Bool
+
+    func hasParticipantWithProfileNameContains(name: String) -> Bool
+
+    func hasParticipantWithJamiIdContains(name: String) -> Bool
+}
+
 class ParticipantInfo: Equatable, Hashable {
 
     var jamiId: String
     var role: ParticipantRole
     var avatar: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
-    var name = BehaviorRelay(value: "")
+    var registeredName = BehaviorRelay(value: "")
+    var profileName = BehaviorRelay(value: "")
+    var finalName = BehaviorRelay(value: "")
     let disposeBag = DisposeBag()
     var hasProfileAvatar = false
 
     init(jamiId: String, role: ParticipantRole) {
         self.jamiId = jamiId
         self.role = role
-        self.name
+        self.finalName.accept(jamiId)
+        self.finalName
             .subscribe { [weak self] name in
                 guard let self = self else { return }
                 // when profile does not have an avatar, contact image
                 // should be updated each time when name changed.
                 if !self.hasProfileAvatar, !name.isEmpty {
-                    if jamiId == name && self.avatar.value != nil {
-                        return
-                    }
+
                     self.avatar.accept(UIImage.createContactAvatar(username: name, size: CGSize(width: 40, height: 40)))
                 }
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
+        Observable.combineLatest(self.registeredName.asObservable(),
+                                 self.profileName.asObservable())
+            .subscribe {[weak self] (registeredName, profileName) in
+                guard let self = self else { return }
+                let finalName = ContactsUtils.getFinalNameFrom(registeredName: registeredName, profileName: profileName, hash: self.jamiId)
+                self.finalName.accept(finalName)
+
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
@@ -69,8 +114,8 @@ class ParticipantInfo: Equatable, Hashable {
             .take(1)
             .subscribe(onNext: { [weak self] lookupNameResponse in
                 guard let self = self else { return }
-                if let name = lookupNameResponse.name, !name.isEmpty, self.name.value != name {
-                    self.name.accept(name)
+                if let name = lookupNameResponse.name, !name.isEmpty, self.registeredName.value != name {
+                    self.registeredName.accept(name)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -78,7 +123,7 @@ class ParticipantInfo: Equatable, Hashable {
     }
 }
 
-class SwarmInfo {
+class SwarmInfo: SwarmInfoProtocol {
     var avatar: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     var title = BehaviorRelay(value: "")
     var color = BehaviorRelay<String>(value: "")
@@ -90,9 +135,9 @@ class SwarmInfo {
     var avatarHeight: CGFloat = 40
     var avatarSpacing: CGFloat = 2
     var maximumLimit: Int = 8
-    var id: String {
+    lazy var id: String = {
         return conversation?.id ?? ""
-    }
+    }()
 
     lazy var finalTitle: Observable<String> = {
         return Observable
@@ -184,11 +229,41 @@ class SwarmInfo {
         self.insertAndSortContacts(contacts: contactsInfo)
     }
 
+    func hasParticipantWithRegisteredName(name: String) -> Bool {
+        return !self.participants.value.filter { participant in
+            participant.registeredName.value == name
+        }.isEmpty
+    }
+
+    func hasParticipantWithProfileName(name: String) -> Bool {
+        return !self.participants.value.filter { participant in
+            participant.profileName.value == name
+        }.isEmpty
+    }
+
+    func hasParticipantWithRegisteredNameContains(name: String) -> Bool {
+        return !self.participants.value.filter { participant in
+            participant.registeredName.value.containsCaseInsentative(string: name)
+        }.isEmpty
+    }
+
+    func hasParticipantWithProfileNameContains(name: String) -> Bool {
+        return !self.participants.value.filter { participant in
+            participant.profileName.value.containsCaseInsentative(string: name)
+        }.isEmpty
+    }
+
+    func hasParticipantWithJamiIdContains(name: String) -> Bool {
+        return !self.participants.value.filter { participant in
+            participant.jamiId.containsCaseInsentative(string: name)
+        }.isEmpty
+    }
+
     private func subscribeParticipantsInfo() {
         tempBag = DisposeBag()
         let namesObservable = participants.value
             .map({ participantInfo in
-                return participantInfo.name.share().asObservable()
+                return participantInfo.finalName.share().asObservable()
             })
         Observable
             .combineLatest(namesObservable) { (items: [String]) -> [String] in
@@ -320,28 +395,20 @@ class SwarmInfo {
             self.profileService
                 .getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
                 .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe { [weak self, weak participantInfo] profile in
-                    guard let self = self, let participantInfo = participantInfo else { return }
+                .subscribe { [weak participantInfo] profile in
+                    guard let participantInfo = participantInfo else { return }
                     if let imageString = profile.photo, let image = imageString.createImage() {
                         participantInfo.avatar.accept(image)
                         participantInfo.hasProfileAvatar = true
                     }
                     if let profileName = profile.alias, !profileName.isEmpty {
-                        participantInfo.name.accept(profileName)
-                    }
-                    if participantInfo.avatar.value == nil || participantInfo.name.value.isEmpty {
-                        if participantInfo.name.value.isEmpty {
-                            participantInfo.name.accept(jamiId)
-                        }
-                        participantInfo.lookupName(nameService: self.nameService, accountId: self.accountId)
+                        participantInfo.profileName.accept(profileName)
                     }
                 } onError: { _ in
                 }
                 .disposed(by: participantInfo.disposeBag)
-        } else {
-            participantInfo.name.accept(jamiId)
-            participantInfo.lookupName(nameService: self.nameService, accountId: self.accountId)
         }
+        participantInfo.lookupName(nameService: self.nameService, accountId: self.accountId)
         return participantInfo
     }
 
@@ -357,7 +424,7 @@ class SwarmInfo {
         currentValue = currentValue.filter({ [.invited, .member, .admin].contains($0.role) })
         currentValue.sort { participant1, participant2 in
             if participant1.role == participant2.role {
-                return participant1.name.value > participant2.name.value
+                return participant1.finalName.value > participant2.finalName.value
             } else {
                 switch participant1.role {
                 case .admin:
@@ -407,7 +474,7 @@ class SwarmInfo {
         if participantsCount == 2, let localJamiId = self.localJamiId,
            let name = self.participants.value.filter({ info in
             return info.jamiId != localJamiId
-           }).first?.name.value {
+           }).first?.finalName.value {
             return name
         }
         // replaece local name with "me"
@@ -415,7 +482,7 @@ class SwarmInfo {
         if let localJamiId = self.localJamiId,
            let name = self.participants.value.filter({ info in
             return info.jamiId == localJamiId
-           }).first?.name.value {
+           }).first?.finalName.value {
             localName = name
         }
         var namesVariable = names

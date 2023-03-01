@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2020 Savoir-faire Linux Inc.
+ *  Copyright (C) 2020-2023 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
@@ -24,21 +24,39 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 
+enum SearchStatus {
+    case notSearching
+    case searching
+    case noResult
+
+    func toString() -> String {
+        switch self {
+        case .notSearching:
+            return ""
+        case .searching:
+            return L10n.Smartlist.searching
+        case .noResult:
+            return L10n.Smartlist.noResults
+        }
+    }
+}
+
 protocol FilterConversationDataSource {
     var conversationViewModels: [ConversationViewModel] { get set }
+}
 
-    func conversationFound(conversation: ConversationViewModel?, name: String)
+protocol FilterConversationDelegate: AnyObject {
+    func temporaryConversationCreated(conversation: ConversationViewModel?)
     func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel)
 }
 
 class JamiSearchViewModel {
-
-    struct UserSearchModel {
+    struct JamsUserSearchModel {
         var username, firstName, lastName, organization, jamiId: String
         var profilePicture: Data?
     }
 
-    let log = SwiftyBeaver.self
+    private let log = SwiftyBeaver.self
 
     // Services
     private let nameService: NameService
@@ -49,21 +67,15 @@ class JamiSearchViewModel {
 
     lazy var searchResults: Observable<[ConversationSection]> = {
         return Observable<[ConversationSection]>
-            .combineLatest(self.contactFoundConversation.asObservable(),
+            .combineLatest(self.temporaryConversation.asObservable(),
                            self.filteredResults.asObservable(),
-                           self.jamsResults.asObservable(),
-                           resultSelector: { contactFoundConversation, filteredResults, jamsResults in
+                           self.jamsTemporaryResults.asObservable(),
+                           resultSelector: { temporaryConversation, filteredResults, jamsTemporaryResults in
                             var sections = [ConversationSection]()
-                            let jamsResults = JamiSearchViewModel.removeFilteredConversations(from: jamsResults,
-                                                                                              with: filteredResults)
-                            if !jamsResults.isEmpty {
-                                sections.append(ConversationSection(header: L10n.Smartlist.results, items: jamsResults))
-                            } else if contactFoundConversation != nil {
-                                let contactFoundConversation = JamiSearchViewModel.removeFilteredConversations(from: [contactFoundConversation!],
-                                                                                                               with: filteredResults)
-                                if !contactFoundConversation.isEmpty {
-                                    sections.append(ConversationSection(header: L10n.Smartlist.results, items: contactFoundConversation))
-                                }
+                            if !jamsTemporaryResults.isEmpty {
+                                sections.append(ConversationSection(header: L10n.Smartlist.results, items: jamsTemporaryResults))
+                            } else if let temporaryConversation = temporaryConversation {
+                                sections.append(ConversationSection(header: L10n.Smartlist.results, items: [temporaryConversation]))
                             }
                             if !filteredResults.isEmpty {
                                 sections.append(ConversationSection(header: L10n.Smartlist.conversations, items: filteredResults))
@@ -73,14 +85,23 @@ class JamiSearchViewModel {
             .observe(on: MainScheduler.instance)
     }()
 
-    private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
+    // Temporary conversation created when perform search for a new contact.
+    private var temporaryConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
+
+    /*
+     Existing conversations with the title containing search result or one of
+     the participant's name containing search result.
+     */
     private var filteredResults = BehaviorRelay(value: [ConversationViewModel]())
-    private let jamsResults = BehaviorRelay<[ConversationViewModel]>(value: [])
+
+    // Jams temporary conversations created when perform search for a new contact
+    private let jamsTemporaryResults = BehaviorRelay<[ConversationViewModel]>(value: [])
 
     let searchBarText = BehaviorRelay<String>(value: "")
     var isSearching: Observable<Bool>!
-    var searchStatus = PublishSubject<String>()
-    let dataSource: FilterConversationDataSource
+    var searchStatus = PublishSubject<SearchStatus>()
+    private let dataSource: FilterConversationDataSource
+    private weak var delegate: FilterConversationDelegate?
 
     init(with injectionBag: InjectionBag, source: FilterConversationDataSource) {
         self.nameService = injectionBag.nameService
@@ -88,14 +109,14 @@ class JamiSearchViewModel {
         self.injectionBag = injectionBag
         self.dataSource = source
 
-        // Observes if the user is searching
+        // Observes if the user is searching.
         self.isSearching = searchBarText.asObservable()
             .map({ text in
                 return !text.isEmpty
             })
             .observe(on: MainScheduler.instance)
 
-        // Observes search bar text
+        // Observes search bar text.
         searchBarText.asObservable()
             .observe(on: MainScheduler.instance)
             .distinctUntilChanged()
@@ -104,84 +125,48 @@ class JamiSearchViewModel {
             })
             .disposed(by: disposeBag)
 
-        // Observe username lookup
+        // Observe username lookup.
         self.nameService.usernameLookupStatus
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak injectionBag] lookupResponse in
-                guard let self = self else { return }
-                if lookupResponse.state == .found && (lookupResponse.name == self.searchBarText.value || lookupResponse.address == self.searchBarText.value) {
-                    if let conversation = self.dataSource.conversationViewModels
-                        .filter({ conversationViewModel in
-                                    conversationViewModel.conversation.value.containsParticipant(participant: lookupResponse.address) }).first {
-                        self.contactFoundConversation.accept(conversation)
-                        self.dataSource.conversationFound(conversation: conversation, name: self.searchBarText.value)
-
-                    } else if !(self.contactFoundConversation.value?.conversation.value.containsParticipant(participant: lookupResponse.address) ?? false),
-                              let account = self.accountsService.currentAccount,
-                              let injectionBag = injectionBag {
-
-                        let uri = JamiURI.init(schema: URIType.ring, infoHach: lookupResponse.address)
-                        // Create new converation
-                        let conversation = ConversationModel(withParticipantUri: uri, accountId: account.id)
-                        let newConversation = ConversationViewModel(with: injectionBag)
-                        if lookupResponse.name == self.searchBarText.value {
-                            newConversation.userName.accept(lookupResponse.name)
-                        }
-                        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
-                        self.contactFoundConversation.accept(newConversation)
-                        self.dataSource.conversationFound(conversation: newConversation, name: self.searchBarText.value)
-                    }
-                    self.searchStatus.onNext("")
-                } else {
-                    if self.filteredResults.value.isEmpty && self.contactFoundConversation.value == nil {
-                        self.searchStatus.onNext(L10n.Smartlist.noResults)
-                    } else {
-                        self.searchStatus.onNext("")
-                    }
+            .subscribe(onNext: { [weak self] lookupResponse in
+                guard let self = self,
+                      let account = self.accountsService.currentAccount else { return }
+                guard lookupResponse.state == .found,
+                      lookupResponse.name == self.searchBarText.value else {
+                    self.updateSearchStatus()
+                    return
                 }
+                // username exists, create a new temporary conversation model
+                let tempConversation = self.createTemporarySwarmConversation(with: lookupResponse.address, accountId: account.id, userName: lookupResponse.name)
+                self.temporaryConversationCreated(tempConversation: tempConversation)
+                self.updateSearchStatus()
             })
             .disposed(by: disposeBag)
 
+        // Observe jams search results.
         self.nameService
             .userSearchResponseShared
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] nameSearchResponse in
                 guard let self = self,
                       let results = nameSearchResponse.results as? [[String: String]],
-                      let account = self.accountsService.currentAccount else { return }
-
-                let deserializeUser = { (dictionary: [String: String]) -> UserSearchModel? in
-                    guard let username = dictionary["username"], let firstName = dictionary["firstName"],
-                          let lastName = dictionary["lastName"], let organization = dictionary["organization"],
-                          let jamiId = dictionary["id"] ?? dictionary["jamiId"], let base64Encoded = dictionary["profilePicture"]
-                    else { return nil }
-
-                    return UserSearchModel(username: username, firstName: firstName,
-                                           lastName: lastName, organization: organization, jamiId: jamiId,
-                                           profilePicture: NSData(base64Encoded: base64Encoded,
-                                                                  options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?)
+                      let account = self.accountsService.currentAccount else {
+                    return
                 }
-
-                var newConversations: [ConversationViewModel] = []
-                for result in results {
-                    if let user = deserializeUser(result) {
-
-                        let uri = JamiURI.init(schema: URIType.ring, infoHach: user.jamiId)
-                        let conversation = ConversationModel(withParticipantUri: uri, accountId: account.id)
-                        conversation.type = .jams
-                        let newConversation = ConversationViewModel(with: injectionBag,
-                                                                    conversation: conversation,
-                                                                    user: user)
-                        newConversations.append(newConversation)
-                    }
+                // convert dictionary result to [UserSearchModel]
+                let users = results.map { result in
+                    return ContactsUtils.deserializeUser(dictionary: result)
                 }
-                self.jamsResults.accept(newConversations)
+                .compactMap { $0 }
+                // Create temporary conversations for search results.
+                var jamsSearch = self.convertToConversations(from: users, accountId: account.id)
+                // Filter out existing conversations (filtered results).
+                jamsSearch = JamiSearchViewModel
+                    .removeFilteredConversations(from: jamsSearch,
+                                                 with: self.filteredResults.value)
+                self.jamsTemporaryResults.accept(jamsSearch)
+                self.updateSearchStatus()
 
-                if self.filteredResults.value.isEmpty && self.jamsResults.value.isEmpty {
-                    self.searchStatus.onNext(L10n.Smartlist.noResults)
-                } else {
-                    self.searchStatus.onNext("")
-                }
             })
             .disposed(by: self.disposeBag)
     }
@@ -189,78 +174,200 @@ class JamiSearchViewModel {
     static func removeFilteredConversations(from conversationViewModels: [ConversationViewModel],
                                             with filteredResults: [ConversationViewModel]) -> [ConversationViewModel] {
         return conversationViewModels
-            .filter({ [filteredResults] found -> Bool in
-                return filteredResults
-                    .first(where: { (filtered) -> Bool in
-                        found.conversation.value.getParticipants()[0].jamiId == filtered.conversation.value.getParticipants()[0].jamiId
-                    }) == nil
-            })
+            .filter({ !filteredResults.contains($0) })
     }
 
-    private func search(withText text: String) {
-        guard let currentAccount = self.accountsService.currentAccount else { return }
+    func updateSearchStatus() {
+        if self.filteredResults.value.isEmpty && self.jamsTemporaryResults.value.isEmpty && self.temporaryConversation.value == nil {
+            self.searchStatus.onNext(.noResult)
+        } else {
+            self.searchStatus.onNext(.notSearching)
+        }
+    }
 
-        self.contactFoundConversation.accept(nil)
-        self.jamsResults.accept([])
-        self.dataSource.conversationFound(conversation: nil, name: "")
-        self.filteredResults.accept([])
-        self.searchStatus.onNext("")
+    func setDelegate(delegate: FilterConversationDelegate?) {
+        self.delegate = delegate
+    }
 
-        if text.isEmpty { return }
+    private func temporaryConversationCreated(tempConversation: ConversationViewModel?) {
+        self.temporaryConversation.accept(tempConversation)
+        if let delegate = self.delegate {
+            delegate.temporaryConversationCreated(conversation: tempConversation)
+        }
+    }
 
-        // Filter conversations
-        let filteredConversations =
+    func isConversation(_ conversation: ConversationViewModel, contains searchQuery: String) -> Bool {
+        /*
+         For swarm conversation check if conversation title or one of the participant's
+         name or jamiId contains search text. For SIP, non swarm and jams conversations
+         check userName, displayName and participant hash.
+         */
+        let model = conversation.model()
+        let username = conversation.userName.value
+        let displayName = conversation.displayName.value
+        if conversation.model().isSwarm() {
+            guard let swarmInfo = conversation.swarmInfo else { return false }
+            return swarmInfo.hasParticipantWithProfileNameContains(name: searchQuery) ||
+                swarmInfo.hasParticipantWithRegisteredNameContains(name: searchQuery) ||
+                swarmInfo.hasParticipantWithJamiIdContains(name: searchQuery) ||
+                swarmInfo.title.value.containsCaseInsentative(string: searchQuery)
+        } else {
+            var displayNameContainsText = false
+            if let displayName = conversation.displayName.value {
+                displayNameContainsText = displayName.containsCaseInsentative(string: searchQuery)
+            }
+            var participantHashContainsText = false
+            if let hash = conversation.model().getParticipants().first?.jamiId {
+                participantHashContainsText = hash.containsCaseInsentative(string: searchQuery)
+            }
+            return conversation.userName.value.containsCaseInsentative(string: searchQuery) ||
+                displayNameContainsText || participantHashContainsText
+        }
+    }
+
+    private func getFilteredConversations(for searchQuery: String) -> [ConversationViewModel]? {
+        let conversations =
             self.dataSource.conversationViewModels
-            .filter({conversationViewModel in
-                conversationViewModel.conversation.value.accountId == currentAccount.id &&
-                    (conversationViewModel.conversation.value.containsParticipant(participant: text) ||
-                        (conversationViewModel.displayName.value ?? "").capitalized.contains(text.capitalized))
+            .filter({conversation in
+                return self.isConversation(conversation, contains: searchQuery)
             })
+        return conversations
+    }
 
-        if !filteredConversations.isEmpty {
+    func isConversation(_ conversation: ConversationViewModel, match searchQuery: String) -> Bool {
+        guard conversation.model().isCoredialog() else {
+            return false
+        }
+        if searchQuery.isSHA1() {
+            return conversation.model().getParticipants().first?.jamiId == searchQuery
+        }
+        if conversation.model().isSwarm() {
+            return conversation.swarmInfo?.hasParticipantWithRegisteredName(name: searchQuery) ?? false
+        }
+        return conversation.userName.value == searchQuery
+    }
+
+    func isConversationExists(for searchQuery: String) -> Bool {
+        let coreDialog = self.dataSource.conversationViewModels
+            .filter({conversation in
+                self.isConversation(conversation, match: searchQuery)
+            }).first
+        return coreDialog != nil
+    }
+
+    private func createTemporaryConversation(searchQuery: String, account: AccountModel) -> ConversationViewModel {
+        switch account.type {
+        case .sip:
+            return self.createTemporarySipConversation(with: searchQuery, account: account)
+        case .ring:
+            return self.createTemporarySwarmConversation(with: searchQuery, accountId: account.id)
+        }
+    }
+
+    // Filter existing conversations, perform name lookup and create temporary conversations.
+    private func search(withText searchQuery: String) {
+        self.cleanUpPreviousSearch()
+        if searchQuery.isEmpty { return }
+        if let filteredConversations = getFilteredConversations(for: searchQuery) {
             self.filteredResults.accept(filteredConversations)
         }
+        self.addTemporaryConversationsIfNeed(searchQuery: searchQuery)
+    }
 
+    private func addTemporaryConversationsIfNeed(searchQuery: String) {
+        guard let currentAccount = self.accountsService.currentAccount else { return }
+        /*
+         For jams account perform searchUser. Temporary conversations will be added
+         when search result received. We should perform search even if a conversation
+         already exists to get results with similar names. There why it is done before
+         checking isConversationExists.
+         */
         if self.accountsService.isJams(for: currentAccount.id) {
-            self.nameService.searchUser(withAccount: currentAccount.id, query: text)
-            self.searchStatus.onNext(L10n.Smartlist.searching)
+            self.performSearch(searchQuery: searchQuery, accounId: currentAccount.id, isJams: true)
             return
         }
+        // If conversation already exists we do not need to create temporary conversation.
+        if self.isConversationExists(for: searchQuery) {
+            return
+        }
+        /*
+         For jami account perform name lookup if text to search is not contact
+         hash(not SHA1 format) and return because temporary conversation will be
+         added when lookup ended.
+         */
+        if currentAccount.type == .ring && !searchQuery.isSHA1() {
+            self.performLookup(searchQuery: searchQuery, accounId: currentAccount.id, isJams: false)
+            return
+        }
+        let tempConversation = self.createTemporaryConversation(searchQuery: searchQuery, account: currentAccount)
+        self.temporaryConversationCreated(tempConversation: tempConversation)
+    }
 
-        if currentAccount.type == AccountType.sip {
-            let trimmed = text.trimmedSipNumber()
-            let uri = JamiURI.init(schema: URIType.sip, infoHach: trimmed, account: currentAccount)
-            let conversation = ConversationModel(withParticipantUri: uri,
-                                                 accountId: currentAccount.id,
-                                                 hash: trimmed)
-            conversation.type = .sip
-            let newConversation = ConversationViewModel(with: self.injectionBag)
-            newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
-            self.contactFoundConversation.accept(newConversation)
-            self.dataSource.conversationFound(conversation: newConversation, name: trimmed)
-            return
+    private func performLookup(searchQuery: String, accounId: String, isJams: Bool) {
+        self.searchStatus.onNext(.searching)
+        if isJams {
+            self.nameService.searchUser(withAccount: accounId, query: searchQuery)
+        } else {
+            self.nameService.lookupName(withAccount: accounId, nameserver: "", name: searchQuery)
         }
+    }
 
-        if !text.isSHA1() {
-            self.nameService.lookupName(withAccount: currentAccount.id, nameserver: "", name: text)
-            self.searchStatus.onNext(L10n.Smartlist.searching)
-            return
-        }
+    private func cleanUpPreviousSearch() {
+        self.temporaryConversationCreated(tempConversation: nil)
+        self.jamsTemporaryResults.accept([])
+        self.filteredResults.accept([])
+    }
 
-        // check if conversation already exists
-        if let existingConversation = self.contactFoundConversation.value, existingConversation.conversation.value.containsParticipant(participant: text) {
-            return
+    private func convertToConversations(from searchModels: [JamiSearchViewModel.JamsUserSearchModel], accountId: String) -> [ConversationViewModel] {
+        var jamsSearch: [ConversationViewModel] = []
+        for model in searchModels {
+            let newConversation = self.createTemporaryJamsConversation(with: model, accountId: accountId)
+            jamsSearch.append(newConversation)
         }
-        let uri = JamiURI.init(schema: URIType.ring, infoHach: text)
+        return jamsSearch
+    }
+
+    private func createTemporarySwarmConversation(with hash: String, accountId: String, userName: String? = nil) -> ConversationViewModel {
+        let uri = JamiURI.init(schema: URIType.ring, infoHach: hash)
         let conversation = ConversationModel(withParticipantUri: uri,
-                                             accountId: currentAccount.id)
+                                             accountId: accountId)
+        conversation.type = .oneToOne
         let newConversation = ConversationViewModel(with: self.injectionBag)
+        if let userName = userName {
+            newConversation.userName.accept(userName)
+        } else {
+            newConversation.userName.accept(hash)
+        }
         newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
-        self.contactFoundConversation.accept(newConversation)
-        self.dataSource.conversationFound(conversation: newConversation, name: self.searchBarText.value)
+        return newConversation
+    }
+
+    private func createTemporarySipConversation(with searchQuery: String, account: AccountModel) -> ConversationViewModel {
+        let trimmed = searchQuery.trimmedSipNumber()
+        let uri = JamiURI.init(schema: URIType.sip, infoHach: trimmed, account: account)
+        let conversation = ConversationModel(withParticipantUri: uri,
+                                             accountId: account.id,
+                                             hash: trimmed)
+        conversation.type = .sip
+        let newConversation = ConversationViewModel(with: self.injectionBag)
+        newConversation.userName.accept(trimmed)
+        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+        return newConversation
+    }
+
+    private func createTemporaryJamsConversation(with user: JamsUserSearchModel, accountId: String) -> ConversationViewModel {
+        let uri = JamiURI.init(schema: URIType.ring, infoHach: user.jamiId)
+        let conversation = ConversationModel(withParticipantUri: uri, accountId: accountId)
+        conversation.type = .jams
+        let newConversation = ConversationViewModel(with: injectionBag,
+                                                    conversation: conversation,
+                                                    user: user)
+        return newConversation
     }
 
     func showConversation(conversation: ConversationViewModel) {
-        dataSource.showConversation(withConversationViewModel: conversation)
+        if let delegate = delegate {
+            delegate.showConversation(withConversationViewModel: conversation)
+        }
     }
 }
