@@ -33,10 +33,12 @@ class LocationSharingAnnotation: NSObject, MKAnnotation {
 struct MapView: UIViewRepresentable {
     @Binding var coordinates: [(CLLocationCoordinate2D, UIImage)] {
         didSet {
-            zoomMap(mapView: mapView)
+            zoomMap()
         }
     }
-    let mapView = MKMapView()
+    @SwiftUI.State var shouldShowZoomButton: Bool = false
+    private let mapView = MKMapView()
+    private let button = UIButton(type: .custom)
 
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
@@ -46,8 +48,32 @@ struct MapView: UIViewRepresentable {
         overlay.canReplaceMapContent = true
         mapView.addOverlay(overlay, level: .aboveLabels)
 
+        if shouldShowZoomButton {
+            button.frame = CGRect(origin: CGPoint(x: mapView.center.x, y: mapView.center.y), size: CGSize(width: 55, height: 55))
+            button.backgroundColor = .black
+            button.layer.cornerRadius = 16
+            button.setImage(UIImage(systemName: "location.fill"), for: [])
+            button.tintColor = .white
+
+            button.translatesAutoresizingMaskIntoConstraints = false
+
+            mapView.addSubview(button)
+            mapView.bringSubviewToFront(button)
+
+            NSLayoutConstraint.activate([
+                button.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -100),
+                button.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -20),
+                button.heightAnchor.constraint(equalToConstant: 55),
+                button.widthAnchor.constraint(equalToConstant: 55)
+            ])
+
+            button.addAction(UIAction(handler: { _ in
+                zoomMap()
+            }), for: .touchUpInside)
+        }
+
         addPins(mapView: mapView)
-        zoomMap(mapView: mapView)
+        zoomMap()
         return mapView
     }
 
@@ -64,7 +90,7 @@ struct MapView: UIViewRepresentable {
         }
     }
 
-    func zoomMap(mapView: MKMapView) {
+    func zoomMap() {
         if let firstCoordinate = coordinates.first {
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegion(center: firstCoordinate.0, span: span)
