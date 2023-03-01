@@ -229,13 +229,17 @@ extension LocationSharingService {
     }
 
     func startSharingLocation(from accountId: String, to recipientUri: String, duration: TimeInterval) {
-        guard !self.isAlreadySharing(accountId: accountId, contactUri: recipientUri) else { return }
+        guard !self.isAlreadySharingMyLocation(accountId: accountId, contactUri: recipientUri) else { return }
 
         let instanceToInsert = OutgoingLocationSharingInstance(locationSharingService: self,
                                                                accountId: accountId,
                                                                contactUri: recipientUri,
                                                                duration: duration)
         self.outgoingInstances.insertOrUpdate(instanceToInsert)
+
+        if let location = CLLocationManager().location {
+            self.currentLocation.accept(location)
+        }
 
         self.locationManager.startUpdatingLocation()
         self.locationManager.allowsBackgroundLocationUpdates = true
