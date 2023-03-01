@@ -826,39 +826,6 @@ class ConversationViewController: UIViewController,
     }
 }
 
-extension ConversationViewController {
-
-    private func deleteCellSetup(_ cell: MessageCell) {
-        cell.deleteMessage
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak cell] (shouldDelete) in
-                guard shouldDelete, let self = self, let cell = cell, let messageId = cell.messageId else { return }
-
-                self.isExecutingDeleteMessage = true
-                self.viewModel.deleteLocationMessage(messageId: messageId)
-            })
-            .disposed(by: cell.disposeBag)
-    }
-
-    private func tapToShowTimeCellSetup(_ cell: MessageCell) {
-        cell.tappedToShowTime
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self, weak cell] (tappedToShowTime) in
-                guard tappedToShowTime, let self = self, let cell = cell else { return }
-
-                let hide = !(cell.timeLabel!.isHidden)
-                if hide {
-                    cell.toggleCellTimeLabelVisibility()
-                }
-
-                self.tableView.performBatchUpdates({
-                    self.tableView.updateConstraintsIfNeeded()
-                }, completion: { _ in if !hide { cell.toggleCellTimeLabelVisibility() } })
-            })
-            .disposed(by: cell.disposeBag)
-    }
-}
-
 // MARK: Location sharing
 extension ConversationViewController {
     private func locationSharingAction() -> UIAlertAction {

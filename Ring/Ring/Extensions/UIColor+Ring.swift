@@ -92,10 +92,7 @@ extension UIColor {
     static let jamiSecondary = UIColor(hex: 0x1F4971, alpha: 1.0)
     static let jamiButtonLight = UIColor(hex: 0x285F97, alpha: 1.0)
     static let jamiButtonDark = UIColor(hex: 0x0F2643, alpha: 1.0)
-    static let jamiMsgCellEmoji = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
     static let jamiMsgCellSent = UIColor(hex: 0x367BC1, alpha: 1.0)
-    static let jamiMsgCellSentText = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0)
-    static let jamiMsgCellWebLink = UIColor(red: 232, green: 232, blue: 232, alpha: 1.0)
     static var jamiMsgCellReceived: UIColor {
         return UIColor(named: "background_msg_received") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
     }
