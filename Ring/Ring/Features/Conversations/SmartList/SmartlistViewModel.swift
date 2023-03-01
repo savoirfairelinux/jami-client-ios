@@ -52,7 +52,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     var searching = PublishSubject<Bool>()
 
-    private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
+    // private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
 
     lazy var hideNoConversationsMessage: Observable<Bool> = {
         return Observable<Bool>
@@ -155,10 +155,12 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                         }).first {
                             conversationViewModel = foundConversationViewModel
                             conversationViewModel?.conversation.accept(conversationModel)
-                        } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
-                            conversationViewModel = contactFound
-                            self.conversationViewModels.append(contactFound)
-                        } else {
+                        }
+                        //                        else if let contactFound = self.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
+                        //                            conversationViewModel = contactFound
+                        //                            self.conversationViewModels.append(contactFound)
+                        //                        }
+                        else {
                             conversationViewModel = ConversationViewModel(with: self.injectionBag)
                             conversationViewModel?.conversation = BehaviorRelay<ConversationModel>(value: conversationModel)
                             if let conversation = conversationViewModel {
@@ -282,9 +284,9 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     /// For FilterConversationDataSource protocol
-    func conversationFound(conversation: ConversationViewModel?, name: String) {
-        contactFoundConversation.accept(conversation)
-    }
+        func conversationFound(conversation: ConversationViewModel?, name: String) {
+           // contactFoundConversation.accept(conversation)
+        }
 
     func delete(conversationViewModel: ConversationViewModel) {
         conversationViewModel.closeAllPlayers()

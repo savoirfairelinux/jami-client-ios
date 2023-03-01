@@ -26,7 +26,7 @@ struct MemberList: View {
     var body: some View {
         List {
             ForEach(viewmodel.swarmInfo.participants.value, id: \.self) {
-                MemberItem(image: $0.avatar.value, name: $0.name.value.isEmpty ? $0.jamiId : $0.name.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
+                MemberItem(image: $0.avatar.value, name: $0.finalName.value.isEmpty ? $0.jamiId : $0.finalName.value, role: $0.role == .member ? "" : $0.role.stringValue, isInvited: $0.role == .invited)
                     .deleteDisabled($0.role == .admin)
             }
             .onDelete(perform: viewmodel.isAdmin ? delete : nil)
