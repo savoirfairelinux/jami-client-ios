@@ -42,8 +42,6 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
         return self.accountService.currentAccount
     }()
 
-    private var lookupName = BehaviorRelay<String?>(value: "")
-
     var searching = PublishSubject<Bool>()
 
     var connectionState = PublishSubject<ConnectionType>()
@@ -69,15 +67,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
             .disposed(by: self.disposeBag)
     }
 
-    func conversationFound(conversation: ConversationViewModel?, name: String) {
-        contactFoundConversation.accept(conversation)
-        lookupName.accept(name)
-    }
-
-    private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
-
-    func showConversation (withConversationViewModel conversationViewModel: ConversationViewModel) {
-    }
+    private var temporaryConversation = BehaviorRelay<ConversationViewModel?>(value: nil) // created when searching for a new contact
 
     func enableBoothMode(enable: Bool, password: String) -> Bool {
         guard let accountId = self.accountService.currentAccount?.id else {
@@ -95,15 +85,24 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
     }
 
     func startCall(audioOnly: Bool) {
-        guard let conversation = self.contactFoundConversation.value?.conversation.value,
-              let participantId = conversation.getParticipants().first?.jamiId else {
+        guard let conversation = self.temporaryConversation.value?.conversation.value,
+              let participantId = conversation.getParticipants().first?.jamiId,
+        let username = self.temporaryConversation.value?.userName.value else {
             return
         }
-        let username: String = lookupName.value ?? ""
         if audioOnly {
             self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: participantId, userName: username))
             return
         }
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: participantId, userName: username))
+    }
+}
+
+extension IncognitoSmartListViewModel: FilterConversationDelegate {
+    func temporaryConversationCreated(conversation: ConversationViewModel?, name: String) {
+        self.temporaryConversation.accept(conversation)
+    }
+    func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
+
     }
 }
