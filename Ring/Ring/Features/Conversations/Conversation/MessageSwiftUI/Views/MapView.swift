@@ -60,11 +60,13 @@ struct MapView: UIViewRepresentable {
     }
 
     func addPinsAndZoom(mapView: MKMapView) {
-        mapView.removeAnnotations(mapView.annotations)
-        for coordinate in coordinates {
-            let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
-            annotation.avatar = coordinate.1
-            mapView.addAnnotation(annotation)
+        if mapView.annotations.compactMap({ $0.coordinate }) != coordinates.compactMap({ $0.0 }) {
+            mapView.removeAnnotations(mapView.annotations)
+            for coordinate in coordinates {
+                let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
+                annotation.avatar = coordinate.1
+                mapView.addAnnotation(annotation)
+            }
         }
         if let firstCoordinate = coordinates.first {
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
@@ -113,6 +115,12 @@ extension MapView {
 
     func makeCoordinator() -> Coordinator {
         Coordinator()
+    }
+}
+
+extension CLLocationCoordinate2D: Equatable {
+    public static func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
 }
 
