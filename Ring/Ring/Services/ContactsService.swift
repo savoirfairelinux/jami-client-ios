@@ -71,13 +71,11 @@ class ContactsService {
             return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHach: profile.uri))
         })
         self.contacts.accept([])
-        for contact in contacts {
-            if self.contacts.value.firstIndex(of: contact) == nil {
-                var values = self.contacts.value
-                values.append(contact)
-                self.contacts.accept(values)
-                self.log.debug("contact: \(String(describing: contact.userName))")
-            }
+        for contact in contacts where self.contacts.value.firstIndex(of: contact) == nil {
+            var values = self.contacts.value
+            values.append(contact)
+            self.contacts.accept(values)
+            self.log.debug("contact: \(String(describing: contact.userName))")
         }
     }
     private func loadAndSaveJamiContacts(withAccount account: AccountModel) {
@@ -99,12 +97,10 @@ class ContactsService {
             return ContactModel(withDictionary: contactDict)
         }) {
             self.contacts.accept([])
-            for contact in contacts {
-                if self.contacts.value.firstIndex(of: contact) == nil {
-                    var values = self.contacts.value
-                    values.append(contact)
-                    self.contacts.accept(values)
-                }
+            for contact in contacts where self.contacts.value.firstIndex(of: contact) == nil {
+                var values = self.contacts.value
+                values.append(contact)
+                self.contacts.accept(values)
             }
         }
     }
@@ -209,12 +205,10 @@ extension ContactsService: ContactsAdapterDelegate {
             if let contacts = contactsDictionaries?.map({ contactDict in
                 return ContactModel(withDictionary: contactDict)
             }) {
-                for contact in contacts {
-                    if self.contacts.value.firstIndex(of: contact) == nil {
-                        var values = self.contacts.value
-                        values.append(contact)
-                        self.contacts.accept(values)
-                    }
+                for contact in contacts where self.contacts.value.firstIndex(of: contact) == nil {
+                    var values = self.contacts.value
+                    values.append(contact)
+                    self.contacts.accept(values)
                 }
             }
         }

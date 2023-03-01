@@ -161,7 +161,7 @@ class SendFileViewModel: Stateable, ViewModel {
         dateFormatter.dateFormat = "yyyy-MM-dd_HH:mm:ss"
         let date = Date()
         let dateString = dateFormatter.string(from: date)
-        let random = String(arc4random_uniform(9999))
+        let random = String(UInt64.random(in: 0 ... 9999))
         let nameForRecordingFile = dateString + "_" + random
         guard let url = self.fileTransferService.getFilePathForRecordings(forFile: nameForRecordingFile,
                                                                           accountID: conversation.accountId,

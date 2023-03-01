@@ -130,7 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         log.removeAllDestinations()
         #endif
 
-        /// move files from the app container to the group container, so it could be accessed by notification extension
+        // move files from the app container to the group container, so it could be accessed by notification extension
         if !self.moveDataToGroupContainer() {
             self.window?.rootViewController = self.appCoordinator.rootViewController
             self.window?.makeKeyAndVisible()
@@ -238,7 +238,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                object: nil)
         CFNotificationCenterAddObserver(self.center,
                                         nil, { (_, _, _, _, _) in
-                                            /// emit signal so notification could be handeled by daemon
+                                            // emit signal so notification could be handeled by daemon
                                             NotificationCenter.default.post(name: AppDelegate.shouldHandleNotification, object: nil, userInfo: nil)
                                         },
                                         Constants.notificationReceived,

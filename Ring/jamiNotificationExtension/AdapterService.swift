@@ -184,10 +184,6 @@ extension AdapterService: AdapterDelegate {
         handler(.call, EventData(accountId: accountId, jamiId: peerId, content: "\(hasVideo)"))
     }
 
-    func receivedContactRequest(accountId: String, peerId: String) {
-        /// TODO add invitation notification
-    }
-
     func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String]) {
         guard let handler = self.eventHandler else {
             return

@@ -17,6 +17,7 @@ import Foundation
 
 struct EventData {
     var accountId, jamiId, conversationId, content, groupTitle: String
+
     init(accountId: String = "", jamiId: String = "", conversationId: String = "", content: String = "", groupTitle: String = "") {
         self.accountId = accountId
         self.jamiId = jamiId

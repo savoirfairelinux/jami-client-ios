@@ -87,7 +87,7 @@ class VCardUtils {
             }
             var vcardLength = vCardString.count
             let chunkSize = 1024
-            let idKey = Int64(arc4random_uniform(10000000))
+            let idKey = UInt64.random(in: 0 ... 10000000)
             let total = vcardLength / chunkSize + (((vcardLength % chunkSize) == 0) ? 0 : 1)
             var i = 1
             while vcardLength > 0 {

@@ -795,7 +795,7 @@ class DBManager {
         if !createIfNotExists {
             return nil
         }
-        let conversationID = Int64(arc4random_uniform(10000000))
+        let conversationID = Int64.random(in: 0...10000000)
         do {
             _ = try self.getProfile(for: contactUri, createIfNotExists: true, accountId: accountId)
         } catch {}

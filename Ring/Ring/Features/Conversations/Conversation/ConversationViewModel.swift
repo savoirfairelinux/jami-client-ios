@@ -27,7 +27,7 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 
-// swiftlint:disable file_length, type_body_length
+// swiftlint:disable type_body_length
 class ConversationViewModel: Stateable, ViewModel {
 
     /// Logger
@@ -474,6 +474,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
     let shouldDismiss = BehaviorRelay<Bool>(value: false)
+
     func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
         self.stateSubject.onNext(ConversationState.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate))
     }

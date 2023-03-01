@@ -44,7 +44,6 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
     }
 }
 
-// swiftlint:disable closure_body_length
 struct MessagesListView: View {
     @StateObject var model: MessagesListVM
     @SwiftUI.State var showScrollToLatestButton = false

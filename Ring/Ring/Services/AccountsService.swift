@@ -540,10 +540,9 @@ class AccountsService: AccountAdapterDelegate {
      - Returns: the account if found, nil otherwise.
      */
     func getAccount(fromAccountId id: String) -> AccountModel? {
-        for account in self.accountList {
-            if id.compare(account.id) == ComparisonResult.orderedSame {
-                return account
-            }
+        for account in self.accountList
+        where id.compare(account.id) == ComparisonResult.orderedSame {
+            return account
         }
         return nil
     }

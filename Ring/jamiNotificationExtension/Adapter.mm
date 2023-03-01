@@ -135,16 +135,6 @@ std::map<std::string, std::string> nameServers;
                                                                     hasVideo:hasVideo];
             }
         }));
-    //Contact added signal
-    confHandlers.insert(exportable_callback<ConfigurationSignal::ContactAdded>([&](const std::string& accountId,
-                                                                                   const std::string& uri,
-                                                                                   bool confirmed) {
-        if(Adapter.delegate) {
-            NSString* accountIdStr = [NSString stringWithUTF8String:accountId.c_str()];
-            NSString* uriStr = [NSString stringWithUTF8String:uri.c_str()];
-            [Adapter.delegate receivedContactRequestWithAccountId: accountIdStr peerId: uriStr];
-        }
-    }));
 
     confHandlers.insert(exportable_callback<ConversationSignal::ConversationRequestReceived>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> metadata) {
         if(Adapter.delegate) {

@@ -30,6 +30,5 @@ import Foundation
     func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String)
     func conversationSyncCompleted(accountId: String)
     func receivedCallConnectionRequest(accountId: String, peerId: String, hasVideo: Bool)
-    func receivedContactRequest(accountId: String, peerId: String)
     func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String])
 }

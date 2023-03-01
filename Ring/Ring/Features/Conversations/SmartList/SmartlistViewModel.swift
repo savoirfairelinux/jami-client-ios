@@ -201,7 +201,9 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 return requests.filter { $0.accountId == account.id }.count
             })
     }()
+
     typealias BageValues = (messages: Int, requests: Int)
+
     lazy var updateSegmentControl: Observable<BageValues> = {[weak self] in
         guard let self = self else {
             let value: BageValues = (0, 0)

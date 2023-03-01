@@ -180,7 +180,6 @@ public class CallModel {
         return false
     }
 
-    // swiftlint:disable cyclomatic_complexity
     func update(withDictionary dictionary: [String: String], withMedia mediaList: [[String: String]]) {
 
         if self.state == .current && self.dateReceived == nil {
@@ -210,11 +209,9 @@ public class CallModel {
         }
 
         self.audioMuted = true
-        for (item) in self.mediaList where item[MediaAttributeKey.mediaType.rawValue] == MediaAttributeValue.audio.rawValue {
-            if !checkDeviceMediaMuted(media: item) {
-                self.audioMuted = false
-                break
-            }
+        for (item) in self.mediaList where (item[MediaAttributeKey.mediaType.rawValue] == MediaAttributeValue.audio.rawValue && !checkDeviceMediaMuted(media: item)) {
+            self.audioMuted = false
+            break
         }
 
         if let participantRingId = dictionary[CallDetailKey.peerNumberKey.rawValue] {

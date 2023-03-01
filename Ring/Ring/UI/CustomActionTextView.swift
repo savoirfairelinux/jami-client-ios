@@ -52,10 +52,8 @@ class CustomActionTextView: UITextView {
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
 
-        for actionToRemove in actionsToRemove {
-            if action == actionToRemove.toSelector() {
-                return false
-            }
+        for actionToRemove in actionsToRemove where action == actionToRemove.toSelector() {
+            return false
         }
         return super.canPerformAction(action, withSender: sender)
     }
