@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "902af03c_cdd9610c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-02T14:29:24Z",
+      "side": 1,
+      "message": "update margins to be the same like for \"start sharing\" and \"copyright\" buttons. Make corners same as for \"start sharing\" button.",
+      "revId": "c393cb036221b2898503c66b0b52fc374ca11677",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
