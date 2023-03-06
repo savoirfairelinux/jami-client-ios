@@ -33,7 +33,7 @@ struct SerializableLocation: Codable {
     var lat: Double?    // position
     var long: Double?   // position
     var alt: Double?    // position
-    var time: Int64     // position and stop
+    var time: Int64?     // position and stop
     var bearing: Float? // position (optional)
     var speed: Float?   // position (optional)
 }
@@ -299,24 +299,29 @@ extension LocationSharingService {
         }
 
         if let incomingInstance = self.incomingInstances.get(accountId, peerUri) {
-            if incomingInstance.lastReceivedTimeStamp < incomingData.time {
-                incomingInstance.lastReceivedDate = Date()
-                incomingInstance.lastReceivedTimeStamp = incomingData.time
-            } else {
-                return // ignore messages older than the newest we have (when receiving not in order)
+            if let incomingTime = incomingData.time {
+                if incomingInstance.lastReceivedTimeStamp < incomingTime {
+                    incomingInstance.lastReceivedDate = Date()
+                    incomingInstance.lastReceivedTimeStamp = incomingTime
+                } else {
+                    return // ignore messages older than the newest we have (when receiving not in order)
+                }
             }
         } else {
-            self.incomingInstances.insertOrUpdate(IncomingLocationSharingInstance(accountId: accountId,
-                                                                                  contactUri: peerUri,
-                                                                                  lastReceivedDate: Date(),
-                                                                                  lastReceivedTimeStamp: incomingData.time))
+            if let incomingTime = incomingData.time {
+                self.incomingInstances.insertOrUpdate(IncomingLocationSharingInstance(accountId: accountId,
+                                                                                      contactUri: peerUri,
+                                                                                      lastReceivedDate: Date(),
+                                                                                      lastReceivedTimeStamp: incomingTime))
+            }
         }
 
         if incomingData.type == nil || incomingData.type == SerializableLocationTypes.position.rawValue {
             // TODO: altitude?
-            let peerUriAndData = (peerUri, CLLocationCoordinate2D(latitude: incomingData.lat!, longitude: incomingData.long!), Int(incomingData.time) / 60000)
-            self.peerUriAndLocationReceived.accept(peerUriAndData)
-
+            if let incomingTime = incomingData.time {
+                let peerUriAndData = (peerUri, CLLocationCoordinate2D(latitude: incomingData.lat!, longitude: incomingData.long!), Int(incomingTime) / 60000)
+                self.peerUriAndLocationReceived.accept(peerUriAndData)
+            }
         } else if incomingData.type == SerializableLocationTypes.stop.rawValue {
             self.stopReceivingLocation(accountId: accountId, contactUri: peerUri)
         }
