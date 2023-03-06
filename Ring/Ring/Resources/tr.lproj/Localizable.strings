@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "Kabin kipini etkinleştirdikten sonra tüm konuşmalarınız kaldırılacaktır.";
 "accountPage.peerDiscovery" = "Yerel ağda kendiliğinden bağlan";
 "accountPage.autoRegistration" = "Geçerlilik bittiğinde kendiliğinden kaydol";
+"accountPage.connectivityHeader" = "Bağlanabilirlik";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN adresi";
+"accountPage.turnUsername" = "TURN kullanıcı adı";
+"accountPage.turnPassword" = "TURN parolası";
+"accountPage.turnRealm" = "TURN yetki alanı";
 
 //Account
 "account.sipUsername" = "Kullanıcı Adı";

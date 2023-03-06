@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 "accountPage.peerDiscovery" = "Automatické pripojenie v lokálnej sieti";
 "accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.connectivityHeader" = "Pripojenie";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN adresa";
+"accountPage.turnUsername" = "TURN používateľské meno";
+"accountPage.turnPassword" = "TURN heslo";
+"accountPage.turnRealm" = "TURN realm";
 
 //Account
 "account.sipUsername" = "Používateľské meno";

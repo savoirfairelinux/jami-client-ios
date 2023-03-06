@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "Etter å ha aktiver messemodus vil alle dine samtaler bli slettet.";
 "accountPage.peerDiscovery" = "Koble automatisk til lokalt nettverk";
 "accountPage.autoRegistration" = "Automatisk registrering etter utløp";
+"accountPage.connectivityHeader" = "Forbindelsesstatus";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN-adresse";
+"accountPage.turnUsername" = "TURN-brukernavn";
+"accountPage.turnPassword" = "TURN-passord";
+"accountPage.turnRealm" = "TURN-område";
 
 //Account
 "account.sipUsername" = "Brukernavn";

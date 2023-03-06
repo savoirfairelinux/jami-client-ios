@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "Depois de ativar o modo Booth, todas as suas conversas serão removidas.";
 "accountPage.peerDiscovery" = "Conexão automática na rede local";
 "accountPage.autoRegistration" = "Registro automático após expiração";
+"accountPage.connectivityHeader" = "Conectividade";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "Endereço TURN";
+"accountPage.turnUsername" = "Nome de usuário TURN";
+"accountPage.turnPassword" = "Senha TURN";
+"accountPage.turnRealm" = "Domínio TURN";
 
 //Account
 "account.sipUsername" = "Nome do Usuário";

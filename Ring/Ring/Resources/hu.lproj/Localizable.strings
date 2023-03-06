@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "A fülke üzemmód engedélyezése után az összes beszélgetés eltávolításra kerül.";
 "accountPage.peerDiscovery" = "Ónműködő csatlakozás helyi hálózaton";
 "accountPage.autoRegistration" = "Önműködő bejegyzése a lejárat után";
+"accountPage.connectivityHeader" = "Kapcsolódás";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN cím";
+"accountPage.turnUsername" = "TURN felhasználónév";
+"accountPage.turnPassword" = "TURN jelszó";
+"accountPage.turnRealm" = "TURN tartomány";
 
 //Account
 "account.sipUsername" = "Felhasználónév";

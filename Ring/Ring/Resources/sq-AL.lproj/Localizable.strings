@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "Pas aktivizimit të mënyrës Kabinë, krej bisedat tuaja do të hiqen.";
 "accountPage.peerDiscovery" = "Vetëlidhu në rrjet vendor";
 "accountPage.autoRegistration" = "Regjistrohu automatikisht pas skadimit";
+"accountPage.connectivityHeader" = "Aftësi lidhjeje";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "Adresë TURN";
+"accountPage.turnUsername" = "Emër përdoruesi TURN";
+"accountPage.turnPassword" = "Fjalëkalim TURN";
+"accountPage.turnRealm" = "TURN shtrirje";
 
 //Account
 "account.sipUsername" = "Emër Përdoruesi";
@@ -378,7 +384,7 @@
 "generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
 "generalSettings.fileTransfer" = "Shpërngulje kartelash";
 "generalSettings.automaticAcceptIncomingFiles" = "Prano automatikisht kartela ardhëse";
-"generalSettings.acceptTransferLimit" = "Prano kufi shpërnguljesh";
+"generalSettings.acceptTransferLimit" = "Kufi pranimi shpërnguljesh";
 "generalSettings.acceptTransferLimitDescription" = "(në MB, 0 = e pakufizuar)";
 
 //Log View

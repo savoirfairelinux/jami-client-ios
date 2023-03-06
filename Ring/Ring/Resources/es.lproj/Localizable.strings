@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "Después de habilitar el modo reservado, se eliminarán todas sus conversaciones.";
 "accountPage.peerDiscovery" = "Auto conectar en red local";
 "accountPage.autoRegistration" = "Registrar automáticamente luego de la expiración";
+"accountPage.connectivityHeader" = "Connectivity";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN address";
+"accountPage.turnUsername" = "TURN username";
+"accountPage.turnPassword" = "TURN password";
+"accountPage.turnRealm" = "Dominio TURN";
 
 //Account
 "account.sipUsername" = "Nombre de usuario";

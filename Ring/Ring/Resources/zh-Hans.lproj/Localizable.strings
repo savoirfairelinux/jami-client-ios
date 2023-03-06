@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "在啟用展示模式後，所有的對話都會被移除。";
 "accountPage.peerDiscovery" = "在區域網路上自動連線";
 "accountPage.autoRegistration" = "過期後自動註冊";
+"accountPage.connectivityHeader" = "連線";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN 地址";
+"accountPage.turnUsername" = "TURN 使用者名稱";
+"accountPage.turnPassword" = "TURN 密碼";
+"accountPage.turnRealm" = "TURN 範圍";
 
 //Account
 "account.sipUsername" = "使用者名稱";

@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 "accountPage.peerDiscovery" = "Auto connect on local network";
 "accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.connectivityHeader" = "การเชื่อมต่อ";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN address";
+"accountPage.turnUsername" = "TURN ชื่อผู้ใช้";
+"accountPage.turnPassword" = "TURN password";
+"accountPage.turnRealm" = "TURN realm";
 
 //Account
 "account.sipUsername" = "User Name";

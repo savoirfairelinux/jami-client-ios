@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "Setelah mengaktifkan mode booth, semua percakapan Anda akan dihapus.";
 "accountPage.peerDiscovery" = "Terhubung otomatis pada jaringan lokal";
 "accountPage.autoRegistration" = "Daftar otomatis setelah kedaluwarsa";
+"accountPage.connectivityHeader" = "Konektivitas";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "Alamat TURN";
+"accountPage.turnUsername" = "Nama pengguna TURN";
+"accountPage.turnPassword" = "Kata sandi TURN";
+"accountPage.turnRealm" = "TURN realm";
 
 //Account
 "account.sipUsername" = "Nama Pengguna";

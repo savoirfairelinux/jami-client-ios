@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 "accountPage.peerDiscovery" = "Auto connect on local network";
 "accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.connectivityHeader" = "З'єднання";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "Адреса TURN";
+"accountPage.turnUsername" = "Обрати ім'я";
+"accountPage.turnPassword" = "Обрати пароль";
+"accountPage.turnRealm" = "Простір TURN";
 
 //Account
 "account.sipUsername" = "Ім'я користувача";

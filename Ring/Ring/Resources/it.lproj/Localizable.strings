@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "Dopo aver attivato la Modalità Cabina, tutte le tue conversazioni saranno eliminate.";
 "accountPage.peerDiscovery" = "Connessione automatica sulla rete locale";
 "accountPage.autoRegistration" = "Registrazione automatica dopo la scadenza";
+"accountPage.connectivityHeader" = "Connessione";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "Indirizzo TURN";
+"accountPage.turnUsername" = "Nome utente TURN";
+"accountPage.turnPassword" = "Password TURN";
+"accountPage.turnRealm" = "Dominio TURN";
 
 //Account
 "account.sipUsername" = "Nome utente";

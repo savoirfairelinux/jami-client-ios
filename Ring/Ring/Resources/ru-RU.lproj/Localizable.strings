@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "После включения режима кабинки все ваши разговоры будут удалены.";
 "accountPage.peerDiscovery" = "Автоматическое соединение в локальной сети";
 "accountPage.autoRegistration" = "Автоматическая регистрация после истечения срока действия";
+"accountPage.connectivityHeader" = "Связь";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "Адрес TURN";
+"accountPage.turnUsername" = "Имя пользователя";
+"accountPage.turnPassword" = "Пароль";
+"accountPage.turnRealm" = "Домен TURN";
 
 //Account
 "account.sipUsername" = "Имя пользователя";

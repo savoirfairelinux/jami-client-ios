@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 "accountPage.peerDiscovery" = "Automatisch verbinden op lokaal netwerk";
 "accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.connectivityHeader" = "Connectiviteit";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN-adres";
+"accountPage.turnUsername" = "TURN-gebruikersnaam";
+"accountPage.turnPassword" = "TURN-wachtwoord";
+"accountPage.turnRealm" = "TURN-realm";
 
 //Account
 "account.sipUsername" = "Gebruikersnaam";

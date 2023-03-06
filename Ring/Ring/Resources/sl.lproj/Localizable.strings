@@ -93,7 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Trenutno v živo pridobivate podatek o lokaciji od";
 "conversation.errorSavingImage" = "Shranjevanje slike v galerijo je spodletelo";
 "conversation.receivedRequest" = "\%@\ vam je poslal zahtevo za pogovor.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.incomingRequest" = "Vam je poslal zahtevo za pogovor.";
 "conversation.requestMessage" = "Pozdravljeni, \nse želite pridružiti pogovoru?";
 "conversation.notContact" = "\%@\ ni na seznamu vaših stikov.";
 "conversation.sendRequest" = "Pošljite ji/mu zahtevo za stik, da si bosta lahko medsebojno izmenjevala.";
@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "Ob vklopu načina govorilnice bodo odstranjeni vsi vaši pogovori.";
 "accountPage.peerDiscovery" = "Samodejno povezovanje v krajevnem omrežju";
 "accountPage.autoRegistration" = "Samodejna registracija po izteku";
+"accountPage.connectivityHeader" = "Povezljivost";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "Naslov TURN";
+"accountPage.turnUsername" = "Uporabniško ime TURN";
+"accountPage.turnPassword" = "Geslo TURN";
+"accountPage.turnRealm" = "Območje TURN";
 
 //Account
 "account.sipUsername" = "Uporabniško ime";

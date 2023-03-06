@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "När uppstartsläge är aktiverat försvinner tidigare konversationer. ";
 "accountPage.peerDiscovery" = "Anslut automatiskt på lokalt nätverk";
 "accountPage.autoRegistration" = "Registrera automatiskt efter tiden går ut";
+"accountPage.connectivityHeader" = "Anslutningsbarhet";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN-adress";
+"accountPage.turnUsername" = "TURN-användarnamn";
+"accountPage.turnPassword" = "TURN-lösenord";
+"accountPage.turnRealm" = "TURN-domän";
 
 //Account
 "account.sipUsername" = "Användarnamn";

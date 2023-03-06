@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "Après avoir activé le mode Kiosque, toutes vos conversations seront supprimées.";
 "accountPage.peerDiscovery" = "Connexion automatique sur réseau local";
 "accountPage.autoRegistration" = "Réenregistrement automatique après expiration";
+"accountPage.connectivityHeader" = "Connectivité";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "Adresse du serveur TURN";
+"accountPage.turnUsername" = "TURN username";
+"accountPage.turnPassword" = "Mot de passe TURN";
+"accountPage.turnRealm" = "Domaine TURN";
 
 //Account
 "account.sipUsername" = "Nom d'utilisateur";

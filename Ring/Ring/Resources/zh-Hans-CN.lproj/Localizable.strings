@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "启用话亭模式后，您的现有会话都将被删除。";
 "accountPage.peerDiscovery" = "在本地网络自动连接";
 "accountPage.autoRegistration" = "过期后自动注册";
+"accountPage.connectivityHeader" = "连接性";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN 地址";
+"accountPage.turnUsername" = "TURN 用户名";
+"accountPage.turnPassword" = "TURN 密码";
+"accountPage.turnRealm" = "TURN 域";
 
 //Account
 "account.sipUsername" = "用户名";

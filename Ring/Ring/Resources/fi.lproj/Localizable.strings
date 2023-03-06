@@ -291,6 +291,12 @@
 "accountPage.boothModeAlertMessage" = "Kun kioskitila on otettu käyttöön, kaikki keskustelut poistetaan.";
 "accountPage.peerDiscovery" = "Automaattinen yhteys paikallisessa verkossa";
 "accountPage.autoRegistration" = "Automaattinen rekisteröinti vanhentumisen jälkeen";
+"accountPage.connectivityHeader" = "Connectivity";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN osoite";
+"accountPage.turnUsername" = "TURN username";
+"accountPage.turnPassword" = "TURN salasana";
+"accountPage.turnRealm" = "TURN -alue";
 
 //Account
 "account.sipUsername" = "Käyttäjänimi";
