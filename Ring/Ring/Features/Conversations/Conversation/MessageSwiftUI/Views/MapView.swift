@@ -21,133 +21,126 @@
 import SwiftUI
 import MapKit
 
-class LocationSharingAnnotation: NSObject, MKAnnotation {
+class LocationSharingAnnotation: NSObject, MKAnnotation, Identifiable {
     var avatar: UIImage!
     var coordinate: CLLocationCoordinate2D
 
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
     }
+
+    init(coordinate: CLLocationCoordinate2D, avatar: UIImage) {
+        self.coordinate = coordinate
+        self.avatar = avatar
+    }
 }
 
-struct MapView: UIViewRepresentable {
-    @Binding var coordinates: [(CLLocationCoordinate2D, UIImage)] {
-        didSet {
-            zoomMap()
+struct MapView: View {
+    @Binding var annotations: [LocationSharingAnnotation]
+    @Binding var showZoomButton: Bool
+    @SwiftUI.State private var region = MKCoordinateRegion()
+    var isFirstLoad: Bool = true
+
+    var body: some View {
+        ZStack {
+            Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: annotations) { annotation in
+                MapAnnotation(coordinate: annotation.coordinate) {
+                    Image(uiImage: annotation.avatar)
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .clipShape(Circle())
+                }
+            }
+            .edgesIgnoringSafeArea(.all)
+            //            .overlay(mapOverlay())
+            //            .onChange(of: annotations) { newValue in
+            //                    zoomMap()
+            //            })
+
+            if showZoomButton {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            zoomMap(onUserLocation: true)
+                        }) {
+                            Image(systemName: "location.fill")
+                                .foregroundColor(.black)
+                                .padding()
+                                .background(Color(.systemBackground))
+                                .clipShape(Circle())
+                                .padding(.trailing, 15)
+                                .padding(.bottom, 120)
+                        }
+                    }
+                }
+            }
         }
     }
-    @SwiftUI.State var shouldShowZoomButton: Bool = false
-    private let mapView = MKMapView()
-    private let button = UIButton(type: .custom)
 
-    func makeUIView(context: Context) -> MKMapView {
-        mapView.delegate = context.coordinator
-        // Add an OpenStreetMap tile overlay to the map view.
-        let urlTemplate = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        let overlay = MKTileOverlay(urlTemplate: urlTemplate)
-        overlay.canReplaceMapContent = true
-        mapView.addOverlay(overlay, level: .aboveLabels)
-
-        if shouldShowZoomButton {
-            button.frame = CGRect(origin: CGPoint(x: mapView.center.x, y: mapView.center.y), size: CGSize(width: 55, height: 55))
-            button.backgroundColor = .systemBackground
-            button.layer.cornerRadius = 16
-            button.setImage(UIImage(systemName: "location.fill"), for: [])
-            button.tintColor = .label
-
-            button.translatesAutoresizingMaskIntoConstraints = false
-
-            mapView.addSubview(button)
-            mapView.bringSubviewToFront(button)
-
-            NSLayoutConstraint.activate([
-                button.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -120),
-                button.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -15),
-                button.heightAnchor.constraint(equalToConstant: 50),
-                button.widthAnchor.constraint(equalToConstant: 50)
-            ])
-
-            button.addAction(UIAction(handler: { _ in
-                zoomMap(onUserLocation: true)
-            }), for: .touchUpInside)
-        }
-
-        addPins(mapView: mapView)
-        zoomMap()
-        return mapView
-    }
-
-    func updateUIView(_ view: MKMapView, context: Context) {
-        addPins(mapView: view)
-    }
-
-    func addPins(mapView: MKMapView) {
-        mapView.removeAnnotations(mapView.annotations)
-        for coordinate in coordinates {
-            let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
-            annotation.avatar = coordinate.1
-            mapView.addAnnotation(annotation)
-        }
-    }
+    //    func mapOverlay() -> some View {
+    //        MapOverlay(overlayAction: { mapView in
+    //            let urlTemplate = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+    //            let overlay = MKTileOverlay(urlTemplate: urlTemplate)
+    //            overlay.canReplaceMapContent = true
+    //            mapView.addOverlay(overlay, level: .aboveLabels)
+    //        })
+    //    }
 
     func zoomMap(onUserLocation: Bool = false) {
-        if onUserLocation {
-            if let coordinate = CLLocationManager().location?.coordinate {
-                zoom(on: coordinate)
-            }
-        } else {
-            if let firstCoordinate = coordinates.first {
-                zoom(on: firstCoordinate.0)
+        DispatchQueue.main.async {
+            if onUserLocation {
+                if let coordinate = CLLocationManager().location?.coordinate {
+                    zoom(on: coordinate)
+                }
+            } else {
+                if let firstCoordinate = annotations.first {
+                    zoom(on: firstCoordinate.coordinate)
+                }
             }
         }
     }
 
     func zoom(on coordinate: CLLocationCoordinate2D) {
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        let region = MKCoordinateRegion(center: coordinate, span: span)
-        mapView.setRegion(region, animated: true)
+        DispatchQueue.main.async {
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegion(center: coordinate, span: span)
+            self.region.span = span
+        }
     }
 }
 
-extension MapView {
-    class Coordinator: NSObject, MKMapViewDelegate {
-
-        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            if overlay is MKTileOverlay {
-                let renderer = MKTileOverlayRenderer(overlay: overlay)
-                return renderer
-            } else {
-                return MKTileOverlayRenderer()
-            }
-        }
-
-        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-            guard let customAnnotation = annotation as? LocationSharingAnnotation else {
-                return nil
-            }
-
-            let reuseId = customAnnotation.avatar?.description ?? customAnnotation.description
-
-            var anView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
-            if anView == nil {
-                anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            } else {
-                anView?.annotation = customAnnotation
-            }
-
-            let imageWidth = 35
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageWidth, height: imageWidth))
-            imageView.image = customAnnotation.avatar
-            imageView.layer.cornerRadius = imageView.layer.frame.size.width / 2
-            imageView.layer.masksToBounds = true
-            anView?.addSubview(imageView)
-
-            return anView
-        }
-    }
+struct MapOverlay: UIViewRepresentable {
+    var overlayAction: (MKMapView) -> Void
 
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(overlayAction: overlayAction)
+    }
+
+    func makeUIView(context: Context) -> MKMapView {
+        let mapView = MKMapView()
+        mapView.delegate = context.coordinator
+        return mapView
+    }
+
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+        overlayAction(uiView)
+    }
+
+    class Coordinator: NSObject, MKMapViewDelegate {
+        var overlayAction: (MKMapView) -> Void
+
+        init(overlayAction: @escaping (MKMapView) -> Void) {
+            self.overlayAction = overlayAction
+        }
+
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            if let tileOverlay = overlay as? MKTileOverlay {
+                return MKTileOverlayRenderer(tileOverlay: tileOverlay)
+            }
+            return MKOverlayRenderer(overlay: overlay)
+        }
     }
 }
 
@@ -159,6 +152,8 @@ extension CLLocationCoordinate2D: Equatable {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(coordinates: .init(projectedValue: .constant([(CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417), UIImage())])))
+        MapView(annotations: .init(projectedValue: .constant([
+            LocationSharingAnnotation(coordinate: CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417), avatar: UIImage())
+        ])), showZoomButton: .constant(true))
     }
 }
