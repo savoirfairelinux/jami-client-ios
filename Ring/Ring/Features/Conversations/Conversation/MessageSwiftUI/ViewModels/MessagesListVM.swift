@@ -56,7 +56,7 @@ class MessagesListVM: ObservableObject {
     }
     @Published var numberOfNewMessages: Int = 0
     @Published var shouldShowMap: Bool = false
-    @Published var coordinates = [(CLLocationCoordinate2D, UIImage)]()
+    @Published var coordinates = [LocationSharingAnnotation]()
     @Published var isMapOpened = false
     var contactAvatar: UIImage = UIImage()
     var currentAccountAvatar: UIImage = UIImage()
@@ -201,15 +201,18 @@ class MessagesListVM: ObservableObject {
     }
 
     private func updateCoordinatesList() {
-        var coordinates = [(CLLocationCoordinate2D, UIImage)]()
+        var coordinates = [LocationSharingAnnotation]()
         if let myContactsLocation = self.myContactsLocation {
-            coordinates.append((myContactsLocation, self.contactAvatar))
+            coordinates.append(LocationSharingAnnotation(coordinate: myContactsLocation, avatar: self.contactAvatar))
         }
         if let myLocation = self.myCoordinate {
-            coordinates.append((myLocation, self.currentAccountAvatar))
+            coordinates.append(LocationSharingAnnotation(coordinate: myLocation, avatar: self.currentAccountAvatar))
         }
-        self.coordinates = coordinates
-        self.shouldShowMap = self.isAlreadySharingLocation() && !coordinates.isEmpty
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.coordinates = coordinates
+            self.shouldShowMap = self.isAlreadySharingLocation() && !coordinates.isEmpty
+        }
     }
 
     private func insert(newMessage: MessageModel) -> Bool {
