@@ -24,98 +24,110 @@ import SwiftUI
 struct LocationSharingView: View {
 
     @StateObject var model: MessagesListVM
-    @Binding var coordinates: [(CLLocationCoordinate2D, UIImage)]
+    @SwiftUI.State private var forceUpdate = false
     @SwiftUI.State private var showCopyrightAlert = false
-    @SwiftUI.State private var viewCornerRadius: CGFloat = 15
+    var viewCornerRadius: CGFloat = 15
 
     var navigationBarHeight: CGFloat {
         UINavigationController.navBarHeight() + ( UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0) + 80
     }
 
+    var mapWidth: CGFloat {
+        return model.locationSharingiewModel.isMapOpened ? UIScreen.main.bounds.size.width : 250
+    }
+
+    var mapHeight: CGFloat {
+        return model.locationSharingiewModel.isMapOpened ? (UIScreen.main.bounds.size.height - navigationBarHeight) : 150
+    }
+
+    var labelHeight: CGFloat {
+        return model.locationSharingiewModel.isMapOpened ? 60 : 0
+    }
+
     var body: some View {
         HStack {
-            if model.isMapOpened {
-                VStack {
-                    ZStack(alignment: .center) {
-                        VStack(spacing: 0) {
-                            HStack {
-                                Spacer()
-                                    .frame(width: 20)
-                                Button {
-                                    model.isMapOpened = false
-                                } label: {
-                                    Image(systemName: "xmark")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 20, weight: .semibold))
-                                }
-                                Spacer()
-                                    .frame(width: 20)
-                                Text("Location Sharing")
-                                    .fontWeight(.semibold)
-                                    .font(.title3)
-                                    .foregroundColor(.white)
-                                Spacer()
-                            }
-                            .frame(width: UIScreen.main.bounds.size.width, height: 60)
-                            .background(Color(UIColor.darkGray))
-                            .cornerRadius(radius: viewCornerRadius, corners: [.topLeft, .topRight])
-                            ZStack(alignment: .bottom) {
-                                MapView(coordinates: $coordinates, shouldShowZoomButton: true)
-                                createCopyrigtButton()
-                                    .padding(.all, 10)
-                            }
+            ZStack(alignment: model.locationSharingiewModel.isMapOpened ? .center : .bottom) {
+                VStack(spacing: 0) {
+                    HStack {
+                        Spacer()
+                            .frame(width: 20)
+                        Button {
+                            updateMapViewWithAnimation(isMapOpened: false)
+                        } label: {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20, weight: .semibold))
                         }
-
-                        if model.isAlreadySharingMyLocation() {
-                            VStack {
-                                Spacer()
-                                Text(model.getMyLocationSharingRemainedTimeText())
-                                    .fontWeight(.semibold)
-                                    .font(.caption)
-                                    .padding([.leading, .trailing], 15)
-                                    .padding([.top, .bottom], 5)
-                                    .background(Color.black)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(8)
-
-                                Button {
-                                    model.stopSendingLocation()
-                                    model.isMapOpened = false
-                                } label: {
-                                    HStack {
-                                        Image(systemName: "paperplane.fill")
-                                            .foregroundColor(.black)
-                                        Text(L10n.Actions.stopLocationSharing)
-                                            .font(.callout)
-                                    }
-                                    .padding([.leading, .trailing], 15)
-                                    .frame(height: 50)
-                                    .background(Color.red)
-                                    .foregroundColor(.black)
-                                    .cornerRadius(16)
-                                }
-                                .padding(.bottom, 15)
-                            }
-                        }
+                        Spacer()
+                            .frame(width: 20)
+                        Text("Location Sharing")
+                            .fontWeight(.semibold)
+                            .font(.title3)
+                            .foregroundColor(.white)
+                        Spacer()
                     }
-                    .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - navigationBarHeight)
+                    .frame(width: mapWidth, height: labelHeight)
+                    .background(Color(UIColor.darkGray))
+                    .cornerRadius(radius: viewCornerRadius, corners: [.topLeft, .topRight])
+
+                    ZStack(alignment: .bottom) {
+                        var mapView: MapView? = MapView(annotations: $model.coordinates, showZoomButton: $model.locationSharingiewModel.isMapOpened)
+
+                        mapView
+                            .cornerRadius(model.locationSharingiewModel.isMapOpened ? 0 : viewCornerRadius)
+                            .id(forceUpdate ? "uniqueID1" : "uniqueID2")
+                            .onDisappear {
+                                mapView?.deinitView()
+                                mapView = nil
+                            }
+
+                        createCopyrigtButton()
+                            .padding(.all, 5)
+                    }
                 }
-            } else {
-                ZStack(alignment: .center) {
-                    MapView(coordinates: $coordinates)
-                        .frame(width: 250, height: 150)
-                        .cornerRadius(viewCornerRadius)
-                        .onTapGesture {
-                            model.isMapOpened = true
-                        }
-                    if model.isAlreadySharingMyLocation() {
-                        VStack {
+                .onTapGesture {
+                    if !model.locationSharingiewModel.isMapOpened {
+                        updateMapViewWithAnimation(isMapOpened: true)
+                    }
+                }
+
+                if model.isAlreadySharingMyLocation() {
+                    VStack {
+                        if model.locationSharingiewModel.isMapOpened {
+                            Spacer()
+                            Text(model.getMyLocationSharingRemainedTimeText())
+                                .fontWeight(.semibold)
+                                .font(.caption)
+                                .padding([.leading, .trailing], 15)
+                                .padding([.top, .bottom], 5)
+                                .background(Color.black)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+
+                            Button {
+                                model.stopSendingLocation()
+                                updateMapViewWithAnimation(isMapOpened: false)
+                            } label: {
+                                HStack {
+                                    Image(systemName: "paperplane.fill")
+                                        .foregroundColor(.black)
+                                    Text(L10n.Actions.stopLocationSharing)
+                                        .font(.callout)
+                                }
+                                .padding([.leading, .trailing], 15)
+                                .padding([.top, .bottom], 15)
+                                .background(Color.red)
+                                .foregroundColor(.black)
+                                .cornerRadius(20)
+                            }
+                            .padding(.bottom, 10)
+                        } else {
                             Spacer()
                             HStack {
                                 Spacer()
                                 Button {
                                     model.stopSendingLocation()
-                                    model.isMapOpened = false
+                                    updateMapViewWithAnimation(isMapOpened: false)
                                 } label: {
                                     Text(L10n.Actions.stopLocationSharing)
                                         .fontWeight(.semibold)
@@ -131,11 +143,9 @@ struct LocationSharingView: View {
                             .padding(.all, 10)
                         }
                     }
-                    createCopyrigtButton()
-                        .padding(.all, 5)
                 }
-                .frame(width: 200, height: 150)
             }
+            .frame(width: mapWidth, height: mapHeight)
         }
         .alert(isPresented: $showCopyrightAlert) {
             Alert(title: Text("OpenStreetMap"), message: Text("Map data © OpenStreetMap contributors"), primaryButton: .default(Text("Open in Safari")) {
@@ -145,6 +155,15 @@ struct LocationSharingView: View {
                     UIApplication.shared.open(url)
                 }
             }, secondaryButton: .cancel())
+        }
+    }
+
+    func updateMapViewWithAnimation(isMapOpened: Bool) {
+        withAnimation {
+            DispatchQueue.main.async {
+                model.locationSharingiewModel.isMapOpened = isMapOpened
+                forceUpdate.toggle()
+            }
         }
     }
 
