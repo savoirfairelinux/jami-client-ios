@@ -81,7 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
      */
     private var presentingCallScreen = false
 
-
     lazy var injectionBag: InjectionBag = {
         return InjectionBag(withDaemonService: self.daemonService,
                             withAccountService: self.accountService,
