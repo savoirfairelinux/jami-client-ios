@@ -139,6 +139,7 @@ class MessagesListVM: ObservableObject {
             self.subscribeMessagesStatus()
             self.subscribeSwarmPreferences()
             self.updateColorPreference()
+            self.subscribeUserAvatarForLocationSharing()
         }
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
@@ -179,7 +180,6 @@ class MessagesListVM: ObservableObject {
                 self.updateCoordinatesList()
             })
             .disposed(by: self.disposeBag)
-        self.subscribeUserAvatarForLocationSharing()
     }
 
     func subscribeUserAvatarForLocationSharing() {
@@ -187,7 +187,14 @@ class MessagesListVM: ObservableObject {
             .subscribe(onNext: { [weak self] profile in
                 guard let self = self else { return }
                 let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId)
-                self.currentAccountAvatar = UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account)
+                let defaultAvatar = UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account)
+                if let photo = profile.photo,
+                   let data = NSData(base64Encoded: photo,
+                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+                    self.currentAccountAvatar = UIImage(data: data) ?? defaultAvatar
+                } else {
+                    self.currentAccountAvatar = defaultAvatar
+                }
                 self.updateCoordinatesList()
             })
             .disposed(by: self.disposeBag)
