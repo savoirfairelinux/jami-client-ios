@@ -136,7 +136,7 @@ struct MessagesListView: View {
                 screenHeight = UIScreen.main.bounds.size.height
             })
             if model.shouldShowMap {
-                LocationSharingView(model: model, coordinates: $model.coordinates)
+                LocationSharingView(model: model, coordinates: $model.coordinates, shouldShowZoomButton: $model.isMapOpened)
             }
         }
     }
