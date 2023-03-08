@@ -21,26 +21,22 @@
 import SwiftUI
 import MapKit
 
-class LocationSharingAnnotation: NSObject, MKAnnotation {
-    var avatar: UIImage!
-    var coordinate: CLLocationCoordinate2D
-
-    init(coordinate: CLLocationCoordinate2D) {
-        self.coordinate = coordinate
-    }
-}
-
 struct MapView: UIViewRepresentable {
-    @Binding var coordinates: [(CLLocationCoordinate2D, UIImage)] {
-        didSet {
-            zoomMap()
-        }
+    @Binding var annotations: [LocationSharingAnnotation]
+    @Binding var showZoomButton: Bool
+    private var button: UIButton?
+    private var locationManager: CLLocationManager?
+
+    init(annotations: Binding<[LocationSharingAnnotation]>, showZoomButton: Binding<Bool>) {
+        self.button = UIButton(type: .custom)
+        self.locationManager = CLLocationManager()
+        self._annotations = annotations
+        self._showZoomButton = showZoomButton
     }
-    @SwiftUI.State var shouldShowZoomButton: Bool = false
-    private let mapView = MKMapView()
-    private let button = UIButton(type: .custom)
 
     func makeUIView(context: Context) -> MKMapView {
+        let mapView = MKMapView()
+        guard let button = button else { return MKMapView() }
         mapView.delegate = context.coordinator
         // Add an OpenStreetMap tile overlay to the map view.
         let urlTemplate = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -48,32 +44,33 @@ struct MapView: UIViewRepresentable {
         overlay.canReplaceMapContent = true
         mapView.addOverlay(overlay, level: .aboveLabels)
 
-        if shouldShowZoomButton {
+        if showZoomButton {
             button.frame = CGRect(origin: CGPoint(x: mapView.center.x, y: mapView.center.y), size: CGSize(width: 55, height: 55))
             button.backgroundColor = .systemBackground
             button.layer.cornerRadius = 16
             button.setImage(UIImage(systemName: "location.fill"), for: [])
             button.tintColor = .label
 
-            button.translatesAutoresizingMaskIntoConstraints = false
-
             mapView.addSubview(button)
             mapView.bringSubviewToFront(button)
 
+            button.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 button.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -120),
                 button.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -15),
-                button.heightAnchor.constraint(equalToConstant: 50),
-                button.widthAnchor.constraint(equalToConstant: 50)
+                button.heightAnchor.constraint(equalToConstant: 55),
+                button.widthAnchor.constraint(equalToConstant: 55)
             ])
 
-            button.addAction(UIAction(handler: { _ in
-                zoomMap(onUserLocation: true)
-            }), for: .touchUpInside)
+            button.addAction(UIAction(handler: { [weak mapView] _ in
+                guard let mapView = mapView else { return }
+                zoomMap(onUserLocation: true, mapView: mapView)
+            }), for: .allEvents)
         }
 
         addPins(mapView: mapView)
-        zoomMap()
+        zoomMap(mapView: mapView)
+
         return mapView
     }
 
@@ -82,35 +79,51 @@ struct MapView: UIViewRepresentable {
     }
 
     func addPins(mapView: MKMapView) {
-        mapView.removeAnnotations(mapView.annotations)
-        for coordinate in coordinates {
-            let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
-            annotation.avatar = coordinate.1
-            mapView.addAnnotation(annotation)
+        if mapView.annotations.compactMap({ $0.coordinate }) != annotations.compactMap({ $0.coordinate }) {
+            mapView.removeAnnotations(mapView.annotations)
+            mapView.addAnnotations(annotations)
         }
     }
 
-    func zoomMap(onUserLocation: Bool = false) {
+    func zoomMap(onUserLocation: Bool = false, mapView: MKMapView) {
         if onUserLocation {
-            if let coordinate = CLLocationManager().location?.coordinate {
-                zoom(on: coordinate)
+            if let coordinate = locationManager?.location?.coordinate {
+                zoom(on: coordinate, mapView: mapView)
             }
         } else {
-            if let firstCoordinate = coordinates.first {
-                zoom(on: firstCoordinate.0)
+            if let firstCoordinate = annotations.first {
+                zoom(on: firstCoordinate.coordinate, mapView: mapView)
             }
         }
     }
 
-    func zoom(on coordinate: CLLocationCoordinate2D) {
+    func zoom(on coordinate: CLLocationCoordinate2D, mapView: MKMapView) {
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: coordinate, span: span)
         mapView.setRegion(region, animated: true)
+    }
+
+    mutating func deinitView() {
+        self._annotations = .constant([])
+        self._showZoomButton = .constant(false)
+        locationManager = nil
+        button?.removeFromSuperview()
+        if let button = button {
+            for target in button.allTargets {
+                button.removeTarget(target, action: nil, for: .allEvents)
+            }
+        }
+        button = nil
     }
 }
 
 extension MapView {
     class Coordinator: NSObject, MKMapViewDelegate {
+        var parent: MapView?
+
+        init(_ parent: MapView) {
+            self.parent = parent
+        }
 
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if overlay is MKTileOverlay {
@@ -144,21 +157,24 @@ extension MapView {
 
             return anView
         }
+
+        deinit {
+            parent?.button?.removeFromSuperview()
+            parent?.button = nil
+            parent?.locationManager = nil
+            parent = nil
+        }
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator()
-    }
-}
-
-extension CLLocationCoordinate2D: Equatable {
-    public static func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
-        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+        Coordinator(self)
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(coordinates: .init(projectedValue: .constant([(CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417), UIImage())])))
+        MapView(annotations: .init(projectedValue: .constant([
+            LocationSharingAnnotation(coordinate: CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417), avatar: UIImage())
+        ])), showZoomButton: .constant(true))
     }
 }
