@@ -20,6 +20,7 @@
 
 import SwiftUI
 import MapKit
+import Combine
 
 class LocationSharingAnnotation: NSObject, MKAnnotation {
     var avatar: UIImage!
@@ -30,15 +31,14 @@ class LocationSharingAnnotation: NSObject, MKAnnotation {
     }
 }
 
+class MapViewModel: ObservableObject {
+    @Published var shouldShowZoomButton: Bool = false
+}
+
 struct MapView: UIViewRepresentable {
-    @Binding var coordinates: [(CLLocationCoordinate2D, UIImage)] {
-        didSet {
-            zoomMap()
-        }
-    }
-    @SwiftUI.State var shouldShowZoomButton: Bool = false
+    @Binding var coordinates: [(CLLocationCoordinate2D, UIImage)]
+    @EnvironmentObject var viewModel: MapViewModel
     private let mapView = MKMapView()
-    private let button = UIButton(type: .custom)
 
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
@@ -47,30 +47,31 @@ struct MapView: UIViewRepresentable {
         let overlay = MKTileOverlay(urlTemplate: urlTemplate)
         overlay.canReplaceMapContent = true
         mapView.addOverlay(overlay, level: .aboveLabels)
+        let buttonWidth: CGFloat = 60
 
-        if shouldShowZoomButton {
-            button.frame = CGRect(origin: CGPoint(x: mapView.center.x, y: mapView.center.y), size: CGSize(width: 55, height: 55))
-            button.backgroundColor = .systemBackground
-            button.layer.cornerRadius = 16
-            button.setImage(UIImage(systemName: "location.fill"), for: [])
-            button.tintColor = .label
+        let button = UIButton(type: .custom)
+        button.frame = CGRect(origin: CGPoint(x: mapView.center.x, y: mapView.center.y), size: CGSize(width: buttonWidth, height: buttonWidth))
+        button.backgroundColor = .systemBackground
+        button.layer.cornerRadius = 16
+        button.setImage(UIImage(systemName: "location.fill"), for: [])
+        button.tintColor = .label
+        button.tag = 1000
 
-            button.translatesAutoresizingMaskIntoConstraints = false
+        button.addAction(UIAction(handler: { _ in
+            zoomMap(onUserLocation: true)
+        }), for: .allTouchEvents)
 
-            mapView.addSubview(button)
-            mapView.bringSubviewToFront(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
 
-            NSLayoutConstraint.activate([
-                button.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -120),
-                button.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -15),
-                button.heightAnchor.constraint(equalToConstant: 50),
-                button.widthAnchor.constraint(equalToConstant: 50)
-            ])
+        mapView.addSubview(button)
+        mapView.bringSubviewToFront(button)
 
-            button.addAction(UIAction(handler: { _ in
-                zoomMap(onUserLocation: true)
-            }), for: .touchUpInside)
-        }
+        NSLayoutConstraint.activate([
+            button.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -120),
+            button.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -15),
+            button.heightAnchor.constraint(equalToConstant: buttonWidth),
+            button.widthAnchor.constraint(equalToConstant: buttonWidth)
+        ])
 
         addPins(mapView: mapView)
         zoomMap()
@@ -82,11 +83,13 @@ struct MapView: UIViewRepresentable {
     }
 
     func addPins(mapView: MKMapView) {
-        mapView.removeAnnotations(mapView.annotations)
-        for coordinate in coordinates {
-            let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
-            annotation.avatar = coordinate.1
-            mapView.addAnnotation(annotation)
+        if mapView.annotations.compactMap({ $0.coordinate }) != coordinates.compactMap({ $0.0 }) {
+            mapView.removeAnnotations(mapView.annotations)
+            for coordinate in coordinates {
+                let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
+                annotation.avatar = coordinate.1
+                mapView.addAnnotation(annotation)
+            }
         }
     }
 
@@ -110,15 +113,27 @@ struct MapView: UIViewRepresentable {
 }
 
 extension MapView {
-    class Coordinator: NSObject, MKMapViewDelegate {
+    class Coordinator: NSObject, MKMapViewDelegate, ObservableObject {
+        var parent: MapView
+        private var cancellables: Set<AnyCancellable> = []
+
+        init(_ parent: MapView) {
+            self.parent = parent
+            super.init()
+
+            // Observe changes to shouldShowZoomButton
+            parent.viewModel.$shouldShowZoomButton
+                .sink { [weak self] newValue in
+                    self?.parent.mapView.subviews.filter({ $0.tag == 1000 }).first?.isHidden = !newValue
+                }
+                .store(in: &cancellables)
+        }
 
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            if overlay is MKTileOverlay {
-                let renderer = MKTileOverlayRenderer(overlay: overlay)
-                return renderer
-            } else {
-                return MKTileOverlayRenderer()
+            if let tileOverlay = overlay as? MKTileOverlay {
+                return MKTileOverlayRenderer(tileOverlay: tileOverlay)
             }
+            return MKOverlayRenderer()
         }
 
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -147,7 +162,8 @@ extension MapView {
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        let coordinator = Coordinator(self)
+        return coordinator
     }
 }
 
