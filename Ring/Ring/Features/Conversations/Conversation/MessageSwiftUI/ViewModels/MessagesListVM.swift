@@ -208,8 +208,10 @@ class MessagesListVM: ObservableObject {
         if let myLocation = self.myCoordinate {
             coordinates.append((myLocation, self.currentAccountAvatar))
         }
-        self.coordinates = coordinates
-        self.shouldShowMap = self.isAlreadySharingLocation() && !coordinates.isEmpty
+        DispatchQueue.main.async {
+            self.coordinates = coordinates
+            self.shouldShowMap = self.isAlreadySharingLocation() && !coordinates.isEmpty
+        }
     }
 
     private func insert(newMessage: MessageModel) -> Bool {
