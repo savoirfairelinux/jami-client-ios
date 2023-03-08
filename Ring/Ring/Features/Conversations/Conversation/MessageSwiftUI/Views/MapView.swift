@@ -24,7 +24,7 @@ import MapKit
 class LocationSharingAnnotation: NSObject, MKAnnotation {
     var avatar: UIImage!
     var coordinate: CLLocationCoordinate2D
-
+    
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
     }
@@ -45,7 +45,7 @@ struct MapView: UIViewRepresentable {
         let overlay = MKTileOverlay(urlTemplate: urlTemplate)
         overlay.canReplaceMapContent = true
         mapView.addOverlay(overlay, level: .aboveLabels)
-
+        
         addPins(mapView: mapView)
         zoomMap(mapView: mapView)
         return mapView
@@ -56,11 +56,13 @@ struct MapView: UIViewRepresentable {
     }
 
     func addPins(mapView: MKMapView) {
-        mapView.removeAnnotations(mapView.annotations)
-        for coordinate in coordinates {
-            let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
-            annotation.avatar = coordinate.1
-            mapView.addAnnotation(annotation)
+        if mapView.annotations.compactMap({ $0.coordinate }) != coordinates.compactMap({ $0.0 }) {
+            mapView.removeAnnotations(mapView.annotations)
+            for coordinate in coordinates {
+                let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
+                annotation.avatar = coordinate.1
+                mapView.addAnnotation(annotation)
+            }
         }
     }
 
@@ -77,12 +79,10 @@ extension MapView {
     class Coordinator: NSObject, MKMapViewDelegate {
 
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            if overlay is MKTileOverlay {
-                let renderer = MKTileOverlayRenderer(overlay: overlay)
-                return renderer
-            } else {
-                return MKTileOverlayRenderer()
+            if let tileOverlay = overlay as? MKTileOverlay {
+                return MKTileOverlayRenderer(tileOverlay: tileOverlay)
             }
+            return MKOverlayRenderer()
         }
 
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
