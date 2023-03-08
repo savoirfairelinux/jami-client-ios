@@ -30,6 +30,92 @@ class LocationSharingAnnotation: NSObject, MKAnnotation {
     }
 }
 
+// class OpenStreetMapTileOverlay: MKTileOverlay, URLSessionDownloadDelegate {
+//    let cache = NSCache<NSString, NSData>()
+//    let downloadQueue = OperationQueue()
+//    var downloadsInProgress = [URL: Operation]()
+//
+//    override func url(forTilePath path: MKTileOverlayPath) -> URL {
+//        return URL(string: "https://tile.openstreetmap.org/\(path.z)/\(path.x)/\(path.y).png")!
+//    }
+//
+//    override func loadTile(at path: MKTileOverlayPath, result: @escaping (Data?, Error?) -> Void) {
+//        let tileURL = url(forTilePath: path)
+//
+//        // Check if tile is already cached
+//        if let cachedData = cache.object(forKey: tileURL.absoluteString as NSString) {
+//            result(cachedData as Data, nil)
+//            return
+//        }
+//
+//        // Check if tile download is already in progress
+//        if downloadsInProgress[tileURL] != nil {
+//            return
+//        }
+//
+//        // Download tile
+//        let downloadOperation = BlockOperation {
+//            let sessionConfiguration = URLSessionConfiguration.default
+//            sessionConfiguration.requestCachePolicy = .reloadIgnoringLocalCacheData
+//            let session = URLSession(configuration: sessionConfiguration, delegate: self, delegateQueue: nil)
+//            let downloadTask = session.downloadTask(with: tileURL)
+//            downloadTask.resume()
+//        }
+//        downloadOperation.completionBlock = {
+//            if self.downloadsInProgress.keys.contains(tileURL) {
+//                self.downloadsInProgress.removeValue(forKey: tileURL)
+//            }
+//        }
+//        downloadsInProgress[tileURL] = downloadOperation
+//        downloadQueue.addOperation(downloadOperation)
+//    }
+//
+//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+//        guard let url = downloadTask.originalRequest?.url else { return }
+//
+//        do {
+//            let data = try Data(contentsOf: location)
+//            cache.setObject(data as NSData, forKey: url.absoluteString as NSString)
+//            if let response = downloadTask.response as? HTTPURLResponse,
+//               response.statusCode == 200 {
+//                if let imageData = NSData(contentsOf: location) {
+//                    DispatchQueue.main.async {
+//                        self.cache.setObject(imageData, forKey: url.absoluteString as NSString)
+//
+//                        let enumerator = self.cache.keyEnumerator()
+//                        var key: NSString?
+//
+//                        while let currentKey = enumerator.nextObject() as? NSString? {
+//                            key = currentKey
+//
+//                            if let date = self.cache.object(forKey: key!) as? Date {
+//                                if date.timeIntervalSinceNow < -3600 { // Replace with your own expiration logic
+//                                    self.cache.removeObject(forKey: key!)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            if let tileOperation = downloadsInProgress[url] {
+//                tileOperation.completionBlock?()
+//            }
+//        } catch {
+//            print("Error downloading tile: \(error.localizedDescription)")
+//        }
+//    }
+//
+//    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+//        if let error = error {
+//            print("Error downloading tile: \(error.localizedDescription)")
+//        }
+//    }
+//
+//    private class func prune(_ cache: NSCache<AnyObject, AnyObject>) {
+//
+//    }
+// }
+
 struct MapView: UIViewRepresentable {
     @Binding var coordinates: [(CLLocationCoordinate2D, UIImage)] {
         didSet {
@@ -45,6 +131,7 @@ struct MapView: UIViewRepresentable {
         let overlay = MKTileOverlay(urlTemplate: urlTemplate)
         overlay.canReplaceMapContent = true
         mapView.addOverlay(overlay, level: .aboveLabels)
+        //        addOverlay(to: mapView)
 
         addPins(mapView: mapView)
         zoomMap(mapView: mapView)
@@ -56,11 +143,13 @@ struct MapView: UIViewRepresentable {
     }
 
     func addPins(mapView: MKMapView) {
-        mapView.removeAnnotations(mapView.annotations)
-        for coordinate in coordinates {
-            let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
-            annotation.avatar = coordinate.1
-            mapView.addAnnotation(annotation)
+        if mapView.annotations.compactMap({ $0.coordinate }) != coordinates.compactMap({ $0.0 }) {
+            mapView.removeAnnotations(mapView.annotations)
+            for coordinate in coordinates {
+                let annotation = LocationSharingAnnotation(coordinate: coordinate.0)
+                annotation.avatar = coordinate.1
+                mapView.addAnnotation(annotation)
+            }
         }
     }
 
@@ -71,18 +160,23 @@ struct MapView: UIViewRepresentable {
             mapView.setRegion(region, animated: true)
         }
     }
+
+    //    private func addOverlay(to mapView: MKMapView) {
+    //        // Add a custom tile overlay to the map view that downloads and caches OpenStreetMap tiles
+    //        let overlay = OpenStreetMapTileOverlay()
+    //        overlay.canReplaceMapContent = true
+    //        mapView.addOverlay(overlay, level: .aboveLabels)
+    //    }
 }
 
 extension MapView {
     class Coordinator: NSObject, MKMapViewDelegate {
 
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            if overlay is MKTileOverlay {
-                let renderer = MKTileOverlayRenderer(overlay: overlay)
-                return renderer
-            } else {
-                return MKTileOverlayRenderer()
+            if let tileOverlay = overlay as? MKTileOverlay {
+                return MKTileOverlayRenderer(tileOverlay: tileOverlay)
             }
+            return MKOverlayRenderer()
         }
 
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
