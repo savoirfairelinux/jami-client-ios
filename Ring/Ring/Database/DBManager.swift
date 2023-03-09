@@ -631,7 +631,7 @@ class DBManager {
                 continue
             }
             let type = participant.contains("ring:") ? URIType.ring : URIType.sip
-            let uri = JamiURI.init(schema: type, infoHach: participant)
+            let uri = JamiURI.init(schema: type, infoHash: participant)
             let conversationModel = ConversationModel(withParticipantUri: uri,
                                                       accountId: accountId)
             if type == .sip {

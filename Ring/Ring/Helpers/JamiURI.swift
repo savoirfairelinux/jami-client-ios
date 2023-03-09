@@ -42,14 +42,14 @@ class JamiURI {
         self.schema = schema
     }
 
-    init(schema: URIType, infoHach: String, account: AccountModel) {
+    init(schema: URIType, infoHash: String, account: AccountModel) {
         self.schema = schema
-        self.parce(infoHach: infoHach, account: account)
+        self.parce(infoHash: infoHash, account: account)
     }
 
-    init(schema: URIType, infoHach: String) {
+    init(schema: URIType, infoHash: String) {
         self.schema = schema
-        self.parce(infoHach: infoHach)
+        self.parce(infoHash: infoHash)
     }
 
     init(from uriString: String) {
@@ -62,11 +62,11 @@ class JamiURI {
         } else {
             self.schema = .ring
         }
-        self.parce(infoHach: uriString)
+        self.parce(infoHash: uriString)
     }
 
-    private func parce(infoHach: String, account: AccountModel) {
-        self.parce(infoHach: infoHach)
+    private func parce(infoHash: String, account: AccountModel) {
+        self.parce(infoHash: infoHash)
         if self.schema == .ring || self.userInfo.isEmpty {
             return
         }
@@ -80,8 +80,8 @@ class JamiURI {
         }
     }
 
-    private func parce(infoHach: String) {
-        var info = infoHach.replacingOccurrences(of: "ring:", with: "")
+    private func parce(infoHash: String) {
+        var info = infoHash.replacingOccurrences(of: "ring:", with: "")
             .replacingOccurrences(of: "sip:", with: "")
             .replacingOccurrences(of: "@ring.dht", with: "")
             .replacingOccurrences(of: "<", with: "")

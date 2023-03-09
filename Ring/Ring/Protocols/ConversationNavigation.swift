@@ -47,7 +47,7 @@ enum ConversationState: State {
     case needToOnboard
     case returnToSmartList
     case migrateAccount(accountId: String)
-    case presentSwarmInfo(swarmInfo: SwarmInfo)
+    case presentSwarmInfo(swarmInfo: SwarmInfoProtocol)
 }
 
 protocol ConversationNavigation: AnyObject {
@@ -158,7 +158,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withStateable: swarmCreationViewController.viewModel)
     }
 
-    func presentSwarmInfo(swarmInfo: SwarmInfo) {
+    func presentSwarmInfo(swarmInfo: SwarmInfoProtocol) {
         if let flag = self.presentingVC[VCType.contact.rawValue], flag {
             return
         }

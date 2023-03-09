@@ -508,7 +508,7 @@ extension AppDelegate {
     func findContactAndStartCall(hash: String, isVideo: Bool) {
         // if saved jami hash
         if hash.isSHA1() {
-            let contactUri = JamiURI(schema: URIType.ring, infoHach: hash)
+            let contactUri = JamiURI(schema: URIType.ring, infoHash: hash)
             self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
             return
         }
@@ -522,11 +522,11 @@ extension AppDelegate {
             .subscribe(onNext: { usernameLookupStatus in
                 if usernameLookupStatus.state == .found {
                     guard let address = usernameLookupStatus.address else { return }
-                    let contactUri = JamiURI(schema: URIType.ring, infoHach: address)
+                    let contactUri = JamiURI(schema: URIType.ring, infoHash: address)
                     self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.ring)
                 } else {
                     // if saved sip contact
-                    let contactUri = JamiURI(schema: URIType.sip, infoHach: hash)
+                    let contactUri = JamiURI(schema: URIType.sip, infoHash: hash)
                     self.findAccountAndStartCall(uri: contactUri, isVideo: isVideo, type: AccountType.sip)
                 }
             })
@@ -542,7 +542,7 @@ extension AppDelegate {
         for account in self.accountService.accounts where account.type == type {
             if type == AccountType.sip {
                 let conatactUri = JamiURI(schema: URIType.sip,
-                                          infoHach: hash,
+                                          infoHash: hash,
                                           account: account)
                 hash = conatactUri.hash ?? ""
                 uriString = conatactUri.uriString ?? ""

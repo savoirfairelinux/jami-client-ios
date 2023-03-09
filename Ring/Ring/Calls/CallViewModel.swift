@@ -169,7 +169,7 @@ class CallViewModel: Stateable, ViewModel {
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
-                                           infoHach: call.participantUri,
+                                           infoHash: call.participantUri,
                                            account: account).uriString else { return nil }
         return self.profileService.getProfile(uri: uriString,
                                               createIfNotexists: true, accountId: account.id)
@@ -591,7 +591,7 @@ extension CallViewModel {
         guard let call = self.call else {
             return
         }
-        guard let jamiId = JamiURI(schema: URIType.ring, infoHach: call.participantUri).hash else {
+        guard let jamiId = JamiURI(schema: URIType.ring, infoHash: call.participantUri).hash else {
             return
         }
 

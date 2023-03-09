@@ -44,7 +44,7 @@ class ContactModel: Equatable {
         if let hash = dictionary["id"] {
             self.hash = hash
             if let uriString = JamiURI.init(schema: URIType.ring,
-                                            infoHach: hash).uriString {
+                                            infoHash: hash).uriString {
                 self.uriString = uriString
             }
         }

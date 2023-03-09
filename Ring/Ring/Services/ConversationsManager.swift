@@ -396,14 +396,14 @@ class ConversationsManager {
               let accountForMessage = self.accountsService.getAccount(fromAccountId: accountId) else { return }
 
         let type = AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() ? URIType.sip : URIType.ring
-        guard let peerUri = JamiURI.init(schema: type, infoHach: peerId, account: accountForMessage).uriString else { return }
+        guard let peerUri = JamiURI.init(schema: type, infoHash: peerId, account: accountForMessage).uriString else { return }
 
         if self.conversationService.isBeginningOfLocationSharing(incoming: true, contactUri: peerUri, accountId: accountId) {
             let shouldRefresh = currentAccount.id == accountId
 
             // Save (if first)
             guard let uriString = JamiURI.init(schema: type,
-                                               infoHach: peerUri,
+                                               infoHash: peerUri,
                                                account: accountForMessage).uriString else { return }
             let message = self.conversationService.createLocation(withId: messageId,
                                                                   byAuthor: uriString,
@@ -429,7 +429,7 @@ class ConversationsManager {
         let type = AccountModelHelper.init(withAccount: accountForMessage)
             .isAccountSip() ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
-                                           infoHach: peerUri,
+                                           infoHash: peerUri,
                                            account: accountForMessage).uriString else { return }
         let message = self.conversationService.createMessage(withId: messageId,
                                                              withContent: content,

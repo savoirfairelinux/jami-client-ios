@@ -236,10 +236,17 @@ class ConversationModel: Equatable {
     }
 
     static func == (lhs: ConversationModel, rhs: ConversationModel) -> Bool {
+        if lhs.type != rhs.type { return false }
+        /*
+         Swarm conversations must have an unique id, unless it temporary oneToOne
+         conversation. For non swarm conversations and for temporary swarm
+         conversations check participant and accountId.
+         */
         if !lhs.isSwarm() && !rhs.isSwarm() || lhs.id.isEmpty || rhs.id.isEmpty {
-            if let rParticipant = rhs.participants.first, let lParticipant = lhs.participants.first {
-                return (lParticipant == rParticipant && lhs.accountId == rhs.accountId && lhs.participants.count == rhs.participants.count)
+            if let rParticipant = rhs.getParticipants().first, let lParticipant = lhs.getParticipants().first {
+                return (lParticipant == rParticipant && lhs.accountId == rhs.accountId)
             }
+            return false
         }
         return lhs.id == rhs.id
     }

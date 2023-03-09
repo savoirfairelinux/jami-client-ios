@@ -153,7 +153,7 @@ class MessageViewModel {
     private func subscribeProfileServiceContactPhoto() {
         guard let account = self.accountService.currentAccount else { return }
         let schema: URIType = account.type == .sip ? .sip : .ring
-        guard let contactURI = JamiURI(schema: schema, infoHach: self.message.authorId).uriString else { return }
+        guard let contactURI = JamiURI(schema: schema, infoHash: self.message.authorId).uriString else { return }
         self.profileService
             .getProfile(uri: contactURI,
                         createIfNotexists: false,

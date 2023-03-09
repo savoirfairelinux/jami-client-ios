@@ -19,19 +19,16 @@
  */
 
 import Foundation
-import RxSwift
 
-class SwarmInfoViewModel: Stateable, ViewModel {
-    private let stateSubject = PublishSubject<State>()
-    lazy var state: Observable<State> = {
-        return self.stateSubject.asObservable()
-    }()
-
-    var swarmInfo: SwarmInfoProtocol?
-
-    let injectionBag: InjectionBag
-
-    required init(with injectionBag: InjectionBag) {
-        self.injectionBag = injectionBag
-    }
-}
+let jamiId1 = "b48cf0140bea12734db05ebcdb012f1d265bed84"
+let jamiId2 = "e5ghj8140bea12734db05ebcdb012f1d2634dv56"
+let accountId1 = "accountId1"
+let accountId2 = "accountId2"
+let conversationId1 = "conversationId1"
+let conversationId2 = "conversationId2"
+let registeredName1 = "registeredName1"
+let registeredName2 = "registeredName2"
+let profileName1 = "profileName1"
+let profileName2 = "profileName2"
+let sipTestNumber1 = "234"
+let title1 = "title1"

@@ -42,7 +42,7 @@ class ScanViewModel: ViewModel, Stateable {
         }
         // Create new converation
         let conversation = ConversationModel(withParticipantUri: JamiURI.init(schema: URIType.ring,
-                                                                              infoHach: recipientRingId),
+                                                                              infoHash: recipientRingId),
                                              accountId: currentAccount.id)
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
