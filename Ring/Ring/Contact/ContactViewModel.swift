@@ -107,7 +107,7 @@ class ContactViewModel: ViewModel, Stateable {
                 self.nameService.lookupAddress(withAccount: account.id, nameserver: "", address: jamiId)
             }
             let schema: URIType = account.type == .sip ? .sip : .ring
-            guard let contactURI = JamiURI(schema: schema, infoHach: jamiId).uriString else { return }
+            guard let contactURI = JamiURI(schema: schema, infoHash: jamiId).uriString else { return }
             var initialProfile = Profile(uri: jamiId, alias: "", photo: "", type: schema.getString())
             if let profile = self.contactService.getProfile(uri: contactURI, accountId: conversation.accountId) {
                 initialProfile = profile

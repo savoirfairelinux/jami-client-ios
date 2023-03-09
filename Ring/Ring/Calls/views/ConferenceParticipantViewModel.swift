@@ -45,7 +45,7 @@ class ConferenceParticipantViewModel {
         }
         let type = account.type == AccountType.sip ? URIType.sip : URIType.ring
         guard let uriString = JamiURI.init(schema: type,
-                                           infoHach: participantId,
+                                           infoHash: participantId,
                                            account: account).uriString else { return Observable.just(nil) }
         return profileService.getProfile(uri: uriString,
                                          createIfNotexists: false,

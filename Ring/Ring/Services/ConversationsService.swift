@@ -289,7 +289,7 @@ class ConversationsService {
         if let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId),
            conversation.isCoredialog(),
            let jamiId = conversation.getParticipants().first?.jamiId,
-           let uri = JamiURI.init(schema: .ring, infoHach: jamiId).uriString,
+           let uri = JamiURI.init(schema: .ring, infoHash: jamiId).uriString,
            let nonSwarmConvId = try? self.dbManager.getConversationsFor(contactUri: uri, accountId: accountId) {
             var conversations = self.conversations.value
             _ = self.dbManager
@@ -314,7 +314,7 @@ class ConversationsService {
 
     func saveJamsConversation(for jamiId: String, accountId: String) {
         if self.getConversationForParticipant(jamiId: jamiId, accontId: accountId) != nil { return }
-        let contactUri = JamiURI(schema: .ring, infoHach: jamiId)
+        let contactUri = JamiURI(schema: .ring, infoHash: jamiId)
         guard let contactUriString = contactUri.uriString else { return }
         let conversationId = dbManager.createConversationsFor(contactUri: contactUriString, accountId: accountId)
         if conversationId.isEmpty || conversationId == "-1" { return }
@@ -477,7 +477,7 @@ class ConversationsService {
             let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: jamiId, flag: 0))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
             let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
-            let contactUri = JamiURI.init(schema: type, infoHach: jamiId, account: senderAccount)
+            let contactUri = JamiURI.init(schema: type, infoHash: jamiId, account: senderAccount)
             guard let stringUri = contactUri.uriString else {
                 completable(.completed)
                 return Disposables.create {}
@@ -581,7 +581,7 @@ class ConversationsService {
     func removeConversationFromDB(conversation: ConversationModel, keepConversation: Bool) {
         guard let jamiId = conversation.getParticipants().first?.jamiId else { return }
         let schema: URIType = conversation.type == .sip ? .sip : .ring
-        guard let uri = JamiURI(schema: schema, infoHach: jamiId).uriString else { return }
+        guard let uri = JamiURI(schema: schema, infoHash: jamiId).uriString else { return }
         self.dbManager.clearHistoryFor(accountId: conversation.accountId, and: uri, keepConversation: keepConversation)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onCompleted: { [weak self] in
@@ -670,7 +670,7 @@ class ConversationsService {
             let isIncoming = transferInfo.flags == 1
             let interactionType: InteractionType = isIncoming ? .iTransfer : .oTransfer
             guard let contactUri = JamiURI.init(schema: URIType.ring,
-                                                infoHach: transferInfo.peer).uriString else {
+                                                infoHash: transferInfo.peer).uriString else {
                 completable(.completed)
                 return Disposables.create { }
             }
@@ -951,7 +951,7 @@ extension ConversationsService {
             let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri, flag: 1))
             let accountHelper = AccountModelHelper(withAccount: senderAccount)
             let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
-            let contactUri = JamiURI.init(schema: type, infoHach: recipientUri, account: senderAccount)
+            let contactUri = JamiURI.init(schema: type, infoHash: recipientUri, account: senderAccount)
             guard let stringUri = contactUri.uriString else {
                 completable(.completed)
                 return Disposables.create {}
@@ -1001,13 +1001,13 @@ extension ConversationsService {
     func deleteLocationUpdate(incoming: Bool, peerUri: String, accountId: String, shouldRefreshConversations: Bool) -> Completable {
         return Completable.create(subscribe: { [weak self] completable in
             guard let self = self,
-                  let contactUri = JamiURI(schema: .ring, infoHach: peerUri).uriString else { return Disposables.create { } }
+                  let contactUri = JamiURI(schema: .ring, infoHash: peerUri).uriString else { return Disposables.create { } }
             self.dbManager.deleteLocationUpdates(incoming: incoming, peerUri: contactUri, accountId: accountId)
                 .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                 .subscribe(onCompleted: {
                     if shouldRefreshConversations, let conversation = self.conversations.value
                         .filter({ conversation in
-                            return conversation.getParticipants().first?.jamiId == JamiURI(schema: .ring, infoHach: peerUri).hash &&
+                            return conversation.getParticipants().first?.jamiId == JamiURI(schema: .ring, infoHash: peerUri).hash &&
                                 conversation.accountId == accountId
                         })
                         .first {

@@ -219,7 +219,7 @@ class RequestsService {
                     request.synchronizing.accept(true)
                     /// save profile
                     let photo = (request.avatar != nil) ? request.avatar!.base64EncodedString() : ""
-                    let participantURI = JamiURI.init(schema: .ring, infoHach: jamiId)
+                    let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
                     _ = self.createProfile(with: participantURI.uriString!, alias: request.name, photo: photo, accountId: request.accountId)
                     if request.conversationId.isEmpty {
                         self.removeRequest(withJamiId: jamiId, accountId: accountId)
@@ -312,7 +312,7 @@ class RequestsService {
                     }
                 }
                 self.requestsAdapter.sendTrustRequest(toContact: jamiId, payload: payload, withAccountId: accountId)
-                let participantURI = JamiURI.init(schema: .ring, infoHach: jamiId)
+                let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
                 let photo = avatar ?? ""
                 _ = self.createProfile(with: participantURI.uriString!, alias: alias, photo: photo, accountId: accountId)
                 completable(.completed)

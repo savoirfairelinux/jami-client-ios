@@ -40,8 +40,9 @@ class JamiSearchView: NSObject {
     let incognitoHeaderHeight: CGFloat = 0
     var showSearchResult: Bool = true
 
-    func configure(with injectionBag: InjectionBag, source: FilterConversationDataSource, isIncognito: Bool) {
+    func configure(with injectionBag: InjectionBag, source: FilterConversationDataSource, isIncognito: Bool, delegate: FilterConversationDelegate?) {
         self.viewModel = JamiSearchViewModel(with: injectionBag, source: source)
+        self.viewModel.setDelegate(delegate: delegate)
         self.isIncognito = isIncognito
         self.setUpView()
     }
@@ -104,7 +105,10 @@ class JamiSearchView: NSObject {
         // search status label
         self.viewModel.searchStatus
             .observe(on: MainScheduler.instance)
-            .bind(to: self.searchingLabel.rx.text)
+            .subscribe(onNext: { [weak self] status in
+                guard let self = self else { return }
+                self.searchingLabel.text = status.toString()
+            })
             .disposed(by: disposeBag)
         searchingLabel.textColor = UIColor.jamiLabelColor
 

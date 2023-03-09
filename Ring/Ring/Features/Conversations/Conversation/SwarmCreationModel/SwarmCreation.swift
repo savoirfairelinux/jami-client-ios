@@ -30,9 +30,9 @@ class ParticipantRow: Identifiable, ObservableObject {
 
     init(participantData: ParticipantInfo) {
         self.id = participantData.jamiId
-        participantData.name
+        participantData.finalName
             .observe(on: MainScheduler.instance)
-            .startWith(participantData.name.value)
+            .startWith(participantData.finalName.value)
             .subscribe {[weak self] name in
                 guard let self = self else { return }
                 self.name = name

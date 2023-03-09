@@ -70,7 +70,7 @@ class ProfilesService: ProfilesAdapterDelegate {
     }
 
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
-        let uri = JamiURI(schema: URIType.ring, infoHach: uri)
+        let uri = JamiURI(schema: URIType.ring, infoHash: uri)
         guard let uriString = uri.uriString,
               let data = FileManager.default.contents(atPath: path),
               let vCard = CNContactVCardSerialization.parseToVCard(data: data) else { return }
@@ -96,7 +96,7 @@ class ProfilesService: ProfilesAdapterDelegate {
             return
         }
 
-        let uri = JamiURI(schema: URIType.ring, infoHach: ringId)
+        let uri = JamiURI(schema: URIType.ring, infoHash: ringId)
         let uriString = uri.uriString ?? ringId
         self.triggerProfileSignal(uri: uriString, createIfNotexists: false, accountId: accountId)
     }
@@ -193,7 +193,7 @@ class ProfilesService: ProfilesAdapterDelegate {
                 stringImage = image.base64EncodedString()
             }
             guard let uri = JamiURI.init(schema: URIType.ring,
-                                         infoHach: ringID).uriString else {
+                                         infoHash: ringID).uriString else {
                 return
             }
             _ = self.dbManager

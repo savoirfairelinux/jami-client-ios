@@ -283,7 +283,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     /// For FilterConversationDataSource protocol
     func conversationFound(conversation: ConversationViewModel?, name: String) {
-        contactFoundConversation.accept(conversation)
+        // contactFoundConversation.accept(conversation)
     }
 
     func delete(conversationViewModel: ConversationViewModel) {
@@ -332,11 +332,6 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         }
     }
 
-    func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
-        self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
-                                                                        conversationViewModel))
-    }
-
     func showAccountSettings() {
         self.stateSubject.onNext(ConversationState.showAccountSettings)
     }
@@ -353,7 +348,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             return
         }
         let uri = JamiURI.init(schema: URIType.sip,
-                               infoHach: number,
+                               infoHash: number,
                                account: account)
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: account.id,
@@ -395,5 +390,16 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     func showGeneralSettings() {
         self.stateSubject.onNext(ConversationState.showGeneralSettings)
+    }
+}
+
+extension SmartlistViewModel: FilterConversationDelegate {
+    func temporaryConversationCreated(conversation: ConversationViewModel?) {
+        self.contactFoundConversation.accept(conversation)
+    }
+
+    func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
+        self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
+                                                                        conversationViewModel))
     }
 }

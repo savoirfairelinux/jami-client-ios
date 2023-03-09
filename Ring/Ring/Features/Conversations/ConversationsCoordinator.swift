@@ -281,7 +281,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         guard let account = accountService.currentAccount else {
             return
         }
-        guard let uriString = JamiURI(schema: URIType.ring, infoHach: participantId).uriString else {
+        guard let uriString = JamiURI(schema: URIType.ring, infoHash: participantId).uriString else {
             return
         }
         if let model = getConversationViewModel(participantUri: uriString) {

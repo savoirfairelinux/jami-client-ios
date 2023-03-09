@@ -63,7 +63,7 @@ class GeneratedInteractionsManager {
 
                 let type = AccountModelHelper.init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
                 guard let uriString = JamiURI.init(schema: type,
-                                                   infoHach: jamiId,
+                                                   infoHash: jamiId,
                                                    account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,
@@ -134,7 +134,7 @@ class GeneratedInteractionsManager {
                     guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId.filterOutHost(), accontId: accountID), !conversation.isSwarm() else { return }
                 } else {
                     // ensure sip conversation exists
-                    guard let uri = JamiURI.init(schema: .sip, infoHach: jamiId, account: account).uriString else { return }
+                    guard let uri = JamiURI.init(schema: .sip, infoHash: jamiId, account: account).uriString else { return }
                     self.conversationService.createSipConversation(uri: uri, accountId: accountID)
                 }
 
@@ -149,7 +149,7 @@ class GeneratedInteractionsManager {
                 let type = AccountModelHelper
                     .init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
                 guard let stringUri = JamiURI.init(schema: type,
-                                                   infoHach: jamiId,
+                                                   infoHash: jamiId,
                                                    account: account).uriString else { return }
                 var shouldUpdateConversations = false
                 if let currentAccount = self.accountService.currentAccount,

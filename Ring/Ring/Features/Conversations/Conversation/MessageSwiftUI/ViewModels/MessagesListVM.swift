@@ -590,7 +590,7 @@ class MessagesListVM: ObservableObject {
             return
         }
         let schema: URIType = account.type == .sip ? .sip : .ring
-        guard let contactURI = JamiURI(schema: schema, infoHach: id).uriString else { return }
+        guard let contactURI = JamiURI(schema: schema, infoHash: id).uriString else { return }
         self.profileService
             .getProfile(uri: contactURI,
                         createIfNotexists: false,

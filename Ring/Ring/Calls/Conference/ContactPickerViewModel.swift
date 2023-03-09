@@ -168,7 +168,7 @@ extension ContactPickerViewModel {
         calls.values.forEach { call in
             guard let account = self.accountService.getAccount(fromAccountId: call.accountId) else { return }
             let type = account.type == AccountType.ring ? URIType.ring : URIType.sip
-            let uri = JamiURI.init(schema: type, infoHach: call.participantUri, account: account)
+            let uri = JamiURI.init(schema: type, infoHash: call.participantUri, account: account)
             guard let uriString = uri.uriString else { return }
             guard let hashString = uri.hash else { return }
             callURIs.append(uriString)

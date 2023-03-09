@@ -485,7 +485,7 @@ class CallsService: CallsAdapterDelegate {
                                           isMixed: true)
         let accountHelper = AccountModelHelper(withAccount: accountId)
         let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
-        let contactUri = JamiURI.init(schema: type, infoHach: call.participantUri, account: accountId)
+        let contactUri = JamiURI.init(schema: type, infoHash: call.participantUri, account: accountId)
         guard let stringUri = contactUri.uriString else {
             return
         }

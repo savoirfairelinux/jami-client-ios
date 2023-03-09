@@ -361,7 +361,7 @@ class AccountsService: AccountAdapterDelegate {
                 if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
                     throw AddAccountError.unknownError
                 }
-                let uri = JamiURI(schema: URIType.ring, infoHach: accountModel.jamiId)
+                let uri = JamiURI(schema: URIType.ring, infoHash: accountModel.jamiId)
                 let uriString = uri.uriString ?? ""
                 _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id, accountURI: uriString)
                 self.loadAccountsFromDaemon()
@@ -445,7 +445,7 @@ class AccountsService: AccountAdapterDelegate {
                 if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
                     throw AddAccountError.unknownError
                 }
-                let uri = JamiURI(schema: URIType.ring, infoHach: accountModel.jamiId)
+                let uri = JamiURI(schema: URIType.ring, infoHash: accountModel.jamiId)
                 let uriString = uri.uriString ?? ""
                 _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id, accountURI: uriString)
                 self.loadAccountsFromDaemon()

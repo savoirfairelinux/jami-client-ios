@@ -68,7 +68,7 @@ class ContactsService {
         guard let profiles = self.dbManager
                 .getProfilesForAccount(accountId: account.id) else { return }
         let contacts = profiles.map({ profile in
-            return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHach: profile.uri))
+            return ContactModel(withUri: JamiURI.init(schema: URIType.sip, infoHash: profile.uri))
         })
         self.contacts.accept([])
         for contact in contacts where self.contacts.value.firstIndex(of: contact) == nil {
