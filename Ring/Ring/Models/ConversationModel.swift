@@ -236,12 +236,26 @@ class ConversationModel: Equatable {
     }
 
     static func == (lhs: ConversationModel, rhs: ConversationModel) -> Bool {
+        if lhs.type != rhs.type { return false }
+        /*
+         Swarm conversations must have an unique id, unless it temporary oneToOne
+         conversation. For non swarm conversations and for temporary swarm
+         conversations check participant and accountId.
+         */
         if !lhs.isSwarm() && !rhs.isSwarm() || lhs.id.isEmpty || rhs.id.isEmpty {
-            if let rParticipant = rhs.participants.first, let lParticipant = lhs.participants.first {
-                return (lParticipant == rParticipant && lhs.accountId == rhs.accountId && lhs.participants.count == rhs.participants.count)
+            if let rParticipant = rhs.getParticipants().first, let lParticipant = lhs.getParticipants().first {
+                if lParticipant.jamiId == "b48cf0140bea12734db05ebcdb012f1d265bed84" {
+                    print("dsfdf")
+                }
+                return (lParticipant == rParticipant && lhs.accountId == rhs.accountId)
             }
+            return false
         }
         return lhs.id == rhs.id
+    }
+
+    func isTempoaray() -> Bool {
+        return self.isSwarm() && self.id.isEmpty
     }
 
     private func subscribeUnreadMessages() {

@@ -44,7 +44,7 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
         super.viewDidLoad()
         self.configureRingNavigationBar()
         self.setupSearchBar()
-        searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: true)
+        searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: true, delegate: viewModel)
         self.setupUI()
         self.applyL10n()
 

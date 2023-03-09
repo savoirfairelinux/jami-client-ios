@@ -45,7 +45,7 @@ class SwarmInfoVM: ObservableObject {
     private let conversationService: ConversationsService
     private let contactsService: ContactsService
 
-    var swarmInfo: SwarmInfo
+    var swarmInfo: SwarmInfoProtocol
     var conversation: ConversationModel?
     var description: String = "" {
         didSet {
@@ -73,7 +73,7 @@ class SwarmInfoVM: ObservableObject {
     var colorPickerStatus = BehaviorRelay<Bool>(value: false)
     var navBarColor = BehaviorRelay<String>(value: "")
 
-    init(with injectionBag: InjectionBag, swarmInfo: SwarmInfo) {
+    init(with injectionBag: InjectionBag, swarmInfo: SwarmInfoProtocol) {
         self.injectionBag = injectionBag
         self.accountService = injectionBag.accountService
         self.conversationService = injectionBag.conversationsService
