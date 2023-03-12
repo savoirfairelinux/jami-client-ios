@@ -24,6 +24,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05f09792_41109ddc",
+        "filename": "Ring/RingTests/ConversationModelTests.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-12T15:16:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b02b85b_4d98dd54",
+      "range": {
+        "startLine": 35,
+        "startChar": 53,
+        "endLine": 35,
+        "endChar": 61
+      },
+      "revId": "9827c64858de5429ca370f905abc94972a282c1f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f43d7c0_cbb00f23",
@@ -47,6 +71,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ec107c3_ea25beea",
+        "filename": "Ring/RingTests/ConversationModelTests.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-12T15:16:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f43d7c0_cbb00f23",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 39
+      },
+      "revId": "9827c64858de5429ca370f905abc94972a282c1f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a82fdc2_5e541e07",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-03-12T02:09:41Z",
       "side": 1,
       "message": "ConversationExists is fine",
+      "range": {
+        "startLine": 109,
+        "startChar": 13,
+        "endLine": 109,
+        "endChar": 33
+      },
+      "revId": "9827c64858de5429ca370f905abc94972a282c1f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa4bab0b_b63a884d",
+        "filename": "Ring/RingTests/JamiSearchViewModelTests.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-12T15:16:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a82fdc2_5e541e07",
       "range": {
         "startLine": 109,
         "startChar": 13,
