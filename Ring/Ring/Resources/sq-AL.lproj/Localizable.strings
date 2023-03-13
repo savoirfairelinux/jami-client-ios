@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Vetëlidhu në rrjet vendor";
 "accountPage.autoRegistration" = "Regjistrohu automatikisht pas skadimit";
 "accountPage.connectivityHeader" = "Aftësi lidhjeje";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Aktivizo TURN";
 "accountPage.turnServer" = "Adresë TURN";
 "accountPage.turnUsername" = "Emër përdoruesi TURN";
 "accountPage.turnPassword" = "Fjalëkalim TURN";

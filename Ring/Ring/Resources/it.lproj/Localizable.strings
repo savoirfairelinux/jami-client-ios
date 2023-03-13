@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Connessione automatica sulla rete locale";
 "accountPage.autoRegistration" = "Registrazione automatica dopo la scadenza";
 "accountPage.connectivityHeader" = "Connessione";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Abilita TURN";
 "accountPage.turnServer" = "Indirizzo TURN";
 "accountPage.turnUsername" = "Nome utente TURN";
 "accountPage.turnPassword" = "Password TURN";

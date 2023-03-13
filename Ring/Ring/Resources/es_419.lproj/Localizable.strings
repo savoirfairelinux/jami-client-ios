@@ -291,10 +291,10 @@
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 "accountPage.peerDiscovery" = "Auto connect on local network";
 "accountPage.autoRegistration" = "Auto register after expiration";
-"accountPage.connectivityHeader" = "Connectivity";
+"accountPage.connectivityHeader" = "Conectividad";
 "accountPage.turnEnabled" = "Enable TURN";
-"accountPage.turnServer" = "TURN address";
-"accountPage.turnUsername" = "TURN username";
+"accountPage.turnServer" = "Dirección TURN";
+"accountPage.turnUsername" = "Nombre de usuario en TURN";
 "accountPage.turnPassword" = "Contraseña TURN";
 "accountPage.turnRealm" = "Reino TURN";
 

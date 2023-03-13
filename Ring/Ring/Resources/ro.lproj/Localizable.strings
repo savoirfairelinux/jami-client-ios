@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Conectare automată la rețeaua locală";
 "accountPage.autoRegistration" = "Înscriere automată după expirare";
 "accountPage.connectivityHeader" = "Conectare";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Activează TURN";
 "accountPage.turnServer" = "Adresa TURN";
 "accountPage.turnUsername" = "Nume de utilizator TURN";
 "accountPage.turnPassword" = "Parola TURN";

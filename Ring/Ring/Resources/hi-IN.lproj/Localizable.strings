@@ -293,7 +293,7 @@
 "accountPage.autoRegistration" = "Auto register after expiration";
 "accountPage.connectivityHeader" = "Connectivity";
 "accountPage.turnEnabled" = "Enable TURN";
-"accountPage.turnServer" = "TURN address";
+"accountPage.turnServer" = "टर्न पता";
 "accountPage.turnUsername" = "TURN username";
 "accountPage.turnPassword" = "TURN password";
 "accountPage.turnRealm" = "TURN realm";
