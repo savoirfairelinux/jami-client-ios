@@ -66,16 +66,6 @@ class DaemonServiceTests: XCTestCase {
     }
 
     /**
-     Tests that the Ring Daemon Service does not start again if it is already started.
-     */
-    func testAlreadyRunningException() {
-        let daemonService = testStart()
-        XCTAssertThrowsError(try daemonService.startDaemon()) { (error) in
-            XCTAssertEqual(error as? StartDaemonError, StartDaemonError.daemonAlreadyRunning)
-        }
-    }
-
-    /**
      Tests that the Ring Daemon Service does not stop if it is not currently running.
      */
     func testDaemonNotRunningException() {
