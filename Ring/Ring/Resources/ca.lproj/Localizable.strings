@@ -291,11 +291,11 @@
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 "accountPage.peerDiscovery" = "Connecta automàticament a la xarxa local";
 "accountPage.autoRegistration" = "Auto register after expiration";
-"accountPage.connectivityHeader" = "Connectivity";
+"accountPage.connectivityHeader" = "Connectivitat";
 "accountPage.turnEnabled" = "Enable TURN";
 "accountPage.turnServer" = "TURN address";
-"accountPage.turnUsername" = "TURN username";
-"accountPage.turnPassword" = "TURN password";
+"accountPage.turnUsername" = "Usuari de TURN";
+"accountPage.turnPassword" = "Contrasenya de TURN";
 "accountPage.turnRealm" = "TURN realm";
 
 //Account

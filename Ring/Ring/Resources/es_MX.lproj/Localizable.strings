@@ -291,10 +291,10 @@
 "accountPage.boothModeAlertMessage" = "Después de habilitar el modo de conversación reservada, se eliminarán todas sus conversaciones.";
 "accountPage.peerDiscovery" = "Conectarse automáticamente en red local";
 "accountPage.autoRegistration" = "Registrar automáticamente luego de la expiración";
-"accountPage.connectivityHeader" = "Connectivity";
+"accountPage.connectivityHeader" = "Conectividad";
 "accountPage.turnEnabled" = "Enable TURN";
 "accountPage.turnServer" = "Dirección TURN";
-"accountPage.turnUsername" = "TURN username";
+"accountPage.turnUsername" = "Nombre de usuario en TURN";
 "accountPage.turnPassword" = "Contraseña TURN";
 "accountPage.turnRealm" = "Reino TURN";
 

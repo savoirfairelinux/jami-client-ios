@@ -117,7 +117,7 @@
 "createProfile.skipCreateProfile" = "Átugrani";
 "createProfile.profileCreated" = "Tovább";
 "createProfile.title" = "Névjegy testreszabása";
-"createProfile.enterNameLabel" = "Adja meg a megjelenítési nevet";
+"createProfile.enterNameLabel" = "Megjelenítendő név megadása";
 "createProfile.enterNamePlaceholder" = "Név megadása";
 "createProfile.subtitle" = "A névjegyed csak a kapcsolataival kerül megosztásra. Bármikor megváltoztathatja.";
 "createProfile.createYourAvatar" = "Névjegykép létrehozása";
@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Ónműködő csatlakozás helyi hálózaton";
 "accountPage.autoRegistration" = "Önműködő bejegyzése a lejárat után";
 "accountPage.connectivityHeader" = "Kapcsolódás";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "TURN-kiszolgáló engedélyezése";
 "accountPage.turnServer" = "TURN cím";
 "accountPage.turnUsername" = "TURN felhasználónév";
 "accountPage.turnPassword" = "TURN jelszó";

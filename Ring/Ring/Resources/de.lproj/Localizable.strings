@@ -291,11 +291,11 @@
 "accountPage.boothModeAlertMessage" = "Nach der Aktivierung des Geheim-Modus werden alle Ihre Gespräche entfernt.";
 "accountPage.peerDiscovery" = "In lokalem Netzwerk automatisch verbinden";
 "accountPage.autoRegistration" = "Automatische Registrierung nach Ablauf";
-"accountPage.connectivityHeader" = "Connectivity";
-"accountPage.turnEnabled" = "Enable TURN";
-"accountPage.turnServer" = "TURN address";
-"accountPage.turnUsername" = "TURN username";
-"accountPage.turnPassword" = "TURN password";
+"accountPage.connectivityHeader" = "Verbindung";
+"accountPage.turnEnabled" = "TURN aktivieren";
+"accountPage.turnServer" = "TURN Adresse";
+"accountPage.turnUsername" = "TURN-Benutzer";
+"accountPage.turnPassword" = "TURN-Passwort";
 "accountPage.turnRealm" = "TURN-Realm";
 
 //Account
