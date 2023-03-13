@@ -15,10 +15,15 @@ fastlane_version "2.68.0"
 
 default_platform :ios
 
+ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
+
 platform :ios do
   desc "Runs all the tests"
   lane :test do
-    scan
+    scan(
+      scheme: "Ring",
+      sdk: "iphonesimulator"
+    )
   end
 
   desc "Test build without packaging"
