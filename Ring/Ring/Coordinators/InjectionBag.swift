@@ -36,7 +36,7 @@ class InjectionBag {
     let audioService: AudioService
     let dataTransferService: DataTransferService
     let profileService: ProfilesService
-    let callsProvider: CallsProviderDelegate
+    let callsProvider: CallsProviderService
     let locationSharingService: LocationSharingService
     let requestsService: RequestsService
     let systemService: SystemService
@@ -53,7 +53,7 @@ class InjectionBag {
           withAudioService audioService: AudioService,
           withDataTransferService dataTransferService: DataTransferService,
           withProfileService profileService: ProfilesService,
-          withCallsProvider callsProvider: CallsProviderDelegate,
+          withCallsProvider callsProvider: CallsProviderService,
           withLocationSharingService locationSharingService: LocationSharingService,
           withRequestsService requestsService: RequestsService,
           withSystemService systemService: SystemService) {

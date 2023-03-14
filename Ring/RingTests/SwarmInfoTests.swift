@@ -39,7 +39,7 @@ final class SwarmInfoTests: XCTestCase {
         let audioService = AudioService(withAudioAdapter: AudioAdapter())
         let systemService = SystemService(withSystemAdapter: SystemAdapter())
         let networkService = NetworkService()
-        let callsProvider: CallsProviderDelegate = CallsProviderDelegate()
+        let callsProvider: CallsProviderService = CallsProviderService(provider: CXProvider(configuration: CallsHelpers.providerConfiguration()))
         let callService: CallsService = CallsService(withCallsAdapter: CallsAdapter(), dbManager: dBManager)
         let accountService: AccountsService = AccountsService(withAccountAdapter: AccountAdapter(), dbManager: dBManager)
         let contactsService: ContactsService = ContactsService(withContactsAdapter: ContactsAdapter(), dbManager: dBManager)

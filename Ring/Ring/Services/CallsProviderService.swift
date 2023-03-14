@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2019-2022 Savoir-faire Linux Inc.
+ *  Copyright (C) 2019-2023 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -21,7 +21,6 @@
 import AVFoundation
 import CallKit
 import RxSwift
-import os
 
 enum UnhandeledCallState {
     case answered
@@ -47,78 +46,72 @@ class UnhandeledCall: Equatable, Hashable {
     }
 }
 
-class CallsProviderDelegate: NSObject {
-    private lazy var provider: CXProvider? = nil
+class CallsProviderService: NSObject {
+    private let provider: CXProvider
     private lazy var callController = CXCallController()
-    let responseStream = PublishSubject<ServiceEvent>()
-    var sharedResponseStream: Observable<ServiceEvent>
     private let disposeBag = DisposeBag()
+    // Calls that were created from notification extension and waiting for daemon to connect.
     var unhandeledCalls = Set<UnhandeledCall>()
-    weak var timer: Timer?
+    // Timer to stop pending unhandeled call if no information about call received from the daemon.
+    private weak var timer: Timer?
+    // Timeout in seconds to wait until unhandeled call should be stopped.
+    private let pendingCallTimeout = 15.0
 
-    override init() {
+    private let responseStream = PublishSubject<ServiceEvent>()
+    var sharedResponseStream: Observable<ServiceEvent>
+
+    init(provider: CXProvider, delegate: CXProviderDelegate? = nil) {
         self.sharedResponseStream = responseStream.share()
+        self.provider = provider
         super.init()
-        let providerConfiguration = CXProviderConfiguration()
-        providerConfiguration.supportsVideo = true
-        providerConfiguration.supportedHandleTypes = [.generic, .phoneNumber]
-        providerConfiguration.ringtoneSound = "default.wav"
-        providerConfiguration.iconTemplateImageData = UIImage(asset: Asset.jamiLogo)?.pngData()
-        providerConfiguration.maximumCallGroups = 1
-        providerConfiguration.maximumCallsPerCallGroup = 1
-
-        provider = CXProvider(configuration: providerConfiguration)
-        provider?.setDelegate(self, queue: nil)
+        if let delegate = delegate {
+            self.provider.setDelegate(delegate, queue: nil)
+        } else {
+            self.provider.setDelegate(self, queue: nil)
+        }
         self.responseStream.disposed(by: disposeBag)
     }
 }
 
-extension CallsProviderDelegate {
+extension CallsProviderService {
     func stopCall(callUUID: UUID, participant: String) {
-        var uuid = callUUID
-        if let call = getUnhandeledCall(for: callUUID) {
+        // Remove call from pending unhandeled calls. Get pending call by jamiId, because uuid could be different for unhandeled call and for incoming call.
+        if let call = getUnhandeledCall(peerId: participant) {
+            let unhandeledCallUUID = call.uuid
             unhandeledCalls.remove(call)
-        } else if let call = getUnhandeledCall(for: participant) {
-            uuid = call.uuid
-            unhandeledCalls.remove(call)
-        }
-        let callController = CXCallController()
-        let endCallAction = CXEndCallAction(call: uuid)
-        let transaction = CXTransaction(action: endCallAction)
-        callController.request(transaction) { error in
-            if let error = error {
-                print("Error requesting transaction: \(error)")
-            } else {
-                print("Requested transaction successfully")
+            // If unhandeled calls uuid is different from requested callUUID stop it.
+            if unhandeledCallUUID != callUUID {
+                let endCallAction = CXEndCallAction(call: unhandeledCallUUID)
+                let transaction = CXTransaction(action: endCallAction)
+                self.requestTransaction(transaction)
             }
         }
+        // Send request end call to CallKit.
+        let endCallAction = CXEndCallAction(call: callUUID)
+        let transaction = CXTransaction(action: endCallAction)
+        self.requestTransaction(transaction)
     }
+
     func hasPendingTransactions() -> Bool {
         return !self.callController.callObserver.calls.isEmpty
     }
 
     func handleIncomingCall(account: AccountModel, call: CallModel) {
-        if let unhandeledCall = getUnhandeledCall(for: call.paricipantHash()) {
+        if let unhandeledCall = getUnhandeledCall(peerId: call.paricipantHash()) {
             defer {
                 unhandeledCalls.remove(unhandeledCall)
             }
             call.callUUID = unhandeledCall.uuid
             if unhandeledCall.state != .awaiting {
-                /// CallKit already received user action before call received from the daemon. Notify call view about the action
+                // CallKit already received user action before call received from the daemon. Notify call view about the action
                 let serviceEventType: ServiceEventType = unhandeledCall.state == .answered ? .callProviderAnswerCall : .callProviderCancelCall
                 var serviceEvent = ServiceEvent(withEventType: serviceEventType)
                 serviceEvent.addEventInput(.callUUID, value: call.callUUID.uuidString)
                 self.responseStream.onNext(serviceEvent)
             }
         } else {
-            call.callUUID = UUID()
             reportIncomingCall(account: account, call: call, completion: nil)
         }
-        let serviceEventType: ServiceEventType = .callProviderUpdatedUUID
-        var serviceEvent = ServiceEvent(withEventType: serviceEventType)
-        serviceEvent.addEventInput(.callId, value: call.callId)
-        serviceEvent.addEventInput(.callUUID, value: call.callUUID.uuidString)
-        self.responseStream.onNext(serviceEvent)
     }
 
     private func reportIncomingCall(account: AccountModel, call: CallModel,
@@ -128,11 +121,10 @@ extension CallsProviderDelegate {
         guard let handleInfo = self.getHandleInfo(account: account, call: call) else { return }
         let handleType = (isJamiAccount
                             || !handleInfo.handle.isPhoneNumber) ? CXHandle.HandleType.generic : CXHandle.HandleType.phoneNumber
-        // update.localizedCallerName = handleInfo.displayName
         update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
         self.setUpCallUpdate(update: update, localizedCallerName: handleInfo.displayName, videoFlag: !call.isAudioOnly)
-        self.provider?.reportNewIncomingCall(with: call.callUUID,
-                                             update: update) { error in
+        self.provider.reportNewIncomingCall(with: call.callUUID,
+                                            update: update) { error in
             if error == nil {
                 return
             }
@@ -149,7 +141,7 @@ extension CallsProviderDelegate {
 
         update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
         self.setUpCallUpdate(update: update, localizedCallerName: call.registeredName, videoFlag: !call.isAudioOnly)
-        self.provider?.reportCall(with: call.callUUID, updated: update)
+        self.provider.reportCall(with: call.callUUID, updated: update)
     }
 
     func previewPendingCall(peerId: String, withVideo: Bool, displayName: String,
@@ -158,10 +150,15 @@ extension CallsProviderDelegate {
         let handleType = CXHandle.HandleType.phoneNumber
         update.remoteHandle = CXHandle(type: handleType, value: peerId)
         self.setUpCallUpdate(update: update, localizedCallerName: displayName, videoFlag: withVideo)
+
+        // Stop existing unhandeled call for jamiId
+        if let existingUnhandeledCall = self.getUnhandeledCall(peerId: peerId) {
+            self.stopCall(callUUID: existingUnhandeledCall.uuid, participant: existingUnhandeledCall.peerId)
+        }
         let unhandeledCall = UnhandeledCall(peerId: peerId)
         unhandeledCalls.insert(unhandeledCall)
-        self.provider?.reportNewIncomingCall(with: unhandeledCall.uuid,
-                                             update: update) { error in
+        self.provider.reportNewIncomingCall(with: unhandeledCall.uuid,
+                                            update: update) { error in
             if error == nil {
                 return
             }
@@ -194,7 +191,7 @@ extension CallsProviderDelegate {
         requestTransaction(transaction)
     }
 
-    func stop() {
+    func stopAllUnhandeledCalls() {
         unhandeledCalls.forEach { call in
             stopCall(callUUID: call.uuid, participant: call.peerId)
         }
@@ -221,15 +218,22 @@ extension CallsProviderDelegate {
         return (name, contactHandle)
     }
 
-    func getUnhandeledCall(for UUID: UUID) -> UnhandeledCall? {
+    func getUnhandeledCall(UUID: UUID) -> UnhandeledCall? {
         return self.unhandeledCalls.filter { call in
             call.uuid == UUID
         }.first
     }
-    func getUnhandeledCall(for peerId: String) -> UnhandeledCall? {
+
+    func getUnhandeledCall(peerId: String) -> UnhandeledCall? {
         return self.unhandeledCalls.filter { call in
             call.peerId == peerId
         }.first
+    }
+
+    func getUnhandeledCalls(peerId: String) -> [UnhandeledCall]? {
+        return self.unhandeledCalls.filter { call in
+            call.peerId == peerId
+        }
     }
 
     private func requestTransaction(_ transaction: CXTransaction) {
@@ -249,15 +253,14 @@ extension CallsProviderDelegate {
         }
         guard let uuid = timer.userInfo as? UUID else { return }
         // did not receive incoming call from daemon
-        if getUnhandeledCall(for: uuid) != nil {
+        if getUnhandeledCall(UUID: uuid) != nil {
             stopCall(callUUID: uuid, participant: "")
         }
     }
 
     func startTimer(callUUID: UUID) {
         stopTimer()
-        let seconds = 15.0
-        timer = Timer.scheduledTimer(timeInterval: seconds, target: self, selector: #selector(timerHandler(_:)), userInfo: callUUID, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: pendingCallTimeout, target: self, selector: #selector(timerHandler(_:)), userInfo: callUUID, repeats: false)
     }
 
     func stopTimer() {
@@ -265,12 +268,15 @@ extension CallsProviderDelegate {
     }
 }
 // MARK: - CXProviderDelegate
-extension CallsProviderDelegate: CXProviderDelegate {
+extension CallsProviderService: CXProviderDelegate {
     func providerDidReset(_ provider: CXProvider) {
     }
 
     func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
-        if let call = getUnhandeledCall(for: action.callUUID) {
+        defer {
+            action.fulfill()
+        }
+        if let call = getUnhandeledCall(UUID: action.callUUID) {
             call.state = .answered
             return
         }
@@ -278,11 +284,13 @@ extension CallsProviderDelegate: CXProviderDelegate {
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)
         self.responseStream.onNext(serviceEvent)
-        action.fulfill()
     }
 
     func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
-        if let call = getUnhandeledCall(for: action.callUUID) {
+        defer {
+            action.fulfill()
+        }
+        if let call = getUnhandeledCall(UUID: action.callUUID) {
             call.state = .declined
             return
         }
@@ -290,16 +298,21 @@ extension CallsProviderDelegate: CXProviderDelegate {
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.callUUID, value: action.callUUID.uuidString)
         self.responseStream.onNext(serviceEvent)
-        action.fulfill()
     }
 
     func provider(_ provider: CXProvider, perform action: CXStartCallAction) {
+        defer {
+            action.fulfill()
+        }
+        /*
+         To display correct name in call history create an update and report
+         it to the provider.
+         */
         let update = CXCallUpdate()
         update.remoteHandle = action.handle
         update.localizedCallerName = action.contactIdentifier
         update.hasVideo = action.isVideo
-        self.provider?.reportCall(with: action.callUUID, updated: update)
-        action.fulfill()
+        self.provider.reportCall(with: action.callUUID, updated: update)
     }
 
     func provider(_ provider: CXProvider, didActivate audioSession: AVAudioSession) {
