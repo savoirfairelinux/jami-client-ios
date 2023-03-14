@@ -345,6 +345,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        self.callsProvider.stopAllUnhandeledCalls()
         self.stopDaemon()
     }
 
@@ -383,7 +384,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     private func stopDaemon() {
-        self.callsProvider.stop()
         do {
             try self.daemonService.stopDaemon()
         } catch StopDaemonError.daemonNotRunning {

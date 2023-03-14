@@ -548,7 +548,6 @@ extension CallViewModel {
                                    videoSource: self.videoService.getVideoSource(),
                                    isAudioOnly: isAudioOnly)
             .subscribe(onSuccess: { [weak self] callModel in
-                callModel.callUUID = UUID()
                 self?.call = callModel
                 if self?.isBoothMode() ?? false {
                     return

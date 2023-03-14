@@ -248,7 +248,7 @@ class MeViewModel: ViewModel, Stateable {
     lazy var otherJamiSettings: Observable<SettingsSection> = {
         var proxyServer = ""
         if let account = self.accountService.currentAccount,
-            let details = account.details {
+           let details = account.details {
             proxyServer = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: ConfigKey.proxyServer))
             self.proxyAddress.accept(proxyServer)
         }
@@ -257,7 +257,7 @@ class MeViewModel: ViewModel, Stateable {
                                                    .blockedList,
                                                    .proxy,
                                                    SettingsSection.SectionRow
-                                                   .accountState(state: self.accountStatus),
+                                                    .accountState(state: self.accountStatus),
                                                    .enableAccount,
                                                    .changePassword,
                                                    .boothMode,
