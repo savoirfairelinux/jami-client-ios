@@ -436,7 +436,7 @@ class CallViewModel: Stateable, ViewModel {
 
     var containerViewModel: ButtonsContainerViewModel?
     let injectionBag: InjectionBag
-    let callsProvider: CallsProviderDelegate
+    let callsProvider: CallsProviderService
 
     required init(with injectionBag: InjectionBag) {
         self.callService = injectionBag.callService
@@ -548,7 +548,6 @@ extension CallViewModel {
                                    videoSource: self.videoService.getVideoSource(),
                                    isAudioOnly: isAudioOnly)
             .subscribe(onSuccess: { [weak self] callModel in
-                callModel.callUUID = UUID()
                 self?.call = callModel
                 if self?.isBoothMode() ?? false {
                     return

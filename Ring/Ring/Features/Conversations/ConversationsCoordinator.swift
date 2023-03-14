@@ -44,7 +44,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     let callService: CallsService
     let accountService: AccountsService
     let conversationService: ConversationsService
-    let callsProvider: CallsProviderDelegate
+    let callsProvider: CallsProviderService
     let nameService: NameService
     let requestsService: RequestsService
 

@@ -3,7 +3,7 @@
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
- * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
+ *  Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ class ConversationsManager {
     private let dataTransferService: DataTransferService
     private let callService: CallsService
     private let locationSharingService: LocationSharingService
-    private let callsProvider: CallsProviderDelegate
+    private let callsProvider: CallsProviderService
     private let requestService: RequestsService
 
     private let disposeBag = DisposeBag()
@@ -57,7 +57,7 @@ class ConversationsManager {
          callService: CallsService,
          locationSharingService: LocationSharingService,
          contactsService: ContactsService,
-         callsProvider: CallsProviderDelegate,
+         callsProvider: CallsProviderService,
          requestsService: RequestsService) {
         self.conversationService = conversationService
         self.accountsService = accountsService
@@ -121,6 +121,7 @@ class ConversationsManager {
                 case .callProviderPreviewPendingCall:
                     self.accountsService.setAccountsActive(active: true)
                 case .callEnded, .callProviderCancelCall:
+                    if self.callsProvider.hasPendingTransactions() { return }
                     DispatchQueue.main.async {
                         let state = UIApplication.shared.applicationState
                         if state == .background {
@@ -186,22 +187,6 @@ class ConversationsManager {
                     os_log("call provider cancel call")
                     self.callService.stopCall(call: call)
                 }
-            })
-            .disposed(by: self.disposeBag)
-        callsProvider.sharedResponseStream
-            .filter({serviceEvent in
-                guard serviceEvent.eventType == .callProviderUpdatedUUID else {
-                    return false
-                }
-                return true
-            })
-            .subscribe(onNext: { [weak self] serviceEvent in
-                guard let self = self,
-                      let callUUID: String = serviceEvent.getEventInput(ServiceEventInput.callUUID),
-                      let callId: String = serviceEvent.getEventInput(ServiceEventInput.callId) else {
-                    return
-                }
-                self.callService.updateCallUUID(callId: callId, callUUID: callUUID)
             })
             .disposed(by: self.disposeBag)
     }

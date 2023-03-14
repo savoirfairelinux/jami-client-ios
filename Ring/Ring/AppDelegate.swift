@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let audioService = AudioService(withAudioAdapter: AudioAdapter())
     private let systemService = SystemService(withSystemAdapter: SystemAdapter())
     private let networkService = NetworkService()
-    private let callsProvider: CallsProviderDelegate = CallsProviderDelegate()
+    private let callsProvider: CallsProviderService = CallsProviderService(provider: CXProvider(configuration: CallsHelpers.providerConfiguration()))
     private var conversationManager: ConversationsManager?
     private var interactionsManager: GeneratedInteractionsManager?
     private var videoManager: VideoManager?
@@ -345,6 +345,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        self.callsProvider.stopAllUnhandeledCalls()
         self.stopDaemon()
     }
 
@@ -383,7 +384,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     private func stopDaemon() {
-        self.callsProvider.stop()
         do {
             try self.daemonService.stopDaemon()
         } catch StopDaemonError.daemonNotRunning {
