@@ -3221,7 +3221,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 3.44;
+				MARKETING_VERSION = 3.45;
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3259,7 +3259,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 3.44;
+				MARKETING_VERSION = 3.45;
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3596,7 +3596,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
-				MARKETING_VERSION = 3.44;
+				MARKETING_VERSION = 3.45;
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
