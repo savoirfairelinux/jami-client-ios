@@ -80,7 +80,7 @@ enum ConversationPreferenceAttributes: String {
     case ignoreNotifications
 }
 
-enum ParticipantRole: Int {
+enum ParticipantRole: String {
     case invited
     case admin
     case member
@@ -129,8 +129,7 @@ class ConversationParticipant: Equatable, Hashable {
             self.jamiId = jamiId.replacingOccurrences(of: "ring:", with: "")
         }
         if let role = info["role"],
-           let typeInt = Int(role),
-           let memberRole = ParticipantRole(rawValue: typeInt) {
+           let memberRole = ParticipantRole(rawValue: role) {
             self.role = memberRole
         }
         if let lastRead = info["lastDisplayed"] {
