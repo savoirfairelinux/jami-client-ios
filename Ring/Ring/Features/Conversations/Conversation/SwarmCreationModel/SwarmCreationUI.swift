@@ -68,6 +68,7 @@ struct SwarmCreationUI: View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 10) {
                 Button(action: {
+                    self.hideKeyboard()
                     showingOptions = true
                 }) {
                     if let image = list.image {
