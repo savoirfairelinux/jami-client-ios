@@ -36,80 +36,110 @@ enum VCardFields: String {
 
 extension CNContactVCardSerialization {
 
-    class func dataWithImageAndUUID(from contact: CNContact, andImageCompression compressedSize: Int?, encoding: String.Encoding = .utf16) throws -> Data? {
+    class func dataWithImageAndUUID(from profile: Profile, andImageCompression compressedSize: Int?, encoding: String.Encoding = .utf8) throws -> Data? {
 
         // recreate vCard string
         let beginString = VCardFields.begin.rawValue + "\n"
-        let entryUIDString = VCardFields.uid.rawValue + contact.identifier + "\n"
-        let name = contact.familyName.trimmingCharacters(in: .whitespacesAndNewlines)
-        let phone = contact.phoneNumbers.isEmpty ? "" : contact.phoneNumbers[0].value.stringValue
+        // let entryUIDString = VCardFields.uid.rawValue + contact.identifier + "\n"
+        let name = profile.alias!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let phone = profile.uri
         let telephoneString = VCardFields.telephone.rawValue + phone + "\n"
         let fullNameString = VCardFields.fullName.rawValue + name + "\n"
         let endString = VCardFields.end.rawValue
 
-        var vCardString = beginString + entryUIDString + fullNameString + telephoneString + endString
+        var vCardString = beginString + fullNameString + telephoneString + endString
 
-        // if contact have an image add it to vCard data
-        guard var image = contact.imageData  else {
+        // if contact have profile image add it to vCard data
+        guard var image = profile.photo  else {
             return vCardString.data(using: encoding)
         }
 
-        var photofieldName = VCardFields.photoPNG
-
-        // if we need smallest image first scale it and than compress
-        var scaledImage: UIImage?
-        if compressedSize != nil {
-            scaledImage = UIImage(data: image)?
-                .convert(toSize: CGSize(width: 400.0, height: 400.0), scale: 1.0)
-        }
-        if let scaledImage = scaledImage, let data = scaledImage.pngData() {
-            image = data
-        }
-
-        if let compressionSize = compressedSize {
-            // compress image before sending vCard
-            guard let compressedImage = UIImage(data: image)?
-                    .convertToData(ofMaxSize: compressionSize) else {
-                return vCardString.data(using: encoding)
-            }
-
-            image = compressedImage
-            photofieldName = VCardFields.photoJPEG
-        }
-
-        let base64Image = image.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
-        let vcardImageString = photofieldName.rawValue + base64Image + "\n"
+        //        var photofieldName = VCardFields.photoPNG
+        //
+        //        // if we need smallest image first scale it and than compress
+        //        var scaledImage: UIImage?
+        //        if compressedSize != nil {
+        //            scaledImage = UIImage(data: image)?
+        //                .convert(toSize: CGSize(width: 400.0, height: 400.0), scale: 1.0)
+        //        }
+        //        if let scaledImage = scaledImage, let data = scaledImage.pngData() {
+        //            image = data
+        //        }
+        //
+        //        if let compressionSize = compressedSize {
+        //            // compress image before sending vCard
+        //            guard let compressedImage = UIImage(data: image)?
+        //                    .convertToData(ofMaxSize: compressionSize) else {
+        //                return vCardString.data(using: encoding)
+        //            }
+        //
+        //            image = compressedImage
+        //            photofieldName = VCardFields.photoJPEG
+        //        }
+        //
+        //        let base64Image = image.base64EncodedString(options: Data.Base64EncodingOptions.init(rawValue: 0))
+        let vcardImageString = VCardFields.photoJPEG.rawValue + image + "\n"
         vCardString = vCardString.replacingOccurrences(of: VCardFields.end.rawValue, with: (vcardImageString + VCardFields.end.rawValue))
 
         return vCardString.data(using: encoding)
     }
 
-    class func parseToVCard(data: Data) -> CNContact? {
-        var contact: CNContact?
-        do {
-            try ObjCHandler.try {
-                guard let vCards = try? CNContactVCardSerialization.contacts(with: data),
-                      let vCard = vCards.first else { return }
-                var stringData = String(data: data, encoding: .utf16)
-                if stringData == nil {
-                    stringData = String(data: data, encoding: .utf8)
-                }
-                guard let returnData = stringData else { return }
-                let contentArr = returnData.components(separatedBy: "\n")
-                let vcard = CNMutableContact()
-                if let nameRow = contentArr.filter({ String($0.prefix(3)) == VCardFields.fullName.rawValue }).first {
-                    let name = String(nameRow.suffix(nameRow.count - 3))
-                    vcard.familyName = name
-                } else if !vCard.givenName.isEmpty {
-                    vcard.familyName = vCard.givenName
-                }
-                vcard.phoneNumbers = vCard.phoneNumbers
-                vcard.imageData = vCard.imageData
-                contact = vcard
+    class func parseToProfile(data: Data) -> Profile? {
+        // var contact: CNContact?
+        var stringData = String(data: data, encoding: .utf8)
+        //        if stringData == nil {
+        //            stringData = String(data: data, encoding: .utf16)
+        //        }
+        guard let str = stringData else { return nil}
+        let lines = str.split(whereSeparator: \.isNewline)
+        var alias: String = ""
+        var avatar: String = ""
+        var profileUri: String = ""
+        for line in lines {
+            print(line)
+            if line.contains("PHOTO") {
+                avatar = line.components(separatedBy: ":").last ?? ""
+            } else if line.contains("FN") {
+                alias = line.components(separatedBy: ":").last ?? ""
             }
-        } catch {
-            print("An error ocurred during CNContactVCardSerialization: \(error)")
+            if line.contains("TEL;other") {
+                profileUri = line.components(separatedBy: ":").last ?? ""
+            }
         }
-        return contact
+        let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
+
+        return Profile(uri: profileUri, alias: alias, photo: avatar, type: type.rawValue)
+        //        let profile = Profile(uri: <#T##String#>, type: <#T##String#>)
+        //        //let vcard = CNMutableContact()
+        //        vcard.familyName = name
+        //        vcard.imageData = avatar.data(using: .utf8)
+        //        vcard.phoneNumbers = [CNLabeledValue(label: CNLabelPhoneNumberiPhone, value: CNPhoneNumber(stringValue: id))]
+        //        //        vcard.phoneNumbers = [CNLabeledValue(label: "CNPhoneNumber", value: CNPhoneNumber.init(stringValue: id))]
+        //        return vcard
+        //        do {
+        //            try ObjCHandler.try {
+        //                guard let vCards = try? CNContactVCardSerialization.contacts(with: data),
+        //                      let vCard = vCards.first else { return }
+        //                //                var stringData = String(data: data, encoding: .utf16)
+        //                //                if stringData == nil {
+        //                //                    stringData = String(data: data, encoding: .utf8)
+        //                //                }
+        //                //                guard let returnData = stringData else { return }
+        //                //                let contentArr = returnData.components(separatedBy: "\n")
+        //                let vcard = CNMutableContact()
+        //                //                if let nameRow = contentArr.filter({ String($0.prefix(3)) == VCardFields.fullName.rawValue }).first {
+        //                //                    let name = String(nameRow.suffix(nameRow.count - 3))
+        //                //                    vcard.familyName = name
+        //                //                } else if !vCard.givenName.isEmpty {
+        //                vcard.familyName = vCard.givenName
+        //                // }
+        //                vcard.phoneNumbers = vCard.phoneNumbers
+        //                vcard.imageData = vCard.imageData
+        //                contact = vcard
+        //            }
+        //        } catch {
+        //            print("An error ocurred during CNContactVCardSerialization: \(error)")
+        //        }
+        //        return contact
     }
 }

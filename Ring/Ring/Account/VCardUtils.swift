@@ -78,10 +78,10 @@ class VCardUtils {
         return name
     }
 
-    class func sendVCard(card: CNContact, callID: String, accountID: String, sender: CallsService, from: String) {
+    class func sendVCard(card: Profile, callID: String, accountID: String, sender: CallsService, from: String) {
         do {
-            let vCard = card
-            guard let vCardData = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000, encoding: .utf8),
+            // let vCard = card
+            guard let vCardData = try CNContactVCardSerialization.dataWithImageAndUUID(from: card, andImageCompression: 40000, encoding: .utf8),
                   var vCardString = String(data: vCardData, encoding: String.Encoding.utf8) else {
                 return
             }
