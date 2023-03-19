@@ -104,7 +104,7 @@ class EditProfileViewModel {
         guard let account = self.accountService.currentAccount else { return }
         var photo: String?
         if let image = self.image, !image.isEqual(defaultImage),
-           let imageData = image.pngData() {
+           let imageData = image.convertToData(ofMaxSize: 40000) {
             photo = imageData.base64EncodedString()
         }
         let details = self.accountService.getAccountDetails(fromAccountId: account.id)

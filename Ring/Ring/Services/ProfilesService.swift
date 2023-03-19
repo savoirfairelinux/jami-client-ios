@@ -73,16 +73,11 @@ class ProfilesService: ProfilesAdapterDelegate {
         let uri = JamiURI(schema: URIType.ring, infoHash: uri)
         guard let uriString = uri.uriString,
               let data = FileManager.default.contents(atPath: path),
-              let vCard = CNContactVCardSerialization.parseToVCard(data: data) else { return }
-        let name = VCardUtils.getName(from: vCard)
-        var stringImage: String?
-        if let image = vCard.imageData {
-            stringImage = image.base64EncodedString()
-        }
+              let profile = VCardUtils.parseToProfile(data: data) else { return }
         _ = self.dbManager
             .createOrUpdateRingProfile(profileUri: uriString,
-                                       alias: name,
-                                       image: stringImage,
+                                       alias: profile.alias,
+                                       image: profile.photo,
                                        accountId: accountId)
         self.triggerProfileSignal(uri: uriString, createIfNotexists: false, accountId: accountId)
     }
@@ -186,20 +181,15 @@ class ProfilesService: ProfilesAdapterDelegate {
         }
 
         // Create the vCard, save and db and emit a new event
-        if let vCard = CNContactVCardSerialization.parseToVCard(data: vCardData) {
-            let name = VCardUtils.getName(from: vCard)
-            var stringImage: String?
-            if let image = vCard.imageData {
-                stringImage = image.base64EncodedString()
-            }
+        if let profile = VCardUtils.parseToProfile(data: vCardData) {
             guard let uri = JamiURI.init(schema: URIType.ring,
                                          infoHash: ringID).uriString else {
                 return
             }
             _ = self.dbManager
                 .createOrUpdateRingProfile(profileUri: uri,
-                                           alias: name,
-                                           image: stringImage,
+                                           alias: profile.alias,
+                                           image: profile.photo,
                                            accountId: accountId)
             self.triggerProfileSignal(uri: uri, createIfNotexists: false, accountId: accountId)
         }
