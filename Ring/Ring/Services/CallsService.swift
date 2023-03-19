@@ -464,14 +464,14 @@ class CallsService: CallsAdapterDelegate {
         if accountID.isEmpty || callID.isEmpty {
             return
         }
-        guard let vCard = self.dbManager.accountVCard(for: accountID),
-              let phoneNumber = vCard.phoneNumbers.first?.value else { return }
+        guard let profile = self.dbManager.accountVCard(for: accountID) else { return }
+        let jamiId = profile.uri
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            VCardUtils.sendVCard(card: vCard,
+            VCardUtils.sendVCard(card: profile,
                                  callID: callID,
                                  accountID: accountID,
-                                 sender: self, from: phoneNumber.stringValue)
+                                 sender: self, from: jamiId)
         }
     }
 
