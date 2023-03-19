@@ -574,10 +574,10 @@ class DBManager {
         return self.getProfileFromPath(path: path)
     }
 
-    func accountVCard(for accountId: String) -> CNContact? {
+    func accountVCard(for accountId: String) -> Profile? {
         guard let path = self.dbConnections.accountProfilePath(accountId: accountId),
               let data = FileManager.default.contents(atPath: path) else { return nil }
-        return CNContactVCardSerialization.parseToVCard(data: data)
+        return VCardHelper.parseToProfile(data: data)
     }
 
     func createOrUpdateRingProfile(profileUri: String, alias: String?, image: String?, accountId: String) -> Bool {
@@ -745,31 +745,15 @@ class DBManager {
 
     private func getProfileFromPath(path: String) -> Profile? {
         guard let data = FileManager.default.contents(atPath: path),
-              let vCard = CNContactVCardSerialization.parseToVCard(data: data) else {
+              let profile = VCardHelper.parseToProfile(data: data) else {
             return nil
         }
-        let profileURI = vCard.phoneNumbers.isEmpty ? "" : vCard.phoneNumbers[0].value.stringValue
-        let type = profileURI.contains("ring") ? ProfileType.ring : ProfileType.sip
-        let imageString = {(data: Data?) -> String in
-            guard let data = data else { return "" }
-            return data.base64EncodedString()
-        }(vCard.imageData)
-        let profile = Profile(uri: profileURI, alias: vCard.familyName, photo: imageString, type: type.rawValue)
         return profile
     }
 
     private func saveProfile(profile: Profile, path: String) throws {
         let url = URL(fileURLWithPath: path)
-        let contactCard = CNMutableContact()
-        if let name = profile.alias {
-            contactCard.familyName = name
-        }
-        contactCard.phoneNumbers = [CNLabeledValue(label: CNLabelPhoneNumberiPhone, value: CNPhoneNumber(stringValue: profile.uri))]
-        if let photo = profile.photo {
-            contactCard.imageData = NSData(base64Encoded: photo,
-                                           options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
-        }
-        let data = try CNContactVCardSerialization.dataWithImageAndUUID(from: contactCard, andImageCompression: 40000)
+        let data = try VCardHelper.dataWithImageAndUUID(from: profile, andImageCompression: 40000)
         try data?.write(to: url)
     }
 

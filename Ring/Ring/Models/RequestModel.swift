@@ -62,9 +62,13 @@ class RequestModel {
         self.type = type
         self.participants = [ConversationParticipant(jamiId: jamiId)]
         self.receivedDate = receivedDate
-        if let contactVCard = CNContactVCardSerialization.parseToVCard(data: payload) {
-            self.avatar = contactVCard.imageData ?? Data()
-            self.name = VCardUtils.getName(from: contactVCard).isEmpty ? jamiId : contactVCard.familyName
+        if let profile = VCardHelper.parseToProfile(data: payload) {
+            if let photo = profile.photo {
+                self.avatar = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data
+            }
+            if let name = profile.alias {
+                self.name = name
+            }
         }
     }
 
@@ -77,9 +81,13 @@ class RequestModel {
 
             if let vCardString = dictionary[RequestKey.payload.rawValue],
                let data = vCardString.data(using: String.Encoding.utf8), !data.isEmpty,
-               let contactVCard = CNContactVCardSerialization.parseToVCard(data: data) {
-                self.avatar = contactVCard.imageData
-                self.name = VCardUtils.getName(from: contactVCard).isEmpty ? jamiId : contactVCard.familyName
+               let profile = VCardHelper.parseToProfile(data: data) {
+                if let photo = profile.photo {
+                    self.avatar = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data
+                }
+                if let name = profile.alias {
+                    self.name = name
+                }
             }
             if let receivedDateString = dictionary[RequestKey.received.rawValue],
                let timestamp = Double(receivedDateString) {

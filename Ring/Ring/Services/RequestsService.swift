@@ -296,19 +296,19 @@ class RequestsService {
             do {
                 var payload: Data?
                 if let accountProfile = self.dbManager.accountProfile(for: accountId) {
-                    let vCard = CNMutableContact()
+                    // let vCard = CNMutableContact()
                     var cardChanged = false
-                    if let name = accountProfile.alias {
-                        vCard.familyName = name
+                    if accountProfile.alias != nil {
+                        // vCard.familyName = name
                         cardChanged = true
                     }
-                    if let photo = accountProfile.photo {
-                        vCard.imageData = NSData(base64Encoded: photo,
-                                                 options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
+                    if accountProfile.photo != nil {
+                        // vCard.imageData = NSData(base64Encoded: photo,
+                        //                                                 options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
                         cardChanged = true
                     }
                     if cardChanged {
-                        payload = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000, encoding: .utf8)
+                        payload = try VCardHelper.dataWithImageAndUUID(from: accountProfile, andImageCompression: 40000, encoding: .utf8)
                     }
                 }
                 self.requestsAdapter.sendTrustRequest(toContact: jamiId, payload: payload, withAccountId: accountId)

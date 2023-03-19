@@ -117,7 +117,7 @@
 		0EDCC8601F98150500B121D7 /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */; };
 		0EDE34C71F868E1200FFA15C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE34C61F868E1200FFA15C /* EditProfileViewController.swift */; };
 		0EDE34C91F8691BB00FFA15C /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE34C81F8691BB00FFA15C /* EditProfileViewModel.swift */; };
-		0EE1B54E1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54D1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift */; };
+		0EE1B54E1F75ACDE00BA98EE /* VCardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54D1F75ACDE00BA98EE /* VCardHelper.swift */; };
 		0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		0EF49A9F23828C960064CD98 /* ConferenceParticipantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF49A9E23828C960064CD98 /* ConferenceParticipantView.swift */; };
 		0EF49AA123828CBC0064CD98 /* ConferenceParticipantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF49AA023828CBC0064CD98 /* ConferenceParticipantViewModel.swift */; };
@@ -717,7 +717,7 @@
 		0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
 		0EDE34C61F868E1200FFA15C /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		0EDE34C81F8691BB00FFA15C /* EditProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
-		0EE1B54D1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CNContactVCardSerialization+Helpers.swift"; sourceTree = "<group>"; };
+		0EE1B54D1F75ACDE00BA98EE /* VCardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCardHelper.swift; sourceTree = "<group>"; };
 		0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCardUtils.swift; sourceTree = "<group>"; };
 		0EEFBA3B1F83DA21000EDBAD /* libsecp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsecp256k1.a; path = ../DEPS/arm64/lib/libsecp256k1.a; sourceTree = "<group>"; };
 		0EF49A9E23828C960064CD98 /* ConferenceParticipantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceParticipantView.swift; sourceTree = "<group>"; };
@@ -1519,7 +1519,6 @@
 				1A2D189B1F264AD900B2C785 /* UIViewController+Ring.swift */,
 				1A2D18A51F27F7A400B2C785 /* UIViewController+Rx.swift */,
 				0586C94A1F684DF600613517 /* UIImage+Helpers.swift */,
-				0EE1B54D1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift */,
 				621231F81F880EDF009B86F0 /* UILabel+Ring.swift */,
 				0EDCC85F1F98150500B121D7 /* UIView+Rx.swift */,
 				62006E03203F4DD6003C3197 /* UITextField+Helpers.swift */,
@@ -1738,6 +1737,7 @@
 		0E44B62D202B9DC40060F71B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0EE1B54D1F75ACDE00BA98EE /* VCardHelper.swift */,
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
 				0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */,
 				0E99F19F22417A0400CF8BD6 /* JamiURI.swift */,
@@ -2808,7 +2808,7 @@
 				0E0FF1B91FC398C5003898C2 /* InteractionDataHelper.swift in Sources */,
 				0E6F545822403B0300ECC3CE /* CreateSipAccountViewController.swift in Sources */,
 				26C6A2602927EC4E007786B8 /* SwarmInfo.swift in Sources */,
-				0EE1B54E1F75ACDE00BA98EE /* CNContactVCardSerialization+Helpers.swift in Sources */,
+				0EE1B54E1F75ACDE00BA98EE /* VCardHelper.swift in Sources */,
 				268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */,
 				0E0FF1AA1FC3843E003898C2 /* DBContainer.swift in Sources */,
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
