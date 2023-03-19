@@ -28,6 +28,14 @@ enum VCardFolders: String {
     case profile
 }
 
+enum VCardFields: String {
+    case begin     = "BEGIN:VCARD"
+    case photoJPEG = "PHOTO;ENCODING=BASE64;TYPE=JPEG:"
+    case end       = "END:VCARD"
+    case fullName  = "FN:"
+    case telephone = "TEL;other:"
+}
+
 enum VCardFiles: String {
     case myProfile
 }
@@ -78,10 +86,9 @@ class VCardUtils {
         return name
     }
 
-    class func sendVCard(card: CNContact, callID: String, accountID: String, sender: CallsService, from: String) {
+    class func sendVCard(card: Profile, callID: String, accountID: String, sender: CallsService, from: String) {
         do {
-            let vCard = card
-            guard let vCardData = try CNContactVCardSerialization.dataWithImageAndUUID(from: vCard, andImageCompression: 40000, encoding: .utf8),
+            guard let vCardData = try VCardUtils.dataWithImageAndUUID(from: card),
                   var vCardString = String(data: vCardData, encoding: String.Encoding.utf8) else {
                 return
             }
@@ -112,5 +119,49 @@ class VCardUtils {
         } catch {
             print(error)
         }
+    }
+
+    class func dataWithImageAndUUID(from profile: Profile) throws -> Data? {
+
+        // create vCard string
+        let beginString = VCardFields.begin.rawValue + "\n"
+        let name = (profile.alias ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        let phone = profile.uri
+        let telephoneString = VCardFields.telephone.rawValue + phone + "\n"
+        let fullNameString = VCardFields.fullName.rawValue + name + "\n"
+        let endString = VCardFields.end.rawValue
+
+        var vCardString = beginString + fullNameString + telephoneString
+
+        guard let image = profile.photo  else {
+            print("****\(vCardString + endString)")
+            return (vCardString + endString).data(using: .utf8)
+        }
+        let vcardImageString = VCardFields.photoJPEG.rawValue + image + "\n"
+        vCardString += vcardImageString + VCardFields.end.rawValue
+        print("****\(vCardString)")
+        return vCardString.data(using: .utf8)
+    }
+
+    class func parseToProfile(data: Data) -> Profile? {
+        guard let encoding = data.stringEncoding,
+              let profileStr = String(data: data, encoding: encoding) else {
+            return nil
+        }
+        let lines = profileStr.split(whereSeparator: \.isNewline)
+        var alias = "", avatar = "", profileUri = ""
+        for line in lines {
+            if line.starts(with: "PHOTO") {
+                avatar = line.components(separatedBy: ":").last ?? ""
+            }
+            if line.starts(with: "FN") {
+                alias = line.components(separatedBy: ":").last ?? ""
+            }
+            if line.starts(with: "TEL;other") {
+                profileUri = line.components(separatedBy: ":").last ?? ""
+            }
+        }
+        let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
+        return Profile(uri: profileUri, alias: alias, photo: avatar, type: type.rawValue)
     }
 }
