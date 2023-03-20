@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Samodejno povezovanje v krajevnem omrežju";
 "accountPage.autoRegistration" = "Samodejna registracija po izteku";
 "accountPage.connectivityHeader" = "Povezljivost";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Omogoči TURN";
 "accountPage.turnServer" = "Naslov TURN";
 "accountPage.turnUsername" = "Uporabniško ime TURN";
 "accountPage.turnPassword" = "Geslo TURN";
