@@ -157,6 +157,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                             conversationViewModel?.conversation.accept(conversationModel)
                         } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
                             conversationViewModel = contactFound
+                            conversationViewModel?.conversation = BehaviorRelay(value: conversationModel)
                             self.conversationViewModels.append(contactFound)
                         } else {
                             conversationViewModel = ConversationViewModel(with: self.injectionBag)
