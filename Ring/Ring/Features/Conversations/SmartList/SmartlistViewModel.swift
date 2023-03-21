@@ -195,11 +195,16 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         }
         return self.requestsService.requests
             .asObservable()
-            .map({ requests -> Int in
-                guard let account = self.accountsService.currentAccount else {
+            .map({ [weak self]requests -> Int in
+                guard let self = self,
+                      account = self.accountsService.currentAccount else {
                     return 0
                 }
-                return requests.filter { $0.accountId == account.id }.count
+                // filter out existing conversations
+                let conversationIds = self.conversationViewModels.map({ conversationVM in
+                    return conversationVM.conversation.value.id
+                })
+                return requests.filter { $0.accountId == account.id && !conversationIds.contains($0.conversationId) }.count
             })
     }()
 

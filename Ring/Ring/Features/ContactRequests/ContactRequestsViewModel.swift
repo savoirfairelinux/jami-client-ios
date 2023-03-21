@@ -61,8 +61,14 @@ class ContactRequestsViewModel: Stateable, ViewModel {
             .asObservable()
             .map({ [weak self] requests in
                 guard let self = self else { return [] }
+                // filter out existing conversations
+                let conversationIds = self.conversationService.conversations.value.map({ conversation in
+                    return conversation.id
+                })
                 return requests
-                    .filter { $0.accountId == self.accountsService.currentAccount?.id }
+                    .filter { $0.accountId == self.accountsService.currentAccount?.id
+                        && !conversationIds.contains($0.conversationId)
+                    }
                     .sorted { $0.receivedDate > $1.receivedDate }
                     .map { contactRequest in
                         let item = RequestItem(withRequest: contactRequest,
@@ -88,12 +94,16 @@ class ContactRequestsViewModel: Stateable, ViewModel {
     lazy var hasInvitations: Observable<Bool> = {
         return self.requestsService.requests
             .asObservable()
-            .map({ [weak self] contactRequests in
-                return contactRequests
-                    .filter { $0.accountId == self?.accountsService.currentAccount?.id }
-            })
-            .map({ items in
-                return !items.isEmpty
+            .map({ [weak self] requests -> Bool in
+                guard let self = self,
+                      let account = self.accountsService.currentAccount else {
+                    return false
+                }
+                // filter out existing conversations
+                let conversationIds = self.conversationService.conversations.value.map({ conversation in
+                    return conversation.id
+                })
+                return !requests.filter { $0.accountId == account.id && !conversationIds.contains($0.conversationId) }.isEmpty
             })
     }()
 
