@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -40,32 +40,6 @@ enum VCardFiles: String {
     case myProfile
 }
 class VCardUtils {
-
-    class func getFilePath(forFile fileName: String, inFolder folderName: String, createIfNotExists shouldCreate: Bool) -> URL? {
-
-        var path: URL?
-        guard let documentsURL = Constants.documentsPath else { return path }
-
-        let directoryURL = documentsURL.appendingPathComponent(folderName)
-        var isDirectory = ObjCBool(true)
-        let directoryExists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory)
-        if directoryExists && isDirectory.boolValue {
-            path = directoryURL.appendingPathComponent(fileName)
-            return path
-        }
-        if !shouldCreate {
-            return path
-        }
-
-        do {
-            try FileManager.default.createDirectory(atPath: directoryURL.path, withIntermediateDirectories: true, attributes: nil)
-            path = directoryURL.appendingPathComponent(fileName)
-            return path
-
-        } catch _ as NSError {
-            return path
-        }
-    }
 
     class func getName(from vCard: CNContact?) -> String {
         guard let vCard = vCard else {
