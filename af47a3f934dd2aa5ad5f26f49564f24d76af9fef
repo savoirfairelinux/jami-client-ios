@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c5bc818_a10273ea",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-22T15:26:03Z",
+      "side": 1,
+      "message": "on qt-client when duration not limited, it does not ask for duration. Just starts location sharing until user stops it.",
+      "revId": "af47a3f934dd2aa5ad5f26f49564f24d76af9fef",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c614890c_7f4fa1e4",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-22T15:26:03Z",
+      "side": 1,
+      "message": "[weak self]",
+      "revId": "af47a3f934dd2aa5ad5f26f49564f24d76af9fef",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c38d17_b4979b45",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-22T15:26:03Z",
+      "side": 1,
+      "message": "Use UIDatePicker instead of UISlider to select duration, because it is difficult to select precize time with the slider on small phone screen.",
+      "revId": "af47a3f934dd2aa5ad5f26f49564f24d76af9fef",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
