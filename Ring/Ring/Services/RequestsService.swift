@@ -95,20 +95,6 @@ class RequestsService {
         }) {
             currentRequests.append(contentsOf: conversationRequests)
         }
-        if let swarmIds = self.requestsAdapter.getSwarmConversations(forAccount: accountId) as? [String] {
-            for swarmId in swarmIds {
-                if let info = self.requestsAdapter.getConversationInfo(forAccount: accountId, conversationId: swarmId) as? [String: String],
-                   let participantsInfo = self.requestsAdapter.getConversationMembers(accountId, conversationId: swarmId) {
-                    if let syncing = info["syncing"], syncing == "true" {
-                        /// request in synchronization
-                        let conversation = ConversationModel(withId: swarmId, accountId: accountId, info: info)
-                        conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-                        let request = RequestModel(conversation: conversation)
-                        currentRequests.append(request)
-                    }
-                }
-            }
-        }
         // Load trust requests from daemon
         let trustRequestsDictionaries = self.requestsAdapter.trustRequests(withAccountId: accountId)
         if let contactRequests = trustRequestsDictionaries?.map({ dictionary in
@@ -205,7 +191,7 @@ class RequestsService {
 
     // MARK: Request actions
     /**
-     acceptContactRequest called for contact requests or for one-to-one conversation  requests when a peer is not added to contacts yet.
+     acceptContactRequest called for contact requests.
      In case of success it will save profile for contact
      */
     func acceptContactRequest(jamiId: String, withAccount accountId: String) -> Observable<Void> {
@@ -216,13 +202,12 @@ class RequestsService {
             if success {
                 if let request = self.requests.value.filter({ $0.participants.first?.jamiId == jamiId && $0.accountId == accountId
                 }).first {
-                    request.synchronizing.accept(true)
                     /// save profile
                     let photo = (request.avatar != nil) ? request.avatar!.base64EncodedString() : ""
                     let participantURI = JamiURI.init(schema: .ring, infoHash: jamiId)
                     _ = self.createProfile(with: participantURI.uriString!, alias: request.name, photo: photo, accountId: request.accountId)
+                    self.removeRequest(withJamiId: jamiId, accountId: accountId)
                     if request.conversationId.isEmpty {
-                        self.removeRequest(withJamiId: jamiId, accountId: accountId)
                         /// emit event so message could be generated for db
                         var event = ServiceEvent(withEventType: .contactAdded)
                         event.addEventInput(.accountId, value: accountId)
@@ -239,14 +224,19 @@ class RequestsService {
         }
     }
 
+    func requestAccepted(conversationId: String, withAccount accountId: String) {
+        var event = ServiceEvent(withEventType: .requestAccepted)
+        event.addEventInput(.accountId, value: accountId)
+        event.addEventInput(.conversationId, value: conversationId)
+        self.responseStream.onNext(event)
+    }
+
     func acceptConverversationRequest(conversationId: String, withAccount accountId: String) -> Observable<Void> {
         return Observable.create { [weak self] observable in
             guard let self = self else { return Disposables.create { } }
             self.requestsAdapter.acceptConversationRequest(accountId, conversationId: conversationId)
-            if let request = self.requests.value.filter({ $0.conversationId == conversationId && $0.accountId == accountId
-            }).first {
-                request.synchronizing.accept(true)
-            }
+            self.removeRequest(with: conversationId, accountId: accountId)
+            self.requestAccepted(conversationId: conversationId, withAccount: accountId)
             observable.on(.completed)
             return Disposables.create { }
         }
@@ -377,11 +367,6 @@ extension RequestsService: RequestsAdapterDelegate {
             self.responseStream.onNext(event)
         }
     }
-    /**
-     conversationRequestReceived signal emmited in 2 cases:
-     - for a newly  received conversation request
-     - at the beggining of application  for all requests that was accepted but not synchronized yet. At this case profile for participant should be  already      saved
-     */
     func conversationRequestReceived(conversationId: String, accountId: String, metadata: [String: String]) {
         /// add a conversation request. If a contact request exists for same conversation remove it.
         let conversationRequest = RequestModel(withDictionary: metadata, accountId: accountId, type: .conversation, conversationId: conversationId)
@@ -396,22 +381,6 @@ extension RequestsService: RequestsAdapterDelegate {
                 }
             } else { return }
         }
-        /**
-         if it is a core dialog check profile.
-         If profile exists it means we already accepted request and now request synchronizing.
-         */
-        if conversationRequest.isCoredialog(),
-           let profile = self.getProfile(with: "ring:" + conversationRequest.participants.first!.jamiId, accountId: accountId) {
-            if let alias = profile.alias, !alias.isEmpty {
-                conversationRequest.name = alias
-            }
-            if let photo = profile.photo,
-               let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                conversationRequest.avatar = data
-            }
-            conversationRequest.synchronizing.accept(true)
-        }
-        self.log.debug("received conversation request for conversation: \(conversationId)")
         values.append(conversationRequest)
         self.requests.accept(values)
     }
