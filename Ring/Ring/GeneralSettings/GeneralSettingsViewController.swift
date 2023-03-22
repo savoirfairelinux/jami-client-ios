@@ -97,6 +97,10 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                     return self.makeAcceptTransferLimitCell()
                 case .automaticallyAcceptIncomingFiles:
                     return self.makeAutoDownloadFilesCell()
+                case .limitLocationSharingDuration:
+                    return self.makeLimitLocationSharingCell()
+                case .locationSharingDuration:
+                    return self.makeLocationSharingDurationCell()
                 case .log:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.LogView.description
@@ -216,5 +220,80 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
             })
             .disposed(by: cell.disposeBag)
         return cell
+    }
+
+    func makeLimitLocationSharingCell() -> DisposableCell {
+        let cell = DisposableCell()
+        cell.textLabel?.text = L10n.GeneralSettings.limitLocationSharingDuration
+        let switchView = UISwitch()
+        cell.selectionStyle = .none
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        cell.accessoryView = switchView
+        switchView.setOn(self.viewModel.limitLocationSharingDuration.value, animated: false)
+        self.viewModel.limitLocationSharingDuration
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .bind(to: switchView.rx.value)
+            .disposed(by: cell.disposeBag)
+        switchView.rx.value
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (enabled) in
+                self?.viewModel.togleLimitLocationSharingDuration(enable: enabled)
+            })
+            .disposed(by: cell.disposeBag)
+        return cell
+    }
+
+    func makeLocationSharingDurationCell() -> DisposableCell {
+        let cell = DisposableCell()
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.spacing = 8
+        cell.contentView.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 6).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -6).isActive = true
+        stackView.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 16).isActive = true
+        stackView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -16).isActive = true
+        stackView.layoutSubviews()
+
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        // Add your title text here
+        titleLabel.text = L10n.GeneralSettings.locationSharingDuration + "  \(self.viewModel.locationSharingDurationText)"
+        titleLabel.heightAnchor.constraint(equalToConstant: 45).isActive = true
+
+        stackView.addArrangedSubview(titleLabel)
+
+        let slider = UISlider()
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.minimumValue = 1
+        slider.maximumValue = 600
+        slider.value = Float(self.viewModel.locationSharingDuration.value)
+        stackView.addArrangedSubview(slider)
+
+        slider.heightAnchor.constraint(equalToConstant: 45).isActive = true
+
+        slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+
+        cell.selectionStyle = .none
+
+        viewModel.limitLocationSharingDuration
+            .subscribe(onNext: {[weak cell] (enabled) in
+                cell?.isUserInteractionEnabled = enabled
+                cell?.alpha = enabled ? 1 : 0.3
+            })
+            .disposed(by: cell.disposeBag)
+
+        return cell
+    }
+
+    @objc
+    func sliderValueChanged(_ sender: UISlider) {
+        let value = Int(sender.value)
+        viewModel.locationSharingDuration.accept(value)
     }
 }
