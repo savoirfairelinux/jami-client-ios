@@ -75,6 +75,7 @@ class ConversationsManager {
         self.subscribeContactsEvents()
         self.subscribeLocationSharingEvent()
         self.subscribeCallsProviderEvents()
+        self.subscribeRequestEvents()
         self.controlAccountsState()
     }
 
@@ -153,6 +154,20 @@ class ConversationsManager {
     @objc
     func appMovedForeground() {
         appState.accept(.appEnterForeground)
+    }
+
+    private func subscribeRequestEvents() {
+        self.requestService.sharedResponseStream
+            .filter({ $0.eventType == ServiceEventType.requestAccepted })
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self,
+                      let accountId: String = event.getEventInput(.accountId),
+                      let conversationId: String = event.getEventInput(.conversationId),
+                      let account = self.accountsService.getAccount(fromAccountId: accountId)
+                else { return }
+                self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func subscribeContactsEvents() {

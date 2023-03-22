@@ -108,18 +108,6 @@ class ContactRequestCell: UITableViewCell, NibReusable {
             .observe(on: MainScheduler.instance)
             .bind(to: self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
-        item.request.synchronizing
-            .startWith(item.request.synchronizing.value)
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe { inSynchronization in
-                self.buttonsContainer.isHidden = inSynchronization
-                self.deletable = inSynchronization
-            } onError: { _ in
-
-            }
-            .disposed(by: self.disposeBag)
-
         self.selectionStyle = .none
     }
 }

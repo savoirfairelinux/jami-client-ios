@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O1m-sW-gim">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O1m-sW-gim">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,11 +18,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yc2-Jn-6vm">
-                                <rect key="frame" x="0.0" y="-100" width="375" height="767"/>
+                                <rect key="frame" x="0.0" y="-80" width="375" height="747"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" id="Cd7-Fm-IM5">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cd7-Fm-IM5" id="TOb-Hu-RG9">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -32,14 +32,14 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5cj-ge-3dv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <color key="backgroundColor" red="0.88391119240000005" green="0.82437592739999999" blue="0.76125866170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
                                 <color key="textColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehB-ol-cdx">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="e7R-TC-NQ2"/>
                                 </constraints>
@@ -47,6 +47,15 @@
                                 <color key="tintColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Navigate to call"/>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading conversation from peer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04J-Zf-h3H">
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="750" constant="60" id="0kN-bl-82z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Wq-EJ-CAF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
@@ -77,6 +86,7 @@
                             <constraint firstItem="ehB-ol-cdx" firstAttribute="leading" secondItem="lhx-ny-Zct" secondAttribute="leading" id="AUO-95-xlZ"/>
                             <constraint firstItem="XRu-HM-jhQ" firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="D1h-vM-lOK"/>
                             <constraint firstAttribute="trailing" secondItem="6Wq-EJ-CAF" secondAttribute="trailing" id="EuA-fk-PFm"/>
+                            <constraint firstItem="04J-Zf-h3H" firstAttribute="trailing" secondItem="ehB-ol-cdx" secondAttribute="trailing" id="HZL-ep-59G"/>
                             <constraint firstAttribute="bottom" secondItem="6Wq-EJ-CAF" secondAttribute="bottom" id="QKw-Wp-ff0"/>
                             <constraint firstItem="yc2-Jn-6vm" firstAttribute="leading" secondItem="lhx-ny-Zct" secondAttribute="leading" id="RmT-dh-QdK"/>
                             <constraint firstAttribute="trailing" secondItem="yc2-Jn-6vm" secondAttribute="trailing" id="Vbp-Qr-Bjn"/>
@@ -86,6 +96,8 @@
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="trailing" secondItem="ehB-ol-cdx" secondAttribute="trailing" id="adg-fs-d5i"/>
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="top" secondItem="ehB-ol-cdx" secondAttribute="top" id="bMn-Xz-w1J"/>
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="bottom" secondItem="ehB-ol-cdx" secondAttribute="bottom" id="bi2-5t-Ueh"/>
+                            <constraint firstItem="04J-Zf-h3H" firstAttribute="top" secondItem="5cj-ge-3dv" secondAttribute="top" id="e8r-Nh-OCt"/>
+                            <constraint firstItem="04J-Zf-h3H" firstAttribute="leading" secondItem="ehB-ol-cdx" secondAttribute="leading" id="f4Y-Wq-YiD"/>
                             <constraint firstAttribute="trailing" secondItem="ehB-ol-cdx" secondAttribute="trailing" id="hsT-qM-JJP"/>
                             <constraint firstAttribute="bottom" secondItem="yc2-Jn-6vm" secondAttribute="bottom" id="m6U-Gp-jhl"/>
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="top" secondItem="mrp-Ty-hZO" secondAttribute="top" id="ucp-wl-kSP"/>
@@ -96,6 +108,7 @@
                     </view>
                     <connections>
                         <outlet property="callButtonHeightConstraint" destination="e7R-TC-NQ2" id="5uM-Sy-1EZ"/>
+                        <outlet property="conversationInSyncLabel" destination="04J-Zf-h3H" id="4J6-cN-Jg9"/>
                         <outlet property="currentCallButton" destination="ehB-ol-cdx" id="hXv-aJ-8DN"/>
                         <outlet property="currentCallLabel" destination="5cj-ge-3dv" id="HaN-nP-GKW"/>
                         <outlet property="spinnerView" destination="6Wq-EJ-CAF" id="XKK-Rh-rmd"/>
