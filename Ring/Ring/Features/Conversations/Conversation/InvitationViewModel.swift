@@ -31,7 +31,7 @@ import SwiftyBeaver
 enum InvitationStatus {
     case temporary ///  result from search
     case pending /// received request
-    case synchronizing ///  conversation request in synchronization
+    // case synchronizing ///  conversation request in synchronization
     case added
     case refused
     case invalid
@@ -102,15 +102,15 @@ class InvitationViewModel: ViewModel {
         }
         self.listenConversationStatus()
         // request became in synchronization right after accepting and before contact became online and synchronization finished
-        self.request!.synchronizing
-            .startWith(self.request!.synchronizing.value)
-            .subscribe(onNext: { [weak self] synchronizing in
-                if synchronizing {
-                    self?.invitationStatus.accept(.synchronizing)
-                }
-            }, onError: { _ in
-            })
-            .disposed(by: self.disposeBag)
+        //        self.request!.synchronizing
+        //            .startWith(self.request!.synchronizing.value)
+        //            .subscribe(onNext: { [weak self] synchronizing in
+        //                if synchronizing {
+        //                    self?.invitationStatus.accept(.synchronizing)
+        //                }
+        //            }, onError: { _ in
+        //            })
+        //            .disposed(by: self.disposeBag)
     }
 
     private func lookupUserName(request: RequestModel) {
@@ -174,17 +174,37 @@ class InvitationViewModel: ViewModel {
     func acceptRequest() {
         guard let request = self.request else { return }
         guard let jamiId = request.participants.first?.jamiId else { return }
-        if request.type == .contact || (request.isDialog() && self.contactsService.contact(withHash: jamiId) == nil) {
-            self.requestsService
-                .acceptContactRequest(jamiId: jamiId, withAccount: self.accountId)
-                .subscribe()
-                .disposed(by: self.disposeBag)
-        } else {
-            self.requestsService
-                .acceptConverversationRequest(conversationId: self.conversationId, withAccount: self.accountId)
-                .subscribe()
-                .disposed(by: self.disposeBag)
-        }
+        //        if request.type == .contact || (request.isDialog() && self.contactsService.contact(withHash: jamiId) == nil) {
+        //            self.requestsService
+        //                .acceptContactRequest(jamiId: jamiId, withAccount: self.accountId)
+        //                .subscribe()
+        //                .disposed(by: self.disposeBag)
+        //        } else {
+
+        self.requestsService
+            .acceptConverversationRequest(conversationId: self.conversationId, withAccount: self.accountId)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.invitationHandeledCB(self.conversationId)
+            }, onError: { error in
+                print("Observable error: \(error.localizedDescription)")
+            }, onCompleted: { [weak self] in
+                guard let self = self else { return }
+                self.invitationHandeledCB(self.conversationId)
+            })
+            .disposed(by: self.disposeBag)
+        //        self.requestsService
+        //            .acceptConverversationRequest(conversationId: self.conversationId, withAccount: self.accountId)
+        //            .subscribe({ <#Event<()>#> in
+        //                <#code#>
+        //            })
+        //            .subscribe { [weak self] in
+        //                guard let self = self else { return }
+        //                self.invitationHandeledCB(self.conversationId)
+        //            } onError: { _ in
+        //            }
+        //            .disposed(by: self.disposeBag)
+        // }
     }
     /**
      For contact requests or for one-to-one conversation requests when a peer is not added to contacts yet call discardContactRequest.
