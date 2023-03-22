@@ -621,7 +621,7 @@ extension ConversationViewModel {
                                                                       contactUri: jamiId)
     }
 
-    func startSendingLocation(duration: TimeInterval) {
+    func startSendingLocation(duration: TimeInterval? = nil) {
         guard let account = self.accountService.currentAccount,
               let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
         self.locationSharingService.startSharingLocation(from: account.id,
