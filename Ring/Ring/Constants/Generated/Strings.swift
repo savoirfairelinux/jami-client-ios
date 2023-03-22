@@ -454,6 +454,12 @@ internal enum L10n {
     internal static let automaticAcceptIncomingFiles = L10n.tr("Localizable", "generalSettings.automaticAcceptIncomingFiles", fallback: "Automatically accept incoming files")
     /// File transfer
     internal static let fileTransfer = L10n.tr("Localizable", "generalSettings.fileTransfer", fallback: "File transfer")
+    /// Limit the duration of location sharing
+    internal static let limitLocationSharingDuration = L10n.tr("Localizable", "generalSettings.limitLocationSharingDuration", fallback: "Limit the duration of location sharing")
+    /// Location Sharing
+    internal static let locationSharing = L10n.tr("Localizable", "generalSettings.locationSharing", fallback: "Location Sharing")
+    /// Position share duration
+    internal static let locationSharingDuration = L10n.tr("Localizable", "generalSettings.locationSharingDuration", fallback: "Position share duration")
     /// Advanced settings
     internal static let title = L10n.tr("Localizable", "generalSettings.title", fallback: "Advanced settings")
     /// Enable video acceleration
