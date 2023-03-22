@@ -59,6 +59,12 @@ class ConversationViewController: UIViewController,
     private let messageGroupingInterval = 10 * 60 // 10 minutes
     var bottomHeight: CGFloat = 0.00
     var isExecutingDeleteMessage: Bool = false
+    private var isLocationSharingDurationLimited: Bool {
+        return UserDefaults.standard.bool(forKey: limitLocationSharingDurationKey)
+    }
+    private var locationSharingDuration: Int {
+        return UserDefaults.standard.integer(forKey: locationSharingDurationKey)
+    }
 
     @IBOutlet weak var currentCallButton: UIButton!
     @IBOutlet weak var currentCallLabel: UILabel!
@@ -833,25 +839,13 @@ extension ConversationViewController {
             guard let self = self else { return }
 
             if self.checkLocationAuthorization() && self.isNotAlreadySharingWithThisContact() {
-                self.askLocationSharingDuration()
+                if self.isLocationSharingDurationLimited {
+                    self.viewModel.startSendingLocation(duration: TimeInterval(self.locationSharingDuration * 60))
+                } else {
+                    self.viewModel.startSendingLocation()
+                }
             }
         }
-    }
-
-    private func askLocationSharingDuration() {
-        let alert = UIAlertController.init(title: L10n.Alerts.locationSharingDurationTitle,
-                                           message: nil,
-                                           preferredStyle: .alert)
-
-        alert.addAction(.init(title: L10n.Alerts.locationSharingDuration10min, style: .default, handler: { [weak self] _ in
-            self?.viewModel.startSendingLocation(duration: 10 * 60)
-        }))
-        alert.addAction(.init(title: L10n.Alerts.locationSharingDuration1hour, style: .default, handler: { [weak self] _ in
-            self?.viewModel.startSendingLocation(duration: 60 * 60)
-        }))
-        alert.addAction(.init(title: L10n.Alerts.profileCancelPhoto, style: UIAlertAction.Style.cancel))
-
-        self.present(alert, animated: true, completion: nil)
     }
 
     private func isNotAlreadySharingWithThisContact() -> Bool {

@@ -99,6 +99,15 @@ private class OutgoingLocationSharingInstance: LocationSharingInstance {
                                  repeats: false)
     }
 
+    init(locationSharingService: LocationSharingService, accountId: String, contactUri: String) {
+        self.locationSharingService = locationSharingService
+        self.duration = 0
+        super.init(accountId: accountId, contactUri: contactUri)
+
+        self.endSharingTimer =
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in }
+    }
+
     @objc
     private func endSharing(timer: Timer) {
         self.locationSharingService.stopSharingLocation(accountId: self.accountId, contactUri: self.contactUri)
@@ -228,13 +237,21 @@ extension LocationSharingService {
         return Int(self.outgoingInstances.get(accountId, contactUri)?.remainingTime ?? 0)
     }
 
-    func startSharingLocation(from accountId: String, to recipientUri: String, duration: TimeInterval) {
+    func startSharingLocation(from accountId: String, to recipientUri: String, duration: TimeInterval? = nil) {
         guard !self.isAlreadySharingMyLocation(accountId: accountId, contactUri: recipientUri) else { return }
 
-        let instanceToInsert = OutgoingLocationSharingInstance(locationSharingService: self,
+        var instanceToInsert: OutgoingLocationSharingInstance!
+        if let duration = duration {
+            instanceToInsert = OutgoingLocationSharingInstance(locationSharingService: self,
                                                                accountId: accountId,
                                                                contactUri: recipientUri,
                                                                duration: duration)
+        } else {
+            instanceToInsert = OutgoingLocationSharingInstance(locationSharingService: self,
+                                                               accountId: accountId,
+                                                               contactUri: recipientUri)
+        }
+
         self.outgoingInstances.insertOrUpdate(instanceToInsert)
 
         if let location = CLLocationManager().location {
