@@ -156,10 +156,6 @@ class ConversationsService {
     private func addSwarm(conversationId: String, accountId: String, accountURI: String, to conversations: inout [ConversationModel]) {
         if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
            let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
-            if let syncing = info["syncing"], syncing == "true" {
-                /// request in synchronization
-                return
-            }
             let conversation = ConversationModel(withId: conversationId, accountId: accountId, info: info)
             if let prefsInfo = getConversationPreferences(accountId: accountId, conversationId: conversationId) {
                 conversation.updatePreferences(preferences: prefsInfo)
@@ -283,29 +279,25 @@ class ConversationsService {
             data[ConversationNotificationsKeys.accountId.rawValue] = accountId
             NotificationCenter.default.post(name: NSNotification.Name(ConversationNotifications.conversationReady.rawValue), object: nil, userInfo: data)
             self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 2)
+            self.sortIfNeeded()
+            self.conversationReady.accept(conversationId)
+            return
+        }
+        if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
+           let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
+            let conversation = ConversationModel(withId: conversationId, accountId: accountId, info: info)
+            if let prefsInfo = getConversationPreferences(accountId: accountId, conversationId: conversationId) {
+                conversation.updatePreferences(preferences: prefsInfo)
+            }
+            conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
+            if let lastRead = conversation.getLastReadMessage() {
+                let unreadInteractions = conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: accountURI)
+                conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
+            }
+            self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 1)
+            self.sortIfNeeded()
         }
         self.conversationReady.accept(conversationId)
-        /// check if legacy conversation for linked account was added to db. If so remopve conversation
-        if let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId),
-           conversation.isCoredialog(),
-           let jamiId = conversation.getParticipants().first?.jamiId,
-           let uri = JamiURI.init(schema: .ring, infoHash: jamiId).uriString,
-           let nonSwarmConvId = try? self.dbManager.getConversationsFor(contactUri: uri, accountId: accountId) {
-            var conversations = self.conversations.value
-            _ = self.dbManager
-                .clearHistoryFor(accountId: accountId, and: uri, keepConversation: false)
-                .subscribe(onCompleted: { [weak self] in
-                    guard let self = self else { return }
-                    if let index = conversations.firstIndex(where: { conversationModel in
-                        conversationModel.id == String(nonSwarmConvId)
-                    }) {
-                        conversations.remove(at: index)
-                        self.conversations.accept(conversations)
-                    }
-                }, onError: { _ in
-                })
-                .disposed(by: self.disposeBag)
-        }
     }
 
     func getConversationInfo(conversationId: String, accountId: String) -> [String: String] {

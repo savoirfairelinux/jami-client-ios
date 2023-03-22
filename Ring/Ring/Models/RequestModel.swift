@@ -29,7 +29,7 @@ class RequestModel {
     var participants = [ConversationParticipant]()
     var conversationType: ConversationType = .nonSwarm
     var type: RequestType
-    var synchronizing = BehaviorRelay<Bool>(value: false)
+    // var synchronizing = BehaviorRelay<Bool>(value: false)
 
     enum RequestKey: String {
         case payload = "payload"
@@ -53,7 +53,7 @@ class RequestModel {
         self.conversationType = conversation.type
         self.type = .conversation
         self.participants = conversation.getParticipants()
-        self.synchronizing.accept(true)
+        // self.synchronizing.accept(true)
     }
 
     init (with jamiId: String, accountId: String, withPayload payload: Data, receivedDate: Date, type: RequestType, conversationId: String) {
