@@ -26,6 +26,8 @@ import RxDataSources
 let hardareAccelerationKey = "HARDWARE_ACCELERATION_KEY"
 let automaticDownloadFilesKey = "AUTOMATIC_DOWNLOAD_FILES_KEY"
 let acceptTransferLimitKey = "ACCEPT_TRANSFER_LIMIT_KEY"
+let limitLocationSharingDurationKey = "LIMIT_LOCATION_SHARING_DURATION_KEY"
+let locationSharingDurationKey = "LOCATION_SHARING_DURATION_KEY"
 
 enum GeneralSettingsSection: SectionModelType {
     typealias Item = SectionRow
@@ -33,7 +35,9 @@ enum GeneralSettingsSection: SectionModelType {
     enum SectionRow {
         case hardwareAcceleration
         case automaticallyAcceptIncomingFiles
+        case limitLocationSharingDuration
         case acceptTransferLimit
+        case locationSharingDuration
         case sectionHeader(title: String)
         case log
     }
@@ -69,6 +73,9 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
                                                                 .sectionHeader(title: L10n.GeneralSettings.fileTransfer),
                                                                 .automaticallyAcceptIncomingFiles,
                                                                 .acceptTransferLimit,
+                                                                .sectionHeader(title: L10n.GeneralSettings.locationSharing),
+                                                                .limitLocationSharingDuration,
+                                                                .locationSharingDuration,
                                                                 .sectionHeader(title: L10n.LogView.title),
                                                                 .log
                                                             ])])
@@ -77,6 +84,11 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
     var hardwareAccelerationEnabled: BehaviorRelay<Bool>
     var automaticAcceptIncomingFiles: BehaviorRelay<Bool>
     var acceptTransferLimit: BehaviorRelay<String>
+    var limitLocationSharingDuration: BehaviorRelay<Bool>
+    var locationSharingDuration: BehaviorRelay<Int>
+    var locationSharingDurationText: String {
+        return convertMinutesToText(minutes: locationSharingDuration.value)
+    }
 
     let videoService: VideoService
 
@@ -95,6 +107,12 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
 
         let acceptTransferLimitValue = UserDefaults.standard.integer(forKey: acceptTransferLimitKey)
         acceptTransferLimit = BehaviorRelay<String>(value: String(acceptTransferLimitValue))
+
+        let isLocationSharingDurationLimited = UserDefaults.standard.bool(forKey: limitLocationSharingDurationKey)
+        limitLocationSharingDuration = BehaviorRelay<Bool>(value: isLocationSharingDurationLimited)
+
+        let locationSharingDurationValue = UserDefaults.standard.integer(forKey: locationSharingDurationKey)
+        locationSharingDuration = BehaviorRelay<Int>(value: locationSharingDurationValue)
     }
 
     func togleHardwareAcceleration(enable: Bool) {
@@ -106,12 +124,30 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
         hardwareAccelerationEnabled.accept(enable)
     }
 
+    private func convertMinutesToText(minutes: Int) -> String {
+        let hours = minutes / 60
+        let remainingMinutes = minutes % 60
+
+        if hours > 0 && remainingMinutes > 0 {
+            return "\(hours)h \(remainingMinutes)min"
+        } else if hours > 0 {
+            return "\(hours)h"
+        } else {
+            return "\(remainingMinutes)min"
+        }
+    }
+
     func togleAcceptingUnkownIncomingFiles(enable: Bool) {
         if automaticAcceptIncomingFiles.value == enable {
             return
         }
         UserDefaults.standard.set(enable, forKey: automaticDownloadFilesKey)
         automaticAcceptIncomingFiles.accept(enable)
+    }
+
+    func togleLimitLocationSharingDuration(enable: Bool) {
+        UserDefaults.standard.set(enable, forKey: limitLocationSharingDurationKey)
+        limitLocationSharingDuration.accept(enable)
     }
 
     func openLog() {
@@ -124,6 +160,14 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
         }
         UserDefaults.standard.set(Int(value) ?? 0, forKey: acceptTransferLimitKey)
         acceptTransferLimit.accept(value)
+    }
+
+    func changeLocationSharingDuration(value: Int) {
+        if locationSharingDuration.value == value {
+            return
+        }
+        UserDefaults.standard.set(value, forKey: locationSharingDurationKey)
+        locationSharingDuration.accept(value)
     }
 
     func hardwareAccelerationEnabledSettings() -> Bool {
