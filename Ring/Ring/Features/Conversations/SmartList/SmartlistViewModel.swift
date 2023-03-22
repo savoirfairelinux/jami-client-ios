@@ -158,6 +158,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                         } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
                             conversationViewModel = contactFound
                             conversationViewModel?.conversation = BehaviorRelay(value: conversationModel)
+                            conversationViewModel?.conversationCreated.accept(true)
                             self.conversationViewModels.append(contactFound)
                         } else {
                             conversationViewModel = ConversationViewModel(with: self.injectionBag)
@@ -285,11 +286,6 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 self?.conversationViewModels.remove(at: index)
             })
             .disposed(by: self.disposeBag)
-    }
-
-    /// For FilterConversationDataSource protocol
-    func conversationFound(conversation: ConversationViewModel?, name: String) {
-        // contactFoundConversation.accept(conversation)
     }
 
     func delete(conversationViewModel: ConversationViewModel) {
