@@ -95,20 +95,6 @@ class RequestsService {
         }) {
             currentRequests.append(contentsOf: conversationRequests)
         }
-        if let swarmIds = self.requestsAdapter.getSwarmConversations(forAccount: accountId) as? [String] {
-            for swarmId in swarmIds {
-                if let info = self.requestsAdapter.getConversationInfo(forAccount: accountId, conversationId: swarmId) as? [String: String],
-                   let participantsInfo = self.requestsAdapter.getConversationMembers(accountId, conversationId: swarmId) {
-                    if let syncing = info["syncing"], syncing == "true" {
-                        /// request in synchronization
-                        let conversation = ConversationModel(withId: swarmId, accountId: accountId, info: info)
-                        conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-                        let request = RequestModel(conversation: conversation)
-                        currentRequests.append(request)
-                    }
-                }
-            }
-        }
         // Load trust requests from daemon
         let trustRequestsDictionaries = self.requestsAdapter.trustRequests(withAccountId: accountId)
         if let contactRequests = trustRequestsDictionaries?.map({ dictionary in
@@ -380,7 +366,7 @@ extension RequestsService: RequestsAdapterDelegate {
     /**
      conversationRequestReceived signal emmited in 2 cases:
      - for a newly  received conversation request
-     - at the beggining of application  for all requests that was accepted but not synchronized yet. At this case profile for participant should be  already      saved
+     - at the beggining of application  for all requests that was accepted but not synchronized yet. At this case profile for participant should be  already  saved
      */
     func conversationRequestReceived(conversationId: String, accountId: String, metadata: [String: String]) {
         /// add a conversation request. If a contact request exists for same conversation remove it.

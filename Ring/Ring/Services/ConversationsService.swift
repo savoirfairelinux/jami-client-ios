@@ -156,10 +156,6 @@ class ConversationsService {
     private func addSwarm(conversationId: String, accountId: String, accountURI: String, to conversations: inout [ConversationModel]) {
         if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
            let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
-            if let syncing = info["syncing"], syncing == "true" {
-                /// request in synchronization
-                return
-            }
             let conversation = ConversationModel(withId: conversationId, accountId: accountId, info: info)
             if let prefsInfo = getConversationPreferences(accountId: accountId, conversationId: conversationId) {
                 conversation.updatePreferences(preferences: prefsInfo)
