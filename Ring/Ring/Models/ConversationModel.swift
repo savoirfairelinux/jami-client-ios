@@ -389,6 +389,7 @@ class ConversationModel: Equatable {
 
     func appendNonSwarm(message: MessageModel) {
         self.messages.append(message)
+        self.newMessages.accept([message])
     }
 
     func isSwarm() -> Bool {

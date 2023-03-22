@@ -123,7 +123,7 @@ class GeneratedInteractionsManager {
                     return
                 }
 
-                guard let jamiId: String = callEvent.getEventInput(.uri) else {
+                guard let jamiId: String = callEvent.getEventInput(.peerUri) else {
                     return
                 }
 
@@ -134,7 +134,9 @@ class GeneratedInteractionsManager {
                     guard let conversation = self.conversationService.getConversationForParticipant(jamiId: jamiId.filterOutHost(), accontId: accountID), !conversation.isSwarm() else { return }
                 } else {
                     // ensure sip conversation exists
-                    guard let uri = JamiURI.init(schema: .sip, infoHash: jamiId, account: account).uriString else { return }
+                    guard let uri = JamiURI.init(schema: .sip, infoHash: jamiId, account: account).uriString else {
+                        return
+                    }
                     self.conversationService.createSipConversation(uri: uri, accountId: accountID)
                 }
 

@@ -645,14 +645,24 @@ class DBManager {
                         dataBase: dataBase) else {
                 continue
             }
+            var lastMessage: MessageModel?
             for interaction in interactions {
                 let author = interaction.author == participant
                     ? participant : ""
                 if let message = self.convertToMessage(interaction: interaction, author: author) {
                     messages.append(message)
+                    if let last = lastMessage {
+                        if last.receivedDate < message.receivedDate {
+                            lastMessage = message
+                        }
+
+                    } else {
+                        lastMessage = message
+                    }
                 }
             }
             conversationModel.messages = messages
+            conversationModel.lastMessage = lastMessage
             conversationsToReturn.append(conversationModel)
         }
         return conversationsToReturn

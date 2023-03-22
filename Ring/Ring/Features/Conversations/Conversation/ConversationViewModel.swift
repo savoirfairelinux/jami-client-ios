@@ -157,6 +157,7 @@ class ConversationViewModel: Stateable, ViewModel {
             if account.type == AccountType.sip {
                 self.userName.accept(self.conversation.value.hash)
                 self.isAccountSip = true
+                self.subscribeLastMessagesUpdate()
                 return
             }
             ///

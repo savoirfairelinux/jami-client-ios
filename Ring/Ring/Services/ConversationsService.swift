@@ -455,6 +455,14 @@ class ConversationsService {
                             message.content = content
                             message.id = savedMessage.messageID
                             conversation.appendNonSwarm(message: message)
+                            if let lastMessage = conversation.lastMessage {
+                                if lastMessage.receivedDate < message.receivedDate {
+                                    conversation.lastMessage = message
+                                }
+
+                            } else {
+                                conversation.lastMessage = message
+                            }
                             self.sortIfNeeded()
                         }
                     }
@@ -629,6 +637,7 @@ class ConversationsService {
                 .getConversationsObservable(for: accountId)
                 .subscribe { [weak self] conversationModels in
                     self?.conversations.accept(conversationModels)
+                    self?.sortIfNeeded()
                 } onError: { _ in
                 }
                 .disposed(by: self.disposeBag)
