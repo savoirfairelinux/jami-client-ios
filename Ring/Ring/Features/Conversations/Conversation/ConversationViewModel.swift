@@ -71,6 +71,8 @@ class ConversationViewModel: Stateable, ViewModel {
         return self.stateSubject.asObservable()
     }()
 
+    var synchronizing = BehaviorRelay<Bool>(value: false)
+
     lazy var typingIndicator: Observable<Bool> = {
         return self.conversationsService
             .sharedResponseStream
@@ -161,7 +163,7 @@ class ConversationViewModel: Stateable, ViewModel {
                 return
             }
             ///
-            let showInv = self.conversation.value.needsSyncing || self.request != nil || self.conversation.value.id.isEmpty
+            let showInv = self.request != nil || self.conversation.value.id.isEmpty
             if self.showInvitation.value != showInv {
                 self.showInvitation.accept(showInv)
             }
@@ -214,8 +216,24 @@ class ConversationViewModel: Stateable, ViewModel {
                 }
             }
             subscribeLastMessagesUpdate()
+            subscribeConversationSynchronization()
             // self.subscribeConversationServiceTypingIndicator()
         }
+    }
+
+    private func subscribeConversationSynchronization() {
+        let syncObservable = self.conversation.flatMap { conversation -> BehaviorRelay<Bool> in
+            let innerObservable = conversation.synchronizing
+            return innerObservable
+        }
+        syncObservable
+            .startWith(self.conversation.value.synchronizing.value)
+            .subscribe { [weak self] synchronizing in
+                guard let self = self else { return }
+                self.synchronizing.accept(synchronizing)
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
     }
 
     private func subscribeLastMessagesUpdate() {

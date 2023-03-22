@@ -109,7 +109,7 @@ class ContactRequestsViewModel: Stateable, ViewModel {
 
     func accept(withItem item: RequestItem) -> Observable<Void> {
         guard let jamiId = item.request.participants.first?.jamiId else { return Observable.empty() }
-        if item.request.type == .contact || (item.request.isDialog() && self.contactsService.contact(withHash: jamiId) == nil) {
+        if item.request.type == .contact && self.contactsService.contact(withHash: jamiId) == nil {
             let acceptCompleted = self.requestsService.acceptContactRequest(jamiId: item.request.participants.first!.jamiId, withAccount: item.request.accountId)
             self.presenceService.subscribeBuddy(withAccountId: item.request.accountId,
                                                 withUri: jamiId,
