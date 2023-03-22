@@ -68,6 +68,7 @@ class ConversationViewController: UIViewController,
 
     @IBOutlet weak var currentCallButton: UIButton!
     @IBOutlet weak var currentCallLabel: UILabel!
+    @IBOutlet weak var conversationInSyncLabel: UILabel!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
     var bottomAnchor: NSLayoutConstraint?
@@ -769,6 +770,15 @@ class ConversationViewController: UIViewController,
                     self.messageAccessoryView.isHidden = false
                     self.setRightNavigationButtons()
                 }
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
+        self.viewModel.conversation.value.synchronizing
+            .startWith(self.viewModel.conversation.value.synchronizing.value)
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] synchronizing in
+                guard let self = self else { return }
+                self.conversationInSyncLabel.isHidden = !synchronizing
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
