@@ -167,6 +167,7 @@ class ConversationModel: Equatable {
     var title: String = ""
     var description: String = ""
     var preferences = ConversationPreferences()
+    var synchronizing = BehaviorRelay<Bool>(value: false)
 
     convenience init(withParticipantUri participantUri: JamiURI, accountId: String) {
         self.init()
@@ -206,6 +207,9 @@ class ConversationModel: Equatable {
         self.init()
         self.id = conversationId
         self.accountId = accountId
+        if let syncing = info["syncing"], syncing == "true" {
+            self.synchronizing.accept(true)
+        }
         if let hash = info[ConversationAttributes.title.rawValue], !hash.isEmpty {
             self.hash = hash
         }
