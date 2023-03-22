@@ -59,6 +59,12 @@ class ConversationViewController: UIViewController,
     private let messageGroupingInterval = 10 * 60 // 10 minutes
     var bottomHeight: CGFloat = 0.00
     var isExecutingDeleteMessage: Bool = false
+    private var isLocationSharingDurationLimited: Bool {
+        return UserDefaults.standard.bool(forKey: limitLocationSharingDurationKey)
+    }
+    private var locationSharingDuration: Int {
+        return UserDefaults.standard.integer(forKey: locationSharingDurationKey)
+    }
 
     @IBOutlet weak var currentCallButton: UIButton!
     @IBOutlet weak var currentCallLabel: UILabel!
@@ -833,7 +839,11 @@ extension ConversationViewController {
             guard let self = self else { return }
 
             if self.checkLocationAuthorization() && self.isNotAlreadySharingWithThisContact() {
-                self.askLocationSharingDuration()
+                if self.isLocationSharingDurationLimited {
+                    self.viewModel.startSendingLocation(duration: TimeInterval(self.locationSharingDuration * 60))
+                } else {
+                    self.askLocationSharingDuration()
+                }
             }
         }
     }
