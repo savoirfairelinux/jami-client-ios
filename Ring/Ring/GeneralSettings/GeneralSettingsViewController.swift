@@ -97,6 +97,10 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                     return self.makeAcceptTransferLimitCell()
                 case .automaticallyAcceptIncomingFiles:
                     return self.makeAutoDownloadFilesCell()
+                case .limitLocationSharingDuration:
+                    return self.makeLimitLocationSharingCell()
+                case .locationSharingDuration:
+                    return self.makeLocationSharingDurationCell()
                 case .log:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.LogView.description
@@ -189,6 +193,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         textField.heightAnchor.constraint(equalToConstant: 45).isActive = true
         textField.addCloseToolbar()
         viewModel.automaticAcceptIncomingFiles
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: {[weak textField, weak titleLabel] (enabled) in
                 textField?.isUserInteractionEnabled = enabled
                 textField?.textColor = enabled ? UIColor.label : UIColor.tertiaryLabel
@@ -215,6 +220,95 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                 self?.viewModel.changeTransferLimit(value: newValue ?? "")
             })
             .disposed(by: cell.disposeBag)
+        return cell
+    }
+
+    func makeLimitLocationSharingCell() -> DisposableCell {
+        let cell = DisposableCell()
+        cell.textLabel?.text = L10n.GeneralSettings.limitLocationSharingDuration
+        let switchView = UISwitch()
+        cell.selectionStyle = .none
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        cell.accessoryView = switchView
+        self.viewModel.limitLocationSharingDuration
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .bind(to: switchView.rx.value)
+            .disposed(by: cell.disposeBag)
+        switchView.rx.value
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (enabled) in
+                guard let self = self else { return }
+                if enabled && !self.viewModel.limitLocationSharingDuration.value {
+                    self.viewModel.changeLocationSharingDuration(value: 15)
+                }
+                self.viewModel.togleLimitLocationSharingDuration(enable: enabled)
+            })
+            .disposed(by: cell.disposeBag)
+        switchView.setOn(self.viewModel.limitLocationSharingDuration.value, animated: false)
+        return cell
+    }
+
+    func makeLocationSharingDurationCell() -> DisposableCell {
+        let cell = DisposableCell()
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.spacing = 8
+        cell.contentView.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 6).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -6).isActive = true
+        stackView.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 16).isActive = true
+        stackView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -16).isActive = true
+        stackView.layoutSubviews()
+
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        titleLabel.text = L10n.GeneralSettings.locationSharingDuration
+        titleLabel.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        stackView.addArrangedSubview(titleLabel)
+
+        let textField = PaddingTextField(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.cornerRadius = 5
+        textField.borderColor = UIColor(red: 51, green: 51, blue: 51, alpha: 1)
+        textField.borderWidth = 1
+        textField.keyboardType = .numberPad
+        textField.textAlignment = .left
+        textField.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+        textField.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        textField.addCloseToolbar()
+
+        let durationPicker = DurationPicker(maxHours: 10, duration: viewModel.locationSharingDuration.value)
+        durationPicker.translatesAutoresizingMaskIntoConstraints = false
+        durationPicker.viewModel = viewModel
+        textField.inputView = durationPicker
+        stackView.addArrangedSubview(textField)
+
+        viewModel.locationSharingDuration
+            .startWith(self.viewModel.locationSharingDuration.value)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak textField, weak self] value in
+                guard let self = self else { return }
+                textField?.text = self.viewModel.locationSharingDurationText
+                durationPicker.duration = value
+            })
+            .disposed(by: cell.disposeBag)
+
+        cell.selectionStyle = .none
+
+        viewModel.limitLocationSharingDuration
+            .startWith(viewModel.limitLocationSharingDuration.value)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak cell] (enabled) in
+                cell?.isUserInteractionEnabled = enabled
+                cell?.alpha = enabled ? 1 : 0.3
+            })
+            .disposed(by: cell.disposeBag)
+
         return cell
     }
 }
