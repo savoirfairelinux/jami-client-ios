@@ -59,8 +59,6 @@ class InvitationViewController: UIViewController, StoryboardBased, ViewModelBase
                     self.setTemporaryContactView()
                 case .pending:
                     self.setPendingContactView()
-                case .synchronizing:
-                    self.setSynchronizationContactView()
                 case .added, .refused:
                     self.removeChildController()
                     self.dismiss(animated: false, completion: nil)

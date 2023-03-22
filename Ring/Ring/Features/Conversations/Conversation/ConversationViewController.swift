@@ -69,6 +69,7 @@ class ConversationViewController: UIViewController,
 
     @IBOutlet weak var currentCallButton: UIButton!
     @IBOutlet weak var currentCallLabel: UILabel!
+    @IBOutlet weak var conversationInSyncLabel: UILabel!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
     var bottomAnchor: NSLayoutConstraint?
@@ -663,9 +664,11 @@ class ConversationViewController: UIViewController,
             .subscribe(onNext: { [weak self] name in
                 guard !name.isEmpty else { return }
                 let placeholder = L10n.Conversation.messagePlaceholder + name
+                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(name)
                 self?.messageAccessoryView.setPlaceholder(placeholder: placeholder)
             })
             .disposed(by: self.disposeBag)
+        self.conversationInSyncLabel.backgroundColor = UIColor(hexString: self.viewModel.conversation.value.preferences.color)
     }
 
     func placeCall() {
@@ -770,6 +773,15 @@ class ConversationViewController: UIViewController,
                     self.messageAccessoryView.isHidden = false
                     self.setRightNavigationButtons()
                 }
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
+        self.viewModel.synchronizing
+            .startWith(self.viewModel.synchronizing.value)
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] synchronizing in
+                guard let self = self else { return }
+                self.conversationInSyncLabel.isHidden = !synchronizing
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)

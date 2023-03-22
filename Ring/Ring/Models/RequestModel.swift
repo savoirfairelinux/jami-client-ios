@@ -29,7 +29,6 @@ class RequestModel {
     var participants = [ConversationParticipant]()
     var conversationType: ConversationType = .nonSwarm
     var type: RequestType
-    var synchronizing = BehaviorRelay<Bool>(value: false)
 
     enum RequestKey: String {
         case payload = "payload"
@@ -53,7 +52,6 @@ class RequestModel {
         self.conversationType = conversation.type
         self.type = .conversation
         self.participants = conversation.getParticipants()
-        self.synchronizing.accept(true)
     }
 
     init (with jamiId: String, accountId: String, withPayload payload: Data, receivedDate: Date, type: RequestType, conversationId: String) {
@@ -101,29 +99,33 @@ class RequestModel {
                 self.conversationId = conversationId
             }
         } else {
-            if let type = dictionary[ConversationAttributes.mode.rawValue],
-               let typeInt = Int(type),
-               let conversationType = ConversationType(rawValue: typeInt) {
-                self.conversationType = conversationType
-            }
-            if let conversationId = dictionary[RequestKey.conversationId.rawValue] {
-                self.conversationId = conversationId
-            }
-            if let from = dictionary[RequestKey.from.rawValue] {
-                self.participants.append(ConversationParticipant(jamiId: from))
-            }
-            if let title = dictionary[RequestKey.title.rawValue] {
-                self.name = title
-            }
-            if let avatar = dictionary[RequestKey.avatar.rawValue], !avatar.isEmpty {
-                self.avatar = Data(base64Encoded: avatar,
-                                   options: Data.Base64DecodingOptions.ignoreUnknownCharacters)
-            }
-            if let timestamp = dictionary[RequestKey.received.rawValue],
-               let timestampDouble = Double(timestamp) {
-                let receivedDate = Date.init(timeIntervalSince1970: timestampDouble)
-                self.receivedDate = receivedDate
-            }
+            self.updatefrom(dictionary: dictionary)
+        }
+    }
+
+    func updatefrom(dictionary: [String: String]) {
+        if let type = dictionary[ConversationAttributes.mode.rawValue],
+           let typeInt = Int(type),
+           let conversationType = ConversationType(rawValue: typeInt) {
+            self.conversationType = conversationType
+        }
+        if let conversationId = dictionary[RequestKey.conversationId.rawValue] {
+            self.conversationId = conversationId
+        }
+        if let from = dictionary[RequestKey.from.rawValue] {
+            self.participants.append(ConversationParticipant(jamiId: from))
+        }
+        if let title = dictionary[RequestKey.title.rawValue] {
+            self.name = title
+        }
+        if let avatar = dictionary[RequestKey.avatar.rawValue], !avatar.isEmpty {
+            self.avatar = Data(base64Encoded: avatar,
+                               options: Data.Base64DecodingOptions.ignoreUnknownCharacters)
+        }
+        if let timestamp = dictionary[RequestKey.received.rawValue],
+           let timestampDouble = Double(timestamp) {
+            let receivedDate = Date.init(timeIntervalSince1970: timestampDouble)
+            self.receivedDate = receivedDate
         }
     }
 
