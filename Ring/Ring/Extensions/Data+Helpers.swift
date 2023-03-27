@@ -21,9 +21,12 @@
 import Foundation
 
 extension Data {
-    var stringEncoding: String.Encoding? {
+    var stringUTF8OrUTF16Encoding: String.Encoding? {
         var string: NSString?
-        guard case let value = NSString.stringEncoding(for: self, encodingOptions: nil, convertedString: &string, usedLossyConversion: nil),
+        let options: [StringEncodingDetectionOptionsKey: Any] =
+            [StringEncodingDetectionOptionsKey.suggestedEncodingsKey: [String.Encoding.utf8.rawValue, String.Encoding.utf16.rawValue],
+             StringEncodingDetectionOptionsKey.useOnlySuggestedEncodingsKey: 1]
+        guard case let value = NSString.stringEncoding(for: self, encodingOptions: options, convertedString: &string, usedLossyConversion: nil),
               value != 0 else { return nil }
         return .init(rawValue: value)
     }

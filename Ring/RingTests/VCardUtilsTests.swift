@@ -36,7 +36,7 @@ final class VCardUtilsTests: XCTestCase {
         return """
         BEGIN:VCARD
         FN:\(profileName1)
-        TEL;other:\(jamiId1)
+        TEL;other:ring:\(jamiId1)
         PHOTO;ENCODING=BASE64;TYPE=JPEG:\(photo)
         END:VCARD
         """
@@ -46,7 +46,7 @@ final class VCardUtilsTests: XCTestCase {
         return """
         BEGIN:VCARD
         FN:\(profileName1)
-        TEL;other:\(jamiId1)
+        TEL;other:ring:\(jamiId1)
         END:VCARD
         """
     }
@@ -55,10 +55,14 @@ final class VCardUtilsTests: XCTestCase {
         return """
         BEGIN:VCARD
         FN:
-        TEL;other:\(jamiId1)
+        TEL;other:ring:\(jamiId1)
         PHOTO;ENCODING=BASE64;TYPE=JPEG:\(photo)
         END:VCARD
         """
+    }
+
+    func getJamiUri() -> String {
+        return "ring:\(jamiId1)"
     }
 
     func testParseToProfile() {
@@ -69,12 +73,12 @@ final class VCardUtilsTests: XCTestCase {
         // Assert
         XCTAssertEqual(profile?.alias, profileName1)
         XCTAssertEqual(profile?.photo, photo)
-        XCTAssertEqual(profile?.uri, jamiId1)
+        XCTAssertEqual(profile?.uri, getJamiUri())
     }
 
     func testDataWithImageAndUUID_whenProfileHasPhotoAndAlias() throws {
         // Arrange
-        let profile = Profile(uri: jamiId1, alias: profileName1, photo: photo, type: ProfileType.ring.rawValue)
+        let profile = Profile(uri: getJamiUri(), alias: profileName1, photo: photo, type: ProfileType.ring.rawValue)
         let expectedData = generateVCardStingWithNameAndImage().data(using: .utf8)
         // Act
         let data = try XCTUnwrap(VCardUtils.dataWithImageAndUUID(from: profile))
@@ -84,7 +88,7 @@ final class VCardUtilsTests: XCTestCase {
 
     func testDataWithImageAndUUID_whenProfileMissingPhoto() throws {
         // Arrange
-        let profile = Profile(uri: jamiId1, alias: profileName1, photo: nil, type: ProfileType.ring.rawValue)
+        let profile = Profile(uri: getJamiUri(), alias: profileName1, photo: nil, type: ProfileType.ring.rawValue)
         let expectedData = generateVCardStingWithName().data(using: .utf8)
         // Act
         let data = try XCTUnwrap(VCardUtils.dataWithImageAndUUID(from: profile))
@@ -94,7 +98,7 @@ final class VCardUtilsTests: XCTestCase {
 
     func testDataWithImageAndUUID_whenProfileAliasHasLeadingWhitespace() throws {
         // Arrange
-        let profile = Profile(uri: jamiId1, alias: " " + profileName1, photo: photo, type: ProfileType.ring.rawValue)
+        let profile = Profile(uri: getJamiUri(), alias: " " + profileName1, photo: photo, type: ProfileType.ring.rawValue)
         let expectedData = generateVCardStingWithNameAndImage().data(using: .utf8)
         // Act
         let data = try XCTUnwrap(VCardUtils.dataWithImageAndUUID(from: profile))
@@ -104,7 +108,7 @@ final class VCardUtilsTests: XCTestCase {
 
     func test_dataWithImageAndUUID_whenProfileHasNoAlias() throws {
         // Arrange
-        let profile = Profile(uri: jamiId1, alias: nil, photo: photo, type: ProfileType.ring.rawValue)
+        let profile = Profile(uri: getJamiUri(), alias: nil, photo: photo, type: ProfileType.ring.rawValue)
         let expectedData = generateVCardStingWithImage().data(using: .utf8)
         // Act
         let data = try XCTUnwrap(VCardUtils.dataWithImageAndUUID(from: profile))
