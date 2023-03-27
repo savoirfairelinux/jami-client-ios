@@ -294,7 +294,7 @@
 "accountPage.connectivityHeader" = "Connectivité";
 "accountPage.turnEnabled" = "Enable TURN";
 "accountPage.turnServer" = "Adresse du serveur TURN";
-"accountPage.turnUsername" = "TURN username";
+"accountPage.turnUsername" = "Nom d'utilisateur TURN";
 "accountPage.turnPassword" = "Mot de passe TURN";
 "accountPage.turnRealm" = "Domaine TURN";
 
