@@ -108,17 +108,15 @@ class VCardUtils {
         var vCardString = beginString + fullNameString + telephoneString
 
         guard let image = profile.photo  else {
-            print("****\(vCardString + endString)")
             return (vCardString + endString).data(using: .utf8)
         }
         let vcardImageString = VCardFields.photoJPEG.rawValue + image + "\n"
         vCardString += vcardImageString + VCardFields.end.rawValue
-        print("****\(vCardString)")
         return vCardString.data(using: .utf8)
     }
 
     class func parseToProfile(data: Data) -> Profile? {
-        guard let encoding = data.stringEncoding,
+        guard let encoding = data.stringUTF8OrUTF16Encoding,
               let profileStr = String(data: data, encoding: encoding) else {
             return nil
         }
@@ -132,7 +130,7 @@ class VCardUtils {
                 alias = line.components(separatedBy: ":").last ?? ""
             }
             if line.starts(with: "TEL;other") {
-                profileUri = line.components(separatedBy: ":").last ?? ""
+                profileUri = line.replacingOccurrences(of: "TEL;other:", with: "")
             }
         }
         let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
