@@ -69,4 +69,5 @@ typedef NS_ENUM(int, MessageStatus)  {
 - (uint32_t)loadConversationMessages:(NSString*) accountId conversationId:(NSString*) conversationId from:(NSString*)fromMessage size:(NSInteger)size;
 
 - (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId;
+- (void)reloadConversationsAndRequests;
 @end
