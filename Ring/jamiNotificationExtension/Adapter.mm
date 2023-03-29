@@ -212,6 +212,7 @@ std::map<std::string, std::string> nameServers;
 {
     auto accounts = getAccountList();
     for (auto account : accounts) {
+        reloadConversationsAndRequests(account);
         setAccountActive(account, active, true);
     }
 }
