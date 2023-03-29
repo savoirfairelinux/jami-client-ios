@@ -124,6 +124,7 @@ class InvitationViewController: UIViewController, StoryboardBased, ViewModelBase
         invitationLabel1.isHidden = false
         self.viewModel.displayName
             .asObservable()
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
                 self?.invitationLabel1.text = L10n.Conversation.receivedRequest(name)
             })
@@ -142,6 +143,7 @@ class InvitationViewController: UIViewController, StoryboardBased, ViewModelBase
         invitationLabel2.text = L10n.Conversation.synchronizationTitle
         self.viewModel.displayName
             .asObservable()
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
                 self?.invitationLabel3.text = L10n.Conversation.synchronizationMessage(name)
             })

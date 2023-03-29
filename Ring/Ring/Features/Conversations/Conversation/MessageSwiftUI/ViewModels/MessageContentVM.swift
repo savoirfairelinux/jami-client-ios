@@ -312,7 +312,9 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         if self.url == nil {
             self.transferState.onNext(TransferState.getURL(viewModel: self))
         }
-        _ = getImage()
+        DispatchQueue.main.async { [weak self] in
+            _ = self?.getImage()
+        }
     }
 
     private func updateTransferActions() {
