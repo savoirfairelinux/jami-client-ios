@@ -86,6 +86,24 @@
       "message": "Use UIDatePicker instead of UISlider to select duration, because it is difficult to select precize time with the slider on small phone screen.",
       "revId": "af47a3f934dd2aa5ad5f26f49564f24d76af9fef",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99b4a0a3_c58f3b10",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-03-29T19:29:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7c38d17_b4979b45",
+      "revId": "af47a3f934dd2aa5ad5f26f49564f24d76af9fef",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
