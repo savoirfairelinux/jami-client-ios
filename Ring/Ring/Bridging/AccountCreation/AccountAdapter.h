@@ -83,5 +83,6 @@
                   oldPassword:(NSString *)oldpassword
                   newPassword:(NSString *)newPassword;
 - (void)setAccountsActive:(BOOL) active;
+- (void)reloadConversationsAndRequests;
 
 @end

@@ -965,6 +965,10 @@ class AccountsService: AccountAdapterDelegate {
         self.accountAdapter.setAccountsActive(active)
     }
 
+    func reloadConversationsAndRequests() {
+        self.accountAdapter.reloadConversationsAndRequests()
+    }
+
     func setAccountActive(active: Bool, accountId: String) {
         self.accountAdapter.setAccountActive(accountId, active: active)
     }
