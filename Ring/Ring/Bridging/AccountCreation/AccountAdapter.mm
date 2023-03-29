@@ -25,6 +25,7 @@
 #import "Utils.h"
 
 #import "jami/configurationmanager_interface.h"
+#import "jami/conversation_interface.h"
 #import "RegistrationResponse.h"
 
 @implementation AccountAdapter
@@ -218,6 +219,7 @@ static id <AccountAdapterDelegate> _delegate;
 -(void)setAccountsActive:(BOOL) active {
     auto accounts = getAccountList();
     for(auto account: accounts) {
+        reloadConversationsAndRequests(account);
         setAccountActive(account, active, true);
     }
 }
