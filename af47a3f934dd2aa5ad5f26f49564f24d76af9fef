@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d224b2a_912fc7c0",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-03-29T17:11:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c5bc818_a10273ea",
+      "revId": "af47a3f934dd2aa5ad5f26f49564f24d76af9fef",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c614890c_7f4fa1e4",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-03-22T15:26:03Z",
       "side": 1,
       "message": "[weak self]",
+      "revId": "af47a3f934dd2aa5ad5f26f49564f24d76af9fef",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2db6ffb_f5755dff",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-03-29T17:11:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c614890c_7f4fa1e4",
       "revId": "af47a3f934dd2aa5ad5f26f49564f24d76af9fef",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
