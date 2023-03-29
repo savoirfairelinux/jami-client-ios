@@ -152,6 +152,10 @@ class ConversationsService {
         }
     }
 
+    func reloadConversationsAndRequests() {
+        self.conversationsAdapter.reloadConversationsAndRequests()
+    }
+
     private func addSwarm(conversationId: String, accountId: String, accountURI: String, to conversations: inout [ConversationModel]) {
         if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
            let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {

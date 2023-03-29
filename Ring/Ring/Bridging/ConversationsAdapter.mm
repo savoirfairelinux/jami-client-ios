@@ -249,4 +249,11 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
     _messagesDelegate = delegate;
 }
 
+- (void)reloadConversationsAndRequests {
+    auto accounts = getAccountList();
+    for(auto account: accounts) {
+        reloadConversationsAndRequests(account);
+    }
+}
+
 @end

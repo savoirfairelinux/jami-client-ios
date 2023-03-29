@@ -166,6 +166,7 @@ std::map<std::string, std::string> nameServers;
 {
     [self registerSignals];
     if (initialized() == true) {
+        reloadConversationsAndRequests(std::string([accountId UTF8String]));
         setAccountActive(std::string([accountId UTF8String]), true);
         return true;
     }
@@ -203,6 +204,9 @@ std::map<std::string, std::string> nameServers;
 {
     auto accounts = getAccountList();
     for (auto account : accounts) {
+        if (active) {
+            reloadConversationsAndRequests(account);
+        }
         setAccountActive(account, active, true);
     }
 }
