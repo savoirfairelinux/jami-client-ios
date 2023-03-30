@@ -62,7 +62,9 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        captureSession?.startRunning()
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.captureSession?.startRunning()
+        }
     }
 
     override func viewDidLoad() {
@@ -94,9 +96,9 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 // We tell our Output the expected Meta-data type
                 captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
                 captureMetadataOutput.metadataObjectTypes = [.code128, .qr, .ean13, .ean8, .code39, .upce, .aztec, .pdf417]
-                // AVMetadataObject.ObjectType
-
-                captureSession?.startRunning()
+                DispatchQueue.global(qos: .background).async { [weak self] in
+                    self?.captureSession?.startRunning()
+                }
 
                 // The videoPreviewLayer displays video in conjunction with the captureSession
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
@@ -168,18 +170,18 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             // Those coordinates are assigned to our codeFrame
             codeFrame.frame = metaDataCoordinates.bounds
 
-            guard let ringId = stringCodeValue.components(separatedBy: "http://").last else {
+            guard let jamiId = stringCodeValue.components(separatedBy: "http://").last else {
                 let alert = UIAlertController(title: L10n.Scan.badQrCode, message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
                 return
             }
 
-            if ringId.isSHA1() {
+            if jamiId.isSHA1() {
                 AudioServicesPlayAlertSound(systemSoundId)
-                print("RingId : " + ringId)
+                print("jamiId : " + jamiId)
                 self.dismiss(animated: true, completion: nil)
-                self.viewModel.createNewConversation(recipientRingId: ringId)
+                self.viewModel.openConversation(jamiId: jamiId)
                 self.scannedQrCode = true
             } else {
                 let alert = UIAlertController(title: L10n.Scan.badQrCode, message: "", preferredStyle: .alert)

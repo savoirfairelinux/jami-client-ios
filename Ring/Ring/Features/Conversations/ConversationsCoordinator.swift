@@ -88,6 +88,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.migrateAccount(accountId: accountId)
                 case .returnToSmartList:
                     self.popToSmartList()
+                case .openConversation(let jamiId):
+                    self.openConversation(jamiId: jamiId)
                 default:
                     break
                 }
@@ -188,6 +190,20 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     }
 
+    func openConversation(jamiId: String) {
+        guard let account = self.accountService.currentAccount else { return }
+        let uri = JamiURI(schema: URIType.ring, infoHash: jamiId)
+        if let conversation = self.getConversationViewModelForParticipant(jamiId: jamiId) {
+            self.showConversation(withConversationViewModel: conversation)
+            return
+        }
+        let conversation = ConversationModel(withParticipantUri: uri,
+                                             accountId: account.id)
+        let newConversation = ConversationViewModel(with: self.injectionBag)
+        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+        self.showConversation(withConversationViewModel: newConversation)
+    }
+
     func presentCallScreen(call: CallModel) {
         if let topController = self.getTopController(),
            !topController.isKind(of: (CallViewController).self) {
@@ -197,7 +213,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         if self.accountService.currentAccount?.id != call.accountId {
             self.accountService.currentAccount = self.accountService.getAccount(fromAccountId: call.accountId)
         }
-        if let model = self.getConversationViewModel(participantUri: call.paricipantHash()) {
+        if let model = self.getConversationViewModelForParticipant(jamiId: call.paricipantHash()) {
             self.showConversation(withConversationViewModel: model)
         }
         let controller = CallViewController.instantiate(with: self.injectionBag)
@@ -254,7 +270,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func replaceCurrentWithConversationFor(participantUri: String) {
-        guard let model = getConversationViewModel(participantUri: participantUri) else { return }
+        guard let model = getConversationViewModelForParticipant(jamiId: participantUri) else { return }
         self.popToSmartList()
         self.showConversation(withConversationViewModel: model)
     }
@@ -265,7 +281,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     func openConversation(conversationId: String, accountId: String) {
         self.popToSmartList()
-        if let model = getConversationViewModel(conversationId: conversationId) {
+        if let model = getConversationViewModelForId(conversationId: conversationId) {
             self.showConversation(withConversationViewModel: model)
         } else if let request = self.requestsService.getRequest(withId: conversationId, accountId: accountId) {
             let conversationViewModel = ConversationViewModel(with: self.injectionBag)
@@ -284,7 +300,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         guard let uriString = JamiURI(schema: URIType.ring, infoHash: participantId).uriString else {
             return
         }
-        if let model = getConversationViewModel(participantUri: uriString) {
+        if let model = getConversationViewModelForParticipant(jamiId: uriString) {
             self.showConversation(withConversationViewModel: model)
             return
         }
@@ -320,12 +336,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         navigationViewController = controller
     }
 
-    func getConversationViewModel(participantUri: String) -> ConversationViewModel? {
+    func getConversationViewModelForParticipant(jamiId: String) -> ConversationViewModel? {
         let viewControllers = self.navigationViewController.children
         for controller in viewControllers {
             if let smartController = controller as? SmartlistViewController {
                 for model in smartController.viewModel.conversationViewModels where
-                    model.conversation.value.isCoredialog() && model.conversation.value.getParticipants().first?.jamiId == participantUri {
+                    model.conversation.value.isCoredialog() && model.conversation.value.getParticipants().first?.jamiId == jamiId {
                     return model
                 }
             }
@@ -333,7 +349,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         return nil
     }
 
-    func getConversationViewModel(conversationId: String) -> ConversationViewModel? {
+    func getConversationViewModelForId(conversationId: String) -> ConversationViewModel? {
         let viewControllers = self.navigationViewController.children
         for controller in viewControllers {
             if let smartController = controller as? SmartlistViewController {

@@ -25,32 +25,15 @@ import RxCocoa
 class ScanViewModel: ViewModel, Stateable {
 
     // MARK: variables
-    private var injectionBag: InjectionBag
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
 
     // MARK: functions
-    required init(with injectionBag: InjectionBag) {
-        self.injectionBag = injectionBag
-    }
+    required init(with injectionBag: InjectionBag) {}
 
-    func createNewConversation(recipientRingId: String) {
-        guard let currentAccount = self.injectionBag.accountService.currentAccount else {
-            return
-        }
-        // Create new converation
-        let conversation = ConversationModel(withParticipantUri: JamiURI.init(schema: URIType.ring,
-                                                                              infoHash: recipientRingId),
-                                             accountId: currentAccount.id)
-        let newConversation = ConversationViewModel(with: self.injectionBag)
-        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
-        self.showConversation(withConversationViewModel: newConversation)
-    }
-
-    func showConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
-        self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
-                                                                        conversationViewModel))
+    func openConversation(jamiId: String) {
+        self.stateSubject.onNext(ConversationState.openConversation(jamiId: jamiId))
     }
 }

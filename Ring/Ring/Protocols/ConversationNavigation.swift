@@ -40,7 +40,13 @@ enum ConversationState: State {
     case accountModeChanged
     case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate)
     case openIncomingInvitationView(displayName: String, request: RequestModel, parentView: UIViewController, invitationHandeledCB: ((_ conversationId: String) -> Void))
-    case openOutgoingInvitationView(displayName: String, alias: String, avatar: Data?, contactJamiId: String, accountId: String, parentView: UIViewController, invitationHandeledCB: ((_ conversationId: String) -> Void))
+    case openOutgoingInvitationView(displayName: String,
+                                    alias: String,
+                                    avatar: Data?,
+                                    contactJamiId: String,
+                                    accountId: String,
+                                    parentView: UIViewController,
+                                    invitationHandeledCB: ((_ conversationId: String) -> Void))
     case replaceCurrentWithConversationFor(participantUri: String)
     case showAccountSettings
     case accountRemoved
@@ -48,6 +54,7 @@ enum ConversationState: State {
     case returnToSmartList
     case migrateAccount(accountId: String)
     case presentSwarmInfo(swarmInfo: SwarmInfoProtocol)
+    case openConversation(jamiId: String)
 }
 
 protocol ConversationNavigation: AnyObject {
@@ -90,7 +97,13 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                 case .openIncomingInvitationView(let displayName, let request, let parentView, let invitationHandeledCB):
                     self.openIncomingInvitationView(displayName: displayName, request: request, parentView: parentView, invitationHandeledCB: invitationHandeledCB)
                 case .openOutgoingInvitationView(let displayName, let alias, let avatar, let contactJamiId, let accountId, let parentView, let invitationHandeledCB):
-                    self.openOutgoingInvitationView(displayName: displayName, alias: alias, avatar: avatar, contactJamiId: contactJamiId, accountId: accountId, parentView: parentView, invitationHandeledCB: invitationHandeledCB)
+                    self.openOutgoingInvitationView(displayName: displayName,
+                                                    alias: alias,
+                                                    avatar: avatar,
+                                                    contactJamiId: contactJamiId,
+                                                    accountId: accountId,
+                                                    parentView: parentView,
+                                                    invitationHandeledCB: invitationHandeledCB)
                 case .presentSwarmInfo(let swarmInfo):
                     self.presentSwarmInfo(swarmInfo: swarmInfo)
                 default:
