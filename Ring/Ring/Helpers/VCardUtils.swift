@@ -39,6 +39,22 @@ enum VCardFields: String {
 enum VCardFiles: String {
     case myProfile
 }
+
+struct Profile {
+    var uri: String
+    var alias: String?
+    var photo: String?
+    var type: String
+}
+
+enum ProfileType: String {
+    case ring = "RING"
+    case sip = "SIP"
+}
+
+protocol VCardSender {
+    func sendChunk(callID: String, message: [String: String], accountId: String, from: String)
+}
 class VCardUtils {
 
     class func getName(from vCard: CNContact?) -> String {
@@ -60,7 +76,7 @@ class VCardUtils {
         return name
     }
 
-    class func sendVCard(card: Profile, callID: String, accountID: String, sender: CallsService, from: String) {
+    class func sendVCard(card: Profile, callID: String, accountID: String, sender: VCardSender, from: String) {
         do {
             guard let vCardData = try VCardUtils.dataWithImageAndUUID(from: card),
                   var vCardString = String(data: vCardData, encoding: String.Encoding.utf8) else {

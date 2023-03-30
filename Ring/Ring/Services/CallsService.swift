@@ -50,7 +50,7 @@ enum MediaType: String, CustomStringConvertible {
 }
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class CallsService: CallsAdapterDelegate {
+class CallsService: CallsAdapterDelegate, VCardSender {
     private let disposeBag = DisposeBag()
     private let callsAdapter: CallsAdapter
     private let log = SwiftyBeaver.self

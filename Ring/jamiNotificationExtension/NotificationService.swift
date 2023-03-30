@@ -445,9 +445,8 @@ extension NotificationService {
         if !FileManager.default.fileExists(atPath: profilePath) { return nil }
 
         guard let data = FileManager.default.contents(atPath: profilePath),
-              let vCards = try? CNContactVCardSerialization.contacts(with: data),
-              let vCard = vCards.first else { return nil }
-        return vCard.familyName.isEmpty ? vCard.givenName : vCard.familyName
+              let profile = VCardUtils.parseToProfile(data: data) else { return nil }
+        return profile.alias
     }
 }
 
