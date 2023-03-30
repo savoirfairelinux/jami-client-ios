@@ -247,6 +247,8 @@
 		2673D63225267785000C56CB /* ConferenceLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */; };
 		2679E42C29328352007E4639 /* ConcurrentDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679E42B29328352007E4639 /* ConcurrentDictionary.swift */; };
 		267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267AD77D252B979F00047593 /* ConferenceParticipant.swift */; };
+		267CC6FC29D5B27600505E56 /* Data+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE64229C8F58800D66D5E /* Data+Helpers.swift */; };
+		267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
 		26929FD425659E5F0052A601 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 26929FD125659E5F0052A601 /* cacert.pem */; };
@@ -3002,7 +3004,9 @@
 				26BB4389267017D400019CF6 /* Utils.mm in Sources */,
 				26A88C07266FFFC800888EED /* NotificationService.swift in Sources */,
 				26A88C1A267000F000888EED /* Adapter.mm in Sources */,
+				267CC6FC29D5B27600505E56 /* Data+Helpers.swift in Sources */,
 				26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */,
+				267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */,
 				BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */,
 				449E736728D9F86A00CBF564 /* Strings.swift in Sources */,
 			);

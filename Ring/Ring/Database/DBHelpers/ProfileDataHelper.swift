@@ -21,13 +21,6 @@
 import SQLite
 import SwiftyBeaver
 
-struct Profile {
-    var uri: String
-    var alias: String?
-    var photo: String?
-    var type: String
-}
-
 final class ProfileDataHelper {
     let contactsProfileTable = Table("profiles")
     let accountProfileTable = Table("account_profile")
