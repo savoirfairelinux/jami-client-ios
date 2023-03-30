@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4083025_4c531b10",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-30T13:26:51Z",
+      "side": 1,
+      "message": "at this point check if duration 0h 0min and if so present an alert suggesting to modify duration in the settings and do not start location sharing.",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2076c6d2_ca3a4c81",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/DurationPicker.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-30T13:26:51Z",
+      "side": 1,
+      "message": "copyright",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eafc2501_cb629ffc",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-30T13:26:51Z",
+      "side": 1,
+      "message": "why do we need this? It is already initialized with this value",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01d4f3ef_51705776",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-30T13:26:51Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8d819f2_a22fc65d",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-30T13:26:51Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c679478d_bbbd994b",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-30T13:26:51Z",
+      "side": 1,
+      "message": "add .startWith(viewModel.limitLocationSharingDuration.value) to get initial value",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdd3104d_ba3d259c",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-03-30T13:26:51Z",
+      "side": 1,
+      "message": "we do not need this timer",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
