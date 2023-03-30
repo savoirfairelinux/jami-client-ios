@@ -23,11 +23,6 @@ import Foundation
 import RxSwift
 import SQLite
 
-enum ProfileType: String {
-    case ring = "RING"
-    case sip = "SIP"
-}
-
 enum GeneratedMessage: Int {
     case outgoingCall
     case incomingCall
