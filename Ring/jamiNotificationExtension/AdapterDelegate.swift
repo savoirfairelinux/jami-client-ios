@@ -29,6 +29,5 @@ import Foundation
     func newInteraction(conversationId: String, accountId: String, message: [String: String])
     func dataTransferEvent(withFileId transferId: String, withEventCode eventCode: Int, accountId: String, conversationId: String, interactionId: String)
     func conversationSyncCompleted(accountId: String)
-    func receivedCallConnectionRequest(accountId: String, peerId: String, hasVideo: Bool)
     func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String])
 }

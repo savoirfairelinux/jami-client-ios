@@ -49,7 +49,6 @@ class AdapterService {
         case fileTransferDone
         case fileTransferInProgress
         case syncCompleted
-        case call
         case invitation
     }
 
@@ -175,13 +174,6 @@ extension AdapterService: AdapterDelegate {
             return
         }
         handler(.syncCompleted, EventData(accountId: accountId))
-    }
-
-    func receivedCallConnectionRequest(accountId: String, peerId: String, hasVideo: Bool) {
-        guard let handler = self.eventHandler else {
-            return
-        }
-        handler(.call, EventData(accountId: accountId, jamiId: peerId, content: "\(hasVideo)"))
     }
 
     func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String]) {
