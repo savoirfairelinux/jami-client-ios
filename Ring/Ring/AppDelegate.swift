@@ -75,6 +75,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }()
 
     private let voipRegistry = PKPushRegistry(queue: DispatchQueue.main)
+    /*
+     When the app is in the background, but the call screen is present, notifications
+     should be handled by Jami.app and not by the notification extension.
+     */
+    private var presentingCallScreen = false
+
 
     lazy var injectionBag: InjectionBag = {
         return InjectionBag(withDaemonService: self.daemonService,
@@ -323,6 +329,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             .disposed(by: self.disposeBag)
     }
 
+    func updateCallScreenState(presenting: Bool) {
+        self.presentingCallScreen = presenting
+    }
+
     func reloadDataFor(account: AccountModel) {
         self.requestsService.loadRequests(withAccount: account.id, accountURI: account.jamiId)
         self.conversationManager?
@@ -417,8 +427,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     @objc
     private func handleNotification() {
         DispatchQueue.main.async {[weak self] in
-            // if app is in the background extension should handle notification
-            if UIApplication.shared.applicationState == .background {
+            guard let self = self else { return }
+            // If the app is running in the background and there are no waiting calls, the extension should handle the notification.
+            if UIApplication.shared.applicationState == .background && !self.presentingCallScreen && !self.callsProvider.hasPendingTransactions() {
                 return
             }
             // emit signal that app is active for notification extension
@@ -430,7 +441,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
             userDefaults.set([[String: String]](), forKey: Constants.notificationData)
             for data in notificationData {
-                self?.accountService.pushNotificationReceived(data: data)
+                self.accountService.pushNotificationReceived(data: data)
             }
         }
     }
@@ -657,6 +668,7 @@ extension AppDelegate: PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+        self.updateCallScreenState(presenting: true)
         let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
         let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
         let displayName = payload.dictionaryPayload["displayName"] as? String ?? ""
