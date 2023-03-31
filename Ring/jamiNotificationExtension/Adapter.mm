@@ -125,17 +125,6 @@ std::map<std::string, std::string> nameServers;
             }
         }));
 
-    confHandlers.insert(exportable_callback<ConversationSignal::CallConnectionRequest>(
-        [&](const std::string& account_id, const std::string& peer_id, bool hasVideo) {
-            if (Adapter.delegate) {
-                NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
-                NSString* peerId = [NSString stringWithUTF8String:peer_id.c_str()];
-                [Adapter.delegate receivedCallConnectionRequestWithAccountId:accountId
-                                                                      peerId:peerId
-                                                                    hasVideo:hasVideo];
-            }
-        }));
-
     confHandlers.insert(exportable_callback<ConversationSignal::ConversationRequestReceived>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> metadata) {
         if(Adapter.delegate) {
             NSString* accountIdStr = [NSString stringWithUTF8String:accountId.c_str()];
