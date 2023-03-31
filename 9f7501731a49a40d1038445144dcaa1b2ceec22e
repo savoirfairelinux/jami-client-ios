@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36111e4d_4446c937",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-03-31T19:10:21Z",
+      "side": 1,
+      "message": "The picker minimum value is 1 minute, you mean when the user turn it off in the settings?",
+      "parentUuid": "5c58fa35_42e4995f",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2076c6d2_ca3a4c81",
         "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/DurationPicker.swift",
         "patchSetId": 8
@@ -67,6 +85,24 @@
       "writtenOn": "2023-03-30T13:26:51Z",
       "side": 1,
       "message": "copyright",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e656c8c0_ea727485",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/DurationPicker.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-03-31T19:10:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2076c6d2_ca3a4c81",
       "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -84,6 +120,24 @@
       "writtenOn": "2023-03-30T13:26:51Z",
       "side": 1,
       "message": "why do we need this? It is already initialized with this value",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0ffbf53_a1513b53",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-03-31T19:10:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eafc2501_cb629ffc",
       "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -122,6 +176,42 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a190c41f_d14c5cdf",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-03-31T19:10:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8d819f2_a22fc65d",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c10c9bb6_43837278",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-03-31T19:10:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01d4f3ef_51705776",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c679478d_bbbd994b",
@@ -139,6 +229,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e73574b2_134e342a",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-03-31T19:10:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c679478d_bbbd994b",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdd3104d_ba3d259c",
@@ -152,6 +260,24 @@
       "writtenOn": "2023-03-30T13:26:51Z",
       "side": 1,
       "message": "we do not need this timer",
+      "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "563d4fc6_ccf18282",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-03-31T19:10:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdd3104d_ba3d259c",
       "revId": "9f7501731a49a40d1038445144dcaa1b2ceec22e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
