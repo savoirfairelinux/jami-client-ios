@@ -108,10 +108,12 @@ class ConversationsManager {
                 guard let self = self else { return }
                 switch eventType {
                 case .appEnterBackground:
-                    if !self.callsProvider.hasPendingTransactions() {
-                        self.accountsService.setAccountsActive(active: false)
-                    }
+                    self.updateBackgroundState()
                 case .appEnterForeground:
+                    // when app is in foreground call screen is not presented
+                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                        appDelegate.updateCallScreenState(presenting: false)
+                    }
                     self.accountsService.setAccountsActive(active: true)
                     // reload requests, since they may be handeled by notification extension
                     // and Jami may not have up to date requests when entering foreground
@@ -121,11 +123,10 @@ class ConversationsManager {
                 case .callProviderPreviewPendingCall:
                     self.accountsService.setAccountsActive(active: true)
                 case .callEnded, .callProviderCancelCall:
-                    if self.callsProvider.hasPendingTransactions() { return }
                     DispatchQueue.main.async {
                         let state = UIApplication.shared.applicationState
                         if state == .background {
-                            self.accountsService.setAccountsActive(active: false)
+                            self.updateBackgroundState()
                         }
                     }
                 default:
@@ -134,6 +135,18 @@ class ConversationsManager {
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
+    }
+
+    /*
+     When the app is in the background, the account should not be active, and
+     the notification extension should handle incoming notifications unless there is a pending call.
+     */
+    func updateBackgroundState() {
+        if self.callsProvider.hasPendingTransactions() { return }
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.updateCallScreenState(presenting: false)
+        }
+        self.accountsService.setAccountsActive(active: false)
     }
 
     @objc
