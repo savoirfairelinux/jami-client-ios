@@ -141,7 +141,7 @@ class NotificationService: UNNotificationServiceExtension {
                         handleCall(peerId, "\(hasVideo)")
                         return
                     case .gitMessage:
-                        self.handleGitMessage(handleCall: handleCall)
+                        self.handleGitMessage()
                     case .unknown:
                         break
                     }
@@ -159,7 +159,7 @@ class NotificationService: UNNotificationServiceExtension {
         finish()
     }
 
-    private func handleGitMessage(handleCall: @escaping (String, String) -> Void) {
+    private func handleGitMessage() {
         /// check if account already acive
         guard !self.accountIsActive else { return }
         self.accountIsActive = true
@@ -183,8 +183,6 @@ class NotificationService: UNNotificationServiceExtension {
                 self.verifyTasksStatus()
             case .fileTransferInProgress:
                 self.numberOfFiles += 1
-            case .call:
-                handleCall(eventData.jamiId, eventData.content)
             case .invitation:
                 self.syncCompleted = true
                 self.numberOfMessages += 1
