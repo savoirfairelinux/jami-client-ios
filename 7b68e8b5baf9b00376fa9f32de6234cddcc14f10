@@ -16,6 +16,125 @@
       "message": "Memory leak when resize map.",
       "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe049f0c_4d0439a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T14:02:15Z",
+      "side": 1,
+      "message": "I do not have animations when map resizing",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a5f61da_c8dbbed6",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/CustomAnnotationModel.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T14:02:15Z",
+      "side": 1,
+      "message": "year is 2023",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca4fe818_26807b9e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/LocationSharingVM.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T14:02:15Z",
+      "side": 1,
+      "message": "year is only 2023",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0664827_7ca724da",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/LocationSharingVM.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T14:02:15Z",
+      "side": 1,
+      "message": "does mapViewModel need to be @Published?",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b619b3e_cdac3537",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MapVM.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T14:02:15Z",
+      "side": 1,
+      "message": "2023",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1473d3c9_a5d79c6e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MapVM.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T14:02:15Z",
+      "side": 1,
+      "message": "it is never used",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53f9ed01_57e61e0c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MapView.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T14:02:15Z",
+      "side": 1,
+      "message": "do we need this viewModel?. It is never used.",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
