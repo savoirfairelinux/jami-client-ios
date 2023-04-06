@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f55747a_294afbef",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/DurationPicker.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T13:17:29Z",
+      "side": 1,
+      "message": "year",
+      "revId": "0f86d577e86510ece46d9018414216a46c109bab",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7d5139b_bd12b18b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/DurationPicker.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T13:17:29Z",
+      "side": 1,
+      "message": "author",
+      "revId": "0f86d577e86510ece46d9018414216a46c109bab",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cbd50c5_c06863a4",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T13:17:29Z",
+      "side": 1,
+      "message": "we do not need add viewDidAppear",
+      "revId": "0f86d577e86510ece46d9018414216a46c109bab",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0581803a_f6e89fed",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T13:17:29Z",
+      "side": 1,
+      "message": "time is set to 15 min, but if open time picker the selected value is different",
+      "revId": "0f86d577e86510ece46d9018414216a46c109bab",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
