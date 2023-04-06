@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2f2dc6_57ea1d7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-06T13:32:55Z",
+      "side": 1,
+      "message": "Memory leak when resize map.",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
