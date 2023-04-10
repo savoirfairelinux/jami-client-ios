@@ -109,7 +109,7 @@
 //Welcome Screen
 "welcome.title" = "Bun venit în Jami!";
 "welcome.text" = "Jami este o platformă de comunicare liberă și universală care păstrează libertățile și intimitatea.";
-"welcome.linkDevice" = "Asociază acest aparat unui cont";
+"welcome.linkDevice" = "Asociază acest aparat cu un cont";
 "welcome.createAccount" = "Creează un cont Jami";
 "welcome.connectToManager" = "Conectează-te la un server JAMS";
 
@@ -153,7 +153,7 @@
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Introdu parola";
 "linkToAccount.pinLabel" = "Introdu codul PIN";
-"linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. În „Reglări” alege „Asociază alt aparat acestui cont” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
+"linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. În „Reglări” alege „Asociază alt aparat cu acest cont” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";
@@ -327,7 +327,7 @@
 "linkDevice.passwordError" = "Parola introdusă nu deblochează acest cont";
 "linkDevice.networkError" = "O eroare de rețea a apărut în timpul exportării";
 "linkDevice.defaultError" = "O eroare a apărut în timpul exportării";
-"linkDevice.explanationMessage" = "Pentru a completa procesul, trebuie să deschizi Jami în noul aparat și să alegi opțiunea „Asociază acest aparat unui cont”. Codul tău PIN este valabil 10 minute.";
+"linkDevice.explanationMessage" = "Pentru a completa procesul, trebuie să deschizi Jami în noul aparat și să alegi opțiunea „Asociază acest aparat cu un cont”. Codul tău PIN este valabil 10 minute.";
 "linkDevice.hudMessage" = "Se verifică";
 
 //Contact Page

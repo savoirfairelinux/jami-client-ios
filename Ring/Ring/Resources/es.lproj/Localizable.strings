@@ -92,14 +92,14 @@
 "conversation.explanationSendingLocationTo" = "Estás compartiendo tu ubicación con";
 "conversation.explanationReceivingLocationFrom" = "Estás recibiendo una ubicación en vivo desde";
 "conversation.errorSavingImage" = "No se pudo guardar la imagen en la galería";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%@\ te envió una solicitud de conversación.";
 "conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Hola,\n¿Te gustaría unirte a la conversación?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "\%@\ no está en tus contactos.";
 "conversation.sendRequest" = "Enviarle una solicitud de contacto para poder interactuar";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Has aceptado la solicitud de conversación.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Esperando a que \%@\ se conecte para sincronizar la conversación.";
 
 //Invitations
 "invitations.noInvitations" = "No hay invitaciones";
@@ -364,10 +364,10 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Has recibido una invitación";
 "generatedMessage.swarmCreated" = "Enjambre creado";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.invitationReceived" = "invitado a unirse";
+"generatedMessage.invitationAccepted" = "unido a la conversación";
 "generatedMessage.youJoined" = "You joined the conversation";
 "generatedMessage.contactBanned" = "was kicked";
 "generatedMessage.contactReAdded" = "was re-added";
@@ -376,7 +376,7 @@
 "generatedMessage.missedOutgoingCall" = "Llamada saliente perdida";
 "generatedMessage.missedIncomingCall" = "Llamada entrante perdida";
 "generatedMessage.liveLocationSharing" = "Compartición de ubicación en vivo";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "retirado";
 
 //General Settings
 "generalSettings.title" = "Ajustes avanzados";
