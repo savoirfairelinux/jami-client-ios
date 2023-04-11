@@ -53,8 +53,7 @@ class NotificationService: UNNotificationServiceExtension {
 
     private var contentHandler: ((UNNotificationContent) -> Void)?
     private var bestAttemptContent = UNMutableNotificationContent()
-
-    private var adapterService: AdapterService = AdapterService(withAdapter: Adapter())
+    private var adapterService = AdapterService(withAdapter: Adapter())
 
     private var accountIsActive = false
     var tasksCompleted = false /// all values from dht parsed, conversation synchronized if needed and files downloaded
@@ -77,12 +76,14 @@ class NotificationService: UNNotificationServiceExtension {
         }
         let requestData = requestToDictionary(request: request)
         if requestData.isEmpty {
+            self.tasksCompleted = true
             return
         }
 
         /// if main app is active extension should save notification data and let app handle notification
         saveData(data: requestData)
         if appIsActive() {
+            self.tasksCompleted = true
             return
         }
 
@@ -92,6 +93,7 @@ class NotificationService: UNNotificationServiceExtension {
         /// app is not active. Querry value from dht
         guard let proxyURL = getProxyCaches(data: requestData),
               let url = getRequestURL(data: requestData, path: proxyURL) else {
+            self.tasksCompleted = true
             return
         }
         tasksGroup.enter()
@@ -214,6 +216,8 @@ class NotificationService: UNNotificationServiceExtension {
         if self.accountIsActive {
             self.accountIsActive = false
             self.adapterService.stop()
+        } else {
+            self.adapterService.removeDelegate()
         }
         /// cleanup pending notifications
         if !self.pendingCalls.isEmpty, let info = self.pendingCalls.first?.value {
@@ -226,13 +230,18 @@ class NotificationService: UNNotificationServiceExtension {
             }
             pendingLocalNotifications.removeAll()
         }
+        if !self.tasksCompleted {
+            self.tasksGroup.leave()
+        }
         if let contentHandler = contentHandler {
             contentHandler(self.bestAttemptContent)
         }
     }
 
+    let group = DispatchGroup()
+
     private func appIsActive() -> Bool {
-        let group = DispatchGroup()
+        // let group = DispatchGroup()
         defer {
             self.removeObserver()
             group.leave()

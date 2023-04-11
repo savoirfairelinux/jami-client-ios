@@ -74,7 +74,7 @@ std::map<std::string, std::string> nameServers;
 - (void)registerSignals
 {
     confHandlers.insert(exportable_callback<ConfigurationSignal::GetAppDataPath>(
-        [&](const std::string& name, std::vector<std::string>* ret) {
+        [](const std::string& name, std::vector<std::string>* ret) {
             if (name == "cache") {
                 auto path = [Constants cachesPath];
                 ret->push_back(std::string([path.path UTF8String]));
@@ -85,31 +85,33 @@ std::map<std::string, std::string> nameServers;
         }));
 
     confHandlers.insert(exportable_callback<ConversationSignal::MessageReceived>(
-        [&](const std::string& accountId,
+        [weakDelegate = Adapter.delegate](const std::string& accountId,
             const std::string& conversationId,
             std::map<std::string, std::string> message) {
-            if (Adapter.delegate) {
+                id<AdapterDelegate> delegate = weakDelegate;
+                if (delegate) {
                 NSString* convId = [NSString stringWithUTF8String:conversationId.c_str()];
                 NSString* account = [NSString stringWithUTF8String:accountId.c_str()];
                 NSMutableDictionary* interaction = [Utils mapToDictionnary:message];
-                [Adapter.delegate newInteractionWithConversationId:convId
+                [delegate newInteractionWithConversationId:convId
                                                          accountId:account
                                                            message:interaction];
             }
         }));
 
     confHandlers.insert(exportable_callback<DataTransferSignal::DataTransferEvent>(
-        [&](const std::string& account_id,
+        [weakDelegate = Adapter.delegate](const std::string& account_id,
             const std::string& conversation_id,
             const std::string& interaction_id,
             const std::string& file_id,
             int eventCode) {
-            if (Adapter.delegate) {
+                id<AdapterDelegate> delegate = weakDelegate;
+                if (delegate) {
                 NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
                 NSString* conversationId = [NSString stringWithUTF8String:conversation_id.c_str()];
                 NSString* fileId = [NSString stringWithUTF8String:file_id.c_str()];
                 NSString* interactionId = [NSString stringWithUTF8String:interaction_id.c_str()];
-                [Adapter.delegate dataTransferEventWithFileId:fileId
+                [delegate dataTransferEventWithFileId:fileId
                                                 withEventCode:eventCode
                                                     accountId:accountId
                                                conversationId:conversationId
@@ -118,19 +120,21 @@ std::map<std::string, std::string> nameServers;
         }));
 
     confHandlers.insert(exportable_callback<ConversationSignal::ConversationSyncFinished>(
-        [&](const std::string& account_id) {
-            if (Adapter.delegate) {
+        [weakDelegate = Adapter.delegate](const std::string& account_id) {
+            id<AdapterDelegate> delegate = weakDelegate;
+            if (delegate) {
                 NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
-                [Adapter.delegate conversationSyncCompletedWithAccountId:accountId];
+                [delegate conversationSyncCompletedWithAccountId:accountId];
             }
         }));
 
-    confHandlers.insert(exportable_callback<ConversationSignal::ConversationRequestReceived>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> metadata) {
-        if(Adapter.delegate) {
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationRequestReceived>([weakDelegate = Adapter.delegate](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> metadata) {
+        id<AdapterDelegate> delegate = weakDelegate;
+        if (delegate) {
             NSString* accountIdStr = [NSString stringWithUTF8String:accountId.c_str()];
             NSString* convIdStr = [NSString stringWithUTF8String:conversationId.c_str()];
             NSMutableDictionary* info = [Utils mapToDictionnary: metadata];
-            [Adapter.delegate receivedConversationRequestWithAccountId: accountIdStr conversationId: convIdStr metadata:info];
+            [delegate receivedConversationRequestWithAccountId: accountIdStr conversationId: convIdStr metadata:info];
         }
     }));
     registerSignalHandlers(confHandlers);
