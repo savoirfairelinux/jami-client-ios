@@ -214,6 +214,8 @@ class NotificationService: UNNotificationServiceExtension {
         if self.accountIsActive {
             self.accountIsActive = false
             self.adapterService.stop()
+        } else {
+            self.adapterService.removeDelegate()
         }
         /// cleanup pending notifications
         if !self.pendingCalls.isEmpty, let info = self.pendingCalls.first?.value {
