@@ -83,7 +83,7 @@ class AdapterService {
 
     private let maxSizeForAutoaccept = 20 * 1024 * 1024
 
-    private let adapter: Adapter
+    var adapter: Adapter!
     var eventHandler: ((EventType, EventData) -> Void)?
     var loadingFiles = [String: EventData]()
 
@@ -118,8 +118,14 @@ class AdapterService {
         self.adapter.start(accountId)
     }
 
+    func removeDelegate() {
+        Adapter.delegate = nil
+        self.adapter = nil
+    }
+
     func stop() {
         self.adapter.stop()
+        removeDelegate()
     }
 
     func getNameFor(address: String, accountId: String) -> String {
