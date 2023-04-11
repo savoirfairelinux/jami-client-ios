@@ -156,6 +156,10 @@ class NotificationService: UNNotificationServiceExtension {
     }
 
     override func serviceExtensionTimeWillExpire() {
+        if !self.tasksCompleted {
+            self.tasksCompleted = true
+            self.tasksGroup.leave()
+        }
         finish()
     }
 
