@@ -53,8 +53,10 @@ class NotificationService: UNNotificationServiceExtension {
 
     private var contentHandler: ((UNNotificationContent) -> Void)?
     private var bestAttemptContent = UNMutableNotificationContent()
-
-    private var adapterService: AdapterService = AdapterService(withAdapter: Adapter())
+    //    private var adapter: Adapter! = Adapter()
+    //    lazy var adapterService: AdapterService! = AdapterService(withAdapter: adapter)
+    private var adapterService = AdapterService(withAdapter: Adapter())
+    // private var adapterService: AdapterService!
 
     private var accountIsActive = false
     var tasksCompleted = false /// all values from dht parsed, conversation synchronized if needed and files downloaded
@@ -72,17 +74,26 @@ class NotificationService: UNNotificationServiceExtension {
     // swiftlint:disable cyclomatic_complexity
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
+        //        var adapter: Adapter? = Adapter()
+        //        adapterService = AdapterService(withAdapter: adapter!)
+        print("***init extension \(Unmanaged.passUnretained(self).toOpaque())")
+        print("***extension service \(Unmanaged.passUnretained(adapterService).toOpaque())")
+        print("***extension service adapter \(Unmanaged.passUnretained(adapterService.adapter).toOpaque())")
         defer {
             finish()
+            // adapter = nil
+            print("****completly finish")
         }
         let requestData = requestToDictionary(request: request)
         if requestData.isEmpty {
+            self.tasksCompleted = true
             return
         }
 
         /// if main app is active extension should save notification data and let app handle notification
         saveData(data: requestData)
         if appIsActive() {
+            self.tasksCompleted = true
             return
         }
 
@@ -92,6 +103,7 @@ class NotificationService: UNNotificationServiceExtension {
         /// app is not active. Querry value from dht
         guard let proxyURL = getProxyCaches(data: requestData),
               let url = getRequestURL(data: requestData, path: proxyURL) else {
+            self.tasksCompleted = true
             return
         }
         tasksGroup.enter()
@@ -159,6 +171,10 @@ class NotificationService: UNNotificationServiceExtension {
         finish()
     }
 
+    deinit {
+        print("***extension deinit")
+    }
+
     private func handleGitMessage() {
         /// check if account already acive
         guard !self.accountIsActive else { return }
@@ -211,9 +227,12 @@ class NotificationService: UNNotificationServiceExtension {
     }
 
     private func finish() {
+        // self.adapterService.cleanup()
         if self.accountIsActive {
             self.accountIsActive = false
             self.adapterService.stop()
+        } else {
+            self.adapterService.cleanup()
         }
         /// cleanup pending notifications
         if !self.pendingCalls.isEmpty, let info = self.pendingCalls.first?.value {
@@ -226,13 +245,22 @@ class NotificationService: UNNotificationServiceExtension {
             }
             pendingLocalNotifications.removeAll()
         }
+        // self.adapterService = nil
+        // self.adapter = nil
+        if !self.tasksCompleted {
+            self.tasksGroup.leave()
+        }
+        // self.adapterService = nil
+        print("***finish")
         if let contentHandler = contentHandler {
             contentHandler(self.bestAttemptContent)
         }
     }
 
+    let group = DispatchGroup()
+
     private func appIsActive() -> Bool {
-        let group = DispatchGroup()
+        // let group = DispatchGroup()
         defer {
             self.removeObserver()
             group.leave()

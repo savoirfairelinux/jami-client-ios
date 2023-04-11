@@ -83,13 +83,20 @@ class AdapterService {
 
     private let maxSizeForAutoaccept = 20 * 1024 * 1024
 
-    private let adapter: Adapter
+    var adapter: Adapter!
     var eventHandler: ((EventType, EventData) -> Void)?
     var loadingFiles = [String: EventData]()
 
     init(withAdapter adapter: Adapter) {
         self.adapter = adapter
         Adapter.delegate = self
+        print("***init service \(Unmanaged.passUnretained(self).toOpaque())")
+    }
+
+    deinit {
+        Adapter.delegate = nil
+        self.adapter = nil
+        print("***deinit service \(Unmanaged.passUnretained(self).toOpaque())")
     }
 
     func startAccountsWithListener(accountId: String, listener: @escaping (EventType, EventData) -> Void) {
@@ -118,8 +125,14 @@ class AdapterService {
         self.adapter.start(accountId)
     }
 
+    func cleanup() {
+        Adapter.delegate = nil
+        self.adapter = nil
+    }
+
     func stop() {
         self.adapter.stop()
+        cleanup()
     }
 
     func getNameFor(address: String, accountId: String) -> String {
