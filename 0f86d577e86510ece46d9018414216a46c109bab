@@ -121,6 +121,24 @@
       "message": "time is set to 15 min, but if open time picker the selected value is different",
       "revId": "0f86d577e86510ece46d9018414216a46c109bab",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4770e3c1_35accd72",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewController.swift",
+        "patchSetId": 15
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-04-14T21:40:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0581803a_f6e89fed",
+      "revId": "0f86d577e86510ece46d9018414216a46c109bab",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
