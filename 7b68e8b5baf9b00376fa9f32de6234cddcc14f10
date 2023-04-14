@@ -124,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "189085da_e0538df6",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/LocationSharingVM.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-04-14T21:26:23Z",
+      "side": 1,
+      "message": "If we need to observe the changes to the isMapOpened property from multiple views or classes, marking it with @Published is necessary.",
+      "parentUuid": "d0664827_7ca724da",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b619b3e_cdac3537",
         "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MapVM.swift",
         "patchSetId": 17
