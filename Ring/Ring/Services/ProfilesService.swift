@@ -201,6 +201,7 @@ class ProfilesService: ProfilesAdapterDelegate {
         }
         self.dbManager
             .profileObservable(for: uri, createIfNotExists: createIfNotexists, accountId: accountId)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { profile in
                 profileObservable.onNext(profile)
             } onError: { error in
@@ -244,6 +245,7 @@ extension ProfilesService {
         }
         self.dbManager
             .accountProfileObservable(for: accountId)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { profile in
                 profileObservable.onNext(profile)
             }, onError: { (_) in

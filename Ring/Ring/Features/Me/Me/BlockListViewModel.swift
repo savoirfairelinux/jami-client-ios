@@ -73,6 +73,7 @@ class BlockListViewModel: ViewModel {
                 if let uri = contact.uriString {
                     self.contactService.getProfileForUri(uri: uri,
                                                          accountId: accountId)
+                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                         .subscribe(onNext: { (profile) in
                             item.displayName = profile.alias
                             guard let photo = profile.photo else {
