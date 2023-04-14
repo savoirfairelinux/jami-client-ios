@@ -52,6 +52,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff61aa7_cae249d7",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/CustomAnnotationModel.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-04-14T17:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a5f61da_c8dbbed6",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca4fe818_26807b9e",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-04-06T14:02:15Z",
       "side": 1,
       "message": "year is only 2023",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "152946d9_4d37ec6d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/LocationSharingVM.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-04-14T17:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca4fe818_26807b9e",
       "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -103,6 +139,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe42c198_67cc77f8",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MapVM.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-04-14T17:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b619b3e_cdac3537",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1473d3c9_a5d79c6e",
@@ -120,6 +174,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89102b36_aff42e92",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MapVM.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-04-14T17:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1473d3c9_a5d79c6e",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53f9ed01_57e61e0c",
@@ -133,6 +205,24 @@
       "writtenOn": "2023-04-06T14:02:15Z",
       "side": 1,
       "message": "do we need this viewModel?. It is never used.",
+      "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3a05c73_f355da18",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MapView.swift",
+        "patchSetId": 17
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-04-14T17:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53f9ed01_57e61e0c",
       "revId": "7b68e8b5baf9b00376fa9f32de6234cddcc14f10",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
