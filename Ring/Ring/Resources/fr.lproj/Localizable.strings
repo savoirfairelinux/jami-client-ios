@@ -62,7 +62,7 @@
 "swarm.invited" = "Invité(s)";
 "swarm.admin" = "Administrateur";
 "swarm.banned" = "Bloqué";
-"swarm.unknown" = "Unkown";
+"swarm.unknown" = "Inconnu";
 "swarm.addMorePeople" = "Vous pouvez ajouter \%d\ personne(s) de plus dans le Swarm";
 "swarm.addMember" = "Ajouter un membre";
 "swarm.confirmLeaveSwarm" = "Êtes-vous certain de vouloir quitter le Swarm ?";
@@ -93,7 +93,7 @@
 "conversation.explanationReceivingLocationFrom" = "Vous recevez actuellement la position de ";
 "conversation.errorSavingImage" = "Impossible de sauvegarder l'image dans la galerie";
 "conversation.receivedRequest" = "\%@\ vous a envoyé une invitation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.incomingRequest" = "vous a envoyé une demande de conversation.";
 "conversation.requestMessage" = "Bonjour,\nSouhaitez-vous rejoindre la conversation ?";
 "conversation.notContact" = " \%@\ ne fait pas partie de vos contacts.";
 "conversation.sendRequest" = "Envoyer lui une demande de contact afin de pouvoir discuter ensemble";
@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Connexion automatique sur réseau local";
 "accountPage.autoRegistration" = "Réenregistrement automatique après expiration";
 "accountPage.connectivityHeader" = "Connectivité";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Activer le relais TURN";
 "accountPage.turnServer" = "Adresse du serveur TURN";
 "accountPage.turnUsername" = "Utilisateur TURN";
 "accountPage.turnPassword" = "Mot de passe TURN";
