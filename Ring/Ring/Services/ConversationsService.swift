@@ -447,24 +447,18 @@ class ConversationsService {
                         let content = (message.type == .contact || message.type == .call) ?
                             GeneratedMessage.init(from: message.content).toMessage(with: Int(duration))
                             : message.content
-                        /// for location sharing we should just update message if if exists
-                        if message.type == .location,
-                           let existingMessage = conversation.messages.filter({ $0.type == .location && $0.incoming == message.incoming }).first {
-                            existingMessage.content = content
-                        } else {
-                            message.content = content
-                            message.id = savedMessage.messageID
-                            conversation.appendNonSwarm(message: message)
-                            if let lastMessage = conversation.lastMessage {
-                                if lastMessage.receivedDate < message.receivedDate {
-                                    conversation.lastMessage = message
-                                }
-
-                            } else {
+                        message.content = content
+                        message.id = savedMessage.messageID
+                        conversation.appendNonSwarm(message: message)
+                        if let lastMessage = conversation.lastMessage {
+                            if lastMessage.receivedDate < message.receivedDate {
                                 conversation.lastMessage = message
                             }
-                            self.sortIfNeeded()
+
+                        } else {
+                            conversation.lastMessage = message
                         }
+                        self.sortIfNeeded()
                     }
                     completable(.completed)
                 }, onError: { error in
@@ -943,12 +937,6 @@ class ConversationsService {
 // MARK: Location
 extension ConversationsService {
 
-    func createLocation(withId messageId: String, byAuthor author: String, incoming: Bool) -> MessageModel {
-        let message = MessageModel(withId: messageId, receivedDate: Date(), content: L10n.GeneratedMessage.liveLocationSharing, authorURI: author, incoming: incoming)
-        message.type = .location
-        return message
-    }
-
     // TODO: Possible extraction with sendMessage
     func sendLocation(withContent content: String, from senderAccount: AccountModel,
                       recipientUri: String, shouldRefreshConversations: Bool,
@@ -957,84 +945,9 @@ extension ConversationsService {
         return Completable.create(subscribe: { [weak self] completable in
             guard let self = self else { return Disposables.create { } }
             let contentDict = [self.geoLocationMIMEType: content]
-            let messageId = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri, flag: 1))
-            let accountHelper = AccountModelHelper(withAccount: senderAccount)
-            let type = accountHelper.isAccountSip() ? URIType.sip : URIType.ring
-            let contactUri = JamiURI.init(schema: type, infoHash: recipientUri, account: senderAccount)
-            guard let stringUri = contactUri.uriString else {
-                completable(.completed)
-                return Disposables.create {}
-            }
-            if shouldTryToSave, let uri = accountHelper.uri, uri != recipientUri {
-                let message = self.createLocation(withId: messageId,
-                                                  byAuthor: uri,
-                                                  incoming: false)
-                self.saveLocation(message: message,
-                                  toConversationWith: stringUri,
-                                  toAccountId: senderAccount.id,
-                                  shouldRefreshConversations: shouldRefreshConversations,
-                                  contactUri: recipientUri)
-                    .subscribe(onCompleted: { [weak self] in
-                        self?.log.debug("Location saved")
-                    })
-                    .disposed(by: self.disposeBag)
-            }
+            _ = String(self.conversationsAdapter.sendMessage(withContent: contentDict, withAccountId: senderAccount.id, to: recipientUri, flag: 1))
             completable(.completed)
             return Disposables.create {}
         })
     }
-
-    // Save location only if it's the first one
-    func isBeginningOfLocationSharing(incoming: Bool, contactUri: String, accountId: String) -> Bool {
-        let isFirstLocationIncomingUpdate = self.dbManager.isFirstLocationIncomingUpdate(incoming: incoming, peerUri: contactUri, accountId: accountId)
-        return isFirstLocationIncomingUpdate != nil && isFirstLocationIncomingUpdate!
-    }
-
-    // Location saved doesn't actually contain the geolocation data
-    func saveLocation(message: MessageModel,
-                      toConversationWith recipientRingId: String,
-                      toAccountId: String,
-                      shouldRefreshConversations: Bool,
-                      contactUri: String) -> Completable {
-        if self.isBeginningOfLocationSharing(incoming: message.incoming, contactUri: contactUri, accountId: toAccountId) {
-            return self.saveMessageModelToDb(message: message, toConversationWith: recipientRingId,
-                                             toAccountId: toAccountId, duration: 0, shouldRefreshConversations: shouldRefreshConversations,
-                                             interactionType: InteractionType.location)
-        }
-        return Completable.create(subscribe: { completable in
-            completable(.completed)
-            return Disposables.create { }
-        })
-    }
-
-    func deleteLocationUpdate(incoming: Bool, peerUri: String, accountId: String, shouldRefreshConversations: Bool) -> Completable {
-        return Completable.create(subscribe: { [weak self] completable in
-            guard let self = self,
-                  let contactUri = JamiURI(schema: .ring, infoHash: peerUri).uriString else { return Disposables.create { } }
-            self.dbManager.deleteLocationUpdates(incoming: incoming, peerUri: contactUri, accountId: accountId)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe(onCompleted: {
-                    if shouldRefreshConversations, let conversation = self.conversations.value
-                        .filter({ conversation in
-                            return conversation.getParticipants().first?.jamiId == JamiURI(schema: .ring, infoHash: peerUri).hash &&
-                                conversation.accountId == accountId
-                        })
-                        .first {
-                        var messages = conversation.messages
-                        if let index = messages.firstIndex(where: { message in
-                            message.type == .location && message.incoming == incoming
-                        }) {
-                            messages.remove(at: index)
-                            // conversation.messages.accept(messages)
-                        }
-                    }
-                    completable(.completed)
-                }, onError: { (error) in
-                    completable(.error(error))
-                })
-                .disposed(by: self.disposeBag)
-            return Disposables.create { }
-        })
-    }
-
 }

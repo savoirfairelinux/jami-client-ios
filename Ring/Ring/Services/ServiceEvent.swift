@@ -54,7 +54,6 @@ enum ServiceEventType {
     case lastDisplayedMessageUpdated
     case presenseSubscribed
     case sendLocation
-    case deleteLocation
     case stopLocationSharing
     case appEnterBackground
     case appEnterForeground

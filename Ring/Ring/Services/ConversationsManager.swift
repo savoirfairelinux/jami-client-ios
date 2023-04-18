@@ -227,29 +227,6 @@ class ConversationsManager {
                     .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
-
-        self.locationSharingService
-            .locationServiceEventShared
-            .filter({ $0.eventType == ServiceEventType.deleteLocation })
-            .subscribe(onNext: { [weak self] event in
-                guard let self = self,
-                      let currentAccount = self.accountsService.currentAccount,
-                      let (incoming, shouldRefreshConversations): (Bool, Bool) = event.getEventInput(ServiceEventInput.content),
-                      let accountId: String = event.getEventInput(ServiceEventInput.accountId),
-                      let peerUri: String = event.getEventInput(ServiceEventInput.peerUri)
-                else { return }
-
-                let shouldRefresh = currentAccount.id == accountId && shouldRefreshConversations
-
-                self.conversationService.deleteLocationUpdate(incoming: incoming,
-                                                              peerUri: peerUri,
-                                                              accountId: accountId,
-                                                              shouldRefreshConversations: shouldRefresh)
-                    .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                    .subscribe()
-                    .disposed(by: self.disposeBag)
-            })
-            .disposed(by: self.disposeBag)
     }
 
     private func subscribeCallsEvents() {
@@ -392,24 +369,24 @@ class ConversationsManager {
         let type = AccountModelHelper.init(withAccount: accountForMessage).isAccountSip() ? URIType.sip : URIType.ring
         guard let peerUri = JamiURI.init(schema: type, infoHash: peerId, account: accountForMessage).uriString else { return }
 
-        if self.conversationService.isBeginningOfLocationSharing(incoming: true, contactUri: peerUri, accountId: accountId) {
-            let shouldRefresh = currentAccount.id == accountId
-
-            // Save (if first)
-            guard let uriString = JamiURI.init(schema: type,
-                                               infoHash: peerUri,
-                                               account: accountForMessage).uriString else { return }
-            let message = self.conversationService.createLocation(withId: messageId,
-                                                                  byAuthor: uriString,
-                                                                  incoming: true)
-            self.conversationService.saveLocation(message: message,
-                                                  toConversationWith: uriString,
-                                                  toAccountId: accountId,
-                                                  shouldRefreshConversations: shouldRefresh,
-                                                  contactUri: peerUri)
-                .subscribe()
-                .disposed(by: self.disposeBag)
-        }
+        //        if self.conversationService.isBeginningOfLocationSharing(incoming: true, contactUri: peerUri, accountId: accountId) {
+        //            let shouldRefresh = currentAccount.id == accountId
+        //
+        //            // Save (if first)
+        //            guard let uriString = JamiURI.init(schema: type,
+        //                                               infoHash: peerUri,
+        //                                               account: accountForMessage).uriString else { return }
+        //            let message = self.conversationService.createLocation(withId: messageId,
+        //                                                                  byAuthor: uriString,
+        //                                                                  incoming: true)
+        //            self.conversationService.saveLocation(message: message,
+        //                                                  toConversationWith: uriString,
+        //                                                  toAccountId: accountId,
+        //                                                  shouldRefreshConversations: shouldRefresh,
+        //                                                  contactUri: peerUri)
+        //                .subscribe()
+        //                .disposed(by: self.disposeBag)
+        //        }
 
         // Tell the location sharing service
         self.locationSharingService.handleReceivedLocationUpdate(from: peerUri, to: accountId, messageId: messageId, locationJSON: content)

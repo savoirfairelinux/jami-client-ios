@@ -42,7 +42,6 @@ enum MessageType: String {
     case fileTransfer = "application/data-transfer+json"
     case contact = "member"
     case call = "application/call-history+json"
-    case location = "location"
     case merge = "merge"
     case initial = "initial"
     case profile = "application/update-profile"

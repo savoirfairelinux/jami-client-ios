@@ -202,14 +202,6 @@ class LocationSharingService: NSObject {
         self.locationServiceEventStream.onNext(event)
     }
 
-    private func triggerDeleteLocation(accountId: String, peerUri: String, incoming: Bool, shouldRefreshConversations: Bool) {
-        var event = ServiceEvent(withEventType: .deleteLocation)
-        event.addEventInput(.accountId, value: accountId)
-        event.addEventInput(.peerUri, value: peerUri)
-        event.addEventInput(.content, value: (incoming, shouldRefreshConversations))
-        self.locationServiceEventStream.onNext(event)
-    }
-
     private func triggerStopSharing(accountId: String, peerUri: String, content: String) {
         var event = ServiceEvent(withEventType: .stopLocationSharing)
         event.addEventInput(.accountId, value: accountId)
@@ -285,8 +277,6 @@ extension LocationSharingService {
             self.currentLocation.accept(nil)
         }
 
-        self.triggerDeleteLocation(accountId: accountId, peerUri: contactUri, incoming: false, shouldRefreshConversations: true)
-
         self.sendStopSharingLocationMessage(from: accountId, to: contactUri)
     }
 
@@ -343,8 +333,6 @@ extension LocationSharingService {
 
     func stopReceivingLocation(accountId: String, contactUri: String) {
         self.peerUriAndLocationReceived.accept((contactUri, nil, nil))
-
-        self.triggerDeleteLocation(accountId: accountId, peerUri: contactUri, incoming: true, shouldRefreshConversations: true)
 
         _ = self.incomingInstances.remove(accountId, contactUri)
 
