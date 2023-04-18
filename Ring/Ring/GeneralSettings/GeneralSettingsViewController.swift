@@ -27,6 +27,7 @@ import RxDataSources
 class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: GeneralSettingsViewModel!
     let disposeBag = DisposeBag()
+    let defaultFont = UIFont.preferredFont(forTextStyle: .body)
 
     @IBOutlet weak var settingsTable: UITableView!
 
@@ -68,10 +69,10 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                     return DisposableCell()
                 }
                 switch dataSource[indexPath] {
-
                 case .hardwareAcceleration:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.GeneralSettings.videoAcceleration
+                    cell.textLabel?.font = self.defaultFont
                     let switchView = UISwitch()
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
@@ -92,7 +93,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                     return cell
                 case .sectionHeader(let title):
                     let cell = UITableViewCell()
-                    cell.textLabel?.text = title
+                    cell.textLabel?.text = title.uppercased()
+                    cell.textLabel?.textColor = .secondaryLabel
                     cell.backgroundColor = UIColor.jamiBackgroundSecondaryColor
                     cell.selectionStyle = .none
                     return cell
@@ -107,7 +109,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                 case .log:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.LogView.description
-                    cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+                    cell.textLabel?.font = self.defaultFont
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.selectionStyle = .none
                     cell.sizeToFit()
@@ -122,7 +124,6 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                         })
                         .disposed(by: cell.disposeBag)
                     return cell
-
                 }
             }
         let settingsItemDataSource = RxTableViewSectionedReloadDataSource<GeneralSettingsSection>(configureCell: configureCell)
@@ -134,6 +135,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
     func makeAutoDownloadFilesCell() -> DisposableCell {
         let cell = DisposableCell()
         cell.textLabel?.text = L10n.GeneralSettings.automaticAcceptIncomingFiles
+        cell.textLabel?.font = self.defaultFont
         let switchView = UISwitch()
         cell.selectionStyle = .none
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
@@ -171,7 +173,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        let normalAttributes = [NSAttributedString.Key.font: titleLabel.font.withSize(17)]
+        let normalAttributes = [NSAttributedString.Key.font: defaultFont]
         let smallAttributes = [NSAttributedString.Key.font: titleLabel.font.withSize(10)]
 
         let partOne = NSMutableAttributedString(string: L10n.GeneralSettings.acceptTransferLimit, attributes: normalAttributes)
@@ -229,6 +231,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
     func makeLimitLocationSharingCell() -> DisposableCell {
         let cell = DisposableCell()
         cell.textLabel?.text = L10n.GeneralSettings.limitLocationSharingDuration
+        cell.textLabel?.font = self.defaultFont
         let switchView = UISwitch()
         cell.selectionStyle = .none
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
@@ -269,6 +272,7 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
 
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = self.defaultFont
 
         titleLabel.text = L10n.GeneralSettings.locationSharingDuration
         titleLabel.heightAnchor.constraint(equalToConstant: 45).isActive = true

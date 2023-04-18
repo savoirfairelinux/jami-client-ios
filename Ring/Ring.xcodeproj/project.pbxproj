@@ -1821,6 +1821,7 @@
 		0E96ED73225D05F70016C07D /* GeneralSettings */ = {
 			isa = PBXGroup;
 			children = (
+				26B6923E29EEDFA6004A1CE7 /* views */,
 				0E96ED74225D06250016C07D /* GeneralSettingsViewController.storyboard */,
 				0E96ED76225D06380016C07D /* GeneralSettingsViewController.swift */,
 				0E96ED78225D06480016C07D /* GeneralSettingsViewModel.swift */,
@@ -2214,7 +2215,6 @@
 				265DFB0A292FD41100834B97 /* PlayerSwiftUI.swift */,
 				265DFB1029302A8700834B97 /* ContactMessageView.swift */,
 				26A072F82959F461006D8163 /* ContextMenuView.swift */,
-				BB06BD8429D4C1210064F0FC /* DurationPicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2263,6 +2263,14 @@
 				26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */,
 			);
 			path = jamiNotificationExtension;
+			sourceTree = "<group>";
+		};
+		26B6923E29EEDFA6004A1CE7 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				BB06BD8429D4C1210064F0FC /* DurationPicker.swift */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 		4430A669236CB9F600747177 /* Conference */ = {
