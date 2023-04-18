@@ -59,11 +59,14 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
 
     private func setUpDataSource() {
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, GeneralSettingsSection.Item)
-            -> UITableViewCell = {
+            -> UITableViewCell = { [weak self]
                 ( dataSource: TableViewSectionedDataSource<GeneralSettingsSection>,
                   _: UITableView,
                   indexPath: IndexPath,
                   _: GeneralSettingsSection.Item) in
+                guard let self = self else {
+                    return DisposableCell()
+                }
                 switch dataSource[indexPath] {
 
                 case .hardwareAcceleration:
