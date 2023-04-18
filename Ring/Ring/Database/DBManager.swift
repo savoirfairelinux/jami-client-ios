@@ -148,7 +148,6 @@ enum InteractionType: String {
     case contact    = "CONTACT"
     case iTransfer  = "INCOMING_DATA_TRANSFER"
     case oTransfer  = "OUTGOING_DATA_TRANSFER"
-    case location   = "LOCATION"
 
     func toMessageType() -> MessageType {
         switch self {
@@ -162,8 +161,6 @@ enum InteractionType: String {
             return .fileTransfer
         case .oTransfer:
             return .fileTransfer
-        case .location:
-            return .location
         }
     }
 }
@@ -677,8 +674,7 @@ class DBManager {
             interaction.type != InteractionType.contact.rawValue &&
             interaction.type != InteractionType.call.rawValue &&
             interaction.type != InteractionType.iTransfer.rawValue &&
-            interaction.type != InteractionType.oTransfer.rawValue &&
-            interaction.type != InteractionType.location.rawValue {
+            interaction.type != InteractionType.oTransfer.rawValue {
             return nil
         }
         let content = (interaction.type == InteractionType.call.rawValue
@@ -794,59 +790,5 @@ class DBManager {
         }
         return try self.conversationHelper
             .selectConversationsForProfile(profileUri: contactUri, dataBase: dataBase)?.first?.id
-    }
-
-    // MARK: Location sharing
-    func isFirstLocationIncomingUpdate(incoming: Bool, peerUri: String, accountId: String) -> Bool? {
-        do {
-            guard let dataBase = self.dbConnections.forAccount(account: accountId) else { return nil }
-
-            let conversationId = try self.getConversationsFor(contactUri: peerUri, createIfNotExists: true, dataBase: dataBase, accountId: accountId)
-            let interactions = try self.interactionHepler.selectInteractionsForConversation(conv: conversationId!, dataBase: dataBase)
-
-            var isFirst = true
-            for (interaction) in interactions! where interaction.type == InteractionType.location.rawValue && interaction.incoming == incoming {
-                isFirst = false
-                break
-            }
-            return isFirst
-        } catch {
-            return nil
-        }
-    }
-
-    func deleteLocationUpdates(incoming: Bool, peerUri: String, accountId: String) -> Completable {
-        return Completable.create(subscribe: { [weak self] completable in
-            do {
-                guard let self = self, let dataBase = self.dbConnections.forAccount(account: accountId) else { throw DataAccessError.datastoreConnectionError }
-                let conversationId = try self.getConversationsFor(contactUri: peerUri, createIfNotExists: true, dataBase: dataBase, accountId: accountId)
-
-                let predicat: Expression<Bool> = (self.interactionHepler.conversation == conversationId! &&
-                                                    self.interactionHepler.type == InteractionType.location.rawValue &&
-                                                    self.interactionHepler.incoming == incoming)
-
-                _ = try self.interactionHepler.deleteInteractions(where: predicat, dataBase: dataBase)
-                completable(.completed)
-            } catch {
-                completable(.error(DBBridgingError.deleteMessageFailed))
-            }
-            return Disposables.create { }
-        })
-    }
-
-    func deleteAllLocationUpdates(accountIds: [String]) -> Bool {
-        var didNotFailOnce = true
-        for accountId in accountIds {
-            do {
-                guard let dataBase = self.dbConnections.forAccount(account: accountId) else { throw DataAccessError.datastoreConnectionError }
-
-                let predicat: Expression<Bool> = (self.interactionHepler.type == InteractionType.location.rawValue)
-
-                _ = try self.interactionHepler.deleteInteractions(where: predicat, dataBase: dataBase)
-            } catch {
-                didNotFailOnce = false
-            }
-        }
-        return didNotFailOnce
     }
 }

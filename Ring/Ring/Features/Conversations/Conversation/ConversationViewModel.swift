@@ -321,14 +321,6 @@ class ConversationViewModel: Stateable, ViewModel {
         }
     }
 
-    func deleteLocationMessage(messageId: String) {
-        guard let message = self.conversation.value.messages.filter({ $0.id == messageId }).first,
-              let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
-        self.conversationsService.deleteLocationUpdate(incoming: message.incoming, peerUri: jamiId, accountId: self.conversation.value.accountId, shouldRefreshConversations: true)
-            .subscribe()
-            .disposed(by: self.disposeBag)
-    }
-
     func startCall() {
         guard let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
         self.closeAllPlayers()
