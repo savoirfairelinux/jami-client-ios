@@ -72,7 +72,6 @@ class MessageViewModel {
     var sequencing: MessageSequencing = .unknown
     var isComposingIndicator: Bool = false
 
-    var isLocationSharingBubble: Bool { return self.message.type == .location }
     var isText: Bool { return self.message.type == .text }
 
     private let disposeBag = DisposeBag()
