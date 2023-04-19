@@ -177,7 +177,7 @@ class LocationSharingService: NSObject {
             .disposed(by: self.disposeBag)
     }
 
-    private static func serializeLocation(location: SerializableLocation) -> String? {
+    static func serializeLocation(location: SerializableLocation) -> String? {
         do {
             let data = try JSONEncoder().encode(location)
             return String(data: data, encoding: .utf8)!
@@ -186,7 +186,7 @@ class LocationSharingService: NSObject {
         }
     }
 
-    private static func deserializeLocation(json: String) -> SerializableLocation? {
+    internal static func deserializeLocation(json: String) -> SerializableLocation? {
         do {
             return try JSONDecoder().decode(SerializableLocation.self, from: json.data(using: .utf8)!)
         } catch {
@@ -194,7 +194,7 @@ class LocationSharingService: NSObject {
         }
     }
 
-    private func triggerSendLocation(accountId: String, peerUri: String, content: String, shouldTryToSave: Bool) {
+    internal func triggerSendLocation(accountId: String, peerUri: String, content: String, shouldTryToSave: Bool) {
         var event = ServiceEvent(withEventType: .sendLocation)
         event.addEventInput(.accountId, value: accountId)
         event.addEventInput(.peerUri, value: peerUri)
@@ -202,12 +202,16 @@ class LocationSharingService: NSObject {
         self.locationServiceEventStream.onNext(event)
     }
 
-    private func triggerStopSharing(accountId: String, peerUri: String, content: String) {
+    internal func triggerStopSharing(accountId: String, peerUri: String, content: String) {
         var event = ServiceEvent(withEventType: .stopLocationSharing)
         event.addEventInput(.accountId, value: accountId)
         event.addEventInput(.peerUri, value: peerUri)
         event.addEventInput(.content, value: content)
         self.locationServiceEventStream.onNext(event)
+    }
+
+    func getLocationServiceEventStream() -> PublishSubject<ServiceEvent> {
+        return locationServiceEventStream
     }
 }
 
