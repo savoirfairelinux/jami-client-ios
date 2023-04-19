@@ -170,9 +170,9 @@ std::map<std::string, std::string> nameServers;
         return true;
     }
 #if DEBUG
-    int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_IOS_EXTENSION;
+    int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC;
 #else
-    int flag = LIBJAMI_FLAG_IOS_EXTENSION;;
+    int flag = LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC;
 #endif
     if (![[NSThread currentThread] isMainThread]) {
         __block bool success;
