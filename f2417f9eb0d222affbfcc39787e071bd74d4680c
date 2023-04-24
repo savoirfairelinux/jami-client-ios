@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7042c4e8_042db615",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-24T12:52:09Z",
+      "side": 1,
+      "message": "ticket number in commit message",
+      "revId": "f2417f9eb0d222affbfcc39787e071bd74d4680c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "279a2510_2a49cf5d",
+        "filename": "Ring/RingTests/LocationSharingServiceTests.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-24T12:52:09Z",
+      "side": 1,
+      "message": "copyright",
+      "revId": "f2417f9eb0d222affbfcc39787e071bd74d4680c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b40c377_34f328ab",
+        "filename": "Ring/RingTests/LocationSharingServiceTests.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-04-24T12:52:09Z",
+      "side": 1,
+      "message": "there is Constats.swift file that contains jamiId, accountsId that could be used for the test.",
+      "revId": "f2417f9eb0d222affbfcc39787e071bd74d4680c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
