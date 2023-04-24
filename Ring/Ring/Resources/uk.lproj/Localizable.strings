@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 "generalSettings.fileTransfer" = "Передача файлів";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
+"generalSettings.locationSharingDuration" = "Position share duration";
+
 
 //Log View
 "logView.title" = "Diagnostics";

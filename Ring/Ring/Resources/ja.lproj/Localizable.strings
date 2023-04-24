@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 "generalSettings.fileTransfer" = "ファイル転送";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "ファイルの受信を自動的に許可";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
+"generalSettings.locationSharingDuration" = "Position share duration";
+
 
 //Log View
 "logView.title" = "診断";

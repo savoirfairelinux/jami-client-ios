@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "啟用視訊加速";
 "generalSettings.fileTransfer" = "檔案傳輸";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "自動接受傳來的檔案";
 "generalSettings.acceptTransferLimit" = "接受傳輸限制";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
+"generalSettings.locationSharingDuration" = "Position share duration";
+
 
 //Log View
 "logView.title" = "診斷";

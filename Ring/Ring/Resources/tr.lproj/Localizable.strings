@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Görüntü hızlandırmayı etkinleştir";
 "generalSettings.fileTransfer" = "Dosya aktarımı";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Gelen dosyaları kendiliğinden kabul et";
 "generalSettings.acceptTransferLimit" = "Aktarma sınırını kabul et";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
+"generalSettings.locationSharingDuration" = "Position share duration";
+
 
 //Log View
 "logView.title" = "Tanılama";

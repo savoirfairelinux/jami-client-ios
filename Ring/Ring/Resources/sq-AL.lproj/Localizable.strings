@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Rregullime Videoje";
 "generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
 "generalSettings.fileTransfer" = "Shpërngulje kartelash";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Prano automatikisht kartela ardhëse";
 "generalSettings.acceptTransferLimit" = "Kufi pranimi shpërnguljesh";
 "generalSettings.acceptTransferLimitDescription" = "(në MB, 0 = e pakufizuar)";
+"generalSettings.limitLocationSharingDuration" = "Kufizo kohëzgjatjen e tregimit të vendndodhjes";
+"generalSettings.locationSharingDuration" = "Kohëzgjatje tregimi pozicioni";
+
 
 //Log View
 "logView.title" = "Diagnostikime";

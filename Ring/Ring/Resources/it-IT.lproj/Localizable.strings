@@ -109,7 +109,7 @@
 //Welcome Screen
 "welcome.title" = "Benvenuto in Jami !";
 "welcome.text" = "Jami è una piattaforma di comunicazione libera e universale che preserva la privacy e le libertà degli utenti";
-"welcome.linkDevice" = "Collega questo dispositivo ad un account";
+"welcome.linkDevice" = "Associa questo dispositivo a un account";
 "welcome.createAccount" = "Crea un account Jami";
 "welcome.connectToManager" = "Connettiti a un server JAMS";
 
@@ -148,12 +148,12 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Collegamento dell'account";
-"linkToAccount.linkButtonTitle" = "Collega dispositivo";
+"linkToAccount.linkButtonTitle" = "Associa dispositivo";
 "linkToAccount.passwordPlaceholder" = "Password";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.passwordLabel" = "Inserire la password";
 "linkToAccount.pinLabel" = "Inserire il PIN";
-"linkToAccount.explanationPinMessage" = "Per generare il codice PIN, accedere alle impostazioni di gestione dell'account sul dispositivo che contiene l'account che si desidera utilizzare. Nelle impostazioni del dispositivo seleziona \"Collega un altro dispositivo a questo account\". Otterrai il PIN necessario per completare questo modulo. Il PIN è valido solo per 10 minuti.";
+"linkToAccount.explanationPinMessage" = "Per generare il codice PIN, accedere alle impostazioni di gestione dell'account sul dispositivo che contiene l'account che si desidera utilizzare. Nelle impostazioni del dispositivo seleziona \"Associa un altro dispositivo a questo account\". Otterrai il PIN necessario per completare questo modulo. Il PIN è valido solo per 10 minuti.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Accedi";
@@ -262,7 +262,7 @@
 "accountPage.deviceRevocationWrongPassword" = "password errata";
 "accountPage.deviceRevocationUnknownDevice" = "Dispositivo sconosciuto";
 "accountPage.deviceRevocationError" = "Errore di revoca del dispositivo";
-"accountPage.linkDeviceTitle" = "Collega un altro dispositivo";
+"accountPage.linkDeviceTitle" = "Associa un altro dispositivo";
 "accountPage.other" = "Altro";
 "accountPage.removeAccountTitle" = "Rimuovi l'account";
 "accountPage.removeAccountMessage" = "Cliccando su \"Rimuovi\" si rimuove questo account su questo dispositivo! Questa azione non può essere annullata. Inoltre, il tuo nome registrato può essere perso.";
@@ -323,11 +323,11 @@
 "blockListPage.noBlockedContacts" = "Nessun contatto bloccato";
 
 //Link New Device
-"linkDevice.title" = "Collega un nuovo dispositivo";
+"linkDevice.title" = "Associa un altro dispositivo";
 "linkDevice.passwordError" = "La password che hai inserito non sblocca questo account";
 "linkDevice.networkError" = "Si è verificato un errore nella rete durante l'esportazione";
 "linkDevice.defaultError" = "Si è verificato un errore durante l'esportazione";
-"linkDevice.explanationMessage" = "Per completare il processo, è necessario aprire Jami sul nuovo dispositivo e scegliere l'opzione \"Collega questo dispositivo a un account\". Il tuo PIN è valido per 10 minuti";
+"linkDevice.explanationMessage" = "Per completare il processo, è necessario aprire Jami sul nuovo dispositivo e scegliere l'opzione \"Associa questo dispositivo a un account\". Il tuo PIN è valido per 10 minuti";
 "linkDevice.hudMessage" = "Verifica";
 
 //Contact Page
@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Impostazioni video";
 "generalSettings.videoAcceleration" = "Attiva l'accelerazione video";
 "generalSettings.fileTransfer" = "Trasferimento file";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Accetta automaticamente i file in arrivo";
 "generalSettings.acceptTransferLimit" = "Limite del file accettato";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = illimitato)";
+"generalSettings.limitLocationSharingDuration" = "Limita la durata della condivisione della posizione";
+"generalSettings.locationSharingDuration" = "Durata posizione condivisa";
+
 
 //Log View
 "logView.title" = "Diagnostica";

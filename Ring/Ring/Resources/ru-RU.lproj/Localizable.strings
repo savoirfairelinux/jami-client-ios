@@ -42,7 +42,7 @@
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact...";
 "swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
+"swarmcreation.addADescription" = "Добавить описание";
 "swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Ignore the swarm";
@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Разрешить видео-ускорение";
 "generalSettings.fileTransfer" = "Передача файлов";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Автоматически принимать входящие файлы";
 "generalSettings.acceptTransferLimit" = "Принять лимит на передачу";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
+"generalSettings.locationSharingDuration" = "Position share duration";
+
 
 //Log View
 "logView.title" = "Диагностика";

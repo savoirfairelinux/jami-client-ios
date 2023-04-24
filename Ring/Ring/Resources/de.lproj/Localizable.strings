@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Video-Einstellungen";
 "generalSettings.videoAcceleration" = "Videobeschleunigung aktivieren";
 "generalSettings.fileTransfer" = "Dateitransfer";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Eingehende Dateien automatisch annehmen";
 "generalSettings.acceptTransferLimit" = "Annahmelimit Datentransfer";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unbegrenzt)";
+"generalSettings.limitLocationSharingDuration" = "Dauer der Standortfreigabe begrenzen";
+"generalSettings.locationSharingDuration" = "Dauer der Positionsfreigabe";
+
 
 //Log View
 "logView.title" = "Diagnose";

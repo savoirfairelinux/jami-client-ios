@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "محادثات";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "إعدادت الحساب";
 "global.ok" = "موافق";
 "global.close" = "إغلاق";
 "global.share" = "مشاركة";
@@ -83,7 +83,7 @@
 "smartlist.noNumber" = "لا تحتوى جهة الاتصال المحددة على أى رقم";
 "smartlist.selectOneNumber" = "حدد أحد الأرقام";
 "smartlist.invitations" = "الدعوات";
-"smartlist.accountSettings" = "Account Settings";
+"smartlist.accountSettings" = "إعدادت الحساب";
 "smartlist.advancedSettings" = "Advanced Settings";
 "smartlist.aboutJami" = "حول جامي";
 
@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 "generalSettings.fileTransfer" = "نقل ملف";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
+"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
+"generalSettings.locationSharingDuration" = "Position share duration";
+
 
 //Log View
 "logView.title" = "Diagnostics";
