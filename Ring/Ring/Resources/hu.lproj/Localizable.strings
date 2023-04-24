@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Videóbeállítások";
 "generalSettings.videoAcceleration" = "Videó gyorsítás engedélyezése";
 "generalSettings.fileTransfer" = "Fájlküldés";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "A bejövő fájlok önműködő elfogadása";
 "generalSettings.acceptTransferLimit" = "Fájlküldési korlátozás elfogadása";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = korlátlan)";
+"generalSettings.limitLocationSharingDuration" = "Helymegosztás időtartamának korlátozása";
+"generalSettings.locationSharingDuration" = "Helymegosztás időtartama";
+
 
 //Log View
 "logView.title" = "Diagnosztika";

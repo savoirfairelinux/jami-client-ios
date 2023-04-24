@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Reglări video";
 "generalSettings.videoAcceleration" = "Activează accelerarea video";
 "generalSettings.fileTransfer" = "Transfer de fișiere";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Acceptă automat fișierele primite";
 "generalSettings.acceptTransferLimit" = "Limita fișierului acceptat";
 "generalSettings.acceptTransferLimitDescription" = "(în Mo, 0 = nelimitat)";
+"generalSettings.limitLocationSharingDuration" = "Limitează durata distribuirii poziției";
+"generalSettings.locationSharingDuration" = "Durata distribuirii poziției";
+
 
 //Log View
 "logView.title" = "Diagnoză";

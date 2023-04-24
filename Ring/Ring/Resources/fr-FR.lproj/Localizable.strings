@@ -54,7 +54,7 @@
 "swarm.members" = "Membres";
 "swarm.addDescription" = "Rajouter une description";
 "swarm.oneToOne" = "Swarm privé";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "Seul l'administrateur peut inviter";
 "swarm.invitesOnly" = "Swarm privé";
 "swarm.publicChat" = "Swarm public";
 "swarm.others" = "Autres";
@@ -383,9 +383,13 @@
 "generalSettings.videoSettings" = "Paramètres vidéo ";
 "generalSettings.videoAcceleration" = "Activer l'accélération vidéo";
 "generalSettings.fileTransfer" = "Transfert de fichier";
+"generalSettings.locationSharing" = "Location Sharing";
 "generalSettings.automaticAcceptIncomingFiles" = "Accepter automatiquement les fichiers entrants";
 "generalSettings.acceptTransferLimit" = "Taille maximum des fichiers automatiquement acceptés";
 "generalSettings.acceptTransferLimitDescription" = "(en MB, 0 = illimité)";
+"generalSettings.limitLocationSharingDuration" = "Limiter la durée de partage de la position";
+"generalSettings.locationSharingDuration" = "Durée du partage de position";
+
 
 //Log View
 "logView.title" = "Diagnostiques";
