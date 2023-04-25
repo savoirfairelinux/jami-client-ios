@@ -22,7 +22,6 @@ import Reusable
 import UIKit
 import RxSwift
 import RxCocoa
-import PKHUD
 
 class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: MigrateAccountViewModel!
@@ -42,6 +41,7 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
     @IBOutlet weak var passwordContainer: UIStackView!
     @IBOutlet weak var passwordField: DesignableTextField!
     @IBOutlet weak var passwordExplanationLabel: UILabel!
+    var loadingViewPresenter = LoadingViewPresenter()
 
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
@@ -227,15 +227,15 @@ class MigrateAccountViewController: UIViewController, StoryboardBased, ViewModel
     // MARK: - alerts
 
     private func stopLoadingView() {
-        HUD.hide(animated: false)
+        loadingViewPresenter.hide(animated: false)
     }
     private func showLoadingView() {
-        HUD.show(.labeledProgress(title: L10n.MigrateAccount.migrating,
-                                  subtitle: nil))
+        loadingViewPresenter.presentWithMessage(message: L10n.MigrateAccount.migrating, presentingVC: self, animated: true)
     }
 
     private func showMigrationError() {
-        HUD.hide(animated: true) { _ in
+        loadingViewPresenter.hide(animated: true) { [weak self] in
+            guard let self = self else { return }
             let alert = UIAlertController(title: L10n.MigrateAccount.error,
                                           message: nil,
                                           preferredStyle: .alert)

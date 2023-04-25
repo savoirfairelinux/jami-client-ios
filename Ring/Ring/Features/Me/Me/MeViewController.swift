@@ -25,7 +25,6 @@ import Reusable
 import RxSwift
 import RxCocoa
 import RxDataSources
-import PKHUD
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
@@ -46,6 +45,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     private let jamiIDCell = "jamiIDCell"
     private let jamiUserNameCell = "jamiUserNameCell"
     private let accountStateCell = "accountStateCell"
+    var loadingViewPresenter = LoadingViewPresenter()
 
     // MARK: - functions
     override func viewDidLoad() {
@@ -174,15 +174,16 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     private func showLoadingView() {
-        HUD.show(.labeledProgress(title: L10n.AccountPage.deviceRevocationProgress, subtitle: nil))
+        loadingViewPresenter.presentWithMessage(message: L10n.AccountPage.deviceRevocationProgress, presentingVC: self, animated: true)
     }
 
     private func showNameRegistration() {
-        HUD.show(.labeledProgress(title: L10n.AccountPage.usernameRegistering, subtitle: nil))
+        loadingViewPresenter.presentWithMessage(message: L10n.AccountPage.usernameRegistering, presentingVC: self, animated: true)
     }
 
     private func showDeviceRevocationError(deviceId: String, errorMessage: String) {
-        HUD.hide(animated: true) { _ in
+        loadingViewPresenter.hide(animated: true) { [weak self] in
+            guard let self = self else { return }
             let alert = UIAlertController(title: errorMessage,
                                           message: nil,
                                           preferredStyle: .alert)
@@ -199,7 +200,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     private func showDeviceRevokedAlert(deviceId: String) {
-        HUD.hide(animated: true) { _ in
+        loadingViewPresenter.hide(animated: true) { [weak self] in
+            guard let self = self else { return }
             let alert = UIAlertController(title: L10n.AccountPage.deviceRevocationSuccess,
                                           message: nil,
                                           preferredStyle: .alert)
@@ -211,7 +213,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     private func showNameRegisterationFailed(error: String) {
-        HUD.hide(animated: true) { _ in
+        loadingViewPresenter.hide(animated: true) { [weak self] in
+            guard let self = self else { return }
             let alert = UIAlertController(title: error,
                                           message: nil,
                                           preferredStyle: .alert)
@@ -1278,10 +1281,11 @@ extension MeViewController: BoothModeConfirmationPresenter {
     }
 
     internal func stopLoadingView() {
-        HUD.hide(animated: false)
+        loadingViewPresenter.hide(animated: false)
     }
 
     internal func showLoadingViewWithoutText() {
-        HUD.show(.labeledProgress(title: "", subtitle: nil))
+        loadingViewPresenter.showSuccessAllert(message: "nice", presentingVC: self, animated: true)
+        // loadingViewPresenter.presentWithMessage(message: "", presentingVC: self, animated: true)
     }
 }
