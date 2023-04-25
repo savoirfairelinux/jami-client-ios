@@ -22,7 +22,6 @@
 import UIKit
 import Reusable
 import RxSwift
-import PKHUD
 
 class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelBased {
 
@@ -58,6 +57,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
+    var loadingViewPresenter = LoadingViewPresenter()
 
     // MARK: functions
     override func viewDidLoad() {
@@ -329,9 +329,6 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.createAccountButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                DispatchQueue.main.async {
-                    self.showAccountCreationInProgress()
-                }
                 DispatchQueue.global(qos: .background).async {
                     self.viewModel.createAccount()
                 }
@@ -340,15 +337,11 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     private func showAccountCreationInProgress() {
-        HUD.show(.labeledProgress(title: L10n.CreateAccount.loading, subtitle: nil))
-    }
-
-    private func showAccountCreationSuccess() {
-        HUD.flash(.labeledSuccess(title: L10n.Alerts.accountAddedTitle, subtitle: nil), delay: Durations.alertFlashDuration.value)
+        loadingViewPresenter.presentWithMessage(message: L10n.CreateAccount.loading, presentingVC: self, animated: true)
     }
 
     private func hideAccountCreationHud() {
-        HUD.hide()
+        loadingViewPresenter.hide(animated: false)
     }
 
     private func showAccountCreationError(error: AccountCreationError) {
