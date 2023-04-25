@@ -21,7 +21,6 @@
 import UIKit
 import Reusable
 import RxSwift
-import PKHUD
 
 class LinkToAccountManagerViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: LinkToAccountManagerViewModel!
@@ -39,6 +38,7 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
     var disposeBag = DisposeBag()
+    var loadingViewPresenter = LoadingViewPresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,11 +132,11 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
     }
 
     private func showLinkHUD() {
-        HUD.show(.labeledProgress(title: L10n.LinkToAccountManager.signIn, subtitle: nil))
+        loadingViewPresenter.presentWithMessage(message: L10n.LinkToAccountManager.signIn, presentingVC: self, animated: true)
     }
 
     private func hideHud() {
-        HUD.hide()
+        loadingViewPresenter.hide(animated: false)
     }
 
     private func showAccountCreationError(error: AccountCreationError) {
