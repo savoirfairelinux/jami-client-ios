@@ -23,7 +23,6 @@ import RxSwift
 import RxDataSources
 import RxCocoa
 import Reusable
-import PKHUD
 
 class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewModelBased {
 
@@ -36,6 +35,7 @@ class IncognitoSmartListViewController: UIViewController, StoryboardBased, ViewM
     @IBOutlet weak var networkAlertLabel: UILabel!
     @IBOutlet weak var networkAlertView: UIView!
     @IBOutlet weak var searchBarShadow: UIView!
+    var loadingViewPresenter = LoadingViewPresenter()
 
     var viewModel: IncognitoSmartListViewModel!
     private let disposeBag = DisposeBag()
@@ -181,10 +181,10 @@ extension IncognitoSmartListViewController: BoothModeConfirmationPresenter {
     }
 
     internal func stopLoadingView() {
-        HUD.hide(animated: false)
+        loadingViewPresenter.hide(animated: false)
     }
 
     internal func showLoadingViewWithoutText() {
-        HUD.show(.labeledProgress(title: "", subtitle: nil))
+        loadingViewPresenter.presentWithMessage(message: "", presentingVC: self, animated: true)
     }
 }

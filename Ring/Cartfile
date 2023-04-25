@@ -1,6 +1,5 @@
 github "RxSwiftCommunity/RxRealm"
 github "RxSwiftCommunity/RxDataSources"
-github "pkluz/PKHUD"
 github "AliSoftware/Reusable"
 github "SwiftyBeaver/SwiftyBeaver"
 github "andreamazz/AMPopTip"

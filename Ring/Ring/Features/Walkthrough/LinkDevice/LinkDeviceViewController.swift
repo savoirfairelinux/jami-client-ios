@@ -22,7 +22,6 @@
 import UIKit
 import Reusable
 import RxSwift
-import PKHUD
 import AMPopTip
 import SwiftyBeaver
 
@@ -45,6 +44,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
     let popTip = PopTip()
+    var loadingViewPresenter = LoadingViewPresenter()
 
     let log = SwiftyBeaver.self
 
@@ -193,15 +193,15 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     }
 
     private func showCreationHUD() {
-        HUD.show(.labeledProgress(title: L10n.LinkToAccount.waitLinkToAccountTitle, subtitle: nil))
+        loadingViewPresenter.presentWithMessage(message: L10n.LinkToAccount.waitLinkToAccountTitle, presentingVC: self, animated: true)
     }
 
     private func showLinkedSuccess() {
-        HUD.flash(.labeledSuccess(title: L10n.Alerts.accountLinkedTitle, subtitle: nil), delay: Durations.alertFlashDuration.value)
+        loadingViewPresenter.showSuccessAllert(message: L10n.Alerts.accountLinkedTitle, presentingVC: self, animated: true)
     }
 
     private func hideHud() {
-        HUD.hide()
+        loadingViewPresenter.hide(animated: false)
     }
 
     private func showAccountCreationError(error: AccountCreationError) {

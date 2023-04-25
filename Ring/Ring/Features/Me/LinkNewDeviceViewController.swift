@@ -21,12 +21,12 @@
 import Foundation
 import Reusable
 import RxSwift
-import PKHUD
 
 class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     var viewModel: LinkNewDeviceViewModel!
     let disposeBag = DisposeBag()
+    var loadingViewPresenter = LoadingViewPresenter()
 
     override func viewDidLoad() {
 
@@ -58,10 +58,10 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     private func showProgress() {
-        HUD.show(.labeledProgress(title: L10n.LinkDevice.hudMessage, subtitle: nil))
+        loadingViewPresenter.presentWithMessage(message: L10n.LinkDevice.hudMessage, presentingVC: self, animated: true)
     }
     private func hideHud() {
-        HUD.hide(animated: false)
+        loadingViewPresenter.hide(animated: false)
     }
 
     func showSuccessAlert(pin: String) {
