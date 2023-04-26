@@ -26,6 +26,8 @@ import Reusable
 
 class ConversationCell: UITableViewCell, NibReusable {
 
+    @IBOutlet weak var myLocationSharingIcon: UIImageView!
+    @IBOutlet weak var locationSharingIcon: UIImageView!
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var newMessagesIndicator: UIView?
@@ -37,6 +39,9 @@ class ConversationCell: UITableViewCell, NibReusable {
     @IBOutlet weak var selectionContainer: UIView?
 
     var avatarSize: CGFloat { return 50 }
+
+    var incomingLocationSharing = false
+    var outgoingLocationSharing = false
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         let initialColor = selected ? UIColor.jamiUITableViewCellSelection : UIColor.jamiUITableViewCellSelection.lighten(by: 5.0)
@@ -60,6 +65,32 @@ class ConversationCell: UITableViewCell, NibReusable {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.disposeBag = DisposeBag()
+        self.incomingLocationSharing = false
+        self.outgoingLocationSharing = false
+    }
+
+    override open func didMoveToWindow() {
+        super.didMoveToWindow()
+        if window != nil {
+            updateLocationSharingState()
+        }
+    }
+
+    func updateLocationSharingState() {
+        self.locationSharingIcon.isHidden = !self.incomingLocationSharing
+        self.myLocationSharingIcon.isHidden = !self.outgoingLocationSharing
+        if incomingLocationSharing {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.locationSharingIcon.stopBlinking()
+                self?.locationSharingIcon.blink()
+            }
+        }
+        if outgoingLocationSharing {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.myLocationSharingIcon.stopBlinking()
+                self?.myLocationSharingIcon.blink()
+            }
+        }
     }
 
     func configureFromItem(_ item: ConversationSection.Item) {
@@ -127,6 +158,46 @@ class ConversationCell: UITableViewCell, NibReusable {
                 .bind(to: lastMessage.rx.text)
                 .disposed(by: self.disposeBag)
         }
+
+        if let outgoingLocationSharingImage = Asset.localisationsSendBlack.image.withColor(.systemBlue) {
+            self.myLocationSharingIcon.image = outgoingLocationSharingImage
+        }
+
+        if let incomingLocationSharingImage = Asset.localisationsReceiveBlack.image.withColor(.label) {
+            self.locationSharingIcon.image = incomingLocationSharingImage
+        }
+
+        item.showOutgoingLocationSharing
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .startWith(item.showOutgoingLocationSharing.value)
+            .subscribe(onNext: { [weak self] show in
+                guard let self = self else { return }
+                self.outgoingLocationSharing = show
+                self.myLocationSharingIcon.isHidden = !show
+                if show {
+                    self.myLocationSharingIcon.blink()
+                } else {
+                    self.myLocationSharingIcon.stopBlinking()
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        item.showIncomingLocationSharing
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .startWith(item.showIncomingLocationSharing.value)
+            .subscribe(onNext: { [weak self] show in
+                guard let self = self else { return }
+                self.incomingLocationSharing = show
+                self.locationSharingIcon.isHidden = !show
+                if show {
+                    self.locationSharingIcon.blink()
+                } else {
+                    self.locationSharingIcon.stopBlinking()
+                }
+            })
+            .disposed(by: self.disposeBag)
         self.selectionStyle = .none
     }
 }

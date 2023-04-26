@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -118,7 +118,7 @@
                                 <rect key="frame" x="80" y="0.0" width="278" height="76"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LGr-0b-otR">
-                                        <rect key="frame" x="0.0" y="-14.5" width="238" height="105"/>
+                                        <rect key="frame" x="0.0" y="-14.5" width="195" height="105"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fJ-Wf-1e0">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -127,7 +127,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1Lt-95-QFg">
-                                                <rect key="frame" x="0.0" y="55" width="238" height="50"/>
+                                                <rect key="frame" x="0.0" y="55" width="195" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Yv-cC-LKx">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -135,7 +135,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eug-ak-r49">
-                                                        <rect key="frame" x="50" y="0.0" width="188" height="50"/>
+                                                        <rect key="frame" x="50" y="0.0" width="145" height="50"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -151,10 +151,32 @@
                                             <constraint firstAttribute="trailing" secondItem="1Lt-95-QFg" secondAttribute="trailing" id="pRn-ni-QiG"/>
                                         </constraints>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="pA0-Ab-Lfe">
+                                        <rect key="frame" x="208" y="25.5" width="55" height="25"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Localisations_Receive_Black_24dp" translatesAutoresizingMaskIntoConstraints="NO" id="JEM-kb-unW">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="JEM-kb-unW" secondAttribute="height" id="0Cv-N3-ygb"/>
+                                                    <constraint firstAttribute="height" constant="25" id="Tbu-QS-LSa"/>
+                                                    <constraint firstAttribute="width" secondItem="JEM-kb-unW" secondAttribute="height" id="mIo-Dc-La2"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Localisations_Send_Black_24dp" translatesAutoresizingMaskIntoConstraints="NO" id="MaW-Ck-szG">
+                                                <rect key="frame" x="30" y="0.0" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="MaW-Ck-szG" secondAttribute="height" id="P5u-KL-iGM"/>
+                                                    <constraint firstAttribute="height" constant="25" id="Y0V-7k-UHw"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="pA0-Ab-Lfe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LGr-0b-otR" secondAttribute="trailing" constant="4" id="3J7-Mz-P9d"/>
+                                    <constraint firstAttribute="trailing" secondItem="pA0-Ab-Lfe" secondAttribute="trailing" constant="15" id="7eB-T6-wEo"/>
+                                    <constraint firstItem="pA0-Ab-Lfe" firstAttribute="centerY" secondItem="seF-bL-Xvj" secondAttribute="centerY" id="8hz-zC-do3"/>
                                     <constraint firstItem="LGr-0b-otR" firstAttribute="leading" secondItem="seF-bL-Xvj" secondAttribute="leading" id="UVf-fe-O3E"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LGr-0b-otR" secondAttribute="trailing" constant="15" id="hb9-G7-3nM"/>
                                     <constraint firstItem="LGr-0b-otR" firstAttribute="centerY" secondItem="seF-bL-Xvj" secondAttribute="centerY" id="tXs-g1-OYR"/>
                                 </constraints>
                             </view>
@@ -180,6 +202,8 @@
                 <outlet property="avatarView" destination="KC4-sG-yj8" id="Rag-Lj-Lmi"/>
                 <outlet property="lastMessageDateLabel" destination="7Yv-cC-LKx" id="pFf-hW-zD8"/>
                 <outlet property="lastMessagePreviewLabel" destination="eug-ak-r49" id="3jj-Lx-jbU"/>
+                <outlet property="locationSharingIcon" destination="MaW-Ck-szG" id="teM-1o-SDB"/>
+                <outlet property="myLocationSharingIcon" destination="JEM-kb-unW" id="Jqg-AI-NUR"/>
                 <outlet property="nameLabel" destination="2fJ-Wf-1e0" id="0Mb-yC-vh6"/>
                 <outlet property="newMessagesIndicator" destination="JTE-eF-Y5s" id="9kR-8x-Zpk"/>
                 <outlet property="newMessagesLabel" destination="P5S-4k-0yx" id="WlA-Z8-sNC"/>
@@ -187,7 +211,11 @@
                 <outlet property="selectionContainer" destination="NKy-ZG-e6V" id="8By-TX-0He"/>
                 <outlet property="selectionIndicator" destination="kb7-S0-UM0" id="gDE-2m-3k1"/>
             </connections>
-            <point key="canvasLocation" x="9" y="-89"/>
+            <point key="canvasLocation" x="8" y="-89.055472263868069"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Localisations_Receive_Black_24dp" width="24" height="24"/>
+        <image name="Localisations_Send_Black_24dp" width="24" height="24"/>
+    </resources>
 </document>

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Localisations_Receive_Black_24dp.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

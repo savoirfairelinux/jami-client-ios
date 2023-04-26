@@ -67,6 +67,9 @@ class ConversationViewModel: Stateable, ViewModel {
 
     let showInvitation = BehaviorRelay<Bool>(value: false)
 
+    let showIncomingLocationSharing = BehaviorRelay<Bool>(value: false)
+    let showOutgoingLocationSharing = BehaviorRelay<Bool>(value: false)
+
     private let stateSubject = PublishSubject<State>()
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
@@ -207,6 +210,7 @@ class ConversationViewModel: Stateable, ViewModel {
             }
             subscribeLastMessagesUpdate()
             subscribeConversationSynchronization()
+            subscribeLocationEvents()
             // self.subscribeConversationServiceTypingIndicator()
         }
     }
@@ -647,9 +651,16 @@ extension ConversationViewModel {
 extension ConversationViewModel {
 
     func isAlreadySharingLocation() -> Bool {
-        guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
-        return self.locationSharingService.isAlreadySharingMyLocation(accountId: account.id,
+        guard let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
+        let accountId = self.conversation.value.accountId
+        return self.locationSharingService.isAlreadySharing(accountId: accountId,
+                                                            contactUri: jamiId)
+    }
+
+    func isAlreadySharingMyLocation() -> Bool {
+        guard let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
+        let accountId = self.conversation.value.accountId
+        return self.locationSharingService.isAlreadySharingMyLocation(accountId: accountId,
                                                                       contactUri: jamiId)
     }
 
@@ -670,6 +681,33 @@ extension ConversationViewModel {
 
     func model() -> ConversationModel {
         return self.conversation.value
+    }
+
+    func subscribeLocationEvents() {
+        self.locationSharingService
+            .peerUriAndLocationReceived
+            .subscribe(onNext: { [weak self] tuple in
+                guard let self = self else { return }
+                if tuple.1 != nil &&
+                    self.isAlreadySharingLocation() {
+                    self.showIncomingLocationSharing.accept(true)
+                } else {
+                    self.showIncomingLocationSharing.accept(false)
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.locationSharingService.currentLocation
+            .subscribe(onNext: { [weak self] myCurrentLocation in
+                guard let self = self else { return }
+                if myCurrentLocation != nil &&
+                    self.isAlreadySharingMyLocation() {
+                    self.showOutgoingLocationSharing.accept(true)
+                } else {
+                    self.showOutgoingLocationSharing.accept(false)
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 
