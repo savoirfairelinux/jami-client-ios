@@ -64,7 +64,7 @@ private class LocationSharingInstanceDictionary<T: LocationSharingInstance> {
     }
 }
 
-private class LocationSharingInstance {
+class LocationSharingInstance {
     let accountId: String
     let contactUri: String
 
@@ -213,6 +213,13 @@ class LocationSharingService: NSObject {
 
 // MARK: Sharing my location
 extension LocationSharingService {
+    func getUsersSharingLocationWith() -> [LocationSharingInstance] {
+        return self.incomingInstances.asArray().compactMap({ LocationSharingInstance(accountId: $0.accountId, contactUri: $0.contactUri) })
+    }
+
+    func getUsersSharingLocation() -> [LocationSharingInstance] {
+        return self.outgoingInstances.asArray().compactMap({ LocationSharingInstance(accountId: $0.accountId, contactUri: $0.contactUri) })
+    }
 
     func isAlreadySharing(accountId: String, contactUri: String) -> Bool {
         return self.incomingInstances.get(accountId, contactUri) != nil

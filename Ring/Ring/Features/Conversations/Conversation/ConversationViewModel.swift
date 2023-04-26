@@ -609,6 +609,13 @@ extension ConversationViewModel {
     func isAlreadySharingLocation() -> Bool {
         guard let account = self.accountService.currentAccount,
               let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
+        return self.locationSharingService.isAlreadySharing(accountId: account.id,
+                                                            contactUri: jamiId)
+    }
+
+    func isAlreadySharingMyLocation() -> Bool {
+        guard let account = self.accountService.currentAccount,
+              let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
         return self.locationSharingService.isAlreadySharingMyLocation(accountId: account.id,
                                                                       contactUri: jamiId)
     }
