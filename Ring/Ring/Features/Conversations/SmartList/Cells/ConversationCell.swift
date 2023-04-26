@@ -26,6 +26,8 @@ import Reusable
 
 class ConversationCell: UITableViewCell, NibReusable {
 
+    @IBOutlet weak var myLocationSharingIcon: UIImageView!
+    @IBOutlet weak var locationSharingIcon: UIImageView!
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var newMessagesIndicator: UIView?
@@ -126,6 +128,26 @@ class ConversationCell: UITableViewCell, NibReusable {
                 .startWith(item.lastMessage.value)
                 .bind(to: lastMessage.rx.text)
                 .disposed(by: self.disposeBag)
+        }
+        item.myLocation
+            .observe(on: MainScheduler.instance)
+            .startWith(nil)
+            .map { $0 == nil }
+            .bind(to: myLocationSharingIcon.rx.isHidden)
+            .disposed(by: self.disposeBag)
+
+        item.myContactsLocation
+            .observe(on: MainScheduler.instance)
+            .startWith(nil)
+            .map { $0 == nil }
+            .bind(to: locationSharingIcon.rx.isHidden)
+            .disposed(by: self.disposeBag)
+
+        myLocationSharingIcon.image = Asset.localisationsSendBlack.image.withColor(.systemBlue)
+        if self.traitCollection.userInterfaceStyle == .dark {
+            locationSharingIcon.image = Asset.localisationsReceiveBlack.image.withColor(.white)
+        } else {
+            locationSharingIcon.image = Asset.localisationsReceiveBlack.image.withColor(.black)
         }
         self.selectionStyle = .none
     }

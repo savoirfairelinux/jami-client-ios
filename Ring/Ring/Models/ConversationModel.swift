@@ -124,6 +124,7 @@ class ConversationParticipant: Equatable, Hashable {
     var isLocal: Bool = false
 
     init (info: [String: String], isLocal: Bool) {
+        print(info)
         self.isLocal = isLocal
         if let jamiId = info["uri"], !jamiId.isEmpty {
             self.jamiId = jamiId.replacingOccurrences(of: "ring:", with: "")

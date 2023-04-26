@@ -109,6 +109,8 @@ class ConversationViewModel: Stateable, ViewModel {
     var profileImageData = BehaviorRelay<Data?>(value: nil)
     /// My profile's image data
     var myOwnProfileImageData: Data?
+    var myContactsLocation = BehaviorRelay<CLLocationCoordinate2D?>(value: nil)
+    var myLocation = BehaviorRelay<CLLocationCoordinate2D?>(value: nil)
 
     var contactPresence = BehaviorRelay<Bool>(value: false)
     var swarmInfo: SwarmInfoProtocol?
@@ -213,6 +215,7 @@ class ConversationViewModel: Stateable, ViewModel {
             }
             subscribeLastMessagesUpdate()
             subscribeConversationSynchronization()
+            subscribeLocationEvents()
             // self.subscribeConversationServiceTypingIndicator()
         }
     }
@@ -229,6 +232,48 @@ class ConversationViewModel: Stateable, ViewModel {
                 self.synchronizing.accept(synchronizing)
             } onError: { _ in
             }
+            .disposed(by: self.disposeBag)
+    }
+
+    func subscribeLocationEvents() {
+        self.locationSharingService
+            .peerUriAndLocationReceived
+            .subscribe(onNext: { [weak self] tuple in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    if let coordinates = tuple.1 {
+                        let participantJamiIds = Set(self.conversation.value.getParticipants().compactMap({ $0.jamiId }))
+                        let jamiId = (tuple.0 ?? "").replacingOccurrences(of: "ring:", with: "")
+
+                        if participantJamiIds.contains(jamiId) {
+                            self.myContactsLocation.accept(coordinates)
+                        } else {
+                            self.myContactsLocation.accept(nil)
+                        }
+                    } else {
+                        self.myContactsLocation.accept(nil)
+                    }
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.locationSharingService
+            .currentLocation
+            .subscribe(onNext: { [weak self] myCurrentLocation in
+                guard let self = self else { return }
+                if let myCurrentLocation = myCurrentLocation {
+                    let participantJamiIds = Set(conversation.value.getParticipants().compactMap({ $0.jamiId }))
+                    let sharedJamiIds = Set(self.locationSharingService.getOutgoingInstances().asArray().compactMap({ $0.contactUri }))
+
+                    if !sharedJamiIds.isDisjoint(with: participantJamiIds) {
+                        self.myLocation.accept(myCurrentLocation.coordinate)
+                    } else {
+                        self.myLocation.accept(nil)
+                    }
+                } else {
+                    self.myLocation.accept(nil)
+                }
+            })
             .disposed(by: self.disposeBag)
     }
 
@@ -479,7 +524,6 @@ class ConversationViewModel: Stateable, ViewModel {
         //        self.messages.accept(conversationsMsg)
     }
 
-    var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
     let shouldDismiss = BehaviorRelay<Bool>(value: false)
 
     func openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate) {
@@ -621,6 +665,13 @@ extension ConversationViewModel {
 extension ConversationViewModel {
 
     func isAlreadySharingLocation() -> Bool {
+        guard let account = self.accountService.currentAccount,
+              let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
+        return self.locationSharingService.isAlreadySharing(accountId: account.id,
+                                                            contactUri: jamiId)
+    }
+
+    func isAlreadySharingMyLocation() -> Bool {
         guard let account = self.accountService.currentAccount,
               let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
         return self.locationSharingService.isAlreadySharingMyLocation(accountId: account.id,

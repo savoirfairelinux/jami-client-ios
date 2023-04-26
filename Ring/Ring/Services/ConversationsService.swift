@@ -122,6 +122,7 @@ class ConversationsService {
     func getSwarmMembers(conversationId: String, accountId: String, accountURI: String) -> [ParticipantInfo] {
         if let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
             return participantsInfo.compactMap({ info in
+                dump(info, name: "dddddddddd")
                 if let jamiId = info["uri"],
                    let roleText = info["role"] {
                     var role = ParticipantRole.member
