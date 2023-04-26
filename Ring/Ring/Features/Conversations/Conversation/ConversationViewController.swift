@@ -848,7 +848,7 @@ extension ConversationViewController {
     }
 
     private func isNotAlreadySharingWithThisContact() -> Bool {
-        if self.viewModel.isAlreadySharingLocation() {
+        if self.viewModel.isAlreadySharingMyLocation() {
             let alert = UIAlertController.init(title: L10n.Alerts.alreadylocationSharing,
                                                message: nil,
                                                preferredStyle: .alert)

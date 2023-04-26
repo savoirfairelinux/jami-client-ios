@@ -658,16 +658,21 @@ extension MessagesListVM {
     }
 
     func isAlreadySharingLocation() -> Bool {
-        guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
-        return self.locationSharingService.isAlreadySharing(accountId: account.id,
-                                                            contactUri: jamiId) || self.locationSharingService.isAlreadySharingMyLocation(accountId: account.id, contactUri: jamiId)
+        return peerIsAlreadySharingLocation() || self.isAlreadySharingMyLocation()
+    }
+
+    func peerIsAlreadySharingLocation() -> Bool {
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
+        let accountId = self.conversation.accountId
+        return self.locationSharingService
+            .isAlreadySharing(accountId: accountId,
+                              contactUri: jamiId)
     }
 
     func isAlreadySharingMyLocation() -> Bool {
-        guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
-        return self.locationSharingService.isAlreadySharingMyLocation(accountId: account.id, contactUri: jamiId)
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
+        let accountId = self.conversation.accountId
+        return self.locationSharingService.isAlreadySharingMyLocation(accountId: accountId, contactUri: jamiId)
     }
 
     func startSendingLocation(duration: TimeInterval) {

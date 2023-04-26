@@ -566,7 +566,7 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "linkDevice.title", fallback: "Link a new device")
   }
   internal enum LinkToAccount {
-    /// To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.
+    /// To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select "Link new device". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.
     internal static let explanationPinMessage = L10n.tr("Localizable", "linkToAccount.explanationPinMessage", fallback: "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.")
     /// Link
     internal static let linkButtonTitle = L10n.tr("Localizable", "linkToAccount.linkButtonTitle", fallback: "Link")

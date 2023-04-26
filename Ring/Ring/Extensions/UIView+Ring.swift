@@ -207,6 +207,11 @@ extension UIView {
                        })
     }
 
+    func stopBlinking() {
+        layer.removeAllAnimations()
+        alpha = 1.0 // Reset to full opacity
+    }
+
     func removeSubviews(recursive: Bool = false) {
         self.subviews.forEach { (subview) in
             if recursive {
