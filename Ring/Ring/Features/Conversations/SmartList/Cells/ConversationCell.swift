@@ -26,6 +26,7 @@ import Reusable
 
 class ConversationCell: UITableViewCell, NibReusable {
 
+    @IBOutlet weak var locationSharingIcon: UIImageView!
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var newMessagesIndicator: UIView?
@@ -126,6 +127,12 @@ class ConversationCell: UITableViewCell, NibReusable {
                 .startWith(item.lastMessage.value)
                 .bind(to: lastMessage.rx.text)
                 .disposed(by: self.disposeBag)
+        }
+        locationSharingIcon.isHidden = !(item.isAlreadySharingLocation() || item.isAlreadySharingMyLocation())
+        if item.isAlreadySharingLocation() {
+            locationSharingIcon.tintColor = .red
+        } else if item.isAlreadySharingMyLocation() {
+            locationSharingIcon.tintColor = .blue
         }
         self.selectionStyle = .none
     }
