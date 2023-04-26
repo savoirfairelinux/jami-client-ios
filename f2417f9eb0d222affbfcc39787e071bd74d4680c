@@ -35,6 +35,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49cf5ce9_22c56e0f",
+        "filename": "Ring/RingTests/LocationSharingServiceTests.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-04-26T15:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "279a2510_2a49cf5d",
+      "revId": "f2417f9eb0d222affbfcc39787e071bd74d4680c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b40c377_34f328ab",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-04-24T12:52:09Z",
       "side": 1,
       "message": "there is Constats.swift file that contains jamiId, accountsId that could be used for the test.",
+      "revId": "f2417f9eb0d222affbfcc39787e071bd74d4680c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b292c0f_437c09f3",
+        "filename": "Ring/RingTests/LocationSharingServiceTests.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-04-26T15:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b40c377_34f328ab",
       "revId": "f2417f9eb0d222affbfcc39787e071bd74d4680c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
