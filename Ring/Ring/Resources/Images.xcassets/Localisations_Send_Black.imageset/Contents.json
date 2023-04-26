@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "Localisations_Send_Black_24dp.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
+  }
+}
