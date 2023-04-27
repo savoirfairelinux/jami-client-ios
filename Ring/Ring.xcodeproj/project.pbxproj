@@ -3420,6 +3420,7 @@
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				NEW_SETTING = "";
+				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiNotificationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3473,6 +3474,7 @@
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				NEW_SETTING = "";
+				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiNotificationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3520,6 +3522,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				NEW_SETTING = "";
+				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiNotificationExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
