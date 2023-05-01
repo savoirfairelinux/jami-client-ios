@@ -383,7 +383,7 @@
 "generalSettings.videoSettings" = "Rregullime Videoje";
 "generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
 "generalSettings.fileTransfer" = "Shpërngulje kartelash";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Tregim Vendndodhjeje";
 "generalSettings.automaticAcceptIncomingFiles" = "Prano automatikisht kartela ardhëse";
 "generalSettings.acceptTransferLimit" = "Kufi pranimi shpërnguljesh";
 "generalSettings.acceptTransferLimitDescription" = "(në MB, 0 = e pakufizuar)";

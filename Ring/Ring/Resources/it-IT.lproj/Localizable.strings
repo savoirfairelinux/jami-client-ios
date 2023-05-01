@@ -383,7 +383,7 @@
 "generalSettings.videoSettings" = "Impostazioni video";
 "generalSettings.videoAcceleration" = "Attiva l'accelerazione video";
 "generalSettings.fileTransfer" = "Trasferimento file";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Condivisione della posizione";
 "generalSettings.automaticAcceptIncomingFiles" = "Accetta automaticamente i file in arrivo";
 "generalSettings.acceptTransferLimit" = "Limite del file accettato";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = illimitato)";

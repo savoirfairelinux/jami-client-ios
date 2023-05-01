@@ -383,7 +383,7 @@
 "generalSettings.videoSettings" = "Videóbeállítások";
 "generalSettings.videoAcceleration" = "Videó gyorsítás engedélyezése";
 "generalSettings.fileTransfer" = "Fájlküldés";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Helymegosztás";
 "generalSettings.automaticAcceptIncomingFiles" = "A bejövő fájlok önműködő elfogadása";
 "generalSettings.acceptTransferLimit" = "Fájlküldési korlátozás elfogadása";
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = korlátlan)";

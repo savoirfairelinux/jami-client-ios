@@ -40,8 +40,8 @@
 "scan.search" = "Поиск…";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
+"swarmcreation.searchBar" = "Поиск контакта...";
+"swarmcreation.createTheSwarm" = "Создать группу";
 "swarmcreation.addADescription" = "Добавить описание";
 "swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
 // Swarm
