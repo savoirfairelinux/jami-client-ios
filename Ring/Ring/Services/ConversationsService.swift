@@ -243,8 +243,9 @@ class ConversationsService {
         // if all loaded messages are of type .merge, we need to load next messages
         let numberOfInteractions = messages.filter { $0.type != .merge && $0.type != .profile }.count
         if fromLoaded && numberOfInteractions == 0 {
-            let firstMessage = messages.first?.id ?? ""
-            self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: firstMessage)
+            if let lastMessage = messages.last?.id {
+                self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: lastMessage)
+            }
             return false
         }
         var newMessages = [MessageModel]()
