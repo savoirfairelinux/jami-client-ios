@@ -113,7 +113,7 @@ class NotificationService: UNNotificationServiceExtension {
                         self.verifyTasksStatus()
                         return
                     }
-                    let result = self.adapterService.decrypt(keyPath: keyPath.path, messagesPath: treatedMessages.path, value: map)
+                    let result = self.adapterService.decrypt(keyPath: keyPath.path, accountId: self.accountId, messagesPath: treatedMessages.path, value: map)
                     let handleCall: (String, String) -> Void = { [weak self] (peerId, hasVideo) in
                         guard let self = self else {
                             return

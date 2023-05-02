@@ -97,8 +97,8 @@ class AdapterService {
         start(accountId: accountId)
     }
 
-    func decrypt(keyPath: String, messagesPath: String, value: [String: Any]) -> PeerConnectionRequestType {
-        let result = adapter.decrypt(keyPath, treated: messagesPath, value: value)
+    func decrypt(keyPath: String, accountId: String, messagesPath: String, value: [String: Any]) -> PeerConnectionRequestType {
+        let result = adapter.decrypt(keyPath, accountId: accountId, treated: messagesPath, value: value)
         guard let peerId = result?.keys.first,
               let type = result?.values.first else {
             return .unknown}

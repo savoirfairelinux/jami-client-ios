@@ -208,6 +208,7 @@ std::map<std::string, std::string> nameServers;
 }
 
 - (NSDictionary<NSString*, NSString*>*)decrypt:(NSString*)keyPath
+                                       accountId:(NSString*)accountId
                                        treated:(NSString*)treatedMessagesPath
                                          value:(NSDictionary*)value
 {
@@ -247,9 +248,9 @@ std::map<std::string, std::string> nameServers;
 
         std::string peerId = "";
         if (peerCR.connType == "videoCall" || peerCR.connType == "audioCall") {
-            auto certPath = [[Constants documentsPath] URLByAppendingPathComponent:certificates].path.UTF8String;
-            auto crlPath = [[Constants documentsPath] URLByAppendingPathComponent:crls].path.UTF8String;
-            auto ocspPath = [[Constants documentsPath] URLByAppendingPathComponent:ocsp].path.UTF8String;
+            auto certPath = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:certificates].path.UTF8String;
+            auto crlPath = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:crls].path.UTF8String;
+            auto ocspPath = [[[Constants documentsPath] URLByAppendingPathComponent:accountId] URLByAppendingPathComponent:ocsp].path.UTF8String;
             peerId = getPeerId(decrypted->owner->getId().toString(),
                                certPath,
                                crlPath,
