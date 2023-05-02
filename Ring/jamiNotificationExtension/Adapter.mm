@@ -54,8 +54,6 @@ struct PeerConnectionRequest : public dht::EncryptedValue<PeerConnectionRequest>
     MSGPACK_DEFINE_MAP(id, ice_msg, isAnswer, connType)
 };
 
-typedef NS_ENUM(NSInteger, NotificationType) { videoCall, audioCall, gitMessage, unknown };
-
 // Constants
 const std::string fileSeparator = "/";
 NSString* const certificates = @"certificates";
@@ -246,13 +244,17 @@ std::map<std::string, std::string> nameServers;
         if (isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String])) {
             return {};
         }
-        auto certPath = [[Constants documentsPath] URLByAppendingPathComponent:certificates].path.UTF8String;
-        auto crlPath = [[Constants documentsPath] URLByAppendingPathComponent:crls].path.UTF8String;
-        auto ocspPath = [[Constants documentsPath] URLByAppendingPathComponent:ocsp].path.UTF8String;
-        std::string peerId = getPeerId(decrypted->owner->getId().toString(),
-                                       certPath,
-                                       crlPath,
-                                       ocspPath);
+
+        std::string peerId = "";
+        if (peerCR.connType == "videoCall" || peerCR.connType == "audioCall") {
+            auto certPath = [[Constants documentsPath] URLByAppendingPathComponent:certificates].path.UTF8String;
+            auto crlPath = [[Constants documentsPath] URLByAppendingPathComponent:crls].path.UTF8String;
+            auto ocspPath = [[Constants documentsPath] URLByAppendingPathComponent:ocsp].path.UTF8String;
+            peerId = getPeerId(decrypted->owner->getId().toString(),
+                               certPath,
+                               crlPath,
+                               ocspPath);
+        }
         return @{@(peerId.c_str()): @(peerCR.connType.c_str())};
     } catch (std::runtime_error error) {
     }
