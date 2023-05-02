@@ -96,9 +96,6 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 // We tell our Output the expected Meta-data type
                 captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
                 captureMetadataOutput.metadataObjectTypes = [.code128, .qr, .ean13, .ean8, .code39, .upce, .aztec, .pdf417]
-                DispatchQueue.global(qos: .background).async { [weak self] in
-                    self?.captureSession?.startRunning()
-                }
 
                 // The videoPreviewLayer displays video in conjunction with the captureSession
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
@@ -112,6 +109,9 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
                 view.layer.addSublayer(videoPreviewLayer!)
                 view.bringSubviewToFront(header)
                 view.bringSubviewToFront(self.scanImage)
+                DispatchQueue.global(qos: .background).async { [weak self] in
+                    self?.captureSession?.startRunning()
+                }
             } catch { print("Error") }
         }
         self.updateOrientation()
