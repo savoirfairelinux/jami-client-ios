@@ -129,11 +129,11 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
         let remainingMinutes = minutes % 60
 
         if hours > 0 && remainingMinutes > 0 {
-            return "\(hours)h \(remainingMinutes)min"
+            return "\(hours) h \(remainingMinutes) min"
         } else if hours > 0 {
-            return "\(hours)h"
+            return "\(hours) h"
         } else {
-            return "\(remainingMinutes)min"
+            return "\(remainingMinutes) min"
         }
     }
 
