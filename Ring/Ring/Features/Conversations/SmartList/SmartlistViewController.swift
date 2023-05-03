@@ -599,7 +599,10 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     func confugureAccountPicker() {
         view.addSubview(accountPickerTextView)
+
         accountPickerTextView.inputView = accounPicker
+        view.addSubview(accountPickerTextView)
+
         accounPicker.backgroundColor = .jamiBackgroundSecondaryColor
         self.viewModel.accounts
             .observe(on: MainScheduler.instance)
@@ -632,18 +635,26 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         accountsLabel.textColor = .jamiSecondary
         accountsLabel.textAlignment = .center
         let addAccountButton = UIButton(type: .custom)
-        addAccountButton.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
+        addAccountButton.frame = CGRect(x: 0, y: 0, width: 250, height: 40)
         addAccountButton.contentHorizontalAlignment = .right
         addAccountButton.setTitle(L10n.Smartlist.addAccountButton, for: .normal)
         addAccountButton.setTitleColor(.jamiMain, for: .normal)
-        addAccountButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 25)
+        addAccountButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 23)
+
+        // Enable auto-shrink
+        addAccountButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        addAccountButton.titleLabel?.minimumScaleFactor = 0.5 // The minimum scale factor for the font size
+        addAccountButton.sizeToFit()
+
         let flexibleBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
         let addBarButton = UIBarButtonItem(customView: addAccountButton)
         let toolbar = UIToolbar()
         toolbar.barTintColor = .jamiBackgroundSecondaryColor
         toolbar.isTranslucent = false
+
         toolbar.sizeToFit()
         toolbar.center = CGPoint(x: self.view.frame.width * 0.5, y: 200)
+
         toolbar.items = [flexibleBarButton, addBarButton]
         accountPickerTextView.inputAccessoryView = toolbar
         addAccountButton.rx.tap
