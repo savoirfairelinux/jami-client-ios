@@ -393,8 +393,6 @@
 		44DFB39D2887048F0023878C /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38B2887044E0023878C /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB39E2887048F0023878C /* SwiftyBeaver.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38C288704530023878C /* SwiftyBeaver.xcframework */; };
 		44DFB39F2887048F0023878C /* SwiftyBeaver.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38C288704530023878C /* SwiftyBeaver.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3A02887048F0023878C /* RxRealm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38D288704570023878C /* RxRealm.xcframework */; };
-		44DFB3A12887048F0023878C /* RxRealm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38D288704570023878C /* RxRealm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3A22887048F0023878C /* Reachability.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38E2887045B0023878C /* Reachability.xcframework */; };
 		44DFB3A32887048F0023878C /* Reachability.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38E2887045B0023878C /* Reachability.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3A42887048F0023878C /* RxDataSources.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38F288704600023878C /* RxDataSources.xcframework */; };
@@ -403,8 +401,6 @@
 		44DFB3A7288704900023878C /* RxBlocking.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB390288704640023878C /* RxBlocking.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3A8288704900023878C /* Differentiator.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB391288704690023878C /* Differentiator.xcframework */; };
 		44DFB3A9288704900023878C /* Differentiator.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB391288704690023878C /* Differentiator.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3AA288704900023878C /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3922887046D0023878C /* Realm.xcframework */; };
-		44DFB3AB288704900023878C /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3922887046D0023878C /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3AC288704900023878C /* GSKStretchyHeaderView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB393288704710023878C /* GSKStretchyHeaderView.xcframework */; };
 		44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB393288704710023878C /* GSKStretchyHeaderView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3AE288704900023878C /* AMPopTip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB394288704750023878C /* AMPopTip.xcframework */; };
@@ -417,8 +413,6 @@
 		44DFB3B5288704910023878C /* RxRelay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB397288704820023878C /* RxRelay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3B6288704910023878C /* SQLite.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB398288704860023878C /* SQLite.xcframework */; };
 		44DFB3B7288704910023878C /* SQLite.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB398288704860023878C /* SQLite.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3B8288704910023878C /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3992887048A0023878C /* RealmSwift.xcframework */; };
-		44DFB3B9288704920023878C /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB3992887048A0023878C /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44EDA53E28FE232400BEB99A /* libjami.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EDA53D28FE22FD00BEB99A /* libjami.a */; };
 		44EDA53F28FE234500BEB99A /* libjami.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EDA53D28FE22FD00BEB99A /* libjami.a */; };
 		5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
@@ -475,8 +469,6 @@
 		BB06BD8129D491F80064F0FC /* CustomAnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06BD8029D491F80064F0FC /* CustomAnnotationModel.swift */; };
 		BB06BD8329D492AA0064F0FC /* LocationSharingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */; };
 		BB06BD8529D4C1210064F0FC /* DurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06BD8429D4C1210064F0FC /* DurationPicker.swift */; };
-		BB06BD8129D491F80064F0FC /* CustomAnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06BD8029D491F80064F0FC /* CustomAnnotationModel.swift */; };
-		BB06BD8329D492AA0064F0FC /* LocationSharingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */; };
 		BB1E8C7329159DFC005AE1D6 /* MembersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C6E29159DF6005AE1D6 /* MembersList.swift */; };
 		BB1E8C7529159DFC005AE1D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */; };
 		BB1E8C7729159E1F005AE1D6 /* SwarmInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7629159E1F005AE1D6 /* SwarmInfoViewController.swift */; };
@@ -540,15 +532,12 @@
 				44DFB3B5288704910023878C /* RxRelay.xcframework in Embed Frameworks */,
 				44DFB39D2887048F0023878C /* RxSwift.xcframework in Embed Frameworks */,
 				44DFB3A9288704900023878C /* Differentiator.xcframework in Embed Frameworks */,
-				44DFB3A12887048F0023878C /* RxRealm.xcframework in Embed Frameworks */,
-				44DFB3B9288704920023878C /* RealmSwift.xcframework in Embed Frameworks */,
 				44DFB3B3288704910023878C /* RxCocoa.xcframework in Embed Frameworks */,
 				44DFB39F2887048F0023878C /* SwiftyBeaver.xcframework in Embed Frameworks */,
 				44DFB3B1288704910023878C /* Reusable.xcframework in Embed Frameworks */,
 				44DFB3B7288704910023878C /* SQLite.xcframework in Embed Frameworks */,
 				44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */,
 				44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */,
-				44DFB3AB288704900023878C /* Realm.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1109,8 +1098,6 @@
 		BB06BD8029D491F80064F0FC /* CustomAnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationModel.swift; sourceTree = "<group>"; };
 		BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingVM.swift; sourceTree = "<group>"; };
 		BB06BD8429D4C1210064F0FC /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
-		BB06BD8029D491F80064F0FC /* CustomAnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationModel.swift; sourceTree = "<group>"; };
-		BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingVM.swift; sourceTree = "<group>"; };
 		BB1E8C6E29159DF6005AE1D6 /* MembersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersList.swift; sourceTree = "<group>"; };
 		BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BB1E8C7629159E1F005AE1D6 /* SwarmInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoViewController.swift; sourceTree = "<group>"; };
@@ -1131,7 +1118,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44DFB3A02887048F0023878C /* RxRealm.xcframework in Frameworks */,
 				269DA05E28D0D366007D51D6 /* libhogweed.a in Frameworks */,
 				649AD3C324B4CFC700A0236D /* libsqlite3.tbd in Frameworks */,
 				269DA06A28D0D366007D51D6 /* libpjmedia.a in Frameworks */,
@@ -1162,7 +1148,6 @@
 				269DA06F28D0D366007D51D6 /* libpjsua.a in Frameworks */,
 				269DA07328D0D366007D51D6 /* libspeex.a in Frameworks */,
 				269DA06B28D0D366007D51D6 /* libpjnath.a in Frameworks */,
-				44DFB3B8288704910023878C /* RealmSwift.xcframework in Frameworks */,
 				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
 				269DA06728D0D366007D51D6 /* libpjmedia-audiodev.a in Frameworks */,
 				269DA06828D0D366007D51D6 /* libpjmedia-codec.a in Frameworks */,
@@ -1183,7 +1168,6 @@
 				44DFB39C2887048F0023878C /* RxSwift.xcframework in Frameworks */,
 				269DA07628D0D366007D51D6 /* libssl.a in Frameworks */,
 				44DFB3A8288704900023878C /* Differentiator.xcframework in Frameworks */,
-				44DFB3AA288704900023878C /* Realm.xcframework in Frameworks */,
 				269DA07C28D0D367007D51D6 /* libx264.a in Frameworks */,
 				269DA07928D0D367007D51D6 /* libtls.a in Frameworks */,
 				269DA05F28D0D366007D51D6 /* libhttp_parser.a in Frameworks */,
@@ -2500,9 +2484,7 @@
 				TargetAttributes = {
 					043999F21D1C2D9D00E99CD9 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = MSHYCBXK85;
 						LastSwiftMigration = 0910;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3239,8 +3221,7 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Ring/Debug.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3259,6 +3240,7 @@
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MARKETING_VERSION = 3.46;
 				OTHER_CFLAGS = "";
+				OTHER_CODE_SIGN_FLAGS = "--generate-entitlement-der";
 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3620,12 +3602,11 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Ring/Debug.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MSHYCBXK85;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;

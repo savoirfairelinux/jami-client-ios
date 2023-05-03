@@ -18,10 +18,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-import RealmSwift
-import RxRealm
-
-class DeviceModel: Object {
+class DeviceModel {
 
     @objc dynamic var deviceId = ""
     @objc dynamic var deviceName: String?
