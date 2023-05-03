@@ -202,10 +202,6 @@ class ConversationViewModel: Stateable, ViewModel {
                         self.userName.accept(filterParicipants.first?.jamiId ?? "")
                         self.subscribeUserServiceLookupStatus()
                         self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
-                    } else if self.userName.value.isEmpty {
-                        self.userName.accept(filterParicipants.first?.jamiId ?? "")
-                        self.subscribeUserServiceLookupStatus()
-                        self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
                     }
                 } else {
                     self.userName.accept(filterParicipants.first?.jamiId ?? "")
