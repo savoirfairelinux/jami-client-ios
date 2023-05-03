@@ -458,7 +458,7 @@ class CallViewModel: Stateable, ViewModel {
                 guard let self = self else { return }
                 self.audioService.startAudio()
                 // for outgoing calls ve create audio sesion with default parameters.
-                // for incoming call audio session is created, ve need to override it
+                // for incoming call audio session is created, we need to override it
                 let overrideOutput = self.call?.callTypeValue == CallType.incoming.rawValue
                 self.audioService.setDefaultOutput(toSpeaker: !self.isAudioOnly,
                                                    override: overrideOutput)

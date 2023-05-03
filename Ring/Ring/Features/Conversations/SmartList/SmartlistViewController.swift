@@ -598,8 +598,20 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func confugureAccountPicker() {
+        //        accountPickerTextView.frame = CGRect(x: accountPickerTextView.frame.origin.x,
+        //                                             y: accountPickerTextView.frame.origin.y,
+        //                                             width: UIScreen.main.bounds.width,
+        //                                             height: accountPickerTextView.frame.size.height)
         view.addSubview(accountPickerTextView)
+        print("RRRR", accountPickerTextView.bounds.width)
+        print("RRRR", UIScreen.main.bounds.width)
+        //        accounPicker.frame =
+        accounPicker.frame = CGRect(x: accounPicker.frame.origin.x,
+                                    y: accounPicker.frame.origin.y,
+                                    width: 500,
+                                    height: accounPicker.frame.size.height)
         accountPickerTextView.inputView = accounPicker
+        print("RRRR", accounPicker.bounds.width)
         accounPicker.backgroundColor = .jamiBackgroundSecondaryColor
         self.viewModel.accounts
             .observe(on: MainScheduler.instance)
@@ -806,6 +818,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             return
         }
         accountPickerTextView.becomeFirstResponder()
+        
+        
+
+        print("RRRRSSS", accountPickerTextView.bounds.width)
+        print("RRRRSSS", UIScreen.main.bounds.width)
+        print("RRRRSSS", accounPicker.bounds.width)
         self.view.addGestureRecognizer(accountsDismissTapRecognizer)
     }
 
