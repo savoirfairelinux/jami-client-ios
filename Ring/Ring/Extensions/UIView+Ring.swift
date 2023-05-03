@@ -145,6 +145,10 @@ extension UIView {
         }
     }
 
+    var isRightToLeft: Bool {
+        return self.effectiveUserInterfaceLayoutDirection == .rightToLeft
+    }
+
     func applyGradient(with colours: [UIColor], locations: [NSNumber]? = nil) {
         let gradient = CAGradientLayer()
         gradient.frame = self.bounds

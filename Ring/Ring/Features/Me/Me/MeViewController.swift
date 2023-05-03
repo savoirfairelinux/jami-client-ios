@@ -698,13 +698,13 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         let cell = DisposableCell(style: .value1, reuseIdentifier: accountStateCell)
         cell.backgroundColor = UIColor.jamiBackgroundColor
         cell.selectionStyle = .none
-        let text = UITextField()
-        text.tag = self.sipCredentialsTAG
-        text.font = UIFont.preferredFont(forTextStyle: .callout)
-        text.returnKeyType = .done
-        text.text = value
-        text.sizeToFit()
-        text.rx.controlEvent(.editingDidEndOnExit)
+        let textfield = UITextField()
+        textfield.tag = self.sipCredentialsTAG
+        textfield.font = UIFont.preferredFont(forTextStyle: .callout)
+        textfield.returnKeyType = .done
+        textfield.text = value
+        textfield.sizeToFit()
+        textfield.rx.controlEvent(.editingDidEndOnExit)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.updateTurnSettings()
@@ -720,22 +720,22 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: cell.disposeBag)
         switch cellType {
         case .turnServer:
-            text.rx.text.orEmpty.distinctUntilChanged()
+            textfield.rx.text.orEmpty.distinctUntilChanged()
                 .bind(to: self.viewModel.turnServer)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.AccountPage.turnServer
         case .turnUsername:
-            text.rx.text.orEmpty.distinctUntilChanged()
+            textfield.rx.text.orEmpty.distinctUntilChanged()
                 .bind(to: self.viewModel.turnUsername)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.AccountPage.turnUsername
         case .turnPassword:
-            text.rx.text.orEmpty.distinctUntilChanged()
+            textfield.rx.text.orEmpty.distinctUntilChanged()
                 .bind(to: self.viewModel.turnPassword)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.AccountPage.turnPassword
         case .turnRealm:
-            text.rx.text.orEmpty.distinctUntilChanged()
+            textfield.rx.text.orEmpty.distinctUntilChanged()
                 .bind(to: self.viewModel.turnRealm)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.AccountPage.turnRealm
@@ -746,12 +746,19 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.sizeToFit()
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         cell.detailTextLabel?.textColor = UIColor.clear
+
         var frame = CGRect(x: self.connectivityMargin, y: 0,
                            width: self.view.frame.width - self.connectivityMargin,
                            height: cell.frame.height)
-        if self.view.frame.width - self.connectivityMargin < text.frame.size.width {
+        if cell.isRightToLeft {
+            frame = CGRect(x: 0, y: 0,
+                           width: self.view.frame.width - self.connectivityMargin - 10,
+                           height: cell.frame.height)
+        }
+
+        if self.view.frame.width - self.connectivityMargin < textfield.frame.size.width {
             let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
-            let size = text.frame.size
+            let size = textfield.frame.size
             frame.origin = origin
             frame.size = size
             cell.detailTextLabel?.text = value
@@ -759,9 +766,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             cell.detailTextLabel?.text = ""
         }
         cell.detailTextLabel?.sizeToFit()
-        text.frame = frame
-        cell.contentView.addSubview(text)
+        textfield.frame = frame
+        cell.contentView.addSubview(textfield)
         cell.sizeToFit()
+
         return cell
     }
 
