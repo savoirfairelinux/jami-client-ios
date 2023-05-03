@@ -61,13 +61,21 @@ class CustomSearchBar: UISearchBar {
     }
     init() {
         super.init(frame: CGRect.zero)
-        buttonView = UIView(frame: CGRect(x: self.frame.size.width - buttonSize, y: 0, width: buttonSize, height: buttonSize))
+        if isRightToLeft {
+            buttonView = UIView(frame: CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize))
+        } else {
+            buttonView = UIView(frame: CGRect(x: self.frame.size.width - buttonSize, y: 0, width: buttonSize, height: buttonSize))
+        }
     }
     func sizeChanged(to size: CGFloat, totalItems: CGFloat) {
         totalItem = totalItems
         var buttonFrame = buttonView.frame
         let margin = rightMargin
-        buttonFrame.origin.x = size - (buttonSize * totalItems) + margin
+        if isRightToLeft {
+            buttonFrame.origin.x = margin
+        } else {
+            buttonFrame.origin.x = size - (buttonSize * totalItems) + margin
+        }
         buttonView.frame = CGRect(x: buttonFrame.origin.x, y: buttonFrame.origin.y, width: (buttonSize * totalItems), height: buttonSize)
         if margin == 0 {
             searchFieldTrailing.constant = rightButton.isHidden ? currentTrailingEditing : (currentTrailing * totalItems)
