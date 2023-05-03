@@ -41,7 +41,6 @@ class AccountItemView: UIView {
     func commonInit() {
         Bundle.main.loadNibNamed("AccountItemView", owner: self, options: nil)
         addSubview(containerView)
-        containerView.frame = self.bounds
         needMigrateLabel.text = L10n.Account.needMigration
         nameLabel.textColor = UIColor.jamiLabelColor
     }
