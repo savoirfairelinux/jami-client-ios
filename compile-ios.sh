@@ -62,48 +62,48 @@ if [ ! -d "$DAEMON_DIR" ]; then
   exit 1
 fi
 
-if [ ! `which gas-preprocessor.pl` ]
+if [ ! $(which gas-preprocessor.pl) ]
 then
   echo 'gas-preprocessor.pl not found. Trying to install...'
   mkdir -p "$DAEMON_DIR/extras/tools/build/bin/"
   (curl -L https://github.com/libav/gas-preprocessor/raw/master/gas-preprocessor.pl \
     -o "$DAEMON_DIR/extras/tools/build/bin/gas-preprocessor.pl" \
     && chmod +x "$DAEMON_DIR/extras/tools/build/bin/gas-preprocessor.pl")
-  export PATH="$DAEMON_DIR"/extras/tools/build/bin:$PATH
+  export PATH="$DAEMON_DIR/extras/tools/build/bin:$PATH"
 fi
 
 if [ -z "$NPROC"  ]; then
-  NPROC=`sysctl -n hw.ncpu || echo -n 1`
+  NPROC=$(sysctl -n hw.ncpu || echo -n 1)
 fi
 
 export IOS_TARGET_PLATFORM
 echo "Building for $IOS_TARGET_PLATFORM for $ARCHS"
 
-cd $DAEMON_DIR
+cd "$DAEMON_DIR"
 
 for ARCH in "${ARCHS[@]}"
 do
-  mkdir -p contrib/native-$ARCH
-  cd contrib/native-$ARCH
+  mkdir -p "contrib/native-$ARCH"
+  cd "contrib/native-$ARCH"
 
   if [ "$ARCH" = "arm64" ]
   then
     HOST=aarch64-apple-darwin_ios
     IOS_TARGET_PLATFORM="iPhoneOS"
   else
-    HOST=$ARCH-apple-darwin_ios
+    HOST=$"ARCH"-apple-darwin_ios
     IOS_TARGET_PLATFORM="iPhoneSimulator"
   fi
   export IOS_TARGET_PLATFORM
 
-  SDKROOT=`xcode-select -print-path`/Platforms/${IOS_TARGET_PLATFORM}.platform/Developer/SDKs/${IOS_TARGET_PLATFORM}${SDK_VERSION}.sdk
+  SDKROOT=$(xcode-select -print-path)/Platforms/${IOS_TARGET_PLATFORM}.platform/Developer/SDKs/${IOS_TARGET_PLATFORM}${SDK_VERSION}.sdk
 
   host=$(sw_vers -productVersion)
-  if [ "12.0" \> $host ]
+  if [ "12.0" \> "$host" ]
   then
-      SDK="`echo "print '${IOS_TARGET_PLATFORM}'.lower()" | python`"
+      SDK="$(echo "print '${IOS_TARGET_PLATFORM}'.lower()" | python)"
   else
-      SDK="`echo "print('${IOS_TARGET_PLATFORM}'.lower())" | python3`"
+      SDK="$(echo "print('${IOS_TARGET_PLATFORM}'.lower())" | python3)"
   fi
 
   CC="xcrun -sdk $SDK clang"
@@ -113,7 +113,7 @@ do
 
   echo "Building contrib"
   make fetch
-  make -j$NPROC || exit 1
+  make -j"$NPROC" || exit 1
 
   cd ../..
   echo "Building daemon"
@@ -136,7 +136,7 @@ do
 
   ./autogen.sh || exit 1
   mkdir -p "build-ios-$ARCH"
-  cd build-ios-$ARCH
+  cd "build-ios-$ARCH"
 
   JAMI_CONF="--host=$HOST \
              --without-dbus \
@@ -153,7 +153,7 @@ do
     JAMI_CONF+=" --enable-debug"
   fi
 
-  $DAEMON_DIR/configure $JAMI_CONF \
+  "$DAEMON_DIR"/configure $JAMI_CONF \
                         CC="$CC $CFLAGS" \
                         CXX="$CXX $CXXFLAGS" \
                         OBJCXX="$CXX $CXXFLAGS" \
@@ -163,36 +163,36 @@ do
                         LDFLAGS="$LDFLAGS" || exit 1
 
   # We need to copy this file or else it's just an empty file
-  rsync -a $DAEMON_DIR/src/buildinfo.cpp ./src/buildinfo.cpp
+  rsync -a "$DAEMON_DIR/src/buildinfo.cpp" ./src/buildinfo.cpp
 
-  make -j$NPROC || exit 1
+  make -j"$NPROC" || exit 1
   make install || exit 1
 
-  rsync -ar $DAEMON_DIR/contrib/$HOST/lib/*.a $IOS_TOP_DIR/DEPS/$ARCH/lib/
+  rsync -ar "$DAEMON_DIR/contrib/$HOST/lib/*.a" "$IOS_TOP_DIR/DEPS/$ARCH/lib/"
   # copy headers for extension
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/opendht $IOS_TOP_DIR/DEPS/$ARCH/include/
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/msgpack.hpp $IOS_TOP_DIR/DEPS/$ARCH/include/
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/gnutls $IOS_TOP_DIR/DEPS/$ARCH/include/
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/json $IOS_TOP_DIR/DEPS/$ARCH/include/
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/msgpack $IOS_TOP_DIR/DEPS/$ARCH/include/
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/yaml-cpp $IOS_TOP_DIR/DEPS/$ARCH/include/
-  rsync -ar $DAEMON_DIR/contrib/$HOST/include/libavutil $IOS_TOP_DIR/DEPS/$ARCH/include/
-  cd $IOS_TOP_DIR/DEPS/$ARCH/lib/
+  rsync -ar "$DAEMON_DIR/contrib/$HOST/include/opendht" "$IOS_TOP_DIR/DEPS/$ARCH/include/"
+  rsync -ar $DAEMON_DIR/contrib/$HOST/include/msgpack.hpp "$IOS_TOP_DIR/DEPS/$ARCH/include/"
+  rsync -ar $DAEMON_DIR/contrib/$HOST/include/gnutls "$IOS_TOP_DIR/DEPS/$ARCH/include/"
+  rsync -ar $DAEMON_DIR/contrib/$HOST/include/json "$IOS_TOP_DIR/DEPS/$ARCH/include/"
+  rsync -ar $DAEMON_DIR/contrib/$HOST/include/msgpack "$IOS_TOP_DIR/DEPS/$ARCH/include/"
+  rsync -ar $DAEMON_DIR/contrib/$HOST/include/yaml-cpp "$IOS_TOP_DIR/DEPS/$ARCH/include/"
+  rsync -ar $DAEMON_DIR/contrib/$HOST/include/libavutil "$IOS_TOP_DIR/DEPS/$ARCH/include/"
+  cd "$IOS_TOP_DIR/DEPS/$ARCH/lib/"
   for i in *.a ; do mv "$i" "${i/-$HOST.a/.a}" ; done
 
-  cd $DAEMON_DIR
+  cd "$DAEMON_DIR"
 done
 
-cd $IOS_TOP_DIR
+cd "$IOS_TOP_DIR"
 
-FAT_DIR=$IOS_TOP_DIR/fat
-mkdir -p $FAT_DIR
+FAT_DIR="$IOS_TOP_DIR/fat"
+mkdir -p "$FAT_DIR"
 
 if ((${#ARCHS[@]} == "2"))
 then
-  mkdir -p $FAT_DIR/lib
+  mkdir -p "$FAT_DIR/lib"
   echo "Making fat lib for ${ARCHS[0]} and ${ARCHS[1]}"
-  LIBFILES=$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/*.a
+  LIBFILES="$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/"*.a
   for f in $LIBFILES
   do
     libFile=${f##*/}
@@ -204,7 +204,7 @@ then
   done
 else
   echo "No need for fat lib"
-  rsync -ar --delete $IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/*.a $FAT_DIR/lib
+  rsync -ar --delete "$IOS_TOP_DIR/DEPS/${ARCHS[0]}/lib/"*.a "$FAT_DIR/lib"
 fi
 
-rsync -ar --delete $IOS_TOP_DIR/DEPS/${ARCHS[0]}/include/* $FAT_DIR/include
+rsync -ar --delete "$IOS_TOP_DIR/DEPS/${ARCHS[0]}/include/"* "$FAT_DIR/include"
