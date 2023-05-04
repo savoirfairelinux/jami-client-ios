@@ -19,7 +19,6 @@
  */
 
 import XCTest
-import RealmSwift
 @testable import Ring
 
 /**

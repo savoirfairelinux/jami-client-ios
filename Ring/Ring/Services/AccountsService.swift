@@ -22,7 +22,6 @@
 
 import RxCocoa
 import RxSwift
-import RealmSwift
 import SwiftyBeaver
 
 enum LinkNewDeviceError: Error {
