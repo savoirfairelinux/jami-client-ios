@@ -48,7 +48,7 @@
 "swarm.ignoreSwarm" = "Ignore the swarm";
 "swarm.leaveConversation" = "Leave the conversation";
 "swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.typeOfSwarm" = "Тип роя";
 "swarm.identifier" = "Идентификатор";
 "swarm.about" = "О продукте";
 "swarm.members" = "Участники";
@@ -58,7 +58,7 @@
 "swarm.invitesOnly" = "Частный рой";
 "swarm.publicChat" = "Public swarm";
 "swarm.others" = "Others";
-"swarm.member" = "Member";
+"swarm.member" = "Участник";
 "swarm.invited" = "Invited";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Banned";
@@ -365,7 +365,7 @@
 
 //Generated Message
 "generatedMessage.contactAdded" = "You received inviation";
-"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.swarmCreated" = "Рой создан";
 "generatedMessage.invitationReceived" = "was invited to join";
 "generatedMessage.invitationAccepted" = "joined the conversation";
 "generatedMessage.youJoined" = "You joined the conversation";

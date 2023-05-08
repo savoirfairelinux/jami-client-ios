@@ -41,15 +41,15 @@
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
+"swarmcreation.createTheSwarm" = "إنشاء السحابة";
+"swarmcreation.addADescription" = "إضافة وصف";
 "swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Ignore the swarm";
 "swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
-"swarm.identifier" = "Identifier";
+"swarm.chooseColor" = "اختر لون";
+"swarm.typeOfSwarm" = "نوع السحابة";
+"swarm.identifier" = "المعرف";
 "swarm.about" = "عن RING";
 "swarm.members" = "الأعضاء";
 "swarm.addDescription" = "Add Description";
@@ -58,15 +58,15 @@
 "swarm.invitesOnly" = "سرب خاص";
 "swarm.publicChat" = "Public swarm";
 "swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
+"swarm.member" = "عضو";
+"swarm.invited" = "مدعوة";
+"swarm.admin" = "المدير";
+"swarm.banned" = "ممنوع";
 "swarm.unknown" = "Unkown";
 "swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
 "swarm.addMember" = "Add Member";
 "swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.Leave" = "إرحل";
 // Smartlist
 "smartlist.yesterday" = "البارحة";
 "smartlist.results" = "Public Directory";
@@ -94,7 +94,7 @@
 "conversation.errorSavingImage" = "Failed to save image to galery";
 "conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
+"conversation.requestMessage" = "مرحباً، هل تودين الانضمام إلى المحادثة؟";
 "conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
 "conversation.sendRequestTitle" = "Send Contact Request";
@@ -111,7 +111,7 @@
 "welcome.text" = "چامى هو منصة اتصال حرة وعالمية تحفظ خصوصية المستخدمين وحرياتهم";
 "welcome.linkDevice" = "اربط هذا الجهاز مع حساب";
 "welcome.createAccount" = "كوّن حساب جامي";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "التواصل مع خادم JAMS";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "تخطي";
@@ -127,7 +127,7 @@
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.enterNewUsernamePlaceholder" = "اسم المستخدم";
 "createAccount.newPasswordPlaceholder" = "كلمة السر";
-"createAccount.repeatPasswordPlaceholder" = "Confirm password";
+"createAccount.repeatPasswordPlaceholder" = "تأكيد كلمة المرور";
 "createAccount.passwordCharactersNumberError" = "6 محارف على الأقل";
 "createAccount.passwordNotMatchingError" = "كلمات المرور غير متطابقة";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
@@ -136,7 +136,7 @@
 "createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "جاري التحميل";
 "createAccount.waitCreateAccountTitle" = "في طور إضافة حساب";
-"createAccount.RegisterAUsername" = "Register a username";
+"createAccount.RegisterAUsername" = "تسجيل اسم المستخدم";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "الإشعارات";
@@ -206,7 +206,7 @@
 //Actions
 "actions.deleteAction" = "إحذف";
 "actions.cancelAction" = "ألغِ";
-"actions.clearAction" = "Clear";
+"actions.clearAction" = "واضح";
 "actions.backAction" = "السابق";
 "actions.doneAction" = "منجز";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
@@ -247,7 +247,7 @@
 "accountPage.enableProxy" = "Enable Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
 "accountPage.saveProxyAddress" = "سجل";
-"accountPage.proxyPaceholder" = "Proxy address";
+"accountPage.proxyPaceholder" = "عنوان النظام الأساسي";
 "accountPage.enableNotifications" = "فعل الإخطارات";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
@@ -259,7 +259,7 @@
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
 "accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
+"accountPage.deviceRevocationWrongPassword" = "كلمة مرور خاطئة";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.linkDeviceTitle" = "اربط جهازاً آخر";
@@ -270,7 +270,7 @@
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "Register a username";
+"accountPage.registerNameTitle" = "تسجيل اسم المستخدم";
 "accountPage.passwordPlaceholder" = "أدخل كلمة مرور الحساب";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
@@ -280,8 +280,8 @@
 "accountPage.createPassword" = "إنشاء كلمة مرور";
 "accountPage.changePassword" = "تغيير كلمة المرور";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
+"accountPage.newPasswordPlaceholder" = "إدخال كلمة مرور جديدة";
+"accountPage.newPasswordConfirmPlaceholder" = "تأكيد كلمة المرور الجديدة";
 "accountPage.changePasswordError" = "Password incorrect";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
@@ -365,7 +365,7 @@
 
 //Generated Message
 "generatedMessage.contactAdded" = "You received inviation";
-"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.swarmCreated" = "حشرة خلق";
 "generatedMessage.invitationReceived" = "was invited to join";
 "generatedMessage.invitationAccepted" = "joined the conversation";
 "generatedMessage.youJoined" = "You joined the conversation";
@@ -384,17 +384,17 @@
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 "generalSettings.fileTransfer" = "نقل ملف";
 "generalSettings.locationSharing" = "Location Sharing";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
+"generalSettings.automaticAcceptIncomingFiles" = "تقبل الملفات الموصلة تلقائيًا";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.limitLocationSharingDuration" = "الحد من مدة مشاركة الموقع";
+"generalSettings.locationSharingDuration" = "مدة حصة الموقف";
 
 
 //Log View
-"logView.title" = "Diagnostics";
-"logView.description" = "Open diagnostic log settings";
-"logView.startLogging" = "Start Logging";
+"logView.title" = "التشخيص";
+"logView.description" = "إعدادات سجل التشخيص المفتوحة";
+"logView.startLogging" = "ابدأ في التسجيل";
 "logView.stopLogging" = "Stop Logging";
 "logView.saveError" = "Failed to save file";
 "logView.shareError" = "Failed to share file";

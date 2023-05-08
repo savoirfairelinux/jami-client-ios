@@ -383,7 +383,7 @@
 "generalSettings.videoSettings" = "Nastavitve videa";
 "generalSettings.videoAcceleration" = "Vklopi strojno pospeševanje videa";
 "generalSettings.fileTransfer" = "Prenos datoteke";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Deljenje lokacije";
 "generalSettings.automaticAcceptIncomingFiles" = "Samodejno sprejmi dohodne datoteke";
 "generalSettings.acceptTransferLimit" = "Sprejmi omejitev prenosa";
 "generalSettings.acceptTransferLimitDescription" = "(v MB, 0 = neomejeno)";

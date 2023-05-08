@@ -20,7 +20,7 @@
 
 // Global
 "global.homeTabBarTitle" = "Συνομιλίες";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Ρυθμίσεις λογαριασμού";
 "global.ok" = "Εντάξει";
 "global.close" = "Κλείσιμο";
 "global.share" = "Κοινοποίηση";
@@ -37,7 +37,7 @@
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.search" = "Γίνεται αναζήτηση...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact...";
@@ -58,7 +58,7 @@
 "swarm.invitesOnly" = "Private swarm";
 "swarm.publicChat" = "Public swarm";
 "swarm.others" = "Others";
-"swarm.member" = "Member";
+"swarm.member" = "Μέλος";
 "swarm.invited" = "Invited";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Banned";
@@ -83,7 +83,7 @@
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
 "smartlist.invitations" = "Προσκλήσεις";
-"smartlist.accountSettings" = "Account Settings";
+"smartlist.accountSettings" = "Ρυθμίσεις λογαριασμού";
 "smartlist.advancedSettings" = "Advanced Settings";
 "smartlist.aboutJami" = "Σχετικά με το Jami";
 
@@ -177,7 +177,7 @@
 "alerts.profileCancelPhoto" = "Ακύρωση";
 "alerts.accountLinkedTitle" = "Σύνδεση λογαριασμού";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
+"alerts.dbFailedMessage" = "Παρακαλώ κλείστε την εφαρμογή και προσπαθήστε να την ανοίξετε ξανά";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -222,7 +222,7 @@
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
-"calls.searching" = "Searching…";
+"calls.searching" = "Γίνεται αναζήτηση...";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -280,8 +280,8 @@
 "accountPage.createPassword" = "Create password";
 "accountPage.changePassword" = "Αλλαγή κωδικού";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
+"accountPage.newPasswordPlaceholder" = "Εισαγωγή νέου κωδικού";
+"accountPage.newPasswordConfirmPlaceholder" = "Επιβεβαίωση νέου κωδικού";
 "accountPage.changePasswordError" = "Password incorrect";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
