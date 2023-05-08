@@ -106,11 +106,6 @@ static id <RequestsAdapterDelegate> _delegate;
     return trustRequests;
 }
 
-- (NSArray<NSDictionary<NSString*,NSString*>*>*)contactsWithAccountId:(NSString*)accountId {
-    std::vector<std::map<std::string, std::string>> contacts = getContacts(std::string([accountId UTF8String]));
-    return [Utils vectorOfMapsToArray:contacts];
-}
-
 - (BOOL)acceptTrustRequestFromContact:(NSString*)ringId withAccountId:(NSString*)accountId {
     return acceptTrustRequest(std::string([accountId UTF8String]), std::string([ringId UTF8String]));
 }

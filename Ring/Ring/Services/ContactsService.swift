@@ -88,6 +88,10 @@ class ContactsService {
         }
     }
 
+    func getContactsInfo(withAccountId accountId: String) -> [[String: String]] {
+        return self.contactsAdapter.contacts(withAccountId: accountId)
+    }
+
     private func loadJamiContacts(withAccountId accountId: String) {
         // Load contacts from daemon
         let contactsDictionaries = self.contactsAdapter.contacts(withAccountId: accountId)

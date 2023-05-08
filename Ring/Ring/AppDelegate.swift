@@ -333,7 +333,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func reloadDataFor(account: AccountModel) {
-        self.requestsService.loadRequests(withAccount: account.id, accountURI: account.jamiId)
+        let contacts = self.contactsService.getContactsInfo(withAccountId: account.id)
+        self.requestsService.loadRequests(withAccount: account.id, accountURI: account.jamiId, contacts: contacts)
         self.conversationManager?
             .prepareConversationsForAccount(accountId: account.id, accountURI: account.jamiId)
         self.contactsService.loadContacts(withAccount: account)

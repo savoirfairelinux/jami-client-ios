@@ -25,10 +25,6 @@ import RxSwift
 import RxRelay
 import SwiftyBeaver
 
-enum ConversationNotifications: String {
-    case conversationReady
-}
-
 enum ConversationNotificationsKeys: String {
     case conversationId
     case accountId
@@ -277,7 +273,6 @@ class ConversationsService {
             var data = [String: Any]()
             data[ConversationNotificationsKeys.conversationId.rawValue] = conversationId
             data[ConversationNotificationsKeys.accountId.rawValue] = accountId
-            NotificationCenter.default.post(name: NSNotification.Name(ConversationNotifications.conversationReady.rawValue), object: nil, userInfo: data)
             self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 2)
             self.sortIfNeeded()
             self.conversationReady.accept(conversationId)

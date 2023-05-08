@@ -39,6 +39,5 @@
 - (BOOL)acceptTrustRequestFromContact:(NSString*)ringId withAccountId:(NSString*)accountId;
 - (BOOL)discardTrustRequestFromContact:(NSString*)ringId withAccountId:(NSString*)accountId;
 - (void)sendTrustRequestToContact:(NSString*)ringId payload:(NSData*)payload withAccountId:(NSString*)accountId;
-- (NSArray<NSDictionary<NSString*,NSString*>*>*)contactsWithAccountId:(NSString*)accountId;
 
 @end

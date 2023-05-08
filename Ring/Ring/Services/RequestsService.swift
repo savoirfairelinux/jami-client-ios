@@ -57,13 +57,6 @@ class RequestsService {
         self.requestsAdapter = requestsAdapter
         self.sharedResponseStream = responseStream.share()
         RequestsAdapter.delegate = self
-        /**
-         after accepting the request stays in synchronization until other contact became online and conversation synchronized.
-         When it happens conversationReady signal is emitted. And we could remove the request.
-         */
-        NotificationCenter.default.addObserver(self, selector: #selector(self.conversationReady(_:)),
-                                               name: NSNotification.Name(rawValue: ConversationNotifications.conversationReady.rawValue),
-                                               object: nil)
     }
 
     func updateConversationsRequests(withAccount accountId: String) {
@@ -82,67 +75,47 @@ class RequestsService {
         }
     }
 
-    /**
-     Called when application starts and when  account changed
-     */
-    func loadRequests(withAccount accountId: String, accountURI: String) {
+    func parseRequests(swarmRequestsDictionaries: [[String: String]], contactRequestsDictionaries: [[String: String]], contactsDictionaries: [[String: String]], withAccount accountId: String, accountURI: String) {
         self.requests.accept([])
         var currentRequests = self.requests.value
-        // Load conversation requests from daemon
-        let conversationRequestsDictionaries = self.requestsAdapter.getSwarmRequests(forAccount: accountId)
-        if let conversationRequests = conversationRequestsDictionaries?.map({ dictionary in
+        let conversationRequests = swarmRequestsDictionaries.map({ dictionary in
             return RequestModel(withDictionary: dictionary, accountId: accountId, type: .conversation)
-        }) {
-            currentRequests.append(contentsOf: conversationRequests)
-        }
-        // Load trust requests from daemon
-        let trustRequestsDictionaries = self.requestsAdapter.trustRequests(withAccountId: accountId)
-        if let contactRequests = trustRequestsDictionaries?.map({ dictionary in
+        })
+        currentRequests.append(contentsOf: conversationRequests)
+        let contactRequests = contactRequestsDictionaries.map({ dictionary in
             return RequestModel(withDictionary: dictionary, accountId: accountId, type: .contact)
-        }) {
-            var contactsId = [String]()
-            let contactsDictionaries = self.requestsAdapter.contacts(withAccountId: accountId)
-            if let contacts = contactsDictionaries?.map({ contactDict in
-                return ContactModel(withDictionary: contactDict)
-            }) {
-                for contact in contacts {
-                    contactsId.append(contact.hash)
-                }
+        })
+        var contactsId = [String]()
+        let contacts = contactsDictionaries.map({ contactDict in
+            return ContactModel(withDictionary: contactDict)
+        })
+        for contact in contacts {
+            contactsId.append(contact.hash)
+        }
+        for contactRequest in contactRequests where !contactRequest.conversationId.isEmpty {
+            // check if we have conversation request. If so we do not need contact request
+            if !currentRequests.filter({ $0.conversationId == contactRequest.conversationId && $0.accountId == contactRequest.accountId }).isEmpty {
+                continue
             }
-            for contactRequest in contactRequests where contactRequest.conversationId.isEmpty {
-                // check if we have conversation request. If so we do not need contact request
-                if !currentRequests.filter({ $0.conversationId == contactRequest.conversationId && $0.accountId == contactRequest.accountId }).isEmpty {
-                    continue
-                }
-                if !currentRequests.filter({ $0.participants == contactRequest.participants && $0.accountId == accountId && $0.participants.count == 1 }).isEmpty {
-                    continue
-                }
-                /// check if contact request already accepted
-                if contactsId.contains(contactRequest.participants.first?.jamiId ?? "") {
-                    return
-                }
-                currentRequests.append(contactRequest)
+            if !currentRequests.filter({ $0.participants == contactRequest.participants && $0.accountId == accountId && $0.participants.count == 1 }).isEmpty {
+                continue
             }
+            /// check if contact request already accepted
+            if contactsId.contains(contactRequest.participants.first?.jamiId ?? "") {
+                return
+            }
+            currentRequests.append(contactRequest)
         }
         self.requests.accept(currentRequests)
     }
 
-    // MARK: NotificationCenter action
-    @objc
-    private func conversationReady(_ notification: NSNotification) {
-        guard let conversationId = notification.userInfo?[ConversationNotificationsKeys.conversationId.rawValue] as? String else {
-            return
-        }
-        guard let accountId = notification.userInfo?[ConversationNotificationsKeys.accountId.rawValue] as? String else {
-            return
-        }
-        if let index = self.requests.value.firstIndex(where: { request in
-            request.accountId == accountId && request.conversationId == conversationId
-        }) {
-            var values = requests.value
-            _ = values.remove(at: index)
-            self.requests.accept(values)
-        }
+    /**
+     Called when application starts and when  account changed
+     */
+    func loadRequests(withAccount accountId: String, accountURI: String, contacts: [[String: String]]) {
+        guard let swarmRequests = self.requestsAdapter.getSwarmRequests(forAccount: accountId) else { return }
+        guard let contactRequests = self.requestsAdapter.trustRequests(withAccountId: accountId) else { return }
+        self.parseRequests(swarmRequestsDictionaries: swarmRequests, contactRequestsDictionaries: contactRequests, contactsDictionaries: contacts, withAccount: accountId, accountURI: accountURI)
     }
 
     func getRequest(withId conversationId: String, accountId: String) -> RequestModel? {
