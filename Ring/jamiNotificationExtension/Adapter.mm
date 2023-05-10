@@ -126,6 +126,15 @@ std::map<std::string, std::string> nameServers;
             }
         }));
 
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationCloned>(
+                                                                                          [weakDelegate = Adapter.delegate](const std::string& account_id) {
+                                                                                              id<AdapterDelegate> delegate = weakDelegate;
+                                                                                              if (delegate) {
+                                                                                                  NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+                                                                                                  [delegate conversationClonedWithAccountId:accountId];
+                                                                                              }
+                                                                                          }));
+
     confHandlers.insert(exportable_callback<ConversationSignal::ConversationRequestReceived>([weakDelegate = Adapter.delegate](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> metadata) {
         id<AdapterDelegate> delegate = weakDelegate;
         if (delegate) {
@@ -238,6 +247,10 @@ std::map<std::string, std::string> nameServers;
             // this value is not a PeerConnectionRequest
             // check if it a TrustRequest
             auto conversationRequest = unpacked.get().as<dht::TrustRequest>();
+            if (conversationRequest.confirm) {
+                // request confirmation. We need to wait for conversation to clone
+                return @{@"": @"application/clone"};
+            }
             if (!conversationRequest.conversationId.empty()) {
                 if (conversationRequest.service == "cx.ring") {
                     // return git message type to start daemon

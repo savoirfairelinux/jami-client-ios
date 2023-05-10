@@ -49,12 +49,14 @@ class AdapterService {
         case fileTransferDone
         case fileTransferInProgress
         case syncCompleted
+        case conversationCloned
         case invitation
     }
 
     enum PeerConnectionRequestType {
         case call(peerId: String, isVideo: Bool)
         case gitMessage
+        case clone
         case unknown
     }
 
@@ -109,6 +111,8 @@ class AdapterService {
             return PeerConnectionRequestType.call(peerId: peerId, isVideo: false)
         case "text/plain", "application/im-gitmessage-id":
             return PeerConnectionRequestType.gitMessage
+        case "application/clone":
+            return PeerConnectionRequestType.clone
         default:
             return .unknown
         }
@@ -180,6 +184,13 @@ extension AdapterService: AdapterDelegate {
             return
         }
         handler(.syncCompleted, EventData(accountId: accountId))
+    }
+
+    func conversationCloned(accountId: String) {
+        guard let handler = self.eventHandler else {
+            return
+        }
+        handler(.conversationCloned, EventData(accountId: accountId))
     }
 
     func receivedConversationRequest(accountId: String, conversationId: String, metadata: [String: String]) {

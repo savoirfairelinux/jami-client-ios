@@ -61,6 +61,7 @@ class NotificationService: UNNotificationServiceExtension {
     var numberOfFiles = 0 /// number of files need to be downloaded
     var numberOfMessages = 0 /// number of scheduled messages
     var syncCompleted = false
+    var convCloned = true
     private let tasksGroup = DispatchGroup()
     var accountId = ""
 
@@ -142,6 +143,9 @@ class NotificationService: UNNotificationServiceExtension {
                         return
                     case .gitMessage:
                         self.handleGitMessage()
+                    case .clone:
+                        self.convCloned = false
+                        self.handleGitMessage()
                     case .unknown:
                         break
                     }
@@ -195,6 +199,9 @@ class NotificationService: UNNotificationServiceExtension {
                                                   accountId: self.accountId,
                                                   conversationId: eventData.conversationId,
                                                   groupTitle: eventData.groupTitle)
+            case .conversationCloned:
+                self.convCloned = true
+                self.verifyTasksStatus()
             }
         }
     }
@@ -208,7 +215,7 @@ class NotificationService: UNNotificationServiceExtension {
         /// We could finish in two cases:
         /// 1. we did not start account we are not waiting for the signals from the daemon
         /// 2. conversation synchronization completed and all files downloaded
-        if !self.accountIsActive || (self.syncCompleted && self.numberOfFiles == 0 && self.numberOfMessages == 0) {
+        if !self.accountIsActive || (self.syncCompleted && self.numberOfFiles == 0 && self.numberOfMessages == 0 && self.convCloned) {
             self.tasksCompleted = true
             self.tasksGroup.leave()
         }
