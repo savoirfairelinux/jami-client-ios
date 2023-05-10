@@ -126,6 +126,15 @@ std::map<std::string, std::string> nameServers;
             }
         }));
 
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationCloned>(
+                                                                                          [weakDelegate = Adapter.delegate](const std::string& account_id) {
+                                                                                              id<AdapterDelegate> delegate = weakDelegate;
+                                                                                              if (delegate) {
+                                                                                                  NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
+                                                                                                  [delegate conversationSyncCompletedWithAccountId:accountId];
+                                                                                              }
+                                                                                          }));
+
     confHandlers.insert(exportable_callback<ConversationSignal::ConversationRequestReceived>([weakDelegate = Adapter.delegate](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> metadata) {
         id<AdapterDelegate> delegate = weakDelegate;
         if (delegate) {
