@@ -96,7 +96,6 @@ class ProfilesService: ProfilesAdapterDelegate {
         self.triggerProfileSignal(uri: uriString, createIfNotexists: false, accountId: accountId)
     }
 
-    // swiftlint:disable cyclomatic_complexity
     @objc
     private func messageReceived(_ notification: NSNotification) {
         guard let ringId = notification.userInfo?[ProfileNotificationsKeys.ringID.rawValue] as? String else {
@@ -111,34 +110,26 @@ class ProfilesService: ProfilesAdapterDelegate {
             return
         }
 
-        if let vCardKey = message.keys.filter({ $0.hasPrefix(self.ringVCardMIMEType) }).first {
+        if let vCardKey = message.keys.filter({ $0.hasPrefix(self.ringVCardMIMEType) }).first,
+           let decoded = vCardKey.removingPercentEncoding {
 
-            // Parse the key to get the number of parts and the current part number
-            let components = vCardKey.components(separatedBy: ",")
-
-            guard let partComponent = components.filter({ $0.hasPrefix("part=") }).first else {
+            guard let regex = try? NSRegularExpression(pattern: "x-ring/ring.profile.vcard;id=([A-z0-9]+),part=([0-9]+),of=([0-9]+)") else {
                 return
             }
+            let matches = regex.matches(in: decoded, range: NSRange(decoded.startIndex..., in: decoded))
+            guard let match = matches.first,
+                  let idRange = Range(match.range(at: 1), in: decoded),
+                  let partRange = Range(match.range(at: 2), in: decoded),
+                  let ofRange = Range(match.range(at: 3), in: decoded) else { return }
 
-            guard let ofComponent = components.filter({ $0.hasPrefix("of=") }).first else {
-                return
-            }
+            let idString = String(decoded[idRange])
+            let partString = String(decoded[partRange])
+            let ofString = String(decoded[ofRange])
 
-            guard let idComponent = components.filter({ $0.hasPrefix("x-ring/ring.profile.vcard;id=") }).first else {
-                return
-            }
+            guard let part = Int(partString),
+                  let of = Int(ofString),
+                  let id = Int(idString) else { return }
 
-            guard let part = Int(partComponent.components(separatedBy: "=")[1]) else {
-                return
-            }
-
-            guard let of = Int(ofComponent.components(separatedBy: "=")[1]) else {
-                return
-            }
-
-            guard let id = Int(idComponent.components(separatedBy: "=")[1]) else {
-                return
-            }
             var numberOfReceivedChunk = 1
             if var chunk = self.base64VCards[id] {
                 chunk.data[part] = message[vCardKey]
@@ -173,11 +164,6 @@ class ProfilesService: ProfilesAdapterDelegate {
             if let currentData = vCardChunks[currentPartNumber]?.data(using: String.Encoding.utf8) {
                 vCardData.append(currentData)
             }
-        }
-
-        if let datautf8 = String(data: vCardData, encoding: .utf8),
-           let dataUtf16 = datautf8.data(using: String.Encoding.utf16) {
-            vCardData = dataUtf16
         }
 
         // Create the vCard, save and db and emit a new event
