@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5aaabfc_725aa131",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-05-12T20:22:31Z",
+      "side": 1,
+      "message": "now it is not possible to start location sharing if contact already sharing location",
+      "revId": "ab164c75f16f8b1fd43b50ef596801954c2bb773",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01130fc7_9030300e",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/Cells/ConversationCell.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-05-12T20:22:31Z",
+      "side": 1,
+      "message": "it is not updated when location started/ stopped. The changes only reflected when table redrawn, for example when changing account.",
+      "revId": "ab164c75f16f8b1fd43b50ef596801954c2bb773",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65e390ab_1781a931",
+        "filename": "Ring/Ring/Services/LocationSharingService.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-05-12T20:22:31Z",
+      "side": 1,
+      "message": "is it used?",
+      "revId": "ab164c75f16f8b1fd43b50ef596801954c2bb773",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
