@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de79e81a_49d3159c",
+        "filename": "Ring/Cartfile.resolved",
+        "patchSetId": 9
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-05-12T20:57:22Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "43b4c952d9b6e1032064f22189657ec545b6d5aa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d1300ec_f9a703ee",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewController.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-05-12T20:57:22Z",
+      "side": 1,
+      "message": "do we need to add it second time? If so add the comment with explanation.",
+      "revId": "43b4c952d9b6e1032064f22189657ec545b6d5aa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3c83dbc_d7297689",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-05-12T20:57:22Z",
+      "side": 1,
+      "message": "use camel case for variable names.",
+      "revId": "43b4c952d9b6e1032064f22189657ec545b6d5aa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
