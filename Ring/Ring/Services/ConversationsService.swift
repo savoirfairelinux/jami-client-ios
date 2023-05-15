@@ -145,6 +145,12 @@ class ConversationsService {
         return []
     }
 
+    func updateConversations() {
+        self.conversations.value.forEach { conversation in
+            self.updateConversationMessages(conversationId: conversation.id)
+        }
+    }
+
     func updateConversationMessages(conversationId: String) {
         for conversation in self.conversations.value where conversation.id == conversationId {
             conversation.clearMessages()
