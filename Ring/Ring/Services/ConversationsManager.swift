@@ -116,6 +116,7 @@ class ConversationsManager {
                     // and Jami may not have up to date requests when entering foreground
                     if let currentAccount = self.accountsService.currentAccount {
                         self.requestService.updateConversationsRequests(withAccount: currentAccount.id)
+                        self.conversationService.updateConversations()
                     }
                 case .callProviderPreviewPendingCall:
                     self.accountsService.setAccountsActive(active: true)
