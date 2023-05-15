@@ -40,33 +40,33 @@
 "scan.search" = "در حال جستجو...";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
+"swarmcreation.searchBar" = "دنبال تماس...";
+"swarmcreation.createTheSwarm" = ". جمع را بساز";
 "swarmcreation.addADescription" = "توضیحی اضافه کنید";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "تو ميتوني به گروه بيشتر نفر اضافه کني";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
-"swarm.identifier" = "Identifier";
+"swarm.ignoreSwarm" = "به گروه توجه نکن";
+"swarm.leaveConversation" = "حرفش رو بذار";
+"swarm.chooseColor" = "رنگي را انتخاب کن";
+"swarm.typeOfSwarm" = "نوع سور";
+"swarm.identifier" = "شناسه";
 "swarm.about" = "درباره";
 "swarm.members" = "اعضا";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "توضیحات اضافه کنید";
 "swarm.oneToOne" = "Swarm خصوصی";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "فقط منتظم دعوت می کند";
 "swarm.invitesOnly" = "Swarm خصوصی";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.publicChat" = "سواد عمومی";
+"swarm.others" = "سایر";
+"swarm.member" = "عضو";
+"swarm.invited" = "دعوت شده";
+"swarm.admin" = "مدیر";
+"swarm.banned" = "ممنوع";
+"swarm.unknown" = "نامعلوم";
+"swarm.addMorePeople" = "تو ميتوني به اين دسته افراد بيشتر بيار";
+"swarm.addMember" = "عضو اضافه کنید";
+"swarm.confirmLeaveSwarm" = "مطمئنی می خوای از این سور خارج بشی؟";
+"swarm.Leave" = "از اينجا بريد";
 // Smartlist
 "smartlist.yesterday" = "دیروز";
 "smartlist.results" = "دایرکتوری عمومی";
@@ -92,14 +92,14 @@
 "conversation.explanationSendingLocationTo" = "در حال حاضر مکان خود را به اشتراک می‌گذارید";
 "conversation.explanationReceivingLocationFrom" = "در حال حاضر مکان زنده را دریافت می‌کنید از";
 "conversation.errorSavingImage" = "ذخیره تصویر در گالری انجام نشد";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%@\ به شما درخواست مکالمه ای فرستاد";
+"conversation.incomingRequest" = "بهتون درخواست مکالمه رو فرستادم";
 "conversation.requestMessage" = "درود،\nمی‌خواهید به گفت‌وگو بپیوندید؟";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "\%@\ در لیست تماس شما نیست.";
 "conversation.sendRequest" = "برای او درخواست ارتباط بفرستید تا بتواند با هم تبادل کنید";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "درخواست تماس ارسال کنید";
 "conversation.synchronizationTitle" = "شما درخواست مکالمه را پذیرفته‌اید.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "ما منتظر اتصال هستیم تا مکالمه را همبستگی کنیم.";
 
 //Invitations
 "invitations.noInvitations" = "بدون دعوت‌نامه";
@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "اتصال خودکار در شبکه محلی";
 "accountPage.autoRegistration" = "ثبت‌نام خودکار پس از انقضا";
 "accountPage.connectivityHeader" = "اتصال";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "فعال کردن TURN";
 "accountPage.turnServer" = "نشانی TURN";
 "accountPage.turnUsername" = "نام کاربری TURN";
 "accountPage.turnPassword" = "گذرواژه TURN";
@@ -364,40 +364,40 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
-"generatedMessage.swarmCreated" = "Swarm created";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.contactAdded" = "تو ازت درخواست درخواست گرفتي";
+"generatedMessage.swarmCreated" = "سوق ایجاد شده";
+"generatedMessage.invitationReceived" = "دعوت شد که به";
+"generatedMessage.invitationAccepted" = "به حرف زدن پیوست";
+"generatedMessage.youJoined" = "تو هم به اين مکالمه پیوستي";
+"generatedMessage.contactBanned" = "و به دستش خورد";
+"generatedMessage.contactReAdded" = "دوباره اضافه شد";
 "generatedMessage.outgoingCall" = "تماس خروجی";
 "generatedMessage.incomingCall" = "تماس ورودی";
 "generatedMessage.missedOutgoingCall" = "تماس خروجی بی پاسخ";
 "generatedMessage.missedIncomingCall" = "تماس ورودی بی پاسخ";
 "generatedMessage.liveLocationSharing" = "هم‌رسانی زنده مکان";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "چپ";
 
 //General Settings
 "generalSettings.title" = "تنظیمات پیشرفته";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "تنظیمات ویدیو";
 "generalSettings.videoAcceleration" = "فعال‌سازی شتاب‌دهی ویدیو";
 "generalSettings.fileTransfer" = "انتقال فایل";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "اشتراک گذاری مکان";
 "generalSettings.automaticAcceptIncomingFiles" = "پذیرش فایل‌های ورودی به صورت خودکار";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.acceptTransferLimit" = "محدودیت انتقال را قبول کنید";
+"generalSettings.acceptTransferLimitDescription" = "(در MB، 0 = نامحدود)";
+"generalSettings.limitLocationSharingDuration" = "مدت زمان اشتراک گذاری مکان را محدود کنید";
+"generalSettings.locationSharingDuration" = "مدت زمان سهم موقعیت";
 
 
 //Log View
 "logView.title" = "عیب‌یابی";
 "logView.description" = "نتظیمات گزارش عیب‌یابی را باز کن";
 "logView.startLogging" = "شروع گزارش‌گیری";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "قطع چوب را متوقف کنید";
+"logView.saveError" = "حفظ فایل موفق نشد";
+"logView.shareError" = "اشتراک گذاری فایل شکست خورده";
 
 //Migrate Account
 "migrateAccount.title" = "انتقال حساب";

@@ -47,7 +47,7 @@
 // Swarm
 "swarm.ignoreSwarm" = "Ignore the swarm";
 "swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
+"swarm.chooseColor" = "Выбрать цвет";
 "swarm.typeOfSwarm" = "Тип роя";
 "swarm.identifier" = "Идентификатор";
 "swarm.about" = "О продукте";
@@ -59,14 +59,14 @@
 "swarm.publicChat" = "Public swarm";
 "swarm.others" = "Others";
 "swarm.member" = "Участник";
-"swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
+"swarm.invited" = "Приглашен(а)";
+"swarm.admin" = "Администратор";
+"swarm.banned" = "Заблокирован";
 "swarm.unknown" = "Unkown";
 "swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
 "swarm.addMember" = "Add Member";
 "swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.Leave" = "Покинуть";
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Публичный Каталог";

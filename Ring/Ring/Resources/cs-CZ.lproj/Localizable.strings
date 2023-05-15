@@ -92,14 +92,14 @@
 "conversation.explanationSendingLocationTo" = "Právě sdílíte svou polohu s ";
 "conversation.explanationReceivingLocationFrom" = "Právě přijímáte aktuální polohu od ";
 "conversation.errorSavingImage" = "Nepodařilo se uložit obrázek do galerie";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "%@ Vám poslal žádost o konverzaci.";
 "conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Dobrý den,\nChcete se připojit ke konverzaci?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "%@ není mezi tvými kontakty";
 "conversation.sendRequest" = "Pošlete mu/jí žádost o kontakt, abyste si mohli společně vyměňovat.";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "Přijali jste žádost o konverzaci.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Čekáme, až se připojí %@ aby došlo k synchronizaci konverzace.";
 
 //Invitations
 "invitations.noInvitations" = "Žádná pozvání";
@@ -364,10 +364,10 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Obdržel jsi pozvánku";
 "generatedMessage.swarmCreated" = "Swarm vytvořen";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.invitationReceived" = "čeká se na spojení";
+"generatedMessage.invitationAccepted" = "Připojeno ke konverzaci";
 "generatedMessage.youJoined" = "You joined the conversation";
 "generatedMessage.contactBanned" = "was kicked";
 "generatedMessage.contactReAdded" = "was re-added";
@@ -376,7 +376,7 @@
 "generatedMessage.missedOutgoingCall" = "Nepřijatý odchozí hovor";
 "generatedMessage.missedIncomingCall" = "Zmeškaný příchozí hovor";
 "generatedMessage.liveLocationSharing" = "Sdílení aktuální polohy";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "opustit";
 
 //General Settings
 "generalSettings.title" = "Pokročilá nastavení";

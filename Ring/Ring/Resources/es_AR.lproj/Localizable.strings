@@ -40,32 +40,32 @@
 "scan.search" = "Buscando...";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.searchBar" = "Buscar contacto...";
 "swarmcreation.createTheSwarm" = "Crear enjambre";
 "swarmcreation.addADescription" = "Añadir descripción";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Puedes añadir \%d\ más personas en la nube";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorar enjambre";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.leaveConversation" = "Dejar la conversación";
 "swarm.chooseColor" = "Elegir color";
 "swarm.typeOfSwarm" = "Tipo de enjambre";
 "swarm.identifier" = "Identificador";
 "swarm.about" = "Acerca de";
 "swarm.members" = "Miembros";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Añadir descripción";
 "swarm.oneToOne" = "Enjambre privado";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "Solo invitaciones del administrador";
 "swarm.invitesOnly" = "Enjambre privado";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
+"swarm.publicChat" = "Enjambre público";
+"swarm.others" = "Otros";
 "swarm.member" = "Miembro";
 "swarm.invited" = "Invitado";
 "swarm.admin" = "Administrador";
 "swarm.banned" = "Bloqueado";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.unknown" = "Desconocido";
+"swarm.addMorePeople" = "Puedes añadir \%d\ más personas al enjambre";
+"swarm.addMember" = "Añadir Miembro";
+"swarm.confirmLeaveSwarm" = "¿Está seguro de querer abandonar este enjambre?";
 "swarm.Leave" = "Abandonar";
 // Smartlist
 "smartlist.yesterday" = "Ayer";
@@ -93,11 +93,11 @@
 "conversation.explanationReceivingLocationFrom" = "Estás recibiendo una ubicación en vivo de";
 "conversation.errorSavingImage" = "No se pudo guardar la imagen en la galería";
 "conversation.receivedRequest" = "\%@\ te envió una solicitud de conversación.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.incomingRequest" = "Te envió una solicitud de conversación.";
 "conversation.requestMessage" = "Hola,\n¿Te gustaría unirte a la conversación?";
 "conversation.notContact" = "\%@\ no está en tus contactos.";
 "conversation.sendRequest" = "Enviarle una solicitud de contacto para poder interactuar";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "Enviar solicitud de contacto";
 "conversation.synchronizationTitle" = "Has aceptado la solicitud de conversación.";
 "conversation.synchronizationMessage" = "Esperando a que \%@\ se conecte para sincronizar la conversación.";
 
@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Conectar automáticamente en red local";
 "accountPage.autoRegistration" = "Registrar automáticamente luego de la expiración";
 "accountPage.connectivityHeader" = "Conectividad";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Habilitar TURN";
 "accountPage.turnServer" = "Dirección TURN";
 "accountPage.turnUsername" = "Usuario TURN";
 "accountPage.turnPassword" = "Contraseña TURN";
@@ -368,9 +368,9 @@
 "generatedMessage.swarmCreated" = "Enjambre creado";
 "generatedMessage.invitationReceived" = "invitado a unirse";
 "generatedMessage.invitationAccepted" = "unido a la conversación";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.youJoined" = "Te uniste a la conversación";
+"generatedMessage.contactBanned" = "expulsada";
+"generatedMessage.contactReAdded" = "añadida de nuevo";
 "generatedMessage.outgoingCall" = "Llamada saliente";
 "generatedMessage.incomingCall" = "Llamada entrante";
 "generatedMessage.missedOutgoingCall" = "Llamada saliente perdida";
@@ -380,24 +380,24 @@
 
 //General Settings
 "generalSettings.title" = "Opciones avanzadas";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Ajustes de vídeo";
 "generalSettings.videoAcceleration" = "Habilitar aceleración de video";
 "generalSettings.fileTransfer" = "Transferencia de archivos";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Ubicación compartida";
 "generalSettings.automaticAcceptIncomingFiles" = "Aceptar automáticamente los archivos entrantes";
 "generalSettings.acceptTransferLimit" = "Límite de transferencia";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.limitLocationSharingDuration" = "Limitar la duración del uso compartido de la ubicación";
+"generalSettings.locationSharingDuration" = "Duración del tiempo compartido";
 
 
 //Log View
 "logView.title" = "Diagnósticos";
 "logView.description" = "Abrir preferencias de registro de diagnóstico";
 "logView.startLogging" = "Iniciar registro";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Detener el registro";
+"logView.saveError" = "Error al guardar el archivo";
+"logView.shareError" = "Error al compartir el archivo";
 
 //Migrate Account
 "migrateAccount.title" = "Migración de cuenta";
