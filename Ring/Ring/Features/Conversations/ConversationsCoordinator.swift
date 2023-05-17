@@ -277,7 +277,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
 
     func popToSmartList() {
         let viewControllers = navigationViewController.viewControllers
-           if viewControllers.contains(smartListViewController) {
+        if viewControllers.contains(smartListViewController) {
             navigationViewController.popToViewController(smartListViewController, animated: false)
         }
     }

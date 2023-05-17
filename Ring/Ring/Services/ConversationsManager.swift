@@ -178,9 +178,10 @@ class ConversationsManager {
                       let accountId: String = event.getEventInput(.accountId),
                       let jamiId: String = event.getEventInput(.peerUri),
                       let account = self.accountsService.getAccount(fromAccountId: accountId),
-                      account.isJams
+                      account.isJams,
+                      let currentAccount = accountsService.currentAccount
                 else { return }
-                self.conversationService.saveJamsConversation(for: jamiId, accountId: accountId)
+                self.conversationService.saveJamsConversation(for: jamiId, accountId: accountId, refreshConversations: currentAccount.id == jamiId)
             })
             .disposed(by: self.disposeBag)
     }
