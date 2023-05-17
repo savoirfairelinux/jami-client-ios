@@ -309,11 +309,12 @@ class ConversationsService {
         return conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String] ?? [String: String]()
     }
 
-    func saveJamsConversation(for jamiId: String, accountId: String) {
+    func saveJamsConversation(for jamiId: String, accountId: String, refreshConversations: Bool) {
         if self.getConversationForParticipant(jamiId: jamiId, accontId: accountId) != nil { return }
         let contactUri = JamiURI(schema: .ring, infoHash: jamiId)
         guard let contactUriString = contactUri.uriString else { return }
         let conversationId = dbManager.createConversationsFor(contactUri: contactUriString, accountId: accountId)
+        if !refreshConversations { return }
         if conversationId.isEmpty || conversationId == "-1" { return }
         let conversationModel = ConversationModel(withParticipantUri: contactUri,
                                                   accountId: accountId)
