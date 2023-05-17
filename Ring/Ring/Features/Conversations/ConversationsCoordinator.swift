@@ -276,7 +276,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func popToSmartList() {
-        navigationViewController.popToViewController(smartListViewController, animated: false)
+        let viewControllers = navigationViewController.viewControllers
+           if viewControllers.contains(smartListViewController) {
+            navigationViewController.popToViewController(smartListViewController, animated: false)
+        }
     }
 
     func openConversation(conversationId: String, accountId: String) {
