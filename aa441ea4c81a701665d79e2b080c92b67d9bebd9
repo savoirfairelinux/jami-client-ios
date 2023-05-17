@@ -1,4 +1,28 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b1584a8_d205534b",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewModel.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2023-05-17T21:59:28Z",
+      "side": 1,
+      "message": "Can this be a non-breaking space `\u0026nbsp;`?",
+      "range": {
+        "startLine": 133,
+        "startChar": 28,
+        "endLine": 133,
+        "endChar": 29
+      },
+      "revId": "aa441ea4c81a701665d79e2b080c92b67d9bebd9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ],
   "submitRequirementResults": []
 }
