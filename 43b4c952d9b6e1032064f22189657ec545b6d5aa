@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c5330fe_5629a014",
+        "filename": "Ring/Cartfile.resolved",
+        "patchSetId": 9
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-05-17T16:39:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de79e81a_49d3159c",
+      "revId": "43b4c952d9b6e1032064f22189657ec545b6d5aa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d1300ec_f9a703ee",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-12T20:57:22Z",
       "side": 1,
       "message": "do we need to add it second time? If so add the comment with explanation.",
+      "revId": "43b4c952d9b6e1032064f22189657ec545b6d5aa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a103ee2f_af7b35d3",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/SmartlistViewController.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-05-17T16:39:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d1300ec_f9a703ee",
       "revId": "43b4c952d9b6e1032064f22189657ec545b6d5aa",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
