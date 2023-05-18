@@ -251,6 +251,9 @@
 		267CC6FC29D5B27600505E56 /* Data+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE64229C8F58800D66D5E /* Data+Helpers.swift */; };
 		267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
 		2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */; };
+		2685F90E2A1698B400BFCDA3 /*  VideoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2685F90D2A1698B400BFCDA3 /*  VideoInput.swift */; };
+		2685F9102A16A45600BFCDA3 /* VideoInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2685F90F2A16A45600BFCDA3 /* VideoInputDelegate.swift */; };
+		2685F9122A16B9DD00BFCDA3 /* VideoViewsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2685F9112A16B9DD00BFCDA3 /* VideoViewsContainer.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
 		26929FD425659E5F0052A601 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 26929FD125659E5F0052A601 /* cacert.pem */; };
 		269DA02728D0D2E5007D51D6 /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */; };
@@ -854,6 +857,9 @@
 		2679E42B29328352007E4639 /* ConcurrentDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentDictionary.swift; sourceTree = "<group>"; };
 		267AD77D252B979F00047593 /* ConferenceParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceParticipant.swift; sourceTree = "<group>"; };
 		2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerDelegate.swift; sourceTree = "<group>"; };
+		2685F90D2A1698B400BFCDA3 /*  VideoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " VideoInput.swift"; sourceTree = "<group>"; };
+		2685F90F2A16A45600BFCDA3 /* VideoInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInputDelegate.swift; sourceTree = "<group>"; };
+		2685F9112A16B9DD00BFCDA3 /* VideoViewsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewsContainer.swift; sourceTree = "<group>"; };
 		268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
 		26929FD125659E5F0052A601 /* cacert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cacert.pem; sourceTree = "<group>"; };
 		269B849326151AC10015BC72 /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = ../DEPS/arm64/lib/libgit2.a; sourceTree = "<group>"; };
@@ -1433,6 +1439,7 @@
 				2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */,
 				264FB66129775B1C00BEFBBF /* SystemService.swift */,
 				264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */,
+				2685F90F2A16A45600BFCDA3 /* VideoInputDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1742,6 +1749,7 @@
 				260AE62429B65A4B00D66D5E /* ContactsUtils.swift */,
 				260AE63F29C23AEC00D66D5E /* CallsHelper.swift */,
 				261E4EF129F8191300ABB37C /* LoadingView.swift */,
+				2685F90D2A1698B400BFCDA3 /*  VideoInput.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1861,6 +1869,7 @@
 				0EF49AA023828CBC0064CD98 /* ConferenceParticipantViewModel.swift */,
 				0EF49AA223828CD00064CD98 /* ConferenceParticipantView.xib */,
 				26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */,
+				2685F9112A16B9DD00BFCDA3 /* VideoViewsContainer.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -2742,6 +2751,7 @@
 				1D4EE84D29252AD000ED2010 /* SwarmCreationUIModel.swift in Sources */,
 				0E68571120238546008B0717 /* ConversationNavigation.swift in Sources */,
 				0E49096C1FEAB225005CAA50 /* CallsAdapterDelegate.swift in Sources */,
+				2685F90E2A1698B400BFCDA3 /*  VideoInput.swift in Sources */,
 				0E6F544F223C0ED600ECC3CE /* AccountPickerAdapter.swift in Sources */,
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
 				1A5DC0201F355DCF0075E8EF /* ContactsService.swift in Sources */,
@@ -2839,6 +2849,7 @@
 				2662FC79246B1E1700FA7782 /* JamiSearchView.swift in Sources */,
 				0E44B62F202B9DE40060F71B /* LocalNotificationsHelper.swift in Sources */,
 				2673D630252657B0000C56CB /* ConferenceLayout.swift in Sources */,
+				2685F9102A16A45600BFCDA3 /* VideoInputDelegate.swift in Sources */,
 				0E6F545A22403B1D00ECC3CE /* CreateSipAccountViewModel.swift in Sources */,
 				1A2D18FC1F292DAD00B2C785 /* ConversationCell.swift in Sources */,
 				0E48F9D31FDF150700D6CC08 /* GeneratedInteractionsManager.swift in Sources */,
@@ -2970,6 +2981,7 @@
 				0E6F5453223C3C7500ECC3CE /* AccountItemView.swift in Sources */,
 				0EF49AA123828CBC0064CD98 /* ConferenceParticipantViewModel.swift in Sources */,
 				0E8E9A0520483E1200DA8E8B /* TitleView.swift in Sources */,
+				2685F9122A16B9DD00BFCDA3 /* VideoViewsContainer.swift in Sources */,
 				264FB66629775B9B00BEFBBF /* SystemAdapterDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
