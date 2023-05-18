@@ -338,14 +338,14 @@ class ConversationModel: Equatable {
     }
 
     func updateLastDisplayedMessage(participantsInfo: [[String: String]]) {
-        self.participants.forEach { participant in
-            participantsInfo.forEach { info in
-                guard let jamiId = info["uri"],
-                      let lastDisplayed = info["lastDisplayed"],
-                      jamiId == participant.jamiId else { return }
-                participant.lastDisplayed = lastDisplayed
-            }
-        }
+        //        self.participants.forEach { participant in
+        //            participantsInfo.forEach { info in
+        //                guard let jamiId = info["uri"],
+        //                      let lastDisplayed = info["lastDisplayed"],
+        //                      jamiId == participant.jamiId else { return }
+        //                participant.lastDisplayed = lastDisplayed
+        //            }
+        //        }
     }
 
     func isCoredialog() -> Bool {
