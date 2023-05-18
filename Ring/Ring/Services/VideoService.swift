@@ -288,6 +288,8 @@ class VideoService: FrameExtractorDelegate {
     var angle: Int = 0
     var switchInputRequested: Bool = false
     var currentDeviceId = ""
+    var videoInputs = [String: VideoInput]()
+    var renderStarted = BehaviorRelay(value: "")
 
     private let disposeBag = DisposeBag()
 
@@ -448,8 +450,9 @@ extension VideoService: VideoAdapterDelegate {
                 self.videoAdapter.switchInput("camera://" + camera.namePortrait, accountId: accountId, forCall: rendererId)
             }
         }
-        self.log.debug("Decoding started...")
-        videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height)
+        let videoInput = VideoInput(renderId: rendererId, width: width, height: height, videoAdapter: self.videoAdapter)
+        self.videoInputs[rendererId] = videoInput
+        self.renderStarted.accept(rendererId)
         self.currentDeviceId = self.videoAdapter.getDefaultDevice()
     }
 
@@ -459,8 +462,10 @@ extension VideoService: VideoAdapterDelegate {
 
     func decodingStopped(withRendererId rendererId: String) {
         self.log.debug("Decoding stopped...")
-        self.incomingVideoFrame.onNext(RendererTuple(rendererId, nil, false))
-        videoAdapter.removeSinkTarget(withSinkId: rendererId)
+        if let videoInput = self.videoInputs[rendererId] {
+            videoInput.stop(videoAdapter: self.videoAdapter)
+            self.videoInputs.removeValue(forKey: rendererId)
+        }
     }
 
     func startCapture(withDevice device: String) {

@@ -24,6 +24,7 @@ import UIKit
 import RxSwift
 import Reusable
 import SwiftyBeaver
+import SwiftUI
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
@@ -43,6 +44,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet private weak var mainView: UIView!
     // video screen
     @IBOutlet private weak var callView: UIView!
+    @IBOutlet private weak var incomingVideo: VideoViewsContainer!
     @IBOutlet weak var beforeIncomingVideo: UIView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var capturedVideo: UIImageView!
@@ -89,6 +91,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     private var isCapturedVideoHidden = false
     private var orientation = UIDevice.current.orientation
     private var conferenceParticipantMenu: UIView?
+    private var videoViewSwiftUI: ContainerView!
 
     private let disposeBag = DisposeBag()
 
@@ -129,6 +132,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             initCallAnimation()
         }
         self.configureConferenceLayout()
+        self.configureIncomingVideView()
         if callCurrent {
             self.capturedVideoBlurEffect.alpha = 1
             hideCapturedVideo()
@@ -198,38 +202,71 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
     }
 
+    func configureIncomingVideView() {
+        //        let messageListView = MessagesListView(model: swiftUIModel)
+        //        let swiftUIView = UIHostingController(rootView: messageListView)
+        //        addChild(swiftUIView)
+        //        swiftUIView.view.frame = self.view.frame
+        //        self.view.addSubview(swiftUIView.view)
+        //        swiftUIView.view.translatesAutoresizingMaskIntoConstraints = false
+        //        swiftUIView.view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        //        bottomAnchor = swiftUIView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        //        bottomAnchor?.isActive = true
+        //        swiftUIView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        //        swiftUIView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        //        swiftUIView.didMove(toParent: self)
+        //        self.view.backgroundColor = UIColor.systemBackground
+        //        self.view.sendSubviewToBack(swiftUIView.view)
+        videoViewSwiftUI = ContainerView(model: ContainerViewModel())
+        let hostingController = UIHostingController(rootView: videoViewSwiftUI)
+        self.addChild(hostingController)
+        hostingController.view.frame = incomingVideo.bounds
+        self.incomingVideo.addSubview(hostingController.view)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.topAnchor.constraint(equalTo: self.incomingVideo.topAnchor, constant: 0).isActive = true
+        hostingController.view.bottomAnchor.constraint(equalTo: self.incomingVideo.bottomAnchor, constant: 0).isActive = true
+        hostingController.view.leadingAnchor.constraint(equalTo: self.incomingVideo.leadingAnchor, constant: 0).isActive = true
+        hostingController.view.trailingAnchor.constraint(equalTo: self.incomingVideo.trailingAnchor, constant: 0).isActive = true
+        hostingController.didMove(toParent: self)
+    }
+
     private func configureConferenceLayout() {
-        self.updateconferenceLayoutSize()
+        //  self.updateconferenceLayoutSize()
         self.viewModel.layoutUpdated
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] updated in
                 guard let self = self, updated else { return }
-                self.updateconferenceLayoutSize()
-                let participants = self.viewModel.getConferenceParticipants()
-                self.conferenceLayout.setParticipants(participants: participants, isCurrentModerator: self.viewModel.isCurrentModerator() || self.viewModel.isHostCall )
-
-                guard let unwrapParticipants = participants, self.viewModel.isCurrentModerator(), !self.viewModel.isHostCall else { return }
-                self.conferenceCalls.arrangedSubviews.forEach({ (view) in
-                    view.removeFromSuperview()
-                })
-                for participant in unwrapParticipants {
-                    let callView =
-                        ConferenceParticipantView(frame:
-                                                    CGRect(x: 0, y: 0,
-                                                           width: inConfViewWidth, height: inConfViewHeight))
-                    let injectionBag = self.viewModel.injectionBag
-                    let isLocal = self.viewModel.isLocalCall(participantId: participant.uri ?? "")
-                    let pendingCallViewModel =
-                        ConferenceParticipantViewModel(with: nil,
-                                                       injectionBag: injectionBag,
-                                                       isLocal: isLocal,
-                                                       participantId: participant.uri ?? "",
-                                                       participantUserName: participant.displayName)
-                    callView.viewModel = pendingCallViewModel
-                    callView.delegate = self
-                    self.conferenceCalls.addArrangedSubview(callView)
+                //  self.updateconferenceLayoutSize()
+                if let participants = self.viewModel.getConferenceParticipants() {
+                    self.videoViewSwiftUI.model.addParticipants(participantsInfo: participants)
+                    self.videoViewSwiftUI.model.setCallLayout(layout: .grid)
+                    // self.incomingVideo.addParticipants(participants: participants)
                 }
+                return
+                //                    self.conferenceLayout.setParticipants(participants: participants, isCurrentModerator: self.viewModel.isCurrentModerator() || self.viewModel.isHostCall )
+                //
+                //                guard let unwrapParticipants = participants, self.viewModel.isCurrentModerator(), !self.viewModel.isHostCall else { return }
+                //                self.conferenceCalls.arrangedSubviews.forEach({ (view) in
+                //                    view.removeFromSuperview()
+                //                })
+                //                for participant in unwrapParticipants {
+                //                    let callView =
+                //                        ConferenceParticipantView(frame:
+                //                                                    CGRect(x: 0, y: 0,
+                //                                                           width: inConfViewWidth, height: inConfViewHeight))
+                //                    let injectionBag = self.viewModel.injectionBag
+                //                    let isLocal = self.viewModel.isLocalCall(participantId: participant.uri ?? "")
+                //                    let pendingCallViewModel =
+                //                        ConferenceParticipantViewModel(with: nil,
+                //                                                       injectionBag: injectionBag,
+                //                                                       isLocal: isLocal,
+                //                                                       participantId: participant.uri ?? "",
+                //                                                       participantUserName: participant.displayName)
+                //                    callView.viewModel = pendingCallViewModel
+                //                    callView.delegate = self
+                //                    self.conferenceCalls.addArrangedSubview(callView)
+                // }
             })
             .disposed(by: self.disposeBag)
     }
@@ -293,13 +330,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.buttonsContainer.viewModel = self.viewModel.containerViewModel
         self.buttonsContainer.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.cancelCall()
+                self?.viewModel.cancelCall(callId: "")
                 self?.removeFromScreen()
             })
             .disposed(by: self.disposeBag)
         self.buttonsContainer.stopButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.cancelCall()
+                self?.viewModel.cancelCall(callId: "")
                 self?.removeFromScreen()
             })
             .disposed(by: self.disposeBag)
@@ -329,13 +366,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
         self.buttonsContainer.muteAudioButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.toggleMuteAudio()
+                self?.viewModel.toggleMuteAudio(callId: "")
             })
             .disposed(by: self.disposeBag)
 
         self.buttonsContainer.muteVideoButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.toggleMuteVideo()
+                self?.viewModel.toggleMuteVideo(callId: "")
             })
             .disposed(by: self.disposeBag)
 
@@ -493,6 +530,68 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .observe(on: MainScheduler.instance)
             .bind(to: self.infoBottomLabel.rx.text)
             .disposed(by: self.disposeBag)
+        self.viewModel.renderStarted
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] renderId in
+                guard let self = self else { return }
+                // self.needToCleanIncomingFrame = true
+                self.setAvatarView(false)
+                self.spinner.stopAnimating()
+                if self.beforeIncomingVideo.alpha != 0 {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.beforeIncomingVideo.alpha = 0
+                    }, completion: { [weak self] _ in
+                        self?.beforeIncomingVideo.isHidden = true
+                    })
+                }
+                if let input = self.viewModel.getVideoInput(renderId: renderId) {
+                    self.videoViewSwiftUI.model.addVideoInput(videoInput: input, renderId: renderId)
+                    // self.incomingVideo.addVideoInput(videoInput: input, renderId: renderId)
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        //        self.viewModel.incomingFrame
+        //            .observe(on: MainScheduler.instance)
+        //            .subscribe(onNext: { [weak self] frame in
+        //                guard let self = self else { return }
+        //                guard let image = frame else {
+        //                    if self.needToCleanIncomingFrame {
+        //                        self.needToCleanIncomingFrame = false
+        //                        DispatchQueue.main.async { [weak self] in
+        //                            self?.incomingVideo.image = UIImage()
+        //                        }
+        //                    }
+        //                    return
+        //                }
+        //                self.needToCleanIncomingFrame = true
+        //                self.setAvatarView(false)
+        //                self.spinner.stopAnimating()
+        //                if self.beforeIncomingVideo.alpha != 0 {
+        //                    UIView.animate(withDuration: 0.4, animations: {
+        //                        self.beforeIncomingVideo.alpha = 0
+        //                    }, completion: { [weak self] _ in
+        //                        self?.beforeIncomingVideo.isHidden = true
+        //                    })
+        //                }
+        //                DispatchQueue.main.async { [weak self] in
+        //                    self?.incomingVideo.image = image
+        //                }
+        //            })
+        // .disposed(by: self.disposeBag)
+
+        self.viewModel.capturedFrame
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] frame in
+                if let image = frame {
+                    DispatchQueue.main.async {
+                        self?.capturedVideo.image = image
+                        self?.spinner.stopAnimating()
+                    }
+                }
+            })
+            .disposed(by: self.disposeBag)
+>>>>>>> d17fb87a (call: video sink per media)
 
         self.viewModel.showCallOptions
             .observe(on: MainScheduler.instance)
