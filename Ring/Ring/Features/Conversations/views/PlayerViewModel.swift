@@ -72,34 +72,34 @@ class PlayerViewModel {
         // subscribe for frame playback
         // get first frame, pause player and seek back to first frame
         self.playBackDisposeBag = DisposeBag()
-        self.incomingFrame.filter {  [weak self] (render) -> Bool in
-            render?.rendererId == self?.playerId
-        }
-        .take(1)
-        .map({[weak self] (renderer) -> Observable<RendererTuple?>  in
-            self?.firstFrame = renderer?.buffer
-            self?.playerPosition.onNext(0)
-            self?.toglePause()
-            self?.muteAudio()
-            self?.seekToTime(time: 0)
-            self?.startTimer()
-            self?.playerReady.accept(true)
-            self?.playBackFrame.onNext(self?.firstFrame)
-            if let sampleBuffer = renderer?.buffer,
-               let image = UIImage.createFrom(sampleBuffer: sampleBuffer) {
-                DispatchQueue.main.async {
-                    self?.delegate?.extractedVideoFrame(with: image.size.height)
-                }
-            }
-            return self?.incomingFrame.filter {  [weak self] (render) -> Bool in
-                render?.rendererId == self?.playerId
-            } ?? Observable.just(renderer)
-        })
-        .merge()
-        .subscribe(onNext: {  [weak self] (renderer) in
-            self?.playBackFrame.onNext(renderer?.buffer)
-        })
-        .disposed(by: self.playBackDisposeBag)
+        //        self.incomingFrame.filter {  [weak self] (render) -> Bool in
+        //            render?.rendererId == self?.playerId
+        //        }
+        //        .take(1)
+        //        .map({[weak self] (renderer) -> Observable<RendererTuple?>  in
+        //            self?.firstFrame = renderer?.buffer
+        //            self?.playerPosition.onNext(0)
+        //            self?.toglePause()
+        //            self?.muteAudio()
+        //            self?.seekToTime(time: 0)
+        //            self?.startTimer()
+        //            self?.playerReady.accept(true)
+        //            self?.playBackFrame.onNext(self?.firstFrame)
+        //            if let sampleBuffer = renderer?.buffer,
+        //               let image = UIImage.createFrom(sampleBuffer: sampleBuffer) {
+        //                DispatchQueue.main.async {
+        //                    self?.delegate?.extractedVideoFrame(with: image.size.height)
+        //                }
+        //            }
+        //            return self?.incomingFrame.filter {  [weak self] (render) -> Bool in
+        //                render?.rendererId == self?.playerId
+        //            } ?? Observable.just(renderer)
+        //        })
+        //        .merge()
+        //        .subscribe(onNext: {  [weak self] (renderer) in
+        //            self?.playBackFrame.onNext(renderer?.buffer)
+        //        })
+        //        .disposed(by: self.playBackDisposeBag)
 
         // subscribe for fileInfo
         self.videoService.playerInfo
@@ -183,9 +183,9 @@ class PlayerViewModel {
         videoService.seekToTime(time: time, playerId: playerId)
     }
 
-    lazy var incomingFrame: Observable<RendererTuple?> = {
-        return videoService.incomingVideoFrame.asObservable()
-    }()
+    //    lazy var incomingFrame: Observable<RendererTuple?> = {
+    //        return videoService.incomingVideoFrame.asObservable()
+    //    }()
 
     var currentTime: Int64 = 0
 
