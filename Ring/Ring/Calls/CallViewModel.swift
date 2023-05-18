@@ -191,19 +191,33 @@ class CallViewModel: Stateable, ViewModel {
 
     private var hasIncomigVideo = BehaviorRelay<Bool>(value: false)
 
-    lazy var incomingFrame: Observable<UIImage?> = {
-        return videoService.incomingVideoFrame.asObservable()
-            .filter({[weak self] renderer -> Bool in
-                (renderer?.rendererId == self?
-                    .rendererId)
-            })
-            .map({ [weak self] renderer in
-                self?.hasIncomigVideo.accept(renderer?.running ?? false)
-                return renderer?.data
-            })
-    }()
+    lazy var incomingFrame = BehaviorRelay<UIImage?>(value: nil)
 
-    var rendererId = ""
+    var rendererId = "" {
+        didSet {
+            if rendererId.isEmpty {
+                return
+            }
+
+            self.videoService.renderStarted
+                .filter({ startedRender in
+                    startedRender == self.rendererId
+                })
+                .subscribe(onNext: { [weak self] rendererId in
+                    guard let self = self else { return }
+                    if let input = self.videoService.videoInputs[rendererId] {
+                        input.frame
+                            .subscribe(onNext: { [weak self] image in
+                                guard let self = self else { return }
+                                self.incomingFrame.accept(image)
+                            })
+                            .disposed(by: self.disposeBag)
+                    }
+                })
+                .disposed(by: self.disposeBag)
+
+        }
+    }
     lazy var capturedFrame: Observable<UIImage?> = {
         return videoService.capturedVideoFrame.asObservable().map({ frame in
             return frame

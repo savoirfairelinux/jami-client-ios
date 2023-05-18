@@ -18,7 +18,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class ConferenceParticipant {
+class ConferenceParticipant: Hashable {
     var originX: CGFloat = 0
     var originY: CGFloat = 0
     var width: CGFloat = 0
@@ -32,6 +32,7 @@ class ConferenceParticipant {
     var isVideoMuted: Bool = false
     var isHandRaised: Bool = false
     var device: String = ""
+    var buffer = AVSampleBufferDisplayLayer()
 
     init (info: [String: String], onlyURIAndActive: Bool) {
         self.uri = info["uri"]
@@ -71,5 +72,13 @@ class ConferenceParticipant {
         if let device = info["device"] {
             self.device = device
         }
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(uri)
+    }
+
+    static func == (lhs: ConferenceParticipant, rhs: ConferenceParticipant) -> Bool {
+        return lhs.uri == rhs.uri
     }
 }
