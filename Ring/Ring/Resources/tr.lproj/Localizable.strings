@@ -40,33 +40,33 @@
 "scan.search" = "Arıyor...";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
+"swarmcreation.searchBar" = "- İletişim aramak...";
+"swarmcreation.createTheSwarm" = "Bir sürü yaratın.";
 "swarmcreation.addADescription" = "Açıklama ekle";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Swarm'a daha fazla kişi ekleyebilirsin.";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.ignoreSwarm" = "Sığırları görmezden gel.";
+"swarm.leaveConversation" = "Konuşmayı bırak.";
+"swarm.chooseColor" = "Bir renk seçin";
+"swarm.typeOfSwarm" = "Swarm türü";
 "swarm.identifier" = "Tanımlayıcı";
 "swarm.about" = "Hakkında";
 "swarm.members" = "Üyeler";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Açıklama Ekle";
 "swarm.oneToOne" = "Özel küme";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "Admin sadece davet eder";
 "swarm.invitesOnly" = "Özel küme";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.publicChat" = "Toplum sürüsü";
+"swarm.others" = "Diğerleri";
+"swarm.member" = "Üye";
+"swarm.invited" = "- davet edildi.";
+"swarm.admin" = "Yöneticisi";
+"swarm.banned" = "Yasaklanmış";
+"swarm.unknown" = "Bilinmeyen";
+"swarm.addMorePeople" = "Bu sürümde daha fazla insan ekleyebilirsin.";
+"swarm.addMember" = "Üye Ekle";
+"swarm.confirmLeaveSwarm" = "Bu sürüyü terk etmek istediğinden emin misin?";
+"swarm.Leave" = "Git.";
 // Smartlist
 "smartlist.yesterday" = "Dün";
 "smartlist.results" = "Genel Dizin";
@@ -92,14 +92,14 @@
 "conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
 "conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
 "conversation.errorSavingImage" = "Fotoğraf galeriye kaydedilemedi";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.receivedRequest" = "Size bir konuşma isteği gönderdi.";
+"conversation.incomingRequest" = "Sana bir konuşma isteği gönderdim.";
 "conversation.requestMessage" = "Merhaba,\nKonuşmaya katılmak ister misin?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "\%@\ bağlantı listenizde değil.";
 "conversation.sendRequest" = "Birlikte iletişim kurmak için ona bir kişi isteği gönderin";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "İletişim İstekini Gönder";
 "conversation.synchronizationTitle" = "Görüşme isteğini kabul ettiniz.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Konuşmayı senkronize etmek için \%@\ bağlantıları bekliyoruz.";
 
 //Invitations
 "invitations.noInvitations" = "Davetiye yok";
@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Yerel ağda kendiliğinden bağlan";
 "accountPage.autoRegistration" = "Geçerlilik bittiğinde kendiliğinden kaydol";
 "accountPage.connectivityHeader" = "Bağlanabilirlik";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Dönüştürme etkinleştir";
 "accountPage.turnServer" = "TURN adresi";
 "accountPage.turnUsername" = "TURN kullanıcı adı";
 "accountPage.turnPassword" = "TURN parolası";
@@ -364,40 +364,40 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "- Sen de izinsiz kaldın.";
 "generatedMessage.swarmCreated" = "Küme oluşturuldu";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "katılmak için davet edildi";
+"generatedMessage.invitationAccepted" = "Konuşmaya katıldım.";
+"generatedMessage.youJoined" = "Konuşmaya katıldın.";
+"generatedMessage.contactBanned" = "Tekmeledi";
+"generatedMessage.contactReAdded" = "Yeniden eklendi";
 "generatedMessage.outgoingCall" = "Giden arama";
 "generatedMessage.incomingCall" = "Gelen arama";
 "generatedMessage.missedOutgoingCall" = "Yanıtsız giden arama";
 "generatedMessage.missedIncomingCall" = "Yanıtsız gelen arama";
 "generatedMessage.liveLocationSharing" = "Canlı konum paylaşımı";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "sol";
 
 //General Settings
 "generalSettings.title" = "Gelişmiş ayarlar";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Video Ayarları";
 "generalSettings.videoAcceleration" = "Görüntü hızlandırmayı etkinleştir";
 "generalSettings.fileTransfer" = "Dosya aktarımı";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Yer paylaşımı";
 "generalSettings.automaticAcceptIncomingFiles" = "Gelen dosyaları kendiliğinden kabul et";
 "generalSettings.acceptTransferLimit" = "Aktarma sınırını kabul et";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.acceptTransferLimitDescription" = "(MB'de, 0 = sınırsız)";
+"generalSettings.limitLocationSharingDuration" = "Yer paylaşımının süresini sınırlayın";
+"generalSettings.locationSharingDuration" = "Pozisyon payı süresi";
 
 
 //Log View
 "logView.title" = "Tanılama";
 "logView.description" = "Tanılama günlüğü ayarlarını aç";
 "logView.startLogging" = "Günlükle";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Kaynak Çubuğunu Durdur";
+"logView.saveError" = "Dosya kaydetmek başarısız oldu";
+"logView.shareError" = "Dosya paylaşımı başarısız oldu";
 
 //Migrate Account
 "migrateAccount.title" = "Hesap taşıma";

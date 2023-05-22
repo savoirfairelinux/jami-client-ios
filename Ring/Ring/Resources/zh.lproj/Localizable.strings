@@ -43,7 +43,7 @@
 "swarmcreation.searchBar" = "搜索联系人";
 "swarmcreation.createTheSwarm" = "创建群聊";
 "swarmcreation.addADescription" = "添加描述";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "你可以把更多的人加入群中";
 // Swarm
 "swarm.ignoreSwarm" = "忽略群聊";
 "swarm.leaveConversation" = "离开该会话";
@@ -56,16 +56,16 @@
 "swarm.oneToOne" = "私人 swarm";
 "swarm.adminInvitesOnly" = "仅可管理员邀请";
 "swarm.invitesOnly" = "私人 swarm";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
+"swarm.publicChat" = "公共群";
+"swarm.others" = "其他";
 "swarm.member" = "成员";
 "swarm.invited" = "已邀请";
 "swarm.admin" = "管理员";
 "swarm.banned" = "已屏蔽";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.unknown" = "无人";
+"swarm.addMorePeople" = "你可以把更多的人加入这个群体中";
+"swarm.addMember" = "加入成员";
+"swarm.confirmLeaveSwarm" = "你确定你想离开这个群体吗?";
 "swarm.Leave" = "离开";
 // Smartlist
 "smartlist.yesterday" = "昨天";
@@ -92,14 +92,14 @@
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
 "conversation.errorSavingImage" = "保存至图库失败";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.receivedRequest" = "给你发了一个谈话请求.";
+"conversation.incomingRequest" = "发给你一个谈话请求.";
 "conversation.requestMessage" = "您好，\n您想要加入会话吗？";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "您的联系人名单中没有.";
 "conversation.sendRequest" = "向他/她发送联系人请求以开始互相交流";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "发送联系请求";
 "conversation.synchronizationTitle" = "您已接受会话请求。";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "我们正在等待\%@\连接,";
 
 //Invitations
 "invitations.noInvitations" = "沒有邀請";
@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "在本地网络自动连接";
 "accountPage.autoRegistration" = "过期后自动注册";
 "accountPage.connectivityHeader" = "连接性";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "启动TURN";
 "accountPage.turnServer" = "TURN 地址";
 "accountPage.turnUsername" = "TURN 用户名";
 "accountPage.turnPassword" = "TURN 密码";
@@ -364,40 +364,40 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "你得到了免责";
 "generatedMessage.swarmCreated" = "已建立 Swarm";
-"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationReceived" = "邀请加入";
 "generatedMessage.invitationAccepted" = "加入该对话";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.youJoined" = "你加入了谈话";
+"generatedMessage.contactBanned" = "被了";
+"generatedMessage.contactReAdded" = "已重新添加";
 "generatedMessage.outgoingCall" = "撥出電話";
 "generatedMessage.incomingCall" = "來電";
 "generatedMessage.missedOutgoingCall" = "未接去電";
 "generatedMessage.missedIncomingCall" = "未接來電";
 "generatedMessage.liveLocationSharing" = "实时位置分享";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "左边";
 
 //General Settings
 "generalSettings.title" = "進階設定";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "视频设置";
 "generalSettings.videoAcceleration" = "启用视频加速";
 "generalSettings.fileTransfer" = "文件传输";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "位置共享";
 "generalSettings.automaticAcceptIncomingFiles" = "自动接收文件";
 "generalSettings.acceptTransferLimit" = "接受传输限制";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.acceptTransferLimitDescription" = "(在MB中,0 =无限)";
+"generalSettings.limitLocationSharingDuration" = "限制位置共享的时间";
+"generalSettings.locationSharingDuration" = "位置股份持续时间";
 
 
 //Log View
 "logView.title" = "诊断";
 "logView.description" = "打开诊断日志设置";
 "logView.startLogging" = "开启日志";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "停止伐木";
+"logView.saveError" = "无法保存文件";
+"logView.shareError" = "无法共享文件";
 
 //Migrate Account
 "migrateAccount.title" = "账户迁移";

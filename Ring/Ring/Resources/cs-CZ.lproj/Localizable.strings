@@ -40,32 +40,32 @@
 "scan.search" = "Hledá se…";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.searchBar" = "Vyhledejte kontakt na...";
 "swarmcreation.createTheSwarm" = "Vytvořit swarm";
 "swarmcreation.addADescription" = "Přidejte popis";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Můžete přidat \%d\ více lidí ve Swarmu";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorovat swarm";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.leaveConversation" = "Opustit konverzaci";
 "swarm.chooseColor" = "Vyber barvu";
 "swarm.typeOfSwarm" = "Typ swarmu";
 "swarm.identifier" = "Identifikátor";
 "swarm.about" = "O aplikaci";
 "swarm.members" = "Členové";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Přidejte popis";
 "swarm.oneToOne" = "Soukromý swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "Pouze pozvánky pro správce";
 "swarm.invitesOnly" = "Soukromý swarm";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
+"swarm.publicChat" = "Veřejný swarm";
+"swarm.others" = "Ostatní";
 "swarm.member" = "Člen";
 "swarm.invited" = "Pozvaný";
 "swarm.admin" = "Správce";
 "swarm.banned" = "Zakázaný";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.unknown" = "Neznámé";
+"swarm.addMorePeople" = "Můžete přidat \%d\ více lidí ve Swarmu";
+"swarm.addMember" = "Přidat člena";
+"swarm.confirmLeaveSwarm" = "Jste si jistí, že chcete opustit swarm?";
 "swarm.Leave" = "Opustit";
 // Smartlist
 "smartlist.yesterday" = "Včera";
@@ -93,11 +93,11 @@
 "conversation.explanationReceivingLocationFrom" = "Právě přijímáte aktuální polohu od ";
 "conversation.errorSavingImage" = "Nepodařilo se uložit obrázek do galerie";
 "conversation.receivedRequest" = "%@ Vám poslal žádost o konverzaci.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.incomingRequest" = "Poslal jsem vám žádost o konverzaci.";
 "conversation.requestMessage" = "Dobrý den,\nChcete se připojit ke konverzaci?";
 "conversation.notContact" = "%@ není mezi tvými kontakty";
 "conversation.sendRequest" = "Pošlete mu/jí žádost o kontakt, abyste si mohli společně vyměňovat.";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "Odeslat žádost o kontakt";
 "conversation.synchronizationTitle" = "Přijali jste žádost o konverzaci.";
 "conversation.synchronizationMessage" = "Čekáme, až se připojí %@ aby došlo k synchronizaci konverzace.";
 
@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Automatické připojení na místní síti";
 "accountPage.autoRegistration" = "Automatická registrace po vypršení platnosti";
 "accountPage.connectivityHeader" = "Připojení";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Povolit TURN";
 "accountPage.turnServer" = "Adresa TURN";
 "accountPage.turnUsername" = "Uživatelské jméno TURN";
 "accountPage.turnPassword" = "Heslo TURN";
@@ -368,9 +368,9 @@
 "generatedMessage.swarmCreated" = "Swarm vytvořen";
 "generatedMessage.invitationReceived" = "čeká se na spojení";
 "generatedMessage.invitationAccepted" = "Připojeno ke konverzaci";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.youJoined" = "Připojil jste se ke konverzaci";
+"generatedMessage.contactBanned" = "byl vyhozen";
+"generatedMessage.contactReAdded" = "byl znovu přidán";
 "generatedMessage.outgoingCall" = "Odchozí hovor";
 "generatedMessage.incomingCall" = "Příchozí hovor";
 "generatedMessage.missedOutgoingCall" = "Nepřijatý odchozí hovor";
@@ -380,24 +380,24 @@
 
 //General Settings
 "generalSettings.title" = "Pokročilá nastavení";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Nastavení videa";
 "generalSettings.videoAcceleration" = "Povolit zrychlení videa";
 "generalSettings.fileTransfer" = "Přenos souboru";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Místní sdílení";
 "generalSettings.automaticAcceptIncomingFiles" = "Automaticky přijmout příchozí soubory";
 "generalSettings.acceptTransferLimit" = "Přijmout limit přenosu";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = neomezeno)";
+"generalSettings.limitLocationSharingDuration" = "Limit doby sdílení polohy";
+"generalSettings.locationSharingDuration" = "Doba sdílení pozice";
 
 
 //Log View
 "logView.title" = "Diagnostika";
 "logView.description" = "Otevření nastavení diagnostického protokolu";
 "logView.startLogging" = "Spuštění záznamu";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Zastavení protokolování";
+"logView.saveError" = "Nepodařilo se uložit soubor";
+"logView.shareError" = "Nepodařilo se sdílet soubor";
 
 //Migrate Account
 "migrateAccount.title" = "Převod účtu";

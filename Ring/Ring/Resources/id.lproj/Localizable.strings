@@ -40,32 +40,32 @@
 "scan.search" = "Mencari...";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.searchBar" = "Cari kontak...";
 "swarmcreation.createTheSwarm" = "Buat kawanan";
 "swarmcreation.addADescription" = "Tambah deskripsi";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Anda bisa menambahkan \%d\ lebih banyak orang ke dalam swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Abaikan kawanan";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.leaveConversation" = "Tinggalkan percakapan";
 "swarm.chooseColor" = "Pilih warna";
 "swarm.typeOfSwarm" = "Jenis kawanan";
 "swarm.identifier" = "Pengidentifikasi";
 "swarm.about" = "Tentang";
 "swarm.members" = "Anggota";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Tambahkan Deskripsi";
 "swarm.oneToOne" = "Kolam privat";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "Admin hanya mengundang";
 "swarm.invitesOnly" = "Kolam privat";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
+"swarm.publicChat" = "Rumput umum";
+"swarm.others" = "Yang lain";
 "swarm.member" = "Anggota";
 "swarm.invited" = "Diundang";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Dibanned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.unknown" = "Tidak diketahui";
+"swarm.addMorePeople" = "Anda bisa menambahkan \%d\ lebih banyak orang ke dalam gerombolan ini";
+"swarm.addMember" = "Tambahkan Anggota";
+"swarm.confirmLeaveSwarm" = "Kau yakin kau ingin meninggalkan gerombolan ini?";
 "swarm.Leave" = "Keluar";
 // Smartlist
 "smartlist.yesterday" = "Kemarin";
@@ -92,14 +92,14 @@
 "conversation.explanationSendingLocationTo" = "Anda saat ini berbagi lokasi Anda dengan";
 "conversation.explanationReceivingLocationFrom" = "Saat ini Anda sedang menerima lokasi langsung dari";
 "conversation.errorSavingImage" = "Gagal menyimpan gambar ke galeri";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%@\ mengirim permintaan untuk percakapan.";
+"conversation.incomingRequest" = "Mengirimkan permintaan untuk percakapan.";
 "conversation.requestMessage" = "Halo, \nApakah Anda ingin bergabung dalam percakapan?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "\%@\ tidak ada dalam daftar kontak Anda.";
 "conversation.sendRequest" = "Kirimkan permintaan kontak kepadanya agar Anda bisa saling bertukar pikiran.";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "Kirim permintaan kontak";
 "conversation.synchronizationTitle" = "Anda telah menerima permintaan percakapan.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Kami menunggu \%@\ koneksi untuk menyelaraskan percakapan.";
 
 //Invitations
 "invitations.noInvitations" = "Tidak ada undangan";
@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Terhubung otomatis pada jaringan lokal";
 "accountPage.autoRegistration" = "Daftar otomatis setelah kedaluwarsa";
 "accountPage.connectivityHeader" = "Konektivitas";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Memungkinkan TURN";
 "accountPage.turnServer" = "Alamat TURN";
 "accountPage.turnUsername" = "Nama pengguna TURN";
 "accountPage.turnPassword" = "Kata sandi TURN";
@@ -364,40 +364,40 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Kau menerima undangan";
 "generatedMessage.swarmCreated" = "Kawanan dibuat";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "diundang untuk bergabung";
+"generatedMessage.invitationAccepted" = "bergabung dengan percakapan";
+"generatedMessage.youJoined" = "Kau bergabung dalam percakapan";
+"generatedMessage.contactBanned" = "dipukul";
+"generatedMessage.contactReAdded" = "ditambahkan kembali";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
 "generatedMessage.incomingCall" = "Panggilan masuk";
 "generatedMessage.missedOutgoingCall" = "Panggilan keluar tidak terjawab";
 "generatedMessage.missedIncomingCall" = "Panggilan masuk tidak terjawab";
 "generatedMessage.liveLocationSharing" = "Berbagi lokasi secara live";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "kiri";
 
 //General Settings
 "generalSettings.title" = "Pengaturan lanjutan";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Pengaturan Video";
 "generalSettings.videoAcceleration" = "Aktifkan akselerasi video";
 "generalSettings.fileTransfer" = "Mengirim berkas";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Pembagian Lokasi";
 "generalSettings.automaticAcceptIncomingFiles" = "Secara otomatis menerima file yang masuk";
 "generalSettings.acceptTransferLimit" = "Terima batas transfer";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.acceptTransferLimitDescription" = "(dalam MB, 0 = tak terbatas)";
+"generalSettings.limitLocationSharingDuration" = "Batasi durasi pembagian lokasi";
+"generalSettings.locationSharingDuration" = "Durasi saham posisi";
 
 
 //Log View
 "logView.title" = "Diagnostik";
 "logView.description" = "Buka pengaturan log diagnostik";
 "logView.startLogging" = "Mulai logging";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Hentikan Logging";
+"logView.saveError" = "Tidak berhasil menyimpan file";
+"logView.shareError" = "Tidak dapat berbagi file";
 
 //Migrate Account
 "migrateAccount.title" = "Migrasi akun";

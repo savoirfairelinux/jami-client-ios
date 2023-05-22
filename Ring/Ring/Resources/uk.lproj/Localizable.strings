@@ -24,9 +24,9 @@
 "global.ok" = "Гаразд";
 "global.close" = "Закрити";
 "global.share" = "Поділитися";
-"global.forward" = "Forward";
+"global.forward" = "Наперед";
 "global.save" = "Зберігти";
-"global.resend" = "Resend";
+"global.resend" = "Перепродажу";
 "global.preview" = "Попередній перегляд";
 "global.accept" = "Прийняти";
 "global.block" = "Заблокувати";
@@ -36,73 +36,73 @@
 "global.reply" = "Відповісти";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
+"scan.badQrCode" = "Погано QR-код";
 "scan.search" = "Пошук…";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
+"swarmcreation.searchBar" = "Пошук контакту...";
+"swarmcreation.createTheSwarm" = "Створюйте ров";
 "swarmcreation.addADescription" = "Додати опис";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Ви можете додати більше людей до рогу";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.ignoreSwarm" = "Ігноруйте рогу";
+"swarm.leaveConversation" = "Не розмовляй.";
 "swarm.chooseColor" = "Обрати колір";
-"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.typeOfSwarm" = "Тип рогу";
 "swarm.identifier" = "Ідентифікатор";
 "swarm.about" = "Про программу";
 "swarm.members" = "Учасники";
-"swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private swarm";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
+"swarm.addDescription" = "Додавати Описание";
+"swarm.oneToOne" = "Частний рог";
+"swarm.adminInvitesOnly" = "Адмініст тільки запрошує";
+"swarm.invitesOnly" = "Частний рог";
+"swarm.publicChat" = "Об'єднаний ров";
+"swarm.others" = "Інші";
+"swarm.member" = "Член";
+"swarm.invited" = "Запрошують";
 "swarm.admin" = "Адміністратор";
-"swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.banned" = "Заборонена";
+"swarm.unknown" = "Невідомі";
+"swarm.addMorePeople" = "Ви можете додати більше людей до цього рога";
+"swarm.addMember" = "Додавати члена";
+"swarm.confirmLeaveSwarm" = "Ти впевнений, що хочеш покинути цей рог?";
+"swarm.Leave" = "Відходи";
 // Smartlist
 "smartlist.yesterday" = "Вчора";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Публічний каталог";
 "smartlist.conversations" = "Групові чати";
-"smartlist.searching" = "Searching...";
-"smartlist.noResults" = "No results";
-"smartlist.noConversation" = "No conversations";
-"smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searching" = "Шукаю...";
+"smartlist.noResults" = "Ніяких результатів";
+"smartlist.noConversation" = "Ніяких розмов";
+"smartlist.searchBarPlaceholder" = "Введіть ім'я...";
+"smartlist.searchBar" = "Пошук нових або існуючих контактів...";
 "smartlist.noNetworkConnectivity" = "Відсутнє з’єднання з мережею";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Переконайтеся, що доступ на мобільний телефон у ваших налаштуваннях";
 "smartlist.accountsTitle" = "Облікові записи";
 "smartlist.addAccountButton" = "+ Додати обліковий запис";
-"smartlist.noNumber" = "Selected contact does not have any number";
-"smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Invitations";
+"smartlist.noNumber" = "Вибраний контакт не має ніякого номера";
+"smartlist.selectOneNumber" = "Виберіть один з цифр";
+"smartlist.invitations" = "Запрошення";
 "smartlist.accountSettings" = "Налаштування облікового запису";
 "smartlist.advancedSettings" = "Розширені налаштування";
 "smartlist.aboutJami" = "Про Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.sendRequestTitle" = "Send Contact Request";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.messagePlaceholder" = "Напишіть повідомлення ";
+"conversation.explanationSendingLocationTo" = "Ви зараз ділитеся своїм місцем розташуванням з ";
+"conversation.explanationReceivingLocationFrom" = "Ви зараз отримуєте пряму локацію від ";
+"conversation.errorSavingImage" = "Не вдалося зберегти зображення в галерею";
+"conversation.receivedRequest" = "\%@\ послав вам запит на розмову.";
+"conversation.incomingRequest" = "Посилала прохання про розмову.";
+"conversation.requestMessage" = "Привіт, чи не хочеш приєднатися до розмови?";
+"conversation.notContact" = "\%@\ не в списку контактів.";
+"conversation.sendRequest" = "Відправить йому/їй запит на контакт, щоб вони могли обмінюватися разом";
+"conversation.sendRequestTitle" = "Відправляйте запит на зв'язок";
+"conversation.synchronizationTitle" = "Ви прийняли запит на розмову.";
+"conversation.synchronizationMessage" = "Ми чекаємо \%@\ підключення для синхронізації розмови.";
 
 //Invitations
-"invitations.noInvitations" = "No invitations";
+"invitations.noInvitations" = "Ніяких запрошень";
 
 // Walkthrough
 
@@ -111,16 +111,16 @@
 "welcome.text" = "Джамі — це вільна та універсальна платформа для зв'язку, яка оберігає приватність і свободи користувачів";
 "welcome.linkDevice" = "Прив'язати цей пристрій до облікового запису";
 "welcome.createAccount" = "Створити обліковий запис Jami";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Підключення до сервера JAMS";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустити";
 "createProfile.profileCreated" = "Далі";
-"createProfile.title" = "Personalise your profile";
-"createProfile.enterNameLabel" = "Enter a display name";
+"createProfile.title" = "Персоналізуйте свій профіль";
+"createProfile.enterNameLabel" = "Введіть ім'я дисплею";
 "createProfile.enterNamePlaceholder" = "Введіть ім'я";
-"createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
-"createProfile.createYourAvatar" = "Create your avatar";
+"createProfile.subtitle" = "Ваш профіль буде передано вашим контактам. Ви можете змінити його в будь-який час.";
+"createProfile.createYourAvatar" = "Створюйте свій аватар";
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Створіть ваш обліковий запис";
@@ -129,40 +129,40 @@
 "createAccount.newPasswordPlaceholder" = "Пароль";
 "createAccount.repeatPasswordPlaceholder" = "Підтвердити пароль";
 "createAccount.passwordCharactersNumberError" = "мінімум 6 символів";
-"createAccount.passwordNotMatchingError" = "passwords do not match";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "invalid username";
-"createAccount.usernameAlreadyTaken" = "username already taken";
-"createAccount.usernameValid" = "username is available";
-"createAccount.loading" = "Loading";
+"createAccount.passwordNotMatchingError" = "паролі не відповідають";
+"createAccount.lookingForUsernameAvailability" = "шукаючи доступність...";
+"createAccount.invalidUsername" = "недійсне ім'я користувача";
+"createAccount.usernameAlreadyTaken" = "Уживальне ім'я вже прийнято";
+"createAccount.usernameValid" = "користувацьке ім'я доступне";
+"createAccount.loading" = "Завантаження";
 "createAccount.waitCreateAccountTitle" = "Додавання облікового запису";
-"createAccount.RegisterAUsername" = "Register a username";
-"createAccount.ChooseAPassword" = "Encrypt my account";
-"createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
-"createAccount.EnableNotifications" = "Notifications";
-"createAccount.Recommended" = "(Recommended)";
+"createAccount.RegisterAUsername" = "Зареєструйте ім'я користувача";
+"createAccount.ChooseAPassword" = "Зашифруйте мій рахунок";
+"createAccount.PasswordInformation" = "Виберіть пароль для шифрування локального рахунку. Не забудьте його, інакше ви не зможете відновити свій рахунок";
+"createAccount.EnableNotifications" = "За повідомленнями";
+"createAccount.Recommended" = "(Заповноважена)";
 "createAccount.UsernameNotRegisteredTitle" = "Збій мережі";
-"createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
+"createAccount.UsernameNotRegisteredMessage" = "Уведено обліковий запис, але ім'я користувача не зареєстровано";
 "createAccount.timeoutTitle" = "Обліковий запис створено";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.timeoutMessage" = "Запис користувача може зайняти кілька хвилин.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link device";
+"linkToAccount.waitLinkToAccountTitle" = "Спільвання рахунків";
+"linkToAccount.linkButtonTitle" = "Устрій зв'язку";
 "linkToAccount.passwordPlaceholder" = "Пароль";
 "linkToAccount.pinPlaceholder" = "PIN-код";
-"linkToAccount.passwordLabel" = "Enter Password";
+"linkToAccount.passwordLabel" = "Введіть пароль";
 "linkToAccount.pinLabel" = "Ввести PIN-код";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Для генерування PIN-коду перейдіть до налаштувань управління рахунком на пристрої, що містять акаунт, який ви хочете використовувати. У налаштуваннях пристроїв виберіть \"Звязати інше пристрої до цього акаунту\". Ви отримаєте потрібний PIN для заповнення цієї форми.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
+"linkToAccountManager.signIn" = "Підпишіться";
 "linkToAccountManager.passwordPlaceholder" = "Пароль";
-"linkToAccountManager.passwordLabel" = "Enter Password";
+"linkToAccountManager.passwordLabel" = "Введіть пароль";
 "linkToAccountManager.usernamePlaceholder" = "Ім’я";
-"linkToAccountManager.usernameLabel" = "Enter Username";
+"linkToAccountManager.usernameLabel" = "Введіть ім'я користувача";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Введіть URL JAMS";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Не можу знайти обліковий запис";
@@ -170,37 +170,37 @@
 "alerts.accountAddedTitle" = "Обліковий запис додано";
 "alerts.accountNoNetworkTitle" = "Не можу з'єднатися з мережею";
 "alerts.accountNoNetworkMessage" = "Не вдалося додати обліковий запис, оскільки Джамі не вдалося з'єднатися до розподіленої мережі. Перевірте зв'язок пристрою з мережею.";
-"alerts.accountDefaultErrorTitle" = "Unknown error";
-"alerts.accountDefaultErrorMessage" = "The account couldn't be created.";
+"alerts.accountDefaultErrorTitle" = "Невідома помилка";
+"alerts.accountDefaultErrorMessage" = "Запис не міг бути створений.";
 "alerts.profileTakePhoto" = "Зняти фото";
-"alerts.profileUploadPhoto" = "Upload photo";
+"alerts.profileUploadPhoto" = "Завантажити фото";
 "alerts.profileCancelPhoto" = "Скасувати";
-"alerts.accountLinkedTitle" = "Linking account";
+"alerts.accountLinkedTitle" = "Спільний рахунок";
 "alerts.dbFailedTitle" = "Під час запуску Джамі сталася помилка";
-"alerts.dbFailedMessage" = "Please close application and try to open it again";
-"alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
-"alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
-"alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
-"alerts.confirmDeleteConversationTitle" = "Delete Conversation";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
-"alerts.confirmClearConversationTitle" = "Clear Conversation";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.dbFailedMessage" = "Будь ласка, закрийте заявку і спробуйте відкрити її знову";
+"alerts.confirmBlockContact" = "Ви впевнені, що хочете заблокувати цей контакт?";
+"alerts.confirmBlockContactTitle" = "Блок контакту";
+"alerts.confirmDeleteConversation" = "Ти впевнений, що хочеш назавжди видалити цю розмову?";
+"alerts.confirmDeleteConversationFromContact" = "Ти впевнений, що хочеш видалити розмову з цим контактом?";
+"alerts.confirmDeleteConversationTitle" = "Знімайте розмову";
+"alerts.confirmClearConversation" = "Ти впевнений, що хочеш розмовляти з цим контактом?";
+"alerts.confirmClearConversationTitle" = "Ясна розмова";
+"alerts.noMediaPermissionsTitle" = "Звіленої інформації не надано дозволу";
+"alerts.noLibraryPermissionsTitle" = "Доступ до фотобіблиотеки не наданий";
+"alerts.noLocationPermissionsTitle" = "Доступ до місця не наданий";
+"alerts.errorWrongCredentials" = "Не можу зв'язатися з наданим менеджером рахунку.";
+"alerts.recordVideoMessage" = "Запишіть відео повідомлення";
+"alerts.recordAudioMessage" = "Запишіть аудіоповість";
+"alerts.uploadFile" = "Завантаження файлу";
+"alerts.uploadPhoto" = "Завантажити фото або фільм";
+"alerts.locationServiceIsDisabled" = "Зверніть \"Сервіси місцезнаходження\", щоб \"Джамі\" визначив ваше місцезнаходження.";
+"alerts.locationSharing" = "Розділіть моє місцезнаходження";
+"alerts.alreadylocationSharing" = "Уже поділяється місцезнаходженням з цим користувачем";
+"alerts.locationSharingDurationTitle" = "Як довго ділиться місцезнаходження?";
+"alerts.locationSharingDuration10min" = "10 хвилин";
+"alerts.locationSharingDuration1hour" = "1 годину";
+"alerts.mapInformation" = "Інформація з карти";
+"alerts.openStreetMapCopyright" = "© Докладчики OpenStreetMap";
 "alerts.openStreetMapCopyrightMoreInfo" = "Дізнатися більше";
 
 //Actions
@@ -209,90 +209,90 @@
 "actions.clearAction" = "Очистити";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "Позванка з ";
 "alerts.incomingCallButtonIgnore" = "Ігнорувати";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
-"actions.goToSettings" = "Go to Settings";
+"actions.startAudioCall" = "Зов'янок з аудіо";
+"actions.startVideoCall" = "Віддіові дзвінки";
+"actions.goToSettings" = "Перейти до Настройки";
 "actions.stopLocationSharing" = "Зупинити поширення";
 
 //Calls
 "calls.callItemTitle" = "Дзвінок";
 "calls.unknown" = "Невідомий";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "Ringing…";
-"calls.connecting" = "Connecting…";
+"calls.incomingCallInfo" = "Хоче розмовляти з тобою";
+"calls.ringing" = "Звон...";
+"calls.connecting" = "З'єднавши...";
 "calls.searching" = "Пошук…";
-"calls.callFinished" = "Call finished";
-"calls.currentCallWith" = "Call with ";
-"calls.haghUp" = "hang up";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
-"calls.lowerHand" = "lower hand";
+"calls.callFinished" = "Зов'язок завершений";
+"calls.currentCallWith" = "Звони з ";
+"calls.haghUp" = "Звішайте";
+"calls.maximize" = "максимальна";
+"calls.minimize" = "мінімізувати";
+"calls.setModerator" = "встановлений модератор";
+"calls.removeModerator" = "Moderator";
+"calls.muteAudio" = "мовчазний аудіо";
+"calls.unmuteAudio" = "незатиснуваний аудіо";
+"calls.lowerHand" = "нижню руку";
 
 //Account Page
 "accountPage.devicesListHeader" = "Пристрої";
 "accountPage.settingsHeader" = "Налаштування";
 "accountPage.username" = "Ім’я";
-"accountPage.usernameNotRegistered" = "username: not registered";
+"accountPage.usernameNotRegistered" = "користувацьке ім'я: не зареєстровано";
 "accountPage.credentialsHeader" = "Відомості про обліковий запис";
-"accountPage.enableProxy" = "Enable Proxy";
+"accountPage.enableProxy" = "Отримати прокси";
 "accountPage.blockedContacts" = "Заблоковані контакти";
-"accountPage.unblockContact" = "UNBLOCK";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
+"accountPage.unblockContact" = "БЛОКОННА";
+"accountPage.proxyAddressAlert" = "Додайте прокси-адрес";
+"accountPage.enableProxy" = "Отримати прокси";
+"accountPage.noProxyExplanationLabel" = "Устрій не отримає повідомлення, коли прокси-прокси відключено.";
 "accountPage.saveProxyAddress" = "Зберігти";
 "accountPage.proxyPaceholder" = "Адреса проксі";
 "accountPage.enableNotifications" = "Увімкнути оповіщення";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
-"accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
+"accountPage.proxyDisabledAlertTitle" = "Прокси-сервер відключений";
+"accountPage.proxyDisabledAlertBody" = "Щоб отримати повідомлення, будь ласка, включте прокси";
 "accountPage.revokeDeviceTitle" = "Відкликати пристрій";
-"accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
+"accountPage.revokeDeviceMessage" = "Ви впевнені, що хочете скасувати цей пристрій?";
 "accountPage.revokeDeviceButton" = "Відкликати";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
-"accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
-"accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Incorrect password";
-"accountPage.deviceRevocationUnknownDevice" = "Unknown device";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.revokeDevicePlaceholder" = "Введіть пароль";
+"accountPage.deviceRevoked" = "Завершено скасування пристрою";
+"accountPage.deviceRevocationProgress" = "Відкликати...";
+"accountPage.deviceRevocationSuccess" = "Пристрій був відкликаний";
+"accountPage.deviceRevocationTryAgain" = "Попробуй ще раз.";
+"accountPage.deviceRevocationWrongPassword" = "Неправильний пароль";
+"accountPage.deviceRevocationUnknownDevice" = "Невідоме пристрої";
+"accountPage.deviceRevocationError" = "Помилка відкликання пристрою";
 "accountPage.linkDeviceTitle" = "Прив'язати інший пристрій";
 "accountPage.other" = "Інше";
 "accountPage.removeAccountTitle" = "Вилучити обліковий запис";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "Націкаючи на \"Вилучити\", ви видалите цей акаунт на цьому пристрої!";
 "accountPage.removeAccountButton" = "Видалити";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "Register a username";
-"accountPage.passwordPlaceholder" = "Enter account password";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.shareAccountDetails" = "Деталі рахунку";
+"accountPage.contactMeOnJamiTitle" = "Звініться зі мною на Джамі!";
+"accountPage.contactMeOnJamiContant" = "Зверніться до мене за допомогою \"%s\" на платформі спілкування, що поширюється Jami: https://jami.net";
+"accountPage.registerNameTitle" = "Зареєструйте ім'я користувача";
+"accountPage.passwordPlaceholder" = "Введіть пароль рахунку";
+"accountPage.usernamePlaceholder" = "Введіть бажане ім'я користувача";
+"accountPage.registerNameErrorMessage" = "Вибрано ім'я користувача не доступне";
+"accountPage.usernameRegistering" = "Реєстрація";
 "accountPage.usernameRegisterAction" = "Зареєструватися";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
+"accountPage.usernameRegistrationFailed" = "Зареєстрація не вдалося. Прошу перевірити пароль.";
 "accountPage.createPassword" = "Створити пароль";
 "accountPage.changePassword" = "Змінити пароль";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
-"accountPage.peerDiscovery" = "Auto connect on local network";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.oldPasswordPlaceholder" = "Введіть старий пароль";
+"accountPage.newPasswordPlaceholder" = "Введіть новий пароль";
+"accountPage.newPasswordConfirmPlaceholder" = "Підтвердити новий пароль";
+"accountPage.changePasswordError" = "Пароль невірна";
+"accountPage.enableBoothMode" = "Отримати режим бути";
+"accountPage.disableBoothMode" = "Виключити режим бути";
+"accountPage.disableBoothModeExplanation" = "Будь ласка, подайте пароль рахунку";
+"accountPage.boothModeExplanation" = "У режимі кабіни історія розмов не збереглася і функціонал Jami обмежений виходячими дзвінками.";
+"accountPage.noBoothMode" = "Щоб вчинити режим Бут, спочатку потрібно створити пароль рахунку.";
+"accountPage.boothModeAlertMessage" = "Після включення режиму \"бути\" всі ваші розмови будуть видалені.";
+"accountPage.peerDiscovery" = "Автополучається в локальній мережі";
+"accountPage.autoRegistration" = "Автореєстр після закінчення терміну дії";
 "accountPage.connectivityHeader" = "З'єднання";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Включити TURN";
 "accountPage.turnServer" = "Адреса TURN";
 "accountPage.turnUsername" = "Обрати ім'я";
 "accountPage.turnPassword" = "Обрати пароль";
@@ -305,18 +305,18 @@
 "account.port" = "Порт";
 "account.proxyServer" = "Проксі";
 "account.createSipAccount" = "Створити обліковий запис SIP";
-"account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "Enter Password";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
+"account.usernameLabel" = "Введіть ім'я користувача";
+"account.passwordLabel" = "Введіть пароль";
+"account.serverLabel" = "Введіть адресу";
+"account.portLabel" = "Введіть номер порта";
 "account.accountStatus" = "Стан облікового запису";
 "account.enableAccount" = "Дозволити обліковий запис";
 "account.statusOnline" = "У мережі";
 "account.statusOffline" = "Поза мережею";
 "account.statusConnecting" = "З'єднання";
 "account.statusUnknown" = "Невідомий";
-"account.statusConnectionerror" = "Connection Error";
-"account.needMigration" = "account need to be migrated";
+"account.statusConnectionerror" = "Помилка з'єднання";
+"account.needMigration" = "рахунку потрібно перевести";
 "account.me" = "Я";
 
 //Block List Page
@@ -324,91 +324,91 @@
 
 //Link New Device
 "linkDevice.title" = "Прив'язати новий пристрій";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "A network error occured during the export";
+"linkDevice.passwordError" = "Пароль, яку ви ввели, не розблокує цей рахунок";
+"linkDevice.networkError" = "Помилка мережі, що відбулася під час експорту";
 "linkDevice.defaultError" = "При імпорті трапилася помилка";
 "linkDevice.explanationMessage" = "Щоб завершити, відкрийте Джамі на іншому пристрої й виберіть «Прив'язати інший пристрій до облікового запису». Ваш PIN-код дійсний протягом 10 хвилин.";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "Перевірка";
 
 //Contact Page
-"contactPage.startAudioCall" = "Start Audio Call";
-"contactPage.startVideoCall" = "Start Video Call";
-"contactPage.sendMessage" = "Send Message";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.startAudioCall" = "Почнете аудіозванк";
+"contactPage.startVideoCall" = "Почнете відеозванк";
+"contactPage.sendMessage" = "Посилайте повідомлення";
+"contactPage.clearConversation" = "Чистий чат";
+"contactPage.blockContact" = "Блок контакту";
+"contactPage.removeConversation" = "Знімайте розмову";
 
 //DataTransfer
-"dataTransfer.readableStatusCreated" = "Initializing…";
+"dataTransfer.readableStatusCreated" = "Ініціалізація...";
 "dataTransfer.readableStatusError" = "Помилка";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusAwaiting" = "Очікую...";
+"dataTransfer.readableStatusOngoing" = "Передача";
 "dataTransfer.readableStatusCanceled" = "Скасовано";
-"dataTransfer.sendingFailed" = "Failed to send";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.sendingFailed" = "Не вдалося відправити";
+"dataTransfer.readableStatusSuccess" = "Повністю";
 "dataTransfer.readableStatusCancel" = "Скасувати";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
-"notifications.missedCall" = "Missed Call";
-"notifications.newFile" = "New file";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"notifications.incomingCall" = "Повідомлення";
+"notifications.missedCall" = "Згублений дзвін";
+"notifications.newFile" = "Новий файл";
+"notifications.locationSharingStarted" = "Розпочалося обмін місцем розташування";
+"notifications.locationSharingStopped" = "Дохідний обмін місцем розташування припинено";
+"dataTransfer.readableStatusAwaiting" = "Очікую...";
+"dataTransfer.readableStatusOngoing" = "Передача";
 "dataTransfer.readableStatusCanceled" = "Скасовано";
-"dataTransfer.readableStatusSuccess" = "Complete";
+"dataTransfer.readableStatusSuccess" = "Повністю";
 "dataTransfer.readableStatusCancel" = "Скасувати";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Натисніть, щоб почати запис";
 "dataTransfer.sendMessage" = "Відправити";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
-"generatedMessage.swarmCreated" = "Swarm created";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.contactAdded" = "Ви отримали невідпущення";
+"generatedMessage.swarmCreated" = "Створена пастка";
+"generatedMessage.invitationReceived" = "був запрошений приєднатися";
+"generatedMessage.invitationAccepted" = "приєднався до розмови";
+"generatedMessage.youJoined" = "Ти приєднався до розмови";
+"generatedMessage.contactBanned" = "був кинутий";
+"generatedMessage.contactReAdded" = "було додано";
 "generatedMessage.outgoingCall" = "Вихідний виклик";
 "generatedMessage.incomingCall" = "Вхідний виклик";
 "generatedMessage.missedOutgoingCall" = "Пропущений вихідний виклик";
 "generatedMessage.missedIncomingCall" = "Пропущений вхідний виклик";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.liveLocationSharing" = "Поділення місцями на живо";
+"generatedMessage.contactLeftConversation" = "ліво";
 
 //General Settings
 "generalSettings.title" = "Розширені налаштування";
-"generalSettings.videoSettings" = "Video Settings";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoSettings" = "Настройки відео";
+"generalSettings.videoAcceleration" = "Отримати прискорення відео";
 "generalSettings.fileTransfer" = "Передача файлів";
-"generalSettings.locationSharing" = "Location Sharing";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.locationSharing" = "Розділення місця";
+"generalSettings.automaticAcceptIncomingFiles" = "Автоматично приймають вхідні файли";
+"generalSettings.acceptTransferLimit" = "Прийміть ліміт переведення";
+"generalSettings.acceptTransferLimitDescription" = "(у MB, 0 = не обмежено)";
+"generalSettings.limitLocationSharingDuration" = "Ограничити тривалість обміну місцем розташування";
+"generalSettings.locationSharingDuration" = "Тривалість позиційних акцій";
 
 
 //Log View
-"logView.title" = "Diagnostics";
-"logView.description" = "Open diagnostic log settings";
-"logView.startLogging" = "Start Logging";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.title" = "Діагностика";
+"logView.description" = "Відкриття налаштувань діагностичного журналу";
+"logView.startLogging" = "Почнете заголовку";
+"logView.stopLogging" = "Перестань діяти";
+"logView.saveError" = "Не вдалося зберегти файл";
+"logView.shareError" = "Не вдалося поділити файл";
 
 //Migrate Account
 "migrateAccount.title" = "Переведення облікового запису";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.migrateButton" = "Миграційний рахунок";
+"migrateAccount.explanation" = "Цей рахунок потрібно перемігравати";
 "migrateAccount.passwordPlaceholder" = "Ввести пароль";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
+"migrateAccount.passwordExplanation" = "Щоб продовжити переїзд, потрібно ввести пароль, який був використаний для цього облікового запису";
 "migrateAccount.removeAccount" = "Вилучити обліковий запис";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.error" = "Не вдалося переміграти свій акаунт. Ви можете спробувати знову або видалити свій акаунт.";
+"migrateAccount.migrating" = "Миграція...";
 "migrateAccount.cancel" = "Скасувати";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "Переїжджайте на інший обліковий запис";
 
 

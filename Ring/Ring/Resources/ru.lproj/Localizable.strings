@@ -43,29 +43,29 @@
 "swarmcreation.searchBar" = "Поиск контакта...";
 "swarmcreation.createTheSwarm" = "Создать группу";
 "swarmcreation.addADescription" = "Добавить описание";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Вы можете добавить в ров больше людей";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
+"swarm.ignoreSwarm" = "Игнорируйте ров";
+"swarm.leaveConversation" = "Оставьте разговор.";
 "swarm.chooseColor" = "Выбрать цвет";
 "swarm.typeOfSwarm" = "Тип роя";
 "swarm.identifier" = "Идентификатор";
 "swarm.about" = "О программе";
 "swarm.members" = "Члены";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Добавить описание";
 "swarm.oneToOne" = "Частный рой";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "Администратор приглашает только";
 "swarm.invitesOnly" = "Частный рой";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
+"swarm.publicChat" = "Общественный ров";
+"swarm.others" = "Другие";
 "swarm.member" = "Участник";
 "swarm.invited" = "Приглашен(а)";
 "swarm.admin" = "Администратор";
 "swarm.banned" = "Заблокирован";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.unknown" = "Неизвестный";
+"swarm.addMorePeople" = "Вы можете добавить в этот ров больше людей";
+"swarm.addMember" = "Добавить член";
+"swarm.confirmLeaveSwarm" = "Ты уверен, что хочешь покинуть этот рог?";
 "swarm.Leave" = "Покинуть";
 // Smartlist
 "smartlist.yesterday" = "Вчера";
@@ -92,14 +92,14 @@
 "conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
 "conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
 "conversation.errorSavingImage" = "Не удалось сохранить изображение в галерею";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%@\\ послал вам запрос на разговор.";
+"conversation.incomingRequest" = "Я отправил вам запрос на разговор.";
 "conversation.requestMessage" = "Привет,\nВы хотите присоединиться к разговору?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "\%@\ не в вашем списке контактов.";
 "conversation.sendRequest" = "Отправьте ему/ей запрос контакта, чтобы иметь возможность совместного обмена";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "Посылать запрос на контакт";
 "conversation.synchronizationTitle" = "Вы приняли запрос на беседу.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Мы ждем \%@\ подключения, чтобы синхронизировать разговор.";
 
 //Invitations
 "invitations.noInvitations" = "Приглашений нет";
@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Авто-подключение к локальной сети";
 "accountPage.autoRegistration" = "Автоматическая регистрация после истечения срока действия";
 "accountPage.connectivityHeader" = "Связь";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Включить TURN";
 "accountPage.turnServer" = "Адрес TURN";
 "accountPage.turnUsername" = "Имя пользователя TURN";
 "accountPage.turnPassword" = "Пароль TURN";
@@ -364,40 +364,40 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Ты получил неотказание";
 "generatedMessage.swarmCreated" = "Рой создан";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "приглашали к участию";
+"generatedMessage.invitationAccepted" = "Присоединился к разговору";
+"generatedMessage.youJoined" = "Ты присоединился к разговору";
+"generatedMessage.contactBanned" = "был выбит";
+"generatedMessage.contactReAdded" = "был передобавлен";
 "generatedMessage.outgoingCall" = "Исходящий вызов";
 "generatedMessage.incomingCall" = "Входящий звонок";
 "generatedMessage.missedOutgoingCall" = "Непринятый исходящий звонок";
 "generatedMessage.missedIncomingCall" = "Пропущенный входящий звонок";
 "generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "левый";
 
 //General Settings
 "generalSettings.title" = "Дополнительные настройки";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Настройки видео";
 "generalSettings.videoAcceleration" = "Разрешить видео-ускорение";
 "generalSettings.fileTransfer" = "Передача файла";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Разделение мест";
 "generalSettings.automaticAcceptIncomingFiles" = "Автоматически принимать входящие файлы";
 "generalSettings.acceptTransferLimit" = "Принять лимит на передачу";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.acceptTransferLimitDescription" = "(в МБ, 0 = неограниченный)";
+"generalSettings.limitLocationSharingDuration" = "Ограничить продолжительность совместного размещения";
+"generalSettings.locationSharingDuration" = "Продолжительность позиционных акций";
 
 
 //Log View
 "logView.title" = "Диагностика";
 "logView.description" = "Открыть настройки диагностических логов";
 "logView.startLogging" = "Начать логирование";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Перестаньте лесозаготовку";
+"logView.saveError" = "Не удалось сохранить файл";
+"logView.shareError" = "Не удалось поделиться файлом";
 
 //Migrate Account
 "migrateAccount.title" = "Перенос аккаунта";
