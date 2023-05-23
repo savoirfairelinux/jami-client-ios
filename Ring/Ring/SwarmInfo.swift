@@ -65,6 +65,7 @@ class ParticipantInfo: Equatable, Hashable {
         self.role = role
         self.finalName.accept(jamiId)
         self.finalName
+            .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe { [weak self] name in
                 guard let self = self else { return }
                 // when profile does not have an avatar, contact image
