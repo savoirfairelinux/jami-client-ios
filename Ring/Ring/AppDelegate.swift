@@ -181,6 +181,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         callService: self.callService,
                                                         locationSharingService: self.locationSharingService, contactsService: self.contactsService,
                                                         callsProvider: self.callsProvider, requestsService: self.requestsService)
+        /*
+         When the application starts, all conversations will be loaded.
+         Conversation data should be cleaned to prevent reloading conversations
+         that were updated from notifications
+         */
+        self.conversationManager?.cleanConversationData()
         self.videoManager = VideoManager(with: self.callService, videoService: self.videoService)
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()

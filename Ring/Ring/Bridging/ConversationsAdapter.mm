@@ -240,6 +240,10 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
     return [NSString stringWithUTF8String: startConversation(std::string([accountId UTF8String])).c_str()];
 }
 
+- (void)reloadConversationsAndRequests:(NSString*)accountId {
+    reloadConversationsAndRequests(std::string([accountId UTF8String]));
+}
+
 #pragma mark MessagesAdapterDelegate
 + (id <MessagesAdapterDelegate>)messagesDelegate {
     return _messagesDelegate;
@@ -247,13 +251,6 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
 
 + (void) setMessagesDelegate:(id<MessagesAdapterDelegate>)delegate {
     _messagesDelegate = delegate;
-}
-
-- (void)reloadConversationsAndRequests {
-    auto accounts = getAccountList();
-    for(auto account: accounts) {
-        reloadConversationsAndRequests(account);
-    }
 }
 
 @end

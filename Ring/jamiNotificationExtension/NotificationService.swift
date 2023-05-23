@@ -173,9 +173,11 @@ class NotificationService: UNNotificationServiceExtension {
             }
             switch event {
             case .message:
+                self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
                 self.numberOfMessages += 1
                 self.configureMessageNotification(from: eventData.jamiId, body: eventData.content, accountId: self.accountId, conversationId: eventData.conversationId, groupTitle: "")
             case .fileTransferDone:
+                self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
                 if let url = URL(string: eventData.content) {
                     self.configureFileNotification(from: eventData.jamiId, url: url, accountId: self.accountId, conversationId: eventData.conversationId)
                 } else {
@@ -188,6 +190,7 @@ class NotificationService: UNNotificationServiceExtension {
             case .fileTransferInProgress:
                 self.numberOfFiles += 1
             case .invitation:
+                self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
                 self.syncCompleted = true
                 self.numberOfMessages += 1
                 self.configureMessageNotification(from: eventData.jamiId,
@@ -266,6 +269,35 @@ class NotificationService: UNNotificationServiceExtension {
         }
         notificationData.append(data)
         userDefaults.set(notificationData, forKey: Constants.notificationData)
+    }
+
+    private func conversationUpdated(conversationId: String, accountId: String) {
+        var conversationData = [String: String]()
+        conversationData[Constants.NotificationUserInfoKeys.conversationID.rawValue] = conversationId
+        conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] = accountId
+        self.setUpdatedConversations(conversation: conversationData)
+    }
+
+    private func setUpdatedConversations(conversation: [String: String]) {
+        /*
+         Save updated conversations so they can be reloaded when Jami
+         becomes active.
+         */
+        guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else {
+            return
+        }
+        var conversationData = [[String: String]]()
+        if let existingData = userDefaults.object(forKey: Constants.updatedConversations) as? [[String: String]] {
+            conversationData = existingData
+        }
+        for data in conversationData
+        where data[Constants.NotificationUserInfoKeys.conversationID.rawValue] ==
+            conversation[Constants.NotificationUserInfoKeys.conversationID.rawValue] {
+            return
+        }
+
+        conversationData.append(conversation)
+        userDefaults.set(conversationData, forKey: Constants.updatedConversations)
     }
 
     private func setNotificationCount(notification: UNMutableNotificationContent) {
