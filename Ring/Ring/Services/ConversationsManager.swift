@@ -113,20 +113,16 @@ class ConversationsManager {
                 case .appEnterForeground:
                     DispatchQueue.global(qos: .background).async { [weak self] in
                         guard let self = self else { return }
-                        self.conversationService.reloadConversationsAndRequests()
-                        self.accountsService.setAccountsActive(active: true)
-                        // reload requests, since they may be handeled by notification extension
-                        // and Jami may not have up to date requests when entering foreground
-                        if let currentAccount = self.accountsService.currentAccount {
-                            self.requestService.updateConversationsRequests(withAccount: currentAccount.id)
-                            self.conversationService.updateConversations()
-                        }
+                        self.updateForegroundState()
                     }
                 case .callProviderPreviewPendingCall:
                     self.accountsService.setAccountsActive(active: true)
+                    // Reload conversations updated in the background if needed.
                     DispatchQueue.global(qos: .background).async { [weak self] in
-                        guard let self = self else { return }
-                        self.conversationService.reloadConversationsAndRequests()
+                        guard let self = self,
+                              let updatedConversations = self.getConversationData() else { return }
+                        self.cleanConversationData()
+                        self.reloadConversationsAndRequests(updatedConversations: updatedConversations)
                     }
                 case .callEnded, .callProviderCancelCall:
                     DispatchQueue.main.async {
@@ -153,6 +149,51 @@ class ConversationsManager {
             appDelegate.updateCallScreenState(presenting: false)
         }
         self.accountsService.setAccountsActive(active: false)
+    }
+
+    func cleanConversationData() {
+        guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else {
+            return
+        }
+        userDefaults.set([[String: String]](), forKey: Constants.updatedConversations)
+    }
+
+    func getConversationData() -> [[String: String]]? {
+        guard let userDefaults = UserDefaults(suiteName: Constants.appGroupIdentifier) else {
+            return nil
+        }
+        return userDefaults.object(forKey: Constants.updatedConversations) as? [[String: String]]
+    }
+
+    func updateForegroundState() {
+        guard let updatedConversations = self.getConversationData() else {
+            self.accountsService.setAccountsActive(active: true)
+            return
+        }
+        self.cleanConversationData()
+        self.reloadConversationsAndRequests(updatedConversations: updatedConversations)
+        self.accountsService.setAccountsActive(active: true)
+
+        self.reloadConversationMessages(updatedConversations: updatedConversations)
+    }
+
+    func reloadConversationsAndRequests(updatedConversations: [[String: String]]) {
+        for conversationData in updatedConversations {
+            if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
+                self.conversationService.reloadConversationsAndRequests(accountId: accountId)
+            }
+        }
+    }
+
+    func reloadConversationMessages(updatedConversations: [[String: String]]) {
+        for conversationData in updatedConversations {
+            if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue],
+               let currentAccountId = self.accountsService.currentAccount?.id,
+               let conversationId = conversationData[Constants.NotificationUserInfoKeys.conversationID.rawValue],
+               accountId == currentAccountId {
+                self.conversationService.updateConversationMessages(conversationId: conversationId)
+            }
+        }
     }
 
     @objc

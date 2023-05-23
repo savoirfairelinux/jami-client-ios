@@ -187,6 +187,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         prepareVideoAcceleration()
         prepareAccounts()
+        /*
+         When the application starts, all conversations will be loaded.
+         Conversation data should be cleaned to prevent reloading conversations
+         that were updated from notifications
+         */
+        self.conversationManager?.cleanConversationData()
         self.voipRegistry.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(registerNotifications),
                                                name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),

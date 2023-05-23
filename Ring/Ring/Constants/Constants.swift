@@ -22,6 +22,7 @@ public class Constants: NSObject {
     @objc public static let notificationReceived = "com.savoirfairelinux.notificationExtension.receivedNotification" as CFString
     @objc public static let notificationAppIsActive = "com.savoirfairelinux.jami.appActive" as CFString
     @objc public static let notificationData = "notificationData"
+    @objc public static let updatedConversations = "updatedConversations"
     @objc public static let appGroupIdentifier = "group.com.savoirfairelinux.ring"
     @objc public static let notificationsCount = "notificationsCount"
 

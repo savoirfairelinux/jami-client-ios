@@ -145,12 +145,6 @@ class ConversationsService {
         return []
     }
 
-    func updateConversations() {
-        self.conversations.value.forEach { conversation in
-            self.updateConversationMessages(conversationId: conversation.id)
-        }
-    }
-
     func updateConversationMessages(conversationId: String) {
         for conversation in self.conversations.value where conversation.id == conversationId {
             conversation.clearMessages()
@@ -158,8 +152,8 @@ class ConversationsService {
         }
     }
 
-    func reloadConversationsAndRequests() {
-        self.conversationsAdapter.reloadConversationsAndRequests()
+    func reloadConversationsAndRequests(accountId: String) {
+        self.conversationsAdapter.reloadConversationsAndRequests(accountId)
     }
 
     private func addSwarm(conversationId: String, accountId: String, accountURI: String, to conversations: inout [ConversationModel]) {
