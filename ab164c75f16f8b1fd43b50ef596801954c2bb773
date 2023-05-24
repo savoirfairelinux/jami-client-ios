@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cb97dcf_a18ad764",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-05-24T19:36:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5aaabfc_725aa131",
+      "revId": "ab164c75f16f8b1fd43b50ef596801954c2bb773",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01130fc7_9030300e",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-12T20:22:31Z",
       "side": 1,
       "message": "it is not updated when location started/ stopped. The changes only reflected when table redrawn, for example when changing account.",
+      "revId": "ab164c75f16f8b1fd43b50ef596801954c2bb773",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c773f039_6cd1419b",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/Cells/ConversationCell.swift",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-05-24T19:36:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01130fc7_9030300e",
       "revId": "ab164c75f16f8b1fd43b50ef596801954c2bb773",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
