@@ -534,7 +534,8 @@ extension  ConversationsManager: MessagesAdapterDelegate {
             if newMessage.type == .fileTransfer {
                 let progress = self.dataTransferService.getTransferProgress(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true)
                 newMessage.transferStatus = progress == 0 ? .awaiting : progress == newMessage.totalSize ? .success : .ongoing
-                if newMessage.transferStatus == .awaiting, newMessage.totalSize <= maxSizeForAutoaccept {
+                if newMessage.transferStatus == .awaiting &&
+                    (isDownloadingEnabled(for: newMessage.totalSize) || dictionary[MessageAttributes.author.rawValue] == account.jamiId) {
                     var filename = ""
                     self.dataTransferService.downloadFile(withId: newMessage.daemonId,
                                                           interactionID: newMessage.id,
@@ -547,36 +548,34 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, conversationId: conversationId, fromLoaded: true)
     }
 
+    func isDownloadingEnabled(for size: Int) -> Bool {
+        if !UserDefaults.standard.bool(forKey: automaticDownloadFilesKey) {
+            return false
+        }
+
+        if maxSizeForAutoaccept == 0 { return true}
+        return Int(size) <= maxSizeForAutoaccept
+    }
+
     func newInteraction(conversationId: String, accountId: String, message: [String: String]) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         let newMessage = MessageModel(withInfo: message, accountJamiId: account.jamiId)
         if newMessage.type == .fileTransfer {
             newMessage.transferStatus = newMessage.incoming ? .awaiting : .success
         }
-        /// if new message was inserted check if we need to present notification
         if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, conversationId: conversationId, fromLoaded: false) {
-            /// download if file not saved yet
-            if let size = message["totalSize"],
-               (newMessage.transferStatus == .awaiting || newMessage.transferStatus == .success) {
-
-                let isReceiving = message[MessageAttributes.author.rawValue] != account.jamiId
-
-                let isAutomaticDownloadEnabled = UserDefaults.standard.bool(forKey: automaticDownloadFilesKey)
-                var isFileSizeDownloadable = false
-                if maxSizeForAutoaccept == 0 {
-                    isFileSizeDownloadable = true
-                } else {
-                    isFileSizeDownloadable = Int(size) ?? 30 * 1024 * 1024 <= maxSizeForAutoaccept
+            let incoming = message[MessageAttributes.author.rawValue] != account.jamiId
+            if incoming {
+                if newMessage.transferStatus != .awaiting || !isDownloadingEnabled(for: newMessage.totalSize) {
+                    return
                 }
-
-                if isReceiving && isFileSizeDownloadable && isAutomaticDownloadEnabled {
-                    var filename = ""
-                    self.dataTransferService.downloadFile(withId: newMessage.daemonId, interactionID: newMessage.id, fileName: &filename, accountID: accountId, conversationID: conversationId)
-                } else if !isReceiving {
-                    var filename = ""
-                    self.dataTransferService.downloadFile(withId: newMessage.daemonId, interactionID: newMessage.id, fileName: &filename, accountID: accountId, conversationID: conversationId)
+            } else {
+                if newMessage.transferStatus != .awaiting && newMessage.transferStatus != .success {
+                    return
                 }
             }
+            var filename = ""
+            self.dataTransferService.downloadFile(withId: newMessage.daemonId, interactionID: newMessage.id, fileName: &filename, accountID: accountId, conversationID: conversationId)
         }
     }
 
