@@ -114,11 +114,16 @@ final class ConversationDataHelper {
     func selectConversationsForProfile(profileUri: String, dataBase: Connection) throws -> [Conversation]? {
         var conversations = [Conversation]()
         let query = table.filter(participant == profileUri)
-        let items = try dataBase.prepare(query)
-        for item in  items {
-            conversations.append(Conversation(id: item[id], participant: item[participant]))
+        do {
+            let items = try dataBase.prepare(query)
+            for item in items {
+                conversations.append(Conversation(id: item[id], participant: item[participant]))
+            }
+            return conversations
+        } catch {
+            print("Error while preparing query: \(error)")
+            throw error
         }
-        return conversations
     }
 
     func deleteConversations(conversationID: Int64, dataBase: Connection) -> Bool {
