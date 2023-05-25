@@ -530,6 +530,54 @@ extension NotificationService {
         return nil
     }
 
+    func createSmallImage(fileURLString: String) -> UIImage? {
+        guard let escapedPath = fileURLString.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            // Handle the case where path encoding fails
+            return nil
+        }
+
+        // Construct the file URL with the correct scheme and path
+        guard let fileURL = URL(string: "file://" + escapedPath) else {
+            // Handle the case where the file URL creation fails
+            return nil
+        }
+        guard let imageSource = CGImageSourceCreateWithURL(fileURL as CFURL, nil) else {
+            return nil
+        }
+        guard let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any]
+        else {
+            return nil
+        }
+        guard let pixelWidth = imageProperties[kCGImagePropertyPixelWidth] as? Int else {
+            return nil
+        }
+        guard let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as? Int else {
+            return nil
+        }
+        guard let downsampledImage = createDownsampledImage(imageSource: imageSource, targetSize: CGSize(width: 50, height: 50), pixelWidth: pixelWidth, pixelHeight: pixelHeight) else {
+            return nil
+        }
+        //        guard let imageSource = CGImageSourceCreateWithURL(path as CFURL, nil),
+        //              let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
+        //              let pixelWidth = imageProperties[kCGImagePropertyPixelWidth] as? Int,
+        //              let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as? Int,
+        //              let downsampledImage = createDownsampledImage(imageSource: imageSource, targetSize: CGSize(width: 50, height: 50), pixelWidth: pixelWidth, pixelHeight: pixelHeight) else {
+        //            return nil
+        //        }
+
+        return UIImage(cgImage: downsampledImage)
+    }
+
+    func createDownsampledImage(imageSource: CGImageSource, targetSize: CGSize, pixelWidth: Int, pixelHeight: Int) -> CGImage? {
+        let maxDimension = max(targetSize.width, targetSize.height)
+        let options: [CFString: Any] = [
+            kCGImageSourceThumbnailMaxPixelSize: maxDimension,
+            kCGImageSourceCreateThumbnailFromImageAlways: true
+        ]
+
+        return CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
+    }
+
     private func configureFileNotification(from: String, url: URL, accountId: String, conversationId: String) {
         let content = UNMutableNotificationContent()
         content.sound = UNNotificationSound.default
@@ -540,7 +588,7 @@ extension NotificationService {
         data[Constants.NotificationUserInfoKeys.accountID.rawValue] = accountId
         data[Constants.NotificationUserInfoKeys.conversationID.rawValue] = conversationId
         content.userInfo = data
-        if let image = UIImage(contentsOfFile: url.path), let attachement = createAttachment(identifier: imageName, image: image, options: nil) {
+        if let image = createSmallImage(fileURLString: url.path), let attachement = createAttachment(identifier: imageName, image: image, options: nil) {
             content.attachments = [ attachement ]
         }
         let title = self.bestName(accountId: accountId, contactId: from)
