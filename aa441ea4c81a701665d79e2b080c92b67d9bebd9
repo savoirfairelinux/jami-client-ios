@@ -46,6 +46,30 @@
       },
       "revId": "aa441ea4c81a701665d79e2b080c92b67d9bebd9",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11f9e19b_5e710f3d",
+        "filename": "Ring/Ring/GeneralSettings/GeneralSettingsViewModel.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2023-05-25T07:42:39Z",
+      "side": 1,
+      "message": "Thank you for your reply.\n\nNUMBER\u0026nbsp;UNIT\n\neg. `2 h 23 min` \u003d `2\u0026nbsp;h 23\u0026nbsp;min`\n\nShould `min` be `m` for consistency with the Firefox convention, cf. https://git.jami.net/savoirfairelinux/jami-client-ios/-/issues/273#note_43127? i.e. `2 h 23 m` \u003d `2\u0026nbsp;h 23\u0026nbsp;m`\n\nAnother international convention for `minute(s)` and `second(s)` are `’` and `”`, respectively. https://www.nagwa.com/en/explainers/960124791407/ However, this may not be as well known, yet is a pure form (i.e. international) of minutes and seconds. If this was used there would be no space between the NUMBER and UNIT, i.e. `2h23’`\n\nSeems like following the computing convention of Firefox is the best way forward, i.e. `2 h 23 m` \u003d `2\u0026nbsp;h 23\u0026nbsp;m`\n\nHope this helps.\n\nThank you",
+      "parentUuid": "b59fba60_42f24f01",
+      "range": {
+        "startLine": 133,
+        "startChar": 28,
+        "endLine": 133,
+        "endChar": 29
+      },
+      "revId": "aa441ea4c81a701665d79e2b080c92b67d9bebd9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ],
   "submitRequirementResults": []
