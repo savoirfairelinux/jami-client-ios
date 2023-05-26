@@ -477,13 +477,11 @@ extension NotificationService {
 
     private func contactProfileName(accountId: String, contactId: String) -> String? {
         guard let documents = Constants.documentsPath else { return nil }
-        let profileURI = "ring:" + contactId
-        let profilePath = documents.path + "/" + "\(accountId)" + "/profiles/" + "\(Data(profileURI.utf8).base64EncodedString()).vcf"
-        if !FileManager.default.fileExists(atPath: profilePath) { return nil }
+        let uri = "ring:" + contactId
+        let path = documents.path + "/" + "\(accountId)" + "/profiles/" + "\(Data(uri.utf8).base64EncodedString()).vcf"
+        if !FileManager.default.fileExists(atPath: path) { return nil }
 
-        guard let data = FileManager.default.contents(atPath: profilePath),
-              let profile = VCardUtils.parseToProfile(data: data) else { return nil }
-        return profile.alias
+        return VCardUtils.getNameFromVCard(filePath: path) else { return nil }
     }
 }
 
