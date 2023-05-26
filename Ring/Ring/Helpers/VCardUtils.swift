@@ -152,4 +152,41 @@ class VCardUtils {
         let type = profileUri.contains("ring") ? ProfileType.ring : ProfileType.sip
         return Profile(uri: profileUri, alias: alias, photo: avatar, type: type.rawValue)
     }
+
+    class func getNameFromVCard(filePath: String) -> String? {
+        guard let fileStream = InputStream(fileAtPath: filePath) else {
+            return nil
+        }
+
+        fileStream.open()
+
+        defer {
+            fileStream.close()
+        }
+
+        let bufferSize = 1024
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+
+        defer {
+            buffer.deallocate()
+        }
+
+        while fileStream.hasBytesAvailable {
+            let bytesRead = fileStream.read(buffer, maxLength: bufferSize)
+
+            guard bytesRead > 0 else {
+                break
+            }
+
+            let stringRead = String(bytesNoCopy: buffer, length: bytesRead, encoding: .utf8, freeWhenDone: false)
+
+            if let lines = stringRead?.split(whereSeparator: \.isNewline) {
+                for line in lines where line.hasPrefix(VCardFields.fullName.rawValue) {
+                    return line.replacingOccurrences(of: VCardFields.fullName.rawValue, with: "")
+                }
+            }
+        }
+
+        return nil
+    }
 }
