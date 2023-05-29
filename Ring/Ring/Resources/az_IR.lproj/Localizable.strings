@@ -21,7 +21,7 @@
 // Global
 "global.homeTabBarTitle" = "دانیشیقلار";
 "global.meTabBarTitle" = "حسابلارین تنظیماتلاری";
-"global.ok" = "Tamam";
+"global.ok" = "باشه";
 "global.close" = "یاخینلاشماق";
 "global.share" = "بؤلوم";
 "global.forward" = "قاباقدا";
@@ -174,7 +174,7 @@
 "alerts.accountDefaultErrorMessage" = "حساب یاراتيلمادي.";
 "alerts.profileTakePhoto" = "عکس آل";
 "alerts.profileUploadPhoto" = "عکس آپلود";
-"alerts.profileCancelPhoto" = "Ləğv et";
+"alerts.profileCancelPhoto" = "لغو";
 "alerts.accountLinkedTitle" = "باغلانان حساب";
 "alerts.dbFailedTitle" = "جامی نین گؤستریلمه سینده خاتمه اولدو";
 "alerts.dbFailedMessage" = "لطفاً درخواستي باغلايين و اونو گئنه آچماغا چاليشين";
@@ -205,7 +205,7 @@
 
 //Actions
 "actions.deleteAction" = "حذف";
-"actions.cancelAction" = "Ləğv et";
+"actions.cancelAction" = "لغو";
 "actions.clearAction" = "واضح";
 "actions.backAction" = "گئری دؤن";
 "actions.doneAction" = "یئرلشدی";
@@ -343,10 +343,10 @@
 "dataTransfer.readableStatusError" = "خطای";
 "dataTransfer.readableStatusAwaiting" = "منتظر...";
 "dataTransfer.readableStatusOngoing" = "یئرلشمه";
-"dataTransfer.readableStatusCanceled" = "Ləğv edilib";
+"dataTransfer.readableStatusCanceled" = "لغو ائدیلدی";
 "dataTransfer.sendingFailed" = "گؤندرمهمئش";
 "dataTransfer.readableStatusSuccess" = "تام";
-"dataTransfer.readableStatusCancel" = "Ləğv et";
+"dataTransfer.readableStatusCancel" = "لغو";
 
 //Notifications
 "notifications.incomingCall" = "گئچن چاغ";
@@ -356,9 +356,9 @@
 "notifications.locationSharingStopped" = "یئرلشمه یه داوام ائتدی";
 "dataTransfer.readableStatusAwaiting" = "منتظر...";
 "dataTransfer.readableStatusOngoing" = "یئرلشمه";
-"dataTransfer.readableStatusCanceled" = "Ləğv edilib";
+"dataTransfer.readableStatusCanceled" = "لغو ائدیلدی";
 "dataTransfer.readableStatusSuccess" = "تام";
-"dataTransfer.readableStatusCancel" = "Ləğv et";
+"dataTransfer.readableStatusCancel" = "لغو";
 "dataTransfer.infoMessage" = "ضبط ائتمک اوچون باس";
 "dataTransfer.sendMessage" = "گؤنده ر";
 
@@ -408,7 +408,7 @@
 "migrateAccount.removeAccount" = "حسابي حذف ائتمک";
 "migrateAccount.error" = "حسابینی کؤچورمه یه قادیرسان. حسابینی گئنه چالیش یا دا ییرین.";
 "migrateAccount.migrating" = "کؤچورمک...";
-"migrateAccount.cancel" = "Ləğv et";
+"migrateAccount.cancel" = "لغو";
 "migrateAccount.migrateAnother" = "باشقا حسابا کؤچ";
 
 

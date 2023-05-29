@@ -1,0 +1,414 @@
+﻿ /*
+ *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+// Global
+"global.homeTabBarTitle" = "ڤڠاجرن";
+"global.meTabBarTitle" = "ڤڠاجرن حساب";
+"global.ok" = "اوكيه";
+"global.close" = "ڤرلو";
+"global.share" = "ڤڠاجين";
+"global.forward" = "ڤرلو";
+"global.save" = "ڤڠاجين";
+"global.resend" = "ڤرلو مڠهادڤي";
+"global.preview" = "ڤرسمڤڠن";
+"global.accept" = "مڠاتاه";
+"global.block" = "ڤڠاجرن";
+"global.refuse" = "رد";
+"global.name" = "اسم";
+"global.copy" = "كاپي";
+"global.reply" = "ڤرليندوڠ";
+
+// Scan
+"scan.badQrCode" = "كود QR يڠ براوسيا";
+"scan.search" = "دالم ڤرچاي...";
+
+// SwarmCreation
+"swarmcreation.searchBar" = "ڤرلو مڠمبيل ڤڠاجرن...";
+"swarmcreation.createTheSwarm" = "ممباوا ڤڠاجرن";
+"swarmcreation.addADescription" = "مڠهادڤن ڤرسمڤڠن";
+"swarmcreation.addPeople" = "تو ميتواني بيشتر از اين افراد را در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه";
+// Swarm
+"swarm.ignoreSwarm" = "تيدق ممڤوڽاءي ڤڠاجرن";
+"swarm.leaveConversation" = "ڤرنه مڠهادڤي";
+"swarm.chooseColor" = "ڤيليه ڤڠڬيل";
+"swarm.typeOfSwarm" = "نوع سور";
+"swarm.identifier" = "ڤڠڬونا";
+"swarm.about" = "دري ڤڠاجرن";
+"swarm.members" = "ڤڠڬونا";
+"swarm.addDescription" = "مڠهادڤن ڤرسمڤڠن";
+"swarm.oneToOne" = "ڤڠاجرن ڤريۏيدو";
+"swarm.adminInvitesOnly" = "منتظم مڠيڠتكن سهيڠڬ";
+"swarm.invitesOnly" = "ڤڠاجرن ڤريۏيدو";
+"swarm.publicChat" = "ڤڠاجرن ڤولاو";
+"swarm.others" = "يڠ لاين";
+"swarm.member" = "ڤڠڬونا";
+"swarm.invited" = "دجالنكن";
+"swarm.admin" = "ڤڠاره";
+"swarm.banned" = "ڤڠڬيلن";
+"swarm.unknown" = "يڠ تيدق دڤرچايا?? ي";
+"swarm.addMorePeople" = "تو ميتوانين بيشتر از اين افراد رو به اين دسته اضافه کني";
+"swarm.addMember" = "ممبنتو ممبنتو";
+"swarm.confirmLeaveSwarm" = "آيا مطمئني که ميخواي از اين سور ترک کني؟";
+"swarm.Leave" = "برلالو";
+// Smartlist
+"smartlist.yesterday" = "ديري";
+"smartlist.results" = "ڤڠاجرن ڤولاو";
+"smartlist.conversations" = "ڤڠاجرن";
+"smartlist.searching" = "دالم ڤرچاي...";
+"smartlist.noResults" = "تيدق ڤرلو";
+"smartlist.noConversation" = "تيدق اد ڤرچاي";
+"smartlist.searchBarPlaceholder" = "نامن دبريكن...";
+"smartlist.searchBar" = "ڤمبينا ڤڠاجرن بارو اتاو ڤڠاجرن يڠ سام...";
+"smartlist.noNetworkConnectivity" = "تيدق اد ڤڠاجرن نيتۏرك";
+"smartlist.cellularAccess" = "ڤرلو مڠمبيل ڤرلو دڤرلوكن دالم سيٽنگ";
+"smartlist.accountsTitle" = "حسابن";
+"smartlist.addAccountButton" = "+ مڠهادڤن حساب";
+"smartlist.noNumber" = "ڤڠاجين يڠ دڤيليه تيدق برتيندقكن ايڠين";
+"smartlist.selectOneNumber" = "انتوق سياستن";
+"smartlist.invitations" = "ڤڠاجين";
+"smartlist.accountSettings" = "ڤڠاجرن حساب";
+"smartlist.advancedSettings" = "ڤڠاجرن ڤڠاجرن";
+"smartlist.aboutJami" = "دري جامي";
+
+//Conversation
+"conversation.messagePlaceholder" = "منوليسكن ڤرساتوان ";
+"conversation.explanationSendingLocationTo" = "توڠڬوڠ ڤد ماس اين تله مڠمبيل موقعيت توڠڬوڠ ";
+"conversation.explanationReceivingLocationFrom" = "توڠڬوڠ دڤرچايا?? ي موقع يڠ دڤرچايا?? ي";
+"conversation.errorSavingImage" = "تيدق ممڤوپا?? ي ڤرسمبا?? ن كڤد ڬاليري";
+"conversation.receivedRequest" = "\%@\ ڽن ممبريكن كاكي ڤرلو مڠهادڤكن.";
+"conversation.incomingRequest" = "منولقكن كيت ڤرلو مڠهادڤكن.";
+"conversation.requestMessage" = "سلام، آيا ميخواي به اين مکالمه ملحق بشي؟";
+"conversation.notContact" = "\%@\ تيدق دالم ڤمباچ ڤرلو.";
+"conversation.sendRequest" = "مڠهادڤكن كڤدڽ كڤد ڤرلو مڠمبيلكن كڤدڽ اونتوق مڠمبيلكن كڤدڽ";
+"conversation.sendRequestTitle" = "مڠهادڤكن ڤرليندوڠن ڤڠاجرن";
+"conversation.synchronizationTitle" = "تو قبول کردي درخواست صحبت";
+"conversation.synchronizationMessage" = "كيت برتنتو اونتوق \%@\ منچاريكن ڤمباچ.";
+
+//Invitations
+"invitations.noInvitations" = "تيدق اد ڤڠاجرن";
+
+// Walkthrough
+
+//Welcome Screen
+"welcome.title" = "خوش اومدن به جامي!";
+"welcome.text" = "Jami اداله ڤلاڤتورم ڤمبلاجرن يڠ براوسيا دان ڤرنه ممڤرچايا?? ي ڤرودوک دان ڤرودوک ڤڠڬونا";
+"welcome.linkDevice" = "منچاريكن ڤرودوک اين دڠن اکاونت";
+"welcome.createAccount" = "منوليسكن اکاونت Jami";
+"welcome.connectToManager" = "منچاريکن کڤد ڤمبلاجرن JAMS";
+
+//Creation Profile Screen
+"createProfile.skipCreateProfile" = "سكيڤ";
+"createProfile.profileCreated" = "ڤد ماس يڠ لاين";
+"createProfile.title" = "ممڤرچايا?? ي ڤروڤيل";
+"createProfile.enterNameLabel" = "ڤرلو ممبريكن نام ڤمباچ";
+"createProfile.enterNamePlaceholder" = "نامن دبري";
+"createProfile.subtitle" = "ڤروڤيلڽ دڤرچايا?? ي دڠن ڤڠاجرنڽ. اكو بوليه مڠهادڤيڽ دالم ساتو ڤرلو.";
+"createProfile.createYourAvatar" = "ڤرچاي اوتار";
+
+//Create Account form
+"createAccount.createAccountFormTitle" = "ڤڠڬوناكن ايكون";
+"createAccount.chooseStrongPassword" = "ڤيليه ڤرسود يڠ ڤرنه دڤرچايا?? ي اونتوق ممڤرچايا?? ي کات Jami-توه.";
+"createAccount.enterNewUsernamePlaceholder" = "نام ڤڠڬونا";
+"createAccount.newPasswordPlaceholder" = "ڤاسر";
+"createAccount.repeatPasswordPlaceholder" = "ڤرليمن ڤرساتوان";
+"createAccount.passwordCharactersNumberError" = "6 ڤڠاجرن ڤد ڤد";
+"createAccount.passwordNotMatchingError" = "ڤاسور تيدق برتيندق";
+"createAccount.lookingForUsernameAvailability" = "اونتوق ممڤوڽاءي ڤرلو...";
+"createAccount.invalidUsername" = "نام ڤڠڬونا يڠ تيدق برمولا";
+"createAccount.usernameAlreadyTaken" = "نام ڤڠڬونا يڠ دڤرچايا?? ي";
+"createAccount.usernameValid" = "نام ڤڠڬونا دڤرلو";
+"createAccount.loading" = "ڤڠاجرن";
+"createAccount.waitCreateAccountTitle" = "ڤڠاجين";
+"createAccount.RegisterAUsername" = "مڠهادڤكن نام ڤڠڬونا";
+"createAccount.ChooseAPassword" = "كڤد ايكون ساي";
+"createAccount.PasswordInformation" = "ڤيليه ڤاسر اونتوق مڠهادڤي ايكون لوكالي. تيدق تيدق تيدق ممڤوڽاءي ايكون اتاو تيدق بوليه منريما ايكون اتاو";
+"createAccount.EnableNotifications" = "ڤمبلاجر";
+"createAccount.Recommended" = "(موصى به)";
+"createAccount.UsernameNotRegisteredTitle" = "خطأ شبكه";
+"createAccount.UsernameNotRegisteredMessage" = "ايكون دتولق نامو ڤڠڬونا تيدق دتولق";
+"createAccount.timeoutTitle" = "ايكون دڤرچايا?? ي";
+"createAccount.timeoutMessage" = "ڤرجالنن نام ڤڠڬونا دالم ڤرڬرقن... اكن مڠڬوناكن ببراڤ كتيک.";
+
+//Link To Account form
+"linkToAccount.waitLinkToAccountTitle" = "ڤڠاجرن حساب";
+"linkToAccount.linkButtonTitle" = "ڤڠڬيلن ڤڠڬيلن";
+"linkToAccount.passwordPlaceholder" = "ڤاسر";
+"linkToAccount.pinPlaceholder" = "PIN";
+"linkToAccount.passwordLabel" = "ڤرودوق ڤرسودوق";
+"linkToAccount.pinLabel" = "ڤڠڬيل PIN";
+"linkToAccount.explanationPinMessage" = "اونتوق ممبنتو کود PIN، برلالو دالم ڤڠڬوناءن ڤڠڬوناءن کات دالم ڤڠڬوناءن ايكوڤيت يڠ ممڤوپا?? ي ايكوڤيت يڠ برڤڠڬوناءن. دالم ڤڠڬوناءن ايكوڤيت سچارا \"مربوط ايكوڤيت لاين دڠن ايكوڤيت اين\". ايكوڤيت ايكوڤيت ڤرلو ممڤوپا?? ي ڤڠ ڤرلو دڤرلوكن ڤرلوڤوهن اين. ڤين اداله ڤرلوڤوهن اونتوق 10 مينيت.";
+
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "ڤمباچ ڤرنه";
+"linkToAccountManager.passwordPlaceholder" = "ڤاسر";
+"linkToAccountManager.passwordLabel" = "ڤرودوق ڤرسودوق";
+"linkToAccountManager.usernamePlaceholder" = "نام ڤڠڬونا";
+"linkToAccountManager.usernameLabel" = "مڠڬوناكن نام ڤڠڬونا";
+"linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
+"linkToAccountManager.accountManagerLabel" = "ڤرلو مڠهادڤي URL JAMS";
+
+//Alerts
+"alerts.accountCannotBeFoundTitle" = "نميتونم حساب پيدا کنم";
+"alerts.accountCannotBeFoundMessage" = "حساب تيدق دڤرچايا?? ي دالم نيتۏرك Jami. اكن مڠمبيلكنڽ دتمڤت دجمي دري ساتو ڤرچايا?? ن موجود، دان اڤابيلا كريديتينالڽ سموا.";
+"alerts.accountAddedTitle" = "حساب دڤيليه";
+"alerts.accountNoNetworkTitle" = "تيدق بوليه منچاريكن نيتۏرك";
+"alerts.accountNoNetworkMessage" = "نميتو ممبيناكن حساب كران جامي تيدق بوليه منچاريكن ڤڠاجرن اونتوق نيترۏيك دڤرتوبوهكن.";
+"alerts.accountDefaultErrorTitle" = "خطا ناشناخته";
+"alerts.accountDefaultErrorMessage" = "حساب تيدق بوليه دڤرچايا?? ي.";
+"alerts.profileTakePhoto" = "ڤيليهن";
+"alerts.profileUploadPhoto" = "ڤڠاجرن ڤوتو";
+"alerts.profileCancelPhoto" = "ڤڠڬيل";
+"alerts.accountLinkedTitle" = "حساب ڤڠاجرن";
+"alerts.dbFailedTitle" = "كسرڠ دالم ممڤوپا?? ي Jami";
+"alerts.dbFailedMessage" = "كرجاسا?? ن مڠهادڤكن ڤرچاي دان ممڤرچايكنڽ كدوا";
+"alerts.confirmBlockContact" = "اڤابيلا اكو مريك مريك اكن مريك اكن مڠهادڤكن ڤڠاجرن اين؟ سياستن ڤڠاجرن اين دأداكن دڠن ڤڠاجرن اين.";
+"alerts.confirmBlockContactTitle" = "ڤڠاجرن ڤڠاجرن";
+"alerts.confirmDeleteConversation" = "اكو يقيني اكو بوليه مڠحذفكن ڤرساتوان اين دالم كهيدوڤن؟";
+"alerts.confirmDeleteConversationFromContact" = "اكو يقيني اكو بررلو مڠحذفكن ڤمبلاجرن دڠن ڤڠاجرن اين؟";
+"alerts.confirmDeleteConversationTitle" = "مڠمبيل ڤڠاجرن";
+"alerts.confirmClearConversation" = "اكو يقيني اكو بررسي ممبينا ڤمباچ دڠن ڤڠاجرن اين؟";
+"alerts.confirmClearConversationTitle" = "ڤڠاجرن يڠ برڤرچايا?? ن";
+"alerts.noMediaPermissionsTitle" = "ڤرسمڤوان ميديا تيدق دبريكن";
+"alerts.noLibraryPermissionsTitle" = "ڤرلو دڤرچايا?? ي ڤمباچ ڤوترو";
+"alerts.noLocationPermissionsTitle" = "ڤرلو دڤرچايا?? يكن دالم لوكاسي";
+"alerts.errorWrongCredentials" = "تيدق بوليه منچاريكن ڤڠاره حساب يڠ دبريكن.";
+"alerts.recordVideoMessage" = "ڤرچاي ڤمبلاجرن";
+"alerts.recordAudioMessage" = "سلاكو ڤرساتوان اودي";
+"alerts.uploadFile" = "ڤڠاجرن ڤڠاجرن";
+"alerts.uploadPhoto" = "ڤرلو مڠهادڤ ڤوتو اتاو فلم";
+"alerts.locationServiceIsDisabled" = "مڠهادڤي \"خدمات موقعيت\" اونتوق ممبريكن \"جامي\" ممبنتو موقعيت.";
+"alerts.locationSharing" = "مڠمبيل موقعيت ساي";
+"alerts.alreadylocationSharing" = "ڤد ماس اين مڠمبيل ڤڠڬونا اين";
+"alerts.locationSharingDurationTitle" = "كم كتيک ڤرلو دڤرچايا?? يكن دالم ڤمباڠونن لوكاسي؟";
+"alerts.locationSharingDuration10min" = "10 مينيت";
+"alerts.locationSharingDuration1hour" = "1 ساعه";
+"alerts.mapInformation" = "معلوماتي نقشه";
+"alerts.openStreetMapCopyright" = "© ڤڠڬونا OpenStreetMap";
+"alerts.openStreetMapCopyrightMoreInfo" = "مڠاتاكن لبيه";
+
+//Actions
+"actions.deleteAction" = "مڠمبيل";
+"actions.cancelAction" = "ڤڠڬيل";
+"actions.clearAction" = "واضح";
+"actions.backAction" = "ڤرنه";
+"actions.doneAction" = "ڤرنه";
+"alerts.incomingCallAllertTitle" = "كاوسن يڠ دتاهن دري ";
+"alerts.incomingCallButtonIgnore" = "تيدق ممڤوڽاءي";
+"actions.startAudioCall" = "ڤڠاجين اوندڠ";
+"actions.startVideoCall" = "ڤڠاجين ڤيديو";
+"actions.goToSettings" = "برتڠه دالم سيٽنگ";
+"actions.stopLocationSharing" = "ڤرنه مڠمبيل";
+
+//Calls
+"calls.callItemTitle" = "ڤڠاجين";
+"calls.unknown" = "نامعلوم";
+"calls.incomingCallInfo" = "بلياو برتوجو";
+"calls.ringing" = "...تڠه...";
+"calls.connecting" = "ارتباط...";
+"calls.searching" = "دالم ڤرچاي...";
+"calls.callFinished" = "ڤڠاجين تله دڤرچايا?? ي";
+"calls.currentCallWith" = "كاو دڠن ";
+"calls.haghUp" = "كاو كاو";
+"calls.maximize" = "ڤڠاجين";
+"calls.minimize" = "مڠمبيل";
+"calls.setModerator" = "مودراتور سيت";
+"calls.removeModerator" = "مودراتور غيرمعياري";
+"calls.muteAudio" = "صوتي ساكن";
+"calls.unmuteAudio" = "اونتوق مڠمبيل";
+"calls.lowerHand" = "يڠ ڤرنه";
+
+//Account Page
+"accountPage.devicesListHeader" = "ڤرودوک";
+"accountPage.settingsHeader" = "سيٽنگون";
+"accountPage.username" = "نام ڤڠڬونا";
+"accountPage.usernameNotRegistered" = "نام ڤڠڬونا: تيدق دڤرجواڠن";
+"accountPage.credentialsHeader" = "ڤرچاي ڤڠاجين";
+"accountPage.enableProxy" = "فعالكن ڤروكسي";
+"accountPage.blockedContacts" = "ڤڠاجين يڠ دڤرچايا?? ي";
+"accountPage.unblockContact" = "UNBLOCK";
+"accountPage.proxyAddressAlert" = "ممبريكن ڤرودوكسي";
+"accountPage.enableProxy" = "فعالكن ڤروكسي";
+"accountPage.noProxyExplanationLabel" = "جهازك لن يتلق إخطارات عندما يتم تعطيل الوكيل";
+"accountPage.saveProxyAddress" = "ڤڠاجين";
+"accountPage.proxyPaceholder" = "ڤرودوکسي";
+"accountPage.enableNotifications" = "فعاليت اطلاعيه ها";
+"accountPage.proxyDisabledAlertTitle" = "ڤروكسي ڤرلو دڤرچايا?? ي";
+"accountPage.proxyDisabledAlertBody" = "اونتوق مڠهادڤي ڤرساتوان، كرجاسام ممبنتو ڤروكسي";
+"accountPage.revokeDeviceTitle" = "ڤڠڬيلن ڤڠڬيلن";
+"accountPage.revokeDeviceMessage" = "اكو يقيني اكو بررلو مڠمبيل ڤراڠت اين؟ ڤرودوک اين تيدق بوليه دڤرچايا?? ي.";
+"accountPage.revokeDeviceButton" = "ڤڠاجرن";
+"accountPage.revokeDevicePlaceholder" = "ڤرنه ڤرنه ڤرنه";
+"accountPage.deviceRevoked" = "ڤمبلاجرن ڤڠڬونا";
+"accountPage.deviceRevocationProgress" = "ڤرنه دڤرچايا?? ي...";
+"accountPage.deviceRevocationSuccess" = "ڤڠڬوناڽ دڤرچايا?? ي";
+"accountPage.deviceRevocationTryAgain" = "چيكرڽ جوڬ";
+"accountPage.deviceRevocationWrongPassword" = "ڤاسر يڠ تيدق برلاكو";
+"accountPage.deviceRevocationUnknownDevice" = "ڤڠڬونا يڠ تيدق دڤرچايا?? ي";
+"accountPage.deviceRevocationError" = "خطأ ڤمباچ ڤرودوک";
+"accountPage.linkDeviceTitle" = "منچيلكن ڤرودوک لاين";
+"accountPage.other" = "ڤڠاجين";
+"accountPage.removeAccountTitle" = "مڠمبيل ڤڠاجرن";
+"accountPage.removeAccountMessage" = "با كليك \"مڠحذف\" تومڤوان اكو ممبيل اكوڠ اين دالم ڤرودوک اين! اين اكشن تيدق دڤرچايا?? ي. جوڬ، نام يڠ دڤرجواڠكن تومڤوان اكوڠ تيدق دڤرچايا?? ي.";
+"accountPage.removeAccountButton" = "ڤرنه دڤرچايا?? ي";
+"accountPage.shareAccountDetails" = "ڤڠاجرن حساب";
+"accountPage.contactMeOnJamiTitle" = "با من دري جامي تماس بگير!";
+"accountPage.contactMeOnJamiContant" = "منچاريکن ساي دڠن مڠݢوناکن \"%s\" دالم ڤرتوبوهن ڤمبلاجرن Jami: https://jami.net";
+"accountPage.registerNameTitle" = "مڠهادڤكن نام ڤڠڬونا";
+"accountPage.passwordPlaceholder" = "مڠهادڤي كاسوڠن ايكون";
+"accountPage.usernamePlaceholder" = "ممبريكن نام ڤڠڬونا يڠ دڤرلو";
+"accountPage.registerNameErrorMessage" = "نام ڤڠڬونا يڠ دڤيليه تيدق دڤرلوكن";
+"accountPage.usernameRegistering" = "ڤرجالنن";
+"accountPage.usernameRegisterAction" = "ڤمباچ";
+"accountPage.usernameRegistrationFailed" = "ڤرجالنن تله دڤرچايا?? ي.";
+"accountPage.createPassword" = "ڤڠڬونا ڤرسود";
+"accountPage.changePassword" = "مڠهادڤي ڤرسود";
+"accountPage.oldPasswordPlaceholder" = "ممبري ڤرسود ڤريڠکت";
+"accountPage.newPasswordPlaceholder" = "مڠهادڤي ڤرسودن بارو";
+"accountPage.newPasswordConfirmPlaceholder" = "ڤڠاتسكن ڤرسودن بارو";
+"accountPage.changePasswordError" = "ڤاسر يڠ تيدق برلاكو";
+"accountPage.enableBoothMode" = "فعالكن مود بوث";
+"accountPage.disableBoothMode" = "مڠمبيل مود بوث";
+"accountPage.disableBoothModeExplanation" = "ڤليس مڠهادڤي كاسد ايكون";
+"accountPage.boothModeExplanation" = "دالم مود بوته سياستن ڤرساتوان تيدق دڤرچايا?? ي دان ڤڠونجوڠ jami دڤرچايا?? ي دڠن ممبنتو ڤرساتوان يڠ برمولا.";
+"accountPage.noBoothMode" = "اونتوق ممبنتو مود بوث، تومبوهن ڤرلو ممبنتو ڤرسود ايكونت.";
+"accountPage.boothModeAlertMessage" = "بعد از فعال کردن حالت كوتاه تمام مکالمه هاتون حذف ميشه";
+"accountPage.peerDiscovery" = "ڤڠاجين اوتوماتيك دالم نيترۏيك لوكالي";
+"accountPage.autoRegistration" = "ڤرجالنن اوتوماتيك سهيڠڬ ڤڠڬيلن";
+"accountPage.connectivityHeader" = "ڤڠاجين";
+"accountPage.turnEnabled" = "فعالكن TURN";
+"accountPage.turnServer" = "عنوان TURN";
+"accountPage.turnUsername" = "نام ڤڠڬونا TURN";
+"accountPage.turnPassword" = "ڤاسر TURN";
+"accountPage.turnRealm" = "كراجأن TURN";
+
+//Account
+"account.sipUsername" = "نام ڤڠڬونا";
+"account.sipPassword" = "ڤاسر";
+"account.sipServer" = "SIP Server";
+"account.port" = "ڤڠوربان";
+"account.proxyServer" = "ڤروكسي";
+"account.createSipAccount" = "منوليسكن ايكون SIP";
+"account.usernameLabel" = "مڠڬوناكن نام ڤڠڬونا";
+"account.passwordLabel" = "ڤرودوق ڤرسودوق";
+"account.serverLabel" = "ڤرلو مڠهادڤكن ايندريس";
+"account.portLabel" = "ڤرلو ممڤوڽاءي ڤرتوم";
+"account.accountStatus" = "ستاتوس حساب";
+"account.enableAccount" = "فعال کردن حساب";
+"account.statusOnline" = "اونلاين";
+"account.statusOffline" = "اونلاين";
+"account.statusConnecting" = "ڤڠاجين";
+"account.statusUnknown" = "نامعلوم";
+"account.statusConnectionerror" = "خطأ ڤربواتن";
+"account.needMigration" = "حساب ڤرلو دڤرچايا?? ي";
+"account.me" = "من";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "تيدق ڤرلو ممبليكن ڤڠاجرن";
+
+//Link New Device
+"linkDevice.title" = "منچيلكن ڤڠڬونا?? ن بارو";
+"linkDevice.passwordError" = "ڤاسر يڠ دبريكن تيدق ممڤوڽاءي ايكون اين";
+"linkDevice.networkError" = "كسرن نيتڬري دأداكن سلڤس ڤڠاجرن";
+"linkDevice.defaultError" = "كسرڠ دالم ڤڠاجرن";
+"linkDevice.explanationMessage" = "اونتوق ممڤرچايا?? ي ڤروسيس ايت، اكو بوليه ممبلي Jami دالم ڤرودوک بارو دان مميليه ڤيليهن \"مربوط ڤرودوک اين دڠن اکاونت\". ڤين اكو برلاكو اونتوق 10 مينيت";
+"linkDevice.hudMessage" = "ڤمباچ";
+
+//Contact Page
+"contactPage.startAudioCall" = "ڤرودوک ڤرودوک";
+"contactPage.startVideoCall" = "ڤرودوک ڤيليهن";
+"contactPage.sendMessage" = "مڠهادڤکن ڤرساتوان";
+"contactPage.clearConversation" = "چيت برتاهن";
+"contactPage.blockContact" = "ڤڠاجرن ڤڠاجرن";
+"contactPage.removeConversation" = "مڠهادڤي ڤڠاجرن";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "ڤرودوکن...";
+"dataTransfer.readableStatusError" = "خطأ";
+"dataTransfer.readableStatusAwaiting" = "منتظره...";
+"dataTransfer.readableStatusOngoing" = "ڤرچاي";
+"dataTransfer.readableStatusCanceled" = "ڤرنه دڤرچايا?? ي";
+"dataTransfer.sendingFailed" = "تيدق ممڤوپا?? ي";
+"dataTransfer.readableStatusSuccess" = "كامله";
+"dataTransfer.readableStatusCancel" = "ڤڠڬيل";
+
+//Notifications
+"notifications.incomingCall" = "ڤڠاجين يڠ دڤرچايا?? ي";
+"notifications.missedCall" = "ڤڠاجرن يڠ تيدق دڤرچايا?? ي";
+"notifications.newFile" = "ملف جديد";
+"notifications.locationSharingStarted" = "ڤڠاجين لوكاسي يڠ دتوليس";
+"notifications.locationSharingStopped" = "ڤڠمبيلن لوكاسي يڠ دتاهن دتمڤت";
+"dataTransfer.readableStatusAwaiting" = "منتظره...";
+"dataTransfer.readableStatusOngoing" = "ڤرچاي";
+"dataTransfer.readableStatusCanceled" = "ڤرنه دڤرچايا?? ي";
+"dataTransfer.readableStatusSuccess" = "كامله";
+"dataTransfer.readableStatusCancel" = "ڤڠڬيل";
+"dataTransfer.infoMessage" = "ڤريڠكت اونتوق مولاكن ڤرچاي";
+"dataTransfer.sendMessage" = "مڠهادڤ";
+
+
+//Generated Message
+"generatedMessage.contactAdded" = "توڠڬوڠ ڤرلو";
+"generatedMessage.swarmCreated" = "سڤرتي دڤرچايا?? ي";
+"generatedMessage.invitationReceived" = "دتاهن اونتوق مڠڬوناكن";
+"generatedMessage.invitationAccepted" = "مڠمبيل ڤرساتوان";
+"generatedMessage.youJoined" = "تو اونتوق مڠاتاكن ڤڠاجرن";
+"generatedMessage.contactBanned" = "دڤرچاي";
+"generatedMessage.contactReAdded" = "دڤرچايا?? ي";
+"generatedMessage.outgoingCall" = "ڤڠاجين يڠ برمولا";
+"generatedMessage.incomingCall" = "ڤڠاجين يڠ دڤرچايا?? ي";
+"generatedMessage.missedOutgoingCall" = "ڤڠاجرن يڠ تله دڤرچايا?? ي";
+"generatedMessage.missedIncomingCall" = "ڤڠاجرن يڠ دڤرچايا?? ي";
+"generatedMessage.liveLocationSharing" = "ڤڠاجين لوكاسي";
+"generatedMessage.contactLeftConversation" = "ڤڠاجين";
+
+//General Settings
+"generalSettings.title" = "ڤڠاجرن ڤڠاجرن";
+"generalSettings.videoSettings" = "ڤڠاجرن ڤيديو";
+"generalSettings.videoAcceleration" = "ممبنتو ڤرودوک ڤيديو";
+"generalSettings.fileTransfer" = "ڤرچاي ڤرچاي";
+"generalSettings.locationSharing" = "ڤڠاجرن لوكاسي";
+"generalSettings.automaticAcceptIncomingFiles" = "مڠاتاهكن ڤرچاي يڠ دڤرچاي";
+"generalSettings.acceptTransferLimit" = "ڤڠاجرن ڤڠاجرن";
+"generalSettings.acceptTransferLimitDescription" = "(دالم MB, 0 = لامحدود)";
+"generalSettings.limitLocationSharingDuration" = "مڠهادڤي ڤڠاجرن ڤڠاجرن";
+"generalSettings.locationSharingDuration" = "ڤڠاجرن ڤروسي";
+
+
+//Log View
+"logView.title" = "ڤڠاجرن";
+"logView.description" = "ڤڠاجرن لوڬ دأڠڬڤ";
+"logView.startLogging" = "ڤرلو مڠهادڤي ڤڠاجين";
+"logView.stopLogging" = "ڤرنه مڠهادڤي";
+"logView.saveError" = "تيدق ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممڤو ممو ممڤو مم";
+"logView.shareError" = "تيدق ممبنتو ڤمباچ";
+
+//Migrate Account
+"migrateAccount.title" = "ڤمباچ ڤرچاي";
+"migrateAccount.migrateButton" = "حساب مڠاجر";
+"migrateAccount.explanation" = "اين حساب بايد مهاجرت شود";
+"migrateAccount.passwordPlaceholder" = "ڤرلو مڠهادڤي كاسوس";
+"migrateAccount.passwordExplanation" = "اونتوق ممڤرچايا?? ي ڤرڬي، اكو بوليه مپببكن ڤرسود يڠ دڤڠڬوناكن اونتوق ايكون اين";
+"migrateAccount.removeAccount" = "مڠمبيل ڤڠاجرن";
+"migrateAccount.error" = "تيدق ممڤوڽاءي ڤڠاجرن ايكون اتاو تيدق ممڤوڽاءي ايكون اتاو مڠحذف.";
+"migrateAccount.migrating" = "ڤمبلاجرن...";
+"migrateAccount.cancel" = "ڤڠڬيل";
+"migrateAccount.migrateAnother" = "مڠهادڤي ايكونت لاين";
+
+

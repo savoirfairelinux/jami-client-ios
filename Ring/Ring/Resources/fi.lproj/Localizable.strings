@@ -40,33 +40,33 @@
 "scan.search" = "Etsitään...";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.searchBar" = "Etsit yhteydenpitoa...";
+"swarmcreation.createTheSwarm" = "Luota ruumis";
+"swarmcreation.addADescription" = "Lisää kuvaus";
+"swarmcreation.addPeople" = "Voit lisätä lisää ihmisiä joukkoon";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.ignoreSwarm" = "Ilman huomiota";
+"swarm.leaveConversation" = "Jätä keskustelu";
+"swarm.chooseColor" = "Valitse väri";
+"swarm.typeOfSwarm" = "Ruumiin tyyppi";
 "swarm.identifier" = "Tunniste";
 "swarm.about" = "Tietoa";
 "swarm.members" = "Jäsenet";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Lisää kuvausta";
 "swarm.oneToOne" = "Yksityinen parvi";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "Valvontajohtaja vain kutsuu";
 "swarm.invitesOnly" = "Yksityinen parvi";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.publicChat" = "Julkinen ruumis";
+"swarm.others" = "Muut";
+"swarm.member" = "Jäsen";
+"swarm.invited" = "Kutsuttu";
+"swarm.admin" = "Hallinnoija";
+"swarm.banned" = "Kielletty";
+"swarm.unknown" = "Kylmä";
+"swarm.addMorePeople" = "Voit lisätä lisää ihmisiä tähän ruokkaan.";
+"swarm.addMember" = "Lisää jäsen";
+"swarm.confirmLeaveSwarm" = "Oletko varma, että haluat lähteä?";
+"swarm.Leave" = "Lähdetään";
 // Smartlist
 "smartlist.yesterday" = "Eilen";
 "smartlist.results" = "Julkinen kansio";
@@ -92,14 +92,14 @@
 "conversation.explanationSendingLocationTo" = "Jaat sijaintisi tällä hetkellä";
 "conversation.explanationReceivingLocationFrom" = "Saat parhaillaan suoraa sijaintia";
 "conversation.errorSavingImage" = "Kuvan tallennus galleriaan epäonnistui";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.receivedRequest" = "Lähetimme sinulle pyynnön.";
+"conversation.incomingRequest" = "Lähetin pyynnön juttelemaan.";
 "conversation.requestMessage" = "Hei,\nHaluatko liittyä keskusteluun?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "\%@\ ei ole yhteystiedellisyksessäsi.";
 "conversation.sendRequest" = "Lähetä hänelle yhteydenottopyyntö, jotta hän voi vaihtaa tietoja.";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "Lähetä yhteydenpitoa";
 "conversation.synchronizationTitle" = "Olet hyväksynyt keskustelupyynnön.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Odotamme \%@\ yhteyksiä, jotta keskustelu synkronoidaan.";
 
 //Invitations
 "invitations.noInvitations" = "Ei kutsuja";
@@ -292,7 +292,7 @@
 "accountPage.peerDiscovery" = "Automaattinen yhteys paikallisessa verkossa";
 "accountPage.autoRegistration" = "Automaattinen rekisteröinti vanhentumisen jälkeen";
 "accountPage.connectivityHeader" = "Yhteydet";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Valitse TURN";
 "accountPage.turnServer" = "TURN osoite";
 "accountPage.turnUsername" = "TURN käyttäjänimi";
 "accountPage.turnPassword" = "TURN salasana";
@@ -364,40 +364,40 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Sait vapautuksen.";
 "generatedMessage.swarmCreated" = "Parvi luotiin";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "oli kutsuttu liittymään";
+"generatedMessage.invitationAccepted" = "- Hän liittyi keskustelulle.";
+"generatedMessage.youJoined" = "Sinä liittyt keskustelulle.";
+"generatedMessage.contactBanned" = "- Hän sai potkut.";
+"generatedMessage.contactReAdded" = "lisättiin uudelleen";
 "generatedMessage.outgoingCall" = "Lähtevä puhelu";
 "generatedMessage.incomingCall" = "Saapuva puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "vasemmisto";
 
 //General Settings
 "generalSettings.title" = "Edistyneet asetukset";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Videon asetukset";
 "generalSettings.videoAcceleration" = "Kytke videon laitteistokiihdytys";
 "generalSettings.fileTransfer" = "Tiedostonsiirto";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Paikallisen jakamisen";
 "generalSettings.automaticAcceptIncomingFiles" = "Hyväksy saapuvat tiedostot automaattisesti";
 "generalSettings.acceptTransferLimit" = "Hyväksy siirtoraja";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.acceptTransferLimitDescription" = "(MB:ssä 0 = rajattomuus)";
+"generalSettings.limitLocationSharingDuration" = "Rajoittakaa sijaintiyhteyden kesto";
+"generalSettings.locationSharingDuration" = "Asetuksen osakkeiden kesto";
 
 
 //Log View
 "logView.title" = "Diagnostiikka";
 "logView.description" = "Avaa diagnostiikan lokin asetukset";
 "logView.startLogging" = "Aloita kirjaaminen";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Lopeta metsästys";
+"logView.saveError" = "Tiedosto ei ole tallennettu";
+"logView.shareError" = "Tiedosto ei ole jakettu";
 
 //Migrate Account
 "migrateAccount.title" = "Tilin siirto";

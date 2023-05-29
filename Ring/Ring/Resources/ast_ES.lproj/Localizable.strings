@@ -19,73 +19,73 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Konversacioj";
-"global.meTabBarTitle" = "Konto-sekcioj";
-"global.ok" = "Bone";
-"global.close" = "Proksima";
-"global.share" = "Kunhavi";
-"global.forward" = "Forward";
-"global.save" = "Savi";
-"global.resend" = "Resend";
-"global.preview" = "Antaŭvido";
-"global.accept" = "Akcepti";
-"global.block" = "Bloko";
-"global.refuse" = "Rifuzi";
-"global.name" = "Nomo";
-"global.copy" = "Kopii";
-"global.reply" = "Respondo";
+"global.homeTabBarTitle" = "El so padre foi un fíu de la familia de la familia de los hermanos.";
+"global.meTabBarTitle" = "Configuración de cuenta";
+"global.ok" = "Bien, ye bien.";
+"global.close" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
+"global.share" = "Compartir";
+"global.forward" = "Aforra";
+"global.save" = "El so nome ye \"Castor\".";
+"global.resend" = "Enviar a la xente";
+"global.preview" = "Previsión";
+"global.accept" = "Acceptar";
+"global.block" = "Bloqueáu";
+"global.refuse" = "Rechazar";
+"global.name" = "Nombre";
+"global.copy" = "La copia";
+"global.reply" = "Respuesta";
 
 // Scan
-"scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
+"scan.badQrCode" = "Un codiciu QR malo";
+"scan.search" = "Buscando...";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Kreu la sorbon";
-"swarmcreation.addADescription" = "Aldonu priskribon";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.searchBar" = "La busca de contactu...";
+"swarmcreation.createTheSwarm" = "Crear el enjambre";
+"swarmcreation.addADescription" = "Axega una descripción";
+"swarmcreation.addPeople" = "Puede añadir más xente al enjambre";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Elektu koloron";
-"swarm.typeOfSwarm" = "Tipo de sorbo";
-"swarm.identifier" = "Identigilo";
-"swarm.about" = "Pri";
-"swarm.members" = "Anoj";
-"swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private swarm";
+"swarm.ignoreSwarm" = "Ignorar el enjambre";
+"swarm.leaveConversation" = "La conversación ye una cuestión de tiempu.";
+"swarm.chooseColor" = "Escueye un color";
+"swarm.typeOfSwarm" = "Esti tipu de enjambre";
+"swarm.identifier" = "Identificador";
+"swarm.about" = "Sobre";
+"swarm.members" = "Los miembros";
+"swarm.addDescription" = "Aumentu de la descripción";
+"swarm.oneToOne" = "El so grupu privado";
+"swarm.adminInvitesOnly" = "Admins solo invita";
+"swarm.invitesOnly" = "El so grupu privado";
 "swarm.publicChat" = "Public swarm";
-"swarm.others" = "Aliaj";
-"swarm.member" = "Membro";
-"swarm.invited" = "Invitita";
-"swarm.admin" = "Administro";
-"swarm.banned" = "Malpermesita";
+"swarm.others" = "Altres";
+"swarm.member" = "Miembro";
+"swarm.invited" = "Convidaos";
+"swarm.admin" = "Administración";
+"swarm.banned" = "Prohibíu";
 "swarm.unknown" = "Unkown";
 "swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
 "swarm.addMember" = "Add Member";
 "swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Foriru";
+"swarm.Leave" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
 // Smartlist
-"smartlist.yesterday" = "Hieraŭ";
+"smartlist.yesterday" = "En xineru de 2011";
 "smartlist.results" = "Public Directory";
-"smartlist.conversations" = "Konversacioj";
-"smartlist.searching" = "Serĉas";
-"smartlist.noResults" = "Nula trovaĵon";
+"smartlist.conversations" = "El so padre foi un fíu de la familia de la familia de los hermanos.";
+"smartlist.searching" = "Buscando...";
+"smartlist.noResults" = "Nun hai resultáu";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
 "smartlist.searchBar" = "Search for new or existing contact...";
-"smartlist.noNetworkConnectivity" = "Sen reta konekto";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
-"smartlist.accountsTitle" = "Kontoj";
+"smartlist.noNetworkConnectivity" = "Nun hai conectividá de rede";
+"smartlist.cellularAccess" = "Asegúrese d'un accesu celular autorizáu nos sos ajustes";
+"smartlist.accountsTitle" = "Cuentas";
 "smartlist.addAccountButton" = "+ Add Account";
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
-"smartlist.invitations" = "Invitoj";
-"smartlist.accountSettings" = "Konto-sekcioj";
-"smartlist.advancedSettings" = "Antaŭaj agordoj";
-"smartlist.aboutJami" = "Pri Jami";
+"smartlist.invitations" = "Les invitaciones";
+"smartlist.accountSettings" = "Configuración de cuenta";
+"smartlist.advancedSettings" = "La configuración avanzada";
+"smartlist.aboutJami" = "Sobre Jami";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -94,11 +94,11 @@
 "conversation.errorSavingImage" = "Failed to save image to galery";
 "conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Sent you a request for a conversation.";
-"conversation.requestMessage" = "Saluton, ĉu vi ŝatus aliĝi al la konversacio?";
+"conversation.requestMessage" = "Hola, ¿quieres xunise a la conversación?";
 "conversation.notContact" = "\%@\ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
 "conversation.sendRequestTitle" = "Send Contact Request";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
+"conversation.synchronizationTitle" = "Acordó la so solicitud de conversación.";
 "conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
 
 //Invitations
@@ -109,13 +109,13 @@
 //Welcome Screen
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Ligi tiun aparaton al konto";
-"welcome.createAccount" = "Krei konto en Jami";
-"welcome.connectToManager" = "Konekti al JAMS-servilo";
+"welcome.linkDevice" = "Estaxe un enllaz a un cuentu";
+"welcome.createAccount" = "Crear una cuenta Jami";
+"welcome.connectToManager" = "Conectar a un servidor JAMS";
 
 //Creation Profile Screen
-"createProfile.skipCreateProfile" = "Skip";
-"createProfile.profileCreated" = "Sekva";
+"createProfile.skipCreateProfile" = "El so nome ye \"Skip\".";
+"createProfile.profileCreated" = "El siguiente";
 "createProfile.title" = "Personalise your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
 "createProfile.enterNamePlaceholder" = "Enter name";
@@ -125,59 +125,59 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
-"createAccount.enterNewUsernamePlaceholder" = "Uzantnomo";
-"createAccount.newPasswordPlaceholder" = "Pasvorto";
-"createAccount.repeatPasswordPlaceholder" = "Konfirmu pasvorton";
-"createAccount.passwordCharactersNumberError" = "6 signoj minimume";
-"createAccount.passwordNotMatchingError" = "pasvortoj ne kongruas";
+"createAccount.enterNewUsernamePlaceholder" = "Nombre d'usuariu";
+"createAccount.newPasswordPlaceholder" = "Paez que la contraseña";
+"createAccount.repeatPasswordPlaceholder" = "Confirmar contraseña";
+"createAccount.passwordCharactersNumberError" = "Minimu de 6 caracteres";
+"createAccount.passwordNotMatchingError" = "Les contraseñes nun coinciden";
 "createAccount.lookingForUsernameAvailability" = "looking for availability…";
-"createAccount.invalidUsername" = "nevalida uzantnomo";
-"createAccount.usernameAlreadyTaken" = "uzantnomo jam prenita";
+"createAccount.invalidUsername" = "Nombre d'usuariu inválidu";
+"createAccount.usernameAlreadyTaken" = "Nómase usuariu ya adoptáu";
 "createAccount.usernameValid" = "username is available";
-"createAccount.loading" = "Ŝarĝas";
-"createAccount.waitCreateAccountTitle" = "Aldonanta konton";
-"createAccount.RegisterAUsername" = "Registru uzantnomon";
+"createAccount.loading" = "Carga";
+"createAccount.waitCreateAccountTitle" = "Contá adicional";
+"createAccount.RegisterAUsername" = "Registrar un nome d' usuariu";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "Notifications";
 "createAccount.Recommended" = "(Recommended)";
-"createAccount.UsernameNotRegisteredTitle" = "Reta eraro";
+"createAccount.UsernameNotRegisteredTitle" = "Error de red";
 "createAccount.UsernameNotRegisteredMessage" = "Account was created but username was not registered";
 "createAccount.timeoutTitle" = "Account Created";
 "createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Ligas konton";
-"linkToAccount.linkButtonTitle" = "Ligi aparaton";
-"linkToAccount.passwordPlaceholder" = "Pasvorto";
-"linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Entajpu Pasvorton";
-"linkToAccount.pinLabel" = "Entajpu PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account managment settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.waitLinkToAccountTitle" = "La vinculación de cuentas";
+"linkToAccount.linkButtonTitle" = "Dispositivu de enllaz";
+"linkToAccount.passwordPlaceholder" = "Paez que la contraseña";
+"linkToAccount.pinPlaceholder" = "El PIN";
+"linkToAccount.passwordLabel" = "Entra contraseña";
+"linkToAccount.pinLabel" = "Entra PIN";
+"linkToAccount.explanationPinMessage" = "El PIN ye un sistema de xestión de datos que se basa en datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "Pasvorto";
-"linkToAccountManager.passwordLabel" = "Entajpu Pasvorton";
-"linkToAccountManager.usernamePlaceholder" = "Uzantnomo";
+"linkToAccountManager.signIn" = "Ensinar";
+"linkToAccountManager.passwordPlaceholder" = "Paez que la contraseña";
+"linkToAccountManager.passwordLabel" = "Entra contraseña";
+"linkToAccountManager.usernamePlaceholder" = "Nombre d'usuariu";
 "linkToAccountManager.usernameLabel" = "Enter Username";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
 //Alerts
-"alerts.accountCannotBeFoundTitle" = "Ne trovantas konton";
+"alerts.accountCannotBeFoundTitle" = "Nun puedo atopar cuenta";
 "alerts.accountCannotBeFoundMessage" = "Account couldn't be found on the Jami network. Make sure it was exported on Jami from an existing device, and that provided credentials are correct.";
-"alerts.accountAddedTitle" = "Konto estas aldonita";
-"alerts.accountNoNetworkTitle" = "Ne povas konekti al la reto";
-"alerts.accountNoNetworkMessage" = "Ne eblas aldoni konton, ĉar Jami ne povas konektiĝi al la distribuita reto.";
-"alerts.accountDefaultErrorTitle" = "Nekonata eraro";
-"alerts.accountDefaultErrorMessage" = "Ne provas krei konton.";
-"alerts.profileTakePhoto" = "Foti";
-"alerts.profileUploadPhoto" = "Alŝuti foton";
-"alerts.profileCancelPhoto" = "Nuligi";
-"alerts.accountLinkedTitle" = "Ligas konton";
+"alerts.accountAddedTitle" = "Cuenta añadida";
+"alerts.accountNoNetworkTitle" = "Nun se puede conectar a la rede.";
+"alerts.accountNoNetworkMessage" = "La so cuenta nun pudo ser añadida porque Jami nun podía conectar a la rede distribuyida.";
+"alerts.accountDefaultErrorTitle" = "Error desconocíu";
+"alerts.accountDefaultErrorMessage" = "La cuenta nun se pudo crear.";
+"alerts.profileTakePhoto" = "Ye una fotografía.";
+"alerts.profileUploadPhoto" = "Archiváu dende l' oxetivu";
+"alerts.profileCancelPhoto" = "Cancelación";
+"alerts.accountLinkedTitle" = "Cuenta de vinculación";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
-"alerts.dbFailedMessage" = "Bonvolu fermu aplikaĵo kaj provu aktivigi ĝin denove";
+"alerts.dbFailedMessage" = "Por favor, cierre la so solicitud y intenta abrir de nuevu.";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -199,30 +199,30 @@
 "alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Mapo informoj";
+"alerts.mapInformation" = "Información del mapa";
 "alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
 "alerts.openStreetMapCopyrightMoreInfo" = "Learn more";
 
 //Actions
-"actions.deleteAction" = "Forigi";
-"actions.cancelAction" = "Nuligi";
-"actions.clearAction" = "Malpezo";
-"actions.backAction" = "Reiri";
-"actions.doneAction" = "Finita";
+"actions.deleteAction" = "Esborrar";
+"actions.cancelAction" = "Cancelación";
+"actions.clearAction" = "El so nome ye \"Clarity\".";
+"actions.backAction" = "El so fíu, el so fíu,";
+"actions.doneAction" = "Fináu";
 "alerts.incomingCallAllertTitle" = "Incoming call from ";
-"alerts.incomingCallButtonIgnore" = "Malatenti";
+"alerts.incomingCallButtonIgnore" = "Ignore";
 "actions.startAudioCall" = "  Audio Call";
 "actions.startVideoCall" = "  Video Call";
 "actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Ĉesu dividi";
+"actions.stopLocationSharing" = "Pa evitar la compartición";
 
 //Calls
-"calls.callItemTitle" = "Voko";
-"calls.unknown" = "Nekonata";
+"calls.callItemTitle" = "Llamada";
+"calls.unknown" = "Nun se sabe";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
-"calls.searching" = "Searching…";
+"calls.searching" = "Buscando...";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -235,23 +235,23 @@
 "calls.lowerHand" = "lower hand";
 
 //Account Page
-"accountPage.devicesListHeader" = "Aparatoj";
-"accountPage.settingsHeader" = "Agordoj";
-"accountPage.username" = "Uzantnomo";
+"accountPage.devicesListHeader" = "Dispositivos";
+"accountPage.settingsHeader" = "Configuración";
+"accountPage.username" = "Nombre d'usuariu";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.enableProxy" = "Enable Proxy";
-"accountPage.blockedContacts" = "Blokiĝintaj kontaktoj";
+"accountPage.blockedContacts" = "Contactos bloqueados";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
 "accountPage.enableProxy" = "Enable Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
-"accountPage.saveProxyAddress" = "Savi";
-"accountPage.proxyPaceholder" = "Proksimula adreso";
-"accountPage.enableNotifications" = "Ŝalti Sciigojn";
+"accountPage.saveProxyAddress" = "El so nome ye \"Castor\".";
+"accountPage.proxyPaceholder" = "La dirección de proxy";
+"accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Revoga aparato";
+"accountPage.revokeDeviceTitle" = "Dispositivu de revocación";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
 "accountPage.revokeDevicePlaceholder" = "Enter your passord";
@@ -259,29 +259,29 @@
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
 "accountPage.deviceRevocationTryAgain" = "Try again";
-"accountPage.deviceRevocationWrongPassword" = "Malĝusta pasvorto";
+"accountPage.deviceRevocationWrongPassword" = "Paez incorrecta";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.linkDeviceTitle" = "Link another device";
-"accountPage.other" = "Alia";
-"accountPage.removeAccountTitle" = "Remove account";
+"accountPage.other" = "Other";
+"accountPage.removeAccountTitle" = "La cuenta ye retirada";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-"accountPage.removeAccountButton" = "Forigi";
+"accountPage.removeAccountButton" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "Registru uzantnomon";
-"accountPage.passwordPlaceholder" = "Enter account password";
+"accountPage.registerNameTitle" = "Registrar un nome d' usuariu";
+"accountPage.passwordPlaceholder" = "Entra contraseña de la cuenta";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
-"accountPage.usernameRegisterAction" = "Registri";
+"accountPage.usernameRegisterAction" = "El rexistru";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
-"accountPage.changePassword" = "Ŝanĝu pasvorton";
+"accountPage.createPassword" = "Crear contraseña";
+"accountPage.changePassword" = "Cambiar contraseña";
 "accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enigu novan pasvorton";
-"accountPage.newPasswordConfirmPlaceholder" = "Konfirmu novan pasvorton";
+"accountPage.newPasswordPlaceholder" = "Introducir una contraseña nueva";
+"accountPage.newPasswordConfirmPlaceholder" = "Confirmar la contraseña nueva";
 "accountPage.changePasswordError" = "Password incorrect";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
@@ -291,44 +291,44 @@
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 "accountPage.peerDiscovery" = "Auto connect on local network";
 "accountPage.autoRegistration" = "Auto register after expiration";
-"accountPage.connectivityHeader" = "Konektiveco";
+"accountPage.connectivityHeader" = "La conectividá";
 "accountPage.turnEnabled" = "Enable TURN";
-"accountPage.turnServer" = "Adreso de la TIR-a";
-"accountPage.turnUsername" = "TURN uzantnomo";
-"accountPage.turnPassword" = "TURN pasvorto";
+"accountPage.turnServer" = "Direición de la RRN";
+"accountPage.turnUsername" = "Nómase d'usuariu TURN";
+"accountPage.turnPassword" = "La contraseña de TURN";
 "accountPage.turnRealm" = "TURN realm";
 
 //Account
 "account.sipUsername" = "User Name";
-"account.sipPassword" = "Pasvorto";
+"account.sipPassword" = "Paez que la contraseña";
 "account.sipServer" = "SIP Server";
-"account.port" = "Pordo";
-"account.proxyServer" = "Prokura Servilo";
+"account.port" = "Portos";
+"account.proxyServer" = "El so nome ye";
 "account.createSipAccount" = "Create a SIP Account";
 "account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "Entajpu Pasvorton";
+"account.passwordLabel" = "Entra contraseña";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
 "account.enableAccount" = "Enable Account";
-"account.statusOnline" = "Interreto";
-"account.statusOffline" = "Malkonektita";
-"account.statusConnecting" = "Konektiĝo";
-"account.statusUnknown" = "Nekonata";
+"account.statusOnline" = "En línea";
+"account.statusOffline" = "La llinia";
+"account.statusConnecting" = "Conexión";
+"account.statusUnknown" = "Nun se sabe";
 "account.statusConnectionerror" = "Connection Error";
 "account.needMigration" = "account need to be migrated";
-"account.me" = "Mi";
+"account.me" = "Yo tamién.";
 
 //Block List Page
-"blockListPage.noBlockedContacts" = "Neniu blokita kontakto";
+"blockListPage.noBlockedContacts" = "Nun hai contactos bloqueaos";
 
 //Link New Device
-"linkDevice.title" = "Ligigu novan aparaton";
-"linkDevice.passwordError" = "The password you entered does not unlock this account";
-"linkDevice.networkError" = "Reta eraro okazis dum la elporto";
-"linkDevice.defaultError" = "Eraro okazis dum la elporto";
+"linkDevice.title" = "Enlazar un nuevu dispositivu";
+"linkDevice.passwordError" = "La contraseña que introdució nun desbloquea esta cuenta";
+"linkDevice.networkError" = "Un error de rede ocurrió mientres la exportación";
+"linkDevice.defaultError" = "Un error producíu mientres la exportación";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
-"linkDevice.hudMessage" = "Certigas";
+"linkDevice.hudMessage" = "Verificación";
 
 //Contact Page
 "contactPage.startAudioCall" = "Start Audio Call";
@@ -340,13 +340,13 @@
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initializing…";
-"dataTransfer.readableStatusError" = "Eraro";
+"dataTransfer.readableStatusError" = "Error de cita";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Nuligita";
+"dataTransfer.readableStatusCanceled" = "Cancelada";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusCancel" = "Nuligi";
+"dataTransfer.readableStatusCancel" = "Cancelación";
 
 //Notifications
 "notifications.incomingCall" = "Incoming Call";
@@ -356,59 +356,59 @@
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Nuligita";
+"dataTransfer.readableStatusCanceled" = "Cancelada";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusCancel" = "Nuligi";
-"dataTransfer.infoMessage" = "Press to start recording";
-"dataTransfer.sendMessage" = "Sendi";
+"dataTransfer.readableStatusCancel" = "Cancelación";
+"dataTransfer.infoMessage" = "Presione pa empezar a grabar";
+"dataTransfer.sendMessage" = "Enviar";
 
 
 //Generated Message
 "generatedMessage.contactAdded" = "You received inviation";
-"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.swarmCreated" = "El so nome ye \"Swarm\".";
 "generatedMessage.invitationReceived" = "was invited to join";
 "generatedMessage.invitationAccepted" = "joined the conversation";
 "generatedMessage.youJoined" = "You joined the conversation";
 "generatedMessage.contactBanned" = "was kicked";
 "generatedMessage.contactReAdded" = "was re-added";
-"generatedMessage.outgoingCall" = "Eliranta voko";
-"generatedMessage.incomingCall" = "Eniranta voko";
-"generatedMessage.missedOutgoingCall" = "Maltrafis forirantan telefonon";
-"generatedMessage.missedIncomingCall" = "Maltrafis envenantan telefonon";
+"generatedMessage.outgoingCall" = "L'escursión de salida";
+"generatedMessage.incomingCall" = "L'español";
+"generatedMessage.missedOutgoingCall" = "La llamada saliente perdida";
+"generatedMessage.missedIncomingCall" = "La llamada entrante perdida";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 "generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
-"generalSettings.title" = "Antaŭaj agordoj";
+"generalSettings.title" = "Configuraciones avanzadas";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
-"generalSettings.fileTransfer" = "Transdono de dosieroj";
+"generalSettings.fileTransfer" = "Transferencia de archivos";
 "generalSettings.locationSharing" = "Location Sharing";
-"generalSettings.automaticAcceptIncomingFiles" = "Aŭtomate akceptu alvenantajn dosierojn";
+"generalSettings.automaticAcceptIncomingFiles" = "Acceptar automáticamente archivos entrantes";
 "generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limigu la daŭron de la kuniga loko";
-"generalSettings.locationSharingDuration" = "La daŭro de poziciaj akcioj";
+"generalSettings.limitLocationSharingDuration" = "Limitar la duración de la compartición de la ubicación";
+"generalSettings.locationSharingDuration" = "El periodu de duración de les acciones de posiciones";
 
 
 //Log View
-"logView.title" = "Diagnostikoj";
-"logView.description" = "Malfermu diagnozajn registrojn";
-"logView.startLogging" = "Komenci la logadon";
+"logView.title" = "Los diagnósticos";
+"logView.description" = "Configuraciones abiertes del rexistru de diagnósticu";
+"logView.startLogging" = "Comienza la arquivada";
 "logView.stopLogging" = "Stop Logging";
 "logView.saveError" = "Failed to save file";
 "logView.shareError" = "Failed to share file";
 
 //Migrate Account
-"migrateAccount.title" = "Migrado de konto";
+"migrateAccount.title" = "Migración de cuentas";
 "migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Enigu pasvorton";
+"migrateAccount.explanation" = "Esta cuenta tien que ser migrao";
+"migrateAccount.passwordPlaceholder" = "Entra contraseña";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
+"migrateAccount.removeAccount" = "La cuenta ye retirada";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Nuligi";
+"migrateAccount.cancel" = "Cancelación";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
 
 
