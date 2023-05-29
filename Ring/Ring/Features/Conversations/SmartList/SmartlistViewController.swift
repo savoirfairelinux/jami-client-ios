@@ -112,6 +112,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
          */
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(swarmCreated(_:)), name: NSNotification.Name("SwarmCreated"), object: nil)
         self.setupSearchBar()
         searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: false, delegate: viewModel)
         self.setUpContactRequest()
@@ -149,6 +150,19 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             searchView.showSearchResult = false
         default:
             break
+        }
+    }
+
+    @objc
+    func swarmCreated(_ notification: Notification) {
+
+        if let dictionary = notification.userInfo as? [String: Any] {
+            if self.navigationController?.topViewController == self {
+                if let conversationId = dictionary["conversationId"] as? String,
+                   let convToShow: ConversationViewModel = self.viewModel.conversationViewModels.first(where: { $0.conversation.value.id == conversationId }) {
+                    self.viewModel.showConversation(withConversationViewModel: convToShow)
+                }
+            }
         }
     }
 

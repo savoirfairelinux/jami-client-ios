@@ -43,9 +43,14 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
         super.viewDidLoad()
         guard let accountId = self.viewModel.currentAccount?.id else { return }
 
-        let model = SwarmCreationUIModel(with: self.viewModel.injectionBag, accountId: accountId, strSearchText: strSearchText, swarmCreated: {[weak self] _ in
+        let model = SwarmCreationUIModel(with: self.viewModel.injectionBag, accountId: accountId, strSearchText: strSearchText, swarmCreated: {[weak self] conversationId in
             self?.navigationController?.popViewController(animated: true)
-            self?.dismiss(animated: true, completion: nil)
+            self?.dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: NSNotification.Name("SwarmCreated"), object: nil, userInfo: [
+                    "conversationId": conversationId
+                ])
+            })
+
         })
         let contentView = UIHostingController(rootView: SwarmCreationUI(list: model))
         addChild(contentView)
