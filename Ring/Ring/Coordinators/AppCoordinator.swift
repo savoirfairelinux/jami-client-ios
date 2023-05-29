@@ -179,7 +179,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
 
     func openConversation(conversationId: String, accountId: String) {
         if let conversationCoordinator = self.childCoordinators[0] as? ConversationsCoordinator {
-            conversationCoordinator.openConversation(conversationId: conversationId, accountId: accountId)
+            conversationCoordinator.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: true)
         }
     }
 
