@@ -40,33 +40,33 @@
 "scan.search" = "Szukanie...";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.searchBar" = "Szukaj kontaktu...";
+"swarmcreation.createTheSwarm" = "Stwórz rzadkość";
+"swarmcreation.addADescription" = "Dodaj opis";
+"swarmcreation.addPeople" = "Możesz dodać więcej ludzi do rodu";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.ignoreSwarm" = "/Nie zwracaj uwagę /na rzęd";
+"swarm.leaveConversation" = "Zostaw rozmowę.";
+"swarm.chooseColor" = "Wybierz kolor";
+"swarm.typeOfSwarm" = "Rodzaj rąk";
 "swarm.identifier" = "Identyfikator";
 "swarm.about" = "O programie";
 "swarm.members" = "Użytkownicy";
-"swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private swarm";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
+"swarm.addDescription" = "Dodaj opis";
+"swarm.oneToOne" = "Prywatny ród";
+"swarm.adminInvitesOnly" = "Admin zaprasza tylko";
+"swarm.invitesOnly" = "Prywatny ród";
+"swarm.publicChat" = "Rast publiczny";
+"swarm.others" = "Inne";
+"swarm.member" = "Członek";
+"swarm.invited" = "Zaproszone";
 "swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.banned" = "Zakazane";
+"swarm.unknown" = "Nieznane";
+"swarm.addMorePeople" = "Możesz dodać więcej ludzi do tej rzeszy";
+"swarm.addMember" = "Dodaj członka";
+"swarm.confirmLeaveSwarm" = "Jesteś pewna, że chcesz opuścić tę rzędę?";
+"swarm.Leave" = "Wyjdź";
 // Smartlist
 "smartlist.yesterday" = "Wczoraj";
 "smartlist.results" = "Publiczny Katalog";
@@ -92,14 +92,14 @@
 "conversation.explanationSendingLocationTo" = "Udostępniasz teraz lokalizację dla ";
 "conversation.explanationReceivingLocationFrom" = "Otrzymujesz teraz lokalizację na żywo od";
 "conversation.errorSavingImage" = "Nie udało się zapisać obrazu do galerii";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.sendRequestTitle" = "Send Contact Request";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.receivedRequest" = "/Wysłaliśmy ci prośbę o rozmowę.";
+"conversation.incomingRequest" = "Wysłałem ci prośbę o rozmowę.";
+"conversation.requestMessage" = "- Cześć, chciałbyś dołączyć do rozmowy?";
+"conversation.notContact" = "\%@\ nie jest w liście kontaktów.";
+"conversation.sendRequest" = "Wysyłać mu/jej prośbę o kontakt, aby mogli wspólnie wymieniać się";
+"conversation.sendRequestTitle" = "Wysyłaj wniosek o kontakt";
+"conversation.synchronizationTitle" = "Przyjąłeś prośbę o rozmowę.";
+"conversation.synchronizationMessage" = "Czekamy na %@\ łączenia, aby zsynchronizować rozmowę.";
 
 //Invitations
 "invitations.noInvitations" = "Brak zaproszeń";
@@ -228,11 +228,11 @@
 "calls.haghUp" = "Rozłącz";
 "calls.maximize" = "maksymalizuj";
 "calls.minimize" = "minimalizuj";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
+"calls.setModerator" = "ustawiony moderator";
+"calls.removeModerator" = "Moderator nie ustawiony";
 "calls.muteAudio" = "wycisz dźwięk";
 "calls.unmuteAudio" = "wyłącz wyciszenie dźwięku";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "dolna ręka";
 
 //Account Page
 "accountPage.devicesListHeader" = "Urządzenia";
@@ -283,16 +283,16 @@
 "accountPage.newPasswordPlaceholder" = "Wprowadź nowe hasło";
 "accountPage.newPasswordConfirmPlaceholder" = "Potwierdź nowe hasło";
 "accountPage.changePasswordError" = "Hasło niepoprawne";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
+"accountPage.enableBoothMode" = "Włącz tryb stołu";
+"accountPage.disableBoothMode" = "Wyłącz tryb budki";
 "accountPage.disableBoothModeExplanation" = "Proszę wprowadź swoje hasło do konta";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.boothModeExplanation" = "W trybie booth historia rozmowy nie jest zapisana i funkcjonalność jami ograniczona przez wykonywanie wychodzących połączeń.";
+"accountPage.noBoothMode" = "Aby włączyć tryb Booth, musisz najpierw utworzyć hasło konta.";
+"accountPage.boothModeAlertMessage" = "Po włączeniu trybu kabiny wszystkie rozmowy zostaną usunięte.";
 "accountPage.peerDiscovery" = "Automatycznie łącz się w sieci lokalnej";
 "accountPage.autoRegistration" = "Automatyczna rejestracja po wygaśnięciu";
 "accountPage.connectivityHeader" = "Łączność";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Włącz TURN";
 "accountPage.turnServer" = "Adres TURN";
 "accountPage.turnUsername" = "Nazwa użytkownika TURN";
 "accountPage.turnPassword" = "Hasło TURN";
@@ -364,40 +364,40 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
-"generatedMessage.swarmCreated" = "Swarm created";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.contactAdded" = "Otrzymałeś nieprzypustkę";
+"generatedMessage.swarmCreated" = "Wytworzone pęcherz";
+"generatedMessage.invitationReceived" = "Został zaproszony do przyłączenia się";
+"generatedMessage.invitationAccepted" = "Dołączyłem do rozmowy";
+"generatedMessage.youJoined" = "Dołączyłeś do rozmowy.";
+"generatedMessage.contactBanned" = "- Wpadł na mnie.";
+"generatedMessage.contactReAdded" = "został ponownie dodany";
 "generatedMessage.outgoingCall" = "Połączenie wychodzące";
 "generatedMessage.incomingCall" = "Połączenie przychodzące";
 "generatedMessage.missedOutgoingCall" = "Nieodebrane połączenie wychodzące";
 "generatedMessage.missedIncomingCall" = "Nieodebrane połączenie przychodzące";
 "generatedMessage.liveLocationSharing" = "Udostępnianie lokalizacji na żywo";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "w lewo";
 
 //General Settings
 "generalSettings.title" = "Ustawienia zaawansowane";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Ustawienia wideo";
 "generalSettings.videoAcceleration" = "Włącz przyspieszenie video";
 "generalSettings.fileTransfer" = "Transfer pliku";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Udział w lokalizacji";
 "generalSettings.automaticAcceptIncomingFiles" = "Automatycznie akceptuj przychodzące pliki";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.acceptTransferLimit" = "Przyjmuj limit przeniesienia";
+"generalSettings.acceptTransferLimitDescription" = "(w MB, 0 = nieograniczone)";
+"generalSettings.limitLocationSharingDuration" = "Ogranicz czas trwania udostępniania lokalizacji";
+"generalSettings.locationSharingDuration" = "Okres trwania udziałów pozycyjnych";
 
 
 //Log View
 "logView.title" = "Diagnostyka";
 "logView.description" = "Otwórz ustawienia logów diagnostycznych";
 "logView.startLogging" = "Start logowania";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Przestańcie łupiać";
+"logView.saveError" = "Nie udało się zapisać pliku";
+"logView.shareError" = "Nie udostępniono pliku";
 
 //Migrate Account
 "migrateAccount.title" = "Przenoszenie konta";

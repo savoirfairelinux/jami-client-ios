@@ -20,13 +20,13 @@
 
 // Global
 "global.homeTabBarTitle" = "Samtaler";
-"global.meTabBarTitle" = "Account Settings";
+"global.meTabBarTitle" = "Kontoindstillinger";
 "global.ok" = "Ok";
 "global.close" = "Luk";
 "global.share" = "Del";
-"global.forward" = "Forward";
+"global.forward" = "Fremad";
 "global.save" = "Gem";
-"global.resend" = "Resend";
+"global.resend" = "Send tilbage";
 "global.preview" = "Forvisning";
 "global.accept" = "Accepter";
 "global.block" = "Blokér";
@@ -40,42 +40,42 @@
 "scan.search" = "Søger…";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.searchBar" = "Søg efter kontakt...";
+"swarmcreation.createTheSwarm" = "Skaf sværmen";
+"swarmcreation.addADescription" = "Tilføj en beskrivelse";
+"swarmcreation.addPeople" = "Du kan tilføje flere mennesker i sværmen";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
-"swarm.identifier" = "Identifier";
+"swarm.ignoreSwarm" = "Ignorer sværmen";
+"swarm.leaveConversation" = "Lad samtalen være.";
+"swarm.chooseColor" = "Vælg en farve";
+"swarm.typeOfSwarm" = "Type svam";
+"swarm.identifier" = "Identifikator";
 "swarm.about" = "Om";
-"swarm.members" = "Members";
-"swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private swarm";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
+"swarm.members" = "Medlemmer";
+"swarm.addDescription" = "Tilføj Beskrivelse";
+"swarm.oneToOne" = "Privat svam";
+"swarm.adminInvitesOnly" = "Admin inviterer kun";
+"swarm.invitesOnly" = "Privat svam";
+"swarm.publicChat" = "Fælles swarm";
+"swarm.others" = "Andre";
+"swarm.member" = "Medlem";
+"swarm.invited" = "Indbydes";
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.unknown" = "Ukendt";
+"swarm.addMorePeople" = "Du kan tilføje flere mennesker til denne sværm";
+"swarm.addMember" = "Tilføj medlem";
+"swarm.confirmLeaveSwarm" = "Er du sikker på, du vil forlade denne sværm?";
+"swarm.Leave" = "- Gå væk.";
 // Smartlist
 "smartlist.yesterday" = "I går";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Det offentlige register";
 "smartlist.conversations" = "Samtaler";
 "smartlist.searching" = "Søger...";
 "smartlist.noResults" = "Ingen resultater";
 "smartlist.noConversation" = "Ingen samtaler";
 "smartlist.searchBarPlaceholder" = "Indtast navn...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Søg efter nye eller eksisterende kontakter...";
 "smartlist.noNetworkConnectivity" = "Ingen netværksforbindelse";
 "smartlist.cellularAccess" = "Kontroller at rettigheder til mobildata er givet i indstillinger";
 "smartlist.accountsTitle" = "Konti";
@@ -83,23 +83,23 @@
 "smartlist.noNumber" = "Den valgte kontakt har ikke noget nummer";
 "smartlist.selectOneNumber" = "Vælg et af numrene";
 "smartlist.invitations" = "Invitationer";
-"smartlist.accountSettings" = "Account Settings";
-"smartlist.advancedSettings" = "Advanced Settings";
+"smartlist.accountSettings" = "Kontoindstillinger";
+"smartlist.advancedSettings" = "Avancerede indstillinger";
 "smartlist.aboutJami" = "Om Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
+"conversation.messagePlaceholder" = "Skriv et besked til ";
 "conversation.explanationSendingLocationTo" = "Du deler i øjeblikket din lokation med";
 "conversation.explanationReceivingLocationFrom" = "Du modtager i øjeblikket en live lokation fra";
-"conversation.errorSavingImage" = "Failed to save image to galery";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.sendRequestTitle" = "Send Contact Request";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.errorSavingImage" = "Uddannede at gemme billede til galleri";
+"conversation.receivedRequest" = "Vi sendte dig en anmodning om en samtale.";
+"conversation.incomingRequest" = "Jeg sendte en anmodning om en samtale.";
+"conversation.requestMessage" = "Vil du være med i samtalen?";
+"conversation.notContact" = "\%@\ er ikke på din kontaktliste.";
+"conversation.sendRequest" = "Send ham/hende en kontaktansøgning, så han/hun kan udveksle oplysninger";
+"conversation.sendRequestTitle" = "Send en kontaktansøgning";
+"conversation.synchronizationTitle" = "Du har accepteret forespørgslen.";
+"conversation.synchronizationMessage" = "Vi venter på \%@\ forbindelser til at synkronisere samtalen.";
 
 //Invitations
 "invitations.noInvitations" = "Ingen invitationer";
@@ -111,7 +111,7 @@
 "welcome.text" = "Jami er en gratis og universel kommunikationsplatform som respekterer sine brugeres privatliv og frihed";
 "welcome.linkDevice" = "Tilknyt denne enhed til en konto";
 "welcome.createAccount" = "Opret en Jami-konto";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Forbindelse til en JAMS-server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Spring over";
@@ -124,16 +124,16 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Opret din konto";
-"createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
+"createAccount.chooseStrongPassword" = "Vælg et stærkt password, du vil huske for at beskytte din Jami-konto.";
 "createAccount.enterNewUsernamePlaceholder" = "Brugernavn";
 "createAccount.newPasswordPlaceholder" = "Adgangskode";
 "createAccount.repeatPasswordPlaceholder" = "Bekræft adgangskode";
 "createAccount.passwordCharactersNumberError" = "Mindst 6 tegn";
 "createAccount.passwordNotMatchingError" = "kodeordene stemmer ikke overens";
-"createAccount.lookingForUsernameAvailability" = "looking for availability…";
+"createAccount.lookingForUsernameAvailability" = "- Jeg er ude efter tilgængelighed.";
 "createAccount.invalidUsername" = "ugyldigt brugernavn";
 "createAccount.usernameAlreadyTaken" = "brugernavn er allerede anvendt";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "brugernavn er tilgængelig";
 "createAccount.loading" = "Indlæser";
 "createAccount.waitCreateAccountTitle" = "Tilføjer konto";
 "createAccount.RegisterAUsername" = "Registrér et brugernavn";
@@ -144,7 +144,7 @@
 "createAccount.UsernameNotRegisteredTitle" = "Netværksfejl";
 "createAccount.UsernameNotRegisteredMessage" = "Kontoen blev oprettet men brugernavnet blev ikke registreret.";
 "createAccount.timeoutTitle" = "Konto Oprettet";
-"createAccount.timeoutMessage" = "Username registration in progress... It could take a few moments.";
+"createAccount.timeoutMessage" = "Registrering af brugernavn er i gang, det kan tage et par minutter.";
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Konto-tilknytning";
@@ -162,7 +162,7 @@
 "linkToAccountManager.usernamePlaceholder" = "Brugernavn";
 "linkToAccountManager.usernameLabel" = "Indtast Brugernavn";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Indtaster JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Kan ikke finde konto";
@@ -183,24 +183,24 @@
 "alerts.confirmDeleteConversation" = "Er du sikker på at du vil slette denne samtale permanent?";
 "alerts.confirmDeleteConversationFromContact" = "Er du sikker på at du vil slette samtalen med denne bruger?";
 "alerts.confirmDeleteConversationTitle" = "Slet samtale";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversation" = "Er du sikker på, du vil afklare samtalen med denne kontakt?";
 "alerts.confirmClearConversationTitle" = "Ryd Samtale";
 "alerts.noMediaPermissionsTitle" = "Medietilladelse er ikke givet";
 "alerts.noLibraryPermissionsTitle" = "Har ikke adgang til foto-biblioteket";
 "alerts.noLocationPermissionsTitle" = "Har ikke adgang til lokation";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
+"alerts.errorWrongCredentials" = "Kan ikke oprette forbindelse til den kontoansvarlige.";
 "alerts.recordVideoMessage" = "Optag en video meddelelse";
 "alerts.recordAudioMessage" = "Optag en audio samtale";
 "alerts.uploadFile" = "Upload fil";
 "alerts.uploadPhoto" = "Upload billede eller film";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
+"alerts.locationServiceIsDisabled" = "Tænd \"Lokationstjenester\" for at lade \"Jami\" bestemme din placering.";
 "alerts.locationSharing" = "Del min lokation";
 "alerts.alreadylocationSharing" = "Du deler allerede din lokation med denne bruger";
 "alerts.locationSharingDurationTitle" = "I hvor lang tid vil du dele din lokation?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 time";
 "alerts.mapInformation" = "Kort information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap bidragydere";
 "alerts.openStreetMapCopyrightMoreInfo" = "Find ud af mere";
 
 //Actions
@@ -213,7 +213,7 @@
 "alerts.incomingCallButtonIgnore" = "Afvis";
 "actions.startAudioCall" = "Lydopkald";
 "actions.startVideoCall" = "Videoopkald";
-"actions.goToSettings" = "Go to Settings";
+"actions.goToSettings" = "Gå til Indstillinger";
 "actions.stopLocationSharing" = "Stop deling";
 
 //Calls
@@ -228,11 +228,11 @@
 "calls.haghUp" = "læg på";
 "calls.maximize" = "maksimér";
 "calls.minimize" = "minimér";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
-"calls.lowerHand" = "lower hand";
+"calls.setModerator" = "indstiller moderator";
+"calls.removeModerator" = "Moderator";
+"calls.muteAudio" = "Stum lyd";
+"calls.unmuteAudio" = "Udybnet lyd";
+"calls.lowerHand" = "nederste hånd";
 
 //Account Page
 "accountPage.devicesListHeader" = "Enheder";
@@ -261,62 +261,62 @@
 "accountPage.deviceRevocationTryAgain" = "Prøv igen";
 "accountPage.deviceRevocationWrongPassword" = "Forkert adgangskode";
 "accountPage.deviceRevocationUnknownDevice" = "Ukendt enhed";
-"accountPage.deviceRevocationError" = "Device revocation error";
+"accountPage.deviceRevocationError" = "Fejl med tilbagekaldelse af udstyret";
 "accountPage.linkDeviceTitle" = "Tilknyt en anden enhed";
 "accountPage.other" = "Andre";
-"accountPage.removeAccountTitle" = "Remove account";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountTitle" = "Fjern kontoen";
+"accountPage.removeAccountMessage" = "Hvis du klikker på \"Fjern\" fjerner du denne konto på denne enhed! Denne handling kan ikke gøres ugyldig.";
 "accountPage.removeAccountButton" = "Fjern";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
+"accountPage.shareAccountDetails" = "Del kontooplysninger";
+"accountPage.contactMeOnJamiTitle" = "Kontakt mig på Jami!";
+"accountPage.contactMeOnJamiContant" = "Kontakt mig ved hjælp af \"%s\" på Jami distribueret kommunikationsplatform: https://jami.net";
 "accountPage.registerNameTitle" = "Registrér et brugernavn";
 "accountPage.passwordPlaceholder" = "Indtast password til kontoen";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernamePlaceholder" = "Indtaster ønskede brugernavn";
+"accountPage.registerNameErrorMessage" = "Vælget brugernavn er ikke tilgængeligt";
+"accountPage.usernameRegistering" = "Registrering";
 "accountPage.usernameRegisterAction" = "Registrér";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.usernameRegistrationFailed" = "Registrering mislykkedes.";
+"accountPage.createPassword" = "Oprette adgangskode";
 "accountPage.changePassword" = "Skift adgangskode";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
-"accountPage.peerDiscovery" = "Auto connect on local network";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.oldPasswordPlaceholder" = "Indtaster gammelt adgangskode";
+"accountPage.newPasswordPlaceholder" = "Indtaster nyt adgangskode";
+"accountPage.newPasswordConfirmPlaceholder" = "bekræft nyt adgangskode";
+"accountPage.changePasswordError" = "Faldt adgangskode";
+"accountPage.enableBoothMode" = "Aktiver Booth- modus";
+"accountPage.disableBoothMode" = "Sluk op på standmodus";
+"accountPage.disableBoothModeExplanation" = "Giv din konto adgangskode";
+"accountPage.boothModeExplanation" = "I stand-modus er samtalehistorien ikke gemt og Jami-funktionen begrænset ved at foretage udgående opkald.";
+"accountPage.noBoothMode" = "For at aktivere Booth-modus skal du oprette kontopassord først.";
+"accountPage.boothModeAlertMessage" = "Efter at have aktiveret stand-modus, fjernes alle dine samtaler.";
+"accountPage.peerDiscovery" = "Automatisk forbindelse på lokalt netværk";
+"accountPage.autoRegistration" = "Autorejser efter udløbet";
 "accountPage.connectivityHeader" = "Forbindelse";
-"accountPage.turnEnabled" = "Enable TURN";
-"accountPage.turnServer" = "TURN address";
+"accountPage.turnEnabled" = "Aktivere TURN";
+"accountPage.turnServer" = "Adresse";
 "accountPage.turnUsername" = "TURN-brugernavn";
 "accountPage.turnPassword" = "TURN-adgangskode";
-"accountPage.turnRealm" = "TURN realm";
+"accountPage.turnRealm" = "TURN-verden";
 
 //Account
-"account.sipUsername" = "User Name";
+"account.sipUsername" = "Brugernavn";
 "account.sipPassword" = "Adgangskode";
-"account.sipServer" = "SIP Server";
+"account.sipServer" = "SIP-server";
 "account.port" = "Port";
 "account.proxyServer" = "Stedfortræder";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Oprette en SIP-konto";
 "account.usernameLabel" = "Indtast Brugernavn";
 "account.passwordLabel" = "Indtast kodeord";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
-"account.enableAccount" = "Enable Account";
+"account.serverLabel" = "Indtast Adresse";
+"account.portLabel" = "Indtasts portnummer";
+"account.accountStatus" = "Kontostatus";
+"account.enableAccount" = "Aktiver konto";
 "account.statusOnline" = "Forbundet";
 "account.statusOffline" = "Ingen forbindelse";
 "account.statusConnecting" = "Forbinder";
 "account.statusUnknown" = "Ukendt";
-"account.statusConnectionerror" = "Connection Error";
-"account.needMigration" = "account need to be migrated";
+"account.statusConnectionerror" = "Forbindelsesfejl";
+"account.needMigration" = "konto skal migreres";
 "account.me" = "Mig";
 
 //Block List Page
@@ -327,7 +327,7 @@
 "linkDevice.passwordError" = "Den adgangskode du har indtastet låser ikke op for denne konto";
 "linkDevice.networkError" = "Der opstod en netværksfejl under eksporteringen";
 "linkDevice.defaultError" = "Der opstod en fejl under eksport";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "For at fuldføre processen skal du åbne Jami på den nye enhed og vælge alternativet \"Link denne enhed til en konto\". Din pin er gyldig i 10 minutter";
 "linkDevice.hudMessage" = "Verificerer";
 
 //Contact Page
@@ -336,7 +336,7 @@
 "contactPage.sendMessage" = "Send besked";
 "contactPage.clearConversation" = "Ryd chat";
 "contactPage.blockContact" = "Bloker kontakt";
-"contactPage.removeConversation" = "Remove Conversation";
+"contactPage.removeConversation" = "Fjern samtalen";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Initialiserer...";
@@ -344,71 +344,71 @@
 "dataTransfer.readableStatusAwaiting" = "Under oprettelse...";
 "dataTransfer.readableStatusOngoing" = "Overfører";
 "dataTransfer.readableStatusCanceled" = "Annulleret";
-"dataTransfer.sendingFailed" = "Failed to send";
+"dataTransfer.sendingFailed" = "Uden at sende";
 "dataTransfer.readableStatusSuccess" = "Afsluttet";
 "dataTransfer.readableStatusCancel" = "Annuller";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
-"notifications.missedCall" = "Missed Call";
-"notifications.newFile" = "New file";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
+"notifications.incomingCall" = "Indkommende opkald";
+"notifications.missedCall" = "Misseligt opkald";
+"notifications.newFile" = "Ny fil";
+"notifications.locationSharingStarted" = "Indgående placeringsholding startet";
+"notifications.locationSharingStopped" = "Indkommende placeringsholding stoppet";
 "dataTransfer.readableStatusAwaiting" = "Under oprettelse...";
 "dataTransfer.readableStatusOngoing" = "Overfører";
 "dataTransfer.readableStatusCanceled" = "Annulleret";
 "dataTransfer.readableStatusSuccess" = "Afsluttet";
 "dataTransfer.readableStatusCancel" = "Annuller";
-"dataTransfer.infoMessage" = "Press to start recording";
+"dataTransfer.infoMessage" = "Tryk for at begynde at optage";
 "dataTransfer.sendMessage" = "Send";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
-"generatedMessage.swarmCreated" = "Swarm created";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.contactAdded" = "Du har fået undladelse.";
+"generatedMessage.swarmCreated" = "Skarm skabt";
+"generatedMessage.invitationReceived" = "blev inviteret til at deltage";
+"generatedMessage.invitationAccepted" = "- Jeg er med i samtalen.";
+"generatedMessage.youJoined" = "Du er med i samtalen.";
+"generatedMessage.contactBanned" = "blev sparket";
+"generatedMessage.contactReAdded" = "blev tilføjet";
 "generatedMessage.outgoingCall" = "Udgående opkald";
 "generatedMessage.incomingCall" = "Indgående opkald";
 "generatedMessage.missedOutgoingCall" = "Ubesvarede udgående opkald";
 "generatedMessage.missedIncomingCall" = "Ubesvarede indgående opkald";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.liveLocationSharing" = "Live placeringsholding";
+"generatedMessage.contactLeftConversation" = "til venstre";
 
 //General Settings
 "generalSettings.title" = "Avancerede indstillinger";
-"generalSettings.videoSettings" = "Video Settings";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoSettings" = "Videoindstillinger";
+"generalSettings.videoAcceleration" = "Aktivere videobesked";
 "generalSettings.fileTransfer" = "Filoverførsler";
-"generalSettings.locationSharing" = "Location Sharing";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.locationSharing" = "Omstillingsholding";
+"generalSettings.automaticAcceptIncomingFiles" = "Automatisk acceptere indgående filer";
+"generalSettings.acceptTransferLimit" = "Antagelse af overførselsgrænser";
+"generalSettings.acceptTransferLimitDescription" = "(i MB, 0 = ubegrænset)";
+"generalSettings.limitLocationSharingDuration" = "Begræns varigheden af deling af placering";
+"generalSettings.locationSharingDuration" = "Varighed af positionaktier";
 
 
 //Log View
-"logView.title" = "Diagnostics";
-"logView.description" = "Open diagnostic log settings";
-"logView.startLogging" = "Start Logging";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.title" = "Diagnostik";
+"logView.description" = "Åbne indstillinger for diagnostisk log";
+"logView.startLogging" = "Start logging";
+"logView.stopLogging" = "Stop med at skære";
+"logView.saveError" = "Uddannelse af fil";
+"logView.shareError" = "Uddelt fil";
 
 //Migrate Account
 "migrateAccount.title" = "Konto-migrering";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
+"migrateAccount.migrateButton" = "Migrationskonto";
+"migrateAccount.explanation" = "Denne konto skal migreres";
 "migrateAccount.passwordPlaceholder" = "Indtast adgangskode";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
+"migrateAccount.passwordExplanation" = "For at fortsætte med migrationen skal du angive et adgangskode, der blev brugt til denne konto";
+"migrateAccount.removeAccount" = "Fjern kontoen";
+"migrateAccount.error" = "Du kan prøve igen eller slette din konto.";
+"migrateAccount.migrating" = "Migrerende...";
 "migrateAccount.cancel" = "Annuller";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
+"migrateAccount.migrateAnother" = "Flyt til en anden konto";
 
 
