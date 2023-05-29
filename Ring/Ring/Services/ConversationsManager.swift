@@ -177,9 +177,12 @@ class ConversationsManager {
             return
         }
         self.cleanConversationData()
+        // ask daemon to reload conversations and request from file
         self.reloadConversationsAndRequests(updatedConversations: updatedConversations)
         self.accountsService.setAccountsActive(active: true)
-
+        // get requests from the daemon
+        self.updateRequests(updatedConversations: updatedConversations)
+        // get interactions from the daemon
         self.reloadConversationMessages(updatedConversations: updatedConversations)
     }
 
@@ -187,6 +190,14 @@ class ConversationsManager {
         for conversationData in updatedConversations {
             if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
                 self.conversationService.reloadConversationsAndRequests(accountId: accountId)
+            }
+        }
+    }
+
+    func updateRequests(updatedConversations: [[String: String]]) {
+        for conversationData in updatedConversations {
+            if let accountId = conversationData[Constants.NotificationUserInfoKeys.accountID.rawValue] {
+                self.requestService.updateConversationsRequests(withAccount: accountId)
             }
         }
     }
