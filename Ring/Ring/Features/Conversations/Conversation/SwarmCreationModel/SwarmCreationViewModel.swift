@@ -30,12 +30,22 @@ class SwarmCreationViewModel: ViewModel, Stateable {
     }()
     let disposeBag = DisposeBag()
     let injectionBag: InjectionBag
+    var conversationViewModel: ConversationViewModel?
 
     private let accountsService: AccountsService
     var currentAccount: AccountModel? { self.accountsService.currentAccount }
 
     required init(with injectionBag: InjectionBag) {
         self.accountsService = injectionBag.accountService
+        self.conversationViewModel = ConversationViewModel(with: injectionBag)
         self.injectionBag = injectionBag
+    }
+
+    func showConversation(withConversationModel conversationModel: ConversationModel) {
+        conversationViewModel?.conversation = BehaviorRelay<ConversationModel>(value: conversationModel)
+        if let conversationViewModel {
+            self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel:
+                                                                            conversationViewModel))
+        }
     }
 }
