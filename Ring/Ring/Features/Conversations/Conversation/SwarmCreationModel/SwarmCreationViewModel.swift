@@ -38,4 +38,8 @@ class SwarmCreationViewModel: ViewModel, Stateable {
         self.accountsService = injectionBag.accountService
         self.injectionBag = injectionBag
     }
+
+    func showConversation(withConversationModel conversationModel: ConversationModel) {
+        self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: conversationModel.id, accountId: conversationModel.accountId))
+    }
 }

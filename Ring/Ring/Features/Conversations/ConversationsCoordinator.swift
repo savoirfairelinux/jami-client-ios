@@ -24,6 +24,8 @@ import RxSwift
 import RxCocoa
 import os
 
+// swiftlint:disable cyclomatic_complexity
+// swiftlint:disable type_body_length
 /// This Coordinator drives the conversation navigation (Smartlist / Conversation detail)
 class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNavigation {
     var presentingVC = [String: Bool]()
@@ -90,6 +92,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.popToSmartList()
                 case .openConversation(let jamiId):
                     self.openConversation(jamiId: jamiId)
+                case .openConversationForConversationId(let conversationId, let accountId):
+                    self.openConversation(conversationId: conversationId, accountId: accountId)
                 default:
                     break
                 }
@@ -283,7 +287,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     }
 
     func openConversation(conversationId: String, accountId: String) {
-        self.popToSmartList()
         if let model = getConversationViewModelForId(conversationId: conversationId) {
             self.showConversation(withConversationViewModel: model)
         } else if let request = self.requestsService.getRequest(withId: conversationId, accountId: accountId) {
@@ -292,6 +295,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
             conversationViewModel.request = request
             self.showConversation(withConversationViewModel: conversationViewModel)
+        }
+        let viewControllers = navigationViewController.viewControllers
+        if let index = viewControllers.firstIndex(where: { $0 is SwarmCreationViewController }) {
+            navigationViewController.viewControllers.remove(at: index)
         }
     }
 

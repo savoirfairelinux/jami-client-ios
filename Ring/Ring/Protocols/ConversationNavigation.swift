@@ -55,6 +55,7 @@ enum ConversationState: State {
     case migrateAccount(accountId: String)
     case presentSwarmInfo(swarmInfo: SwarmInfoProtocol)
     case openConversation(jamiId: String)
+    case openConversationForConversationId(conversationId: String, accountId: String)
 }
 
 protocol ConversationNavigation: AnyObject {
@@ -106,6 +107,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                                                     invitationHandeledCB: invitationHandeledCB)
                 case .presentSwarmInfo(let swarmInfo):
                     self.presentSwarmInfo(swarmInfo: swarmInfo)
+                case .openConversationForConversationId:
+                    break
                 default:
                     break
                 }
