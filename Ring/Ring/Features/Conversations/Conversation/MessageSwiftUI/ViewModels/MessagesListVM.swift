@@ -225,8 +225,18 @@ class MessagesListVM: ObservableObject {
         }) { return false }
         let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject)
         self.subscribeMessage(container: container)
-        // first try to find child
-        if let index = self.messagesModels.firstIndex(where: { message in
+        // try to find parent
+        if let parentIndex = self.messagesModels.firstIndex(where: { messageModel in
+            messageModel.message.id == newMessage.parentId
+        }) {
+            if parentIndex > 0 {
+                self.messagesModels.insert(container, at: parentIndex)
+            } else {
+                self.messagesModels.insert(container, at: 0)
+            }
+        }
+        // try to find child
+        else if let index = self.messagesModels.firstIndex(where: { message in
             message.message.parentId == newMessage.id
         }) {
             if index < self.messagesModels.count - 1 {
@@ -234,29 +244,21 @@ class MessagesListVM: ObservableObject {
             } else {
                 self.messagesModels.append(container)
             }
-            // try to find parent
-        } else if let parentIndex = self.messagesModels.firstIndex(where: { messageModel in
-            messageModel.message.id == newMessage.parentId
-        }) {
-            if parentIndex > 0 {
-                self.messagesModels.insert(container, at: parentIndex - 1)
-            } else {
-                self.messagesModels.insert(container, at: 0)
-            }
+            conversation.unorderedInteractions.append(newMessage.parentId)
         } else {
             if let last = self.messagesModels.last, last.message.parentId.isEmpty {
                 self.messagesModels.insert(container, at: 0)
             } else {
                 self.messagesModels.append(container)
             }
-            conversation.unorderedInteractions.append(newMessage.id)
+            conversation.unorderedInteractions.append(newMessage.parentId)
         }
-        /// if a new message is a parent for previously added message change messages order
+        // if a new message is a parent for previously added message change messages order
         if conversation.unorderedInteractions.contains(where: { parentId in
-            parentId == newMessage.parentId
+            parentId == newMessage.id
         }) {
-            moveInteraction(interactionId: newMessage.id, after: newMessage.parentId)
-            if let ind = conversation.unorderedInteractions.firstIndex(of: newMessage.parentId) {
+            parentAdded(parentId: newMessage.id)
+            if let ind = conversation.unorderedInteractions.firstIndex(of: newMessage.id) {
                 conversation.unorderedInteractions.remove(at: ind)
             }
         }
@@ -264,12 +266,12 @@ class MessagesListVM: ObservableObject {
         return true
     }
 
-    /**
-     move child interaction when found parent interaction
-     */
-    private func moveInteraction(interactionId: String, after parentId: String) {
+    private func parentAdded(parentId: String) {
+        guard let interactionToMove = messagesModels.filter({ message in
+            message.message.parentId == parentId
+        }).first else { return }
         if let index = messagesModels.firstIndex(where: { messge in
-            messge.id == interactionId
+            messge.id == interactionToMove.id
         }), let parentIndex = messagesModels.firstIndex(where: { messge in
             messge.id == parentId
         }) {
@@ -277,18 +279,13 @@ class MessagesListVM: ObservableObject {
                 // alredy on the right place
                 return
             }
-
-            let interactionToMove = messagesModels[index]
             let moveToIndex = parentIndex > 0 ? parentIndex - 1 : 0
             if index > 0 {
-                // if interaction we are going to move is parent for next interaction we should move next interaction as well
-                let childInteraction = messagesModels[index - 1]
-                let moveChildInteraction = interactionToMove.id == childInteraction.message.parentId
                 messagesModels.insert(messagesModels.remove(at: index), at: moveToIndex)
-                if !moveChildInteraction {
-                    return
+                parentAdded(parentId: interactionToMove.id)
+                if let ind = conversation.unorderedInteractions.firstIndex(of: interactionToMove.id) {
+                    conversation.unorderedInteractions.remove(at: ind)
                 }
-                moveInteraction(interactionId: childInteraction.id, after: interactionToMove.id)
             } else {
                 // message we are going to move is last in the first, we do not need to check child interactions
                 messagesModels.insert(messagesModels.remove(at: index), at: moveToIndex)
