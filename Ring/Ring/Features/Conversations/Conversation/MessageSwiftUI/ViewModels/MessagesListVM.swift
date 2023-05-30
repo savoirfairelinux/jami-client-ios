@@ -103,6 +103,10 @@ class MessagesListVM: ObservableObject {
                 .observe(on: MainScheduler.instance)
                 .subscribe { [weak self] messages in
                     guard let self = self else { return }
+                    if self.conversation.messages.isEmpty {
+                        self.messagesModels = [MessageContainerModel]()
+                        return
+                    }
                     var insertionCount = 0
                     for newMessage in messages where self.insert(newMessage: newMessage) == true {
                         insertionCount += 1
