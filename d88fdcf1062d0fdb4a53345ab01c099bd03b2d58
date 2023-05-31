@@ -16,6 +16,24 @@
       "message": "It should be coordinator that is responsible for presenting view controllers. Coordinator should pass stateable when presenting SwarmCreationViewController. And SwarmCreationViewModel should update state.",
       "revId": "d88fdcf1062d0fdb4a53345ab01c099bd03b2d58",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ffddd3d_6e41b6cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-05-31T19:10:40Z",
+      "side": 1,
+      "message": "Fixed the issue",
+      "parentUuid": "fff9c441_b08e6c57",
+      "revId": "d88fdcf1062d0fdb4a53345ab01c099bd03b2d58",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
