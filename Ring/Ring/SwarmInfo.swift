@@ -368,24 +368,22 @@ class SwarmInfo: SwarmInfoProtocol {
         let participantInfo = ParticipantInfo(jamiId: jamiId, role: role)
         let uri = JamiURI.init(schema: .ring, infoHash: jamiId)
         guard let uriString = uri.uriString else { return nil }
-        if self.contactsService.contact(withHash: jamiId) != nil {
-            // subscribe for profile updates for participant
-            self.profileService
-                .getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe { [weak participantInfo] profile in
-                    guard let participantInfo = participantInfo else { return }
-                    if let imageString = profile.photo, let image = imageString.createImage() {
-                        participantInfo.avatar.accept(image)
-                        participantInfo.hasProfileAvatar = true
-                    }
-                    if let profileName = profile.alias, !profileName.isEmpty {
-                        participantInfo.profileName.accept(profileName)
-                    }
-                } onError: { _ in
+        // subscribe for profile updates for participant
+        self.profileService
+            .getProfile(uri: uriString, createIfNotexists: false, accountId: accountId)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe { [weak participantInfo] profile in
+                guard let participantInfo = participantInfo else { return }
+                if let imageString = profile.photo, let image = imageString.createImage() {
+                    participantInfo.avatar.accept(image)
+                    participantInfo.hasProfileAvatar = true
                 }
-                .disposed(by: participantInfo.disposeBag)
-        }
+                if let profileName = profile.alias, !profileName.isEmpty {
+                    participantInfo.profileName.accept(profileName)
+                }
+            } onError: { _ in
+            }
+            .disposed(by: participantInfo.disposeBag)
         participantInfo.lookupName(nameService: self.nameService, accountId: self.accountId)
         return participantInfo
     }
