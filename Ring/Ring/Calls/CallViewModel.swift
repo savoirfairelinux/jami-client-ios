@@ -515,18 +515,7 @@ class CallViewModel: Stateable, ViewModel {
 // MARK: actions
 extension CallViewModel {
 
-    func cancelCall(stopProvider: Bool) {
-        guard let call = self.call else {
-            return
-        }
-        if stopProvider {
-            self.callsProvider.stopCall(callUUID: call.callUUID, participant: call.paricipantHash())
-            call.participantsCallId.forEach { (callId) in
-                if let participantCall = self.callService.call(callID: callId) {
-                    self.callsProvider.stopCall(callUUID: participantCall.callUUID, participant: participantCall.paricipantHash())
-                }
-            }
-        }
+    func cancelCall() {
         self.callService
             .hangUpCallOrConference(callId: rendererId)
             .subscribe()

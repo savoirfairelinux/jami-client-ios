@@ -241,13 +241,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.buttonsContainer.viewModel = self.viewModel.containerViewModel
         self.buttonsContainer.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.cancelCall(stopProvider: true)
+                self?.viewModel.cancelCall()
                 self?.removeFromScreen()
             })
             .disposed(by: self.disposeBag)
         self.buttonsContainer.stopButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.cancelCall(stopProvider: true)
+                self?.viewModel.cancelCall()
                 self?.removeFromScreen()
             })
             .disposed(by: self.disposeBag)
