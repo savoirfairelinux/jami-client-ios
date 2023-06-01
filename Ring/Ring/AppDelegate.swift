@@ -428,7 +428,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             // If the app is running in the background and there are no waiting calls, the extension should handle the notification.
-            if UIApplication.shared.applicationState == .background && !self.presentingCallScreen && !self.callsProvider.hasPendingTransactions() {
+            if UIApplication.shared.applicationState == .background && !self.presentingCallScreen && !self.callsProvider.hasActiveCalls() {
                 return
             }
             // emit signal that app is active for notification extension
@@ -586,7 +586,7 @@ extension AppDelegate {
          Othervise it was called from Contacts app.
          We need find contact and start a call
          */
-        if self.callsProvider.hasPendingTransactions() { return false }
+        if self.callsProvider.hasActiveCalls() { return false }
         guard let handle = userActivity.startCallHandle else {
             return false
         }
@@ -671,7 +671,10 @@ extension AppDelegate: PKPushRegistryDelegate {
         let peerId: String = payload.dictionaryPayload["peerId"] as? String ?? ""
         let hasVideo = payload.dictionaryPayload["hasVideo"] as? String ?? "true"
         let displayName = payload.dictionaryPayload["displayName"] as? String ?? ""
-        callsProvider.previewPendingCall(peerId: peerId, withVideo: hasVideo.boolValue, displayName: displayName) { _ in
+        callsProvider.previewPendingCall(peerId: peerId, withVideo: hasVideo.boolValue, displayName: displayName) { error in
+            if error != nil {
+                self.updateCallScreenState(presenting: false)
+            }
             completion()
         }
     }

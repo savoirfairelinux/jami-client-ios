@@ -150,7 +150,7 @@ class ConversationsManager {
      the notification extension should handle incoming notifications unless there is a pending call.
      */
     func updateBackgroundState() {
-        if self.callsProvider.hasPendingTransactions() { return }
+        if self.callsProvider.hasActiveCalls() { return }
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.updateCallScreenState(presenting: false)
         }

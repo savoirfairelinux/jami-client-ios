@@ -59,6 +59,7 @@ class CallsProviderService: NSObject {
 
     private let responseStream = PublishSubject<ServiceEvent>()
     var sharedResponseStream: Observable<ServiceEvent>
+    var jamiCallUUIDs = Set<UUID>()
 
     init(provider: CXProvider, controller: CXCallController) {
         self.sharedResponseStream = responseStream.share()
@@ -89,8 +90,16 @@ extension CallsProviderService {
         self.requestTransaction(transaction)
     }
 
-    func hasPendingTransactions() -> Bool {
-        return !self.callController.callObserver.calls.isEmpty
+    func hasActiveCalls() -> Bool {
+        let calls = self.callController.callObserver.calls
+        let jamiCalls = calls.filter { call in
+            !call.hasEnded && isJamiCall(call)
+        }
+        return !jamiCalls.isEmpty
+    }
+
+    func isJamiCall(_ call: CXCall) -> Bool {
+        return jamiCallUUIDs.contains(call.uuid)
     }
 
     func handleIncomingCall(account: AccountModel, call: CallModel) {
@@ -121,9 +130,9 @@ extension CallsProviderService {
         update.remoteHandle = CXHandle(type: handleType, value: handleInfo.handle)
         self.setUpCallUpdate(update: update, localizedCallerName: handleInfo.displayName, videoFlag: !call.isAudioOnly)
         self.provider.reportNewIncomingCall(with: call.callUUID,
-                                            update: update) { error in
+                                            update: update) { [weak self] error in
             if error == nil {
-                return
+                self?.jamiCallUUIDs.insert(call.callUUID)
             }
             completion?(error)
         }
@@ -155,9 +164,9 @@ extension CallsProviderService {
         let unhandeledCall = UnhandeledCall(peerId: peerId)
         unhandeledCalls.insert(unhandeledCall)
         self.provider.reportNewIncomingCall(with: unhandeledCall.uuid,
-                                            update: update) { error in
+                                            update: update) { [weak self] error in
             if error == nil {
-                return
+                self?.jamiCallUUIDs.insert(unhandeledCall.uuid)
             }
             completion?(error)
         }
@@ -287,6 +296,7 @@ extension CallsProviderService: CXProviderDelegate {
         defer {
             action.fulfill()
         }
+        jamiCallUUIDs.remove(action.callUUID)
         if let call = getUnhandeledCall(UUID: action.callUUID) {
             call.state = .declined
             return
@@ -301,6 +311,7 @@ extension CallsProviderService: CXProviderDelegate {
         defer {
             action.fulfill()
         }
+        self.jamiCallUUIDs.insert(action.callUUID)
         /*
          To display correct name in call history create an update and report
          it to the provider.
