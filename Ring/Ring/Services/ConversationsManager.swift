@@ -534,8 +534,11 @@ extension  ConversationsManager: MessagesAdapterDelegate {
     }
 
     func conversationReady(conversationId: String, accountId: String) {
-        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+            self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
+        }
     }
     func conversationLoaded(conversationId: String, accountId: String, messages: [[String: String]]) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
