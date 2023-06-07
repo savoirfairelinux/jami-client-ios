@@ -20,12 +20,15 @@
 
 import RxSwift
 import SwiftyBeaver
+import RxCocoa
 
 class ContactPickerViewModel: ViewModel {
     private let log = SwiftyBeaver.self
 
     private var contactsOnly: Bool { self.currentCallId.isEmpty }
     var contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?
+    var conversationSelectedCB: ((_ conversaionIds: [String]) -> Void)?
+    let injectionBag: InjectionBag
 
     var currentCallId = ""
     lazy var conferensableItems: Observable<[ContactPickerSection]> = {
@@ -87,10 +90,51 @@ class ContactPickerViewModel: ViewModel {
             })
     }()
 
+    var conversationViewModels = [ConversationViewModel]()
+    lazy var conversations: Observable<[ConversationSection]> = { [weak self] in
+        guard let self = self else { return Observable.empty() }
+        return self.conversationsService
+            .conversations
+            .share()
+            .startWith(self.conversationsService.conversations.value)
+            .map({ (conversations) in
+                if conversations.isEmpty {
+                    self.conversationViewModels = [ConversationViewModel]()
+                }
+                return conversations
+                    .compactMap({ conversationModel in
+                        var conversationViewModel: ConversationViewModel?
+                        if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
+                            return conversationViewModel.conversation.value == conversationModel
+                        }).first {
+                            conversationViewModel = foundConversationViewModel
+                            conversationViewModel?.conversation.accept(conversationModel)
+                            //                        } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
+                            //                            conversationViewModel = contactFound
+                            //                            conversationViewModel?.conversation = BehaviorRelay(value: conversationModel)
+                            //                            conversationViewModel?.conversationCreated.accept(true)
+                            //                            self.conversationViewModels.append(contactFound)
+                        } else {
+                            conversationViewModel = ConversationViewModel(with: self.injectionBag)
+                            conversationViewModel?.conversation = BehaviorRelay<ConversationModel>(value: conversationModel)
+                            if let conversation = conversationViewModel {
+                                self.conversationViewModels
+                                    .append(conversation)
+                            }
+                        }
+                        return conversationViewModel
+                    })
+            })
+            .map({ conversationsViewModels in
+                return [ConversationSection(header: "", items: conversationsViewModels)]
+            })
+    }()
+
     let search = PublishSubject<String>()
     private let disposeBag = DisposeBag()
 
     private let contactsService: ContactsService
+    private let conversationsService: ConversationsService
     private let callService: CallsService
     private let profileService: ProfilesService
     private let accountService: AccountsService
@@ -106,12 +150,21 @@ class ContactPickerViewModel: ViewModel {
         self.presenceService = injectionBag.presenceService
         self.videoService = injectionBag.videoService
         self.nameService = injectionBag.nameService
+        self.conversationsService = injectionBag.conversationsService
+        self.injectionBag = injectionBag
     }
 
     func contactSelected(contacts: [ConferencableItem]) {
         if contacts.isEmpty { return }
         if contactSelectedCB != nil {
             contactSelectedCB!(contacts)
+        }
+    }
+
+    func conversationSelected(conversaionIds: [String]) {
+        if conversaionIds.isEmpty { return }
+        if conversationSelectedCB != nil {
+            conversationSelectedCB!(conversaionIds)
         }
     }
 }
