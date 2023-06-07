@@ -34,8 +34,13 @@ enum ConversationState: State {
     case showGeneralSettings
     case recordFile(conversation: ConversationModel, audioOnly: Bool)
     case navigateToCall(call: CallModel)
+<<<<<<< HEAD
     case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void))
     case openConversationFromCall(conversation: ConversationModel)
+=======
+    case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem] ) -> Void)?, conversationSelectedCB: ((_ conversaionIds: [String]) -> Void)?)
+    case fromCallToConversation(conversation: ConversationViewModel)
+>>>>>>> 9834231d (fix forward text message issues)
     case needAccountMigration(accountId: String)
     case accountModeChanged
     case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate)
@@ -48,6 +53,7 @@ enum ConversationState: State {
                                     parentView: UIViewController,
                                     invitationHandeledCB: ((_ conversationId: String) -> Void))
     case replaceCurrentWithConversationFor(participantUri: String)
+    case replaceCurrentWithConversationWith(conversation: ConversationModel)
     case showAccountSettings
     case accountRemoved
     case needToOnboard

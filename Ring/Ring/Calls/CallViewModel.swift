@@ -353,7 +353,7 @@ extension CallViewModel {
             } else {
                 self.callService.joinConference(confID: contact.conferenceID, callID: self.conferenceId)
             }
-        }))
+        }, conversationSelectedCB: nil))
     }
 
     func showConversations() {
