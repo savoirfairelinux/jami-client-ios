@@ -20,12 +20,15 @@
 
 import RxSwift
 import SwiftyBeaver
+import RxCocoa
 
 class ContactPickerViewModel: ViewModel {
     private let log = SwiftyBeaver.self
 
     private var contactsOnly: Bool { self.currentCallId.isEmpty }
     var contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?
+    var conversationSelectedCB: ((_ conversaionIds: [String]) -> Void)?
+    let injectionBag: InjectionBag
 
     var currentCallId = ""
     lazy var conferensableItems: Observable<[ContactPickerSection]> = {
@@ -87,10 +90,29 @@ class ContactPickerViewModel: ViewModel {
             })
     }()
 
+    var conversationViewModels = [ConversationViewModel]()
+    lazy var conversations: Observable<[ConversationSection]> = { [weak self] in
+        guard let self = self else { return Observable.empty() }
+        var conversationViewModels = self.conversationsService
+            .conversations
+            .value
+            .compactMap({ conversationModel in
+                let conversationViewModel = ConversationViewModel(with: self.injectionBag)
+                conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversationModel)
+                self.conversationViewModels.append(conversationViewModel)
+                return conversationViewModel
+            })
+        if conversationViewModels.isEmpty {
+            self.conversationViewModels = [ConversationViewModel]()
+        }
+        return Observable.just([ConversationSection(header: "", items: conversationViewModels)])
+    }()
+
     let search = PublishSubject<String>()
     private let disposeBag = DisposeBag()
 
     private let contactsService: ContactsService
+    private let conversationsService: ConversationsService
     private let callService: CallsService
     private let profileService: ProfilesService
     private let accountService: AccountsService
@@ -106,12 +128,21 @@ class ContactPickerViewModel: ViewModel {
         self.presenceService = injectionBag.presenceService
         self.videoService = injectionBag.videoService
         self.nameService = injectionBag.nameService
+        self.conversationsService = injectionBag.conversationsService
+        self.injectionBag = injectionBag
     }
 
     func contactSelected(contacts: [ConferencableItem]) {
         if contacts.isEmpty { return }
         if contactSelectedCB != nil {
             contactSelectedCB!(contacts)
+        }
+    }
+
+    func conversationSelected(conversaionIds: [String]) {
+        if conversaionIds.isEmpty { return }
+        if conversationSelectedCB != nil {
+            conversationSelectedCB!(conversaionIds)
         }
     }
 }
