@@ -863,7 +863,11 @@ class ConversationViewController: UIViewController,
 
     func presentContactPicker(contactPickerVC: ContactPickerViewController) {
         self.addChild(contactPickerVC)
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        var statusBarHeight: CGFloat = 0
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let statusBarManager = windowScene.statusBarManager {
+            statusBarHeight = statusBarManager.statusBarFrame.height
+        }
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
@@ -872,16 +876,12 @@ class ConversationViewController: UIViewController,
         contactPickerVC.view.frame = initialFrame
         self.view.addSubview(contactPickerVC.view)
         contactPickerVC.didMove(toParent: self)
-        UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            guard let self = self else { return }
+        UIView.animate(withDuration: 0.2, animations: { [weak self, weak contactPickerVC] in
+            guard let self = self, let contactPickerVC = contactPickerVC else { return }
             contactPickerVC.view.frame = newFrame
             self.inputAccessoryView.isHidden = true
         }, completion: {  _ in
         })
-    }
-
-    func contactPickerDismissed() {
-        self.inputAccessoryView.isHidden = false
     }
 }
 
@@ -936,6 +936,19 @@ extension ConversationViewController {
         @unknown default: break
         }
         return false
+    }
+}
+
+extension ConversationViewController: ContactPickerViewControllerDelegate {
+    func contactPickerDismissed() {
+        self.inputAccessoryView.isHidden = false
+        self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
+                           displayName: self.viewModel.displayName.value,
+                           username: self.viewModel.userName.value)
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
     }
 }
 // swiftlint:enable type_body_length

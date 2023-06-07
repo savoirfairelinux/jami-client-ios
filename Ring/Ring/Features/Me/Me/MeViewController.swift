@@ -86,6 +86,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.configureNavigationBar()
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
     }
 
     func setupTableView() {
