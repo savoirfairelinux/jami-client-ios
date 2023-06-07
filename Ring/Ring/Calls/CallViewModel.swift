@@ -570,7 +570,7 @@ extension CallViewModel {
             } else {
                 self.callService.joinConference(confID: contact.conferenceID, callID: self.rendererId)
             }
-        }))
+        }, conversationSelectedCB: nil))
     }
 
     func showConversations() {
