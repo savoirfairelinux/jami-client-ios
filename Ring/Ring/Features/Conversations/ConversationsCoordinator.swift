@@ -74,10 +74,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.showGeneralSettings()
                 case .navigateToCall(let call):
                     self.navigateToCall(call: call)
-                case .showContactPicker(let callID, let callBack):
-                    self.showContactPicker(callId: callID, contactSelectedCB: callBack)
-                case .replaceCurrentWithConversationFor(let participantUri):
-                    self.replaceCurrentWithConversationFor(participantUri: participantUri)
+                case .showContactPicker(let callID, let contactCallBack, let conversationCallBack):
+                    self.showContactPicker(callId: callID, contactSelectedCB: contactCallBack, conversationSelectedCB: conversationCallBack)
                 case .showAccountSettings:
                     self.showAccountSettings()
                 case .accountRemoved:
@@ -251,11 +249,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         }
     }
 
-    func showContactPicker(callId: String, contactSelectedCB: @escaping ((_ contact: [ConferencableItem]) -> Void)) {
+    func showContactPicker(callId: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)? = nil, conversationSelectedCB: ((_ conversationIds: [String]) -> Void)? = nil) {
         let contactPickerViewController = ContactPickerViewController.instantiate(with: self.injectionBag)
         contactPickerViewController.type = callId.isEmpty ? .forConversation : .forCall
         contactPickerViewController.viewModel.currentCallId = callId
         contactPickerViewController.viewModel.contactSelectedCB = contactSelectedCB
+        contactPickerViewController.viewModel.conversationSelectedCB = conversationSelectedCB
         if let controller = self.navigationViewController.visibleViewController as? ContactPickerDelegate {
             controller.presentContactPicker(contactPickerVC: contactPickerViewController)
         }
@@ -273,12 +272,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                 self?.removeChildCoordinator(childCoordinator: generalSettingsCoordinator)
             })
             .disposed(by: self.disposeBag)
-    }
-
-    func replaceCurrentWithConversationFor(participantUri: String) {
-        guard let model = getConversationViewModelForParticipant(jamiId: participantUri) else { return }
-        self.popToSmartList()
-        self.showConversation(withConversationViewModel: model)
     }
 
     func popToSmartList() {

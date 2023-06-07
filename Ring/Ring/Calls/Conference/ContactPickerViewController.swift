@@ -30,6 +30,10 @@ enum ContactPickerType {
     case forCall
 }
 
+protocol ContactPickerViewControllerDelegate: AnyObject {
+    func contactPickerDismissed()
+}
+
 class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelBased, UITableViewDelegate, UIGestureRecognizerDelegate {
 
     private let log = SwiftyBeaver.self
@@ -98,65 +102,55 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.view.layoutIfNeeded()
         }, completion: { [weak self] _ in
-            self?.didMove(toParent: nil)
-            self?.view.removeFromSuperview()
-            self?.removeFromParent()
+            guard let self = self else { return }
+            self.didMove(toParent: nil)
+            self.view.removeFromSuperview()
+            if let parent = self.parent as? ContactPickerViewControllerDelegate {
+                parent.contactPickerDismissed()
+            }
+            self.removeFromParent()
         })
     }
 
     private func setupDataSources() {
-        let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ContactPickerSection.Item)
-            -> UITableViewCell = { [weak self]
-                (   _: TableViewSectionedDataSource<ContactPickerSection>,
-                    tableView: UITableView,
-                    indexPath: IndexPath,
-                    contactItem: ContactPickerSection.Item) in
-                guard let self = self else { return UITableViewCell() }
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
-                cell.selectionContainer?.isHidden = self.type == .forCall
-                cell.selectionIndicator?.backgroundColor = UIColor.clear
-                cell.selectionIndicator?.borderColor = UIColor.jamiTextBlue
-                if contactItem.contacts.count < 1 {
+        switch self.type {
+        case .forCall:
+            let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ContactPickerSection.Item)
+                -> UITableViewCell = { [weak self]
+                    (   _: TableViewSectionedDataSource<ContactPickerSection>,
+                        tableView: UITableView,
+                        indexPath: IndexPath,
+                        item: ContactPickerSection.Item) in
+
+                    let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
+                    guard let self = self else { return cell }
+                    self.configureContactCell(cell: cell, contactItem: item)
                     return cell
                 }
-                cell.newMessagesIndicator?.isHidden = true
-                cell.newMessagesLabel?.isHidden = true
-                cell.lastMessageDateLabel?.isHidden = true
-                cell.presenceIndicator?.isHidden = true
-                cell.avatarView.isHidden = contactItem.contacts.count > 1
-                let contacts = contactItem.contacts
-                contacts.forEach { contact in
-                    contact.firstLine.asObservable()
-                        .startWith(contact.firstLine.value)
-                        .observe(on: MainScheduler.instance)
-                        .subscribe(onNext: { [weak self, weak cell] _ in
-                            self?.updateCell(cell: cell, contacts: contacts)
-                        }, onError: { (_) in
-                        })
-                        .disposed(by: cell.disposeBag)
-                }
-                if contacts.count == 1, let contact = contacts.first {
-                    guard let status = contact.presenceStatus else {
-                        return cell
-                    }
-                    status
-                        .asObservable()
-                        .observe(on: MainScheduler.instance)
-                        .startWith(status.value)
-                        .subscribe(onNext: { precence in
-                            cell.presenceIndicator?.isHidden = !precence
-                        })
-                        .disposed(by: cell.disposeBag)
-                }
-                return cell
+            let contactDataSource = RxTableViewSectionedReloadDataSource<ContactPickerSection>(configureCell: configureCell)
+            self.viewModel.searchResultItems
+                .bind(to: self.tableView.rx.items(dataSource: contactDataSource))
+                .disposed(by: disposeBag)
+            contactDataSource.titleForHeaderInSection = { dataSource, index in
+                return dataSource.sectionModels[index].header
             }
-        let contactDataSource = RxTableViewSectionedReloadDataSource<ContactPickerSection>(configureCell: configureCell)
-        self.viewModel.searchResultItems
-            .bind(to: self.tableView.rx.items(dataSource: contactDataSource))
-            .disposed(by: disposeBag)
-        if self.type == .forConversation { return }
-        contactDataSource.titleForHeaderInSection = { dataSource, index in
-            return dataSource.sectionModels[index].header
+        case .forConversation:
+            let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationPickerSection.Item)
+                -> UITableViewCell = { [weak self]
+                    (   _: TableViewSectionedDataSource<ConversationPickerSection>,
+                        tableView: UITableView,
+                        indexPath: IndexPath,
+                        conversationItem: ConversationPickerSection.Item) in
+
+                    let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
+                    guard let self = self else { return cell }
+                    self.configureConversationCell(cell: cell, info: conversationItem)
+                    return cell
+                }
+            let conversationsDataSource = RxTableViewSectionedReloadDataSource<ConversationPickerSection>(configureCell: configureCell)
+            self.viewModel.conversationsSearchResultItems
+                .bind(to: self.tableView.rx.items(dataSource: conversationsDataSource))
+                .disposed(by: disposeBag)
         }
     }
 
@@ -227,14 +221,14 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             self.doneButton.rx.tap
                 .subscribe(onNext: { [weak self] in
                     let paths = self?.tableView.indexPathsForSelectedRows
-                    var contacts = [ConferencableItem]()
+                    var conversationIds = [String]()
                     paths?.forEach({ (path) in
                         guard let self = self else { return }
-                        if let contactToAdd: ConferencableItem = try? self.tableView.rx.model(at: path) {
-                            contacts.append(contactToAdd)
+                        if let conversationToAdd: SwarmInfo = try? self.tableView.rx.model(at: path) {
+                            conversationIds.append(conversationToAdd.id)
                         }
                     })
-                    self?.viewModel.contactSelected(contacts: contacts)
+                    self?.viewModel.conversationSelected(conversaionIds: conversationIds)
                     self?.removeView()
                 })
                 .disposed(by: self.disposeBag)
@@ -243,6 +237,75 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 self?.updateButtonsOnSelectionChange(cell: cell, indexPath: row)
             }
         }
+    }
+
+    func configureContactCell(cell: SmartListCell, contactItem:
+                                ConferencableItem) {
+        cell.selectionContainer?.isHidden = self.type == .forCall
+        cell.selectionIndicator?.backgroundColor = UIColor.clear
+        cell.selectionIndicator?.borderColor = UIColor.jamiTextBlue
+        if contactItem.contacts.count < 1 {
+            return
+        }
+        cell.newMessagesIndicator?.isHidden = true
+        cell.newMessagesLabel?.isHidden = true
+        cell.lastMessageDateLabel?.isHidden = true
+        cell.presenceIndicator?.isHidden = true
+        cell.avatarView.isHidden = contactItem.contacts.count > 1
+        let contacts = contactItem.contacts
+        contacts.forEach { contact in
+            contact.firstLine.asObservable()
+                .startWith(contact.firstLine.value)
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: { [weak self, weak cell] _ in
+                    self?.updateCell(cell: cell, contacts: contacts)
+                }, onError: { (_) in
+                })
+                .disposed(by: cell.disposeBag)
+        }
+        if contacts.count == 1, let contact = contacts.first {
+            guard let status = contact.presenceStatus else {
+                return
+            }
+            status
+                .asObservable()
+                .observe(on: MainScheduler.instance)
+                .startWith(status.value)
+                .subscribe(onNext: { precence in
+                    cell.presenceIndicator?.isHidden = !precence
+                })
+                .disposed(by: cell.disposeBag)
+        }
+    }
+
+    func configureConversationCell(cell: SmartListCell, info:
+                                    SwarmInfo) {
+        cell.selectionContainer?.isHidden = false
+        cell.selectionIndicator?.backgroundColor = UIColor.clear
+        cell.selectionIndicator?.borderColor = UIColor.jamiTextBlue
+        cell.newMessagesIndicator?.isHidden = true
+        cell.newMessagesLabel?.isHidden = true
+        cell.lastMessageDateLabel?.isHidden = true
+        cell.presenceIndicator?.isHidden = true
+        info.finalAvatar
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak cell]  avatar in
+                guard let cell = cell else { return }
+                cell.avatarView
+                    .addSubview(
+                        AvatarView(image: avatar, size: 40))
+            })
+            .disposed(by: self.disposeBag)
+        info.finalTitle
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak cell]  title in
+                guard let cell = cell else { return }
+                cell.nameLabel.text = title
+            })
+            .disposed(by: self.disposeBag)
+        cell.lastMessagePreviewLabel?.isHidden = true
     }
 
     func updateCell(cell: SmartListCell?, contacts: [Contact]) {

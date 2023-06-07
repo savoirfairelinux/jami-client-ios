@@ -48,7 +48,7 @@ class EditProfileViewModel {
                 if let photo = profile.photo,
                    let data = NSData(base64Encoded: photo,
                                      options: NSData.Base64DecodingOptions
-                    .ignoreUnknownCharacters) as Data?,
+                                        .ignoreUnknownCharacters) as Data?,
                    let image = UIImage(data: data) {
                     return image
                 }

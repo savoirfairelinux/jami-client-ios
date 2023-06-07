@@ -46,8 +46,11 @@ class ContactViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?
-            .navigationBar.layer.shadowColor = UIColor.clear.cgColor
+        navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
     }
 
     private func addHeaderView() {

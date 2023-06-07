@@ -48,6 +48,11 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                                     NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor]
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+    }
+
     func setUpTable() {
         self.settingsTable.estimatedRowHeight = 50
         self.settingsTable.rowHeight = UITableView.automaticDimension

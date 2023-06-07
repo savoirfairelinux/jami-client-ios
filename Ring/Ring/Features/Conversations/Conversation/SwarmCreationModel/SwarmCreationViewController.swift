@@ -64,6 +64,12 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
                                     NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor]
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         // Waiting for screen size change
         DispatchQueue.global(qos: .background).async {

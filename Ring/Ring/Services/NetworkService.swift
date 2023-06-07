@@ -54,14 +54,14 @@ class NetworkService {
             self.lastStatus = path.status
 
             switch path.status {
-                case .satisfied:
-                    print("Connected to a network")
-                    self.connectionState.accept(.connected)
-                case .unsatisfied, .requiresConnection:
-                    print("Disconnected from a network")
-                    self.connectionState.accept(.none)
-                default:
-                    break
+            case .satisfied:
+                print("Connected to a network")
+                self.connectionState.accept(.connected)
+            case .unsatisfied, .requiresConnection:
+                print("Disconnected from a network")
+                self.connectionState.accept(.none)
+            default:
+                break
             }
         }
         let queue = DispatchQueue(label: "NetworkMonitor")
