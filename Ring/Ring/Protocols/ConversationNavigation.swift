@@ -34,7 +34,7 @@ enum ConversationState: State {
     case showGeneralSettings
     case recordFile(conversation: ConversationModel, audioOnly: Bool)
     case navigateToCall(call: CallModel)
-    case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void))
+    case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem] ) -> Void)?, conversationSelectedCB: ((_ conversaionIds: [String]) -> Void)?)
     case fromCallToConversation(conversation: ConversationViewModel)
     case needAccountMigration(accountId: String)
     case accountModeChanged
@@ -48,6 +48,7 @@ enum ConversationState: State {
                                     parentView: UIViewController,
                                     invitationHandeledCB: ((_ conversationId: String) -> Void))
     case replaceCurrentWithConversationFor(participantUri: String)
+    case replaceCurrentWithConversationWith(conversation: ConversationModel)
     case showAccountSettings
     case accountRemoved
     case needToOnboard
