@@ -28,6 +28,7 @@ import RxCocoa
 import SwiftyBeaver
 
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 class ConversationViewModel: Stateable, ViewModel {
 
     /// Logger
@@ -297,8 +298,8 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var hideDate: Bool { self.conversation.value.messages.isEmpty }
 
-    func sendMessage(withContent content: String, contactURI: String? = nil, parentId: String = "") {
-        let conversation = self.conversation.value
+    func sendMessage(withContent content: String, contactURI: String? = nil, parentId: String = "", conversationModel: ConversationModel? = nil) {
+        let conversation = conversationModel ?? self.conversation.value
         if !conversation.isSwarm() {
             /// send not swarm message
             guard let participantJamiId = conversation.getParticipants().first?.jamiId,
@@ -675,35 +676,31 @@ extension ConversationViewModel {
 // MARK: share message
 extension ConversationViewModel {
 
-    private func changeConversationIfNeeded(items: [ConferencableItem]) {
-        let contactsURIs = items.map { item -> String? in
-            item.contacts.first?.hash
-        }
-        .compactMap { $0 }
-        guard let participant = self.conversation.value.getParticipants().first?.jamiId else { return }
-        if contactsURIs.contains(participant) { return }
-        guard let selectedItemURI = contactsURIs.first else { return }
-        self.stateSubject.onNext(ConversationState.replaceCurrentWithConversationFor(participantUri: selectedItemURI))
+    private func changeConversationIfNeeded(items: [String]) {
+        guard let accountId = self.accountService.currentAccount?.id else { return }
+        if items.contains(where: { $0 == self.conversation.value.id }) { return } // if items contains the current conversation, we do not need to change it
+        guard let selectedConversationId = items.first else { return }
+        self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: selectedConversationId, accountId: accountId, shouldOpenSmarList: false))
     }
 
-    private func shareMessage(message: MessageContentVM, with contact: Contact, fileURL: URL?, fileName: String) {
+    private func shareMessage(message: MessageContentVM, with conversationId: String, fileURL: URL?, fileName: String) {
+        guard let accountId = self.accountService.currentAccount?.id else { return }
+        let conversationModel = self.conversationsService.getConversationForId(conversationId: conversationId, accountId: accountId) ?? self.conversation.value
         if message.type != .fileTransfer {
-            self.sendMessage(withContent: message.content, contactURI: contact.uri)
+            self.sendMessage(withContent: message.content, conversationModel: conversationModel)
             return
         }
         if let url = fileURL {
-            if let jamiId = self.conversation.value.getParticipants().first?.jamiId, contact.hash == jamiId {
-                // if contact.hash == self.conversation.value.getParticipants().first!.jamiId {
-                self.sendFile(filePath: url.path, displayName: fileName, contactHash: contact.hash)
-            } else if let data = FileManager.default.contents(atPath: url.path),
-                      let convId = self.conversationsService.getConversationForParticipant(jamiId: contact.hash, accontId: contact.accountID)?.id {
-                self.sendAndSaveFile(displayName: fileName, imageData: data, conversationId: convId, accountId: contact.accountID)
+            if conversationModel.messages.contains(where: { $0.content == message.content }) {
+                self.sendFile(filePath: url.path, displayName: fileName, conversationModel: conversationModel)
+            } else if let data = FileManager.default.contents(atPath: url.path) {
+                self.sendAndSaveFile(displayName: fileName, imageData: data, conversationModel: conversationModel)
             }
             return
         }
     }
 
-    private func shareMessage(message: MessageContentVM, with selectedContacts: [ConferencableItem]) {
+    private func shareMessage(message: MessageContentVM, with selectedConversations: [String]) {
         // to send file we need to have file url or image
         let url = message.url
         var fileName = message.content
@@ -711,17 +708,17 @@ extension ConversationViewModel {
             guard let substring = message.content.split(separator: "\n").first else { return }
             fileName = String(substring)
         }
-        selectedContacts.forEach { (item) in
-            guard let contact = item.contacts.first else { return }
-            self.shareMessage(message: message, with: contact, fileURL: url, fileName: fileName)
+        selectedConversations.forEach { item in
+            self.shareMessage(message: message, with: item, fileURL: url, fileName: fileName)
         }
-        self.changeConversationIfNeeded(items: selectedContacts)
+        self.changeConversationIfNeeded(items: selectedConversations)
     }
 
     func slectContactsToShareMessage(message: MessageContentVM) {
         guard message.message.type == .text || message.message.type == .fileTransfer else { return }
-        self.stateSubject.onNext(ConversationState.showContactPicker(callID: "", contactSelectedCB: {[weak self] (selectedItems) in
-            self?.shareMessage(message: message, with: selectedItems)
+        self.stateSubject.onNext(ConversationState.showContactPicker(callID: "", contactSelectedCB: nil, conversationSelectedCB: { [weak self] selectedItems in
+            guard let self = self, let selectedItems = selectedItems else { return }
+            self.shareMessage(message: message, with: selectedItems)
         }))
     }
 }
@@ -729,18 +726,14 @@ extension ConversationViewModel {
 // MARK: file transfer
 extension ConversationViewModel {
 
-    func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil, contactHash: String? = nil) {
-        self.dataTransferService.sendFile(conversation: self.conversation.value, filePath: filePath, displayName: displayName, localIdentifier: localIdentifier)
+    func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil, conversationModel: ConversationModel? = nil) {
+        let conversation = conversationModel ?? self.conversation.value
+        self.dataTransferService.sendFile(conversation: conversation, filePath: filePath, displayName: displayName, localIdentifier: localIdentifier)
     }
 
-    func sendAndSaveFile(displayName: String, imageData: Data, conversationId: String? = nil, accountId: String? = nil) {
-        if let conversationId = conversationId,
-           let accountId = accountId,
-           let conversation = self.conversationsService.getConversationForId(conversationId: conversationId, accountId: accountId) {
-            self.dataTransferService.sendAndSaveFile(displayName: displayName, conversation: conversation, imageData: imageData)
-        } else {
-            self.dataTransferService.sendAndSaveFile(displayName: displayName, conversation: self.conversation.value, imageData: imageData)
-        }
+    func sendAndSaveFile(displayName: String, imageData: Data, conversationModel: ConversationModel? = nil) {
+        let conversation = conversationModel ?? self.conversation.value
+        self.dataTransferService.sendAndSaveFile(displayName: displayName, conversation: conversation, imageData: imageData)
     }
 }
 
