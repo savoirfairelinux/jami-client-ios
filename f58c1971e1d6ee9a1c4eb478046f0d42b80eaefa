@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e8a3f55_073ed74f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-06-12T14:53:43Z",
+      "side": 1,
+      "message": "ideally it should looks like we just presenting a conversation view controller rather than go back to smart list and than open a conversation view controller.",
+      "revId": "f58c1971e1d6ee9a1c4eb478046f0d42b80eaefa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9366aeca_0d6142d5",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/SwarmCreationModel/SwarmCreationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-06-12T14:53:43Z",
+      "side": 1,
+      "message": "we should not create another ConversationViewModel for the same conversation. There is a method openConversation(conversationId: String, accountId: String) in ConversationsCoordinator that could be used to access existing ConversationViewModel.",
+      "revId": "f58c1971e1d6ee9a1c4eb478046f0d42b80eaefa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
