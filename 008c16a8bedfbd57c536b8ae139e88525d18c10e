@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb02a5bb_50368dd5",
+        "filename": "Ring/Ring/Calls/Conference/ContactPickerViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-06-12T15:46:42Z",
+      "side": 1,
+      "message": "Conversations could be simplified. Conversations would not change while the contact picker is present because it requires user input. Therefore, we could directly use self.conversationsService.conversations.value without observing changes. In this case, there would be no need to use foundConversationViewModel to check if a conversation has already been added. However, it is important to consider the search bar entry, as conversations may need to be filtered(see searchResultItems)",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f1505c_001e2ccb",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-06-12T15:46:42Z",
+      "side": 1,
+      "message": "conversationIds for variable name?",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5415733_732799d7",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-06-12T15:46:42Z",
+      "side": 1,
+      "message": "if items contains the current conversation, we do not need to change it",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ed32bc5_2dc07097",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-06-12T15:46:42Z",
+      "side": 1,
+      "message": "what do we check with this condition? We should check if we already send the selected file in the selected conversation. In this case we do not need to save a file again, only send. Otherwise file need to be saved and send.",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "979d2e01_24dcaa27",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-06-12T15:46:42Z",
+      "side": 1,
+      "message": "contactHash not used anymore, could be removed",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20145d0b_64e72499",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-06-12T15:46:42Z",
+      "side": 1,
+      "message": "we could use func openConversation(conversationId: String, accountId: String)",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
