@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0be5ca8_5edcf412",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-06-14T18:52:13Z",
+      "side": 1,
+      "message": "we need self.popToSmartList() when open conversation from notification",
+      "revId": "2687218dc0e9f8f8e5af741d5a63d88598f31182",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
