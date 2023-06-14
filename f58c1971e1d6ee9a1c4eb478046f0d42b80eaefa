@@ -33,6 +33,24 @@
       "message": "we should not create another ConversationViewModel for the same conversation. There is a method openConversation(conversationId: String, accountId: String) in ConversationsCoordinator that could be used to access existing ConversationViewModel.",
       "revId": "f58c1971e1d6ee9a1c4eb478046f0d42b80eaefa",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3759fb23_198bc278",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/SwarmCreationModel/SwarmCreationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-06-14T18:04:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9366aeca_0d6142d5",
+      "revId": "f58c1971e1d6ee9a1c4eb478046f0d42b80eaefa",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
