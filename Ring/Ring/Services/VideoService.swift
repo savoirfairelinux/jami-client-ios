@@ -24,7 +24,6 @@ import SwiftyBeaver
 import RxSwift
 import RxRelay
 import UIKit
-import AVFoundation
 
 // swiftlint:disable identifier_name
 
@@ -263,13 +262,15 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         guard let uiImage = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
+
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.captured(imageBuffer: imageBuffer, image: uiImage)
         }
     }
 }
 
-typealias RendererTuple = (rendererId: String, data: UIImage?, running: Bool)
+// typealias RendererTuple = (rendererId: String, data: UIImage?, running: Bool)
+typealias RendererTuple = (rendererId: String, buffer: CMSampleBuffer?, running: Bool)
 
 class VideoService: FrameExtractorDelegate {
 
@@ -277,8 +278,10 @@ class VideoService: FrameExtractorDelegate {
     private let camera = FrameExtractor()
 
     var cameraPosition = AVCaptureDevice.Position.front
+    //  let incomingVideoFrame = PublishSubject<RendererTuple?>()
     let incomingVideoFrame = PublishSubject<RendererTuple?>()
     let capturedVideoFrame = PublishSubject<UIImage?>()
+    // let deviceVideoFrame = PublishSubject<CMSampleBuffer?>()
     let playerInfo = PublishSubject<Player>()
     var currentOrientation: AVCaptureVideoOrientation
 
@@ -495,8 +498,42 @@ extension VideoService: VideoAdapterDelegate {
         self.camera.stopCapturing()
     }
 
-    func writeFrame(withImage image: UIImage?, forCallId: String) {
-        self.incomingVideoFrame.onNext(RendererTuple(forCallId, image, true))
+    func writeFrame(withBuffer buffer: CVPixelBuffer?, forCallId: String) {
+        guard let sampleBuffer = self.createSampleBufferFrom(pixelBuffer: buffer) else {
+            return }
+        self.setSampleBufferAttachments(sampleBuffer)
+        self.incomingVideoFrame.onNext(RendererTuple(forCallId, sampleBuffer, true))
+    }
+    func createSampleBufferFrom(pixelBuffer: CVPixelBuffer?) -> CMSampleBuffer? {
+        var sampleBuffer: CMSampleBuffer?
+
+        var timimgInfo = CMSampleTimingInfo()
+        var formatDescription: CMFormatDescription?
+        guard let pixelBuffer = pixelBuffer else { return nil }
+        CMVideoFormatDescriptionCreateForImageBuffer(allocator: kCFAllocatorDefault, imageBuffer: pixelBuffer, formatDescriptionOut: &formatDescription)
+
+        CMSampleBufferCreateReadyWithImageBuffer(
+            allocator: kCFAllocatorDefault,
+            imageBuffer: pixelBuffer,
+            formatDescription: formatDescription!,
+            sampleTiming: &timimgInfo,
+            sampleBufferOut: &sampleBuffer
+        )
+        guard let buffer = sampleBuffer else {
+            print("Cannot create sample buffer")
+            return nil
+        }
+
+        return buffer
+    }
+
+    func setSampleBufferAttachments(_ sampleBuffer: CMSampleBuffer) {
+        let attachments: CFArray! = CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, createIfNecessary: true)
+        let dictionary = unsafeBitCast(CFArrayGetValueAtIndex(attachments, 0),
+                                       to: CFMutableDictionary.self)
+        let key = Unmanaged.passUnretained(kCMSampleAttachmentKey_DisplayImmediately).toOpaque()
+        let value = Unmanaged.passUnretained(kCFBooleanTrue).toOpaque()
+        CFDictionarySetValue(dictionary, key, value)
     }
 
     func getImageOrienation() -> UIImage.Orientation {
@@ -526,8 +563,7 @@ extension VideoService: VideoAdapterDelegate {
                                 scale: 1.0,
                                 orientation: self.getImageOrienation()))
         }
-        videoAdapter.writeOutgoingFrame(with: imageBuffer,
-                                        angle: Int32(self.angle), videoInputId: self.getVideoSource())
+        videoAdapter.writeOutgoingFrame(with: imageBuffer, angle: Int32(self.angle), videoInputId: self.getVideoSource())
     }
 
     func updateDevicePosition(position: AVCaptureDevice.Position) {

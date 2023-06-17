@@ -48,10 +48,10 @@ struct Renderer
                 return;
             }
             @autoreleasepool {
-                UIImage *image = [Utils
-                                  convertHardwareDecodedFrameToImage: std::move(frame.get())];
+                CVPixelBufferRef buffer = [Utils getCVPixelBufferFromAVFrame:std::move(frame.get())];
                 isRendering = true;
-                [VideoAdapter.videoDelegate writeFrameWithImage: image forCallId: rendererId];
+                [VideoAdapter.videoDelegate writeFrameWithBuffer: buffer forCallId: rendererId];
+                CFRelease(buffer);
                 isRendering = false;
             }
         };

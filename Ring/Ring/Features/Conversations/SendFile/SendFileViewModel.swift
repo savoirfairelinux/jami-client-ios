@@ -308,8 +308,12 @@ extension SendFileViewModel {
             .disposed(by: playBackDisposeBag)
 
         player?.playBackFrame.asObservable()
-            .subscribe(onNext: { [weak self] image in
-                self?.playBackFrame.onNext(image)
+            .subscribe(onNext: { [weak self] buffer in
+                guard let self = self else { return }
+                if let buffer = buffer,
+                   let image = UIImage.createFrom(sampleBuffer: buffer) {
+                    self.playBackFrame.onNext(image)
+                }
             })
             .disposed(by: playBackDisposeBag)
 
