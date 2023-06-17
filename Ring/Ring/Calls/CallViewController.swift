@@ -41,15 +41,15 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet private weak var callPulse: UIView!
 
     @IBOutlet private weak var mainView: UIView!
-
     // video screen
     @IBOutlet private weak var callView: UIView!
-    @IBOutlet private weak var incomingVideo: UIImageView!
     @IBOutlet weak var beforeIncomingVideo: UIView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var capturedVideo: UIImageView!
+    // @IBOutlet weak var capturedVideo: UIView!
     @IBOutlet weak var capturedVideoBlurEffect: UIVisualEffectView!
     @IBOutlet weak var viewCapturedVideo: UIView!
+    @IBOutlet weak var incomingVideo: UIView!
     @IBOutlet private weak var infoContainer: UIView!
     @IBOutlet private weak var callNameLabel: UILabel!
     @IBOutlet private weak var callInfoTimerLabel: UILabel!
@@ -82,6 +82,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var conferenceCallsTop: NSLayoutConstraint!
 
     var viewModel: CallViewModel!
+    var pipController: AVPictureInPictureController! = nil
+    var incomingVideoLayer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
     private var callViewMode: CallViewMode = .audio
     private var isMenuShowed = false
     private var needToCleanIncomingFrame = false
@@ -117,12 +119,16 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
         self.setUpCallButtons()
         self.setupBindings()
+        self.configureIncomingVideo()
+        self.setupPIP()
         self.profileImageView.tintColor = UIColor.jamiDefaultAvatar
         nameLabel.textColor = UIColor.jamiLabelColor
         durationLabel.textColor = UIColor.jamiLabelColor
         infoBottomLabel.textColor = UIColor.jamiLabelColor
         UIApplication.shared.isIdleTimerDisabled = true
-        initCallAnimation()
+        if !callCurrent {
+            initCallAnimation()
+        }
         self.configureConferenceLayout()
         if callCurrent {
             self.capturedVideoBlurEffect.alpha = 1
@@ -140,6 +146,53 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self.callPulse.layer.cornerRadius = (self.profileImageViewWidthConstraint.constant - 20) * 0.5
             })
             .disposed(by: self.disposeBag)
+    }
+
+    func configureIncomingVideo() {
+        self.incomingVideo.layer.addSublayer(self.incomingVideoLayer)
+        self.incomingVideoLayer.videoGravity = .resizeAspect
+        self.viewModel.incomingFrame
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] buffer in
+                guard let self = self else { return }
+                guard let buffer = buffer else { return }
+                self.incomingVideoStarted()
+                self.incomingVideoLayer.enqueue(buffer)
+                // AVSampleBufferDisplayLayer requires frame of view in which buffer is shown
+                if self.incomingVideoLayer.frame != self.incomingVideo.bounds {
+                    CATransaction.begin()
+                    CATransaction.setDisableActions(true)
+                    self.incomingVideoLayer.frame = self.incomingVideo.bounds
+                    CATransaction.commit()
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    func incomingVideoStarted() {
+        self.setAvatarView(false)
+        self.spinner.stopAnimating()
+        if self.beforeIncomingVideo.alpha != 0 {
+            UIView.animate(withDuration: 0.4, animations: {
+                self.beforeIncomingVideo.alpha = 0
+            }, completion: { [weak self] _ in
+                self?.beforeIncomingVideo.isHidden = true
+            })
+        }
+    }
+
+    func setupPIP() {
+        if #available(iOS 15.0, *) {
+            guard AVPictureInPictureController.isPictureInPictureSupported() else { return }
+            let contentSource = AVPictureInPictureController.ContentSource(sampleBufferDisplayLayer: incomingVideoLayer, playbackDelegate: self)
+            pipController = AVPictureInPictureController(contentSource: contentSource)
+            pipController.delegate = self
+            // Set requiresLinearPlayback to true to hide buttons from Picture in Picture except cancel and restoreView
+            pipController.requiresLinearPlayback = true
+
+            // Hide the overlay text and controls except for the cancel and restore view buttons
+            pipController.setValue(true, forKey: "controlsStyle")
+        }
     }
 
     func addTapGesture() {
@@ -254,6 +307,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.sendMessageButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showConversations()
+                if #available(iOS 15.0, *) {
+                    // startPictureInPicture requires user interaction
+                    self?.pipController.startPictureInPicture()
+                }
                 self?.dismiss(animated: false, completion: nil)
             })
             .disposed(by: self.disposeBag)
@@ -394,6 +451,10 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] dismiss in
                 if dismiss {
+                    if #available(iOS 15.0, *) {
+                        self?.pipController.stopPictureInPicture()
+                        self?.pipController = nil
+                    }
                     self?.removeFromScreen()
                 }
             })
@@ -434,47 +495,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .bind(to: self.infoBottomLabel.rx.text)
             .disposed(by: self.disposeBag)
 
-        self.viewModel.incomingFrame
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] frame in
-                guard let self = self else { return }
-                guard let image = frame else {
-                    if self.needToCleanIncomingFrame {
-                        self.needToCleanIncomingFrame = false
-                        DispatchQueue.main.async { [weak self] in
-                            self?.incomingVideo.image = UIImage()
-                        }
-                    }
-                    return
-                }
-                self.needToCleanIncomingFrame = true
-                self.setAvatarView(false)
-                self.spinner.stopAnimating()
-                if self.beforeIncomingVideo.alpha != 0 {
-                    UIView.animate(withDuration: 0.4, animations: {
-                        self.beforeIncomingVideo.alpha = 0
-                    }, completion: { [weak self] _ in
-                        self?.beforeIncomingVideo.isHidden = true
-                    })
-                }
-                DispatchQueue.main.async { [weak self] in
-                    self?.incomingVideo.image = image
-                }
-            })
-            .disposed(by: self.disposeBag)
-
-        self.viewModel.capturedFrame
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] frame in
-                if let image = frame {
-                    DispatchQueue.main.async {
-                        self?.capturedVideo.image = image
-                        self?.spinner.stopAnimating()
-                    }
-                }
-            })
-            .disposed(by: self.disposeBag)
-
         self.viewModel.showCallOptions
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] show in
@@ -492,10 +512,21 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 }
             })
             .disposed(by: self.disposeBag)
-
         self.viewModel.videoMuted
             .observe(on: MainScheduler.instance)
             .bind(to: self.capturedVideo.rx.isHidden)
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.capturedFrame
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] frame in
+                if let image = frame {
+                    DispatchQueue.main.async {
+                        self?.capturedVideo.image = image
+                        self?.spinner.stopAnimating()
+                    }
+                }
+            })
             .disposed(by: self.disposeBag)
 
         self.viewModel.videoMuted
@@ -634,6 +665,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     }
 
     func setAvatarView(_ show: Bool) {
+        if self.avatarView.isHidden != show {
+            return
+        }
         if !show {
             self.avatarView.isHidden = true
             self.backButtonAudioCall.isHidden = true
@@ -707,7 +741,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                     default: break
                     }
                     UIView.animate(withDuration: 0.4, animations: {
-                        self?.beforeIncomingVideo.backgroundColor = UIColor.darkGray
+                        self?.beforeIncomingVideo.backgroundColor = UIColor.black
                         self?.resizeCapturedVideo(withInfoContainer: false)
                         self?.capturedVideoBlurEffect.alpha = 0
                         self?.view.layoutIfNeeded()
@@ -908,6 +942,45 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
     func contactPickerDismissed() {
         self.addTapGesture()
+    }
+}
+
+// MARK: - AVPictureInPictureSampleBufferPlaybackDelegate
+
+extension CallViewController: AVPictureInPictureSampleBufferPlaybackDelegate {
+
+    func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {}
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, setPlaying playing: Bool) {}
+
+    func pictureInPictureControllerTimeRangeForPlayback(_ pictureInPictureController: AVPictureInPictureController) -> CMTimeRange {
+        return CMTimeRange(start: .negativeInfinity, duration: .positiveInfinity)
+    }
+
+    func pictureInPictureControllerIsPlaybackPaused(_ pictureInPictureController: AVPictureInPictureController) -> Bool {
+        return false
+    }
+
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, didTransitionToRenderSize newRenderSize: CMVideoDimensions) {}
+
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, skipByInterval skipInterval: CMTime, completion completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+}
+
+// MARK: - AVPictureInPictureControllerDelegate
+
+extension CallViewController: AVPictureInPictureControllerDelegate {
+
+    func pictureInPictureControllerWillStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
+        if self.navigationController?.topViewController != self {
+            self.viewModel.reopenCall(viewControler: self)
+        }
+    }
+
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController,
+                                    restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
+        pipController.stopPictureInPicture()
+        completionHandler(true)
     }
 }
 

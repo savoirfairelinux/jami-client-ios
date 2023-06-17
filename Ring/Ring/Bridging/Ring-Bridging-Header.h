@@ -51,3 +51,5 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "LinkPresentation/LinkPresentation.h"
+#import <AVKit/AVPictureInPictureController.h>
+#import <AVKit/AVPictureInPictureController_AVSampleBufferDisplayLayerSupport.h>

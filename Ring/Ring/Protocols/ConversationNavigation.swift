@@ -56,6 +56,7 @@ enum ConversationState: State {
     case presentSwarmInfo(swarmInfo: SwarmInfoProtocol)
     case openConversation(jamiId: String)
     case openConversationForConversationId(conversationId: String, accountId: String)
+    case reopenCall(viewController: CallViewController)
 }
 
 protocol ConversationNavigation: AnyObject {
@@ -109,6 +110,8 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.presentSwarmInfo(swarmInfo: swarmInfo)
                 case .openConversationForConversationId:
                     break
+                case .reopenCall(let viewController):
+                    self.reopenCall(viewController: viewController)
                 default:
                     break
                 }
@@ -155,7 +158,12 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
 
     func openOutgoingInvitationView(displayName: String, alias: String, avatar: Data?, contactJamiId: String, accountId: String, parentView: UIViewController, invitationHandeledCB: @escaping ((_ conversationId: String) -> Void)) {
         let invitationVC = InvitationViewController.instantiate(with: self.injectionBag)
-        invitationVC.viewModel.setInfoForSearchResult(contactJamiId: contactJamiId, accountId: accountId, displayName: displayName, alias: alias, avatar: avatar, invitationHandeledCB: invitationHandeledCB)
+        invitationVC.viewModel.setInfoForSearchResult(contactJamiId: contactJamiId,
+                                                      accountId: accountId,
+                                                      displayName: displayName,
+                                                      alias: alias,
+                                                      avatar: avatar,
+                                                      invitationHandeledCB: invitationHandeledCB)
         parentView.addChildController(invitationVC, initialFrame: parentView.view.bounds)
     }
 
@@ -230,21 +238,50 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         self.showConversation(withConversationViewModel: conversationViewModel)
     }
 
-    func navigateToCall (call: CallModel) {
-        guard let navController = self.rootViewController as? UINavigationController else { return }
+    func reopenCall(viewController: CallViewController) {
+        guard let call = viewController.viewModel.call else { return }
+        if self.tryPresentCallFromStack(call: call) {
+            return
+        }
+        if !dismissTopCallViewControllerIfNeeded() {
+            return
+        }
+        self.present(viewController: viewController,
+                     withStyle: .appear,
+                     withAnimation: false,
+                     withStateable: viewController.viewModel)
+    }
+
+    func tryPresentCallFromStack(call: CallModel) -> Bool {
+        guard let navController = self.rootViewController as? UINavigationController else { return false
+        }
         let controllers = navController.children
         for controller in controllers
         where controller.isKind(of: (CallViewController).self) {
-            if let callcontroller = controller as? CallViewController, callcontroller.viewModel.call?.callId == call.callId {
-                navController.popToViewController(callcontroller, animated: true)
-                return
+            if let callController = controller as? CallViewController, callController.viewModel.call?.callId == call.callId {
+                navController.popToViewController(callController, animated: true)
+                return true
             }
         }
+        return false
+    }
+
+    func dismissTopCallViewControllerIfNeeded() -> Bool {
         guard let topController = getTopController(),
-              !topController.isKind(of: (CallViewController).self) else {
-            return
+              !topController.isKind(of: CallViewController.self) else {
+            return false
         }
         topController.dismiss(animated: false, completion: nil)
+        return true
+    }
+
+    func navigateToCall(call: CallModel) {
+        if self.tryPresentCallFromStack(call: call) {
+            return
+        }
+        if !dismissTopCallViewControllerIfNeeded() {
+            return
+        }
         let callViewController = CallViewController
             .instantiate(with: self.injectionBag)
         callViewController.viewModel.call = call
