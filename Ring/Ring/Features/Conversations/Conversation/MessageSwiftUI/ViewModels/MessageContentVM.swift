@@ -390,7 +390,8 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let player = self.player, let firstImage = player.firstFrame,
-               let frameSize = firstImage.getNewSize(of: CGSize(width: self.maxDimension, height: self.maxDimension)) {
+               let image = UIImage.createFrom(sampleBuffer: firstImage),
+               let frameSize = image.getNewSize(of: CGSize(width: self.maxDimension, height: self.maxDimension)) {
                 self.playerHeight = frameSize.height
                 self.playerWidth = frameSize.width
             } else {
@@ -404,7 +405,8 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         guard let player = player else { return }
         var playerSize = CGSize(width: playerWidth, height: playerHeight)
         if let firstImage = player.firstFrame,
-           let frameSize = firstImage.getNewSize(of: CGSize(width: maxDimension, height: maxDimension)) {
+           let image = UIImage.createFrom(sampleBuffer: firstImage),
+           let frameSize = image.getNewSize(of: CGSize(width: maxDimension, height: maxDimension)) {
             playerSize = frameSize
             playerHeight = frameSize.height
             playerWidth = frameSize.width

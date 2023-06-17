@@ -416,4 +416,13 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return result
     }
+
+    class func createFrom(sampleBuffer: CMSampleBuffer) -> UIImage? {
+        let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
+        let ciimage = CIImage(cvPixelBuffer: imageBuffer)
+        let context = CIContext(options: nil)
+        let cgImage = context.createCGImage(ciimage, from: ciimage.extent)!
+        let image = UIImage(cgImage: cgImage)
+        return image
+    }
 }

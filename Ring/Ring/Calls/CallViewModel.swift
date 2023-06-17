@@ -191,15 +191,14 @@ class CallViewModel: Stateable, ViewModel {
 
     private var hasIncomigVideo = BehaviorRelay<Bool>(value: false)
 
-    lazy var incomingFrame: Observable<UIImage?> = {
+    lazy var incomingFrame: Observable<CMSampleBuffer?> = {
         return videoService.incomingVideoFrame.asObservable()
             .filter({[weak self] renderer -> Bool in
-                (renderer?.rendererId == self?
-                    .rendererId)
+                (renderer?.rendererId == self?.rendererId)
             })
-            .map({ [weak self] renderer in
+            .map({[weak self] renderer in
                 self?.hasIncomigVideo.accept(renderer?.running ?? false)
-                return renderer?.data
+                return renderer?.buffer
             })
     }()
 
@@ -768,5 +767,9 @@ extension CallViewModel {
         }).first else { return }
         let state = !partisipant.isHandRaised
         self.callService.setRaiseHand(confId: self.rendererId, participantId: account.jamiId, state: state)
+    }
+
+    func reopenCall(viewControler: CallViewController) {
+        stateSubject.onNext(ConversationState.reopenCall(viewController: viewControler))
     }
 }

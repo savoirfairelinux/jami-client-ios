@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +22,7 @@
                 <outlet property="imageLeadingConstraint" destination="Si0-gJ-tGK" id="awz-ih-HfL"/>
                 <outlet property="imageTopConstraint" destination="Pbu-c5-kzI" id="tzP-fz-Z4F"/>
                 <outlet property="imageTrailingConstraint" destination="cbv-MY-Zg7" id="S8P-5c-v2Y"/>
-                <outlet property="incomingImage" destination="ezV-YT-sBx" id="8OR-cv-fDL"/>
+                <outlet property="incomingVideo" destination="ezV-YT-sBx" id="Thl-0q-ESh"/>
                 <outlet property="leadingConstraint" destination="XLV-qe-9DE" id="lk7-jh-dhD"/>
                 <outlet property="muteAudio" destination="yln-si-MH9" id="uKn-ld-lq7"/>
                 <outlet property="muteAudioHeightConstraint" destination="w2q-ic-1oe" id="6IP-b8-tk3"/>
@@ -45,17 +45,18 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="NF5-DN-i1x">
+                <view contentMode="scaleToFill" ambiguous="YES" id="NF5-DN-i1x">
                     <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAm-WD-Qnr">
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dAm-WD-Qnr">
                             <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                         </view>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ezV-YT-sBx">
                             <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </imageView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qa1-8d-lpc">
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qa1-8d-lpc">
                             <rect key="frame" x="0.0" y="320" width="400" height="80"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfP-4w-tZW">
