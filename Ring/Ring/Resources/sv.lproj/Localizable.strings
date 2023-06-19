@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Konversationer";
-"global.meTabBarTitle" = "Kontoinställningar";
+"global.accountSettings" = "Kontoinställningar";
+"global.advancedSettings" = "Avancerade inställningar";
+"global.username" = "Användarnamn";
+"global.password" = "Lösenord";
+"global.registerAUsername" = "Registrera ett användarnamn";
+"global.enterPassword" = "Ange lösenord";
+"global.enterUsername" = "Ange användarnamn";
+"global.cancel" = "Avbryt";
+"global.blockContact" = "Blockera kontakt";
+"global.removeAccount" = "Ta bort konto";
+"global.incomingCall" = "Inkommande samtal";
 "global.ok" = "OK";
 "global.close" = "Stäng";
 "global.share" = "Dela";
@@ -34,10 +43,10 @@
 "global.name" = "Namn";
 "global.copy" = "Kopiera";
 "global.reply" = "Svara";
+"global.search" = "Söker...";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";
-"scan.search" = "Söker...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "-Sök efter kontakt...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Offentlig mapp";
 "smartlist.conversations" = "Konversationer";
-"smartlist.searching" = "Söker...";
 "smartlist.noResults" = "Inget resultat";
 "smartlist.noConversation" = "Inga konversationer";
 "smartlist.searchBarPlaceholder" = "Ange namn...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Den valda kontakten har inget nummer";
 "smartlist.selectOneNumber" = "Välj ett nummer";
 "smartlist.invitations" = "Inbjudningar";
-"smartlist.accountSettings" = "Kontoinställningar";
-"smartlist.advancedSettings" = "Avancerade inställningar";
 "smartlist.aboutJami" = "Om Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "Du delar nu din plats med ";
 "conversation.explanationReceivingLocationFrom" = "Du tar emot en live sändning från ";
 "conversation.errorSavingImage" = "Misslyckades spara till galleriet ";
-"conversation.receivedRequest" = "Du fick en begäran om ett samtal.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "- Jag skickade en begäran om ett samtal.";
 "conversation.requestMessage" = "Hej! \nVill du gå med i konversationen? ";
-"conversation.notContact" = "\%@\ är inte på din kontaktlista.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Skicka en kontaktförfrågan för att kunna ha ett utbyte ";
 "conversation.sendRequestTitle" = "Skicka en kontaktförfrågan";
 "conversation.synchronizationTitle" = "Du har accepterat konversationsförfrågan.";
-"conversation.synchronizationMessage" = "Vi väntar på att \%@\ anslutningar synkronisera samtalet.";
+"conversation.synchronizationMessage" = "Vi inväntar %@att ansluta och synkronisera denna konversation";
 
 //Invitations
 "invitations.noInvitations" = "Inga inbjudningar";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Skapa ditt konto";
 "createAccount.chooseStrongPassword" = "Välj ett starkt lösenord som du kommer ihåg, för att skydda ditt Jami-konto.";
-"createAccount.enterNewUsernamePlaceholder" = "Användarnamn";
-"createAccount.newPasswordPlaceholder" = "Lösenord";
 "createAccount.repeatPasswordPlaceholder" = "Bekräfta lösenord";
 "createAccount.passwordCharactersNumberError" = "6 tecken minimum";
 "createAccount.passwordNotMatchingError" = "Lösenorden stämmer inte";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "användarnamnet är tillgängligt";
 "createAccount.loading" = "Läser in";
 "createAccount.waitCreateAccountTitle" = "Lägger till konto";
-"createAccount.RegisterAUsername" = "Registrera ett användarnamn";
 "createAccount.ChooseAPassword" = "Kryptera mitt konto";
 "createAccount.PasswordInformation" = "Välj ett lösenord för att kryptera ditt lokala konto. Glöm inte bort det, för då kommer du inte att kunna återställa ditt konto.";
 "createAccount.EnableNotifications" = "Aviseringar";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontokoppling";
 "linkToAccount.linkButtonTitle" = "Koppla enhet";
-"linkToAccount.passwordPlaceholder" = "Lösenord";
 "linkToAccount.pinPlaceholder" = "PIN-kod";
-"linkToAccount.passwordLabel" = "Ange lösenord";
 "linkToAccount.pinLabel" = "Ange PIN-kod";
 "linkToAccount.explanationPinMessage" = "För att generera PIN-koden, går du till kontohanteringen på den enhet som innehåller det konto du vill använda. I enhetsinställningarna väljer du \"Länka en annan enhet till detta konto\". Du får då den nödvändiga PIN-koden för att slutföra detta formulär. Pin-koden är endast giltig i 10 minuter.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Logga in";
-"linkToAccountManager.passwordPlaceholder" = "Lösenord";
-"linkToAccountManager.passwordLabel" = "Ange lösenord";
-"linkToAccountManager.usernamePlaceholder" = "Användarnamn";
-"linkToAccountManager.usernameLabel" = "Ange användarnamn";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Ange JAMS URL";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Kontot kunde inte skapas.";
 "alerts.profileTakePhoto" = "Ta ett foto";
 "alerts.profileUploadPhoto" = "Ladda upp foto";
-"alerts.profileCancelPhoto" = "Avbryt";
 "alerts.accountLinkedTitle" = "Kopplar konto";
 "alerts.dbFailedTitle" = "Ett fel inträffade när Jami startades";
 "alerts.dbFailedMessage" = "Stäng appen och försök starta den igen";
 "alerts.confirmBlockContact" = "Vill du verkligen blockera den här kontakten? Konversationshistoriken för den här kontakten, kommer också att raderas permanent.";
-"alerts.confirmBlockContactTitle" = "Blockera kontakt";
 "alerts.confirmDeleteConversation" = "Vill du verkligen ta bort den här konversationen permanent?";
 "alerts.confirmDeleteConversationFromContact" = "Vill du verkligen ta bort konversationen med denna kontakt?";
 "alerts.confirmDeleteConversationTitle" = "Ta bort konversation";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Ta bort";
-"actions.cancelAction" = "Avbryt";
 "actions.clearAction" = "Ta bort";
 "actions.backAction" = "Tillbaka";
 "actions.doneAction" = "Klar";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Samtal";
-"calls.unknown" = "Okänd";
 "calls.incomingCallInfo" = "vill prata med dig";
 "calls.ringing" = "Ringer...";
 "calls.connecting" = "Ansluter...";
-"calls.searching" = "Söker...";
 "calls.callFinished" = "Samtalet avslutat";
 "calls.currentCallWith" = "Ring upp med";
 "calls.haghUp" = "lägg på";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
 "accountPage.settingsHeader" = "Inställningar";
-"accountPage.username" = "Användarnamn";
 "accountPage.usernameNotRegistered" = "Användarnamn: Inte registrerat";
 "accountPage.credentialsHeader" = "Kontoinformation";
-"accountPage.enableProxy" = "Aktivera proxy";
 "accountPage.blockedContacts" = "Blockerade kontakter";
 "accountPage.unblockContact" = "AVBLOCKERA";
 "accountPage.proxyAddressAlert" = "Ange proxyadress";
-"accountPage.enableProxy" = "Aktivera proxy";
 "accountPage.noProxyExplanationLabel" = "Din enhet tar inte emot aviseringar när proxy är inaktiverat";
-"accountPage.saveProxyAddress" = "Spara";
 "accountPage.proxyPaceholder" = "Proxyadress";
 "accountPage.enableNotifications" = "Aktivera aviseringar";
 "accountPage.proxyDisabledAlertTitle" = "Proxyserver inaktiverad";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Kunde inte återkalla enheten";
 "accountPage.linkDeviceTitle" = "Koppla en annan enhet";
 "accountPage.other" = "Annat";
-"accountPage.removeAccountTitle" = "Ta bort konto";
 "accountPage.removeAccountMessage" = "Genom att klicka \"Ta bort\" kommer du att ta bort detta konto från denna enhet. Denna åtgärd kan inte ångras. Ditt registrerade namn kan också förloras.";
 "accountPage.removeAccountButton" = "Ta bort";
 "accountPage.shareAccountDetails" = "Dela kontoinformation";
 "accountPage.contactMeOnJamiTitle" = "Kontakta mig på Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontakta genom %s på Jami kommunikationsplattformen: https://jami.net ";
-"accountPage.registerNameTitle" = "Registrera ett användarnamn";
 "accountPage.passwordPlaceholder" = "Ange kontolösenord";
 "accountPage.usernamePlaceholder" = "Ange önskat användanamn";
 "accountPage.registerNameErrorMessage" = "Valt användarnamn inte tillgängligt";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Användarnamn";
-"account.sipPassword" = "Lösenord";
 "account.sipServer" = "SIP-server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Skapa ett SIP-konto";
-"account.usernameLabel" = "Ange användarnamn";
-"account.passwordLabel" = "Ange lösenord";
 "account.serverLabel" = "Ange adress";
 "account.portLabel" = "Ange portnummer";
 "account.accountStatus" = "Kontostatus";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Starta videosamtal";
 "contactPage.sendMessage" = "Skicka meddelande";
 "contactPage.clearConversation" = "Rensa chatten";
-"contactPage.blockContact" = "Blockera kontakt";
 "contactPage.removeConversation" = "Ta bort konversation";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "Avbruten";
 "dataTransfer.sendingFailed" = "Misslyckades att skicka";
 "dataTransfer.readableStatusSuccess" = "Slutförd";
-"dataTransfer.readableStatusCancel" = "Avbryt";
 
 //Notifications
-"notifications.incomingCall" = "Inkommande samtal";
 "notifications.missedCall" = "Missat samtal";
 "notifications.newFile" = "Ny fil";
 "notifications.locationSharingStarted" = "Inkommande platsdelning startad";
 "notifications.locationSharingStopped" = "Inkommande platsdelning avslutad";
-"dataTransfer.readableStatusAwaiting" = "Väntar...";
-"dataTransfer.readableStatusOngoing" = "Överför";
-"dataTransfer.readableStatusCanceled" = "Avbruten";
-"dataTransfer.readableStatusSuccess" = "Slutförd";
-"dataTransfer.readableStatusCancel" = "Avbryt";
+"dataTransfer.readableStatusRefuse" = "Neka";
+"dataTransfer.readableStatusAccept" = "Acceptera";
 "dataTransfer.infoMessage" = "Tryck för att starta inspelning";
 "dataTransfer.sendMessage" = "Skicka";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "- Jag fick sparken.";
 "generatedMessage.contactReAdded" = "lagdes till";
 "generatedMessage.outgoingCall" = "Utgående samtal";
-"generatedMessage.incomingCall" = "Inkommande samtal";
 "generatedMessage.missedOutgoingCall" = "Missat utgående samtal";
 "generatedMessage.missedIncomingCall" = "Missat inkommande samtal";
 "generatedMessage.liveLocationSharing" = "Live platsdelning ";
 "generatedMessage.contactLeftConversation" = "vänster";
 
 //General Settings
-"generalSettings.title" = "Avancerade inställningar";
 "generalSettings.videoSettings" = "Videonställningar";
 "generalSettings.videoAcceleration" = "Aktivera videoacceleration";
 "generalSettings.fileTransfer" = "Filöverföring";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "Kontodelning";
 "migrateAccount.migrateButton" = "Migrera konto";
 "migrateAccount.explanation" = "Detta konto behöver migreras";
-"migrateAccount.passwordPlaceholder" = "Ange lösenord";
 "migrateAccount.passwordExplanation" = "För att fortsätta migrering behöver du ange lösenordet till detta konto\n ";
-"migrateAccount.removeAccount" = "Ta bort konto";
 "migrateAccount.error" = "82%match\nKunde inte migrera ditt konto. Du kan försöka igen genom att klicka OK, eller radera ditt konto.";
 "migrateAccount.migrating" = "Migrerar...";
-"migrateAccount.cancel" = "Avbryt";
 "migrateAccount.migrateAnother" = "Migrera ett annat konto";
-
-

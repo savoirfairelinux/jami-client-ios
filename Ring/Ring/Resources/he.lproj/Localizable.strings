@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "דיונים";
-"global.meTabBarTitle" = "הגדרות החשבון";
+"global.accountSettings" = "הגדרות החשבון";
+"global.advancedSettings" = "הגדרות מתקדמות";
+"global.username" = "שם משתמש";
+"global.password" = "סיסמה";
+"global.registerAUsername" = "רשום שם משתמש";
+"global.enterPassword" = "הכניסה סיסמה";
+"global.enterUsername" = "הכניסה שם משתמש";
+"global.cancel" = "ביטול";
+"global.blockContact" = "בלוק קשר";
+"global.removeAccount" = "תבטלו את החשבון";
+"global.incomingCall" = "שיחה נכנסת";
 "global.ok" = "אישור";
 "global.close" = "סגירה";
 "global.share" = "שיתוף";
@@ -34,10 +43,10 @@
 "global.name" = "שם";
 "global.copy" = "העתקה";
 "global.reply" = "תשובה";
+"global.search" = "בחיפוש...";
 
 // Scan
 "scan.badQrCode" = "קוד QR גרוע";
-"scan.search" = "בחיפוש...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "חיפוש קשר...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "אתמול";
 "smartlist.results" = "תיקון ציבורי";
 "smartlist.conversations" = "דיונים";
-"smartlist.searching" = "חפש...";
 "smartlist.noResults" = "אין תוצאות";
 "smartlist.noConversation" = "אין דיונים";
 "smartlist.searchBarPlaceholder" = "יש להזין שם...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "הקשר הנבחר אינו רשום";
 "smartlist.selectOneNumber" = "בחר אחד המספרים";
 "smartlist.invitations" = "הזמנות";
-"smartlist.accountSettings" = "הגדרות החשבון";
-"smartlist.advancedSettings" = "הגדרות מתקדמות";
 "smartlist.aboutJami" = "על אודות Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "אתה חולק את המיקום שלך עם ";
 "conversation.explanationReceivingLocationFrom" = "אתה מקבל כרגע מיקום חי מ";
 "conversation.errorSavingImage" = "לא הצלחתי לשמור תמונה לגלריה";
-"conversation.receivedRequest" = "\%@\ שלח לך בקשה לשיחה.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "שלחתי לך בקשה לשיחה.";
 "conversation.requestMessage" = "שלום, תרצה להצטרף לשיחה?";
-"conversation.notContact" = "\%@\ לא ברשימה של אנשי הקשר שלך.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "שלח לו/ה בקשה ליצור קשר כדי שנוכל להחליף יחד";
 "conversation.sendRequestTitle" = "שלח בקשה ליצור קשר";
 "conversation.synchronizationTitle" = "אתה קיבלת את בקשת השיחה.";
-"conversation.synchronizationMessage" = "אנחנו מחכים לתקשורת \%@\ כדי להעמיק את השיחה.";
+"conversation.synchronizationMessage" = "אנחנו מחכים ל%@ מתחברים כדי להעמיק את השיחה.";
 
 //Invitations
 "invitations.noInvitations" = "אין הזמנות";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "ליצור חשבון";
 "createAccount.chooseStrongPassword" = "בחרו סיסמה חזקה שתזכרי כדי להגן על חשבון ג'מי שלכם.";
-"createAccount.enterNewUsernamePlaceholder" = "שם משתמש";
-"createAccount.newPasswordPlaceholder" = "סיסמה";
 "createAccount.repeatPasswordPlaceholder" = "אישור סיסמה";
 "createAccount.passwordCharactersNumberError" = "6 אותיות לפחות";
 "createAccount.passwordNotMatchingError" = "סיסמאות לא מתאימות";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "שם המשתמש זמין";
 "createAccount.loading" = "מטען";
 "createAccount.waitCreateAccountTitle" = "הוספת חשבון";
-"createAccount.RegisterAUsername" = "רשום שם משתמש";
 "createAccount.ChooseAPassword" = "לחבר את החשבון שלי";
 "createAccount.PasswordInformation" = "בחרו סיסמה כדי לחבר את החשבון המקומי שלכם. אל תשכחו אותה או שלא תוכלו לשחזר את החשבון שלכם";
 "createAccount.EnableNotifications" = "הודעות";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "חיבור חשבונות";
 "linkToAccount.linkButtonTitle" = "מכשיר חיבור";
-"linkToAccount.passwordPlaceholder" = "סיסמה";
 "linkToAccount.pinPlaceholder" = "מספר זיהוי אישי";
-"linkToAccount.passwordLabel" = "הכניסה סיסמה";
 "linkToAccount.pinLabel" = "הכניס את סימן PIN";
 "linkToAccount.explanationPinMessage" = "כדי ליצור את קוד PIN, לכו להגדרות ניהול חשבון במכשיר המכיל את החשבון שרצית להשתמש בו. בהגדרות המכשירים בחרו \"חברו מכשיר אחר לחשבון הזה\". תקבלו את הסימון PIN הנדרש כדי למלא את הטופס הזה. הסימון PIN הוא תקף רק 10 דקות.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "כניסה";
-"linkToAccountManager.passwordPlaceholder" = "סיסמה";
-"linkToAccountManager.passwordLabel" = "הכניסה סיסמה";
-"linkToAccountManager.usernamePlaceholder" = "שם משתמש";
-"linkToAccountManager.usernameLabel" = "הכניסה שם משתמש";
 "linkToAccountManager.accountManagerPlaceholder" = "דואר URL של JAMS";
 "linkToAccountManager.accountManagerLabel" = "הכניס את URL JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "לא ניתן ליצור את החשבון.";
 "alerts.profileTakePhoto" = "צלם.";
 "alerts.profileUploadPhoto" = "תעלה תמונה";
-"alerts.profileCancelPhoto" = "ביטול";
 "alerts.accountLinkedTitle" = "חשבון חיבור";
 "alerts.dbFailedTitle" = "טעות קרה בעת השיגור של ג'מי.";
 "alerts.dbFailedMessage" = "בבקשה סגור את ההזמנה ותנסה לפתוח אותה שוב.";
 "alerts.confirmBlockContact" = "האם אתה בטוח שאתה רוצה לחסום את הקשר הזה? היסטוריית השיחה עם הקשר הזה גם תימחק באופן קבוע.";
-"alerts.confirmBlockContactTitle" = "בלוק קשר";
 "alerts.confirmDeleteConversation" = "אתה בטוח שאתה רוצה למחוק את השיחה הזאת באופן קבוע?";
 "alerts.confirmDeleteConversationFromContact" = "אתה בטוח שאתה רוצה למחוק את השיחה עם הקשר הזה?";
 "alerts.confirmDeleteConversationTitle" = "מחיקת דיון";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "מחק";
-"actions.cancelAction" = "ביטול";
 "actions.clearAction" = "ניקוי";
 "actions.backAction" = "חזרה";
 "actions.doneAction" = "סיים";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "שיחה";
-"calls.unknown" = "לא מוכר";
 "calls.incomingCallInfo" = "רוצה לדבר איתך.";
 "calls.ringing" = "זה מצלצל...";
 "calls.connecting" = "חיבור...";
-"calls.searching" = "בחיפוש...";
 "calls.callFinished" = "שיחת הודעה נגמרה.";
 "calls.currentCallWith" = "תתקשר עם ";
 "calls.haghUp" = "תנתק.";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "התקנים";
 "accountPage.settingsHeader" = "הגדרות";
-"accountPage.username" = "שם משתמש";
 "accountPage.usernameNotRegistered" = "שם משתמש: לא רשום";
 "accountPage.credentialsHeader" = "פרטים על החשבון";
-"accountPage.enableProxy" = "תפעיל פרוקסי";
 "accountPage.blockedContacts" = "אנשי קשר חסומים";
 "accountPage.unblockContact" = "לא מבלי";
 "accountPage.proxyAddressAlert" = "תורם כתובת פרוקסי";
-"accountPage.enableProxy" = "תפעיל פרוקסי";
 "accountPage.noProxyExplanationLabel" = "המכשיר שלך לא יקבל הודעות כאשר הפוקסי מופעל";
-"accountPage.saveProxyAddress" = "שמור";
 "accountPage.proxyPaceholder" = "כתובת דווקא";
 "accountPage.enableNotifications" = "אפשרות של הודעות";
 "accountPage.proxyDisabledAlertTitle" = "שרת פרוקסי מופחת";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "טעות בביטול המכשיר";
 "accountPage.linkDeviceTitle" = "קישור מכשיר אחר";
 "accountPage.other" = "אחר";
-"accountPage.removeAccountTitle" = "תבטלו את החשבון";
 "accountPage.removeAccountMessage" = "על ידי לחיצה \"מחק\" אתה ימחק את החשבון הזה על המכשיר הזה! פעולה זו לא יכולה להיות מבוטלת.";
 "accountPage.removeAccountButton" = "הסר";
 "accountPage.shareAccountDetails" = "פרטים על חשבון שיתוף";
 "accountPage.contactMeOnJamiTitle" = "התקשר אליי על ג'מי!";
 "accountPage.contactMeOnJamiContant" = "צור איתי קשר באמצעות \"%s\" על פלטפורמת התקשורת המوزعة של ג'מי: https://jami.net";
-"accountPage.registerNameTitle" = "רשום שם משתמש";
 "accountPage.passwordPlaceholder" = "הכניסה סיסמה לחשבון";
 "accountPage.usernamePlaceholder" = "הכניס את שם המשתמש הרצוי";
 "accountPage.registerNameErrorMessage" = "שם המשתמש הנבחר אינו זמין";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "שם המשתמש";
-"account.sipPassword" = "סיסמה";
 "account.sipServer" = "סרבר SIP";
 "account.port" = "פורט";
 "account.proxyServer" = "פרוקסי";
 "account.createSipAccount" = "ליצור חשבון SIP";
-"account.usernameLabel" = "הכניסה שם משתמש";
-"account.passwordLabel" = "הכניסה סיסמה";
 "account.serverLabel" = "הכניסה כתובת";
 "account.portLabel" = "הכניסה מספר הנמל";
 "account.accountStatus" = "מצב החשבון";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "התחלת שיחת וידאו";
 "contactPage.sendMessage" = "שלח הודעה";
 "contactPage.clearConversation" = "ניקוי הצ׳אט";
-"contactPage.blockContact" = "בלוק קשר";
 "contactPage.removeConversation" = "הסרת דיון";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "מבוטל";
 "dataTransfer.sendingFailed" = "לא הצלחתי לשלוח";
 "dataTransfer.readableStatusSuccess" = "מלא";
-"dataTransfer.readableStatusCancel" = "ביטול";
 
 //Notifications
-"notifications.incomingCall" = "שיחה נכנסת";
 "notifications.missedCall" = "התקשרות החסרות";
 "notifications.newFile" = "תיק חדש";
 "notifications.locationSharingStarted" = "החל שיתוף מיקום נכנס";
 "notifications.locationSharingStopped" = "שיתוף מיקום נכנסים נעצר";
-"dataTransfer.readableStatusAwaiting" = "מחכה...";
-"dataTransfer.readableStatusOngoing" = "העברה";
-"dataTransfer.readableStatusCanceled" = "מבוטל";
-"dataTransfer.readableStatusSuccess" = "מלא";
-"dataTransfer.readableStatusCancel" = "ביטול";
+"dataTransfer.readableStatusRefuse" = "לדחות";
+"dataTransfer.readableStatusAccept" = "לקבל";
 "dataTransfer.infoMessage" = "לחץ כדי להתחיל להקליט";
 "dataTransfer.sendMessage" = "שלח";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "נבעט";
 "generatedMessage.contactReAdded" = "הוספת מחדש";
 "generatedMessage.outgoingCall" = "שיחה יוצאת";
-"generatedMessage.incomingCall" = "שיחה נכנסת";
 "generatedMessage.missedOutgoingCall" = "פספסתי שיחת פנויה";
 "generatedMessage.missedIncomingCall" = "פספסתי שיחת כניסה";
 "generatedMessage.liveLocationSharing" = "שיתוף מיקום חי";
 "generatedMessage.contactLeftConversation" = "שמאלה";
 
 //General Settings
-"generalSettings.title" = "הגדרות מתקדמות";
 "generalSettings.videoSettings" = "הגדרות הוידאו";
 "generalSettings.videoAcceleration" = "אפשרת אינטגרציה של וידאו";
 "generalSettings.fileTransfer" = "העברת קבצים";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "מיגרת חשבונות";
 "migrateAccount.migrateButton" = "חשבון היגר";
 "migrateAccount.explanation" = "החשבון הזה צריך לעבור.";
-"migrateAccount.passwordPlaceholder" = "הכניסו סיסמה";
 "migrateAccount.passwordExplanation" = "כדי להמשיך עם ההגירה, אתה צריך להזין סיסמה ששימשה לחשבון הזה";
-"migrateAccount.removeAccount" = "תבטלו את החשבון";
 "migrateAccount.error" = "לא העבר את החשבון שלך. אתה יכול לנסות שוב או למחוק את החשבון שלך.";
 "migrateAccount.migrating" = "היגר...";
-"migrateAccount.cancel" = "ביטול";
 "migrateAccount.migrateAnother" = "להעביר חשבון אחר";
-
-

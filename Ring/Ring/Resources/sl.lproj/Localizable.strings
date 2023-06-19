@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Pogovori";
-"global.meTabBarTitle" = "Nastavitve računa";
+"global.accountSettings" = "Nastavitve računa";
+"global.advancedSettings" = "Napredne nastavitve";
+"global.username" = "Uporabniško ime";
+"global.password" = "Geslo";
+"global.registerAUsername" = "Registracija uporabniškega imena";
+"global.enterPassword" = "Vnesite geslo";
+"global.enterUsername" = "Vnesite uporabniško ime";
+"global.cancel" = "Prekliči";
+"global.blockContact" = "Blokiraj stik";
+"global.removeAccount" = "Odstrani račun";
+"global.incomingCall" = "Dohodni klic";
 "global.ok" = "V redu";
 "global.close" = "Zapri";
 "global.share" = "Deli";
@@ -34,10 +43,10 @@
 "global.name" = "Ime";
 "global.copy" = "Kopiraj";
 "global.reply" = "Odgovori";
+"global.search" = "Iskanje ...";
 
 // Scan
 "scan.badQrCode" = "Napačna QR-koda";
-"scan.search" = "Iskanje ...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Poišči stik ...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "Včeraj";
 "smartlist.results" = "Javni imenik";
 "smartlist.conversations" = "Pogovori";
-"smartlist.searching" = "Iskanje ...";
 "smartlist.noResults" = "Ni zadetkov";
 "smartlist.noConversation" = "Ni pogovorov";
 "smartlist.searchBarPlaceholder" = "Vnesite ime ...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Izbrani stiki nimajo številke";
 "smartlist.selectOneNumber" = "Izberite eno od številk";
 "smartlist.invitations" = "Povabila";
-"smartlist.accountSettings" = "Nastavitve računa";
-"smartlist.advancedSettings" = "Napredne nastavitve";
 "smartlist.aboutJami" = "O programu Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "Trenutno v živo delite svojo lokacijo z ";
 "conversation.explanationReceivingLocationFrom" = "Trenutno v živo pridobivate podatek o lokaciji od";
 "conversation.errorSavingImage" = "Shranjevanje slike v galerijo je spodletelo";
-"conversation.receivedRequest" = "\%@\ vam je poslal zahtevo za pogovor.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Vam je poslal zahtevo za pogovor.";
 "conversation.requestMessage" = "Pozdravljeni, \nse želite pridružiti pogovoru?";
-"conversation.notContact" = "\%@\ ni na seznamu vaših stikov.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Pošljite ji/mu zahtevo za stik, da si bosta lahko medsebojno izmenjevala.";
 "conversation.sendRequestTitle" = "Pošlji zahtevo za stik";
 "conversation.synchronizationTitle" = "Sprejeli ste zahtevo za pogovor.";
-"conversation.synchronizationMessage" = "Čakamo, da se \%@\ poveže, da sinhroniziramo pogovor.";
+"conversation.synchronizationMessage" = "Čakamo, da se %@ poveže, da sinhroniziramo pogovor.";
 
 //Invitations
 "invitations.noInvitations" = "Ni povabil";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Ustvari svoj račun";
 "createAccount.chooseStrongPassword" = "Izberite močno geslo, ki si ga boste zapomnili in z njim zaščitili svoj račun Jami.";
-"createAccount.enterNewUsernamePlaceholder" = "Uporabniško ime";
-"createAccount.newPasswordPlaceholder" = "Geslo";
 "createAccount.repeatPasswordPlaceholder" = "Potrdite geslo";
 "createAccount.passwordCharactersNumberError" = "najmanj 6 znakov";
 "createAccount.passwordNotMatchingError" = "gesli se ne ujemata";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "uporabniško ime je na voljo";
 "createAccount.loading" = "Nalaganje";
 "createAccount.waitCreateAccountTitle" = "Dodajanje računa";
-"createAccount.RegisterAUsername" = "Registracija uporabniškega imena";
 "createAccount.ChooseAPassword" = "Šifriraj moj račun";
 "createAccount.PasswordInformation" = "Izberite geslo za šifriranje vašega računa na tej napravi. Upoštevajte, da gesla ni mogoče obnoviti, zato ga ne pozabite.";
 "createAccount.EnableNotifications" = "Obvestila";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Povezovanje računa";
 "linkToAccount.linkButtonTitle" = "Poveži napravo";
-"linkToAccount.passwordPlaceholder" = "Geslo";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Vnesite geslo";
 "linkToAccount.pinLabel" = "Vnesite PIN";
 "linkToAccount.explanationPinMessage" = "Za generiranje PIN-kode pojdite v nastavitve računa na napravi z računom, ki ga želite uporabiti. Izberite »Poveži drugo napravo s tem računom«. Dobili boste potreben PIN za vnos v ta obrazec. PIN velja 10 minut.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Vpis";
-"linkToAccountManager.passwordPlaceholder" = "Geslo";
-"linkToAccountManager.passwordLabel" = "Vnesite geslo";
-"linkToAccountManager.usernamePlaceholder" = "Uporabniško ime";
-"linkToAccountManager.usernameLabel" = "Vnesite uporabniško ime";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Vnesite URL JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Računa ni bilo mogoče ustvariti.";
 "alerts.profileTakePhoto" = "Slikaj";
 "alerts.profileUploadPhoto" = "Naloži sliko";
-"alerts.profileCancelPhoto" = "Prekliči";
 "alerts.accountLinkedTitle" = "Povezovanje računa";
 "alerts.dbFailedTitle" = "Ob zagonu Jami se je zgodila napaka";
 "alerts.dbFailedMessage" = "Zaprite program in ga ponovno zaženite";
 "alerts.confirmBlockContact" = "Ali ste prepričani, da želite blokirati ta stik? Zgodovina pogovorov s tem stikom bo trajsno izbrisana.";
-"alerts.confirmBlockContactTitle" = "Blokiraj stik";
 "alerts.confirmDeleteConversation" = "Ali ste prepričani, da želite trajno izbrisati ta pogovor?";
 "alerts.confirmDeleteConversationFromContact" = "Ali ste prepričani, da želite izbrisati pogovor s tem stikom?";
 "alerts.confirmDeleteConversationTitle" = "Izbriši pogovor";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Izbriši";
-"actions.cancelAction" = "Prekliči";
 "actions.clearAction" = "Počisti";
 "actions.backAction" = "Nazaj";
 "actions.doneAction" = "Opravljeno";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Kliči";
-"calls.unknown" = "Neznano";
 "calls.incomingCallInfo" = "želi govoriti z vami";
 "calls.ringing" = "Zvonenje ...";
 "calls.connecting" = "Povezovanje ...";
-"calls.searching" = "Iskanje ...";
 "calls.callFinished" = "Klic je končan";
 "calls.currentCallWith" = "Klic z";
 "calls.haghUp" = "odloži";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Naprave";
 "accountPage.settingsHeader" = "Nastavitve";
-"accountPage.username" = "Uporabniško ime";
 "accountPage.usernameNotRegistered" = "uporabniško ime: ni registrirano";
 "accountPage.credentialsHeader" = "Podrobnosti računa";
-"accountPage.enableProxy" = "Omogoči posredniški strežnik";
 "accountPage.blockedContacts" = "Blokirani stiki";
 "accountPage.unblockContact" = "ODBLOKIRAJ";
 "accountPage.proxyAddressAlert" = "Posredujte naslov posredniškega strežnika";
-"accountPage.enableProxy" = "Omogoči posredniški strežnik";
 "accountPage.noProxyExplanationLabel" = "Vaša naprava ne bo prejemala obvestil, če je posredniški strežnik onemogočen";
-"accountPage.saveProxyAddress" = "Shrani";
 "accountPage.proxyPaceholder" = "Naslov posredniškega strežnika";
 "accountPage.enableNotifications" = "Vklopi obveščanje";
 "accountPage.proxyDisabledAlertTitle" = "Posredniški strežnik je onemogočen";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Napaka pri odpoklicu naprave";
 "accountPage.linkDeviceTitle" = "Poveži še eno napravo";
 "accountPage.other" = "Drugo";
-"accountPage.removeAccountTitle" = "Odstrani račun";
 "accountPage.removeAccountMessage" = "S klikom »Odstrani« boste odstranili račun s te naprave! Tega dejanja ni mogoče razveljaviti. Poleg tega lahko izgubite svoje registrirano ime.";
 "accountPage.removeAccountButton" = "Odstrani";
 "accountPage.shareAccountDetails" = "Deli podrobnosti računa";
 "accountPage.contactMeOnJamiTitle" = "Poišči me na Jami-ju!";
 "accountPage.contactMeOnJamiContant" = "Stopi v stik z menoj z uporabo »%s« na razpršeni komunikacijski platformi Jami: https://jami.net";
-"accountPage.registerNameTitle" = "Registriraj uporabniško ime";
 "accountPage.passwordPlaceholder" = "Vnesite geslo računa";
 "accountPage.usernamePlaceholder" = "Vnesite želeno uporabniško ime";
 "accountPage.registerNameErrorMessage" = "Izbrano uporabniško ime ni na voljo";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Uporabniško ime";
-"account.sipPassword" = "Geslo";
 "account.sipServer" = "Strežnik SIP";
 "account.port" = "Vrata";
 "account.proxyServer" = "Posredniški strežnik";
 "account.createSipAccount" = "Ustvari račun SIP";
-"account.usernameLabel" = "Vnesite uporabniško ime";
-"account.passwordLabel" = "Vnesite geslo";
 "account.serverLabel" = "Vnesite naslov";
 "account.portLabel" = "Vnesite številko vrat";
 "account.accountStatus" = "Stanje računa";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Začni video klic";
 "contactPage.sendMessage" = "Pošlji sporočilo";
 "contactPage.clearConversation" = "Počisti klepet";
-"contactPage.blockContact" = "Blokiraj stik";
 "contactPage.removeConversation" = "Odstrani pogovor";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "Preklicano";
 "dataTransfer.sendingFailed" = "Neuspešno pošiljanje";
 "dataTransfer.readableStatusSuccess" = "Dokončano";
-"dataTransfer.readableStatusCancel" = "Prekliči";
 
 //Notifications
-"notifications.incomingCall" = "Dohodni klic";
 "notifications.missedCall" = "Zgrešen klic";
 "notifications.newFile" = "Nova datoteka";
 "notifications.locationSharingStarted" = "Dohodno deljenje lokacije se je začelo";
 "notifications.locationSharingStopped" = "Dohodno deljenje lokacije je bilo ustavljeno";
-"dataTransfer.readableStatusAwaiting" = "Na čakanju ...";
-"dataTransfer.readableStatusOngoing" = "Prenos";
-"dataTransfer.readableStatusCanceled" = "Preklicano";
-"dataTransfer.readableStatusSuccess" = "Dokončano";
-"dataTransfer.readableStatusCancel" = "Prekliči";
+"dataTransfer.readableStatusRefuse" = "Zavrni";
+"dataTransfer.readableStatusAccept" = "Sprejmi";
 "dataTransfer.infoMessage" = "Pritisnite za začetek snemanja";
 "dataTransfer.sendMessage" = "Pošlji";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "je izvržen_a";
 "generatedMessage.contactReAdded" = "je ponovno dodan_a";
 "generatedMessage.outgoingCall" = "Odhodni klic";
-"generatedMessage.incomingCall" = "Dohodni klic";
 "generatedMessage.missedOutgoingCall" = "Zgrešen odhodni klic";
 "generatedMessage.missedIncomingCall" = "Zgrešen dohodni klic";
 "generatedMessage.liveLocationSharing" = "Deljenje lokacije v živo";
 "generatedMessage.contactLeftConversation" = "je odšel_a";
 
 //General Settings
-"generalSettings.title" = "Napredne nastavitve";
 "generalSettings.videoSettings" = "Nastavitve videa";
 "generalSettings.videoAcceleration" = "Vklopi strojno pospeševanje videa";
 "generalSettings.fileTransfer" = "Prenos datoteke";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "Selitev računa";
 "migrateAccount.migrateButton" = "Preseli račun";
 "migrateAccount.explanation" = "Ta račun je potrebno preseliti";
-"migrateAccount.passwordPlaceholder" = "Vnesi geslo";
 "migrateAccount.passwordExplanation" = "Za nadaljevanje selitve morate vnesti geslo, uporabljeno za ta račun.";
-"migrateAccount.removeAccount" = "Odstrani račun";
 "migrateAccount.error" = "Selitev računa ni uspela. Lahko poskusite ponovno izbrisati račun.";
 "migrateAccount.migrating" = "Selitev ...";
-"migrateAccount.cancel" = "Prekliči";
 "migrateAccount.migrateAnother" = "Preseli še en račun";
-
-

@@ -19,14 +19,23 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "会話";
-"global.meTabBarTitle" = "アカウント設定";
+"global.accountSettings" = "アカウント設定";
+"global.advancedSettings" = "詳細設定";
+"global.username" = "利用者名";
+"global.password" = "暗証語";
+"global.registerAUsername" = "利用者名を登録";
+"global.enterPassword" = "パスワードを入力してください";
+"global.enterUsername" = "ユーザー名を入力してください";
+"global.cancel" = "キャンセル";
+"global.blockContact" = "連絡先をブロック";
+"global.removeAccount" = "アカウントを削除";
+"global.incomingCall" = "着信";
 "global.ok" = "わかった";
 "global.close" = "閉じる";
 "global.share" = "共有";
-"global.forward" = "Forward";
+"global.forward" = "前へ";
 "global.save" = "保存";
-"global.resend" = "Resend";
+"global.resend" = "送信する";
 "global.preview" = "プレビュー";
 "global.accept" = "受け入れ";
 "global.block" = "ブロック";
@@ -34,44 +43,43 @@
 "global.name" = "名前";
 "global.copy" = "コピー";
 "global.reply" = "返信";
+"global.search" = "検索中…";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";
-"scan.search" = "検索中…";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.searchBar" = "連絡先を探して...";
+"swarmcreation.createTheSwarm" = "群れを作れ";
+"swarmcreation.addADescription" = "記述を追加する";
+"swarmcreation.addPeople" = "群れにもっと人を加えることができます";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
-"swarm.identifier" = "Identifier";
+"swarm.ignoreSwarm" = "群れを無視する";
+"swarm.leaveConversation" = "話をやめろ";
+"swarm.chooseColor" = "色を選び";
+"swarm.typeOfSwarm" = "群れの種類";
+"swarm.identifier" = "識別子";
 "swarm.about" = "アプリについて";
 "swarm.members" = "要員";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "記述を追加する";
 "swarm.oneToOne" = "非公開の会合";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "アドミニアム招待のみ";
 "swarm.invitesOnly" = "非公開の会合";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.publicChat" = "公衆群";
+"swarm.others" = "他者";
+"swarm.member" = "メンバー";
+"swarm.invited" = "招待された";
+"swarm.admin" = "管理者";
+"swarm.banned" = "禁止";
+"swarm.unknown" = "知らない";
+"swarm.addMorePeople" = "この群れに もっと人を加えることができます";
+"swarm.addMember" = "メンバーを追加";
+"swarm.confirmLeaveSwarm" = "この群れを離れたいのか?";
+"swarm.Leave" = "出て行こう";
 // Smartlist
 "smartlist.yesterday" = "昨日";
 "smartlist.results" = "公開ディレクトリー";
 "smartlist.conversations" = "会話";
-"smartlist.searching" = "検索中...";
 "smartlist.noResults" = "検索結果はありません";
 "smartlist.noConversation" = "会話はありません";
 "smartlist.searchBarPlaceholder" = "名前を入力...";
@@ -81,10 +89,8 @@
 "smartlist.accountsTitle" = "アカウント";
 "smartlist.addAccountButton" = "+ アカウントを追加";
 "smartlist.noNumber" = "この連絡先には番号が登録されていません";
-"smartlist.selectOneNumber" = "Select one of the numbers";
+"smartlist.selectOneNumber" = "番号のうちの1つを選択";
 "smartlist.invitations" = "招待";
-"smartlist.accountSettings" = "アカウント設定";
-"smartlist.advancedSettings" = "詳細設定";
 "smartlist.aboutJami" = "Jamiについて";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "現在地の共有相手: ";
 "conversation.explanationReceivingLocationFrom" = "現在地を受信している相手: ";
 "conversation.errorSavingImage" = "画像一覧に画像を保存できませんでした";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.incomingRequest" = "会話の要請を送った";
 "conversation.requestMessage" = "こんにちは\n会話に参加しませんか？";
-"conversation.notContact" = "\%@\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.notContact" = "%@ is not in your contact list.";
+"conversation.sendRequest" = "連絡を依頼して一緒に交換できる";
+"conversation.sendRequestTitle" = "連絡を要請する";
 "conversation.synchronizationTitle" = "会話への参加が許可されました";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "会話を同期させるために %@接続を待っています.";
 
 //Invitations
 "invitations.noInvitations" = "招待はありません";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "アカウントを作成";
 "createAccount.chooseStrongPassword" = "あなたのJamiアカウントを守るために強固なパスワードを設定してください。また、このパスワードを忘れないでください。";
-"createAccount.enterNewUsernamePlaceholder" = "利用者名";
-"createAccount.newPasswordPlaceholder" = "暗証語";
 "createAccount.repeatPasswordPlaceholder" = "暗証語の再入力";
 "createAccount.passwordCharactersNumberError" = "最低6文字";
 "createAccount.passwordNotMatchingError" = "暗証語が一致しません";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "この利用者名は利用可能です";
 "createAccount.loading" = "読み込み中";
 "createAccount.waitCreateAccountTitle" = "アカウントを追加";
-"createAccount.RegisterAUsername" = "利用者名を登録";
 "createAccount.ChooseAPassword" = "アカウントを暗号化";
 "createAccount.PasswordInformation" = "アカウントを暗号化する暗証語を選んでください。アカウントが復旧できなくなりますので，暗証語は大切にお控えください。";
 "createAccount.EnableNotifications" = "通知";
@@ -149,20 +152,14 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "アカウントを関連付けています";
 "linkToAccount.linkButtonTitle" = "機器を関連付ける";
-"linkToAccount.passwordPlaceholder" = "暗証語";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "パスワードを入力してください";
 "linkToAccount.pinLabel" = "PINを入力してください";
 "linkToAccount.explanationPinMessage" = "PINコードを生成するには、使用するアカウントにログインしたデバイスのアカウント管理設定に移動します。デバイスの設定で「このアカウントに別のデバイスを紐づける」を選択します。このフォームを完了するために必要なPINを取得します。 PINは10分間のみ有効です。";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "サインイン";
-"linkToAccountManager.passwordPlaceholder" = "パスワード";
-"linkToAccountManager.passwordLabel" = "パスワードを入力してください";
-"linkToAccountManager.usernamePlaceholder" = "ユーザー名";
-"linkToAccountManager.usernameLabel" = "ユーザー名を入力してください";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMSのURL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "JAMS URL を入力する";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "アカウントが見つかりません";
@@ -174,42 +171,39 @@
 "alerts.accountDefaultErrorMessage" = "アカウントを作成できませんでした。";
 "alerts.profileTakePhoto" = "撮影";
 "alerts.profileUploadPhoto" = "写真のアップロード";
-"alerts.profileCancelPhoto" = "キャンセル";
 "alerts.accountLinkedTitle" = "アカウントをリンクしています";
 "alerts.dbFailedTitle" = "Jami起動中にエラーが発生しました";
 "alerts.dbFailedMessage" = "アプリケーションを終了し、起動し直してください";
 "alerts.confirmBlockContact" = "本当にこの連絡先をブロックしますか？ブロックするとこの連絡先との会話履歴が永久に削除されます。";
-"alerts.confirmBlockContactTitle" = "連絡先をブロック";
 "alerts.confirmDeleteConversation" = "この会話を完全に削除してもよろしいですか？";
 "alerts.confirmDeleteConversationFromContact" = "本当にこの連絡先との会話履歴を削除しても良いですか？";
 "alerts.confirmDeleteConversationTitle" = "会話を消去";
-"alerts.confirmClearConversation" = "Are you sure you want to clear the conversation with this contact?";
+"alerts.confirmClearConversation" = "この連絡先で 話を片付けたいか?";
 "alerts.confirmClearConversationTitle" = "会話履歴を削除";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
+"alerts.noMediaPermissionsTitle" = "メディア許可が認められていない";
+"alerts.noLibraryPermissionsTitle" = "フォトライブラリへのアクセスが許可されていない";
+"alerts.noLocationPermissionsTitle" = "場所へのアクセスが認められていない";
 "alerts.errorWrongCredentials" = "ご指定のアカウント管理機能に接続できません。資格情報をご確認ください。";
 "alerts.recordVideoMessage" = "ビデオメッセージを録画";
 "alerts.recordAudioMessage" = "音声メッセージを録音";
 "alerts.uploadFile" = "ファイルをアップロード";
-"alerts.uploadPhoto" = "Upload photo or movie";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
+"alerts.uploadPhoto" = "写真をアップロードする";
+"alerts.locationServiceIsDisabled" = "\"Jami\"があなたの位置を決定できるように\"位置サービス\"をオンにします.";
+"alerts.locationSharing" = "私の位置をシェア";
 "alerts.alreadylocationSharing" = "このユーザーと既に位置情報を共有済みです";
 "alerts.locationSharingDurationTitle" = "いつまで位置情報を共有しますか？";
 "alerts.locationSharingDuration10min" = "10分";
 "alerts.locationSharingDuration1hour" = "1時間";
 "alerts.mapInformation" = "地図情報";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.openStreetMapCopyright" = "© OpenStreetMapの貢献者";
 "alerts.openStreetMapCopyrightMoreInfo" = "詳細情報";
 
 //Actions
 "actions.deleteAction" = "削除";
-"actions.cancelAction" = "キャンセル";
 "actions.clearAction" = "クリア";
 "actions.backAction" = "戻る";
 "actions.doneAction" = "完了";
-"alerts.incomingCallAllertTitle" = "Incoming call from ";
+"alerts.incomingCallAllertTitle" = "からの電話";
 "alerts.incomingCallButtonIgnore" = "無視";
 "actions.startAudioCall" = "  音声通話";
 "actions.startVideoCall" = "  ビデオ通話";
@@ -218,38 +212,32 @@
 
 //Calls
 "calls.callItemTitle" = "通話";
-"calls.unknown" = "不明";
-"calls.incomingCallInfo" = "wants to talk to you";
-"calls.ringing" = "Ringing…";
+"calls.incomingCallInfo" = "あなたと話したい";
+"calls.ringing" = "鳴ってる";
 "calls.connecting" = "接続中…";
-"calls.searching" = "検索中…";
-"calls.callFinished" = "Call finished";
-"calls.currentCallWith" = "Call with ";
+"calls.callFinished" = "呼び出し終了";
+"calls.currentCallWith" = "連絡する";
 "calls.haghUp" = "通話終了";
 "calls.maximize" = "最大";
 "calls.minimize" = "最小";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
+"calls.setModerator" = "設定モデレーター";
+"calls.removeModerator" = "設定を解除するモデレーター";
 "calls.muteAudio" = "ミュート";
 "calls.unmuteAudio" = "ミュート解除";
-"calls.lowerHand" = "lower hand";
+"calls.lowerHand" = "下手";
 
 //Account Page
 "accountPage.devicesListHeader" = "デバイス";
 "accountPage.settingsHeader" = "設定";
-"accountPage.username" = "ユーザー名";
-"accountPage.usernameNotRegistered" = "username: not registered";
+"accountPage.usernameNotRegistered" = "ユーザー名:登録されていない";
 "accountPage.credentialsHeader" = "アカウント詳細";
-"accountPage.enableProxy" = "プロキシを有効にする";
 "accountPage.blockedContacts" = "着信拒否した連絡先";
 "accountPage.unblockContact" = "ブロック解除";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "プロキシを有効にする";
+"accountPage.proxyAddressAlert" = "代理アドレスを入力する";
 "accountPage.noProxyExplanationLabel" = "お使いの端末のプロキシを無効にすると通知が受取れません";
-"accountPage.saveProxyAddress" = "保存";
 "accountPage.proxyPaceholder" = "プロキシアドレス";
 "accountPage.enableNotifications" = "通知を有効化";
-"accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
+"accountPage.proxyDisabledAlertTitle" = "プロキシサーバーが無効";
 "accountPage.proxyDisabledAlertBody" = "通知を有効にするため、プロキシを有効にしてください。";
 "accountPage.revokeDeviceTitle" = "デバイスを取り消し";
 "accountPage.revokeDeviceMessage" = "本当にこの端末を無効にしますか？この操作は取り消せません。";
@@ -264,35 +252,33 @@
 "accountPage.deviceRevocationError" = "端末無効化エラー";
 "accountPage.linkDeviceTitle" = "別のデバイスをリンク";
 "accountPage.other" = "その他";
-"accountPage.removeAccountTitle" = "アカウントを削除";
-"accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"accountPage.removeAccountMessage" = "\"削除\"をクリックすると,このデバイス上のアカウントを削除します!このアクションは無効にできません.また,登録された名前も失われる可能性があります.";
 "accountPage.removeAccountButton" = "削除";
-"accountPage.shareAccountDetails" = "Share Account Details";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "ユーザー名を登録";
+"accountPage.shareAccountDetails" = "共有アカウント詳細";
+"accountPage.contactMeOnJamiTitle" = "ジャミに連絡する!";
+"accountPage.contactMeOnJamiContant" = "広報プラットフォームの\"%s\"を使用して私に連絡してください: https://jami.net";
 "accountPage.passwordPlaceholder" = "アカウントのパスワードを入力";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernamePlaceholder" = "必要なユーザー名を入力する";
+"accountPage.registerNameErrorMessage" = "選択したユーザー名は表示されていません";
+"accountPage.usernameRegistering" = "登録";
 "accountPage.usernameRegisterAction" = "登録";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.usernameRegistrationFailed" = "登録失敗.パスワードを確認してください.";
+"accountPage.createPassword" = "パスワードを作成する";
 "accountPage.changePassword" = "パスワードを変更";
 "accountPage.oldPasswordPlaceholder" = "現在のパスワードを入力";
 "accountPage.newPasswordPlaceholder" = "新しいパスワードを入力";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.newPasswordConfirmPlaceholder" = "新しいパスワードを確認する";
+"accountPage.changePasswordError" = "パスワードが間違っています";
+"accountPage.enableBoothMode" = "ブースモードを有効にする";
+"accountPage.disableBoothMode" = "ブースモードを無効にする";
+"accountPage.disableBoothModeExplanation" = "口座パスワードを入力してください";
+"accountPage.boothModeExplanation" = "ブルースモードでは会話履歴が保存されず,Jami機能は出かけ通話によって制限されます.ブルースモードを有効にすると,すべての会話が削除されます.";
+"accountPage.noBoothMode" = "起動するには,まずアカウントパスワードを作成する必要があります.";
+"accountPage.boothModeAlertMessage" = "スタンドモードを有効にした後,すべての会話が削除されます.";
 "accountPage.peerDiscovery" = "局所通信網に自動的に接続";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "期限切れ後自動登録";
 "accountPage.connectivityHeader" = "接続性";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "ターンを有効にする";
 "accountPage.turnServer" = "TURNアドレス";
 "accountPage.turnUsername" = "TURNの利用者名";
 "accountPage.turnPassword" = "TURNの暗証語";
@@ -300,23 +286,20 @@
 
 //Account
 "account.sipUsername" = "ユーザー名";
-"account.sipPassword" = "パスワード";
 "account.sipServer" = "SIPサーバー";
 "account.port" = "ポート番号";
 "account.proxyServer" = "プロキシ";
-"account.createSipAccount" = "Create a SIP Account";
-"account.usernameLabel" = "ユーザー名を入力してください";
-"account.passwordLabel" = "パスワードを入力してください";
-"account.serverLabel" = "Enter Address";
-"account.portLabel" = "Enter Port Number";
-"account.accountStatus" = "Account Status";
+"account.createSipAccount" = "SIP アカウントを作成する";
+"account.serverLabel" = "アドレス入力";
+"account.portLabel" = "ポート番号を入力する";
+"account.accountStatus" = "口座の状態";
 "account.enableAccount" = "アカウントを有効化";
 "account.statusOnline" = "オンライン";
 "account.statusOffline" = "オフライン";
 "account.statusConnecting" = "接続中";
 "account.statusUnknown" = "不明";
-"account.statusConnectionerror" = "Connection Error";
-"account.needMigration" = "account need to be migrated";
+"account.statusConnectionerror" = "接続エラー";
+"account.needMigration" = "口座を移動する必要がある";
 "account.me" = "自分";
 
 //Block List Page
@@ -327,88 +310,75 @@
 "linkDevice.passwordError" = "入力したパスワードではこのアカウントのロックを解除できません";
 "linkDevice.networkError" = "エクスポート中にネットワークエラーが発生しました";
 "linkDevice.defaultError" = "エクスポート中にエラーが発生しました";
-"linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
+"linkDevice.explanationMessage" = "プロセスは完了するには,新しいデバイスでJamiを開いて\",このデバイスをアカウントにリンクする\"オプションを選択する必要があります. あなたのピンは10分間有効です";
 "linkDevice.hudMessage" = "検証中";
 
 //Contact Page
 "contactPage.startAudioCall" = "音声通話を開始";
 "contactPage.startVideoCall" = "ビデオ通話を開始";
 "contactPage.sendMessage" = "メッセージを送信";
-"contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "連絡先をブロック";
+"contactPage.clearConversation" = "オープンチャット";
 "contactPage.removeConversation" = "会話を削除";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "初期化中…";
 "dataTransfer.readableStatusError" = "エラー";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
+"dataTransfer.readableStatusAwaiting" = "待ってる";
 "dataTransfer.readableStatusOngoing" = "転送中";
 "dataTransfer.readableStatusCanceled" = "キャンセルしました";
-"dataTransfer.sendingFailed" = "Failed to send";
+"dataTransfer.sendingFailed" = "送信できませんでした";
 "dataTransfer.readableStatusSuccess" = "完了";
-"dataTransfer.readableStatusCancel" = "キャンセル";
 
 //Notifications
-"notifications.incomingCall" = "着信";
-"notifications.missedCall" = "Missed Call";
+"notifications.missedCall" = "欠電話";
 "notifications.newFile" = "新しいファイル";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusOngoing" = "転送中";
-"dataTransfer.readableStatusCanceled" = "キャンセルしました";
-"dataTransfer.readableStatusSuccess" = "完了";
-"dataTransfer.readableStatusCancel" = "キャンセル";
-"dataTransfer.infoMessage" = "Press to start recording";
+"notifications.locationSharingStarted" = "位置共有開始";
+"notifications.locationSharingStopped" = "到着する場所共有停止";
+"dataTransfer.readableStatusRefuse" = "拒否";
+"dataTransfer.readableStatusAccept" = "受け入れ";
+"dataTransfer.infoMessage" = "記録を開始するには押す";
 "dataTransfer.sendMessage" = "送信";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
-"generatedMessage.swarmCreated" = "Swarm created";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.contactAdded" = "免許を受け取りました";
+"generatedMessage.swarmCreated" = "群れが生まれました";
+"generatedMessage.invitationReceived" = "加入するよう招待されました";
+"generatedMessage.invitationAccepted" = "話を参加した";
+"generatedMessage.youJoined" = "話を聞いてくれた";
+"generatedMessage.contactBanned" = "蹴られた";
+"generatedMessage.contactReAdded" = "追加されました";
 "generatedMessage.outgoingCall" = "発信";
-"generatedMessage.incomingCall" = "着信";
 "generatedMessage.missedOutgoingCall" = "不在発信";
 "generatedMessage.missedIncomingCall" = "不在着信";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.liveLocationSharing" = "リアルタイムでの位置共有";
+"generatedMessage.contactLeftConversation" = "左";
 
 //General Settings
-"generalSettings.title" = "詳細設定";
-"generalSettings.videoSettings" = "Video Settings";
-"generalSettings.videoAcceleration" = "Enable video acceleration";
+"generalSettings.videoSettings" = "ビデオ設定";
+"generalSettings.videoAcceleration" = "ビデオ加速を有効にする";
 "generalSettings.fileTransfer" = "ファイル転送";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "場所 分享";
 "generalSettings.automaticAcceptIncomingFiles" = "ファイルの受信を自動的に許可";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.acceptTransferLimit" = "譲渡制限を承認する";
+"generalSettings.acceptTransferLimitDescription" = "(MBで0 =無限)";
+"generalSettings.limitLocationSharingDuration" = "場所共有の期間を制限する";
+"generalSettings.locationSharingDuration" = "ポジションシェア期間";
 
 
 //Log View
 "logView.title" = "診断";
 "logView.description" = "診断記録設定を開く";
 "logView.startLogging" = "記録を開始する";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "伐採をやめ";
+"logView.saveError" = "ファイル保存に失敗";
+"logView.shareError" = "ファイル共有に失敗";
 
 //Migrate Account
 "migrateAccount.title" = "アカウントの移行";
 "migrateAccount.migrateButton" = "アカウントを移行";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "パスワードを入力してください";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "アカウントを削除";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "キャンセル";
+"migrateAccount.explanation" = "このアカウントは移行する必要があります";
+"migrateAccount.passwordExplanation" = "移行を進めるとき,このアカウントに使用されたパスワードを入力する必要があります";
+"migrateAccount.error" = "アカウントを移行できなかった. また試すか削除することもできます.";
+"migrateAccount.migrating" = "移住する";
 "migrateAccount.migrateAnother" = "別のアカウントに移行";
-
-

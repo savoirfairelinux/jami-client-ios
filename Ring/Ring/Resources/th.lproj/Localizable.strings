@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "บทสนทนา";
-"global.meTabBarTitle" = "การตั้งค่าบัญชี";
+"global.accountSettings" = "การตั้งค่าบัญชี";
+"global.advancedSettings" = "การตั้งค่าที่ทันสมัย";
+"global.username" = "ชื่อผู้ใช้";
+"global.password" = "รหัสผ่าน";
+"global.registerAUsername" = "จดชื่อผู้ใช้";
+"global.enterPassword" = "ใส่รหัสผ่าน";
+"global.enterUsername" = "กรอก Username";
+"global.cancel" = "ยกเลิก";
+"global.blockContact" = "คอนตาคเตอร์";
+"global.removeAccount" = "ยกบัญชี";
+"global.incomingCall" = "สายเรียกเข้า";
 "global.ok" = "ตกลง";
 "global.close" = "ใกล้";
 "global.share" = "แบ่งปัน";
@@ -34,10 +43,10 @@
 "global.name" = "ชื่อ";
 "global.copy" = "สำเนา";
 "global.reply" = "ตอบกลับ";
+"global.search" = "ค้นหา...";
 
 // Scan
 "scan.badQrCode" = "รหัส QR ที่ไม่ดี";
-"scan.search" = "ค้นหา...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "ค้นหาการติดต่อ...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "เมื่อวาน";
 "smartlist.results" = "คู่มือสาธารณะ";
 "smartlist.conversations" = "บทสนทนา";
-"smartlist.searching" = "กำลังค้นหา...";
 "smartlist.noResults" = "ไม่มีผลลัพธ์";
 "smartlist.noConversation" = "ไม่มีการพูดคุย";
 "smartlist.searchBarPlaceholder" = "ใส่ชื่อ...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "สมาชิกที่เลือกไม่มีหมายเลข";
 "smartlist.selectOneNumber" = "เลือกเลขหนึ่ง";
 "smartlist.invitations" = "คำเชิญ";
-"smartlist.accountSettings" = "การตั้งค่าบัญชี";
-"smartlist.advancedSettings" = "การตั้งค่าที่ทันสมัย";
 "smartlist.aboutJami" = "เกี่ยวกับ Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "คุณกําลังแบ่งปันสถานที่ของคุณกับ ";
 "conversation.explanationReceivingLocationFrom" = "คุณกําลังรับข้อมูลที่ตั้งสดจาก ";
 "conversation.errorSavingImage" = "ไม่สามารถบันทึกภาพไปยังห้องแสดงภาพ";
-"conversation.receivedRequest" = "\%@\ \ ส่งคําขอให้คุย";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "ส่งคําขอให้คุยกัน";
 "conversation.requestMessage" = "สวัสดีครับ คุณอยากเข้าร่วมการพูดคุยกันไหม";
-"conversation.notContact" = "\%@\ ไม่อยู่ในรายการติดต่อของคุณ";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "ส่งคําขอติดต่อให้เขา/เธอ เพื่อสามารถแลกเปลี่ยนด้วยกัน";
 "conversation.sendRequestTitle" = "ส่ง คํา สนใจ";
 "conversation.synchronizationTitle" = "คุณยอมรับคําขอคุย";
-"conversation.synchronizationMessage" = "เรากําลังรอ \%@\ เชื่อมต่อเพื่อสอดคล้องการพูดคุย";
+"conversation.synchronizationMessage" = "เรากําลังรอการเชื่อมต่อ %@ เพื่อสอดคล้องการพูดคุย";
 
 //Invitations
 "invitations.noInvitations" = "ไม่มีการเชิญ";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "สร้างบัญชีของคุณ";
 "createAccount.chooseStrongPassword" = "เลือกรหัสผ่านที่แข็งแกร่งที่คุณจะจําไว้ เพื่อปกป้องบัญชี Jami ของคุณ";
-"createAccount.enterNewUsernamePlaceholder" = "ชื่อผู้ใช้";
-"createAccount.newPasswordPlaceholder" = "รหัสผ่าน";
 "createAccount.repeatPasswordPlaceholder" = "ยืนยันปัสริด";
 "createAccount.passwordCharactersNumberError" = "ขั้นต่ำ 6 ตัวอักษร";
 "createAccount.passwordNotMatchingError" = "รหัสผ่านไม่ตรงกัน";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "ชื่อผู้ใช้ได้";
 "createAccount.loading" = "กำลังโหลด";
 "createAccount.waitCreateAccountTitle" = "กำลังเพิ่มบัญชี";
-"createAccount.RegisterAUsername" = "จดชื่อผู้ใช้";
 "createAccount.ChooseAPassword" = "เคล็ดลับบัญชีของฉัน";
 "createAccount.PasswordInformation" = "เลือกรหัสผ่านเพื่อรหัสบัญชีส่วนตัวของคุณ อย่าลืมมัน หรือคุณจะไม่สามารถฟื้นฟูบัญชีของคุณได้";
 "createAccount.EnableNotifications" = "การแจ้งเตือน";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "การเชื่อมโยงบัญชี";
 "linkToAccount.linkButtonTitle" = "เชื่อมโยงอุปกรณ์";
-"linkToAccount.passwordPlaceholder" = "รหัสผ่าน";
 "linkToAccount.pinPlaceholder" = "ปักหมุด";
-"linkToAccount.passwordLabel" = "ใส่รหัสผ่าน";
 "linkToAccount.pinLabel" = "ป้อน PIN";
 "linkToAccount.explanationPinMessage" = "หากต้องการสร้างรหัส PIN ให้ไปที่การตั้งค่าการจัดการบัญชีในอุปกรณ์ที่มีบัญชีที่คุณต้องการใช้ ในการตั้งค่าอุปกรณ์ เลือก \"เชื่อมโยงอุปกรณ์อื่นกับบัญชีนี้\" คุณจะได้รับ PIN ที่จำเป็นในการกรอกแบบฟอร์มนี้ PIN นี้ใช้ได้เพียง 10 นาทีเท่านั้น";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "สมัครสมาชิก";
-"linkToAccountManager.passwordPlaceholder" = "รหัสผ่าน";
-"linkToAccountManager.passwordLabel" = "ใส่รหัสผ่าน";
-"linkToAccountManager.usernamePlaceholder" = "ชื่อผู้ใช้";
-"linkToAccountManager.usernameLabel" = "กรอก Username";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "กรอก URL JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "ไม่สามารถสร้างบัญชีได้";
 "alerts.profileTakePhoto" = "ถ่ายภาพ";
 "alerts.profileUploadPhoto" = "อัพโหลดรูปภาพ";
-"alerts.profileCancelPhoto" = "ยกเลิก";
 "alerts.accountLinkedTitle" = "เชื่อมโยงบัญชี";
 "alerts.dbFailedTitle" = "เกิดความผิดพลาดตอนเปิดตัว Jami";
 "alerts.dbFailedMessage" = "โปรดปิดแอปพลิเคชันแล้วลองเปิดใหม่อีกครั้ง";
 "alerts.confirmBlockContact" = "คุณแน่ใจนะว่า คุณต้องการปิดการติดต่อนี้? ประวัติการพูดคุยกับการติดต่อนี้จะถูกลบไปอย่างถาวร";
-"alerts.confirmBlockContactTitle" = "คอนตาคเตอร์";
 "alerts.confirmDeleteConversation" = "คุณแน่ใจนะว่า คุณต้องการลบการพูดคุยนี้ได้ตลอดไป";
 "alerts.confirmDeleteConversationFromContact" = "คุณแน่ใจนะว่าอยากลบการพูดคุยกับผู้ติดต่อนี้";
 "alerts.confirmDeleteConversationTitle" = "กดการพูดคุย";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "ลบ";
-"actions.cancelAction" = "ยกเลิก";
 "actions.clearAction" = "ชัดเจน";
 "actions.backAction" = "กลับ";
 "actions.doneAction" = "ทําแล้ว";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "โทร";
-"calls.unknown" = "ไม่ทราบ";
 "calls.incomingCallInfo" = "อยากคุยกับเธอ";
 "calls.ringing" = "เสียงร้อง";
 "calls.connecting" = "การเชื่อมต่อ...";
-"calls.searching" = "ค้นหา...";
 "calls.callFinished" = "โทรศัพท์เสร็จ";
 "calls.currentCallWith" = "โทรมา ";
 "calls.haghUp" = "หยุด";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "อุปกรณ์";
 "accountPage.settingsHeader" = "การตั้งค่า";
-"accountPage.username" = "ชื่อผู้ใช้";
 "accountPage.usernameNotRegistered" = "ชื่อผู้ใช้: ไม่ลงทะเบียน";
 "accountPage.credentialsHeader" = "รายละเอียดบัญชี";
-"accountPage.enableProxy" = "เปิดตัวแทน";
 "accountPage.blockedContacts" = "ผู้ติดต่อที่ถูกบล็อก";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "ให้ที่อยู่ตัวแทน";
-"accountPage.enableProxy" = "เปิดตัวแทน";
 "accountPage.noProxyExplanationLabel" = "อุปกรณ์ของคุณจะไม่รับแจ้งเมื่อ proxy ถูกปิด";
-"accountPage.saveProxyAddress" = "เก็บ";
 "accountPage.proxyPaceholder" = "ที่อยู่ตัวแทน";
 "accountPage.enableNotifications" = "เปิดรับแจ้ง";
 "accountPage.proxyDisabledAlertTitle" = "พรอক্ซี่เซอร์เวอร์ปิด";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "ความผิดพลาดในการยกเลิกอุปกรณ์";
 "accountPage.linkDeviceTitle" = "เชื่อมต่ออุปกรณ์อื่น";
 "accountPage.other" = "อื่นๆ";
-"accountPage.removeAccountTitle" = "ยกบัญชี";
 "accountPage.removeAccountMessage" = "โดยการคลิก \"ลบ\" คุณจะลบบัญชีนี้บนอุปกรณ์นี้! การกระทํานี้ไม่สามารถถอนได้ นอกจากนี้ชื่อที่ลงทะเบียนของคุณก็สามารถหายไปได้";
 "accountPage.removeAccountButton" = "ยกออก";
 "accountPage.shareAccountDetails" = "รายละเอียดบัญชีส่วนร่วม";
 "accountPage.contactMeOnJamiTitle" = "ติดต่อฉันใน Jami!";
 "accountPage.contactMeOnJamiContant" = "ติดต่อฉันโดยใช้ \"%s\" บนโครงการสื่อสารกระจายของ Jami: https://jami.net";
-"accountPage.registerNameTitle" = "จดชื่อผู้ใช้";
 "accountPage.passwordPlaceholder" = "กรอกรหัสผ่านบัญชี";
 "accountPage.usernamePlaceholder" = "กรอกชื่อผู้ใช้ที่ต้องการ";
 "accountPage.registerNameErrorMessage" = "ชื่อผู้ใช้ที่เลือกไม่ได้";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "ชื่อผู้ใช้งาน";
-"account.sipPassword" = "รหัสผ่าน";
 "account.sipServer" = "SIP Server";
 "account.port" = "พอร์ต";
 "account.proxyServer" = "พอร์กส";
 "account.createSipAccount" = "สร้างบัญชี SIP";
-"account.usernameLabel" = "กรอก Username";
-"account.passwordLabel" = "ใส่รหัสผ่าน";
 "account.serverLabel" = "กรอกที่อยู่";
 "account.portLabel" = "กรอกหมายเลขท่าเรือ";
 "account.accountStatus" = "สถานการณ์บัญชี";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "เริ่มการโทรวีดีโอ";
 "contactPage.sendMessage" = "ส่ง ข้อความ";
 "contactPage.clearConversation" = "ส่งจอ";
-"contactPage.blockContact" = "คอนตาคเตอร์";
 "contactPage.removeConversation" = "ถอด การ สัมภาษณ์";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "ยกเลิกแล้ว";
 "dataTransfer.sendingFailed" = "ไม่ส่ง";
 "dataTransfer.readableStatusSuccess" = "เสร็จ";
-"dataTransfer.readableStatusCancel" = "ยกเลิก";
 
 //Notifications
-"notifications.incomingCall" = "การเรียกที่เข้ามา";
 "notifications.missedCall" = "โทรศัพท์ที่พลาด";
 "notifications.newFile" = "ไฟล์ใหม่";
 "notifications.locationSharingStarted" = "การแบ่งปันสถานที่ที่เข้ามาเริ่ม";
 "notifications.locationSharingStopped" = "การแบ่งปันสถานที่ที่เข้าหยุด";
-"dataTransfer.readableStatusAwaiting" = "รออยู่";
-"dataTransfer.readableStatusOngoing" = "การโอน";
-"dataTransfer.readableStatusCanceled" = "ยกเลิกแล้ว";
-"dataTransfer.readableStatusSuccess" = "เสร็จ";
-"dataTransfer.readableStatusCancel" = "ยกเลิก";
+"dataTransfer.readableStatusRefuse" = "ปฏิเสธ";
+"dataTransfer.readableStatusAccept" = "ยอมรับ";
 "dataTransfer.infoMessage" = "กดเพื่อเริ่มบันทึก";
 "dataTransfer.sendMessage" = "ส่ง";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "ถูกเตะ";
 "generatedMessage.contactReAdded" = "ได้เพิ่มขึ้นใหม่";
 "generatedMessage.outgoingCall" = "โทรออก";
-"generatedMessage.incomingCall" = "สายเรียกเข้า";
 "generatedMessage.missedOutgoingCall" = "สายที่ไม่ได้รับ";
 "generatedMessage.missedIncomingCall" = "สายเรียกเข้าที่ไม่ได้รับ";
 "generatedMessage.liveLocationSharing" = "การแบ่งปันสถานที่สด";
 "generatedMessage.contactLeftConversation" = "ซ้าย";
 
 //General Settings
-"generalSettings.title" = "ตั้งค่าขั้นสูง";
 "generalSettings.videoSettings" = "การตั้งค่าวีดีโอ";
 "generalSettings.videoAcceleration" = "เปิดให้การเร่งวิดีโอ";
 "generalSettings.fileTransfer" = "การถ่ายโอนไฟล์";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "การย้ายบัญชี";
 "migrateAccount.migrateButton" = "บัญชีการย้าย";
 "migrateAccount.explanation" = "บัญชีนี้ต้องถูกย้าย";
-"migrateAccount.passwordPlaceholder" = "ใส่รหัสผ่าน";
 "migrateAccount.passwordExplanation" = "เพื่อดําเนินการย้ายไปยังประเทศอื่นๆ คุณต้องใส่รหัสผ่านที่ใช้สําหรับบัญชีนี้";
-"migrateAccount.removeAccount" = "ยกบัญชี";
 "migrateAccount.error" = "ไม่สามารถย้ายบัญชีของคุณได้ คุณสามารถพยายามอีกครั้งหรือลบบัญชีของคุณ";
 "migrateAccount.migrating" = "การย้ายไป...";
-"migrateAccount.cancel" = "ยกเลิก";
 "migrateAccount.migrateAnother" = "ขยับบัญชีใหม่";
-
-

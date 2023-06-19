@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "محادثات";
-"global.meTabBarTitle" = "إعدادت الحساب";
+"global.accountSettings" = "إعدادت الحساب";
+"global.advancedSettings" = "إعدادات متقدمة";
+"global.username" = "اسم المستخدم";
+"global.password" = "كلمة السر";
+"global.registerAUsername" = "تسجيل اسم المستخدم";
+"global.enterPassword" = "أدخِل كلمة المرور";
+"global.enterUsername" = "إدخال اسم المستخدم";
+"global.cancel" = "ألغِ";
+"global.blockContact" = "إغلاق الاتصال";
+"global.removeAccount" = "إزالة الحساب";
+"global.incomingCall" = "مكالمة واردة";
 "global.ok" = "موافق";
 "global.close" = "إغلاق";
 "global.share" = "مشاركة";
@@ -34,10 +43,10 @@
 "global.name" = "إسم";
 "global.copy" = "نسخ";
 "global.reply" = "رد";
+"global.search" = "يتم البحث...";
 
 // Scan
 "scan.badQrCode" = "رمز QR غير صالح";
-"scan.search" = "يتم البحث...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "البحث عن الاتصال...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "البارحة";
 "smartlist.results" = "الإرشاد العام";
 "smartlist.conversations" = "محادثات";
-"smartlist.searching" = "جاري البحث...";
 "smartlist.noResults" = "لا يوجد نتائج";
 "smartlist.noConversation" = "لا يوجد محادثات";
 "smartlist.searchBarPlaceholder" = "ادخال اسم...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "لا تحتوى جهة الاتصال المحددة على أى رقم";
 "smartlist.selectOneNumber" = "حدد أحد الأرقام";
 "smartlist.invitations" = "الدعوات";
-"smartlist.accountSettings" = "إعدادت الحساب";
-"smartlist.advancedSettings" = "إعدادات متقدمة";
 "smartlist.aboutJami" = "حول جامي";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "أنت تشارك موقعك حاليًا مع";
 "conversation.explanationReceivingLocationFrom" = "أنت تتلقى حاليًا موقعًا مباشرًا من";
 "conversation.errorSavingImage" = "فشلت في حفظ الصورة إلى المعرض";
-"conversation.receivedRequest" = "\%@\ أرسل لك طلب للحديث.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "أرسلت لك طلباً للحديث";
 "conversation.requestMessage" = "مرحباً، هل تودين الانضمام إلى المحادثة؟";
-"conversation.notContact" = "\%@\ ليس في قائمة الاتصالات الخاصة بك.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "إرسال طلب اتصال له لكي يتمكنوا من التبادل معاً";
 "conversation.sendRequestTitle" = "أرسل طلب الاتصال";
 "conversation.synchronizationTitle" = "لقد قبلت طلب المحادثة";
-"conversation.synchronizationMessage" = "نحن ننتظر \%@\ الاتصالات لمزامنة المحادثة.";
+"conversation.synchronizationMessage" = "نحن ننتظر %@ الاتصالات لنزامن المحادثة.";
 
 //Invitations
 "invitations.noInvitations" = "لم تــرد أي دعوة";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "أنشئ حسابك";
 "createAccount.chooseStrongPassword" = "اختر كلمة مرور قوية ستذكرها لحماية حساب جامي";
-"createAccount.enterNewUsernamePlaceholder" = "اسم المستخدم";
-"createAccount.newPasswordPlaceholder" = "كلمة السر";
 "createAccount.repeatPasswordPlaceholder" = "تأكيد كلمة المرور";
 "createAccount.passwordCharactersNumberError" = "6 محارف على الأقل";
 "createAccount.passwordNotMatchingError" = "كلمات المرور غير متطابقة";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "اسم المستخدم متاح";
 "createAccount.loading" = "جاري التحميل";
 "createAccount.waitCreateAccountTitle" = "في طور إضافة حساب";
-"createAccount.RegisterAUsername" = "تسجيل اسم المستخدم";
 "createAccount.ChooseAPassword" = "تشفير حسابي";
 "createAccount.PasswordInformation" = "اختر كلمة مرور لتشفير حسابك المحلي. لا تنسها وإلا لن تكون قادرًا على استعادة حسابك";
 "createAccount.EnableNotifications" = "الإشعارات";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ربط الحساب";
 "linkToAccount.linkButtonTitle" = "اربط جهاز";
-"linkToAccount.passwordPlaceholder" = "كلمة السر";
 "linkToAccount.pinPlaceholder" = "رمز الأمان";
-"linkToAccount.passwordLabel" = "أدخِل كلمة المرور";
 "linkToAccount.pinLabel" = "أدخِل رمز الأمان";
 "linkToAccount.explanationPinMessage" = "لتوليد رمز الأمان اذهب إلى إعدادات إدارة الحساب في الجهاز الذي يحتوي على الحساب الذي تريد استخدامه. في إعدادات الجهاز اختر \"ربط جهاز آخر مع هذا الحساب\". ستحصل عل رمز الأمان اللازم لإكمال العملية. تنتهي صلاحية رمز الأمان بعد 10 دقائق فقط.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "تسجيل الدخول";
-"linkToAccountManager.passwordPlaceholder" = "كلمة السر";
-"linkToAccountManager.passwordLabel" = "أدخِل كلمة المرور";
-"linkToAccountManager.usernamePlaceholder" = "اسم المستخدم";
-"linkToAccountManager.usernameLabel" = "إدخال اسم المستخدم";
 "linkToAccountManager.accountManagerPlaceholder" = "عنوان JAMS";
 "linkToAccountManager.accountManagerLabel" = "أدخل عنوان JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "لا يمكن إنشاء الحساب";
 "alerts.profileTakePhoto" = "التقاط صورة";
 "alerts.profileUploadPhoto" = "تحميل صورة";
-"alerts.profileCancelPhoto" = "ألغِ";
 "alerts.accountLinkedTitle" = "جاري ربط الحساب";
 "alerts.dbFailedTitle" = "حدث خطأ عند إطلاق (جامي)";
 "alerts.dbFailedMessage" = "الرجاء إغلاق التطبيق ومحاولة فتحه مرة ثانية";
 "alerts.confirmBlockContact" = "هل أنت متأكد أنك تريد حظر هذا الاتصال؟ سيقوم حذف تاريخ المحادثة مع هذا الاتصال بشكل دائم.";
-"alerts.confirmBlockContactTitle" = "إغلاق الاتصال";
 "alerts.confirmDeleteConversation" = "هل أنت متأكد أنك تريد حذف هذه المحادثة بشكل دائم؟";
 "alerts.confirmDeleteConversationFromContact" = "هل أنت متأكد أنك تريد حذف المحادثة مع هذا الاتصال؟";
 "alerts.confirmDeleteConversationTitle" = "إزالة المحادثة";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "إحذف";
-"actions.cancelAction" = "ألغِ";
 "actions.clearAction" = "واضح";
 "actions.backAction" = "السابق";
 "actions.doneAction" = "منجز";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "مكالمة";
-"calls.unknown" = "مجهول";
 "calls.incomingCallInfo" = "يريد التحدث معك";
 "calls.ringing" = "... يرن";
 "calls.connecting" = "اتصال جاري...";
-"calls.searching" = "يتم البحث...";
 "calls.callFinished" = "المكالمة انتهت";
 "calls.currentCallWith" = "اتصل بـ";
 "calls.haghUp" = "إرفع";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "الأجهزة";
 "accountPage.settingsHeader" = "إعدادات";
-"accountPage.username" = "اسم المستخدم";
 "accountPage.usernameNotRegistered" = "اسم المستخدم: غير مسجل";
 "accountPage.credentialsHeader" = "تفاصيل الحساب";
-"accountPage.enableProxy" = "تمكين الوكيل";
 "accountPage.blockedContacts" = "جهات إتصال محظورة";
 "accountPage.unblockContact" = "لا يُغلق";
 "accountPage.proxyAddressAlert" = "إعطاء عنوان النظام الأساسي";
-"accountPage.enableProxy" = "تمكين الوكيل";
 "accountPage.noProxyExplanationLabel" = "جهازك لن يتلقى إشعارات عندما يتم تعطيل النظام الأولي";
-"accountPage.saveProxyAddress" = "سجل";
 "accountPage.proxyPaceholder" = "عنوان النظام الأساسي";
 "accountPage.enableNotifications" = "فعل الإخطارات";
 "accountPage.proxyDisabledAlertTitle" = "محطم خادم النظام الأساسي";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "خطأ إلغاء الجهاز";
 "accountPage.linkDeviceTitle" = "اربط جهازاً آخر";
 "accountPage.other" = "آخر";
-"accountPage.removeAccountTitle" = "إزالة الحساب";
 "accountPage.removeAccountMessage" = "من خلال النقر على \"إزالة\" سوف تقوم بإزالة هذا الحساب على هذا الجهاز! لا يمكن إلغاء هذا الإجراء. أيضاً، يمكن أن يفقد اسمك المسجل.";
 "accountPage.removeAccountButton" = "احذف";
 "accountPage.shareAccountDetails" = "تفاصيل الحساب";
 "accountPage.contactMeOnJamiTitle" = "اتصل بي عن (جامي)!";
 "accountPage.contactMeOnJamiContant" = "اتصل بي باستخدام \"%s\" على منصة الاتصالات الموزعة في جامي: https://jami.net";
-"accountPage.registerNameTitle" = "تسجيل اسم المستخدم";
 "accountPage.passwordPlaceholder" = "أدخل كلمة مرور الحساب";
 "accountPage.usernamePlaceholder" = "أدخل اسم المستخدم المطلوب";
 "accountPage.registerNameErrorMessage" = "اسم المستخدم المختار غير متوفر";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "اسم المستخدم";
-"account.sipPassword" = "كلمة السر";
 "account.sipServer" = "خادم SIP";
 "account.port" = "نقطة عبور ( port )";
 "account.proxyServer" = "الوكيل";
 "account.createSipAccount" = "إعداد حساب SIP";
-"account.usernameLabel" = "إدخال اسم المستخدم";
-"account.passwordLabel" = "أدخِل كلمة المرور";
 "account.serverLabel" = "إدخال العنوان";
 "account.portLabel" = "إدخال رقم الميناء";
 "account.accountStatus" = "حالة الحساب";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "أبدأ مكالمة الفيديو";
 "contactPage.sendMessage" = "أرسل رسالة";
 "contactPage.clearConversation" = "-تحدثوا";
-"contactPage.blockContact" = "إغلاق الاتصال";
 "contactPage.removeConversation" = "إزالة المحادثة";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "تم الإلغاء";
 "dataTransfer.sendingFailed" = "فشلت في إرسال";
 "dataTransfer.readableStatusSuccess" = "كاملة";
-"dataTransfer.readableStatusCancel" = "ألغِ";
 
 //Notifications
-"notifications.incomingCall" = "المكالمة القادمة";
 "notifications.missedCall" = "المكالمة المفقودة";
 "notifications.newFile" = "ملف جديد";
 "notifications.locationSharingStarted" = "بدأ تبادل الموقع المقبل";
 "notifications.locationSharingStopped" = "توقف مشاركة الموقع المقبل";
-"dataTransfer.readableStatusAwaiting" = "في انتظار...";
-"dataTransfer.readableStatusOngoing" = "التحويل";
-"dataTransfer.readableStatusCanceled" = "تم الإلغاء";
-"dataTransfer.readableStatusSuccess" = "كاملة";
-"dataTransfer.readableStatusCancel" = "ألغِ";
+"dataTransfer.readableStatusRefuse" = "أرفض";
+"dataTransfer.readableStatusAccept" = "اقبل";
 "dataTransfer.infoMessage" = "اضغط لبدء التسجيل";
 "dataTransfer.sendMessage" = "أرسل";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "لقد ركل";
 "generatedMessage.contactReAdded" = "تم إعادة إضافة";
 "generatedMessage.outgoingCall" = "مكالمة خارجة";
-"generatedMessage.incomingCall" = "مكالمة واردة";
 "generatedMessage.missedOutgoingCall" = "مكالمة خارجة فائتة";
 "generatedMessage.missedIncomingCall" = "مكالمة واردة فائتة";
 "generatedMessage.liveLocationSharing" = "مشاركة الموقع المباشر";
 "generatedMessage.contactLeftConversation" = "اليسار";
 
 //General Settings
-"generalSettings.title" = "إعدادات متقدمة";
 "generalSettings.videoSettings" = "إعدادات الفيديو";
 "generalSettings.videoAcceleration" = "تمكين تسريع الفيديو";
 "generalSettings.fileTransfer" = "نقل ملف";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "هجرة الحساب";
 "migrateAccount.migrateButton" = "حساب الهجرة";
 "migrateAccount.explanation" = "يجب ترحيل هذا الحساب";
-"migrateAccount.passwordPlaceholder" = "أدخِل كلمة المرور";
 "migrateAccount.passwordExplanation" = "لمواصلة الهجرة، تحتاج إلى إدخال كلمة المرور التي استخدمت لهذا الحساب";
-"migrateAccount.removeAccount" = "إزالة الحساب";
 "migrateAccount.error" = "فشلت في نقل حسابك يمكنك محاولة أخرى أو حذف حسابك";
 "migrateAccount.migrating" = "الهجرة...";
-"migrateAccount.cancel" = "ألغِ";
 "migrateAccount.migrateAnother" = "تحويل حساب آخر";
-
-

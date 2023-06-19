@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "대화";
-"global.meTabBarTitle" = "계정 설정";
+"global.accountSettings" = "계정 설정";
+"global.advancedSettings" = "고급 설정";
+"global.username" = "사용자명";
+"global.password" = "암호";
+"global.registerAUsername" = "사용자 이름을 등록";
+"global.enterPassword" = "비밀번호 입력";
+"global.enterUsername" = "사용자 이름을 입력";
+"global.cancel" = "취소";
+"global.blockContact" = "블록 연락처";
+"global.removeAccount" = "계정을 삭제";
+"global.incomingCall" = "수신 전화";
 "global.ok" = "확인";
 "global.close" = "가까이";
 "global.share" = "공유";
@@ -34,10 +43,10 @@
 "global.name" = "이름";
 "global.copy" = "복사하기";
 "global.reply" = "답변";
+"global.search" = "찾아...";
 
 // Scan
 "scan.badQrCode" = "나쁜 QR 코드";
-"scan.search" = "찾아...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "연락처를 찾아...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "어제";
 "smartlist.results" = "공공 디렉토리";
 "smartlist.conversations" = "대화";
-"smartlist.searching" = "검색 중...";
 "smartlist.noResults" = "결과도 없습니다";
 "smartlist.noConversation" = "대화가 없다";
 "smartlist.searchBarPlaceholder" = "이름 입력하세요...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "선택된 연락처는 번호가 없습니다";
 "smartlist.selectOneNumber" = "숫자들 중 하나를 선택";
 "smartlist.invitations" = "초대";
-"smartlist.accountSettings" = "계정 설정";
-"smartlist.advancedSettings" = "고급 설정";
 "smartlist.aboutJami" = "자미 에 관한 것";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "현재 위치와 공유하고 있습니다.";
 "conversation.explanationReceivingLocationFrom" = "현재 ";
 "conversation.errorSavingImage" = "갤러리에 이미지를 저장하지 못했습니다";
-"conversation.receivedRequest" = "대화 요청을 보내주셨죠.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "대화 요청을 보냈어요";
 "conversation.requestMessage" = "안녕하세요, 대화에 참여하고 싶으세요?";
-"conversation.notContact" = "\%@\는 연락처 목록에 포함되어 있지 않습니다.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "함께 교환할 수 있도록 연락 요청을 보내십시오";
 "conversation.sendRequestTitle" = "연락 요청 을 보내십시오";
 "conversation.synchronizationTitle" = "대화 요청을 받아들였습니다.";
-"conversation.synchronizationMessage" = "우리는 대화를 동기화하기 위해 \%@\ 연결을 기다리고 있습니다.";
+"conversation.synchronizationMessage" = "우리는 대화를 동기화하기 위해 %@ 연결을 기다리고 있습니다.";
 
 //Invitations
 "invitations.noInvitations" = "초대도 없습니다";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "계정 생성하기";
 "createAccount.chooseStrongPassword" = "자미 계정을 보호하기 위해 기억할 강력한 비밀번호를 선택하세요.";
-"createAccount.enterNewUsernamePlaceholder" = "사용자명";
-"createAccount.newPasswordPlaceholder" = "암호";
 "createAccount.repeatPasswordPlaceholder" = "암호 확인";
 "createAccount.passwordCharactersNumberError" = "최소 6자";
 "createAccount.passwordNotMatchingError" = "비밀번호가 일치하지 않습니다";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "사용자 이름 사용 가능";
 "createAccount.loading" = "로딩";
 "createAccount.waitCreateAccountTitle" = "추가 계좌";
-"createAccount.RegisterAUsername" = "사용자 이름을 등록";
 "createAccount.ChooseAPassword" = "내 계정을 암호화";
 "createAccount.PasswordInformation" = "로컬 계정을 암호화하기 위해 비밀번호를 선택하세요. 잊지 마세요. 그렇지 않으면 계정을 복구할 수 없습니다.";
 "createAccount.EnableNotifications" = "통지";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "계좌 연결";
 "linkToAccount.linkButtonTitle" = "연결 장치";
-"linkToAccount.passwordPlaceholder" = "암호";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "비밀번호 입력";
 "linkToAccount.pinLabel" = "PIN를 입력";
 "linkToAccount.explanationPinMessage" = "PIN 코드를 생성하려면 사용하고자 하는 계정을 포함하는 장치의 계정 관리 설정에 이동합니다. 장치 설정에서 \"이 계정에 다른 장치를 연결하십시오\"를 선택합니다. 이 양식을 작성하려면 필요한 PIN을 얻을 수 있습니다. PIN는 10 분 동안 만 유효합니다.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "로그인";
-"linkToAccountManager.passwordPlaceholder" = "암호";
-"linkToAccountManager.passwordLabel" = "비밀번호 입력";
-"linkToAccountManager.usernamePlaceholder" = "사용자명";
-"linkToAccountManager.usernameLabel" = "사용자 이름을 입력";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL를 입력";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "계좌를 만들 수 없었습니다.";
 "alerts.profileTakePhoto" = "사진 찍기";
 "alerts.profileUploadPhoto" = "사진 업로드";
-"alerts.profileCancelPhoto" = "취소";
 "alerts.accountLinkedTitle" = "연결 계좌";
 "alerts.dbFailedTitle" = "자미를 발사하는 과정에서 오류가 발생했습니다";
 "alerts.dbFailedMessage" = "신청서를 닫고 다시 열려고 해 주세요";
 "alerts.confirmBlockContact" = "이 연락처를 차단하고 싶으신가요? 이 연락처의 대화 역사 또한 영구적으로 삭제됩니다.";
-"alerts.confirmBlockContactTitle" = "블록 연락처";
 "alerts.confirmDeleteConversation" = "이 대화를 영구적으로 삭제하고 싶다고 확신하십니까?";
 "alerts.confirmDeleteConversationFromContact" = "이 연락처와 대화를 삭제하고 싶다고 확신하십니까?";
 "alerts.confirmDeleteConversationTitle" = "대화 를 삭제";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "삭제";
-"actions.cancelAction" = "취소";
 "actions.clearAction" = "명확한 것";
 "actions.backAction" = "돌아와";
 "actions.doneAction" = "완료";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "통화";
-"calls.unknown" = "알 수 없는";
 "calls.incomingCallInfo" = "당신과 얘기하고 싶어";
 "calls.ringing" = "울리는 소리...";
 "calls.connecting" = "연결...";
-"calls.searching" = "찾아...";
 "calls.callFinished" = "전화 종료";
 "calls.currentCallWith" = "전화";
 "calls.haghUp" = "";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "장치";
 "accountPage.settingsHeader" = "설정";
-"accountPage.username" = "사용자명";
 "accountPage.usernameNotRegistered" = "사용자 이름: 등록되지 않은";
 "accountPage.credentialsHeader" = "계좌 세부 사항";
-"accountPage.enableProxy" = "프록시를 활성화";
 "accountPage.blockedContacts" = "차단된 연락처";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "프록시 주소를 입력";
-"accountPage.enableProxy" = "프록시를 활성화";
 "accountPage.noProxyExplanationLabel" = "프록시가 비활성화되면 장치가 알림을 받지 않습니다.";
-"accountPage.saveProxyAddress" = "저장";
 "accountPage.proxyPaceholder" = "프록시 주소는";
 "accountPage.enableNotifications" = "통지 설정";
 "accountPage.proxyDisabledAlertTitle" = "프록시 서버 비활성화";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "장치 취소 오류";
 "accountPage.linkDeviceTitle" = "다른 장치를 연결";
 "accountPage.other" = "다른";
-"accountPage.removeAccountTitle" = "계정을 삭제";
 "accountPage.removeAccountMessage" = "\"Remove\"를 클릭하면 이 장치에서 이 계정을 삭제 할 수 있습니다! 이 동작은 취소 할 수 없습니다. 또한 등록된 이름도 손실 될 수 있습니다.";
 "accountPage.removeAccountButton" = "제거";
 "accountPage.shareAccountDetails" = "공유 계정 세부사항";
 "accountPage.contactMeOnJamiTitle" = "자미에 연락해!";
 "accountPage.contactMeOnJamiContant" = "Jami 유통 통신 플랫폼에서 \"%s\"를 사용하여 연락하십시오: https://jami.net";
-"accountPage.registerNameTitle" = "사용자 이름을 등록";
 "accountPage.passwordPlaceholder" = "계정 비밀번호를 입력";
 "accountPage.usernamePlaceholder" = "원하는 사용자 이름을 입력";
 "accountPage.registerNameErrorMessage" = "선택된 사용자 이름은 사용되지 않습니다";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "사용자 이름";
-"account.sipPassword" = "암호";
 "account.sipServer" = "SIP 서버";
 "account.port" = "포트";
 "account.proxyServer" = "프록시";
 "account.createSipAccount" = "SIP 계정 을 생성";
-"account.usernameLabel" = "사용자 이름을 입력";
-"account.passwordLabel" = "비밀번호 입력";
 "account.serverLabel" = "주소 입력";
 "account.portLabel" = "포트 번호를 입력";
 "account.accountStatus" = "계정 상태";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "비디오 통화 시작";
 "contactPage.sendMessage" = "메시지 보내";
 "contactPage.clearConversation" = "클리어 채팅";
-"contactPage.blockContact" = "블록 연락처";
 "contactPage.removeConversation" = "대화 를 제거 하라";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "취소됨";
 "dataTransfer.sendingFailed" = "보내지 못했어요";
 "dataTransfer.readableStatusSuccess" = "완전함";
-"dataTransfer.readableStatusCancel" = "취소";
 
 //Notifications
-"notifications.incomingCall" = "수신 전화";
 "notifications.missedCall" = "전화가 빠진 것";
 "notifications.newFile" = "새로운 파일";
 "notifications.locationSharingStarted" = "입국 위치 공유가 시작되었습니다";
 "notifications.locationSharingStopped" = "유입 위치 공유가 중단";
-"dataTransfer.readableStatusAwaiting" = "기다렸어";
-"dataTransfer.readableStatusOngoing" = "이전";
-"dataTransfer.readableStatusCanceled" = "취소됨";
-"dataTransfer.readableStatusSuccess" = "완전함";
-"dataTransfer.readableStatusCancel" = "취소";
+"dataTransfer.readableStatusRefuse" = "거절";
+"dataTransfer.readableStatusAccept" = "수락";
 "dataTransfer.infoMessage" = "녹음을 시작하기 위해 누르세요";
 "dataTransfer.sendMessage" = "보내";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발 발";
 "generatedMessage.contactReAdded" = "다시 추가되었습니다";
 "generatedMessage.outgoingCall" = "출력 전화";
-"generatedMessage.incomingCall" = "수신 전화";
 "generatedMessage.missedOutgoingCall" = "출력 전화가 빠진 것";
 "generatedMessage.missedIncomingCall" = "수신 전화가 빠진 것";
 "generatedMessage.liveLocationSharing" = "실시간 위치 공유";
 "generatedMessage.contactLeftConversation" = "왼쪽";
 
 //General Settings
-"generalSettings.title" = "고급 설정";
 "generalSettings.videoSettings" = "비디오 설정";
 "generalSettings.videoAcceleration" = "비디오 가속을 활성화";
 "generalSettings.fileTransfer" = "파일 전송";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "계정 마이그레이션";
 "migrateAccount.migrateButton" = "마이그레이션 계좌";
 "migrateAccount.explanation" = "이 계정은 마이그레이션되어야 합니다";
-"migrateAccount.passwordPlaceholder" = "비밀번호를 입력";
 "migrateAccount.passwordExplanation" = "이 계정에서 사용된 비밀번호를 입력해야 합니다.";
-"migrateAccount.removeAccount" = "계정을 삭제";
 "migrateAccount.error" = "계정을 마이그레이션하지 못했어요. 다시 시도하거나 삭제할 수 있습니다.";
 "migrateAccount.migrating" = "이주하는 것...";
-"migrateAccount.cancel" = "취소";
 "migrateAccount.migrateAnother" = "다른 계정 을 마이그레이션";
-
-

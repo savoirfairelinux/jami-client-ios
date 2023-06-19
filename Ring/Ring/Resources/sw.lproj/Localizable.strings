@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Mazungumzo";
-"global.meTabBarTitle" = "Mipangilio ya Akaunti";
+"global.accountSettings" = "Mipangilio ya Akaunti";
+"global.advancedSettings" = "Mipangilio ya Juu";
+"global.username" = "Jina la mtumiaji";
+"global.password" = "Nambari";
+"global.registerAUsername" = "Sajili jina la mtumiaji";
+"global.enterPassword" = "Ingiza nywila";
+"global.enterUsername" = "Ingiza Jina la Mtumiaji";
+"global.cancel" = "Kughairi";
+"global.blockContact" = "Kuzuia Mawasiliano";
+"global.removeAccount" = "Ondoa akaunti";
+"global.incomingCall" = "Kuwasiliana";
 "global.ok" = "Sawa";
 "global.close" = "Karibu";
 "global.share" = "Kushiriki";
@@ -34,10 +43,10 @@
 "global.name" = "Jina";
 "global.copy" = "Nakala";
 "global.reply" = "Jibu";
+"global.search" = "Kutafuta...";
 
 // Scan
 "scan.badQrCode" = "Nambari mbaya ya QR";
-"scan.search" = "Kutafuta...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Kutafuta mawasiliano...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "Jana";
 "smartlist.results" = "Orodha ya Umma";
 "smartlist.conversations" = "Mazungumzo";
-"smartlist.searching" = "Kutafuta...";
 "smartlist.noResults" = "Hakuna matokeo";
 "smartlist.noConversation" = "Hakuna mazungumzo";
 "smartlist.searchBarPlaceholder" = "Ingiza jina...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Wasilianaji waliochaguliwa hawana nambari yoyote";
 "smartlist.selectOneNumber" = "Chagua moja ya idadi";
 "smartlist.invitations" = "Maombi";
-"smartlist.accountSettings" = "Mipangilio ya Akaunti";
-"smartlist.advancedSettings" = "Mipangilio ya Juu";
 "smartlist.aboutJami" = "Kuhusu Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "Kwa sasa unashiriki eneo lako na ";
 "conversation.explanationReceivingLocationFrom" = "Kwa sasa unapata eneo moja kwa moja kutoka ";
 "conversation.errorSavingImage" = "Kushindwa kuhifadhi picha kwa gallery";
-"conversation.receivedRequest" = "\%@\ akutumikia ombi kwa ajili ya mazungumzo.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Nilituma ombi la mazungumzo.";
 "conversation.requestMessage" = "Halo, ungependa kujiunga na mazungumzo?";
-"conversation.notContact" = "\%@\ si katika orodha yako ya mawasiliano.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Kumtumia ombi la kuwasiliana ili waweze kubadilishana pamoja";
 "conversation.sendRequestTitle" = "Tuma Ombi la Wasiliana";
 "conversation.synchronizationTitle" = "Umeikubali ombi la mazungumzo.";
-"conversation.synchronizationMessage" = "Tunasubiri kwa ajili ya \%@\ kuunganisha kwa kulinganisha mazungumzo.";
+"conversation.synchronizationMessage" = "Tunasubiri kwa ajili ya %@ uhusiano kwa kulinganisha mazungumzo.";
 
 //Invitations
 "invitations.noInvitations" = "Hakuna mwaliko";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Unda akaunti yako";
 "createAccount.chooseStrongPassword" = "Chagua password yenye nguvu ambayo utakumbuka ili kulinda akaunti yako ya Jami.";
-"createAccount.enterNewUsernamePlaceholder" = "Jina la mtumiaji";
-"createAccount.newPasswordPlaceholder" = "Nambari";
 "createAccount.repeatPasswordPlaceholder" = "Tathmini password";
 "createAccount.passwordCharactersNumberError" = "Kiwango cha chini cha herufi 6";
 "createAccount.passwordNotMatchingError" = "nywila hazifanani";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "jina la mtumiaji linapatikana";
 "createAccount.loading" = "Kubeba";
 "createAccount.waitCreateAccountTitle" = "Kuongeza akaunti";
-"createAccount.RegisterAUsername" = "Sajili jina la mtumiaji";
 "createAccount.ChooseAPassword" = "Encrypt akaunti yangu";
 "createAccount.PasswordInformation" = "Chagua password ya kufungia akaunti yako ya ndani. Usisahau au huwezi kupata akaunti yako";
 "createAccount.EnableNotifications" = "Maarifa";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kuunganisha akaunti";
 "linkToAccount.linkButtonTitle" = "Kifaa cha kuunganisha";
-"linkToAccount.passwordPlaceholder" = "Nambari";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Ingiza nywila";
 "linkToAccount.pinLabel" = "Ingiza PIN";
 "linkToAccount.explanationPinMessage" = "Ili kuzalisha PIN, nenda kwenye mipangilio ya usimamizi wa akaunti kwenye kifaa ambacho kina akaunti unayotaka kutumia. Katika mipangilio ya vifaa Chagua \"Uunganisha kifaa kingine na akaunti hii\". Utapata PIN muhimu kukamilisha fomu hii. PIN ni halali kwa dakika 10 tu.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Ingia";
-"linkToAccountManager.passwordPlaceholder" = "Nambari";
-"linkToAccountManager.passwordLabel" = "Ingiza nywila";
-"linkToAccountManager.usernamePlaceholder" = "Jina la mtumiaji";
-"linkToAccountManager.usernameLabel" = "Ingiza Jina la Mtumiaji";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Ingiza URL ya JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Akaunti haikuweza kufanywa.";
 "alerts.profileTakePhoto" = "Piga picha";
 "alerts.profileUploadPhoto" = "Pakia picha";
-"alerts.profileCancelPhoto" = "Kughairi";
 "alerts.accountLinkedTitle" = "Akaunti ya kuunganisha";
 "alerts.dbFailedTitle" = "Hitilafu ilitokea wakati wa kuendesha Jami";
 "alerts.dbFailedMessage" = "Tafadhali fungua maombi na jaribu kuifungua tena";
 "alerts.confirmBlockContact" = "Je, una uhakika unataka kuzuia kuwasiliana hii? historia ya mazungumzo na kuwasiliana hii pia kufuta milele.";
-"alerts.confirmBlockContactTitle" = "Kuzuia Mawasiliano";
 "alerts.confirmDeleteConversation" = "Je, una uhakika unataka kufuta mazungumzo haya milele?";
 "alerts.confirmDeleteConversationFromContact" = "Je, una uhakika unataka kufuta mazungumzo na mawasiliano haya?";
 "alerts.confirmDeleteConversationTitle" = "Ondoa Mazungumzo";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Futa";
-"actions.cancelAction" = "Kughairi";
 "actions.clearAction" = "Safi";
 "actions.backAction" = "Kurudi";
 "actions.doneAction" = "Imefanywa";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Piga simu";
-"calls.unknown" = "Haijulikani";
 "calls.incomingCallInfo" = "anataka kuzungumza na wewe";
 "calls.ringing" = "Kupiga simu...";
 "calls.connecting" = "Kuunganisha...";
-"calls.searching" = "Kutafuta...";
 "calls.callFinished" = "Wito umekamilika";
 "calls.currentCallWith" = "Piga simu na ";
 "calls.haghUp" = "funga";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Vifaa";
 "accountPage.settingsHeader" = "Mipangilio";
-"accountPage.username" = "Jina la mtumiaji";
 "accountPage.usernameNotRegistered" = "Jina la mtumiaji: halijasajiliwa";
 "accountPage.credentialsHeader" = "Maelezo ya Akaunti";
-"accountPage.enableProxy" = "Kuwezesha Proxy";
 "accountPage.blockedContacts" = "Mawasiliano yaliyopigwa";
 "accountPage.unblockContact" = "UONGOZI";
 "accountPage.proxyAddressAlert" = "Toa anwani ya proxy";
-"accountPage.enableProxy" = "Kuwezesha Proxy";
 "accountPage.noProxyExplanationLabel" = "Kifaa chako hakitapokea taarifa wakati proxy imelemazwa";
-"accountPage.saveProxyAddress" = "Kuokoa";
 "accountPage.proxyPaceholder" = "Anwani ya Wakala";
 "accountPage.enableNotifications" = "Kuwezesha Matangazo";
 "accountPage.proxyDisabledAlertTitle" = "Seva ya Proxy Imelemazwa";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Kosa la kurudia kifaa";
 "accountPage.linkDeviceTitle" = "Unganisha kifaa kingine";
 "accountPage.other" = "Vinginevyo";
-"accountPage.removeAccountTitle" = "Ondoa akaunti";
 "accountPage.removeAccountMessage" = "Kwa kubonyeza \"Ondoa\" utaondoa akaunti hii kwenye kifaa hiki! hatua hii haiwezi kufanyika. Pia, jina lako kusajiliwa inaweza kupotea.";
 "accountPage.removeAccountButton" = "Ondoa";
 "accountPage.shareAccountDetails" = "Shiriki maelezo ya akaunti";
 "accountPage.contactMeOnJamiTitle" = "Wasiliana nami juu ya Jami!";
 "accountPage.contactMeOnJamiContant" = "Wasiliana nami kwa kutumia \"%s\" kwenye jukwaa la mawasiliano la Jami: https://jami.net";
-"accountPage.registerNameTitle" = "Sajili jina la mtumiaji";
 "accountPage.passwordPlaceholder" = "Ingiza nenosiri la akaunti";
 "accountPage.usernamePlaceholder" = "Ingiza jina la mtumiaji";
 "accountPage.registerNameErrorMessage" = "Jina la mtumiaji lililochaguliwa haliko";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Jina la mtumiaji";
-"account.sipPassword" = "Nambari";
 "account.sipServer" = "SIP Server";
 "account.port" = "Bandari";
 "account.proxyServer" = "Wakala wa kuwakilisha";
 "account.createSipAccount" = "Unda Akaunti ya SIP";
-"account.usernameLabel" = "Ingiza Jina la Mtumiaji";
-"account.passwordLabel" = "Ingiza nywila";
 "account.serverLabel" = "Ingiza Anwani";
 "account.portLabel" = "Ingiza Nambari ya Bandari";
 "account.accountStatus" = "Hali ya Akaunti";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Anza Simu ya Video";
 "contactPage.sendMessage" = "Tuma Ujumbe";
 "contactPage.clearConversation" = "Mazungumzo wazi";
-"contactPage.blockContact" = "Kuzuia Mawasiliano";
 "contactPage.removeConversation" = "Ondoa Mazungumzo";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "Imeghairiwa";
 "dataTransfer.sendingFailed" = "Kushindwa kutuma";
 "dataTransfer.readableStatusSuccess" = "Utimilifu";
-"dataTransfer.readableStatusCancel" = "Kughairi";
 
 //Notifications
-"notifications.incomingCall" = "Wito Unaofika";
 "notifications.missedCall" = "Simu Iliyokosa";
 "notifications.newFile" = "Faili mpya";
 "notifications.locationSharingStarted" = "Kuingia eneo kushiriki kuanza";
 "notifications.locationSharingStopped" = "Kushiriki eneo linalokuja kumeacha";
-"dataTransfer.readableStatusAwaiting" = "Kusubiri...";
-"dataTransfer.readableStatusOngoing" = "Kuhamisha";
-"dataTransfer.readableStatusCanceled" = "Imeghairiwa";
-"dataTransfer.readableStatusSuccess" = "Utimilifu";
-"dataTransfer.readableStatusCancel" = "Kughairi";
+"dataTransfer.readableStatusRefuse" = "Kukataa";
+"dataTransfer.readableStatusAccept" = "Kubali";
 "dataTransfer.infoMessage" = "Bonyeza ili kuanza kurekodi";
 "dataTransfer.sendMessage" = "Tuma";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "alipewa kick";
 "generatedMessage.contactReAdded" = "aliongezwa tena";
 "generatedMessage.outgoingCall" = "Kuondoka simu";
-"generatedMessage.incomingCall" = "Kuwasiliana";
 "generatedMessage.missedOutgoingCall" = "Kupoteza wito wa nje";
 "generatedMessage.missedIncomingCall" = "Kupoteza simu ya ndani";
 "generatedMessage.liveLocationSharing" = "Kushiriki eneo la kuishi";
 "generatedMessage.contactLeftConversation" = "kushoto";
 
 //General Settings
-"generalSettings.title" = "Mipangilio ya juu";
 "generalSettings.videoSettings" = "Mipangilio ya Video";
 "generalSettings.videoAcceleration" = "Kuwezesha video kuharakisha";
 "generalSettings.fileTransfer" = "Uhamisho wa faili";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "Uhamiaji wa akaunti";
 "migrateAccount.migrateButton" = "Akaunti ya Uhamiaji";
 "migrateAccount.explanation" = "Akaunti hii inahitaji kuhamishwa";
-"migrateAccount.passwordPlaceholder" = "Ingiza nywila";
 "migrateAccount.passwordExplanation" = "Ili kuendelea na uhamiaji, unahitaji kuingia nenosiri ambalo lilitumiwa kwa akaunti hii";
-"migrateAccount.removeAccount" = "Ondoa akaunti";
 "migrateAccount.error" = "Usikose kuhamisha akaunti yako. Unaweza kujaribu tena au kufuta akaunti yako.";
 "migrateAccount.migrating" = "Kuhamia...";
-"migrateAccount.cancel" = "Kughairi";
 "migrateAccount.migrateAnother" = "Hesabu Nyingine";
-
-

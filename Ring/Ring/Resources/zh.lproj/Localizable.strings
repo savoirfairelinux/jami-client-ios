@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "對話";
-"global.meTabBarTitle" = "帳號設定";
+"global.accountSettings" = "帳號設定";
+"global.advancedSettings" = "高级设置";
+"global.username" = "使用者名";
+"global.password" = "密码";
+"global.registerAUsername" = "註冊使用者名稱";
+"global.enterPassword" = "输入密码";
+"global.enterUsername" = "输入用户名";
+"global.cancel" = "取消";
+"global.blockContact" = "屏蔽联系人";
+"global.removeAccount" = "移除账户";
+"global.incomingCall" = "來電";
 "global.ok" = "確定";
 "global.close" = "關閉";
 "global.share" = "分享";
@@ -34,10 +43,10 @@
 "global.name" = "姓名";
 "global.copy" = "複製";
 "global.reply" = "回复";
+"global.search" = "正在搜索…";
 
 // Scan
 "scan.badQrCode" = "无效的二维码";
-"scan.search" = "正在搜索…";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "搜索联系人";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公共目录";
 "smartlist.conversations" = "對話";
-"smartlist.searching" = "正在搜尋...";
 "smartlist.noResults" = "无结果";
 "smartlist.noConversation" = "沒有對話";
 "smartlist.searchBarPlaceholder" = "輸入名字……";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "选定的连接没有任何数字";
 "smartlist.selectOneNumber" = "選取其中一個號碼";
 "smartlist.invitations" = "邀請";
-"smartlist.accountSettings" = "帳號設定";
-"smartlist.advancedSettings" = "高级设置";
 "smartlist.aboutJami" = "关于 Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
 "conversation.errorSavingImage" = "保存至图库失败";
-"conversation.receivedRequest" = "给你发了一个谈话请求.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "发给你一个谈话请求.";
 "conversation.requestMessage" = "您好，\n您想要加入会话吗？";
-"conversation.notContact" = "您的联系人名单中没有.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "向他/她发送联系人请求以开始互相交流";
 "conversation.sendRequestTitle" = "发送联系请求";
 "conversation.synchronizationTitle" = "您已接受会话请求。";
-"conversation.synchronizationMessage" = "我们正在等待\%@\连接,";
+"conversation.synchronizationMessage" = "我们正在等待 %@ 连接以同步对话。";
 
 //Invitations
 "invitations.noInvitations" = "沒有邀請";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "创建你的账户";
 "createAccount.chooseStrongPassword" = "选择一个强密码并记住它来保护您的 Jami 账户。";
-"createAccount.enterNewUsernamePlaceholder" = "使用者名";
-"createAccount.newPasswordPlaceholder" = "密码";
 "createAccount.repeatPasswordPlaceholder" = "确认密码";
 "createAccount.passwordCharactersNumberError" = "最少 6 字符";
 "createAccount.passwordNotMatchingError" = "两次输入的密码不匹配";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "用户名可用";
 "createAccount.loading" = "正在載入";
 "createAccount.waitCreateAccountTitle" = "添加账户";
-"createAccount.RegisterAUsername" = "註冊使用者名稱";
 "createAccount.ChooseAPassword" = "加密我的帳號";
 "createAccount.PasswordInformation" = "选择一个密码来加密您的账户。请记下它，否则您将无法恢复您的账户。";
 "createAccount.EnableNotifications" = "通知";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "关联账户";
 "linkToAccount.linkButtonTitle" = "关联设备";
-"linkToAccount.passwordPlaceholder" = "密码";
 "linkToAccount.pinPlaceholder" = "PIN 碼";
-"linkToAccount.passwordLabel" = "输入密码";
 "linkToAccount.pinLabel" = "输入 PIN";
 "linkToAccount.explanationPinMessage" = "要生成 PIN 码，请在包含您想使用的账户的设备上打开本应用的账户管理设置，在设备设置中选择“将另一台设备关联至此账户”。您会获得完成本项内容所需的 PIN 码，该 PIN 码有效期为 10 分钟。";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "注册";
-"linkToAccountManager.passwordPlaceholder" = "密码";
-"linkToAccountManager.passwordLabel" = "输入密码";
-"linkToAccountManager.usernamePlaceholder" = "使用者名";
-"linkToAccountManager.usernameLabel" = "输入用户名";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "输入 JAMS URL";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "无法创建此账户。";
 "alerts.profileTakePhoto" = "照相";
 "alerts.profileUploadPhoto" = "上传照片";
-"alerts.profileCancelPhoto" = "取消";
 "alerts.accountLinkedTitle" = "正在关联账户";
 "alerts.dbFailedTitle" = "启动Jami时出现了一个问题";
 "alerts.dbFailedMessage" = "请关闭应用，并尝试重新开启。";
 "alerts.confirmBlockContact" = "您确定要屏蔽这个联系人吗？与这个联系人的会话历史也将被永久删除。";
-"alerts.confirmBlockContactTitle" = "屏蔽联系人";
 "alerts.confirmDeleteConversation" = "您确定要永久删除这个会话吗？";
 "alerts.confirmDeleteConversationFromContact" = "您确定要删除与该联系人的会话吗？";
 "alerts.confirmDeleteConversationTitle" = "删除会话";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "刪除";
-"actions.cancelAction" = "取消";
 "actions.clearAction" = "清除";
 "actions.backAction" = "前一個";
 "actions.doneAction" = "完成";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "撥打";
-"calls.unknown" = "未知";
 "calls.incomingCallInfo" = "想要与您对话";
 "calls.ringing" = "響鈴中……";
 "calls.connecting" = "正在连接…";
-"calls.searching" = "正在搜索…";
 "calls.callFinished" = "通话已结束";
 "calls.currentCallWith" = "通话到";
 "calls.haghUp" = "掛斷";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "裝置";
 "accountPage.settingsHeader" = "設定";
-"accountPage.username" = "使用者名";
 "accountPage.usernameNotRegistered" = "用户名：未被注册";
 "accountPage.credentialsHeader" = "账户详情";
-"accountPage.enableProxy" = "启用代理";
 "accountPage.blockedContacts" = "已屏蔽的联系人";
 "accountPage.unblockContact" = "取消屏蔽";
 "accountPage.proxyAddressAlert" = "提供代理地址";
-"accountPage.enableProxy" = "启用代理";
 "accountPage.noProxyExplanationLabel" = "代理禁用后您将无法收到通知";
-"accountPage.saveProxyAddress" = "儲存";
 "accountPage.proxyPaceholder" = "代理地址";
 "accountPage.enableNotifications" = "啟用通知";
 "accountPage.proxyDisabledAlertTitle" = "代理服务器已禁用";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "设备吊销出错";
 "accountPage.linkDeviceTitle" = "关联另一台设备";
 "accountPage.other" = "其他";
-"accountPage.removeAccountTitle" = "移除账户";
 "accountPage.removeAccountMessage" = "点击“删除”将从此设备上删除该账户！此操作无法撤销。同时，您也会失去您的注册用户名。";
 "accountPage.removeAccountButton" = "删除";
 "accountPage.shareAccountDetails" = "分享账户详情";
 "accountPage.contactMeOnJamiTitle" = "在 Jami 上联系我！";
 "accountPage.contactMeOnJamiContant" = "在Jami分布式通信平台：https://jami.net 上使用“%s”与我联系";
-"accountPage.registerNameTitle" = "註冊使用者名稱";
 "accountPage.passwordPlaceholder" = "输入账户密码";
 "accountPage.usernamePlaceholder" = "输入想使用的用户名";
 "accountPage.registerNameErrorMessage" = "选择的用户名不可用";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "用户名";
-"account.sipPassword" = "密码";
 "account.sipServer" = "SIP 伺服器";
 "account.port" = "埠";
 "account.proxyServer" = "代理";
 "account.createSipAccount" = "创建 SIP 账户";
-"account.usernameLabel" = "输入用户名";
-"account.passwordLabel" = "输入密码";
 "account.serverLabel" = "输入地址";
 "account.portLabel" = "输入端口号";
 "account.accountStatus" = "账户状态";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "发起视频通话";
 "contactPage.sendMessage" = "发送信息";
 "contactPage.clearConversation" = "清除聊天";
-"contactPage.blockContact" = "屏蔽联系人";
 "contactPage.removeConversation" = "删除会话";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "已取消";
 "dataTransfer.sendingFailed" = "发送失败";
 "dataTransfer.readableStatusSuccess" = "完成";
-"dataTransfer.readableStatusCancel" = "取消";
 
 //Notifications
-"notifications.incomingCall" = "来电";
 "notifications.missedCall" = "未接来电";
 "notifications.newFile" = "新文件";
 "notifications.locationSharingStarted" = "传入位置分享已开始";
 "notifications.locationSharingStopped" = "传入位置分享已停止";
-"dataTransfer.readableStatusAwaiting" = "验证中";
-"dataTransfer.readableStatusOngoing" = "传递中";
-"dataTransfer.readableStatusCanceled" = "已取消";
-"dataTransfer.readableStatusSuccess" = "完成";
-"dataTransfer.readableStatusCancel" = "取消";
+"dataTransfer.readableStatusRefuse" = "拒絕";
+"dataTransfer.readableStatusAccept" = "接受";
 "dataTransfer.infoMessage" = "按下开始录音";
 "dataTransfer.sendMessage" = "發送";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "被了";
 "generatedMessage.contactReAdded" = "已重新添加";
 "generatedMessage.outgoingCall" = "撥出電話";
-"generatedMessage.incomingCall" = "來電";
 "generatedMessage.missedOutgoingCall" = "未接去電";
 "generatedMessage.missedIncomingCall" = "未接來電";
 "generatedMessage.liveLocationSharing" = "实时位置分享";
 "generatedMessage.contactLeftConversation" = "左边";
 
 //General Settings
-"generalSettings.title" = "進階設定";
 "generalSettings.videoSettings" = "视频设置";
 "generalSettings.videoAcceleration" = "启用视频加速";
 "generalSettings.fileTransfer" = "文件传输";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "账户迁移";
 "migrateAccount.migrateButton" = "迁移账户";
 "migrateAccount.explanation" = "该账户需迁移";
-"migrateAccount.passwordPlaceholder" = "输入密码";
 "migrateAccount.passwordExplanation" = "若要进行迁移，您需要输入此账户的密码。";
-"migrateAccount.removeAccount" = "移除账户";
 "migrateAccount.error" = "账户迁移失败。您可重试或删除您的账户。";
 "migrateAccount.migrating" = "迁移中...";
-"migrateAccount.cancel" = "取消";
 "migrateAccount.migrateAnother" = "迁移另一个账户";
-
-

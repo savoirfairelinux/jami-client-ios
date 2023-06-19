@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Keskustelu";
-"global.meTabBarTitle" = "Tunnuksen asetukset";
+"global.accountSettings" = "Tunnuksen asetukset";
+"global.advancedSettings" = "Lisäasetukset";
+"global.username" = "Käyttäjänimi";
+"global.password" = "Salasana";
+"global.registerAUsername" = "Rekisteröi käyttäjänimi";
+"global.enterPassword" = "Syötä salasana";
+"global.enterUsername" = "Anna käyttäjänimi";
+"global.cancel" = "Peruuta";
+"global.blockContact" = "Estä yhteystieto";
+"global.removeAccount" = "Poista tili";
+"global.incomingCall" = "Saapuva puhelu";
 "global.ok" = "Vahvista";
 "global.close" = "Sulje";
 "global.share" = "Jako";
@@ -34,44 +43,43 @@
 "global.name" = "Nimi";
 "global.copy" = "Kopioi";
 "global.reply" = "Vastaa";
+"global.search" = "Etsitään...";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";
-"scan.search" = "Etsitään...";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.searchBar" = "Etsit yhteydenpitoa...";
+"swarmcreation.createTheSwarm" = "Luota ruumis";
+"swarmcreation.addADescription" = "Lisää kuvaus";
+"swarmcreation.addPeople" = "Voit lisätä lisää ihmisiä joukkoon";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.ignoreSwarm" = "Ilman huomiota";
+"swarm.leaveConversation" = "Jätä keskustelu";
+"swarm.chooseColor" = "Valitse väri";
+"swarm.typeOfSwarm" = "Ruumiin tyyppi";
 "swarm.identifier" = "Tunniste";
 "swarm.about" = "Tietoa";
 "swarm.members" = "Jäsenet";
-"swarm.addDescription" = "Add Description";
+"swarm.addDescription" = "Lisää kuvausta";
 "swarm.oneToOne" = "Yksityinen parvi";
-"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.adminInvitesOnly" = "Valvontajohtaja vain kutsuu";
 "swarm.invitesOnly" = "Yksityinen parvi";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
-"swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.publicChat" = "Julkinen ruumis";
+"swarm.others" = "Muut";
+"swarm.member" = "Jäsen";
+"swarm.invited" = "Kutsuttu";
+"swarm.admin" = "Hallinnoija";
+"swarm.banned" = "Kielletty";
+"swarm.unknown" = "Kylmä";
+"swarm.addMorePeople" = "Voit lisätä lisää ihmisiä tähän ruokkaan.";
+"swarm.addMember" = "Lisää jäsen";
+"swarm.confirmLeaveSwarm" = "Oletko varma, että haluat lähteä?";
+"swarm.Leave" = "Lähdetään";
 // Smartlist
 "smartlist.yesterday" = "Eilen";
 "smartlist.results" = "Julkinen kansio";
 "smartlist.conversations" = "Keskustelu";
-"smartlist.searching" = "Etsitään...";
 "smartlist.noResults" = "Ei tuloksia";
 "smartlist.noConversation" = "Ei keskusteluja";
 "smartlist.searchBarPlaceholder" = "Syötä nimi...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Valitulla yhteyshenkilöllä ei ole numeroa";
 "smartlist.selectOneNumber" = "Valitse yksi numeroista";
 "smartlist.invitations" = "Kutsut";
-"smartlist.accountSettings" = "Tunnuksen asetukset";
-"smartlist.advancedSettings" = "Lisäasetukset";
 "smartlist.aboutJami" = "Tietoa Jamista";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "Jaat sijaintisi tällä hetkellä";
 "conversation.explanationReceivingLocationFrom" = "Saat parhaillaan suoraa sijaintia";
 "conversation.errorSavingImage" = "Kuvan tallennus galleriaan epäonnistui";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Lähetin pyynnön juttelemaan.";
 "conversation.requestMessage" = "Hei,\nHaluatko liittyä keskusteluun?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Lähetä hänelle yhteydenottopyyntö, jotta hän voi vaihtaa tietoja.";
-"conversation.sendRequestTitle" = "Send Contact Request";
+"conversation.sendRequestTitle" = "Lähetä yhteydenpitoa";
 "conversation.synchronizationTitle" = "Olet hyväksynyt keskustelupyynnön.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Odotamme, että %@ tahdistaa keskustelun.";
 
 //Invitations
 "invitations.noInvitations" = "Ei kutsuja";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Tee tilisi";
 "createAccount.chooseStrongPassword" = "Valitse muistettava, vahva salasana jota käytät Jami-tunnuksen suojaamiseen.";
-"createAccount.enterNewUsernamePlaceholder" = "Käyttäjänimi";
-"createAccount.newPasswordPlaceholder" = "Salasana";
 "createAccount.repeatPasswordPlaceholder" = "Varmista salasana";
 "createAccount.passwordCharactersNumberError" = "Vähintään 6 merkkiä";
 "createAccount.passwordNotMatchingError" = "salasanat eivät täsmää";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "Tunnus on saatavilla";
 "createAccount.loading" = "Ladataan";
 "createAccount.waitCreateAccountTitle" = "Lisätään tunnusta";
-"createAccount.RegisterAUsername" = "Rekisteröi käyttäjänimi";
 "createAccount.ChooseAPassword" = "Salaa tilini";
 "createAccount.PasswordInformation" = "Valitse salasana paikallisen tilisi salaamiseksi. Älä unohda sitä, tai et voi palauttaa tiliäsi";
 "createAccount.EnableNotifications" = "Ilmoitukset";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Tilin linkittäminen";
 "linkToAccount.linkButtonTitle" = "Linkitä laite";
-"linkToAccount.passwordPlaceholder" = "Salasana";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Syötä salasana";
 "linkToAccount.pinLabel" = "Syötä PIN-koodi";
 "linkToAccount.explanationPinMessage" = "Voit luoda PIN-koodin siirtymällä asetuksiin laitteessa, joka sisältää haluamasi tilin. Valitse laiteasetuksissa \"Linkitä toinen laite tähän tiliin\". Saat tarvittavan PIN-koodin tämän lomakkeen lopusta. PIN-koodi on voimassa vain 10 minuuttia.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Kirjaudu sisään";
-"linkToAccountManager.passwordPlaceholder" = "Salasana";
-"linkToAccountManager.passwordLabel" = "Syötä salasana";
-"linkToAccountManager.usernamePlaceholder" = "Käyttäjänimi";
-"linkToAccountManager.usernameLabel" = "Anna käyttäjänimi";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS verkko-osoite";
 "linkToAccountManager.accountManagerLabel" = "Kirjoita JAMS URL";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Tiliä ei voitu luoda.";
 "alerts.profileTakePhoto" = "Ota valokuva";
 "alerts.profileUploadPhoto" = "Lähetä kuva";
-"alerts.profileCancelPhoto" = "Peruuta";
 "alerts.accountLinkedTitle" = "Tilin linkittäminen";
 "alerts.dbFailedTitle" = "Jamia käynnistettäessä tapahtui virhe";
 "alerts.dbFailedMessage" = "Sulje sovellus ja yritä avata se uudelleen";
 "alerts.confirmBlockContact" = "Haluatko varmasti estää tämän yhteystiedon? Tämän yhteyshenkilön keskusteluhistoria myös poistetaan pysyvästi.";
-"alerts.confirmBlockContactTitle" = "Estä yhteystieto";
 "alerts.confirmDeleteConversation" = "Haluatko varmasti poistaa tämän keskustelun pysyvästi?";
 "alerts.confirmDeleteConversationFromContact" = "Haluatko varmasti poistaa keskustelun tämän yhteyshenkilön kanssa?";
 "alerts.confirmDeleteConversationTitle" = "Poista keskustelu";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Poista";
-"actions.cancelAction" = "Peruuta";
 "actions.clearAction" = "Tyhjennä";
 "actions.backAction" = "Takaisin";
 "actions.doneAction" = "Valmis";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Soita";
-"calls.unknown" = "Tuntematon";
 "calls.incomingCallInfo" = "haluaa puhua kanssasi";
 "calls.ringing" = "Soi...";
 "calls.connecting" = "Yhdistää...";
-"calls.searching" = "Etsitään...";
 "calls.callFinished" = "Puhelu päättynyt";
 "calls.currentCallWith" = "Soita";
 "calls.haghUp" = "katkaise puhelu";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Laitteet";
 "accountPage.settingsHeader" = "Asetukset";
-"accountPage.username" = "Käyttäjänimi";
 "accountPage.usernameNotRegistered" = "käyttäjätunnus: ei rekisteröity";
 "accountPage.credentialsHeader" = "Tilin tiedot";
-"accountPage.enableProxy" = "Proxy käyttöön";
 "accountPage.blockedContacts" = "Estetyt yhteystiedot";
 "accountPage.unblockContact" = "SALLI";
 "accountPage.proxyAddressAlert" = "Anna välityspalvelimen osoite";
-"accountPage.enableProxy" = "Proxy käyttöön";
 "accountPage.noProxyExplanationLabel" = "Laite ei saa ilmoituksia, kun välityspalvelin on poistettu käytöstä";
-"accountPage.saveProxyAddress" = "Tallenna";
 "accountPage.proxyPaceholder" = "Proxy osoite";
 "accountPage.enableNotifications" = "Ilmoitukset päälle";
 "accountPage.proxyDisabledAlertTitle" = "Välityspalvelin poistettu käytöstä";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Laitteen peruuttamisvirhe";
 "accountPage.linkDeviceTitle" = "Linkitä toinen laite";
 "accountPage.other" = "Muu";
-"accountPage.removeAccountTitle" = "Poista tili";
 "accountPage.removeAccountMessage" = "Painamalla \"Poista\"-painiketta poistat tämän tilin tästä laitteesta! Tätä toimintoa ei voi kumota. Rekisteröity nimesi voi myös kadota.";
 "accountPage.removeAccountButton" = "Poista";
 "accountPage.shareAccountDetails" = "Jaa tilin tiedot";
 "accountPage.contactMeOnJamiTitle" = "Ota minuun yhteyttä Jamilla!";
 "accountPage.contactMeOnJamiContant" = "Ota minuun yhteyttä \"%s\" Jamin hajautetun viestintäalustan avulla:  https://jami.net";
-"accountPage.registerNameTitle" = "Rekisteröi käyttäjänimi";
 "accountPage.passwordPlaceholder" = "Syötä käyttäjätunnuksen salasana";
 "accountPage.usernamePlaceholder" = "Kirjoita haluamasi käyttäjänimi";
 "accountPage.registerNameErrorMessage" = "Valittu käyttäjänimi ei ole käytettävissä";
@@ -292,7 +278,7 @@
 "accountPage.peerDiscovery" = "Automaattinen yhteys paikallisessa verkossa";
 "accountPage.autoRegistration" = "Automaattinen rekisteröinti vanhentumisen jälkeen";
 "accountPage.connectivityHeader" = "Yhteydet";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Valitse TURN";
 "accountPage.turnServer" = "TURN osoite";
 "accountPage.turnUsername" = "TURN käyttäjänimi";
 "accountPage.turnPassword" = "TURN salasana";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Käyttäjänimi";
-"account.sipPassword" = "Salasana";
 "account.sipServer" = "SIP-palvelin";
 "account.port" = "Portti";
 "account.proxyServer" = "Välityspalvelin";
 "account.createSipAccount" = "Luo SIP tunnus";
-"account.usernameLabel" = "Anna käyttäjänimi";
-"account.passwordLabel" = "Syötä salasana";
 "account.serverLabel" = "Anna osoite";
 "account.portLabel" = "Anna porttinumero";
 "account.accountStatus" = "Tilin tila";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Aloita videopuhelu";
 "contactPage.sendMessage" = "Lähetä viesti";
 "contactPage.clearConversation" = "Tyhjennä keskustelu";
-"contactPage.blockContact" = "Estä yhteystieto";
 "contactPage.removeConversation" = "Poista keskustelu";
 
 //DataTransfer
@@ -346,69 +328,57 @@
 "dataTransfer.readableStatusCanceled" = "Peruttu";
 "dataTransfer.sendingFailed" = "Lähetys epäonnistui";
 "dataTransfer.readableStatusSuccess" = "Valmis";
-"dataTransfer.readableStatusCancel" = "Peruuta";
 
 //Notifications
-"notifications.incomingCall" = "Saapuva puhelu";
 "notifications.missedCall" = "Vastaamaton puhelu";
 "notifications.newFile" = "Uusi tiedosto";
 "notifications.locationSharingStarted" = "Saapuvan sijainnin jakaminen alkoi";
 "notifications.locationSharingStopped" = "Saapuvan sijainnin jakaminen loppui";
-"dataTransfer.readableStatusAwaiting" = "Odottaa...";
-"dataTransfer.readableStatusOngoing" = "Lähettää";
-"dataTransfer.readableStatusCanceled" = "Peruttu";
-"dataTransfer.readableStatusSuccess" = "Valmis";
-"dataTransfer.readableStatusCancel" = "Peruuta";
+"dataTransfer.readableStatusRefuse" = "Kieltäydy";
+"dataTransfer.readableStatusAccept" = "Hyväksy";
 "dataTransfer.infoMessage" = "Aloita tallennus painamalla";
 "dataTransfer.sendMessage" = "Lähetä";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "Sait vapautuksen.";
 "generatedMessage.swarmCreated" = "Parvi luotiin";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.invitationReceived" = "oli kutsuttu liittymään";
+"generatedMessage.invitationAccepted" = "- Hän liittyi keskustelulle.";
+"generatedMessage.youJoined" = "Sinä liittyt keskustelulle.";
+"generatedMessage.contactBanned" = "- Hän sai potkut.";
+"generatedMessage.contactReAdded" = "lisättiin uudelleen";
 "generatedMessage.outgoingCall" = "Lähtevä puhelu";
-"generatedMessage.incomingCall" = "Saapuva puhelu";
 "generatedMessage.missedOutgoingCall" = "Vastaamaton lähtevä puhelu";
 "generatedMessage.missedIncomingCall" = "Vastaamaton puhelu";
 "generatedMessage.liveLocationSharing" = "Suoran sijainnin jakaminen";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.contactLeftConversation" = "vasemmisto";
 
 //General Settings
-"generalSettings.title" = "Edistyneet asetukset";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Videon asetukset";
 "generalSettings.videoAcceleration" = "Kytke videon laitteistokiihdytys";
 "generalSettings.fileTransfer" = "Tiedostonsiirto";
-"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.locationSharing" = "Paikallisen jakamisen";
 "generalSettings.automaticAcceptIncomingFiles" = "Hyväksy saapuvat tiedostot automaattisesti";
 "generalSettings.acceptTransferLimit" = "Hyväksy siirtoraja";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.acceptTransferLimitDescription" = "(MB:ssä 0 = rajattomuus)";
+"generalSettings.limitLocationSharingDuration" = "Rajoittakaa sijaintiyhteyden kesto";
+"generalSettings.locationSharingDuration" = "Asetuksen osakkeiden kesto";
 
 
 //Log View
 "logView.title" = "Diagnostiikka";
 "logView.description" = "Avaa diagnostiikan lokin asetukset";
 "logView.startLogging" = "Aloita kirjaaminen";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.stopLogging" = "Lopeta metsästys";
+"logView.saveError" = "Tiedosto ei ole tallennettu";
+"logView.shareError" = "Tiedosto ei ole jakettu";
 
 //Migrate Account
 "migrateAccount.title" = "Tilin siirto";
 "migrateAccount.migrateButton" = "Siirrä tunnus";
 "migrateAccount.explanation" = "Tämä tili on siirrettävä";
-"migrateAccount.passwordPlaceholder" = "Syötä salasana";
 "migrateAccount.passwordExplanation" = "Jatka siirtymistä antamalla salasana, jota käytettiin tähän tiliin";
-"migrateAccount.removeAccount" = "Poista tili";
 "migrateAccount.error" = "Tilisi siirtäminen epäonnistui. Voit yrittää uudelleen tai poistaa tilisi.";
 "migrateAccount.migrating" = "Siirretään...";
-"migrateAccount.cancel" = "Peruuta";
 "migrateAccount.migrateAnother" = "Siirrä toinen tunnus";
-
-

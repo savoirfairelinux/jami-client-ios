@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "ਗੱਲਾਂਬਾਤਾਂ";
-"global.meTabBarTitle" = "Account Settings";
+"global.accountSettings" = "Account Settings";
+"global.advancedSettings" = "Advanced Settings";
+"global.username" = "ਵਰਤੋਂਕਾਰ ਨਾਂ";
+"global.password" = "ਪਾਸਵਰਡ";
+"global.registerAUsername" = "Register a username";
+"global.enterPassword" = "ਪਾਸਵਰਡ ਦਾਖਲ ਕਰੋ";
+"global.enterUsername" = "Enter Username";
+"global.cancel" = "ਰੱਦ ਕਰੋ";
+"global.blockContact" = "Block Contact";
+"global.removeAccount" = "Remove account";
+"global.incomingCall" = "ਆਉਂਦੀ ਕਾਲ";
 "global.ok" = "ਠੀਕ ਹੈ";
 "global.close" = "Close";
 "global.share" = "ਸਾਂਝਾ ਕਰੋ";
@@ -34,10 +43,10 @@
 "global.name" = "ਨਾਂ";
 "global.copy" = "ਨਕਲ ਲਾਹੋ";
 "global.reply" = "ਜਵਾਬ ਦਿਓ";
+"global.search" = "Searching…";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
-"scan.search" = "Searching…";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Search for contact...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "ਕੱਲ੍ਹ";
 "smartlist.results" = "Public Directory";
 "smartlist.conversations" = "ਗੱਲਾਂਬਾਤਾਂ";
-"smartlist.searching" = "ਖੋਜਿਆ ਜਾ ਰਿਹਾ ਹੈ...";
 "smartlist.noResults" = "ਕੋਈ ਨਤੀਜਾ ਨਹੀਂ";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Selected contact does not have any number";
 "smartlist.selectOneNumber" = "Select one of the numbers";
 "smartlist.invitations" = "ਸੱਦੇ";
-"smartlist.accountSettings" = "Account Settings";
-"smartlist.advancedSettings" = "Advanced Settings";
 "smartlist.aboutJami" = "Jami ਬਾਰੇ";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 "conversation.errorSavingImage" = "Failed to save image to galery";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "We are waiting for %@ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Create your account";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
-"createAccount.enterNewUsernamePlaceholder" = "ਵਰਤੋਂਕਾਰ ਨਾਂ";
-"createAccount.newPasswordPlaceholder" = "ਪਾਸਵਰਡ";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
 "createAccount.passwordCharactersNumberError" = "ਘੱਟੋ-ਘੱਟ 6 ਅੱਖਰ-ਚਿੰਨ੍ਹ";
 "createAccount.passwordNotMatchingError" = "ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾਂਦੇ";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "username is available";
 "createAccount.loading" = "ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ";
 "createAccount.waitCreateAccountTitle" = "ਖਾਤਾ ਸ਼ਾਮਲ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ";
-"createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Encrypt my account";
 "createAccount.PasswordInformation" = "Choose a password to encrypt your local account. Don’t forget it or you will not be able to recover your account";
 "createAccount.EnableNotifications" = "Notifications";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ਖਾਤਾ ਲਿੰਕ ਕਰਨਾ";
 "linkToAccount.linkButtonTitle" = "ਡੀਵਾਈਸ ਲਿੰਕ ਕਰੋ";
-"linkToAccount.passwordPlaceholder" = "ਪਾਸਵਰਡ";
 "linkToAccount.pinPlaceholder" = "ਪਿੰਨ";
-"linkToAccount.passwordLabel" = "ਪਾਸਵਰਡ ਦਾਖਲ ਕਰੋ";
 "linkToAccount.pinLabel" = "ਪਿੰਨ ਦਾਖਲ ਕਰੋ";
 "linkToAccount.explanationPinMessage" = "ਪਿੰਨ ਕੋਡ ਸਿਰਜਣ ਲਈ, ਉਸ ਖਾਤੇ ਵਾਲੇ ਡੀਵਾਈਸ 'ਤੇ ਖਾਤਾ ਪ੍ਰਬੰਧਨ ਸੈਟਿੰਗਾਂ 'ਤੇ ਜਾਓ, ਜਿਸਨੂੰ ਤੁਸੀਂ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ। ਡੀਵਾਈਸ ਸੈਟਿੰਗਾਂ ਵਿੱਚ \"ਕਿਸੇ ਹੋਰ ਡੀਵਾਈਸ ਨੂੰ ਇਸ ਖਾਤੇ ਨਾਲ ਲਿੰਕ ਕਰੋ\" ਨੂੰ ਚੁਣੋ। ਤੁਹਾਨੂੰ ਇਹ ਫਾਰਮ ਪੂਰਾ ਕਰਨ ਲਈ ਜ਼ਰੂਰੀ ਪਿੰਨ ਦੀ ਲੋੜ ਪਵੇਗੀ। ਪਿੰਨ ਸਿਰਫ਼ 10 ਮਿੰਟਾਂ ਲਈ ਵੈਧ ਰਹਿੰਦਾ ਹੈ।";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "ਪਾਸਵਰਡ";
-"linkToAccountManager.passwordLabel" = "ਪਾਸਵਰਡ ਦਾਖਲ ਕਰੋ";
-"linkToAccountManager.usernamePlaceholder" = "ਵਰਤੋਂਕਾਰ ਨਾਂ";
-"linkToAccountManager.usernameLabel" = "Enter Username";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "ਖਾਤਾ ਬਣਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।";
 "alerts.profileTakePhoto" = "ਫ਼ੋਟੋ ਖਿੱਚੋ";
 "alerts.profileUploadPhoto" = "ਫ਼ੋਟੋ ਅੱਪਲੋਡ ਕਰੋ";
-"alerts.profileCancelPhoto" = "ਰੱਦ ਕਰੋ";
 "alerts.accountLinkedTitle" = "ਖਾਤਾ ਲਿੰਕ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ";
 "alerts.dbFailedTitle" = "An error happned when launching Jami";
 "alerts.dbFailedMessage" = "ਕਿਰਪਾ ਕਰਕੇ ਐਪਲੀਕੇਸ਼ਨ ਬੰਦ ਕਰਕੇ ਦੁਬਾਰਾ ਖੋਲ੍ਹ ਕੇ ਦੇਖੋ";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
-"alerts.confirmBlockContactTitle" = "Block Contact";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
 "alerts.confirmDeleteConversationFromContact" = "Are you sure you want to delete the conversation with this contact?";
 "alerts.confirmDeleteConversationTitle" = "Delete Conversation";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "ਮਿਟਾਓ";
-"actions.cancelAction" = "ਰੱਦ ਕਰੋ";
 "actions.clearAction" = "Clear";
 "actions.backAction" = "ਪਿੱਛੇ";
 "actions.doneAction" = "Done";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Call";
-"calls.unknown" = "ਅਣਪਛਾਤਾ";
 "calls.incomingCallInfo" = "wants to talk to you";
 "calls.ringing" = "Ringing…";
 "calls.connecting" = "Connecting…";
-"calls.searching" = "Searching…";
 "calls.callFinished" = "Call finished";
 "calls.currentCallWith" = "Call with ";
 "calls.haghUp" = "hang up";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "ਡੀਵਾਈਸ";
 "accountPage.settingsHeader" = "ਸੈਟਿੰਗਾਂ";
-"accountPage.username" = "ਵਰਤੋਂਕਾਰ ਨਾਂ";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
-"accountPage.enableProxy" = "Enable Proxy";
 "accountPage.blockedContacts" = "ਬਲਾਕ ਕੀਤੇ ਸੰਪਰਕ";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Enable Proxy";
 "accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
-"accountPage.saveProxyAddress" = "Save";
 "accountPage.proxyPaceholder" = "Proxy address";
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Device revocation error";
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "ਹੋਰ";
-"accountPage.removeAccountTitle" = "Remove account";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 "accountPage.removeAccountButton" = "Remove";
 "accountPage.shareAccountDetails" = "Share Account Details";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "Register a username";
 "accountPage.passwordPlaceholder" = "Enter account password";
 "accountPage.usernamePlaceholder" = "Enter desired username";
 "accountPage.registerNameErrorMessage" = "Choosen username is not available";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "User Name";
-"account.sipPassword" = "ਪਾਸਵਰਡ";
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
 "account.proxyServer" = "ਪ੍ਰੌਕਸੀ";
 "account.createSipAccount" = "Create a SIP Account";
-"account.usernameLabel" = "Enter Username";
-"account.passwordLabel" = "ਪਾਸਵਰਡ ਦਾਖਲ ਕਰੋ";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Start Video Call";
 "contactPage.sendMessage" = "Send Message";
 "contactPage.clearConversation" = "Clear Chat";
-"contactPage.blockContact" = "Block Contact";
 "contactPage.removeConversation" = "Remove Conversation";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "ਰੱਦ ਕੀਤਾ ਗਿਆ";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusCancel" = "ਰੱਦ ਕਰੋ";
 
 //Notifications
-"notifications.incomingCall" = "Incoming Call";
 "notifications.missedCall" = "Missed Call";
 "notifications.newFile" = "New file";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
-"dataTransfer.readableStatusAwaiting" = "Pending…";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "ਰੱਦ ਕੀਤਾ ਗਿਆ";
-"dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusCancel" = "ਰੱਦ ਕਰੋ";
+"dataTransfer.readableStatusRefuse" = "ਨਾ-ਮਨਜ਼ੂਰ ਕਰੋ";
+"dataTransfer.readableStatusAccept" = "ਮਨਜ਼ੂਰ ਕਰੋ";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "ਭੇਜੋ";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "was kicked";
 "generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "ਜਾਂਦੀ ਕਾਲ";
-"generatedMessage.incomingCall" = "ਆਉਂਦੀ ਕਾਲ";
 "generatedMessage.missedOutgoingCall" = "ਖੁੰਝੀ ਜਾਂਦੀ ਕਾਲ";
 "generatedMessage.missedIncomingCall" = "ਖੁੰਝੀ ਆਉਂਦੀ ਕਾਲ";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
 "generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
-"generalSettings.title" = "ਉੱਨਤ ਸੈਟਿੰਗਾਂ";
 "generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
 "generalSettings.fileTransfer" = "ਫ਼ਾਈਲ ਤਬਾਦਲਾ";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "ਖਾਤਾ ਤਬਾਦਲਾ";
 "migrateAccount.migrateButton" = "Migrate Account";
 "migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "ਪਾਸਵਰਡ ਦਾਖਲ ਕਰੋ";
 "migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Remove account";
 "migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
 "migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "ਰੱਦ ਕਰੋ";
 "migrateAccount.migrateAnother" = "Migrate Another Account";
-
-

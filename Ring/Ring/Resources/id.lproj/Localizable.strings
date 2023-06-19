@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Obrolan";
-"global.meTabBarTitle" = "Pengaturan Akun";
+"global.accountSettings" = "Pengaturan Akun";
+"global.advancedSettings" = "Pengaturan Lanjutan";
+"global.username" = "Nama pengguna";
+"global.password" = "Kata sandi";
+"global.registerAUsername" = "Daftarkan nama pengguna";
+"global.enterPassword" = "Masukkan kata sandi";
+"global.enterUsername" = "Masukkan nama pengguna";
+"global.cancel" = "Batal";
+"global.blockContact" = "Blokir kontak";
+"global.removeAccount" = "Buang akun";
+"global.incomingCall" = "Panggilan masuk";
 "global.ok" = "Oke";
 "global.close" = "Tutup";
 "global.share" = "Bagikan";
@@ -34,10 +43,10 @@
 "global.name" = "Nama";
 "global.copy" = "Salin";
 "global.reply" = "Balas";
+"global.search" = "Mencari...";
 
 // Scan
 "scan.badQrCode" = "Kode QR yang buruk";
-"scan.search" = "Mencari...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Cari kontak...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "Kemarin";
 "smartlist.results" = "Direktori Publik";
 "smartlist.conversations" = "Obrolan";
-"smartlist.searching" = "Mencari...";
 "smartlist.noResults" = "Tidak ketemu";
 "smartlist.noConversation" = "Tidak ada obrolan";
 "smartlist.searchBarPlaceholder" = "Masukkan nama...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Kontak yang dipilih tidak memiliki nomor";
 "smartlist.selectOneNumber" = "Pilih salah satu nomor";
 "smartlist.invitations" = "Undangan";
-"smartlist.accountSettings" = "Pengaturan Akun";
-"smartlist.advancedSettings" = "Pengaturan Lanjutan";
 "smartlist.aboutJami" = "Tentang Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "Anda saat ini berbagi lokasi Anda dengan";
 "conversation.explanationReceivingLocationFrom" = "Saat ini Anda sedang menerima lokasi langsung dari";
 "conversation.errorSavingImage" = "Gagal menyimpan gambar ke galeri";
-"conversation.receivedRequest" = "\%@\ mengirim permintaan untuk percakapan.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Mengirimkan permintaan untuk percakapan.";
 "conversation.requestMessage" = "Halo, \nApakah Anda ingin bergabung dalam percakapan?";
-"conversation.notContact" = "\%@\ tidak ada dalam daftar kontak Anda.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Kirimkan permintaan kontak kepadanya agar Anda bisa saling bertukar pikiran.";
 "conversation.sendRequestTitle" = "Kirim permintaan kontak";
 "conversation.synchronizationTitle" = "Anda telah menerima permintaan percakapan.";
-"conversation.synchronizationMessage" = "Kami menunggu \%@\ koneksi untuk menyelaraskan percakapan.";
+"conversation.synchronizationMessage" = "Kami menunggu %@ terhubung untuk menyinkronkan percakapan.";
 
 //Invitations
 "invitations.noInvitations" = "Tidak ada undangan";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Buat akun anda";
 "createAccount.chooseStrongPassword" = "Gunakan kata sandi kuat dan mudah diingat untuk menjaga akun Jami anda.";
-"createAccount.enterNewUsernamePlaceholder" = "Nama pengguna";
-"createAccount.newPasswordPlaceholder" = "Kata sandi";
 "createAccount.repeatPasswordPlaceholder" = "Konfirmasi kata sandi";
 "createAccount.passwordCharactersNumberError" = "Minimum 6 karakter";
 "createAccount.passwordNotMatchingError" = "Kata sandi tidak cocok";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "Nama pengguna tersedia";
 "createAccount.loading" = "Harap tunggu";
 "createAccount.waitCreateAccountTitle" = "Menambahkan akun";
-"createAccount.RegisterAUsername" = "Daftarkan nama pengguna";
 "createAccount.ChooseAPassword" = "Enkripsi akun saya";
 "createAccount.PasswordInformation" = "Pilih kata sandi untuk mengenkripsi akun lokal Anda. Jangan lupa atau Anda tidak akan bisa memulihkan akun Anda";
 "createAccount.EnableNotifications" = "Notifikasi";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Penautan akun";
 "linkToAccount.linkButtonTitle" = "Tautkan perangkat";
-"linkToAccount.passwordPlaceholder" = "Kata sandi";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Masukkan kata sandi";
 "linkToAccount.pinLabel" = "Masukkan PIN";
 "linkToAccount.explanationPinMessage" = "Untuk membuat kode PIN, buka pengaturan pengelolaan akun pada perangkat yang berisi akun yang ingin Anda gunakan. Dalam pengaturan perangkat, pilih \"Tautkan perangkat lain ke akun ini\". Anda akan mendapatkan PIN yang diperlukan untuk melengkapi formulir ini. PIN hanya berlaku selama 10 menit.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Masuk";
-"linkToAccountManager.passwordPlaceholder" = "Kata sandi";
-"linkToAccountManager.passwordLabel" = "Masukkan kata sandi";
-"linkToAccountManager.usernamePlaceholder" = "Nama pengguna";
-"linkToAccountManager.usernameLabel" = "Masukkan nama pengguna";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Masukkan URL JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Akun tidak bisa dibuat";
 "alerts.profileTakePhoto" = "Ambil foto";
 "alerts.profileUploadPhoto" = "Unggah foto";
-"alerts.profileCancelPhoto" = "Batal";
 "alerts.accountLinkedTitle" = "Menghubungkan akun";
 "alerts.dbFailedTitle" = "Terjadi error saat meluncurkan Jami";
 "alerts.dbFailedMessage" = "Harap tutup aplikasi dan coba buka lagi";
 "alerts.confirmBlockContact" = "Apakah Anda yakin ingin memblokir kontak ini? Riwayat percakapan dengan kontak ini juga akan dihapus secara permanen.";
-"alerts.confirmBlockContactTitle" = "Blokir kontak";
 "alerts.confirmDeleteConversation" = "Apakah Anda yakin ingin menghapus percakapan ini secara permanen?";
 "alerts.confirmDeleteConversationFromContact" = "Apakah Anda yakin ingin menghapus percakapan dengan kontak ini?";
 "alerts.confirmDeleteConversationTitle" = "Hapus Percakapan";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Hapus";
-"actions.cancelAction" = "Batal";
 "actions.clearAction" = "Bersihkan";
 "actions.backAction" = "Kembali";
 "actions.doneAction" = "Selesai";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Telepon";
-"calls.unknown" = "Tidak diketahui";
 "calls.incomingCallInfo" = "ingin berbicara dengan Anda";
 "calls.ringing" = "Berdering...";
 "calls.connecting" = "Menghubungkan...";
-"calls.searching" = "Mencari...";
 "calls.callFinished" = "Panggilan selesai";
 "calls.currentCallWith" = "Telepon dengan";
 "calls.haghUp" = "angkat";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Perangkat";
 "accountPage.settingsHeader" = "Setelan";
-"accountPage.username" = "Nama pengguna";
 "accountPage.usernameNotRegistered" = "Nama pengguna: tidak terdaftar";
 "accountPage.credentialsHeader" = "Detail Akun";
-"accountPage.enableProxy" = "Aktifkan proksi";
 "accountPage.blockedContacts" = "Kontak yang diblokir";
 "accountPage.unblockContact" = "BUKA BLOKIR";
 "accountPage.proxyAddressAlert" = "Masukkan alamat proksi";
-"accountPage.enableProxy" = "Aktifkan proksi";
 "accountPage.noProxyExplanationLabel" = "Perangkat Anda tidak akan menerima notifikasi ketika proxy dinonaktifkan";
-"accountPage.saveProxyAddress" = "Simpan";
 "accountPage.proxyPaceholder" = "Alamat proksi";
 "accountPage.enableNotifications" = "Aktifkan notifikasi";
 "accountPage.proxyDisabledAlertTitle" = "Server Proxy Dinonaktifkan";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Pencabutan perangkat error";
 "accountPage.linkDeviceTitle" = "Tautkan perangkat lain";
 "accountPage.other" = "Lainnya";
-"accountPage.removeAccountTitle" = "Buang akun";
 "accountPage.removeAccountMessage" = "Dengan mengklik \"Hapus\", Anda akan menghapus akun ini di perangkat ini! Tindakan ini tidak bisa dibatalkan. Selain itu, nama terdaftar Anda bisa hilang.";
 "accountPage.removeAccountButton" = "Hapus";
 "accountPage.shareAccountDetails" = "Bagikan detail akun";
 "accountPage.contactMeOnJamiTitle" = "Hubungi saya di Jami!";
 "accountPage.contactMeOnJamiContant" = "Hubungi saya menggunakan \"%s\" pada platform komunikasi terdistribusi Jami: https://jami.net";
-"accountPage.registerNameTitle" = "Daftarkan nama pengguna";
 "accountPage.passwordPlaceholder" = "Masukkan kata sandi akun";
 "accountPage.usernamePlaceholder" = "Masukkan nama pengguna yang diinginkan";
 "accountPage.registerNameErrorMessage" = "Nama pengguna yang dipilih tidak tersedia";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Nama Pengguna";
-"account.sipPassword" = "Kata sandi";
 "account.sipServer" = "Peladen SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Proksi";
 "account.createSipAccount" = "Buat akun SIP";
-"account.usernameLabel" = "Masukkan nama pengguna";
-"account.passwordLabel" = "Masukkan kata sandi";
 "account.serverLabel" = "Masukkan alamat";
 "account.portLabel" = "Masukkan nomor port";
 "account.accountStatus" = "Status akun";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Mulai panggilan video";
 "contactPage.sendMessage" = "Kirim pesan";
 "contactPage.clearConversation" = "Bersihkan obrolan";
-"contactPage.blockContact" = "Blokir kontak";
 "contactPage.removeConversation" = "Buang percakapan";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "Dibatalkan";
 "dataTransfer.sendingFailed" = "Gagal mengirim";
 "dataTransfer.readableStatusSuccess" = "Selesai";
-"dataTransfer.readableStatusCancel" = "Batal";
 
 //Notifications
-"notifications.incomingCall" = "Panggilan masuk";
 "notifications.missedCall" = "Panggilan tak terjawab";
 "notifications.newFile" = "File baru";
 "notifications.locationSharingStarted" = "Berbagi lokasi masuk dimulai";
 "notifications.locationSharingStopped" = "Berbagi lokasi masuk dihentikan";
-"dataTransfer.readableStatusAwaiting" = "Tertunda...";
-"dataTransfer.readableStatusOngoing" = "Mengirimkan";
-"dataTransfer.readableStatusCanceled" = "Dibatalkan";
-"dataTransfer.readableStatusSuccess" = "Selesai";
-"dataTransfer.readableStatusCancel" = "Batal";
+"dataTransfer.readableStatusRefuse" = "Tolak";
+"dataTransfer.readableStatusAccept" = "Terima";
 "dataTransfer.infoMessage" = "Tekan untuk mulai merekam";
 "dataTransfer.sendMessage" = "Kirim";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "dipukul";
 "generatedMessage.contactReAdded" = "ditambahkan kembali";
 "generatedMessage.outgoingCall" = "Panggilan keluar";
-"generatedMessage.incomingCall" = "Panggilan masuk";
 "generatedMessage.missedOutgoingCall" = "Panggilan keluar tidak terjawab";
 "generatedMessage.missedIncomingCall" = "Panggilan masuk tidak terjawab";
 "generatedMessage.liveLocationSharing" = "Berbagi lokasi secara live";
 "generatedMessage.contactLeftConversation" = "kiri";
 
 //General Settings
-"generalSettings.title" = "Pengaturan lanjutan";
 "generalSettings.videoSettings" = "Pengaturan Video";
 "generalSettings.videoAcceleration" = "Aktifkan akselerasi video";
 "generalSettings.fileTransfer" = "Mengirim berkas";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "Migrasi akun";
 "migrateAccount.migrateButton" = "Migrasi akun";
 "migrateAccount.explanation" = "Akun ini perlu dimigrasikan";
-"migrateAccount.passwordPlaceholder" = "Masukan kata sandi";
 "migrateAccount.passwordExplanation" = "Untuk melanjutkan migrasi, Anda harus memasukkan kata sandi yang digunakan untuk akun ini";
-"migrateAccount.removeAccount" = "Buang akun";
 "migrateAccount.error" = "Gagal memigrasikan akun Anda. Anda dapat mencoba kembali atau menghapus akun Anda.";
 "migrateAccount.migrating" = "Memigrasikan...";
-"migrateAccount.cancel" = "Batal";
 "migrateAccount.migrateAnother" = "Migrasi akun lainnya";
-
-

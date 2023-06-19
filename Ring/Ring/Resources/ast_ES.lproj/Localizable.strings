@@ -1,0 +1,384 @@
+﻿ /*
+ *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *
+ *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+// Global
+"global.accountSettings" = "Configuración de cuenta";
+"global.advancedSettings" = "La configuración avanzada";
+"global.username" = "Nombre d'usuariu";
+"global.password" = "Paez que la contraseña";
+"global.registerAUsername" = "Registrar un nome d' usuariu";
+"global.enterPassword" = "Entra contraseña";
+"global.enterUsername" = "Entra nome d' usuariu";
+"global.cancel" = "Cancelación";
+"global.blockContact" = "Bloquear el contautu";
+"global.removeAccount" = "La cuenta ye retirada";
+"global.incomingCall" = "L'español";
+"global.ok" = "Bien, ye bien.";
+"global.close" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
+"global.share" = "Compartir";
+"global.forward" = "Aforra";
+"global.save" = "El so nome ye \"Castor\".";
+"global.resend" = "Enviar a la xente";
+"global.preview" = "Previsión";
+"global.accept" = "Acceptar";
+"global.block" = "Bloqueáu";
+"global.refuse" = "Rechazar";
+"global.name" = "Nombre";
+"global.copy" = "La copia";
+"global.reply" = "Respuesta";
+"global.search" = "Buscando...";
+
+// Scan
+"scan.badQrCode" = "Un codiciu QR malo";
+
+// SwarmCreation
+"swarmcreation.searchBar" = "La busca de contactu...";
+"swarmcreation.createTheSwarm" = "Crear el enjambre";
+"swarmcreation.addADescription" = "Axega una descripción";
+"swarmcreation.addPeople" = "Puede añadir más xente al enjambre";
+// Swarm
+"swarm.ignoreSwarm" = "Ignorar el enjambre";
+"swarm.leaveConversation" = "La conversación ye una cuestión de tiempu.";
+"swarm.chooseColor" = "Escueye un color";
+"swarm.typeOfSwarm" = "Esti tipu de enjambre";
+"swarm.identifier" = "Identificador";
+"swarm.about" = "Sobre";
+"swarm.members" = "Los miembros";
+"swarm.addDescription" = "Aumentu de la descripción";
+"swarm.oneToOne" = "El so grupu privado";
+"swarm.adminInvitesOnly" = "Admins solo invita";
+"swarm.invitesOnly" = "El so grupu privado";
+"swarm.publicChat" = "El rei de los Estaos Xuníos";
+"swarm.others" = "Altres";
+"swarm.member" = "Miembro";
+"swarm.invited" = "Convidaos";
+"swarm.admin" = "Administración";
+"swarm.banned" = "Prohibíu";
+"swarm.unknown" = "La so familia";
+"swarm.addMorePeople" = "Puede añadir más xente a este enjambre";
+"swarm.addMember" = "Aderir miembru";
+"swarm.confirmLeaveSwarm" = "¿Seguru que quieres salir de la masa?";
+"swarm.Leave" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
+// Smartlist
+"smartlist.yesterday" = "En xineru de 2011";
+"smartlist.results" = "El Directoriu Públicu";
+"smartlist.conversations" = "El so padre foi un fíu de la familia de la familia de los hermanos.";
+"smartlist.noResults" = "Nun hai resultáu";
+"smartlist.noConversation" = "Nun hai conversaciones.";
+"smartlist.searchBarPlaceholder" = "Entra'l nome...";
+"smartlist.searchBar" = "La busca de nuevos o actuales contactos...";
+"smartlist.noNetworkConnectivity" = "Nun hai conectividá de rede";
+"smartlist.cellularAccess" = "Asegúrese d'un accesu celular autorizáu nos sos ajustes";
+"smartlist.accountsTitle" = "Cuentas";
+"smartlist.addAccountButton" = "+ Agrega cuenta";
+"smartlist.noNumber" = "El contautu seleccionáu nun tien númberu.";
+"smartlist.selectOneNumber" = "Seleccione unu de los númberos";
+"smartlist.invitations" = "Les invitaciones";
+"smartlist.aboutJami" = "Sobre Jami";
+
+//Conversation
+"conversation.messagePlaceholder" = "Escribir un mensaxe a ";
+"conversation.explanationSendingLocationTo" = "En casu de que nun se pueda identificar la so situación,";
+"conversation.explanationReceivingLocationFrom" = "Nun ye posible que la xente que la conoz reciba un llugar en directo de ";
+"conversation.errorSavingImage" = "Nun pudo guardar imáxenes na galería";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Envié-y una petición de conversación.";
+"conversation.requestMessage" = "Hola, ¿quieres xunise a la conversación?";
+"conversation.notContact" = "%@ is not in your contact list.";
+"conversation.sendRequest" = "Enviar-y una solicitud de contacto pa poder intercambiar xuntos";
+"conversation.sendRequestTitle" = "Enviar una so solicitud de contautu";
+"conversation.synchronizationTitle" = "Acordó la so solicitud de conversación.";
+"conversation.synchronizationMessage" = "Esperamos que %@ conecten pa sincronizar la conversación.";
+
+//Invitations
+"invitations.noInvitations" = "Nun hai invitaciones.";
+
+// Walkthrough
+
+//Welcome Screen
+"welcome.title" = "Bienveníu a Jami!";
+"welcome.text" = "Jami ye una plataforma de comunicación gratuita y universal que preserva la privacidá y les llibertaes de los usuarios.";
+"welcome.linkDevice" = "Estaxe un enllaz a un cuentu";
+"welcome.createAccount" = "Crear una cuenta Jami";
+"welcome.connectToManager" = "Conectar a un servidor JAMS";
+
+//Creation Profile Screen
+"createProfile.skipCreateProfile" = "El so nome ye \"Skip\".";
+"createProfile.profileCreated" = "El siguiente";
+"createProfile.title" = "Personalizase'l so perfil";
+"createProfile.enterNameLabel" = "Introducir un nome d' pantalla";
+"createProfile.enterNamePlaceholder" = "Entra nome";
+"createProfile.subtitle" = "El so perfil va ser compartidu con los sos contactos.";
+"createProfile.createYourAvatar" = "Crear el so avatar";
+
+//Create Account form
+"createAccount.createAccountFormTitle" = "Crear la so cuenta";
+"createAccount.chooseStrongPassword" = "Escueye una contraseña fuerte que recordar pa protexer la so cuenta Jami.";
+"createAccount.repeatPasswordPlaceholder" = "Confirmar contraseña";
+"createAccount.passwordCharactersNumberError" = "Minimu de 6 caracteres";
+"createAccount.passwordNotMatchingError" = "Les contraseñes nun coinciden";
+"createAccount.lookingForUsernameAvailability" = "Buscando disponibilidá...";
+"createAccount.invalidUsername" = "Nombre d'usuariu inválidu";
+"createAccount.usernameAlreadyTaken" = "Nómase usuariu ya adoptáu";
+"createAccount.usernameValid" = "El nome d'usuariu ye disponible";
+"createAccount.loading" = "Carga";
+"createAccount.waitCreateAccountTitle" = "Contá adicional";
+"createAccount.ChooseAPassword" = "Encripta la mio cuenta";
+"createAccount.PasswordInformation" = "Escolla una contraseña pa cifrar la cuenta local.";
+"createAccount.EnableNotifications" = "Notificaciones";
+"createAccount.Recommended" = "(Recomendáu)";
+"createAccount.UsernameNotRegisteredTitle" = "Error de red";
+"createAccount.UsernameNotRegisteredMessage" = "Creóse una cuenta pero nun se rexistró'l nome d'usuariu";
+"createAccount.timeoutTitle" = "Creáu cuenta";
+"createAccount.timeoutMessage" = "El rexistru del nome d'usuariu en cursu... podría tardar unos momentos.";
+
+//Link To Account form
+"linkToAccount.waitLinkToAccountTitle" = "La vinculación de cuentas";
+"linkToAccount.linkButtonTitle" = "Dispositivu de enllaz";
+"linkToAccount.pinPlaceholder" = "El PIN";
+"linkToAccount.pinLabel" = "Entra PIN";
+"linkToAccount.explanationPinMessage" = "El PIN ye un sistema de xestión de datos que se basa en datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos";
+
+//Link To Account Manager form
+"linkToAccountManager.signIn" = "Ensinar";
+"linkToAccountManager.accountManagerPlaceholder" = "La dirección de la páxina web de James";
+"linkToAccountManager.accountManagerLabel" = "Entra URL de JAMS";
+
+//Alerts
+"alerts.accountCannotBeFoundTitle" = "Nun puedo atopar cuenta";
+"alerts.accountCannotBeFoundMessage" = "La cuenta nun pudo ser atopada na rede Jami.";
+"alerts.accountAddedTitle" = "Cuenta añadida";
+"alerts.accountNoNetworkTitle" = "Nun se puede conectar a la rede.";
+"alerts.accountNoNetworkMessage" = "La so cuenta nun pudo ser añadida porque Jami nun podía conectar a la rede distribuyida.";
+"alerts.accountDefaultErrorTitle" = "Error desconocíu";
+"alerts.accountDefaultErrorMessage" = "La cuenta nun se pudo crear.";
+"alerts.profileTakePhoto" = "Ye una fotografía.";
+"alerts.profileUploadPhoto" = "Archiváu dende l' oxetivu";
+"alerts.accountLinkedTitle" = "Cuenta de vinculación";
+"alerts.dbFailedTitle" = "Un error asocedió al llanzar Jami.";
+"alerts.dbFailedMessage" = "Por favor, cierre la so solicitud y intenta abrir de nuevu.";
+"alerts.confirmBlockContact" = "¿Estás segura de que quieres bloquear este contacto?";
+"alerts.confirmDeleteConversation" = "¿Estás segura de qu'ayudes a borrar esta conversación de forma permanente?";
+"alerts.confirmDeleteConversationFromContact" = "¿Estás segura de qu'ayudes a borrar la conversación con esti contautu?";
+"alerts.confirmDeleteConversationTitle" = "La conversación ye borrada";
+"alerts.confirmClearConversation" = "¿Estás segura de que quieres despeñar la conversación con este contautu?";
+"alerts.confirmClearConversationTitle" = "El so padre, el so padre, yera un fíu de María.";
+"alerts.noMediaPermissionsTitle" = "Permisión de medios non concedida";
+"alerts.noLibraryPermissionsTitle" = "L'accesu a la biblioteca de fotos nun se concede";
+"alerts.noLocationPermissionsTitle" = "L'accesu a la localización nun se concede";
+"alerts.errorWrongCredentials" = "Nun se puede conectar al administrador de cuenta proporcionáu.";
+"alerts.recordVideoMessage" = "Grabar un mensaxe de video";
+"alerts.recordAudioMessage" = "Grabar un mensaxe d'únicu audio";
+"alerts.uploadFile" = "Archiváu dende l' oxetivu";
+"alerts.uploadPhoto" = "Cargar foto o película";
+"alerts.locationServiceIsDisabled" = "Enviada \"Servicios de localización\" pa dexar a \"Jami\" determinar la so localización.";
+"alerts.locationSharing" = "Compartir la mio localización";
+"alerts.alreadylocationSharing" = "Al traviés de la páxina web, el nome del usuariu ye'l nome de la páxina web.";
+"alerts.locationSharingDurationTitle" = "¿Cuánto tiempu debería tar la distribución de la localización?";
+"alerts.locationSharingDuration10min" = "10 min";
+"alerts.locationSharingDuration1hour" = "Una hora";
+"alerts.mapInformation" = "Información del mapa";
+"alerts.openStreetMapCopyright" = "© Colaboradores de OpenStreetMap";
+"alerts.openStreetMapCopyrightMoreInfo" = "Más información";
+
+//Actions
+"actions.deleteAction" = "Esborrar";
+"actions.clearAction" = "El so nome ye \"Clarity\".";
+"actions.backAction" = "El so fíu, el so fíu,";
+"actions.doneAction" = "Fináu";
+"alerts.incomingCallAllertTitle" = "Llamada de ";
+"alerts.incomingCallButtonIgnore" = "Ignorar";
+"actions.startAudioCall" = "La llamada d'únicu soníu";
+"actions.startVideoCall" = "La llamada de video";
+"actions.goToSettings" = "Asegúrese de les configuraciones";
+"actions.stopLocationSharing" = "Pa evitar la compartición";
+
+//Calls
+"calls.callItemTitle" = "Llamada";
+"calls.incomingCallInfo" = "Quiere falar contigo.";
+"calls.ringing" = "El soníu...";
+"calls.connecting" = "La conexión...";
+"calls.callFinished" = "La llamada terminada";
+"calls.currentCallWith" = "Llamó con ";
+"calls.haghUp" = "Enfermedaes de la familia";
+"calls.maximize" = "maximizar";
+"calls.minimize" = "Minimizar";
+"calls.setModerator" = "Establecimientu inscritu nel Rexistru d'Actividaes Turístiques del Principáu d'Asturies col códigu DGT CA0831.";
+"calls.removeModerator" = "Moderador desimputáu";
+"calls.muteAudio" = "El so nome ye \"Audio\"";
+"calls.unmuteAudio" = "La so voz nun se silenció.";
+"calls.lowerHand" = "La mano inferior";
+
+//Account Page
+"accountPage.devicesListHeader" = "Dispositivos";
+"accountPage.settingsHeader" = "Configuración";
+"accountPage.usernameNotRegistered" = "Nome d'usuariu: non rexistráu";
+"accountPage.credentialsHeader" = "Detalles de la cuenta";
+"accountPage.blockedContacts" = "Contactos bloqueados";
+"accountPage.unblockContact" = "Unbloque";
+"accountPage.proxyAddressAlert" = "Envíe direutamente la dirección de proxy";
+"accountPage.noProxyExplanationLabel" = "El so dispositivu nun recibirá notificaciones cuando se desactiva'l proxy";
+"accountPage.proxyPaceholder" = "La dirección de proxy";
+"accountPage.enableNotifications" = "Activu Notificaciones";
+"accountPage.proxyDisabledAlertTitle" = "El servidor proxy nun funciona";
+"accountPage.proxyDisabledAlertBody" = "Pa recibir notificaciones, por favor, activen proxy";
+"accountPage.revokeDeviceTitle" = "Dispositivu de revocación";
+"accountPage.revokeDeviceMessage" = "Esta acción nun podía ser revocada.";
+"accountPage.revokeDeviceButton" = "Revocación";
+"accountPage.revokeDevicePlaceholder" = "Entra la so contraseña.";
+"accountPage.deviceRevoked" = "La revocación del dispositivu completada";
+"accountPage.deviceRevocationProgress" = "Revocar...";
+"accountPage.deviceRevocationSuccess" = "El dispositivu foi revocáu";
+"accountPage.deviceRevocationTryAgain" = "Ensaiar otra vegada.";
+"accountPage.deviceRevocationWrongPassword" = "Paez incorrecta";
+"accountPage.deviceRevocationUnknownDevice" = "Dispositivu desconocíu";
+"accountPage.deviceRevocationError" = "Error de revocación del dispositivu";
+"accountPage.linkDeviceTitle" = "Enlazar otru dispositivu";
+"accountPage.other" = "Altres";
+"accountPage.removeAccountMessage" = "El so nome rexistráu puede perderse.";
+"accountPage.removeAccountButton" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
+"accountPage.shareAccountDetails" = "Compartir detalles de cuenta";
+"accountPage.contactMeOnJamiTitle" = "¡Contacta-me en Jami!";
+"accountPage.contactMeOnJamiContant" = "La so primer apaición foi nel estrenu de la so cuarta temporada en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, y en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, y en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en The Hollywood Revival, en The Hollywood Revival, en The Hollywood Revival, en The Hollywood Revival, en The CW.";
+"accountPage.passwordPlaceholder" = "Entra contraseña de la cuenta";
+"accountPage.usernamePlaceholder" = "Introduz el nome d' usuariu deseáu";
+"accountPage.registerNameErrorMessage" = "El nome d' usuariu escoyíu nun ye disponible";
+"accountPage.usernameRegistering" = "El rexistru";
+"accountPage.usernameRegisterAction" = "El rexistru";
+"accountPage.usernameRegistrationFailed" = "La inscripción fallaron.";
+"accountPage.createPassword" = "Crear contraseña";
+"accountPage.changePassword" = "Cambiar contraseña";
+"accountPage.oldPasswordPlaceholder" = "Introducir una contraseña vieya";
+"accountPage.newPasswordPlaceholder" = "Introducir una contraseña nueva";
+"accountPage.newPasswordConfirmPlaceholder" = "Confirmar la contraseña nueva";
+"accountPage.changePasswordError" = "La contraseña ye incorrecta";
+"accountPage.enableBoothMode" = "Activa'l Módus de Booth";
+"accountPage.disableBoothMode" = "Desactivar el Módulu de Booth";
+"accountPage.disableBoothModeExplanation" = "Pleace proporcionar la so contraseña de cuenta";
+"accountPage.boothModeExplanation" = "En modo stand, el historial de conversaciones nun se guarda y la funcionalidá jami ye limitada por facer llamadas salientes.";
+"accountPage.noBoothMode" = "Pa activar el mode Booth hai que crear primero la contraseña de la cuenta.";
+"accountPage.boothModeAlertMessage" = "La so primer apaición foi nel estrenu de la cuarta temporada de la serie enllargar hasta un total de 12 episodios.[16] N'ochobre de 1998, la so primer apaición foi nel estrenu de la cuarta temporada de la serie enllargar hasta un total d'once episodios.[16]";
+"accountPage.peerDiscovery" = "Autónomu conexión na rede local";
+"accountPage.autoRegistration" = "El rexistru automáticu dempués de la expiración";
+"accountPage.connectivityHeader" = "La conectividá";
+"accountPage.turnEnabled" = "Activu TURN";
+"accountPage.turnServer" = "Direición de la RRN";
+"accountPage.turnUsername" = "Nómase d'usuariu TURN";
+"accountPage.turnPassword" = "La contraseña de TURN";
+"accountPage.turnRealm" = "El Reinu de la VIRTANcia";
+
+//Account
+"account.sipUsername" = "Nome d'usuariu";
+"account.sipServer" = "Servidor SIP";
+"account.port" = "Portos";
+"account.proxyServer" = "El so nome ye";
+"account.createSipAccount" = "Crear una cuenta SIP";
+"account.serverLabel" = "Entra direutamente";
+"account.portLabel" = "Entra'l númberu de puertu";
+"account.accountStatus" = "El estatutu de la cuenta";
+"account.enableAccount" = "Activación de cuenta";
+"account.statusOnline" = "En línea";
+"account.statusOffline" = "La llinia";
+"account.statusConnecting" = "Conexión";
+"account.statusUnknown" = "Nun se sabe";
+"account.statusConnectionerror" = "Error de conexión";
+"account.needMigration" = "La cuenta tien de ser migrao.";
+"account.me" = "Yo tamién.";
+
+//Block List Page
+"blockListPage.noBlockedContacts" = "Nun hai contactos bloqueaos";
+
+//Link New Device
+"linkDevice.title" = "Enlazar un nuevu dispositivu";
+"linkDevice.passwordError" = "La contraseña que introdució nun desbloquea esta cuenta";
+"linkDevice.networkError" = "Un error de rede ocurrió mientres la exportación";
+"linkDevice.defaultError" = "Un error producíu mientres la exportación";
+"linkDevice.explanationMessage" = "El sistema de conexión de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de terminal de la terminal de la terminal de terminal de la terminal de terminal de la terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal";
+"linkDevice.hudMessage" = "Verificación";
+
+//Contact Page
+"contactPage.startAudioCall" = "Iniciativa pa la so intervención en audio";
+"contactPage.startVideoCall" = "Iniciativa pa la llamada de video";
+"contactPage.sendMessage" = "Enviar mensaxes";
+"contactPage.clearConversation" = "La conversación ye clara.";
+"contactPage.removeConversation" = "La conversación ye desactivada";
+
+//DataTransfer
+"dataTransfer.readableStatusCreated" = "La inicialización...";
+"dataTransfer.readableStatusError" = "Error de cita";
+"dataTransfer.readableStatusAwaiting" = "En espera...";
+"dataTransfer.readableStatusOngoing" = "La transferencia";
+"dataTransfer.readableStatusCanceled" = "Cancelada";
+"dataTransfer.sendingFailed" = "Nun se envió";
+"dataTransfer.readableStatusSuccess" = "El so nome ye";
+
+//Notifications
+"notifications.missedCall" = "La llamada perdida";
+"notifications.newFile" = "Archivu nuevu";
+"notifications.locationSharingStarted" = "El partu de localización entamó";
+"notifications.locationSharingStopped" = "La distribución de la localización entrante nun se fixo";
+"dataTransfer.readableStatusRefuse" = "Rechazar";
+"dataTransfer.readableStatusAccept" = "Acceptar";
+"dataTransfer.infoMessage" = "Presione pa empezar a grabar";
+"dataTransfer.sendMessage" = "Enviar";
+
+
+//Generated Message
+"generatedMessage.contactAdded" = "Recibió la so invivencia.";
+"generatedMessage.swarmCreated" = "El so nome ye \"Swarm\".";
+"generatedMessage.invitationReceived" = "Foi convidáu a participar";
+"generatedMessage.invitationAccepted" = "Entra na conversación.";
+"generatedMessage.youJoined" = "Acompañó la conversación";
+"generatedMessage.contactBanned" = "Foi pateada";
+"generatedMessage.contactReAdded" = "Foi añadida de nuevu";
+"generatedMessage.outgoingCall" = "L'escursión de salida";
+"generatedMessage.missedOutgoingCall" = "La llamada saliente perdida";
+"generatedMessage.missedIncomingCall" = "La llamada entrante perdida";
+"generatedMessage.liveLocationSharing" = "Compartir la localización en directo";
+"generatedMessage.contactLeftConversation" = "La so parte inferior ye de la derecha.";
+
+//General Settings
+"generalSettings.videoSettings" = "La configuración de video";
+"generalSettings.videoAcceleration" = "Aceleración de video";
+"generalSettings.fileTransfer" = "Transferencia de archivos";
+"generalSettings.locationSharing" = "La división de los llaos";
+"generalSettings.automaticAcceptIncomingFiles" = "Acceptar automáticamente archivos entrantes";
+"generalSettings.acceptTransferLimit" = "Accepta'l límite de transferencia";
+"generalSettings.acceptTransferLimitDescription" = "(en MB, 0 = ilimitáu)";
+"generalSettings.limitLocationSharingDuration" = "Limitar la duración de la compartición de la ubicación";
+"generalSettings.locationSharingDuration" = "El periodu de duración de les acciones de posiciones";
+
+
+//Log View
+"logView.title" = "Los diagnósticos";
+"logView.description" = "Configuraciones abiertes del rexistru de diagnósticu";
+"logView.startLogging" = "Comienza la arquivada";
+"logView.stopLogging" = "Pa finar la tala";
+"logView.saveError" = "Faló en guardar archivos";
+"logView.shareError" = "Faló en compartir archivos";
+
+//Migrate Account
+"migrateAccount.title" = "Migración de cuentas";
+"migrateAccount.migrateButton" = "La cuenta de migración";
+"migrateAccount.explanation" = "Esta cuenta tien que ser migrao";
+"migrateAccount.passwordExplanation" = "Pa proceder a la migración, hai que introducir una contraseña que se usó pa esta cuenta.";
+"migrateAccount.error" = "Nun se pudo migrar la cuenta. Pueden intentar o borrar la cuenta.";
+"migrateAccount.migrating" = "Migrando...";
+"migrateAccount.migrateAnother" = "Migráu a otra cuenta";

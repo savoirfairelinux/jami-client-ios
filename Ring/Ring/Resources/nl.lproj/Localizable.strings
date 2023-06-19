@@ -19,14 +19,23 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Gesprekken";
-"global.meTabBarTitle" = "Accountinstellingen";
+"global.accountSettings" = "Accountinstellingen";
+"global.advancedSettings" = "Geavanceerde instellingen";
+"global.username" = "Gebruikersnaam";
+"global.password" = "Wachtwoord";
+"global.registerAUsername" = "Een gebruikersnaam registreren";
+"global.enterPassword" = "Voer wachtwoord in";
+"global.enterUsername" = "Voer gebruikersnaam in";
+"global.cancel" = "Annuleren";
+"global.blockContact" = "Contact blokkeren";
+"global.removeAccount" = "Account verwijderen";
+"global.incomingCall" = "Inkomende oproep";
 "global.ok" = "In orde";
 "global.close" = "Sluiten";
 "global.share" = "Delen";
-"global.forward" = "Forward";
+"global.forward" = "Voorwaarts";
 "global.save" = "Opslaan";
-"global.resend" = "Resend";
+"global.resend" = "Verzend";
 "global.preview" = "Voorbeeld";
 "global.accept" = "Accepteren";
 "global.block" = "Blokkeren";
@@ -34,48 +43,47 @@
 "global.name" = "Naam";
 "global.copy" = "Kopiëren";
 "global.reply" = "Beantwoorden";
+"global.search" = "Bezig met zoeken…";
 
 // Scan
 "scan.badQrCode" = "Verkeerde QR-code";
-"scan.search" = "Bezig met zoeken…";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
-"swarmcreation.addADescription" = "Add a description";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.searchBar" = "Zoek contact...";
+"swarmcreation.createTheSwarm" = "Maak de zwerm.";
+"swarmcreation.addADescription" = "Voeg een beschrijving toe";
+"swarmcreation.addPeople" = "Je kunt meer mensen toevoegen aan het zwerm";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
-"swarm.identifier" = "Identifier";
+"swarm.ignoreSwarm" = "Ignoreer de zwerm.";
+"swarm.leaveConversation" = "Laat het gesprek maar.";
+"swarm.chooseColor" = "Kies een kleur";
+"swarm.typeOfSwarm" = "Soort zwerm";
+"swarm.identifier" = "Identificatie";
 "swarm.about" = "Over";
-"swarm.members" = "Members";
-"swarm.addDescription" = "Add Description";
-"swarm.oneToOne" = "Private swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private swarm";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
+"swarm.members" = "Lid-Staten";
+"swarm.addDescription" = "Beschrijving toevoegen";
+"swarm.oneToOne" = "Privé zwerm";
+"swarm.adminInvitesOnly" = "Admin nodigt alleen uit";
+"swarm.invitesOnly" = "Privé zwerm";
+"swarm.publicChat" = "Publieke zwerm";
+"swarm.others" = "Andere";
+"swarm.member" = "Lid";
+"swarm.invited" = "Uitgenodigd";
 "swarm.admin" = "Administrator";
-"swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.banned" = "Verbied";
+"swarm.unknown" = "Onbekend";
+"swarm.addMorePeople" = "Je kunt meer mensen toevoegen aan dit zwerm";
+"swarm.addMember" = "Voeg lid toe";
+"swarm.confirmLeaveSwarm" = "Weet je zeker dat je deze zwerm wilt verlaten?";
+"swarm.Leave" = "Ga weg.";
 // Smartlist
 "smartlist.yesterday" = "Gisteren";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Openbare directory";
 "smartlist.conversations" = "Gesprekken";
-"smartlist.searching" = "Zoeken…";
 "smartlist.noResults" = "Geen resultaten";
 "smartlist.noConversation" = "Geen gesprekken";
 "smartlist.searchBarPlaceholder" = "Voer naam in…";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Zoek naar nieuwe of bestaande contacten...";
 "smartlist.noNetworkConnectivity" = "Geen netwerkverbinding";
 "smartlist.cellularAccess" = "Zorg dat u toegang tot het mobiele netwerk toegestaan heeft in uw instellingen";
 "smartlist.accountsTitle" = "Accounts";
@@ -83,23 +91,21 @@
 "smartlist.noNumber" = "Het geselecteerde contact heeft geen nummer";
 "smartlist.selectOneNumber" = "Kies één van de nummers";
 "smartlist.invitations" = "Uitnodigingen";
-"smartlist.accountSettings" = "Accountinstellingen";
-"smartlist.advancedSettings" = "Advanced Settings";
 "smartlist.aboutJami" = "Over Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
-"conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.sendRequestTitle" = "Send Contact Request";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.messagePlaceholder" = "Schrijf een bericht naar ";
+"conversation.explanationSendingLocationTo" = "U deelt uw locatie momenteel met ";
+"conversation.explanationReceivingLocationFrom" = "U ontvangt momenteel een live locatie van ";
+"conversation.errorSavingImage" = "Het is niet gelukt om afbeeldingen te bewaren in galerie";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Ik heb je een verzoek gestuurd.";
+"conversation.requestMessage" = "Wil je meedoen aan het gesprek?";
+"conversation.notContact" = "%@ is not in your contact list.";
+"conversation.sendRequest" = "Stuur hem/haar een contactverzoek om samen te kunnen uitwisselen";
+"conversation.sendRequestTitle" = "Verzend contactverzoek";
+"conversation.synchronizationTitle" = "Je hebt het gesprek geaccepteerd.";
+"conversation.synchronizationMessage" = "We wachten op %@ verbindingen om het gesprek te synchroniseren.";
 
 //Invitations
 "invitations.noInvitations" = "Geen uitnodigingen";
@@ -111,7 +117,7 @@
 "welcome.text" = "Jami is een vrij en universeel communicatieplatform, dat de privacy en vrijheden van haar gebruikers eerbiedigt";
 "welcome.linkDevice" = "Dit apparaat aan een account koppelen";
 "welcome.createAccount" = "Een Jami-account aanmaken";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.connectToManager" = "Verbinding met een JAMS-server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Overslaan";
@@ -125,18 +131,15 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Maak uw account aan";
 "createAccount.chooseStrongPassword" = "Kies een sterk wachtwoord om uw Jami-account te beschermen.";
-"createAccount.enterNewUsernamePlaceholder" = "Gebruikersnaam";
-"createAccount.newPasswordPlaceholder" = "Wachtwoord";
 "createAccount.repeatPasswordPlaceholder" = "Bevestig wachtwoord";
 "createAccount.passwordCharactersNumberError" = "Minimaal 6 tekens";
 "createAccount.passwordNotMatchingError" = "wachtwoorden komen niet overeen";
 "createAccount.lookingForUsernameAvailability" = "beschikbaarheid wordt gecontroleerd…";
 "createAccount.invalidUsername" = "ongeldige gebruikersnaam";
 "createAccount.usernameAlreadyTaken" = "gebruikersnaam reeds in gebruik";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "gebruikersnaam is beschikbaar";
 "createAccount.loading" = "Laden";
 "createAccount.waitCreateAccountTitle" = "Account wordt toegevoegd";
-"createAccount.RegisterAUsername" = "Een gebruikersnaam registreren";
 "createAccount.ChooseAPassword" = "Mijn account versleutelen";
 "createAccount.PasswordInformation" = "Kies een wachtwoord om uw lokale account mee te versleutelen. Vergeet het niet, u zult uw account anders niet kunnen herstellen";
 "createAccount.EnableNotifications" = "Meldingen";
@@ -149,20 +152,14 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account koppelen";
 "linkToAccount.linkButtonTitle" = "Apparaat koppelen";
-"linkToAccount.passwordPlaceholder" = "Wachtwoord";
 "linkToAccount.pinPlaceholder" = "Pincode";
-"linkToAccount.passwordLabel" = "Voer wachtwoord in";
 "linkToAccount.pinLabel" = "Voer pincode in";
 "linkToAccount.explanationPinMessage" = "Om de pincode te genereren, gaat u naar de accountbeheerinstellingen op het apparaat dat het account bevat dat u wilt gebruiken. Selecteer ‘Een ander apparaat aan dit account koppelen’. U zult de pincode krijgen die u nodig heeft om dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
 
 //Link To Account Manager form
-"linkToAccountManager.signIn" = "Sign In";
-"linkToAccountManager.passwordPlaceholder" = "Wachtwoord";
-"linkToAccountManager.passwordLabel" = "Voer wachtwoord in";
-"linkToAccountManager.usernamePlaceholder" = "Gebruikersnaam";
-"linkToAccountManager.usernameLabel" = "Voer gebruikersnaam in";
+"linkToAccountManager.signIn" = "Inlog";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerLabel" = "Voer JAMS-URL in";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Account kan niet gevonden worden";
@@ -174,79 +171,70 @@
 "alerts.accountDefaultErrorMessage" = "Het account kon niet aangemaakt worden.";
 "alerts.profileTakePhoto" = "Foto nemen";
 "alerts.profileUploadPhoto" = "Foto uploaden";
-"alerts.profileCancelPhoto" = "Annuleren";
 "alerts.accountLinkedTitle" = "Account koppelen";
 "alerts.dbFailedTitle" = "Er trad een fout op bij het starten van Jami";
 "alerts.dbFailedMessage" = "Sluit de toepassing en probeer het opnieuw";
 "alerts.confirmBlockContact" = "Weet u zeker dat u dit contact wilt blokkeren? De gespreksgeschiedenis met dit contact zal ook voorgoed verwijderd worden.";
-"alerts.confirmBlockContactTitle" = "Contact blokkeren";
 "alerts.confirmDeleteConversation" = "Weet u zeker dat u dit gesprek voorgoed wilt verwijderen?";
 "alerts.confirmDeleteConversationFromContact" = "Weet u zeker dat u het gesprek met dit contact wilt verwijderen?";
 "alerts.confirmDeleteConversationTitle" = "Gesprek verwijderen";
 "alerts.confirmClearConversation" = "Weet u zeker dat u het gesprek met dit contact wilt verwijderen?";
 "alerts.confirmClearConversationTitle" = "Gesprek wissen";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
-"alerts.locationSharingDuration10min" = "10 min";
-"alerts.locationSharingDuration1hour" = "1 hour";
-"alerts.mapInformation" = "Map information";
-"alerts.openStreetMapCopyright" = "© OpenStreetMap contributors";
+"alerts.noMediaPermissionsTitle" = "Mediavergunning niet verleend";
+"alerts.noLibraryPermissionsTitle" = "Toegang tot de fotobibliotheek niet toegestaan";
+"alerts.noLocationPermissionsTitle" = "Toegang tot locatie niet toegestaan";
+"alerts.errorWrongCredentials" = "Kan niet aansluiten op de rekeningmanager.";
+"alerts.recordVideoMessage" = "Een video bericht opnemen";
+"alerts.recordAudioMessage" = "Een audiobericht opnemen";
+"alerts.uploadFile" = "Upload bestand";
+"alerts.uploadPhoto" = "Foto of film uploaden";
+"alerts.locationServiceIsDisabled" = "Sluit \"Location Services\" aan om \"Jami\" toe te staan om uw locatie te bepalen.";
+"alerts.locationSharing" = "Deel mijn locatie";
+"alerts.alreadylocationSharing" = "Al met deze gebruiker delen";
+"alerts.locationSharingDurationTitle" = "Hoe lang moet de locatie worden gedeeld?";
+"alerts.locationSharingDuration10min" = "10 minuten";
+"alerts.locationSharingDuration1hour" = "1 uur";
+"alerts.mapInformation" = "Informatie over de kaart";
+"alerts.openStreetMapCopyright" = "© OpenStreetMap-medewerkers";
 "alerts.openStreetMapCopyrightMoreInfo" = "Meer informatie";
 
 //Actions
 "actions.deleteAction" = "Verwijderen";
-"actions.cancelAction" = "Annuleren";
 "actions.clearAction" = "Wissen";
 "actions.backAction" = "Terug";
 "actions.doneAction" = "Klaar";
 "alerts.incomingCallAllertTitle" = "Inkomende oproep van";
 "alerts.incomingCallButtonIgnore" = "Negeren";
-"actions.startAudioCall" = "  Audio Call";
-"actions.startVideoCall" = "  Video Call";
-"actions.goToSettings" = "Go to Settings";
+"actions.startAudioCall" = "Audio-oproep";
+"actions.startVideoCall" = "Video oproep";
+"actions.goToSettings" = "Ga naar instellingen";
 "actions.stopLocationSharing" = "Stop met delen";
 
 //Calls
 "calls.callItemTitle" = "Oproep";
-"calls.unknown" = "Onbekend";
 "calls.incomingCallInfo" = "wil met u praten";
 "calls.ringing" = "Gaat over…";
 "calls.connecting" = "Bezig met verbinden…";
-"calls.searching" = "Bezig met zoeken…";
 "calls.callFinished" = "Oproep beëindigd";
 "calls.currentCallWith" = "Bellen met";
-"calls.haghUp" = "hang up";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
-"calls.lowerHand" = "lower hand";
+"calls.haghUp" = "Doe je kop op.";
+"calls.maximize" = "maximaal";
+"calls.minimize" = "minimaliseren";
+"calls.setModerator" = "stel moderator";
+"calls.removeModerator" = "Unset moderator";
+"calls.muteAudio" = "stomme geluid";
+"calls.unmuteAudio" = "Niet-gemakkelijk geluid";
+"calls.lowerHand" = "onderhand";
 
 //Account Page
 "accountPage.devicesListHeader" = "Apparaten";
 "accountPage.settingsHeader" = "Instellingen";
-"accountPage.username" = "Gebruikersnaam";
 "accountPage.usernameNotRegistered" = "gebruikersnaam: niet geregistreerd";
 "accountPage.credentialsHeader" = "Accountgegevens";
-"accountPage.enableProxy" = "Proxy inschakelen";
 "accountPage.blockedContacts" = "Geblokkeerde contacten";
 "accountPage.unblockContact" = "Deblokkeren";
 "accountPage.proxyAddressAlert" = "Voer proxyadres in";
-"accountPage.enableProxy" = "Proxy inschakelen";
 "accountPage.noProxyExplanationLabel" = "Uw apparaat zal geen meldingen ontvangen wanneer de proxy uitgeschakeld is";
-"accountPage.saveProxyAddress" = "Opslaan";
 "accountPage.proxyPaceholder" = "Proxyadres";
 "accountPage.enableNotifications" = "Meldingen inschakelen";
 "accountPage.proxyDisabledAlertTitle" = "Proxyserver uitgeschakeld";
@@ -264,35 +252,33 @@
 "accountPage.deviceRevocationError" = "Fout bij intrekken van apparaat";
 "accountPage.linkDeviceTitle" = "Een ander apparaat koppelen";
 "accountPage.other" = "Anders";
-"accountPage.removeAccountTitle" = "Account verwijderen";
 "accountPage.removeAccountMessage" = "Door op ‘Verwijderen’ te klikken, zult u dit account van dit apparaat verwijderen! Deze handeling kan niet ongedaan gemaakt worden. Uw geregistreerde naam zal ook verloren gaan.";
 "accountPage.removeAccountButton" = "Verwijderen";
 "accountPage.shareAccountDetails" = "Accountdetails delen";
 "accountPage.contactMeOnJamiTitle" = "Contacteer me op Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "Een gebruikersnaam registreren";
-"accountPage.passwordPlaceholder" = "Enter account password";
-"accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.contactMeOnJamiContant" = "Neem contact met mij op via \"%s\" op het Jami-distributiecommunicatieplatform: https://jami.net";
+"accountPage.passwordPlaceholder" = "Voer het account wachtwoord in";
+"accountPage.usernamePlaceholder" = "Voer de gewenste gebruikersnaam in";
+"accountPage.registerNameErrorMessage" = "Gebruikersnaam niet beschikbaar";
+"accountPage.usernameRegistering" = "Registratie";
 "accountPage.usernameRegisterAction" = "Registreren";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
-"accountPage.createPassword" = "Create password";
+"accountPage.usernameRegistrationFailed" = "Registratie mislukt.";
+"accountPage.createPassword" = "Creëren van wachtwoord";
 "accountPage.changePassword" = "Wachtwoord wijzigen";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
-"accountPage.changePasswordError" = "Password incorrect";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.oldPasswordPlaceholder" = "Voer het oude wachtwoord in";
+"accountPage.newPasswordPlaceholder" = "Voer een nieuw wachtwoord in";
+"accountPage.newPasswordConfirmPlaceholder" = "Bevestig het nieuwe wachtwoord";
+"accountPage.changePasswordError" = "Slecht wachtwoord";
+"accountPage.enableBoothMode" = "De booth-modus in staat stellen";
+"accountPage.disableBoothMode" = "De booth-modus uitschakelen";
+"accountPage.disableBoothModeExplanation" = "Geef je account wachtwoord.";
+"accountPage.boothModeExplanation" = "In de standmodus is de gesprekshistorie niet opgeslagen en de Jami-functionaliteit beperkt door uitgaande gesprekken te maken.";
+"accountPage.noBoothMode" = "Om de booth-modus in te schakelen moet je eerst het wachtwoord van het account maken.";
+"accountPage.boothModeAlertMessage" = "Nadat je de stand-modus hebt ingeschakeld, worden al je gesprekken verwijderd.";
 "accountPage.peerDiscovery" = "Automatisch verbinden op lokaal netwerk";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Auto-register na verval";
 "accountPage.connectivityHeader" = "Connectiviteit";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Toch de omschakeling";
 "accountPage.turnServer" = "TURN-adres";
 "accountPage.turnUsername" = "TURN-gebruikersnaam";
 "accountPage.turnPassword" = "TURN-wachtwoord";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Gebruikersnaam";
-"account.sipPassword" = "Wachtwoord";
 "account.sipServer" = "SIP-server";
 "account.port" = "Poort";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Create a SIP Account";
-"account.usernameLabel" = "Voer gebruikersnaam in";
-"account.passwordLabel" = "Voer wachtwoord in";
+"account.createSipAccount" = "SIP-account maken";
 "account.serverLabel" = "Voer adres in";
 "account.portLabel" = "Voer poortnummer in";
 "account.accountStatus" = "Accountstatus";
@@ -316,7 +299,7 @@
 "account.statusConnecting" = "Verbinden";
 "account.statusUnknown" = "Onbekend";
 "account.statusConnectionerror" = "Verbindingsfout";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "rekening moet worden migreerd";
 "account.me" = "Ik";
 
 //Block List Page
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Video-oproep starten";
 "contactPage.sendMessage" = "Bericht versturen";
 "contactPage.clearConversation" = "Gesprek wissen";
-"contactPage.blockContact" = "Contact blokkeren";
 "contactPage.removeConversation" = "Gesprek verwijderen";
 
 //DataTransfer
@@ -346,69 +328,57 @@
 "dataTransfer.readableStatusCanceled" = "Geannuleerd";
 "dataTransfer.sendingFailed" = "Versturen mislukt";
 "dataTransfer.readableStatusSuccess" = "Voltooid";
-"dataTransfer.readableStatusCancel" = "Annuleren";
 
 //Notifications
-"notifications.incomingCall" = "Inkomende oproep";
 "notifications.missedCall" = "Gemiste oproep";
 "notifications.newFile" = "Nieuw bestand";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
-"dataTransfer.readableStatusAwaiting" = "In afwachting…";
-"dataTransfer.readableStatusOngoing" = "Wordt verstuurd";
-"dataTransfer.readableStatusCanceled" = "Geannuleerd";
-"dataTransfer.readableStatusSuccess" = "Voltooid";
-"dataTransfer.readableStatusCancel" = "Annuleren";
-"dataTransfer.infoMessage" = "Press to start recording";
+"notifications.locationSharingStarted" = "Inkomende locatie delen begonnen";
+"notifications.locationSharingStopped" = "Inkomende locatie delen is gestopt";
+"dataTransfer.readableStatusRefuse" = "Afwijzen";
+"dataTransfer.readableStatusAccept" = "Accepteren";
+"dataTransfer.infoMessage" = "Druk om te beginnen met opnemen";
 "dataTransfer.sendMessage" = "Versturen";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
-"generatedMessage.swarmCreated" = "Swarm created";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.contactAdded" = "Je hebt een vrijlating ontvangen.";
+"generatedMessage.swarmCreated" = "Een zwerm gecreëerd";
+"generatedMessage.invitationReceived" = "werd uitgenodigd om bij te komen";
+"generatedMessage.invitationAccepted" = "De gesprekke is begonnen.";
+"generatedMessage.youJoined" = "Je bent bij het gesprek aangesloten.";
+"generatedMessage.contactBanned" = "werd geslagen.";
+"generatedMessage.contactReAdded" = "werd opnieuw toegevoegd";
 "generatedMessage.outgoingCall" = "Uitgaande oproep";
-"generatedMessage.incomingCall" = "Inkomende oproep";
 "generatedMessage.missedOutgoingCall" = "Gemiste uitgaande oproep";
 "generatedMessage.missedIncomingCall" = "Gemiste inkomende oproep";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.liveLocationSharing" = "Live locatie delen";
+"generatedMessage.contactLeftConversation" = "links";
 
 //General Settings
-"generalSettings.title" = "Geavanceerde instellingen";
-"generalSettings.videoSettings" = "Video Settings";
+"generalSettings.videoSettings" = "Video-instellingen";
 "generalSettings.videoAcceleration" = "Videoversnelling inschakelen";
 "generalSettings.fileTransfer" = "Bestandsoverdracht";
-"generalSettings.locationSharing" = "Location Sharing";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.locationSharing" = "Locatieverdeling";
+"generalSettings.automaticAcceptIncomingFiles" = "Automatisch ontvangen van inkomende bestanden";
+"generalSettings.acceptTransferLimit" = "Aanvaardingslimiet";
+"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = onbeperkt)";
+"generalSettings.limitLocationSharingDuration" = "Beperking van de duur van locatieverdeling";
+"generalSettings.locationSharingDuration" = "De duur van de positie";
 
 
 //Log View
-"logView.title" = "Diagnostics";
-"logView.description" = "Open diagnostic log settings";
-"logView.startLogging" = "Start Logging";
-"logView.stopLogging" = "Stop Logging";
-"logView.saveError" = "Failed to save file";
-"logView.shareError" = "Failed to share file";
+"logView.title" = "Diagnostiek";
+"logView.description" = "Open diagnostische loginstellingen";
+"logView.startLogging" = "Begin met loggen";
+"logView.stopLogging" = "Stop met het houtplanten";
+"logView.saveError" = "Het bestand is niet gespaard";
+"logView.shareError" = "Fichaire gedeeld";
 
 //Migrate Account
 "migrateAccount.title" = "Accountmigratie";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Voer wachtwoord in";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Account verwijderen";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
-"migrateAccount.migrating" = "Migrating...";
-"migrateAccount.cancel" = "Annuleren";
-"migrateAccount.migrateAnother" = "Migrate Another Account";
-
-
+"migrateAccount.migrateButton" = "Migreren rekening";
+"migrateAccount.explanation" = "Dit account moet worden migreerd.";
+"migrateAccount.passwordExplanation" = "Om door te gaan met de migratie, moet je een wachtwoord invoeren dat voor dit account werd gebruikt";
+"migrateAccount.error" = "Je kunt je account opnieuw proberen of verwijderen.";
+"migrateAccount.migrating" = "Migreert...";
+"migrateAccount.migrateAnother" = "Migreer naar een ander account";

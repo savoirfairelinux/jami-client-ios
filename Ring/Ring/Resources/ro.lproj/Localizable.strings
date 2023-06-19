@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Conversații";
-"global.meTabBarTitle" = "Reglările contului";
+"global.accountSettings" = "Reglările contului";
+"global.advancedSettings" = "Reglări avansate";
+"global.username" = "Nume de utilizator";
+"global.password" = "Parola";
+"global.registerAUsername" = "Înscrie un nume de utilizator";
+"global.enterPassword" = "Introdu parola";
+"global.enterUsername" = "Introdu numele de utilizator";
+"global.cancel" = "Renunță";
+"global.blockContact" = "Blochează contactul";
+"global.removeAccount" = "Elimină contul";
+"global.incomingCall" = "Apel primit";
 "global.ok" = "Bine";
 "global.close" = "Închide";
 "global.share" = "Distribuie";
@@ -34,10 +43,10 @@
 "global.name" = "Nume";
 "global.copy" = "Copiază";
 "global.reply" = "Răspunde";
+"global.search" = "Se caută...";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
-"scan.search" = "Se caută...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Caută un contact...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
 "smartlist.conversations" = "Conversații";
-"smartlist.searching" = "Se caută...";
 "smartlist.noResults" = "Niciun rezultat";
 "smartlist.noConversation" = "Nicio conversație";
 "smartlist.searchBarPlaceholder" = "Introdu numele...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Contactul ales nu are niciun număr";
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
 "smartlist.invitations" = "Invitații";
-"smartlist.accountSettings" = "Reglările contului";
-"smartlist.advancedSettings" = "Reglări avansate";
 "smartlist.aboutJami" = "Despre Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către ";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
 "conversation.errorSavingImage" = "Salvarea imaginii nu a reușit";
-"conversation.receivedRequest" = "\%@\ ți-a trimis o invitație la o conversație.";
-"conversation.incomingRequest" = "Ți-a trimis o invitație la o conversație.";
+"conversation.receivedRequest" = "%@ ți-a trimis o invitație la conversație.";
+"conversation.incomingRequest" = "Ți-a trimis o invitație la conversație.";
 "conversation.requestMessage" = "Vrei să participi la conversație?";
-"conversation.notContact" = "\%@\ nu este în contactele tale.";
+"conversation.notContact" = "%@ nu este în contactele tale.";
 "conversation.sendRequest" = "Trimite-i o cerere de contact pentru a conversa împreună.";
 "conversation.sendRequestTitle" = "Trimite o cerere de contact";
 "conversation.synchronizationTitle" = "Ai acceptat invitația la conversație.";
-"conversation.synchronizationMessage" = "Se așteaptă ca \%@\ să se conecteze pentru a sincroniza conversația.";
+"conversation.synchronizationMessage" = "Se așteaptă ca %@ să se conecteze pentru a sincroniza conversația.";
 
 //Invitations
 "invitations.noInvitations" = "Nicio invitație";
@@ -117,7 +123,7 @@
 "createProfile.skipCreateProfile" = "Omite";
 "createProfile.profileCreated" = "Înainte";
 "createProfile.title" = "Personalizează-ți profilul";
-"createProfile.enterNameLabel" = "Introdu un nume de arătat";
+"createProfile.enterNameLabel" = "Introdu un nume de afișat";
 "createProfile.enterNamePlaceholder" = "Introdu numele";
 "createProfile.subtitle" = "Profilul tău va fi distribuit contactelor tale. Poți schimba asta cînd vrei.";
 "createProfile.createYourAvatar" = "Creează poza de profil";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Creează contul tău";
 "createAccount.chooseStrongPassword" = "Alege o parolă complexă pe care să ți-o amintești, ca să protejezi contul tău Jami.";
-"createAccount.enterNewUsernamePlaceholder" = "Nume de utilizator";
-"createAccount.newPasswordPlaceholder" = "Parola";
 "createAccount.repeatPasswordPlaceholder" = "Confirmă parola";
 "createAccount.passwordCharactersNumberError" = "minimum 6 caractere";
 "createAccount.passwordNotMatchingError" = "parolele nu se potrivesc";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "nume disponibil";
 "createAccount.loading" = "Se încarcă";
 "createAccount.waitCreateAccountTitle" = "Se adaugă contul";
-"createAccount.RegisterAUsername" = "Înscrie un nume de utilizator";
 "createAccount.ChooseAPassword" = "Cifrează contul meu";
 "createAccount.PasswordInformation" = "Alege o parolă pentru cifrarea contului tău local. Dacă o vei uita, nu vei mai avea acces la contul tău.";
 "createAccount.EnableNotifications" = "Notificări";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asocierea contului";
 "linkToAccount.linkButtonTitle" = "Asociază aparatul";
-"linkToAccount.passwordPlaceholder" = "Parola";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Introdu parola";
 "linkToAccount.pinLabel" = "Introdu codul PIN";
 "linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. În „Reglări” alege „Asociază alt aparat cu acest cont” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";
-"linkToAccountManager.passwordPlaceholder" = "Parola";
-"linkToAccountManager.passwordLabel" = "Introdu parola";
-"linkToAccountManager.usernamePlaceholder" = "Nume de utilizator";
-"linkToAccountManager.usernameLabel" = "Introdu numele de utilizator";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Introdu URL-ul JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Contul nu a putut fi creat.";
 "alerts.profileTakePhoto" = "Fă o poză";
 "alerts.profileUploadPhoto" = "Încarcă o poză";
-"alerts.profileCancelPhoto" = "Renunță";
 "alerts.accountLinkedTitle" = "Se asociază contul";
 "alerts.dbFailedTitle" = "S-a produs o eroare la pornirea lui Jami";
 "alerts.dbFailedMessage" = "Închide aplicația și încearcă să o repornești";
 "alerts.confirmBlockContact" = "Sigur vrei să blochezi acest contact? Conversația cu acest contact va fi ștearsă definitiv.";
-"alerts.confirmBlockContactTitle" = "Blochează contactul";
 "alerts.confirmDeleteConversation" = "Chiar vrei să ștergi această conversație?";
 "alerts.confirmDeleteConversationFromContact" = "Chiar vrei să ștergi conversația cu acest contact?";
 "alerts.confirmDeleteConversationTitle" = "Șterge conversația";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Șterge";
-"actions.cancelAction" = "Renunță";
 "actions.clearAction" = "Șterge";
 "actions.backAction" = "Înapoi";
 "actions.doneAction" = "Făcut";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Apelează";
-"calls.unknown" = "Necunoscut";
 "calls.incomingCallInfo" = "vrea să vorbească cu tine";
 "calls.ringing" = "Sună...";
 "calls.connecting" = "Se conectează...";
-"calls.searching" = "Se caută...";
 "calls.callFinished" = "Apel terminat";
 "calls.currentCallWith" = "Apel cu ";
 "calls.haghUp" = "închide";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Aparate";
 "accountPage.settingsHeader" = "Reglări";
-"accountPage.username" = "Nume de utilizator";
 "accountPage.usernameNotRegistered" = "nume de utilizator: neînscris";
 "accountPage.credentialsHeader" = "Detaliile contului";
-"accountPage.enableProxy" = "Activează Proxy";
 "accountPage.blockedContacts" = "Contacte blocate";
 "accountPage.unblockContact" = "DEBLOCHEAZĂ";
 "accountPage.proxyAddressAlert" = "Introdu adresa proxy";
-"accountPage.enableProxy" = "Activează Proxy";
 "accountPage.noProxyExplanationLabel" = "Aparatul nu va primi notificări dacă Proxy e dezactivat";
-"accountPage.saveProxyAddress" = "Salvează";
 "accountPage.proxyPaceholder" = "Adresa Proxy";
 "accountPage.enableNotifications" = "Activează notificările";
 "accountPage.proxyDisabledAlertTitle" = "Serverul Proxy e dezactivat";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Eroare la eliminarea aparatului";
 "accountPage.linkDeviceTitle" = "Asociază alt aparat";
 "accountPage.other" = "Altele";
-"accountPage.removeAccountTitle" = "Elimină contul";
 "accountPage.removeAccountMessage" = "Făcînd clic pe „Elimină” vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
 "accountPage.removeAccountButton" = "Elimină";
 "accountPage.shareAccountDetails" = "Distribuie detaliile contului";
 "accountPage.contactMeOnJamiTitle" = "Contactează-mă pe Jami!";
 "accountPage.contactMeOnJamiContant" = "Contactează-mă folosind „%s” pe platforma distribuită de comunicare Jami: https://jami.net";
-"accountPage.registerNameTitle" = "Înscrie un nume de utilizator";
 "accountPage.passwordPlaceholder" = "Introdu parola contului";
 "accountPage.usernamePlaceholder" = "Introdu numele de utilizator";
 "accountPage.registerNameErrorMessage" = "Numele de utilizator introdus nu e disponibil";
@@ -294,19 +280,16 @@
 "accountPage.connectivityHeader" = "Conectare";
 "accountPage.turnEnabled" = "Activează TURN";
 "accountPage.turnServer" = "Adresa TURN";
-"accountPage.turnUsername" = "Nume de utilizator TURN";
+"accountPage.turnUsername" = "Nume TURN";
 "accountPage.turnPassword" = "Parola TURN";
 "accountPage.turnRealm" = "Domeniul TURN";
 
 //Account
 "account.sipUsername" = "Nume de utilizator";
-"account.sipPassword" = "Parola";
 "account.sipServer" = "Server SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Creează un cont SIP";
-"account.usernameLabel" = "Introdu numele de utilizator";
-"account.passwordLabel" = "Introdu parola";
 "account.serverLabel" = "Introdu adresa";
 "account.portLabel" = "Introdu numărul Portului";
 "account.accountStatus" = "Starea contului";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Începe un apel video";
 "contactPage.sendMessage" = "Trimite un mesaj";
 "contactPage.clearConversation" = "Șterge discuția";
-"contactPage.blockContact" = "Blochează contactul";
 "contactPage.removeConversation" = "Elimină conversația";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "Anulat";
 "dataTransfer.sendingFailed" = "Trimitere nereușită";
 "dataTransfer.readableStatusSuccess" = "Terminat";
-"dataTransfer.readableStatusCancel" = "Renunță";
 
 //Notifications
-"notifications.incomingCall" = "Apel primit";
 "notifications.missedCall" = "Apel pierdut";
 "notifications.newFile" = "Fișier nou";
 "notifications.locationSharingStarted" = "Distribuirea poziției primite a început";
 "notifications.locationSharingStopped" = "Distribuirea poziției primite s-a oprit";
-"dataTransfer.readableStatusAwaiting" = "În așteptare…";
-"dataTransfer.readableStatusOngoing" = "Se transferă";
-"dataTransfer.readableStatusCanceled" = "Anulat";
-"dataTransfer.readableStatusSuccess" = "Terminat";
-"dataTransfer.readableStatusCancel" = "Renunță";
+"dataTransfer.readableStatusRefuse" = "Refuză";
+"dataTransfer.readableStatusAccept" = "Acceptă";
 "dataTransfer.infoMessage" = "Apasă pentru a începe înregistrarea";
 "dataTransfer.sendMessage" = "Trimite";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "a fost dat afară";
 "generatedMessage.contactReAdded" = "a fost reprimit";
 "generatedMessage.outgoingCall" = "Apel efectuat";
-"generatedMessage.incomingCall" = "Apel primit";
 "generatedMessage.missedOutgoingCall" = "Apel efectuat nepreluat";
 "generatedMessage.missedIncomingCall" = "Apel pierdut";
 "generatedMessage.liveLocationSharing" = "Distribuirea poziției în direct";
 "generatedMessage.contactLeftConversation" = "a ieșit";
 
 //General Settings
-"generalSettings.title" = "Reglări avansate";
 "generalSettings.videoSettings" = "Reglări video";
 "generalSettings.videoAcceleration" = "Activează accelerarea video";
 "generalSettings.fileTransfer" = "Transfer de fișiere";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "Transferul contului";
 "migrateAccount.migrateButton" = "Transferă contul";
 "migrateAccount.explanation" = "Acest cont trebuie transferat";
-"migrateAccount.passwordPlaceholder" = "Introdu parola";
 "migrateAccount.passwordExplanation" = "Pentru a continua transferul, trebuie să introduci o parolă care a fost folosită pentru acest cont.";
-"migrateAccount.removeAccount" = "Elimină contul";
 "migrateAccount.error" = "Transferul contului tău nu a reușit. Poți încerca din nou sau șterge acest cont.";
 "migrateAccount.migrating" = "Se transferă...";
-"migrateAccount.cancel" = "Renunță";
 "migrateAccount.migrateAnother" = "Transferă alt cont";
-
-

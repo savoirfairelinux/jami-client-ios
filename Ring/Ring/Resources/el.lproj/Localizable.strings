@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Συνομιλίες";
-"global.meTabBarTitle" = "Ρυθμίσεις λογαριασμού";
+"global.accountSettings" = "Ρυθμίσεις λογαριασμού";
+"global.advancedSettings" = "Προχωρημένες ρυθμίσεις";
+"global.username" = "Όνομα χρήστη";
+"global.password" = "Κωδικός";
+"global.registerAUsername" = "Καταχωρίστε ένα όνομα χρήστη";
+"global.enterPassword" = "Καταχώρηση συνθηματικού";
+"global.enterUsername" = "Εισάγετε όνομα χρήστη";
+"global.cancel" = "Ακύρωση";
+"global.blockContact" = "Κλειδί Επικοινωνίας";
+"global.removeAccount" = "Αποσύρουμε λογαριασμό";
+"global.incomingCall" = "Εισερχόμενη κλήση";
 "global.ok" = "Εντάξει";
 "global.close" = "Κλείσιμο";
 "global.share" = "Κοινοποίηση";
@@ -34,10 +43,10 @@
 "global.name" = "Όνομα";
 "global.copy" = "Αντιγραφή";
 "global.reply" = "Απάντηση";
+"global.search" = "Γίνεται αναζήτηση...";
 
 // Scan
 "scan.badQrCode" = "Κακό QR κωδικό";
-"scan.search" = "Γίνεται αναζήτηση...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Ψάξτε για επαφή...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "Χθες";
 "smartlist.results" = "Δημόσιο κατάλογο";
 "smartlist.conversations" = "Συνομιλίες";
-"smartlist.searching" = "Αναζήτηση...";
 "smartlist.noResults" = "Χωρίς αποτελέσματα";
 "smartlist.noConversation" = "Δεν έχουμε συνομιλίες.";
 "smartlist.searchBarPlaceholder" = "Εισάγετε το όνομα...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Η επιλεγμένη επαφή δεν έχει αριθμό";
 "smartlist.selectOneNumber" = "Επιλέξτε έναν από τους αριθμούς";
 "smartlist.invitations" = "Προσκλήσεις";
-"smartlist.accountSettings" = "Ρυθμίσεις λογαριασμού";
-"smartlist.advancedSettings" = "Προχωρημένες ρυθμίσεις";
 "smartlist.aboutJami" = "Σχετικά με το Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "Συμμετέχετε τη θέση σας με ";
 "conversation.explanationReceivingLocationFrom" = "Πλέον λαμβάνετε ζωντανή τοποθεσία από";
 "conversation.errorSavingImage" = "Αποτύχθηκε να αποθηκεύσει εικόνα στη γκαλερί";
-"conversation.receivedRequest" = "Σου έστειλε αίτηση για συζήτηση.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Σου έστειλα αίτημα για συζήτηση.";
 "conversation.requestMessage" = "Γεια σας, θα θέλατε να συμμετάσχετε στη συζήτηση;";
-"conversation.notContact" = "Το \%@\ δεν είναι στη λίστα επαφών σας.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Να του στείλετε αίτηση επικοινωνίας για να μπορέσουν να ανταλλάξουν μαζί";
 "conversation.sendRequestTitle" = "Στείλτε αίτηση επικοινωνίας";
 "conversation.synchronizationTitle" = "- Δέχτηκες την αίτηση συζήτησης.";
-"conversation.synchronizationMessage" = "Περιμένουμε τις συνδέσεις για να συγχρονίσουμε τη συζήτηση.";
+"conversation.synchronizationMessage" = "Περιμένουμε %@ συνδέσεις για να συγχρονιστεί η συζήτηση.";
 
 //Invitations
 "invitations.noInvitations" = "Δεν υπάρχουν προσκλήσεις.";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Δημιουργήστε το λογαριασμό σας";
 "createAccount.chooseStrongPassword" = "Επιλέξτε ένα ισχυρό κωδικό πρόσβασης που θα θυμάστε για να προστατεύσετε το λογαριασμό σας στο Jami.";
-"createAccount.enterNewUsernamePlaceholder" = "Όνομα χρήστη";
-"createAccount.newPasswordPlaceholder" = "Συνθηματικό";
 "createAccount.repeatPasswordPlaceholder" = "Επιβεβαίωση κωδικού";
 "createAccount.passwordCharactersNumberError" = "το ελάχιστο 6 χαρακτήρες";
 "createAccount.passwordNotMatchingError" = "τα συνθηματικά δεν ταιριάζουν";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "Το όνομα χρήστη είναι διαθέσιμο";
 "createAccount.loading" = "Ανεβαίνει";
 "createAccount.waitCreateAccountTitle" = "Εισαγωγή λογαριασμού";
-"createAccount.RegisterAUsername" = "Καταχωρίστε ένα όνομα χρήστη";
 "createAccount.ChooseAPassword" = "Κρυπτογράφησε το λογαριασμό μου.";
 "createAccount.PasswordInformation" = "Επιλέξτε κωδικό πρόσβασης για να κρυπτογραφήσετε το τοπικό σας λογαριασμό. Μην το ξεχάσετε αλλιώς δεν θα μπορέσετε να ανακτήσετε το λογαριασμό σας";
 "createAccount.EnableNotifications" = "Ειδοποιήσεις";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Σύνδεση λογαριασμού";
 "linkToAccount.linkButtonTitle" = "Σύνδεση συσκευής";
-"linkToAccount.passwordPlaceholder" = "Συνθηματικό";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Καταχώρηση Συνθηματικού";
 "linkToAccount.pinLabel" = "Εισάγετε PIN";
 "linkToAccount.explanationPinMessage" = "Για να δημιουργήσετε τον κωδικό PIN, πηγαίνετε στις ρυθμίσεις διαχείρισης λογαριασμού στην συσκευή που περιέχει λογαριασμό που θέλετε να χρησιμοποιήσετε. Στις ρυθμίσεις συσκευών Επιλέξτε \"Συνδέστε άλλη συσκευή με αυτό το λογαριασμό\". Θα λάβετε το απαραίτητο PIN για να συμπληρώσετε αυτό το έντυπο.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Εισαγγελέστε";
-"linkToAccountManager.passwordPlaceholder" = "Συνθηματικό";
-"linkToAccountManager.passwordLabel" = "Καταχώρηση Συνθηματικού";
-"linkToAccountManager.usernamePlaceholder" = "Όνομα χρήστη";
-"linkToAccountManager.usernameLabel" = "Εισάγετε όνομα χρήστη";
 "linkToAccountManager.accountManagerPlaceholder" = "Η διεύθυνση URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Εισάγετε το URL JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Ο λογαριασμός δεν μπόρεσε να δημιουργηθεί.";
 "alerts.profileTakePhoto" = "Λήψη φωτογραφίας";
 "alerts.profileUploadPhoto" = "Ανέβασε φωτογραφία";
-"alerts.profileCancelPhoto" = "Ακύρωση";
 "alerts.accountLinkedTitle" = "Σύνδεση λογαριασμού";
 "alerts.dbFailedTitle" = "Έγινε λάθος στην εκτόξευση του Τζάμι.";
 "alerts.dbFailedMessage" = "Παρακαλώ κλείστε την εφαρμογή και προσπαθήστε να την ανοίξετε ξανά";
 "alerts.confirmBlockContact" = "Είσαι σίγουρος ότι θέλεις να μπλοκάρεις αυτή την επαφή;";
-"alerts.confirmBlockContactTitle" = "Κλειδί Επικοινωνίας";
 "alerts.confirmDeleteConversation" = "Είσαι σίγουρος ότι θέλεις να διαγράψεις αυτή τη συζήτηση μόνιμα;";
 "alerts.confirmDeleteConversationFromContact" = "Είσαι σίγουρος ότι θέλεις να διαγράψεις τη συζήτηση με αυτόν τον επαφή;";
 "alerts.confirmDeleteConversationTitle" = "Διαγράψτε τη συζήτηση";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Διαγραφή";
-"actions.cancelAction" = "Ακύρωση";
 "actions.clearAction" = "Εκκαθάριση";
 "actions.backAction" = "Πίσω";
 "actions.doneAction" = "Τελείωσε";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Κλήση";
-"calls.unknown" = "Άγνωστοι";
 "calls.incomingCallInfo" = "Θέλει να σου μιλήσει.";
 "calls.ringing" = "- Ακούγεται...";
 "calls.connecting" = "Συνδέοντας...";
-"calls.searching" = "Γίνεται αναζήτηση...";
 "calls.callFinished" = "Η κλήση ολοκληρώθηκε";
 "calls.currentCallWith" = "Τηλεφώνησε με";
 "calls.haghUp" = "Κλείσε το.";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Συσκευές";
 "accountPage.settingsHeader" = "Ρυθμίσεις";
-"accountPage.username" = "Όνομα χρήστη";
 "accountPage.usernameNotRegistered" = "όνομα χρήστη: μη εγγεγραμμένο";
 "accountPage.credentialsHeader" = "Πληροφορίες λογαριασμού";
-"accountPage.enableProxy" = "Ενεργοποιήστε το Proxy";
 "accountPage.blockedContacts" = "Μπλοκαρισμένες επαφές";
 "accountPage.unblockContact" = "ΑΝΑΜΜΑΤΟ";
 "accountPage.proxyAddressAlert" = "Παρέξτε διεύθυνση αντιπροσωπευτικού χαρακτήρα";
-"accountPage.enableProxy" = "Ενεργοποιήστε το Proxy";
 "accountPage.noProxyExplanationLabel" = "Η συσκευή σας δεν θα λαμβάνει ειδοποιήσεις όταν το proxy είναι απενεργοποιημένο";
-"accountPage.saveProxyAddress" = "Αποθήκευση";
 "accountPage.proxyPaceholder" = "Δικαστική διεύθυνση";
 "accountPage.enableNotifications" = "Ενεργοποίηση των ειδοποιήσεων";
 "accountPage.proxyDisabledAlertTitle" = "Απασχολούνται οι διακομιστές αντιπροσωπευτικών";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Λάθος ανάκλησης συσκευής";
 "accountPage.linkDeviceTitle" = "Συνδέστε άλλη συσκευή";
 "accountPage.other" = "Άλλα";
-"accountPage.removeAccountTitle" = "Αποσύρουμε λογαριασμό";
 "accountPage.removeAccountMessage" = "Αν κάνετε κλικ στο \"Αφαίρεση\" θα αφαιρέσετε αυτό το λογαριασμό σε αυτή τη συσκευή!";
 "accountPage.removeAccountButton" = "Απομακρύνετε";
 "accountPage.shareAccountDetails" = "Λογαριασμός μετοχής";
 "accountPage.contactMeOnJamiTitle" = "Επικοινωνήστε μαζί μου για την Τζάμι!";
 "accountPage.contactMeOnJamiContant" = "Επικοινωνήστε μαζί μου χρησιμοποιώντας το \"%s\" στην πλατφόρμα επικοινωνίας της Jami: https://jami.net";
-"accountPage.registerNameTitle" = "Καταχωρίστε ένα όνομα χρήστη";
 "accountPage.passwordPlaceholder" = "Εισάγετε κωδικό πρόσβασης λογαριασμού";
 "accountPage.usernamePlaceholder" = "Εισάγετε το επιθυμητό όνομα χρήστη";
 "accountPage.registerNameErrorMessage" = "Το επιλεγμένο όνομα χρήστη δεν είναι διαθέσιμο";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Όνομα Χρήστη";
-"account.sipPassword" = "Συνθηματικό";
 "account.sipServer" = "Υπηρετή SIP";
 "account.port" = "Θύρα";
 "account.proxyServer" = "Διαμεσολαβητής";
 "account.createSipAccount" = "Δημιουργία λογαριασμού SIP";
-"account.usernameLabel" = "Εισάγετε όνομα χρήστη";
-"account.passwordLabel" = "Καταχώρηση Συνθηματικού";
 "account.serverLabel" = "Εισάγετε διεύθυνση";
 "account.portLabel" = "Εισάγετε τον αριθμό λιμένα";
 "account.accountStatus" = "Κατάσταση λογαριασμού";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Ξεκινήστε την κλήση βίντεο";
 "contactPage.sendMessage" = "Στείλτε μήνυμα";
 "contactPage.clearConversation" = "Καθαρή συζήτηση";
-"contactPage.blockContact" = "Κλειδί Επικοινωνίας";
 "contactPage.removeConversation" = "Απομακρύνετε τη συζήτηση";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "Ακυρώθηκε";
 "dataTransfer.sendingFailed" = "Δεν έστειλε";
 "dataTransfer.readableStatusSuccess" = "Συμπλήρωση";
-"dataTransfer.readableStatusCancel" = "Ακύρωση";
 
 //Notifications
-"notifications.incomingCall" = "Ερχόμενη κλήση";
 "notifications.missedCall" = "Απέλειψε την κλήση";
 "notifications.newFile" = "Νέο αρχείο";
 "notifications.locationSharingStarted" = "Η συμμετοχή αρχίζει";
 "notifications.locationSharingStopped" = "Η συμμετοχή των εισερχόμενων τοποθεσιών σταμάτησε";
-"dataTransfer.readableStatusAwaiting" = "Περιμένω...";
-"dataTransfer.readableStatusOngoing" = "Μεταφορά";
-"dataTransfer.readableStatusCanceled" = "Ακυρώθηκε";
-"dataTransfer.readableStatusSuccess" = "Συμπλήρωση";
-"dataTransfer.readableStatusCancel" = "Ακύρωση";
+"dataTransfer.readableStatusRefuse" = "Άρνηση";
+"dataTransfer.readableStatusAccept" = "Αποδοχή";
 "dataTransfer.infoMessage" = "Κάντε πίεση για να αρχίσετε την εγγραφή";
 "dataTransfer.sendMessage" = "Αποστολή";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "Τραβήχτηκε.";
 "generatedMessage.contactReAdded" = "προστέθηκε ξανά";
 "generatedMessage.outgoingCall" = "Εξερχόμενη κλήση";
-"generatedMessage.incomingCall" = "Εισερχόμενη κλήση";
 "generatedMessage.missedOutgoingCall" = "Αναπάντητη εξερχόμενη κλήση";
 "generatedMessage.missedIncomingCall" = "Αναπάντητη εισερχόμενη κλήση";
 "generatedMessage.liveLocationSharing" = "Συνοχή τοποθεσιών ζωντανά";
 "generatedMessage.contactLeftConversation" = "αριστερά";
 
 //General Settings
-"generalSettings.title" = "Προχωρημένες ρυθμίσεις";
 "generalSettings.videoSettings" = "Εποθέματα Βίντεο";
 "generalSettings.videoAcceleration" = "Επιτρέψτε την επιτάχυνση βίντεο";
 "generalSettings.fileTransfer" = "Μεταφορά Αρχείων";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "Μεταφορά λογαριασμού";
 "migrateAccount.migrateButton" = "Λογαριασμός μετανάστευσης";
 "migrateAccount.explanation" = "Αυτό το λογαριασμό πρέπει να μεταφερθεί";
-"migrateAccount.passwordPlaceholder" = "Εισάγετε τον κωδικό πρόσβασης";
 "migrateAccount.passwordExplanation" = "Για να συνεχίσετε με τη μετανάστευση, πρέπει να εισαγάγετε ένα κωδικό πρόσβασης που χρησιμοποιήθηκε για αυτό το λογαριασμό";
-"migrateAccount.removeAccount" = "Αποσύρουμε λογαριασμό";
 "migrateAccount.error" = "Δεν μεταφέρθηκε το λογαριασμό σας. Μπορείτε να δοκιμάσετε ξανά ή να διαγράψετε το λογαριασμό σας.";
 "migrateAccount.migrating" = "Μετανάστευση...";
-"migrateAccount.cancel" = "Ακύρωση";
 "migrateAccount.migrateAnother" = "Μεταναστεύστε άλλο λογαριασμό";
-
-

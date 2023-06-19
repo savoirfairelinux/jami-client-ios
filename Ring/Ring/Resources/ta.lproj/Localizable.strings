@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "உரையாடல்கள்";
-"global.meTabBarTitle" = "கணக்கு அமைப்புகள்";
+"global.accountSettings" = "கணக்கு அமைப்புகள்";
+"global.advancedSettings" = "மேம்பட்ட அமைப்புகள்";
+"global.username" = "பயனர் பெயர்";
+"global.password" = "கடவுச்சொல்";
+"global.registerAUsername" = "பயனர்பெயரை பதிவு செய்யவும்";
+"global.enterPassword" = "கடவுச்சொல்லை உள்ளிடவும்";
+"global.enterUsername" = "பயனர்பெயரை உள்ளிடவும்";
+"global.cancel" = "ரத்துசெய்க";
+"global.blockContact" = "தொடர்புத் தொகுப்பு";
+"global.removeAccount" = "கணக்கை நீக்கு";
+"global.incomingCall" = "வருகின்ற அழைப்பு";
 "global.ok" = "சரி";
 "global.close" = "நெருக்கமாக";
 "global.share" = "பகிர்வு";
@@ -34,10 +43,10 @@
 "global.name" = "பெயர்";
 "global.copy" = "பதிப்பு";
 "global.reply" = "பதில்";
+"global.search" = "தேடுவது.";
 
 // Scan
 "scan.badQrCode" = "கெட்ட QR குறியீடு";
-"scan.search" = "தேடுவது.";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "தொடர்பு தேடல்...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "நேற்று";
 "smartlist.results" = "பொதுப் பட்டியல்";
 "smartlist.conversations" = "உரையாடல்கள்";
-"smartlist.searching" = "தேடுவது.";
 "smartlist.noResults" = "முடிவுகள் இல்லை";
 "smartlist.noConversation" = "எந்த உரையாடலும் இல்லை";
 "smartlist.searchBarPlaceholder" = "பெயர் உள்ளிடவும்...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "தேர்ந்தெடுக்கப்பட்ட தொடர்பு எண் இல்லை";
 "smartlist.selectOneNumber" = "எண்களில் ஒன்றைத் தேர்ந்தெடுக்கவும்";
 "smartlist.invitations" = "அழைப்பிதழ்கள்";
-"smartlist.accountSettings" = "கணக்கு அமைப்புகள்";
-"smartlist.advancedSettings" = "மேம்பட்ட அமைப்புகள்";
 "smartlist.aboutJami" = "ஜாமி பற்றி";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "நீங்கள் தற்போது உங்கள் இருப்பிடத்தை பகிர்ந்துகொள்கிறீர்கள் ";
 "conversation.explanationReceivingLocationFrom" = "நீங்கள் தற்போது ல் இருந்து ஒரு நேரடி இருப்பிடத்தை பெறுகிறீர்கள்";
 "conversation.errorSavingImage" = "காட்சியகத்தில் படத்தை சேமிக்க முடியவில்லை";
-"conversation.receivedRequest" = "\%@\ \ உங்களுக்கு ஒரு உரையாடல் கோரிக்கை அனுப்பிய.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "ஒரு உரையாடல் கோரிக்கை அனுப்பிய.";
 "conversation.requestMessage" = "வணக்கம், நீங்கள் உரையாடலில் சேர விரும்புகிறீர்களா?";
-"conversation.notContact" = "\%@\ உங்கள் தொடர்பு பட்டியலில் இல்லை.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "அவருடன் தொடர்பு கொள்ளும் கோரிக்கையை அனுப்புங்கள்.";
 "conversation.sendRequestTitle" = "தொடர்பு கோரிக்கை அனுப்புதல்";
 "conversation.synchronizationTitle" = "நீங்கள் உரையாடல் கோரிக்கையை ஏற்றுக்கொண்டீர்கள்.";
-"conversation.synchronizationMessage" = "நாம் \%@\ இணைப்புகள் காத்திருக்கிறோம் உரையாடலை ஒத்திசைக்க.";
+"conversation.synchronizationMessage" = "உரையாடலை ஒத்திசைக்க %@ இணைப்புக்காக காத்திருக்கிறோம்.";
 
 //Invitations
 "invitations.noInvitations" = "அழைப்பிதழ்கள் இல்லை";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "உங்கள் கணக்கை உருவாக்கவும்";
 "createAccount.chooseStrongPassword" = "ஜாமி கணக்கை பாதுகாக்க நீங்கள் நினைவில் வைத்திருக்கும் வலுவான கடவுச்சொல்லைத் தேர்ந்தெடுக்கவும்.";
-"createAccount.enterNewUsernamePlaceholder" = "பயனர் பெயர்";
-"createAccount.newPasswordPlaceholder" = "கடவுச்சொல்";
 "createAccount.repeatPasswordPlaceholder" = "கடவுச்சொல்லை உறுதிப்படுத்தவும்";
 "createAccount.passwordCharactersNumberError" = "குறைந்தபட்சம் 6 எழுத்துக்கள்";
 "createAccount.passwordNotMatchingError" = "கடவுச்சொற்கள் பொருந்தாது";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "பயனர் பெயர் கிடைக்கிறது";
 "createAccount.loading" = "சுமை";
 "createAccount.waitCreateAccountTitle" = "கணக்கு சேர்க்கல்";
-"createAccount.RegisterAUsername" = "பயனர்பெயரை பதிவு செய்யவும்";
 "createAccount.ChooseAPassword" = "என் கணக்கை குறியாக்கம்";
 "createAccount.PasswordInformation" = "உங்கள் உள்ளூர் கணக்கை குறியாக்க கடவுச்சொல்லைத் தேர்ந்தெடுக்கவும். அதை மறந்துவிடாதீர்கள் அல்லது உங்கள் கணக்கை மீட்டெடுக்க முடியாது";
 "createAccount.EnableNotifications" = "அறிவிப்புகள்";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "கணக்கு இணைப்பு";
 "linkToAccount.linkButtonTitle" = "இணைப்பு சாதனம்";
-"linkToAccount.passwordPlaceholder" = "கடவுச்சொல்";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "கடவுச்சொல்லை உள்ளிடவும்";
 "linkToAccount.pinLabel" = "PIN ஐ உள்ளிடவும்";
 "linkToAccount.explanationPinMessage" = "PIN குறியீட்டை உருவாக்க, நீங்கள் பயன்படுத்த விரும்பும் கணக்கை உள்ளடக்கிய சாதனத்தின் கணக்கு நிர்வாக அமைப்புகளுக்குச் செல்லவும். சாதன அமைப்புகளில் \"இந்த கணக்கிற்கு மற்றொரு சாதனத்தை இணைக்கவும்\" என்பதைத் தேர்ந்தெடுக்கவும். இந்த படிவத்தை பூர்த்தி செய்ய தேவையான PIN ஐப் பெறுவீர்கள். PIN 10 நிமிடங்கள் மட்டுமே செல்லுபடியாகும்.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "பதிவு செய்யவும்";
-"linkToAccountManager.passwordPlaceholder" = "கடவுச்சொல்";
-"linkToAccountManager.passwordLabel" = "கடவுச்சொல்லை உள்ளிடவும்";
-"linkToAccountManager.usernamePlaceholder" = "பயனர் பெயர்";
-"linkToAccountManager.usernameLabel" = "பயனர்பெயரை உள்ளிடவும்";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "JAMS URL ஐ உள்ளிடவும்";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "கணக்கை உருவாக்க முடியவில்லை.";
 "alerts.profileTakePhoto" = "புகைப்படம் எடு";
 "alerts.profileUploadPhoto" = "புகைப்படத்தை பதிவேற்றவும்";
-"alerts.profileCancelPhoto" = "ரத்துசெய்க";
 "alerts.accountLinkedTitle" = "இணைப்பு கணக்கு";
 "alerts.dbFailedTitle" = "ஜாமி ஏற்றும் போது ஒரு தவறு ஏற்பட்டது";
 "alerts.dbFailedMessage" = "தயவுசெய்து விண்ணப்பத்தை மூடிவிட்டு மீண்டும் திறக்க முயற்சிக்கவும்";
 "alerts.confirmBlockContact" = "இந்த தொடர்பு தொடர்பான உரையாடல் வரலாறு நிரந்தரமாக நீக்கப்படும்.";
-"alerts.confirmBlockContactTitle" = "தொடர்புத் தொகுப்பு";
 "alerts.confirmDeleteConversation" = "நீங்கள் இந்த உரையாடலை நிரந்தரமாக நீக்க வேண்டும் என்று உறுதியாக இருக்கிறீர்களா?";
 "alerts.confirmDeleteConversationFromContact" = "இந்த தொடர்பு கொண்டு உரையாடலை நீக்க விரும்புகிறீர்களா?";
 "alerts.confirmDeleteConversationTitle" = "உரையாடலை நீக்கு";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "நீக்கவும்";
-"actions.cancelAction" = "ரத்துசெய்க";
 "actions.clearAction" = "தெளிவு";
 "actions.backAction" = "திரும்பி";
 "actions.doneAction" = "முடிந்தது";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "அழைப்பு";
-"calls.unknown" = "அறியப்படாதது";
 "calls.incomingCallInfo" = "உங்களுடன் பேச விரும்புகிறார்";
 "calls.ringing" = "- ஒலிக்கிறது.";
 "calls.connecting" = "இணைப்பு.";
-"calls.searching" = "தேடுவது.";
 "calls.callFinished" = "அழைப்பு முடிந்தது";
 "calls.currentCallWith" = " உடன் அழைப்பு";
 "calls.haghUp" = "மூடிடு";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "சாதனங்கள்";
 "accountPage.settingsHeader" = "அமைப்புகள்";
-"accountPage.username" = "பயனர் பெயர்";
 "accountPage.usernameNotRegistered" = "பயனர் பெயர்ஃ பதிவு செய்யப்படவில்லை";
 "accountPage.credentialsHeader" = "கணக்கு விவரங்கள்";
-"accountPage.enableProxy" = "ப்ராக்ஸி செயல்படுத்தவும்";
 "accountPage.blockedContacts" = "தடுக்கப்பட்ட தொடர்புகள்";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "பிரதி முகவரியை வழங்கவும்";
-"accountPage.enableProxy" = "ப்ராக்ஸி செயல்படுத்தவும்";
 "accountPage.noProxyExplanationLabel" = "ப்ராக்ஸி செயலிழக்கப்படும்போது உங்கள் சாதனம் அறிவிப்புகளை பெறாது";
-"accountPage.saveProxyAddress" = "சேமி";
 "accountPage.proxyPaceholder" = "பிரதிநிதி முகவரி";
 "accountPage.enableNotifications" = "அறிவிப்புகளை இயக்குதல்";
 "accountPage.proxyDisabledAlertTitle" = "ப்ராக்ஸி சேவையகம் செயலிழக்கப்பட்டது";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "சாதன மீறல் தவறு";
 "accountPage.linkDeviceTitle" = "மற்றொரு சாதனத்தை இணைக்கவும்";
 "accountPage.other" = "மற்றவை";
-"accountPage.removeAccountTitle" = "கணக்கை நீக்கு";
 "accountPage.removeAccountMessage" = "\"Remove\" என்பதை கிளிக் செய்தால் இந்த சாதனத்தில் இந்த கணக்கை நீக்குவீர்கள்! இந்த செயலைத் திரும்பப் பெற முடியாது. மேலும், உங்கள் பதிவு செய்யப்பட்ட பெயர் இழக்கப்படலாம்.";
 "accountPage.removeAccountButton" = "நீக்கவும்";
 "accountPage.shareAccountDetails" = "பகிர்தல் கணக்கு விவரங்கள்";
 "accountPage.contactMeOnJamiTitle" = "ஜாமி மீது என்னை தொடர்பு!";
 "accountPage.contactMeOnJamiContant" = "ஜாமி விநியோகிக்கப்பட்ட தகவல் தொடர்பு தளத்தில் \"%s\" ஐப் பயன்படுத்தி என்னை தொடர்பு கொள்ளவும்ஃ https://jami.net";
-"accountPage.registerNameTitle" = "பயனர்பெயரை பதிவு செய்யவும்";
 "accountPage.passwordPlaceholder" = "கணக்கு கடவுச்சொல்லை உள்ளிடவும்";
 "accountPage.usernamePlaceholder" = "விரும்பிய பயனர்பெயரை உள்ளிடவும்";
 "accountPage.registerNameErrorMessage" = "தேர்ந்தெடுக்கப்பட்ட பயனர் பெயர் கிடைக்கவில்லை";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "பயனர் பெயர்";
-"account.sipPassword" = "கடவுச்சொல்";
 "account.sipServer" = "SIP சேவையகம்";
 "account.port" = "துறைமுகம்";
 "account.proxyServer" = "பிரதிநிதி";
 "account.createSipAccount" = "SIP கணக்கை உருவாக்கவும்";
-"account.usernameLabel" = "பயனர்பெயரை உள்ளிடவும்";
-"account.passwordLabel" = "கடவுச்சொல்லை உள்ளிடவும்";
 "account.serverLabel" = "முகவரியை உள்ளிடவும்";
 "account.portLabel" = "போர்ட் எண்";
 "account.accountStatus" = "கணக்கு நிலை";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "வீடியோ அழைப்பைத் தொடங்கவும்";
 "contactPage.sendMessage" = "செய்தி அனுப்புங்கள்";
 "contactPage.clearConversation" = "தெளிவான அரட்டை";
-"contactPage.blockContact" = "தொடர்புத் தொகுப்பு";
 "contactPage.removeConversation" = "உரையாடலை அகற்றவும்";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "ரத்து செய்யப்பட்டது";
 "dataTransfer.sendingFailed" = "அனுப்ப முடியவில்லை";
 "dataTransfer.readableStatusSuccess" = "முழுமையான";
-"dataTransfer.readableStatusCancel" = "ரத்துசெய்க";
 
 //Notifications
-"notifications.incomingCall" = "வருகின்ற அழைப்பு";
 "notifications.missedCall" = "தொலைபேசி அழைப்பு";
 "notifications.newFile" = "புதிய கோப்பு";
 "notifications.locationSharingStarted" = "வருகை தரும் இட பகிர்வு தொடங்கியது";
 "notifications.locationSharingStopped" = "வருகை தரும் இடம் பகிர்வு நிறுத்தப்பட்டது";
-"dataTransfer.readableStatusAwaiting" = "காத்திருப்பு.";
-"dataTransfer.readableStatusOngoing" = "பரிமாற்றம்";
-"dataTransfer.readableStatusCanceled" = "ரத்து செய்யப்பட்டது";
-"dataTransfer.readableStatusSuccess" = "முழுமையான";
-"dataTransfer.readableStatusCancel" = "ரத்துசெய்க";
+"dataTransfer.readableStatusRefuse" = "மறுத்தல்";
+"dataTransfer.readableStatusAccept" = "ஏற்றுக்கொள்ளுங்கள்";
 "dataTransfer.infoMessage" = "பதிவு செய்ய துவக்க அழுத்தவும்";
 "dataTransfer.sendMessage" = "அனுப்பு";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "அடித்த";
 "generatedMessage.contactReAdded" = "மீண்டும் சேர்க்கப்பட்டது";
 "generatedMessage.outgoingCall" = "வெளியேறும் அழைப்பு";
-"generatedMessage.incomingCall" = "வருகின்ற அழைப்பு";
 "generatedMessage.missedOutgoingCall" = "தொலைபேசி அழைப்பு தவறியது";
 "generatedMessage.missedIncomingCall" = "தவறவிட்ட அழைப்பு";
 "generatedMessage.liveLocationSharing" = "நேரடி இருப்பிட பகிர்வு";
 "generatedMessage.contactLeftConversation" = "இடது";
 
 //General Settings
-"generalSettings.title" = "மேம்பட்ட அமைப்புகள்";
 "generalSettings.videoSettings" = "வீடியோ அமைப்புகள்";
 "generalSettings.videoAcceleration" = "வீடியோ துரிதப்படுத்தலை இயக்கு";
 "generalSettings.fileTransfer" = "கோப்பு பரிமாற்றம்";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "கணக்கு இடம்பெயர்வு";
 "migrateAccount.migrateButton" = "இடம்பெயர்வு கணக்கு";
 "migrateAccount.explanation" = "இந்த கணக்கை இடமாற்றம் செய்ய வேண்டும்";
-"migrateAccount.passwordPlaceholder" = "கடவுச்சொல்லை உள்ளிடவும்";
 "migrateAccount.passwordExplanation" = "இந்த இடம்பெயர்வு தொடர, இந்த கணக்கிற்கு பயன்படுத்தப்பட்ட கடவுச்சொல்லை நீங்கள் உள்ளிட வேண்டும்";
-"migrateAccount.removeAccount" = "கணக்கை நீக்கு";
 "migrateAccount.error" = "உங்கள் கணக்கை நகர்த்த முடியவில்லை. நீங்கள் மீண்டும் முயற்சி செய்யலாம் அல்லது உங்கள் கணக்கை நீக்கலாம்.";
 "migrateAccount.migrating" = "புலம்பெயர்.";
-"migrateAccount.cancel" = "ரத்துசெய்க";
 "migrateAccount.migrateAnother" = "மற்றொரு கணக்கை நகர்த்தவும்";
-
-

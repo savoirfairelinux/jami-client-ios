@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Групові чати";
-"global.meTabBarTitle" = "Налаштування облікового запису";
+"global.accountSettings" = "Налаштування облікового запису";
+"global.advancedSettings" = "Розширені налаштування";
+"global.username" = "Ім’я";
+"global.password" = "Пароль";
+"global.registerAUsername" = "Зареєструйте ім'я користувача";
+"global.enterPassword" = "Введіть пароль";
+"global.enterUsername" = "Введіть ім'я користувача";
+"global.cancel" = "Скасувати";
+"global.blockContact" = "Блок контакту";
+"global.removeAccount" = "Вилучити обліковий запис";
+"global.incomingCall" = "Вхідний виклик";
 "global.ok" = "Гаразд";
 "global.close" = "Закрити";
 "global.share" = "Поділитися";
@@ -34,10 +43,10 @@
 "global.name" = "Ім’я";
 "global.copy" = "Копіювати";
 "global.reply" = "Відповісти";
+"global.search" = "Пошук…";
 
 // Scan
 "scan.badQrCode" = "Погано QR-код";
-"scan.search" = "Пошук…";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Пошук контакту...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "Вчора";
 "smartlist.results" = "Публічний каталог";
 "smartlist.conversations" = "Групові чати";
-"smartlist.searching" = "Шукаю...";
 "smartlist.noResults" = "Ніяких результатів";
 "smartlist.noConversation" = "Ніяких розмов";
 "smartlist.searchBarPlaceholder" = "Введіть ім'я...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Вибраний контакт не має ніякого номера";
 "smartlist.selectOneNumber" = "Виберіть один з цифр";
 "smartlist.invitations" = "Запрошення";
-"smartlist.accountSettings" = "Налаштування облікового запису";
-"smartlist.advancedSettings" = "Розширені налаштування";
 "smartlist.aboutJami" = "Про Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "Ви зараз ділитеся своїм місцем розташуванням з ";
 "conversation.explanationReceivingLocationFrom" = "Ви зараз отримуєте пряму локацію від ";
 "conversation.errorSavingImage" = "Не вдалося зберегти зображення в галерею";
-"conversation.receivedRequest" = "\%@\ послав вам запит на розмову.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Посилала прохання про розмову.";
 "conversation.requestMessage" = "Привіт, чи не хочеш приєднатися до розмови?";
-"conversation.notContact" = "\%@\ не в списку контактів.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Відправить йому/їй запит на контакт, щоб вони могли обмінюватися разом";
 "conversation.sendRequestTitle" = "Відправляйте запит на зв'язок";
 "conversation.synchronizationTitle" = "Ви прийняли запит на розмову.";
-"conversation.synchronizationMessage" = "Ми чекаємо \%@\ підключення для синхронізації розмови.";
+"conversation.synchronizationMessage" = "Ми чекаємо %@ підключення для синхронізації розмови.";
 
 //Invitations
 "invitations.noInvitations" = "Ніяких запрошень";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Створіть ваш обліковий запис";
 "createAccount.chooseStrongPassword" = "Оберіть сильний пароль, який ви запам'ятаєте, щоб захистити ваш обліковий запис Джамі.";
-"createAccount.enterNewUsernamePlaceholder" = "Ім’я";
-"createAccount.newPasswordPlaceholder" = "Пароль";
 "createAccount.repeatPasswordPlaceholder" = "Підтвердити пароль";
 "createAccount.passwordCharactersNumberError" = "мінімум 6 символів";
 "createAccount.passwordNotMatchingError" = "паролі не відповідають";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "користувацьке ім'я доступне";
 "createAccount.loading" = "Завантаження";
 "createAccount.waitCreateAccountTitle" = "Додавання облікового запису";
-"createAccount.RegisterAUsername" = "Зареєструйте ім'я користувача";
 "createAccount.ChooseAPassword" = "Зашифруйте мій рахунок";
 "createAccount.PasswordInformation" = "Виберіть пароль для шифрування локального рахунку. Не забудьте його, інакше ви не зможете відновити свій рахунок";
 "createAccount.EnableNotifications" = "За повідомленнями";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Спільвання рахунків";
 "linkToAccount.linkButtonTitle" = "Устрій зв'язку";
-"linkToAccount.passwordPlaceholder" = "Пароль";
 "linkToAccount.pinPlaceholder" = "PIN-код";
-"linkToAccount.passwordLabel" = "Введіть пароль";
 "linkToAccount.pinLabel" = "Ввести PIN-код";
 "linkToAccount.explanationPinMessage" = "Для генерування PIN-коду перейдіть до налаштувань управління рахунком на пристрої, що містять акаунт, який ви хочете використовувати. У налаштуваннях пристроїв виберіть \"Звязати інше пристрої до цього акаунту\". Ви отримаєте потрібний PIN для заповнення цієї форми.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Підпишіться";
-"linkToAccountManager.passwordPlaceholder" = "Пароль";
-"linkToAccountManager.passwordLabel" = "Введіть пароль";
-"linkToAccountManager.usernamePlaceholder" = "Ім’я";
-"linkToAccountManager.usernameLabel" = "Введіть ім'я користувача";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Введіть URL JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Запис не міг бути створений.";
 "alerts.profileTakePhoto" = "Зняти фото";
 "alerts.profileUploadPhoto" = "Завантажити фото";
-"alerts.profileCancelPhoto" = "Скасувати";
 "alerts.accountLinkedTitle" = "Спільний рахунок";
 "alerts.dbFailedTitle" = "Під час запуску Джамі сталася помилка";
 "alerts.dbFailedMessage" = "Будь ласка, закрийте заявку і спробуйте відкрити її знову";
 "alerts.confirmBlockContact" = "Ви впевнені, що хочете заблокувати цей контакт?";
-"alerts.confirmBlockContactTitle" = "Блок контакту";
 "alerts.confirmDeleteConversation" = "Ти впевнений, що хочеш назавжди видалити цю розмову?";
 "alerts.confirmDeleteConversationFromContact" = "Ти впевнений, що хочеш видалити розмову з цим контактом?";
 "alerts.confirmDeleteConversationTitle" = "Знімайте розмову";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Видалити";
-"actions.cancelAction" = "Скасувати";
 "actions.clearAction" = "Очистити";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Дзвінок";
-"calls.unknown" = "Невідомий";
 "calls.incomingCallInfo" = "Хоче розмовляти з тобою";
 "calls.ringing" = "Звон...";
 "calls.connecting" = "З'єднавши...";
-"calls.searching" = "Пошук…";
 "calls.callFinished" = "Зов'язок завершений";
 "calls.currentCallWith" = "Звони з ";
 "calls.haghUp" = "Звішайте";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Пристрої";
 "accountPage.settingsHeader" = "Налаштування";
-"accountPage.username" = "Ім’я";
 "accountPage.usernameNotRegistered" = "користувацьке ім'я: не зареєстровано";
 "accountPage.credentialsHeader" = "Відомості про обліковий запис";
-"accountPage.enableProxy" = "Отримати прокси";
 "accountPage.blockedContacts" = "Заблоковані контакти";
 "accountPage.unblockContact" = "БЛОКОННА";
 "accountPage.proxyAddressAlert" = "Додайте прокси-адрес";
-"accountPage.enableProxy" = "Отримати прокси";
 "accountPage.noProxyExplanationLabel" = "Устрій не отримає повідомлення, коли прокси-прокси відключено.";
-"accountPage.saveProxyAddress" = "Зберігти";
 "accountPage.proxyPaceholder" = "Адреса проксі";
 "accountPage.enableNotifications" = "Увімкнути оповіщення";
 "accountPage.proxyDisabledAlertTitle" = "Прокси-сервер відключений";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Помилка відкликання пристрою";
 "accountPage.linkDeviceTitle" = "Прив'язати інший пристрій";
 "accountPage.other" = "Інше";
-"accountPage.removeAccountTitle" = "Вилучити обліковий запис";
 "accountPage.removeAccountMessage" = "Націкаючи на \"Вилучити\", ви видалите цей акаунт на цьому пристрої!";
 "accountPage.removeAccountButton" = "Видалити";
 "accountPage.shareAccountDetails" = "Деталі рахунку";
 "accountPage.contactMeOnJamiTitle" = "Звініться зі мною на Джамі!";
 "accountPage.contactMeOnJamiContant" = "Зверніться до мене за допомогою \"%s\" на платформі спілкування, що поширюється Jami: https://jami.net";
-"accountPage.registerNameTitle" = "Зареєструйте ім'я користувача";
 "accountPage.passwordPlaceholder" = "Введіть пароль рахунку";
 "accountPage.usernamePlaceholder" = "Введіть бажане ім'я користувача";
 "accountPage.registerNameErrorMessage" = "Вибрано ім'я користувача не доступне";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Ім'я користувача";
-"account.sipPassword" = "Пароль";
 "account.sipServer" = "Сервер SIP";
 "account.port" = "Порт";
 "account.proxyServer" = "Проксі";
 "account.createSipAccount" = "Створити обліковий запис SIP";
-"account.usernameLabel" = "Введіть ім'я користувача";
-"account.passwordLabel" = "Введіть пароль";
 "account.serverLabel" = "Введіть адресу";
 "account.portLabel" = "Введіть номер порта";
 "account.accountStatus" = "Стан облікового запису";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Почнете відеозванк";
 "contactPage.sendMessage" = "Посилайте повідомлення";
 "contactPage.clearConversation" = "Чистий чат";
-"contactPage.blockContact" = "Блок контакту";
 "contactPage.removeConversation" = "Знімайте розмову";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "Скасовано";
 "dataTransfer.sendingFailed" = "Не вдалося відправити";
 "dataTransfer.readableStatusSuccess" = "Повністю";
-"dataTransfer.readableStatusCancel" = "Скасувати";
 
 //Notifications
-"notifications.incomingCall" = "Повідомлення";
 "notifications.missedCall" = "Згублений дзвін";
 "notifications.newFile" = "Новий файл";
 "notifications.locationSharingStarted" = "Розпочалося обмін місцем розташування";
 "notifications.locationSharingStopped" = "Дохідний обмін місцем розташування припинено";
-"dataTransfer.readableStatusAwaiting" = "Очікую...";
-"dataTransfer.readableStatusOngoing" = "Передача";
-"dataTransfer.readableStatusCanceled" = "Скасовано";
-"dataTransfer.readableStatusSuccess" = "Повністю";
-"dataTransfer.readableStatusCancel" = "Скасувати";
+"dataTransfer.readableStatusRefuse" = "Скидання";
+"dataTransfer.readableStatusAccept" = "Прийняти";
 "dataTransfer.infoMessage" = "Натисніть, щоб почати запис";
 "dataTransfer.sendMessage" = "Відправити";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "був кинутий";
 "generatedMessage.contactReAdded" = "було додано";
 "generatedMessage.outgoingCall" = "Вихідний виклик";
-"generatedMessage.incomingCall" = "Вхідний виклик";
 "generatedMessage.missedOutgoingCall" = "Пропущений вихідний виклик";
 "generatedMessage.missedIncomingCall" = "Пропущений вхідний виклик";
 "generatedMessage.liveLocationSharing" = "Поділення місцями на живо";
 "generatedMessage.contactLeftConversation" = "ліво";
 
 //General Settings
-"generalSettings.title" = "Розширені налаштування";
 "generalSettings.videoSettings" = "Настройки відео";
 "generalSettings.videoAcceleration" = "Отримати прискорення відео";
 "generalSettings.fileTransfer" = "Передача файлів";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "Переведення облікового запису";
 "migrateAccount.migrateButton" = "Миграційний рахунок";
 "migrateAccount.explanation" = "Цей рахунок потрібно перемігравати";
-"migrateAccount.passwordPlaceholder" = "Ввести пароль";
 "migrateAccount.passwordExplanation" = "Щоб продовжити переїзд, потрібно ввести пароль, який був використаний для цього облікового запису";
-"migrateAccount.removeAccount" = "Вилучити обліковий запис";
 "migrateAccount.error" = "Не вдалося переміграти свій акаунт. Ви можете спробувати знову або видалити свій акаунт.";
 "migrateAccount.migrating" = "Миграція...";
-"migrateAccount.cancel" = "Скасувати";
 "migrateAccount.migrateAnother" = "Переїжджайте на інший обліковий запис";
-
-

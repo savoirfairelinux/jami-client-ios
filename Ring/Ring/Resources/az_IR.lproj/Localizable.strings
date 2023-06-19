@@ -26,11 +26,11 @@
 "global.registerAUsername" = "آدی یازیلماق";
 "global.enterPassword" = "رمز یازماق";
 "global.enterUsername" = "Username وارد ائدیر";
-"global.cancel" = "Ləğv et";
+"global.cancel" = "لغو";
 "global.blockContact" = "بلاک کنتاکت";
 "global.removeAccount" = "حسابي حذف ائتمک";
 "global.incomingCall" = "گئچن چاغ";
-"global.ok" = "Tamam";
+"global.ok" = "باشه";
 "global.close" = "یاخینلاشماق";
 "global.share" = "بؤلوم";
 "global.forward" = "قاباقدا";
@@ -325,7 +325,7 @@
 "dataTransfer.readableStatusError" = "خطای";
 "dataTransfer.readableStatusAwaiting" = "منتظر...";
 "dataTransfer.readableStatusOngoing" = "یئرلشمه";
-"dataTransfer.readableStatusCanceled" = "Ləğv edilib";
+"dataTransfer.readableStatusCanceled" = "لغو ائدیلدی";
 "dataTransfer.sendingFailed" = "گؤندرمهمئش";
 "dataTransfer.readableStatusSuccess" = "تام";
 

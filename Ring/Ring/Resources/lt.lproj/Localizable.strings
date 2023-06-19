@@ -19,12 +19,21 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Pokalbiai";
-"global.meTabBarTitle" = "Paskyros nustatymai";
+"global.accountSettings" = "Paskyros nustatymai";
+"global.advancedSettings" = "Išplėstiniai nustatymai";
+"global.username" = "Naudotojo vardas";
+"global.password" = "Slaptažodis";
+"global.registerAUsername" = "Užsiregistruokite naudotojo vardą";
+"global.enterPassword" = "Įveskite slaptažodį";
+"global.enterUsername" = "Įveskite naudotojo adresą";
+"global.cancel" = "Atsisakyti";
+"global.blockContact" = "Užblokuoti adresatą";
+"global.removeAccount" = "Šalinti paskyrą";
+"global.incomingCall" = "Gaunamasis skambutis";
 "global.ok" = "Gerai";
 "global.close" = "Užverti";
 "global.share" = "Bendrinti";
-"global.forward" = "Forward";
+"global.forward" = "Išankstinis";
 "global.save" = "Įrašyti";
 "global.resend" = "Siųsti iš naujo";
 "global.preview" = "Peržiūra";
@@ -34,72 +43,69 @@
 "global.name" = "Vardas";
 "global.copy" = "Kopijuoti";
 "global.reply" = "Atsakyti";
+"global.search" = "Ieškoma…";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";
-"scan.search" = "Ieškoma…";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Search for contact...";
-"swarmcreation.createTheSwarm" = "Create the swarm";
+"swarmcreation.searchBar" = "Ieškokite kontaktų...";
+"swarmcreation.createTheSwarm" = "Sukurkite sraudą";
 "swarmcreation.addADescription" = "Pridėti aprašą";
-"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
+"swarmcreation.addPeople" = "Galite pridėti daugiau žmonių prie sraudo";
 // Swarm
-"swarm.ignoreSwarm" = "Ignore the swarm";
-"swarm.leaveConversation" = "Leave the conversation";
-"swarm.chooseColor" = "Choose a color";
-"swarm.typeOfSwarm" = "Type of swarm";
-"swarm.identifier" = "Identifier";
+"swarm.ignoreSwarm" = "Ignoruokite sraudą";
+"swarm.leaveConversation" = "Palikite pokalbį.";
+"swarm.chooseColor" = "Pasirinkite spalvą";
+"swarm.typeOfSwarm" = "Žvaigždės tipas";
+"swarm.identifier" = "Identifikavimo ženklas";
 "swarm.about" = "Apie";
-"swarm.members" = "Members";
+"swarm.members" = "Parlamento nariai";
 "swarm.addDescription" = "Pridėti aprašą";
-"swarm.oneToOne" = "Private swarm";
-"swarm.adminInvitesOnly" = "Admin invites only";
-"swarm.invitesOnly" = "Private swarm";
-"swarm.publicChat" = "Public swarm";
-"swarm.others" = "Others";
-"swarm.member" = "Member";
-"swarm.invited" = "Invited";
+"swarm.oneToOne" = "Privati sparnukai";
+"swarm.adminInvitesOnly" = "Admin kviečia tik";
+"swarm.invitesOnly" = "Privati sparnukai";
+"swarm.publicChat" = "Visuomenė srauta";
+"swarm.others" = "Kiti";
+"swarm.member" = "Žmogaus teisių";
+"swarm.invited" = "Pakviesti";
 "swarm.admin" = "Administratorius";
-"swarm.banned" = "Banned";
-"swarm.unknown" = "Unkown";
-"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
-"swarm.addMember" = "Add Member";
-"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
-"swarm.Leave" = "Leave";
+"swarm.banned" = "Uždrausta";
+"swarm.unknown" = "Nepažįstamas";
+"swarm.addMorePeople" = "Galite pridėti daugiau žmonių į šį sraudą";
+"swarm.addMember" = "Įrašyti narį";
+"swarm.confirmLeaveSwarm" = "Ar tikrai nori palikti šį sraudą?";
+"swarm.Leave" = "Išvykite.";
 // Smartlist
 "smartlist.yesterday" = "Vakar";
-"smartlist.results" = "Public Directory";
+"smartlist.results" = "Visuomenė direktorija";
 "smartlist.conversations" = "Pokalbiai";
-"smartlist.searching" = "Ieškoma...";
 "smartlist.noResults" = "Jokių rezultatų";
 "smartlist.noConversation" = "Pokalbių nėra";
 "smartlist.searchBarPlaceholder" = "Įveskite vardą...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Ieškoti naujų ar esamų kontaktų...";
 "smartlist.noNetworkConnectivity" = "Nėra tinklo ryšio";
-"smartlist.cellularAccess" = "Be sure cellular access is granted in your settings";
+"smartlist.cellularAccess" = "Įsitikinkite, kad jūsų nustatymuose yra suteiktas mobiliojo ryšio prieiga";
 "smartlist.accountsTitle" = "Paskyros";
 "smartlist.addAccountButton" = "+ Pridėti paskyrą";
 "smartlist.noNumber" = "Pasirinktas adresatas neturi numerio";
 "smartlist.selectOneNumber" = "Pasirinkite vieną iš numerių";
 "smartlist.invitations" = "Pakvietimai";
-"smartlist.accountSettings" = "Paskyros nustatymai";
-"smartlist.advancedSettings" = "Išplėstiniai nustatymai";
 "smartlist.aboutJami" = "Apie Jami";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write message to ";
-"conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
-"conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
-"conversation.receivedRequest" = "\%@\ sent you a request for a conversation.";
-"conversation.incomingRequest" = "Sent you a request for a conversation.";
+"conversation.messagePlaceholder" = "Pašaldyk pranešimą ";
+"conversation.explanationSendingLocationTo" = "Šiuo metu daliniesi savo buveine su ";
+"conversation.explanationReceivingLocationFrom" = "Šiuo metu gavote gyvą vietą iš ";
+"conversation.errorSavingImage" = "Nesugebėjo išsaugoti paveikslo galerijoje";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Siuntė jums prašymą apie pokalbį.";
 "conversation.requestMessage" = "Sveiki,\nAr norėtumėte prisijungti prie pokalbio?";
-"conversation.notContact" = "\%@\ is not in your contact list.";
-"conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.sendRequestTitle" = "Send Contact Request";
-"conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for \%@\ connects to synchronize the conversation.";
+"conversation.notContact" = "%@ is not in your contact list.";
+"conversation.sendRequest" = "Siųskite jam (iš) kontaktinį prašymą, kad galėtumėte kartu keistis";
+"conversation.sendRequestTitle" = "Siųskite kontaktinį prašymą";
+"conversation.synchronizationTitle" = "Jūs priėmėte pokalbį.";
+"conversation.synchronizationMessage" = "Laukiame %@ ryšių, kad sinchronizuotų pokalbį.";
 
 //Invitations
 "invitations.noInvitations" = "Pakvietimų nėra";
@@ -116,7 +122,7 @@
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Praleisti";
 "createProfile.profileCreated" = "Kitas";
-"createProfile.title" = "Personalise your profile";
+"createProfile.title" = "Personalizuokite savo profilį";
 "createProfile.enterNameLabel" = "Įveskite rodomą vardą";
 "createProfile.enterNamePlaceholder" = "Įveskite vardą";
 "createProfile.subtitle" = "Jūsų profilis bus bendrinamas tik su jūsų adresatais. Tai galėsite bet kuriuo metu pakeisti.";
@@ -125,18 +131,15 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Susikurkite paskyrą";
 "createAccount.chooseStrongPassword" = "Pasirinkite stiprų slaptažodį, kurį prisiminsite, kad apsaugotumėte savo Jami paskyrą.";
-"createAccount.enterNewUsernamePlaceholder" = "Naudotojo vardas";
-"createAccount.newPasswordPlaceholder" = "Slaptažodis";
 "createAccount.repeatPasswordPlaceholder" = "Patvirtinkite slaptažodį";
 "createAccount.passwordCharactersNumberError" = "Mažiausiai 6 simboliai";
 "createAccount.passwordNotMatchingError" = "slaptažodžiai nesutampa";
 "createAccount.lookingForUsernameAvailability" = "tikrinamas prieinamumas…";
 "createAccount.invalidUsername" = "neteisingas naudotojo vardas";
 "createAccount.usernameAlreadyTaken" = "naudotojo vardas jau užimtas";
-"createAccount.usernameValid" = "username is available";
+"createAccount.usernameValid" = "Naudotojo vardas prieinamas";
 "createAccount.loading" = "Įkeliama";
 "createAccount.waitCreateAccountTitle" = "Pridedama paskyra";
-"createAccount.RegisterAUsername" = "Register a username";
 "createAccount.ChooseAPassword" = "Šifruoti mano paskyrą";
 "createAccount.PasswordInformation" = "Pasirinkite slaptažodį, skirtą šifruoti jūsų vietinę paskyrą. Nepamirškite jo arba kitaip nebegalėsite atkurti savo paskyros";
 "createAccount.EnableNotifications" = "Pranešimai";
@@ -149,20 +152,14 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Paskyros susiejimas";
 "linkToAccount.linkButtonTitle" = "Susieti įrenginį";
-"linkToAccount.passwordPlaceholder" = "Slaptažodis";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Įveskite slaptažodį";
 "linkToAccount.pinLabel" = "Įveskite PIN";
 "linkToAccount.explanationPinMessage" = "Norėdami generuoti PIN kodą, pereikite į paskyros tvarkymo nustatymus įrenginyje, kuriame yra paskyra, kurią norite naudoti. Įrenginių nustatymuose pasirinkite \"Susieti kitą įrenginį su šia paskyra\". Taip gausite šiai formai reikalingą PIN. PIN galios tik 10 minučių.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Prisijungti";
-"linkToAccountManager.passwordPlaceholder" = "Slaptažodis";
-"linkToAccountManager.passwordLabel" = "Įveskite slaptažodį";
-"linkToAccountManager.usernamePlaceholder" = "Naudotojo vardas";
-"linkToAccountManager.usernameLabel" = "Įveskite naudotojo adresą";
-"linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
-"linkToAccountManager.accountManagerLabel" = "Enter JAMS URL";
+"linkToAccountManager.accountManagerPlaceholder" = "JAMS adresas";
+"linkToAccountManager.accountManagerLabel" = "Įvesti JAMS URL";
 
 //Alerts
 "alerts.accountCannotBeFoundTitle" = "Nepavyksta rasti paskyros";
@@ -174,29 +171,27 @@
 "alerts.accountDefaultErrorMessage" = "Nepavyko sukurti paskyros.";
 "alerts.profileTakePhoto" = "Padaryti nuotrauką";
 "alerts.profileUploadPhoto" = "Įkelti nuotrauką";
-"alerts.profileCancelPhoto" = "Atsisakyti";
 "alerts.accountLinkedTitle" = "Susiejama paskyra";
 "alerts.dbFailedTitle" = "Paleidžiant Jami, įvyko klaida";
 "alerts.dbFailedMessage" = "Prašome užverti programą ir bandyti ją atverti dar kartą";
 "alerts.confirmBlockContact" = "Ar tikrai norite užblokuoti šį adresatą? Pokalbio istorija su šiuo adresatu taip pat bus ištrinta visiems laikams.";
-"alerts.confirmBlockContactTitle" = "Užblokuoti adresatą";
 "alerts.confirmDeleteConversation" = "Ar tikrai norite visiems laikams ištrinti šį pokalbį?";
 "alerts.confirmDeleteConversationFromContact" = "Ar tikrai norite ištrinti pokalbį su šiuo adresatu?";
 "alerts.confirmDeleteConversationTitle" = "Ištrinti pokalbį";
 "alerts.confirmClearConversation" = "Ar tikrai norite išvalyti pokalbį su šiuo adresatu?";
 "alerts.confirmClearConversationTitle" = "Išvalyti pokalbį";
-"alerts.noMediaPermissionsTitle" = "Media permission not granted";
-"alerts.noLibraryPermissionsTitle" = "Access to photo library not granted";
-"alerts.noLocationPermissionsTitle" = "Access to location not granted";
-"alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
-"alerts.recordVideoMessage" = "Record a video message";
-"alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
-"alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
-"alerts.locationSharing" = "Share my location";
-"alerts.alreadylocationSharing" = "Already sharing location with this user";
-"alerts.locationSharingDurationTitle" = "How long should the location sharing be?";
+"alerts.noMediaPermissionsTitle" = "Žinias leidimas nesuteiktas";
+"alerts.noLibraryPermissionsTitle" = "Fotografinės bibliotekos prieiga nepriimta";
+"alerts.noLocationPermissionsTitle" = "Neįmanoma gauti prieigos prie vietos";
+"alerts.errorWrongCredentials" = "Negalima prisijungti prie pateikto paskyros valdytojo.";
+"alerts.recordVideoMessage" = "Užregistruokite vaizdo pranešimą";
+"alerts.recordAudioMessage" = "Užregistruokite garso pranešimą";
+"alerts.uploadFile" = "Įkelkite failą";
+"alerts.uploadPhoto" = "Įkelkite nuotrauką ar filmą";
+"alerts.locationServiceIsDisabled" = "Įjungkite \"Lokation Services\" ir leiskite \"Jami\" nustatyti jūsų vietą.";
+"alerts.locationSharing" = "Pasidalinkite mano vieta";
+"alerts.alreadylocationSharing" = "Jau dalintis vieta su šiuo vartotoju";
+"alerts.locationSharingDurationTitle" = "Kiek laiko turėtų trukti vietos dalinimas?";
 "alerts.locationSharingDuration10min" = "10 min.";
 "alerts.locationSharingDuration1hour" = "1 val.";
 "alerts.mapInformation" = "Informacija apie žemėlapį";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Ištrinti";
-"actions.cancelAction" = "Atsisakyti";
 "actions.clearAction" = "Išvalyti";
 "actions.backAction" = "Atgal";
 "actions.doneAction" = "Atlikta";
@@ -213,40 +207,34 @@
 "alerts.incomingCallButtonIgnore" = "Nepaisyti";
 "actions.startAudioCall" = "Garso skambutis";
 "actions.startVideoCall" = "Vaizdo skambutis";
-"actions.goToSettings" = "Go to Settings";
-"actions.stopLocationSharing" = "Stop sharing";
+"actions.goToSettings" = "Pasikonsultuokite su nustatymu";
+"actions.stopLocationSharing" = "Nustokite dalintis";
 
 //Calls
 "calls.callItemTitle" = "Skambutis";
-"calls.unknown" = "Nežinomas";
 "calls.incomingCallInfo" = "nori su jumis pakalbėti";
-"calls.ringing" = "Ringing…";
+"calls.ringing" = "- Žinau.";
 "calls.connecting" = "Jungiamasi…";
-"calls.searching" = "Ieškoma…";
 "calls.callFinished" = "Skambutis užbaigtas";
-"calls.currentCallWith" = "Call with ";
-"calls.haghUp" = "hang up";
-"calls.maximize" = "maximize";
-"calls.minimize" = "minimize";
-"calls.setModerator" = "set moderator";
-"calls.removeModerator" = "unset moderator";
-"calls.muteAudio" = "mute audio";
-"calls.unmuteAudio" = "unmute audio";
-"calls.lowerHand" = "lower hand";
+"calls.currentCallWith" = "Paskambinkite su";
+"calls.haghUp" = "Susisiekite.";
+"calls.maximize" = "maksimaliai";
+"calls.minimize" = "sumažinti";
+"calls.setModerator" = "nustatomas moderatorius";
+"calls.removeModerator" = "Neįjungtas moderatorius";
+"calls.muteAudio" = "Stulbų garso";
+"calls.unmuteAudio" = "Nepaklausyti garso";
+"calls.lowerHand" = "žemesnis rankas";
 
 //Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";
 "accountPage.settingsHeader" = "Nustatymai";
-"accountPage.username" = "Naudotojo vardas";
 "accountPage.usernameNotRegistered" = "naudotojo vardas: neregistruotas";
 "accountPage.credentialsHeader" = "Išsamesnė paskyros informacija";
-"accountPage.enableProxy" = "Įjungti įgaliotąjį serverį";
 "accountPage.blockedContacts" = "Užblokuoti adresatai";
 "accountPage.unblockContact" = "ATBLOKUOTI";
-"accountPage.proxyAddressAlert" = "Provide proxy address";
-"accountPage.enableProxy" = "Įjungti įgaliotąjį serverį";
-"accountPage.noProxyExplanationLabel" = "Your device won't receive notifications when proxy is disabled";
-"accountPage.saveProxyAddress" = "Įrašyti";
+"accountPage.proxyAddressAlert" = "Pateikite proxy adresą";
+"accountPage.noProxyExplanationLabel" = "Jūsų įrenginys negaus pranešimų, kai proxy yra išjungtas";
 "accountPage.proxyPaceholder" = "Įgaliotojo serverio adresas";
 "accountPage.enableNotifications" = "Įjungti pranešimus";
 "accountPage.proxyDisabledAlertTitle" = "Įgaliotasis serveris išjungtas";
@@ -254,45 +242,43 @@
 "accountPage.revokeDeviceTitle" = "Panaikinti įrenginį";
 "accountPage.revokeDeviceMessage" = "Ar tikrai norite panaikinti šį įrenginį? Šio veiksmo neįmanoma bus atšaukti.";
 "accountPage.revokeDeviceButton" = "Panaikinti";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
+"accountPage.revokeDevicePlaceholder" = "Įveskite slaptažodį";
 "accountPage.deviceRevoked" = "Įrenginio panaikinimas užbaigtas";
 "accountPage.deviceRevocationProgress" = "Panaikinama...";
 "accountPage.deviceRevocationSuccess" = "Įrenginys buvo panaikintas";
-"accountPage.deviceRevocationTryAgain" = "Try again";
+"accountPage.deviceRevocationTryAgain" = "Bandyk dar kartą.";
 "accountPage.deviceRevocationWrongPassword" = "Neteisingas slaptažodis";
 "accountPage.deviceRevocationUnknownDevice" = "Nežinomas įrenginys";
 "accountPage.deviceRevocationError" = "Įrenginio panaikinimo klaida";
 "accountPage.linkDeviceTitle" = "Susieti kitą įrenginį";
 "accountPage.other" = "Kita";
-"accountPage.removeAccountTitle" = "Šalinti paskyrą";
 "accountPage.removeAccountMessage" = "Spustelėję \"Šalinti\", pašalinsite šią paskyrą šiame įrenginyje! Šio veiksmo negalima bus atšaukti. Be to, galite prarasti savo registruotą vardą.";
 "accountPage.removeAccountButton" = "Šalinti";
 "accountPage.shareAccountDetails" = "Bendrinti informaciją apie paskyrą";
-"accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
-"accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
-"accountPage.registerNameTitle" = "Register a username";
-"accountPage.passwordPlaceholder" = "Enter account password";
-"accountPage.usernamePlaceholder" = "Enter desired username";
+"accountPage.contactMeOnJamiTitle" = "Susisiekite su manimi Džimi!";
+"accountPage.contactMeOnJamiContant" = "Susisiekite su manimi naudojant \"%s\" Džami platintoje komunikacijos platformėje: https://jami.net";
+"accountPage.passwordPlaceholder" = "Įveskite paskyros slaptažodį";
+"accountPage.usernamePlaceholder" = "Įvesti pageidaujamą naudotojo vardą";
 "accountPage.registerNameErrorMessage" = "Pasirinktas naudotojo vardas yra neprieinamas";
-"accountPage.usernameRegistering" = "Registering";
+"accountPage.usernameRegistering" = "Registravimas";
 "accountPage.usernameRegisterAction" = "Registruoti";
-"accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
+"accountPage.usernameRegistrationFailed" = "Registracija nesilaukė, prašome patikrinti slaptažodį.";
 "accountPage.createPassword" = "Sukurti slaptažodį";
 "accountPage.changePassword" = "Pakeisti slaptažodį";
-"accountPage.oldPasswordPlaceholder" = "Enter old password";
-"accountPage.newPasswordPlaceholder" = "Enter new password";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirm new password";
+"accountPage.oldPasswordPlaceholder" = "Įveskite seną slaptažodį";
+"accountPage.newPasswordPlaceholder" = "Įveskite naują slaptažodį";
+"accountPage.newPasswordConfirmPlaceholder" = "Pasitikrinkite naują slaptažodį";
 "accountPage.changePasswordError" = "Slaptažodis yra neteisingas";
-"accountPage.enableBoothMode" = "Enable Booth Mode";
-"accountPage.disableBoothMode" = "Disable Booth Mode";
+"accountPage.enableBoothMode" = "Įjungti statinio režimą";
+"accountPage.disableBoothMode" = "Išjungti statinio režimą";
 "accountPage.disableBoothModeExplanation" = "Pateikite savo paskyros slaptažodį";
-"accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
-"accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
-"accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
+"accountPage.boothModeExplanation" = "Kai įjungsite \"Booth\" režimą, jūsų pokalbių istorija nebus išsaugota ir \"Jami\" funkcija bus apribota išvykstančiais skambučiais.";
+"accountPage.noBoothMode" = "Norėdami įjungti \"Booth\" režimą, pirmiausia turite sukurti paskyros slaptažodį.";
+"accountPage.boothModeAlertMessage" = "Kai įjungsite kabino režimą, visi jūsų pokalbis bus pašalintas.";
 "accountPage.peerDiscovery" = "Automatiškai prisijungti vietiniame tinkle";
-"accountPage.autoRegistration" = "Auto register after expiration";
+"accountPage.autoRegistration" = "Autoriškas registruotojas po galiojimo termino";
 "accountPage.connectivityHeader" = "Jungiamumas";
-"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnEnabled" = "Įgalinkite \"TURN\"";
 "accountPage.turnServer" = "TURN adresas";
 "accountPage.turnUsername" = "TURN naudotojo vardas";
 "accountPage.turnPassword" = "TURN slaptažodis";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Naudotojo vardas";
-"account.sipPassword" = "Slaptažodis";
 "account.sipServer" = "SIP serveris";
 "account.port" = "Prievadas";
 "account.proxyServer" = "Įgaliotasis serveris";
-"account.createSipAccount" = "Create a SIP Account";
-"account.usernameLabel" = "Įveskite naudotojo adresą";
-"account.passwordLabel" = "Įveskite slaptažodį";
+"account.createSipAccount" = "SIP paskyros sukūrimas";
 "account.serverLabel" = "Įveskite adresą";
 "account.portLabel" = "Įveskite prievado numerį";
 "account.accountStatus" = "Paskyros būsena";
@@ -316,7 +299,7 @@
 "account.statusConnecting" = "Sujungiama";
 "account.statusUnknown" = "Nežinomas";
 "account.statusConnectionerror" = "Ryšio klaida";
-"account.needMigration" = "account need to be migrated";
+"account.needMigration" = "reikalo reikia perkelti";
 "account.me" = "Aš";
 
 //Block List Page
@@ -328,87 +311,74 @@
 "linkDevice.networkError" = "Eksportavimo metu, įvyko klaida";
 "linkDevice.defaultError" = "Eksportavimo metu, įvyko klaida";
 "linkDevice.explanationMessage" = "Norėdami užbaigti procesą, jūs turite atverti Jami naujame įrenginyje ir pasirinkti parinktį \"Susieti šį įrenginį su paskyra\". Jūsų pin galioja 10 minučių";
-"linkDevice.hudMessage" = "Verifying";
+"linkDevice.hudMessage" = "Įvertinimas";
 
 //Contact Page
 "contactPage.startAudioCall" = "Pradėti garso skambutį";
 "contactPage.startVideoCall" = "Pradėti vaizdo skambutį";
 "contactPage.sendMessage" = "Siųsti žinutę";
 "contactPage.clearConversation" = "Išvalyti pokalbį";
-"contactPage.blockContact" = "Užblokuoti adresatą";
 "contactPage.removeConversation" = "Šalinti pokalbį";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inicijuojama…";
 "dataTransfer.readableStatusError" = "Klaida";
 "dataTransfer.readableStatusAwaiting" = "Laukiama…";
-"dataTransfer.readableStatusOngoing" = "Transferring";
+"dataTransfer.readableStatusOngoing" = "Perdavimo";
 "dataTransfer.readableStatusCanceled" = "Atsisakyta";
 "dataTransfer.sendingFailed" = "Nepavyko išsiųsti";
-"dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusCancel" = "Atsisakyti";
+"dataTransfer.readableStatusSuccess" = "Visiškas";
 
 //Notifications
-"notifications.incomingCall" = "Gaunamasis skambutis";
 "notifications.missedCall" = "Praleistas skambutis";
 "notifications.newFile" = "Naujas failas";
-"notifications.locationSharingStarted" = "Incoming location sharing started";
-"notifications.locationSharingStopped" = "Incoming location sharing stopped";
-"dataTransfer.readableStatusAwaiting" = "Laukiama…";
-"dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "Atsisakyta";
-"dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.readableStatusCancel" = "Atsisakyti";
-"dataTransfer.infoMessage" = "Press to start recording";
+"notifications.locationSharingStarted" = "Pradėta dalytis vietomis";
+"notifications.locationSharingStopped" = "Įvairių vietų pasidalijimas sustabdytas";
+"dataTransfer.readableStatusRefuse" = "Atmesti";
+"dataTransfer.readableStatusAccept" = "Priimti";
+"dataTransfer.infoMessage" = "Paspauskite, kad pradėtumėte įrašyti";
 "dataTransfer.sendMessage" = "Siųsti";
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
-"generatedMessage.swarmCreated" = "Swarm created";
-"generatedMessage.invitationReceived" = "was invited to join";
-"generatedMessage.invitationAccepted" = "joined the conversation";
-"generatedMessage.youJoined" = "You joined the conversation";
-"generatedMessage.contactBanned" = "was kicked";
-"generatedMessage.contactReAdded" = "was re-added";
+"generatedMessage.contactAdded" = "Jūs gavote atleidimą.";
+"generatedMessage.swarmCreated" = "Skaitė sukurta";
+"generatedMessage.invitationReceived" = "buvo pakviestas prisijungti";
+"generatedMessage.invitationAccepted" = "prisijungė prie pokalbio";
+"generatedMessage.youJoined" = "Tu prisijungėte prie pokalbio.";
+"generatedMessage.contactBanned" = "buvo iššaudytas";
+"generatedMessage.contactReAdded" = "buvo pridėta";
 "generatedMessage.outgoingCall" = "Išsiunčiamasis skambutis";
-"generatedMessage.incomingCall" = "Gaunamasis skambutis";
-"generatedMessage.missedOutgoingCall" = "Missed outgoing call";
+"generatedMessage.missedOutgoingCall" = "Praleistas išvykęs paskyras";
 "generatedMessage.missedIncomingCall" = "Praleistas gaunamasis skambutis";
-"generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "left";
+"generatedMessage.liveLocationSharing" = "Gyvi vietos pasidalijimas";
+"generatedMessage.contactLeftConversation" = "kairėje";
 
 //General Settings
-"generalSettings.title" = "Išplėstiniai nustatymai";
 "generalSettings.videoSettings" = "Vaizdo nustatymai";
 "generalSettings.videoAcceleration" = "Įjungti vaizdo spartinimą";
 "generalSettings.fileTransfer" = "Failų persiuntimas";
-"generalSettings.locationSharing" = "Location Sharing";
-"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
-"generalSettings.acceptTransferLimit" = "Accept transfer limit";
-"generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
-"generalSettings.locationSharingDuration" = "Position share duration";
+"generalSettings.locationSharing" = "Vietos pasidalijimas";
+"generalSettings.automaticAcceptIncomingFiles" = "Automatiškai priimais failus";
+"generalSettings.acceptTransferLimit" = "Priimkite pervedimo ribą";
+"generalSettings.acceptTransferLimitDescription" = "(MB, 0 = nelimityvus)";
+"generalSettings.limitLocationSharingDuration" = "Įgyvendinimo ir tvarkymo sistemos";
+"generalSettings.locationSharingDuration" = "Pozicijos akcijų trukmė";
 
 
 //Log View
 "logView.title" = "Diagnostika";
 "logView.description" = "Atverti diagnostikos žurnalo nustatymus";
-"logView.startLogging" = "Start Logging";
-"logView.stopLogging" = "Stop Logging";
+"logView.startLogging" = "Pradėkite užrašyti";
+"logView.stopLogging" = "Nustokite lazdą";
 "logView.saveError" = "Nepavyko įrašyti failo";
 "logView.shareError" = "Nepavyko bendrinti failo";
 
 //Migrate Account
 "migrateAccount.title" = "Paskyros perkėlimas";
-"migrateAccount.migrateButton" = "Migrate Account";
-"migrateAccount.explanation" = "This account needs to be migrated";
-"migrateAccount.passwordPlaceholder" = "Įveskite slaptažodį";
-"migrateAccount.passwordExplanation" = "To proceed with the migration, you need to enter a password that was used for this account";
-"migrateAccount.removeAccount" = "Šalinti paskyrą";
-"migrateAccount.error" = "Failed to migrate your account. You can retry or delete your account.";
+"migrateAccount.migrateButton" = "Migros sąskaita";
+"migrateAccount.explanation" = "Ši sąskaita turi būti perkelta";
+"migrateAccount.passwordExplanation" = "Norėdami tęsti migraciją, turite įvesti slaptažodį, kuris buvo naudojamas šiam paskyrui";
+"migrateAccount.error" = "Jūsų paskyrą nesugebėjo perkelti. Galite dar kartą bandyti arba ištrinti savo paskyrą.";
 "migrateAccount.migrating" = "Perkeliama...";
-"migrateAccount.cancel" = "Atsisakyti";
 "migrateAccount.migrateAnother" = "Perkelti kitą paskyrą";
-
-

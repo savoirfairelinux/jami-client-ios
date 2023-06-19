@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Biseda";
-"global.meTabBarTitle" = "Rregullime Llogarie";
+"global.accountSettings" = "Rregullime Llogarie";
+"global.advancedSettings" = "Rregullime të Mëtejshme";
+"global.username" = "Emër përdoruesi";
+"global.password" = "Fjalëkalim";
+"global.registerAUsername" = "Regjistroni një emër përdoruesi";
+"global.enterPassword" = "Jepni Fjalëkalimin";
+"global.enterUsername" = "Jepni Emër Përdoruesi";
+"global.cancel" = "Anuloje";
+"global.blockContact" = "Bllokoje Kontaktin";
+"global.removeAccount" = "Hiqe llogarinë";
+"global.incomingCall" = "Thirrje ardhëse";
 "global.ok" = "Në rregull";
 "global.close" = "Mbylle";
 "global.share" = "Ndajeni me të tjerë";
@@ -34,10 +43,10 @@
 "global.name" = "Emër";
 "global.copy" = "Kopjoje";
 "global.reply" = "Përgjigjuni";
+"global.search" = "Po kërkohet…";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
-"scan.search" = "Po kërkohet…";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Kërkoni për kontakt…";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori Publike";
 "smartlist.conversations" = "Biseda";
-"smartlist.searching" = "Po kërkohet…";
 "smartlist.noResults" = "S’ka përfundime";
 "smartlist.noConversation" = "S’ka biseda";
 "smartlist.searchBarPlaceholder" = "Jepni emrin…";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Kontakti i përzgjedhur s’ka ndonjë numër";
 "smartlist.selectOneNumber" = "Përzgjidhni një nga numrat";
 "smartlist.invitations" = "Ftesa";
-"smartlist.accountSettings" = "Rregullime Llogarie";
-"smartlist.advancedSettings" = "Rregullime të Mëtejshme";
 "smartlist.aboutJami" = "Mbi Jami-n";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 "conversation.errorSavingImage" = "S’u arrit të dërgohet figurë te galeri";
-"conversation.receivedRequest" = "\%@\ ju dërgoi një kërkesë për një bisedë.";
+"conversation.receivedRequest" = "%@ ju dërgoi një kërkesë për bisedë.";
 "conversation.incomingRequest" = "Ju dërgoi një kërkesë për bisedë.";
 "conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
-"conversation.notContact" = "\%@\ s’gjendet te lista e kontakteve tuaj.";
+"conversation.notContact" = "%@ s’gjendet te lista e kontakteve tuaj.";
 "conversation.sendRequest" = "Dërgojini një kërkesë kontakti, që të jeni në gjendje të shkëmbeni me njëri-tjetrin";
 "conversation.sendRequestTitle" = "Dërgo Kërkesë Kontakti";
 "conversation.synchronizationTitle" = "Keni pranuar kërkesën për bisedë.";
-"conversation.synchronizationMessage" = "Po presim që \%@\ të lidhet, për të njëkohësuar bisedën.";
+"conversation.synchronizationMessage" = "Po presim që %@ të lidhet për të njëkohësuar bisedën.";
 
 //Invitations
 "invitations.noInvitations" = "S’ka ftesa";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Krijoni llogarinë tuaj";
 "createAccount.chooseStrongPassword" = "Për të mbrojtur llogarinë tuaj Jami, zgjidhni fjalëkalim të fuqishëm që do ta mbani mend.";
-"createAccount.enterNewUsernamePlaceholder" = "Emër përdoruesi";
-"createAccount.newPasswordPlaceholder" = "Fjalëkalim";
 "createAccount.repeatPasswordPlaceholder" = "Ripohoni fjalëkalimin";
 "createAccount.passwordCharactersNumberError" = "Minimumi 6 shenja";
 "createAccount.passwordNotMatchingError" = "fjalëkalimet nuk përputhen";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "emri i përdoruesit është i lirë";
 "createAccount.loading" = "Po ngarkohet";
 "createAccount.waitCreateAccountTitle" = "Po shtohet llogaria";
-"createAccount.RegisterAUsername" = "Regjistroni një emër përdoruesi";
 "createAccount.ChooseAPassword" = "Fshehtëzoje llogarinë time";
 "createAccount.PasswordInformation" = "Zgjidhni një fjalëkalim për të fshehtëzuar llogarinë tuaj vendore. Mos e harroni, përndryshe s’do të jeni në gjendje të rimerrni llogarinë tuaj";
 "createAccount.EnableNotifications" = "Njoftime";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";
 "linkToAccount.linkButtonTitle" = "Lidhni pajisje";
-"linkToAccount.passwordPlaceholder" = "Fjalëkalim";
 "linkToAccount.pinPlaceholder" = "PIN";
-"linkToAccount.passwordLabel" = "Jepni Fjalëkalimin";
 "linkToAccount.pinLabel" = "Jepni PIN-in";
 "linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni \"Lidhni me këtë llogari një pajisje tjetër\". Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Hyni";
-"linkToAccountManager.passwordPlaceholder" = "Fjalëkalim";
-"linkToAccountManager.passwordLabel" = "Jepni Fjalëkalimin";
-"linkToAccountManager.usernamePlaceholder" = "Emër përdoruesi";
-"linkToAccountManager.usernameLabel" = "Jepni Emër Përdoruesi";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAM-i";
 "linkToAccountManager.accountManagerLabel" = "Jepni URL JAMS-i";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Llogaria s’u krijua dot.";
 "alerts.profileTakePhoto" = "Bëni një foto";
 "alerts.profileUploadPhoto" = "Ngarkoni foto";
-"alerts.profileCancelPhoto" = "Anuloje";
 "alerts.accountLinkedTitle" = "Po lidhet llogaria";
 "alerts.dbFailedTitle" = "Ndodhi një gabim gjatë nisjes së Jami-t";
 "alerts.dbFailedMessage" = "Ju lutemi, mbylleni aplikacionin dhe provoni ta rihapni";
 "alerts.confirmBlockContact" = "Jeni i sigurt se doni të bllokohet ky kontakt? Edhe historiku i bisedave me këtë kontakt do të fshihet përgjithmonë.";
-"alerts.confirmBlockContactTitle" = "Bllokoje Kontaktin";
 "alerts.confirmDeleteConversation" = "Jeni i sigurt se doni të fshihet përgjithmonë kjo bisedë?";
 "alerts.confirmDeleteConversationFromContact" = "Jeni i sigurt se doni të fshihet biseda me këtë kontakt?";
 "alerts.confirmDeleteConversationTitle" = "Fshije Bisedën";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Fshije";
-"actions.cancelAction" = "Anuloje";
 "actions.clearAction" = "Spastroje";
 "actions.backAction" = "Mbrapsht";
 "actions.doneAction" = "U bë";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Thirre";
-"calls.unknown" = "I panjohur";
 "calls.incomingCallInfo" = "dëshiron të flasë me ju";
 "calls.ringing" = "Po thirret…";
 "calls.connecting" = "Po lidhet…";
-"calls.searching" = "Po kërkohet…";
 "calls.callFinished" = "Thirrja përfundoi";
 "calls.currentCallWith" = "Thirre me";
 "calls.haghUp" = "mbylleni";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Pajisje";
 "accountPage.settingsHeader" = "Rregullime";
-"accountPage.username" = "Emër përdoruesi";
 "accountPage.usernameNotRegistered" = "emër përdoruesi: jo i regjistruar";
 "accountPage.credentialsHeader" = "Hollësi Llogarie";
-"accountPage.enableProxy" = "Aktivizo Ndërmjetës";
 "accountPage.blockedContacts" = "Kontakte të bllokuar";
 "accountPage.unblockContact" = "ZHBLLOKOJE";
 "accountPage.proxyAddressAlert" = "Jepni adresë ndërmjetësi";
-"accountPage.enableProxy" = "Aktivizo Ndërmjetës";
 "accountPage.noProxyExplanationLabel" = "Pajisja juaj s’do të marrë njoftime kur ndërmjetësi të jetë çaktivizuar";
-"accountPage.saveProxyAddress" = "Ruaje";
 "accountPage.proxyPaceholder" = "Adresë ndërmjetësi";
 "accountPage.enableNotifications" = "Aktivizoni Njoftime";
 "accountPage.proxyDisabledAlertTitle" = "Shërbyesi Ndërmjetës u Çaktivizua";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Gabim shfuqizimi pajisjeje";
 "accountPage.linkDeviceTitle" = "Lidhni një pajisje tjetër";
 "accountPage.other" = "Tjetër";
-"accountPage.removeAccountTitle" = "Hiqe llogarinë";
 "accountPage.removeAccountMessage" = "Duke klikuar \"Hiqe\", do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Po ashtu, emri juaj i regjistruar mund të humbë.";
 "accountPage.removeAccountButton" = "Hiqe";
 "accountPage.shareAccountDetails" = "Nda Hollësi Llogarie";
 "accountPage.contactMeOnJamiTitle" = "Lidhuni me mua në Jami!";
 "accountPage.contactMeOnJamiContant" = "Lidhuni me mua duke përdorur \"%s\" në platformën e komunikimeve të shpërndara Jami: https://jami.net";
-"accountPage.registerNameTitle" = "Regjistroni një emër përdoruesi";
 "accountPage.passwordPlaceholder" = "Jepni fjalëkalim llogarie";
 "accountPage.usernamePlaceholder" = "Jepni emrin e dëshiruar të përdoruesit";
 "accountPage.registerNameErrorMessage" = "Emri i përdoruesit i zgjedhur s’është i lirë";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Emër Përdoruesi";
-"account.sipPassword" = "Fjalëkalim";
 "account.sipServer" = "Shërbyes SIP";
 "account.port" = "Portë";
 "account.proxyServer" = "Ndërmjetës";
 "account.createSipAccount" = "Krijoni një Llogari SIP";
-"account.usernameLabel" = "Jepni Emër Përdoruesi";
-"account.passwordLabel" = "Jepni Fjalëkalimin";
 "account.serverLabel" = "Jepni Adresë";
 "account.portLabel" = "Jepni Numër Porte";
 "account.accountStatus" = "Gjendje Llogarie";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Filloni Thirrje Video";
 "contactPage.sendMessage" = "Dërgoni Mesazh";
 "contactPage.clearConversation" = "Spastroje Bisedën";
-"contactPage.blockContact" = "Bllokoje Kontaktin";
 "contactPage.removeConversation" = "Hiqe Bisedën";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "U anulua";
 "dataTransfer.sendingFailed" = "S’u arrit të dërgohej";
 "dataTransfer.readableStatusSuccess" = "E plotë";
-"dataTransfer.readableStatusCancel" = "Anuloje";
 
 //Notifications
-"notifications.incomingCall" = "Thirrje Ardhëse";
 "notifications.missedCall" = "Thirrje të Humbura";
 "notifications.newFile" = "Kartelë e re";
 "notifications.locationSharingStarted" = "Nisi dhënia e vendndodhjes për thirrje ardhëse";
 "notifications.locationSharingStopped" = "Reshti dhënia e vendndodhjes për thirrje ardhëse";
-"dataTransfer.readableStatusAwaiting" = "Pezull…";
-"dataTransfer.readableStatusOngoing" = "Po shpërngulet";
-"dataTransfer.readableStatusCanceled" = "U anulua";
-"dataTransfer.readableStatusSuccess" = "E plotë";
-"dataTransfer.readableStatusCancel" = "Anuloje";
+"dataTransfer.readableStatusRefuse" = "Hidhe tej";
+"dataTransfer.readableStatusAccept" = "Pranoje";
 "dataTransfer.infoMessage" = "Shtypeni që të fillojë regjistrimi";
 "dataTransfer.sendMessage" = "Dërgoje";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "u përzu";
 "generatedMessage.contactReAdded" = "u rishtua";
 "generatedMessage.outgoingCall" = "Thirrje për";
-"generatedMessage.incomingCall" = "Thirrje ardhëse";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
 "generatedMessage.liveLocationSharing" = "Dhënie “live” e vendndodhjes";
 "generatedMessage.contactLeftConversation" = "iku";
 
 //General Settings
-"generalSettings.title" = "Rregullime të mëtejshme";
 "generalSettings.videoSettings" = "Rregullime Videoje";
 "generalSettings.videoAcceleration" = "Aktivizo përshpejtim videosh";
 "generalSettings.fileTransfer" = "Shpërngulje kartelash";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "Migrim llogarie";
 "migrateAccount.migrateButton" = "Migroni Llogari";
 "migrateAccount.explanation" = "Kjo llogari lypset të migrohet";
-"migrateAccount.passwordPlaceholder" = "Jepni fjalëkalimin";
 "migrateAccount.passwordExplanation" = "Që të vazhdohet me migrimin, lypset të jepni një fjalëkalim që qe përdorur për këtë llogari";
-"migrateAccount.removeAccount" = "Hiqe llogarinë";
 "migrateAccount.error" = "S’u arrit të migrohej llogaria juaj. Mund të riprovoni ose të fshini llogarinë tuaj.";
 "migrateAccount.migrating" = "Po migrohet…";
-"migrateAccount.cancel" = "Anuloje";
 "migrateAccount.migrateAnother" = "Migroni Llogari Tjetër";
-
-

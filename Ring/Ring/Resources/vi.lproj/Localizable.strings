@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Các cuộc trò chuyện";
-"global.meTabBarTitle" = "Cài đặt tài khoản";
+"global.accountSettings" = "Cài đặt tài khoản";
+"global.advancedSettings" = "Thiết lập nâng cao";
+"global.username" = "Username";
+"global.password" = "Mật khẩu";
+"global.registerAUsername" = "Đăng ký tên người dùng";
+"global.enterPassword" = "Nhập mật khẩu";
+"global.enterUsername" = "Nhập Username";
+"global.cancel" = "Hủy bỏ";
+"global.blockContact" = "Khóa liên lạc";
+"global.removeAccount" = "Xóa tài khoản";
+"global.incomingCall" = "Tiếp tục gọi";
 "global.ok" = "Ok";
 "global.close" = "Gần";
 "global.share" = "Chia sẻ";
@@ -34,10 +43,10 @@
 "global.name" = "Tên";
 "global.copy" = "Tải";
 "global.reply" = "Trả lời";
+"global.search" = "Tìm kiếm...";
 
 // Scan
 "scan.badQrCode" = "Mã QR xấu";
-"scan.search" = "Tìm kiếm...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Tìm kiếm liên lạc...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "Hôm qua";
 "smartlist.results" = "Đồ mục công cộng";
 "smartlist.conversations" = "Các cuộc trò chuyện";
-"smartlist.searching" = "Tìm kiếm...";
 "smartlist.noResults" = "Không có kết quả";
 "smartlist.noConversation" = "Không có cuộc trò chuyện";
 "smartlist.searchBarPlaceholder" = "Nhập tên...";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Liên hệ được chọn không có số";
 "smartlist.selectOneNumber" = "Chọn một trong số";
 "smartlist.invitations" = "Thỉnh cầu";
-"smartlist.accountSettings" = "Cài đặt tài khoản";
-"smartlist.advancedSettings" = "Thiết lập nâng cao";
 "smartlist.aboutJami" = "Về Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "Bạn đang chia sẻ vị trí của mình với ";
 "conversation.explanationReceivingLocationFrom" = "Bạn đang nhận được một địa điểm trực tiếp từ ";
 "conversation.errorSavingImage" = "Không thể lưu hình ảnh vào phòng trưng bày";
-"conversation.receivedRequest" = "\%@\ đã gửi cho bạn một yêu cầu cho một cuộc trò chuyện.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Tôi đã gửi cho anh một yêu cầu để nói chuyện.";
 "conversation.requestMessage" = "Chào, anh có muốn tham gia cuộc trò chuyện không?";
-"conversation.notContact" = "\%@\ không có trong danh sách liên hệ của bạn.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Gửi cho anh ta/cô ấy một yêu cầu liên lạc để có thể trao đổi cùng nhau";
 "conversation.sendRequestTitle" = "Gửi yêu cầu liên lạc";
 "conversation.synchronizationTitle" = "Ông đã chấp nhận yêu cầu nói chuyện.";
-"conversation.synchronizationMessage" = "Chúng tôi đang chờ kết nối \%@\ để đồng bộ hóa cuộc trò chuyện.";
+"conversation.synchronizationMessage" = "Chúng tôi đang chờ đợi %@ kết nối để đồng bộ hóa cuộc trò chuyện.";
 
 //Invitations
 "invitations.noInvitations" = "Không có lời mời";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Tạo tài khoản của bạn";
 "createAccount.chooseStrongPassword" = "Chọn mật khẩu mạnh mẽ mà bạn sẽ nhớ để bảo vệ tài khoản Jami của bạn.";
-"createAccount.enterNewUsernamePlaceholder" = "Username";
-"createAccount.newPasswordPlaceholder" = "Mật khẩu";
 "createAccount.repeatPasswordPlaceholder" = "Tiếp tục xác nhận mật khẩu";
 "createAccount.passwordCharactersNumberError" = "6 ký tự tối thiểu";
 "createAccount.passwordNotMatchingError" = "mật khẩu không phù hợp";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "Username có sẵn";
 "createAccount.loading" = "Lái";
 "createAccount.waitCreateAccountTitle" = "Tài khoản bổ sung";
-"createAccount.RegisterAUsername" = "Đăng ký tên người dùng";
 "createAccount.ChooseAPassword" = "Mã hóa tài khoản của tôi";
 "createAccount.PasswordInformation" = "Chọn mật khẩu để mã hóa tài khoản địa phương của bạn. Đừng quên nó hoặc bạn sẽ không thể phục hồi tài khoản của mình";
 "createAccount.EnableNotifications" = "Thông báo";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kết nối tài khoản";
 "linkToAccount.linkButtonTitle" = "Thiết bị liên kết";
-"linkToAccount.passwordPlaceholder" = "Mật khẩu";
 "linkToAccount.pinPlaceholder" = "GHIM";
-"linkToAccount.passwordLabel" = "Nhập mật khẩu";
 "linkToAccount.pinLabel" = "Nhập PIN";
 "linkToAccount.explanationPinMessage" = "Để tạo mã PIN, hãy truy cập cài đặt quản lý tài khoản trên thiết bị chứa tài khoản bạn muốn sử dụng. Trong cài đặt thiết bị, chọn \"Công nối thiết bị khác với tài khoản này\". Bạn sẽ nhận được mã PIN cần thiết để hoàn thành biểu mẫu này.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Đăng nhập";
-"linkToAccountManager.passwordPlaceholder" = "Mật khẩu";
-"linkToAccountManager.passwordLabel" = "Nhập mật khẩu";
-"linkToAccountManager.usernamePlaceholder" = "Username";
-"linkToAccountManager.usernameLabel" = "Nhập Username";
 "linkToAccountManager.accountManagerPlaceholder" = "URL JAMS";
 "linkToAccountManager.accountManagerLabel" = "Nhập URL JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Tài khoản không thể được tạo ra.";
 "alerts.profileTakePhoto" = "Tạo ảnh";
 "alerts.profileUploadPhoto" = "Lên ảnh";
-"alerts.profileCancelPhoto" = "Hủy bỏ";
 "alerts.accountLinkedTitle" = "Tài khoản liên kết";
 "alerts.dbFailedTitle" = "Một lỗi xảy ra khi phóng Jami";
 "alerts.dbFailedMessage" = "Vui lòng đóng đơn và cố gắng mở lại";
 "alerts.confirmBlockContact" = "Bạn có chắc chắn rằng bạn muốn chặn liên lạc này? lịch sử cuộc trò chuyện với liên lạc này cũng sẽ bị xóa vĩnh viễn.";
-"alerts.confirmBlockContactTitle" = "Khóa liên lạc";
 "alerts.confirmDeleteConversation" = "Em có chắc em muốn xóa cuộc trò chuyện này vĩnh viễn không?";
 "alerts.confirmDeleteConversationFromContact" = "Anh có chắc là muốn xóa cuộc trò chuyện với người liên lạc này không?";
 "alerts.confirmDeleteConversationTitle" = "Tránh cuộc trò chuyện";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Xóa";
-"actions.cancelAction" = "Hủy bỏ";
 "actions.clearAction" = "Rõ ràng";
 "actions.backAction" = "Trở lại";
 "actions.doneAction" = "Được làm";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Gọi";
-"calls.unknown" = "Không biết";
 "calls.incomingCallInfo" = "muốn nói chuyện với anh";
 "calls.ringing" = "- Anh nghe thấy...";
 "calls.connecting" = "Kết nối...";
-"calls.searching" = "Tìm kiếm...";
 "calls.callFinished" = "Tiếp tục cuộc gọi";
 "calls.currentCallWith" = "Gọi với ";
 "calls.haghUp" = "- Cởi điện đi.";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Thiết bị";
 "accountPage.settingsHeader" = "Cài đặt";
-"accountPage.username" = "Username";
 "accountPage.usernameNotRegistered" = "Tên người dùng: không đăng ký";
 "accountPage.credentialsHeader" = "Thông tin chi tiết tài khoản";
-"accountPage.enableProxy" = "Khả năng Proxy";
 "accountPage.blockedContacts" = "Các liên lạc bị chặn";
 "accountPage.unblockContact" = "UNBLOCK";
 "accountPage.proxyAddressAlert" = "Cung cấp địa chỉ đại diện";
-"accountPage.enableProxy" = "Khả năng Proxy";
 "accountPage.noProxyExplanationLabel" = "Thiết bị của bạn sẽ không nhận được thông báo khi proxy bị vô hiệu hóa";
-"accountPage.saveProxyAddress" = "- Cứu";
 "accountPage.proxyPaceholder" = "Địa chỉ đại diện";
 "accountPage.enableNotifications" = "Khả năng thông báo";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server bị vô hiệu hóa";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Trận lỗi hủy thiết bị";
 "accountPage.linkDeviceTitle" = "Kết nối một thiết bị khác";
 "accountPage.other" = "Các loại khác";
-"accountPage.removeAccountTitle" = "Xóa tài khoản";
 "accountPage.removeAccountMessage" = "Bằng cách nhấp vào \"Tắt\" bạn sẽ xóa tài khoản này trên thiết bị này!";
 "accountPage.removeAccountButton" = "Tắt";
 "accountPage.shareAccountDetails" = "Thông tin chia sẻ tài khoản";
 "accountPage.contactMeOnJamiTitle" = "Liên hệ với tôi về Jami!";
 "accountPage.contactMeOnJamiContant" = "Liên hệ với tôi bằng cách sử dụng \"%s\" trên nền tảng truyền thông phân phối của Jami: https://jami.net";
-"accountPage.registerNameTitle" = "Đăng ký tên người dùng";
 "accountPage.passwordPlaceholder" = "Nhập mật khẩu tài khoản";
 "accountPage.usernamePlaceholder" = "Nhập tên người dùng mong muốn";
 "accountPage.registerNameErrorMessage" = "Tên người dùng đã chọn không có sẵn";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Tên người dùng";
-"account.sipPassword" = "Mật khẩu";
 "account.sipServer" = "SIP Server";
 "account.port" = "Cảng";
 "account.proxyServer" = "Tín hiệu";
 "account.createSipAccount" = "Tạo tài khoản SIP";
-"account.usernameLabel" = "Nhập Username";
-"account.passwordLabel" = "Nhập mật khẩu";
 "account.serverLabel" = "Nhập địa chỉ";
 "account.portLabel" = "Nhập số cổng";
 "account.accountStatus" = "Tình trạng tài khoản";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Bắt đầu cuộc gọi video";
 "contactPage.sendMessage" = "Gửi thông điệp";
 "contactPage.clearConversation" = "Tự giải";
-"contactPage.blockContact" = "Khóa liên lạc";
 "contactPage.removeConversation" = "Tránh cuộc trò chuyện";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "Đã hủy bỏ";
 "dataTransfer.sendingFailed" = "Không gửi";
 "dataTransfer.readableStatusSuccess" = "Hoàn thành";
-"dataTransfer.readableStatusCancel" = "Hủy bỏ";
 
 //Notifications
-"notifications.incomingCall" = "Tiếp tục gọi";
 "notifications.missedCall" = "Lần gọi bị bỏ lỡ";
 "notifications.newFile" = "Dữ liệu mới";
 "notifications.locationSharingStarted" = "Việc chia sẻ địa điểm tiếp theo bắt đầu";
 "notifications.locationSharingStopped" = "Chia sẻ địa điểm tiếp nhận đã dừng lại";
-"dataTransfer.readableStatusAwaiting" = "Chờ đợi...";
-"dataTransfer.readableStatusOngoing" = "Chuyển";
-"dataTransfer.readableStatusCanceled" = "Đã hủy bỏ";
-"dataTransfer.readableStatusSuccess" = "Hoàn thành";
-"dataTransfer.readableStatusCancel" = "Hủy bỏ";
+"dataTransfer.readableStatusRefuse" = "Nhận không";
+"dataTransfer.readableStatusAccept" = "Chấp nhận";
 "dataTransfer.infoMessage" = "Bấm để bắt đầu ghi";
 "dataTransfer.sendMessage" = "Gửi đi";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "bị đá";
 "generatedMessage.contactReAdded" = "được thêm lại";
 "generatedMessage.outgoingCall" = "Tiếp tục gọi";
-"generatedMessage.incomingCall" = "Tiếp tục gọi";
 "generatedMessage.missedOutgoingCall" = "Lỡ cuộc gọi ra ngoài";
 "generatedMessage.missedIncomingCall" = "Lỡ cuộc gọi tiếp nhận";
 "generatedMessage.liveLocationSharing" = "Chia sẻ địa điểm trực tiếp";
 "generatedMessage.contactLeftConversation" = "trái";
 
 //General Settings
-"generalSettings.title" = "Thiết lập nâng cao";
 "generalSettings.videoSettings" = "Định hướng video";
 "generalSettings.videoAcceleration" = "Khả năng tăng tốc video";
 "generalSettings.fileTransfer" = "Chuyển tập tin";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "Di chuyển tài khoản";
 "migrateAccount.migrateButton" = "Tài khoản di cư";
 "migrateAccount.explanation" = "Tài khoản này cần phải di chuyển";
-"migrateAccount.passwordPlaceholder" = "Nhập mật khẩu";
 "migrateAccount.passwordExplanation" = "Để tiến hành di chuyển, bạn cần nhập mật khẩu đã được sử dụng cho tài khoản này";
-"migrateAccount.removeAccount" = "Xóa tài khoản";
 "migrateAccount.error" = "Không chuyển đổi tài khoản của bạn. Bạn có thể thử lại hoặc xóa tài khoản của bạn.";
 "migrateAccount.migrating" = "Di cư...";
-"migrateAccount.cancel" = "Hủy bỏ";
 "migrateAccount.migrateAnother" = "Chuyển đến tài khoản khác";
-
-

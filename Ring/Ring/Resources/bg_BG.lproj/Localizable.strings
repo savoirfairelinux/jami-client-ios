@@ -19,8 +19,17 @@
  */
 
 // Global
-"global.homeTabBarTitle" = "Разговори";
-"global.meTabBarTitle" = "Настройки на сметката";
+"global.accountSettings" = "Настройки на сметката";
+"global.advancedSettings" = "Разширени настройки";
+"global.username" = "Потребителско име";
+"global.password" = "Парола";
+"global.registerAUsername" = "Регистриране на потребителско име";
+"global.enterPassword" = "Въведете парола";
+"global.enterUsername" = "Введете потребителско име";
+"global.cancel" = "Отказ";
+"global.blockContact" = "Блокиране на контакт";
+"global.removeAccount" = "Премахване на профил";
+"global.incomingCall" = "Входящо обаждане";
 "global.ok" = "Добре";
 "global.close" = "Затваряне";
 "global.share" = "Споделяне";
@@ -34,10 +43,10 @@
 "global.name" = "Име";
 "global.copy" = "Копиране";
 "global.reply" = "Отговор";
+"global.search" = "Търсене...";
 
 // Scan
 "scan.badQrCode" = "Грешен QR-код";
-"scan.search" = "Търсене...";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Търсене на контакт...";
@@ -71,7 +80,6 @@
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Обществен каталог";
 "smartlist.conversations" = "Разговори";
-"smartlist.searching" = "Търсене...";
 "smartlist.noResults" = "Няма резултати";
 "smartlist.noConversation" = "Няма разговори";
 "smartlist.searchBarPlaceholder" = "Въведете име…";
@@ -83,8 +91,6 @@
 "smartlist.noNumber" = "Избраният контакт няма номер";
 "smartlist.selectOneNumber" = "Изберете един от числата";
 "smartlist.invitations" = "Покани";
-"smartlist.accountSettings" = "Настройки на сметката";
-"smartlist.advancedSettings" = "Разширени настройки";
 "smartlist.aboutJami" = "Относно Jami";
 
 //Conversation
@@ -92,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "В момента споделяте местоположението си с ";
 "conversation.explanationReceivingLocationFrom" = "В момента получавате живо местоположение от ";
 "conversation.errorSavingImage" = "Не успях да запазя изображението в галерията";
-"conversation.receivedRequest" = "Изпрати ти искане за разговор.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Изпратих ви молба за разговор.";
 "conversation.requestMessage" = "Здравейте, бихте ли се присъединили към разговора?";
-"conversation.notContact" = "\%@\ не е в списъка с контактите.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Изпратете му/тя искане за контакт, за да може да обменя заедно";
 "conversation.sendRequestTitle" = "Изпратете запитване за контакт";
 "conversation.synchronizationTitle" = "Приехте молбата за разговор.";
-"conversation.synchronizationMessage" = "Чакаме \%@\ връзки, за да синхронизираме разговора.";
+"conversation.synchronizationMessage" = "Чакаме %@ връзки, за да синхронизираме разговора.";
 
 //Invitations
 "invitations.noInvitations" = "Няма покани.";
@@ -125,8 +131,6 @@
 //Create Account form
 "createAccount.createAccountFormTitle" = "Създаване на профил";
 "createAccount.chooseStrongPassword" = "Изберете сигурна парола, която ще запомните, за да е защитен профилът ви.";
-"createAccount.enterNewUsernamePlaceholder" = "Потребителско име";
-"createAccount.newPasswordPlaceholder" = "Парола";
 "createAccount.repeatPasswordPlaceholder" = "Потвърдете паролата";
 "createAccount.passwordCharactersNumberError" = "Най-малко 6 знака";
 "createAccount.passwordNotMatchingError" = "паролите не съвпадат";
@@ -136,7 +140,6 @@
 "createAccount.usernameValid" = "име на потребителя е налично";
 "createAccount.loading" = "Натоварване";
 "createAccount.waitCreateAccountTitle" = "Добавяне на профил";
-"createAccount.RegisterAUsername" = "Регистриране на потребителско име";
 "createAccount.ChooseAPassword" = "Криптиране на профил";
 "createAccount.PasswordInformation" = "Изберете парола, за да криптирате местния си профил. Не я забравяйте или няма да можете да възстановите профила си";
 "createAccount.EnableNotifications" = "Известия";
@@ -149,18 +152,12 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Свързване на профил";
 "linkToAccount.linkButtonTitle" = "Свързване на устройство";
-"linkToAccount.passwordPlaceholder" = "Парола";
 "linkToAccount.pinPlaceholder" = "ПИН";
-"linkToAccount.passwordLabel" = "Въведете парола";
 "linkToAccount.pinLabel" = "Въведете ПИН";
 "linkToAccount.explanationPinMessage" = "За да генерирате ПИН кода, отидете в настройките за управление на профила на устройството, което съдържа профила, който искате да използвате. Изберете „Свързване на друго устройство с този профил“. Ще получите необходимия ПИН. ПИН кодът е валиден само за 10 минути.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Вписване";
-"linkToAccountManager.passwordPlaceholder" = "Парола";
-"linkToAccountManager.passwordLabel" = "Въведете парола";
-"linkToAccountManager.usernamePlaceholder" = "Потребителско име";
-"linkToAccountManager.usernameLabel" = "Введете потребителско име";
 "linkToAccountManager.accountManagerPlaceholder" = "JAMS URL";
 "linkToAccountManager.accountManagerLabel" = "Введете URL на JAMS";
 
@@ -174,12 +171,10 @@
 "alerts.accountDefaultErrorMessage" = "Профилът не можа да бъде създаден.";
 "alerts.profileTakePhoto" = "Направи снимка";
 "alerts.profileUploadPhoto" = "Качване на снимка";
-"alerts.profileCancelPhoto" = "Отказ";
 "alerts.accountLinkedTitle" = "Свързване на профил";
 "alerts.dbFailedTitle" = "Погрешка се случи при изстрелването на Джами.";
 "alerts.dbFailedMessage" = "Моля, затворите заявката и опитайте да я отворите отново.";
 "alerts.confirmBlockContact" = "Също така ще бъде изтрита историята на разговора с този контакт.";
-"alerts.confirmBlockContactTitle" = "Блокиране на контакт";
 "alerts.confirmDeleteConversation" = "Наистина ли искате да изтриете разговора завинаги?";
 "alerts.confirmDeleteConversationFromContact" = "Наистина ли искате да изтриете разговора с този контакт?";
 "alerts.confirmDeleteConversationTitle" = "Изтриване на разговор";
@@ -205,7 +200,6 @@
 
 //Actions
 "actions.deleteAction" = "Изтриване";
-"actions.cancelAction" = "Отказ";
 "actions.clearAction" = "Чисто";
 "actions.backAction" = "Назад";
 "actions.doneAction" = "Готово";
@@ -218,11 +212,9 @@
 
 //Calls
 "calls.callItemTitle" = "Обаждане";
-"calls.unknown" = "Неизвестно";
 "calls.incomingCallInfo" = "Иска да говори с теб.";
 "calls.ringing" = "Звъня...";
 "calls.connecting" = "Свързваме...";
-"calls.searching" = "Търсене...";
 "calls.callFinished" = "Обаждането приключи.";
 "calls.currentCallWith" = "Обади се с ";
 "calls.haghUp" = "- Затворете.";
@@ -237,16 +229,12 @@
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
 "accountPage.settingsHeader" = "Настройки";
-"accountPage.username" = "Потребителско име";
 "accountPage.usernameNotRegistered" = "потребителско име: не е регистрирано";
 "accountPage.credentialsHeader" = "Подробности за профила";
-"accountPage.enableProxy" = "Осигуряване на прокси";
 "accountPage.blockedContacts" = "Блокирани контакти";
 "accountPage.unblockContact" = "БЛОК";
 "accountPage.proxyAddressAlert" = "Посочете адрес на прокси";
-"accountPage.enableProxy" = "Осигуряване на прокси";
 "accountPage.noProxyExplanationLabel" = "Устройството не получава уведомления, когато проксито е деактивирано.";
-"accountPage.saveProxyAddress" = "Запазване";
 "accountPage.proxyPaceholder" = "Адрес на прокси";
 "accountPage.enableNotifications" = "Включване на известията";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сървър деактивиран";
@@ -264,13 +252,11 @@
 "accountPage.deviceRevocationError" = "Изключение на устройството";
 "accountPage.linkDeviceTitle" = "Свържете друго устройство";
 "accountPage.other" = "Други";
-"accountPage.removeAccountTitle" = "Премахване на профил";
 "accountPage.removeAccountMessage" = "Ако изберете „Премахване“, ще премахнете този профил на това устройство! Това действие не може да бъде отменено. Също така, регистрираното ви име може да бъде загубено.";
 "accountPage.removeAccountButton" = "Премахване";
 "accountPage.shareAccountDetails" = "Детайли за споделяне на сметката";
 "accountPage.contactMeOnJamiTitle" = "Свържете се с мен по Джами!";
 "accountPage.contactMeOnJamiContant" = "Свържете се с мен с помощта на \"%s\" на разпространените комуникационни платформи на Jami: https://jami.net";
-"accountPage.registerNameTitle" = "Регистриране на потребителско име";
 "accountPage.passwordPlaceholder" = "Въведете паролата на профила";
 "accountPage.usernamePlaceholder" = "Введете желаното потребителско име";
 "accountPage.registerNameErrorMessage" = "Избрано потребителско име не е налично";
@@ -300,13 +286,10 @@
 
 //Account
 "account.sipUsername" = "Потребителско име";
-"account.sipPassword" = "Парола";
 "account.sipServer" = "SIP сървър";
 "account.port" = "Порт";
 "account.proxyServer" = "Посредник";
 "account.createSipAccount" = "Създаване на SIP сметка";
-"account.usernameLabel" = "Введете потребителско име";
-"account.passwordLabel" = "Въведете парола";
 "account.serverLabel" = "Введете адрес";
 "account.portLabel" = "Введете номер на порта";
 "account.accountStatus" = "Състояние на профил";
@@ -335,7 +318,6 @@
 "contactPage.startVideoCall" = "Започнете видео обаждането";
 "contactPage.sendMessage" = "Изпращайте съобщение";
 "contactPage.clearConversation" = "Разпространи се.";
-"contactPage.blockContact" = "Блокиране на контакт";
 "contactPage.removeConversation" = "Извадете разговора";
 
 //DataTransfer
@@ -346,19 +328,14 @@
 "dataTransfer.readableStatusCanceled" = "Отменено";
 "dataTransfer.sendingFailed" = "Не успях да изпратя";
 "dataTransfer.readableStatusSuccess" = "Пълен";
-"dataTransfer.readableStatusCancel" = "Отказ";
 
 //Notifications
-"notifications.incomingCall" = "Пристигащ повик";
 "notifications.missedCall" = "Изпуснат разговор";
 "notifications.newFile" = "Нов файл";
 "notifications.locationSharingStarted" = "Започна се споделянето на местоположения";
 "notifications.locationSharingStopped" = "Прекратено споделяне на място";
-"dataTransfer.readableStatusAwaiting" = "Чакам...";
-"dataTransfer.readableStatusOngoing" = "Прехвърляне";
-"dataTransfer.readableStatusCanceled" = "Отменено";
-"dataTransfer.readableStatusSuccess" = "Пълен";
-"dataTransfer.readableStatusCancel" = "Отказ";
+"dataTransfer.readableStatusRefuse" = "Отказ";
+"dataTransfer.readableStatusAccept" = "Приемане";
 "dataTransfer.infoMessage" = "Натиснете за започване на запис";
 "dataTransfer.sendMessage" = "Изпращане";
 
@@ -372,14 +349,12 @@
 "generatedMessage.contactBanned" = "- Да, но беше ритна.";
 "generatedMessage.contactReAdded" = "е добавен отново";
 "generatedMessage.outgoingCall" = "Изходящо обаждане";
-"generatedMessage.incomingCall" = "Входящо обаждане";
 "generatedMessage.missedOutgoingCall" = "Пропуснато изходящо обаждане";
 "generatedMessage.missedIncomingCall" = "Пропуснато входящо обаждане";
 "generatedMessage.liveLocationSharing" = "Съвместно разпределение на местоположения";
 "generatedMessage.contactLeftConversation" = "лево";
 
 //General Settings
-"generalSettings.title" = "Разширени настройки";
 "generalSettings.videoSettings" = "Настройки на видео";
 "generalSettings.videoAcceleration" = "Осигуряване на видео ускорение";
 "generalSettings.fileTransfer" = "Прехвърляне на файлове";
@@ -403,12 +378,7 @@
 "migrateAccount.title" = "Пренасяне на профил";
 "migrateAccount.migrateButton" = "Мигрираща сметка";
 "migrateAccount.explanation" = "Този профил трябва да бъде преместен";
-"migrateAccount.passwordPlaceholder" = "Въведете парола";
 "migrateAccount.passwordExplanation" = "За да продължите с миграцията, трябва да въведете парола, който е бил използван за тази сметка";
-"migrateAccount.removeAccount" = "Премахване на профил";
 "migrateAccount.error" = "Не успя да мигрирате профила си. Можете да опитате отново или да изтриете профила си.";
 "migrateAccount.migrating" = "Мигрира...";
-"migrateAccount.cancel" = "Отказ";
 "migrateAccount.migrateAnother" = "Премести се на друг акаунт";
-
-
