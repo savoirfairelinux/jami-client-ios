@@ -106,6 +106,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e30260c_adcf15a6",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-06-21T18:46:24Z",
+      "side": 1,
+      "message": "Done, I realized it.",
+      "parentUuid": "78436cee_13e223bf",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ed32bc5_2dc07097",
