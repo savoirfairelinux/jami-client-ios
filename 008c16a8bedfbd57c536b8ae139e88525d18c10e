@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "361a768c_fd1a5c13",
+        "filename": "Ring/Ring/Calls/Conference/ContactPickerViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-06-21T18:45:51Z",
+      "side": 1,
+      "message": "I\u0027m using the foundConversationViewModel to make the ConversationViewModel with the foundConversationModel",
+      "parentUuid": "fb02a5bb_50368dd5",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28f1505c_001e2ccb",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-06-12T15:46:42Z",
       "side": 1,
       "message": "conversationIds for variable name?",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "527d98c6_5b9e688a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-06-21T18:45:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28f1505c_001e2ccb",
       "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78436cee_13e223bf",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-06-21T18:45:51Z",
+      "side": 1,
+      "message": "Could you please explain more?",
+      "parentUuid": "d5415733_732799d7",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ed32bc5_2dc07097",
         "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
         "patchSetId": 3
@@ -65,6 +119,24 @@
       "writtenOn": "2023-06-12T15:46:42Z",
       "side": 1,
       "message": "what do we check with this condition? We should check if we already send the selected file in the selected conversation. In this case we do not need to save a file again, only send. Otherwise file need to be saved and send.",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36d25e4a_dcce7394",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-06-21T18:45:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ed32bc5_2dc07097",
       "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -86,6 +158,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dbc197e_58099b2e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-06-21T18:45:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "979d2e01_24dcaa27",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20145d0b_64e72499",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-06-12T15:46:42Z",
       "side": 1,
       "message": "we could use func openConversation(conversationId: String, accountId: String)",
+      "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d96cada_637fbc28",
+        "filename": "Ring/Ring/Features/Conversations/ConversationsCoordinator.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-06-21T18:45:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20145d0b_64e72499",
       "revId": "008c16a8bedfbd57c536b8ae139e88525d18c10e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
