@@ -164,6 +164,11 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let captureDevice = selectCaptureDevice(withPosition: position) else {
             throw VideoError.selectDeviceFailed
         }
+        if #available(iOS 16.0, *) {
+            if captureSession.isMultitaskingCameraAccessSupported {
+                captureSession.isMultitaskingCameraAccessEnabled = true
+            }
+        }
         let captureDeviceInput = try AVCaptureDeviceInput(device: captureDevice)
         guard captureSession.canAddInput(captureDeviceInput) else {
             throw VideoError.setupInputDeviceFailed
