@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2021 Savoir-faire Linux Inc.
+ *  Copyright (C) 2023 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -18,9 +18,29 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-@objc protocol DecodingAdapterDelegate {
-    func decodingStarted(withSinkId sinkId: String,
-                         withWidth width: Int,
-                         withHeight height: Int)
-    func decodingStopped(withSinkId sinkId: String)
+import SwiftUI
+
+let screenWidth = UIScreen.main.bounds.size.width
+let screenHeight = UIScreen.main.bounds.size.height
+
+enum IndicatorOrientation {
+    case vertical
+    case horizontal
+}
+
+struct Indicator: View {
+    let orientation: IndicatorOrientation
+
+    var body: some View {
+        switch orientation {
+        case .vertical:
+            RoundedRectangle(cornerRadius: 5)
+                .fill(Color(UIColor.lightGray))
+                .frame(width: 5, height: 60)
+        case .horizontal:
+            RoundedRectangle(cornerRadius: 5)
+                .fill(Color(UIColor.lightGray))
+                .frame(width: 60, height: 5)
+        }
+    }
 }
