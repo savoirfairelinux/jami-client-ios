@@ -92,9 +92,6 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.view.layoutIfNeeded()
         }, completion: { [weak self] _ in
-            if let parent = self?.parent as? ContactPickerDelegate {
-                parent.contactPickerDismissed()
-            }
             self?.didMove(toParent: nil)
             self?.view.removeFromSuperview()
             self?.removeFromParent()
@@ -103,12 +100,12 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
     private func setupDataSources() {
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ContactPickerSection.Item)
-            -> UITableViewCell = {
+            -> UITableViewCell = { [weak self]
                 (   _: TableViewSectionedDataSource<ContactPickerSection>,
                     tableView: UITableView,
                     indexPath: IndexPath,
                     contactItem: ContactPickerSection.Item) in
-
+                guard let self = self else { return UITableViewCell() }
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
                 cell.selectionContainer?.isHidden = self.type == .forCall
                 cell.selectionIndicator?.backgroundColor = UIColor.clear
