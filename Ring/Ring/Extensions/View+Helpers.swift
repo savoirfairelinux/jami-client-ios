@@ -38,3 +38,9 @@ extension View {
             .foregroundColor(Color(UIColor.jamiButtonLight))
     }
 }
+
+extension Animation {
+    static func dragableCaptureViewAnimation() -> Animation {
+        return Animation.interpolatingSpring(stiffness: 100, damping: 20, initialVelocity: 0)
+    }
+}
