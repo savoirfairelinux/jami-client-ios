@@ -73,11 +73,11 @@ class PlayerViewModel {
         // get first frame, pause player and seek back to first frame
         self.playBackDisposeBag = DisposeBag()
         self.incomingFrame.filter {  [weak self] (render) -> Bool in
-            render?.rendererId == self?.playerId
+            render.sinkId == self?.playerId
         }
         .take(1)
-        .map({[weak self] (renderer) -> Observable<RendererTuple?>  in
-            self?.firstFrame = renderer?.buffer
+        .map({[weak self] (renderer) -> Observable<VideoFrameInfo>  in
+            self?.firstFrame = renderer.sampleBuffer
             self?.playerPosition.onNext(0)
             self?.toglePause()
             self?.muteAudio()
@@ -85,19 +85,19 @@ class PlayerViewModel {
             self?.startTimer()
             self?.playerReady.accept(true)
             self?.playBackFrame.onNext(self?.firstFrame)
-            if let sampleBuffer = renderer?.buffer,
+            if let sampleBuffer = renderer.sampleBuffer,
                let image = UIImage.createFrom(sampleBuffer: sampleBuffer) {
                 DispatchQueue.main.async {
                     self?.delegate?.extractedVideoFrame(with: image.size.height)
                 }
             }
             return self?.incomingFrame.filter {  [weak self] (render) -> Bool in
-                render?.rendererId == self?.playerId
+                render.sinkId == self?.playerId
             } ?? Observable.just(renderer)
         })
         .merge()
         .subscribe(onNext: {  [weak self] (renderer) in
-            self?.playBackFrame.onNext(renderer?.buffer)
+            self?.playBackFrame.onNext(renderer.sampleBuffer)
         })
         .disposed(by: self.playBackDisposeBag)
 
@@ -105,7 +105,7 @@ class PlayerViewModel {
         self.videoService.playerInfo
             .asObservable()
             .filter {  [weak self] (player) -> Bool in
-                player.playerId == self?.playerId
+                self?.playerId.contains(player.playerId) ?? false
             }
             .take(1)
             .subscribe(onNext: {  [weak self] player in
@@ -183,8 +183,8 @@ class PlayerViewModel {
         videoService.seekToTime(time: time, playerId: playerId)
     }
 
-    lazy var incomingFrame: Observable<RendererTuple?> = {
-        return videoService.incomingVideoFrame.asObservable()
+    lazy var incomingFrame: Observable<VideoFrameInfo> = {
+        return videoService.videoInputManager.frameSubject.asObservable()
     }()
 
     var currentTime: Int64 = 0

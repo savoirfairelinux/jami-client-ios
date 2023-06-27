@@ -1,0 +1,65 @@
+/*
+ *  Copyright (C) 2023 Savoir-faire Linux Inc.
+ *
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+import Foundation
+import RxSwift
+import SwiftUI
+
+class PendingConferenceCall {
+    @Published var avatar = UIImage()
+    @Published var name = ""
+
+    let id: String
+    let profileInfo: ParticipantProfileInfo
+    var info: ConferenceParticipant
+    let disposeBag = DisposeBag()
+    let callsService: CallsService
+
+    init(info: ConferenceParticipant, injectionBag: InjectionBag) {
+        self.info = info
+        self.id = info.sinkId
+        self.callsService = injectionBag.callService
+        self.profileInfo = ParticipantProfileInfo(
+            injectionBag: injectionBag, info: info
+        )
+        self.profileInfo.avatar
+            .observe(on: MainScheduler.instance)
+            .startWith(self.profileInfo.avatar.value)
+            .filter { $0 != nil }
+            .subscribe(onNext: { [weak self] avatar in
+                if let avatar = avatar {
+                    self?.avatar = avatar
+                }
+            })
+            .disposed(by: disposeBag)
+        self.profileInfo.displayName
+            .observe(on: MainScheduler.instance)
+            .startWith(self.profileInfo.displayName.value)
+            .filter { !$0.isEmpty }
+            .subscribe(onNext: { [weak self] name in
+                self?.name = name
+            })
+            .disposed(by: disposeBag)
+    }
+
+    func stopPendingCall() {
+        self.callsService.stopPendingCall(callId: self.id)
+    }
+}
