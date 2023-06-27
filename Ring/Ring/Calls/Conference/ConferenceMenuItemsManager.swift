@@ -25,7 +25,6 @@ enum RoleInCall {
 class ConferenceMenuItemsManager {
     func getMenuItemsForLocalCall(conference: CallModel?, active: Bool?, isHandRised: Bool) -> [MenuItem] {
         var menu = [MenuItem]()
-        menu.append(.name)
         guard let conference = conference else {
             return menu
         }
@@ -57,7 +56,6 @@ class ConferenceMenuItemsManager {
     // swiftlint:disable cyclomatic_complexity
     func getMenuItemsFor(call: CallModel?, isHost: Bool, conference: CallModel?, active: Bool?, role: RoleInCall, isHandRised: Bool) -> [MenuItem] {
         var menu = [MenuItem]()
-        menu.append(.name)
         guard let conference = conference,
               let call = call else {
             return menu
