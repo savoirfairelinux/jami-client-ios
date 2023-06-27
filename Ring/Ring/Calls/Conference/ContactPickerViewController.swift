@@ -92,9 +92,6 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.view.layoutIfNeeded()
         }, completion: { [weak self] _ in
-            if let parent = self?.parent as? ContactPickerDelegate {
-                parent.contactPickerDismissed()
-            }
             self?.didMove(toParent: nil)
             self?.view.removeFromSuperview()
             self?.removeFromParent()
