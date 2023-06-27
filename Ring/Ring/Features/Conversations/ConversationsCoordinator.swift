@@ -92,8 +92,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.popToSmartList()
                 case .openConversation(let jamiId):
                     self.openConversation(jamiId: jamiId)
-                case .openConversationForConversationId(let conversationId, let accountId):
-                    self.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: false)
+                case .openConversationForConversationId(let conversationId, let accountId, let shouldOpenSmarList):
+                    self.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: shouldOpenSmarList)
                 default:
                     break
                 }
