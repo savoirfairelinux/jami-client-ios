@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2018-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2023 Savoir-faire Linux Inc.
  *
- *  Author: Andreas Traczyk <andreas.traczyk@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,9 +18,24 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-@objc protocol VideoAdapterDelegate {
-    func startCapture(withDevice device: String)
-    func stopCapture()
-    func setDecodingAccelerated(withState state: Bool)
-    func fileOpened(for playerId: String, fileInfo: [String: String])
+import SwiftUI
+
+struct TopView: View {
+    @SwiftUI.State var participants: [ParticipantViewModel]
+    let width: CGFloat = 150
+    let height: CGFloat = 100
+    var body: some View {
+        VStack {
+            Spacer()
+                .frame(height: 30)
+            ScrollView(.horizontal) {
+                HStack(spacing: 10) {
+                    ForEach(participants) { participant in
+                        ParticipantView(model: participant, width: width, height: height)
+                    }
+                }
+                .background(Color.black.frame(width: 99999999))
+            }
+        }
+    }
 }

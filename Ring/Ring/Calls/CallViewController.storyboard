@@ -480,7 +480,6 @@
                         <outlet property="conferenceCalls" destination="7G0-Fp-Xc3" id="KSO-wf-OJy"/>
                         <outlet property="conferenceCallsScrolView" destination="bij-Xb-EKH" id="YxK-ru-kO4"/>
                         <outlet property="conferenceCallsTop" destination="pgr-29-Lef" id="Wug-zj-y0Q"/>
-                        <outlet property="conferenceLayout" destination="BOE-du-fSU" id="tCL-dC-2dy"/>
                         <outlet property="durationLabel" destination="zMN-6z-uXT" id="Uuf-ph-lrC"/>
                         <outlet property="incomingVideo" destination="fDj-CM-JeT" id="7lp-bF-eQa"/>
                         <outlet property="infoBlurEffect" destination="zuX-Zf-IN1" id="hAl-Rg-hPM"/>
