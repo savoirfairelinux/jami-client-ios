@@ -33,40 +33,24 @@ class VideoManager {
          videoService: VideoService) {
         self.callService = callService
         self.videoService = videoService
-        self.subscribeCallsEvents()
         VideoAdapter.decodingDelegate = self
-    }
-
-    private func subscribeCallsEvents() {
-        self.callService.sharedResponseStream
-            .filter { event in
-                event.eventType == .callEnded
-            }
-            .subscribe { [weak self] _ in
-                guard let self = self else { return }
-                self.videoService.stopCapture()
-                self.videoService.setCameraOrientation(orientation: UIDevice.current.orientation)
-            } onError: {_ in
-            }
-            .disposed(by: disposeBag)
     }
 }
 
 extension VideoManager: DecodingAdapterDelegate {
-    func decodingStarted(withRendererId rendererId: String,
+    func decodingStarted(withSinkId sinkId: String,
                          withWidth width: Int,
                          withHeight height: Int) {
         var accountId = ""
         var codecId: String?
-        if let call = self.callService.call(callID: rendererId),
+        if let call = self.callService.call(callID: sinkId),
            let codec = self.callService.getVideoCodec(call: call) {
             codecId = codec
             accountId = call.accountId
         }
-        self.videoService.decodingStarted(withRendererId: rendererId, withWidth: width, withHeight: height, withCodec: codecId, withaAccountId: accountId)
+        self.videoService.decodingStarted(withsinkId: sinkId, withWidth: width, withHeight: height, withCodec: codecId, withaAccountId: accountId)
     }
-    func decodingStopped(withRendererId rendererId: String) {
-        self.videoService.decodingStopped(withRendererId: rendererId)
+    func decodingStopped(withSinkId sinkId: String) {
+        self.videoService.decodingStopped(withsinkId: sinkId)
     }
-
 }

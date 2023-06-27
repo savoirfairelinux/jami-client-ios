@@ -35,7 +35,8 @@
 - (NSString*)getDefaultDevice;
 - (void)registerSinkTargetWithSinkId:sinkId
                            withWidth:(NSInteger)w
-                          withHeight:(NSInteger)h;
+                          withHeight:(NSInteger)h
+                         hasListeners:(BOOL)hasListeners;
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId;
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
                                angle:(int)angle
@@ -57,5 +58,6 @@
 - (bool)playerSeekToTime:(int)time playerId:(NSString*)playerId;
 - (int64_t)getPlayerPosition:(NSString*)playerId;
 -(CGSize)getRenderSize:(NSString* )sinkId;
+- (void)setHasListeners:(BOOL)hasListeners forSinkId:(NSString*)sinkId;
 
 @end
