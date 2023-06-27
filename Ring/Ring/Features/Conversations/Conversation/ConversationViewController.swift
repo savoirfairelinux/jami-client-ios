@@ -86,11 +86,6 @@ class ConversationViewController: UIViewController,
         super.viewDidLoad()
         messageAccessoryView.delegate = self
         self.configureNavigationBar()
-        if #available(iOS 15.0, *) {
-            self.currentCallButton.isHidden = true
-            self.currentCallLabel.isHidden = true
-            self.callButtonHeightConstraint.constant = 0
-        }
         self.setupUI()
         self.setupBindings()
         /*
@@ -669,36 +664,32 @@ class ConversationViewController: UIViewController,
         .disposed(by: self.disposeBag)
 
         self.setRightNavigationButtons()
-        if #available(iOS 15.0, *) {
-            print("iOS 15")
-        } else {
-            self.viewModel.showCallButton
-                .observe(on: MainScheduler.instance)
-                .startWith(self.viewModel.haveCurrentCall())
-                .subscribe(onNext: { [weak self] show in
-                    if show {
-                        DispatchQueue.main.async {
-                            if self?.viewModel.currentCallId.value.isEmpty ?? true {
-                                return
-                            }
-                            self?.currentCallButton.isHidden = false
-                            self?.currentCallLabel.isHidden = false
-                            self?.callButtonHeightConstraint.constant = 60
+        self.viewModel.showCallButton
+            .observe(on: MainScheduler.instance)
+            .startWith(self.viewModel.haveCurrentCall())
+            .subscribe(onNext: { [weak self] show in
+                if show {
+                    DispatchQueue.main.async {
+                        if self?.viewModel.currentCallId.value.isEmpty ?? true {
+                            return
                         }
-                        return
+                        self?.currentCallButton.isHidden = false
+                        self?.currentCallLabel.isHidden = false
+                        self?.callButtonHeightConstraint.constant = 60
                     }
-                    self?.currentCallButton.isHidden = true
-                    self?.currentCallLabel.isHidden = true
-                    self?.callButtonHeightConstraint.constant = 0
-                })
-                .disposed(by: disposeBag)
-            currentCallButton.rx.tap
-                .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-                .subscribe(onNext: { [weak self] in
-                    self?.viewModel.openCall()
-                })
-                .disposed(by: self.disposeBag)
-        }
+                    return
+                }
+                self?.currentCallButton.isHidden = true
+                self?.currentCallLabel.isHidden = true
+                self?.callButtonHeightConstraint.constant = 0
+            })
+            .disposed(by: disposeBag)
+        currentCallButton.rx.tap
+            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.openCall()
+            })
+            .disposed(by: self.disposeBag)
         viewModel.bestName
             .asObservable()
             .observe(on: MainScheduler.instance)

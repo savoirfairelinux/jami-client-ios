@@ -35,7 +35,7 @@ enum ConversationState: State {
     case recordFile(conversation: ConversationModel, audioOnly: Bool)
     case navigateToCall(call: CallModel)
     case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void))
-    case fromCallToConversation(conversation: ConversationViewModel)
+    case openConversationFromCall(conversation: ConversationModel)
     case needAccountMigration(accountId: String)
     case accountModeChanged
     case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate)
@@ -55,7 +55,7 @@ enum ConversationState: State {
     case migrateAccount(accountId: String)
     case presentSwarmInfo(swarmInfo: SwarmInfoProtocol)
     case openConversation(jamiId: String)
-    case openConversationForConversationId(conversationId: String, accountId: String)
+    case openConversationForConversationId(conversationId: String, accountId: String, shouldOpenSmarList: Bool)
     case reopenCall(viewController: CallViewController)
 }
 
@@ -88,8 +88,6 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.createSwarm()
                 case .recordFile(let conversation, let audioOnly):
                     self.openRecordFile(conversation: conversation, audioOnly: audioOnly)
-                case .fromCallToConversation(let conversation):
-                    self.fromCallToConversation(withConversationViewModel: conversation)
                 case .navigateToCall(let call):
                     self.navigateToCall(call: call)
                 case .needAccountMigration(let accountId):
@@ -222,20 +220,6 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withAnimation: true,
                      withStateable: conversationViewController.viewModel,
                      lockWhilePresenting: VCType.conversation.rawValue)
-    }
-
-    func fromCallToConversation(withConversationViewModel conversationViewModel: ConversationViewModel) {
-        guard let navigationController = self.rootViewController as? UINavigationController else { return }
-        let controllers = navigationController.children
-        for controller in controllers
-        where controller.isKind(of: (ConversationViewController).self) {
-            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation.value == conversationViewModel.conversation.value {
-                navigationController.popToViewController(conversationController, animated: true)
-                conversationController.becomeFirstResponder()
-                return
-            }
-        }
-        self.showConversation(withConversationViewModel: conversationViewModel)
     }
 
     func reopenCall(viewController: CallViewController) {
