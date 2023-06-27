@@ -40,6 +40,6 @@ class SwarmCreationViewModel: ViewModel, Stateable {
     }
 
     func showConversation(withConversationId conversationId: String, andWithAccountId accountId: String) {
-        self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: conversationId, accountId: accountId))
+        self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: false))
     }
 }
