@@ -18,7 +18,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class ConferenceParticipant {
+class ConferenceParticipant: Hashable {
     var originX: CGFloat = 0
     var originY: CGFloat = 0
     var width: CGFloat = 0
@@ -32,6 +32,10 @@ class ConferenceParticipant {
     var isVideoMuted: Bool = false
     var isHandRaised: Bool = false
     var device: String = ""
+    var sinkId: String = ""
+    var voiceActivity: Bool = false
+    var recording: Bool = false
+    var audioModeratorMuted: Bool = false
 
     init (info: [String: String], onlyURIAndActive: Bool) {
         self.uri = info["uri"]
@@ -71,5 +75,34 @@ class ConferenceParticipant {
         if let device = info["device"] {
             self.device = device
         }
+
+        if let sinkId = info["sinkId"] {
+            self.sinkId = sinkId
+        }
+
+        if let voiceActivity = info["voiceActivity"] {
+            self.voiceActivity = voiceActivity.boolValue
+        }
+
+        if let recording = info["recording"] {
+            self.recording = recording.boolValue
+        }
+
+        if let audioModeratorMuted = info["audioModeratorMuted"] {
+            self.audioModeratorMuted = audioModeratorMuted.boolValue
+        }
+    }
+
+    init(sinkId: String, isActive: Bool) {
+        self.sinkId = sinkId
+        self.isActive = isActive
+    }
+
+    func hash(into hasher: inout Hasher) {
+        return hasher.combine(uri)
+    }
+
+    static func == (lhs: ConferenceParticipant, rhs: ConferenceParticipant) -> Bool {
+        return lhs.uri == rhs.uri
     }
 }
