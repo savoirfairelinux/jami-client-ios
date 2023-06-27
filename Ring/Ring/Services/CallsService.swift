@@ -208,6 +208,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
 
     func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]]) {
         let participants = self.arrayToConferenceParticipants(participants: info, onlyURIAndActive: false)
+        print("^^^^^^^^^^ \(info)")
         self.conferenceInfos[conferenceID] = participants
         currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
     }
@@ -293,6 +294,11 @@ class CallsService: CallsAdapterDelegate, VCardSender {
 
     func stopCall(call: CallModel) {
         self.callsAdapter.hangUpCall(call.callId, accountId: call.accountId)
+    }
+
+    func stopPendingCall(callId: String) {
+        guard let call = self.call(callID: callId) else { return }
+        self.stopCall(call: call)
     }
     func answerCall(call: CallModel) -> Bool {
         NSLog("call service answerCall %@", call.callId)
@@ -801,11 +807,6 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         }
     }
 
-    func muteParticipant(confId: String, participantId: String, active: Bool) {
-        guard let conference = call(callID: confId) else { return }
-        self.callsAdapter.muteConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId, active: active)
-    }
-
     func setModeratorParticipant(confId: String, participantId: String, active: Bool) {
         guard let conference = call(callID: confId) else { return }
         self.callsAdapter.setConferenceModerator(participantId, forConference: confId, accountId: conference.accountId, active: active)
@@ -816,9 +817,13 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         self.callsAdapter.hangupConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId, deviceId: device)
     }
 
-    func setRaiseHand(confId: String, participantId: String, state: Bool) {
+    func muteStream(confId: String, participantId: String, device: String, accountId: String, streamId: String, state: Bool) {
+        self.callsAdapter.muteStream(participantId, forConference: confId, accountId: accountId, deviceId: device, streamId: streamId, state: state)
+    }
+
+    func setRaiseHand(confId: String, participantId: String, state: Bool, accountId: String, deviceId: String) {
         guard let conference = call(callID: confId) else { return }
-        self.callsAdapter.setHandRaised(participantId, forConference: confId, accountId: conference.accountId, state: state)
+        self.callsAdapter.raiseHand(participantId, forConference: confId, accountId: accountId, deviceId: deviceId, state: state)
     }
 
 }
