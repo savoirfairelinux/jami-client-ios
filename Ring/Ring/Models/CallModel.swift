@@ -99,7 +99,13 @@ enum CallLayout: Int32 {
 public class CallModel {
 
     var callId: String = ""
-    var participantsCallId: Set<String> = Set<String>()
+    var participantsCallId: Set<String> = Set<String>() {
+        didSet {
+            if self.participantsCallId.count <= 1 {
+                self.layout = .one
+            }
+        }
+    }
     var callUUID: UUID = UUID()
     var dateReceived: Date?
     var participantUri: String = ""
@@ -112,7 +118,7 @@ public class CallModel {
     var peerHolding: Bool = false
     var speakerActive: Bool = false
     var isAudioOnly: Bool = false
-    var layout: CallLayout = .grid
+    var layout: CallLayout = .one
     lazy var paricipantHash = {
         self.participantUri.filterOutHost()
     }
@@ -187,7 +193,10 @@ public class CallModel {
         }
 
         if !mediaList.isEmpty {
+            print("**********updating medialist for call \(self.callId)")
             self.mediaList = mediaList
+        } else {
+            print("**********updating medialist for call \(self.callId) is empty")
         }
 
         if let displayName = dictionary[CallDetailKey.displayNameKey.rawValue], !displayName.isEmpty {
