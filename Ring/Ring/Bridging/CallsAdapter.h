@@ -56,4 +56,10 @@
 - (void)muteConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId active:(BOOL)isActive;
 - (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId;
 -(void)setHandRaised:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId state:(BOOL)state;
+-(void)muteStream:(NSString*)participantId
+    forConference:(NSString*)conferenceId
+        accountId:(NSString*)accountId
+         deviceId:(NSString*)deviceId
+         streamId:(NSString*)streamId
+            state:(BOOL)state;
 @end

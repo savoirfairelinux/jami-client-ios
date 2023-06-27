@@ -208,6 +208,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
 
     func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]]) {
         let participants = self.arrayToConferenceParticipants(participants: info, onlyURIAndActive: false)
+        print("^^^^^^^^^^ \(info)")
         self.conferenceInfos[conferenceID] = participants
         currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
     }
@@ -814,6 +815,10 @@ class CallsService: CallsAdapterDelegate, VCardSender {
     func hangupParticipant(confId: String, participantId: String, device: String) {
         guard let conference = call(callID: confId) else { return }
         self.callsAdapter.hangupConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId, deviceId: device)
+    }
+
+    func muteStream(confId: String, participantId: String, device: String, accountId: String, streamId: String, state: Bool) {
+        self.callsAdapter.muteStream(participantId, forConference: confId, accountId: accountId, deviceId: device, streamId: streamId, state: state)
     }
 
     func setRaiseHand(confId: String, participantId: String, state: Bool) {

@@ -298,6 +298,20 @@ static id <CallsAdapterDelegate> _delegate;
     raiseParticipantHand(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), state);
 }
 
+-(void)muteStream:(NSString*)participantId
+    forConference:(NSString*)conferenceId
+        accountId:(NSString*)accountId
+         deviceId:(NSString*)deviceId
+         streamId:(NSString*)streamId
+            state:(BOOL)state {
+    muteStream(std::string([accountId UTF8String]),
+               std::string([conferenceId UTF8String]),
+               std::string([participantId UTF8String]),
+               std::string([deviceId UTF8String]),
+               std::string([streamId UTF8String]),
+               state);
+}
+
 #pragma mark AccountAdapterDelegate
 
 + (id <CallsAdapterDelegate>)delegate {
