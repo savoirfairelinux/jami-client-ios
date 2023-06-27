@@ -27,6 +27,7 @@ class Contact {
     var accountID: String
     var registeredName: String
     var hash: String
+    let disposeBag = DisposeBag()
 
     lazy var presenceStatus: BehaviorRelay<Bool>? = {
         self.presenceService
@@ -36,38 +37,95 @@ class Contact {
     var firstLine: BehaviorRelay<String> = BehaviorRelay(value: "")
     var secondLine: String = ""
 
-    var profile: Profile?
-    var presenceService: PresenceService
+    var imageData: BehaviorRelay<Data?> = BehaviorRelay(value: nil)
+    let presenceService: PresenceService
+    let nameService: NameService
+    let profileService: ProfilesService
 
     init (contactUri: String, accountId: String,
           registeredName: String, presService: PresenceService,
-          contactProfile: Profile?, hash: String) {
-        self.uri = contactUri
+          nameService: NameService, hash: String, profileService: ProfilesService) {
         self.presenceService = presService
+        self.nameService = nameService
+        self.profileService = profileService
+        self.uri = contactUri
         self.accountID = accountId
         self.registeredName = registeredName
-        self.profile = contactProfile
         self.hash = hash
-        self.updateFirestLine()
-        self.updateSecondLine()
+        self.updateName()
+        self.fetchProfile()
     }
 
-    func registeredNameFound(name: String) {
-        self.registeredName = name
-        self.updateFirestLine()
-        self.updateSecondLine()
+    private func fetchProfile() {
+        profileService.getProfile(uri: self.uri, createIfNotexists: false, accountId: self.accountID)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(
+                onNext: { [weak self] profile in
+                    self?.processProfile(profile)
+                },
+                onError: { [weak self] _ in
+                    self?.handleError()
+                }
+            )
+            .disposed(by: disposeBag)
     }
 
-    private func updateFirestLine() {
-        self.firstLine.accept({
-            if let contactProfile = profile,
-               let profileAlias = contactProfile.alias,
-               !profileAlias.isEmpty {
-                return profileAlias
+    private func processProfile(_ profile: Profile) {
+        updateName(profile: profile)
+        if let photo = profile.photo,
+           let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
+            DispatchQueue.main.async { [weak self ] in
+                self?.imageData.accept(data)
             }
-            return registeredName.isEmpty ? hash : registeredName
-        }())
+        }
+        if registeredName.isEmpty && profile.alias?.isEmpty ?? true {
+            lookupNameAsync()
+        }
+    }
 
+    private func handleError() {
+        if registeredName.isEmpty {
+            lookupNameAsync()
+        } else {
+            updateName()
+        }
+    }
+
+    private func lookupNameAsync() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            self.lookupName(nameService: self.nameService, accountId: self.accountID)
+        }
+    }
+
+    private func lookupName(nameService: NameService?, accountId: String) {
+        nameService?.usernameLookupStatus.share()
+            .filter { [weak self] response in
+                response.address == self?.hash
+            }
+            .asObservable()
+            .take(1)
+            .subscribe(onNext: { [weak self] response in
+                self?.registeredName = response.name
+                self?.updateName()
+            })
+            .disposed(by: disposeBag)
+
+        nameService?.lookupAddress(withAccount: accountId, nameserver: "", address: hash)
+    }
+
+    private func updateName(profile: Profile? = nil) {
+        DispatchQueue.main.async { [weak self ] in
+            guard let self = self else { return }
+            let nameToUse: String
+            if let alias = profile?.alias, !alias.isEmpty {
+                nameToUse = alias
+            } else {
+                nameToUse = self.registeredName.isEmpty ? self.hash : self.registeredName
+            }
+            self.firstLine.accept(nameToUse)
+            self.updateSecondLine()
+        }
     }
 
     private func updateSecondLine() {

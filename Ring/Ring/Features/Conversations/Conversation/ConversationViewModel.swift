@@ -421,18 +421,31 @@ class ConversationViewModel: Stateable, ViewModel {
             })
             .map({ [weak self]  call in
                 guard let self = self else { return false }
-                let callIsValid = self.callIsValid(call: call)
-                self.currentCallId.accept(callIsValid ? call.callId : "")
-                return callIsValid
+                let show = self.shouldShowCallButton(call: call)
+                self.currentCallId.accept(show ? call.callId : "")
+                return show
             })
     }()
 
     let currentCallId = BehaviorRelay<String>(value: "")
 
-    func callIsValid (call: CallModel) -> Bool {
+    func callIsValid(call: CallModel) -> Bool {
         return call.stateValue == CallState.hold.rawValue ||
             call.stateValue == CallState.unhold.rawValue ||
-            call.stateValue == CallState.current.rawValue
+            call.stateValue == CallState.current.rawValue ||
+            call.stateValue == CallState.ringing.rawValue ||
+            call.stateValue == CallState.connecting.rawValue
+    }
+
+    func shouldShowCallButton(call: CallModel) -> Bool {
+        // From iOS 15 picture in picture is supported and it will take care of presenting the video call.
+        if #available(iOS 15.0, *) {
+            if call.isAudioOnly {
+                return callIsValid(call: call)
+            }
+            return call.stateValue == CallState.ringing.rawValue || call.stateValue == CallState.connecting.rawValue
+        }
+        return callIsValid(call: call)
     }
 
     func openCall() {
