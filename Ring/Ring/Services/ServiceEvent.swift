@@ -38,6 +38,7 @@ enum ServiceEventType {
     case proxyEnabled
     case notificationEnabled
     case callEnded
+    case callsCompleted
     case dataTransferCreated
     case dataTransferChanged
     case dataTransferMessageUpdated
