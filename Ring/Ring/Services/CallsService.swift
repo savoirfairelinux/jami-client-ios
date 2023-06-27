@@ -208,6 +208,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
 
     func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]]) {
         let participants = self.arrayToConferenceParticipants(participants: info, onlyURIAndActive: false)
+        print("^^^^^^^^^^ \(info)")
         self.conferenceInfos[conferenceID] = participants
         currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
     }
