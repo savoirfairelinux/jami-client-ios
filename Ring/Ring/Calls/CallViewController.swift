@@ -24,6 +24,7 @@ import UIKit
 import RxSwift
 import Reusable
 import SwiftyBeaver
+import SwiftUI
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
@@ -74,21 +75,19 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     @IBOutlet weak var conferenceCalls: UIStackView!
     @IBOutlet weak var conferenceCallsScrolView: UIScrollView!
     @IBOutlet weak var buttonsStackView: UIStackView!
-    @IBOutlet weak var conferenceLayout: ConferenceLayout!
 
     @IBOutlet weak var backButtonAudioCall: UIButton!
     @IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var conferenceCallsTop: NSLayoutConstraint!
 
     var viewModel: CallViewModel!
-    var pipController: AVPictureInPictureController! = nil
-    var incomingVideoLayer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
     private var callViewMode: CallViewMode = .audio
     private var isMenuShowed = false
     private var needToCleanIncomingFrame = false
     private var isCapturedVideoHidden = false
     private var orientation = UIDevice.current.orientation
     private var conferenceParticipantMenu: UIView?
+    private var videoContainerViewModel: ContainerViewModel!
 
     private let disposeBag = DisposeBag()
 
@@ -118,8 +117,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
         self.setUpCallButtons()
         self.setupBindings()
-        self.configureIncomingVideo()
-        self.setupPIP()
         self.profileImageView.tintColor = UIColor.jamiDefaultAvatar
         nameLabel.textColor = UIColor.jamiLabelColor
         durationLabel.textColor = UIColor.jamiLabelColor
@@ -129,6 +126,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             initCallAnimation()
         }
         self.configureConferenceLayout()
+        self.configureConferenceInfo()
+        self.configureIncomingVideView()
         if callCurrent {
             self.capturedVideoBlurEffect.alpha = 1
             hideCapturedVideo()
@@ -147,27 +146,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .disposed(by: self.disposeBag)
     }
 
-    func configureIncomingVideo() {
-        self.incomingVideo.layer.addSublayer(self.incomingVideoLayer)
-        self.incomingVideoLayer.videoGravity = .resizeAspect
-        self.viewModel.incomingFrame
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] buffer in
-                guard let self = self else { return }
-                guard let buffer = buffer else { return }
-                self.incomingVideoStarted()
-                self.incomingVideoLayer.enqueue(buffer)
-                // AVSampleBufferDisplayLayer requires frame of view in which buffer is shown
-                if self.incomingVideoLayer.frame != self.incomingVideo.bounds {
-                    CATransaction.begin()
-                    CATransaction.setDisableActions(true)
-                    self.incomingVideoLayer.frame = self.incomingVideo.bounds
-                    CATransaction.commit()
-                }
-            })
-            .disposed(by: self.disposeBag)
-    }
-
     func incomingVideoStarted() {
         self.setAvatarView(false)
         self.spinner.stopAnimating()
@@ -180,63 +158,63 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         }
     }
 
-    func setupPIP() {
-        if #available(iOS 15.0, *) {
-            guard AVPictureInPictureController.isPictureInPictureSupported() else { return }
-            let contentSource = AVPictureInPictureController.ContentSource(sampleBufferDisplayLayer: incomingVideoLayer, playbackDelegate: self)
-            pipController = AVPictureInPictureController(contentSource: contentSource)
-            pipController.delegate = self
-            // Set requiresLinearPlayback to true to hide buttons from Picture in Picture except cancel and restoreView
-            pipController.requiresLinearPlayback = true
-
-            // Hide the overlay text and controls except for the cancel and restore view buttons
-            pipController.setValue(true, forKey: "controlsStyle")
-        }
-    }
-
     func addTapGesture() {
         self.mainView.addGestureRecognizer(tapGestureRecognizer)
     }
 
+    func configureIncomingVideView() {
+        let localId = self.viewModel.localId()
+        videoContainerViewModel = ContainerViewModel(localId: localId, delegate: self, videoService: self.viewModel.videoService)
+        let videoViewSwiftUI = ContainerView(model: videoContainerViewModel)
+        let hostingController = UIHostingController(rootView: videoViewSwiftUI)
+        self.addChild(hostingController)
+        hostingController.view.frame = incomingVideo.bounds
+        self.incomingVideo.addSubview(hostingController.view)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.topAnchor.constraint(equalTo: self.incomingVideo.topAnchor, constant: 0).isActive = true
+        hostingController.view.bottomAnchor.constraint(equalTo: self.incomingVideo.bottomAnchor, constant: 0).isActive = true
+        hostingController.view.leadingAnchor.constraint(equalTo: self.incomingVideo.leadingAnchor, constant: 0).isActive = true
+        hostingController.view.trailingAnchor.constraint(equalTo: self.incomingVideo.trailingAnchor, constant: 0).isActive = true
+        hostingController.didMove(toParent: self)
+        let participant = ConferenceParticipant(sinkId: self.viewModel.conferenceId)
+        self.videoContainerViewModel.conferenceUpdated(participantsInfo: [participant])
+    }
+
     private func configureConferenceLayout() {
-        self.updateconferenceLayoutSize()
         self.viewModel.layoutUpdated
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] updated in
                 guard let self = self, updated else { return }
-                self.updateconferenceLayoutSize()
-                let participants = self.viewModel.getConferenceParticipants()
-                self.conferenceLayout.setParticipants(participants: participants, isCurrentModerator: self.viewModel.isCurrentModerator() || self.viewModel.isHostCall )
-
-                guard let unwrapParticipants = participants, self.viewModel.isCurrentModerator(), !self.viewModel.isHostCall else { return }
-                self.conferenceCalls.arrangedSubviews.forEach({ (view) in
-                    view.removeFromSuperview()
-                })
-                for participant in unwrapParticipants {
-                    let callView =
-                        ConferenceParticipantView(frame:
-                                                    CGRect(x: 0, y: 0,
-                                                           width: inConfViewWidth, height: inConfViewHeight))
-                    let injectionBag = self.viewModel.injectionBag
-                    let isLocal = self.viewModel.isLocalCall(participantId: participant.uri ?? "")
-                    let pendingCallViewModel =
-                        ConferenceParticipantViewModel(with: nil,
-                                                       injectionBag: injectionBag,
-                                                       isLocal: isLocal,
-                                                       participantId: participant.uri ?? "",
-                                                       participantUserName: participant.displayName)
-                    callView.viewModel = pendingCallViewModel
-                    callView.delegate = self
-                    self.conferenceCalls.addArrangedSubview(callView)
+                if let participants = self.viewModel.getConferenceParticipants() {
+                    self.videoContainerViewModel.conferenceUpdated(participantsInfo: participants)
                 }
+                return
+                //                    self.conferenceLayout.setParticipants(participants: participants, isCurrentModerator: self.viewModel.isCurrentModerator() || self.viewModel.isHostCall )
+                //
+                //                guard let unwrapParticipants = participants, self.viewModel.isCurrentModerator(), !self.viewModel.isHostCall else { return }
+                //                self.conferenceCalls.arrangedSubviews.forEach({ (view) in
+                //                    view.removeFromSuperview()
+                //                })
+                //                for participant in unwrapParticipants {
+                //                    let callView =
+                //                        ConferenceParticipantView(frame:
+                //                                                    CGRect(x: 0, y: 0,
+                //                                                           width: inConfViewWidth, height: inConfViewHeight))
+                //                    let injectionBag = self.viewModel.injectionBag
+                //                    let isLocal = self.viewModel.isLocalCall(participantId: participant.uri ?? "")
+                //                    let pendingCallViewModel =
+                //                        ConferenceParticipantViewModel(with: nil,
+                //                                                       injectionBag: injectionBag,
+                //                                                       isLocal: isLocal,
+                //                                                       participantId: participant.uri ?? "",
+                //                                                       participantUserName: participant.displayName)
+                //                    callView.viewModel = pendingCallViewModel
+                //                    callView.delegate = self
+                //                    self.conferenceCalls.addArrangedSubview(callView)
+                // }
             })
             .disposed(by: self.disposeBag)
-    }
-
-    private func updateconferenceLayoutSize() {
-        let size = self.viewModel.getConferenceVideoSize()
-        self.conferenceLayout.setUpWithVideoSize(size: size)
     }
 
     @objc
@@ -306,18 +284,15 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.sendMessageButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showConversations()
-                if #available(iOS 15.0, *) {
-                    // startPictureInPicture requires user interaction
-                    self?.pipController.startPictureInPicture()
-                }
-                self?.dismiss(animated: false, completion: nil)
+                self?.videoContainerViewModel.showPiP()
+                self?.dismiss(animated: false)
             })
             .disposed(by: self.disposeBag)
 
         self.backButtonAudioCall.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showConversations()
-                self?.dismiss(animated: false, completion: nil)
+                self?.dismiss(animated: false)
             })
             .disposed(by: self.disposeBag)
 
@@ -329,13 +304,13 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
         self.buttonsContainer.muteAudioButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.toggleMuteAudio()
+                self?.viewModel.toggleMuteAudio(callId: "")
             })
             .disposed(by: self.disposeBag)
 
         self.buttonsContainer.muteVideoButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.toggleMuteVideo()
+                self?.viewModel.toggleMuteVideo(callId: "")
             })
             .disposed(by: self.disposeBag)
 
@@ -450,10 +425,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] dismiss in
                 if dismiss {
-                    if #available(iOS 15.0, *) {
-                        self?.pipController.stopPictureInPicture()
-                        self?.pipController = nil
-                    }
                     self?.removeFromScreen()
                 }
             })
@@ -492,6 +463,18 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.viewModel.bottomInfo
             .observe(on: MainScheduler.instance)
             .bind(to: self.infoBottomLabel.rx.text)
+            .disposed(by: self.disposeBag)
+
+        self.viewModel.capturedFrame
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] frame in
+                if let image = frame {
+                    DispatchQueue.main.async {
+                        self?.capturedVideo.image = image
+                        self?.spinner.stopAnimating()
+                    }
+                }
+            })
             .disposed(by: self.disposeBag)
 
         self.viewModel.showCallOptions
@@ -538,6 +521,27 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             .bind(to: self.leftArrow.rx.isHidden)
             .disposed(by: self.disposeBag)
 
+        self.viewModel.callPaused
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] paused in
+                guard let self = self else { return }
+                if paused {
+                    self.setUpAudioView()
+                    self.showCallOptions()
+                    return
+                }
+                switch self.callViewMode {
+                case .audio:
+                    return
+                default:
+                    self.setUpVideoView()
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    func configureConferenceInfo() {
+        // participants list with the actions
         self.viewModel.conferenceMode
             .asObservable()
             .observe(on: MainScheduler.instance)
@@ -545,7 +549,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 guard let call = self?.viewModel.call,
                       let self = self else { return }
                 if call.state != .current { return }
-                self.updateconferenceLayoutSize()
                 self.buttonsContainer.updateView()
                 self.infoContainer.isHidden = enteredConference ? true : false
                 self.conferenceCallsTop.constant = enteredConference ? 0 : -50
@@ -591,6 +594,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                     self.conferenceCalls.arrangedSubviews.forEach({ (view) in
                         view.removeFromSuperview()
                     })
+                    self.videoContainerViewModel.conferenceDestroyed()
                 }
             })
             .disposed(by: self.disposeBag)
@@ -616,24 +620,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 callView.viewModel = pendingCallViewModel
                 callView.delegate = self
                 self.conferenceCalls.addArrangedSubview(callView)
-            })
-            .disposed(by: self.disposeBag)
-
-        self.viewModel.callPaused
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] paused in
-                guard let self = self else { return }
-                if paused {
-                    self.setUpAudioView()
-                    self.showCallOptions()
-                    return
-                }
-                switch self.callViewMode {
-                case .audio:
-                    return
-                default:
-                    self.setUpVideoView()
-                }
             })
             .disposed(by: self.disposeBag)
     }
@@ -752,6 +738,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     }
 
     func removeFromScreen() {
+        self.videoContainerViewModel.callStopped()
         UIDevice.current.isProximityMonitoringEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false
         self.viewModel.callFinished()
@@ -846,7 +833,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                     self.capturedVideoTrailingConstraint.constant = 35
                     self.capturedVideoTopConstraint.constant = -13
                 } else if UIDevice.current.hasNotch {
-                    self.capturedVideoTrailingConstraint.constant = 10
+                    // self.capturedVideoTrailingConstraint.constant = 10
                     self.capturedVideoTopConstraint.constant = 0
                 } else {
                     self.capturedVideoTrailingConstraint.constant = 10
@@ -944,50 +931,6 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     }
 }
 
-// MARK: - AVPictureInPictureSampleBufferPlaybackDelegate
-
-extension CallViewController: AVPictureInPictureSampleBufferPlaybackDelegate {
-
-    func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {}
-    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, setPlaying playing: Bool) {}
-
-    func pictureInPictureControllerTimeRangeForPlayback(_ pictureInPictureController: AVPictureInPictureController) -> CMTimeRange {
-        /*
-         Using CMTimeRange(start: .negativeInfinity, duration: .positiveInfinity) can lead
-         to high CPU usage in the background. As an alternative, it is suggested to use
-         a 24-hour duration instead, as mentioned in https://developer.apple.com/forums/thread/724632
-         */
-        return CMTimeRange(start: .zero, duration: CMTimeMake(value: 3600 * 24, timescale: 1))
-    }
-
-    func pictureInPictureControllerIsPlaybackPaused(_ pictureInPictureController: AVPictureInPictureController) -> Bool {
-        return false
-    }
-
-    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, didTransitionToRenderSize newRenderSize: CMVideoDimensions) {}
-
-    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, skipByInterval skipInterval: CMTime, completion completionHandler: @escaping () -> Void) {
-        completionHandler()
-    }
-}
-
-// MARK: - AVPictureInPictureControllerDelegate
-
-extension CallViewController: AVPictureInPictureControllerDelegate {
-
-    func pictureInPictureControllerWillStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        if self.navigationController?.topViewController != self {
-            self.viewModel.reopenCall(viewControler: self)
-        }
-    }
-
-    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController,
-                                    restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
-        pipController.stopPictureInPicture()
-        completionHandler(true)
-    }
-}
-
 extension CallViewController: ConferenceParticipantViewDelegate {
     func addConferenceParticipantMenu(origin: CGPoint, displayName: String, participantId: String, callId: String?, hangup: @escaping (() -> Void)) {
         // remove menu if it is already present
@@ -1063,5 +1006,13 @@ extension CallViewController: ConferenceParticipantViewDelegate {
     func removeConferenceParticipantMenu() {
         self.conferenceParticipantMenu?.removeFromSuperview()
         self.conferenceParticipantMenu = nil
+    }
+}
+
+extension CallViewController: PictureInPictureManagerDelegate {
+    func reopenCurrentCall() {
+        if self.navigationController?.topViewController != self {
+            self.viewModel.reopenCall(viewControler: self)
+        }
     }
 }
