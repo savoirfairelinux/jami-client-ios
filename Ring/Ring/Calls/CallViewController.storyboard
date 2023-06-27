@@ -21,10 +21,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVy-nB-bKJ" userLabel="CallView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDj-CM-JeT">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOE-du-fSU" customClass="ConferenceLayout" customModule="Ring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <constraints>
@@ -220,6 +216,10 @@
                                             <constraint firstItem="rt7-JS-vjg" firstAttribute="centerY" secondItem="CfE-DF-buX" secondAttribute="centerY" id="tCB-hE-MJu"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDj-CM-JeT">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -244,24 +244,6 @@
                                     <constraint firstItem="Zmp-OX-Cez" firstAttribute="width" secondItem="fDj-CM-JeT" secondAttribute="width" id="u51-56-VwC"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bij-Xb-EKH">
-                                <rect key="frame" x="0.0" y="812" width="375" height="360"/>
-                                <subviews>
-                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="7G0-Fp-Xc3">
-                                        <rect key="frame" x="10" y="10" width="355" height="320"/>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="7G0-Fp-Xc3" firstAttribute="top" secondItem="bij-Xb-EKH" secondAttribute="top" constant="10" id="7hy-qG-cQS"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="GXs-Xe-tfL"/>
-                                    <constraint firstAttribute="trailing" secondItem="7G0-Fp-Xc3" secondAttribute="trailing" constant="10" id="IQa-4D-dRD"/>
-                                    <constraint firstItem="7G0-Fp-Xc3" firstAttribute="centerX" secondItem="bij-Xb-EKH" secondAttribute="centerX" placeholder="YES" id="JZj-B5-YW6"/>
-                                    <constraint firstItem="7G0-Fp-Xc3" firstAttribute="leading" secondItem="bij-Xb-EKH" secondAttribute="leading" constant="10" id="QC5-Mh-VcC"/>
-                                    <constraint firstAttribute="bottom" secondItem="7G0-Fp-Xc3" secondAttribute="bottom" constant="30" id="lUV-jq-9bZ"/>
-                                    <constraint firstAttribute="height" constant="360" id="q8G-dB-syM"/>
-                                    <constraint firstItem="7G0-Fp-Xc3" firstAttribute="height" secondItem="bij-Xb-EKH" secondAttribute="height" constant="-40" id="xAL-yn-Zen"/>
-                                </constraints>
-                            </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5E0-lB-SkS" userLabel="AvatarView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
@@ -349,7 +331,7 @@
                                             <constraint firstItem="mAh-HX-dsf" firstAttribute="top" secondItem="FeP-5g-b4S" secondAttribute="top" constant="7" id="wiY-Ri-ov9"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdV-jx-Mla">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdV-jx-Mla">
                                         <rect key="frame" x="187.66666666666666" y="652" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -381,12 +363,6 @@
                                     <constraint firstItem="73Y-N1-Yga" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5E0-lB-SkS" secondAttribute="leading" constant="20" id="yRj-S6-9PE"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LK6-u0-eLU" customClass="ButtonsContainerView" customModule="Ring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="612" width="375" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="r58-OO-QqE"/>
-                                </constraints>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F79-SX-Txp">
                                 <rect key="frame" x="20" y="20" width="30" height="50"/>
                                 <constraints>
@@ -414,13 +390,9 @@
                         <constraints>
                             <constraint firstItem="5E0-lB-SkS" firstAttribute="top" secondItem="ZVy-nB-bKJ" secondAttribute="top" id="1PH-hE-Wgj"/>
                             <constraint firstItem="ZK1-Be-lcD" firstAttribute="leading" relation="lessThanOrEqual" secondItem="lZI-X0-bkP" secondAttribute="trailing" constant="-25" id="5UD-4Q-iDL"/>
-                            <constraint firstItem="LK6-u0-eLU" firstAttribute="leading" secondItem="QpJ-Sx-9dG" secondAttribute="leading" id="6Ed-ct-5WE"/>
-                            <constraint firstItem="bij-Xb-EKH" firstAttribute="leading" secondItem="ZVy-nB-bKJ" secondAttribute="leading" id="77F-7w-YAb"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" id="DB0-aS-tKo"/>
-                            <constraint firstItem="LK6-u0-eLU" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="Eep-Jy-4aG"/>
                             <constraint firstItem="3RN-4M-qR4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZVy-nB-bKJ" secondAttribute="leading" id="ElV-U4-tpk"/>
                             <constraint firstItem="SdV-jx-Mla" firstAttribute="centerX" secondItem="lZI-X0-bkP" secondAttribute="centerX" id="FMZ-tv-l27"/>
-                            <constraint firstItem="LK6-u0-eLU" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="FbU-xz-BkQ"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="top" secondItem="3RN-4M-qR4" secondAttribute="top" id="G1C-hv-89U"/>
                             <constraint firstItem="5E0-lB-SkS" firstAttribute="centerX" secondItem="lZI-X0-bkP" secondAttribute="centerX" id="INh-Ix-uWw"/>
                             <constraint firstItem="ZK1-Be-lcD" firstAttribute="width" secondItem="ZVy-nB-bKJ" secondAttribute="width" id="INy-1p-atS"/>
@@ -428,29 +400,14 @@
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="top" secondItem="QpJ-Sx-9dG" secondAttribute="top" id="NrK-DR-BPG"/>
                             <constraint firstItem="ZK1-Be-lcD" firstAttribute="height" secondItem="QpJ-Sx-9dG" secondAttribute="height" constant="45" id="U8s-yX-fkD"/>
                             <constraint firstItem="lZI-X0-bkP" firstAttribute="top" secondItem="ZK1-Be-lcD" secondAttribute="top" constant="45" id="Uew-ao-q8k"/>
-                            <constraint firstItem="lZI-X0-bkP" firstAttribute="trailing" secondItem="bij-Xb-EKH" secondAttribute="trailing" id="W2C-XA-mUT"/>
-                            <constraint firstItem="SdV-jx-Mla" firstAttribute="bottom" secondItem="LK6-u0-eLU" secondAttribute="top" constant="40" id="YIc-Oj-lc8"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerY" secondItem="QpJ-Sx-9dG" secondAttribute="centerY" id="bAN-gX-nPE"/>
                             <constraint firstItem="F79-SX-Txp" firstAttribute="top" secondItem="QpJ-Sx-9dG" secondAttribute="top" constant="20" id="bXp-US-6IM"/>
                             <constraint firstItem="F79-SX-Txp" firstAttribute="leading" secondItem="QpJ-Sx-9dG" secondAttribute="leading" constant="20" id="cze-sA-qCJ"/>
-                            <constraint firstAttribute="bottom" secondItem="LK6-u0-eLU" secondAttribute="bottom" id="dXj-zI-fQb"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="centerX" secondItem="lZI-X0-bkP" secondAttribute="centerX" id="ff0-Nw-f2Y"/>
-                            <constraint firstItem="bij-Xb-EKH" firstAttribute="top" secondItem="ZK1-Be-lcD" secondAttribute="bottom" constant="-50" id="pgr-29-Lef"/>
                             <constraint firstItem="5E0-lB-SkS" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="rOQ-In-yON"/>
                             <constraint firstItem="ZVy-nB-bKJ" firstAttribute="width" secondItem="QpJ-Sx-9dG" secondAttribute="width" id="sCh-Gw-iu0"/>
                             <constraint firstItem="MdN-dF-4x3" firstAttribute="leading" secondItem="lZI-X0-bkP" secondAttribute="leading" constant="20" id="tsz-q2-iDb"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="FbU-xz-BkQ"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="constraints">
-                                <exclude reference="Eep-Jy-4aG"/>
-                                <include reference="FbU-xz-BkQ"/>
-                            </mask>
-                        </variation>
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -463,9 +420,6 @@
                         <outlet property="beforeIncomingVideo" destination="K0W-KI-Ul4" id="qrt-Kd-7S8"/>
                         <outlet property="blinkAudioRecordView" destination="mAh-HX-dsf" id="PDT-NT-1zQ"/>
                         <outlet property="blinkVideoRecordView" destination="rH0-Y4-Mjq" id="bht-JK-10P"/>
-                        <outlet property="buttonContainerHeightConstraint" destination="r58-OO-QqE" id="6Sg-fe-0ww"/>
-                        <outlet property="buttonsContainer" destination="LK6-u0-eLU" id="rb7-9y-4Eh"/>
-                        <outlet property="buttonsContainerBottomConstraint" destination="dXj-zI-fQb" id="n8H-WQ-JyD"/>
                         <outlet property="buttonsStackView" destination="MdN-dF-4x3" id="RTn-aF-RYp"/>
                         <outlet property="callInfoTimerLabel" destination="fac-lR-4on" id="fMl-JM-d9Y"/>
                         <outlet property="callNameLabel" destination="cgd-Wa-clf" id="oEa-7j-Eac"/>
@@ -477,10 +431,6 @@
                         <outlet property="capturedVideoTopConstraint" destination="Uew-ao-q8k" id="tzK-s5-FwX"/>
                         <outlet property="capturedVideoTrailingConstraint" destination="9x1-VE-ej7" id="r50-BL-h6L"/>
                         <outlet property="capturedVideoWidthConstraint" destination="INy-1p-atS" id="5DU-4k-XrI"/>
-                        <outlet property="conferenceCalls" destination="7G0-Fp-Xc3" id="KSO-wf-OJy"/>
-                        <outlet property="conferenceCallsScrolView" destination="bij-Xb-EKH" id="YxK-ru-kO4"/>
-                        <outlet property="conferenceCallsTop" destination="pgr-29-Lef" id="Wug-zj-y0Q"/>
-                        <outlet property="conferenceLayout" destination="BOE-du-fSU" id="tCL-dC-2dy"/>
                         <outlet property="durationLabel" destination="zMN-6z-uXT" id="Uuf-ph-lrC"/>
                         <outlet property="incomingVideo" destination="fDj-CM-JeT" id="7lp-bF-eQa"/>
                         <outlet property="infoBlurEffect" destination="zuX-Zf-IN1" id="hAl-Rg-hPM"/>
