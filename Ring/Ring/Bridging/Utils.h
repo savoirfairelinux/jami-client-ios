@@ -26,6 +26,12 @@
 #import <vector>
 struct AVFrame;
 
+typedef struct {
+    CVPixelBufferRef pixelBuffer;
+    int rotation;
+    bool ownsMemory;
+} PixelBufferInfo;
+
 @interface Utils : NSObject
 
 + (NSArray*)vectorToArray:(const std::vector<std::string>&)vector;
@@ -36,8 +42,7 @@ struct AVFrame;
 + (NSData*)dataFromVectorOfUInt8:(std::vector<uint8_t>)vectorOfUInt8;
 + (std::vector<uint8_t>)vectorOfUInt8FromData:(NSData*)data;
 + (std::vector<std::map<std::string, std::string>>)arrayOfDictionnarisToVectorOfMap:(NSArray*)dictionaries;
-+ (UIImage*)convertHardwareDecodedFrameToImage:(const AVFrame*)frame;
-+(CVPixelBufferRef)getCVPixelBufferFromAVFrame:(const AVFrame *)frame;
++(PixelBufferInfo)getCVPixelBufferFromAVFrame:(const AVFrame *)frame;
 + (AVFrame*)configureHardwareDecodedFrame:(AVFrame*)frame
                           fromImageBuffer: (CVImageBufferRef)image
                                     angle:(int) angle;
@@ -46,4 +51,5 @@ struct AVFrame;
                      angle:(int)angle;
 +(UIImageOrientation)uimageOrientationFromRotation:(double)rotation;
 +(CGImagePropertyOrientation)ciimageOrientationFromRotation:(double)rotation;
+
 @end
