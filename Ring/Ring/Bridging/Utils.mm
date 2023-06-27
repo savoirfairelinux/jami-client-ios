@@ -26,6 +26,7 @@ extern "C" {
     #include <libavutil/time.h>
 }
 
+
 @implementation Utils
 
 + (NSArray*)vectorToArray:(const std::vector<std::string>&)vector {
@@ -148,82 +149,74 @@ extern "C" {
     return orientation;
 }
 
-+ (UIImage*)convertHardwareDecodedFrameToImage:(const AVFrame*)frame {
-    CIImage *image;
-    if ((CVPixelBufferRef)frame->data[3]) {
-        image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
-    } else {
-        auto buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
-        if (buffer == NULL) {
-            return [[UIImage alloc] init];
-        }
-        image = [CIImage imageWithCVPixelBuffer: buffer];
-        CFRelease(buffer);
++(CVPixelBufferRef) CopyCVPixelBuffer420v:(CVPixelBufferRef) sourcePixelBuffer {
+    if (!sourcePixelBuffer) {
+        return NULL;
     }
-    if (!image) {
-        return [[UIImage alloc] init];
+
+    // Create a new pixel buffer with the same attributes as the source, but without the actual data
+    CVPixelBufferRef copiedPixelBuffer = NULL;
+
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSDictionary dictionary], kCVPixelBufferIOSurfacePropertiesKey,
+                             nil];
+    CVReturn status = CVPixelBufferCreate(
+                                          NULL, // Allocator, pass NULL to use the default allocator
+                                          CVPixelBufferGetWidth(sourcePixelBuffer), // Width
+                                          CVPixelBufferGetHeight(sourcePixelBuffer), // Height
+                                          CVPixelBufferGetPixelFormatType(sourcePixelBuffer), // Pixel format
+                                          (__bridge CFDictionaryRef)(options), // Attributes, pass NULL for default attributes
+                                          &copiedPixelBuffer
+                                          );
+
+    if (status != kCVReturnSuccess) {
+        NSLog(@"Error creating copied pixel buffer: %d", status);
+        return NULL;
     }
-    if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
-        const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
-        auto rotation = av_display_rotation_get(data);
-        auto uiImageOrientation = [Utils uimageOrientationFromRotation:rotation];
-        auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
-        image = [image imageByApplyingCGOrientation: ciImageOrientation];
-        UIImage * imageUI = [UIImage imageWithCIImage:image scale:1 orientation: uiImageOrientation];
-        return imageUI;
-    }
-    UIImage * imageUI = [UIImage imageWithCIImage:image];
-    return imageUI;
+
+    // Lock both source and copied pixel buffers for reading and writing
+    CVPixelBufferLockBaseAddress(sourcePixelBuffer, kCVPixelBufferLock_ReadOnly);
+    CVPixelBufferLockBaseAddress(copiedPixelBuffer, 0);
+
+    // Get base addresses and bytes per row
+    void *sourceYBaseAddress = CVPixelBufferGetBaseAddressOfPlane(sourcePixelBuffer, 0); // Y plane
+    void *sourceUVBaseAddress = CVPixelBufferGetBaseAddressOfPlane(sourcePixelBuffer, 1); // UV plane
+    size_t yBytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(sourcePixelBuffer, 0); // Y plane bytes per row
+    size_t uvBytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(sourcePixelBuffer, 1); // UV plane bytes per row
+
+    void *copiedYBaseAddress = CVPixelBufferGetBaseAddressOfPlane(copiedPixelBuffer, 0); // Y plane
+    void *copiedUVBaseAddress = CVPixelBufferGetBaseAddressOfPlane(copiedPixelBuffer, 1); // UV plane
+
+    // Copy Y data from source to copied buffer
+    memcpy(copiedYBaseAddress, sourceYBaseAddress, yBytesPerRow * CVPixelBufferGetHeight(sourcePixelBuffer));
+
+    // Copy UV data from source to copied buffer
+    memcpy(copiedUVBaseAddress, sourceUVBaseAddress, uvBytesPerRow * CVPixelBufferGetHeight(sourcePixelBuffer) / 2); // Dividing by 2 as UV plane has half the height
+
+    // Unlock both buffers
+    CVPixelBufferUnlockBaseAddress(sourcePixelBuffer, kCVPixelBufferLock_ReadOnly);
+    CVPixelBufferUnlockBaseAddress(copiedPixelBuffer, 0);
+
+    return copiedPixelBuffer;
 }
 
-+(CVPixelBufferRef)getCVPixelBufferFromAVFrame:(const AVFrame *)frame {
-    CIImage *image;
-    CIContext *context = nil;
-    CVPixelBufferRef finalBuffer = nil;
-    CGFloat height = frame->height;
-    CGFloat width = frame->width;
-    CVPixelBufferRef buffer = nil;
-    BOOL shouldReleaseBuffer = NO;
++(PixelBufferInfo)getCVPixelBufferFromAVFrame:(const AVFrame *)frame {
+    PixelBufferInfo info;
     if ((CVPixelBufferRef)frame->data[3]) {
-        buffer = (CVPixelBufferRef)frame->data[3];
+        CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)frame->data[3];
+
+        info.pixelBuffer = [Utils CopyCVPixelBuffer420v:pixelBuffer];
+        info.shouldRelease = true;
     } else {
-        buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
-        shouldReleaseBuffer = YES;
+        info.pixelBuffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
+        info.shouldRelease = true;
     }
-    if (buffer == NULL) {
-        return NULL;
-    }
-    image = [CIImage imageWithCVPixelBuffer: buffer];
-    if (!image) {
-        if (shouldReleaseBuffer) {
-            CFRelease(buffer);
-        }
-        return NULL;
-    }
+    info.rotation = 0;
     if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
-        if (shouldReleaseBuffer) {
-            CFRelease(buffer);
-        }
         const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
-        auto rotation = av_display_rotation_get(data);
-        auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
-        image = [image imageByApplyingCGOrientation: ciImageOrientation];
-        context = [CIContext context];
-        CGFloat newWidth = ciImageOrientation == kCGImagePropertyOrientationDown || ciImageOrientation == kCGImagePropertyOrientationUp ? width : height;
-        CGFloat newHeight = ciImageOrientation == kCGImagePropertyOrientationDown || ciImageOrientation == kCGImagePropertyOrientationUp ? height : width;
-        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSDictionary dictionary], kCVPixelBufferIOSurfacePropertiesKey,
-                                 nil];
-        CVPixelBufferCreate(kCFAllocatorDefault,
-                            newWidth,
-                            newHeight,
-                            kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange,
-                            (__bridge CFDictionaryRef)(options),
-                            &finalBuffer);
-        [context render:image toCVPixelBuffer: finalBuffer];
-        return  finalBuffer;
+        info.rotation = av_display_rotation_get(data);
     }
-    return buffer;
+    return info;
 }
 
 +(CVPixelBufferRef)converCVPixelBufferRefFromAVFrame:(const AVFrame *)frame {
@@ -235,7 +228,7 @@ extern "C" {
         return NULL;
     }
 
-    CVPixelBufferRef pixelBuffer = NULL;
+   CVPixelBufferRef pixelBuffer = NULL;
 
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
                              @(frame->linesize[0]), kCVPixelBufferBytesPerRowAlignmentKey,
