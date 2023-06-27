@@ -340,7 +340,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
-typealias RendererTuple = (rendererId: String, buffer: CMSampleBuffer?, running: Bool)
+typealias RendererTuple = (sinkId: String, buffer: CMSampleBuffer?, running: Bool)
 
 class VideoService: FrameExtractorDelegate {
 
@@ -348,11 +348,10 @@ class VideoService: FrameExtractorDelegate {
     private let camera = FrameExtractor()
 
     var cameraPosition = AVCaptureDevice.Position.front
-    //  let incomingVideoFrame = PublishSubject<RendererTuple?>()
-    let incomingVideoFrame = PublishSubject<RendererTuple?>()
     let capturedVideoFrame = PublishSubject<UIImage?>()
-    // let deviceVideoFrame = PublishSubject<CMSampleBuffer?>()
     let playerInfo = PublishSubject<Player>()
+    var renderStarted = BehaviorRelay(value: "")
+    var renderStopped = BehaviorRelay(value: "")
     var currentOrientation: AVCaptureVideoOrientation
 
     private let log = SwiftyBeaver.self
@@ -360,6 +359,7 @@ class VideoService: FrameExtractorDelegate {
     var angle: Int = 0
     var switchInputRequested: Bool = false
     var currentDeviceId = ""
+    var videoInputManager = VideoInputsManager()
 
     private let disposeBag = DisposeBag()
 
@@ -509,7 +509,7 @@ extension VideoService: VideoAdapterDelegate {
         }
     }
 
-    func decodingStarted(withRendererId rendererId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?, withaAccountId accountId: String) {
+    func decodingStarted(withsinkId sinkId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?, withaAccountId accountId: String) {
         if let codecId = codec, !codecId.isEmpty {
             // we do not support hardware acceleration with VP8 codec. In this case software
             // encoding will be used. Downgrate resolution if needed. After call finished
@@ -517,22 +517,42 @@ extension VideoService: VideoAdapterDelegate {
             let codec = VideoCodecs(rawValue: codecId) ?? VideoCodecs.unknown
             if !supportHardware(codec: codec) && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
                 self.videoAdapter.setDefaultDevice(camera.namePortrait)
-                self.videoAdapter.switchInput("camera://" + camera.namePortrait, accountId: accountId, forCall: rendererId)
+                self.videoAdapter.switchInput("camera://" + camera.namePortrait, accountId: accountId, forCall: sinkId)
             }
         }
-        self.log.debug("Decoding started...")
-        videoAdapter.registerSinkTarget(withSinkId: rendererId, withWidth: width, withHeight: height)
+        let hasListener = self.videoInputManager.hasListener(sinkId: sinkId)
+        videoAdapter.registerSinkTarget(withSinkId: sinkId, withWidth: width, withHeight: height, hasListeners: hasListener)
         self.currentDeviceId = self.videoAdapter.getDefaultDevice()
+        renderStarted.accept(sinkId)
+    }
+
+    func addListener(withsinkId sinkId: String) {
+        self.videoInputManager.addListener(sinkId: sinkId)
+        let hasListener = self.videoInputManager.hasListener(sinkId: sinkId)
+        self.videoAdapter.setHasListeners(hasListener, forSinkId: sinkId)
+    }
+
+    func hasListener(withsinkId sinkId: String) -> Bool {
+        return self.videoInputManager.hasListener(sinkId: sinkId)
+    }
+
+    func removeListener(withsinkId sinkId: String) {
+        self.videoInputManager.removeListener(sinkId: sinkId)
+        let hasListener = self.videoInputManager.hasListener(sinkId: sinkId)
+        self.videoAdapter.setHasListeners(hasListener, forSinkId: sinkId)
+    }
+
+    func decodingStopped(withsinkId sinkId: String) {
+        self.videoInputManager.stop(sinkId: sinkId)
+        videoAdapter.removeSinkTarget(withSinkId: sinkId)
+    }
+
+    func writeFrame(withBuffer buffer: CVPixelBuffer?, sinkId: String, rotation: Int) {
+        self.videoInputManager.writeFrame(withBuffer: buffer, sinkId: sinkId, rotation: rotation)
     }
 
     func supportHardware(codec: VideoCodecs) -> Bool {
         return codec == VideoCodecs.H264 || codec == VideoCodecs.H265
-    }
-
-    func decodingStopped(withRendererId rendererId: String) {
-        self.log.debug("Decoding stopped...")
-        self.incomingVideoFrame.onNext(RendererTuple(rendererId, nil, false))
-        videoAdapter.removeSinkTarget(withSinkId: rendererId)
     }
 
     func startCapture(withDevice device: String) {
@@ -566,40 +586,6 @@ extension VideoService: VideoAdapterDelegate {
     func stopCapture() {
         self.log.debug("Capture stopped...")
         self.camera.stopCapturing()
-    }
-
-    func writeFrame(withBuffer buffer: CVPixelBuffer?, forCallId: String) {
-        guard let sampleBuffer = self.createSampleBufferFrom(pixelBuffer: buffer) else {
-            return }
-        self.setSampleBufferAttachments(sampleBuffer)
-        self.incomingVideoFrame.onNext(RendererTuple(forCallId, sampleBuffer, true))
-    }
-    func createSampleBufferFrom(pixelBuffer: CVPixelBuffer?) -> CMSampleBuffer? {
-        var sampleBuffer: CMSampleBuffer?
-
-        var timimgInfo = CMSampleTimingInfo()
-        var formatDescription: CMFormatDescription?
-        guard let pixelBuffer = pixelBuffer else { return nil }
-        CMVideoFormatDescriptionCreateForImageBuffer(allocator: kCFAllocatorDefault, imageBuffer: pixelBuffer, formatDescriptionOut: &formatDescription)
-
-        CMSampleBufferCreateReadyWithImageBuffer(
-            allocator: kCFAllocatorDefault,
-            imageBuffer: pixelBuffer,
-            formatDescription: formatDescription!,
-            sampleTiming: &timimgInfo,
-            sampleBufferOut: &sampleBuffer
-        )
-
-        return sampleBuffer
-    }
-
-    func setSampleBufferAttachments(_ sampleBuffer: CMSampleBuffer) {
-        guard let attachments: CFArray = CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, createIfNecessary: true) else { return }
-        let dictionary = unsafeBitCast(CFArrayGetValueAtIndex(attachments, 0),
-                                       to: CFMutableDictionary.self)
-        let key = Unmanaged.passUnretained(kCMSampleAttachmentKey_DisplayImmediately).toOpaque()
-        let value = Unmanaged.passUnretained(kCFBooleanTrue).toOpaque()
-        CFDictionarySetValue(dictionary, key, value)
     }
 
     func getImageOrienation() -> UIImage.Orientation {
