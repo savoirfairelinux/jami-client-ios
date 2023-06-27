@@ -112,7 +112,7 @@ public class CallModel {
     var peerHolding: Bool = false
     var speakerActive: Bool = false
     var isAudioOnly: Bool = false
-    var layout: CallLayout = .grid
+    var layout: CallLayout = .one
     lazy var paricipantHash = {
         self.participantUri.filterOutHost()
     }

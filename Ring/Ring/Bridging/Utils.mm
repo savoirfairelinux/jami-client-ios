@@ -151,14 +151,27 @@ extern "C" {
 + (UIImage*)convertHardwareDecodedFrameToImage:(const AVFrame*)frame {
     CIImage *image;
     if ((CVPixelBufferRef)frame->data[3]) {
-        image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
+        CIImage *ciImage = [CIImage imageWithCVPixelBuffer:(CVPixelBufferRef)frame->data[3]];
+        CIContext *context = [CIContext context];
+        CGImageRef cgImage = [context createCGImage:ciImage fromRect:ciImage.extent];
+        UIImage *imageUI = [UIImage imageWithCGImage:cgImage];
+        CGImageRelease(cgImage);
+        return imageUI;
+       // image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
     } else {
         auto buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
         if (buffer == NULL) {
             return [[UIImage alloc] init];
         }
-        image = [CIImage imageWithCVPixelBuffer: buffer];
+        //image = [CIImage imageWithCVPixelBuffer: buffer];
+       // CFRelease(buffer);
+        CIImage *ciImage = [CIImage imageWithCVPixelBuffer: buffer];
+        CIContext *context = [CIContext context];
+        CGImageRef cgImage = [context createCGImage:ciImage fromRect:ciImage.extent];
+        UIImage *imageUI = [UIImage imageWithCGImage:cgImage];
+        CGImageRelease(cgImage);
         CFRelease(buffer);
+        return imageUI;
     }
     if (!image) {
         return [[UIImage alloc] init];
