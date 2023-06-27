@@ -20,21 +20,26 @@
 
 import RxSwift
 import SwiftyBeaver
+import RxRelay
 
 class ContactPickerViewModel: ViewModel {
     private let log = SwiftyBeaver.self
 
     private var contactsOnly: Bool { self.currentCallId.isEmpty }
     var contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?
+    var loading = BehaviorRelay(value: true)
 
     var currentCallId = ""
     lazy var conferensableItems: Observable<[ContactPickerSection]> = {
         if contactsOnly {
-            return self.contactsService.contacts.asObservable().map { [weak self] contacts in
-                var sections = [ContactPickerSection]()
-                self?.addContactsToContactPickerSections(contacts: contacts, sections: &sections)
-                return sections
-            }
+            return self.contactsService.contacts
+                .asObservable()
+                .map { [weak self] contacts in
+                    var sections = [ContactPickerSection]()
+                    self?.addContactsToContactPickerSections(contacts: contacts, sections: &sections)
+                    self?.loading.accept(false)
+                    return sections
+                }
         }
         return Observable
             .combineLatest(self.contactsService.contacts.asObservable(),
@@ -44,15 +49,16 @@ class ContactPickerViewModel: ViewModel {
                 guard let currentCall = self.callService.call(callID: self.currentCallId) else { return sections }
                 let callURIs = self.addCallsToContactPickerSections(calls: calls, sections: &sections)
                 self.addContactsToContactPickerSections(contacts: contacts, sections: &sections, urlToExclude: callURIs)
+                self.loading.accept(false)
                 return sections
             }
     }()
 
     lazy var searchResultItems: Observable<[ContactPickerSection]> = {
-        return search
-            .startWith("")
-            .distinctUntilChanged()
-            .withLatestFrom(self.conferensableItems) { (search, targets) in (search, targets) }
+        return Observable
+            .combineLatest(search
+                            .startWith("")
+                            .distinctUntilChanged(), self.conferensableItems) { (search, targets) in (search, targets) }
             .map({ (arg) -> [ContactPickerSection] in
                 var (search, targets) = arg
                 if search.isEmpty {
@@ -128,28 +134,13 @@ extension ContactPickerViewModel {
             if urlToExclude.contains(contactUri) {
                 return
             }
-            let profile = self.contactsService.getProfile(uri: contactUri, accountId: currentAccount.id)
-            var contactToAdd = Contact(contactUri: contactUri,
+            let contactToAdd = Contact(contactUri: contactUri,
                                        accountId: currentAccount.id,
                                        registeredName: contact.userName ?? "",
                                        presService: self.presenceService,
-                                       contactProfile: profile,
-                                       hash: contact.hash)
-            if contact.userName == nil || contact.userName! == "" {
-                self.nameService.usernameLookupStatus.single()
-                    .filter({[weak contact] lookupNameResponse in
-                        return lookupNameResponse.address != nil &&
-                            lookupNameResponse.address == contact?.hash
-                    })
-                    .take(1)
-                    .subscribe(onNext: {[weak contactToAdd] lookupNameResponse in
-                        if let name = lookupNameResponse.name, !name.isEmpty {
-                            contactToAdd?.registeredNameFound(name: name)
-                        }
-                    })
-                    .disposed(by: self.disposeBag)
-                self.nameService.lookupAddress(withAccount: currentAccount.id, nameserver: "", address: contact.hash)
-            }
+                                       nameService: self.nameService,
+                                       hash: contact.hash,
+                                       profileService: self.profileService)
             let contactItem = ConferencableItem(conferenceID: "", contacts: [contactToAdd])
             contactItems.append(contactItem)
         }
@@ -179,13 +170,12 @@ extension ContactPickerViewModel {
             if call.state != .current && call.state != .hold && call.state != .unhold {
                 return
             }
-            let profile = self.contactsService.getProfile(uri: uriString, accountId: call.accountId)
-            var contact = Contact(contactUri: uriString,
-                                  accountId: call.accountId,
-                                  registeredName: call.registeredName,
+            let contact = Contact(contactUri: uriString,
+                                  accountId: call.accountId, registeredName: call.registeredName,
                                   presService: self.presenceService,
-                                  contactProfile: profile,
-                                  hash: hashString)
+                                  nameService: self.nameService,
+                                  hash: hashString,
+                                  profileService: self.profileService)
             if call.participantsCallId.count == 1 {
                 let confItem = ConferencableItem(conferenceID: call.callId, contacts: [contact])
                 callItems.append(confItem)
