@@ -208,6 +208,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
 
     func conferenceInfoUpdated(conference conferenceID: String, info: [[String: String]]) {
         let participants = self.arrayToConferenceParticipants(participants: info, onlyURIAndActive: false)
+        print("^^^^^^^^^^ \(info)")
         self.conferenceInfos[conferenceID] = participants
         currentConferenceEvent.accept(ConferenceUpdates(conferenceID, ConferenceState.infoUpdated.rawValue, [""]))
     }
@@ -293,6 +294,11 @@ class CallsService: CallsAdapterDelegate, VCardSender {
 
     func stopCall(call: CallModel) {
         self.callsAdapter.hangUpCall(call.callId, accountId: call.accountId)
+    }
+
+    func stopPendingCall(callId: String) {
+        guard let call = self.call(callID: callId) else { return }
+        self.stopCall(call: call)
     }
     func answerCall(call: CallModel) -> Bool {
         NSLog("call service answerCall %@", call.callId)
@@ -426,28 +432,29 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         })
     }
 
-    func requestMediaChange(call callId: String, mediaLabel: String) {
+    func requestMediaChange(call callId: String, mediaLabel: String, source: String) {
         guard let call = self.calls.value[callId] else {
             return
         }
         var mediaList = call.mediaList
+        if mediaList.isEmpty {
+            guard let attributes = self.callsAdapter.currentMediaList(withCallId: callId, accountId: call.accountId) else { return }
+            call.update(withDictionary: [:], withMedia: attributes)
+            mediaList = call.mediaList
+        }
         let medias = mediaList.count
-        var found = false
         for index in 0..<medias where mediaList[index][MediaAttributeKey.label.rawValue] == mediaLabel {
             mediaList[index][MediaAttributeKey.enabled.rawValue] = "true"
             let muted = mediaList[index][MediaAttributeKey.muted.rawValue]
+            // Use "muteSource" to represent a muted camera source.
+            // This variable name indicates that the camera is intentionally not real,
+            // while keeping the number of inputs consistent.
+            var device = source
+            if !source.hasPrefix("camera://") {
+                device = "camera://" + source
+            }
+            mediaList[index][MediaAttributeKey.source.rawValue] = muted == "true" ? device : "muteSource"
             mediaList[index][MediaAttributeKey.muted.rawValue] = muted == "true" ? "false" : "true"
-            found = true
-            break
-        }
-        if !found && mediaLabel == "video_0" {
-            var media = [String: String]()
-            media[MediaAttributeKey.mediaType.rawValue] = MediaAttributeValue.video.rawValue
-            media[MediaAttributeKey.enabled.rawValue] = "true"
-            media[MediaAttributeKey.muted.rawValue] = "false"
-            media[MediaAttributeKey.source.rawValue] = ""
-            media[MediaAttributeKey.label.rawValue] = mediaLabel
-            mediaList.append(media)
         }
         self.callsAdapter.requestMediaChange(callId, accountId: call.accountId, withMedia: mediaList)
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: call.accountId) {
@@ -801,11 +808,6 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         }
     }
 
-    func muteParticipant(confId: String, participantId: String, active: Bool) {
-        guard let conference = call(callID: confId) else { return }
-        self.callsAdapter.muteConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId, active: active)
-    }
-
     func setModeratorParticipant(confId: String, participantId: String, active: Bool) {
         guard let conference = call(callID: confId) else { return }
         self.callsAdapter.setConferenceModerator(participantId, forConference: confId, accountId: conference.accountId, active: active)
@@ -816,9 +818,13 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         self.callsAdapter.hangupConferenceParticipant(participantId, forConference: confId, accountId: conference.accountId, deviceId: device)
     }
 
-    func setRaiseHand(confId: String, participantId: String, state: Bool) {
+    func muteStream(confId: String, participantId: String, device: String, accountId: String, streamId: String, state: Bool) {
+        self.callsAdapter.muteStream(participantId, forConference: confId, accountId: accountId, deviceId: device, streamId: streamId, state: state)
+    }
+
+    func setRaiseHand(confId: String, participantId: String, state: Bool, accountId: String, deviceId: String) {
         guard let conference = call(callID: confId) else { return }
-        self.callsAdapter.setHandRaised(participantId, forConference: confId, accountId: conference.accountId, state: state)
+        self.callsAdapter.raiseHand(participantId, forConference: confId, accountId: accountId, deviceId: deviceId, state: state)
     }
 
 }
