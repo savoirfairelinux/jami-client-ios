@@ -92,8 +92,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.popToSmartList()
                 case .openConversation(let jamiId):
                     self.openConversation(jamiId: jamiId)
-                case .openConversationForConversationId(let conversationId, let accountId):
-                    self.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: false)
+                case .openConversationForConversationId(let conversationId, let accountId, let shouldOpenSmarList):
+                    self.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: shouldOpenSmarList)
+                case .openConversationFromCall(let conversation):
+                    self.openConversationFromCall(conversationModel: conversation)
                 default:
                     break
                 }
@@ -284,6 +286,20 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         if viewControllers.contains(smartListViewController) {
             navigationViewController.popToViewController(smartListViewController, animated: false)
         }
+    }
+
+    func openConversationFromCall(conversationModel: ConversationModel) {
+        guard let navigationController = self.rootViewController as? UINavigationController else { return }
+        let controllers = navigationController.children
+        for controller in controllers
+        where controller.isKind(of: (ConversationViewController).self) {
+            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation.value == conversationModel {
+                navigationController.popToViewController(conversationController, animated: true)
+                conversationController.becomeFirstResponder()
+                return
+            }
+        }
+        self.openConversation(conversationId: conversationModel.id, accountId: conversationModel.accountId, shouldOpenSmarList: true)
     }
 
     func openConversation(conversationId: String, accountId: String, shouldOpenSmarList: Bool) {
