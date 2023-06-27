@@ -26,6 +26,7 @@ extern "C" {
     #include <libavutil/time.h>
 }
 
+
 @implementation Utils
 
 + (NSArray*)vectorToArray:(const std::vector<std::string>&)vector {
@@ -148,82 +149,23 @@ extern "C" {
     return orientation;
 }
 
-+ (UIImage*)convertHardwareDecodedFrameToImage:(const AVFrame*)frame {
-    CIImage *image;
-    if ((CVPixelBufferRef)frame->data[3]) {
-        image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
-    } else {
-        auto buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
-        if (buffer == NULL) {
-            return [[UIImage alloc] init];
-        }
-        image = [CIImage imageWithCVPixelBuffer: buffer];
-        CFRelease(buffer);
-    }
-    if (!image) {
-        return [[UIImage alloc] init];
-    }
-    if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
-        const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
-        auto rotation = av_display_rotation_get(data);
-        auto uiImageOrientation = [Utils uimageOrientationFromRotation:rotation];
-        auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
-        image = [image imageByApplyingCGOrientation: ciImageOrientation];
-        UIImage * imageUI = [UIImage imageWithCIImage:image scale:1 orientation: uiImageOrientation];
-        return imageUI;
-    }
-    UIImage * imageUI = [UIImage imageWithCIImage:image];
-    return imageUI;
-}
++(PixelBufferInfo)getCVPixelBufferFromAVFrame:(const AVFrame *)frame {
+    PixelBufferInfo info;
+    info.rotation = 0;
 
-+(CVPixelBufferRef)getCVPixelBufferFromAVFrame:(const AVFrame *)frame {
-    CIImage *image;
-    CIContext *context = nil;
-    CVPixelBufferRef finalBuffer = nil;
-    CGFloat height = frame->height;
-    CGFloat width = frame->width;
-    CVPixelBufferRef buffer = nil;
-    BOOL shouldReleaseBuffer = NO;
     if ((CVPixelBufferRef)frame->data[3]) {
-        buffer = (CVPixelBufferRef)frame->data[3];
+        info.pixelBuffer = (CVPixelBufferRef)frame->data[3];
+        info.ownsMemory = false;
     } else {
-        buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
-        shouldReleaseBuffer = YES;
+        info.pixelBuffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
+        info.ownsMemory = true;
     }
-    if (buffer == NULL) {
-        return NULL;
-    }
-    image = [CIImage imageWithCVPixelBuffer: buffer];
-    if (!image) {
-        if (shouldReleaseBuffer) {
-            CFRelease(buffer);
-        }
-        return NULL;
-    }
+
     if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
-        if (shouldReleaseBuffer) {
-            CFRelease(buffer);
-        }
         const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
-        auto rotation = av_display_rotation_get(data);
-        auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
-        image = [image imageByApplyingCGOrientation: ciImageOrientation];
-        context = [CIContext context];
-        CGFloat newWidth = ciImageOrientation == kCGImagePropertyOrientationDown || ciImageOrientation == kCGImagePropertyOrientationUp ? width : height;
-        CGFloat newHeight = ciImageOrientation == kCGImagePropertyOrientationDown || ciImageOrientation == kCGImagePropertyOrientationUp ? height : width;
-        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSDictionary dictionary], kCVPixelBufferIOSurfacePropertiesKey,
-                                 nil];
-        CVPixelBufferCreate(kCFAllocatorDefault,
-                            newWidth,
-                            newHeight,
-                            kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange,
-                            (__bridge CFDictionaryRef)(options),
-                            &finalBuffer);
-        [context render:image toCVPixelBuffer: finalBuffer];
-        return  finalBuffer;
+        info.rotation = av_display_rotation_get(data);
     }
-    return buffer;
+    return info;
 }
 
 +(CVPixelBufferRef)converCVPixelBufferRefFromAVFrame:(const AVFrame *)frame {
@@ -235,7 +177,7 @@ extern "C" {
         return NULL;
     }
 
-    CVPixelBufferRef pixelBuffer = NULL;
+   CVPixelBufferRef pixelBuffer = NULL;
 
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
                              @(frame->linesize[0]), kCVPixelBufferBytesPerRowAlignmentKey,
@@ -389,12 +331,12 @@ extern "C" {
     if (CVPixelBufferIsPlanar(image)) {
         int planes = static_cast<int>(CVPixelBufferGetPlaneCount(image));
         for (int i = 0; i < planes; i++) {
-            frame->data[i]     = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(image, i);
+            frame->data[i] = (uint8_t *)CVPixelBufferGetBaseAddressOfPlane(image, i);
             frame->linesize[i] = static_cast<int>(CVPixelBufferGetBytesPerRowOfPlane(image, i));
         }
     } else {
         frame->data[0] = (uint8_t *)CVPixelBufferGetBaseAddress(image);
-        frame->linesize[0] =static_cast<int>(CVPixelBufferGetBytesPerRow(image));
+        frame->linesize[0] = static_cast<int>(CVPixelBufferGetBytesPerRow(image));
     }
     CVPixelBufferUnlockBaseAddress(image, 0);
     AVBufferRef* localFrameDataBuffer = angle == 0 ? nullptr : av_buffer_alloc(sizeof(int32_t) * 9);

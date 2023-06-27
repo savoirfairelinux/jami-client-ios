@@ -21,5 +21,4 @@
 
 protocol ContactPickerDelegate: AnyObject {
     func presentContactPicker(contactPickerVC: ContactPickerViewController)
-    func contactPickerDismissed()
 }

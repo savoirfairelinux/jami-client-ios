@@ -25,7 +25,6 @@ enum RoleInCall {
 class ConferenceMenuItemsManager {
     func getMenuItemsForLocalCall(conference: CallModel?, active: Bool?, isHandRised: Bool) -> [MenuItem] {
         var menu = [MenuItem]()
-        menu.append(.name)
         guard let conference = conference else {
             return menu
         }
@@ -54,10 +53,36 @@ class ConferenceMenuItemsManager {
         return menu
     }
 
+    func getMenuItemsForLocalCall(layout: CallLayout, active: Bool?, isHandRised: Bool) -> [MenuItem] {
+        var menu = [MenuItem]()
+        guard let active = active else {
+            return menu
+        }
+        if isHandRised {
+            menu.append(.lowerHand)
+        }
+        switch layout {
+        case .grid:
+            menu.append(.maximize)
+        case .oneWithSmal:
+            menu.append(.maximize)
+            if active {
+                menu.append(.minimize)
+            }
+        case .one:
+            if active {
+                menu.append(.minimize)
+            } else {
+                menu.append(.maximize)
+            }
+        }
+        menu.append(.muteAudio)
+        return menu
+    }
+
     // swiftlint:disable cyclomatic_complexity
     func getMenuItemsFor(call: CallModel?, isHost: Bool, conference: CallModel?, active: Bool?, role: RoleInCall, isHandRised: Bool) -> [MenuItem] {
         var menu = [MenuItem]()
-        menu.append(.name)
         guard let conference = conference,
               let call = call else {
             return menu
@@ -73,6 +98,81 @@ class ConferenceMenuItemsManager {
             menu.append(.lowerHand)
         }
         switch conference.layout {
+        case .grid:
+            menu.append(.maximize)
+            switch role {
+            case .host:
+                menu.append(.muteAudio)
+                menu.append(.setModerator)
+                menu.append(.hangup)
+            case .moderator:
+                menu.append(.muteAudio)
+                if !isHost {
+                    menu.append(.hangup)
+                }
+            case .regular:
+                break
+            }
+        case .oneWithSmal:
+            if active {
+                menu.append(.maximize)
+                menu.append(.minimize)
+            } else {
+                menu.append(.maximize)
+            }
+            switch role {
+            case .host:
+                menu.append(.muteAudio)
+                menu.append(.setModerator)
+                menu.append(.hangup)
+            case .moderator:
+                menu.append(.muteAudio)
+                if !isHost {
+                    menu.append(.hangup)
+                }
+            case .regular:
+                break
+            }
+        case .one:
+            if active {
+                menu.append(.minimize)
+            } else {
+                menu.append(.maximize)
+            }
+            switch role {
+            case .host:
+                menu.append(.muteAudio)
+                menu.append(.setModerator)
+                menu.append(.hangup)
+            case .moderator:
+                menu.append(.muteAudio)
+                if !isHost {
+                    menu.append(.hangup)
+                }
+            case .regular:
+                break
+            }
+        }
+        return menu
+    }
+
+    // swiftlint:disable cyclomatic_complexity
+    func getMenuItemsFor(call: CallModel?, isHost: Bool, layout: CallLayout, active: Bool?, role: RoleInCall, isHandRised: Bool) -> [MenuItem] {
+        var menu = [MenuItem]()
+        guard let call = call else {
+            return menu
+        }
+        if call.state != CallState.current {
+            menu.append(.hangup)
+            return menu
+        }
+        guard let active = active else {
+            return menu
+        }
+        if isHandRised {
+            menu.append(.lowerHand)
+        }
+        switch layout {
         case .grid:
             menu.append(.maximize)
             switch role {
