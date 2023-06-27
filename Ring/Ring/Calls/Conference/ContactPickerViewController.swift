@@ -38,6 +38,7 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var topViewContainer: UIView!
     @IBOutlet weak var topSpace: NSLayoutConstraint!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
     var viewModel: ContactPickerViewModel!
     private let disposeBag = DisposeBag()
@@ -53,6 +54,11 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         self.setUPBlurBackground()
         self.updateViewForCurrentMode()
         self.setupTableViews()
+        self.viewModel
+            .loading
+            .observe(on: MainScheduler.instance)
+            .bind(to: loadingIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -92,9 +98,6 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.view.layoutIfNeeded()
         }, completion: { [weak self] _ in
-            if let parent = self?.parent as? ContactPickerDelegate {
-                parent.contactPickerDismissed()
-            }
             self?.didMove(toParent: nil)
             self?.view.removeFromSuperview()
             self?.removeFromParent()
@@ -103,12 +106,12 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
 
     private func setupDataSources() {
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ContactPickerSection.Item)
-            -> UITableViewCell = {
+            -> UITableViewCell = { [weak self]
                 (   _: TableViewSectionedDataSource<ContactPickerSection>,
                     tableView: UITableView,
                     indexPath: IndexPath,
                     contactItem: ContactPickerSection.Item) in
-
+                guard let self = self else { return UITableViewCell() }
                 let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
                 cell.selectionContainer?.isHidden = self.type == .forCall
                 cell.selectionIndicator?.backgroundColor = UIColor.clear
@@ -261,14 +264,14 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
         cell.nameLabel.text = contact.firstLine.value
         cell.lastMessagePreviewLabel?.isHidden = true
 
-        var imageData: Data?
-        if let contactProfile = contact.profile, let photo = contactProfile.photo,
-           let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-            imageData = data
-        }
-        cell.avatarView
-            .addSubview(
-                AvatarView(profileImageData: imageData,
-                           username: contact.firstLine.value, size: 40))
+        contact.imageData
+            .asObservable()
+            .subscribe(onNext: { [weak cell]  imageData in
+                cell?.avatarView
+                    .addSubview(
+                        AvatarView(profileImageData: imageData,
+                                   username: contact.firstLine.value, size: 40))
+            })
+            .disposed(by: self.disposeBag)
     }
 }

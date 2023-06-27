@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2021 Savoir-faire Linux Inc.
+ *  Copyright (C) 2023 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -18,9 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-@objc protocol DecodingAdapterDelegate {
-    func decodingStarted(withSinkId sinkId: String,
-                         withWidth width: Int,
-                         withHeight height: Int)
-    func decodingStopped(withSinkId sinkId: String)
+import Foundation
+
+@objc protocol VideoInputDelegate {
+    func writeFrame(withBuffer buffer: CVPixelBuffer?, sinkId: String, rotation: Int)
 }
