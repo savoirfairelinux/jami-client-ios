@@ -68,5 +68,4 @@ extension VideoManager: DecodingAdapterDelegate {
     func decodingStopped(withRendererId rendererId: String) {
         self.videoService.decodingStopped(withRendererId: rendererId)
     }
-
 }
