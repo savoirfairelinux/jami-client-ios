@@ -21,7 +21,6 @@
 @objc protocol VideoAdapterDelegate {
     func startCapture(withDevice device: String)
     func stopCapture()
-    func writeFrame(withBuffer buffer: CVPixelBuffer?, forCallId: String)
     func setDecodingAccelerated(withState state: Bool)
     func fileOpened(for playerId: String, fileInfo: [String: String])
 }

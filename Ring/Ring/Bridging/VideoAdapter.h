@@ -23,6 +23,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @protocol VideoAdapterDelegate;
+@protocol VideoInputDelegate;
 @protocol DecodingAdapterDelegate;
 
 @interface VideoAdapter : NSObject
@@ -35,7 +36,8 @@
 - (NSString*)getDefaultDevice;
 - (void)registerSinkTargetWithSinkId:sinkId
                            withWidth:(NSInteger)w
-                          withHeight:(NSInteger)h;
+                          withHeight:(NSInteger)h
+                        withDelegate:(id <VideoInputDelegate>)delegate;
 - (void)removeSinkTargetWithSinkId:(NSString*)sinkId;
 - (void)writeOutgoingFrameWithBuffer:(CVImageBufferRef)image
                                angle:(int)angle
