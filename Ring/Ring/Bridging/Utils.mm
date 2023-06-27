@@ -26,6 +26,7 @@ extern "C" {
     #include <libavutil/time.h>
 }
 
+
 @implementation Utils
 
 + (NSArray*)vectorToArray:(const std::vector<std::string>&)vector {
@@ -148,82 +149,19 @@ extern "C" {
     return orientation;
 }
 
-+ (UIImage*)convertHardwareDecodedFrameToImage:(const AVFrame*)frame {
-    CIImage *image;
++(PixelBufferInfo)getCVPixelBufferFromAVFrame:(const AVFrame *)frame {
+    PixelBufferInfo info;
     if ((CVPixelBufferRef)frame->data[3]) {
-        image = [CIImage imageWithCVPixelBuffer: (CVPixelBufferRef)frame->data[3]];
+        info.pixelBuffer = (CVPixelBufferRef)frame->data[3];
     } else {
-        auto buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
-        if (buffer == NULL) {
-            return [[UIImage alloc] init];
-        }
-        image = [CIImage imageWithCVPixelBuffer: buffer];
-        CFRelease(buffer);
+        info.pixelBuffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
     }
-    if (!image) {
-        return [[UIImage alloc] init];
-    }
+    info.rotation = 0;
     if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
         const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
-        auto rotation = av_display_rotation_get(data);
-        auto uiImageOrientation = [Utils uimageOrientationFromRotation:rotation];
-        auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
-        image = [image imageByApplyingCGOrientation: ciImageOrientation];
-        UIImage * imageUI = [UIImage imageWithCIImage:image scale:1 orientation: uiImageOrientation];
-        return imageUI;
+        info.rotation = av_display_rotation_get(data);
     }
-    UIImage * imageUI = [UIImage imageWithCIImage:image];
-    return imageUI;
-}
-
-+(CVPixelBufferRef)getCVPixelBufferFromAVFrame:(const AVFrame *)frame {
-    CIImage *image;
-    CIContext *context = nil;
-    CVPixelBufferRef finalBuffer = nil;
-    CGFloat height = frame->height;
-    CGFloat width = frame->width;
-    CVPixelBufferRef buffer = nil;
-    BOOL shouldReleaseBuffer = NO;
-    if ((CVPixelBufferRef)frame->data[3]) {
-        buffer = (CVPixelBufferRef)frame->data[3];
-    } else {
-        buffer = [Utils converCVPixelBufferRefFromAVFrame: frame];
-        shouldReleaseBuffer = YES;
-    }
-    if (buffer == NULL) {
-        return NULL;
-    }
-    image = [CIImage imageWithCVPixelBuffer: buffer];
-    if (!image) {
-        if (shouldReleaseBuffer) {
-            CFRelease(buffer);
-        }
-        return NULL;
-    }
-    if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
-        if (shouldReleaseBuffer) {
-            CFRelease(buffer);
-        }
-        const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
-        auto rotation = av_display_rotation_get(data);
-        auto ciImageOrientation = [Utils ciimageOrientationFromRotation:rotation];
-        image = [image imageByApplyingCGOrientation: ciImageOrientation];
-        context = [CIContext context];
-        CGFloat newWidth = ciImageOrientation == kCGImagePropertyOrientationDown || ciImageOrientation == kCGImagePropertyOrientationUp ? width : height;
-        CGFloat newHeight = ciImageOrientation == kCGImagePropertyOrientationDown || ciImageOrientation == kCGImagePropertyOrientationUp ? height : width;
-        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSDictionary dictionary], kCVPixelBufferIOSurfacePropertiesKey,
-                                 nil];
-        CVPixelBufferCreate(kCFAllocatorDefault,
-                            newWidth,
-                            newHeight,
-                            kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange,
-                            (__bridge CFDictionaryRef)(options),
-                            &finalBuffer);
-        [context render:image toCVPixelBuffer: finalBuffer];
-        return  finalBuffer;
-    }
-    return buffer;
+    return info;
 }
 
 +(CVPixelBufferRef)converCVPixelBufferRefFromAVFrame:(const AVFrame *)frame {
