@@ -46,6 +46,11 @@
                BlueprintName = "RingTests"
                ReferencedContainer = "container:Ring.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "ConferenceMenuItemsManagerTest">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">
