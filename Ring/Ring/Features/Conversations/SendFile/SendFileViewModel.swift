@@ -194,9 +194,9 @@ class SendFileViewModel: Stateable, ViewModel {
 
     let injectionBag: InjectionBag
 
-    lazy var incomingFrame: Observable<RendererTuple?> = {
-        return videoService.incomingVideoFrame.asObservable()
-    }()
+    //    lazy var incomingFrame: Observable<RendererTuple?> = {
+    //        return videoService.incomingVideoFrame.asObservable()
+    //    }()
 
     func sendFile() {
         guard let fileUrl = URL(string: fileName) else {
