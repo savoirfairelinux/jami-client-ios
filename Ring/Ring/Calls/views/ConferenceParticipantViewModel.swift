@@ -28,7 +28,7 @@ class ConferenceParticipantViewModel {
     private let callsSercive: CallsService
     private let profileService: ProfilesService
     private let accountService: AccountsService
-    private let isLocal: Bool
+    private var isLocal: Bool = false
     private let disposeBag = DisposeBag()
 
     private lazy var contactImageData: Observable<String?> = {
@@ -68,6 +68,13 @@ class ConferenceParticipantViewModel {
         return BehaviorRelay<String>(value: initialName)
     }()
 
+    lazy var avatarObservable: Observable<(String?, String?)> = {
+        return Observable<(String?, String?)>
+            .combineLatest(self.contactImageData, self.displayName.asObservable()) { image, name in
+                return (image, name)
+            }
+    }()
+
     lazy var removeView: Observable<Bool>? = {
         guard let callId = callId else { return nil }
         return self.callsSercive.currentCall(callId: callId)
@@ -79,21 +86,19 @@ class ConferenceParticipantViewModel {
             })
     }()
 
-    lazy var avatarObservable: Observable<(String?, String?)> = {
-        return Observable<(String?, String?)>
-            .combineLatest(self.contactImageData, self.displayName.asObservable()) { image, name in
-                return (image, name)
-            }
-    }()
-
-    init(with callId: String?, injectionBag: InjectionBag, isLocal: Bool, participantId: String, participantUserName: String) {
-        self.callId = callId
+    init(injectionBag: InjectionBag, info: ConferenceParticipant) {
+        self.callId = info.sinkId
         self.callsSercive = injectionBag.callService
         self.profileService = injectionBag.profileService
         self.accountService = injectionBag.accountService
-        self.isLocal = isLocal
-        self.participantId = participantId
-        self.participantUserName = participantUserName
+        self.participantId = info.uri ?? ""
+        self.participantUserName = info.displayName
+        self.isLocal = isLocalCall()
+    }
+
+    func isLocalCall() -> Bool {
+        guard let account = self.accountService.currentAccount else { return false }
+        return account.jamiId == participantId.filterOutHost()
     }
 
     func getName() -> String {
