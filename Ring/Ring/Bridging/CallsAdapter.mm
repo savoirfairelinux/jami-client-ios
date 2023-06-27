@@ -287,15 +287,34 @@ static id <CallsAdapterDelegate> _delegate;
     setModerator(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), isActive);
 }
 
-- (void)muteConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId active:(BOOL)isActive {
-    muteParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), isActive);
-}
-
 - (void)hangupConferenceParticipant:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId deviceId:(NSString*)deviceId {
     hangupParticipant(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), std::string([deviceId UTF8String]));
 }
--(void)setHandRaised:(NSString*)participantId forConference:(NSString*)conferenceId accountId:(NSString*)accountId state:(BOOL)state {
-    raiseParticipantHand(std::string([accountId UTF8String]), std::string([conferenceId UTF8String]), std::string([participantId UTF8String]), state);
+
+-(void)muteStream:(NSString*)participantId
+    forConference:(NSString*)conferenceId
+        accountId:(NSString*)accountId
+         deviceId:(NSString*)deviceId
+         streamId:(NSString*)streamId
+            state:(BOOL)state {
+    muteStream(std::string([accountId UTF8String]),
+               std::string([conferenceId UTF8String]),
+               std::string([participantId UTF8String]),
+               std::string([deviceId UTF8String]),
+               std::string([streamId UTF8String]),
+               state);
+}
+
+-(void)raiseHand:(NSString*)participantId
+   forConference:(NSString*)conferenceId
+       accountId:(NSString*)accountId
+        deviceId:(NSString*)deviceId
+           state:(BOOL)state {
+    raiseHand(std::string([accountId UTF8String]),
+              std::string([conferenceId UTF8String]),
+              std::string([participantId UTF8String]),
+              std::string([deviceId UTF8String]),
+              state);
 }
 
 #pragma mark AccountAdapterDelegate
