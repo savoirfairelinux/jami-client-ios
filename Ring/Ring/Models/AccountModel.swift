@@ -24,13 +24,6 @@
 import Foundation
 
 /**
- Errors that can be thrown when trying to build an AccountModel
- */
-enum AccountModelError: Error {
-    case unexpectedError
-}
-
-/**
  A class representing an account.
  */
 class AccountModel: Equatable {

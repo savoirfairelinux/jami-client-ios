@@ -23,49 +23,6 @@ import Foundation
 import RxSwift
 import SQLite
 
-enum GeneratedMessage: Int {
-    case outgoingCall
-    case incomingCall
-    case missedOutgoingCall
-    case missedIncomingCall
-    case contactAdded
-    case invitationReceived
-    case invitationAccepted
-    case unknown
-
-    func toString() -> String {
-        return String(self.rawValue)
-    }
-    init(from: String) {
-        if let intValue = Int(from) {
-            self = GeneratedMessage(rawValue: intValue) ?? .unknown
-        } else {
-            self = .unknown
-        }
-    }
-    func toMessage(with duration: Int) -> String {
-        let time = Date.convertSecondsToTimeString(seconds: Double(duration))
-        switch self {
-        case .contactAdded:
-            return L10n.GeneratedMessage.contactAdded
-        case .invitationReceived:
-            return L10n.GeneratedMessage.invitationReceived
-        case .invitationAccepted:
-            return L10n.GeneratedMessage.invitationAccepted
-        case .missedOutgoingCall:
-            return L10n.GeneratedMessage.missedOutgoingCall
-        case .missedIncomingCall:
-            return L10n.GeneratedMessage.missedIncomingCall
-        case .outgoingCall:
-            return L10n.GeneratedMessage.outgoingCall + " - " + time
-        case .incomingCall:
-            return L10n.Global.incomingCall + " - " + time
-        default:
-            return ""
-        }
-    }
-}
-
 enum InteractionStatus: String {
     case invalid = "INVALID"
     case unknown = "UNKNOWN"
@@ -128,39 +85,6 @@ enum InteractionStatus: String {
         case .success: self = .transferSuccess
         case .error: self = .transferError
         case .unknown: self = .unknown
-        }
-    }
-}
-
-enum DBBridgingError: Error {
-    case saveMessageFailed
-    case getConversationFailed
-    case updateIntercationFailed
-    case deleteConversationFailed
-    case getProfileFailed
-    case deleteMessageFailed
-}
-
-enum InteractionType: String {
-    case invalid    = "INVALID"
-    case text       = "TEXT"
-    case call       = "CALL"
-    case contact    = "CONTACT"
-    case iTransfer  = "INCOMING_DATA_TRANSFER"
-    case oTransfer  = "OUTGOING_DATA_TRANSFER"
-
-    func toMessageType() -> MessageType {
-        switch self {
-        case .invalid, .text:
-            return .text
-        case .call:
-            return .call
-        case .contact:
-            return .contact
-        case .iTransfer:
-            return .fileTransfer
-        case .oTransfer:
-            return .fileTransfer
         }
     }
 }

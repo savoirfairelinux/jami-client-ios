@@ -363,7 +363,6 @@
 		26BB43842670144800019CF6 /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB43832670144500019CF6 /* libz.1.2.8.tbd */; };
 		26BB43852670150E00019CF6 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A951D1C2F6100E99CD9 /* libbz2.tbd */; };
 		26BB4389267017D400019CF6 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26BB4388267017D400019CF6 /* Utils.mm */; };
-		26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438A2670191E00019CF6 /* AdapterDelegate.swift */; };
 		26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438C267019FC00019CF6 /* AdapterService.swift */; };
 		26BC15EE29302B00003FC8D1 /* ContactMessageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */; };
 		26C4845A2A79645E005BC767 /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05128D0D2ED007D51D6 /* libfmt.a */; };
@@ -475,15 +474,125 @@
 		BB1E8C7529159DFC005AE1D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */; };
 		BB1E8C7729159E1F005AE1D6 /* SwarmInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7629159E1F005AE1D6 /* SwarmInfoViewController.swift */; };
 		BB1E8C7A29159E3E005AE1D6 /* SwarmInfoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7929159E3E005AE1D6 /* SwarmInfoVM.swift */; };
+		BB32720C2A437FA500ADD174 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB32720B2A437FA500ADD174 /* ShareViewController.swift */; };
+		BB32720F2A437FA500ADD174 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB32720D2A437FA500ADD174 /* MainInterface.storyboard */; };
+		BB3272132A437FA500ADD174 /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BB3272092A437FA300ADD174 /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BB3272232A438E8200ADD174 /* AdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3272222A438E8000ADD174 /* AdapterDelegate.swift */; };
+		BB3272262A438EA500ADD174 /* ShareAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB3272252A438EA400ADD174 /* ShareAdapter.mm */; };
+		BB32722B2A43902B00ADD174 /* ShareUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB3272292A43902B00ADD174 /* ShareUtils.mm */; };
+		BB32722D2A43938300ADD174 /* ShareAdapterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB32722C2A43938300ADD174 /* ShareAdapterService.swift */; };
+		BB3272302A43A5E500ADD174 /* libjami.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EDA53D28FE22FD00BEB99A /* libjami.a */; };
 		BB3AB06C29316FA6006906BA /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3AB06929316FA0006906BA /* ViewDidLoadModifier.swift */; };
 		BB3B0A412971AEE30083CAD8 /* LocationSharingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B0A402971AEE30083CAD8 /* LocationSharingView.swift */; };
 		BB3E5815291C138600E85BEA /* SwarmInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB3E5814291C138600E85BEA /* SwarmInfoViewController.storyboard */; };
+		BB4B80E32A4CA91400F9DE78 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */; };
+		BB4B80E42A4CA9D700F9DE78 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */; };
+		BB4B80E52A4CAA4D00F9DE78 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB41D1C341A00E99CD9 /* libavfilter.a */; };
+		BB4B80E62A4CAA4D00F9DE78 /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */; };
+		BB4B80E72A4CAA4D00F9DE78 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB21D1C341A00E99CD9 /* libavcodec.a */; };
+		BB4B80E82A4CAA4D00F9DE78 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB31D1C341A00E99CD9 /* libavdevice.a */; };
+		BB4B80E92A4CAA4D00F9DE78 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB51D1C341A00E99CD9 /* libavformat.a */; };
+		BB4B80EA2A4CAA4D00F9DE78 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB61D1C341A00E99CD9 /* libavutil.a */; };
+		BB4B80EB2A4CAA4D00F9DE78 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCE206C0AEE0009C44C /* libcrypto.a */; };
+		BB4B80EC2A4CAA4D00F9DE78 /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05128D0D2ED007D51D6 /* libfmt.a */; };
+		BB4B80ED2A4CAA4D00F9DE78 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05228D0D2EF007D51D6 /* libgit2.a */; };
+		BB4B80EE2A4CAA4D00F9DE78 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB81D1C341A00E99CD9 /* libgmp.a */; };
+		BB4B80EF2A4CAA4D00F9DE78 /* libgnutls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB91D1C341A00E99CD9 /* libgnutls.a */; };
+		BB4B80F02A4CAA4D00F9DE78 /* libhogweed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABB1D1C341A00E99CD9 /* libhogweed.a */; };
+		BB4B80F12A4CAA4D00F9DE78 /* libhttp_parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E4A51CB23282BCC00357AFC /* libhttp_parser.a */; };
+		BB4B80F22A4CAA4D00F9DE78 /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABD1D1C341A00E99CD9 /* libixml.a */; };
+		BB4B80F32A4CAA4D00F9DE78 /* libjami.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EDA53D28FE22FD00BEB99A /* libjami.a */; };
+		BB4B80F42A4CAA4D00F9DE78 /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABE1D1C341A00E99CD9 /* libjsoncpp.a */; };
+		BB4B80F52A4CAA4D00F9DE78 /* libnettle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC01D1C341A00E99CD9 /* libnettle.a */; };
+		BB4B80F62A4CAA4D00F9DE78 /* libopendht.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC21D1C341A00E99CD9 /* libopendht.a */; };
+		BB4B80F72A4CAA4D00F9DE78 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC31D1C341A00E99CD9 /* libopus.a */; };
+		BB4B80F82A4CAA4D00F9DE78 /* libpj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC61D1C341A00E99CD9 /* libpj.a */; };
+		BB4B80F92A4CAA4D00F9DE78 /* libpjlib-util.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC71D1C341A00E99CD9 /* libpjlib-util.a */; };
+		BB4B80FA2A4CAA4D00F9DE78 /* libpjmedia-audiodev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC81D1C341A00E99CD9 /* libpjmedia-audiodev.a */; };
+		BB4B80FB2A4CAA4D00F9DE78 /* libpjmedia-codec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AC91D1C341A00E99CD9 /* libpjmedia-codec.a */; };
+		BB4B80FC2A4CAA4D00F9DE78 /* libpjmedia-videodev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACA1D1C341A00E99CD9 /* libpjmedia-videodev.a */; };
+		BB4B80FD2A4CAA4D00F9DE78 /* libpjmedia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACB1D1C341A00E99CD9 /* libpjmedia.a */; };
+		BB4B80FE2A4CAA4D00F9DE78 /* libpjnath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACC1D1C341A00E99CD9 /* libpjnath.a */; };
+		BB4B80FF2A4CAA4D00F9DE78 /* libpjsip-simple.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACD1D1C341A00E99CD9 /* libpjsip-simple.a */; };
+		BB4B81002A4CAA4D00F9DE78 /* libpjsip-ua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACE1D1C341A00E99CD9 /* libpjsip-ua.a */; };
+		BB4B81012A4CAA4D00F9DE78 /* libpjsip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ACF1D1C341A00E99CD9 /* libpjsip.a */; };
+		BB4B81022A4CAA4D00F9DE78 /* libpjsua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD01D1C341A00E99CD9 /* libpjsua.a */; };
+		BB4B81032A4CAA4D00F9DE78 /* libpjsua2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD11D1C341A00E99CD9 /* libpjsua2.a */; };
+		BB4B81042A4CAA4D00F9DE78 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05028D0D2EA007D51D6 /* libsecp256k1.a */; };
+		BB4B81052A4CAA4D00F9DE78 /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD71D1C341A00E99CD9 /* libspeex.a */; };
+		BB4B81062A4CAA4D00F9DE78 /* libspeexdsp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD81D1C341A00E99CD9 /* libspeexdsp.a */; };
+		BB4B81072A4CAA4D00F9DE78 /* libsrtp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AD91D1C341A00E99CD9 /* libsrtp.a */; };
+		BB4B81082A4CAA4D00F9DE78 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCA206BE23B0009C44C /* libssl.a */; };
+		BB4B81092A4CAA4D00F9DE78 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADA1D1C341A00E99CD9 /* libswresample.a */; };
+		BB4B810A2A4CAA4D00F9DE78 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADB1D1C341A00E99CD9 /* libswscale.a */; };
+		BB4B810B2A4CAA4D00F9DE78 /* libtls.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 628F4DCC206BF4730009C44C /* libtls.a */; };
+		BB4B810C2A4CAA4D00F9DE78 /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADD1D1C341A00E99CD9 /* libupnp.a */; };
+		BB4B810D2A4CAA4D00F9DE78 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE11D1C341A00E99CD9 /* libvpx.a */; };
+		BB4B810E2A4CAA4D00F9DE78 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE21D1C341A00E99CD9 /* libx264.a */; };
+		BB4B810F2A4CAA4D00F9DE78 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
+		BB4B81102A4CAA4D00F9DE78 /* libyuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA04F28D0D2E6007D51D6 /* libyuv.a */; };
+		BB4B81112A4CAAD200F9DE78 /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05128D0D2ED007D51D6 /* libfmt.a */; };
+		BB4B81172A4CB46B00F9DE78 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */; };
+		BB4B81182A4CB47800F9DE78 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */; };
+		BB4B81192A4CB47800F9DE78 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */; };
+		BB4B811A2A4CB47900F9DE78 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */; };
+		BB4B811B2A4CB47900F9DE78 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */; };
+		BB4B811C2A4CB47900F9DE78 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */; };
 		BB4C6E2629229131001C901A /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C6E2529229131001C901A /* ColorExtension.swift */; };
+		BB690B982A83BB9E007F7950 /* ShareDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB690B972A83BB9E007F7950 /* ShareDBManager.swift */; };
+		BB690B992A83BC9B007F7950 /* InteractionDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B81FC398C5003898C2 /* InteractionDataHelper.swift */; };
 		BB8BBCA329F04DA1007228BA /* LocationSharingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8BBCA229F04DA1007228BA /* LocationSharingServiceTests.swift */; };
 		BB90263528F0918700B85859 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB90263428F0918700B85859 /* PaddingTextField.swift */; };
 		BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB91FAA9292EA26900BB41C1 /* EventData.swift */; };
+		BBA963702A4CB54000A73270 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */; };
+		BBA963712A4CB55200A73270 /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */; };
+		BBA963722A4CB56E00A73270 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A961D1C2F6100E99CD9 /* libz.tbd */; };
+		BBA963732A4CB57D00A73270 /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB437C267013F100019CF6 /* libz.1.1.3.tbd */; };
+		BBA963742A4CB57D00A73270 /* libz.1.2.11.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A88C7A26700C0500888EED /* libz.1.2.11.tbd */; };
+		BBA963752A4CB57D00A73270 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB437F2670140200019CF6 /* libz.1.2.5.tbd */; };
+		BBA963762A4CB57D00A73270 /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26BB43832670144500019CF6 /* libz.1.2.8.tbd */; };
+		BBA963772A4CB5A400A73270 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A951D1C2F6100E99CD9 /* libbz2.tbd */; };
+		BBA963782A4CB5BC00A73270 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ECEE9A2220D1935000E1CF4 /* VideoToolbox.framework */; };
+		BBA963792A4CB5E000A73270 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399A931D1C2F5800E99CD9 /* libiconv.tbd */; };
+		BBA9637B2A4CD8E500A73270 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C436C2862561700B4BE73 /* Constants.swift */; };
+		BBB73C5D2A7161CD0013B314 /* SharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB73C5C2A7161CC0013B314 /* SharedModel.swift */; };
+		BBB73C5E2A7162320013B314 /* SharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB73C5C2A7161CC0013B314 /* SharedModel.swift */; };
+		BBB73C6A2A716C5A0013B314 /* Stateable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2041791F1E547F00C08435 /* Stateable.swift */; };
+		BBB73C702A716FDE0013B314 /* ShareInjectionBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB73C6F2A716FDE0013B314 /* ShareInjectionBag.swift */; };
+		BBB73C732A7176580013B314 /* ShareSwarmInfoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB73C722A7176560013B314 /* ShareSwarmInfoProtocol.swift */; };
+		BBB73C792A7181A90013B314 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB73C782A7181A90013B314 /* UIImageExtension.swift */; };
+		BBB73C842A719FC10013B314 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB73C822A719FC10013B314 /* ConversationTableViewCell.swift */; };
+		BBB73C852A719FC10013B314 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBB73C832A719FC10013B314 /* ConversationTableViewCell.xib */; };
+		BBB73C8B2A71B8DA0013B314 /* UserSearchResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 64DBCD2124DB3CF600CB5CA2 /* UserSearchResponse.m */; };
+		BBB73C8F2A71BA000013B314 /* NameRegistrationAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C44631E943E1E000F92B1 /* NameRegistrationAdapterDelegate.swift */; };
+		BBB73C912A7298DF0013B314 /* ShareNameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB73C882A71B52E0013B314 /* ShareNameService.swift */; };
+		BBB73C932A729AB60013B314 /* LookupNameResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9DE1EDDC9D300CDAF8B /* LookupNameResponse.m */; };
+		BBB73C952A729AB60013B314 /* NameRegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56308BA61EA00E5700660275 /* NameRegistrationResponse.m */; };
+		BBB73C962A72A2370013B314 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04399A021D1C2D9D00E99CD9 /* Images.xcassets */; };
 		BBB76E412966062C00A42DF5 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB76E402966062C00A42DF5 /* MapView.swift */; };
+		BBC435602A5F060600EC26B0 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC4355F2A5F060600EC26B0 /* ShareViewModel.swift */; };
+		BBC435642A5F07CF00EC26B0 /* UIColor+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABA7451F0FE9C000739605 /* UIColor+Ring.swift */; };
+		BBC435652A5F083C00EC26B0 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07E11F0D924700D36361 /* Strings.swift */; };
+		BBC435682A5F0A7A00EC26B0 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627F11F020348FBF006560B5 /* AvatarView.swift */; };
+		BBC435692A5F0BF100EC26B0 /* Durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C445A1E8EA44E000F92B1 /* Durations.swift */; };
+		BBC435702A5F140400EC26B0 /* VCardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */; };
+		BBC435772A5F1E8A00EC26B0 /* ShareContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC435762A5F1E8800EC26B0 /* ShareContactPickerSection.swift */; };
+		BBC435782A5F21DB00EC26B0 /* String+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6C1F758E6F00D3FEF4 /* String+Helpers.swift */; };
+		BBC4357F2A5F362A00EC26B0 /* ServiceEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9B63E1E1D4E8C00F82F0C /* ServiceEvent.swift */; };
+		BBC435882A5F39E100EC26B0 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABE07D01F0D8FE800D36361 /* Images.swift */; };
+		BBC4358C2A5F3AFC00EC26B0 /* DataTransferAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B60AFA2048A437001BEACF /* DataTransferAdapterDelegate.swift */; };
+		BBC4358E2A5F3B2C00EC26B0 /* ProfileDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1AE1FC38CBC003898C2 /* ProfileDataHelper.swift */; };
+		BBC4358F2A5F3B3000EC26B0 /* ConversationDataHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1B61FC398B3003898C2 /* ConversationDataHepler.swift */; };
+		BBC435912A5F3B3900EC26B0 /* DBContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0FF1A91FC3843E003898C2 /* DBContainer.swift */; };
+		BBC435942A5F3BA400EC26B0 /* AvatarsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E55B6E1F793ADE00D3FEF4 /* AvatarsColors.swift */; };
+		BBC435962A5F3E3300EC26B0 /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBC9BB1ED7161200CDAF8B /* Date+Helpers.swift */; };
 		BBD3D751297B4CA00098DB02 /* SwarmInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */; };
+		BBDDE7012A6EFC87008733B7 /* AccountConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18B91F29180700B2C785 /* AccountConfigModel.swift */; };
+		BBDDE7022A6EFC8D008733B7 /* ConfigKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18BC1F29180700B2C785 /* ConfigKeyModel.swift */; };
+		BBDDE7032A6EFC9C008733B7 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18BF1F29180700B2C785 /* DeviceModel.swift */; };
+		BBDDE7042A6EFCB8008733B7 /* AccountCredentialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18BA1F29180700B2C785 /* AccountCredentialsModel.swift */; };
+		BBDDE7062A6EFE45008733B7 /* JamiShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC4359C2A5F47F800EC26B0 /* JamiShareModel.swift */; };
+		BBDDE7072A6EFE63008733B7 /* Data+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE64229C8F58800D66D5E /* Data+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -508,6 +617,13 @@
 			remoteGlobalIDString = 26A88C03266FFFC800888EED;
 			remoteInfo = jamiNotificationExtension;
 		};
+		BB3272112A437FA500ADD174 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BB3272082A437FA300ADD174;
+			remoteInfo = ShareExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -517,6 +633,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				BB3272132A437FA500ADD174 /* ShareExtension.appex in Embed App Extensions */,
 				26A88C0B266FFFC800888EED /* jamiNotificationExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -934,7 +1051,6 @@
 		26BB43832670144500019CF6 /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
 		26BB4387267017D400019CF6 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		26BB4388267017D400019CF6 /* Utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
-		26BB438A2670191E00019CF6 /* AdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterDelegate.swift; sourceTree = "<group>"; };
 		26BB438C267019FC00019CF6 /* AdapterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterService.swift; sourceTree = "<group>"; };
 		26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageVM.swift; sourceTree = "<group>"; };
 		26C4845B2A796D69005BC767 /* libdhtnet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdhtnet.a; path = ../fat/lib/libdhtnet.a; sourceTree = "<group>"; };
@@ -1105,14 +1221,80 @@
 		BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BB1E8C7629159E1F005AE1D6 /* SwarmInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoViewController.swift; sourceTree = "<group>"; };
 		BB1E8C7929159E3E005AE1D6 /* SwarmInfoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoVM.swift; sourceTree = "<group>"; };
+		BB3272092A437FA300ADD174 /* ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB32720B2A437FA500ADD174 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		BB32720E2A437FA500ADD174 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		BB3272102A437FA500ADD174 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB32721B2A438B5D00ADD174 /* ShareAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareAdapter.h; sourceTree = "<group>"; };
+		BB3272222A438E8000ADD174 /* AdapterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterDelegate.swift; sourceTree = "<group>"; };
+		BB3272242A438EA000ADD174 /* ShareExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShareExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		BB3272252A438EA400ADD174 /* ShareAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareAdapter.mm; sourceTree = "<group>"; };
+		BB3272292A43902B00ADD174 /* ShareUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareUtils.mm; sourceTree = "<group>"; };
+		BB32722A2A43902B00ADD174 /* ShareUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareUtils.h; sourceTree = "<group>"; };
+		BB32722C2A43938300ADD174 /* ShareAdapterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareAdapterService.swift; sourceTree = "<group>"; };
+		BB32722F2A43968300ADD174 /* SharePrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharePrefixHeader.pch; sourceTree = "<group>"; };
+		BB32725D2A43A6D400ADD174 /* libdevcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdevcore.a; path = ../fat/lib/libdevcore.a; sourceTree = "<group>"; };
+		BB32725E2A43A6D600ADD174 /* libgmp.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libgmp.la; path = ../fat/lib/libgmp.la; sourceTree = "<group>"; };
+		BB32725F2A43A6D700ADD174 /* libclient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libclient.a; path = ../fat/lib/libclient.a; sourceTree = "<group>"; };
+		BB3272602A43A6D900ADD174 /* libpjnath-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjnath-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjnath-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB3272612A43A6DB00ADD174 /* libsound.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsound.a; path = ../fat/lib/libsound.a; sourceTree = "<group>"; };
+		BB3272622A43A6DD00ADD174 /* libupnp.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libupnp.la; path = ../fat/lib/libupnp.la; sourceTree = "<group>"; };
+		BB3272632A43A6DF00ADD174 /* libpjlib-util-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjlib-util-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjlib-util-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB3272642A43A6E100ADD174 /* libpjsua-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsua-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjsua-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB3272652A43A6E300ADD174 /* libconfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libconfig.a; path = ../fat/lib/libconfig.a; sourceTree = "<group>"; };
+		BB3272662A43A6E500ADD174 /* libaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudio.a; path = ../fat/lib/libaudio.a; sourceTree = "<group>"; };
+		BB3272672A43A6E700ADD174 /* libpjmedia-codec-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-codec-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjmedia-codec-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB3272682A43A6E900ADD174 /* libconnectivity.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libconnectivity.a; path = ../fat/lib/libconnectivity.a; sourceTree = "<group>"; };
+		BB3272692A43A6EB00ADD174 /* libupnpprotocol.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libupnpprotocol.a; path = ../fat/lib/libupnpprotocol.a; sourceTree = "<group>"; };
+		BB32726A2A43A6ED00ADD174 /* libpjmedia-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjmedia-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB32726B2A43A6EF00ADD174 /* libiosvideo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiosvideo.a; path = ../fat/lib/libiosvideo.a; sourceTree = "<group>"; };
+		BB32726C2A43A6F100ADD174 /* libpjsip-simple-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-simple-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjsip-simple-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB32726D2A43A6F200ADD174 /* libsecurity.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsecurity.a; path = ../fat/lib/libsecurity.a; sourceTree = "<group>"; };
+		BB32726E2A43A6F500ADD174 /* libupnpcontrol.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libupnpcontrol.a; path = ../fat/lib/libupnpcontrol.a; sourceTree = "<group>"; };
+		BB32726F2A43A6F700ADD174 /* libpj-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpj-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpj-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB3272702A43A6F900ADD174 /* libim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libim.a; path = ../fat/lib/libim.a; sourceTree = "<group>"; };
+		BB3272712A43A6FB00ADD174 /* libcoreaudiolayer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcoreaudiolayer.a; path = ../fat/lib/libcoreaudiolayer.a; sourceTree = "<group>"; };
+		BB3272722A43A6FD00ADD174 /* libaudioprocessing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libaudioprocessing.a; path = ../fat/lib/libaudioprocessing.a; sourceTree = "<group>"; };
+		BB3272732A43A6FF00ADD174 /* libpjsip-ua-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-ua-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjsip-ua-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB3272742A43A70100ADD174 /* libsecp256k1.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libsecp256k1.la; path = ../fat/lib/libsecp256k1.la; sourceTree = "<group>"; };
+		BB3272752A43A70300ADD174 /* libmedia.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmedia.a; path = ../fat/lib/libmedia.a; sourceTree = "<group>"; };
+		BB3272762A43A70500ADD174 /* libspeexdsp.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libspeexdsp.la; path = ../fat/lib/libspeexdsp.la; sourceTree = "<group>"; };
+		BB3272772A43A70700ADD174 /* libpjsua2-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsua2-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjsua2-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB3272782A43A70A00ADD174 /* libjamiacc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjamiacc.a; path = ../fat/lib/libjamiacc.a; sourceTree = "<group>"; };
+		BB3272792A43A70C00ADD174 /* libyuv-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libyuv-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libyuv-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB32727A2A43A70E00ADD174 /* libixml.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libixml.la; path = ../fat/lib/libixml.la; sourceTree = "<group>"; };
+		BB32727B2A43A71000ADD174 /* libdevcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdevcrypto.a; path = ../fat/lib/libdevcrypto.a; sourceTree = "<group>"; };
+		BB32727C2A43A71200ADD174 /* libgnutls.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libgnutls.la; path = ../fat/lib/libgnutls.la; sourceTree = "<group>"; };
+		BB32727D2A43A71400ADD174 /* libpjmedia-audiodev-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-audiodev-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjmedia-audiodev-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB32727E2A43A71600ADD174 /* libsrtp-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsrtp-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libsrtp-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB32727F2A43A71800ADD174 /* libvideo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvideo.a; path = ../fat/lib/libvideo.a; sourceTree = "<group>"; };
+		BB3272802A43A71A00ADD174 /* libsiplink.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsiplink.a; path = ../fat/lib/libsiplink.a; sourceTree = "<group>"; };
+		BB3272812A43A71C00ADD174 /* libpjmedia-videodev-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-videodev-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjmedia-videodev-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB3272822A43A71E00ADD174 /* libspeex.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = libspeex.la; path = ../fat/lib/libspeex.la; sourceTree = "<group>"; };
+		BB3272832A43A72000ADD174 /* libpjsip-aarch64-apple-darwin_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-aarch64-apple-darwin_ios.a"; path = "../fat/lib/libpjsip-aarch64-apple-darwin_ios.a"; sourceTree = "<group>"; };
+		BB3272842A44A2FE00ADD174 /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libbz2.1.0.tbd; sourceTree = DEVELOPER_DIR; };
+		BB3272852A44A30000ADD174 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libc++.1.tbd"; sourceTree = DEVELOPER_DIR; };
 		BB3AB06929316FA0006906BA /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
 		BB3B0A402971AEE30083CAD8 /* LocationSharingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingView.swift; sourceTree = "<group>"; };
 		BB3E5814291C138600E85BEA /* SwarmInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SwarmInfoViewController.storyboard; sourceTree = "<group>"; };
+		BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.1.tbd; sourceTree = DEVELOPER_DIR; };
 		BB4C6E2529229131001C901A /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		BB690B972A83BB9E007F7950 /* ShareDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDBManager.swift; sourceTree = "<group>"; };
 		BB8BBCA229F04DA1007228BA /* LocationSharingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingServiceTests.swift; sourceTree = "<group>"; };
 		BB90263428F0918700B85859 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		BB91FAA9292EA26900BB41C1 /* EventData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
+		BBA9637C2A4CD9AE00A73270 /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareExtension.entitlements; sourceTree = "<group>"; };
+		BBB73C5C2A7161CC0013B314 /* SharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModel.swift; sourceTree = "<group>"; };
+		BBB73C6F2A716FDE0013B314 /* ShareInjectionBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareInjectionBag.swift; sourceTree = "<group>"; };
+		BBB73C722A7176560013B314 /* ShareSwarmInfoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSwarmInfoProtocol.swift; sourceTree = "<group>"; };
+		BBB73C782A7181A90013B314 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		BBB73C822A719FC10013B314 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		BBB73C832A719FC10013B314 /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
+		BBB73C882A71B52E0013B314 /* ShareNameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNameService.swift; sourceTree = "<group>"; };
 		BBB76E402966062C00A42DF5 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		BBC4355F2A5F060600EC26B0 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
+		BBC435762A5F1E8800EC26B0 /* ShareContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareContactPickerSection.swift; sourceTree = "<group>"; };
+		BBC4359C2A5F47F800EC26B0 /* JamiShareModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JamiShareModel.swift; sourceTree = "<group>"; };
 		BBD3D750297B4CA00098DB02 /* SwarmInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwarmInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1249,6 +1431,7 @@
 				269DA04428D0D2E6007D51D6 /* libspeex.a in Frameworks */,
 				26A88C722670099D00888EED /* AudioToolbox.framework in Frameworks */,
 				269DA03928D0D2E5007D51D6 /* libpjmedia-audiodev.a in Frameworks */,
+				BB4B81112A4CAAD200F9DE78 /* libfmt.a in Frameworks */,
 				269DA03628D0D2E5007D51D6 /* libopus.a in Frameworks */,
 				269DA03528D0D2E5007D51D6 /* libopendht.a in Frameworks */,
 				269DA02D28D0D2E5007D51D6 /* libcrypto.a in Frameworks */,
@@ -1266,6 +1449,76 @@
 				269DA04D28D0D2E6007D51D6 /* libx264.a in Frameworks */,
 				269DA03128D0D2E5007D51D6 /* libhttp_parser.a in Frameworks */,
 				269DA02828D0D2E5007D51D6 /* libavcodec.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB3272062A437FA300ADD174 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB4B80EF2A4CAA4D00F9DE78 /* libgnutls.a in Frameworks */,
+				BB4B80EA2A4CAA4D00F9DE78 /* libavutil.a in Frameworks */,
+				BB4B811A2A4CB47900F9DE78 /* libz.1.tbd in Frameworks */,
+				BB4B810E2A4CAA4D00F9DE78 /* libx264.a in Frameworks */,
+				BB4B810A2A4CAA4D00F9DE78 /* libswscale.a in Frameworks */,
+				BB4B80FC2A4CAA4D00F9DE78 /* libpjmedia-videodev.a in Frameworks */,
+				BBA963712A4CB55200A73270 /* libz.1.tbd in Frameworks */,
+				BB4B811C2A4CB47900F9DE78 /* libz.1.tbd in Frameworks */,
+				BB4B80F42A4CAA4D00F9DE78 /* libjsoncpp.a in Frameworks */,
+				BBA963792A4CB5E000A73270 /* libiconv.tbd in Frameworks */,
+				BBA963752A4CB57D00A73270 /* libz.1.2.5.tbd in Frameworks */,
+				BBA963742A4CB57D00A73270 /* libz.1.2.11.tbd in Frameworks */,
+				BB4B81072A4CAA4D00F9DE78 /* libsrtp.a in Frameworks */,
+				BBA963762A4CB57D00A73270 /* libz.1.2.8.tbd in Frameworks */,
+				BB4B80F32A4CAA4D00F9DE78 /* libjami.a in Frameworks */,
+				BBA963782A4CB5BC00A73270 /* VideoToolbox.framework in Frameworks */,
+				BB4B81042A4CAA4D00F9DE78 /* libsecp256k1.a in Frameworks */,
+				BB4B80F12A4CAA4D00F9DE78 /* libhttp_parser.a in Frameworks */,
+				BB4B80E82A4CAA4D00F9DE78 /* libavdevice.a in Frameworks */,
+				BB4B81192A4CB47800F9DE78 /* libz.1.tbd in Frameworks */,
+				BB4B80E52A4CAA4D00F9DE78 /* libavfilter.a in Frameworks */,
+				BB4B80F02A4CAA4D00F9DE78 /* libhogweed.a in Frameworks */,
+				BB4B810D2A4CAA4D00F9DE78 /* libvpx.a in Frameworks */,
+				BB4B81082A4CAA4D00F9DE78 /* libssl.a in Frameworks */,
+				BB4B80E62A4CAA4D00F9DE78 /* libargon2.a in Frameworks */,
+				BB4B80F92A4CAA4D00F9DE78 /* libpjlib-util.a in Frameworks */,
+				BB4B80E92A4CAA4D00F9DE78 /* libavformat.a in Frameworks */,
+				BB4B80ED2A4CAA4D00F9DE78 /* libgit2.a in Frameworks */,
+				BB4B81092A4CAA4D00F9DE78 /* libswresample.a in Frameworks */,
+				BB4B80E42A4CA9D700F9DE78 /* libz.1.tbd in Frameworks */,
+				BB4B80FB2A4CAA4D00F9DE78 /* libpjmedia-codec.a in Frameworks */,
+				BB4B80EE2A4CAA4D00F9DE78 /* libgmp.a in Frameworks */,
+				BB4B80EB2A4CAA4D00F9DE78 /* libcrypto.a in Frameworks */,
+				BB4B810F2A4CAA4D00F9DE78 /* libyaml-cpp.a in Frameworks */,
+				BB4B81022A4CAA4D00F9DE78 /* libpjsua.a in Frameworks */,
+				BB4B81172A4CB46B00F9DE78 /* libz.1.tbd in Frameworks */,
+				BB4B81032A4CAA4D00F9DE78 /* libpjsua2.a in Frameworks */,
+				BB4B81182A4CB47800F9DE78 /* libz.1.tbd in Frameworks */,
+				BB4B80FE2A4CAA4D00F9DE78 /* libpjnath.a in Frameworks */,
+				BB4B81062A4CAA4D00F9DE78 /* libspeexdsp.a in Frameworks */,
+				BB4B80F72A4CAA4D00F9DE78 /* libopus.a in Frameworks */,
+				BB4B810B2A4CAA4D00F9DE78 /* libtls.a in Frameworks */,
+				BB4B80F82A4CAA4D00F9DE78 /* libpj.a in Frameworks */,
+				BB4B81002A4CAA4D00F9DE78 /* libpjsip-ua.a in Frameworks */,
+				BB4B80FF2A4CAA4D00F9DE78 /* libpjsip-simple.a in Frameworks */,
+				BB4B81052A4CAA4D00F9DE78 /* libspeex.a in Frameworks */,
+				BB4B81012A4CAA4D00F9DE78 /* libpjsip.a in Frameworks */,
+				BB4B80E32A4CA91400F9DE78 /* libz.1.tbd in Frameworks */,
+				BBA963702A4CB54000A73270 /* libz.1.tbd in Frameworks */,
+				BB4B80FD2A4CAA4D00F9DE78 /* libpjmedia.a in Frameworks */,
+				BB4B80F22A4CAA4D00F9DE78 /* libixml.a in Frameworks */,
+				BB3272302A43A5E500ADD174 /* libjami.a in Frameworks */,
+				BB4B80F62A4CAA4D00F9DE78 /* libopendht.a in Frameworks */,
+				BB4B80F52A4CAA4D00F9DE78 /* libnettle.a in Frameworks */,
+				BBA963772A4CB5A400A73270 /* libbz2.tbd in Frameworks */,
+				BB4B810C2A4CAA4D00F9DE78 /* libupnp.a in Frameworks */,
+				BBA963722A4CB56E00A73270 /* libz.tbd in Frameworks */,
+				BB4B80EC2A4CAA4D00F9DE78 /* libfmt.a in Frameworks */,
+				BB4B80FA2A4CAA4D00F9DE78 /* libpjmedia-audiodev.a in Frameworks */,
+				BB4B811B2A4CB47900F9DE78 /* libz.1.tbd in Frameworks */,
+				BB4B81102A4CAA4D00F9DE78 /* libyuv.a in Frameworks */,
+				BBA963732A4CB57D00A73270 /* libz.1.1.3.tbd in Frameworks */,
+				BB4B80E72A4CAA4D00F9DE78 /* libavcodec.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1295,6 +1548,48 @@
 			isa = PBXGroup;
 			children = (
 				26C4845B2A796D69005BC767 /* libdhtnet.a */,
+				BB4B807F2A4CA7F600F9DE78 /* libz.1.tbd */,
+				BB3272842A44A2FE00ADD174 /* libbz2.1.0.tbd */,
+				BB3272852A44A30000ADD174 /* libc++.1.tbd */,
+				BB3272662A43A6E500ADD174 /* libaudio.a */,
+				BB3272722A43A6FD00ADD174 /* libaudioprocessing.a */,
+				BB32725F2A43A6D700ADD174 /* libclient.a */,
+				BB3272652A43A6E300ADD174 /* libconfig.a */,
+				BB3272682A43A6E900ADD174 /* libconnectivity.a */,
+				BB3272712A43A6FB00ADD174 /* libcoreaudiolayer.a */,
+				BB32725D2A43A6D400ADD174 /* libdevcore.a */,
+				BB32727B2A43A71000ADD174 /* libdevcrypto.a */,
+				BB32725E2A43A6D600ADD174 /* libgmp.la */,
+				BB32727C2A43A71200ADD174 /* libgnutls.la */,
+				BB3272702A43A6F900ADD174 /* libim.a */,
+				BB32726B2A43A6EF00ADD174 /* libiosvideo.a */,
+				BB32727A2A43A70E00ADD174 /* libixml.la */,
+				BB3272782A43A70A00ADD174 /* libjamiacc.a */,
+				BB3272752A43A70300ADD174 /* libmedia.a */,
+				BB32726F2A43A6F700ADD174 /* libpj-aarch64-apple-darwin_ios.a */,
+				BB3272632A43A6DF00ADD174 /* libpjlib-util-aarch64-apple-darwin_ios.a */,
+				BB32726A2A43A6ED00ADD174 /* libpjmedia-aarch64-apple-darwin_ios.a */,
+				BB32727D2A43A71400ADD174 /* libpjmedia-audiodev-aarch64-apple-darwin_ios.a */,
+				BB3272672A43A6E700ADD174 /* libpjmedia-codec-aarch64-apple-darwin_ios.a */,
+				BB3272812A43A71C00ADD174 /* libpjmedia-videodev-aarch64-apple-darwin_ios.a */,
+				BB3272602A43A6D900ADD174 /* libpjnath-aarch64-apple-darwin_ios.a */,
+				BB3272832A43A72000ADD174 /* libpjsip-aarch64-apple-darwin_ios.a */,
+				BB32726C2A43A6F100ADD174 /* libpjsip-simple-aarch64-apple-darwin_ios.a */,
+				BB3272732A43A6FF00ADD174 /* libpjsip-ua-aarch64-apple-darwin_ios.a */,
+				BB3272642A43A6E100ADD174 /* libpjsua-aarch64-apple-darwin_ios.a */,
+				BB3272772A43A70700ADD174 /* libpjsua2-aarch64-apple-darwin_ios.a */,
+				BB3272742A43A70100ADD174 /* libsecp256k1.la */,
+				BB32726D2A43A6F200ADD174 /* libsecurity.a */,
+				BB3272802A43A71A00ADD174 /* libsiplink.a */,
+				BB3272612A43A6DB00ADD174 /* libsound.a */,
+				BB3272822A43A71E00ADD174 /* libspeex.la */,
+				BB3272762A43A70500ADD174 /* libspeexdsp.la */,
+				BB32727E2A43A71600ADD174 /* libsrtp-aarch64-apple-darwin_ios.a */,
+				BB3272622A43A6DD00ADD174 /* libupnp.la */,
+				BB32726E2A43A6F500ADD174 /* libupnpcontrol.a */,
+				BB3272692A43A6EB00ADD174 /* libupnpprotocol.a */,
+				BB32727F2A43A71800ADD174 /* libvideo.a */,
+				BB3272792A43A70C00ADD174 /* libyuv-aarch64-apple-darwin_ios.a */,
 				44EDA53D28FE22FD00BEB99A /* libjami.a */,
 				269DA08428D0DA18007D51D6 /* libyaml-cpp.a */,
 				269DA05128D0D2ED007D51D6 /* libfmt.a */,
@@ -1548,6 +1843,7 @@
 				04399A0F1D1C2D9D00E99CD9 /* RingTests */,
 				04399A1A1D1C2D9D00E99CD9 /* RingUITests */,
 				26A88C05266FFFC800888EED /* jamiNotificationExtension */,
+				BB32720A2A437FA300ADD174 /* ShareExtension */,
 				043999F41D1C2D9D00E99CD9 /* Products */,
 				02AED8171DD4C4B000F740BA /* Frameworks */,
 			);
@@ -1560,6 +1856,7 @@
 				04399A0C1D1C2D9D00E99CD9 /* RingTests.xctest */,
 				04399A171D1C2D9D00E99CD9 /* RingUITests.xctest */,
 				26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */,
+				BB3272092A437FA300ADD174 /* ShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2030,6 +2327,7 @@
 		1A2D18B81F2916BA00B2C785 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BBB73C5C2A7161CC0013B314 /* SharedModel.swift */,
 				1A5DC0271F3564AA0075E8EF /* MessageModel.swift */,
 				1A5DC0231F3564360075E8EF /* RequestModel.swift */,
 				1A2D18B91F29180700B2C785 /* AccountConfigModel.swift */,
@@ -2259,7 +2557,7 @@
 				26A88C17267000F000888EED /* JamiNotificationExtension-Bridging-Header.h */,
 				26BB4387267017D400019CF6 /* Utils.h */,
 				26BB4388267017D400019CF6 /* Utils.mm */,
-				26BB438A2670191E00019CF6 /* AdapterDelegate.swift */,
+				BB3272222A438E8000ADD174 /* AdapterDelegate.swift */,
 				26BB438C267019FC00019CF6 /* AdapterService.swift */,
 				BB91FAA9292EA26900BB41C1 /* EventData.swift */,
 				26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */,
@@ -2397,6 +2695,82 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		BB32720A2A437FA300ADD174 /* ShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				BBA9637C2A4CD9AE00A73270 /* ShareExtension.entitlements */,
+				BBB73C7D2A719F520013B314 /* Models */,
+				BBB73C7F2A719F780013B314 /* daemon */,
+				BBB73C7E2A719F670013B314 /* ViewModels */,
+				BBB73C802A719F900013B314 /* Views */,
+				BBB73C872A71A00C0013B314 /* Helpers */,
+				BB3272102A437FA500ADD174 /* Info.plist */,
+				BB32722F2A43968300ADD174 /* SharePrefixHeader.pch */,
+				BB3272242A438EA000ADD174 /* ShareExtension-Bridging-Header.h */,
+			);
+			path = ShareExtension;
+			sourceTree = "<group>";
+		};
+		BBB73C7D2A719F520013B314 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BBC4359C2A5F47F800EC26B0 /* JamiShareModel.swift */,
+				BBB73C6F2A716FDE0013B314 /* ShareInjectionBag.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BBB73C7E2A719F670013B314 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BBC4355F2A5F060600EC26B0 /* ShareViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BBB73C7F2A719F780013B314 /* daemon */ = {
+			isa = PBXGroup;
+			children = (
+				BB32722C2A43938300ADD174 /* ShareAdapterService.swift */,
+				BBB73C882A71B52E0013B314 /* ShareNameService.swift */,
+				BB32722A2A43902B00ADD174 /* ShareUtils.h */,
+				BB3272292A43902B00ADD174 /* ShareUtils.mm */,
+				BB32721B2A438B5D00ADD174 /* ShareAdapter.h */,
+				BB3272252A438EA400ADD174 /* ShareAdapter.mm */,
+			);
+			path = daemon;
+			sourceTree = "<group>";
+		};
+		BBB73C802A719F900013B314 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BBB73C812A719FA30013B314 /* TableViewCell */,
+				BB32720B2A437FA500ADD174 /* ShareViewController.swift */,
+				BB32720D2A437FA500ADD174 /* MainInterface.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BBB73C812A719FA30013B314 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				BBB73C822A719FC10013B314 /* ConversationTableViewCell.swift */,
+				BBB73C832A719FC10013B314 /* ConversationTableViewCell.xib */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		BBB73C872A71A00C0013B314 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BBB73C722A7176560013B314 /* ShareSwarmInfoProtocol.swift */,
+				BBC435762A5F1E8800EC26B0 /* ShareContactPickerSection.swift */,
+				BBB73C782A7181A90013B314 /* UIImageExtension.swift */,
+				BB690B972A83BB9E007F7950 /* ShareDBManager.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2416,6 +2790,7 @@
 			);
 			dependencies = (
 				26A88C0A266FFFC800888EED /* PBXTargetDependency */,
+				BB3272122A437FA500ADD174 /* PBXTargetDependency */,
 			);
 			name = Ring;
 			productName = Ring;
@@ -2475,6 +2850,23 @@
 			productReference = 26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		BB3272082A437FA300ADD174 /* ShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB3272172A437FA500ADD174 /* Build configuration list for PBXNativeTarget "ShareExtension" */;
+			buildPhases = (
+				BB3272052A437FA300ADD174 /* Sources */,
+				BB3272062A437FA300ADD174 /* Frameworks */,
+				BB3272072A437FA300ADD174 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareExtension;
+			productName = ShareExtension;
+			productReference = BB3272092A437FA300ADD174 /* ShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2484,7 +2876,7 @@
 				KnownAssetTags = (
 					New,
 				);
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Savoir-faire Linux";
 				TargetAttributes = {
@@ -2529,6 +2921,10 @@
 					62366028200914C1002598C1 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+					};
+					BB3272082A437FA300ADD174 = {
+						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -2585,6 +2981,7 @@
 				ru,
 				"zh-Hans-CN",
 				"zh-Hans",
+				Base,
 			);
 			mainGroup = 043999EA1D1C2D9D00E99CD9;
 			productRefGroup = 043999F41D1C2D9D00E99CD9 /* Products */;
@@ -2596,6 +2993,7 @@
 				04399A161D1C2D9D00E99CD9 /* RingUITests */,
 				62366028200914C1002598C1 /* libring */,
 				26A88C03266FFFC800888EED /* jamiNotificationExtension */,
+				BB3272082A437FA300ADD174 /* ShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2672,6 +3070,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				449E736428D9F69E00CBF564 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB3272072A437FA300ADD174 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBB73C962A72A2370013B314 /* Images.xcassets in Resources */,
+				BBB73C852A719FC10013B314 /* ConversationTableViewCell.xib in Resources */,
+				BB32720F2A437FA500ADD174 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2788,6 +3196,7 @@
 				0E3BD4282044784000A50DDF /* ContactViewController.swift in Sources */,
 				62006E04203F4DD6003C3197 /* UITextField+Helpers.swift in Sources */,
 				4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */,
+				BBB73C5D2A7161CD0013B314 /* SharedModel.swift in Sources */,
 				1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */,
 				1A5DC01E1F355DA70075E8EF /* ContactsAdapterDelegate.swift in Sources */,
 				0E983E6E1FC77C3E0082103E /* ConversationModel.swift in Sources */,
@@ -3018,7 +3427,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				265C436B286254C900B4BE73 /* Constants.swift in Sources */,
-				26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */,
 				26BB4389267017D400019CF6 /* Utils.mm in Sources */,
 				26A88C07266FFFC800888EED /* NotificationService.swift in Sources */,
 				26A88C1A267000F000888EED /* Adapter.mm in Sources */,
@@ -3026,7 +3434,55 @@
 				26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */,
 				267CC6FD29D5B6D100505E56 /* VCardUtils.swift in Sources */,
 				BB91FAAD292EA36200BB41C1 /* EventData.swift in Sources */,
+				BB3272232A438E8200ADD174 /* AdapterDelegate.swift in Sources */,
 				449E736728D9F86A00CBF564 /* Strings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB3272052A437FA300ADD174 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBB73C932A729AB60013B314 /* LookupNameResponse.m in Sources */,
+				BBB73C952A729AB60013B314 /* NameRegistrationResponse.m in Sources */,
+				BBC435942A5F3BA400EC26B0 /* AvatarsColors.swift in Sources */,
+				BBDDE7062A6EFE45008733B7 /* JamiShareModel.swift in Sources */,
+				BBB73C912A7298DF0013B314 /* ShareNameService.swift in Sources */,
+				BBC4358E2A5F3B2C00EC26B0 /* ProfileDataHelper.swift in Sources */,
+				BBC435702A5F140400EC26B0 /* VCardUtils.swift in Sources */,
+				BBA9637B2A4CD8E500A73270 /* Constants.swift in Sources */,
+				BB690B992A83BC9B007F7950 /* InteractionDataHelper.swift in Sources */,
+				BBB73C5E2A7162320013B314 /* SharedModel.swift in Sources */,
+				BBDDE7072A6EFE63008733B7 /* Data+Helpers.swift in Sources */,
+				BB690B982A83BB9E007F7950 /* ShareDBManager.swift in Sources */,
+				BBC435912A5F3B3900EC26B0 /* DBContainer.swift in Sources */,
+				BBC435882A5F39E100EC26B0 /* Images.swift in Sources */,
+				BBB73C8B2A71B8DA0013B314 /* UserSearchResponse.m in Sources */,
+				BBC4358C2A5F3AFC00EC26B0 /* DataTransferAdapterDelegate.swift in Sources */,
+				BBDDE7042A6EFCB8008733B7 /* AccountCredentialsModel.swift in Sources */,
+				BBC435692A5F0BF100EC26B0 /* Durations.swift in Sources */,
+				BBB73C702A716FDE0013B314 /* ShareInjectionBag.swift in Sources */,
+				BBC435682A5F0A7A00EC26B0 /* AvatarView.swift in Sources */,
+				BB32722B2A43902B00ADD174 /* ShareUtils.mm in Sources */,
+				BB32720C2A437FA500ADD174 /* ShareViewController.swift in Sources */,
+				BB3272262A438EA500ADD174 /* ShareAdapter.mm in Sources */,
+				BBDDE7022A6EFC8D008733B7 /* ConfigKeyModel.swift in Sources */,
+				BBC435652A5F083C00EC26B0 /* Strings.swift in Sources */,
+				BBC435602A5F060600EC26B0 /* ShareViewModel.swift in Sources */,
+				BBB73C792A7181A90013B314 /* UIImageExtension.swift in Sources */,
+				BBC435642A5F07CF00EC26B0 /* UIColor+Ring.swift in Sources */,
+				BBB73C8F2A71BA000013B314 /* NameRegistrationAdapterDelegate.swift in Sources */,
+				BBB73C842A719FC10013B314 /* ConversationTableViewCell.swift in Sources */,
+				BB32722D2A43938300ADD174 /* ShareAdapterService.swift in Sources */,
+				BBC4357F2A5F362A00EC26B0 /* ServiceEvent.swift in Sources */,
+				BBC4358F2A5F3B3000EC26B0 /* ConversationDataHepler.swift in Sources */,
+				BBC435962A5F3E3300EC26B0 /* Date+Helpers.swift in Sources */,
+				BBDDE7032A6EFC9C008733B7 /* DeviceModel.swift in Sources */,
+				BBC435772A5F1E8A00EC26B0 /* ShareContactPickerSection.swift in Sources */,
+				BBB73C732A7176580013B314 /* ShareSwarmInfoProtocol.swift in Sources */,
+				BBDDE7012A6EFC87008733B7 /* AccountConfigModel.swift in Sources */,
+				BBC435782A5F21DB00EC26B0 /* String+Helpers.swift in Sources */,
+				BBB73C6A2A716C5A0013B314 /* Stateable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3047,6 +3503,11 @@
 			isa = PBXTargetDependency;
 			target = 26A88C03266FFFC800888EED /* jamiNotificationExtension */;
 			targetProxy = 26A88C09266FFFC800888EED /* PBXContainerItemProxy */;
+		};
+		BB3272122A437FA500ADD174 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BB3272082A437FA300ADD174 /* ShareExtension */;
+			targetProxy = BB3272112A437FA500ADD174 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3103,6 +3564,14 @@
 				62AD0C2B1FE0557D00BEA1F6 /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		BB32720D2A437FA500ADD174 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB32720E2A437FA500ADD174 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -3431,6 +3900,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				NEW_SETTING = "";
 				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
 				OTHER_LDFLAGS = "";
@@ -3485,6 +3955,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				NEW_SETTING = "";
 				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
 				OTHER_LDFLAGS = "";
@@ -3533,6 +4004,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				MTL_FAST_MATH = YES;
 				NEW_SETTING = "";
 				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
 				OTHER_LDFLAGS = "";
@@ -3715,6 +4187,163 @@
 			};
 			name = Release;
 		};
+		BB3272142A437FA500ADD174 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_PREFIX_HEADER = ShareExtension/SharePrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"OPENDHT_JSONCPP=1",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+					"$(SRCROOT)/../fat/include/include",
+				);
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareExtension/ShareExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BB3272152A437FA500ADD174 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_PREFIX_HEADER = ShareExtension/SharePrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"OPENDHT_JSONCPP=1",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+					"$(SRCROOT)/../fat/include/include",
+				);
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareExtension/ShareExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Development;
+		};
+		BB3272162A437FA500ADD174 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_PREFIX_HEADER = ShareExtension/SharePrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "OPENDHT_JSONCPP=1";
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+					"$(SRCROOT)/../fat/include/include",
+				);
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Savoir-faire Linux. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.ShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareExtension/ShareExtension-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3774,6 +4403,16 @@
 				6236602A200914C1002598C1 /* Debug */,
 				6236602B200914C1002598C1 /* Development */,
 				6236602C200914C1002598C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB3272172A437FA500ADD174 /* Build configuration list for PBXNativeTarget "ShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB3272142A437FA500ADD174 /* Debug */,
+				BB3272152A437FA500ADD174 /* Development */,
+				BB3272162A437FA500ADD174 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

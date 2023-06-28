@@ -18,20 +18,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-enum URIType {
-    case ring
-    case sip
-
-    func getString() -> String {
-        switch self {
-        case .ring:
-            return "ring"
-        case .sip:
-            return "sip"
-        }
-    }
-}
-
 class JamiURI {
     var schema: URIType
     var userInfo: String = ""

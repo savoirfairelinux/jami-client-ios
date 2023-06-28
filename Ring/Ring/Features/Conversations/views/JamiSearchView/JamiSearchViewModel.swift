@@ -51,10 +51,6 @@ protocol FilterConversationDelegate: AnyObject {
 }
 
 class JamiSearchViewModel {
-    struct JamsUserSearchModel {
-        var username, firstName, lastName, organization, jamiId: String
-        var profilePicture: Data?
-    }
 
     private let log = SwiftyBeaver.self
 
@@ -322,7 +318,7 @@ class JamiSearchViewModel {
         self.filteredResults.accept([])
     }
 
-    private func convertToConversations(from searchModels: [JamiSearchViewModel.JamsUserSearchModel], accountId: String) -> [ConversationViewModel] {
+    private func convertToConversations(from searchModels: [JamsUserSearchModel], accountId: String) -> [ConversationViewModel] {
         var jamsSearch: [ConversationViewModel] = []
         for model in searchModels {
             let newConversation = self.createTemporaryJamsConversation(with: model, accountId: accountId)
