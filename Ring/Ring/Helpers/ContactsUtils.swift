@@ -32,7 +32,7 @@ class ContactsUtils {
         return registeredName
     }
 
-    class func deserializeUser(dictionary: [String: String]) -> JamiSearchViewModel.JamsUserSearchModel? {
+    class func deserializeUser(dictionary: [String: String]) -> JamsUserSearchModel? {
         guard let username = dictionary["username"],
               let firstName = dictionary["firstName"],
               let lastName = dictionary["lastName"],
@@ -41,12 +41,12 @@ class ContactsUtils {
               let base64Encoded = dictionary["profilePicture"]
         else { return nil }
         let imageData = NSData(base64Encoded: base64Encoded, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?
-        return JamiSearchViewModel.JamsUserSearchModel(username: username,
-                                                       firstName: firstName,
-                                                       lastName: lastName,
-                                                       organization: organization,
-                                                       jamiId: jamiId,
-                                                       profilePicture: imageData)
+        return JamsUserSearchModel(username: username,
+                                   firstName: firstName,
+                                   lastName: lastName,
+                                   organization: organization,
+                                   jamiId: jamiId,
+                                   profilePicture: imageData)
     }
 
 }

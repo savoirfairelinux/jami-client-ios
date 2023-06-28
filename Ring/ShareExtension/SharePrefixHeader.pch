@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  Ring
+//
+//  Created by kateryna on 2021-09-18.
+//  Copyright © 2021 Savoir-faire Linux. All rights reserved.
+//
+
+#ifndef SharePrefixHeader_pch
+#define SharePrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#endif /* SharePrefixHeader_pch */

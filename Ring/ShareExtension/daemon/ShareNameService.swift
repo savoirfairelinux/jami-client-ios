@@ -22,7 +22,7 @@
 import RxSwift
 import SwiftyBeaver
 
-class NameService {
+class ShareNameService {
 
     /// Logger
     private let log = SwiftyBeaver.self
@@ -30,7 +30,7 @@ class NameService {
     private let disposeBag = DisposeBag()
 
     /// Used to make lookup name request to the daemon
-    private let nameRegistrationAdapter: NameRegistrationAdapter
+    private let nameRegistrationAdapter: ShareAdapter
 
     private var delayedLookupNameCall: DispatchWorkItem?
 
@@ -48,14 +48,14 @@ class NameService {
     /// Triggered when we receive a UserSearchResponse from the daemon
     let userSearchResponseShared: Observable<UserSearchResponse>
 
-    init(withNameRegistrationAdapter nameRegistrationAdapter: NameRegistrationAdapter) {
+    init(withNameRegistrationAdapter nameRegistrationAdapter: ShareAdapter) {
         self.nameRegistrationAdapter = nameRegistrationAdapter
         self.sharedRegistrationStatus = registrationStatus.share()
 
         self.userSearchResponseStream.disposed(by: self.disposeBag)
         self.userSearchResponseShared = self.userSearchResponseStream.share()
 
-        NameRegistrationAdapter.delegate = self
+        ShareAdapter.delegate = self
     }
 
     /// Make a username lookup request to the daemon
@@ -136,7 +136,7 @@ class NameService {
 }
 
 // MARK: NameRegistrationAdapterDelegate
-extension NameService: NameRegistrationAdapterDelegate {
+extension ShareNameService: NameRegistrationAdapterDelegate {
 
     internal func registeredNameFound(with response: LookupNameResponse) {
 

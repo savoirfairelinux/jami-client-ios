@@ -19,42 +19,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-enum MessageAttributes: String {
-    case interactionId = "id"
-    case type = "type"
-    case invited = "invited"
-    case fileId = "fileId"
-    case displayName = "displayName"
-    case body = "body"
-    case author = "author"
-    case uri = "uri"
-    case timestamp = "timestamp"
-    case parent = "linearizedParent"
-    case action = "action"
-    case duration = "duration"
-    case reply = "reply-to"
-    case react = "react-to"
-    case totalSize = "totalSize"
-}
-
-enum MessageType: String {
-    case text = "text/plain"
-    case fileTransfer = "application/data-transfer+json"
-    case contact = "member"
-    case call = "application/call-history+json"
-    case merge = "merge"
-    case initial = "initial"
-    case profile = "application/update-profile"
-}
-
-enum ContactAction: String {
-    case add
-    case remove
-    case join
-    case banned
-    case unban
-}
-
 public class MessageModel {
 
     var id: String = ""
