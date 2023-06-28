@@ -25,41 +25,6 @@ import Foundation
 import MobileCoreServices
 import Photos
 
-// swiftlint:disable identifier_name
-
-enum DataTransferServiceError: Error {
-    case createTransferError
-    case updateTransferError
-}
-
-enum Directories: String {
-    case recorded
-    case downloads
-    case conversation_data
-}
-
-enum DataTransferStatus: CustomStringConvertible {
-    var description: String {
-        switch self {
-        case .created: return ""
-        case .awaiting: return ""
-        case .canceled: return "Canceled"
-        case .ongoing: return "Transferring"
-        case .success: return "Completed"
-        case .error: return ""
-        case .unknown: return ""
-        }
-    }
-
-    case created
-    case awaiting
-    case canceled
-    case ongoing
-    case success
-    case error
-    case unknown
-}
-
 // swiftlint:disable cyclomatic_complexity
 func stringFromEventCode(with code: NSDataTransferEventCode) -> String {
     switch code {

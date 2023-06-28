@@ -134,7 +134,7 @@ class ConversationViewModel: Stateable, ViewModel {
         }
     }
 
-    convenience init(with injectionBag: InjectionBag, conversation: ConversationModel, user: JamiSearchViewModel.JamsUserSearchModel) {
+    convenience init(with injectionBag: InjectionBag, conversation: ConversationModel, user: JamsUserSearchModel) {
         self.init(with: injectionBag)
         self.userName.accept(user.username)
         self.displayName.accept(user.firstName + " " + user.lastName)

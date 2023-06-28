@@ -1,28 +1,25 @@
 /*
- *  Copyright (C) 2017-2020 Savoir-faire Linux Inc.
+ * Copyright (C) 2023 Savoir-faire Linux Inc. *
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
- *  Author: Raphaël Brulé <raphael.brule@savoirfairelinux.com>
+ * Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version. *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details. *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 import RxSwift
 import SwiftyBeaver
 
-class NameService {
+class ShareNameService {
 
     /// Logger
     private let log = SwiftyBeaver.self
@@ -30,7 +27,7 @@ class NameService {
     private let disposeBag = DisposeBag()
 
     /// Used to make lookup name request to the daemon
-    private let nameRegistrationAdapter: NameRegistrationAdapter
+    private let nameRegistrationAdapter: ShareAdapter
 
     private var delayedLookupNameCall: DispatchWorkItem?
 
@@ -48,14 +45,14 @@ class NameService {
     /// Triggered when we receive a UserSearchResponse from the daemon
     let userSearchResponseShared: Observable<UserSearchResponse>
 
-    init(withNameRegistrationAdapter nameRegistrationAdapter: NameRegistrationAdapter) {
+    init(withNameRegistrationAdapter nameRegistrationAdapter: ShareAdapter) {
         self.nameRegistrationAdapter = nameRegistrationAdapter
         self.sharedRegistrationStatus = registrationStatus.share()
 
         self.userSearchResponseStream.disposed(by: self.disposeBag)
         self.userSearchResponseShared = self.userSearchResponseStream.share()
 
-        NameRegistrationAdapter.delegate = self
+        ShareAdapter.delegate = self
     }
 
     /// Make a username lookup request to the daemon
@@ -136,7 +133,7 @@ class NameService {
 }
 
 // MARK: NameRegistrationAdapterDelegate
-extension NameService: NameRegistrationAdapterDelegate {
+extension ShareNameService: NameRegistrationAdapterDelegate {
 
     internal func registeredNameFound(with response: LookupNameResponse) {
 

@@ -41,15 +41,6 @@ enum MessageSequencing {
     case unknown
 }
 
-enum GeneratedMessageType: String {
-    case receivedContactRequest = "Contact request received"
-    case contactAdded = "Contact added"
-    case missedIncomingCall = "Missed incoming call"
-    case missedOutgoingCall = "Missed outgoing call"
-    case incomingCall = "Incoming call"
-    case outgoingCall = "Outgoing call"
-}
-
 class MessageViewModel {
 
     private let log = SwiftyBeaver.self

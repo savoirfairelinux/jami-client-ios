@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vaB-HS-Bmg">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Share View Controller-->
+        <scene sceneID="Ngb-Zh-v0i">
+            <objects>
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overFullScreen" id="vaB-HS-Bmg" customClass="ShareViewController" customModule="ShareExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hOg-PV-NfG">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Id9-Yx-DSg">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RHk-B5-roA">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uWO-Rj-dlb">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Zio-i7-bDD">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="light"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zdJ-x3-Zua">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxI-G0-Gww">
+                                        <rect key="frame" x="171.66666666666666" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="6Tc-te-O6m"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THz-O8-Kmx">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="90"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-73-R9b">
+                                                <rect key="frame" x="343" y="45" width="30" height="35"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="edy-73-R9b" secondAttribute="trailing" constant="20" id="AcW-x6-ztN"/>
+                                            <constraint firstAttribute="height" constant="90" id="IMx-Wa-tWc"/>
+                                            <constraint firstAttribute="bottom" secondItem="edy-73-R9b" secondAttribute="bottom" constant="10" id="rjh-8B-7lH"/>
+                                        </constraints>
+                                    </view>
+                                    <searchBar contentMode="redraw" searchBarStyle="prominent" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xq8-tu-lET">
+                                        <rect key="frame" x="0.0" y="140" width="393" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="PAO-ky-he9"/>
+                                        </constraints>
+                                        <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="20" vertical="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hOv-o9-TEd">
+                                        <rect key="frame" x="0.0" y="184" width="393" height="575"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="vaB-HS-Bmg" id="sHJ-mh-pCo"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="hOv-o9-TEd" secondAttribute="bottom" id="JzS-Ls-s2F"/>
+                                    <constraint firstItem="xq8-tu-lET" firstAttribute="leading" secondItem="zdJ-x3-Zua" secondAttribute="leading" id="aa2-lr-vBL"/>
+                                    <constraint firstItem="THz-O8-Kmx" firstAttribute="leading" secondItem="zdJ-x3-Zua" secondAttribute="leading" id="ahm-9G-XOK"/>
+                                    <constraint firstAttribute="trailing" secondItem="THz-O8-Kmx" secondAttribute="trailing" id="bnR-OF-bcN"/>
+                                    <constraint firstAttribute="trailing" secondItem="xq8-tu-lET" secondAttribute="trailing" id="i1G-fi-uRx"/>
+                                    <constraint firstAttribute="trailing" secondItem="hOv-o9-TEd" secondAttribute="trailing" id="tur-bN-LdK"/>
+                                    <constraint firstItem="hOv-o9-TEd" firstAttribute="leading" secondItem="zdJ-x3-Zua" secondAttribute="leading" id="u0s-rs-cyj"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qTb-a5-rRn"/>
+                        <constraints>
+                            <constraint firstItem="Id9-Yx-DSg" firstAttribute="bottom" secondItem="zdJ-x3-Zua" secondAttribute="bottom" id="9za-aS-7zE"/>
+                            <constraint firstItem="Id9-Yx-DSg" firstAttribute="leading" secondItem="hOg-PV-NfG" secondAttribute="leading" id="GAj-CV-VB6"/>
+                            <constraint firstItem="qTb-a5-rRn" firstAttribute="bottom" secondItem="Id9-Yx-DSg" secondAttribute="bottom" id="Tfd-WS-7Ou"/>
+                            <constraint firstAttribute="trailing" secondItem="Id9-Yx-DSg" secondAttribute="trailing" id="acg-nU-qra"/>
+                            <constraint firstItem="Id9-Yx-DSg" firstAttribute="leading" secondItem="zdJ-x3-Zua" secondAttribute="leading" id="eKT-LG-Z5N"/>
+                            <constraint firstItem="Id9-Yx-DSg" firstAttribute="top" secondItem="qTb-a5-rRn" secondAttribute="top" id="hcE-in-Zk8"/>
+                            <constraint firstItem="Id9-Yx-DSg" firstAttribute="top" secondItem="zdJ-x3-Zua" secondAttribute="top" id="iUk-Dk-3ul"/>
+                            <constraint firstItem="Id9-Yx-DSg" firstAttribute="trailing" secondItem="zdJ-x3-Zua" secondAttribute="trailing" id="lWU-UZ-Ze3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="doneButton" destination="edy-73-R9b" id="dIU-JN-pvE"/>
+                        <outlet property="searchBar" destination="xq8-tu-lET" id="bWw-Lo-Jdp"/>
+                        <outlet property="tableView" destination="hOv-o9-TEd" id="Pmf-Xz-CTa"/>
+                        <outlet property="topSpace" destination="6Tc-te-O6m" id="LLf-2E-27E"/>
+                        <outlet property="topViewContainer" destination="THz-O8-Kmx" id="kWw-2w-fOP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eFx-Ac-uTZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-581" y="-2"/>
+        </scene>
+    </scenes>
+</document>
