@@ -240,22 +240,19 @@ class ConversationsService {
                     return conversation.id == conversationId && conversation.accountId == accountId
                 })
                 .first else { return false }
-        // if all loaded messages are of type .merge, we need to load next messages
-        let numberOfInteractions = messages.filter { $0.type != .merge && $0.type != .profile }.count
-        if fromLoaded && numberOfInteractions == 0 {
+        // If all the loaded messages are of type .merge or .profile or have already been added, we need to load the next set of messages.
+        let filtered = messages.filter { newMessage in newMessage.type != .merge && newMessage.type != .profile && !conversation.messages.contains(where: { message in
+            message.id == newMessage.id
+        })
+        }
+        if fromLoaded && filtered.isEmpty {
             if let lastMessage = messages.last?.id {
                 self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: lastMessage)
             }
             return false
         }
         var newMessages = [MessageModel]()
-        messages.forEach { newMessage in
-            /// filter out merge interaction
-            if newMessage.type == .merge || newMessage.type == .profile { return }
-            /// filter out existing messages
-            if conversation.messages.contains(where: { message in
-                message.id == newMessage.id
-            }) { return }
+        filtered.forEach { newMessage in
             if fromLoaded {
                 newMessage.status = .displayed
             }
