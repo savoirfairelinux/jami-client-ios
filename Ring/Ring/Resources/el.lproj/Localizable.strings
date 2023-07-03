@@ -98,10 +98,10 @@
 "conversation.explanationSendingLocationTo" = "Συμμετέχετε τη θέση σας με ";
 "conversation.explanationReceivingLocationFrom" = "Πλέον λαμβάνετε ζωντανή τοποθεσία από";
 "conversation.errorSavingImage" = "Αποτύχθηκε να αποθηκεύσει εικόνα στη γκαλερί";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.receivedRequest" = "Ο χρήστης %@ σας έστειλε αίτημα συνομιλίας.";
 "conversation.incomingRequest" = "Σου έστειλα αίτημα για συζήτηση.";
 "conversation.requestMessage" = "Γεια σας, θα θέλατε να συμμετάσχετε στη συζήτηση;";
-"conversation.notContact" = "%@ is not in your contact list.";
+"conversation.notContact" = "Ο χρήστης %@ δεν βρίσκεται στη λίστα επαφών σας.";
 "conversation.sendRequest" = "Να του στείλετε αίτηση επικοινωνίας για να μπορέσουν να ανταλλάξουν μαζί";
 "conversation.sendRequestTitle" = "Στείλτε αίτηση επικοινωνίας";
 "conversation.synchronizationTitle" = "- Δέχτηκες την αίτηση συζήτησης.";
