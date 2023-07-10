@@ -317,7 +317,7 @@
 "contactPage.startAudioCall" = "音声通話を開始";
 "contactPage.startVideoCall" = "ビデオ通話を開始";
 "contactPage.sendMessage" = "メッセージを送信";
-"contactPage.clearConversation" = "オープンチャット";
+"contactPage.clearConversation" = "クリアチャット";
 "contactPage.removeConversation" = "会話を削除";
 
 //DataTransfer

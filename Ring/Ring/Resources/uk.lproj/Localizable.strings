@@ -46,38 +46,38 @@
 "global.search" = "Пошук…";
 
 // Scan
-"scan.badQrCode" = "Погано QR-код";
+"scan.badQrCode" = "Неприйнятний QR-код";
 
 // SwarmCreation
 "swarmcreation.searchBar" = "Пошук контакту...";
 "swarmcreation.createTheSwarm" = "Створюйте ров";
 "swarmcreation.addADescription" = "Додати опис";
-"swarmcreation.addPeople" = "Ви можете додати більше людей до рогу";
+"swarmcreation.addPeople" = "Можете додати ще %d людей до рою";
 // Swarm
-"swarm.ignoreSwarm" = "Ігноруйте рогу";
-"swarm.leaveConversation" = "Не розмовляй.";
+"swarm.ignoreSwarm" = "Ігнорувати рій";
+"swarm.leaveConversation" = "Покинути розмову";
 "swarm.chooseColor" = "Обрати колір";
-"swarm.typeOfSwarm" = "Тип рогу";
+"swarm.typeOfSwarm" = "Тип рою";
 "swarm.identifier" = "Ідентифікатор";
 "swarm.about" = "Про программу";
 "swarm.members" = "Учасники";
-"swarm.addDescription" = "Додавати Описание";
-"swarm.oneToOne" = "Частний рог";
-"swarm.adminInvitesOnly" = "Адмініст тільки запрошує";
-"swarm.invitesOnly" = "Частний рог";
-"swarm.publicChat" = "Об'єднаний ров";
+"swarm.addDescription" = "Додати опис";
+"swarm.oneToOne" = "Приватний рій";
+"swarm.adminInvitesOnly" = "Лише адміністратор запрошує";
+"swarm.invitesOnly" = "Приватний рій";
+"swarm.publicChat" = "Публічний рій";
 "swarm.others" = "Інші";
 "swarm.member" = "Член";
-"swarm.invited" = "Запрошують";
+"swarm.invited" = "Запрошено";
 "swarm.admin" = "Адміністратор";
 "swarm.banned" = "Заборонена";
 "swarm.unknown" = "Невідомі";
-"swarm.addMorePeople" = "Ви можете додати більше людей до цього рога";
+"swarm.addMorePeople" = "Можете додати ще %d людей до цього рою";
 "swarm.addMember" = "Додавати члена";
-"swarm.confirmLeaveSwarm" = "Ти впевнений, що хочеш покинути цей рог?";
-"swarm.Leave" = "Відходи";
+"swarm.confirmLeaveSwarm" = "Ти впевнений, що хочеш покинути цей рій?";
+"swarm.Leave" = "Піти";
 // Smartlist
-"smartlist.yesterday" = "Вчора";
+"smartlist.yesterday" = "Учора";
 "smartlist.results" = "Публічний каталог";
 "smartlist.conversations" = "Групові чати";
 "smartlist.noResults" = "Ніяких результатів";
@@ -98,10 +98,10 @@
 "conversation.explanationSendingLocationTo" = "Ви зараз ділитеся своїм місцем розташуванням з ";
 "conversation.explanationReceivingLocationFrom" = "Ви зараз отримуєте пряму локацію від ";
 "conversation.errorSavingImage" = "Не вдалося зберегти зображення в галерею";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.receivedRequest" = "%@ пропонує почати розмову.";
 "conversation.incomingRequest" = "Посилала прохання про розмову.";
 "conversation.requestMessage" = "Привіт, чи не хочеш приєднатися до розмови?";
-"conversation.notContact" = "%@ is not in your contact list.";
+"conversation.notContact" = "%@ немає в контактах.";
 "conversation.sendRequest" = "Відправить йому/їй запит на контакт, щоб вони могли обмінюватися разом";
 "conversation.sendRequestTitle" = "Відправляйте запит на зв'язок";
 "conversation.synchronizationTitle" = "Ви прийняли запит на розмову.";
@@ -140,7 +140,7 @@
 "createAccount.usernameValid" = "користувацьке ім'я доступне";
 "createAccount.loading" = "Завантаження";
 "createAccount.waitCreateAccountTitle" = "Додавання облікового запису";
-"createAccount.ChooseAPassword" = "Зашифруйте мій рахунок";
+"createAccount.ChooseAPassword" = "Зашифрувати свій обліковий запис";
 "createAccount.PasswordInformation" = "Виберіть пароль для шифрування локального рахунку. Не забудьте його, інакше ви не зможете відновити свій рахунок";
 "createAccount.EnableNotifications" = "За повідомленнями";
 "createAccount.Recommended" = "(Заповноважена)";
@@ -150,8 +150,8 @@
 "createAccount.timeoutMessage" = "Запис користувача може зайняти кілька хвилин.";
 
 //Link To Account form
-"linkToAccount.waitLinkToAccountTitle" = "Спільвання рахунків";
-"linkToAccount.linkButtonTitle" = "Устрій зв'язку";
+"linkToAccount.waitLinkToAccountTitle" = "Поєднання облікових записів";
+"linkToAccount.linkButtonTitle" = "Прив'язати пристрій";
 "linkToAccount.pinPlaceholder" = "PIN-код";
 "linkToAccount.pinLabel" = "Ввести PIN-код";
 "linkToAccount.explanationPinMessage" = "Для генерування PIN-коду перейдіть до налаштувань управління рахунком на пристрої, що містять акаунт, який ви хочете використовувати. У налаштуваннях пристроїв виберіть \"Звязати інше пристрої до цього акаунту\". Ви отримаєте потрібний PIN для заповнення цієї форми.";
