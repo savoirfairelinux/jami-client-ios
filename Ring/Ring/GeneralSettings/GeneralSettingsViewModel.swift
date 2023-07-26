@@ -29,6 +29,7 @@ let automaticDownloadFilesKey = "AUTOMATIC_DOWNLOAD_FILES_KEY"
 let acceptTransferLimitKey = "ACCEPT_TRANSFER_LIMIT_KEY"
 let limitLocationSharingDurationKey = "LIMIT_LOCATION_SHARING_DURATION_KEY"
 let locationSharingDurationKey = "LOCATION_SHARING_DURATION_KEY"
+let fileRecordingLimitationInBackgroundKey = "FILE_RECORDING_LIMITATION_IN_BACKGROUND"
 
 enum GeneralSettingsSection: SectionModelType {
     typealias Item = SectionRow
