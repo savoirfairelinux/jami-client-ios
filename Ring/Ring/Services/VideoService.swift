@@ -24,6 +24,7 @@ import SwiftyBeaver
 import RxSwift
 import RxRelay
 import UIKit
+import Combine
 
 // swiftlint:disable identifier_name
 
@@ -53,6 +54,12 @@ protocol FrameExtractorDelegate: AnyObject {
     func updateDevicePosition(position: AVCaptureDevice.Position)
 }
 
+enum Framerates: CGFloat {
+    case high = 30
+    case medium = 20
+    case low = 15
+}
+
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     let namePortrait = "mediumCamera"
@@ -80,11 +87,69 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private let sessionQueue = DispatchQueue(label: "session queue")
     private let captureSession = AVCaptureSession()
     private let context = CIContext()
+    private var systemPressureObservation: NSKeyValueObservation?
 
     weak var delegate: FrameExtractorDelegate?
 
     override init() {
         super.init()
+    }
+
+    func setFrameRateForDevice(captureDevice: AVCaptureDevice, framerate: CGFloat, useRange: Bool) {
+        let ranges = captureDevice.activeFormat.videoSupportedFrameRateRanges as [AVFrameRateRange]
+        var maxFrameRate = framerate
+        var minFrameRate = framerate
+
+        for range in ranges {
+            if range.maxFrameRate >= framerate && range.minFrameRate <= framerate {
+                if useRange {
+                    maxFrameRate = range.maxFrameRate
+                    minFrameRate = range.minFrameRate
+                }
+
+                let newMinFrameDuration = CMTimeMake(value: 1, timescale: Int32(minFrameRate))
+                let newMaxFrameDuration = CMTimeMake(value: 1, timescale: Int32(maxFrameRate))
+                if captureDevice.activeVideoMinFrameDuration == newMinFrameDuration &&
+                    captureDevice.activeVideoMaxFrameDuration == newMaxFrameDuration {
+                    return
+                }
+
+                do {
+                    try captureDevice.lockForConfiguration()
+                    captureDevice.activeVideoMinFrameDuration = newMinFrameDuration
+                    captureDevice.activeVideoMaxFrameDuration = newMaxFrameDuration
+                    captureDevice.unlockForConfiguration()
+                } catch {
+                    print("Could not lock device for configuration: \(error)")
+                }
+
+                return
+            }
+        }
+    }
+
+    func observeSystemPressureChanges(captureDevice: AVCaptureDevice) {
+        // Restore normal framerate.
+        setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.high.rawValue, useRange: true)
+
+        // Observe system pressure.
+        systemPressureObservation = captureDevice.observe(\.systemPressureState, options: .new) { [weak self, weak captureDevice] _, change in
+            guard let self = self, let captureDevice = captureDevice else { return }
+            guard let systemPressureState = change.newValue?.level else { return }
+
+            switch systemPressureState {
+            case .nominal:
+                self.setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.high.rawValue, useRange: true)
+            case .fair:
+                self.setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.medium.rawValue, useRange: false)
+            case .serious, .critical:
+                self.setFrameRateForDevice(captureDevice: captureDevice, framerate: Framerates.low.rawValue, useRange: false)
+            case .shutdown:
+                self.stopCapturing()
+            default:
+                break
+            }
+        }
     }
 
     func getDeviceInfo(forPosition position: AVCaptureDevice.Position, quality: AVCaptureSession.Preset) throws -> DeviceInfo {
@@ -164,6 +229,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         guard let captureDevice = selectCaptureDevice(withPosition: position) else {
             throw VideoError.selectDeviceFailed
         }
+        self.observeSystemPressureChanges(captureDevice: captureDevice)
         if #available(iOS 16.0, *) {
             if captureSession.isMultitaskingCameraAccessSupported {
                 captureSession.isMultitaskingCameraAccessEnabled = true
@@ -219,6 +285,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 } else {
                     newCamera = self.selectCaptureDevice(withPosition: .back)
                 }
+                self.observeSystemPressureChanges(captureDevice: newCamera)
+
                 self.delegate!.updateDevicePosition(position: newCamera.position)
             }
             var newVideoInput: AVCaptureDeviceInput!

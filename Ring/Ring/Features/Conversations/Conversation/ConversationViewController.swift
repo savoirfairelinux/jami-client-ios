@@ -215,6 +215,62 @@ class ConversationViewController: UIViewController,
 
     // MARK: photo library
 
+    private func presentBackgroundRecordingAlert() {
+        let alert = UIAlertController(title: nil, message: L10n.DataTransfer.recordInBackgroundWarning, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: { [weak self] _ in
+            UserDefaults.standard.setValue(true, forKey: fileRecordingLimitationInBackgroundKey)
+            self?.startVideoRecording()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    private func canRecordVideoFile() -> Bool {
+        /*According to Apple, warning about camera performance in the background
+         should be presented for iPad devices running on versions lower than iOS 16
+         */
+        if #available(iOS 16.0, *) {
+            return true
+        }
+
+        return UIDevice.current.userInterfaceIdiom != .pad || UserDefaults.standard.bool(forKey: fileRecordingLimitationInBackgroundKey)
+    }
+
+    private func startVideoRecording() {
+        if canRecordVideoFile() {
+            self.viewModel.recordVideoFile()
+        } else {
+            presentBackgroundRecordingAlert()
+        }
+    }
+
+    private func presentRecordingAlert() {
+        let alert = UIAlertController(title: nil, message: L10n.DataTransfer.recordInBackgroundWarning, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: { [weak self] _ in
+            UserDefaults.standard.setValue(true, forKey: fileRecordingLimitationInBackgroundKey)
+            self?.recordVideoFile()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    private func verifyCouldRecord() -> Bool {
+        if #available(iOS 16.0, *) {
+            return true
+        }
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            return true
+        }
+
+        return UserDefaults.standard.bool(forKey: fileRecordingLimitationInBackgroundKey)
+    }
+
+    private func recordVideoFile() {
+        if verifyCouldRecord() {
+            self.viewModel.recordVideoFile()
+        } else {
+            presentRecordingAlert()
+        }
+    }
+
     func selectItemsFromPhotoLibrary() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -239,11 +295,11 @@ class ConversationViewController: UIViewController,
             if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
                 if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
                     self?.messageAccessoryView.messageTextView.resignFirstResponder()
-                    self?.viewModel.recordVideoFile()
+                    self?.recordVideoFile()
                 } else {
                     AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
                         if granted == true {
-                            self?.viewModel.recordVideoFile()
+                            self?.recordVideoFile()
                         } else {
                             self?.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
                         }
@@ -253,11 +309,11 @@ class ConversationViewController: UIViewController,
                 AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { (granted: Bool) -> Void in
                     if granted == true {
                         if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
-                            self?.viewModel.recordVideoFile()
+                            self?.recordVideoFile()
                         } else {
                             AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
                                 if granted == true {
-                                    self?.viewModel.recordVideoFile()
+                                    self?.recordVideoFile()
                                 } else {
                                     self?.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
                                 }
