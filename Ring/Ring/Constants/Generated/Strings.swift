@@ -408,6 +408,8 @@ internal enum L10n {
     internal static let readableStatusRefuse = L10n.tr("Localizable", "dataTransfer.readableStatusRefuse", fallback: "Refuse")
     /// Complete
     internal static let readableStatusSuccess = L10n.tr("Localizable", "dataTransfer.readableStatusSuccess", fallback: "Complete")
+    /// Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking
+    internal static let recordInBackgroundWarning = L10n.tr("Localizable", "dataTransfer.recordInBackgroundWarning", fallback: "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking")
     /// Failed to send
     internal static let sendingFailed = L10n.tr("Localizable", "dataTransfer.sendingFailed", fallback: "Failed to send")
     /// Send
