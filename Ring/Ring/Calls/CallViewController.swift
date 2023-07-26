@@ -952,7 +952,12 @@ extension CallViewController: AVPictureInPictureSampleBufferPlaybackDelegate {
     func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, setPlaying playing: Bool) {}
 
     func pictureInPictureControllerTimeRangeForPlayback(_ pictureInPictureController: AVPictureInPictureController) -> CMTimeRange {
-        return CMTimeRange(start: .negativeInfinity, duration: .positiveInfinity)
+        /*
+         Using CMTimeRange(start: .negativeInfinity, duration: .positiveInfinity) can lead
+         to high CPU usage in the background. As an alternative, it is suggested to use
+         a 24-hour duration instead, as mentioned in https://developer.apple.com/forums/thread/724632
+         */
+        return CMTimeRange(start: .zero, duration: CMTimeMake(value: 3600 * 24, timescale: 1))
     }
 
     func pictureInPictureControllerIsPlaybackPaused(_ pictureInPictureController: AVPictureInPictureController) -> Bool {
