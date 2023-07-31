@@ -98,10 +98,10 @@
 "conversation.explanationSendingLocationTo" = "Vous partagez actuellement votre position avec";
 "conversation.explanationReceivingLocationFrom" = "Vous recevez actuellement la position de ";
 "conversation.errorSavingImage" = "Impossible de sauvegarder l'image dans la galerie";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.receivedRequest" = "\%@\ vous a envoyé une invitation.";
 "conversation.incomingRequest" = "vous a envoyé une demande de conversation.";
 "conversation.requestMessage" = "Bonjour,\nSouhaitez-vous rejoindre la conversation ?";
-"conversation.notContact" = "%@ is not in your contact list.";
+"conversation.notContact" = " %@ ne fait pas partie de vos contacts.";
 "conversation.sendRequest" = "Envoyer lui une demande de contact afin de pouvoir discuter ensemble";
 "conversation.sendRequestTitle" = "Envoyer une invitation";
 "conversation.synchronizationTitle" = "Vous avez accepté la demande de conversation";
