@@ -331,7 +331,6 @@
 		269DA07E28D0D367007D51D6 /* libyuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA04F28D0D2E6007D51D6 /* libyuv.a */; };
 		269DA07F28D0D5D0007D51D6 /* libgit2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05228D0D2EF007D51D6 /* libgit2.a */; };
 		269DA08028D0D614007D51D6 /* libsecp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05028D0D2EA007D51D6 /* libsecp256k1.a */; };
-		269DA08128D0D634007D51D6 /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05128D0D2ED007D51D6 /* libfmt.a */; };
 		269DA08228D0D68F007D51D6 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB61D1C341A00E99CD9 /* libavutil.a */; };
 		269DA08628D0DFE3007D51D6 /* libyaml-cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AE31D1C341A00E99CD9 /* libyaml-cpp.a */; };
 		269DA09928E23D37007D51D6 /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269DA09828E23D37007D51D6 /* MessageRowView.swift */; };
@@ -367,6 +366,9 @@
 		26BB438B2670191E00019CF6 /* AdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438A2670191E00019CF6 /* AdapterDelegate.swift */; };
 		26BB438D267019FC00019CF6 /* AdapterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB438C267019FC00019CF6 /* AdapterService.swift */; };
 		26BC15EE29302B00003FC8D1 /* ContactMessageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */; };
+		26C4845A2A79645E005BC767 /* libfmt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 269DA05128D0D2ED007D51D6 /* libfmt.a */; };
+		26C4845C2A796D87005BC767 /* libdhtnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C4845B2A796D69005BC767 /* libdhtnet.a */; };
+		26C4845D2A796DC9005BC767 /* libdhtnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C4845B2A796D69005BC767 /* libdhtnet.a */; };
 		26C6A2602927EC4E007786B8 /* SwarmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */; };
 		26CE5AB82523968500DE6F90 /* ConferenceActionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */; };
 		26D08AB12693474300E37574 /* InvitationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26D08AB02693474300E37574 /* InvitationViewController.storyboard */; };
@@ -935,6 +937,7 @@
 		26BB438A2670191E00019CF6 /* AdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterDelegate.swift; sourceTree = "<group>"; };
 		26BB438C267019FC00019CF6 /* AdapterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterService.swift; sourceTree = "<group>"; };
 		26BC15ED29302B00003FC8D1 /* ContactMessageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageVM.swift; sourceTree = "<group>"; };
+		26C4845B2A796D69005BC767 /* libdhtnet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdhtnet.a; path = ../fat/lib/libdhtnet.a; sourceTree = "<group>"; };
 		26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfo.swift; sourceTree = "<group>"; };
 		26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationPrefixHeader.pch; sourceTree = "<group>"; };
 		26CE5AB72523968500DE6F90 /* ConferenceActionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceActionsMenu.swift; sourceTree = "<group>"; };
@@ -1146,6 +1149,7 @@
 				44DFB3B0288704910023878C /* Reusable.xcframework in Frameworks */,
 				269DA05428D0D366007D51D6 /* libavcodec.a in Frameworks */,
 				269DA06F28D0D366007D51D6 /* libpjsua.a in Frameworks */,
+				26C4845D2A796DC9005BC767 /* libdhtnet.a in Frameworks */,
 				269DA07328D0D366007D51D6 /* libspeex.a in Frameworks */,
 				269DA06B28D0D366007D51D6 /* libpjnath.a in Frameworks */,
 				043866211D218B1100E06CE2 /* AudioToolbox.framework in Frameworks */,
@@ -1226,6 +1230,7 @@
 				26BB437E267013FB00019CF6 /* libz.1.2.11.tbd in Frameworks */,
 				26BB437D267013F600019CF6 /* libz.1.1.3.tbd in Frameworks */,
 				26A88C7926700BC500888EED /* libiconv.tbd in Frameworks */,
+				26C4845A2A79645E005BC767 /* libfmt.a in Frameworks */,
 				269DA03328D0D2E5007D51D6 /* libjsoncpp.a in Frameworks */,
 				269DA02E28D0D2E5007D51D6 /* libgmp.a in Frameworks */,
 				269DA07F28D0D5D0007D51D6 /* libgit2.a in Frameworks */,
@@ -1234,6 +1239,7 @@
 				269DA03E28D0D2E5007D51D6 /* libpjsip-simple.a in Frameworks */,
 				26A88C7726700B5F00888EED /* libxml2.tbd in Frameworks */,
 				26A88C7626700ABC00888EED /* libz.tbd in Frameworks */,
+				26C4845C2A796D87005BC767 /* libdhtnet.a in Frameworks */,
 				26A88C75267009EC00888EED /* CoreVideo.framework in Frameworks */,
 				269DA08028D0D614007D51D6 /* libsecp256k1.a in Frameworks */,
 				269DA03B28D0D2E5007D51D6 /* libpjmedia-videodev.a in Frameworks */,
@@ -1242,7 +1248,6 @@
 				269DA04C28D0D2E6007D51D6 /* libvpx.a in Frameworks */,
 				269DA04428D0D2E6007D51D6 /* libspeex.a in Frameworks */,
 				26A88C722670099D00888EED /* AudioToolbox.framework in Frameworks */,
-				269DA08128D0D634007D51D6 /* libfmt.a in Frameworks */,
 				269DA03928D0D2E5007D51D6 /* libpjmedia-audiodev.a in Frameworks */,
 				269DA03628D0D2E5007D51D6 /* libopus.a in Frameworks */,
 				269DA03528D0D2E5007D51D6 /* libopendht.a in Frameworks */,
@@ -1289,6 +1294,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26C4845B2A796D69005BC767 /* libdhtnet.a */,
 				44EDA53D28FE22FD00BEB99A /* libjami.a */,
 				269DA08428D0DA18007D51D6 /* libyaml-cpp.a */,
 				269DA05128D0D2ED007D51D6 /* libfmt.a */,
