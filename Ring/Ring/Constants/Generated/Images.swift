@@ -35,6 +35,7 @@ internal enum Asset {
   internal static let audioRunning = ImageAsset(name: "audio_running")
   internal static let backButton = ImageAsset(name: "back_button")
   internal static let backgroundInputText = ColorAsset(name: "background_input_text")
+  internal static let backgroundLogin = ImageAsset(name: "background_login")
   internal static let backgroundMsgReceived = ColorAsset(name: "background_msg_received")
   internal static let blockIcon = ImageAsset(name: "block_icon")
   internal static let callButton = ImageAsset(name: "call_button")
