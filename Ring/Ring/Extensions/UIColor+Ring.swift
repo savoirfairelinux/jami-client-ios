@@ -90,8 +90,9 @@ extension UIColor {
     static let jamiMain = UIColor(hex: 0x3F6DA7, alpha: 1.0)
     static let conferenceRaiseHand = UIColor(red: 0, green: 184, blue: 255, alpha: 1.0)
     static let jamiSecondary = UIColor(hex: 0x1F4971, alpha: 1.0)
-    static let jamiButtonLight = UIColor(hex: 0x285F97, alpha: 1.0)
-    static let jamiButtonDark = UIColor(hex: 0x0F2643, alpha: 1.0)
+    static let jamiButtonLight = UIColor(hexString: "#0071C9")!
+    static let jamiButtonDark = UIColor(hexString: "005699")!
+    static let jamiButtonWithOpacity = UIColor(hexString: "#005699")!.withAlphaComponent(0.33)
     static let jamiMsgCellSent = UIColor(hex: 0x367BC1, alpha: 1.0)
     static var jamiMsgCellReceived: UIColor {
         return UIColor(named: "background_msg_received") ?? UIColor(red: 231, green: 235, blue: 235, alpha: 1.0)
