@@ -1,4 +1,28 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6ee0fe4_8ba54fe7",
+        "filename": "Ring/Ring/Resources/hu.lproj/Localizable.strings",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2023-08-14T21:58:51Z",
+      "side": 1,
+      "message": "Should the string end with a full-stop `.`? Thank you",
+      "range": {
+        "startLine": 331,
+        "startChar": 44,
+        "endLine": 331,
+        "endChar": 180
+      },
+      "revId": "7e43edceab03be0613edbe64fae24f0e21e77a76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ],
   "submitRequirementResults": []
 }
