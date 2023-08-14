@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "تم الإلغاء";
 "dataTransfer.sendingFailed" = "فشلت في إرسال";
 "dataTransfer.readableStatusSuccess" = "كاملة";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "المكالمة المفقودة";

@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Abgebrochen";
 "dataTransfer.sendingFailed" = "Senden fehlgeschlagen";
 "dataTransfer.readableStatusSuccess" = "Abgeschlossen";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Verpasster Anruf";

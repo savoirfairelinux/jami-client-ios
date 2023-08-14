@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Скасавана";
 "dataTransfer.sendingFailed" = "Не атрымалася адправіць";
 "dataTransfer.readableStatusSuccess" = "Поўны";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Адпушчаны званок";

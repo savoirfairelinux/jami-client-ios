@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Đã hủy bỏ";
 "dataTransfer.sendingFailed" = "Không gửi";
 "dataTransfer.readableStatusSuccess" = "Hoàn thành";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Lần gọi bị bỏ lỡ";

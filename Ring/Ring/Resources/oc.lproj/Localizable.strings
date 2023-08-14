@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Annulèt";
 "dataTransfer.sendingFailed" = "Fracàs del mandadís";
 "dataTransfer.readableStatusSuccess" = "Complet";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Sonada mancada";

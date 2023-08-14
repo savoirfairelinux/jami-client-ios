@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Zrušeno";
 "dataTransfer.sendingFailed" = "Odeslání selhalo";
 "dataTransfer.readableStatusSuccess" = "Dokončeno";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Zmeškaný hovor";

@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Otkazano";
 "dataTransfer.sendingFailed" = "Nije uspio poslati";
 "dataTransfer.readableStatusSuccess" = "Potpuno";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Izgubio poziv";

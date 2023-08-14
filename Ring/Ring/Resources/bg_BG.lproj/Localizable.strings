@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Отменено";
 "dataTransfer.sendingFailed" = "Не успях да изпратя";
 "dataTransfer.readableStatusSuccess" = "Пълен";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Изпуснат разговор";

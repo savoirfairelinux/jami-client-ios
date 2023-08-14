@@ -52,7 +52,7 @@
 "swarmcreation.searchBar" = "संपर्क की खोज...";
 "swarmcreation.createTheSwarm" = "झुंड को बनाएँ";
 "swarmcreation.addADescription" = "विवरण जोड़ें";
-"swarmcreation.addPeople" = "आप अधिक लोगों को झुंड में जोड़ सकते हैं";
+"swarmcreation.addPeople" = "आप समूह में \%d\ और लोग जोड़ सकते हैं।";
 // Swarm
 "swarm.ignoreSwarm" = "झुंड को अनदेखा करें";
 "swarm.leaveConversation" = "बातचीत छोड़ दो";
@@ -72,7 +72,7 @@
 "swarm.admin" = "प्रशासक";
 "swarm.banned" = "प्रतिबंधित";
 "swarm.unknown" = "अनजान";
-"swarm.addMorePeople" = "आप इस झुंड में अधिक लोगों को जोड़ सकते हैं";
+"swarm.addMorePeople" = "आप इस स्वार्म में \%d\ और लोग जोड़ सकते हैं।";
 "swarm.addMember" = "सदस्य जोड़ें";
 "swarm.confirmLeaveSwarm" = "क्या आप इस झुंड को छोड़ना चाहते हैं?";
 "swarm.Leave" = "छोड़ो";
@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "रद्द किया गया";
 "dataTransfer.sendingFailed" = "भेजने में विफल";
 "dataTransfer.readableStatusSuccess" = "पूर्ण";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "फोन नहीं मिला";

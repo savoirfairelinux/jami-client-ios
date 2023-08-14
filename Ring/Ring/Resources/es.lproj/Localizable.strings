@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Cancelado";
 "dataTransfer.sendingFailed" = "Fallo al enviar";
 "dataTransfer.readableStatusSuccess" = "Completado";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Llamada perdida";

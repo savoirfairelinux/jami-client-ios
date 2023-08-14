@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "રદ થયેલ છે";
 "dataTransfer.sendingFailed" = "મોકલવામાં નિષ્ફળ";
 "dataTransfer.readableStatusSuccess" = "પૂર્ણ";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "ચૂકી ગયેલ કૉલ";

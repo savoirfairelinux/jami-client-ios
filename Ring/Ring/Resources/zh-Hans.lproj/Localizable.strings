@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "已取消";
 "dataTransfer.sendingFailed" = "傳送失敗";
 "dataTransfer.readableStatusSuccess" = "完成";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "漏接的通話";

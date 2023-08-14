@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Megszakítva";
 "dataTransfer.sendingFailed" = "Nem sikerült elküldeni";
 "dataTransfer.readableStatusSuccess" = "Kész";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Nem fogadott hívás";

@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Nuligita";
 "dataTransfer.sendingFailed" = "Ne sendis";
 "dataTransfer.readableStatusSuccess" = "Kompleta";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Maltrafita alvoko";

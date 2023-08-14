@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Geannuleerd";
 "dataTransfer.sendingFailed" = "Versturen mislukt";
 "dataTransfer.readableStatusSuccess" = "Voltooid";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Gemiste oproep";

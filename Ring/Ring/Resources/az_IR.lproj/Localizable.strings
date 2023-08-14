@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "لغو ائدیلدی";
 "dataTransfer.sendingFailed" = "گؤندرمهمئش";
 "dataTransfer.readableStatusSuccess" = "تام";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "تلفون تلفون";

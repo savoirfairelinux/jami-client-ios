@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "ยกเลิกแล้ว";
 "dataTransfer.sendingFailed" = "ไม่ส่ง";
 "dataTransfer.readableStatusSuccess" = "เสร็จ";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "โทรศัพท์ที่พลาด";

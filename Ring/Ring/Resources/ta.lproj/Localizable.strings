@@ -328,6 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "ரத்து செய்யப்பட்டது";
 "dataTransfer.sendingFailed" = "அனுப்ப முடியவில்லை";
 "dataTransfer.readableStatusSuccess" = "முழுமையான";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "தொலைபேசி அழைப்பு";
