@@ -197,13 +197,6 @@ class CreateAccountViewModel: Stateable, ViewModel {
     let createAccountTitle = L10n.CreateAccount.createAccountFormTitle
     let createAccountButton = L10n.Welcome.createAccount
     let usernameTitle = L10n.Global.username
-    let passwordTitle = L10n.Global.password
-    let confirmPasswordTitle = L10n.CreateAccount.repeatPasswordPlaceholder
-    let registerAUserNameTitle = L10n.Global.registerAUsername
-    let chooseAPasswordTitle = L10n.CreateAccount.chooseAPassword
-    let passwordInfoTitle = L10n.CreateAccount.passwordInformation
-    let enableNotificationsTitle = L10n.CreateAccount.enableNotifications
-    let recommendedTitle = L10n.CreateAccount.recommended
 
     // MARK: - Low level services
     private let accountService: AccountsService
