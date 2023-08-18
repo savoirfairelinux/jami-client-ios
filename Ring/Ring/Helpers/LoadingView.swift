@@ -27,19 +27,21 @@ class LoadingViewPresenter {
 
     var loadingView: LoadingView! = {
         let loadingView = LoadingView()
-        loadingView.modalPresentationStyle = .overCurrentContext
+        loadingView.modalPresentationStyle = .overFullScreen
         loadingView.modalTransitionStyle = .crossDissolve
         return loadingView
     }()
 
-    func presentWithMessage(message: String, presentingVC: UIViewController, animated flag: Bool) {
+    func presentWithMessage(message: String, presentingVC: UIViewController, animated flag: Bool, modalPresentationStyle: UIModalPresentationStyle = .overCurrentContext) {
         loadingView.message = message
+        loadingView.modalPresentationStyle = modalPresentationStyle
         loadingView.showLoadingView()
         presentingVC.present(loadingView, animated: flag)
     }
 
-    func showSuccessAllert(message: String, presentingVC: UIViewController, animated flag: Bool) {
+    func showSuccessAllert(message: String, presentingVC: UIViewController, animated flag: Bool, modalPresentationStyle: UIModalPresentationStyle = .overCurrentContext) {
         loadingView.message = message
+        loadingView.modalPresentationStyle = modalPresentationStyle
         loadingView.showSuccessView()
         presentingVC.present(loadingView, animated: flag)
         startTimer()
@@ -168,10 +170,11 @@ class LoadingView: UIViewController {
         let textHeight = messageLabel.frame.height
         let width = horizontalMargin * 2 + defaultSize
         let conteinerHeight = viewHeight + textHeight + verticalMargin * 3
-        let height = max(defaultSize, conteinerHeight)
+        let height = max(width, max(defaultSize, conteinerHeight))
         let updatedVerticalMargin = (height - textHeight - viewHeight) / 3
 
         containerView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: height))
+
         containerView.center = view.center
 
         self.addVibrancy()
@@ -180,6 +183,7 @@ class LoadingView: UIViewController {
         let centerX = containerView.contentView.center.x
         let indicatorCenterY = containerView.contentView.frame.height - (viewHeight * 0.5) - updatedVerticalMargin
         let textCenterY = (textHeight * 0.5) + updatedVerticalMargin
+
         messageLabel.center = CGPoint(
             x: centerX,
             y: textCenterY
@@ -190,4 +194,5 @@ class LoadingView: UIViewController {
             y: indicatorCenterY
         )
     }
+
 }

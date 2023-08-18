@@ -129,7 +129,6 @@
 		1A20417E1F1E8DDA00C08435 /* CreateProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A20417D1F1E8DDA00C08435 /* CreateProfileViewController.storyboard */; };
 		1A2041801F1E903B00C08435 /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A20417F1F1E903B00C08435 /* CreateProfileViewController.swift */; };
 		1A2041821F1E906B00C08435 /* CreateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2041811F1E906B00C08435 /* CreateProfileViewModel.swift */; };
-		1A2041841F1EA0FC00C08435 /* CreateAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A2041831F1EA0FC00C08435 /* CreateAccountViewController.storyboard */; };
 		1A2041861F1EA19600C08435 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2041851F1EA19600C08435 /* CreateAccountViewController.swift */; };
 		1A2041881F1EA1EA00C08435 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2041871F1EA1EA00C08435 /* CreateAccountViewModel.swift */; };
 		1A20418B1F1EA58A00C08435 /* ViewModelBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A20418A1F1EA58A00C08435 /* ViewModelBased.swift */; };
@@ -470,6 +469,7 @@
 		BB06BD8329D492AA0064F0FC /* LocationSharingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */; };
 		BB06BD8529D4C1210064F0FC /* DurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB06BD8429D4C1210064F0FC /* DurationPicker.swift */; };
 		BB0AB9932A8FC4340033061F /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0AB9922A8FC4340033061F /* Colors.xcassets */; };
+		BB0AB99A2A8FC7A90033061F /* CreateAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB0AB9972A8FC7A90033061F /* CreateAccountViewController.storyboard */; };
 		BB1E8C7329159DFC005AE1D6 /* MembersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C6E29159DF6005AE1D6 /* MembersList.swift */; };
 		BB1E8C7529159DFC005AE1D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */; };
 		BB1E8C7729159E1F005AE1D6 /* SwarmInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1E8C7629159E1F005AE1D6 /* SwarmInfoViewController.swift */; };
@@ -732,7 +732,6 @@
 		1A20417D1F1E8DDA00C08435 /* CreateProfileViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateProfileViewController.storyboard; sourceTree = "<group>"; };
 		1A20417F1F1E903B00C08435 /* CreateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		1A2041811F1E906B00C08435 /* CreateProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfileViewModel.swift; sourceTree = "<group>"; };
-		1A2041831F1EA0FC00C08435 /* CreateAccountViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateAccountViewController.storyboard; sourceTree = "<group>"; };
 		1A2041851F1EA19600C08435 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		1A2041871F1EA1EA00C08435 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		1A20418A1F1EA58A00C08435 /* ViewModelBased.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelBased.swift; sourceTree = "<group>"; };
@@ -1102,6 +1101,7 @@
 		BB06BD8229D492AA0064F0FC /* LocationSharingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingVM.swift; sourceTree = "<group>"; };
 		BB06BD8429D4C1210064F0FC /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
 		BB0AB9922A8FC4340033061F /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		BB0AB9972A8FC7A90033061F /* CreateAccountViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateAccountViewController.storyboard; sourceTree = "<group>"; };
 		BB1E8C6E29159DF6005AE1D6 /* MembersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersList.swift; sourceTree = "<group>"; };
 		BB1E8C7029159DFC005AE1D6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BB1E8C7629159E1F005AE1D6 /* SwarmInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoViewController.swift; sourceTree = "<group>"; };
@@ -1924,7 +1924,7 @@
 		1A0C4ED61F1D4AB300550433 /* CreateAccount */ = {
 			isa = PBXGroup;
 			children = (
-				1A2041831F1EA0FC00C08435 /* CreateAccountViewController.storyboard */,
+				BB0AB9972A8FC7A90033061F /* CreateAccountViewController.storyboard */,
 				1A2041851F1EA19600C08435 /* CreateAccountViewController.swift */,
 				1A2041871F1EA1EA00C08435 /* CreateAccountViewModel.swift */,
 			);
@@ -2622,6 +2622,7 @@
 				263B715C246D96E5007044C4 /* IncognitoSmartListCell.xib in Resources */,
 				1A2D18B11F2915B600B2C785 /* SmartlistViewController.storyboard in Resources */,
 				0E6F5451223C3C4F00ECC3CE /* AccountItemView.xib in Resources */,
+				BB0AB99A2A8FC7A90033061F /* CreateAccountViewController.storyboard in Resources */,
 				26929FD425659E5F0052A601 /* cacert.pem in Resources */,
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
 				0E438A96204F318200402900 /* AccountHeader.xib in Resources */,
@@ -2629,7 +2630,6 @@
 				26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
 				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
-				1A2041841F1EA0FC00C08435 /* CreateAccountViewController.storyboard in Resources */,
 				26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */,
 				1A2D18ED1F2919D800B2C785 /* MeViewController.storyboard in Resources */,
 				26D08AB12693474300E37574 /* InvitationViewController.storyboard in Resources */,
