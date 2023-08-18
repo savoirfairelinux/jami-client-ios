@@ -338,8 +338,8 @@ internal enum L10n {
     internal static let chooseAPassword = L10n.tr("Localizable", "createAccount.ChooseAPassword", fallback: "Encrypt my account")
     /// Choose strong password you will remember to protect your Jami account.
     internal static let chooseStrongPassword = L10n.tr("Localizable", "createAccount.chooseStrongPassword", fallback: "Choose strong password you will remember to protect your Jami account.")
-    /// Create your account
-    internal static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle", fallback: "Create your account")
+    /// Join Jami
+    internal static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle", fallback: "Join Jami")
     /// Notifications
     internal static let enableNotifications = L10n.tr("Localizable", "createAccount.EnableNotifications", fallback: "Notifications")
     /// invalid username
@@ -704,12 +704,16 @@ internal enum L10n {
     internal static let searchBar = L10n.tr("Localizable", "swarmcreation.searchBar", fallback: "Search for contact...")
   }
   internal enum Welcome {
-    /// Connect to a JAMS server
-    internal static let connectToManager = L10n.tr("Localizable", "welcome.connectToManager", fallback: "Connect to a JAMS server")
-    /// Create a Jami account
-    internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount", fallback: "Create a Jami account")
-    /// Link this device to an account
-    internal static let linkDevice = L10n.tr("Localizable", "welcome.linkDevice", fallback: "Link this device to an account")
+    /// Connect to a Jami Account Manager Server
+    internal static let connectToManager = L10n.tr("Localizable", "welcome.connectToManager", fallback: "Connect to a Jami Account Manager Server")
+    /// Join
+    internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount", fallback: "Join")
+    /// I already have an account
+    internal static let haveAccount = L10n.tr("Localizable", "welcome.haveAccount", fallback: "I already have an account")
+    /// Import from archive backup
+    internal static let linkBackup = L10n.tr("Localizable", "welcome.linkBackup", fallback: "Import from archive backup")
+    /// Import from another device
+    internal static let linkDevice = L10n.tr("Localizable", "welcome.linkDevice", fallback: "Import from another device")
     /// Jami is a free and universal communication platform which preserves the users' privacy and freedoms
     internal static let text = L10n.tr("Localizable", "welcome.text", fallback: "Jami is a free and universal communication platform which preserves the users' privacy and freedoms")
     /// Welcome to Jami !
