@@ -115,9 +115,11 @@
 //Welcome Screen
 "welcome.title" = "Welcome to Jami !";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "Link this device to an account";
-"welcome.createAccount" = "Create a Jami account";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
@@ -129,7 +131,7 @@
 "createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your account";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
 "createAccount.passwordCharactersNumberError" = "6 characters minimum";
