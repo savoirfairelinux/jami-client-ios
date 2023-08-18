@@ -105,8 +105,14 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             .disposed(by: self.disposeBag)
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        self.presentedViewController?.modalPresentationStyle = ScreenHelper.currentModalPresentationStyle()
+    }
+
     func applyL10n() {
-        joinJamiButton.setTitle(L10n.Welcome.createAccount, for: .normal)
+        joinJamiButton.setTitle(L10n.CreateAccount.createAccountFormTitle, for: .normal)
         linkAccountButton.setTitle(L10n.Welcome.haveAccount, for: .normal)
         importDeviceButton.setTitle(L10n.Welcome.linkDevice, for: .normal)
         importBackupButton.setTitle(L10n.Welcome.linkBackup, for: .normal)
