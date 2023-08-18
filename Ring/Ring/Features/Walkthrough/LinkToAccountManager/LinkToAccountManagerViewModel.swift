@@ -65,7 +65,7 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
                 self.accountCreationState.accept(.success)
                 self.enablePushNotifications(enable: self.notificationSwitch.value)
                 DispatchQueue.main.async {
-                    self.stateSubject.onNext(WalkthroughState.profileCreated)
+                    self.stateSubject.onNext(WalkthroughState.accountCreated)
                 }
             }, onError: { [weak self] (error) in
                 if let error = error as? AccountCreationError {
