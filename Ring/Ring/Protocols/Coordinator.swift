@@ -35,6 +35,7 @@ public enum PresentationStyle {
     case popup
     case appear
     case push
+    case formModal
 }
 
 /// A Coordinator drives the navigation of a whole part of the application
@@ -98,6 +99,12 @@ extension Coordinator {
                                                        completion: nil)
         case .popup:
             viewController.modalPresentationStyle = .overCurrentContext
+            viewController.modalTransitionStyle = .coverVertical
+            self.rootViewController.present(viewController,
+                                            animated: animation,
+                                            completion: nil)
+        case .formModal:
+            viewController.modalPresentationStyle = .formSheet
             viewController.modalTransitionStyle = .coverVertical
             self.rootViewController.present(viewController,
                                             animated: animation,
