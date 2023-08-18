@@ -173,6 +173,22 @@ extension UIView {
         }
     }
 
+    func roundTopCorners(radius: CGFloat) {
+        DispatchQueue.main.async { [weak self] in
+            let path = UIBezierPath(roundedRect: (self?.bounds ?? .zero), byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: radius, height: radius))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            mask.frame = self?.bounds ?? .zero
+            self?.layer.mask = mask
+        }
+    }
+
+    func removeCorners() {
+        DispatchQueue.main.async { [weak self] in
+            self?.layer.mask = nil
+        }
+    }
+
     func blink() {
         UIView.animate(withDuration: 1,
                        delay: 0.0,

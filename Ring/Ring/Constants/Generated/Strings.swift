@@ -340,8 +340,8 @@ internal enum L10n {
     internal static let chooseAPassword = L10n.tr("Localizable", "createAccount.ChooseAPassword", fallback: "Encrypt my account")
     /// Choose strong password you will remember to protect your Jami account.
     internal static let chooseStrongPassword = L10n.tr("Localizable", "createAccount.chooseStrongPassword", fallback: "Choose strong password you will remember to protect your Jami account.")
-    /// Create your account
-    internal static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle", fallback: "Create your account")
+    /// Join Jami
+    internal static let createAccountFormTitle = L10n.tr("Localizable", "createAccount.createAccountFormTitle", fallback: "Join Jami")
     /// Notifications
     internal static let enableNotifications = L10n.tr("Localizable", "createAccount.EnableNotifications", fallback: "Notifications")
     /// invalid username
@@ -512,6 +512,8 @@ internal enum L10n {
     internal static let password = L10n.tr("Localizable", "global.password", fallback: "Password")
     /// Preview
     internal static let preview = L10n.tr("Localizable", "global.preview", fallback: "Preview")
+    /// Recommended
+    internal static let recommended = L10n.tr("Localizable", "global.recommended", fallback: "Recommended")
     /// Refuse
     internal static let refuse = L10n.tr("Localizable", "global.refuse", fallback: "Refuse")
     /// Register a username
@@ -708,8 +710,8 @@ internal enum L10n {
   internal enum Welcome {
     /// Connect to a Jami Account Manager Server
     internal static let connectToManager = L10n.tr("Localizable", "welcome.connectToManager", fallback: "Connect to a Jami Account Manager Server")
-    /// Join Jami
-    internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount", fallback: "Join Jami")
+    /// Join
+    internal static let createAccount = L10n.tr("Localizable", "welcome.createAccount", fallback: "Join")
     /// I already have an account
     internal static let haveAccount = L10n.tr("Localizable", "welcome.haveAccount", fallback: "I already have an account")
     /// Import from archive backup
