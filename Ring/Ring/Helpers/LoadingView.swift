@@ -163,16 +163,29 @@ class LoadingView: UIViewController {
         }
         let messageLabel = createMessageView()
 
+        // Log the initial container frame
+        print("***** Initial container frame:", containerView.frame)
+        print("***** Initial screen size:", UIScreen.main.bounds)
+
         // sizes
         let viewHeight = viewToAdd.frame.height
         let textHeight = messageLabel.frame.height
         let width = horizontalMargin * 2 + defaultSize
         let conteinerHeight = viewHeight + textHeight + verticalMargin * 3
-        let height = max(defaultSize, conteinerHeight)
+        let height = max(width, max(defaultSize, conteinerHeight))
         let updatedVerticalMargin = (height - textHeight - viewHeight) / 3
 
         containerView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: height))
+        // Add this new line to make sure height equals width
+        containerView.frame.size.width = containerView.frame.size.height
+
         containerView.center = view.center
+
+        // Log the updated container frame
+        print("***** Updated container frame:", containerView.frame)
+
+        // Log the view to add frame
+        print("***** View to add frame:", viewToAdd.frame)
 
         self.addVibrancy()
         containerView.contentView.addSubview(messageLabel)
@@ -180,6 +193,7 @@ class LoadingView: UIViewController {
         let centerX = containerView.contentView.center.x
         let indicatorCenterY = containerView.contentView.frame.height - (viewHeight * 0.5) - updatedVerticalMargin
         let textCenterY = (textHeight * 0.5) + updatedVerticalMargin
+
         messageLabel.center = CGPoint(
             x: centerX,
             y: textCenterY
@@ -189,5 +203,16 @@ class LoadingView: UIViewController {
             x: centerX,
             y: indicatorCenterY
         )
+
+        // Log the final container and view to add frames
+        print("***** Final container frame:", containerView.frame)
+        print("***** Final view to add frame:", viewToAdd.frame)
+
+        // Add this new line to print subviews
+        print("***** Container subviews:", containerView.subviews)
+        for subview in containerView.subviews {
+            subview.frame = containerView.bounds
+        }
     }
+
 }

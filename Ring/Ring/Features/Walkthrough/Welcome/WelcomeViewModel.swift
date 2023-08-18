@@ -53,7 +53,7 @@ class WelcomeViewModel: Stateable, ViewModel {
     }
 
     func cancelWalkthrough() {
-        self.stateSubject.onNext(WalkthroughState.profileCreated)
+        self.stateSubject.onNext(WalkthroughState.accountCreated)
     }
 
     func linkToAccountManager() {

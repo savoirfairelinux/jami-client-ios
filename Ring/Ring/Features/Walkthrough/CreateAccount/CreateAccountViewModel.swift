@@ -197,13 +197,6 @@ class CreateAccountViewModel: Stateable, ViewModel {
     let createAccountTitle = L10n.CreateAccount.createAccountFormTitle
     let createAccountButton = L10n.Welcome.createAccount
     let usernameTitle = L10n.Global.username
-    let passwordTitle = L10n.Global.password
-    let confirmPasswordTitle = L10n.CreateAccount.repeatPasswordPlaceholder
-    let registerAUserNameTitle = L10n.Global.registerAUsername
-    let chooseAPasswordTitle = L10n.CreateAccount.chooseAPassword
-    let passwordInfoTitle = L10n.CreateAccount.passwordInformation
-    let enableNotificationsTitle = L10n.CreateAccount.enableNotifications
-    let recommendedTitle = L10n.CreateAccount.recommended
 
     // MARK: - Low level services
     private let accountService: AccountsService
@@ -217,47 +210,22 @@ class CreateAccountViewModel: Stateable, ViewModel {
     let username = BehaviorRelay<String>(value: "")
     let password = BehaviorRelay<String>(value: "")
     let confirmPassword = BehaviorRelay<String>(value: "")
-    let registerUsername = BehaviorRelay<Bool>(value: true)
     let notificationSwitch = BehaviorRelay<Bool>(value: true)
-    lazy var passwordValidationState: Observable<PasswordValidationState> = {
-        return Observable.combineLatest(self.password.asObservable(), self.confirmPassword.asObservable())
-        { (password: String, confirmPassword: String) -> PasswordValidationState in
-            if password.isEmpty && confirmPassword.isEmpty {
-                return .validated
-            }
-
-            if password.count < 6 {
-                return .error(message: L10n.CreateAccount.passwordCharactersNumberError)
-            }
-
-            if password != confirmPassword {
-                return .error(message: L10n.CreateAccount.passwordNotMatchingError)
-            }
-
-            return .validated
-        }
-    }()
     lazy var usernameValidationState = BehaviorRelay<UsernameValidationState>(value: .unknown)
     lazy var canAskForAccountCreation: Observable<Bool> = {
-        return Observable.combineLatest(self.passwordValidationState.asObservable(),
-                                        self.usernameValidationState.asObservable(),
-                                        self.registerUsername.asObservable(),
+        return Observable.combineLatest(self.usernameValidationState.asObservable(),
                                         self.username.asObservable(),
                                         self.createState,
                                         resultSelector:
-                                            { ( passwordValidationState: PasswordValidationState,
-                                                usernameValidationState: UsernameValidationState,
-                                                registerUsername: Bool,
+                                            { ( usernameValidationState: UsernameValidationState,
                                                 username: String,
                                                 creationState: AccountCreationState) -> Bool in
 
                                                 var canAsk = true
 
-                                                if registerUsername {
+                                                if !username.isEmpty {
                                                     canAsk = canAsk && usernameValidationState.isAvailable && !username.isEmpty
                                                 }
-
-                                                canAsk = canAsk && passwordValidationState.isValidated
 
                                                 canAsk = canAsk && !creationState.isInProgress
 

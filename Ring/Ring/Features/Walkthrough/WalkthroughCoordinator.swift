@@ -40,7 +40,6 @@ public enum WalkthroughType {
 /// - deviceLinked: linking has finished
 public enum WalkthroughState: State {
     case welcomeDone(withType: WalkthroughType)
-    case profileCreated
     case accountCreated
     case deviceLinked
 }
@@ -73,9 +72,9 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
                 case .welcomeDone(let walkthroughType):
                     self.showAddAccount(with: walkthroughType)
                 case .accountCreated, .deviceLinked:
-                    self.showCreateProfile()
-                case .profileCreated:
-                    self.rootViewController.dismiss(animated: true, completion: nil)
+                    self.rootViewController.dismiss(animated: true) {
+                        self.rootViewController.dismiss(animated: true)
+                    }
                 }
             })
             .disposed(by: self.disposeBag)
@@ -89,18 +88,12 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
         self.present(viewController: welcomeViewController, withStyle: .show, withAnimation: false, withStateable: welcomeViewController.viewModel)
     }
 
-    private func showCreateProfile () {
-        let createProfileViewController = CreateProfileViewController.instantiate(with: self.injectionBag)
-        createProfileViewController.model = EditProfileViewModel(profileService: self.injectionBag.profileService,
-                                                                 accountService: self.injectionBag.accountService)
-        self.present(viewController: createProfileViewController, withStyle: .show, withAnimation: true, withStateable: createProfileViewController.viewModel)
-    }
-
     private func showAddAccount (with walkthroughType: WalkthroughType) {
         switch walkthroughType {
         case .createAccount:
             let createAccountViewController = CreateAccountViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: createAccountViewController, withStyle: .show, withAnimation: true, withStateable: createAccountViewController.viewModel)
+            createAccountViewController.view.backgroundColor = .clear
+            self.present(viewController: createAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: createAccountViewController.viewModel)
         case .createSipAccount:
             let sipAccountViewController = CreateSipAccountViewController.instantiate(with: self.injectionBag)
             self.present(viewController: sipAccountViewController, withStyle: .show, withAnimation: true, withStateable: sipAccountViewController.viewModel)
