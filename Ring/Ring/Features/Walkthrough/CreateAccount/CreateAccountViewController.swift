@@ -26,34 +26,18 @@ import RxSwift
 class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     // MARK: outlets
-    @IBOutlet weak var createAccountButton: DesignableButton!
-    @IBOutlet weak var registerUsernameHeightConstraint: NSLayoutConstraint! {
-        didSet {
-            self.registerUsernameHeightConstraintConstant = registerUsernameHeightConstraint.constant
-        }
-    }
-    @IBOutlet weak var choosePasswordViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var usernameSwitch: UISwitch!
-    @IBOutlet weak var passwordSwitch: UISwitch!
-    @IBOutlet weak var notificationsSwitch: UISwitch!
-    @IBOutlet weak var registerUsernameView: UIView!
-    @IBOutlet weak var registerPasswordView: UIView!
-    @IBOutlet weak var registerUsernameLabel: UILabel!
-    @IBOutlet weak var recommendedLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var dismissView: UIView!
+    @IBOutlet weak var joinButton: DesignableButton!
+    @IBOutlet weak var cancelButton: DesignableButton!
+    @IBOutlet weak var userNameTitleLabel: UILabel!
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var registerUsernameErrorLabel: UILabel!
-    @IBOutlet weak var passwordTextField: DesignableTextField!
-    @IBOutlet weak var confirmPasswordTextField: DesignableTextField!
-    @IBOutlet weak var passwordErrorLabel: UILabel!
-    @IBOutlet weak var usernameTextField: DesignableTextField!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var chooseAPasswordLabel: UILabel!
-    @IBOutlet weak var passwordInfoLabel: UILabel!
-    @IBOutlet weak var enableNotificationsLabel: UILabel!
+
     // MARK: members
     private let disposeBag = DisposeBag()
     var viewModel: CreateAccountViewModel!
-    var registerUsernameHeightConstraintConstant: CGFloat = 0.0
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
@@ -64,18 +48,15 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         // L10n
         self.applyL10n()
         super.viewDidLoad()
+        self.contentView.roundTopCorners(radius: 12)
         self.view.layoutIfNeeded()
         configureWalkrhroughNavigationBar()
 
         // Style
-        self.scrollView.alwaysBounceHorizontal = false
-        self.scrollView.alwaysBounceVertical = true
-        self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
-        createAccountButton.titleLabel?.ajustToTextSize()
+        joinButton.titleLabel?.ajustToTextSize()
         self.usernameTextField.becomeFirstResponder()
         self.usernameTextField.tintColor = UIColor.jamiSecondary
-        self.passwordTextField.tintColor = UIColor.jamiSecondary
-        self.confirmPasswordTextField.tintColor = UIColor.jamiSecondary
+        self.joinButton.tintColor = .jamiButtonDark
 
         // Bind ViewModel to View
         self.bindViewModelToView()
@@ -84,23 +65,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.bindViewToViewModel()
 
         // handle keyboard
-        self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        NotificationCenter.default.rx
-            .notification(UIDevice.orientationDidChangeNotification)
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (_) in
-                guard UIDevice.current.portraitOrLandscape else { return }
-                self?.createAccountButton.updateGradientFrame()
-                self?.configureWalkrhroughNavigationBar()
-                if self?.registerPasswordView.isHidden ?? true {
-                    return
-                }
-                guard let height = self?.passwordInfoLabel.frame.height else { return }
-                self?.choosePasswordViewHeightConstraint.constant = 133 + height
-                self?.view.layoutIfNeeded()
-            })
-            .disposed(by: self.disposeBag)
         adaptToSystemColor()
     }
 
@@ -112,37 +77,10 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
     func adaptToSystemColor() {
         view.backgroundColor = UIColor.jamiBackgroundColor
-        scrollView.backgroundColor = UIColor.jamiBackgroundColor
-        registerUsernameLabel.textColor = UIColor.jamiTextSecondary
-        recommendedLabel.textColor = UIColor.jamiTextSecondary
-        chooseAPasswordLabel.textColor = UIColor.jamiTextSecondary
-        enableNotificationsLabel.textColor = UIColor.jamiTextSecondary
-        passwordInfoLabel.textColor = UIColor.jamiTextBlue
-        registerPasswordView.backgroundColor = UIColor.jamiBackgroundColor
-        registerUsernameView.backgroundColor = UIColor.jamiBackgroundColor
-        usernameTextField.backgroundColor = UIColor.jamiBackgroundColor
-        passwordTextField.backgroundColor = UIColor.jamiBackgroundColor
-        confirmPasswordTextField.backgroundColor = UIColor.jamiBackgroundColor
-        usernameTextField.borderColor = UIColor.jamiTextBlue
-        passwordTextField.borderColor = UIColor.jamiTextBlue
-        confirmPasswordTextField.borderColor = UIColor.jamiTextBlue
-        usernameSwitch.tintColor = UIColor.jamiTextBlue
-        passwordSwitch.tintColor = UIColor.jamiTextBlue
-        notificationsSwitch.tintColor = UIColor.jamiTextBlue
     }
 
-    func setContentInset() {
-        if !self.isKeyboardOpened {
-            self.containerViewBottomConstraint.constant = -20
-            return
-        }
-        let device = UIDevice.modelName
-        switch device {
-        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR":
-            self.containerViewBottomConstraint.constant = 100
-        default:
-            self.containerViewBottomConstraint.constant = 70
-        }
+    func setContentInset(keyboardHeight: CGFloat = 0) {
+        self.containerViewBottomConstraint.constant = keyboardHeight
     }
 
     @objc
@@ -153,16 +91,20 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     @objc
-    func keyboardWillAppear(withNotification: NSNotification) {
+    func keyboardWillAppear(withNotification notification: NSNotification) {
         self.isKeyboardOpened = true
-        self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
-        self.setContentInset()
+        self.dismissView.addGestureRecognizer(keyboardDismissTapRecognizer)
 
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.size.height
+            self.setContentInset(keyboardHeight: keyboardHeight)
+        }
     }
 
     @objc
     func keyboardWillDisappear(withNotification: NSNotification) {
-        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
+        dismissView.removeGestureRecognizer(keyboardDismissTapRecognizer)
         self.setContentInset()
     }
 
@@ -175,65 +117,20 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     private func applyL10n() {
-        self.createAccountButton
+        self.joinButton
             .setTitle(self.viewModel.createAccountButton, for: .normal)
-        self.usernameTextField.placeholder = self.viewModel.usernameTitle
-        self.passwordTextField.placeholder = self.viewModel.passwordTitle
-        self.confirmPasswordTextField.placeholder = self.viewModel.confirmPasswordTitle
-        self.registerUsernameLabel.text = self.viewModel.registerAUserNameTitle
-        self.chooseAPasswordLabel.text = self.viewModel.chooseAPasswordTitle
-        self.passwordInfoLabel.text = self.viewModel.passwordInfoTitle
-        self.enableNotificationsLabel.text = self.viewModel.enableNotificationsTitle
-        self.recommendedLabel.text = self.viewModel.recommendedTitle
+        self.usernameTextField.placeholder = "Recommended"
+        self.titleLabel.text = self.viewModel.createAccountTitle
+        self.userNameTitleLabel.text = self.viewModel.usernameTitle
         self.navigationItem.title = self.viewModel.createAccountTitle
     }
 
     private func bindViewModelToView() {
-        // handle username registration visibility
-        self.viewModel.registerUsername.asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (isOn) in
-                guard let self = self else { return }
-                UIView.animate(withDuration: 0.3, animations: {
-                    if isOn {
-                        self.registerUsernameHeightConstraint.constant = self.registerUsernameHeightConstraintConstant
-                        DispatchQueue.global(qos: .background).async {
-                            usleep(300000)
-                            DispatchQueue.main.async {
-                                UIView.animate(withDuration: 0.3, animations: {
-                                    self.registerUsernameView.alpha = 1.0
-                                })
-                            }
-                        }
-                    } else {
-                        self.registerUsernameHeightConstraint.constant = 0
-                        self.registerUsernameView.alpha = 0.0
-                    }
-                    self.setContentInset()
-                    self.view.layoutIfNeeded()
-                })
-            })
-            .disposed(by: self.disposeBag)
 
-        self.viewModel.canAskForAccountCreation.bind(to: self.createAccountButton.rx.isEnabled)
-            .disposed(by: self.disposeBag)
-
-        // handle password error
-        self.viewModel.passwordValidationState.map { $0.isValidated }
-            .skip(until: self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
-            .bind(to: self.passwordErrorLabel.rx.isHidden)
-            .disposed(by: self.disposeBag)
-        self.viewModel.passwordValidationState.map { $0.message }
-            .skip(until: self.passwordTextField.rx.controlEvent(UIControl.Event.editingDidEnd))
-            .bind(to: self.passwordErrorLabel.rx.text)
+        self.viewModel.canAskForAccountCreation.bind(to: self.joinButton.rx.isEnabled)
             .disposed(by: self.disposeBag)
 
         // handle registration error
-        self.viewModel.usernameValidationState.asObservable()
-            .map { $0.isDefault }
-            .skip(until: self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
-            .bind(to: self.registerUsernameErrorLabel.rx.isHidden)
-            .disposed(by: self.disposeBag)
         self.viewModel.usernameValidationState.asObservable()
             .map { $0.message }
             .skip(until: self.usernameTextField.rx.controlEvent(UIControl.Event.editingDidBegin))
@@ -276,43 +173,9 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             .disposed(by: self.disposeBag)
     }
 
-    private func managePasswordSwitch(isOn: Bool) {
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            if isOn {
-                guard let height = self?.passwordInfoLabel.frame.height else { return }
-                self?.registerPasswordView.isHidden = false
-                self?.choosePasswordViewHeightConstraint.constant = 133 + height
-                self?.view.layoutIfNeeded()
-                DispatchQueue.global(qos: .background).async {
-                    usleep(300000)
-                    DispatchQueue.main.async {
-                        UIView.animate(withDuration: 0.3, animations: {
-                            self?.registerPasswordView.alpha = 1.0
-                        })
-                    }
-                }
-            } else {
-                self?.choosePasswordViewHeightConstraint.constant = 0
-                self?.registerPasswordView.alpha = 0.0
-                self?.passwordTextField.text = ""
-                self?.confirmPasswordTextField.text = ""
-                self?.passwordErrorLabel.isHidden = true
-                self?.registerPasswordView.isHidden = true
-            }
-            self?.setContentInset()
-            self?.view.layoutIfNeeded()
-        })
-    }
-
     private func bindViewToViewModel() {
         // Bind View Outlets to ViewModel
-        self.usernameSwitch.rx.isOn.bind(to: self.viewModel.registerUsername).disposed(by: self.disposeBag)
-        self.passwordSwitch.rx.isOn
-            .subscribe(onNext: { [weak self] isOn in
-                self?.managePasswordSwitch(isOn: isOn)
-            })
-            .disposed(by: self.disposeBag)
-        self.notificationsSwitch.rx.isOn.bind(to: self.viewModel.notificationSwitch).disposed(by: self.disposeBag)
+
         self.usernameTextField
             .rx
             .text
@@ -322,11 +185,9 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
             .distinctUntilChanged()
             .bind(to: self.viewModel.username)
             .disposed(by: self.disposeBag)
-        self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
-        self.confirmPasswordTextField.rx.text.orEmpty.bind(to: self.viewModel.confirmPassword).disposed(by: self.disposeBag)
 
         // Bind View Actions to ViewModel
-        self.createAccountButton.rx.tap
+        self.joinButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 DispatchQueue.global(qos: .background).async {
@@ -334,10 +195,17 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
                 }
             })
             .disposed(by: self.disposeBag)
+
+        self.cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.dismiss(animated: true)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func showAccountCreationInProgress() {
-        loadingViewPresenter.presentWithMessage(message: L10n.CreateAccount.loading, presentingVC: self, animated: true)
+        loadingViewPresenter.presentWithMessage(message: L10n.CreateAccount.loading, presentingVC: self, animated: true, modalPresentationStyle: .overFullScreen)
     }
 
     private func hideAccountCreationHud() {
