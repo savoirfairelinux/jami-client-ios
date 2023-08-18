@@ -100,7 +100,7 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
         switch walkthroughType {
         case .createAccount:
             let createAccountViewController = CreateAccountViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: createAccountViewController, withStyle: .show, withAnimation: true, withStateable: createAccountViewController.viewModel)
+            self.present(viewController: createAccountViewController, withStyle: .appear, withAnimation: true, withStateable: createAccountViewController.viewModel)
         case .createSipAccount:
             let sipAccountViewController = CreateSipAccountViewController.instantiate(with: self.injectionBag)
             self.present(viewController: sipAccountViewController, withStyle: .show, withAnimation: true, withStateable: sipAccountViewController.viewModel)
