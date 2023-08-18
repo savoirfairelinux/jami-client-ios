@@ -173,6 +173,13 @@ extension UIView {
         }
     }
 
+    func roundTopCorners(radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: radius, height: radius))
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        self.layer.mask = maskLayer
+    }
+
     func blink() {
         UIView.animate(withDuration: 1,
                        delay: 0.0,
