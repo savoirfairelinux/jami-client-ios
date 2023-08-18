@@ -2,6 +2,7 @@
  *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
  *
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
+ *  Author: Alireza Toghiani Khorasgani alireza.toghiani@savoirfairelinux.com *
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -40,9 +41,9 @@ public enum WalkthroughType {
 /// - deviceLinked: linking has finished
 public enum WalkthroughState: State {
     case welcomeDone(withType: WalkthroughType)
-    case profileCreated
     case accountCreated
     case deviceLinked
+    case walkthroughCanceled
 }
 
 /// This Coordinator drives the walkthrough navigation (welcome / profile / creation or link)
@@ -73,9 +74,13 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
                 case .welcomeDone(let walkthroughType):
                     self.showAddAccount(with: walkthroughType)
                 case .accountCreated, .deviceLinked:
-                    self.showCreateProfile()
-                case .profileCreated:
-                    self.rootViewController.dismiss(animated: true, completion: nil)
+                    if self.rootViewController.presentedViewController != nil {
+                        self.rootViewController.dismiss(animated: true) { // dismiss the pop up form modal view
+                            self.rootViewController.dismiss(animated: true) // dismiss the welcome view and check for user account state
+                        }
+                    }
+                case .walkthroughCanceled:
+                    self.rootViewController.dismiss(animated: true)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -89,18 +94,12 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
         self.present(viewController: welcomeViewController, withStyle: .show, withAnimation: false, withStateable: welcomeViewController.viewModel)
     }
 
-    private func showCreateProfile () {
-        let createProfileViewController = CreateProfileViewController.instantiate(with: self.injectionBag)
-        createProfileViewController.model = EditProfileViewModel(profileService: self.injectionBag.profileService,
-                                                                 accountService: self.injectionBag.accountService)
-        self.present(viewController: createProfileViewController, withStyle: .show, withAnimation: true, withStateable: createProfileViewController.viewModel)
-    }
-
     private func showAddAccount (with walkthroughType: WalkthroughType) {
         switch walkthroughType {
         case .createAccount:
             let createAccountViewController = CreateAccountViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: createAccountViewController, withStyle: .show, withAnimation: true, withStateable: createAccountViewController.viewModel)
+            createAccountViewController.view.backgroundColor = .clear
+            self.present(viewController: createAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: createAccountViewController.viewModel)
         case .createSipAccount:
             let sipAccountViewController = CreateSipAccountViewController.instantiate(with: self.injectionBag)
             self.present(viewController: sipAccountViewController, withStyle: .show, withAnimation: true, withStateable: sipAccountViewController.viewModel)
