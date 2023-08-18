@@ -32,7 +32,7 @@ class WelcomeViewModel: Stateable, ViewModel {
 
     // MARK: - Rx Singles for L10n
     let welcomeText = Observable<String>.of(L10n.Welcome.title)
-    let createAccount = Observable<String>.of(L10n.Welcome.createAccount)
+    let createAccount = Observable<String>.of(L10n.CreateAccount.createAccountFormTitle)
     let linkDevice = Observable<String>.of(L10n.Welcome.linkDevice)
 
     static var count = 0
@@ -53,7 +53,7 @@ class WelcomeViewModel: Stateable, ViewModel {
     }
 
     func cancelWalkthrough() {
-        self.stateSubject.onNext(WalkthroughState.profileCreated)
+        self.stateSubject.onNext(WalkthroughState.walkthroughCanceled)
     }
 
     func linkToAccountManager() {
