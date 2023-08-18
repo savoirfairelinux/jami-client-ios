@@ -106,7 +106,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     func applyL10n() {
-        joinJamiButton.setTitle(L10n.Welcome.createAccount, for: .normal)
+        joinJamiButton.setTitle(L10n.CreateAccount.createAccountFormTitle, for: .normal)
         linkAccountButton.setTitle(L10n.Welcome.haveAccount, for: .normal)
         importDeviceButton.setTitle(L10n.Welcome.linkDevice, for: .normal)
         importBackupButton.setTitle(L10n.Welcome.linkBackup, for: .normal)
