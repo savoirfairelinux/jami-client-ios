@@ -22,6 +22,7 @@
 "global.accountSettings" = "Account Settings";
 "global.advancedSettings" = "Advanced Settings";
 "global.username" = "Username";
+"global.recommended" = "Recommended";
 "global.password" = "Password";
 "global.registerAUsername" = "Register a username";
 "global.enterPassword" = "Enter Password";
@@ -118,7 +119,7 @@
 "welcome.haveAccount" = "I already have an account";
 "welcome.linkDevice" = "Import from another device";
 "welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Create your avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Create your account";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "Choose strong password you will remember to protect your Jami account.";
 "createAccount.repeatPasswordPlaceholder" = "Confirm password";
 "createAccount.passwordCharactersNumberError" = "6 characters minimum";
