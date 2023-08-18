@@ -35,12 +35,13 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     @IBOutlet weak var importDeviceButton: DesignableButton!
     @IBOutlet weak var importBackupButton: DesignableButton!
     @IBOutlet weak var advancedFeaturesButton: DesignableButton!
-    @IBOutlet weak var aboutJamiButton: DesignableButton!
     @IBOutlet weak var connectJamiAcountManagerButton: DesignableButton!
     @IBOutlet weak var configureSIPButton: DesignableButton!
 
+    @IBOutlet weak var aboutJamiButton: DesignableButton!
+
     // MARK: constraints
-    @IBOutlet weak var ringLogoBottomConstraint: NSLayoutConstraint!
+    //    @IBOutlet weak var ringLogoBottomConstraint: NSLayoutConstraint!
 
     // MARK: members
     private let disposeBag = DisposeBag()
@@ -53,7 +54,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         if self.viewModel.isAnimatable {
             self.initialAnimation()
         } else {
-            self.ringLogoBottomConstraint.constant = -220
+            //            self.ringLogoBottomConstraint.constant = -220
             self.welcomeTextLabel.alpha = 1
             self.joinJamiButton.alpha = 1
             self.linkAccountButton.alpha = 1
@@ -212,9 +213,9 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         DispatchQueue.global(qos: .background).async {
             sleep(1)
             DispatchQueue.main.async { [weak self] in
-                self?.ringLogoBottomConstraint.constant = -72
+                //                self?.ringLogoBottomConstraint.constant = -72
                 UIView.animate(withDuration: 0.5, animations: {
-                    self?.ringLogoBottomConstraint.constant = -220
+                    //                    self?.ringLogoBottomConstraint.constant = -220
                     self?.welcomeTextLabel.alpha = 1
                     self?.joinJamiButton.alpha = 1
                     self?.linkAccountButton.alpha = 1
