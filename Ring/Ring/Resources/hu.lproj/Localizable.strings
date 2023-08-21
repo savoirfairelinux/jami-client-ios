@@ -328,7 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Megszakítva";
 "dataTransfer.sendingFailed" = "Nem sikerült elküldeni";
 "dataTransfer.readableStatusSuccess" = "Kész";
-"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
+"dataTransfer.recordInBackgroundWarning" = "Ha több alkalmazással többfeladatos munka közben készít videót, akkor a videók gyengébb minőségét eredményezhetik. A legjobb eredmény elérése érdekében rögzítse, ha nem végez többfeladatot.";
 
 //Notifications
 "notifications.missedCall" = "Nem fogadott hívás";

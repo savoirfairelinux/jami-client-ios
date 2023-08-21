@@ -328,7 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Anulat";
 "dataTransfer.sendingFailed" = "Trimitere nereușită";
 "dataTransfer.readableStatusSuccess" = "Terminat";
-"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
+"dataTransfer.recordInBackgroundWarning" = "Înregistrarea video în timp ce se utilizează și alte aplicații poate avea ca rezultat video de calitate inferioară. Pentru cele mai bune rezultate, închide celelalte aplicații.";
 
 //Notifications
 "notifications.missedCall" = "Apel pierdut";

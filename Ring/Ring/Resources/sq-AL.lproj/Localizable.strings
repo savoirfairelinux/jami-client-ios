@@ -328,7 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "U anulua";
 "dataTransfer.sendingFailed" = "S’u arrit të dërgohej";
 "dataTransfer.readableStatusSuccess" = "E plotë";
-"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
+"dataTransfer.recordInBackgroundWarning" = "Regjistrimi i videove teksa punohet njëkohësisht me disa aplikacione, mund të sjellë video me cilësi më të ulët. Për përfundimet më të mira, regjistroni kur nuk punohet në mënyrë të tillë";
 
 //Notifications
 "notifications.missedCall" = "Thirrje të Humbura";

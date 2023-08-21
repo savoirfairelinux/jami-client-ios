@@ -328,7 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Annullato";
 "dataTransfer.sendingFailed" = "Impossibile inviare";
 "dataTransfer.readableStatusSuccess" = "Completo";
-"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
+"dataTransfer.recordInBackgroundWarning" = "La registrazione di video durante l'utilizzo di altre applicazioni può comportare una qualità video inferiore. Per ottenere i migliori risultati, chiudere le altre applicazioni.";
 
 //Notifications
 "notifications.missedCall" = "Chiamata persa";

@@ -328,7 +328,7 @@
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
+"dataTransfer.recordInBackgroundWarning" = "Grabar un video mientras se realizan varias tareas a la vez con varias aplicaciones puede originar una baja calidad del video. Para obtener los mejores resultados, grabe cuando no realice múltiples tareas";
 
 //Notifications
 "notifications.missedCall" = "Missed Call";
