@@ -137,7 +137,6 @@
 		1A2041911F1FD46300C08435 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2041901F1FD46200C08435 /* DesignableView.swift */; };
 		1A2D189A1F2642C000B2C785 /* NotificationCenter+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18991F2642C000B2C785 /* NotificationCenter+Ring.swift */; };
 		1A2D189C1F264AD900B2C785 /* UIViewController+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D189B1F264AD900B2C785 /* UIViewController+Ring.swift */; };
-		1A2D18A01F27A6D600B2C785 /* LinkDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A2D189D1F27A6D600B2C785 /* LinkDeviceViewController.storyboard */; };
 		1A2D18A11F27A6D600B2C785 /* LinkDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D189E1F27A6D600B2C785 /* LinkDeviceViewController.swift */; };
 		1A2D18A21F27A6D600B2C785 /* LinkDeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D189F1F27A6D600B2C785 /* LinkDeviceViewModel.swift */; };
 		1A2D18A41F27EF5200B2C785 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D18A31F27EF5200B2C785 /* AppCoordinator.swift */; };
@@ -480,6 +479,7 @@
 		BB3B0A412971AEE30083CAD8 /* LocationSharingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B0A402971AEE30083CAD8 /* LocationSharingView.swift */; };
 		BB3E5815291C138600E85BEA /* SwarmInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB3E5814291C138600E85BEA /* SwarmInfoViewController.storyboard */; };
 		BB4C6E2629229131001C901A /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C6E2529229131001C901A /* ColorExtension.swift */; };
+		BB56DF092A9F91F8002C6E52 /* LinkDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB56DF082A9F91F7002C6E52 /* LinkDeviceViewController.storyboard */; };
 		BB6690042A99043200875848 /* AppInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6690032A99043200875848 /* AppInfoHelper.swift */; };
 		BB6690072A99069900875848 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6690052A99069200875848 /* WelcomeViewController.swift */; };
 		BB6690082A99069900875848 /* WelcomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB6690062A99069400875848 /* WelcomeViewController.storyboard */; };
@@ -743,7 +743,6 @@
 		1A2041901F1FD46200C08435 /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		1A2D18991F2642C000B2C785 /* NotificationCenter+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Ring.swift"; sourceTree = "<group>"; };
 		1A2D189B1F264AD900B2C785 /* UIViewController+Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ring.swift"; sourceTree = "<group>"; };
-		1A2D189D1F27A6D600B2C785 /* LinkDeviceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LinkDeviceViewController.storyboard; sourceTree = "<group>"; };
 		1A2D189E1F27A6D600B2C785 /* LinkDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkDeviceViewController.swift; sourceTree = "<group>"; };
 		1A2D189F1F27A6D600B2C785 /* LinkDeviceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkDeviceViewModel.swift; sourceTree = "<group>"; };
 		1A2D18A31F27EF5200B2C785 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -1114,6 +1113,7 @@
 		BB3B0A402971AEE30083CAD8 /* LocationSharingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSharingView.swift; sourceTree = "<group>"; };
 		BB3E5814291C138600E85BEA /* SwarmInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SwarmInfoViewController.storyboard; sourceTree = "<group>"; };
 		BB4C6E2529229131001C901A /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		BB56DF082A9F91F7002C6E52 /* LinkDeviceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LinkDeviceViewController.storyboard; sourceTree = "<group>"; };
 		BB6690032A99043200875848 /* AppInfoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoHelper.swift; sourceTree = "<group>"; };
 		BB6690052A99069200875848 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BB6690062A99069400875848 /* WelcomeViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WelcomeViewController.storyboard; sourceTree = "<group>"; };
@@ -1953,7 +1953,7 @@
 		1A0C4ED81F1D4AD600550433 /* LinkDevice */ = {
 			isa = PBXGroup;
 			children = (
-				1A2D189D1F27A6D600B2C785 /* LinkDeviceViewController.storyboard */,
+				BB56DF082A9F91F7002C6E52 /* LinkDeviceViewController.storyboard */,
 				1A2D189E1F27A6D600B2C785 /* LinkDeviceViewController.swift */,
 				1A2D189F1F27A6D600B2C785 /* LinkDeviceViewModel.swift */,
 			);
@@ -2634,6 +2634,7 @@
 				BB0AB99A2A8FC7A90033061F /* CreateAccountViewController.storyboard in Resources */,
 				26929FD425659E5F0052A601 /* cacert.pem in Resources */,
 				0E4909751FEAC943005CAA50 /* CallViewController.storyboard in Resources */,
+				BB56DF092A9F91F8002C6E52 /* LinkDeviceViewController.storyboard in Resources */,
 				0E438A96204F318200402900 /* AccountHeader.xib in Resources */,
 				0E5806F723BE4325007D1F5D /* PlayerView.xib in Resources */,
 				26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */,
@@ -2661,7 +2662,6 @@
 				0EB1A5CF1F8EBE03009923E2 /* DeviceCell.xib in Resources */,
 				1A2D18B31F2915C500B2C785 /* ConversationViewController.storyboard in Resources */,
 				0E7CF4DF2017918300CD967D /* ButtonsContainerView.xib in Resources */,
-				1A2D18A01F27A6D600B2C785 /* LinkDeviceViewController.storyboard in Resources */,
 				1DE93594291B119900E426CF /* SwarmCreationViewController.storyboard in Resources */,
 				0E3697A9203243D3009A68CA /* BannedContactCell.xib in Resources */,
 				0E6D95982407113900996A28 /* LinkToAccountManagerViewController.storyboard in Resources */,
