@@ -16,6 +16,24 @@
       "message": "Since this function is used in different view controllers, it could be moved to a separate helper class",
       "revId": "3ff63a9cfe6591db15f7a0e3f75db70a9fbd345e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df4d62ba_6498f2bf",
+        "filename": "Ring/Ring/Features/Walkthrough/Welcome/WelcomeViewController.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-08-25T15:56:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a01cdfba_4cbc6b0d",
+      "revId": "3ff63a9cfe6591db15f7a0e3f75db70a9fbd345e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
