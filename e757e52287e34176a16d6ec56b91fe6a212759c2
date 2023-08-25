@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d621d6_aa6034f7",
+        "filename": "Ring/Ring/Features/Walkthrough/WelcomeViewController.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-08-25T17:41:40Z",
+      "side": 1,
+      "message": "modify copyright date and author",
+      "revId": "e757e52287e34176a16d6ec56b91fe6a212759c2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bbb44b4_35607ca3",
+        "filename": "Ring/Ring/Features/Walkthrough/WelcomeViewController.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-08-25T17:41:40Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "e757e52287e34176a16d6ec56b91fe6a212759c2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85130474_93690890",
+        "filename": "Ring/Ring/Features/Walkthrough/WelcomeViewController.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-08-25T17:41:40Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "e757e52287e34176a16d6ec56b91fe6a212759c2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8fa8682_82d3cec4",
+        "filename": "Ring/Ring/Helpers/AppInfoHelper.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-08-25T17:41:40Z",
+      "side": 1,
+      "message": "copyright",
+      "revId": "e757e52287e34176a16d6ec56b91fe6a212759c2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
