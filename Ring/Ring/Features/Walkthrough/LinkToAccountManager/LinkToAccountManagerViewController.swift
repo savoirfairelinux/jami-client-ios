@@ -81,7 +81,7 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
     func setupUI() {
         let welcomeFormPresentationStyle = ScreenHelper.welcomeFormPresentationStyle()
         self.setupConstraint()
-        
+
         if welcomeFormPresentationStyle == .fullScreen {
             self.contentView.removeCorners()
             self.view.backgroundColor = .secondarySystemBackground
@@ -89,7 +89,7 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
             self.contentView.roundTopCorners(radius: 12)
             self.view.backgroundColor = .clear
         }
-        
+
         // Mark the view as needing layout and then force the layout immediately
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
