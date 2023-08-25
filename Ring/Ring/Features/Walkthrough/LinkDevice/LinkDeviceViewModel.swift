@@ -32,7 +32,6 @@ class LinkDeviceViewModel: Stateable, ViewModel {
     private let accountService: AccountsService
     private let contactService: ContactsService
     private let accountCreationState = BehaviorRelay<AccountCreationState>(value: .unknown)
-    let enableNotificationsTitle = L10n.CreateAccount.enableNotifications
     lazy var createState: Observable<AccountCreationState> = {
         return self.accountCreationState.asObservable()
     }()
@@ -45,7 +44,6 @@ class LinkDeviceViewModel: Stateable, ViewModel {
 
     let pin = BehaviorRelay<String>(value: "")
     let password = BehaviorRelay<String>(value: "")
-    let notificationSwitch = BehaviorRelay<Bool>(value: true)
     let disposeBag = DisposeBag()
 
     required init (with injectionBag: InjectionBag) {
@@ -58,7 +56,7 @@ class LinkDeviceViewModel: Stateable, ViewModel {
         self.accountService
             .linkToJamiAccount(withPin: self.pin.value,
                                password: self.password.value,
-                               enable: self.notificationSwitch.value)
+                               enable: true)
             .subscribe(onNext: { [weak self] (account) in
                 guard let self = self else { return }
                 self.accountCreationState.accept(.success)
@@ -70,7 +68,7 @@ class LinkDeviceViewModel: Stateable, ViewModel {
                         self.accountService.currentAccount = account
                         UserDefaults.standard
                             .set(account.id, forKey: self.accountService.selectedAccountID)
-                        self.enablePushNotifications(enable: self.notificationSwitch.value)
+                        self.enablePushNotifications(enable: true)
                         self.stateSubject.onNext(WalkthroughState.deviceLinked)
                     })
                     .disposed(by: self.disposeBag)
