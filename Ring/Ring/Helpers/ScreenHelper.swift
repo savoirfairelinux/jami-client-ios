@@ -34,7 +34,7 @@ class ScreenHelper {
         case .landscapeLeft, .landscapeRight:
             return .fullScreen
         case .portrait, .portraitUpsideDown:
-            return .popover
+            return .formSheet
         default:
             return .fullScreen
         }
