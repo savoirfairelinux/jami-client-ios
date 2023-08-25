@@ -28,53 +28,53 @@ import SwiftyBeaver
 class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     // MARK: outlets
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var cancelButton: DesignableButton!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var linkButton: DesignableButton!
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var pinTextField: DesignableTextField!
-    @IBOutlet weak var passwordTextField: DesignableTextField!
-    @IBOutlet weak var pinInfoButton: UIButton!
+    @IBOutlet weak var pinTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var pinLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var notificationsSwitch: UISwitch!
-    @IBOutlet weak var enableNotificationsLabel: UILabel!
     // MARK: members
     private let disposeBag = DisposeBag()
     var viewModel: LinkDeviceViewModel!
-    var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
     let popTip = PopTip()
     var loadingViewPresenter = LoadingViewPresenter()
+    weak var containerViewTopConstraint: NSLayoutConstraint?
 
     let log = SwiftyBeaver.self
 
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupUI()
         // Style
         self.pinTextField.becomeFirstResponder()
         self.configureWalkrhroughNavigationBar()
         self.view.layoutIfNeeded()
-        self.linkButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         linkButton.titleLabel?.ajustToTextSize()
 
-        self.pinTextField.tintColor = UIColor.jamiSecondary
-        self.passwordTextField.tintColor = UIColor.jamiSecondary
         adaptToSystemColor()
+        configurePasswordField()
 
         self.applyL10n()
 
         // bind view model to view
-        self.pinInfoButton.rx.tap
-            .subscribe(onNext: { [weak self] (_) in
-                self?.showPinInfo()
-            })
-            .disposed(by: self.disposeBag)
 
         self.linkButton.rx.tap
             .subscribe(onNext: { [weak self] (_) in
                 self?.viewModel.linkDevice()
+            })
+            .disposed(by: self.disposeBag)
+
+        self.cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.dismiss(animated: true)
             })
             .disposed(by: self.disposeBag)
 
@@ -103,83 +103,140 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
             })
             .disposed(by: self.disposeBag)
 
+        self.viewModel.linkButtonEnabledState
+            .subscribe(onNext: { [weak self] isEnabled in
+                self?.linkButton.setTitleColor(isEnabled ? .jamiButtonDark : .systemGray, for: .normal)
+            })
+            .disposed(by: self.disposeBag)
+
         self.viewModel.linkButtonEnabledState.bind(to: self.linkButton.rx.isEnabled)
             .disposed(by: self.disposeBag)
 
         // bind view to view model
         self.pinTextField.rx.text.orEmpty.bind(to: self.viewModel.pin).disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
-        self.notificationsSwitch.rx.isOn.bind(to: self.viewModel.notificationSwitch).disposed(by: self.disposeBag)
 
-        // handle keyboard
-        self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
-        keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
                 guard UIDevice.current.portraitOrLandscape else { return }
-                self?.linkButton.updateGradientFrame()
                 self?.configureWalkrhroughNavigationBar()
             })
             .disposed(by: self.disposeBag)
-    }
-
-    func adaptToSystemColor() {
-        view.backgroundColor = UIColor.jamiBackgroundColor
-        scrollView.backgroundColor = UIColor.jamiBackgroundColor
-        pinLabel.textColor = UIColor.jamiTextSecondary
-        passwordLabel.textColor = UIColor.jamiTextSecondary
-        enableNotificationsLabel.textColor = UIColor.jamiTextSecondary
-        self.pinTextField.backgroundColor = UIColor.jamiBackgroundColor
-        self.passwordTextField.backgroundColor = UIColor.jamiBackgroundColor
-        self.pinTextField.borderColor = UIColor.jamiTextBlue
-        self.passwordTextField.borderColor = UIColor.jamiTextBlue
-        notificationsSwitch.tintColor = UIColor.jamiTextBlue
-        pinInfoButton.tintColor = UIColor.jamiTextBlue
-    }
-
-    func setContentInset() {
-        if !self.isKeyboardOpened {
-            self.containerViewBottomConstraint.constant = -20
-            return
-        }
-        let device = UIDevice.modelName
-        switch device {
-        case "iPhone X", "iPhone XS", "iPhone XS Max", "iPhone XR":
-            self.containerViewBottomConstraint.constant = -40
-        default:
-            self.containerViewBottomConstraint.constant = -65
-        }
-    }
-
-    @objc
-    func dismissKeyboard() {
-        self.isKeyboardOpened = false
-        self.becomeFirstResponder()
-        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
-    }
-
-    @objc
-    func keyboardWillAppear(withNotification: NSNotification) {
-        self.isKeyboardOpened = true
-        self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
-        self.setContentInset()
-    }
-
-    @objc
-    func keyboardWillDisappear(withNotification: NSNotification) {
-        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
-        self.setContentInset()
-    }
-
-    override var canBecomeFirstResponder: Bool {
-        return true
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setupUI()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        setupUI()
+    }
+
+    func setupUI() {
+        let welcomeFormPresentationStyle = ScreenHelper.welcomeFormPresentationStyle()
+        setupConstraint()
+        if welcomeFormPresentationStyle == .fullScreen {
+            contentView.removeCorners()
+            view.backgroundColor = .secondarySystemBackground
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                self?.contentView.roundTopCorners(radius: 12)
+            }
+            view.backgroundColor = .clear
+        }
+        view.layoutIfNeeded()
+    }
+
+    func setupConstraint() {
+        // Remove the existing top constraint (if it exists)
+        containerViewTopConstraint?.isActive = false
+        containerViewTopConstraint = nil
+
+        // Create a new constraint with the desired relationship
+        let newConstraint: NSLayoutConstraint
+        if ScreenHelper.welcomeFormPresentationStyle() == .fullScreen || UIDevice.current.userInterfaceIdiom == .pad {
+            newConstraint = contentView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.height)
+        } else {
+            newConstraint = contentView.heightAnchor.constraint(equalToConstant: 214)
+        }
+
+        // Activate the constraint
+        newConstraint.isActive = true
+
+        // Assign it to the property for later reference
+        containerViewTopConstraint = newConstraint
+    }
+
+    func adaptToSystemColor() {
+        pinLabel.textColor = UIColor.jamiTextSecondary
+        passwordLabel.textColor = UIColor.jamiTextSecondary
+        self.pinTextField.tintColor = UIColor.jamiSecondary
+        self.passwordTextField.tintColor = UIColor.jamiSecondary
+        view.backgroundColor = .clear
+    }
+
+    func setContentInset(keyboardHeight: CGFloat = 0) {
+        self.containerViewBottomConstraint.constant = keyboardHeight
+    }
+
+    func configurePasswordField() {
+        passwordTextField.isSecureTextEntry = true
+        let isSecureTextEntry = PublishSubject<Bool>()
+        let rightButton = UIButton(type: .custom)
+        rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        rightButton.setImage(UIImage(asset: Asset.icHideInput), for: .normal)
+        passwordTextField.rx.text.orEmpty.distinctUntilChanged()
+            .bind { text in
+                rightButton.isHidden = text.isEmpty
+                rightButton.isEnabled = !text.isEmpty
+            }
+            .disposed(by: self.disposeBag)
+        passwordTextField.rightViewMode = .always
+        let rightView = UIView(frame: CGRect( x: 0, y: 0, width: 50, height: 30))
+        rightView.addSubview(rightButton)
+        passwordTextField.rightView = rightView
+        rightButton.rx.tap
+            .subscribe(onNext: { [weak self, isSecureTextEntry] _ in
+                guard let self = self else { return }
+                self.passwordTextField.isSecureTextEntry.toggle()
+                isSecureTextEntry
+                    .onNext(self.passwordTextField.isSecureTextEntry)
+            })
+            .disposed(by: self.disposeBag)
+        isSecureTextEntry.asObservable()
+            .subscribe(onNext: { [weak rightButton] secure in
+                let image = secure ?
+                    UIImage(asset: Asset.icHideInput) :
+                    UIImage(asset: Asset.icShowInput)
+                rightButton?.setImage(image, for: .normal)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    @objc
+    func keyboardWillAppear(withNotification notification: NSNotification) {
+        self.isKeyboardOpened = true
+
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+           ScreenHelper.welcomeFormPresentationStyle() != .fullScreen {
+            let keyboardHeight = keyboardFrame.size.height
+            self.setContentInset(keyboardHeight: keyboardHeight)
+        }
+    }
+
+    @objc
+    func keyboardWillDisappear(withNotification: NSNotification) {
+        self.setContentInset()
+    }
+
+    override var canBecomeFirstResponder: Bool {
+        return true
     }
 
     private func applyL10n() {
@@ -188,12 +245,11 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
         self.passwordLabel.text = L10n.Global.enterPassword
         self.pinTextField.placeholder = L10n.LinkToAccount.pinPlaceholder
         self.passwordTextField.placeholder = L10n.Global.password
-        self.navigationItem.title = L10n.LinkToAccount.linkButtonTitle
-        self.enableNotificationsLabel.text = self.viewModel.enableNotificationsTitle
+        self.titleLabel.text = L10n.LinkToAccount.linkDeviceTitle
     }
 
     private func showCreationHUD() {
-        loadingViewPresenter.presentWithMessage(message: L10n.LinkToAccount.waitLinkToAccountTitle, presentingVC: self, animated: true)
+        loadingViewPresenter.presentWithMessage(message: L10n.CreateAccount.loading, presentingVC: self, animated: false, modalPresentationStyle: .fullScreen)
     }
 
     private func showLinkedSuccess() {
@@ -210,20 +266,5 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
                                            preferredStyle: .alert)
         alert.addAction(UIAlertAction.init(title: L10n.Global.ok, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-
-    private func showPinInfo() {
-        if popTip.isVisible {
-            popTip.hide()
-        } else {
-            popTip.shouldDismissOnTap = true
-            popTip.entranceAnimation = .scale
-            popTip.bubbleColor = UIColor.jamiSecondary
-            popTip.textColor = UIColor.white
-            let offset: CGFloat = 20.0
-            popTip.offset = offset - scrollView.contentOffset.y
-            popTip.show(text: L10n.LinkToAccount.explanationPinMessage, direction: .down,
-                        maxWidth: 255, in: self.view, from: pinInfoButton.frame)
-        }
     }
 }
