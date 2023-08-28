@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Escriure un missatge a ";
 "conversation.explanationSendingLocationTo" = "Actualment estàs compartint la teva ubicació amb ";
 "conversation.explanationReceivingLocationFrom" = "Actualment estàs recebint una ubicació en directe de ";
-"conversation.errorSavingImage" = "No va salvar imatge a la galeria";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Us ha enviat una petició per a una conversa.";
 "conversation.requestMessage" = "Hola, t'agradaria unir-te a la conversa?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Benvinguts a Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami és una plataforma de comunicació lliure i universal que conserva la privacitat i llibertats dels usuaris";
-"welcome.linkDevice" = "Enllaça aquest dispositiu a un compte";
-"welcome.createAccount" = "Crear un compte Jami";
-"welcome.connectToManager" = "Conectar-se a un servidor JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Salta";
 "createProfile.profileCreated" = "Endavant";
-"createProfile.title" = "Personalitzar el teu perfil";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Introdueix un nom de pantalla";
 "createProfile.enterNamePlaceholder" = "Introdueix el nom";
 "createProfile.subtitle" = "El teu perfil serà compartit amb els teus contactes.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Dispositiu de vincular";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introdueix PIN";
-"linkToAccount.explanationPinMessage" = "Per generar el codi PIN, aneu a les configuracions de gestió de compte del dispositiu que contenga el compte que voleu utilitzar. En les configuracions dels dispositius Seleccioneu \"Conectar un altre dispositiu a aquest compte\". Obtindràs el PIN necessari per completar aquest formulari. El PIN només és valid per 10 minuts.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Inscriure-se";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Fer foto";
 "alerts.profileUploadPhoto" = "Carrega foto";
 "alerts.accountLinkedTitle" = "Conta de vincul";
-"alerts.dbFailedTitle" = "Un error va succeir al llançament de Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Si us plau tanqueu la sol·licitud i intenteu obrir-la de nou";
 "alerts.confirmBlockContact" = "Estàs segur que vols bloquejar aquest contacte? El historial de conversa amb aquest contacte també s'eliminarà permanentment.";
 "alerts.confirmDeleteConversation" = "Estàs segur que vols suprimir aquesta conversa de forma permanent?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Revoca el dispositiu";
 "accountPage.revokeDeviceMessage" = "Estàs segur que vols revocar aquest dispositiu?";
 "accountPage.revokeDeviceButton" = "Revocació";
-"accountPage.revokeDevicePlaceholder" = "Introduir la seva contrasenya";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Revocació del dispositiu completada";
 "accountPage.deviceRevocationProgress" = "Revocar...";
 "accountPage.deviceRevocationSuccess" = "L'equip va ser revocat";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Contacta amb mi utilitzant \"%s\" a la plataforma de comunicació distribuïda Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Introducir la contrasenya de compte";
 "accountPage.usernamePlaceholder" = "Introducir el nom d'usuari desitjat";
-"accountPage.registerNameErrorMessage" = "No està disponible el nom d'usuari seleccionat";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registre";
 "accountPage.usernameRegisterAction" = "Registra";
 "accountPage.usernameRegistrationFailed" = "La inscripció no va funcionar.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Password incorrecte";
 "accountPage.enableBoothMode" = "Activació de l' mòde de l'estamp";
 "accountPage.disableBoothMode" = "Desactivar el mode de l'estamp";
-"accountPage.disableBoothModeExplanation" = "Enviar la contrasenya de la seva compte";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "En mode cabina no s'ha guardat el historial de conversa i la funcionalitat jami limitada per fer trucades sortents.";
 "accountPage.noBoothMode" = "Per activar el mode Booth cal crear primer la contrasenya de compte.";
 "accountPage.boothModeAlertMessage" = "Després d'activar el mode cabina totes les converses seran eliminades.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "Servidor SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Intermediari";
-"account.createSipAccount" = "Creació d'un compte SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Introducció d'adreça";
 "account.portLabel" = "Introducir el número de port";
 "account.accountStatus" = "Estatut de compte";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Enllaça un nou dispositiu";
 "linkDevice.passwordError" = "La contrasenya que ha introduït no desbloqueja aquest compte";
-"linkDevice.networkError" = "S'ha produït un error durant l'exportació";
-"linkDevice.defaultError" = "Error ocorrit durant l'exportació";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Per completar el procés, cal obrir Jami en el nou dispositiu i triar l'opció \"Linear aquest dispositiu a un compte\". El seu pin és válid per 10 minuts";
 "linkDevice.hudMessage" = "Verificació";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Has rebut la inviolació";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Creat un amas";
 "generatedMessage.invitationReceived" = "va ser convidat a unir-se";
 "generatedMessage.invitationAccepted" = "s'ha unit a la conversa";

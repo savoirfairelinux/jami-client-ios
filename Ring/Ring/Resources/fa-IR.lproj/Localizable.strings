@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "پیام بنویسید به";
 "conversation.explanationSendingLocationTo" = "در حال حاضر مکان خود را به اشتراک می‌گذارید";
 "conversation.explanationReceivingLocationFrom" = "در حال حاضر مکان زنده را دریافت می‌کنید از";
-"conversation.errorSavingImage" = "ذخیره تصویر در گالری انجام نشد";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "بهتون درخواست مکالمه رو فرستادم";
 "conversation.requestMessage" = "درود،\nمی‌خواهید به گفت‌وگو بپیوندید؟";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "به جمی خوش آمدید!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "جمی یک بستر ارتباطی رایگان و جهانی است، که حریم خصوصی و آزادی کاربران را حفظ می‌کند";
-"welcome.linkDevice" = "پیوند این دستگاه به یک حساب";
-"welcome.createAccount" = "ایجاد یک حساب جمی";
-"welcome.connectToManager" = "اتصال به یک سرور JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "پرش";
 "createProfile.profileCreated" = "بعدی";
-"createProfile.title" = "نمایه خود را شخصی‌سازی کنید";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "نامی برای نمایش وارد کنید";
 "createProfile.enterNamePlaceholder" = "نام را وارد کنید";
 "createProfile.subtitle" = "نمایه شما با مخاطبانتان به اشتراک گذاشته می‌شود. شما می‌توانید، آن را در هر زمان تغییر دهید.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "پیوند این افزاره";
 "linkToAccount.pinPlaceholder" = "پین";
 "linkToAccount.pinLabel" = "پین را وارد کنید";
-"linkToAccount.explanationPinMessage" = "برای تولید پین کد ( یا PIN)، به تنظیمات مدیریت حساب در دستگاهی که حاوی حساب کاربری مورد نظر شماست رجوع کنید. در تنظیمات دستگاه، «یک دستگاه دیگر را به این حساب پیوند دهید» را انتخاب کنید. برای تکمیل این فرم پین لازم را دریافت خواهید کرد. پین فقط ده (10) دقیقه معتبر است";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "ورود";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "عکس  بگیرید!";
 "alerts.profileUploadPhoto" = "بارگذاری عکس";
 "alerts.accountLinkedTitle" = "پیوند دادن حسابها";
-"alerts.dbFailedTitle" = "خطایی هنگام راه‌اندازی جامی رخ داد";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "لطفا برنامه را ببندید و دوباره آن را باز کنید.";
 "alerts.confirmBlockContact" = "آیا مطمئن هستید که میخواهید این مخاطب را مسدود کنید؟ تاریخچه گفتگو با این مخاطب برای همیشه پاک خواهد شد.";
 "alerts.confirmDeleteConversation" = "آیا اطمینان دارید که می‌خواهید این گفتگو را برای همیشه پاک کنید؟";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "باطل کردن دستگاه";
 "accountPage.revokeDeviceMessage" = "اطمینان دارید که می‌خواهید دسترسی این دستگاه را باطل کنید؟ این عمل قابل برگشت نیست.";
 "accountPage.revokeDeviceButton" = "باطل کردن";
-"accountPage.revokeDevicePlaceholder" = "گذرواژه خود را وارد کنید";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "ابطال دستگاه تکمیل شد";
 "accountPage.deviceRevocationProgress" = "در حال ابطال…";
 "accountPage.deviceRevocationSuccess" = "دسترسی دستگاه باطل شد";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "با استفاده از \"%s\" روی بستر ارتباط توزیع‌شده جمی، با من در تماس باشید: https://jami.net";
 "accountPage.passwordPlaceholder" = "گذرواژه حساب را وارد کنید";
 "accountPage.usernamePlaceholder" = "نام کاربری دلخواه را وارد کنید";
-"accountPage.registerNameErrorMessage" = "نام کاربری انتخاب‌شده در دسترس نیست";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "ثبت‌نام";
 "accountPage.usernameRegisterAction" = "ثبت‌نام";
 "accountPage.usernameRegistrationFailed" = "انتقال ناموفق بود، لطفا گذرواژه را بررسی کنید.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "گذرواژه نادرست است";
 "accountPage.enableBoothMode" = "فعال‌سازی حالت غرفه";
 "accountPage.disableBoothMode" = "غیر‌فعال‌سازی حالت غرفه";
-"accountPage.disableBoothModeExplanation" = "گذرواژه حساب‌تان را وارد کنید";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "در حالت غرفه سابقه گفتگو ذخیره نمی‌شود و عملکرد جمی به برقراری تماس‌های خروجی محدود می‌شود. وقتی حالت غرفه را فعال کنید، تمامی گفتگو‌های شما حذف می‌شوند.";
 "accountPage.noBoothMode" = "برای فعال‌سازی حالت غرفه ابتدا باید گذرواژه حساب ایجاد کنید.";
 "accountPage.boothModeAlertMessage" = "بعد از فعال‌سازی حالت غرفه، تمامی گفتگوهای شما حذف می‌شوند.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "سرور SIP";
 "account.port" = "پرت";
 "account.proxyServer" = "پراکسی";
-"account.createSipAccount" = "ایجاد یک حساب SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "آدرس را وارد کنید";
 "account.portLabel" = "شماره درگاه را وارد کنید";
 "account.accountStatus" = "وضعیت حساب";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "پیوند یک دستگاه جدید";
 "linkDevice.passwordError" = "گذرواژه‌ای که وارد کردید قفل این حساب کاربری را باز نمی‌کند";
-"linkDevice.networkError" = "یک خطای در ارتباط با شبکه  در زمان برون ریزی رخ داد.";
-"linkDevice.defaultError" = "یک خطا  در زمان برون ریزی رخ داد.";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "برای کامل کردن فرایند، باید جمی را روی دستگاه جدید باز کرده و  «پیوند این دستگاه به یک حساب» را انتخاب کنید. پین شما برای 10 دقیقه اعتبار دارد";
 "linkDevice.hudMessage" = " در حال انجام تأیید...";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "تو ازت درخواست درخواست گرفتي";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "سوق ایجاد شده";
 "generatedMessage.invitationReceived" = "دعوت شد که به";
 "generatedMessage.invitationAccepted" = "به حرف زدن پیوست";

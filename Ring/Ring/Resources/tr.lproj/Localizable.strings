@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Şuna ileti yaz:";
 "conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
 "conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
-"conversation.errorSavingImage" = "Fotoğraf galeriye kaydedilemedi";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@size bir konuşma isteği gönderdi.";
 "conversation.incomingRequest" = "Sana bir konuşma isteği gönderdim.";
 "conversation.requestMessage" = "Merhaba,\nKonuşmaya katılmak ister misin?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Jami'ye Hoşgeldiniz !";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami, kullanıcılarının gizlilik ve özgürlüklerini sağlayan evrensel ve özgür platformdur.";
-"welcome.linkDevice" = "Bu aygıtı hesaba bağla";
-"welcome.createAccount" = "Jami hesabı oluştur";
-"welcome.connectToManager" = "Bir JAMS sunucusuna bağlan";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Atla";
 "createProfile.profileCreated" = "İleri";
-"createProfile.title" = "Profilinizi kişiselleştirin";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Görünecek adı girin";
 "createProfile.enterNamePlaceholder" = "Ad girin";
 "createProfile.subtitle" = "Profiliniz kişilerinizle paylaşılacak. İstediğiniz zaman değiştirebilirsiniz.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Aygıt bağla";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN'i gir";
-"linkToAccount.explanationPinMessage" = "PIN kodu oluşturmak için, hesabı kullanmak istediğiniz aygıttaki hesap yönetimi ayarlarına gidin. Aygıt ayarlarında \"Başka aygıtı bu hesaba bağla\"yı seçin. Bu formu doldurmada gereken PIN'i edineceksiniz. PIN 10 dakikalığına geçerlidir.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Oturum Aç";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Fotoğraf çek";
 "alerts.profileUploadPhoto" = "Fotograf yükle";
 "alerts.accountLinkedTitle" = "Hesap bağlama";
-"alerts.dbFailedTitle" = "Jami başlatılırken bir hata oluştu";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Lütfen uygulamayı kapatın ve yeniden açmayı deneyin";
 "alerts.confirmBlockContact" = "Bu kişiyi engellemek istediğinize emin misiniz? Bu kişiyle olan konuşma geçmişi de kalıcı olarak silinecek.";
 "alerts.confirmDeleteConversation" = "Bu konuşmayı kalıcı olarak silmek istediğinizden emin misiniz?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Aygıtı kaldır";
 "accountPage.revokeDeviceMessage" = "Bu aygıtı kaldırmak istediğinize emin misiniz? Bu eylem geri alınamaz.";
 "accountPage.revokeDeviceButton" = "Kaldır";
-"accountPage.revokeDevicePlaceholder" = "Parolanızı girin";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Aygıt iptali tamamlandı";
 "accountPage.deviceRevocationProgress" = "İptal ediliyor...";
 "accountPage.deviceRevocationSuccess" = "Aygıt kaldırıldı";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Jami dağıtılmış iletişim platformunda \"%s\" kullanarak bana ulaşın: https://jami.net";
 "accountPage.passwordPlaceholder" = "Hesap parolanızı girin";
 "accountPage.usernamePlaceholder" = "İstenen kullanıcı adını girin";
-"accountPage.registerNameErrorMessage" = "Seçilen kullanıcı adı uygun değil";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Kayıt ediliyor";
 "accountPage.usernameRegisterAction" = "Kaydol";
 "accountPage.usernameRegistrationFailed" = "Kayıt başarısız. Lütfen parolanızı denetleyin.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Parola yanlış";
 "accountPage.enableBoothMode" = "Kabin Kipini Etkinleştir";
 "accountPage.disableBoothMode" = "Kabin Kipini Devre Dışı Bırak";
-"accountPage.disableBoothModeExplanation" = "Lütfen hesap parolanızı sağlayın";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Kabin kipinde konuşma geçmişiniz kaydedilmez ve jami'nin işlevleri giden aramalar ile kısıtlandırılır. Kabin kipini etkinleştirdiğinizde tüm konuşmalarınız kaldırılacaktır.";
 "accountPage.noBoothMode" = "Kabin kipini etkinleştirmek için önce hesap parolası oluşturmanız gerekir.";
 "accountPage.boothModeAlertMessage" = "Kabin kipini etkinleştirdikten sonra tüm konuşmalarınız kaldırılacaktır.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP sunucusu";
 "account.port" = "Delik";
 "account.proxyServer" = "Vekil";
-"account.createSipAccount" = "Bir SIP Hesabı oluşturun";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Adres Girin";
 "account.portLabel" = "Bağlantı Noktası Numarası Gir";
 "account.accountStatus" = "Hesap Durumu";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Yeni aygıt bağla";
 "linkDevice.passwordError" = "Girdiğiniz parola bu hesabı açmaz";
-"linkDevice.networkError" = "Dışa aktarma esnasında bir ağ hatası oluştu";
-"linkDevice.defaultError" = "Dışa aktarma esnasında bir hata oluştu";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Süreci tamamlamak için yeni aygıtta Jami'yi açmanız ve \"Bu aygıtı hesaba bağla\"yı seçmelisiniz. Pininiz 10 dakikalığına geçerlidir";
 "linkDevice.hudMessage" = "Doğrulama";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "- Sen de izinsiz kaldın.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Küme oluşturuldu";
 "generatedMessage.invitationReceived" = "katılmak için davet edildi";
 "generatedMessage.invitationAccepted" = "Konuşmaya katıldım.";

@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Skriv ein melding til ";
 "conversation.explanationSendingLocationTo" = "Du delar no med deg av plasseringa med ";
 "conversation.explanationReceivingLocationFrom" = "Du får for tiden ein live-platsing frå ";
-"conversation.errorSavingImage" = "Ikkje før eg save bilder til galleri";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Eg sende deg ein forespørsel om ein samtale.";
 "conversation.requestMessage" = "Helt godt, vil du koma med på samtalen?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Velkommen til Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami er ein fri og universell kommunikasjonsplattform som behåller privatlivet og frita til brukarane.";
-"welcome.linkDevice" = "Knyt dette til ein konto";
-"welcome.createAccount" = "Skapa ein Jami-konto";
-"welcome.connectToManager" = "Knytte til ein JAMS server";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Neste";
-"createProfile.title" = "Personleggjøre profilen din";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Skriv inn eit visningsnamn";
 "createProfile.enterNamePlaceholder" = "Skriv inn namn";
 "createProfile.subtitle" = "Profilen din vert delt med kontaktane dine. Du kan endra den når som helst.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Linketøy";
 "linkToAccount.pinPlaceholder" = "PIN-kode";
 "linkToAccount.pinLabel" = "Skriv inn PIN";
-"linkToAccount.explanationPinMessage" = "For å generere PIN-koden, gå til kontohanteringsinnstillingane på einheten som inneholder konto du vil bruke. I settinga på einheten Velg \"Link ein annan enhet til denne kontoen\". Du får den nødvendige PIN-koden for å fylla i dette skjemaet. PIN-koden er berre gyldig i 10 minuttar.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Logg inn";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Ta eit foto";
 "alerts.profileUploadPhoto" = "La opp foton";
 "alerts.accountLinkedTitle" = "Liningkonto";
-"alerts.dbFailedTitle" = "Det skjedde ei feil når ein la Jami av.";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Vennligst lukk søknaden og prøv å opna den igjen";
 "alerts.confirmBlockContact" = "Er du sikker på du vil blokkere denne kontakta? Samtalehistoria med denne kontakta vert òg slettet permanent.";
 "alerts.confirmDeleteConversation" = "Er du sikker på du vil sletta samtalen permanent?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Einheit for å avbryta";
 "accountPage.revokeDeviceMessage" = "Er du sikker på at du vil tilbakekalle denne eining?";
 "accountPage.revokeDeviceButton" = "Avkalling";
-"accountPage.revokeDevicePlaceholder" = "Skriv inn passordet ditt";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Avkalling av utstyret fullført";
 "accountPage.deviceRevocationProgress" = "Å avskaffe...";
 "accountPage.deviceRevocationSuccess" = "Eit apparat vart avkalla";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Ta kontakt med meg ved å bruke \"%s\" på den distribuerte kommunikasjonsplattformen til Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Skriv inn kontopassord";
 "accountPage.usernamePlaceholder" = "Skriv inn ynskinga";
-"accountPage.registerNameErrorMessage" = "Velde brukernavn er ikkje tilgjengeleg";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registrering";
 "accountPage.usernameRegisterAction" = "Registrer";
 "accountPage.usernameRegistrationFailed" = "Registrering mislyktes. Vennligst sjekk passordet.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Passord feil";
 "accountPage.enableBoothMode" = "Aktive brukstilstand";
 "accountPage.disableBoothMode" = "Deaktivera standstill";
-"accountPage.disableBoothModeExplanation" = "Vennligst gjev ditt kontopassord";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "I stand-modus blir samtalshistoria ikkje lagd og funksjonaliteten til jami er begrenset av å gjera utgående samtal. Når du aktiverer stand-modus blir alle samtalene dine fjerna.";
 "accountPage.noBoothMode" = "For å aktivere Booth-modus må du oppretta kontopassord først.";
 "accountPage.boothModeAlertMessage" = "Etter at du har aktivert stand-modus, blir alle samtalene dine fjernt.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP server";
 "account.port" = "Port";
 "account.proxyServer" = "Styrkemann";
-"account.createSipAccount" = "Skapa ein SIP konto";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Skriv inn adressen";
 "account.portLabel" = "Skriv inn portnummer";
 "account.accountStatus" = "Kontostatus";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Legg ein ny enhet til";
 "linkDevice.passwordError" = "Passordet du har eingjeve låser ikkje dette kontoet";
-"linkDevice.networkError" = "Netverksfeller oppstod under eksporten";
-"linkDevice.defaultError" = "Feil som oppsto under eksporten";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "For å fullføra prosessen, må du opna Jami på den nye enheten og velg alternativet \"Linja denne enheten til ein konto\". Pinen din er gyldig i 10 minuttar";
 "linkDevice.hudMessage" = "Verifisering";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Du fekk innlevering";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Skarm skapte";
 "generatedMessage.invitationReceived" = "blei invitert til å bli med";
 "generatedMessage.invitationAccepted" = "gjekk med på samtalen";

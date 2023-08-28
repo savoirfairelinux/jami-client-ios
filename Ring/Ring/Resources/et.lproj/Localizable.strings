@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Kirjuta sõnum ";
 "conversation.explanationSendingLocationTo" = "Sa jagad praegu oma asukoha ";
 "conversation.explanationReceivingLocationFrom" = "Saate praegu otse-eeskirja ";
-"conversation.errorSavingImage" = "Galerii salvestamise ebaõnnestumine";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Saatsin sulle kõne taotlus.";
 "conversation.requestMessage" = "Tere, kas sa sooviksid meiega rääkida?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Tere tulemast Jami'sse!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami on vaba ja universaalne sideplatvorm, mis kaitseb kasutajate privaatsust ja vabadusi";
-"welcome.linkDevice" = "Seadme ühendamine kontoniga";
-"welcome.createAccount" = "Loe Jami konto";
-"welcome.connectToManager" = "JAMS serveriga ühendamine";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Lööge";
 "createProfile.profileCreated" = "Järgmine";
-"createProfile.title" = "Isendata oma profiili";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Sisesta näite nimi";
 "createProfile.enterNamePlaceholder" = "Sisestage nimi";
 "createProfile.subtitle" = "Teie profiil jagatakse teie kontakttega.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Seossevõtuvahend";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Sisesta PIN-aeg";
-"linkToAccount.explanationPinMessage" = "PIN-koodide tekkimiseks pöörduge seadme konto haldamise seadmete juurde, mis sisaldavad kasutaja konto. seadmete seadmetes valige \"Linguta see kontole teine seadme\". Teil on vajalik PIN-kood, et täita see vorm. PIN-kood on kehtiv ainult 10 minutit.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Saegne sisse";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Võta foto.";
 "alerts.profileUploadPhoto" = "Laadige üles foto";
 "alerts.accountLinkedTitle" = "Sõltumine konto";
-"alerts.dbFailedTitle" = "Jami'i laskmisel juhtus viga.";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Palun sulge taotlus ja proovige uuesti avada.";
 "alerts.confirmBlockContact" = "Kas sa tahad selle kontakti blokeerida?";
 "alerts.confirmDeleteConversation" = "Oled kindel, et tahad seda vestlust püsivalt kustutada?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Kinnitusseadmed";
 "accountPage.revokeDeviceMessage" = "Kas sa tahad selle seadme tagasi võtta?";
 "accountPage.revokeDeviceButton" = "Kinnitamine";
-"accountPage.revokeDevicePlaceholder" = "Sisesta oma parool";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "seadme tagasivõtmine lõpetatud";
 "accountPage.deviceRevocationProgress" = "- Kinnitamine...";
 "accountPage.deviceRevocationSuccess" = "Seadme tühistati.";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Võta ühendust minuga Jami jaotatud sideplatvormis \"%s\" kasutades: https://jami.net";
 "accountPage.passwordPlaceholder" = "Kirjuta konto parool";
 "accountPage.usernamePlaceholder" = "Sisesta soovitud kasutajanimi";
-"accountPage.registerNameErrorMessage" = "Valitud kasutajanimi ei ole kättesaadav";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registreerimine";
 "accountPage.usernameRegisterAction" = "Registreerimine";
 "accountPage.usernameRegistrationFailed" = "Registreerimine ebaõnnestunud.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Salaus on vale";
 "accountPage.enableBoothMode" = "Võimalise boodi toiming";
 "accountPage.disableBoothMode" = "Püüa peatada laua";
-"accountPage.disableBoothModeExplanation" = "Palun andke oma konto parool";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Booth-režiimis ei salvestata vestlushistoriat ja Jami funktsioon on piiratud väljapääsude tegemisega.";
 "accountPage.noBoothMode" = "Et võimaldada Booth-režiimi, peate kõigepealt luua konto parool.";
 "accountPage.boothModeAlertMessage" = "Pärast kabinimoodi aktiveerimist kustutatakse kõik teie vestlused.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP server";
 "account.port" = "Sadam";
 "account.proxyServer" = "Vastutus";
-"account.createSipAccount" = "Loe SIP konto";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Sisesta aadress";
 "account.portLabel" = "Sisesta sadaminumber";
 "account.accountStatus" = "Kontosituus";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Sõlgke uus seadme";
 "linkDevice.passwordError" = "Sisestatud parool ei lukusta seda kontot";
-"linkDevice.networkError" = "Ekspordi ajal tekkis võrgu viga";
-"linkDevice.defaultError" = "Ekspordi ajal tekkinud viga";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Selleks, et protsessi lõpetada, peate avama Jami uuel seadmel ja valima valik \"Ühendage see seadme kontonile\". Teie pin on kehtiv 10 minutit";
 "linkDevice.hudMessage" = "Kontrollimine";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Sa said vabastust.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Loodi karm";
 "generatedMessage.invitationReceived" = "kutsuti ühinema";
 "generatedMessage.invitationAccepted" = "ühines vestlusesse";

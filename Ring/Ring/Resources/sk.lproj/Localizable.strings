@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Napíšte správu ";
 "conversation.explanationSendingLocationTo" = "V súčasnosti zdieľate svoju polohu s ";
 "conversation.explanationReceivingLocationFrom" = "Momentálne dostávate živú lokalitu od ";
-"conversation.errorSavingImage" = "Zlyhal, aby sa uložiť obrázok do galérie";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Poslal som vám žiadosť o rozhovor.";
 "conversation.requestMessage" = "Ahoj, chcela by si sa pripojiť k rozhovore?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Vitajte v Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami je slobodná a univerzálna komunikačná platforma, ktorá zachováva súkromie a slobodu používateľov.";
-"welcome.linkDevice" = "Prepojiť toto zariadenie s účtom";
-"welcome.createAccount" = "Vytvoriť Jami účet";
-"welcome.connectToManager" = "Pripojenie k serveru JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Preskočiť";
 "createProfile.profileCreated" = "Ďalej";
-"createProfile.title" = "Prispôsobte si svoj profil";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Zadajte meno na zobrazenie";
 "createProfile.enterNamePlaceholder" = "Zadajte meno";
 "createProfile.subtitle" = "Váš profil bude zdieľaný s vašimi kontaktami. Môžete to kedykoľvek zmeniť.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Prepájanie zariadenia";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Zadajte PIN";
-"linkToAccount.explanationPinMessage" = "Pre vygenerovanie PIN kódu musíte ísť do nastavení účtu na zariadení, ktoré už obsahuje účet, ktorý chcete použiť. Zvoľte \"Prepojiť ďalšie zariadenie s týmto účtom\". Potom obdržíte PIN potrebný na vyplnenie tohto formulára. PIN je platný 10 minút.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Prihlásiť sa";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Zhotoviť fotografiu";
 "alerts.profileUploadPhoto" = "Nahrať fotografiu";
 "alerts.accountLinkedTitle" = "Prepájanie účtu";
-"alerts.dbFailedTitle" = "Pri spúšťaní Jami sa vyskytla chyba";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Zavrite a znovu otvorte aplikáciu";
 "alerts.confirmBlockContact" = "Naozaj chcete zablokovať tento kontakt? Bude trvalo vymazaná aj história konverzácie s týmto kontaktom.";
 "alerts.confirmDeleteConversation" = "Naozaj chcete natrvalo vymazať túto konverzáciu?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Odobrať zariadenie";
 "accountPage.revokeDeviceMessage" = "Naozaj chcete odobrať toto zariadenie? Táto operácia sa nedá vrátiť.";
 "accountPage.revokeDeviceButton" = "Odobrať";
-"accountPage.revokeDevicePlaceholder" = "Zadajte vaše heslo";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Odobratie zariadenia dokončené";
 "accountPage.deviceRevocationProgress" = "Odoberanie...";
 "accountPage.deviceRevocationSuccess" = "Zariadenie bolo odobrané";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Kontaktujete ma pomocou \"%s\" na distribuovanej komunikačnej platforme Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Zadajte heslo k účtu";
 "accountPage.usernamePlaceholder" = "Zadajte želané používateľské meno";
-"accountPage.registerNameErrorMessage" = "Zvolené meno nie je dostupné";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registruje sa";
 "accountPage.usernameRegisterAction" = "Registrovať";
 "accountPage.usernameRegistrationFailed" = "Registrácia zlyhala. Skontrolujte prosím heslo.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Nespraviteľné heslo";
 "accountPage.enableBoothMode" = "Umožniť režim kabíny";
 "accountPage.disableBoothMode" = "Zmazať režim kabíny";
-"accountPage.disableBoothModeExplanation" = "Prosím, poskytnite si heslo účtu.";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "V režime kabíny nie je uložená historika konverzácií a funkcia Jami je obmedzená výstupnými hovormi.";
 "accountPage.noBoothMode" = "Ak chcete aktivovať režim Booth, musíte najprv vytvoriť heslo účtu.";
 "accountPage.boothModeAlertMessage" = "Po spustení režimu stanky sa všetky vaše konverzácie odstránia.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Vytvorenie účtu SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Zadajte adresu";
 "account.portLabel" = "Zadajte číslo portu";
 "account.accountStatus" = "Status účtu";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Prepojiť nové zariadenie";
 "linkDevice.passwordError" = "Heslo, ktoré ste zadali, neodomyká tento účet";
-"linkDevice.networkError" = "Počas exportu sa vyskytla chyba siete";
-"linkDevice.defaultError" = "Počas exportu sa vyskytla chyba";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Na dokončenie procesu je potrebné otvoriť aplikáciu Jami na novom zariadení a zvoliť možnosť \"Prepojiť toto zariadenie s účtom\". Váš PIN bude funkčný po dobu 10 minút.";
 "linkDevice.hudMessage" = "Overovanie";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Dostal si nepovolenie";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Vytvorený hŕstok";
 "generatedMessage.invitationReceived" = "bol pozvaný k tomu, aby sa pripojil";
 "generatedMessage.invitationAccepted" = "Pripojil sa k rozhovore";

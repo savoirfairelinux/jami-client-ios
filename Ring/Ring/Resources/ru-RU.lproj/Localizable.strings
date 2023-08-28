@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Написать сообщение";
 "conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
 "conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
-"conversation.errorSavingImage" = "Не удалось сохранить изображение в галерею";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Я отправил вам запрос на разговор.";
 "conversation.requestMessage" = "Привет,\nВы хотите присоединиться к разговору?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Добро пожаловать в Jami !";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami - это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
-"welcome.linkDevice" = "Привязать это устройство к аккаунту";
-"welcome.createAccount" = "Создать учётную запись Jami";
-"welcome.connectToManager" = "Подключиться к JAMS серверу";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустить";
 "createProfile.profileCreated" = "Далее";
-"createProfile.title" = "Персонализируйте свой профиль";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Введите отображаемое имя";
 "createProfile.enterNamePlaceholder" = "Введите имя";
 "createProfile.subtitle" = "Ваш профиль будет доступен только вашим контактам. Вы можете изменить это в любое время.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Привязать устройство";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Введите PIN";
-"linkToAccount.explanationPinMessage" = "Чтобы сгенерировать PIN-код, перейдите к настройкам управления аккаунтами на устройстве, содержащий аккаунт, которую вы хотите использовать. В настройках устройства выберите \"связать другое устройство с этим аккаунтом\". Вы получите необходимый PIN-код для заполнения этой формы. PIN-код действителен только в течение 10 минут.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Войти";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Сфотографировать";
 "alerts.profileUploadPhoto" = "Загрузить фото";
 "alerts.accountLinkedTitle" = "Привязать аккаунт";
-"alerts.dbFailedTitle" = "Произошла ошибка при запуске Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Пожалуйста, закройте приложение и попробуйте открыть его снова";
 "alerts.confirmBlockContact" = "Вы уверены, что хотите заблокировать этот контакт? История разговоров с этим контактом также будет безвозвратно удалена.";
 "alerts.confirmDeleteConversation" = "Вы уверены, что хотите безвозвратно удалить этот разговор?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Отозвать устройство";
 "accountPage.revokeDeviceMessage" = "Ты уверен, что хотите отозвать это устройство? Это действие не может быть отменено.";
 "accountPage.revokeDeviceButton" = "Отозвать";
-"accountPage.revokeDevicePlaceholder" = "Введите ваш пароль";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Отзыв устройства завершенно";
 "accountPage.deviceRevocationProgress" = "Отзыв…";
 "accountPage.deviceRevocationSuccess" = "Устройство было отозвано";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Свяжитесь со мной, используя \"%s\" на распределенной коммуникационной платформе Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Введите пароль вашего аккаунта";
 "accountPage.usernamePlaceholder" = "Введите желаемое имя пользователя";
-"accountPage.registerNameErrorMessage" = "Выбранное имя пользователя недоступно";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Регистрация";
 "accountPage.usernameRegisterAction" = "Зарегистрировать";
 "accountPage.usernameRegistrationFailed" = "Ошибка регистрации. Пожалуйста, проверьте пароль.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Пароль неверный ";
 "accountPage.enableBoothMode" = "Включить режим кабинки";
 "accountPage.disableBoothMode" = "Выключить режим кабинки";
-"accountPage.disableBoothModeExplanation" = "Пожалуйста, укажите пароль вашей учетной записи";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "В режиме кабинки история разговоров не сохраняется, а функциональность Jami ограничена исходящими звонками. Когда вы включите режим кабинки, все ваши разговоры будут удалены.";
 "accountPage.noBoothMode" = "Для включения режима кабинки необходимо сначала создать пароль учетной записи.";
 "accountPage.boothModeAlertMessage" = "После включения режима кабинки все ваши разговоры будут удалены.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP-сервер";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
-"account.createSipAccount" = "Создать SIP Аккаунт";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Введите адрес";
 "account.portLabel" = "Введите номер порта";
 "account.accountStatus" = "Статус аккаунта";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Привязать новое устройство";
 "linkDevice.passwordError" = "Введенный пароль не разблокирует этот аккаунт";
-"linkDevice.networkError" = "Во время экспорта произошла сетевая ошибка";
-"linkDevice.defaultError" = "Во время экспорта произошла ошибка";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Для завершения процесса Вам необходимо запустить Jami на новом устройстве и выбрать пункт \"Привязать это устройство к аккаунту\". Ваш PIN действителен в течение 10 минут";
 "linkDevice.hudMessage" = "Верификация";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Ты получил неотказание";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Рой создан";
 "generatedMessage.invitationReceived" = "приглашали к участию";
 "generatedMessage.invitationAccepted" = "Присоединился к разговору";

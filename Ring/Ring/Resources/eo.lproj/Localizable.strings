@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Skribu mesaĝon al ";
 "conversation.explanationSendingLocationTo" = "Vi nun dividas vian lokon kun ";
 "conversation.explanationReceivingLocationFrom" = "Vi nun ricevas live-lokon de ";
-"conversation.errorSavingImage" = "Ne sukcesis savi bildon al galerio";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Mi sendis al vi peton por konversacio.";
 "conversation.requestMessage" = "Saluton, ĉu vi ŝatus aliĝi al la konversacio?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Bonvenon al Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami estas libera kaj universala komunikada platformo kiu konservas la privatecon kaj liberecojn de la uzantoj";
-"welcome.linkDevice" = "Ligi tiun aparaton al konto";
-"welcome.createAccount" = "Krei konto en Jami";
-"welcome.connectToManager" = "Konekti al JAMS-servilo";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Sekva";
-"createProfile.title" = "Personaligu vian profilon";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Enigu la nomon de la ekrano";
 "createProfile.enterNamePlaceholder" = "Enigu nomon";
 "createProfile.subtitle" = "Via profilo estos dividita kun viaj kontaktoj. Vi povas ŝanĝi ĝin en iu ajn tempo.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Ligi aparaton";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Entajpu PIN";
-"linkToAccount.explanationPinMessage" = "Por generi la PIN-kodo, iru al la agordoj de administrado de konto sur la aparato, kiuj enhavas la konton, kiun vi volas uzi. En la agordoj de la aparato Elektu \"Liĉu alian aparaton al tiu konto\". Vi ricevos la necesajn PIN-kodon por kompletigi tiun formularon. La PIN-kodon validas nur 10 minutojn.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Enskribiĝu";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Foti";
 "alerts.profileUploadPhoto" = "Alŝuti foton";
 "alerts.accountLinkedTitle" = "Ligas konton";
-"alerts.dbFailedTitle" = "Eraro okazis dum la lanĉo de Jami.";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Bonvolu fermu aplikaĵo kaj provu aktivigi ĝin denove";
 "alerts.confirmBlockContact" = "Ĉu vi certas, ke vi volas bloki tiun kontakton? La konversacia historio kun tiu kontakto ankaŭ estos forigita permanente.";
 "alerts.confirmDeleteConversation" = "Ĉu vi certas, ke vi volas forigi ĉi tiun konversacion permanente?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Revoga aparato";
 "accountPage.revokeDeviceMessage" = "Ĉu vi certas, ke vi volas revoki tiun aparaton?";
 "accountPage.revokeDeviceButton" = "Revoĝo";
-"accountPage.revokeDevicePlaceholder" = "Enigu vian pasvorton";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "La aparato estas nuligita";
 "accountPage.deviceRevocationProgress" = "Revokas...";
 "accountPage.deviceRevocationSuccess" = "La aparato estis revokita";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Kontaktu min uzante \"%s\" sur la distribuita komunikada platformo de Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Enigu la pasvorton de la konto";
 "accountPage.usernamePlaceholder" = "Enigu la deziratan uzantnomon";
-"accountPage.registerNameErrorMessage" = "Elektita uzantnomo ne estas disponebla";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registriĝo";
 "accountPage.usernameRegisterAction" = "Registri";
 "accountPage.usernameRegistrationFailed" = "Registro malsukcesis. Bonvolu kontroli la pasvorton.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Malĝusta pasvorto";
 "accountPage.enableBoothMode" = "Aktivigu la ŝarĝan reĝimon";
 "accountPage.disableBoothMode" = "Malŝaltu la buŝan reĝimon";
-"accountPage.disableBoothModeExplanation" = "Bonvolu informi vian pasvorton pri via konto";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "En la stand-modo konversacia historio ne estas savita kaj la funkcio de Jami limigita per farante elirantaj alvokojn. Kiam vi aktivigas stand-modo ĉiuj viaj konversacioj estos forigitaj.";
 "accountPage.noBoothMode" = "Por aktivigi la buŝan reĝimon vi devas unue krei la pasvorton de la konto.";
 "accountPage.boothModeAlertMessage" = "Post aktivigo de la stand-modo ĉiuj viaj konversacioj estos forigitaj.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP Servilo";
 "account.port" = "Pordo";
 "account.proxyServer" = "Prokura Servilo";
-"account.createSipAccount" = "Kreu SIP-konto";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Enigu adreson";
 "account.portLabel" = "Enigu la portujan numeron";
 "account.accountStatus" = "Statuso de konto";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Ligigu novan aparaton";
 "linkDevice.passwordError" = "La pasvorto, kiun vi enmetis, ne malŝlosas tiun konton";
-"linkDevice.networkError" = "Reta eraro okazis dum la elporto";
-"linkDevice.defaultError" = "Eraro okazis dum la elporto";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Por kompletigi la procezon, vi devas malfermi Jami sur la nova aparato kaj elekti la eblon \"Liĉu ĉi tiun aparaton al konto\". Via pinto validas dum 10 minutoj";
 "linkDevice.hudMessage" = "Certigas";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Vi ricevis la malpermeson";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "La ŝarmo kreis";
 "generatedMessage.invitationReceived" = "estis invitita al ligi";
 "generatedMessage.invitationAccepted" = "aliĝis al la konversacio";

@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Γράψε μήνυμα σε ";
 "conversation.explanationSendingLocationTo" = "Συμμετέχετε τη θέση σας με ";
 "conversation.explanationReceivingLocationFrom" = "Πλέον λαμβάνετε ζωντανή τοποθεσία από";
-"conversation.errorSavingImage" = "Αποτύχθηκε να αποθηκεύσει εικόνα στη γκαλερί";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "Ο χρήστης %@ σας έστειλε αίτημα συνομιλίας.";
 "conversation.incomingRequest" = "Σου έστειλα αίτημα για συζήτηση.";
 "conversation.requestMessage" = "Γεια σας, θα θέλατε να συμμετάσχετε στη συζήτηση;";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Καλώς ήρθατε στο Τζάμι!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Η Jami είναι μια ελεύθερη και παγκόσμια πλατφόρμα επικοινωνίας που διατηρεί την ιδιωτικότητα και τις ελευθερίες των χρηστών";
-"welcome.linkDevice" = "Σύνδεση αυτής της συσκευής με ένα λογαριασμό";
-"welcome.createAccount" = "Δημιουργία λογαριασμού Jami";
-"welcome.connectToManager" = "Σύνδεση σε έναν  διακομιστή JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Παράληψη";
 "createProfile.profileCreated" = "Επόμενο";
-"createProfile.title" = "Προσωπικόποιήστε το προφίλ σας";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Εισάγετε όνομα προβολής";
 "createProfile.enterNamePlaceholder" = "Εισάγετε όνομα";
 "createProfile.subtitle" = "Το προφίλ σας θα μοιραστεί με τους επαφές σας.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Σύνδεση συσκευής";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Εισάγετε PIN";
-"linkToAccount.explanationPinMessage" = "Για να δημιουργήσετε τον κωδικό PIN, πηγαίνετε στις ρυθμίσεις διαχείρισης λογαριασμού στην συσκευή που περιέχει λογαριασμό που θέλετε να χρησιμοποιήσετε. Στις ρυθμίσεις συσκευών Επιλέξτε \"Συνδέστε άλλη συσκευή με αυτό το λογαριασμό\". Θα λάβετε το απαραίτητο PIN για να συμπληρώσετε αυτό το έντυπο.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Εισαγγελέστε";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Λήψη φωτογραφίας";
 "alerts.profileUploadPhoto" = "Ανέβασε φωτογραφία";
 "alerts.accountLinkedTitle" = "Σύνδεση λογαριασμού";
-"alerts.dbFailedTitle" = "Έγινε λάθος στην εκτόξευση του Τζάμι.";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Παρακαλώ κλείστε την εφαρμογή και προσπαθήστε να την ανοίξετε ξανά";
 "alerts.confirmBlockContact" = "Είσαι σίγουρος ότι θέλεις να μπλοκάρεις αυτή την επαφή;";
 "alerts.confirmDeleteConversation" = "Είσαι σίγουρος ότι θέλεις να διαγράψεις αυτή τη συζήτηση μόνιμα;";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Αφαίρεση συσκευής";
 "accountPage.revokeDeviceMessage" = "Είσαι σίγουρος ότι θέλεις να ανακαλέσεις την συσκευή;";
 "accountPage.revokeDeviceButton" = "Απαλλαγή";
-"accountPage.revokeDevicePlaceholder" = "Εισάγετε το κωδικό πρόσβασης σας.";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Τελείωσε την ανάκληση της συσκευής";
 "accountPage.deviceRevocationProgress" = "Απακύρωση...";
 "accountPage.deviceRevocationSuccess" = "Η συσκευή ανακαλέστηκε.";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Επικοινωνήστε μαζί μου χρησιμοποιώντας το \"%s\" στην πλατφόρμα επικοινωνίας της Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Εισάγετε κωδικό πρόσβασης λογαριασμού";
 "accountPage.usernamePlaceholder" = "Εισάγετε το επιθυμητό όνομα χρήστη";
-"accountPage.registerNameErrorMessage" = "Το επιλεγμένο όνομα χρήστη δεν είναι διαθέσιμο";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Καταχώριση";
 "accountPage.usernameRegisterAction" = "Εγγραφή";
 "accountPage.usernameRegistrationFailed" = "Η εγγραφή απέτυχε. Παρακαλώ ελέγξτε το κωδικό πρόσβασης.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Λάθος κωδικό πρόσβασης";
 "accountPage.enableBoothMode" = "Ενεργοποιήστε τη λειτουργία Booth";
 "accountPage.disableBoothMode" = "Απαλείψτε τη λειτουργία Booth";
-"accountPage.disableBoothModeExplanation" = "Παρακαλώ να δώσετε το κωδικό πρόσβασης του λογαριασμού σας";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Στην κατάσταση του μπουθ, το ιστορικό συνομιλιών δεν έχει αποθηκευτεί και η λειτουργία του Jami περιορίζεται από τις εξόδους κλήσεων.";
 "accountPage.noBoothMode" = "Για να ενεργοποιήσετε τη λειτουργία Booth πρέπει πρώτα να δημιουργήσετε κωδικό πρόσβασης λογαριασμού.";
 "accountPage.boothModeAlertMessage" = "Αφού ενεργοποιήσεις τη λειτουργία του θάλαμου, όλες οι συνομιλίες σου θα αφαιρεθούν.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "Υπηρετή SIP";
 "account.port" = "Θύρα";
 "account.proxyServer" = "Διαμεσολαβητής";
-"account.createSipAccount" = "Δημιουργία λογαριασμού SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Εισάγετε διεύθυνση";
 "account.portLabel" = "Εισάγετε τον αριθμό λιμένα";
 "account.accountStatus" = "Κατάσταση λογαριασμού";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Σύνδεση νέας συσκευής";
 "linkDevice.passwordError" = "Το κωδικό πρόσβασης που εισάγετε δεν αποκλείει αυτό το λογαριασμό";
-"linkDevice.networkError" = "Συνέβη σφάλμα κατά την διάρκεια της εξαγωγής";
-"linkDevice.defaultError" = "Συνέβη σφάλμα κατά την διάρκεια της εξαγωγής";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Για να ολοκληρώσετε τη διαδικασία, πρέπει να ανοίξετε το Jami στη νέα συσκευή και να επιλέξετε την επιλογή \"Συνδέστε αυτή τη συσκευή με λογαριασμό\".";
 "linkDevice.hudMessage" = "Επαλήθευση";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Πήρες την απαλλαγή";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Δημιουργήθηκε σμήνος";
 "generatedMessage.invitationReceived" = "καλέστηκε να συμμετάσχει";
 "generatedMessage.invitationAccepted" = "Συμμετείχε στη συζήτηση";

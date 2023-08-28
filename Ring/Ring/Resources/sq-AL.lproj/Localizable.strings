@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Shkruani mesazh për";
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
-"conversation.errorSavingImage" = "S’u arrit të dërgohet figurë te galeri";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ ju dërgoi një kërkesë për bisedë.";
 "conversation.incomingRequest" = "Ju dërgoi një kërkesë për bisedë.";
 "conversation.requestMessage" = "Tungjatjeta,\nDo të donit të merrnit pjesë në bisedë?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Mirë se vini te Jami !";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami është një platformë e lirë dhe universale komunikimesh që ruan privatësinë dhe liritë e përdoruesve";
-"welcome.linkDevice" = "Lidheni këtë pajisje me një llogari";
-"welcome.createAccount" = "Krijoni një llogari Jami";
-"welcome.connectToManager" = "Lidhu me një shërbyes JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Anashkaloje";
 "createProfile.profileCreated" = "Pasuesi";
-"createProfile.title" = "Personalizoni profilin tuaj";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Jepni një emër për në ekran";
 "createProfile.enterNamePlaceholder" = "Jepni emër";
 "createProfile.subtitle" = "Profili juaj do të ndahet me kontaktet tuaja. Mund ta ndryshoni në çfarëdo kohe.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Lidhni pajisje";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Jepni PIN-in";
-"linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni \"Lidhni me këtë llogari një pajisje tjetër\". Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Hyni";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Bëni një foto";
 "alerts.profileUploadPhoto" = "Ngarkoni foto";
 "alerts.accountLinkedTitle" = "Po lidhet llogaria";
-"alerts.dbFailedTitle" = "Ndodhi një gabim gjatë nisjes së Jami-t";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Ju lutemi, mbylleni aplikacionin dhe provoni ta rihapni";
 "alerts.confirmBlockContact" = "Jeni i sigurt se doni të bllokohet ky kontakt? Edhe historiku i bisedave me këtë kontakt do të fshihet përgjithmonë.";
 "alerts.confirmDeleteConversation" = "Jeni i sigurt se doni të fshihet përgjithmonë kjo bisedë?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Shfuqizoje pajisjen";
 "accountPage.revokeDeviceMessage" = "Jeni i sigurt se doni të shfuqizohet kjo pajisje? Ky veprim s’mund të zhbëhet.";
 "accountPage.revokeDeviceButton" = "Shfuqizoje";
-"accountPage.revokeDevicePlaceholder" = "Jepni fjalëkalimin tuaj";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Shfuqizimi i pajisjes u plotësua";
 "accountPage.deviceRevocationProgress" = "Po shfuqizohet…";
 "accountPage.deviceRevocationSuccess" = "Pajisja u shfuqizua";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Lidhuni me mua duke përdorur \"%s\" në platformën e komunikimeve të shpërndara Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Jepni fjalëkalim llogarie";
 "accountPage.usernamePlaceholder" = "Jepni emrin e dëshiruar të përdoruesit";
-"accountPage.registerNameErrorMessage" = "Emri i përdoruesit i zgjedhur s’është i lirë";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Regjistrim";
 "accountPage.usernameRegisterAction" = "Regjistrohuni";
 "accountPage.usernameRegistrationFailed" = "Regjistrimi dështoi. Ju lutemi, kontrolloni fjalëkalimin.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Fjalëkalim i pasaktë";
 "accountPage.enableBoothMode" = "Aktivizo Mënyrën Kabinë";
 "accountPage.disableBoothMode" = "Çaktivizo Mënyrën Kabinë";
-"accountPage.disableBoothModeExplanation" = "Ju lutemi, jepni fjalëkalimin e llogarisë tuaj";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Në mënyrën kabinë, historiku i bisedës s’ruhet dhe funksionet e Jami-t kufizohen në bërje thirrjesh. Kur aktivizoni mënyrën kabinë, krejt bisedat tuaja do të hiqen.";
 "accountPage.noBoothMode" = "Që të aktivizohet mënyra Kabinë, lypset të krijoni një fjalëkalim llogarie së pari.";
 "accountPage.boothModeAlertMessage" = "Pas aktivizimit të mënyrës Kabinë, krej bisedat tuaja do të hiqen.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "Shërbyes SIP";
 "account.port" = "Portë";
 "account.proxyServer" = "Ndërmjetës";
-"account.createSipAccount" = "Krijoni një Llogari SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Jepni Adresë";
 "account.portLabel" = "Jepni Numër Porte";
 "account.accountStatus" = "Gjendje Llogarie";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Lidhni një pajisje të re";
 "linkDevice.passwordError" = "Fjalëkalimi që dhatë nuk e shkyç këtë llogari";
-"linkDevice.networkError" = "Ndodhi një gabim rrjeti gjatë eksportimit";
-"linkDevice.defaultError" = "Ndodhi një gabim gjatë eksportimit";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Që të plotësohet procesi, lypset ta hapni Jami-n në pajisjen e re dhe të zgjidhni mundësinë \"Lidhe këtë pajisje me një llogari.\" PIN-i juaj është i vlefshëm për 10 minuta";
 "linkDevice.hudMessage" = "Po verifikohet";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Morët ftesë";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Zgjoi u krijua";
 "generatedMessage.invitationReceived" = "u ftua të marrë pjesë";
 "generatedMessage.invitationAccepted" = "hyri në bisedë";

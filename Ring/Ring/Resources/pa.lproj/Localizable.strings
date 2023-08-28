@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Write message to ";
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
-"conversation.errorSavingImage" = "Failed to save image to galery";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welcome to Jami !";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.linkDevice" = "ਇਹ ਡੀਵਾਈਸ ਕਿਸੇ ਖਾਤੇ ਨਾਲ ਲਿੰਕ ਕਰੋ";
-"welcome.createAccount" = "Jami ਖਾਤਾ ਬਣਾਓ";
-"welcome.connectToManager" = "Connect to a JAMS server";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "ਲੰਘਾਓ";
 "createProfile.profileCreated" = "ਅੱਗੇ";
-"createProfile.title" = "Personalise your profile";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Enter a display name";
 "createProfile.enterNamePlaceholder" = "Enter name";
 "createProfile.subtitle" = "Your profile will be shared with your contacts. You can change it at any time.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "ਡੀਵਾਈਸ ਲਿੰਕ ਕਰੋ";
 "linkToAccount.pinPlaceholder" = "ਪਿੰਨ";
 "linkToAccount.pinLabel" = "ਪਿੰਨ ਦਾਖਲ ਕਰੋ";
-"linkToAccount.explanationPinMessage" = "ਪਿੰਨ ਕੋਡ ਸਿਰਜਣ ਲਈ, ਉਸ ਖਾਤੇ ਵਾਲੇ ਡੀਵਾਈਸ 'ਤੇ ਖਾਤਾ ਪ੍ਰਬੰਧਨ ਸੈਟਿੰਗਾਂ 'ਤੇ ਜਾਓ, ਜਿਸਨੂੰ ਤੁਸੀਂ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ। ਡੀਵਾਈਸ ਸੈਟਿੰਗਾਂ ਵਿੱਚ \"ਕਿਸੇ ਹੋਰ ਡੀਵਾਈਸ ਨੂੰ ਇਸ ਖਾਤੇ ਨਾਲ ਲਿੰਕ ਕਰੋ\" ਨੂੰ ਚੁਣੋ। ਤੁਹਾਨੂੰ ਇਹ ਫਾਰਮ ਪੂਰਾ ਕਰਨ ਲਈ ਜ਼ਰੂਰੀ ਪਿੰਨ ਦੀ ਲੋੜ ਪਵੇਗੀ। ਪਿੰਨ ਸਿਰਫ਼ 10 ਮਿੰਟਾਂ ਲਈ ਵੈਧ ਰਹਿੰਦਾ ਹੈ।";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sign In";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "ਫ਼ੋਟੋ ਖਿੱਚੋ";
 "alerts.profileUploadPhoto" = "ਫ਼ੋਟੋ ਅੱਪਲੋਡ ਕਰੋ";
 "alerts.accountLinkedTitle" = "ਖਾਤਾ ਲਿੰਕ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ";
-"alerts.dbFailedTitle" = "An error happned when launching Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "ਕਿਰਪਾ ਕਰਕੇ ਐਪਲੀਕੇਸ਼ਨ ਬੰਦ ਕਰਕੇ ਦੁਬਾਰਾ ਖੋਲ੍ਹ ਕੇ ਦੇਖੋ";
 "alerts.confirmBlockContact" = "Are you sure you want to block this contact? The conversation history with this contact will also be deleted permanently.";
 "alerts.confirmDeleteConversation" = "Are you sure you want to delete this conversation permanently?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "ਡੀਵਾਈਸ ਹਟਾਓ";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
-"accountPage.revokeDevicePlaceholder" = "Enter your passord";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Enter account password";
 "accountPage.usernamePlaceholder" = "Enter desired username";
-"accountPage.registerNameErrorMessage" = "Choosen username is not available";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registering";
 "accountPage.usernameRegisterAction" = "ਪੰਜੀਕਰਨ ਕਰੋ";
 "accountPage.usernameRegistrationFailed" = "Registration failed. Please check password.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Password incorrect";
 "accountPage.enableBoothMode" = "Enable Booth Mode";
 "accountPage.disableBoothMode" = "Disable Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Pleace provide your account password";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "In booth mode conversation history not saved and jami functionality limited by making outgoing calls. When you enable booth mode all your conversations will be removed.";
 "accountPage.noBoothMode" = "To enable Booth mode you need to create account password first.";
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Port";
 "account.proxyServer" = "ਪ੍ਰੌਕਸੀ";
-"account.createSipAccount" = "Create a SIP Account";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";
 "account.accountStatus" = "Account Status";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "ਨਵਾਂ ਡੀਵਾਈਸ ਜੋੜੋ";
 "linkDevice.passwordError" = "ਤੁਹਾਡੇ ਦਾਖਲ ਕੀਤੇ ਪਾਸਵਰਡ ਨਾਲ ਇਹ ਖਾਤਾ ਅਣਲਾਕ ਨਹੀਂ ਹੁੰਦਾ";
-"linkDevice.networkError" = "ਨਿਰਯਾਤ ਵੇਲੇ ਕੋਈ ਨੈੱਟਵਰਕ ਗੜਬੜ ਹੋਈ";
-"linkDevice.defaultError" = "ਨਿਰਯਾਤ ਵੇਲੇ ਕੋਈ ਗੜਬੜ ਹੋਈ";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "To complete the process, you need to open Jami on the new device and choose the option \"Link this device to an account.\" Your pin is valid for 10 minutes";
 "linkDevice.hudMessage" = "ਪੁਸ਼ਟੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received inviation";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Swarm created";
 "generatedMessage.invitationReceived" = "was invited to join";
 "generatedMessage.invitationAccepted" = "joined the conversation";

@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Andika ujumbe kwa ";
 "conversation.explanationSendingLocationTo" = "Kwa sasa unashiriki eneo lako na ";
 "conversation.explanationReceivingLocationFrom" = "Kwa sasa unapata eneo moja kwa moja kutoka ";
-"conversation.errorSavingImage" = "Kushindwa kuhifadhi picha kwa gallery";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Nilituma ombi la mazungumzo.";
 "conversation.requestMessage" = "Halo, ungependa kujiunga na mazungumzo?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Karibu Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami ni jukwaa la mawasiliano la bure na la kimataifa ambalo huhifadhi faragha na uhuru wa watumiaji";
-"welcome.linkDevice" = "Unganisha kifaa hiki kwa akaunti";
-"welcome.createAccount" = "Unda akaunti ya Jami";
-"welcome.connectToManager" = "Kuunganisha kwa JAMS server";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Kwenda";
 "createProfile.profileCreated" = "Yafuatayo";
-"createProfile.title" = "Fanya profile yako iwe ya kibinafsi";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Ingiza jina la kuonyesha";
 "createProfile.enterNamePlaceholder" = "Ingiza jina";
 "createProfile.subtitle" = "Profaili yako itagawanywa na wawasiliani wako. Unaweza kuibadilisha wakati wowote.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Kifaa cha kuunganisha";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Ingiza PIN";
-"linkToAccount.explanationPinMessage" = "Ili kuzalisha PIN, nenda kwenye mipangilio ya usimamizi wa akaunti kwenye kifaa ambacho kina akaunti unayotaka kutumia. Katika mipangilio ya vifaa Chagua \"Uunganisha kifaa kingine na akaunti hii\". Utapata PIN muhimu kukamilisha fomu hii. PIN ni halali kwa dakika 10 tu.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Ingia";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Piga picha";
 "alerts.profileUploadPhoto" = "Pakia picha";
 "alerts.accountLinkedTitle" = "Akaunti ya kuunganisha";
-"alerts.dbFailedTitle" = "Hitilafu ilitokea wakati wa kuendesha Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Tafadhali fungua maombi na jaribu kuifungua tena";
 "alerts.confirmBlockContact" = "Je, una uhakika unataka kuzuia kuwasiliana hii? historia ya mazungumzo na kuwasiliana hii pia kufuta milele.";
 "alerts.confirmDeleteConversation" = "Je, una uhakika unataka kufuta mazungumzo haya milele?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Kifaa cha kuondoa";
 "accountPage.revokeDeviceMessage" = "Je, una uhakika unataka kufuta kifaa hiki?";
 "accountPage.revokeDeviceButton" = "Kuondolewa";
-"accountPage.revokeDevicePlaceholder" = "Ingiza nywila yako";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Kukomesha kutengwa kwa kifaa";
 "accountPage.deviceRevocationProgress" = "Kukataza...";
 "accountPage.deviceRevocationSuccess" = "Kifaa ilifutwa";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Wasiliana nami kwa kutumia \"%s\" kwenye jukwaa la mawasiliano la Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Ingiza nenosiri la akaunti";
 "accountPage.usernamePlaceholder" = "Ingiza jina la mtumiaji";
-"accountPage.registerNameErrorMessage" = "Jina la mtumiaji lililochaguliwa haliko";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Kujiandikisha";
 "accountPage.usernameRegisterAction" = "Kujiandikisha";
 "accountPage.usernameRegistrationFailed" = "Usajili umeshindwa Tafadhali angalia password.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Nywila isiyo sahihi";
 "accountPage.enableBoothMode" = "Kuwezesha Mode Booth";
 "accountPage.disableBoothMode" = "Kulemaza Mode Booth";
-"accountPage.disableBoothModeExplanation" = "Tafadhali toa password yako ya akaunti";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Katika hali ya jengo mazungumzo historia si kuhifadhiwa na utendaji jami mdogo kwa kufanya wito outgoing.";
 "accountPage.noBoothMode" = "Ili kuwezesha hali Booth unahitaji kuunda password akaunti kwanza.";
 "accountPage.boothModeAlertMessage" = "Baada ya kuamsha mode ya jengo mazungumzo yako yote itaondolewa.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Bandari";
 "account.proxyServer" = "Wakala wa kuwakilisha";
-"account.createSipAccount" = "Unda Akaunti ya SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Ingiza Anwani";
 "account.portLabel" = "Ingiza Nambari ya Bandari";
 "account.accountStatus" = "Hali ya Akaunti";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Unganisha kifaa kipya";
 "linkDevice.passwordError" = "Nywila uliyoingiza haifungui akaunti hii";
-"linkDevice.networkError" = "Kosa la mtandao lilitokea wakati wa usafirishaji";
-"linkDevice.defaultError" = "Kosa lililotokea wakati wa usafirishaji";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Ili kukamilisha mchakato, unahitaji kufungua Jami kwenye kifaa kipya na kuchagua chaguo \"Uunganishe kifaa hiki kwa akaunti\". Pin yako ni halali kwa dakika 10";
 "linkDevice.hudMessage" = "Kufanya uthibitisho";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Ulipokea uandikishaji";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Kiwanda kilichoundwa";
 "generatedMessage.invitationReceived" = "alialikwa kujiunga";
 "generatedMessage.invitationAccepted" = "alijiunga na mazungumzo";

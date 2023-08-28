@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Kirjoita viesti";
 "conversation.explanationSendingLocationTo" = "Jaat sijaintisi tällä hetkellä";
 "conversation.explanationReceivingLocationFrom" = "Saat parhaillaan suoraa sijaintia";
-"conversation.errorSavingImage" = "Kuvan tallennus galleriaan epäonnistui";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Lähetin pyynnön juttelemaan.";
 "conversation.requestMessage" = "Hei,\nHaluatko liittyä keskusteluun?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Tervetuloa Jamiin !";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami on vapaa ja universaali viestintäalusta joka turvaa käyttäjien yksityisyyden ja vapaudet";
-"welcome.linkDevice" = "Yhdistä tämä laite tiliin";
-"welcome.createAccount" = "Tee Jami-tili";
-"welcome.connectToManager" = "Yhdistä JAMS-palvelimeen";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Ohita";
 "createProfile.profileCreated" = "Seuraava";
-"createProfile.title" = "Muokkaa profiiliasi";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Anna näyttönimi";
 "createProfile.enterNamePlaceholder" = "Syötä nimesi";
 "createProfile.subtitle" = "Profiilisi jaetaan yhteystietojesi kanssa. Voit muuttaa sitä milloin tahansa.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Linkitä laite";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Syötä PIN-koodi";
-"linkToAccount.explanationPinMessage" = "Voit luoda PIN-koodin siirtymällä asetuksiin laitteessa, joka sisältää haluamasi tilin. Valitse laiteasetuksissa \"Linkitä toinen laite tähän tiliin\". Saat tarvittavan PIN-koodin tämän lomakkeen lopusta. PIN-koodi on voimassa vain 10 minuuttia.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Kirjaudu sisään";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Ota valokuva";
 "alerts.profileUploadPhoto" = "Lähetä kuva";
 "alerts.accountLinkedTitle" = "Tilin linkittäminen";
-"alerts.dbFailedTitle" = "Jamia käynnistettäessä tapahtui virhe";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Sulje sovellus ja yritä avata se uudelleen";
 "alerts.confirmBlockContact" = "Haluatko varmasti estää tämän yhteystiedon? Tämän yhteyshenkilön keskusteluhistoria myös poistetaan pysyvästi.";
 "alerts.confirmDeleteConversation" = "Haluatko varmasti poistaa tämän keskustelun pysyvästi?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Peruuta laite";
 "accountPage.revokeDeviceMessage" = "Haluatko varmasti peruuttaa tämän laitteen? Tätä toimintoa ei voitu kumota.";
 "accountPage.revokeDeviceButton" = "Peruuta";
-"accountPage.revokeDevicePlaceholder" = "Syötä salasanasi";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Laitteen peruminen valmis";
 "accountPage.deviceRevocationProgress" = "Peruuttaminen...";
 "accountPage.deviceRevocationSuccess" = "Laite on peruttu";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Ota minuun yhteyttä \"%s\" Jamin hajautetun viestintäalustan avulla:  https://jami.net";
 "accountPage.passwordPlaceholder" = "Syötä käyttäjätunnuksen salasana";
 "accountPage.usernamePlaceholder" = "Kirjoita haluamasi käyttäjänimi";
-"accountPage.registerNameErrorMessage" = "Valittu käyttäjänimi ei ole käytettävissä";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Rekisteröidään";
 "accountPage.usernameRegisterAction" = "Rekistöröi";
 "accountPage.usernameRegistrationFailed" = "Rekisteröinti epäonnistui. Tarkista salasana.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Väärä salasana";
 "accountPage.enableBoothMode" = "Kioskitila käyttöön";
 "accountPage.disableBoothMode" = "Poista kioskitila";
-"accountPage.disableBoothModeExplanation" = "Anna tilisi salasana";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Kioskitilassa keskusteluhistoriaa ei tallenneta ja jamin toimintoja rajoitettu lähtevien puheluiden osalta. Kun otat kioskitilan käyttöön, kaikki keskustelusi poistetaan.";
 "accountPage.noBoothMode" = "Voit ottaa kioskitilan käyttöön luomalla ensin tilin salasanan.";
 "accountPage.boothModeAlertMessage" = "Kun kioskitila on otettu käyttöön, kaikki keskustelut poistetaan.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP-palvelin";
 "account.port" = "Portti";
 "account.proxyServer" = "Välityspalvelin";
-"account.createSipAccount" = "Luo SIP tunnus";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Anna osoite";
 "account.portLabel" = "Anna porttinumero";
 "account.accountStatus" = "Tilin tila";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Linkitä uusi laite";
 "linkDevice.passwordError" = "Antamasi salasana ei avaa tämän tunnuksen salaisuuksia";
-"linkDevice.networkError" = "Tiedonviennissä tapahtui verkkoyhteysvirhe";
-"linkDevice.defaultError" = "Tiedonviennissä tapahtui virhe";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Prosessin loppuun saattamiseksi sinun on avattava Jami uudessa laitteessa ja valittava vaihtoehto \"Yhdistä tämä laite tunnukseen\". PIN on voimassa 10 minuuttia";
 "linkDevice.hudMessage" = "Tarkistetaan";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Sait vapautuksen.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Parvi luotiin";
 "generatedMessage.invitationReceived" = "oli kutsuttu liittymään";
 "generatedMessage.invitationAccepted" = "- Hän liittyi keskustelulle.";

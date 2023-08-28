@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "اكتب رسالة إلى";
 "conversation.explanationSendingLocationTo" = "أنت تشارك موقعك حاليًا مع";
 "conversation.explanationReceivingLocationFrom" = "أنت تتلقى حاليًا موقعًا مباشرًا من";
-"conversation.errorSavingImage" = "فشلت في حفظ الصورة إلى المعرض";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "أرسلت لك طلباً للحديث";
 "conversation.requestMessage" = "مرحباً، هل تودين الانضمام إلى المحادثة؟";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "مرحبا بك في چامى!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "چامى هو منصة اتصال حرة وعالمية تحفظ خصوصية المستخدمين وحرياتهم";
-"welcome.linkDevice" = "اربط هذا الجهاز مع حساب";
-"welcome.createAccount" = "كوّن حساب جامي";
-"welcome.connectToManager" = "التواصل مع خادم JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "تخطي";
 "createProfile.profileCreated" = "التالي";
-"createProfile.title" = "إخصائص ملفك الشخصي";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "إدخال اسم العرض";
 "createProfile.enterNamePlaceholder" = "أدخِل اسم";
 "createProfile.subtitle" = "سيتم مشاركة ملفك الشخصي مع جهات الاتصال الخاصة بك. يمكنك تغييرها في أي وقت.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "اربط جهاز";
 "linkToAccount.pinPlaceholder" = "رمز الأمان";
 "linkToAccount.pinLabel" = "أدخِل رمز الأمان";
-"linkToAccount.explanationPinMessage" = "لتوليد رمز الأمان اذهب إلى إعدادات إدارة الحساب في الجهاز الذي يحتوي على الحساب الذي تريد استخدامه. في إعدادات الجهاز اختر \"ربط جهاز آخر مع هذا الحساب\". ستحصل عل رمز الأمان اللازم لإكمال العملية. تنتهي صلاحية رمز الأمان بعد 10 دقائق فقط.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "تسجيل الدخول";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "التقاط صورة";
 "alerts.profileUploadPhoto" = "تحميل صورة";
 "alerts.accountLinkedTitle" = "جاري ربط الحساب";
-"alerts.dbFailedTitle" = "حدث خطأ عند إطلاق (جامي)";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "الرجاء إغلاق التطبيق ومحاولة فتحه مرة ثانية";
 "alerts.confirmBlockContact" = "هل أنت متأكد أنك تريد حظر هذا الاتصال؟ سيقوم حذف تاريخ المحادثة مع هذا الاتصال بشكل دائم.";
 "alerts.confirmDeleteConversation" = "هل أنت متأكد أنك تريد حذف هذه المحادثة بشكل دائم؟";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "إبطال جهاز";
 "accountPage.revokeDeviceMessage" = "هل أنت متأكد أنك تريد إلغاء هذا الجهاز؟";
 "accountPage.revokeDeviceButton" = "سحب";
-"accountPage.revokeDevicePlaceholder" = "أدخل كلمة المرور الخاصة بك";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "إعادة إلغاء الجهاز قد تم الانتهاء منها";
 "accountPage.deviceRevocationProgress" = "-تلغيّر";
 "accountPage.deviceRevocationSuccess" = "تم إلغاء الجهاز";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "اتصل بي باستخدام \"%s\" على منصة الاتصالات الموزعة في جامي: https://jami.net";
 "accountPage.passwordPlaceholder" = "أدخل كلمة مرور الحساب";
 "accountPage.usernamePlaceholder" = "أدخل اسم المستخدم المطلوب";
-"accountPage.registerNameErrorMessage" = "اسم المستخدم المختار غير متوفر";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "التسجيل";
 "accountPage.usernameRegisterAction" = "سجل";
 "accountPage.usernameRegistrationFailed" = "التسجيل فشل، من فضلك تحقق من كلمة المرور";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "كلمة مرور خاطئة";
 "accountPage.enableBoothMode" = "تمكين وضع المرفق";
 "accountPage.disableBoothMode" = "إيقاف وضع المرفق";
-"accountPage.disableBoothModeExplanation" = "رجاءً إعطى كلمة المرور الخاصة بك";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "في وضع الكشك لا يتم حفظ تاريخ المحادثات و وظائف jami محدودة من خلال إجراء المكالمات الخارجة. عندما تمكن من وضع الكشك سيتم إزالة جميع المحادثات الخاصة بك.";
 "accountPage.noBoothMode" = "لتشغيل وضع \"بوث\" عليك إنشاء كلمة المرور أولاً.";
 "accountPage.boothModeAlertMessage" = "بعد تمكين وضع الكشك سيتم إزالة جميع محادثاتك";
@@ -289,7 +291,8 @@
 "account.sipServer" = "خادم SIP";
 "account.port" = "نقطة عبور ( port )";
 "account.proxyServer" = "الوكيل";
-"account.createSipAccount" = "إعداد حساب SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "إدخال العنوان";
 "account.portLabel" = "إدخال رقم الميناء";
 "account.accountStatus" = "حالة الحساب";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "ربط جهاز جديد";
 "linkDevice.passwordError" = "كلمة المرور التي أدخلتها لا تفتح هذا الحساب";
-"linkDevice.networkError" = "حدث خطأ في الشبكة أثناء التصدير";
-"linkDevice.defaultError" = "حدث خطأ أثناء التصدير";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "لإكمال العملية، تحتاج إلى فتح Jami على الجهاز الجديد واختيار خيار \"ربط هذا الجهاز إلى حساب\".";
 "linkDevice.hudMessage" = "جاري التحقق";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "لقد حصلت على الحظر";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "حشرة خلق";
 "generatedMessage.invitationReceived" = "تم دعوته للانضمام";
 "generatedMessage.invitationAccepted" = "انضم إلى المحادثة";

@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Pašaldyk pranešimą ";
 "conversation.explanationSendingLocationTo" = "Šiuo metu daliniesi savo buveine su ";
 "conversation.explanationReceivingLocationFrom" = "Šiuo metu gavote gyvą vietą iš ";
-"conversation.errorSavingImage" = "Nesugebėjo išsaugoti paveikslo galerijoje";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Siuntė jums prašymą apie pokalbį.";
 "conversation.requestMessage" = "Sveiki,\nAr norėtumėte prisijungti prie pokalbio?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Sveiki atvykę į Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami yra laisva ir universali bendravimo platforma, kuri išsaugo naudotojo privatumą ir laisves.";
-"welcome.linkDevice" = "Susieti šį įrenginį su paskyra";
-"welcome.createAccount" = "Susikurti Jami paskyrą";
-"welcome.connectToManager" = "Prisijungti prie JAMS serverio";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Praleisti";
 "createProfile.profileCreated" = "Kitas";
-"createProfile.title" = "Personalizuokite savo profilį";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Įveskite rodomą vardą";
 "createProfile.enterNamePlaceholder" = "Įveskite vardą";
 "createProfile.subtitle" = "Jūsų profilis bus bendrinamas tik su jūsų adresatais. Tai galėsite bet kuriuo metu pakeisti.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Susieti įrenginį";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Įveskite PIN";
-"linkToAccount.explanationPinMessage" = "Norėdami generuoti PIN kodą, pereikite į paskyros tvarkymo nustatymus įrenginyje, kuriame yra paskyra, kurią norite naudoti. Įrenginių nustatymuose pasirinkite \"Susieti kitą įrenginį su šia paskyra\". Taip gausite šiai formai reikalingą PIN. PIN galios tik 10 minučių.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Prisijungti";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Padaryti nuotrauką";
 "alerts.profileUploadPhoto" = "Įkelti nuotrauką";
 "alerts.accountLinkedTitle" = "Susiejama paskyra";
-"alerts.dbFailedTitle" = "Paleidžiant Jami, įvyko klaida";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Prašome užverti programą ir bandyti ją atverti dar kartą";
 "alerts.confirmBlockContact" = "Ar tikrai norite užblokuoti šį adresatą? Pokalbio istorija su šiuo adresatu taip pat bus ištrinta visiems laikams.";
 "alerts.confirmDeleteConversation" = "Ar tikrai norite visiems laikams ištrinti šį pokalbį?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Panaikinti įrenginį";
 "accountPage.revokeDeviceMessage" = "Ar tikrai norite panaikinti šį įrenginį? Šio veiksmo neįmanoma bus atšaukti.";
 "accountPage.revokeDeviceButton" = "Panaikinti";
-"accountPage.revokeDevicePlaceholder" = "Įveskite slaptažodį";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Įrenginio panaikinimas užbaigtas";
 "accountPage.deviceRevocationProgress" = "Panaikinama...";
 "accountPage.deviceRevocationSuccess" = "Įrenginys buvo panaikintas";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Susisiekite su manimi naudojant \"%s\" Džami platintoje komunikacijos platformėje: https://jami.net";
 "accountPage.passwordPlaceholder" = "Įveskite paskyros slaptažodį";
 "accountPage.usernamePlaceholder" = "Įvesti pageidaujamą naudotojo vardą";
-"accountPage.registerNameErrorMessage" = "Pasirinktas naudotojo vardas yra neprieinamas";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registravimas";
 "accountPage.usernameRegisterAction" = "Registruoti";
 "accountPage.usernameRegistrationFailed" = "Registracija nesilaukė, prašome patikrinti slaptažodį.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Slaptažodis yra neteisingas";
 "accountPage.enableBoothMode" = "Įjungti statinio režimą";
 "accountPage.disableBoothMode" = "Išjungti statinio režimą";
-"accountPage.disableBoothModeExplanation" = "Pateikite savo paskyros slaptažodį";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Kai įjungsite \"Booth\" režimą, jūsų pokalbių istorija nebus išsaugota ir \"Jami\" funkcija bus apribota išvykstančiais skambučiais.";
 "accountPage.noBoothMode" = "Norėdami įjungti \"Booth\" režimą, pirmiausia turite sukurti paskyros slaptažodį.";
 "accountPage.boothModeAlertMessage" = "Kai įjungsite kabino režimą, visi jūsų pokalbis bus pašalintas.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP serveris";
 "account.port" = "Prievadas";
 "account.proxyServer" = "Įgaliotasis serveris";
-"account.createSipAccount" = "SIP paskyros sukūrimas";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Įveskite adresą";
 "account.portLabel" = "Įveskite prievado numerį";
 "account.accountStatus" = "Paskyros būsena";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Susieti naują įrenginį";
 "linkDevice.passwordError" = "Slaptažodis, kurį įrašėte, neatrakina šios paskyros";
-"linkDevice.networkError" = "Eksportavimo metu, įvyko klaida";
-"linkDevice.defaultError" = "Eksportavimo metu, įvyko klaida";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Norėdami užbaigti procesą, jūs turite atverti Jami naujame įrenginyje ir pasirinkti parinktį \"Susieti šį įrenginį su paskyra\". Jūsų pin galioja 10 minučių";
 "linkDevice.hudMessage" = "Įvertinimas";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Jūs gavote atleidimą.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Skaitė sukurta";
 "generatedMessage.invitationReceived" = "buvo pakviestas prisijungti";
 "generatedMessage.invitationAccepted" = "prisijungė prie pokalbio";

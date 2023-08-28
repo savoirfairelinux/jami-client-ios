@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = " এ বার্তা লিখুন";
 "conversation.explanationSendingLocationTo" = "আপনি বর্তমানে আপনার অবস্থান শেয়ার করছেন ";
 "conversation.explanationReceivingLocationFrom" = "আপনি বর্তমানে একটি লাইভ অবস্থান থেকে প্রাপ্ত ";
-"conversation.errorSavingImage" = "গ্যালারীতে ছবি সংরক্ষণ করতে ব্যর্থ";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "আপনাকে কথোপকথনের জন্য অনুরোধ পাঠিয়েছি।";
 "conversation.requestMessage" = "হ্যালো, আপনি কি কথোপকথনে যোগ দিতে চান?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "জামিতে স্বাগতম!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "জামি একটি মুক্ত ও সর্বজনীন যোগাযোগ প্ল্যাটফর্ম যা ব্যবহারকারীদের গোপনীয়তা ও স্বাধীনতা রক্ষা করে";
-"welcome.linkDevice" = "এই ডিভাইসটিকে একটি অ্যাকাউন্টের সাথে লিঙ্ক করুন";
-"welcome.createAccount" = "জামি অ্যাকাউন্ট তৈরি করুন";
-"welcome.connectToManager" = "একটি JAMS সার্ভারে সংযোগ করুন";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "স্কিপ";
 "createProfile.profileCreated" = "পরবর্তী";
-"createProfile.title" = "আপনার প্রোফাইলটি ব্যক্তিগতকৃত করুন";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "একটি প্রদর্শন নাম লিখুন";
 "createProfile.enterNamePlaceholder" = "নাম লিখুন";
 "createProfile.subtitle" = "আপনার প্রোফাইল আপনার পরিচিতির সাথে শেয়ার করা হবে। আপনি যে কোনো সময় এটি পরিবর্তন করতে পারেন।";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "লিঙ্ক ডিভাইস";
 "linkToAccount.pinPlaceholder" = "পিন";
 "linkToAccount.pinLabel" = "পিন লিখুন";
-"linkToAccount.explanationPinMessage" = "পিন কোড তৈরি করতে, আপনি যে ডিভাইসে অ্যাকাউন্ট ব্যবহার করতে চান সেটিতে অ্যাকাউন্ট পরিচালনার সেটিংস এ যান। ডিভাইস সেটিংস থেকে \"এই অ্যাকাউন্টে অন্য ডিভাইস লিঙ্ক করুন\" নির্বাচন করুন। আপনি এই ফর্মটি পূরণ করতে প্রয়োজনীয় পিন পাবেন। পিনটি কেবল 10 মিনিটের জন্য বৈধ।";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "সাইন ইন করুন";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "ছবি তুলুন";
 "alerts.profileUploadPhoto" = "ছবি আপলোড করুন";
 "alerts.accountLinkedTitle" = "লিঙ্কিং অ্যাকাউন্ট";
-"alerts.dbFailedTitle" = "জামিকে লঞ্চ করার সময় একটি ত্রুটি ঘটেছে।";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "দয়া করে আবেদনটি বন্ধ করে আবার খুলতে চেষ্টা করুন।";
 "alerts.confirmBlockContact" = "আপনি কি নিশ্চিত যে আপনি এই যোগাযোগ ব্লক করতে চান? এই যোগাযোগের সাথে কথোপকথনের ইতিহাসও স্থায়ীভাবে মুছে ফেলা হবে।";
 "alerts.confirmDeleteConversation" = "আপনি নিশ্চিত যে আপনি এই কথোপকথন স্থায়ীভাবে মুছে ফেলতে চান?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "বাতিলকরণ ডিভাইস";
 "accountPage.revokeDeviceMessage" = "আপনি কি নিশ্চিত যে আপনি এই ডিভাইসটি প্রত্যাহার করতে চান?";
 "accountPage.revokeDeviceButton" = "বাতিল";
-"accountPage.revokeDevicePlaceholder" = "আপনার পাসওয়ার্ড লিখুন";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "ডিভাইস বাতিল সম্পন্ন";
 "accountPage.deviceRevocationProgress" = "বাতিল করা...";
 "accountPage.deviceRevocationSuccess" = "ডিভাইসটি বাতিল করা হয়েছে";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "জামি বিতরণ করা যোগাযোগ প্ল্যাটফর্মে \"%s\" ব্যবহার করে আমার সাথে যোগাযোগ করুনঃ https://jami.net";
 "accountPage.passwordPlaceholder" = "অ্যাকাউন্টের পাসওয়ার্ড লিখুন";
 "accountPage.usernamePlaceholder" = "পছন্দসই ব্যবহারকারীর নাম লিখুন";
-"accountPage.registerNameErrorMessage" = "নির্বাচিত ব্যবহারকারীর নাম পাওয়া যায় না";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "নিবন্ধন";
 "accountPage.usernameRegisterAction" = "নিবন্ধন";
 "accountPage.usernameRegistrationFailed" = "নিবন্ধন ব্যর্থ হয়েছে, পাসওয়ার্ড চেক করুন।";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "ভুল পাসওয়ার্ড";
 "accountPage.enableBoothMode" = "বুথ মোড সক্ষম করুন";
 "accountPage.disableBoothMode" = "বুথ মোড অক্ষম করুন";
-"accountPage.disableBoothModeExplanation" = "দয়া করে আপনার অ্যাকাউন্টের পাসওয়ার্ড দিন";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "বুথ মোডে কথোপকথনের ইতিহাস সংরক্ষিত নয় এবং বহিরাগত কল করার মাধ্যমে Jami কার্যকারিতা সীমিত। যখন আপনি বুথ মোড সক্ষম করবেন তখন আপনার সমস্ত কথোপকথন মুছে ফেলা হবে।";
 "accountPage.noBoothMode" = "বুথ মোড সক্ষম করতে আপনাকে প্রথমে অ্যাকাউন্ট পাসওয়ার্ড তৈরি করতে হবে।";
 "accountPage.boothModeAlertMessage" = "বুথ মোড চালু করার পর আপনার সমস্ত কথোপকথন মুছে ফেলা হবে।";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP সার্ভার";
 "account.port" = "বন্দর";
 "account.proxyServer" = "প্রক্সি";
-"account.createSipAccount" = "একটি SIP অ্যাকাউন্ট তৈরি করুন";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "ঠিকানা লিখুন";
 "account.portLabel" = "পোর্ট নম্বর লিখুন";
 "account.accountStatus" = "অ্যাকাউন্টের অবস্থা";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "একটি নতুন ডিভাইস লিঙ্ক";
 "linkDevice.passwordError" = "আপনি যে পাসওয়ার্ডটি প্রবেশ করেছেন তা এই অ্যাকাউন্টটি আনলক করে না";
-"linkDevice.networkError" = "রপ্তানি চলাকালীন নেটওয়ার্ক ত্রুটি ঘটেছে";
-"linkDevice.defaultError" = "রপ্তানি চলাকালীন ত্রুটি";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "প্রক্রিয়াটি সম্পূর্ণ করতে, আপনাকে নতুন ডিভাইসে জামি খুলতে হবে এবং \"এই ডিভাইসটিকে একটি অ্যাকাউন্টে লিঙ্ক করুন\" বিকল্পটি নির্বাচন করতে হবে। আপনার পিন 10 মিনিটের জন্য বৈধ";
 "linkDevice.hudMessage" = "যাচাইকরণ";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "আপনি নিষ্পত্তি পেয়েছেন";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "সৃষ্টি করা ঝাঁকুনি";
 "generatedMessage.invitationReceived" = "যোগদানের জন্য আমন্ত্রিত হয়েছিল";
 "generatedMessage.invitationAccepted" = "কথোপকথনে যোগদান";

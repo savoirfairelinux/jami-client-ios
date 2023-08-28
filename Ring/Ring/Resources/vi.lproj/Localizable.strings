@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Hãy gửi tin nhắn cho ";
 "conversation.explanationSendingLocationTo" = "Bạn đang chia sẻ vị trí của mình với ";
 "conversation.explanationReceivingLocationFrom" = "Bạn đang nhận được một địa điểm trực tiếp từ ";
-"conversation.errorSavingImage" = "Không thể lưu hình ảnh vào phòng trưng bày";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Tôi đã gửi cho anh một yêu cầu để nói chuyện.";
 "conversation.requestMessage" = "Chào, anh có muốn tham gia cuộc trò chuyện không?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Chào mừng đến với Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami là một nền tảng truyền thông miễn phí và phổ biến bảo vệ quyền riêng tư và tự do của người dùng";
-"welcome.linkDevice" = "Kết nối thiết bị này với tài khoản";
-"welcome.createAccount" = "Tạo tài khoản Jami";
-"welcome.connectToManager" = "Kết nối với máy chủ JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Tháo";
 "createProfile.profileCreated" = "Tiếp theo";
-"createProfile.title" = "Cần cá nhân hóa hồ sơ của bạn";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Nhập tên hiển thị";
 "createProfile.enterNamePlaceholder" = "Nhập tên";
 "createProfile.subtitle" = "Profile của bạn sẽ được chia sẻ với các liên lạc của bạn. Bạn có thể thay đổi nó bất cứ lúc nào.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Thiết bị liên kết";
 "linkToAccount.pinPlaceholder" = "GHIM";
 "linkToAccount.pinLabel" = "Nhập PIN";
-"linkToAccount.explanationPinMessage" = "Để tạo mã PIN, hãy truy cập cài đặt quản lý tài khoản trên thiết bị chứa tài khoản bạn muốn sử dụng. Trong cài đặt thiết bị, chọn \"Công nối thiết bị khác với tài khoản này\". Bạn sẽ nhận được mã PIN cần thiết để hoàn thành biểu mẫu này.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Đăng nhập";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Tạo ảnh";
 "alerts.profileUploadPhoto" = "Lên ảnh";
 "alerts.accountLinkedTitle" = "Tài khoản liên kết";
-"alerts.dbFailedTitle" = "Một lỗi xảy ra khi phóng Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Vui lòng đóng đơn và cố gắng mở lại";
 "alerts.confirmBlockContact" = "Bạn có chắc chắn rằng bạn muốn chặn liên lạc này? lịch sử cuộc trò chuyện với liên lạc này cũng sẽ bị xóa vĩnh viễn.";
 "alerts.confirmDeleteConversation" = "Em có chắc em muốn xóa cuộc trò chuyện này vĩnh viễn không?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Thiết bị hủy bỏ";
 "accountPage.revokeDeviceMessage" = "Ông có chắc ông muốn hủy bỏ thiết bị này không?";
 "accountPage.revokeDeviceButton" = "Tháo lại";
-"accountPage.revokeDevicePlaceholder" = "Nhập mật khẩu của bạn";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Việc hủy bỏ thiết bị đã hoàn thành";
 "accountPage.deviceRevocationProgress" = "Tháo lại...";
 "accountPage.deviceRevocationSuccess" = "Thiết bị bị bị hủy bỏ";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Liên hệ với tôi bằng cách sử dụng \"%s\" trên nền tảng truyền thông phân phối của Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Nhập mật khẩu tài khoản";
 "accountPage.usernamePlaceholder" = "Nhập tên người dùng mong muốn";
-"accountPage.registerNameErrorMessage" = "Tên người dùng đã chọn không có sẵn";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Đăng ký";
 "accountPage.usernameRegisterAction" = "Register";
 "accountPage.usernameRegistrationFailed" = "Đăng ký thất bại, xin vui lòng kiểm tra mật khẩu.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Mật khẩu không chính xác";
 "accountPage.enableBoothMode" = "Khả năng chế độ Booth";
 "accountPage.disableBoothMode" = "Thiết lập chế độ Booth";
-"accountPage.disableBoothModeExplanation" = "Xin vui lòng cung cấp mật khẩu tài khoản của bạn";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Trong chế độ booth lịch sử cuộc trò chuyện không được lưu và chức năng jami bị hạn chế bằng cách thực hiện cuộc gọi ra ngoài. Khi bạn bật chế độ booth tất cả các cuộc trò chuyện của bạn sẽ bị xóa.";
 "accountPage.noBoothMode" = "Để kích hoạt chế độ Booth, bạn cần tạo mật khẩu tài khoản trước.";
 "accountPage.boothModeAlertMessage" = "Sau khi bật chế độ phòng, tất cả các cuộc trò chuyện của bạn sẽ bị xóa.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Cảng";
 "account.proxyServer" = "Tín hiệu";
-"account.createSipAccount" = "Tạo tài khoản SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Nhập địa chỉ";
 "account.portLabel" = "Nhập số cổng";
 "account.accountStatus" = "Tình trạng tài khoản";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Kết nối một thiết bị mới";
 "linkDevice.passwordError" = "Mật khẩu mà bạn nhập không mở khóa tài khoản này";
-"linkDevice.networkError" = "Một lỗi mạng xảy ra trong quá trình xuất khẩu";
-"linkDevice.defaultError" = "Một lỗi xảy ra trong quá trình xuất khẩu";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Để hoàn thành quá trình, bạn cần mở Jami trên thiết bị mới và chọn tùy chọn \"Công nối thiết bị này với tài khoản\". Pin của bạn là hợp lệ trong 10 phút";
 "linkDevice.hudMessage" = "Kiểm tra";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Anh đã nhận được sự miễn trừ";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Thủy tạo ra";
 "generatedMessage.invitationReceived" = "được mời tham gia";
 "generatedMessage.invitationAccepted" = "gia nhập cuộc trò chuyện";

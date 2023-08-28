@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "כתוב הודעה ל ";
 "conversation.explanationSendingLocationTo" = "אתה חולק את המיקום שלך עם ";
 "conversation.explanationReceivingLocationFrom" = "אתה מקבל כרגע מיקום חי מ";
-"conversation.errorSavingImage" = "לא הצלחתי לשמור תמונה לגלריה";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "שלחתי לך בקשה לשיחה.";
 "conversation.requestMessage" = "שלום, תרצה להצטרף לשיחה?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "ברוך בואך אל Jami‏ !";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "ג'אמי היא פלטפורמה חופשית ויקונביסלית לשיחה שמטרת הפרטיות והחופש של המשתמשים";
-"welcome.linkDevice" = "קישור את המכשיר הזה לחשבון";
-"welcome.createAccount" = "יצירת חשבון Jami";
-"welcome.connectToManager" = "חיבור לשרת JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "דילוג";
 "createProfile.profileCreated" = "קדימה";
-"createProfile.title" = "אישית את הפרופיל שלך";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "הכניסו שם תצוגה";
 "createProfile.enterNamePlaceholder" = "הכניסה של שם";
 "createProfile.subtitle" = "הפרופיל שלך ייחלק עם אנשי הקשר שלך. אתה יכול לשנות אותו בכל עת.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "מכשיר חיבור";
 "linkToAccount.pinPlaceholder" = "מספר זיהוי אישי";
 "linkToAccount.pinLabel" = "הכניס את סימן PIN";
-"linkToAccount.explanationPinMessage" = "כדי ליצור את קוד PIN, לכו להגדרות ניהול חשבון במכשיר המכיל את החשבון שרצית להשתמש בו. בהגדרות המכשירים בחרו \"חברו מכשיר אחר לחשבון הזה\". תקבלו את הסימון PIN הנדרש כדי למלא את הטופס הזה. הסימון PIN הוא תקף רק 10 דקות.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "כניסה";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "צלם.";
 "alerts.profileUploadPhoto" = "תעלה תמונה";
 "alerts.accountLinkedTitle" = "חשבון חיבור";
-"alerts.dbFailedTitle" = "טעות קרה בעת השיגור של ג'מי.";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "בבקשה סגור את ההזמנה ותנסה לפתוח אותה שוב.";
 "alerts.confirmBlockContact" = "האם אתה בטוח שאתה רוצה לחסום את הקשר הזה? היסטוריית השיחה עם הקשר הזה גם תימחק באופן קבוע.";
 "alerts.confirmDeleteConversation" = "אתה בטוח שאתה רוצה למחוק את השיחה הזאת באופן קבוע?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "מכשיר ביטול";
 "accountPage.revokeDeviceMessage" = "אתה בטוח שאתה רוצה לבטל את המכשיר?";
 "accountPage.revokeDeviceButton" = "ביטול";
-"accountPage.revokeDevicePlaceholder" = "הכנס את הסיסמה שלך";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "ביטול המכשיר הושלם";
 "accountPage.deviceRevocationProgress" = "ביטול...";
 "accountPage.deviceRevocationSuccess" = "המכשיר הושתק.";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "צור איתי קשר באמצעות \"%s\" על פלטפורמת התקשורת המوزعة של ג'מי: https://jami.net";
 "accountPage.passwordPlaceholder" = "הכניסה סיסמה לחשבון";
 "accountPage.usernamePlaceholder" = "הכניס את שם המשתמש הרצוי";
-"accountPage.registerNameErrorMessage" = "שם המשתמש הנבחר אינו זמין";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "רישום";
 "accountPage.usernameRegisterAction" = "הירשם";
 "accountPage.usernameRegistrationFailed" = "ההרשמה נכשלה, אנא בדוק את הסיסמה.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "סיסמה שגויה";
 "accountPage.enableBoothMode" = "תפעיל מצב קיר";
 "accountPage.disableBoothMode" = "תבטל מצב הדלת";
-"accountPage.disableBoothModeExplanation" = "אנא תני לי את הסיסמה של החשבון שלך";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "במצב הקו לא נשמרת היסטוריית השיחה והפונקציונליות של ג'אמי מוגבלת על ידי שיחות יוצאות.";
 "accountPage.noBoothMode" = "כדי להפעיל מצב בוט, אתה צריך ליצור קודם סיסמה לחשבון.";
 "accountPage.boothModeAlertMessage" = "לאחר שתפעיל את מצב הקו, כל השיחות שלך ימחקו.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "סרבר SIP";
 "account.port" = "פורט";
 "account.proxyServer" = "פרוקסי";
-"account.createSipAccount" = "ליצור חשבון SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "הכניסה כתובת";
 "account.portLabel" = "הכניסה מספר הנמל";
 "account.accountStatus" = "מצב החשבון";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "קישור מכשיר חדש";
 "linkDevice.passwordError" = "הסיסמה שהכנסת לא פותחת את החשבון הזה";
-"linkDevice.networkError" = "טעות ברשת התרחשה במהלך ההצוא";
-"linkDevice.defaultError" = "טעות שקרה במהלך ההצוא";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "כדי להשלים את התהליך, אתה צריך לפתוח את ג'מי על המכשיר החדש ולבחר את האפשרות \"רחב את המכשיר הזה לחשבון\".";
 "linkDevice.hudMessage" = "אימות";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "קיבלת חסינות.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "סרם נוצר";
 "generatedMessage.invitationReceived" = "הוזמנת להצטרף";
 "generatedMessage.invitationAccepted" = "הצטרף לשיחה";

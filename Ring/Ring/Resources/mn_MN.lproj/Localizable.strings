@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Энэ талаар мэдээлэл өгөөч";
 "conversation.explanationSendingLocationTo" = "Та одоо байр сууриа хуваалцаж байна.";
 "conversation.explanationReceivingLocationFrom" = "Та одоо ";
-"conversation.errorSavingImage" = "Зураг галерийн дотор хадгалах боломжгүй";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Таныг ярилцлага явуулах хүсэлт ирүүлсэн.";
 "conversation.requestMessage" = "Та яриадаа нэгдэх үү?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Жэмид тавтай морилно уу!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami нь хэрэглэгчийн хувийн хэвшил, эрх чөлөөг хадгалах чөлөөтэй, бүх нийтийн харилцааны платформ юм";
-"welcome.linkDevice" = "Энэ төхөөрөмжийг дансанд холбоно";
-"welcome.createAccount" = "Jami-ийн дансыг бий болгох";
-"welcome.connectToManager" = "JAMS сервертэй холбох";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Улаанбаатар";
 "createProfile.profileCreated" = "Дараа нь";
-"createProfile.title" = "Таны хувилбарыг тасалдаг";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Тавиагийн нэрийг оруул";
 "createProfile.enterNamePlaceholder" = "Нэр дуул";
 "createProfile.subtitle" = "Таны профилийг таны холбоотонтай хуваалцах болно. Та үүнийг хэзээ ч өөрчилж болно.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Зэвсэглэлтэй холболт";
 "linkToAccount.pinPlaceholder" = "ПИН код";
 "linkToAccount.pinLabel" = "PIN-ийг оруул";
-"linkToAccount.explanationPinMessage" = "PIN код үүсгэхэд та ашиглахыг хүссэн дансыг агуулсан төхөөрөмжийн дансны удирдлагын тангаруудад явна.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Та бүртгэнэ";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Сүрэл зураг хий";
 "alerts.profileUploadPhoto" = "Зураг борлуула";
 "alerts.accountLinkedTitle" = "Холбоосон данс";
-"alerts.dbFailedTitle" = "Jami-г нисэх үеэр алдаа гарсан";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Та хүсэлтээ хааж дахин нээхээр хичээгээрэй";
 "alerts.confirmBlockContact" = "Та энэ холбоосыг хаахыг хүсч байна уу? Энэ холбооны ярианы түүх мөн мөн л байнга устгагдана.";
 "alerts.confirmDeleteConversation" = "Та энэ яриаг тасралтгүй устгахыг хүсч байна уу?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Халдааны сэргээлт";
 "accountPage.revokeDeviceMessage" = "Та энэ төхөөрөмжийг цуцлахыг хүсч байна уу?";
 "accountPage.revokeDeviceButton" = "Хуримтлал цуцлах";
-"accountPage.revokeDevicePlaceholder" = "Хууль нууц товчийг оруул";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Утасны цуцлах ажил дууссан";
 "accountPage.deviceRevocationProgress" = "-Хэрэв та...";
 "accountPage.deviceRevocationSuccess" = "Утасны хэрэгсэл цуцлагдлаа";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Jami-ийн хуваарилалттай харилцааны платформын \"%s\" хэрэгслээр намайг хангаарай: https://jami.net";
 "accountPage.passwordPlaceholder" = "Хэтгэлийн нууц үг оруулах";
 "accountPage.usernamePlaceholder" = "Та хүссэн хэрэглэгчдийн нэрийг оруул";
-"accountPage.registerNameErrorMessage" = "Та сонгосон хэрэглэгчдийн нэр байхгүй";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Төгсгөл";
 "accountPage.usernameRegisterAction" = "Тэтгэврийн";
 "accountPage.usernameRegistrationFailed" = "Тэнд бүртгэл алдаатай. Хууль нууц товчлуулъя.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Хууль үг буруу";
 "accountPage.enableBoothMode" = "Бутын хэв маяг ашиглах";
 "accountPage.disableBoothMode" = "Бутын хэв маяг гараагүй болгох";
-"accountPage.disableBoothModeExplanation" = "Та өөрийн дансны нууц үгсийг өгөөч";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Бут режимд ярианы түүх хадгалан үлдээгүй бөгөөд Jami-ийн функц-ийн үйл ажиллагааг гадаад дуудлага хийхээр хязгаарлагджээ. Бут режимд хангахдаа бүх яриаг нь хасна.";
 "accountPage.noBoothMode" = "Бутын хэв маяг идэвхжүүлэхийн тулд та эхлээд дансны нууц үг үүсгэх хэрэгтэй.";
 "accountPage.boothModeAlertMessage" = "Бут режимыг идэвхжүүлсний дараа бүх яриагаа устгасан болно.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "Газар";
 "account.proxyServer" = "Төлөөлөгч";
-"account.createSipAccount" = "SIP дансыг бий болгох";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Хатуу хаяг оруул";
 "account.portLabel" = "Портын дугаар";
 "account.accountStatus" = "Нягтлан бодох бүртгэлийн байдал";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Шинэ төхөөрөмжийг холбох";
 "linkDevice.passwordError" = "Та оруулсан нууц үг энэ сэжигээ нээлттэй болгодоггүй";
-"linkDevice.networkError" = "Экспортын үеэр сүлжээний алдаа гарсан";
-"linkDevice.defaultError" = "Экспортын үеэр алдаа гарсан";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Энэ үйл явцыг дуусгахын тулд шинэ төхөөрөмж дээр Jami-г нээж, \"Энэ төхөөрөмжийг дансанд холбоно\" гэсэн сонголт сонгох хэрэгтэй. Таны шил нь 10 минут хүчинтэй байна";
 "linkDevice.hudMessage" = "Хяналт шалгах";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Та хаалгагүй болсон.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Хүрэлсүх үүссэн";
 "generatedMessage.invitationReceived" = "оролцохоор урьж байсан";
 "generatedMessage.invitationAccepted" = "ярилцлагад нэгдсэн";

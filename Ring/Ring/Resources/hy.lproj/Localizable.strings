@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Գրեք հաղորդագրություն ";
 "conversation.explanationSendingLocationTo" = "Դուք ներկայումս կիսում եք ձեր գտնվելու վայրը ";
 "conversation.explanationReceivingLocationFrom" = "Դուք ներկայումս ստանում եք կենդանի տեղակայման ";
-"conversation.errorSavingImage" = "Չկարողացա պահպանել պատկերները գալերիա";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Ձեզ ուղարկել է հարցազրույցի խնդրանք:";
 "conversation.requestMessage" = "Բարեւ, կցանկանայի՞ք միանալ զրույցին:";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Բարի գալուստ Ջամի!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami-ն ազատ եւ համընդհանուր հաղորդակցման հարթակ է, որը պահպանում է օգտատերերի գաղտնիությունն ու ազատությունները";
-"welcome.linkDevice" = "Կապակցեք այս սարքը հաշիվի հետ";
-"welcome.createAccount" = "Ստեղծեք Jami հաշիվ";
-"welcome.connectToManager" = "Հաղորդակցել JAMS սերվերի";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Հեռանալ";
 "createProfile.profileCreated" = "Հաջորդը";
-"createProfile.title" = "Անհատականացնել ձեր պրոֆիլը";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Ներբեռնեք ցուցադրման անուն";
 "createProfile.enterNamePlaceholder" = "Նշանակել անուն";
 "createProfile.subtitle" = "Ձեր պրոֆիլը կկիսվի ձեր կոնտակտների հետ: Դուք կարող եք այն ցանկացած պահի փոխել:";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Կապակցման սարք";
 "linkToAccount.pinPlaceholder" = "PIN-ը";
 "linkToAccount.pinLabel" = "Նշեք PIN- ն";
-"linkToAccount.explanationPinMessage" = "PIN կոդը ստեղծելու համար գնացեք սարքի հաշվառման կարգավորումների վրա, որոնք պարունակում են հաշիվ, որը ցանկանում եք օգտագործել: սարքերի կարգավորումների մեջ ընտրեք \"Հավելվածի հետ միացնել այլ սարք\": Դուք կստանաք անհրաժեշտ PIN-ը, որպեսզի լրացրեք այս ձեւը: PIN-ը գործում է միայն 10 րոպե:";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Գրանցվեք";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Լուսանկարներ արեք";
 "alerts.profileUploadPhoto" = "Լուսանկարներ բեռնել";
 "alerts.accountLinkedTitle" = "Կապակցող հաշիվ";
-"alerts.dbFailedTitle" = "Ջամիի արձակման ժամանակ սխալ է տեղի ունեցել:";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Խնդրում ենք փակել դիմումը եւ փորձել նորից բացել այն";
 "alerts.confirmBlockContact" = "Համոզված եք, որ ցանկանում եք արգելափակել այս շփումը: Այս շփման հետ կապված զրույցի պատմությունը նույնպես կսահմանվի մշտապես:";
 "alerts.confirmDeleteConversation" = "Համոզված ես, որ ուզում ես այս զրույցը մշտապես ջնջել:";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Վերադարձի սարք";
 "accountPage.revokeDeviceMessage" = "Դուք համոզված եք, որ ցանկանում եք վերացնել այս սարքը: Այս գործողությունը չի կարող չեղարկվել:";
 "accountPage.revokeDeviceButton" = "Վերադարձ";
-"accountPage.revokeDevicePlaceholder" = "Ներբեռնեք գաղտնաբառը";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Հեռացման սարքը ավարտված է";
 "accountPage.deviceRevocationProgress" = "Վերադարձը...";
 "accountPage.deviceRevocationSuccess" = "Հեռացվել է սարքը";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Կապվեք ինձ հետ՝ օգտագործելով \"%s\" Jami- ի տարածված հաղորդակցման հարթակում. https://jami.net";
 "accountPage.passwordPlaceholder" = "Գրեք հաշիվի գաղտնաբառը";
 "accountPage.usernamePlaceholder" = "Նշեք ցանկալի օգտատերունուն";
-"accountPage.registerNameErrorMessage" = "Ընտրված օգտատերու անունը չի հասանելի";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Գրանցում";
 "accountPage.usernameRegisterAction" = "Գրանցվել";
 "accountPage.usernameRegistrationFailed" = "Անվանումը ձախողվել է, խնդրում ենք ստուգել գաղտնաբառը:";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Անշարունակություն";
 "accountPage.enableBoothMode" = "Հեռուստացույցի ռեժիմը ակտիվացնել";
 "accountPage.disableBoothMode" = "Հեռացնել բուշի մոդը";
-"accountPage.disableBoothModeExplanation" = "Խնդրում եմ տրամադրել ձեր հաշիվի գաղտնաբառը";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Բուդի ռեժիմում զրույցի պատմությունը չի պահպանվում եւ Jami ֆունկցիոնալությունը սահմանափակվում է ելող զանգերի կատարմամբ: Երբ դուք ակտիվացնում եք բուդի ռեժիմը, ձեր բոլոր զրույցները կվերացվեն:";
 "accountPage.noBoothMode" = "Բուտ մոդի ակտիվացնելու համար նախ պետք է ստեղծել հաշիվի գաղտնաբառը:";
 "accountPage.boothModeAlertMessage" = "Երբ ակտիվացնեք բուդի մոդը, ձեր բոլոր զրույցները կվերացվեն:";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP սերվեր";
 "account.port" = "Պորտ";
 "account.proxyServer" = "Պրոկսի";
-"account.createSipAccount" = "Ստեղծեք SIP հաշիվ";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Գտեք հասցե";
 "account.portLabel" = "Նմուշներ";
 "account.accountStatus" = "Հաշվետու վիճակը";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Կապակցեք նոր սարք";
 "linkDevice.passwordError" = "Ձեր մուտքագրած գաղտնաբառը չի բացում այս հաշիվը";
-"linkDevice.networkError" = "Արտահանման ընթացքում ցանցային սխալ է առաջացել";
-"linkDevice.defaultError" = "Արտահանման ընթացքում առաջացած սխալ";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Պրոցեսը ավարտելու համար պետք է բացեք Jami- ն նոր սարքում եւ ընտրեք \"Կապակցեք այս սարքը հաշիվի հետ\": Ձեր PIN- ը գործում է 10 րոպե";
 "linkDevice.hudMessage" = "Փորձարկում";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Դուք ստացել եք անպատասխանատվություն";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Ստեղծված խավ";
 "generatedMessage.invitationReceived" = "հրավիրվել է միանալ";
 "generatedMessage.invitationAccepted" = "միացել է զրույցին";

@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Напішыце паведамленне ";
 "conversation.explanationSendingLocationTo" = "Вы ў цяперашні час дзяліцеся сваім месцам з ";
 "conversation.explanationReceivingLocationFrom" = "Вы ў цяперашні час атрымліваеце жывое месца з ";
-"conversation.errorSavingImage" = "Не ўдалося захаваць малюнак у галерэі";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Паслаў вам просьбу аб размове.";
 "conversation.requestMessage" = "Прывітанне, вы хацелі б далучыцца да размовы?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Сардэчна запрашаем у Джамі!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami - гэта бясплатная і універсальная платформа для зносін, якая захоўвае прыватнасць і свабоды карыстальнікаў";
-"welcome.linkDevice" = "Звязаць гэта прылада да рахунку";
-"welcome.createAccount" = "Стварэнне ўліковага запісу Jami";
-"welcome.connectToManager" = "Падключэнне да сервера JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Скінг";
 "createProfile.profileCreated" = "Далей";
-"createProfile.title" = "Персаналізаваць свой профіль";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Увядзіце імя адлюстравання";
 "createProfile.enterNamePlaceholder" = "Увядзіце імя";
 "createProfile.subtitle" = "Ваш профіль будзе падзяляцца з вашымі кантактамі. Вы можаце змяніць яго ў любы час.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Прылада злучэння";
 "linkToAccount.pinPlaceholder" = "Пін-аўт";
 "linkToAccount.pinLabel" = "Увядзіце PIN";
-"linkToAccount.explanationPinMessage" = "Каб стварыць код PIN, перайдзіце ў налады кіравання рахункам на прыладзе, якое змяшчае ўліковы запіс, які вы хочаце выкарыстоўваць. У налады прылад Выберыце \"Звязаць іншае прыладу да гэтага рахунку\". Вы атрымаеце неабходны PIN для запоўнення гэтай формы.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Падпішыцеся";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Здымайце фота";
 "alerts.profileUploadPhoto" = "Загрузка фота";
 "alerts.accountLinkedTitle" = "Звязвальны рахунак";
-"alerts.dbFailedTitle" = "Памылка адбылася пры запуску Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Калі ласка, зачыніць заяўку і паспрабаваць адкрыць яе зноў";
 "alerts.confirmBlockContact" = "Ці вы ўпэўненыя, што хочаце заблакаваць гэты кантакт?";
 "alerts.confirmDeleteConversation" = "Ці ўпэўнены, што хочаш назаўсёды выдаліць гэтую размову?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Прылада адмены";
 "accountPage.revokeDeviceMessage" = "Ці вы ўпэўненыя, што хочаце адклікаць гэта прылада?";
 "accountPage.revokeDeviceButton" = "Адмена";
-"accountPage.revokeDevicePlaceholder" = "Увядзіце пароль";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Завяршана адкліканне прылады";
 "accountPage.deviceRevocationProgress" = "Адмяняючы...";
 "accountPage.deviceRevocationSuccess" = "Прылада была адменена";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Звяжыцеся са мной з дапамогай \"%s\" на раскіданыя медыцынскія платформы Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Увядзіце пароль рахунку";
 "accountPage.usernamePlaceholder" = "Увядзіце жаданае карыстацкае імя";
-"accountPage.registerNameErrorMessage" = "Выбранае імя карыстальніка не даступна";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Рэгістрацыя";
 "accountPage.usernameRegisterAction" = "Рэгістрацыя";
 "accountPage.usernameRegistrationFailed" = "Рэгістрацыя не атрымалася. Калі ласка, праверце пароль.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Пароль няправільна";
 "accountPage.enableBoothMode" = "Уключыць рэжым бута";
 "accountPage.disableBoothMode" = "Адключыць рэжым бута";
-"accountPage.disableBoothModeExplanation" = "Калі ласка, дадайце пароль да рахунку";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "У рэжыме кабіны гісторыя размоў не захаваная і функцыянальнасць Jami абмежаваны выхаду званкі.";
 "accountPage.noBoothMode" = "Каб уключыць рэжым Бута, спачатку трэба стварыць пароль уліковага запісу.";
 "accountPage.boothModeAlertMessage" = "Пасля таго, як вы ўключыце рэжым кабіны, усе вашыя размовы будуць выдаленыя.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP сервер";
 "account.port" = "Порт";
 "account.proxyServer" = "Практыкаванне";
-"account.createSipAccount" = "Стварэнне SIP-акаўнта";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Увядзіце адрас";
 "account.portLabel" = "Увядзіце нумар порта";
 "account.accountStatus" = "Статус рахунку";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Злучыць новае прылада";
 "linkDevice.passwordError" = "Пароль, якую вы ўвайшлі, не раскрывае гэты рахунак";
-"linkDevice.networkError" = "Памылка сеткі адбылася падчас экспарту";
-"linkDevice.defaultError" = "Памылка, якая адбылася падчас экспарту";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Каб скончыць працэс, вам трэба адкрыць Jami на новым прыладзе і выбраць варыянт \"Звязаць гэта прыладу з рахункам\". Ваш шнур валідуе на працягу 10 хвілін";
 "linkDevice.hudMessage" = "Праверка";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Вы атрымалі непарушэнне";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Ствараецца натоўп";
 "generatedMessage.invitationReceived" = "быў запрошаны далучыцца";
 "generatedMessage.invitationAccepted" = "далучыўся да размовы";

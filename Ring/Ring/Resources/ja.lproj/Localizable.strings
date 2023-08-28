@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "メッセージを送信";
 "conversation.explanationSendingLocationTo" = "現在地の共有相手: ";
 "conversation.explanationReceivingLocationFrom" = "現在地を受信している相手: ";
-"conversation.errorSavingImage" = "画像一覧に画像を保存できませんでした";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "会話の要請を送った";
 "conversation.requestMessage" = "こんにちは\n会話に参加しませんか？";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Jamiへようこそ！";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jamiは世界中の利用者と繋がることができる自由ソフトウェアであり，利用者の自由と私事権とを尊重しています。";
-"welcome.linkDevice" = "このデバイスをアカウントへリンク";
-"welcome.createAccount" = "Jamiアカウントを作成";
-"welcome.connectToManager" = "JAMSサーバーに接続";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "スキップ";
 "createProfile.profileCreated" = "次へ";
-"createProfile.title" = "個人情報を設定する";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "表示名を入力";
 "createProfile.enterNamePlaceholder" = "名前を入力";
 "createProfile.subtitle" = "プロフィール情報は連絡先と共有されます。設定の変更はいつでも可能です。";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "機器を関連付ける";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PINを入力してください";
-"linkToAccount.explanationPinMessage" = "PINコードを生成するには、使用するアカウントにログインしたデバイスのアカウント管理設定に移動します。デバイスの設定で「このアカウントに別のデバイスを紐づける」を選択します。このフォームを完了するために必要なPINを取得します。 PINは10分間のみ有効です。";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "サインイン";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "撮影";
 "alerts.profileUploadPhoto" = "写真のアップロード";
 "alerts.accountLinkedTitle" = "アカウントをリンクしています";
-"alerts.dbFailedTitle" = "Jami起動中にエラーが発生しました";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "アプリケーションを終了し、起動し直してください";
 "alerts.confirmBlockContact" = "本当にこの連絡先をブロックしますか？ブロックするとこの連絡先との会話履歴が永久に削除されます。";
 "alerts.confirmDeleteConversation" = "この会話を完全に削除してもよろしいですか？";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "デバイスを取り消し";
 "accountPage.revokeDeviceMessage" = "本当にこの端末を無効にしますか？この操作は取り消せません。";
 "accountPage.revokeDeviceButton" = "破棄";
-"accountPage.revokeDevicePlaceholder" = "パスワードを入力";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "デバイスの無効化が完了しました";
 "accountPage.deviceRevocationProgress" = "取り消し中...";
 "accountPage.deviceRevocationSuccess" = "無効なデバイス";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "広報プラットフォームの\"%s\"を使用して私に連絡してください: https://jami.net";
 "accountPage.passwordPlaceholder" = "アカウントのパスワードを入力";
 "accountPage.usernamePlaceholder" = "必要なユーザー名を入力する";
-"accountPage.registerNameErrorMessage" = "選択したユーザー名は表示されていません";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "登録";
 "accountPage.usernameRegisterAction" = "登録";
 "accountPage.usernameRegistrationFailed" = "登録失敗.パスワードを確認してください.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "パスワードが間違っています";
 "accountPage.enableBoothMode" = "ブースモードを有効にする";
 "accountPage.disableBoothMode" = "ブースモードを無効にする";
-"accountPage.disableBoothModeExplanation" = "口座パスワードを入力してください";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "ブルースモードでは会話履歴が保存されず,Jami機能は出かけ通話によって制限されます.ブルースモードを有効にすると,すべての会話が削除されます.";
 "accountPage.noBoothMode" = "起動するには,まずアカウントパスワードを作成する必要があります.";
 "accountPage.boothModeAlertMessage" = "スタンドモードを有効にした後,すべての会話が削除されます.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIPサーバー";
 "account.port" = "ポート番号";
 "account.proxyServer" = "プロキシ";
-"account.createSipAccount" = "SIP アカウントを作成する";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "アドレス入力";
 "account.portLabel" = "ポート番号を入力する";
 "account.accountStatus" = "口座の状態";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "新しいデバイスをリンク";
 "linkDevice.passwordError" = "入力したパスワードではこのアカウントのロックを解除できません";
-"linkDevice.networkError" = "エクスポート中にネットワークエラーが発生しました";
-"linkDevice.defaultError" = "エクスポート中にエラーが発生しました";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "プロセスは完了するには,新しいデバイスでJamiを開いて\",このデバイスをアカウントにリンクする\"オプションを選択する必要があります. あなたのピンは10分間有効です";
 "linkDevice.hudMessage" = "検証中";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "免許を受け取りました";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "群れが生まれました";
 "generatedMessage.invitationReceived" = "加入するよう招待されました";
 "generatedMessage.invitationAccepted" = "話を参加した";

@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Idatzi mezu bat";
 "conversation.explanationSendingLocationTo" = "Orain zure kokapena partekatzen ari zara.";
 "conversation.explanationReceivingLocationFrom" = "Oraintxe bertan, zuzenean ari zara entzuten.";
-"conversation.errorSavingImage" = "Galerian argazkia gorde ezin izan da.";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Elkarrizketa baterako eskaera bidali dizut.";
 "conversation.requestMessage" = "Kaixo, elkarrizketara etorri nahi duzu?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Ongi etorri Jami-ra!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami komunikazio plataforma librea eta unibertsala da, erabiltzaileen pribatutasuna eta askatasuna babesten dituena.";
-"welcome.linkDevice" = "Estekatu gailua kontu batekin";
-"welcome.createAccount" = "Sortu Jami kontua";
-"welcome.connectToManager" = "JAMS zerbitzari batetik konektatu";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Jauzi";
 "createProfile.profileCreated" = "Hurrengoa";
-"createProfile.title" = "Zure profila pertsonalizatu";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Sartu pantaila izen bat";
 "createProfile.enterNamePlaceholder" = "Sartu izena";
 "createProfile.subtitle" = "Zure profila zure kontaktuekin partekatuko da.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Estekatu gailua";
 "linkToAccount.pinPlaceholder" = "PIN-a";
 "linkToAccount.pinLabel" = "Sartu PIN-a";
-"linkToAccount.explanationPinMessage" = "PIN kodea sortzeko, joan nahi duzun kontua duen gailuaren kontu kudeaketa-aukera. Gailuen ezarpenetan, aukeratu \"Beste gailu bat kontu honekin lotzea\". Formulari hau betetzeko beharrezkoa den PIN-a lortuko duzu. PIN-a 10 minutuz bakarrik balio du.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Sarrera";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Atera argazkia";
 "alerts.profileUploadPhoto" = "Igo argazkia";
 "alerts.accountLinkedTitle" = "Kontua estekatzen";
-"alerts.dbFailedTitle" = "Akats bat gertatu zen Jami jaurtitzen ari ginenean.";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Itxi aplikazioa eta saiatu berriro irekitzen";
 "alerts.confirmBlockContact" = "Kontaktu hau blokeatu nahi duzu? Kontaktu honekin egindako elkarrizketa historiala ere betiko ezabatuko da.";
 "alerts.confirmDeleteConversation" = "Ziur zaude elkarrizketa hau betiko ezabatu nahi duzula?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Atzera egiteko gailua";
 "accountPage.revokeDeviceMessage" = "Ziur zaude gailu hau bertan behera utzi nahi duzula?";
 "accountPage.revokeDeviceButton" = "Atzera egitea";
-"accountPage.revokeDevicePlaceholder" = "Sartu zure pasahitza.";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Gailuaren erretiroa amaitu da";
 "accountPage.deviceRevocationProgress" = "-Askatuko dut...";
 "accountPage.deviceRevocationSuccess" = "Gailua bertan behera geratu da.";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Jarri harremanetan nirekin Jami-ren komunikazio plataforma banatuan dagoen \"%s\" erabiliz: https://jami.net";
 "accountPage.passwordPlaceholder" = "Sartu kontuaren pasahitza";
 "accountPage.usernamePlaceholder" = "Sartu nahi duzun erabiltzaile izena";
-"accountPage.registerNameErrorMessage" = "Aukeratutako erabiltzaile izena ez dago eskura";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Erregistroa";
 "accountPage.usernameRegisterAction" = "Erregistratu";
 "accountPage.usernameRegistrationFailed" = "Erregistroak huts egin du.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Pasahitza oker";
 "accountPage.enableBoothMode" = "Bota Modua aktibatu";
 "accountPage.disableBoothMode" = "Desaktibatu Booth Modua";
-"accountPage.disableBoothModeExplanation" = "Mesedez, eman zure kontuaren pasahitza.";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Talde moduko elkarrizketa historia ez da gorde eta jami funtzionalitatea mugatuta irteten deiak eginez.";
 "accountPage.noBoothMode" = "Booth modua aktibatu ahal izateko, lehenik kontuaren pasahitza sortu behar da.";
 "accountPage.boothModeAlertMessage" = "Kabina-moduan jarri ondoren, zure elkarrizketa guztiak ezabatuko dira.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP zerbitzaria";
 "account.port" = "Ataka";
 "account.proxyServer" = "Proxya";
-"account.createSipAccount" = "SIP Kontua sortzea";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Sartu helbidea";
 "account.portLabel" = "Sartu portuaren zenbakia";
 "account.accountStatus" = "Kontuaren egoera";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Estekatu gailu berria";
 "linkDevice.passwordError" = "Sartu duzun pasahitzak ez du kontu hau desblokeatzen";
-"linkDevice.networkError" = "Sare errore bat gertatu da esportazioan";
-"linkDevice.defaultError" = "Errore bat gertatu da esportazioan";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Prozesua osatzeko, Jami ireki behar duzu gailu berrian eta aukeratu \"Gailu hau kontu batera lotzea\". Zure pinak 10 minutu iraungo du.";
 "linkDevice.hudMessage" = "Egiaztatzen";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Invizio bat jaso duzu.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Sarrera sortua";
 "generatedMessage.invitationReceived" = "Batera etortzeko gonbidatu zuten.";
 "generatedMessage.invitationAccepted" = "Elkarrizketan sartu nintzen.";

@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "이 지문에 메시지를 보내";
 "conversation.explanationSendingLocationTo" = "현재 위치와 공유하고 있습니다.";
 "conversation.explanationReceivingLocationFrom" = "현재 ";
-"conversation.errorSavingImage" = "갤러리에 이미지를 저장하지 못했습니다";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "대화 요청을 보냈어요";
 "conversation.requestMessage" = "안녕하세요, 대화에 참여하고 싶으세요?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "자미에 오신 것을 환영합니다!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "자미는 무료 및 보편적인 통신 플랫폼으로 이용자의 개인 정보와 자유를 보호합니다.";
-"welcome.linkDevice" = "이 장치를 계정에 연결하기";
-"welcome.createAccount" = "Jami 계정을 생성";
-"welcome.connectToManager" = "JAMS 서버에 연결";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "스피프";
 "createProfile.profileCreated" = "다음";
-"createProfile.title" = "프로필을 개인화";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "표시 이름을 입력";
 "createProfile.enterNamePlaceholder" = "이름 입력";
 "createProfile.subtitle" = "귀하의 프로필은 연락처와 공유됩니다. 언제든지 변경할 수 있습니다.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "연결 장치";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN를 입력";
-"linkToAccount.explanationPinMessage" = "PIN 코드를 생성하려면 사용하고자 하는 계정을 포함하는 장치의 계정 관리 설정에 이동합니다. 장치 설정에서 \"이 계정에 다른 장치를 연결하십시오\"를 선택합니다. 이 양식을 작성하려면 필요한 PIN을 얻을 수 있습니다. PIN는 10 분 동안 만 유효합니다.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "로그인";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "사진 찍기";
 "alerts.profileUploadPhoto" = "사진 업로드";
 "alerts.accountLinkedTitle" = "연결 계좌";
-"alerts.dbFailedTitle" = "자미를 발사하는 과정에서 오류가 발생했습니다";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "신청서를 닫고 다시 열려고 해 주세요";
 "alerts.confirmBlockContact" = "이 연락처를 차단하고 싶으신가요? 이 연락처의 대화 역사 또한 영구적으로 삭제됩니다.";
 "alerts.confirmDeleteConversation" = "이 대화를 영구적으로 삭제하고 싶다고 확신하십니까?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "취소 장치";
 "accountPage.revokeDeviceMessage" = "이 장치를 취소하고 싶다고 확신하십니까?";
 "accountPage.revokeDeviceButton" = "취소";
-"accountPage.revokeDevicePlaceholder" = "비밀번호를 입력하세요";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "장치 취소 완료";
 "accountPage.deviceRevocationProgress" = "취소...";
 "accountPage.deviceRevocationSuccess" = "기기는 취소되었습니다";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Jami 유통 통신 플랫폼에서 \"%s\"를 사용하여 연락하십시오: https://jami.net";
 "accountPage.passwordPlaceholder" = "계정 비밀번호를 입력";
 "accountPage.usernamePlaceholder" = "원하는 사용자 이름을 입력";
-"accountPage.registerNameErrorMessage" = "선택된 사용자 이름은 사용되지 않습니다";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "등록";
 "accountPage.usernameRegisterAction" = "등록";
 "accountPage.usernameRegistrationFailed" = "등록이 실패했으니 비밀번호 확인해 주세요";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "비밀번호 잘못";
 "accountPage.enableBoothMode" = "부스 모드를 활성화";
 "accountPage.disableBoothMode" = "부스 모드를 비활성화";
-"accountPage.disableBoothModeExplanation" = "귀하의 계정 비밀번호를 입력하시기 바랍니다";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "부시 모드에서는 대화의 역사가 저장되지 않고, 출력 통화로 Jami 기능이 제한됩니다. 부시 모드를 활성화하면 모든 대화가 삭제됩니다.";
 "accountPage.noBoothMode" = "부스 모드를 활성화하려면 먼저 계정 비밀번호를 생성해야 합니다.";
 "accountPage.boothModeAlertMessage" = "부시 모드를 활성화하면 모든 대화가 삭제됩니다.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP 서버";
 "account.port" = "포트";
 "account.proxyServer" = "프록시";
-"account.createSipAccount" = "SIP 계정 을 생성";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "주소 입력";
 "account.portLabel" = "포트 번호를 입력";
 "account.accountStatus" = "계정 상태";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "새로운 장치를 연결";
 "linkDevice.passwordError" = "입력한 비밀번호는 이 계정을 열 수 없습니다";
-"linkDevice.networkError" = "수출 중 네트워크 오류가 발생";
-"linkDevice.defaultError" = "수출 중 발생한 오류";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "이 프로세스를 완료하려면 새로운 장치에서 Jami를 열고 \"이 장치를 계정에 연결하십시오\".";
 "linkDevice.hudMessage" = "확인";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "당신은 무죄를 받았습니다";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "무리가 만들어졌습니다";
 "generatedMessage.invitationReceived" = "참여하도록 초청되었습니다.";
 "generatedMessage.invitationAccepted" = "대화에 참여";

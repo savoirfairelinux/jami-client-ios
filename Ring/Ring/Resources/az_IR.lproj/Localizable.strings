@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "بو ایسته یینجه بیر خبر یاز";
 "conversation.explanationSendingLocationTo" = "حال بو حالدا یئرینی ایشله ییبسان.";
 "conversation.explanationReceivingLocationFrom" = "ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی";
-"conversation.errorSavingImage" = "عکس گالریه سینده ساخلانیب";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "سنه مکالمه اوچون درخواست گؤندردئم.";
 "conversation.requestMessage" = "سلام، گئجه جکسن؟";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "جامی'یه خوش آمدید!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "جامی، آزاد و آلیشلی بیر ارتباط پلتفرمیدیر کی، ایستیفاده چیلرین خصوصی و آزادلیغی قوروموشدور.";
-"welcome.linkDevice" = "بو آلینانی حسابا باغلا";
-"welcome.createAccount" = "Jami حسابي يارادين";
-"welcome.connectToManager" = "JAMS سرورلا باغلانیب";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "سکیپ";
 "createProfile.profileCreated" = "سونراسي";
-"createProfile.title" = "پروفایلینی شخصیلاش";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "صفحه آدینی دن";
 "createProfile.enterNamePlaceholder" = "آدلارین دن یئری";
 "createProfile.subtitle" = "پروفایلینیز تانریلارینیزلا اشتراک اولوناجاق.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "آلاچیقلاشما";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN یئری";
-"linkToAccount.explanationPinMessage" = "PIN کدونو یارانماق اوچون، ایستیفاده ائتمک ائستهدئيینیز حسابین واردیر. آلتیلارین دَیییشمه سینده \"ایکی آلتی بو حسابا باغلاییب\" سئچمه سینی چئوریب. بو فورمونو دولدورماق اوچون لازیم اولان PIN آلاجاقسان. PIN آنجاق 10 دقیقه دیر.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "آندا یاز";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "عکس آل";
 "alerts.profileUploadPhoto" = "عکس آپلود";
 "alerts.accountLinkedTitle" = "باغلانان حساب";
-"alerts.dbFailedTitle" = "جامی نین گؤستریلمه سینده خاتمه اولدو";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "لطفاً درخواستي باغلايين و اونو گئنه آچماغا چاليشين";
 "alerts.confirmBlockContact" = "آيا مطمئن ايشي ايشي ايسته ييرسن؟ بو ايشي ايله باغلي موباحيثه تاريخي ده دائم سئلئنر.";
 "alerts.confirmDeleteConversation" = "آيا مطمئني که مي خواي اين مکالمه رو به طور دائم حذف کني؟";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "آلنادا چکمه";
 "accountPage.revokeDeviceMessage" = "آيا مطمئنين کي بو قورولوغو لغو اتمک ائستهيئرسئنئز؟";
 "accountPage.revokeDeviceButton" = "رد";
-"accountPage.revokeDevicePlaceholder" = "رمزئيئني يازين";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "آلنادا چکمه لری";
 "accountPage.deviceRevocationProgress" = "رد کردن...";
 "accountPage.deviceRevocationSuccess" = "آلنادا بیرلشمه یه مجبور اولموشدور";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Jami-Distributed Communication Platform-ده \"%s\" ایستیفاده ائدرک منی تماس آلین: https://jami.net";
 "accountPage.passwordPlaceholder" = "حساب رمزونو دن";
 "accountPage.usernamePlaceholder" = "ایسته دیگی یئنی آدلار یئری";
-"accountPage.registerNameErrorMessage" = "سئچمیش ایستیفاده چی آدی یوخدور";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "ثبت";
 "accountPage.usernameRegisterAction" = "ثبت";
 "accountPage.usernameRegistrationFailed" = "ثبت نام ناکام اولدو. لطفا رمزونو چک کنید.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "پاسورده حاقسيز";
 "accountPage.enableBoothMode" = "بوث مودونو فعال ائتمک";
 "accountPage.disableBoothMode" = "بوث مودونو غیر فعال ات";
-"accountPage.disableBoothModeExplanation" = "لطفا حسابينين رمزيني بيان كنيد";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "بوخ مودوندا مکالمه تاریخ سی ساقلانیلمیر و Jami فعالیتلری چیخیشلار وئرمکله محدود اولور. بوخ مودوندا بوتون مکالمه لرین چئوریلیر.";
 "accountPage.noBoothMode" = "بوث مودونو فعال اتمک اوچون اوّل حساب رمزي یاراتماليسينيز.";
 "accountPage.boothModeAlertMessage" = "بوخ موودی فعال ائدن سونرا بوتون دانیشیقلارینیز آرادان آپاراجاق.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP سرور";
 "account.port" = "بندر";
 "account.proxyServer" = "پراکسی";
-"account.createSipAccount" = "SIP حسابي يارادين";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "آدرس یئری";
 "account.portLabel" = "پورت نومره سئني دن";
 "account.accountStatus" = "حساب وضعیتی";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "یئنی آلتی باغلا";
 "linkDevice.passwordError" = "واردیغی سئویش کلمه سی بو حسابین قفلینمه سینی آچمامیش";
-"linkDevice.networkError" = "صادراتدا شبکه خطاسی";
-"linkDevice.defaultError" = "صادراتدا خاتمه";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "پروسه نی باشا چاتدیرماق اوچون، جامی نین یئنی آلتیندا آچماسی و \"بو آلتی حسابا باغلا\" آپشنینی سئچیب.";
 "linkDevice.hudMessage" = "چکمه";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "تو اینفوئشن آلدی";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "سوْنرا ياراندي";
 "generatedMessage.invitationReceived" = "گئتمه یه دعوت ائدیلدی";
 "generatedMessage.invitationAccepted" = "دانیشیقدا قوشولدو";

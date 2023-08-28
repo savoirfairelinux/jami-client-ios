@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Üzenet írása következő(k)nek: ";
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
-"conversation.errorSavingImage" = "Nem sikerült menteni a képet a kepgyűjteménybe";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ kérelmet küldött Önnek egy beszélgetésre.";
 "conversation.incomingRequest" = "Beszélgetési kérelmet küldött.";
 "conversation.requestMessage" = "Üdv!\nSzeretne csatlakozni a beszélgetéshez?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Isten hozott!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "A Jami egy szabad szoftver az egyetemes közlés emelvény, mely tiszteletben tartja a felhasználók szabadságát és magán szféráját";
-"welcome.linkDevice" = "Ezen eszköz összekapcsolása egy fiókhoz";
-"welcome.createAccount" = "Jami-fiók létrehozása";
-"welcome.connectToManager" = "Csatlakozás a JAMS kiszolgálóhoz";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Átugrani";
 "createProfile.profileCreated" = "Tovább";
-"createProfile.title" = "Névjegy testreszabása";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Megjelenítendő név megadása";
 "createProfile.enterNamePlaceholder" = "Név megadása";
 "createProfile.subtitle" = "A névjegyed csak a kapcsolataival kerül megosztásra. Bármikor megváltoztathatja.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Összekapcsoló eszköz";
 "linkToAccount.pinPlaceholder" = "PIN-kód";
 "linkToAccount.pinLabel" = "PIN-kód megadása";
-"linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához keresse meg a fiókkezelő beállításait a használni kívánt fiókot tartalmazó eszközön.  Válassza az eszközbeállításoknál a „Eszköz összekapcsolása fiókhoz” lehetőséget. Meg fogja kapni az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Bejelentkezés";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Fénykép készítése";
 "alerts.profileUploadPhoto" = "Fénykép feltöltése";
 "alerts.accountLinkedTitle" = "Fiók összekapcsolása…";
-"alerts.dbFailedTitle" = "Hiba történt a Jami elindításakor";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Kérjük, hogy zárja be az alkalmazást és próbálja meg újra megnyitni";
 "alerts.confirmBlockContact" = "Biztos, hogy letiltja ezt a kapcsolatot? A beszélgetés előzményei a kapcsolattal együtt véglegesen törlődni fognak.";
 "alerts.confirmDeleteConversation" = "Biztosan végleg törölni szeretné ezt a beszélgetést?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Eszköz visszavonása";
 "accountPage.revokeDeviceMessage" = "Biztosan visszavonja ezt az eszközt? Ez a művelet nem vonható vissza.";
 "accountPage.revokeDeviceButton" = "Visszavon";
-"accountPage.revokeDevicePlaceholder" = "Adja meg a jelszót";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Az eszköz visszavonása befejeződött";
 "accountPage.deviceRevocationProgress" = "Visszavonása…";
 "accountPage.deviceRevocationSuccess" = "Az eszközt visszavonták";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Lépjen velem kapcsolatba a(z) „%s” használatával, a Jami elosztott kommunikációs platformon: https://jami.net";
 "accountPage.passwordPlaceholder" = "Adja meg a fiók jelszavát";
 "accountPage.usernamePlaceholder" = "Írja be a kívánt felhasználónevet";
-"accountPage.registerNameErrorMessage" = "A kért felhasználónév nem érhető.";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Regisztráció…";
 "accountPage.usernameRegisterAction" = "Regisztráció";
 "accountPage.usernameRegistrationFailed" = "Bejegyeztetés sikertelen. Kérjük, ellenőrizze a jelszót.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Helytelen jelszó";
 "accountPage.enableBoothMode" = "Fülke üzemmód engedélyezése";
 "accountPage.disableBoothMode" = "Fülke üzemmód letiltása";
-"accountPage.disableBoothModeExplanation" = "Adja meg fiókjának jelszavát";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "A fülke üzemmódban a beszélgetési előzmények nem kerülnek mentésre, és a Jami funkcionalitása korlátozott a kimenő hívások kezdeményezésekor. Ha a fülke üzemmód engedélyezve van, az összes beszélgetés törlődik.";
 "accountPage.noBoothMode" = "A fülke üzemmód engedélyezéséhez először létre kell hoznia egy fiók jelszavát.";
 "accountPage.boothModeAlertMessage" = "A fülke üzemmód engedélyezése után az összes beszélgetés eltávolításra kerül.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP-kiszolgáló";
 "account.port" = "Kikötő";
 "account.proxyServer" = "Meghatalmazás";
-"account.createSipAccount" = "SIP-fiók létrehozása";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Cím beírása";
 "account.portLabel" = "Kikötőszám megadása";
 "account.accountStatus" = "Fiók állapota";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Eszköz összekapcsolása fiókhoz";
 "linkDevice.passwordError" = "A megadott jelszó nem oldja fel ezt a fiókot";
-"linkDevice.networkError" = "Hálózati hiba történt az exportálás során";
-"linkDevice.defaultError" = "Hiba történt az exportálás során";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön és válassza az „Eszköz összekapcsolása fiókhoz” opciót. A PIN-kódod 10 percig érvényes.";
 "linkDevice.hudMessage" = "Ellenőrzése";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Meghívás megérkezett";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Rajcsoport létrehozva";
 "generatedMessage.invitationReceived" = "meghívást kapott a csatlakozásra";
 "generatedMessage.invitationAccepted" = "csatlakozott a beszélgetéshez";

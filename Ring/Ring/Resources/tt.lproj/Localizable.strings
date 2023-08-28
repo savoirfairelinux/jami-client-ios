@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "";
 "conversation.explanationSendingLocationTo" = "Сез хәзерге вакытта ";
 "conversation.explanationReceivingLocationFrom" = "Сез хәзерге вакытта ";
-"conversation.errorSavingImage" = "Фотоны галереягә саклый алмадым";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Сезгә сөйләшү өчен үтенеч җибәрдем.";
 "conversation.requestMessage" = "Сәлам, әңгәмәгә кушылырга телисезме?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Җәмигә рәхим итегез!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami - кулланучыларның шәхси һәм иреклелекләрен саклый торган ирекле һәм универсаль коммуникация платформасы";
-"welcome.linkDevice" = "Әлеге җайланманы хисапка тоташтыру";
-"welcome.createAccount" = "Jami хисабы булдыру";
-"welcome.connectToManager" = "JAMS серверына тоташтыру";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Карап чык";
 "createProfile.profileCreated" = "Киләсесе";
-"createProfile.title" = "Профилегезне шәхсиләштерү";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Күрсәтү исемен кертү";
 "createProfile.enterNamePlaceholder" = "Исем кертегез";
 "createProfile.subtitle" = "Профиль белән танышучылар уртаклашачак.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Сылтама төре";
 "linkToAccount.pinPlaceholder" = "ПИН";
 "linkToAccount.pinLabel" = "ПИНны кертү";
-"linkToAccount.explanationPinMessage" = "ПИН-кодны булдыру өчен, сез кулланырга теләгән хисапны үз эченә алган җайланмадагы хисапны идарә итү җайланмаларына барыгыз.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Теркәлү";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Фотога төшерегез";
 "alerts.profileUploadPhoto" = "Фотоны урнаштыру";
 "alerts.accountLinkedTitle" = "Бәйләнеш хисабы";
-"alerts.dbFailedTitle" = "Җәмине җибәргәндә хата булган";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Язганны яп һәм яңадан ачып карагыз.";
 "alerts.confirmBlockContact" = "Бу контактны туктатырга теләвегездә ышанычлымы? Бу контакт белән сөйләшү тарихы да мәңгегә бетереләчәк.";
 "alerts.confirmDeleteConversation" = "Сез бу сөйләшүне мәңгегә бетерәсегез киләме?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Ачу чарасы";
 "accountPage.revokeDeviceMessage" = "Сез бу коралны кире кайтарырга телисез икәненә ышанасызмы?";
 "accountPage.revokeDeviceButton" = "Китерелү";
-"accountPage.revokeDevicePlaceholder" = "Парольне кертегез";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Сөйләмнең кире кайтарылуы тәмамланды";
 "accountPage.deviceRevocationProgress" = "- Мин...";
 "accountPage.deviceRevocationSuccess" = "Кушымтаны кире кактылар";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Jami таратылган коммуникация платформасында \"%s\" кулланып, миңа мөрәҗәгать итегез: https://jami.net";
 "accountPage.passwordPlaceholder" = "Хисап номеры шифрен кертегез";
 "accountPage.usernamePlaceholder" = "Теләгелгән кулланучы исемен кертү";
-"accountPage.registerNameErrorMessage" = "Сайланган кулланучы исеме юк";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Теркәлү";
 "accountPage.usernameRegisterAction" = "Теркәлү";
 "accountPage.usernameRegistrationFailed" = "Теркәү уңышсыз булды. Шифрны тикшерегез.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Пароль дөрес түгел";
 "accountPage.enableBoothMode" = "Бут режимын кую";
 "accountPage.disableBoothMode" = "Бут режимын гамәлдән чыгару";
-"accountPage.disableBoothModeExplanation" = "Сөйләмдә үз хисап номерыгызны языгыз";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Буут режимында сөйләшү тарихы сакланып калмаган һәм Jami функциясе чикле булган, читтән баручы шалтыратулар ясаганда.";
 "accountPage.noBoothMode" = "Бут режимын булдыру өчен башта хисап паролен булдырырга кирәк.";
 "accountPage.boothModeAlertMessage" = "Бут режимын кушкач, барлык сөйләшүләрегез дә бетереләчәк.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP серверы";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
-"account.createSipAccount" = "SIP хисабы булдыру";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Адресны кертү";
 "account.portLabel" = "Порт номерын кертү";
 "account.accountStatus" = "Хисап хәле";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Яңа җайланманы тоташтыру";
 "linkDevice.passwordError" = "Сез керткән пароль бу хисапны ачмый";
-"linkDevice.networkError" = "Экспорт вакытында челтәр хатасы булган";
-"linkDevice.defaultError" = "Экспорт вакытында хата булган";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Процессны тәмамлар өчен, яңа җайланмада Jamiны ачып, \"Бу җайланманы аккаунтка тоташтыру\" вариантын сайларга кирәк.";
 "linkDevice.hudMessage" = "Тикшерү";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Сезне ирексезлек белән азат иттеләр.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Туганнар төркеме";
 "generatedMessage.invitationReceived" = "кушылырга чакырылды";
 "generatedMessage.invitationAccepted" = "сөйләшүгә кушылды";

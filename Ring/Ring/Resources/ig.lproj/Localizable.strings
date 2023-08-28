@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Dee ozi na ";
 "conversation.explanationSendingLocationTo" = "Ị na-ekere òkè ugbu a na ọnọdụ gị na ";
 "conversation.explanationReceivingLocationFrom" = "Ị na-enweta ugbu a a a ndụ ọnọdụ site ";
-"conversation.errorSavingImage" = "Enweghi ike ịchekwa foto na gallery";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "M zigara gị arịrịọ maka mkparịta ụka.";
 "conversation.requestMessage" = "Ndewo, ị̀ ga-achọ isonyere anyị ná mkparịta ụka ahụ?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Mmadụ Bịa na Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami bụ usoro nkwukọrịta n'efu na nke zuru ụwa ọnụ nke na-echekwa nzuzo na nnwere onwe nke ndị ọrụ";
-"welcome.linkDevice" = "Jikọọ ngwaọrụ a na akaụntụ";
-"welcome.createAccount" = "Mepụta akaụntụ Jami";
-"welcome.connectToManager" = "Jikọọ na ihe nkesa JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Ịpụ";
 "createProfile.profileCreated" = "Nke na-abịa";
-"createProfile.title" = "Mee ka profaịlụ gị bụrụ nke gị";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Tinye aha ngosi";
 "createProfile.enterNamePlaceholder" = "Tinye aha";
 "createProfile.subtitle" = "A ga-ekenye ndị gị na ha na-akpakọrịta profaịlụ gị. Ị nwere ike ịgbanwe ya n'oge ọ bụla.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Ngwaọrụ njikọ";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Tinye PIN";
-"linkToAccount.explanationPinMessage" = "Iji mepụta koodu PIN, gaa na ntọala njikwa akaụntụ na ngwaọrụ nke nwere akaụntụ ịchọrọ iji. Na ntọala ngwaọrụ Họrọ \"Jikọọ ngwaọrụ ọzọ na akaụntụ a\". Ị ga-enweta PIN dị mkpa iji mezue mpempe akwụkwọ a. PIN ahụ dị irè naanị nkeji 10.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Banye";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Were foto";
 "alerts.profileUploadPhoto" = "Bulite foto";
 "alerts.accountLinkedTitle" = "Nkwekọrịta akaụntụ";
-"alerts.dbFailedTitle" = "Njehie mere mgbe a na-ebugharị Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Biko mechie akwụkwọ ma gbalịa imeghe ya ọzọ";
 "alerts.confirmBlockContact" = "Ị̀ maara na ị chọrọ igbochi kọntaktị a? A ga-ehichapụ akụkọ ihe mere eme nke mkparịta ụka na kọntaktị a kpamkpam.";
 "alerts.confirmDeleteConversation" = "Ì ji n'aka na ị chọrọ ihichapụ mkparịta ụka a kpamkpam?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Ngwaọrụ iwepụ";
 "accountPage.revokeDeviceMessage" = "Ị̀ ma na ị chọrọ ka e wepụ ihe a?";
 "accountPage.revokeDeviceButton" = "Ịtụgharị";
-"accountPage.revokeDevicePlaceholder" = "Tinye paswọọdụ gị";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "E mechaa iwepụ ngwaọrụ";
 "accountPage.deviceRevocationProgress" = "Ịkpọghachite...";
 "accountPage.deviceRevocationSuccess" = "E kagbuola ngwaọrụ ahụ";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Kpọtụrụ m site na iji \"%s\" na usoro nkwukọrịta nke Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Tinye paswọọdụ akaụntụ";
 "accountPage.usernamePlaceholder" = "Tinye aha njirimara achọrọ";
-"accountPage.registerNameErrorMessage" = "Aha njirimara ahọpụtara adịghị";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Ndebanye aha";
 "accountPage.usernameRegisterAction" = "Debanye aha";
 "accountPage.usernameRegistrationFailed" = "Ndebanye aha ahụ adaala, biko chọpụta paswọọdụ.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Paswọọdụ ezighi ezi";
 "accountPage.enableBoothMode" = "Gbaa Mbata Booth Mode";
 "accountPage.disableBoothMode" = "Gbanyụọ Booth Mode";
-"accountPage.disableBoothModeExplanation" = "Biko nye paswọọdụ akaụntụ gị";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Na booth mode mkparịta ụka akụkọ ihe mere eme na-adịghị echekwara na jami ọrụ nanị site na-eme na-aga na oku. Mgbe ị na-enyere booth mode niile gị mkparịta ụka ga-ehichapụ.";
 "accountPage.noBoothMode" = "Iji mee ka ọnọdụ Booth rụọ ọrụ, ị ga-ebu ụzọ mepụta paswọọdụ akaụntụ.";
 "accountPage.boothModeAlertMessage" = "Mgbe i mebisịrị ọnọdụ ụlọ, a ga-ewepụ mkparịta ụka gị niile.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "Ihe Nlekọta SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Onye nnọchianya";
-"account.createSipAccount" = "Mepụta akaụntụ SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Tinye Adreesị";
 "account.portLabel" = "Tinye nọmba ọdụ ụgbọ mmiri";
 "account.accountStatus" = "Ọnọdụ akaụntụ";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Jikọọ ngwaọrụ ọhụrụ";
 "linkDevice.passwordError" = "Paswọdu ị banyere adịghị akpọchi akaụntụ a";
-"linkDevice.networkError" = "Njehie netwọk mere n'oge mbupụ";
-"linkDevice.defaultError" = "Njehie mere n'oge mbupụ";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Iji mezue usoro ahụ, ịkwesịrị imeghe Jami na ngwaọrụ ọhụrụ ma họrọ nhọrọ \"Jikọọ ngwaọrụ a na akaụntụ\". Pin gị dị irè maka nkeji 10";
 "linkDevice.hudMessage" = "Ịtụle";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Ị natara akwụkwọ ikike";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "A na-emepụta ụyọkọ";
 "generatedMessage.invitationReceived" = "a kpọrọ ya ka o soro";
 "generatedMessage.invitationAccepted" = "sonyeere mkparịta ụka ahụ";

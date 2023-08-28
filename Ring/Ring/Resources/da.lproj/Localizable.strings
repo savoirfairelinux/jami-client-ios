@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Skriv et besked til ";
 "conversation.explanationSendingLocationTo" = "Du deler i øjeblikket din lokation med";
 "conversation.explanationReceivingLocationFrom" = "Du modtager i øjeblikket en live lokation fra";
-"conversation.errorSavingImage" = "Uddannede at gemme billede til galleri";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Jeg sendte en anmodning om en samtale.";
 "conversation.requestMessage" = "Vil du være med i samtalen?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Velkommen til Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami er en gratis og universel kommunikationsplatform som respekterer sine brugeres privatliv og frihed";
-"welcome.linkDevice" = "Tilknyt denne enhed til en konto";
-"welcome.createAccount" = "Opret en Jami-konto";
-"welcome.connectToManager" = "Forbindelse til en JAMS-server";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Spring over";
 "createProfile.profileCreated" = "Næste";
-"createProfile.title" = "Personliggør din profil";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Indtast dit brugernavn";
 "createProfile.enterNamePlaceholder" = "Indtast navn";
 "createProfile.subtitle" = "Din profil vil blive delt med dine kontakter. Du kan ændre den når som helst.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Tilknyt enhed";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Indtast PIN-kode";
-"linkToAccount.explanationPinMessage" = "For at generere PIN-koden skal du gå til Kontoadministration på den enhed som indeholder kontoen du ønsker at tilknytte. Under enhedsindstillinger vælg \"Tilknyt en anden enhed til denne konto\". Dette vil generere den nødvendige PIN-kode der skal indtastes i denne formular. PIN-koden er kun gyldig i 10 minutter. ";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Log Ind";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Tag billede";
 "alerts.profileUploadPhoto" = "Upload foto";
 "alerts.accountLinkedTitle" = "Tilknytter konto";
-"alerts.dbFailedTitle" = "En fejl opstod under start af Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Luk venligst applikationen og prøv at starte den igen";
 "alerts.confirmBlockContact" = "Er du sikker på at du vil blokere denne kontakt? Samtalehistorikken med denne bruger vil også blive permanent slettet.";
 "alerts.confirmDeleteConversation" = "Er du sikker på at du vil slette denne samtale permanent?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Tilbagetræk enheden";
 "accountPage.revokeDeviceMessage" = "Er du sikker på du til fjerne adgangen for denne enheden? Denne handling kan ikke fortrydes.";
 "accountPage.revokeDeviceButton" = "Tilbagekald";
-"accountPage.revokeDevicePlaceholder" = "Indtast dit password";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Enheden har fået fjernet sin adgang";
 "accountPage.deviceRevocationProgress" = "Fjerner adgang...";
 "accountPage.deviceRevocationSuccess" = "Enhedens adgang blev fjernet";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Kontakt mig ved hjælp af \"%s\" på Jami distribueret kommunikationsplatform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Indtast password til kontoen";
 "accountPage.usernamePlaceholder" = "Indtaster ønskede brugernavn";
-"accountPage.registerNameErrorMessage" = "Vælget brugernavn er ikke tilgængeligt";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registrering";
 "accountPage.usernameRegisterAction" = "Registrér";
 "accountPage.usernameRegistrationFailed" = "Registrering mislykkedes.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Faldt adgangskode";
 "accountPage.enableBoothMode" = "Aktiver Booth- modus";
 "accountPage.disableBoothMode" = "Sluk op på standmodus";
-"accountPage.disableBoothModeExplanation" = "Giv din konto adgangskode";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "I stand-modus er samtalehistorien ikke gemt og Jami-funktionen begrænset ved at foretage udgående opkald.";
 "accountPage.noBoothMode" = "For at aktivere Booth-modus skal du oprette kontopassord først.";
 "accountPage.boothModeAlertMessage" = "Efter at have aktiveret stand-modus, fjernes alle dine samtaler.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP-server";
 "account.port" = "Port";
 "account.proxyServer" = "Stedfortræder";
-"account.createSipAccount" = "Oprette en SIP-konto";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Indtast Adresse";
 "account.portLabel" = "Indtasts portnummer";
 "account.accountStatus" = "Kontostatus";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Tilknyt en ny enhed";
 "linkDevice.passwordError" = "Den adgangskode du har indtastet låser ikke op for denne konto";
-"linkDevice.networkError" = "Der opstod en netværksfejl under eksporteringen";
-"linkDevice.defaultError" = "Der opstod en fejl under eksport";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "For at fuldføre processen skal du åbne Jami på den nye enhed og vælge alternativet \"Link denne enhed til en konto\". Din pin er gyldig i 10 minutter";
 "linkDevice.hudMessage" = "Verificerer";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Du har fået undladelse.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Skarm skabt";
 "generatedMessage.invitationReceived" = "blev inviteret til at deltage";
 "generatedMessage.invitationAccepted" = "- Jeg er med i samtalen.";

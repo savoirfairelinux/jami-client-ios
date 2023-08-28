@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "เขียนข้อความไปยัง ";
 "conversation.explanationSendingLocationTo" = "คุณกําลังแบ่งปันสถานที่ของคุณกับ ";
 "conversation.explanationReceivingLocationFrom" = "คุณกําลังรับข้อมูลที่ตั้งสดจาก ";
-"conversation.errorSavingImage" = "ไม่สามารถบันทึกภาพไปยังห้องแสดงภาพ";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "ส่งคําขอให้คุยกัน";
 "conversation.requestMessage" = "สวัสดีครับ คุณอยากเข้าร่วมการพูดคุยกันไหม";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "ยินดีต้อนรับที่จามิ";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "จามิเป็นเว็บสื่อสารฟรีและทั่วไปที่รักษาความเป็นส่วนตัวและเสรีภาพของผู้ใช้";
-"welcome.linkDevice" = "เชื่อมโยงอุปกรณ์นี้กับบัญชี";
-"welcome.createAccount" = "สร้างบัญชี Jami";
-"welcome.connectToManager" = "เชื่อมต่อกับเซิร์ฟเวอร์ JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "ข้าม";
 "createProfile.profileCreated" = "ต่อไป";
-"createProfile.title" = "ปรับแต่งโปรไฟล์ของคุณ";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "กรอกชื่อการแสดง";
 "createProfile.enterNamePlaceholder" = "ใส่ชื่อ";
 "createProfile.subtitle" = "โปรไฟล์ของคุณจะถูกแบ่งปันกับผู้ติดต่อของคุณ คุณสามารถเปลี่ยนมันได้ในเวลาใดก็ตาม";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "เชื่อมโยงอุปกรณ์";
 "linkToAccount.pinPlaceholder" = "ปักหมุด";
 "linkToAccount.pinLabel" = "ป้อน PIN";
-"linkToAccount.explanationPinMessage" = "หากต้องการสร้างรหัส PIN ให้ไปที่การตั้งค่าการจัดการบัญชีในอุปกรณ์ที่มีบัญชีที่คุณต้องการใช้ ในการตั้งค่าอุปกรณ์ เลือก \"เชื่อมโยงอุปกรณ์อื่นกับบัญชีนี้\" คุณจะได้รับ PIN ที่จำเป็นในการกรอกแบบฟอร์มนี้ PIN นี้ใช้ได้เพียง 10 นาทีเท่านั้น";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "สมัครสมาชิก";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "ถ่ายภาพ";
 "alerts.profileUploadPhoto" = "อัพโหลดรูปภาพ";
 "alerts.accountLinkedTitle" = "เชื่อมโยงบัญชี";
-"alerts.dbFailedTitle" = "เกิดความผิดพลาดตอนเปิดตัว Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "โปรดปิดแอปพลิเคชันแล้วลองเปิดใหม่อีกครั้ง";
 "alerts.confirmBlockContact" = "คุณแน่ใจนะว่า คุณต้องการปิดการติดต่อนี้? ประวัติการพูดคุยกับการติดต่อนี้จะถูกลบไปอย่างถาวร";
 "alerts.confirmDeleteConversation" = "คุณแน่ใจนะว่า คุณต้องการลบการพูดคุยนี้ได้ตลอดไป";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "เพิกถอนอุปกรณ์";
 "accountPage.revokeDeviceMessage" = "คุณแน่ใจนะว่าคุณต้องการที่จะยกเลิกอุปกรณ์นี้";
 "accountPage.revokeDeviceButton" = "ยกเลิก";
-"accountPage.revokeDevicePlaceholder" = "กรอกรหัสผ่านของคุณ";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "การยกเลิกอุปกรณ์เสร็จสิ้น";
 "accountPage.deviceRevocationProgress" = "ยกเลิก...";
 "accountPage.deviceRevocationSuccess" = "อุปกรณ์ถูกยกเลิก";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "ติดต่อฉันโดยใช้ \"%s\" บนโครงการสื่อสารกระจายของ Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "กรอกรหัสผ่านบัญชี";
 "accountPage.usernamePlaceholder" = "กรอกชื่อผู้ใช้ที่ต้องการ";
-"accountPage.registerNameErrorMessage" = "ชื่อผู้ใช้ที่เลือกไม่ได้";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "การลงทะเบียน";
 "accountPage.usernameRegisterAction" = "ลงทะเบียน";
 "accountPage.usernameRegistrationFailed" = "การลงทะเบียนล้มเหลว ขอเช็คปัสริด";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "ปรสওয়ার্ডผิด";
 "accountPage.enableBoothMode" = "เปิดโหมด Booth";
 "accountPage.disableBoothMode" = "ปิดโหมด Booth";
-"accountPage.disableBoothModeExplanation" = "กรุณาให้คําว่าบัญชีของคุณ";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "ในโหมดบูธ ประวัติการพูดคุยไม่ได้บันทึก และการทํางานของ Jami มีขัดขวางโดยการทําการโทรออก เมื่อคุณเปิดโหมดบูธทั้งหมดการพูดคุยของคุณจะถูกลบ";
 "accountPage.noBoothMode" = "เพื่อเปิดโหมด Booth คุณต้องสร้างรหัสผ่านบัญชีก่อน";
 "accountPage.boothModeAlertMessage" = "หลังจากเปิดโหมดบูธแล้ว การพูดคุยทั้งหมดของคุณจะถูกลบ";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "พอร์ต";
 "account.proxyServer" = "พอร์กส";
-"account.createSipAccount" = "สร้างบัญชี SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "กรอกที่อยู่";
 "account.portLabel" = "กรอกหมายเลขท่าเรือ";
 "account.accountStatus" = "สถานการณ์บัญชี";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "เชื่อมโยงอุปกรณ์ใหม่";
 "linkDevice.passwordError" = "รหัสผ่านที่คุณป้อนไม่ได้ปลดล็อคบัญชีนี้";
-"linkDevice.networkError" = "เกิดข้อผิดพลาดของเครือข่ายระหว่างการส่งออก";
-"linkDevice.defaultError" = "เกิดข้อผิดพลาดระหว่างการส่งออก";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "เพื่อทําการสําเร็จ คุณต้องเปิด Jami บนอุปกรณ์ใหม่ และเลือกทางเลือก \"เชื่อมอุปกรณ์นี้กับบัญชี\" ปินของคุณมีสิทธิในการใช้งาน 10 นาที";
 "linkDevice.hudMessage" = "กำลังยืนยัน";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "คุณได้รับการอนุญาต";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "สร้างสระ";
 "generatedMessage.invitationReceived" = "ได้รับเชิญร่วม";
 "generatedMessage.invitationAccepted" = "เข้าร่วมการพูดคุย";

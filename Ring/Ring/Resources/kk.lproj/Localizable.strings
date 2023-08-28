@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Хатты ";
 "conversation.explanationSendingLocationTo" = "Сіз қазір орналасқан жеріңізді ";
 "conversation.explanationReceivingLocationFrom" = "Сіз қазір ";
-"conversation.errorSavingImage" = "Суретті галереяға сақтау мүмкін емес";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Сізге әңгімелесуді сұрап жібердім.";
 "conversation.requestMessage" = "Сәлем, әңгімеге қосылғыңыз келе ме?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Жамиге қош келдіңіздер!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami - бұл пайдаланушылардың жеке өмірі мен бостандықтарын сақтайтын тегін және әмбебап байланыс платформасы";
-"welcome.linkDevice" = "Құрылғыны тіркелгіге қосу";
-"welcome.createAccount" = "Jami тіркелгісін құру";
-"welcome.connectToManager" = "JAMS серверіне қосылу";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Кетіңіз";
 "createProfile.profileCreated" = "Келесі";
-"createProfile.title" = "Профиліңізді жекешелендіру";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Көрсету атауын келтіріңіз";
 "createProfile.enterNamePlaceholder" = "Атауын келтіріңіз";
 "createProfile.subtitle" = "Профиліңіз байланыс адамдарыңызбен бөлінеді.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Қосылу құрылғысы";
 "linkToAccount.pinPlaceholder" = "ПИН";
 "linkToAccount.pinLabel" = "PIN- ні келтіріңіз";
-"linkToAccount.explanationPinMessage" = "PIN кодын құру үшін, пайдалануыңыз келетін құрылғыдағы тіркелгілерді қамтитын тіркелгі басқару параметрлеріне кіріңіз.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Тіркелу";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Суретке түсіріңіз";
 "alerts.profileUploadPhoto" = "Фотоны жүктеу";
 "alerts.accountLinkedTitle" = "Қосылған шот";
-"alerts.dbFailedTitle" = "Жами ұшағын ұшып жібергенде қате пайда болды";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Өтінішті жабыңыз және оны қайта ашуға тырысыңыз";
 "alerts.confirmBlockContact" = "Сіз бұл байланысты тоқтатуды қалайсыз ба? Бұл байланыспен әңгімелесу тарихы да тұрақты түрде өшіріледі.";
 "alerts.confirmDeleteConversation" = "Бұл әңгімеді тұрақты түрде өшіргіңіз келе ме?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Қайта шығару құрылғысы";
 "accountPage.revokeDeviceMessage" = "Бұл әрекет қайталанбайды.";
 "accountPage.revokeDeviceButton" = "Қайталану";
-"accountPage.revokeDevicePlaceholder" = "Парольді келтіріңіз";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Құрылғыны қайтарып алу аяқталды";
 "accountPage.deviceRevocationProgress" = "Қайтарып алу...";
 "accountPage.deviceRevocationSuccess" = "Құрылғы алынып тасталды";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Jami таратушы байланыс платформасында \"%s\" арқылы маған хабарласыңыз: https://jami.net";
 "accountPage.passwordPlaceholder" = "Тіркелгі паролін келтіріңіз";
 "accountPage.usernamePlaceholder" = "Қажетті пайдаланушы атауын келтіріңіз";
-"accountPage.registerNameErrorMessage" = "Таңдалған пайдаланушы атауы жоқ";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Тіркеу";
 "accountPage.usernameRegisterAction" = "Тіркеу";
 "accountPage.usernameRegistrationFailed" = "Тіркеу сәтсіз аяқталды.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Пароль дұрыс емес";
 "accountPage.enableBoothMode" = "Бут режимін қосу";
 "accountPage.disableBoothMode" = "Бут режимін өшіру";
-"accountPage.disableBoothModeExplanation" = "Тіркелгіңіздің паролін келтіріңіз";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Бут режиміне қосылғанда барлық әңгімелеріңіз алынып тасталады.";
 "accountPage.noBoothMode" = "Booth режимін қосу үшін алдымен тіркелгі паролін құру керек.";
 "accountPage.boothModeAlertMessage" = "Кабина режимін қосудан кейін барлық әңгімелеріңіз алынып тасталады.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP сервері";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
-"account.createSipAccount" = "SIP тіркелгісін құру";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Адресті келтіріңіз";
 "account.portLabel" = "Порт нөмірін келтіріңіз";
 "account.accountStatus" = "Есепшоттың жағдайы";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Жаңа құрылғыны қосу";
 "linkDevice.passwordError" = "Кірген пароліңіз осы тіркелгіді ашпайды";
-"linkDevice.networkError" = "Экспорт кезінде желілік қате пайда болды";
-"linkDevice.defaultError" = "Экспорт кезінде қате пайда болды";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Процессті аяқтау үшін жаңа құрылғыда Jami-ді ашу және \"Бұл құрылғыны тіркелгіге қосу\" параметрін таңдау керек.";
 "linkDevice.hudMessage" = "Тексеру";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Сізге рұқсат берілді";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Ұяшық пайда болды";
 "generatedMessage.invitationReceived" = "қосылуға шақырылды";
 "generatedMessage.invitationAccepted" = "әңгімеге қосылды";

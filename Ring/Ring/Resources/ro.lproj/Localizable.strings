@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Scrie pentru ";
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către ";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
-"conversation.errorSavingImage" = "Salvarea imaginii nu a reușit";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ ți-a trimis o invitație la conversație.";
 "conversation.incomingRequest" = "Ți-a trimis o invitație la conversație.";
 "conversation.requestMessage" = "Vrei să participi la conversație?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Bun venit în Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami este o platformă de comunicare liberă și universală care păstrează libertățile și intimitatea.";
-"welcome.linkDevice" = "Asociază acest aparat cu un cont";
-"welcome.createAccount" = "Creează un cont Jami";
-"welcome.connectToManager" = "Conectează-te la un server JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Omite";
 "createProfile.profileCreated" = "Înainte";
-"createProfile.title" = "Personalizează-ți profilul";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Introdu un nume de afișat";
 "createProfile.enterNamePlaceholder" = "Introdu numele";
 "createProfile.subtitle" = "Profilul tău va fi distribuit contactelor tale. Poți schimba asta cînd vrei.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Asociază aparatul";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introdu codul PIN";
-"linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. În „Reglări” alege „Asociază alt aparat cu acest cont” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Fă o poză";
 "alerts.profileUploadPhoto" = "Încarcă o poză";
 "alerts.accountLinkedTitle" = "Se asociază contul";
-"alerts.dbFailedTitle" = "S-a produs o eroare la pornirea lui Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Închide aplicația și încearcă să o repornești";
 "alerts.confirmBlockContact" = "Sigur vrei să blochezi acest contact? Conversația cu acest contact va fi ștearsă definitiv.";
 "alerts.confirmDeleteConversation" = "Chiar vrei să ștergi această conversație?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Elimină aparatul";
 "accountPage.revokeDeviceMessage" = "Sigur vrei să elimini acest aparat? Această acțiune este ireversibilă!";
 "accountPage.revokeDeviceButton" = "Elimină";
-"accountPage.revokeDevicePlaceholder" = "Introdu parola ta";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Eliminarea aparatului s-a terminat";
 "accountPage.deviceRevocationProgress" = "Se elimină...";
 "accountPage.deviceRevocationSuccess" = "Aparatul a fost eliminat";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Contactează-mă folosind „%s” pe platforma distribuită de comunicare Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Introdu parola contului";
 "accountPage.usernamePlaceholder" = "Introdu numele de utilizator";
-"accountPage.registerNameErrorMessage" = "Numele de utilizator introdus nu e disponibil";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Se înscrie";
 "accountPage.usernameRegisterAction" = "Înscrie-te";
 "accountPage.usernameRegistrationFailed" = "Înscrierea a eșuat. Verifică parola.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Parola e greșită";
 "accountPage.enableBoothMode" = "Activează „Modul Cabină”";
 "accountPage.disableBoothMode" = "Dezactivează „Modul Cabină”";
-"accountPage.disableBoothModeExplanation" = "Introdu parola contului tău";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "În „Modul Cabină” cronologia conversațiilor nu e salvată și Jami este limitat la efectuarea de apeluri. Dacă activezi „Modul Cabină”, toate conversațiile tale vor fi șterse.";
 "accountPage.noBoothMode" = "Pentru a activa „Modul Cabină”, trebuie mai întîi să creezi parola contului.";
 "accountPage.boothModeAlertMessage" = "După activarea modului cabină, toate conversațiile tale vor fi șterse.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "Server SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Creează un cont SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Introdu adresa";
 "account.portLabel" = "Introdu numărul Portului";
 "account.accountStatus" = "Starea contului";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Asociază alt aparat";
 "linkDevice.passwordError" = "Parola introdusă nu deblochează acest cont";
-"linkDevice.networkError" = "O eroare de rețea a apărut în timpul exportării";
-"linkDevice.defaultError" = "O eroare a apărut în timpul exportării";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Pentru a completa procesul, trebuie să deschizi Jami în noul aparat și să alegi opțiunea „Asociază acest aparat cu un cont”. Codul tău PIN este valabil 10 minute.";
 "linkDevice.hudMessage" = "Se verifică";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Ai primit o invitație";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Grup creat";
 "generatedMessage.invitationReceived" = "a fost invitat să participe";
 "generatedMessage.invitationAccepted" = "participă la conversație";

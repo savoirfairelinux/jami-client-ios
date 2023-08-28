@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "منوليسكن ڤرساتوان ";
 "conversation.explanationSendingLocationTo" = "توڠڬوڠ ڤد ماس اين تله مڠمبيل موقعيت توڠڬوڠ ";
 "conversation.explanationReceivingLocationFrom" = "توڠڬوڠ دڤرچايا?? ي موقع يڠ دڤرچايا?? ي";
-"conversation.errorSavingImage" = "تيدق ممڤوپا?? ي ڤرسمبا?? ن كڤد ڬاليري";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "منولقكن كيت ڤرلو مڠهادڤكن.";
 "conversation.requestMessage" = "سلام، آيا ميخواي به اين مکالمه ملحق بشي؟";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "خوش اومدن به جامي!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami اداله ڤلاڤتورم ڤمبلاجرن يڠ براوسيا دان ڤرنه ممڤرچايا?? ي ڤرودوک دان ڤرودوک ڤڠڬونا";
-"welcome.linkDevice" = "منچاريكن ڤرودوک اين دڠن اکاونت";
-"welcome.createAccount" = "منوليسكن اکاونت Jami";
-"welcome.connectToManager" = "منچاريکن کڤد ڤمبلاجرن JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "سكيڤ";
 "createProfile.profileCreated" = "ڤد ماس يڠ لاين";
-"createProfile.title" = "ممڤرچايا?? ي ڤروڤيل";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "ڤرلو ممبريكن نام ڤمباچ";
 "createProfile.enterNamePlaceholder" = "نامن دبري";
 "createProfile.subtitle" = "ڤروڤيلڽ دڤرچايا?? ي دڠن ڤڠاجرنڽ. اكو بوليه مڠهادڤيڽ دالم ساتو ڤرلو.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "ڤڠڬيلن ڤڠڬيلن";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "ڤڠڬيل PIN";
-"linkToAccount.explanationPinMessage" = "اونتوق ممبنتو کود PIN، برلالو دالم ڤڠڬوناءن ڤڠڬوناءن کات دالم ڤڠڬوناءن ايكوڤيت يڠ ممڤوپا?? ي ايكوڤيت يڠ برڤڠڬوناءن. دالم ڤڠڬوناءن ايكوڤيت سچارا \"مربوط ايكوڤيت لاين دڠن ايكوڤيت اين\". ايكوڤيت ايكوڤيت ڤرلو ممڤوپا?? ي ڤڠ ڤرلو دڤرلوكن ڤرلوڤوهن اين. ڤين اداله ڤرلوڤوهن اونتوق 10 مينيت.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "ڤمباچ ڤرنه";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "ڤيليهن";
 "alerts.profileUploadPhoto" = "ڤڠاجرن ڤوتو";
 "alerts.accountLinkedTitle" = "حساب ڤڠاجرن";
-"alerts.dbFailedTitle" = "كسرڠ دالم ممڤوپا?? ي Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "كرجاسا?? ن مڠهادڤكن ڤرچاي دان ممڤرچايكنڽ كدوا";
 "alerts.confirmBlockContact" = "اڤابيلا اكو مريك مريك اكن مريك اكن مڠهادڤكن ڤڠاجرن اين؟ سياستن ڤڠاجرن اين دأداكن دڠن ڤڠاجرن اين.";
 "alerts.confirmDeleteConversation" = "اكو يقيني اكو بوليه مڠحذفكن ڤرساتوان اين دالم كهيدوڤن؟";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "ڤڠڬيلن ڤڠڬيلن";
 "accountPage.revokeDeviceMessage" = "اكو يقيني اكو بررلو مڠمبيل ڤراڠت اين؟ ڤرودوک اين تيدق بوليه دڤرچايا?? ي.";
 "accountPage.revokeDeviceButton" = "ڤڠاجرن";
-"accountPage.revokeDevicePlaceholder" = "ڤرنه ڤرنه ڤرنه";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "ڤمبلاجرن ڤڠڬونا";
 "accountPage.deviceRevocationProgress" = "ڤرنه دڤرچايا?? ي...";
 "accountPage.deviceRevocationSuccess" = "ڤڠڬوناڽ دڤرچايا?? ي";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "منچاريکن ساي دڠن مڠݢوناکن \"%s\" دالم ڤرتوبوهن ڤمبلاجرن Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "مڠهادڤي كاسوڠن ايكون";
 "accountPage.usernamePlaceholder" = "ممبريكن نام ڤڠڬونا يڠ دڤرلو";
-"accountPage.registerNameErrorMessage" = "نام ڤڠڬونا يڠ دڤيليه تيدق دڤرلوكن";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "ڤرجالنن";
 "accountPage.usernameRegisterAction" = "ڤمباچ";
 "accountPage.usernameRegistrationFailed" = "ڤرجالنن تله دڤرچايا?? ي.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "ڤاسر يڠ تيدق برلاكو";
 "accountPage.enableBoothMode" = "فعالكن مود بوث";
 "accountPage.disableBoothMode" = "مڠمبيل مود بوث";
-"accountPage.disableBoothModeExplanation" = "ڤليس مڠهادڤي كاسد ايكون";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "دالم مود بوته سياستن ڤرساتوان تيدق دڤرچايا?? ي دان ڤڠونجوڠ jami دڤرچايا?? ي دڠن ممبنتو ڤرساتوان يڠ برمولا.";
 "accountPage.noBoothMode" = "اونتوق ممبنتو مود بوث، تومبوهن ڤرلو ممبنتو ڤرسود ايكونت.";
 "accountPage.boothModeAlertMessage" = "بعد از فعال کردن حالت كوتاه تمام مکالمه هاتون حذف ميشه";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP Server";
 "account.port" = "ڤڠوربان";
 "account.proxyServer" = "ڤروكسي";
-"account.createSipAccount" = "منوليسكن ايكون SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "ڤرلو مڠهادڤكن ايندريس";
 "account.portLabel" = "ڤرلو ممڤوڽاءي ڤرتوم";
 "account.accountStatus" = "ستاتوس حساب";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "منچيلكن ڤڠڬونا?? ن بارو";
 "linkDevice.passwordError" = "ڤاسر يڠ دبريكن تيدق ممڤوڽاءي ايكون اين";
-"linkDevice.networkError" = "كسرن نيتڬري دأداكن سلڤس ڤڠاجرن";
-"linkDevice.defaultError" = "كسرڠ دالم ڤڠاجرن";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "اونتوق ممڤرچايا?? ي ڤروسيس ايت، اكو بوليه ممبلي Jami دالم ڤرودوک بارو دان مميليه ڤيليهن \"مربوط ڤرودوک اين دڠن اکاونت\". ڤين اكو برلاكو اونتوق 10 مينيت";
 "linkDevice.hudMessage" = "ڤمباچ";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "توڠڬوڠ ڤرلو";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "سڤرتي دڤرچايا?? ي";
 "generatedMessage.invitationReceived" = "دتاهن اونتوق مڠڬوناكن";
 "generatedMessage.invitationAccepted" = "مڠمبيل ڤرساتوان";

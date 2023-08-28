@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "写消息至";
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
-"conversation.errorSavingImage" = "保存至图库失败";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "发给你一个谈话请求.";
 "conversation.requestMessage" = "您好，\n您想要加入会话吗？";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "歡迎來到 Jami！";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami 是一個自由且通用的通訊平臺，其尊重使用者的隱私與自由。";
-"welcome.linkDevice" = "将此设备与一个账户进行关联";
-"welcome.createAccount" = "建立 Jami 帳號";
-"welcome.connectToManager" = "连接到 JAMS 服务器";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "跳过";
 "createProfile.profileCreated" = "下一步";
-"createProfile.title" = "个性化您的账户资料";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "选择一个显示名";
 "createProfile.enterNamePlaceholder" = "输入名称";
 "createProfile.subtitle" = "您的资料会分享给您的联系人。您可随时修改。";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "关联设备";
 "linkToAccount.pinPlaceholder" = "PIN 碼";
 "linkToAccount.pinLabel" = "输入 PIN";
-"linkToAccount.explanationPinMessage" = "要生成 PIN 码，请在包含您想使用的账户的设备上打开本应用的账户管理设置，在设备设置中选择“将另一台设备关联至此账户”。您会获得完成本项内容所需的 PIN 码，该 PIN 码有效期为 10 分钟。";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "注册";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "照相";
 "alerts.profileUploadPhoto" = "上传照片";
 "alerts.accountLinkedTitle" = "正在关联账户";
-"alerts.dbFailedTitle" = "启动Jami时出现了一个问题";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "请关闭应用，并尝试重新开启。";
 "alerts.confirmBlockContact" = "您确定要屏蔽这个联系人吗？与这个联系人的会话历史也将被永久删除。";
 "alerts.confirmDeleteConversation" = "您确定要永久删除这个会话吗？";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "吊销设备";
 "accountPage.revokeDeviceMessage" = "您确定要吊销此设备吗？此操作不能撤销。";
 "accountPage.revokeDeviceButton" = "撤銷";
-"accountPage.revokeDevicePlaceholder" = "输入您的密码";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "设备吊销完成";
 "accountPage.deviceRevocationProgress" = "吊销中...";
 "accountPage.deviceRevocationSuccess" = "设备已被吊销";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "在Jami分布式通信平台：https://jami.net 上使用“%s”与我联系";
 "accountPage.passwordPlaceholder" = "输入账户密码";
 "accountPage.usernamePlaceholder" = "输入想使用的用户名";
-"accountPage.registerNameErrorMessage" = "选择的用户名不可用";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "注册中";
 "accountPage.usernameRegisterAction" = "註冊";
 "accountPage.usernameRegistrationFailed" = "注册失败。请检查密码。";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "密码错误";
 "accountPage.enableBoothMode" = "启用话亭模式";
 "accountPage.disableBoothMode" = "禁用话亭模式";
-"accountPage.disableBoothModeExplanation" = "请输入您的账户密码";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "话亭模式中，不会保存会话历史，且 jami 的功能会受限为外拨电话。启用话亭模式后，现有会话将全部被删除。";
 "accountPage.noBoothMode" = "要使用话亭模式，您需要先设置账户密码。";
 "accountPage.boothModeAlertMessage" = "启用话亭模式后，您的现有会话都将被删除。";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP 伺服器";
 "account.port" = "埠";
 "account.proxyServer" = "代理服務器";
-"account.createSipAccount" = "创建 SIP 账户";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "输入地址";
 "account.portLabel" = "输入端口号";
 "account.accountStatus" = "账户状态";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "关联新设备";
 "linkDevice.passwordError" = "您输入的密码无法解锁该账户";
-"linkDevice.networkError" = "當匯出時遇到網路錯誤";
-"linkDevice.defaultError" = "當匯出時遇到錯誤";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "要完成关联过程，请在您的新设备上打开 Jami 并选择“将这台设备关联到账户”。PIN 码有效期为 10 分钟。";
 "linkDevice.hudMessage" = "正在驗證";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "你得到了免责";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "已建立 Swarm";
 "generatedMessage.invitationReceived" = "邀请加入";
 "generatedMessage.invitationAccepted" = "加入该对话";

@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Napisati poruku na ";
 "conversation.explanationSendingLocationTo" = "Trenutno dijelite svoju lokaciju s ";
 "conversation.explanationReceivingLocationFrom" = "Trenutno primaš uživo lokaciju od ";
-"conversation.errorSavingImage" = "Nije uspjela sačuvati sliku u galeriju";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Poslala sam ti zahtjev za razgovor.";
 "conversation.requestMessage" = "-Hello, želiš li se pridružiti razgovoru?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Dobrodošli u Jamiju!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami je besplatna i univerzalna komunikacijska platforma koja čuva privatnost i slobode korisnika";
-"welcome.linkDevice" = "Povežite ovaj uređaj s računom";
-"welcome.createAccount" = "Napravite Jami račun";
-"welcome.connectToManager" = "Povezivanje s JAMS serverom";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Preskoči";
 "createProfile.profileCreated" = "Slijedeće";
-"createProfile.title" = "Priliknite svoj profil";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Ubaci ime prikaza";
 "createProfile.enterNamePlaceholder" = "Unesi ime";
 "createProfile.subtitle" = "Vaš profil će biti podijeljen s vašim kontaktima.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Uređaj za povezivanje";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Unesite PIN";
-"linkToAccount.explanationPinMessage" = "Za generiranje PIN koda, idi u postavke upravljanja računarom na uređaju koji sadrže račun koji želite koristiti. U postavkama uređaja odaberite \"Vidjeti drugi uređaj na ovaj račun\". Dobijete PIN koji je potreban za popunjenje ovog obrasca. PIN je važan samo 10 minuta.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Upis";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Fotografija";
 "alerts.profileUploadPhoto" = "Pošalji fotografiju";
 "alerts.accountLinkedTitle" = "Uloga za povezivanje";
-"alerts.dbFailedTitle" = "Pogreška se dogodila pri lansiranju Jamija.";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Molim vas zatvorite prijavu i pokušajte je ponovno otvoriti.";
 "alerts.confirmBlockContact" = "Jeste li sigurni da želite blokirati ovaj kontakt?";
 "alerts.confirmDeleteConversation" = "Jesi li siguran da želiš izbrisati ovaj razgovor trajno?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Uređaj za ukidanje";
 "accountPage.revokeDeviceMessage" = "Jeste li sigurni da želite povući ovaj uređaj?";
 "accountPage.revokeDeviceButton" = "Opozovi";
-"accountPage.revokeDevicePlaceholder" = "Ubaci svoj lozinku.";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Ispunjeno povlačenje uređaja";
 "accountPage.deviceRevocationProgress" = "-Održavanje...";
 "accountPage.deviceRevocationSuccess" = "Uređaj je otkazan.";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Kontaktirajte me pomoću \"%s\" na distribuiranoj komunikacijskoj platformi Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Ubaci lozinku računa";
 "accountPage.usernamePlaceholder" = "Ubaci željeno korisničko ime";
-"accountPage.registerNameErrorMessage" = "Izbrano korisničko ime nije dostupno";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Uvod u registraciju";
 "accountPage.usernameRegisterAction" = "Registriraj";
 "accountPage.usernameRegistrationFailed" = "Registracija je propala.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Lozinka pogrešna";
 "accountPage.enableBoothMode" = "Aktivirajte režim stanice";
 "accountPage.disableBoothMode" = "Odričaj način štampa";
-"accountPage.disableBoothModeExplanation" = "Pleace podajte lozinku računa";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "U režimu kabine povijest razgovora nije spisana i funkcionalnost jami ograničena odlaska pozive.";
 "accountPage.noBoothMode" = "Da biste omogućili režim Booth, prvo morate stvoriti lozinku računa.";
 "accountPage.boothModeAlertMessage" = "Nakon uključivanja stand modu, svi razgovori će biti uklonjeni.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP server";
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "Stvoriti SIP račun";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Ubaci adresu";
 "account.portLabel" = "Ubaci broj portu";
 "account.accountStatus" = "Status računa";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Povežite novi uređaj";
 "linkDevice.passwordError" = "Lozinka koju ste unijeli ne otvara ovaj račun";
-"linkDevice.networkError" = "U slučaju da se ne može utvrditi u skladu s člankom 1. stavkom 1.";
-"linkDevice.defaultError" = "U slučaju da se ne može utvrditi u skladu s člankom 1. stavkom 1.";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Da biste završili proces, morate otvoriti Jami na novom uređaju i izabrati opciju \" Povezati ovaj uređaj na račun. \" Vaš PIN je važan 10 minuta";
 "linkDevice.hudMessage" = "Provjeravanje";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Dobio si nepovratnost.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Stvorena skupa";
 "generatedMessage.invitationReceived" = "pozvan da se pridruži";
 "generatedMessage.invitationAccepted" = "Pridružili su se razgovoru";

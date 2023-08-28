@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "ಸಂದೇಶವನ್ನು ";
 "conversation.explanationSendingLocationTo" = "ನೀವು ಪ್ರಸ್ತುತ ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಹಂಚಿಕೊಳ್ಳುತ್ತಿದ್ದೀರಿ ";
 "conversation.explanationReceivingLocationFrom" = "ನೀವು ಪ್ರಸ್ತುತ ";
-"conversation.errorSavingImage" = "ಚಿತ್ರವನ್ನು ಗ್ಯಾಲರಿಗೆ ಉಳಿಸಲು ವಿಫಲವಾಗಿದೆ";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "ನಿಮಗೆ ಸಂಭಾಷಣೆಗಾಗಿ ವಿನಂತಿಯನ್ನು ಕಳುಹಿಸಿದೆ.";
 "conversation.requestMessage" = "ಹಲೋ, ನೀವು ಸಂಭಾಷಣೆಗೆ ಸೇರಲು ಬಯಸುವಿರಾ?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "ಜಾಮಿಗೆ ಸ್ವಾಗತ!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "ಜಾಮಿ ಉಚಿತ ಮತ್ತು ಸಾರ್ವತ್ರಿಕ ಸಂವಹನ ವೇದಿಕೆಯಾಗಿದ್ದು, ಇದು ಬಳಕೆದಾರರ ಗೌಪ್ಯತೆ ಮತ್ತು ಸ್ವಾತಂತ್ರ್ಯಗಳನ್ನು ಸಂರಕ್ಷಿಸುತ್ತದೆ";
-"welcome.linkDevice" = "ಈ ಸಾಧನವನ್ನು ಖಾತೆಗೆ ಲಿಂಕ್ ಮಾಡಿ";
-"welcome.createAccount" = "ಜಾಮಿ ಖಾತೆಯನ್ನು ರಚಿಸಿ";
-"welcome.connectToManager" = "JAMS ಸರ್ವರ್ಗೆ ಸಂಪರ್ಕ";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "ಸ್ಕಿಪ್";
 "createProfile.profileCreated" = "ಮುಂದಿನದು";
-"createProfile.title" = "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಅನ್ನು ವೈಯಕ್ತೀಕರಿಸಿ";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "ಪ್ರದರ್ಶನ ಹೆಸರನ್ನು ನಮೂದಿಸಿ";
 "createProfile.enterNamePlaceholder" = "ಹೆಸರು ನಮೂದಿಸಿ";
 "createProfile.subtitle" = "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಅನ್ನು ನಿಮ್ಮ ಸಂಪರ್ಕಗಳೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಲಾಗುವುದು. ನೀವು ಅದನ್ನು ಯಾವುದೇ ಸಮಯದಲ್ಲಿ ಬದಲಾಯಿಸಬಹುದು.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "ಲಿಂಕ್ ಸಾಧನ";
 "linkToAccount.pinPlaceholder" = "PIN ಕೋಡ್";
 "linkToAccount.pinLabel" = "ಪಿನ್ ನಮೂದಿಸಿ";
-"linkToAccount.explanationPinMessage" = "ಪಿನ್ ಕೋಡ್ ಅನ್ನು ರಚಿಸಲು, ನೀವು ಬಳಸಲು ಬಯಸುವ ಖಾತೆಯನ್ನು ಹೊಂದಿರುವ ಸಾಧನದಲ್ಲಿ ಖಾತೆ ನಿರ್ವಹಣೆ ಸೆಟ್ಟಿಂಗ್ಗಳಿಗೆ ಹೋಗಿ. ಸಾಧನ ಸೆಟ್ಟಿಂಗ್ಗಳಲ್ಲಿ \"ಈ ಖಾತೆಗೆ ಮತ್ತೊಂದು ಸಾಧನವನ್ನು ಲಿಂಕ್ ಮಾಡಿ\" ಆಯ್ಕೆಮಾಡಿ. ಈ ಫಾರ್ಮ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ನಿಮಗೆ ಅಗತ್ಯವಾದ ಪಿನ್ ಸಿಗುತ್ತದೆ. ಪಿನ್ ಕೇವಲ 10 ನಿಮಿಷಗಳ ಕಾಲ ಮಾನ್ಯವಾಗಿರುತ್ತದೆ.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "ಸೈನ್ ಇನ್ ಮಾಡಿ";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "ಫೋಟೋ ತೆಗೆದುಕೊ";
 "alerts.profileUploadPhoto" = "ಫೋಟೋ ಅಪ್ಲೋಡ್ ಮಾಡಿ";
 "alerts.accountLinkedTitle" = "ಲಿಂಕ್ ಖಾತೆ";
-"alerts.dbFailedTitle" = "ಜಾಮಿ ಉಡಾವಣೆ ಮಾಡುವಾಗ ಒಂದು ದೋಷ ಸಂಭವಿಸಿದೆ.";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "ದಯವಿಟ್ಟು ಅರ್ಜಿಯನ್ನು ಮುಚ್ಚಿ ಮತ್ತೆ ತೆರೆಯಲು ಪ್ರಯತ್ನಿಸಿ";
 "alerts.confirmBlockContact" = "ಈ ಸಂಪರ್ಕವನ್ನು ನಿರ್ಬಂಧಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ? ಈ ಸಂಪರ್ಕದೊಂದಿಗೆ ಸಂಭಾಷಣೆ ಇತಿಹಾಸವನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಲಾಗುತ್ತದೆ.";
 "alerts.confirmDeleteConversation" = "ಈ ಸಂಭಾಷಣೆಯನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "ರದ್ದುಗೊಳಿಸುವ ಸಾಧನ";
 "accountPage.revokeDeviceMessage" = "ಈ ಉಪಕರಣವನ್ನು ಹಿಂತೆಗೆದುಕೊಳ್ಳಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?";
 "accountPage.revokeDeviceButton" = "ರದ್ದು";
-"accountPage.revokeDevicePlaceholder" = "ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "ಸಾಧನವನ್ನು ಹಿಂತೆಗೆದುಕೊಳ್ಳುವುದು ಪೂರ್ಣಗೊಂಡಿದೆ";
 "accountPage.deviceRevocationProgress" = "- ಹಿಂತೆಗೆದುಕೊಳ್ಳುವಿಕೆ.";
 "accountPage.deviceRevocationSuccess" = "ಸಾಧನವನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "ಜಾಮಿ ವಿತರಿಸಿದ ಸಂವಹನ ವೇದಿಕೆಯಲ್ಲಿ \"%s\" ಅನ್ನು ಬಳಸಿಕೊಂಡು ನನ್ನನ್ನು ಸಂಪರ್ಕಿಸಿಃ https://jami.net";
 "accountPage.passwordPlaceholder" = "ಖಾತೆ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";
 "accountPage.usernamePlaceholder" = "ಬಯಸಿದ ಬಳಕೆದಾರ ಹೆಸರನ್ನು ನಮೂದಿಸಿ";
-"accountPage.registerNameErrorMessage" = "ಆಯ್ಕೆ ಮಾಡಿದ ಬಳಕೆದಾರ ಹೆಸರು ಲಭ್ಯವಿಲ್ಲ";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "ನೋಂದಣಿ";
 "accountPage.usernameRegisterAction" = "ನೋಂದಣಿ";
 "accountPage.usernameRegistrationFailed" = "ನೋಂದಣಿ ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಪಾಸ್ವರ್ಡ್ ಪರಿಶೀಲಿಸಿ.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "ತಪ್ಪಾದ ಪಾಸ್ವರ್ಡ್";
 "accountPage.enableBoothMode" = "ಬೂತ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ";
 "accountPage.disableBoothMode" = "ಬೂತ್ ಮೋಡ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ";
-"accountPage.disableBoothModeExplanation" = "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಖಾತೆಯ ಪಾಸ್ವರ್ಡ್ ಅನ್ನು ಒದಗಿಸಿ";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "ಬೂತ್ ಮೋಡ್ನಲ್ಲಿ ಸಂವಾದದ ಇತಿಹಾಸವನ್ನು ಉಳಿಸಲಾಗುವುದಿಲ್ಲ ಮತ್ತು ಹೊರಹೋಗುವ ಕರೆಗಳನ್ನು ಮಾಡುವ ಮೂಲಕ Jami ಕಾರ್ಯವನ್ನು ಸೀಮಿತಗೊಳಿಸಲಾಗುತ್ತದೆ. ನೀವು ಬೂತ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ ನಿಮ್ಮ ಎಲ್ಲಾ ಸಂಭಾಷಣೆಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ.";
 "accountPage.noBoothMode" = "ಬೂತ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ನೀವು ಮೊದಲು ಖಾತೆಯ ಪಾಸ್ವರ್ಡ್ ಅನ್ನು ರಚಿಸಬೇಕಾಗುತ್ತದೆ.";
 "accountPage.boothModeAlertMessage" = "ಬೂತ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದ ನಂತರ ನಿಮ್ಮ ಎಲ್ಲಾ ಸಂಭಾಷಣೆಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP ಸರ್ವರ್";
 "account.port" = "ಬಂದರು";
 "account.proxyServer" = "ಪ್ರಾಕ್ಸಿ";
-"account.createSipAccount" = "SIP ಖಾತೆಯನ್ನು ರಚಿಸಿ";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "ವಿಳಾಸ ನಮೂದಿಸಿ";
 "account.portLabel" = "ಪೋರ್ಟ್ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ";
 "account.accountStatus" = "ಖಾತೆ ಸ್ಥಿತಿ";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "ಹೊಸ ಸಾಧನವನ್ನು ಸಂಪರ್ಕಿಸಿ";
 "linkDevice.passwordError" = "ನೀವು ನಮೂದಿಸಿದ ಪಾಸ್ವರ್ಡ್ ಈ ಖಾತೆಯನ್ನು ಅನ್ಲಾಕ್ ಮಾಡುವುದಿಲ್ಲ";
-"linkDevice.networkError" = "ರಫ್ತು ಸಮಯದಲ್ಲಿ ನೆಟ್ವರ್ಕ್ ದೋಷ ಸಂಭವಿಸಿದೆ";
-"linkDevice.defaultError" = "ರಫ್ತು ಸಮಯದಲ್ಲಿ ದೋಷ ಸಂಭವಿಸಿದೆ";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "ಪ್ರಕ್ರಿಯೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು, ನೀವು ಹೊಸ ಸಾಧನದಲ್ಲಿ ಜಾಮಿಯನ್ನು ತೆರೆಯಬೇಕು ಮತ್ತು \"ಈ ಸಾಧನವನ್ನು ಖಾತೆಗೆ ಲಿಂಕ್ ಮಾಡಿ\" ಆಯ್ಕೆಯನ್ನು ಆರಿಸಬೇಕು. ನಿಮ್ಮ ಪಿನ್ 10 ನಿಮಿಷಗಳ ಕಾಲ ಮಾನ್ಯವಾಗಿರುತ್ತದೆ";
 "linkDevice.hudMessage" = "ಪರಿಶೀಲನೆ";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "ನೀವು ವಿನಾಯಿತಿ ಪಡೆದಿದ್ದೀರಿ";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "ಒಂದು ಗುಂಪು ರಚಿಸಲಾಗಿದೆ";
 "generatedMessage.invitationReceived" = "ಸೇರಲು ಆಹ್ವಾನಿಸಲಾಯಿತು";
 "generatedMessage.invitationAccepted" = "ಸಂಭಾಷಣೆಗೆ ಸೇರಿಕೊಂಡರು";

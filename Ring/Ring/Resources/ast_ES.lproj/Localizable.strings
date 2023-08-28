@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Escribir un mensaxe a ";
 "conversation.explanationSendingLocationTo" = "En casu de que nun se pueda identificar la so situación,";
 "conversation.explanationReceivingLocationFrom" = "Nun ye posible que la xente que la conoz reciba un llugar en directo de ";
-"conversation.errorSavingImage" = "Nun pudo guardar imáxenes na galería";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Envié-y una petición de conversación.";
 "conversation.requestMessage" = "Hola, ¿quieres xunise a la conversación?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Bienveníu a Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami ye una plataforma de comunicación gratuita y universal que preserva la privacidá y les llibertaes de los usuarios.";
-"welcome.linkDevice" = "Estaxe un enllaz a un cuentu";
-"welcome.createAccount" = "Crear una cuenta Jami";
-"welcome.connectToManager" = "Conectar a un servidor JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "El so nome ye \"Skip\".";
 "createProfile.profileCreated" = "El siguiente";
-"createProfile.title" = "Personalizase'l so perfil";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Introducir un nome d' pantalla";
 "createProfile.enterNamePlaceholder" = "Entra nome";
 "createProfile.subtitle" = "El so perfil va ser compartidu con los sos contactos.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Dispositivu de enllaz";
 "linkToAccount.pinPlaceholder" = "El PIN";
 "linkToAccount.pinLabel" = "Entra PIN";
-"linkToAccount.explanationPinMessage" = "El PIN ye un sistema de xestión de datos que se basa en datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos de datos";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Ensinar";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Ye una fotografía.";
 "alerts.profileUploadPhoto" = "Archiváu dende l' oxetivu";
 "alerts.accountLinkedTitle" = "Cuenta de vinculación";
-"alerts.dbFailedTitle" = "Un error asocedió al llanzar Jami.";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Por favor, cierre la so solicitud y intenta abrir de nuevu.";
 "alerts.confirmBlockContact" = "¿Estás segura de que quieres bloquear este contacto?";
 "alerts.confirmDeleteConversation" = "¿Estás segura de qu'ayudes a borrar esta conversación de forma permanente?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Dispositivu de revocación";
 "accountPage.revokeDeviceMessage" = "Esta acción nun podía ser revocada.";
 "accountPage.revokeDeviceButton" = "Revocación";
-"accountPage.revokeDevicePlaceholder" = "Entra la so contraseña.";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "La revocación del dispositivu completada";
 "accountPage.deviceRevocationProgress" = "Revocar...";
 "accountPage.deviceRevocationSuccess" = "El dispositivu foi revocáu";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "La so primer apaición foi nel estrenu de la so cuarta temporada en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, y en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, y en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en The Hollywood Revival, en The Hollywood Revival, en The Hollywood Revival, en The Hollywood Revival, en The CW.";
 "accountPage.passwordPlaceholder" = "Entra contraseña de la cuenta";
 "accountPage.usernamePlaceholder" = "Introduz el nome d' usuariu deseáu";
-"accountPage.registerNameErrorMessage" = "El nome d' usuariu escoyíu nun ye disponible";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "El rexistru";
 "accountPage.usernameRegisterAction" = "El rexistru";
 "accountPage.usernameRegistrationFailed" = "La inscripción fallaron.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "La contraseña ye incorrecta";
 "accountPage.enableBoothMode" = "Activa'l Módus de Booth";
 "accountPage.disableBoothMode" = "Desactivar el Módulu de Booth";
-"accountPage.disableBoothModeExplanation" = "Pleace proporcionar la so contraseña de cuenta";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "En modo stand, el historial de conversaciones nun se guarda y la funcionalidá jami ye limitada por facer llamadas salientes.";
 "accountPage.noBoothMode" = "Pa activar el mode Booth hai que crear primero la contraseña de la cuenta.";
 "accountPage.boothModeAlertMessage" = "La so primer apaición foi nel estrenu de la cuarta temporada de la serie enllargar hasta un total de 12 episodios.[16] N'ochobre de 1998, la so primer apaición foi nel estrenu de la cuarta temporada de la serie enllargar hasta un total d'once episodios.[16]";
@@ -289,7 +291,8 @@
 "account.sipServer" = "Servidor SIP";
 "account.port" = "Portos";
 "account.proxyServer" = "El so nome ye";
-"account.createSipAccount" = "Crear una cuenta SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Entra direutamente";
 "account.portLabel" = "Entra'l númberu de puertu";
 "account.accountStatus" = "El estatutu de la cuenta";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Enlazar un nuevu dispositivu";
 "linkDevice.passwordError" = "La contraseña que introdució nun desbloquea esta cuenta";
-"linkDevice.networkError" = "Un error de rede ocurrió mientres la exportación";
-"linkDevice.defaultError" = "Un error producíu mientres la exportación";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "El sistema de conexión de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de la terminal de terminal de la terminal de la terminal de terminal de la terminal de terminal de la terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal de terminal";
 "linkDevice.hudMessage" = "Verificación";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Recibió la so invivencia.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "El so nome ye \"Swarm\".";
 "generatedMessage.invitationReceived" = "Foi convidáu a participar";
 "generatedMessage.invitationAccepted" = "Entra na conversación.";

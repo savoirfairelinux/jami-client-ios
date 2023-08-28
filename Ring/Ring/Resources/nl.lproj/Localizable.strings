@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Schrijf een bericht naar ";
 "conversation.explanationSendingLocationTo" = "U deelt uw locatie momenteel met ";
 "conversation.explanationReceivingLocationFrom" = "U ontvangt momenteel een live locatie van ";
-"conversation.errorSavingImage" = "Het is niet gelukt om afbeeldingen te bewaren in galerie";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Ik heb je een verzoek gestuurd.";
 "conversation.requestMessage" = "Wil je meedoen aan het gesprek?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Welkom bij Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami is een vrij en universeel communicatieplatform, dat de privacy en vrijheden van haar gebruikers eerbiedigt";
-"welcome.linkDevice" = "Dit apparaat aan een account koppelen";
-"welcome.createAccount" = "Een Jami-account aanmaken";
-"welcome.connectToManager" = "Verbinding met een JAMS-server";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Overslaan";
 "createProfile.profileCreated" = "Volgende";
-"createProfile.title" = "Personaliseer uw profiel";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Voer een weergavenaam in";
 "createProfile.enterNamePlaceholder" = "Voer naam in";
 "createProfile.subtitle" = "Uw profiel wordt gedeeld met uw contacten. U kunt het op elk moment wijzigen.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Apparaat koppelen";
 "linkToAccount.pinPlaceholder" = "Pincode";
 "linkToAccount.pinLabel" = "Voer pincode in";
-"linkToAccount.explanationPinMessage" = "Om de pincode te genereren, gaat u naar de accountbeheerinstellingen op het apparaat dat het account bevat dat u wilt gebruiken. Selecteer ‘Een ander apparaat aan dit account koppelen’. U zult de pincode krijgen die u nodig heeft om dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Inlog";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Foto nemen";
 "alerts.profileUploadPhoto" = "Foto uploaden";
 "alerts.accountLinkedTitle" = "Account koppelen";
-"alerts.dbFailedTitle" = "Er trad een fout op bij het starten van Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Sluit de toepassing en probeer het opnieuw";
 "alerts.confirmBlockContact" = "Weet u zeker dat u dit contact wilt blokkeren? De gespreksgeschiedenis met dit contact zal ook voorgoed verwijderd worden.";
 "alerts.confirmDeleteConversation" = "Weet u zeker dat u dit gesprek voorgoed wilt verwijderen?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Apparaat intrekken";
 "accountPage.revokeDeviceMessage" = "Weet u zeker dat u dit apparaat wilt intrekken? Deze handeling kan niet ongedaan gemaakt worden.";
 "accountPage.revokeDeviceButton" = "Intrekken";
-"accountPage.revokeDevicePlaceholder" = "Voer uw wachtwoord in";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Intrekken van apparaat voltooid";
 "accountPage.deviceRevocationProgress" = "Bezig met intrekken…";
 "accountPage.deviceRevocationSuccess" = "Apparaat is ingetrokken";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Neem contact met mij op via \"%s\" op het Jami-distributiecommunicatieplatform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Voer het account wachtwoord in";
 "accountPage.usernamePlaceholder" = "Voer de gewenste gebruikersnaam in";
-"accountPage.registerNameErrorMessage" = "Gebruikersnaam niet beschikbaar";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Registratie";
 "accountPage.usernameRegisterAction" = "Registreren";
 "accountPage.usernameRegistrationFailed" = "Registratie mislukt.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Slecht wachtwoord";
 "accountPage.enableBoothMode" = "De booth-modus in staat stellen";
 "accountPage.disableBoothMode" = "De booth-modus uitschakelen";
-"accountPage.disableBoothModeExplanation" = "Geef je account wachtwoord.";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "In de standmodus is de gesprekshistorie niet opgeslagen en de Jami-functionaliteit beperkt door uitgaande gesprekken te maken.";
 "accountPage.noBoothMode" = "Om de booth-modus in te schakelen moet je eerst het wachtwoord van het account maken.";
 "accountPage.boothModeAlertMessage" = "Nadat je de stand-modus hebt ingeschakeld, worden al je gesprekken verwijderd.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "SIP-server";
 "account.port" = "Poort";
 "account.proxyServer" = "Proxy";
-"account.createSipAccount" = "SIP-account maken";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Voer adres in";
 "account.portLabel" = "Voer poortnummer in";
 "account.accountStatus" = "Accountstatus";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Een nieuw apparaat koppelen";
 "linkDevice.passwordError" = "Het wachtwoord dat u heeft ingevoerd ontgrendelt dit account niet";
-"linkDevice.networkError" = "Er trad een netwerkfout op tijdens het exporteren";
-"linkDevice.defaultError" = "Er trad een fout op tijdens het exporteren";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Om het proces te voltooien opent u Jami op het nieuwe apparaat en kiest u de optie ‘Dit apparaat aan een account koppelen’. Uw pincode is 10 minuten geldig";
 "linkDevice.hudMessage" = "Verifiëren";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Je hebt een vrijlating ontvangen.";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Een zwerm gecreëerd";
 "generatedMessage.invitationReceived" = "werd uitgenodigd om bij te komen";
 "generatedMessage.invitationAccepted" = "De gesprekke is begonnen.";

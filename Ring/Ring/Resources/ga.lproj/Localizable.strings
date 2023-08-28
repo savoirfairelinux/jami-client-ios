@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Scríobh teachtaireacht chuig ";
 "conversation.explanationSendingLocationTo" = "Tá tú ag roinnt do shuíomh faoi láthair le ";
 "conversation.explanationReceivingLocationFrom" = "Tá tú ag fáil suíomh beo faoi láthair ó ";
-"conversation.errorSavingImage" = "Ní raibh sé in ann pictiúr a shábháil go galerie";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Chuir mé iarratas ar chuntas duit le haghaidh comhrá.";
 "conversation.requestMessage" = "Halo, ba mhaith leat a bheith páirteach sa comhrá?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Fáilte go Jami!";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Is ardán cumarsáide saor in aisce agus uilethír é Jami a chaomhnaíonn príobháideacht agus saoirsí na n-úsáideoirí";
-"welcome.linkDevice" = "Déan nasc chuig cuntas ar an gléas seo";
-"welcome.createAccount" = "Déan cuntas Jami";
-"welcome.connectToManager" = "Déan nasc le Seirbhís JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Skip";
 "createProfile.profileCreated" = "Next";
-"createProfile.title" = "Déan do phróifíl pearsanta";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Ainm taispeántais a chur isteach";
 "createProfile.enterNamePlaceholder" = "Ainm a chur isteach";
 "createProfile.subtitle" = "Déanfar do phróifíl a roinnt le do chaontaithe. Is féidir leat é a athrú ag am ar bith.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Feidhmchlár nasc";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Cuir PIN isteach";
-"linkToAccount.explanationPinMessage" = "Chun an cód PIN a ghiniúint, téigh chuig na socruithe bainistíochta cuntas ar an gléas a bhfuil cuntas ar mhaith leat a úsáid. I socrúcháin na gléasanna Roghnaigh \"Connect another device to this account\". Gheobhaidh tú an PIN is gá chun an fhoirm seo a líonadh.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Clóscríobh isteach";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Déan grianghraf";
 "alerts.profileUploadPhoto" = "Fógraí a uaslódáil";
 "alerts.accountLinkedTitle" = "Cunntas nasc";
-"alerts.dbFailedTitle" = "Bhí mearachd ann nuair a chuir Jami ar bun";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Cuir isteach an t-iarratas agus déan iarracht é a oscailt arís";
 "alerts.confirmBlockContact" = "Tá tú cinnte go bhfuil tú ag iarraidh an teagmháil seo a bhac?";
 "alerts.confirmDeleteConversation" = "An bhfuil tú cinnte gur mhaith leat an comhrá seo a scriosadh go buan?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Iarráid athchóirithe";
 "accountPage.revokeDeviceMessage" = "An bhfuil tú cinnte gur mhaith leat an gléas a tharraingt siar?";
 "accountPage.revokeDeviceButton" = "Athghairm";
-"accountPage.revokeDevicePlaceholder" = "Cuir isteach do phasfhocal";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "An t-údarú feiste críochnaithe";
 "accountPage.deviceRevocationProgress" = "A thabhairt ar ais...";
 "accountPage.deviceRevocationSuccess" = "An t-ordú a tharraingt siar";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Déan teagmháil liom ag baint úsáide as \"%s\" ar an ardán cumarsáide dáileadh Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Cluiche Pasfhocal";
 "accountPage.usernamePlaceholder" = "Cuir isteach ainm úsáideora is mian leat";
-"accountPage.registerNameErrorMessage" = "Níl ainm úsáideora roghnaithe ar fáil";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Cláir";
 "accountPage.usernameRegisterAction" = "Clár";
 "accountPage.usernameRegistrationFailed" = "Fág freagra ar 'An t-ainm atá ar an gcluiche'";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Pasfhocal mícheart";
 "accountPage.enableBoothMode" = "Cumas a chur ar an modh Booth";
 "accountPage.disableBoothMode" = "Cinntí an modh Booth";
-"accountPage.disableBoothModeExplanation" = "Cuir isteach do phraghas focal cuntas";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "I modh booth, ní shábháil go bhfuil stair comhrá agus cumaíocht jami teoranta ag glaochanna amach. Nuair a chuireann tú ar chumas modh booth, déanfar do chuid comhráite go léir a bhaint.";
 "accountPage.noBoothMode" = "Chun an modh Booth a chumasú, ní mór duit pasfhocal cuntas a chruthú ar dtús.";
 "accountPage.boothModeAlertMessage" = "Tar éis do modh booth a chumasú, déanfar do chuid comhráite go léir a bhaint.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "Seirbhísí SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Cláir";
-"account.createSipAccount" = "Cunntas SIP a chruthú";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Cuir isteach Seoladh";
 "account.portLabel" = "Cuir isteach uimhir an chalafoirt";
 "account.accountStatus" = "Stádas cuntas";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Déan nasc a dhéanamh ar ghléas nua";
 "linkDevice.passwordError" = "Ní fhosclaíonn an pasfhocal a chuir tú isteach an cuntas seo";
-"linkDevice.networkError" = "Measadh mearachd líonra le linn an onnmhairithe";
-"linkDevice.defaultError" = "Measadh mearachd le linn an onnmhairithe";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Chun an próiseas a chríochnú, ní mór duit Jami a oscailt ar an gléas nua agus an rogha a roghnú \"Connect this device to an account\". Tá do pin bailí ar feadh 10 nóiméad";
 "linkDevice.hudMessage" = "Feidhmiú";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Fuair tú neamhdhleathacht";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Cruthaíodh swarm";
 "generatedMessage.invitationReceived" = "cuireadh a thabhairt isteach";
 "generatedMessage.invitationAccepted" = "chuaigh isteach sa comhrá";

@@ -1,5 +1,5 @@
 ﻿ /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2023 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *
@@ -97,7 +97,7 @@
 "conversation.messagePlaceholder" = "Tulis pesan ke";
 "conversation.explanationSendingLocationTo" = "Anda saat ini berbagi lokasi Anda dengan";
 "conversation.explanationReceivingLocationFrom" = "Saat ini Anda sedang menerima lokasi langsung dari";
-"conversation.errorSavingImage" = "Gagal menyimpan gambar ke galeri";
+"conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Mengirimkan permintaan untuk percakapan.";
 "conversation.requestMessage" = "Halo, \nApakah Anda ingin bergabung dalam percakapan?";
@@ -113,16 +113,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Selamat datang di Jami !";
+"welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami adalah platform komunikasi gratis dan universal yang menjaga privasi dan kebebasan pengguna";
-"welcome.linkDevice" = "Tautkan perangkat ini ke akun";
-"welcome.createAccount" = "Buat akun Jami";
-"welcome.connectToManager" = "Hubungkan ke server JAMS";
+"welcome.haveAccount" = "I already have an account";
+"welcome.linkDevice" = "Import from another device";
+"welcome.linkBackup" = "Import from archive backup";
+"welcome.createAccount" = "Join Jami";
+"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Lewat";
 "createProfile.profileCreated" = "Selanjutnya";
-"createProfile.title" = "Personalisasi profil Anda";
+"createProfile.title" = "Personalize your profile";
 "createProfile.enterNameLabel" = "Masukkan nama tampilan";
 "createProfile.enterNamePlaceholder" = "Ketik nama";
 "createProfile.subtitle" = "Profil Anda akan dibagikan dengan kontak Anda. Anda bisa mengubahnya kapan saja.";
@@ -154,7 +156,7 @@
 "linkToAccount.linkButtonTitle" = "Tautkan perangkat";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Masukkan PIN";
-"linkToAccount.explanationPinMessage" = "Untuk membuat kode PIN, buka pengaturan pengelolaan akun pada perangkat yang berisi akun yang ingin Anda gunakan. Dalam pengaturan perangkat, pilih \"Tautkan perangkat lain ke akun ini\". Anda akan mendapatkan PIN yang diperlukan untuk melengkapi formulir ini. PIN hanya berlaku selama 10 menit.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Masuk";
@@ -172,7 +174,7 @@
 "alerts.profileTakePhoto" = "Ambil foto";
 "alerts.profileUploadPhoto" = "Unggah foto";
 "alerts.accountLinkedTitle" = "Menghubungkan akun";
-"alerts.dbFailedTitle" = "Terjadi error saat meluncurkan Jami";
+"alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Harap tutup aplikasi dan coba buka lagi";
 "alerts.confirmBlockContact" = "Apakah Anda yakin ingin memblokir kontak ini? Riwayat percakapan dengan kontak ini juga akan dihapus secara permanen.";
 "alerts.confirmDeleteConversation" = "Apakah Anda yakin ingin menghapus percakapan ini secara permanen?";
@@ -242,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Hapus perangkat";
 "accountPage.revokeDeviceMessage" = "Apakah Anda yakin ingin mencabut perangkat ini? Tindakan ini tidak bisa dibatalkan.";
 "accountPage.revokeDeviceButton" = "Cabut";
-"accountPage.revokeDevicePlaceholder" = "Masukkan kata sandi anda";
+"accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Pencabutan perangkat selesai";
 "accountPage.deviceRevocationProgress" = "Mencabut...";
 "accountPage.deviceRevocationSuccess" = "Perangkat telah dicabut";
@@ -259,7 +261,7 @@
 "accountPage.contactMeOnJamiContant" = "Hubungi saya menggunakan \"%s\" pada platform komunikasi terdistribusi Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Masukkan kata sandi akun";
 "accountPage.usernamePlaceholder" = "Masukkan nama pengguna yang diinginkan";
-"accountPage.registerNameErrorMessage" = "Nama pengguna yang dipilih tidak tersedia";
+"accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Mendaftarkan";
 "accountPage.usernameRegisterAction" = "Daftar";
 "accountPage.usernameRegistrationFailed" = "Pendaftaran gagal. Silakan periksa kata sandi.";
@@ -271,7 +273,7 @@
 "accountPage.changePasswordError" = "Kata sandi salah";
 "accountPage.enableBoothMode" = "Aktifkan Mode Booth";
 "accountPage.disableBoothMode" = "Nonaktifkan Mode Booth";
-"accountPage.disableBoothModeExplanation" = "Silakan masukkan kata sandi akun Anda";
+"accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Dalam mode booth riwayat percakapan tidak disimpan dan fungsi jami dibatasi dengan melakukan panggilan keluar. Ketika Anda mengaktifkan mode booth semua percakapan Anda akan dihapus.";
 "accountPage.noBoothMode" = "Untuk mengaktifkan mode Booth, Anda harus membuat kata sandi akun terlebih dahulu.";
 "accountPage.boothModeAlertMessage" = "Setelah mengaktifkan mode booth, semua percakapan Anda akan dihapus.";
@@ -289,7 +291,8 @@
 "account.sipServer" = "Peladen SIP";
 "account.port" = "Port";
 "account.proxyServer" = "Proksi";
-"account.createSipAccount" = "Buat akun SIP";
+"account.createSipAccount" = "Configure a SIP Account";
+"account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Masukkan alamat";
 "account.portLabel" = "Masukkan nomor port";
 "account.accountStatus" = "Status akun";
@@ -308,8 +311,8 @@
 //Link New Device
 "linkDevice.title" = "Hubungkan perangkat baru";
 "linkDevice.passwordError" = "Kata sandi yang Anda masukkan tidak membuka kunci akun ini";
-"linkDevice.networkError" = "Terjadi kesalahan jaringan selama ekspor";
-"linkDevice.defaultError" = "Terjadi kesalahan selama ekspor";
+"linkDevice.networkError" = "A network error occurred during the export";
+"linkDevice.defaultError" = "An error occurred during the export";
 "linkDevice.explanationMessage" = "Untuk menyelesaikan prosesnya, Anda perlu membuka Jami pada perangkat baru dan memilih opsi \"Tautkan perangkat ini ke akun.\" Pin Anda berlaku selama 10 menit";
 "linkDevice.hudMessage" = "Memverifikasi";
 
@@ -342,7 +345,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "Kau menerima undangan";
+"generatedMessage.contactAdded" = "You received invitation";
 "generatedMessage.swarmCreated" = "Kawanan dibuat";
 "generatedMessage.invitationReceived" = "diundang untuk bergabung";
 "generatedMessage.invitationAccepted" = "bergabung dengan percakapan";
