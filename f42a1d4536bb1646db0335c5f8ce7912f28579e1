@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "774f21a5_b38c26dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-08-28T14:23:54Z",
+      "side": 1,
+      "message": "Issues when tested on iPhone:\n- Only left corner is rounded.\n- A gap appears between the view and the keyboard when the label regarding the username (such as \u0027invalid username\u0027) is displayed. This is especially noticeable in landscape mode when the \u0027Cancel\u0027 and \u0027Join\u0027 buttons become inaccessible, and the pull-down gesture doesn\u0027t function.\n- It is not adapted to dark mode.\n- Maybe add some vibrancy. It is in design.",
+      "revId": "f42a1d4536bb1646db0335c5f8ce7912f28579e1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ba1f0a_5cab840b",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-08-28T14:23:54Z",
+      "side": 1,
+      "message": "When loading view is displayed keyboard is hidden and Join Jami view goes to the screen bottom. Maybe use .fullScreen and without animation, to show loading ower welcome view. Or do not change size of Join Jami view when keyboard removed",
+      "revId": "f42a1d4536bb1646db0335c5f8ce7912f28579e1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db56d057_8233e1b4",
+        "filename": "Ring/Ring/Features/Walkthrough/WalkthroughCoordinator.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-08-28T14:23:54Z",
+      "side": 1,
+      "message": "before dismiss verify if the view controller exists (for example if let presentedViewController \u003d self.presentedViewController as? CreateAccountViewController)",
+      "revId": "f42a1d4536bb1646db0335c5f8ce7912f28579e1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
