@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c78f8f3a_3b3a1f57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-08-30T16:08:07Z",
+      "side": 1,
+      "message": "- view does not resize in landscape\n- it is not scrollable, so on iPhone on landscape buttons are not accessible.\n- in the design the view has vibrancy effect.",
+      "revId": "a1bf3d10304512e908e8c2b7840b2c37faecac5b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
