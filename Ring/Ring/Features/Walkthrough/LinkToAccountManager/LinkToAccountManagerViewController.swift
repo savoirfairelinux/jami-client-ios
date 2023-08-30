@@ -25,16 +25,19 @@ import RxSwift
 class LinkToAccountManagerViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: LinkToAccountManagerViewModel!
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dismissView: UIView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var cancelButton: DesignableButton!
     @IBOutlet weak var signInButton: DesignableButton!
-    @IBOutlet weak var passwordTextField: DesignableTextField!
-    @IBOutlet weak var userNameTextField: DesignableTextField!
-    @IBOutlet weak var accountManagerTextField: DesignableTextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var accountManagerTextField: UITextField!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var accountManagerLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var notificationsSwitch: UISwitch!
-    @IBOutlet weak var enableNotificationsLabel: UILabel!
+
+    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
     var disposeBag = DisposeBag()
@@ -44,18 +47,17 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
         super.viewDidLoad()
         self.bindViewToViewModel()
         self.applyL10()
+        self.contentView.roundTopCorners(radius: 12)
         self.view.layoutIfNeeded()
         self.userNameTextField.becomeFirstResponder()
-        self.signInButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         signInButton.titleLabel?.ajustToTextSize()
         configureWalkrhroughNavigationBar()
-        self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
+
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
                 guard UIDevice.current.portraitOrLandscape else { return }
-                self?.signInButton.updateGradientFrame()
                 self?.configureWalkrhroughNavigationBar()
             })
             .disposed(by: self.disposeBag)
@@ -65,6 +67,7 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,17 +75,33 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
-    @objc
-    func dismissKeyboard() {
-        self.isKeyboardOpened = false
-        view.endEditing(true)
-        self.view.removeGestureRecognizer(keyboardDismissTapRecognizer)
+    func setContentInset(keyboardHeight: CGFloat = 0) {
+        self.containerViewBottomConstraint.constant = keyboardHeight
     }
 
     @objc
-    func keyboardWillAppear(withNotification: NSNotification) {
+    func dismissKeyboard() {
+        self.isKeyboardOpened = false
+        self.becomeFirstResponder()
+        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
+    }
+
+    @objc
+    func keyboardWillAppear(withNotification notification: NSNotification) {
         self.isKeyboardOpened = true
-        self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
+        self.dismissView.addGestureRecognizer(keyboardDismissTapRecognizer)
+
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.size.height
+            self.setContentInset(keyboardHeight: keyboardHeight)
+        }
+    }
+
+    @objc
+    func keyboardWillDisappear(withNotification: NSNotification) {
+        dismissView.removeGestureRecognizer(keyboardDismissTapRecognizer)
+        self.setContentInset()
     }
 
     func bindViewToViewModel() {
@@ -128,7 +147,6 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
             .disposed(by: self.disposeBag)
         self.viewModel.canLink.bind(to: self.signInButton.rx.isEnabled)
             .disposed(by: self.disposeBag)
-        self.notificationsSwitch.rx.isOn.bind(to: self.viewModel.notificationSwitch).disposed(by: self.disposeBag)
     }
 
     private func showLinkHUD() {
@@ -149,6 +167,7 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
 
     func applyL10() {
         signInButton.setTitle(L10n.LinkToAccountManager.signIn, for: .normal)
+        titleLabel.text = L10n.LinkToAccountManager.signIn
         self.navigationItem.title = L10n.LinkToAccountManager.signIn
         passwordTextField.placeholder = L10n.Global.password
         userNameTextField.placeholder = L10n.Global.username
@@ -156,22 +175,19 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
         userNameLabel.text = L10n.Global.enterUsername
         passwordLabel.text = L10n.Global.enterPassword
         accountManagerLabel.text = L10n.LinkToAccountManager.accountManagerLabel
-        self.enableNotificationsLabel.text = L10n.CreateAccount.enableNotifications
     }
 
     func adaptToSystemColor() {
         view.backgroundColor = UIColor.jamiBackgroundColor
-        scrollView.backgroundColor = UIColor.jamiBackgroundColor
         userNameLabel.textColor = UIColor.jamiTextSecondary
         passwordLabel.textColor = UIColor.jamiTextSecondary
         accountManagerLabel.textColor = UIColor.jamiTextSecondary
-        enableNotificationsLabel.textColor = UIColor.jamiTextSecondary
         userNameTextField.backgroundColor = UIColor.jamiBackgroundColor
         passwordTextField.backgroundColor = UIColor.jamiBackgroundColor
         accountManagerTextField.backgroundColor = UIColor.jamiBackgroundColor
         userNameTextField.borderColor = UIColor.jamiTextBlue
         passwordTextField.borderColor = UIColor.jamiTextBlue
         accountManagerTextField.borderColor = UIColor.jamiTextBlue
-        notificationsSwitch.tintColor = UIColor.jamiTextBlue
+        signInButton.tintColor = UIColor.jamiButtonDark
     }
 }
