@@ -96,6 +96,34 @@ extension UIViewController {
             .disposed(by: disposeBag)
     }
 
+    func adaptToWelcomeFormKeyboardState(for scrollView: UIScrollView, with disposeBag: DisposeBag) {
+        NotificationCenter.keyboardHeight.observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self, weak scrollView] (height) in
+                guard let self = self, let scrollView = scrollView else { return }
+                let trueHeight = height
+                if [.landscapeRight, .landscapeLeft].contains(ScreenHelper.currentOrientation()) {
+                    let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: trueHeight, right: 0.0)
+                    scrollView.contentInset = contentInsets
+                } else {
+                    scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+                }
+
+                // If active text field is hidden by keyboard, scroll it so it's visible
+                // Your app might not need or want this behavior.
+                if let activeField = self.findActiveTextField(in: scrollView) {
+                    var aRect = self.view.frame
+                    aRect.size.height -= trueHeight
+
+                    let activeFieldBottomPoint = CGPoint(x: activeField.frame.origin.x, y: activeField.frame.origin.y + activeField.frame.size.height + 10) // added 10 as padding
+
+                    if !aRect.contains(activeFieldBottomPoint) {
+                        scrollView.scrollRectToVisible(activeField.frame, animated: true)
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
     func adaptTableToKeyboardState (for tableView: UITableView, with disposeBag: DisposeBag, topOffset: CGFloat? = nil, bottomOffset: CGFloat? = nil) {
         NotificationCenter.keyboardHeight
             .observe(on: MainScheduler.instance)
