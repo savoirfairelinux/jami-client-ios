@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b78f60a0_5df5c624",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-08-30T15:43:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8bbd65d_98b44c08",
+      "revId": "a0964165421bfe332816731ec94a24d9014ed7b3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0f9c4aa_0771ef5b",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "what color it should be?",
       "parentUuid": "e0f9c4aa_0771ef5b",
+      "revId": "a0964165421bfe332816731ec94a24d9014ed7b3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "101dec42_c8ff37c0",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-08-30T15:43:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9166a6b_cc0dd810",
       "revId": "a0964165421bfe332816731ec94a24d9014ed7b3",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

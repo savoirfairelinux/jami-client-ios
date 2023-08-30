@@ -50,6 +50,24 @@
       "message": "before dismiss verify if the view controller exists (for example if let presentedViewController \u003d self.presentedViewController as? CreateAccountViewController)",
       "revId": "f42a1d4536bb1646db0335c5f8ce7912f28579e1",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "527fc581_a9321fe2",
+        "filename": "Ring/Ring/Features/Walkthrough/WalkthroughCoordinator.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-08-30T15:43:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db56d057_8233e1b4",
+      "revId": "f42a1d4536bb1646db0335c5f8ce7912f28579e1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
