@@ -35,6 +35,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a41f13b_3bcfa772",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-08-30T15:49:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54ba1f0a_5cab840b",
+      "revId": "f42a1d4536bb1646db0335c5f8ce7912f28579e1",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db56d057_8233e1b4",
