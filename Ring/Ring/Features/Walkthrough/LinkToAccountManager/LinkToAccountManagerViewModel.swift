@@ -31,7 +31,6 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
     var userName = BehaviorRelay<String>(value: "")
     var password = BehaviorRelay<String>(value: "")
     var manager = BehaviorRelay<String>(value: "")
-    let notificationSwitch = BehaviorRelay<Bool>(value: true)
     private let accountsService: AccountsService
     private let disposeBag = DisposeBag()
     private let accountCreationState = BehaviorRelay<AccountCreationState>(value: .unknown)
@@ -59,11 +58,11 @@ class LinkToAccountManagerViewModel: Stateable, ViewModel {
             .connectToAccountManager(username: userName.value,
                                      password: password.value,
                                      serverUri: manager.value,
-                                     emableNotifications: self.notificationSwitch.value)
+                                     emableNotifications: true)
             .subscribe(onNext: { [weak self] (_) in
                 guard let self = self else { return }
                 self.accountCreationState.accept(.success)
-                self.enablePushNotifications(enable: self.notificationSwitch.value)
+                self.enablePushNotifications(enable: true)
                 DispatchQueue.main.async {
                     self.stateSubject.onNext(WalkthroughState.accountCreated)
                 }
