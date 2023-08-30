@@ -108,7 +108,8 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
             self.present(viewController: linkDeviceViewController, withStyle: .show, withAnimation: true, withStateable: linkDeviceViewController.viewModel)
         case .linkToAccountManager:
             let linkToManagerViewController = LinkToAccountManagerViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: linkToManagerViewController, withStyle: .show, withAnimation: true, withStateable: linkToManagerViewController.viewModel)
+            linkToManagerViewController.view.backgroundColor = .clear
+            self.present(viewController: linkToManagerViewController, withStyle: .formModal, withAnimation: true, withStateable: linkToManagerViewController.viewModel)
         }
     }
 }
