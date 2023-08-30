@@ -33,6 +33,24 @@
       "message": "We should change joinButton background color when it is not available.",
       "revId": "a0964165421bfe332816731ec94a24d9014ed7b3",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9166a6b_cc0dd810",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-08-30T15:17:47Z",
+      "side": 1,
+      "message": "what color it should be?",
+      "parentUuid": "e0f9c4aa_0771ef5b",
+      "revId": "a0964165421bfe332816731ec94a24d9014ed7b3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
