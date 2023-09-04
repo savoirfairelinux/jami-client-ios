@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "O Jami é uma plataforma de comunicação universal que preserva a privacidade e liberdades dos utilizadores";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Já tenho uma conta.";
+"welcome.linkDevice" = "Importação a partir de outro dispositivo";
+"welcome.linkBackup" = "Importar de um arquivo de backup";
+"welcome.createAccount" = "Junte-se a Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Revogar dispositivo";
 "accountPage.revokeDeviceMessage" = "Tem a certeza que quer desvincular este dispositivo? Esta ação não pode ser desfeita.";
 "accountPage.revokeDeviceButton" = "Desvincular";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Introduza a sua palavra-chave";
 "accountPage.deviceRevoked" = "A desvinculação ao dispositivo terminou";
 "accountPage.deviceRevocationProgress" = "A desvincular...";
 "accountPage.deviceRevocationSuccess" = "O dispositivo foi desvinculado";

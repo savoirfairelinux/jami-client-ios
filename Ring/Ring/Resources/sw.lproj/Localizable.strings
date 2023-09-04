@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami ni jukwaa la mawasiliano la bure na la kimataifa ambalo huhifadhi faragha na uhuru wa watumiaji";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Mimi tayari nina akaunti";
+"welcome.linkDevice" = "Uagizaji kutoka kifaa kingine";
+"welcome.linkBackup" = "Kuagiza kutoka kumbukumbu ya kumbukumbu";
+"welcome.createAccount" = "Jiunge Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen

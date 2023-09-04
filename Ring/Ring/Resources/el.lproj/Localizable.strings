@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Η Jami είναι μια ελεύθερη και παγκόσμια πλατφόρμα επικοινωνίας που διατηρεί την ιδιωτικότητα και τις ελευθερίες των χρηστών";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Έχω ήδη λογαριασμό.";
+"welcome.linkDevice" = "Εισαγωγή από άλλη συσκευή";
+"welcome.linkBackup" = "Εισαγωγή απο αρχειοθετημένο αντίγραφο ασφαλείας";
+"welcome.createAccount" = "Δημιουργήστε λογαριασμό Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Αφαίρεση συσκευής";
 "accountPage.revokeDeviceMessage" = "Είσαι σίγουρος ότι θέλεις να ανακαλέσεις την συσκευή;";
 "accountPage.revokeDeviceButton" = "Απαλλαγή";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Εισαγωγή κωδικού πρόσβασης";
 "accountPage.deviceRevoked" = "Τελείωσε την ανάκληση της συσκευής";
 "accountPage.deviceRevocationProgress" = "Απακύρωση...";
 "accountPage.deviceRevocationSuccess" = "Η συσκευή ανακαλέστηκε.";

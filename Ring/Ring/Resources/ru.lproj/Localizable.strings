@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami - это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "У меня уже есть аккаунт";
+"welcome.linkDevice" = "Импортировать с другого устройства";
+"welcome.linkBackup" = "Импортировать из резервной копии";
+"welcome.createAccount" = "Присоединиться к Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Отозвать устройство";
 "accountPage.revokeDeviceMessage" = "Ты уверен, что хотите отозвать это устройство? Это действие не может быть отменено.";
 "accountPage.revokeDeviceButton" = "Отвязать";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Введите ваш пароль";
 "accountPage.deviceRevoked" = "Отзыв устройства завершенно";
 "accountPage.deviceRevocationProgress" = "Отзыв…";
 "accountPage.deviceRevocationSuccess" = "Устройство было отозвано";

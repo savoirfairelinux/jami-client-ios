@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami нь хэрэглэгчийн хувийн хэвшил, эрх чөлөөг хадгалах чөлөөтэй, бүх нийтийн харилцааны платформ юм";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Би аль хэдийнээ бүртгэлтэй.";
+"welcome.linkDevice" = "Өөр төхөөрөмжээс импортлох";
+"welcome.linkBackup" = "Архивын нусхабар захиргаас импортлох";
+"welcome.createAccount" = "Жэмид нэгдээрэй";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen

@@ -113,12 +113,12 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
+"welcome.title" = "使用 Jami 分享，自由、私密";
 "welcome.text" = "Jami 是一个保护用户的隐私和自由的通用自由软件。";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "我已经有一个账户";
+"welcome.linkDevice" = "從其他裝置匯入";
+"welcome.linkBackup" = "从归档备份中导入";
+"welcome.createAccount" = "加入 Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "吊销设备";
 "accountPage.revokeDeviceMessage" = "您确定要吊销此设备吗？此操作不能撤销。";
 "accountPage.revokeDeviceButton" = "吊销";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "输入您的密码";
 "accountPage.deviceRevoked" = "设备吊销完成";
 "accountPage.deviceRevocationProgress" = "吊销中...";
 "accountPage.deviceRevocationSuccess" = "设备已被吊销";

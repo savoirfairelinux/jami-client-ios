@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami là một nền tảng truyền thông miễn phí và phổ biến bảo vệ quyền riêng tư và tự do của người dùng";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Tôi đã có tài khoản";
+"welcome.linkDevice" = "Nhập khẩu từ thiết bị khác";
+"welcome.linkBackup" = "Nhập từ sao lưu lưu lưu";
+"welcome.createAccount" = "Tham gia Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
