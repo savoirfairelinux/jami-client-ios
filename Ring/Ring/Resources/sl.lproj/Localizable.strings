@@ -113,12 +113,12 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
+"welcome.title" = "Delite z drugimi, prosto in zasebno prek Jami";
 "welcome.text" = "Jami je prosta in brezplačna univerzalna komunikacijska platforma, ki spoštuje svobodo in zasebnost svojih uporabnikov.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Račun že imam";
+"welcome.linkDevice" = "Uvozi z druge naprave";
+"welcome.linkBackup" = "Uvozi iz varnostne kopije arhiva";
+"welcome.createAccount" = "Pridruži se Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Odpokliči napravo";
 "accountPage.revokeDeviceMessage" = "Ali ste prepričani, da želite odstraniti to napravo? Tega dejanja ni mogoče razveljaviti.";
 "accountPage.revokeDeviceButton" = "Odpokliči";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Vnesite geslo";
 "accountPage.deviceRevoked" = "Odpoklic naprave je uspel";
 "accountPage.deviceRevocationProgress" = "Odpoklic je v teku ...";
 "accountPage.deviceRevocationSuccess" = "Naprava je bila odpoklicana";

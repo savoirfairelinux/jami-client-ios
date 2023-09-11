@@ -19,17 +19,17 @@
  */
 
 // Global
-"global.accountSettings" = "Configuración de la cuenta";
-"global.advancedSettings" = "Ajustes Avanzados";
-"global.username" = "Nombre de usuario";
-"global.password" = "Contraseña";
-"global.registerAUsername" = "Registrá un nombre de usuario";
-"global.enterPassword" = "Escriba la contraseña";
-"global.enterUsername" = "Ingresá el nombre de usuario";
-"global.cancel" = "Cancelar";
-"global.blockContact" = "Bloquear contacto";
-"global.removeAccount" = "Eliminar cuenta";
-"global.incomingCall" = "Llamada entrante";
+"global.accountSettings" = "Account Settings";
+"global.advancedSettings" = "Advanced Settings";
+"global.username" = "Username";
+"global.password" = "Password";
+"global.registerAUsername" = "Register a username";
+"global.enterPassword" = "Enter Password";
+"global.enterUsername" = "Enter Username";
+"global.cancel" = "Cancel";
+"global.blockContact" = "Block Contact";
+"global.removeAccount" = "Remove account";
+"global.incomingCall" = "Incoming call";
 "global.ok" = "Ok";
 "global.close" = "Close";
 "global.share" = "Share";
@@ -37,45 +37,45 @@
 "global.save" = "Save";
 "global.resend" = "Resend";
 "global.preview" = "Preview";
-"global.accept" = "Aceptar";
-"global.block" = "Bloquear";
-"global.refuse" = "Rechazar";
-"global.name" = "Nombre";
-"global.copy" = "Copiar";
-"global.reply" = "Responder";
-"global.search" = "Buscando...";
+"global.accept" = "Accept";
+"global.block" = "Block";
+"global.refuse" = "Refuse";
+"global.name" = "Name";
+"global.copy" = "Copy";
+"global.reply" = "Reply";
+"global.search" = "Searching…";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "Buscar contacto...";
-"swarmcreation.createTheSwarm" = "Crear enjambre";
-"swarmcreation.addADescription" = "Añadir descripción";
-"swarmcreation.addPeople" = "Puedes añadir \%d\ más personas al enjambre";
+"swarmcreation.searchBar" = "Search for contact...";
+"swarmcreation.createTheSwarm" = "Create the swarm";
+"swarmcreation.addADescription" = "Add a description";
+"swarmcreation.addPeople" = "You can add \%d\ more people in the swarm";
 // Swarm
-"swarm.ignoreSwarm" = "Ignorar enjambre";
-"swarm.leaveConversation" = "Dejar la conversación";
-"swarm.chooseColor" = "Elegir color";
-"swarm.typeOfSwarm" = "Tipo de enjambre";
-"swarm.identifier" = "Identificador";
-"swarm.about" = "Acerca de";
-"swarm.members" = "Miembros";
-"swarm.addDescription" = "Añadir descripción";
-"swarm.oneToOne" = "Enjambre privado";
-"swarm.adminInvitesOnly" = "Solo invitaciones del administrador";
-"swarm.invitesOnly" = "Enjambre privado";
-"swarm.publicChat" = "Enjambre público";
-"swarm.others" = "Otros";
-"swarm.member" = "Miembro";
-"swarm.invited" = "Invitado";
-"swarm.admin" = "Administrador";
-"swarm.banned" = "Bloqueado";
-"swarm.unknown" = "Desconocido";
-"swarm.addMorePeople" = "Puedes añadir \%d\ más personas al enjambre";
-"swarm.addMember" = "Añadir Miembro";
-"swarm.confirmLeaveSwarm" = "¿Está seguro de querer abandonar este enjambre?";
-"swarm.Leave" = "Abandonar";
+"swarm.ignoreSwarm" = "Ignore the swarm";
+"swarm.leaveConversation" = "Leave the conversation";
+"swarm.chooseColor" = "Choose a color";
+"swarm.typeOfSwarm" = "Type of swarm";
+"swarm.identifier" = "Identifier";
+"swarm.about" = "About";
+"swarm.members" = "Members";
+"swarm.addDescription" = "Add Description";
+"swarm.oneToOne" = "Private swarm";
+"swarm.adminInvitesOnly" = "Admin invites only";
+"swarm.invitesOnly" = "Private swarm";
+"swarm.publicChat" = "Public swarm";
+"swarm.others" = "Others";
+"swarm.member" = "Member";
+"swarm.invited" = "Invited";
+"swarm.admin" = "Administrator";
+"swarm.banned" = "Banned";
+"swarm.unknown" = "Unkown";
+"swarm.addMorePeople" = "You can add \%d\ more people in this swarm";
+"swarm.addMember" = "Add Member";
+"swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
+"swarm.Leave" = "Leave";
 // Smartlist
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";
@@ -98,14 +98,14 @@
 "conversation.explanationSendingLocationTo" = "You are currently sharing your location with ";
 "conversation.explanationReceivingLocationFrom" = "You are currently receiving a live location from ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
-"conversation.receivedRequest" = "%@ te mandó una solicitud de conversación.";
-"conversation.incomingRequest" = "Te envió una solicitud de conversación.";
+"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "%@no está en su lista de contactos.";
+"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
-"conversation.sendRequestTitle" = "Enviar solicitud de contacto";
+"conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "Esperando a que %@ se conecte para sincronizar la conversación.";
+"conversation.synchronizationMessage" = "We are waiting for %@ connects to synchronize the conversation.";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";
@@ -113,12 +113,12 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
+"welcome.title" = "使用 Jami 分享，自由、私密";
 "welcome.text" = "Jami is a free and universal communication platform which preserves the users' privacy and freedoms";
-"welcome.haveAccount" = "Ya tengo una cuenta";
-"welcome.linkDevice" = "Importar desde otro dispositivo";
-"welcome.linkBackup" = "Importar desde archivo de respaldo";
-"welcome.createAccount" = "Unirse a Jami";
+"welcome.haveAccount" = "我已经有一个账户";
+"welcome.linkDevice" = "從其他裝置匯入";
+"welcome.linkBackup" = "从归档备份中导入";
+"welcome.createAccount" = "加入 Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Revoke device";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
-"accountPage.revokeDevicePlaceholder" = "Ingresa tu contraseña";
+"accountPage.revokeDevicePlaceholder" = "輸入你的密碼";
 "accountPage.deviceRevoked" = "Device revocation completed";
 "accountPage.deviceRevocationProgress" = "Revoking...";
 "accountPage.deviceRevocationSuccess" = "Device was revoked";
@@ -279,12 +279,12 @@
 "accountPage.boothModeAlertMessage" = "After enabling booth mode all your conversations will be removed.";
 "accountPage.peerDiscovery" = "Auto connect on local network";
 "accountPage.autoRegistration" = "Auto register after expiration";
-"accountPage.connectivityHeader" = "Conectividad";
-"accountPage.turnEnabled" = "Habilitar TURN";
-"accountPage.turnServer" = "Dirección TURN";
-"accountPage.turnUsername" = "Nombre de usuario en TURN";
-"accountPage.turnPassword" = "Contraseña TURN";
-"accountPage.turnRealm" = "Reino TURN";
+"accountPage.connectivityHeader" = "Connectivity";
+"accountPage.turnEnabled" = "Enable TURN";
+"accountPage.turnServer" = "TURN address";
+"accountPage.turnUsername" = "TURN username";
+"accountPage.turnPassword" = "TURN password";
+"accountPage.turnRealm" = "TURN realm";
 
 //Account
 "account.sipUsername" = "User Name";
@@ -331,52 +331,52 @@
 "dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
-"dataTransfer.recordInBackgroundWarning" = "Grabar un video mientras se realizan varias tareas a la vez con varias aplicaciones puede originar una baja calidad del video. Para obtener los mejores resultados, grabe cuando no realice múltiples tareas";
+"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
 
 //Notifications
 "notifications.missedCall" = "Missed Call";
 "notifications.newFile" = "New file";
 "notifications.locationSharingStarted" = "Incoming location sharing started";
 "notifications.locationSharingStopped" = "Incoming location sharing stopped";
-"dataTransfer.readableStatusRefuse" = "Rechazar";
-"dataTransfer.readableStatusAccept" = "Aceptar";
+"dataTransfer.readableStatusRefuse" = "Refuse";
+"dataTransfer.readableStatusAccept" = "Accept";
 "dataTransfer.infoMessage" = "Press to start recording";
 "dataTransfer.sendMessage" = "Send";
 
 
 //Generated Message
 "generatedMessage.contactAdded" = "You received invitation";
-"generatedMessage.swarmCreated" = "Enjambre creado";
-"generatedMessage.invitationReceived" = "invitado a unirse";
-"generatedMessage.invitationAccepted" = "unido a la conversación";
-"generatedMessage.youJoined" = "Te uniste a la conversación";
-"generatedMessage.contactBanned" = "expulsada";
-"generatedMessage.contactReAdded" = "añadida de nuevo";
+"generatedMessage.swarmCreated" = "Swarm created";
+"generatedMessage.invitationReceived" = "was invited to join";
+"generatedMessage.invitationAccepted" = "joined the conversation";
+"generatedMessage.youJoined" = "You joined the conversation";
+"generatedMessage.contactBanned" = "was kicked";
+"generatedMessage.contactReAdded" = "was re-added";
 "generatedMessage.outgoingCall" = "Outgoing call";
 "generatedMessage.missedOutgoingCall" = "Missed outgoing call";
 "generatedMessage.missedIncomingCall" = "Missed incoming call";
 "generatedMessage.liveLocationSharing" = "Live location sharing";
-"generatedMessage.contactLeftConversation" = "retirado";
+"generatedMessage.contactLeftConversation" = "left";
 
 //General Settings
-"generalSettings.videoSettings" = "Ajustes de vídeo";
+"generalSettings.videoSettings" = "Video Settings";
 "generalSettings.videoAcceleration" = "Enable video acceleration";
-"generalSettings.fileTransfer" = "Transferencia de archivo";
-"generalSettings.locationSharing" = "Ubicación compartida";
-"generalSettings.automaticAcceptIncomingFiles" = "Aceptar automáticamente los archivos entrantes";
-"generalSettings.acceptTransferLimit" = "Aceptar límite de transferencia";
+"generalSettings.fileTransfer" = "File transfer";
+"generalSettings.locationSharing" = "Location Sharing";
+"generalSettings.automaticAcceptIncomingFiles" = "Automatically accept incoming files";
+"generalSettings.acceptTransferLimit" = "Accept transfer limit";
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
-"generalSettings.limitLocationSharingDuration" = "Limitar la duración del uso compartido de la ubicación";
-"generalSettings.locationSharingDuration" = "Duración del tiempo compartido";
+"generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
+"generalSettings.locationSharingDuration" = "Position share duration";
 
 
 //Log View
-"logView.title" = "Diagnósticos";
-"logView.description" = "Abrir preferencias de registro de diagnóstico";
-"logView.startLogging" = "Iniciar registro";
-"logView.stopLogging" = "Detener el registro";
-"logView.saveError" = "Error al guardar el archivo";
-"logView.shareError" = "Error al compartir el archivo";
+"logView.title" = "Diagnostics";
+"logView.description" = "Open diagnostic log settings";
+"logView.startLogging" = "Start Logging";
+"logView.stopLogging" = "Stop Logging";
+"logView.saveError" = "Failed to save file";
+"logView.shareError" = "Failed to share file";
 
 //Migrate Account
 "migrateAccount.title" = "Account migration";

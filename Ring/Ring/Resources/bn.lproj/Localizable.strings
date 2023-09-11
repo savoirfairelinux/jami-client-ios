@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "জামি একটি মুক্ত ও সর্বজনীন যোগাযোগ প্ল্যাটফর্ম যা ব্যবহারকারীদের গোপনীয়তা ও স্বাধীনতা রক্ষা করে";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "আমার একটা একাউন্ট আছে";
+"welcome.linkDevice" = "অন্য ডিভাইস থেকে আমদানি";
+"welcome.linkBackup" = "সংরক্ষণাগার ব্যাকআপ থেকে আমদানি";
+"welcome.createAccount" = "জামিতে যোগদান করুন";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen

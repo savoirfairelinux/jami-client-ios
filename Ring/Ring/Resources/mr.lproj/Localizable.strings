@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "जेमी हा एक मुक्त आणि सार्वत्रिक संवाद मंच आहे जो वापरकर्त्यांची गोपनीयता आणि स्वातंत्र्ये राखतो.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "माझ्याकडे आधीच खाते आहे";
+"welcome.linkDevice" = "दुसर्या उपकरणाकडून आयात";
+"welcome.linkBackup" = "बॅकअप बॅकअपमधून आयात";
+"welcome.createAccount" = "जामीमध्ये सामील व्हा";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen

@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "چامى هو منصة اتصال حرة وعالمية تحفظ خصوصية المستخدمين وحرياتهم";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "لدي حساب بالفعل";
+"welcome.linkDevice" = "الاستيراد من جهاز آخر";
+"welcome.linkBackup" = "الاستيراد من النسخة الاحتياطية";
+"welcome.createAccount" = "انضموا إلى جامي";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "إبطال جهاز";
 "accountPage.revokeDeviceMessage" = "هل أنت متأكد أنك تريد إلغاء هذا الجهاز؟";
 "accountPage.revokeDeviceButton" = "سحب";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "أدخِل كلمة المرور";
 "accountPage.deviceRevoked" = "إعادة إلغاء الجهاز قد تم الانتهاء منها";
 "accountPage.deviceRevocationProgress" = "-تلغيّر";
 "accountPage.deviceRevocationSuccess" = "تم إلغاء الجهاز";

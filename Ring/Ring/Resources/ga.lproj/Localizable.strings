@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Is ardán cumarsáide saor in aisce agus uilethír é Jami a chaomhnaíonn príobháideacht agus saoirsí na n-úsáideoirí";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Tá cuntas agam cheana féin";
+"welcome.linkDevice" = "Importaíocht ó threalamh eile";
+"welcome.linkBackup" = "Importaí ó chúltaca archiv";
+"welcome.createAccount" = "Téigh le Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen

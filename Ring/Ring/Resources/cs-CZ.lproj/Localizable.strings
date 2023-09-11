@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami je svobodný software a všeobecný dorozumívací systém, který zachovává soukromí a svobody uživatelů.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Už účet mám";
+"welcome.linkDevice" = "Import z jiného zařízení";
+"welcome.linkBackup" = "Importovat ze záložního archivu";
+"welcome.createAccount" = "Připojit k Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Odebrat zařízení";
 "accountPage.revokeDeviceMessage" = "Opravdu chcete odebrat toto zařízení? Tento krok nelze vrátit zpět.";
 "accountPage.revokeDeviceButton" = "Odebrat";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Zadejte své heslo";
 "accountPage.deviceRevoked" = "Odebrání zařízení dokončeno";
 "accountPage.deviceRevocationProgress" = "Odebírá se...";
 "accountPage.deviceRevocationSuccess" = "Zařízení bylo odebráno!";

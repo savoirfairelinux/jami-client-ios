@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami on vapaa ja universaali viestintäalusta joka turvaa käyttäjien yksityisyyden ja vapaudet";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Minulla on jo tili.";
+"welcome.linkDevice" = "Muusta laitteesta tuonnut";
+"welcome.linkBackup" = "Tuo varmuuskopiosta";
+"welcome.createAccount" = "Liity Jamiin.";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Peruuta laite";
 "accountPage.revokeDeviceMessage" = "Haluatko varmasti peruuttaa tämän laitteen? Tätä toimintoa ei voitu kumota.";
 "accountPage.revokeDeviceButton" = "Peruuta";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Syötä salasanasi";
 "accountPage.deviceRevoked" = "Laitteen peruminen valmis";
 "accountPage.deviceRevocationProgress" = "Peruuttaminen...";
 "accountPage.deviceRevocationSuccess" = "Laite on peruttu";

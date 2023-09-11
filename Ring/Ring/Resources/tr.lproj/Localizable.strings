@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami, kullanıcılarının gizlilik ve özgürlüklerini sağlayan evrensel ve özgür platformdur.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "- Hesabım var.";
+"welcome.linkDevice" = "Başka bir cihazdan ithal";
+"welcome.linkBackup" = "Arşiv yedeklemesinden içe aktar";
+"welcome.createAccount" = "Jami'ye katılın.";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Aygıtı kaldır";
 "accountPage.revokeDeviceMessage" = "Bu aygıtı kaldırmak istediğinize emin misiniz? Bu eylem geri alınamaz.";
 "accountPage.revokeDeviceButton" = "Kaldır";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Parolanızı girin";
 "accountPage.deviceRevoked" = "Aygıt iptali tamamlandı";
 "accountPage.deviceRevocationProgress" = "İptal ediliyor...";
 "accountPage.deviceRevocationSuccess" = "Aygıt kaldırıldı";

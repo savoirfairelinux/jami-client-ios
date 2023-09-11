@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "ജാമി എന്നത് സ്വതന്ത്രവും സാർവത്രികവുമായ ഒരു ആശയവിനിമയ പ്ലാറ്റ്ഫോമാണ്, അത് ഉപയോക്താക്കളുടെ സ്വകാര്യതയും സ്വാതന്ത്ര്യവും സംരക്ഷിക്കുന്നു";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "എനിക്ക് ഒരു അക്കൌണ്ട് ഉണ്ട്";
+"welcome.linkDevice" = "മറ്റൊരു ഉപകരണത്തിൽ നിന്നും ഇറക്കുമതി ചെയ്യുക";
+"welcome.linkBackup" = "ആർക്കൈവ് ബാക്കപ്പ് നിന്നും ഇറക്കുമതി ചെയ്യുക";
+"welcome.createAccount" = "ജാമിയിൽ ചേരുക";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "പിൻവലിക്കൽ ഉപകരണം";
 "accountPage.revokeDeviceMessage" = "ഈ ഉപകരണം പിൻവലിക്കാൻ താങ്കൾക്ക് ഉറപ്പുണ്ടോ?";
 "accountPage.revokeDeviceButton" = "റദ്ദാക്കൽ";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Masukkan kata laluan anda";
 "accountPage.deviceRevoked" = "ഉപകരണം പിൻവലിച്ചതിനു ശേഷം";
 "accountPage.deviceRevocationProgress" = "- പിൻവലിക്കുന്നു.";
 "accountPage.deviceRevocationSuccess" = "ഉപകരണം റദ്ദാക്കി";

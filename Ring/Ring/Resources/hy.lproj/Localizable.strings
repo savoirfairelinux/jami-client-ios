@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami-ն ազատ եւ համընդհանուր հաղորդակցման հարթակ է, որը պահպանում է օգտատերերի գաղտնիությունն ու ազատությունները";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Ես արդեն հաշիվ ունեմ";
+"welcome.linkDevice" = "Արտահանման այլ սարք";
+"welcome.linkBackup" = "Արտահանում արխիվային պահուստային համակարգից";
+"welcome.createAccount" = "Միացեք Ջամիին";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen

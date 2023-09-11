@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami is een vrij en universeel communicatieplatform, dat de privacy en vrijheden van haar gebruikers eerbiedigt";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Ik heb al een account.";
+"welcome.linkDevice" = "Import van een ander apparaat";
+"welcome.linkBackup" = "Importeren van back-uparchief";
+"welcome.createAccount" = "Neem deel aan Jami.";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Apparaat intrekken";
 "accountPage.revokeDeviceMessage" = "Weet u zeker dat u dit apparaat wilt intrekken? Deze handeling kan niet ongedaan gemaakt worden.";
 "accountPage.revokeDeviceButton" = "Intrekken";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Voer uw wachtwoord in";
 "accountPage.deviceRevoked" = "Intrekken van apparaat voltooid";
 "accountPage.deviceRevocationProgress" = "Bezig met intrekken…";
 "accountPage.deviceRevocationSuccess" = "Apparaat is ingetrokken";

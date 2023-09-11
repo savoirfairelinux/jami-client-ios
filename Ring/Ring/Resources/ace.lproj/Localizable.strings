@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami اداله ڤلاڤتورم ڤمبلاجرن يڠ براوسيا دان ڤرنه ممڤرچايا?? ي ڤرودوک دان ڤرودوک ڤڠڬونا";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "ساي تله مڠهادڤكن";
+"welcome.linkDevice" = "ڤڠاجرن دري ڤڠاجرن لاين";
+"welcome.linkBackup" = "ڤڠمبيلن دري ڤڠمبيلن ارشيڤ";
+"welcome.createAccount" = "مڠڬوناكن Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen

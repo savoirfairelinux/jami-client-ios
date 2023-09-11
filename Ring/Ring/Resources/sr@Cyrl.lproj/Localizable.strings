@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Џами је бесплатна и универзална комуникацијска платформа која чува приватност и слободе корисника";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Уже имам рачун.";
+"welcome.linkDevice" = "Увоз из другог уређаја";
+"welcome.linkBackup" = "Импорт из архивног резервног копија";
+"welcome.createAccount" = "Придружи се Џамију.";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen

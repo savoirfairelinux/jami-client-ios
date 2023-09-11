@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "जामी एक मुक्त और सार्वभौमिक संचार मंच है जो उपयोगकर्ताओं की गोपनीयता और स्वतंत्रता को संरक्षित करता है";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "मेरे पास पहले से ही एक खाता है";
+"welcome.linkDevice" = "दूसरे उपकरण से आयात";
+"welcome.linkBackup" = "संग्रह बैकअप से आयात";
+"welcome.createAccount" = "जामी में शामिल हों";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "निरसन उपकरण";
 "accountPage.revokeDeviceMessage" = "क्या आप इस उपकरण को वापस लेना चाहते हैं?";
 "accountPage.revokeDeviceButton" = "निरस्त";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "अपना पासवर्ड दर्ज करें";
 "accountPage.deviceRevoked" = "डिवाइस निरस्त पूरा";
 "accountPage.deviceRevocationProgress" = "निरस्त...";
 "accountPage.deviceRevocationSuccess" = "डिवाइस को रद्द कर दिया गया था";

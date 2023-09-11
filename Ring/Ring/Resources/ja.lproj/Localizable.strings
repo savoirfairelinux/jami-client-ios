@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jamiは世界中の利用者と繋がることができる自由ソフトウェアであり，利用者の自由と私事権とを尊重しています。";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "すでにアカウントを持っている";
+"welcome.linkDevice" = "他のデバイスから輸入する";
+"welcome.linkBackup" = "アーカイブバックアップからインポート";
+"welcome.createAccount" = "Jamiに登録";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "デバイスを取り消し";
 "accountPage.revokeDeviceMessage" = "本当にこの端末を無効にしますか？この操作は取り消せません。";
 "accountPage.revokeDeviceButton" = "破棄";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "パスワードを入力してください";
 "accountPage.deviceRevoked" = "デバイスの無効化が完了しました";
 "accountPage.deviceRevocationProgress" = "取り消し中...";
 "accountPage.deviceRevocationSuccess" = "無効なデバイス";

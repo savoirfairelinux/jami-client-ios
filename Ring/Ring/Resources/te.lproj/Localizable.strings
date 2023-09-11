@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "జామి అనేది ఉచిత మరియు సార్వత్రిక కమ్యూనికేషన్ ప్లాట్ఫాం, ఇది వినియోగదారుల గోప్యత మరియు స్వేచ్ఛలను కాపాడుతుంది";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "నాకు ఇప్పటికే ఒక ఖాతా ఉంది";
+"welcome.linkDevice" = "మరొక పరికరము నుండి దిగుమతి";
+"welcome.linkBackup" = "ఆర్కైవ్ బ్యాకప్ నుండి దిగుమతి";
+"welcome.createAccount" = "జామితో చేరండి";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen

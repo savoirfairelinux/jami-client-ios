@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Ring jest wolnym oprogramowaniem do uniwersalnej komunikacji, respektującym wolności i prywatność swoich użytkowników";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Mam już konto.";
+"welcome.linkDevice" = "Importuje się z innego urządzenia";
+"welcome.linkBackup" = "Importuj z archiwum kopii zapasowej";
+"welcome.createAccount" = "Dołącz do Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -244,7 +244,7 @@
 "accountPage.revokeDeviceTitle" = "Odwołaj urządzenie";
 "accountPage.revokeDeviceMessage" = "Czy jesteś pewny, że chcesz odwołać to urządzenie? Nie można tego cofnąć.";
 "accountPage.revokeDeviceButton" = "Odwołaj";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Wpisz swoje hasło";
 "accountPage.deviceRevoked" = "Odwoływanie urządzenia ukończone";
 "accountPage.deviceRevocationProgress" = "Odwoływanie...";
 "accountPage.deviceRevocationSuccess" = "Urządzenie zostało odwołane";

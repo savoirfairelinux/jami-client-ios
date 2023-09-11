@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami estas libera kaj universala komunikada platformo kiu konservas la privatecon kaj liberecojn de la uzantoj";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Mi jam havas konton.";
+"welcome.linkDevice" = "Importado de alia aparato";
+"welcome.linkBackup" = "Importado de arkiva kopiado";
+"welcome.createAccount" = "Aliĝu al Jami";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen

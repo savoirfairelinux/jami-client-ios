@@ -115,10 +115,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "자미는 무료 및 보편적인 통신 플랫폼으로 이용자의 개인 정보와 자유를 보호합니다.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "이미 계좌가 있어요";
+"welcome.linkDevice" = "다른 장치에서 수입";
+"welcome.linkBackup" = "파일 백업에서 가져온";
+"welcome.createAccount" = "자미에 합류해";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
