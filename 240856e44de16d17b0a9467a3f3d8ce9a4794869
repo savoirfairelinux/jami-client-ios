@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c733d9f8_1c17d453",
+        "filename": "Ring/Ring/Extensions/UIView+Ring.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-13T21:14:01Z",
+      "side": 1,
+      "message": "we should not use DispatchQueue.main.async when apply corners. When roundTopCorners used at this point we need to check if it main thread if necessary.",
+      "revId": "240856e44de16d17b0a9467a3f3d8ce9a4794869",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0af28d5a_da0f99d7",
+        "filename": "Ring/Ring/Extensions/UIView+Ring.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-13T21:14:01Z",
+      "side": 1,
+      "message": "same there",
+      "revId": "240856e44de16d17b0a9467a3f3d8ce9a4794869",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
