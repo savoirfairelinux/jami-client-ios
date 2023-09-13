@@ -123,6 +123,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "941faf22_1744555e",
+        "filename": "Ring/Ring/Features/Walkthrough/WalkthroughCoordinator.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-13T19:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc25cbb7_dce4b6fa",
+      "revId": "b4f46185e49e4841cf160fd537ce6e4bb76cfb98",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "040b8dc6_207080ef",
