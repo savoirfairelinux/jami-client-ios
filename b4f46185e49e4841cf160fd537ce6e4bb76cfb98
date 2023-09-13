@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d9baf4_6000a756",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-13T18:57:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f27941f5_c415050d",
+      "revId": "b4f46185e49e4841cf160fd537ce6e4bb76cfb98",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbd5a2c1_585b2a72",
@@ -35,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a7b50a3_ac57aabd",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-13T18:57:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbd5a2c1_585b2a72",
+      "revId": "b4f46185e49e4841cf160fd537ce6e4bb76cfb98",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0be26425_0a69a77e",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-09-13T18:24:13Z",
       "side": 1,
       "message": "it is not used",
+      "revId": "b4f46185e49e4841cf160fd537ce6e4bb76cfb98",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0038d4b_c696526c",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateAccount/CreateAccountViewController.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-13T18:57:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0be26425_0a69a77e",
       "revId": "b4f46185e49e4841cf160fd537ce6e4bb76cfb98",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -86,6 +140,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69eff348_d94ed2e5",
+        "filename": "Ring/Ring/Features/Walkthrough/WelcomeViewController.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-13T18:57:06Z",
+      "side": 1,
+      "message": "this for avoiding the conflict between our scroll view and popup view scroll view.\nThe same apprach was there in apple notes, they avoided the scroll to dismiss of the popup view in that state",
+      "parentUuid": "040b8dc6_207080ef",
+      "revId": "b4f46185e49e4841cf160fd537ce6e4bb76cfb98",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b27ee57a_4fc18779",
@@ -99,6 +171,24 @@
       "writtenOn": "2023-09-13T18:24:13Z",
       "side": 1,
       "message": "this is checking orientation rather than presentation style, maybe name function currentOrientation? and return UIInterfaceOrientation",
+      "revId": "b4f46185e49e4841cf160fd537ce6e4bb76cfb98",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abe881e5_3368d340",
+        "filename": "Ring/Ring/Helpers/ScreenHelper.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-13T18:57:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b27ee57a_4fc18779",
       "revId": "b4f46185e49e4841cf160fd537ce6e4bb76cfb98",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
