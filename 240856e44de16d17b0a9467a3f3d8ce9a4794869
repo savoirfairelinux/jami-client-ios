@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e49e54ae_7b93771d",
+        "filename": "Ring/Ring/Extensions/UIView+Ring.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-13T22:01:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c733d9f8_1c17d453",
+      "revId": "240856e44de16d17b0a9467a3f3d8ce9a4794869",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0af28d5a_da0f99d7",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-13T21:14:01Z",
       "side": 1,
       "message": "same there",
+      "revId": "240856e44de16d17b0a9467a3f3d8ce9a4794869",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f11eb803_cd203162",
+        "filename": "Ring/Ring/Extensions/UIView+Ring.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-13T22:01:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0af28d5a_da0f99d7",
       "revId": "240856e44de16d17b0a9467a3f3d8ce9a4794869",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
