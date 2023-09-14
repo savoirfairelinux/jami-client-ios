@@ -151,6 +151,8 @@ internal enum L10n {
     internal static let turnUsername = L10n.tr("Localizable", "accountPage.turnUsername", fallback: "TURN username")
     /// UNBLOCK
     internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact", fallback: "UNBLOCK")
+    /// Use UPnP
+    internal static let upnpEnabled = L10n.tr("Localizable", "accountPage.upnpEnabled", fallback: "Use UPnP")
     /// username: not registered
     internal static let usernameNotRegistered = L10n.tr("Localizable", "accountPage.usernameNotRegistered", fallback: "username: not registered")
     /// Enter desired username

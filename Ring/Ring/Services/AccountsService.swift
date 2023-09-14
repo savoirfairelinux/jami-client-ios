@@ -941,6 +941,10 @@ class AccountsService: AccountAdapterDelegate {
         self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.turnEnable))
     }
 
+    func enableUpnp(enable: Bool, accountId: String) {
+        self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.accountUpnpEnabled))
+    }
+
     func setTurnSettings(accountId: String, server: String, username: String, password: String, realm: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnServer), withValue: server)
