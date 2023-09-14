@@ -63,6 +63,7 @@ enum SettingsSection: SectionModelType {
         case turnUsername
         case turnPassword
         case turnRealm
+        case upnpEnabled
     }
 
     var items: [SectionRow] {
@@ -241,7 +242,8 @@ class MeViewModel: ViewModel, Stateable {
                                            .turnServer,
                                            .turnUsername,
                                            .turnPassword,
-                                           .turnRealm]))
+                                           .turnRealm,
+                                           .upnpEnabled]))
     }()
 
     lazy var otherJamiSettings: Observable<SettingsSection> = {
@@ -804,6 +806,13 @@ class MeViewModel: ViewModel, Stateable {
         turnEnabled.accept(enable)
     }
 
+    func enableUpnp(enable: Bool) {
+        guard self.upnpEnabled.value != enable,
+              let account = self.accountService.currentAccount else { return }
+        self.accountService.enableUpnp(enable: enable, accountId: account.id)
+        upnpEnabled.accept(enable)
+    }
+
     func enableKeepAlive(enable: Bool) {
         guard self.keepAliveEnabled.value != enable,
               let account = self.accountService.currentAccount else { return }
@@ -817,6 +826,16 @@ class MeViewModel: ViewModel, Stateable {
            let details = account.details {
             let enable = details.get(withConfigKeyModel:
                                         ConfigKeyModel.init(withKey: .turnEnable)).boolValue
+            return BehaviorRelay<Bool>(value: enable)
+        }
+        return BehaviorRelay<Bool>(value: true)
+    }()
+
+    lazy var upnpEnabled: BehaviorRelay<Bool> = {
+        if let account = self.accountService.currentAccount,
+           let details = account.details {
+            let enable = details.get(withConfigKeyModel:
+                                        ConfigKeyModel.init(withKey: .accountUpnpEnabled)).boolValue
             return BehaviorRelay<Bool>(value: enable)
         }
         return BehaviorRelay<Bool>(value: true)

@@ -286,6 +286,7 @@
 "accountPage.turnUsername" = "TURN username";
 "accountPage.turnPassword" = "TURN password";
 "accountPage.turnRealm" = "TURN realm";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "User Name";

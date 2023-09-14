@@ -622,6 +622,30 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         })
                         .disposed(by: cell.disposeBag)
                     return cell
+                case .upnpEnabled:
+                    let cell = DisposableCell()
+                    cell.backgroundColor = UIColor.jamiBackgroundColor
+                    cell.textLabel?.text = L10n.AccountPage.upnpEnabled
+                    let switchView = UISwitch()
+                    cell.selectionStyle = .none
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.accessoryView = switchView
+                    self.viewModel.upnpEnabled
+                        .asObservable()
+                        .startWith(self.viewModel.upnpEnabled.value)
+                        .observe(on: MainScheduler.instance)
+                        .bind(to: switchView.rx.value)
+                        .disposed(by: cell.disposeBag)
+                    switchView.rx
+                        .isOn.changed
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
+                        .distinctUntilChanged()
+                        .asObservable()
+                        .subscribe(onNext: {[weak self] enable in
+                            self?.viewModel.enableUpnp(enable: enable)
+                        })
+                        .disposed(by: cell.disposeBag)
+                    return cell
                 case .turnServer:
                     let cell = self
                         .configureTurnCell(cellType: .turnServer,
