@@ -631,6 +631,7 @@ extension AppDelegate {
                 completionHandler(.newData)
                 return
             }
+            // Keep it for backward compatibility for now. Once OpenDHT is updated, resubscription will be managed in the notification extension.
             backgrounTaskQueue.async {[weak self] in
                 var taskId = UIBackgroundTaskIdentifier.invalid
                 taskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {

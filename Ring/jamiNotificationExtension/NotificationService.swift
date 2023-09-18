@@ -90,7 +90,9 @@ class NotificationService: UNNotificationServiceExtension {
 
         guard let account = requestData[NotificationField.accountId.rawValue] else { return }
         accountId = account
-
+        if isResubscribe(accountId: accountId, data: requestData) {
+            return
+        }
         /// app is not active. Querry value from dht
         guard let proxyURL = getProxyCaches(data: requestData),
               let url = getRequestURL(data: requestData, path: proxyURL) else {
@@ -167,6 +169,19 @@ class NotificationService: UNNotificationServiceExtension {
             self.tasksGroup.leave()
         }
         finish()
+    }
+
+    private func isResubscribe(accountId: String, data: [String: String]) -> Bool {
+        let isResubscribe = data["timeout"] != nil && data["timeout"] != "<null>"
+        if !isResubscribe {
+            return false
+        }
+        self.accountIsActive = true
+        self.adapterService.startAccount(accountId: accountId)
+        self.adapterService.pushNotificationReceived(accountId: accountId, data: data)
+        // wait to proceed pushNotificationReceived
+        sleep(5)
+        return true
     }
 
     private func handleGitMessage() {

@@ -28,6 +28,7 @@
 
 - (void)stop;
 - (BOOL)start:(NSString*)accountId;
+- (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data;
 - (bool)downloadFileWithFileId:(NSString*)fileId
                      accountId:(NSString*)accountId
                 conversationId:(NSString*)conversationId
