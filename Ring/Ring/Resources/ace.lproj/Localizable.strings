@@ -22,6 +22,7 @@
 "global.accountSettings" = "ڤڠاجرن حساب";
 "global.advancedSettings" = "ڤڠاجرن ڤڠاجرن";
 "global.username" = "نام ڤڠڬونا";
+"global.recommended" = "Recommended";
 "global.password" = "ڤاسر";
 "global.registerAUsername" = "مڠهادڤكن نام ڤڠڬونا";
 "global.enterPassword" = "ڤرودوق ڤرسودوق";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami اداله ڤلاڤتورم ڤمبلاجرن يڠ براوسيا دان ڤرنه ممڤرچايا?? ي ڤرودوک دان ڤرودوک ڤڠڬونا";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "ساي تله مڠهادڤكن";
+"welcome.linkDevice" = "ڤڠاجرن دري ڤڠاجرن لاين";
+"welcome.linkBackup" = "ڤڠمبيلن دري ڤڠمبيلن ارشيڤ";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "ڤرچاي اوتار";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "ڤڠڬوناكن ايكون";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "ڤيليه ڤرسود يڠ ڤرنه دڤرچايا?? ي اونتوق ممڤرچايا?? ي کات Jami-توه.";
 "createAccount.repeatPasswordPlaceholder" = "ڤرليمن ڤرساتوان";
 "createAccount.passwordCharactersNumberError" = "6 ڤڠاجرن ڤد ڤد";

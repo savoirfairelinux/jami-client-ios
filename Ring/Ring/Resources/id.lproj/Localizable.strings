@@ -22,6 +22,7 @@
 "global.accountSettings" = "Pengaturan Akun";
 "global.advancedSettings" = "Pengaturan Lanjutan";
 "global.username" = "Nama pengguna";
+"global.recommended" = "Rekomendasi";
 "global.password" = "Kata sandi";
 "global.registerAUsername" = "Daftarkan nama pengguna";
 "global.enterPassword" = "Masukkan kata sandi";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami adalah platform komunikasi gratis dan universal yang menjaga privasi dan kebebasan pengguna";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Saya sudah punya akun";
+"welcome.linkDevice" = "Impor dari perangkat lain";
+"welcome.linkBackup" = "Impor dari arsip cadangan";
+"welcome.createAccount" = "Gabung";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Buat avatar anda";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Buat akun anda";
+"createAccount.createAccountFormTitle" = "Gabung Jami";
 "createAccount.chooseStrongPassword" = "Gunakan kata sandi kuat dan mudah diingat untuk menjaga akun Jami anda.";
 "createAccount.repeatPasswordPlaceholder" = "Konfirmasi kata sandi";
 "createAccount.passwordCharactersNumberError" = "Minimum 6 karakter";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Hapus perangkat";
 "accountPage.revokeDeviceMessage" = "Apakah Anda yakin ingin mencabut perangkat ini? Tindakan ini tidak bisa dibatalkan.";
 "accountPage.revokeDeviceButton" = "Cabut";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Masukkan kata sandi anda";
 "accountPage.deviceRevoked" = "Pencabutan perangkat selesai";
 "accountPage.deviceRevocationProgress" = "Mencabut...";
 "accountPage.deviceRevocationSuccess" = "Perangkat telah dicabut";

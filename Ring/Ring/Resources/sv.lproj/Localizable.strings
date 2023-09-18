@@ -22,6 +22,7 @@
 "global.accountSettings" = "Kontoinställningar";
 "global.advancedSettings" = "Avancerade inställningar";
 "global.username" = "Användarnamn";
+"global.recommended" = "Rekommendera";
 "global.password" = "Lösenord";
 "global.registerAUsername" = "Registrera ett användarnamn";
 "global.enterPassword" = "Ange lösenord";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami är en obunden och universell kommunikationsplattform, som bevarar användarens integritet och frihet.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Jag har redan ett konto.";
+"welcome.linkDevice" = "Import från en annan enhet";
+"welcome.linkBackup" = "Importera från arkiverad säkerhetskopia";
+"welcome.createAccount" = "Anslut";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Skapa din avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Skapa ditt konto";
+"createAccount.createAccountFormTitle" = "Gå med Jami.";
 "createAccount.chooseStrongPassword" = "Välj ett starkt lösenord som du kommer ihåg, för att skydda ditt Jami-konto.";
 "createAccount.repeatPasswordPlaceholder" = "Bekräfta lösenord";
 "createAccount.passwordCharactersNumberError" = "6 tecken minimum";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Återkalla enhet";
 "accountPage.revokeDeviceMessage" = "Vill du verkligen återkalla den här enheten? Åtgärden kan inte ångras.";
 "accountPage.revokeDeviceButton" = "Återkalla";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Ange ditt lösenord";
 "accountPage.deviceRevoked" = "Enheten har återkallats";
 "accountPage.deviceRevocationProgress" = "Återkallar...";
 "accountPage.deviceRevocationSuccess" = "Enheten återkallades";

@@ -22,6 +22,7 @@
 "global.accountSettings" = "खाते सेटिंग्ज";
 "global.advancedSettings" = "प्रगत सेटिंग्ज";
 "global.username" = "नाव";
+"global.recommended" = "शिफारस केलेले";
 "global.password" = "पासवर्ड";
 "global.registerAUsername" = "एक वापरकर्तानाव नोंदवा";
 "global.enterPassword" = "पासवर्ड प्रविष्ट करा";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "जेमी हा एक मुक्त आणि सार्वत्रिक संवाद मंच आहे जो वापरकर्त्यांची गोपनीयता आणि स्वातंत्र्ये राखतो.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "माझ्याकडे आधीच खाते आहे";
+"welcome.linkDevice" = "दुसर्या उपकरणाकडून आयात";
+"welcome.linkBackup" = "बॅकअप बॅकअपमधून आयात";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "तुमचा अवतार तयार करा";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "आपले खाते तयार करा";
+"createAccount.createAccountFormTitle" = "जामीमध्ये सामील व्हा";
 "createAccount.chooseStrongPassword" = "आपल्या जामी खात्याचे संरक्षण करण्यासाठी तुम्हाला लक्षात राहणारे मजबूत संकेतशब्द निवडा.";
 "createAccount.repeatPasswordPlaceholder" = "पासवर्ड पुष्टी करा";
 "createAccount.passwordCharactersNumberError" = "किमान 6 वर्ण";

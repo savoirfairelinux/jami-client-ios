@@ -22,6 +22,7 @@
 "global.accountSettings" = "การตั้งค่าบัญชี";
 "global.advancedSettings" = "การตั้งค่าที่ทันสมัย";
 "global.username" = "ชื่อผู้ใช้";
+"global.recommended" = "ข้อเสนอแนะ";
 "global.password" = "รหัสผ่าน";
 "global.registerAUsername" = "จดชื่อผู้ใช้";
 "global.enterPassword" = "ใส่รหัสผ่าน";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "จามิเป็นเว็บสื่อสารฟรีและทั่วไปที่รักษาความเป็นส่วนตัวและเสรีภาพของผู้ใช้";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "ฉันมีบัญชีแล้ว";
+"welcome.linkDevice" = "การนําเข้าจากอุปกรณ์อื่น";
+"welcome.linkBackup" = "นำเข้าจากข้อมูลสำรองที่เก็บถาวร";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "สร้างอวตาร์ของคุณ";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "สร้างบัญชีของคุณ";
+"createAccount.createAccountFormTitle" = "เข้าร่วมกับจามิ";
 "createAccount.chooseStrongPassword" = "เลือกรหัสผ่านที่แข็งแกร่งที่คุณจะจําไว้ เพื่อปกป้องบัญชี Jami ของคุณ";
 "createAccount.repeatPasswordPlaceholder" = "ยืนยันปัสริด";
 "createAccount.passwordCharactersNumberError" = "ขั้นต่ำ 6 ตัวอักษร";

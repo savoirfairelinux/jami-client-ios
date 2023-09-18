@@ -22,6 +22,7 @@
 "global.accountSettings" = "Cinntí cuntas";
 "global.advancedSettings" = "Cinntíocht Leathraithe";
 "global.username" = "Ainm úsáideora";
+"global.recommended" = "Moltar";
 "global.password" = "Pasfhocal";
 "global.registerAUsername" = "Ainm úsáideora a chlárú";
 "global.enterPassword" = "Cluiche Pasfhocal";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Is ardán cumarsáide saor in aisce agus uilethír é Jami a chaomhnaíonn príobháideacht agus saoirsí na n-úsáideoirí";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Tá cuntas agam cheana féin";
+"welcome.linkDevice" = "Importaíocht ó threalamh eile";
+"welcome.linkBackup" = "Importaí ó chúltaca archiv";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Cruthaigh do avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Cruthaigh do chuntas";
+"createAccount.createAccountFormTitle" = "Téigh le Jami";
 "createAccount.chooseStrongPassword" = "Roghnaigh pasfhocal láidir a chuimhnigh tú chun do chuntas Jami a chosaint.";
 "createAccount.repeatPasswordPlaceholder" = "Pasfhocal a dhearbhú";
 "createAccount.passwordCharactersNumberError" = "6 carachtair ar a laghad";

@@ -22,6 +22,7 @@
 "global.accountSettings" = "Kontode seaded";
 "global.advancedSettings" = "Eduskunud seadmed";
 "global.username" = "Kasutaja nimi";
+"global.recommended" = "Recommended";
 "global.password" = "Salaus";
 "global.registerAUsername" = "Registreerige kasutajanimi";
 "global.enterPassword" = "Sisestage parool";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami on vaba ja universaalne sideplatvorm, mis kaitseb kasutajate privaatsust ja vabadusi";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Mul on juba konto.";
+"welcome.linkDevice" = "Impordi muudest seadmetest";
+"welcome.linkBackup" = "Importida arhiivist varustust";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Loe oma avatari";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Loe oma konto";
+"createAccount.createAccountFormTitle" = "Liitu Jamiga";
 "createAccount.chooseStrongPassword" = "Vali tugeva parooli, mida sa mäletad, et kaitsta oma Jami kontot.";
 "createAccount.repeatPasswordPlaceholder" = "Paranduse kinnitamine";
 "createAccount.passwordCharactersNumberError" = "Vähemalt 6 tähtaeg";

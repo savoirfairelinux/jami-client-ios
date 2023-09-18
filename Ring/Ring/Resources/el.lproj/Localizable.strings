@@ -22,6 +22,7 @@
 "global.accountSettings" = "Ρυθμίσεις λογαριασμού";
 "global.advancedSettings" = "Προχωρημένες ρυθμίσεις";
 "global.username" = "Όνομα χρήστη";
+"global.recommended" = "Recommended";
 "global.password" = "Κωδικός";
 "global.registerAUsername" = "Καταχωρίστε ένα όνομα χρήστη";
 "global.enterPassword" = "Καταχώρηση συνθηματικού";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Η Jami είναι μια ελεύθερη και παγκόσμια πλατφόρμα επικοινωνίας που διατηρεί την ιδιωτικότητα και τις ελευθερίες των χρηστών";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Έχω ήδη λογαριασμό.";
+"welcome.linkDevice" = "Εισαγωγή από άλλη συσκευή";
+"welcome.linkBackup" = "Εισαγωγή απο αρχειοθετημένο αντίγραφο ασφαλείας";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Δημιουργήστε το avatar σας";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Δημιουργήστε το λογαριασμό σας";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "Επιλέξτε ένα ισχυρό κωδικό πρόσβασης που θα θυμάστε για να προστατεύσετε το λογαριασμό σας στο Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Επιβεβαίωση κωδικού";
 "createAccount.passwordCharactersNumberError" = "το ελάχιστο 6 χαρακτήρες";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Αφαίρεση συσκευής";
 "accountPage.revokeDeviceMessage" = "Είσαι σίγουρος ότι θέλεις να ανακαλέσεις την συσκευή;";
 "accountPage.revokeDeviceButton" = "Απαλλαγή";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Εισαγωγή κωδικού πρόσβασης";
 "accountPage.deviceRevoked" = "Τελείωσε την ανάκληση της συσκευής";
 "accountPage.deviceRevocationProgress" = "Απακύρωση...";
 "accountPage.deviceRevocationSuccess" = "Η συσκευή ανακαλέστηκε.";

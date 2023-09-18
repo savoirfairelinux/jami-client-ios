@@ -22,6 +22,7 @@
 "global.accountSettings" = "Cài đặt tài khoản";
 "global.advancedSettings" = "Thiết lập nâng cao";
 "global.username" = "Username";
+"global.recommended" = "Ưu tiên";
 "global.password" = "Mật khẩu";
 "global.registerAUsername" = "Đăng ký tên người dùng";
 "global.enterPassword" = "Nhập mật khẩu";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami là một nền tảng truyền thông miễn phí và phổ biến bảo vệ quyền riêng tư và tự do của người dùng";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Tôi đã có tài khoản";
+"welcome.linkDevice" = "Nhập khẩu từ thiết bị khác";
+"welcome.linkBackup" = "Nhập từ sao lưu lưu lưu";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Tạo avatar của bạn";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Tạo tài khoản của bạn";
+"createAccount.createAccountFormTitle" = "Tham gia Jami";
 "createAccount.chooseStrongPassword" = "Chọn mật khẩu mạnh mẽ mà bạn sẽ nhớ để bảo vệ tài khoản Jami của bạn.";
 "createAccount.repeatPasswordPlaceholder" = "Tiếp tục xác nhận mật khẩu";
 "createAccount.passwordCharactersNumberError" = "6 ký tự tối thiểu";

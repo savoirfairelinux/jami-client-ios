@@ -22,6 +22,7 @@
 "global.accountSettings" = "Configuracion de compte";
 "global.advancedSettings" = "Ajustaments avançats";
 "global.username" = "Nom d’utilizaire";
+"global.recommended" = "Recomandat";
 "global.password" = "Senhal";
 "global.registerAUsername" = "Registrar un nom d' utilizaire";
 "global.enterPassword" = "Picatz vòstre senhal";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami es un logicial liure per comunicacions universalas que respèctan la libertat e la vida privada de sos utilizaires.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Ai ja un compte";
+"welcome.linkDevice" = "Importar d'un autre dispositiu";
+"welcome.linkBackup" = "Importar d’una salvagarda";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Creatz vòstre avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Creatz vòstre compte";
+"createAccount.createAccountFormTitle" = "S' unís a Jami";
 "createAccount.chooseStrongPassword" = "Escòli una contraròtle fòrta que te remembraràs per protegir ton compte Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Confirmar lo senhal";
 "createAccount.passwordCharactersNumberError" = "6 caractèrs minimals";

@@ -22,6 +22,7 @@
 "global.accountSettings" = "Tunnuksen asetukset";
 "global.advancedSettings" = "Lisäasetukset";
 "global.username" = "Käyttäjänimi";
+"global.recommended" = "Recommended";
 "global.password" = "Salasana";
 "global.registerAUsername" = "Rekisteröi käyttäjänimi";
 "global.enterPassword" = "Syötä salasana";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami on vapaa ja universaali viestintäalusta joka turvaa käyttäjien yksityisyyden ja vapaudet";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Minulla on jo tili.";
+"welcome.linkDevice" = "Muusta laitteesta tuonnut";
+"welcome.linkBackup" = "Tuo varmuuskopiosta";
+"welcome.createAccount" = "Liity";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Luo avatari";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Tee tilisi";
+"createAccount.createAccountFormTitle" = "Liity Jamiin.";
 "createAccount.chooseStrongPassword" = "Valitse muistettava, vahva salasana jota käytät Jami-tunnuksen suojaamiseen.";
 "createAccount.repeatPasswordPlaceholder" = "Varmista salasana";
 "createAccount.passwordCharactersNumberError" = "Vähintään 6 merkkiä";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Peruuta laite";
 "accountPage.revokeDeviceMessage" = "Haluatko varmasti peruuttaa tämän laitteen? Tätä toimintoa ei voitu kumota.";
 "accountPage.revokeDeviceButton" = "Peruuta";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Syötä salasanasi";
 "accountPage.deviceRevoked" = "Laitteen peruminen valmis";
 "accountPage.deviceRevocationProgress" = "Peruuttaminen...";
 "accountPage.deviceRevocationSuccess" = "Laite on peruttu";

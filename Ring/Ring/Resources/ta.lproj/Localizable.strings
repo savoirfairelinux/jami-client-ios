@@ -22,6 +22,7 @@
 "global.accountSettings" = "கணக்கு அமைப்புகள்";
 "global.advancedSettings" = "மேம்பட்ட அமைப்புகள்";
 "global.username" = "பயனர் பெயர்";
+"global.recommended" = "பரிந்துரைக்கப்படுகிறது";
 "global.password" = "கடவுச்சொல்";
 "global.registerAUsername" = "பயனர்பெயரை பதிவு செய்யவும்";
 "global.enterPassword" = "கடவுச்சொல்லை உள்ளிடவும்";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "ஜாமி என்பது பயனர்களின் தனியுரிமையும் சுதந்திரமும் பாதுகாக்கப்படும் இலவச மற்றும் உலகளாவிய தகவல் தொடர்பு தளமாகும்";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "எனக்கு ஏற்கனவே ஒரு கணக்கு இருக்கிறது";
+"welcome.linkDevice" = "மற்றொரு சாதனத்திலிருந்து இறக்குமதி";
+"welcome.linkBackup" = "காப்புரிமை காப்புரிமை இருந்து இறக்குமதி";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "உங்கள் அவதாரத்தை உருவாக்கவும்";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "உங்கள் கணக்கை உருவாக்கவும்";
+"createAccount.createAccountFormTitle" = "ஜாமிக்கு சேரவும்";
 "createAccount.chooseStrongPassword" = "ஜாமி கணக்கை பாதுகாக்க நீங்கள் நினைவில் வைத்திருக்கும் வலுவான கடவுச்சொல்லைத் தேர்ந்தெடுக்கவும்.";
 "createAccount.repeatPasswordPlaceholder" = "கடவுச்சொல்லை உறுதிப்படுத்தவும்";
 "createAccount.passwordCharactersNumberError" = "குறைந்தபட்சம் 6 எழுத்துக்கள்";

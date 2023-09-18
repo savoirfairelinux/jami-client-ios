@@ -22,6 +22,7 @@
 "global.accountSettings" = "Configuracions de comptes";
 "global.advancedSettings" = "Configuracions avançades";
 "global.username" = "Nom d'usuari";
+"global.recommended" = "Recommended";
 "global.password" = "Contrasenya";
 "global.registerAUsername" = "Registreu un nom d'usuari";
 "global.enterPassword" = "Introducir contrasenya";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami és una plataforma de comunicació lliure i universal que conserva la privacitat i llibertats dels usuaris";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Jo ja tinc un compte";
+"welcome.linkDevice" = "Importació des d'un altre dispositiu";
+"welcome.linkBackup" = "Importa des d'una còpia de seguretat d'arxiu";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Crea el teu avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Crea el teu compte";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "Seleccioneu una contrasenya forta que recordareu per protegir el vostre compte Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Confirmi contrasenya";
 "createAccount.passwordCharactersNumberError" = "Mínim 6 caràcters";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Revoca el dispositiu";
 "accountPage.revokeDeviceMessage" = "Estàs segur que vols revocar aquest dispositiu?";
 "accountPage.revokeDeviceButton" = "Revocació";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Introdueix la teva contrassenya";
 "accountPage.deviceRevoked" = "Revocació del dispositiu completada";
 "accountPage.deviceRevocationProgress" = "Revocar...";
 "accountPage.deviceRevocationSuccess" = "L'equip va ser revocat";

@@ -22,6 +22,7 @@
 "global.accountSettings" = "Настройки на сметката";
 "global.advancedSettings" = "Разширени настройки";
 "global.username" = "Потребителско име";
+"global.recommended" = "Recommended";
 "global.password" = "Парола";
 "global.registerAUsername" = "Регистриране на потребителско име";
 "global.enterPassword" = "Въведете парола";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami е свободна и универсална комуникационна платформа, която запазва личния живот и свободите на потребителите";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Вече имам сметка.";
+"welcome.linkDevice" = "Внос от друго устройство";
+"welcome.linkBackup" = "Импорт от архивния резерв";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Създаване на аватар";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Създаване на профил";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "Изберете сигурна парола, която ще запомните, за да е защитен профилът ви.";
 "createAccount.repeatPasswordPlaceholder" = "Потвърдете паролата";
 "createAccount.passwordCharactersNumberError" = "Най-малко 6 знака";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Премахване на устройство";
 "accountPage.revokeDeviceMessage" = "Сигурен ли си, че искаш да отмениш устройството?";
 "accountPage.revokeDeviceButton" = "Отмяна на решението";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Въведете паролата си";
 "accountPage.deviceRevoked" = "Завършено оттегляне на устройството";
 "accountPage.deviceRevocationProgress" = "Отменя...";
 "accountPage.deviceRevocationSuccess" = "Устройството е отменено.";

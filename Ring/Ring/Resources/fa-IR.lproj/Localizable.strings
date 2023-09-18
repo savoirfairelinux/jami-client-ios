@@ -22,6 +22,7 @@
 "global.accountSettings" = "تنظیمات حساب";
 "global.advancedSettings" = "تنظیمات پیشرفته";
 "global.username" = "نام کاربری";
+"global.recommended" = "Recommended";
 "global.password" = "گذرواژه";
 "global.registerAUsername" = "ثبت یک نام‌کاربری";
 "global.enterPassword" = "گذرواژه را وارد کنید";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "جمی یک بستر ارتباطی رایگان و جهانی است، که حریم خصوصی و آزادی کاربران را حفظ می‌کند";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "من قبلاً حسابي دارم";
+"welcome.linkDevice" = "واردات از دستگاه دیگری";
+"welcome.linkBackup" = "وارد کردن از پشتیبان بایگانی‌شده";
+"welcome.createAccount" = "پیوستن";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "آواتار خود را بسازید";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "حساب کاربری خود را بسازید";
+"createAccount.createAccountFormTitle" = "با جمی هم همراهی کن";
 "createAccount.chooseStrongPassword" = "برای محافظت از حساب جمی خود، گذرواژه‌ای قوی انتخاب کنید، که بتوانید آن را به خاطر بیاورید.";
 "createAccount.repeatPasswordPlaceholder" = "تأیید گذرواژه";
 "createAccount.passwordCharactersNumberError" = "حداقل ۶ کاراکتر";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "باطل کردن دستگاه";
 "accountPage.revokeDeviceMessage" = "اطمینان دارید که می‌خواهید دسترسی این دستگاه را باطل کنید؟ این عمل قابل برگشت نیست.";
 "accountPage.revokeDeviceButton" = "باطل کردن";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "گذرواژه‌تان را وارد کنید";
 "accountPage.deviceRevoked" = "ابطال دستگاه تکمیل شد";
 "accountPage.deviceRevocationProgress" = "در حال ابطال…";
 "accountPage.deviceRevocationSuccess" = "دسترسی دستگاه باطل شد";

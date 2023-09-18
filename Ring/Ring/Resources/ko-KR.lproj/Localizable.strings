@@ -22,6 +22,7 @@
 "global.accountSettings" = "계정 설정";
 "global.advancedSettings" = "고급 설정";
 "global.username" = "사용자명";
+"global.recommended" = "추천";
 "global.password" = "암호";
 "global.registerAUsername" = "사용자 이름을 등록";
 "global.enterPassword" = "비밀번호 입력";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "자미는 무료 및 보편적인 통신 플랫폼으로 이용자의 개인 정보와 자유를 보호합니다.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "이미 계좌가 있어요";
+"welcome.linkDevice" = "다른 장치에서 수입";
+"welcome.linkBackup" = "파일 백업에서 가져온";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "아바타를 만들";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "계정 생성하기";
+"createAccount.createAccountFormTitle" = "자미에 합류해";
 "createAccount.chooseStrongPassword" = "자미 계정을 보호하기 위해 기억할 강력한 비밀번호를 선택하세요.";
 "createAccount.repeatPasswordPlaceholder" = "암호 확인";
 "createAccount.passwordCharactersNumberError" = "최소 6자";

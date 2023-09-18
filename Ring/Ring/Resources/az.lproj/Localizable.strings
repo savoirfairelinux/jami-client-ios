@@ -22,6 +22,7 @@
 "global.accountSettings" = "حسابلارین تنظیماتلاری";
 "global.advancedSettings" = "آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین";
 "global.username" = "ایستیفاده چی آد";
+"global.recommended" = "Recommended";
 "global.password" = "رمز";
 "global.registerAUsername" = "آدی یازیلماق";
 "global.enterPassword" = "رمز یازماق";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "جامی، آزاد و آلیشلی بیر ارتباط پلتفرمیدیر کی، ایستیفاده چیلرین خصوصی و آزادلیغی قوروموشدور.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "منیم حسابوم وار";
+"welcome.linkDevice" = "باشقا آلاتدان واردات";
+"welcome.linkBackup" = "آرشیو آرخایینلاشماسیندان واردات";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "اؤز اوتارينيزي يارادين";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "حسابين ايچينده";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "جامی حسابینی قوروماق اوچون خاطیرلاداجاقینیز گوجلو رمز سئچیب.";
 "createAccount.repeatPasswordPlaceholder" = "رمز لری تصدیق ائدیر";
 "createAccount.passwordCharactersNumberError" = "6 حرفدن آز";

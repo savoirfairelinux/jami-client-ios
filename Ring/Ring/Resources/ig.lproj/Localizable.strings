@@ -22,6 +22,7 @@
 "global.accountSettings" = "Ntọala akaụntụ";
 "global.advancedSettings" = "Ntọala Dị Elu";
 "global.username" = "Aha njirimara";
+"global.recommended" = "A Na-atụ aro ya";
 "global.password" = "Paswọdu";
 "global.registerAUsername" = "Debanye aha njirimara";
 "global.enterPassword" = "Tinye paswọọdụ";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami bụ usoro nkwukọrịta n'efu na nke zuru ụwa ọnụ nke na-echekwa nzuzo na nnwere onwe nke ndị ọrụ";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Enwere m akaụntụ m.";
+"welcome.linkDevice" = "Ịbubata site na ngwaọrụ ọzọ";
+"welcome.linkBackup" = "Import si ndabere nchekwa";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Mepụta avatar gị";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Mepụta akaụntụ gị";
+"createAccount.createAccountFormTitle" = "Soro Jami";
 "createAccount.chooseStrongPassword" = "Họrọ paswọọdụ siri ike ị ga-echeta iji chebe akaụntụ Jami gị.";
 "createAccount.repeatPasswordPlaceholder" = "Nyochaa paswọọdụ";
 "createAccount.passwordCharactersNumberError" = "Ihe dịkarịa ala mkpụrụedemede 6";

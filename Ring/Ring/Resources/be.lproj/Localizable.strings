@@ -22,6 +22,7 @@
 "global.accountSettings" = "Налады ўліковых запісаў";
 "global.advancedSettings" = "Дасканалыя налады";
 "global.username" = "Назва карыстальніка";
+"global.recommended" = "Recommended";
 "global.password" = "Пароль";
 "global.registerAUsername" = "Запішыце імя карыстальніка";
 "global.enterPassword" = "Увядзіце пароль";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami - гэта бясплатная і універсальная платформа для зносін, якая захоўвае прыватнасць і свабоды карыстальнікаў";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "У мяне ўжо ёсць рахунак";
+"welcome.linkDevice" = "Імпарт з іншага прылады";
+"welcome.linkBackup" = "Імпарт з архіва рэзервовага капіявання";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Стварыце свой аватар";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Стварэнне вашага ўліку";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "Выберыце моцны пароль, які вы будзеце памятаць, каб абараніць свой рахунак Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Пацвердзіць пароль";
 "createAccount.passwordCharactersNumberError" = "Мінімум 6 знакаў";

@@ -22,6 +22,7 @@
 "global.accountSettings" = "Kontoindstillinger";
 "global.advancedSettings" = "Avancerede indstillinger";
 "global.username" = "Brugernavn";
+"global.recommended" = "Recommended";
 "global.password" = "Adgangskode";
 "global.registerAUsername" = "Registrér et brugernavn";
 "global.enterPassword" = "Indtast kodeord";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami er en gratis og universel kommunikationsplatform som respekterer sine brugeres privatliv og frihed";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Jeg har allerede en konto.";
+"welcome.linkDevice" = "Import fra et andet udstyr";
+"welcome.linkBackup" = "Import fra backup";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Lav din avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Opret din konto";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "Vælg et stærkt password, du vil huske for at beskytte din Jami-konto.";
 "createAccount.repeatPasswordPlaceholder" = "Bekræft adgangskode";
 "createAccount.passwordCharactersNumberError" = "Mindst 6 tegn";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Tilbagetræk enheden";
 "accountPage.revokeDeviceMessage" = "Er du sikker på du til fjerne adgangen for denne enheden? Denne handling kan ikke fortrydes.";
 "accountPage.revokeDeviceButton" = "Tilbagekald";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Indtast din adgangskode";
 "accountPage.deviceRevoked" = "Enheden har fået fjernet sin adgang";
 "accountPage.deviceRevocationProgress" = "Fjerner adgang...";
 "accountPage.deviceRevocationSuccess" = "Enhedens adgang blev fjernet";

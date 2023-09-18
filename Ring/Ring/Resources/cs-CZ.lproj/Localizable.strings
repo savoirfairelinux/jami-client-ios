@@ -22,6 +22,7 @@
 "global.accountSettings" = "Nastavení účtu";
 "global.advancedSettings" = "Pokročilá nastavení";
 "global.username" = "Uživatelské jméno";
+"global.recommended" = "Recommended";
 "global.password" = "Heslo";
 "global.registerAUsername" = "Zaregistrovat uživatelské jméno";
 "global.enterPassword" = "Zadejte heslo";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami je svobodný software a všeobecný dorozumívací systém, který zachovává soukromí a svobody uživatelů.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Už účet mám";
+"welcome.linkDevice" = "Import z jiného zařízení";
+"welcome.linkBackup" = "Importovat ze záložního archivu";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Vytvořit vlastního avatara";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Vytvořit vlastní účet";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "K ochraně účtu Jami si zvolte silné heslo, které si dovedete zapamatovat.";
 "createAccount.repeatPasswordPlaceholder" = "Potvrdit heslo";
 "createAccount.passwordCharactersNumberError" = "Nejméně 6 znaků";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Odebrat zařízení";
 "accountPage.revokeDeviceMessage" = "Opravdu chcete odebrat toto zařízení? Tento krok nelze vrátit zpět.";
 "accountPage.revokeDeviceButton" = "Odebrat";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Zadejte své heslo";
 "accountPage.deviceRevoked" = "Odebrání zařízení dokončeno";
 "accountPage.deviceRevocationProgress" = "Odebírá se...";
 "accountPage.deviceRevocationSuccess" = "Zařízení bylo odebráno!";
