@@ -112,7 +112,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private let backgrounTaskQueue = DispatchQueue(label: "backgrounTaskQueue")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
         // ignore sigpipe
         typealias SigHandler = @convention(c) (Int32) -> Void
         let SIG_IGN = unsafeBitCast(OpaquePointer(bitPattern: 1), to: SigHandler.self)
@@ -195,7 +194,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let path = self.certificatePath() {
             setenv("CA_ROOT_FILE", path, 1)
         }
-        os_log("&&&&&&&didFinishLaunchingWithOptions")
         return true
     }
 
@@ -621,42 +619,7 @@ extension AppDelegate {
                 dictionary[keyString] = valueString
             }
         }
-        let isResubscribe = dictionary["timeout"] != nil
-        guard let accountId = dictionary["to"] else {
-            completionHandler(.newData)
-            return
-        }
-        if UIApplication.shared.applicationState == .background {
-            if !isResubscribe {
-                completionHandler(.newData)
-                return
-            }
-            backgrounTaskQueue.async {[weak self] in
-                var taskId = UIBackgroundTaskIdentifier.invalid
-                taskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {
-                    if UIApplication.shared.applicationState == .background {
-                        self?.accountService.setAccountActive(active: false, accountId: accountId)
-                    }
-                    UIApplication.shared.endBackgroundTask(taskId)
-                })
-                self?.accountService.setAccountActive(active: true, accountId: accountId)
-                self?.accountService.pushNotificationReceived(data: dictionary)
-                sleep(5)
-                let group = DispatchGroup()
-                group.enter()
-                DispatchQueue.main.async { [weak self] in
-                    if UIApplication.shared.applicationState == .background {
-                        self?.accountService.setAccountActive(active: false, accountId: accountId)
-                    }
-                    group.leave()
-                }
-                group.wait()
-                UIApplication.shared.endBackgroundTask(taskId)
-                taskId = UIBackgroundTaskIdentifier.invalid
-            }
-        } else {
-            self.accountService.pushNotificationReceived(data: dictionary)
-        }
+        self.accountService.pushNotificationReceived(data: dictionary)
         completionHandler(.newData)
     }
 }
