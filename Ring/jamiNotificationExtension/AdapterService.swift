@@ -99,6 +99,14 @@ class AdapterService {
         start(accountId: accountId)
     }
 
+    func startAccount(accountId: String) {
+        start(accountId: accountId)
+    }
+
+    func pushNotificationReceived(accountId: String, data: [String: String]) {
+        self.adapter.pushNotificationReceived(accountId, message: data)
+    }
+
     func decrypt(keyPath: String, accountId: String, messagesPath: String, value: [String: Any]) -> PeerConnectionRequestType {
         let result = adapter.decrypt(keyPath, accountId: accountId, treated: messagesPath, value: value)
         guard let peerId = result?.keys.first,
