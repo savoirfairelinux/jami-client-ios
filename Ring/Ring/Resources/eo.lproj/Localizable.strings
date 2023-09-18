@@ -22,6 +22,7 @@
 "global.accountSettings" = "Konto-sekcioj";
 "global.advancedSettings" = "Antaŭaj agordoj";
 "global.username" = "Uzantnomo";
+"global.recommended" = "Recommended";
 "global.password" = "Pasvorto";
 "global.registerAUsername" = "Registru uzantnomon";
 "global.enterPassword" = "Entajpu Pasvorton";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami estas libera kaj universala komunikada platformo kiu konservas la privatecon kaj liberecojn de la uzantoj";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Mi jam havas konton.";
+"welcome.linkDevice" = "Importado de alia aparato";
+"welcome.linkBackup" = "Importado de arkiva kopiado";
+"welcome.createAccount" = "Kunigi";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Krei vian avataron";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Krei vian konton";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "Elektu fortan pasvorton, kiun vi memorigos por protekti vian konto Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Konfirmu pasvorton";
 "createAccount.passwordCharactersNumberError" = "6 signoj minimume";

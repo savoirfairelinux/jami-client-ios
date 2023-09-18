@@ -22,6 +22,7 @@
 "global.accountSettings" = "Настройки аккаунта";
 "global.advancedSettings" = "Расширенные настройки";
 "global.username" = "Имя пользователя";
+"global.recommended" = "Рекомендуется";
 "global.password" = "Пароль";
 "global.registerAUsername" = "Зарегистрировать имя пользователя";
 "global.enterPassword" = "Введите пароль";
@@ -115,23 +116,23 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami - это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "У меня уже есть аккаунт";
+"welcome.linkDevice" = "Импортировать с другого устройства";
+"welcome.linkBackup" = "Импортировать из резервной копии";
+"welcome.createAccount" = "Присоединиться";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустить";
 "createProfile.profileCreated" = "Далее";
-"createProfile.title" = "Personalize your profile";
+"createProfile.title" = "Персонализируйте свой профиль";
 "createProfile.enterNameLabel" = "Введите отображаемое имя";
 "createProfile.enterNamePlaceholder" = "Введите имя";
 "createProfile.subtitle" = "Ваш профиль будет доступен только вашим контактам. Вы можете изменить это в любое время.";
 "createProfile.createYourAvatar" = "Создайте свой аватар";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Создайте свой аккаунт";
+"createAccount.createAccountFormTitle" = "Присоединиться к Jami";
 "createAccount.chooseStrongPassword" = "Выберите надёжный пароль, который вы запомните, чтобы защитить ваш аккаунт Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Подтверждение пароля";
 "createAccount.passwordCharactersNumberError" = "Минимум 6 символов";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Отозвать устройство";
 "accountPage.revokeDeviceMessage" = "Ты уверен, что хотите отозвать это устройство? Это действие не может быть отменено.";
 "accountPage.revokeDeviceButton" = "Отвязать";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Введите ваш пароль";
 "accountPage.deviceRevoked" = "Отзыв устройства завершенно";
 "accountPage.deviceRevocationProgress" = "Отзыв…";
 "accountPage.deviceRevocationSuccess" = "Устройство было отозвано";
@@ -291,8 +292,8 @@
 "account.sipServer" = "Сервер SIP";
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
-"account.createSipAccount" = "Configure a SIP Account";
-"account.advancedFeatures" = "Advanced Features";
+"account.createSipAccount" = "Настроить SIP-аккаунт";
+"account.advancedFeatures" = "Дополнительные функции";
 "account.serverLabel" = "Введите адрес";
 "account.portLabel" = "Введите номер порта";
 "account.accountStatus" = "Статус аккаунта";
@@ -345,7 +346,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
+"generatedMessage.contactAdded" = "Вы получили приглашение";
 "generatedMessage.swarmCreated" = "Рой создан";
 "generatedMessage.invitationReceived" = "приглашали к участию";
 "generatedMessage.invitationAccepted" = "Присоединился к разговору";

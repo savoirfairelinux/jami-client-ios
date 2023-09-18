@@ -22,6 +22,7 @@
 "global.accountSettings" = "Налаштування облікового запису";
 "global.advancedSettings" = "Розширені налаштування";
 "global.username" = "Ім’я";
+"global.recommended" = "Рекомендовано";
 "global.password" = "Пароль";
 "global.registerAUsername" = "Зареєструйте ім'я користувача";
 "global.enterPassword" = "Введіть пароль";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Джамі — це вільна та універсальна платформа для зв'язку, яка оберігає приватність і свободи користувачів";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "У мене вже є рахунок.";
+"welcome.linkDevice" = "Імпорт з іншого пристрою";
+"welcome.linkBackup" = "Імпорт з архивного резервного копію";
+"welcome.createAccount" = "Приєднатися";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Створюйте свій аватар";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Створіть ваш обліковий запис";
+"createAccount.createAccountFormTitle" = "Приєднуйся до Jami";
 "createAccount.chooseStrongPassword" = "Оберіть сильний пароль, який ви запам'ятаєте, щоб захистити ваш обліковий запис Джамі.";
 "createAccount.repeatPasswordPlaceholder" = "Підтвердити пароль";
 "createAccount.passwordCharactersNumberError" = "мінімум 6 символів";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Відкликати пристрій";
 "accountPage.revokeDeviceMessage" = "Ви впевнені, що хочете скасувати цей пристрій?";
 "accountPage.revokeDeviceButton" = "Відкликати";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Введіть ваш пароль";
 "accountPage.deviceRevoked" = "Завершено скасування пристрою";
 "accountPage.deviceRevocationProgress" = "Відкликати...";
 "accountPage.deviceRevocationSuccess" = "Пристрій був відкликаний";

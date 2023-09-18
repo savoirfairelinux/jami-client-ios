@@ -22,6 +22,7 @@
 "global.accountSettings" = "Paskyros nustatymai";
 "global.advancedSettings" = "Išplėstiniai nustatymai";
 "global.username" = "Naudotojo vardas";
+"global.recommended" = "Rekomenduojama";
 "global.password" = "Slaptažodis";
 "global.registerAUsername" = "Užsiregistruokite naudotojo vardą";
 "global.enterPassword" = "Įveskite slaptažodį";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami yra laisva ir universali bendravimo platforma, kuri išsaugo naudotojo privatumą ir laisves.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Aš jau turiu paskyrą";
+"welcome.linkDevice" = "Importuoti iš kito įrenginio";
+"welcome.linkBackup" = "Importuoti iš atsarginio valiudo";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Susikurkite avatarą";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Susikurkite paskyrą";
+"createAccount.createAccountFormTitle" = "Prisijunkite prie Džami.";
 "createAccount.chooseStrongPassword" = "Pasirinkite stiprų slaptažodį, kurį prisiminsite, kad apsaugotumėte savo Jami paskyrą.";
 "createAccount.repeatPasswordPlaceholder" = "Patvirtinkite slaptažodį";
 "createAccount.passwordCharactersNumberError" = "Mažiausiai 6 simboliai";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Panaikinti įrenginį";
 "accountPage.revokeDeviceMessage" = "Ar tikrai norite panaikinti šį įrenginį? Šio veiksmo neįmanoma bus atšaukti.";
 "accountPage.revokeDeviceButton" = "Panaikinti";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Įveskite savo slaptažodį";
 "accountPage.deviceRevoked" = "Įrenginio panaikinimas užbaigtas";
 "accountPage.deviceRevocationProgress" = "Panaikinama...";
 "accountPage.deviceRevocationSuccess" = "Įrenginys buvo panaikintas";

@@ -22,6 +22,7 @@
 "global.accountSettings" = "ఖాతా సెట్టింగులు";
 "global.advancedSettings" = "అధునాతన సెట్టింగులు";
 "global.username" = "వాడుకరి పేరు";
+"global.recommended" = "సిఫార్సు";
 "global.password" = "పాస్వర్డ్";
 "global.registerAUsername" = "ఒక వినియోగదారు పేరును నమోదు చేయండి";
 "global.enterPassword" = "పాస్వర్డ్ను నమోదు చేయండి";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "జామి అనేది ఉచిత మరియు సార్వత్రిక కమ్యూనికేషన్ ప్లాట్ఫాం, ఇది వినియోగదారుల గోప్యత మరియు స్వేచ్ఛలను కాపాడుతుంది";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "నాకు ఇప్పటికే ఒక ఖాతా ఉంది";
+"welcome.linkDevice" = "మరొక పరికరము నుండి దిగుమతి";
+"welcome.linkBackup" = "ఆర్కైవ్ బ్యాకప్ నుండి దిగుమతి";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "మీ అవతార్ సృష్టించు";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "మీ ఖాతాను సృష్టించండి";
+"createAccount.createAccountFormTitle" = "జామితో చేరండి";
 "createAccount.chooseStrongPassword" = "మీ జమీ ఖాతాను రక్షించడానికి మీరు గుర్తుంచుకోగల బలమైన పాస్వర్డ్ను ఎంచుకోండి.";
 "createAccount.repeatPasswordPlaceholder" = "పాస్వర్డ్ను నిర్ధారించు";
 "createAccount.passwordCharactersNumberError" = "6 అక్షరాలు";

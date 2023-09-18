@@ -22,6 +22,7 @@
 "global.accountSettings" = "Settingar på konto";
 "global.advancedSettings" = "Forfråte innstillingar";
 "global.username" = "Bruksnamn";
+"global.recommended" = "Tilrådeleg";
 "global.password" = "Passord";
 "global.registerAUsername" = "Registrer ein brukernavn";
 "global.enterPassword" = "Skriv inn passord";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami er ein fri og universell kommunikasjonsplattform som behåller privatlivet og frita til brukarane.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Eg har allereie ein konto";
+"welcome.linkDevice" = "Import frå ein annan enhet";
+"welcome.linkBackup" = "Import frå backup";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Skapa din avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Skapa kontoen din";
+"createAccount.createAccountFormTitle" = "Kom til Jami";
 "createAccount.chooseStrongPassword" = "Velg eit sterkt passord du vil huske for å verne kontoen din.";
 "createAccount.repeatPasswordPlaceholder" = "Bekreft passord";
 "createAccount.passwordCharactersNumberError" = "Minst 6 teikn";

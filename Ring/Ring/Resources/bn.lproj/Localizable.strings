@@ -22,6 +22,7 @@
 "global.accountSettings" = "অ্যাকাউন্ট সেটিংস";
 "global.advancedSettings" = "উন্নত সেটিংস";
 "global.username" = "ব্যবহারকারীর নাম";
+"global.recommended" = "Recommended";
 "global.password" = "পাসওয়ার্ড";
 "global.registerAUsername" = "একটি ব্যবহারকারীর নাম নিবন্ধন করুন";
 "global.enterPassword" = "পাসওয়ার্ড লিখুন";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "জামি একটি মুক্ত ও সর্বজনীন যোগাযোগ প্ল্যাটফর্ম যা ব্যবহারকারীদের গোপনীয়তা ও স্বাধীনতা রক্ষা করে";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "আমার একটা একাউন্ট আছে";
+"welcome.linkDevice" = "অন্য ডিভাইস থেকে আমদানি";
+"welcome.linkBackup" = "সংরক্ষণাগার ব্যাকআপ থেকে আমদানি";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "আপনার অবতার তৈরি করুন";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "আপনার অ্যাকাউন্ট তৈরি করুন";
+"createAccount.createAccountFormTitle" = "Join Jami";
 "createAccount.chooseStrongPassword" = "আপনার জামি অ্যাকাউন্ট সুরক্ষিত রাখতে আপনি যে পাসওয়ার্ডটি মনে রাখবেন তা শক্তিশালী করুন।";
 "createAccount.repeatPasswordPlaceholder" = "পাসওয়ার্ড নিশ্চিত করুন";
 "createAccount.passwordCharactersNumberError" = "৬টি অক্ষর কমপক্ষে";

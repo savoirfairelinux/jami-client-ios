@@ -22,6 +22,7 @@
 "global.accountSettings" = "Постављања рачуна";
 "global.advancedSettings" = "Насочни настройки";
 "global.username" = "Korisničko ime";
+"global.recommended" = "Preporučeno";
 "global.password" = "Šifra";
 "global.registerAUsername" = "Регистрирајте корисничко име";
 "global.enterPassword" = "Уведите лозинку";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Џами је бесплатна и универзална комуникацијска платформа која чува приватност и слободе корисника";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Уже имам рачун.";
+"welcome.linkDevice" = "Увоз из другог уређаја";
+"welcome.linkBackup" = "Импорт из архивног резервног копија";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Стварите свој аватар";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Стварити свој рачун";
+"createAccount.createAccountFormTitle" = "Придружи се Џамију.";
 "createAccount.chooseStrongPassword" = "Изаберите јаку лозинку коју ћете се сетити да бисте заштитили свој рачун Џами.";
 "createAccount.repeatPasswordPlaceholder" = "Потврди лозинку";
 "createAccount.passwordCharactersNumberError" = "Minimalna dužina 6 karaktera";

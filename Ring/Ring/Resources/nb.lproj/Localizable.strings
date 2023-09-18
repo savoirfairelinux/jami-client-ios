@@ -22,6 +22,7 @@
 "global.accountSettings" = "Kontoinnstillinger";
 "global.advancedSettings" = "Innstillinger for viderekommende";
 "global.username" = "Brukernavn";
+"global.recommended" = "Anbefalt";
 "global.password" = "Passord";
 "global.registerAUsername" = "Registrer et brukernavn";
 "global.enterPassword" = "Tast inn passord";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami er en gratis og universell kommunikasjonsplattform som ivaretar brukernes personvern og friheter";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Jeg har allerede en konto";
+"welcome.linkDevice" = "Import fra en annen enhet";
+"welcome.linkBackup" = "Importer fra sikkerhetskopi";
+"welcome.createAccount" = "Bli med";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Opprett din avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Opprett din konto";
+"createAccount.createAccountFormTitle" = "Bli med Jami";
 "createAccount.chooseStrongPassword" = "Velg et sterkt passord du vil huske for å beskytte Jami-kontoen din.";
 "createAccount.repeatPasswordPlaceholder" = "Bekreft passord";
 "createAccount.passwordCharactersNumberError" = "minimum 6 tegn";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Tilbakekall enhet";
 "accountPage.revokeDeviceMessage" = "Er du sikker på at du vil tilbakekalle denne enheten? Denne handlingen kan ikke angres.";
 "accountPage.revokeDeviceButton" = "Tilbakekall";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Skriv inn ditt passord";
 "accountPage.deviceRevoked" = "Tilbakekallelse av enhet fullført";
 "accountPage.deviceRevocationProgress" = "Tilbakekaller...";
 "accountPage.deviceRevocationSuccess" = "Enhet ble tilbakekalt";

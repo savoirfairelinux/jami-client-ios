@@ -22,6 +22,7 @@
 "global.accountSettings" = "הגדרות החשבון";
 "global.advancedSettings" = "הגדרות מתקדמות";
 "global.username" = "שם משתמש";
+"global.recommended" = "מומלץ";
 "global.password" = "סיסמה";
 "global.registerAUsername" = "רשום שם משתמש";
 "global.enterPassword" = "הכניסה סיסמה";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "ג'אמי היא פלטפורמה חופשית ויקונביסלית לשיחה שמטרת הפרטיות והחופש של המשתמשים";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "יש לי חשבון.";
+"welcome.linkDevice" = "ייבוא ממכשיר אחר";
+"welcome.linkBackup" = "ייבוא מאחזת תיק";
+"welcome.createAccount" = "הצטרף";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "ליצור את האווטאר שלך";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "ליצור חשבון";
+"createAccount.createAccountFormTitle" = "הצטרף לג'מי.";
 "createAccount.chooseStrongPassword" = "בחרו סיסמה חזקה שתזכרי כדי להגן על חשבון ג'מי שלכם.";
 "createAccount.repeatPasswordPlaceholder" = "אישור סיסמה";
 "createAccount.passwordCharactersNumberError" = "6 אותיות לפחות";

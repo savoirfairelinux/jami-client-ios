@@ -22,6 +22,7 @@
 "global.accountSettings" = "帳號設定";
 "global.advancedSettings" = "進階設定";
 "global.username" = "使用者名稱";
+"global.recommended" = "建議";
 "global.password" = "密碼";
 "global.registerAUsername" = "註冊使用者名稱";
 "global.enterPassword" = "輸入密碼";
@@ -113,12 +114,12 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
+"welcome.title" = "使用 Jami 分享，自由、私密";
 "welcome.text" = "Jami 是一個自由且通用的通訊平臺，其尊重使用者的隱私與自由。";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "我已经有一个账户";
+"welcome.linkDevice" = "從其他裝置匯入";
+"welcome.linkBackup" = "從封存備份匯入";
+"welcome.createAccount" = "加入";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "建立您的大頭貼";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "建立您的帳號";
+"createAccount.createAccountFormTitle" = "加入 Jami";
 "createAccount.chooseStrongPassword" = "選擇您可以記住用來保護您的 Jami 帳號的強式密碼。";
 "createAccount.repeatPasswordPlaceholder" = "確認密碼";
 "createAccount.passwordCharactersNumberError" = "最小6個字元";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "撤銷裝置";
 "accountPage.revokeDeviceMessage" = "你想要撤銷此裝置嗎？這個動作無法復原。";
 "accountPage.revokeDeviceButton" = "撤銷";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "輸入你的密碼";
 "accountPage.deviceRevoked" = "裝置撤銷完成";
 "accountPage.deviceRevocationProgress" = "正在撤銷……";
 "accountPage.deviceRevocationSuccess" = "裝置已撤銷";

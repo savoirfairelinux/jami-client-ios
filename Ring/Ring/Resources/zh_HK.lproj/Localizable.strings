@@ -22,6 +22,7 @@
 "global.accountSettings" = "帳號設定";
 "global.advancedSettings" = "高级设置";
 "global.username" = "使用者名";
+"global.recommended" = "推荐";
 "global.password" = "密碼";
 "global.registerAUsername" = "註冊使用者名稱";
 "global.enterPassword" = "输入密码";
@@ -113,12 +114,12 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
+"welcome.title" = "使用 Jami 分享，自由、私密";
 "welcome.text" = "Jami 是一個自由且通用的通訊平臺，其尊重使用者的隱私與自由。";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "我已经有一个账户";
+"welcome.linkDevice" = "從其他裝置匯入";
+"welcome.linkBackup" = "从归档备份中导入";
+"welcome.createAccount" = "加入";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "创建您的头像";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "创建您的账户";
+"createAccount.createAccountFormTitle" = "加入 Jami";
 "createAccount.chooseStrongPassword" = "选择一个强密码并记住它来保护您的 Jami 账户。";
 "createAccount.repeatPasswordPlaceholder" = "确认密码";
 "createAccount.passwordCharactersNumberError" = "最少 6 字符";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "吊销设备";
 "accountPage.revokeDeviceMessage" = "您确定要吊销此设备吗？此操作不能撤销。";
 "accountPage.revokeDeviceButton" = "撤銷";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "輸入你的密碼";
 "accountPage.deviceRevoked" = "设备吊销完成";
 "accountPage.deviceRevocationProgress" = "吊销中...";
 "accountPage.deviceRevocationSuccess" = "设备已被吊销";

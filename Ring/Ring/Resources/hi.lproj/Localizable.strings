@@ -22,6 +22,7 @@
 "global.accountSettings" = "खाता सेटिंग";
 "global.advancedSettings" = "उन्नत सेटिंग";
 "global.username" = "उपयोगकर्ता नाम";
+"global.recommended" = "अनुशंसित";
 "global.password" = "पासवर्ड";
 "global.registerAUsername" = "एक उपयोगकर्ता नाम दर्ज करें";
 "global.enterPassword" = "पासवर्ड दर्ज करें";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "जामी एक मुक्त और सार्वभौमिक संचार मंच है जो उपयोगकर्ताओं की गोपनीयता और स्वतंत्रता को संरक्षित करता है";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "मेरे पास पहले से ही एक खाता है";
+"welcome.linkDevice" = "दूसरे उपकरण से आयात";
+"welcome.linkBackup" = "संग्रह बैकअप से आयात";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "अपना अवतार बनाएं";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "अपना खाता बनाएं";
+"createAccount.createAccountFormTitle" = "जामी में शामिल हों";
 "createAccount.chooseStrongPassword" = "अपने जेमी खाते की सुरक्षा के लिए एक मजबूत पासवर्ड चुनें।";
 "createAccount.repeatPasswordPlaceholder" = "पासवर्ड की पुष्टि करें";
 "createAccount.passwordCharactersNumberError" = "न्यूनतम 6 वर्ण";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "निरसन उपकरण";
 "accountPage.revokeDeviceMessage" = "क्या आप इस उपकरण को वापस लेना चाहते हैं?";
 "accountPage.revokeDeviceButton" = "निरस्त";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "अपना पासवर्ड दर्ज करें";
 "accountPage.deviceRevoked" = "डिवाइस निरस्त पूरा";
 "accountPage.deviceRevocationProgress" = "निरस्त...";
 "accountPage.deviceRevocationSuccess" = "डिवाइस को रद्द कर दिया गया था";

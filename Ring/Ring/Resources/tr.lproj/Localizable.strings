@@ -22,6 +22,7 @@
 "global.accountSettings" = "Hesap Ayarları";
 "global.advancedSettings" = "Gelişmiş Ayarlar";
 "global.username" = "Kullanıcı adı";
+"global.recommended" = "Önerilen";
 "global.password" = "Parola";
 "global.registerAUsername" = "Kullanıcı adı kaydet";
 "global.enterPassword" = "Parola Girin";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami, kullanıcılarının gizlilik ve özgürlüklerini sağlayan evrensel ve özgür platformdur.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "- Hesabım var.";
+"welcome.linkDevice" = "Başka bir cihazdan ithal";
+"welcome.linkBackup" = "Arşiv yedeklemesinden içe aktar";
+"welcome.createAccount" = "Katıl";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Avatarınızı oluşturun";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Hesabınızı oluşturun";
+"createAccount.createAccountFormTitle" = "Jami'ye katılın.";
 "createAccount.chooseStrongPassword" = "Jami hesabınızı korumak için anımsayacağınız güçlü parola seçin.";
 "createAccount.repeatPasswordPlaceholder" = "Parolayı onayla";
 "createAccount.passwordCharactersNumberError" = "En az 6 karakter";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Aygıtı kaldır";
 "accountPage.revokeDeviceMessage" = "Bu aygıtı kaldırmak istediğinize emin misiniz? Bu eylem geri alınamaz.";
 "accountPage.revokeDeviceButton" = "Kaldır";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Parolanızı girin";
 "accountPage.deviceRevoked" = "Aygıt iptali tamamlandı";
 "accountPage.deviceRevocationProgress" = "İptal ediliyor...";
 "accountPage.deviceRevocationSuccess" = "Aygıt kaldırıldı";

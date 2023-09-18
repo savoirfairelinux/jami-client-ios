@@ -22,6 +22,7 @@
 "global.accountSettings" = "Nastavenia účtu";
 "global.advancedSettings" = "Pokročilé nastavenia";
 "global.username" = "Používateľské meno";
+"global.recommended" = "Odporúčané";
 "global.password" = "Heslo";
 "global.registerAUsername" = "Registrovať používateľské meno";
 "global.enterPassword" = "Zadajte heslo";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami je slobodná a univerzálna komunikačná platforma, ktorá zachováva súkromie a slobodu používateľov.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Už mám účet.";
+"welcome.linkDevice" = "Import z iného zariadenia";
+"welcome.linkBackup" = "Importovať zo zálohovaného archívu";
+"welcome.createAccount" = "Pridať";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Vytvorte si avatara";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Vytvoriť váš účet";
+"createAccount.createAccountFormTitle" = "Pridajte sa k Jami";
 "createAccount.chooseStrongPassword" = "Zvoľte si silné heslo, ktoré si zapamätáte, na zabezpečenie vášho Jami účtu.";
 "createAccount.repeatPasswordPlaceholder" = "Potvrďte heslo";
 "createAccount.passwordCharactersNumberError" = "Minimálne 6 znakov";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Odobrať zariadenie";
 "accountPage.revokeDeviceMessage" = "Naozaj chcete odobrať toto zariadenie? Táto operácia sa nedá vrátiť.";
 "accountPage.revokeDeviceButton" = "Odobrať";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Zadajte vaše heslo";
 "accountPage.deviceRevoked" = "Odobratie zariadenia dokončené";
 "accountPage.deviceRevocationProgress" = "Odoberanie...";
 "accountPage.deviceRevocationSuccess" = "Zariadenie bolo odobrané";

@@ -22,6 +22,7 @@
 "global.accountSettings" = "Configurações da Conta";
 "global.advancedSettings" = "Configurações avançadas";
 "global.username" = "Nome de usuário";
+"global.recommended" = "Recomendado";
 "global.password" = "Senha";
 "global.registerAUsername" = "Registre um nome de usuário";
 "global.enterPassword" = "Digite a Senha";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami é uma plataforma de comunicação gratuita e universal que preserva a privacidade e liberdade dos usuários";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Já tenho uma conta.";
+"welcome.linkDevice" = "Importação a partir de outro dispositivo";
+"welcome.linkBackup" = "Importar de um arquivo de backup";
+"welcome.createAccount" = "Juntar-se";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Crie seu avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Criar uma conta";
+"createAccount.createAccountFormTitle" = "Junte-se a Jami";
 "createAccount.chooseStrongPassword" = "Escolha uma senha forte, da qual se lembrará, para proteger sua conta Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Confirmar senha";
 "createAccount.passwordCharactersNumberError" = "Pelo menos 6 caracteres";
@@ -244,7 +245,7 @@
 "accountPage.revokeDeviceTitle" = "Revogar dispositivo";
 "accountPage.revokeDeviceMessage" = "Tem certeza de que deseja remover este dispositivo? Esta ação não poderá ser desfeita.";
 "accountPage.revokeDeviceButton" = "Revogar";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Entre sua senha";
 "accountPage.deviceRevoked" = "Revogação de dispositivo completa";
 "accountPage.deviceRevocationProgress" = "Revogando...";
 "accountPage.deviceRevocationSuccess" = "Dispositivo foi revogado";

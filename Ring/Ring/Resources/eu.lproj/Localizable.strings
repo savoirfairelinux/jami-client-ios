@@ -22,6 +22,7 @@
 "global.accountSettings" = "Kontuaren ezarpenak";
 "global.advancedSettings" = "Jarriera aurreratuak";
 "global.username" = "Erabiltzaile-izena";
+"global.recommended" = "Recommended";
 "global.password" = "Pasahitza";
 "global.registerAUsername" = "Izen-abizena erregistratzea";
 "global.enterPassword" = "Sartu pasahitza";
@@ -115,10 +116,10 @@
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
 "welcome.text" = "Jami komunikazio plataforma librea eta unibertsala da, erabiltzaileen pribatutasuna eta askatasuna babesten dituena.";
-"welcome.haveAccount" = "I already have an account";
-"welcome.linkDevice" = "Import from another device";
-"welcome.linkBackup" = "Import from archive backup";
-"welcome.createAccount" = "Join Jami";
+"welcome.haveAccount" = "Kontu bat daukat.";
+"welcome.linkDevice" = "Beste gailu batetik inportatzea";
+"welcome.linkBackup" = "Inportatu babes-kopia artxibotik";
+"welcome.createAccount" = "Join";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -131,7 +132,7 @@
 "createProfile.createYourAvatar" = "Sortzen duzu zure avatarra";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Sortzeko zure kontua";
+"createAccount.createAccountFormTitle" = "Jar zaitez Jami-rekin.";
 "createAccount.chooseStrongPassword" = "Aukeratu pasahitz sendoa, eta gogoratu zure kontuak Jami-n babesteko.";
 "createAccount.repeatPasswordPlaceholder" = "Berretsi pasahitza";
 "createAccount.passwordCharactersNumberError" = "6 karaktere gutxienez";
