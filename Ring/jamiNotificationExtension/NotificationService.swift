@@ -111,11 +111,12 @@ class NotificationService: UNNotificationServiceExtension {
                     guard let jsonData = line.data(using: .utf8),
                           let map = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any],
                           let keyPath = self.getKeyPath(data: requestData),
-                          let treatedMessages = self.getTreatedMessagesPath(data: requestData) else {
+                          let treatedMessages = self.getTreatedMessagesPath(data: requestData),
+                          let treatedImMessages = self.getTreatedImMessagesPath(data: requestData) else {
                         self.verifyTasksStatus()
                         return
                     }
-                    let result = self.adapterService.decrypt(keyPath: keyPath.path, accountId: self.accountId, messagesPath: treatedMessages.path, value: map)
+                    let result = self.adapterService.decrypt(keyPath: keyPath.path, accountId: self.accountId, messagesPath: treatedMessages.path, value: map, treatedImMessagesPath: treatedImMessages.path)
                     let handleCall: (String, String) -> Void = { [weak self] (peerId, hasVideo) in
                         guard let self = self else {
                             return
@@ -473,6 +474,14 @@ extension NotificationService {
             return nil
         }
         return cachesPath.appendingPathComponent(accountId).appendingPathComponent("treatedMessages")
+    }
+
+    private func getTreatedImMessagesPath(data: [String: String]) -> URL? {
+        guard let cachesPath = Constants.cachesPath,
+              let accountId = data[NotificationField.accountId.rawValue] else {
+            return nil
+        }
+        return cachesPath.appendingPathComponent(accountId).appendingPathComponent("treatedImMessages")
     }
 
     private func getProxyCaches(data: [String: String]) -> URL? {

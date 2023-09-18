@@ -224,6 +224,7 @@ std::map<std::string, std::string> nameServers;
                                        accountId:(NSString*)accountId
                                        treated:(NSString*)treatedMessagesPath
                                          value:(NSDictionary*)value
+                                     treatedIm:(NSString*)treatedImMessagesPath
 {
     if (![[NSFileManager defaultManager] fileExistsAtPath:keyPath]) {
         return {};
@@ -259,7 +260,14 @@ std::map<std::string, std::string> nameServers;
             }
             return {};
         }
-        if (isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String])) {
+        if (peerCR.connType == "videoCall" || peerCR.connType == "audioCall") {
+            auto isTreated = isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String]) || isMessageTreated(peerCR.id, [treatedImMessagesPath UTF8String]);
+            NSLog(@"********* check if treated, %@, isTreated: %d", @(to_hex_string(peerCR.id).c_str()), isTreated);
+            if (isTreated) {
+                return {};
+            }
+        }
+        else if (isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String]) || isMessageTreated(peerCR.id, [treatedImMessagesPath UTF8String])) {
             return {};
         }
 
@@ -277,6 +285,12 @@ std::map<std::string, std::string> nameServers;
     } catch (std::runtime_error error) {
     }
     return {};
+}
+
+std::string
+to_hex_string(uint64_t id)
+{
+    return fmt::format("{:016x}", id);
 }
 
 -(NSString*)getNameFor:(NSString*)address accountId:(NSString*)accountId {
