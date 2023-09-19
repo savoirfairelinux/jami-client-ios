@@ -102,7 +102,7 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
             self.present(viewController: createAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: createAccountViewController.viewModel)
         case .createSipAccount:
             let sipAccountViewController = CreateSipAccountViewController.instantiate(with: self.injectionBag)
-            self.present(viewController: sipAccountViewController, withStyle: .show, withAnimation: true, withStateable: sipAccountViewController.viewModel)
+            self.present(viewController: sipAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: sipAccountViewController.viewModel)
         case .linkDevice:
             let linkDeviceViewController = LinkDeviceViewController.instantiate(with: self.injectionBag)
             self.present(viewController: linkDeviceViewController, withStyle: .show, withAnimation: true, withStateable: linkDeviceViewController.viewModel)
