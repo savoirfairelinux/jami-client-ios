@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b26a0ae_72f28d9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:15:37Z",
+      "side": 1,
+      "message": "View overlapped in landscape on iPhone. Loading view have extra space on top.",
+      "revId": "10ef0b9e88ed96fbcc0eae575679c2f9863a4325",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d03c1d71_16f9c103",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkToAccountManager/LinkToAccountManagerViewController.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:15:37Z",
+      "side": 1,
+      "message": "passwordTextField should have secure entry",
+      "revId": "10ef0b9e88ed96fbcc0eae575679c2f9863a4325",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c197f6d_650989fb",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkToAccountManager/LinkToAccountManagerViewController.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:15:37Z",
+      "side": 1,
+      "message": "we should keep keyboard and do not dismiss",
+      "revId": "10ef0b9e88ed96fbcc0eae575679c2f9863a4325",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dbdf2c6_0580b6c2",
+        "filename": "Ring/Ring/Features/Walkthrough/WalkthroughCoordinator.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:15:37Z",
+      "side": 1,
+      "message": "could we set backgroundColor directly in the view controller?",
+      "revId": "10ef0b9e88ed96fbcc0eae575679c2f9863a4325",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
