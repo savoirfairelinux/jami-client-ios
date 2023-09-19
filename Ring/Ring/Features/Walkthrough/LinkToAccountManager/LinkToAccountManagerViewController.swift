@@ -53,7 +53,6 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
         self.view.backgroundColor = .clear
         self.userNameTextField.becomeFirstResponder()
         signInButton.titleLabel?.ajustToTextSize()
-        configureWalkrhroughNavigationBar()
 
         self.adaptToWelcomeFormKeyboardState(for: self.scrollView, with: self.disposeBag)
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
