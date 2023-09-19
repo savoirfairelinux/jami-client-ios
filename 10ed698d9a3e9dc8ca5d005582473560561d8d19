@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34a5ad3d_164f367d",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateSipAccount/CreateSipAccountViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:48:51Z",
+      "side": 1,
+      "message": "username and password fields are centred differently than address and port fields.",
+      "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f776e6_25a1d920",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateSipAccount/CreateSipAccountViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:48:51Z",
+      "side": 1,
+      "message": "serverTextField is inaccessible in landscape on iPhone.",
+      "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32c4587a_e9b128b5",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateSipAccount/CreateSipAccountViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:48:51Z",
+      "side": 1,
+      "message": "we do not have port when configuring sIP account on qt-client. To confirm if we need it",
+      "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0f28e05_382e843c",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateSipAccount/CreateSipAccountViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:48:51Z",
+      "side": 1,
+      "message": "do not need dismissKeyboard",
+      "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ac23b62_fa6f84ca",
+        "filename": "Ring/Ring/Features/Walkthrough/WalkthroughCoordinator.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:48:51Z",
+      "side": 1,
+      "message": "configure in view controller",
+      "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
