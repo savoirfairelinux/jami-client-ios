@@ -349,16 +349,12 @@ class AccountsService: AccountAdapterDelegate {
 
     func addSipAccount(userName: String,
                        password: String,
-                       sipServer: String,
-                       port: String) -> Bool {
+                       sipServer: String) -> Bool {
         do {
             var accountDetails = try self.getInitialAccountDetails(accountType: AccountType.sip.rawValue)
             accountDetails.updateValue(userName, forKey: ConfigKey.accountUsername.rawValue)
             accountDetails.updateValue(sipServer, forKey: ConfigKey.accountHostname.rawValue)
             accountDetails.updateValue(password, forKey: ConfigKey.accountPassword.rawValue)
-            if !port.isEmpty {
-                accountDetails.updateValue(port, forKey: ConfigKey.localPort.rawValue)
-            }
             guard let account = self.accountAdapter.addAccount(accountDetails) else { return false }
             _ = try self.dbManager.createDatabaseForAccount(accountId: account, createFolder: true)
             self.loadAccountsFromDaemon()

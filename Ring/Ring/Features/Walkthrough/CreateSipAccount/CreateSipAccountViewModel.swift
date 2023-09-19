@@ -31,7 +31,6 @@ class CreateSipAccountViewModel: Stateable, ViewModel {
     var userName = BehaviorRelay<String>(value: "")
     var password = BehaviorRelay<String>(value: "")
     var sipServer = BehaviorRelay<String>(value: "")
-    var port = BehaviorRelay<String>(value: "")
     private let accountsService: AccountsService
 
     required init(with injectionBag: InjectionBag) {
@@ -41,8 +40,7 @@ class CreateSipAccountViewModel: Stateable, ViewModel {
     func createSipaccount() {
         let created = self.accountsService.addSipAccount(userName: userName.value,
                                                          password: password.value,
-                                                         sipServer: sipServer.value,
-                                                         port: port.value)
+                                                         sipServer: sipServer.value)
         if created {
             DispatchQueue.main.async {
                 self.stateSubject.onNext(WalkthroughState.accountCreated)
