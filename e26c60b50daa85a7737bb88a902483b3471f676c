@@ -33,6 +33,24 @@
       "message": "conversationViewModels does not need to be class member. It is only used inside conversations, so it could be created there",
       "revId": "e26c60b50daa85a7737bb88a902483b3471f676c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "519d80ed_a6957da1",
+        "filename": "Ring/Ring/Calls/Conference/ContactPickerViewModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-19T14:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c52ff2c9_14c07bdf",
+      "revId": "e26c60b50daa85a7737bb88a902483b3471f676c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
