@@ -15,6 +15,8 @@ internal enum L10n {
     internal static let accountStatus = L10n.tr("Localizable", "account.accountStatus", fallback: "Account Status")
     /// Advanced Features
     internal static let advancedFeatures = L10n.tr("Localizable", "account.advancedFeatures", fallback: "Advanced Features")
+    /// Configure
+    internal static let configure = L10n.tr("Localizable", "account.configure", fallback: "Configure")
     /// Configure a SIP Account
     internal static let createSipAccount = L10n.tr("Localizable", "account.createSipAccount", fallback: "Configure a SIP Account")
     /// Enable Account
@@ -31,6 +33,8 @@ internal enum L10n {
     internal static let proxyServer = L10n.tr("Localizable", "account.proxyServer", fallback: "Proxy")
     /// Enter Address
     internal static let serverLabel = L10n.tr("Localizable", "account.serverLabel", fallback: "Enter Address")
+    /// SIP Account
+    internal static let sipAccount = L10n.tr("Localizable", "account.sipAccount", fallback: "SIP Account")
     /// SIP Server
     internal static let sipServer = L10n.tr("Localizable", "account.sipServer", fallback: "SIP Server")
     /// User Name
