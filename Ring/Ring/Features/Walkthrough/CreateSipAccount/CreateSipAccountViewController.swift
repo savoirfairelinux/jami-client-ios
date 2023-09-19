@@ -25,49 +25,50 @@ import RxSwift
 class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewModelBased {
     var viewModel: CreateSipAccountViewModel!
 
-    @IBOutlet weak var createAccountButton: DesignableButton!
-    @IBOutlet weak var passwordTextField: DesignableTextField!
-    @IBOutlet weak var userNameTextField: DesignableTextField!
-    @IBOutlet weak var serverTextField: DesignableTextField!
-    @IBOutlet weak var portTextField: DesignableTextField!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var cancelButton: DesignableButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var createAccountButton: DesignableButton!
+    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var serverTextField: UITextField!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var serverLabel: UILabel!
-    @IBOutlet weak var portLabel: UILabel!
-    @IBOutlet weak var backgroundView: UIView!
 
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var isKeyboardOpened: Bool = false
     var disposeBag = DisposeBag()
+    weak var containerViewHeightConstraint: NSLayoutConstraint?
+    let formHeight: CGFloat = 258
 
     override func viewDidLoad() {
         self.applyL10n()
         super.viewDidLoad()
+        setupUI()
         self.buindViewToViewModel()
-        self.configureWalkrhroughNavigationBar()
         self.userNameTextField.becomeFirstResponder()
         self.configurePasswordField()
-        self.createAccountButton.applyGradient(with: [UIColor.jamiButtonLight, UIColor.jamiButtonDark], gradient: .horizontal)
         createAccountButton.titleLabel?.ajustToTextSize()
-        // handle keyboard
-        self.adaptToKeyboardState(for: self.scrollView, with: self.disposeBag)
-        keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        NotificationCenter.default.rx
-            .notification(UIDevice.orientationDidChangeNotification)
+        adaptToSystemColor()
+
+        self.adaptToWelcomeFormKeyboardState(for: self.scrollView, with: self.disposeBag)
+        NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_) in
                 guard UIDevice.current.portraitOrLandscape else { return }
-                self?.createAccountButton.updateGradientFrame()
-                self?.configureWalkrhroughNavigationBar()
+                self?.setupUI()
             })
             .disposed(by: self.disposeBag)
-        adaptToSystemColor()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(withNotification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setupUI()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,60 +77,97 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
     }
 
     func adaptToSystemColor() {
-        view.backgroundColor = UIColor.jamiBackgroundColor
-        backgroundView.backgroundColor = UIColor.jamiBackgroundColor
-        scrollView.backgroundColor = UIColor.jamiBackgroundColor
+        view.backgroundColor = .clear
         userNameLabel.textColor = UIColor.jamiTextSecondary
         passwordLabel.textColor = UIColor.jamiTextSecondary
         serverLabel.textColor = UIColor.jamiTextSecondary
-        portLabel.textColor = UIColor.jamiTextSecondary
-        userNameTextField.backgroundColor = UIColor.jamiBackgroundColor
-        passwordTextField.backgroundColor = UIColor.jamiBackgroundColor
-        serverTextField.backgroundColor = UIColor.jamiBackgroundColor
-        portTextField.backgroundColor = UIColor.jamiBackgroundColor
-        userNameTextField.borderColor = UIColor.jamiTextBlue
-        passwordTextField.borderColor = UIColor.jamiTextBlue
-        serverTextField.borderColor = UIColor.jamiTextBlue
-        portTextField.borderColor = UIColor.jamiTextBlue
+        userNameTextField.tintColor = UIColor.jamiSecondary
+        passwordTextField.tintColor = UIColor.jamiSecondary
+        serverTextField.tintColor = UIColor.jamiSecondary
+        createAccountButton.tintColor = .jamiButtonDark
+    }
+
+    func setContentInset(keyboardHeight: CGFloat = 0) {
+        self.containerViewBottomConstraint.constant = keyboardHeight
     }
 
     @objc
-    func dismissKeyboard() {
-        self.isKeyboardOpened = false
-        view.endEditing(true)
-        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
-    }
-
-    @objc
-    func keyboardWillAppear(withNotification: NSNotification) {
+    func keyboardWillAppear(withNotification notification: NSNotification) {
         self.isKeyboardOpened = true
-        self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
+
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+           ScreenHelper.welcomeFormPresentationStyle() != .fullScreen {
+            let keyboardHeight = keyboardFrame.size.height
+            self.setContentInset(keyboardHeight: keyboardHeight)
+        }
+    }
+
+    @objc
+    func keyboardWillDisappear(withNotification: NSNotification) {
+        self.setContentInset()
+    }
+
+    func setupUI() {
+        let welcomeFormPresentationStyle = ScreenHelper.welcomeFormPresentationStyle()
+        if welcomeFormPresentationStyle == .fullScreen {
+            contentView.removeCorners()
+            view.backgroundColor = .secondarySystemBackground
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                self?.contentView.roundTopCorners(radius: 12)
+            }
+            view.backgroundColor = .clear
+        }
+
+        DispatchQueue.main.async { [weak self] in
+            self?.setupConstraint()
+            self?.view.setNeedsLayout()
+            self?.view.layoutIfNeeded()
+        }
+    }
+
+    func setupConstraint() {
+        // Remove the existing top constraint (if it exists)
+        containerViewHeightConstraint?.isActive = false
+        containerViewHeightConstraint = nil
+
+        // Create a new constraint with the desired relationship
+        let newConstraint: NSLayoutConstraint
+        if ScreenHelper.welcomeFormPresentationStyle() == .fullScreen || UIDevice.current.userInterfaceIdiom == .pad {
+            newConstraint = contentView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.height)
+        } else {
+            newConstraint = contentView.heightAnchor.constraint(equalToConstant: formHeight)
+        }
+
+        // Activate the constraint
+        newConstraint.isActive = true
+
+        // Assign it to the property for later reference
+        containerViewHeightConstraint = newConstraint
     }
 
     func configurePasswordField() {
+        passwordTextField.isSecureTextEntry = true
         let isSecureTextEntry = PublishSubject<Bool>()
         let rightButton = UIButton(type: .custom)
         rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         rightButton.setImage(UIImage(asset: Asset.icHideInput), for: .normal)
         passwordTextField.rx.text.orEmpty.distinctUntilChanged()
-            .bind { text in
-                rightButton.isHidden = text.isEmpty
-                rightButton.isEnabled = !text.isEmpty
+            .bind { [weak rightButton] text in
+                rightButton?.isHidden = text.isEmpty
+                rightButton?.isEnabled = !text.isEmpty
             }
             .disposed(by: self.disposeBag)
         passwordTextField.rightViewMode = .always
         let rightView = UIView(frame: CGRect( x: 0, y: 0, width: 50, height: 30))
         rightView.addSubview(rightButton)
         passwordTextField.rightView = rightView
-        passwordTextField.leftViewMode = .always
-        let leftView = UIView(frame: CGRect( x: 0, y: 0, width: 50, height: 30))
-        rightButton.tintColor = UIColor.darkGray
-        passwordTextField.leftView = leftView
         rightButton.rx.tap
-            .subscribe(onNext: { [weak self, isSecureTextEntry] _ in
+            .subscribe(onNext: { [weak self, weak isSecureTextEntry] _ in
                 guard let self = self else { return }
                 self.passwordTextField.isSecureTextEntry.toggle()
-                isSecureTextEntry
+                isSecureTextEntry?
                     .onNext(self.passwordTextField.isSecureTextEntry)
             })
             .disposed(by: self.disposeBag)
@@ -155,9 +193,6 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
             .disposed(by: self.disposeBag)
         self.passwordTextField.rx.text.orEmpty.bind(to: self.viewModel.password).disposed(by: self.disposeBag)
         self.serverTextField.rx.text.orEmpty.bind(to: self.viewModel.sipServer).disposed(by: self.disposeBag)
-        self.portTextField.rx.text.orEmpty
-            .bind(to: self.viewModel.port)
-            .disposed(by: self.disposeBag)
         self.createAccountButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
@@ -166,19 +201,22 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
                 }
             })
             .disposed(by: self.disposeBag)
+        self.cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.dismiss(animated: true)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func applyL10n() {
-        self.createAccountButton
-            .setTitle(L10n.Account.createSipAccount, for: .normal)
-        self.navigationItem.title = L10n.Account.createSipAccount
+        self.createAccountButton.setTitle(L10n.Account.configure, for: .normal)
+        titleLabel.text = L10n.Account.sipAccount
         self.userNameLabel.text = L10n.Global.enterUsername
         self.passwordLabel.text = L10n.Global.enterPassword
         self.serverLabel.text = L10n.Account.serverLabel
-        self.portLabel.text = L10n.Account.portLabel
         self.passwordTextField.placeholder = L10n.Global.password
         self.userNameTextField.placeholder = L10n.Account.sipUsername
         self.serverTextField.placeholder = L10n.Account.sipServer
-        self.portTextField.placeholder = L10n.Account.port
     }
 }
