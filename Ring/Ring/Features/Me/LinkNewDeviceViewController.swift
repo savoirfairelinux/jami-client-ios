@@ -43,8 +43,8 @@ class LinkNewDeviceViewController: UIViewController, StoryboardBased, ViewModelB
                     self?.hideHud()
                     self?.showSuccessAlert(pin: pin)
                 case .error(let pinError):
-                    self?.showErrorAlert(error: pinError.description)
                     self?.hideHud()
+                    self?.showErrorAlert(error: pinError.description)
                 default:
                     break
                 }
