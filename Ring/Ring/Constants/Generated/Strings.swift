@@ -15,8 +15,10 @@ internal enum L10n {
     internal static let accountStatus = L10n.tr("Localizable", "account.accountStatus", fallback: "Account Status")
     /// Advanced Features
     internal static let advancedFeatures = L10n.tr("Localizable", "account.advancedFeatures", fallback: "Advanced Features")
-    /// Configure a SIP Account
-    internal static let createSipAccount = L10n.tr("Localizable", "account.createSipAccount", fallback: "Configure a SIP Account")
+    /// Configure
+    internal static let configure = L10n.tr("Localizable", "account.configure", fallback: "Configure")
+    /// SIP Account
+    internal static let createSipAccount = L10n.tr("Localizable", "account.createSipAccount", fallback: "SIP Account")
     /// Enable Account
     internal static let enableAccount = L10n.tr("Localizable", "account.enableAccount", fallback: "Enable Account")
     /// Me
