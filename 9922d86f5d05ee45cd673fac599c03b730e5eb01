@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502bb021_9ead4ec9",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:35:44Z",
+      "side": 1,
+      "message": "password should have secure entry",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf18334c_6b34d84e",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:35:44Z",
+      "side": 1,
+      "message": "To check with Charlotte if we need to provide information about PIN",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6271b470_cd11ec87",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:35:44Z",
+      "side": 1,
+      "message": "when error happens (for example wrong pin or password) state stayed in \"Loading\"",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7634a000_e6ababf9",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:35:44Z",
+      "side": 1,
+      "message": "when linkButton is disabled it should have different color",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3de64761_ed4e7224",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:35:44Z",
+      "side": 1,
+      "message": "there are now some unused properties in view model that could be removed. For example notificationSwitch",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95d592d_7d992200",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:35:44Z",
+      "side": 1,
+      "message": "we do not need dismissKeyboard",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9c48165_4ca06a52",
+        "filename": "Ring/Ring/Features/Walkthrough/WalkthroughCoordinator.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-09-19T18:35:44Z",
+      "side": 1,
+      "message": "set backgroundColor in the view controller.",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
