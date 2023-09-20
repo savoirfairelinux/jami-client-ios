@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fee2e66f_48ff860e",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateSipAccount/CreateSipAccountViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T16:35:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34a5ad3d_164f367d",
+      "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5f776e6_25a1d920",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-19T18:48:51Z",
       "side": 1,
       "message": "serverTextField is inaccessible in landscape on iPhone.",
+      "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7295dc2b_c14f735e",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateSipAccount/CreateSipAccountViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T16:35:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5f776e6_25a1d920",
       "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49306537_ccf9dc0d",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateSipAccount/CreateSipAccountViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T16:35:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32c4587a_e9b128b5",
+      "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0f28e05_382e843c",
@@ -69,6 +123,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "733a1b38_979288ea",
+        "filename": "Ring/Ring/Features/Walkthrough/CreateSipAccount/CreateSipAccountViewController.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T16:35:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0f28e05_382e843c",
+      "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ac23b62_fa6f84ca",
@@ -82,6 +154,24 @@
       "writtenOn": "2023-09-19T18:48:51Z",
       "side": 1,
       "message": "configure in view controller",
+      "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a754dcb_40a0f9cc",
+        "filename": "Ring/Ring/Features/Walkthrough/WalkthroughCoordinator.swift",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T16:35:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ac23b62_fa6f84ca",
       "revId": "10ed698d9a3e9dc8ca5d005582473560561d8d19",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
