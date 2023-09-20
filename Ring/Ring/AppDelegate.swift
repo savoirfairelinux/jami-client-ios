@@ -621,43 +621,7 @@ extension AppDelegate {
                 dictionary[keyString] = valueString
             }
         }
-        let isResubscribe = dictionary["timeout"] != nil
-        guard let accountId = dictionary["to"] else {
-            completionHandler(.newData)
-            return
-        }
-        if UIApplication.shared.applicationState == .background {
-            if !isResubscribe {
-                completionHandler(.newData)
-                return
-            }
-            // Keep it for backward compatibility for now. Once OpenDHT is updated, resubscription will be managed in the notification extension.
-            backgrounTaskQueue.async {[weak self] in
-                var taskId = UIBackgroundTaskIdentifier.invalid
-                taskId = UIApplication.shared.beginBackgroundTask(expirationHandler: {
-                    if UIApplication.shared.applicationState == .background {
-                        self?.accountService.setAccountActive(active: false, accountId: accountId)
-                    }
-                    UIApplication.shared.endBackgroundTask(taskId)
-                })
-                self?.accountService.setAccountActive(active: true, accountId: accountId)
-                self?.accountService.pushNotificationReceived(data: dictionary)
-                sleep(5)
-                let group = DispatchGroup()
-                group.enter()
-                DispatchQueue.main.async { [weak self] in
-                    if UIApplication.shared.applicationState == .background {
-                        self?.accountService.setAccountActive(active: false, accountId: accountId)
-                    }
-                    group.leave()
-                }
-                group.wait()
-                UIApplication.shared.endBackgroundTask(taskId)
-                taskId = UIBackgroundTaskIdentifier.invalid
-            }
-        } else {
-            self.accountService.pushNotificationReceived(data: dictionary)
-        }
+        self.accountService.pushNotificationReceived(data: dictionary)
         completionHandler(.newData)
     }
 }
