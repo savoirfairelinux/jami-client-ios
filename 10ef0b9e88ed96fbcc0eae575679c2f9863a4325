@@ -35,6 +35,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa2af8ca_40e06099",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkToAccountManager/LinkToAccountManagerViewController.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T16:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d03c1d71_16f9c103",
+      "revId": "10ef0b9e88ed96fbcc0eae575679c2f9863a4325",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c197f6d_650989fb",
@@ -52,6 +70,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18607cde_f090c118",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkToAccountManager/LinkToAccountManagerViewController.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T16:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c197f6d_650989fb",
+      "revId": "10ef0b9e88ed96fbcc0eae575679c2f9863a4325",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dbdf2c6_0580b6c2",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-09-19T18:15:37Z",
       "side": 1,
       "message": "could we set backgroundColor directly in the view controller?",
+      "revId": "10ef0b9e88ed96fbcc0eae575679c2f9863a4325",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c02d91_d36a6989",
+        "filename": "Ring/Ring/Features/Walkthrough/WalkthroughCoordinator.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T16:17:52Z",
+      "side": 1,
+      "message": "I did this.",
+      "parentUuid": "7dbdf2c6_0580b6c2",
       "revId": "10ef0b9e88ed96fbcc0eae575679c2f9863a4325",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
