@@ -59,6 +59,11 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         }
         for button in [joinJamiButton, linkAccountButton, importDeviceButton, importBackupButton, advancedFeaturesButton, connectJamiAcountManagerButton, configureSIPButton] {
             button?.titleLabel?.ajustToTextSize()
+
+            // Set left and right padding
+            let leftPadding: CGFloat = 5
+            let rightPadding: CGFloat = 5
+            button?.contentEdgeInsets = UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right: rightPadding)
         }
         self.joinJamiButton.backgroundColor = .jamiButtonDark
         self.linkAccountButton.backgroundColor = .jamiButtonDark
