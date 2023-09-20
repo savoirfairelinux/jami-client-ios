@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5542bf1_c656faf9",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T17:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "502bb021_9ead4ec9",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf18334c_6b34d84e",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-19T18:35:44Z",
       "side": 1,
       "message": "To check with Charlotte if we need to provide information about PIN",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e2f2cc4_f7c73d14",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T17:09:57Z",
+      "side": 1,
+      "message": "They will give a new design for this info I will do it anytime they provide the new design",
+      "parentUuid": "bf18334c_6b34d84e",
       "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20a54a65_5198ba85",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T17:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6271b470_cd11ec87",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7634a000_e6ababf9",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-09-19T18:35:44Z",
       "side": 1,
       "message": "when linkButton is disabled it should have different color",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ee0fe1a_7e7f6acd",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T17:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7634a000_e6ababf9",
       "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -86,6 +158,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45376e54_6742eef6",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T17:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3de64761_ed4e7224",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e95d592d_7d992200",
@@ -103,6 +193,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df1ac7e_b1f25041",
+        "filename": "Ring/Ring/Features/Walkthrough/LinkDevice/LinkDeviceViewController.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T17:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e95d592d_7d992200",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9c48165_4ca06a52",
@@ -116,6 +224,24 @@
       "writtenOn": "2023-09-19T18:35:44Z",
       "side": 1,
       "message": "set backgroundColor in the view controller.",
+      "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed32467e_54eab5bd",
+        "filename": "Ring/Ring/Features/Walkthrough/WalkthroughCoordinator.swift",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-09-20T17:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9c48165_4ca06a52",
       "revId": "9922d86f5d05ee45cd673fac599c03b730e5eb01",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
