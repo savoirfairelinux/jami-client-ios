@@ -117,7 +117,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     func adaptToSystemColor() {
-        view.backgroundColor = UIColor.jamiBackgroundColor
+        view.backgroundColor = .clear
     }
 
     func setContentInset(keyboardHeight: CGFloat = 0) {

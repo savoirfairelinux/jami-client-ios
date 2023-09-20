@@ -98,7 +98,6 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
         switch walkthroughType {
         case .createAccount:
             let createAccountViewController = CreateAccountViewController.instantiate(with: self.injectionBag)
-            createAccountViewController.view.backgroundColor = .clear
             self.present(viewController: createAccountViewController, withStyle: .formModal, withAnimation: true, withStateable: createAccountViewController.viewModel)
         case .createSipAccount:
             let sipAccountViewController = CreateSipAccountViewController.instantiate(with: self.injectionBag)
