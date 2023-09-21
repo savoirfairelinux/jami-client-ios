@@ -704,7 +704,7 @@ extension SmartlistViewController: CNContactPickerDelegate {
 // MARK: - menu
 extension SmartlistViewController {
     private func createMenu() -> UIMenu {
-        return UIMenu(title: "", children: [createSwarmAction(), inviteFriendsAction(), accountsAction(), openAccountAction(), openSettingsAction(), aboutJamiAction()])
+        return UIMenu(title: "", children: [createSwarmAction(), inviteFriendsAction(), accountsAction(), openAccountAction(), openSettingsAction(), donateAction(), aboutJamiAction()])
     }
 
     private func createTintedImage(systemName: String, configuration: UIImage.SymbolConfiguration, tintColor: UIColor) -> UIImage? {
@@ -729,6 +729,13 @@ extension SmartlistViewController {
         let image = createTintedImage(systemName: "envelope.open", configuration: configuration, tintColor: .jamiButtonDark)
         return UIAction(title: L10n.Smartlist.inviteFriends, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
             self?.shareAccountInfo()
+        }
+    }
+
+    private func donateAction() -> UIAction {
+        let image = createTintedImage(systemName: "heart", configuration: configuration, tintColor: .jamiDonation)
+        return UIAction(title: L10n.Global.donate, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { _ in
+            SharedActionsPresenter.openDonationLink()
         }
     }
 
