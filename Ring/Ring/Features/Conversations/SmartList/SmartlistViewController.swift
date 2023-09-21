@@ -78,7 +78,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     let margin: CGFloat = 10
     let size: CGFloat = 32
     let triangleViewSize: CGFloat = 12
-    var menu = UIView()
 
     var contactRequestVC: ContactRequestsViewController?
 
@@ -129,9 +128,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 let messages: Int = Int(self.conversationBadge.title(for: .normal) ?? "0") ?? 0
                 let requests: Int = Int(self.requestsBadge.title(for: .normal) ?? "0") ?? 0
                 self.setUpSegmemtControl(messages: messages, requests: requests)
-                if self.menu.superview != nil {
-                    self.showContextualMenu()
-                }
                 self.searchController.sizeChanged(to: size.width, totalItems: 2.0)
             }
         }
@@ -175,7 +171,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     @objc
     func dismissKeyboard() {
-        menu.removeFromSuperview()
         accountPickerTextView.resignFirstResponder()
         view.removeGestureRecognizer(accountsDismissTapRecognizer)
     }
@@ -308,29 +303,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 }
             })
             .disposed(by: self.disposeBag)
-
-        let imageSettings = UIImage(asset: Asset.moreSettings) as UIImage?
-        let generalSettingsButton = UIButton(type: UIButton.ButtonType.system) as UIButton
-        generalSettingsButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-        generalSettingsButton.borderWidth = 2
-        generalSettingsButton.borderColor = UIColor.jamiMain
-        generalSettingsButton.setImage(imageSettings, for: .normal)
-        generalSettingsButton.contentMode = .scaleAspectFill
-        let settingsButtonItem = UIBarButtonItem(customView: generalSettingsButton)
-        generalSettingsButton.cornerRadius = 17.5
-        generalSettingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        generalSettingsButton.setBorderPadding(left: 5, right: 5, top: 5, bottom: 5)
-        generalSettingsButton.layoutIfNeeded()
-        generalSettingsButton.layer.masksToBounds = false
-        generalSettingsButton.rx.tap.throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                if self?.menu.superview == nil {
-                    self?.showContextualMenu()
-                } else {
-                    self?.menu.removeFromSuperview()
-                }
-            })
-            .disposed(by: self.disposeBag)
         self.viewModel.currentAccountChanged
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] currentAccount in
@@ -341,8 +313,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 }
             })
             .disposed(by: disposeBag)
-
-        self.navigationItem.rightBarButtonItem = settingsButtonItem
         // create accounts button
         let accountButton = UIButton(type: .custom)
         self.viewModel.profileImage.bind(to: accountButton.rx.image(for: .normal))
@@ -419,6 +389,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             })
             .disposed(by: self.disposeBag)
         self.navigationItem.leftBarButtonItem = accountButtonItem
+        self.navigationItem.rightBarButtonItem = createMenuButton()
 
         dialpadButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -428,109 +399,40 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.conversationsTableView.tableFooterView = UIView()
     }
 
-    func showContextualMenu() {
-        self.menu.removeFromSuperview()
-        self.view.addGestureRecognizer(accountsDismissTapRecognizer)
-        guard let frame = self.navigationController?.navigationBar.frame else { return }
-        let originY = frame.size.height
-        let originX = frame.size.width - 120
-        let marginX: CGFloat = 20
-        let itemHeight: CGFloat = 50
-        menu = UIView(frame: CGRect(x: originX, y: originY, width: 100, height: itemHeight * 3))
-        menu.roundedCorners = true
-        menu.cornerRadius = 15
-        // labels
-        let accountSettings = UILabel(frame: CGRect(x: marginX, y: 15, width: 100, height: itemHeight))
-        accountSettings.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        accountSettings.text = L10n.Global.accountSettings
-        accountSettings.sizeToFit()
-        let advancedSettings = UILabel(frame: CGRect(x: marginX, y: 15, width: 100, height: itemHeight))
-        advancedSettings.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        advancedSettings.text = L10n.Global.advancedSettings
-        advancedSettings.sizeToFit()
-        let about = UILabel(frame: CGRect(x: marginX, y: 15, width: 100, height: itemHeight))
-        about.text = L10n.Smartlist.aboutJami
-        about.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        about.sizeToFit()
-        // calculate menu size to fit labels text
-        let maxWidth = max(max(accountSettings.frame.size.width, advancedSettings.frame.size.width), about.frame.size.width)
-        let viewWidth = maxWidth + marginX * 3 + 25
-        let buttonOrigin = maxWidth + marginX * 2
+    func createMenuButton() -> UIBarButtonItem {
+        let imageSettings = UIImage(systemName: "ellipsis.circle") as UIImage?
+        let generalSettingsButton = UIButton(type: UIButton.ButtonType.system) as UIButton
+        generalSettingsButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        generalSettingsButton.setImage(imageSettings, for: .normal)
+        generalSettingsButton.menu = createMenu()
+        generalSettingsButton.tintColor = .jamiMain
+        generalSettingsButton.showsMenuAsPrimaryAction = true
+        return UIBarButtonItem(customView: generalSettingsButton)
+    }
 
-        let accountSettingsView = UIView.init(frame: CGRect(x: 0, y: 0, width: viewWidth, height: itemHeight))
-        let accountImage = UIImageView.init(frame: CGRect(x: buttonOrigin + 2, y: 17, width: 20, height: 20))
-        accountImage.tintColor = UIColor.jamiMain
-        accountImage.image = UIImage(asset: Asset.fallbackAvatar)
-        accountImage.borderWidth = 1
-        accountImage.borderColor = UIColor.jamiMain
-        accountImage.cornerRadius = 10
-        accountSettingsView.addSubview(accountSettings)
-        accountSettingsView.addSubview(accountImage)
-        let accountSettingsButton = UIButton(type: .custom)
-        accountSettingsButton.frame = accountSettingsView.bounds
-        accountSettingsButton.rx.tap
-            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.menu.removeFromSuperview()
-                self?.viewModel.showAccountSettings()
-            })
-            .disposed(by: self.disposeBag)
-        accountSettingsView.addSubview(accountSettingsButton)
+    func createMenu() -> UIMenu {
+        let configuration = UIImage.SymbolConfiguration(pointSize: 40, weight: .regular, scale: .large)
+        let accountImage = UIImage(systemName: "person.circle", withConfiguration: configuration)
+        let tintedAccountImage = accountImage?.withTintColor(.jamiMain, renderingMode: .alwaysOriginal)
 
-        let advancedSettingsView = UIView.init(frame: CGRect(x: 0, y: itemHeight, width: viewWidth, height: itemHeight))
-        let advancedImage = UIImageView.init(frame: CGRect(x: buttonOrigin, y: 15, width: 25, height: 25))
-        advancedImage.tintColor = UIColor.jamiMain
-        advancedImage.image = UIImage(asset: Asset.settings)
-        advancedSettingsView.addSubview(advancedSettings)
-        advancedSettingsView.addSubview(advancedImage)
-        let advancedSettingsButton = UIButton(type: .custom)
-        advancedSettingsButton.frame = advancedSettingsView.bounds
-        advancedSettingsButton.rx.tap
-            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.menu.removeFromSuperview()
-                self?.viewModel.showGeneralSettings()
-            })
-            .disposed(by: self.disposeBag)
-        advancedSettingsView.addSubview(advancedSettingsButton)
+        let generalImage = UIImage(systemName: "gearshape", withConfiguration: configuration)
+        let tintedGeneralImage = generalImage?.withTintColor(.jamiMain, renderingMode: .alwaysOriginal)
 
-        let aboutView = UIView.init(frame: CGRect(x: 0, y: itemHeight * 2, width: viewWidth, height: itemHeight))
-        let aboutImage = UIImageView.init(frame: CGRect(x: buttonOrigin + 2, y: 17, width: 20, height: 20))
-        aboutImage.image = UIImage(asset: Asset.jamiIcon)
-        aboutView.addSubview(about)
-        aboutView.addSubview(aboutImage)
-        let aboutButton = UIButton(type: .custom)
-        aboutButton.frame = aboutView.bounds
-        aboutButton.rx.tap
-            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                guard let self else { return }
-                AppInfoHelper.showAboutJamiAlert(onViewController: self)
-                self.menu.removeFromSuperview()
-            })
-            .disposed(by: self.disposeBag)
-        aboutView.addSubview(aboutButton)
+        let aboutImage = UIImage(asset: Asset.jamiIcon)
 
-        // update menu frame
-        menu.frame.size.width = viewWidth
-        let orientation = UIDevice.current.orientation
-        let rightMargin: CGFloat = UIDevice.current.hasNotch && (orientation == .landscapeRight || orientation == .landscapeLeft) ? 40 : 10
-        menu.frame.origin.x = frame.size.width - viewWidth - rightMargin
-        menu.addSubview(accountSettingsView)
-        menu.addSubview(advancedSettingsView)
-        menu.addSubview(aboutView)
-        let firstLine = UIView.init(frame: CGRect(x: 0, y: itemHeight, width: viewWidth, height: 1))
-        let secondLine = UIView.init(frame: CGRect(x: 0, y: itemHeight * 2, width: viewWidth, height: 1))
-        firstLine.backgroundColor = UIColor.quaternaryLabel
-        secondLine.backgroundColor = UIColor.quaternaryLabel
-        menu.addSubview(firstLine)
-        menu.addSubview(secondLine)
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterial))
-        visualEffectView.frame = menu.bounds
-        visualEffectView.isUserInteractionEnabled = false
-        visualEffectView.alpha = 0.97
-        menu.insertSubview(visualEffectView, at: 0)
-        self.navigationController?.view.addSubview(menu)
+        let openAccount = UIAction(title: L10n.Global.accountSettings, image: tintedAccountImage, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
+            self?.viewModel.showAccountSettings()
+        }
+
+        let openSettings = UIAction(title: L10n.Global.advancedSettings, image: tintedGeneralImage, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
+            self?.viewModel.showGeneralSettings()
+        }
+
+        let aboutJami = UIAction(title: L10n.Smartlist.aboutJami, image: aboutImage, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { _ in
+            AppInfoHelper.showAboutJamiAlert(onViewController: self)
+        }
+
+        return UIMenu(title: "", children: [openAccount, openSettings, aboutJami])
     }
 
     private func updateAccountItemSize() {
