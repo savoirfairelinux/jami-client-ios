@@ -88,6 +88,7 @@ extension UIColor {
     }
 
     static let jamiMain = UIColor(hex: 0x3F6DA7, alpha: 1.0)
+    static let jamiDonation = UIColor(red: 255, green: 0, blue: 69, alpha: 1.0)
     static let conferenceRaiseHand = UIColor(red: 0, green: 184, blue: 255, alpha: 1.0)
     static let jamiSecondary = UIColor(hex: 0x1F4971, alpha: 1.0)
     static let jamiButtonLight = UIColor(named: "jamiButtonLight")!

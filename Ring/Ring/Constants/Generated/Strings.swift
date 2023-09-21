@@ -502,6 +502,8 @@ internal enum L10n {
     internal static let close = L10n.tr("Localizable", "global.close", fallback: "Close")
     /// Copy
     internal static let copy = L10n.tr("Localizable", "global.copy", fallback: "Copy")
+    /// Donate
+    internal static let donate = L10n.tr("Localizable", "global.donate", fallback: "Donate")
     /// Enter Password
     internal static let enterPassword = L10n.tr("Localizable", "global.enterPassword", fallback: "Enter Password")
     /// Enter Username

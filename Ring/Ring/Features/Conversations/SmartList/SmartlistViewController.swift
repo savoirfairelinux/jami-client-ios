@@ -420,6 +420,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         let aboutImage = UIImage(asset: Asset.jamiIcon)
 
+        let donateImage = UIImage(systemName: "heart", withConfiguration: configuration)
+        let tintedDonateImage = donateImage?.withTintColor(.jamiDonation, renderingMode: .alwaysOriginal)
+
         let openAccount = UIAction(title: L10n.Global.accountSettings, image: tintedAccountImage, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
             self?.viewModel.showAccountSettings()
         }
@@ -432,7 +435,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             AppInfoHelper.showAboutJamiAlert(onViewController: self)
         }
 
-        return UIMenu(title: "", children: [openAccount, openSettings, aboutJami])
+        let donation = UIAction(title: L10n.Global.donate, image: tintedDonateImage, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { _ in
+            // TODO: add link
+        }
+
+        return UIMenu(title: "", children: [openAccount, openSettings, donation, aboutJami])
     }
 
     private func updateAccountItemSize() {

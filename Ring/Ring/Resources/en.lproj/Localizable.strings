@@ -45,6 +45,7 @@
 "global.copy" = "Copy";
 "global.reply" = "Reply";
 "global.search" = "Searching…";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
