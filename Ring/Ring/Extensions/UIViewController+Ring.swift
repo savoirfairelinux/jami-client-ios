@@ -156,6 +156,22 @@ extension UIViewController {
             .disposed(by: disposeBag)
     }
 
+    func configureLargeTitleNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        let titleFont = UIFont.systemFont(ofSize: 17, weight: .medium)
+        appearance.titleTextAttributes = [.font: titleFont]
+
+        let largeTitleFont = UIFont.systemFont(ofSize: 34, weight: .medium)
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.jamiMain, .font: largeTitleFont]
+
+        appearance.shadowColor = .clear
+        appearance.shadowImage = nil
+
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.standardAppearance = appearance
+    }
+
     func configureRingNavigationBar() {
         self.navigationController?.navigationBar.barStyle = .default
         self.navigationController?.navigationBar.isTranslucent = true
