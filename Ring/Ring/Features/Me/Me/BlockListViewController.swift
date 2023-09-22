@@ -38,7 +38,7 @@ class BlockListViewController: UIViewController, StoryboardBased, ViewModelBased
         noBlockedContactLabel.backgroundColor = UIColor.jamiBackgroundColor
         noBlockedContactLabel.textColor = UIColor.jamiLabelColor
 
-        self.configureRingNavigationBar()
+        self.configureNavigationBar()
         self.navigationItem.title = L10n.AccountPage.blockedContacts
     }
 
