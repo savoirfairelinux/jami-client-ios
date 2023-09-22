@@ -55,7 +55,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         super.viewDidLoad()
         self.applyL10n()
         self.configureBindings()
-        self.configureRingNavigationBar()
+        self.configureNavigationBar()
         self.calculateSipCredentialsMargin()
         self.calculateConnectivityMargin()
         self.adaptTableToKeyboardState(for: self.settingsTable,

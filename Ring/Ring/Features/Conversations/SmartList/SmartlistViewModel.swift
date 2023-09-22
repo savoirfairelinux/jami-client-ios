@@ -344,6 +344,11 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         }
     }
 
+    func isSipAccount() -> Bool {
+        guard let account = self.currentAccount else { return false }
+        return account.type == .sip
+    }
+
     func showSipConversation(withNumber number: String) {
         guard let account = self.accountsService
                 .currentAccount else {

@@ -242,6 +242,8 @@
 		2673D62E252624AB000C56CB /* ConferenceMenuItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D62D252624AB000C56CB /* ConferenceMenuItemsManager.swift */; };
 		2673D630252657B0000C56CB /* ConferenceLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D62F252657B0000C56CB /* ConferenceLayout.swift */; };
 		2673D63225267785000C56CB /* ConferenceLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */; };
+		267792882AC2100000759110 /* SmartListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267792872AC2100000759110 /* SmartListHeaderView.xib */; };
+		2677928A2AC2103300759110 /* SmartListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267792892AC2103300759110 /* SmartListHeaderView.swift */; };
 		2679E42C29328352007E4639 /* ConcurrentDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679E42B29328352007E4639 /* ConcurrentDictionary.swift */; };
 		267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267AD77D252B979F00047593 /* ConferenceParticipant.swift */; };
 		267CC6FC29D5B27600505E56 /* Data+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260AE64229C8F58800D66D5E /* Data+Helpers.swift */; };
@@ -854,6 +856,8 @@
 		2673D62D252624AB000C56CB /* ConferenceMenuItemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceMenuItemsManager.swift; sourceTree = "<group>"; };
 		2673D62F252657B0000C56CB /* ConferenceLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceLayout.swift; sourceTree = "<group>"; };
 		2673D63125267785000C56CB /* ConferenceLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceLayoutHelper.swift; sourceTree = "<group>"; };
+		267792872AC2100000759110 /* SmartListHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SmartListHeaderView.xib; path = Ring/Features/Conversations/SmartList/SmartListHeaderView.xib; sourceTree = SOURCE_ROOT; };
+		267792892AC2103300759110 /* SmartListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListHeaderView.swift; path = Ring/Features/Conversations/SmartList/SmartListHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		2679E42B29328352007E4639 /* ConcurrentDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentDictionary.swift; sourceTree = "<group>"; };
 		267AD77D252B979F00047593 /* ConferenceParticipant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceParticipant.swift; sourceTree = "<group>"; };
 		2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerDelegate.swift; sourceTree = "<group>"; };
@@ -2018,6 +2022,8 @@
 				2662FC80246B793500FA7782 /* IncognitoSmartListViewController.storyboard */,
 				2662FC7C246B78E800FA7782 /* IncognitoSmartListViewController.swift */,
 				2662FC7E246B790400FA7782 /* IncognitoSmartListViewModel.swift */,
+				267792872AC2100000759110 /* SmartListHeaderView.xib */,
+				267792892AC2103300759110 /* SmartListHeaderView.swift */,
 			);
 			path = Smartlist;
 			sourceTree = "<group>";
@@ -2623,6 +2629,7 @@
 				0E6F545622403ADE00ECC3CE /* CreateSipAccountViewController.storyboard in Resources */,
 				1A2D18FD1F292DAD00B2C785 /* SmartListCell.xib in Resources */,
 				0E320D50224ADF840070B515 /* DialpadViewController.storyboard in Resources */,
+				267792882AC2100000759110 /* SmartListHeaderView.xib in Resources */,
 				1ABE07DC1F0D915100D36361 /* Localizable.strings in Resources */,
 				1A2D18E61F29197100B2C785 /* MessageAccessoryView.xib in Resources */,
 				0E3BD4242044776300A50DDF /* ContactViewController.storyboard in Resources */,
@@ -2877,6 +2884,7 @@
 				0ECA5683243394960055D31E /* MigrateAccountViewController.swift in Sources */,
 				BB3AB06C29316FA6006906BA /* ViewDidLoadModifier.swift in Sources */,
 				1A2041821F1E906B00C08435 /* CreateProfileViewModel.swift in Sources */,
+				2677928A2AC2103300759110 /* SmartListHeaderView.swift in Sources */,
 				1A0C4EE31F1D673600550433 /* InjectionBag.swift in Sources */,
 				0E3BD4262044778100A50DDF /* ContactViewModel.swift in Sources */,
 				0EF49A9F23828C960064CD98 /* ConferenceParticipantView.swift in Sources */,
