@@ -31,7 +31,7 @@ class LogViewController: UIViewController, ViewModelBased, StoryboardBased {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureRingNavigationBar()
+        self.configureNavigationBar()
         self.navigationItem.title = L10n.LogView.title
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
