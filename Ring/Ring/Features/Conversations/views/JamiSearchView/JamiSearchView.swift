@@ -105,25 +105,26 @@ class JamiSearchView: NSObject {
         // search status label
         self.viewModel.searchStatus
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] status in
+            .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                self.searchingLabel.text = status.toString()
+                // self.searchingLabel.text = status.toString()
             })
             .disposed(by: disposeBag)
-        searchingLabel.textColor = UIColor.jamiLabelColor
+        //  searchingLabel.textColor = UIColor.jamiLabelColor
 
         self.viewModel.isSearching
             .subscribe(onNext: { [weak self] (isSearching) in
                 guard let self = self else { return }
                 self.searchResultsTableView.isHidden = !isSearching
                 let resultvisible = isSearching && self.showSearchResult
-                self.searchingLabel.isHidden = !resultvisible
+                // self.searchingLabel.isHidden = !resultvisible
             })
             .disposed(by: disposeBag)
     }
 
     private func configureSearchBar() {
-        self.searchBar.rx.text.orEmpty
+        return
+            self.searchBar.rx.text.orEmpty
             .debounce(Durations.textFieldThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
             .bind(to: self.viewModel.searchBarText)
             .disposed(by: disposeBag)

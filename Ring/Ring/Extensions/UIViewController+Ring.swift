@@ -156,7 +156,25 @@ extension UIViewController {
             .disposed(by: disposeBag)
     }
 
-    func configureRingNavigationBar() {
+    func configureLargeTitleNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        let titleFont = UIFont.systemFont(ofSize: 17, weight: .medium)
+        appearance.titleTextAttributes = [.font: titleFont]
+
+        let largeTitleFont = UIFont.systemFont(ofSize: 34, weight: .medium)
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.jamiMain, .font: largeTitleFont]
+
+        appearance.shadowColor = .clear
+        appearance.shadowImage = UIImage()
+
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0
+    }
+
+    func configureNavigationBar() {
         self.navigationController?.navigationBar.barStyle = .default
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
@@ -174,6 +192,7 @@ extension UIViewController {
             navigationItem.preferredSearchBarPlacement = .stacked
         }
         #endif
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
 
     func configureWalkrhroughNavigationBar() {
