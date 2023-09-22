@@ -33,9 +33,6 @@ import QuartzCore
 struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 70.0
     static let tableHeaderViewHeight: CGFloat = 30.0
-    static let networkAllerHeight: CGFloat = 56.0
-    static let tableViewOffset: CGFloat = 80.0
-
 }
 
 // swiftlint:disable type_body_length
@@ -44,25 +41,24 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     private let log = SwiftyBeaver.self
 
     // MARK: outlets
-    @IBOutlet weak var viewContainer: UIView!
+    // @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var conversationsTableView: UITableView!
-    @IBOutlet weak var conversationsSegmentControl: UISegmentedControl!
-    @IBOutlet weak var segmentControlContainer: UIView!
-    @IBOutlet weak var conversationBadge: UIButton!
-    @IBOutlet weak var requestsBadge: UIButton!
-    @IBOutlet weak var conversationBadgeLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var requestBadgeTrailingConstraint: NSLayoutConstraint!
-
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var noConversationsView: UIView!
-    @IBOutlet weak var noConversationLabel: UILabel!
-    @IBOutlet weak var networkAlertLabel: UILabel!
-    @IBOutlet weak var cellularAlertLabel: UILabel!
-    @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var dialpadButton: UIButton!
-    @IBOutlet weak var dialpadButtonShadow: UIView!
-    @IBOutlet weak var networkAlertView: UIView!
+    // @IBOutlet weak var conversationsSegmentControl: UISegmentedControl!
+    //    @IBOutlet weak var segmentControlContainer: UIView!
+    //    @IBOutlet weak var conversationBadge: UIButton!
+    //    @IBOutlet weak var requestsBadge: UIButton!
+    //    @IBOutlet weak var conversationBadgeLeadingConstraint: NSLayoutConstraint!
+    //    @IBOutlet weak var requestBadgeTrailingConstraint: NSLayoutConstraint!
+    //
+    //    @IBOutlet weak var containerView: UIView!
+    //    @IBOutlet weak var noConversationsView: UIView!
+    //    @IBOutlet weak var noConversationLabel: UILabel!
+    //    @IBOutlet weak var networkAlertLabel: UILabel!
+    //    @IBOutlet weak var cellularAlertLabel: UILabel!
+    //    @IBOutlet weak var settingsButton: UIButton!
+    //    @IBOutlet weak var dialpadButton: UIButton!
+    //    @IBOutlet weak var dialpadButtonShadow: UIView!
+    //    @IBOutlet weak var networkAlertView: UIView!
     @IBOutlet weak var searchView: JamiSearchView!
 
     // account selection
@@ -114,23 +110,23 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.setupSearchBar()
         searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: false, delegate: viewModel)
         self.setUpContactRequest()
-        conversationsSegmentControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
+        //        conversationsSegmentControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         // Waiting for screen size change
-        DispatchQueue.global(qos: .background).async {
-            sleep(UInt32(0.5))
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self,
-                      UIDevice.current.portraitOrLandscape else { return }
-                self.updateAccountItemSize()
-                let messages: Int = Int(self.conversationBadge.title(for: .normal) ?? "0") ?? 0
-                let requests: Int = Int(self.requestsBadge.title(for: .normal) ?? "0") ?? 0
-                self.setUpSegmemtControl(messages: messages, requests: requests)
-                self.searchController.sizeChanged(to: size.width, totalItems: 2.0)
-            }
-        }
+        //        DispatchQueue.global(qos: .background).async {
+        //            sleep(UInt32(0.5))
+        //            DispatchQueue.main.async { [weak self] in
+        //                guard let self = self,
+        //                      UIDevice.current.portraitOrLandscape else { return }
+        //                self.updateAccountItemSize()
+        //                let messages: Int = Int(self.conversationBadge.title(for: .normal) ?? "0") ?? 0
+        //                let requests: Int = Int(self.requestsBadge.title(for: .normal) ?? "0") ?? 0
+        //                self.setUpSegmemtControl(messages: messages, requests: requests)
+        //                // self.searchController.sizeChanged(to: size.width, totalItems: 2.0)
+        //            }
+        //        }
         super.viewWillTransition(to: size, with: coordinator)
     }
 
@@ -157,16 +153,16 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         addChild(controller)
 
         // make sure that the child view controller's view is the right size
-        controller.view.frame = containerView.bounds
-        containerView.addSubview(controller.view)
-
-        // you must call this at the end per Apple's documentation
-        controller.didMove(toParent: self)
-        controller.view.isHidden = true
-        self.searchView.searchBar.rx.text.orEmpty
-            .debounce(Durations.textFieldThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
-            .bind(to: (self.contactRequestVC?.viewModel.filter)!)
-            .disposed(by: disposeBag)
+        //        controller.view.frame = containerView.bounds
+        //        containerView.addSubview(controller.view)
+        //
+        //        // you must call this at the end per Apple's documentation
+        //        controller.didMove(toParent: self)
+        //        controller.view.isHidden = true
+        //        self.searchView.searchBar.rx.text.orEmpty
+        //            .debounce(Durations.textFieldThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
+        //            .bind(to: (self.contactRequestVC?.viewModel.filter)!)
+        //            .disposed(by: disposeBag)
     }
 
     @objc
@@ -177,142 +173,142 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
-        self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
-                                    NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
+        //        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+        //        self.navigationController?.navigationBar
+        //            .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
+        //                                    NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
         self.viewModel.closeAllPlayers()
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        self.searchController.sizeChanged(to: self.view.frame.size.width, totalItems: 2.0)
+        // self.searchController.sizeChanged(to: self.view.frame.size.width, totalItems: 2.0)
         super.viewDidAppear(animated)
-        viewContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.navigationController?.setNavigationBarHidden(false, animated: false)
-        }
+        //        viewContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        //        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        // self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
-            if scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0 {
-                self.navigationController?.setNavigationBarHidden(false, animated: true)
-            } else {
-                self.navigationController?.setNavigationBarHidden(true, animated: true)
-            }
-        }
+        //        if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
+        //            if scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0 {
+        //                self.navigationController?.setNavigationBarHidden(false, animated: true)
+        //            } else {
+        //                self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //            }
+        //        }
     }
 
     func applyL10n() {
-        noConversationLabel.text = L10n.Smartlist.noConversation
-        self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
-        self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
+        //        noConversationLabel.text = L10n.Smartlist.noConversation
+        //        self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
+        //        self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
     }
 
     func setUpSegmemtControl(messages: Int, requests: Int) {
-        if requests == 0 {
-            segmentControlContainer.isHidden = true
-            conversationBadge.setTitle(String(messages), for: .normal)
-            requestsBadge.setTitle(String(requests), for: .normal)
-            return
-        }
-        if segmentControlContainer.isHidden {
-            conversationsSegmentControl.selectedSegmentIndex = 0
-        }
-        segmentControlContainer.isHidden = false
-        let unreadMessages = messages
-        let unreadRequests = requests
-        let margin: CGFloat = 5
-
-        self.conversationBadge.isHidden = unreadMessages == 0
-        self.requestsBadge.isHidden = unreadRequests == 0
-        let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
-        let attributes = [NSAttributedString.Key.font: titleFont]
-        let conversationTitle = L10n.Smartlist.conversations
-        let requestsTitle = L10n.Smartlist.invitations
-        conversationsSegmentControl.setTitleTextAttributes(attributes, for: .normal)
-        conversationsSegmentControl.setTitle(conversationTitle, forSegmentAt: 0)
-        conversationsSegmentControl.setTitle(requestsTitle, forSegmentAt: 1)
-        conversationBadge.setTitle(String(unreadMessages), for: .normal)
-        requestsBadge.setTitle(String(unreadRequests), for: .normal)
-        self.conversationBadge.sizeToFit()
-        self.requestsBadge.sizeToFit()
-        self.conversationBadge.setNeedsDisplay()
-        self.requestsBadge.setNeedsDisplay()
-
-        let convBageWidth = unreadMessages == 0 ? 0 : conversationBadge.frame.width
-        let requestBageWidth = unreadRequests == 0 ? 0 : requestsBadge.frame.size.width
-        let widthConversation = conversationTitle.size(withAttributes: attributes).width
-        let widthRequests = requestsTitle.size(withAttributes: attributes).width
-
-        let segmentWidth = conversationsSegmentControl.frame.size.width * 0.5
-        let convContentWidth = convBageWidth + widthConversation + margin
-        let reqContentWidth = requestBageWidth + widthRequests + margin
-        conversationsSegmentControl.setContentOffset(CGSize(width: -(convBageWidth + margin) * 0.5, height: 0), forSegmentAt: 0)
-        conversationsSegmentControl.setContentOffset(CGSize(width: -(requestBageWidth + margin) * 0.5, height: 0), forSegmentAt: 1)
-        let conversationConstraint = (segmentWidth - convContentWidth) * 0.5 + widthConversation + margin
-        self.conversationBadgeLeadingConstraint.constant = conversationConstraint
-        let requestConstraint = (segmentWidth - reqContentWidth) * 0.5
-        self.requestBadgeTrailingConstraint.constant = requestConstraint
+        //        if requests == 0 {
+        //            segmentControlContainer.isHidden = true
+        //            conversationBadge.setTitle(String(messages), for: .normal)
+        //            requestsBadge.setTitle(String(requests), for: .normal)
+        //            return
+        //        }
+        //        if segmentControlContainer.isHidden {
+        //            conversationsSegmentControl.selectedSegmentIndex = 0
+        //        }
+        //        segmentControlContainer.isHidden = false
+        //        let unreadMessages = messages
+        //        let unreadRequests = requests
+        //        let margin: CGFloat = 5
+        //
+        //        self.conversationBadge.isHidden = unreadMessages == 0
+        //        self.requestsBadge.isHidden = unreadRequests == 0
+        //        let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
+        //        let attributes = [NSAttributedString.Key.font: titleFont]
+        //        let conversationTitle = L10n.Smartlist.conversations
+        //        let requestsTitle = L10n.Smartlist.invitations
+        //        conversationsSegmentControl.setTitleTextAttributes(attributes, for: .normal)
+        //        conversationsSegmentControl.setTitle(conversationTitle, forSegmentAt: 0)
+        //        conversationsSegmentControl.setTitle(requestsTitle, forSegmentAt: 1)
+        //        conversationBadge.setTitle(String(unreadMessages), for: .normal)
+        //        requestsBadge.setTitle(String(unreadRequests), for: .normal)
+        //        self.conversationBadge.sizeToFit()
+        //        self.requestsBadge.sizeToFit()
+        //        self.conversationBadge.setNeedsDisplay()
+        //        self.requestsBadge.setNeedsDisplay()
+        //
+        //        let convBageWidth = unreadMessages == 0 ? 0 : conversationBadge.frame.width
+        //        let requestBageWidth = unreadRequests == 0 ? 0 : requestsBadge.frame.size.width
+        //        let widthConversation = conversationTitle.size(withAttributes: attributes).width
+        //        let widthRequests = requestsTitle.size(withAttributes: attributes).width
+        //
+        //        let segmentWidth = conversationsSegmentControl.frame.size.width * 0.5
+        //        let convContentWidth = convBageWidth + widthConversation + margin
+        //        let reqContentWidth = requestBageWidth + widthRequests + margin
+        //        conversationsSegmentControl.setContentOffset(CGSize(width: -(convBageWidth + margin) * 0.5, height: 0), forSegmentAt: 0)
+        //        conversationsSegmentControl.setContentOffset(CGSize(width: -(requestBageWidth + margin) * 0.5, height: 0), forSegmentAt: 1)
+        //        let conversationConstraint = (segmentWidth - convContentWidth) * 0.5 + widthConversation + margin
+        //        self.conversationBadgeLeadingConstraint.constant = conversationConstraint
+        //        let requestConstraint = (segmentWidth - reqContentWidth) * 0.5
+        //        self.requestBadgeTrailingConstraint.constant = requestConstraint
     }
 
     // swiftlint:disable function_body_length
     func setupUI() {
-        conversationBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 1, right: 5)
-        requestsBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 2, right: 5)
-        conversationBadge.backgroundColor = UIColor.jamiMain
-        requestsBadge.backgroundColor = UIColor.jamiMain
-        self.viewModel.updateSegmentControl.subscribe { [weak self] (messages, requests) in
-            self?.setUpSegmemtControl(messages: messages, requests: requests)
-        }
-        .disposed(by: self.disposeBag)
+        //        conversationBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 1, right: 5)
+        //        requestsBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 2, right: 5)
+        //        conversationBadge.backgroundColor = UIColor.jamiMain
+        //        requestsBadge.backgroundColor = UIColor.jamiMain
+        //        self.viewModel.updateSegmentControl.subscribe { [weak self] (messages, requests) in
+        //            self?.setUpSegmemtControl(messages: messages, requests: requests)
+        //        }
+        //        .disposed(by: self.disposeBag)
 
         view.backgroundColor = UIColor.jamiBackgroundColor
         conversationsTableView.backgroundColor = UIColor.jamiBackgroundColor
-        noConversationsView.backgroundColor = UIColor.jamiBackgroundColor
-        noConversationLabel.backgroundColor = UIColor.jamiBackgroundColor
-        noConversationLabel.textColor = UIColor.jamiLabelColor
-        dialpadButtonShadow.backgroundColor = UIColor.jamiBackgroundSecondaryColor
-        dialpadButtonShadow.layer.shadowColor = UIColor.jamiLabelColor.cgColor
-        dialpadButtonShadow.layer.shadowOffset = CGSize.zero
-        dialpadButtonShadow.layer.shadowRadius = 1
-        dialpadButtonShadow.layer.shadowOpacity = 0.6
-        dialpadButtonShadow.layer.masksToBounds = false
-        self.viewModel.hideNoConversationsMessage
-            .bind(to: self.noConversationsView.rx.isHidden)
-            .disposed(by: disposeBag)
-        let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
-        self.networkAlertView.isHidden = isHidden
-        self.viewModel.connectionState
-            .subscribe(onNext: { [weak self] connectionState in
-                let isHidden = connectionState == .none ? false : true
-                self?.networkAlertView.isHidden = isHidden
-            })
-            .disposed(by: self.disposeBag)
-
-        self.settingsButton.backgroundColor = nil
-        self.settingsButton.rx.tap
-            .subscribe(onNext: { _ in
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    UIApplication.shared.open(url, completionHandler: nil)
-                }
-            })
-            .disposed(by: self.disposeBag)
-        self.viewModel.currentAccountChanged
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] currentAccount in
-                if let account = currentAccount {
-                    let accountSip = account.type == AccountType.sip
-                    self?.dialpadButtonShadow.isHidden = !accountSip
-                    self?.updateSearchBar()
-                }
-            })
-            .disposed(by: disposeBag)
+        //        noConversationsView.backgroundColor = UIColor.jamiBackgroundColor
+        //        noConversationLabel.backgroundColor = UIColor.jamiBackgroundColor
+        //        noConversationLabel.textColor = UIColor.jamiLabelColor
+        //        dialpadButtonShadow.backgroundColor = UIColor.jamiBackgroundSecondaryColor
+        //        dialpadButtonShadow.layer.shadowColor = UIColor.jamiLabelColor.cgColor
+        //        dialpadButtonShadow.layer.shadowOffset = CGSize.zero
+        //        dialpadButtonShadow.layer.shadowRadius = 1
+        //        dialpadButtonShadow.layer.shadowOpacity = 0.6
+        //        dialpadButtonShadow.layer.masksToBounds = false
+        //        self.viewModel.hideNoConversationsMessage
+        //            .bind(to: self.noConversationsView.rx.isHidden)
+        //            .disposed(by: disposeBag)
+        //        let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
+        //        self.networkAlertView.isHidden = isHidden
+        //        self.viewModel.connectionState
+        //            .subscribe(onNext: { [weak self] connectionState in
+        //                let isHidden = connectionState == .none ? false : true
+        //                self?.networkAlertView.isHidden = isHidden
+        //            })
+        //            .disposed(by: self.disposeBag)
+        //
+        //        self.settingsButton.backgroundColor = nil
+        //        self.settingsButton.rx.tap
+        //            .subscribe(onNext: { _ in
+        //                if let url = URL(string: UIApplication.openSettingsURLString) {
+        //                    UIApplication.shared.open(url, completionHandler: nil)
+        //                }
+        //            })
+        //            .disposed(by: self.disposeBag)
+        //        self.viewModel.currentAccountChanged
+        //            .observe(on: MainScheduler.instance)
+        //            .subscribe(onNext: { [weak self] currentAccount in
+        //                if let account = currentAccount {
+        //                    let accountSip = account.type == AccountType.sip
+        //                    self?.dialpadButtonShadow.isHidden = !accountSip
+        //                    self?.updateSearchBar()
+        //                }
+        //            })
+        //            .disposed(by: disposeBag)
         // create accounts button
         let accountButton = UIButton(type: .custom)
         self.viewModel.profileImage.bind(to: accountButton.rx.image(for: .normal))
@@ -391,11 +387,11 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.navigationItem.leftBarButtonItem = accountButtonItem
         self.navigationItem.rightBarButtonItem = createMenuButton()
 
-        dialpadButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.showDialpad()
-            })
-            .disposed(by: self.disposeBag)
+        //        dialpadButton.rx.tap
+        //            .subscribe(onNext: { [weak self] in
+        //                self?.viewModel.showDialpad()
+        //            })
+        //            .disposed(by: self.disposeBag)
         self.conversationsTableView.tableFooterView = UIView()
     }
 
@@ -483,7 +479,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         if let account = self.viewModel.currentAccount,
            let row = accountsAdapter.rowForAccountId(account: account) {
             accounPicker.selectRow(row, inComponent: 0, animated: true)
-            dialpadButtonShadow.isHidden = account.type == AccountType.ring
+            // dialpadButtonShadow.isHidden = account.type == AccountType.ring
         }
         self.viewModel.currentAccountChanged
             .observe(on: MainScheduler.instance)
@@ -601,26 +597,27 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.conversationsTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
 
-    let searchController: CustomSearchController = {
-        let searchController = CustomSearchController(searchResultsController: nil)
-        searchController.searchBar.searchBarStyle = .minimal
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.definesPresentationContext = true
-        searchController.hidesNavigationBarDuringPresentation = true
-        return searchController
-    }()
+    let searchController = UISearchController(searchResultsController: nil)
+    //    : CustomSearchController = {
+    //        let searchController = CustomSearchController(searchResultsController: nil)
+    //        // searchController.searchBar.searchBarStyle = .minimal
+    //        searchController.obscuresBackgroundDuringPresentation = false
+    //        searchController.definesPresentationContext = true
+    //        searchController.hidesNavigationBarDuringPresentation = true
+    //        return searchController
+    //    }()
 
     func updateSearchBar() {
-        guard let account = self.viewModel.currentAccount else { return }
-        let accountSip = account.type == AccountType.sip
-        let image = accountSip ? UIImage(asset: Asset.phoneBook) : UIImage(asset: Asset.qrCode)
-        guard let buttonImage = image else { return }
-        searchController.updateSearchBar(image: buttonImage)
-        if !accountSip {
-            let image1 = UIImage(asset: Asset.createSwarm)
-            guard let buttonImage = image1 else { return }
-            searchController.updateSearchBar(image: buttonImage)
-        }
+        //        guard let account = self.viewModel.currentAccount else { return }
+        //        let accountSip = account.type == AccountType.sip
+        //        let image = accountSip ? UIImage(asset: Asset.phoneBook) : UIImage(asset: Asset.qrCode)
+        //        guard let buttonImage = image else { return }
+        //        searchController.updateSearchBar(image: buttonImage)
+        //        if !accountSip {
+        //            let image1 = UIImage(asset: Asset.createSwarm)
+        //            guard let buttonImage = image1 else { return }
+        //            searchController.updateSearchBar(image: buttonImage)
+        //        }
     }
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         // -100 from total width as number of buttons in navigation items are 2
@@ -632,47 +629,56 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     func setupSearchBar() {
         guard let account = self.viewModel.currentAccount else { return }
         let accountSip = account.type == AccountType.sip
-        let image = accountSip ? UIImage(asset: Asset.phoneBook) : UIImage(asset: Asset.qrCode)
-        guard let buttonImage = image else { return }
-        searchController
-            .configureSearchBar(image: buttonImage, position: 1,
-                                buttonPressed: { [weak self] in
-                                    guard let self = self else { return }
-                                    guard let account = self.viewModel.currentAccount else { return }
-                                    let accountSip = account.type == AccountType.sip
-                                    if accountSip {
-                                        self.contactPicker.delegate = self
-                                        self.present(self.contactPicker, animated: true, completion: nil)
-                                    } else {
-                                        self.openScan()
-                                    }
-                                })
+        //        let image = accountSip ? UIImage(asset: Asset.phoneBook) : UIImage(asset: Asset.qrCode)
+        //        guard let buttonImage = image else { return }
+        //        searchController
+        //            .configureSearchBar(image: buttonImage, position: 1,
+        //                                buttonPressed: { [weak self] in
+        //                                    guard let self = self else { return }
+        //                                    guard let account = self.viewModel.currentAccount else { return }
+        //                                    let accountSip = account.type == AccountType.sip
+        //                                    if accountSip {
+        //                                        self.contactPicker.delegate = self
+        //                                        self.present(self.contactPicker, animated: true, completion: nil)
+        //                                    } else {
+        //                                        self.openScan()
+        //                                    }
+        //                                })
         if !accountSip {
             let image1 = UIImage(asset: Asset.createSwarm)
             guard let buttonImage1 = image1 else { return }
-            searchController
-                .configureSearchBar(image: buttonImage1, position: 2,
-                                    buttonPressed: { [weak self] in
-                                        guard let self = self else { return }
-                                        //                                        guard let account = self.viewModel.currentAccount else { return }
-                                        //                                        let accountSip = account.type == AccountType.sip
-                                        //                                        if accountSip {
-                                        //                                            self.contactPicker.delegate = self
-                                        //                                            self.present(self.contactPicker, animated: true, completion: nil)
-                                        //                                        } else {
-                                        self.createGroup()
-                                        //                                        }
-                                    })
-        }
-        navigationItem.searchController = searchController
+            //            searchController
+            //                .configureSearchBar(image: buttonImage1, position: 2,
+            //                                    buttonPressed: { [weak self] in
+            //                                        guard let self = self else { return }
+            //                                        //                                        guard let account = self.viewModel.currentAccount else { return }
+            //                                        //                                        let accountSip = account.type == AccountType.sip
+            //                                        //                                        if accountSip {
+            //                                        //                                            self.contactPicker.delegate = self
+            //                                        //                                            self.present(self.contactPicker, animated: true, completion: nil)
+            //                                        //                                        } else {
+            //                                        self.createGroup()
+            //                                        //                                        }
+            //                                    })
+            //        }
+            // searchController.searchResultsUpdater = self
+            searchController.obscuresBackgroundDuringPresentation = false
+            searchController.searchBar.placeholder = "Search"
+            navigationItem.searchController = searchController
+            definesPresentationContext = true
 
-        navigationItem.hidesSearchBarWhenScrolling = false
-        searchView.searchBar = searchController.searchBar
-        self.searchView.editSearch
-            .subscribe(onNext: {[weak self] (editing) in
-                self?.viewModel.searching.onNext(editing)
-            })
-            .disposed(by: disposeBag)
+            navigationItem.searchController = searchController
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationItem.title = "Conversations"
+
+            navigationItem.hidesSearchBarWhenScrolling = false
+            searchView.searchBar = searchController.searchBar
+            self.searchView.editSearch
+                .subscribe(onNext: {[weak self] (editing) in
+                    self?.viewModel.searching.onNext(editing)
+                })
+                .disposed(by: disposeBag)
+        }
     }
 
     func startAccountCreation() {

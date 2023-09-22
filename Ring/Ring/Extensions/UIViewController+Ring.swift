@@ -157,23 +157,23 @@ extension UIViewController {
     }
 
     func configureRingNavigationBar() {
-        self.navigationController?.navigationBar.barStyle = .default
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
-        self.navigationController?.navigationBar.layer.shadowRadius = 2
-        self.navigationController?.navigationBar.layer.masksToBounds = false
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
-        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
-        self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
-        self.navigationController?.navigationBar.barTintColor = UIColor.systemBackground
-        #if swift(>=5.7)
-        if #available(iOS 16.0, *) {
-            navigationItem.preferredSearchBarPlacement = .stacked
-        }
-        #endif
+        // self.navigationController?.navigationBar.barStyle = .default
+        // self.navigationController?.navigationBar.isTranslucent = true
+        //        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+        //        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        //        self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
+        //        self.navigationController?.navigationBar.layer.shadowRadius = 2
+        //        self.navigationController?.navigationBar.layer.masksToBounds = false
+        //        self.navigationController?.navigationBar.shadowImage = UIImage()
+        //        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
+        //        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
+        //        self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
+        //        self.navigationController?.navigationBar.barTintColor = UIColor.systemBackground
+        //        #if swift(>=5.7)
+        //        if #available(iOS 16.0, *) {
+        //            navigationItem.preferredSearchBarPlacement = .stacked
+        //        }
+        //        #endif
     }
 
     func configureWalkrhroughNavigationBar() {
