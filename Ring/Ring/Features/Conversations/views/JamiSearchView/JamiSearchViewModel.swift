@@ -124,54 +124,6 @@ class JamiSearchViewModel {
                 self?.search(withText: text)
             })
             .disposed(by: disposeBag)
-
-        // Observe username lookup.
-        self.nameService.usernameLookupStatus
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] lookupResponse in
-                guard let self = self,
-                      let account = self.accountsService.currentAccount else { return }
-                guard lookupResponse.state == .found,
-                      lookupResponse.name == self.searchBarText.value else {
-                    self.updateSearchStatus()
-                    return
-                }
-                if self.temporaryConversationExists(for: lookupResponse.address) {
-                    return
-                }
-                // Username exists, create a new temporary conversation model
-                let tempConversation = self.createTemporarySwarmConversation(with: lookupResponse.address, accountId: account.id, userName: lookupResponse.name)
-                self.temporaryConversationCreated(tempConversation: tempConversation)
-                self.updateSearchStatus()
-            })
-            .disposed(by: disposeBag)
-
-        // Observe jams search results.
-        self.nameService
-            .userSearchResponseShared
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] nameSearchResponse in
-                guard let self = self,
-                      let results = nameSearchResponse.results as? [[String: String]],
-                      let account = self.accountsService.currentAccount else {
-                    return
-                }
-                // convert dictionary result to [UserSearchModel]
-                let users = results.map { result in
-                    return ContactsUtils.deserializeUser(dictionary: result)
-                }
-                .compactMap { $0 }
-                // Create temporary conversations for search results.
-                var jamsSearch = self.convertToConversations(from: users, accountId: account.id)
-                // Filter out existing conversations (filtered results).
-                jamsSearch = JamiSearchViewModel
-                    .removeFilteredConversations(from: jamsSearch,
-                                                 with: self.filteredResults.value)
-                self.jamsTemporaryResults.accept(jamsSearch)
-                self.updateSearchStatus()
-
-            })
-            .disposed(by: self.disposeBag)
     }
 
     static func removeFilteredConversations(from conversationViewModels: [ConversationViewModel],
@@ -309,6 +261,55 @@ class JamiSearchViewModel {
 
     private func performLookup(searchQuery: String, accounId: String, isJams: Bool) {
         self.searchStatus.onNext(.searching)
+        // Observe username lookup.
+        self.nameService.usernameLookupStatus
+            .observe(on: MainScheduler.instance)
+            .take(1)
+            .subscribe(onNext: { [weak self] lookupResponse in
+                guard let self = self,
+                      let account = self.accountsService.currentAccount else { return }
+                guard lookupResponse.state == .found,
+                      lookupResponse.name == self.searchBarText.value else {
+                    self.updateSearchStatus()
+                    return
+                }
+                if self.temporaryConversationExists(for: lookupResponse.address) {
+                    return
+                }
+                // Username exists, create a new temporary conversation model
+                let tempConversation = self.createTemporarySwarmConversation(with: lookupResponse.address, accountId: account.id, userName: lookupResponse.name)
+                self.temporaryConversationCreated(tempConversation: tempConversation)
+                self.updateSearchStatus()
+            })
+            .disposed(by: disposeBag)
+
+        // Observe jams search results.
+        self.nameService
+            .userSearchResponseShared
+            .take(1)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] nameSearchResponse in
+                guard let self = self,
+                      let results = nameSearchResponse.results as? [[String: String]],
+                      let account = self.accountsService.currentAccount else {
+                    return
+                }
+                // convert dictionary result to [UserSearchModel]
+                let users = results.map { result in
+                    return ContactsUtils.deserializeUser(dictionary: result)
+                }
+                .compactMap { $0 }
+                // Create temporary conversations for search results.
+                var jamsSearch = self.convertToConversations(from: users, accountId: account.id)
+                // Filter out existing conversations (filtered results).
+                jamsSearch = JamiSearchViewModel
+                    .removeFilteredConversations(from: jamsSearch,
+                                                 with: self.filteredResults.value)
+                self.jamsTemporaryResults.accept(jamsSearch)
+                self.updateSearchStatus()
+
+            })
+            .disposed(by: self.disposeBag)
         if isJams {
             self.nameService.searchUser(withAccount: accounId, query: searchQuery)
         } else {
