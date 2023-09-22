@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SmartListHeaderView" customModule="Ring" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7ic-Bx-tBX">
+                    <rect key="frame" x="0.0" y="59" width="393" height="31"/>
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="L8a-Os-Ezj">
+                            <rect key="frame" x="15" y="0.0" width="363" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="31" id="UV0-uF-of3"/>
+                            </constraints>
+                            <segments>
+                                <segment title="Conversations"/>
+                                <segment title="Requests"/>
+                            </segments>
+                        </segmentedControl>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="L8a-Os-Ezj" firstAttribute="leading" secondItem="7ic-Bx-tBX" secondAttribute="leading" constant="15" id="SMC-ll-DAv"/>
+                        <constraint firstAttribute="trailing" secondItem="L8a-Os-Ezj" secondAttribute="trailing" constant="15" id="ppI-ye-cQ1"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="7ic-Bx-tBX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="278-8c-RFZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7ic-Bx-tBX" secondAttribute="trailing" id="L8G-Aj-Qhe"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="7ic-Bx-tBX" secondAttribute="bottom" id="pYV-r5-YTh"/>
+                <constraint firstItem="7ic-Bx-tBX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="zUG-mY-xgW"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="conversationsSegmentControl" destination="L8a-Os-Ezj" id="FjQ-lk-Cur"/>
+            </connections>
+            <point key="canvasLocation" x="-79" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

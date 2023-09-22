@@ -19,6 +19,84 @@
  */
 import UIKit
 
+class CustomNavigationBar: UINavigationBar {
+
+    var customHeight: CGFloat = 44.0
+    var customSearchView: UIView?
+
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: customHeight)
+    }
+
+    func addCustomSearchView() {
+        customSearchView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: 50))
+        customSearchView?.backgroundColor = .clear  // Or any color you prefer
+
+        let label = UILabel(frame: CGRect(x: 10, y: 0, width: 200, height: 40))
+        label.text = "Custom Label"
+
+        let button = UIButton(frame: CGRect(x: self.bounds.width - 200, y: 0, width: 100, height: 40))
+        button.setTitle("Button", for: .normal)
+        button.addTarget(self, action: #selector(handleButtonTap), for: .touchUpInside)
+
+        customSearchView?.addSubview(label)
+        customSearchView?.addSubview(button)
+
+        if let customView = customSearchView {
+            addSubview(customView)
+        }
+    }
+
+    @objc
+    func handleButtonTap() {}
+
+    func removeCustomSearchView() {
+        customSearchView?.removeFromSuperview()
+        customSearchView = nil
+    }
+
+    var increaseHeight = false {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        for subview in self.subviews {
+            let stringFromClass = NSStringFromClass(subview.classForCoder)
+
+            if stringFromClass.contains("UINavigationBarContentView") {
+                if increaseHeight {
+                    subview.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: customHeight)
+                }
+            }
+
+            if stringFromClass.contains("SearchBar") {
+                if increaseHeight {
+                    subview.frame = CGRect(x: 0, y: 40, width: self.frame.width, height: subview.frame.height)
+                }
+            }
+
+        }
+    }
+
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: super.intrinsicContentSize.width, height: customHeight)
+    }
+
+    override var frame: CGRect {
+        didSet {
+            var newFrame = frame
+            if newFrame.size.height < customHeight && increaseHeight {
+                newFrame.size.height = customHeight
+            }
+            super.frame = newFrame
+        }
+    }
+}
+
 class CustomSearchController: UISearchController {
     private var customSearchBar = CustomSearchBar()
     override var searchBar: UISearchBar {
