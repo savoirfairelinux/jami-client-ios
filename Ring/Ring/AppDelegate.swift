@@ -285,6 +285,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 // set selected account if exists
                 self.appCoordinator.start()
                 if !self.accountService.hasAccounts() {
+                    // Set default download transfer limit to 20MB.
+                    let userDefaults = UserDefaults.standard
+                    if userDefaults.object(forKey: acceptTransferLimitKey) == nil {
+                        userDefaults.set(20, forKey: acceptTransferLimitKey)
+                    }
                     return
                 }
                 if self.accountService.hasAccountWithProxyEnabled() {
