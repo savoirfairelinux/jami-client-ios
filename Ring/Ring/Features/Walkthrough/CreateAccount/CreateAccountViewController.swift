@@ -125,12 +125,6 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     @objc
-    func dismissKeyboard() {
-        self.isKeyboardOpened = false
-        self.becomeFirstResponder()
-    }
-
-    @objc
     func keyboardWillAppear(withNotification notification: NSNotification) {
         self.isKeyboardOpened = true
 
@@ -249,7 +243,7 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     }
 
     private func showAccountCreationInProgress() {
-        loadingViewPresenter.presentWithMessage(message: L10n.CreateAccount.loading, presentingVC: self, animated: false, modalPresentationStyle: .fullScreen)
+        loadingViewPresenter.presentWithMessage(message: L10n.CreateAccount.loading, presentingVC: self, animated: false, modalPresentationStyle: .overFullScreen)
     }
 
     private func hideAccountCreationHud() {
