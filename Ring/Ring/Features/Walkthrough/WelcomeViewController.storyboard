@@ -270,7 +270,7 @@
         </designable>
     </designables>
     <resources>
-        <image name="background_login" width="2940" height="2189"/>
+        <image name="background_login" width="5200" height="3000"/>
         <image name="jamiIcon" width="66.666664123535156" height="63.333332061767578"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
