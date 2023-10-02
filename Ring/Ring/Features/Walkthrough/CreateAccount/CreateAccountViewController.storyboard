@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILs-xb-iKr">
-    <device id="ipad10_2" orientation="portrait" layout="fullscreen" appearance="dark"/>
+    <device id="ipad10_2" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
@@ -99,14 +99,14 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I84-2C-S8U">
-                                                                <rect key="frame" x="152.5" y="0.5" width="657.5" height="41"/>
+                                                                <rect key="frame" x="72.5" y="0.5" width="737.5" height="41"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstItem="I84-2C-S8U" firstAttribute="leading" secondItem="gHD-DM-cx4" secondAttribute="trailing" constant="100" id="0aT-Nx-iy2"/>
+                                                            <constraint firstItem="I84-2C-S8U" firstAttribute="leading" secondItem="gHD-DM-cx4" secondAttribute="trailing" constant="20" id="0aT-Nx-iy2"/>
                                                             <constraint firstItem="I84-2C-S8U" firstAttribute="top" secondItem="2Bp-r8-OPS" secondAttribute="bottom" id="1Ve-wA-lCs"/>
                                                             <constraint firstAttribute="trailing" secondItem="Nvh-Wk-lGQ" secondAttribute="trailing" id="3LI-dU-wIN"/>
                                                             <constraint firstAttribute="trailing" secondItem="I84-2C-S8U" secondAttribute="trailing" id="5r2-MK-SJz"/>

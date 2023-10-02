@@ -57,24 +57,8 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
             self.linkAccountButton.alpha = 1
             self.advancedFeaturesButton.alpha = 1
         }
-        for button in [joinJamiButton, linkAccountButton, importDeviceButton, importBackupButton, advancedFeaturesButton, connectJamiAcountManagerButton, configureSIPButton] {
-            button?.titleLabel?.ajustToTextSize()
 
-            // Set left and right padding
-            let leftPadding: CGFloat = 5
-            let rightPadding: CGFloat = 5
-            button?.contentEdgeInsets = UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right: rightPadding)
-        }
-        self.joinJamiButton.backgroundColor = .jamiButtonDark
-        self.linkAccountButton.backgroundColor = .jamiButtonDark
-
-        for button in [importDeviceButton, importBackupButton, connectJamiAcountManagerButton, configureSIPButton] {
-            button?.borderWidth = 1
-            button?.borderColor = .jamiButtonDark
-            button?.backgroundColor = .jamiButtonWithOpacity
-            button?.setTitleColor(UIColor.jamiButtonDark, for: [])
-        }
-        advancedFeaturesButton.setTitleColor(UIColor.jamiButtonDark, for: [])
+        adaptSystemStyles()
 
         // Bind ViewModel to View
         self.viewModel.welcomeText.bind(to: self.welcomeTextLabel.rx.text).disposed(by: self.disposeBag)
@@ -127,6 +111,36 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         welcomeTextLabel.text = L10n.Welcome.title
 
         aboutJamiButton.setTitle(L10n.Smartlist.aboutJami, for: [])
+    }
+
+    func adaptSystemStyles() {
+        for button in [joinJamiButton, linkAccountButton, importDeviceButton, importBackupButton, advancedFeaturesButton, connectJamiAcountManagerButton, configureSIPButton] {
+            button?.titleLabel?.ajustToTextSize()
+
+            // Set left and right padding
+            let leftPadding: CGFloat = 5
+            let rightPadding: CGFloat = 5
+            button?.contentEdgeInsets = UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right: rightPadding)
+        }
+        self.joinJamiButton.backgroundColor = .jamiButtonDark
+        self.linkAccountButton.backgroundColor = .jamiButtonDark
+        aboutJamiButton.setTitleColor(.jamiButtonDark, for: [])
+
+        if traitCollection.userInterfaceStyle == .dark {
+            self.joinJamiButton.setTitleColor(.black, for: [])
+            self.linkAccountButton.setTitleColor(.black, for: [])
+        } else if traitCollection.userInterfaceStyle == .light {
+            self.joinJamiButton.setTitleColor(.white, for: [])
+            self.linkAccountButton.setTitleColor(.white, for: [])
+        }
+
+        for button in [importDeviceButton, importBackupButton, connectJamiAcountManagerButton, configureSIPButton] {
+            button?.borderWidth = 1
+            button?.borderColor = .jamiButtonDark
+            button?.backgroundColor = .jamiButtonWithOpacity
+            button?.setTitleColor(UIColor.jamiButtonDark, for: [])
+        }
+        advancedFeaturesButton.setTitleColor(UIColor.jamiButtonDark, for: [])
     }
 
     private func aboutJamiButtonDidTap() {

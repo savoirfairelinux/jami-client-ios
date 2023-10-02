@@ -78,9 +78,6 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
 
     func adaptToSystemColor() {
         view.backgroundColor = .clear
-        userNameLabel.textColor = UIColor.jamiTextSecondary
-        passwordLabel.textColor = UIColor.jamiTextSecondary
-        serverLabel.textColor = UIColor.jamiTextSecondary
         userNameTextField.tintColor = UIColor.jamiSecondary
         passwordTextField.tintColor = UIColor.jamiSecondary
         serverTextField.tintColor = UIColor.jamiSecondary
