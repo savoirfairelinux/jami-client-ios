@@ -180,8 +180,6 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     }
 
     func adaptToSystemColor() {
-        pinLabel.textColor = UIColor.jamiTextSecondary
-        passwordLabel.textColor = UIColor.jamiTextSecondary
         self.pinTextField.tintColor = UIColor.jamiSecondary
         self.passwordTextField.tintColor = UIColor.jamiSecondary
         view.backgroundColor = .clear

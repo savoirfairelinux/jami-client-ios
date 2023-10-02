@@ -258,10 +258,7 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
     }
 
     func adaptToSystemColor() {
-        view.backgroundColor = UIColor.jamiBackgroundColor
-        userNameLabel.textColor = UIColor.jamiTextSecondary
-        passwordLabel.textColor = UIColor.jamiTextSecondary
-        accountManagerLabel.textColor = UIColor.jamiTextSecondary
+        view.backgroundColor = .clear
         userNameTextField.tintColor = UIColor.jamiSecondary
         passwordTextField.tintColor = UIColor.jamiSecondary
         accountManagerTextField.tintColor = UIColor.jamiSecondary
