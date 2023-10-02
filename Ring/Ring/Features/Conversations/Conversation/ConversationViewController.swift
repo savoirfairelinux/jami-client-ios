@@ -698,10 +698,12 @@ class ConversationViewController: UIViewController,
         viewModel.bestName
             .asObservable()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] name in
+            .subscribe(onNext: { [weak self] bestName in
+                let name = bestName.replacingOccurrences(of: "\0", with: "")
                 guard !name.isEmpty else { return }
                 let placeholder = L10n.Conversation.messagePlaceholder + name
-                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(name)
+                let nameNSString = name as NSString
+                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(nameNSString)
                 self?.messageAccessoryView.setPlaceholder(placeholder: placeholder)
             })
             .disposed(by: self.disposeBag)
