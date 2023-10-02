@@ -230,7 +230,7 @@ class LinkToAccountManagerViewController: UIViewController, StoryboardBased, Vie
     }
 
     private func showLinkHUD() {
-        loadingViewPresenter.presentWithMessage(message: L10n.LinkToAccountManager.signIn, presentingVC: self, animated: false)
+        loadingViewPresenter.presentWithMessage(message: L10n.LinkToAccountManager.signIn, presentingVC: self, animated: false, modalPresentationStyle: .overFullScreen)
     }
 
     private func hideHud() {

@@ -255,7 +255,7 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     }
 
     private func showCreationHUD() {
-        loadingViewPresenter.presentWithMessage(message: L10n.CreateAccount.loading, presentingVC: self, animated: false, modalPresentationStyle: .fullScreen)
+        loadingViewPresenter.presentWithMessage(message: L10n.CreateAccount.loading, presentingVC: self, animated: false, modalPresentationStyle: .overFullScreen)
     }
 
     private func showLinkedSuccess() {
