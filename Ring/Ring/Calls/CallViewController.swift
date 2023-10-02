@@ -449,7 +449,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         self.viewModel.dismisVC
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] dismiss in
-                if dismiss {
+                if dismiss && self?.pipController != nil {
                     if #available(iOS 15.0, *) {
                         self?.pipController.stopPictureInPicture()
                         self?.pipController = nil
