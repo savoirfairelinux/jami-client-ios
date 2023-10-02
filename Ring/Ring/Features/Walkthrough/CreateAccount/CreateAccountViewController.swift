@@ -57,8 +57,6 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         // Style
         joinButton.titleLabel?.ajustToTextSize()
         self.usernameTextField.becomeFirstResponder()
-        self.usernameTextField.tintColor = UIColor.jamiSecondary
-        self.joinButton.tintColor = .jamiButtonDark
 
         // Bind ViewModel to View
         self.bindViewModelToView()
@@ -118,6 +116,8 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
 
     func adaptToSystemColor() {
         view.backgroundColor = .clear
+        self.usernameTextField.tintColor = UIColor.jamiSecondary
+        self.joinButton.tintColor = .jamiButtonDark
     }
 
     func setContentInset(keyboardHeight: CGFloat = 0) {

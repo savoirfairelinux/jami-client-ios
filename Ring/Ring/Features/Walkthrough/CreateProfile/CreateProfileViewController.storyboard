@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1yn-Mj-8Ek">
-    <device id="retina3_5" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1yn-Mj-8Ek">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,28 +16,28 @@
                         <viewControllerLayoutGuide type="bottom" id="fB8-X7-N5u"/>
                     </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1T-Xh-FH1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="onC-vk-VGN">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Yq-n7-91P">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="547"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="547"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your profile will be shared with your contacts. You can change it at any time." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lL-e0-PFL" userLabel="Subtitle">
-                                                <rect key="frame" x="20" y="20" width="280" height="38.5"/>
+                                                <rect key="frame" x="20" y="20.000000000000004" width="353" height="38.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a display name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1N-hn-LTy" userLabel="Enter Name Label">
-                                                <rect key="frame" x="79.5" y="220" width="161" height="22"/>
+                                                <rect key="frame" x="116" y="220" width="161" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ebb-h3-1X3" userLabel="Profile Name Edit Text">
-                                                <rect key="frame" x="35" y="252" width="250" height="50"/>
+                                                <rect key="frame" x="40" y="252" width="313" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="V3Q-1d-nI7"/>
                                                 </constraints>
@@ -53,8 +53,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Po-6e-k14" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
-                                                <rect key="frame" x="35" y="317" width="250" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Po-6e-k14" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
+                                                <rect key="frame" x="40" y="317" width="313" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="2ir-B7-kVX"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="DZF-Ea-XUf"/>
@@ -69,7 +69,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="Wss-Rm-aKz">
-                                                <rect key="frame" x="96" y="74.5" width="128" height="120"/>
+                                                <rect key="frame" x="111.33333333333333" y="74.333333333333314" width="170.66666666666669" height="120"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="120" id="Edd-cj-Zhl"/>
@@ -107,17 +107,17 @@
                                 </constraints>
                             </scrollView>
                             <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRA-lP-OD3" userLabel="Info View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="z2z-6h-lsY">
-                                        <rect key="frame" x="96" y="74.5" width="128" height="120"/>
+                                        <rect key="frame" x="111.33333333333333" y="133.33333333333334" width="170.66666666666669" height="120"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="6Y2-EN-n8A"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="RuJ-k9-6d2" userLabel="Arrow">
-                                        <rect key="frame" x="44" y="189.5" width="72" height="80"/>
+                                        <rect key="frame" x="80.666666666666671" y="248.33333333333337" width="72.000000000000014" height="80"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="RIv-ZQ-8Uw"/>
@@ -125,7 +125,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your avatar" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwE-6U-bqU">
-                                        <rect key="frame" x="0.0" y="274.5" width="160" height="56"/>
+                                        <rect key="frame" x="16.666666666666671" y="333.33333333333331" width="160" height="55.666666666666686"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="160" id="emA-LP-rz8"/>
                                         </constraints>
@@ -182,8 +182,13 @@
             <point key="canvasLocation" x="1104.3478260869565" y="366.29464285714283"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="5Po-6e-k14">
+            <size key="intrinsicContentSize" width="34" height="34"/>
+        </designable>
+    </designables>
     <resources>
-        <image name="add_avatar" width="128" height="128"/>
-        <image name="info_arrow" width="128" height="128"/>
+        <image name="add_avatar" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="info_arrow" width="170.66667175292969" height="170.66667175292969"/>
     </resources>
 </document>
