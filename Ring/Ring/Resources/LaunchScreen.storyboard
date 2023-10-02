@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,32 +15,38 @@
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jamiIcon" translatesAutoresizingMaskIntoConstraints="NO" id="kP1-oe-ZEx">
-                                <rect key="frame" x="137.66666666666666" y="358.66666666666669" width="100" height="95"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login" translatesAutoresizingMaskIntoConstraints="NO" id="5w4-lf-PEm">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jami_gnupackage" translatesAutoresizingMaskIntoConstraints="NO" id="kP1-oe-ZEx">
+                                <rect key="frame" x="-641.66666666666663" y="281" width="1658.3333333333333" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="kP1-oe-ZEx" secondAttribute="height" multiplier="20:19" id="5Bg-Lw-vZJ"/>
-                                    <constraint firstAttribute="width" constant="100" id="Vc4-VQ-EsM"/>
+                                    <constraint firstAttribute="height" constant="100" id="bZq-5y-hTA"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="kP1-oe-ZEx" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ksh-ub-gUe"/>
+                            <constraint firstItem="kP1-oe-ZEx" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-75" id="ksh-ub-gUe"/>
+                            <constraint firstItem="5w4-lf-PEm" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottomMargin" id="ofT-oK-fqA"/>
+                            <constraint firstItem="5w4-lf-PEm" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="qpt-Qa-DZT"/>
+                            <constraint firstAttribute="trailing" secondItem="5w4-lf-PEm" secondAttribute="trailing" id="rvJ-Is-9e7"/>
                             <constraint firstItem="kP1-oe-ZEx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="soi-Xo-HWk"/>
+                            <constraint firstItem="5w4-lf-PEm" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="w3l-vN-1aN"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.5" y="375"/>
+            <point key="canvasLocation" x="52" y="374.6305418719212"/>
         </scene>
     </scenes>
     <resources>
-        <image name="jamiIcon" width="66.666664123535156" height="63.333332061767578"/>
+        <image name="background_login" width="786" height="1704"/>
+        <image name="jami_gnupackage" width="1658.4000244140625" height="552.79998779296875"/>
     </resources>
 </document>
