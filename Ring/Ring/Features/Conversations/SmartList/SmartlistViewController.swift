@@ -33,35 +33,22 @@ import QuartzCore
 struct SmartlistConstants {
     static let smartlistRowHeight: CGFloat = 70.0
     static let tableHeaderViewHeight: CGFloat = 30.0
-    static let networkAllerHeight: CGFloat = 56.0
-    static let tableViewOffset: CGFloat = 80.0
-
 }
 
 // swiftlint:disable type_body_length
-class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased {
+class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased, UISearchControllerDelegate {
 
     private let log = SwiftyBeaver.self
 
     // MARK: outlets
-    @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var conversationsTableView: UITableView!
-    @IBOutlet weak var conversationsSegmentControl: UISegmentedControl!
-    @IBOutlet weak var segmentControlContainer: UIView!
-    @IBOutlet weak var conversationBadge: UIButton!
-    @IBOutlet weak var requestsBadge: UIButton!
-    @IBOutlet weak var conversationBadgeLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var requestBadgeTrailingConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var noConversationsView: UIView!
     @IBOutlet weak var noConversationLabel: UILabel!
     @IBOutlet weak var networkAlertLabel: UILabel!
     @IBOutlet weak var cellularAlertLabel: UILabel!
-    @IBOutlet weak var networkAlertViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var dialpadButton: UIButton!
-    @IBOutlet weak var dialpadButtonShadow: UIView!
+    @IBOutlet weak var tableTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var widgetsTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var networkAlertView: UIView!
     @IBOutlet weak var searchView: JamiSearchView!
 
@@ -76,10 +63,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     let triangleTag = 200
     let openAccountTag = 300
     let margin: CGFloat = 10
-    let size: CGFloat = 32
+    let size: CGFloat = 28
     let triangleViewSize: CGFloat = 12
+    var headerView: SmartListHeaderView?
 
     var contactRequestVC: ContactRequestsViewController?
+    private var selectedSegmentIndex = BehaviorRelay<Int>(value: 0)
 
     // MARK: members
     var viewModel: SmartlistViewModel!
@@ -101,10 +90,10 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.setupTableView()
         self.setupUI()
         self.applyL10n()
-        self.configureRingNavigationBar()
+        self.configureLargeTitleNavigationBar()
         self.confugureAccountPicker()
         accountsDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-
+        setupTableViewHeader(for: self.conversationsTableView)
         /*
          Register to keyboard notifications to adjust tableView insets when the keybaord appears
          or disappears
@@ -113,25 +102,36 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.setupSearchBar()
         searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: false, delegate: viewModel)
-        self.setUpContactRequest()
-        conversationsSegmentControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
+        if !self.viewModel.isSipAccount() {
+            self.setUpContactRequest()
+        }
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        // Waiting for screen size change
-        DispatchQueue.global(qos: .background).async {
-            sleep(UInt32(0.5))
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self,
-                      UIDevice.current.portraitOrLandscape else { return }
-                self.updateAccountItemSize()
-                let messages: Int = Int(self.conversationBadge.title(for: .normal) ?? "0") ?? 0
-                let requests: Int = Int(self.requestsBadge.title(for: .normal) ?? "0") ?? 0
-                self.setUpSegmemtControl(messages: messages, requests: requests)
-                self.searchController.sizeChanged(to: size.width, totalItems: 2.0)
+    func setupTableViewHeader(for tableView: UITableView) {
+        let nib = UINib(nibName: "SmartListHeaderView", bundle: nil)
+        if let view = nib.instantiate(withOwner: nil, options: nil).first as? SmartListHeaderView {
+            tableView.tableHeaderView = view
+            NSLayoutConstraint.activate([
+                view.widthAnchor.constraint(equalTo: tableView.widthAnchor, constant: -30),
+                view.centerXAnchor.constraint(equalTo: tableView.centerXAnchor)
+            ])
+            view.conversationsSegmentControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
+            self.selectedSegmentIndex.subscribe { [weak view] index in
+                view?.conversationsSegmentControl.selectedSegmentIndex = index
             }
+            .disposed(by: self.disposeBag)
+            self.viewModel.updateSegmentControl
+                .subscribe { [weak view, weak tableView] (messages, requests) in
+                    let height: CGFloat = requests == 0 ? 0 : 32
+                    if var frame = view?.frame {
+                        frame.size.height = height
+                        view?.frame = frame
+                    }
+                    view?.setUnread(messages: messages, requests: requests)
+                    tableView?.tableHeaderView = view
+                }
+                .disposed(by: self.disposeBag)
         }
-        super.viewWillTransition(to: size, with: coordinator)
     }
 
     @objc
@@ -140,12 +140,15 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         case 0:
             contactRequestVC?.view.isHidden = true
             searchView.showSearchResult = true
+            self.navigationItem.title = L10n.Smartlist.conversations
         case 1:
             contactRequestVC?.view.isHidden = false
             searchView.showSearchResult = false
+            self.navigationItem.title = L10n.Smartlist.invitations
         default:
             break
         }
+        self.selectedSegmentIndex.accept(segmentedControl.selectedSegmentIndex)
     }
 
     func addContactRequestVC(controller: ContactRequestsViewController) {
@@ -163,6 +166,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         // you must call this at the end per Apple's documentation
         controller.didMove(toParent: self)
         controller.view.isHidden = true
+        self.setupTableViewHeader(for: controller.tableView)
         self.searchView.searchBar.rx.text.orEmpty
             .debounce(Durations.textFieldThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
             .bind(to: (self.contactRequestVC?.viewModel.filter)!)
@@ -177,125 +181,50 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
-        self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Light", size: 25)!,
-                                    NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
+        self.configureLargeTitleNavigationBar()
         self.viewModel.closeAllPlayers()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        self.searchController.sizeChanged(to: self.view.frame.size.width, totalItems: 2.0)
-        super.viewDidAppear(animated)
-        viewContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.navigationController?.setNavigationBarHidden(false, animated: false)
-        }
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.updateSearchBarIfActive()
+        if let customNavBar = self.navigationController?.navigationBar as? SmartListNavigationBar {
+            customNavBar.usingCustomSize = true
+        }
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
-            if scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0 {
-                self.navigationController?.setNavigationBarHidden(false, animated: true)
-            } else {
-                self.navigationController?.setNavigationBarHidden(true, animated: true)
-            }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let customNavBar = self.navigationController?.navigationBar as? SmartListNavigationBar {
+            customNavBar.removeTopView()
+            customNavBar.usingCustomSize = false
         }
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.setNeedsLayout()
+        navigationController?.navigationBar.layoutIfNeeded()
     }
 
     func applyL10n() {
-        noConversationLabel.text = L10n.Smartlist.noConversation
+        self.navigationItem.title = L10n.Smartlist.conversations
+        self.noConversationLabel.text = L10n.Smartlist.noConversation
         self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
         self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
     }
 
-    func setUpSegmemtControl(messages: Int, requests: Int) {
-        if requests == 0 {
-            segmentControlContainer.isHidden = true
-            conversationBadge.setTitle(String(messages), for: .normal)
-            requestsBadge.setTitle(String(requests), for: .normal)
-            return
-        }
-        if segmentControlContainer.isHidden {
-            conversationsSegmentControl.selectedSegmentIndex = 0
-        }
-        segmentControlContainer.isHidden = false
-        let unreadMessages = messages
-        let unreadRequests = requests
-        let margin: CGFloat = 5
-
-        self.conversationBadge.isHidden = unreadMessages == 0
-        self.requestsBadge.isHidden = unreadRequests == 0
-        let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
-        let attributes = [NSAttributedString.Key.font: titleFont]
-        let conversationTitle = L10n.Smartlist.conversations
-        let requestsTitle = L10n.Smartlist.invitations
-        conversationsSegmentControl.setTitleTextAttributes(attributes, for: .normal)
-        conversationsSegmentControl.setTitle(conversationTitle, forSegmentAt: 0)
-        conversationsSegmentControl.setTitle(requestsTitle, forSegmentAt: 1)
-        conversationBadge.setTitle(String(unreadMessages), for: .normal)
-        requestsBadge.setTitle(String(unreadRequests), for: .normal)
-        self.conversationBadge.sizeToFit()
-        self.requestsBadge.sizeToFit()
-        self.conversationBadge.setNeedsDisplay()
-        self.requestsBadge.setNeedsDisplay()
-
-        let convBageWidth = unreadMessages == 0 ? 0 : conversationBadge.frame.width
-        let requestBageWidth = unreadRequests == 0 ? 0 : requestsBadge.frame.size.width
-        let widthConversation = conversationTitle.size(withAttributes: attributes).width
-        let widthRequests = requestsTitle.size(withAttributes: attributes).width
-
-        let segmentWidth = conversationsSegmentControl.frame.size.width * 0.5
-        let convContentWidth = convBageWidth + widthConversation + margin
-        let reqContentWidth = requestBageWidth + widthRequests + margin
-        conversationsSegmentControl.setContentOffset(CGSize(width: -(convBageWidth + margin) * 0.5, height: 0), forSegmentAt: 0)
-        conversationsSegmentControl.setContentOffset(CGSize(width: -(requestBageWidth + margin) * 0.5, height: 0), forSegmentAt: 1)
-        let conversationConstraint = (segmentWidth - convContentWidth) * 0.5 + widthConversation + margin
-        self.conversationBadgeLeadingConstraint.constant = conversationConstraint
-        let requestConstraint = (segmentWidth - reqContentWidth) * 0.5
-        self.requestBadgeTrailingConstraint.constant = requestConstraint
-    }
-
-    // swiftlint:disable function_body_length
     func setupUI() {
-        conversationBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 1, right: 5)
-        requestsBadge.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 2, right: 5)
-        conversationBadge.backgroundColor = UIColor.jamiMain
-        requestsBadge.backgroundColor = UIColor.jamiMain
-        self.viewModel.updateSegmentControl.subscribe { [weak self] (messages, requests) in
-            self?.setUpSegmemtControl(messages: messages, requests: requests)
-        }
-        .disposed(by: self.disposeBag)
-
         view.backgroundColor = UIColor.jamiBackgroundColor
         conversationsTableView.backgroundColor = UIColor.jamiBackgroundColor
-        noConversationsView.backgroundColor = UIColor.jamiBackgroundColor
         noConversationLabel.backgroundColor = UIColor.jamiBackgroundColor
         noConversationLabel.textColor = UIColor.jamiLabelColor
-        dialpadButtonShadow.backgroundColor = UIColor.jamiBackgroundSecondaryColor
-        dialpadButtonShadow.layer.shadowColor = UIColor.jamiLabelColor.cgColor
-        dialpadButtonShadow.layer.shadowOffset = CGSize.zero
-        dialpadButtonShadow.layer.shadowRadius = 1
-        dialpadButtonShadow.layer.shadowOpacity = 0.6
-        dialpadButtonShadow.layer.masksToBounds = false
         self.viewModel.hideNoConversationsMessage
-            .bind(to: self.noConversationsView.rx.isHidden)
+            .bind(to: self.noConversationLabel.rx.isHidden)
             .disposed(by: disposeBag)
-        let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
-        self.networkAlertView.isHidden = isHidden
         self.viewModel.connectionState
-            .subscribe(onNext: { [weak self] connectionState in
-                let isHidden = connectionState == .none ? false : true
-                self?.networkAlertView.isHidden = isHidden
+            .startWith(self.viewModel.networkConnectionState())
+            .subscribe(onNext: { [weak self] _ in
+                self?.updateNetworkUI()
             })
             .disposed(by: self.disposeBag)
 
         self.settingsButton.backgroundColor = nil
+        self.settingsButton.setTitle("", for: .normal)
         self.settingsButton.rx.tap
             .subscribe(onNext: { _ in
                 if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -305,12 +234,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: self.disposeBag)
         self.viewModel.currentAccountChanged
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] currentAccount in
-                if let account = currentAccount {
-                    let accountSip = account.type == AccountType.sip
-                    self?.dialpadButtonShadow.isHidden = !accountSip
-                    self?.updateSearchBar()
-                }
+            .subscribe(onNext: { [weak self] _ in
+                self?.searchBarNotActive()
             })
             .disposed(by: disposeBag)
         // create accounts button
@@ -323,80 +248,39 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         accountButton.cornerRadius = size * 0.5
         accountButton.frame = CGRect(x: 0, y: 0, width: size, height: size)
         accountButton.imageEdgeInsets = UIEdgeInsets(top: -4, left: -4, bottom: -4, right: -4)
-        let screenRect = UIScreen.main.bounds
-        let screenWidth = screenRect.size.width
-        let window = UIApplication.shared.keyWindow
-        let leftPadding: CGFloat = window?.safeAreaInsets.left ?? 0
-        let navControllerMargin = self.navigationController?.systemMinimumLayoutMargins.leading ?? 20
-        let maxWidth: CGFloat = screenWidth - 32 - navControllerMargin * 3 - leftPadding * 2
-        let accountNameX: CGFloat = accountButton.frame.origin.x + accountButton.frame.size.width + margin
-        let triangleViewX: CGFloat = maxWidth - triangleViewSize
-        let triangleViewY: CGFloat = size * 0.5
-        let accountNameWidth: CGFloat = maxWidth - triangleViewSize - size - margin * 2
-        let accountName = UILabel(frame: CGRect(x: accountNameX, y: 5, width: accountNameWidth, height: size))
-        accountName.tag = nameLabelTag
-        let triangleView = UIView(frame: CGRect(x: triangleViewX, y: triangleViewY, width: triangleViewSize, height: triangleViewSize))
-        triangleView.tag = triangleTag
-        let heightWidth = triangleView.frame.size.width
-        let path = CGMutablePath()
-
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: heightWidth / 2, y: heightWidth / 2))
-        path.addLine(to: CGPoint(x: heightWidth, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: 0))
-
-        let shape = CAShapeLayer()
-        shape.path = path
-        shape.fillColor = UIColor.jamiTextBlue.cgColor
-        triangleView.layer.insertSublayer(shape, at: 0)
-        accountName.textAlignment = .left
-        accountName.font = UIFont.systemFont(ofSize: 18.0)
-        accountName.lineBreakMode = .byTruncatingTail
-        accountName.textColor = UIColor.jamiTextBlue
-        let openButton = UIButton(type: .custom)
-        openButton.frame = CGRect(x: 0, y: 0, width: maxWidth, height: size)
-        openButton.tag = openAccountTag
-        self.viewModel.accountName
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { name in
-                accountName.text = name
-                accountName.sizeToFit()
-                var frame = accountName.frame
-                frame.size.width = min(frame.size.width, maxWidth - 70)
-                accountName.frame = frame
-            })
-            .disposed(by: self.disposeBag)
-        accountView = UIView(frame: CGRect(x: 0, y: 0, width: maxWidth, height: size))
-        accountView.addSubview(accountButton)
-        accountView.addSubview(accountName)
-        accountView.addSubview(triangleView)
-        accountView.addSubview(openButton)
-        let accountButtonItem = UIBarButtonItem(customView: accountView)
+        let accountButtonItem = UIBarButtonItem(customView: accountButton)
         accountButtonItem
             .customView?
             .translatesAutoresizingMaskIntoConstraints = false
         accountButtonItem.customView?
             .heightAnchor
             .constraint(equalToConstant: size).isActive = true
-        accountWidth = accountView
+        accountButtonItem.customView?
             .widthAnchor
-            .constraint(equalToConstant: maxWidth)
-        accountWidth.isActive = true
-        openButton.rx.tap
+            .constraint(equalToConstant: size).isActive = true
+        accountButton.rx.tap
             .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.openAccountsList()
             })
             .disposed(by: self.disposeBag)
         self.navigationItem.leftBarButtonItem = accountButtonItem
-        self.navigationItem.rightBarButtonItem = createMenuButton()
+        self.navigationItem.rightBarButtonItems = [createSearchButton(), createMenuButton()]
+        self.conversationsTableView.tableFooterView = UIView()
+    }
 
-        dialpadButton.rx.tap
+    func createSearchButton() -> UIBarButtonItem {
+        let imageSettings = UIImage(systemName: "square.and.pencil") as UIImage?
+        let generalSettingsButton = UIButton(type: UIButton.ButtonType.system) as UIButton
+        generalSettingsButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        generalSettingsButton.setImage(imageSettings, for: .normal)
+        generalSettingsButton.tintColor = .jamiMain
+        generalSettingsButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel.showDialpad()
+                self?.searchController.isActive = true
             })
             .disposed(by: self.disposeBag)
-        self.conversationsTableView.tableFooterView = UIView()
+        return UIBarButtonItem(customView: generalSettingsButton)
     }
 
     func createMenuButton() -> UIBarButtonItem {
@@ -435,42 +319,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         return UIMenu(title: "", children: [openAccount, openSettings, aboutJami])
     }
 
-    private func updateAccountItemSize() {
-        let screenRect = UIScreen.main.bounds
-        let screenWidth = screenRect.size.width
-        let window = UIApplication.shared.keyWindow
-        let leftPadding: CGFloat = window?.safeAreaInsets.left ?? 0
-        let navControllerMargin = self.navigationController?.systemMinimumLayoutMargins.leading ?? 20
-        let maxWidth: CGFloat = screenWidth - 32 - navControllerMargin * 3 - leftPadding * 2
-        accountWidth.constant = maxWidth
-        var accountFrame = accountView.frame
-        accountFrame.size.width = maxWidth
-        accountView.frame = accountFrame
-        if let triangle = accountView.subviews.filter({ view in
-            return view.tag == triangleTag
-        }).first {
-            var triangleFrame = triangle.frame
-            let triangleViewX: CGFloat = maxWidth - triangleViewSize - 2
-            triangleFrame.origin.x = triangleViewX
-            triangle.frame = triangleFrame
-        }
-        if let name = accountView.subviews.filter({ view in
-            return view.tag == nameLabelTag
-        }).first {
-            var nameFrame = name.frame
-            let accountNameWidth: CGFloat = maxWidth - triangleViewSize - size - margin * 2
-            nameFrame.size.width = accountNameWidth
-            name.frame = nameFrame
-        }
-        if let button = accountView.subviews.filter({ view in
-            return view.tag == openAccountTag
-        }).first {
-            var buttonFrame = button.frame
-            buttonFrame.size.width = maxWidth
-            button.frame = buttonFrame
-        }
-    }
-
     func confugureAccountPicker() {
         accountPickerTextView.inputView = accounPicker
         view.addSubview(accountPickerTextView)
@@ -483,7 +331,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         if let account = self.viewModel.currentAccount,
            let row = accountsAdapter.rowForAccountId(account: account) {
             accounPicker.selectRow(row, inComponent: 0, animated: true)
-            dialpadButtonShadow.isHidden = account.type == AccountType.ring
         }
         self.viewModel.currentAccountChanged
             .observe(on: MainScheduler.instance)
@@ -601,69 +448,19 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.conversationsTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
 
-    let searchController: CustomSearchController = {
-        let searchController = CustomSearchController(searchResultsController: nil)
-        searchController.searchBar.searchBarStyle = .minimal
+    let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.definesPresentationContext = true
         searchController.hidesNavigationBarDuringPresentation = true
         return searchController
     }()
 
-    func updateSearchBar() {
-        guard let account = self.viewModel.currentAccount else { return }
-        let accountSip = account.type == AccountType.sip
-        let image = accountSip ? UIImage(asset: Asset.phoneBook) : UIImage(asset: Asset.qrCode)
-        guard let buttonImage = image else { return }
-        searchController.updateSearchBar(image: buttonImage)
-        if !accountSip {
-            let image1 = UIImage(asset: Asset.createSwarm)
-            guard let buttonImage = image1 else { return }
-            searchController.updateSearchBar(image: buttonImage)
-        }
-    }
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        // -100 from total width as number of buttons in navigation items are 2
-        if let container = self.searchController.searchBar.superview {
-            container.frame = CGRect(x: container.frame.origin.x, y: container.frame.origin.y, width: self.view.frame.size.width - 100, height: container.frame.size.height)
-        }
-    }
-
     func setupSearchBar() {
-        guard let account = self.viewModel.currentAccount else { return }
-        let accountSip = account.type == AccountType.sip
-        let image = accountSip ? UIImage(asset: Asset.phoneBook) : UIImage(asset: Asset.qrCode)
-        guard let buttonImage = image else { return }
-        searchController
-            .configureSearchBar(image: buttonImage, position: 1,
-                                buttonPressed: { [weak self] in
-                                    guard let self = self else { return }
-                                    guard let account = self.viewModel.currentAccount else { return }
-                                    let accountSip = account.type == AccountType.sip
-                                    if accountSip {
-                                        self.contactPicker.delegate = self
-                                        self.present(self.contactPicker, animated: true, completion: nil)
-                                    } else {
-                                        self.openScan()
-                                    }
-                                })
-        if !accountSip {
-            let image1 = UIImage(asset: Asset.createSwarm)
-            guard let buttonImage1 = image1 else { return }
-            searchController
-                .configureSearchBar(image: buttonImage1, position: 2,
-                                    buttonPressed: { [weak self] in
-                                        guard let self = self else { return }
-                                        //                                        guard let account = self.viewModel.currentAccount else { return }
-                                        //                                        let accountSip = account.type == AccountType.sip
-                                        //                                        if accountSip {
-                                        //                                            self.contactPicker.delegate = self
-                                        //                                            self.present(self.contactPicker, animated: true, completion: nil)
-                                        //                                        } else {
-                                        self.createGroup()
-                                        //                                        }
-                                    })
-        }
+        searchController.delegate = self
+        let navBar = SmartListNavigationBar()
+        self.navigationController?.setValue(navBar, forKey: "navigationBar")
+
         navigationItem.searchController = searchController
 
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -673,6 +470,92 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 self?.viewModel.searching.onNext(editing)
             })
             .disposed(by: disposeBag)
+    }
+
+    func willPresentSearchController(_ searchController: UISearchController) {
+        self.searchBarActive()
+    }
+
+    func updateSearchBarIfActive() {
+        if searchController.isActive {
+            searchBarActive()
+        }
+    }
+
+    func updateNetworkUI() {
+        let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
+        self.networkAlertView.isHidden = isHidden
+        self.tableTopConstraint.constant = isHidden ? -60 : 15
+        self.view.layoutIfNeeded()
+    }
+
+    func searchBarActive() {
+        guard let customNavBar = self.navigationController?.navigationBar as? SmartListNavigationBar else { return }
+
+        self.navigationItem.title = ""
+        self.tableTopConstraint.constant = 15
+        self.widgetsTopConstraint.constant = 40
+        customNavBar.customHeight = 70
+        customNavBar.searchActive = true
+
+        if self.viewModel.isSipAccount() {
+            let bookButton = creatSwarchBarButtonWithImage(named: "book.circle", weigh: .light, width: 27)
+            bookButton.setImage(UIImage(asset: Asset.phoneBook), for: .normal)
+            bookButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    guard let self = self else { return }
+                    self.contactPicker.delegate = self
+                    self.present(self.contactPicker, animated: true, completion: nil)
+                })
+                .disposed(by: customNavBar.disposeBag)
+            let dialpadCodeButton = creatSwarchBarButtonWithImage(named: "square.grid.3x3.topleft.filled", weigh: .light, width: 25)
+            dialpadCodeButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.viewModel.showDialpad()
+                })
+                .disposed(by: customNavBar.disposeBag)
+            customNavBar.addTopView(with: [bookButton, dialpadCodeButton])
+        } else {
+            let qrCodeButton = creatSwarchBarButtonWithImage(named: "qrcode", weigh: .regular, width: 25)
+            qrCodeButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.viewModel.showQRCode()
+                })
+                .disposed(by: customNavBar.disposeBag)
+            let swarmButton = creatSwarchBarButtonWithImage(named: "person.2", weigh: .regular, width: 32)
+            swarmButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.createGroup()
+                })
+                .disposed(by: customNavBar.disposeBag)
+            customNavBar.addTopView(with: [qrCodeButton, swarmButton])
+        }
+    }
+
+    func searchBarNotActive() {
+        guard let customNavBar = self.navigationController?.navigationBar as? SmartListNavigationBar else { return }
+        self.navigationItem.title = selectedSegmentIndex.value == 0 ?
+            L10n.Smartlist.conversations : L10n.Smartlist.invitations
+        self.widgetsTopConstraint.constant = 0
+        updateNetworkUI()
+        customNavBar.customHeight = 44
+        customNavBar.searchActive = false
+        customNavBar.removeTopView()
+    }
+
+    func creatSwarchBarButtonWithImage(named imageName: String, weigh: UIImage.SymbolWeight, width: CGFloat) -> UIButton {
+        let button = UIButton()
+        let configuration = UIImage.SymbolConfiguration(pointSize: 40, weight: weigh, scale: .large)
+        button.setImage(UIImage(systemName: imageName, withConfiguration: configuration), for: .normal)
+        button.tintColor = .jamiMain
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.widthAnchor.constraint(equalToConstant: width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 23).isActive = true
+        return button
+    }
+
+    func willDismissSearchController(_ searchController: UISearchController) {
+        searchBarNotActive()
     }
 
     func startAccountCreation() {
