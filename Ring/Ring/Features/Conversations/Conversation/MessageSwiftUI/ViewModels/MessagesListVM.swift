@@ -191,7 +191,7 @@ class MessagesListVM: ObservableObject {
             .subscribe(onNext: { [weak self] profile in
                 guard let self = self else { return }
                 let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId)
-                let defaultAvatar = UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account)
+                let defaultAvatar = UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 16)
                 if let photo = profile.photo,
                    let data = NSData(base64Encoded: photo,
                                      options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {

@@ -66,6 +66,8 @@ struct SwarmCreationUI: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Spacer()
+                .frame(height: 10)
             HStack(alignment: .center, spacing: 10) {
                 Button(action: {
                     self.hideKeyboard()
