@@ -196,7 +196,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         }
         return self.requestsService.requests
             .asObservable()
-            .map({ [weak self]requests -> Int in
+            .map({ [weak self] requests -> Int in
                 guard let self = self,
                       let account = self.accountsService.currentAccount else {
                     return 0
@@ -211,18 +211,23 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     typealias BageValues = (messages: Int, requests: Int)
 
-    lazy var updateSegmentControl: Observable<BageValues> = {[weak self] in
-        guard let self = self else {
-            let value: BageValues = (0, 0)
-            return Observable.just(value)
+    lazy var updateSegmentControl: ReplaySubject<BageValues> = {
+        let subject = ReplaySubject<BageValues>.create(bufferSize: 1)
+
+        Observable.combineLatest(self.unreadMessages, self.unhandeledRequests) { (messages, requests) -> BageValues in
+            return (messages, requests)
         }
-        return Observable<BageValues>
-            .combineLatest(self.unreadMessages,
-                           self.unhandeledRequests,
-                           resultSelector: {(messages, requests) -> BageValues in
-                            return (messages, requests)
-                           })
-            .observe(on: MainScheduler.instance)
+        .observe(on: MainScheduler.instance)
+        .subscribe(onNext: { values in
+            subject.onNext(values)
+        }, onError: { error in
+            subject.onError(error)
+        }, onCompleted: {
+            subject.onCompleted()
+        })
+        .disposed(by: self.disposeBag)
+
+        return subject
     }()
 
     func reloadDataFor(accountId: String) {
@@ -342,6 +347,11 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         self.conversationViewModels.forEach { conversationModel in
             conversationModel.closeAllPlayers()
         }
+    }
+
+    func isSipAccount() -> Bool {
+        guard let account = self.currentAccount else { return false }
+        return account.type == .sip
     }
 
     func showSipConversation(withNumber number: String) {
