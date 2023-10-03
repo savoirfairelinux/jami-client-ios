@@ -23,6 +23,7 @@
 import RxCocoa
 import RxSwift
 import SwiftyBeaver
+import os.log
 
 enum LinkNewDeviceError: Error {
     case unknownError
@@ -852,6 +853,8 @@ class AccountsService: AccountAdapterDelegate {
                 notificationData[keyString] = valueString
             }
         }
+        let notificationDataDescription = String(describing: notificationData)
+        os_log("Notification data: %{public}@", notificationDataDescription)
         self.accountAdapter.pushNotificationReceived("", message: notificationData)
     }
 
@@ -966,6 +969,7 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func setAccountActive(active: Bool, accountId: String) {
+        os_log("****** set account active for accountId: %@ with active status: %d", accountId, active ? 1 : 0)
         self.accountAdapter.setAccountActive(accountId, active: active)
     }
 
