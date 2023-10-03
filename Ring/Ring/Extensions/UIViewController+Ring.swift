@@ -156,7 +156,48 @@ extension UIViewController {
             .disposed(by: disposeBag)
     }
 
-    func configureRingNavigationBar() {
+    func configureLargeTitleNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        let titleFont = UIFont.systemFont(ofSize: 17, weight: .medium)
+        appearance.titleTextAttributes = [.font: titleFont]
+
+        let largeTitleFont = UIFont.systemFont(ofSize: 34, weight: .medium)
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.jamiMain, .font: largeTitleFont]
+
+        appearance.shadowColor = .clear
+        appearance.shadowImage = UIImage()
+
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0
+        self.navigationController?.navigationBar.tintColor = .label
+    }
+
+    func configureNavigationBar(isTransparent: Bool = false) {
+        let appearance = UINavigationBarAppearance()
+        if isTransparent {
+            appearance.configureWithTransparentBackground()
+        } else {
+            appearance.configureWithDefaultBackground()
+            appearance.backgroundColor = UIColor.systemBackground
+        }
+
+        // Explicitly set shadow properties to none
+        appearance.shadowColor = nil
+        appearance.shadowImage = nil
+        appearance.backgroundImage = nil
+
+        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
+        appearance.titleTextAttributes = textAttributes
+        navigationController?.navigationBar.tintColor = UIColor.jamiMain
+
+        // Apply the appearance configuration
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.standardAppearance = appearance
+
+        // Set other properties
         self.navigationController?.navigationBar.barStyle = .default
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
@@ -164,16 +205,12 @@ extension UIViewController {
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
         self.navigationController?.navigationBar.layer.shadowRadius = 2
         self.navigationController?.navigationBar.layer.masksToBounds = false
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
-        self.navigationController?.navigationBar.titleTextAttributes = textAttributes
-        self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
-        self.navigationController?.navigationBar.barTintColor = UIColor.systemBackground
         #if swift(>=5.7)
         if #available(iOS 16.0, *) {
             navigationItem.preferredSearchBarPlacement = .stacked
         }
         #endif
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
 
     func configureWalkrhroughNavigationBar() {

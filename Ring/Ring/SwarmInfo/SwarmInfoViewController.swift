@@ -31,6 +31,7 @@ class SwarmInfoViewController: UIViewController, ViewModelBased, StoryboardBased
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureNavigationBar(isTransparent: true)
         guard let swarmInfo = self.viewModel.swarmInfo else { return }
         let swiftUIVM = SwarmInfoVM(with: self.viewModel.injectionBag, swarmInfo: swarmInfo)
         contentView = UIHostingController(rootView: SwarmInfoView(viewmodel: swiftUIVM))

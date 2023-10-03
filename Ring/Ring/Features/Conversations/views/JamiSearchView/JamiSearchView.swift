@@ -108,6 +108,7 @@ class JamiSearchView: NSObject {
             .subscribe(onNext: { [weak self] status in
                 guard let self = self else { return }
                 self.searchingLabel.text = status.toString()
+                self.searchingLabel.isHidden = status.toString().isEmpty
             })
             .disposed(by: disposeBag)
         searchingLabel.textColor = UIColor.jamiLabelColor
@@ -127,47 +128,7 @@ class JamiSearchView: NSObject {
             .debounce(Durations.textFieldThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
             .bind(to: self.viewModel.searchBarText)
             .disposed(by: disposeBag)
-
-        // Show Cancel button
-        self.searchBar.rx.textDidBeginEditing
-            .subscribe(onNext: { [weak self] in
-                self?.editSearch.onNext(true)
-                self?.searchBar.setShowsCancelButton(true, animated: false)
-            })
-            .disposed(by: disposeBag)
-
-        // Hide Cancel button
-        self.searchBar.rx.textDidEndEditing
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.searchBar.setShowsCancelButton(false, animated: false)
-                if self.isIncognito && !(self.searchBar.text?.isEmpty ?? true) {
-                    return
-                }
-                self.editSearch.onNext(false)
-            })
-            .disposed(by: disposeBag)
-
-        // Cancel button event
-        self.searchBar.rx.cancelButtonClicked
-            .subscribe(onNext: { [weak self] in
-                self?.cancelSearch()
-            })
-            .disposed(by: disposeBag)
-
-        // Search button event
-        self.searchBar.rx.searchButtonClicked
-            .subscribe(onNext: { [weak self] in
-                self?.searchBar.resignFirstResponder()
-            })
-            .disposed(by: disposeBag)
-
-        searchBar.returnKeyType = .done
-        searchBar.autocapitalizationType = .none
-        searchBar.tintColor = UIColor.jamiMain
         searchBar.placeholder = L10n.Smartlist.searchBar
-        searchBar.backgroundImage = UIImage()
-        searchBar.backgroundColor = UIColor.clear
     }
 }
 
