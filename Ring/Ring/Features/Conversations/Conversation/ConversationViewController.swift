@@ -84,7 +84,7 @@ class ConversationViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         messageAccessoryView.delegate = self
-        self.configureRingNavigationBar()
+        self.configureNavigationBar()
         if #available(iOS 15.0, *) {
             self.currentCallButton.isHidden = true
             self.currentCallLabel.isHidden = true
@@ -123,7 +123,7 @@ class ConversationViewController: UIViewController,
                     self.navigationItem.rightBarButtonItems = []
                     self.navigationItem.setHidesBackButton(true, animated: false)
                 } else {
-                    self.configureRingNavigationBar()
+                    self.configureNavigationBar()
                     self.setRightNavigationButtons()
                     self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                                        displayName: self.viewModel.displayName.value,
@@ -180,8 +180,6 @@ class ConversationViewController: UIViewController,
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
         self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                            displayName: self.viewModel.displayName.value,
                            username: self.viewModel.userName.value)

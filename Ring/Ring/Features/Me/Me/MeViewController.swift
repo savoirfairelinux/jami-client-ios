@@ -55,7 +55,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         super.viewDidLoad()
         self.applyL10n()
         self.configureBindings()
-        self.configureRingNavigationBar()
+        self.configureNavigationBar()
         self.calculateSipCredentialsMargin()
         self.calculateConnectivityMargin()
         self.adaptTableToKeyboardState(for: self.settingsTable,
@@ -77,7 +77,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.jamiNavigationBarShadow.cgColor
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
                                     NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor]
