@@ -265,30 +265,70 @@ extension UIImage {
         return image
     }
 
-    class func defaultJamiAvatarFor(profileName: String?, account: AccountModel?) -> UIImage {
-        guard let account = account else { return UIImage(asset: Asset.icContactPicture)! }
-        let image = UIImage(asset: Asset.icContactPicture)!
-            .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
-        var name: String? = (profileName != nil) ? profileName :
-            !account.registeredName.isEmpty ?
-            account.registeredName : nil
-        if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
-           let accountName = userNameData[account.id] as? String,
-           !accountName.isEmpty {
-            name = accountName
+    func fillJamiBackgroundColor() -> UIImage {
+        let color = UIColor.jamiMain
+        let inset: CGFloat = 4
+        let newSize = CGSize(width: self.size.width + 2 * inset, height: self.size.height + 2 * inset)
+        let drawingRect = CGRect(x: inset, y: inset, width: self.size.width, height: self.size.height)
+
+        UIGraphicsBeginImageContextWithOptions(newSize, false, self.scale)
+
+        let context = UIGraphicsGetCurrentContext()
+
+        color.setFill()
+        context?.fill(CGRect(origin: CGPoint.zero, size: newSize))
+
+        UIColor.white.setFill()
+
+        self.withRenderingMode(.alwaysTemplate).draw(in: drawingRect)
+
+        let imageWithBackground = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+
+        return imageWithBackground ?? self
+    }
+
+    class func defaultJamiAvatarFor(profileName: String?, account: AccountModel?, size: CGFloat) -> UIImage {
+        func generateDefaultImage() -> UIImage {
+            let configuration = UIImage.SymbolConfiguration(pointSize: size, weight: .regular, scale: .medium)
+            let defaultImage = UIImage(systemName: "person.fill", withConfiguration: configuration)
+            return defaultImage?.fillJamiBackgroundColor().circleMasked ?? defaultImage!.fillJamiBackgroundColor()
         }
-        guard let username = name else { return image }
-        let scanner = Scanner(string: username.toMD5HexString().prefixString())
-        var index: UInt64 = 0
-        if scanner.scanHexInt64(&index) {
-            let fbaBGColor = avatarColors[Int(index)]
-            if !username.isSHA1() && !username.isEmpty {
-                if let avatar = image.drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: CGSize(width: 40, height: 40)) {
-                    return avatar
-                }
+
+        func extractUsername(from profileName: String?, and account: AccountModel?) -> String? {
+            if let profileName = profileName, !profileName.isEmpty {
+                return profileName
+            } else if let accountName = account?.registeredName, !accountName.isEmpty {
+                return accountName
+            } else if let accountID = account?.id,
+                      let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+                      let accountName = userNameData[accountID] as? String, !accountName.isEmpty {
+                return accountName
             }
+            return nil
         }
-        return image
+
+        func generateAvatar(from username: String) -> UIImage? {
+            let scanner = Scanner(string: username.toMD5HexString().prefixString())
+            var index: UInt64 = 0
+
+            guard scanner.scanHexInt64(&index) else { return nil }
+            let fbaBGColor = avatarColors[Int(index)]
+
+            if !username.isSHA1() && !username.isEmpty {
+                return UIImage().drawText(text: username.prefixString().capitalized,
+                                          backgroundColor: fbaBGColor,
+                                          textColor: .white,
+                                          size: CGSize(width: size + 8, height: size + 8))?.circleMasked
+            }
+            return nil
+        }
+
+        let defaultImage = generateDefaultImage()
+        guard let account = account else { return defaultImage }
+        guard let username = extractUsername(from: profileName, and: account) else { return defaultImage }
+        return generateAvatar(from: username) ?? defaultImage
     }
 
     class func mergeImages(image1: UIImage, image2: UIImage, spacing: CGFloat = 6, height: CGFloat) -> UIImage {
@@ -406,7 +446,6 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.main.scale)
         if let context = UIGraphicsGetCurrentContext() {
             let rect = CGRect(origin: .zero, size: size)
-            // context.setFillColor(color.cgColor)
             self.draw(in: rect)
             context.setBlendMode(CGBlendMode.normal)
             context.setFillColor(color.cgColor)
