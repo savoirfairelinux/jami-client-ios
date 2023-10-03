@@ -648,8 +648,8 @@ internal enum L10n {
     internal static let noResults = L10n.tr("Localizable", "smartlist.noResults", fallback: "No results")
     /// Public Directory
     internal static let results = L10n.tr("Localizable", "smartlist.results", fallback: "Public Directory")
-    /// Search for new or existing contact...
-    internal static let searchBar = L10n.tr("Localizable", "smartlist.searchBar", fallback: "Search for new or existing contact...")
+    /// Search
+    internal static let searchBar = L10n.tr("Localizable", "smartlist.searchBar", fallback: "Search")
     /// Enter name...
     internal static let searchBarPlaceholder = L10n.tr("Localizable", "smartlist.searchBarPlaceholder", fallback: "Enter name...")
     /// Select one of the numbers
