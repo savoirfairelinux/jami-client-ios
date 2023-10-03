@@ -79,18 +79,12 @@ final class AccountPickerAdapter: NSObject, UIPickerViewDataSource, UIPickerView
             .map({ [weak self] accountProfile in
                 if let photo = accountProfile.photo,
                    let data = NSData(base64Encoded: photo,
-                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    return UIImage(data: data) ?? UIImage(asset: Asset.fallbackAvatar)!
+                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?,
+                   let image = UIImage(data: data) {
+                    return image
                 }
-                guard let account = self?.items[row].account else {
-                    return UIImage(asset: Asset.fallbackAvatar)!
-                }
-                guard let name = accountProfile.alias else {
-                    return UIImage.defaultJamiAvatarFor(profileName: nil,
-                                                        account: account)}
-                let profileName = name.isEmpty ? nil : name
-                return UIImage.defaultJamiAvatarFor(profileName: profileName,
-                                                    account: account)
+                let account = self?.items[row].account
+                return UIImage.defaultJamiAvatarFor(profileName: accountProfile.alias, account: account, size: 30)
             })
             .bind(to: accountView.avatarView.rx.image)
             .disposed(by: DisposeBag())
