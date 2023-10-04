@@ -26,6 +26,7 @@ class DisposableCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.backgroundColor = .systemBackground
         self.disposeBag = DisposeBag()
     }
 }
