@@ -49,8 +49,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     // MARK: - functions
     override func viewDidLoad() {
-        self.view.backgroundColor = UIColor.jamiBackgroundColor
-        self.settingsTable.backgroundColor = UIColor.jamiBackgroundColor
+        self.view.backgroundColor = .jamiFormBackgroundColor
+        self.settingsTable.backgroundColor = .jamiFormBackgroundColor
         self.addHeaderView()
         super.viewDidLoad()
         self.applyL10n()
@@ -274,9 +274,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 switch dataSource[indexPath] {
                 case .autoRegistration:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.autoRegistration
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -299,7 +299,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
                 case .device(let device):
                     let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeviceCell.self)
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.deviceIdLabel.text = device.deviceId
                     cell.deviceIdLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
                     cell.deviceIdLabel.sizeToFit()
@@ -320,9 +319,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
                 case .linkNew:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.linkDeviceTitle
-                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
                     cell.selectionStyle = .none
                     cell.sizeToFit()
@@ -335,8 +333,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                             self?.viewModel.linkDevice()
                         })
                         .disposed(by: cell.disposeBag)
+                    cell.backgroundColor = .clear
+                    cell.contentView.backgroundColor = .systemBackground
                     return cell
-
                 case .blockedList:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.blockedContacts
@@ -345,7 +344,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.selectionStyle = .none
                     cell.sizeToFit()
                     let button = UIButton.init(frame: cell.frame)
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     let size = CGSize(width: self.view.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
@@ -356,17 +354,42 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .disposed(by: cell.disposeBag)
                     return cell
                 case .sectionHeader(let title):
-                    let cell = UITableViewCell()
-                    cell.textLabel?.text = title
-                    cell.backgroundColor = UIColor.jamiBackgroundSecondaryColor
-                    cell.selectionStyle = .none
-                    return cell
+                    let headerView = UIView()
+                    headerView.backgroundColor = .clear
 
+                    let label = UILabel()
+                    label.text = title
+                    label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+                    label.textColor = .lightGray
+                    headerView.addSubview(label)
+
+                    label.translatesAutoresizingMaskIntoConstraints = false
+                    NSLayoutConstraint.activate([
+                        label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+                        label.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
+                        label.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 25),
+                        label.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -5)
+                    ])
+
+                    let cell = UITableViewCell()
+                    cell.selectionStyle = .none
+                    cell.backgroundColor = .clear
+                    cell.contentView.addSubview(headerView)
+
+                    headerView.translatesAutoresizingMaskIntoConstraints = false
+                    NSLayoutConstraint.activate([
+                        headerView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
+                        headerView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),
+                        headerView.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
+                        headerView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)
+                    ])
+
+                    cell.removeCorners()
+                    return cell
                 case .removeAccount:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.Global.removeAccount
-                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
                     cell.selectionStyle = .none
                     cell.sizeToFit()
@@ -388,7 +411,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     }
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.Global.registerAUsername
-                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
                     cell.sizeToFit()
                     cell.selectionStyle = .none
@@ -408,15 +431,13 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                                                 style: .footnote)
                 case .ordinary(let label):
                     let cell = UITableViewCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = label
                     cell.selectionStyle = .none
                     return cell
                 case .shareAccountDetails:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.shareAccountDetails
-                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
                     cell.sizeToFit()
                     cell.selectionStyle = .none
@@ -432,11 +453,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .changePassword:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     let title = self.viewModel.hasPassword() ?
                         L10n.AccountPage.changePassword : L10n.AccountPage.createPassword
                     cell.textLabel?.text = title
-                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
                     cell.sizeToFit()
                     cell.selectionStyle = .none
@@ -452,9 +472,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .notifications:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.enableNotifications
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -475,9 +495,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .peerDiscovery:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.peerDiscovery
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -540,10 +560,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .boothMode:
                     let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.enableBoothMode
                     cell.textLabel?.sizeToFit()
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -575,9 +595,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .enableAccount:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.Account.enableAccount
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -600,9 +620,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .turnEnabled:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.turnEnabled
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -624,9 +644,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .upnpEnabled:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.upnpEnabled
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -675,6 +695,23 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: disposeBag)
     }
 
+    func makeAndAddContentView(onCell cell: DisposableCell) -> UIView {
+        cell.backgroundColor = .clear
+        let contentView = UIView()
+        contentView.backgroundColor = .systemBackground
+        cell.contentView.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 0),
+            contentView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: 0),
+            contentView.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 44)
+        ])
+
+        return contentView
+    }
+
     func configureCellWithEnableTextCopy(text: String, secondaryText: String, style: UIFont.TextStyle) -> DisposableCell {
         let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
         cell.selectionStyle = .none
@@ -720,7 +757,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     func configureTurnCell(cellType: SettingsSection.SectionRow,
                            value: String) -> UITableViewCell {
         let cell = DisposableCell(style: .value1, reuseIdentifier: accountStateCell)
-        cell.backgroundColor = UIColor.jamiBackgroundColor
         cell.selectionStyle = .none
         let textField = UITextField()
         textField.tag = self.sipCredentialsTAG
@@ -800,7 +836,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     func configureSipCredentialsCell(cellType: SettingsSection.SectionRow,
                                      value: String) -> UITableViewCell {
         let cell = DisposableCell(style: .value1, reuseIdentifier: sipAccountCredentialsCell)
-        cell.backgroundColor = UIColor.jamiBackgroundColor
         cell.selectionStyle = .none
         let text = UITextField()
         text.tag = self.sipCredentialsTAG
