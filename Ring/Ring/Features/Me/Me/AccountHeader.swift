@@ -28,7 +28,7 @@ class AccountHeader: GSKStretchyHeaderView {
 
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
-        background.backgroundColor = UIColor.jamiBackgroundColor
+        background.backgroundColor = UIColor.clear
     }
 
     override func didChangeStretchFactor(_ stretchFactor: CGFloat) {

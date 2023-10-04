@@ -24,6 +24,16 @@
  */
 
 final class SettingsTableView: UITableView {
+
+    override var contentOffset: CGPoint {
+        didSet {
+            if contentOffset.x != 0 && !alwaysBounceHorizontal {
+                print("********* Unexpected horizontal scroll detected!")
+                contentOffset.x = 0
+            }
+        }
+    }
+
     override func scrollRectToVisible(_ rect: CGRect, animated: Bool) {
         // Don'd do anything here to prevent autoscrolling.
     }

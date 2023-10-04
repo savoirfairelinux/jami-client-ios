@@ -4,6 +4,7 @@
  *  Author: Thibault Wittemberg <thibault.wittemberg@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Author: Alireza Toghiani Khorasgani <alireza.toghiani@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,9 +32,12 @@ enum SettingsSection: SectionModelType {
     typealias Item = SectionRow
 
     case linkedDevices(items: [SectionRow])
-    case linkNewDevice(items: [SectionRow])
     case accountSettings(items: [SectionRow])
+    case notificationSettings(items: [SectionRow])
+    case connectivitySettings(items: [SectionRow])
     case credentials(items: [SectionRow])
+    case otherSettings(items: [SectionRow])
+    case removeAccountSettings(items: [SectionRow])
 
     enum SectionRow {
         case device(device: DeviceModel)
@@ -41,7 +45,6 @@ enum SettingsSection: SectionModelType {
         case blockedList
         case removeAccount
         case shareAccountDetails
-        case sectionHeader(title: String)
         case ordinary(label: String)
         case jamiID(label: String)
         case jamiUserName(label: String)
@@ -68,27 +71,46 @@ enum SettingsSection: SectionModelType {
 
     var items: [SectionRow] {
         switch self {
-        case .linkedDevices(let items):
+        case .linkedDevices(let items), .removeAccountSettings(items: let items), .notificationSettings(let items), .connectivitySettings(let items), .credentials(let items), .otherSettings(items: let items), .accountSettings(items: let items):
             return items
-        case .linkNewDevice(let items):
-            return items
-        case .accountSettings(let items):
-            return items
-        case .credentials(let items):
-            return items
+        }
+    }
+
+    var title: String? {
+        switch self {
+        case .linkedDevices:
+            return L10n.AccountPage.devicesListHeader
+        case .otherSettings:
+            return L10n.AccountPage.other
+        case .removeAccountSettings:
+            return nil
+        case .notificationSettings:
+            return L10n.AccountPage.notificationsHeader
+        case .connectivitySettings:
+            return L10n.AccountPage.connectivityHeader
+        case .credentials:
+            return L10n.AccountPage.credentialsHeader
+        case .accountSettings(items: let items):
+            return nil
         }
     }
 
     init(original: SettingsSection, items: [SectionRow]) {
         switch original {
+        case .accountSettings(items: let items):
+            self = .accountSettings(items: items)
         case .linkedDevices:
             self = .linkedDevices(items: items)
-        case .linkNewDevice:
-            self = .linkNewDevice(items: items)
-        case .accountSettings:
-            self = .accountSettings(items: items)
+        case .notificationSettings:
+            self = .notificationSettings(items: items)
+        case .connectivitySettings:
+            self = .connectivitySettings(items: items)
         case .credentials:
             self = .credentials(items: items)
+        case .otherSettings(items: let items):
+            self = .otherSettings(items: items)
+        case .removeAccountSettings(items: let items):
+            self = .removeAccountSettings(items: items)
         }
     }
 }
@@ -134,8 +156,7 @@ class MeViewModel: ViewModel, Stateable {
     lazy var accountCredentials: Observable<SettingsSection> = {
         return Observable
             .combineLatest(userName.startWith(""), ringId.startWith("")) { (name, ringID) in
-                var items: [SettingsSection.SectionRow] = [.sectionHeader(title: L10n.AccountPage.credentialsHeader),
-                                                           .jamiID(label: ringID)]
+                var items: [SettingsSection.SectionRow] = [.jamiID(label: ringID)]
                 items.append(.jamiUserName(label: name))
                 items.append(.shareAccountDetails)
                 return SettingsSection
@@ -147,14 +168,9 @@ class MeViewModel: ViewModel, Stateable {
         return self.accountService.accountInfoToShare
     }
 
-    lazy var linkNewDevice: Observable<SettingsSection> = {
-        return Observable.just(.linkNewDevice(items: [.linkNew]))
-    }()
-
     lazy var removeAccount: Observable<SettingsSection> = {
         return Observable
-            .just(.accountSettings( items: [.sectionHeader(title: ""),
-                                            .ordinary(label: L10n.Global.removeAccount)]))
+            .just(.removeAccountSettings( items: [.ordinary(label: L10n.Global.removeAccount)]))
     }()
 
     lazy var accountStatus: BehaviorRelay<String> = {
@@ -188,8 +204,7 @@ class MeViewModel: ViewModel, Stateable {
 
     lazy var accountJamiSettings: Observable<SettingsSection> = {
         return Observable
-            .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.settingsHeader),
-                                            .notifications]))
+            .just(.notificationSettings( items: [.notifications]))
     }()
 
     lazy var connectivitySettings: Observable<SettingsSection> = {
@@ -209,24 +224,21 @@ class MeViewModel: ViewModel, Stateable {
             self.turnRealm.accept(realm)
         }
         return Observable
-            .just(.accountSettings(items: [.sectionHeader(title: L10n.AccountPage.connectivityHeader),
-                                           .turnEnabled,
-                                           .turnServer,
-                                           .turnUsername,
-                                           .turnPassword,
-                                           .turnRealm,
-                                           .upnpEnabled]))
+            .just(.connectivitySettings(items: [.turnEnabled,
+                                                .turnServer,
+                                                .turnUsername,
+                                                .turnPassword,
+                                                .turnRealm,
+                                                .upnpEnabled]))
     }()
 
     lazy var otherJamiSettings: Observable<SettingsSection> = {
-        let items: [SettingsSection.SectionRow] = [.sectionHeader(title: L10n.AccountPage.other),
-                                                   .peerDiscovery,
+        let items: [SettingsSection.SectionRow] = [.peerDiscovery,
                                                    .blockedList,
                                                    .accountState(state: self.accountStatus),
                                                    .enableAccount,
                                                    .changePassword,
-                                                   .boothMode,
-                                                   .removeAccount]
+                                                   .boothMode]
 
         return Observable.combineLatest(Observable.just(items),
                                         self.accountService.currentAccountChanged.asObservable().startWith(nil),
@@ -237,7 +249,7 @@ class MeViewModel: ViewModel, Stateable {
                                                 items.remove(at: items.count - 2) // remove .boothMode
                                                 items.remove(at: items.count - 2) // remove .changePassword
                                             }
-                                            return SettingsSection.accountSettings(items: items)
+                                            return SettingsSection.otherSettings(items: items)
                                         })
     }()
 
@@ -248,12 +260,12 @@ class MeViewModel: ViewModel, Stateable {
 
     lazy var jamiSettings: Observable<[SettingsSection]> = {
         Observable.combineLatest(accountCredentials,
-                                 linkNewDevice,
                                  linkedDevices,
                                  accountJamiSettings,
                                  connectivitySettings,
-                                 otherJamiSettings) { (credentials, linkNew, devices, settings, connectivity, other) in
-            return [credentials, devices, linkNew, settings, connectivity, other]
+                                 otherJamiSettings,
+                                 removeAccountSettings) { (credentials, devices, settings, connectivity, other, removeAccount) in
+            return [credentials, devices, settings, connectivity, other, removeAccount]
         }
     }()
 
@@ -262,11 +274,14 @@ class MeViewModel: ViewModel, Stateable {
 
     lazy var otherSipSettings: Observable<SettingsSection> = {
         return Observable
-            .just(SettingsSection.accountSettings( items: [.sectionHeader(title: ""),
-                                                           .accountState(state: self.accountStatus),
+            .just(SettingsSection.accountSettings( items: [.accountState(state: self.accountStatus),
                                                            .enableAccount,
-                                                           .autoRegistration,
-                                                           .removeAccount]))
+                                                           .autoRegistration]))
+    }()
+
+    lazy var removeAccountSettings: Observable<SettingsSection> = {
+        return Observable
+            .just(SettingsSection.removeAccountSettings( items: [.removeAccount]))
     }()
 
     lazy var sipCredentials: Observable<SettingsSection> = {
@@ -292,14 +307,12 @@ class MeViewModel: ViewModel, Stateable {
             }
             // isIP2IP
             if server.isEmpty {
-                return .accountSettings( items: [.sectionHeader(title: ""),
-                                                 .sipUserName(value: username),
+                return .accountSettings( items: [.sipUserName(value: username),
                                                  .sipPassword(value: password),
                                                  .sipServer(value: server),
                                                  .shareAccountDetails])
             }
-            return .accountSettings( items: [.sectionHeader(title: ""),
-                                             .sipUserName(value: username),
+            return .accountSettings( items: [.sipUserName(value: username),
                                              .sipPassword(value: password),
                                              .sipServer(value: server),
                                              .port(value: port),
@@ -624,9 +637,11 @@ class MeViewModel: ViewModel, Stateable {
                                                     isCurrent: true))]
                 }
                 if rows != nil {
-                    rows?.insert(.sectionHeader(title: L10n.AccountPage.devicesListHeader), at: 0)
+                    rows!.append(.linkNew)
                     let devicesSection: SettingsSection = .linkedDevices(items: rows!)
                     return devicesSection
+                } else {
+                    rows = [.linkNew]
                 }
                 return empptySection
             }
