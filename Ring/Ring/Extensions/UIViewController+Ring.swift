@@ -161,15 +161,16 @@ extension UIViewController {
         if isTransparent {
             appearance.configureWithTransparentBackground()
         } else {
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor.systemBackground
+            appearance.configureWithDefaultBackground()
+            appearance.backgroundColor = UIColor.jamiFormBackgroundColor
         }
 
         // Explicitly set shadow properties to none
-        appearance.shadowColor = .clear
-        appearance.shadowImage = UIImage()
+        appearance.shadowColor = nil
+        appearance.shadowImage = nil
+        appearance.backgroundImage = nil
+
         navigationController?.navigationBar.tintColor = UIColor.jamiButtonDark
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0
 
         // Apply the appearance configuration
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
