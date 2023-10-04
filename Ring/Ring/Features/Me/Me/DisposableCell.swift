@@ -23,9 +23,18 @@ import RxSwift
 
 class DisposableCell: UITableViewCell {
     var disposeBag = DisposeBag()
+    var cellId: String = ""
 
     override func prepareForReuse() {
         super.prepareForReuse()
         self.disposeBag = DisposeBag()
+        self.cellId = ""
+        removeSeperatorView()
+    }
+
+    func removeSeperatorView() {
+        if let seperatorView = self.contentView.subviews.first(where: { $0.tag == 999 }) {
+            seperatorView.removeFromSuperview()
+        }
     }
 }
