@@ -188,7 +188,7 @@ class MeViewModel: ViewModel, Stateable {
 
     lazy var accountJamiSettings: Observable<SettingsSection> = {
         return Observable
-            .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.settingsHeader),
+            .just(.accountSettings( items: [.sectionHeader(title: L10n.AccountPage.notificationsHeader),
                                             .notifications]))
     }()
 
