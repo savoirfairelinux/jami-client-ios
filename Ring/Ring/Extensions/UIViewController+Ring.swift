@@ -181,7 +181,7 @@ extension UIViewController {
             appearance.configureWithTransparentBackground()
         } else {
             appearance.configureWithDefaultBackground()
-            appearance.backgroundColor = UIColor.systemBackground
+            appearance.backgroundColor = UIColor.jamiFormBackgroundColor
         }
 
         // Explicitly set shadow properties to none
@@ -189,9 +189,7 @@ extension UIViewController {
         appearance.shadowImage = nil
         appearance.backgroundImage = nil
 
-        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.jamiMain]
-        appearance.titleTextAttributes = textAttributes
-        navigationController?.navigationBar.tintColor = UIColor.jamiMain
+        navigationController?.navigationBar.tintColor = UIColor.jamiButtonDark
 
         // Apply the appearance configuration
         navigationController?.navigationBar.scrollEdgeAppearance = appearance

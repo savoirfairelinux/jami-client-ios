@@ -99,6 +99,8 @@ internal enum L10n {
     internal static let enableBoothMode = L10n.tr("Localizable", "accountPage.enableBoothMode", fallback: "Enable Booth Mode")
     /// Enable Notifications
     internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications", fallback: "Enable Notifications")
+    /// Invite friends
+    internal static let inviteFriends = L10n.tr("Localizable", "accountPage.inviteFriends", fallback: "Invite friends")
     /// Link another device
     internal static let linkDeviceTitle = L10n.tr("Localizable", "accountPage.linkDeviceTitle", fallback: "Link another device")
     /// Confirm new password
@@ -109,6 +111,8 @@ internal enum L10n {
     internal static let noBoothMode = L10n.tr("Localizable", "accountPage.noBoothMode", fallback: "To enable Booth mode you need to create account password first.")
     /// Your device won't receive notifications when proxy is disabled
     internal static let noProxyExplanationLabel = L10n.tr("Localizable", "accountPage.noProxyExplanationLabel", fallback: "Your device won't receive notifications when proxy is disabled")
+    /// Notifications
+    internal static let notificationsHeader = L10n.tr("Localizable", "accountPage.notificationsHeader", fallback: "Notifications")
     /// Enter old password
     internal static let oldPasswordPlaceholder = L10n.tr("Localizable", "accountPage.oldPasswordPlaceholder", fallback: "Enter old password")
     /// Other
@@ -141,8 +145,6 @@ internal enum L10n {
     internal static let revokeDeviceTitle = L10n.tr("Localizable", "accountPage.revokeDeviceTitle", fallback: "Revoke device")
     /// Settings
     internal static let settingsHeader = L10n.tr("Localizable", "accountPage.settingsHeader", fallback: "Settings")
-    /// Share Account Details
-    internal static let shareAccountDetails = L10n.tr("Localizable", "accountPage.shareAccountDetails", fallback: "Share Account Details")
     /// Enable TURN
     internal static let turnEnabled = L10n.tr("Localizable", "accountPage.turnEnabled", fallback: "Enable TURN")
     /// TURN password
