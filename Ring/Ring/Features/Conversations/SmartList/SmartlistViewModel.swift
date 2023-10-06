@@ -187,6 +187,10 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             }
     }()
 
+    var accountInfoToShare: [Any]? {
+        return self.accountsService.accountInfoToShare
+    }
+
     lazy var unhandeledRequests: Observable<Int> = {[weak self] in
         guard let self = self else {
             return Observable.just(0)

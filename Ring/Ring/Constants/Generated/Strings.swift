@@ -628,6 +628,8 @@ internal enum L10n {
   internal enum Smartlist {
     /// About Jami
     internal static let aboutJami = L10n.tr("Localizable", "smartlist.aboutJami", fallback: "About Jami")
+    /// Account list
+    internal static let accounts = L10n.tr("Localizable", "smartlist.accounts", fallback: "Account list")
     /// Accounts
     internal static let accountsTitle = L10n.tr("Localizable", "smartlist.accountsTitle", fallback: "Accounts")
     /// + Add Account
@@ -638,6 +640,8 @@ internal enum L10n {
     internal static let conversations = L10n.tr("Localizable", "smartlist.conversations", fallback: "Conversations")
     /// Invitations
     internal static let invitations = L10n.tr("Localizable", "smartlist.invitations", fallback: "Invitations")
+    /// Invite friends
+    internal static let inviteFriends = L10n.tr("Localizable", "smartlist.inviteFriends", fallback: "Invite friends")
     /// No conversations
     internal static let noConversation = L10n.tr("Localizable", "smartlist.noConversation", fallback: "No conversations")
     /// No network connectivity
@@ -694,6 +698,8 @@ internal enum L10n {
     internal static let member = L10n.tr("Localizable", "swarm.member", fallback: "Member")
     /// Members
     internal static let members = L10n.tr("Localizable", "swarm.members", fallback: "Members")
+    /// New swarm
+    internal static let newSwarm = L10n.tr("Localizable", "swarm.newSwarm", fallback: "New swarm")
     /// Private swarm
     internal static let oneToOne = L10n.tr("Localizable", "swarm.oneToOne", fallback: "Private swarm")
     /// Others

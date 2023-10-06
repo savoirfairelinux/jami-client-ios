@@ -144,7 +144,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     }
 
     private func aboutJamiButtonDidTap() {
-        AppInfoHelper.showAboutJamiAlert(onViewController: self)
+        SharedActionsPresenter.showAboutJamiAlert(onViewController: self)
     }
 
     func setupButtonActions() {

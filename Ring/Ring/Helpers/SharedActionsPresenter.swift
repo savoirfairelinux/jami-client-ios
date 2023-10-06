@@ -20,7 +20,7 @@
 
 import Foundation
 
-class AppInfoHelper {
+class SharedActionsPresenter {
 
     class func showAboutJamiAlert(onViewController viewController: UIViewController) {
         var compileDate: String {
@@ -49,5 +49,18 @@ class AppInfoHelper {
         alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 64.0))
         alert.view.addConstraint(NSLayoutConstraint(item: image, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 64.0))
         viewController.present(alert, animated: true, completion: nil)
+    }
+
+    class func shareAccountInfo(onViewController viewController: UIViewController, sourceView: UIView, content: [Any]) {
+        let title = L10n.AccountPage.contactMeOnJamiTitle
+        let activityViewController = UIActivityViewController(activityItems: content,
+                                                              applicationActivities: nil)
+        activityViewController.setValue(title, forKey: "Subject")
+        activityViewController.modalPresentationStyle = .overFullScreen
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceView = sourceView
+            popoverController.permittedArrowDirections = []
+        }
+        viewController.present(activityViewController, animated: true, completion: nil)
     }
 }

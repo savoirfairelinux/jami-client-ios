@@ -1276,16 +1276,15 @@ extension MeViewController: UITableViewDelegate {
 
     func shareAccountInfo() {
         guard let content = self.viewModel.accountInfoToShare else { return }
-        let title = L10n.AccountPage.contactMeOnJamiTitle
-        let activityViewController = UIActivityViewController(activityItems: content,
-                                                              applicationActivities: nil)
-        activityViewController.setValue(title, forKey: "Subject")
+
+        let sourceView: UIView
         if UIDevice.current.userInterfaceIdiom == .phone {
-            activityViewController.popoverPresentationController?.sourceView = self.view
+            sourceView = self.view
         } else {
-            activityViewController.popoverPresentationController?.sourceView = stretchyHeader
+            sourceView = stretchyHeader
         }
-        self.present(activityViewController, animated: true, completion: nil)
+
+        SharedActionsPresenter.shareAccountInfo(onViewController: self, sourceView: sourceView, content: content)
     }
 
     private func scrollViewDidStopScrolling() {

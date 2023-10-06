@@ -298,29 +298,19 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         return UIBarButtonItem(customView: generalSettingsButton)
     }
 
-    private func createMenu() -> UIMenu {
-        let configuration = UIImage.SymbolConfiguration(pointSize: 40, weight: .regular, scale: .large)
-        let accountImage = UIImage(systemName: "person.circle", withConfiguration: configuration)
-        let tintedAccountImage = accountImage?.withTintColor(.jamiMain, renderingMode: .alwaysOriginal)
+    private func shareAccountInfo() {
+        guard let content = self.viewModel.accountInfoToShare else { return }
 
-        let generalImage = UIImage(systemName: "gearshape", withConfiguration: configuration)
-        let tintedGeneralImage = generalImage?.withTintColor(.jamiMain, renderingMode: .alwaysOriginal)
-
-        let aboutImage = UIImage(asset: Asset.jamiIcon)
-
-        let openAccount = UIAction(title: L10n.Global.accountSettings, image: tintedAccountImage, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
-            self?.viewModel.showAccountSettings()
+        let sourceView: UIView
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            sourceView = self.view
+        } else if let navigationBar = self.navigationController?.navigationBar {
+            sourceView = navigationBar
+        } else {
+            sourceView = self.view
         }
 
-        let openSettings = UIAction(title: L10n.Global.advancedSettings, image: tintedGeneralImage, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
-            self?.viewModel.showGeneralSettings()
-        }
-
-        let aboutJami = UIAction(title: L10n.Smartlist.aboutJami, image: aboutImage, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { _ in
-            AppInfoHelper.showAboutJamiAlert(onViewController: self)
-        }
-
-        return UIMenu(title: "", children: [openAccount, openSettings, aboutJami])
+        SharedActionsPresenter.shareAccountInfo(onViewController: self, sourceView: sourceView, content: content)
     }
 
     func confugureAccountPicker() {
@@ -684,5 +674,65 @@ extension SmartlistViewController: CNContactPickerDelegate {
 
     func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
 
+    }
+}
+
+// MARK: - menu
+extension SmartlistViewController {
+    private func createMenu() -> UIMenu {
+        return UIMenu(title: "", children: [createSwarmAction(), inviteFriendsAction(), accountsAction(), openAccountAction(), openSettingsAction(), aboutJamiAction()])
+    }
+
+    private func createTintedImage(systemName: String, configuration: UIImage.SymbolConfiguration, tintColor: UIColor) -> UIImage? {
+        let image = UIImage(systemName: systemName, withConfiguration: configuration)
+        return image?.withTintColor(tintColor, renderingMode: .alwaysOriginal)
+    }
+
+    // MARK: - Action creation functions
+
+    private var configuration: UIImage.SymbolConfiguration {
+        return UIImage.SymbolConfiguration(pointSize: 40, weight: .regular, scale: .large)
+    }
+
+    private func createSwarmAction() -> UIAction {
+        let image = createTintedImage(systemName: "person.2", configuration: configuration, tintColor: .jamiMain)
+        return UIAction(title: L10n.Swarm.newSwarm, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
+            self?.viewModel.createGroup()
+        }
+    }
+
+    private func inviteFriendsAction() -> UIAction {
+        let image = createTintedImage(systemName: "envelope.open", configuration: configuration, tintColor: .jamiMain)
+        return UIAction(title: L10n.Smartlist.inviteFriends, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
+            self?.shareAccountInfo()
+        }
+    }
+
+    private func accountsAction() -> UIAction {
+        let image = createTintedImage(systemName: "list.bullet", configuration: configuration, tintColor: .jamiMain)
+        return UIAction(title: L10n.Smartlist.accounts, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
+            self?.openAccountsList()
+        }
+    }
+
+    private func openAccountAction() -> UIAction {
+        let image = createTintedImage(systemName: "person.circle", configuration: configuration, tintColor: .jamiMain)
+        return UIAction(title: L10n.Global.accountSettings, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
+            self?.viewModel.showAccountSettings()
+        }
+    }
+
+    private func openSettingsAction() -> UIAction {
+        let image = createTintedImage(systemName: "gearshape", configuration: configuration, tintColor: .jamiMain)
+        return UIAction(title: L10n.Global.advancedSettings, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
+            self?.viewModel.showGeneralSettings()
+        }
+    }
+
+    private func aboutJamiAction() -> UIAction {
+        let image = UIImage(asset: Asset.jamiIcon)
+        return UIAction(title: L10n.Smartlist.aboutJami, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { _ in
+            SharedActionsPresenter.showAboutJamiAlert(onViewController: self)
+        }
     }
 }

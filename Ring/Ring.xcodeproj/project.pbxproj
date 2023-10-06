@@ -483,7 +483,7 @@
 		BB3E5815291C138600E85BEA /* SwarmInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB3E5814291C138600E85BEA /* SwarmInfoViewController.storyboard */; };
 		BB4C6E2629229131001C901A /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C6E2529229131001C901A /* ColorExtension.swift */; };
 		BB56DF092A9F91F8002C6E52 /* LinkDeviceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB56DF082A9F91F7002C6E52 /* LinkDeviceViewController.storyboard */; };
-		BB6690042A99043200875848 /* AppInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6690032A99043200875848 /* AppInfoHelper.swift */; };
+		BB6690042A99043200875848 /* SharedActionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6690032A99043200875848 /* SharedActionsPresenter.swift */; };
 		BB6690072A99069900875848 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6690052A99069200875848 /* WelcomeViewController.swift */; };
 		BB6690082A99069900875848 /* WelcomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB6690062A99069400875848 /* WelcomeViewController.storyboard */; };
 		BB68E6602AB1F03000F02AB7 /* ScreenHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB68E65F2AB1F03000F02AB7 /* ScreenHelper.swift */; };
@@ -1120,7 +1120,7 @@
 		BB3E5814291C138600E85BEA /* SwarmInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SwarmInfoViewController.storyboard; sourceTree = "<group>"; };
 		BB4C6E2529229131001C901A /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		BB56DF082A9F91F7002C6E52 /* LinkDeviceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LinkDeviceViewController.storyboard; sourceTree = "<group>"; };
-		BB6690032A99043200875848 /* AppInfoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoHelper.swift; sourceTree = "<group>"; };
+		BB6690032A99043200875848 /* SharedActionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedActionsPresenter.swift; sourceTree = "<group>"; };
 		BB6690052A99069200875848 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		BB6690062A99069400875848 /* WelcomeViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WelcomeViewController.storyboard; sourceTree = "<group>"; };
 		BB68E65F2AB1F03000F02AB7 /* ScreenHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenHelper.swift; sourceTree = "<group>"; };
@@ -1761,7 +1761,7 @@
 			isa = PBXGroup;
 			children = (
 				627F11F020348FBF006560B5 /* AvatarView.swift */,
-				BB6690032A99043200875848 /* AppInfoHelper.swift */,
+				BB6690032A99043200875848 /* SharedActionsPresenter.swift */,
 				0EE1B54F1F75AD4700BA98EE /* VCardUtils.swift */,
 				0E44B62E202B9DE40060F71B /* LocalNotificationsHelper.swift */,
 				0E99F19F22417A0400CF8BD6 /* JamiURI.swift */,
@@ -2985,7 +2985,7 @@
 				0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */,
 				2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */,
 				0E320D52224ADF930070B515 /* DialpadViewController.swift in Sources */,
-				BB6690042A99043200875848 /* AppInfoHelper.swift in Sources */,
+				BB6690042A99043200875848 /* SharedActionsPresenter.swift in Sources */,
 				0E49096E1FEAC0DE005CAA50 /* CallsService.swift in Sources */,
 				0273C2FF1E0C438F00CF00BA /* AccountAdapterDelegate.swift in Sources */,
 				1A2D18A41F27EF5200B2C785 /* AppCoordinator.swift in Sources */,

@@ -163,6 +163,38 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    var accountInfoToShare: [Any]? {
+        var info = [String]()
+        guard let account = self.currentAccount else { return nil }
+        var nameToContact = ""
+        if account.type == .sip {
+            guard let accountDetails = account.details,
+                  let credentials = account.credentialDetails.first else { return nil }
+            if AccountModelHelper.init(withAccount: account).isAccountRing() {
+                return nil
+            }
+            let username = credentials.username
+            let server = accountDetails.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .accountHostname))
+            if username.isEmpty || server.isEmpty {
+                return nil
+            }
+            nameToContact = username + "@" + server
+        }
+        if !account.registeredName.isEmpty {
+            nameToContact = account.registeredName
+        } else if let userNameData = UserDefaults.standard.dictionary(forKey: registeredNamesKey),
+                  let accountName = userNameData[account.id] as? String,
+                  !accountName.isEmpty {
+            nameToContact = accountName
+        }
+        if nameToContact.isEmpty {
+            nameToContact = account.jamiId
+        }
+        let title = L10n.AccountPage.contactMeOnJamiContant(nameToContact)
+        info.append(title)
+        return info
+    }
+
     init(withAccountAdapter accountAdapter: AccountAdapter, dbManager: DBManager) {
         self.accountList = []
 
