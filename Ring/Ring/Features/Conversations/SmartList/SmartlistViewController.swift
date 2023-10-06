@@ -76,12 +76,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.configureLargeTitleNavigationBar()
         self.confugureAccountPicker()
         accountsDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        /*
-         Register to keyboard notifications to adjust tableView insets when the keybaord appears
-         or disappears
-         */
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(withNotification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.setupSearchBar()
         searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: false, delegate: viewModel)
         if !self.viewModel.isSipAccount() {
@@ -392,27 +386,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 self?.startAccountCreation()
             })
             .disposed(by: self.disposeBag)
-    }
-
-    @objc
-    func keyboardWillShow(withNotification notification: Notification) {
-        guard let userInfo: Dictionary = notification.userInfo else { return }
-        guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        let keyboardRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keyboardRectangle.height
-        self.conversationsTableView.contentInset.bottom = keyboardHeight
-        self.searchView.searchResultsTableView.contentInset.bottom = keyboardHeight
-        self.conversationsTableView.scrollIndicatorInsets.bottom = keyboardHeight
-        self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = keyboardHeight
-    }
-
-    @objc
-    func keyboardWillHide(withNotification notification: Notification) {
-        self.conversationsTableView.contentInset.bottom = 0
-        self.searchView.searchResultsTableView.contentInset.bottom = 0
-
-        self.conversationsTableView.scrollIndicatorInsets.bottom = 0
-        self.searchView.searchResultsTableView.scrollIndicatorInsets.bottom = 0
     }
 
     func setupDataSources() {
