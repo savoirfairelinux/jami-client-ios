@@ -102,8 +102,8 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         sendMessageButton.isEnabled = !self.viewModel.isBoothMode()
         buttonsStackView.isHidden = self.viewModel.isBoothMode()
         backButtonAudioCall.tintColor = UIColor.jamiLabelColor
-        self.beforeIncomingVideo.backgroundColor = UIColor.jamiBackgroundColor
-        let callCurrent = self.viewModel.call?.state == .current
+        self.beforeIncomingVideo.backgroundColor = UIColor.clear
+        let callCurrent = true// self.viewModel.call?.state == .current
         self.setAvatarView(!callCurrent || callViewMode == .audio)
         self.capturedVideoBlurEffect.isHidden = callCurrent
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
@@ -128,7 +128,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
         if !callCurrent {
             initCallAnimation()
         }
-        self.configureConferenceLayout()
+        //  self.configureConferenceLayout()
         if callCurrent {
             self.capturedVideoBlurEffect.alpha = 1
             hideCapturedVideo()
@@ -148,6 +148,7 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     }
 
     func configureIncomingVideo() {
+        self.incomingVideoStarted()
         self.incomingVideo.layer.addSublayer(self.incomingVideoLayer)
         self.incomingVideoLayer.videoGravity = .resizeAspect
         self.viewModel.incomingFrame
@@ -178,6 +179,11 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 self?.beforeIncomingVideo.isHidden = true
             })
         }
+        self.beforeIncomingVideo.backgroundColor = UIColor.black
+        self.resizeCapturedVideo(withInfoContainer: false)
+        self.capturedVideoBlurEffect.alpha = 0
+        self.view.layoutIfNeeded()
+        self.infoContainer.isHidden = false
     }
 
     func setupPIP() {
@@ -446,18 +452,18 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             })
             .disposed(by: self.disposeBag)
 
-        self.viewModel.dismisVC
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] dismiss in
-                if dismiss && self?.pipController != nil {
-                    if #available(iOS 15.0, *) {
-                        self?.pipController.stopPictureInPicture()
-                        self?.pipController = nil
-                    }
-                    self?.removeFromScreen()
-                }
-            })
-            .disposed(by: self.disposeBag)
+        //        self.viewModel.dismisVC
+        //            .observe(on: MainScheduler.instance)
+        //            .subscribe(onNext: { [weak self] dismiss in
+        //                if dismiss && self?.pipController != nil {
+        //                    if #available(iOS 15.0, *) {
+        //                        self?.pipController.stopPictureInPicture()
+        //                        self?.pipController = nil
+        //                    }
+        //                    self?.removeFromScreen()
+        //                }
+        //            })
+        //            .disposed(by: self.disposeBag)
 
         self.viewModel.contactName.drive(self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
@@ -802,9 +808,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
 
     func resizeCapturedVideo(withInfoContainer: Bool) {
         self.leftArrow.alpha = 0
-        if self.viewModel.call?.state != .current {
-            return
-        }
+        //        if self.viewModel.call?.state != .current {
+        //            return
+        //        }
         // Don't change anything if the orientation change to portraitUpsideDown, faceUp or faceDown
         if  UIDevice.current.orientation.rawValue != 5 && UIDevice.current.orientation.rawValue != 6 && UIDevice.current.orientation.rawValue != 2 {
             self.orientation = UIDevice.current.orientation

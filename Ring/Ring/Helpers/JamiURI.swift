@@ -118,9 +118,9 @@ class JamiURI {
             infoString += self.userInfo
             return infoString
         }
-        if self.hostname.isEmpty || self.port.isEmpty {
-            return nil
-        }
+        //        if self.hostname.isEmpty || self.port.isEmpty {
+        //            return nil
+        //        }
         infoString += self.userInfo + "@" + self.hostname + ":" + self.port
         return infoString
     }()

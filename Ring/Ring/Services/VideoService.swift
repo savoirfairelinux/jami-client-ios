@@ -189,14 +189,15 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 self.captureSession.sessionPreset = self.quality
                 self.captureSession.commitConfiguration()
             }
-            self.captureSession.startRunning()
+            // self.captureSession.startRunning()
         }
     }
 
     func stopCapturing() {
-        sessionQueue.async { [weak self] in
-            self?.captureSession.stopRunning()
-        }
+        return
+            sessionQueue.async { [weak self] in
+                self?.captureSession.stopRunning()
+            }
     }
 
     func checkPermission() {
@@ -564,7 +565,8 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func stopCapture() {
-        self.log.debug("Capture stopped...")
+        return
+            self.log.debug("Capture stopped...")
         self.camera.stopCapturing()
     }
 
