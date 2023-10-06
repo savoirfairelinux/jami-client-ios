@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ced5948b_be4c7aa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-06T19:18:25Z",
+      "side": 1,
+      "message": "on iPhone image looks different than original image, probably because of resolution that cause stretch on iPhone.",
+      "revId": "397e89f50eb0ef972fcbe273990addaaa115f706",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
