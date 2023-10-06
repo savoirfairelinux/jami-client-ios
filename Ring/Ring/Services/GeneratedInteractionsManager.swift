@@ -140,13 +140,13 @@ class GeneratedInteractionsManager {
                     self.conversationService.createSipConversation(uri: uri, accountId: accountID)
                 }
 
-                guard let time: Int = callEvent.getEventInput(.callTime) else {
-                    return
-                }
-
-                guard let callType: Int = callEvent.getEventInput(.callType) else {
-                    return
-                }
+                //                guard let time: Int = callEvent.getEventInput(.callTime) else {
+                //                    return
+                //                }
+                //
+                //                guard let callType: Int = callEvent.getEventInput(.callType) else {
+                //                    return
+                //                }
 
                 let type = AccountModelHelper
                     .init(withAccount: account).isAccountSip() ? URIType.sip : URIType.ring
@@ -158,13 +158,10 @@ class GeneratedInteractionsManager {
                    currentAccount.id == account.id {
                     shouldUpdateConversations = true
                 }
-                let message = callType == CallType.incoming.rawValue
-                    ? (time > 0) ? GeneratedMessage.incomingCall.toString() : GeneratedMessage.missedIncomingCall.toString() :
-                    (time > 0) ? GeneratedMessage.outgoingCall.toString() :
-                    GeneratedMessage.missedOutgoingCall.toString()
+                let message = GeneratedMessage.missedOutgoingCall.toString()
                 self.conversationService
                     .generateMessage(messageContent: message,
-                                     duration: Int64(time),
+                                     duration: Int64(0),
                                      contactUri: stringUri,
                                      accountId: account.id,
                                      date: Date(),

@@ -62,8 +62,8 @@ class ButtonsContainerViewModel {
     private func checkCallOptions() {
         let callIsActive: Observable<Bool> = self.currentCall
             .startWith(self.callService.call(callID: self.callID) ?? CallModel())
-            .filter({ call in
-                return call.state == .current
+            .filter({ _ in
+                return true// call.state == .current
             })
             .map({ _ in return true })
 
