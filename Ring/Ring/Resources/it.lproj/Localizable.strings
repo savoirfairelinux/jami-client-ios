@@ -77,6 +77,7 @@
 "swarm.addMember" = "Aggiungi membro";
 "swarm.confirmLeaveSwarm" = "Sei sicuro di voler lasciare questo gruppo?";
 "swarm.Leave" = "Lascia";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Elenco pubblico";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Nessun risultato";
 "smartlist.noConversation" = "Nessuna conversazione";
 "smartlist.searchBarPlaceholder" = "Inserire il nome...";
-"smartlist.searchBar" = "Cerca contatto nuovo o esistente...";
+"smartlist.searchBar" = "Cerca";
 "smartlist.noNetworkConnectivity" = "Nessuna connessione di rete";
 "smartlist.cellularAccess" = "Assicurati che l'accesso alla rete sia consentito";
 "smartlist.accountsTitle" = "Account";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Seleziona uno dei numeri";
 "smartlist.invitations" = "Inviti";
 "smartlist.aboutJami" = "Informazioni su Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Scrivi a ";
@@ -119,7 +122,7 @@
 "welcome.haveAccount" = "Ho già un account";
 "welcome.linkDevice" = "Importa da un altro dispositivo";
 "welcome.linkBackup" = "Importa dal backup";
-"welcome.createAccount" = "Collegarsi";
+"welcome.createAccount" = "Partecipa";
 "welcome.connectToManager" = "Connettiti a Jami Account Management Server";
 
 //Creation Profile Screen
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Collegamento dell'account";
-"linkToAccount.linkButtonTitle" = "Associa dispositivo";
+"linkToAccount.linkButtonTitle" = "Associa";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Inserire il PIN";
 "linkToAccount.explanationPinMessage" = "Per generare il codice PIN, accedere alle impostazioni di gestione dell'account sul dispositivo che contiene l'account che si desidera utilizzare. Nelle impostazioni del dispositivo seleziona \"Associa un altro dispositivo a questo account\". Otterrai il PIN necessario per completare questo modulo. Il PIN è valido solo per 10 minuti.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Nome TURN";
 "accountPage.turnPassword" = "Password TURN";
 "accountPage.turnRealm" = "Dominio TURN";
+"accountPage.upnpEnabled" = "Utilizza UPnP";
 
 //Account
 "account.sipUsername" = "Nome utente";
@@ -293,6 +299,8 @@
 "account.port" = "Porta";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configura un account SIP";
+"account.sipAccount" = "Account SIP";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Caratteristiche avanzate";
 "account.serverLabel" = "Inserire l'indirizzo";
 "account.portLabel" = "Inserire il numero della porta";

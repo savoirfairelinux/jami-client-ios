@@ -22,7 +22,7 @@
 "global.accountSettings" = "حسابلارین تنظیماتلاری";
 "global.advancedSettings" = "آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین آلنین";
 "global.username" = "ایستیفاده چی آد";
-"global.recommended" = "Recommended";
+"global.recommended" = "توصیه اولونور";
 "global.password" = "رمز";
 "global.registerAUsername" = "آدی یازیلماق";
 "global.enterPassword" = "رمز یازماق";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "عضوی قوش";
 "swarm.confirmLeaveSwarm" = "آيا مطمئني که مي خواي از اين سوره خارج بشي؟";
 "swarm.Leave" = "گئت";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "دونن";
 "smartlist.results" = "عمومی دایرکتوری";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "نتیجه یوخدور";
 "smartlist.noConversation" = "دانیشیق اولماز";
 "smartlist.searchBarPlaceholder" = "آدینی یئره قوی...";
-"smartlist.searchBar" = "نئجه و یا وار اولان تماسلار آختارماق...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "شبکه باغلیغی یوخدور";
 "smartlist.cellularAccess" = "سیلاوی آچیقلاما سیزلیگیزین وئریلمه سیندن آرخایین اولون";
 "smartlist.accountsTitle" = "حسابلار";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "ساییلارین بیری ساییلار";
 "smartlist.invitations" = "دعوتلر";
 "smartlist.aboutJami" = "جامی حاقّيندا";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "بو ایسته یینجه بیر خبر یاز";
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "اؤز اوتارينيزي يارادين";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "جمیه یه قوشول";
 "createAccount.chooseStrongPassword" = "جامی حسابینی قوروماق اوچون خاطیرلاداجاقینیز گوجلو رمز سئچیب.";
 "createAccount.repeatPasswordPlaceholder" = "رمز لری تصدیق ائدیر";
 "createAccount.passwordCharactersNumberError" = "6 حرفدن آز";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "حساب باغلاماسی";
-"linkToAccount.linkButtonTitle" = "آلاچیقلاشما";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN یئری";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "تورن آدلی یوللاندیریجی آد";
 "accountPage.turnPassword" = "تورن رمز";
 "accountPage.turnRealm" = "تورن دؤولت";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "ایستیفاده چی آد";
@@ -293,6 +299,8 @@
 "account.port" = "بندر";
 "account.proxyServer" = "پراکسی";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "آدرس یئری";
 "account.portLabel" = "پورت نومره سئني دن";

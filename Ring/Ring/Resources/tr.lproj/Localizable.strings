@@ -77,6 +77,7 @@
 "swarm.addMember" = "Üye Ekle";
 "swarm.confirmLeaveSwarm" = "Bu sürüyü terk etmek istediğinden emin misin?";
 "swarm.Leave" = "Git.";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Dün";
 "smartlist.results" = "Genel Dizin";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Sonuç yok";
 "smartlist.noConversation" = "Konuşma yok";
 "smartlist.searchBarPlaceholder" = "Ad girin...";
-"smartlist.searchBar" = "Yeni ya da var olan kişiyi ara...";
+"smartlist.searchBar" = "Arama";
 "smartlist.noNetworkConnectivity" = "Ağ bağlantısı yok";
 "smartlist.cellularAccess" = "Ayarlarınızda hücresel erişim izni olduğundan emin olun.";
 "smartlist.accountsTitle" = "Hesaplar";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Numaralardan birini seçin";
 "smartlist.invitations" = "Davetiyeler";
 "smartlist.aboutJami" = "Jami Hakkında";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Şuna ileti yaz:";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Hesap bağlantısı";
-"linkToAccount.linkButtonTitle" = "Aygıt bağla";
+"linkToAccount.linkButtonTitle" = "Bağlantı";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN'i gir";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN kullanıcı adı";
 "accountPage.turnPassword" = "TURN parolası";
 "accountPage.turnRealm" = "TURN yetki alanı";
+"accountPage.upnpEnabled" = "UpnP kullan";
 
 //Account
 "account.sipUsername" = "Kullanıcı Adı";
@@ -293,6 +299,8 @@
 "account.port" = "Delik";
 "account.proxyServer" = "Vekil";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Hesabı";
+"account.configure" = "Yapılandır";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Adres Girin";
 "account.portLabel" = "Bağlantı Noktası Numarası Gir";

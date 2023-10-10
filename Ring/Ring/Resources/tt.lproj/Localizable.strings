@@ -77,6 +77,7 @@
 "swarm.addMember" = "Учреждение әгъзасын өстәү";
 "swarm.confirmLeaveSwarm" = "Сез бу җәмәгатьчелекне калдырырга телисез икәненә ышанасызмы?";
 "swarm.Leave" = "Кит!";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Кичә";
 "smartlist.results" = "Халык күрсәткече";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Нәтиҗәләр юк";
 "smartlist.noConversation" = "Сөйләшүләр юк";
 "smartlist.searchBarPlaceholder" = "Исемегезне кертегез...";
-"smartlist.searchBar" = "Яңа яки булган контактны эзләү...";
+"smartlist.searchBar" = "Эзләү";
 "smartlist.noNetworkConnectivity" = "Авылыбыз юк";
 "smartlist.cellularAccess" = "Үз җайланмаларыгызда күчермәле телефонга керү рөхсәт ителгәнен тикшерегез";
 "smartlist.accountsTitle" = "Хисаплар";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Саннардан берсен сайлагыз";
 "smartlist.invitations" = "Чакырулар";
 "smartlist.aboutJami" = "Җәми турында";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Хисапны бәйләү";
-"linkToAccount.linkButtonTitle" = "Сылтама төре";
+"linkToAccount.linkButtonTitle" = "Сылтама";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "ПИН";
 "linkToAccount.pinLabel" = "ПИНны кертү";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "ТУРН кулланучы исеме";
 "accountPage.turnPassword" = "ТУРН пароле";
 "accountPage.turnRealm" = "ТОРН өлкәсе";
+"accountPage.upnpEnabled" = "UPnP куллан";
 
 //Account
 "account.sipUsername" = "Исем кулланучы";
@@ -293,6 +299,8 @@
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Адресны кертү";
 "account.portLabel" = "Порт номерын кертү";

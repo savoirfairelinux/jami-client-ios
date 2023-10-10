@@ -22,7 +22,7 @@
 "global.accountSettings" = "Kontoeinstellungen";
 "global.advancedSettings" = "Erweiterte Einstellungen";
 "global.username" = "Benutzername";
-"global.recommended" = "Recommended";
+"global.recommended" = "Empfohlen";
 "global.password" = "Passwort";
 "global.registerAUsername" = "Benutzername registrieren";
 "global.enterPassword" = "Passwort eingeben";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Mitglied hinzufügen";
 "swarm.confirmLeaveSwarm" = "Sind Sie sicher, dass Sie diesen Schwarm verlassen möchten?";
 "swarm.Leave" = "Verlassen";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Gestern";
 "smartlist.results" = "Öffentliches Verzeichnis";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Keine Ergebnisse";
 "smartlist.noConversation" = "Keine Unterhaltungen";
 "smartlist.searchBarPlaceholder" = "Namen eingeben…";
-"smartlist.searchBar" = "Nach neuen oder bestehenden Kontakten suchen...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "Keine Netzwerkverbindung";
 "smartlist.cellularAccess" = "Vergewissern Sie sich, dass der Mobilfunkzugang in Ihren Einstellungen erlaubt ist.";
 "smartlist.accountsTitle" = "Konten";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Eine der Nummern auswählen";
 "smartlist.invitations" = "Einladungen";
 "smartlist.aboutJami" = "Über Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Nachricht schreiben an";
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "Ihren Avatar erstellen";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "Mitmachen bei Jami";
 "createAccount.chooseStrongPassword" = "Wählen Sie ein sicheres Passwort, an das Sie sich erinnern können, um ihr Jami-Konto zu schützen.";
 "createAccount.repeatPasswordPlaceholder" = "Passwort bestätigen";
 "createAccount.passwordCharactersNumberError" = "Mindestens 6 Zeichen";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontenverknüpfung";
-"linkToAccount.linkButtonTitle" = "Verbinde Gerät";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN eingeben";
 "linkToAccount.explanationPinMessage" = "Um den PIN-Code zu generieren, gehen Sie zu den Kontoverwaltungseinstellungen auf dem Gerät, das das Konto enthält, das Sie verwenden möchten. Wählen Sie in den Geräteeinstellungen „Ein anderes Gerät mit diesem Konto verknüpfen“ aus. Sie erhalten die zum Ausfüllen dieses Formulars erforderliche PIN. Der PIN ist nur 10 Minuten gültig.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN-Benutzer";
 "accountPage.turnPassword" = "TURN-Passwort";
 "accountPage.turnRealm" = "TURN-Realm";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Benutzername";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Ein SIP-Konto konfigurieren";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Einstellen";
 "account.advancedFeatures" = "Erweiterte Funktionen";
 "account.serverLabel" = "Adresse eingeben";
 "account.portLabel" = "Port-Nummer eingeben";

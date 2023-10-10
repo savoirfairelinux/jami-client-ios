@@ -77,6 +77,7 @@
 "swarm.addMember" = "гишүүн нэмнэ";
 "swarm.confirmLeaveSwarm" = "Та энэ цувралсаа гарахыг хүсч байгаа гэдэгт итгэлтэй байна уу?";
 "swarm.Leave" = "Хойч яв";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Өчигдөр";
 "smartlist.results" = "Нийтийн захиалг";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Үр дүнгүй";
 "smartlist.noConversation" = "Хэлэлцүүлэггүй";
 "smartlist.searchBarPlaceholder" = "Нэрээ оруул...";
-"smartlist.searchBar" = "Шинэ болон одоогийн холбоосыг хайх...";
+"smartlist.searchBar" = "Танд хайх";
 "smartlist.noNetworkConnectivity" = "Сүлжээний холболтгүй";
 "smartlist.cellularAccess" = "Таны тохируулгад соён утсаар хангах боломжтой байх";
 "smartlist.accountsTitle" = "Санхүүжилт";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Нэг тоот тоот сонго";
 "smartlist.invitations" = "Нэрлэг";
 "smartlist.aboutJami" = "Жэмигийн тухай";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Энэ талаар мэдээлэл өгөөч";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Нягтлан бодох бүртгэлийн холбоо";
-"linkToAccount.linkButtonTitle" = "Зэвсэглэлтэй холболт";
+"linkToAccount.linkButtonTitle" = "Зэвсэглэл";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "ПИН код";
 "linkToAccount.pinLabel" = "PIN-ийг оруул";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN хэрэглэгчдийн нэр";
 "accountPage.turnPassword" = "TURN нууц үг";
 "accountPage.turnRealm" = "ТУРН-ийн ертөнц";
+"accountPage.upnpEnabled" = "UPnP-ийг ашигла";
 
 //Account
 "account.sipUsername" = "Хэрэглэгчийн нэр";
@@ -293,6 +299,8 @@
 "account.port" = "Газар";
 "account.proxyServer" = "Төлөөлөгч";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Хатуу хаяг оруул";
 "account.portLabel" = "Портын дугаар";

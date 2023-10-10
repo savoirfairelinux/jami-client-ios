@@ -77,6 +77,7 @@
 "swarm.addMember" = "સભ્ય ઉમેરો";
 "swarm.confirmLeaveSwarm" = "શું તમે ખાતરી કરો કે તમે આ સમૂહ છોડી માંગો છો?";
 "swarm.Leave" = "જવા";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "ગઈકાલે";
 "smartlist.results" = "જાહેર ડિરેક્ટરી";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "કોઈ પરિણામો";
 "smartlist.noConversation" = "કોઈ વાતચીત નહીં";
 "smartlist.searchBarPlaceholder" = "નામ દાખલ કરો.";
-"smartlist.searchBar" = "નવા અથવા હાલના સંપર્કની શોધ કરો.";
+"smartlist.searchBar" = "શોધ";
 "smartlist.noNetworkConnectivity" = "નેટવર્ક કનેક્ટિવિટી નથી";
 "smartlist.cellularAccess" = "ખાતરી કરો કે સેલ ઍક્સેસ તમારી સેટિંગ્સમાં મંજૂર છે";
 "smartlist.accountsTitle" = "ખાતાઓ";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "નંબરોમાંથી એક પસંદ કરો";
 "smartlist.invitations" = "આમંત્રણો";
 "smartlist.aboutJami" = "જમી વિશે";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "સંદેશ લખો ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ખાતાની લિંકિંગ";
-"linkToAccount.linkButtonTitle" = "લિંક ઉપકરણ";
+"linkToAccount.linkButtonTitle" = "લિંક";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "પિન";
 "linkToAccount.pinLabel" = "PIN દાખલ કરો";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "ટર્ન વપરાશકર્તા નામ";
 "accountPage.turnPassword" = "ટર્ન પાસવર્ડ";
 "accountPage.turnRealm" = "ટર્ન ક્ષેત્ર";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "વપરાશકર્તા નામ";
@@ -293,6 +299,8 @@
 "account.port" = "બંદર";
 "account.proxyServer" = "પ્રોક્સી";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "સરનામું દાખલ કરો";
 "account.portLabel" = "પોર્ટ નંબર દાખલ કરો";

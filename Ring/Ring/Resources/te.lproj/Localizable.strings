@@ -77,6 +77,7 @@
 "swarm.addMember" = "సభ్యుడిని జోడించండి";
 "swarm.confirmLeaveSwarm" = "మీరు ఈ సమూహం వదిలి అనుకుంటున్నారా ఖచ్చితంగా?";
 "swarm.Leave" = "బయలుదేరండి";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "నిన్న";
 "smartlist.results" = "పబ్లిక్ డైరెక్టరీ";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "ఫలితాలు లేవు";
 "smartlist.noConversation" = "చర్చలు లేవు";
 "smartlist.searchBarPlaceholder" = "పేరు నమోదు చేయండి.";
-"smartlist.searchBar" = "కొత్త లేదా ఇప్పటికే ఉన్న పరిచయాల కోసం శోధించండి.";
+"smartlist.searchBar" = "శోధన";
 "smartlist.noNetworkConnectivity" = "నెట్వర్క్ కనెక్టివిటీ లేదు";
 "smartlist.cellularAccess" = "మీ సెట్టింగులలో సెల్ యాక్సెస్ అనుమతించబడిందని నిర్ధారించుకోండి";
 "smartlist.accountsTitle" = "ఖాతాలు";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "సంఖ్యలలో ఒకదాన్ని ఎంచుకోండి";
 "smartlist.invitations" = "ఆహ్వానాలు";
 "smartlist.aboutJami" = "జామి గురించి";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = " కు సందేశం పంపండి";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ఖాతా లింకింగ్";
-"linkToAccount.linkButtonTitle" = "లింక్ పరికరం";
+"linkToAccount.linkButtonTitle" = "లింక్";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "పిన్ను";
 "linkToAccount.pinLabel" = "PIN ని నమోదు చేయండి";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN వాడుకరి పేరు";
 "accountPage.turnPassword" = "టర్న్ పాస్వర్డ్";
 "accountPage.turnRealm" = "టర్న్ రాజ్యం";
+"accountPage.upnpEnabled" = "UPnP ను ఉపయోగించండి";
 
 //Account
 "account.sipUsername" = "వాడుకరి పేరు";
@@ -293,6 +299,8 @@
 "account.port" = "పోర్ట్";
 "account.proxyServer" = "ప్రాక్సీ";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "చిరునామాను నమోదు చేయండి";
 "account.portLabel" = "పోర్ట్ నంబర్ను నమోదు చేయండి";

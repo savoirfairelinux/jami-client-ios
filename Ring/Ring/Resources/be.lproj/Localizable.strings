@@ -22,7 +22,7 @@
 "global.accountSettings" = "Налады ўліковых запісаў";
 "global.advancedSettings" = "Дасканалыя налады";
 "global.username" = "Назва карыстальніка";
-"global.recommended" = "Recommended";
+"global.recommended" = "Рэкамендуецца";
 "global.password" = "Пароль";
 "global.registerAUsername" = "Запішыце імя карыстальніка";
 "global.enterPassword" = "Увядзіце пароль";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Дадаць члена";
 "swarm.confirmLeaveSwarm" = "Ці ўпэўнены, што хочаш пакінуць гэты раман?";
 "swarm.Leave" = "Ад'ехаць";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Учора";
 "smartlist.results" = "Грамадскі каталог";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Ніякіх вынікаў";
 "smartlist.noConversation" = "Ніякіх размоў";
 "smartlist.searchBarPlaceholder" = "Увядзіце імя...";
-"smartlist.searchBar" = "Пошук для новых або існуючых кантактаў...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "Ніякай сеткавай сувязі";
 "smartlist.cellularAccess" = "Пераканайцеся, што доступ да мабільнага тэлефона дапускаецца ў вашых наладках";
 "smartlist.accountsTitle" = "Рэкамендацыі";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Выберыце адзін з лічбаў";
 "smartlist.invitations" = "Запрашэнні";
 "smartlist.aboutJami" = "Пра Джані";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Напішыце паведамленне ";
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "Стварыце свой аватар";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "Далучайцеся да Jami";
 "createAccount.chooseStrongPassword" = "Выберыце моцны пароль, які вы будзеце памятаць, каб абараніць свой рахунак Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Пацвердзіць пароль";
 "createAccount.passwordCharactersNumberError" = "Мінімум 6 знакаў";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Звязванне рахункаў";
-"linkToAccount.linkButtonTitle" = "Прылада злучэння";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "Пін-аўт";
 "linkToAccount.pinLabel" = "Увядзіце PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Назва карыстальніка TURN";
 "accountPage.turnPassword" = "Пароль TURN";
 "accountPage.turnRealm" = "РАЗВАЛЬНАе царства";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Назва карыстальніка";
@@ -293,6 +299,8 @@
 "account.port" = "Порт";
 "account.proxyServer" = "Практыкаванне";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Увядзіце адрас";
 "account.portLabel" = "Увядзіце нумар порта";

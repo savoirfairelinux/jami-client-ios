@@ -77,6 +77,7 @@
 "swarm.addMember" = "Dodavanje člana";
 "swarm.confirmLeaveSwarm" = "Jesi li siguran da želiš napustiti ovaj vrh?";
 "swarm.Leave" = "Odlazi";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Jučer";
 "smartlist.results" = "U skladu s člankom 1.";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Nema rezultata";
 "smartlist.noConversation" = "Nema razgovora.";
 "smartlist.searchBarPlaceholder" = "Ubaci ime...";
-"smartlist.searchBar" = "Tražite novi ili postojeći kontakt...";
+"smartlist.searchBar" = "Traženje";
 "smartlist.noNetworkConnectivity" = "Veza nedostupna";
 "smartlist.cellularAccess" = "Pobrini se da je mobilni pristup odobren u vašim postavkama";
 "smartlist.accountsTitle" = "Računi";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Izberite jedan od brojeva";
 "smartlist.invitations" = "Pozivi";
 "smartlist.aboutJami" = "O Jami-u";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Napisati poruku na ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Povezivanje računa";
-"linkToAccount.linkButtonTitle" = "Uređaj za povezivanje";
+"linkToAccount.linkButtonTitle" = "Poveznica";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Unesite PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN korisničko ime";
 "accountPage.turnPassword" = "TURN lozinka";
 "accountPage.turnRealm" = "VRAČNJE kraljevstvo";
+"accountPage.upnpEnabled" = "Upotreba UPnP";
 
 //Account
 "account.sipUsername" = "Korisničko ime";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP račun";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Ubaci adresu";
 "account.portLabel" = "Ubaci broj portu";

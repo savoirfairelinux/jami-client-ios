@@ -77,6 +77,7 @@
 "swarm.addMember" = "सदस्य जोड़ें";
 "swarm.confirmLeaveSwarm" = "क्या आप इस झुंड को छोड़ना चाहते हैं?";
 "swarm.Leave" = "छोड़ो";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "कल";
 "smartlist.results" = "सार्वजनिक निर्देशिका";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "कोई परिणाम नहीं";
 "smartlist.noConversation" = "कोई बातचीत नहीं";
 "smartlist.searchBarPlaceholder" = "नाम दर्ज करें...";
-"smartlist.searchBar" = "नए या मौजूदा संपर्क की खोज...";
+"smartlist.searchBar" = "खोज";
 "smartlist.noNetworkConnectivity" = "नेटवर्क संपर्क नही है";
 "smartlist.cellularAccess" = "सुनिश्चित करें कि आपकी सेटिंग्स में सेल्युलर एक्सेस की अनुमति है";
 "smartlist.accountsTitle" = "खाते";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "संख्याओं में से एक का चयन करें";
 "smartlist.invitations" = "आमंत्रण";
 "smartlist.aboutJami" = "जामी के बारे में";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = " को संदेश लिखें";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "खाता लिंक";
-"linkToAccount.linkButtonTitle" = "लिंक डिवाइस";
+"linkToAccount.linkButtonTitle" = "लिंक";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "पिन";
 "linkToAccount.pinLabel" = "पिन दर्ज करें";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "यूजरनाम TURN";
 "accountPage.turnPassword" = "टर्न पासवर्ड";
 "accountPage.turnRealm" = "टर्न क्षेत्र";
+"accountPage.upnpEnabled" = "UPnP का प्रयोग करें";
 
 //Account
 "account.sipUsername" = "उपयोगकर्ता नाम";
@@ -293,6 +299,8 @@
 "account.port" = "बंदरगाह";
 "account.proxyServer" = "प्रॉक्सी";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "पते दर्ज करें";
 "account.portLabel" = "पोर्ट नंबर दर्ज करें";

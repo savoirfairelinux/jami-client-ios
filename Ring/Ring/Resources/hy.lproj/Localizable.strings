@@ -77,6 +77,7 @@
 "swarm.addMember" = "Մասնակից ավելացնել";
 "swarm.confirmLeaveSwarm" = "Համոզված ես, որ ուզում ես լքել այս ցավը:";
 "swarm.Leave" = "Գնացեք";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Երեկ";
 "smartlist.results" = "Հանրային ցուցակ";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Ոչ մի արդյունք";
 "smartlist.noConversation" = "Ոչ մի խոսակցություն";
 "smartlist.searchBarPlaceholder" = "Գտեք անուն...";
-"smartlist.searchBar" = "Փնտրեք նոր կամ գոյություն ունեցող կոնտակտներ...";
+"smartlist.searchBar" = "Փնտրություն";
 "smartlist.noNetworkConnectivity" = "Ոչ մի ցանցային կապ";
 "smartlist.cellularAccess" = "Համոզվեք, որ ձեր տեղադրումներում թույլատրվում է բջջային մուտք";
 "smartlist.accountsTitle" = "Հաշվետոմսեր";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Ընտրեք թվերից մեկը";
 "smartlist.invitations" = "հրավիրումներ";
 "smartlist.aboutJami" = "Ջամիի մասին";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Գրեք հաղորդագրություն ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Հաշվետու կապ";
-"linkToAccount.linkButtonTitle" = "Կապակցման սարք";
+"linkToAccount.linkButtonTitle" = "Կապ";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN-ը";
 "linkToAccount.pinLabel" = "Նշեք PIN- ն";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN օգտատերու անուն";
 "accountPage.turnPassword" = "TURN գաղտնաբառ";
 "accountPage.turnRealm" = "ՏՈՐՆԻՍՏԵՐ";
+"accountPage.upnpEnabled" = "Օգտագործեք UPnP";
 
 //Account
 "account.sipUsername" = "Օգտագործողի անունը";
@@ -293,6 +299,8 @@
 "account.port" = "Պորտ";
 "account.proxyServer" = "Պրոկսի";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Գտեք հասցե";
 "account.portLabel" = "Նմուշներ";

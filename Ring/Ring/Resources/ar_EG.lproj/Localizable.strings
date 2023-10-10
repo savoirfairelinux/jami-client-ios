@@ -22,7 +22,7 @@
 "global.accountSettings" = "إعدادت الحساب";
 "global.advancedSettings" = "إعدادات متقدمة";
 "global.username" = "اسم المستخدم";
-"global.recommended" = "Recommended";
+"global.recommended" = "موصى به";
 "global.password" = "كلمة السر";
 "global.registerAUsername" = "تسجيل اسم المستخدم";
 "global.enterPassword" = "أدخِل كلمة المرور";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "إضافة عضو";
 "swarm.confirmLeaveSwarm" = "هل أنت متأكد أنك تريد ترك هذه السلالة؟";
 "swarm.Leave" = "إرحل";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "البارحة";
 "smartlist.results" = "الإرشاد العام";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "لا يوجد نتائج";
 "smartlist.noConversation" = "لا يوجد محادثات";
 "smartlist.searchBarPlaceholder" = "ادخال اسم...";
-"smartlist.searchBar" = "البحث عن اتصال جديد أو موجود";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "لا يوجد اتصال بالشبكة";
 "smartlist.cellularAccess" = "تأكد من السماح للوصول النقال الخلوي في إعدادتك";
 "smartlist.accountsTitle" = "حسابات";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "حدد أحد الأرقام";
 "smartlist.invitations" = "الدعوات";
 "smartlist.aboutJami" = "حول جامي";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "اكتب رسالة إلى";
@@ -119,7 +122,7 @@
 "welcome.haveAccount" = "لدي حساب بالفعل";
 "welcome.linkDevice" = "الاستيراد من جهاز آخر";
 "welcome.linkBackup" = "الاستيراد من النسخة الاحتياطية";
-"welcome.createAccount" = "Join";
+"welcome.createAccount" = "انضم";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "إخلق اوتارك";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "انضموا إلى جامي";
 "createAccount.chooseStrongPassword" = "اختر كلمة مرور قوية ستذكرها لحماية حساب جامي";
 "createAccount.repeatPasswordPlaceholder" = "تأكيد كلمة المرور";
 "createAccount.passwordCharactersNumberError" = "6 محارف على الأقل";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ربط الحساب";
-"linkToAccount.linkButtonTitle" = "اربط جهاز";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "رمز الأمان";
 "linkToAccount.pinLabel" = "أدخِل رمز الأمان";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "اسم المستخدم لبروتوكول TURN";
 "accountPage.turnPassword" = "كلمة المرور لبروتوكول TURN";
 "accountPage.turnRealm" = "حقل بروتوكول TURN";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "اسم المستخدم";
@@ -293,6 +299,8 @@
 "account.port" = "منفذ عبور";
 "account.proxyServer" = "الوكيل";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "إدخال العنوان";
 "account.portLabel" = "إدخال رقم الميناء";

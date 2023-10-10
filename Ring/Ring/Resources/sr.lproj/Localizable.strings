@@ -77,6 +77,7 @@
 "swarm.addMember" = "Додајте члана";
 "swarm.confirmLeaveSwarm" = "Сигуран си да желиш да напустиш овај рог?";
 "swarm.Leave" = "Одлази";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Учерашњи";
 "smartlist.results" = "Јавни справочник";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Нису резултати";
 "smartlist.noConversation" = "Никакве разговоре";
 "smartlist.searchBarPlaceholder" = "Унесите име...";
-"smartlist.searchBar" = "Трага за новим или постојећим контактима...";
+"smartlist.searchBar" = "Прошука";
 "smartlist.noNetworkConnectivity" = "Nema internet konekcije";
 "smartlist.cellularAccess" = "Уверите се да је доступ на мобилном у вашем подесувању";
 "smartlist.accountsTitle" = "Nalozi";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Изаберите један од бројева";
 "smartlist.invitations" = "Позивања";
 "smartlist.aboutJami" = "O Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Пиши поруку на ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Сврзавање рачуна";
-"linkToAccount.linkButtonTitle" = "Уредица за повезивање";
+"linkToAccount.linkButtonTitle" = "Веза";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "ПИН";
 "linkToAccount.pinLabel" = "Unesi PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN korisničko ime";
 "accountPage.turnPassword" = "TURN lozinka";
 "accountPage.turnRealm" = "СВЕТИЦА СВЕТ";
+"accountPage.upnpEnabled" = "Користе UPnP";
 
 //Account
 "account.sipUsername" = "Име корисника";
@@ -293,6 +299,8 @@
 "account.port" = "Порт";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Уведите адресу";
 "account.portLabel" = "Унесите број порта";

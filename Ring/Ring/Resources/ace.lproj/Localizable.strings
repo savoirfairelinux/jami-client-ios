@@ -22,7 +22,7 @@
 "global.accountSettings" = "ڤڠاجرن حساب";
 "global.advancedSettings" = "ڤڠاجرن ڤڠاجرن";
 "global.username" = "نام ڤڠڬونا";
-"global.recommended" = "Recommended";
+"global.recommended" = "مڠمبيل";
 "global.password" = "ڤاسر";
 "global.registerAUsername" = "مڠهادڤكن نام ڤڠڬونا";
 "global.enterPassword" = "ڤرودوق ڤرسودوق";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "ممبنتو ممبنتو";
 "swarm.confirmLeaveSwarm" = "آيا مطمئني که ميخواي از اين سور ترک کني؟";
 "swarm.Leave" = "برلالو";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "ديري";
 "smartlist.results" = "ڤڠاجرن ڤولاو";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "تيدق ڤرلو";
 "smartlist.noConversation" = "تيدق اد ڤرچاي";
 "smartlist.searchBarPlaceholder" = "نامن دبريكن...";
-"smartlist.searchBar" = "ڤمبينا ڤڠاجرن بارو اتاو ڤڠاجرن يڠ سام...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "تيدق اد ڤڠاجرن نيتۏرك";
 "smartlist.cellularAccess" = "ڤرلو مڠمبيل ڤرلو دڤرلوكن دالم سيٽنگ";
 "smartlist.accountsTitle" = "حسابن";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "انتوق سياستن";
 "smartlist.invitations" = "ڤڠاجين";
 "smartlist.aboutJami" = "دري جامي";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "منوليسكن ڤرساتوان ";
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "ڤرچاي اوتار";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "مڠڬوناكن Jami";
 "createAccount.chooseStrongPassword" = "ڤيليه ڤرسود يڠ ڤرنه دڤرچايا?? ي اونتوق ممڤرچايا?? ي کات Jami-توه.";
 "createAccount.repeatPasswordPlaceholder" = "ڤرليمن ڤرساتوان";
 "createAccount.passwordCharactersNumberError" = "6 ڤڠاجرن ڤد ڤد";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ڤڠاجرن حساب";
-"linkToAccount.linkButtonTitle" = "ڤڠڬيلن ڤڠڬيلن";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "ڤڠڬيل PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "نام ڤڠڬونا TURN";
 "accountPage.turnPassword" = "ڤاسر TURN";
 "accountPage.turnRealm" = "كراجأن TURN";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "نام ڤڠڬونا";
@@ -293,6 +299,8 @@
 "account.port" = "ڤڠوربان";
 "account.proxyServer" = "ڤروكسي";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "ڤرلو مڠهادڤكن ايندريس";
 "account.portLabel" = "ڤرلو ممڤوڽاءي ڤرتوم";

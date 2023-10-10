@@ -77,6 +77,7 @@
 "swarm.addMember" = "അംഗം ചേർക്കുക";
 "swarm.confirmLeaveSwarm" = "ഈ കൂട്ടം വിട്ടുപോകാൻ നിനക്ക് ഉറപ്പുണ്ടോ?";
 "swarm.Leave" = "പോകൂ";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Semalam";
 "smartlist.results" = "പൊതുവായ ഡയറക്ടറി";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "ഫലങ്ങളില്ല";
 "smartlist.noConversation" = "സംഭാഷണം വേണ്ട";
 "smartlist.searchBarPlaceholder" = "പേര് നൽകുക.";
-"smartlist.searchBar" = "പുതിയതോ നിലവിലുള്ളതോ ആയ ബന്ധം കണ്ടെത്തുക.";
+"smartlist.searchBar" = "തിരയൽ";
 "smartlist.noNetworkConnectivity" = "Tiada sambungan rangkaian";
 "smartlist.cellularAccess" = "നിങ്ങളുടെ ക്രമീകരണങ്ങളിൽ സെല്ലുലാർ ആക്സസ് അനുവദിച്ചിട്ടുണ്ടെന്ന് ഉറപ്പാക്കുക";
 "smartlist.accountsTitle" = "Akaun";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "നമ്പറുകളിൽ ഒന്ന് തിരഞ്ഞെടുക്കുക";
 "smartlist.invitations" = "ക്ഷണങ്ങള്";
 "smartlist.aboutJami" = "ജാമിയെ കുറിച്ച്";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = " എന്നതിലേക്ക് സന്ദേശം അയയ്ക്കുക";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "അക്കൌണ്ട് ബന്ധിപ്പിക്കൽ";
-"linkToAccount.linkButtonTitle" = "ലിങ്ക് ഉപകരണം";
+"linkToAccount.linkButtonTitle" = "ലിങ്ക്";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "പി. ഐ. എൻ.";
 "linkToAccount.pinLabel" = "Masukkan PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Nama pengguna TURN";
 "accountPage.turnPassword" = "Kata laluan TURN";
 "accountPage.turnRealm" = "ടര് ൻ മേഖല";
+"accountPage.upnpEnabled" = "UPnP ഉപയോഗിക്കുക";
 
 //Account
 "account.sipUsername" = "ഉപയോക്തൃനാമം";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Proksi";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "വിലാസം നൽകുക";
 "account.portLabel" = "പോർട്ട് നമ്പർ നൽകുക";

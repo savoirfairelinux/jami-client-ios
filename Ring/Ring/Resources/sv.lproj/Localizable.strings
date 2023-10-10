@@ -77,6 +77,7 @@
 "swarm.addMember" = "Lägg till medlem";
 "swarm.confirmLeaveSwarm" = "Är du säker på att du vill lämna den här svärmen?";
 "swarm.Leave" = "- Gå.";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Offentlig mapp";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Inget resultat";
 "smartlist.noConversation" = "Inga konversationer";
 "smartlist.searchBarPlaceholder" = "Ange namn...";
-"smartlist.searchBar" = "Sök efter nya eller existerande kontakter...";
+"smartlist.searchBar" = "Sök efter";
 "smartlist.noNetworkConnectivity" = "Ingen nätverksanslutning";
 "smartlist.cellularAccess" = "Tillse att mobilnätsåtkomst tillåts i dina inställningar";
 "smartlist.accountsTitle" = "Konton";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Välj ett nummer";
 "smartlist.invitations" = "Inbjudningar";
 "smartlist.aboutJami" = "Om Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Skriv meddelanden till";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontokoppling";
-"linkToAccount.linkButtonTitle" = "Koppla enhet";
+"linkToAccount.linkButtonTitle" = "Länka";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN-kod";
 "linkToAccount.pinLabel" = "Ange PIN-kod";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN-användarnamn";
 "accountPage.turnPassword" = "TURN-lösenord";
 "accountPage.turnRealm" = "TURN-domän";
+"accountPage.upnpEnabled" = "Använd UPnP";
 
 //Account
 "account.sipUsername" = "Användarnamn";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP-konto";
+"account.configure" = "Konfigurera";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Ange adress";
 "account.portLabel" = "Ange portnummer";

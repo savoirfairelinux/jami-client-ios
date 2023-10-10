@@ -77,6 +77,7 @@
 "swarm.addMember" = "เพิ่มสมาชิก";
 "swarm.confirmLeaveSwarm" = "คุณแน่ใจนะว่าอยากออกจากกลุ่มนี้?";
 "swarm.Leave" = "ออกไป";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "เมื่อวาน";
 "smartlist.results" = "คู่มือสาธารณะ";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "ไม่มีผลลัพธ์";
 "smartlist.noConversation" = "ไม่มีการพูดคุย";
 "smartlist.searchBarPlaceholder" = "ใส่ชื่อ...";
-"smartlist.searchBar" = "ค้นหาผู้ติดต่อใหม่ หรือที่มีอยู่";
+"smartlist.searchBar" = "ค้นหา";
 "smartlist.noNetworkConnectivity" = "ไม่มีการเชื่อมต่อเครือข่าย";
 "smartlist.cellularAccess" = "ตรวจสอบให้แน่ใจว่าให้สิทธิ์การเข้าถึงมือถือในการตั้งค่าของคุณ";
 "smartlist.accountsTitle" = "บัญชี";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "เลือกเลขหนึ่ง";
 "smartlist.invitations" = "คำเชิญ";
 "smartlist.aboutJami" = "เกี่ยวกับ Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "เขียนข้อความไปยัง ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "การเชื่อมโยงบัญชี";
-"linkToAccount.linkButtonTitle" = "เชื่อมโยงอุปกรณ์";
+"linkToAccount.linkButtonTitle" = "ลิงค์";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "ปักหมุด";
 "linkToAccount.pinLabel" = "ป้อน PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN ชื่อผู้ใช้";
 "accountPage.turnPassword" = "ปรสิต TURN";
 "accountPage.turnRealm" = "สาขา TURN";
+"accountPage.upnpEnabled" = "ใช้ UPnP";
 
 //Account
 "account.sipUsername" = "ชื่อผู้ใช้งาน";
@@ -293,6 +299,8 @@
 "account.port" = "พอร์ต";
 "account.proxyServer" = "พอร์กส";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "กรอกที่อยู่";
 "account.portLabel" = "กรอกหมายเลขท่าเรือ";

@@ -77,6 +77,7 @@
 "swarm.addMember" = "Cuid a chur le Comhalta";
 "swarm.confirmLeaveSwarm" = "An bhfuil tú cinnte go bhfuil tú ag iarraidh a fhágáil an swarm?";
 "swarm.Leave" = "Téigh ar shiúl";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "An-dè";
 "smartlist.results" = "Taispeántas poiblí";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Ní raibh aon torthaí";
 "smartlist.noConversation" = "Ní raibh aon comhráite";
 "smartlist.searchBarPlaceholder" = "Cuir isteach ainm...";
-"smartlist.searchBar" = "Cuardaigh teagmháil nua nó atá ann cheana féin...";
+"smartlist.searchBar" = "Cuardaigh";
 "smartlist.noNetworkConnectivity" = "Ní bheidh aon nasc líonra";
 "smartlist.cellularAccess" = "Déan cinnte go bhfuil rochtain ceallaithe ar fáil i do shuíomhanna";
 "smartlist.accountsTitle" = "Contae";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Roghnaigh ceann de na huimhreacha";
 "smartlist.invitations" = "Ceiliúradh";
 "smartlist.aboutJami" = "Maidir le Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Scríobh teachtaireacht chuig ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Cúlra nasc";
-"linkToAccount.linkButtonTitle" = "Feidhmchlár nasc";
+"linkToAccount.linkButtonTitle" = "Líon";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Cuir PIN isteach";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Ainm úsáideora TURN";
 "accountPage.turnPassword" = "Códchlár TURN";
 "accountPage.turnRealm" = "RIMHÍON";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Ainm úsáideora";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Cláir";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Cuir isteach Seoladh";
 "account.portLabel" = "Cuir isteach uimhir an chalafoirt";

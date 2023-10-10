@@ -22,7 +22,7 @@
 "global.accountSettings" = "تنظیمات حساب";
 "global.advancedSettings" = "تنظیمات پیشرفته";
 "global.username" = "نام کاربری";
-"global.recommended" = "Recommended";
+"global.recommended" = "توصیه‌شده";
 "global.password" = "گذرواژه";
 "global.registerAUsername" = "ثبت یک نام‌کاربری";
 "global.enterPassword" = "گذرواژه را وارد کنید";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "عضو اضافه کنید";
 "swarm.confirmLeaveSwarm" = "مطمئنی می خوای از این سور خارج بشی؟";
 "swarm.Leave" = "از اينجا بريد";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "دیروز";
 "smartlist.results" = "دایرکتوری عمومی";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "بدون نتیجه";
 "smartlist.noConversation" = "بدون گفتگو";
 "smartlist.searchBarPlaceholder" = "نام را وارد کنید...";
-"smartlist.searchBar" = "جستجو برای مخاطب جدید یا موجود...";
+"smartlist.searchBar" = "جستجو";
 "smartlist.noNetworkConnectivity" = "قطع ارتباط با شبکه";
 "smartlist.cellularAccess" = "اطمینان حاصل کنید که دسترسی به تلفن همراه در تنظیمات شما اعمال شده است";
 "smartlist.accountsTitle" = "حساب‌ها";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "یکی از شماره‌ها را انتخاب کنید";
 "smartlist.invitations" = "دعوت ها";
 "smartlist.aboutJami" = "درباره جمی";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "پیام بنویسید به";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "پیوند دادن حسابها";
-"linkToAccount.linkButtonTitle" = "پیوند این افزاره";
+"linkToAccount.linkButtonTitle" = "پیوند";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "کد پین";
 "linkToAccount.pinLabel" = "پین را وارد کنید";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "نام کاربری TURN";
 "accountPage.turnPassword" = "گذرواژه TURN";
 "accountPage.turnRealm" = "قلمرو TURN";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "نام کاربر";
@@ -293,6 +299,8 @@
 "account.port" = "پرت";
 "account.proxyServer" = "پراکسی";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "پیکربندی";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "آدرس را وارد کنید";
 "account.portLabel" = "شماره درگاه را وارد کنید";

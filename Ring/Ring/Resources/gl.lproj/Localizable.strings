@@ -77,6 +77,7 @@
 "swarm.addMember" = "Adición de membro";
 "swarm.confirmLeaveSwarm" = "Estás seguro de que queres deixar este enjambre?";
 "swarm.Leave" = "Deixar";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Onte";
 "smartlist.results" = "Directorio público";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Sen resultados";
 "smartlist.noConversation" = "Non hai conversacións.";
 "smartlist.searchBarPlaceholder" = "Introduza o nome...";
-"smartlist.searchBar" = "Buscar contacto novo ou existente...";
+"smartlist.searchBar" = "Buscar";
 "smartlist.noNetworkConnectivity" = "Sen conexión a rede";
 "smartlist.cellularAccess" = "Asegúrate de que nos axustes tes permiso de acceso a rede";
 "smartlist.accountsTitle" = "Contas";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Seleccione un dos números";
 "smartlist.invitations" = "Convites";
 "smartlist.aboutJami" = "Acerca de Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Escribir un mensaxe a ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Ligando conta";
-"linkToAccount.linkButtonTitle" = "Ligar dispositivo";
+"linkToAccount.linkButtonTitle" = "Ligar";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Escribe o PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Nome usuaria TURN";
 "accountPage.turnPassword" = "Contrasinal TURN";
 "accountPage.turnRealm" = "Ámbito TURN";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Nome de usuaria";
@@ -293,6 +299,8 @@
 "account.port" = "Porto";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Introduce Dirección";
 "account.portLabel" = "Introduce o número do porto";

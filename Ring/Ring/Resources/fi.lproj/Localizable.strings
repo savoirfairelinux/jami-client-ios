@@ -22,7 +22,7 @@
 "global.accountSettings" = "Tunnuksen asetukset";
 "global.advancedSettings" = "Lisäasetukset";
 "global.username" = "Käyttäjänimi";
-"global.recommended" = "Recommended";
+"global.recommended" = "Suositus";
 "global.password" = "Salasana";
 "global.registerAUsername" = "Rekisteröi käyttäjänimi";
 "global.enterPassword" = "Syötä salasana";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Lisää jäsen";
 "swarm.confirmLeaveSwarm" = "Oletko varma, että haluat lähteä?";
 "swarm.Leave" = "Lähdetään";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Eilen";
 "smartlist.results" = "Julkinen kansio";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Ei tuloksia";
 "smartlist.noConversation" = "Ei keskusteluja";
 "smartlist.searchBarPlaceholder" = "Syötä nimi...";
-"smartlist.searchBar" = "Etsi uutta tai aiemmin luotua yhteystietoa...";
+"smartlist.searchBar" = "Etsintä";
 "smartlist.noNetworkConnectivity" = "Ei verkkoyhteyttä";
 "smartlist.cellularAccess" = "Varmista, että matkapuhelinverkon käyttö on sallittu asetuksissasi";
 "smartlist.accountsTitle" = "Tunnukset";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Valitse yksi numeroista";
 "smartlist.invitations" = "Kutsut";
 "smartlist.aboutJami" = "Tietoa Jamista";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Kirjoita viesti";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Tilin linkittäminen";
-"linkToAccount.linkButtonTitle" = "Linkitä laite";
+"linkToAccount.linkButtonTitle" = "Yhdistä";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Syötä PIN-koodi";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN käyttäjänimi";
 "accountPage.turnPassword" = "TURN salasana";
 "accountPage.turnRealm" = "TURN -alue";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Käyttäjänimi";
@@ -293,6 +299,8 @@
 "account.port" = "Portti";
 "account.proxyServer" = "Välityspalvelin";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Anna osoite";
 "account.portLabel" = "Anna porttinumero";

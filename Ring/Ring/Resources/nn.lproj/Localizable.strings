@@ -77,6 +77,7 @@
 "swarm.addMember" = "Legg til medlem";
 "swarm.confirmLeaveSwarm" = "Er du sikker på du vil forlate denne sjarmen?";
 "swarm.Leave" = "Gå bort";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Fellesregister";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Ingen resultat";
 "smartlist.noConversation" = "Ingen samtal";
 "smartlist.searchBarPlaceholder" = "Skriv inn namnet...";
-"smartlist.searchBar" = "Søk etter nye eller eksisterende kontakt...";
+"smartlist.searchBar" = "Søk etter";
 "smartlist.noNetworkConnectivity" = "Ingen nettverksanslutning";
 "smartlist.cellularAccess" = "Sørg for at mobilen er tilgjevd i innstillingane dine";
 "smartlist.accountsTitle" = "Rekontering";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Velg ein av tallane";
 "smartlist.invitations" = "Invitasjonar";
 "smartlist.aboutJami" = "Om Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Skriv ein melding til ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontokoppbinding";
-"linkToAccount.linkButtonTitle" = "Linketøy";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN-kode";
 "linkToAccount.pinLabel" = "Skriv inn PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Brukarnamn TURN";
 "accountPage.turnPassword" = "Passord til TURN";
 "accountPage.turnRealm" = "DER er det ikkje";
+"accountPage.upnpEnabled" = "Bruk UPnP";
 
 //Account
 "account.sipUsername" = "Nøme til brukaren";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Styrkemann";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Skriv inn adressen";
 "account.portLabel" = "Skriv inn portnummer";

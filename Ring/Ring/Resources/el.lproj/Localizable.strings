@@ -22,7 +22,7 @@
 "global.accountSettings" = "Ρυθμίσεις λογαριασμού";
 "global.advancedSettings" = "Προχωρημένες ρυθμίσεις";
 "global.username" = "Όνομα χρήστη";
-"global.recommended" = "Recommended";
+"global.recommended" = "Προτεινόμενα";
 "global.password" = "Κωδικός";
 "global.registerAUsername" = "Καταχωρίστε ένα όνομα χρήστη";
 "global.enterPassword" = "Καταχώρηση συνθηματικού";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Προσθήκη Μέλη";
 "swarm.confirmLeaveSwarm" = "Είσαι σίγουρος ότι θέλεις να φύγεις από αυτό το σμήνος;";
 "swarm.Leave" = "Φύγε";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Χθες";
 "smartlist.results" = "Δημόσιο κατάλογο";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Χωρίς αποτελέσματα";
 "smartlist.noConversation" = "Δεν έχουμε συνομιλίες.";
 "smartlist.searchBarPlaceholder" = "Εισάγετε το όνομα...";
-"smartlist.searchBar" = "Ψάξτε για νέα ή υπάρχοντα επαφή...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "Καμία σύνδεση στο δίκτυο";
 "smartlist.cellularAccess" = "Βεβαιωθείτε ότι η πρόσβαση σε κινητή έχει χορηγηθεί στις ρυθμίσεις σας";
 "smartlist.accountsTitle" = "Λογαριασμοί";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Επιλέξτε έναν από τους αριθμούς";
 "smartlist.invitations" = "Προσκλήσεις";
 "smartlist.aboutJami" = "Σχετικά με το Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Γράψε μήνυμα σε ";
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "Δημιουργήστε το avatar σας";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "Δημιουργήστε λογαριασμό Jami";
 "createAccount.chooseStrongPassword" = "Επιλέξτε ένα ισχυρό κωδικό πρόσβασης που θα θυμάστε για να προστατεύσετε το λογαριασμό σας στο Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Επιβεβαίωση κωδικού";
 "createAccount.passwordCharactersNumberError" = "το ελάχιστο 6 χαρακτήρες";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Σύνδεση λογαριασμού";
-"linkToAccount.linkButtonTitle" = "Σύνδεση συσκευής";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Εισάγετε PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Όνομα χρήστη TURN";
 "accountPage.turnPassword" = "Κωδικός TURN";
 "accountPage.turnRealm" = "Το βασίλειο ΤΟΥΡΝ";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Όνομα Χρήστη";
@@ -293,6 +299,8 @@
 "account.port" = "Θύρα";
 "account.proxyServer" = "Διαμεσολαβητής";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Εισάγετε διεύθυνση";
 "account.portLabel" = "Εισάγετε τον αριθμό λιμένα";

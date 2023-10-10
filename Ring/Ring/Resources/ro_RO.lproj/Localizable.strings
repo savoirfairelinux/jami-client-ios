@@ -77,6 +77,7 @@
 "swarm.addMember" = "Adaugă un membru";
 "swarm.confirmLeaveSwarm" = "Sigur vrei să părăsești acest grup?";
 "swarm.Leave" = "Părăsește";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Niciun rezultat";
 "smartlist.noConversation" = "Nicio conversație";
 "smartlist.searchBarPlaceholder" = "Introdu numele...";
-"smartlist.searchBar" = "Caută un contact nou sau existent...";
+"smartlist.searchBar" = "Caută";
 "smartlist.noNetworkConnectivity" = "Nicio legătură la rețea";
 "smartlist.cellularAccess" = "Asigură-te că accesul la rețea este permis";
 "smartlist.accountsTitle" = "Conturi";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
 "smartlist.invitations" = "Invitații";
 "smartlist.aboutJami" = "Despre Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Scrie pentru ";
@@ -119,7 +122,7 @@
 "welcome.haveAccount" = "Am deja un cont";
 "welcome.linkDevice" = "Importă din alt aparat";
 "welcome.linkBackup" = "Importă din copia de rezervă";
-"welcome.createAccount" = "Join";
+"welcome.createAccount" = "Participă";
 "welcome.connectToManager" = "Conectează-te la Serverul de Administrare a Conturilor Jami";
 
 //Creation Profile Screen
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asocierea contului";
-"linkToAccount.linkButtonTitle" = "Asociază aparatul";
+"linkToAccount.linkButtonTitle" = "Asociază";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introdu PIN-ul";
 "linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. În „Reglări” alege „Asociază alt aparat cu acest cont” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Nume de utilizator TURN";
 "accountPage.turnPassword" = "Parola TURN";
 "accountPage.turnRealm" = "Domeniul TURN";
+"accountPage.upnpEnabled" = "Folosește UPnP";
 
 //Account
 "account.sipUsername" = "Nume de utilizator";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configurează un cont SIP";
+"account.sipAccount" = "Cont SIP";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Caracteristici avansate";
 "account.serverLabel" = "Introdu adresa";
 "account.portLabel" = "Introdu numărul Portului";

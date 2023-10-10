@@ -77,6 +77,7 @@
 "swarm.addMember" = "Thêm thành viên";
 "swarm.confirmLeaveSwarm" = "Em có chắc em muốn rời khỏi đám đông này không?";
 "swarm.Leave" = "Đi đi";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Hôm qua";
 "smartlist.results" = "Đồ mục công cộng";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Không có kết quả";
 "smartlist.noConversation" = "Không có cuộc trò chuyện";
 "smartlist.searchBarPlaceholder" = "Nhập tên...";
-"smartlist.searchBar" = "Tìm kiếm liên lạc mới hoặc hiện có...";
+"smartlist.searchBar" = "Tìm kiếm";
 "smartlist.noNetworkConnectivity" = "Không có kết nối mạng";
 "smartlist.cellularAccess" = "Hãy chắc chắn rằng truy cập di động được cấp trong cài đặt của bạn";
 "smartlist.accountsTitle" = "Tài khoản";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Chọn một trong số";
 "smartlist.invitations" = "Thỉnh cầu";
 "smartlist.aboutJami" = "Về Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Hãy gửi tin nhắn cho ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kết nối tài khoản";
-"linkToAccount.linkButtonTitle" = "Thiết bị liên kết";
+"linkToAccount.linkButtonTitle" = "Liên kết";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "GHIM";
 "linkToAccount.pinLabel" = "Nhập PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Tên người dùng TURN";
 "accountPage.turnPassword" = "Mật khẩu TURN";
 "accountPage.turnRealm" = "Vị trí của TURN";
+"accountPage.upnpEnabled" = "Sử dụng UPnP";
 
 //Account
 "account.sipUsername" = "Tên người dùng";
@@ -293,6 +299,8 @@
 "account.port" = "Cảng";
 "account.proxyServer" = "Tín hiệu";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Nhập địa chỉ";
 "account.portLabel" = "Nhập số cổng";

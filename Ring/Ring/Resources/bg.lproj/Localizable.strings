@@ -22,7 +22,7 @@
 "global.accountSettings" = "Настройки на сметката";
 "global.advancedSettings" = "Разширени настройки";
 "global.username" = "Потребителско име";
-"global.recommended" = "Recommended";
+"global.recommended" = "Препоръчително";
 "global.password" = "Парола";
 "global.registerAUsername" = "Регистриране на потребителско име";
 "global.enterPassword" = "Въведете парола";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Добавете член";
 "swarm.confirmLeaveSwarm" = "Сигурен ли си, че искаш да напуснеш роя?";
 "swarm.Leave" = "Излезте.";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Обществен каталог";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Няма резултати";
 "smartlist.noConversation" = "Няма разговори";
 "smartlist.searchBarPlaceholder" = "Въведете име…";
-"smartlist.searchBar" = "Търсене на нови или съществуващи контакти...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "Няма връзка с мрежата";
 "smartlist.cellularAccess" = "Уверете се, че в настроенията ви е предоставен достъп с мобилен телефон.";
 "smartlist.accountsTitle" = "Профили";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Изберете един от числата";
 "smartlist.invitations" = "Покани";
 "smartlist.aboutJami" = "Относно Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Пиши съобщение на ";
@@ -119,7 +122,7 @@
 "welcome.haveAccount" = "Вече имам сметка.";
 "welcome.linkDevice" = "Внос от друго устройство";
 "welcome.linkBackup" = "Импорт от архивния резерв";
-"welcome.createAccount" = "Join";
+"welcome.createAccount" = "Присъединяване";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "Създаване на аватар";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "Присъединете се към Джами.";
 "createAccount.chooseStrongPassword" = "Изберете сигурна парола, която ще запомните, за да е защитен профилът ви.";
 "createAccount.repeatPasswordPlaceholder" = "Потвърдете паролата";
 "createAccount.passwordCharactersNumberError" = "Най-малко 6 знака";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Свързване на профил";
-"linkToAccount.linkButtonTitle" = "Свързване на устройство";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "ПИН";
 "linkToAccount.pinLabel" = "Въведете ПИН";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Потребителско име за TURN";
 "accountPage.turnPassword" = "Парола за TURN";
 "accountPage.turnRealm" = "СВЕЗНИЦА";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Потребителско име";
@@ -293,6 +299,8 @@
 "account.port" = "Порт";
 "account.proxyServer" = "Посредник";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Настройка";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Введете адрес";
 "account.portLabel" = "Введете номер на порта";

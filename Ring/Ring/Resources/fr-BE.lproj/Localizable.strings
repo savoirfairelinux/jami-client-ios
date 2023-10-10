@@ -22,7 +22,7 @@
 "global.accountSettings" = "Paramètres Compte Jami";
 "global.advancedSettings" = "Paramètres avancés";
 "global.username" = "Nom d'utilisateur";
-"global.recommended" = "Recommended";
+"global.recommended" = "Recommandé";
 "global.password" = "Mot de passe";
 "global.registerAUsername" = "Enregistrer un nom d'utilisateur";
 "global.enterPassword" = "Entrer le mot-de-passe";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Ajouter un membre";
 "swarm.confirmLeaveSwarm" = "Êtes-vous certain de vouloir quitter le Swarm ?";
 "swarm.Leave" = "Quitter";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Hier";
 "smartlist.results" = "Annuaire public";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Aucun résultat";
 "smartlist.noConversation" = "Pas de conversations";
 "smartlist.searchBarPlaceholder" = "Entrez un nom... ";
-"smartlist.searchBar" = "Rechercher parmi les contacts existants ou nouveaux...";
+"smartlist.searchBar" = "Rechercher";
 "smartlist.noNetworkConnectivity" = "Pas d'accès au réseau";
 "smartlist.cellularAccess" = "Assurez vous que l'accès mobile est activé dans vos paramètres";
 "smartlist.accountsTitle" = "Comptes";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Choisir un des numéros";
 "smartlist.invitations" = "Invitations";
 "smartlist.aboutJami" = "À propos de Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Écrire un message à ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Association du compte";
-"linkToAccount.linkButtonTitle" = "Lier l'appareil";
+"linkToAccount.linkButtonTitle" = "Lier";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "NIP";
 "linkToAccount.pinLabel" = "Entrer le NIP";
 "linkToAccount.explanationPinMessage" = "Pour générer le code NIP, rendez-vous dans les paramètres de gestion du compte sur l'appareil qui contient le compte que vous souhaitez utiliser. Dans les paramètres de l'appareil, sélectionnez \"Lier un autre appareil à ce compte\". Vous obtiendrez le NIP nécessaire pour compléter ce formulaire. Le NIP reste valide pendant 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Nom d'utilisateur TURN";
 "accountPage.turnPassword" = "Mot de passe TURN";
 "accountPage.turnRealm" = "Domaine TURN";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Nom d'utilisateur";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configurer un compte SIP";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configurer";
 "account.advancedFeatures" = "Fonctionnalités avancées";
 "account.serverLabel" = "Entrer l'adresse";
 "account.portLabel" = "Entrer le numéro de port";

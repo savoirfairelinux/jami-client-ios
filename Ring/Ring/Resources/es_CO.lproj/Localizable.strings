@@ -22,7 +22,7 @@
 "global.accountSettings" = "Configuración de la cuenta";
 "global.advancedSettings" = "Ajustes Avanzados";
 "global.username" = "Nombre de usuario";
-"global.recommended" = "Recommended";
+"global.recommended" = "Recomendado";
 "global.password" = "Contraseña";
 "global.registerAUsername" = "Registrá un nombre de usuario";
 "global.enterPassword" = "Escriba la contraseña";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Añadir Miembro";
 "swarm.confirmLeaveSwarm" = "¿Está seguro de querer abandonar este enjambre?";
 "swarm.Leave" = "Abandonar";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Ayer";
 "smartlist.results" = "Directorio Público";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Sin resultados";
 "smartlist.noConversation" = "Sin conversaciones";
 "smartlist.searchBarPlaceholder" = "Ingresá tu nombre...";
-"smartlist.searchBar" = "Buscar contacto nuevo o existente...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "Sin conexión de red";
 "smartlist.cellularAccess" = "Verifique que el acceso celular está permitido en las configuraciones";
 "smartlist.accountsTitle" = "Cuentas";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Seleccioná uno de los números";
 "smartlist.invitations" = "Invitaciones";
 "smartlist.aboutJami" = "Acerca de Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Escribir mensaje a";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asociación de la cuenta";
-"linkToAccount.linkButtonTitle" = "Conectar dispositivo";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Escriba el PIN";
 "linkToAccount.explanationPinMessage" = "Para generar el código PIN, vaya a la configuración de la cuenta en el dispositivo que contiene la cuenta que dese utilizar. En la configuración del dispositivo seleccione \"Conectar otro dispositivo a esta cuenta\". Recibirá el PIN necesario para completar este formulario. Este será válido durante 10 minutos.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Nombre de usuario en TURN";
 "accountPage.turnPassword" = "Contraseña TURN";
 "accountPage.turnRealm" = "Reino TURN";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Nombre de usuario";
@@ -293,6 +299,8 @@
 "account.port" = "Puerto";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configurar una cuenta SIP";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configurar";
 "account.advancedFeatures" = "Características avanzadas";
 "account.serverLabel" = "Ingresá dirección";
 "account.portLabel" = "Ingresá número de puerto";

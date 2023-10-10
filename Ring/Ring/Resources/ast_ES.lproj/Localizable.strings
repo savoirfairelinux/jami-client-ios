@@ -22,7 +22,7 @@
 "global.accountSettings" = "Configuración de cuenta";
 "global.advancedSettings" = "La configuración avanzada";
 "global.username" = "Nombre d'usuariu";
-"global.recommended" = "Recommended";
+"global.recommended" = "Recomendáu";
 "global.password" = "Paez que la contraseña";
 "global.registerAUsername" = "Registrar un nome d' usuariu";
 "global.enterPassword" = "Entra contraseña";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Aderir miembru";
 "swarm.confirmLeaveSwarm" = "¿Seguru que quieres salir de la masa?";
 "swarm.Leave" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "En xineru de 2011";
 "smartlist.results" = "El Directoriu Públicu";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Nun hai resultáu";
 "smartlist.noConversation" = "Nun hai conversaciones.";
 "smartlist.searchBarPlaceholder" = "Entra'l nome...";
-"smartlist.searchBar" = "La busca de nuevos o actuales contactos...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "Nun hai conectividá de rede";
 "smartlist.cellularAccess" = "Asegúrese d'un accesu celular autorizáu nos sos ajustes";
 "smartlist.accountsTitle" = "Cuentas";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Seleccione unu de los númberos";
 "smartlist.invitations" = "Les invitaciones";
 "smartlist.aboutJami" = "Sobre Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Escribir un mensaxe a ";
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "Crear el so avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "Uníu a Jami";
 "createAccount.chooseStrongPassword" = "Escueye una contraseña fuerte que recordar pa protexer la so cuenta Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Confirmar contraseña";
 "createAccount.passwordCharactersNumberError" = "Minimu de 6 caracteres";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "La vinculación de cuentas";
-"linkToAccount.linkButtonTitle" = "Dispositivu de enllaz";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "El PIN";
 "linkToAccount.pinLabel" = "Entra PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Nómase d'usuariu TURN";
 "accountPage.turnPassword" = "La contraseña de TURN";
 "accountPage.turnRealm" = "El Reinu de la VIRTANcia";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Nome d'usuariu";
@@ -293,6 +299,8 @@
 "account.port" = "Portos";
 "account.proxyServer" = "El so nome ye";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Entra direutamente";
 "account.portLabel" = "Entra'l númberu de puertu";

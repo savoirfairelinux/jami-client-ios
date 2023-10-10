@@ -77,6 +77,7 @@
 "swarm.addMember" = "加入成员";
 "swarm.confirmLeaveSwarm" = "你确定你想离开这个群体吗?";
 "swarm.Leave" = "离开";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公開目錄";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "沒有結果";
 "smartlist.noConversation" = "沒有對話";
 "smartlist.searchBarPlaceholder" = "輸入名字……";
-"smartlist.searchBar" = "搜尋新的或既有的聯絡人……";
+"smartlist.searchBar" = "搜尋";
 "smartlist.noNetworkConnectivity" = "沒有網路連接";
 "smartlist.cellularAccess" = "確定在您的設定中已授權使用行動通訊";
 "smartlist.accountsTitle" = "帳號";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "選取其中一個號碼";
 "smartlist.invitations" = "邀請";
 "smartlist.aboutJami" = "關於 Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "編寫訊息給";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "帳號連結";
-"linkToAccount.linkButtonTitle" = "連結裝置";
+"linkToAccount.linkButtonTitle" = "連結";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN 碼";
 "linkToAccount.pinLabel" = "輸入 PIN 碼";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN 使用者名稱";
 "accountPage.turnPassword" = "TURN 密碼";
 "accountPage.turnRealm" = "TURN 範圍";
+"accountPage.upnpEnabled" = "使用 UPnP";
 
 //Account
 "account.sipUsername" = "使用者名稱";
@@ -293,6 +299,8 @@
 "account.port" = "連接埠";
 "account.proxyServer" = "代理服務器";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP 帳號";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "輸入地址";
 "account.portLabel" = "輸入連接埠號";

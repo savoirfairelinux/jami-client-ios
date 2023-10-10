@@ -77,6 +77,7 @@
 "swarm.addMember" = "Tag hozzáadása";
 "swarm.confirmLeaveSwarm" = "Biztos, hogy kilép ebből a rajcsoportból?";
 "swarm.Leave" = "Elhagyás";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Nyilvános címtár";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Nincs eredmény";
 "smartlist.noConversation" = "Beszélgetés nem található";
 "smartlist.searchBarPlaceholder" = "Név megadása…";
-"smartlist.searchBar" = "Keressen új vagy meglévő kapcsolatok között…";
+"smartlist.searchBar" = "Keresés";
 "smartlist.noNetworkConnectivity" = "Nincs hálózati csatlakozás";
 "smartlist.cellularAccess" = "Győződjön meg róla, hogy a mobilhálózati hozzáférést a beállításai biztosítják";
 "smartlist.accountsTitle" = "Fiókok";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Válasszon egy számot";
 "smartlist.invitations" = "Meghívások";
 "smartlist.aboutJami" = "A Jami névjegye";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Üzenet írása következő(k)nek: ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Fiók összekapcsolása";
-"linkToAccount.linkButtonTitle" = "Összekapcsoló eszköz";
+"linkToAccount.linkButtonTitle" = "Kapcsolat";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN-kód";
 "linkToAccount.pinLabel" = "PIN-kód megadása";
 "linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához ugorjon a fiókkezelési beállításokhoz a használni kívánt fiókot tartalmazó eszközön. Válassza az eszközbeállításoknál a „Eszköz összekapcsolása fiókhoz” lehetőséget. Meg fogja kapni az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN felhasználónév";
 "accountPage.turnPassword" = "TURN jelszó";
 "accountPage.turnRealm" = "TURN tartomány";
+"accountPage.upnpEnabled" = "UPnP használata";
 
 //Account
 "account.sipUsername" = "Felhasználónév";
@@ -293,6 +299,8 @@
 "account.port" = "Kikötő";
 "account.proxyServer" = "Meghatalmazás";
 "account.createSipAccount" = "SIP-fiók beállítása";
+"account.sipAccount" = "SIP fiók ";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Haladó jellemzők";
 "account.serverLabel" = "Cím beírása";
 "account.portLabel" = "Kikötőszám megadása";

@@ -77,6 +77,7 @@
 "swarm.addMember" = "Add Member";
 "swarm.confirmLeaveSwarm" = "Are you sure you want to leave this swarm?";
 "swarm.Leave" = "Leave";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "ਕੱਲ੍ਹ";
 "smartlist.results" = "Public Directory";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "ਕੋਈ ਨਤੀਜਾ ਨਹੀਂ";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
-"smartlist.searchBar" = "Search for new or existing contact...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "ਕੋਈ ਨੈੱਟਵਰਕ ਕਨੈਕਸ਼ਨ ਨਹੀਂ ਹੈ";
 "smartlist.cellularAccess" = "ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਆਪਣੀਆਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਸੈਲਿਊਲਰ ਪਹੁੰਚ ਦਿੱਤੀ ਹੋਵੇ";
 "smartlist.accountsTitle" = "ਖਾਤੇ";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Select one of the numbers";
 "smartlist.invitations" = "ਸੱਦੇ";
 "smartlist.aboutJami" = "Jami ਬਾਰੇ";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write message to ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ਖਾਤਾ ਲਿੰਕ ਕਰਨਾ";
-"linkToAccount.linkButtonTitle" = "ਡੀਵਾਈਸ ਲਿੰਕ ਕਰੋ";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "ਪਿੰਨ";
 "linkToAccount.pinLabel" = "ਪਿੰਨ ਦਾਖਲ ਕਰੋ";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN ਵਰਤੋਂਕਾਰ ਨਾਂ";
 "accountPage.turnPassword" = "TURN ਪਾਸਵਰਡ";
 "accountPage.turnRealm" = "TURN realm";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "User Name";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "ਪ੍ਰੌਕਸੀ";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Enter Address";
 "account.portLabel" = "Enter Port Number";

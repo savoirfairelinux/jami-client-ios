@@ -77,6 +77,7 @@
 "swarm.addMember" = "Pridať člena";
 "swarm.confirmLeaveSwarm" = "Si si istý, že chceš opustiť tento hŕst?";
 "swarm.Leave" = "Odchádzam";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Včera";
 "smartlist.results" = "Verejný zoznam";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Žiadne výsledky";
 "smartlist.noConversation" = "Žiadne konverzácie";
 "smartlist.searchBarPlaceholder" = "Zadajte meno...";
-"smartlist.searchBar" = "Vyhľadávanie nových alebo existujúcich kontaktov...";
+"smartlist.searchBar" = "Vyhľadávanie";
 "smartlist.noNetworkConnectivity" = "Žiadne sieťové pripojenie";
 "smartlist.cellularAccess" = "Uistite, že v nastaveniach je povolený prístup k mobilnej sieti";
 "smartlist.accountsTitle" = "Účty";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Vyberte jedno z čísel";
 "smartlist.invitations" = "Pozvánky";
 "smartlist.aboutJami" = "O programe Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Napíšte správu ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Prepájanie účtu";
-"linkToAccount.linkButtonTitle" = "Prepájanie zariadenia";
+"linkToAccount.linkButtonTitle" = "Prepojiť";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Zadajte PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN používateľské meno";
 "accountPage.turnPassword" = "TURN heslo";
 "accountPage.turnRealm" = "TURN realm";
+"accountPage.upnpEnabled" = "Používať UPnP";
 
 //Account
 "account.sipUsername" = "Používateľské meno";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Účet";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Zadajte adresu";
 "account.portLabel" = "Zadajte číslo portu";

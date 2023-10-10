@@ -77,6 +77,7 @@
 "swarm.addMember" = "Додавати члена";
 "swarm.confirmLeaveSwarm" = "Ти впевнений, що хочеш покинути цей рій?";
 "swarm.Leave" = "Піти";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Учора";
 "smartlist.results" = "Публічний каталог";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Ніяких результатів";
 "smartlist.noConversation" = "Ніяких розмов";
 "smartlist.searchBarPlaceholder" = "Введіть ім'я...";
-"smartlist.searchBar" = "Пошук нових або існуючих контактів...";
+"smartlist.searchBar" = "Пошук";
 "smartlist.noNetworkConnectivity" = "Відсутнє з’єднання з мережею";
 "smartlist.cellularAccess" = "Переконайтеся, що доступ на мобільний телефон у ваших налаштуваннях";
 "smartlist.accountsTitle" = "Облікові записи";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Виберіть один з цифр";
 "smartlist.invitations" = "Запрошення";
 "smartlist.aboutJami" = "Про Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Напишіть повідомлення ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Поєднання облікових записів";
-"linkToAccount.linkButtonTitle" = "Прив'язати пристрій";
+"linkToAccount.linkButtonTitle" = "Зв'язати";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN-код";
 "linkToAccount.pinLabel" = "Ввести PIN-код";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Обрати ім'я";
 "accountPage.turnPassword" = "Обрати пароль";
 "accountPage.turnRealm" = "Простір TURN";
+"accountPage.upnpEnabled" = "Використовувати UPnP";
 
 //Account
 "account.sipUsername" = "Ім'я користувача";
@@ -293,6 +299,8 @@
 "account.port" = "Порт";
 "account.proxyServer" = "Проксі";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "Аккаунт SIP";
+"account.configure" = "Налаштувати";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Введіть адресу";
 "account.portLabel" = "Введіть номер порта";

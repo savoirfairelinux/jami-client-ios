@@ -22,7 +22,7 @@
 "global.accountSettings" = "Kontoindstillinger";
 "global.advancedSettings" = "Avancerede indstillinger";
 "global.username" = "Brugernavn";
-"global.recommended" = "Recommended";
+"global.recommended" = "Anbefalet";
 "global.password" = "Adgangskode";
 "global.registerAUsername" = "Registrér et brugernavn";
 "global.enterPassword" = "Indtast kodeord";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Tilføj medlem";
 "swarm.confirmLeaveSwarm" = "Er du sikker på, du vil forlade denne sværm?";
 "swarm.Leave" = "- Gå væk.";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Det offentlige register";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Ingen resultater";
 "smartlist.noConversation" = "Ingen samtaler";
 "smartlist.searchBarPlaceholder" = "Indtast navn...";
-"smartlist.searchBar" = "Søg efter nye eller eksisterende kontakter...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "Ingen netværksforbindelse";
 "smartlist.cellularAccess" = "Kontroller at rettigheder til mobildata er givet i indstillinger";
 "smartlist.accountsTitle" = "Konti";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Vælg et af numrene";
 "smartlist.invitations" = "Invitationer";
 "smartlist.aboutJami" = "Om Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Skriv et besked til ";
@@ -119,7 +122,7 @@
 "welcome.haveAccount" = "Jeg har allerede en konto.";
 "welcome.linkDevice" = "Import fra et andet udstyr";
 "welcome.linkBackup" = "Import fra backup";
-"welcome.createAccount" = "Join";
+"welcome.createAccount" = "Deltag";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "Lav din avatar";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "Gå med Jami";
 "createAccount.chooseStrongPassword" = "Vælg et stærkt password, du vil huske for at beskytte din Jami-konto.";
 "createAccount.repeatPasswordPlaceholder" = "Bekræft adgangskode";
 "createAccount.passwordCharactersNumberError" = "Mindst 6 tegn";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Konto-tilknytning";
-"linkToAccount.linkButtonTitle" = "Tilknyt enhed";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Indtast PIN-kode";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN-brugernavn";
 "accountPage.turnPassword" = "TURN-adgangskode";
 "accountPage.turnRealm" = "TURN-verden";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Brugernavn";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Stedfortræder";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Indtast Adresse";
 "account.portLabel" = "Indtasts portnummer";

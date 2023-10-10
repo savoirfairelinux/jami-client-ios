@@ -22,7 +22,7 @@
 "global.accountSettings" = "Konto-sekcioj";
 "global.advancedSettings" = "Antaŭaj agordoj";
 "global.username" = "Uzantnomo";
-"global.recommended" = "Recommended";
+"global.recommended" = "Recomandita";
 "global.password" = "Pasvorto";
 "global.registerAUsername" = "Registru uzantnomon";
 "global.enterPassword" = "Entajpu Pasvorton";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Aldoni Membron";
 "swarm.confirmLeaveSwarm" = "Ĉu vi certas, ke vi volas forlasi tiun sorbon?";
 "swarm.Leave" = "Foriru";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Hieraŭ";
 "smartlist.results" = "Publika Direktorio";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Nula trovaĵon";
 "smartlist.noConversation" = "Neniu konversacio";
 "smartlist.searchBarPlaceholder" = "Enigu nomon...";
-"smartlist.searchBar" = "Serĉu novan aŭ ekzistantan kontakton...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "Sen reta konekto";
 "smartlist.cellularAccess" = "Certigu ke la poŝtelefono estas permesita en viaj agordoj";
 "smartlist.accountsTitle" = "Kontoj";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Elektu unu el la nombroj";
 "smartlist.invitations" = "Invitoj";
 "smartlist.aboutJami" = "Pri Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Skribu mesaĝon al ";
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "Krei vian avataron";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "Aliĝu al Jami";
 "createAccount.chooseStrongPassword" = "Elektu fortan pasvorton, kiun vi memorigos por protekti vian konto Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Konfirmu pasvorton";
 "createAccount.passwordCharactersNumberError" = "6 signoj minimume";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Ligas konton";
-"linkToAccount.linkButtonTitle" = "Ligi aparaton";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Entajpu PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN uzantnomo";
 "accountPage.turnPassword" = "TURN pasvorto";
 "accountPage.turnRealm" = "RON regno";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Uzanto";
@@ -293,6 +299,8 @@
 "account.port" = "Pordo";
 "account.proxyServer" = "Prokura Servilo";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Agordi";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Enigu adreson";
 "account.portLabel" = "Enigu la portujan numeron";

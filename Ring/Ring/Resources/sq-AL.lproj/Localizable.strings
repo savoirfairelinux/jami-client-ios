@@ -77,6 +77,7 @@
 "swarm.addMember" = "Shtoni Anëtar";
 "swarm.confirmLeaveSwarm" = "Jeni i sigurt se doni të braktisni këtë zgjua?";
 "swarm.Leave" = "Braktise";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori Publike";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "S’ka përfundime";
 "smartlist.noConversation" = "S’ka biseda";
 "smartlist.searchBarPlaceholder" = "Jepni emrin…";
-"smartlist.searchBar" = "Kërkoni për kontakt të ri ose ekzistues…";
+"smartlist.searchBar" = "Kërkim";
 "smartlist.noNetworkConnectivity" = "Pa lidhje në rrjet";
 "smartlist.cellularAccess" = "Sigurohuni qe te rregullimet tuaja i është dhënë hyrje te celulari";
 "smartlist.accountsTitle" = "Llogari";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Përzgjidhni një nga numrat";
 "smartlist.invitations" = "Ftesa";
 "smartlist.aboutJami" = "Mbi Jami-n";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Shkruani mesazh për";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";
-"linkToAccount.linkButtonTitle" = "Lidhni pajisje";
+"linkToAccount.linkButtonTitle" = "Lidhje";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Jepni PIN-in";
 "linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni \"Lidhni me këtë llogari një pajisje tjetër\". Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Emër përdoruesi TURN";
 "accountPage.turnPassword" = "Fjalëkalim TURN";
 "accountPage.turnRealm" = "TURN shtrirje";
+"accountPage.upnpEnabled" = "Përdor UPnP";
 
 //Account
 "account.sipUsername" = "Emër Përdoruesi";
@@ -293,6 +299,8 @@
 "account.port" = "Portë";
 "account.proxyServer" = "Ndërmjetës";
 "account.createSipAccount" = "Formësoni një llogari SIP";
+"account.sipAccount" = "Llogari SIP";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Veçori të Thelluara";
 "account.serverLabel" = "Jepni Adresë";
 "account.portLabel" = "Jepni Numër Porte";

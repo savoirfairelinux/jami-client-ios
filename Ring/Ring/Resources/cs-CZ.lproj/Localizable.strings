@@ -22,7 +22,7 @@
 "global.accountSettings" = "Nastavení účtu";
 "global.advancedSettings" = "Pokročilá nastavení";
 "global.username" = "Uživatelské jméno";
-"global.recommended" = "Recommended";
+"global.recommended" = "Doporučeno";
 "global.password" = "Heslo";
 "global.registerAUsername" = "Zaregistrovat uživatelské jméno";
 "global.enterPassword" = "Zadejte heslo";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Přidat člena";
 "swarm.confirmLeaveSwarm" = "Jste si jistí, že chcete opustit swarm?";
 "swarm.Leave" = "Opustit";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Včera";
 "smartlist.results" = "Veřejný adresář";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Žádné výsledky";
 "smartlist.noConversation" = "Žádné konverzace";
 "smartlist.searchBarPlaceholder" = "Zadejte jméno...";
-"smartlist.searchBar" = "Vyhledávání nových nebo stávajících kontaktů...";
+"smartlist.searchBar" = "Search";
 "smartlist.noNetworkConnectivity" = "Chybí připojení";
 "smartlist.cellularAccess" = "Ujistěte se, že je v nastavení zaručen buňkový (místní) přístup";
 "smartlist.accountsTitle" = "Účty";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Vyberte jedno z čísel.";
 "smartlist.invitations" = "Pozvání";
 "smartlist.aboutJami" = "O Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Napsat zprávu";
@@ -119,7 +122,7 @@
 "welcome.haveAccount" = "Už účet mám";
 "welcome.linkDevice" = "Import z jiného zařízení";
 "welcome.linkBackup" = "Importovat ze záložního archivu";
-"welcome.createAccount" = "Join";
+"welcome.createAccount" = "Spojit";
 "welcome.connectToManager" = "Connect to a Jami Account Manager Server";
 
 //Creation Profile Screen
@@ -132,7 +135,7 @@
 "createProfile.createYourAvatar" = "Vytvořit vlastního avatara";
 
 //Create Account form
-"createAccount.createAccountFormTitle" = "Join Jami";
+"createAccount.createAccountFormTitle" = "Připojit k Jami";
 "createAccount.chooseStrongPassword" = "K ochraně účtu Jami si zvolte silné heslo, které si dovedete zapamatovat.";
 "createAccount.repeatPasswordPlaceholder" = "Potvrdit heslo";
 "createAccount.passwordCharactersNumberError" = "Nejméně 6 znaků";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Připojení účtu";
-"linkToAccount.linkButtonTitle" = "Připojit zařízení";
+"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Zadejte PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Uživatelské jméno TURN";
 "accountPage.turnPassword" = "Heslo TURN";
 "accountPage.turnRealm" = "Oblast TURN";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Uživatelské jméno";
@@ -293,6 +299,8 @@
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Zadejte adresu.";
 "account.portLabel" = "Zadejte číslo portu.";

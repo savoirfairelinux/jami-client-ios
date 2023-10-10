@@ -77,6 +77,7 @@
 "swarm.addMember" = "ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ";
 "swarm.confirmLeaveSwarm" = "ಈ ರಾಶಿಯನ್ನು ಬಿಟ್ಟು ಹೋಗಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?";
 "swarm.Leave" = "ಹೊರಟುಹೋಗು";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "ನಿನ್ನೆ";
 "smartlist.results" = "ಸಾರ್ವಜನಿಕ ಡೈರೆಕ್ಟರಿ";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "ಫಲಿತಾಂಶಗಳಿಲ್ಲ";
 "smartlist.noConversation" = "ಯಾವುದೇ ಸಂಭಾಷಣೆಗಳಿಲ್ಲ";
 "smartlist.searchBarPlaceholder" = "ಹೆಸರು ನಮೂದಿಸಿ.";
-"smartlist.searchBar" = "ಹೊಸ ಅಥವಾ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಸಂಪರ್ಕವನ್ನು ಹುಡುಕಿ.";
+"smartlist.searchBar" = "ಹುಡುಕಾಟ";
 "smartlist.noNetworkConnectivity" = "ನೆಟ್ವರ್ಕ್ ಸಂಪರ್ಕವಿಲ್ಲ";
 "smartlist.cellularAccess" = "ನಿಮ್ಮ ಸೆಟ್ಟಿಂಗ್ಗಳಲ್ಲಿ ಸೆಲ್ ಪ್ರವೇಶವನ್ನು ಅನುಮತಿಸಲಾಗಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ";
 "smartlist.accountsTitle" = "ಖಾತೆಗಳು";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "ಒಂದು ಸಂಖ್ಯೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ";
 "smartlist.invitations" = "ಆಹ್ವಾನಗಳು";
 "smartlist.aboutJami" = "ಜಾಮಿ ಬಗ್ಗೆ";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "ಸಂದೇಶವನ್ನು ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ಖಾತೆಗಳನ್ನು ಸಂಪರ್ಕಿಸುವುದು";
-"linkToAccount.linkButtonTitle" = "ಲಿಂಕ್ ಸಾಧನ";
+"linkToAccount.linkButtonTitle" = "ಲಿಂಕ್";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN ಕೋಡ್";
 "linkToAccount.pinLabel" = "ಪಿನ್ ನಮೂದಿಸಿ";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN ಬಳಕೆದಾರ ಹೆಸರು";
 "accountPage.turnPassword" = "ಟರ್ನ್ ಪಾಸ್ವರ್ಡ್";
 "accountPage.turnRealm" = "ಟರ್ನ್ ಕ್ಷೇತ್ರ";
+"accountPage.upnpEnabled" = "UPnP ಅನ್ನು ಬಳಸಿ";
 
 //Account
 "account.sipUsername" = "ಬಳಕೆದಾರ ಹೆಸರು";
@@ -293,6 +299,8 @@
 "account.port" = "ಬಂದರು";
 "account.proxyServer" = "ಪ್ರಾಕ್ಸಿ";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "ವಿಳಾಸ ನಮೂದಿಸಿ";
 "account.portLabel" = "ಪೋರ್ಟ್ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ";

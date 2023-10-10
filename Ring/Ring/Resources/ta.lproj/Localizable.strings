@@ -77,6 +77,7 @@
 "swarm.addMember" = "உறுப்பினர் சேர்க்கவும்";
 "swarm.confirmLeaveSwarm" = "நீங்கள் இந்த குளத்தில் இருந்து வெளியேற வேண்டும் என்று உறுதியாக இருக்கிறீர்களா?";
 "swarm.Leave" = "வெளியேறு";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "நேற்று";
 "smartlist.results" = "பொதுப் பட்டியல்";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "முடிவுகள் இல்லை";
 "smartlist.noConversation" = "எந்த உரையாடலும் இல்லை";
 "smartlist.searchBarPlaceholder" = "பெயர் உள்ளிடவும்...";
-"smartlist.searchBar" = "புதிய அல்லது ஏற்கனவே உள்ள தொடர்புகளை தேடவும்...";
+"smartlist.searchBar" = "தேடல்";
 "smartlist.noNetworkConnectivity" = "நெட்வொர்க் இணைப்பு இல்லை";
 "smartlist.cellularAccess" = "உங்கள் அமைப்புகளில் செல்போன் அணுகல் வழங்கப்பட்டிருப்பதை உறுதி செய்யவும்";
 "smartlist.accountsTitle" = "கணக்குகள்";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "எண்களில் ஒன்றைத் தேர்ந்தெடுக்கவும்";
 "smartlist.invitations" = "அழைப்பிதழ்கள்";
 "smartlist.aboutJami" = "ஜாமி பற்றி";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "கணக்கு இணைப்பு";
-"linkToAccount.linkButtonTitle" = "இணைப்பு சாதனம்";
+"linkToAccount.linkButtonTitle" = "இணைப்பு";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN ஐ உள்ளிடவும்";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "பயனர் பெயர் TURN";
 "accountPage.turnPassword" = "TURN கடவுச்சொல்";
 "accountPage.turnRealm" = "TURN சாம்ராஜ்யம்";
+"accountPage.upnpEnabled" = "UPnP ஐப் பயன்படுத்தவும்";
 
 //Account
 "account.sipUsername" = "பயனர் பெயர்";
@@ -293,6 +299,8 @@
 "account.port" = "துறைமுகம்";
 "account.proxyServer" = "பிரதிநிதி";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "முகவரியை உள்ளிடவும்";
 "account.portLabel" = "போர்ட் எண்";

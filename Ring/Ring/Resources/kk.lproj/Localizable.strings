@@ -77,6 +77,7 @@
 "swarm.addMember" = "Қауымшыны қосу";
 "swarm.confirmLeaveSwarm" = "Бұл тобырдан кетуіңізге сенімдісіз бе?";
 "swarm.Leave" = "Кетіңіздер";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Келесі күні";
 "smartlist.results" = "Қоғамдық кітапша";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Нәтиже жоқ";
 "smartlist.noConversation" = "Әңгіме жоқ";
 "smartlist.searchBarPlaceholder" = "Аты-жөніңізді келтіріңіз...";
-"smartlist.searchBar" = "Жаңа немесе бар байланыс іздеу...";
+"smartlist.searchBar" = "Іздеу";
 "smartlist.noNetworkConnectivity" = "Желілік қосылым жоқ";
 "smartlist.cellularAccess" = "Орындауларыңызда ұялы телефонға қол жеткізуді қамтамасыз етіңіз";
 "smartlist.accountsTitle" = "Есеп айырысу";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Сандардың біреуін таңдаңыз";
 "smartlist.invitations" = "Шақырулар";
 "smartlist.aboutJami" = "Жами туралы";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Хатты ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Есептік жазбаларды байланыстыру";
-"linkToAccount.linkButtonTitle" = "Қосылу құрылғысы";
+"linkToAccount.linkButtonTitle" = "Тізім";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "ПИН";
 "linkToAccount.pinLabel" = "PIN- ні келтіріңіз";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "ТУРН пайдаланушы аты";
 "accountPage.turnPassword" = "ТУРН паролі";
 "accountPage.turnRealm" = "ТУРН әлемі";
+"accountPage.upnpEnabled" = "UPnP- ды қолдану";
 
 //Account
 "account.sipUsername" = "Пайдаланушы атауы";
@@ -293,6 +299,8 @@
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Адресті келтіріңіз";
 "account.portLabel" = "Порт нөмірін келтіріңіз";

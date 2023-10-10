@@ -22,7 +22,7 @@
 "global.accountSettings" = "Kontuaren ezarpenak";
 "global.advancedSettings" = "Jarriera aurreratuak";
 "global.username" = "Erabiltzaile-izena";
-"global.recommended" = "Recommended";
+"global.recommended" = "gomendatzen da";
 "global.password" = "Pasahitza";
 "global.registerAUsername" = "Izen-abizena erregistratzea";
 "global.enterPassword" = "Sartu pasahitza";
@@ -77,6 +77,7 @@
 "swarm.addMember" = "Batzordea gehitu";
 "swarm.confirmLeaveSwarm" = "Ziur zaude ez duzula talde hau utzi nahi?";
 "swarm.Leave" = "Joan zaitezke?";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Atzo";
 "smartlist.results" = "Zerrenda publikoa";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Emaitzarik ez";
 "smartlist.noConversation" = "Ez dago elkarrizketarik.";
 "smartlist.searchBarPlaceholder" = "Sartu izena...";
-"smartlist.searchBar" = "Bilatu kontaktu berriak edo egungoak...";
+"smartlist.searchBar" = "Bilaketa";
 "smartlist.noNetworkConnectivity" = "Ez dago sare-konexiorik";
 "smartlist.cellularAccess" = "Egiaztatu sare mugikorrera sarbidea eman dela ezarpenetan";
 "smartlist.accountsTitle" = "Kontuak";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Aukeratu zenbakietako bat.";
 "smartlist.invitations" = "Gonbidapenak";
 "smartlist.aboutJami" = "Jamiri buruz";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Idatzi mezu bat";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontua estekatzen";
-"linkToAccount.linkButtonTitle" = "Estekatu gailua";
+"linkToAccount.linkButtonTitle" = "Esteka";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN-a";
 "linkToAccount.pinLabel" = "Sartu PIN-a";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN erabiltzaile izena";
 "accountPage.turnPassword" = "TURN pasahitza";
 "accountPage.turnRealm" = "-TURN erreinua.";
+"accountPage.upnpEnabled" = "Use UPnP";
 
 //Account
 "account.sipUsername" = "Erabiltzaile izena";
@@ -293,6 +299,8 @@
 "account.port" = "Ataka";
 "account.proxyServer" = "Proxya";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP Account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Sartu helbidea";
 "account.portLabel" = "Sartu portuaren zenbakia";

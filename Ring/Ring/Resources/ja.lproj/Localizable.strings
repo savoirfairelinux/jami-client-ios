@@ -77,6 +77,7 @@
 "swarm.addMember" = "メンバーを追加";
 "swarm.confirmLeaveSwarm" = "この群れを離れたいのか?";
 "swarm.Leave" = "出て行こう";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "昨日";
 "smartlist.results" = "公開ディレクトリー";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "検索結果はありません";
 "smartlist.noConversation" = "会話はありません";
 "smartlist.searchBarPlaceholder" = "名前を入力...";
-"smartlist.searchBar" = "新規または既存の連絡先を検索…";
+"smartlist.searchBar" = "検索";
 "smartlist.noNetworkConnectivity" = "ネットワーク接続がありません";
 "smartlist.cellularAccess" = "設定から写真へのアクセスが許可されていることを確認してください";
 "smartlist.accountsTitle" = "アカウント";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "番号のうちの1つを選択";
 "smartlist.invitations" = "招待";
 "smartlist.aboutJami" = "Jamiについて";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "メッセージを送信";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "アカウントを関連付けています";
-"linkToAccount.linkButtonTitle" = "機器を関連付ける";
+"linkToAccount.linkButtonTitle" = "リンク";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PINを入力してください";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURNの利用者名";
 "accountPage.turnPassword" = "TURNの暗証語";
 "accountPage.turnRealm" = "TURNレルム";
+"accountPage.upnpEnabled" = "UPnPを使用";
 
 //Account
 "account.sipUsername" = "ユーザー名";
@@ -293,6 +299,8 @@
 "account.port" = "ポート番号";
 "account.proxyServer" = "プロキシ";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIPアカウント";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "アドレス入力";
 "account.portLabel" = "ポート番号を入力する";

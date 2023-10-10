@@ -77,6 +77,7 @@
 "swarm.addMember" = "Добавить член";
 "swarm.confirmLeaveSwarm" = "Ты уверен, что хочешь покинуть этот рог?";
 "swarm.Leave" = "Покинуть";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Публичный Каталог";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Нет результатов";
 "smartlist.noConversation" = "Нет разговоров";
 "smartlist.searchBarPlaceholder" = "Введите имя...";
-"smartlist.searchBar" = "Поиск нового или существующего контакта";
+"smartlist.searchBar" = "Поиск:";
 "smartlist.noNetworkConnectivity" = "Отсутствует сетевое подключение";
 "smartlist.cellularAccess" = "Убедитесь, что сотовый доступ предоставляется в настройках";
 "smartlist.accountsTitle" = "Учетные записи";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Выберите один из номеров";
 "smartlist.invitations" = "Приглашения";
 "smartlist.aboutJami" = "О Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Написать сообщение";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Привязка аккаунта";
-"linkToAccount.linkButtonTitle" = "Привязать устройство";
+"linkToAccount.linkButtonTitle" = "Ссылка";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Введите PIN";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "Имя пользователя";
 "accountPage.turnPassword" = "Пароль";
 "accountPage.turnRealm" = "Домен TURN";
+"accountPage.upnpEnabled" = "Использовать UPnP";
 
 //Account
 "account.sipUsername" = "Имя пользователя";
@@ -293,6 +299,8 @@
 "account.port" = "Порт";
 "account.proxyServer" = "Прокси";
 "account.createSipAccount" = "Настроить SIP-аккаунт";
+"account.sipAccount" = "Учетная запись SIP";
+"account.configure" = "Настройка";
 "account.advancedFeatures" = "Дополнительные функции";
 "account.serverLabel" = "Введите адрес";
 "account.portLabel" = "Введите номер порта";

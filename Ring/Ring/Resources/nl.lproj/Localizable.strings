@@ -77,6 +77,7 @@
 "swarm.addMember" = "Voeg lid toe";
 "swarm.confirmLeaveSwarm" = "Weet je zeker dat je deze zwerm wilt verlaten?";
 "swarm.Leave" = "Ga weg.";
+"swarm.newSwarm" = "New swarm";
 // Smartlist
 "smartlist.yesterday" = "Gisteren";
 "smartlist.results" = "Openbare directory";
@@ -84,7 +85,7 @@
 "smartlist.noResults" = "Geen resultaten";
 "smartlist.noConversation" = "Geen gesprekken";
 "smartlist.searchBarPlaceholder" = "Voer naam in…";
-"smartlist.searchBar" = "Zoek naar nieuwe of bestaande contacten...";
+"smartlist.searchBar" = "Zoek";
 "smartlist.noNetworkConnectivity" = "Geen netwerkverbinding";
 "smartlist.cellularAccess" = "Zorg dat u toegang tot het mobiele netwerk toegestaan heeft in uw instellingen";
 "smartlist.accountsTitle" = "Accounts";
@@ -93,6 +94,8 @@
 "smartlist.selectOneNumber" = "Kies één van de nummers";
 "smartlist.invitations" = "Uitnodigingen";
 "smartlist.aboutJami" = "Over Jami";
+"smartlist.inviteFriends" = "Invite friends";
+"smartlist.accounts" = "Account list";
 
 //Conversation
 "conversation.messagePlaceholder" = "Schrijf een bericht naar ";
@@ -154,7 +157,9 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account koppelen";
-"linkToAccount.linkButtonTitle" = "Apparaat koppelen";
+"linkToAccount.linkButtonTitle" = "Koppelen";
+"linkToAccount.linkDeviceTitle" = "Link Device";
+"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "Pincode";
 "linkToAccount.pinLabel" = "Voer pincode in";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -286,6 +291,7 @@
 "accountPage.turnUsername" = "TURN-gebruikersnaam";
 "accountPage.turnPassword" = "TURN-wachtwoord";
 "accountPage.turnRealm" = "TURN-realm";
+"accountPage.upnpEnabled" = "UPnP gebruiken";
 
 //Account
 "account.sipUsername" = "Gebruikersnaam";
@@ -293,6 +299,8 @@
 "account.port" = "Poort";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
+"account.sipAccount" = "SIP-account";
+"account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Voer adres in";
 "account.portLabel" = "Voer poortnummer in";
