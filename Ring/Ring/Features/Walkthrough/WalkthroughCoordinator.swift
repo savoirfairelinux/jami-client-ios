@@ -53,6 +53,9 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
         return self.navigationViewController
     }
 
+    // Create a PublishSubject that emits Void events
+    let didDismissController = PublishSubject<Void>()
+
     var childCoordinators = [Coordinator]()
     var parentCoordinator: Coordinator?
     var isAccountFirst: Bool = true
