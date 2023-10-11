@@ -102,6 +102,12 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         self.dispatchApplication()
     }
 
+    /// Starts the coordinator without loading
+    func startWithoutLoading () {
+        // ~ Dispatch to the proper screen
+        self.dispatchApplication()
+    }
+
     func migrateAccount(accountId: String) {
         let migratonController = MigrateAccountViewController.instantiate(with: self.injectionBag)
         migratonController.viewModel.accountToMigrate = accountId
@@ -139,6 +145,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
         let walkthroughCoordinator = WalkthroughCoordinator(with: self.injectionBag)
         walkthroughCoordinator.isAccountFirst = isAccountFirst
         walkthroughCoordinator.withAnimations = animated
+        walkthroughCoordinator.parentCoordinator = self
         walkthroughCoordinator.start()
 
         self.addChildCoordinator(childCoordinator: walkthroughCoordinator)
@@ -152,7 +159,7 @@ final class AppCoordinator: Coordinator, StateableResponsive {
             .subscribe(onNext: { [weak self, weak walkthroughCoordinator] (_) in
                 walkthroughCoordinator?.stateSubject.dispose()
                 self?.removeChildCoordinator(childCoordinator: walkthroughCoordinator)
-                self?.dispatchApplication()
+                self?.startWithoutLoading()
             })
             .disposed(by: self.disposeBag)
     }
