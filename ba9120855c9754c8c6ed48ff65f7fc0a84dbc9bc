@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a45886c7_f80c983c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2023-10-11T21:46:31Z",
+      "side": 1,
+      "message": "use jpg or the apple HEIF format",
+      "revId": "ba9120855c9754c8c6ed48ff65f7fc0a84dbc9bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
