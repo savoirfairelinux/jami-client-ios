@@ -83,6 +83,8 @@ extension CallsProviderService {
                 let transaction = CXTransaction(action: endCallAction)
                 self.requestTransaction(transaction)
             }
+        } else if let call = getUnhandeledCall(UUID: callUUID) {
+            unhandeledCalls.remove(call)
         }
         // Send request end call to CallKit.
         let endCallAction = CXEndCallAction(call: callUUID)
