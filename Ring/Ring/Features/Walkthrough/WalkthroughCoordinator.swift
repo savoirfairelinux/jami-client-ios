@@ -75,8 +75,12 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
                     self.showAddAccount(with: walkthroughType)
                 case .accountCreated, .deviceLinked:
                     if self.rootViewController.presentedViewController != nil {
-                        self.rootViewController.dismiss(animated: true) { [weak self] in // dismiss the pop up form modal view
-                            self?.rootViewController.dismiss(animated: true) // dismiss the welcome view and check for user account state
+                        if let appCoordinator = self.parentCoordinator as? AppCoordinator {
+                            appCoordinator.startWithoutLoading()
+                            appCoordinator.removeChildCoordinator(childCoordinator: self)
+                            rootViewController.presentedViewController?.dismiss(animated: true) {
+                                self.rootViewController.dismiss(animated: false)
+                            }
                         }
                     }
                 case .walkthroughCanceled:
