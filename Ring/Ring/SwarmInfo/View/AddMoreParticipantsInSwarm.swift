@@ -47,20 +47,13 @@ struct AddMoreParticipantsInSwarm: View {
         .sheet(isPresented: $showAddMember, onDismiss: {
             viewmodel.removeExistingSubscription()
         }, content: {
-            let currentCount = viewmodel.addMemberCount - viewmodel.selections.count
-            Text(L10n.Swarm.addMorePeople(viewmodel.selections.isEmpty ? viewmodel.addMemberCount : currentCount))
-                .opacity(currentCount > 0 ? 1 : 0)
-                .padding(.top, 20)
-                .font(.system(size: 15.0, weight: .semibold, design: .default))
             List {
                 ForEach(viewmodel.participantsRows) { contact in
                     ParticipantListCell(participant: contact, isSelected: viewmodel.selections.contains(contact.id)) {
                         if viewmodel.selections.contains(contact.id) {
                             viewmodel.selections.removeAll(where: { $0 == contact.id })
                         } else {
-                            if viewmodel.selections.count < viewmodel.addMemberCount {
-                                viewmodel.selections.append(contact.id)
-                            }
+                            viewmodel.selections.append(contact.id)
                         }
                     }
                 }

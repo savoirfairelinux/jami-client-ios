@@ -24,7 +24,6 @@ import RxCocoa
 class SwarmInfoVM: ObservableObject {
     @Published var participantsRows = [ParticipantRow]()
     @Published var selections: [String] = []
-    @Published var addMemberCount: Int = 0
     @Published var finalAvatar: UIImage = UIImage()
     @Published var finalTitle: String = ""
     @Published var finalColor: String = UIColor.defaultSwarm
@@ -82,8 +81,6 @@ class SwarmInfoVM: ObservableObject {
         self.contactsService = injectionBag.contactsService
         self.swarmInfo = swarmInfo
         self.conversation = swarmInfo.conversation
-        addMemberCount = self.swarmInfo.maximumLimit - self.swarmInfo.participants.value.count
-        print("Swarm Type :-\(swarmInfo.type.value.stringValue)")
         self.swarmInfo.finalAvatar
             .subscribe(onNext: { [weak self] newValue in
                 DispatchQueue.main.async {
@@ -149,7 +146,6 @@ class SwarmInfoVM: ObservableObject {
         colorPickerStatus.accept(colorPicker)
     }
     func updateContactList () {
-        addMemberCount = self.swarmInfo.maximumLimit - self.swarmInfo.participants.value.count
         self.swarmInfo.contacts
             .subscribe { [weak self] newValue in
                 guard let self = self else { return }

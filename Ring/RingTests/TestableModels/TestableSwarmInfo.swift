@@ -34,7 +34,6 @@ class TestableSwarmInfo: SwarmInfoProtocol {
 
     var avatarHeight: CGFloat = 40
     var avatarSpacing: CGFloat = 2
-    var maximumLimit: Int = 8
     lazy var id: String = {
         return conversation?.id ?? ""
     }()

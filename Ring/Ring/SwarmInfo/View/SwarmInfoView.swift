@@ -142,7 +142,7 @@ public struct SwarmInfoView: View {
             .onChange(of: viewmodel.finalTitle) { _ in
                 titleTextFieldInput = viewmodel.finalTitle
             }
-            if viewmodel.swarmInfo.participants.value.count < viewmodel.swarmInfo.maximumLimit && !(viewmodel.conversation?.isCoredialog() ?? true) {
+            if !(viewmodel.conversation?.isCoredialog() ?? true) {
                 AddMoreParticipantsInSwarm(viewmodel: viewmodel)
             }
             if viewmodel.showColorSheet {

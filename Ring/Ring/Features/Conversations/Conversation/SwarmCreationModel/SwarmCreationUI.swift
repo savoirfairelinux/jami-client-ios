@@ -120,11 +120,6 @@ struct SwarmCreationUI: View {
                 }
                 Spacer()
             }
-            if (list.memberLimit - list.selections.count) > 0 {
-                Text(L10n.Swarmcreation.addPeople(list.memberLimit - list.selections.count))
-                    .padding(.leading, 20)
-                    .font(.system(size: 15.0, weight: .semibold, design: .default))
-            }
         }.onTapGesture {
             self.hideKeyboard()
         }
@@ -135,8 +130,7 @@ struct SwarmCreationUI: View {
                         if list.selections.contains(contact.id) {
                             list.selections.removeAll(where: { $0 == contact.id })
                         } else {
-                            if list.selections.count < list.memberLimit {                                       list.selections.append(contact.id)
-                            }
+                            list.selections.append(contact.id)
                         }
                         self.hideKeyboard()
                     }
