@@ -154,6 +154,7 @@ extension CallsProviderService {
 
     func previewPendingCall(peerId: String, withVideo: Bool, displayName: String,
                             completion: ((Error?) -> Void)?) {
+        print("********** show call screen")
         let update = CXCallUpdate()
         let handleType = CXHandle.HandleType.phoneNumber
         update.remoteHandle = CXHandle(type: handleType, value: peerId)

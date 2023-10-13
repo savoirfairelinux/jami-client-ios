@@ -998,6 +998,9 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func setAccountActive(active: Bool, accountId: String) {
+        if active {
+            print("********** setAccountActive")
+        }
         self.accountAdapter.setAccountActive(accountId, active: active)
     }
 
