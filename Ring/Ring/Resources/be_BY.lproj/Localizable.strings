@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Пошук кантактаў...";
 "swarmcreation.createTheSwarm" = "Стварыць раман";
 "swarmcreation.addADescription" = "Дадаць апісанне";
-"swarmcreation.addPeople" = "Вы можаце дадаць \%d\ больш людзей у раман";
 // Swarm
 "swarm.ignoreSwarm" = "Ігнаруйце раман";
 "swarm.leaveConversation" = "Пакіньце размову";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Адміністратар";
 "swarm.banned" = "Забараняецца";
 "swarm.unknown" = "Невядомыя";
-"swarm.addMorePeople" = "Вы можаце дадаць \%d\ больш людзей у гэты раман";
 "swarm.addMember" = "Дадаць члена";
 "swarm.confirmLeaveSwarm" = "Ці ўпэўнены, што хочаш пакінуць гэты раман?";
 "swarm.Leave" = "Ад'ехаць";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "Ніякіх вынікаў";
 "smartlist.noConversation" = "Ніякіх размоў";
 "smartlist.searchBarPlaceholder" = "Увядзіце імя...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "Пошук";
 "smartlist.noNetworkConnectivity" = "Ніякай сеткавай сувязі";
 "smartlist.cellularAccess" = "Пераканайцеся, што доступ да мабільнага тэлефона дапускаецца ў вашых наладках";
 "smartlist.accountsTitle" = "Рэкамендацыі";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Звязванне рахункаў";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "Звязка";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "Пін-аўт";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "Назва карыстальніка TURN";
 "accountPage.turnPassword" = "Пароль TURN";
 "accountPage.turnRealm" = "РАЗВАЛЬНАе царства";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Выкарыстоўвайце UPnP";
 
 //Account
 "account.sipUsername" = "Назва карыстальніка";

@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Bilatu kontaktuak...";
 "swarmcreation.createTheSwarm" = "Sortu sorta.";
 "swarmcreation.addADescription" = "Deskribazioa gehitu";
-"swarmcreation.addPeople" = "Jende gehiago gehitu dezakezu.";
 // Swarm
 "swarm.ignoreSwarm" = "Ez kasurik egin.";
 "swarm.leaveConversation" = "Utzi hitzaldia.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administrazioa";
 "swarm.banned" = "Debekatuta";
 "swarm.unknown" = "Ez dakit zer den.";
-"swarm.addMorePeople" = "Jende gehiago gehitu dezakezu.";
 "swarm.addMember" = "Batzordea gehitu";
 "swarm.confirmLeaveSwarm" = "Ziur zaude ez duzula talde hau utzi nahi?";
 "swarm.Leave" = "Joan zaitezke?";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "TURN erabiltzaile izena";
 "accountPage.turnPassword" = "TURN pasahitza";
 "accountPage.turnRealm" = "-TURN erreinua.";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Erabili UPnP";
 
 //Account
 "account.sipUsername" = "Erabiltzaile izena";

@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Kërkoni për kontakt…";
 "swarmcreation.createTheSwarm" = "Krijoje zgjoin";
 "swarmcreation.addADescription" = "Shtoni një përshkrim";
-"swarmcreation.addPeople" = "Mundeni të shtoni \%d\persona më tepër te zgjoi";
 // Swarm
 "swarm.ignoreSwarm" = "Shpërfille zgjuan";
 "swarm.leaveConversation" = "Braktiseni bisedën";
@@ -73,11 +72,10 @@
 "swarm.admin" = "Përgjegjës";
 "swarm.banned" = "Dëbuar";
 "swarm.unknown" = "I panjohur";
-"swarm.addMorePeople" = "Mundeni të shtoni \%d\persona më tepër te ky zgjua";
 "swarm.addMember" = "Shtoni Anëtar";
 "swarm.confirmLeaveSwarm" = "Jeni i sigurt se doni të braktisni këtë zgjua?";
 "swarm.Leave" = "Braktise";
-"swarm.newSwarm" = "New swarm";
+"swarm.newSwarm" = "Zgjua i ri";
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori Publike";
@@ -94,8 +92,8 @@
 "smartlist.selectOneNumber" = "Përzgjidhni një nga numrat";
 "smartlist.invitations" = "Ftesa";
 "smartlist.aboutJami" = "Mbi Jami-n";
-"smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.inviteFriends" = "Ftoni shokë";
+"smartlist.accounts" = "Listë llogarish";
 
 //Conversation
 "conversation.messagePlaceholder" = "Shkruani mesazh për";
@@ -158,8 +156,8 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Lidhje llogarish";
 "linkToAccount.linkButtonTitle" = "Lidhje";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Lidhni Pajisje";
+"linkToAccount.linkDeviceMessage" = "Zgjidhni “Lidhni një pajisje të re”, që nga aplikacioni tjetër Jami, që të shfaqet kodi QR, ose PIN-i";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Jepni PIN-in";
 "linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni \"Lidhni me këtë llogari një pajisje tjetër\". Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
@@ -300,7 +298,7 @@
 "account.proxyServer" = "Ndërmjetës";
 "account.createSipAccount" = "Formësoni një llogari SIP";
 "account.sipAccount" = "Llogari SIP";
-"account.configure" = "Configure";
+"account.configure" = "Formësojeni";
 "account.advancedFeatures" = "Veçori të Thelluara";
 "account.serverLabel" = "Jepni Adresë";
 "account.portLabel" = "Jepni Numër Porte";

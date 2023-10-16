@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "- İletişim aramak...";
 "swarmcreation.createTheSwarm" = "Bir sürü yaratın.";
 "swarmcreation.addADescription" = "Açıklama ekle";
-"swarmcreation.addPeople" = "Swarm'a daha fazla kişi ekleyebilirsin.";
 // Swarm
 "swarm.ignoreSwarm" = "Sığırları görmezden gel.";
 "swarm.leaveConversation" = "Konuşmayı bırak.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Yöneticisi";
 "swarm.banned" = "Yasaklanmış";
 "swarm.unknown" = "Bilinmeyen";
-"swarm.addMorePeople" = "Bu sürümde daha fazla insan ekleyebilirsin.";
 "swarm.addMember" = "Üye Ekle";
 "swarm.confirmLeaveSwarm" = "Bu sürüyü terk etmek istediğinden emin misin?";
 "swarm.Leave" = "Git.";

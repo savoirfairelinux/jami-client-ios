@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "連絡先を探して...";
 "swarmcreation.createTheSwarm" = "群れを作れ";
 "swarmcreation.addADescription" = "記述を追加する";
-"swarmcreation.addPeople" = "群れにもっと人を加えることができます";
 // Swarm
 "swarm.ignoreSwarm" = "群れを無視する";
 "swarm.leaveConversation" = "話をやめろ";
@@ -73,7 +72,6 @@
 "swarm.admin" = "管理者";
 "swarm.banned" = "禁止";
 "swarm.unknown" = "知らない";
-"swarm.addMorePeople" = "この群れに もっと人を加えることができます";
 "swarm.addMember" = "メンバーを追加";
 "swarm.confirmLeaveSwarm" = "この群れを離れたいのか?";
 "swarm.Leave" = "出て行こう";

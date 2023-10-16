@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "যোগাযোগের খোঁজ...";
 "swarmcreation.createTheSwarm" = "ঘোড়ার সৃষ্টি করুন";
 "swarmcreation.addADescription" = "বর্ণনা যোগ করুন";
-"swarmcreation.addPeople" = "আপনি আরো মানুষ যোগ করতে পারেন \%d\ swarm মধ্যে";
 // Swarm
 "swarm.ignoreSwarm" = "ঘোড়ার দিকে নজর দাও";
 "swarm.leaveConversation" = "কথোপকথন ছেড়ে দাও";
@@ -73,7 +72,6 @@
 "swarm.admin" = "প্রশাসক";
 "swarm.banned" = "নিষিদ্ধ";
 "swarm.unknown" = "অজানা";
-"swarm.addMorePeople" = "আপনি এই ঘোড়ায় আরো মানুষ যোগ করতে পারেন \%d\";
 "swarm.addMember" = "সদস্য যোগ করুন";
 "swarm.confirmLeaveSwarm" = "তুমি কি নিশ্চিত যে তুমি এই ঘাঁটি ছেড়ে যেতে চাও?";
 "swarm.Leave" = "চলে যাও";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "কোন ফলাফল নেই";
 "smartlist.noConversation" = "কোন কথোপকথন নেই";
 "smartlist.searchBarPlaceholder" = "নাম লিখুন...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "অনুসন্ধান";
 "smartlist.noNetworkConnectivity" = "নেটওয়ার্ক সংযোগ নেই";
 "smartlist.cellularAccess" = "আপনার সেটিংসে সেলুলার অ্যাক্সেস দেওয়া হয়েছে তা নিশ্চিত করুন";
 "smartlist.accountsTitle" = "অ্যাকাউন্ট";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "অ্যাকাউন্ট লিঙ্কিং";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "লিঙ্ক";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "পিন";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "ইউজার নাম TURN";
 "accountPage.turnPassword" = "টার্ন পাসওয়ার্ড";
 "accountPage.turnRealm" = "টার্ন রিয়াল";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "UPnP ব্যবহার করুন";
 
 //Account
 "account.sipUsername" = "ব্যবহারকারীর নাম";

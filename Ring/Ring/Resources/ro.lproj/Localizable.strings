@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Caută un contact...";
 "swarmcreation.createTheSwarm" = "Creează grupul";
 "swarmcreation.addADescription" = "Adaugă o descriere";
-"swarmcreation.addPeople" = "Poți adăuga încă \%d\ persoane în grup";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoră grupul";
 "swarm.leaveConversation" = "Termină conversația";
@@ -73,11 +72,10 @@
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Blocat";
 "swarm.unknown" = "Necunoscut";
-"swarm.addMorePeople" = "Poți adăuga încă \%d\ persoane în acest grup";
 "swarm.addMember" = "Adaugă un membru";
 "swarm.confirmLeaveSwarm" = "Sigur vrei să părăsești acest grup?";
 "swarm.Leave" = "Părăsește";
-"swarm.newSwarm" = "New swarm";
+"swarm.newSwarm" = "Grup nou";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";
@@ -94,8 +92,8 @@
 "smartlist.selectOneNumber" = "Alege unul dintre numere";
 "smartlist.invitations" = "Invitații";
 "smartlist.aboutJami" = "Despre Jami";
-"smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.inviteFriends" = "Invită prieteni";
+"smartlist.accounts" = "Lista de conturi";
 
 //Conversation
 "conversation.messagePlaceholder" = "Scrie pentru ";
@@ -158,8 +156,8 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asocierea contului";
 "linkToAccount.linkButtonTitle" = "Asociază";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Asociază aparatul";
+"linkToAccount.linkDeviceMessage" = "Alege „Asociază alt aparat” din cealaltă aplicație Jami pentru a afișa codul QR sau PIN-ul.";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introdu codul PIN";
 "linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. În „Reglări” alege „Asociază alt aparat cu acest cont” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
@@ -300,7 +298,7 @@
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configurează un cont SIP";
 "account.sipAccount" = "Cont SIP";
-"account.configure" = "Configure";
+"account.configure" = "Configurează";
 "account.advancedFeatures" = "Caracteristici avansate";
 "account.serverLabel" = "Introdu adresa";
 "account.portLabel" = "Introdu numărul Portului";

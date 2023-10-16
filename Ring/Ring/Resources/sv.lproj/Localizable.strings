@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "-Sök efter kontakt...";
 "swarmcreation.createTheSwarm" = "Skapa en svärm";
 "swarmcreation.addADescription" = "Lägg till en beskrivning";
-"swarmcreation.addPeople" = "Du kan lägga till fler människor i swarmen";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorera swarmen";
 "swarm.leaveConversation" = "Lämna samtalet.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administratör";
 "swarm.banned" = "Förbjudet";
 "swarm.unknown" = "Utrådda";
-"swarm.addMorePeople" = "Du kan lägga till fler människor i den här svärmen";
 "swarm.addMember" = "Lägg till medlem";
 "swarm.confirmLeaveSwarm" = "Är du säker på att du vill lämna den här svärmen?";
 "swarm.Leave" = "- Gå.";

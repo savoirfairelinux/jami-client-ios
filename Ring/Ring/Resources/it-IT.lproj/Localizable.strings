@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Cerca contatto...";
 "swarmcreation.createTheSwarm" = "Crea il gruppo";
 "swarmcreation.addADescription" = "Aggiungi una descrizione";
-"swarmcreation.addPeople" = "Puoi aggiungere altre \%d\ persone nel gruppo";
 // Swarm
 "swarm.ignoreSwarm" = "Ignora il gruppo";
 "swarm.leaveConversation" = "Lascia la conversazione";
@@ -73,11 +72,10 @@
 "swarm.admin" = "Amministratore";
 "swarm.banned" = "Bloccato";
 "swarm.unknown" = "Sconosciuto";
-"swarm.addMorePeople" = "Puoi aggiungere altre \%d\ persone in questo gruppo";
 "swarm.addMember" = "Aggiungi membro";
 "swarm.confirmLeaveSwarm" = "Sei sicuro di voler lasciare questo gruppo?";
 "swarm.Leave" = "Lascia";
-"swarm.newSwarm" = "New swarm";
+"swarm.newSwarm" = "Nuovo gruppo";
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Elenco pubblico";
@@ -94,8 +92,8 @@
 "smartlist.selectOneNumber" = "Seleziona uno dei numeri";
 "smartlist.invitations" = "Inviti";
 "smartlist.aboutJami" = "Informazioni su Jami";
-"smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.inviteFriends" = "Invita amici";
+"smartlist.accounts" = "Elenco degli account";
 
 //Conversation
 "conversation.messagePlaceholder" = "Scrivi a ";
@@ -158,8 +156,8 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Collegamento dell'account";
 "linkToAccount.linkButtonTitle" = "Associa";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Associa dispositivo";
+"linkToAccount.linkDeviceMessage" = "Scegliere \"Associa un altro dispositivo\" dall'altra applicazione Jami per mostrare il codice QR o il PIN.";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Inserire il PIN";
 "linkToAccount.explanationPinMessage" = "Per generare il codice PIN, accedere alle impostazioni di gestione dell'account sul dispositivo che contiene l'account che si desidera utilizzare. Nelle impostazioni del dispositivo seleziona \"Associa un altro dispositivo a questo account\". Otterrai il PIN necessario per completare questo modulo. Il PIN è valido solo per 10 minuti.";
@@ -300,7 +298,7 @@
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configura un account SIP";
 "account.sipAccount" = "Account SIP";
-"account.configure" = "Configure";
+"account.configure" = "Configura";
 "account.advancedFeatures" = "Caratteristiche avanzate";
 "account.serverLabel" = "Inserire l'indirizzo";
 "account.portLabel" = "Inserire il numero della porta";

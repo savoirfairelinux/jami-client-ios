@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Байланыс іздеу...";
 "swarmcreation.createTheSwarm" = "Қалыңдықты құру";
 "swarmcreation.addADescription" = "Тасуирлеуді қосу";
-"swarmcreation.addPeople" = "Сендер тобырға тағы да көп адам қосып аласыңдар";
 // Swarm
 "swarm.ignoreSwarm" = "Қалыңдықты елеме";
 "swarm.leaveConversation" = "Әңгімелі тоқтатып жіберіңіз";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Әкімші";
 "swarm.banned" = "Тыйылған";
 "swarm.unknown" = "Ашық";
-"swarm.addMorePeople" = "Осы тобырға тағы да көп адам қосыла алады";
 "swarm.addMember" = "Қауымшыны қосу";
 "swarm.confirmLeaveSwarm" = "Бұл тобырдан кетуіңізге сенімдісіз бе?";
 "swarm.Leave" = "Кетіңіздер";

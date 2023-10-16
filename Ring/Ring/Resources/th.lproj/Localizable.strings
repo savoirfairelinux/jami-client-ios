@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "ค้นหาการติดต่อ...";
 "swarmcreation.createTheSwarm" = "สร้างกลุ่ม";
 "swarmcreation.addADescription" = "เพิ่มคําอธิบาย";
-"swarmcreation.addPeople" = "คุณสามารถเพิ่ม \%d\ คนเพิ่มในกลุ่ม";
 // Swarm
 "swarm.ignoreSwarm" = "ใส่ใจกลุ่ม";
 "swarm.leaveConversation" = "ปล่อยการพูดคุย";
@@ -73,7 +72,6 @@
 "swarm.admin" = "ผู้บริหาร";
 "swarm.banned" = "ป้องกัน";
 "swarm.unknown" = "ไม่ทราบ";
-"swarm.addMorePeople" = "คุณสามารถเพิ่ม \%d\ คนเพิ่มในกลุ่มนี้";
 "swarm.addMember" = "เพิ่มสมาชิก";
 "swarm.confirmLeaveSwarm" = "คุณแน่ใจนะว่าอยากออกจากกลุ่มนี้?";
 "swarm.Leave" = "ออกไป";

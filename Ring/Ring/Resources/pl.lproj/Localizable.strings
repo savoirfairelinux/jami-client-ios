@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Szukaj kontaktu...";
 "swarmcreation.createTheSwarm" = "Stwórz rzadkość";
 "swarmcreation.addADescription" = "Dodaj opis";
-"swarmcreation.addPeople" = "Możesz dodać więcej ludzi do rodu";
 // Swarm
 "swarm.ignoreSwarm" = "/Nie zwracaj uwagę /na rzęd";
 "swarm.leaveConversation" = "Zostaw rozmowę.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Zakazane";
 "swarm.unknown" = "Nieznane";
-"swarm.addMorePeople" = "Możesz dodać więcej ludzi do tej rzeszy";
 "swarm.addMember" = "Dodaj członka";
 "swarm.confirmLeaveSwarm" = "Jesteś pewna, że chcesz opuścić tę rzędę?";
 "swarm.Leave" = "Wyjdź";

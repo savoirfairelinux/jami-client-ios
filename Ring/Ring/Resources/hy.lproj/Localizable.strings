@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Հաղորդում ենք կապի մասին...";
 "swarmcreation.createTheSwarm" = "Ստեղծեք զավակ";
 "swarmcreation.addADescription" = "Բացատրություն ավելացնել";
-"swarmcreation.addPeople" = "Դուք կարող եք ավելացնել \%d\ ավելի շատ մարդկանց swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Անտեսեք զավթակը";
 "swarm.leaveConversation" = "Թող խոսակցությունը";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Վարչապետ";
 "swarm.banned" = "Արգելվում է";
 "swarm.unknown" = "Անհայտ";
-"swarm.addMorePeople" = "Դուք կարող եք ավելացնել \%d\ ավելի շատ մարդկանց այս swarm";
 "swarm.addMember" = "Մասնակից ավելացնել";
 "swarm.confirmLeaveSwarm" = "Համոզված ես, որ ուզում ես լքել այս ցավը:";
 "swarm.Leave" = "Գնացեք";

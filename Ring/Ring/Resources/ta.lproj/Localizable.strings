@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "தொடர்பு தேடல்...";
 "swarmcreation.createTheSwarm" = "கொட்டையை உருவாக்குங்கள்";
 "swarmcreation.addADescription" = "ஒரு விவரத்தை சேர்க்கவும்";
-"swarmcreation.addPeople" = "நீங்கள் \%d \ \ கூடுதல் மக்கள் கூட்டம் சேர்க்க முடியும்";
 // Swarm
 "swarm.ignoreSwarm" = "கொடியை புறக்கணிக்கவும்";
 "swarm.leaveConversation" = "உரையாடலை விட்டுவிடு";
@@ -73,7 +72,6 @@
 "swarm.admin" = "நிர்வாகி";
 "swarm.banned" = "தடை செய்யப்பட்டது";
 "swarm.unknown" = "அறியாதது";
-"swarm.addMorePeople" = "நீங்கள் இந்த குளத்தில் இன்னும் \%d\ மக்கள் சேர்க்க முடியும்";
 "swarm.addMember" = "உறுப்பினர் சேர்க்கவும்";
 "swarm.confirmLeaveSwarm" = "நீங்கள் இந்த குளத்தில் இருந்து வெளியேற வேண்டும் என்று உறுதியாக இருக்கிறீர்களா?";
 "swarm.Leave" = "வெளியேறு";

@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Serĉu kontakton...";
 "swarmcreation.createTheSwarm" = "Kreu la sorbon";
 "swarmcreation.addADescription" = "Aldonu priskribon";
-"swarmcreation.addPeople" = "Vi povas aldoni pli da homoj en la sorbon";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoru la amason";
 "swarm.leaveConversation" = "Lasu la konversacion";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administro";
 "swarm.banned" = "Malpermesita";
 "swarm.unknown" = "Nekonata";
-"swarm.addMorePeople" = "Vi povas aldoni pli da homoj al tiu aro";
 "swarm.addMember" = "Aldoni Membron";
 "swarm.confirmLeaveSwarm" = "Ĉu vi certas, ke vi volas forlasi tiun sorbon?";
 "swarm.Leave" = "Foriru";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "Nula trovaĵon";
 "smartlist.noConversation" = "Neniu konversacio";
 "smartlist.searchBarPlaceholder" = "Enigu nomon...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "Serĉu";
 "smartlist.noNetworkConnectivity" = "Sen reta konekto";
 "smartlist.cellularAccess" = "Certigu ke la poŝtelefono estas permesita en viaj agordoj";
 "smartlist.accountsTitle" = "Kontoj";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Ligas konton";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "Rilato";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "TURN uzantnomo";
 "accountPage.turnPassword" = "TURN pasvorto";
 "accountPage.turnRealm" = "RON regno";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Uzu UPnP";
 
 //Account
 "account.sipUsername" = "Uzanto";
@@ -299,7 +297,7 @@
 "account.port" = "Pordo";
 "account.proxyServer" = "Prokura Servilo";
 "account.createSipAccount" = "Configure a SIP Account";
-"account.sipAccount" = "SIP Account";
+"account.sipAccount" = "SIP Konto";
 "account.configure" = "Agordi";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Enigu adreson";

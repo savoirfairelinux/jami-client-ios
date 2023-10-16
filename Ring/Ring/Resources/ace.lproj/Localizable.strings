@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "ڤرلو مڠمبيل ڤڠاجرن...";
 "swarmcreation.createTheSwarm" = "ممباوا ڤڠاجرن";
 "swarmcreation.addADescription" = "مڠهادڤن ڤرسمڤڠن";
-"swarmcreation.addPeople" = "تو ميتواني بيشتر از اين افراد را در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه بيشتر در گروه";
 // Swarm
 "swarm.ignoreSwarm" = "تيدق ممڤوڽاءي ڤڠاجرن";
 "swarm.leaveConversation" = "ڤرنه مڠهادڤي";
@@ -73,7 +72,6 @@
 "swarm.admin" = "ڤڠاره";
 "swarm.banned" = "ڤڠڬيلن";
 "swarm.unknown" = "يڠ تيدق دڤرچايا?? ي";
-"swarm.addMorePeople" = "تو ميتوانين بيشتر از اين افراد رو به اين دسته اضافه کني";
 "swarm.addMember" = "ممبنتو ممبنتو";
 "swarm.confirmLeaveSwarm" = "آيا مطمئني که ميخواي از اين سور ترک کني؟";
 "swarm.Leave" = "برلالو";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "تيدق ڤرلو";
 "smartlist.noConversation" = "تيدق اد ڤرچاي";
 "smartlist.searchBarPlaceholder" = "نامن دبريكن...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "ڤرچاي";
 "smartlist.noNetworkConnectivity" = "تيدق اد ڤڠاجرن نيتۏرك";
 "smartlist.cellularAccess" = "ڤرلو مڠمبيل ڤرلو دڤرلوكن دالم سيٽنگ";
 "smartlist.accountsTitle" = "حسابن";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ڤڠاجرن حساب";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "لينك";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "نام ڤڠڬونا TURN";
 "accountPage.turnPassword" = "ڤاسر TURN";
 "accountPage.turnRealm" = "كراجأن TURN";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "مڠڬوناكن UPnP";
 
 //Account
 "account.sipUsername" = "نام ڤڠڬونا";

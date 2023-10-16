@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Байлцаах хайл...";
 "swarmcreation.createTheSwarm" = "Хүрэлсүхнийг бий болго";
 "swarmcreation.addADescription" = "Тодруул";
-"swarmcreation.addPeople" = "Та \"Дэлгэр\" багт илүү олон хүн нэмж болно";
 // Swarm
 "swarm.ignoreSwarm" = "Хүрэнтгийрүүлэг";
 "swarm.leaveConversation" = "Хэлэлцүүлгийг орхи";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Захиргагч";
 "swarm.banned" = "Хөрөгдөл";
 "swarm.unknown" = "Үргэлжгүй";
-"swarm.addMorePeople" = "Та энэ бүлэгт илүү олон хүн нэмж болно";
 "swarm.addMember" = "гишүүн нэмнэ";
 "swarm.confirmLeaveSwarm" = "Та энэ цувралсаа гарахыг хүсч байгаа гэдэгт итгэлтэй байна уу?";
 "swarm.Leave" = "Хойч яв";

@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Поиск контакта...";
 "swarmcreation.createTheSwarm" = "Создать группу";
 "swarmcreation.addADescription" = "Добавить описание";
-"swarmcreation.addPeople" = "Вы можете добавить в ров больше людей";
 // Swarm
 "swarm.ignoreSwarm" = "Игнорируйте ров";
 "swarm.leaveConversation" = "Оставьте разговор.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Администратор";
 "swarm.banned" = "Заблокирован";
 "swarm.unknown" = "Неизвестный";
-"swarm.addMorePeople" = "Вы можете добавить в этот ров больше людей";
 "swarm.addMember" = "Добавить член";
 "swarm.confirmLeaveSwarm" = "Ты уверен, что хочешь покинуть этот рог?";
 "swarm.Leave" = "Покинуть";

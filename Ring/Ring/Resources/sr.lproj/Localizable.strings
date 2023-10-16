@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Трага за контакт...";
 "swarmcreation.createTheSwarm" = "Стварити рогу";
 "swarmcreation.addADescription" = "Додајте описа";
-"swarmcreation.addPeople" = "Можете додати \%d\ више људи у рогу";
 // Swarm
 "swarm.ignoreSwarm" = "Игнорирај се.";
 "swarm.leaveConversation" = "Оставите разговор.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Администратор";
 "swarm.banned" = "Забранена";
 "swarm.unknown" = "Непознати";
-"swarm.addMorePeople" = "Можете додати \%d\ више људи у овај рог";
 "swarm.addMember" = "Додајте члана";
 "swarm.confirmLeaveSwarm" = "Сигуран си да желиш да напустиш овај рог?";
 "swarm.Leave" = "Одлази";

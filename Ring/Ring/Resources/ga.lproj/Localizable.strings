@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Cuardaigh teagmháil...";
 "swarmcreation.createTheSwarm" = "Cruthaigh an swarm";
 "swarmcreation.addADescription" = "Cuir síos leis";
-"swarmcreation.addPeople" = "Is féidir leat a chur \%d\ níos mó daoine sa swarm";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoráil an swarm";
 "swarm.leaveConversation" = "Cinnigh an comhrá";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Rialtais";
 "swarm.banned" = "Ceadaítear";
 "swarm.unknown" = "Ní raibh a fhios acu";
-"swarm.addMorePeople" = "Is féidir leat a chur \%d\ níos mó daoine sa swarm";
 "swarm.addMember" = "Cuid a chur le Comhalta";
 "swarm.confirmLeaveSwarm" = "An bhfuil tú cinnte go bhfuil tú ag iarraidh a fhágáil an swarm?";
 "swarm.Leave" = "Téigh ar shiúl";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "Ainm úsáideora TURN";
 "accountPage.turnPassword" = "Códchlár TURN";
 "accountPage.turnRealm" = "RIMHÍON";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Úsáid UPnP";
 
 //Account
 "account.sipUsername" = "Ainm úsáideora";

@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "La busca de contactu...";
 "swarmcreation.createTheSwarm" = "Crear el enjambre";
 "swarmcreation.addADescription" = "Axega una descripción";
-"swarmcreation.addPeople" = "Puede añadir más xente al enjambre";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorar el enjambre";
 "swarm.leaveConversation" = "La conversación ye una cuestión de tiempu.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administración";
 "swarm.banned" = "Prohibíu";
 "swarm.unknown" = "La so familia";
-"swarm.addMorePeople" = "Puede añadir más xente a este enjambre";
 "swarm.addMember" = "Aderir miembru";
 "swarm.confirmLeaveSwarm" = "¿Seguru que quieres salir de la masa?";
 "swarm.Leave" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "Nun hai resultáu";
 "smartlist.noConversation" = "Nun hai conversaciones.";
 "smartlist.searchBarPlaceholder" = "Entra'l nome...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "Buscar";
 "smartlist.noNetworkConnectivity" = "Nun hai conectividá de rede";
 "smartlist.cellularAccess" = "Asegúrese d'un accesu celular autorizáu nos sos ajustes";
 "smartlist.accountsTitle" = "Cuentas";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "La vinculación de cuentas";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "Enllaz";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "El PIN";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "Nómase d'usuariu TURN";
 "accountPage.turnPassword" = "La contraseña de TURN";
 "accountPage.turnRealm" = "El Reinu de la VIRTANcia";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Utiliza UPnP";
 
 //Account
 "account.sipUsername" = "Nome d'usuariu";

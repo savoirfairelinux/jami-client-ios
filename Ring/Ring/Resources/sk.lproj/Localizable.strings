@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Vyhľadávanie kontaktu...";
 "swarmcreation.createTheSwarm" = "Vytvorte hŕstok";
 "swarmcreation.addADescription" = "Pridať opis";
-"swarmcreation.addPeople" = "Môžete pridať \%d\ viac ľudí do hŕňa";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoruj rýž";
 "swarm.leaveConversation" = "Nechajme rozhovor";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Správca";
 "swarm.banned" = "Zákaz";
 "swarm.unknown" = "Neznámy";
-"swarm.addMorePeople" = "Môžete pridať \%d\ viac ľudí do tohto hŕňa";
 "swarm.addMember" = "Pridať člena";
 "swarm.confirmLeaveSwarm" = "Si si istý, že chceš opustiť tento hŕst?";
 "swarm.Leave" = "Odchádzam";

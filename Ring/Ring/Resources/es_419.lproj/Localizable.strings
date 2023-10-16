@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Buscar contacto...";
 "swarmcreation.createTheSwarm" = "Crear enjambre";
 "swarmcreation.addADescription" = "Añadir descripción";
-"swarmcreation.addPeople" = "Puedes añadir \%d\ más personas al enjambre";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorar enjambre";
 "swarm.leaveConversation" = "Dejar la conversación";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administrador";
 "swarm.banned" = "Bloqueado";
 "swarm.unknown" = "Desconocido";
-"swarm.addMorePeople" = "Puedes añadir \%d\ más personas al enjambre";
 "swarm.addMember" = "Añadir Miembro";
 "swarm.confirmLeaveSwarm" = "¿Está seguro de querer abandonar este enjambre?";
 "swarm.Leave" = "Abandonar";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "Sin resultados";
 "smartlist.noConversation" = "Sin conversaciones";
 "smartlist.searchBarPlaceholder" = "Ingresá tu nombre...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "Buscar";
 "smartlist.noNetworkConnectivity" = "Sin conexión de red";
 "smartlist.cellularAccess" = "Verifique que el acceso celular está permitido en las configuraciones";
 "smartlist.accountsTitle" = "Cuentas";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asociación de la cuenta";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "Vincular";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "Nombre de usuario en TURN";
 "accountPage.turnPassword" = "Contraseña TURN";
 "accountPage.turnRealm" = "Reino TURN";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Usar UPnP";
 
 //Account
 "account.sipUsername" = "Nombre de usuario";
@@ -299,7 +297,7 @@
 "account.port" = "Puerto";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configurar una cuenta SIP";
-"account.sipAccount" = "SIP Account";
+"account.sipAccount" = "Cuenta SIP";
 "account.configure" = "Configurar";
 "account.advancedFeatures" = "Características avanzadas";
 "account.serverLabel" = "Ingresá dirección";

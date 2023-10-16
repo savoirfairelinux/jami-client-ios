@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Otsime kontakti...";
 "swarmcreation.createTheSwarm" = "Loovad rohma";
 "swarmcreation.addADescription" = "Lisage kirjeldus";
-"swarmcreation.addPeople" = "Sa võid lisada rohmesse rohkem inimesi";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoreerige rohma";
 "swarm.leaveConversation" = "Jäta vestlus ära.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administraator";
 "swarm.banned" = "Keelatud";
 "swarm.unknown" = "Kinnitamata";
-"swarm.addMorePeople" = "Sa võid lisada sellele rohmele rohkem inimesi";
 "swarm.addMember" = "Lisada liikme";
 "swarm.confirmLeaveSwarm" = "Oled kindel, et tahad siit rohvast lahkuda?";
 "swarm.Leave" = "Lähen ära.";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "Ei tulemusi";
 "smartlist.noConversation" = "Mitte kõnelusi.";
 "smartlist.searchBarPlaceholder" = "Sisestage nimi...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "Otsing";
 "smartlist.noNetworkConnectivity" = "Võrguühendus puudub";
 "smartlist.cellularAccess" = "Veenduge, et teie seadetes on mobiiltelefonis juurdepääs";
 "smartlist.accountsTitle" = "Arvestused";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontode sidemine";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "Liin";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "Kasutaja nimi TURN";
 "accountPage.turnPassword" = "VART-sõna";
 "accountPage.turnRealm" = "TÜRN-maailm";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Kasutage UPnP";
 
 //Account
 "account.sipUsername" = "Kasutaja nimi";

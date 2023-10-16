@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Søg efter kontakt...";
 "swarmcreation.createTheSwarm" = "Skaf sværmen";
 "swarmcreation.addADescription" = "Tilføj en beskrivelse";
-"swarmcreation.addPeople" = "Du kan tilføje flere mennesker i sværmen";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorer sværmen";
 "swarm.leaveConversation" = "Lad samtalen være.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Banned";
 "swarm.unknown" = "Ukendt";
-"swarm.addMorePeople" = "Du kan tilføje flere mennesker til denne sværm";
 "swarm.addMember" = "Tilføj medlem";
 "swarm.confirmLeaveSwarm" = "Er du sikker på, du vil forlade denne sværm?";
 "swarm.Leave" = "- Gå væk.";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "Ingen resultater";
 "smartlist.noConversation" = "Ingen samtaler";
 "smartlist.searchBarPlaceholder" = "Indtast navn...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "Søg";
 "smartlist.noNetworkConnectivity" = "Ingen netværksforbindelse";
 "smartlist.cellularAccess" = "Kontroller at rettigheder til mobildata er givet i indstillinger";
 "smartlist.accountsTitle" = "Konti";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Konto-tilknytning";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "Tilknyt";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "TURN-brugernavn";
 "accountPage.turnPassword" = "TURN-adgangskode";
 "accountPage.turnRealm" = "TURN-verden";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Brug UPnP";
 
 //Account
 "account.sipUsername" = "Brugernavn";
@@ -299,7 +297,7 @@
 "account.port" = "Port";
 "account.proxyServer" = "Stedfortræder";
 "account.createSipAccount" = "Configure a SIP Account";
-"account.sipAccount" = "SIP Account";
+"account.sipAccount" = "SIP-konto";
 "account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Indtast Adresse";

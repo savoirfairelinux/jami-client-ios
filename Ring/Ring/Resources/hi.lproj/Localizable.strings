@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "संपर्क की खोज...";
 "swarmcreation.createTheSwarm" = "झुंड को बनाएँ";
 "swarmcreation.addADescription" = "विवरण जोड़ें";
-"swarmcreation.addPeople" = "आप समूह में \%d\ और लोग जोड़ सकते हैं।";
 // Swarm
 "swarm.ignoreSwarm" = "झुंड को अनदेखा करें";
 "swarm.leaveConversation" = "बातचीत छोड़ दो";
@@ -73,7 +72,6 @@
 "swarm.admin" = "प्रशासक";
 "swarm.banned" = "प्रतिबंधित";
 "swarm.unknown" = "अनजान";
-"swarm.addMorePeople" = "आप इस स्वार्म में \%d\ और लोग जोड़ सकते हैं।";
 "swarm.addMember" = "सदस्य जोड़ें";
 "swarm.confirmLeaveSwarm" = "क्या आप इस झुंड को छोड़ना चाहते हैं?";
 "swarm.Leave" = "छोड़ो";

@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Søk etter kontakt...";
 "swarmcreation.createTheSwarm" = "Skape sjarmen";
 "swarmcreation.addADescription" = "Legg til en beskrivelse";
-"swarmcreation.addPeople" = "Du kan legge til flere mennesker i sjarmen";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorere sjarmen";
 "swarm.leaveConversation" = "La samtalen være";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administrator";
 "swarm.banned" = "Forbudt";
 "swarm.unknown" = "Uavhengige";
-"swarm.addMorePeople" = "Du kan legge til flere mennesker i denne sjarmen";
 "swarm.addMember" = "Legg til medlem";
 "swarm.confirmLeaveSwarm" = "Er du sikker på at du vil forlate denne sjarmen?";
 "swarm.Leave" = "Gå bort";

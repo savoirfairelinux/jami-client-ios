@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Etsit yhteydenpitoa...";
 "swarmcreation.createTheSwarm" = "Luota ruumis";
 "swarmcreation.addADescription" = "Lisää kuvaus";
-"swarmcreation.addPeople" = "Voit lisätä lisää ihmisiä joukkoon";
 // Swarm
 "swarm.ignoreSwarm" = "Ilman huomiota";
 "swarm.leaveConversation" = "Jätä keskustelu";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Hallinnoija";
 "swarm.banned" = "Kielletty";
 "swarm.unknown" = "Kylmä";
-"swarm.addMorePeople" = "Voit lisätä lisää ihmisiä tähän ruokkaan.";
 "swarm.addMember" = "Lisää jäsen";
 "swarm.confirmLeaveSwarm" = "Oletko varma, että haluat lähteä?";
 "swarm.Leave" = "Lähdetään";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "TURN käyttäjänimi";
 "accountPage.turnPassword" = "TURN salasana";
 "accountPage.turnRealm" = "TURN -alue";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Käytä UPnP";
 
 //Account
 "account.sipUsername" = "Käyttäjänimi";
@@ -299,7 +297,7 @@
 "account.port" = "Portti";
 "account.proxyServer" = "Välityspalvelin";
 "account.createSipAccount" = "Configure a SIP Account";
-"account.sipAccount" = "SIP Account";
+"account.sipAccount" = "SIP tunnus";
 "account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Anna osoite";

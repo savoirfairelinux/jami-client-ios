@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Buscar contacte...";
 "swarmcreation.createTheSwarm" = "Crea el enjame";
 "swarmcreation.addADescription" = "Ajuda una descripció";
-"swarmcreation.addPeople" = "Pots afegir més persones al enjard";
 // Swarm
 "swarm.ignoreSwarm" = "Ignora l'esgarre";
 "swarm.leaveConversation" = "Deixar la conversa";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Admins";
 "swarm.banned" = "Prohibida";
 "swarm.unknown" = "No conegut";
-"swarm.addMorePeople" = "Pots afegir més persones a aquest enjard";
 "swarm.addMember" = "Agrega Membre";
 "swarm.confirmLeaveSwarm" = "Tens la certeza que vols deixar aquest enjame?";
 "swarm.Leave" = "Deixar";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "Sense resultats";
 "smartlist.noConversation" = "No hi ha converses.";
 "smartlist.searchBarPlaceholder" = "Introdueix el nom...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "Buscar";
 "smartlist.noNetworkConnectivity" = "No hi ha connexió a la xarxa";
 "smartlist.cellularAccess" = "Assegureu-vos que l’accés al mòbil s’atorga a la vostra configuració";
 "smartlist.accountsTitle" = "Comptes";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Enllaç de comptes";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "Enllaç";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "Usuari de TURN";
 "accountPage.turnPassword" = "Contrasenya de TURN";
 "accountPage.turnRealm" = "REMIÓ DE VURT";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Utilitza UPnP";
 
 //Account
 "account.sipUsername" = "Nome d'usuari";
@@ -299,7 +297,7 @@
 "account.port" = "Port";
 "account.proxyServer" = "Intermediari";
 "account.createSipAccount" = "Configure a SIP Account";
-"account.sipAccount" = "SIP Account";
+"account.sipAccount" = "Compte SIP";
 "account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Introducció d'adreça";

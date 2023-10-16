@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Търсене на контакт...";
 "swarmcreation.createTheSwarm" = "Създавайте рома";
 "swarmcreation.addADescription" = "Добавете описание";
-"swarmcreation.addPeople" = "Можете да добавите още хора в рома.";
 // Swarm
 "swarm.ignoreSwarm" = "Игнорира се рогата.";
 "swarm.leaveConversation" = "Остави разговора.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Администратор";
 "swarm.banned" = "Забранено";
 "swarm.unknown" = "Неизвестни";
-"swarm.addMorePeople" = "Можете да добавите още хора в този рог.";
 "swarm.addMember" = "Добавете член";
 "swarm.confirmLeaveSwarm" = "Сигурен ли си, че искаш да напуснеш роя?";
 "swarm.Leave" = "Излезте.";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "Няма резултати";
 "smartlist.noConversation" = "Няма разговори";
 "smartlist.searchBarPlaceholder" = "Въведете име…";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "Търсене";
 "smartlist.noNetworkConnectivity" = "Няма връзка с мрежата";
 "smartlist.cellularAccess" = "Уверете се, че в настроенията ви е предоставен достъп с мобилен телефон.";
 "smartlist.accountsTitle" = "Профили";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Свързване на профил";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "Свързване";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "ПИН";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "Потребителско име за TURN";
 "accountPage.turnPassword" = "Парола за TURN";
 "accountPage.turnRealm" = "СВЕЗНИЦА";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Използвайте UPnP";
 
 //Account
 "account.sipUsername" = "Потребителско име";
@@ -299,7 +297,7 @@
 "account.port" = "Порт";
 "account.proxyServer" = "Посредник";
 "account.createSipAccount" = "Configure a SIP Account";
-"account.sipAccount" = "SIP Account";
+"account.sipAccount" = "Акаунт за SIP";
 "account.configure" = "Настройка";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Введете адрес";

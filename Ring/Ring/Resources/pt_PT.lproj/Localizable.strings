@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Procura contacto...";
 "swarmcreation.createTheSwarm" = "Criar o enxame";
 "swarmcreation.addADescription" = "Adicionar uma descrição";
-"swarmcreation.addPeople" = "Podes adicionar mais pessoas ao enxame";
 // Swarm
 "swarm.ignoreSwarm" = "Ignora o enxame";
 "swarm.leaveConversation" = "Deixe a conversa";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administrador";
 "swarm.banned" = "Proibido";
 "swarm.unknown" = "Não conhecido";
-"swarm.addMorePeople" = "Podes adicionar mais pessoas a este enxame";
 "swarm.addMember" = "Adicionar Membro";
 "swarm.confirmLeaveSwarm" = "Tens a certeza de que queres sair deste enxame?";
 "swarm.Leave" = "- Não.";

@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "البحث عن الاتصال...";
 "swarmcreation.createTheSwarm" = "إنشاء السحابة";
 "swarmcreation.addADescription" = "إضافة وصف";
-"swarmcreation.addPeople" = "يمكنك إضافة المزيد من الناس إلى السحابة";
 // Swarm
 "swarm.ignoreSwarm" = "تجاهل السحابة";
 "swarm.leaveConversation" = "أترك المحادثة";
@@ -73,7 +72,6 @@
 "swarm.admin" = "المدير";
 "swarm.banned" = "ممنوع";
 "swarm.unknown" = "غير معروف";
-"swarm.addMorePeople" = "يمكنك إضافة المزيد من الناس إلى هذه السحابة";
 "swarm.addMember" = "إضافة عضو";
 "swarm.confirmLeaveSwarm" = "هل أنت متأكد أنك تريد ترك هذه السلالة؟";
 "swarm.Leave" = "إرحل";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "لا يوجد نتائج";
 "smartlist.noConversation" = "لا يوجد محادثات";
 "smartlist.searchBarPlaceholder" = "ادخال اسم...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "إبحث";
 "smartlist.noNetworkConnectivity" = "الاتصال بالشبكة غير متوفر";
 "smartlist.cellularAccess" = "تأكد من السماح للوصول النقال الخلوي في إعدادتك";
 "smartlist.accountsTitle" = "حسابات";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "ربط الحساب";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "ربط";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "رمز الأمان";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "اسم المستخدم لبروتوكول TURN";
 "accountPage.turnPassword" = "كلمة المرور لبروتوكول TURN";
 "accountPage.turnRealm" = "حقل بروتوكول TURN";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "استخدم UPnP";
 
 //Account
 "account.sipUsername" = "اسم المستخدم";
@@ -299,8 +297,8 @@
 "account.port" = "نقطة عبور ( port )";
 "account.proxyServer" = "الوكيل";
 "account.createSipAccount" = "Configure a SIP Account";
-"account.sipAccount" = "SIP Account";
-"account.configure" = "Configure";
+"account.sipAccount" = "حساب SIP";
+"account.configure" = "ترتيب";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "إدخال العنوان";
 "account.portLabel" = "إدخال رقم الميناء";

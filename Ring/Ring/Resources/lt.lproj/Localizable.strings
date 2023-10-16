@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Ieškokite kontaktų...";
 "swarmcreation.createTheSwarm" = "Sukurkite sraudą";
 "swarmcreation.addADescription" = "Pridėti aprašą";
-"swarmcreation.addPeople" = "Galite pridėti daugiau žmonių prie sraudo";
 // Swarm
 "swarm.ignoreSwarm" = "Ignoruokite sraudą";
 "swarm.leaveConversation" = "Palikite pokalbį.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Administratorius";
 "swarm.banned" = "Uždrausta";
 "swarm.unknown" = "Nepažįstamas";
-"swarm.addMorePeople" = "Galite pridėti daugiau žmonių į šį sraudą";
 "swarm.addMember" = "Įrašyti narį";
 "swarm.confirmLeaveSwarm" = "Ar tikrai nori palikti šį sraudą?";
 "swarm.Leave" = "Išvykite.";

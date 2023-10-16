@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "ബന്ധം കണ്ടെത്തുക...";
 "swarmcreation.createTheSwarm" = "ഒരു കൂട്ടം സൃഷ്ടിക്കുക";
 "swarmcreation.addADescription" = "വിവരണം ചേർക്കുക";
-"swarmcreation.addPeople" = "നിങ്ങൾക്ക് കൂട്ടത്തിൽ കൂടുതൽ ആളുകളെ ചേർക്കാം";
 // Swarm
 "swarm.ignoreSwarm" = "ആ കൂട്ടം അവഗണിക്കുക";
 "swarm.leaveConversation" = "സംഭാഷണം ഉപേക്ഷിക്കുക";
@@ -73,7 +72,6 @@
 "swarm.admin" = "അഡ്മിനിസ്ട്രേറ്റർ";
 "swarm.banned" = "നിരോധനം";
 "swarm.unknown" = "അജ്ഞാതമായ";
-"swarm.addMorePeople" = "ഈ കൂട്ടത്തിൽ കൂടുതൽ ആളുകളെ ചേർക്കാം";
 "swarm.addMember" = "അംഗം ചേർക്കുക";
 "swarm.confirmLeaveSwarm" = "ഈ കൂട്ടം വിട്ടുപോകാൻ നിനക്ക് ഉറപ്പുണ്ടോ?";
 "swarm.Leave" = "പോകൂ";

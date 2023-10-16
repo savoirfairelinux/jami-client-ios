@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Poišči stik ...";
 "swarmcreation.createTheSwarm" = "Ustvarite roj";
 "swarmcreation.addADescription" = "Dodajte opis";
-"swarmcreation.addPeople" = "V ta roj lahko dodate še \%d\ oseb";
 // Swarm
 "swarm.ignoreSwarm" = "Prezri roj";
 "swarm.leaveConversation" = "Zapusti pogovor";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Skrbnik";
 "swarm.banned" = "Izključen/a";
 "swarm.unknown" = "Neznano";
-"swarm.addMorePeople" = "V ta roj lahko dodate še \%d\ oseb";
 "swarm.addMember" = "Dodaj člana";
 "swarm.confirmLeaveSwarm" = "Ali ste prepričani, da želite zapustiti ta roj?";
 "swarm.Leave" = "Zapusti";

@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Tìm kiếm liên lạc...";
 "swarmcreation.createTheSwarm" = "Tạo ra đám đông";
 "swarmcreation.addADescription" = "Thêm mô tả";
-"swarmcreation.addPeople" = "Bạn có thể thêm thêm nhiều người vào đám đông";
 // Swarm
 "swarm.ignoreSwarm" = "Đừng quan tâm đến đám đông";
 "swarm.leaveConversation" = "Hãy để cuộc trò chuyện";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Trình quản lý";
 "swarm.banned" = "Thiết bị cấm";
 "swarm.unknown" = "Không biết";
-"swarm.addMorePeople" = "Bạn có thể thêm thêm nhiều người vào đám đông này";
 "swarm.addMember" = "Thêm thành viên";
 "swarm.confirmLeaveSwarm" = "Em có chắc em muốn rời khỏi đám đông này không?";
 "swarm.Leave" = "Đi đi";

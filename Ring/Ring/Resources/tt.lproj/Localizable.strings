@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Контактны эзләү...";
 "swarmcreation.createTheSwarm" = "Саулыкны барлыкка китерегез";
 "swarmcreation.addADescription" = "Тәрҗемәсе";
-"swarmcreation.addPeople" = "Син җөмләгә тагын да күбрәк кешене кертә аласың";
 // Swarm
 "swarm.ignoreSwarm" = "Саулыкны санга сукма.";
 "swarm.leaveConversation" = "Әңгәмәгезне калдырыгыз.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Администратор";
 "swarm.banned" = "Тыелган";
 "swarm.unknown" = "Белмәгән";
-"swarm.addMorePeople" = "Бу җөмләгә тагын да күбрәк кеше кушыла ала";
 "swarm.addMember" = "Учреждение әгъзасын өстәү";
 "swarm.confirmLeaveSwarm" = "Сез бу җәмәгатьчелекне калдырырга телисез икәненә ышанасызмы?";
 "swarm.Leave" = "Кит!";

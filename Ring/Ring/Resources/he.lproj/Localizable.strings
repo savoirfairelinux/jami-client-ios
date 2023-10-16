@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "חיפוש קשר...";
 "swarmcreation.createTheSwarm" = "ליצור את הסוואר";
 "swarmcreation.addADescription" = "הוסף תיאור";
-"swarmcreation.addPeople" = "אתה יכול להוסיף עוד אנשים למגוון";
 // Swarm
 "swarm.ignoreSwarm" = "התעלמו מהגזע.";
 "swarm.leaveConversation" = "עזוב את השיחה.";
@@ -73,7 +72,6 @@
 "swarm.admin" = "מנהל";
 "swarm.banned" = "אסור";
 "swarm.unknown" = "לא ידוע";
-"swarm.addMorePeople" = "אתה יכול להוסיף עוד אנשים למגוון הזה";
 "swarm.addMember" = "הוסף חבר";
 "swarm.confirmLeaveSwarm" = "אתה בטוח שאתה רוצה לעזוב את הסוואר הזה?";
 "swarm.Leave" = "עזוב";

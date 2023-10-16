@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "Vyhledejte kontakt na...";
 "swarmcreation.createTheSwarm" = "Vytvořit swarm";
 "swarmcreation.addADescription" = "Přidejte popis";
-"swarmcreation.addPeople" = "Můžete přidat \%d\ více lidí ve Swarmu";
 // Swarm
 "swarm.ignoreSwarm" = "Ignorovat swarm";
 "swarm.leaveConversation" = "Opustit konverzaci";
@@ -73,7 +72,6 @@
 "swarm.admin" = "Správce";
 "swarm.banned" = "Zakázaný";
 "swarm.unknown" = "Neznámé";
-"swarm.addMorePeople" = "Můžete přidat \%d\ více lidí ve Swarmu";
 "swarm.addMember" = "Přidat člena";
 "swarm.confirmLeaveSwarm" = "Jste si jistí, že chcete opustit swarm?";
 "swarm.Leave" = "Opustit";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "Žádné výsledky";
 "smartlist.noConversation" = "Žádné konverzace";
 "smartlist.searchBarPlaceholder" = "Zadejte jméno...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "Hledat";
 "smartlist.noNetworkConnectivity" = "Chybí připojení";
 "smartlist.cellularAccess" = "Ujistěte se, že je v nastavení zaručen buňkový (místní) přístup";
 "smartlist.accountsTitle" = "Účty";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Připojení účtu";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "Odkaz";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "Uživatelské jméno TURN";
 "accountPage.turnPassword" = "Heslo TURN";
 "accountPage.turnRealm" = "Oblast TURN";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "Použít UPnP";
 
 //Account
 "account.sipUsername" = "Uživatelské jméno";
@@ -299,7 +297,7 @@
 "account.port" = "Port";
 "account.proxyServer" = "Proxy";
 "account.createSipAccount" = "Configure a SIP Account";
-"account.sipAccount" = "SIP Account";
+"account.sipAccount" = "Účet SIP";
 "account.configure" = "Configure";
 "account.advancedFeatures" = "Advanced Features";
 "account.serverLabel" = "Zadejte adresu.";

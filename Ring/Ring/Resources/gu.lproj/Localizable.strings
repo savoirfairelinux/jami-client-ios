@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "સંપર્ક શોધો.";
 "swarmcreation.createTheSwarm" = "સમૂહ બનાવો";
 "swarmcreation.addADescription" = "વર્ણન ઉમેરો";
-"swarmcreation.addPeople" = "તમે swarm વધુ લોકો ઉમેરી શકો છો \%d\";
 // Swarm
 "swarm.ignoreSwarm" = "ધૂપને અવગણો";
 "swarm.leaveConversation" = "વાતચીત છોડી દો";
@@ -73,7 +72,6 @@
 "swarm.admin" = "સંચાલક";
 "swarm.banned" = "પ્રતિબંધિત";
 "swarm.unknown" = "અજાણ્યા";
-"swarm.addMorePeople" = "તમે આ સમૂહમાં વધુ લોકો ઉમેરી શકો છો";
 "swarm.addMember" = "સભ્ય ઉમેરો";
 "swarm.confirmLeaveSwarm" = "શું તમે ખાતરી કરો કે તમે આ સમૂહ છોડી માંગો છો?";
 "swarm.Leave" = "જવા";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "ટર્ન વપરાશકર્તા નામ";
 "accountPage.turnPassword" = "ટર્ન પાસવર્ડ";
 "accountPage.turnRealm" = "ટર્ન ક્ષેત્ર";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "UPnP નો ઉપયોગ કરો";
 
 //Account
 "account.sipUsername" = "વપરાશકર્તા નામ";

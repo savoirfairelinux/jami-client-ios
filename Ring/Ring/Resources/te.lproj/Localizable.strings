@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "పరిచయం కోసం శోధన...";
 "swarmcreation.createTheSwarm" = "సమూహము సృష్టించు";
 "swarmcreation.addADescription" = "వివరణను జోడించండి";
-"swarmcreation.addPeople" = "మీరు గుంపు లోకి మరింత మంది జోడించవచ్చు \%d\";
 // Swarm
 "swarm.ignoreSwarm" = "గుంపును విస్మరించు";
 "swarm.leaveConversation" = "సంభాషణను వదిలివేయండి";
@@ -73,7 +72,6 @@
 "swarm.admin" = "నిర్వాహకుడు";
 "swarm.banned" = "నిషేధించబడింది";
 "swarm.unknown" = "తెలియని";
-"swarm.addMorePeople" = "మీరు ఈ సమూహంలో మరింత మందిని జోడించవచ్చు";
 "swarm.addMember" = "సభ్యుడిని జోడించండి";
 "swarm.confirmLeaveSwarm" = "మీరు ఈ సమూహం వదిలి అనుకుంటున్నారా ఖచ్చితంగా?";
 "swarm.Leave" = "బయలుదేరండి";

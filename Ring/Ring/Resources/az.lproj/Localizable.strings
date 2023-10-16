@@ -53,7 +53,6 @@
 "swarmcreation.searchBar" = "تماس آختارماق...";
 "swarmcreation.createTheSwarm" = "سورو یارات";
 "swarmcreation.addADescription" = "شرح قوش";
-"swarmcreation.addPeople" = "توپدا داها چوخ آدام قوشا بیلرسن";
 // Swarm
 "swarm.ignoreSwarm" = "سورونو تفتیش ائت";
 "swarm.leaveConversation" = "دانیشیقدان چیخ";
@@ -73,7 +72,6 @@
 "swarm.admin" = "مدیر";
 "swarm.banned" = "ممنوع";
 "swarm.unknown" = "تانینماز";
-"swarm.addMorePeople" = "بو سوروه داها چوخ آدام قوشا بیلرسن";
 "swarm.addMember" = "عضوی قوش";
 "swarm.confirmLeaveSwarm" = "آيا مطمئني که مي خواي از اين سوره خارج بشي؟";
 "swarm.Leave" = "گئت";
@@ -85,7 +83,7 @@
 "smartlist.noResults" = "نتیجه یوخدور";
 "smartlist.noConversation" = "دانیشیق اولماز";
 "smartlist.searchBarPlaceholder" = "آدینی یئره قوی...";
-"smartlist.searchBar" = "Search";
+"smartlist.searchBar" = "آختارماق";
 "smartlist.noNetworkConnectivity" = "شبکه باغلیغی یوخدور";
 "smartlist.cellularAccess" = "سیلاوی آچیقلاما سیزلیگیزین وئریلمه سیندن آرخایین اولون";
 "smartlist.accountsTitle" = "حسابلار";
@@ -157,7 +155,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "حساب باغلاماسی";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "لینک";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -291,7 +289,7 @@
 "accountPage.turnUsername" = "تورن آدلی یوللاندیریجی آد";
 "accountPage.turnPassword" = "تورن رمز";
 "accountPage.turnRealm" = "تورن دؤولت";
-"accountPage.upnpEnabled" = "Use UPnP";
+"accountPage.upnpEnabled" = "UPnP- نی ائشلشدیر";
 
 //Account
 "account.sipUsername" = "ایستیفاده چی آد";
