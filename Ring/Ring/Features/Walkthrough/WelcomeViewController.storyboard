@@ -28,12 +28,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ka9-wr-QQv">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="415"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jamiIcon" translatesAutoresizingMaskIntoConstraints="NO" id="2Pc-uJ-SAI">
-                                                <rect key="frame" x="137.66666666666666" y="20" width="100" height="95"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="jami_gnupackage" translatesAutoresizingMaskIntoConstraints="NO" id="2Pc-uJ-SAI">
+                                                <rect key="frame" x="-641.66666666666663" y="50" width="1658.3333333333333" height="65"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="2Pc-uJ-SAI" secondAttribute="height" multiplier="20:19" id="5fN-uH-uSi"/>
-                                                    <constraint firstAttribute="height" constant="95" id="Mlo-yj-dOM"/>
+                                                    <constraint firstAttribute="height" constant="65" id="Mlo-yj-dOM"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Zv-unB">
@@ -176,7 +175,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="top" secondItem="ka9-wr-QQv" secondAttribute="top" constant="20" id="2hZ-9k-9aa"/>
+                                            <constraint firstItem="2Pc-uJ-SAI" firstAttribute="top" secondItem="ka9-wr-QQv" secondAttribute="top" constant="50" id="2hZ-9k-9aa"/>
                                             <constraint firstItem="E4b-Zv-unB" firstAttribute="centerX" secondItem="2Pc-uJ-SAI" secondAttribute="centerX" id="BrK-Ku-djd"/>
                                             <constraint firstItem="CTB-bR-Knj" firstAttribute="centerX" secondItem="ka9-wr-QQv" secondAttribute="centerX" id="EN2-7d-QMm"/>
                                             <constraint firstItem="2Pc-uJ-SAI" firstAttribute="centerX" secondItem="ka9-wr-QQv" secondAttribute="centerX" id="FLm-J1-PSJ"/>
@@ -276,7 +275,7 @@
     </designables>
     <resources>
         <image name="background_login" width="786" height="1704"/>
-        <image name="jamiIcon" width="66.666664123535156" height="63.333332061767578"/>
+        <image name="jami_gnupackage" width="1658.4000244140625" height="552.79998779296875"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
