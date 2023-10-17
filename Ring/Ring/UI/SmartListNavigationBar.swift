@@ -24,7 +24,7 @@ import RxSwift
 class SmartListNavigationBar: UINavigationBar {
 
     private struct Constants {
-        static let topViewHeight: CGFloat = 50.0
+        static let topViewHeight: CGFloat = 60.0
         static let buttonSpacing: CGFloat = -15.0
     }
 
@@ -134,7 +134,7 @@ private extension SmartListNavigationBar {
             }
 
             if stringFromClass.contains("SearchBar") && searchActive {
-                subview.frame = CGRect(x: 0, y: 40, width: frame.width, height: subview.frame.height)
+                subview.frame = CGRect(x: 0, y: 50, width: frame.width, height: subview.frame.height)
             }
         }
     }

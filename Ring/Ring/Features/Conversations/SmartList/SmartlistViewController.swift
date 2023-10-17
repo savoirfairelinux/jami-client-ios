@@ -269,7 +269,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             })
             .disposed(by: self.disposeBag)
         self.navigationItem.leftBarButtonItem = accountButtonItem
-        self.navigationItem.rightBarButtonItems = [createSearchButton(), createMenuButton()]
+        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        space.width = 20
+        self.navigationItem.rightBarButtonItems = [createSearchButton(), space, createMenuButton()]
         self.conversationsTableView.tableFooterView = UIView()
     }
 
@@ -468,7 +470,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         if let superview = self.networkAlertView.superview {
             superview.isUserInteractionEnabled = !isHidden
         }
-        self.tableTopConstraint.constant = isHidden ? -60 : 15
+        self.tableTopConstraint.constant = isHidden ? -50 : 25
         self.view.layoutIfNeeded()
     }
 
@@ -497,9 +499,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     private func setupCommonUI(customNavBar: SmartListNavigationBar) {
         navigationItem.title = ""
-        tableTopConstraint.constant = 15
-        widgetsTopConstraint.constant = 40
-        customNavBar.customHeight = 70
+        tableTopConstraint.constant = 25
+        widgetsTopConstraint.constant = 50
+        customNavBar.customHeight = 80
         customNavBar.searchActive = true
     }
 
