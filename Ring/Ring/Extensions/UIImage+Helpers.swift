@@ -233,9 +233,10 @@ extension UIImage {
         return newImage
     }
 
-    func drawText(text: String, backgroundColor: UIColor, textColor: UIColor, size: CGSize) -> UIImage? {
+    func drawText(text: String, backgroundColor: UIColor, textColor: UIColor, size: CGSize, textFontSize: CGFloat? = nil) -> UIImage? {
         // Setups up the font attributes that will be later used to dictate how the text should be drawn
-        let textFont = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        let textFontSize = textFontSize == nil ? 20 : textFontSize
+        let textFont = UIFont.systemFont(ofSize: textFontSize!, weight: .semibold)
         let textFontAttributes = [
             NSAttributedString.Key.font: textFont,
             NSAttributedString.Key.foregroundColor: textColor]
@@ -320,7 +321,7 @@ extension UIImage {
                 return UIImage().drawText(text: username.prefixString().capitalized,
                                           backgroundColor: fbaBGColor,
                                           textColor: .white,
-                                          size: CGSize(width: size + 8, height: size + 8))?.circleMasked
+                                          size: CGSize(width: size + 8, height: size + 8), textFontSize: 14)?.circleMasked
             }
             return nil
         }

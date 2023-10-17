@@ -25,7 +25,8 @@ class SmartListNavigationBar: UINavigationBar {
 
     private struct Constants {
         static let topViewHeight: CGFloat = 50.0
-        static let buttonSpacing: CGFloat = -15.0
+        static let buttonSpacing: CGFloat = -22.0
+        static let trailing: CGFloat = -15.0
     }
 
     var topView: UIView?
@@ -83,7 +84,7 @@ private extension SmartListNavigationBar {
 
         let guide = self.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: guide.topAnchor),
+            view.topAnchor.constraint(equalTo: guide.topAnchor, constant: -5),
             view.heightAnchor.constraint(equalToConstant: Constants.topViewHeight),
             view.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: guide.trailingAnchor)
@@ -97,7 +98,7 @@ private extension SmartListNavigationBar {
 
         let title = UILabel()
         title.text = L10n.Smartlist.searchBar
-        title.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        title.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         title.translatesAutoresizingMaskIntoConstraints = false
 
         topView.addSubview(title)
@@ -118,7 +119,7 @@ private extension SmartListNavigationBar {
             if let prevBtn = previousButton {
                 button.trailingAnchor.constraint(equalTo: prevBtn.leadingAnchor, constant: Constants.buttonSpacing).isActive = true
             } else {
-                button.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: Constants.buttonSpacing).isActive = true
+                button.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: Constants.trailing).isActive = true
             }
             button.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
             previousButton = button
@@ -134,7 +135,7 @@ private extension SmartListNavigationBar {
             }
 
             if stringFromClass.contains("SearchBar") && searchActive {
-                subview.frame = CGRect(x: 0, y: 40, width: frame.width, height: subview.frame.height)
+                subview.frame = CGRect(x: 0, y: 36, width: frame.width, height: subview.frame.height)
             }
         }
     }

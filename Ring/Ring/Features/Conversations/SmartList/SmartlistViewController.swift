@@ -264,7 +264,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             })
             .disposed(by: self.disposeBag)
         self.navigationItem.leftBarButtonItem = accountButtonItem
-        self.navigationItem.rightBarButtonItems = [createSearchButton(), createMenuButton()]
+        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        space.width = 20
+        self.navigationItem.rightBarButtonItems = [createSearchButton(), space, createMenuButton()]
         self.conversationsTableView.tableFooterView = UIView()
     }
 
@@ -487,13 +489,13 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     private func setupCommonUI(customNavBar: SmartListNavigationBar) {
         navigationItem.title = ""
-        widgetsTopConstraint.constant = 40
+        widgetsTopConstraint.constant = 42
         customNavBar.customHeight = 70
         customNavBar.searchActive = true
     }
 
     private func setupUIForSipAccount(customNavBar: SmartListNavigationBar) {
-        let bookButton = createSearchBarButtonWithImage(named: "book.circle", weight: .light, width: 27)
+        let bookButton = createSearchBarButtonWithImage(named: "book.circle", weight: .regular, width: 27)
         bookButton.setImage(UIImage(asset: Asset.phoneBook), for: .normal)
         bookButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -501,7 +503,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             })
             .disposed(by: customNavBar.disposeBag)
 
-        let dialpadCodeButton = createSearchBarButtonWithImage(named: "square.grid.3x3.topleft.filled", weight: .light, width: 25)
+        let dialpadCodeButton = createSearchBarButtonWithImage(named: "square.grid.3x3.topleft.filled", weight: .regular, width: 25)
         dialpadCodeButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showDialpad()
@@ -512,14 +514,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     private func setupUIForNonSipAccount(customNavBar: SmartListNavigationBar) {
-        let qrCodeButton = createSearchBarButtonWithImage(named: "qrcode", weight: .regular, width: 25)
+        let qrCodeButton = createSearchBarButtonWithImage(named: "qrcode", weight: .medium, width: 25)
         qrCodeButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.showQRCode()
             })
             .disposed(by: customNavBar.disposeBag)
 
-        let swarmButton = createSearchBarButtonWithImage(named: "person.2", weight: .regular, width: 32)
+        let swarmButton = createSearchBarButtonWithImage(named: "person.2", weight: .medium, width: 32)
         swarmButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.createGroup()
