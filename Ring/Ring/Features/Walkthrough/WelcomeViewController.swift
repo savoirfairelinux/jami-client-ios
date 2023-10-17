@@ -67,7 +67,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
         configureSIPButton.setTitle(L10n.Account.createSipAccount, for: .normal)
         if !self.viewModel.notCancelable {
             let cancelButton = UIButton(type: .custom)
-            cancelButton.setTitleColor(.jamiMain, for: .normal)
+            cancelButton.setTitleColor(.jamiButtonDark, for: .normal)
             cancelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 25)
             cancelButton.setTitle(L10n.Global.cancel, for: .normal)
             cancelButton.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
