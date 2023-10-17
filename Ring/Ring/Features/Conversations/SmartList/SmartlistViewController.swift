@@ -47,7 +47,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var networkAlertLabel: UILabel!
     @IBOutlet weak var cellularAlertLabel: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var tableTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var widgetsTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var networkAlertView: UIView!
     @IBOutlet weak var searchView: JamiSearchView!
@@ -73,7 +72,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.setupTableView()
         self.setupUI()
         self.applyL10n()
-        self.configureLargeTitleNavigationBar()
+        self.configureNavigationBar()
         self.confugureAccountPicker()
         accountsDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.setupSearchBar()
@@ -85,7 +84,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.configureLargeTitleNavigationBar()
         self.viewModel.closeAllPlayers()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         configureCustomNavBar(usingCustomSize: true)
@@ -94,9 +92,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         configureCustomNavBar(usingCustomSize: false)
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.setNeedsLayout()
-        navigationController?.navigationBar.layoutIfNeeded()
     }
 
     func setupTableViewHeader(for tableView: UITableView) {
@@ -464,11 +459,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     func updateNetworkUI() {
         let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
         self.networkAlertView.isHidden = isHidden
-        self.networkAlertView.isUserInteractionEnabled = !isHidden
-        if let superview = self.networkAlertView.superview {
-            superview.isUserInteractionEnabled = !isHidden
-        }
-        self.tableTopConstraint.constant = isHidden ? -60 : 15
         self.view.layoutIfNeeded()
     }
 
@@ -497,7 +487,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     private func setupCommonUI(customNavBar: SmartListNavigationBar) {
         navigationItem.title = ""
-        tableTopConstraint.constant = 15
         widgetsTopConstraint.constant = 40
         customNavBar.customHeight = 70
         customNavBar.searchActive = true

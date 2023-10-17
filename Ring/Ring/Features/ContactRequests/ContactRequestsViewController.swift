@@ -44,7 +44,7 @@ class ContactRequestsViewController: UIViewController, StoryboardBased, ViewMode
         noInvitationsPlaceholder.backgroundColor = UIColor.jamiBackgroundColor
         noRequestsLabel.backgroundColor = UIColor.jamiBackgroundColor
         noRequestsLabel.textColor = UIColor.jamiLabelColor
-        self.configureLargeTitleNavigationBar()
+        self.configureNavigationBar()
         self.tableView.rx.modelSelected(RequestItem.self)
             .subscribe({ [weak self] item in
                 guard let self = self else { return }

@@ -724,12 +724,18 @@ class ConversationViewController: UIViewController,
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
         self.textFieldShouldEndEditing = false
         self.messagesLoadingFinished()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0
         self.viewModel.setIsComposingMsg(isComposing: false)
         self.textFieldShouldEndEditing = true
         self.viewModel.setMessagesAsRead()
