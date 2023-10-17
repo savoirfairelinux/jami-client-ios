@@ -275,7 +275,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let generalSettingsButton = UIButton(type: UIButton.ButtonType.system) as UIButton
         generalSettingsButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         generalSettingsButton.setImage(imageSettings, for: .normal)
-        generalSettingsButton.tintColor = .jamiMain
+        generalSettingsButton.tintColor = .jamiButtonDark
         generalSettingsButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.searchController.isActive = true
@@ -290,7 +290,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         generalSettingsButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         generalSettingsButton.setImage(imageSettings, for: .normal)
         generalSettingsButton.menu = createMenu()
-        generalSettingsButton.tintColor = .jamiMain
+        generalSettingsButton.tintColor = .jamiButtonDark
         generalSettingsButton.showsMenuAsPrimaryAction = true
         return UIBarButtonItem(customView: generalSettingsButton)
     }
@@ -348,7 +348,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         addAccountButton.frame = CGRect(x: 0, y: 0, width: 250, height: 40)
         addAccountButton.contentHorizontalAlignment = .right
         addAccountButton.setTitle(L10n.Smartlist.addAccountButton, for: .normal)
-        addAccountButton.setTitleColor(.jamiMain, for: .normal)
+        addAccountButton.setTitleColor(.jamiButtonDark, for: .normal)
         addAccountButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 23)
 
         // Enable auto-shrink
@@ -540,7 +540,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         let button = UIButton()
         let configuration = UIImage.SymbolConfiguration(pointSize: 40, weight: weight, scale: .large)
         button.setImage(UIImage(systemName: imageName, withConfiguration: configuration), for: .normal)
-        button.tintColor = .jamiMain
+        button.tintColor = .jamiButtonDark
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: width).isActive = true
         button.heightAnchor.constraint(equalToConstant: 23).isActive = true
@@ -686,35 +686,35 @@ extension SmartlistViewController {
     }
 
     private func createSwarmAction() -> UIAction {
-        let image = createTintedImage(systemName: "person.2", configuration: configuration, tintColor: .jamiMain)
+        let image = createTintedImage(systemName: "person.2", configuration: configuration, tintColor: .jamiButtonDark)
         return UIAction(title: L10n.Swarm.newSwarm, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
             self?.viewModel.createGroup()
         }
     }
 
     private func inviteFriendsAction() -> UIAction {
-        let image = createTintedImage(systemName: "envelope.open", configuration: configuration, tintColor: .jamiMain)
+        let image = createTintedImage(systemName: "envelope.open", configuration: configuration, tintColor: .jamiButtonDark)
         return UIAction(title: L10n.Smartlist.inviteFriends, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
             self?.shareAccountInfo()
         }
     }
 
     private func accountsAction() -> UIAction {
-        let image = createTintedImage(systemName: "list.bullet", configuration: configuration, tintColor: .jamiMain)
+        let image = createTintedImage(systemName: "list.bullet", configuration: configuration, tintColor: .jamiButtonDark)
         return UIAction(title: L10n.Smartlist.accounts, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
             self?.openAccountsList()
         }
     }
 
     private func openAccountAction() -> UIAction {
-        let image = createTintedImage(systemName: "person.circle", configuration: configuration, tintColor: .jamiMain)
+        let image = createTintedImage(systemName: "person.circle", configuration: configuration, tintColor: .jamiButtonDark)
         return UIAction(title: L10n.Global.accountSettings, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
             self?.viewModel.showAccountSettings()
         }
     }
 
     private func openSettingsAction() -> UIAction {
-        let image = createTintedImage(systemName: "gearshape", configuration: configuration, tintColor: .jamiMain)
+        let image = createTintedImage(systemName: "gearshape", configuration: configuration, tintColor: .jamiButtonDark)
         return UIAction(title: L10n.Global.advancedSettings, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
             self?.viewModel.showGeneralSettings()
         }

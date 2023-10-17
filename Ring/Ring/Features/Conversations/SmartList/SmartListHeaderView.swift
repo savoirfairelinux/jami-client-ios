@@ -77,7 +77,7 @@ class SmartListHeaderView: UIView {
         UIGraphicsBeginImageContextWithOptions(roundedRectSize, false, UIScreen.main.scale)
 
         let roundedRectPath = UIBezierPath(roundedRect: CGRect(origin: .zero, size: roundedRectSize), cornerRadius: roundedRectSize.height / 2)
-        UIColor.jamiMain.setFill()
+        UIColor.jamiButtonDark.setFill()
         roundedRectPath.fill()
 
         let stringOrigin = CGPoint(x: (roundedRectSize.width - sizeOfString.width) / 2, y: (roundedRectSize.height - sizeOfString.height) / 2)

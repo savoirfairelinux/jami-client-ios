@@ -560,7 +560,7 @@ class ConversationViewController: UIViewController,
             let dnlabel: UILabel = UILabel.init(frame: CGRect.init(x: imageSize + infoPadding, y: dnlabelYOffset, width: maxNameLength, height: 20))
             dnlabel.text = name
             dnlabel.font = UIFont.systemFont(ofSize: nameSize)
-            dnlabel.textColor = UIColor.jamiMain
+            dnlabel.textColor = UIColor.jamiButtonDark
             dnlabel.textAlignment = .left
             titleView.addSubview(dnlabel)
             nameSize = 14.0
@@ -575,7 +575,7 @@ class ConversationViewController: UIViewController,
             let unlabel: UILabel = UILabel.init(frame: frame)
             unlabel.text = username
             unlabel.font = UIFont.systemFont(ofSize: nameSize)
-            unlabel.textColor = UIColor.jamiMain
+            unlabel.textColor = UIColor.jamiButtonDark
             unlabel.textAlignment = .left
             titleView.addSubview(unlabel)
         }
