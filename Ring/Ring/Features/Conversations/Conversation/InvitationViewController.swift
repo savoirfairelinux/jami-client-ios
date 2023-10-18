@@ -143,7 +143,11 @@ class InvitationViewController: UIViewController, StoryboardBased, ViewModelBase
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
-                self?.invitationLabel3.text = L10n.Conversation.synchronizationMessage(name)
+                let name = name.replacingOccurrences(of: "\0", with: "")
+                guard !name.isEmpty else { return }
+
+                let message = String(format: NSLocalizedString("conversation.synchronizationMessage", comment: ""), name)
+                self?.invitationLabel3.text = message
             })
             .disposed(by: self.disposeBag)
     }

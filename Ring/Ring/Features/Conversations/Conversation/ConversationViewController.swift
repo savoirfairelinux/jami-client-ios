@@ -700,8 +700,8 @@ class ConversationViewController: UIViewController,
                 let name = bestName.replacingOccurrences(of: "\0", with: "")
                 guard !name.isEmpty else { return }
                 let placeholder = L10n.Conversation.messagePlaceholder + name
-                let nameNSString = name as NSString
-                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(nameNSString)
+                let message = String(format: NSLocalizedString("conversation.synchronizationMessage", comment: ""), name)
+                self?.conversationInSyncLabel.text = message
                 self?.messageAccessoryView.setPlaceholder(placeholder: placeholder)
             })
             .disposed(by: self.disposeBag)
