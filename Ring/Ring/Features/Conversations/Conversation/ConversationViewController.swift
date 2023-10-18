@@ -701,12 +701,12 @@ class ConversationViewController: UIViewController,
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] bestName in
+                guard let self = self else { return }
                 let name = bestName.replacingOccurrences(of: "\0", with: "")
                 guard !name.isEmpty else { return }
                 let placeholder = L10n.Conversation.messagePlaceholder + name
-                let nameNSString = name as NSString
-                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(nameNSString)
-                self?.messageAccessoryView.setPlaceholder(placeholder: placeholder)
+                self.conversationInSyncLabel.text = "We are waiting to synchronize the conversation."
+                self.messageAccessoryView.setPlaceholder(placeholder: placeholder)
             })
             .disposed(by: self.disposeBag)
         self.conversationInSyncLabel.backgroundColor = UIColor(hexString: self.viewModel.conversation.value.preferences.color)
