@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "174107b0_212312ca",
+        "filename": "Ring/Ring/EditProfileViewModel.swift",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-19T16:34:22Z",
+      "side": 1,
+      "message": "all this logic already done in UIImage.defaultJamiAvatarFor(profileName, account, size, withFontSize), so just use it directly",
+      "revId": "293ec480ee21d2c15e13cc18e1b61c82061b93b9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
