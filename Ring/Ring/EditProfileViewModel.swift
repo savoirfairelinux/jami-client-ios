@@ -44,17 +44,18 @@ class EditProfileViewModel {
         })
         return profileForCurrentAccount.share()
             .map({ profile in
-                if let photo = profile.photo,
-                   let data = NSData(base64Encoded: photo,
-                                     options: NSData.Base64DecodingOptions
-                                        .ignoreUnknownCharacters) as Data? {
-                    self?.image = UIImage(data: data)
-                    guard let image = UIImage(data: data) else {
-                        return UIImage(named: "add_avatar")!
-                    }
-                    return image
+                guard let self = self, let account = self.accountService.currentAccount else { return UIImage.defaultJamiAvatarFor(profileName: nil, account: nil, size: 70, withFontSize: 26) }
+                if let name = profile.alias, !name.isEmpty {
+                    return UIImage.defaultJamiAvatarFor(profileName: name, account: account, size: 70, withFontSize: 26)
                 }
-                return UIImage(named: "add_avatar")!
+                if let account = self.accountService.currentAccount {
+                    let details = self.accountService.getAccountDetails(fromAccountId: account.id)
+                    let name = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: .displayName))
+                    if !name.isEmpty {
+                        return UIImage.defaultJamiAvatarFor(profileName: name, account: account, size: 70, withFontSize: 26)
+                    }
+                }
+                return UIImage.defaultJamiAvatarFor(profileName: nil, account: account, size: 70, withFontSize: 26)
             })
     }()
 
