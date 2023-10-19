@@ -116,8 +116,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.settingsTable.delegate = self
         self.profileImageView = stretchyHeader.profileImageView
         self.profileName = stretchyHeader.profileName
-        print("********* stretchyHeader contentSize: \(stretchyHeader.frame)")
-        print("********* profileImageView contentSize: \(profileImageView.frame)")
     }
 
     private func supportEditProfile() {
