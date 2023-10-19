@@ -290,7 +290,7 @@ extension UIImage {
         return imageWithBackground ?? self
     }
 
-    class func defaultJamiAvatarFor(profileName: String?, account: AccountModel?, size: CGFloat) -> UIImage {
+    class func defaultJamiAvatarFor(profileName: String?, account: AccountModel?, size: CGFloat, withFontSize fontSize: CGFloat = 14) -> UIImage {
         func generateDefaultImage() -> UIImage {
             let configuration = UIImage.SymbolConfiguration(pointSize: size, weight: .regular, scale: .medium)
             let defaultImage = UIImage(systemName: "person.fill", withConfiguration: configuration)
@@ -321,7 +321,7 @@ extension UIImage {
                 return UIImage().drawText(text: username.prefixString().capitalized,
                                           backgroundColor: fbaBGColor,
                                           textColor: .white,
-                                          size: CGSize(width: size + 8, height: size + 8), textFontSize: 14)?.circleMasked
+                                          size: CGSize(width: size + 8, height: size + 8), textFontSize: fontSize)?.circleMasked
             }
             return nil
         }
