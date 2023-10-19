@@ -48,14 +48,11 @@ class EditProfileViewModel {
                 if let photo = profile.photo,
                    let data = NSData(base64Encoded: photo,
                                      options: NSData.Base64DecodingOptions
-                                        .ignoreUnknownCharacters) as Data? {
-                    self?.image = UIImage(data: data)
-                    guard let image = UIImage(data: data) else {
-                        return UIImage(named: "add_avatar")!
-                    }
+                    .ignoreUnknownCharacters) as Data?,
+                   let image = UIImage(data: data) {
                     return image
                 }
-                return UIImage(named: "add_avatar")!
+                return UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: self?.accountService.currentAccount, size: 70, withFontSize: 26)
             })
     }()
 
