@@ -74,6 +74,7 @@ class ConversationViewController: UIViewController,
     @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
     var bottomAnchor: NSLayoutConstraint?
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
+    var swiftUIViewAdded: Bool = false
 
     private lazy var locationManager: CLLocationManager = { return CLLocationManager() }()
 
@@ -104,10 +105,10 @@ class ConversationViewController: UIViewController,
                                                object: nil)
 
         keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        self.addSwiftUIView()
     }
 
     private func addSwiftUIView() {
+        swiftUIViewAdded = true
         let transferHelper = TransferHelper(dataTransferService: self.viewModel.dataTransferService,
                                             conversationViewModel: self.viewModel)
         let swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
@@ -171,6 +172,9 @@ class ConversationViewController: UIViewController,
         swiftUIView.didMove(toParent: self)
         self.view.backgroundColor = UIColor.systemBackground
         self.view.sendSubviewToBack(swiftUIView.view)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[weak self] in
+            self?.messagesLoadingFinished()
+        }
     }
 
     @objc
@@ -729,7 +733,9 @@ class ConversationViewController: UIViewController,
         self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
         self.textFieldShouldEndEditing = false
-        self.messagesLoadingFinished()
+        if !self.swiftUIViewAdded {
+            self.addSwiftUIView()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
