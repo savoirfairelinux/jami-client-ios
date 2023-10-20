@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87d57f84_fb69ec81",
+        "filename": "Ring/Ring/Extensions/UIView+Ring.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b56f903d_c2d71c69",
+        "filename": "Ring/Ring/Extensions/UIViewController+Ring.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "do we need this changes? It breaks other view",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e857423c_3c0ef412",
+        "filename": "Ring/Ring/Extensions/UIViewController+Ring.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "do we need this changes? It breaks other view",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1caca09d_17bfdf8a",
+        "filename": "Ring/Ring/Features/Me/Me/DisposableCell.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "noot needed",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd86eb4b_4d499cc2",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "do we need observe device orientation?",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "185fc453_d1328278",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e59748_0e93e27e",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "we do not need cellId",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f006fe9_0308a0c8",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "delegate already set",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b321c63_c23b4cc9",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608c899a_dddbe1dc",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52785be7_d8b36dcb",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 1292,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "looks different from design. Maybe try 30?",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0f6da05_cfd31b91",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "do we need this change?",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22df6b9f_b8a48fe8",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-20T19:50:28Z",
+      "side": 1,
+      "message": "remove account button should go to otherSettings. Otherwise there is a lot of space because there is an empty header view for new section",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
