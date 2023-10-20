@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1a72bbb_316552e4",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-20T15:08:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "604b85fd_a9f300d0",
+      "revId": "2507e60507735a1820ac32c1a3794bb48c0d6edf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24fd62e0_2bc98589",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-16T16:37:38Z",
       "side": 1,
       "message": "we do not need round corners for every cell, just for sections. This could be achieved by using .insetGrouped style.",
+      "revId": "2507e60507735a1820ac32c1a3794bb48c0d6edf",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9a8078_783849a9",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 3
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-20T15:08:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24fd62e0_2bc98589",
       "revId": "2507e60507735a1820ac32c1a3794bb48c0d6edf",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
