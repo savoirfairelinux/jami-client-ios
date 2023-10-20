@@ -51,7 +51,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     override func viewDidLoad() {
         self.view.backgroundColor = .jamiFormBackgroundColor
         self.settingsTable.backgroundColor = .jamiFormBackgroundColor
-        self.settingsTable.separatorStyle = .none
+        self.settingsTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.settingsTable.alwaysBounceHorizontal = false
         self.addHeaderView()
         super.viewDidLoad()
@@ -116,8 +116,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.settingsTable.delegate = self
         self.profileImageView = stretchyHeader.profileImageView
         self.profileName = stretchyHeader.profileName
-        print("********* stretchyHeader contentSize: \(stretchyHeader.frame)")
-        print("********* profileImageView contentSize: \(profileImageView.frame)")
     }
 
     private func supportEditProfile() {
@@ -283,10 +281,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                   tableView: UITableView,
                   indexPath: IndexPath,
                   _: SettingsSection.Item) in
-                print("********* TableView contentSize: \(self.settingsTable.contentSize)")
-                print("********* Screen Width: \(self.view.frame.width)")
-                print("********* TableView Width: \(self.settingsTable.frame.width)")
-                print("********* TableView Content Insets: \(tableView.contentInset)")
                 switch dataSource[indexPath] {
                 case .autoRegistration:
                     let cell = DisposableCell()
@@ -368,39 +362,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                             self?.openBlockedList()
                         })
                         .disposed(by: cell.disposeBag)
-                    return cell
-                case .sectionHeader(let title):
-                    let headerView = UIView()
-                    headerView.backgroundColor = .clear
-
-                    let label = UILabel()
-                    label.text = title.uppercased()
-                    label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-                    label.textColor = .lightGray
-                    headerView.addSubview(label)
-
-                    label.translatesAutoresizingMaskIntoConstraints = false
-                    NSLayoutConstraint.activate([
-                        label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
-                        label.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
-                        label.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 25),
-                        label.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -5)
-                    ])
-
-                    let cell = UITableViewCell()
-                    cell.selectionStyle = .none
-                    cell.backgroundColor = .clear
-                    cell.contentView.addSubview(headerView)
-
-                    headerView.translatesAutoresizingMaskIntoConstraints = false
-                    NSLayoutConstraint.activate([
-                        headerView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
-                        headerView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),
-                        headerView.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
-                        headerView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)
-                    ])
-
-                    cell.removeCorners()
                     return cell
                 case .removeAccount:
                     let cell = DisposableCell()
@@ -713,6 +674,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             }
 
         let settingsItemDataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: configureCell)
+        settingsItemDataSource.titleForHeaderInSection = { dataSource, sectionIndex in
+            return dataSource[sectionIndex].title
+        }
+        settingsTable
+            .rx.setDelegate(self)
+            .disposed(by: disposeBag)
         self.viewModel.settings
             .bind(to: self.settingsTable.rx.items(dataSource: settingsItemDataSource))
             .disposed(by: disposeBag)
@@ -727,31 +694,31 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     func setupCellUI() {
         settingsTable.rx.willDisplayCell
-            .subscribe(onNext: { (cell, indexPath) in
-                let separator = self.createSeparator(for: cell)
-                if cell.backgroundColor != .clear { // To avoid adding seperator for the headers
-                    // Add separator line to cell
-                    cell.contentView.addSubview(separator)
-                }
-
-                if let customCell = cell as? DisposableCell {
-                    switch customCell.cellId {
-                    case "notifications":
-                        customCell.roundAllCorners(radius: 12)
-                        customCell.removeSeperatorView()
-                    case "shareAccountDetails", "linkNew", "upnpEnabled", "boothMode", "removeAccount", "autoRegistration":
-                        customCell.roundBottomCorners(radius: 12)
-                        customCell.removeSeperatorView()
-                    default:
-                        if indexPath.row == 1 {
-                            customCell.roundTopCorners(radius: 12)
-                        }
-                    }
-                } else if let customCell = cell as? DeviceCell {
-                    if indexPath.row == 1 {
-                        customCell.roundTopCorners(radius: 12)
-                    }
-                }
+            .subscribe(onNext: { (_, _) in
+                //                let separator = self.createSeparator(for: cell)
+                //                if cell.backgroundColor != .clear { // To avoid adding seperator for the headers
+                //                    // Add separator line to cell
+                //                    cell.contentView.addSubview(separator)
+                //                }
+                //
+                //                if let customCell = cell as? DisposableCell {
+                //                    switch customCell.cellId {
+                //                    case "notifications":
+                //                        customCell.roundAllCorners(radius: 12)
+                //                        customCell.removeSeperatorView()
+                //                    case "shareAccountDetails", "linkNew", "upnpEnabled", "boothMode", "removeAccount", "autoRegistration":
+                //                        customCell.roundBottomCorners(radius: 12)
+                //                        customCell.removeSeperatorView()
+                //                    default:
+                //                        if indexPath.row == 1 {
+                //                            customCell.roundTopCorners(radius: 12)
+                //                        }
+                //                    }
+                //                } else if let customCell = cell as? DeviceCell {
+                //                    if indexPath.row == 1 {
+                //                        customCell.roundTopCorners(radius: 12)
+                //                    }
+                //                }
             })
             .disposed(by: disposeBag)
     }
@@ -1321,6 +1288,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 }
 
 extension MeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        50
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let navigationHeight = self.navigationController?.navigationBar.bounds.height
         var size = self.view.bounds.size
