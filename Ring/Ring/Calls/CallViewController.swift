@@ -459,6 +459,19 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
             })
             .disposed(by: self.disposeBag)
 
+        self.viewModel.callFailed
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] dismiss in
+                if dismiss && self?.pipController != nil {
+                    if #available(iOS 15.0, *) {
+                        self?.pipController.stopPictureInPicture()
+                        self?.pipController = nil
+                    }
+                    self?.removeFromScreen()
+                }
+            })
+            .disposed(by: self.disposeBag)
+
         self.viewModel.contactName.drive(self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
 
