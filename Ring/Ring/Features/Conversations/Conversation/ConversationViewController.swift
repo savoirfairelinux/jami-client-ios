@@ -702,14 +702,12 @@ class ConversationViewController: UIViewController,
     func placeCall() {
         self.textFieldShouldEndEditing = true
         self.messageAccessoryView.messageTextView.resignFirstResponder()
-        self.resignFirstResponder()
         self.viewModel.startCall()
     }
 
     func placeAudioOnlyCall() {
         self.textFieldShouldEndEditing = true
         self.messageAccessoryView.messageTextView.resignFirstResponder()
-        self.resignFirstResponder()
         self.viewModel.startAudioCall()
     }
 

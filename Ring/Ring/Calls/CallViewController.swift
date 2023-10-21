@@ -133,6 +133,14 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
                 }
             })
             .disposed(by: self.disposeBag)
+        self.viewModel.callFailed
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] dismiss in
+                if dismiss {
+                    self?.removeFromScreen()
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func removeFromScreen() {

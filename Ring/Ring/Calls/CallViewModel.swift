@@ -61,6 +61,8 @@ class CallViewModel: Stateable, ViewModel {
     }()
     private var callDisposeBag = DisposeBag()
 
+    var callFailed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+
     var conferenceId = ""
 
     func getJamiId() -> String? {
@@ -326,11 +328,7 @@ extension CallViewModel {
         return self.callService.accept(call: call)
     }
 
-    func placeCall(with uri: String, userName: String, isAudioOnly: Bool = false) {
-        guard let account = self.accountService.currentAccount else {
-            return
-        }
-
+    func placeCall(with uri: String, userName: String, account: AccountModel, isAudioOnly: Bool = false) {
         self.callService.placeCall(withAccount: account,
                                    toParticipantId: uri,
                                    userName: userName,
@@ -343,6 +341,8 @@ extension CallViewModel {
                 }
                 self?.callsProvider
                     .startCall(account: account, call: callModel)
+            }, onFailure: {  [weak self] _ in
+                self?.callFailed.accept(true)
             })
             .disposed(by: self.disposeBag)
     }
