@@ -407,7 +407,7 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         return Single<CallModel>.create(subscribe: { [weak self] single in
             if let self = self, let callId = self.callsAdapter.placeCall(withAccountId: account.id,
                                                                          toParticipantId: participantId,
-                                                                         withMedia: mediaList),
+                                                                         withMedia: mediaList), !callId.isEmpty,
                let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: account.id) {
                 call.update(withDictionary: callDictionary, withMedia: mediaList)
                 call.participantUri = participantId
