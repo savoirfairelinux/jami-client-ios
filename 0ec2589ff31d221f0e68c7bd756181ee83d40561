@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7af88277_d42f7e6f",
+        "filename": "Ring/Ring/Extensions/UIView+Ring.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87d57f84_fb69ec81",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b56f903d_c2d71c69",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-20T19:50:28Z",
       "side": 1,
       "message": "do we need this changes? It breaks other view",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dafa6fb_a1e5d1fd",
+        "filename": "Ring/Ring/Extensions/UIViewController+Ring.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "I modified it so it works like before for other views",
+      "parentUuid": "b56f903d_c2d71c69",
       "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -52,6 +88,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ba5bef6_5925c027",
+        "filename": "Ring/Ring/Extensions/UIViewController+Ring.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e857423c_3c0ef412",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1caca09d_17bfdf8a",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-10-20T19:50:28Z",
       "side": 1,
       "message": "noot needed",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07cb1858_40e73fb1",
+        "filename": "Ring/Ring/Features/Me/Me/DisposableCell.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1caca09d_17bfdf8a",
       "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -86,6 +158,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eb472b8_5aa614af",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "It was needed with the custom seperators now it is not needed.",
+      "parentUuid": "dd86eb4b_4d499cc2",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "185fc453_d1328278",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-10-20T19:50:28Z",
       "side": 1,
       "message": "not needed",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "718b4114_8c3aece5",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "185fc453_d1328278",
       "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -120,6 +228,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "656882e7_ef0ea86e",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12e59748_0e93e27e",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f006fe9_0308a0c8",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-10-20T19:50:28Z",
       "side": 1,
       "message": "delegate already set",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e42c664_3dd70b30",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f006fe9_0308a0c8",
       "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -154,6 +298,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97053c0b_c745a4f5",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b321c63_c23b4cc9",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "608c899a_dddbe1dc",
@@ -167,6 +329,24 @@
       "writtenOn": "2023-10-20T19:50:28Z",
       "side": 1,
       "message": "not used",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72bb336d_aaea81f4",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "608c899a_dddbe1dc",
       "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -188,6 +368,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6143455d_926eef92",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 1292,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52785be7_d8b36dcb",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0f6da05_cfd31b91",
@@ -205,6 +403,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6680dd49_a44c1668",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0f6da05_cfd31b91",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22df6b9f_b8a48fe8",
@@ -218,6 +434,24 @@
       "writtenOn": "2023-10-20T19:50:28Z",
       "side": 1,
       "message": "remove account button should go to otherSettings. Otherwise there is a lot of space because there is an empty header view for new section",
+      "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "512f7b3d_67606640",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-23T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22df6b9f_b8a48fe8",
       "revId": "0ec2589ff31d221f0e68c7bd756181ee83d40561",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
