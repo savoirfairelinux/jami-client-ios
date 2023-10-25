@@ -289,6 +289,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .autoRegistration:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.autoRegistration
+                    cell.textLabel?.numberOfLines = 0
                     let switchView = UISwitch()
                     switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
@@ -314,6 +315,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeviceCell.self)
                     cell.deviceIdLabel.text = device.deviceId
                     cell.deviceIdLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+                    cell.textLabel?.numberOfLines = 0
                     cell.deviceIdLabel.sizeToFit()
                     if let deviceName = device.deviceName {
                         cell.deviceNameLabel.text = deviceName
@@ -334,6 +336,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.text = L10n.AccountPage.linkDeviceTitle
                     cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
+                    cell.textLabel?.numberOfLines = 0
                     cell.selectionStyle = .none
                     cell.sizeToFit()
                     let button = UIButton.init(frame: cell.frame)
@@ -352,6 +355,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.blockedContacts
                     cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+                    cell.textLabel?.numberOfLines = 0
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.selectionStyle = .none
                     cell.sizeToFit()
@@ -370,6 +374,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.text = L10n.Global.removeAccount
                     cell.textLabel?.textColor = UIColor.systemRed
                     cell.textLabel?.textAlignment = .center
+                    cell.textLabel?.numberOfLines = 0
                     cell.selectionStyle = .none
                     cell.sizeToFit()
                     let button = UIButton.init(frame: cell.frame)
@@ -394,6 +399,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.text = L10n.Global.registerAUsername
                     cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
+                    cell.textLabel?.numberOfLines = 0
                     cell.sizeToFit()
                     cell.selectionStyle = .none
                     let button = UIButton.init(frame: cell.frame)
@@ -413,6 +419,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .ordinary(let label):
                     let cell = UITableViewCell()
                     cell.textLabel?.text = label
+                    cell.textLabel?.numberOfLines = 0
                     cell.selectionStyle = .none
                     return cell
                 case .shareAccountDetails:
@@ -420,6 +427,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.text = L10n.AccountPage.inviteFriends
                     cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
+                    cell.textLabel?.numberOfLines = 0
                     cell.sizeToFit()
                     cell.selectionStyle = .none
                     let button = UIButton.init(frame: cell.frame)
@@ -439,6 +447,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.textLabel?.text = title
                     cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
+                    cell.textLabel?.numberOfLines = 0
                     cell.sizeToFit()
                     cell.selectionStyle = .none
                     let button = UIButton.init(frame: cell.frame)
@@ -454,6 +463,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .notifications:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.enableNotifications
+                    cell.textLabel?.numberOfLines = 0
                     let switchView = UISwitch()
                     switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
@@ -477,6 +487,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .peerDiscovery:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.peerDiscovery
+                    cell.textLabel?.numberOfLines = 0
                     let switchView = UISwitch()
                     switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
@@ -528,6 +539,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.backgroundColor = UIColor.jamiBackgroundColor
 
                     cell.textLabel?.text = L10n.Account.accountStatus
+                    cell.textLabel?.numberOfLines = 0
                     cell.selectionStyle = .none
                     cell.textLabel?.sizeToFit()
                     cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
@@ -542,6 +554,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .boothMode:
                     let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
                     cell.textLabel?.text = L10n.AccountPage.enableBoothMode
+                    cell.textLabel?.numberOfLines = 0
                     cell.textLabel?.sizeToFit()
                     let switchView = UISwitch()
                     switchView.onTintColor = .jamiButtonDark
@@ -577,6 +590,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .enableAccount:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.Account.enableAccount
+                    cell.textLabel?.numberOfLines = 0
                     let switchView = UISwitch()
                     switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
@@ -602,6 +616,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .turnEnabled:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.turnEnabled
+                    cell.textLabel?.numberOfLines = 0
                     let switchView = UISwitch()
                     switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
@@ -626,6 +641,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .upnpEnabled:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.upnpEnabled
+                    cell.textLabel?.numberOfLines = 0
                     let switchView = UISwitch()
                     switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
@@ -769,6 +785,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         default:
             break
         }
+        cell.textLabel?.numberOfLines = 0
         cell.textLabel?.sizeToFit()
         cell.sizeToFit()
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
