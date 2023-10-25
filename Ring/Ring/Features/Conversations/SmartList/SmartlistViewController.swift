@@ -682,7 +682,7 @@ extension SmartlistViewController {
     // MARK: - Action creation functions
 
     private var configuration: UIImage.SymbolConfiguration {
-        return UIImage.SymbolConfiguration(pointSize: 40, weight: .regular, scale: .large)
+        return UIImage.SymbolConfiguration(scale: .medium)
     }
 
     private func createSwarmAction() -> UIAction {
