@@ -54,16 +54,15 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
     // MARK: functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         // Style
-        self.pinTextField.becomeFirstResponder()
-        self.view.layoutIfNeeded()
         linkButton.titleLabel?.ajustToTextSize()
 
         adaptToSystemColor()
         configurePasswordField()
 
         self.applyL10n()
+        setupUI()
+        self.pinTextField.becomeFirstResponder()
 
         // bind view model to view
 
@@ -142,7 +141,10 @@ class LinkDeviceViewController: UIViewController, StoryboardBased, ViewModelBase
             contentView.removeCorners()
             view.backgroundColor = .secondarySystemBackground
         } else {
-            contentView.roundTopCorners(radius: 12)
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                self.contentView.roundTopCorners(radius: 12)
+            }
             view.backgroundColor = .clear
         }
 
