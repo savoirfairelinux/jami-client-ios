@@ -225,8 +225,8 @@ extension UIImage {
         return newSize
     }
 
-    func resizeImageWith(newSize: CGSize) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(newSize, true, 0)
+    func resizeImageWith(newSize: CGSize, opaque: Bool = true) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(newSize, opaque, 0)
         draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

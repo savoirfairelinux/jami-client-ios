@@ -682,7 +682,7 @@ extension SmartlistViewController {
     // MARK: - Action creation functions
 
     private var configuration: UIImage.SymbolConfiguration {
-        return UIImage.SymbolConfiguration(pointSize: 40, weight: .regular, scale: .large)
+        return UIImage.SymbolConfiguration(scale: .medium)
     }
 
     private func createSwarmAction() -> UIAction {
@@ -721,7 +721,7 @@ extension SmartlistViewController {
     }
 
     private func aboutJamiAction() -> UIAction {
-        let image = UIImage(asset: Asset.jamiIcon)
+        let image = UIImage(asset: Asset.jamiIcon)?.resizeImageWith(newSize: CGSize(width: 22, height: 22), opaque: false)
         return UIAction(title: L10n.Smartlist.aboutJami, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { _ in
             SharedActionsPresenter.showAboutJamiAlert(onViewController: self)
         }
