@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f9ed2b_10225b86",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-26T13:55:20Z",
+      "side": 1,
+      "message": "I think we should just use systemBackground, because all other view uses systemBackground.",
+      "revId": "a9d696cd0c11b64aa5e44925216a0f82bcccbe3a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39bf5f80_ff66677a",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-26T13:55:20Z",
+      "side": 1,
+      "message": "rightButton going out of table",
+      "revId": "a9d696cd0c11b64aa5e44925216a0f82bcccbe3a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d41b02bf_0cd27e1e",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-26T13:55:20Z",
+      "side": 1,
+      "message": "do we need this part for checking header? We should not have empty header",
+      "revId": "a9d696cd0c11b64aa5e44925216a0f82bcccbe3a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34c95218_15aa3060",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-10-26T13:55:20Z",
+      "side": 1,
+      "message": "we do not need a separate section for removeAccountSettings. it should be added to otherSettings",
+      "revId": "a9d696cd0c11b64aa5e44925216a0f82bcccbe3a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
