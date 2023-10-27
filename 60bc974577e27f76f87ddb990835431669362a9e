@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "708a39b8_16d4e8dd",
+        "filename": "Ring/Ring/EditProfileViewModel.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-27T19:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db4ed9d5_9adafbc5",
+      "revId": "60bc974577e27f76f87ddb990835431669362a9e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ce32b72_cf3f3125",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-26T14:40:46Z",
       "side": 1,
       "message": "it could be refactored so defaultJamiAvatarFor is called only once. it will prevent possible errors if at some point parameters will be changed.",
+      "revId": "60bc974577e27f76f87ddb990835431669362a9e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c333e7f_135466ea",
+        "filename": "Ring/Ring/EditProfileViewModel.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-27T19:22:30Z",
+      "side": 1,
+      "message": "Could you please explain more what should I do about it?",
+      "parentUuid": "7ce32b72_cf3f3125",
       "revId": "60bc974577e27f76f87ddb990835431669362a9e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
