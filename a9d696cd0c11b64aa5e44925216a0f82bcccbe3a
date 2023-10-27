@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa38b90e_a83b33cc",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-27T19:35:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6f9ed2b_10225b86",
+      "revId": "a9d696cd0c11b64aa5e44925216a0f82bcccbe3a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39bf5f80_ff66677a",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd83bda6_2e05bc16",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-27T19:35:28Z",
+      "side": 1,
+      "message": "It is for remove account header which is empty",
+      "parentUuid": "d41b02bf_0cd27e1e",
+      "revId": "a9d696cd0c11b64aa5e44925216a0f82bcccbe3a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34c95218_15aa3060",
         "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
         "patchSetId": 8
@@ -65,6 +101,24 @@
       "writtenOn": "2023-10-26T13:55:20Z",
       "side": 1,
       "message": "we do not need a separate section for removeAccountSettings. it should be added to otherSettings",
+      "revId": "a9d696cd0c11b64aa5e44925216a0f82bcccbe3a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9488182f_99878172",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewModel.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-27T19:35:28Z",
+      "side": 1,
+      "message": "If we add it at the end of the other settings section it can\u0027t be with clear background like design because the section group apply the round corners to first and last cells. Should I still add it there?",
+      "parentUuid": "34c95218_15aa3060",
       "revId": "a9d696cd0c11b64aa5e44925216a0f82bcccbe3a",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }

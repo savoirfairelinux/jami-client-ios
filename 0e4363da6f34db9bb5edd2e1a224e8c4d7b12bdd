@@ -16,6 +16,24 @@
       "message": "This will affect all view controllers. Color for one view controller should be changed in viewWillAppear and reverted back in viewWillDissapear",
       "revId": "0e4363da6f34db9bb5edd2e1a224e8c4d7b12bdd",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb598db0_df3c6733",
+        "filename": "Ring/Ring/Extensions/UIViewController+Ring.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-10-27T19:35:28Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "11b7a4e6_a076553c",
+      "revId": "0e4363da6f34db9bb5edd2e1a224e8c4d7b12bdd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
