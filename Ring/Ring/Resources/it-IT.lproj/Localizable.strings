@@ -306,7 +306,7 @@
 "account.enableAccount" = "Abilita account";
 "account.statusOnline" = "Connesso";
 "account.statusOffline" = "Disconnesso";
-"account.statusConnecting" = "Collegamento";
+"account.statusConnecting" = "Connessione in corso";
 "account.statusUnknown" = "Sconosciuto";
 "account.statusConnectionerror" = "Errore di connessione";
 "account.needMigration" = "l'account deve essere migrato";
