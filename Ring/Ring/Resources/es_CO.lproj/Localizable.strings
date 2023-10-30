@@ -75,7 +75,7 @@
 "swarm.addMember" = "Añadir Miembro";
 "swarm.confirmLeaveSwarm" = "¿Está seguro de querer abandonar este enjambre?";
 "swarm.Leave" = "Abandonar";
-"swarm.newSwarm" = "New swarm";
+"swarm.newSwarm" = "Nuevo enjambre";
 // Smartlist
 "smartlist.yesterday" = "Ayer";
 "smartlist.results" = "Directorio Público";
@@ -92,8 +92,8 @@
 "smartlist.selectOneNumber" = "Seleccioná uno de los números";
 "smartlist.invitations" = "Invitaciones";
 "smartlist.aboutJami" = "Acerca de Jami";
-"smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.inviteFriends" = "Invitar amigos";
+"smartlist.accounts" = "Lista de cuentas";
 
 //Conversation
 "conversation.messagePlaceholder" = "Escribir mensaje a";
@@ -156,8 +156,8 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Asociación de la cuenta";
 "linkToAccount.linkButtonTitle" = "Vincular";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Enlazar dispositivo";
+"linkToAccount.linkDeviceMessage" = "Elija \"Enlazar un nuevo dispositivo\" desde otra aplicación Jami para mostrar el código QR o el PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Escriba el PIN";
 "linkToAccount.explanationPinMessage" = "Para generar el código PIN, vaya a la configuración de la cuenta en el dispositivo que contiene la cuenta que dese utilizar. En la configuración del dispositivo seleccione \"Conectar otro dispositivo a esta cuenta\". Recibirá el PIN necesario para completar este formulario. Este será válido durante 10 minutos.";
