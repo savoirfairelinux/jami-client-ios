@@ -187,17 +187,10 @@ class ConversationViewModel: Stateable, ViewModel {
                     .disposed(by: self.disposeBag)
             } else {
                 let filterParicipants = conversation.value.getParticipants()
-                if let contact = self.contactsService.contact(withHash: filterParicipants.first?.jamiId ?? "") {
-                    if let profile = self.contactsService.getProfile(uri: "ring:" + (filterParicipants.first?.jamiId ?? ""), accountId: self.conversation.value.accountId),
-                       let alias = profile.alias, let photo = profile.photo {
-                        if !alias.isEmpty {
-                            self.displayName.accept(alias)
-                        }
-                        if !photo.isEmpty {
-                            let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? // {
-                            self.profileImageData.accept(data)
-                        }
-                    }
+                if let participantId = filterParicipants.first?.jamiId,
+                   let contact = self.contactsService.contact(withHash: participantId) {
+                    self.subscribeNonSwarmProfiles(uri: "ring:" + participantId,
+                                                   accountId: self.conversation.value.accountId)
                     if let contactUserName = contact.userName {
                         self.userName.accept(contactUserName)
                     } else if self.userName.value.isEmpty {
@@ -227,6 +220,25 @@ class ConversationViewModel: Stateable, ViewModel {
             .subscribe { [weak self] synchronizing in
                 guard let self = self else { return }
                 self.synchronizing.accept(synchronizing)
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeNonSwarmProfiles(uri: String, accountId: String) {
+        self.profileService
+            .getProfile(uri: uri, createIfNotexists: false, accountId: accountId)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe { profile in
+                if let alias = profile.alias, let photo = profile.photo {
+                    if !alias.isEmpty {
+                        self.displayName.accept(alias)
+                    }
+                    if !photo.isEmpty {
+                        let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? // {
+                        self.profileImageData.accept(data)
+                    }
+                }
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
