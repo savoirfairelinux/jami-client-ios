@@ -69,6 +69,24 @@
       "parentUuid": "7ce32b72_cf3f3125",
       "revId": "60bc974577e27f76f87ddb990835431669362a9e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fae31bf4_11f65110",
+        "filename": "Ring/Ring/EditProfileViewModel.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-11-02T04:10:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c333e7f_135466ea",
+      "revId": "60bc974577e27f76f87ddb990835431669362a9e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
