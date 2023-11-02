@@ -35,6 +35,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2086ed4e_d2653237",
+        "filename": "Ring/Ring/EditProfileViewModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-11-02T14:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7ad7054_b4f03ede",
+      "revId": "e771c953bbb98d67478bc1af9e1945620f52d1c0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf89c932_2a0320f3",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-11-02T13:46:51Z",
       "side": 1,
       "message": "define constants that is used in UIImage.defaultJamiAvatarFor in advance, this way when UIImage.defaultJamiAvatarFor called multiple times they will be the same",
+      "revId": "e771c953bbb98d67478bc1af9e1945620f52d1c0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7291f171_799b6de1",
+        "filename": "Ring/Ring/EditProfileViewModel.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 977
+      },
+      "writtenOn": "2023-11-02T14:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf89c932_2a0320f3",
       "revId": "e771c953bbb98d67478bc1af9e1945620f52d1c0",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
