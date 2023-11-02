@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e776e6_1999e1f6",
+        "filename": "Ring/Ring/EditProfileViewModel.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-11-02T14:31:04Z",
+      "side": 1,
+      "message": "The space between the avatar and the settings table seems larger than intended.",
+      "revId": "efa93b5f3dd78157a81d27356ce2a4f2dbe8ef3a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
