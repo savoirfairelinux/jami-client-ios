@@ -156,13 +156,13 @@ extension UIViewController {
             .disposed(by: disposeBag)
     }
 
-    func configureNavigationBar(isTransparent: Bool = false) {
+    func configureNavigationBar(isTransparent: Bool = false, backgroundColor: UIColor = .systemBackground) {
         let appearance = UINavigationBarAppearance()
         if isTransparent {
             appearance.configureWithTransparentBackground()
         } else {
             appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor.systemBackground
+            appearance.backgroundColor = backgroundColor
         }
 
         // Explicitly set shadow properties to none

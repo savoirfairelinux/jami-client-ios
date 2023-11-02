@@ -4,6 +4,7 @@
  *  Author: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
+ *  Author: Alireza Toghiani Khorasgani <alireza.toghiani@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -47,15 +48,14 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     private let accountStateCell = "accountStateCell"
     var loadingViewPresenter = LoadingViewPresenter()
 
-    // MARK: - functions
+    // MARK: - functio
     override func viewDidLoad() {
-        self.view.backgroundColor = UIColor.jamiBackgroundColor
-        self.settingsTable.backgroundColor = UIColor.jamiBackgroundColor
+        self.view.backgroundColor = .secondarySystemBackground
+        setupTableView()
         self.addHeaderView()
         super.viewDidLoad()
         self.applyL10n()
         self.configureBindings()
-        self.configureNavigationBar()
         self.calculateSipCredentialsMargin()
         self.calculateConnectivityMargin()
         self.adaptTableToKeyboardState(for: self.settingsTable,
@@ -79,8 +79,22 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar
-            .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium),
-                                    NSAttributedString.Key.foregroundColor: UIColor.jamiLabelColor]
+            .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium)]
+        self.configureNavigationBar(backgroundColor: .secondarySystemBackground)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.configureNavigationBar()
+    }
+
+    func setupTableView() {
+        self.settingsTable.backgroundColor = .secondarySystemBackground
+        self.settingsTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.settingsTable.alwaysBounceHorizontal = false
+        if #available(iOS 15.0, *) {
+            self.settingsTable.sectionHeaderTopPadding = 0
+        }
     }
 
     func applyL10n() {
@@ -98,7 +112,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             supportEditProfile()
             return
         }
-        headerView.backgroundColor = UIColor.jamiBackgroundColor
+        headerView.backgroundColor = .secondarySystemBackground
         self.stretchyHeader = headerView
         let point = CGPoint(x: 0, y: 120)
         self.stretchyHeader.frame.origin = point
@@ -274,9 +288,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 switch dataSource[indexPath] {
                 case .autoRegistration:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.autoRegistration
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -296,10 +310,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         })
                         .disposed(by: cell.disposeBag)
                     return cell
-
                 case .device(let device):
                     let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeviceCell.self)
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.deviceIdLabel.text = device.deviceId
                     cell.deviceIdLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
                     cell.deviceIdLabel.sizeToFit()
@@ -317,17 +329,15 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .disposed(by: cell.disposeBag)
                     cell.sizeToFit()
                     return cell
-
                 case .linkNew:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.linkDeviceTitle
-                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
                     cell.selectionStyle = .none
                     cell.sizeToFit()
                     let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    let size = CGSize(width: self.settingsTable.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
                     button.rx.tap
@@ -335,8 +345,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                             self?.viewModel.linkDevice()
                         })
                         .disposed(by: cell.disposeBag)
+                    cell.backgroundColor = .clear
+                    cell.contentView.backgroundColor = .systemBackground
                     return cell
-
                 case .blockedList:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.AccountPage.blockedContacts
@@ -345,8 +356,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     cell.selectionStyle = .none
                     cell.sizeToFit()
                     let button = UIButton.init(frame: cell.frame)
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
-                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    let size = CGSize(width: self.settingsTable.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
                     button.rx.tap
@@ -355,23 +365,15 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         })
                         .disposed(by: cell.disposeBag)
                     return cell
-                case .sectionHeader(let title):
-                    let cell = UITableViewCell()
-                    cell.textLabel?.text = title
-                    cell.backgroundColor = UIColor.jamiBackgroundSecondaryColor
-                    cell.selectionStyle = .none
-                    return cell
-
                 case .removeAccount:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.Global.removeAccount
-                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textColor = UIColor.systemRed
                     cell.textLabel?.textAlignment = .center
                     cell.selectionStyle = .none
                     cell.sizeToFit()
                     let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    let size = CGSize(width: self.settingsTable.frame.width, height: 25)
                     button.frame.size = size
                     cell.addSubview(button)
                     button.rx.tap
@@ -379,6 +381,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                             self?.confirmRemoveAccountAlert()
                         })
                         .disposed(by: cell.disposeBag)
+                    cell.backgroundColor = .clear
+                    cell.contentView.backgroundColor = .clear
                     return cell
                 case .jamiUserName(let label):
                     if !label.isEmpty {
@@ -388,12 +392,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     }
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.Global.registerAUsername
-                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
                     cell.sizeToFit()
                     cell.selectionStyle = .none
                     let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    let size = CGSize(width: self.settingsTable.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
                     button.rx.tap
@@ -408,22 +412,20 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                                                 style: .footnote)
                 case .ordinary(let label):
                     let cell = UITableViewCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = label
                     cell.selectionStyle = .none
                     return cell
                 case .shareAccountDetails:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
-                    cell.textLabel?.text = L10n.AccountPage.shareAccountDetails
-                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.text = L10n.AccountPage.inviteFriends
+                    cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
                     cell.sizeToFit()
                     cell.selectionStyle = .none
                     let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    let size = CGSize(width: cell.contentView.bounds.width, height: button.frame.height)
                     button.frame.size = size
-                    cell.addSubview(button)
+                    cell.contentView.addSubview(button)
                     button.rx.tap
                         .subscribe(onNext: { [weak self] in
                             self?.shareAccountInfo()
@@ -432,16 +434,15 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .changePassword:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     let title = self.viewModel.hasPassword() ?
                         L10n.AccountPage.changePassword : L10n.AccountPage.createPassword
                     cell.textLabel?.text = title
-                    cell.textLabel?.textColor = UIColor.jamiMain
+                    cell.textLabel?.textColor = UIColor.jamiButtonDark
                     cell.textLabel?.textAlignment = .center
                     cell.sizeToFit()
                     cell.selectionStyle = .none
                     let button = UIButton.init(frame: cell.frame)
-                    let size = CGSize(width: self.view.frame.width, height: button.frame.height)
+                    let size = CGSize(width: self.settingsTable.frame.width, height: button.frame.height)
                     button.frame.size = size
                     cell.addSubview(button)
                     button.rx.tap
@@ -452,9 +453,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .notifications:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.enableNotifications
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -475,9 +476,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .peerDiscovery:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.peerDiscovery
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -540,10 +541,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .boothMode:
                     let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.enableBoothMode
                     cell.textLabel?.sizeToFit()
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -575,9 +576,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .enableAccount:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.Account.enableAccount
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -600,9 +601,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .turnEnabled:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.turnEnabled
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -624,9 +625,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .upnpEnabled:
                     let cell = DisposableCell()
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
                     cell.textLabel?.text = L10n.AccountPage.upnpEnabled
                     let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
                     cell.selectionStyle = .none
                     cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
                     cell.accessoryView = switchView
@@ -670,6 +671,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             }
 
         let settingsItemDataSource = RxTableViewSectionedReloadDataSource<SettingsSection>(configureCell: configureCell)
+        settingsItemDataSource.titleForHeaderInSection = { dataSource, sectionIndex in
+            return dataSource[sectionIndex].title
+        }
         self.viewModel.settings
             .bind(to: self.settingsTable.rx.items(dataSource: settingsItemDataSource))
             .disposed(by: disposeBag)
@@ -720,7 +724,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     func configureTurnCell(cellType: SettingsSection.SectionRow,
                            value: String) -> UITableViewCell {
         let cell = DisposableCell(style: .value1, reuseIdentifier: accountStateCell)
-        cell.backgroundColor = UIColor.jamiBackgroundColor
         cell.selectionStyle = .none
         let textField = UITextField()
         textField.tag = self.sipCredentialsTAG
@@ -772,15 +775,15 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.detailTextLabel?.textColor = UIColor.clear
 
         var frame = CGRect(x: self.connectivityMargin, y: 0,
-                           width: self.view.frame.width - self.connectivityMargin,
+                           width: self.settingsTable.frame.width - self.connectivityMargin,
                            height: cell.frame.height)
         if cell.isRightToLeft {
             frame = CGRect(x: 0, y: 0,
-                           width: self.view.frame.width - self.connectivityMargin - 10,
+                           width: self.settingsTable.frame.width - self.connectivityMargin - 10,
                            height: cell.frame.height)
         }
 
-        if self.view.frame.width - self.connectivityMargin < textField.frame.size.width {
+        if self.settingsTable.frame.width - self.connectivityMargin < textField.frame.size.width {
             let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
             let size = textField.frame.size
             frame.origin = origin
@@ -800,15 +803,14 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     func configureSipCredentialsCell(cellType: SettingsSection.SectionRow,
                                      value: String) -> UITableViewCell {
         let cell = DisposableCell(style: .value1, reuseIdentifier: sipAccountCredentialsCell)
-        cell.backgroundColor = UIColor.jamiBackgroundColor
         cell.selectionStyle = .none
-        let text = UITextField()
-        text.tag = self.sipCredentialsTAG
-        text.font = UIFont.preferredFont(forTextStyle: .callout)
-        text.returnKeyType = .done
-        text.text = value
-        text.sizeToFit()
-        text.rx.controlEvent(.editingDidEndOnExit)
+        let textField = UITextField()
+        textField.tag = self.sipCredentialsTAG
+        textField.font = UIFont.preferredFont(forTextStyle: .callout)
+        textField.returnKeyType = .done
+        textField.text = value
+        textField.sizeToFit()
+        textField.rx.controlEvent(.editingDidEndOnExit)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.updateSipSettings()
@@ -816,17 +818,17 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             .disposed(by: cell.disposeBag)
         switch cellType {
         case .port:
-            text.rx.text.orEmpty.distinctUntilChanged()
+            textField.rx.text.orEmpty.distinctUntilChanged()
                 .bind(to: self.viewModel.port)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.Account.port
         case .proxyServer:
-            text.rx.text.orEmpty.distinctUntilChanged()
+            textField.rx.text.orEmpty.distinctUntilChanged()
                 .bind(to: self.viewModel.proxyServer)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.Account.proxyServer
         case .sipServer:
-            text.rx.text.orEmpty.distinctUntilChanged()
+            textField.rx.text.orEmpty.distinctUntilChanged()
                 .bind(to: self.viewModel.sipServer)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.Account.sipServer
@@ -835,13 +837,13 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             // show password button
             let rightButton = UIButton(type: .custom)
             var insets = rightButton.contentEdgeInsets
-            insets.right = 20.0
+            insets.right = 60
             rightButton.contentEdgeInsets = insets
             self.viewModel.secureTextEntry
                 .asObservable()
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { (secure) in
-                    text.isSecureTextEntry = secure
+                    textField.isSecureTextEntry = secure
                     if secure {
                         rightButton.setImage(UIImage(asset: Asset.icHideInput),
                                              for: .normal)
@@ -852,15 +854,15 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 })
                 .disposed(by: cell.disposeBag)
             rightButton.tintColor = UIColor.darkGray
-            text.rightViewMode = .always
-            text.rightView = rightButton
+            textField.rightViewMode = .always
+            textField.rightView = rightButton
             rightButton.rx.tap
                 .subscribe(onNext: { [weak self] _ in
                     self?.viewModel.secureTextEntry
-                        .onNext(!text.isSecureTextEntry)
+                        .onNext(!textField.isSecureTextEntry)
                 })
                 .disposed(by: cell.disposeBag)
-            text.rx.text.orEmpty.distinctUntilChanged()
+            textField.rx.text.orEmpty.distinctUntilChanged()
                 .bind { [weak self, weak rightButton] newText in
                     self?.viewModel.sipPassword.accept(newText)
                     rightButton?.isHidden = newText.isEmpty
@@ -868,7 +870,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 }
                 .disposed(by: cell.disposeBag)
         case .sipUserName:
-            text.rx.text.orEmpty.distinctUntilChanged()
+            textField.rx.text.orEmpty.distinctUntilChanged()
                 .bind(to: self.viewModel.sipUsername)
                 .disposed(by: cell.disposeBag)
             cell.textLabel?.text = L10n.Account.sipUsername
@@ -880,11 +882,11 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
         cell.detailTextLabel?.textColor = UIColor.clear
         var frame = CGRect(x: self.sipCredentialsMargin, y: 0,
-                           width: self.view.frame.width - self.sipCredentialsMargin,
+                           width: self.settingsTable.frame.width - self.sipCredentialsMargin,
                            height: cell.frame.height)
-        if self.view.frame.width - self.sipCredentialsMargin < text.frame.size.width {
+        if self.settingsTable.frame.width - self.sipCredentialsMargin < textField.frame.size.width {
             let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
-            let size = text.frame.size
+            let size = textField.frame.size
             frame.origin = origin
             frame.size = size
             cell.detailTextLabel?.text = value
@@ -892,8 +894,8 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             cell.detailTextLabel?.text = ""
         }
         cell.detailTextLabel?.sizeToFit()
-        text.frame = frame
-        cell.contentView.addSubview(text)
+        textField.frame = frame
+        cell.contentView.addSubview(textField)
         cell.sizeToFit()
         return cell
     }
@@ -1242,6 +1244,25 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 }
 
 extension MeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if let dataSourceProxy = tableView.dataSource as? RxTableViewDataSourceProxy,
+           let actualDataSource = dataSourceProxy.forwardToDelegate() as? RxTableViewSectionedReloadDataSource<SettingsSection> {
+            let headerTitle = actualDataSource[section].title
+            if headerTitle == nil || headerTitle == .some("") {
+                return 10
+            }
+        }
+        return 50
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let navigationHeight = self.navigationController?.navigationBar.bounds.height
         var size = self.view.bounds.size

@@ -174,13 +174,19 @@ extension UIView {
     }
 
     func roundTopCorners(radius: CGFloat) {
-        //        DispatchQueue.main.async { [weak self] in
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         mask.path = path.cgPath
-        mask.frame = bounds
+        mask.frame = self.bounds
         layer.mask = mask
-        //        }
+    }
+
+    func roundAllCorners(radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.bottomLeft, .bottomRight, .topRight, .topLeft], cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        mask.frame = self.bounds
+        layer.mask = mask
     }
 
     func removeCorners() {
