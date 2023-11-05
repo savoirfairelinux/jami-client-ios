@@ -78,7 +78,7 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
                         if let appCoordinator = self.parentCoordinator as? AppCoordinator {
                             appCoordinator.startWithoutLoading()
                             appCoordinator.removeChildCoordinator(childCoordinator: self)
-                            rootViewController.presentedViewController?.dismiss(animated: true) {
+                            self.rootViewController.presentedViewController?.dismiss(animated: true) {
                                 self.rootViewController.dismiss(animated: false)
                             }
                         }
