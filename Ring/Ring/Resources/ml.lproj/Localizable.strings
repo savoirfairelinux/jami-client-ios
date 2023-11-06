@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "ഉപകരണങ്ങൾ";
 "accountPage.settingsHeader" = "ക്രമീകരണങ്ങൾ";
+"accountPage.notificationsHeader" = "അറിയിപ്പുകൾ";
 "accountPage.usernameNotRegistered" = "ഉപയോക്തൃനാമംഃ രജിസ്റ്റർ ചെയ്തിട്ടില്ല";
 "accountPage.credentialsHeader" = "അക്കൌണ്ട് വിശദാംശങ്ങൾ";
 "accountPage.blockedContacts" = "തടഞ്ഞ കോൺടാക്റ്റുകൾ";
@@ -260,7 +261,7 @@
 "accountPage.other" = "മറ്റു";
 "accountPage.removeAccountMessage" = "\"അവള് നീക്കം ചെയ്യുക\" എന്നതിൽ ക്ലിക്ക് ചെയ്താല് ഈ ഉപകരണത്തിലെ ഈ അക്കൌണ്ട് നീക്കം ചെയ്യപ്പെടും! ഈ പ്രവർത്തനം തിരുത്താനാവില്ല. കൂടാതെ, നിങ്ങളുടെ രജിസ്റ്റർ ചെയ്ത പേര് നഷ്ടപ്പെടാം.";
 "accountPage.removeAccountButton" = "നീക്കം ചെയ്യുക";
-"accountPage.shareAccountDetails" = "പങ്കിടൽ അക്കൌണ്ട് വിശദാംശങ്ങൾ";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ജാമി എന്നിവിടങ്ങളിൽ എന്നെ ബന്ധപ്പെടുക!";
 "accountPage.contactMeOnJamiContant" = "ജാമി വിതരണം ചെയ്ത ആശയവിനിമയ പ്ലാറ്റ്ഫോമിലെ \"%s\" ഉപയോഗിച്ച് എന്നെ ബന്ധപ്പെടുകഃ https://jami.net";
 "accountPage.passwordPlaceholder" = "അക്കൌണ്ട് പാസ്വേഡ് നൽകുക";

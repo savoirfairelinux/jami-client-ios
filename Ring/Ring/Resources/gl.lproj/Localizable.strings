@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Axuste";
+"accountPage.notificationsHeader" = "Notificacións";
 "accountPage.usernameNotRegistered" = "Nome de usuario: non rexistrado";
 "accountPage.credentialsHeader" = "Detalles da conta";
 "accountPage.blockedContacts" = "Contactos bloqueados";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Outros";
 "accountPage.removeAccountMessage" = "Ao facer clic en \"Clicar\" eliminarás esta conta neste dispositivo! Esta acción non se pode revocar.";
 "accountPage.removeAccountButton" = "Retirada";
-"accountPage.shareAccountDetails" = "Detalles de conta de participación";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Contacta comigo en Jami!";
 "accountPage.contactMeOnJamiContant" = "Contacte comigo usando \"%s\" na plataforma de comunicación distribuída de Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Escribe o contrasinal da conta";

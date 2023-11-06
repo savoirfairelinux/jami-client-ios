@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "장치";
 "accountPage.settingsHeader" = "설정";
+"accountPage.notificationsHeader" = "통지";
 "accountPage.usernameNotRegistered" = "사용자 이름: 등록되지 않은";
 "accountPage.credentialsHeader" = "계좌 세부 사항";
 "accountPage.blockedContacts" = "차단된 연락처";
@@ -260,7 +261,7 @@
 "accountPage.other" = "다른";
 "accountPage.removeAccountMessage" = "\"Remove\"를 클릭하면 이 장치에서 이 계정을 삭제 할 수 있습니다! 이 동작은 취소 할 수 없습니다. 또한 등록된 이름도 손실 될 수 있습니다.";
 "accountPage.removeAccountButton" = "제거";
-"accountPage.shareAccountDetails" = "공유 계정 세부사항";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "자미에 연락해!";
 "accountPage.contactMeOnJamiContant" = "Jami 유통 통신 플랫폼에서 \"%s\"를 사용하여 연락하십시오: https://jami.net";
 "accountPage.passwordPlaceholder" = "계정 비밀번호를 입력";

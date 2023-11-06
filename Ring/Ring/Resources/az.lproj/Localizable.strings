@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "آلاتلار";
 "accountPage.settingsHeader" = "تنظیمات";
+"accountPage.notificationsHeader" = "Notifications";
 "accountPage.usernameNotRegistered" = "آدی: ثبت اولونماييب";
 "accountPage.credentialsHeader" = "حساب بیلگیلری";
 "accountPage.blockedContacts" = "قفل اولونموش تماسلار";
@@ -260,7 +261,7 @@
 "accountPage.other" = "باشقا";
 "accountPage.removeAccountMessage" = "\"احذیر\"اچماقلا بو حسابی بو آلینادا آرادان آپاراجاقسان! بو عملین رد ائدیلمه سی مومکون دئییل.";
 "accountPage.removeAccountButton" = "گؤتور";
-"accountPage.shareAccountDetails" = "بؤلون حساب لار";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "جمي ايله باغلي اول!";
 "accountPage.contactMeOnJamiContant" = "Jami-Distributed Communication Platform-ده \"%s\" ایستیفاده ائدرک منی تماس آلین: https://jami.net";
 "accountPage.passwordPlaceholder" = "حساب رمزونو دن";

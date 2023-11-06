@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "התקנים";
 "accountPage.settingsHeader" = "הגדרות";
+"accountPage.notificationsHeader" = "הודעות";
 "accountPage.usernameNotRegistered" = "שם משתמש: לא רשום";
 "accountPage.credentialsHeader" = "פרטים על החשבון";
 "accountPage.blockedContacts" = "אנשי קשר חסומים";
@@ -260,7 +261,7 @@
 "accountPage.other" = "אחר";
 "accountPage.removeAccountMessage" = "על ידי לחיצה \"מחק\" אתה ימחק את החשבון הזה על המכשיר הזה! פעולה זו לא יכולה להיות מבוטלת.";
 "accountPage.removeAccountButton" = "הסר";
-"accountPage.shareAccountDetails" = "פרטים על חשבון שיתוף";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "התקשר אליי על ג'מי!";
 "accountPage.contactMeOnJamiContant" = "צור איתי קשר באמצעות \"%s\" על פלטפורמת התקשורת המوزعة של ג'מי: https://jami.net";
 "accountPage.passwordPlaceholder" = "הכניסה סיסמה לחשבון";

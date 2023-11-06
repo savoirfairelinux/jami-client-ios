@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Eszközök";
 "accountPage.settingsHeader" = "Beállítások";
+"accountPage.notificationsHeader" = "Értesítések";
 "accountPage.usernameNotRegistered" = "felhasználónév: nincs bejegyzett";
 "accountPage.credentialsHeader" = "Fiók részletek";
 "accountPage.blockedContacts" = "Letiltott kapcsolatok";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Másik";
 "accountPage.removeAccountMessage" = "Szeretné eltávolítani ezt a fiókot ezen az eszközön? Óvatosan, ez eltávolítja a fiókot és a regisztrált neve elveszhet. Ez nem vonható vissza.";
 "accountPage.removeAccountButton" = "Eltávolítás";
-"accountPage.shareAccountDetails" = "Fiók részletek megosztása";
+"accountPage.inviteFriends" = "Barátok és ismerősök meghívása";
 "accountPage.contactMeOnJamiTitle" = "Lépjen kapcsolatba velem a Jami-n!";
 "accountPage.contactMeOnJamiContant" = "Lépjen velem kapcsolatba a(z) „%s” használatával, a Jami elosztott kommunikációs platformon: https://jami.net";
 "accountPage.passwordPlaceholder" = "Adja meg a fiók jelszavát";
@@ -285,7 +286,7 @@
 "accountPage.autoRegistration" = "Önműködő bejegyzése a lejárat után";
 "accountPage.connectivityHeader" = "Kapcsolódás";
 "accountPage.turnEnabled" = "TURN-kiszolgáló engedélyezése";
-"accountPage.turnServer" = "TURN cím";
+"accountPage.turnServer" = "TURN-cím";
 "accountPage.turnUsername" = "TURN felhasználónév";
 "accountPage.turnPassword" = "TURN jelszó";
 "accountPage.turnRealm" = "TURN tartomány";

@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "ڤرودوک";
 "accountPage.settingsHeader" = "سيٽنگون";
+"accountPage.notificationsHeader" = "Notifications";
 "accountPage.usernameNotRegistered" = "نام ڤڠڬونا: تيدق دڤرجواڠن";
 "accountPage.credentialsHeader" = "ڤرچاي ڤڠاجين";
 "accountPage.blockedContacts" = "ڤڠاجين يڠ دڤرچايا?? ي";
@@ -260,7 +261,7 @@
 "accountPage.other" = "ڤڠاجين";
 "accountPage.removeAccountMessage" = "با كليك \"مڠحذف\" تومڤوان اكو ممبيل اكوڠ اين دالم ڤرودوک اين! اين اكشن تيدق دڤرچايا?? ي. جوڬ، نام يڠ دڤرجواڠكن تومڤوان اكوڠ تيدق دڤرچايا?? ي.";
 "accountPage.removeAccountButton" = "ڤرنه دڤرچايا?? ي";
-"accountPage.shareAccountDetails" = "ڤڠاجرن حساب";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "با من دري جامي تماس بگير!";
 "accountPage.contactMeOnJamiContant" = "منچاريکن ساي دڠن مڠݢوناکن \"%s\" دالم ڤرتوبوهن ڤمبلاجرن Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "مڠهادڤي كاسوڠن ايكون";

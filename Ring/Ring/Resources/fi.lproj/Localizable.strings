@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Laitteet";
 "accountPage.settingsHeader" = "Asetukset";
+"accountPage.notificationsHeader" = "Ilmoitukset";
 "accountPage.usernameNotRegistered" = "käyttäjätunnus: ei rekisteröity";
 "accountPage.credentialsHeader" = "Tilin tiedot";
 "accountPage.blockedContacts" = "Estetyt yhteystiedot";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Muu";
 "accountPage.removeAccountMessage" = "Painamalla \"Poista\"-painiketta poistat tämän tilin tästä laitteesta! Tätä toimintoa ei voi kumota. Rekisteröity nimesi voi myös kadota.";
 "accountPage.removeAccountButton" = "Poista";
-"accountPage.shareAccountDetails" = "Jaa tilin tiedot";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Ota minuun yhteyttä Jamilla!";
 "accountPage.contactMeOnJamiContant" = "Ota minuun yhteyttä \"%s\" Jamin hajautetun viestintäalustan avulla:  https://jami.net";
 "accountPage.passwordPlaceholder" = "Syötä käyttäjätunnuksen salasana";

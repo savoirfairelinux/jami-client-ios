@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Ngwaọrụ";
 "accountPage.settingsHeader" = "Ntọala";
+"accountPage.notificationsHeader" = "Nkwupụta";
 "accountPage.usernameNotRegistered" = "aha njirimara: edebanyere ahaghị aha";
 "accountPage.credentialsHeader" = "Ihe ndekọ ego";
 "accountPage.blockedContacts" = "Ndị a na-egbochi";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Ndị ọzọ";
 "accountPage.removeAccountMessage" = "Site na ịpị \"Iwepu\" ị ga-ewepụ akaụntụ a na ngwaọrụ a!";
 "accountPage.removeAccountButton" = "Wepụ";
-"accountPage.shareAccountDetails" = "Akụkọ Akụkọ";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Kpọtụrụ m na Jami!";
 "accountPage.contactMeOnJamiContant" = "Kpọtụrụ m site na iji \"%s\" na usoro nkwukọrịta nke Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Tinye paswọọdụ akaụntụ";

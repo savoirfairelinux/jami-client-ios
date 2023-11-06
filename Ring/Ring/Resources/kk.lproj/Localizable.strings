@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Құрылғылар";
 "accountPage.settingsHeader" = "Параметрлері";
+"accountPage.notificationsHeader" = "Хабарламалар";
 "accountPage.usernameNotRegistered" = "пайдаланушы аты: тіркелмеген";
 "accountPage.credentialsHeader" = "Есепшоттың деректері";
 "accountPage.blockedContacts" = "Ашық контакттар";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Басқа";
 "accountPage.removeAccountMessage" = "\"Арту\" дегенді басу арқылы сіз осы құрылғыдағы осы тіркелгіңізді алып тастайсыз! Бұл әрекетті қайтарып алу мүмкін емес. Сондай-ақ, тіркелген атыңыз жоғалуы мүмкін.";
 "accountPage.removeAccountButton" = "Алып тастау";
-"accountPage.shareAccountDetails" = "Тіркелгі мәліметі";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Jami-де менімен байланысыңыз!";
 "accountPage.contactMeOnJamiContant" = "Jami таратушы байланыс платформасында \"%s\" арқылы маған хабарласыңыз: https://jami.net";
 "accountPage.passwordPlaceholder" = "Тіркелгі паролін келтіріңіз";

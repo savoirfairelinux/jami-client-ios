@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Naprave";
 "accountPage.settingsHeader" = "Nastavitve";
+"accountPage.notificationsHeader" = "Obveščanje";
 "accountPage.usernameNotRegistered" = "uporabniško ime: ni registrirano";
 "accountPage.credentialsHeader" = "Podrobnosti računa";
 "accountPage.blockedContacts" = "Blokirani stiki";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Drugo";
 "accountPage.removeAccountMessage" = "S klikom »Odstrani« boste odstranili račun s te naprave! Tega dejanja ni mogoče razveljaviti. Poleg tega lahko izgubite svoje registrirano ime.";
 "accountPage.removeAccountButton" = "Odstrani";
-"accountPage.shareAccountDetails" = "Deli podrobnosti računa";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Poišči me na Jami-ju!";
 "accountPage.contactMeOnJamiContant" = "Stopi v stik z menoj z uporabo »%s« na razpršeni komunikacijski platformi Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Vnesite geslo računa";

@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Кораллар";
 "accountPage.settingsHeader" = "Калыплар";
+"accountPage.notificationsHeader" = "Билгеләүләр";
 "accountPage.usernameNotRegistered" = "Исем: теркәлмәгән";
 "accountPage.credentialsHeader" = "Хисапның тулылыгы";
 "accountPage.blockedContacts" = "Тотылган контактлар";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Башкалар";
 "accountPage.removeAccountMessage" = "\"Ач\" дигән сылтаманы басыгыз, сез бу җайланмадагы бу хисабын бетерәчәксез! Бу гамәлне кире кайтара алмыйсыз.";
 "accountPage.removeAccountButton" = "Ачтыр";
-"accountPage.shareAccountDetails" = "Аккаунтның мәгълүматлары";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Җәми белән элемтәгә керегез!";
 "accountPage.contactMeOnJamiContant" = "Jami таратылган коммуникация платформасында \"%s\" кулланып, миңа мөрәҗәгать итегез: https://jami.net";
 "accountPage.passwordPlaceholder" = "Хисап номеры шифрен кертегез";

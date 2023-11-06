@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "อุปกรณ์";
 "accountPage.settingsHeader" = "การตั้งค่า";
+"accountPage.notificationsHeader" = "การแจ้งเตือน";
 "accountPage.usernameNotRegistered" = "ชื่อผู้ใช้: ไม่ลงทะเบียน";
 "accountPage.credentialsHeader" = "รายละเอียดบัญชี";
 "accountPage.blockedContacts" = "ผู้ติดต่อที่ถูกบล็อก";
@@ -260,7 +261,7 @@
 "accountPage.other" = "อื่นๆ";
 "accountPage.removeAccountMessage" = "โดยการคลิก \"ลบ\" คุณจะลบบัญชีนี้บนอุปกรณ์นี้! การกระทํานี้ไม่สามารถถอนได้ นอกจากนี้ชื่อที่ลงทะเบียนของคุณก็สามารถหายไปได้";
 "accountPage.removeAccountButton" = "ยกออก";
-"accountPage.shareAccountDetails" = "รายละเอียดบัญชีส่วนร่วม";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ติดต่อฉันใน Jami!";
 "accountPage.contactMeOnJamiContant" = "ติดต่อฉันโดยใช้ \"%s\" บนโครงการสื่อสารกระจายของ Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "กรอกรหัสผ่านบัญชี";

@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Įrenginiai";
 "accountPage.settingsHeader" = "Nustatymai";
+"accountPage.notificationsHeader" = "Pranešimai";
 "accountPage.usernameNotRegistered" = "naudotojo vardas: neregistruotas";
 "accountPage.credentialsHeader" = "Išsamesnė paskyros informacija";
 "accountPage.blockedContacts" = "Užblokuoti adresatai";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Kita";
 "accountPage.removeAccountMessage" = "Spustelėję \"Šalinti\", pašalinsite šią paskyrą šiame įrenginyje! Šio veiksmo negalima bus atšaukti. Be to, galite prarasti savo registruotą vardą.";
 "accountPage.removeAccountButton" = "Šalinti";
-"accountPage.shareAccountDetails" = "Bendrinti informaciją apie paskyrą";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Susisiekite su manimi Džimi!";
 "accountPage.contactMeOnJamiContant" = "Susisiekite su manimi naudojant \"%s\" Džami platintoje komunikacijos platformėje: https://jami.net";
 "accountPage.passwordPlaceholder" = "Įveskite paskyros slaptažodį";

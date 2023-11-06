@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "ಉಪಕರಣಗಳು";
 "accountPage.settingsHeader" = "ಸೆಟ್ಟಿಂಗ್ಗಳು";
+"accountPage.notificationsHeader" = "ಅಧಿಸೂಚನೆಗಳು";
 "accountPage.usernameNotRegistered" = "ಬಳಕೆದಾರ ಹೆಸರುಃ ನೋಂದಾಯಿತವಲ್ಲ";
 "accountPage.credentialsHeader" = "ಖಾತೆ ವಿವರಗಳು";
 "accountPage.blockedContacts" = "ನಿರ್ಬಂಧಿತ ಸಂಪರ್ಕಗಳು";
@@ -260,7 +261,7 @@
 "accountPage.other" = "ಇತರರು";
 "accountPage.removeAccountMessage" = "\"Remove\" ಕ್ಲಿಕ್ ಮಾಡುವುದರ ಮೂಲಕ ನೀವು ಈ ಸಾಧನದಲ್ಲಿ ಈ ಖಾತೆಯನ್ನು ತೆಗೆದುಹಾಕುತ್ತೀರಿ! ಈ ಕ್ರಿಯೆಯನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗುವುದಿಲ್ಲ. ಅಲ್ಲದೆ, ನಿಮ್ಮ ನೋಂದಾಯಿತ ಹೆಸರನ್ನು ಕಳೆದುಕೊಳ್ಳಬಹುದು.";
 "accountPage.removeAccountButton" = "ತೆಗೆದುಹಾಕಿ";
-"accountPage.shareAccountDetails" = "ಹಂಚಿಕೆ ಖಾತೆ ವಿವರಗಳು";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ಜಾಮಿ ಬಗ್ಗೆ ನನ್ನನ್ನು ಸಂಪರ್ಕಿಸಿ!";
 "accountPage.contactMeOnJamiContant" = "ಜಾಮಿ ವಿತರಿಸಿದ ಸಂವಹನ ವೇದಿಕೆಯಲ್ಲಿ \"%s\" ಅನ್ನು ಬಳಸಿಕೊಂಡು ನನ್ನನ್ನು ಸಂಪರ್ಕಿಸಿಃ https://jami.net";
 "accountPage.passwordPlaceholder" = "ಖಾತೆ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";

@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Aparate";
 "accountPage.settingsHeader" = "Reglări";
+"accountPage.notificationsHeader" = "Notificări";
 "accountPage.usernameNotRegistered" = "nume de utilizator: neînscris";
 "accountPage.credentialsHeader" = "Detaliile contului";
 "accountPage.blockedContacts" = "Contacte blocate";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Altele";
 "accountPage.removeAccountMessage" = "Făcînd clic pe „Elimină” vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
 "accountPage.removeAccountButton" = "Elimină";
-"accountPage.shareAccountDetails" = "Distribuie detaliile contului";
+"accountPage.inviteFriends" = "Invită prieteni";
 "accountPage.contactMeOnJamiTitle" = "Contactează-mă pe Jami!";
 "accountPage.contactMeOnJamiContant" = "Contactează-mă folosind „%s” pe platforma distribuită de comunicare Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Introdu parola contului";

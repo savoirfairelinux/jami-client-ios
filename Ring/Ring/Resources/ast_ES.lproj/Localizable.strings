@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Configuración";
+"accountPage.notificationsHeader" = "Notifications";
 "accountPage.usernameNotRegistered" = "Nome d'usuariu: non rexistráu";
 "accountPage.credentialsHeader" = "Detalles de la cuenta";
 "accountPage.blockedContacts" = "Contactos bloqueados";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Altres";
 "accountPage.removeAccountMessage" = "El so nome rexistráu puede perderse.";
 "accountPage.removeAccountButton" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
-"accountPage.shareAccountDetails" = "Compartir detalles de cuenta";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "¡Contacta-me en Jami!";
 "accountPage.contactMeOnJamiContant" = "La so primer apaición foi nel estrenu de la so cuarta temporada en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, y en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, y en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en Hollywood, en The Hollywood Revival, en The Hollywood Revival, en The Hollywood Revival, en The Hollywood Revival, en The CW.";
 "accountPage.passwordPlaceholder" = "Entra contraseña de la cuenta";

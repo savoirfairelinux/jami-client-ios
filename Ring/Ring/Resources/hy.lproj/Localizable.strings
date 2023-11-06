@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "սարքավորումներ";
 "accountPage.settingsHeader" = "Կարգավորումներ";
+"accountPage.notificationsHeader" = "Հրավերներ";
 "accountPage.usernameNotRegistered" = "օգտագործողի անունը. գրանցված չէ";
 "accountPage.credentialsHeader" = "Հաշվետու մանրամասներ";
 "accountPage.blockedContacts" = "Պակված շփումներ";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Մյուսներ";
 "accountPage.removeAccountMessage" = "\"Վերահղել\" կոճակը կլուծի այս հաշիվը այս սարքում! Այս գործողությունը չի կարող չեղարկվել:";
 "accountPage.removeAccountButton" = "Հեռացնել";
-"accountPage.shareAccountDetails" = "Գործակցման հաշիվների մանրամասներ";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Կապվեք ինձ հետ Ջամիի մասին:";
 "accountPage.contactMeOnJamiContant" = "Կապվեք ինձ հետ՝ օգտագործելով \"%s\" Jami- ի տարածված հաղորդակցման հարթակում. https://jami.net";
 "accountPage.passwordPlaceholder" = "Գրեք հաշիվի գաղտնաբառը";

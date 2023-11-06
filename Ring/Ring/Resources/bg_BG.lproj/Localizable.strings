@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
 "accountPage.settingsHeader" = "Настройки";
+"accountPage.notificationsHeader" = "Notifications";
 "accountPage.usernameNotRegistered" = "потребителско име: не е регистрирано";
 "accountPage.credentialsHeader" = "Подробности за профила";
 "accountPage.blockedContacts" = "Блокирани контакти";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Други";
 "accountPage.removeAccountMessage" = "Ако изберете „Премахване“, ще премахнете този профил на това устройство! Това действие не може да бъде отменено. Също така, регистрираното ви име може да бъде загубено.";
 "accountPage.removeAccountButton" = "Премахване";
-"accountPage.shareAccountDetails" = "Детайли за споделяне на сметката";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Свържете се с мен по Джами!";
 "accountPage.contactMeOnJamiContant" = "Свържете се с мен с помощта на \"%s\" на разпространените комуникационни платформи на Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Въведете паролата на профила";

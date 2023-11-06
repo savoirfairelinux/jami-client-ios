@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Zariadenia";
 "accountPage.settingsHeader" = "Nastavenia";
+"accountPage.notificationsHeader" = "Upozornenia";
 "accountPage.usernameNotRegistered" = "používateľské meno: nezaregistrované";
 "accountPage.credentialsHeader" = "Podrobnosti účtu";
 "accountPage.blockedContacts" = "Blokované kontakty";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Iné";
 "accountPage.removeAccountMessage" = "Kliknutím na \"Odstrániť\" odstránite tento účet z tohto zariadenia! Táto operácia nemôže byť vrátená. Vaše registrované meno môže byť stratené.";
 "accountPage.removeAccountButton" = "Odstrániť";
-"accountPage.shareAccountDetails" = "Zdieľať podrobnosti účtu";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Kontaktujte ma na Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontaktujete ma pomocou \"%s\" na distribuovanej komunikačnej platforme Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Zadajte heslo k účtu";

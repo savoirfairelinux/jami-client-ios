@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Perangkat";
 "accountPage.settingsHeader" = "Setelan";
+"accountPage.notificationsHeader" = "Notifikasi";
 "accountPage.usernameNotRegistered" = "Nama pengguna: tidak terdaftar";
 "accountPage.credentialsHeader" = "Detail Akun";
 "accountPage.blockedContacts" = "Kontak yang diblokir";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Lainnya";
 "accountPage.removeAccountMessage" = "Dengan mengklik \"Hapus\", Anda akan menghapus akun ini di perangkat ini! Tindakan ini tidak bisa dibatalkan. Selain itu, nama terdaftar Anda bisa hilang.";
 "accountPage.removeAccountButton" = "Hapus";
-"accountPage.shareAccountDetails" = "Bagikan detail akun";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Hubungi saya di Jami!";
 "accountPage.contactMeOnJamiContant" = "Hubungi saya menggunakan \"%s\" pada platform komunikasi terdistribusi Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Masukkan kata sandi akun";

@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Tooted";
 "accountPage.settingsHeader" = "Seadused";
+"accountPage.notificationsHeader" = "Teatused";
 "accountPage.usernameNotRegistered" = "kasutajanime: registreerimata";
 "accountPage.credentialsHeader" = "Konto üksikasjad";
 "accountPage.blockedContacts" = "Sissepuudud";
@@ -260,7 +261,7 @@
 "accountPage.other" = "muud";
 "accountPage.removeAccountMessage" = "Kui klikkate \"Kõikada\", siis kustutate selle konto seadmel!";
 "accountPage.removeAccountButton" = "Võtke välja";
-"accountPage.shareAccountDetails" = "Osalemiskonto andmed";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Võta ühendust Jamiga!";
 "accountPage.contactMeOnJamiContant" = "Võta ühendust minuga Jami jaotatud sideplatvormis \"%s\" kasutades: https://jami.net";
 "accountPage.passwordPlaceholder" = "Kirjuta konto parool";

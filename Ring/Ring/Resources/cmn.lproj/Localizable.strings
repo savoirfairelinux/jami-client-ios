@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "裝置";
 "accountPage.settingsHeader" = "設定";
+"accountPage.notificationsHeader" = "Notifications";
 "accountPage.usernameNotRegistered" = "用户名：未被注册";
 "accountPage.credentialsHeader" = "账户详情";
 "accountPage.blockedContacts" = "已屏蔽的联系人";
@@ -260,7 +261,7 @@
 "accountPage.other" = "其他";
 "accountPage.removeAccountMessage" = "点击“删除”将从此设备上删除该账户！此操作无法撤销。同时，您也会失去您的注册用户名。";
 "accountPage.removeAccountButton" = "删除";
-"accountPage.shareAccountDetails" = "分享账户详情";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "在 Jami 上联系我！";
 "accountPage.contactMeOnJamiContant" = "在Jami分布式通信平台：https://jami.net 上使用“%s”与我联系";
 "accountPage.passwordPlaceholder" = "输入账户密码";

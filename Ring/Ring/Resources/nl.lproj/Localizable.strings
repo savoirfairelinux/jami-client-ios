@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Apparaten";
 "accountPage.settingsHeader" = "Instellingen";
+"accountPage.notificationsHeader" = "Meldingen";
 "accountPage.usernameNotRegistered" = "gebruikersnaam: niet geregistreerd";
 "accountPage.credentialsHeader" = "Accountgegevens";
 "accountPage.blockedContacts" = "Geblokkeerde contacten";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Anders";
 "accountPage.removeAccountMessage" = "Door op ‘Verwijderen’ te klikken, zult u dit account van dit apparaat verwijderen! Deze handeling kan niet ongedaan gemaakt worden. Uw geregistreerde naam zal ook verloren gaan.";
 "accountPage.removeAccountButton" = "Verwijderen";
-"accountPage.shareAccountDetails" = "Accountdetails delen";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Contacteer me op Jami!";
 "accountPage.contactMeOnJamiContant" = "Neem contact met mij op via \"%s\" op het Jami-distributiecommunicatieplatform: https://jami.net";
 "accountPage.passwordPlaceholder" = "Voer het account wachtwoord in";

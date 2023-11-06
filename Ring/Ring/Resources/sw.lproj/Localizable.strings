@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Vifaa";
 "accountPage.settingsHeader" = "Mipangilio";
+"accountPage.notificationsHeader" = "Maarifa";
 "accountPage.usernameNotRegistered" = "Jina la mtumiaji: halijasajiliwa";
 "accountPage.credentialsHeader" = "Maelezo ya Akaunti";
 "accountPage.blockedContacts" = "Mawasiliano yaliyopigwa";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Vinginevyo";
 "accountPage.removeAccountMessage" = "Kwa kubonyeza \"Ondoa\" utaondoa akaunti hii kwenye kifaa hiki! hatua hii haiwezi kufanyika. Pia, jina lako kusajiliwa inaweza kupotea.";
 "accountPage.removeAccountButton" = "Ondoa";
-"accountPage.shareAccountDetails" = "Shiriki maelezo ya akaunti";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Wasiliana nami juu ya Jami!";
 "accountPage.contactMeOnJamiContant" = "Wasiliana nami kwa kutumia \"%s\" kwenye jukwaa la mawasiliano la Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Ingiza nenosiri la akaunti";

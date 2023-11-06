@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "சாதனங்கள்";
 "accountPage.settingsHeader" = "அமைப்புகள்";
+"accountPage.notificationsHeader" = "அறிவிப்புகள்";
 "accountPage.usernameNotRegistered" = "பயனர் பெயர்ஃ பதிவு செய்யப்படவில்லை";
 "accountPage.credentialsHeader" = "கணக்கு விவரங்கள்";
 "accountPage.blockedContacts" = "தடுக்கப்பட்ட தொடர்புகள்";
@@ -260,7 +261,7 @@
 "accountPage.other" = "மற்றவை";
 "accountPage.removeAccountMessage" = "\"Remove\" என்பதை கிளிக் செய்தால் இந்த சாதனத்தில் இந்த கணக்கை நீக்குவீர்கள்! இந்த செயலைத் திரும்பப் பெற முடியாது. மேலும், உங்கள் பதிவு செய்யப்பட்ட பெயர் இழக்கப்படலாம்.";
 "accountPage.removeAccountButton" = "நீக்கவும்";
-"accountPage.shareAccountDetails" = "பகிர்தல் கணக்கு விவரங்கள்";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ஜாமி மீது என்னை தொடர்பு!";
 "accountPage.contactMeOnJamiContant" = "ஜாமி விநியோகிக்கப்பட்ட தகவல் தொடர்பு தளத்தில் \"%s\" ஐப் பயன்படுத்தி என்னை தொடர்பு கொள்ளவும்ஃ https://jami.net";
 "accountPage.passwordPlaceholder" = "கணக்கு கடவுச்சொல்லை உள்ளிடவும்";

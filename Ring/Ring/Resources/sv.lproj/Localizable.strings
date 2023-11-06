@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Enheter";
 "accountPage.settingsHeader" = "Inställningar";
+"accountPage.notificationsHeader" = "Aviseringar";
 "accountPage.usernameNotRegistered" = "Användarnamn: Inte registrerat";
 "accountPage.credentialsHeader" = "Kontoinformation";
 "accountPage.blockedContacts" = "Blockerade kontakter";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Annat";
 "accountPage.removeAccountMessage" = "Genom att klicka \"Ta bort\" kommer du att ta bort detta konto från denna enhet. Denna åtgärd kan inte ångras. Ditt registrerade namn kan också förloras.";
 "accountPage.removeAccountButton" = "Ta bort";
-"accountPage.shareAccountDetails" = "Dela kontoinformation";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Kontakta mig på Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontakta genom %s på Jami kommunikationsplattformen: https://jami.net ";
 "accountPage.passwordPlaceholder" = "Ange kontolösenord";

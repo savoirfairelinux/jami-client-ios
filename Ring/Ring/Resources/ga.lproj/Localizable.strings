@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Iarratais";
 "accountPage.settingsHeader" = "Cinntí";
+"accountPage.notificationsHeader" = "Feidhmeanna";
 "accountPage.usernameNotRegistered" = "ainm úsáideora: gan chlárú";
 "accountPage.credentialsHeader" = "sonraí cuntas";
 "accountPage.blockedContacts" = "Contaeanna blocaithe";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Cinntí";
 "accountPage.removeAccountMessage" = "Trí cliceáil ar \"Chilbh\" beidh tú a bhaint ar an cuntas seo ar an gléas seo! Ní féidir an gníomh seo a dhéanamh ar ais. Chomh maith leis sin, d'ainm cláraithe a chaillear.";
 "accountPage.removeAccountButton" = "Cúlghairm";
-"accountPage.shareAccountDetails" = "Roinnt sonraí cuntas a roinnt";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Déan teagmháil liom ar Jami!";
 "accountPage.contactMeOnJamiContant" = "Déan teagmháil liom ag baint úsáide as \"%s\" ar an ardán cumarsáide dáileadh Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Cluiche Pasfhocal";

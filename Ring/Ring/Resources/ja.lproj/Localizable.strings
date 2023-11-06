@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "デバイス";
 "accountPage.settingsHeader" = "設定";
+"accountPage.notificationsHeader" = "通知";
 "accountPage.usernameNotRegistered" = "ユーザー名:登録されていない";
 "accountPage.credentialsHeader" = "アカウント詳細";
 "accountPage.blockedContacts" = "着信拒否した連絡先";
@@ -260,7 +261,7 @@
 "accountPage.other" = "その他";
 "accountPage.removeAccountMessage" = "\"削除\"をクリックすると,このデバイス上のアカウントを削除します!このアクションは無効にできません.また,登録された名前も失われる可能性があります.";
 "accountPage.removeAccountButton" = "削除";
-"accountPage.shareAccountDetails" = "共有アカウント詳細";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "ジャミに連絡する!";
 "accountPage.contactMeOnJamiContant" = "広報プラットフォームの\"%s\"を使用して私に連絡してください: https://jami.net";
 "accountPage.passwordPlaceholder" = "アカウントのパスワードを入力";

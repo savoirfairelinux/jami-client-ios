@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Thiết bị";
 "accountPage.settingsHeader" = "Cài đặt";
+"accountPage.notificationsHeader" = "Thông báo";
 "accountPage.usernameNotRegistered" = "Tên người dùng: không đăng ký";
 "accountPage.credentialsHeader" = "Thông tin chi tiết tài khoản";
 "accountPage.blockedContacts" = "Các liên lạc bị chặn";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Các loại khác";
 "accountPage.removeAccountMessage" = "Bằng cách nhấp vào \"Tắt\" bạn sẽ xóa tài khoản này trên thiết bị này!";
 "accountPage.removeAccountButton" = "Tắt";
-"accountPage.shareAccountDetails" = "Thông tin chia sẻ tài khoản";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Liên hệ với tôi về Jami!";
 "accountPage.contactMeOnJamiContant" = "Liên hệ với tôi bằng cách sử dụng \"%s\" trên nền tảng truyền thông phân phối của Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Nhập mật khẩu tài khoản";

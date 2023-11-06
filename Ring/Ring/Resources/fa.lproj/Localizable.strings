@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "دستگاه ها";
 "accountPage.settingsHeader" = "تنظیمات";
+"accountPage.notificationsHeader" = "اعلان‌ها";
 "accountPage.usernameNotRegistered" = "نام کاربری: ثبت نشده";
 "accountPage.credentialsHeader" = "جزییات حساب کاربری";
 "accountPage.blockedContacts" = "مخاطبین مسدود‌شده";
@@ -260,7 +261,7 @@
 "accountPage.other" = "دیگر";
 "accountPage.removeAccountMessage" = "با کلیک روی \"حذف\"، این حساب را در این دستگاه حذف خواهید کرد! این عمل قابل بازگشت نیست. همچنین، نام ثبت‌شده شما می تواند از‌ دست رود.";
 "accountPage.removeAccountButton" = "حذف کن";
-"accountPage.shareAccountDetails" = "اشتراک جزییات حساب";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "با من روی جمی در تماس باشید!";
 "accountPage.contactMeOnJamiContant" = "با استفاده از \"%s\" روی بستر ارتباط توزیع‌شده جمی، با من در تماس باشید: https://jami.net";
 "accountPage.passwordPlaceholder" = "گذرواژه حساب را وارد کنید";

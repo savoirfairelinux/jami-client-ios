@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Устройства";
 "accountPage.settingsHeader" = "Настройки";
+"accountPage.notificationsHeader" = "Уведомления";
 "accountPage.usernameNotRegistered" = "имя пользователя: не зарегистрировано";
 "accountPage.credentialsHeader" = "Информация об аккаунте";
 "accountPage.blockedContacts" = "Заблокированные контакты";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Другой";
 "accountPage.removeAccountMessage" = "Нажав кнопку «Удалить», вы удалите этот аккаунт на этом устройстве! Это действие не может быть отменено. Кроме того, ваше зарегистрированное имя может быть утеряно.";
 "accountPage.removeAccountButton" = "Удалить";
-"accountPage.shareAccountDetails" = "Поделиться информацией об учетной записи";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Свяжитесь со мной в Jami!";
 "accountPage.contactMeOnJamiContant" = "Свяжитесь со мной, используя \"%s\" на распределенной коммуникационной платформе Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Введите пароль вашего аккаунта";

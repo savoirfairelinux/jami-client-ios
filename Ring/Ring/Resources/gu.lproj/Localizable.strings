@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "ઉપકરણો";
 "accountPage.settingsHeader" = "સેટિંગ્સ";
+"accountPage.notificationsHeader" = "સૂચનાઓ";
 "accountPage.usernameNotRegistered" = "વપરાશકર્તા નામઃ નોંધાયેલ નથી";
 "accountPage.credentialsHeader" = "એકાઉન્ટ વિગતો";
 "accountPage.blockedContacts" = "અવરોધિત સંપર્કો";
@@ -260,7 +261,7 @@
 "accountPage.other" = "અન્ય";
 "accountPage.removeAccountMessage" = "\"Remove\" ક્લિક કરીને તમે આ ઉપકરણ પર આ એકાઉન્ટને દૂર કરી શકશો! આ ક્રિયાને રદ કરી શકાતી નથી. ઉપરાંત, તમારું રજિસ્ટર્ડ નામ પણ ખોવાઈ શકે છે.";
 "accountPage.removeAccountButton" = "દૂર કરો";
-"accountPage.shareAccountDetails" = "શેર એકાઉન્ટ વિગતો";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "જમી પર મને સંપર્ક કરો!";
 "accountPage.contactMeOnJamiContant" = "જમી વિતરણ સંચાર પ્લેટફોર્મ પર \"%s\" નો ઉપયોગ કરીને મને સંપર્ક કરોઃ https://jami.net";
 "accountPage.passwordPlaceholder" = "એકાઉન્ટ પાસવર્ડ દાખલ કરો";

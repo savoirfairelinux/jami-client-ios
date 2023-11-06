@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Aparatoj";
 "accountPage.settingsHeader" = "Agordoj";
+"accountPage.notificationsHeader" = "Notifikaĵoj";
 "accountPage.usernameNotRegistered" = "Uzan nomon: ne registrita";
 "accountPage.credentialsHeader" = "Konto detaloj";
 "accountPage.blockedContacts" = "Blokiĝintaj kontaktoj";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Alia";
 "accountPage.removeAccountMessage" = "Alklaku \"Forigu\" kaj vi forigos tiun konton de tiu aparato!";
 "accountPage.removeAccountButton" = "Forigi";
-"accountPage.shareAccountDetails" = "Komuna konto detaloj";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Kontaktu min pri Jami!";
 "accountPage.contactMeOnJamiContant" = "Kontaktu min uzante \"%s\" sur la distribuita komunikada platformo de Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Enigu la pasvorton de la konto";

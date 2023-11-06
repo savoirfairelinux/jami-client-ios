@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Συσκευές";
 "accountPage.settingsHeader" = "Ρυθμίσεις";
+"accountPage.notificationsHeader" = "Ειδοποιήσεις";
 "accountPage.usernameNotRegistered" = "όνομα χρήστη: μη εγγεγραμμένο";
 "accountPage.credentialsHeader" = "Πληροφορίες λογαριασμού";
 "accountPage.blockedContacts" = "Μπλοκαρισμένες επαφές";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Άλλα";
 "accountPage.removeAccountMessage" = "Αν κάνετε κλικ στο \"Αφαίρεση\" θα αφαιρέσετε αυτό το λογαριασμό σε αυτή τη συσκευή!";
 "accountPage.removeAccountButton" = "Απομακρύνετε";
-"accountPage.shareAccountDetails" = "Λογαριασμός μετοχής";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Επικοινωνήστε μαζί μου για την Τζάμι!";
 "accountPage.contactMeOnJamiContant" = "Επικοινωνήστε μαζί μου χρησιμοποιώντας το \"%s\" στην πλατφόρμα επικοινωνίας της Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Εισάγετε κωδικό πρόσβασης λογαριασμού";

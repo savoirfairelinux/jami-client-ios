@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Утасны хэрэгсэл";
 "accountPage.settingsHeader" = "Байгууллага";
+"accountPage.notificationsHeader" = "Хэвлэлт";
 "accountPage.usernameNotRegistered" = "хэрэглэгчийн нэр: бүртгэгдээгүй";
 "accountPage.credentialsHeader" = "Санхүүгийн мэдээллийг";
 "accountPage.blockedContacts" = "Хаалттай холбоо";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Бусад";
 "accountPage.removeAccountMessage" = "\"Халгах\" товчлоор та энэ төхөөрөмжийн дансыг устгах болно! Энэ үйлдлийг сэргээж чадахгүй. Мөн таны бүртгэлтэй нэрийг алдсан болно.";
 "accountPage.removeAccountButton" = "Уулгах";
-"accountPage.shareAccountDetails" = "Хөрслөөс хуваалцах";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Жэми дээр намайг холбогдох!";
 "accountPage.contactMeOnJamiContant" = "Jami-ийн хуваарилалттай харилцааны платформын \"%s\" хэрэгслээр намайг хангаарай: https://jami.net";
 "accountPage.passwordPlaceholder" = "Хэтгэлийн нууц үг оруулах";

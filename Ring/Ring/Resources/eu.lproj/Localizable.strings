@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Gailuak";
 "accountPage.settingsHeader" = "Ezarpenak";
+"accountPage.notificationsHeader" = "Oharrak";
 "accountPage.usernameNotRegistered" = "Erabiltzaile izena: ez dago erregistratuta.";
 "accountPage.credentialsHeader" = "Kontuaren xehetasunak";
 "accountPage.blockedContacts" = "Blokeatutako kontaktuak";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Besteak";
 "accountPage.removeAccountMessage" = "\"Azabatu\" sakatzean, kontu hau ezabatuko duzu!";
 "accountPage.removeAccountButton" = "Kendu";
-"accountPage.shareAccountDetails" = "Kontuaren xehetasunak partekatzea";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Jarri harremanetan Jami-rekin!";
 "accountPage.contactMeOnJamiContant" = "Jarri harremanetan nirekin Jami-ren komunikazio plataforma banatuan dagoen \"%s\" erabiliz: https://jami.net";
 "accountPage.passwordPlaceholder" = "Sartu kontuaren pasahitza";

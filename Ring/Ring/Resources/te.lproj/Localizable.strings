@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "పరికరాలు";
 "accountPage.settingsHeader" = "సెట్టింగులు";
+"accountPage.notificationsHeader" = "నోటిఫికేషన్లు";
 "accountPage.usernameNotRegistered" = "వాడుకరి పేరుః నమోదు చేయబడలేదు";
 "accountPage.credentialsHeader" = "ఖాతా వివరాలు";
 "accountPage.blockedContacts" = "అడ్డుకున్న పరిచయాలు";
@@ -260,7 +261,7 @@
 "accountPage.other" = "ఇతర";
 "accountPage.removeAccountMessage" = "\"Remove\" క్లిక్ చేయడం ద్వారా మీరు ఈ పరికరంలో ఈ ఖాతాను తొలగిస్తారు! ఈ చర్యను తిరస్కరించలేరు. అలాగే, మీ రిజిస్టర్డ్ పేరు కోల్పోవచ్చు.";
 "accountPage.removeAccountButton" = "తొలగించు";
-"accountPage.shareAccountDetails" = "భాగస్వామ్య ఖాతా వివరాలు";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Jami వద్ద నాకు సంప్రదించండి!";
 "accountPage.contactMeOnJamiContant" = "జామి పంపిణీ కమ్యూనికేషన్ ప్లాట్ఫామ్లో \"%s\" ను ఉపయోగించి నన్ను సంప్రదించండిః https://jami.net";
 "accountPage.passwordPlaceholder" = "ఖాతా పాస్వర్డ్ను నమోదు చేయండి";

@@ -235,6 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Прылады";
 "accountPage.settingsHeader" = "Налады";
+"accountPage.notificationsHeader" = "Notifications";
 "accountPage.usernameNotRegistered" = "імя карыстальніка: не зарэгістраваны";
 "accountPage.credentialsHeader" = "Падрабязнасць рахунку";
 "accountPage.blockedContacts" = "Блокаваныя кантакты";
@@ -260,7 +261,7 @@
 "accountPage.other" = "Іншыя";
 "accountPage.removeAccountMessage" = "Націснуўшы на \"Выдаліць\", вы выдаляеце гэты рахунак на гэтым прыладзе!";
 "accountPage.removeAccountButton" = "Выдаліць";
-"accountPage.shareAccountDetails" = "Падзяліцца падрабязнасць рахунку";
+"accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Звяжыцеся са мной на Jami!";
 "accountPage.contactMeOnJamiContant" = "Звяжыцеся са мной з дапамогай \"%s\" на раскіданыя медыцынскія платформы Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Увядзіце пароль рахунку";
