@@ -53,30 +53,30 @@ final class DBContainer {
     private let log = SwiftyBeaver.self
     private let dbVersions = [1, 2]
 
-    func removeDBForAccount(account: String, removeFolder: Bool) {
+    func removeDBForAccount(account: String, removeFolder: Bool = true) {
+        self.connectionsSemaphore.wait()
+        defer {
+            self.connectionsSemaphore.signal()
+        }
         connections[account] = nil
         if !removeFolder { return }
-        self.removeAccountFolder(accountId: account)
-    }
-
-    func removeDBForAccount(account: String) {
-        connections[account] = nil
         self.removeDBNamed(dbName: "\(account).db")
     }
 
     func forAccount(account: String) -> Connection? {
+        self.connectionsSemaphore.wait()
+        defer {
+            self.connectionsSemaphore.signal()
+        }
         if connections[account] != nil {
             return connections[account] ?? nil
         }
         guard let dbPath = accountDbPath(accountId: account) else { return nil }
         do {
-            self.connectionsSemaphore.wait()
             connections[account] = try Connection(dbPath)
             connections[account]??.userVersion = dbVersions.last
-            self.connectionsSemaphore.signal()
             return connections[account] ?? nil
         } catch {
-            self.connectionsSemaphore.signal()
             log.error("Unable to open database")
             return nil
         }
