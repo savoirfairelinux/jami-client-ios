@@ -162,6 +162,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         // Observe connectivity changes and reconnect DHT
         self.networkService.connectionStateObservable
+            .skip(1)
             .subscribe(onNext: { _ in
                 self.daemonService.connectivityChanged()
             })
@@ -308,7 +309,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
                     return
                 }
-                self.reloadDataFor(account: currentAccount)
+                DispatchQueue.global(qos: .background).async {[weak self] in
+                    guard let self = self else { return }
+                    self.reloadDataFor(account: currentAccount)
+                }
             }, onError: { _ in
                 self.appCoordinator.showInitialLoading()
                 let time = DispatchTime.now() + 1
