@@ -248,7 +248,7 @@ class ConversationsManager {
                       account.isJams,
                       let currentAccount = self.accountsService.currentAccount
                 else { return }
-                self.conversationService.saveJamsConversation(for: jamiId, accountId: accountId, refreshConversations: currentAccount.id == jamiId)
+                self.conversationService.saveJamsConversation(for: jamiId, accountId: accountId, refreshConversations: currentAccount.id == accountId)
             })
             .disposed(by: self.disposeBag)
     }
