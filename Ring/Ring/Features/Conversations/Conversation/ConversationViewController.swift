@@ -459,13 +459,15 @@ class ConversationViewController: UIViewController,
         PHPhotoLibrary.shared().performChanges({
             let request = PHAssetCreationRequest.forAsset()
             request.addResource(with: .photo, fileURL: url, options: nil)
-        }
-        ) {[weak self] (_, error) in
-            if let error = error {
-                self?.showAlert(error: error)
+        }, completionHandler: { _, error in
+            guard let error = error else { return }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.showAlert(error: error)
             }
-        }
+        })
     }
+
     func showAlert(error: Error) {
         let allert = UIAlertController(title: L10n.Conversation.errorSavingImage, message: error.localizedDescription, preferredStyle: .alert)
         allert.addAction(UIAlertAction(title: "OK", style: .default))
