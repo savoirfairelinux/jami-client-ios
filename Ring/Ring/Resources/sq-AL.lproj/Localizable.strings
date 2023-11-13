@@ -31,7 +31,7 @@
 "global.blockContact" = "Bllokoje Kontaktin";
 "global.removeAccount" = "Hiqe llogarinë";
 "global.incomingCall" = "Thirrje ardhëse";
-"global.ok" = "Në rregull";
+"global.ok" = "OK";
 "global.close" = "Mbylle";
 "global.share" = "Ndajeni me të tjerë";
 "global.forward" = "Përcille";
@@ -160,7 +160,7 @@
 "linkToAccount.linkDeviceMessage" = "Zgjidhni “Lidhni një pajisje të re”, që nga aplikacioni tjetër Jami, që të shfaqet kodi QR, ose PIN-i";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Jepni PIN-in";
-"linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni \"Lidhni me këtë llogari një pajisje tjetër\". Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
+"linkToAccount.explanationPinMessage" = "Që të prodhohet kodi PIN, kaloni te ndarja e administrimit të llogarive, te pajisja që përmban llogarinë që doni të përdorni. Te rregullime pajisje, Përzgjidhni “Lidhni me këtë llogari një pajisje tjetër”. Do të merrni PIN-in e nevojshëm për të plotësuar këtë formular. PIN-i vlen vetëm për 10 minuta.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Hyni";
@@ -259,11 +259,11 @@
 "accountPage.deviceRevocationError" = "Gabim shfuqizimi pajisjeje";
 "accountPage.linkDeviceTitle" = "Lidhni një pajisje tjetër";
 "accountPage.other" = "Tjetër";
-"accountPage.removeAccountMessage" = "Duke klikuar \"Hiqe\", do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Po ashtu, emri juaj i regjistruar mund të humbë.";
+"accountPage.removeAccountMessage" = "Duke klikuar “Hiqe”, do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Po ashtu, emri juaj i regjistruar mund të humbë.";
 "accountPage.removeAccountButton" = "Hiqe";
 "accountPage.inviteFriends" = "Ftoni shokë";
 "accountPage.contactMeOnJamiTitle" = "Lidhuni me mua në Jami!";
-"accountPage.contactMeOnJamiContant" = "Lidhuni me mua duke përdorur \"%s\" në platformën e komunikimeve të shpërndara Jami: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Lidhuni me mua duke përdorur “%s” në platformën e komunikimeve të shpërndara Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Jepni fjalëkalim llogarie";
 "accountPage.usernamePlaceholder" = "Jepni emrin e dëshiruar të përdoruesit";
 "accountPage.registerNameErrorMessage" = "Emri i përdoruesit i zgjedhur s’është i lirë";
@@ -289,7 +289,7 @@
 "accountPage.turnServer" = "Adresë TURN";
 "accountPage.turnUsername" = "Emër përdoruesi TURN";
 "accountPage.turnPassword" = "Fjalëkalim TURN";
-"accountPage.turnRealm" = "TURN shtrirje";
+"accountPage.turnRealm" = "TURN realm";
 "accountPage.upnpEnabled" = "Përdor UPnP";
 
 //Account
@@ -304,7 +304,7 @@
 "account.serverLabel" = "Jepni Adresë";
 "account.portLabel" = "Jepni Numër Porte";
 "account.accountStatus" = "Gjendje Llogarie";
-"account.enableAccount" = "Akitvizo Llogari";
+"account.enableAccount" = "Aktivizo Llogari";
 "account.statusOnline" = "Në linjë";
 "account.statusOffline" = "Jo në linjë";
 "account.statusConnecting" = "Po lidhet";
@@ -321,7 +321,7 @@
 "linkDevice.passwordError" = "Fjalëkalimi që dhatë nuk e shkyç këtë llogari";
 "linkDevice.networkError" = "Ndodhi një gabim rrjeti gjatë eksportimit";
 "linkDevice.defaultError" = "Ndodhi një gabim gjatë eksportimit";
-"linkDevice.explanationMessage" = "Që të plotësohet procesi, lypset ta hapni Jami-n në pajisjen e re dhe të zgjidhni mundësinë \"Lidhe këtë pajisje me një llogari.\" PIN-i juaj është i vlefshëm për 10 minuta";
+"linkDevice.explanationMessage" = "Që të plotësohet procesi, lypset ta hapni Jami-n në pajisjen e re dhe të zgjidhni mundësinë “Lidhe këtë pajisje me një llogari”. PIN-i juaj është i vlefshëm për 10 minuta";
 "linkDevice.hudMessage" = "Po verifikohet";
 
 //Contact Page
@@ -363,7 +363,7 @@
 "generatedMessage.outgoingCall" = "Thirrje për";
 "generatedMessage.missedOutgoingCall" = "Thirrje ikse të humbura";
 "generatedMessage.missedIncomingCall" = "Thirrje ardhëse të humbura";
-"generatedMessage.liveLocationSharing" = "Dhënie “live” e vendndodhjes";
+"generatedMessage.liveLocationSharing" = "Dhënie e vendndodhjes drejtpërsëdrejti";
 "generatedMessage.contactLeftConversation" = "iku";
 
 //General Settings

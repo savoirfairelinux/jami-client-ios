@@ -235,7 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "الأجهزة";
 "accountPage.settingsHeader" = "إعدادات";
-"accountPage.notificationsHeader" = "Notifications";
+"accountPage.notificationsHeader" = "الإشعارات";
 "accountPage.usernameNotRegistered" = "اسم المستخدم: غير مسجل";
 "accountPage.credentialsHeader" = "تفاصيل الحساب";
 "accountPage.blockedContacts" = "جهات إتصال محظورة";
