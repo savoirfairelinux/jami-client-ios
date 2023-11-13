@@ -183,10 +183,10 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 self.captureSession.beginConfiguration()
                 self.captureSession.sessionPreset = self.quality
                 self.captureSession.commitConfiguration()
-            } else if self.captureSession.canSetSessionPreset(AVCaptureSession.Preset.medium) {
-                self.quality = AVCaptureSession.Preset.medium
+            } else if self.captureSession.canSetSessionPreset(AVCaptureSession.Preset.high) {
+                self.quality = AVCaptureSession.Preset.high
                 self.captureSession.beginConfiguration()
-                self.captureSession.sessionPreset = self.quality
+                self.captureSession.sessionPreset = AVCaptureSession.Preset.high
                 self.captureSession.commitConfiguration()
             }
             self.captureSession.startRunning()
@@ -408,7 +408,7 @@ class VideoService: FrameExtractorDelegate {
                                quality: AVCaptureSession.Preset.hd1280x720)
             let frontPortraitCameraDevInfo: [String: String] = try camera
                 .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
-                               quality: AVCaptureSession.Preset.medium)
+                               quality: AVCaptureSession.Preset.high)
             videoAdapter.addVideoDevice(withName: camera.namePortrait,
                                         withDevInfo: frontPortraitCameraDevInfo)
             videoAdapter.addVideoDevice(withName: camera.nameDevice1280_720,
@@ -540,7 +540,7 @@ extension VideoService: VideoAdapterDelegate {
         if device == camera.nameDevice1280_720 && self.camera.quality == AVCaptureSession.Preset.medium {
             self.camera.setQuality(quality: AVCaptureSession.Preset.hd1280x720)
         } else if device == camera.namePortrait && self.camera.quality == AVCaptureSession.Preset.hd1280x720 {
-            self.camera.setQuality(quality: AVCaptureSession.Preset.medium)
+            self.camera.setQuality(quality: AVCaptureSession.Preset.high)
         }
         self.angle = self.mapDeviceOrientation(orientation: self.currentOrientation)
         self.camera.startCapturing()
