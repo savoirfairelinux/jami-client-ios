@@ -54,8 +54,8 @@ protocol FrameExtractorDelegate: AnyObject {
 }
 
 enum Framerates: CGFloat {
-    case high = 30
-    case medium = 20
+    case high = 60
+    case medium = 30
     case low = 15
 }
 
@@ -161,7 +161,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         let formatDescription = captureDevice.activeFormat.formatDescription
         let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription)
-        var bestRate = 30.0
+        var bestRate = 60.0
         for vFormat in captureDevice.formats {
             let ranges = vFormat.videoSupportedFrameRateRanges as [AVFrameRateRange]
             let frameRates = ranges[0]
