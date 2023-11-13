@@ -235,7 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Dispositivos";
 "accountPage.settingsHeader" = "Configuración";
-"accountPage.notificationsHeader" = "Notifications";
+"accountPage.notificationsHeader" = "Notificaciones";
 "accountPage.usernameNotRegistered" = "Nome d'usuariu: non rexistráu";
 "accountPage.credentialsHeader" = "Detalles de la cuenta";
 "accountPage.blockedContacts" = "Contactos bloqueados";

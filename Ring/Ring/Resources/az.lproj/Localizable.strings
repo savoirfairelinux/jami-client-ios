@@ -235,7 +235,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "آلاتلار";
 "accountPage.settingsHeader" = "تنظیمات";
-"accountPage.notificationsHeader" = "Notifications";
+"accountPage.notificationsHeader" = "اطلاعیه لر";
 "accountPage.usernameNotRegistered" = "آدی: ثبت اولونماييب";
 "accountPage.credentialsHeader" = "حساب بیلگیلری";
 "accountPage.blockedContacts" = "قفل اولونموش تماسلار";
