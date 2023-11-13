@@ -3449,7 +3449,6 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
 					"$(SRCROOT)/../fat/include/include",
 				);
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
@@ -3503,7 +3502,6 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
 					"$(SRCROOT)/../fat/include/include",
 				);
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
@@ -3552,7 +3550,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "OPENDHT_JSONCPP=1";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
 					"$(SRCROOT)/../fat/include/include",
 				);
 				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
