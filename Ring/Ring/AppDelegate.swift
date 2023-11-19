@@ -145,6 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
             return true
         }
+        PreferenceManager.registerDonationsDefaults()
 
         self.addListenerForNotification()
 
@@ -196,7 +197,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let path = self.certificatePath() {
             setenv("CA_ROOT_FILE", path, 1)
         }
-        os_log("&&&&&&&didFinishLaunchingWithOptions")
         return true
     }
 

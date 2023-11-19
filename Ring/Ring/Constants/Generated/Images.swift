@@ -50,6 +50,7 @@ internal enum Asset {
   internal static let device = ImageAsset(name: "device")
   internal static let dialpad = ImageAsset(name: "dialpad")
   internal static let disableSpeakerphone = ImageAsset(name: "disable_speakerphone")
+  internal static let donation = ImageAsset(name: "donation")
   internal static let doneIcon = ImageAsset(name: "done_icon")
   internal static let downloadIcon = ImageAsset(name: "download_icon")
   internal static let editSwarmImage = ImageAsset(name: "editSwarmImage")

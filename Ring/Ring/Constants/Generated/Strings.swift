@@ -432,6 +432,10 @@ internal enum L10n {
     internal static let acceptTransferLimitDescription = L10n.tr("Localizable", "generalSettings.acceptTransferLimitDescription", fallback: "(in MB, 0 = unlimited)")
     /// Automatically accept incoming files
     internal static let automaticAcceptIncomingFiles = L10n.tr("Localizable", "generalSettings.automaticAcceptIncomingFiles", fallback: "Automatically accept incoming files")
+    /// Donation campaign
+    internal static let donationCanpaign = L10n.tr("Localizable", "generalSettings.donationCanpaign", fallback: "Donation campaign")
+    /// Enable donation campaign
+    internal static let enableDonationCanpaign = L10n.tr("Localizable", "generalSettings.enableDonationCanpaign", fallback: "Enable donation campaign")
     /// File transfer
     internal static let fileTransfer = L10n.tr("Localizable", "generalSettings.fileTransfer", fallback: "File transfer")
     /// Limit the duration of location sharing
@@ -504,6 +508,8 @@ internal enum L10n {
     internal static let close = L10n.tr("Localizable", "global.close", fallback: "Close")
     /// Copy
     internal static let copy = L10n.tr("Localizable", "global.copy", fallback: "Copy")
+    /// Donate
+    internal static let donate = L10n.tr("Localizable", "global.donate", fallback: "Donate")
     /// Enter Password
     internal static let enterPassword = L10n.tr("Localizable", "global.enterPassword", fallback: "Enter Password")
     /// Enter Username
@@ -640,6 +646,10 @@ internal enum L10n {
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess", fallback: "Be sure cellular access is granted in your settings")
     /// Conversations
     internal static let conversations = L10n.tr("Localizable", "smartlist.conversations", fallback: "Conversations")
+    /// Not now
+    internal static let disableDonation = L10n.tr("Localizable", "smartlist.disableDonation", fallback: "Not now")
+    /// If you enjoy using Jami and believe in our mission, would you make a donation?
+    internal static let donationExplanation = L10n.tr("Localizable", "smartlist.donationExplanation", fallback: "If you enjoy using Jami and believe in our mission, would you make a donation?")
     /// Invitations
     internal static let invitations = L10n.tr("Localizable", "smartlist.invitations", fallback: "Invitations")
     /// Invite friends
