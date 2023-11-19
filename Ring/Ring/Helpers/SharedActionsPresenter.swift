@@ -63,4 +63,12 @@ class SharedActionsPresenter {
         }
         viewController.present(activityViewController, animated: true, completion: nil)
     }
+
+    class func openDonationLink() {
+        if let url = URL(string: "https://jami.net/whydonate/") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
 }
