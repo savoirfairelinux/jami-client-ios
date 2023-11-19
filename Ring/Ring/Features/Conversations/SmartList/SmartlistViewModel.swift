@@ -24,6 +24,7 @@
 import RxSwift
 import RxCocoa
 import SwiftyBeaver
+import RxRelay
 
 let smartListAccountSize: CGFloat = 28
 let smartListAccountMargin: CGFloat = 4
@@ -85,6 +86,8 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 return items
             })
     }()
+
+    var donationBannerVisible = BehaviorRelay(value: false)
 
     /// For FilterConversationDataSource protocol
     var conversationViewModels = [ConversationViewModel]()
@@ -254,6 +257,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         self.callService = injectionBag.callService
         self.requestsService = injectionBag.requestsService
         self.injectionBag = injectionBag
+        self.donationBannerVisible.accept(getDonationBunnerVisiblity())
 
         self.callService.newCall
             .asObservable()
@@ -292,6 +296,15 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 self?.conversationViewModels.remove(at: index)
             })
             .disposed(by: self.disposeBag)
+    }
+
+    func getDonationBunnerVisiblity() -> Bool {
+        return PreferenceManager.isDateWithinCampaignPeriod() && PreferenceManager.isCampaignEnabled()
+    }
+
+    func temporaryDisableDonationCampaign() {
+        PreferenceManager.temporarilyDisableDonationCampaign()
+        self.donationBannerVisible.accept(getDonationBunnerVisiblity())
     }
 
     func delete(conversationViewModel: ConversationViewModel) {

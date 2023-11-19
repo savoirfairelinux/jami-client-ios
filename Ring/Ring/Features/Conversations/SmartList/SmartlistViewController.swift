@@ -50,6 +50,10 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var widgetsTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var networkAlertView: UIView!
     @IBOutlet weak var searchView: JamiSearchView!
+    @IBOutlet weak var donationBaner: UIView!
+    @IBOutlet weak var donateButton: UIButton!
+    @IBOutlet weak var disableDonationButton: UIButton!
+    @IBOutlet weak var donationLabel: UILabel!
 
     // account selection
     private var accounPicker = UIPickerView()
@@ -209,6 +213,16 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.noConversationLabel.text = L10n.Smartlist.noConversation
         self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
         self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.jamiButtonDark,
+            .font: UIFont.systemFont(ofSize: 14)]
+        let disableDonationTitle = NSAttributedString(string: L10n.Smartlist.disableDonation, attributes: attributes)
+        let donateTitle = NSAttributedString(string: L10n.Smartlist.donate, attributes: attributes)
+
+        self.disableDonationButton.setAttributedTitle(disableDonationTitle, for: .normal)
+        self.donateButton.setAttributedTitle(donateTitle, for: .normal)
+        self.donationLabel.text = L10n.Smartlist.donationExplanation
     }
 
     private func setupUI() {
@@ -268,6 +282,24 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         space.width = 20
         self.navigationItem.rightBarButtonItems = [createSearchButton(), space, createMenuButton()]
         self.conversationsTableView.tableFooterView = UIView()
+                self.viewModel.donationBannerVisible
+                    .startWith(self.viewModel.donationBannerVisible.value)
+                    .map { !$0 }
+                    .bind(to: self.donationBaner.rx.isHidden)
+                    .disposed(by: disposeBag)
+        self.donateButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                SharedActionsPresenter.openDonationLink()
+                self.viewModel.temporaryDisableDonationCampaign()
+            })
+            .disposed(by: self.disposeBag)
+        self.disableDonationButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.viewModel.temporaryDisableDonationCampaign()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func createSearchButton() -> UIBarButtonItem {

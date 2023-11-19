@@ -640,6 +640,12 @@ internal enum L10n {
     internal static let cellularAccess = L10n.tr("Localizable", "smartlist.cellularAccess", fallback: "Be sure cellular access is granted in your settings")
     /// Conversations
     internal static let conversations = L10n.tr("Localizable", "smartlist.conversations", fallback: "Conversations")
+    /// Not now
+    internal static let disableDonation = L10n.tr("Localizable", "smartlist.disableDonation", fallback: "Not now")
+    /// Donate
+    internal static let donate = L10n.tr("Localizable", "smartlist.donate", fallback: "Donate")
+    /// If you enjoy using Jami and believe in our mission, would you make a donation?
+    internal static let donationExplanation = L10n.tr("Localizable", "smartlist.donationExplanation", fallback: "If you enjoy using Jami and believe in our mission, would you make a donation?")
     /// Invitations
     internal static let invitations = L10n.tr("Localizable", "smartlist.invitations", fallback: "Invitations")
     /// Invite friends

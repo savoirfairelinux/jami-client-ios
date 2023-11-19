@@ -225,6 +225,7 @@
 		264EA8862977089C00B6FB6F /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA8852977089C00B6FB6F /* LogViewController.swift */; };
 		264FB66229775B1C00BEFBBF /* SystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FB66129775B1C00BEFBBF /* SystemService.swift */; };
 		264FB66629775B9B00BEFBBF /* SystemAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */; };
+		265807202B0FBE2900CDE196 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */; };
 		2659F65827483656009107F1 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65727483656009107F1 /* VideoManager.swift */; };
 		2659F65C27483A27009107F1 /* DecodingAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */; };
 		265C436A286254C900B4BE73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C4369286254C900B4BE73 /* Constants.swift */; };
@@ -847,6 +848,7 @@
 		264EA8852977089C00B6FB6F /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		264FB66129775B1C00BEFBBF /* SystemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemService.swift; sourceTree = "<group>"; };
 		264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAdapterDelegate.swift; sourceTree = "<group>"; };
+		2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
 		2659F65727483656009107F1 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingAdapterDelegate.swift; sourceTree = "<group>"; };
 		265C4369286254C900B4BE73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -1789,6 +1791,7 @@
 				BB68E65F2AB1F03000F02AB7 /* ScreenHelper.swift */,
 				2685F90D2A1698B400BFCDA3 /* VideoInputsManager.swift */,
 				26E0731B2A918F7A006B6F03 /* SwiftUIViews.swift */,
+				2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2905,6 +2908,7 @@
 				56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */,
 				0ED2B6FC1F96A158001572F0 /* LinkNewDeviceViewController.swift in Sources */,
 				1ABE07E21F0D924700D36361 /* Strings.swift in Sources */,
+				265807202B0FBE2900CDE196 /* PreferencesManager.swift in Sources */,
 				0E6F544D223BFE3E00ECC3CE /* DisposableCell.swift in Sources */,
 				1DE93595291B119900E426CF /* SwarmCreationViewController.swift in Sources */,
 				BBD3D751297B4CA00098DB02 /* SwarmInfoView.swift in Sources */,
