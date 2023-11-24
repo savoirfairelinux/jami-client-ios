@@ -166,16 +166,25 @@ struct BottomSheetContentView: View {
     func createButtonRow(buttons: [ButtonInfoWrapper]) -> some View {
         HStack(spacing: margin) {
             Spacer()
-            ForEach(buttons, id: \.name) { button in
-                Button(action: {
-                    self.model.perform(action: button.action)
-                }, label: {
-                    CallButtonView(buttonInfo: button)
-                })
-                .disabled(button.disabled)
+            ForEach(buttons, id: \.name) { buttonInfo in
+                CustomButtonView(buttonInfo: buttonInfo, model: self.model)
             }
             Spacer()
         }
+    }
+}
+
+struct CustomButtonView: View {
+    @ObservedObject var buttonInfo: ButtonInfoWrapper
+    var model: ActionsViewModel
+
+    var body: some View {
+        Button(action: {
+            self.model.perform(action: buttonInfo.action)
+        }, label: {
+            CallButtonView(buttonInfo: buttonInfo)
+        })
+        .disabled(buttonInfo.disabled)
     }
 }
 
