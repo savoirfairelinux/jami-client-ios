@@ -47,12 +47,13 @@ struct ExpandableParticipantView: View {
     @ObservedObject var model: ParticipantViewModel
     @Binding var isAnimatingTopMainGrid: Bool
     @Binding var showMainGridView: Bool
-    @SwiftUI.State var layerWidth: CGFloat = 0
-    @SwiftUI.State var layerHeight: CGFloat = 0
+    @SwiftUI.State var layerWidth: CGFloat = 1
+    @SwiftUI.State var layerHeight: CGFloat = 1
     var viewWidth: CGFloat
     var viewHeight: CGFloat
     @SwiftUI.State var maxHeight: CGFloat = 0
     @SwiftUI.State var offsetX: CGFloat = 0
+
     var body: some View {
         if shouldShowOverlayColorView {
             overlayColorView
