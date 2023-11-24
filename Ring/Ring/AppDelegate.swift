@@ -291,6 +291,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     if userDefaults.object(forKey: acceptTransferLimitKey) == nil {
                         userDefaults.set(20, forKey: acceptTransferLimitKey)
                     }
+                    if userDefaults.object(forKey: hardareAccelerationKey) == nil {
+                        self.videoService.setHardwareAccelerated(withState: true)
+                        UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
+                    }
+                    self.videoService.setHardwareAccelerated(withState: true)
+                    UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
                     return
                 }
                 if self.accountService.hasAccountWithProxyEnabled() {
@@ -304,9 +310,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
                 guard let currentAccount = self.accountService.currentAccount else {
                     self.log.error("Can't get current account!")
-                    // if we don't have any account means it is first run, so enable hardware acceleration
-                    self.videoService.setHardwareAccelerated(withState: true)
-                    UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
                     return
                 }
                 DispatchQueue.global(qos: .background).async {[weak self] in
