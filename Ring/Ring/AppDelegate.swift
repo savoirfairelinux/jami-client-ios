@@ -295,6 +295,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         self.videoService.setHardwareAccelerated(withState: true)
                         UserDefaults.standard.set(true, forKey: hardareAccelerationKey)
                     }
+                    if userDefaults.object(forKey: limitLocationSharingDurationKey) == nil {
+                        UserDefaults.standard.set(true, forKey: limitLocationSharingDurationKey)
+                    }
+                    if userDefaults.object(forKey: locationSharingDurationKey) == nil {
+                        UserDefaults.standard.set(15, forKey: locationSharingDurationKey)
+                    }
                     return
                 }
                 if self.accountService.hasAccountWithProxyEnabled() {
