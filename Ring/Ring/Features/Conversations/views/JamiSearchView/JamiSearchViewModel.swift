@@ -264,6 +264,9 @@ class JamiSearchViewModel {
         // Observe username lookup.
         self.nameService.usernameLookupStatus
             .observe(on: MainScheduler.instance)
+            .filter({ [weak self] responce in
+                responce.name == self?.searchBarText.value
+            })
             .take(1)
             .subscribe(onNext: { [weak self] lookupResponse in
                 guard let self = self,
