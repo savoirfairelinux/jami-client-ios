@@ -37,6 +37,7 @@ enum SettingsSection: SectionModelType {
     case connectivitySettings(items: [SectionRow])
     case credentials(items: [SectionRow])
     case otherSettings(items: [SectionRow])
+    case donations(items: [SectionRow])
     case removeAccountSettings(items: [SectionRow])
 
     enum SectionRow {
@@ -67,11 +68,20 @@ enum SettingsSection: SectionModelType {
         case turnPassword
         case turnRealm
         case upnpEnabled
+        case donationCampaign
+        case donate
     }
 
     var items: [SectionRow] {
         switch self {
-        case .linkedDevices(let items), .removeAccountSettings(items: let items), .notificationSettings(let items), .connectivitySettings(let items), .credentials(let items), .otherSettings(items: let items), .accountSettings(items: let items):
+        case .linkedDevices(let items),
+             .removeAccountSettings(items: let items),
+             .notificationSettings(let items),
+             .connectivitySettings(let items),
+             .credentials(let items),
+             .otherSettings(items: let items),
+             .accountSettings(items: let items),
+             .donations(items: let items):
             return items
         }
     }
@@ -90,7 +100,9 @@ enum SettingsSection: SectionModelType {
             return L10n.AccountPage.connectivityHeader
         case .credentials:
             return L10n.AccountPage.credentialsHeader
-        case .accountSettings(items: let items):
+        case .donations(items: _):
+            return L10n.Global.donate
+        case .accountSettings(items: _):
             return nil
         }
     }
@@ -111,6 +123,8 @@ enum SettingsSection: SectionModelType {
             self = .otherSettings(items: items)
         case .removeAccountSettings(items: let items):
             self = .removeAccountSettings(items: items)
+        case .donations(items: let items):
+            self = .donations(items: items)
         }
     }
 }
@@ -207,6 +221,20 @@ class MeViewModel: ViewModel, Stateable {
             .just(.notificationSettings( items: [.notifications]))
     }()
 
+    lazy var donationsSettings: Observable<SettingsSection> = {
+        var items: [SettingsSection.SectionRow] = []
+        if !PreferenceManager.isReachEndOfDonationCampaign() {
+            items.append(contentsOf: [
+                .donationCampaign
+            ])
+        }
+        items.append(contentsOf: [
+            .donate
+        ])
+        return Observable
+            .just(.donations( items: items))
+    }()
+
     lazy var connectivitySettings: Observable<SettingsSection> = {
         var server = ""
         var username = ""
@@ -261,11 +289,12 @@ class MeViewModel: ViewModel, Stateable {
     lazy var jamiSettings: Observable<[SettingsSection]> = {
         Observable.combineLatest(accountCredentials,
                                  linkedDevices,
+                                 donationsSettings,
                                  accountJamiSettings,
                                  connectivitySettings,
                                  otherJamiSettings,
-                                 removeAccountSettings) { (credentials, devices, settings, connectivity, other, removeAccount) in
-            return [credentials, devices, settings, connectivity, other, removeAccount]
+                                 removeAccountSettings) { (credentials, devices, donate, settings, connectivity, other, removeAccount) in
+            return [credentials, devices, donate, settings, connectivity, other, removeAccount]
         }
     }()
 
@@ -323,8 +352,9 @@ class MeViewModel: ViewModel, Stateable {
 
     lazy var sipSettings: Observable<[SettingsSection]> = {
         Observable.combineLatest(sipCredentials,
-                                 otherSipSettings) { (credentials, other) in
-            return [credentials, other]
+                                 donationsSettings,
+                                 otherSipSettings) { (credentials, donate, other) in
+            return [credentials, donate, other]
         }
     }()
 
@@ -354,6 +384,7 @@ class MeViewModel: ViewModel, Stateable {
         self.contactService = injectionBag.contactsService
         self.presenceService = injectionBag.presenceService
         self.secureTextEntry.onNext(true)
+        self.enableDonationCampaign = BehaviorRelay<Bool>(value: PreferenceManager.isCampaignEnabled())
     }
 
     func updateDataFor(account: AccountModel) {
@@ -553,6 +584,8 @@ class MeViewModel: ViewModel, Stateable {
     let currentAccountDevices = PublishSubject<[DeviceModel]>()
     let currentAccountProxy = PublishSubject<Bool>()
     let currentAccountState = PublishSubject<AccountState>()
+
+    var enableDonationCampaign: BehaviorRelay<Bool>
 
     lazy var accountState: Observable<AccountState> = {
         var state = AccountState.registered
@@ -805,6 +838,21 @@ class MeViewModel: ViewModel, Stateable {
               let account = self.accountService.currentAccount else { return }
         self.accountService.enableKeepAlive(enable: enable, accountId: account.id)
         keepAliveEnabled.accept(enable)
+    }
+
+    func donate() {
+        SharedActionsPresenter.openDonationLink()
+    }
+
+    func togleEnableDonationCampaign(enable: Bool) {
+        if enableDonationCampaign.value == enable {
+            return
+        }
+        PreferenceManager.setCampaignEnabled(enable)
+        if enable {
+            PreferenceManager.setStartDonationDate(DefaultValues.donationStartDate)
+        }
+        enableDonationCampaign.accept(enable)
     }
 
     // MARK: Connectivity
