@@ -107,6 +107,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                     return self.makeLimitLocationSharingCell()
                 case .locationSharingDuration:
                     return self.makeLocationSharingDurationCell()
+                case .donationCampaign:
+                    return self.makeDoantionCell()
                 case .log:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.LogView.description
@@ -131,6 +133,29 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         self.viewModel.generalSettings
             .bind(to: settingsTable.rx.items(dataSource: settingsItemDataSource))
             .disposed(by: disposeBag)
+    }
+
+    func makeDoantionCell() -> DisposableCell {
+        let cell = DisposableCell()
+        cell.textLabel?.text = L10n.GeneralSettings.enableDonationCampaign
+        cell.textLabel?.font = self.defaultFont
+        let switchView = UISwitch()
+        cell.selectionStyle = .none
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        cell.accessoryView = switchView
+        self.viewModel.enableDonationCampaign
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .startWith(viewModel.enableDonationCampaign.value)
+            .bind(to: switchView.rx.value)
+            .disposed(by: cell.disposeBag)
+        switchView.rx.value
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (enabled) in
+                self?.viewModel.togleEnableDonationCampaign(enable: enabled)
+            })
+            .disposed(by: cell.disposeBag)
+        return cell
     }
 
     func makeAutoDownloadFilesCell() -> DisposableCell {

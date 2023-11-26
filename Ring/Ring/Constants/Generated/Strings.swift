@@ -433,9 +433,9 @@ internal enum L10n {
     /// Automatically accept incoming files
     internal static let automaticAcceptIncomingFiles = L10n.tr("Localizable", "generalSettings.automaticAcceptIncomingFiles", fallback: "Automatically accept incoming files")
     /// Donation campaign
-    internal static let donationCanpaign = L10n.tr("Localizable", "generalSettings.donationCanpaign", fallback: "Donation campaign")
+    internal static let donationCampaign = L10n.tr("Localizable", "generalSettings.donationCampaign", fallback: "Donation campaign")
     /// Enable donation campaign
-    internal static let enableDonationCanpaign = L10n.tr("Localizable", "generalSettings.enableDonationCanpaign", fallback: "Enable donation campaign")
+    internal static let enableDonationCampaign = L10n.tr("Localizable", "generalSettings.enableDonationCampaign", fallback: "Enable donation campaign")
     /// File transfer
     internal static let fileTransfer = L10n.tr("Localizable", "generalSettings.fileTransfer", fallback: "File transfer")
     /// Limit the duration of location sharing
