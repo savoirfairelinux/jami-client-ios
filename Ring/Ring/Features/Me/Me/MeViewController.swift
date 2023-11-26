@@ -683,6 +683,10 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         .configureTurnCell(cellType: .turnRealm,
                                            value: self.viewModel.turnRealm.value)
                     return cell
+                case .donationCampaign:
+                    return self.createDonationNotificationCell()
+                case .donate:
+                    return self.createDonationCell()
                 }
             }
 
@@ -693,6 +697,50 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.viewModel.settings
             .bind(to: self.settingsTable.rx.items(dataSource: settingsItemDataSource))
             .disposed(by: disposeBag)
+    }
+
+    func createDonationCell() -> UITableViewCell {
+        let cell = DisposableCell()
+        cell.textLabel?.text = L10n.Global.donate
+        cell.textLabel?.textColor = UIColor.jamiButtonDark
+        cell.textLabel?.textAlignment = .center
+        cell.textLabel?.numberOfLines = 0
+        cell.selectionStyle = .none
+        cell.sizeToFit()
+        let button = UIButton.init(frame: cell.frame)
+        let size = CGSize(width: self.settingsTable.frame.width, height: button.frame.height)
+        button.frame.size = size
+        cell.addSubview(button)
+        button.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.donate()
+            })
+            .disposed(by: cell.disposeBag)
+        cell.backgroundColor = .clear
+        cell.contentView.backgroundColor = .systemBackground
+        return cell
+    }
+
+    func createDonationNotificationCell() -> DisposableCell {
+        let cell = DisposableCell()
+        cell.textLabel?.text = L10n.GeneralSettings.enableDonationCampaign
+        let switchView = UISwitch()
+        cell.selectionStyle = .none
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        cell.accessoryView = switchView
+        self.viewModel.enableDonationCampaign
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .startWith(viewModel.enableDonationCampaign.value)
+            .bind(to: switchView.rx.value)
+            .disposed(by: cell.disposeBag)
+        switchView.rx.value
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (enabled) in
+                self?.viewModel.togleEnableDonationCampaign(enable: enabled)
+            })
+            .disposed(by: cell.disposeBag)
+        return cell
     }
 
     func configureCellWithEnableTextCopy(text: String, secondaryText: String, style: UIFont.TextStyle) -> DisposableCell {
