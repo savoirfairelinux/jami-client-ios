@@ -42,6 +42,7 @@ enum GeneralSettingsSection: SectionModelType {
         case locationSharingDuration
         case sectionHeader(title: String)
         case log
+        case donationCampaign
     }
 
     var items: [SectionRow] {
@@ -67,20 +68,30 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
     }()
 
     lazy var generalSettings: Observable<[GeneralSettingsSection]> = {
+        var items: [GeneralSettingsSection.SectionRow] = [
+            .sectionHeader(title: L10n.GeneralSettings.videoSettings),
+            .hardwareAcceleration,
+            .sectionHeader(title: L10n.GeneralSettings.fileTransfer),
+            .automaticallyAcceptIncomingFiles,
+            .acceptTransferLimit,
+            .sectionHeader(title: L10n.GeneralSettings.locationSharing),
+            .limitLocationSharingDuration,
+            .locationSharingDuration
+        ]
+
+        if !PreferenceManager.isReachEndOfDonationCampaign() {
+            items.append(contentsOf: [
+                .sectionHeader(title: L10n.GeneralSettings.donationCampaign),
+                .donationCampaign
+            ])
+        }
+
+        items.append(contentsOf: [
+            .sectionHeader(title: L10n.LogView.title),
+            .log
+        ])
         return Observable
-            .just([GeneralSettingsSection.generalSettings(items:
-                                                            [
-                                                                .sectionHeader(title: L10n.GeneralSettings.videoSettings),
-                                                                .hardwareAcceleration,
-                                                                .sectionHeader(title: L10n.GeneralSettings.fileTransfer),
-                                                                .automaticallyAcceptIncomingFiles,
-                                                                .acceptTransferLimit,
-                                                                .sectionHeader(title: L10n.GeneralSettings.locationSharing),
-                                                                .limitLocationSharingDuration,
-                                                                .locationSharingDuration,
-                                                                .sectionHeader(title: L10n.LogView.title),
-                                                                .log
-                                                            ])])
+            .just([GeneralSettingsSection.generalSettings(items: items)])
     }()
 
     var hardwareAccelerationEnabled: BehaviorRelay<Bool>
@@ -88,6 +99,7 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
     var acceptTransferLimit: BehaviorRelay<String>
     var limitLocationSharingDuration: BehaviorRelay<Bool>
     var locationSharingDuration: BehaviorRelay<Int>
+    var enableDonationCampaign: BehaviorRelay<Bool>
     var locationSharingDurationText: String {
         return convertMinutesToText(minutes: locationSharingDuration.value)
     }
@@ -115,6 +127,7 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
 
         let locationSharingDurationValue = UserDefaults.standard.integer(forKey: locationSharingDurationKey)
         locationSharingDuration = BehaviorRelay<Int>(value: locationSharingDurationValue)
+        enableDonationCampaign = BehaviorRelay<Bool>(value: PreferenceManager.isCampaignEnabled())
     }
 
     func togleHardwareAcceleration(enable: Bool) {
@@ -154,6 +167,17 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
 
     func openLog() {
         self.stateSubject.onNext(SettingsState.openLog)
+    }
+
+    func togleEnableDonationCampaign(enable: Bool) {
+        if enableDonationCampaign.value == enable {
+            return
+        }
+        PreferenceManager.setCampaignEnabled(enable)
+        if enable {
+            PreferenceManager.setStartDonationDate(DefaultValues.donationStartDate)
+        }
+        enableDonationCampaign.accept(enable)
     }
 
     func changeTransferLimit(value: String) {

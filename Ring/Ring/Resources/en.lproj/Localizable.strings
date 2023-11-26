@@ -379,8 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Limit the duration of location sharing";
 "generalSettings.locationSharingDuration" = "Position share duration";
-"generalSettings.donationCanpaign" = "Donation campaign";
-"generalSettings.enableDonationCanpaign" = "Enable donation campaign";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View
