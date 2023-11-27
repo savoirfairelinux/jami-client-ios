@@ -45,6 +45,7 @@
 "global.copy" = "Koopiat";
 "global.reply" = "Vastust";
 "global.search" = "Otsime...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Halb QR-kood";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Jami kohta";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Kirjuta sõnum ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = piiramata)";
 "generalSettings.limitLocationSharingDuration" = "Piirata asukoha jagamise kestust";
 "generalSettings.locationSharingDuration" = "Positsioonide osaluse kestus";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

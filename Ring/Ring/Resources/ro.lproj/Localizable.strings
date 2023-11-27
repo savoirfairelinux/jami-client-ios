@@ -45,6 +45,7 @@
 "global.copy" = "Copiază";
 "global.reply" = "Răspunde";
 "global.search" = "Se caută...";
+"global.donate" = "Donează";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Despre Jami";
 "smartlist.inviteFriends" = "Invită prieteni";
 "smartlist.accounts" = "Lista de conturi";
+"smartlist.disableDonation" = "Nu acum";
+"smartlist.donationExplanation" = "Dacă îți place să folosești Jami și crezi că misiunea noastră este importantă, poți face o donație?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Scrie pentru ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(în Mo, 0 = nelimitat)";
 "generalSettings.limitLocationSharingDuration" = "Limitează durata distribuirii poziției";
 "generalSettings.locationSharingDuration" = "Durata distribuirii poziției";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Activează campania de donare";
 
 
 //Log View

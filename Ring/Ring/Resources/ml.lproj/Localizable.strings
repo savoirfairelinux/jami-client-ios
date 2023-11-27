@@ -45,6 +45,7 @@
 "global.copy" = "കോപ്പി";
 "global.reply" = "മറുപടി";
 "global.search" = "തിരയുന്ന...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "മോശം ക്യുആർ കോഡ്";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "ജാമിയെ കുറിച്ച്";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = " എന്നതിലേക്ക് സന്ദേശം അയയ്ക്കുക";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB ൽ, 0 = പരിധിയില്ലാത്തത്)";
 "generalSettings.limitLocationSharingDuration" = "സ്ഥാനം പങ്കിടുന്നതിന്റെ കാലാവധി പരിമിതപ്പെടുത്തുക";
 "generalSettings.locationSharingDuration" = "പോസിഷൻ ഓഹരി കാലാവധി";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

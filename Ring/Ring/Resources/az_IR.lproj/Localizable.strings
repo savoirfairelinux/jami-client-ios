@@ -45,6 +45,7 @@
 "global.copy" = "نُسخ";
 "global.reply" = "جاواب";
 "global.search" = "آختاريش...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "سيخين QR کد";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "جامی حاقّيندا";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "بو ایسته یینجه بیر خبر یاز";
@@ -235,7 +238,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "آلاتلار";
 "accountPage.settingsHeader" = "تنظیمات";
-"accountPage.notificationsHeader" = "Notifications";
+"accountPage.notificationsHeader" = "اطلاعیه لر";
 "accountPage.usernameNotRegistered" = "آدی: ثبت اولونماييب";
 "accountPage.credentialsHeader" = "حساب بیلگیلری";
 "accountPage.blockedContacts" = "قفل اولونموش تماسلار";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB، 0 = محدود)";
 "generalSettings.limitLocationSharingDuration" = "یئر بؤلمه سی نین مودّتی محدود اولسون";
 "generalSettings.locationSharingDuration" = "موقف پايين مودّتي";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

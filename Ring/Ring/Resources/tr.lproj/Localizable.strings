@@ -25,47 +25,48 @@
 "global.recommended" = "Önerilen";
 "global.password" = "Parola";
 "global.registerAUsername" = "Kullanıcı adı kaydet";
-"global.enterPassword" = "Parola Girin";
-"global.enterUsername" = "Kullanıcı Adını Girin";
+"global.enterPassword" = "Parola Gir";
+"global.enterUsername" = "Kullanıcı Adı Gir";
 "global.cancel" = "İptal";
 "global.blockContact" = "Kişiyi Engelle";
 "global.removeAccount" = "Hesabı Kaldır";
-"global.incomingCall" = "Gelen arama";
+"global.incomingCall" = "Gelen çağrı";
 "global.ok" = "Tamam";
 "global.close" = "Kapat";
 "global.share" = "Paylaş";
 "global.forward" = "İlet";
 "global.save" = "Kaydet";
 "global.resend" = "Yeniden gönder";
-"global.preview" = "Önizle";
+"global.preview" = "Ön izle";
 "global.accept" = "Kabul et";
-"global.block" = "Engelleme";
-"global.refuse" = "Geri Çevir";
-"global.name" = "Ad";
+"global.block" = "Engelle";
+"global.refuse" = "Reddet";
+"global.name" = "İsim";
 "global.copy" = "Kopyala";
 "global.reply" = "Yanıtla";
-"global.search" = "Arıyor...";
+"global.search" = "Aranıyor…";
+"global.donate" = "Bağış";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";
 
 // SwarmCreation
-"swarmcreation.searchBar" = "- İletişim aramak...";
-"swarmcreation.createTheSwarm" = "Bir sürü yaratın.";
+"swarmcreation.searchBar" = "Kişi ara...";
+"swarmcreation.createTheSwarm" = "Bir swarm oluştur";
 "swarmcreation.addADescription" = "Açıklama ekle";
 // Swarm
-"swarm.ignoreSwarm" = "Sığırları görmezden gel.";
-"swarm.leaveConversation" = "Konuşmayı bırak.";
-"swarm.chooseColor" = "Bir renk seçin";
+"swarm.ignoreSwarm" = "Swarm'ları görmezden gel.";
+"swarm.leaveConversation" = "Görüşmeden ayrıl";
+"swarm.chooseColor" = "Bir renk seç";
 "swarm.typeOfSwarm" = "Swarm türü";
 "swarm.identifier" = "Tanımlayıcı";
 "swarm.about" = "Hakkında";
 "swarm.members" = "Üyeler";
 "swarm.addDescription" = "Açıklama Ekle";
-"swarm.oneToOne" = "Özel küme";
-"swarm.adminInvitesOnly" = "Admin sadece davet eder";
-"swarm.invitesOnly" = "Özel küme";
-"swarm.publicChat" = "Toplum sürüsü";
+"swarm.oneToOne" = "Özel swarm";
+"swarm.adminInvitesOnly" = "Yalnızca yönetici davetleri";
+"swarm.invitesOnly" = "Özel swarm";
+"swarm.publicChat" = "Açık swarm";
 "swarm.others" = "Diğerleri";
 "swarm.member" = "Üye";
 "swarm.invited" = "- davet edildi.";
@@ -73,41 +74,43 @@
 "swarm.banned" = "Yasaklanmış";
 "swarm.unknown" = "Bilinmeyen";
 "swarm.addMember" = "Üye Ekle";
-"swarm.confirmLeaveSwarm" = "Bu sürüyü terk etmek istediğinden emin misin?";
+"swarm.confirmLeaveSwarm" = "Bu swarm'ı terk etmek istiyor musun?";
 "swarm.Leave" = "Git.";
 "swarm.newSwarm" = "Yeni swarm";
 // Smartlist
 "smartlist.yesterday" = "Dün";
 "smartlist.results" = "Genel Dizin";
-"smartlist.conversations" = "Konuşmalar";
+"smartlist.conversations" = "Görüşmeler";
 "smartlist.noResults" = "Sonuç yok";
-"smartlist.noConversation" = "Konuşma yok";
+"smartlist.noConversation" = "Görüşme yok";
 "smartlist.searchBarPlaceholder" = "Ad girin...";
-"smartlist.searchBar" = "Arama";
+"smartlist.searchBar" = "Ara";
 "smartlist.noNetworkConnectivity" = "Ağ bağlantısı yok";
 "smartlist.cellularAccess" = "Ayarlarınızda hücresel erişim izni olduğundan emin olun.";
 "smartlist.accountsTitle" = "Hesaplar";
 "smartlist.addAccountButton" = "+ Hesap Ekle";
-"smartlist.noNumber" = "Seçilen kişinin numarası yok";
+"smartlist.noNumber" = "Seçilen kişinin herhangi bir numarası yok";
 "smartlist.selectOneNumber" = "Numaralardan birini seçin";
 "smartlist.invitations" = "Davetiyeler";
 "smartlist.aboutJami" = "Jami Hakkında";
 "smartlist.inviteFriends" = "Arkadaşlarını davet et";
 "smartlist.accounts" = "Hesap listesi";
+"smartlist.disableDonation" = "Şimdi değil";
+"smartlist.donationExplanation" = "Jami'yi kullanmaktan hoşlanıyor ve misyonumuza inanıyorsan bağış yapmak ister misin?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Şuna ileti yaz:";
 "conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
 "conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
 "conversation.errorSavingImage" = "Görsel galeriye kaydedilemedi";
-"conversation.receivedRequest" = "%@size bir konuşma isteği gönderdi.";
-"conversation.incomingRequest" = "Sana bir konuşma isteği gönderdim.";
-"conversation.requestMessage" = "Merhaba,\nKonuşmaya katılmak ister misin?";
-"conversation.notContact" = "%@temas listenizde değil.";
+"conversation.receivedRequest" = "%@size bir görüşme isteği gönderdi.";
+"conversation.incomingRequest" = "Sana bir görüşme isteği gönderdim.";
+"conversation.requestMessage" = "Merhaba,\nGörüşmeye katılmak ister misin?";
+"conversation.notContact" = "%@ kişi listenizde yok.";
 "conversation.sendRequest" = "Birlikte iletişim kurmak için ona bir kişi isteği gönderin";
-"conversation.sendRequestTitle" = "İletişim İstekini Gönder";
-"conversation.synchronizationTitle" = "Görüşme isteğini kabul ettiniz.";
-"conversation.synchronizationMessage" = "Sohbeti senkronize etmek için %@ bağlanmasını bekliyoruz.";
+"conversation.sendRequestTitle" = "İletişim İsteği Gönder";
+"conversation.synchronizationTitle" = "Görüşme isteğini kabul ettin.";
+"conversation.synchronizationMessage" = "Görüşmeyi eş zamanlamak için %@ bağlanmasını bekliyoruz.";
 
 //Invitations
 "invitations.noInvitations" = "Davetiye yok";
@@ -118,7 +121,7 @@
 "welcome.title" = "Jami ile özgürce ve özel olarak paylaşın";
 "welcome.text" = "Jami, kullanıcılarının gizlilik ve özgürlüklerini sağlayan evrensel ve özgür platformdur.";
 "welcome.haveAccount" = "- Hesabım var.";
-"welcome.linkDevice" = "Başka bir cihazdan ithal";
+"welcome.linkDevice" = "Diğer aygıttan içe aktar";
 "welcome.linkBackup" = "Arşiv yedeklemesinden içe aktar";
 "welcome.createAccount" = "Katıl";
 "welcome.connectToManager" = "Jami Hesap Yöneticisi Sunucusuna bağlan";
@@ -129,7 +132,7 @@
 "createProfile.title" = "Profilini kişiselleştir";
 "createProfile.enterNameLabel" = "Görünecek adı girin";
 "createProfile.enterNamePlaceholder" = "Ad girin";
-"createProfile.subtitle" = "Profiliniz kişilerinizle paylaşılacak. İstediğiniz zaman değiştirebilirsiniz.";
+"createProfile.subtitle" = "Profilin kişilerinle paylaşılacak. İstediğin zaman değiştirebilirsin.";
 "createProfile.createYourAvatar" = "Avatarınızı oluşturun";
 
 //Create Account form
@@ -145,7 +148,7 @@
 "createAccount.loading" = "Yükleniyor";
 "createAccount.waitCreateAccountTitle" = "Hesap ekleniyor";
 "createAccount.ChooseAPassword" = "Hesabımı şifrele";
-"createAccount.PasswordInformation" = "Yerel hesabınızı şifrelemek için parola seçin. Parolayı unutmayın yoksa hesabınızı kurtaramazsınız";
+"createAccount.PasswordInformation" = "Yerel hesabını şifrelemek için parola ayarla. Parolayı unutma yoksa hesabını kurtaramazsın.";
 "createAccount.EnableNotifications" = "Bildirimler";
 "createAccount.Recommended" = "(Önerilen)";
 "createAccount.UsernameNotRegisteredTitle" = "Ağ hatası";
@@ -156,11 +159,11 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Hesap bağlantısı";
 "linkToAccount.linkButtonTitle" = "Bağlantı";
-"linkToAccount.linkDeviceTitle" = "Cihaz bağla";
-"linkToAccount.linkDeviceMessage" = "QR kodunu veya PIN'i göstermek için diğer Jami uygulamasından \"Yeni bir cihaz bağla\"yı seçin";
+"linkToAccount.linkDeviceTitle" = "Aygıt bağla";
+"linkToAccount.linkDeviceMessage" = "QR kodunu veya PIN'i göstermek için diğer Jami uygulamasından \"Yeni bir aygıt bağla\"yı seç";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN'i gir";
-"linkToAccount.explanationPinMessage" = "PIN kodunu oluşturmak için kullanmak istediğiniz hesabın bulunduğu cihazdaki hesap yönetimi ayarlarına gidin. Cihaz ayarlarında \"Bu hesaba başka bir cihazı bağla\" seçeneğini seçin. Bu formu doldurmak için gerekli PIN'i alacaksınız. PIN yalnızca 10 dakika süreyle geçerlidir.";
+"linkToAccount.explanationPinMessage" = "PIN kodunu oluşturmak için kullanmak istediğin hesabın bulunduğu aygıttaki hesap yönetimi ayarlarına git. Aygıt ayarlarında \"Bu hesaba başka bir aygıtı bağla\" seçeneğini seç. Burayı doldurmak için gerekli PIN'i alacaksın. PIN yalnızca 10 dakika süreyle geçerlidir.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Oturum Aç";
@@ -180,11 +183,11 @@
 "alerts.accountLinkedTitle" = "Hesap bağlama";
 "alerts.dbFailedTitle" = "Jami başlatılırken bir hata oluştu";
 "alerts.dbFailedMessage" = "Lütfen uygulamayı kapatın ve yeniden açmayı deneyin";
-"alerts.confirmBlockContact" = "Bu kişiyi engellemek istediğinize emin misiniz? Bu kişiyle olan konuşma geçmişi de kalıcı olarak silinecek.";
-"alerts.confirmDeleteConversation" = "Bu konuşmayı kalıcı olarak silmek istediğinizden emin misiniz?";
-"alerts.confirmDeleteConversationFromContact" = "Bu kişi ile konuşmayı kalıcı olarak silmek istediğinizden emin misiniz?";
-"alerts.confirmDeleteConversationTitle" = "Konuşmayı Sil";
-"alerts.confirmClearConversation" = "Bu kişi ile konuşmayı kalıcı olarak temizlemek istediğinizden emin misiniz?";
+"alerts.confirmBlockContact" = "Bu kişiyi engellemek istediğine emin misin? Bu kişiyle olan görüşme geçmişi de kalıcı olarak silinecek.";
+"alerts.confirmDeleteConversation" = "Bu görüşmeyi kalıcı olarak silmek istediğinden emin misin?";
+"alerts.confirmDeleteConversationFromContact" = "Bu kişi ile olan görüşmeyi kalıcı olarak silmek istediğinden emin misin?";
+"alerts.confirmDeleteConversationTitle" = "Görüşmeyi Sil";
+"alerts.confirmClearConversation" = "Bu kişi ile olan görüşmeyi kalıcı olarak temizlemek istediğine emin misin?";
 "alerts.confirmClearConversationTitle" = "Görüşmeyi temizle";
 "alerts.noMediaPermissionsTitle" = "Medya izni verilmedi";
 "alerts.noLibraryPermissionsTitle" = "Fotoğraf kitaplığına erişim izni verilmedi";
@@ -211,19 +214,19 @@
 "actions.doneAction" = "Tamam";
 "alerts.incomingCallAllertTitle" = "Adlı kişiden gelen çağrı";
 "alerts.incomingCallButtonIgnore" = "Göz ardı et";
-"actions.startAudioCall" = "Sesli Arama";
-"actions.startVideoCall" = "Görüntülü Arama";
+"actions.startAudioCall" = "Sesli Çağrı";
+"actions.startVideoCall" = "Görüntülü Çağrı";
 "actions.goToSettings" = "Ayarlara Git";
 "actions.stopLocationSharing" = "Paylaşmayı durdur";
 
 //Calls
-"calls.callItemTitle" = "Ara";
+"calls.callItemTitle" = "Çağrı";
 "calls.incomingCallInfo" = "seninle konuşmak istiyor";
 "calls.ringing" = "Çalıyor...";
 "calls.connecting" = "Bağlanıyor...";
-"calls.callFinished" = "Arama sonlandırıldı";
-"calls.currentCallWith" = "İle ara";
-"calls.haghUp" = "Aramayı sonlandır";
+"calls.callFinished" = "Çağrı sonlandırıldı";
+"calls.currentCallWith" = "İle çağrı yap";
+"calls.haghUp" = "Çağrıyı sonlandır";
 "calls.maximize" = "ekranı kapla";
 "calls.minimize" = "küçült";
 "calls.setModerator" = "moderatör olarak ayarla";
@@ -247,7 +250,7 @@
 "accountPage.proxyDisabledAlertTitle" = "Vekil Sunucu Devre dışı";
 "accountPage.proxyDisabledAlertBody" = "Bildirimleri almak için lütfen vekil sunucuyu etkinleştirin";
 "accountPage.revokeDeviceTitle" = "Aygıtı kaldır";
-"accountPage.revokeDeviceMessage" = "Bu aygıtı kaldırmak istediğinize emin misiniz? Bu eylem geri alınamaz.";
+"accountPage.revokeDeviceMessage" = "Bu aygıtı kaldırmak istediğine emin misin? Bu eylem geri alınamaz.";
 "accountPage.revokeDeviceButton" = "Kaldır";
 "accountPage.revokeDevicePlaceholder" = "Parolanızı girin";
 "accountPage.deviceRevoked" = "Aygıt iptali tamamlandı";
@@ -263,13 +266,13 @@
 "accountPage.removeAccountButton" = "Kaldır";
 "accountPage.inviteFriends" = "Arkadaşlarını davet et";
 "accountPage.contactMeOnJamiTitle" = "Benimle Jami'de iletişime geç!";
-"accountPage.contactMeOnJamiContant" = "Jami dağıtılmış iletişim platformunda \"%s\" kullanarak bana ulaşın: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Jami dağıtık iletişim platformunda \"%s\" kullanarak benimle iletişime geç: https://jami.net";
 "accountPage.passwordPlaceholder" = "Hesap parolanızı girin";
 "accountPage.usernamePlaceholder" = "İstenen kullanıcı adını girin";
 "accountPage.registerNameErrorMessage" = "Seçilen kullanıcı adı uygun değil";
 "accountPage.usernameRegistering" = "Kayıt ediliyor";
 "accountPage.usernameRegisterAction" = "Kaydol";
-"accountPage.usernameRegistrationFailed" = "Kayıt başarısız. Lütfen parolanızı denetleyin.";
+"accountPage.usernameRegistrationFailed" = "Kayıt başarısız. Lütfen parolanı gözden geçir.";
 "accountPage.createPassword" = "Parola oluştur";
 "accountPage.changePassword" = "Parolayı değiştir";
 "accountPage.oldPasswordPlaceholder" = "Eski parolayı girin";
@@ -321,15 +324,15 @@
 "linkDevice.passwordError" = "Girdiğiniz parola bu hesabı açmaz";
 "linkDevice.networkError" = "Dışa aktarma esnasında bir ağ hatası oluştu";
 "linkDevice.defaultError" = "Dışa aktarma esnasında bir hata oluştu";
-"linkDevice.explanationMessage" = "Süreci tamamlamak için yeni aygıtta Jami'yi açmanız ve \"Bu aygıtı hesaba bağla\"yı seçmelisiniz. Pininiz 10 dakikalığına geçerlidir";
+"linkDevice.explanationMessage" = "Süreci tamamlamak için yeni aygıtta Jami'yi açman ve \"Bu aygıtı hesaba bağla\"yı seçmelisin. Pin 10 dakika geçerlidir";
 "linkDevice.hudMessage" = "Doğrulama";
 
 //Contact Page
-"contactPage.startAudioCall" = "Sesli Arama Başlat";
-"contactPage.startVideoCall" = "Görüntülü Arama Başlat";
+"contactPage.startAudioCall" = "Sesli Çağrı Başlat";
+"contactPage.startVideoCall" = "Görüntülü Çağrı Başlat";
 "contactPage.sendMessage" = "İleti Gönder";
 "contactPage.clearConversation" = "Görüşmeyi temizle";
-"contactPage.removeConversation" = "Konuşmayı Kaldır";
+"contactPage.removeConversation" = "Görüşmeyi Kaldır";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Başlatılıyor...";
@@ -342,7 +345,7 @@
 "dataTransfer.recordInBackgroundWarning" = "Birden fazla uygulamayla çoklu görev yaparken video kaydetmek, video kalitesinin düşmesine neden olabilir. İyi sonuç elde etmek için çoklu görev yapmadığınız zamanlarda kaydedin";
 
 //Notifications
-"notifications.missedCall" = "Yanıtsız Arama";
+"notifications.missedCall" = "Yanıtsız Çağrı";
 "notifications.newFile" = "Yeni dosya";
 "notifications.locationSharingStarted" = "Gelen konum paylaşımı başlatıldı";
 "notifications.locationSharingStopped" = "Gelen konum paylaşımı durduruldu";
@@ -354,28 +357,30 @@
 
 //Generated Message
 "generatedMessage.contactAdded" = "Davet aldınız";
-"generatedMessage.swarmCreated" = "Küme oluşturuldu";
+"generatedMessage.swarmCreated" = "Swarm oluşturuldu";
 "generatedMessage.invitationReceived" = "katılmak için davet edildi";
-"generatedMessage.invitationAccepted" = "Konuşmaya katıldım.";
-"generatedMessage.youJoined" = "Konuşmaya katıldın.";
+"generatedMessage.invitationAccepted" = "görüşmeye katıldı";
+"generatedMessage.youJoined" = "Görüşme katıldın";
 "generatedMessage.contactBanned" = "Tekmeledi";
 "generatedMessage.contactReAdded" = "Yeniden eklendi";
-"generatedMessage.outgoingCall" = "Giden arama";
-"generatedMessage.missedOutgoingCall" = "Yanıtsız giden arama";
-"generatedMessage.missedIncomingCall" = "Yanıtsız gelen arama";
+"generatedMessage.outgoingCall" = "Giden çağrı";
+"generatedMessage.missedOutgoingCall" = "Cevapsız giden çağrı";
+"generatedMessage.missedIncomingCall" = "Cevapsız gelen çağrı";
 "generatedMessage.liveLocationSharing" = "Canlı konum paylaşımı";
 "generatedMessage.contactLeftConversation" = "sol";
 
 //General Settings
-"generalSettings.videoSettings" = "Video Ayarları";
+"generalSettings.videoSettings" = "Görüntü Ayarları";
 "generalSettings.videoAcceleration" = "Görüntü hızlandırmayı etkinleştir";
 "generalSettings.fileTransfer" = "Dosya aktarımı";
-"generalSettings.locationSharing" = "Yer paylaşımı";
-"generalSettings.automaticAcceptIncomingFiles" = "Gelen dosyaları kendiliğinden kabul et";
+"generalSettings.locationSharing" = "Konum paylaşımı";
+"generalSettings.automaticAcceptIncomingFiles" = "Gelen dosyaları otomatik olarak kabul et";
 "generalSettings.acceptTransferLimit" = "Aktarma sınırını kabul et";
-"generalSettings.acceptTransferLimitDescription" = "(MB'de, 0 = sınırsız)";
-"generalSettings.limitLocationSharingDuration" = "Yer paylaşımının süresini sınırlayın";
-"generalSettings.locationSharingDuration" = "Pozisyon payı süresi";
+"generalSettings.acceptTransferLimitDescription" = "(MB cinsinden, 0 = sınırsız)";
+"generalSettings.limitLocationSharingDuration" = "Konum paylaşımının süresini sınırla";
+"generalSettings.locationSharingDuration" = "Konum paylaşım süresi";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Bağış kampanyasını etkinleştir";
 
 
 //Log View
@@ -390,7 +395,7 @@
 "migrateAccount.title" = "Hesap taşıma";
 "migrateAccount.migrateButton" = "Hesap Taşıma";
 "migrateAccount.explanation" = "Bu hesabın taşınması gerekli";
-"migrateAccount.passwordExplanation" = "Taşıma işlemini sürdürmek için bu hesapta kullanılan parolayı girmelisiniz";
-"migrateAccount.error" = "Hesabınız taşınamadı. Yeniden deneyebilir veya hesabınızı silebilirsiniz.";
+"migrateAccount.passwordExplanation" = "Taşıma işlemini sürdürmek için bu hesapta kullanılan parolayı girmelisin";
+"migrateAccount.error" = "Hesabın taşınamadı. Yeniden deneyebilir veya hesabını silebilirsin.";
 "migrateAccount.migrating" = "Taşınıyor...";
-"migrateAccount.migrateAnother" = "Başka Bir Hesap Taşı";
+"migrateAccount.migrateAnother" = "Başka Bir Hesabı Taşı";

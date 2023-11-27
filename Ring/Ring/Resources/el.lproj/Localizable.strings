@@ -45,6 +45,7 @@
 "global.copy" = "Αντιγραφή";
 "global.reply" = "Απάντηση";
 "global.search" = "Γίνεται αναζήτηση...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Κακό QR κωδικό";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Σχετικά με το Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Γράψε μήνυμα σε ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(σε MB, 0 = απεριόριστο)";
 "generalSettings.limitLocationSharingDuration" = "Περιορίστε τη διάρκεια της μοιράσεως θέσεων";
 "generalSettings.locationSharingDuration" = "Διάρκεια των μετοχών θέσης";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

@@ -45,6 +45,7 @@
 "global.copy" = "複製";
 "global.reply" = "回复";
 "global.search" = "正在搜索…";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "无效的二维码";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "关于 Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "写消息至";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(在MB中,0 =无限)";
 "generalSettings.limitLocationSharingDuration" = "限制位置共享的时间";
 "generalSettings.locationSharingDuration" = "位置股份持续时间";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

@@ -45,6 +45,7 @@
 "global.copy" = "Kopiér";
 "global.reply" = "Svar";
 "global.search" = "Søger…";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Ugyldigt QR-kode";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Om Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Skriv et besked til ";
@@ -235,7 +238,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Enheder";
 "accountPage.settingsHeader" = "Indstillinger";
-"accountPage.notificationsHeader" = "Notifications";
+"accountPage.notificationsHeader" = "Notifikationer";
 "accountPage.usernameNotRegistered" = "brugernavn: ikke registreret";
 "accountPage.credentialsHeader" = "Kontodetaljer";
 "accountPage.blockedContacts" = "Blokerede kontakter";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(i MB, 0 = ubegrænset)";
 "generalSettings.limitLocationSharingDuration" = "Begræns varigheden af deling af placering";
 "generalSettings.locationSharingDuration" = "Varighed af positionaktier";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

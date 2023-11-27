@@ -45,6 +45,7 @@
 "global.copy" = "העתקה";
 "global.reply" = "תשובה";
 "global.search" = "בחיפוש...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "קוד QR גרוע";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "על אודות Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "כתוב הודעה ל ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(ב-MB, 0 = לא מוגבל)";
 "generalSettings.limitLocationSharingDuration" = "להגביל את משך זמן שיתוף המיקום";
 "generalSettings.locationSharingDuration" = "משך משותף עמדות";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

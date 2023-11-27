@@ -45,6 +45,7 @@
 "global.copy" = "Kopii";
 "global.reply" = "Respondo";
 "global.search" = "Serĉante...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Malbona QR-kodo";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Pri Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Skribu mesaĝon al ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(en MB, 0 = senlima)";
 "generalSettings.limitLocationSharingDuration" = "Limigu la daŭron de la kuniga loko";
 "generalSettings.locationSharingDuration" = "La daŭro de poziciaj akcioj";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

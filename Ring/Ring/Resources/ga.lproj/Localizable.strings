@@ -45,6 +45,7 @@
 "global.copy" = "Cúrsa";
 "global.reply" = "Freagra";
 "global.search" = "Ag lorg...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Cód QR olc";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Maidir le Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Scríobh teachtaireacht chuig ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(i MB, 0 = gan teorainn)";
 "generalSettings.limitLocationSharingDuration" = "Coinneáil an tréimhse a bhaineann le comhroinnt áiteanna";
 "generalSettings.locationSharingDuration" = "Cinntíocht na n-airgead";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

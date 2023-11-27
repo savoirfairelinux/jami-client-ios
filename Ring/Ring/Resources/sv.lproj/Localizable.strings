@@ -45,6 +45,7 @@
 "global.copy" = "Kopiera";
 "global.reply" = "Svara";
 "global.search" = "Söker...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Om Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Skriv meddelanden till";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(i MB, 0 = obegränsat)";
 "generalSettings.limitLocationSharingDuration" = "Begränsa varaktigheten av platsdelning";
 "generalSettings.locationSharingDuration" = "Uppdragsdelstid";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

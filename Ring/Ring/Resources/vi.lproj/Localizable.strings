@@ -45,6 +45,7 @@
 "global.copy" = "Tải";
 "global.reply" = "Trả lời";
 "global.search" = "Tìm kiếm...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Mã QR xấu";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Về Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Hãy gửi tin nhắn cho ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(trong MB, 0 = không giới hạn)";
 "generalSettings.limitLocationSharingDuration" = "Giới hạn thời gian chia sẻ vị trí";
 "generalSettings.locationSharingDuration" = "Thời gian chia sẻ vị trí";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

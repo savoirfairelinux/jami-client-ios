@@ -45,6 +45,7 @@
 "global.copy" = "Көшірме";
 "global.reply" = "Жауап беру";
 "global.search" = "іздеу...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Жаман QR код";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Жами туралы";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Хатты ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = шексіз)";
 "generalSettings.limitLocationSharingDuration" = "Орналасқан жерді бөлісудің ұзақтығын шектеу";
 "generalSettings.locationSharingDuration" = "Орналасқан позициялар";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

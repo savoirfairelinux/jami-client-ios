@@ -45,6 +45,7 @@
 "global.copy" = "복사하기";
 "global.reply" = "답변";
 "global.search" = "찾아...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "나쁜 QR 코드";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "자미 에 관한 것";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "이 지문에 메시지를 보내";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = 무제한)";
 "generalSettings.limitLocationSharingDuration" = "위치 공유 기간을 제한";
 "generalSettings.locationSharingDuration" = "위치 공유 기간";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

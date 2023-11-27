@@ -45,6 +45,7 @@
 "global.copy" = "کپی";
 "global.reply" = "پاسخ";
 "global.search" = "در حال جستجو...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "درباره جمی";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "پیام بنویسید به";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(در MB، 0 = نامحدود)";
 "generalSettings.limitLocationSharingDuration" = "مدت زمان اشتراک گذاری مکان را محدود کنید";
 "generalSettings.locationSharingDuration" = "مدت زمان سهم موقعیت";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

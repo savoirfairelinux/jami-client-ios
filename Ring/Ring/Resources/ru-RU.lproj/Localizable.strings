@@ -45,6 +45,7 @@
 "global.copy" = "Копировать";
 "global.reply" = "Ответить";
 "global.search" = "Поиск...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Плохой QR-code";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "О Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Написать сообщение";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(в МБ, 0 = неограниченный)";
 "generalSettings.limitLocationSharingDuration" = "Ограничить продолжительность совместного размещения";
 "generalSettings.locationSharingDuration" = "Продолжительность позиционных акций";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

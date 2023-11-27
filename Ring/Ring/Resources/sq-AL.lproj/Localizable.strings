@@ -45,6 +45,7 @@
 "global.copy" = "Kopjoje";
 "global.reply" = "Përgjigjuni";
 "global.search" = "Po kërkohet…";
+"global.donate" = "Dhuroni";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Mbi Jami-n";
 "smartlist.inviteFriends" = "Ftoni shokë";
 "smartlist.accounts" = "Listë llogarish";
+"smartlist.disableDonation" = "Jo tani";
+"smartlist.donationExplanation" = "Nëse ju shijon të përdorni Jami-n dhe besoni në misionin tonë, a do të bënit një dhurim?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Shkruani mesazh për";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(në MB, 0 = e pakufizuar)";
 "generalSettings.limitLocationSharingDuration" = "Kufizo kohëzgjatjen e tregimit të vendndodhjes";
 "generalSettings.locationSharingDuration" = "Kohëzgjatje tregimi pozicioni";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Aktivizo fushatë dhurimesh";
 
 
 //Log View

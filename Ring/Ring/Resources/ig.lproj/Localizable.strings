@@ -45,6 +45,7 @@
 "global.copy" = "Nkọwa";
 "global.reply" = "Zaa";
 "global.search" = "Ị na-achọ...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Usoro QR na-adịghị mma";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Banyere Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Dee ozi na ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(na MB, 0 = na-akparaghị ókè)";
 "generalSettings.limitLocationSharingDuration" = "Kwụsị oge nke ịkekọrịta ebe";
 "generalSettings.locationSharingDuration" = "Oge nke òkè ọnọdụ";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

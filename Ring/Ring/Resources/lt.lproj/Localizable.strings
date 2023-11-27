@@ -45,6 +45,7 @@
 "global.copy" = "Kopijuoti";
 "global.reply" = "Atsakyti";
 "global.search" = "Ieškoma…";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Apie Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Pašaldyk pranešimą ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = nelimityvus)";
 "generalSettings.limitLocationSharingDuration" = "Įgyvendinimo ir tvarkymo sistemos";
 "generalSettings.locationSharingDuration" = "Pozicijos akcijų trukmė";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

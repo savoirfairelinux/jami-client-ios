@@ -45,6 +45,7 @@
 "global.copy" = "Nakala";
 "global.reply" = "Jibu";
 "global.search" = "Kutafuta...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Nambari mbaya ya QR";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Kuhusu Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Andika ujumbe kwa ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(kwa MB, 0 = bila kikomo)";
 "generalSettings.limitLocationSharingDuration" = "Kupanua muda wa kushiriki eneo";
 "generalSettings.locationSharingDuration" = "Muda wa hisa za nafasi";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

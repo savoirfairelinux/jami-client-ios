@@ -45,6 +45,7 @@
 "global.copy" = "Copia";
 "global.reply" = "Respon";
 "global.search" = "Buscant...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Mal codi QR";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Sobre Jami...";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Escriure un missatge a ";
@@ -235,7 +238,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "Dispositius";
 "accountPage.settingsHeader" = "Opcions";
-"accountPage.notificationsHeader" = "Notifications";
+"accountPage.notificationsHeader" = "Notificacions";
 "accountPage.usernameNotRegistered" = "Nom d'usuari: no està registrat";
 "accountPage.credentialsHeader" = "Detalls de compte";
 "accountPage.blockedContacts" = "Contactes bloquejats";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(en MB, 0 = il·limitats)";
 "generalSettings.limitLocationSharingDuration" = "Limitar la durada de la partil·lació de localització";
 "generalSettings.locationSharingDuration" = "Durada de la quota de posicions";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

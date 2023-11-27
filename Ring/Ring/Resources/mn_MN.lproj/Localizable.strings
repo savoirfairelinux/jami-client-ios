@@ -45,6 +45,7 @@
 "global.copy" = "Хөгжүүлэн";
 "global.reply" = "Хариулт";
 "global.search" = "Танд хайж байна...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Зур QR код";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Жэмигийн тухай";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Энэ талаар мэдээлэл өгөөч";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = хязгааргүй)";
 "generalSettings.limitLocationSharingDuration" = "Байгууллагын хуваалцлын хугацааг хязгаарла";
 "generalSettings.locationSharingDuration" = "Тодруулгын хувьцааны хугацаа";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

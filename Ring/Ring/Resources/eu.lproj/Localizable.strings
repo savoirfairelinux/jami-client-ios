@@ -45,6 +45,7 @@
 "global.copy" = "Kopiatu";
 "global.reply" = "Erantzun";
 "global.search" = "Bilatzen ari naiz...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "QR kodea txarra";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Jamiri buruz";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Idatzi mezu bat";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = mugagabe)";
 "generalSettings.limitLocationSharingDuration" = "Leku partekatzearen iraupena mugatzea";
 "generalSettings.locationSharingDuration" = "Postuak partekatzeko iraupena";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

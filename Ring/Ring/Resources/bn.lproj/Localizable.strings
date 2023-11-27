@@ -45,6 +45,7 @@
 "global.copy" = "কপি";
 "global.reply" = "উত্তর";
 "global.search" = "খোঁজ...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "খারাপ QR কোড";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "জামি সম্পর্কে";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = " এ বার্তা লিখুন";
@@ -235,7 +238,7 @@
 //Account Page
 "accountPage.devicesListHeader" = "ডিভাইস";
 "accountPage.settingsHeader" = "সেটিং";
-"accountPage.notificationsHeader" = "Notifications";
+"accountPage.notificationsHeader" = "বিজ্ঞপ্তি";
 "accountPage.usernameNotRegistered" = "ব্যবহারকারীর নামঃ নিবন্ধিত নয়";
 "accountPage.credentialsHeader" = "অ্যাকাউন্টের বিবরণ";
 "accountPage.blockedContacts" = "বন্ধ করা পরিচিতি";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(এমবিতে, 0 = সীমাহীন)";
 "generalSettings.limitLocationSharingDuration" = "অবস্থান ভাগ করার সময়সীমা সীমাবদ্ধ করুন";
 "generalSettings.locationSharingDuration" = "পজিশন শেয়ারের সময়কাল";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

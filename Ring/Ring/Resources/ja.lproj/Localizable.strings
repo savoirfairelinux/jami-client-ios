@@ -45,6 +45,7 @@
 "global.copy" = "コピー";
 "global.reply" = "返信";
 "global.search" = "検索中…";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Jamiについて";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "メッセージを送信";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MBで0 =無限)";
 "generalSettings.limitLocationSharingDuration" = "場所共有の期間を制限する";
 "generalSettings.locationSharingDuration" = "ポジションシェア期間";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

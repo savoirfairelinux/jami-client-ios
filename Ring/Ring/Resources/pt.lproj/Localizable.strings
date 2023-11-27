@@ -45,6 +45,7 @@
 "global.copy" = "Copiar";
 "global.reply" = "Responder";
 "global.search" = "A pesquisar…";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "Código QR inválido";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "Sobre o Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Escrever mensagem para";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(em MB, 0 = ilimitado)";
 "generalSettings.limitLocationSharingDuration" = "Limitar a duração da partilha de localização";
 "generalSettings.locationSharingDuration" = "Duração das participações em posições";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

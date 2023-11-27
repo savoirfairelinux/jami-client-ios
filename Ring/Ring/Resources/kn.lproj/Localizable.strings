@@ -45,6 +45,7 @@
 "global.copy" = "ನಕಲು";
 "global.reply" = "ಉತ್ತರ";
 "global.search" = "ಹುಡುಕುತ್ತಿರುವ.";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "ಕೆಟ್ಟ QR ಕೋಡ್";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "ಜಾಮಿ ಬಗ್ಗೆ";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "ಸಂದೇಶವನ್ನು ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = ಅನಿಯಮಿತ)";
 "generalSettings.limitLocationSharingDuration" = "ಸ್ಥಳ ಹಂಚಿಕೆಯ ಅವಧಿಯನ್ನು ಮಿತಿಗೊಳಿಸಿ";
 "generalSettings.locationSharingDuration" = "ಸ್ಥಾನದ ಪಾಲಿನ ಅವಧಿ";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

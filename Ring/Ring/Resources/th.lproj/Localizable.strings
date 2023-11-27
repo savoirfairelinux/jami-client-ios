@@ -45,6 +45,7 @@
 "global.copy" = "สำเนา";
 "global.reply" = "ตอบกลับ";
 "global.search" = "ค้นหา...";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "รหัส QR ที่ไม่ดี";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "เกี่ยวกับ Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = "เขียนข้อความไปยัง ";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(ใน MB, 0 = ไม่จํากัด)";
 "generalSettings.limitLocationSharingDuration" = "จํากัดระยะเวลาในการแบ่งที่ตั้ง";
 "generalSettings.locationSharingDuration" = "ระยะเวลาส่วนแบ่งตําแหน่ง";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View

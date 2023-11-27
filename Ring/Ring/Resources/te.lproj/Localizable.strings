@@ -45,6 +45,7 @@
 "global.copy" = "కాపీ";
 "global.reply" = "జవాబు";
 "global.search" = "శోధన.";
+"global.donate" = "Donate";
 
 // Scan
 "scan.badQrCode" = "చెడ్డ QR కోడ్";
@@ -94,6 +95,8 @@
 "smartlist.aboutJami" = "జామి గురించి";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
+"smartlist.disableDonation" = "Not now";
+"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
 "conversation.messagePlaceholder" = " కు సందేశం పంపండి";
@@ -376,6 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB లో, 0 = అపరిమిత)";
 "generalSettings.limitLocationSharingDuration" = "స్థానం పంచుకునే వ్యవధిని పరిమితం చేయండి";
 "generalSettings.locationSharingDuration" = "స్థానం వాటా వ్యవధి";
+"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 
 //Log View
