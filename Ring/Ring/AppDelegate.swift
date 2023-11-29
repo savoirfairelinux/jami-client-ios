@@ -158,9 +158,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         self.audioService.connectAudioSignal()
 
-        // start monitoring for network changes
-        self.networkService.monitorNetworkType()
-
         // Observe connectivity changes and reconnect DHT
         self.networkService.connectionStateObservable
             .skip(1)
@@ -168,6 +165,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.daemonService.connectivityChanged()
             })
             .disposed(by: self.disposeBag)
+
+        // start monitoring for network changes
+        self.networkService.monitorNetworkType()
 
         self.interactionsManager = GeneratedInteractionsManager(accountService: self.accountService,
                                                                 requestsService: self.requestsService,
