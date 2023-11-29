@@ -725,6 +725,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         let cell = DisposableCell()
         cell.textLabel?.text = L10n.GeneralSettings.enableDonationCampaign
         let switchView = UISwitch()
+        switchView.onTintColor = .jamiButtonDark
         cell.selectionStyle = .none
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         cell.accessoryView = switchView
