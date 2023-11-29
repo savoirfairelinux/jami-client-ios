@@ -231,6 +231,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .bind(to: self.noConversationLabel.rx.isHidden)
             .disposed(by: disposeBag)
         self.viewModel.connectionState
+            .observe(on: MainScheduler.instance)
             .startWith(self.viewModel.networkConnectionState())
             .subscribe(onNext: { [weak self] _ in
                 self?.updateNetworkUI()
@@ -284,6 +285,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.navigationItem.rightBarButtonItems = [createSearchButton(), space, createMenuButton()]
         self.conversationsTableView.tableFooterView = UIView()
         self.viewModel.donationBannerVisible
+            .observe(on: MainScheduler.instance)
             .startWith(self.viewModel.donationBannerVisible.value)
             .map { !$0 }
             .bind(to: self.donationBaner.rx.isHidden)
@@ -493,8 +495,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     func updateNetworkUI() {
         let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
-        self.networkAlertView.isHidden = isHidden
-        self.view.layoutIfNeeded()
+        // self.networkAlertView.isHidden = isHidden
+        // self.view.layoutIfNeeded()
     }
 
     func searchBarNotActive() {
