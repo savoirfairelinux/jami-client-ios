@@ -495,8 +495,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     func updateNetworkUI() {
         let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
-        // self.networkAlertView.isHidden = isHidden
-        // self.view.layoutIfNeeded()
+        self.networkAlertView.isHidden = isHidden
+        self.view.layoutIfNeeded()
     }
 
     func searchBarNotActive() {
