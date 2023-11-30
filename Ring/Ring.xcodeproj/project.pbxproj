@@ -407,8 +407,6 @@
 		44DFB39D2887048F0023878C /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38B2887044E0023878C /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB39E2887048F0023878C /* SwiftyBeaver.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38C288704530023878C /* SwiftyBeaver.xcframework */; };
 		44DFB39F2887048F0023878C /* SwiftyBeaver.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38C288704530023878C /* SwiftyBeaver.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44DFB3A22887048F0023878C /* Reachability.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38E2887045B0023878C /* Reachability.xcframework */; };
-		44DFB3A32887048F0023878C /* Reachability.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38E2887045B0023878C /* Reachability.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3A42887048F0023878C /* RxDataSources.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38F288704600023878C /* RxDataSources.xcframework */; };
 		44DFB3A52887048F0023878C /* RxDataSources.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB38F288704600023878C /* RxDataSources.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44DFB3A6288704900023878C /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44DFB390288704640023878C /* RxBlocking.xcframework */; };
@@ -547,7 +545,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				44DFB3A7288704900023878C /* RxBlocking.xcframework in Embed Frameworks */,
-				44DFB3A32887048F0023878C /* Reachability.xcframework in Embed Frameworks */,
 				44DFB3A52887048F0023878C /* RxDataSources.xcframework in Embed Frameworks */,
 				44DFB3B5288704910023878C /* RxRelay.xcframework in Embed Frameworks */,
 				44DFB39D2887048F0023878C /* RxSwift.xcframework in Embed Frameworks */,
@@ -1176,7 +1173,6 @@
 				269DA05628D0D366007D51D6 /* libavfilter.a in Frameworks */,
 				44EDA53E28FE232400BEB99A /* libjami.a in Frameworks */,
 				0ECEE9A3220D1935000E1CF4 /* VideoToolbox.framework in Frameworks */,
-				44DFB3A22887048F0023878C /* Reachability.xcframework in Frameworks */,
 				269DA07D28D0D367007D51D6 /* libyaml-cpp.a in Frameworks */,
 				269DA05D28D0D366007D51D6 /* libgnutls.a in Frameworks */,
 				44DFB3B4288704910023878C /* RxRelay.xcframework in Frameworks */,

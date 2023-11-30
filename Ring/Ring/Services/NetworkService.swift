@@ -19,22 +19,19 @@
  */
 
 import Foundation
-import Reachability
+import Network
 import SwiftyBeaver
 import RxSwift
 import RxRelay
 
 enum ConnectionType {
     case none
-    case wifi
-    case cellular
+    case connected
 }
 
 class NetworkService {
 
     private let log = SwiftyBeaver.self
-
-    let reachability: Reachability?
 
     var connectionState = BehaviorRelay<ConnectionType>(value: .none)
 
@@ -42,30 +39,32 @@ class NetworkService {
         return self.connectionState.asObservable()
     }()
 
+    private var monitor: NWPathMonitor?
+    private var lastStatus: NWPath.Status = .requiresConnection
+
     init() {
-        reachability = try? Reachability()
+        monitor = NWPathMonitor()
     }
 
     func monitorNetworkType() {
+        monitor?.pathUpdateHandler = { [weak self] path in
+            guard let self = self else { return }
 
-        reachability?.whenReachable = { reachability in
-            if reachability.connection == .wifi {
-                self.connectionState.accept(.wifi)
-            } else {
-                self.connectionState.accept(.cellular)
+            if self.lastStatus == path.status { return }
+            self.lastStatus = path.status
+
+            switch path.status {
+                case .satisfied:
+                    print("Connected to a network")
+                    self.connectionState.accept(.connected)
+                case .unsatisfied, .requiresConnection:
+                    print("Disconnected from a network")
+                    self.connectionState.accept(.none)
+                default:
+                    break
             }
         }
-
-        reachability?.whenUnreachable = { _ in
-            self.connectionState.accept(.none)
-        }
-
-        do {
-            try reachability?.startNotifier()
-            self.log.debug("network notifier started")
-        } catch {
-            self.log.debug("unable to start network notifier")
-        }
-
+        let queue = DispatchQueue(label: "NetworkMonitor")
+        monitor?.start(queue: queue)
     }
 }
