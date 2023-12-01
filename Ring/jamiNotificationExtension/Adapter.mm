@@ -175,6 +175,7 @@ std::map<std::string, std::string> nameServers;
 {
     [self registerSignals];
     if (initialized() == true) {
+        reloadContacts(std::string([accountId UTF8String]));
         reloadConversationsAndRequests(std::string([accountId UTF8String]));
         setAccountActive(std::string([accountId UTF8String]), true);
         return true;
