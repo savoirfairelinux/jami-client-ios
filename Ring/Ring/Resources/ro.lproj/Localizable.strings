@@ -379,7 +379,7 @@
 "generalSettings.acceptTransferLimitDescription" = "(în Mo, 0 = nelimitat)";
 "generalSettings.limitLocationSharingDuration" = "Limitează durata distribuirii poziției";
 "generalSettings.locationSharingDuration" = "Durata distribuirii poziției";
-"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.donationCampaign" = "Campania de donare";
 "generalSettings.enableDonationCampaign" = "Activează campania de donare";
 
 

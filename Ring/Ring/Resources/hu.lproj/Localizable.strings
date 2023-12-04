@@ -96,7 +96,7 @@
 "smartlist.inviteFriends" = "Barátok és ismerősök meghívása";
 "smartlist.accounts" = "Fióklista";
 "smartlist.disableDonation" = "Máskor";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.donationExplanation" = "Ha hisz a küldetésünkben, adományozna?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Üzenet írása következő(k)nek: ";
@@ -379,7 +379,7 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB, 0 = korlátlan)";
 "generalSettings.limitLocationSharingDuration" = "Helymegosztás időtartamának korlátozása";
 "generalSettings.locationSharingDuration" = "Helymegosztás időtartama";
-"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.donationCampaign" = "Adományozási kampány";
 "generalSettings.enableDonationCampaign" = "Adományozási kampány engedélyezése";
 
 

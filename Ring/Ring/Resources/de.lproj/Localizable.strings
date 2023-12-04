@@ -45,7 +45,7 @@
 "global.copy" = "Kopieren";
 "global.reply" = "Antworten";
 "global.search" = "Suchen…";
-"global.donate" = "Donate";
+"global.donate" = "Spenden";
 
 // Scan
 "scan.badQrCode" = "QR-Code ungültig";
@@ -95,8 +95,8 @@
 "smartlist.aboutJami" = "Über Jami";
 "smartlist.inviteFriends" = "Freunde einladen";
 "smartlist.accounts" = "Kontoliste";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.disableDonation" = "Nicht jetzt";
+"smartlist.donationExplanation" = "Wenn Sie gerne Jami nutzen und an unsere Mission glauben, würden Sie dann spenden?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Nachricht schreiben an";
@@ -379,8 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unbegrenzt)";
 "generalSettings.limitLocationSharingDuration" = "Dauer der Standortfreigabe begrenzen";
 "generalSettings.locationSharingDuration" = "Dauer der Positionsfreigabe";
-"generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.donationCampaign" = "Spendenaktion";
+"generalSettings.enableDonationCampaign" = "Spendenaktion aktivieren";
 
 
 //Log View

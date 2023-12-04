@@ -379,7 +379,7 @@
 "generalSettings.acceptTransferLimitDescription" = "(në MB, 0 = e pakufizuar)";
 "generalSettings.limitLocationSharingDuration" = "Kufizo kohëzgjatjen e tregimit të vendndodhjes";
 "generalSettings.locationSharingDuration" = "Kohëzgjatje tregimi pozicioni";
-"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.donationCampaign" = "Fushatë dhurimesh";
 "generalSettings.enableDonationCampaign" = "Aktivizo fushatë dhurimesh";
 
 
