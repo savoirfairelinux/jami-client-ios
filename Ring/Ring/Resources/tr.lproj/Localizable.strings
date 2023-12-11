@@ -379,7 +379,7 @@
 "generalSettings.acceptTransferLimitDescription" = "(MB cinsinden, 0 = sınırsız)";
 "generalSettings.limitLocationSharingDuration" = "Konum paylaşımının süresini sınırla";
 "generalSettings.locationSharingDuration" = "Konum paylaşım süresi";
-"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.donationCampaign" = "Bağış kampanyası";
 "generalSettings.enableDonationCampaign" = "Bağış kampanyasını etkinleştir";
 
 

@@ -45,7 +45,7 @@
 "global.copy" = "Копіювати";
 "global.reply" = "Відповісти";
 "global.search" = "Пошук…";
-"global.donate" = "Donate";
+"global.donate" = "Донат";
 
 // Scan
 "scan.badQrCode" = "Неприйнятний QR-код";
@@ -76,7 +76,7 @@
 "swarm.addMember" = "Додавати члена";
 "swarm.confirmLeaveSwarm" = "Ти впевнений, що хочеш покинути цей рій?";
 "swarm.Leave" = "Піти";
-"swarm.newSwarm" = "New swarm";
+"swarm.newSwarm" = "Новий рій";
 // Smartlist
 "smartlist.yesterday" = "Учора";
 "smartlist.results" = "Публічний каталог";
@@ -93,16 +93,16 @@
 "smartlist.selectOneNumber" = "Виберіть один з цифр";
 "smartlist.invitations" = "Запрошення";
 "smartlist.aboutJami" = "Про Jami";
-"smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inviteFriends" = "Запросити друзів";
+"smartlist.accounts" = "Список облікових записів";
+"smartlist.disableDonation" = "Не зараз";
+"smartlist.donationExplanation" = "Якщо вам подобається Jami і ви вірите в нашу місію, чи не зробили б ви пожертву?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Напишіть повідомлення ";
 "conversation.explanationSendingLocationTo" = "Ви зараз ділитеся своїм місцем розташуванням з ";
 "conversation.explanationReceivingLocationFrom" = "Ви зараз отримуєте пряму локацію від ";
-"conversation.errorSavingImage" = "Failed to save image to gallery";
+"conversation.errorSavingImage" = "Не вдалося зберегти зображення в галерею";
 "conversation.receivedRequest" = "%@ пропонує почати розмову.";
 "conversation.incomingRequest" = "Посилала прохання про розмову.";
 "conversation.requestMessage" = "Привіт, чи не хочеш приєднатися до розмови?";
@@ -118,18 +118,18 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
+"welcome.title" = "Діліться вільно і приватно з Jami";
 "welcome.text" = "Джамі — це вільна та універсальна платформа для зв'язку, яка оберігає приватність і свободи користувачів";
 "welcome.haveAccount" = "У мене вже є рахунок.";
 "welcome.linkDevice" = "Імпорт з іншого пристрою";
 "welcome.linkBackup" = "Імпорт з архивного резервного копію";
 "welcome.createAccount" = "Приєднатися";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.connectToManager" = "Підключитися до сервера облікових записів Jami.";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустити";
 "createProfile.profileCreated" = "Далі";
-"createProfile.title" = "Personalize your profile";
+"createProfile.title" = "Персоналізуйте свій профіль";
 "createProfile.enterNameLabel" = "Введіть ім'я дисплею";
 "createProfile.enterNamePlaceholder" = "Введіть ім'я";
 "createProfile.subtitle" = "Ваш профіль буде передано вашим контактам. Ви можете змінити його в будь-який час.";
@@ -159,11 +159,11 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Поєднання облікових записів";
 "linkToAccount.linkButtonTitle" = "Зв'язати";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Повʼязати пристрій";
+"linkToAccount.linkDeviceMessage" = "Виберіть «Підключити новий пристрій» у іншій програмі Jami, щоб показати QR-код або PIN";
 "linkToAccount.pinPlaceholder" = "PIN-код";
 "linkToAccount.pinLabel" = "Ввести PIN-код";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Для генерації PIN-коду перейдіть до налаштувань управління обліковим записом на пристрої, на якому знаходиться обліковий запис, який ви хочете використовувати. У налаштуваннях пристрою виберіть «Підключити інший пристрій до цього облікового запису». Ви отримаєте необхідний PIN-код для заповнення цієї форми. PIN-код дійсний лише протягом 10 хвилин.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Підпишіться";
@@ -181,7 +181,7 @@
 "alerts.profileTakePhoto" = "Зняти фото";
 "alerts.profileUploadPhoto" = "Завантажити фото";
 "alerts.accountLinkedTitle" = "Спільний рахунок";
-"alerts.dbFailedTitle" = "An error happened when launching Jami";
+"alerts.dbFailedTitle" = "Сталася помилка при запуску Jami";
 "alerts.dbFailedMessage" = "Будь ласка, закрийте заявку і спробуйте відкрити її знову";
 "alerts.confirmBlockContact" = "Ви впевнені, що хочете заблокувати цей контакт?";
 "alerts.confirmDeleteConversation" = "Ти впевнений, що хочеш назавжди видалити цю розмову?";
@@ -264,12 +264,12 @@
 "accountPage.other" = "Інше";
 "accountPage.removeAccountMessage" = "Націкаючи на \"Вилучити\", ви видалите цей акаунт на цьому пристрої!";
 "accountPage.removeAccountButton" = "Видалити";
-"accountPage.inviteFriends" = "Invite friends";
+"accountPage.inviteFriends" = "Запросити друзів";
 "accountPage.contactMeOnJamiTitle" = "Звініться зі мною на Джамі!";
 "accountPage.contactMeOnJamiContant" = "Зверніться до мене за допомогою \"%s\" на платформі спілкування, що поширюється Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Введіть пароль рахунку";
 "accountPage.usernamePlaceholder" = "Введіть бажане ім'я користувача";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "Вибране імʼя користувача недоступне";
 "accountPage.usernameRegistering" = "Реєстрація";
 "accountPage.usernameRegisterAction" = "Зареєструватися";
 "accountPage.usernameRegistrationFailed" = "Зареєстрація не вдалося. Прошу перевірити пароль.";
@@ -281,7 +281,7 @@
 "accountPage.changePasswordError" = "Пароль невірна";
 "accountPage.enableBoothMode" = "Отримати режим бути";
 "accountPage.disableBoothMode" = "Виключити режим бути";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Будь ласка, надайте свій пароль для облікового запису";
 "accountPage.boothModeExplanation" = "У режимі кабіни історія розмов не збереглася і функціонал Jami обмежений виходячими дзвінками.";
 "accountPage.noBoothMode" = "Щоб вчинити режим Бут, спочатку потрібно створити пароль рахунку.";
 "accountPage.boothModeAlertMessage" = "Після включення режиму \"бути\" всі ваші розмови будуть видалені.";
@@ -300,10 +300,10 @@
 "account.sipServer" = "Сервер SIP";
 "account.port" = "Порт";
 "account.proxyServer" = "Проксі";
-"account.createSipAccount" = "Configure a SIP Account";
+"account.createSipAccount" = "Налаштувати обліковий запис SIP";
 "account.sipAccount" = "Аккаунт SIP";
 "account.configure" = "Налаштувати";
-"account.advancedFeatures" = "Advanced Features";
+"account.advancedFeatures" = "Розширені функції";
 "account.serverLabel" = "Введіть адресу";
 "account.portLabel" = "Введіть номер порта";
 "account.accountStatus" = "Стан облікового запису";
@@ -322,8 +322,8 @@
 //Link New Device
 "linkDevice.title" = "Прив'язати новий пристрій";
 "linkDevice.passwordError" = "Пароль, яку ви ввели, не розблокує цей рахунок";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
+"linkDevice.networkError" = "Виникла мережева помилка під час експорту";
+"linkDevice.defaultError" = "Під час експорту сталася помилка";
 "linkDevice.explanationMessage" = "Щоб завершити, відкрийте Джамі на іншому пристрої й виберіть «Прив'язати інший пристрій до облікового запису». Ваш PIN-код дійсний протягом 10 хвилин.";
 "linkDevice.hudMessage" = "Перевірка";
 
@@ -342,7 +342,7 @@
 "dataTransfer.readableStatusCanceled" = "Скасовано";
 "dataTransfer.sendingFailed" = "Не вдалося відправити";
 "dataTransfer.readableStatusSuccess" = "Повністю";
-"dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";
+"dataTransfer.recordInBackgroundWarning" = "Запис відео під час використання кількох застосунків одночасно може призвести до зниження якості відео. Для отримання найкращих результатів, рекомендується записувати відео без використання кількох застосунків одночасно.";
 
 //Notifications
 "notifications.missedCall" = "Згублений дзвін";
@@ -356,7 +356,7 @@
 
 
 //Generated Message
-"generatedMessage.contactAdded" = "You received invitation";
+"generatedMessage.contactAdded" = "Ви отримали запрошення";
 "generatedMessage.swarmCreated" = "Створена пастка";
 "generatedMessage.invitationReceived" = "був запрошений приєднатися";
 "generatedMessage.invitationAccepted" = "приєднався до розмови";
@@ -379,8 +379,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(у MB, 0 = не обмежено)";
 "generalSettings.limitLocationSharingDuration" = "Ограничити тривалість обміну місцем розташування";
 "generalSettings.locationSharingDuration" = "Тривалість позиційних акцій";
-"generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.donationCampaign" = "Кампанія збору пожертв";
+"generalSettings.enableDonationCampaign" = "Увімкнути кампанію збору пожертв";
 
 
 //Log View

@@ -29,7 +29,7 @@
 "global.enterUsername" = "Introdu numele de utilizator";
 "global.cancel" = "Renunță";
 "global.blockContact" = "Blochează contactul";
-"global.removeAccount" = "Elimină contul";
+"global.removeAccount" = "Șterge contul";
 "global.incomingCall" = "Apel primit";
 "global.ok" = "Bine";
 "global.close" = "Închide";
@@ -262,8 +262,8 @@
 "accountPage.deviceRevocationError" = "Eroare la eliminarea aparatului";
 "accountPage.linkDeviceTitle" = "Asociază alt aparat";
 "accountPage.other" = "Altele";
-"accountPage.removeAccountMessage" = "Făcând clic pe „Elimină” vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
-"accountPage.removeAccountButton" = "Elimină";
+"accountPage.removeAccountMessage" = "Făcând clic pe „Șterge” vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
+"accountPage.removeAccountButton" = "Șterge";
 "accountPage.inviteFriends" = "Invită prieteni";
 "accountPage.contactMeOnJamiTitle" = "Contactează-mă pe Jami!";
 "accountPage.contactMeOnJamiContant" = "Contactează-mă folosind „%s” pe platforma distribuită de comunicare Jami: https://jami.net";
@@ -332,7 +332,7 @@
 "contactPage.startVideoCall" = "Începe un apel video";
 "contactPage.sendMessage" = "Trimite un mesaj";
 "contactPage.clearConversation" = "Șterge discuția";
-"contactPage.removeConversation" = "Elimină conversația";
+"contactPage.removeConversation" = "Șterge conversația";
 
 //DataTransfer
 "dataTransfer.readableStatusCreated" = "Inițializare...";

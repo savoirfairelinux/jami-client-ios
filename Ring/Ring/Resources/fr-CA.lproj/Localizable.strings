@@ -379,7 +379,7 @@
 "generalSettings.acceptTransferLimitDescription" = "(en MB, 0 = illimité)";
 "generalSettings.limitLocationSharingDuration" = "Limiter la durée de partage de la position";
 "generalSettings.locationSharingDuration" = "Durée du partage de position";
-"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.donationCampaign" = "Campagne de donation";
 "generalSettings.enableDonationCampaign" = "Activer la campagne de dons";
 
 
