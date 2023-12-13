@@ -28,6 +28,8 @@ class ContactPickerViewModel: ViewModel {
     private var contactsOnly: Bool { self.currentCallId.isEmpty }
     var contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?
     var loading = BehaviorRelay(value: true)
+    var conversationSelectedCB: ((_ conversaionIds: [String]) -> Void)?
+    let injectionBag: InjectionBag
 
     var currentCallId = ""
     lazy var conferensableItems: Observable<[ContactPickerSection]> = {
@@ -93,10 +95,53 @@ class ContactPickerViewModel: ViewModel {
             })
     }()
 
+    lazy var conversationsSearchResultItems: Observable<[ConversationPickerSection]> = {
+        return Observable
+            .combineLatest(search
+                            .startWith("")
+                            .distinctUntilChanged(), self.conversations) { (search, targets) in (search, targets) }
+            .map({ (arg) -> [ConversationPickerSection] in
+                var (search, targets) = arg
+                if search.isEmpty {
+                    return targets
+                }
+                let result = targets.map {(section: ConversationPickerSection) -> ConversationPickerSection in
+                    var sectionVariable = section
+                    let newItems = section.items.filter { item in
+                        item.contains(searchQuery: search)
+                    }
+                    sectionVariable.items = newItems
+                    return sectionVariable
+                }
+                .filter { (section: ConversationPickerSection) -> Bool in
+                    return !section.items.isEmpty
+                }
+                return result
+            })
+    }()
+
+    lazy var conversations: Observable<[ConversationPickerSection]> = { [weak self] in
+        guard let self = self else { return Observable.empty() }
+        var conversationInfos = self.conversationsService
+            .conversations
+            .value
+            .compactMap({ conversationModel in
+                return SwarmInfo(injectionBag: self.injectionBag,
+                                 conversation: conversationModel)
+            })
+        if conversationInfos.isEmpty {
+            conversationInfos = [SwarmInfo]()
+        }
+        self.loading.accept(false)
+        let section = ConversationPickerSection(items: conversationInfos)
+        return Observable.just([section])
+    }()
+
     let search = PublishSubject<String>()
     private let disposeBag = DisposeBag()
 
     private let contactsService: ContactsService
+    private let conversationsService: ConversationsService
     private let callService: CallsService
     private let profileService: ProfilesService
     private let accountService: AccountsService
@@ -112,12 +157,21 @@ class ContactPickerViewModel: ViewModel {
         self.presenceService = injectionBag.presenceService
         self.videoService = injectionBag.videoService
         self.nameService = injectionBag.nameService
+        self.conversationsService = injectionBag.conversationsService
+        self.injectionBag = injectionBag
     }
 
     func contactSelected(contacts: [ConferencableItem]) {
         if contacts.isEmpty { return }
         if contactSelectedCB != nil {
             contactSelectedCB!(contacts)
+        }
+    }
+
+    func conversationSelected(conversaionIds: [String]) {
+        if conversaionIds.isEmpty { return }
+        if conversationSelectedCB != nil {
+            conversationSelectedCB!(conversaionIds)
         }
     }
 }

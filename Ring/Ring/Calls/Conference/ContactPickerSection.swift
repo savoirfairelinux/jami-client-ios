@@ -164,3 +164,15 @@ extension ContactPickerSection: SectionModelType {
         self.items = items
     }
 }
+
+struct ConversationPickerSection {
+    var items: [Item]
+}
+
+extension ConversationPickerSection: SectionModelType {
+    typealias Item = SwarmInfo
+    init(original: ConversationPickerSection, items: [SwarmInfo]) {
+        self = original
+        self.items = items
+    }
+}
