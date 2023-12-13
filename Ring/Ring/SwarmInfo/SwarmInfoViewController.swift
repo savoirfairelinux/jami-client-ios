@@ -56,6 +56,7 @@ class SwarmInfoViewController: UIViewController, ViewModelBased, StoryboardBased
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.tintColor = UIColor.jamiMain
+        self.configureNavigationBar()
     }
 
     func setupConstraints() {

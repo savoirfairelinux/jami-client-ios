@@ -22,6 +22,23 @@ import Foundation
 import UIKit
 
 class AvatarView: UIView {
+    init(image: UIImage,
+         size: CGFloat = 32.0) {
+
+        let frame = CGRect(x: 0, y: 0, width: size, height: size)
+
+        super.init(frame: frame)
+        self.frame = CGRect(x: 0, y: 0, width: size, height: size)
+
+        let avatarImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: size, height: size))
+        (avatarImageView as UIImageView).image = image
+        avatarImageView.layer.masksToBounds = false
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
+        avatarImageView.clipsToBounds = true
+        avatarImageView.contentMode = .scaleAspectFill
+        self.addSubview(avatarImageView)
+    }
+
     init(profileImageData: Data?,
          username: String,
          size: CGFloat = 32.0,
