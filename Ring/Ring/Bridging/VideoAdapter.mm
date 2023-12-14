@@ -230,8 +230,9 @@ static id <DecodingAdapterDelegate> _decodingDelegate;
     return getEncodingAccelerated();
 }
 
-- (void)switchInput:(NSString*)videoInputId accountId:(NSString*)accountId forCall:(NSString*)callID {
-    switchInput(std::string([accountId UTF8String]), std::string([callID UTF8String]), std::string([videoInputId UTF8String]));
+- (BOOL)requestMediaChange:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList {
+    requestMediaChange(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
+    return false;
 }
 
 - (void)stopAudioDevice {

@@ -34,15 +34,12 @@
 - (BOOL)unholdCallWithId:(NSString*)callId accountId:(NSString*)accountId;
 - (void)playDTMF:(NSString*)code;
 
-- (BOOL)requestMediaChange:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList;
 - (void)answerMediaChangeResquest:(NSString*)callId accountId:(NSString*)accountId withMedia: (NSArray*)mediaList;
 
 - (NSString*)placeCallWithAccountId:(NSString*)accountId toParticipantId:(NSString*)participantId withMedia: (NSArray*)mediaList;
 - (NSDictionary<NSString*,NSString*>*)callDetailsWithCallId:(NSString*)callId accountId:(NSString*)accountId;
 - (NSArray<NSString*>*)callsForAccountId:(NSString*)accountId;
 - (void)sendTextMessageWithCallID:(NSString*)callId accountId:(NSString*)accountId message:(NSDictionary*)message from:(NSString*)jamiId isMixed:(bool)isMixed;
-- (BOOL)muteMedia:(NSString*)callId accountId:(NSString*)accountId mediaType:(NSString*)media muted:(bool)muted;
-
 - (BOOL)joinConference:(NSString*)confID call:(NSString*)callID accountId:(NSString*)accountId account2Id:(NSString*)account2Id;
 - (BOOL)joinConferences:(NSString*)firstConf secondConference:(NSString*)secondConf accountId:(NSString*)accountId account2Id:(NSString*)account2Id;
 - (BOOL)joinCall:(NSString*)firstCall second:(NSString*)secondCall accountId:(NSString*)accountId account2Id:(NSString*)account2Id;
