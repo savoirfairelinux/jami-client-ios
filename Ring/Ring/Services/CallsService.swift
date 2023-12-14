@@ -432,50 +432,6 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         })
     }
 
-    func requestMediaChange(call callId: String, mediaLabel: String, source: String) {
-        guard let call = self.calls.value[callId] else {
-            return
-        }
-        var mediaList = call.mediaList
-        if mediaList.isEmpty {
-            guard let attributes = self.callsAdapter.currentMediaList(withCallId: callId, accountId: call.accountId) else { return }
-            call.update(withDictionary: [:], withMedia: attributes)
-            mediaList = call.mediaList
-        }
-        let medias = mediaList.count
-        var found = false
-        for index in 0..<medias where mediaList[index][MediaAttributeKey.label.rawValue] == mediaLabel {
-            mediaList[index][MediaAttributeKey.enabled.rawValue] = "true"
-            let muted = mediaList[index][MediaAttributeKey.muted.rawValue]
-            // Use "muteSource" to represent a muted camera source.
-            // This variable name indicates that the camera is intentionally not real,
-            // while keeping the number of inputs consistent.
-            var device = source
-            if !source.hasPrefix("camera://") {
-                device = "camera://" + source
-            }
-            mediaList[index][MediaAttributeKey.source.rawValue] = muted == "true" ? device : "muteSource"
-            mediaList[index][MediaAttributeKey.muted.rawValue] = muted == "true" ? "false" : "true"
-            found = true
-            break
-        }
-
-        if !found && mediaLabel == "video_0" {
-            var media = [String: String]()
-            media[MediaAttributeKey.mediaType.rawValue] = MediaAttributeValue.video.rawValue
-            media[MediaAttributeKey.enabled.rawValue] = "true"
-            media[MediaAttributeKey.muted.rawValue] = "false"
-            media[MediaAttributeKey.source.rawValue] = ""
-            media[MediaAttributeKey.label.rawValue] = mediaLabel
-            mediaList.append(media)
-        }
-        self.callsAdapter.requestMediaChange(callId, accountId: call.accountId, withMedia: mediaList)
-        if let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: call.accountId) {
-            call.update(withDictionary: callDictionary, withMedia: mediaList)
-            self.currentCallsEvents.onNext(call)
-        }
-    }
-
     func playDTMF(code: String) {
         self.callsAdapter.playDTMF(code)
     }
@@ -734,6 +690,29 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         }
         call.videoMuted = mute
         self.currentCallsEvents.onNext(call)
+    }
+
+    func callMediaUpdated(call: CallModel) {
+        var mediaList = call.mediaList
+        if mediaList.isEmpty {
+            guard let attributes = self.callsAdapter.currentMediaList(withCallId: call.callId, accountId: call.accountId) else { return }
+            call.update(withDictionary: [:], withMedia: attributes)
+            mediaList = call.mediaList
+        }
+        if let callDictionary = self.callsAdapter.callDetails(withCallId: call.callId, accountId: call.accountId) {
+            call.update(withDictionary: callDictionary, withMedia: mediaList)
+            self.currentCallsEvents.onNext(call)
+        }
+    }
+
+    func updateCallMediaIfNeeded(call: CallModel) {
+        var mediaList = call.mediaList
+        if mediaList.isEmpty {
+            guard let attributes = self.callsAdapter.currentMediaList(withCallId: call.callId, accountId: call.accountId) else { return }
+            call.update(withDictionary: [:], withMedia: attributes)
+            mediaList = call.mediaList
+        }
+        call.mediaList = mediaList
     }
 
     func conferenceCreated(conference conferenceID: String, accountId: String) {
