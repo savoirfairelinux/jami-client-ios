@@ -60,12 +60,13 @@ extension VideoManager: DecodingAdapterDelegate {
                          withHeight height: Int) {
         var accountId = ""
         var codecId: String?
-        if let call = self.callService.call(callID: sinkId),
+        let call = self.callService.call(callID: sinkId)
+        if let call = call,
            let codec = self.callService.getVideoCodec(call: call) {
             codecId = codec
             accountId = call.accountId
         }
-        self.videoService.decodingStarted(withsinkId: sinkId, withWidth: width, withHeight: height, withCodec: codecId, withaAccountId: accountId)
+        self.videoService.decodingStarted(withsinkId: sinkId, withWidth: width, withHeight: height, withCodec: codecId, withaAccountId: accountId, call: call)
     }
     func decodingStopped(withSinkId sinkId: String) {
         self.videoService.decodingStopped(withsinkId: sinkId)

@@ -210,11 +210,6 @@ static id <CallsAdapterDelegate> _delegate;
     playDTMF(std::string([code UTF8String]));
 }
 
-- (BOOL)requestMediaChange:(NSString*)callId accountId:(NSString*)accountId withMedia:(NSArray*)mediaList {
-    requestMediaChange(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
-    return false;
-}
-
 - (void)answerMediaChangeResquest:(NSString*)callId accountId:(NSString*)accountId withMedia: (NSArray*)mediaList {
     answerMediaChangeRequest(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils arrayOfDictionnarisToVectorOfMap: mediaList]);
 }
@@ -247,10 +242,6 @@ static id <CallsAdapterDelegate> _delegate;
 
 - (void)sendTextMessageWithCallID:(NSString*)callId accountId:(NSString*)accountId message:(NSDictionary*)message from:(NSString*)jamiId isMixed:(bool)isMixed {
     sendTextMessage(std::string([accountId UTF8String]), std::string([callId UTF8String]), [Utils dictionnaryToMap:message], std::string([jamiId UTF8String]), isMixed);
-}
-
-- (BOOL)muteMedia:(NSString*)callId accountId:(NSString*)accountId mediaType:(NSString*)media muted:(bool)muted {
-    return muteLocalMedia(std::string([accountId UTF8String]), std::string([callId UTF8String]), std::string([media UTF8String]), muted);
 }
 
 - (BOOL)joinConference:(NSString*)confID call:(NSString*)callID accountId:(NSString*)accountId account2Id:(NSString*)account2Id {

@@ -471,14 +471,40 @@ class VideoService: FrameExtractorDelegate {
 }
 
 extension VideoService: VideoAdapterDelegate {
-    func switchInput(toDevice device: String, callID: String?, accountId: String) {
-        if let call = callID {
-            videoAdapter.switchInput(device, accountId: accountId, forCall: call)
-            return
+    func switchInput(toDevice device: String, call: CallModel) {
+        self.requestMediaChange(call: call, mediaLabel: "video_0", source: device)
+    }
+
+    func requestMediaChange(call: CallModel, mediaLabel: String, source: String) {
+        var mediaList = call.mediaList
+        let medias = mediaList.count
+        var found = false
+        for index in 0..<medias where mediaList[index][MediaAttributeKey.label.rawValue] == mediaLabel {
+            mediaList[index][MediaAttributeKey.enabled.rawValue] = "true"
+            let muted = mediaList[index][MediaAttributeKey.muted.rawValue]
+            // Use "muteSource" to represent a muted camera source.
+            // This variable name indicates that the camera is intentionally not real,
+            // while keeping the number of inputs consistent.
+            var device = source
+            if !source.hasPrefix("camera://") {
+                device = "camera://" + source
+            }
+            mediaList[index][MediaAttributeKey.source.rawValue] = muted == "true" ? device : "muteSource"
+            mediaList[index][MediaAttributeKey.muted.rawValue] = muted == "true" ? "false" : "true"
+            found = true
+            break
         }
-        let current = self.videoAdapter.getDefaultDevice()
-        self.videoAdapter.closeVideoInput(current)
-        self.videoAdapter.openVideoInput(device)
+
+        if !found && mediaLabel == "video_0" {
+            var media = [String: String]()
+            media[MediaAttributeKey.mediaType.rawValue] = MediaAttributeValue.video.rawValue
+            media[MediaAttributeKey.enabled.rawValue] = "true"
+            media[MediaAttributeKey.muted.rawValue] = "false"
+            media[MediaAttributeKey.source.rawValue] = ""
+            media[MediaAttributeKey.label.rawValue] = mediaLabel
+            mediaList.append(media)
+        }
+        self.videoAdapter.requestMediaChange(call.callId, accountId: call.accountId, withMedia: mediaList)
     }
 
     func setDecodingAccelerated(withState state: Bool) {
@@ -508,15 +534,17 @@ extension VideoService: VideoAdapterDelegate {
         }
     }
 
-    func decodingStarted(withsinkId sinkId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?, withaAccountId accountId: String) {
+    func decodingStarted(withsinkId sinkId: String, withWidth width: Int, withHeight height: Int, withCodec codec: String?, withaAccountId accountId: String, call: CallModel?) {
         if let codecId = codec, !codecId.isEmpty {
             // we do not support hardware acceleration with VP8 codec. In this case software
             // encoding will be used. Downgrate resolution if needed. After call finished
             // resolution will be restored in restoreDefaultDevice()
             let codec = VideoCodecs(rawValue: codecId) ?? VideoCodecs.unknown
-            if !supportHardware(codec: codec) && self.camera.quality == AVCaptureSession.Preset.high {
+            if let call = call,
+               !supportHardware(codec: codec),
+               self.camera.quality == AVCaptureSession.Preset.high {
                 self.videoAdapter.setDefaultDevice(camera.mediumCamera)
-                self.videoAdapter.switchInput("camera://" + camera.mediumCamera, accountId: accountId, forCall: sinkId)
+                self.switchInput(toDevice: "camera://" + camera.mediumCamera, call: call)
             }
         }
         let hasListener = self.videoInputManager.hasListener(sinkId: sinkId)
