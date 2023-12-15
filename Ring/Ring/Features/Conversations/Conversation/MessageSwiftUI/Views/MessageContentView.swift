@@ -19,7 +19,6 @@
  */
 
 import SwiftUI
-import LinkPresentation
 
 class CustomLinkView: LPLinkView {
     override var intrinsicContentSize: CGSize { CGSize(width: 0, height: super.intrinsicContentSize.height) }

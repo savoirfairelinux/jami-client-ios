@@ -516,8 +516,8 @@ extension MessageContentVM: PlayerDelegate {
     }
 
     func saveFile() {
-        guard let imageURL = self.url else { return }
-        self.contextMenuState.onNext(ContextMenu.saveGIFOrImage(url: imageURL))
+        guard let fileURL = self.url else { return }
+        self.contextMenuState.onNext(ContextMenu.saveFile(url: fileURL))
     }
 
     func swarmColorUpdated(color: UIColor) {

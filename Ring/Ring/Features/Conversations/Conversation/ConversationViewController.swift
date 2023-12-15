@@ -36,16 +36,22 @@ enum ContextMenu: State {
     case preview(message: MessageContentVM)
     case forward(message: MessageContentVM)
     case share(items: [Any])
-    case saveGIFOrImage(url: URL)
+    case saveFile(url: URL)
+}
+
+enum DocumentPickerMode {
+    case picking
+    case saving
+    case none
 }
 
 // swiftlint:disable file_length
 // swiftlint:disable type_body_length
 class ConversationViewController: UIViewController,
                                   UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-                                  UIDocumentPickerDelegate, StoryboardBased, ViewModelBased,
+                                  StoryboardBased, ViewModelBased,
                                   MessageAccessoryViewDelegate, ContactPickerDelegate,
-                                  PHPickerViewControllerDelegate, UIDocumentInteractionControllerDelegate {
+                                  PHPickerViewControllerDelegate {
 
     // MARK: StateableResponsive
     let disposeBag = DisposeBag()
@@ -75,6 +81,7 @@ class ConversationViewController: UIViewController,
     var bottomAnchor: NSLayoutConstraint?
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var swiftUIViewAdded: Bool = false
+    var currentDocumentPickerMode: DocumentPickerMode = .none
 
     private lazy var locationManager: CLLocationManager = { return CLLocationManager() }()
 
@@ -133,16 +140,13 @@ class ConversationViewController: UIViewController,
                 guard let self = self, let state = state as? ContextMenu else { return }
                 switch state {
                 case .preview(let message):
-                    if message.url == nil && message.player == nil { return }
-                    self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: message.getImage(), initialFrame: CGRect.zero, delegate: message)
-                    self.messageAccessoryView.frame.size.height = 0
-                    self.messageAccessoryView.isHidden = true
+                    self.presentPreview(message: message)
                 case .forward(let message):
                     self.viewModel.slectContactsToShareMessage(message: message)
                 case .share(let items):
                     self.presentActivityControllerWithItems(items: items)
-                case .saveGIFOrImage(let url):
-                    self.saveGIFOrImage(url: url)
+                case .saveFile(let url):
+                    self.saveFile(url: url)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -187,22 +191,11 @@ class ConversationViewController: UIViewController,
     }
 
     private func importDocument() {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        currentDocumentPickerMode = .picking
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.item])
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
         self.present(documentPicker, animated: true, completion: nil)
-    }
-
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        let filePath = urls[0].absoluteURL.path
-        self.log.debug("Successfully imported \(filePath)")
-        let fileName = urls[0].absoluteURL.lastPathComponent
-        do {
-            let data = try Data(contentsOf: urls[0])
-            self.viewModel.sendAndSaveFile(displayName: fileName, imageData: data)
-        } catch {
-            self.viewModel.sendFile(filePath: filePath, displayName: fileName)
-        }
     }
 
     private func showNoPermissionsAlert(title: String) {
@@ -450,31 +443,6 @@ class ConversationViewController: UIViewController,
                                 }
                                 self.viewModel.sendAndSaveFile(displayName: imageFileName, imageData: videoData as Data)
                             })
-    }
-
-    func saveGIFOrImage(url: URL) {
-        PHPhotoLibrary.shared().performChanges({
-            let request = PHAssetCreationRequest.forAsset()
-            request.addResource(with: .photo, fileURL: url, options: nil)
-        }, completionHandler: { _, error in
-            guard let error = error else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.showAlert(error: error)
-            }
-        })
-    }
-
-    func showAlert(error: Error) {
-        let allert = UIAlertController(title: L10n.Conversation.errorSavingImage, message: error.localizedDescription, preferredStyle: .alert)
-        allert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(allert, animated: true)
-    }
-    @objc
-    func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            self.showAlert(error: error)
-        }
     }
 
     @objc
@@ -830,31 +798,11 @@ class ConversationViewController: UIViewController,
         return textFieldShouldEndEditing
     }
 
-    // MARK: open file
-
-    func openDocument(messageModel: MessageViewModel) {
-        let conversation = self.viewModel.conversation.value
-        let accountId = self.viewModel.conversation.value.accountId
-        guard let url = messageModel.transferedFile(conversationID: conversation.id, accountId: accountId, isSwarm: conversation.isSwarm()),
-              FileManager().fileExists(atPath: url.path) else { return }
-        let interactionController = UIDocumentInteractionController(url: url)
-        interactionController.delegate = self
-        interactionController.presentPreview(animated: true)
-    }
-
-    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
-        if let navigationController = self.navigationController {
-            return navigationController
-        }
-        return self
-    }
-
-    func presentActivityControllerWithItems(items: [Any]) {
-        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
-        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)
-        self.present(activityViewController, animated: true, completion: nil)
+    func updateNavigationBarShadow() {
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
     }
 
     // MARK: ContactPickerDelegate
@@ -935,13 +883,6 @@ extension ConversationViewController {
         }
         return false
     }
-
-    func updateNavigationBarShadow() {
-        self.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 0.5)
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0.1
-    }
 }
 
 extension ConversationViewController: ContactPickerViewControllerDelegate {
@@ -951,6 +892,108 @@ extension ConversationViewController: ContactPickerViewControllerDelegate {
                            displayName: self.viewModel.displayName.value,
                            username: self.viewModel.userName.value)
         self.updateNavigationBarShadow()
+    }
+}
+
+extension ConversationViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        if currentDocumentPickerMode == .picking {
+            let filePath = urls[0].absoluteURL.path
+            self.log.debug("Successfully imported \(filePath)")
+            let fileName = urls[0].absoluteURL.lastPathComponent
+            do {
+                let data = try Data(contentsOf: urls[0])
+                self.viewModel.sendAndSaveFile(displayName: fileName, imageData: data)
+            } catch {
+                self.viewModel.sendFile(filePath: filePath, displayName: fileName)
+            }
+        }
+        currentDocumentPickerMode = .none
+    }
+}
+
+extension ConversationViewController: UIDocumentInteractionControllerDelegate {
+    internal func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        if let navigationController = self.navigationController {
+            return navigationController
+        }
+        return self
+    }
+}
+
+// MARK: - Messages actions
+extension ConversationViewController {
+    func saveFile(url: URL) {
+        if url.pathExtension.isImageExtension() {
+            saveGIFOrImage(url: url)
+        } else {
+            saveFileToDocuments(fileURL: url)
+        }
+    }
+
+    func presentPreview(message: MessageContentVM) {
+        guard let url = message.url else { return }
+        if message.player != nil {
+            presentMedia(message: message)
+        } else {
+            openDocument(url: url)
+        }
+    }
+
+    func presentActivityControllerWithItems(items: [Any]) {
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+
+    func saveGIFOrImage(url: URL) {
+        PHPhotoLibrary.shared().performChanges({
+            let request = PHAssetCreationRequest.forAsset()
+            request.addResource(with: .photo, fileURL: url, options: nil)
+        }, completionHandler: { _, error in
+            guard let error = error else { return }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.showAlert(error: error)
+            }
+        })
+    }
+
+    @objc
+    func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            self.showAlert(error: error)
+        }
+    }
+
+    func showAlert(error: Error) {
+        let allert = UIAlertController(title: L10n.Conversation.errorSavingImage, message: error.localizedDescription, preferredStyle: .alert)
+        allert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(allert, animated: true)
+    }
+
+    func saveFileToDocuments(fileURL: URL) {
+        currentDocumentPickerMode = .saving
+        let documentPicker = UIDocumentPickerViewController(forExporting: [fileURL])
+        documentPicker.delegate = self
+        documentPicker.modalPresentationStyle = .formSheet
+        self.present(documentPicker, animated: true, completion: nil)
+    }
+
+    func presentMedia(message: MessageContentVM) {
+        self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: message.getImage(), initialFrame: CGRect.zero, delegate: message)
+        self.messageAccessoryView.frame.size.height = 0
+        self.messageAccessoryView.isHidden = true
+    }
+
+    func openDocument(url: URL) {
+        DispatchQueue.main.async {
+            let interactionController = UIDocumentInteractionController(url: url)
+            interactionController.delegate = self
+            interactionController.presentPreview(animated: true)
+        }
     }
 }
 // swiftlint:enable type_body_length

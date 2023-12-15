@@ -25,7 +25,6 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 import MobileCoreServices
-import LinkPresentation
 
 enum BubblePosition {
     case received
