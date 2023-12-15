@@ -356,6 +356,8 @@ class VideoService: FrameExtractorDelegate {
     var currentDeviceId = ""
     var videoInputManager = VideoInputsManager()
 
+    let mutedCamera = "mutedCamera"
+
     private let disposeBag = DisposeBag()
 
     init(withVideoAdapter videoAdapter: VideoAdapter) {
@@ -489,7 +491,7 @@ extension VideoService: VideoAdapterDelegate {
             if !source.hasPrefix("camera://") {
                 device = "camera://" + source
             }
-            mediaList[index][MediaAttributeKey.source.rawValue] = muted == "true" ? device : "muteSource"
+            mediaList[index][MediaAttributeKey.source.rawValue] = muted == "true" ? device : mutedCamera
             mediaList[index][MediaAttributeKey.muted.rawValue] = muted == "true" ? "false" : "true"
             found = true
             break
@@ -611,9 +613,7 @@ extension VideoService: VideoAdapterDelegate {
     }
 
     func stopCapture(withDevice device: String) {
-        // Stops the camera for a real device only.
-        if device.starts(with: "camera://") {
-            self.log.debug("Capture stopped...")
+        if !device.isEmpty && device != mutedCamera {
             self.camera.stopCapturing()
         }
     }
