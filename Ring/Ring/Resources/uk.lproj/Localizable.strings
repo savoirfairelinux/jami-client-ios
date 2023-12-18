@@ -163,7 +163,7 @@
 "linkToAccount.linkDeviceMessage" = "Виберіть «Підключити новий пристрій» у іншій програмі Jami, щоб показати QR-код або PIN";
 "linkToAccount.pinPlaceholder" = "PIN-код";
 "linkToAccount.pinLabel" = "Ввести PIN-код";
-"linkToAccount.explanationPinMessage" = "Для генерації PIN-коду перейдіть до налаштувань управління обліковим записом на пристрої, на якому знаходиться обліковий запис, який ви хочете використовувати. У налаштуваннях пристрою виберіть «Підключити інший пристрій до цього облікового запису». Ви отримаєте необхідний PIN-код для заповнення цієї форми. PIN-код дійсний лише протягом 10 хвилин.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Підпишіться";

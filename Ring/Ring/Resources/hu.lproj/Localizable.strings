@@ -163,7 +163,7 @@
 "linkToAccount.linkDeviceMessage" = "Válassza az „Új eszköz összekapcsolása” lehetőséget a másik Jami alkalmazásban a QR- vagy PIN-kód megjelenítéséhez";
 "linkToAccount.pinPlaceholder" = "PIN-kód";
 "linkToAccount.pinLabel" = "PIN-kód megadása";
-"linkToAccount.explanationPinMessage" = "A PIN-kód létrehozásához ugorjon a fiókkezelési beállításokhoz a használni kívánt fiókot tartalmazó eszközön. Válassza az eszközbeállításoknál a „Eszköz összekapcsolása fiókhoz” lehetőséget. Meg fogja kapni az űrlap kitöltéséhez szükséges PIN-kódot. A PIN-kód csak 10 percig érvényes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Bejelentkezés";
