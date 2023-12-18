@@ -277,7 +277,10 @@ class ConversationsManager {
                     }
                 } else {
                     os_log("call provider cancel call")
-                    self.callService.stopCall(call: call)
+                    self.callService
+                        .refuse(callId: call.callId)
+                        .subscribe()
+                        .disposed(by: self.disposeBag)
                 }
             })
             .disposed(by: self.disposeBag)
