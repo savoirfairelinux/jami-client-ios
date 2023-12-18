@@ -35,6 +35,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cb9567e_be960508",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/Cells/ConversationCell.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-12-18T21:09:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "299db774_98b3a6ef",
+      "revId": "1efe9c5f32fa81b6c16219a79e5ef71244183fe2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0d448be_bb497297",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-30T20:13:31Z",
       "side": 1,
       "message": "This image does not displayed. Should it be Localisations_Receive_Black? Same for send location sharing",
+      "revId": "1efe9c5f32fa81b6c16219a79e5ef71244183fe2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37616522_01735f32",
+        "filename": "Ring/Ring/Features/Conversations/SmartList/Cells/SmartListCell.xib",
+        "patchSetId": 11
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2023-12-18T21:09:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0d448be_bb497297",
       "revId": "1efe9c5f32fa81b6c16219a79e5ef71244183fe2",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
