@@ -45,7 +45,7 @@
 "global.copy" = "کپی";
 "global.reply" = "پاسخ";
 "global.search" = "در حال جستجو...";
-"global.donate" = "Donate";
+"global.donate" = "اهدا کنید";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
@@ -95,7 +95,7 @@
 "smartlist.aboutJami" = "درباره جمی";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "الان نه";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
@@ -163,7 +163,7 @@
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "پین";
 "linkToAccount.pinLabel" = "پین را وارد کنید";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on device that contain account you want to use. In devices settings Select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "ورود";

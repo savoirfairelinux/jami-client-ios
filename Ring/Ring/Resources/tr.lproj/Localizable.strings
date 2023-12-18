@@ -163,7 +163,7 @@
 "linkToAccount.linkDeviceMessage" = "QR kodunu veya PIN'i göstermek için diğer Jami uygulamasından \"Yeni bir aygıt bağla\"yı seç";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN'i gir";
-"linkToAccount.explanationPinMessage" = "PIN kodunu oluşturmak için kullanmak istediğin hesabın bulunduğu aygıttaki hesap yönetimi ayarlarına git. Aygıt ayarlarında \"Bu hesaba başka bir aygıtı bağla\" seçeneğini seç. Burayı doldurmak için gerekli PIN'i alacaksın. PIN yalnızca 10 dakika süreyle geçerlidir.";
+"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Oturum Aç";
