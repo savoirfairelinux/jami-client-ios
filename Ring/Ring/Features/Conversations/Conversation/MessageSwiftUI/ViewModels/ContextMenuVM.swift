@@ -24,7 +24,7 @@ import SwiftUI
 class ContextMenuVM {
     @Published var menuItems = [ContextualMenuItem]()
     var currentSnapshot: UIImage?
-    var presentingMessage: MessageContentView! {
+    var presentingMessage: MessageBubbleView! {
         didSet {
             menuItems = presentingMessage.model.menuItems
             actionsAnchor = presentingMessage.model.message.incoming ? .topLeading : .topTrailing

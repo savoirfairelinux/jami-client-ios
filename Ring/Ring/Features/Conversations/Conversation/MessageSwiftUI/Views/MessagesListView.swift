@@ -52,7 +52,7 @@ struct MessagesListView: View {
     // context menu
     @SwiftUI.State private var showContextMenu = false
     @SwiftUI.State private var currentSnapshot: UIImage?
-    @SwiftUI.State private var presentingMessage: MessageContentView?
+    @SwiftUI.State private var presentingMessage: MessageBubbleView?
     @SwiftUI.State private var messageFrame: CGRect?
     var contextMenuModel = ContextMenuVM()
     @SwiftUI.State private var screenHeight: CGFloat = 0

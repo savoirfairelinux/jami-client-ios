@@ -94,7 +94,6 @@ class MessagesListVM: ObservableObject {
     // dictionary of message id and array of participants for whom the message is last read
     var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
                                        dictionary: [String: [String: UIImage]]())
-
     var conversation: ConversationModel {
         didSet {
             messagesDisposeBag = DisposeBag()
@@ -144,6 +143,7 @@ class MessagesListVM: ObservableObject {
             self.subscribeSwarmPreferences()
             self.updateColorPreference()
             self.subscribeUserAvatarForLocationSharing()
+            self.subscribeReplyTarget()
         }
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
@@ -155,6 +155,53 @@ class MessagesListVM: ObservableObject {
         self.transferHelper = transferHelper
         self.locationSharingService = injectionBag.locationSharingService
         self.subscribeLocationEvents()
+    }
+
+    func receiveReply(newMessage: MessageContainerModel, fromHistory: Bool) {
+        let replyId = newMessage.message.reply
+        if let replyContentTarget = self.getReplyContentTarget(for: replyId) {
+            newMessage.replyTarget.target = replyContentTarget
+        } else if let message = self.conversation.getMessage(messageId: replyId) {
+            newMessage.setReplyTarget(message: message)
+        } else {
+            self.loadReplyTarget(newMessage: newMessage)
+        }
+    }
+
+    private func getReplyContentTarget(for replyId: String) -> MessageContentVM? {
+        if let replyContent = self.getMessage(messageId: replyId) {
+            return replyContent.messageContent
+        }
+        return nil
+    }
+
+    func loadReplyTarget(newMessage: MessageContainerModel) {
+        let replyId = newMessage.message.reply
+        let result = self.conversationService.loadTargetReply(conversationId: self.conversation.id, accountId: self.conversation.accountId, target: replyId)
+        if case .messageFound(let message) = result {
+            newMessage.setReplyTarget(message: message)
+        }
+    }
+
+    func getMessage(messageId: String) -> MessageContainerModel? {
+        return self.messagesModels.filter({ messageModel in
+            messageModel.message.id == messageId
+        }).first
+    }
+
+    func targetReplyReceived(target: MessageModel) {
+        self.messagesModels.forEach { [weak self, weak target] messageModel in
+            guard let self = self, let target = target else { return }
+            self.updateTargetReplyIfNeed(target: target, container: messageModel)
+        }
+    }
+
+    private func updateTargetReplyIfNeed(target: MessageModel,
+                                         container: MessageContainerModel) {
+        guard container.replyTarget.target == nil,
+              container.message.isReply(),
+              container.message.reply == target.id else { return }
+        container.setReplyTarget(message: target)
     }
 
     func subscribeLocationEvents() {
@@ -204,6 +251,17 @@ class MessagesListVM: ObservableObject {
             .disposed(by: self.disposeBag)
     }
 
+    func subscribeReplyTarget() {
+        self.conversationService.replyTargets
+            .subscribe(onNext: { [weak self] targets in
+                guard let self = self else { return }
+                for target in targets {
+                    self.targetReplyReceived(target: target)
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+
     private func updateCoordinatesList() {
         var coordinates = [LocationSharingAnnotation]()
         if let myContactsLocation = self.myContactsLocation {
@@ -220,15 +278,22 @@ class MessagesListVM: ObservableObject {
     }
 
     private func insert(newMessage: MessageModel, fromHistory: Bool) -> Bool {
+        guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
+            return false
+        }
         if self.messagesModels.contains(where: { messageModel in
             messageModel.message.id == newMessage.id
         }) { return false }
-        let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject)
+        let isHistory = newMessage.isReply()
+        let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject, isHistory: isHistory, localJamiId: localJamiId)
         self.subscribeMessage(container: container)
         if fromHistory {
             self.messagesModels.append(container)
         } else {
             self.messagesModels.insert(container, at: 0)
+        }
+        if newMessage.isReply() {
+            self.receiveReply(newMessage: container, fromHistory: fromHistory)
         }
         return true
     }
@@ -275,7 +340,7 @@ class MessagesListVM: ObservableObject {
                 }
             case .updateDisplayname(let jamiId):
                 if let name = self.names.get(key: jamiId) as? String {
-                    container.updateUsername(name: name)
+                    container.updateUsername(name: name, jamiId: jamiId)
                 } else {
                     self.getInformationForContact(id: jamiId, message: container)
                 }
@@ -375,11 +440,11 @@ class MessagesListVM: ObservableObject {
 
     private func allLoaded() -> Bool {
         guard let firstMessage = self.messagesModels.last else { return false }
-        return firstMessage.message.parentId.isEmpty
+        return firstMessage.message.parentId.isEmpty && firstMessage.message.parents.isEmpty
     }
 
     func loadMore() {
-        if self.loading || self.allLoaded() {
+        if self.loading || allLoaded() {
             return
         }
         if let messageId = self.messagesModels.last?.id {
@@ -422,8 +487,7 @@ class MessagesListVM: ObservableObject {
         }
         for (index, model) in self.messagesModels.enumerated() {
             model.sequencing = getMessageSequencing(forIndex: index)
-            let shouldDisplayName = (model.sequencing == .firstOfSequence || model.sequencing == .singleMessage) && model.message.incoming
-            model.shouldDisplayName = shouldDisplayName
+            model.shouldDisplayName = shouldDisplayName(message: model)
         }
     }
 
@@ -431,7 +495,11 @@ class MessagesListVM: ObservableObject {
 
     private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
         return message.uri != secondMessage.uri
-            || message.type == .contact || message.type == .initial || message.authorId != secondMessage.authorId
+            || message.type == .contact || message.type == .initial || message.authorId != secondMessage.authorId || message.isReply() || secondMessage.isReply()
+    }
+
+    private func shouldDisplayName(message: MessageContainerModel) -> Bool {
+        return (message.sequencing == .firstOfSequence || message.sequencing == .singleMessage) && message.message.incoming && !message.message.isReply()
     }
 
     private func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
@@ -479,7 +547,7 @@ class MessagesListVM: ObservableObject {
 
     private func updateName(name: String, id: String, message: MessageContainerModel) {
         self.names.set(value: name, for: id)
-        message.updateUsername(name: name)
+        message.updateUsername(name: name, jamiId: id)
     }
 
     private func updateAvatar(image: UIImage, id: String, message: MessageContainerModel) {

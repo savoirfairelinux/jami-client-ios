@@ -66,7 +66,7 @@ extension View {
 
 struct MessageRowView: View {
     let messageModel: MessageContainerModel
-    var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
+    var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     @StateObject var model: MessageRowVM
     var body: some View {
         VStack(alignment: .leading) {

@@ -25,7 +25,7 @@ struct MessageStackView: View {
     var model: MessageStackVM {
         return messageModel.stackViewModel
     }
-    var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
+    var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     var body: some View {
         VStack(alignment: model.horizontalAllignment) {
             if model.shouldDisplayName {

@@ -29,6 +29,7 @@
     func detectingMessageTyping(_ from: String, for accountId: String, status: Int)
 
     func conversationLoaded(conversationId: String, accountId: String, messages: [SwarmMessageWrap], requestId: Int)
+    func messageLoaded(conversationId: String, accountId: String, messages: [[String: String]])
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap)
     func conversationReady(conversationId: String, accountId: String)
     func conversationRemoved(conversationId: String, accountId: String)
