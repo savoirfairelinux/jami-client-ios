@@ -221,6 +221,10 @@ class ConversationsService {
         self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: 40)
     }
 
+    func getReplyMessage(conversationId: String, accountId: String, id: String) {
+        self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: id, size: 1)
+    }
+
     func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
         self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId)
     }

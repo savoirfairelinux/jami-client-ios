@@ -170,13 +170,13 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
 
-    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>) {
+    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, isHistory: Bool) {
         self.contextMenuState = contextMenuState
         self.transferState = transferState
         self.message = message
         self.type = message.type
         self.isIncoming = message.incoming
-        self.isHistory = false
+        self.isHistory = isHistory
         self.content = message.content
         self.transferStatus = message.transferStatus
         self.secondaryColor = Color(UIColor.secondaryLabel)

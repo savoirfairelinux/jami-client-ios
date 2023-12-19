@@ -120,7 +120,9 @@ struct MessageContentView: View {
     var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
     var body: some View {
         VStack(alignment: .leading) {
-            if model.type == .call {
+            if messageModel.messageContent.isHistory {
+                ReplyHistory(messageModel: messageModel)
+            } else if model.type == .call {
                 Text(model.content)
                     .padding(model.textInset)
                     .foregroundColor(model.textColor)

@@ -94,6 +94,7 @@ class MessagesListVM: ObservableObject {
     // dictionary of message id and array of participants for whom the message is last read
     var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
                                        dictionary: [String: [String: UIImage]]())
+    var waitForReply = [String: Set<String>]()
 
     var conversation: ConversationModel {
         didSet {
@@ -108,8 +109,18 @@ class MessagesListVM: ObservableObject {
                         return
                     }
                     var insertionCount = 0
-                    for newMessage in messages.messages where self.insert(newMessage: newMessage, fromHistory: messages.fromHistory) == true {
-                        insertionCount += 1
+                    for newMessage in messages.messages {
+                        if waitForReply.keys.contains(newMessage.id) {
+                            self.updateReplyMessages(reply: newMessage)
+                            return
+                        }
+                        if !newMessage.reply.isEmpty {
+                            self.displayReplies(newMessage: newMessage, fromHistory: messages.fromHistory)
+                            insertionCount += 1
+                        }
+                        if self.insert(newMessage: newMessage, fromHistory: messages.fromHistory) == true {
+                            insertionCount += 1
+                        }
                     }
                     if insertionCount == 0 {
                         return
@@ -155,6 +166,43 @@ class MessagesListVM: ObservableObject {
         self.transferHelper = transferHelper
         self.locationSharingService = injectionBag.locationSharingService
         self.subscribeLocationEvents()
+    }
+
+    func displayReplies(newMessage: MessageModel, fromHistory: Bool) {
+        let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject, isHistory: true)
+        self.subscribeMessage(container: container)
+        if fromHistory {
+            self.messagesModels.append(container)
+        } else {
+            self.messagesModels.insert(container, at: 0)
+        }
+        if let messageView = self.messagesModels.filter({ messageModel in
+            messageModel.message.id == newMessage.reply
+        }).first {
+            container.historyModel.replyTo = messageView.message
+
+        } else if let message = self.conversation.messages.filter({ messageModel in
+            messageModel.id == newMessage.reply
+        }).first {
+            container.historyModel.replyTo = message
+
+        } else {
+            self.waitForReply[newMessage.reply, default: Set<String>()].insert(newMessage.id)
+            self.conversationService.getReplyMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, id: newMessage.reply)
+        }
+    }
+
+    func updateReplyMessages(reply: MessageModel) {
+        if let messagesToUpdate = self.waitForReply[reply.id] {
+            for message in messagesToUpdate {
+                if let messageView = self.messagesModels.filter({ messageModel in
+                    messageModel.message.id == message
+                }).first {
+                    messageView.historyModel.replyTo = reply
+                }
+            }
+        }
+        self.waitForReply[reply.id] = nil
     }
 
     func subscribeLocationEvents() {
@@ -223,7 +271,7 @@ class MessagesListVM: ObservableObject {
         if self.messagesModels.contains(where: { messageModel in
             messageModel.message.id == newMessage.id
         }) { return false }
-        let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject)
+        let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject, isHistory: false)
         self.subscribeMessage(container: container)
         if fromHistory {
             self.messagesModels.append(container)

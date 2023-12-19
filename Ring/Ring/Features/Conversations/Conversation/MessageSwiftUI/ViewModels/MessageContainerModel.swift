@@ -81,13 +81,13 @@ class MessageContainerModel: Identifiable {
         }
     }
 
-    init(message: MessageModel, contextMenuState: PublishSubject<State>) {
+    init(message: MessageModel, contextMenuState: PublishSubject<State>, isHistory: Bool) {
         self.id = message.id
         self.message = message
         self.contextMenuState = contextMenuState
         self.historyModel = MessageHistoryVM()
         self.stackViewModel = MessageStackVM(message: message, infoState: self.infoSubject)
-        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject)
+        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, isHistory: isHistory)
         self.messageRow = MessageRowVM(message: message, infoState: self.infoSubject)
         self.contactViewModel = ContactMessageVM(message: message, infoState: self.infoSubject)
     }
