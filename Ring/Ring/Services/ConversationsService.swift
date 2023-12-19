@@ -265,7 +265,7 @@ class ConversationsService {
         }
         conversation.messages.append(contentsOf: newMessages)
         sortIfNeeded()
-        conversation.newMessages.accept(newMessages)
+        conversation.newMessages.accept(LoadedMessages(messages: newMessages, fromHistory: fromLoaded))
         self.updateUnreadMessages(conversationId: conversationId, accountId: accountId)
         return true
     }
