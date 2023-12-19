@@ -150,8 +150,13 @@ class ConversationParticipant: Equatable, Hashable {
     }
 }
 
+struct LoadedMessages {
+    var messages: [MessageModel]
+    var fromHistory: Bool
+}
+
 class ConversationModel: Equatable {
-    var newMessages = BehaviorRelay<[MessageModel]>(value: [MessageModel]())
+    var newMessages = BehaviorRelay<LoadedMessages>(value: LoadedMessages(messages: [MessageModel](), fromHistory: false))
     private var participants = [ConversationParticipant]()
     var messages = [MessageModel]()
     var hash = ""/// contact hash for dialog, conversation title for multiparticipants
@@ -159,7 +164,6 @@ class ConversationModel: Equatable {
     var id: String = ""
     var lastMessage: MessageModel?
     var type: ConversationType = .nonSwarm
-    var unorderedInteractions = [String]()/// array ofr interaction id with child not currently present in messages
     let numberOfUnreadMessages = BehaviorRelay<Int>(value: 0)
     let disposeBag = DisposeBag()
     var avatar: String = ""
@@ -398,7 +402,7 @@ class ConversationModel: Equatable {
 
     func appendNonSwarm(message: MessageModel) {
         self.messages.append(message)
-        self.newMessages.accept([message])
+        self.newMessages.accept(LoadedMessages(messages: [message], fromHistory: false))
     }
 
     func isSwarm() -> Bool {
@@ -407,9 +411,8 @@ class ConversationModel: Equatable {
 
     func clearMessages() {
         messages = [MessageModel]()
-        newMessages.accept([MessageModel]())
+        newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false))
         lastMessage = nil
-        unorderedInteractions = [String]()
         numberOfUnreadMessages.accept(0)
     }
 }
