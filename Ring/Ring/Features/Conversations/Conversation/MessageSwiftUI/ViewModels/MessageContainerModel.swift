@@ -28,11 +28,11 @@ class MessageContainerModel: Identifiable {
     let id: String
     let messageContent: MessageContentVM
     let messageRow: MessageRowVM
-    let historyModel: MessageHistoryVM
     let stackViewModel: MessageStackVM
     let contactViewModel: ContactMessageVM
     let message: MessageModel
     let disposeBag = DisposeBag()
+    var replyTarget: MessageReplyTargetVM
 
     // message info state
     private let infoSubject = PublishSubject<State>()
@@ -72,30 +72,48 @@ class MessageContainerModel: Identifiable {
         didSet {
             self.messageContent.followEmogiMessage = followEmogiMessage
             self.messageRow.followEmogiMessage = followEmogiMessage
+            if let reply = self.replyTarget.target {
+                reply.followEmogiMessage = followEmogiMessage
+            }
         }
     }
     var followingByEmogiMessage = false {
         didSet {
             self.messageContent.followingByEmogiMessage = followingByEmogiMessage
+            if let reply = self.replyTarget.target {
+                reply.followingByEmogiMessage = followingByEmogiMessage
+            }
             self.messageRow.followingByEmogiMessage = followingByEmogiMessage
         }
     }
 
-    init(message: MessageModel, contextMenuState: PublishSubject<State>) {
+    init(message: MessageModel, contextMenuState: PublishSubject<State>, isHistory: Bool, localJamiId: String) {
         self.id = message.id
         self.message = message
         self.contextMenuState = contextMenuState
-        self.historyModel = MessageHistoryVM()
         self.stackViewModel = MessageStackVM(message: message, infoState: self.infoSubject)
-        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject)
+        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, isHistory: isHistory)
         self.messageRow = MessageRowVM(message: message, infoState: self.infoSubject)
         self.contactViewModel = ContactMessageVM(message: message, infoState: self.infoSubject)
+        self.replyTarget = MessageReplyTargetVM(infoState: self.infoSubject, localJamiId: localJamiId, replyAuthorJamiId: message.authorId)
+    }
+
+    func setReplyTarget(message: MessageModel) {
+        let target = MessageContentVM(message: message, contextMenuState: PublishSubject<State>(), transferState: self.transferSubject, isHistory: false)
+        self.replyTarget.target = target
     }
 
     func updateTransferStatus(status: DataTransferStatus) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.messageContent.setTransferStatus(transferStatus: status)
+        }
+
+        if let reply = self.replyTarget.target {
+            DispatchQueue.main.async { [weak reply] in
+                guard let reply = reply else { return }
+                reply.setTransferStatus(transferStatus: status)
+            }
         }
     }
 
@@ -115,10 +133,14 @@ class MessageContainerModel: Identifiable {
             if self.message.type == .contact && self.message.incoming {
                 self.contactViewModel.avatarImage = image
             }
+
+            if self.replyTarget.target != nil {
+                self.replyTarget.avatarImage = image
+            }
         }
     }
 
-    func updateUsername(name: String) {
+    func updateUsername(name: String, jamiId: String) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if self.stackViewModel.shouldDisplayName && self.message.incoming {
@@ -126,6 +148,10 @@ class MessageContainerModel: Identifiable {
             }
             if self.message.type == .contact && self.message.incoming {
                 self.contactViewModel.username = name
+            }
+
+            if  self.replyTarget.target != nil {
+                self.replyTarget.updateUsername(name: name, jamiId: jamiId)
             }
         }
     }
