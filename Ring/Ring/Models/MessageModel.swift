@@ -172,4 +172,8 @@ public class MessageModel {
             break
         }
     }
+
+    func isReply() -> Bool {
+        return !self.reply.isEmpty
+    }
 }
