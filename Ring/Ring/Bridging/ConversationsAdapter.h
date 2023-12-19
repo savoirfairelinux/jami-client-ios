@@ -28,6 +28,17 @@ typedef NS_ENUM(int, MessageStatus)  {
     MessageStatusFailure
 };
 
+@interface SwarmMessageWrap : NSObject
+
+@property (nonatomic, strong) NSString* id;
+@property (nonatomic, strong) NSString* type;
+@property (nonatomic, strong) NSString* linearizedParent;
+@property (nonatomic, strong) NSDictionary<NSString *, NSString *>* body;
+@property (nonatomic, strong) NSArray<NSDictionary<NSString *, NSString *> *>* reactions;
+@property (nonatomic, strong) NSArray<NSDictionary<NSString *, NSString *> *>* editions;
+
+@end
+
 @protocol MessagesAdapterDelegate;
 
 @interface ConversationsAdapter : NSObject

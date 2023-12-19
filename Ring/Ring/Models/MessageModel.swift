@@ -82,6 +82,10 @@ public class MessageModel {
         self.authorId = authorURI
         self.incoming = incoming
     }
+
+    convenience init (with swarmMessage: SwarmMessageWrap, accountJamiId: String) {
+        self.init(withInfo: swarmMessage.body, accountJamiId: accountJamiId)
+    }
     // swiftlint:disable:next cyclomatic_complexity
     init(withInfo info: [String: String], accountJamiId: String) {
         if let interactionId = info[MessageAttributes.interactionId.rawValue] {

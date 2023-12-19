@@ -263,9 +263,13 @@ class ConversationsService {
                 return
             }
         }
-        conversation.messages.append(contentsOf: newMessages)
+        if fromLoaded {
+            conversation.messages.append(contentsOf: newMessages)
+        } else {
+            conversation.messages.insert(contentsOf: newMessages, at: 0)
+        }
         sortIfNeeded()
-        conversation.newMessages.accept(newMessages)
+        conversation.newMessages.accept(LoadedMessages(messages: newMessages, fromHistory: fromLoaded))
         self.updateUnreadMessages(conversationId: conversationId, accountId: accountId)
         return true
     }

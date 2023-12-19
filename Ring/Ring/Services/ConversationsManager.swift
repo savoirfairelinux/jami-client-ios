@@ -540,16 +540,17 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
     }
-    func conversationLoaded(conversationId: String, accountId: String, messages: [[String: String]]) {
+
+    func conversationLoaded(conversationId: String, accountId: String, messages: [SwarmMessageWrap], requestId: Int) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        /// convert array of dictionaries to messages
-        let messagesModels = messages.map { dictionary -> MessageModel in
-            let newMessage = MessageModel(withInfo: dictionary, accountJamiId: account.jamiId)
+        // convert array of dictionaries to messages
+        let messagesModels = messages.map { wrapInfo -> MessageModel in
+            let newMessage = MessageModel(with: wrapInfo, accountJamiId: account.jamiId)
             if newMessage.type == .fileTransfer {
                 let progress = self.dataTransferService.getTransferProgress(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true)
                 newMessage.transferStatus = progress == 0 ? .awaiting : progress == newMessage.totalSize ? .success : .ongoing
                 if newMessage.transferStatus == .awaiting &&
-                    (isDownloadingEnabled(for: newMessage.totalSize) || dictionary[MessageAttributes.author.rawValue] == account.jamiId) {
+                    (isDownloadingEnabled(for: newMessage.totalSize) || wrapInfo.body[MessageAttributes.author.rawValue] == account.jamiId) {
                     var filename = ""
                     self.dataTransferService.downloadFile(withId: newMessage.daemonId,
                                                           interactionID: newMessage.id,
@@ -571,14 +572,14 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         return Int(size) <= maxSizeForAutoaccept
     }
 
-    func newInteraction(conversationId: String, accountId: String, message: [String: String]) {
+    func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        let newMessage = MessageModel(withInfo: message, accountJamiId: account.jamiId)
+        let newMessage = MessageModel(with: message, accountJamiId: account.jamiId)
         if newMessage.type == .fileTransfer {
             newMessage.transferStatus = newMessage.incoming ? .awaiting : .success
         }
         if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, conversationId: conversationId, fromLoaded: false) {
-            let incoming = message[MessageAttributes.author.rawValue] != account.jamiId
+            let incoming = message.body[MessageAttributes.author.rawValue] != account.jamiId
             if incoming {
                 if newMessage.transferStatus != .awaiting || !isDownloadingEnabled(for: newMessage.totalSize) {
                     return

@@ -25,6 +25,23 @@
 #import "jami/configurationmanager_interface.h"
 #import "jami/conversation_interface.h"
 
+@implementation SwarmMessageWrap
+
+- (instancetype)initWithSwarmMessage:(const libjami::SwarmMessage &)message {
+    self = [super init];
+    if (self) {
+        self.id = @(message.id.c_str());
+        self.type = @(message.type.c_str());
+        self.linearizedParent = @(message.linearizedParent.c_str());
+        self.body = [Utils mapToDictionnary: message.body];
+        self.reactions = [Utils vectorOfMapsToArray: message.reactions];
+        self.editions = [Utils vectorOfMapsToArray: message.editions];
+    }
+    return self;
+}
+
+@end
+
 @implementation ConversationsAdapter
 
 using namespace libjami;
@@ -76,21 +93,26 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
         }
     }));
 
-    confHandlers.insert(exportable_callback<ConversationSignal::ConversationLoaded>([&](uint32_t id, const std::string& accountId, const std::string& conversationId, std::vector<std::map<std::string, std::string>> messages) {
+    confHandlers.insert(exportable_callback<ConversationSignal::SwarmLoaded>([&](uint32_t id, const std::string& accountId, const std::string& conversationId, std::vector<libjami::SwarmMessage> messages) {
         if (ConversationsAdapter.messagesDelegate) {
             NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
             NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
-            NSArray* interactions = [Utils vectorOfMapsToArray: messages];
-            [ConversationsAdapter.messagesDelegate conversationLoadedWithConversationId: convId accountId: account messages: interactions];
+
+            NSMutableArray<SwarmMessageWrap *> *swarmMessages = [[NSMutableArray alloc] init];
+            for (const libjami::SwarmMessage &message : messages) {
+                SwarmMessageWrap *swarmMessage = [[SwarmMessageWrap alloc] initWithSwarmMessage:message];
+                [swarmMessages addObject:swarmMessage];
+            }
+            [ConversationsAdapter.messagesDelegate conversationLoadedWithConversationId: convId accountId: account messages: swarmMessages requestId: id];
         }
     }));
 
-    confHandlers.insert(exportable_callback<ConversationSignal::MessageReceived>([&](const std::string& accountId, const std::string& conversationId, std::map<std::string, std::string> message) {
+    confHandlers.insert(exportable_callback<ConversationSignal::SwarmMessageReceived>([&](const std::string& accountId, const std::string& conversationId, libjami::SwarmMessage message) {
         if (ConversationsAdapter.messagesDelegate) {
             NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
             NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
-            NSMutableDictionary* interaction = [Utils mapToDictionnary: message];
-            [ConversationsAdapter.messagesDelegate newInteractionWithConversationId: convId accountId: account message: interaction];
+            SwarmMessageWrap *swarmMessage = [[SwarmMessageWrap alloc] initWithSwarmMessage: message];
+            [ConversationsAdapter.messagesDelegate newInteractionWithConversationId: convId accountId: account message: swarmMessage];
         }
     }));
 
@@ -187,7 +209,7 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
 }
 
 - (uint32_t)loadConversationMessages:(NSString*) accountId conversationId:(NSString*) conversationId from:(NSString*)fromMessage size:(NSInteger)size {
-    return loadConversationMessages(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fromMessage UTF8String]), size);
+    return loadConversation(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fromMessage UTF8String]), size);
 }
 
 - (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId  {
