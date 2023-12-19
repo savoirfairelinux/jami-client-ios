@@ -113,6 +113,11 @@ public class MessageModel {
         incoming = self.uri.isEmpty ? !self.authorId.isEmpty : self.uri != accountJamiId
         if let parent = info[MessageAttributes.parent.rawValue] {
             self.parentId = parent
+            if parent.isEmpty {
+                if let parents = info["parents"]?.components(separatedBy: ","), let firstParent = parents.first {
+                    self.parentId = firstParent
+                }
+            }
         }
         if let totalSizeString = info[MessageAttributes.totalSize.rawValue],
            let totalSize = Int(totalSizeString) {
@@ -171,5 +176,9 @@ public class MessageModel {
         default:
             break
         }
+    }
+
+    func isReply() -> Bool {
+        return !self.reply.isEmpty
     }
 }

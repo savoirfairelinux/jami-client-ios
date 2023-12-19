@@ -541,6 +541,29 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         self.conversationService.conversationReady(conversationId: conversationId, accountId: accountId, accountURI: account.jamiId)
     }
 
+    func messageLoaded(conversationId: String, accountId: String, messages: [[String: String]]) {
+        guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
+        // convert array of dictionaries to messages
+        let messagesModels = messages.map { dictionary -> MessageModel in
+            let newMessage = MessageModel(withInfo: dictionary, accountJamiId: account.jamiId)
+            if newMessage.type == .fileTransfer {
+                let progress = self.dataTransferService.getTransferProgress(withId: newMessage.daemonId, accountId: accountId, conversationId: conversationId, isSwarm: true)
+                newMessage.transferStatus = progress == 0 ? .awaiting : progress == newMessage.totalSize ? .success : .ongoing
+                if newMessage.transferStatus == .awaiting &&
+                    (isDownloadingEnabled(for: newMessage.totalSize) || dictionary[MessageAttributes.author.rawValue] == account.jamiId) {
+                    var filename = ""
+                    self.dataTransferService.downloadFile(withId: newMessage.daemonId,
+                                                          interactionID: newMessage.id,
+                                                          fileName: &filename, accountID: accountId,
+                                                          conversationID: conversationId)
+                }
+            }
+            return newMessage
+        }
+        _ = self.conversationService.insertReplies(messages: messagesModels, accountId: accountId, conversationId: conversationId, fromLoaded: true)
+
+    }
+
     func conversationLoaded(conversationId: String, accountId: String, messages: [SwarmMessageWrap], requestId: Int) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         // convert array of dictionaries to messages
