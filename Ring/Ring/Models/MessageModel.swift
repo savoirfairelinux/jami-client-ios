@@ -74,6 +74,7 @@ public class MessageModel {
     var reply: String = ""
     var react: String = ""
     var totalSize: Int = 0
+    var parents = [String]()
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -113,6 +114,11 @@ public class MessageModel {
         incoming = self.uri.isEmpty ? !self.authorId.isEmpty : self.uri != accountJamiId
         if let parent = info[MessageAttributes.parent.rawValue] {
             self.parentId = parent
+        }
+        if let parents = info["parents"]?.components(separatedBy: ",").filter({ parentId in
+            !parentId.isEmpty
+        }) {
+            self.parents.append(contentsOf: parents)
         }
         if let totalSizeString = info[MessageAttributes.totalSize.rawValue],
            let totalSize = Int(totalSizeString) {
@@ -171,5 +177,9 @@ public class MessageModel {
         default:
             break
         }
+    }
+
+    func isReply() -> Bool {
+        return !self.reply.isEmpty
     }
 }

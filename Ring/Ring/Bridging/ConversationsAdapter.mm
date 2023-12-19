@@ -107,6 +107,15 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
         }
     }));
 
+    confHandlers.insert(exportable_callback<ConversationSignal::ConversationLoaded>([&](uint32_t id, const std::string& accountId, const std::string& conversationId, std::vector<std::map<std::string, std::string>> messages) {
+            if (ConversationsAdapter.messagesDelegate) {
+                    NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
+                    NSString* account =  [NSString stringWithUTF8String:accountId.c_str()];
+                    NSArray* interactions = [Utils vectorOfMapsToArray: messages];
+                [ConversationsAdapter.messagesDelegate messageLoadedWithConversationId:convId accountId: account messages:interactions];
+            }
+        }));
+
     confHandlers.insert(exportable_callback<ConversationSignal::SwarmMessageReceived>([&](const std::string& accountId, const std::string& conversationId, libjami::SwarmMessage message) {
         if (ConversationsAdapter.messagesDelegate) {
             NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];
@@ -210,6 +219,10 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
 
 - (uint32_t)loadConversationMessages:(NSString*) accountId conversationId:(NSString*) conversationId from:(NSString*)fromMessage size:(NSInteger)size {
     return loadConversation(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fromMessage UTF8String]), size);
+}
+
+- (uint32_t)loadConversationForAccountId:(NSString*) accountId conversationId:(NSString*) conversationId from:(NSString*)fromMessage until:(NSString*)toMessage {
+    return loadConversationUntil(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fromMessage UTF8String]), std::string([toMessage UTF8String]));
 }
 
 - (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId  {
