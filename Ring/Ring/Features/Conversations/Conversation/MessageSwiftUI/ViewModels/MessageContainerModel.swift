@@ -28,7 +28,8 @@ class MessageContainerModel: Identifiable {
     let id: String
     let messageContent: MessageContentVM
     let messageRow: MessageRowVM
-    let historyModel: MessageHistoryVM
+    // let historyModel: MessageHistoryVM
+    var replyTo: MessageContentVM?
     let stackViewModel: MessageStackVM
     let contactViewModel: ContactMessageVM
     let message: MessageModel
@@ -72,22 +73,28 @@ class MessageContainerModel: Identifiable {
         didSet {
             self.messageContent.followEmogiMessage = followEmogiMessage
             self.messageRow.followEmogiMessage = followEmogiMessage
+            if let reply = self.replyTo {
+                reply.followEmogiMessage = followEmogiMessage
+            }
         }
     }
     var followingByEmogiMessage = false {
         didSet {
             self.messageContent.followingByEmogiMessage = followingByEmogiMessage
+            if let reply = self.replyTo {
+                reply.followingByEmogiMessage = followingByEmogiMessage
+            }
             self.messageRow.followingByEmogiMessage = followingByEmogiMessage
         }
     }
 
-    init(message: MessageModel, contextMenuState: PublishSubject<State>) {
+    init(message: MessageModel, contextMenuState: PublishSubject<State>, isHistory: Bool) {
         self.id = message.id
         self.message = message
         self.contextMenuState = contextMenuState
-        self.historyModel = MessageHistoryVM()
+        // self.historyModel = MessageHistoryVM()
         self.stackViewModel = MessageStackVM(message: message, infoState: self.infoSubject)
-        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject)
+        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, isHistory: isHistory)
         self.messageRow = MessageRowVM(message: message, infoState: self.infoSubject)
         self.contactViewModel = ContactMessageVM(message: message, infoState: self.infoSubject)
     }
@@ -96,6 +103,13 @@ class MessageContainerModel: Identifiable {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.messageContent.setTransferStatus(transferStatus: status)
+        }
+
+        if let reply = self.replyTo {
+            DispatchQueue.main.async { [weak reply] in
+                guard let reply = reply else { return }
+                reply.setTransferStatus(transferStatus: status)
+            }
         }
     }
 
@@ -133,5 +147,8 @@ class MessageContainerModel: Identifiable {
     func swarmColorUpdated(color: UIColor) {
         self.messageContent.swarmColorUpdated(color: color)
         self.contactViewModel.swarmColorUpdated(color: color)
+        if let reply = self.replyTo {
+            reply.swarmColorUpdated(color: color)
+        }
     }
 }
