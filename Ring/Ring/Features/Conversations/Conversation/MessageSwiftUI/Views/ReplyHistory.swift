@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2022 Savoir-faire Linux Inc.
+ *  Copyright (C) 2023 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -20,62 +20,93 @@
 
 import SwiftUI
 
-struct ReplyHistory: View {
-    let messageModel: MessageContainerModel
-    var model: MessageHistoryVM {
-        return messageModel.historyModel
-    }
-    var body: some View {
-        VStack {
-            HStack(alignment: .bottom) {
-                //                if let aimage = test.avatarImage {
-                //                    Image(uiImage: aimage)
-                //                        .resizable()
-                //                        .scaledToFit()
-                //                        .frame(width: 30, height: 30)
-                //                        .background(Color.blue)
-                //                        .cornerRadius(15)
-                //                }
-                //                VStack {
-                //                    Text(test.username)
-                //                        .font(.callout)
-                //                        .foregroundColor(.secondary)
-                //                        .frame(maxWidth: .infinity, alignment: .leading)
-                //                    Spacer()
-                //                        .frame(height: 5)
-                //                    HStack(alignment: .bottom) {
-                //                        if let image = test.image {
-                //                            Image(uiImage: image)
-                //                                .resizable()
-                //                                .scaledToFit()
-                //                                .frame(width: 100, height: 100)
-                //                                .background(Color.blue)
-                //                                .cornerRadius(20)
-                //                        } else {
-                //                            Text(test.content)
-                //                                .frame(maxWidth: .infinity, alignment: .center)
-                //                                .padding(EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0))
-                //                                .foregroundColor(.secondary)
-                //                                .font(.body)
-                //                                .overlay(
-                //                                    CornerRadiusShape(radius: 15, corners: [.topLeft, .topRight, .bottomRight])
-                //                                        .stroke(.gray, lineWidth: 2)
-                //                                )
-                //                        }
-                //                    }
-                //                }
-            }
-            .padding(EdgeInsets(top: 15, leading: 15, bottom: 5, trailing: 15))
+struct MessageReplyStyle: ViewModifier {
+    @StateObject var model: MessageContentVM
 
-            Button("2 Replies") {
-                print("Button tapped!")
+    func body(content: Content) -> some View {
+        content
+            .padding(.top, 5)
+            .padding(.bottom, 5)
+            .padding(.leading, 10)
+            .padding(.trailing, 10)
+            .foregroundColor(Color(UIColor.label))
+            .background(Color(UIColor.lightGray))
+            .font(.footnote)
+            .modifier(MessageCornerRadius(model: model))
+    }
+}
+
+struct ReplyHistory: View {
+    let model: MessageReplyTargetVM
+    var target: MessageContentVM? {
+        return model.target
+    }
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.openURL) var openURL
+
+    var body: some View {
+        VStack(alignment: model.alignment, spacing: 4) {
+            if let target = self.target {
+                Text(model.inReplyTo)
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                    .onAppear {
+                        target.onAppear()
+                    }
+                if target.type == .fileTransfer {
+                    if let player = target.player {
+                        ZStack(alignment: .center) {
+                            if colorScheme == .dark {
+                                target.borderColor
+                                    .modifier(MessageCornerRadius(model: target))
+                                    .frame(width: target.playerWidth + 2, height: target.playerHeight + 2)
+                            }
+                            PlayerSwiftUI(model: target, player: player, onLongGesture: {})
+                                .modifier(MessageCornerRadius(model: target))
+                                .opacity(0.7)
+                        }
+                    } else if let image = target.finalImage {
+                        if !target.isGifImage() {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(minHeight: model.imageMinHeight, maxHeight: model.imageMaxHeight)
+                                .onTapGesture {}
+                                .modifier(MessageCornerRadius(model: target))
+                                .opacity(0.7)
+                        } else {
+                            ScaledImageViewWrapper(imageToShow: image)
+                                .scaledToFit()
+                                .frame(maxHeight: model.imageMaxHeight)
+                                .onTapGesture {}
+                                .modifier(MessageCornerRadius(model: target))
+                                .opacity(0.7)
+                        }
+                    } else {
+                        DefaultTransferView(model: target, onLongGesture: {})
+                            .modifier(MessageCornerRadius(model: target))
+                            .opacity(0.7)
+                    }
+                } else if target.type == .text {
+                    if let metadata = target.metadata {
+                        URLPreview(metadata: metadata, maxDimension: target.maxDimension * model.sizeIndex)
+                            .modifier(MessageCornerRadius(model: target))
+                            .opacity(0.7)
+                    } else if target.content.isValidURL, let url = target.getURL() {
+                        Text(target.content)
+                            .modifier(MessageReplyStyle(model: target))
+                            .onTapGesture(perform: {
+                                openURL(url)
+                            })
+                            .opacity(0.4)
+                    } else {
+                        Text(target.content)
+                            .modifier(MessageReplyStyle(model: target))
+                            .lineLimit(nil)
+                            .opacity(0.4)
+                    }
+                }
             }
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 0))
         }
-        .overlay(
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(.green, lineWidth: 2)
-        )
-        .padding()
     }
 }

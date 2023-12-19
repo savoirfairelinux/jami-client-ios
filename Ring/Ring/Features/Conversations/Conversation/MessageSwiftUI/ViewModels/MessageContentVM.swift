@@ -170,22 +170,22 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
 
-    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>) {
+    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, isHistory: Bool) {
         self.contextMenuState = contextMenuState
         self.transferState = transferState
         self.message = message
         self.type = message.type
         self.isIncoming = message.incoming
-        self.isHistory = false
+        self.isHistory = isHistory
         self.content = message.content
         self.transferStatus = message.transferStatus
         self.secondaryColor = Color(UIColor.secondaryLabel)
         if isHistory {
-            self.sequencing = .firstOfSequence
-            self.borderColor = Color(.secondaryLabel)
-            self.textColor = Color(.secondaryLabel)
-            self.hasBorder = true
-            self.backgroundColor = Color(.white)
+            self.sequencing = .singleMessage
+            self.hasBorder = false
+            self.borderColor = Color(.clear)
+            self.textColor = isIncoming ? Color(UIColor.label) : Color(.white)
+            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(.jamiMsgCellSent)
         } else {
             self.textColor = isIncoming ? Color(UIColor.label) : Color(.white)
             self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(.jamiMsgCellSent)
