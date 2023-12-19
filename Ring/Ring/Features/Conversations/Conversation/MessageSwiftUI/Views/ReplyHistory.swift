@@ -21,61 +21,81 @@
 import SwiftUI
 
 struct ReplyHistory: View {
-    let messageModel: MessageContainerModel
-    var model: MessageHistoryVM {
-        return messageModel.historyModel
+    let model: MessageReplyTargetVM
+    var target: MessageContentVM? {
+        return model.target
     }
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.openURL) var openURL
     var body: some View {
-        VStack {
-            HStack(alignment: .bottom) {
-                //                if let aimage = test.avatarImage {
-                //                    Image(uiImage: aimage)
-                //                        .resizable()
-                //                        .scaledToFit()
-                //                        .frame(width: 30, height: 30)
-                //                        .background(Color.blue)
-                //                        .cornerRadius(15)
-                //                }
-                //                VStack {
-                //                    Text(test.username)
-                //                        .font(.callout)
-                //                        .foregroundColor(.secondary)
-                //                        .frame(maxWidth: .infinity, alignment: .leading)
-                //                    Spacer()
-                //                        .frame(height: 5)
-                //                    HStack(alignment: .bottom) {
-                //                        if let image = test.image {
-                //                            Image(uiImage: image)
-                //                                .resizable()
-                //                                .scaledToFit()
-                //                                .frame(width: 100, height: 100)
-                //                                .background(Color.blue)
-                //                                .cornerRadius(20)
-                //                        } else {
-                //                            Text(test.content)
-                //                                .frame(maxWidth: .infinity, alignment: .center)
-                //                                .padding(EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0))
-                //                                .foregroundColor(.secondary)
-                //                                .font(.body)
-                //                                .overlay(
-                //                                    CornerRadiusShape(radius: 15, corners: [.topLeft, .topRight, .bottomRight])
-                //                                        .stroke(.gray, lineWidth: 2)
-                //                                )
-                //                        }
-                //                    }
-                //                }
+        VStack(alignment: model.alignment, spacing: 4) {
+            if let target = self.target {
+                Text(model.inReplyTo)
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .onAppear {
+                        target.onAppear()
+                    }
+                if target.type == .fileTransfer {
+                    if let player = target.player {
+                        ZStack(alignment: .center) {
+                            if colorScheme == .dark {
+                                target.borderColor
+                                    .modifier(MessageCornerRadius(model: target))
+                                    .frame(width: target.playerWidth + 2, height: target.playerHeight + 2)
+                            }
+                            PlayerSwiftUI(model: target, player: player, onLongGesture: {})
+                                .modifier(MessageCornerRadius(model: target))
+                                .opacity(0.4)
+                        }
+                    } else if let image = target.finalImage {
+                        if !target.isGifImage() {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(minHeight: 20, maxHeight: 100)
+                                /*
+                                 Views with long press tap gesture prevent table from receiving
+                                 tap gesture and it causing scroll issue.
+                                 Adding empty onTapGesture fixes this.
+                                 */
+                                .onTapGesture {}
+                                .modifier(MessageCornerRadius(model: target))
+                                .opacity(0.4)
+                        } else {
+                            ScaledImageViewWrapper(imageToShow: image)
+                                .scaledToFit()
+                                .frame(maxHeight: 100)
+                                .onTapGesture {}
+                                .modifier(MessageCornerRadius(model: target))
+                                .opacity(0.4)
+                        }
+                    } else {
+                        DefaultTransferView(model: target, onLongGesture: {})
+                            .modifier(MessageCornerRadius(model: target))
+                            .opacity(0.4)
+                    }
+                } else if target.type == .text {
+                    if let metadata = target.metadata {
+                        URLPreview(metadata: metadata, maxDimension: target.maxDimension * 0.5)
+                            .modifier(MessageCornerRadius(model: target))
+                            .opacity(0.4)
+                    } else if target.content.isValidURL, let url = target.getURL() {
+                        Text(target.content)
+                            .modifier(MessageReplyStyle(model: target))
+                            .onTapGesture(perform: {
+                                openURL(url)
+                            })
+                            .opacity(0.4)
+                    } else {
+                        Text(target.content)
+                            .modifier(MessageReplyStyle(model: target))
+                            .lineLimit(nil)
+                            .opacity(0.4)
+                    }
+                }
             }
-            .padding(EdgeInsets(top: 15, leading: 15, bottom: 5, trailing: 15))
-
-            Button("2 Replies") {
-                print("Button tapped!")
-            }
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 0))
         }
-        .overlay(
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(.green, lineWidth: 2)
-        )
-        .padding()
     }
 }

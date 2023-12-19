@@ -34,6 +34,12 @@ enum ConversationNotificationsKeys: String {
     case accountId
 }
 
+enum LoadReplyResult {
+    case messageFound(MessageModel)
+    case duplicateRequest
+    case loadTriggered
+}
+
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 class ConversationsService {
@@ -53,6 +59,9 @@ class ConversationsService {
 
     var conversations = BehaviorRelay(value: [ConversationModel]())
     var conversationReady = BehaviorRelay(value: "")
+
+    var requestedReplyTargets = [String]()
+    var replyTargets = BehaviorRelay(value: [MessageModel]())
 
     let dbManager: DBManager
 
@@ -221,6 +230,37 @@ class ConversationsService {
         self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: 40)
     }
 
+    func loadTargetReply(conversationId: String, accountId: String, target: String) -> LoadReplyResult {
+        if self.requestedReplyTargets.contains(target) {
+            return .duplicateRequest
+        }
+        self.requestedReplyTargets.append(target)
+
+        if let message = self.findReplyTargetsById(target) {
+            return .messageFound(message)
+        } else {
+            self.triggerConversationLoad(accountId: accountId, conversationId: conversationId, replyToId: target)
+            return .loadTriggered
+        }
+    }
+
+    private func findReplyTargetsById(_ id: String) -> MessageModel? {
+        return self.replyTargets.value.first(where: { $0.id == id })
+    }
+
+    private func triggerConversationLoad(accountId: String, conversationId: String, replyToId: String) {
+        self.conversationsAdapter.loadConversationUntil(
+            forAccountId: accountId,
+            conversationId: conversationId,
+            from: replyToId,
+            toMessage: replyToId
+        )
+    }
+
+    func getReplyMessage(conversationId: String, accountId: String, id: String) {
+        self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: id, size: 1)
+    }
+
     func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
         self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId)
     }
@@ -240,6 +280,10 @@ class ConversationsService {
                     return conversation.id == conversationId && conversation.accountId == accountId
                 })
                 .first else { return false }
+        if self.isTargetReply(messages: messages) {
+            self.processReplyTargetMessage(with: messages.first)
+            return true
+        }
         // If all the loaded messages are of type .merge or .profile or have already been added, we need to load the next set of messages.
         let filtered = messages.filter { newMessage in newMessage.type != .merge && newMessage.type != .profile && !conversation.messages.contains(where: { message in
             message.id == newMessage.id
@@ -272,6 +316,33 @@ class ConversationsService {
         conversation.newMessages.accept(LoadedMessages(messages: newMessages, fromHistory: fromLoaded))
         self.updateUnreadMessages(conversationId: conversationId, accountId: accountId)
         return true
+    }
+
+    private func isTargetReply(messages: [MessageModel]) -> Bool {
+        if let targetMessage = messages.first,
+           messages.count == 1,
+           self.requestedReplyTargets.contains(targetMessage.id) {
+            return true
+        }
+        return false
+    }
+
+    private func processReplyTargetMessage(with message: MessageModel?) {
+        guard let target = message else { return }
+        self.updateReplyTargets(with: target)
+        self.removeMessageIdFromRequestedTargets(target.id)
+    }
+
+    private func updateReplyTargets(with message: MessageModel) {
+        var updatedTargets = replyTargets.value
+        if !updatedTargets.contains(where: { $0.id == message.id }) {
+            updatedTargets.append(message)
+            self.replyTargets.accept(updatedTargets)
+        }
+    }
+
+    private func removeMessageIdFromRequestedTargets(_ messageId: String) {
+        self.requestedReplyTargets.removeAll { $0 == messageId }
     }
 
     func conversationReady(conversationId: String, accountId: String, accountURI: String) {
