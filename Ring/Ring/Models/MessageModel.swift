@@ -85,6 +85,7 @@ public class MessageModel {
 
     convenience init (with swarmMessage: SwarmMessageWrap, accountJamiId: String) {
         self.init(withInfo: swarmMessage.body, accountJamiId: accountJamiId)
+        self.parentId = swarmMessage.linearizedParent
     }
     // swiftlint:disable:next cyclomatic_complexity
     init(withInfo info: [String: String], accountJamiId: String) {
@@ -171,5 +172,9 @@ public class MessageModel {
         default:
             break
         }
+    }
+
+    func isReply() -> Bool {
+        return !self.reply.isEmpty
     }
 }

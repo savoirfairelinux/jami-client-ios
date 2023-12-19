@@ -282,6 +282,12 @@ class ConversationModel: Equatable {
         }).first
     }
 
+    func getMessage(messageId: String) -> MessageModel? {
+        return self.messages.filter({ message in
+            return message.id == messageId
+        }).first
+    }
+
     func getLastReadMessage() -> String? {
         return self.participants.filter { participant in
             participant.isLocal
