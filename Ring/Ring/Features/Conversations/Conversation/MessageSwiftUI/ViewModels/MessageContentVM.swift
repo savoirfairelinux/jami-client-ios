@@ -143,14 +143,16 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
 
     var message: MessageModel
     var isIncoming: Bool
-    var isHistory: Bool
+    var isReply: Bool {
+        return !self.message.isReply()
+    }
     var type: MessageType = .text
     var followEmogiMessage = false
     var followingByEmogiMessage = false
 
     private var sequencing: MessageSequencing = .unknown {
         didSet {
-            guard !isHistory else { return }
+            guard !isReply else { return }
             self.corners = self.updatedCorners()
             // text need to be updated to trigger view redrowing
             let oldContent = self.content
@@ -176,21 +178,19 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         self.message = message
         self.type = message.type
         self.isIncoming = message.incoming
-        self.isHistory = false
         self.content = message.content
         self.transferStatus = message.transferStatus
         self.secondaryColor = Color(UIColor.secondaryLabel)
-        if isHistory {
-            self.sequencing = .firstOfSequence
-            self.borderColor = Color(.secondaryLabel)
-            self.textColor = Color(.secondaryLabel)
-            self.hasBorder = true
-            self.backgroundColor = Color(.white)
-        } else {
-            self.textColor = isIncoming ? Color(UIColor.label) : Color(.white)
-            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(.jamiMsgCellSent)
+        self.textColor = isIncoming ? Color(UIColor.label) : Color(.white)
+        self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(.jamiMsgCellSent)
+        self.hasBorder = false
+        self.borderColor = Color(.clear)
+        if self.isReply {
+            self.sequencing = .singleMessage
             self.hasBorder = false
             self.borderColor = Color(.clear)
+            self.textColor = isIncoming ? Color(UIColor.label) : Color(.white)
+            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(.jamiMsgCellSent)
         }
         if self.content.containsOnlyEmoji {
             self.backgroundColor = .clear

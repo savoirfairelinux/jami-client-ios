@@ -89,6 +89,22 @@ struct MessageTextStyle: ViewModifier {
     }
 }
 
+struct MessageReplyStyle: ViewModifier {
+    @StateObject var model: MessageContentVM
+
+    func body(content: Content) -> some View {
+        content
+            .padding(.top, 5)
+            .padding(.bottom, 5)
+            .padding(.leading, 10)
+            .padding(.trailing, 10)
+            .foregroundColor(Color(UIColor.label))
+            .background(Color(UIColor.lightGray))
+            .font(.footnote)
+            .modifier(MessageCornerRadius(model: model))
+    }
+}
+
 struct MessageLongPress: ViewModifier {
     var longPressCb: (() -> Void)
 
@@ -118,92 +134,111 @@ struct MessageContentView: View {
     @Environment(\.openURL) var openURL
     @Environment(\.colorScheme) var colorScheme
     var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
+    let padding: CGFloat = 12
     var body: some View {
-        VStack(alignment: .leading) {
-            if model.type == .call {
-                Text(model.content)
-                    .padding(model.textInset)
-                    .foregroundColor(model.textColor)
-                    .lineLimit(1)
-                    .background(model.backgroundColor)
-                    .font(model.textFont)
-                    .modifier(MessageCornerRadius(model: model))
-            } else if model.type == .fileTransfer {
-                if let player = self.model.player {
-                    ZStack(alignment: .center) {
-                        if colorScheme == .dark {
-                            model.borderColor
+        ZStack {
+            VStack(alignment: messageModel.replyTarget.alignment) {
+                if messageModel.isReply {
+                    HStack {
+                        if messageModel.replyTarget.alignment == .leading {
+                            Spacer().frame(width: padding)
+                        }
+                        ReplyHistory(model: messageModel.replyTarget)
+                        if messageModel.replyTarget.alignment == .trailing {
+                            Spacer().frame(width: padding)
+                        }
+                    }
+                }
+                VStack {
+                    if model.type == .call {
+                        Text(model.content)
+                            .padding(model.textInset)
+                            .foregroundColor(model.textColor)
+                            .lineLimit(1)
+                            .background(model.backgroundColor)
+                            .font(model.textFont)
+                            .modifier(MessageCornerRadius(model: model))
+                    } else if model.type == .fileTransfer {
+                        if let player = self.model.player {
+                            ZStack(alignment: .center) {
+                                if colorScheme == .dark {
+                                    model.borderColor
+                                        .modifier(MessageCornerRadius(model: model))
+                                        .frame(width: model.playerWidth + 2, height: model.playerHeight + 2)
+                                }
+                                PlayerSwiftUI(model: model, player: player, onLongGesture: receivedLongPress())
+                                    .modifier(MessageCornerRadius(model: model))
+                            }
+                        } else if let image = model.finalImage {
+                            if !model.isGifImage() {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(minHeight: 50, maxHeight: 300)
+                                    /*
+                                     Views with long press tap gesture prevent table from receiving
+                                     tap gesture and it causing scroll issue.
+                                     Adding empty onTapGesture fixes this.
+                                     */
+                                    .onTapGesture {}
+                                    .modifier(MessageCornerRadius(model: model))
+                                    .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                            } else {
+                                ScaledImageViewWrapper(imageToShow: image)
+                                    .scaledToFit()
+                                    .frame(maxHeight: 300)
+                                    .onTapGesture {}
+                                    .modifier(MessageCornerRadius(model: model))
+                                    .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                            }
+                        } else {
+                            DefaultTransferView(model: model, onLongGesture: receivedLongPress())
                                 .modifier(MessageCornerRadius(model: model))
-                                .frame(width: model.playerWidth + 2, height: model.playerHeight + 2)
                         }
-                        PlayerSwiftUI(model: model, player: player, onLongGesture: receivedLongPress())
-                            .modifier(MessageCornerRadius(model: model))
+                    } else if model.type == .text {
+                        if let metadata = model.metadata {
+                            URLPreview(metadata: metadata, maxDimension: model.maxDimension)
+                                .modifier(MessageCornerRadius(model: model))
+                        } else if model.content.isValidURL, let url = model.getURL() {
+                            Text(model.content)
+                                .applyTextStyle(model: model)
+                                .onTapGesture(perform: {
+                                    openURL(url)
+                                })
+                                .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                        } else {
+                            Text(model.content)
+                                .applyTextStyle(model: model)
+                                .lineLimit(nil)
+                                // add onTapGesture to fix scroll
+                                .onTapGesture {}
+                                .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                        }
                     }
-                } else if let image = model.finalImage {
-                    if !model.isGifImage() {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(minHeight: 50, maxHeight: 300)
-                            /*
-                             Views with long press tap gesture prevent table from receiving
-                             tap gesture and it causing scroll issue.
-                             Adding empty onTapGesture fixes this.
-                             */
-                            .onTapGesture {}
-                            .modifier(MessageCornerRadius(model: model))
-                            .modifier(MessageLongPress(longPressCb: receivedLongPress()))
-                    } else {
-                        ScaledImageViewWrapper(imageToShow: image)
-                            .scaledToFit()
-                            .frame(maxHeight: 300)
-                            .onTapGesture {}
-                            .modifier(MessageCornerRadius(model: model))
-                            .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                }
+
+                .background(
+                    GeometryReader { proxy in
+                        Rectangle().fill(Color.clear)
+                            .onChange(of: presentMenu, perform: { _ in
+                                if !presentMenu {
+                                    return
+                                }
+                                DispatchQueue.main.async {
+                                    let frame = proxy.frame(in: .global)
+                                    presentMenu = false
+                                    onLongPress(frame, self)
+                                }
+                            })
                     }
-                } else {
-                    DefaultTransferView(model: model, onLongGesture: receivedLongPress())
-                        .modifier(MessageCornerRadius(model: model))
+                )
+                .onAppear {
+                    self.model.onAppear()
                 }
-            } else if model.type == .text {
-                if let metadata = model.metadata {
-                    URLPreview(metadata: metadata, maxDimension: model.maxDimension)
-                        .modifier(MessageCornerRadius(model: model))
-                } else if model.content.isValidURL, let url = model.getURL() {
-                    Text(model.content)
-                        .applyTextStyle(model: model)
-                        .onTapGesture(perform: {
-                            openURL(url)
-                        })
-                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
-                } else {
-                    Text(model.content)
-                        .applyTextStyle(model: model)
-                        .lineLimit(nil)
-                        // add onTapGesture to fix scroll
-                        .onTapGesture {}
-                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
-                }
+                .offset(y: messageModel.isReply ? -padding : 0)
             }
         }
-        .background(
-            GeometryReader { proxy in
-                Rectangle().fill(Color.clear)
-                    .onChange(of: presentMenu, perform: { _ in
-                        if !presentMenu {
-                            return
-                        }
-                        DispatchQueue.main.async {
-                            let frame = proxy.frame(in: .global)
-                            presentMenu = false
-                            onLongPress(frame, self)
-                        }
-                    })
-            }
-        )
-        .onAppear {
-            self.model.onAppear()
-        }
+        .offset(y: messageModel.isReply ? padding : 0)
     }
 
     private func receivedLongPress() -> (() -> Void) {
