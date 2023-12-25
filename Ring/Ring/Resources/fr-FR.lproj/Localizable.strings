@@ -163,7 +163,7 @@
 "linkToAccount.linkDeviceMessage" = "Allez sur \"Associer un nouvel appareil\" sur l'autre appareil pour voir le code QR ou le NIP";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Saisissez le code PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Pour générer le code PIN, accédez aux paramètres de gestion du compte sur l'appareil contenant le compte que vous souhaitez lier. Sélectionnez \"Lier un nouvel appareil\". Vous recevrez le code PIN nécessaire pour remplir ce formulaire. Le code PIN n'est valable que pendant 10 minutes.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Connexion";

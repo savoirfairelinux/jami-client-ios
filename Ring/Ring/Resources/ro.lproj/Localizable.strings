@@ -163,7 +163,7 @@
 "linkToAccount.linkDeviceMessage" = "Alege „Asociază alt aparat” din cealaltă aplicație Jami pentru a afișa codul QR sau PIN-ul.";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introdu codul PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Pentru generarea codului PIN, du-te la reglările contului în aparatul care conține contul pe care vrei să-l folosești. Alege „Asociază alt aparat” și vei obține PIN-ul necesar. Acest PIN este valabil doar 10 minute.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Autentificare";

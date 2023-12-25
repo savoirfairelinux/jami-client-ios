@@ -163,7 +163,7 @@
 "linkToAccount.linkDeviceMessage" = "Wählen Sie in der anderen Jami-App „Neues Gerät verknüpfen“, um den QR-Code oder die PIN anzuzeigen";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "PIN eingeben";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Um den PIN-Code zu generieren, gehen Sie zu den Kontoverwaltungseinstellungen auf dem Gerät, das das Konto enthält, mit dem Sie eine Verknüpfung herstellen möchten. Wählen Sie „Neues Gerät verknüpfen“. Sie erhalten die zum Ausfüllen dieses Formulars erforderliche PIN. Die PIN ist nur 10 Minuten gültig.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Einloggen";
