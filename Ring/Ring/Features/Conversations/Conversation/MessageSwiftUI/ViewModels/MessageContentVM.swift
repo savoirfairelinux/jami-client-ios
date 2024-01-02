@@ -529,4 +529,45 @@ extension MessageContentVM: PlayerDelegate {
             self.backgroundColor = Color(color)
         }
     }
+
+    func getReactions() -> [MessageReaction]? {
+        return self.message.reactions.isEmpty ? nil : self.message.reactions
+    }
+
+    func getReactionsString() -> String? {
+        let reactions = self.message.reactions.map { reaction in
+            reaction.content
+        }
+
+        return reactions.isEmpty ? nil : constructString(from: reactions, spaceBetweenCharacters: "  ", spaceBetweenCharAndCount: "")
+    }
+
+    func constructString(from strings: [String], spaceBetweenCharacters: String, spaceBetweenCharAndCount: String) -> String {
+        var charCounts = [String: Int]()
+        var result = ""
+
+        for str in strings {
+            charCounts[str, default: 0] += 1
+        }
+
+        for (str, count) in charCounts {
+            if count > 1 {
+                result += "\(str)\(spaceBetweenCharAndCount)\(count)\(spaceBetweenCharacters)"
+            } else {
+                result += "\(str)\(spaceBetweenCharacters)"
+            }
+        }
+
+        result = String(result.dropLast(spaceBetweenCharacters.count))
+        return result
+    }
+}
+
+class ReactionView {
+    var reaction: MessageReaction
+    var count: Int = 1
+
+    init(reaction: MessageReaction) {
+        self.reaction = reaction
+    }
 }

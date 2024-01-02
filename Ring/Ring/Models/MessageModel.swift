@@ -55,6 +55,24 @@ enum ContactAction: String {
     case unban
 }
 
+class MessageReaction: Identifiable, Equatable {
+    static func == (lhs: MessageReaction, rhs: MessageReaction) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    var content: String = ""
+    var id: String = ""
+
+    init(withInfo info: [String: String]) {
+        if let interactionId = info[MessageAttributes.interactionId.rawValue] {
+            self.id = interactionId
+        }
+        if let content = info[MessageAttributes.body.rawValue] {
+            self.content = content
+        }
+    }
+}
+
 public class MessageModel {
 
     var id: String = ""
@@ -75,6 +93,7 @@ public class MessageModel {
     var react: String = ""
     var totalSize: Int = 0
     var parents = [String]()
+    var reactions = [MessageReaction]()
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -86,6 +105,9 @@ public class MessageModel {
 
     convenience init (with swarmMessage: SwarmMessageWrap, accountJamiId: String) {
         self.init(withInfo: swarmMessage.body, accountJamiId: accountJamiId)
+        for reaction in swarmMessage.reactions {
+            self.reactions.append(MessageReaction(withInfo: reaction))
+        }
     }
     // swiftlint:disable:next cyclomatic_complexity
     init(withInfo info: [String: String], accountJamiId: String) {
@@ -114,6 +136,9 @@ public class MessageModel {
         incoming = self.uri.isEmpty ? !self.authorId.isEmpty : self.uri != accountJamiId
         if let parent = info[MessageAttributes.parent.rawValue] {
             self.parentId = parent
+            if !parent.isEmpty {
+                print("&&&&&&&&&&& not empty")
+            }
         }
         if let parents = info["parents"]?.components(separatedBy: ",").filter({ parentId in
             !parentId.isEmpty
@@ -181,5 +206,9 @@ public class MessageModel {
 
     func isReply() -> Bool {
         return !self.reply.isEmpty
+    }
+
+    func isReaction() -> Bool {
+        return !self.react.isEmpty
     }
 }

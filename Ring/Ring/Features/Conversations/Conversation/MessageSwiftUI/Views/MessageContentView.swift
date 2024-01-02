@@ -20,6 +20,13 @@
 
 import SwiftUI
 
+struct SizePreferenceKey: PreferenceKey {
+    static var defaultValue: CGSize = .zero
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        value = nextValue()
+    }
+}
+
 class CustomLinkView: LPLinkView {
     override var intrinsicContentSize: CGSize { CGSize(width: 0, height: super.intrinsicContentSize.height) }
 }
@@ -119,8 +126,15 @@ struct MessageContentView: View {
     @Environment(\.colorScheme) var colorScheme
     var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
     let padding: CGFloat = 12
+    @SwiftUI.State private var textSize: CGSize = .zero
+    @Binding var showExplanation: Bool
+    @SwiftUI.State private var textPosition: CGRect = .zero
+    @SwiftUI.State private var reactionAlignment = Alignment.bottomTrailing
+    @SwiftUI.State private var contentwidth: CGFloat = .zero
+    @SwiftUI.State private var explanationwidth: CGFloat = .zero
+
     var body: some View {
-        ZStack {
+        ZStack(alignment: reactionAlignment) {
             VStack(alignment: messageModel.replyTarget.alignment) {
                 if messageModel.messageContent.isHistory {
                     renderReplyHistory()
@@ -137,6 +151,9 @@ struct MessageContentView: View {
                 .background(
                     GeometryReader { proxy in
                         Rectangle().fill(Color.clear)
+                            .onAppear {
+                                self.contentwidth = proxy.frame(in: .global).width
+                            }
                             .onChange(of: presentMenu, perform: { _ in
                                 if !presentMenu {
                                     return
@@ -154,8 +171,71 @@ struct MessageContentView: View {
                 }
                 .offset(y: messageModel.messageContent.isHistory ? -padding : 0)
             }
+            .padding(.bottom, model.getReactionsString() == nil ? 2 : textSize.height - 10)
+            if let reactions = model.getReactionsString() {
+                Text(reactions)
+                    .lineLimit(nil)
+                    .lineSpacing(5)
+                    .padding(.horizontal, 5)
+                    .padding(.vertical, 5)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding(.trailing, 10)
+                    .padding(.leading, 30)
+                    .shadow(radius: 0.2, x: 0.5, y: 0.5)
+                    .background(GeometryReader { geometry in
+                        Color.clear
+                            .preference(key: SizePreferenceKey.self, value: geometry.size)
+                            .onAppear {
+                                self.textPosition = geometry.frame(in: .global)
+                            }
+                    })
+                    .onLongPressGesture(minimumDuration: 0.5) {
+                        self.showExplanation.toggle()
+
+                    }
+                    .simultaneousGesture(
+                        TapGesture()
+                            .onEnded { _ in
+                                self.showExplanation = false
+                            }
+                    )
+                if showExplanation {
+                    explanationView()
+                        .background(GeometryReader { geometry in
+                            Color.clear
+                                .onAppear {
+                                    self.explanationwidth = geometry.frame(in: .global).width
+                                }
+                        })
+                }
+            }
+        }
+        .onPreferenceChange(SizePreferenceKey.self) { preferences in
+            self.textSize = preferences
         }
         .offset(y: messageModel.messageContent.isHistory ? padding : 0)
+        .padding(.vertical, 2)
+        .onChange(of: showExplanation) { _ in
+            let align = contentwidth < explanationwidth || contentwidth < 100
+            reactionAlignment = showExplanation ? align ? Alignment.bottomLeading : Alignment.bottomTrailing : Alignment.bottomTrailing
+        }
+    }
+
+    private func explanationView() -> some View {
+        Text("Explanation text here")
+            .padding()
+            .background(Color.blue)
+            .cornerRadius(10)
+            .foregroundColor(.white)
+    }
+
+    private func renderEmojiContainer(emojis: [MessageReaction]) -> some View {
+        HStack {
+            ForEach(emojis) { reaction in
+                Text(reaction.content)
+            }
+        }
     }
 
     private func renderReplyHistory() -> some View {
@@ -187,14 +267,14 @@ struct MessageContentView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(minHeight: 50, maxHeight: 300)
-                    .onTapGesture { }
+                    .onTapGesture {}
                     .modifier(MessageCornerRadius(model: model))
                     .modifier(MessageLongPress(longPressCb: receivedLongPress()))
             } else {
                 ScaledImageViewWrapper(imageToShow: image)
                     .scaledToFit()
                     .frame(maxHeight: 300)
-                    .onTapGesture { }
+                    .onTapGesture {}
                     .modifier(MessageCornerRadius(model: model))
                     .modifier(MessageLongPress(longPressCb: receivedLongPress()))
             }
@@ -217,7 +297,7 @@ struct MessageContentView: View {
                 Text(model.content)
                     .applyTextStyle(model: model)
                     .lineLimit(nil)
-                    .onTapGesture { }
+                    .onTapGesture {}
                     .modifier(MessageLongPress(longPressCb: receivedLongPress()))
             }
         }

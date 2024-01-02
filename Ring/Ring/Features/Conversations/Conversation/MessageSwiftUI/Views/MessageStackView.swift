@@ -25,6 +25,7 @@ struct MessageStackView: View {
     var model: MessageStackVM {
         return messageModel.stackViewModel
     }
+    @SwiftUI.State var showExplanation = false
     var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
     var body: some View {
         VStack(alignment: model.horizontalAllignment) {
@@ -36,8 +37,11 @@ struct MessageStackView: View {
                 Spacer()
                     .frame(height: 4)
             }
-            MessageContentView(messageModel: messageModel, model: messageModel.messageContent, onLongPress: onLongPress)
+            MessageContentView(messageModel: messageModel, model: messageModel.messageContent, onLongPress: onLongPress, showExplanation: $showExplanation)
                 .frame(maxWidth: .infinity, alignment: model.alignment)
+        }
+        .onTapGesture {
+            self.showExplanation = false
         }
     }
 }

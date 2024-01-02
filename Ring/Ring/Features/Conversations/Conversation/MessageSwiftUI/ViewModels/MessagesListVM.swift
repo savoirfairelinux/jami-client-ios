@@ -278,6 +278,9 @@ class MessagesListVM: ObservableObject {
     }
 
     private func insert(newMessage: MessageModel, fromHistory: Bool) -> Bool {
+        if newMessage.isReaction() {
+            return false
+        }
         guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
             return false
         }
