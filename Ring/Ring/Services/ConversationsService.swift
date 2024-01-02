@@ -117,7 +117,7 @@ class ConversationsService {
                 self?.sortAndUpdate(conversations: &currentConversations)
                 // load one message for each swarm conversation
                 for swarmId in conversationToLoad {
-                    self?.conversationsAdapter.loadConversationMessages(accountId, conversationId: swarmId, from: "", size: 1)
+                    self?.conversationsAdapter.loadConversationMessages(accountId, conversationId: swarmId, from: "", size: 4)
                 }
             }, onError: { [weak self] _ in
                 self?.conversations.accept(currentConversations)
@@ -173,10 +173,10 @@ class ConversationsService {
                 conversation.updatePreferences(preferences: prefsInfo)
             }
             conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-            if let lastRead = conversation.getLastReadMessage() {
-                let unreadInteractions = conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: accountURI)
-                conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
-            }
+            //            if let lastRead = conversation.getLastReadMessage() {
+            //                let unreadInteractions = conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: accountURI)
+            //                conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
+            //            }
             conversations.append(conversation)
         }
     }
@@ -367,7 +367,7 @@ class ConversationsService {
             data[ConversationNotificationsKeys.conversationId.rawValue] = conversationId
             data[ConversationNotificationsKeys.accountId.rawValue] = accountId
             NotificationCenter.default.post(name: NSNotification.Name(ConversationNotifications.conversationReady.rawValue), object: nil, userInfo: data)
-            self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 2)
+            self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 4)
             self.sortIfNeeded()
             self.conversationReady.accept(conversationId)
             return

@@ -150,7 +150,7 @@ class MessageContainerModel: Identifiable {
                 self.contactViewModel.username = name
             }
 
-            if  self.replyTarget.target != nil {
+            if self.replyTarget.target != nil {
                 self.replyTarget.updateUsername(name: name, jamiId: jamiId)
             }
         }
