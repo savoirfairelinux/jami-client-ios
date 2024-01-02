@@ -20,6 +20,14 @@
 
 import SwiftUI
 
+struct SizePreferenceKey: PreferenceKey {
+    static var defaultValue: CGSize = .zero
+
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        value = nextValue()
+    }
+}
+
 class CustomLinkView: LPLinkView {
     override var intrinsicContentSize: CGSize { CGSize(width: 0, height: super.intrinsicContentSize.height) }
 }
@@ -119,8 +127,12 @@ struct MessageContentView: View {
     @Environment(\.colorScheme) var colorScheme
     var onLongPress: (_ frame: CGRect, _ message: MessageContentView) -> Void
     let padding: CGFloat = 12
+    @SwiftUI.State private var textSize: CGSize = .zero
+    @SwiftUI.State private var reactionsPosition: CGRect = .zero
+    var showReactionsView: (_ message: MessageContainerModel?) -> Void
+
     var body: some View {
-        ZStack {
+        ZStack(alignment: Alignment.bottomTrailing) {
             VStack(alignment: messageModel.replyTarget.alignment) {
                 if messageModel.messageContent.isHistory {
                     renderReplyHistory()
@@ -154,8 +166,16 @@ struct MessageContentView: View {
                 }
                 .offset(y: messageModel.messageContent.isHistory ? -padding : 0)
             }
+            .padding(.bottom, model.getReactionsString() == nil ? 2 : textSize.height - 10)
+            if let reactions = model.getReactionsString() {
+                renderReactions(reactions: reactions)
+            }
+        }
+        .onPreferenceChange(SizePreferenceKey.self) { preferences in
+            self.textSize = preferences
         }
         .offset(y: messageModel.messageContent.isHistory ? padding : 0)
+        .padding(.vertical, 2)
     }
 
     private func renderReplyHistory() -> some View {
@@ -180,6 +200,26 @@ struct MessageContentView: View {
             .modifier(MessageCornerRadius(model: model))
     }
 
+    private func renderReactions(reactions: String) -> some View {
+        Text(reactions)
+            .lineLimit(nil)
+            .lineSpacing(5)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 5)
+            .background(Color.white)
+            .cornerRadius(10)
+            .padding(.trailing, 10)
+            .padding(.leading, 30)
+            .shadow(radius: 0.2, x: 0.5, y: 0.5)
+            .background(GeometryReader { geometry in
+                Color.clear
+                    .preference(key: SizePreferenceKey.self, value: geometry.size)
+            })
+            .onLongPressGesture(minimumDuration: 0.5) {
+                self.showReactionsView(messageModel)
+            }
+    }
+
     private func renderImage(image: UIImage) -> some View {
         Group {
             if !model.isGifImage() {
@@ -187,14 +227,14 @@ struct MessageContentView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(minHeight: 50, maxHeight: 300)
-                    .onTapGesture { }
+                    .onTapGesture {}
                     .modifier(MessageCornerRadius(model: model))
                     .modifier(MessageLongPress(longPressCb: receivedLongPress()))
             } else {
                 ScaledImageViewWrapper(imageToShow: image)
                     .scaledToFit()
                     .frame(maxHeight: 300)
-                    .onTapGesture { }
+                    .onTapGesture {}
                     .modifier(MessageCornerRadius(model: model))
                     .modifier(MessageLongPress(longPressCb: receivedLongPress()))
             }
@@ -217,7 +257,7 @@ struct MessageContentView: View {
                 Text(model.content)
                     .applyTextStyle(model: model)
                     .lineLimit(nil)
-                    .onTapGesture { }
+                    .onTapGesture {}
                     .modifier(MessageLongPress(longPressCb: receivedLongPress()))
             }
         }
@@ -249,10 +289,5 @@ struct MessageContentView: View {
             if model.menuItems.isEmpty { return }
             presentMenu = true
         }
-    }
-
-    private var contentWidth: CGFloat {
-        let padding: CGFloat = 20
-        return UIScreen.main.bounds.size.width - padding * 2
     }
 }

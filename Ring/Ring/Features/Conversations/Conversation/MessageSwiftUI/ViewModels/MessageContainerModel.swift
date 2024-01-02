@@ -32,7 +32,8 @@ class MessageContainerModel: Identifiable {
     let contactViewModel: ContactMessageVM
     let message: MessageModel
     let disposeBag = DisposeBag()
-    var replyTarget: MessageReplyTargetVM
+    let replyTarget: MessageReplyTargetVM
+    let reactionsModel: ReactionsContainerModel
 
     // message info state
     private let infoSubject = PublishSubject<State>()
@@ -96,6 +97,7 @@ class MessageContainerModel: Identifiable {
         self.messageRow = MessageRowVM(message: message, infoState: self.infoSubject)
         self.contactViewModel = ContactMessageVM(message: message, infoState: self.infoSubject)
         self.replyTarget = MessageReplyTargetVM(infoState: self.infoSubject, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
+        self.reactionsModel = ReactionsContainerModel(message: message, infoState: self.infoSubject)
     }
 
     func setReplyTarget(message: MessageModel) {
@@ -124,7 +126,7 @@ class MessageContainerModel: Identifiable {
         }
     }
 
-    func updateAvatar(image: UIImage) {
+    func updateAvatar(image: UIImage, jamiId: String) {
         DispatchQueue.main.async { [weak self, weak image] in
             guard let self = self, let image = image else { return }
             if self.messageRow.shouldDisplayAavatar && self.message.incoming {
@@ -137,6 +139,8 @@ class MessageContainerModel: Identifiable {
             if self.replyTarget.target != nil {
                 self.replyTarget.avatarImage = image
             }
+
+            self.reactionsModel.updateImage(image: image, jamiId: jamiId)
         }
     }
 
@@ -150,9 +154,11 @@ class MessageContainerModel: Identifiable {
                 self.contactViewModel.username = name
             }
 
-            if  self.replyTarget.target != nil {
+            if self.replyTarget.target != nil {
                 self.replyTarget.updateUsername(name: name, jamiId: jamiId)
             }
+
+            self.reactionsModel.updateUsername(name: name, jamiId: jamiId)
         }
     }
 
