@@ -278,6 +278,9 @@ class MessagesListVM: ObservableObject {
     }
 
     private func insert(newMessage: MessageModel, fromHistory: Bool) -> Bool {
+        if newMessage.isReaction() {
+            return false
+        }
         guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
             return false
         }
@@ -324,7 +327,7 @@ class MessagesListVM: ObservableObject {
             switch state {
             case .updateAvatar(let jamiId):
                 if let avatar = self.avatars.get(key: jamiId) as? UIImage {
-                    container.updateAvatar(image: avatar)
+                    container.updateAvatar(image: avatar, jamiId: jamiId)
                 } else {
                     self.getInformationForContact(id: jamiId, message: container)
                 }
@@ -339,7 +342,13 @@ class MessagesListVM: ObservableObject {
                     self.updateLastRead(messageId: messageId, messageModel: container)
                 }
             case .updateDisplayname(let jamiId):
+                if jamiId == "1710b3b1556d555911a4d976acb2d5d3879cbfe8" {
+                    print("$$$$$$$$ get name")
+                }
                 if let name = self.names.get(key: jamiId) as? String {
+                    if jamiId == "1710b3b1556d555911a4d976acb2d5d3879cbfe8" {
+                        print("$$$$$$$$ get name already exists. update container \(name)")
+                    }
                     container.updateUsername(name: name, jamiId: jamiId)
                 } else {
                     self.getInformationForContact(id: jamiId, message: container)
@@ -546,6 +555,9 @@ class MessagesListVM: ObservableObject {
     // MARK: participant information
 
     private func updateName(name: String, id: String, message: MessageContainerModel) {
+        if id == "1710b3b1556d555911a4d976acb2d5d3879cbfe8" {
+            print("$$$$$$$$ get name found will update container")
+        }
         self.names.set(value: name, for: id)
         message.updateUsername(name: name, jamiId: id)
     }
@@ -553,7 +565,7 @@ class MessagesListVM: ObservableObject {
     private func updateAvatar(image: UIImage, id: String, message: MessageContainerModel) {
         self.avatars.set(value: image, for: id)
         self.updateContacLocationSharingImage()
-        message.updateAvatar(image: image)
+        message.updateAvatar(image: image, jamiId: id)
         if var lastReadAvatars = self.lastRead.get(key: message.id) as? [String: UIImage] {
             if var _ = lastReadAvatars[id] {
                 lastReadAvatars[id] = image
@@ -577,10 +589,19 @@ class MessagesListVM: ObservableObject {
             .take(1)
             .subscribe(onNext: { [weak self, weak message] lookupNameResponse in
                 guard let self = self, let message = message else { return }
+                if id == "1710b3b1556d555911a4d976acb2d5d3879cbfe8" {
+                    print("$$$$$$$$ get name found")
+                }
                 // if we have a registered name then we should update the value for it
                 if let name = lookupNameResponse.name, !name.isEmpty {
+                    if id == "1710b3b1556d555911a4d976acb2d5d3879cbfe8" {
+                        print("$$$$$$$$ get name found username exists")
+                    }
                     self.updateName(name: name, id: id, message: message)
                 } else {
+                    if id == "1710b3b1556d555911a4d976acb2d5d3879cbfe8" {
+                        print("$$$$$$$$ get name found username not exists")
+                    }
                     self.updateName(name: id, id: id, message: message)
                 }
                 if let username = self.names.get(key: id) as? String,
