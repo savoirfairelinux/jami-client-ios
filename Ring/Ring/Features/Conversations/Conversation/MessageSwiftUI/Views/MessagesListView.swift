@@ -56,93 +56,118 @@ struct MessagesListView: View {
     @SwiftUI.State private var messageFrame: CGRect?
     var contextMenuModel = ContextMenuVM()
     @SwiftUI.State private var screenHeight: CGFloat = 0
+    @SwiftUI.State private var showReactionsView = false
+    @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
 
     var body: some View {
-        ZStack(alignment: .top) {
-            ZStack(alignment: .bottomTrailing) {
-                ScrollViewReader { scrollView in
-                    ScrollView(showsIndicators: false) {
-                        // update scroll offset
-                        GeometryReader { proxy in
-                            let offset = proxy.frame(in: .named("scroll")).minY
-                            Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
-                        }
-                        LazyVStack(spacing: 0) {
-                            // scroll to the bottom
-                            Text("")
-                                .id("lastMessage")
-                            // messages
-                            ForEach(model.messagesModels) { message in
-                                MessageRowView(messageModel: message, onLongPress: {(frame, message) in
-                                    if showContextMenu == true {
-                                        return
-                                    }
-                                    model.hideNavigationBar.accept(true)
-                                    contextMenuModel.presentingMessage = message
-                                    contextMenuModel.messageFrame = frame
-                                    if let topController = topVC() {
-                                        contextMenuModel.currentSnapshot = UIImage.makeSnapshot(from: topController.view)
-                                    }
-                                    showContextMenu = true
-                                }, model: message.messageRow)
+        ZStack {
+            ZStack(alignment: .top) {
+                ZStack(alignment: .bottomTrailing) {
+                    ScrollViewReader { scrollView in
+                        ScrollView(showsIndicators: false) {
+                            // update scroll offset
+                            GeometryReader { proxy in
+                                let offset = proxy.frame(in: .named("scroll")).minY
+                                Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
                             }
-                            .flipped()
-                            // load more
-                            Text("")
-                                .onAppear(perform: {
-                                    DispatchQueue.global(qos: .background)
-                                        .asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 10)) {
-                                            self.model.loadMore()
-                                        }
-                                })
-                        }
-                        .listRowBackground(Color.clear)
-                        .onReceive(model.$scrollToId, perform: { (scrollToId) in
-                            guard scrollToId != nil else { return }
-                            scrollView.scrollTo("lastMessage")
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                model.scrollToId = nil
+                            LazyVStack(spacing: 0) {
+                                // scroll to the bottom
+                                Text("")
+                                    .id("lastMessage")
+                                // messages
+                                ForEach(model.messagesModels) { message in
+                                    createMessageRowView(for: message)
+                                }
+                                .flipped()
+                                // load more
+                                Text("")
+                                    .onAppear(perform: {
+                                        DispatchQueue.global(qos: .background)
+                                            .asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 10)) {
+                                                self.model.loadMore()
+                                            }
+                                    })
                             }
-                        })
-                    }
-                    .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-                        DispatchQueue.main.async {
-                            let scrollOffset = value ?? 0
-                            let atTheBottom = scrollOffset < scrollReserved
-                            if atTheBottom != model.atTheBottom {
-                                model.atTheBottom = atTheBottom
+                            .listRowBackground(Color.clear)
+                            .onReceive(model.$scrollToId, perform: { (scrollToId) in
+                                guard scrollToId != nil else { return }
+                                scrollView.scrollTo("lastMessage")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    model.scrollToId = nil
+                                }
+                            })
+                        }
+                        .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
+                            DispatchQueue.main.async {
+                                let scrollOffset = value ?? 0
+                                let atTheBottom = scrollOffset < scrollReserved
+                                if atTheBottom != model.atTheBottom {
+                                    model.atTheBottom = atTheBottom
+                                }
                             }
                         }
                     }
+                    .flipped()
+                    if !model.atTheBottom {
+                        createScrollToBottmView()
+                    }
                 }
-                .flipped()
-                if !model.atTheBottom {
-                    createScrollToBottmView()
+                .overlay(showContextMenu && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
+                // hide navigation bar when presenting context menu
+                .onChange(of: showContextMenu) { newValue in
+                    model.hideNavigationBar.accept(newValue)
                 }
-            }
-            .overlay(showContextMenu && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
-            // hide navigation bar when presenting context menu
-            .onChange(of: showContextMenu) { newValue in
-                model.hideNavigationBar.accept(newValue)
-            }
-            // hide context menu overly when device is rotated
-            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-                if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
+                // hide context menu overly when device is rotated
+                .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                    if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
+                        screenHeight = UIScreen.main.bounds.size.height
+                        showContextMenu = false
+                    }
+                }
+                .onAppear(perform: {
                     screenHeight = UIScreen.main.bounds.size.height
-                    showContextMenu = false
+                })
+                if model.shouldShowMap {
+                    LocationSharingView(model: model)
                 }
             }
-            .onAppear(perform: {
-                screenHeight = UIScreen.main.bounds.size.height
-            })
-            if model.shouldShowMap {
-                LocationSharingView(model: model)
+            if showReactionsView {
+                if let reactions = reactionsForMessage {
+                    ReactionsView(model: reactions)
+                        .onTapGesture {
+                            self.showReactionsView = false
+                        }
+                }
+            }
+        }
+        .onTapGesture {
+            showReactionsView.toggle()
+            if showReactionsView == false {
+                reactionsForMessage = nil
             }
         }
     }
 
     func makeOverlay() -> some View {
         return ContextMenuView(model: contextMenuModel, showContextMenu: $showContextMenu)
+    }
+
+    private func createMessageRowView(for message: MessageContainerModel) -> some View {
+        MessageRowView(messageModel: message, onLongPress: {(frame, message) in
+            if showContextMenu == true {
+                return
+            }
+            model.hideNavigationBar.accept(true)
+            contextMenuModel.presentingMessage = message
+            contextMenuModel.messageFrame = frame
+            if let topController = topVC() {
+                contextMenuModel.currentSnapshot = UIImage.makeSnapshot(from: topController.view)
+            }
+            showContextMenu = true
+        }, showReactionsView: {message in
+            reactionsForMessage = message
+            showReactionsView.toggle()
+        }, model: message.messageRow)
     }
 
     func createScrollToBottmView() -> some View {
@@ -183,7 +208,7 @@ struct MessagesListView: View {
         .padding(.top, 0.0)
         .padding(.bottom, 5.0)
         .ignoresSafeArea(.container, edges: [])
-        .shadow(color: Color(UIColor.quaternaryLabel), radius: 2, x: 1, y: 2)
+        .shadowForConversation()
     }
 }
 
