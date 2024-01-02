@@ -107,6 +107,26 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
         }
     }));
 
+    confHandlers.insert(exportable_callback<ConversationSignal::ReactionAdded>([&](const std::string& accountId, const std::string& conversationId, const std::string& messageId, std::map<std::string, std::string> reaction) {
+        if (ConversationsAdapter.messagesDelegate) {
+            NSString* conversationIdStr =  [NSString stringWithUTF8String:conversationId.c_str()];
+            NSString* accountIdStr =  [NSString stringWithUTF8String:accountId.c_str()];
+            NSString* messageIdStr =  [NSString stringWithUTF8String:messageId.c_str()];
+            NSDictionary* reactionDict = [Utils mapToDictionnary: reaction];
+            [ConversationsAdapter.messagesDelegate reactionAddedWithConversationId:conversationIdStr accountId:accountIdStr messageId:messageIdStr reaction:reactionDict];
+        }
+    }));
+
+    confHandlers.insert(exportable_callback<ConversationSignal::ReactionRemoved>([&](const std::string& accountId, const std::string& conversationId, const std::string& messageId, const std::string& reactionId) {
+                if (ConversationsAdapter.messagesDelegate) {
+                    NSString* conversationIdStr =  [NSString stringWithUTF8String:conversationId.c_str()];
+                    NSString* accountIdStr =  [NSString stringWithUTF8String:accountId.c_str()];
+                    NSString* messageIdStr =  [NSString stringWithUTF8String:messageId.c_str()];
+                    NSString* reactionIdStr =  [NSString stringWithUTF8String:reactionId.c_str()];
+                    [ConversationsAdapter.messagesDelegate reactionRemovedWithConversationId:conversationIdStr accountId:accountIdStr messageId:messageIdStr reactionId:reactionIdStr];
+                }
+    }));
+
     confHandlers.insert(exportable_callback<ConversationSignal::ConversationLoaded>([&](uint32_t id, const std::string& accountId, const std::string& conversationId, std::vector<std::map<std::string, std::string>> messages) {
             if (ConversationsAdapter.messagesDelegate) {
                     NSString* convId =  [NSString stringWithUTF8String:conversationId.c_str()];

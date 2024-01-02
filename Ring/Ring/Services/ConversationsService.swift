@@ -432,16 +432,24 @@ class ConversationsService {
     }
 
     func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: ConversationMemberEvent, accountURI: String) {
-        guard let conversation = self.conversations.value.filter({ conversation in
-            return  conversation.id == conversationId && conversation.accountId == accountId
-        }).first,
-        let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) else { return }
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId),
+              let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) else { return }
         conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
         let serviceEventType: ServiceEventType = .conversationMemberEvent
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.conversationId, value: conversationId)
         serviceEvent.addEventInput(.accountId, value: accountId)
         self.responseStream.onNext(serviceEvent)
+    }
+
+    func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
+        conversation.reactionAdded(messageId: messageId, reaction: reaction)
+    }
+
+    func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
+        conversation.reactionRemoved(messageId: messageId, reactionId: reactionId)
     }
 
     // MARK: conversations management
