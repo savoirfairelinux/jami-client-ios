@@ -113,10 +113,14 @@ struct MessageCornerRadius: ViewModifier {
 struct MessageContentView: View {
     let messageModel: MessageContainerModel
     @StateObject var model: MessageContentVM
+    @StateObject var reactionsModel: ReactionsContainerModel
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     let padding: CGFloat = 12
+    @SwiftUI.State private var reactionsTextSize: CGSize = .zero
+    var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
+
     var body: some View {
-        ZStack {
+        ZStack(alignment: Alignment.bottomTrailing) {
             VStack(alignment: messageModel.replyTarget.alignment) {
                 if messageModel.messageContent.isHistory {
                     renderReplyHistory()
@@ -127,6 +131,13 @@ struct MessageContentView: View {
                     }
                     .offset(y: messageModel.messageContent.isHistory ? -padding : 0)
             }
+            .padding(.bottom, !messageModel.hasReactions() ? 0 : reactionsTextSize.height - 6)
+            if messageModel.hasReactions() {
+                renderReactions()
+            }
+        }
+        .onPreferenceChange(SizePreferenceKey.self) { preferences in
+            self.reactionsTextSize = preferences
         }
         .offset(y: messageModel.messageContent.isHistory ? padding : 0)
     }
@@ -141,5 +152,27 @@ struct MessageContentView: View {
                 Spacer().frame(width: padding)
             }
         }
+    }
+
+    private func renderReactions() -> some View {
+        Text(reactionsModel.displayValue)
+            .font(.callout)
+            .fontWeight(.medium)
+            .lineLimit(nil)
+            .lineSpacing(5)
+            .padding(5)
+            .background(Color(UIColor.systemBackground))
+            .cornerRadius(10)
+            .padding(.trailing, 10)
+            .padding(.leading, 30)
+            .shadowForConversation()
+            .measureSize()
+            .onLongPressGesture(minimumDuration: 0.5) {
+                self.showReactionsView(reactionsModel)
+            }
+            .onAppear {
+                self.messageModel.reactionsModel.onAppear()
+            }
+            .padding(.bottom, 2)
     }
 }
