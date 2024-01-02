@@ -26,6 +26,7 @@ struct MessageStackView: View {
         return messageModel.stackViewModel
     }
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
+    var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
     var body: some View {
         VStack(alignment: model.horizontalAllignment) {
             if model.shouldDisplayName {
@@ -36,7 +37,11 @@ struct MessageStackView: View {
                 Spacer()
                     .frame(height: 4)
             }
-            MessageContentView(messageModel: messageModel, model: messageModel.messageContent, onLongPress: onLongPress)
+            MessageContentView(messageModel: messageModel,
+                               model: messageModel.messageContent,
+                               reactionsModel: messageModel.reactionsModel,
+                               onLongPress: onLongPress,
+                               showReactionsView: showReactionsView)
                 .frame(maxWidth: .infinity, alignment: model.alignment)
         }
     }

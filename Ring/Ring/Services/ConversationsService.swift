@@ -117,7 +117,7 @@ class ConversationsService {
                 self?.sortAndUpdate(conversations: &currentConversations)
                 // load one message for each swarm conversation
                 for swarmId in conversationToLoad {
-                    self?.conversationsAdapter.loadConversationMessages(accountId, conversationId: swarmId, from: "", size: 1)
+                    self?.conversationsAdapter.loadConversationMessages(accountId, conversationId: swarmId, from: "", size: 4)
                 }
             }, onError: { [weak self] _ in
                 self?.conversations.accept(currentConversations)
@@ -367,7 +367,7 @@ class ConversationsService {
             data[ConversationNotificationsKeys.conversationId.rawValue] = conversationId
             data[ConversationNotificationsKeys.accountId.rawValue] = accountId
             NotificationCenter.default.post(name: NSNotification.Name(ConversationNotifications.conversationReady.rawValue), object: nil, userInfo: data)
-            self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 2)
+            self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 4)
             self.sortIfNeeded()
             self.conversationReady.accept(conversationId)
             return
@@ -425,16 +425,24 @@ class ConversationsService {
     }
 
     func conversationMemberEvent(conversationId: String, accountId: String, memberUri: String, event: ConversationMemberEvent, accountURI: String) {
-        guard let conversation = self.conversations.value.filter({ conversation in
-            return  conversation.id == conversationId && conversation.accountId == accountId
-        }).first,
-        let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) else { return }
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId),
+              let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) else { return }
         conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
         let serviceEventType: ServiceEventType = .conversationMemberEvent
         var serviceEvent = ServiceEvent(withEventType: serviceEventType)
         serviceEvent.addEventInput(.conversationId, value: conversationId)
         serviceEvent.addEventInput(.accountId, value: accountId)
         self.responseStream.onNext(serviceEvent)
+    }
+
+    func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
+        conversation.reactionAdded(messageId: messageId, reaction: reaction)
+    }
+
+    func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
+        conversation.reactionRemoved(messageId: messageId, reactionId: reactionId)
     }
 
     // MARK: conversations management

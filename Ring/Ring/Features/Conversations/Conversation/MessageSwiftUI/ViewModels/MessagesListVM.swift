@@ -144,6 +144,7 @@ class MessagesListVM: ObservableObject {
             self.updateColorPreference()
             self.subscribeUserAvatarForLocationSharing()
             self.subscribeReplyTarget()
+            self.subscribeReactions()
         }
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
@@ -262,6 +263,20 @@ class MessagesListVM: ObservableObject {
             .disposed(by: self.disposeBag)
     }
 
+    func subscribeReactions() {
+        self.conversation.reactionsUpdated
+            .subscribe(onNext: { [weak self] messageId in
+                guard let self = self else { return }
+                self.reactionsUpdated(messageId: messageId)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    func reactionsUpdated(messageId: String) {
+        guard let message = self.getMessage(messageId: messageId) else { return }
+        message.reactionsUpdated()
+    }
+
     private func updateCoordinatesList() {
         var coordinates = [LocationSharingAnnotation]()
         if let myContactsLocation = self.myContactsLocation {
@@ -278,6 +293,9 @@ class MessagesListVM: ObservableObject {
     }
 
     private func insert(newMessage: MessageModel, fromHistory: Bool) -> Bool {
+        if newMessage.isReaction() {
+            return false
+        }
         guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
             return false
         }
@@ -324,7 +342,7 @@ class MessagesListVM: ObservableObject {
             switch state {
             case .updateAvatar(let jamiId):
                 if let avatar = self.avatars.get(key: jamiId) as? UIImage {
-                    container.updateAvatar(image: avatar)
+                    container.updateAvatar(image: avatar, jamiId: jamiId)
                 } else {
                     self.getInformationForContact(id: jamiId, message: container)
                 }
@@ -553,7 +571,7 @@ class MessagesListVM: ObservableObject {
     private func updateAvatar(image: UIImage, id: String, message: MessageContainerModel) {
         self.avatars.set(value: image, for: id)
         self.updateContacLocationSharingImage()
-        message.updateAvatar(image: image)
+        message.updateAvatar(image: image, jamiId: id)
         if var lastReadAvatars = self.lastRead.get(key: message.id) as? [String: UIImage] {
             if var _ = lastReadAvatars[id] {
                 lastReadAvatars[id] = image

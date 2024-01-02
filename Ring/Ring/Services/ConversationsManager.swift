@@ -581,6 +581,14 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, conversationId: conversationId, fromLoaded: true)
     }
 
+    func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
+        self.conversationService.reactionAdded(conversationId: conversationId, accountId: accountId, messageId: messageId, reaction: reaction)
+    }
+
+    func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
+        self.conversationService.reactionRemoved(conversationId: conversationId, accountId: accountId, messageId: messageId, reactionId: reactionId)
+    }
+
     func isDownloadingEnabled(for size: Int) -> Bool {
         if !UserDefaults.standard.bool(forKey: automaticDownloadFilesKey) {
             return false
