@@ -171,6 +171,7 @@ class ConversationModel: Equatable {
     var description: String = ""
     var preferences = ConversationPreferences()
     var synchronizing = BehaviorRelay<Bool>(value: false)
+    let reactionsUpdated = PublishSubject<String>()
 
     convenience init(withParticipantUri participantUri: JamiURI, accountId: String) {
         self.init()
@@ -420,5 +421,17 @@ class ConversationModel: Equatable {
         newMessages.accept(LoadedMessages(messages: [MessageModel](), fromHistory: false))
         lastMessage = nil
         numberOfUnreadMessages.accept(0)
+    }
+
+    func reactionAdded(messageId: String, reaction: [String: String]) {
+        guard let message = self.getMessage(messageId: messageId) else { return }
+        message.reactionAdded(reaction: reaction)
+        reactionsUpdated.onNext(messageId)
+    }
+
+    func reactionRemoved(messageId: String, reactionId: String) {
+        guard let message = self.getMessage(messageId: messageId) else { return }
+        message.reactionRemoved(reactionId: reactionId)
+        reactionsUpdated.onNext(messageId)
     }
 }
