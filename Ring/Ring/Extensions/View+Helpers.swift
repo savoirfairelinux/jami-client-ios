@@ -37,6 +37,14 @@ extension View {
             .frame(width: 22, height: 22)
             .foregroundColor(Color(UIColor.jamiButtonLight))
     }
+
+    func measureSize() -> some View {
+        self.modifier(MeasureSizeModifier())
+    }
+
+    func shadowForConversation() -> some View {
+        self.shadow(color: Color(UIColor.quaternaryLabel), radius: 2, x: 1, y: 2)
+    }
 }
 
 extension Animation {
