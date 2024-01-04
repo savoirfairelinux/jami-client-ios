@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51653bc2_7a6b90a7",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 8
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 220
+      },
+      "writtenOn": "2024-01-04T12:40:06Z",
+      "side": 1,
+      "message": "is it ever true? I guess there is no reaction here if you use new signals.",
+      "range": {
+        "startLine": 296,
+        "startChar": 16,
+        "endLine": 296,
+        "endChar": 28
+      },
+      "revId": "5a9bad67026d5742c0a9623be6275b93d9566c7e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
