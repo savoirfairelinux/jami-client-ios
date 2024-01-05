@@ -279,6 +279,11 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
     reloadConversationsAndRequests(std::string([accountId UTF8String]));
 }
 
+- (void)clearCasheForConversationId:(NSString*)conversationId
+                          accountId:(NSString*)accountId {
+    clearCache(std::string([accountId UTF8String]), std::string([conversationId UTF8String]));
+}
+
 #pragma mark MessagesAdapterDelegate
 + (id <MessagesAdapterDelegate>)messagesDelegate {
     return _messagesDelegate;

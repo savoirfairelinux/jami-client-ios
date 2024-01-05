@@ -332,6 +332,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.accountService.currentWillChange
             .subscribe(onNext: { account in
                 guard let currentAccount = account else { return }
+                self.conversationsService.clearConversationsData(accountId: currentAccount.id)
                 self.presenceService.subscribeBuddies(withAccount: currentAccount.id, withContacts: self.contactsService.contacts.value, subscribe: false)
             })
             .disposed(by: self.disposeBag)

@@ -128,6 +128,13 @@ class ConversationsService {
             .disposed(by: self.disposeBag)
     }
 
+    func clearConversationsData(accountId: String) {
+        self.conversations.value.forEach { conversation in
+            self.conversationsAdapter
+                .clearCashe(forConversationId: conversation.id, accountId: accountId)
+        }
+    }
+
     func getSwarmMembers(conversationId: String, accountId: String, accountURI: String) -> [ParticipantInfo] {
         if let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
             return participantsInfo.compactMap({ info in
