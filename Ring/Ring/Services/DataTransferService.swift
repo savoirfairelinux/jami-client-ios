@@ -155,7 +155,7 @@ public final class DataTransferService: DataTransferAdapterDelegate {
                                                accountId: conversation.accountId,
                                                conversationId: conversation.id,
                                                withFilePath: filePath,
-                                               parent: conversation.lastMessage?.id)
+                                               parent: "")
     }
 
     func sendAndSaveFile(displayName: String,
