@@ -49,8 +49,7 @@ enum DocumentPickerMode {
 // swiftlint:disable type_body_length
 class ConversationViewController: UIViewController,
                                   UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-                                  StoryboardBased, ViewModelBased,
-                                  MessageAccessoryViewDelegate, ContactPickerDelegate,
+                                  StoryboardBased, ViewModelBased, ContactPickerDelegate,
                                   PHPickerViewControllerDelegate {
 
     // MARK: StateableResponsive
@@ -64,7 +63,6 @@ class ConversationViewController: UIViewController,
     var viewModel: ConversationViewModel!
     var textFieldShouldEndEditing = false
     private let messageGroupingInterval = 10 * 60 // 10 minutes
-    var bottomHeight: CGFloat = 0.00
     var isExecutingDeleteMessage: Bool = false
     private var isLocationSharingDurationLimited: Bool {
         return UserDefaults.standard.bool(forKey: limitLocationSharingDurationKey)
@@ -78,7 +76,6 @@ class ConversationViewController: UIViewController,
     @IBOutlet weak var conversationInSyncLabel: UILabel!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
-    var bottomAnchor: NSLayoutConstraint?
     var keyboardDismissTapRecognizer: UITapGestureRecognizer!
     var swiftUIViewAdded: Bool = false
     var currentDocumentPickerMode: DocumentPickerMode = .none
@@ -91,22 +88,14 @@ class ConversationViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        messageAccessoryView.delegate = self
         self.configureNavigationBar()
         self.setupUI()
         self.setupBindings()
-        /*
-         Register to keyboard notifications to adjust tableView insets when the keybaord appears
-         or disappears
-         */
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(withNotification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(withNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(applicationWillResignActive),
                                                name: UIApplication.willResignActiveNotification,
                                                object: nil)
 
-        keyboardDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     }
 
     private func addSwiftUIView() {
@@ -115,7 +104,8 @@ class ConversationViewController: UIViewController,
                                             conversationViewModel: self.viewModel)
         let swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
                                           conversation: self.viewModel.conversation.value,
-                                          transferHelper: transferHelper)
+                                          transferHelper: transferHelper,
+                                          bestName: self.viewModel.bestName)
         swiftUIModel.hideNavigationBar
             .subscribe(onNext: { [weak self] (hide) in
                 guard let self = self else { return }
@@ -132,6 +122,20 @@ class ConversationViewController: UIViewController,
                                        displayName: self.viewModel.displayName.value,
                                        username: self.viewModel.userName.value)
                     self.updateNavigationBarShadow()
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        swiftUIModel.messagePanelState
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? MessagePanelState else { return }
+                switch state {
+                case .sendMessage(let content):
+                    self.viewModel.sendMessage(withContent: content)
+                case .showMoreActions:
+                    self.showActionsForMessagePanel()
+                case .sendPhoto:
+                    self.takePicture()
                 }
             })
             .disposed(by: self.disposeBag)
@@ -165,8 +169,7 @@ class ConversationViewController: UIViewController,
         self.view.addSubview(swiftUIView.view)
         swiftUIView.view.translatesAutoresizingMaskIntoConstraints = false
         swiftUIView.view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        bottomAnchor = swiftUIView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
-        bottomAnchor?.isActive = true
+        swiftUIView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         swiftUIView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         swiftUIView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
         swiftUIView.didMove(toParent: self)
@@ -247,7 +250,7 @@ class ConversationViewController: UIViewController,
     }
 
     @objc
-    func imageTapped() {
+    func showActionsForMessagePanel() {
         let alert = UIAlertController.init(title: nil,
                                            message: nil,
                                            preferredStyle: .actionSheet)
@@ -258,7 +261,6 @@ class ConversationViewController: UIViewController,
         let recordVideoAction = UIAlertAction(title: L10n.Alerts.recordVideoMessage, style: UIAlertAction.Style.default) {[weak self] _ in
             if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
                 if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
-                    self?.messageAccessoryView.messageTextView.resignFirstResponder()
                     self?.recordVideoFile()
                 } else {
                     AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
@@ -445,38 +447,6 @@ class ConversationViewController: UIViewController,
                             })
     }
 
-    @objc
-    func dismissKeyboard() {
-        self.becomeFirstResponder()
-        view.removeGestureRecognizer(keyboardDismissTapRecognizer)
-    }
-
-    @objc
-    func keyboardDidShow(withNotification notification: Notification) {
-        guard let userInfo: Dictionary = notification.userInfo else {
-            return
-        }
-        guard let keyboardFrame: NSValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-
-        let keyboardRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keyboardRectangle.height
-
-        if keyboardHeight != self.messageAccessoryView.frame.height {
-            self.view.addGestureRecognizer(keyboardDismissTapRecognizer)
-        }
-        self.updateMessagesOffset()
-    }
-
-    func updateMessagesOffset() {
-        self.bottomHeight = self.messageAccessoryView.frame.height
-        self.bottomAnchor?.constant = -self.bottomHeight
-    }
-
-    @objc
-    func keyboardWillHide(withNotification notification: Notification) {
-        self.updateMessagesOffset()
-    }
-
     func setupNavTitle(profileImageData: Data?, displayName: String? = nil, username: String?) {
         let isPortrait = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height
         let imageSize = isPortrait ? CGFloat(36.0) : CGFloat(32.0)
@@ -597,27 +567,8 @@ class ConversationViewController: UIViewController,
     }
 
     func setupUI() {
-        self.messageAccessoryView.sendButton.contentVerticalAlignment = .fill
-        self.messageAccessoryView.sendButton.contentHorizontalAlignment = .fill
         spinnerView.backgroundColor = UIColor.jamiMsgBackground
         self.view.backgroundColor = UIColor.jamiMsgTextFieldBackground
-
-        if self.viewModel.isAccountSip {
-            self.messageAccessoryView.frame.size.height = 0
-            self.messageAccessoryView.isHidden = true
-        }
-
-        self.messageAccessoryView.shareButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.imageTapped()
-            })
-            .disposed(by: self.disposeBag)
-
-        self.messageAccessoryView.cameraButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.takePicture()
-            })
-            .disposed(by: self.disposeBag)
 
         Observable<(Data?, String?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
                                                            self.viewModel.displayName.asObservable(),
@@ -661,15 +612,14 @@ class ConversationViewController: UIViewController,
             })
             .disposed(by: self.disposeBag)
         viewModel.bestName
+            .share()
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] bestName in
                 let name = bestName.replacingOccurrences(of: "\0", with: "")
                 guard !name.isEmpty else { return }
-                let placeholder = L10n.Conversation.messagePlaceholder + name
                 let nameNSString = name as NSString
                 self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(nameNSString)
-                self?.messageAccessoryView.setPlaceholder(placeholder: placeholder)
             })
             .disposed(by: self.disposeBag)
         self.conversationInSyncLabel.backgroundColor = UIColor(hexString: self.viewModel.conversation.value.preferences.color)
@@ -677,13 +627,11 @@ class ConversationViewController: UIViewController,
 
     func placeCall() {
         self.textFieldShouldEndEditing = true
-        self.messageAccessoryView.messageTextView.resignFirstResponder()
         self.viewModel.startCall()
     }
 
     func placeAudioOnlyCall() {
         self.textFieldShouldEndEditing = true
-        self.messageAccessoryView.messageTextView.resignFirstResponder()
         self.viewModel.startAudioCall()
     }
 
@@ -708,54 +656,7 @@ class ConversationViewController: UIViewController,
         self.spinnerView.isHidden = true
     }
 
-    override var inputAccessoryView: UIView {
-        return self.messageAccessoryView
-    }
-
-    override var canBecomeFirstResponder: Bool {
-        return true
-    }
-
-    lazy var messageAccessoryView: MessageAccessoryView = {
-        return MessageAccessoryView.loadFromNib()
-    }()
-
     func setupBindings() {
-        self.messageAccessoryView.sendButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                guard let payload = self?.messageAccessoryView.messageTextView.text, !payload.isEmpty else {
-                    return
-                }
-                let trimmed = payload.trimmingCharacters(in: .whitespacesAndNewlines)
-                if trimmed.isEmpty {
-                    self?.messageAccessoryView.messageTextView.text = ""
-                    return
-                }
-                self?.viewModel.setIsComposingMsg(isComposing: false)
-                self?.viewModel.sendMessage(withContent: trimmed)
-                self?.messageAccessoryView.messageTextView.text = ""
-                self?.messageAccessoryView.setEmojiButtonVisibility(hide: false)
-            })
-            .disposed(by: self.disposeBag)
-
-        self.messageAccessoryView.emojisButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.sendMessage(withContent: "👍")
-            })
-            .disposed(by: self.disposeBag)
-
-        self.messageAccessoryView.messageTextViewHeight.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                self.updateMessagesOffset()
-            })
-            .disposed(by: self.disposeBag)
-
-        self.messageAccessoryView.messageTextViewContent.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                self?.messageAccessoryView.editingChanges()
-            })
-            .disposed(by: self.disposeBag)
         self.viewModel.shouldDismiss
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] dismiss in
@@ -772,11 +673,9 @@ class ConversationViewController: UIViewController,
                     if self.view.window?.rootViewController is InvitationViewController {
                         return
                     }
-                    self.messageAccessoryView.isHidden = true
                     self.navigationItem.rightBarButtonItems = []
                     self.viewModel.openInvitationView(parentView: self)
                 } else {
-                    self.messageAccessoryView.isHidden = false
                     self.setRightNavigationButtons()
                 }
             } onError: { _ in
@@ -822,10 +721,9 @@ class ConversationViewController: UIViewController,
         contactPickerVC.view.frame = initialFrame
         self.view.addSubview(contactPickerVC.view)
         contactPickerVC.didMove(toParent: self)
-        UIView.animate(withDuration: 0.2, animations: { [weak self, weak contactPickerVC] in
-            guard let self = self, let contactPickerVC = contactPickerVC else { return }
+        UIView.animate(withDuration: 0.2, animations: { [weak contactPickerVC] in
+            guard let contactPickerVC = contactPickerVC else { return }
             contactPickerVC.view.frame = newFrame
-            self.inputAccessoryView.isHidden = true
         }, completion: {  _ in
         })
     }
@@ -887,7 +785,6 @@ extension ConversationViewController {
 
 extension ConversationViewController: ContactPickerViewControllerDelegate {
     func contactPickerDismissed() {
-        self.inputAccessoryView.isHidden = false
         self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                            displayName: self.viewModel.displayName.value,
                            username: self.viewModel.userName.value)
@@ -984,8 +881,6 @@ extension ConversationViewController {
 
     func presentMedia(message: MessageContentVM) {
         self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: message.getImage(), initialFrame: CGRect.zero, delegate: message)
-        self.messageAccessoryView.frame.size.height = 0
-        self.messageAccessoryView.isHidden = true
     }
 
     func openDocument(url: URL) {
