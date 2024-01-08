@@ -165,8 +165,7 @@ class ConversationViewController: UIViewController,
         self.view.addSubview(swiftUIView.view)
         swiftUIView.view.translatesAutoresizingMaskIntoConstraints = false
         swiftUIView.view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        bottomAnchor = swiftUIView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
-        bottomAnchor?.isActive = true
+        swiftUIView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         swiftUIView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         swiftUIView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
         swiftUIView.didMove(toParent: self)
@@ -708,14 +707,6 @@ class ConversationViewController: UIViewController,
         self.spinnerView.isHidden = true
     }
 
-    override var inputAccessoryView: UIView {
-        return self.messageAccessoryView
-    }
-
-    override var canBecomeFirstResponder: Bool {
-        return true
-    }
-
     lazy var messageAccessoryView: MessageAccessoryView = {
         return MessageAccessoryView.loadFromNib()
     }()
@@ -823,9 +814,8 @@ class ConversationViewController: UIViewController,
         self.view.addSubview(contactPickerVC.view)
         contactPickerVC.didMove(toParent: self)
         UIView.animate(withDuration: 0.2, animations: { [weak self, weak contactPickerVC] in
-            guard let self = self, let contactPickerVC = contactPickerVC else { return }
+            guard let contactPickerVC = contactPickerVC else { return }
             contactPickerVC.view.frame = newFrame
-            self.inputAccessoryView.isHidden = true
         }, completion: {  _ in
         })
     }
@@ -887,7 +877,6 @@ extension ConversationViewController {
 
 extension ConversationViewController: ContactPickerViewControllerDelegate {
     func contactPickerDismissed() {
-        self.inputAccessoryView.isHidden = false
         self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                            displayName: self.viewModel.displayName.value,
                            username: self.viewModel.userName.value)

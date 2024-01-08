@@ -22,6 +22,34 @@
 import SwiftUI
 import UIKit
 
+struct ViewHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+struct VisualEffectBlur<Content: View>: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    let content: Content
+
+    init(effect: UIVisualEffect? = nil, @ViewBuilder content: () -> Content) {
+        self.effect = effect
+        self.content = content()
+    }
+
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        let view = UIVisualEffectView(effect: effect)
+        view.contentView.addSubview(UIHostingController(rootView: content).view)
+        return view
+    }
+
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = effect
+    }
+}
+
 struct Flipped: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -58,34 +86,78 @@ struct MessagesListView: View {
     @SwiftUI.State private var screenHeight: CGFloat = 0
     @SwiftUI.State private var showReactionsView = false
     @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
+    @SwiftUI.State private var text: String = ""
+    @SwiftUI.State private var dynamicHeight: CGFloat = 20
+    @SwiftUI.State private var trackedHeight: CGFloat = 0
 
     var body: some View {
         ZStack {
             ZStack(alignment: .top) {
-                ZStack(alignment: .bottomTrailing) {
-                    createMessagesStackView()
-                        .flipped()
-                    if !model.atTheBottom {
-                        createScrollToBottmView()
+                ZStack(alignment: .bottom) {
+                    ZStack(alignment: .bottomTrailing) {
+                        createMessagesStackView()
+                            .flipped()
+                        if !model.atTheBottom {
+                            createScrollToBottmView()
+                        }
                     }
-                }
-                .overlay(showContextMenu && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
-                // hide navigation bar when presenting context menu
-                .onChange(of: showContextMenu) { newValue in
-                    model.hideNavigationBar.accept(newValue)
-                }
-                // hide context menu overly when device is rotated
-                .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-                    if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
+                    .layoutPriority(1)
+                    .offset(y: -trackedHeight)
+                    .overlay(showContextMenu && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
+                    // hide navigation bar when presenting context menu
+                    .onChange(of: showContextMenu) { newValue in
+                        model.hideNavigationBar.accept(newValue)
+                    }
+                    // hide context menu overly when device is rotated
+                    .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                        if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
+                            screenHeight = UIScreen.main.bounds.size.height
+                            showContextMenu = false
+                        }
+                    }
+                    .onAppear(perform: {
                         screenHeight = UIScreen.main.bounds.size.height
-                        showContextMenu = false
+                    })
+                    if model.shouldShowMap {
+                        LocationSharingView(model: model)
                     }
-                }
-                .onAppear(perform: {
-                    screenHeight = UIScreen.main.bounds.size.height
-                })
-                if model.shouldShowMap {
-                    LocationSharingView(model: model)
+                    VStack {
+                        HStack(alignment: .bottom, spacing: 20) {
+                            Button(action: {
+                            }) {
+                                Image(systemName: "plus")
+                                    .frame(width: 35, height: 35)
+                                    .background(Color(UIColor.secondarySystemBackground))
+                                    .clipShape(Circle())
+                                    .foregroundColor(Color(UIColor.secondaryLabel))
+                            }
+
+                            TextEditor(text: $text)
+                                .frame(minHeight: 35, maxHeight: 100)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .cornerRadius(16)
+                                .shadow(radius: 1)
+
+                            Button(action: {
+                            }) {
+                                Text("👍")
+                                    .font(.title)
+                                    .frame(width: 35, height: 35)
+                            }
+                        }
+                        .alignmentGuide(VerticalAlignment.center) { dimensions in
+                            DispatchQueue.main.async {
+                                self.trackedHeight = dimensions.height
+                            }
+                            return dimensions[VerticalAlignment.center]
+                        }
+                        Spacer()
+                            .frame(height: 30)
+                    }
+                    .padding()
+                    .background(VisualEffectBlur(effect: UIBlurEffect(style: .prominent)) {
+                    })
+                    .offset(y: 30)
                 }
             }
             if showReactionsView {
@@ -149,7 +221,9 @@ struct MessagesListView: View {
                     let scrollOffset = value ?? 0
                     let atTheBottom = scrollOffset < scrollReserved
                     if atTheBottom != model.atTheBottom {
-                        model.atTheBottom = atTheBottom
+                        withAnimation {
+                            model.atTheBottom = atTheBottom
+                        }
                     }
                 }
             }
@@ -240,4 +314,13 @@ func topVC() -> UIViewController? {
     }
 
     return nil
+}
+
+extension String {
+    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
+
+        return ceil(boundingBox.height)
+    }
 }
