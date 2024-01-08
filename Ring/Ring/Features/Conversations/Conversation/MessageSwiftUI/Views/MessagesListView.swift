@@ -22,6 +22,26 @@
 import SwiftUI
 import UIKit
 
+struct VisualEffectBlur<Content: View>: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    let content: Content
+
+    init(effect: UIVisualEffect? = nil, @ViewBuilder content: () -> Content) {
+        self.effect = effect
+        self.content = content()
+    }
+
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        let view = UIVisualEffectView(effect: effect)
+        view.contentView.addSubview(UIHostingController(rootView: content).view)
+        return view
+    }
+
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = effect
+    }
+}
+
 struct Flipped: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -58,16 +78,29 @@ struct MessagesListView: View {
     @SwiftUI.State private var screenHeight: CGFloat = 0
     @SwiftUI.State private var showReactionsView = false
     @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
+    @SwiftUI.State private var text: String = ""
+    @SwiftUI.State private var messageContainerHeight: CGFloat = 0
 
     var body: some View {
         ZStack {
             ZStack(alignment: .top) {
-                ZStack(alignment: .bottomTrailing) {
-                    createMessagesStackView()
-                        .flipped()
-                    if !model.atTheBottom {
-                        createScrollToBottmView()
+                ZStack(alignment: .bottom) {
+                    ZStack(alignment: .bottomTrailing) {
+                        createMessagesStackView()
+                            .flipped()
+                        if !model.atTheBottom {
+                            createScrollToBottmView()
+                        }
                     }
+                    .layoutPriority(1)
+                    .padding(.bottom, messageContainerHeight - 40)
+                    MessagePanelView(model: model)
+                        .alignmentGuide(VerticalAlignment.center) { dimensions in
+                            DispatchQueue.main.async {
+                                self.messageContainerHeight = dimensions.height
+                            }
+                            return dimensions[VerticalAlignment.center]
+                        }
                 }
                 .overlay(showContextMenu && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
                 // hide navigation bar when presenting context menu
@@ -102,6 +135,7 @@ struct MessagesListView: View {
             if showReactionsView == false {
                 reactionsForMessage = nil
             }
+            self.hideKeyboard()
         }
     }
 
@@ -149,7 +183,9 @@ struct MessagesListView: View {
                     let scrollOffset = value ?? 0
                     let atTheBottom = scrollOffset < scrollReserved
                     if atTheBottom != model.atTheBottom {
-                        model.atTheBottom = atTheBottom
+                        withAnimation {
+                            model.atTheBottom = atTheBottom
+                        }
                     }
                 }
             }
@@ -210,7 +246,7 @@ struct MessagesListView: View {
         .padding(.trailing, 5.0)
         .padding(.leading, 15.0)
         .padding(.top, 0.0)
-        .padding(.bottom, 5.0)
+        .padding(.bottom, 45)
         .ignoresSafeArea(.container, edges: [])
         .shadowForConversation()
     }
@@ -240,4 +276,13 @@ func topVC() -> UIViewController? {
     }
 
     return nil
+}
+
+extension String {
+    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
+
+        return ceil(boundingBox.height)
+    }
 }

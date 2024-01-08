@@ -33,6 +33,12 @@ enum MessageInfo: State {
     case updateDisplayname(jamiId: String)
 }
 
+enum MessagePanelState: State {
+    case sendMessage(content: String)
+    case showMoreActions
+    case sendPhoto
+}
+
 // swiftlint:disable type_body_length
 class MessagesListVM: ObservableObject {
 
@@ -76,6 +82,11 @@ class MessagesListVM: ObservableObject {
     private let contextStateSubject = PublishSubject<State>()
     lazy var contextMenuState: Observable<State> = {
         return self.contextStateSubject.asObservable()
+    }()
+
+    private let messagePanelStateSubject = PublishSubject<State>()
+    lazy var messagePanelState: Observable<State> = {
+        return self.messagePanelStateSubject.asObservable()
     }()
 
     var hideNavigationBar = BehaviorRelay(value: false)
@@ -556,6 +567,24 @@ class MessagesListVM: ObservableObject {
             }
         }
         return .singleMessage
+    }
+
+    // MARK: MessagePanelState
+
+    func sendMessage(content: String) {
+        let trimmed = content.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty {
+            return
+        }
+        messagePanelStateSubject.onNext(MessagePanelState.sendMessage(content: trimmed))
+    }
+
+    func showMoreActions() {
+        messagePanelStateSubject.onNext(MessagePanelState.showMoreActions)
+    }
+
+    func sendPhoto() {
+        messagePanelStateSubject.onNext(MessagePanelState.sendPhoto)
     }
 
     // MARK: participant information
