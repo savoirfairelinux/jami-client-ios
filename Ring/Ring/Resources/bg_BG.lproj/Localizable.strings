@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Изпратете запитване за контакт";
 "conversation.synchronizationTitle" = "Приехте молбата за разговор.";
 "conversation.synchronizationMessage" = "Чакаме %@ връзки, за да синхронизираме разговора.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Няма покани.";

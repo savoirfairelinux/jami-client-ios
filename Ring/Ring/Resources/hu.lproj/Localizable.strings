@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Kapcsolatfelvételi kérelem küldése";
 "conversation.synchronizationTitle" = "Elfogadta a beszélgetési kérelmet.";
 "conversation.synchronizationMessage" = "Várjuk, hogy a(z) %@ csatlakozzon a beszélgetés összehangolásához.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Nincs meghívás";

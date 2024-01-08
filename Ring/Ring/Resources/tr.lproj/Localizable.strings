@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "İletişim İsteği Gönder";
 "conversation.synchronizationTitle" = "Görüşme isteğini kabul ettin.";
 "conversation.synchronizationMessage" = "Görüşmeyi eş zamanlamak için %@ bağlanmasını bekliyoruz.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Davetiye yok";

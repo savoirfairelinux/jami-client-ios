@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "연락 요청 을 보내십시오";
 "conversation.synchronizationTitle" = "대화 요청을 받아들였습니다.";
 "conversation.synchronizationMessage" = "우리는 대화를 동기화하기 위해 %@ 연결을 기다리고 있습니다.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "초대도 없습니다";

@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Envíe solicitude de contacto";
 "conversation.synchronizationTitle" = "Aceptaches a solicitude para conversar.";
 "conversation.synchronizationMessage" = "Estamos esperando por %@ conexións para sincronizar a conversa.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Non hai invitacións";

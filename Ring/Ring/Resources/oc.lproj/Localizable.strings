@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Enviar una peticion de contacte";
 "conversation.synchronizationTitle" = "Avètz acceptat la peticion de conversacion.";
 "conversation.synchronizationMessage" = "Esperam que %@ connectes per sincronizar la conversacion.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Cap d’invitacion";

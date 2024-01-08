@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Tuma Ombi la Wasiliana";
 "conversation.synchronizationTitle" = "Umeikubali ombi la mazungumzo.";
 "conversation.synchronizationMessage" = "Tunasubiri kwa ajili ya %@ uhusiano kwa kulinganisha mazungumzo.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Hakuna mwaliko";

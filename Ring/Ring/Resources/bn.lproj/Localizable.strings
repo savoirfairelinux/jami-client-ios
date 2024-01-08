@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "যোগাযোগের অনুরোধ পাঠান";
 "conversation.synchronizationTitle" = "আপনি কথোপকথনের অনুরোধ গ্রহণ করেছেন।";
 "conversation.synchronizationMessage" = "আমরা %@ সংলাপের জন্য অপেক্ষা করছি কথোপকথন সিঙ্ক্রোনাইজ করার জন্য।";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "আমন্ত্রণ নেই";

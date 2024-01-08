@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Send kontaktforespørsler";
 "conversation.synchronizationTitle" = "Du har takket ja til samtaleforespørselen.";
 "conversation.synchronizationMessage" = "Vi venter på  %@ tilkoblinger for å synkronisere samtalen.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Ingen invitasjoner";

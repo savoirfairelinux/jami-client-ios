@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "发送联系请求";
 "conversation.synchronizationTitle" = "您已接受会话请求。";
 "conversation.synchronizationMessage" = "我们正在等待 %@ 连接以同步对话。";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "没有邀请";
