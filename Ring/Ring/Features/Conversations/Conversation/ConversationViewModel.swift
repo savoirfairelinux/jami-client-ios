@@ -358,13 +358,6 @@ class ConversationViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: jamiId, userName: self.displayName.value ?? self.userName.value))
     }
 
-    func loadMoreMessages(messageId: String) {
-        self.conversationsService
-            .loadConversationMessages(conversationId: self.conversation.value.id,
-                                      accountId: self.conversation.value.accountId,
-                                      from: messageId)
-    }
-
     func startAudioCall() {
         guard let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
         self.closeAllPlayers()

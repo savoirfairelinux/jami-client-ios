@@ -27,8 +27,12 @@ extension View {
         @ViewBuilder placeholder: () -> Content) -> some View {
 
         ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
             self
+
+            if shouldShow {
+                placeholder()
+                    .allowsHitTesting(false)
+            }
         }
     }
 
@@ -44,6 +48,16 @@ extension View {
 
     func shadowForConversation() -> some View {
         self.shadow(color: Color(UIColor.quaternaryLabel), radius: 2, x: 1, y: 2)
+    }
+
+    public func border<S>(_ content: S, width: CGFloat = 1, cornerRadius: CGFloat) -> some View where S: ShapeStyle {
+        let roundedRect = RoundedRectangle(cornerRadius: cornerRadius)
+        return clipShape(roundedRect)
+            .overlay(roundedRect.strokeBorder(content, lineWidth: width))
+    }
+
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
