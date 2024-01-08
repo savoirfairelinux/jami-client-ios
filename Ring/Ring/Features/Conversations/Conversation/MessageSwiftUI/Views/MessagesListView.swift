@@ -58,16 +58,28 @@ struct MessagesListView: View {
     @SwiftUI.State private var screenHeight: CGFloat = 0
     @SwiftUI.State private var showReactionsView = false
     @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
+    @SwiftUI.State private var messageContainerHeight: CGFloat = 0
 
     var body: some View {
         ZStack {
             ZStack(alignment: .top) {
-                ZStack(alignment: .bottomTrailing) {
-                    createMessagesStackView()
-                        .flipped()
-                    if !model.atTheBottom {
-                        createScrollToBottmView()
+                ZStack(alignment: .bottom) {
+                    ZStack(alignment: .bottomTrailing) {
+                        createMessagesStackView()
+                            .flipped()
+                        if !model.atTheBottom {
+                            createScrollToBottmView()
+                        }
                     }
+                    .layoutPriority(1)
+                    .padding(.bottom, messageContainerHeight - 40)
+                    MessagePanelView(model: model.messagePanel)
+                        .alignmentGuide(VerticalAlignment.center) { dimensions in
+                            DispatchQueue.main.async {
+                                self.messageContainerHeight = dimensions.height
+                            }
+                            return dimensions[VerticalAlignment.center]
+                        }
                 }
                 .overlay(showContextMenu && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
                 // hide navigation bar when presenting context menu
@@ -102,6 +114,7 @@ struct MessagesListView: View {
             if showReactionsView == false {
                 reactionsForMessage = nil
             }
+            self.hideKeyboard()
         }
     }
 
@@ -149,7 +162,9 @@ struct MessagesListView: View {
                     let scrollOffset = value ?? 0
                     let atTheBottom = scrollOffset < scrollReserved
                     if atTheBottom != model.atTheBottom {
-                        model.atTheBottom = atTheBottom
+                        withAnimation {
+                            model.atTheBottom = atTheBottom
+                        }
                     }
                 }
             }
@@ -194,23 +209,24 @@ struct MessagesListView: View {
             }
             Button(action: {
                 model.scrollToTheBottom()
-            }) {
+            }, label: {
                 Image(systemName: "arrow.down")
-                    .frame(width: 45, height: 45)
+                    .frame(width: 30, height: 30)
                     .overlay(
                         Circle()
                             .stroke(Color(model.swarmColor), lineWidth: 1)
                     )
-                    .background(Color.white)
+                    .background(Color(UIColor.secondarySystemBackground))
                     .clipShape(Circle())
                     .foregroundColor(Color(model.swarmColor))
+                    .frame(width: 45, height: 45)
                     .zIndex(0)
-            }
+            })
         }
         .padding(.trailing, 5.0)
         .padding(.leading, 15.0)
         .padding(.top, 0.0)
-        .padding(.bottom, 5.0)
+        .padding(.bottom, 35)
         .ignoresSafeArea(.container, edges: [])
         .shadowForConversation()
     }
