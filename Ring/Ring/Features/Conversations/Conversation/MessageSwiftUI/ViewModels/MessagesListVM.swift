@@ -33,6 +33,12 @@ enum MessageInfo: State {
     case updateDisplayname(jamiId: String)
 }
 
+enum MessagePanelState: State {
+    case sendMessage(content: String)
+    case showMoreActions
+    case sendPhoto
+}
+
 // swiftlint:disable type_body_length
 class MessagesListVM: ObservableObject {
 
@@ -71,11 +77,17 @@ class MessagesListVM: ObservableObject {
     var contactsService: ContactsService
     var nameService: NameService
     var transferHelper: TransferHelper
+    var messagePanel: MessagePanelVM
 
     // state
     private let contextStateSubject = PublishSubject<State>()
     lazy var contextMenuState: Observable<State> = {
         return self.contextStateSubject.asObservable()
+    }()
+
+    private let messagePanelStateSubject = PublishSubject<State>()
+    lazy var messagePanelState: Observable<State> = {
+        return self.messagePanelStateSubject.asObservable()
     }()
 
     var hideNavigationBar = BehaviorRelay(value: false)
@@ -136,7 +148,7 @@ class MessagesListVM: ObservableObject {
         }
     }
 
-    init (injectionBag: InjectionBag, conversation: ConversationModel, transferHelper: TransferHelper) {
+    init (injectionBag: InjectionBag, conversation: ConversationModel, transferHelper: TransferHelper, bestName: Observable<String>) {
         defer {
             self.conversation = conversation
             self.subscribeMessagesStatus()
@@ -155,6 +167,7 @@ class MessagesListVM: ObservableObject {
         self.nameService = injectionBag.nameService
         self.transferHelper = transferHelper
         self.locationSharingService = injectionBag.locationSharingService
+        self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject, bestName: bestName)
         self.subscribeLocationEvents()
     }
 
