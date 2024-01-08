@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "தொடர்பு கோரிக்கை அனுப்புதல்";
 "conversation.synchronizationTitle" = "நீங்கள் உரையாடல் கோரிக்கையை ஏற்றுக்கொண்டீர்கள்.";
 "conversation.synchronizationMessage" = "உரையாடலை ஒத்திசைக்க %@ இணைப்புக்காக காத்திருக்கிறோம்.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "அழைப்பிதழ்கள் இல்லை";

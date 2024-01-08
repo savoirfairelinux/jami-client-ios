@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for %@ connects to synchronize the conversation.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";

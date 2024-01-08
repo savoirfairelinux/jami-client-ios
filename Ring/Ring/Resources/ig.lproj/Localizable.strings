@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Ziga Arịrịọ Kpọtụrụ";
 "conversation.synchronizationTitle" = "Ị nabatawo arịrịọ ahụ e nyere gị ka gị na ya kwurịta okwu.";
 "conversation.synchronizationMessage" = "Anyị na-eche maka %@ njikọ iji mekọrịta mkparịta ụka ahụ.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Enweghị akwụkwọ ịkpọ òkù";

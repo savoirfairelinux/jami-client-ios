@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Pošlji zahtevo za stik";
 "conversation.synchronizationTitle" = "Sprejeli ste zahtevo za pogovor.";
 "conversation.synchronizationMessage" = "Čakamo, da se %@ poveže, da sinhroniziramo pogovor.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Ni povabil";

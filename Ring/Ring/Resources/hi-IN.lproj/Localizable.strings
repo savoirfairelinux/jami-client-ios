@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "संपर्क अनुरोध भेजें";
 "conversation.synchronizationTitle" = "आपने वार्तालाप अनुरोध स्वीकार कर लिया है।";
 "conversation.synchronizationMessage" = "हम वार्तालाप को सिंक्रनाइज़ करने के लिए %@ कनेक्शन की प्रतीक्षा कर रहे हैं।";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "कोई निमंत्रण नहीं";

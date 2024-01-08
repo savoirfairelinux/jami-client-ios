@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Wysyłaj wniosek o kontakt";
 "conversation.synchronizationTitle" = "Przyjąłeś prośbę o rozmowę.";
 "conversation.synchronizationMessage" = "Czekamy na łączenia %@, aby zsynchronizować rozmowę.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Brak zaproszeń";

@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Sendu kontaktan peton";
 "conversation.synchronizationTitle" = "Vi akceptis la interparolan peton.";
 "conversation.synchronizationMessage" = "Ni atendas %@ konektojn por sinkronigi la konversacion.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Neniu invito";

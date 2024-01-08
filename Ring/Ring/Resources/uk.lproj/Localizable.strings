@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "Відправляйте запит на зв'язок";
 "conversation.synchronizationTitle" = "Ви прийняли запит на розмову.";
 "conversation.synchronizationMessage" = "Ми чекаємо %@ підключення для синхронізації розмови.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "Ніяких запрошень";

@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "ส่ง คํา สนใจ";
 "conversation.synchronizationTitle" = "คุณยอมรับคําขอคุย";
 "conversation.synchronizationMessage" = "เรากําลังรอการเชื่อมต่อ %@ เพื่อสอดคล้องการพูดคุย";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "ไม่มีการเชิญ";

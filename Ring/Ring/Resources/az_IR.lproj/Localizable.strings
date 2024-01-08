@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "تماس طلبی بفرستید";
 "conversation.synchronizationTitle" = "دانیشما طلبئني قبول ائتدین.";
 "conversation.synchronizationMessage" = "%@-ين ارتباطيني گؤزله ييب، مکالماتي همچينلاشديرماق اوچون.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "دعوتلر یوخدور";

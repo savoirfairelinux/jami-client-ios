@@ -111,6 +111,8 @@
 "conversation.sendRequestTitle" = "સંપર્ક વિનંતી મોકલો";
 "conversation.synchronizationTitle" = "તમે વાતચીત વિનંતી સ્વીકારી લીધી છે.";
 "conversation.synchronizationMessage" = "અમે વાતચીત સમન્વયિત કરવા માટે %@ જોડાણો માટે રાહ જોઈ રહ્યા છીએ.";
+"conversation.inReplyTo" = "In reply to";
+"conversation.repliedTo" = "replied to";
 
 //Invitations
 "invitations.noInvitations" = "કોઈ આમંત્રણ નહીં";
