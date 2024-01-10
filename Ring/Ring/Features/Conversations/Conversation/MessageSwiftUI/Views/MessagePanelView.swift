@@ -63,45 +63,66 @@ struct MessagePanelView: View {
     }
 
     var body: some View {
-        HStack(alignment: .bottom, spacing: 1) {
-            Button(action: {
-                self.model.showMoreActions()
-            }, label: {
-                MessagePanelImageButton(systemName: "plus.circle", width: 40, height: 40)
-            })
-            Button(action: {
-                self.model.sendPhoto()
-            }, label: {
-                MessagePanelImageButton(systemName: "camera", width: 42, height: 40)
-            })
-
-            Spacer()
-                .frame(width: 5)
-
-            if #available(iOS 16.0, *) {
-                TextEditor(text: $text)
-                    .scrollContentBackground(.hidden)
-                    .modifier(CommonTextEditorStyle(text: $text, placeholder: $model.placeholder))
-            } else {
-                TextEditor(text: $text)
-                    .modifier(CommonTextEditorStyle(text: $text, placeholder: $model.placeholder))
+        VStack {
+            HStack {
+                Spacer()
+                VStack(alignment: .leading) {
+                    Text("Reply to name")
+                        .font(.caption)
+                        .foregroundColor(Color(UIColor.secondaryLabel))
+                    Text("Message.....")
+                        .font(.caption)
+                        .foregroundColor(Color(UIColor.tertiaryLabel))
+                }
+                Spacer()
+                Button(action: {
+                    //
+                }, label: {
+                    MessagePanelImageButton(systemName: "circle.grid.cross.fill", width: 40, height: 40)
+                })
             }
             Spacer()
-                .frame(width: 5)
-            Button(action: {
-                self.model.sendMessage(text: text)
-                text = ""
-            }, label: {
-                if text.isEmpty {
-                    Text(model.defaultEmoji)
-                        .font(.title)
-                        .frame(width: 36, height: 36)
-                        .padding(.bottom, 2)
+                .frame(height: 10)
+            HStack(alignment: .bottom, spacing: 1) {
+                Button(action: {
+                    self.model.showMoreActions()
+                }, label: {
+                    MessagePanelImageButton(systemName: "plus.circle", width: 40, height: 40)
+                })
+                Button(action: {
+                    self.model.sendPhoto()
+                }, label: {
+                    MessagePanelImageButton(systemName: "camera", width: 42, height: 40)
+                })
+
+                Spacer()
+                    .frame(width: 5)
+
+                if #available(iOS 16.0, *) {
+                    TextEditor(text: $text)
+                        .scrollContentBackground(.hidden)
+                        .modifier(CommonTextEditorStyle(text: $text, placeholder: $model.placeholder))
                 } else {
-                    MessagePanelImageButton(systemName: "paperplane", width: 40, height: 40)
+                    TextEditor(text: $text)
+                        .modifier(CommonTextEditorStyle(text: $text, placeholder: $model.placeholder))
                 }
-            })
-            .animation(.default, value: text.isEmpty)
+                Spacer()
+                    .frame(width: 5)
+                Button(action: {
+                    self.model.sendMessage(text: text)
+                    text = ""
+                }, label: {
+                    if text.isEmpty {
+                        Text(model.defaultEmoji)
+                            .font(.title)
+                            .frame(width: 36, height: 36)
+                            .padding(.bottom, 2)
+                    } else {
+                        MessagePanelImageButton(systemName: "paperplane", width: 40, height: 40)
+                    }
+                })
+                .animation(.default, value: text.isEmpty)
+            }
         }
         .padding(8)
         .padding(.top, 10)

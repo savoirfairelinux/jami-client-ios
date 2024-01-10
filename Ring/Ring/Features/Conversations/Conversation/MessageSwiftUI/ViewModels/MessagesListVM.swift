@@ -402,6 +402,18 @@ class MessagesListVM: ObservableObject {
         } onError: { _ in
         }
         .disposed(by: container.disposeBag)
+
+        container.messageContent.contextMenuState
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? ContextMenu else { return }
+                switch state {
+                    case .reply(message: let message):
+                        break
+                    default:
+                        break
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func subscribeSwarmPreferences() {
