@@ -34,7 +34,7 @@ enum MessageInfo: State {
 }
 
 enum MessagePanelState: State {
-    case sendMessage(content: String)
+    case sendMessage(content: String, parentId: String)
     case showMoreActions
     case sendPhoto
 }
@@ -402,6 +402,20 @@ class MessagesListVM: ObservableObject {
         } onError: { _ in
         }
         .disposed(by: container.disposeBag)
+
+        container.messageContent.contextMenuState
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? ContextMenu else { return }
+                switch state {
+                case .reply(messageId: let messageId):
+                    if let message = self.getMessage(messageId: messageId) {
+                        self.messagePanel.configureReplyTo(message: message)
+                    }
+                default:
+                    break
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func subscribeSwarmPreferences() {

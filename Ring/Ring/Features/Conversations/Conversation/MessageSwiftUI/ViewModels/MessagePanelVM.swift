@@ -25,6 +25,8 @@ class MessagePanelVM: ObservableObject {
 
     @Published var placeholder = L10n.Conversation.messagePlaceholder
     @Published var defaultEmoji = "👍"
+    @Published var messageToReply: MessageContainerModel?
+    @Published var isReply: Bool = false
 
     private let messagePanelState: PublishSubject<State>
 
@@ -54,7 +56,8 @@ class MessagePanelVM: ObservableObject {
         if trimmed.isEmpty {
             return
         }
-        messagePanelState.onNext(MessagePanelState.sendMessage(content: trimmed))
+        let parentId = self.messageToReply?.message.id ?? ""
+        messagePanelState.onNext(MessagePanelState.sendMessage(content: trimmed, parentId: parentId))
     }
 
     func showMoreActions() {
@@ -63,6 +66,16 @@ class MessagePanelVM: ObservableObject {
 
     func sendPhoto() {
         messagePanelState.onNext(MessagePanelState.sendPhoto)
+    }
+
+    func configureReplyTo(message: MessageContainerModel) {
+        messageToReply = message
+        isReply = true
+    }
+
+    func cancelReply() {
+        messageToReply = nil
+        isReply = false
     }
 
 }

@@ -302,7 +302,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var hideDate: Bool { self.conversation.value.messages.isEmpty }
 
-    func sendMessage(withContent content: String, contactURI: String? = nil, parentId: String = "", conversationModel: ConversationModel? = nil) {
+    func sendMessage(withContent content: String, parentId: String = "", contactURI: String? = nil, conversationModel: ConversationModel? = nil) {
         let conversation = conversationModel ?? self.conversation.value
         if !conversation.isSwarm() {
             /// send not swarm message
