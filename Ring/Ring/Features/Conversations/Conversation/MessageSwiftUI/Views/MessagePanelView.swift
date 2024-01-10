@@ -20,9 +20,68 @@
 
 import SwiftUI
 
+struct ReplyViewInMessagePanel: View {
+    var messageToReply: MessageContentVM
+    @StateObject var model: MessagePanelVM
+    let padding: CGFloat = 10
+
+    var body: some View {
+        HStack(alignment: .center) {
+            Spacer()
+                .frame(width: padding)
+            VStack(alignment: .leading, spacing: 6) {
+                (Text(L10n.Conversation.inReplyTo) +
+                    Text(" \(model.inReplyTo)").bold())
+                    .font(.caption)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .foregroundColor(Color(UIColor.label))
+                Text(messageToReply.message.content)
+                    .font(.caption)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+            }
+            Spacer()
+            Spacer()
+                .frame(width: padding)
+            if messageToReply.type == .fileTransfer {
+                if let player = messageToReply.player, player.hasVideo.value {
+                    PlayerSwiftUI(model: messageToReply, player: player, onLongGesture: {}, ratio: 0.4, withControls: false, customCornerRadius: 10)
+                } else if let image = messageToReply.finalImage {
+                    ImageOrGifView(message: messageToReply, image: image, onLongGesture: {}, minHeight: 20, maxHeight: 50)
+                }
+            } else if messageToReply.type == .text,
+                      let metadata = messageToReply.metadata {
+                URLPreview(metadata: metadata, maxDimension: 50)
+                    .cornerRadius(messageToReply.cornerRadius)
+            }
+            Button(action: {
+                model.cancelReply()
+            }, label: {
+                Image(systemName: "xmark.circle")
+                    .resizable()
+                    .font(Font.title.weight(.light))
+                    .imageScale(.small)
+                    .scaledToFit()
+                    .padding(9)
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+            })
+        }
+        .padding(.vertical, padding)
+        .padding(.horizontal, 0)
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(10)
+    }
+}
+
 struct MessagePanelView: View {
     @StateObject var model: MessagePanelVM
     @SwiftUI.State private var text: String = ""
+    @SwiftUI.State private var isFocused: Bool = false
+    @SwiftUI.State private var textHeight: CGFloat = 0
+    let padding: CGFloat = 10
 
     private struct MessagePanelImageButton: View {
         let systemName: String
@@ -35,7 +94,9 @@ struct MessagePanelView: View {
                 .font(Font.title.weight(.light))
                 .imageScale(.small)
                 .scaledToFit()
-                .padding(9)
+                .padding(.horizontal, 9)
+                .padding(.top, 13)
+                .padding(.bottom, 5)
                 .frame(width: width, height: height)
                 .foregroundColor(Color(UIColor.secondaryLabel))
         }
@@ -47,67 +108,72 @@ struct MessagePanelView: View {
 
         func body(content: Content) -> some View {
             content
-                .padding(.horizontal, 12)
-                .font(.footnote)
-                .frame(minHeight: 38, maxHeight: 100)
-                .background(Color(UIColor.secondarySystemBackground))
-                .fixedSize(horizontal: false, vertical: true)
                 .cornerRadius(18)
                 .placeholder(when: text.isEmpty, alignment: .leading) {
                     Text(placeholder)
-                        .padding(.horizontal, 16)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
                         .font(.footnote)
                         .foregroundColor(Color(UIColor.secondaryLabel))
+                        .cornerRadius(18)
                 }
         }
     }
 
     var body: some View {
-        HStack(alignment: .bottom, spacing: 1) {
-            Button(action: {
-                self.model.showMoreActions()
-            }, label: {
-                MessagePanelImageButton(systemName: "plus.circle", width: 40, height: 40)
-            })
-            Button(action: {
-                self.model.sendPhoto()
-            }, label: {
-                MessagePanelImageButton(systemName: "camera", width: 42, height: 40)
-            })
-
-            Spacer()
-                .frame(width: 5)
-
-            if #available(iOS 16.0, *) {
-                TextEditor(text: $text)
-                    .scrollContentBackground(.hidden)
-                    .modifier(CommonTextEditorStyle(text: $text, placeholder: $model.placeholder))
-            } else {
-                TextEditor(text: $text)
-                    .modifier(CommonTextEditorStyle(text: $text, placeholder: $model.placeholder))
+        VStack {
+            if let message = model.messageToReply {
+                ReplyViewInMessagePanel(messageToReply: message, model: model)
             }
-            Spacer()
-                .frame(width: 5)
-            Button(action: {
-                self.model.sendMessage(text: text)
-                text = ""
-            }, label: {
-                if text.isEmpty {
-                    Text(model.defaultEmoji)
-                        .font(.title)
-                        .frame(width: 36, height: 36)
-                        .padding(.bottom, 2)
-                } else {
-                    MessagePanelImageButton(systemName: "paperplane", width: 40, height: 40)
-                }
-            })
-            .animation(.default, value: text.isEmpty)
+            HStack(alignment: .bottom, spacing: 1) {
+                Button(action: {
+                    self.model.showMoreActions()
+                }, label: {
+                    MessagePanelImageButton(systemName: "plus.circle", width: 40, height: 40)
+                })
+                Button(action: {
+                    self.model.sendPhoto()
+                }, label: {
+                    MessagePanelImageButton(systemName: "camera", width: 42, height: 40)
+                })
+
+                Spacer()
+                    .frame(width: 5)
+                UITextViewWrapper(text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
+                    .frame(minHeight: textHeight, maxHeight: textHeight)
+                    .modifier(CommonTextEditorStyle(text: $text, placeholder: $model.placeholder))
+                Spacer()
+                    .frame(width: 10)
+                Button(action: {
+                    self.model.sendMessage(text: text)
+                    cleanState()
+                }, label: {
+                    if text.isEmpty {
+                        Text(model.defaultEmoji)
+                            .font(.title)
+                            .frame(width: 36, height: 36)
+                            .padding(.bottom, 2)
+                    } else {
+                        MessagePanelImageButton(systemName: "paperplane", width: 40, height: 40)
+                    }
+                })
+                .animation(.default, value: text.isEmpty)
+            }
         }
-        .padding(8)
-        .padding(.top, 10)
+        .padding(padding)
         .background(
             VisualEffect(style: .regular, withVibrancy: false)
                 .ignoresSafeArea(edges: [.leading, .trailing, .bottom])
         )
+        .onChange(of: model.isReply) { _ in
+            isFocused = model.isReply
+        }
+    }
+
+    func cleanState() {
+        text = ""
+        model.cancelReply()
     }
 }

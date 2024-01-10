@@ -34,7 +34,7 @@ struct MessageBubbleView: View {
             if model.type == .call {
                 renderCallMessage()
             } else if model.type == .fileTransfer {
-                renderMediaContent()
+                MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0)
             } else if model.type == .text {
                 renderTextContent()
             }
@@ -66,27 +66,6 @@ struct MessageBubbleView: View {
             .modifier(MessageCornerRadius(model: model))
     }
 
-    private func renderImage(image: UIImage) -> some View {
-        Group {
-            if !model.isGifImage() {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(minHeight: 50, maxHeight: 300)
-                    .onTapGesture { }
-                    .modifier(MessageCornerRadius(model: model))
-                    .modifier(MessageLongPress(longPressCb: receivedLongPress()))
-            } else {
-                ScaledImageViewWrapper(imageToShow: image)
-                    .scaledToFit()
-                    .frame(maxHeight: 300)
-                    .onTapGesture { }
-                    .modifier(MessageCornerRadius(model: model))
-                    .modifier(MessageLongPress(longPressCb: receivedLongPress()))
-            }
-        }
-    }
-
     private func renderTextContent() -> some View {
         Group {
             if let metadata = model.metadata {
@@ -105,27 +84,6 @@ struct MessageBubbleView: View {
                     .lineLimit(nil)
                     .onTapGesture { }
                     .modifier(MessageLongPress(longPressCb: receivedLongPress()))
-            }
-        }
-    }
-
-    private func renderMediaContent() -> some View {
-        Group {
-            if let player = self.model.player {
-                ZStack(alignment: .center) {
-                    if colorScheme == .dark {
-                        model.borderColor
-                            .modifier(MessageCornerRadius(model: model))
-                            .frame(width: model.playerWidth + 2, height: model.playerHeight + 2)
-                    }
-                    PlayerSwiftUI(model: model, player: player, onLongGesture: receivedLongPress())
-                        .modifier(MessageCornerRadius(model: model))
-                }
-            } else if let image = model.finalImage {
-                renderImage(image: image)
-            } else {
-                DefaultTransferView(model: model, onLongGesture: receivedLongPress())
-                    .modifier(MessageCornerRadius(model: model))
             }
         }
     }
