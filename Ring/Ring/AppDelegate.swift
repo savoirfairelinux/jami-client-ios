@@ -29,7 +29,7 @@ import PushKit
 import ContactsUI
 import os
 
-// swiftlint:disable identifier_name
+// swiftlint:disable identifier_name type_body_length
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
