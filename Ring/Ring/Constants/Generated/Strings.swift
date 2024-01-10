@@ -346,6 +346,8 @@ internal enum L10n {
     }
     /// You have accepted the conversation request.
     internal static let synchronizationTitle = L10n.tr("Localizable", "conversation.synchronizationTitle", fallback: "You have accepted the conversation request.")
+    /// yourself
+    internal static let yourself = L10n.tr("Localizable", "conversation.yourself", fallback: "yourself")
   }
   internal enum CreateAccount {
     /// Encrypt my account

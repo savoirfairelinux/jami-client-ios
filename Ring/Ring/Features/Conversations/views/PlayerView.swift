@@ -40,6 +40,15 @@ class PlayerView: UIView {
     let MAXSIZE: CGFloat = 40
     let MINSIZE: CGFloat = 30
 
+    var withControls: Bool = false {
+        didSet {
+            togglePause.isHidden = !withControls
+            muteAudio.isHidden = !withControls
+            progressSlider.isHidden = !withControls
+            durationLabel.isHidden = !withControls
+        }
+    }
+
     @IBOutlet var containerView: UIView!
     @IBOutlet weak var incomingVideo: UIView!
     @IBOutlet weak var togglePause: UIButton!
@@ -194,7 +203,7 @@ class PlayerView: UIView {
                 if pause {
                     image = UIImage(systemName: "play.fill")
                 }
-                self?.togglePause.setBackgroundImage(image, for: .normal)
+                self?.togglePause.setImage(image, for: .normal)
             })
             .disposed(by: self.disposeBag)
 
@@ -206,7 +215,7 @@ class PlayerView: UIView {
                 if muted {
                     image = UIImage(asset: Asset.audioOff)
                 }
-                self?.muteAudio.setBackgroundImage(image, for: .normal)
+                self?.muteAudio.setImage(image, for: .normal)
             })
             .disposed(by: self.disposeBag)
 
@@ -214,7 +223,21 @@ class PlayerView: UIView {
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] hasVideo in
-                self?.muteAudio.isHidden = !hasVideo
+                guard let self = self else { return }
+                self.muteAudio.isHidden = !hasVideo || !withControls
+                self.backgroundView.backgroundColor = hasVideo ? UIColor.placeholderText : UIColor.secondarySystemBackground
+                self.incomingVideo.backgroundColor = hasVideo ? UIColor.black : UIColor.secondarySystemBackground
+                let color = hasVideo ? UIColor.white : (UIColor.label.lighten(by: 50) ?? UIColor.label)
+                self.togglePause.tintColor = color
+                self.durationLabel.textColor = color
+                self.progressSlider.minimumTrackTintColor = color
+                self.progressSlider.maximumTrackTintColor = color
+                self.progressSlider.thumbTintColor = color
+                let size = self.sizeMode == .fullScreen ? 15 : 10
+                let circleImage = makeCircleWith(size: CGSize(width: size, height: size),
+                                                 backgroundColor: color)
+                self.progressSlider.setThumbImage(circleImage, for: .normal)
+                self.progressSlider.setThumbImage(circleImage, for: .highlighted)
             })
             .disposed(by: self.disposeBag)
         self.muteAudio.rx.tap

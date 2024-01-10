@@ -61,3 +61,50 @@ struct MeasureSizeModifier: ViewModifier {
             })
     }
 }
+
+struct UITextViewWrapper: UIViewRepresentable {
+    @Binding var text: String
+    @Binding var isFocused: Bool
+    @Binding var dynamicHeight: CGFloat
+    let maxHeight: CGFloat = 100
+
+    func makeUIView(context: Context) -> UITextView {
+        let textView = UITextView()
+        textView.isScrollEnabled = true
+        textView.textAlignment = .left
+        textView.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .footnote).pointSize)
+        textView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        textView.backgroundColor = UIColor.secondarySystemBackground
+        textView.layer.cornerRadius = 18
+        textView.clipsToBounds = true
+        textView.delegate = context.coordinator
+        return textView
+    }
+
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.text = text
+
+        DispatchQueue.main.async {
+            if self.isFocused && !uiView.isFirstResponder {
+                uiView.becomeFirstResponder()
+            }
+            dynamicHeight = min(uiView.sizeThatFits(CGSize(width: uiView.frame.size.width, height: .infinity)).height, maxHeight)
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, UITextViewDelegate {
+        var parent: UITextViewWrapper
+
+        init(_ textViewWrapper: UITextViewWrapper) {
+            self.parent = textViewWrapper
+        }
+
+        func textViewDidChange(_ textView: UITextView) {
+            self.parent.text = textView.text
+        }
+    }
+}

@@ -108,7 +108,7 @@ enum ContextualMenuItem: Identifiable {
     }
 }
 
-class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
+class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerDelegate {
 
     @Published var content = ""
     @Published var metadata: LPLinkMetadata?
@@ -119,7 +119,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
     @Published var fileProgress: CGFloat = 0
     @Published var transferActions = [TransferAction]()
     @Published var showProgress: Bool = true
-    @Published var playerHeight: CGFloat = 100
+    @Published var playerHeight: CGFloat = 80
     @Published var playerWidth: CGFloat = 250
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
@@ -278,13 +278,13 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             if self.type == .text {
-                self.menuItems = [.copy, .forward]
+                self.menuItems = [.copy, .forward, .reply]
             }
             guard self.type == .fileTransfer else { return }
             if self.url != nil {
-                self.menuItems = [.save, .forward, .preview, .share]
+                self.menuItems = [.save, .forward, .preview, .share, .reply]
             } else {
-                self.menuItems = [.forward, .preview, .share]
+                self.menuItems = [.forward, .preview, .share, .reply]
             }
         }
     }
@@ -397,7 +397,6 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
             } else {
                 self.playerHeight = height
             }
-            self.borderColor = Color(UIColor.tertiaryLabel)
         }
     }
 
@@ -417,6 +416,17 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
             self.playerWidth = playerSize.width
             self.player = player
             self.player!.delegate = self
+            self.borderColor = Color(UIColor.tertiaryLabel)
+        }
+    }
+
+    func swarmColorUpdated(color: UIColor) {
+        if self.message.incoming || self.content.containsOnlyEmoji {
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.backgroundColor = Color(color)
         }
     }
 
@@ -494,12 +504,12 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate {
         case .save:
             saveFile()
         case .reply:
-            break
+            reply()
         }
     }
 }
 
-extension MessageContentVM: PlayerDelegate {
+extension MessageContentVM {
     func deleteFile() {}
 
     func shareFile() {
@@ -515,18 +525,12 @@ extension MessageContentVM: PlayerDelegate {
         self.contextMenuState.onNext(ContextMenu.forward(message: self))
     }
 
+    func reply() {
+        self.contextMenuState.onNext(ContextMenu.reply(message: self))
+    }
+
     func saveFile() {
         guard let fileURL = self.url else { return }
         self.contextMenuState.onNext(ContextMenu.saveFile(url: fileURL))
-    }
-
-    func swarmColorUpdated(color: UIColor) {
-        if self.message.incoming || self.content.containsOnlyEmoji {
-            return
-        }
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.backgroundColor = Color(color)
-        }
     }
 }

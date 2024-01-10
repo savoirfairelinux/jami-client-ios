@@ -37,6 +37,7 @@ enum ContextMenu: State {
     case forward(message: MessageContentVM)
     case share(items: [Any])
     case saveFile(url: URL)
+    case reply(message: MessageContentVM)
 }
 
 enum DocumentPickerMode {
@@ -127,8 +128,8 @@ class ConversationViewController: UIViewController,
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? MessagePanelState else { return }
                 switch state {
-                case .sendMessage(let content):
-                    self.viewModel.sendMessage(withContent: content)
+                case .sendMessage(let content, let parentId):
+                    self.viewModel.sendMessage(withContent: content, parentId: parentId)
                 case .showMoreActions:
                     self.showActionsForMessagePanel()
                 case .sendPhoto:
@@ -148,6 +149,9 @@ class ConversationViewController: UIViewController,
                     self.presentActivityControllerWithItems(items: items)
                 case .saveFile(let url):
                     self.saveFile(url: url)
+                case .reply(message: _):
+                    // handeled in MessagesListVM
+                    break
                 }
             })
             .disposed(by: self.disposeBag)
