@@ -147,13 +147,12 @@ struct SwarmCreationUI: View {
             .listStyle(PlainListStyle())
             .frame(width: nil, height: nil, alignment: .leading)
             .accentColor(Color.black)
-            if !list.selections.isEmpty {
-                createTheSwarm()
-            }
+
+            createTheSwarmButtonView()
         }
     }
 
-    func createTheSwarm() -> some View {
+    func createTheSwarmButtonView() -> some View {
         return Button(action: {
                         self.hideKeyboard()
                         list.createTheSwarm() }) {
