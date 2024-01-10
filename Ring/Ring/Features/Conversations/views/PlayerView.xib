@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -77,17 +77,17 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFU-4q-kSY">
-                                    <rect key="frame" x="7" y="28.5" width="32" height="31"/>
+                                    <rect key="frame" x="7" y="36.5" width="36" height="35"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="32" id="TYW-Hg-5PI"/>
-                                        <constraint firstAttribute="height" constant="31" id="uRy-yt-VfB"/>
+                                        <constraint firstAttribute="width" constant="36" id="TYW-Hg-5PI"/>
+                                        <constraint firstAttribute="height" constant="35" id="uRy-yt-VfB"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </button>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8XG-XX-SQd">
-                                    <rect key="frame" x="53" y="29" width="329" height="31"/>
+                                    <rect key="frame" x="53" y="39" width="329" height="31"/>
                                     <color key="minimumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -97,8 +97,8 @@
                                     </connections>
                                 </slider>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7a-cw-Z2s">
-                                    <rect key="frame" x="380" y="60" width="0.0" height="0.0"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <rect key="frame" x="380" y="70" width="0.0" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -114,7 +114,7 @@
                                 <constraint firstAttribute="height" constant="80" id="ebw-tO-GaB"/>
                                 <constraint firstItem="B7a-cw-Z2s" firstAttribute="trailing" secondItem="8XG-XX-SQd" secondAttribute="trailing" id="ggi-dE-RSY"/>
                                 <constraint firstItem="8XG-XX-SQd" firstAttribute="leading" secondItem="qa1-8d-lpc" secondAttribute="leading" constant="55" id="jMX-Ml-vVY"/>
-                                <constraint firstAttribute="bottom" secondItem="B7a-cw-Z2s" secondAttribute="bottom" constant="20" id="jV0-Hz-VqM"/>
+                                <constraint firstAttribute="bottom" secondItem="B7a-cw-Z2s" secondAttribute="bottom" constant="10" id="jV0-Hz-VqM"/>
                                 <constraint firstAttribute="trailing" secondItem="B7a-cw-Z2s" secondAttribute="trailing" constant="20" id="x8v-Ie-gEN"/>
                                 <constraint firstAttribute="trailing" secondItem="cfP-4w-tZW" secondAttribute="trailing" id="xby-No-X1M"/>
                             </constraints>
@@ -149,10 +149,10 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yln-si-MH9">
-                                    <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                    <rect key="frame" x="10" y="10" width="35" height="35"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="Llp-eh-Zht"/>
-                                        <constraint firstAttribute="height" constant="30" id="w2q-ic-1oe"/>
+                                        <constraint firstAttribute="width" constant="35" id="Llp-eh-Zht"/>
+                                        <constraint firstAttribute="height" constant="35" id="w2q-ic-1oe"/>
                                     </constraints>
                                     <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="8"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -229,7 +229,7 @@
     </objects>
     <resources>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

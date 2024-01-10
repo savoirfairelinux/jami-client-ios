@@ -113,6 +113,7 @@
 "conversation.synchronizationMessage" = "We are waiting for %@ connects to synchronize the conversation.";
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";

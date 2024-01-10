@@ -59,10 +59,37 @@ extension View {
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
+
+    func conditionalModifier<T: ViewModifier>(_ modifier: T, apply: Bool) -> some View {
+        Group {
+            if apply {
+                self.modifier(modifier)
+            } else {
+                self
+            }
+        }
+    }
+
+    func conditionalCornerRadius(_ radius: CGFloat, apply: Bool) -> some View {
+        self.modifier(ConditionalCornerRadius(radius: radius, apply: apply))
+    }
 }
 
 extension Animation {
     static func dragableCaptureViewAnimation() -> Animation {
         return Animation.interpolatingSpring(stiffness: 100, damping: 20, initialVelocity: 0)
+    }
+}
+
+struct ConditionalCornerRadius: ViewModifier {
+    let radius: CGFloat
+    let apply: Bool
+
+    func body(content: Content) -> some View {
+        if apply {
+            content.cornerRadius(radius)
+        } else {
+            content
+        }
     }
 }

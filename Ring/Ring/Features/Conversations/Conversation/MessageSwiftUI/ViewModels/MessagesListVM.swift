@@ -34,7 +34,7 @@ enum MessageInfo: State {
 }
 
 enum MessagePanelState: State {
-    case sendMessage(content: String)
+    case sendMessage(content: String, parentId: String)
     case showMoreActions
     case sendPhoto
 }
@@ -402,6 +402,18 @@ class MessagesListVM: ObservableObject {
         } onError: { _ in
         }
         .disposed(by: container.disposeBag)
+
+        container.messageContent.contextMenuState
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? ContextMenu else { return }
+                switch state {
+                case .reply(message: let message):
+                    self.configureReply(message: message)
+                default:
+                    break
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func subscribeSwarmPreferences() {
@@ -422,6 +434,27 @@ class MessagesListVM: ObservableObject {
         guard let color = UIColor(hexString: self.conversation.preferences.color) else { return }
         DispatchQueue.main.async { [weak self] in
             self?.swarmColor = color
+        }
+    }
+
+    func configureReply(message: MessageContentVM) {
+        self.messagePanel.configureReplyTo(message: message)
+        self.updateUsernameForReply(message: message)
+    }
+
+    func updateUsernameForReply(message: MessageContentVM) {
+        guard let localJamiId = self.accountService.getAccount(fromAccountId: self.conversation.accountId)?.jamiId else {
+            return
+        }
+        let jamiId = message.message.authorId
+        if localJamiId == jamiId || jamiId.isEmpty {
+            self.messagePanel.updateUsername(name: L10n.Conversation.yourself, jamiId: jamiId)
+            return
+        }
+        if let name = self.names.get(key: jamiId) as? String {
+            self.messagePanel.updateUsername(name: name, jamiId: jamiId)
+        } else if let container = self.getMessage(messageId: jamiId) {
+            self.getInformationForContact(id: jamiId, message: container)
         }
     }
 
@@ -576,6 +609,7 @@ class MessagesListVM: ObservableObject {
     private func updateName(name: String, id: String, message: MessageContainerModel) {
         self.names.set(value: name, for: id)
         message.updateUsername(name: name, jamiId: id)
+        self.messagePanel.updateUsername(name: name, jamiId: id)
     }
 
     private func updateAvatar(image: UIImage, id: String, message: MessageContainerModel) {
