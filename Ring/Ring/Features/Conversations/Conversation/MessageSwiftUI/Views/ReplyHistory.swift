@@ -32,7 +32,7 @@ struct MessageReplyStyle: ViewModifier {
             .foregroundColor(Color(UIColor.label))
             .background(Color(UIColor.lightGray))
             .font(.footnote)
-            .modifier(MessageCornerRadius(model: model))
+            .cornerRadius(model.cornerRadius)
     }
 }
 
@@ -54,43 +54,12 @@ struct ReplyHistory: View {
                         target.onAppear()
                     }
                 if target.type == .fileTransfer {
-                    if let player = target.player {
-                        ZStack(alignment: .center) {
-                            if colorScheme == .dark {
-                                target.borderColor
-                                    .modifier(MessageCornerRadius(model: target))
-                                    .frame(width: target.playerWidth + 2, height: target.playerHeight + 2)
-                            }
-                            PlayerSwiftUI(model: target, player: player, onLongGesture: {})
-                                .modifier(MessageCornerRadius(model: target))
-                                .opacity(0.7)
-                        }
-                    } else if let image = target.finalImage {
-                        if !target.isGifImage() {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(minHeight: model.imageMinHeight, maxHeight: model.imageMaxHeight)
-                                .onTapGesture {}
-                                .modifier(MessageCornerRadius(model: target))
-                                .opacity(0.7)
-                        } else {
-                            ScaledImageViewWrapper(imageToShow: image)
-                                .scaledToFit()
-                                .frame(maxHeight: model.imageMaxHeight)
-                                .onTapGesture {}
-                                .modifier(MessageCornerRadius(model: target))
-                                .opacity(0.7)
-                        }
-                    } else {
-                        DefaultTransferView(model: target, onLongGesture: {})
-                            .modifier(MessageCornerRadius(model: target))
-                            .opacity(0.7)
-                    }
+                    MediaView(message: target, onLongGesture: {}, minHeight: 20, maxHeight: 100, withPlayerControls: true, cornerRadius: 15)
+                        .opacity(0.7)
                 } else if target.type == .text {
                     if let metadata = target.metadata {
                         URLPreview(metadata: metadata, maxDimension: target.maxDimension * model.sizeIndex)
-                            .modifier(MessageCornerRadius(model: target))
+                            .cornerRadius(target.cornerRadius)
                             .opacity(0.7)
                     } else if target.content.isValidURL, let url = target.getURL() {
                         Text(target.content)
