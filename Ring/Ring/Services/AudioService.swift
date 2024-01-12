@@ -54,7 +54,7 @@ class AudioService {
             return
         }
         guard let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue),
-              (reason == .newDeviceAvailable || reason == .oldDeviceUnavailable || reason == .categoryChange) else {
+              reason == .newDeviceAvailable || reason == .oldDeviceUnavailable || reason == .categoryChange else {
             return
         }
         overrideAudioRoute()
