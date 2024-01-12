@@ -56,7 +56,7 @@ struct MessageBubbleView: View {
         )
     }
 
-    private func renderCallMessage()  -> some View {
+    private func renderCallMessage() -> some View {
         Text(model.content)
             .padding(model.textInset)
             .foregroundColor(model.textColor)

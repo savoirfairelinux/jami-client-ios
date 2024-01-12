@@ -100,9 +100,9 @@ enum SettingsSection: SectionModelType {
             return L10n.AccountPage.connectivityHeader
         case .credentials:
             return L10n.AccountPage.credentialsHeader
-        case .donations(items: _):
+        case .donations:
             return L10n.Global.donate
-        case .accountSettings(items: _):
+        case .accountSettings:
             return nil
         }
     }

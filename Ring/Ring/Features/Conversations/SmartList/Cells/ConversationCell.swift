@@ -69,7 +69,7 @@ class ConversationCell: UITableViewCell, NibReusable {
         self.outgoingLocationSharing = false
     }
 
-    override open func didMoveToWindow() {
+    override func didMoveToWindow() {
         super.didMoveToWindow()
         if window != nil {
             updateLocationSharingState()
