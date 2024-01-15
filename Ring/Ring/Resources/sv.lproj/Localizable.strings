@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Skicka en kontaktförfrågan";
 "conversation.synchronizationTitle" = "Du har accepterat konversationsförfrågan.";
 "conversation.synchronizationMessage" = "Vi inväntar %@att ansluta och synkronisera denna konversation";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "I svar till";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

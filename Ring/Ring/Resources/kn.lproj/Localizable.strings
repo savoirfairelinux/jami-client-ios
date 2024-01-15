@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "ಸಂಪರ್ಕ ವಿನಂತಿಯನ್ನು ಕಳುಹಿಸಿ";
 "conversation.synchronizationTitle" = "ನೀವು ಸಂಭಾಷಣೆ ವಿನಂತಿಯನ್ನು ಸ್ವೀಕರಿಸಿದ್ದೀರಿ.";
 "conversation.synchronizationMessage" = "ಸಂಭಾಷಣೆಯನ್ನು ಸಿಂಕ್ರೊನೈಸ್ ಮಾಡಲು ನಾವು %@ ಸಂಪರ್ಕಗಳಿಗಾಗಿ ಕಾಯುತ್ತಿದ್ದೇವೆ.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "ಇದಕ್ಕೆ ಪ್ರತಿಕ್ರಿಯೆಯಾಗಿ";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

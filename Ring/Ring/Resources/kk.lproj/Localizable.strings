@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Байланыс сұрауыңызды жіберіңіз";
 "conversation.synchronizationTitle" = "Сіз әңгімелесу сұрағын қабылдадыңыз.";
 "conversation.synchronizationMessage" = "Біз %@ қосылыстарын күтіп отырмыз.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "Жауап ретінде";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

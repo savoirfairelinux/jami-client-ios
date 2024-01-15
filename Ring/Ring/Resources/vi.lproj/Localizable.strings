@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Gửi yêu cầu liên lạc";
 "conversation.synchronizationTitle" = "Ông đã chấp nhận yêu cầu nói chuyện.";
 "conversation.synchronizationMessage" = "Chúng tôi đang chờ đợi %@ kết nối để đồng bộ hóa cuộc trò chuyện.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "Trả lời";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

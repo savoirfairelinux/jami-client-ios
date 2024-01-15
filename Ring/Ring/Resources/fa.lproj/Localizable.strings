@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "درخواست تماس ارسال کنید";
 "conversation.synchronizationTitle" = "شما درخواست مکالمه را پذیرفته‌اید.";
 "conversation.synchronizationMessage" = "ما منتظر ارتباط %@ هستیم تا گفتگو را همگام‌سازی کنیم.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "در پاسخ به";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

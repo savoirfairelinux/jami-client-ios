@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "सम्पर्क अनुरोध पठाउनुहोस्";
 "conversation.synchronizationTitle" = "तपाईंले वार्तालाप अनुरोध स्वीकार गर्नुभयो।";
 "conversation.synchronizationMessage" = "हामी वार्तालाप सिंक गर्न %@ जडानको प्रतीक्षामा छौं।";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "जवाफमा";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

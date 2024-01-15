@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "مڠهادڤكن ڤرليندوڠن ڤڠاجرن";
 "conversation.synchronizationTitle" = "تو قبول کردي درخواست صحبت";
 "conversation.synchronizationMessage" = "كيت مڠنتو %@ منچاريكن كڤد ڤمباچ.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "دالم ڤردان منتري";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

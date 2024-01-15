@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Հեռախոսազրույց ուղարկել";
 "conversation.synchronizationTitle" = "Դուք ընդունել եք զրուցի խնդրանքը:";
 "conversation.synchronizationMessage" = "Մենք սպասում ենք %@ կապերի, որպեսզի սինխրոնացվի զրույցը:";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "Պատասխանելով";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "ബന്ധപ്പെടാനുള്ള അപേക്ഷ അയയ്ക്കുക";
 "conversation.synchronizationTitle" = "നിങ്ങള് സംഭാഷണ അഭ്യർത്ഥന അംഗീകരിച്ചു.";
 "conversation.synchronizationMessage" = "സംഭാഷണം സമന്വയിപ്പിക്കാൻ %@ കണക്ഷനുകൾക്കായി കാത്തിരിക്കുകയാണ്.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "ഇതിന് മറുപടിയായി";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

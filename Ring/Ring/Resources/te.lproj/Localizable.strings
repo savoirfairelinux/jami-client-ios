@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "సంప్రదింపు అభ్యర్థనను పంపండి";
 "conversation.synchronizationTitle" = "మీరు సంభాషణ అభ్యర్థనను అంగీకరించారు.";
 "conversation.synchronizationMessage" = "సంభాషణను సమకాలీకరించడానికి %@ కనెక్ట్ కోసం మేము వేచి ఉన్నాము.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "దీనికి ప్రతిస్పందనగా";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

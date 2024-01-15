@@ -111,8 +111,8 @@
 "conversation.sendRequestTitle" = "Trimite o cerere de contact";
 "conversation.synchronizationTitle" = "Ai acceptat invitația la conversație.";
 "conversation.synchronizationMessage" = "Se așteaptă ca %@ să se conecteze pentru a sincroniza conversația.";
-"conversation.inReplyTo" = "In reply to";
-"conversation.repliedTo" = "replied to";
+"conversation.inReplyTo" = "Răspuns pentru";
+"conversation.repliedTo" = " a răspuns pentru";
 
 //Invitations
 "invitations.noInvitations" = "Nicio invitație";

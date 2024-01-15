@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Pošaljite zahtjev za kontakt";
 "conversation.synchronizationTitle" = "Prihvatili ste zahtjev za razgovor.";
 "conversation.synchronizationMessage" = "Čekamo na %@ povezivanja da sinhronizujemo razgovor.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "U odgovor na";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

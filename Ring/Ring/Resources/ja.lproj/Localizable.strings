@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "連絡を要請する";
 "conversation.synchronizationTitle" = "会話への参加が許可されました";
 "conversation.synchronizationMessage" = "会話を同期させるために %@接続を待っています.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "メッセージへの返信";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

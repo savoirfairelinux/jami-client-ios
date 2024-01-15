@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Enviar una so solicitud de contautu";
 "conversation.synchronizationTitle" = "Acordó la so solicitud de conversación.";
 "conversation.synchronizationMessage" = "Esperamos que %@ conecten pa sincronizar la conversación.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "En respuesta a";
 "conversation.repliedTo" = "replied to";
 
 //Invitations
