@@ -35,11 +35,6 @@ class AccountModelHelperTests: XCTestCase {
         account = AccountModel(withAccountId: "identifier")
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
     /**
      Tests that the SIP account type is properly detected.
      */

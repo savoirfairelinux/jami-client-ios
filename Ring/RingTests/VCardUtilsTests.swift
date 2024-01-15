@@ -24,14 +24,6 @@ final class VCardUtilsTests: XCTestCase {
 
     let photo = "photo.jpg"
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
-
     func generateVCardStingWithNameAndImage() -> String {
         return """
         BEGIN:VCARD

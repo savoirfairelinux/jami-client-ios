@@ -23,14 +23,6 @@ import XCTest
 
 class ConferenceMenuItemsManagerTest: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-    }
-
-    override func tearDown() {
-        super.tearDown()
-    }
-
     func testGetMenuItemsForLocalCallNil() {
         let manager = ConferenceMenuItemsManager()
         let conference: CallModel? = nil

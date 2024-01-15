@@ -23,14 +23,6 @@ import XCTest
 
 final class ContactUtilsTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
-
     func testGetFinalName_FromHashOnly() {
         let finalName = ContactsUtils.getFinalNameFrom(registeredName: "", profileName: "", hash: jamiId1)
         XCTAssertEqual(finalName, jamiId1)
