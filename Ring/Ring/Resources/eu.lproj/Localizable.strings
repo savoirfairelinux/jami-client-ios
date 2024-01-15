@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Bidali kontaktu eskaera";
 "conversation.synchronizationTitle" = "Onartu duzu elkarrizketa eskaera.";
 "conversation.synchronizationMessage" = "%@ konektatuaren zain gaude elkarrizketa sinkronizatzeko.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "Erantzun";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

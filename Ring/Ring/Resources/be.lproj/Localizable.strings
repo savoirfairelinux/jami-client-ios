@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Пашляце просьбу аб кантактным злучэнні";
 "conversation.synchronizationTitle" = "Вы прынялі просьбу аб размове.";
 "conversation.synchronizationMessage" = "Мы чакаем %@ падключэння, каб сінхрыноўваць размову.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "У адказ на";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

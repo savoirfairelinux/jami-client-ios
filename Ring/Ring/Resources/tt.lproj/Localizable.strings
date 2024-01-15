@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Контактны сорап җибәрү";
 "conversation.synchronizationTitle" = "Сез сөйләшү үтенечен кабул иттегез.";
 "conversation.synchronizationMessage" = "Без %@ бәйләнешләрен сөйләмнең синхронлаштыруын көтәбез.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "Бу сорауларга җавап итеп:";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Verzend contactverzoek";
 "conversation.synchronizationTitle" = "Je hebt het gesprek geaccepteerd.";
 "conversation.synchronizationMessage" = "We wachten op %@ verbindingen om het gesprek te synchroniseren.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "In antwoord op";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

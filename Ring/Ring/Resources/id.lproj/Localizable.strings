@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Kirim permintaan kontak";
 "conversation.synchronizationTitle" = "Anda telah menerima permintaan percakapan.";
 "conversation.synchronizationMessage" = "Kami menunggu %@ terhubung untuk menyinkronkan percakapan.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "Sebagai balasan";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

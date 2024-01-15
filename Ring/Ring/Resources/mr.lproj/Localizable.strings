@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "संपर्क विनंती पाठवा";
 "conversation.synchronizationTitle" = "तुम्ही संभाषण विनंती स्वीकारली आहे.";
 "conversation.synchronizationMessage" = "आम्ही संभाषण समक्रमित करण्यासाठी %@ कनेक्ट्सची वाट पाहत आहोत.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "उत्तर";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

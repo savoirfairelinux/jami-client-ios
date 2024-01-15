@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Посылать запрос на контакт";
 "conversation.synchronizationTitle" = "Вы приняли запрос на беседу.";
 "conversation.synchronizationMessage" = "Мы ожидаем пока %@ подключиться для синхронизации беседы.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "В ответ на";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

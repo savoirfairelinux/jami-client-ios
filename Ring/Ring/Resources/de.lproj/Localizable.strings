@@ -111,8 +111,8 @@
 "conversation.sendRequestTitle" = "Kontaktanfrage senden";
 "conversation.synchronizationTitle" = "Sie haben die Unterhaltungsanfrage angenommen.";
 "conversation.synchronizationMessage" = "Wir warten auf %@ Verbindungen, um die Unterhaltung zu synchronisieren.";
-"conversation.inReplyTo" = "In reply to";
-"conversation.repliedTo" = "replied to";
+"conversation.inReplyTo" = "Als Antwort auf";
+"conversation.repliedTo" = "antwortete auf";
 
 //Invitations
 "invitations.noInvitations" = "Keine Einladungen";

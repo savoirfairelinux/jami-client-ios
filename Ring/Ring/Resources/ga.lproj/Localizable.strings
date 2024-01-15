@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Cuir iarratas a dhéanamh ar an teagmháil";
 "conversation.synchronizationTitle" = "Tá tú glacadh leis an iarraidh comhrá.";
 "conversation.synchronizationMessage" = "Táimid ag fanacht le %@ nascanna chun an comhrá a shuimhrónachadh.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "I dtuarascáil do";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

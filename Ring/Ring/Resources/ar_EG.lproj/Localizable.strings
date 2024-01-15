@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "أرسل طلب الاتصال";
 "conversation.synchronizationTitle" = "لقد قبلت طلب المحادثة";
 "conversation.synchronizationMessage" = "نحن ننتظر %@ الاتصالات لنزامن المحادثة.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "في جواب";
 "conversation.repliedTo" = "replied to";
 
 //Invitations

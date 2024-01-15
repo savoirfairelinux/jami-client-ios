@@ -111,7 +111,7 @@
 "conversation.sendRequestTitle" = "Odeslat žádost o kontakt";
 "conversation.synchronizationTitle" = "Přijali jste žádost o konverzaci.";
 "conversation.synchronizationMessage" = "Čekáme, až se %@připojí, aby mohlo dokjít k synchronizaci konverzace.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "V odpovědi na";
 "conversation.repliedTo" = "replied to";
 
 //Invitations
