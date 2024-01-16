@@ -321,8 +321,8 @@ internal enum L10n {
     internal static let incomingRequest = L10n.tr("Localizable", "conversation.incomingRequest", fallback: "Sent you a request for a conversation.")
     /// In reply to
     internal static let inReplyTo = L10n.tr("Localizable", "conversation.inReplyTo", fallback: "In reply to")
-    /// Write message to 
-    internal static let messagePlaceholder = L10n.tr("Localizable", "conversation.messagePlaceholder", fallback: "Write message to ")
+    /// Write to 
+    internal static let messagePlaceholder = L10n.tr("Localizable", "conversation.messagePlaceholder", fallback: "Write to ")
     /// %@ is not in your contact list.
     internal static func notContact(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.notContact", String(describing: p1), fallback: "%@ is not in your contact list.")
