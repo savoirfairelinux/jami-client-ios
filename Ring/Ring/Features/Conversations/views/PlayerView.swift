@@ -37,10 +37,10 @@ class PlayerView: UIView {
     let MINBOTTOMGRADIENTSIZE: CGFloat = 80
     let PLAYBUTTONBOTTOMCONSTRAINT: CGFloat = 55
     let SLIDEBARLEADINGCONSTRAINT: CGFloat = 50
-    let MAXSIZE: CGFloat = 40
-    let MINSIZE: CGFloat = 30
+    let MAXSIZE: CGFloat = 60
+    let MINSIZE: CGFloat = 40
 
-    var withControls: Bool = false {
+    var withControls: Bool = true {
         didSet {
             togglePause.isHidden = !withControls
             muteAudio.isHidden = !withControls
