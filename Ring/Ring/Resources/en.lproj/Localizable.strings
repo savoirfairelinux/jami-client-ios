@@ -35,6 +35,7 @@
 "global.close" = "Close";
 "global.share" = "Share";
 "global.forward" = "Forward";
+"global.react" = "React";
 "global.save" = "Save";
 "global.resend" = "Resend";
 "global.preview" = "Preview";
@@ -383,6 +384,8 @@
 "generalSettings.locationSharingDuration" = "Position share duration";
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
+
+"generalSettings.msgPressDur" = "Message Press Duration";
 
 
 //Log View

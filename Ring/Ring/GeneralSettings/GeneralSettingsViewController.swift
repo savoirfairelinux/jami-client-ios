@@ -112,6 +112,8 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
                     return self.makeLimitLocationSharingCell()
                 case .locationSharingDuration:
                     return self.makeLocationSharingDurationCell()
+                case .msgPressDur:
+                    return self.makeMsgPressDurCell()
                 case .donationCampaign:
                     return self.makeDoantionCell()
                 case .log:
@@ -347,6 +349,81 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
             })
             .disposed(by: cell.disposeBag)
 
+        return cell
+    }
+
+    func makeMsgPressDurCell() -> DisposableCell {
+        let cell = DisposableCell()
+        let stackView = UIStackView()
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.spacing = 8
+        cell.contentView.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 6).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -6).isActive = true
+        stackView.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 16).isActive = true
+        stackView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -16).isActive = true
+        stackView.layoutSubviews()
+
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        let normalAttributes = [NSAttributedString.Key.font: defaultFont]
+        let smallAttributes = [NSAttributedString.Key.font: titleLabel.font.withSize(10)]
+
+        let partOne = NSMutableAttributedString(string: L10n.GeneralSettings.msgPressDur, attributes: normalAttributes)
+        // TODO add desc
+        let partTwo = NSMutableAttributedString(string: " ", attributes: smallAttributes)
+        //        let partTwo = NSMutableAttributedString(string: " TODO" + L10n.GeneralSettings.msgPressDur, attributes: smallAttributes)
+
+        partOne.append(partTwo)
+
+        titleLabel.attributedText = partOne
+        titleLabel.heightAnchor.constraint(equalToConstant: 45).isActive = true
+
+        stackView.addArrangedSubview(titleLabel)
+
+        let textField = PaddingTextField(frame: CGRect(x: 0, y: 0, width: 50, height: 40))
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.text = viewModel.msgPressDur.value.description
+        textField.cornerRadius = 5
+        textField.borderColor = UIColor(red: 51, green: 51, blue: 51, alpha: 1)
+        textField.borderWidth = 1
+        textField.keyboardType = .numberPad
+        textField.textAlignment = .left
+        textField.setContentHuggingPriority(.fittingSizeLevel, for: .horizontal)
+        textField.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        textField.addCloseToolbar()
+        viewModel.msgPressDur
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak textField, weak titleLabel] (_) in
+                textField?.isUserInteractionEnabled = true
+                textField?.textColor = true ? UIColor.label : UIColor.tertiaryLabel
+                titleLabel?.textColor = true ? UIColor.label : UIColor.tertiaryLabel
+                textField?.borderColor = true ? UIColor(red: 51, green: 51, blue: 51, alpha: 1) : UIColor.tertiaryLabel
+            })
+            .disposed(by: cell.disposeBag)
+        stackView.addArrangedSubview(textField)
+
+        stackView.layoutSubviews()
+        cell.selectionStyle = .none
+
+        self.viewModel.msgPressDur
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .map({ intValue in
+                String(intValue)
+            })
+            .bind(to: textField.rx.value)
+            .disposed(by: cell.disposeBag)
+        textField.rx.value
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (newValue) in
+                self?.viewModel.changeMsgPressDurValue(value: (newValue.unsafelyUnwrapped as NSString).floatValue ?? 0.0)
+            })
+            .disposed(by: cell.disposeBag)
         return cell
     }
 }

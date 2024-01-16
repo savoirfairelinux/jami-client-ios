@@ -91,6 +91,7 @@ struct MessagesListView: View {
                     if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
                         screenHeight = UIScreen.main.bounds.size.height
                         showContextMenu = false
+                        // TODO add similar check to copy/fwd list with keyboard shown
                     }
                 }
                 .onAppear(perform: {

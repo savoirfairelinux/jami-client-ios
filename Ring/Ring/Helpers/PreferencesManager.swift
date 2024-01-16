@@ -99,4 +99,8 @@ class PreferenceManager {
         }
         return false
     }
+
+    static func msgPressDurDefault() -> Float {
+        return 0.2
+    }
 }

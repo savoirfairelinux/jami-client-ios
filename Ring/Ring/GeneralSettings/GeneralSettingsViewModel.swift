@@ -29,6 +29,7 @@ let automaticDownloadFilesKey = "AUTOMATIC_DOWNLOAD_FILES_KEY"
 let acceptTransferLimitKey = "ACCEPT_TRANSFER_LIMIT_KEY"
 let limitLocationSharingDurationKey = "LIMIT_LOCATION_SHARING_DURATION_KEY"
 let locationSharingDurationKey = "LOCATION_SHARING_DURATION_KEY"
+let msgPressDurKey = "MSG_PRESS_DURATION_KEY"
 let fileRecordingLimitationInBackgroundKey = "FILE_RECORDING_LIMITATION_IN_BACKGROUND"
 
 enum GeneralSettingsSection: SectionModelType {
@@ -43,6 +44,7 @@ enum GeneralSettingsSection: SectionModelType {
         case sectionHeader(title: String)
         case log
         case donationCampaign
+        case msgPressDur
     }
 
     var items: [SectionRow] {
@@ -76,7 +78,9 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
             .acceptTransferLimit,
             .sectionHeader(title: L10n.GeneralSettings.locationSharing),
             .limitLocationSharingDuration,
-            .locationSharingDuration
+            .locationSharingDuration,
+            .sectionHeader(title: L10n.GeneralSettings.msgPressDur),
+            .msgPressDur
         ]
 
         if !PreferenceManager.isReachEndOfDonationCampaign() {
@@ -100,6 +104,7 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
     var limitLocationSharingDuration: BehaviorRelay<Bool>
     var locationSharingDuration: BehaviorRelay<Int>
     var enableDonationCampaign: BehaviorRelay<Bool>
+    var msgPressDur: BehaviorRelay<Float>
     var locationSharingDurationText: String {
         return convertMinutesToText(minutes: locationSharingDuration.value)
     }
@@ -128,6 +133,9 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
         let locationSharingDurationValue = UserDefaults.standard.integer(forKey: locationSharingDurationKey)
         locationSharingDuration = BehaviorRelay<Int>(value: locationSharingDurationValue)
         enableDonationCampaign = BehaviorRelay<Bool>(value: PreferenceManager.isCampaignEnabled())
+
+        let msgPressDurValue = UserDefaults.standard.float(forKey: msgPressDurKey)
+        msgPressDur = BehaviorRelay<Float>(value: PreferenceManager.msgPressDurDefault())
     }
 
     func togleHardwareAcceleration(enable: Bool) {
@@ -186,6 +194,11 @@ class GeneralSettingsViewModel: ViewModel, Stateable {
         }
         UserDefaults.standard.set(Int(value) ?? 0, forKey: acceptTransferLimitKey)
         acceptTransferLimit.accept(value)
+    }
+
+    func changeMsgPressDurValue(value: Float) {
+        UserDefaults.standard.set(Float(value) ?? 0, forKey: msgPressDurKey)
+        msgPressDur.accept(value)
     }
 
     func changeLocationSharingDuration(value: Int) {

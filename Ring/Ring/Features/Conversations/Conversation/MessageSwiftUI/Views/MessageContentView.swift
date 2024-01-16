@@ -94,7 +94,7 @@ struct MessageLongPress: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onLongPressGesture(minimumDuration: 0.2, perform: longPressCb)
+            .onLongPressGesture(minimumDuration: (Double) (UserDefaults.standard.float(forKey: msgPressDurKey)), perform: longPressCb)
     }
 }
 
@@ -129,6 +129,7 @@ struct MessageContentView: View {
                     .onAppear {
                         self.model.onAppear()
                     }
+                    //                    .offset(y: 0)
                     .offset(y: messageModel.messageContent.isHistory ? -padding : 0)
             }
             .padding(.bottom, !messageModel.hasReactions() ? 0 : reactionsTextSize - 6)

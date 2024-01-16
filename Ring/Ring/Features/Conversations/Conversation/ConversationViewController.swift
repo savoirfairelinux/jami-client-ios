@@ -33,6 +33,7 @@ import MobileCoreServices
 import SwiftUI
 
 enum ContextMenu: State {
+    case react(message: MessageContentVM)
     case preview(message: MessageContentVM)
     case forward(message: MessageContentVM)
     case share(items: [Any])
@@ -103,6 +104,7 @@ class ConversationViewController: UIViewController,
                                           conversation: self.viewModel.conversation.value,
                                           transferHelper: transferHelper,
                                           bestName: self.viewModel.bestName)
+
         swiftUIModel.hideNavigationBar
             .subscribe(onNext: { [weak self] (hide) in
                 guard let self = self else { return }
@@ -140,6 +142,9 @@ class ConversationViewController: UIViewController,
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ContextMenu else { return }
                 switch state {
+                case .react(let message):
+                    print("react event")
+                    self.viewModel.slectContactsToShareMessage(message: message)
                 case .preview(let message):
                     self.presentPreview(message: message)
                 case .forward(let message):

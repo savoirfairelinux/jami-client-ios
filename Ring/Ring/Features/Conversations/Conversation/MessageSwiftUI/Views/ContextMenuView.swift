@@ -52,8 +52,22 @@ struct ContextMenuView: View {
         ZStack {
             // background
             makeBackground()
+                .blur(radius: 1)
+                .padding(0)
+                .offset(x: 0, y: 0)
             GeometryReader { _ in
                 VStack(alignment: .leading) {
+                    Spacer()
+                        .frame(maxHeight: 6)
+                    // emoji picker
+                    makeEmojiSelector()
+                        .opacity(actionsOpacity)
+                        .padding(6)
+                        .background(Color.white)
+                        .cornerRadius(radius: 16.0, corners: .allCorners)
+                        .offset(x: model.menuOffsetX)
+                    Spacer()
+                        .frame(maxHeight: 8)
                     // message
                     ScrollView {
                         model.presentingMessage
@@ -70,7 +84,7 @@ struct ContextMenuView: View {
                         height: scrollViewHeight
                     )
                     Spacer()
-                        .frame(height: 10)
+                        .frame(height: 6)
                     // actions
                     makeActions()
                         .frame(width: model.menuSize.width)
@@ -104,6 +118,7 @@ struct ContextMenuView: View {
                 showContextMenu = false
             }
         }
+        //        .onTapGesture(count: 2)
         .onAppear(perform: {
             scrollViewHeight = model.messageFrame.height
             withAnimation(.easeOut(duration: 0.4)) {
@@ -130,11 +145,13 @@ struct ContextMenuView: View {
 
     func makeBackground() -> some View {
         ZStack {
+            // TODO replace image snapshot w/ withvibrancy
             Color(UIColor.systemBackground)
                 .opacity(actionsOpacity)
             if let snapshot = model.currentSnapshot, let image = snapshot.fillPartOfImage(frame: model.messageFrame, with: UIColor.systemBackground) {
                 Image(uiImage: image)
                     .scaleEffect(backgroundScale, anchor: .center)
+                    // TODO fast blur here
                     .blur(radius: blurAmount)
             }
             Color(UIColor.tertiaryLabel)
@@ -143,11 +160,30 @@ struct ContextMenuView: View {
         .edgesIgnoringSafeArea(.all)
     }
 
+    func makeEmojiSelector() -> some View {
+        HStack {
+            let defaultReactionEmojis = ["😀", "😎", "🍕", "⭐", "🌈"]
+            //                        let defaultReactionEmojis = [0xF0, 0x9F, 0x98, 0x8D, 0xF0, 0x9F, 0x8E, 0x82, 0xF0, 0x9F, 0x8E, 0x9F].compactMap { String(bytes: [$0], encoding: .utf8) }
+
+            ForEach(defaultReactionEmojis, id: \.self) { emoji in
+                //                Button
+                Button(action: {
+                    print("emoji = ", emoji)
+                }) {
+                    Text(emoji)
+                        .font(.title)
+                }
+            }
+            // TODO add button for gear/plus to modify
+        }
+    }
+
     func makeActions() -> some View {
         VStack(spacing: 0) {
             ForEach(model.menuItems) { item in
                 VStack(spacing: 0) {
                     Button {
+                        // TODO check .react and catch
                         showContextMenu = false
                         model.presentingMessage.model.contextMenuSelect(item: item)
                     } label: {

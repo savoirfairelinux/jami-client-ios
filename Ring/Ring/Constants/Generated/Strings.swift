@@ -448,6 +448,8 @@ internal enum L10n {
     internal static let locationSharing = L10n.tr("Localizable", "generalSettings.locationSharing", fallback: "Location Sharing")
     /// Position share duration
     internal static let locationSharingDuration = L10n.tr("Localizable", "generalSettings.locationSharingDuration", fallback: "Position share duration")
+    /// Message Press Duration
+    internal static let msgPressDur = L10n.tr("Localizable", "generalSettings.msgPressDur", fallback: "Message Press Duration")
     /// Enable video acceleration
     internal static let videoAcceleration = L10n.tr("Localizable", "generalSettings.videoAcceleration", fallback: "Enable video acceleration")
     /// Video Settings
@@ -530,6 +532,8 @@ internal enum L10n {
     internal static let password = L10n.tr("Localizable", "global.password", fallback: "Password")
     /// Preview
     internal static let preview = L10n.tr("Localizable", "global.preview", fallback: "Preview")
+    /// React
+    internal static let react = L10n.tr("Localizable", "global.react", fallback: "React")
     /// Recommended
     internal static let recommended = L10n.tr("Localizable", "global.recommended", fallback: "Recommended")
     /// Refuse
