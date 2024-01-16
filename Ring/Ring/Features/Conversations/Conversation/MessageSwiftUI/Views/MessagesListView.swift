@@ -192,9 +192,6 @@ struct MessagesListView: View {
             model.hideNavigationBar.accept(true)
             contextMenuModel.presentingMessage = message
             contextMenuModel.messageFrame = frame
-            if let topController = topVC() {
-                contextMenuModel.currentSnapshot = UIImage.makeSnapshot(from: topController.view)
-            }
             showContextMenu = true
         }, showReactionsView: {message in
             reactionsForMessage = message

@@ -23,7 +23,6 @@ import SwiftUI
 
 class ContextMenuVM {
     @Published var menuItems = [ContextualMenuItem]()
-    var currentSnapshot: UIImage?
     var presentingMessage: MessageBubbleView! {
         didSet {
             menuItems = presentingMessage.model.menuItems

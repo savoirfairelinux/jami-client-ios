@@ -50,8 +50,6 @@ struct ContextMenuView: View {
 
     var body: some View {
         ZStack {
-            // background
-            makeBackground()
             GeometryReader { _ in
                 VStack(alignment: .leading) {
                     // message
@@ -86,6 +84,7 @@ struct ContextMenuView: View {
                     y: model.messageFrame.origin.y + messageOffsetDiff
                 )
             }
+            .background(makeBackground())
         }
         .onTapGesture {
             withAnimation(Animation.easeOut(duration: 0.2)) {
@@ -131,12 +130,11 @@ struct ContextMenuView: View {
     func makeBackground() -> some View {
         ZStack {
             Color(UIColor.systemBackground)
-                .opacity(actionsOpacity)
-            if let snapshot = model.currentSnapshot, let image = snapshot.fillPartOfImage(frame: model.messageFrame, with: UIColor.systemBackground) {
-                Image(uiImage: image)
-                    .scaleEffect(backgroundScale, anchor: .center)
-                    .blur(radius: blurAmount)
-            }
+                .opacity(backgroundOpacity)
+            Color(UIColor.systemBackground)
+                .frame(width: model.messageFrame.width, height: model.messageFrame.height)
+                .position(x: model.messageFrame.midX, y: model.messageFrame.midY)
+            VisualEffect(style: .regular, withVibrancy: false)
             Color(UIColor.tertiaryLabel)
                 .opacity(backgroundOpacity)
         }
