@@ -139,7 +139,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     let cornerRadius: CGFloat = 15
     var textInset: CGFloat = 15
     var textVerticalInset: CGFloat = 10
-    var textFont: Font = Font.body.weight(.regular)
+    var textFont: Font = Font.callout.weight(.regular)
 
     var message: MessageModel
     var isIncoming: Bool

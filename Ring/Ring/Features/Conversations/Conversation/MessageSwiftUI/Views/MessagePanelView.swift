@@ -115,7 +115,7 @@ struct MessagePanelView: View {
                         .padding(.vertical, 8)
                         .lineLimit(1)
                         .truncationMode(.tail)
-                        .font(.footnote)
+                        .font(.callout)
                         .foregroundColor(Color(UIColor.secondaryLabel))
                         .cornerRadius(18)
                 }
@@ -131,12 +131,12 @@ struct MessagePanelView: View {
                 Button(action: {
                     self.model.showMoreActions()
                 }, label: {
-                    MessagePanelImageButton(systemName: "plus.circle", width: 40, height: 40)
+                    MessagePanelImageButton(systemName: "plus.circle", width: 42, height: 42)
                 })
                 Button(action: {
                     self.model.sendPhoto()
                 }, label: {
-                    MessagePanelImageButton(systemName: "camera", width: 42, height: 40)
+                    MessagePanelImageButton(systemName: "camera", width: 44, height: 42)
                 })
 
                 Spacer()
@@ -156,7 +156,7 @@ struct MessagePanelView: View {
                             .frame(width: 36, height: 36)
                             .padding(.bottom, 2)
                     } else {
-                        MessagePanelImageButton(systemName: "paperplane", width: 40, height: 40)
+                        MessagePanelImageButton(systemName: "paperplane", width: 42, height: 42)
                     }
                 })
                 .animation(.default, value: text.isEmpty)

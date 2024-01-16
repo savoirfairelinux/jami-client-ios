@@ -72,7 +72,7 @@ struct UITextViewWrapper: UIViewRepresentable {
         let textView = UITextView()
         textView.isScrollEnabled = true
         textView.textAlignment = .left
-        textView.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .footnote).pointSize)
+        textView.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .callout).pointSize)
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         textView.backgroundColor = UIColor.secondarySystemBackground
         textView.layer.cornerRadius = 18

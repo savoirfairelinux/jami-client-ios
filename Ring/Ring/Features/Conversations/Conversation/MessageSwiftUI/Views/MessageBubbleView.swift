@@ -58,7 +58,8 @@ struct MessageBubbleView: View {
 
     private func renderCallMessage() -> some View {
         Text(model.content)
-            .padding(model.textInset)
+            .padding(.horizontal, model.textInset)
+            .padding(.vertical, model.textVerticalInset)
             .foregroundColor(model.textColor)
             .lineLimit(1)
             .background(model.backgroundColor)
