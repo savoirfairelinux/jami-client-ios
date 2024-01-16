@@ -31,6 +31,7 @@ import SwiftyBeaver
 import Photos
 import MobileCoreServices
 import SwiftUI
+import RxRelay
 
 enum ContextMenu: State {
     case preview(message: MessageContentVM)
@@ -78,6 +79,8 @@ class ConversationViewController: UIViewController,
     var swiftUIViewAdded: Bool = false
     var currentDocumentPickerMode: DocumentPickerMode = .none
 
+    let tapAction = BehaviorRelay<Bool>(value: false)
+
     private lazy var locationManager: CLLocationManager = { return CLLocationManager() }()
 
     func setIsComposing(isComposing: Bool) {
@@ -93,7 +96,14 @@ class ConversationViewController: UIViewController,
                                                selector: #selector(applicationWillResignActive),
                                                name: UIApplication.willResignActiveNotification,
                                                object: nil)
+        let screenTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        self.view.addGestureRecognizer(screenTapRecognizer)
 
+    }
+
+    @objc
+    func screenTapped() {
+        tapAction.accept(true)
     }
 
     private func addSwiftUIView() {
@@ -163,7 +173,7 @@ class ConversationViewController: UIViewController,
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
-        let messageListView = MessagesListView(model: swiftUIModel)
+        let messageListView = MessagesListView(model: swiftUIModel, screenTapped: tapAction.asObservable())
         let swiftUIView = UIHostingController(rootView: messageListView)
         addChild(swiftUIView)
         swiftUIView.view.frame = self.view.frame

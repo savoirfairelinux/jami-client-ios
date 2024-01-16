@@ -79,7 +79,6 @@ struct PlayerSwiftUI: View {
                 .frame(width: model.playerWidth * ratio)
                 .conditionalModifier(MessageCornerRadius(model: model), apply: customCornerRadius == 0)
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
-                .onTapGesture { }
         }
     }
 }
@@ -124,7 +123,6 @@ struct MediaView: View {
     var body: some View {
         if let player = self.message.player {
             PlayerSwiftUI(model: message, player: player, onLongGesture: onLongGesture, withControls: withPlayerControls, customCornerRadius: cornerRadius)
-                .onTapGesture { }
         } else if let image = message.finalImage {
             ImageOrGifView(message: message, image: image, onLongGesture: onLongGesture, minHeight: minHeight, maxHeight: maxHeight, customCornerRadius: cornerRadius)
 

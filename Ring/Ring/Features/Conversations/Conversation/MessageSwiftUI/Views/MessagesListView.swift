@@ -21,6 +21,7 @@
 
 import SwiftUI
 import UIKit
+import RxSwift
 
 struct Flipped: ViewModifier {
     func body(content: Content) -> some View {
@@ -46,6 +47,7 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
 
 struct MessagesListView: View {
     @StateObject var model: MessagesListVM
+    var screenTapped: Observable<Bool>
     @SwiftUI.State var showScrollToLatestButton = false
     let scrollReserved = UIScreen.main.bounds.height * 1.5
 
@@ -105,17 +107,28 @@ struct MessagesListView: View {
                     ReactionsView(model: reactions)
                         .onTapGesture {
                             self.showReactionsView = false
+                            reactionsForMessage = nil
                         }
                 }
             }
         }
-        .onTapGesture {
-            showReactionsView.toggle()
-            if showReactionsView == false {
-                reactionsForMessage = nil
-            }
-            self.hideKeyboard()
+        .onAppear {
+            /* We cannot use SwiftUI's onTapGesture here because it would
+             interfere with the interactions of the buttons in the player view.
+             Instead, we are using UITapGestureRecognizer from UIView.
+             */
+            setupTapAction()
         }
+    }
+
+    private func setupTapAction() {
+        screenTapped
+            .subscribe(onNext: { _ in
+                self.showReactionsView = false
+                reactionsForMessage = nil
+                hideKeyboard()
+            })
+            .disposed(by: model.disposeBag)
     }
 
     func makeOverlay() -> some View {
