@@ -105,16 +105,10 @@ struct MessagesListView: View {
                     ReactionsView(model: reactions)
                         .onTapGesture {
                             self.showReactionsView = false
+                            reactionsForMessage = nil
                         }
                 }
             }
-        }
-        .onTapGesture {
-            showReactionsView.toggle()
-            if showReactionsView == false {
-                reactionsForMessage = nil
-            }
-            self.hideKeyboard()
         }
     }
 
