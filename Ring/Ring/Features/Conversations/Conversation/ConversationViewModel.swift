@@ -99,7 +99,7 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var displayName = BehaviorRelay<String?>(value: nil)
     var userName = BehaviorRelay<String>(value: "")
-    lazy var bestName: Observable<String> = {
+    lazy var displayOrUserName: Observable<String> = {
         return Observable
             .combineLatest(userName.asObservable(),
                            displayName.asObservable(),

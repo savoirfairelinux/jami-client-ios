@@ -110,7 +110,7 @@
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
-"conversation.synchronizationMessage" = "We are waiting for %@ connects to synchronize the conversation.";
+"conversation.synchronizationMessage" = "Waiting for %@ to synchronize.";
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";

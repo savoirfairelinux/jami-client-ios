@@ -340,9 +340,9 @@ internal enum L10n {
     internal static let sendRequest = L10n.tr("Localizable", "conversation.sendRequest", fallback: "Send him/her a contact request to be able to exchange together")
     /// Send Contact Request
     internal static let sendRequestTitle = L10n.tr("Localizable", "conversation.sendRequestTitle", fallback: "Send Contact Request")
-    /// We are waiting for %@ connects to synchronize the conversation.
+    /// Waiting for %@ to synchronize.
     internal static func synchronizationMessage(_ p1: Any) -> String {
-      return L10n.tr("Localizable", "conversation.synchronizationMessage", String(describing: p1), fallback: "We are waiting for %@ connects to synchronize the conversation.")
+      return L10n.tr("Localizable", "conversation.synchronizationMessage", String(describing: p1), fallback: "Waiting for %@ to synchronize.")
     }
     /// You have accepted the conversation request.
     internal static let synchronizationTitle = L10n.tr("Localizable", "conversation.synchronizationTitle", fallback: "You have accepted the conversation request.")

@@ -113,7 +113,7 @@ class ConversationViewController: UIViewController,
         let swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
                                           conversation: self.viewModel.conversation.value,
                                           transferHelper: transferHelper,
-                                          bestName: self.viewModel.bestName)
+                                          bestName: self.viewModel.displayOrUserName)
         swiftUIModel.hideNavigationBar
             .subscribe(onNext: { [weak self] (hide) in
                 guard let self = self else { return }
@@ -622,18 +622,24 @@ class ConversationViewController: UIViewController,
                 self?.viewModel.openCall()
             })
             .disposed(by: self.disposeBag)
-        viewModel.bestName
+        viewModel.displayOrUserName
             .share()
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] bestName in
-                let name = bestName.replacingOccurrences(of: "\0", with: "")
-                guard !name.isEmpty else { return }
-                let nameNSString = name as NSString
-                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(nameNSString)
+                var cap = bestName.count
+                var suff = ""
+                if cap > 16 {
+                    cap = 16
+                    suff = "..."
+                }
+                let displayableName = String(bestName.prefix(cap - suff.count)).appending(suff).replacingOccurrences(of: "\0", with: "")
+                guard !displayableName.isEmpty else { return }
+                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(displayableName as NSString)
             })
             .disposed(by: self.disposeBag)
         self.conversationInSyncLabel.backgroundColor = UIColor(hexString: self.viewModel.conversation.value.preferences.color)
+        self.conversationInSyncLabel.ajustToTextSize()
     }
 
     func placeCall() {

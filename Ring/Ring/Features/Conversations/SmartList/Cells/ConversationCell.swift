@@ -96,7 +96,7 @@ class ConversationCell: UITableViewCell, NibReusable {
     func configureFromItem(_ item: ConversationSection.Item) {
         // avatar
         Observable<(Data?, String)>.combineLatest(item.profileImageData.asObservable(),
-                                                  item.bestName.asObservable()) { ($0, $1) }
+                                                  item.displayOrUserName.asObservable()) { ($0, $1) }
             .startWith((item.profileImageData.value, item.userName.value))
             .observe(on: MainScheduler.instance)
             .subscribe({ [weak self] profileData in
@@ -135,7 +135,7 @@ class ConversationCell: UITableViewCell, NibReusable {
         }
 
         // username
-        item.bestName.asObservable()
+        item.displayOrUserName.asObservable()
             .observe(on: MainScheduler.instance)
             .bind(to: self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
