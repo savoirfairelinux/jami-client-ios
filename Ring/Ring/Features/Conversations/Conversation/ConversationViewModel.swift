@@ -173,22 +173,8 @@ class ConversationViewModel: Stateable, ViewModel {
             }
 
             self.subscribePresenceServiceContactPresence()
-            if conversation.value.isSwarm() && self.swarmInfo == nil && !self.conversation.value.id.isEmpty {
-                self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value)
-                self.swarmInfo!.finalAvatar.share()
-                    .observe(on: MainScheduler.instance)
-                    .subscribe { [weak self] image in
-                        self?.profileImageData.accept(image.pngData())
-                    } onError: { _ in
-                    }
-                    .disposed(by: self.disposeBag)
-                self.swarmInfo!.finalTitle.share()
-                    .observe(on: MainScheduler.instance)
-                    .subscribe { [weak self] name in
-                        self?.userName.accept(name)
-                    } onError: { _ in
-                    }
-                    .disposed(by: self.disposeBag)
+            if self.shouldCreateSwarmInfo() {
+                self.createSwarmInfo()
             } else {
                 let filterParicipants = conversation.value.getParticipants()
                 if let participantId = filterParicipants.first?.jamiId,
@@ -207,6 +193,11 @@ class ConversationViewModel: Stateable, ViewModel {
                     self.subscribeUserServiceLookupStatus()
                     self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
                 }
+                /*
+                 By default, a conversation is created as non-swarm. Upon receiving the conversationReady
+                 notification, we need to verify whether it is a swarm or not
+                 */
+                subscribeConversationReady()
             }
             subscribeLastMessagesUpdate()
             subscribeConversationSynchronization()
@@ -225,6 +216,46 @@ class ConversationViewModel: Stateable, ViewModel {
             .subscribe { [weak self] synchronizing in
                 guard let self = self else { return }
                 self.synchronizing.accept(synchronizing)
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
+    }
+
+    private func subscribeConversationReady() {
+        self.conversationsService.conversationReady
+            .subscribe { [weak self] conversationId in
+                guard let self = self else { return }
+                /*
+                 Check if the conversation, originally created as non-swarm,
+                 becomes a swarm after an update. If so, update the relevant information.
+                 */
+                if conversationId == self.conversation.value.id {
+                    if self.shouldCreateSwarmInfo() {
+                        self.createSwarmInfo()
+                    }
+                }
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
+    }
+
+    func shouldCreateSwarmInfo() -> Bool {
+        return self.conversation.value.isSwarm() && self.swarmInfo == nil && !self.conversation.value.id.isEmpty
+    }
+
+    func createSwarmInfo() {
+        self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value)
+        self.swarmInfo!.finalAvatar.share()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] image in
+                self?.profileImageData.accept(image.pngData())
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
+        self.swarmInfo!.finalTitle.share()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] name in
+                self?.displayName.accept(name)
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)

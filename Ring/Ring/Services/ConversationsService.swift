@@ -382,7 +382,6 @@ class ConversationsService {
         if let info = conversationsAdapter.getConversationInfo(forAccount: accountId, conversationId: conversationId) as? [String: String],
            let participantsInfo = conversationsAdapter.getConversationMembers(accountId, conversationId: conversationId) {
             conversation.updateInfo(info: info)
-            //            let conversation = ConversationModel(withId: conversationId, accountId: accountId, info: info)
             if let prefsInfo = getConversationPreferences(accountId: accountId, conversationId: conversationId) {
                 conversation.updatePreferences(preferences: prefsInfo)
             }

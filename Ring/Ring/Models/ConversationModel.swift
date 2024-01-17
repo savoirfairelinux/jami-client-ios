@@ -225,6 +225,7 @@ class ConversationModel: Equatable {
         if let hash = info[ConversationAttributes.title.rawValue], !hash.isEmpty {
             self.hash = hash
         }
+        updateProfile(profile: info)
         if let type = info[ConversationAttributes.mode.rawValue],
            let typeInt = Int(type),
            let conversationType = ConversationType(rawValue: typeInt) {
