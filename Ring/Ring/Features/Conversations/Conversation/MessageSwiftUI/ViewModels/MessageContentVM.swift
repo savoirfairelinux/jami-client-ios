@@ -72,6 +72,8 @@ enum ContextualMenuItem: Identifiable {
     case save
     case copy
     case reply
+    case deleteMessage
+    case deleteFile
 
     func toString() -> String {
         switch self {
@@ -87,6 +89,10 @@ enum ContextualMenuItem: Identifiable {
             return L10n.Global.copy
         case .reply:
             return L10n.Global.reply
+        case .deleteMessage:
+            return L10n.Global.deleteMessage
+        case .deleteFile:
+            return L10n.Global.deleteFile
         }
     }
 
@@ -104,6 +110,10 @@ enum ContextualMenuItem: Identifiable {
             return "doc.on.doc"
         case .reply:
             return "arrowshape.turn.up.left"
+        case .deleteMessage:
+            return "xmark.bin"
+        case .deleteFile:
+            return "xmark.bin"
         }
     }
 }
@@ -278,11 +288,19 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             if self.type == .text {
-                self.menuItems = [.copy, .forward, .reply]
+                if self.isIncoming {
+                    self.menuItems = [.copy, .forward, .reply]
+                } else {
+                    self.menuItems = [.copy, .forward, .reply, .deleteMessage]
+                }
             }
             guard self.type == .fileTransfer else { return }
             if self.url != nil {
-                self.menuItems = [.save, .forward, .preview, .share, .reply]
+                if self.isIncoming {
+                    self.menuItems = [.save, .forward, .preview, .share, .reply]
+                } else {
+                    self.menuItems = [.save, .forward, .preview, .share, .reply, .deleteFile]
+                }
             } else {
                 self.menuItems = [.forward, .preview, .share, .reply]
             }
@@ -505,6 +523,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             saveFile()
         case .reply:
             reply()
+        case .deleteMessage:
+            delete()
+        case .deleteFile:
+            delete()
         }
     }
 }
@@ -532,5 +554,9 @@ extension MessageContentVM {
     func saveFile() {
         guard let fileURL = self.url else { return }
         self.contextMenuState.onNext(ContextMenu.saveFile(url: fileURL))
+    }
+
+    func delete() {
+        self.contextMenuState.onNext(ContextMenu.delete(message: self))
     }
 }

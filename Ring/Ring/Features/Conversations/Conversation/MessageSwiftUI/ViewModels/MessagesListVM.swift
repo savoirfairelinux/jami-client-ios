@@ -409,6 +409,8 @@ class MessagesListVM: ObservableObject {
                 switch state {
                 case .reply(message: let message):
                     self.configureReply(message: message)
+                case .delete(message: let message):
+                    self.deleteMessage(message: message)
                 default:
                     break
                 }
@@ -440,6 +442,13 @@ class MessagesListVM: ObservableObject {
     func configureReply(message: MessageContentVM) {
         self.messagePanel.configureReplyTo(message: message)
         self.updateUsernameForReply(message: message)
+    }
+
+    func deleteMessage(message: MessageContentVM) {
+        guard let container = self.getMessage(messageId: message.message.id) else { return }
+        if container.message.type == .text {
+            self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.id, message: "", parentId: message.message.id)
+        }
     }
 
     func updateUsernameForReply(message: MessageContentVM) {

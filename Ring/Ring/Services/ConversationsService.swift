@@ -269,15 +269,14 @@ class ConversationsService {
     }
 
     func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
-        self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId)
+        self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
+    }
+
+    func editSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
+        self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 1)
     }
 
     func insertReplies(messages: [MessageModel], accountId: String, conversationId: String, fromLoaded: Bool) -> Bool {
-        guard let conversation = self.conversations.value
-                .filter({ conversation in
-                    return conversation.id == conversationId && conversation.accountId == accountId
-                })
-                .first else { return false }
         if self.isTargetReply(messages: messages) {
             self.processReplyTargetMessage(with: messages.first)
             return true
