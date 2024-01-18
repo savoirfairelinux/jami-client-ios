@@ -35,8 +35,6 @@ class MessageRowVM: ObservableObject {
     var incoming: Bool
     var infoState: PublishSubject<State>
     var centeredMessage: Bool
-    var followEmogiMessage = false
-    var followingByEmogiMessage = false
 
     var message: MessageModel
 
@@ -59,18 +57,8 @@ class MessageRowVM: ObservableObject {
 
     var sequencing: MessageSequencing = .unknown {
         didSet {
-            var extraTopSpaceForText: Bool = false
-            var extraBottomSpaceForText: Bool = false
-            if self.message.type == .text && !self.message.content.isSingleEmoji {
-                if self.followEmogiMessage {
-                    extraTopSpaceForText = true
-                }
-                if self.followingByEmogiMessage {
-                    extraBottomSpaceForText = true
-                }
-            }
-            topSpace = (sequencing == .singleMessage || sequencing == .firstOfSequence || extraTopSpaceForText) ? 10 : 0
-            bottomSpace = (sequencing == .singleMessage || sequencing == .lastOfSequence || extraBottomSpaceForText) ? 10 : 0
+            topSpace = (sequencing == .singleMessage || sequencing == .firstOfSequence) ? 2 : 0
+            bottomSpace = (sequencing == .singleMessage || sequencing == .lastOfSequence) ? 2 : 0
             let shouldDisplayAavatar = (sequencing == .lastOfSequence || sequencing == .singleMessage) && self.message.incoming
             self.shouldDisplayAavatar = shouldDisplayAavatar
         }
@@ -113,5 +101,14 @@ class MessageRowVM: ObservableObject {
 
         // generate the string containing the message time
         return dateFormatter.string(from: time).uppercased()
+    }
+
+    func setSequencing(sequencing: MessageSequencing) {
+        if self.sequencing != sequencing {
+            DispatchQueue.main.async {[weak self] in
+                guard let self = self else { return }
+                self.sequencing = sequencing
+            }
+        }
     }
 }

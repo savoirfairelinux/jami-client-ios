@@ -46,13 +46,11 @@ struct DefaultTransferView: View {
                         .lineLimit(1)
                         .truncationMode(.middle)
                         .foregroundColor(model.textColor)
-                        .background(model.backgroundColor)
                         .font(.headline)
                     Spacer()
                         .frame(height: 10)
                     Text(model.fileInfo)
                         .foregroundColor(model.textColor)
-                        .background(model.backgroundColor)
                         .font(.footnote)
                     if model.showProgress {
                         Spacer()

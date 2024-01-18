@@ -74,7 +74,7 @@ struct MessagesListView: View {
                         }
                     }
                     .layoutPriority(1)
-                    .padding(.bottom, messageContainerHeight - 40)
+                    .padding(.bottom, messageContainerHeight - 35)
                     MessagePanelView(model: model.messagePanel)
                         .alignmentGuide(VerticalAlignment.center) { dimensions in
                             DispatchQueue.main.async {
