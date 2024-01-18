@@ -224,7 +224,7 @@ class PlayerView: UIView {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] hasVideo in
                 guard let self = self else { return }
-                self.muteAudio.isHidden = !hasVideo || !withControls
+                self.muteAudio.isHidden = !hasVideo || !self.withControls
                 self.backgroundView.backgroundColor = hasVideo ? UIColor.placeholderText : UIColor.secondarySystemBackground
                 self.incomingVideo.backgroundColor = hasVideo ? UIColor.black : UIColor.secondarySystemBackground
                 let color = hasVideo ? UIColor.white : (UIColor.label.lighten(by: 50) ?? UIColor.label)
@@ -234,7 +234,7 @@ class PlayerView: UIView {
                 self.progressSlider.maximumTrackTintColor = color
                 self.progressSlider.thumbTintColor = color
                 let size = self.sizeMode == .fullScreen ? 15 : 10
-                let circleImage = makeCircleWith(size: CGSize(width: size, height: size),
+                let circleImage = self.makeCircleWith(size: CGSize(width: size, height: size),
                                                  backgroundColor: color)
                 self.progressSlider.setThumbImage(circleImage, for: .normal)
                 self.progressSlider.setThumbImage(circleImage, for: .highlighted)
