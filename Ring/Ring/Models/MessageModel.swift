@@ -55,7 +55,7 @@ enum ContactAction: String {
     case unban
 }
 
-class MessageReaction: Identifiable, Equatable, Hashable {
+class MessageAction: Identifiable, Equatable, Hashable {
     var id: String = ""
     var author: String = ""
     var content: String = ""
@@ -77,7 +77,7 @@ class MessageReaction: Identifiable, Equatable, Hashable {
         hasher.combine(id)
     }
 
-    static func == (lhs: MessageReaction, rhs: MessageReaction) -> Bool {
+    static func == (lhs: MessageAction, rhs: MessageAction) -> Bool {
         return lhs.id == rhs.id
     }
 }
@@ -102,7 +102,8 @@ public class MessageModel {
     var react: String = ""
     var totalSize: Int = 0
     var parents = [String]()
-    var reactions = Set<MessageReaction>()
+    var reactions = Set<MessageAction>()
+    var editions = Set<MessageAction>()
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -115,7 +116,10 @@ public class MessageModel {
     convenience init (with swarmMessage: SwarmMessageWrap, accountJamiId: String) {
         self.init(withInfo: swarmMessage.body, accountJamiId: accountJamiId)
         for reaction in swarmMessage.reactions {
-            self.reactions.insert(MessageReaction(withInfo: reaction))
+            self.reactions.insert(MessageAction(withInfo: reaction))
+        }
+        for edition in swarmMessage.editions {
+            self.editions.insert(MessageAction(withInfo: edition))
         }
     }
     // swiftlint:disable:next cyclomatic_complexity
@@ -210,17 +214,56 @@ public class MessageModel {
         }
     }
 
+    func updateFrom(info: [String: String]) {
+        if let content = info[MessageAttributes.body.rawValue], self.type == .text {
+            self.content = content
+        }
+        if let timestamp = info[MessageAttributes.timestamp.rawValue],
+           let timestampDouble = Double(timestamp) {
+            let receivedDate = Date.init(timeIntervalSince1970: timestampDouble)
+            self.receivedDate = receivedDate
+        }
+        if let parent = info[MessageAttributes.parent.rawValue] {
+            self.parentId = parent
+        }
+        if let parents = info["parents"]?.components(separatedBy: ",").filter({ parentId in
+            !parentId.isEmpty
+        }) {
+            self.parents.append(contentsOf: parents)
+        }
+    }
+
     func isReply() -> Bool {
         return !self.reply.isEmpty
     }
 
     func reactionAdded(reaction: [String: String]) {
-        self.reactions.insert(MessageReaction(withInfo: reaction))
+        self.reactions.insert(MessageAction(withInfo: reaction))
     }
 
     func reactionRemoved(reactionId: String) {
         if let reactionToRemove = self.reactions.first(where: { $0.id == reactionId }) {
             self.reactions.remove(reactionToRemove)
+        }
+    }
+
+    func isMessageDeleted() -> Bool {
+        return self.content.isEmpty && !self.editions.isEmpty
+    }
+
+    func isMessageEdited() -> Bool {
+        return !self.editions.isEmpty
+    }
+
+    func messageUpdated(message: SwarmMessageWrap) {
+        self.editions = Set<MessageAction>()
+        self.reactions = Set<MessageAction>()
+        self.updateFrom(info: message.body)
+        for reaction in message.reactions {
+            self.reactions.insert(MessageAction(withInfo: reaction))
+        }
+        for edition in message.editions {
+            self.editions.insert(MessageAction(withInfo: edition))
         }
     }
 }
