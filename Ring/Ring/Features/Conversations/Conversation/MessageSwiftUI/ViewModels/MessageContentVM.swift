@@ -26,27 +26,6 @@ import SwiftUI
 import RxSwift
 import LinkPresentation
 
-enum TransferViewType: Equatable {
-    case playerView(player: PlayerViewModel)
-    case imageView(image: UIImage)
-    case defaultView
-
-    func toString() -> String {
-        switch self {
-        case .playerView:
-            return "playerView"
-        case .imageView:
-            return "imageView"
-        case .defaultView:
-            return "defaultView"
-        }
-    }
-
-    static func == (lhs: TransferViewType, rhs: TransferViewType) -> Bool {
-        return lhs.toString() == rhs.toString()
-    }
-}
-
 enum TransferAction: Identifiable {
     var id: Self { self }
 
@@ -126,6 +105,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     @Published var menuItems = [ContextualMenuItem]()
     @Published var backgroundColor: Color
     @Published var finalImage: UIImage?
+    @Published var messageDeleted = false
+    @Published var messageEdited = false
+    @Published var messageDeletedText = " " + L10n.Conversation.deletedMessage
+    @Published var editIndicator = L10n.Conversation.edited
     var url: URL?
     var fileSize: Int64 = 0
     var transferStatus: DataTransferStatus = .unknown
@@ -166,13 +149,24 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         return URL(string: withPrefix)
     }
 
+    var username = "" {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.messageDeletedText = self.username + " " + L10n.Conversation.deletedMessage
+            }
+        }
+    }
+
     // state
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
+    var infoState: PublishSubject<State>
 
-    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, isHistory: Bool) {
+    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, infoState: PublishSubject<State>, isHistory: Bool) {
         self.contextMenuState = contextMenuState
         self.transferState = transferState
+        self.infoState = infoState
         self.message = message
         self.type = message.type
         self.isIncoming = message.incoming
@@ -211,6 +205,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             self.backgroundColor = Color(UIColor.clear)
             self.borderColor = Color(UIColor.secondaryLabel)
         }
+        self.updateMessageEditions()
         self.fetchMetadata()
     }
 
@@ -428,6 +423,23 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             guard let self = self else { return }
             self.backgroundColor = Color(color)
         }
+    }
+
+    func updateMessageEditions() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.content = self.message.content
+            self.messageDeleted = self.message.isMessageDeleted()
+            self.messageEdited = self.message.isMessageEdited()
+            if self.messageDeleted {
+                self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: self.message.authorId))
+            }
+        }
+    }
+
+    func updateUsername(name: String, jamiId: String) {
+        guard message.authorId == jamiId, !name.isEmpty else { return }
+        self.username = name
     }
 
     func updateFileSize(size: Int64) {

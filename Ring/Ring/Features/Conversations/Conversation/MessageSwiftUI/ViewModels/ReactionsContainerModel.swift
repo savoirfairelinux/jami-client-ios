@@ -28,7 +28,7 @@ class ReactionsRowViewModel: Identifiable, ObservableObject {
     @Published var name: String = ""
     @Published var content = [String: String]()
 
-    init(reaction: MessageReaction) {
+    init(reaction: MessageAction) {
         self.jamiId = reaction.author
         self.name = self.jamiId
         self.messageId = reaction.id
@@ -36,7 +36,7 @@ class ReactionsRowViewModel: Identifiable, ObservableObject {
         self.content[reaction.id] = reaction.content
     }
 
-    func addReaction(reaction: MessageReaction) {
+    func addReaction(reaction: MessageAction) {
         if self.content.keys.contains(reaction.id) { return }
         self.content[reaction.id] = reaction.content
     }
@@ -89,7 +89,7 @@ class ReactionsContainerModel: ObservableObject {
         self.displayValue = self.toString()
     }
 
-    private func updateReaction(reaction: MessageReaction) {
+    private func updateReaction(reaction: MessageAction) {
         if let existingReaction = getReaction(jamiId: reaction.author) {
             existingReaction.addReaction(reaction: reaction)
         } else {
@@ -97,7 +97,7 @@ class ReactionsContainerModel: ObservableObject {
         }
     }
 
-    private func addReaction(reaction: MessageReaction) {
+    private func addReaction(reaction: MessageAction) {
         self.reactionsRow.append(ReactionsRowViewModel(reaction: reaction))
         self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: reaction.author))
         self.infoState.onNext(MessageInfo.updateAvatar(jamiId: reaction.author))
