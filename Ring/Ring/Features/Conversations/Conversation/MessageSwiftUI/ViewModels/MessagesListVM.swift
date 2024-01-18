@@ -82,7 +82,7 @@ class MessagesListVM: ObservableObject {
     // state
     private let contextStateSubject = PublishSubject<State>()
     lazy var contextMenuState: Observable<State> = {
-        return self.contextStateSubject.asObservable()
+        return self.contextStateSubject.share()
     }()
 
     private let messagePanelStateSubject = PublishSubject<State>()
@@ -158,6 +158,7 @@ class MessagesListVM: ObservableObject {
             self.subscribeReplyTarget()
             self.subscribeReactions()
             self.subscribeMessageUpdates()
+            self.subscribeMessagesActions()
         }
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
@@ -298,6 +299,7 @@ class MessagesListVM: ObservableObject {
     func messageUpdated(messageId: String) {
         guard let message = self.getMessage(messageId: messageId) else { return }
         message.messageUpdated()
+        self.computeSequencing()
     }
 
     func reactionsUpdated(messageId: String) {
@@ -417,18 +419,6 @@ class MessagesListVM: ObservableObject {
         } onError: { _ in
         }
         .disposed(by: container.disposeBag)
-
-        container.messageContent.contextMenuState
-            .subscribe(onNext: { [weak self] (state) in
-                guard let self = self, let state = state as? ContextMenu else { return }
-                switch state {
-                case .reply(message: let message):
-                    self.configureReply(message: message)
-                default:
-                    break
-                }
-            })
-            .disposed(by: self.disposeBag)
     }
 
     private func subscribeSwarmPreferences() {
@@ -445,6 +435,22 @@ class MessagesListVM: ObservableObject {
             .disposed(by: self.disposeBag)
     }
 
+    private func subscribeMessagesActions() {
+        self.contextMenuState
+            .subscribe(onNext: { [weak self] (state) in
+                guard let self = self, let state = state as? ContextMenu else { return }
+                switch state {
+                case .reply(message: let message):
+                    self.configureReply(message: message)
+                case .delete(message: let message):
+                    self.deleteMessage(message: message)
+                default:
+                    break
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+
     private func updateColorPreference() {
         guard let color = UIColor(hexString: self.conversation.preferences.color) else { return }
         DispatchQueue.main.async { [weak self] in
@@ -455,6 +461,16 @@ class MessagesListVM: ObservableObject {
     func configureReply(message: MessageContentVM) {
         self.messagePanel.configureReplyTo(message: message)
         self.updateUsernameForReply(message: message)
+    }
+
+    func deleteMessage(message: MessageContentVM) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self, weak message] in
+            guard let self = self, let message = message else { return }
+            guard let container = self.getMessage(messageId: message.message.id) else { return }
+            if container.message.type == .text {
+                self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: message.message.id)
+            }
+        }
     }
 
     func updateUsernameForReply(message: MessageContentVM) {
@@ -571,7 +587,7 @@ class MessagesListVM: ObservableObject {
 
     private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
         return message.uri != secondMessage.uri
-            || message.type == .contact || message.type == .initial || message.authorId != secondMessage.authorId || message.isReply() || secondMessage.isReply()
+            || message.type == .contact || message.type == .initial || message.authorId != secondMessage.authorId || message.isReply() || secondMessage.isReply() || message.content.containsOnlyEmoji || secondMessage.content.containsOnlyEmoji
     }
 
     private func shouldDisplayName(message: MessageContainerModel) -> Bool {
@@ -588,7 +604,6 @@ class MessagesListVM: ObservableObject {
 
         if nextMessageItem == nil {
             if let previousMessageItem = previousMessageItem {
-                messageItem.followEmogiMessage = previousMessageItem.message.content.isSingleEmoji
                 let isNewSequence = messageItem.shouldShowTimeString || self.isBreakingSequence(message: previousMessageItem.message, secondMessage: messageItem.message)
                 return isNewSequence ? .singleMessage : .lastOfSequence
             } else {
@@ -601,8 +616,6 @@ class MessagesListVM: ObservableObject {
         if let next = nextMessageItem, let previous = previousMessageItem {
             let isNewSequence = messageItem.shouldShowTimeString || self.isBreakingSequence(message: previous.message, secondMessage: messageItem.message)
             let changingSequenceAfter = next.shouldShowTimeString || self.isBreakingSequence(message: next.message, secondMessage: messageItem.message)
-            messageItem.followingByEmogiMessage = next.message.content.isSingleEmoji
-            messageItem.followEmogiMessage = previous.message.content.isSingleEmoji
             if isNewSequence && changingSequenceAfter {
                 return .singleMessage
             }

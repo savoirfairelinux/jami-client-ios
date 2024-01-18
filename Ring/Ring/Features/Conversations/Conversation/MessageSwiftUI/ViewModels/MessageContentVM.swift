@@ -51,6 +51,8 @@ enum ContextualMenuItem: Identifiable {
     case save
     case copy
     case reply
+    case deleteMessage
+    case deleteFile
 
     func toString() -> String {
         switch self {
@@ -66,6 +68,10 @@ enum ContextualMenuItem: Identifiable {
             return L10n.Global.copy
         case .reply:
             return L10n.Global.reply
+        case .deleteMessage:
+            return L10n.Global.deleteMessage
+        case .deleteFile:
+            return L10n.Global.deleteFile
         }
     }
 
@@ -83,6 +89,10 @@ enum ContextualMenuItem: Identifiable {
             return "doc.on.doc"
         case .reply:
             return "arrowshape.turn.up.left"
+        case .deleteMessage:
+            return "xmark.bin"
+        case .deleteFile:
+            return "xmark.bin"
         }
     }
 }
@@ -109,6 +119,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     @Published var messageEdited = false
     @Published var messageDeletedText = " " + L10n.Conversation.deletedMessage
     @Published var editIndicator = L10n.Conversation.edited
+    @Published var editionColor = Color(UIColor.secondaryLabel)
     var url: URL?
     var fileSize: Int64 = 0
     var transferStatus: DataTransferStatus = .unknown
@@ -128,8 +139,6 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     var isIncoming: Bool
     var isHistory: Bool
     var type: MessageType = .text
-    var followEmogiMessage = false
-    var followingByEmogiMessage = false
 
     private var sequencing: MessageSequencing = .unknown {
         didSet {
@@ -226,30 +235,13 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     private func updatedCorners() -> UIRectCorner {
-        if self.followEmogiMessage && self.followingByEmogiMessage {
-            return .allCorners
-        }
         switch sequencing {
         case .firstOfSequence:
-            if followingByEmogiMessage {
-                return [.allCorners]
-            } else {
-                return isIncoming ? [.topLeft, .topRight, .bottomRight] : [.topLeft, .topRight, .bottomLeft]
-            }
+            return isIncoming ? [.topLeft, .topRight, .bottomRight] : [.topLeft, .topRight, .bottomLeft]
         case .lastOfSequence:
-            if followEmogiMessage {
-                return [.allCorners]
-            } else {
-                return isIncoming ? [.topRight, .bottomLeft, .bottomRight] : [.topLeft, .bottomLeft, .bottomRight]
-            }
+            return isIncoming ? [.topRight, .bottomLeft, .bottomRight] : [.topLeft, .bottomLeft, .bottomRight]
         case .middleOfSequence:
-            if self.followEmogiMessage {
-                return isIncoming ? [.topRight, .topLeft, .bottomRight] : [.topRight, .topLeft, .bottomLeft ]
-            } else if self.followingByEmogiMessage {
-                return isIncoming ? [.topRight, .bottomRight, .bottomLeft] : [.topLeft, .bottomLeft, .bottomRight]
-            } else {
-                return isIncoming ? [.topRight, .bottomRight] : [.topLeft, .bottomLeft]
-            }
+            return isIncoming ? [.topRight, .bottomRight] : [.topLeft, .bottomLeft]
         case .singleMessage, .unknown:
             return [.allCorners]
         }
@@ -273,11 +265,19 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             if self.type == .text {
-                self.menuItems = [.copy, .forward, .reply]
+                if self.isIncoming {
+                    self.menuItems = [.copy, .forward, .reply]
+                } else {
+                    self.menuItems = [.copy, .forward, .reply, .deleteMessage]
+                }
             }
             guard self.type == .fileTransfer else { return }
             if self.url != nil {
-                self.menuItems = [.save, .forward, .preview, .share, .reply]
+                if self.isIncoming {
+                    self.menuItems = [.save, .forward, .preview, .share, .reply]
+                } else {
+                    self.menuItems = [.save, .forward, .preview, .share, .reply, .deleteFile]
+                }
             } else {
                 self.menuItems = [.forward, .preview, .share, .reply]
             }
@@ -431,6 +431,14 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             self.content = self.message.content
             self.messageDeleted = self.message.isMessageDeleted()
             self.messageEdited = self.message.isMessageEdited()
+            if self.messageDeleted || self.messageEdited {
+                self.textColor = isIncoming ? Color(UIColor.label) : Color(.white)
+                self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(.jamiMsgCellSent)
+                self.hasBorder = false
+                self.editionColor = isIncoming ? Color(UIColor.secondaryLabel) : Color(UIColor.systemGray6)
+                self.textInset = 15
+                self.textVerticalInset = 10
+            }
         }
         if self.message.isMessageDeleted() {
             self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: self.message.authorId))
@@ -517,6 +525,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             saveFile()
         case .reply:
             reply()
+        case .deleteMessage:
+            delete()
+        case .deleteFile:
+            delete()
         }
     }
 }
@@ -544,5 +556,9 @@ extension MessageContentVM {
     func saveFile() {
         guard let fileURL = self.url else { return }
         self.contextMenuState.onNext(ContextMenu.saveFile(url: fileURL))
+    }
+
+    func delete() {
+        self.contextMenuState.onNext(ContextMenu.delete(message: self))
     }
 }

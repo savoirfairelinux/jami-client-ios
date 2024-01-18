@@ -36,7 +36,7 @@ struct MessageBubbleView: View {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.messageDeletedText)
                         .font(.footnote)
-                        .foregroundColor(Color(UIColor.secondaryLabel))
+                        .foregroundColor(model.editionColor)
                 }
             } else {
                 if model.type == .call {
@@ -136,12 +136,12 @@ struct MessageBubbleWithEditionWrapper<Content: View>: View {
             Image(systemName: "pencil")
                 .resizable()
                 .font(Font.body.weight(.bold))
-                .foregroundColor(Color(UIColor.secondaryLabel))
+                .foregroundColor(model.editionColor)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 15, height: 12)
             Text(model.editIndicator)
                 .font(.footnote)
-                .foregroundColor(Color(UIColor.secondaryLabel))
+                .foregroundColor(model.editionColor)
         }
     }
 }
