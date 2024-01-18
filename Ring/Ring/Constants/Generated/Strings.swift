@@ -518,6 +518,10 @@ internal enum L10n {
     internal static let close = L10n.tr("Localizable", "global.close", fallback: "Close")
     /// Copy
     internal static let copy = L10n.tr("Localizable", "global.copy", fallback: "Copy")
+    /// Delete File from device
+    internal static let deleteFile = L10n.tr("Localizable", "global.deleteFile", fallback: "Delete File from device")
+    /// Delete Message
+    internal static let deleteMessage = L10n.tr("Localizable", "global.deleteMessage", fallback: "Delete Message")
     /// Donate
     internal static let donate = L10n.tr("Localizable", "global.donate", fallback: "Donate")
     /// Enter Password

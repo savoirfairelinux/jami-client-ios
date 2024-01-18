@@ -46,6 +46,8 @@
 "global.reply" = "Reply";
 "global.search" = "Searching…";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";

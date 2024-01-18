@@ -47,12 +47,12 @@ class MessageContainerModel: Identifiable {
         return self.transferSubject.asObservable()
     }()
 
-    // context menu state
-    private let contextMenuState: PublishSubject<State>
-
     var shouldShowTimeString: Bool = false {
         didSet {
-            self.messageRow.shouldShowTimeString = shouldShowTimeString
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.messageRow.shouldShowTimeString = shouldShowTimeString
+            }
         }
     }
 
@@ -65,33 +65,13 @@ class MessageContainerModel: Identifiable {
     var sequencing: MessageSequencing = .unknown {
         didSet {
             self.messageContent.setSequencing(sequencing: sequencing)
-            self.messageRow.sequencing = sequencing
-        }
-    }
-
-    var followEmogiMessage = false {
-        didSet {
-            self.messageContent.followEmogiMessage = followEmogiMessage
-            self.messageRow.followEmogiMessage = followEmogiMessage
-            if let reply = self.replyTarget.target {
-                reply.followEmogiMessage = followEmogiMessage
-            }
-        }
-    }
-    var followingByEmogiMessage = false {
-        didSet {
-            self.messageContent.followingByEmogiMessage = followingByEmogiMessage
-            if let reply = self.replyTarget.target {
-                reply.followingByEmogiMessage = followingByEmogiMessage
-            }
-            self.messageRow.followingByEmogiMessage = followingByEmogiMessage
+            self.messageRow.setSequencing(sequencing: sequencing)
         }
     }
 
     init(message: MessageModel, contextMenuState: PublishSubject<State>, isHistory: Bool, localJamiId: String) {
         self.id = message.id
         self.message = message
-        self.contextMenuState = contextMenuState
         self.stackViewModel = MessageStackVM(message: message, infoState: self.infoSubject)
         self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, infoState: self.infoSubject, isHistory: isHistory)
         self.messageRow = MessageRowVM(message: message, infoState: self.infoSubject)
