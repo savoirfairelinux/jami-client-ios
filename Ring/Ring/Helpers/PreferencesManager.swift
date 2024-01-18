@@ -28,7 +28,7 @@ struct DefaultsKeys {
 
 struct DefaultValues {
     static let donationStartDate = "27.11.2023"
-    static let donationEndDate = "31.01.2024"
+    static let donationEndDate = "01.04.2024"
 }
 
 class PreferenceManager {
@@ -50,6 +50,15 @@ class PreferenceManager {
                         DefaultsKeys.donationCampaignEnabled: true] as [String: Any]
 
         UserDefaults.standard.register(defaults: defaults)
+        /*
+         Force update as the end date could be set in the
+         previous application run
+         */
+        self.updateEndDonationsDate(date: defaultEndDate)
+    }
+
+    static func updateEndDonationsDate(date: Date) {
+        UserDefaults.standard.set(date, forKey: DefaultsKeys.donationEndDateKey)
     }
 
     static func setStartDonationDate(_ dateString: String) {
