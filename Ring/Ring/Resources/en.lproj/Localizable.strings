@@ -114,6 +114,8 @@
 "conversation.inReplyTo" = "In reply to";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "No invitations";

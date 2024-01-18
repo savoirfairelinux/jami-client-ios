@@ -589,6 +589,10 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         self.conversationService.reactionRemoved(conversationId: conversationId, accountId: accountId, messageId: messageId, reactionId: reactionId)
     }
 
+    func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap) {
+        self.conversationService.messageUpdated(conversationId: conversationId, accountId: accountId, message: message)
+    }
+
     func isDownloadingEnabled(for size: Int) -> Bool {
         if !UserDefaults.standard.bool(forKey: automaticDownloadFilesKey) {
             return false

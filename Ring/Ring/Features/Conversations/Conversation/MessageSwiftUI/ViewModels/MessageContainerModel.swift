@@ -93,7 +93,7 @@ class MessageContainerModel: Identifiable {
         self.message = message
         self.contextMenuState = contextMenuState
         self.stackViewModel = MessageStackVM(message: message, infoState: self.infoSubject)
-        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, isHistory: isHistory)
+        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, infoState: self.infoSubject, isHistory: isHistory)
         self.messageRow = MessageRowVM(message: message, infoState: self.infoSubject)
         self.contactViewModel = ContactMessageVM(message: message, infoState: self.infoSubject)
         self.replyTarget = MessageReplyTargetVM(infoState: self.infoSubject, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
@@ -101,7 +101,7 @@ class MessageContainerModel: Identifiable {
     }
 
     func setReplyTarget(message: MessageModel) {
-        let target = MessageContentVM(message: message, contextMenuState: PublishSubject<State>(), transferState: self.transferSubject, isHistory: false)
+        let target = MessageContentVM(message: message, contextMenuState: PublishSubject<State>(), transferState: self.transferSubject, infoState: self.infoSubject, isHistory: false)
         self.replyTarget.target = target
     }
 
@@ -157,6 +157,7 @@ class MessageContainerModel: Identifiable {
             if self.replyTarget.target != nil {
                 self.replyTarget.updateUsername(name: name, jamiId: jamiId)
             }
+            self.messageContent.updateUsername(name: name, jamiId: jamiId)
 
             self.reactionsModel.updateUsername(name: name, jamiId: jamiId)
         }
@@ -169,6 +170,10 @@ class MessageContainerModel: Identifiable {
 
     func reactionsUpdated() {
         self.reactionsModel.reactionsUpdated()
+    }
+
+    func messageUpdated() {
+        self.messageContent.updateMessageEditions()
     }
 
     func hasReactions() -> Bool {

@@ -451,6 +451,11 @@ class ConversationsService {
         conversation.reactionRemoved(messageId: messageId, reactionId: reactionId)
     }
 
+    func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap) {
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
+        conversation.messageUpdated(swarmMessage: message)
+    }
+
     // MARK: conversations management
 
     func removeConversation(conversationId: String, accountId: String) {

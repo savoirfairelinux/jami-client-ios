@@ -202,6 +202,15 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
             [ConversationsAdapter.messagesDelegate conversationPreferencesUpdatedWithConversationId:convId accountId:account preferences: preferencesDictionary];
         }
     }));
+
+    confHandlers.insert(exportable_callback<ConversationSignal::SwarmMessageUpdated>([&](const std::string& accountId, const std::string& conversationId, libjami::SwarmMessage message) {
+        if (ConversationsAdapter.messagesDelegate) {
+            NSString* convIdStr =  [NSString stringWithUTF8String:conversationId.c_str()];
+            NSString* accountIdStr =  [NSString stringWithUTF8String:accountId.c_str()];
+            SwarmMessageWrap *swarmMessage = [[SwarmMessageWrap alloc] initWithSwarmMessage: message];
+            [ConversationsAdapter.messagesDelegate messageUpdatedWithConversationId:convIdStr accountId:accountIdStr message:swarmMessage];
+        }
+    }));
     registerSignalHandlers(confHandlers);
 }
 

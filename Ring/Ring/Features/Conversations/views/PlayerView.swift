@@ -235,7 +235,7 @@ class PlayerView: UIView {
                 self.progressSlider.thumbTintColor = color
                 let size = self.sizeMode == .fullScreen ? 15 : 10
                 let circleImage = self.makeCircleWith(size: CGSize(width: size, height: size),
-                                                 backgroundColor: color)
+                                                      backgroundColor: color)
                 self.progressSlider.setThumbImage(circleImage, for: .normal)
                 self.progressSlider.setThumbImage(circleImage, for: .highlighted)
             })

@@ -157,6 +157,7 @@ class MessagesListVM: ObservableObject {
             self.subscribeUserAvatarForLocationSharing()
             self.subscribeReplyTarget()
             self.subscribeReactions()
+            self.subscribeMessageUpdates()
         }
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
@@ -283,6 +284,20 @@ class MessagesListVM: ObservableObject {
                 self.reactionsUpdated(messageId: messageId)
             })
             .disposed(by: self.disposeBag)
+    }
+
+    func subscribeMessageUpdates() {
+        self.conversation.messageUpdated
+            .subscribe(onNext: { [weak self] messageId in
+                guard let self = self else { return }
+                self.messageUpdated(messageId: messageId)
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    func messageUpdated(messageId: String) {
+        guard let message = self.getMessage(messageId: messageId) else { return }
+        message.messageUpdated()
     }
 
     func reactionsUpdated(messageId: String) {
