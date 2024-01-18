@@ -73,6 +73,10 @@ extension View {
     func conditionalCornerRadius(_ radius: CGFloat, apply: Bool) -> some View {
         self.modifier(ConditionalCornerRadius(radius: radius, apply: apply))
     }
+
+    func applyMessageStyle(model: MessageContentVM) -> some View {
+        modifier(MessageTextStyle(model: model))
+    }
 }
 
 extension Animation {

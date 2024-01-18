@@ -79,7 +79,6 @@ struct MessageTextStyle: ViewModifier {
             .padding(.trailing, model.textInset)
             .foregroundColor(model.textColor)
             .background(model.backgroundColor)
-            .font(model.textFont)
             .if(model.hasBorder) { view in
                 view.overlay(
                     CornerRadiusShape(radius: model.cornerRadius, corners: model.corners)
