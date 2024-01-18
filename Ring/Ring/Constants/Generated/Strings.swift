@@ -311,6 +311,10 @@ internal enum L10n {
     internal static let startVideoCall = L10n.tr("Localizable", "contactPage.startVideoCall", fallback: "Start Video Call")
   }
   internal enum Conversation {
+    /// deleted a message
+    internal static let deletedMessage = L10n.tr("Localizable", "conversation.deletedMessage", fallback: "deleted a message")
+    /// edited
+    internal static let edited = L10n.tr("Localizable", "conversation.edited", fallback: "edited")
     /// Failed to save image to gallery
     internal static let errorSavingImage = L10n.tr("Localizable", "conversation.errorSavingImage", fallback: "Failed to save image to gallery")
     /// You are currently receiving a live location from 
