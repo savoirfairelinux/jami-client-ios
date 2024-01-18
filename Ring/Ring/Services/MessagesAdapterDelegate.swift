@@ -39,4 +39,5 @@
     func conversationPreferencesUpdated(conversationId: String, accountId: String, preferences: [String: String])
     func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String])
     func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String)
+    func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap)
 }
