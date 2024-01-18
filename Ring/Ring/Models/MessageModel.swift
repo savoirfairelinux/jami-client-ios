@@ -82,6 +82,33 @@ class MessageReaction: Identifiable, Equatable, Hashable {
     }
 }
 
+class MessageEdition: Identifiable, Equatable, Hashable {
+    var id: String = ""
+    var author: String = ""
+    var content: String = ""
+
+    init(withInfo info: [String: String]) {
+        if let interactionId = info[MessageAttributes.interactionId.rawValue] {
+            self.id = interactionId
+        }
+        if let content = info[MessageAttributes.body.rawValue] {
+            self.content = content
+        }
+
+        if let author = info[MessageAttributes.author.rawValue] {
+            self.author = author
+        }
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    static func == (lhs: MessageEdition, rhs: MessageEdition) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 public class MessageModel {
 
     var id: String = ""
@@ -103,6 +130,7 @@ public class MessageModel {
     var totalSize: Int = 0
     var parents = [String]()
     var reactions = Set<MessageReaction>()
+    var editions = Set<MessageEdition>()
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -116,6 +144,9 @@ public class MessageModel {
         self.init(withInfo: swarmMessage.body, accountJamiId: accountJamiId)
         for reaction in swarmMessage.reactions {
             self.reactions.insert(MessageReaction(withInfo: reaction))
+        }
+        for edition in swarmMessage.editions {
+            self.editions.insert(MessageEdition(withInfo: edition))
         }
     }
     // swiftlint:disable:next cyclomatic_complexity
@@ -221,6 +252,21 @@ public class MessageModel {
     func reactionRemoved(reactionId: String) {
         if let reactionToRemove = self.reactions.first(where: { $0.id == reactionId }) {
             self.reactions.remove(reactionToRemove)
+        }
+    }
+
+    func isMessageDeleted() -> Bool {
+        return self.content.isEmpty && !self.editions.isEmpty
+    }
+
+    func isMessageEdited() -> Bool {
+        return !self.editions.isEmpty
+    }
+
+    func messageUpdated(message: SwarmMessageWrap) {
+        self.editions = Set<MessageEdition>()
+        for edition in message.editions {
+            self.editions.insert(MessageEdition(withInfo: edition))
         }
     }
 }

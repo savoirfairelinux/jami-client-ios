@@ -172,6 +172,7 @@ class ConversationModel: Equatable {
     var preferences = ConversationPreferences()
     var synchronizing = BehaviorRelay<Bool>(value: false)
     let reactionsUpdated = PublishSubject<String>()
+    let messageUpdated = PublishSubject<String>()
 
     convenience init(withParticipantUri participantUri: JamiURI, accountId: String) {
         self.init()
@@ -434,5 +435,10 @@ class ConversationModel: Equatable {
         guard let message = self.getMessage(messageId: messageId) else { return }
         message.reactionRemoved(reactionId: reactionId)
         reactionsUpdated.onNext(messageId)
+    }
+
+    func messageUpdated(message: SwarmMessageWrap) {
+        guard let message = self.getMessage(messageId: message.id) else { return }
+        messageUpdated.onNext(message.id)
     }
 }

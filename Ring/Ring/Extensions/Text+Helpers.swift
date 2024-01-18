@@ -27,8 +27,4 @@ extension Text {
             .padding()
             .foregroundColor(.white)
     }
-
-    func applyTextStyle(model: MessageContentVM) -> some View {
-        modifier(MessageTextStyle(model: model))
-    }
 }

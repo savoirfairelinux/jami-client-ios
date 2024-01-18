@@ -30,13 +30,23 @@ struct MessageBubbleView: View {
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     let padding: CGFloat = 12
     var body: some View {
-        VStack {
-            if model.type == .call {
-                renderCallMessage()
-            } else if model.type == .fileTransfer {
-                MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0)
-            } else if model.type == .text {
-                renderTextContent()
+        VStack(alignment: .leading) {
+            if model.messageDeleted {
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(model.messageDeletedText)
+                        .font(model.textFont)
+                        .foregroundColor(Color(UIColor.secondaryLabel))
+                    editingIndicator()
+                }
+                .applyMessageStyle(model: model)
+            } else {
+                if model.type == .call {
+                    renderCallMessage()
+                } else if model.type == .fileTransfer {
+                    MediaView(message: model, onLongGesture: receivedLongPress(), minHeight: 50, maxHeight: 300, withPlayerControls: true, cornerRadius: 0)
+                } else if model.type == .text {
+                    renderTextContent()
+                }
             }
         }
         .background(
@@ -73,19 +83,41 @@ struct MessageBubbleView: View {
                 URLPreview(metadata: metadata, maxDimension: model.maxDimension)
                     .modifier(MessageCornerRadius(model: model))
             } else if model.content.isValidURL, let url = model.getURL() {
-                Text(model.content)
-                    .applyTextStyle(model: model)
-                    .onTapGesture {
-                        openURL(url)
-                    }
-                    .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(model.content)
+                        .font(model.textFont)
+                        .onTapGesture {
+                            openURL(url)
+                        }
+                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                    editingIndicator()
+                }
+                .applyMessageStyle(model: model)
             } else {
-                Text(model.content)
-                    .applyTextStyle(model: model)
-                    .lineLimit(nil)
-                    .onTapGesture { }
-                    .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(model.content)
+                        .font(model.textFont)
+                        .lineLimit(nil)
+                        .onTapGesture { }
+                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                    editingIndicator()
+                }
+                .applyMessageStyle(model: model)
             }
+        }
+    }
+
+    private func editingIndicator() -> some View {
+        HStack {
+            Image(systemName: "pencil")
+                .resizable()
+                .imageScale(.large)
+                .foregroundColor(Color(UIColor.secondaryLabel))
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 15, height: 15)
+            Text(model.editeIndicator)
+                .font(.footnote)
+                .foregroundColor(Color(UIColor.secondaryLabel))
         }
     }
 
