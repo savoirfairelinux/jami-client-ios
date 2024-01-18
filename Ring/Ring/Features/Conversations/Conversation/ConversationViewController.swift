@@ -39,6 +39,7 @@ enum ContextMenu: State {
     case share(items: [Any])
     case saveFile(url: URL)
     case reply(message: MessageContentVM)
+    case delete(message: MessageContentVM)
 }
 
 enum DocumentPickerMode {
@@ -148,6 +149,7 @@ class ConversationViewController: UIViewController,
             })
             .disposed(by: self.disposeBag)
         swiftUIModel.contextMenuState
+            .share()
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ContextMenu else { return }
                 switch state {
@@ -160,6 +162,9 @@ class ConversationViewController: UIViewController,
                 case .saveFile(let url):
                     self.saveFile(url: url)
                 case .reply(message: _):
+                    // handeled in MessagesListVM
+                    break
+                case .delete(message: _):
                     // handeled in MessagesListVM
                     break
                 }

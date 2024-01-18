@@ -254,8 +254,8 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
     return loadConversationUntil(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fromMessage UTF8String]), std::string([toMessage UTF8String]));
 }
 
-- (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId  {
-    sendMessage(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([message UTF8String]), std::string([parentId UTF8String]));
+- (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId flag:(int32_t)flag {
+    sendMessage(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([message UTF8String]), std::string([parentId UTF8String]), flag);
 }
 
 - (uint32_t)countInteractions:(NSString*)accountId conversationId:(NSString*)conversationId from:(NSString*)messageFrom to:(NSString*)messsageTo authorUri:(NSString*)authorUri  {
