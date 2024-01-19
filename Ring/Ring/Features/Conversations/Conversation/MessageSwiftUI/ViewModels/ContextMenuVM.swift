@@ -20,8 +20,11 @@
 
 import Foundation
 import SwiftUI
+import RxRelay
 
 class ContextMenuVM {
+    var sendEmoji = BehaviorRelay(value: [String: String]())
+    var revokeEmoji = BehaviorRelay(value: [String: String]())
     @Published var menuItems = [ContextualMenuItem]()
     var presentingMessage: MessageBubbleView! {
         didSet {
@@ -29,6 +32,7 @@ class ContextMenuVM {
             actionsAnchor = presentingMessage.model.message.incoming ? .topLeading : .topTrailing
             messsageAnchor = presentingMessage.model.message.incoming ? .bottomLeading : .bottomTrailing
             updateContextMenuSize()
+            updateEmojiBarSize()
         }
     }
     var messageFrame: CGRect = CGRect.zero {
@@ -42,6 +46,13 @@ class ContextMenuVM {
             updateSizes()
         }
     }
+    
+    var emojiBarSize: CGSize = CGSize.zero {
+        didSet {
+            updateSizes()
+        }
+    }
+    
     let itemHeight: CGFloat = 42
     let menuPadding: CGFloat = 15
     let minWidth: CGFloat = 220
@@ -75,23 +86,76 @@ class ContextMenuVM {
         let newWidth: CGFloat = min(width, UIScreen.main.bounds.width - screenPadding)
         menuSize = CGSize(width: newWidth, height: newHeight)
     }
+    
+    func updateEmojiBarSize() {
+        let fontAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]
+        let testEmoji: NSString = NSString(
+            string: String(
+                UnicodeScalar( UTF32Char(0x1F44D) )!
+            )
+        )
+//        let padding = 6.0
+        let bb = testEmoji.size(withAttributes: fontAttributes)
+        let gridSpace = CGSize(width: 42 + 8, height: 42 + 8)
+//        let size =  + /*padding*/ 6
+//        emojiBarSize = CGSize(width: 5.0 * (bb.width + padding) + padding, height: 1.0 * (bb.height + padding + padding))
+        emojiBarSize = CGSize(width: 5.0 * gridSpace.width + 12, height: 1.0 * gridSpace.height)
+        print("bb = (\(bb.width), \(bb.height)) | width = \(emojiBarSize.width)")
+    }
 
     func updateSizes() {
         if messageFrame == CGRect.zero || menuSize == CGSize.zero { return }
         let screenHeight = UIScreen.main.bounds.height
         let navBarHeight = UINavigationController.navBarHeight() + ( UIApplication.shared.windows.first?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0)
         let messageOffsetY = messageFrame.origin.y
-        let maxMessageHeight = screenHeight - (menuSize.height + navBarHeight + 80)
+        let maxMessageHeight = screenHeight - (menuSize.height + navBarHeight + 80 - emojiBarSize.height)
         messageHeight = min(maxMessageHeight, messageFrame.height)
-        let diff = screenHeight - (messageOffsetY + menuSize.height + navBarHeight + messageFrame.height)
-        let diffOffset = max(0, messageFrame.height - messageHeight)
-        bottomOffset = diff < 0 ? diff + diffOffset : 0
+        let diffMid = screenHeight - (messageOffsetY + menuSize.height + navBarHeight + messageFrame.height + emojiBarSize.height)
+        let diffTop = diffMid < 0 ? (screenHeight / 2.0) - diffMid : (screenHeight / 2.0) - diffMid
+        let diffOffset = max(0, messageFrame.height - messageHeight /*- emojiBarSize.height*/)
+        if diffMid < 0 {
+            // check for overflow bottom
+            if diffTop + messageHeight + menuSize.height > maxMessageHeight {
+                let arr = [diffTop, -screenHeight, -navBarHeight, ] as [CGFloat]
+                bottomOffset = -(arr.reduce(0, +))
+            } else {
+                bottomOffset = 0
+            }
+        } else {
+            // check for overflow top
+            if diffTop - emojiBarSize.height - messageHeight < navBarHeight {
+                let arr = [-diffTop, messageHeight, emojiBarSize.height] as [CGFloat]
+                bottomOffset = -(arr.reduce(0, +))
+            } else {
+                bottomOffset = 0
+            }
+        }
+        bottomOffset = diffMid < 0 ? diffMid + diffOffset : 0
+        print("top = \(diffTop) | screen = \(screenHeight) | boff = \(bottomOffset)")
         if presentingMessage.messageModel.message.incoming {
             menuOffsetX = 0
         } else {
             menuOffsetX = messageFrame.width - menuSize.width
         }
-        let difff = messageFrame.height + navBarHeight + menuSize.height - screenHeight
+        
+        let values = [messageFrame.height, emojiBarSize.height, navBarHeight, menuSize.height, -screenHeight] as [CGFloat]
+
+        let difff = values.reduce(0, +)
+
+//        let difff = messageFrame.height + emojiBarSize + navBarHeight + menuSize.height - screenHeight
         scaleMessageUp = difff <= 0
+    }
+
+    func sendEmoji(value: String, emojiActive: Bool) {
+        if emojiActive {
+            if let message = self.presentingMessage {
+                // UNIMPLEMENTED TODO self.revokeEmoji.accept([message.model.message.id: value])
+            }
+        } else {
+            if let message = self.presentingMessage {
+                self.sendEmoji.accept([message.model.message.id: value])
+            }
+        }
+
     }
 }

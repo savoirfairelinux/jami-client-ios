@@ -31,12 +31,24 @@ struct PlayerViewWrapper: UIViewRepresentable {
     var withControls: Bool
     let disposeBag = DisposeBag()
     let longGestureRecognizer = UILongPressGestureRecognizer()
+    // TODO add double tap haptics w user pref and sounds
+    //    let doubleTapRecognizer = UITapGestureRecognizer()
 
     func makeUIView(context: Context) -> PlayerView {
         let frame = CGRect(x: 0, y: 0, width: width, height: height)
         let player = PlayerView(frame: frame)
         player.withControls = withControls
         player.viewModel = viewModel
+        //        doubleTapRecognizer.rx.event
+        //            .filter({ event in
+        //                event.state == UIGestureRecognizer.State.began
+        //            })
+        //            .bind(onNext: { _ in
+        //                print("double tap")
+        //            })
+        //            .disposed(by: self.disposeBag)
+        //        doubleTapRecognizer.numberOfTouchesRequired = 1
+        //        doubleTapRecognizer.numberOfTapsRequired = 1
         longGestureRecognizer.rx
             .event
             .filter({ event in
@@ -46,8 +58,10 @@ struct PlayerViewWrapper: UIViewRepresentable {
                 self.onLongGesture()
             })
             .disposed(by: self.disposeBag)
-        longGestureRecognizer.minimumPressDuration = 0.2
+        // TODO rebase with new advanced settings menu
+        longGestureRecognizer.minimumPressDuration = 0.05
         player.addGestureRecognizer(longGestureRecognizer)
+        //        player.addGestureRecognizer(doubleTapRecognizer)
         return player
     }
 
