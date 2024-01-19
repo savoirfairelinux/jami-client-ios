@@ -56,6 +56,7 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol {
 
     init(infoState: PublishSubject<State>, contextMenuState: PublishSubject<State>, localJamiId: String, replyAuthorJamiId: String, isIncoming: Bool) {
         self.infoState = infoState
+        // TODO this stores "SELECTED_ACCOUNT_ID" instead of a string that would be relevant to the conversation (seems like a local id)
         self.localJamiId = localJamiId
         self.replyAuthorJamiId = replyAuthorJamiId
         self.isIncoming = isIncoming
