@@ -57,7 +57,6 @@ struct MessagesListView: View {
     @SwiftUI.State private var currentSnapshot: UIImage?
     @SwiftUI.State private var presentingMessage: MessageBubbleView?
     @SwiftUI.State private var messageFrame: CGRect?
-    var contextMenuModel = ContextMenuVM()
     @SwiftUI.State private var screenHeight: CGFloat = 0
     @SwiftUI.State private var messageContainerHeight: CGFloat = 0
     @SwiftUI.State private var shouldHideActiveKeyboard = false
@@ -89,7 +88,7 @@ struct MessagesListView: View {
                             return dimensions[VerticalAlignment.center]
                         }
                 }
-                .overlay(contextMenuPresentingState == .shouldPresent && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
+                .overlay(contextMenuPresentingState == .shouldPresent && model.contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
                 // hide navigation bar when presenting context menu
                 .onChange(of: contextMenuPresentingState) { newValue in
                     let shouldHide = newValue == .shouldPresent
@@ -147,7 +146,7 @@ struct MessagesListView: View {
     }
 
     func makeOverlay() -> some View {
-        return ContextMenuView(model: contextMenuModel, presentingState: $contextMenuPresentingState)
+        return ContextMenuView(model: model.contextMenuModel, presentingState: $contextMenuPresentingState)
     }
 
     private func createMessagesStackView() -> some View {
@@ -193,6 +192,18 @@ struct MessagesListView: View {
                     }
                 })
             }
+            .simultaneousGesture(
+                DragGesture()
+                    .onChanged { value in
+//                            dragOffset = value.translation
+                        print("offset = \(value.translation)")
+                        scrollView.scrollTo("lastMessage")
+                    }
+                    .onEnded { value in
+                        // Perform any cleanup or additional logic here
+//                            dragOffset = .zero
+                    }
+            )
             .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
                 DispatchQueue.main.async {
                     let scrollOffset = value ?? 0
@@ -205,6 +216,17 @@ struct MessagesListView: View {
                 }
             }
         }
+        .simultaneousGesture(
+            DragGesture()
+                .onChanged { value in
+//                            dragOffset = value.translation
+                    print("offset = \(value.translation)")
+                }
+                .onEnded { value in
+                    // Perform any cleanup or additional logic here
+//                            dragOffset = .zero
+                }
+        )
     }
 
     private func createMessageRowView(for message: MessageContainerModel) -> some View {
@@ -213,8 +235,8 @@ struct MessagesListView: View {
                 return
             }
             model.hideNavigationBar.accept(true)
-            contextMenuModel.presentingMessage = message
-            contextMenuModel.messageFrame = frame
+            model.contextMenuModel.presentingMessage = message
+            model.contextMenuModel.messageFrame = frame
             /*
              If the keyboard is open, it should be closed.
              Once the context menu is removed, the keyboard

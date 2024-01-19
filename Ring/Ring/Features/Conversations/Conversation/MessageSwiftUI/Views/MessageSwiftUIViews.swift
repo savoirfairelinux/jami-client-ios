@@ -46,7 +46,7 @@ struct PlayerViewWrapper: UIViewRepresentable {
                 self.onLongGesture()
             })
             .disposed(by: self.disposeBag)
-        longGestureRecognizer.minimumPressDuration = 0.2
+        longGestureRecognizer.minimumPressDuration = 0.05
         player.addGestureRecognizer(longGestureRecognizer)
         return player
     }

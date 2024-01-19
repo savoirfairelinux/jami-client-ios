@@ -46,5 +46,6 @@ struct ReactionsView: View {
         .cornerRadius(15)
         .shadowForConversation()
         .frame(maxWidth: defailtSize, maxHeight: min(contentHeight, defailtSize), alignment: .center)
+        // TODO add animation on appear with flex animation and add tap to increment
     }
 }

@@ -21,10 +21,17 @@
 import SwiftUI
 
 struct MessageBubbleView: View {
+    @SwiftUI.GestureState private var isLongPressing = false
+    @SwiftUI.State private var dragOffset: CGSize = .zero
+//    @SwiftUI.State private var isLongPressing = false
+//    @SwiftUI.State private var startLocation: CGPoint?
+    @SwiftUI.State private var isDragging = false
+    @SwiftUI.State private var dragTime: DispatchTime?
+    @SwiftUI.State private var lastPosition: CGPoint?
     let messageModel: MessageContainerModel
     @StateObject var model: MessageContentVM
     @SwiftUI.State private var frame: CGRect = .zero
-    @SwiftUI.State private var presentMenu = false
+    @SwiftUI.State var presentMenu = false
     @Environment(\.openURL) var openURL
     @Environment(\.colorScheme) var colorScheme
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
@@ -38,6 +45,7 @@ struct MessageBubbleView: View {
                         .font(model.styling.secondaryFont)
                         .foregroundColor(model.editionColor)
                 }
+                .onLongPressGesture(minimumDuration: 0.2, perform: receivedLongPress())
             } else {
                 if model.type == .call {
                     renderCallMessage()
@@ -48,6 +56,7 @@ struct MessageBubbleView: View {
                 }
             }
         }
+        // TODO move other tap here
         .background(
             GeometryReader { proxy in
                 Rectangle().fill(Color.clear)
@@ -77,7 +86,7 @@ struct MessageBubbleView: View {
     }
 
     private func renderTextContent() -> some View {
-        Group {
+        VStack {
             if let metadata = model.metadata {
                 URLPreview(metadata: metadata, maxDimension: model.maxDimension)
                     .modifier(MessageCornerRadius(model: model))
@@ -89,21 +98,100 @@ struct MessageBubbleView: View {
                         .onTapGesture {
                             openURL(url)
                         }
-                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
             } else {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.content)
                         .font(model.styling.textFont)
                         .lineLimit(nil)
+            //                        .simultaneousGesture(
+            //                            TapGesture().onEnded({ _ in
+            //                                // do nothing
+            //                            })
+            //                        )
+//                        .gesture(
+//                            DragGesture(minimumDistance: 0, coordinateSpace: .local)
+//                                .onChanged { value in
+//                                    if let time = dragTime {
+//                                        
+//                                    } else {
+//                                        dragTime = DispatchTime.now()
+//                                    }
+//                                    if model.menuItems.isEmpty {
+//                                        return
+//                                    }
+//                                    print("Dragging at \(value.location)")
+//                                    isDragging = true
+//                                    let notMoving: Bool = distanceMoved(from: lastPosition ?? CGPoint(x: 0, y: 0), to: value.location) < 40
+//                                    if notMoving {
+//                                        if let time = dragTime {
+//                                            if time.advanced(by: DispatchTimeInterval.milliseconds(200)) < DispatchTime.now() {
+//                                                    presentMenu = true
+//                                                    // TODO clear vars here or in onEnded
+//                                            }
+//                                        }
+//                                    } else {
+//                                        if let lastPosition = lastPosition {
+//                                            
+//                                        } else {
+//                                            lastPosition = value.location
+//                                        }
+//                                    }
+//                                }
+//                                .onEnded { _ in
+//                                    isDragging = false
+//                                    lastPosition = nil
+//                                    dragTime = nil
+//                                }
+//                        )
+                    
+                    
+                                    .simultaneousGesture(
+                                        LongPressGesture(minimumDuration: 0.4, maximumDistance: 3)
+                                            .updating($isLongPressing) { currentState, gestureState, transaction in
+                                                gestureState = currentState
+                                                transaction.animation = Animation.easeIn(duration: 0.5)
+                                            }
+                                            .onEnded { finished in
+                                                if !finished || model.menuItems.isEmpty {
+                                                    return
+                                                }
+                                                presentMenu = true
+            //                                    self.completedLongPress = finished
+                                            }
+            
+                                    )
+                    
+                    
+                    
                         .onTapGesture {
-                            // Add an empty onTapGesture to keep the table view scrolling smooth
+                            // nothing
                         }
-                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+                    
+                    
+                    
+                    
+//                            DragGesture()
+//                                .onChanged { value in
+//                                    // Handle drag gestures here if needed
+////                                    print("Dragging at \(value.location)")
+//                                }
+//                        )
+                        
+//                        .onLongPressGesture(minimumDuration: 0.2, perform: receivedLongPress())
+//                        .onLongPressGesture(minimumDuration: 0.2, perform: receivedLongPress())
+//                        .onTapGesture {
+//                            // Add an empty onTapGesture to keep the table view scrolling smooth
+//                        }
+//                        .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
             }
         }
     }
+    
+//    func distanceMoved(from start: CGPoint, to end: CGPoint) -> CGFloat {
+//        sqrt(pow(end.x - start.x, 2) + pow(end.y - start.y, 2))
+//    }
 
     private func receivedLongPress() -> (() -> Void) {
         return {
