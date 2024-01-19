@@ -88,6 +88,7 @@ enum MessagePanelState: State {
 class MessagesListVM: ObservableObject {
 
     // view properties
+    var contextMenuModel = ContextMenuVM()
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
     @Published var scrollToReplyTarget: String? // message id of a reply target that we should scroll
@@ -340,6 +341,24 @@ class MessagesListVM: ObservableObject {
             .subscribe(onNext: { [weak self] messageId in
                 guard let self = self else { return }
                 self.reactionsUpdated(messageId: messageId)
+            })
+            .disposed(by: self.disposeBag)
+        
+        // setup subscription for emoji picker
+        self.contextMenuModel.sendEmojiUpdate
+            .subscribe(onNext: { [weak self] pair in
+                if let self = self, let msg = pair.values.first, let messageId = pair.keys.first, !msg.isEmpty, !messageId.isEmpty, let separatorIndex = msg.firstIndex(of: ":") {
+                    let prefix: String = String(msg[..<separatorIndex])
+                    let suffix: String = String(msg[msg.index(after: separatorIndex)...])
+                    let shouldAccept: Bool = suffix == "apply" // otherwise revoke
+                    if shouldAccept {
+                        self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: prefix, parentId: messageId)
+                    } else { // should revoke
+                        let reactionMsgId: String = (self.conversation.getMessage(messageId: messageId)?.reactions.first(where: { el in el.content == prefix })!.id)!
+                        // sets the message with id matching the specified reaction message to ""
+                        self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: reactionMsgId)
+                    }
+                }
             })
             .disposed(by: self.disposeBag)
     }

@@ -277,12 +277,16 @@ class ConversationsService {
         self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: id, size: 1)
     }
 
-    func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
-        self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
-    }
-
     func editSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
         self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 1)
+    }
+    
+    func sendEmojiReactionMessage(conversationId: String, accountId: String, message: String, parentId: String) {
+        self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 2)
+    }
+    
+    func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String, flag: Int32) {
+        self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: flag)
     }
 
     func insertReplies(messages: [MessageModel], accountId: String, conversationId: String, fromLoaded: Bool) -> Bool {
@@ -457,6 +461,11 @@ class ConversationsService {
     func reactionRemoved(conversationId: String, accountId: String, messageId: String, reactionId: String) {
         guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
         conversation.reactionRemoved(messageId: messageId, reactionId: reactionId)
+    }
+    
+    func reactionRemovedByVal(conversationId: String, accountId: String, messageId: String, reactionId: String) {
+        guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
+        conversation.reactionRemovedByVal(messageId: messageId, reactionId: reactionId)
     }
 
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap) {

@@ -56,6 +56,13 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
             }
         }
     }
+    
+    func updateImage(image: UIImage, jamiId: String) {
+       let localId = message.uri.isEmpty ? message.authorId : message.uri
+       if jamiId == localId {
+           self.avatarImage = image
+       }
+   }
 
     var sequencing: MessageSequencing = .unknown {
         didSet {
