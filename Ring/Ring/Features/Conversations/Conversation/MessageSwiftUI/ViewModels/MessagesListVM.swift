@@ -88,6 +88,7 @@ enum MessagePanelState: State {
 class MessagesListVM: ObservableObject {
 
     // view properties
+    var contextMenuModel = ContextMenuVM()
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
     @Published var scrollToReplyTarget: String? // message id of a reply target that we should scroll
@@ -342,7 +343,60 @@ class MessagesListVM: ObservableObject {
                 self.reactionsUpdated(messageId: messageId)
             })
             .disposed(by: self.disposeBag)
+        
+        contextMenuModel.currentJamiAccountId = self.accountService.selectedAccountID
+        if contextMenuModel.currentJamiAccountId == "SELECTED_ACCOUNT_ID" {
+            self.contextMenuModel.currentJamiAccountId = UserDefaults.standard.string(forKey: "SELECTED_ACCOUNT_ID")
+        }
+        
+        contextMenuModel.currentJamiAccountId = self.accountService.currentAccount?.jamiId
+
+        // setup subscription for emoji picker
+        // or message id}
+        self.contextMenuModel.sendEmojiUpdate
+            .subscribe(onNext: { [weak self] event in
+                if let self = self, !event.isEmpty {
+//                    contextMenuModel.localJamiId = self.accountService.currentAccount?.jamiId
+                    switch event["action"] {
+                    case "apply":
+                        self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: event["data"]!, parentId: event["messageId"]!)
+                    case "revoke":
+                        self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: event["reactionId"]!)
+                    default: break
+                    }
+                                    //                    //, let separatorIndex = msg.firstIndex(of: ":") {
+                                    ////                    let contentProvided: String = String(msg[..<separatorIndex])
+                                    ////                    let suffix: String = String(msg[msg.index(after: separatorIndex)...])
+                                    ////                    let shouldAccept: Bool = suffix == "apply" // otherwise revoke
+                                    //                    let parsedUri: [String: String] = parseJamiReactionUri(msg: msg.substring(from: String.Index(encodedOffset: 16) )) //cutoff "jami-reaction://"
+                                    ////                    let shouldAccept: Bool = parsedUri["revokeOrApply"] == "apply"
+                                    //                    if parsedUri["action"] == "apply" {
+                                    //                        self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: parsedUri["data"], parentId: messageId)
+                                    //                    } else { // == revoke
+                                    //                        let reactionMsgId: String = (self.conversation.getMessage(messageId: messageId)?.reactions.first(where: { item in item.content == parsedUri["data"] && item.author == parsedUri["author"] /* && TODO check sender */ })!.id)!
+                                    //                        // sets the message with id matching the specified reaction message to ""
+                                    //                        self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: reactionMsgId)
+                                    //                    }
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
+    
+//    private func parseJamiReactionUri(msg: String) -> [String: String] {
+////        let uriArr: [Substring] = msg.split(maxSplits: 4, omittingEmptySubsequences: false) { sep in
+////            return sep == "/"
+////        }
+//        var uriArr: [Substring] = msg.split(separator: "/", maxSplits: 3, omittingEmptySubsequences: false)
+////        let uriMap: [String: [Int; Int]] = ["revokeOrApply": uriArr[0].startIndex, uriArr[0].endIndex; "hash": uriArr[1].startIndex, uriArr[1].endIndex; "messageId", uriArr[2] == nil ? [0, 0] : [uriArr[2]!.startIndex, uriArr[2]!.endIndex]]
+//        let uriMap: [String: (Substring.Index, Substring.Index)] = [
+//            "author": (uriArr[0].startIndex, uriArr[0].endIndex),
+//            "data": (uriArr[1].startIndex, uriArr[1].endIndex),
+//            "arnios": (uriArr[2].startIndex, uriArr[2].endIndex)
+//        ]
+//        
+//        return uriMap
+//        
+//    }
 
     func subscribeMessageUpdates() {
         self.conversation.messageUpdated
