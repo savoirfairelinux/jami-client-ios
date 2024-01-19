@@ -57,28 +57,30 @@ struct ContextMenuView: View {
     @SwiftUI.State private var cornerRadius: CGFloat = 0
     @SwiftUI.State private var scrollViewHeight: CGFloat = 0
 
+    // TODO drag up on thumbs up to open emoji picker
     var body: some View {
+        // used for alignment of emoji bar
+        // TODO cleanup alignment logic of emoji bar
+        let isOurMsg = model.presentingMessage.messageModel.message.authorId.isEmpty
         ZStack {
             GeometryReader { _ in
                 VStack(alignment: .leading) {
-                    // message
-                    ScrollView {
-                        model.presentingMessage
-                            .frame(
-                                width: model.messageFrame.width,
-                                height: model.messageFrame.height
-                            )
-                    }
-                    .cornerRadius(cornerRadius)
-                    .scaleEffect(messageScale, anchor: model.messsageAnchor)
-                    .shadow(color: Color(model.shadowColor), radius: messageShadow)
-                    .frame(
-                        width: model.messageFrame.width,
-                        height: scrollViewHeight
-                    )
                     Spacer()
-                        .frame(height: 10)
-                    // actions
+                        .frame(maxHeight: model.defaultVerticalPadding)
+                    // emoji picker
+                    makeEmojiSelector()
+                        .opacity(actionsOpacity)
+                        .padding(4)
+                        .background(Color(UIColor.jamiBackgroundColor))
+                        .cornerRadius(radius: 16.0, corners: .allCorners)
+                        .offset(x: isOurMsg ? -((5 * 42) + 16) + (model.messageFrame.width) : 0)
+                    Spacer()
+                        .frame(maxHeight: model.emojiVerticalPadding)
+                    // message + tappable area
+                    clickableMessageBody()
+                    Spacer()
+                        .frame(height: model.defaultVerticalPadding)
+                    // actions (reply, fwd, etc.)
                     makeActions()
                         .frame(width: model.menuSize.width)
                         .opacity(actionsOpacity)
@@ -90,14 +92,14 @@ struct ContextMenuView: View {
                 }
                 .offset(
                     x: model.messageFrame.origin.x,
-                    y: model.messageFrame.origin.y + messageOffsetDiff
+                    y: max(0, model.messageFrame.origin.y + messageOffsetDiff - (6 + 8 + 4)) // for emojiBar
                 )
             }
             .background(makeBackground())
         }
         .onTapGesture {
             presentingState = .willDismissWithoutAction
-            withAnimation(Animation.easeOut(duration: 0.3)) {
+            withAnimation(Animation.easeOut(duration: 0.1)) {
                 scrollViewHeight = model.messageFrame.height
                 blurAmount = 0
                 backgroundScale = 1.00
@@ -109,17 +111,17 @@ struct ContextMenuView: View {
                 messageOffsetDiff = 0
                 cornerRadius = 0
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.42) {
                 presentingState = .dismissed
             }
         }
         .onAppear(perform: {
             scrollViewHeight = model.messageFrame.height
-            withAnimation(.easeOut(duration: 0.4)) {
-                messageScale = model.scaleMessageUp ? 1.1 : 1.0
+            withAnimation(.easeOut(duration: 0.3)) {
+                messageScale = model.scaleMessageUp ? model.maxScaleFactor : 1.0
                 messageShadow = 4
             }
-            withAnimation(.easeIn(duration: 0.2).delay(0.3)) {
+            withAnimation(.easeIn(duration: 0.2).delay(0.15)) {
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                 impactMed.impactOccurred()
                 blurAmount = 10
@@ -130,11 +132,59 @@ struct ContextMenuView: View {
                 messageOffsetDiff = model.bottomOffset
                 cornerRadius = model.menuCornerRadius
             }
-            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(0.3)) {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(0.15)) {
                 actionsScale = 1
             }
         })
         .edgesIgnoringSafeArea(.all)
+    }
+
+    func clickableMessageBody() -> some View {
+        ZStack {
+            ScrollView {
+                model.presentingMessage
+                    .frame(
+                        width: model.messageFrame.width,
+                        height: scrollViewHeight
+                    )
+            }
+            .cornerRadius(cornerRadius)
+            .scaleEffect(messageScale, anchor: model.messsageAnchor)
+            .shadow(color: Color(model.shadowColor), radius: messageShadow)
+            .frame(
+                width: model.messageFrame.width,
+                height: scrollViewHeight
+            )
+            // invisible tap area for accessibility
+            Rectangle()
+                .cornerRadius(cornerRadius)
+                .scaleEffect(messageScale, anchor: model.messsageAnchor)
+                .shadow(color: Color(model.shadowColor), radius: messageShadow)
+                .frame(
+                    width: model.messageFrame.width,
+                    height: scrollViewHeight
+                )
+                .onTapGesture {
+                    presentingState = .willDismissWithoutAction
+                    withAnimation(Animation.easeOut(duration: 0.1)) {
+                        scrollViewHeight = model.messageFrame.height
+                        blurAmount = 0
+                        backgroundScale = 1.00
+                        messageScale = 1
+                        actionsScale = 0.00
+                        actionsOpacity = 0
+                        messageShadow = 0
+                        backgroundOpacity = 0
+                        messageOffsetDiff = 0
+                        cornerRadius = 0
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        presentingState = .dismissed
+                    }
+                }
+                .foregroundColor(Color.clear) // Make the Rectangle transparent
+                .contentShape(Rectangle())
+        }
     }
 
     func makeBackground() -> some View {
@@ -149,6 +199,31 @@ struct ContextMenuView: View {
                 .opacity(backgroundOpacity)
         }
         .edgesIgnoringSafeArea(.all)
+    }
+
+    func makeEmojiSelector() -> some View {
+        HStack {
+            let defaultReactionEmojis: [UTF32Char] = [UTF32Char(0x1F44D), UTF32Char(0x1F44E), UTF32Char(0x1F606), UTF32Char(0x1F923), UTF32Char(0x1F615), UTF32Char(0xFE0F)]
+
+            if #available(iOS 15.0, *) {
+                ForEach(defaultReactionEmojis.indices, id: \.self) { index in
+                    AnimatableWrapperView(
+                        model: model,
+                        emoji: Binding(
+                            get: { defaultReactionEmojis[index] },
+                            set: { _ in }
+                        ),
+                        presentingState: $presentingState,
+                        elementOpacity: 0.0 as CGFloat,
+                        delayIn: 0.03 * Double(index),
+                        elementRotation: Angle(degrees: 10.0 * Double(defaultReactionEmojis.count))
+                    )
+                }
+            } else {
+                // Fallback on earlier versions
+            }
+
+        }
     }
 
     func makeActions() -> some View {
@@ -192,4 +267,80 @@ struct ContextMenuView: View {
         .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
         .cornerRadius(radius: model.menuCornerRadius, corners: .allCorners)
     }
+}
+
+@available(iOS 15.0, *)
+struct EmojiMoreButton: View {
+    var model: ContextMenuVM
+    @Binding var emoji: UTF32Char
+    @SwiftUI.State var elementOpacity: CGFloat
+    @SwiftUI.State var delayIn: Double
+
+    var body: some View {
+        let displayableEmoji: String = String(UnicodeScalar(emoji)!)
+        Button(action: {
+            // UNINPLEMENTED TODO display all emoji
+        }) {
+            Text(verbatim: displayableEmoji)
+                .font(.title3)
+                .opacity(elementOpacity)
+                .cornerRadius(radius: 16, corners: .allCorners)
+
+        }
+        .padding(6)
+        .onAppear {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(delayIn)) {
+                elementOpacity = 1
+            }
+        }
+    }
+
+    func updateElementOpacity(_ newOpacity: CGFloat) {
+        elementOpacity = newOpacity
+    }
+
+}
+
+@available(iOS 15.0, *)
+struct AnimatableWrapperView: View {
+    var model: ContextMenuVM
+    @Binding var emoji: UTF32Char
+    @Binding var presentingState: ContextMenuPresentingState
+    @SwiftUI.State var elementOpacity: CGFloat
+    @SwiftUI.State var delayIn: Double
+    @SwiftUI.State var elementRotation: Angle
+    
+    var body: some View {
+        let displayableEmoji: String = String(UnicodeScalar(emoji)!)
+        let emojiActive = model.presentingMessage.messageModel.reactionsModel.displayValue.containsCaseInsentative(string: displayableEmoji)
+        Button(action: {
+            model.sendEmoji(value: displayableEmoji, emojiActive: emojiActive)
+            presentingState = .dismissed
+        }) {
+            Text(verbatim: displayableEmoji)
+                .font(.title3)
+                .opacity(elementOpacity)
+                .rotationEffect(elementRotation)
+                .cornerRadius(radius: 16, corners: .allCorners)
+                .opacity(emojiActive ? 0.5 : 1.0)
+        }
+        .rotationEffect(elementRotation)
+        .padding(4)
+        .onAppear {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(delayIn)) {
+                elementOpacity = 1
+            }
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.3).delay(delayIn)) {
+                elementRotation = Angle(degrees: elementRotation.degrees / -2)
+            }
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.3, blendDuration: 0.5).delay(delayIn + 0.3)) {
+                elementRotation = Angle(degrees: 0)
+            }
+        }
+    }
+
+    func updateElementOpacity(_ newOpacity: CGFloat) {
+        elementOpacity = newOpacity
+    }
+
 }

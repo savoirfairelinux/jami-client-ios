@@ -20,8 +20,11 @@
 
 import Foundation
 import SwiftUI
+import RxRelay
 
 class ContextMenuVM {
+    var sendEmoji = BehaviorRelay(value: [String: String]())
+    var revokeEmoji = BehaviorRelay(value: [String: String]())
     @Published var menuItems = [ContextualMenuItem]()
     var presentingMessage: MessageBubbleView! {
         didSet {
@@ -49,6 +52,8 @@ class ContextMenuVM {
     let menuItemFont = Font.callout
     let screenPadding: CGFloat = 100
     let menuCornerRadius: CGFloat = 3
+    let defaultVerticalPadding: CGFloat = 6
+    let maxScaleFactor: CGFloat = 1.1
     var bottomOffset: CGFloat = 0 // move message up
     var menuOffsetX: CGFloat = 0
     var menuOffsetY: CGFloat = 0
@@ -56,6 +61,7 @@ class ContextMenuVM {
     var actionsAnchor: UnitPoint = .center
     var messsageAnchor: UnitPoint = .center
     var messageHeight: CGFloat = 0
+    var emojiVerticalPadding: CGFloat = 6
     var shadowColor: UIColor {
         return UITraitCollection.current.userInterfaceStyle == .light ? UIColor.tertiaryLabel : UIColor.black.withAlphaComponent(0.8)
     }
@@ -93,5 +99,27 @@ class ContextMenuVM {
         }
         let difff = messageFrame.height + navBarHeight + menuSize.height - screenHeight
         scaleMessageUp = difff <= 0
+        if scaleMessageUp {
+            let heightDiff = messageHeight * maxScaleFactor - messageHeight
+            /*
+             Because the messageAnchor for the scale is at the bottom,
+             the message will expand upwards. Therefore, it is necessary
+             to add scaled space.
+             */
+            emojiVerticalPadding = defaultVerticalPadding + heightDiff
+        }
+    }
+
+    func sendEmoji(value: String, emojiActive: Bool) {
+        if emojiActive {
+            if let message = self.presentingMessage {
+                // UNIMPLEMENTED TODO self.revokeEmoji.accept([message.model.message.id: value])
+            }
+        } else {
+            if let message = self.presentingMessage {
+                self.sendEmoji.accept([message.model.message.id: value])
+            }
+        }
+
     }
 }
