@@ -88,12 +88,26 @@ struct MessageTextStyle: ViewModifier {
     }
 }
 
+//// KESS too long somehow
+//struct MessageLongPress: ViewModifier {
+//    var longPressCb: (() -> Void)
+//
+//    func body(content: Content) -> some View {
+//        content
+//            .onLongPressGesture(minimumDuration: 0.05, maximumDistance: 40, perform: longPressCb)
+//    }
+//}
+
 struct MessageLongPress: ViewModifier {
     var longPressCb: (() -> Void)
 
     func body(content: Content) -> some View {
         content
-            .onLongPressGesture(minimumDuration: 0.2, perform: longPressCb)
+            .onLongPressGesture(minimumDuration: 0.05, maximumDistance: 40) {
+                DispatchQueue.main.async {
+                    self.longPressCb()
+                }
+            }
     }
 }
 
@@ -110,6 +124,7 @@ struct MessageCornerRadius: ViewModifier {
 }
 
 struct MessageContentView: View {
+//    var longPressCb: (() -> Void)
     let messageModel: MessageContainerModel
     @StateObject var model: MessageContentVM
     @StateObject var reactionsModel: ReactionsContainerModel
@@ -135,6 +150,12 @@ struct MessageContentView: View {
                 renderReactions()
             }
         }
+//        .onLongPressGesture(minimumDuration: 0.05, maximumDistance: 40) {
+//            DispatchQueue.main.async {
+//                print("KESS: fast tap ====")
+//                self.longPressCb()
+//            }
+//        }
         .onPreferenceChange(SizePreferenceKey.self) { preferences in
             self.reactionsTextSize = preferences.height
         }

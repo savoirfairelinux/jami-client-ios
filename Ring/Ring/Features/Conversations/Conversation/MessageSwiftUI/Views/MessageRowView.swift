@@ -86,6 +86,7 @@ struct MessageRowView: View {
             } else if model.incoming {
                 HStack(alignment: .bottom) {
                     if let avatar = model.avatarImage {
+                        // TODO harry potter avatar videos
                         Image(uiImage: avatar)
                             .resizable()
                             .scaledToFill()

@@ -37,7 +37,12 @@ struct MessageStackView: View {
                 Spacer()
                     .frame(height: 4)
             }
-            MessageContentView(messageModel: messageModel,
+            MessageContentView(
+//                longPressCb: {
+//                print("KESS: fast tap in msgstkviw")
+////                self.onLongPress(<#CGRect#>, model.message.)
+//            },
+                               messageModel: messageModel,
                                model: messageModel.messageContent,
                                reactionsModel: messageModel.reactionsModel,
                                onLongPress: onLongPress,
