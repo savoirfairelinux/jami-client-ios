@@ -247,6 +247,13 @@ public class MessageModel {
         }
     }
 
+    func reactionRemovedByVal(reactionValue: String) {
+        if let reactionToRemove = self.reactions.first(where: { $0.content == reactionValue }) {
+            self.reactions.remove(reactionToRemove)
+
+        }
+    }
+
     func isMessageDeleted() -> Bool {
         return self.content.isEmpty && !self.editions.isEmpty
     }

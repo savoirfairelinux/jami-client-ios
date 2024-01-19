@@ -173,7 +173,7 @@ class ConversationViewController: UIViewController,
                      can receive taps. The tap gesture should be re-added
                      once the contact picker is dismissed.
                      */
-                        self.view.removeGestureRecognizer(self.screenTapRecognizer)
+                    self.view.removeGestureRecognizer(self.screenTapRecognizer)
                     self.viewModel.slectContactsToShareMessage(message: message)
                 case .share(let items):
                     self.presentActivityControllerWithItems(items: items)
