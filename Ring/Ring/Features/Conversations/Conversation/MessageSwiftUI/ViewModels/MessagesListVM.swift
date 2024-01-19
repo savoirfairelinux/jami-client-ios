@@ -88,6 +88,7 @@ enum MessagePanelState: State {
 class MessagesListVM: ObservableObject {
 
     // view properties
+    var contextMenuModel = ContextMenuVM()
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
     @Published var scrollToReplyTarget: String? // message id of a reply target that we should scroll
@@ -228,6 +229,21 @@ class MessagesListVM: ObservableObject {
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject, bestName: bestName)
         self.subscribeLocationEvents()
+        
+        self.contextMenuModel.sendEmojiUpdate
+            .subscribe(onNext: { [weak self] pair in
+                if let self = self, let msg = pair.values.first, let messageId = pair.keys.first, !msg.isEmpty, !messageId.isEmpty, let separatorIndex = msg.firstIndex(of: ":") {
+                    let prefix: String = String(msg[..<separatorIndex])
+                    let suffix: String = String(msg[msg.index(after: separatorIndex)...])
+                    let shouldAccept: Bool = suffix == "apply" // otherwise revoke
+                    if shouldAccept {
+                        self.conversationService.sendSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: prefix, parentId: messageId, flag: 2)
+                    } else { // should revoke
+                        self.conversationService.reactionRemovedByVal(conversationId: self.conversation.id, accountId: self.conversation.accountId, messageId: messageId, reactionId: prefix)
+                    }
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func receiveReply(newMessage: MessageContainerModel, fromHistory: Bool) {
