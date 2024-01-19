@@ -20,8 +20,10 @@
 
 import Foundation
 import SwiftUI
+import RxRelay
 
 class ContextMenuVM {
+    var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
     @Published var menuItems = [ContextualMenuItem]()
     var presentingMessage: MessageBubbleView! {
         didSet {
@@ -29,6 +31,7 @@ class ContextMenuVM {
             actionsAnchor = presentingMessage.model.message.incoming ? .topLeading : .topTrailing
             messsageAnchor = presentingMessage.model.message.incoming ? .bottomLeading : .bottomTrailing
             updateContextMenuSize()
+            isOurMsg = !presentingMessage.model.message.incoming
         }
     }
     var messageFrame: CGRect = CGRect.zero {
@@ -36,7 +39,7 @@ class ContextMenuVM {
             updateSizes()
         }
     }
-
+    
     var menuSize: CGSize = CGSize.zero {
         didSet {
             updateSizes()
@@ -49,13 +52,26 @@ class ContextMenuVM {
     let menuItemFont = Font.callout
     let screenPadding: CGFloat = 100
     let menuCornerRadius: CGFloat = 3
+    let defaultVerticalPadding: CGFloat = 6
+    let maxScaleFactor: CGFloat = 1.1
     var bottomOffset: CGFloat = 0 // move message up
     var menuOffsetX: CGFloat = 0
     var menuOffsetY: CGFloat = 0
     var scaleMessageUp = true
     var actionsAnchor: UnitPoint = .center
     var messsageAnchor: UnitPoint = .center
-    var messageHeight: CGFloat = 0
+    var messageHeight: CGFloat = 0 {
+        didSet {
+            isShortMsg = messageHeight < screenHeight / 4.0
+        }
+    }
+    var emojiVerticalPadding: CGFloat = 6
+    
+    let emojiBarHeight: CGFloat = 68
+    var isShortMsg: Bool = true
+    var incomingMessageMarginSize: CGFloat = 58
+    var isOurMsg: Bool? = nil
+    
     var shadowColor: UIColor {
         return UITraitCollection.current.userInterfaceStyle == .light ? UIColor.tertiaryLabel : UIColor.black.withAlphaComponent(0.8)
     }
@@ -93,5 +109,27 @@ class ContextMenuVM {
         }
         let difff = messageFrame.height + navBarHeight + menuSize.height - screenHeight
         scaleMessageUp = difff <= 0
+        if scaleMessageUp {
+            let heightDiff = messageHeight * maxScaleFactor - messageHeight
+            /*
+             Because the messageAnchor for the scale is at the bottom,
+             the message will expand upwards. Therefore, it is necessary
+             to add scaled space.
+             */
+            emojiVerticalPadding = defaultVerticalPadding + heightDiff
+        }
+        // set the left margin for incoming messages when reactions are opened
+        incomingMessageMarginSize = messageFrame.minX
+    }
+
+    func sendEmoji(value: String, emojiActive: Bool) {
+        if let msg = self.presentingMessage {
+            self.sendEmojiUpdate.accept([msg.model.message.id: value + ":" + (emojiActive ? "revoke" : "apply")])
+        }
+    }
+    
+    func containsEmojiReaction(emoji: String) -> Bool {
+//        return model.presentingMessage.messageModel.reactionsModel.displayValue.containsCaseInsentative(string: emoji)
+        return presentingMessage.messageModel.reactionsModel.displayValue.containsCaseInsentative(string: emoji)
     }
 }
