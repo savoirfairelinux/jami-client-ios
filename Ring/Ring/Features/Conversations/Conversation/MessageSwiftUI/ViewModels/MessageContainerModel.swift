@@ -136,7 +136,7 @@ class MessageContainerModel: Identifiable {
         DispatchQueue.main.async { [weak self, weak image] in
             guard let self = self, let image = image else { return }
             if self.messageRow.shouldDisplayAavatar && self.message.incoming {
-                self.messageRow.avatarImage = image
+                self.messageRow.updateImage(image: image, jamiId: jamiId)
             }
             if self.message.type == .contact && self.message.incoming {
                 self.contactViewModel.avatarImage = image
