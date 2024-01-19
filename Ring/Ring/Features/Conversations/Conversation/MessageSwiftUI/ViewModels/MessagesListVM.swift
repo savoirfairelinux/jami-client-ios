@@ -88,6 +88,7 @@ enum MessagePanelState: State {
 class MessagesListVM: ObservableObject {
 
     // view properties
+    var contextMenuModel = ContextMenuVM()
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
     @Published var scrollToReplyTarget: String? // message id of a reply target that we should scroll
@@ -340,6 +341,25 @@ class MessagesListVM: ObservableObject {
             .subscribe(onNext: { [weak self] messageId in
                 guard let self = self else { return }
                 self.reactionsUpdated(messageId: messageId)
+            })
+            .disposed(by: self.disposeBag)
+        contextMenuModel.currentJamiAccountId = self.accountService.currentAccount?.jamiId
+        // setup subscription for emoji picker
+        self.contextMenuModel.sendEmojiUpdate
+            .subscribe(onNext: { [weak self] event in
+                if let self = self, !event.isEmpty {
+                    switch event["action"] {
+                    case ReactionCommand.apply.toString():
+                        if let dat = event["data"], let mId = event["messageId"] {
+                            self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: dat, parentId: mId)
+                        }
+                    case ReactionCommand.revoke.toString():
+                        if let rId = event["reactionId"] {
+                            self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: rId)
+                        }
+                    default: break
+                    }
+                }
             })
             .disposed(by: self.disposeBag)
     }

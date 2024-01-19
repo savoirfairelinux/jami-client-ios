@@ -163,13 +163,13 @@ class JamiSearchViewModel {
         } else {
             var displayNameContainsText = false
             if let displayName = conversation.displayName.value {
-                displayNameContainsText = displayName.containsCaseInsentative(string: searchQuery)
+                displayNameContainsText = displayName.containsCaseInsensitive(string: searchQuery)
             }
             var participantHashContainsText = false
             if let hash = conversation.model().getParticipants().first?.jamiId {
-                participantHashContainsText = hash.containsCaseInsentative(string: searchQuery)
+                participantHashContainsText = hash.containsCaseInsensitive(string: searchQuery)
             }
-            return conversation.userName.value.containsCaseInsentative(string: searchQuery) ||
+            return conversation.userName.value.containsCaseInsensitive(string: searchQuery) ||
                 displayNameContainsText || participantHashContainsText
         }
     }
