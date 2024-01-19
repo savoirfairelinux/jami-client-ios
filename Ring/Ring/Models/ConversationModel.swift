@@ -441,6 +441,13 @@ class ConversationModel: Equatable {
         reactionsUpdated.onNext(messageId)
     }
 
+    // instead of removing by id, we remove by matching an exact value
+    func reactionRemovedByVal(messageId: String, reactionId: String) {
+        guard let message = self.getMessage(messageId: messageId) else { return }
+        message.reactionRemovedByVal(reactionValue: reactionId)
+        reactionsUpdated.onNext(messageId)
+    }
+
     func messageUpdated(swarmMessage: SwarmMessageWrap) {
         guard let message = self.getMessage(messageId: swarmMessage.id) else { return }
         message.messageUpdated(message: swarmMessage)
