@@ -797,14 +797,17 @@ extension ConversationViewController: ContactPickerViewControllerDelegate {
 extension ConversationViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if currentDocumentPickerMode == .picking {
-            let filePath = urls[0].absoluteURL.path
-            self.log.debug("Successfully imported \(filePath)")
-            let fileName = urls[0].absoluteURL.lastPathComponent
-            do {
-                let data = try Data(contentsOf: urls[0])
-                self.viewModel.sendAndSaveFile(displayName: fileName, imageData: data)
-            } catch {
-                self.viewModel.sendFile(filePath: filePath, displayName: fileName)
+            if let url = urls.first, url.startAccessingSecurityScopedResource() {
+                let filePath = url.absoluteURL.path
+                self.log.debug("Successfully imported \(filePath)")
+                let fileName = url.absoluteURL.lastPathComponent
+                do {
+                    let data = try Data(contentsOf: url)
+                    self.viewModel.sendAndSaveFile(displayName: fileName, imageData: data)
+                } catch {
+                    self.viewModel.sendFile(filePath: filePath, displayName: fileName)
+                }
+                url.stopAccessingSecurityScopedResource()
             }
         }
         currentDocumentPickerMode = .none
