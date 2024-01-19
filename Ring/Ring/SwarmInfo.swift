@@ -228,10 +228,10 @@ class SwarmInfo: SwarmInfoProtocol {
     }
 
     func contains(searchQuery: String) -> Bool {
-        if self.title.value.containsCaseInsentative(string: searchQuery) { return true }
+        if self.title.value.containsCaseInsensitive(string: searchQuery) { return true }
         return !self.participants.value.filter { participant in
-            participant.registeredName.value.containsCaseInsentative(string: searchQuery) ||
-                participant.profileName.value.containsCaseInsentative(string: searchQuery) || participant.jamiId.containsCaseInsentative(string: searchQuery)
+            participant.registeredName.value.containsCaseInsensitive(string: searchQuery) ||
+                participant.profileName.value.containsCaseInsensitive(string: searchQuery) || participant.jamiId.containsCaseInsensitive(string: searchQuery)
         }.isEmpty
     }
 

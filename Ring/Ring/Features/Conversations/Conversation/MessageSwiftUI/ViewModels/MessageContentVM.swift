@@ -443,9 +443,6 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     }
 
     func swarmColorUpdated(color: UIColor) {
-        if self.message.incoming || self.content.containsOnlyEmoji {
-            return
-        }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.preferencesColor = color
