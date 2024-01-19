@@ -20,9 +20,12 @@
 
 import Foundation
 import SwiftUI
+import RxRelay
 
 // TODO KESS
 class ContextMenuVM {
+    var sendEmoji = BehaviorRelay(value: [String: String]())
+    var revokeEmoji = BehaviorRelay(value: [String: String]())
     @Published var menuItems = [ContextualMenuItem]()
     var presentingMessage: MessageBubbleView! {
         didSet {
@@ -94,5 +97,18 @@ class ContextMenuVM {
         }
         let difff = messageFrame.height + navBarHeight + menuSize.height - screenHeight
         scaleMessageUp = difff <= 0
+    }
+
+    func sendEmoji(value: String, emojiActive: Bool) {
+        if emojiActive {
+            if let message = self.presentingMessage {
+                // TODO self.revokeEmoji.accept([message.model.message.id: value])
+            }
+        } else {
+            if let message = self.presentingMessage {
+                self.sendEmoji.accept([message.model.message.id: value])
+            }
+        }
+
     }
 }

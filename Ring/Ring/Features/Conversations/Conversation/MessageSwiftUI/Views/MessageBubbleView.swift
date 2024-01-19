@@ -91,17 +91,32 @@ struct MessageBubbleView: View {
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
             } else {
+//<<<<<<< HEAD
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.content)
                         .font(model.styling.textFont)
                         .lineLimit(nil)
                         .onTapGesture {
+                            showEmojiBar()
                             // Add an empty onTapGesture to keep the table view scrolling smooth
                         }
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
+//=======
+//                Text(model.content)
+//                    .applyTextStyle(model: model)
+//                    .lineLimit(nil)
+//                    .onTapGesture {
+//                        showEmojiBar()
+//                    }
+//                    .modifier(MessageLongPress(longPressCb: receivedLongPress()))
+//>>>>>>> 79e0ad56 ((WIP) iOS: emoji picker)
             }
         }
+    }
+
+    private func showEmojiBar() {
+        print("show emojiBar")
     }
 
     private func receivedLongPress() -> (() -> Void) {
