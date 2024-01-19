@@ -56,87 +56,181 @@ struct ContextMenuView: View {
     @SwiftUI.State private var messageOffsetDiff: CGFloat = 0
     @SwiftUI.State private var cornerRadius: CGFloat = 0
     @SwiftUI.State private var scrollViewHeight: CGFloat = 0
-
+    @SwiftUI.GestureState private var isLongPressingEmojiBar = false
+    
+    
     var body: some View {
         ZStack {
             GeometryReader { _ in
                 VStack(alignment: .leading) {
-                    // message
-                    ScrollView {
-                        model.presentingMessage
-                            .frame(
-                                width: model.messageFrame.width,
-                                height: model.messageFrame.height
-                            )
+                    Spacer()
+                        .frame(height: model.defaultVerticalPadding)
+                    // emoji picker
+                    if model.isShortMsg {
+                        HStack {
+                            if !model.isOurMsg! {
+                                Spacer()
+                                    .frame(width: model.incomingMessageMarginSize)
+                            }
+                            makeEmojiBar()
+                            if model.isOurMsg! {
+                                Spacer()
+                                    .frame(width: 10)
+                            }
+                        }
+                        .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                        Spacer()
+                            .frame(height: model.emojiVerticalPadding)
                     }
-                    .cornerRadius(cornerRadius)
-                    .scaleEffect(messageScale, anchor: model.messsageAnchor)
-                    .shadow(color: Color(model.shadowColor), radius: messageShadow)
+                    // message body in scrollable view
+                    // message + tappable area
+                    HStack {
+                        if !model.isOurMsg! {
+                            Spacer()
+                                .frame(width: model.incomingMessageMarginSize)
+                        }
+                        tappableMessageBody()
+                        if model.isOurMsg! {
+                            Spacer()
+                                .frame(width: 10)
+                        }
+                    }
+                    .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                    // extra check for long messages to move emojis closer to the touch center
+                    if !model.isShortMsg {
+                        HStack {
+                            if !model.isOurMsg! {
+                                Spacer()
+                                    .frame(width: model.incomingMessageMarginSize)
+                            }
+                            makeEmojiBar()
+                            if model.isOurMsg! {
+                                Spacer()
+                                    .frame(width: 10)
+                            }
+                        }
+                        .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                    }
+                    else {
+                        Spacer()
+                            .frame(height: model.defaultVerticalPadding)
+                    }
+                    // actions (reply, fwd, etc.)
+                    HStack {
+                        if !model.isOurMsg! {
+                            Spacer()
+                                .frame(width: model.incomingMessageMarginSize)
+                        }
+                        makeActions()
+                            .opacity(actionsOpacity)
+                            .scaleEffect(actionsScale, anchor: model.actionsAnchor)
+                            .frame(width: model.menuSize.width)
+                        if model.isOurMsg! {
+                            Spacer()
+                                .frame(width: 10)
+                        }
+                    }
+                    .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                }
+                .padding(.trailing, 4)
+            }
+                .offset( // offset vstack
+                    x: 0,
+                    y: max(0, model.messageFrame.origin.y + messageOffsetDiff - (model.isShortMsg ? model.emojiBarHeight : 0))
+                )
+                
+        }
+            .background(makeBackground())
+            .onTapGesture {
+                presentingState = .willDismissWithoutAction
+                withAnimation(Animation.easeOut(duration: 0.1)) {
+                    scrollViewHeight = model.messageFrame.height
+                    blurAmount = 0
+                    backgroundScale = 1.00
+                    messageScale = 1
+                    actionsScale = 0.00
+                    actionsOpacity = 0
+                    messageShadow = 0
+                    backgroundOpacity = 0
+                    messageOffsetDiff = 0
+                    cornerRadius = 0
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.42) {
+                    presentingState = .dismissed
+                }
+            }
+            .onAppear(perform: {
+                scrollViewHeight = model.messageFrame.height
+                withAnimation(.easeOut(duration: 0.3)) {
+                    messageScale = model.scaleMessageUp ? model.maxScaleFactor : 1.0
+                    messageShadow = 4
+                }
+                withAnimation(.easeIn(duration: 0.2).delay(0.15)) {
+                    let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                    impactMed.impactOccurred()
+                    blurAmount = 10
+                    backgroundScale = 0.96
+                    backgroundOpacity = 0.3
+                    actionsOpacity = 1
+                    scrollViewHeight = model.messageHeight
+                    messageOffsetDiff = model.bottomOffset
+                    cornerRadius = model.menuCornerRadius
+                }
+                withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(0.15)) {
+                    actionsScale = 1
+                }
+            })
+            .edgesIgnoringSafeArea(.all)
+    }
+        
+    func tappableMessageBody() -> some View {
+        ZStack {
+            ScrollView {
+                model.presentingMessage
                     .frame(
                         width: model.messageFrame.width,
-                        height: scrollViewHeight
+                        height: model.messageFrame.height
                     )
-                    Spacer()
-                        .frame(height: 10)
-                    // actions
-                    makeActions()
-                        .frame(width: model.menuSize.width)
-                        .opacity(actionsOpacity)
-                        .scaleEffect(actionsScale, anchor: model.actionsAnchor)
-                        .offset(
-                            x: model.menuOffsetX,
-                            y: model.menuOffsetY
-                        )
-                }
-                .offset(
-                    x: model.messageFrame.origin.x,
-                    y: model.messageFrame.origin.y + messageOffsetDiff
+                    
+            }
+            .cornerRadius(cornerRadius)
+            .scaleEffect(messageScale, anchor: model.messsageAnchor)
+            .shadow(color: Color(model.shadowColor), radius: messageShadow)
+            .frame(
+                width: model.messageFrame.width,
+                height: scrollViewHeight
+            )
+            // invisible tap area for accessibility
+            Rectangle()
+                .cornerRadius(cornerRadius)
+                .scaleEffect(messageScale, anchor: model.messsageAnchor)
+                .frame(
+                    width: model.messageFrame.width,
+                    height: scrollViewHeight
                 )
-            }
-            .background(makeBackground())
+                .onTapGesture {
+                    presentingState = .willDismissWithoutAction
+                    withAnimation(Animation.easeOut(duration: 0.1)) {
+                        scrollViewHeight = model.messageFrame.height
+                        blurAmount = 0
+                        backgroundScale = 1.00
+                        messageScale = 1
+                        actionsScale = 0.00
+                        actionsOpacity = 0
+                        messageShadow = 0
+                        backgroundOpacity = 0
+                        messageOffsetDiff = 0
+                        cornerRadius = 0
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        presentingState = .dismissed
+                    }
+                }
+                .foregroundColor(Color.clear) // Make the Rectangle transparent
+                .contentShape(Rectangle())
         }
-        .onTapGesture {
-            presentingState = .willDismissWithoutAction
-            withAnimation(Animation.easeOut(duration: 0.3)) {
-                scrollViewHeight = model.messageFrame.height
-                blurAmount = 0
-                backgroundScale = 1.00
-                messageScale = 1
-                actionsScale = 0.00
-                actionsOpacity = 0
-                messageShadow = 0
-                backgroundOpacity = 0
-                messageOffsetDiff = 0
-                cornerRadius = 0
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                presentingState = .dismissed
-            }
-        }
-        .onAppear(perform: {
-            scrollViewHeight = model.messageFrame.height
-            withAnimation(.easeOut(duration: 0.4)) {
-                messageScale = model.scaleMessageUp ? 1.1 : 1.0
-                messageShadow = 4
-            }
-            withAnimation(.easeIn(duration: 0.2).delay(0.3)) {
-                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                impactMed.impactOccurred()
-                blurAmount = 10
-                backgroundScale = 0.96
-                backgroundOpacity = 0.3
-                actionsOpacity = 1
-                scrollViewHeight = model.messageHeight
-                messageOffsetDiff = model.bottomOffset
-                cornerRadius = model.menuCornerRadius
-            }
-            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(0.3)) {
-                actionsScale = 1
-            }
-        })
-        .edgesIgnoringSafeArea(.all)
     }
-
+    
     func makeBackground() -> some View {
         ZStack {
             Color(UIColor.systemBackground)
@@ -150,7 +244,33 @@ struct ContextMenuView: View {
         }
         .edgesIgnoringSafeArea(.all)
     }
+    
+    func makeEmojiBar() -> some View {
+        HStack {
+            let defaultReactionEmojis: [String] = [
+                0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
+            ].map { String(UnicodeScalar($0)!) }
+            
+            ForEach(defaultReactionEmojis.indices, id: \.self) { index in
+                EmojiBarView(
+                    model: model,
+                    emoji: defaultReactionEmojis[index],
+                    presentingState: $presentingState,
+                    elementOpacity: 0.0 as CGFloat,
+                    delayIn: 0.03 * Double(index),
+                    elementRotation: Angle(degrees: 10.0 * Double(defaultReactionEmojis.count))
+                )
+            }
 
+        }
+        .opacity(actionsOpacity)
+        .padding(.vertical, 3)
+        .padding(.horizontal, 8)
+        .background(Color(UIColor.secondarySystemBackground))
+        .cornerRadius(radius: 32, corners: .allCorners)
+        .shadow(color: Color(model.shadowColor), radius: messageShadow)
+    }
+    
     func makeActions() -> some View {
         VStack(spacing: 0) {
             ForEach(model.menuItems) { item in
@@ -172,7 +292,7 @@ struct ContextMenuView: View {
                                 .fontWeight(.light)
                                 .foregroundColor(Color(UIColor.label))
                             Spacer()
-
+                            
                             Image(systemName: item.image())
                                 .foregroundColor(Color(UIColor.label))
                                 .font(Font.callout.weight(.light))
@@ -192,4 +312,62 @@ struct ContextMenuView: View {
         .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
         .cornerRadius(radius: model.menuCornerRadius, corners: .allCorners)
     }
+    
+}
+
+struct EmojiBarView: View {
+    var model: ContextMenuVM
+    var emoji: String
+    @Binding var presentingState: ContextMenuPresentingState
+    @SwiftUI.State var elementOpacity: CGFloat
+    @SwiftUI.State var delayIn: Double
+    @SwiftUI.State var elementRotation: Angle
+    @SwiftUI.State private var enabledNotifierLength: CGFloat = 0
+    @SwiftUI.State private var hightligthColor: UIColor = UIColor.defaultSwarmColor
+    
+    var body: some View {
+//        let emojiActive = model.presentingMessage.messageModel.reactionsModel.displayValue.containsCaseInsentative(string: emoji)
+        let emojiActive = model.containsEmojiReaction(emoji: emoji)
+//        let emojiActive = model.presentingMessage.messageModel.reactionsModel.containsEmojiReaction(emoji: emoji)
+        VStack {
+            Text(verbatim: emoji)
+                .font(.title2)
+                .opacity(elementOpacity)
+                .rotationEffect(elementRotation)
+                .padding(8)
+                .overlay(
+                    Rectangle()
+                        .fill(Color(hightligthColor))
+                        .opacity(emojiActive ? elementOpacity : 0)
+                        .frame(width: enabledNotifierLength, height: 3, alignment: .center)
+                        .cornerRadius(8)
+                        .offset(y: 20)
+                        .onAppear(perform: {
+                            hightligthColor = model.presentingMessage.model.preferencesColor
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.3, blendDuration: 0.9).delay(delayIn + 0.5)) {
+                                enabledNotifierLength = 20
+                            }
+                        })
+                )
+            
+        }
+            .simultaneousGesture(
+                TapGesture().onEnded({ _ in
+                    model.sendEmoji(value: emoji, emojiActive: emojiActive)
+                    presentingState = .dismissed
+            }))
+            .padding(4)
+            .onAppear {
+                withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(delayIn)) {
+                    elementOpacity = 1
+                }
+                withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.3).delay(delayIn)) {
+                    elementRotation = Angle(degrees: elementRotation.degrees / -2)
+                }
+                withAnimation(.spring(response: 0.2, dampingFraction: 0.3, blendDuration: 0.5).delay(delayIn + 0.3)) {
+                    elementRotation = Angle(degrees: 0)
+                }
+            }
+    }
+    
 }
