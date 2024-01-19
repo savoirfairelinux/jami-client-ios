@@ -48,28 +48,35 @@ struct ContextMenuView: View {
     @SwiftUI.State private var cornerRadius: CGFloat = 0
     @SwiftUI.State private var scrollViewHeight: CGFloat = 0
 
+    // TODO drag up on thumbs up to open emoji picker
     var body: some View {
+        // used for alignment of emoji bar
+        // TODO cleanup alignment logic of emoji bar
+        let isOurMsg = model.presentingMessage.messageModel.message.authorId.isEmpty
         ZStack {
+            // background (blurred background + tappable area)
+            makeBackground()
+                .padding(0)
+                .offset(x: 0, y: 0)
             GeometryReader { _ in
                 VStack(alignment: .leading) {
-                    // message
-                    ScrollView {
-                        model.presentingMessage
-                            .frame(
-                                width: model.messageFrame.width,
-                                height: model.messageFrame.height
-                            )
-                    }
-                    .cornerRadius(cornerRadius)
-                    .scaleEffect(messageScale, anchor: model.messsageAnchor)
-                    .shadow(color: Color(model.shadowColor), radius: messageShadow)
-                    .frame(
-                        width: model.messageFrame.width,
-                        height: scrollViewHeight
-                    )
+
                     Spacer()
-                        .frame(height: 10)
-                    // actions
+                        .frame(maxHeight: 6)
+                    // emoji picker
+                    makeEmojiSelector()
+                        .opacity(actionsOpacity)
+                        .padding(4)
+                        .background(Color.white)
+                        .cornerRadius(radius: 16.0, corners: .allCorners)
+                        .offset(x: isOurMsg ? -286 + (model.messageFrame.width) : 0)
+                    Spacer()
+                        .frame(maxHeight: 8)
+                    // message + tappable area
+                    clickableMessageBody()
+                    Spacer()
+                        .frame(height: 6)
+                    // actions (reply, fwd, etc.)
                     makeActions()
                         .frame(width: model.menuSize.width)
                         .opacity(actionsOpacity)
@@ -81,13 +88,13 @@ struct ContextMenuView: View {
                 }
                 .offset(
                     x: model.messageFrame.origin.x,
-                    y: model.messageFrame.origin.y + messageOffsetDiff
+                    y: max(0, model.messageFrame.origin.y + messageOffsetDiff - (6 + 8 + 4)) // for emojiBar
                 )
             }
             .background(makeBackground())
         }
         .onTapGesture {
-            withAnimation(Animation.easeOut(duration: 0.2)) {
+            withAnimation(Animation.easeOut(duration: 0.1)) {
                 scrollViewHeight = model.messageFrame.height
                 blurAmount = 0
                 backgroundScale = 1.00
@@ -99,17 +106,17 @@ struct ContextMenuView: View {
                 messageOffsetDiff = 0
                 cornerRadius = 0
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 showContextMenu = false
             }
         }
         .onAppear(perform: {
             scrollViewHeight = model.messageFrame.height
-            withAnimation(.easeOut(duration: 0.4)) {
+            withAnimation(.easeOut(duration: 0.3)) {
                 messageScale = model.scaleMessageUp ? 1.1 : 1.0
                 messageShadow = 4
             }
-            withAnimation(.easeIn(duration: 0.2).delay(0.3)) {
+            withAnimation(.easeIn(duration: 0.2).delay(0.15)) {
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                 impactMed.impactOccurred()
                 blurAmount = 10
@@ -120,25 +127,115 @@ struct ContextMenuView: View {
                 messageOffsetDiff = model.bottomOffset
                 cornerRadius = model.menuCornerRadius
             }
-            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(0.3)) {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(0.15)) {
                 actionsScale = 1
             }
         })
         .edgesIgnoringSafeArea(.all)
     }
 
+    func clickableMessageBody() -> some View {
+        ZStack {
+            ScrollView {
+                model.presentingMessage
+                    .frame(
+                        width: model.messageFrame.width,
+                        height: scrollViewHeight
+                    )
+            }
+            .cornerRadius(cornerRadius)
+            .scaleEffect(messageScale, anchor: model.messsageAnchor)
+            .shadow(color: Color(model.shadowColor), radius: messageShadow)
+            //            .onTapGesture {
+            //                print("message tapped msg")
+            //            }
+            .frame(
+                width: model.messageFrame.width,
+                height: scrollViewHeight
+            )
+            // invisible tap area for accessibility
+            Rectangle()
+                .cornerRadius(cornerRadius)
+                .scaleEffect(messageScale, anchor: model.messsageAnchor)
+                .shadow(color: Color(model.shadowColor), radius: messageShadow)
+                .frame(
+                    width: model.messageFrame.width,
+                    // height: max(scrollViewHeight - (6 + 8 + 4 + 10), 72) // for emojiBar
+                    height: scrollViewHeight
+                )
+                .onTapGesture {
+                    //                    print("message tapped rect")
+                    withAnimation(Animation.easeOut(duration: 0.1)) {
+                        // TODO make this function for multiple call locations
+                        // func setHiddenInteractions
+                        scrollViewHeight = model.messageFrame.height
+                        blurAmount = 0
+                        backgroundScale = 1.00
+                        messageScale = 1
+                        actionsScale = 0.00
+                        actionsOpacity = 0
+                        messageShadow = 0
+                        backgroundOpacity = 0
+                        messageOffsetDiff = 0
+                        cornerRadius = 0
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        showContextMenu = false
+                    }
+                }
+                .foregroundColor(Color.clear) // Make the Rectangle transparent
+                .contentShape(Rectangle())
+        }
+    }
+
     func makeBackground() -> some View {
         ZStack {
-            Color(UIColor.systemBackground)
-                .opacity(backgroundOpacity)
-            Color(UIColor.systemBackground)
-                .frame(width: model.messageFrame.width, height: model.messageFrame.height)
-                .position(x: model.messageFrame.midX, y: model.messageFrame.midY)
+            //            Color(UIColor.systemBackground)
+            //                .opacity(backgroundOpacity)
+            //            Color(UIColor.systemBackground)
+            //                .frame(width: model.messageFrame.width, height: model.messageFrame.height)
+            //                .position(x: model.messageFrame.midX, y: model.messageFrame.midY)
             VisualEffect(style: .regular, withVibrancy: false)
             Color(UIColor.tertiaryLabel)
                 .opacity(backgroundOpacity)
         }
         .edgesIgnoringSafeArea(.all)
+    }
+
+    func makeEmojiSelector() -> some View {
+        HStack {
+            // Todo chancge to string for picker lib
+            let defaultReactionEmojis: [UTF32Char] = [UTF32Char(0x1F44D), UTF32Char(0x1F44E), UTF32Char(0x1F606), UTF32Char(0x1F923), UTF32Char(0x1F615), UTF32Char(0xFE0F)]
+
+            if #available(iOS 15.0, *) {
+                ForEach(defaultReactionEmojis.indices, id: \.self) { index in
+                    AnimatableWrapperView(
+                        model: model,
+                        emoji: Binding(
+                            get: { defaultReactionEmojis[index] },
+                            set: { _ in }
+                        ),
+                        showContextMenu: $showContextMenu,
+                        elementOpacity: 0.0 as CGFloat,
+                        delayIn: 0.03 * Double(index),
+                        elementRotation: Angle(degrees: 10.0 * Double(defaultReactionEmojis.count))
+                    )
+                }
+                EmojiMoreButton(
+                    model: model,
+                    emoji: Binding(
+                        get: { UTF32Char(0x2795) },
+                        set: { _ in }
+                    ),
+                    elementOpacity: 0.0 as CGFloat,
+                    delayIn: 0.03 * Double(defaultReactionEmojis.count)
+                    //                    elementRotation: 10.0 * Double(defaultReactionEmojs.count)
+                )
+            } else {
+                // Fallback on earlier versions
+            }
+
+        }
     }
 
     func makeActions() -> some View {
@@ -177,4 +274,87 @@ struct ContextMenuView: View {
         .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
         .cornerRadius(radius: model.menuCornerRadius, corners: .allCorners)
     }
+}
+
+// TODO make this a unified button with AnimatableWrapper
+@available(iOS 15.0, *)
+struct EmojiMoreButton: View {
+    var model: ContextMenuVM
+    @Binding var emoji: UTF32Char
+    @SwiftUI.State var elementOpacity: CGFloat
+    @SwiftUI.State var delayIn: Double
+
+    var body: some View {
+        let displayableEmoji: String = String(UnicodeScalar(emoji)!)
+        Button(action: {
+            // TODO pass the current emoji bar to the emoji picker for customizing the bar
+            // TODO make customization a hold or option in settings while selecting + button opens the full emoji picker
+            // SIDENOTE the emoji picker would be easy to do in-house with a simple mapping of per-l10n to UTF32 and could be used to import custom emoji with an alternative data type of IMG or GIF
+            // model.presentingMessage.model.showEmojiPicker(model.emojiBar)
+            //             model.presentingMessage.model.contextMenuSelect(item: item)
+        }) {
+            Text(verbatim: displayableEmoji)
+                .font(.title3)
+                .opacity(elementOpacity)
+                .cornerRadius(radius: 16, corners: .allCorners)
+
+        }
+        .padding(6)
+        .onAppear {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(delayIn)) {
+                elementOpacity = 1
+            }
+        }
+    }
+
+    func updateElementOpacity(_ newOpacity: CGFloat) {
+        elementOpacity = newOpacity
+    }
+
+}
+// TODO add hook for remove emoji
+@available(iOS 15.0, *)
+struct AnimatableWrapperView: View {
+    var model: ContextMenuVM
+    @Binding var emoji: UTF32Char
+    @Binding var showContextMenu: Bool
+    @SwiftUI.State var elementOpacity: CGFloat
+    @SwiftUI.State var delayIn: Double
+    @SwiftUI.State var elementRotation: Angle
+    // @SwiftUI.State var elementOffset: CGFloat = CGFloat(0)
+    // @SwiftUI.State private var progressiveAnimationPercentage: CGFloat = 0
+
+    var body: some View {
+        let displayableEmoji: String = String(UnicodeScalar(emoji)!)
+        let emojiActive = model.presentingMessage.messageModel.reactionsModel.displayValue.containsCaseInsentative(string: displayableEmoji)
+        Button(action: {
+            model.sendEmoji(value: displayableEmoji, emojiActive: emojiActive)
+            showContextMenu = false
+        }) {
+            Text(verbatim: displayableEmoji)
+                .font(.title3)
+                .opacity(elementOpacity)
+                .rotationEffect(elementRotation)
+                .cornerRadius(radius: 16, corners: .allCorners)
+                .background(emojiActive ? Color.gray : Color.white)
+        }
+        .rotationEffect(elementRotation)
+        .padding(4)
+        .onAppear {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(delayIn)) {
+                elementOpacity = 1
+            }
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.3).delay(delayIn)) {
+                elementRotation = Angle(degrees: elementRotation.degrees / -2)
+            }
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.3, blendDuration: 0.5).delay(delayIn + 0.3)) {
+                elementRotation = Angle(degrees: 0)
+            }
+        }
+    }
+
+    func updateElementOpacity(_ newOpacity: CGFloat) {
+        elementOpacity = newOpacity
+    }
+
 }

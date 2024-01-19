@@ -277,12 +277,17 @@ class ConversationsService {
         self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: id, size: 1)
     }
 
-    func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
-        self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
-    }
+//<<<<<<< HEAD
+//    func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
+//        self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 0)
+//    }
 
     func editSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String) {
         self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: 1)
+//=======
+    func sendSwarmMessage(conversationId: String, accountId: String, message: String, parentId: String, flag: UInt32) {
+        self.conversationsAdapter.sendSwarmMessage(accountId, conversationId: conversationId, message: message, parentId: parentId, flag: flag)
+//>>>>>>> 79e0ad56 ((WIP) iOS: emoji picker)
     }
 
     func insertReplies(messages: [MessageModel], accountId: String, conversationId: String, fromLoaded: Bool) -> Bool {

@@ -56,7 +56,6 @@ struct MessagesListView: View {
     @SwiftUI.State private var currentSnapshot: UIImage?
     @SwiftUI.State private var presentingMessage: MessageBubbleView?
     @SwiftUI.State private var messageFrame: CGRect?
-    var contextMenuModel = ContextMenuVM()
     @SwiftUI.State private var screenHeight: CGFloat = 0
     @SwiftUI.State private var showReactionsView = false
     @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
@@ -83,7 +82,7 @@ struct MessagesListView: View {
                             return dimensions[VerticalAlignment.center]
                         }
                 }
-                .overlay(showContextMenu && contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
+                .overlay(showContextMenu && model.contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
                 // hide navigation bar when presenting context menu
                 .onChange(of: showContextMenu) { newValue in
                     model.hideNavigationBar.accept(newValue)
@@ -132,7 +131,7 @@ struct MessagesListView: View {
     }
 
     func makeOverlay() -> some View {
-        return ContextMenuView(model: contextMenuModel, showContextMenu: $showContextMenu)
+        return ContextMenuView(model: model.contextMenuModel, showContextMenu: $showContextMenu)
     }
 
     private func createMessagesStackView() -> some View {
@@ -198,8 +197,8 @@ struct MessagesListView: View {
                 return
             }
             model.hideNavigationBar.accept(true)
-            contextMenuModel.presentingMessage = message
-            contextMenuModel.messageFrame = frame
+            model.contextMenuModel.presentingMessage = message
+            model.contextMenuModel.messageFrame = frame
             showContextMenu = true
         }, showReactionsView: {message in
             reactionsForMessage = message
