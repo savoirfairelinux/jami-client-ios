@@ -96,12 +96,19 @@ struct MessageBubbleView: View {
                         .font(model.styling.textFont)
                         .lineLimit(nil)
                         .onTapGesture {
+//                            showEmojiBar(model)
                             // Add an empty onTapGesture to keep the table view scrolling smooth
                         }
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
             }
         }
+    }
+
+    private func showEmojiBar(model: MessageContentVM) {
+//        presentMenu = true
+        print("show emojiBar")
+        model.onAppear()
     }
 
     private func receivedLongPress() -> (() -> Void) {

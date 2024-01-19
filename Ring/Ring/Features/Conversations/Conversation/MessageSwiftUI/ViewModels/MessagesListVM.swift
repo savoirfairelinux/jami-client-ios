@@ -88,14 +88,17 @@ enum MessagePanelState: State {
 class MessagesListVM: ObservableObject {
 
     // view properties
+    var contextMenuModel = ContextMenuVM()
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
     @Published var scrollToReplyTarget: String? // message id of a reply target that we should scroll
     var temporaryReplyTarget: String? // used to keep a message id of a reply target that we should scroll if this message not loaded yet. ScrollToReplyTarget should be updated after messages loaded
+    // KESS pass this
     @Published var swarmColor = UIColor.defaultSwarmColor {
         didSet {
             self.messagesModels.forEach { message in
                 message.swarmColorUpdated(color: swarmColor)
+                message.theSwarmColor = swarmColor
             }
         }
     }
@@ -228,6 +231,23 @@ class MessagesListVM: ObservableObject {
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject, bestName: bestName)
         self.subscribeLocationEvents()
+        self.contextMenuModel.sendEmoji
+            .subscribe(onNext: { [weak self] pair in
+                if let self = self, let reaction = pair.values.first, let messageId = pair.keys.first, !reaction.isEmpty, !messageId.isEmpty {
+                    self.conversationService.sendSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: reaction, parentId: messageId, flag: 2)
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.contextMenuModel.revokeEmoji
+            .subscribe(onNext: { [weak self] pair in
+                if let self = self, let reaction = pair.values.first, let messageId = pair.keys.first, !reaction.isEmpty, !messageId.isEmpty {
+                    print("revoking ${reaction}")
+                    self.conversationService.reactionRemoved(conversationId: self.conversation.id, accountId: self.conversation.accountId, messageId: messageId, reactionId: reaction)
+                    self.reactionsUpdated(messageId: messageId)
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func receiveReply(newMessage: MessageContainerModel, fromHistory: Bool) {

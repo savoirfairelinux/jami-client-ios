@@ -57,6 +57,7 @@ class MessageContainerModel: Identifiable {
     let disposeBag = DisposeBag()
     let replyTarget: MessageReplyTargetVM
     let reactionsModel: ReactionsContainerModel
+    var theSwarmColor: UIColor
 
     // message info state
     private let infoSubject = PublishSubject<State>()
@@ -104,6 +105,7 @@ class MessageContainerModel: Identifiable {
         self.contactViewModel = ContactMessageVM(message: message, infoState: self.infoSubject)
         self.replyTarget = MessageReplyTargetVM(infoState: self.infoSubject, contextMenuState: contextMenuState, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
         self.reactionsModel = ReactionsContainerModel(message: message, infoState: self.infoSubject)
+        self.theSwarmColor = preferencesColor //UIColor.defaultSwarmColor
     }
 
     func setReplyTarget(message: MessageModel) {
