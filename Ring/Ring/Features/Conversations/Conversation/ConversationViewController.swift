@@ -40,6 +40,7 @@ enum ContextMenu: State {
     case saveFile(url: URL)
     case reply(message: MessageContentVM)
     case delete(message: MessageContentVM)
+    case edit(message: MessageContentVM)
 }
 
 enum DocumentPickerMode {
@@ -145,6 +146,8 @@ class ConversationViewController: UIViewController,
                     self.showActionsForMessagePanel()
                 case .sendPhoto:
                     self.takePicture()
+                case .editMessage(content: let content, messageId: let messageId):
+                    self.viewModel.editMessage(content: content, messageId: messageId)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -160,11 +163,7 @@ class ConversationViewController: UIViewController,
                     self.presentActivityControllerWithItems(items: items)
                 case .saveFile(let url):
                     self.saveFile(url: url)
-                case .reply(message: _):
-                    // handeled in MessagesListVM
-                    break
-                case .delete(message: _):
-                    // handeled in MessagesListVM
+                default:
                     break
                 }
             })

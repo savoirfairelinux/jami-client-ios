@@ -53,6 +53,7 @@ enum ContextualMenuItem: Identifiable {
     case reply
     case deleteMessage
     case deleteFile
+    case edit
 
     func toString() -> String {
         switch self {
@@ -72,6 +73,8 @@ enum ContextualMenuItem: Identifiable {
             return L10n.Global.deleteMessage
         case .deleteFile:
             return L10n.Global.deleteFile
+        case .edit:
+            return L10n.Global.editMessage
         }
     }
 
@@ -93,6 +96,8 @@ enum ContextualMenuItem: Identifiable {
             return "xmark.bin"
         case .deleteFile:
             return "xmark.bin"
+        case .edit:
+            return "pencil"
         }
     }
 }
@@ -268,7 +273,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
                 if self.isIncoming {
                     self.menuItems = [.copy, .forward, .reply]
                 } else {
-                    self.menuItems = [.copy, .forward, .reply, .deleteMessage]
+                    self.menuItems = [.copy, .forward, .reply, .edit, .deleteMessage]
                 }
             }
             guard self.type == .fileTransfer else { return }
@@ -434,6 +439,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
                 self.editionColor = self.isIncoming ? Color(UIColor.secondaryLabel) : Color(UIColor.systemGray6)
                 self.textInset = 15
                 self.textVerticalInset = 10
+                self.textFont = Font.callout.weight(.regular)
             }
         }
         if self.message.isMessageDeleted() {
@@ -525,6 +531,8 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             delete()
         case .deleteFile:
             delete()
+        case .edit:
+            edit()
         }
     }
 }
@@ -557,6 +565,12 @@ extension MessageContentVM {
     func delete() {
         if self.message.type == .text {
             self.contextMenuState.onNext(ContextMenu.delete(message: self))
+        }
+    }
+
+    func edit() {
+        if self.message.type == .text {
+            self.contextMenuState.onNext(ContextMenu.edit(message: self))
         }
     }
 }
