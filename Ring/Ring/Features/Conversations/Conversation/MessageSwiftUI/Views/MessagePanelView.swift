@@ -26,18 +26,22 @@ struct ReplyViewInMessagePanel: View {
     let padding: CGFloat = 10
 
     var body: some View {
+        Rectangle()
+            .frame(height: 1)
+            .foregroundColor(Color(UIColor.secondaryLabel))
+            .padding(.horizontal, padding * 0.5)
         HStack(alignment: .center) {
             Spacer()
                 .frame(width: padding)
             VStack(alignment: .leading, spacing: 6) {
                 (Text(L10n.Conversation.inReplyTo) +
                     Text(" \(model.inReplyTo)").bold())
-                    .font(.caption)
+                    .font(.footnote)
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .foregroundColor(Color(UIColor.label))
                 Text(messageToReply.message.content)
-                    .font(.caption)
+                    .font(.footnote)
                     .lineLimit(1)
                     .truncationMode(.middle)
                     .foregroundColor(Color(UIColor.secondaryLabel))
@@ -58,6 +62,52 @@ struct ReplyViewInMessagePanel: View {
             }
             Button(action: {
                 model.cancelReply()
+            }, label: {
+                Image(systemName: "xmark.circle")
+                    .resizable()
+                    .font(Font.title.weight(.light))
+                    .imageScale(.small)
+                    .scaledToFit()
+                    .padding(9)
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+            })
+        }
+        .padding(.vertical, padding)
+        .padding(.horizontal, 0)
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(10)
+    }
+}
+
+struct EditMessagePanel: View {
+    var messageToEdit: MessageContentVM
+    @StateObject var model: MessagePanelVM
+    @Binding var text: String
+    let padding: CGFloat = 10
+
+    var body: some View {
+        Rectangle()
+            .frame(height: 1)
+            .foregroundColor(Color(UIColor.secondaryLabel))
+            .padding(.horizontal, padding * 0.5)
+        HStack(alignment: .center) {
+            Spacer()
+                .frame(width: padding)
+            Text(L10n.Global.editing)
+                .font(.footnote)
+                .foregroundColor(Color(UIColor.systemBlue))
+            Spacer()
+                .frame(width: 5)
+            Text(messageToEdit.message.content)
+                .font(.footnote)
+                .lineLimit(1)
+                .truncationMode(.middle)
+                .foregroundColor(Color(UIColor.secondaryLabel))
+            Spacer()
+            Button(action: {
+                model.cancelEdit()
+                text = ""
             }, label: {
                 Image(systemName: "xmark.circle")
                     .resizable()
@@ -126,6 +176,11 @@ struct MessagePanelView: View {
         VStack {
             if let message = model.messageToReply {
                 ReplyViewInMessagePanel(messageToReply: message, model: model)
+            } else if let editMesage = model.messageToEdit {
+                EditMessagePanel(messageToEdit: editMesage, model: model, text: $text)
+                    .onAppear {
+                        text = editMesage.content
+                    }
             }
             HStack(alignment: .bottom, spacing: 1) {
                 Button(action: {
@@ -167,13 +222,14 @@ struct MessagePanelView: View {
             VisualEffect(style: .regular, withVibrancy: false)
                 .ignoresSafeArea(edges: [.leading, .trailing, .bottom])
         )
-        .onChange(of: model.isReply) { _ in
-            isFocused = model.isReply
+        .onChange(of: model.isEdit) { _ in
+            isFocused = model.isEdit
         }
     }
 
     func cleanState() {
         text = ""
         model.cancelReply()
+        model.cancelEdit()
     }
 }

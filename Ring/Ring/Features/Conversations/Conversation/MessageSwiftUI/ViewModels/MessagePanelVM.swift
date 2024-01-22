@@ -26,7 +26,8 @@ class MessagePanelVM: ObservableObject {
     @Published var placeholder = L10n.Conversation.messagePlaceholder
     @Published var defaultEmoji = "👍"
     @Published var messageToReply: MessageContentVM?
-    @Published var isReply: Bool = false
+    @Published var messageToEdit: MessageContentVM?
+    @Published var isEdit: Bool = false
     @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""
 
@@ -53,13 +54,27 @@ class MessagePanelVM: ObservableObject {
     // MARK: MessagePanelState
 
     func sendMessage(text: String) {
-        let textToSend = text.isEmpty ? defaultEmoji : text
-        let trimmed = textToSend.trimmingCharacters(in: .whitespacesAndNewlines)
+        if messageToEdit != nil {
+            editMessage(text: text)
+        } else {
+            let textToSend = text.isEmpty ? defaultEmoji : text
+            let trimmed = textToSend.trimmingCharacters(in: .whitespacesAndNewlines)
+            if trimmed.isEmpty {
+                return
+            }
+            let parentId = self.messageToReply?.message.id ?? ""
+            messagePanelState.onNext(MessagePanelState.sendMessage(content: trimmed, parentId: parentId))
+        }
+    }
+
+    func editMessage(text: String) {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.isEmpty {
             return
         }
-        let parentId = self.messageToReply?.message.id ?? ""
-        messagePanelState.onNext(MessagePanelState.sendMessage(content: trimmed, parentId: parentId))
+        guard let message = messageToEdit else { return }
+        messagePanelState.onNext(MessagePanelState.editMessage(content: trimmed, messageId: message.message.id))
+
     }
 
     func showMoreActions() {
@@ -72,12 +87,22 @@ class MessagePanelVM: ObservableObject {
 
     func configureReplyTo(message: MessageContentVM) {
         messageToReply = message
-        isReply = true
+        isEdit = true
+    }
+
+    func configureEdit(message: MessageContentVM) {
+        messageToEdit = message
+        isEdit = true
     }
 
     func cancelReply() {
         messageToReply = nil
-        isReply = false
+        isEdit = false
+    }
+
+    func cancelEdit() {
+        messageToEdit = nil
+        isEdit = false
     }
 
     func updateUsername(name: String, jamiId: String) {
