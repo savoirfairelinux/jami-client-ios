@@ -20,45 +20,26 @@
 
 import SwiftUI
 
-struct ReplyViewInMessagePanel: View {
-    var messageToReply: MessageContentVM
-    @StateObject var model: MessagePanelVM
+struct MessageTopBaseView<Content>: View where Content: View {
     let padding: CGFloat = 10
+    let content: Content
+    let closeAction: () -> Void
+
+    init(closeAction: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+        self.closeAction = closeAction
+        self.content = content()
+    }
 
     var body: some View {
+        Rectangle()
+            .frame(height: 1)
+            .foregroundColor(Color(UIColor.secondaryLabel))
+            .padding(.horizontal, padding * 0.5)
         HStack(alignment: .center) {
+            Spacer().frame(width: padding)
+            content
             Spacer()
-                .frame(width: padding)
-            VStack(alignment: .leading, spacing: 6) {
-                (Text(L10n.Conversation.inReplyTo) +
-                    Text(" \(model.inReplyTo)").bold())
-                    .font(.caption)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-                    .foregroundColor(Color(UIColor.label))
-                Text(messageToReply.message.content)
-                    .font(.caption)
-                    .lineLimit(1)
-                    .truncationMode(.middle)
-                    .foregroundColor(Color(UIColor.secondaryLabel))
-            }
-            Spacer()
-            Spacer()
-                .frame(width: padding)
-            if messageToReply.type == .fileTransfer {
-                if let player = messageToReply.player, player.hasVideo.value {
-                    PlayerSwiftUI(model: messageToReply, player: player, onLongGesture: {}, ratio: 0.4, withControls: false, customCornerRadius: 10)
-                } else if let image = messageToReply.finalImage {
-                    ImageOrGifView(message: messageToReply, image: image, onLongGesture: {}, minHeight: 20, maxHeight: 50)
-                }
-            } else if messageToReply.type == .text,
-                      let metadata = messageToReply.metadata {
-                URLPreview(metadata: metadata, maxDimension: 50)
-                    .cornerRadius(messageToReply.cornerRadius)
-            }
-            Button(action: {
-                model.cancelReply()
-            }, label: {
+            Button(action: closeAction, label: {
                 Image(systemName: "xmark.circle")
                     .resizable()
                     .font(Font.title.weight(.light))
@@ -73,6 +54,68 @@ struct ReplyViewInMessagePanel: View {
         .padding(.horizontal, 0)
         .background(Color(UIColor.systemBackground))
         .cornerRadius(10)
+    }
+}
+
+struct ReplyViewInMessagePanel: View {
+    var messageToReply: MessageContentVM
+    @StateObject var model: MessagePanelVM
+    let padding: CGFloat = 10
+
+    var body: some View {
+        MessageTopBaseView(closeAction: model.cancelReply) {
+            VStack(alignment: .leading, spacing: 6) {
+                (Text(L10n.Conversation.inReplyTo) +
+                    Text(" \(model.inReplyTo)").bold())
+                    .font(.footnote)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .foregroundColor(Color(UIColor.label))
+                Text(messageToReply.message.content)
+                    .font(.footnote)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+            }
+            Spacer()
+                .frame(width: padding)
+            if messageToReply.type == .fileTransfer {
+                if let player = messageToReply.player, player.hasVideo.value {
+                    PlayerSwiftUI(model: messageToReply, player: player, onLongGesture: {}, ratio: 0.4, withControls: false, customCornerRadius: 10)
+                } else if let image = messageToReply.finalImage {
+                    ImageOrGifView(message: messageToReply, image: image, onLongGesture: {}, minHeight: 20, maxHeight: 50)
+                }
+            } else if messageToReply.type == .text,
+                      let metadata = messageToReply.metadata {
+                URLPreview(metadata: metadata, maxDimension: 50)
+                    .cornerRadius(messageToReply.cornerRadius)
+            }
+        }
+    }
+}
+
+struct EditMessagePanel: View {
+    var messageToEdit: MessageContentVM
+    @StateObject var model: MessagePanelVM
+    @Binding var text: String
+    let padding: CGFloat = 10
+
+    var body: some View {
+        MessageTopBaseView(closeAction: {
+            model.cancelEdit()
+            text = ""
+        }) {
+            Text(L10n.Global.editing)
+                .font(.footnote)
+                .foregroundColor(Color(UIColor.systemBlue))
+            Spacer()
+                .frame(width: 5)
+            Text(messageToEdit.message.content)
+                .font(.footnote)
+                .lineLimit(1)
+                .truncationMode(.middle)
+                .foregroundColor(Color(UIColor.secondaryLabel))
+        }
     }
 }
 
@@ -126,6 +169,11 @@ struct MessagePanelView: View {
         VStack {
             if let message = model.messageToReply {
                 ReplyViewInMessagePanel(messageToReply: message, model: model)
+            } else if let editMesage = model.messageToEdit {
+                EditMessagePanel(messageToEdit: editMesage, model: model, text: $text)
+                    .onAppear {
+                        text = editMesage.content
+                    }
             }
             HStack(alignment: .bottom, spacing: 1) {
                 Button(action: {
@@ -167,13 +215,14 @@ struct MessagePanelView: View {
             VisualEffect(style: .regular, withVibrancy: false)
                 .ignoresSafeArea(edges: [.leading, .trailing, .bottom])
         )
-        .onChange(of: model.isReply) { _ in
-            isFocused = model.isReply
+        .onChange(of: model.isEdit) { _ in
+            isFocused = model.isEdit
         }
     }
 
     func cleanState() {
         text = ""
         model.cancelReply()
+        model.cancelEdit()
     }
 }

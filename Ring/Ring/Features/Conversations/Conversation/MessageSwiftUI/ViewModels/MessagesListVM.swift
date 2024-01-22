@@ -35,6 +35,7 @@ enum MessageInfo: State {
 
 enum MessagePanelState: State {
     case sendMessage(content: String, parentId: String)
+    case editMessage(content: String, messageId: String)
     case showMoreActions
     case sendPhoto
 }
@@ -444,6 +445,8 @@ class MessagesListVM: ObservableObject {
                     self.configureReply(message: message)
                 case .delete(message: let message):
                     self.deleteMessage(message: message)
+                case .edit(message: let message):
+                    self.configureEdit(message: message)
                 default:
                     break
                 }
@@ -461,6 +464,10 @@ class MessagesListVM: ObservableObject {
     func configureReply(message: MessageContentVM) {
         self.messagePanel.configureReplyTo(message: message)
         self.updateUsernameForReply(message: message)
+    }
+
+    func configureEdit(message: MessageContentVM) {
+        self.messagePanel.configureEdit(message: message)
     }
 
     func deleteMessage(message: MessageContentVM) {

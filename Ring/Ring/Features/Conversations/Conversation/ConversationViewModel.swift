@@ -333,6 +333,11 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var hideDate: Bool { self.conversation.value.messages.isEmpty }
 
+    func editMessage(content: String, messageId: String) {
+        let conversation = self.conversation.value
+        self.conversationsService.editSwarmMessage(conversationId: conversation.id, accountId: conversation.accountId, message: content, parentId: messageId)
+    }
+
     func sendMessage(withContent content: String, parentId: String = "", contactURI: String? = nil, conversationModel: ConversationModel? = nil) {
         let conversation = conversationModel ?? self.conversation.value
         if !conversation.isSwarm() {
