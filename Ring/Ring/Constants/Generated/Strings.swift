@@ -524,6 +524,10 @@ internal enum L10n {
     internal static let deleteMessage = L10n.tr("Localizable", "global.deleteMessage", fallback: "Delete Message")
     /// Donate
     internal static let donate = L10n.tr("Localizable", "global.donate", fallback: "Donate")
+    /// Edit
+    internal static let edit = L10n.tr("Localizable", "global.edit", fallback: "Edit")
+    /// Edit Message
+    internal static let editMessage = L10n.tr("Localizable", "global.editMessage", fallback: "Edit Message")
     /// Enter Password
     internal static let enterPassword = L10n.tr("Localizable", "global.enterPassword", fallback: "Enter Password")
     /// Enter Username
