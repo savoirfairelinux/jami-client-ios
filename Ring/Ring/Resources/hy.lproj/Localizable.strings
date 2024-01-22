@@ -46,6 +46,8 @@
 "global.reply" = "Պատասխանել";
 "global.search" = "Փնտրում եմ...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Չար QR կոդ";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Գրեք հաղորդագրություն ";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Դուք ներկայումս կիսում եք ձեր գտնվելու վայրը ";
 "conversation.explanationReceivingLocationFrom" = "Դուք ներկայումս ստանում եք կենդանի տեղակայման ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Մենք սպասում ենք %@ կապերի, որպեսզի սինխրոնացվի զրույցը:";
 "conversation.inReplyTo" = "Պատասխանելով";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Ոչ մի հրավիրում";

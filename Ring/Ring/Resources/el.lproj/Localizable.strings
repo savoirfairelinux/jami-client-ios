@@ -46,6 +46,8 @@
 "global.reply" = "Απάντηση";
 "global.search" = "Γίνεται αναζήτηση...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Κακό QR κωδικό";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Γράψε μήνυμα σε ";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Συμμετέχετε τη θέση σας με ";
 "conversation.explanationReceivingLocationFrom" = "Πλέον λαμβάνετε ζωντανή τοποθεσία από";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Περιμένουμε %@ συνδέσεις για να συγχρονιστεί η συζήτηση.";
 "conversation.inReplyTo" = "Απαντώντας";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Δεν υπάρχουν προσκλήσεις.";

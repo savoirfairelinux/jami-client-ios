@@ -46,6 +46,8 @@
 "global.reply" = "ڤرليندوڠ";
 "global.search" = "دالم ڤرچاي...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "كود QR يڠ براوسيا";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "منوليسكن ڤرساتوان ";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "توڠڬوڠ ڤد ماس اين تله مڠمبيل موقعيت توڠڬوڠ ";
 "conversation.explanationReceivingLocationFrom" = "توڠڬوڠ دڤرچايا?? ي موقع يڠ دڤرچايا?? ي";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "كيت مڠنتو %@ منچاريكن كڤد ڤمباچ.";
 "conversation.inReplyTo" = "دالم ڤردان منتري";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "تيدق اد ڤڠاجرن";

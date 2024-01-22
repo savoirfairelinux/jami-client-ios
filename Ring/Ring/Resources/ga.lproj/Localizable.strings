@@ -46,6 +46,8 @@
 "global.reply" = "Freagra";
 "global.search" = "Ag lorg...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Cód QR olc";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Scríobh teachtaireacht chuig ";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Tá tú ag roinnt do shuíomh faoi láthair le ";
 "conversation.explanationReceivingLocationFrom" = "Tá tú ag fáil suíomh beo faoi láthair ó ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Táimid ag fanacht le %@ nascanna chun an comhrá a shuimhrónachadh.";
 "conversation.inReplyTo" = "I dtuarascáil do";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Ní iarratais";

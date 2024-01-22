@@ -46,6 +46,8 @@
 "global.reply" = "Відповісти";
 "global.search" = "Пошук…";
 "global.donate" = "Донат";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Неприйнятний QR-код";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "Якщо вам подобається Jami і ви вірите в нашу місію, чи не зробили б ви пожертву?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Напишіть повідомлення ";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Ви зараз ділитеся своїм місцем розташуванням з ";
 "conversation.explanationReceivingLocationFrom" = "Ви зараз отримуєте пряму локацію від ";
 "conversation.errorSavingImage" = "Не вдалося зберегти зображення в галерею";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Ми чекаємо %@ підключення для синхронізації розмови.";
 "conversation.inReplyTo" = "Відповідно до";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Ніяких запрошень";

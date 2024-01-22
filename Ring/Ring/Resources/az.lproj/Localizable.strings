@@ -46,6 +46,8 @@
 "global.reply" = "جاواب";
 "global.search" = "آختاريش...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "سيخين QR کد";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "بو ایسته یینجه بیر خبر یاز";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "حال بو حالدا یئرینی ایشله ییبسان.";
 "conversation.explanationReceivingLocationFrom" = "ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی کیمی ایندی";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "%@-ين ارتباطيني گؤزله ييب، مکالماتي همچينلاشديرماق اوچون.";
 "conversation.inReplyTo" = "جاوابدا";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "دعوتلر یوخدور";

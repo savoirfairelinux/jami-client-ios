@@ -46,6 +46,8 @@
 "global.reply" = "답변";
 "global.search" = "찾아...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "나쁜 QR 코드";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "이 지문에 메시지를 보내";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "현재 위치와 공유하고 있습니다.";
 "conversation.explanationReceivingLocationFrom" = "현재 ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "우리는 대화를 동기화하기 위해 %@ 연결을 기다리고 있습니다.";
 "conversation.inReplyTo" = "이에 대한 답변";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "초대도 없습니다";

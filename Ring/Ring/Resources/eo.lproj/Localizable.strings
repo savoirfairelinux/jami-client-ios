@@ -46,6 +46,8 @@
 "global.reply" = "Respondo";
 "global.search" = "Serĉante...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Malbona QR-kodo";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Skribu mesaĝon al ";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Vi nun dividas vian lokon kun ";
 "conversation.explanationReceivingLocationFrom" = "Vi nun ricevas live-lokon de ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Ni atendas %@ konektojn por sinkronigi la konversacion.";
 "conversation.inReplyTo" = "En respondo al";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Neniu invito";

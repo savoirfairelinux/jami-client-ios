@@ -46,6 +46,8 @@
 "global.reply" = "Yanıtla";
 "global.search" = "Aranıyor…";
 "global.donate" = "Bağış";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Bozuk QR kod";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "Jami'yi kullanmaktan hoşlanıyor ve misyonumuza inanıyorsan bağış yapmak ister misin?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Şuna ileti yaz:";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
 "conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
 "conversation.errorSavingImage" = "Görsel galeriye kaydedilemedi";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Görüşmeyi eş zamanlamak için %@ bağlanmasını bekliyoruz.";
 "conversation.inReplyTo" = "Cevap olarak";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Davetiye yok";

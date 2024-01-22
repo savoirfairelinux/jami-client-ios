@@ -46,6 +46,8 @@
 "global.reply" = "பதில்";
 "global.search" = "தேடுவது.";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "கெட்ட QR குறியீடு";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "நீங்கள் தற்போது உங்கள் இருப்பிடத்தை பகிர்ந்துகொள்கிறீர்கள் ";
 "conversation.explanationReceivingLocationFrom" = "நீங்கள் தற்போது ல் இருந்து ஒரு நேரடி இருப்பிடத்தை பெறுகிறீர்கள்";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "உரையாடலை ஒத்திசைக்க %@ இணைப்புக்காக காத்திருக்கிறோம்.";
 "conversation.inReplyTo" = "பதில்";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "அழைப்பிதழ்கள் இல்லை";

@@ -46,6 +46,8 @@
 "global.reply" = "উত্তর";
 "global.search" = "খোঁজ...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "খারাপ QR কোড";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = " এ বার্তা লিখুন";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "আপনি বর্তমানে আপনার অবস্থান শেয়ার করছেন ";
 "conversation.explanationReceivingLocationFrom" = "আপনি বর্তমানে একটি লাইভ অবস্থান থেকে প্রাপ্ত ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "আমরা %@ সংলাপের জন্য অপেক্ষা করছি কথোপকথন সিঙ্ক্রোনাইজ করার জন্য।";
 "conversation.inReplyTo" = "উত্তর";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "আমন্ত্রণ নেই";

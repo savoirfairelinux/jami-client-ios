@@ -46,6 +46,8 @@
 "global.reply" = "Përgjigjuni";
 "global.search" = "Po kërkohet…";
 "global.donate" = "Dhuroni";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "Nëse ju shijon të përdorni Jami-n dhe besoni në misionin tonë, a do të bënit një dhurim?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Shkruani mesazh për";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 "conversation.errorSavingImage" = "S’u arrit të ruhej figurë te galeri";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Po presim që %@ të lidhet për të njëkohësuar bisedën.";
 "conversation.inReplyTo" = "Në përgjigje të";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "fshiu një mesazh";
 
 //Invitations
 "invitations.noInvitations" = "S’ka ftesa";

@@ -46,6 +46,8 @@
 "global.reply" = "Odgovori";
 "global.search" = "Iskanje ...";
 "global.donate" = "Donirajte";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Napačna QR-koda";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "Če vam je všeč Jami in verjamete v naše poslanstvo - bi prispevali projektu?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Napiši sporočilo za";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Trenutno v živo delite svojo lokacijo z ";
 "conversation.explanationReceivingLocationFrom" = "Trenutno v živo pridobivate podatek o lokaciji od";
 "conversation.errorSavingImage" = "Shranjevanje slike v galerijo je spodletelo";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Čakamo, da se %@ poveže, da sinhroniziramo pogovor.";
 "conversation.inReplyTo" = "Kot odgovor";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Ni povabil";

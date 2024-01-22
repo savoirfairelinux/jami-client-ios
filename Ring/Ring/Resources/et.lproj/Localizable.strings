@@ -46,6 +46,8 @@
 "global.reply" = "Vastust";
 "global.search" = "Otsime...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Halb QR-kood";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Kirjuta sõnum ";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Sa jagad praegu oma asukoha ";
 "conversation.explanationReceivingLocationFrom" = "Saate praegu otse-eeskirja ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Ootame %@ ühendust, et konverents sünkroniseerida.";
 "conversation.inReplyTo" = "Vastavalt";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Pole kutsu.";

@@ -46,6 +46,8 @@
 "global.reply" = "Хариулт";
 "global.search" = "Танд хайж байна...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Зур QR код";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Энэ талаар мэдээлэл өгөөч";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Та одоо байр сууриа хуваалцаж байна.";
 "conversation.explanationReceivingLocationFrom" = "Та одоо ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Бид %@ холболт яриаг синхрон болгох гэж хүлээдэг.";
 "conversation.inReplyTo" = "Хэвлэл мэдээллийн хэрэгсэл";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Нэр дэвшүүлэггүй";

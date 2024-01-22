@@ -46,6 +46,8 @@
 "global.reply" = "Erantzun";
 "global.search" = "Bilatzen ari naiz...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "QR kodea txarra";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Idatzi mezu bat";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Orain zure kokapena partekatzen ari zara.";
 "conversation.explanationReceivingLocationFrom" = "Oraintxe bertan, zuzenean ari zara entzuten.";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "%@ konektatuaren zain gaude elkarrizketa sinkronizatzeko.";
 "conversation.inReplyTo" = "Erantzun";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Ez dago gonbidapenik.";

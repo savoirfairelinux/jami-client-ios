@@ -46,6 +46,8 @@
 "global.reply" = "Responder";
 "global.search" = "Buscando...";
 "global.donate" = "Doar";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Mal código QR";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "Se desfrutas usando Jami e cres nos nosos obxectivos, farías unha doazón?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Escribir un mensaxe a ";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "Actualmente está compartiendo a súa localización con ";
 "conversation.explanationReceivingLocationFrom" = "Actualmente está a recibir unha localización en directo de ";
 "conversation.errorSavingImage" = "Non se gardou a imaxe na galería";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Estamos esperando por %@ conexións para sincronizar a conversa.";
 "conversation.inReplyTo" = "En resposta a";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Non hai invitacións";

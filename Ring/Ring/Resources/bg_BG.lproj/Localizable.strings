@@ -46,6 +46,8 @@
 "global.reply" = "Отговор";
 "global.search" = "Търсене...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "Грешен QR-код";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Пиши съобщение на ";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "В момента споделяте местоположението си с ";
 "conversation.explanationReceivingLocationFrom" = "В момента получавате живо местоположение от ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "Чакаме %@ връзки, за да синхронизираме разговора.";
 "conversation.inReplyTo" = "В отговор на";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "Няма покани.";

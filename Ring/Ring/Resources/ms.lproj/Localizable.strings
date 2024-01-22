@@ -46,6 +46,8 @@
 "global.reply" = "മറുപടി";
 "global.search" = "തിരയുന്ന...";
 "global.donate" = "Donate";
+"global.deleteMessage" = "Delete Message";
+"global.deleteFile" = "Delete File from device";
 
 // Scan
 "scan.badQrCode" = "മോശം ക്യുആർ കോഡ്";
@@ -99,7 +101,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = " എന്നതിലേക്ക് സന്ദേശം അയയ്ക്കുക";
+"conversation.messagePlaceholder" = "Write to ";
 "conversation.explanationSendingLocationTo" = "നിങ്ങൾ നിലവിൽ നിങ്ങളുടെ സ്ഥാനം പങ്കുവെക്കുന്നു ";
 "conversation.explanationReceivingLocationFrom" = "∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -113,6 +115,9 @@
 "conversation.synchronizationMessage" = "സംഭാഷണം സമന്വയിപ്പിക്കാൻ %@ കണക്ഷനുകൾക്കായി കാത്തിരിക്കുകയാണ്.";
 "conversation.inReplyTo" = "ഇതിന് മറുപടിയായി";
 "conversation.repliedTo" = "replied to";
+"conversation.yourself" = "yourself";
+"conversation.edited" = "edited";
+"conversation.deletedMessage" = "deleted a message";
 
 //Invitations
 "invitations.noInvitations" = "ക്ഷണങ്ങളില്ല";
