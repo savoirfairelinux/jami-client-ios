@@ -2764,7 +2764,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \\\"${CONFIGURATION}\\\" != \\\"Release\\\" ]; then\n export PATH=\"$PATH:/opt/homebrew/bin\"\n  if which swiftlint > /dev/null; then\n      swiftlint autocorrect > /dev/null\n      swiftlint lint --fix --format\n      swiftlint\n  else\n    echo \\\"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\\\"\n  fi\nfi;\n";
+			shellScript = "if [ \"${RUN_SWIFTLINT}\" == \"1\" ]; then\n export PATH=\"$PATH:/opt/homebrew/bin\"\n  if which swiftlint > /dev/null; then\n      swiftlint autocorrect > /dev/null\n      swiftlint lint --fix --format\n      swiftlint\n  else\n    echo \\\"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\\\"\n  fi\nfi;\n";
 		};
 		1ABE07C41F0D779F00D36361 /* ⚙️ SwiftGen Code Generation */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3487,6 +3487,221 @@
 			};
 			name = Release;
 		};
+		265219CF2B603FD700D1CAE9 /* Debug with lint */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug with lint";
+		};
+		265219D02B603FD700D1CAE9 /* Debug with lint */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Ring/Debug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Ring/RingPrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"RUN_SWIFTLINT=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
+				INFOPLIST_FILE = Ring/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				MARKETING_VERSION = 3.61;
+				OTHER_CFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Ring/Bridging/Ring-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "";
+			};
+			name = "Debug with lint";
+		};
+		265219D12B603FD700D1CAE9 /* Debug with lint */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
+				);
+				INFOPLIST_FILE = RingTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ringTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RingTests/RingTests-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ring.app/Ring";
+			};
+			name = "Debug with lint";
+		};
+		265219D22B603FD700D1CAE9 /* Debug with lint */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				INFOPLIST_FILE = RingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cx.ring.RingUITest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+				TEST_TARGET_NAME = Ring;
+			};
+			name = "Debug with lint";
+		};
+		265219D32B603FD700D1CAE9 /* Debug with lint */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Debug with lint";
+		};
+		265219D42B603FD700D1CAE9 /* Debug with lint */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "jamiNotificationExtension/NotificationService-debug.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = MSHYCBXK85;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MSHYCBXK85;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"OPENDHT_JSONCPP=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../fat/include",
+					"$(SRCROOT)/../fat/include/include",
+				);
+				INFOPLIST_FILE = jamiNotificationExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../fat/lib";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				NEW_SETTING = "";
+				OTHER_CFLAGS = "-DMSGPACK_NO_BOOST";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiNotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = iOS_filtering_notifications;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = iOS_filtering_notifications;
+				SKIP_INSTALL = YES;
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "jamiNotificationExtension/jamiNotificationExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug with lint";
+		};
 		26A88C0D266FFFC800888EED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3816,6 +4031,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04399A1E1D1C2D9D00E99CD9 /* Debug */,
+				265219CF2B603FD700D1CAE9 /* Debug with lint */,
 				6229B5A51FCDB006006937DF /* Development */,
 				04399A1F1D1C2D9D00E99CD9 /* Release */,
 			);
@@ -3826,6 +4042,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04399A211D1C2D9D00E99CD9 /* Debug */,
+				265219D02B603FD700D1CAE9 /* Debug with lint */,
 				6229B5A61FCDB006006937DF /* Development */,
 				04399A221D1C2D9D00E99CD9 /* Release */,
 			);
@@ -3836,6 +4053,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04399A241D1C2D9D00E99CD9 /* Debug */,
+				265219D12B603FD700D1CAE9 /* Debug with lint */,
 				6229B5A71FCDB006006937DF /* Development */,
 				04399A251D1C2D9D00E99CD9 /* Release */,
 			);
@@ -3846,6 +4064,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04399A271D1C2D9D00E99CD9 /* Debug */,
+				265219D22B603FD700D1CAE9 /* Debug with lint */,
 				6229B5A81FCDB006006937DF /* Development */,
 				04399A281D1C2D9D00E99CD9 /* Release */,
 			);
@@ -3856,6 +4075,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26A88C0D266FFFC800888EED /* Debug */,
+				265219D42B603FD700D1CAE9 /* Debug with lint */,
 				26A88C0E266FFFC800888EED /* Development */,
 				26A88C0F266FFFC800888EED /* Release */,
 			);
@@ -3866,6 +4086,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6236602A200914C1002598C1 /* Debug */,
+				265219D32B603FD700D1CAE9 /* Debug with lint */,
 				6236602B200914C1002598C1 /* Development */,
 				6236602C200914C1002598C1 /* Release */,
 			);
