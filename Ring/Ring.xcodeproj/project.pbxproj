@@ -2764,7 +2764,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \\\"${CONFIGURATION}\\\" != \\\"Release\\\" ]; then\n export PATH=\"$PATH:/opt/homebrew/bin\"\n  if which swiftlint > /dev/null; then\n      swiftlint autocorrect > /dev/null\n      swiftlint lint --fix --format\n      swiftlint\n  else\n    echo \\\"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\\\"\n  fi\nfi;\n";
+			shellScript = "if [ \\\"${CONFIGURATION}\\\" != \\\"Release\\\" ]; then\n export PATH=\"$PATH:/opt/homebrew/bin\"\n  if which swiftlint > /dev/null; then\n\n   # Navigate to the Git repository root\n    cd \"${SRCROOT}\"\n\n    # Fetch list of modified and untracked Swift files\n    MODIFIED_SWIFT_FILES=$(git ls-files -m --exclude-standard --others -- '*.swift')\n    STAGED_SWIFT_FILES=$(git diff --cached --name-only --diff-filter=d -- '*.swift')\n\n    # Combine both lists of files (removing duplicates)\n    ALL_SWIFT_FILES=$(echo \"$MODIFIED_SWIFT_FILES\"$'\\n'\"$STAGED_SWIFT_FILES\" | sort | uniq)\n\n    # Run SwiftLint commands on each file\n    echo \"$ALL_SWIFT_FILES\" | while read filename; do\n        if [ -f \"$filename\" ]; then\n            swiftlint autocorrect \"$filename\"\n            swiftlint lint --fix --format \"$filename\"\n            swiftlint \"$filename\"\n        fi\n    done\n  else\n    echo \\\"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\\\"\n  fi\nfi;\n";
 		};
 		1ABE07C41F0D779F00D36361 /* ⚙️ SwiftGen Code Generation */ = {
 			isa = PBXShellScriptBuildPhase;
