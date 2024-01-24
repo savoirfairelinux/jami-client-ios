@@ -97,7 +97,6 @@ struct ImageOrGifView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(minHeight: minHeight, maxHeight: maxHeight)
-                .onTapGesture { }
                 .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
                 .modifier(MessageLongPress(longPressCb: onLongGesture))
@@ -105,7 +104,6 @@ struct ImageOrGifView: View {
             ScaledImageViewWrapper(imageToShow: image)
                 .scaledToFit()
                 .frame(maxHeight: maxHeight)
-                .onTapGesture { }
                 .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
                 .modifier(MessageLongPress(longPressCb: onLongGesture))

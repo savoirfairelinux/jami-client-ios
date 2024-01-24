@@ -237,6 +237,15 @@ class ConversationsService {
         self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: 40)
     }
 
+    func loadMessagesUntil(messageId: String, conversationId: String, accountId: String, from: String) {
+        self.conversationsAdapter.loadConversation(
+            forAccountId: accountId,
+            conversationId: conversationId,
+            from: from,
+            until: messageId
+        )
+    }
+
     func loadTargetReply(conversationId: String, accountId: String, target: String) -> LoadReplyResult {
         if self.requestedReplyTargets.contains(target) {
             return .duplicateRequest

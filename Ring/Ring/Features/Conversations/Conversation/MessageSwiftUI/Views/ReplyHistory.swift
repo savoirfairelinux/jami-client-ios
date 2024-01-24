@@ -56,23 +56,34 @@ struct ReplyHistory: View {
                 if target.type == .fileTransfer {
                     MediaView(message: target, onLongGesture: {}, minHeight: 20, maxHeight: 100, withPlayerControls: true, cornerRadius: 15)
                         .opacity(0.7)
+                        .simultaneousGesture(
+                            TapGesture()
+                                .onEnded {
+                                    model.scrollToReplyTarget()
+                                }
+                        )
                 } else if target.type == .text {
                     if let metadata = target.metadata {
                         URLPreview(metadata: metadata, maxDimension: target.maxDimension * model.sizeIndex)
                             .cornerRadius(target.cornerRadius)
                             .opacity(0.7)
-                    } else if target.content.isValidURL, let url = target.getURL() {
-                        Text(target.content)
-                            .modifier(MessageReplyStyle(model: target))
-                            .onTapGesture(perform: {
-                                openURL(url)
-                            })
-                            .opacity(0.4)
+                            .simultaneousGesture(
+                                TapGesture()
+                                    .onEnded {
+                                        model.scrollToReplyTarget()
+                                    }
+                            )
                     } else {
                         Text(target.content)
                             .modifier(MessageReplyStyle(model: target))
                             .lineLimit(nil)
                             .opacity(0.4)
+                            .simultaneousGesture(
+                                TapGesture()
+                                    .onEnded {
+                                        model.scrollToReplyTarget()
+                                    }
+                            )
                     }
                 }
             }

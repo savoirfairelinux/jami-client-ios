@@ -150,6 +150,7 @@ struct MessagesListView: View {
                     // messages
                     ForEach(model.messagesModels) { message in
                         createMessageRowView(for: message)
+                            .id(message.id)
                     }
                     .flipped()
                     // load more
@@ -167,6 +168,13 @@ struct MessagesListView: View {
                     scrollView.scrollTo("lastMessage")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         model.scrollToId = nil
+                    }
+                })
+                .onReceive(model.$scrollToReplyTarget, perform: { (scrollToReplyTarget) in
+                    guard scrollToReplyTarget != nil else { return }
+                    scrollView.scrollTo(scrollToReplyTarget)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        model.scrolledToTargetReply()
                     }
                 })
             }

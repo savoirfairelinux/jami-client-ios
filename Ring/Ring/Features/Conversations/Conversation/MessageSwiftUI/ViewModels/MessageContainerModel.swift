@@ -76,7 +76,7 @@ class MessageContainerModel: Identifiable {
         self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, infoState: self.infoSubject, isHistory: isHistory)
         self.messageRow = MessageRowVM(message: message, infoState: self.infoSubject)
         self.contactViewModel = ContactMessageVM(message: message, infoState: self.infoSubject)
-        self.replyTarget = MessageReplyTargetVM(infoState: self.infoSubject, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
+        self.replyTarget = MessageReplyTargetVM(infoState: self.infoSubject, contextMenuState: contextMenuState, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
         self.reactionsModel = ReactionsContainerModel(message: message, infoState: self.infoSubject)
     }
 
@@ -122,6 +122,10 @@ class MessageContainerModel: Identifiable {
 
             self.reactionsModel.updateImage(image: image, jamiId: jamiId)
         }
+    }
+
+    func startTargetReplyAnimation() {
+        self.messageContent.startTargetReplyAnimation()
     }
 
     func updateUsername(name: String, jamiId: String) {

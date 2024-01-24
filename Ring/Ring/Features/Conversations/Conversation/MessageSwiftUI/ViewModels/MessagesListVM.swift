@@ -46,6 +46,8 @@ class MessagesListVM: ObservableObject {
     // view properties
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
+    @Published var scrollToReplyTarget: String? // message id of a reply target that we should scroll
+    var temporaryReplyTarget: String? // used to keep a message id of a reply target that we should scroll if this message not loaded yet. ScrollToReplyTarget should be updated after messages loaded
     @Published var swarmColor = UIColor.defaultSwarmColor {
         didSet {
             self.messagesModels.forEach { message in
@@ -139,7 +141,14 @@ class MessagesListVM: ObservableObject {
                     self.computeSequencing()
                     self.updateNumberOfNewMessages()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                        self?.loading = false
+                        guard let self = self else {return }
+                        self.loading = false
+                        // check if we have reply target to scroll to.
+                        if let tempTarget = self.temporaryReplyTarget,
+                           self.getMessage(messageId: tempTarget) != nil {
+                            self.scrollToReplyTarget = tempTarget
+                            self.temporaryReplyTarget = nil
+                        }
                     }
                 } onError: { _ in
 
@@ -308,6 +317,15 @@ class MessagesListVM: ObservableObject {
         message.reactionsUpdated()
     }
 
+    func scrolledToTargetReply() {
+        guard let messageId = self.scrollToReplyTarget else { return }
+        let message = self.getMessage(messageId: messageId)
+        self.scrollToReplyTarget = nil
+        if let message = message {
+            message.startTargetReplyAnimation()
+        }
+    }
+
     private func updateCoordinatesList() {
         var coordinates = [LocationSharingAnnotation]()
         if let myContactsLocation = self.myContactsLocation {
@@ -447,6 +465,8 @@ class MessagesListVM: ObservableObject {
                     self.deleteMessage(message: message)
                 case .edit(message: let message):
                     self.configureEdit(message: message)
+                case .scrollToReplyTarget(messageId: let messageId):
+                    self.scrollToTargetReply(messageId: messageId)
                 default:
                     break
                 }
@@ -464,6 +484,20 @@ class MessagesListVM: ObservableObject {
     func configureReply(message: MessageContentVM) {
         self.messagePanel.configureReplyTo(message: message)
         self.updateUsernameForReply(message: message)
+    }
+
+    func scrollToTargetReply(messageId: String) {
+        /*
+         If the required message is already loaded, simply scroll to it;
+         otherwise,load conversation until the required message.
+         */
+        if self.getMessage(messageId: messageId) != nil {
+            self.scrollToReplyTarget = messageId
+        } else if let from = self.messagesModels.last?.id {
+            self.temporaryReplyTarget = messageId
+            self.conversationService.loadMessagesUntil(messageId: messageId, conversationId: self.conversation.id, accountId: self.conversation.accountId, from: from)
+            self.loading = true
+        }
     }
 
     func configureEdit(message: MessageContentVM) {

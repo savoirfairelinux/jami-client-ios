@@ -95,7 +95,6 @@ struct MessageBubbleView: View {
                     Text(model.content)
                         .font(model.textFont)
                         .lineLimit(nil)
-                        .onTapGesture { }
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
             }

@@ -139,6 +139,7 @@ struct MessageContentView: View {
             self.reactionsTextSize = preferences.height
         }
         .offset(y: messageModel.messageContent.isHistory ? padding : 0)
+        .scaleEffect(model.scale)
     }
 
     private func renderReplyHistory() -> some View {
