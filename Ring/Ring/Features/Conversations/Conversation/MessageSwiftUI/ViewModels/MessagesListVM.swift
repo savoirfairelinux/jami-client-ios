@@ -628,7 +628,7 @@ class MessagesListVM: ObservableObject {
 
     private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
         return message.uri != secondMessage.uri
-            || message.type == .contact || message.type == .initial || message.authorId != secondMessage.authorId || message.isReply() || secondMessage.isReply() || message.content.containsOnlyEmoji || secondMessage.content.containsOnlyEmoji
+        || message.type == .contact || message.type == .initial || message.authorId != secondMessage.authorId || message.isReply() || secondMessage.isReply() || message.content.containsOnlyEmoji || secondMessage.content.containsOnlyEmoji || !message.reactions.isEmpty || !secondMessage.reactions.isEmpty
     }
 
     private func shouldDisplayName(message: MessageContainerModel) -> Bool {

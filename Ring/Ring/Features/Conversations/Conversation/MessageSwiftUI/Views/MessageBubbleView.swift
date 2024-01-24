@@ -35,7 +35,7 @@ struct MessageBubbleView: View {
             if model.messageDeleted {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.messageDeletedText)
-                        .font(.footnote)
+                        .font(model.styling.secondaryFont)
                         .foregroundColor(model.editionColor)
                 }
             } else {
@@ -69,10 +69,10 @@ struct MessageBubbleView: View {
         Text(model.content)
             .padding(.horizontal, model.textInset)
             .padding(.vertical, model.textVerticalInset)
-            .foregroundColor(model.textColor)
+            .foregroundColor(model.styling.textColor)
             .lineLimit(1)
             .background(model.backgroundColor)
-            .font(model.textFont)
+            .font(model.styling.textFont)
             .modifier(MessageCornerRadius(model: model))
     }
 
@@ -84,7 +84,7 @@ struct MessageBubbleView: View {
             } else if model.content.isValidURL, let url = model.getURL() {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.content)
-                        .font(model.textFont)
+                        .font(model.styling.textFont)
                         .onTapGesture {
                             openURL(url)
                         }
@@ -93,7 +93,7 @@ struct MessageBubbleView: View {
             } else {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.content)
-                        .font(model.textFont)
+                        .font(model.styling.textFont)
                         .lineLimit(nil)
                         .onTapGesture {
                             // Add an empty onTapGesture to keep the table view scrolling smooth

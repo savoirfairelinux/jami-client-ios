@@ -34,10 +34,10 @@ struct ContactMessageView: View {
             Spacer()
                 .frame(width: model.inset)
             Text(model.content)
-                .foregroundColor(model.textColor)
+                .foregroundColor(model.styling.textColor)
                 .lineLimit(1)
                 .background(model.backgroundColor)
-                .font(model.textFont)
+                .font(model.styling.textFont)
                 .truncationMode(.middle)
         }
         .padding(.horizontal, model.inset)
