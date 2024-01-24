@@ -69,11 +69,14 @@ class MessageContainerModel: Identifiable {
         }
     }
 
-    init(message: MessageModel, contextMenuState: PublishSubject<State>, isHistory: Bool, localJamiId: String) {
+    var preferencesColor: UIColor
+
+    init(message: MessageModel, contextMenuState: PublishSubject<State>, isHistory: Bool, localJamiId: String, preferencesColor: UIColor) {
         self.id = message.id
         self.message = message
+        self.preferencesColor = preferencesColor
         self.stackViewModel = MessageStackVM(message: message, infoState: self.infoSubject)
-        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, infoState: self.infoSubject, isHistory: isHistory)
+        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, infoState: self.infoSubject, isHistory: isHistory, preferencesColor: preferencesColor)
         self.messageRow = MessageRowVM(message: message, infoState: self.infoSubject)
         self.contactViewModel = ContactMessageVM(message: message, infoState: self.infoSubject)
         self.replyTarget = MessageReplyTargetVM(infoState: self.infoSubject, contextMenuState: contextMenuState, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
@@ -81,7 +84,7 @@ class MessageContainerModel: Identifiable {
     }
 
     func setReplyTarget(message: MessageModel) {
-        let target = MessageContentVM(message: message, contextMenuState: PublishSubject<State>(), transferState: self.transferSubject, infoState: self.infoSubject, isHistory: false)
+        let target = MessageContentVM(message: message, contextMenuState: PublishSubject<State>(), transferState: self.transferSubject, infoState: self.infoSubject, isHistory: false, preferencesColor: preferencesColor)
         self.replyTarget.target = target
     }
 
