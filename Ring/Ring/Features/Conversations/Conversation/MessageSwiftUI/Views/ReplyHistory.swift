@@ -48,8 +48,8 @@ struct ReplyHistory: View {
         VStack(alignment: model.alignment, spacing: 4) {
             if let target = self.target {
                 Text(model.inReplyTo)
-                    .font(.footnote)
-                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                    .font(Constants.conversationSecodaryFont)
+                    .foregroundColor(Constants.conversationSecondaryColor)
                     .onAppear {
                         target.onAppear()
                     }
@@ -76,6 +76,7 @@ struct ReplyHistory: View {
                     } else {
                         Text(target.content)
                             .modifier(MessageReplyStyle(model: target))
+                            .font(Constants.conversationMainFont)
                             .lineLimit(nil)
                             .opacity(0.4)
                             .simultaneousGesture(

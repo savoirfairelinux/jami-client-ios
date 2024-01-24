@@ -124,7 +124,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     @Published var messageEdited = false
     @Published var messageDeletedText = " " + L10n.Conversation.deletedMessage
     @Published var editIndicator = L10n.Conversation.edited
-    @Published var editionColor = Color(UIColor.secondaryLabel)
+    @Published var editionColor =  Constants.conversationSecondaryColor
     @Published var scale: CGFloat = 1
     var url: URL?
     var fileSize: Int64 = 0
@@ -139,7 +139,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     let cornerRadius: CGFloat = 15
     var textInset: CGFloat = 15
     var textVerticalInset: CGFloat = 10
-    var textFont: Font = Font.callout.weight(.regular)
+    var textFont: Font = Constants.conversationMainFont
 
     var message: MessageModel
     var isIncoming: Bool
@@ -440,10 +440,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
                 self.textColor = self.isIncoming ? Color(UIColor.label) : Color(.white)
                 self.backgroundColor = self.isIncoming ? Color(.jamiMsgCellReceived) : Color(self.preferencesColor)
                 self.hasBorder = false
-                self.editionColor = self.isIncoming ? Color(UIColor.secondaryLabel) : Color(UIColor.systemGray6)
+                self.editionColor = self.isIncoming ? Constants.conversationSecondaryColor : Color(UIColor.systemGray6)
                 self.textInset = 15
                 self.textVerticalInset = 10
-                self.textFont = Font.callout.weight(.regular)
+                self.textFont = Constants.conversationMainFont
             }
         }
         if self.message.isMessageDeleted() {

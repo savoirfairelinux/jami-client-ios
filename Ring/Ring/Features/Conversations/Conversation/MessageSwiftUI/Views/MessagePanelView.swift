@@ -33,7 +33,7 @@ struct MessageTopBaseView<Content>: View where Content: View {
     var body: some View {
         Rectangle()
             .frame(height: 1)
-            .foregroundColor(Color(UIColor.secondaryLabel))
+            .foregroundColor(Constants.conversationSecondaryColor)
             .padding(.horizontal, padding * 0.5)
         HStack(alignment: .center) {
             Spacer().frame(width: padding)
@@ -47,7 +47,7 @@ struct MessageTopBaseView<Content>: View where Content: View {
                     .scaledToFit()
                     .padding(9)
                     .frame(width: 40, height: 40)
-                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .foregroundColor(Constants.conversationSecondaryColor)
             })
         }
         .padding(.vertical, padding)
@@ -72,10 +72,10 @@ struct ReplyViewInMessagePanel: View {
                     .truncationMode(.tail)
                     .foregroundColor(Color(UIColor.label))
                 Text(messageToReply.message.content)
-                    .font(.footnote)
+                    .font(Constants.conversationSecodaryFont)
                     .lineLimit(1)
                     .truncationMode(.middle)
-                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .foregroundColor(Constants.conversationSecondaryColor)
             }
             Spacer()
                 .frame(width: padding)
@@ -83,7 +83,7 @@ struct ReplyViewInMessagePanel: View {
                 if let player = messageToReply.player, player.hasVideo.value {
                     PlayerSwiftUI(model: messageToReply, player: player, onLongGesture: {}, ratio: 0.4, withControls: false, customCornerRadius: 10)
                 } else if let image = messageToReply.finalImage {
-                    ImageOrGifView(message: messageToReply, image: image, onLongGesture: {}, minHeight: 20, maxHeight: 50)
+                    ImageOrGifView(message: messageToReply, image: image, onLongGesture: {}, minHeight: 20, maxHeight: 50, customCornerRadius: 10)
                 }
             } else if messageToReply.type == .text,
                       let metadata = messageToReply.metadata {
@@ -106,15 +106,15 @@ struct EditMessagePanel: View {
             text = ""
         }) {
             Text(L10n.Global.editing)
-                .font(.footnote)
+                .font(Constants.conversationSecodaryFont)
                 .foregroundColor(Color(UIColor.systemBlue))
             Spacer()
                 .frame(width: 5)
             Text(messageToEdit.message.content)
-                .font(.footnote)
+                .font(Constants.conversationSecodaryFont)
                 .lineLimit(1)
                 .truncationMode(.middle)
-                .foregroundColor(Color(UIColor.secondaryLabel))
+                .foregroundColor(Constants.conversationSecondaryColor)
         }
     }
 }
@@ -141,7 +141,7 @@ struct MessagePanelView: View {
                 .padding(.top, 13)
                 .padding(.bottom, 5)
                 .frame(width: width, height: height)
-                .foregroundColor(Color(UIColor.secondaryLabel))
+                .foregroundColor(.secondary)
         }
     }
 
@@ -158,8 +158,8 @@ struct MessagePanelView: View {
                         .padding(.vertical, 8)
                         .lineLimit(1)
                         .truncationMode(.tail)
-                        .font(.callout)
-                        .foregroundColor(Color(UIColor.secondaryLabel))
+                        .font(Constants.conversationMainFont)
+                        .foregroundColor(.secondary)
                         .cornerRadius(18)
                 }
         }

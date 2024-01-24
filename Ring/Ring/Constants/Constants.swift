@@ -18,6 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+import SwiftUI
+
 public class Constants: NSObject {
     @objc public static let notificationReceived = "com.savoirfairelinux.notificationExtension.receivedNotification" as CFString
     @objc public static let notificationAppIsActive = "com.savoirfairelinux.jami.appActive" as CFString
@@ -58,4 +60,7 @@ public class Constants: NSObject {
                                                "#FF5722",
                                                "#795548",
                                                "#607D8B"]
+    public static let conversationSecondaryColor: Color = .secondary
+    public static let conversationMainFont: Font = Font.callout.weight(.regular)
+    public static let conversationSecodaryFont: Font = Font.footnote.weight(.regular)
 }

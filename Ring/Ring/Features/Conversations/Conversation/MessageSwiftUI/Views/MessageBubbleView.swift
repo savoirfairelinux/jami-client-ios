@@ -35,7 +35,7 @@ struct MessageBubbleView: View {
             if model.messageDeleted {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.messageDeletedText)
-                        .font(.footnote)
+                        .font(Constants.conversationSecodaryFont)
                         .foregroundColor(model.editionColor)
                 }
             } else {
