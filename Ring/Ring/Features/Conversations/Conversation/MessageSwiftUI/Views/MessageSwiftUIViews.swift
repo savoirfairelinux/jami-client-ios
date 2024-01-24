@@ -99,6 +99,9 @@ struct ImageOrGifView: View {
                 .frame(minHeight: minHeight, maxHeight: maxHeight)
                 .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
+                .onTapGesture {
+                    // Add an empty onTapGesture to keep the table view scrolling smooth
+                }
                 .modifier(MessageLongPress(longPressCb: onLongGesture))
         } else {
             ScaledImageViewWrapper(imageToShow: image)
@@ -106,6 +109,9 @@ struct ImageOrGifView: View {
                 .frame(maxHeight: maxHeight)
                 .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)
                 .conditionalCornerRadius(customCornerRadius, apply: customCornerRadius != 0)
+                .onTapGesture {
+                    // Add an empty onTapGesture to keep the table view scrolling smooth
+                }
                 .modifier(MessageLongPress(longPressCb: onLongGesture))
         }
     }

@@ -95,6 +95,9 @@ struct MessageBubbleView: View {
                     Text(model.content)
                         .font(model.textFont)
                         .lineLimit(nil)
+                        .onTapGesture {
+                            // Add an empty onTapGesture to keep the table view scrolling smooth
+                        }
                         .modifier(MessageLongPress(longPressCb: receivedLongPress()))
                 }
             }
