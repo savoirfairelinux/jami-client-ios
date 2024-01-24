@@ -195,7 +195,9 @@ class CallViewController: UIViewController, StoryboardBased, ViewModelBased, Con
     }
 
     func removeFromScreen() {
-        self.videoContainerViewModel.callStopped()
+        if self.videoContainerViewModel != nil {
+            self.videoContainerViewModel.callStopped()
+        }
         UIDevice.current.isProximityMonitoringEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false
         self.viewModel.callFinished()
