@@ -125,6 +125,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     @Published var messageDeletedText = " " + L10n.Conversation.deletedMessage
     @Published var editIndicator = L10n.Conversation.edited
     @Published var editionColor = Color(UIColor.secondaryLabel)
+    @Published var scale: CGFloat = 1
     var url: URL?
     var fileSize: Int64 = 0
     var transferStatus: DataTransferStatus = .unknown
@@ -465,6 +466,18 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
 
     func updateFileURL(url: URL?) {
         self.url = url
+    }
+
+    func startTargetReplyAnimation() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            withAnimation(.easeInOut(duration: 0.3)) {
+                self.scale = 1.3
+            }
+            withAnimation(Animation.easeInOut(duration: 0.1).delay(0.3)) {
+                self.scale = 1
+            }
+        }
     }
 
     func isGifImage() -> Bool {

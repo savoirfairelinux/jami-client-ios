@@ -46,6 +46,8 @@ class MessagesListVM: ObservableObject {
     // view properties
     @Published var messagesModels = [MessageContainerModel]()
     @Published var scrollToId: String?
+    @Published var scrollToReplyTarget: String?
+    var temporaryReplyTarget: String?
     @Published var swarmColor = UIColor.defaultSwarmColor {
         didSet {
             self.messagesModels.forEach { message in
@@ -139,7 +141,12 @@ class MessagesListVM: ObservableObject {
                     self.computeSequencing()
                     self.updateNumberOfNewMessages()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                        self?.loading = false
+                        guard let self = self else {return }
+                        self.loading = false
+                        if let temptarget = self.temporaryReplyTarget, let _ = self.getMessage(messageId: temptarget) {
+                            self.scrollToReplyTarget = temptarget
+                            self.temporaryReplyTarget = nil
+                        }
                     }
                 } onError: { _ in
 
@@ -308,6 +315,15 @@ class MessagesListVM: ObservableObject {
         message.reactionsUpdated()
     }
 
+    func scrolledToTargetReply() {
+        guard let messageId = self.scrollToReplyTarget else { return }
+        let message = self.getMessage(messageId: messageId)
+        self.scrollToReplyTarget = nil
+        if let message = message {
+            message.startTargetReplyAnimation()
+        }
+    }
+
     private func updateCoordinatesList() {
         var coordinates = [LocationSharingAnnotation]()
         if let myContactsLocation = self.myContactsLocation {
@@ -447,6 +463,14 @@ class MessagesListVM: ObservableObject {
                     self.deleteMessage(message: message)
                 case .edit(message: let message):
                     self.configureEdit(message: message)
+                case .scrollToReplyTarget(messageId: let messageId):
+                        if self.getMessage(messageId: messageId) != nil {
+                            self.scrollToReplyTarget = messageId
+                        } else if let from = self.messagesModels.last?.id {
+                            self.temporaryReplyTarget = messageId
+                            self.conversationService.loadMessagesUntil(messageId: messageId, conversationId: self.conversation.id, accountId: self.conversation.accountId, from: from)
+                                self.loading = true
+                        }
                 default:
                     break
                 }

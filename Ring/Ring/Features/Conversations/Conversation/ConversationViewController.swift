@@ -41,6 +41,7 @@ enum ContextMenu: State {
     case reply(message: MessageContentVM)
     case delete(message: MessageContentVM)
     case edit(message: MessageContentVM)
+    case scrollToReplyTarget(messageId: String)
 }
 
 enum DocumentPickerMode {

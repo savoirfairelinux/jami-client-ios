@@ -251,7 +251,7 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
 }
 
 - (uint32_t)loadConversationForAccountId:(NSString*) accountId conversationId:(NSString*) conversationId from:(NSString*)fromMessage until:(NSString*)toMessage {
-    return loadConversationUntil(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fromMessage UTF8String]), std::string([toMessage UTF8String]));
+    return loadSwarmUntil(std::string([accountId UTF8String]), std::string([conversationId UTF8String]), std::string([fromMessage UTF8String]), std::string([toMessage UTF8String]));
 }
 
 - (void)sendSwarmMessage:(NSString*)accountId conversationId:(NSString*)conversationId message:(NSString*)message parentId:(NSString*)parentId flag:(int32_t)flag {

@@ -51,12 +51,15 @@ class MessageReplyTargetVM: ObservableObject {
         }
     }
 
-    init(infoState: PublishSubject<State>, localJamiId: String, replyAuthorJamiId: String, isIncoming: Bool) {
+    var contextMenuState: PublishSubject<State>
+
+    init(infoState: PublishSubject<State>, contextMenuState: PublishSubject<State>, localJamiId: String, replyAuthorJamiId: String, isIncoming: Bool) {
         self.infoState = infoState
         self.localJamiId = localJamiId
         self.replyAuthorJamiId = replyAuthorJamiId
         self.isIncoming = isIncoming
         self.alignment = isIncoming ? .leading : .trailing
+        self.contextMenuState = contextMenuState
     }
 
     func updateUsername(name: String, jamiId: String) {
@@ -111,5 +114,11 @@ class MessageReplyTargetVM: ObservableObject {
 
     private func updateInReplyMessage() {
         inReplyTo = getInReplyMessage()
+    }
+
+    func scrollToReplyTarget() {
+        if let target = target {
+            self.contextMenuState.onNext(ContextMenu.scrollToReplyTarget(messageId: target.message.id))
+        }
     }
 }
