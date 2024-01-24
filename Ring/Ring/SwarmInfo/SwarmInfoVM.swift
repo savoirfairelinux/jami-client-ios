@@ -102,6 +102,11 @@ class SwarmInfoVM: ObservableObject {
                 DispatchQueue.main.async {
                     guard let self = self, !newValue.isEmpty else { return }
                     self.finalColor = newValue
+                    if Constants.swarmColors.contains(newValue) {
+                        self.selectedColor = newValue
+                    } else {
+                        self.selectedColor = String()
+                    }
                     self.navBarColor.accept(newValue)
                 }
             })
