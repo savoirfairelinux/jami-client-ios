@@ -32,7 +32,7 @@ class ContactMessageVM: ObservableObject {
     let avatarSize: CGFloat = 30
     var inset: CGFloat
     var height: CGFloat
-    var textFont: Font = Font.callout.weight(.medium)
+    var textFont: Font = Font.callout.weight(.regular)
 
     var message: MessageModel
     var username = "" {
@@ -48,7 +48,7 @@ class ContactMessageVM: ObservableObject {
     init(message: MessageModel, infoState: PublishSubject<State>) {
         self.message = message
         self.infoState = infoState
-        self.textColor = Color(UIColor.label)
+        self.textColor = self.message.type == .initial ? Color(UIColor.label) : .secondary
         self.backgroundColor = Color(UIColor.clear)
         self.inset = message.type == .initial ? 0 : 7
         self.height = message.type == .initial ? 25 : 45
@@ -64,7 +64,6 @@ class ContactMessageVM: ObservableObject {
     func swarmColorUpdated(color: UIColor) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.textColor = self.message.type == .initial ? Color(color) : Color(UIColor.label)
             self.borderColor = self.message.type != .initial ? Color(color) : Color(UIColor.clear)
         }
     }

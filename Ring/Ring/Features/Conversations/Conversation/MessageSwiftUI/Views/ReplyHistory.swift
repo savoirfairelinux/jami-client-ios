@@ -49,7 +49,7 @@ struct ReplyHistory: View {
             if let target = self.target {
                 Text(model.inReplyTo)
                     .font(.footnote)
-                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                    .foregroundColor(.secondary)
                     .onAppear {
                         target.onAppear()
                     }
