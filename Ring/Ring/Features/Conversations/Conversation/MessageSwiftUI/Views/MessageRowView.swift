@@ -73,8 +73,8 @@ struct MessageRowView: View {
         VStack(alignment: .leading) {
             if model.shouldShowTimeString {
                 Text(model.timeString)
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
+                    .font(.caption)
+                    .foregroundColor(model.styling.secondaryTextColor)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(10)
             }

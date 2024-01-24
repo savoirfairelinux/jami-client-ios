@@ -26,6 +26,7 @@ import Foundation
 import RxSwift
 import RxRelay
 import RxCocoa
+import SwiftUI
 
 enum MessageInfo: State {
     case updateAvatar(jamiId: String)
@@ -59,7 +60,10 @@ class MessagesListVM: ObservableObject {
         didSet {
             lastMessageBeforeScroll = atTheBottom ? nil : self.messagesModels.first?.message.id
             if atTheBottom {
-                numberOfNewMessages = 0
+                withAnimation { [weak self] in
+                    guard let self = self else { return }
+                    self.numberOfNewMessages = 0
+                }
             }
         }
     }
@@ -598,7 +602,10 @@ class MessagesListVM: ObservableObject {
         if let index = self.messagesModels.firstIndex(where: { messageModel in
             messageModel.id == lastSeenMessage
         }) {
-            numberOfNewMessages = index
+            withAnimation { [weak self] in
+                guard let self = self else { return }
+                self.numberOfNewMessages = index
+            }
         }
     }
 
@@ -628,7 +635,7 @@ class MessagesListVM: ObservableObject {
 
     private func isBreakingSequence(message: MessageModel, secondMessage: MessageModel) -> Bool {
         return message.uri != secondMessage.uri
-            || message.type == .contact || message.type == .initial || message.authorId != secondMessage.authorId || message.isReply() || secondMessage.isReply() || message.content.containsOnlyEmoji || secondMessage.content.containsOnlyEmoji
+        || message.type == .contact || message.type == .initial || message.authorId != secondMessage.authorId || message.isReply() || secondMessage.isReply() || message.content.containsOnlyEmoji || secondMessage.content.containsOnlyEmoji || !message.reactions.isEmpty || !secondMessage.reactions.isEmpty
     }
 
     private func shouldDisplayName(message: MessageContainerModel) -> Bool {

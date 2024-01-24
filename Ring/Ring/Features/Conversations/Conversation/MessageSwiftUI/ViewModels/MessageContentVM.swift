@@ -102,7 +102,7 @@ enum ContextualMenuItem: Identifiable {
     }
 }
 
-class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerDelegate {
+class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerDelegate , MessageAppearanceProtocol {
 
     @Published var content = ""
     @Published var metadata: LPLinkMetadata?
@@ -118,13 +118,13 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     @Published var player: PlayerViewModel?
     @Published var corners: UIRectCorner = [.allCorners]
     @Published var menuItems = [ContextualMenuItem]()
-    @Published var backgroundColor: Color
+    @Published var backgroundColor: Color = Color(.jamiMsgCellReceived)
     @Published var finalImage: UIImage?
     @Published var messageDeleted = false
     @Published var messageEdited = false
     @Published var messageDeletedText = " " + L10n.Conversation.deletedMessage
     @Published var editIndicator = L10n.Conversation.edited
-    @Published var editionColor = Color(UIColor.secondaryLabel)
+    @Published var editionColor = Color.secondary
     @Published var scale: CGFloat = 1
     var url: URL?
     var fileSize: Int64 = 0
@@ -132,14 +132,12 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     var dataTransferProgressUpdater: Timer?
 
     // view parameters
-    var borderColor: Color
-    var textColor: Color
-    var secondaryColor: Color
-    var hasBorder: Bool
+    var borderColor: Color = .clear
+    var hasBorder: Bool = false
     let cornerRadius: CGFloat = 15
     var textInset: CGFloat = 15
     var textVerticalInset: CGFloat = 10
-    var textFont: Font = Font.callout.weight(.regular)
+    var styling: MessageStyling = MessageStyling()
 
     var message: MessageModel
     var isIncoming: Bool
@@ -190,40 +188,57 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         self.content = message.content
         self.transferStatus = message.transferStatus
         self.preferencesColor = preferencesColor
-        self.secondaryColor = Color(UIColor.secondaryLabel)
-        if isHistory {
-            self.sequencing = .singleMessage
-            self.hasBorder = false
-            self.borderColor = Color(.clear)
-            self.textColor = isIncoming ? Color(UIColor.label) : Color(.white)
-            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
-        } else {
-            self.textColor = isIncoming ? Color(UIColor.label) : Color(.white)
-            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
-            self.hasBorder = false
-            self.borderColor = Color(.clear)
-        }
-        if self.content.containsOnlyEmoji {
-            self.backgroundColor = .clear
-            self.textFont = Font(UIFont.systemFont(ofSize: 38.0, weight: UIFont.Weight.medium))
-            self.textInset = 0
-            self.textVerticalInset = 2
-        }
+        self.updateMessageStyle()
         if self.type == .fileTransfer {
             self.fileName = message.content
-            self.textColor = Color(UIColor.label)
-            self.borderColor = Color(UIColor.clear)
             self.updateTransferInfo()
-        }
-        if self.type == .contact {
-            self.sequencing = .firstOfSequence
-            self.hasBorder = true
-            self.textColor = Color(UIColor.label)
-            self.backgroundColor = Color(UIColor.clear)
-            self.borderColor = Color(UIColor.secondaryLabel)
         }
         self.updateMessageEditions()
         self.fetchMetadata()
+    }
+
+    private func updateMessageStyle() {
+        self.updateBackgroundColor()
+        self.updateTextColor()
+        self.updateTextFont()
+        self.updateInset()
+        self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(UIColor.systemGray6)
+    }
+
+    private func updateTextColor() {
+        if self.isLink() {
+            self.styling.textColor = Color.blue
+        } else if !self.isIncoming && self.type != .contact {
+            self.styling.textColor = Color.white
+        } else {
+            self.styling.textColor = self.styling.defaultTextColor
+        }
+    }
+
+    private func updateTextFont() {
+        if self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited  {
+            self.styling.textFont = Font(UIFont.systemFont(ofSize: 38.0, weight: UIFont.Weight.medium))
+        } else {
+            self.styling.textFont = self.styling.defaultTextFont
+        }
+    }
+
+    private func updateBackgroundColor() {
+        if self.type == .contact || self.content.containsOnlyEmoji && !self.messageDeleted && !self.messageEdited {
+            self.backgroundColor = .clear
+        } else {
+            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
+        }
+    }
+
+    private func updateInset() {
+        if self.content.containsOnlyEmoji && !self.messageDeleted  && !self.messageEdited  {
+            self.textInset = 0
+            self.textVerticalInset = 2
+        } else {
+            self.textInset = 15
+            self.textVerticalInset = 10
+        }
     }
 
     func setSequencing(sequencing: MessageSequencing) {
@@ -255,9 +270,15 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         }
     }
 
+    private func isLink() -> Bool {
+        return self.type == .text &&
+        self.content.isValidURL &&
+        URL(string: self.content) != nil
+    }
+
     private func fetchMetadata() {
         guard self.type == .text, self.content.isValidURL, let url = URL(string: self.content) else { return }
-        self.textColor = .blue
+        self.updateTextColor()
         LPMetadataProvider().startFetchingMetadata(for: url) {(metaDataObj, error) in
             DispatchQueue.main.async { [weak self, weak metaDataObj] in
                 guard let self = self else { return }
@@ -426,7 +447,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.preferencesColor = color
-            self.backgroundColor = Color(color)
+            self.updateBackgroundColor()
         }
     }
 
@@ -437,13 +458,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             self.messageDeleted = self.message.isMessageDeleted()
             self.messageEdited = self.message.isMessageEdited()
             if self.messageDeleted || self.messageEdited {
-                self.textColor = self.isIncoming ? Color(UIColor.label) : Color(.white)
-                self.backgroundColor = self.isIncoming ? Color(.jamiMsgCellReceived) : Color(self.preferencesColor)
-                self.hasBorder = false
-                self.editionColor = self.isIncoming ? Color(UIColor.secondaryLabel) : Color(UIColor.systemGray6)
-                self.textInset = 15
-                self.textVerticalInset = 10
-                self.textFont = Font.callout.weight(.regular)
+                self.updateMessageStyle()
             }
         }
         if self.message.isMessageDeleted() {

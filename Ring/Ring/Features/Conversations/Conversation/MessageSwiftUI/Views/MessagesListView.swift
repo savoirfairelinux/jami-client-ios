@@ -211,11 +211,11 @@ struct MessagesListView: View {
         return VStack(alignment: .trailing, spacing: -10) {
             if model.numberOfNewMessages > 0 {
                 Text("\(model.numberOfNewMessages)")
-                    .font(.callout)
+                    .font(.caption.weight(.light))
                     .padding(.trailing, 6.0)
                     .padding(.leading, 6.0)
-                    .padding(.top, 0.0)
-                    .padding(.bottom, 0.0)
+                    .padding(.top, 1.0)
+                    .padding(.bottom, 1.0)
                     .background(Color(model.swarmColor))
                     .cornerRadius(9)
                     .foregroundColor(Color.white)
@@ -229,12 +229,12 @@ struct MessagesListView: View {
                 model.scrollToTheBottom()
             }, label: {
                 Image(systemName: "arrow.down")
-                    .frame(width: 30, height: 30)
+                    .frame(width: 35, height: 35)
                     .overlay(
                         Circle()
                             .stroke(Color(model.swarmColor), lineWidth: 1)
                     )
-                    .background(Color(UIColor.secondarySystemBackground))
+                    .background( VisualEffect(style: .regular, withVibrancy: false))
                     .clipShape(Circle())
                     .foregroundColor(Color(model.swarmColor))
                     .frame(width: 45, height: 45)

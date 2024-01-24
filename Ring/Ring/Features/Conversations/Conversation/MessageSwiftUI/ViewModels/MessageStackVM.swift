@@ -22,7 +22,7 @@ import Foundation
 import SwiftUI
 import RxSwift
 
-class MessageStackVM {
+class MessageStackVM: MessageAppearanceProtocol {
     @Published var username = ""
     var horizontalAllignment: HorizontalAlignment {
         self.message.incoming ? HorizontalAlignment.leading : HorizontalAlignment.trailing
@@ -33,6 +33,8 @@ class MessageStackVM {
     var message: MessageModel
 
     var infoState: PublishSubject<State>
+
+    var styling: MessageStyling = MessageStyling()
 
     @Published var shouldDisplayName = false {
         didSet {

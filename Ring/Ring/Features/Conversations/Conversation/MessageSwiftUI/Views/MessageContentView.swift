@@ -77,7 +77,7 @@ struct MessageTextStyle: ViewModifier {
             .padding(.bottom, model.textVerticalInset)
             .padding(.leading, model.textInset)
             .padding(.trailing, model.textInset)
-            .foregroundColor(model.textColor)
+            .foregroundColor(model.styling.textColor)
             .background(model.backgroundColor)
             .if(model.hasBorder) { view in
                 view.overlay(
@@ -163,6 +163,10 @@ struct MessageContentView: View {
             .padding(5)
             .background(Color(UIColor.systemBackground))
             .cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color(model.preferencesColor), lineWidth: 0.8)
+            )
             .padding(.trailing, 10)
             .padding(.leading, 30)
             .shadowForConversation()

@@ -23,6 +23,29 @@
 
 import Foundation
 import RxSwift
+import SwiftUI
+
+struct MessageStyling {
+    let defaultTextColor: Color = Color(UIColor.label)
+    let defaultSecondaryTextColor: Color = Color.secondary
+    let defaultTextFont: Font = Font.callout.weight(.regular)
+    let defaultSecondaryFont: Font = Font.footnote.weight(.regular)
+    var textColor: Color
+    var secondaryTextColor: Color
+    var textFont: Font
+    var secondaryFont: Font
+
+    init() {
+        self.textColor = defaultTextColor
+        self.secondaryTextColor = defaultSecondaryTextColor
+        self.textFont = defaultTextFont
+        self.secondaryFont = defaultSecondaryFont
+    }
+}
+
+protocol MessageAppearanceProtocol {
+    var styling: MessageStyling { get }
+}
 
 class MessageContainerModel: Identifiable {
     let id: String
