@@ -22,17 +22,17 @@ import Foundation
 import SwiftUI
 import RxSwift
 
-class ContactMessageVM: ObservableObject {
+class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
+
     @Published var avatarImage: UIImage?
     @Published var content: String
     @Published var borderColor: Color
     @Published var backgroundColor: Color
-    @Published var textColor: Color
     let cornerRadius: CGFloat = 20
     let avatarSize: CGFloat = 30
     var inset: CGFloat
     var height: CGFloat
-    var textFont: Font = Font.callout.weight(.medium)
+    var styling: MessageStyling = MessageStyling()
 
     var message: MessageModel
     var username = "" {
@@ -48,12 +48,15 @@ class ContactMessageVM: ObservableObject {
     init(message: MessageModel, infoState: PublishSubject<State>) {
         self.message = message
         self.infoState = infoState
-        self.textColor = Color(UIColor.label)
         self.backgroundColor = Color(UIColor.clear)
         self.inset = message.type == .initial ? 0 : 7
         self.height = message.type == .initial ? 25 : 45
         self.borderColor = message.type == .initial ? Color(UIColor.clear) : Color(UIColor.secondaryLabel)
         self.content = message.content
+        if message.type != .initial {
+            self.styling.textFont = self.styling.secondaryFont
+            self.styling.textColor = self.styling.defaultSecondaryTextColor
+        }
         if message.type == .contact && message.incoming {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             self.infoState.onNext(MessageInfo.updateAvatar(jamiId: jamiId))
@@ -64,7 +67,6 @@ class ContactMessageVM: ObservableObject {
     func swarmColorUpdated(color: UIColor) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.textColor = self.message.type == .initial ? Color(color) : Color(UIColor.label)
             self.borderColor = self.message.type != .initial ? Color(color) : Color(UIColor.clear)
         }
     }

@@ -22,7 +22,8 @@ import Foundation
 import SwiftUI
 import RxSwift
 
-class MessageReplyTargetVM: ObservableObject {
+class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol {
+    var styling: MessageStyling = MessageStyling()
 
     @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""

@@ -31,8 +31,8 @@ struct MessageStackView: View {
         VStack(alignment: model.horizontalAllignment) {
             if model.shouldDisplayName {
                 Text(model.username)
-                    .font(.footnote)
-                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                    .font(model.styling.secondaryFont)
+                    .foregroundColor(model.styling.secondaryTextColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                     .frame(height: 4)

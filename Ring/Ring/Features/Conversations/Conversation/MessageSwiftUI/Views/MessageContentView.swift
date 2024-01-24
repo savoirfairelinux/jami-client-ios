@@ -77,7 +77,7 @@ struct MessageTextStyle: ViewModifier {
             .padding(.bottom, model.textVerticalInset)
             .padding(.leading, model.textInset)
             .padding(.trailing, model.textInset)
-            .foregroundColor(model.textColor)
+            .foregroundColor(model.styling.textColor)
             .background(model.backgroundColor)
             .if(model.hasBorder) { view in
                 view.overlay(

@@ -21,19 +21,21 @@
 import SwiftUI
 
 struct MessageTopBaseView<Content>: View where Content: View {
+    var model: MessagePanelVM
     let padding: CGFloat = 10
     let content: Content
     let closeAction: () -> Void
 
-    init(closeAction: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+    init(model: MessagePanelVM, closeAction: @escaping () -> Void, @ViewBuilder content: () -> Content) {
         self.closeAction = closeAction
         self.content = content()
+        self.model = model
     }
 
     var body: some View {
         Rectangle()
             .frame(height: 1)
-            .foregroundColor(Color(UIColor.secondaryLabel))
+            .foregroundColor(model.styling.secondaryTextColor)
             .padding(.horizontal, padding * 0.5)
         HStack(alignment: .center) {
             Spacer().frame(width: padding)
@@ -47,7 +49,7 @@ struct MessageTopBaseView<Content>: View where Content: View {
                     .scaledToFit()
                     .padding(9)
                     .frame(width: 40, height: 40)
-                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .foregroundColor(model.styling.secondaryTextColor)
             })
         }
         .padding(.vertical, padding)
@@ -63,19 +65,19 @@ struct ReplyViewInMessagePanel: View {
     let padding: CGFloat = 10
 
     var body: some View {
-        MessageTopBaseView(closeAction: model.cancelReply) {
+        MessageTopBaseView(model: model, closeAction: model.cancelReply) {
             VStack(alignment: .leading, spacing: 6) {
                 (Text(L10n.Conversation.inReplyTo) +
                     Text(" \(model.inReplyTo)").bold())
-                    .font(.footnote)
+                    .font(model.styling.secondaryFont)
                     .lineLimit(1)
                     .truncationMode(.tail)
-                    .foregroundColor(Color(UIColor.label))
+                    .foregroundColor(model.styling.textColor)
                 Text(messageToReply.message.content)
-                    .font(.footnote)
+                    .font(model.styling.secondaryFont)
                     .lineLimit(1)
                     .truncationMode(.middle)
-                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .foregroundColor(model.styling.secondaryTextColor)
             }
             Spacer()
                 .frame(width: padding)
@@ -83,7 +85,7 @@ struct ReplyViewInMessagePanel: View {
                 if let player = messageToReply.player, player.hasVideo.value {
                     PlayerSwiftUI(model: messageToReply, player: player, onLongGesture: {}, ratio: 0.4, withControls: false, customCornerRadius: 10)
                 } else if let image = messageToReply.finalImage {
-                    ImageOrGifView(message: messageToReply, image: image, onLongGesture: {}, minHeight: 20, maxHeight: 50)
+                    ImageOrGifView(message: messageToReply, image: image, onLongGesture: {}, minHeight: 20, maxHeight: 50, customCornerRadius: 10)
                 }
             } else if messageToReply.type == .text,
                       let metadata = messageToReply.metadata {
@@ -101,20 +103,20 @@ struct EditMessagePanel: View {
     let padding: CGFloat = 10
 
     var body: some View {
-        MessageTopBaseView(closeAction: {
+        MessageTopBaseView(model: model, closeAction: {
             model.cancelEdit()
             text = ""
         }) {
             Text(L10n.Global.editing)
-                .font(.footnote)
+                .font(model.styling.secondaryFont)
                 .foregroundColor(Color(UIColor.systemBlue))
             Spacer()
                 .frame(width: 5)
             Text(messageToEdit.message.content)
-                .font(.footnote)
+                .font(model.styling.secondaryFont)
                 .lineLimit(1)
                 .truncationMode(.middle)
-                .foregroundColor(Color(UIColor.secondaryLabel))
+                .foregroundColor(model.styling.secondaryTextColor)
         }
     }
 }
@@ -126,7 +128,8 @@ struct MessagePanelView: View {
     @SwiftUI.State private var textHeight: CGFloat = 0
     let padding: CGFloat = 10
 
-    private struct MessagePanelImageButton: View {
+    struct MessagePanelImageButton: View {
+        let model: MessagePanelVM
         let systemName: String
         let width: CGFloat
         let height: CGFloat
@@ -141,27 +144,7 @@ struct MessagePanelView: View {
                 .padding(.top, 13)
                 .padding(.bottom, 5)
                 .frame(width: width, height: height)
-                .foregroundColor(Color(UIColor.secondaryLabel))
-        }
-    }
-
-    private struct CommonTextEditorStyle: ViewModifier {
-        @Binding var text: String
-        @Binding var placeholder: String
-
-        func body(content: Content) -> some View {
-            content
-                .cornerRadius(18)
-                .placeholder(when: text.isEmpty, alignment: .leading) {
-                    Text(placeholder)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                        .font(.callout)
-                        .foregroundColor(Color(UIColor.secondaryLabel))
-                        .cornerRadius(18)
-                }
+                .foregroundColor(model.styling.secondaryTextColor)
         }
     }
 
@@ -179,19 +162,29 @@ struct MessagePanelView: View {
                 Button(action: {
                     self.model.showMoreActions()
                 }, label: {
-                    MessagePanelImageButton(systemName: "plus.circle", width: 42, height: 42)
+                    MessagePanelImageButton(model: model, systemName: "plus.circle", width: 42, height: 42)
                 })
                 Button(action: {
                     self.model.sendPhoto()
                 }, label: {
-                    MessagePanelImageButton(systemName: "camera", width: 44, height: 42)
+                    MessagePanelImageButton(model: model, systemName: "camera", width: 44, height: 42)
                 })
 
                 Spacer()
                     .frame(width: 5)
                 UITextViewWrapper(text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
                     .frame(minHeight: textHeight, maxHeight: textHeight)
-                    .modifier(CommonTextEditorStyle(text: $text, placeholder: $model.placeholder))
+                    .cornerRadius(18)
+                    .placeholder(when: text.isEmpty, alignment: .leading) {
+                        Text(model.placeholder)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            .font(model.styling.textFont)
+                            .foregroundColor(model.styling.secondaryTextColor)
+                            .cornerRadius(18)
+                    }
                 Spacer()
                     .frame(width: 10)
                 Button(action: {
@@ -204,7 +197,7 @@ struct MessagePanelView: View {
                             .frame(width: 36, height: 36)
                             .padding(.bottom, 2)
                     } else {
-                        MessagePanelImageButton(systemName: "paperplane", width: 42, height: 42)
+                        MessagePanelImageButton(model: model, systemName: "paperplane", width: 42, height: 42)
                     }
                 })
                 .animation(.default, value: text.isEmpty)
