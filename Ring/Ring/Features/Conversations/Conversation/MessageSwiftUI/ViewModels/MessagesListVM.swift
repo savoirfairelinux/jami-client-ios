@@ -349,7 +349,7 @@ class MessagesListVM: ObservableObject {
             messageModel.message.id == newMessage.id
         }) { return false }
         let isHistory = newMessage.isReply()
-        let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject, isHistory: isHistory, localJamiId: localJamiId)
+        let container = MessageContainerModel(message: newMessage, contextMenuState: self.contextStateSubject, isHistory: isHistory, localJamiId: localJamiId, preferencesColor: self.conversation.preferences.getColor())
         self.subscribeMessage(container: container)
         if fromHistory {
             self.messagesModels.append(container)

@@ -177,8 +177,9 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
     var infoState: PublishSubject<State>
+    var preferencesColor: UIColor
 
-    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, infoState: PublishSubject<State>, isHistory: Bool) {
+    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, infoState: PublishSubject<State>, isHistory: Bool, preferencesColor: UIColor) {
         self.contextMenuState = contextMenuState
         self.transferState = transferState
         self.infoState = infoState
@@ -188,16 +189,17 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         self.isHistory = isHistory
         self.content = message.content
         self.transferStatus = message.transferStatus
+        self.preferencesColor = preferencesColor
         self.secondaryColor = Color(UIColor.secondaryLabel)
         if isHistory {
             self.sequencing = .singleMessage
             self.hasBorder = false
             self.borderColor = Color(.clear)
             self.textColor = isIncoming ? Color(UIColor.label) : Color(.white)
-            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(.jamiMsgCellSent)
+            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
         } else {
             self.textColor = isIncoming ? Color(UIColor.label) : Color(.white)
-            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(.jamiMsgCellSent)
+            self.backgroundColor = isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
             self.hasBorder = false
             self.borderColor = Color(.clear)
         }
@@ -423,6 +425,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
+            self.preferencesColor = color
             self.backgroundColor = Color(color)
         }
     }
@@ -435,7 +438,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             self.messageEdited = self.message.isMessageEdited()
             if self.messageDeleted || self.messageEdited {
                 self.textColor = self.isIncoming ? Color(UIColor.label) : Color(.white)
-                self.backgroundColor = self.isIncoming ? Color(.jamiMsgCellReceived) : Color(.jamiMsgCellSent)
+                self.backgroundColor = self.isIncoming ? Color(.jamiMsgCellReceived) : Color(preferencesColor)
                 self.hasBorder = false
                 self.editionColor = self.isIncoming ? Color(UIColor.secondaryLabel) : Color(UIColor.systemGray6)
                 self.textInset = 15

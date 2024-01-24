@@ -115,6 +115,10 @@ struct ConversationPreferences {
             self.ignoreNotifications = (ignoreNotifications as NSString).boolValue
         }
     }
+
+    func getColor() -> UIColor {
+        return UIColor(hexString: color)!
+    }
 }
 
 class ConversationParticipant: Equatable, Hashable {
