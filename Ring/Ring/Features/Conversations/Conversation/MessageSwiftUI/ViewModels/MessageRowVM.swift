@@ -25,13 +25,15 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class MessageRowVM: ObservableObject {
+class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
+
     @Published var avatarImage: UIImage?
     @Published var read: [UIImage]?
     @Published var timeString: String = ""
     @Published var topSpace: CGFloat = 0
     @Published var bottomSpace: CGFloat = 0
     @Published var readBorderColor: Color
+    var styling: MessageStyling = MessageStyling()
     var incoming: Bool
     var infoState: PublishSubject<State>
     var centeredMessage: Bool

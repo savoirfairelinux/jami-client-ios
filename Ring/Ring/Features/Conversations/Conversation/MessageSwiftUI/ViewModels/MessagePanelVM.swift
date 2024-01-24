@@ -21,7 +21,7 @@
 import Foundation
 import RxSwift
 
-class MessagePanelVM: ObservableObject {
+class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
 
     @Published var placeholder = L10n.Conversation.messagePlaceholder
     @Published var defaultEmoji = "👍"
@@ -30,6 +30,7 @@ class MessagePanelVM: ObservableObject {
     @Published var isEdit: Bool = false
     @Published var avatarImage: UIImage?
     @Published var inReplyTo = ""
+    var styling: MessageStyling = MessageStyling()
 
     private let messagePanelState: PublishSubject<State>
 
