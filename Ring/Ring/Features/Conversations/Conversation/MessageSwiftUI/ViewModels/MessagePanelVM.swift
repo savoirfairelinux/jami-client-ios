@@ -78,8 +78,24 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
 
     }
 
-    func showMoreActions() {
-        messagePanelState.onNext(MessagePanelState.showMoreActions)
+    func openGalery() {
+        messagePanelState.onNext(MessagePanelState.openGalery)
+    }
+
+    func shareLocation() {
+        messagePanelState.onNext(MessagePanelState.shareLocation)
+    }
+
+    func recordVideo() {
+        messagePanelState.onNext(MessagePanelState.recordVido)
+    }
+
+    func recordAudio() {
+        messagePanelState.onNext(MessagePanelState.recordAudio)
+    }
+
+    func sendFile() {
+        messagePanelState.onNext(MessagePanelState.sendFile)
     }
 
     func sendPhoto() {
