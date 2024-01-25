@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Record a video message";
 "alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "Upload file";
-"alerts.uploadPhoto" = "Upload photo or movie";
+"alerts.uploadFile" = "Send file";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
 "alerts.locationSharing" = "Share my location";
 "alerts.alreadylocationSharing" = "Already sharing location with this user";

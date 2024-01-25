@@ -143,12 +143,20 @@ class ConversationViewController: UIViewController,
                 switch state {
                 case .sendMessage(let content, let parentId):
                     self.viewModel.sendMessage(withContent: content, parentId: parentId)
-                case .showMoreActions:
-                    self.showActionsForMessagePanel()
                 case .sendPhoto:
                     self.takePicture()
                 case .editMessage(content: let content, messageId: let messageId):
                     self.viewModel.editMessage(content: content, messageId: messageId)
+                case .openGalery:
+                    self.selectItemsFromPhotoLibrary()
+                case .shareLocation:
+                    self.startLocationSharing()
+                case .recordAudio:
+                    self.recordAudio()
+                case .recordVido:
+                    self.recordVideo()
+                case .sendFile:
+                    self.importDocument()
                 }
             })
             .disposed(by: self.disposeBag)
@@ -264,79 +272,55 @@ class ConversationViewController: UIViewController,
         }
     }
 
-    @objc
-    func showActionsForMessagePanel() {
-        let alert = UIAlertController.init(title: nil,
-                                           message: nil,
-                                           preferredStyle: .actionSheet)
-        let pictureAction = UIAlertAction(title: L10n.Alerts.uploadPhoto, style: UIAlertAction.Style.default) {[weak self] _ in
-            self?.selectItemsFromPhotoLibrary()
-        }
-
-        let recordVideoAction = UIAlertAction(title: L10n.Alerts.recordVideoMessage, style: UIAlertAction.Style.default) {[weak self] _ in
-            if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
-                if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
-                    self?.recordVideoFile()
+    func recordVideo() {
+        if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
+            if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
+                self.recordVideoFile()
+            } else {
+                AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { [weak self] (granted: Bool) -> Void in
+                    guard let self = self else { return }
+                    if granted == true {
+                        self.recordVideoFile()
+                    } else {
+                        self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
+                    }
+                })
+            }
+        } else {
+            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: {[weak self] (granted: Bool) -> Void in
+                guard let self = self else { return }
+                if granted == true {
+                    if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
+                        self.recordVideoFile()
+                    } else {
+                        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
+                            if granted == true {
+                                self.recordVideoFile()
+                            } else {
+                                self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
+                            }
+                        })
+                    }
                 } else {
-                    AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
-                        if granted == true {
-                            self?.recordVideoFile()
-                        } else {
-                            self?.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
-                        }
-                    })
+                    self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
                 }
-            } else {
-                AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { (granted: Bool) -> Void in
-                    if granted == true {
-                        if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized {
-                            self?.recordVideoFile()
-                        } else {
-                            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
-                                if granted == true {
-                                    self?.recordVideoFile()
-                                } else {
-                                    self?.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
-                                }
-                            })
-                        }
-                    } else {
-                        self?.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
-                    }
-                })
-            }
+            })
         }
+    }
 
-        let recordAudioAction = UIAlertAction(title: L10n.Alerts.recordAudioMessage, style: UIAlertAction.Style.default) { [weak self] _ in
-            if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
-                self?.viewModel.recordAudioFile()
-            } else {
-                AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { (granted: Bool) -> Void in
-                    if granted == true {
-                        self?.viewModel.recordAudioFile()
-                    } else {
-                        self?.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
-                    }
-                })
-            }
+    func recordAudio() {
+        if AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized {
+            self.viewModel.recordAudioFile()
+        } else {
+            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { [weak self] (granted: Bool) -> Void in
+                guard let self = self else { return }
+                if granted == true {
+                    self.viewModel.recordAudioFile()
+                } else {
+                    self.showNoPermissionsAlert(title: L10n.Alerts.noMediaPermissionsTitle)
+                }
+            })
         }
-
-        let documentsAction = UIAlertAction(title: L10n.Alerts.uploadFile, style: UIAlertAction.Style.default) { _ in
-            self.importDocument()
-        }
-
-        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: UIAlertAction.Style.cancel)
-
-        alert.addAction(pictureAction)
-        alert.addAction(recordVideoAction)
-        alert.addAction(recordAudioAction)
-        alert.addAction(documentsAction)
-        alert.addAction(locationSharingAction())
-        alert.addAction(cancelAction)
-        alert.popoverPresentationController?.sourceView = self.view
-        alert.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
-        alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.maxX, width: 0, height: 0)
-        self.present(alert, animated: true, completion: nil)
     }
 
     func takePicture() {
@@ -737,16 +721,13 @@ class ConversationViewController: UIViewController,
 
 // MARK: Location sharing
 extension ConversationViewController {
-    private func locationSharingAction() -> UIAlertAction {
-        return UIAlertAction(title: L10n.Alerts.locationSharing, style: .default) { [weak self] _ in
-            guard let self = self else { return }
 
-            if self.checkLocationAuthorization() && self.isNotAlreadySharingWithThisContact() {
-                if self.isLocationSharingDurationLimited {
-                    self.viewModel.startSendingLocation(duration: TimeInterval(self.locationSharingDuration * 60))
-                } else {
-                    self.viewModel.startSendingLocation()
-                }
+    func startLocationSharing() {
+        if self.checkLocationAuthorization() && self.isNotAlreadySharingWithThisContact() {
+            if self.isLocationSharingDurationLimited {
+                self.viewModel.startSendingLocation(duration: TimeInterval(self.locationSharingDuration * 60))
+            } else {
+                self.viewModel.startSendingLocation()
             }
         }
     }

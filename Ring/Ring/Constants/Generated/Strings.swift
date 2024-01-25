@@ -259,10 +259,10 @@ internal enum L10n {
     internal static let recordAudioMessage = L10n.tr("Localizable", "alerts.recordAudioMessage", fallback: "Record an audio message")
     /// Record a video message
     internal static let recordVideoMessage = L10n.tr("Localizable", "alerts.recordVideoMessage", fallback: "Record a video message")
-    /// Upload file
-    internal static let uploadFile = L10n.tr("Localizable", "alerts.uploadFile", fallback: "Upload file")
-    /// Upload photo or movie
-    internal static let uploadPhoto = L10n.tr("Localizable", "alerts.uploadPhoto", fallback: "Upload photo or movie")
+    /// Send file
+    internal static let uploadFile = L10n.tr("Localizable", "alerts.uploadFile", fallback: "Send file")
+    /// Open gallery
+    internal static let uploadPhoto = L10n.tr("Localizable", "alerts.uploadPhoto", fallback: "Open gallery")
   }
   internal enum BlockListPage {
     /// No blocked contacts

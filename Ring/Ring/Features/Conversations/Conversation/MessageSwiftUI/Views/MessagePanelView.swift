@@ -159,11 +159,10 @@ struct MessagePanelView: View {
                     }
             }
             HStack(alignment: .bottom, spacing: 1) {
-                Button(action: {
-                    self.model.showMoreActions()
-                }, label: {
+                Menu(content: menuContent, label: {
                     MessagePanelImageButton(model: model, systemName: "plus.circle", width: 42, height: 42)
                 })
+
                 Button(action: {
                     self.model.sendPhoto()
                 }, label: {
@@ -210,6 +209,36 @@ struct MessagePanelView: View {
         )
         .onChange(of: model.isEdit) { _ in
             isFocused = model.isEdit
+        }
+    }
+
+    private func menuContent() -> some View {
+        Group {
+            Button(action: {
+                model.recordAudio()
+            }) {
+                Label(MessagePanelState.recordAudio.toString(), systemImage: MessagePanelState.recordAudio.imageName())
+            }
+            Button(action: {
+                model.recordVideo()
+            }) {
+                Label(MessagePanelState.recordVido.toString(), systemImage: MessagePanelState.recordVido.imageName())
+            }
+            Button(action: {
+                model.shareLocation()
+            }) {
+                Label(MessagePanelState.shareLocation.toString(), systemImage: MessagePanelState.shareLocation.imageName())
+            }
+            Button(action: {
+                model.sendFile()
+            }) {
+                Label(MessagePanelState.sendFile.toString(), systemImage: MessagePanelState.sendFile.imageName())
+            }
+            Button(action: {
+                model.openGalery()
+            }) {
+                Label(MessagePanelState.openGalery.toString(), systemImage: MessagePanelState.openGalery.imageName())
+            }
         }
     }
 

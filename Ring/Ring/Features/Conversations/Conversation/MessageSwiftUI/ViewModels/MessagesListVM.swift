@@ -37,8 +37,51 @@ enum MessageInfo: State {
 enum MessagePanelState: State {
     case sendMessage(content: String, parentId: String)
     case editMessage(content: String, messageId: String)
-    case showMoreActions
     case sendPhoto
+    case openGalery
+    case shareLocation
+    case recordAudio
+    case recordVido
+    case sendFile
+
+    func toString() -> String {
+        switch self {
+        case .sendMessage:
+            return "send message"
+        case .editMessage:
+            return "edit message"
+        case .openGalery:
+            return L10n.Alerts.uploadPhoto
+        case .shareLocation:
+            return L10n.Alerts.locationSharing
+        case .recordAudio:
+            return L10n.Alerts.recordAudioMessage
+        case .recordVido:
+            return L10n.Alerts.recordVideoMessage
+        case .sendFile:
+            return L10n.Alerts.uploadFile
+        case .sendPhoto:
+            return "send photo"
+        }
+    }
+
+    func imageName() -> String {
+        switch self {
+        case .openGalery:
+            return "photo"
+        case .shareLocation:
+            return "location"
+        case .recordAudio:
+            return "mic"
+        case .recordVido:
+            return "camera"
+        case .sendFile:
+            return "doc"
+        default:
+            return ""
+        }
+
+    }
 }
 
 // swiftlint:disable type_body_length
