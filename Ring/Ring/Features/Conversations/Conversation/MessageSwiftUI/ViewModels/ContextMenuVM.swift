@@ -21,6 +21,7 @@
 import Foundation
 import SwiftUI
 
+// TODO KESS
 class ContextMenuVM {
     @Published var menuItems = [ContextualMenuItem]()
     var presentingMessage: MessageBubbleView! {
