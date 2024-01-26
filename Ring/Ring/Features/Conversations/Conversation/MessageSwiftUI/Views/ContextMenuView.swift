@@ -36,6 +36,7 @@ struct VisualEffect: UIViewRepresentable {
 struct ContextMenuView: View {
     var model: ContextMenuVM
     @Binding var showContextMenu: Bool
+    @Binding var shouldHideActiveKeyboard: Bool
     // animations
     @SwiftUI.State private var blurAmount = 0.0
     @SwiftUI.State private var backgroundScale: CGFloat = 1.00
@@ -87,20 +88,25 @@ struct ContextMenuView: View {
             .background(makeBackground())
         }
         .onTapGesture {
-            withAnimation(Animation.easeOut(duration: 0.2)) {
-                scrollViewHeight = model.messageFrame.height
-                blurAmount = 0
-                backgroundScale = 1.00
-                messageScale = 1
-                actionsScale = 0.00
-                actionsOpacity = 0
-                messageShadow = 0
-                backgroundOpacity = 0
-                messageOffsetDiff = 0
-                cornerRadius = 0
+            if self.shouldHideActiveKeyboard {
+                shouldHideActiveKeyboard = false
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                showContextMenu = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                withAnimation(Animation.easeOut(duration: 0.3)) {
+                    scrollViewHeight = model.messageFrame.height
+                    blurAmount = 0
+                    backgroundScale = 1.00
+                    messageScale = 1
+                    actionsScale = 0.00
+                    actionsOpacity = 0
+                    messageShadow = 0
+                    backgroundOpacity = 0
+                    messageOffsetDiff = 0
+                    cornerRadius = 0
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    showContextMenu = false
+                }
             }
         }
         .onAppear(perform: {
