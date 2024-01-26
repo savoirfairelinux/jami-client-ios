@@ -212,6 +212,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
     let password = BehaviorRelay<String>(value: "")
     let confirmPassword = BehaviorRelay<String>(value: "")
     let notificationSwitch = BehaviorRelay<Bool>(value: true)
+    let nameRegistrationTimeout:CGFloat = 30
     lazy var usernameValidationState = BehaviorRelay<UsernameValidationState>(value: .unknown)
     lazy var canAskForAccountCreation: Observable<Bool> = {
         return Observable.combineLatest(self.usernameValidationState.asObservable(),
@@ -299,7 +300,7 @@ class CreateAccountViewModel: Stateable, ViewModel {
                         self.accountCreationState.accept(.nameNotRegistered)
                     })
                 DispatchQueue.main
-                    .asyncAfter(deadline: .now() + 6) {
+                    .asyncAfter(deadline: .now() + self.nameRegistrationTimeout) {
                         disposable.dispose()
                         if self.accountCreationState.value.isCompleted {
                             return
