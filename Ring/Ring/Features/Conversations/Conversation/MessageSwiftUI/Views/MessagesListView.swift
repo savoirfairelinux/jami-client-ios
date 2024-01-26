@@ -22,6 +22,7 @@
 import SwiftUI
 import UIKit
 import RxSwift
+import Combine
 
 struct Flipped: ViewModifier {
     func body(content: Content) -> some View {
@@ -61,6 +62,9 @@ struct MessagesListView: View {
     @SwiftUI.State private var showReactionsView = false
     @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
     @SwiftUI.State private var messageContainerHeight: CGFloat = 0
+    @SwiftUI.State private var presentingKeyboard = false
+    @SwiftUI.State var isFocused: Bool = false
+    @SwiftUI.State var keyboardHeight: CGFloat = 0
 
     var body: some View {
         ZStack {
@@ -74,8 +78,8 @@ struct MessagesListView: View {
                         }
                     }
                     .layoutPriority(1)
-                    .padding(.bottom, messageContainerHeight - 30)
-                    MessagePanelView(model: model.messagePanel)
+                    .padding(.bottom, presentingKeyboard ? keyboardHeight : messageContainerHeight - 30)
+                    MessagePanelView(model: model.messagePanel, isFocused: $isFocused)
                         .alignmentGuide(VerticalAlignment.center) { dimensions in
                             DispatchQueue.main.async {
                                 self.messageContainerHeight = dimensions.height
@@ -93,11 +97,26 @@ struct MessagesListView: View {
                     if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
                         screenHeight = UIScreen.main.bounds.size.height
                         showContextMenu = false
+                        self.presentingKeyboard = false
                     }
                 }
                 .onAppear(perform: {
                     screenHeight = UIScreen.main.bounds.size.height
                 })
+                .onChange(of: presentingKeyboard, perform: { value in
+                    if value == false {
+                        isFocused = true
+                    }
+                })
+                .onReceive(Publishers.keyboardHeight) { height in
+                    if !presentingKeyboard {
+                        DispatchQueue.main.async {
+                            withAnimation {
+                                keyboardHeight = height
+                            }
+                        }
+                    }
+                }
                 if model.shouldShowMap {
                     LocationSharingView(model: model)
                 }
@@ -132,7 +151,7 @@ struct MessagesListView: View {
     }
 
     func makeOverlay() -> some View {
-        return ContextMenuView(model: contextMenuModel, showContextMenu: $showContextMenu)
+        return ContextMenuView(model: contextMenuModel, showContextMenu: $showContextMenu, presentingKeyboard: $presentingKeyboard)
     }
 
     private func createMessagesStackView() -> some View {
@@ -200,6 +219,13 @@ struct MessagesListView: View {
             model.hideNavigationBar.accept(true)
             contextMenuModel.presentingMessage = message
             contextMenuModel.messageFrame = frame
+            if keyboardHeight > 0 {
+                withAnimation {
+                    self.presentingKeyboard = true
+                }
+                self.hideKeyboard()
+                self.isFocused = false
+            }
             showContextMenu = true
         }, showReactionsView: {message in
             reactionsForMessage = message
@@ -274,4 +300,23 @@ func topVC() -> UIViewController? {
     }
 
     return nil
+}
+
+extension Publishers {
+    static var keyboardHeight: AnyPublisher<CGFloat, Never> {
+        let willShow = NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)
+            .map { $0.keyboardHeight }
+
+        let willHide = NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification)
+            .map { _ in CGFloat(0) }
+
+        return MergeMany(willShow, willHide)
+            .eraseToAnyPublisher()
+    }
+}
+
+extension Notification {
+    var keyboardHeight: CGFloat {
+        (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+    }
 }

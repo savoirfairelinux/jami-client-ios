@@ -93,7 +93,7 @@ struct MessageLongPress: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onLongPressGesture(minimumDuration: 0.2, perform: longPressCb)
+            .onLongPressGesture(perform: longPressCb)
     }
 }
 
