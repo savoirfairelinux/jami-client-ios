@@ -20,6 +20,15 @@
 
 import SwiftUI
 
+enum ContextMenuPresentingState {
+    case none
+    case shouldPresent
+    case willDismissWithoutAction
+    case willDismissWithTextEditingAction
+    case willDismissWithAction
+    case dismissed
+}
+
 struct VisualEffect: UIViewRepresentable {
     @SwiftUI.State var style: UIBlurEffect.Style
     var withVibrancy: Bool
@@ -35,7 +44,7 @@ struct VisualEffect: UIViewRepresentable {
 
 struct ContextMenuView: View {
     var model: ContextMenuVM
-    @Binding var showContextMenu: Bool
+    @Binding var presentingState: ContextMenuPresentingState
     // animations
     @SwiftUI.State private var blurAmount = 0.0
     @SwiftUI.State private var backgroundScale: CGFloat = 1.00
@@ -87,21 +96,22 @@ struct ContextMenuView: View {
             .background(makeBackground())
         }
         .onTapGesture {
-            withAnimation(Animation.easeOut(duration: 0.2)) {
-                scrollViewHeight = model.messageFrame.height
-                blurAmount = 0
-                backgroundScale = 1.00
-                messageScale = 1
-                actionsScale = 0.00
-                actionsOpacity = 0
-                messageShadow = 0
-                backgroundOpacity = 0
-                messageOffsetDiff = 0
-                cornerRadius = 0
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                showContextMenu = false
-            }
+            presentingState = .willDismissWithoutAction
+                withAnimation(Animation.easeOut(duration: 0.3)) {
+                    scrollViewHeight = model.messageFrame.height
+                    blurAmount = 0
+                    backgroundScale = 1.00
+                    messageScale = 1
+                    actionsScale = 0.00
+                    actionsOpacity = 0
+                    messageShadow = 0
+                    backgroundOpacity = 0
+                    messageOffsetDiff = 0
+                    cornerRadius = 0
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    presentingState = .dismissed
+                }
         }
         .onAppear(perform: {
             scrollViewHeight = model.messageFrame.height
@@ -146,8 +156,13 @@ struct ContextMenuView: View {
             ForEach(model.menuItems) { item in
                 VStack(spacing: 0) {
                     Button {
-                        showContextMenu = false
+                        let shouldShowKeyboard = item == .copy || item == .deleteMessage
+                        let state: ContextMenuPresentingState = shouldShowKeyboard ? .willDismissWithAction : .willDismissWithTextEditingAction
+                        presentingState = state
                         model.presentingMessage.model.contextMenuSelect(item: item)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            presentingState = .dismissed
+                        }
                     } label: {
                         HStack {
                             Spacer()
