@@ -22,6 +22,7 @@
 import SwiftUI
 import UIKit
 import RxSwift
+import Combine
 
 struct Flipped: ViewModifier {
     func body(content: Content) -> some View {
@@ -61,6 +62,9 @@ struct MessagesListView: View {
     @SwiftUI.State private var showReactionsView = false
     @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
     @SwiftUI.State private var messageContainerHeight: CGFloat = 0
+    @SwiftUI.State private var shouldHideActiveKeyboard = false
+    @SwiftUI.State var isMessageBarFocused: Bool = false
+    @SwiftUI.State var keyboardHeight: CGFloat = 0
 
     var body: some View {
         ZStack {
@@ -74,8 +78,8 @@ struct MessagesListView: View {
                         }
                     }
                     .layoutPriority(1)
-                    .padding(.bottom, messageContainerHeight - 30)
-                    MessagePanelView(model: model.messagePanel)
+                    .padding(.bottom, shouldHideActiveKeyboard ? keyboardHeight : messageContainerHeight - 30)
+                    MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
                         .alignmentGuide(VerticalAlignment.center) { dimensions in
                             DispatchQueue.main.async {
                                 self.messageContainerHeight = dimensions.height
@@ -93,11 +97,24 @@ struct MessagesListView: View {
                     if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
                         screenHeight = UIScreen.main.bounds.size.height
                         showContextMenu = false
+                        self.shouldHideActiveKeyboard = false
                     }
                 }
                 .onAppear(perform: {
                     screenHeight = UIScreen.main.bounds.size.height
                 })
+                .onChange(of: shouldHideActiveKeyboard, perform: { shouldHide in
+                    /*
+                     When the context menu is removed, we need to reopen the
+                     keyboard and reactivate the message bar if it was active before.
+                     */
+                    if !shouldHide {
+                        isMessageBarFocused = true
+                    }
+                })
+                .onReceive(Publishers.keyboardHeight) { height in
+                    handleKeyboardHeightChange(height)
+                }
                 if model.shouldShowMap {
                     LocationSharingView(model: model)
                 }
@@ -132,7 +149,7 @@ struct MessagesListView: View {
     }
 
     func makeOverlay() -> some View {
-        return ContextMenuView(model: contextMenuModel, showContextMenu: $showContextMenu)
+        return ContextMenuView(model: contextMenuModel, showContextMenu: $showContextMenu, shouldHideActiveKeyboard: $shouldHideActiveKeyboard)
     }
 
     private func createMessagesStackView() -> some View {
@@ -200,6 +217,14 @@ struct MessagesListView: View {
             model.hideNavigationBar.accept(true)
             contextMenuModel.presentingMessage = message
             contextMenuModel.messageFrame = frame
+            /*
+             If the keyboard is open, it should be closed.
+             Once the context menu is removed, the keyboard
+             should be shown again.
+             */
+            if keyboardHeight > 0 {
+                hideKeyboardIfNeed()
+            }
             showContextMenu = true
         }, showReactionsView: {message in
             reactionsForMessage = message
@@ -247,6 +272,31 @@ struct MessagesListView: View {
         .padding(.bottom, 35)
         .ignoresSafeArea(.container, edges: [])
         .shadowForConversation()
+    }
+
+    private func hideKeyboardIfNeed() {
+        if keyboardHeight > 0 {
+            withAnimation {
+                self.shouldHideActiveKeyboard = true
+            }
+            self.hideKeyboard()
+            self.isMessageBarFocused = false
+        }
+    }
+
+    private func handleKeyboardHeightChange(_ height: CGFloat) {
+        /*
+         If shouldHideActiveKeyboard is true, we don't track the
+         keyboard height, as the keyboard is temporarily hidden
+         and expected to reappear once the context menu is removed.
+         */
+        if !shouldHideActiveKeyboard {
+            DispatchQueue.main.async {
+                withAnimation {
+                    keyboardHeight = height
+                }
+            }
+        }
     }
 }
 

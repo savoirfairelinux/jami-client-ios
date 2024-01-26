@@ -123,8 +123,8 @@ struct EditMessagePanel: View {
 
 struct MessagePanelView: View {
     @StateObject var model: MessagePanelVM
+    @Binding var isFocused: Bool
     @SwiftUI.State private var text: String = ""
-    @SwiftUI.State private var isFocused: Bool = false
     @SwiftUI.State private var textHeight: CGFloat = 0
     let padding: CGFloat = 10
 
