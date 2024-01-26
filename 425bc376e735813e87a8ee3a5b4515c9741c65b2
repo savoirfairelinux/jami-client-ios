@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea3e8830_6999d50f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/ConversationViewModel.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 0,
+      "message": "this flag should be handled in conversation service. Conversation service could have enum MessageFlags and functions sendMessage, addReaction, edit. This way Conversation service will be responsible for selecting right flag",
+      "revId": "425bc376e735813e87a8ee3a5b4515c9741c65b2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}

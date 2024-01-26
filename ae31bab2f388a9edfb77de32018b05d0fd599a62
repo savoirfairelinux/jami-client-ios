@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f019439_c07704c1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "put in separate function, like other subscriptions(see lines 211-219)",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f66d9ae_287c7e0d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "this calculation could be done in view model, as well as check for isOurMsg",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d4f95de_0c1623a1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "we should keep model.messageFrame.height, instead of scrollViewHeight. So big message could be scrollable",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "704c16cf_456ee6a8",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "if it is invisible tap area why it has .shadow modifier?",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85e80a07_43deb654",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "we could use String directly for defaultReactionEmojis. We never use UTF32Char, not for display, not for API call. Seems like extra step.",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e991f0b0_ec857294",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "we do not need check for iOS 15 availability",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e080ab34_c2055d1c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "we do not need check for iOS 15 availability",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8588866_5334f224",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "we do not need check for iOS 15 availability",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b62529c_c466eb3a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "emoji does not to be @Binding, var is enough",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75b917e0_2cd406cb",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "839cc0d9_aa4dbe61",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "emojiActive could be calculated in the model",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c774f25_01be2e43",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 5
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-01-26T19:34:51Z",
+      "side": 1,
+      "message": "this function is not used",
+      "revId": "ae31bab2f388a9edfb77de32018b05d0fd599a62",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
