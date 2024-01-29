@@ -203,7 +203,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         self.updateTextColor()
         self.updateTextFont()
         self.updateInset()
-        self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(UIColor.systemGray6)
+        self.editionColor = self.isIncoming ? styling.secondaryTextColor : Color(red: 0.95, green: 0.95, blue: 0.95)
     }
 
     private func updateTextColor() {
