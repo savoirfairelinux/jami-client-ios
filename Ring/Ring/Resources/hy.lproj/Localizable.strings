@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Չար QR կոդ";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Չի կարող կապվել տրամադրված հաշիվի կառավարիչի հետ: Խնդրում ենք ստուգել ձեր վավերականությունները";
 "alerts.recordVideoMessage" = "Տեսագրեք հաղորդագրություն";
 "alerts.recordAudioMessage" = "ձայնային հաղորդագրություն ձայնագրեք";
-"alerts.uploadFile" = "Բեռնել ֆայլը";
-"alerts.uploadPhoto" = "Լուսանկար կամ ֆիլմ բեռնել";
+"alerts.uploadFile" = "Փաստաթուղթ ուղարկել";
+"alerts.uploadPhoto" = "Բաց պատկերասրահ";
 "alerts.locationServiceIsDisabled" = "Փոխցրեք \"Տեղադրման ծառայությունները\", որպեսզի \"Ջամի\" կարողանա որոշել ձեր գտնվելու վայրը:";
 "alerts.locationSharing" = "Գտնվելու վայրը կիսեք";
 "alerts.alreadylocationSharing" = "Արդեն տեղամասը կիսել այս օգտագործողի հետ";

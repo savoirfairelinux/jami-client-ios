@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "无效的二维码";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "无法连接到提供的账户管理器。请检查您的凭据。";
 "alerts.recordVideoMessage" = "录制视频信息";
 "alerts.recordAudioMessage" = "录制语音信息";
-"alerts.uploadFile" = "上传文件";
-"alerts.uploadPhoto" = "上传照片或视频";
+"alerts.uploadFile" = "傳送檔案";
+"alerts.uploadPhoto" = "打开相册";
 "alerts.locationServiceIsDisabled" = "打开”位置服务“以允许 Jami 确定您的位置。";
 "alerts.locationSharing" = "分享我的位置";
 "alerts.alreadylocationSharing" = "已与此用户分享位置";

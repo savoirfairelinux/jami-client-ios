@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Κακό QR κωδικό";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Δεν μπορώ να συνδεθώ με τον διευθυντή λογαριασμού. Παρακαλούμε ελέγξτε τα στοιχεία σας.";
 "alerts.recordVideoMessage" = "Καταγράψτε ένα μήνυμα βίντεο";
 "alerts.recordAudioMessage" = "Καταγράψτε ένα ήχο μήνυμα";
-"alerts.uploadFile" = "Εφορτώστε αρχείο";
-"alerts.uploadPhoto" = "Ανάρτηση φωτογραφίας ή ταινίας";
+"alerts.uploadFile" = "Send file";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Ενεργοποιήστε τις υπηρεσίες τοποθεσίας για να επιτρέψετε στον Τζάμι να προσδιορίσει την τοποθεσία σας.";
 "alerts.locationSharing" = "Μοιραστείτε την τοποθεσία μου";
 "alerts.alreadylocationSharing" = "Ήδη μοιράζεται τοποθεσία με αυτόν τον χρήστη";

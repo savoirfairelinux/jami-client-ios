@@ -45,9 +45,11 @@
 "global.copy" = "Kopiuj";
 "global.reply" = "Odpowiedz";
 "global.search" = "Szukanie";
-"global.donate" = "Donate";
+"global.donate" = "Przekaż darowiznę";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Niepoprawny kod QR";
@@ -97,7 +99,7 @@
 "smartlist.aboutJami" = "O Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
-"smartlist.disableDonation" = "Not now";
+"smartlist.disableDonation" = "Nie w tej chwili";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Nie można połączyć się z podanym menedżerem konta. Sprawdź swoje poświadczenia.";
 "alerts.recordVideoMessage" = "Nagraj wiadomość wideo";
 "alerts.recordAudioMessage" = "Nagraj wiadomość głosową";
-"alerts.uploadFile" = "Prześlij plik";
-"alerts.uploadPhoto" = "Prześlij zdjęcie lub film";
+"alerts.uploadFile" = "Wyślij plik";
+"alerts.uploadPhoto" = "Otwarta galeria";
 "alerts.locationServiceIsDisabled" = "Włącz \"Usługi lokalizacyjne\", aby pozwolić \"Jami\" na określenie Twojej lokalizacji.";
 "alerts.locationSharing" = "Udostępnij moją lokalizację";
 "alerts.alreadylocationSharing" = "Już udostępniasz lokalizację temu użytkownikowi";

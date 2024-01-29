@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Halb QR-kood";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Ma ei saa ühendust võtta antud kontomanijaga.";
 "alerts.recordVideoMessage" = "Salvestada video sõnum";
 "alerts.recordAudioMessage" = "Salvestada audiosõnumi";
-"alerts.uploadFile" = "Laadima faili";
-"alerts.uploadPhoto" = "Laadige üles foto või film";
+"alerts.uploadFile" = "Saada fail";
+"alerts.uploadPhoto" = "Avatud galeriid";
 "alerts.locationServiceIsDisabled" = "Pane \"Lokatsiooni teenused\" sisse, et \"Jami\" saaks su asukohta kindlaks teha.";
 "alerts.locationSharing" = "Jaage minu asukoht.";
 "alerts.alreadylocationSharing" = "Kasutajaga juba jagatakse asukohta";

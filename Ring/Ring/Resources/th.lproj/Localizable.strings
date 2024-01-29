@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "รหัส QR ที่ไม่ดี";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "ไม่สามารถเชื่อมต่อกับผู้จัดการบัญชีที่ให้บริการ ได้โปรดตรวจสอบข้อมูลความเป็นเจ้าของของคุณ";
 "alerts.recordVideoMessage" = "ถ่ายวีดีโอข้อความ";
 "alerts.recordAudioMessage" = "ถ่ายข้อความเสียง";
-"alerts.uploadFile" = "โหลดไฟล์";
-"alerts.uploadPhoto" = "โหลดรูปภาพหรือหนัง";
+"alerts.uploadFile" = "ส่งไฟล์";
+"alerts.uploadPhoto" = "เปิดแกลเลอรี่";
 "alerts.locationServiceIsDisabled" = "เปิด \"บริการสถานที่\" ให้ \"Jami\" รู้ว่าสถานที่ของคุณ";
 "alerts.locationSharing" = "แบ่งตําแหน่งของฉัน";
 "alerts.alreadylocationSharing" = "แบ่งปันสถานที่กับผู้ใช้งานนี้";

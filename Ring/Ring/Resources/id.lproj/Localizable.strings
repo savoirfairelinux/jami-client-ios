@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Kode QR yang buruk";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Tidak dapat terhubung ke manajer akun yang disediakan. Silakan periksa kredensial Anda";
 "alerts.recordVideoMessage" = "Rekam pesan video";
 "alerts.recordAudioMessage" = "Rekam pesan suara";
-"alerts.uploadFile" = "Unggah file";
-"alerts.uploadPhoto" = "Unggah foto atau film";
+"alerts.uploadFile" = "Kirim berkas";
+"alerts.uploadPhoto" = "Buka galeri";
 "alerts.locationServiceIsDisabled" = "Aktifkan \"Layanan Lokasi\" untuk mengizinkan \"Jami\" menentukan lokasi Anda.";
 "alerts.locationSharing" = "Bagikan lokasi saya";
 "alerts.alreadylocationSharing" = "Sudah berbagi lokasi dengan pengguna ini";

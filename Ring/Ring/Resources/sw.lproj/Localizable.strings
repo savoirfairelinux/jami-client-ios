@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Nambari mbaya ya QR";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Haiwezi kuungana na meneja wa akaunti iliyotolewa. Tafadhali angalia sifa zako";
 "alerts.recordVideoMessage" = "Rekodi ujumbe wa video";
 "alerts.recordAudioMessage" = "Rekodi ujumbe wa sauti";
-"alerts.uploadFile" = "Pakia faili";
-"alerts.uploadPhoto" = "Pakia picha au filamu";
+"alerts.uploadFile" = "Tuma faili";
+"alerts.uploadPhoto" = "Maonyesho ya wazi";
 "alerts.locationServiceIsDisabled" = "Weka \"Huduma za Mahali\" ili \"Jami\" aamue mahali pako.";
 "alerts.locationSharing" = "Shiriki eneo langu";
 "alerts.alreadylocationSharing" = "Tayari kushiriki eneo na mtumiaji huyu";

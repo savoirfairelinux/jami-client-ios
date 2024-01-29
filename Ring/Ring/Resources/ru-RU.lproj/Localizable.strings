@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Плохой QR-code";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Не удалось подключиться к предоставленному менеджеру учетных записей. Пожалуйста, проверьте Ваши учетные данные.";
 "alerts.recordVideoMessage" = "Записать видео-сообщение";
 "alerts.recordAudioMessage" = "Записать голосовое сообщение";
-"alerts.uploadFile" = "Загрузить файл";
-"alerts.uploadPhoto" = "Загрузить фото или видео";
+"alerts.uploadFile" = "Отправить файл";
+"alerts.uploadPhoto" = "Открыть галерею";
 "alerts.locationServiceIsDisabled" = "Включите «Службы определения местоположения», чтобы позволить \"Jami\" определять ваше местоположение.";
 "alerts.locationSharing" = "Транслировать мое местоположение";
 "alerts.alreadylocationSharing" = "Местоположением с этим пользователем уже поделился";

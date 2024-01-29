@@ -46,8 +46,10 @@
 "global.reply" = "Odgovori";
 "global.search" = "Iskanje ...";
 "global.donate" = "Donirajte";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
+"global.deleteMessage" = "Izbriši sporočilo";
+"global.deleteFile" = "Izbriši datoteko z naprave";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Napačna QR-koda";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "S podanim upravljalnikom računa se ni mogoče povezati. Preverite poverilnice";
 "alerts.recordVideoMessage" = "Posnemi video sporočilo";
 "alerts.recordAudioMessage" = "Posnemi zvočno sporočilo";
-"alerts.uploadFile" = "Naloži datoteko";
-"alerts.uploadPhoto" = "Naloži sliko ali film";
+"alerts.uploadFile" = "Pošlji datoteko";
+"alerts.uploadPhoto" = "Odpri galerijo";
 "alerts.locationServiceIsDisabled" = "Vklopite »Location services«, da omogočite Jami, da določi vašo lokacijo.";
 "alerts.locationSharing" = "Deli mojo lokacijo";
 "alerts.alreadylocationSharing" = "S tem uporabnikom že delim lokacijo";

@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Zlý QR kód";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Nedá sa pripojiť k danému správcovi účtov. Skontrolujte prosím vaše prístupové údaje.";
 "alerts.recordVideoMessage" = "Zaznamenať video správu";
 "alerts.recordAudioMessage" = "Zaznamenať audio správu";
-"alerts.uploadFile" = "Nahrať súbor";
-"alerts.uploadPhoto" = "Nahrať fotografiu alebo film";
+"alerts.uploadFile" = "Odoslať súbor";
+"alerts.uploadPhoto" = "Otvorená galéria";
 "alerts.locationServiceIsDisabled" = "Vypnite \"Služby umiestnenia\", aby \"Jami\" určil vašu polohu.";
 "alerts.locationSharing" = "Zdieľajte moju polohu";
 "alerts.alreadylocationSharing" = "Už zdieľanie polohy s týmto používateľom";

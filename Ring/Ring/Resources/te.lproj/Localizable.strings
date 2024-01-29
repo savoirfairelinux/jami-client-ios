@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "చెడ్డ QR కోడ్";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "అందించిన ఖాతా నిర్వాహకుడికి కనెక్ట్ కాలేదు. దయచేసి మీ ఆధారాలను తనిఖీ చేయండి";
 "alerts.recordVideoMessage" = "వీడియో సందేశాన్ని రికార్డ్ చేయండి";
 "alerts.recordAudioMessage" = "ఒక ఆడియో సందేశాన్ని రికార్డ్ చేయండి";
-"alerts.uploadFile" = "ఫైలు అప్లోడ్";
-"alerts.uploadPhoto" = "ఫోటో లేదా సినిమా అప్లోడ్";
+"alerts.uploadFile" = "ఫైల్‌ని పంపు";
+"alerts.uploadPhoto" = "బహిరంగ గ్యాలరీ";
 "alerts.locationServiceIsDisabled" = "\"జామి\" మీ స్థానాన్ని గుర్తించడానికి \"స్థానం సేవలు\" ను ప్రారంభించండి.";
 "alerts.locationSharing" = "నా స్థానాన్ని పంచుకోండి";
 "alerts.alreadylocationSharing" = "ఇప్పటికే ఈ వినియోగదారుతో స్థానం పంచుకోవడం";

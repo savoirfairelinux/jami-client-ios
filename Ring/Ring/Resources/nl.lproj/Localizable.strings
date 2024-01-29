@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Verkeerde QR-code";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Kan niet aansluiten op de rekeningmanager.";
 "alerts.recordVideoMessage" = "Een video bericht opnemen";
 "alerts.recordAudioMessage" = "Een audiobericht opnemen";
-"alerts.uploadFile" = "Upload bestand";
-"alerts.uploadPhoto" = "Foto of film uploaden";
+"alerts.uploadFile" = "Bestand verzenden";
+"alerts.uploadPhoto" = "Open galerij";
 "alerts.locationServiceIsDisabled" = "Sluit \"Location Services\" aan om \"Jami\" toe te staan om uw locatie te bepalen.";
 "alerts.locationSharing" = "Deel mijn locatie";
 "alerts.alreadylocationSharing" = "Al met deze gebruiker delen";

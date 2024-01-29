@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Usoro QR na-adịghị mma";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Enweghi ike ijikọ na njikwa akaụntụ enyere. Biko lelee nzere gị";
 "alerts.recordVideoMessage" = "Dee ozi vidio";
 "alerts.recordAudioMessage" = "Dee ozi ọdịyo";
-"alerts.uploadFile" = "Bulite faịlụ";
-"alerts.uploadPhoto" = "Bulite foto ma ọ bụ ihe nkiri";
+"alerts.uploadFile" = "Zipu faịlụ";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Gbanye \"Service Location\" ka \"Jami\" nwee ike ịchọpụta ebe ị nọ.";
 "alerts.locationSharing" = "Kọrọ m ebe m nọ";
 "alerts.alreadylocationSharing" = "Already ekekọrịta ọnọdụ na onye ọrụ a";

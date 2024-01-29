@@ -46,8 +46,10 @@
 "global.reply" = "Válasz";
 "global.search" = "Keresés…";
 "global.donate" = "Adományozás";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
+"global.deleteMessage" = "Üzenet törlése";
+"global.deleteFile" = "Fájl törlése az eszközről";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
@@ -101,7 +103,7 @@
 "smartlist.donationExplanation" = "Ha hisz a küldetésünkben, adományozna?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Írj a következő(k)nek: ";
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
 "conversation.errorSavingImage" = "Nem sikerült menteni a képet a kepgyűjteménybe";
@@ -115,8 +117,8 @@
 "conversation.synchronizationMessage" = "Várjuk, hogy a(z) %@ csatlakozzon a beszélgetés összehangolásához.";
 "conversation.inReplyTo" = "Válaszul erre:";
 "conversation.repliedTo" = "válaszolt neki:";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "önmaga";
+"conversation.edited" = "szerkesztve";
 "conversation.deletedMessage" = "Törölt üzenet";
 
 //Invitations
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Nem lehet csatlakozni a megadott fiókkezelőhöz. Kérjük, ellenőrizze hitelesítő adatait.";
 "alerts.recordVideoMessage" = "Videoüzenet felvétele";
 "alerts.recordAudioMessage" = "Hangüzenet felvétele";
-"alerts.uploadFile" = "Fájl feltöltése";
-"alerts.uploadPhoto" = "Fénykép vagy mozgókép feltöltése";
+"alerts.uploadFile" = "Fájl küldése";
+"alerts.uploadPhoto" = "Gyűjtemény megnyitása";
 "alerts.locationServiceIsDisabled" = "Helymeghatározási szolgáltatások bekapcsolása, hogy a „Jami” meghatározhassa a tartózkodási helyét.";
 "alerts.locationSharing" = "Tartózkodási hely megosztása";
 "alerts.alreadylocationSharing" = "Tartózkodási hely már megosztva ezzel a felhasználóval.";

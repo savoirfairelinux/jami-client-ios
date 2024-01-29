@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Felaktig QR-kod";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Kan inte ansluta till kontoinställningar. Vänligen kontrollera dina uppgifter. ";
 "alerts.recordVideoMessage" = "Spela in ett videomeddelande";
 "alerts.recordAudioMessage" = "Spela in ett ljudmeddelande";
-"alerts.uploadFile" = "Ladda upp fil";
-"alerts.uploadPhoto" = "Ladda upp foto eller film";
+"alerts.uploadFile" = "Skicka fil";
+"alerts.uploadPhoto" = "Öppet galleri";
 "alerts.locationServiceIsDisabled" = "Slå på \"Lokala tjänster\" för att tillåta Jami hitta din plats. ";
 "alerts.locationSharing" = "Dela min plats";
 "alerts.alreadylocationSharing" = "Du delar redan platsinformation med denna användare";

@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Un codiciu QR malo";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Nun se puede conectar al administrador de cuenta proporcionáu.";
 "alerts.recordVideoMessage" = "Grabar un mensaxe de video";
 "alerts.recordAudioMessage" = "Grabar un mensaxe d'únicu audio";
-"alerts.uploadFile" = "Archiváu dende l' oxetivu";
-"alerts.uploadPhoto" = "Cargar foto o película";
+"alerts.uploadFile" = "Send file";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Enviada \"Servicios de localización\" pa dexar a \"Jami\" determinar la so localización.";
 "alerts.locationSharing" = "Compartir la mio localización";
 "alerts.alreadylocationSharing" = "Al traviés de la páxina web, el nome del usuariu ye'l nome de la páxina web.";

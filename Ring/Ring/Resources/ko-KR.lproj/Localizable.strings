@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "나쁜 QR 코드";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "제공된 계정 관리자와 연결할 수 없습니다. 귀하의 신분증을 확인하시기 바랍니다.";
 "alerts.recordVideoMessage" = "비디오 메시지를 녹음";
 "alerts.recordAudioMessage" = "오디오 메시지를 녹음";
-"alerts.uploadFile" = "파일 업로드";
-"alerts.uploadPhoto" = "사진이나 영화를 업로드";
+"alerts.uploadFile" = "파일 보내기";
+"alerts.uploadPhoto" = "개장 갤러리";
 "alerts.locationServiceIsDisabled" = "\"지거 서비스\"를 켜면 \"자미\"가 위치를 확인하도록 합니다.";
 "alerts.locationSharing" = "내 위치를 공유";
 "alerts.alreadylocationSharing" = "이미 이 사용자와 위치를 공유";

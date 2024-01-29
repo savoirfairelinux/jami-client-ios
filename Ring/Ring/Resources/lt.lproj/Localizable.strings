@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Negalima prisijungti prie pateikto paskyros valdytojo.";
 "alerts.recordVideoMessage" = "Užregistruokite vaizdo pranešimą";
 "alerts.recordAudioMessage" = "Užregistruokite garso pranešimą";
-"alerts.uploadFile" = "Įkelkite failą";
-"alerts.uploadPhoto" = "Įkelkite nuotrauką ar filmą";
+"alerts.uploadFile" = "Siųsti failą";
+"alerts.uploadPhoto" = "Atverti galeriją";
 "alerts.locationServiceIsDisabled" = "Įjungkite \"Lokation Services\" ir leiskite \"Jami\" nustatyti jūsų vietą.";
 "alerts.locationSharing" = "Pasidalinkite mano vieta";
 "alerts.alreadylocationSharing" = "Jau dalintis vieta su šiuo vartotoju";

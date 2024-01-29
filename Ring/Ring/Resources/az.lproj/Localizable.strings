@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "سيخين QR کد";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "حساب مدیرینه باغلی اولمامیش. لطفاً اعتباراتینیزینی چک ائدیرین";
 "alerts.recordVideoMessage" = "ویدئو پیغام ثبت کنید";
 "alerts.recordAudioMessage" = "آدیو پيغامي ضبط ائدير";
-"alerts.uploadFile" = "فایل آپلود";
-"alerts.uploadPhoto" = "عکس یا فیلم آپلود";
+"alerts.uploadFile" = "Send file";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "\"جامی\" یئرلشن مکانینی تعیین ائتمه یه \"ماکان خدمات\" نی فعال ات.";
 "alerts.locationSharing" = "مکانیمی بؤلوم";
 "alerts.alreadylocationSharing" = "بو ایستیفاده چیله یئرلشمه یه چالیشمیش";

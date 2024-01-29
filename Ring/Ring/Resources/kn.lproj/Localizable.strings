@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "ಕೆಟ್ಟ QR ಕೋಡ್";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "ಒದಗಿಸಿದ ಖಾತೆ ವ್ಯವಸ್ಥಾಪಕ ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ರುಜುವಾತುಗಳನ್ನು ಪರಿಶೀಲಿಸಿ";
 "alerts.recordVideoMessage" = "ವೀಡಿಯೊ ಸಂದೇಶವನ್ನು ರೆಕಾರ್ಡ್ ಮಾಡಿ";
 "alerts.recordAudioMessage" = "ಆಡಿಯೋ ಸಂದೇಶವನ್ನು ರೆಕಾರ್ಡ್ ಮಾಡಿ";
-"alerts.uploadFile" = "ಫೈಲ್ ಅಪ್ಲೋಡ್";
-"alerts.uploadPhoto" = "ಫೋಟೋ ಅಥವಾ ಚಲನಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ";
+"alerts.uploadFile" = "ಫೈಲ್ ಕಳುಹಿಸು";
+"alerts.uploadPhoto" = "ತೆರೆದ ಗ್ಯಾಲರಿ";
 "alerts.locationServiceIsDisabled" = "\"ಜಾಮಿ\" ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ನಿರ್ಧರಿಸಲು \"ಸ್ಥಳ ಸೇವೆಗಳು\" ಅನ್ನು ಆನ್ ಮಾಡಿ.";
 "alerts.locationSharing" = "ನನ್ನ ಸ್ಥಳವನ್ನು ಹಂಚಿಕೊಳ್ಳಿ";
 "alerts.alreadylocationSharing" = "ಈಗಾಗಲೇ ಈ ಬಳಕೆದಾರರೊಂದಿಗೆ ಸ್ಥಳ ಹಂಚಿಕೆ";

@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "ご指定のアカウント管理機能に接続できません。資格情報をご確認ください。";
 "alerts.recordVideoMessage" = "ビデオメッセージを録画";
 "alerts.recordAudioMessage" = "音声メッセージを録音";
-"alerts.uploadFile" = "ファイルをアップロード";
-"alerts.uploadPhoto" = "写真をアップロードする";
+"alerts.uploadFile" = "ファイルの送信";
+"alerts.uploadPhoto" = "ギャラリーを開く";
 "alerts.locationServiceIsDisabled" = "\"Jami\"があなたの位置を決定できるように\"位置サービス\"をオンにします.";
 "alerts.locationSharing" = "私の位置をシェア";
 "alerts.alreadylocationSharing" = "このユーザーと既に位置情報を共有済みです";

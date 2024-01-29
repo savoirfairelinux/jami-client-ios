@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "खराब QR कोड";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "खाता प्रबन्धकसँग सम्पर्क गर्न सकिएन। कृपया आफ्नो परिचयपत्र जाँच गर्नुहोस्";
 "alerts.recordVideoMessage" = "भिडियो सन्देश रेकर्ड गर्नुहोस्";
 "alerts.recordAudioMessage" = "एउटा अडियो सन्देश रेकर्ड गर्नुहोस्";
-"alerts.uploadFile" = "फाइल अपलोड गर्नुहोस्";
-"alerts.uploadPhoto" = "फोटो वा चलचित्र अपलोड गर्नुहोस्";
+"alerts.uploadFile" = "फाइलहरू पठाउनुहोस्";
+"alerts.uploadPhoto" = "खुला ग्यालरी";
 "alerts.locationServiceIsDisabled" = "\"जामी\" ले तपाईंको स्थान निर्धारण गर्न \"स्थान सेवाहरू\" खोल्नुहोस्।";
 "alerts.locationSharing" = "मेरो स्थान साझा गर्नुहोस्";
 "alerts.alreadylocationSharing" = "यो प्रयोगकर्तासँग स्थान साझा गर्नु";

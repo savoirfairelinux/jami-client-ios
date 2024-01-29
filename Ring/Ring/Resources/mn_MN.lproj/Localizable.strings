@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Зур QR код";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Танай дансны захирлаар холбогдож чадахгүй байна.";
 "alerts.recordVideoMessage" = "Видео мэдээ бичнэ";
 "alerts.recordAudioMessage" = "Зөгнөлийн мэдээ бичнэ";
-"alerts.uploadFile" = "Татаж файл";
-"alerts.uploadPhoto" = "Сүрэл зураг эсвэл киног борлуула";
+"alerts.uploadFile" = "Файл илгээх";
+"alerts.uploadPhoto" = "Нээлттэй галерея";
 "alerts.locationServiceIsDisabled" = "\"Жами\" нь таны байр суурийг тодорхойлохын тулд \"Төвийн үйлчилгээ\" -ийг идэвхжүүлээрэй.";
 "alerts.locationSharing" = "Миний байр суурийг хуваалцаарай";
 "alerts.alreadylocationSharing" = "Энэ хэрэглэгчийн байр суурийг хэдийнээ хуваалцаж байна";

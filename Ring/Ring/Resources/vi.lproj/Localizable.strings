@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Mã QR xấu";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Không thể kết nối với quản lý tài khoản được cung cấp. Xin vui lòng kiểm tra thông tin tín dụng của bạn";
 "alerts.recordVideoMessage" = "Tải một tin nhắn video";
 "alerts.recordAudioMessage" = "Tải một tin nhắn âm thanh";
-"alerts.uploadFile" = "Tải lên tập tin";
-"alerts.uploadPhoto" = "Lên ảnh hoặc phim";
+"alerts.uploadFile" = "Gửi tập tin";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Động hoạt \"Sức vụ vị trí\" để \"Jami\" xác định vị trí của bạn.";
 "alerts.locationSharing" = "Chia sẻ vị trí của tôi";
 "alerts.alreadylocationSharing" = "Đã chia sẻ vị trí với người dùng này";

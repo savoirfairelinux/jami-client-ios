@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "קוד QR גרוע";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "לא ניתן להתחבר למנהל החשבון הנגיש. אנא בדוק את תעודות האישור שלך";
 "alerts.recordVideoMessage" = "הקלטת הודעה וידאו";
 "alerts.recordAudioMessage" = "הקלטת הודעה אוודית";
-"alerts.uploadFile" = "תעלה קבוצה";
-"alerts.uploadPhoto" = "תעלה תמונה או סרט";
+"alerts.uploadFile" = "שלח קובץ";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "תפעיל את \"שירותי המיקום\" כדי לאפשר ל\"ג'מי\" לקבוע את המיקום שלך.";
 "alerts.locationSharing" = "שיתוף המיקום שלי";
 "alerts.alreadylocationSharing" = "כבר משתף את המיקום עם המשתמש הזה";
