@@ -46,8 +46,10 @@
 "global.reply" = "Përgjigjuni";
 "global.search" = "Po kërkohet…";
 "global.donate" = "Dhuroni";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
+"global.deleteMessage" = "Fshije Mesazhin";
+"global.deleteFile" = "Fshije Kartelën prej pajisjeje";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -101,7 +103,7 @@
 "smartlist.donationExplanation" = "Nëse ju shijon të përdorni Jami-n dhe besoni në misionin tonë, a do të bënit një dhurim?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Shkruajini";
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 "conversation.errorSavingImage" = "S’u arrit të ruhej figurë te galeri";
@@ -114,8 +116,8 @@
 "conversation.synchronizationTitle" = "Keni pranuar kërkesën për bisedë.";
 "conversation.synchronizationMessage" = "Po presim që %@ të lidhet për të njëkohësuar bisedën.";
 "conversation.inReplyTo" = "Në përgjigje të";
-"conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
+"conversation.repliedTo" = "iu përgjigj";
+"conversation.yourself" = "vetes";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "fshiu një mesazh";
 
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "S’lidhet dot te përgjegjësi i dhënë i llogarive. Ju lutemi, kontrolloni kredencialet tuaja";
 "alerts.recordVideoMessage" = "Regjistroni një mesazh video";
 "alerts.recordAudioMessage" = "Incizoni një mesazh audio";
-"alerts.uploadFile" = "Ngarkoni kartelë";
-"alerts.uploadPhoto" = "Ngarkoni foto ose film";
+"alerts.uploadFile" = "Dërgo kartelë";
+"alerts.uploadPhoto" = "Hap galerinë";
 "alerts.locationServiceIsDisabled" = "Për ta lejuar Jami-in të përcaktojë vendndodhjen tuaj, aktivizoni “Shërbime Vendndodhjesh”.";
 "alerts.locationSharing" = "Jepua vendndodhjen time";
 "alerts.alreadylocationSharing" = "Ia keni dhënë tashmë vendndodhjen këtij përdoruesi";

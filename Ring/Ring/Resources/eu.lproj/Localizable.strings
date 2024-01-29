@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "QR kodea txarra";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Ezin naiz konektatu kontu kudeatzailearekin.";
 "alerts.recordVideoMessage" = "Grabatu bideo mezua";
 "alerts.recordAudioMessage" = "Grabatu audio mezua";
-"alerts.uploadFile" = "Fitxategia kargatzea";
-"alerts.uploadPhoto" = "Sartu argazki edo film bat";
+"alerts.uploadFile" = "Bidali fitxategia";
+"alerts.uploadPhoto" = "Galeria irekia";
 "alerts.locationServiceIsDisabled" = "Piztu \"Location Services\" eta utzi \"Jami\"ri zure kokapena zehazten.";
 "alerts.locationSharing" = "Nire kokapena partekatu.";
 "alerts.alreadylocationSharing" = "Jada erabiltzaile honekin kokapena partekatzea";

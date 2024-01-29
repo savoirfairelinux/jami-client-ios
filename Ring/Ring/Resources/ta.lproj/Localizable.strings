@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "கெட்ட QR குறியீடு";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "வழங்கப்பட்ட கணக்கு மேலாளருடன் இணைக்க முடியவில்லை. தயவுசெய்து உங்கள் சான்றிதழ்களை சரிபார்க்கவும்";
 "alerts.recordVideoMessage" = "வீடியோ செய்தியை பதிவு செய்யவும்";
 "alerts.recordAudioMessage" = "ஒரு ஆடியோ செய்தியை பதிவு செய்யவும்";
-"alerts.uploadFile" = "கோப்பு பதிவேற்ற";
-"alerts.uploadPhoto" = "புகைப்படம் அல்லது திரைப்படத்தை பதிவேற்றவும்";
+"alerts.uploadFile" = "கோப்பை அனுப்பு";
+"alerts.uploadPhoto" = "திறந்த கேலரி";
 "alerts.locationServiceIsDisabled" = "\"இங்கு இருப்பிட சேவைகள்\" என்பதை இயக்கவும், \"ஜாமி\" உங்கள் இருப்பிடத்தை தீர்மானிக்க அனுமதிக்கும்.";
 "alerts.locationSharing" = "என் இருப்பிடத்தை பகிர்ந்து";
 "alerts.alreadylocationSharing" = "ஏற்கனவே இந்த பயனருடன் இருப்பிட பகிர்வு";

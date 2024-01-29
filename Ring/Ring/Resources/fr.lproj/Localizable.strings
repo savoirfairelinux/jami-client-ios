@@ -46,8 +46,10 @@
 "global.reply" = "Répondre";
 "global.search" = "Recherche en cours ...";
 "global.donate" = "Donnez ";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
+"global.deleteMessage" = "Supprimer le message";
+"global.deleteFile" = "Supprime le fichier de l'appareil";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Code QR incorrect";
@@ -101,7 +103,7 @@
 "smartlist.donationExplanation" = "Si vous appréciez Jami et que vous croyez à notre mission, feriez-vous une donation ?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Écrire à";
 "conversation.explanationSendingLocationTo" = "Vous partagez actuellement votre position avec";
 "conversation.explanationReceivingLocationFrom" = "Vous recevez actuellement la position de ";
 "conversation.errorSavingImage" = "Impossible de sauvegarder l'image dans la galerie";
@@ -115,8 +117,8 @@
 "conversation.synchronizationMessage" = "Nous attendons que %@ se connecte afin de synchroniser la conversation.";
 "conversation.inReplyTo" = "En réponse à";
 "conversation.repliedTo" = "répondre à";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "vous-même";
+"conversation.edited" = "modifié";
 "conversation.deletedMessage" = "a supprimé le message";
 
 //Invitations
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Je n'arrive pas à me connecter à votre gestionnaire de compte. Vérifiez vos éléments d'authentification.";
 "alerts.recordVideoMessage" = "Envoyer un message vidéo";
 "alerts.recordAudioMessage" = "Envoyer un message vocal";
-"alerts.uploadFile" = "Téléverser un fichier";
-"alerts.uploadPhoto" = "Téléverser une photo ou une vidéo";
+"alerts.uploadFile" = "Envoyez un fichier";
+"alerts.uploadPhoto" = "Ouvrir la galerie";
 "alerts.locationServiceIsDisabled" = "Activez le service de géolocalisation pour permettre à Jami de déterminer votre localisation.";
 "alerts.locationSharing" = "Partager votre position";
 "alerts.alreadylocationSharing" = "Vous partagez déjà votre position avec cet utilisateur";

@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";
@@ -203,7 +205,7 @@
 "alerts.recordVideoMessage" = "Tallenna videoviesti";
 "alerts.recordAudioMessage" = "Tallenna ääniviesti";
 "alerts.uploadFile" = "Lähetä tiedosto";
-"alerts.uploadPhoto" = "Lähetä kuva tai video";
+"alerts.uploadPhoto" = "Avoin galleri";
 "alerts.locationServiceIsDisabled" = "Ota \"sijaintipalvelut\" käyttöön, jotta \"Jami\" voi määrittää sijaintisi.";
 "alerts.locationSharing" = "Jaa minun sijainti";
 "alerts.alreadylocationSharing" = "Jaat jo sijaintia tämän käyttäjän kanssa";

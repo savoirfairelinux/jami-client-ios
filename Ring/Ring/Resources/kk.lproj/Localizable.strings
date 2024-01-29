@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Жаман QR код";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Келтірілген шот менеджеріне қосыла алмаймын.";
 "alerts.recordVideoMessage" = "Видео хабарламаны жаз";
 "alerts.recordAudioMessage" = "Аудио хабарды жаздыру";
-"alerts.uploadFile" = "Файл жүктеу";
-"alerts.uploadPhoto" = "Фото немесе фильмді жүктеу";
+"alerts.uploadFile" = "Файл жіберу";
+"alerts.uploadPhoto" = "Ашық галерея";
 "alerts.locationServiceIsDisabled" = "\"Жамның\" сіздің орналасқан жеріңізді анықтауына мүмкіндік беру үшін \"Жамның орналасқан жері\" қызметіне қосыңыз.";
 "alerts.locationSharing" = "Менің орналасқан жерімді бөліңіз";
 "alerts.alreadylocationSharing" = "Бұл пайдаланушымен орналасқан жерді бөлісу";

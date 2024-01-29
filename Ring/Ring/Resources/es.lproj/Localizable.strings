@@ -48,6 +48,8 @@
 "global.donate" = "Donar";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Código QR incorrecto";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "No se pudo conectar al administrador de cuenta proporcionado. Por favor verifica tus credenciales";
 "alerts.recordVideoMessage" = "Grabar mensaje de video";
 "alerts.recordAudioMessage" = "Grabar mensaje de audio";
-"alerts.uploadFile" = "Subir archivo";
-"alerts.uploadPhoto" = "Subir foto o película";
+"alerts.uploadFile" = "Send file";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Activa los \"Servicios de ubicación\" para permitir a \"Jami\" determinar tu ubicación.";
 "alerts.locationSharing" = "Compartir mi ubicación";
 "alerts.alreadylocationSharing" = "Ya se está compartiendo la ubicación con este usuario";

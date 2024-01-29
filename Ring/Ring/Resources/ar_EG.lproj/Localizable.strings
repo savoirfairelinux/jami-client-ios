@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "رمز QR غير صالح";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "لا يمكن الاتصال بمدير الحساب المقدم، يرجى التحقق من إثباتاتك";
 "alerts.recordVideoMessage" = "تسجيل رسالة فيديو";
 "alerts.recordAudioMessage" = "تسجيل رسالة صوتية";
-"alerts.uploadFile" = "تحميل الملف";
-"alerts.uploadPhoto" = "تحميل الصورة أو الفيلم";
+"alerts.uploadFile" = "Send file";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "أفتح \"خدمات الموقع\" للسماح \"جامي\" بتحديد موقعك.";
 "alerts.locationSharing" = "شارك موقعي";
 "alerts.alreadylocationSharing" = "مشاركة الموقع مع هذا المستخدم";

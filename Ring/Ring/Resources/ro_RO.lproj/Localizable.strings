@@ -46,8 +46,10 @@
 "global.reply" = "Răspunde";
 "global.search" = "Se caută...";
 "global.donate" = "Donează";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
+"global.deleteMessage" = "Șterge mesajul";
+"global.deleteFile" = "Șterge fișierul din aparat";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
@@ -101,7 +103,7 @@
 "smartlist.donationExplanation" = "Dacă îți place să folosești Jami și crezi că misiunea noastră este importantă, poți face o donație?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Scrie pentru ";
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către ";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
 "conversation.errorSavingImage" = "Salvarea imaginii nu a reușit";
@@ -115,8 +117,8 @@
 "conversation.synchronizationMessage" = "Se așteaptă ca %@ să se conecteze pentru a sincroniza conversația.";
 "conversation.inReplyTo" = "Răspuns pentru";
 "conversation.repliedTo" = " a răspuns pentru";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "tu";
+"conversation.edited" = "modificat";
 "conversation.deletedMessage" = "a șters un mesaj";
 
 //Invitations
@@ -203,7 +205,7 @@
 "alerts.recordVideoMessage" = "Înregistrează un mesaj video";
 "alerts.recordAudioMessage" = "Înregistrează un mesaj vocal";
 "alerts.uploadFile" = "Trimite un fișier";
-"alerts.uploadPhoto" = "Trimite o poză sau un video";
+"alerts.uploadPhoto" = "Deschide galeria";
 "alerts.locationServiceIsDisabled" = "Activează „Localizarea” pentru ca Jami să poată stabili poziția ta.";
 "alerts.locationSharing" = "Trimite poziția mea";
 "alerts.alreadylocationSharing" = "Se trimite deja poziția către acest utilizator";

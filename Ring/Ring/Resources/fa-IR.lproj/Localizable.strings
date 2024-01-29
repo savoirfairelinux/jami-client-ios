@@ -48,6 +48,8 @@
 "global.donate" = "اهدا کنید";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "کد QR بد";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "توانایی اتصال به مدیریت حساب ارائه‌شده را نداریم. لطفا اعتبارنامه‌های خود را بررسی کنید.";
 "alerts.recordVideoMessage" = "ضبط یک پیام تصویری";
 "alerts.recordAudioMessage" = "ضبط یک پیام صوتی";
-"alerts.uploadFile" = "بارگذاری فایل";
-"alerts.uploadPhoto" = "بارگذاری عکس یا فیلم";
+"alerts.uploadFile" = "ارسال فایل";
+"alerts.uploadPhoto" = "گالری را باز کن";
 "alerts.locationServiceIsDisabled" = "\"خدمات موقعیت مکانی\" را روشن کنید تا به \"جمی\" اجازه دهید مکان شما را تعیین کند.";
 "alerts.locationSharing" = "هم‌رسانی مکان من";
 "alerts.alreadylocationSharing" = "در حال حاضر مکان را با این کاربر به اشتراک می‌گذارید";

@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "不正確的 QR code";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "無法連線至提供的帳號管理員。請檢查您的憑證";
 "alerts.recordVideoMessage" = "錄製影片訊息";
 "alerts.recordAudioMessage" = "錄製音訊訊息";
-"alerts.uploadFile" = "上傳檔案";
-"alerts.uploadPhoto" = "上傳照片或電影";
+"alerts.uploadFile" = "傳送檔案";
+"alerts.uploadPhoto" = "開啟相簿";
 "alerts.locationServiceIsDisabled" = "開啟「位置服務」以讓「Jami」確定您的位置。";
 "alerts.locationSharing" = "分享我的位置";
 "alerts.alreadylocationSharing" = "已與此使用者分享位置";

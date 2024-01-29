@@ -45,9 +45,11 @@
 "global.copy" = "Kopiraj";
 "global.reply" = "Odgovori";
 "global.search" = "Трагајући...";
-"global.donate" = "Donate";
+"global.donate" = "Doniraj";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Лош QR код";
@@ -97,8 +99,8 @@
 "smartlist.aboutJami" = "O Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.disableDonation" = "Ne sada";
+"smartlist.donationExplanation" = "Ako uživate u korišćenju Jami-ja i verujete u našu misiju, da li biste dali donaciju?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write to ";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Не могу се повезити са испорученим управљачем рачуна.";
 "alerts.recordVideoMessage" = "Запишите видео поруку";
 "alerts.recordAudioMessage" = "Запишите аудио поруку";
-"alerts.uploadFile" = "Унесите датотеку";
-"alerts.uploadPhoto" = "Уведите фотографију или филм";
+"alerts.uploadFile" = "Pošalji datoteku";
+"alerts.uploadPhoto" = "Otvori galeriju";
 "alerts.locationServiceIsDisabled" = "Пожелите \"Сlužбе за локацију\" да \"Джеми\" утврди вашу локацију.";
 "alerts.locationSharing" = "Поделити моје место.";
 "alerts.alreadylocationSharing" = "Већ деле локацију са овим корисником";

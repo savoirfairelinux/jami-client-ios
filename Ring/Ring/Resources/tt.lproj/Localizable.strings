@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Яман QR-код";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Мәгълүматны кертү мөмкин түгел.";
 "alerts.recordVideoMessage" = "Видеоязманы яздырыгыз";
 "alerts.recordAudioMessage" = "Аудиоязма яздырыгыз";
-"alerts.uploadFile" = "Файлны йөкләү";
-"alerts.uploadPhoto" = "Фото яки фильмны йөклә";
+"alerts.uploadFile" = "Файлларны җибәрү";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "\"Җами\"нең сезнең урыны билгеләргә мөмкинлек бирер өчен \"Урынлы урын хезмәтләре\"н эшләтеп куй.";
 "alerts.locationSharing" = "Минем урынымны уртаклашыгыз.";
 "alerts.alreadylocationSharing" = "Әлеге кулланучы белән инде урынны уртаклашу";

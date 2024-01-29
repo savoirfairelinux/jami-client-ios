@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "كود QR يڠ براوسيا";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "تيدق بوليه منچاريكن ڤڠاره حساب يڠ دبريكن.";
 "alerts.recordVideoMessage" = "ڤرچاي ڤمبلاجرن";
 "alerts.recordAudioMessage" = "سلاكو ڤرساتوان اودي";
-"alerts.uploadFile" = "ڤڠاجرن ڤڠاجرن";
-"alerts.uploadPhoto" = "ڤرلو مڠهادڤ ڤوتو اتاو فلم";
+"alerts.uploadFile" = "Send file";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "مڠهادڤي \"خدمات موقعيت\" اونتوق ممبريكن \"جامي\" ممبنتو موقعيت.";
 "alerts.locationSharing" = "مڠمبيل موقعيت ساي";
 "alerts.alreadylocationSharing" = "ڤد ماس اين مڠمبيل ڤڠڬونا اين";

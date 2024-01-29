@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Malbona QR-kodo";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Ne eblas konektiĝi al la provizita kontadministratoro. Bonvolu kontroli viajn kreditajn informojn";
 "alerts.recordVideoMessage" = "Enregistru videan mesaĝon";
 "alerts.recordAudioMessage" = "Surbendi aŭdajn mesaĝojn";
-"alerts.uploadFile" = "Alŝutu dosieron";
-"alerts.uploadPhoto" = "Alŝutu foton aŭ filmon";
+"alerts.uploadFile" = "Send file";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Ŝaltu \"Lokadajn Servojn\" por permesi al \"Jami\" determini vian lokon.";
 "alerts.locationSharing" = "Dividu mian lokon";
 "alerts.alreadylocationSharing" = "Jam dividante lokon kun tiu uzanto";

@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Mal codi QR";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "No es pot connectar amb el gestor de compte proporcionat. Si us plau, comproveu les vostres credencials";
 "alerts.recordVideoMessage" = "Gravar un missatge de vídeo";
 "alerts.recordAudioMessage" = "Gravar un missatge d'àudio";
-"alerts.uploadFile" = "Carrega ficher";
-"alerts.uploadPhoto" = "Carrega foto o pel·lícula";
+"alerts.uploadFile" = "Send file";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Activa \"Serviços de localització\" per permetre que \"Jami\" determineixi la seva ubicació.";
 "alerts.locationSharing" = "Comparteix la meva ubicació";
 "alerts.alreadylocationSharing" = "Ja comparteix ubicació amb aquest usuari";

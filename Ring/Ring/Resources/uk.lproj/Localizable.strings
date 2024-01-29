@@ -48,6 +48,8 @@
 "global.donate" = "Донат";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Неприйнятний QR-код";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Не можу зв'язатися з наданим менеджером рахунку.";
 "alerts.recordVideoMessage" = "Запишіть відео повідомлення";
 "alerts.recordAudioMessage" = "Запишіть аудіоповість";
-"alerts.uploadFile" = "Завантаження файлу";
-"alerts.uploadPhoto" = "Завантажити фото або фільм";
+"alerts.uploadFile" = "Відправити файл";
+"alerts.uploadPhoto" = "Відкрити галерею";
 "alerts.locationServiceIsDisabled" = "Зверніть \"Сервіси місцезнаходження\", щоб \"Джамі\" визначив ваше місцезнаходження.";
 "alerts.locationSharing" = "Розділіть моє місцезнаходження";
 "alerts.alreadylocationSharing" = "Уже поділяється місцезнаходженням з цим користувачем";

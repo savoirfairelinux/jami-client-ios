@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Loš QR kod";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Ne mogu se povezati s upraviteljem računa.";
 "alerts.recordVideoMessage" = "Zapisi video poruku";
 "alerts.recordAudioMessage" = "Zapisi audio poruku";
-"alerts.uploadFile" = "Upload datoteka";
-"alerts.uploadPhoto" = "Upload foto ili film";
+"alerts.uploadFile" = "Pošalji datoteku";
+"alerts.uploadPhoto" = "Otvorena galerija";
 "alerts.locationServiceIsDisabled" = "Uključite \"Službe lokacije\" kako bi \"Jami\" utvrdio vašu lokaciju.";
 "alerts.locationSharing" = "Podijelite moju lokaciju.";
 "alerts.alreadylocationSharing" = "Već dijelite lokaciju s ovim korisnikom";

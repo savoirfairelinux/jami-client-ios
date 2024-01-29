@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Cód QR olc";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Ní féidir teagmháil a dhéanamh le bainisteoir cuntas a sholáthraíonn tú.";
 "alerts.recordVideoMessage" = "Teachtaireacht físeán a thaifeadadh";
 "alerts.recordAudioMessage" = "Teachtaireacht fuaime a thaifeadadh";
-"alerts.uploadFile" = "File Upload";
-"alerts.uploadPhoto" = "Fógra nó scannán a uaslódáil";
+"alerts.uploadFile" = "Comhad a sheoladh";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Cuir ar \"Shoirbheis Líne\" chun ligean do \"Jami\" a chinneadh do shuíomh.";
 "alerts.locationSharing" = "Comhroinn mo shuíomh";
 "alerts.alreadylocationSharing" = "Ag roinnt suíomh cheana féin leis an úsáideoir seo";

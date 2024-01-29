@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "മോശം ക്യുആർ കോഡ്";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "നൽകിയിരിക്കുന്ന അക്കൌണ്ട് മാനേജറുമായി ബന്ധപ്പെടാനായില്ല. ദയവായി നിങ്ങളുടെ ക്രെഡിറ്റീവുകൾ പരിശോധിക്കുക";
 "alerts.recordVideoMessage" = "ഒരു വീഡിയോ സന്ദേശം റെക്കോർഡ് ചെയ്യുക";
 "alerts.recordAudioMessage" = "ഒരു ഓഡിയോ സന്ദേശം റെക്കോർഡ് ചെയ്യുക";
-"alerts.uploadFile" = "ഫയൽ അപ്ലോഡ് ചെയ്യുക";
-"alerts.uploadPhoto" = "ഫോട്ടോയോ സിനിമയോ അപ്ലോഡ് ചെയ്യുക";
+"alerts.uploadFile" = "Hantar fail";
+"alerts.uploadPhoto" = "തുറന്ന ഗാലറി";
 "alerts.locationServiceIsDisabled" = "\"ജാമി\" നിങ്ങളുടെ സ്ഥാനം നിർണ്ണയിക്കാൻ \"ലൊക്കേഷൻ സർവീസസ്\" ഓണാക്കുക.";
 "alerts.locationSharing" = "എന്റെ സ്ഥാനം പങ്കുവെക്കുക";
 "alerts.alreadylocationSharing" = "ഈ ഉപയോക്താവിനൊപ്പം ഇതിനകം സ്ഥാനം പങ്കിടുന്നു";

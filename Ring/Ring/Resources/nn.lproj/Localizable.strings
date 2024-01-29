@@ -48,6 +48,8 @@
 "global.donate" = "Donate";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
+"global.editMessage" = "Edit Message";
+"global.editing" = "Edititing";
 
 // Scan
 "scan.badQrCode" = "Dåleg QR-kod";
@@ -202,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Kan ikkje samlast med kontoleiaren. Vennligst sjekk legitimasjonane dine";
 "alerts.recordVideoMessage" = "Ta opp ein video melding";
 "alerts.recordAudioMessage" = "Ta opp ein lydmelding";
-"alerts.uploadFile" = "Uploader file";
-"alerts.uploadPhoto" = "La opp foton eller film";
+"alerts.uploadFile" = "Sende fil";
+"alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Legg på \"Lokasjonstjenester\" for at \"Jami\" kan finne stad.";
 "alerts.locationSharing" = "De deler plasseringa mi";
 "alerts.alreadylocationSharing" = "Aller deling av plassering med denne brukaren";
