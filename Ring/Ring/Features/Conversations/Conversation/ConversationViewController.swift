@@ -83,6 +83,7 @@ class ConversationViewController: UIViewController,
     var currentDocumentPickerMode: DocumentPickerMode = .none
 
     let tapAction = BehaviorRelay<Bool>(value: false)
+    var screenTapRecognizer: UITapGestureRecognizer!
 
     private lazy var locationManager: CLLocationManager = { return CLLocationManager() }()
 
@@ -99,7 +100,7 @@ class ConversationViewController: UIViewController,
                                                selector: #selector(applicationWillResignActive),
                                                name: UIApplication.willResignActiveNotification,
                                                object: nil)
-        let screenTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        screenTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         self.view.addGestureRecognizer(screenTapRecognizer)
 
     }
@@ -167,6 +168,12 @@ class ConversationViewController: UIViewController,
                 case .preview(let message):
                     self.presentPreview(message: message)
                 case .forward(let message):
+                    /*
+                     Remove the tap gesture to ensure the contact selector
+                     can receive taps. The tap gesture should be re-added
+                     once the contact picker is dismissed.
+                     */
+                    self.view.removeGestureRecognizer(screenTapRecognizer)
                     self.viewModel.slectContactsToShareMessage(message: message)
                 case .share(let items):
                     self.presentActivityControllerWithItems(items: items)
@@ -772,6 +779,7 @@ extension ConversationViewController {
 
 extension ConversationViewController: ContactPickerViewControllerDelegate {
     func contactPickerDismissed() {
+        self.view.addGestureRecognizer(screenTapRecognizer)
         self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
                            displayName: self.viewModel.displayName.value,
                            username: self.viewModel.userName.value)
