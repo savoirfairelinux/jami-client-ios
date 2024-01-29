@@ -296,16 +296,16 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             guard let self = self else { return }
             if self.type == .text {
                 if self.isIncoming {
-                    self.menuItems = [.copy, .forward, .reply]
+                    self.menuItems = [.reply, .copy, .forward]
                 } else {
-                    self.menuItems = [.copy, .forward, .reply, .edit, .deleteMessage]
+                    self.menuItems = [.reply, .edit, .copy, .forward, .deleteMessage]
                 }
             }
             guard self.type == .fileTransfer else { return }
             if self.url != nil {
-                self.menuItems = [.save, .forward, .preview, .share, .reply]
+                self.menuItems = [.reply, .save, .forward, .preview, .share]
             } else {
-                self.menuItems = [.forward, .preview, .share, .reply]
+                self.menuItems = [.reply, .forward, .preview, .share]
             }
         }
     }
