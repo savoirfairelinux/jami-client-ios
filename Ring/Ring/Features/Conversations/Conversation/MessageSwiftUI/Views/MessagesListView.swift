@@ -234,7 +234,7 @@ struct MessagesListView: View {
         return VStack(alignment: .trailing, spacing: -10) {
             if model.numberOfNewMessages > 0 {
                 Text("\(model.numberOfNewMessages)")
-                    .font(.caption.weight(.light))
+                    .font(.system(size: 12))
                     .padding(.trailing, 6.0)
                     .padding(.leading, 6.0)
                     .padding(.top, 1.0)
@@ -252,6 +252,7 @@ struct MessagesListView: View {
                 model.scrollToTheBottom()
             }, label: {
                 Image(systemName: "arrow.down")
+                    .font(.system(size: 16))
                     .frame(width: 35, height: 35)
                     .overlay(
                         Circle()

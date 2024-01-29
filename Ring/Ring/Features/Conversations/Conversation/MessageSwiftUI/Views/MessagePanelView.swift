@@ -192,7 +192,7 @@ struct MessagePanelView: View {
                 }, label: {
                     if text.isEmpty {
                         Text(model.defaultEmoji)
-                            .font(.title)
+                            .font(.system(size: 27))
                             .frame(width: 36, height: 36)
                             .padding(.bottom, 2)
                     } else {
