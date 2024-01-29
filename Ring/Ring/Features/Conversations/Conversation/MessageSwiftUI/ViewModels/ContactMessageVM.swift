@@ -29,7 +29,7 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
     @Published var borderColor: Color
     @Published var backgroundColor: Color
     let cornerRadius: CGFloat = 20
-    let avatarSize: CGFloat = 30
+    let avatarSize: CGFloat = 15
     var inset: CGFloat
     var height: CGFloat
     var styling: MessageStyling = MessageStyling()
