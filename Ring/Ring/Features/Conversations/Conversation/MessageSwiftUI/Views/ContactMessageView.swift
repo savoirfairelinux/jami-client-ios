@@ -42,8 +42,5 @@ struct ContactMessageView: View {
         }
         .padding(.horizontal, model.inset)
         .frame(minHeight: model.height)
-        .overlay(
-            RoundedRectangle(cornerRadius: model.cornerRadius)
-                .stroke(model.borderColor, lineWidth: 1))
     }
 }
