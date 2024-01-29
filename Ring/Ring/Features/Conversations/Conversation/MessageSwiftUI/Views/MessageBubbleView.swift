@@ -70,7 +70,7 @@ struct MessageBubbleView: View {
             .padding(.horizontal, model.textInset)
             .padding(.vertical, model.textVerticalInset)
             .foregroundColor(model.styling.textColor)
-            .lineLimit(1)
+            .lineLimit(nil)
             .background(model.backgroundColor)
             .font(model.styling.textFont)
             .modifier(MessageCornerRadius(model: model))
