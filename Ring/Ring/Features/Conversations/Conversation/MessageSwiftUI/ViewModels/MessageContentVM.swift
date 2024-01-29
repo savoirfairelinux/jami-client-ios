@@ -208,7 +208,8 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
 
     private func updateTextColor() {
         if self.isLink() {
-            self.styling.textColor = Color.blue
+            let backgroundIsLightColor: Bool = self.backgroundColor.isLight(threshold: 0.8) ?? true
+            self.styling.textColor = backgroundIsLightColor ? .blue : .white
         } else if !self.isIncoming && self.type != .contact {
             self.styling.textColor = Color.white
         } else {
