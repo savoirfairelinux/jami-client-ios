@@ -85,6 +85,7 @@ struct MessageBubbleView: View {
                 MessageBubbleWithEditionWrapper(model: model) {
                     Text(model.content)
                         .font(model.styling.textFont)
+                        .underline()
                         .onTapGesture {
                             openURL(url)
                         }
