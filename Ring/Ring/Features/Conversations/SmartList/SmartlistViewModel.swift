@@ -409,7 +409,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 self.stateSubject.onNext(ConversationState.needAccountMigration(accountId: accountId))
                 return
             }
-            self.accountsService.currentAccount = account
+            self.accountsService.updateCurrentAccount(account: account)
             UserDefaults.standard.set(accountId, forKey: self.accountsService.selectedAccountID)
         }
     }

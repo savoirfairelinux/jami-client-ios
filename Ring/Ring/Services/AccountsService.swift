@@ -269,6 +269,12 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    func updateCurrentAccount(account: AccountModel) {
+        if self.currentAccount != account {
+            self.currentAccount = account
+        }
+    }
+
     func boothMode() -> Bool {
         return UserDefaults.standard.bool(forKey: boothModeEnabled)
     }
