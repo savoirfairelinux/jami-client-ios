@@ -220,6 +220,11 @@ std::map<std::string, std::string> nameServers;
     }
 }
 
+- (NSDictionary *)getVolatileAccountDetails:(NSString *)accountID {
+    auto volatileDetails = getVolatileAccountDetails(std::string([accountID UTF8String]));
+    return [Utils mapToDictionnary:volatileDetails];
+}
+
 - (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data {
     pushNotificationReceived(std::string([from UTF8String]), [Utils dictionnaryToMap:data]);
 }

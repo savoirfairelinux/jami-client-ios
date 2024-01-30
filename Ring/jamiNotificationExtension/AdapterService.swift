@@ -107,6 +107,11 @@ class AdapterService {
         self.adapter.pushNotificationReceived(accountId, message: data)
     }
 
+    func getJamiId(accountId: String) -> String? {
+        let details = self.adapter.getVolatileAccountDetails(accountId) as? [String: String]
+        return details?["Account.username"]
+    }
+
     func decrypt(keyPath: String, accountId: String, messagesPath: String, value: [String: Any]) -> PeerConnectionRequestType {
         let result = adapter.decrypt(keyPath, accountId: accountId, treated: messagesPath, value: value)
         guard let peerId = result?.keys.first,

@@ -192,6 +192,12 @@ class NotificationService: UNNotificationServiceExtension {
             guard let self = self else {
                 return
             }
+            /*
+             Filter out outgoing messages.(If message was sent from linked device)
+             */
+            if let jamiId = self.adapterService.getJamiId(accountId: self.accountId), jamiId == eventData.jamiId {
+                return
+            }
             switch event {
             case .message:
                 self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
