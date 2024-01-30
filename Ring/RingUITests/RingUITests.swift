@@ -28,4 +28,25 @@ class RingUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
+    func testAccountCreationWithRegisteredName_NameNotFound() {
+        let app = XCUIApplication()
+        app.launch()
+
+        // Tap the "Join Jami" button
+        app.scrollViews.otherElements.buttons["Join Jami"].tap()
+        let expectation = XCTestExpectation(description: "Name does not exists")
+
+        // Interact with the keyboard, enter "name"
+        app.keys["n"].tap()
+        app.keys["a"].tap()
+        app.keys["m"].tap()
+        app.keys["e"].tap()
+
+        // Tap the "Join" button
+        app.buttons["Join"].tap()
+
+        // Handle the notification alert
+        app.alerts["“Jami” Would Like to Send You Notifications"].scrollViews.otherElements.buttons["Allow"].tap()
+    }
+
 }
