@@ -517,13 +517,9 @@ extension AppDelegate {
     }
 
     func handleNotificationActions(data: [AnyHashable: Any]) {
-        guard let currentAccount = self.accountService
-                .currentAccount,
-              let accountId = data[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String,
+        guard let accountId = data[Constants.NotificationUserInfoKeys.accountID.rawValue] as? String,
               let account = self.accountService.getAccount(fromAccountId: accountId) else { return }
-        if currentAccount.id != accountId {
-            self.accountService.currentAccount = account
-        }
+        self.accountService.updateCurrentAccount(account: account)
         if let conversationId = data[Constants.NotificationUserInfoKeys.conversationID.rawValue] as? String {
             self.conversationsService.updateConversationMessages(conversationId: conversationId)
             self.appCoordinator.openConversation(conversationId: conversationId, accountId: accountId)
