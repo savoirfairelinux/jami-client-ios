@@ -50,7 +50,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     // MARK: - functio
     override func viewDidLoad() {
-        self.view.backgroundColor = .secondarySystemBackground
+        self.view.backgroundColor = .systemGroupedBackground
         setupTableView()
         self.addHeaderView()
         super.viewDidLoad()
@@ -80,7 +80,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium)]
-        self.configureNavigationBar(backgroundColor: .secondarySystemBackground)
+       self.configureNavigationBar(backgroundColor: .systemGroupedBackground)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,7 +90,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     func setupTableView() {
-        self.settingsTable.backgroundColor = .secondarySystemBackground
         self.settingsTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.settingsTable.alwaysBounceHorizontal = false
         if #available(iOS 15.0, *) {
@@ -113,7 +112,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
             supportEditProfile()
             return
         }
-        headerView.backgroundColor = .secondarySystemBackground
+        headerView.backgroundColor = .systemGroupedBackground
         self.stretchyHeader = headerView
         let point = CGPoint(x: 0, y: 120)
         self.stretchyHeader.frame.origin = point
@@ -349,8 +348,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                             self?.viewModel.linkDevice()
                         })
                         .disposed(by: cell.disposeBag)
-                    cell.backgroundColor = .clear
-                    cell.contentView.backgroundColor = .systemBackground
                     return cell
                 case .blockedList:
                     let cell = DisposableCell()
@@ -387,8 +384,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                             self?.confirmRemoveAccountAlert()
                         })
                         .disposed(by: cell.disposeBag)
-                    cell.backgroundColor = .clear
-                    cell.contentView.backgroundColor = .clear
                     return cell
                 case .jamiUserName(let label):
                     if !label.isEmpty {
@@ -537,8 +532,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     return cell
                 case .accountState(let state):
                     let cell = DisposableCell(style: .value1, reuseIdentifier: self.accountStateCell)
-                    cell.backgroundColor = UIColor.jamiBackgroundColor
-
                     cell.textLabel?.text = L10n.Account.accountStatus
                     cell.textLabel?.numberOfLines = 0
                     cell.selectionStyle = .none
@@ -717,8 +710,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 self?.viewModel.donate()
             })
             .disposed(by: cell.disposeBag)
-        cell.backgroundColor = .clear
-        cell.contentView.backgroundColor = .systemBackground
         return cell
     }
 
@@ -762,6 +753,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.sizeToFit()
         cell.layoutIfNeeded()
         let textView = CustomActionTextView()
+        textView.backgroundColor = .secondarySystemGroupedBackground
         textView.text = secondaryText
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textContainer.lineBreakMode = .byCharWrapping

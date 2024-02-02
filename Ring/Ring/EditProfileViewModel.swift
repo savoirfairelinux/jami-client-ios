@@ -52,7 +52,7 @@ class EditProfileViewModel {
                    let image = UIImage(data: data) {
                     return image
                 }
-                return UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: self?.accountService.currentAccount, size: 70, withFontSize: 26)
+                return UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: self?.accountService.currentAccount, size: 70, withFontSize: 26, inset: 16)
             })
     }()
 

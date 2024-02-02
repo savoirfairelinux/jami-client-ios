@@ -266,9 +266,8 @@ extension UIImage {
         return image
     }
 
-    func fillJamiBackgroundColor() -> UIImage {
+    func fillJamiBackgroundColor(inset: CGFloat) -> UIImage {
         let color = UIColor.jamiMain
-        let inset: CGFloat = 4
         let newSize = CGSize(width: self.size.width + 2 * inset, height: self.size.height + 2 * inset)
         let drawingRect = CGRect(x: inset, y: inset, width: self.size.width, height: self.size.height)
 
@@ -290,11 +289,11 @@ extension UIImage {
         return imageWithBackground ?? self
     }
 
-    class func defaultJamiAvatarFor(profileName: String?, account: AccountModel?, size: CGFloat, withFontSize fontSize: CGFloat = 14) -> UIImage {
+    class func defaultJamiAvatarFor(profileName: String?, account: AccountModel?, size: CGFloat, withFontSize fontSize: CGFloat = 14, inset: CGFloat = 4) -> UIImage {
         func generateDefaultImage() -> UIImage {
             let configuration = UIImage.SymbolConfiguration(pointSize: size, weight: .regular, scale: .medium)
             let defaultImage = UIImage(systemName: "person.fill", withConfiguration: configuration)
-            return defaultImage?.fillJamiBackgroundColor().circleMasked ?? defaultImage!.fillJamiBackgroundColor()
+            return defaultImage?.fillJamiBackgroundColor(inset: inset).circleMasked ?? defaultImage!.fillJamiBackgroundColor(inset: inset)
         }
 
         func extractUsername(from profileName: String?, and account: AccountModel?) -> String? {
