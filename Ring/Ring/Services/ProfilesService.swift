@@ -49,6 +49,7 @@ class ProfilesService: ProfilesAdapterDelegate {
     private var base64VCards = [Int: Base64VCard]()
     private let log = SwiftyBeaver.self
     private let profilesAdapter: ProfilesAdapter
+    private let maxAvatarSize:CGFloat = 500
 
     var profiles = [String: ReplaySubject<Profile>]()
     var accountProfiles = [String: ReplaySubject<Profile>]()
@@ -73,7 +74,17 @@ class ProfilesService: ProfilesAdapterDelegate {
         let uri = JamiURI(schema: URIType.ring, infoHash: uri)
         guard let uriString = uri.uriString,
               let data = FileManager.default.contents(atPath: path),
-              let profile = VCardUtils.parseToProfile(data: data) else { return }
+              var profile = VCardUtils.parseToProfile(data: data) else { return }
+        // resize big size vatars
+        if let imageString = profile.photo, let image = imageString.createImage(),
+           (image.size.width > maxAvatarSize || image.size.height > maxAvatarSize) {
+            let resizedImage = image.resizeImageWith(newSize: CGSize(width: maxAvatarSize, height: maxAvatarSize))
+            let imageData = resizedImage?.jpegData(compressionQuality: 0.9)
+            let base64String = imageData?.base64EncodedString()
+            if let base64String = base64String {
+                profile.photo = base64String
+            }
+        }
         _ = self.dbManager
             .createOrUpdateRingProfile(profileUri: uriString,
                                        alias: profile.alias,

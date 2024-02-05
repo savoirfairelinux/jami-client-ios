@@ -331,6 +331,8 @@ class AccountsService: AccountAdapterDelegate {
                 if !password.isEmpty {
                     details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
                 }
+                details.updateValue("", forKey: ConfigKey.dhtProxyListUrl.rawValue)
+                details.updateValue("192.168.49.178:8000", forKey: ConfigKey.proxyServer.rawValue)
                 details.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
                 guard let accountId = self.accountAdapter.addAccount(details) else {
                     throw AddAccountError.unknownError
