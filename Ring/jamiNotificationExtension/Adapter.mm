@@ -175,9 +175,11 @@ std::map<std::string, std::string> nameServers;
 {
     [self registerSignals];
     if (initialized() == true) {
-        reloadConversationsAndRequests(std::string([accountId UTF8String]));
-        setAccountActive(std::string([accountId UTF8String]), true);
-        return true;
+//        reloadConversationsAndRequests(std::string([accountId UTF8String]), "da3296f8ad1356c6835cf6c59dddcd91fade70b2");
+       // setAccountActive(std::string([accountId UTF8String]), true);
+       // return true;
+        auto success = start({}, "a9c39b06640f6565", "da3296f8ad1356c6835cf6c59dddcd91fade70b2");
+        return success;
     }
 #if DEBUG
     int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO;
@@ -188,7 +190,7 @@ std::map<std::string, std::string> nameServers;
         __block bool success;
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (init(static_cast<InitFlag>(flag))) {
-                success = start({});
+                success = start({}, "a9c39b06640f6565", "da3296f8ad1356c6835cf6c59dddcd91fade70b2");
             } else {
                 success = false;
             }
@@ -196,7 +198,7 @@ std::map<std::string, std::string> nameServers;
         return success;
     } else {
         if (init(static_cast<InitFlag>(flag))) {
-            return start({});
+            return start({}, "a9c39b06640f6565", "da3296f8ad1356c6835cf6c59dddcd91fade70b2");
         }
         return false;
     }
@@ -206,7 +208,8 @@ std::map<std::string, std::string> nameServers;
 {
     unregisterSignalHandlers();
     confHandlers.clear();
-    [self setAccountsActive:false];
+    fini();
+   // [self setAccountsActive:false];
 }
 
 - (void)setAccountsActive:(BOOL)active
