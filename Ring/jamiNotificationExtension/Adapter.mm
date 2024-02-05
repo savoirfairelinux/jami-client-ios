@@ -175,14 +175,16 @@ std::map<std::string, std::string> nameServers;
 {
     [self registerSignals];
     if (initialized() == true) {
-        reloadConversationsAndRequests(std::string([accountId UTF8String]));
-        setAccountActive(std::string([accountId UTF8String]), true);
+        loadAccountAndConversation(std::string([accountId UTF8String]), "");
+//        reloadConversationsAndRequests(std::string([accountId UTF8String]), "da3296f8ad1356c6835cf6c59dddcd91fade70b2");
+       // setAccountActive(std::string([accountId UTF8String]), true);
+       // return true;
         return true;
     }
 #if DEBUG
-    int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO;
+    int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO | LIBJAMI_FLAG_NO_AUTOLOAD;
 #else
-    int flag = LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO;
+    int flag = LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO | LIBJAMI_FLAG_NO_AUTOLOAD;
 #endif
     if (![[NSThread currentThread] isMainThread]) {
         __block bool success;
@@ -193,10 +195,13 @@ std::map<std::string, std::string> nameServers;
                 success = false;
             }
         });
+        loadAccountAndConversation(std::string([accountId UTF8String]), "");
         return success;
     } else {
         if (init(static_cast<InitFlag>(flag))) {
-            return start({});
+            auto success = start({});
+            loadAccountAndConversation(std::string([accountId UTF8String]), "");
+            return success;
         }
         return false;
     }
@@ -206,7 +211,8 @@ std::map<std::string, std::string> nameServers;
 {
     unregisterSignalHandlers();
     confHandlers.clear();
-    [self setAccountsActive:false];
+    fini();
+   [self setAccountsActive:false];
 }
 
 - (void)setAccountsActive:(BOOL)active

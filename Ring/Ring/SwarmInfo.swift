@@ -373,6 +373,8 @@ class SwarmInfo: SwarmInfoProtocol {
             .subscribe { [weak participantInfo] profile in
                 guard let participantInfo = participantInfo else { return }
                 if let imageString = profile.photo, let image = imageString.createImage() {
+                    let size = image.size
+                    print("******* avatar image size \(size)")
                     participantInfo.avatar.accept(image)
                     participantInfo.hasProfileAvatar = true
                 }
