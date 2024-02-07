@@ -55,7 +55,7 @@ class AdapterService {
 
     enum PeerConnectionRequestType {
         case call(peerId: String, isVideo: Bool)
-        case gitMessage
+        case gitMessage(convId: String)
         case clone
         case unknown
     }
@@ -94,13 +94,13 @@ class AdapterService {
         Adapter.delegate = self
     }
 
-    func startAccountsWithListener(accountId: String, listener: @escaping (EventType, EventData) -> Void) {
+    func startAccountsWithListener(accountId: String, convId: String, listener: @escaping (EventType, EventData) -> Void) {
         self.eventHandler = listener
-        start(accountId: accountId)
+        start(accountId: accountId, convId: convId)
     }
 
-    func startAccount(accountId: String) {
-        start(accountId: accountId)
+    func startAccount(accountId: String, convId: String) {
+        start(accountId: accountId, convId: convId)
     }
 
     func pushNotificationReceived(accountId: String, data: [String: String]) {
@@ -112,13 +112,20 @@ class AdapterService {
         guard let peerId = result?.keys.first,
               let type = result?.values.first else {
             return .unknown}
+        if type.contains("application/im-gitmessage-id") {
+            let components = type.components(separatedBy: "/")
+
+            if components.count > 1, let last = components.last {
+                return PeerConnectionRequestType.gitMessage(convId: last)
+            }
+        }
         switch type {
         case "videoCall":
             return PeerConnectionRequestType.call(peerId: peerId, isVideo: true)
         case "audioCall":
             return PeerConnectionRequestType.call(peerId: peerId, isVideo: false)
         case "text/plain", "application/im-gitmessage-id":
-            return PeerConnectionRequestType.gitMessage
+                return .unknown//PeerConnectionRequestType.gitMessage
         case "application/clone":
             return PeerConnectionRequestType.clone
         default:
@@ -126,8 +133,8 @@ class AdapterService {
         }
     }
 
-    func start(accountId: String) {
-        self.adapter.start(accountId)
+    func start(accountId: String, convId: String) {
+        self.adapter.start(accountId, convId: convId)
     }
 
     func removeDelegate() {

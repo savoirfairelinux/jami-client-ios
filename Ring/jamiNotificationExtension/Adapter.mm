@@ -171,14 +171,11 @@ std::map<std::string, std::string> nameServers;
                         std::string([filePath UTF8String]));
 }
 
-- (BOOL)start:(NSString*)accountId
+- (BOOL)start:(NSString*)accountId convId:(NSString*)convId
 {
     [self registerSignals];
     if (initialized() == true) {
-        loadAccountAndConversation(std::string([accountId UTF8String]), "");
-//        reloadConversationsAndRequests(std::string([accountId UTF8String]), "da3296f8ad1356c6835cf6c59dddcd91fade70b2");
-       // setAccountActive(std::string([accountId UTF8String]), true);
-       // return true;
+        loadAccountAndConversation(std::string([accountId UTF8String]), std::string([convId UTF8String]));
         return true;
     }
 #if DEBUG
@@ -195,12 +192,12 @@ std::map<std::string, std::string> nameServers;
                 success = false;
             }
         });
-        loadAccountAndConversation(std::string([accountId UTF8String]), "");
+        loadAccountAndConversation(std::string([accountId UTF8String]), std::string([convId UTF8String]));
         return success;
     } else {
         if (init(static_cast<InitFlag>(flag))) {
             auto success = start({});
-            loadAccountAndConversation(std::string([accountId UTF8String]), "");
+            loadAccountAndConversation(std::string([accountId UTF8String]), std::string([convId UTF8String]));
             return success;
         }
         return false;
@@ -211,7 +208,6 @@ std::map<std::string, std::string> nameServers;
 {
     unregisterSignalHandlers();
     confHandlers.clear();
-    fini();
    [self setAccountsActive:false];
 }
 
@@ -269,6 +265,8 @@ std::map<std::string, std::string> nameServers;
             }
             return {};
         }
+
+        NSLog(@"&&&&&&&&&&& type %s", peerCR.connType.c_str());
         if (isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String])) {
             return {};
         }

@@ -144,12 +144,12 @@ class NotificationService: UNNotificationServiceExtension {
                     case .call(let peerId, let hasVideo):
                         handleCall(peerId, "\(hasVideo)")
                         return
-                    case .gitMessage:
-                        self.handleGitMessage()
+                    case .gitMessage(let convId):
+                            self.handleGitMessage(convId: convId)
                     case .clone:
                         // Should start daemon and wait until clone completed
                         self.waitForCloning = true
-                        self.handleGitMessage()
+                            self.handleGitMessage(convId: "")
                     case .unknown:
                         break
                     }
@@ -177,18 +177,18 @@ class NotificationService: UNNotificationServiceExtension {
             return false
         }
         self.accountIsActive = true
-        self.adapterService.startAccount(accountId: accountId)
+        self.adapterService.startAccount(accountId: accountId, convId: "")
         self.adapterService.pushNotificationReceived(accountId: accountId, data: data)
         // wait to proceed pushNotificationReceived
         sleep(5)
         return true
     }
 
-    private func handleGitMessage() {
+    private func handleGitMessage(convId: String) {
         /// check if account already acive
         guard !self.accountIsActive else { return }
         self.accountIsActive = true
-        self.adapterService.startAccountsWithListener(accountId: self.accountId) { [weak self] event, eventData in
+        self.adapterService.startAccountsWithListener(accountId: self.accountId, convId: convId) { [weak self] event, eventData in
             guard let self = self else {
                 return
             }
