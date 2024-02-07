@@ -46,7 +46,7 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
                 guard let self = self else { return }
                 let name = bestName.replacingOccurrences(of: "\0", with: "")
                 guard !name.isEmpty else { return }
-                let placeholder = L10n.Conversation.messagePlaceholder + name
+                let placeholder = L10n.Conversation.messagePlaceholder + " " + name
                 self.placeholder = placeholder
             })
             .disposed(by: self.disposeBag)
