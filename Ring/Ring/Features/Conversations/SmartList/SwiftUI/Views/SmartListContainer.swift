@@ -81,6 +81,7 @@ struct SmartListView: View {
                     .navigationBarTitle("", displayMode: .inline)
                     .navigationBarItems(leading: leadingBarItems, trailing: trailingBarItems)
                     .zIndex(0)
+                    .accessibility(identifier: AccessibilityIdentifiers.conversationView)
                 if showAccountList {
                     backgroundCover()
                     accountListsView()
@@ -116,6 +117,7 @@ struct SmartListView: View {
         }) {
             CurrentAccountButton(model: model.accountsModel)
         }
+        .accessibility(identifier: AccessibilityIdentifiers.openAccountsButton)
     }
 
     @ViewBuilder
@@ -218,6 +220,7 @@ struct SmartListView: View {
         } label: {
             Image(systemName: "ellipsis.circle")
                 .foregroundColor(Color.jamiColor)
+                .accessibility(identifier: AccessibilityIdentifiers.openMenuInSmartList)
         }
         .onTapGesture {
             isMenuOpen = true

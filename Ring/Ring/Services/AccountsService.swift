@@ -332,6 +332,10 @@ class AccountsService: AccountAdapterDelegate {
                     details.updateValue(password, forKey: ConfigKey.archivePassword.rawValue)
                 }
                 details.updateValue(enable.toString(), forKey: ConfigKey.proxyEnabled.rawValue)
+                if let testServer = TestEnvironment.shared.nameServerURI {
+                    details.updateValue(testServer, forKey: ConfigKey.ringNsURI.rawValue)
+                }
+
                 guard let accountId = self.accountAdapter.addAccount(details) else {
                     throw AddAccountError.unknownError
                 }

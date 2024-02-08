@@ -74,6 +74,10 @@ class NameService {
     /// Make a username lookup request to the daemon
     func lookupName(withAccount account: String, nameserver: String, name: String) {
 
+        let testServer: String = TestEnvironment.shared.nameServerURI ?? ""
+
+        let nameserver = nameserver.isEmpty ? testServer : nameserver
+
         // Cancel previous lookups...
         delayedLookupNameCall?.cancel()
 

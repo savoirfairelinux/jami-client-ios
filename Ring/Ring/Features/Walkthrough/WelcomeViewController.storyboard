@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a7M-11-Me2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a7M-11-Me2">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -53,6 +53,7 @@
                                                 <subviews>
                                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bu0-90-MB5" customClass="DesignableButton" customModule="Ring" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="Join Jami"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="FEf-kf-jCs"/>
                                                         </constraints>
@@ -235,6 +236,7 @@
                         <outlet property="advancedFeaturesButton" destination="kHN-iS-Mdb" id="Zil-kV-3gy"/>
                         <outlet property="configureSIPButton" destination="ki3-CT-J1m" id="aVq-rF-U7h"/>
                         <outlet property="connectJamiAcountManagerButton" destination="S02-sh-I3j" id="ual-XS-H9Z"/>
+                        <outlet property="containerView" destination="ka9-wr-QQv" id="qqf-d9-fwj"/>
                         <outlet property="importBackupButton" destination="py3-Pp-IIC" id="bWR-Tw-165"/>
                         <outlet property="importDeviceButton" destination="Wd6-vQ-gaH" id="TfO-Xg-8Yk"/>
                         <outlet property="joinJamiButton" destination="bu0-90-MB5" id="8ed-UA-GJh"/>
