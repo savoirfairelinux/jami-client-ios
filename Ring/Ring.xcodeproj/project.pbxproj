@@ -3402,10 +3402,7 @@
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3430,10 +3427,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3600,10 +3594,7 @@
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3961,10 +3952,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
