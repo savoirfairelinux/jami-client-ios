@@ -7,8 +7,44 @@
 //
 
 import XCTest
+@testable import Ring
+
+class MockURLProtocol: URLProtocol {
+    // Handler to intercept request and return mock response
+    static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data?))?
+
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true
+    }
+
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    override func startLoading() {
+        guard let handler = MockURLProtocol.requestHandler else {
+            fatalError("Handler is missing.")
+        }
+        do {
+            let (response, data) = try handler(request)
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            if let data = data {
+                client?.urlProtocol(self, didLoad: data)
+            }
+            client?.urlProtocolDidFinishLoading(self)
+        } catch {
+            client?.urlProtocol(self, didFailWithError: error)
+        }
+    }
+
+    override func stopLoading() {
+    }
+}
 
 class RingUITests: XCTestCase {
+
+    let app = XCUIApplication()
+    let nameService = NameService(withNameRegistrationAdapter: NameRegistrationAdapter())
 
     override func setUp() {
         super.setUp()
@@ -21,11 +57,61 @@ class RingUITests: XCTestCase {
         XCUIApplication().launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+
+        // Setup for mock name server
+        URLProtocol.registerClass(MockURLProtocol.self)
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [MockURLProtocol.self]
+        let session = URLSession(configuration: configuration)
+
+        // Set the name service URL to localhost
+
+        app.launch()
     }
 
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    override func tearDown() {
+        URLProtocol.unregisterClass(MockURLProtocol.self)
     }
 
+    func testAccountCreationWithRegisteredName_NameNotFound() {
+        // Set up the mock response for /addr/name
+        MockURLProtocol.requestHandler = { request in
+            guard let url = request.url, url.path.contains("name/") else {
+                throw NSError(domain: "MockError", code: 100, userInfo: [NSLocalizedDescriptionKey: "Path not handled"])
+            }
+            // Extract `value` from the URL and create a mock response
+            // For the /name/ route value is name
+            let name = url.lastPathComponent // Get the dynamic part of the URL
+
+            // Let's check if the name is in our list of registered names
+            let names = ["alice", "bob", "charlie"]
+            let isRegistered = names.contains(name)
+
+            // The response for a name that is not found is:
+            // "{"error": "name not registered"}"
+            // The response for a name that is found is:
+            // "{"name": "<name>", "addr": "<some_sha1>"}"
+            let response: HTTPURLResponse
+            let data: Data?
+            if isRegistered {
+                response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+                data = "{\"name\": \"\(name)\", \"addr\": \"\(name.sha1())\"}".data(using: .utf8)
+            } else {
+                response = HTTPURLResponse(url: url, statusCode: 404, httpVersion: nil, headerFields: nil)!
+                data = "{\"error\": \"name not registered\"}".data(using: .utf8)
+            }
+            return (response, data)
+        }
+
+        // Tap the "Join Jami" button
+        app.scrollViews.otherElements.buttons["Join Jami"].tap()
+
+        // Directly insert the name "notfound" into the text field
+        app.textFields["Enter your name"].tap()
+        app.textFields["Enter your name"].typeText("notfound")
+
+        // Wait for a response from the name service (expect not found)
+
+        // Verify the state of the "Join" button
+    }
 }
