@@ -264,6 +264,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         accountButton.frame = CGRect(x: 0, y: 0, width: smartListAccountSize, height: smartListAccountSize)
         accountButton.imageEdgeInsets = UIEdgeInsets(top: -smartListAccountMargin, left: -smartListAccountMargin, bottom: -smartListAccountMargin, right: -smartListAccountMargin)
         let accountButtonItem = UIBarButtonItem(customView: accountButton)
+        accountButtonItem.accessibilityIdentifier = "accounts information"
         accountButtonItem
             .customView?
             .translatesAutoresizingMaskIntoConstraints = false
@@ -327,7 +328,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         generalSettingsButton.menu = createMenu()
         generalSettingsButton.tintColor = .jamiButtonDark
         generalSettingsButton.showsMenuAsPrimaryAction = true
-        return UIBarButtonItem(customView: generalSettingsButton)
+        let menuButton = UIBarButtonItem(customView: generalSettingsButton)
+        menuButton.accessibilityIdentifier = "open menu"
+        return menuButton
     }
 
     private func shareAccountInfo() {
