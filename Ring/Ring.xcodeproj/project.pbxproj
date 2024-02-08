@@ -394,6 +394,7 @@
 		26DD506F2A86CFF20074E55F /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DD506E2A86CFF20074E55F /* ActionsViewModel.swift */; };
 		26E0731A2A915A15006B6F03 /* DraggableCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E073192A915A15006B6F03 /* DraggableCaptureView.swift */; };
 		26E0731C2A918F7A006B6F03 /* SwiftUIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E0731B2A918F7A006B6F03 /* SwiftUIViews.swift */; };
+		26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB61332B75724000183FF4 /* AccountCreationTest.swift */; };
 		26EF35E728E3401800D97E14 /* ReplyHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35E628E3401800D97E14 /* ReplyHistory.swift */; };
 		26EF35E928E3847100D97E14 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35E828E3847100D97E14 /* MessageContentView.swift */; };
 		26EF35EB28E38DA200D97E14 /* MessageContentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */; };
@@ -982,6 +983,7 @@
 		26DD506E2A86CFF20074E55F /* ActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewModel.swift; sourceTree = "<group>"; };
 		26E073192A915A15006B6F03 /* DraggableCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableCaptureView.swift; sourceTree = "<group>"; };
 		26E0731B2A918F7A006B6F03 /* SwiftUIViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViews.swift; sourceTree = "<group>"; };
+		26EB61332B75724000183FF4 /* AccountCreationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationTest.swift; sourceTree = "<group>"; };
 		26EF35E628E3401800D97E14 /* ReplyHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyHistory.swift; sourceTree = "<group>"; };
 		26EF35E828E3847100D97E14 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
 		26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentVM.swift; sourceTree = "<group>"; };
@@ -1654,6 +1656,7 @@
 			children = (
 				04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */,
 				04399A1D1D1C2D9D00E99CD9 /* Info.plist */,
+				26EB61332B75724000183FF4 /* AccountCreationTest.swift */,
 			);
 			path = RingUITests;
 			sourceTree = "<group>";
@@ -3104,6 +3107,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */,
 				04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3456,6 +3460,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				INFOPLIST_FILE = RingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3474,6 +3479,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				INFOPLIST_FILE = RingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3626,6 +3632,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				INFOPLIST_FILE = RingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3987,6 +3994,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				INFOPLIST_FILE = RingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
