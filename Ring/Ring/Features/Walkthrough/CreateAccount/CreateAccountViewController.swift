@@ -53,9 +53,11 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         self.contentView.roundTopCorners(radius: 12)
         self.view.layoutIfNeeded()
         configureWalkrhroughNavigationBar()
+        self.setAccessibilityLabels()
 
         // Style
         joinButton.titleLabel?.ajustToTextSize()
+        self.usernameTextField.accessibilityIdentifier = AccessibilityIdentifiers.usernameTextField
         self.usernameTextField.becomeFirstResponder()
 
         // Bind ViewModel to View
@@ -77,6 +79,15 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         setupUI()
+    }
+
+    private func setAccessibilityLabels() {
+        joinButton.accessibilityIdentifier = AccessibilityIdentifiers.joinButton
+        cancelButton.accessibilityIdentifier = AccessibilityIdentifiers.cancelCreatingAccount
+        contentView.accessibilityIdentifier = AccessibilityIdentifiers.createAccountView
+        titleLabel.accessibilityIdentifier = AccessibilityIdentifiers.createAccountTitle
+        userNameTitleLabel.accessibilityIdentifier = AccessibilityIdentifiers.createAccountUserNameLabel
+        registerUsernameErrorLabel.accessibilityIdentifier = AccessibilityIdentifiers.createAccountErrorLabel
     }
 
     func setupUI() {
