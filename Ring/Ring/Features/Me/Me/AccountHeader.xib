@@ -34,6 +34,7 @@
                         </imageView>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oQJ-jT-wTv">
                             <rect key="frame" x="20" y="190" width="335" height="22"/>
+                            <accessibility key="accessibilityConfiguration" identifier="Profile Name" label="Profile Name"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <textInputTraits key="textInputTraits"/>
                             <userDefinedRuntimeAttributes>

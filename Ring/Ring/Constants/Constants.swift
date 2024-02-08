@@ -18,6 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+var globalEnvironmentProperty = ""
+
 public class Constants: NSObject {
     @objc public static let notificationReceived = "com.savoirfairelinux.notificationExtension.receivedNotification" as CFString
     @objc public static let notificationAppIsActive = "com.savoirfairelinux.jami.appActive" as CFString
