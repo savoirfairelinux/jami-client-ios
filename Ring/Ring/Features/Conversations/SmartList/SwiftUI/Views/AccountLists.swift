@@ -69,6 +69,7 @@ struct AccountLists: View {
         .frame(minWidth: 100, maxWidth: .infinity)
         .cornerRadius(cornerRadius)
         .shadow(radius: shadowRadius)
+        .accessibility(identifier: AccessibilityIdentifiers.addAccountButton)
     }
 
     @ViewBuilder

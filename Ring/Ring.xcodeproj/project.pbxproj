@@ -226,6 +226,7 @@
 		26454FB92B7FDCE400CFF06C /* AboutViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26454FB82B7FDCE400CFF06C /* AboutViewController.storyboard */; };
 		26454FBD2B7FDED400CFF06C /* AboutSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FBC2B7FDED400CFF06C /* AboutSwiftUIView.swift */; };
 		26454FBF2B7FDEE900CFF06C /* AboutSwiftUIVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FBE2B7FDEE900CFF06C /* AboutSwiftUIVM.swift */; };
+		26454F7C2B7E770900CFF06C /* TestEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454F7B2B7E770900CFF06C /* TestEnvironment.swift */; };
 		264EA8722971EF4700B6FB6F /* SwarmInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA8712971EF4600B6FB6F /* SwarmInfoViewModel.swift */; };
 		264EA87E2977080300B6FB6F /* LogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA87D2977080300B6FB6F /* LogViewModel.swift */; };
 		264EA8802977082A00B6FB6F /* LogUIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA87F2977082A00B6FB6F /* LogUIViewModel.swift */; };
@@ -233,6 +234,9 @@
 		264EA8862977089C00B6FB6F /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA8852977089C00B6FB6F /* LogViewController.swift */; };
 		264FB66229775B1C00BEFBBF /* SystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FB66129775B1C00BEFBBF /* SystemService.swift */; };
 		264FB66629775B9B00BEFBBF /* SystemAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */; };
+		2657CBA72B858CF20078D6B1 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */; };
+		2657CBA82B858CF20078D6B1 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */; };
+		2657CBAA2B8596290078D6B1 /* XCTestCase + Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2657CBA92B8595F80078D6B1 /* XCTestCase + Helpers.swift */; };
 		265807202B0FBE2900CDE196 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */; };
 		2659F65827483656009107F1 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65727483656009107F1 /* VideoManager.swift */; };
 		2659F65C27483A27009107F1 /* DecodingAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */; };
@@ -410,6 +414,10 @@
 		26E081262BC09534001B4C18 /* RequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E081252BC09534001B4C18 /* RequestsView.swift */; };
 		26EEB19C2BD98CCA00B8B04B /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEB19B2BD98CCA00B8B04B /* SearchBar.swift */; };
 		26EEB19E2BDEDC0C00B8B04B /* UIControllersWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEB19D2BDEDC0C00B8B04B /* UIControllersWrappers.swift */; };
+		26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB61332B75724000183FF4 /* AccountCreationTest.swift */; };
+		26EB61392B7675FB00183FF4 /* Embassy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EB61382B7675FB00183FF4 /* Embassy.xcframework */; };
+		26EB613A2B7675FB00183FF4 /* Embassy.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26EB61382B7675FB00183FF4 /* Embassy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26EB613D2B76810200183FF4 /* MockServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB613C2B76810200183FF4 /* MockServer.swift */; };
 		26EF35E728E3401800D97E14 /* ReplyHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35E628E3401800D97E14 /* ReplyHistory.swift */; };
 		26EF35E928E3847100D97E14 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35E828E3847100D97E14 /* MessageContentView.swift */; };
 		26EF35EB28E38DA200D97E14 /* MessageContentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */; };
@@ -575,6 +583,7 @@
 				44DFB3B1288704910023878C /* Reusable.xcframework in Embed Frameworks */,
 				44DFB3B7288704910023878C /* SQLite.xcframework in Embed Frameworks */,
 				44DFB3AF288704900023878C /* AMPopTip.xcframework in Embed Frameworks */,
+				26EB613A2B7675FB00183FF4 /* Embassy.xcframework in Embed Frameworks */,
 				44DFB3AD288704900023878C /* GSKStretchyHeaderView.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -867,6 +876,7 @@
 		26454FB82B7FDCE400CFF06C /* AboutViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AboutViewController.storyboard; sourceTree = "<group>"; };
 		26454FBC2B7FDED400CFF06C /* AboutSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftUIView.swift; sourceTree = "<group>"; };
 		26454FBE2B7FDEE900CFF06C /* AboutSwiftUIVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftUIVM.swift; sourceTree = "<group>"; };
+		26454F7B2B7E770900CFF06C /* TestEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEnvironment.swift; sourceTree = "<group>"; };
 		264EA8712971EF4600B6FB6F /* SwarmInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoViewModel.swift; sourceTree = "<group>"; };
 		264EA87D2977080300B6FB6F /* LogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewModel.swift; sourceTree = "<group>"; };
 		264EA87F2977082A00B6FB6F /* LogUIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUIViewModel.swift; sourceTree = "<group>"; };
@@ -874,6 +884,8 @@
 		264EA8852977089C00B6FB6F /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		264FB66129775B1C00BEFBBF /* SystemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemService.swift; sourceTree = "<group>"; };
 		264FB66529775B9B00BEFBBF /* SystemAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAdapterDelegate.swift; sourceTree = "<group>"; };
+		2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
+		2657CBA92B8595F80078D6B1 /* XCTestCase + Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase + Helpers.swift"; sourceTree = "<group>"; };
 		2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
 		2659F65727483656009107F1 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		2659F65B27483A27009107F1 /* DecodingAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingAdapterDelegate.swift; sourceTree = "<group>"; };
@@ -1016,6 +1028,9 @@
 		26E081252BC09534001B4C18 /* RequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RequestsView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/RequestsView.swift; sourceTree = SOURCE_ROOT; };
 		26EEB19B2BD98CCA00B8B04B /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SearchBar.swift; sourceTree = SOURCE_ROOT; };
 		26EEB19D2BDEDC0C00B8B04B /* UIControllersWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIControllersWrappers.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/UIControllersWrappers.swift; sourceTree = SOURCE_ROOT; };
+		26EB61332B75724000183FF4 /* AccountCreationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationTest.swift; sourceTree = "<group>"; };
+		26EB61382B7675FB00183FF4 /* Embassy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Embassy.xcframework; path = Carthage/Build/Embassy.xcframework; sourceTree = "<group>"; };
+		26EB613C2B76810200183FF4 /* MockServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServer.swift; sourceTree = "<group>"; };
 		26EF35E628E3401800D97E14 /* ReplyHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyHistory.swift; sourceTree = "<group>"; };
 		26EF35E828E3847100D97E14 /* MessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
 		26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentVM.swift; sourceTree = "<group>"; };
@@ -1203,6 +1218,7 @@
 				269DA07228D0D366007D51D6 /* libsecp256k1.a in Frameworks */,
 				649AD3C724B4D00100A0236D /* libc++.tbd in Frameworks */,
 				269DA07428D0D366007D51D6 /* libspeexdsp.a in Frameworks */,
+				26EB61392B7675FB00183FF4 /* Embassy.xcframework in Frameworks */,
 				269DA06C28D0D366007D51D6 /* libpjsip-simple.a in Frameworks */,
 				6452144424B4ACA7007203D5 /* CoreLocation.framework in Frameworks */,
 				26CA4C5A2AB23CCF00AEF8F5 /* libixml.a in Frameworks */,
@@ -1369,6 +1385,7 @@
 		02AED8171DD4C4B000F740BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26EB61382B7675FB00183FF4 /* Embassy.xcframework */,
 				26CA4C562AB23A9200AEF8F5 /* libxml2.2.tbd */,
 				26C4845B2A796D69005BC767 /* libdhtnet.a */,
 				44EDA53D28FE22FD00BEB99A /* libjami.a */,
@@ -1616,6 +1633,7 @@
 		043999EA1D1C2D9D00E99CD9 = {
 			isa = PBXGroup;
 			children = (
+				2657CBA62B858CF20078D6B1 /* AccessibilityIdentifiers.swift */,
 				265C436C2862561700B4BE73 /* Constants.swift */,
 				6236602520091425002598C1 /* daemon */,
 				0273C3001E0C445200CF00BA /* RingPrefixHeader.pch */,
@@ -1688,8 +1706,10 @@
 		04399A1A1D1C2D9D00E99CD9 /* RingUITests */ = {
 			isa = PBXGroup;
 			children = (
+				26EB613B2B7680F100183FF4 /* Helpers */,
 				04399A1B1D1C2D9D00E99CD9 /* RingUITests.swift */,
 				04399A1D1D1C2D9D00E99CD9 /* Info.plist */,
+				26EB61332B75724000183FF4 /* AccountCreationTest.swift */,
 			);
 			path = RingUITests;
 			sourceTree = "<group>";
@@ -1830,6 +1850,7 @@
 				2685F90D2A1698B400BFCDA3 /* VideoInputsManager.swift */,
 				26E0731B2A918F7A006B6F03 /* SwiftUIViews.swift */,
 				2658071F2B0FBE2900CDE196 /* PreferencesManager.swift */,
+				26454F7B2B7E770900CFF06C /* TestEnvironment.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2433,6 +2454,15 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		26EB613B2B7680F100183FF4 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				26EB613C2B76810200183FF4 /* MockServer.swift */,
+				2657CBA92B8595F80078D6B1 /* XCTestCase + Helpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		4430A669236CB9F600747177 /* Conference */ = {
 			isa = PBXGroup;
 			children = (
@@ -2996,6 +3026,7 @@
 				5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */,
 				26EF35E928E3847100D97E14 /* MessageContentView.swift in Sources */,
 				1ABE07D31F0D8FE800D36361 /* Storyboards.swift in Sources */,
+				26454F7C2B7E770900CFF06C /* TestEnvironment.swift in Sources */,
 				62AA15CA1FFD3D7E0064A063 /* VideoService.swift in Sources */,
 				26D08AB9269628F400E37574 /* RequestsService.swift in Sources */,
 				0EDE34C71F868E1200FFA15C /* EditProfileViewController.swift in Sources */,
@@ -3123,6 +3154,7 @@
 				1A2D18C41F29180700B2C785 /* ConfigKeyModel.swift in Sources */,
 				62B60AFB2048A437001BEACF /* DataTransferAdapterDelegate.swift in Sources */,
 				1DE93593291B119900E426CF /* SwarmCreationUI.swift in Sources */,
+				2657CBA72B858CF20078D6B1 /* AccessibilityIdentifiers.swift in Sources */,
 				62AF6862201A66CF003AA9E8 /* AudioAdapter.mm in Sources */,
 				627F11F120348FBF006560B5 /* AvatarView.swift in Sources */,
 				1A20417A1F1E547F00C08435 /* Stateable.swift in Sources */,
@@ -3214,7 +3246,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26EB613D2B76810200183FF4 /* MockServer.swift in Sources */,
+				26EB61342B75724000183FF4 /* AccountCreationTest.swift in Sources */,
+				2657CBAA2B8596290078D6B1 /* XCTestCase + Helpers.swift in Sources */,
 				04399A1C1D1C2D9D00E99CD9 /* RingUITests.swift in Sources */,
+				2657CBA82B858CF20078D6B1 /* AccessibilityIdentifiers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3512,10 +3548,7 @@
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3540,10 +3573,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3565,7 +3595,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = RingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3584,6 +3616,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				INFOPLIST_FILE = RingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3710,10 +3743,7 @@
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3735,7 +3765,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = RingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4071,10 +4103,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../fat/include",
-					"$(SRCROOT)/../../daemon/contrib/native-arm64/ffmpeg",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../fat/include";
 				INFOPLIST_FILE = RingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4097,6 +4126,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				INFOPLIST_FILE = RingUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
