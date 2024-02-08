@@ -197,6 +197,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let path = self.certificatePath() {
             setenv("CA_ROOT_FILE", path, 1)
         }
+        if let serverAddress = ProcessInfo.processInfo.environment["SERVER_ADDRESS"] {
+            nameService.setServerAddress(serverAddress)
+        }
         return true
     }
 
