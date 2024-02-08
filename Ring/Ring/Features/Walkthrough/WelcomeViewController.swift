@@ -31,6 +31,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     typealias VMType = WelcomeViewModel
     // MARK: outlets
     @IBOutlet weak var welcomeTextLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var joinJamiButton: DesignableButton!
     @IBOutlet weak var linkAccountButton: DesignableButton!
     @IBOutlet weak var importDeviceButton: DesignableButton!
@@ -48,6 +49,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
+        containerView.accessibilityIdentifier = AccessibilityIdentifiers.welcomeWindow
         self.applyL10n()
         if self.viewModel.isAnimatable {
             self.initialAnimation()
@@ -101,6 +103,7 @@ class WelcomeViewController: UIViewController, StoryboardBased, ViewModelBased {
 
     func applyL10n() {
         joinJamiButton.setTitle(L10n.CreateAccount.createAccountFormTitle, for: .normal)
+        joinJamiButton.accessibilityIdentifier = AccessibilityIdentifiers.joinJamiButton
         linkAccountButton.setTitle(L10n.Welcome.haveAccount, for: .normal)
         importDeviceButton.setTitle(L10n.Welcome.linkDevice, for: .normal)
         importBackupButton.setTitle(L10n.Welcome.linkBackup, for: .normal)
