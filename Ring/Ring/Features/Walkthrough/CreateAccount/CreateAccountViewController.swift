@@ -55,7 +55,9 @@ class CreateAccountViewController: UIViewController, StoryboardBased, ViewModelB
         configureWalkrhroughNavigationBar()
 
         // Style
+        joinButton.accessibilityIdentifier = AccessibilityIdentifiers.joinButton
         joinButton.titleLabel?.ajustToTextSize()
+        self.usernameTextField.accessibilityIdentifier = AccessibilityIdentifiers.usernameTextField
         self.usernameTextField.becomeFirstResponder()
 
         // Bind ViewModel to View

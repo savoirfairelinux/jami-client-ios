@@ -227,6 +227,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     private func setupUI() {
+        self.containerView.accessibilityIdentifier = AccessibilityIdentifiers.conversationView
         self.viewModel.hideNoConversationsMessage
             .bind(to: self.noConversationLabel.rx.isHidden)
             .disposed(by: disposeBag)
@@ -264,6 +265,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         accountButton.frame = CGRect(x: 0, y: 0, width: smartListAccountSize, height: smartListAccountSize)
         accountButton.imageEdgeInsets = UIEdgeInsets(top: -smartListAccountMargin, left: -smartListAccountMargin, bottom: -smartListAccountMargin, right: -smartListAccountMargin)
         let accountButtonItem = UIBarButtonItem(customView: accountButton)
+        accountButtonItem.accessibilityIdentifier = AccessibilityIdentifiers.openAccountsButton
         accountButtonItem
             .customView?
             .translatesAutoresizingMaskIntoConstraints = false
@@ -327,7 +329,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         generalSettingsButton.menu = createMenu()
         generalSettingsButton.tintColor = .jamiButtonDark
         generalSettingsButton.showsMenuAsPrimaryAction = true
-        return UIBarButtonItem(customView: generalSettingsButton)
+        let menuButton = UIBarButtonItem(customView: generalSettingsButton)
+        menuButton.accessibilityIdentifier = AccessibilityIdentifiers.openMenuInSmartList
+        return menuButton
     }
 
     private func shareAccountInfo() {
@@ -383,6 +387,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         addAccountButton.frame = CGRect(x: 0, y: 0, width: 250, height: 40)
         addAccountButton.contentHorizontalAlignment = .right
         addAccountButton.setTitle(L10n.Smartlist.addAccountButton, for: .normal)
+        addAccountButton.accessibilityIdentifier = AccessibilityIdentifiers.addAccountButton
         addAccountButton.setTitleColor(.jamiButtonDark, for: .normal)
         addAccountButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 23)
 

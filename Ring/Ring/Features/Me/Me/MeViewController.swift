@@ -389,7 +389,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                     if !label.isEmpty {
                         return self.configureCellWithEnableTextCopy(text: L10n.Global.username,
                                                                     secondaryText: label,
-                                                                    style: .callout)
+                                                                    style: .callout, accessibilityIdentifier: AccessibilityIdentifiers.accountRegisteredName)
                     }
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.Global.registerAUsername
@@ -411,7 +411,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                 case .jamiID(let label):
                     return self.configureCellWithEnableTextCopy(text: "Jami ID",
                                                                 secondaryText: label,
-                                                                style: .footnote)
+                                                                style: .footnote, accessibilityIdentifier: AccessibilityIdentifiers.accountJamiId)
                 case .ordinary(let label):
                     let cell = UITableViewCell()
                     cell.textLabel?.text = label
@@ -736,7 +736,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         return cell
     }
 
-    func configureCellWithEnableTextCopy(text: String, secondaryText: String, style: UIFont.TextStyle) -> DisposableCell {
+    func configureCellWithEnableTextCopy(text: String, secondaryText: String, style: UIFont.TextStyle, accessibilityIdentifier: String) -> DisposableCell {
         let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
         cell.selectionStyle = .none
         cell.textLabel?.text = text
@@ -755,6 +755,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         let textView = CustomActionTextView()
         textView.backgroundColor = .secondarySystemGroupedBackground
         textView.text = secondaryText
+        textView.accessibilityIdentifier = accessibilityIdentifier
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textContainer.lineBreakMode = .byCharWrapping
         textView.tintColor = .clear
