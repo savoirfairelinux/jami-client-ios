@@ -197,6 +197,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let path = self.certificatePath() {
             setenv("CA_ROOT_FILE", path, 1)
         }
+
+        // For UI test we set local host as server address
+        if let serverAddress = ProcessInfo.processInfo.environment["SERVER_ADDRESS"] {
+            nameService.setServerAddress(serverAddress)
+        }
         return true
     }
 

@@ -61,6 +61,9 @@ class NameService {
     /// Triggered when we receive a UserSearchResponse from the daemon
     let userSearchResponseShared: Observable<UserSearchResponse>
 
+    /// Used form UI test to set local host address
+    var nameserver = ""
+
     init(withNameRegistrationAdapter nameRegistrationAdapter: NameRegistrationAdapter) {
         self.nameRegistrationAdapter = nameRegistrationAdapter
         self.sharedRegistrationStatus = registrationStatus.share()
@@ -71,8 +74,14 @@ class NameService {
         NameRegistrationAdapter.delegate = self
     }
 
+    func setServerAddress(_ nameserver: String) {
+        self.nameserver = nameserver
+    }
+
     /// Make a username lookup request to the daemon
     func lookupName(withAccount account: String, nameserver: String, name: String) {
+
+        let nameserver = nameserver.isEmpty ? self.nameserver : nameserver
 
         // Cancel previous lookups...
         delayedLookupNameCall?.cancel()
