@@ -61,6 +61,9 @@ class NameService {
     /// Triggered when we receive a UserSearchResponse from the daemon
     let userSearchResponseShared: Observable<UserSearchResponse>
 
+    /// Used form UI test to set local host address
+    var nameserver = ""
+
     init(withNameRegistrationAdapter nameRegistrationAdapter: NameRegistrationAdapter) {
         self.nameRegistrationAdapter = nameRegistrationAdapter
         self.sharedRegistrationStatus = registrationStatus.share()
@@ -71,8 +74,14 @@ class NameService {
         NameRegistrationAdapter.delegate = self
     }
 
+    func setServerAddress(_ nameserver: String) {
+        self.nameserver = nameserver
+    }
+
     /// Make a username lookup request to the daemon
     func lookupName(withAccount account: String, nameserver: String, name: String) {
+
+        let nameserver = nameserver.isEmpty ? self.nameserver : nameserver
 
         // Cancel previous lookups...
         delayedLookupNameCall?.cancel()
@@ -108,18 +117,18 @@ class NameService {
 
     func registerNameObservable(withAccount account: String, password: String, name: String) -> Observable<Bool> {
         let registerName: Single<Bool> =
-            Single.create(subscribe: { (single) -> Disposable in
-                let dispatchQueue = DispatchQueue(label: "nameRegistration", qos: .background)
-                dispatchQueue.async {[weak self] in
-                    guard let self = self else { return }
-                    self.nameRegistrationAdapter
-                        .registerName(withAccount: account,
-                                      password: password,
-                                      name: name)
-                    single(.success(true))
-                }
-                return Disposables.create { }
-            })
+        Single.create(subscribe: { (single) -> Disposable in
+            let dispatchQueue = DispatchQueue(label: "nameRegistration", qos: .background)
+            dispatchQueue.async {[weak self] in
+                guard let self = self else { return }
+                self.nameRegistrationAdapter
+                    .registerName(withAccount: account,
+                                  password: password,
+                                  name: name)
+                single(.success(true))
+            }
+            return Disposables.create { }
+        })
 
         let filteredDaemonSignals = self.sharedRegistrationStatus
             .filter({ (serviceEvent) -> Bool in
@@ -134,10 +143,10 @@ class NameService {
                 guard let status: NameRegistrationState = serviceEvent.getEventInput(ServiceEventInput.state)
                 else { return false }
                 switch status {
-                case .success:
-                    return true
-                default:
-                    return false
+                    case .success:
+                        return true
+                    default:
+                        return false
                 }
             }
     }
@@ -186,19 +195,19 @@ extension NameService: NameRegistrationAdapterDelegate {
 
     internal func userSearchEnded(with response: UserSearchResponse) {
         switch response.state {
-        case .found:
-            self.userSearchResponseStream.onNext(response)
-        case .invalidName:
-            self.userSearchResponseStream.onNext(response)
-            self.log.warning("User search invalid name")
-        case.notFound:
-            self.userSearchResponseStream.onNext(response)
-            self.log.warning("User search not found")
-        case .error:
-            self.userSearchResponseStream.onNext(response)
-            self.log.error("User search error")
-        @unknown default:
-            self.log.error("User search unknown default")
+            case .found:
+                self.userSearchResponseStream.onNext(response)
+            case .invalidName:
+                self.userSearchResponseStream.onNext(response)
+                self.log.warning("User search invalid name")
+            case.notFound:
+                self.userSearchResponseStream.onNext(response)
+                self.log.warning("User search not found")
+            case .error:
+                self.userSearchResponseStream.onNext(response)
+                self.log.error("User search error")
+            @unknown default:
+                self.log.error("User search unknown default")
         }
     }
 }

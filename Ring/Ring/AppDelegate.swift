@@ -129,11 +129,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // initialize log format
         let console = ConsoleDestination()
         console.format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $C$L$c: $M"
-        #if DEBUG
+#if DEBUG
         log.addDestination(console)
-        #else
+#else
         log.removeAllDestinations()
-        #endif
+#endif
 
         // move files from the app container to the group container, so it could be accessed by notification extension
         if !self.moveDataToGroupContainer() {
@@ -197,6 +197,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let path = self.certificatePath() {
             setenv("CA_ROOT_FILE", path, 1)
         }
+
+        // For UI test we set local host as server address
+        if let serverAddress = ProcessInfo.processInfo.environment["SERVER_ADDRESS"] {
+            nameService.setServerAddress(serverAddress)
+        }
         return true
     }
 
@@ -244,9 +249,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                object: nil)
         CFNotificationCenterAddObserver(self.center,
                                         nil, { (_, _, _, _, _) in
-                                            // emit signal so notification could be handeled by daemon
-                                            NotificationCenter.default.post(name: AppDelegate.shouldHandleNotification, object: nil, userInfo: nil)
-                                        },
+            // emit signal so notification could be handeled by daemon
+            NotificationCenter.default.post(name: AppDelegate.shouldHandleNotification, object: nil, userInfo: nil)
+        },
                                         Constants.notificationReceived,
                                         nil,
                                         .deliverImmediately)
@@ -424,18 +429,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let currentSettings = UNUserNotificationCenter.current()
         currentSettings.getNotificationSettings(completionHandler: { settings in
             switch settings.authorizationStatus {
-            case .notDetermined:
-                break
-            case .denied:
-                if enabled { LocalNotificationsHelper.setNotification(enable: false) }
-            case .authorized:
-                if !enabled { LocalNotificationsHelper.setNotification(enable: true) }
-            case .provisional:
-                if !enabled { LocalNotificationsHelper.setNotification(enable: true) }
-            case .ephemeral:
-                if enabled { LocalNotificationsHelper.setNotification(enable: false) }
-            @unknown default:
-                break
+                case .notDetermined:
+                    break
+                case .denied:
+                    if enabled { LocalNotificationsHelper.setNotification(enable: false) }
+                case .authorized:
+                    if !enabled { LocalNotificationsHelper.setNotification(enable: true) }
+                case .provisional:
+                    if !enabled { LocalNotificationsHelper.setNotification(enable: true) }
+                case .ephemeral:
+                    if enabled { LocalNotificationsHelper.setNotification(enable: false) }
+                @unknown default:
+                    break
             }
         })
     }
@@ -559,7 +564,7 @@ extension AppDelegate {
 
     func findAccountAndStartCall(uri: JamiURI, isVideo: Bool, type: AccountType) {
         guard let currentAccount = self.accountService
-                .currentAccount else { return }
+            .currentAccount else { return }
         var hash = uri.hash ?? ""
         var uriString = uri.uriString ?? ""
         for account in self.accountService.accounts where account.type == type {
@@ -612,7 +617,7 @@ extension AppDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken
-                        deviceToken: Data) {
+                     deviceToken: Data) {
         let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print(deviceTokenString)
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
