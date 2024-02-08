@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64e61a25_d025079a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-08T16:33:03Z",
+      "side": 1,
+      "message": "It is safer to use an enum, such as \u0027Reactions\u0027, with \u0027apply\u0027 and \u0027revoke\u0027 cases. This way, we would not need to compare strings, and there would be fewer errors.",
+      "revId": "ba770d79d8506620502c5e1b88fcb6d5b528e742",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d1f66c0_0ad17183",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-08T16:33:03Z",
+      "side": 1,
+      "message": "message is not used, we could just check if it nil",
+      "revId": "ba770d79d8506620502c5e1b88fcb6d5b528e742",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b318155b_72f6d076",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-08T16:33:03Z",
+      "side": 1,
+      "message": "it is not used",
+      "revId": "ba770d79d8506620502c5e1b88fcb6d5b528e742",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b78a4c85_8037eb13",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageReplyTargetVM.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-08T16:33:03Z",
+      "side": 1,
+      "message": "not need",
+      "revId": "ba770d79d8506620502c5e1b88fcb6d5b528e742",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42c809aa_4d1e665f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-08T16:33:03Z",
+      "side": 1,
+      "message": "we do not need this.\ncontextMenuModel.currentJamiAccountId \u003d self.accountService.currentAccount?.jamiId is good enough.",
+      "revId": "ba770d79d8506620502c5e1b88fcb6d5b528e742",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e132003_c66a0e40",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-08T16:33:03Z",
+      "side": 1,
+      "message": "Use safe unwrap. For example if data \u003d event[\"data\"], etc.",
+      "revId": "ba770d79d8506620502c5e1b88fcb6d5b528e742",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be568b52_ad7f6cd1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessagesListVM.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-08T16:33:03Z",
+      "side": 1,
+      "message": "safe unwrap",
+      "revId": "ba770d79d8506620502c5e1b88fcb6d5b528e742",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59d93643_a86deccf",
+        "filename": "Ring/Ring/Models/ConversationModel.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-08T16:33:03Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "ba770d79d8506620502c5e1b88fcb6d5b528e742",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fdf322b_79adc5fb",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-08T16:33:03Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "ba770d79d8506620502c5e1b88fcb6d5b528e742",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3025c269_38b5f985",
+        "filename": "Ring/Ring/Services/ConversationsService.swift",
+        "patchSetId": 23
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-08T16:33:03Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "ba770d79d8506620502c5e1b88fcb6d5b528e742",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
