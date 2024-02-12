@@ -39,18 +39,21 @@ struct ReactionRowView: View {
                 .font(.callout)
                 .lineLimit(1)
                 .truncationMode(.tail)
-                .layoutPriority(0.7)
+                .layoutPriority(0.5)
                 .multilineTextAlignment(.leading)
 
             Spacer()
 
-            Text(reaction.toString())
-                .bold()
-                .font(.title3)
-                .lineLimit(nil)
-                .frame(minWidth: 20)
-                .layoutPriority(0.3)
-                .multilineTextAlignment(.trailing)
+            ScrollView {
+                Text(reaction.toString())
+                    .bold()
+                    .font(.title3)
+                    .lineLimit(nil)
+                    .multilineTextAlignment(.trailing)
+            }
+            .frame(maxHeight: 60)
+            .frame(minWidth: 30)
+            .layoutPriority(0.5)
         }
         .padding(.horizontal, padding)
     }
