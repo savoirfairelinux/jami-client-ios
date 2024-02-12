@@ -1915,6 +1915,7 @@
 				0E4909711FEAC822005CAA50 /* Calls */,
 				0EDE34C51F868D2D00FFA15C /* Shared */,
 				1A0C4EBD1F1D48DD00550433 /* Walkthrough */,
+				1D4EE840291EF98800ED2010 /* SwarmCreation */,
 				1A2D18A71F290FAA00B2C785 /* Conversations */,
 				1A5DC0331F3567080075E8EF /* ContactRequests */,
 				1A2D18A81F290FBF00B2C785 /* Me */,
@@ -2044,7 +2045,6 @@
 		1A2D18AE1F29153F00B2C785 /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
-				1D4EE840291EF98800ED2010 /* SwarmCreationModel */,
 				265DFAFF292EB91F00834B97 /* MessageSwiftUI */,
 				1A2D18B21F2915C500B2C785 /* ConversationViewController.storyboard */,
 				1A2D18CC1F29182500B2C785 /* ConversationViewController.swift */,
@@ -2149,7 +2149,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		1D4EE840291EF98800ED2010 /* SwarmCreationModel */ = {
+		1D4EE840291EF98800ED2010 /* SwarmCreation */ = {
 			isa = PBXGroup;
 			children = (
 				1DE9358D291B119700E426CF /* SwarmCreationUI.swift */,
@@ -2159,7 +2159,7 @@
 				1D4EE84C29252AD000ED2010 /* SwarmCreationUIModel.swift */,
 				1D4EE843291EF9E000ED2010 /* SwarmCreation.swift */,
 			);
-			path = SwarmCreationModel;
+			path = SwarmCreation;
 			sourceTree = "<group>";
 		};
 		26074FD524F7FF5B00374570 /* Preview */ = {

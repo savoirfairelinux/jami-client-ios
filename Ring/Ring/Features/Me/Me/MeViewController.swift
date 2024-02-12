@@ -80,7 +80,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
         self.navigationController?.navigationBar
             .titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium)]
-       self.configureNavigationBar(backgroundColor: .systemGroupedBackground)
+        self.configureNavigationBar(backgroundColor: .systemGroupedBackground)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
