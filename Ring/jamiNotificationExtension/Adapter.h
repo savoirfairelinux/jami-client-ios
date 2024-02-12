@@ -27,7 +27,7 @@
 @property (class, nonatomic, weak) id <AdapterDelegate> delegate;
 
 - (void)stop;
-- (BOOL)start:(NSString*)accountId;
+- (BOOL)start:(NSString*)accountId convId:(NSString*)convId;
 - (void)pushNotificationReceived:(NSString*)from message:(NSDictionary*)data;
 - (bool)downloadFileWithFileId:(NSString*)fileId
                      accountId:(NSString*)accountId
