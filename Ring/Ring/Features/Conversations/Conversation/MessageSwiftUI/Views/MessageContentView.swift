@@ -115,11 +115,14 @@ struct MessageContentView: View {
     @StateObject var reactionsModel: ReactionsContainerModel
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     let padding: CGFloat = 12
-    @SwiftUI.State private var reactionsTextSize: CGFloat = 20
     var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
+    @SwiftUI.State private var messageWidth:CGFloat = 0
+    @SwiftUI.State private var reactionsHeight: CGFloat = 20
+    @SwiftUI.State private var reactionsWidth:CGFloat = 0
+    @SwiftUI.State private var emojiAlignment:Alignment = Alignment.bottomTrailing
 
     var body: some View {
-        ZStack(alignment: Alignment.bottomTrailing) {
+        ZStack(alignment: emojiAlignment) {
             VStack(alignment: messageModel.replyTarget.alignment) {
                 if messageModel.messageContent.isHistory {
                     renderReplyHistory()
@@ -129,17 +132,34 @@ struct MessageContentView: View {
                         self.model.onAppear()
                     }
                     .offset(y: messageModel.messageContent.isHistory ? -padding : 0)
+                    .background(GeometryReader { preferences in
+                        Color.clear.onAppear {
+                            if preferences.size.width == 0 || preferences.size.height == 0 { return }
+                            self.messageWidth = preferences.size.width
+                            self.updateAlignment()
+                        }
+                    })
             }
-            .padding(.bottom, !messageModel.hasReactions() ? 0 : reactionsTextSize - 6)
+            .padding(.bottom, !messageModel.hasReactions() ? 0 : reactionsHeight - 6)
             if messageModel.hasReactions() {
                 renderReactions()
             }
         }
         .onPreferenceChange(SizePreferenceKey.self) { preferences in
-            self.reactionsTextSize = preferences.height
+            self.reactionsHeight = preferences.height
+            self.reactionsWidth = preferences.width
+            self.updateAlignment()
         }
         .offset(y: messageModel.messageContent.isHistory ? padding : 0)
         .scaleEffect(model.scale)
+    }
+
+    private func updateAlignment() {
+        if self.messageWidth < self.reactionsWidth && model.message.incoming {
+            emojiAlignment = Alignment.bottomLeading
+        } else {
+            emojiAlignment = Alignment.bottomTrailing
+        }
     }
 
     private func renderReplyHistory() -> some View {
