@@ -46,10 +46,10 @@
 "global.reply" = "Odgovori";
 "global.search" = "Трагајући...";
 "global.donate" = "Doniraj";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Избриши поруку";
+"global.deleteFile" = "Избриши датотеку са уређаја";
+"global.editMessage" = "Уреди поруку";
+"global.editing" = "Уређивање";
 
 // Scan
 "scan.badQrCode" = "Лош QR код";
@@ -80,7 +80,7 @@
 "swarm.addMember" = "Додајте члана";
 "swarm.confirmLeaveSwarm" = "Сигуран си да желиш да напустиш овај рог?";
 "swarm.Leave" = "Одлази";
-"swarm.newSwarm" = "New swarm";
+"swarm.newSwarm" = "Нови рој";
 // Smartlist
 "smartlist.yesterday" = "Учерашњи";
 "smartlist.results" = "Јавни справочник";
@@ -98,12 +98,12 @@
 "smartlist.invitations" = "Позивања";
 "smartlist.aboutJami" = "O Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Листа налога";
 "smartlist.disableDonation" = "Ne sada";
 "smartlist.donationExplanation" = "Ako uživate u korišćenju Jami-ja i verujete u našu misiju, da li biste dali donaciju?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "У овом тренутку делите своју локацију са ";
 "conversation.explanationReceivingLocationFrom" = "У овом тренутку добијате живо место од ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -119,7 +119,7 @@
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "обрисао поруку";
 
 //Invitations
 "invitations.noInvitations" = "Нема покана";
@@ -133,7 +133,7 @@
 "welcome.linkDevice" = "Увоз из другог уређаја";
 "welcome.linkBackup" = "Импорт из архивног резервног копија";
 "welcome.createAccount" = "Join";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.connectToManager" = "Povežite se sa сервером за управљање налогом у Јамију";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Preskoči";

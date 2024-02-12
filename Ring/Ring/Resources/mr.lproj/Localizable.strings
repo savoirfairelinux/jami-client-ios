@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "तुम्ही सध्या तुमच्या स्थानाची माहिती ";
 "conversation.explanationReceivingLocationFrom" = "तुम्हाला सध्या ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";

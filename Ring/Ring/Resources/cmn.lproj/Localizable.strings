@@ -45,7 +45,7 @@
 "global.copy" = "複製";
 "global.reply" = "回复";
 "global.search" = "正在搜索…";
-"global.donate" = "Donate";
+"global.donate" = "捐助";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
@@ -100,10 +100,10 @@
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
 "smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "无法连接到提供的账户管理器。请检查您的凭据。";
 "alerts.recordVideoMessage" = "录制视频信息";
 "alerts.recordAudioMessage" = "录制语音信息";
-"alerts.uploadFile" = "Send file";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "傳送檔案";
+"alerts.uploadPhoto" = "打开相册";
 "alerts.locationServiceIsDisabled" = "打开”位置服务“以允许 Jami 确定您的位置。";
 "alerts.locationSharing" = "分享我的位置";
 "alerts.alreadylocationSharing" = "已与此用户分享位置";

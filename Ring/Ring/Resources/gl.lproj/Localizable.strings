@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "Se desfrutas usando Jami e cres nos nosos obxectivos, farías unha doazón?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Actualmente está compartiendo a súa localización con ";
 "conversation.explanationReceivingLocationFrom" = "Actualmente está a recibir unha localización en directo de ";
 "conversation.errorSavingImage" = "Non se gardou a imaxe na galería";

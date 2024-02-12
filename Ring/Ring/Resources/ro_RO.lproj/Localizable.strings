@@ -48,8 +48,8 @@
 "global.donate" = "Donează";
 "global.deleteMessage" = "Șterge mesajul";
 "global.deleteFile" = "Șterge fișierul din aparat";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.editMessage" = "Modifică mesajul";
+"global.editing" = "Modificare";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "Dacă îți place să folosești Jami și crezi că misiunea noastră este importantă, poți face o donație?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Scrie pentru ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către ";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
 "conversation.errorSavingImage" = "Salvarea imaginii nu a reușit";
@@ -117,9 +117,9 @@
 "conversation.synchronizationMessage" = "Se așteaptă ca %@ să se conecteze pentru a sincroniza conversația.";
 "conversation.inReplyTo" = "Răspuns pentru";
 "conversation.repliedTo" = " a răspuns pentru";
-"conversation.yourself" = "tu";
+"conversation.yourself" = "tine";
 "conversation.edited" = "modificat";
-"conversation.deletedMessage" = "a șters un mesaj";
+"conversation.deletedMessage" = "a șters mesajul";
 
 //Invitations
 "invitations.noInvitations" = "Nicio invitație";
@@ -323,7 +323,7 @@
 "account.statusUnknown" = "Necunoscut";
 "account.statusConnectionerror" = "Eroare de conectare";
 "account.needMigration" = "contul trebuie transferat";
-"account.me" = "Eu";
+"account.me" = "Mine";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Niciun contact blocat";

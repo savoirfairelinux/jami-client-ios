@@ -47,9 +47,9 @@
 "global.search" = "Ricerca in corso...";
 "global.donate" = "Donare";
 "global.deleteMessage" = "Cancella messaggio";
-"global.deleteFile" = "Elimina il file dal dispositivo";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteFile" = "Cancella il file dal dispositivo";
+"global.editMessage" = "Modifica messaggio";
+"global.editing" = "Modificare";
 
 // Scan
 "scan.badQrCode" = "Codice QR errato";
@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "Se ti piace usare Jami e pensi che la nostra missione sia importante, puoi fare una donazione?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Scrivi a ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Stai condividendo la tua posizione con ";
 "conversation.explanationReceivingLocationFrom" = "Stai ricevendo una posizione in diretta da ";
 "conversation.errorSavingImage" = "Impossibile salvare l'immagine nella galleria";
@@ -117,9 +117,9 @@
 "conversation.synchronizationMessage" = "In attesa che %@ si connetta per sincronizzare la conversazione.";
 "conversation.inReplyTo" = "In risposta a";
 "conversation.repliedTo" = " ha risposto a";
-"conversation.yourself" = "tu";
+"conversation.yourself" = "te";
 "conversation.edited" = "modificato";
-"conversation.deletedMessage" = "ha eliminato un messaggio";
+"conversation.deletedMessage" = "ha cancellato il messaggio";
 
 //Invitations
 "invitations.noInvitations" = "Nessun invito";
@@ -192,10 +192,10 @@
 "alerts.accountLinkedTitle" = "Collegamento dell'account";
 "alerts.dbFailedTitle" = "Si è verificato un errore durante l'avvio di Jami";
 "alerts.dbFailedMessage" = "Chiudi l'applicazione e prova ad aprirla di nuovo";
-"alerts.confirmBlockContact" = "Sei sicuro di voler bloccare questo contatto? Anche la cronologia delle conversazioni con questo contatto verrà eliminata in modo permanente.";
-"alerts.confirmDeleteConversation" = "Sei sicuro di voler eliminare questa conversazione in modo permanente?";
-"alerts.confirmDeleteConversationFromContact" = "Sei sicuro di voler eliminare la conversazione con questo contatto?";
-"alerts.confirmDeleteConversationTitle" = "Elimina conversazione";
+"alerts.confirmBlockContact" = "Sei sicuro di voler bloccare questo contatto? Anche la cronologia delle conversazioni con questo contatto verrà cancellata in modo permanente.";
+"alerts.confirmDeleteConversation" = "Sei sicuro di voler cancellare questa conversazione in modo permanente?";
+"alerts.confirmDeleteConversationFromContact" = "Sei sicuro di voler cancellare la conversazione con questo contatto?";
+"alerts.confirmDeleteConversationTitle" = "Cancella conversazione";
 "alerts.confirmClearConversation" = "Sei sicuro di voler cancellare la conversazione con questo contatto?";
 "alerts.confirmClearConversationTitle" = "Cancella conversazione";
 "alerts.noMediaPermissionsTitle" = "Permesso non consentito ai media";
@@ -217,7 +217,7 @@
 "alerts.openStreetMapCopyrightMoreInfo" = "Scopri di più";
 
 //Actions
-"actions.deleteAction" = "Elimina";
+"actions.deleteAction" = "Cancella";
 "actions.clearAction" = "Cancella";
 "actions.backAction" = "Indietro";
 "actions.doneAction" = "Fatto";
@@ -323,7 +323,7 @@
 "account.statusUnknown" = "Sconosciuto";
 "account.statusConnectionerror" = "Errore di connessione";
 "account.needMigration" = "l'account deve essere migrato";
-"account.me" = "Io";
+"account.me" = "Me";
 
 //Block List Page
 "blockListPage.noBlockedContacts" = "Nessun contatto bloccato";

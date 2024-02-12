@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Συμμετέχετε τη θέση σας με ";
 "conversation.explanationReceivingLocationFrom" = "Πλέον λαμβάνετε ζωντανή τοποθεσία από";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Δεν μπορώ να συνδεθώ με τον διευθυντή λογαριασμού. Παρακαλούμε ελέγξτε τα στοιχεία σας.";
 "alerts.recordVideoMessage" = "Καταγράψτε ένα μήνυμα βίντεο";
 "alerts.recordAudioMessage" = "Καταγράψτε ένα ήχο μήνυμα";
-"alerts.uploadFile" = "Send file";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "Αποστολή αρχείου";
+"alerts.uploadPhoto" = "Ανοιχτή γκαλερί";
 "alerts.locationServiceIsDisabled" = "Ενεργοποιήστε τις υπηρεσίες τοποθεσίας για να επιτρέψετε στον Τζάμι να προσδιορίσει την τοποθεσία σας.";
 "alerts.locationSharing" = "Μοιραστείτε την τοποθεσία μου";
 "alerts.alreadylocationSharing" = "Ήδη μοιράζεται τοποθεσία με αυτόν τον χρήστη";

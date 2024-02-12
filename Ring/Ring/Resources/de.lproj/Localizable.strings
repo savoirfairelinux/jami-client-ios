@@ -46,10 +46,10 @@
 "global.reply" = "Antworten";
 "global.search" = "Suchen…";
 "global.donate" = "Spenden";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Nachricht löschen";
+"global.deleteFile" = "Datei vom Gerät löschen";
+"global.editMessage" = "Nachricht bearbeiten";
+"global.editing" = "Bearbeitung";
 
 // Scan
 "scan.badQrCode" = "QR-Code ungültig";
@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "Wenn Sie gerne Jami nutzen und an unsere Mission glauben, würden Sie dann spenden?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Sie teilen Ihren Standort derzeit mit";
 "conversation.explanationReceivingLocationFrom" = "Sie erhalten derzeit einen Live-Standort von";
 "conversation.errorSavingImage" = "Bild konnte nicht in der Galerie gespeichert werden";
@@ -117,8 +117,8 @@
 "conversation.synchronizationMessage" = "Wir warten auf %@ Verbindungen, um die Unterhaltung zu synchronisieren.";
 "conversation.inReplyTo" = "Als Antwort auf";
 "conversation.repliedTo" = "antwortete auf";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
+"conversation.yourself" = "Ich selbst";
+"conversation.edited" = "bearbeitet";
 "conversation.deletedMessage" = "eine Nachricht wurde gelöscht";
 
 //Invitations
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Es kann keine Verbindung mit dem angegebenen Kontoverwalter hergestellt werden. Bitte prüfe deine Zugangsdaten.";
 "alerts.recordVideoMessage" = "Videonachricht aufzeichnen";
 "alerts.recordAudioMessage" = "Sprachmitteilung aufzeichnen";
-"alerts.uploadFile" = "Send file";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "Datei senden";
+"alerts.uploadPhoto" = "Galerie öffnen";
 "alerts.locationServiceIsDisabled" = "Schalten Sie den \"Standort Service\" ein, damit \"Jami\" Ihren Standort bestimmen kann.\n";
 "alerts.locationSharing" = "Meinen Standort freigeben";
 "alerts.alreadylocationSharing" = "Teile bereits den Standort mit dem Benutzer";

@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Actualment estàs compartint la teva ubicació amb ";
 "conversation.explanationReceivingLocationFrom" = "Actualment estàs recebint una ubicació en directe de ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "No es pot connectar amb el gestor de compte proporcionat. Si us plau, comproveu les vostres credencials";
 "alerts.recordVideoMessage" = "Gravar un missatge de vídeo";
 "alerts.recordAudioMessage" = "Gravar un missatge d'àudio";
-"alerts.uploadFile" = "Send file";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "Envia el fitxer";
+"alerts.uploadPhoto" = "Obre la galeria";
 "alerts.locationServiceIsDisabled" = "Activa \"Serviços de localització\" per permetre que \"Jami\" determineixi la seva ubicació.";
 "alerts.locationSharing" = "Comparteix la meva ubicació";
 "alerts.alreadylocationSharing" = "Ja comparteix ubicació amb aquest usuari";

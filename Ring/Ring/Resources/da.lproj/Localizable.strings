@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Du deler i øjeblikket din lokation med";
 "conversation.explanationReceivingLocationFrom" = "Du modtager i øjeblikket en live lokation fra";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Kan ikke oprette forbindelse til den kontoansvarlige.";
 "alerts.recordVideoMessage" = "Optag en video meddelelse";
 "alerts.recordAudioMessage" = "Optag en audio samtale";
-"alerts.uploadFile" = "Send file";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "Send fil";
+"alerts.uploadPhoto" = "Åben galleri";
 "alerts.locationServiceIsDisabled" = "Tænd \"Lokationstjenester\" for at lade \"Jami\" bestemme din placering.";
 "alerts.locationSharing" = "Del min lokation";
 "alerts.alreadylocationSharing" = "Du deler allerede din lokation med denne bruger";
