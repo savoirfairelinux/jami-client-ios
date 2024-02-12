@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Právě sdílíte svou polohu s ";
 "conversation.explanationReceivingLocationFrom" = "Právě přijímáte aktuální polohu od ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Nelze se připojit k danému správci účtů. Prosím zkontrolujte své přihlašovací údaje.";
 "alerts.recordVideoMessage" = "Nahrát video zprávu";
 "alerts.recordAudioMessage" = "Nahrát zvukovou zprávu";
-"alerts.uploadFile" = "Send file";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "Poslat soubor";
+"alerts.uploadPhoto" = "Otevřít galerii";
 "alerts.locationServiceIsDisabled" = "Zapněte „Služby polohy“, aby Jami mohl určit vaši polohu.";
 "alerts.locationSharing" = "Sdílet mou polohu";
 "alerts.alreadylocationSharing" = "Poloha je již sdílena s tímto uživatelem.";

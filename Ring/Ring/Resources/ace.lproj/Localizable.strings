@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "توڠڬوڠ ڤد ماس اين تله مڠمبيل موقعيت توڠڬوڠ ";
 "conversation.explanationReceivingLocationFrom" = "توڠڬوڠ دڤرچايا?? ي موقع يڠ دڤرچايا?? ي";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -204,7 +204,7 @@
 "alerts.errorWrongCredentials" = "تيدق بوليه منچاريكن ڤڠاره حساب يڠ دبريكن.";
 "alerts.recordVideoMessage" = "ڤرچاي ڤمبلاجرن";
 "alerts.recordAudioMessage" = "سلاكو ڤرساتوان اودي";
-"alerts.uploadFile" = "Send file";
+"alerts.uploadFile" = "ڤرسکوتوان";
 "alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "مڠهادڤي \"خدمات موقعيت\" اونتوق ممبريكن \"جامي\" ممبنتو موقعيت.";
 "alerts.locationSharing" = "مڠمبيل موقعيت ساي";

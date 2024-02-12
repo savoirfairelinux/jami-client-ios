@@ -27,11 +27,11 @@
 "global.registerAUsername" = "Register a username";
 "global.enterPassword" = "Enter Password";
 "global.enterUsername" = "Enter Username";
-"global.cancel" = "අවලංගු කරන්න";
+"global.cancel" = "Cancel";
 "global.blockContact" = "Block Contact";
 "global.removeAccount" = "Remove account";
 "global.incomingCall" = "Incoming call";
-"global.ok" = "හරි";
+"global.ok" = "Ok";
 "global.close" = "Close";
 "global.share" = "Share";
 "global.forward" = "Forward";
@@ -115,7 +115,7 @@
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for %@ connects to synchronize the conversation.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "メッセージへの返信";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Record a video message";
 "alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "ගොනුව යවන්න";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "ファイルの送信";
+"alerts.uploadPhoto" = "ギャラリーを開く";
 "alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
 "alerts.locationSharing" = "Share my location";
 "alerts.alreadylocationSharing" = "Already sharing location with this user";
@@ -246,8 +246,8 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "සැකසුම්";
-"accountPage.notificationsHeader" = "Notifications";
+"accountPage.settingsHeader" = "Settings";
+"accountPage.notificationsHeader" = "通知";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.blockedContacts" = "Blocked contacts";
@@ -348,7 +348,7 @@
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "අවලංගු කළා";
+"dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";

@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Вы ў цяперашні час дзяліцеся сваім месцам з ";
 "conversation.explanationReceivingLocationFrom" = "Вы ў цяперашні час атрымліваеце жывое месца з ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -204,7 +204,7 @@
 "alerts.errorWrongCredentials" = "Не можа падключыцца да прадстаўленага кіраўніка рахунку. Калі ласка, праверце свае даведкі.";
 "alerts.recordVideoMessage" = "Запіс відэапаведамлення";
 "alerts.recordAudioMessage" = "Запіс аўдыёпаведамлення";
-"alerts.uploadFile" = "Send file";
+"alerts.uploadFile" = "Адправіць файл";
 "alerts.uploadPhoto" = "Open gallery";
 "alerts.locationServiceIsDisabled" = "Уключыце \"Сэрвісы месцазнаходжання\", каб \"Джамі\" вызначыць ваша месцазнаходжанне.";
 "alerts.locationSharing" = "Падзяліцеся маім месцам";

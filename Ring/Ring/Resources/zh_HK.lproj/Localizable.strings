@@ -45,7 +45,7 @@
 "global.copy" = "複製";
 "global.reply" = "回复";
 "global.search" = "正在搜索…";
-"global.donate" = "Donate";
+"global.donate" = "捐助";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
@@ -100,10 +100,10 @@
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
 "smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
 "conversation.errorSavingImage" = "Failed to save image to gallery";

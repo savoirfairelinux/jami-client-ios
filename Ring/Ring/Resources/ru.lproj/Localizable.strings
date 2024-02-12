@@ -45,7 +45,7 @@
 "global.copy" = "Копировать";
 "global.reply" = "Ответить";
 "global.search" = "Поиск…";
-"global.donate" = "Donate";
+"global.donate" = "Пожертвование";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
@@ -99,11 +99,11 @@
 "smartlist.aboutJami" = "О программе Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.disableDonation" = "Не сейчас";
+"smartlist.donationExplanation" = "Если Вам нравится использовать Jami и Вы верите в нашу миссию, Вы бы сделали пожертвование?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
 "conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -119,7 +119,7 @@
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "удалённое сообщение";
 
 //Invitations
 "invitations.noInvitations" = "Приглашений нет";
@@ -389,7 +389,7 @@
 "generalSettings.limitLocationSharingDuration" = "Ограничить продолжительность совместного размещения";
 "generalSettings.locationSharingDuration" = "Продолжительность позиционных акций";
 "generalSettings.donationCampaign" = "Donation campaign";
-"generalSettings.enableDonationCampaign" = "Enable donation campaign";
+"generalSettings.enableDonationCampaign" = "Включить кампанию по пожертвованиям";
 
 
 //Log View

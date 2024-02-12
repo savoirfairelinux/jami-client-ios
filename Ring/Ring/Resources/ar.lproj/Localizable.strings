@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "أنت تشارك موقعك حاليًا مع";
 "conversation.explanationReceivingLocationFrom" = "أنت تتلقى حاليًا موقعًا مباشرًا من";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "لا يمكن الاتصال بمدير الحساب المقدم، يرجى التحقق من إثباتاتك";
 "alerts.recordVideoMessage" = "تسجيل رسالة فيديو";
 "alerts.recordAudioMessage" = "تسجيل رسالة صوتية";
-"alerts.uploadFile" = "Send file";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "إرسال ملف";
+"alerts.uploadPhoto" = "معرض مفتوح";
 "alerts.locationServiceIsDisabled" = "أفتح \"خدمات الموقع\" للسماح \"جامي\" بتحديد موقعك.";
 "alerts.locationSharing" = "شارك موقعي";
 "alerts.alreadylocationSharing" = "مشاركة الموقع مع هذا المستخدم";

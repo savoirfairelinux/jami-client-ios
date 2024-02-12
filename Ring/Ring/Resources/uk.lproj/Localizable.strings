@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "Якщо вам подобається Jami і ви вірите в нашу місію, чи не зробили б ви пожертву?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Ви зараз ділитеся своїм місцем розташуванням з ";
 "conversation.explanationReceivingLocationFrom" = "Ви зараз отримуєте пряму локацію від ";
 "conversation.errorSavingImage" = "Не вдалося зберегти зображення в галерею";

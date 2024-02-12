@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "En casu de que nun se pueda identificar la so situación,";
 "conversation.explanationReceivingLocationFrom" = "Nun ye posible que la xente que la conoz reciba un llugar en directo de ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Nun se puede conectar al administrador de cuenta proporcionáu.";
 "alerts.recordVideoMessage" = "Grabar un mensaxe de video";
 "alerts.recordAudioMessage" = "Grabar un mensaxe d'únicu audio";
-"alerts.uploadFile" = "Send file";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "Enviar archivu";
+"alerts.uploadPhoto" = "Galería abierta";
 "alerts.locationServiceIsDisabled" = "Enviada \"Servicios de localización\" pa dexar a \"Jami\" determinar la so localización.";
 "alerts.locationSharing" = "Compartir la mio localización";
 "alerts.alreadylocationSharing" = "Al traviés de la páxina web, el nome del usuariu ye'l nome de la páxina web.";

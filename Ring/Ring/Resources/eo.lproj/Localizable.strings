@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Vi nun dividas vian lokon kun ";
 "conversation.explanationReceivingLocationFrom" = "Vi nun ricevas live-lokon de ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Ne eblas konektiĝi al la provizita kontadministratoro. Bonvolu kontroli viajn kreditajn informojn";
 "alerts.recordVideoMessage" = "Enregistru videan mesaĝon";
 "alerts.recordAudioMessage" = "Surbendi aŭdajn mesaĝojn";
-"alerts.uploadFile" = "Send file";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "Sendu dosieron";
+"alerts.uploadPhoto" = "Malferma galerio";
 "alerts.locationServiceIsDisabled" = "Ŝaltu \"Lokadajn Servojn\" por permesi al \"Jami\" determini vian lokon.";
 "alerts.locationSharing" = "Dividu mian lokon";
 "alerts.alreadylocationSharing" = "Jam dividante lokon kun tiu uzanto";

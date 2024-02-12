@@ -27,11 +27,11 @@
 "global.registerAUsername" = "Register a username";
 "global.enterPassword" = "Enter Password";
 "global.enterUsername" = "Enter Username";
-"global.cancel" = "අවලංගු කරන්න";
+"global.cancel" = "Cancel";
 "global.blockContact" = "Block Contact";
 "global.removeAccount" = "Remove account";
 "global.incomingCall" = "Incoming call";
-"global.ok" = "හරි";
+"global.ok" = "Ok";
 "global.close" = "Close";
 "global.share" = "Share";
 "global.forward" = "Forward";
@@ -45,7 +45,7 @@
 "global.copy" = "Copy";
 "global.reply" = "Reply";
 "global.search" = "Searching…";
-"global.donate" = "Donate";
+"global.donate" = "捐助";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
@@ -100,7 +100,7 @@
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
 "smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write to";
@@ -115,7 +115,7 @@
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";
 "conversation.synchronizationMessage" = "We are waiting for %@ connects to synchronize the conversation.";
-"conversation.inReplyTo" = "In reply to";
+"conversation.inReplyTo" = "在回复中";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
@@ -167,7 +167,7 @@
 
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Account linking";
-"linkToAccount.linkButtonTitle" = "Link";
+"linkToAccount.linkButtonTitle" = "链接";
 "linkToAccount.linkDeviceTitle" = "Link Device";
 "linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
@@ -204,8 +204,8 @@
 "alerts.errorWrongCredentials" = "Cannot connect to provided account manager. Please check your credentials";
 "alerts.recordVideoMessage" = "Record a video message";
 "alerts.recordAudioMessage" = "Record an audio message";
-"alerts.uploadFile" = "ගොනුව යවන්න";
-"alerts.uploadPhoto" = "Open gallery";
+"alerts.uploadFile" = "傳送檔案";
+"alerts.uploadPhoto" = "打开相册";
 "alerts.locationServiceIsDisabled" = "Turn on \"Location Services\" to allow \"Jami\" to determine your location.";
 "alerts.locationSharing" = "Share my location";
 "alerts.alreadylocationSharing" = "Already sharing location with this user";
@@ -246,8 +246,8 @@
 
 //Account Page
 "accountPage.devicesListHeader" = "Devices";
-"accountPage.settingsHeader" = "සැකසුම්";
-"accountPage.notificationsHeader" = "Notifications";
+"accountPage.settingsHeader" = "Settings";
+"accountPage.notificationsHeader" = "通知";
 "accountPage.usernameNotRegistered" = "username: not registered";
 "accountPage.credentialsHeader" = "Account Details";
 "accountPage.blockedContacts" = "Blocked contacts";
@@ -348,7 +348,7 @@
 "dataTransfer.readableStatusError" = "Error";
 "dataTransfer.readableStatusAwaiting" = "Pending…";
 "dataTransfer.readableStatusOngoing" = "Transferring";
-"dataTransfer.readableStatusCanceled" = "අවලංගු කළා";
+"dataTransfer.readableStatusCanceled" = "Canceled";
 "dataTransfer.sendingFailed" = "Failed to send";
 "dataTransfer.readableStatusSuccess" = "Complete";
 "dataTransfer.recordInBackgroundWarning" = "Recording video while multitasking with multiple apps may result in lower quality videos. For best results, record when not multitasking";

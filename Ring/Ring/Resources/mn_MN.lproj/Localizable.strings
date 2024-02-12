@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Та одоо байр сууриа хуваалцаж байна.";
 "conversation.explanationReceivingLocationFrom" = "Та одоо ";
 "conversation.errorSavingImage" = "Failed to save image to gallery";

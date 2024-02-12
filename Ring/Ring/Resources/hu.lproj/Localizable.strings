@@ -48,8 +48,8 @@
 "global.donate" = "Adományozás";
 "global.deleteMessage" = "Üzenet törlése";
 "global.deleteFile" = "Fájl törlése az eszközről";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.editMessage" = "Üzenet szerkesztése";
+"global.editing" = "Szerkesztés";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "Ha hisz a küldetésünkben, adományozna?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Írj a következő(k)nek: ";
+"conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
 "conversation.errorSavingImage" = "Nem sikerült menteni a képet a kepgyűjteménybe";
