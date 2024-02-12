@@ -171,18 +171,17 @@ std::map<std::string, std::string> nameServers;
                         std::string([filePath UTF8String]));
 }
 
-- (BOOL)start:(NSString*)accountId
+- (BOOL)start:(NSString*)accountId convId:(NSString*)convId loadAll:(BOOL)loadAll
 {
     [self registerSignals];
     if (initialized() == true) {
-        reloadConversationsAndRequests(std::string([accountId UTF8String]));
-        setAccountActive(std::string([accountId UTF8String]), true);
+        loadAccountAndConversation(std::string([accountId UTF8String]), loadAll, std::string([convId UTF8String]));
         return true;
     }
 #if DEBUG
-    int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO;
+    int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO | LIBJAMI_FLAG_NO_AUTOLOAD;
 #else
-    int flag = LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO;
+    int flag = LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO | LIBJAMI_FLAG_NO_AUTOLOAD;
 #endif
     if (![[NSThread currentThread] isMainThread]) {
         __block bool success;
@@ -193,20 +192,23 @@ std::map<std::string, std::string> nameServers;
                 success = false;
             }
         });
+        loadAccountAndConversation(std::string([accountId UTF8String]), loadAll, std::string([convId UTF8String]));
         return success;
     } else {
+        bool success = false;
         if (init(static_cast<InitFlag>(flag))) {
-            return start({});
+            success = start({});
         }
-        return false;
+        loadAccountAndConversation(std::string([accountId UTF8String]), loadAll, std::string([convId UTF8String]));
+        return success;
     }
 }
 
-- (void)stop
+- (void)stopForAccountId:(NSString*)accountId
 {
     unregisterSignalHandlers();
     confHandlers.clear();
-    [self setAccountsActive:false];
+    setAccountActive(std::string([accountId UTF8String]), false, true);
 }
 
 - (void)setAccountsActive:(BOOL)active
