@@ -127,6 +127,7 @@ struct MessagePanelView: View {
     @SwiftUI.State private var text: String = ""
     @SwiftUI.State private var textHeight: CGFloat = 0
     let padding: CGFloat = 10
+    let defaultControlSize: CGFloat = 42
 
     struct MessagePanelImageButton: View {
         let model: MessagePanelVM
@@ -160,13 +161,13 @@ struct MessagePanelView: View {
             }
             HStack(alignment: .bottom, spacing: 1) {
                 Menu(content: menuContent, label: {
-                    MessagePanelImageButton(model: model, systemName: "plus.circle", width: 42, height: 42)
+                    MessagePanelImageButton(model: model, systemName: "plus.circle", width: defaultControlSize, height: defaultControlSize)
                 })
 
                 Button(action: {
                     self.model.sendPhoto()
                 }, label: {
-                    MessagePanelImageButton(model: model, systemName: "camera", width: 44, height: 42)
+                    MessagePanelImageButton(model: model, systemName: "camera", width: 44, height: defaultControlSize)
                 })
 
                 Spacer()
@@ -193,10 +194,10 @@ struct MessagePanelView: View {
                     if text.isEmpty {
                         Text(model.defaultEmoji)
                             .font(.system(size: 27))
-                            .frame(width: 36, height: 36)
+                            .frame(width: defaultControlSize, height: 40)
                             .padding(.bottom, 2)
                     } else {
-                        MessagePanelImageButton(model: model, systemName: "paperplane", width: 42, height: 42)
+                        MessagePanelImageButton(model: model, systemName: "paperplane", width: defaultControlSize, height: defaultControlSize)
                     }
                 })
                 .animation(.default, value: text.isEmpty)
