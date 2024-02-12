@@ -116,10 +116,10 @@ struct MessageContentView: View {
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     let padding: CGFloat = 12
     var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
-    @SwiftUI.State private var messageWidth:CGFloat = 0
+    @SwiftUI.State private var messageWidth: CGFloat = 0
     @SwiftUI.State private var reactionsHeight: CGFloat = 20
-    @SwiftUI.State private var reactionsWidth:CGFloat = 0
-    @SwiftUI.State private var emojiAlignment:Alignment = Alignment.bottomTrailing
+    @SwiftUI.State private var reactionsWidth: CGFloat = 0
+    @SwiftUI.State private var emojiAlignment: Alignment = Alignment.bottomTrailing
 
     var body: some View {
         ZStack(alignment: emojiAlignment) {
