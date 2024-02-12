@@ -39,7 +39,7 @@ struct ReactionRowView: View {
                 .font(.callout)
                 .lineLimit(1)
                 .truncationMode(.tail)
-                .layoutPriority(0.7)
+                .layoutPriority(0.5)
                 .multilineTextAlignment(.leading)
 
             Spacer()
@@ -48,8 +48,8 @@ struct ReactionRowView: View {
                 .bold()
                 .font(.title3)
                 .lineLimit(nil)
-                .frame(minWidth: 20)
-                .layoutPriority(0.3)
+                .frame(minWidth: 30)
+                .layoutPriority(0.5)
                 .multilineTextAlignment(.trailing)
         }
         .padding(.horizontal, padding)
