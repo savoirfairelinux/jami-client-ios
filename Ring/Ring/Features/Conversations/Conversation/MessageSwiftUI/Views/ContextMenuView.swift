@@ -19,6 +19,7 @@
  */
 
 import SwiftUI
+import MCEmojiPicker
 
 enum ContextMenuPresentingState {
     case none
@@ -45,6 +46,7 @@ struct VisualEffect: UIViewRepresentable {
 struct ContextMenuView: View {
     var model: ContextMenuVM
     @Binding var presentingState: ContextMenuPresentingState
+    @SwiftUI.State private var isEmojiPickerPresented: Bool = false
     // animations
     @SwiftUI.State private var blurAmount = 0.0
     @SwiftUI.State private var backgroundScale: CGFloat = 1.00
@@ -57,6 +59,8 @@ struct ContextMenuView: View {
     @SwiftUI.State private var cornerRadius: CGFloat = 0
     @SwiftUI.State private var scrollViewHeight: CGFloat = 0
     @SwiftUI.GestureState private var isLongPressingEmojiBar = false
+
+    @SwiftUI.State var selectedEmoji: String = String(UnicodeScalar(UInt32(0x1F44D))!)
 
     var body: some View {
         ZStack {
@@ -244,29 +248,58 @@ struct ContextMenuView: View {
     }
 
     func makeEmojiBar() -> some View {
-        HStack {
-            let defaultReactionEmojis: [String] = [
-                0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
-            ].map { String(UnicodeScalar($0)!) }
+        VStack {
+            HStack {
+                let defaultReactionEmojis: [String] = [
+                    0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
+                ].map { String(UnicodeScalar($0)!) }
 
-            ForEach(defaultReactionEmojis.indices, id: \.self) { index in
-                EmojiBarView(
-                    model: model,
-                    emoji: defaultReactionEmojis[index],
-                    presentingState: $presentingState,
-                    elementOpacity: 0.0 as CGFloat,
-                    delayIn: 0.03 * Double(index),
-                    elementRotation: Angle(degrees: 10.0 * Double(defaultReactionEmojis.count))
+                ForEach(defaultReactionEmojis.indices, id: \.self) { index in
+                    EmojiBarView(
+                        model: model,
+                        emoji: defaultReactionEmojis[index],
+                        presentingState: $presentingState,
+                        elementOpacity: 0.0 as CGFloat,
+                        delayIn: 0.03 * Double(index),
+                        elementRotation: Angle(degrees: 10.0 * Double(defaultReactionEmojis.count))
+                    )
+                }
+
+            }
+            .opacity(actionsOpacity)
+            .padding(.vertical, 3)
+            .padding(.horizontal, 8)
+            .background(Color(UIColor.secondarySystemBackground))
+            .cornerRadius(radius: 32, corners: .allCorners)
+            .shadow(color: Color(model.shadowColor), radius: messageShadow)
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 4, coordinateSpace: .local)
+                    .onEnded { _ in
+                        print("KESS: drag gesture ended")
+                        isEmojiPickerPresented = true
+                    }
+            )
+            if #available(iOS 17.0, *) {
+                Button(selectedEmoji) {
+                }
+                .emojiPicker(
+                    isPresented: $isEmojiPickerPresented,
+                    selectedEmoji: $selectedEmoji
+                )
+                .onChange(of: selectedEmoji) {
+//                    model.sendReaction(value: selectedEmoji)
+                }
+            } else {
+                // Fallback on earlier versions
+                Button(selectedEmoji) {
+                }
+                .emojiPicker(
+                    isPresented: $isEmojiPickerPresented,
+                    selectedEmoji: $selectedEmoji
                 )
             }
 
         }
-        .opacity(actionsOpacity)
-        .padding(.vertical, 3)
-        .padding(.horizontal, 8)
-        .background(Color(UIColor.secondarySystemBackground))
-        .cornerRadius(radius: 32, corners: .allCorners)
-        .shadow(color: Color(model.shadowColor), radius: messageShadow)
     }
 
     func makeActions() -> some View {
