@@ -259,7 +259,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: disposeBag)
         accountButton.roundedCorners = true
         accountButton.clipsToBounds = true
-        accountButton.contentMode = .scaleAspectFill
+        accountButton.imageView?.contentMode = .scaleAspectFill
         accountButton.cornerRadius = smartListAccountSize * 0.5
         accountButton.frame = CGRect(x: 0, y: 0, width: smartListAccountSize, height: smartListAccountSize)
         accountButton.imageEdgeInsets = UIEdgeInsets(top: -smartListAccountMargin, left: -smartListAccountMargin, bottom: -smartListAccountMargin, right: -smartListAccountMargin)
