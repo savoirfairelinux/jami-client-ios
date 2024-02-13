@@ -185,7 +185,7 @@ struct MessageContentView: View {
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color(model.preferencesColor), lineWidth: 0.8)
+                    .stroke(model.backgroundColor, lineWidth: 0.8)
             )
             .padding(.trailing, 10)
             .padding(.leading, 30)
