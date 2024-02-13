@@ -58,4 +58,5 @@ public class Constants: NSObject {
                                                "#FF5722",
                                                "#795548",
                                                "#607D8B"]
+    public static let MAX_PROFILE_IMAGE_SIZE: CGFloat = 512
 }

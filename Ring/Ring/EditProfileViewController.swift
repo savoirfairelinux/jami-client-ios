@@ -133,12 +133,9 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UIImageP
             image = img
         }
 
-        guard var avatar = image else { return }
-
-        avatar = avatar.convert(toSize: CGSize(width: 100.0, height: 100.0), scale: UIScreen.main.scale)
+        guard let avatar = image?.resizeProfileImage() else { return }
         self.model.updateImage(avatar)
-        profileImageView.contentMode = .scaleAspectFit
-        profileImageView.image = avatar.circleMasked
+        self.profileImageView.image = avatar
         dismiss(animated: true, completion: nil)
     }
 }

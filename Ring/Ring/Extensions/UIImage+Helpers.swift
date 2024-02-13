@@ -464,4 +464,26 @@ extension UIImage {
         let image = UIImage(cgImage: cgImage)
         return image
     }
+
+    func resizeProfileImage() -> UIImage? {
+        // Crop to square based on the smallest dimension
+        let sideLength = min(size.width, size.height)
+        let squareRect = CGRect(
+            x: (size.width - sideLength) / 2,
+            y: (size.height - sideLength) / 2,
+            width: sideLength,
+            height: sideLength
+        )
+        let squareImage = cropImage(to: squareRect) ?? self
+        // Resize if the cropped square is larger than the max size
+        if sideLength > Constants.MAX_PROFILE_IMAGE_SIZE {
+            return resizeImageWith(newSize: CGSize(width: Constants.MAX_PROFILE_IMAGE_SIZE, height: Constants.MAX_PROFILE_IMAGE_SIZE))
+        }
+        return squareImage
+    }
+
+    func cropImage(to rect: CGRect) -> UIImage? {
+        guard let cgImage = self.cgImage?.cropping(to: rect) else { return nil }
+        return UIImage(cgImage: cgImage)
+    }
 }
