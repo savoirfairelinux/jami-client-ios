@@ -832,8 +832,8 @@ class MessagesListVM: ObservableObject {
         // check if we already have the avatar for a contact
         if let avatar = self.avatars.get(key: jamiId) as? UIImage {
             message.updateAvatar(image: avatar, jamiId: jamiId)
-            // check if we need avatar for local accoun or for contact
-        } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId {
+            // check if we need avatar for local account
+        } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId, accountJamiId == jamiId {
             message.updateAvatar(image: self.currentAccountAvatar, jamiId: jamiId)
         } else {
             self.getInformationForContact(id: jamiId, message: message)
