@@ -454,11 +454,7 @@ class MessagesListVM: ObservableObject {
             guard let self = self, let container = container, let state = state as? MessageInfo else { return }
             switch state {
             case .updateAvatar(let jamiId):
-                if let avatar = self.avatars.get(key: jamiId) as? UIImage {
-                    container.updateAvatar(image: avatar, jamiId: jamiId)
-                } else {
-                    self.getInformationForContact(id: jamiId, message: container)
-                }
+                self.getAvatar(jamiId: jamiId, message: container)
             case .updateRead(let messageId):
                 if let lastReadAvatars = self.lastRead.get(key: messageId) as? [String: UIImage] {
                     let values: [UIImage] = lastReadAvatars.map { value in
@@ -831,6 +827,18 @@ class MessagesListVM: ObservableObject {
                 }
             })
             .disposed(by: message.disposeBag)
+    }
+
+    private func getAvatar(jamiId: String, message: MessageContainerModel) {
+        // check if we already have the avatar for a contact
+        if let avatar = self.avatars.get(key: jamiId) as? UIImage {
+            message.updateAvatar(image: avatar, jamiId: jamiId)
+            // check if we need avatar for local accoun or for contact
+        } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId {
+            message.updateAvatar(image: self.currentAccountAvatar, jamiId: jamiId)
+        } else {
+            self.getInformationForContact(id: jamiId, message: message)
+        }
     }
 
     private func updateLastRead(messageId: String, messageModel: MessageContainerModel) {
