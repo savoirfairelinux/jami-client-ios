@@ -464,4 +464,33 @@ extension UIImage {
         let image = UIImage(cgImage: cgImage)
         return image
     }
+
+    func resizeProfileImage() -> UIImage? {
+        let size = self.size
+
+        // Check if both width and height are larger than the maximum size
+        if size.width > Constants.MAX_PROFILE_IMAGE_SIZE && size.height > Constants.MAX_PROFILE_IMAGE_SIZE {
+            let aspectWidth = Constants.MAX_PROFILE_IMAGE_SIZE / size.width
+            let aspectHeight = Constants.MAX_PROFILE_IMAGE_SIZE / size.height
+            let aspectRatio = min(aspectWidth, aspectHeight)
+            let newSize = CGSize(width: size.width * aspectRatio, height: size.height * aspectRatio)
+            return resizeImageWith(newSize: newSize)
+        }
+        // Check if only one dimension is larger
+        else if size.width > Constants.MAX_PROFILE_IMAGE_SIZE || size.height > Constants.MAX_PROFILE_IMAGE_SIZE {
+            let newWidth = min(size.width, Constants.MAX_PROFILE_IMAGE_SIZE)
+            let newHeight = min(size.height, Constants.MAX_PROFILE_IMAGE_SIZE)
+            let cropRect = CGRect(x: (size.width - newWidth) / 2, y: (size.height - newHeight) / 2, width: newWidth, height: newHeight)
+            return cropImage(to: cropRect)
+        }
+        // If image is within the size limit
+        else {
+            return self
+        }
+    }
+
+    func cropImage(to rect: CGRect) -> UIImage? {
+        guard let cgImage = self.cgImage?.cropping(to: rect) else { return nil }
+        return UIImage(cgImage: cgImage)
+    }
 }
