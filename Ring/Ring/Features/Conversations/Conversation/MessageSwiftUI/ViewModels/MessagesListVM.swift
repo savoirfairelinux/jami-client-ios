@@ -697,11 +697,10 @@ class MessagesListVM: ObservableObject {
         let messageTypeCheck = message.type == .contact || message.type == .initial
         let differentAuthor = message.authorId != secondMessage.authorId
         let isReplyCheck = message.isReply() || secondMessage.isReply()
-        let containsEmoji = message.content.containsOnlyEmoji || secondMessage.content.containsOnlyEmoji
         let hasReactions = !message.reactions.isEmpty || !secondMessage.reactions.isEmpty
 
         return differentUri || messageTypeCheck || differentAuthor ||
-            isReplyCheck || containsEmoji || hasReactions
+            isReplyCheck || hasReactions
     }
 
     private func shouldDisplayName(message: MessageContainerModel) -> Bool {
