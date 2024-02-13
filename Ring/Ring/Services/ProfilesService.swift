@@ -73,7 +73,14 @@ class ProfilesService: ProfilesAdapterDelegate {
         let uri = JamiURI(schema: URIType.ring, infoHash: uri)
         guard let uriString = uri.uriString,
               let data = FileManager.default.contents(atPath: path),
-              let profile = VCardUtils.parseToProfile(data: data) else { return }
+              var profile = VCardUtils.parseToProfile(data: data) else { return }
+        if let imageString = profile.photo, let image = imageString.createImage(),
+           let resizedImage = image.resizeProfileImage() {
+            let imageData = resizedImage.jpegData(compressionQuality: 1)
+            if let base64String = imageData?.base64EncodedString() {
+                profile.photo = base64String
+            }
+        }
         _ = self.dbManager
             .createOrUpdateRingProfile(profileUri: uriString,
                                        alias: profile.alias,
