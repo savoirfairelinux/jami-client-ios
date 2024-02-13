@@ -686,7 +686,8 @@ class MessagesListVM: ObservableObject {
         }
         for (index, model) in self.messagesModels.enumerated() {
             model.sequencing = getMessageSequencing(forIndex: index)
-            model.shouldDisplayName = shouldDisplayName(message: model)
+            model.shouldDisplayContactInfo = shouldDisplayContactInfo(message: model) && shouldDisplayContactInfoForConversation()
+            model.shouldDisplayContactInfoForConversation = shouldDisplayContactInfoForConversation()
         }
     }
 
@@ -704,8 +705,13 @@ class MessagesListVM: ObservableObject {
             isReplyCheck || containsEmoji || hasReactions
     }
 
-    private func shouldDisplayName(message: MessageContainerModel) -> Bool {
+    private func shouldDisplayContactInfo(message: MessageContainerModel) -> Bool {
         return (message.sequencing == .firstOfSequence || message.sequencing == .singleMessage) && message.message.incoming && !message.message.isReply()
+    }
+
+    private func shouldDisplayContactInfoForConversation() -> Bool {
+        // do not show names for one to one conversation
+        return self.conversation.getParticipants().count > 1
     }
 
     private func getMessageSequencing(forIndex index: Int) -> MessageSequencing {
