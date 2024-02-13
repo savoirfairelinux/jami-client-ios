@@ -79,9 +79,22 @@ class MessageContainerModel: Identifiable {
         }
     }
 
-    var shouldDisplayName: Bool = false {
+    var shouldDisplayContactInfo: Bool = false {
         didSet {
-            self.stackViewModel.shouldDisplayName = self.shouldDisplayName
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.stackViewModel.shouldDisplayName = self.shouldDisplayContactInfo
+                self.messageRow.shouldDisplayAavatar = self.shouldDisplayContactInfo
+            }
+        }
+    }
+
+    var shouldDisplayContactInfoForConversation: Bool = false {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.messageRow.shouldDisplayContactInfoForConversation(state: self.shouldDisplayContactInfoForConversation)
+            }
         }
     }
 

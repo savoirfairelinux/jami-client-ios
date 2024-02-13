@@ -93,7 +93,7 @@ struct MessageRowView: View {
                             .cornerRadius(15)
                     } else {
                         Spacer()
-                            .frame(width: 30)
+                            .frame(width: model.leadingSpace)
                     }
                     Spacer()
                         .frame(width: 10)

@@ -32,6 +32,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
     @Published var timeString: String = ""
     @Published var topSpace: CGFloat = 0
     @Published var bottomSpace: CGFloat = 0
+    @Published var leadingSpace: CGFloat = 0
     @Published var readBorderColor: Color
     var styling: MessageStyling = MessageStyling()
     var incoming: Bool
@@ -68,8 +69,6 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
         didSet {
             topSpace = (sequencing == .singleMessage || sequencing == .firstOfSequence) ? 2 : 0
             bottomSpace = (sequencing == .singleMessage || sequencing == .lastOfSequence) ? 2 : 0
-            let shouldDisplayAavatar = (sequencing == .lastOfSequence || sequencing == .singleMessage) && self.message.incoming
-            self.shouldDisplayAavatar = shouldDisplayAavatar
         }
     }
 
@@ -119,5 +118,9 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
                 self.sequencing = sequencing
             }
         }
+    }
+
+    func shouldDisplayContactInfoForConversation(state: Bool) {
+        leadingSpace = state ? 30 : 0
     }
 }
