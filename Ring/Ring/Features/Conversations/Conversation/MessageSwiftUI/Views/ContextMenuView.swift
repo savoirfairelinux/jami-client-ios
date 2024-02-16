@@ -256,7 +256,7 @@ struct ContextMenuView: View {
                     presentingState: $presentingState,
                     elementOpacity: 0.0 as CGFloat,
                     delayIn: 0.03 * Double(index),
-                    elementRotation: Angle(degrees: 10.0 * Double(defaultReactionEmojis.count))
+                    elementRotation: Angle(degrees: 45.0)
                 )
             }
 
