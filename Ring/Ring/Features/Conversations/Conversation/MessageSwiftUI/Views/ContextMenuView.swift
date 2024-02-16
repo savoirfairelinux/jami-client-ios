@@ -19,6 +19,7 @@
  */
 
 import SwiftUI
+import MCEmojiPicker
 
 enum ContextMenuPresentingState {
     case none
@@ -43,7 +44,7 @@ struct VisualEffect: UIViewRepresentable {
 }
 
 struct ContextMenuView: View {
-    var model: ContextMenuVM
+    @SwiftUI.State var model: ContextMenuVM
     @Binding var presentingState: ContextMenuPresentingState
     // animations
     @SwiftUI.State private var blurAmount = 0.0
@@ -113,22 +114,29 @@ struct ContextMenuView: View {
                         Spacer()
                             .frame(height: model.defaultVerticalPadding)
                     }
-                    // actions (reply, fwd, etc.)
-                    HStack {
-                        if !model.isOurMsg! {
-                            Spacer()
-                                .frame(width: model.incomingMessageMarginSize)
+
+                    ZStack {
+                        // actions (reply, fwd, etc.)
+                        HStack {
+                            if !model.isOurMsg! {
+                                Spacer()
+                                    .frame(width: model.incomingMessageMarginSize)
+                            }
+                            makeActions()
+                                .opacity(actionsOpacity)
+                                .scaleEffect(actionsScale, anchor: model.actionsAnchor)
+                                .frame(width: model.menuSize.width)
+                            if model.isOurMsg! {
+                                Spacer()
+                                    .frame(width: 10)
+                            }
                         }
-                        makeActions()
-                            .opacity(actionsOpacity)
-                            .scaleEffect(actionsScale, anchor: model.actionsAnchor)
-                            .frame(width: model.menuSize.width)
-                        if model.isOurMsg! {
-                            Spacer()
-                                .frame(width: 10)
-                        }
+                        .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                        // Emoji Palette (for full reactions)
+                        EmojiPaletteView(cxModel: model, selecetdEmoji: $model.selectedEmoji)
+                        //            .position(y: -cxModel.menuSize.height) // move to extern
                     }
-                    .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+
                 }
                 .padding(.trailing, 4)
             }
@@ -310,6 +318,87 @@ struct ContextMenuView: View {
         .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
         .cornerRadius(radius: model.menuCornerRadius, corners: .allCorners)
     }
+}
+
+struct EmojiPaletteView: View {
+
+    //    var cxModel: ContextMenuVM
+    @SwiftUI.State var cxModel: ContextMenuVM
+    @Binding var selecetdEmoji: String
+    @SwiftUI.State private var backgroundOpacity: CGFloat = 0.0
+
+    var body: some View {
+
+        MCEmojiPickerRepresentableController(
+            isPresented: $cxModel.isEmojiPickerPresented,
+            selectedEmoji: $cxModel.selectedEmoji,
+            arrowDirection: .none,
+            customHeight: cxModel.menuSize.height,
+            horizontalInset: .zero,
+            isDismissAfterChoosing: true,
+            selectedEmojiCategoryTintColor: cxModel.presentingMessage.model.preferencesColor,
+            feedBackGeneratorStyle: .medium
+        )
+        //        .background(makeBackground())
+        .onAppear(perform: {
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                cxModel.isEmojiPickerPresented = true
+            }
+
+            //            withAnimation(.easeIn(duration: 0.0).delay(0.3)) {
+            //                cxModel.isEmojiPickerPresented = true
+            //            }
+
+        })
+
+        //        if #available(iOS 17.0, *) {
+        //            Button(cxModel.selectedEmoji) {
+        //            }
+        //            .background(makeBackground())
+        //            .emojiPicker(
+        //                isPresented: $isEmojiPickerPresented,
+        //                selectedEmoji: $cxModel.selectedEmoji // $
+        //            )
+        //            .onChange(of: cxModel.selectedEmoji) {
+        //                // model.sendReaction(value: selectedEmoji)
+        //            }
+        //            .onAppear(perform: {
+        //                isEmojiPickerPresented = true
+        //            })
+        //        } else {
+        //            // Fallback on earlier versions
+        //            Button(cxModel.selectedEmoji) {
+        //            }
+        //            .background(makeBackground())
+        //            .emojiPicker(
+        //                isPresented: $isEmojiPickerPresented,
+        //                selectedEmoji: $cxModel.selectedEmoji // $
+        //            )
+        //            .onAppear(perform: {
+        //                isEmojiPickerPresented = true
+        //            })
+        //        }
+
+    }
+
+    func makeBackground() -> some View {
+        ZStack {
+            Color(UIColor.systemBackground)
+                .opacity(backgroundOpacity)
+                .onAppear(perform: {
+                    backgroundOpacity = 0.0
+                    withAnimation(.easeIn(duration: 0.5).delay(0.0)) {
+                        backgroundOpacity = 0.7
+                    }
+                })
+            Color(UIColor.systemBackground)
+                .frame(width: cxModel.currScreenWidth, height: cxModel.menuSize.height)
+            VisualEffect(style: .regular, withVibrancy: true)
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+
 }
 
 struct EmojiBarItemView: View {

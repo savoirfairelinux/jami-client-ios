@@ -66,8 +66,8 @@ class ContextMenuVM {
         }
     }
     var emojiVerticalPadding: CGFloat = 6
-
     var emojiBarHeight: CGFloat = 68
+
     var isShortMsg: Bool = true
     var incomingMessageMarginSize: CGFloat = 58
     var isOurMsg: Bool?
@@ -78,6 +78,11 @@ class ContextMenuVM {
 
     var currentJamiAccountId: String?
 
+    @Published var selectedEmoji: String = ""
+    @Published var isEmojiPickerPresented: Bool = false
+
+    var currScreenWidth = UIScreen.main.bounds.size.width // updates w screen rotation
+    var currScreenHeight = UIScreen.main.bounds.size.height // updates w screen rotation
     func updateContextMenuSize() {
         let height: CGFloat = CGFloat(menuItems.count) * itemHeight + menuPadding * 2
         let fontAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]
