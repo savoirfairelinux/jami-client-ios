@@ -421,6 +421,10 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     func showGeneralSettings() {
         self.stateSubject.onNext(ConversationState.showGeneralSettings)
     }
+
+    func openAboutJami() {
+        self.stateSubject.onNext(ConversationState.openAboutJami)
+    }
 }
 
 extension SmartlistViewModel: FilterConversationDelegate {

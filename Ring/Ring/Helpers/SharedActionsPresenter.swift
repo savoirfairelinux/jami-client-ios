@@ -23,23 +23,10 @@ import Foundation
 class SharedActionsPresenter {
 
     class func showAboutJamiAlert(onViewController viewController: UIViewController) {
-        var compileDate: String {
-            let dateDefault = ""
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "YYYYMMdd"
-            let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as? String ?? "Info.plist"
-            if let infoPath = Bundle.main.path(forResource: bundleName, ofType: nil),
-               let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
-               let infoDate = infoAttr[FileAttributeKey.creationDate] as? Date {
-                return dateFormatter.string(from: infoDate)
-            }
-            return dateDefault
-        }
+        let fullVersion: String = Constants.fullVersion ?? ""
 
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-
-        let versionName = "Eleutheria"
-        let alert = UIAlertController(title: "\nJami\nversion: \(appVersion)(\(compileDate))\n\(versionName)", message: "", preferredStyle: .alert)
+        let versionName = Constants.versionName
+        let alert = UIAlertController(title: "\nJami\nversion: \(fullVersion)\n\(versionName)", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: L10n.Global.ok, style: .default, handler: nil))
         let image = UIImageView(image: UIImage(asset: Asset.jamiIcon))
         alert.view.addSubview(image)

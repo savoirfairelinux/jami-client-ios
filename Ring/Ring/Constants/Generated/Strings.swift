@@ -10,6 +10,24 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  internal enum AboutJami {
+    /// Artwork by
+    internal static let artworkBy = L10n.tr("Localizable", "aboutJami.artworkBy", fallback: "Artwork by")
+    /// Contribute
+    internal static let contribute = L10n.tr("Localizable", "aboutJami.contribute", fallback: "Contribute")
+    /// Created by
+    internal static let createdBy = L10n.tr("Localizable", "aboutJami.createdBy", fallback: "Created by")
+    /// Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit
+    internal static let declaration1 = L10n.tr("Localizable", "aboutJami.declaration1", fallback: "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit")
+    /// to learn more.
+    internal static let declaration2 = L10n.tr("Localizable", "aboutJami.declaration2", fallback: "to learn more.")
+    /// Feedback
+    internal static let feedback = L10n.tr("Localizable", "aboutJami.feedback", fallback: "Feedback")
+    /// This program comes with absolutely no warranty. See the
+    internal static let noWarranty1 = L10n.tr("Localizable", "aboutJami.noWarranty1", fallback: "This program comes with absolutely no warranty. See the")
+    /// version 3 or later for details.
+    internal static let noWarranty2 = L10n.tr("Localizable", "aboutJami.noWarranty2", fallback: "version 3 or later for details.")
+  }
   internal enum Account {
     /// Account Status
     internal static let accountStatus = L10n.tr("Localizable", "account.accountStatus", fallback: "Account Status")
