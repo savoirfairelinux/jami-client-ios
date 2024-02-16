@@ -67,4 +67,8 @@ class WelcomeViewModel: Stateable, ViewModel {
             .onNext(WalkthroughState
                         .welcomeDone(withType: .createSipAccount))
     }
+
+    func openAboutJami() {
+        self.stateSubject.onNext(WalkthroughState.aboutJami)
+    }
 }

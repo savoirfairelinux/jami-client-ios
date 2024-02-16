@@ -44,6 +44,7 @@ public enum WalkthroughState: State {
     case accountCreated
     case deviceLinked
     case walkthroughCanceled
+    case aboutJami
 }
 
 /// This Coordinator drives the walkthrough navigation (welcome / profile / creation or link)
@@ -81,10 +82,17 @@ class WalkthroughCoordinator: Coordinator, StateableResponsive {
                     }
                 case .walkthroughCanceled:
                     self.rootViewController.dismiss(animated: true)
+                    case .aboutJami:
+                        self.openAboutJami()
                 }
             })
             .disposed(by: self.disposeBag)
 
+    }
+
+    func openAboutJami() {
+        let aboutJamiController = AboutViewController.instantiate(with: self.injectionBag)
+        self.present(viewController: aboutJamiController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
     }
 
     func start () {
