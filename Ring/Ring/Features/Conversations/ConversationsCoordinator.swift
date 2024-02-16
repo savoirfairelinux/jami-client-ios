@@ -72,6 +72,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.showDialpad(inCall: inCall)
                 case .showGeneralSettings:
                     self.showGeneralSettings()
+                case .openAboutJami:
+                    self.openAboutJami()
                 case .navigateToCall(let call):
                     self.navigateToCall(call: call)
                 case .showContactPicker(let callID, let contactCallBack, let conversationCallBack):
@@ -258,6 +260,11 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         if let controller = self.navigationViewController.visibleViewController as? ContactPickerDelegate {
             controller.presentContactPicker(contactPickerVC: contactPickerViewController)
         }
+    }
+
+    func openAboutJami() {
+        let aboutJamiController = AboutViewController.instantiate()
+        self.present(viewController: aboutJamiController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
     }
 
     func showGeneralSettings() {

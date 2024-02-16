@@ -764,8 +764,8 @@ extension SmartlistViewController {
 
     private func aboutJamiAction() -> UIAction {
         let image = UIImage(asset: Asset.jamiIcon)?.resizeImageWith(newSize: CGSize(width: 22, height: 22), opaque: false)
-        return UIAction(title: L10n.Smartlist.aboutJami, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { _ in
-            SharedActionsPresenter.showAboutJamiAlert(onViewController: self)
+        return UIAction(title: L10n.Smartlist.aboutJami, image: image, identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off) { [weak self] _ in
+            self?.viewModel.openAboutJami()
         }
     }
 }
