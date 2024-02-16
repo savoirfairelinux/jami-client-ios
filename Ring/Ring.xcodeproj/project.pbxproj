@@ -434,6 +434,7 @@
 		5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
 		5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */; };
 		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
+		5593D7D32B7FE00A00DA109C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5593D7D22B7FE00A00DA109C /* MCEmojiPicker */; };
 		56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56308BA61EA00E5700660275 /* NameRegistrationResponse.m */; };
 		563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 563AEC761EA664C0003A5641 /* RegistrationResponse.m */; };
 		564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C445A1E8EA44E000F92B1 /* Durations.swift */; };
@@ -1210,6 +1211,7 @@
 				44DFB39C2887048F0023878C /* RxSwift.xcframework in Frameworks */,
 				269DA07628D0D366007D51D6 /* libssl.a in Frameworks */,
 				44DFB3A8288704900023878C /* Differentiator.xcframework in Frameworks */,
+				5593D7D32B7FE00A00DA109C /* MCEmojiPicker in Frameworks */,
 				269DA07C28D0D367007D51D6 /* libx264.a in Frameworks */,
 				269DA07928D0D367007D51D6 /* libtls.a in Frameworks */,
 				269DA05F28D0D366007D51D6 /* libhttp_parser.a in Frameworks */,
@@ -2493,6 +2495,9 @@
 				26A88C0A266FFFC800888EED /* PBXTargetDependency */,
 			);
 			name = Ring;
+			packageProductDependencies = (
+				5593D7D22B7FE00A00DA109C /* MCEmojiPicker */,
+			);
 			productName = Ring;
 			productReference = 043999F31D1C2D9D00E99CD9 /* Ring.app */;
 			productType = "com.apple.product-type.application";
@@ -2662,6 +2667,9 @@
 				"zh-Hans",
 			);
 			mainGroup = 043999EA1D1C2D9D00E99CD9;
+			packageReferences = (
+				5593D7D12B7FE00A00DA109C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
+			);
 			productRefGroup = 043999F41D1C2D9D00E99CD9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -4094,6 +4102,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5593D7D12B7FE00A00DA109C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/izyumkin/MCEmojiPicker";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5593D7D22B7FE00A00DA109C /* MCEmojiPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5593D7D12B7FE00A00DA109C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
+			productName = MCEmojiPicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 043999EB1D1C2D9D00E99CD9 /* Project object */;
 }
