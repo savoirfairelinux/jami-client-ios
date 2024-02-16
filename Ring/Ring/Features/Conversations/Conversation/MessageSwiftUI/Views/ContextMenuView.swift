@@ -329,28 +329,44 @@ struct EmojiPaletteView: View {
 
     var body: some View {
 
-        MCEmojiPickerRepresentableController(
-            isPresented: $cxModel.isEmojiPickerPresented,
-            selectedEmoji: $cxModel.selectedEmoji,
-            arrowDirection: .none,
-            customHeight: cxModel.menuSize.height,
-            horizontalInset: .zero,
-            isDismissAfterChoosing: true,
-            selectedEmojiCategoryTintColor: cxModel.presentingMessage.model.preferencesColor,
-            feedBackGeneratorStyle: .medium
-        )
-        //        .background(makeBackground())
-        .onAppear(perform: {
+        ZStack {
+            Color(UIColor.systemBackground)
+                .opacity(backgroundOpacity)
+                .onAppear(perform: {
+                    backgroundOpacity = 0.0
+                    withAnimation(.easeIn(duration: 0.5).delay(0.0)) {
+                        backgroundOpacity = 0.7
+                    }
+                })
+            Color(UIColor.systemBackground)
+                .frame(width: cxModel.currScreenWidth, height: cxModel.menuSize.height)
+            VisualEffect(style: .regular, withVibrancy: true)
+            MCEmojiPickerRepresentableController(
+                isPresented: $cxModel.isEmojiPickerPresented,
+                selectedEmoji: $cxModel.selectedEmoji,
+                arrowDirection: .none,
+                customHeight: cxModel.menuSize.height,
+                horizontalInset: .zero,
+                isDismissAfterChoosing: true,
+                selectedEmojiCategoryTintColor: cxModel.presentingMessage.model.preferencesColor,
+                feedBackGeneratorStyle: .medium
+            )
+            //        .background(makeBackground())
+            .onAppear(perform: {
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                cxModel.isEmojiPickerPresented = true
-            }
+                cxModel.isEmojiPickerPresented = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    cxModel.isEmojiPickerPresented = true
+                }
 
-            //            withAnimation(.easeIn(duration: 0.0).delay(0.3)) {
-            //                cxModel.isEmojiPickerPresented = true
-            //            }
+                //            withAnimation(.easeIn(duration: 0.0).delay(0.3)) {
+                //                cxModel.isEmojiPickerPresented = true
+                //            }
 
-        })
+            })
+        }
+        .frame(width: cxModel.currScreenWidth, height: cxModel.menuSize.height)
+        .edgesIgnoringSafeArea(.all)
 
         //        if #available(iOS 17.0, *) {
         //            Button(cxModel.selectedEmoji) {
