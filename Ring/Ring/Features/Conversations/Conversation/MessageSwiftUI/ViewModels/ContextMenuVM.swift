@@ -22,7 +22,7 @@ import Foundation
 import SwiftUI
 import RxRelay
 
-class ContextMenuVM {
+class ContextMenuVM: ObservableObject {
     var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
     @Published var menuItems = [ContextualMenuItem]()
     var presentingMessage: MessageBubbleView! {
@@ -78,7 +78,15 @@ class ContextMenuVM {
 
     var currentJamiAccountId: String?
 
-    @Published var selectedEmoji: String = ""
+    @Published var selectedEmoji: String = "" {
+        didSet {
+            print("KESS: sending \(selectedEmoji)")
+            if selectedEmoji == "" {
+                return
+            }
+            sendReaction(value: selectedEmoji)
+        }
+    }
     @Published var isEmojiPickerPresented: Bool = false
 
     var currScreenWidth = UIScreen.main.bounds.size.width // updates w screen rotation

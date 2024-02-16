@@ -44,7 +44,7 @@ struct VisualEffect: UIViewRepresentable {
 }
 
 struct ContextMenuView: View {
-    @SwiftUI.State var model: ContextMenuVM
+    @SwiftUI.StateObject var model: ContextMenuVM
     @Binding var presentingState: ContextMenuPresentingState
     // animations
     @SwiftUI.State private var blurAmount = 0.0
@@ -133,8 +133,10 @@ struct ContextMenuView: View {
                         }
                         .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
                         // Emoji Palette (for full reactions)
-                        EmojiPaletteView(cxModel: model, selecetdEmoji: $model.selectedEmoji)
-                        //            .position(y: -cxModel.menuSize.height) // move to extern
+                        if #available(iOS 17.0, *) {
+                            EmojiPaletteView(cxModel: model, selecetdEmoji: $model.selectedEmoji)
+                        }
+                        //            .position(y: -cxModel.menuSize.height) // move to extern and onappear
                     }
 
                 }
@@ -320,27 +322,26 @@ struct ContextMenuView: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct EmojiPaletteView: View {
-
-    //    var cxModel: ContextMenuVM
-    @SwiftUI.State var cxModel: ContextMenuVM
+    @SwiftUI.StateObject var cxModel: ContextMenuVM
     @Binding var selecetdEmoji: String
     @SwiftUI.State private var backgroundOpacity: CGFloat = 0.0
 
     var body: some View {
 
         ZStack {
-            Color(UIColor.systemBackground)
-                .opacity(backgroundOpacity)
-                .onAppear(perform: {
-                    backgroundOpacity = 0.0
-                    withAnimation(.easeIn(duration: 0.5).delay(0.0)) {
-                        backgroundOpacity = 0.7
-                    }
-                })
-            Color(UIColor.systemBackground)
-                .frame(width: cxModel.currScreenWidth, height: cxModel.menuSize.height)
-            VisualEffect(style: .regular, withVibrancy: true)
+//            Color(UIColor.systemBackground)
+//                .opacity(backgroundOpacity)
+//                .onAppear(perform: {
+//                    backgroundOpacity = 0.0
+//                    withAnimation(.easeIn(duration: 0.5).delay(0.0)) {
+//                        backgroundOpacity = 0.7
+//                    }
+//                })
+//            Color(UIColor.systemBackground)
+//                .frame(width: cxModel.currScreenWidth, height: cxModel.menuSize.height)
+//            VisualEffect(style: .regular, withVibrancy: true)
             MCEmojiPickerRepresentableController(
                 isPresented: $cxModel.isEmojiPickerPresented,
                 selectedEmoji: $cxModel.selectedEmoji,
@@ -351,51 +352,24 @@ struct EmojiPaletteView: View {
                 selectedEmojiCategoryTintColor: cxModel.presentingMessage.model.preferencesColor,
                 feedBackGeneratorStyle: .medium
             )
-            //        .background(makeBackground())
+//            .background(makeBackground())
             .onAppear(perform: {
-
+                print("KESS: show palette")
                 cxModel.isEmojiPickerPresented = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     cxModel.isEmojiPickerPresented = true
+                    print("KESS: show palette true delayed: res = \(cxModel.isEmojiPickerPresented)")
                 }
-
-                //            withAnimation(.easeIn(duration: 0.0).delay(0.3)) {
-                //                cxModel.isEmojiPickerPresented = true
-                //            }
-
+            })
+            .onChange(of: cxModel.isEmojiPickerPresented, {
+                print("KESS: palette ui update \(cxModel.isEmojiPickerPresented)")
+            })
+            .onChange(of: cxModel.selectedEmoji, {
+                print("KESS: sending \(cxModel.selectedEmoji)")
             })
         }
         .frame(width: cxModel.currScreenWidth, height: cxModel.menuSize.height)
         .edgesIgnoringSafeArea(.all)
-
-        //        if #available(iOS 17.0, *) {
-        //            Button(cxModel.selectedEmoji) {
-        //            }
-        //            .background(makeBackground())
-        //            .emojiPicker(
-        //                isPresented: $isEmojiPickerPresented,
-        //                selectedEmoji: $cxModel.selectedEmoji // $
-        //            )
-        //            .onChange(of: cxModel.selectedEmoji) {
-        //                // model.sendReaction(value: selectedEmoji)
-        //            }
-        //            .onAppear(perform: {
-        //                isEmojiPickerPresented = true
-        //            })
-        //        } else {
-        //            // Fallback on earlier versions
-        //            Button(cxModel.selectedEmoji) {
-        //            }
-        //            .background(makeBackground())
-        //            .emojiPicker(
-        //                isPresented: $isEmojiPickerPresented,
-        //                selectedEmoji: $cxModel.selectedEmoji // $
-        //            )
-        //            .onAppear(perform: {
-        //                isEmojiPickerPresented = true
-        //            })
-        //        }
-
     }
 
     func makeBackground() -> some View {
