@@ -18,6 +18,87 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+let contributorsDevelopers: String = """
+Adrien Béraud
+Albert Babí
+Alexander Lussier-Cullen
+Alexandr Sergheev
+Alexandre Lision
+Alexandre Viau
+Aline Bonnet
+Aline Gondim Santos
+Alireza Toghiani
+Amin Bandali
+AmirHossein Naghshzan
+Amna Snene
+Andreas Traczyk
+Anthony Léonard
+Brando Tovar
+Capucine Berthet
+Charles-Francis Damedey
+Christophe Villemer
+Charlotte Hoffmann
+Cyrille Béraud
+Dorina Mosku
+Eden Abitbol
+Edric Milaret
+Éloi Bail
+Emma Falkiewitz
+Emmanuel Lepage-Vallée
+Fadi Shehadeh
+Franck Laurent
+François-Simon Fauteux-Chapleau
+Frédéric Guimont
+Guillaume Heller
+Guillaume Roguez
+Hadrien De Sousa
+Hugo Lefeuvre
+Julien Grossholtz
+Kateryna Kostiuk
+Kessler Dupont-Teevin
+Léo Banno-Cloutier
+Liam Courdoson
+Loïc Siret
+Marianne Forget
+Mathéo Joseph
+Michel Schmit
+Mingrui Zhang
+Mohamed Chibani
+Mohamed Amine Younes Bouacida
+Nicolas Jäger
+Nicolas Reynaud
+Nicolas Vengeon
+Olivier Gregoire
+Olivier Soldano
+Patrick Keroulas
+Peymane Marandi
+Philippe Gorley
+Pierre Duchemin
+Pierre Lespagnol
+Pierre Nicolas
+Raphaël Brulé
+Rayan Osseiran
+Romain Bertozzi
+Saher Azer
+Sébastien Blin
+Seva Ivanov
+Silbino Gonçalves Matado
+Simon Désaulniers
+Simon Zeni
+Stepan Salenikovich
+Thibault Wittemberg
+Thomas Ballasi
+Trevor Tabah
+Vsevolod Ivanov
+Xavier Jouslin de Noray
+Yang Wang
+"""
+
+let contributorsArts: String = """
+Charlotte Hoffman
+Marianne Forget
+"""
+
 public class Constants: NSObject {
     @objc public static let notificationReceived = "com.savoirfairelinux.notificationExtension.receivedNotification" as CFString
     @objc public static let notificationAppIsActive = "com.savoirfairelinux.jami.appActive" as CFString
@@ -32,6 +113,31 @@ public class Constants: NSObject {
 
     @objc public static let cachesPath: URL? = {
         return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)?.appendingPathComponent("Library").appendingPathComponent("Caches")
+    }()
+
+    @objc public static let versionNumber: String? = {
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    }()
+
+    @objc public static let buildNumber: String? = {
+        let dateDefault = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYYMMdd"
+        let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as? String ?? "Info.plist"
+        if let infoPath = Bundle.main.path(forResource: bundleName, ofType: nil),
+           let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
+           let infoDate = infoAttr[FileAttributeKey.creationDate] as? Date {
+            return dateFormatter.string(from: infoDate)
+        }
+        return dateDefault
+    }()
+
+    @objc public static let fullVersion: String? = {
+        if let versionNumber:String = Constants.versionNumber,
+           let buildNumber = Constants.buildNumber {
+            return "\(versionNumber)(\(buildNumber))"
+        }
+        return nil
     }()
 
     enum NotificationUserInfoKeys: String {
@@ -59,4 +165,6 @@ public class Constants: NSObject {
                                                "#795548",
                                                "#607D8B"]
     public static let MAX_PROFILE_IMAGE_SIZE: CGFloat = 512
+
+    public static let versionName = "Eleutheria"
 }

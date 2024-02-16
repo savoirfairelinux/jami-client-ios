@@ -222,6 +222,12 @@
 		263F61762B45BBA100240AEE /* ReactionsContainerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F61752B45BBA100240AEE /* ReactionsContainerModel.swift */; };
 		263F61782B45E8FD00240AEE /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F61772B45E8FD00240AEE /* MessageBubbleView.swift */; };
 		264002462A9ECE6300949B2F /* PendingConferenceCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264002452A9ECE6300949B2F /* PendingConferenceCall.swift */; };
+		26454FB72B7FDCB200CFF06C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FB62B7FDCB200CFF06C /* AboutViewController.swift */; };
+		26454FB92B7FDCE400CFF06C /* AboutViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26454FB82B7FDCE400CFF06C /* AboutViewController.storyboard */; };
+		26454FBB2B7FDD7A00CFF06C /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FBA2B7FDD7A00CFF06C /* AboutViewModel.swift */; };
+		26454FBD2B7FDED400CFF06C /* AboutSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FBC2B7FDED400CFF06C /* AboutSwiftUIView.swift */; };
+		26454FBF2B7FDEE900CFF06C /* AboutSwiftUIVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FBE2B7FDEE900CFF06C /* AboutSwiftUIVM.swift */; };
+		26454FC12B7FDF0C00CFF06C /* projectcredits.html in Resources */ = {isa = PBXBuildFile; fileRef = 26454FC02B7FDF0B00CFF06C /* projectcredits.html */; };
 		264EA8722971EF4700B6FB6F /* SwarmInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA8712971EF4600B6FB6F /* SwarmInfoViewModel.swift */; };
 		264EA87E2977080300B6FB6F /* LogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA87D2977080300B6FB6F /* LogViewModel.swift */; };
 		264EA8802977082A00B6FB6F /* LogUIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264EA87F2977082A00B6FB6F /* LogUIViewModel.swift */; };
@@ -845,6 +851,12 @@
 		263F61752B45BBA100240AEE /* ReactionsContainerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsContainerModel.swift; sourceTree = "<group>"; };
 		263F61772B45E8FD00240AEE /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleView.swift; sourceTree = "<group>"; };
 		264002452A9ECE6300949B2F /* PendingConferenceCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingConferenceCall.swift; sourceTree = "<group>"; };
+		26454FB62B7FDCB200CFF06C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		26454FB82B7FDCE400CFF06C /* AboutViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AboutViewController.storyboard; sourceTree = "<group>"; };
+		26454FBA2B7FDD7A00CFF06C /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
+		26454FBC2B7FDED400CFF06C /* AboutSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftUIView.swift; sourceTree = "<group>"; };
+		26454FBE2B7FDEE900CFF06C /* AboutSwiftUIVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftUIVM.swift; sourceTree = "<group>"; };
+		26454FC02B7FDF0B00CFF06C /* projectcredits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = projectcredits.html; sourceTree = "<group>"; };
 		264EA8712971EF4600B6FB6F /* SwarmInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfoViewModel.swift; sourceTree = "<group>"; };
 		264EA87D2977080300B6FB6F /* LogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewModel.swift; sourceTree = "<group>"; };
 		264EA87F2977082A00B6FB6F /* LogUIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogUIViewModel.swift; sourceTree = "<group>"; };
@@ -1905,6 +1917,7 @@
 		1A0C4EBC1F1D48AA00550433 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				26454FB52B7FDCA100CFF06C /* About */,
 				BB1E8C6B29159DDE005AE1D6 /* SwarmInfo */,
 				0ECA567F243394660055D31E /* MigrateAccount */,
 				0E96ED73225D05F70016C07D /* GeneralSettings */,
@@ -2140,6 +2153,7 @@
 		1ABE07C61F0D86B300D36361 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				26454FC02B7FDF0B00CFF06C /* projectcredits.html */,
 				26929FD125659E5F0052A601 /* cacert.pem */,
 				0EABD3842303600B00DE7ACF /* default.wav */,
 				1ABE07DA1F0D915100D36361 /* Localizable.strings */,
@@ -2246,6 +2260,18 @@
 				264002452A9ECE6300949B2F /* PendingConferenceCall.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		26454FB52B7FDCA100CFF06C /* About */ = {
+			isa = PBXGroup;
+			children = (
+				26454FB62B7FDCB200CFF06C /* AboutViewController.swift */,
+				26454FB82B7FDCE400CFF06C /* AboutViewController.storyboard */,
+				26454FBA2B7FDD7A00CFF06C /* AboutViewModel.swift */,
+				26454FBC2B7FDED400CFF06C /* AboutSwiftUIView.swift */,
+				26454FBE2B7FDEE900CFF06C /* AboutSwiftUIVM.swift */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 		264EA8782977078C00B6FB6F /* Diagnostic */ = {
@@ -2699,6 +2725,7 @@
 				0E5806F723BE4325007D1F5D /* PlayerView.xib in Resources */,
 				26074FDD24F7FFF500374570 /* PreviewViewController.storyboard in Resources */,
 				04399A031D1C2D9D00E99CD9 /* Images.xcassets in Resources */,
+				26454FC12B7FDF0C00CFF06C /* projectcredits.html in Resources */,
 				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
 				26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */,
 				1A2D18ED1F2919D800B2C785 /* MeViewController.storyboard in Resources */,
@@ -2713,6 +2740,7 @@
 				5CE66F751FBF769B00EE9291 /* InitialLoadingViewController.storyboard in Resources */,
 				1A5DC03E1F35678D0075E8EF /* ContactRequestsViewController.storyboard in Resources */,
 				446FAF192373424700519C4F /* SendFileViewController.storyboard in Resources */,
+				26454FB92B7FDCE400CFF06C /* AboutViewController.storyboard in Resources */,
 				BB3E5815291C138600E85BEA /* SwarmInfoViewController.storyboard in Resources */,
 				0E72374A20460320006B0C7D /* ProfileHeaderView.xib in Resources */,
 				4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */,
@@ -2846,6 +2874,7 @@
 				02B22E091DF7585F000358C9 /* DaemonService.swift in Sources */,
 				5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */,
 				66ACB430214AE28C00A94162 /* ScanViewController.swift in Sources */,
+				26454FBD2B7FDED400CFF06C /* AboutSwiftUIView.swift in Sources */,
 				0E6D959A2407115800996A28 /* LinkToAccountManagerViewController.swift in Sources */,
 				2659F65C27483A27009107F1 /* DecodingAdapterDelegate.swift in Sources */,
 				56BBC99F1ED714CB00CDAF8B /* ConversationsAdapter.mm in Sources */,
@@ -2854,6 +2883,7 @@
 				1A2D18A61F27F7A400B2C785 /* UIViewController+Rx.swift in Sources */,
 				26BC15EE29302B00003FC8D1 /* ContactMessageVM.swift in Sources */,
 				BB3B0A412971AEE30083CAD8 /* LocationSharingView.swift in Sources */,
+				26454FBB2B7FDD7A00CFF06C /* AboutViewModel.swift in Sources */,
 				267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */,
 				0E49097A1FEAC9E1005CAA50 /* CallViewController.swift in Sources */,
 				1A5DC0241F3564360075E8EF /* RequestModel.swift in Sources */,
@@ -3005,6 +3035,7 @@
 				261190B62A2928FB00CAE7F8 /* ParticipantView.swift in Sources */,
 				0ED2B6FE1F96A16C001572F0 /* LinkNewDeviceViewModel.swift in Sources */,
 				260AE64029C23AEC00D66D5E /* CallsHelper.swift in Sources */,
+				26454FB72B7FDCB200CFF06C /* AboutViewController.swift in Sources */,
 				0E438A98204F31BD00402900 /* AccountHeader.swift in Sources */,
 				1A3D28A91F0EBF0200B524EE /* UIView+Ring.swift in Sources */,
 				1A2041881F1EA1EA00C08435 /* CreateAccountViewModel.swift in Sources */,
@@ -3045,6 +3076,7 @@
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				1A2D18D11F29182500B2C785 /* ConversationViewController.swift in Sources */,
 				0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */,
+				26454FBF2B7FDEE900CFF06C /* AboutSwiftUIVM.swift in Sources */,
 				2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */,
 				0E320D52224ADF930070B515 /* DialpadViewController.swift in Sources */,
 				BB6690042A99043200875848 /* SharedActionsPresenter.swift in Sources */,
