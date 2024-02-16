@@ -250,7 +250,7 @@ struct ContextMenuView: View {
             ].map { String(UnicodeScalar($0)!) }
 
             ForEach(defaultReactionEmojis.indices, id: \.self) { index in
-                EmojiBarView(
+                EmojiBarItemView(
                     model: model,
                     emoji: defaultReactionEmojis[index],
                     presentingState: $presentingState,
@@ -312,7 +312,7 @@ struct ContextMenuView: View {
     }
 }
 
-struct EmojiBarView: View {
+struct EmojiBarItemView: View {
     var model: ContextMenuVM
     var emoji: String
     @Binding var presentingState: ContextMenuPresentingState
