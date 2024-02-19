@@ -32,6 +32,8 @@ class ContextMenuVM: ObservableObject {
             messsageAnchor = presentingMessage.model.message.incoming ? .bottomLeading : .bottomTrailing
             updateContextMenuSize()
             isOurMsg = !presentingMessage.model.message.incoming
+            myAuthoredReactions = presentingMessage.messageModel.message.reactionsMessageIdsBySender(accountId: currentJamiAccountId!)
+            // print("KESS: emojis listed are \(preferredUserReactions.map({ $0.forDisplay() }).reduce("", +))")
         }
     }
     var messageFrame: CGRect = CGRect.zero {
