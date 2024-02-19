@@ -346,13 +346,14 @@ struct EmojiPaletteView: View {
                 isPresented: $cxModel.isEmojiPickerPresented,
                 selectedEmoji: $cxModel.selectedEmoji,
                 arrowDirection: .none,
-                customHeight: cxModel.menuSize.height,
+                customHeight: cxModel.currScreenHeight - cxModel.menuOffsetY,// cxModel.menuSize.height,
                 horizontalInset: .zero,
                 isDismissAfterChoosing: true,
                 selectedEmojiCategoryTintColor: cxModel.presentingMessage.model.preferencesColor,
                 feedBackGeneratorStyle: .medium
             )
 //            .background(makeBackground())
+            .offset(y: -cxModel.menuSize.height)
             .onAppear(perform: {
                 print("KESS: show palette")
                 cxModel.isEmojiPickerPresented = false
