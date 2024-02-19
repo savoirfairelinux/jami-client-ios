@@ -59,9 +59,13 @@ class ScaledImageView: UIImageView {
 
 struct ScaledImageViewWrapper: UIViewRepresentable {
     let imageToShow: UIImage
+    var maxHeight: CGFloat
+    var maxWidth: CGFloat
 
     func makeUIView(context: Context) -> ScaledImageView {
         let imageView = ScaledImageView()
+        imageView.maxHeight = maxHeight
+        imageView.maxWidth = maxWidth
         imageView.image = imageToShow
         return imageView
     }

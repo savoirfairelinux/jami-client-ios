@@ -24,23 +24,12 @@ private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 extension UIImage {
 
-    public class func gifImageWithData(_ data: Data) -> UIImage? {
-        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
-            print("image doesn't exist")
+    public class func gifImageWithUrl(_ url: URL, maxSize: CGFloat) -> UIImage? {
+        guard let imageSource = CGImageSourceCreateWithURL(url as CFURL, nil) else {
             return nil
         }
 
-        return UIImage.animatedImageWithSource(source)
-    }
-
-    public class func gifImageWithUrl(_ url: URL) -> UIImage? {
-
-        guard let imageData = try? Data(contentsOf: url) else {
-            print("SwiftGif: Cannot turn image named \"\(url.path)\" into NSData")
-            return nil
-        }
-
-        return gifImageWithData(imageData)
+        return UIImage.animatedImageWithSource(imageSource, maxSize: maxSize)
     }
 
     class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
@@ -118,13 +107,17 @@ extension UIImage {
         return gcd
     }
 
-    class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
+    class func animatedImageWithSource(_ source: CGImageSource, maxSize: CGFloat) -> UIImage? {
+        let options: CFDictionary? = maxSize == 0 ? nil : [
+            kCGImageSourceThumbnailMaxPixelSize: maxSize,
+            kCGImageSourceCreateThumbnailFromImageAlways: true
+        ] as CFDictionary
         let count = CGImageSourceGetCount(source)
         var images = [CGImage]()
         var delays = [Int]()
 
         for rang in 0..<count {
-            if let image = CGImageSourceCreateImageAtIndex(source, rang, nil) {
+            if let image = CGImageSourceCreateImageAtIndex(source, rang, options) {
                 images.append(image)
             }
 

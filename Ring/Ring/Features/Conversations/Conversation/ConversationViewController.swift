@@ -878,7 +878,7 @@ extension ConversationViewController {
     }
 
     func presentMedia(message: MessageContentVM) {
-        self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: message.getImage(), initialFrame: CGRect.zero, delegate: message)
+        self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: message.getImage(maxSize: 0), initialFrame: CGRect.zero, delegate: message)
     }
 
     func openDocument(url: URL) {
