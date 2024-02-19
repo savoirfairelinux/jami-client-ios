@@ -79,6 +79,11 @@ class ContextMenuVM: ObservableObject {
     }
 
     var currentJamiAccountId: String?
+    var myAuthoredReactionIds: [String] = [] // list of MessageIds for local user's authored reactions
+    var preferredUserReactions: [ReactionData] = [
+        0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
+    ].map { ReactionData(emoji: String(UnicodeScalar($0)!)) }
+>>>>>>> 9a24d45d (emojibar: support for revoking non-default reactions)
 
     @Published var selectedEmoji: String = "" {
         didSet {

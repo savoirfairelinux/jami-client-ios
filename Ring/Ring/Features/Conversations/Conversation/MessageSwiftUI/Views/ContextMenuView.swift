@@ -298,6 +298,7 @@ struct ContextMenuView: View {
 
 // @available(iOS 17.0, *)
 struct EmojiBarView: View {
+<<<<<<< HEAD
     @SwiftUI.StateObject var cxModel: ContextMenuVM
     @SwiftUI.State private var backgroundOpacity: CGFloat = 0.0
 
@@ -335,6 +336,18 @@ struct EmojiBarView: View {
         .edgesIgnoringSafeArea(.all)
 */
 // =======
+=======
+
+    var model: ContextMenuVM
+    @Binding var presentingState: ContextMenuPresentingState
+    //    @SwiftUI.State private var actionsOpacity: CGFloat = 0 // TODO pass from above
+    @SwiftUI.State private var messageShadow: CGFloat = 0.00 // TODO pass from above
+
+    @SwiftUI.State private var enabledNotifierLength: CGFloat = 0
+
+    var body: some View {
+        // TODO scroll view
+>>>>>>> 9a24d45d (emojibar: support for revoking non-default reactions)
         ScrollView(.horizontal) {
             HStack {
                 // first add defaults/favorites
@@ -349,10 +362,10 @@ struct EmojiBarView: View {
                     )
                 }
 
-                ForEach(model.myAuthoredReactions.indices, id: \.self) { index in
+                ForEach(model.myAuthoredReactionIds.indices, id: \.self) { index in
                     EmojiBarButtonView(
                         model: model,
-                        content: ReactionData(emoji: model.myAuthoredReactions[index]),
+                        content:  model.presentingMessage.messageModel.reactionsModel.message.reactions.first(where: { item in item.id == model.myAuthoredReactionIds[index] })!.content,
                         presentingState: $presentingState,
                         elementOpacity: 1.0 as CGFloat,
                         delayIn: 0.03 * Double(index),
@@ -360,7 +373,7 @@ struct EmojiBarView: View {
                     )
                 }
                 Button(action: {
-                    let str = model.myAuthoredReactions
+                    let str = model.myAuthoredReactionIds
                         .map({ reactionId in model.presentingMessage.model.message.reactions.first(where: { item in item.id == reactionId })!.content.forDisplay()
 
                         })
