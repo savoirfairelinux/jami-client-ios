@@ -54,22 +54,27 @@ extension UIImage {
         return result
     }
 
-    public class func getImagefromURL(url: URL) -> UIImage? {
-        do {
-            let imageData = try Data(contentsOf: url)
-            return UIImage(data: imageData)
-        } catch {
-            print("Error loading image : \(error)")
+    public class func getImagefromURL(fileURL: URL, maxSize: CGFloat) -> UIImage? {
+        let options: [CFString: Any] = [
+            kCGImageSourceThumbnailMaxPixelSize: maxSize,
+            kCGImageSourceCreateThumbnailFromImageAlways: true
+        ]
+
+        guard let imageSource = CGImageSourceCreateWithURL(fileURL as CFURL, nil),
+              let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary) else {
+            return nil
         }
-        return nil
+        return UIImage(cgImage: downsampledImage)
     }
-    public class func unWrapImageFromURL(url: URL?) -> UIImage {
-        var finalImage: UIImage = UIImage()
-        if let imageURL = url, let image = UIImage.getImagefromURL(url: imageURL) {
-            finalImage = image
+
+    public class func getImagefromURL(fileURL: URL) -> UIImage? {
+        guard let imageSource = CGImageSourceCreateWithURL(fileURL as CFURL, nil),
+              let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, nil) else {
+            return nil
         }
-        return finalImage
+        return UIImage(cgImage: image)
     }
+
     func setRoundCorner(radius: CGFloat, offset: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0)
         let bounds = CGRect(origin: .zero, size: self.size)

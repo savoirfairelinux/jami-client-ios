@@ -104,7 +104,7 @@ struct ImageOrGifView: View {
                 }
                 .modifier(MessageLongPress(longPressCb: onLongGesture))
         } else {
-            ScaledImageViewWrapper(imageToShow: image)
+            ScaledImageViewWrapper(imageToShow: image, maxHeight: maxHeight, maxWidth: maxHeight)
                 .scaledToFit()
                 .frame(maxHeight: maxHeight)
                 .conditionalModifier(MessageCornerRadius(model: message), apply: customCornerRadius == 0)

@@ -144,6 +144,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     var isIncoming: Bool
     var isHistory: Bool
     var type: MessageType = .text
+    var maxImageSize:CGFloat = 300
 
     private var sequencing: MessageSequencing = .unknown {
         didSet {
@@ -186,6 +187,9 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         self.type = message.type
         self.isIncoming = message.incoming
         self.isHistory = isHistory
+        if self.isHistory {
+            maxImageSize = 100
+        }
         self.content = message.content
         self.transferStatus = message.transferStatus
         self.preferencesColor = preferencesColor
@@ -335,7 +339,8 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             self.transferState.onNext(TransferState.getURL(viewModel: self))
         }
         DispatchQueue.main.async { [weak self] in
-            _ = self?.getImage()
+            guard let self = self else { return }
+            _ = self.getImage(maxSize: self.maxImageSize)
         }
     }
 
@@ -502,10 +507,17 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         return self.url?.pathExtension == "gif"
     }
 
-    func getImage() -> UIImage? {
+    func getImage(maxSize: CGFloat) -> UIImage? {
+        // need force to load biggest size possible for preview
+        if maxSize == 0 {
+            guard let url = url else { return nil }
+            let image = isGifImage() ? UIImage.gifImageWithUrl(url, maxSize: 300) : UIImage.getImagefromURL(fileURL: url)
+            return image
+
+        }
         if let image = self.finalImage { return image }
         guard let url = url else { return nil }
-        self.finalImage = isGifImage() ? UIImage.gifImageWithUrl(url) : UIImage.getImagefromURL(url: url)
+        self.finalImage = isGifImage() ? UIImage.gifImageWithUrl(url, maxSize: maxSize) : UIImage.getImagefromURL(fileURL: url, maxSize: maxSize)
         return self.finalImage
     }
 
@@ -530,7 +542,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         if self.type == .fileTransfer {
             self.transferState.onNext(TransferState.getPlayer(viewModel: self))
             self.transferState.onNext(TransferState.getURL(viewModel: self))
-            _ = getImage()
+            //_ = getImage()
         }
         updateMenuitems()
     }
