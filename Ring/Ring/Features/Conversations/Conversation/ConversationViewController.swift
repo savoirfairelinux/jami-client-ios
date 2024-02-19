@@ -829,7 +829,7 @@ extension ConversationViewController {
     func presentPreview(message: MessageContentVM) {
         guard let url = message.url else { return }
         if message.player != nil {
-            presentMedia(message: message)
+            presentPlayer(message: message)
         } else {
             openDocument(url: url)
         }
@@ -877,8 +877,8 @@ extension ConversationViewController {
         self.present(documentPicker, animated: true, completion: nil)
     }
 
-    func presentMedia(message: MessageContentVM) {
-        self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: message.getImage(), initialFrame: CGRect.zero, delegate: message)
+    func presentPlayer(message: MessageContentVM) {
+        self.viewModel.openFullScreenPreview(parentView: self, viewModel: message.player, image: nil, initialFrame: CGRect.zero, delegate: message)
     }
 
     func openDocument(url: URL) {
