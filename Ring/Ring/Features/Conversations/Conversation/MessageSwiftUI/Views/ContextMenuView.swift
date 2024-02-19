@@ -72,7 +72,7 @@ struct ContextMenuView: View {
                                 Spacer()
                                     .frame(width: model.incomingMessageMarginSize)
                             }
-                            makeEmojiBar()
+			    EmojiBarView()
                             if model.isOurMsg! {
                                 Spacer()
                                     .frame(width: 10)
@@ -103,7 +103,7 @@ struct ContextMenuView: View {
                                 Spacer()
                                     .frame(width: model.incomingMessageMarginSize)
                             }
-                            makeEmojiBar()
+			    EmojiBarView()
                             if model.isOurMsg! {
                                 Spacer()
                                     .frame(width: 10)
@@ -133,9 +133,9 @@ struct ContextMenuView: View {
                         }
                         .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
                         // Emoji Palette (for full reactions)
-                        if #available(iOS 17.0, *) {
+                        // if #available(iOS 17.0, *) {
                             EmojiPaletteView(cxModel: model, selecetdEmoji: $model.selectedEmoji)
-                        }
+                        // }
                         //            .position(y: -cxModel.menuSize.height) // move to extern and onappear
                     }
 
@@ -253,32 +253,6 @@ struct ContextMenuView: View {
         .edgesIgnoringSafeArea(.all)
     }
 
-    func makeEmojiBar() -> some View {
-        HStack {
-            let defaultReactionEmojis: [String] = [
-                0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
-            ].map { String(UnicodeScalar($0)!) }
-
-            ForEach(defaultReactionEmojis.indices, id: \.self) { index in
-                EmojiBarItemView(
-                    model: model,
-                    emoji: defaultReactionEmojis[index],
-                    presentingState: $presentingState,
-                    elementOpacity: 0.0 as CGFloat,
-                    delayIn: 0.03 * Double(index),
-                    elementRotation: Angle(degrees: 45.0)
-                )
-            }
-
-        }
-        .opacity(actionsOpacity)
-        .padding(.vertical, 3)
-        .padding(.horizontal, 8)
-        .background(Color(UIColor.secondarySystemBackground))
-        .cornerRadius(radius: 32, corners: .allCorners)
-        .shadow(color: Color(model.shadowColor), radius: messageShadow)
-    }
-
     func makeActions() -> some View {
         VStack(spacing: 0) {
             ForEach(model.menuItems) { item in
@@ -322,26 +296,15 @@ struct ContextMenuView: View {
     }
 }
 
-@available(iOS 17.0, *)
-struct EmojiPaletteView: View {
+// @available(iOS 17.0, *)
+struct EmojiBarView: View {
     @SwiftUI.StateObject var cxModel: ContextMenuVM
-    @Binding var selecetdEmoji: String
     @SwiftUI.State private var backgroundOpacity: CGFloat = 0.0
 
     var body: some View {
-
-        ZStack {
-//            Color(UIColor.systemBackground)
-//                .opacity(backgroundOpacity)
-//                .onAppear(perform: {
-//                    backgroundOpacity = 0.0
-//                    withAnimation(.easeIn(duration: 0.5).delay(0.0)) {
-//                        backgroundOpacity = 0.7
-//                    }
-//                })
-//            Color(UIColor.systemBackground)
-//                .frame(width: cxModel.currScreenWidth, height: cxModel.menuSize.height)
-//            VisualEffect(style: .regular, withVibrancy: true)
+// TODO merge this ex-EmojiPalette code with the draggable or plus button-able EmojiBarView that is more robust
+// <<<<<<< HEAD
+/*
             MCEmojiPickerRepresentableController(
                 isPresented: $cxModel.isEmojiPickerPresented,
                 selectedEmoji: $cxModel.selectedEmoji,
@@ -352,7 +315,6 @@ struct EmojiPaletteView: View {
                 selectedEmojiCategoryTintColor: cxModel.presentingMessage.model.preferencesColor,
                 feedBackGeneratorStyle: .medium
             )
-//            .background(makeBackground())
             .offset(y: -cxModel.menuSize.height)
             .onAppear(perform: {
                 print("KESS: show palette")
@@ -371,6 +333,56 @@ struct EmojiPaletteView: View {
         }
         .frame(width: cxModel.currScreenWidth, height: cxModel.menuSize.height)
         .edgesIgnoringSafeArea(.all)
+*/
+// =======
+        ScrollView(.horizontal) {
+            HStack {
+                // first add defaults/favorites
+                ForEach(model.preferredUserReactions.indices, id: \.self) { index in
+                    EmojiBarButtonView(
+                        model: model,
+                        content: model.preferredUserReactions[index],
+                        presentingState: $presentingState,
+                        elementOpacity: 1.0 as CGFloat,
+                        delayIn: 0.03 * Double(index),
+                        elementRotation: Angle(degrees: 45)
+                    )
+                }
+
+                ForEach(model.myAuthoredReactions.indices, id: \.self) { index in
+                    EmojiBarButtonView(
+                        model: model,
+                        content: ReactionData(emoji: model.myAuthoredReactions[index]),
+                        presentingState: $presentingState,
+                        elementOpacity: 1.0 as CGFloat,
+                        delayIn: 0.03 * Double(index),
+                        elementRotation: Angle(degrees: 45)
+                    )
+                }
+                Button(action: {
+                    let str = model.myAuthoredReactions
+                        .map({ reactionId in model.presentingMessage.model.message.reactions.first(where: { item in item.id == reactionId })!.content.forDisplay()
+
+                        })
+                        .reduce("", +)
+                    print("KESS: emojis authored are \(str)")
+
+                }) {
+                    Text("+")
+                }
+                // then add scrollable revokes
+
+            }
+            .frame(height: model.emojiBarHeight)
+        }
+        .frame(width: model.emojiBarMaxWidth, height: model.emojiBarHeight)
+        .opacity(1.0)
+        .padding(.vertical, 3)
+        .padding(.horizontal, 8)
+        .background(Color(UIColor.secondarySystemBackground))
+        .cornerRadius(radius: 32, corners: .allCorners)
+        .shadow(color: Color(model.shadowColor), radius: messageShadow)
+// >>>>>>> 1d44e83a (emojipalette: hotfix for emojibar not showing)
     }
 
     func makeBackground() -> some View {
