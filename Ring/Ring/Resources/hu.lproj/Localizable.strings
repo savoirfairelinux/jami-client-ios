@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "Ha hisz a küldetésünkben, adományozna?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to";
+"conversation.messagePlaceholder" = "Írj a következő(k)nek:";
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
 "conversation.errorSavingImage" = "Nem sikerült menteni a képet a kepgyűjteménybe";

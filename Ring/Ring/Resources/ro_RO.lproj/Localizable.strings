@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "Dacă îți place să folosești Jami și crezi că misiunea noastră este importantă, poți face o donație?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to";
+"conversation.messagePlaceholder" = "Scrie pentru";
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către ";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
 "conversation.errorSavingImage" = "Salvarea imaginii nu a reușit";
