@@ -502,10 +502,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         return self.url?.pathExtension == "gif"
     }
 
-    func getImage() -> UIImage? {
+    func getImage(maxSize: CGFloat) -> UIImage? {
         if let image = self.finalImage { return image }
         guard let url = url else { return nil }
-        self.finalImage = isGifImage() ? UIImage.gifImageWithUrl(url) : UIImage.getImagefromURL(url: url)
+        self.finalImage = isGifImage() ? UIImage.gifImageWithUrl(url) : UIImage.getImagefromURL(fileURL: url, maxSize: maxSize)
         return self.finalImage
     }
 

@@ -30,10 +30,23 @@ extension UIImage {
             return nil
         }
 
-        return UIImage.animatedImageWithSource(source)
+        return UIImage.animatedImageWithSource(source, maxSize: 300)
     }
 
-    public class func gifImageWithUrl(_ url: URL) -> UIImage? {
+    public class func gifImageWithUrl(_ url: URL, maxSize: CGFloat) -> UIImage? {
+        let size = CGSize(width: maxSize, height: maxSize)
+
+        guard let imageSource = CGImageSourceCreateWithURL(url as CFURL, nil),
+              let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
+              let pixelWidth = imageProperties[kCGImagePropertyPixelWidth] as? Int,
+              let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as? Int,
+              let downsampledImage = createDownsampledImage(imageSource: imageSource,
+                                                            targetSize: size,
+                                                            pixelWidth: pixelWidth,
+                                                            pixelHeight: pixelHeight) else {
+            return nil
+        }
+        return UIImage(cgImage: downsampledImage)
 
         guard let imageData = try? Data(contentsOf: url) else {
             print("SwiftGif: Cannot turn image named \"\(url.path)\" into NSData")
@@ -118,13 +131,18 @@ extension UIImage {
         return gcd
     }
 
-    class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
+    class func animatedImageWithSource(_ source: CGImageSource, maxSize: CGFloat) -> UIImage? {
+        let maxDimension = max(maxSize, maxSize)
+        let options: [CFString: Any] = [
+            kCGImageSourceThumbnailMaxPixelSize: maxDimension,
+            kCGImageSourceCreateThumbnailFromImageAlways: true
+        ]
         let count = CGImageSourceGetCount(source)
         var images = [CGImage]()
         var delays = [Int]()
 
         for rang in 0..<count {
-            if let image = CGImageSourceCreateImageAtIndex(source, rang, nil) {
+            if let image = CGImageSourceCreateImageAtIndex(source, rang, options as CFDictionary) {
                 images.append(image)
             }
 

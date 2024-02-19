@@ -63,6 +63,33 @@ extension UIImage {
         }
         return nil
     }
+
+    public class func getImagefromURL(fileURL: URL, maxSize: CGFloat) -> UIImage? {
+        let size = CGSize(width: maxSize, height: maxSize)
+
+        guard let imageSource = CGImageSourceCreateWithURL(fileURL as CFURL, nil),
+              let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
+              let pixelWidth = imageProperties[kCGImagePropertyPixelWidth] as? Int,
+              let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as? Int,
+              let downsampledImage = createDownsampledImage(imageSource: imageSource,
+                                                            targetSize: size,
+                                                            pixelWidth: pixelWidth,
+                                                            pixelHeight: pixelHeight) else {
+            return nil
+        }
+        return UIImage(cgImage: downsampledImage)
+    }
+
+    public class func createDownsampledImage(imageSource: CGImageSource, targetSize: CGSize, pixelWidth: Int, pixelHeight: Int) -> CGImage? {
+        let maxDimension = max(targetSize.width, targetSize.height)
+        let options: [CFString: Any] = [
+            kCGImageSourceThumbnailMaxPixelSize: maxDimension,
+            kCGImageSourceCreateThumbnailFromImageAlways: true
+        ]
+
+        return CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
+    }
+
     public class func unWrapImageFromURL(url: URL?) -> UIImage {
         var finalImage: UIImage = UIImage()
         if let imageURL = url, let image = UIImage.getImagefromURL(url: imageURL) {
