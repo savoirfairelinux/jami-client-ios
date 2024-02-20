@@ -32,8 +32,7 @@ class ContextMenuVM: ObservableObject {
             messsageAnchor = presentingMessage.model.message.incoming ? .bottomLeading : .bottomTrailing
             updateContextMenuSize()
             isOurMsg = !presentingMessage.model.message.incoming
-            myAuthoredReactions = presentingMessage.messageModel.message.reactionsMessageIdsBySender(accountId: currentJamiAccountId!)
-            // print("KESS: emojis listed are \(preferredUserReactions.map({ $0.forDisplay() }).reduce("", +))")
+            myAuthoredReactionIds = presentingMessage.messageModel.message.reactionsMessageIdsBySender(accountId: currentJamiAccountId!)
         }
     }
     var messageFrame: CGRect = CGRect.zero {
@@ -69,6 +68,7 @@ class ContextMenuVM: ObservableObject {
     }
     var emojiVerticalPadding: CGFloat = 6
     var emojiBarHeight: CGFloat = 68
+    var emojiBarMaxWidth: CGFloat = 68 * 5 // TODO
 
     var isShortMsg: Bool = true
     var incomingMessageMarginSize: CGFloat = 58
@@ -80,12 +80,12 @@ class ContextMenuVM: ObservableObject {
 
     var currentJamiAccountId: String?
     var myAuthoredReactionIds: [String] = [] // list of MessageIds for local user's authored reactions
-    var preferredUserReactions: [ReactionData] = [
+    var preferredUserReactions: [String] = [
         0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
-    ].map { ReactionData(emoji: String(UnicodeScalar($0)!)) }
->>>>>>> 9a24d45d (emojibar: support for revoking non-default reactions)
+    ].map { String(UnicodeScalar($0)!) }
+    // >>>>>>> 9a24d45d (emojibar: support for revoking non-default reactions)
 
-    @Published var selectedEmoji: String = "" {
+    @Published var selectedEmoji: String = "➕" {
         didSet {
             print("KESS: sending \(selectedEmoji)")
             if selectedEmoji == "" {
