@@ -193,6 +193,7 @@ class ConversationViewController: UIViewController,
             }
             .disposed(by: self.disposeBag)
         let messageListView = MessagesListView(model: swiftUIModel, screenTapped: tapAction.asObservable())
+        //        let messageListView = MessagesListView(model: swiftUIModel, screenTapped: tapAction.asObservable(), contextMenuPresentingState: ContextMenuPresentingState.none)
         let swiftUIView = UIHostingController(rootView: messageListView)
         addChild(swiftUIView)
         swiftUIView.view.frame = self.view.frame

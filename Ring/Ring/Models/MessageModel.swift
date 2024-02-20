@@ -266,4 +266,8 @@ public class MessageModel {
             self.editions.insert(MessageAction(withInfo: edition))
         }
     }
+
+    func reactionsMessageIdsBySender(accountId: String) -> [String] {
+        return Array(self.reactions.filter({ item in item.author == accountId }).map({ item in item.id }))
+    }
 }

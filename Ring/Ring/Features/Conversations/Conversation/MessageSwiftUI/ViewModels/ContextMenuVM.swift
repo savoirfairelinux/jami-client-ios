@@ -22,7 +22,7 @@ import Foundation
 import SwiftUI
 import RxRelay
 
-class ContextMenuVM {
+class ContextMenuVM: ObservableObject {
     var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
     @Published var menuItems = [ContextualMenuItem]()
     var presentingMessage: MessageBubbleView! {
@@ -32,6 +32,7 @@ class ContextMenuVM {
             messsageAnchor = presentingMessage.model.message.incoming ? .bottomLeading : .bottomTrailing
             updateContextMenuSize()
             isOurMsg = !presentingMessage.model.message.incoming
+            myAuthoredReactionIds = presentingMessage.messageModel.message.reactionsMessageIdsBySender(accountId: currentJamiAccountId!)
         }
     }
     var messageFrame: CGRect = CGRect.zero {
@@ -66,8 +67,11 @@ class ContextMenuVM {
         }
     }
     var emojiVerticalPadding: CGFloat = 6
-
     var emojiBarHeight: CGFloat = 68
+    var emojiBarMaxWidth: CGFloat = 68 * 5 // TODO
+    //    var emojiBarHeight: CGFloat = 60//68
+    //    var emojiBarMaxWidth: CGFloat = 64 * 5 // TODO
+
     var isShortMsg: Bool = true
     var incomingMessageMarginSize: CGFloat = 58
     var isOurMsg: Bool?
@@ -77,7 +81,33 @@ class ContextMenuVM {
     }
 
     var currentJamiAccountId: String?
+    var myAuthoredReactionIds: [String] = [] // list of MessageIds for local user's authored reactions
+    var preferredUserReactions: [String] = [
+        0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
+    ].map { String(UnicodeScalar($0)!) }
+    // >>>>>>> 9a24d45d (emojibar: support for revoking non-default reactions)
 
+    @Published var selectedEmoji: String = "➕" {
+        didSet {
+            print("KESS: sending \(selectedEmoji)")
+            if selectedEmoji == "" {
+                return
+            }
+            sendReaction(value: selectedEmoji)
+            // hide the menu on send
+            self.presentingState = .willDismissWithoutAction
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.presentingState = .dismissed
+            }
+            //            self.presentingMessage.model.contextMenuState.
+            //            presentingState = isEmojiPickerPresented ? .dismissed : presentingState
+        }
+    }
+    @Published var isEmojiPickerPresented: Bool = false
+    @Published var presentingState: ContextMenuPresentingState = .none
+
+    var currScreenWidth = UIScreen.main.bounds.size.width // updates w screen rotation
+    var currScreenHeight = UIScreen.main.bounds.size.height // updates w screen rotation
     func updateContextMenuSize() {
         let height: CGFloat = CGFloat(menuItems.count) * itemHeight + menuPadding * 2
         let fontAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]

@@ -115,6 +115,12 @@ class MessagesListVM: ObservableObject {
     @Published var shouldShowMap: Bool = false
     @Published var coordinates = [LocationSharingAnnotation]()
     @Published var locationSharingiewModel: LocationSharingViewModel = LocationSharingViewModel()
+    @Published var contextMenuPresentingState: ContextMenuPresentingState = .none {
+        didSet {
+            print("KESS: contextMenuPresentingState changed to \(contextMenuPresentingState)")
+        }
+    }
+
     var contactAvatar: UIImage = UIImage()
     var currentAccountAvatar: UIImage = UIImage()
     var myContactsLocation: CLLocationCoordinate2D?

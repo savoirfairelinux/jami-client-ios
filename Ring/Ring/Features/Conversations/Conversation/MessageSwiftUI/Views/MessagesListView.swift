@@ -53,7 +53,8 @@ struct MessagesListView: View {
     let scrollReserved = UIScreen.main.bounds.height * 1.5
 
     // context menu
-    @SwiftUI.State var contextMenuPresentingState: ContextMenuPresentingState = .none
+    //    @SwiftUI.State private var contextMenuPresentingState = ContextMenuPresentingState.none
+    //    @SwiftUI.State private var contextMenuPresentingState: Binding<ContextMenuPresentingState>
     @SwiftUI.State private var currentSnapshot: UIImage?
     @SwiftUI.State private var presentingMessage: MessageBubbleView?
     @SwiftUI.State private var messageFrame: CGRect?
@@ -88,9 +89,9 @@ struct MessagesListView: View {
                             return dimensions[VerticalAlignment.center]
                         }
                 }
-                .overlay(contextMenuPresentingState == .shouldPresent && model.contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
+                .overlay(model.contextMenuPresentingState == .shouldPresent && model.contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
                 // hide navigation bar when presenting context menu
-                .onChange(of: contextMenuPresentingState) { newValue in
+                .onChange(of: model.contextMenuPresentingState) { newValue in
                     let shouldHide = newValue == .shouldPresent
                     model.hideNavigationBar.accept(shouldHide)
                 }
@@ -98,7 +99,7 @@ struct MessagesListView: View {
                 .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
                     if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
                         screenHeight = UIScreen.main.bounds.size.height
-                        contextMenuPresentingState = .dismissed
+                        model.contextMenuPresentingState = .dismissed
                         self.shouldHideActiveKeyboard = false
                     }
                 }
@@ -106,7 +107,7 @@ struct MessagesListView: View {
                     screenHeight = UIScreen.main.bounds.size.height
                 })
 
-                .onChange(of: contextMenuPresentingState, perform: { state in
+                .onChange(of: model.contextMenuPresentingState, perform: { state in
                     contextMenuPresentingStateChanged(state)
                 })
                 .onReceive(Publishers.keyboardHeight) { height in
@@ -146,7 +147,11 @@ struct MessagesListView: View {
     }
 
     func makeOverlay() -> some View {
-        return ContextMenuView(model: model.contextMenuModel, presentingState: $contextMenuPresentingState)
+        //        return ContextMenuView(model: model.contextMenuModel)
+        //        return ContextMenuView(model: model.contextMenuModel)
+        //        model.presentingState = $contextMenuPresentingState
+        //        return ContextMenuView(model: model.contextMenuModel, presentingState: $contextMenuPresentingState)
+        return ContextMenuView(model: model.contextMenuModel, presentingState: $model.contextMenuPresentingState.wrappedValue)
     }
 
     private func createMessagesStackView() -> some View {
@@ -208,7 +213,7 @@ struct MessagesListView: View {
 
     private func createMessageRowView(for message: MessageContainerModel) -> some View {
         MessageRowView(messageModel: message, onLongPress: {(frame, message) in
-            if contextMenuPresentingState != .dismissed && contextMenuPresentingState != .none {
+            if model.contextMenuPresentingState != .dismissed && model.contextMenuPresentingState != .none {
                 return
             }
             model.hideNavigationBar.accept(true)
@@ -222,7 +227,7 @@ struct MessagesListView: View {
             if keyboardHeight > 0 {
                 hideKeyboardIfNeed()
             }
-            contextMenuPresentingState = .shouldPresent
+            model.contextMenuPresentingState = .shouldPresent
         }, showReactionsView: {message in
             reactionsForMessage = message
             showReactionsView.toggle()

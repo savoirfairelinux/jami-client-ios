@@ -75,10 +75,10 @@ class AdapterService {
 
         func isCompleted() -> Bool {
             switch self {
-                case .finished, .closedByHost, .closedByPeer, .unjoinablePeer, .invalidPathname:
-                    return true
-                default:
-                    return false
+            case .finished, .closedByHost, .closedByPeer, .unjoinablePeer, .invalidPathname:
+                return true
+            default:
+                return false
             }
         }
     }
@@ -124,14 +124,14 @@ class AdapterService {
             }
         }
         switch type {
-            case "videoCall":
-                return PeerConnectionRequestType.call(peerId: peerId, isVideo: true)
-            case "audioCall":
-                return PeerConnectionRequestType.call(peerId: peerId, isVideo: false)
-            case "application/clone":
-                return PeerConnectionRequestType.clone
-            default:
-                return .unknown
+        case "videoCall":
+            return PeerConnectionRequestType.call(peerId: peerId, isVideo: true)
+        case "audioCall":
+            return PeerConnectionRequestType.call(peerId: peerId, isVideo: false)
+        case "application/clone":
+            return PeerConnectionRequestType.clone
+        default:
+            return .unknown
         }
     }
 
@@ -239,26 +239,26 @@ extension AdapterService: AdapterDelegate {
         let from = message[InteractionAttributes.author.rawValue] ?? ""
         let content = message[InteractionAttributes.body.rawValue] ?? ""
         switch interactionType {
-            case .message:
-                handler(.message, EventData(accountId: accountId, jamiId: from, conversationId: conversationId, content: content, groupTitle: ""))
-            case.fileTransfer:
-                guard let fileId = message[InteractionAttributes.fileId.rawValue],
-                      let url = self.getFileUrlFor(fileName: fileId, accountId: accountId, conversationId: conversationId) else {
-                    return
-                }
-                let data = EventData(accountId: accountId, jamiId: from, conversationId: conversationId, content: url.path, groupTitle: "")
-                // check if the file has already been downloaded. If no, download the file if filesize is less than a downloading limit
-                if fileAlreadyDownloaded(fileName: fileId, accountId: accountId, conversationId: conversationId) {
-                    handler(.fileTransferDone, data)
-                } else {
-                    guard let interactionId = message[InteractionAttributes.interactionId.rawValue],
-                          let size = message["totalSize"],
-                          (Int(size) ?? (maxSizeForAutoaccept + 1)) <= maxSizeForAutoaccept else { return }
-                    let path = ""
-                    self.adapter.downloadFile(withFileId: fileId, accountId: accountId, conversationId: conversationId, interactionId: interactionId, withFilePath: path)
-                    self.loadingFiles[fileId] = data
-                    handler(.fileTransferInProgress, data)
-                }
+        case .message:
+            handler(.message, EventData(accountId: accountId, jamiId: from, conversationId: conversationId, content: content, groupTitle: ""))
+        case.fileTransfer:
+            guard let fileId = message[InteractionAttributes.fileId.rawValue],
+                  let url = self.getFileUrlFor(fileName: fileId, accountId: accountId, conversationId: conversationId) else {
+                return
+            }
+            let data = EventData(accountId: accountId, jamiId: from, conversationId: conversationId, content: url.path, groupTitle: "")
+            // check if the file has already been downloaded. If no, download the file if filesize is less than a downloading limit
+            if fileAlreadyDownloaded(fileName: fileId, accountId: accountId, conversationId: conversationId) {
+                handler(.fileTransferDone, data)
+            } else {
+                guard let interactionId = message[InteractionAttributes.interactionId.rawValue],
+                      let size = message["totalSize"],
+                      (Int(size) ?? (maxSizeForAutoaccept + 1)) <= maxSizeForAutoaccept else { return }
+                let path = ""
+                self.adapter.downloadFile(withFileId: fileId, accountId: accountId, conversationId: conversationId, interactionId: interactionId, withFilePath: path)
+                self.loadingFiles[fileId] = data
+                handler(.fileTransferInProgress, data)
+            }
         }
     }
 }
