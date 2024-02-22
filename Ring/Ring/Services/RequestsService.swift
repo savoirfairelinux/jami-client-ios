@@ -56,7 +56,6 @@ class RequestsService {
         self.dbManager = dbManager
         self.requestsAdapter = requestsAdapter
         self.sharedResponseStream = responseStream.share()
-        RequestsAdapter.delegate = self
         /**
          after accepting the request stays in synchronization until other contact became online and conversation synchronized.
          When it happens conversationReady signal is emitted. And we could remove the request.
