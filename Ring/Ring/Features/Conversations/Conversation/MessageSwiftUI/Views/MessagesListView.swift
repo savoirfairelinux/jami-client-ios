@@ -96,10 +96,12 @@ struct MessagesListView: View {
                 }
                 // hide context menu overly when device is rotated
                 .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-                    if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
-                        screenHeight = UIScreen.main.bounds.size.height
-                        contextMenuPresentingState = .dismissed
-                        self.shouldHideActiveKeyboard = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
+                            screenHeight = UIScreen.main.bounds.size.height
+                            contextMenuPresentingState = .dismissed
+                            self.shouldHideActiveKeyboard = false
+                        }
                     }
                 }
                 .onAppear(perform: {
