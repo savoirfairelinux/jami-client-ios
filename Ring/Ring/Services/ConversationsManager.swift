@@ -70,6 +70,7 @@ class ConversationsManager {
         self.requestService = requestsService
 
         ConversationsAdapter.messagesDelegate = self
+        RequestsAdapter.delegate = self
         /*
          When the application starts, all conversations will be loaded.
          Conversation data should be cleaned to prevent reloading conversations
@@ -632,6 +633,29 @@ extension  ConversationsManager: MessagesAdapterDelegate {
     func conversationDeclined(conversationId: String, accountId: String) {
         self.requestService.conversationRemoved(conversationId: conversationId, accountId: accountId)
         self.conversationService.conversationRemoved(conversationId: conversationId, accountId: accountId)
+    }
+}
+
+extension  ConversationsManager: RequestsAdapterDelegate {
+    func incomingTrustRequestReceived(from jamiId: String, to accountId: String, conversationId: String, withPayload payload: Data, receivedDate: Date) {
+        guard let localJamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId else { return }
+        if localJamiId == jamiId {
+            // This is request from self. Should not display.
+            return
+        }
+        self.requestService.incomingTrustRequestReceived(from: jamiId, to: accountId, conversationId: conversationId, withPayload: payload, receivedDate: receivedDate)
+    }
+
+
+    func conversationRequestReceived(conversationId: String, accountId: String, metadata: [String: String]) {
+        guard let localJamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId,
+        let peerUri = metadata["from"] else { return }
+        if localJamiId == peerUri {
+            // This is request from self. Should not display.
+            return
+        }
+        self.requestService.conversationRequestReceived(conversationId: conversationId, accountId: accountId, metadata: metadata)
+
     }
 }
 // swiftlint:enable type_body_length
