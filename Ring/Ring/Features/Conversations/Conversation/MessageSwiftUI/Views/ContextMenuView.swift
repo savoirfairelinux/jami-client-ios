@@ -77,7 +77,7 @@ struct ContextMenuView: View {
                                     .frame(width: 10)
                             }
                         }
-                        .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                        .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
                         Spacer()
                             .frame(height: model.emojiVerticalPadding)
                     }
@@ -94,7 +94,7 @@ struct ContextMenuView: View {
                                 .frame(width: 10)
                         }
                     }
-                    .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                    .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
                     // extra check for long messages to move emojis closer to the touch center
                     if !model.isShortMsg {
                         HStack {
@@ -108,7 +108,7 @@ struct ContextMenuView: View {
                                     .frame(width: 10)
                             }
                         }
-                        .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                        .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
                     } else {
                         Spacer()
                             .frame(height: model.defaultVerticalPadding)
@@ -128,7 +128,7 @@ struct ContextMenuView: View {
                                 .frame(width: 10)
                         }
                     }
-                    .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
+                    .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
                 }
                 .padding(.trailing, 4)
             }
