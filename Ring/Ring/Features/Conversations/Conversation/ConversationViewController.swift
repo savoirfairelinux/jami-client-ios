@@ -490,6 +490,8 @@ class ConversationViewController: UIViewController,
         } else if UIDevice.current.hasNotch {
             if displayName == nil || displayName == "" {
                 userNameYOffset = 7
+            } else if username == nil || username == "" {
+                dnlabelYOffset = 7
             } else {
                 dnlabelYOffset = 2
                 userNameYOffset = 18
@@ -497,6 +499,8 @@ class ConversationViewController: UIViewController,
         } else {
             if displayName == nil || displayName == "" {
                 userNameYOffset = 1
+            } else if username == nil || username == "" {
+                dnlabelYOffset = 1
             } else {
                 dnlabelYOffset = -4
                 userNameYOffset = 10
