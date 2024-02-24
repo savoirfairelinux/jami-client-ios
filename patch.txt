@@ -1,0 +1,509 @@
+diff --git a/Ring/Ring.xcodeproj/project.pbxproj b/Ring/Ring.xcodeproj/project.pbxproj
+index b404e524..868882ee 100644
+--- a/Ring/Ring.xcodeproj/project.pbxproj
++++ b/Ring/Ring.xcodeproj/project.pbxproj
+@@ -434,6 +434,7 @@
+ 		5516C29F1E71CEFF009D3D2D /* AccountModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516C29E1E71CEFF009D3D2D /* AccountModelHelper.swift */; };
+ 		5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */; };
+ 		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
++		5593D7D32B7FE00A00DA109C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5593D7D22B7FE00A00DA109C /* MCEmojiPicker */; };
+ 		56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56308BA61EA00E5700660275 /* NameRegistrationResponse.m */; };
+ 		563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 563AEC761EA664C0003A5641 /* RegistrationResponse.m */; };
+ 		564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C445A1E8EA44E000F92B1 /* Durations.swift */; };
+@@ -1210,6 +1211,7 @@
+ 				44DFB39C2887048F0023878C /* RxSwift.xcframework in Frameworks */,
+ 				269DA07628D0D366007D51D6 /* libssl.a in Frameworks */,
+ 				44DFB3A8288704900023878C /* Differentiator.xcframework in Frameworks */,
++				5593D7D32B7FE00A00DA109C /* MCEmojiPicker in Frameworks */,
+ 				269DA07C28D0D367007D51D6 /* libx264.a in Frameworks */,
+ 				269DA07928D0D367007D51D6 /* libtls.a in Frameworks */,
+ 				269DA05F28D0D366007D51D6 /* libhttp_parser.a in Frameworks */,
+@@ -2493,6 +2495,9 @@
+ 				26A88C0A266FFFC800888EED /* PBXTargetDependency */,
+ 			);
+ 			name = Ring;
++			packageProductDependencies = (
++				5593D7D22B7FE00A00DA109C /* MCEmojiPicker */,
++			);
+ 			productName = Ring;
+ 			productReference = 043999F31D1C2D9D00E99CD9 /* Ring.app */;
+ 			productType = "com.apple.product-type.application";
+@@ -2662,6 +2667,9 @@
+ 				"zh-Hans",
+ 			);
+ 			mainGroup = 043999EA1D1C2D9D00E99CD9;
++			packageReferences = (
++				5593D7D12B7FE00A00DA109C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
++			);
+ 			productRefGroup = 043999F41D1C2D9D00E99CD9 /* Products */;
+ 			projectDirPath = "";
+ 			projectRoot = "";
+@@ -3774,6 +3782,7 @@
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+ 				DEFINES_MODULE = YES;
+ 				DEVELOPMENT_TEAM = MSHYCBXK85;
++				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MSHYCBXK85;
+ 				GCC_C_LANGUAGE_STANDARD = c11;
+ 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+ 				GCC_PREFIX_HEADER = JamiNotificationExtension/NotificationPrefixHeader.pch;
+@@ -3801,6 +3810,7 @@
+ 				PRODUCT_BUNDLE_IDENTIFIER = com.savoirfairelinux.ring.jamiNotificationExtension;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				PROVISIONING_PROFILE_SPECIFIER = iOS_filtering_notifications;
++				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = iOS_filtering_notifications;
+ 				SKIP_INSTALL = YES;
+ 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+ 				SWIFT_OBJC_BRIDGING_HEADER = "jamiNotificationExtension/jamiNotificationExtension-Bridging-Header.h";
+@@ -4094,6 +4104,25 @@
+ 			defaultConfigurationName = Release;
+ 		};
+ /* End XCConfigurationList section */
++
++/* Begin XCRemoteSwiftPackageReference section */
++		5593D7D12B7FE00A00DA109C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */ = {
++			isa = XCRemoteSwiftPackageReference;
++			repositoryURL = "https://github.com/izyumkin/MCEmojiPicker";
++			requirement = {
++				kind = upToNextMajorVersion;
++				minimumVersion = 1.2.3;
++			};
++		};
++/* End XCRemoteSwiftPackageReference section */
++
++/* Begin XCSwiftPackageProductDependency section */
++		5593D7D22B7FE00A00DA109C /* MCEmojiPicker */ = {
++			isa = XCSwiftPackageProductDependency;
++			package = 5593D7D12B7FE00A00DA109C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
++			productName = MCEmojiPicker;
++		};
++/* End XCSwiftPackageProductDependency section */
+ 	};
+ 	rootObject = 043999EB1D1C2D9D00E99CD9 /* Project object */;
+ }
+diff --git a/Ring/Ring.xcodeproj/project.xcworkspace/contents.xcworkspacedata b/Ring/Ring.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+index 49533d01..919434a6 100644
+--- a/Ring/Ring.xcodeproj/project.xcworkspace/contents.xcworkspacedata
++++ b/Ring/Ring.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+@@ -2,6 +2,6 @@
+ <Workspace
+    version = "1.0">
+    <FileRef
+-      location = "self:Ring.xcodeproj">
++      location = "self:">
+    </FileRef>
+ </Workspace>
+diff --git a/Ring/Ring.xcodeproj/xcshareddata/xcschemes/Ring.xcscheme b/Ring/Ring.xcodeproj/xcshareddata/xcschemes/Ring.xcscheme
+index ee23e798..2b5a01d0 100644
+--- a/Ring/Ring.xcodeproj/xcshareddata/xcschemes/Ring.xcscheme
++++ b/Ring/Ring.xcodeproj/xcshareddata/xcschemes/Ring.xcscheme
+@@ -60,7 +60,7 @@
+       </Testables>
+    </TestAction>
+    <LaunchAction
+-      buildConfiguration = "Debug with lint"
++      buildConfiguration = "Debug"
+       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+       launchStyle = "0"
+diff --git a/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift b/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift
+index 6ebfa096..cb8e5462 100644
+--- a/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift
++++ b/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift
+@@ -21,8 +21,12 @@
+ import Foundation
+ import SwiftUI
+ import RxRelay
++import SwiftyBeaver
+ 
+-class ContextMenuVM {
++class ContextMenuVM: ObservableObject {
++    
++    private let log = SwiftyBeaver.self
++    
+     var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
+     @Published var menuItems = [ContextualMenuItem]()
+     var presentingMessage: MessageBubbleView! {
+@@ -32,6 +36,7 @@ class ContextMenuVM {
+             messsageAnchor = presentingMessage.model.message.incoming ? .bottomLeading : .bottomTrailing
+             updateContextMenuSize()
+             isOurMsg = !presentingMessage.model.message.incoming
++            myAuthoredReactionIds = presentingMessage.messageModel.message.reactionsMessageIdsBySender(accountId: currentJamiAccountId!)
+         }
+     }
+     var messageFrame: CGRect = CGRect.zero {
+@@ -66,8 +71,13 @@ class ContextMenuVM {
+         }
+     }
+     var emojiVerticalPadding: CGFloat = 6
++    var emojiBarHeight: CGFloat = 68 {
++       didSet {
++           updateSizes()
++       }
++    }
++    var emojiBarMaxWidth: CGFloat = max(0, min(screenWidth - 20, 62 * 5))
+ 
+-    var emojiBarHeight: CGFloat = 68
+     var isShortMsg: Bool = true
+     var incomingMessageMarginSize: CGFloat = 58
+     var isOurMsg: Bool?
+@@ -77,7 +87,37 @@ class ContextMenuVM {
+     }
+ 
+     var currentJamiAccountId: String?
++    var myAuthoredReactionIds: [String] = [] // list of MessageIds for local user's authored reactions
++    var preferredUserReactions: [String] = [
++        0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
++    ].map { String(UnicodeScalar($0)!) }
+ 
++    private var emojiQueued = false
++    @Published var selectedEmoji: String = "" {
++        didSet {
++            switch emojiQueued {
++            case false:
++                self.log.debug("ContextMenuVM: sending \(selectedEmoji)")
++                sendReaction(value: selectedEmoji)
++                // hide reaction view
++                EmojiReactionNotifier.shared.notifyEmojiReaction(event: .init())
++                // hide MCEmojiPicker
++                self.isEmojiPickerPresented = false
++                // clear the emoji from MCEmojiPicker
++                emojiQueued = true
++                selectedEmoji = ""
++                emojiQueued = false
++            case true:
++                // locked on emojiQueued... do nothing
++                return
++            }
++        }
++    }
++    @Published var isEmojiPickerPresented: Bool = false
++
++    var currScreenWidth = UIScreen.main.bounds.size.width // updates w screen rotation
++    var currScreenHeight = UIScreen.main.bounds.size.height // updates w screen rotation
++    
+     func updateContextMenuSize() {
+         let height: CGFloat = CGFloat(menuItems.count) * itemHeight + menuPadding * 2
+         let fontAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]
+@@ -93,6 +133,11 @@ class ContextMenuVM {
+         let newWidth: CGFloat = min(width, UIScreen.main.bounds.width - screenPadding)
+         menuSize = CGSize(width: newWidth, height: newHeight)
+     }
++    
++    func updateEmojiBarSize(size: CGSize) {
++        self.log.debug("ContentMenuVM: updated emojibarheight to \(size.height)")
++        emojiBarHeight = size.height
++    }
+ 
+     func updateSizes() {
+         if messageFrame == CGRect.zero || menuSize == CGSize.zero { return }
+diff --git a/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift b/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift
+index b6f9ed0c..f8d8bde9 100644
+--- a/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift
++++ b/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift
+@@ -19,6 +19,7 @@
+  */
+ 
+ import SwiftUI
++import MCEmojiPicker
+ 
+ enum ContextMenuPresentingState {
+     case none
+@@ -43,7 +44,7 @@ struct VisualEffect: UIViewRepresentable {
+ }
+ 
+ struct ContextMenuView: View {
+-    var model: ContextMenuVM
++    @SwiftUI.StateObject var model: ContextMenuVM
+     @Binding var presentingState: ContextMenuPresentingState
+     // animations
+     @SwiftUI.State private var blurAmount = 0.0
+@@ -113,22 +114,31 @@ struct ContextMenuView: View {
+                         Spacer()
+                             .frame(height: model.defaultVerticalPadding)
+                     }
+-                    // actions (reply, fwd, etc.)
+-                    HStack {
+-                        if !model.isOurMsg! {
+-                            Spacer()
+-                                .frame(width: model.incomingMessageMarginSize)
+-                        }
+-                        makeActions()
+-                            .opacity(actionsOpacity)
+-                            .scaleEffect(actionsScale, anchor: model.actionsAnchor)
+-                            .frame(width: model.menuSize.width)
+-                        if model.isOurMsg! {
+-                            Spacer()
+-                                .frame(width: 10)
++
++                    ZStack {
++                        // actions (reply, fwd, etc.)
++                        HStack {
++                            if !model.isOurMsg! {
++                                Spacer()
++                                    .frame(width: model.incomingMessageMarginSize)
++                            }
++                            makeActions()
++                                .opacity(actionsOpacity)
++                                .scaleEffect(actionsScale, anchor: model.actionsAnchor)
++                                .frame(width: model.menuSize.width)
++                            if model.isOurMsg! {
++                                Spacer()
++                                    .frame(width: 10)
++                            }
+                         }
++                        .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
++                        // Emoji Palette (for full reactions)
++                        // if #available(iOS 17.0, *) {
++                        //                            EmojiPaletteView(cxModel: model, selecetdEmoji: $model.selectedEmoji)
++                        // }
++                        //            .position(y: -cxModel.menuSize.height) // move to extern and onappear
+                     }
+-                    .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
++
+                 }
+                 .padding(.trailing, 4)
+             }
+@@ -243,32 +253,6 @@ struct ContextMenuView: View {
+         .edgesIgnoringSafeArea(.all)
+     }
+ 
+-    func makeEmojiBar() -> some View {
+-        HStack {
+-            let defaultReactionEmojis: [String] = [
+-                0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
+-            ].map { String(UnicodeScalar($0)!) }
+-
+-            ForEach(defaultReactionEmojis.indices, id: \.self) { index in
+-                EmojiBarItemView(
+-                    model: model,
+-                    emoji: defaultReactionEmojis[index],
+-                    presentingState: $presentingState,
+-                    elementOpacity: 0.0 as CGFloat,
+-                    delayIn: 0.03 * Double(index),
+-                    elementRotation: Angle(degrees: 45.0)
+-                )
+-            }
+-
+-        }
+-        .opacity(actionsOpacity)
+-        .padding(.vertical, 3)
+-        .padding(.horizontal, 8)
+-        .background(Color(UIColor.secondarySystemBackground))
+-        .cornerRadius(radius: 32, corners: .allCorners)
+-        .shadow(color: Color(model.shadowColor), radius: messageShadow)
+-    }
+-
+     func makeActions() -> some View {
+         VStack(spacing: 0) {
+             ForEach(model.menuItems) { item in
+@@ -310,10 +294,98 @@ struct ContextMenuView: View {
+         .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
+         .cornerRadius(radius: model.menuCornerRadius, corners: .allCorners)
+     }
++    
++    func makeEmojiBar() -> some View {
++        EmojiBarView(cxModel: model, presentingState: $presentingState)
++        .background(GeometryReader { geometry in
++            Color.clear
++                .onAppear {
++                    model.updateEmojiBarSize(size: geometry.size)
++                }
++        })
++    }
++}
++
++struct EmojiBarView: View {
++    @SwiftUI.StateObject var cxModel: ContextMenuVM
++    @SwiftUI.State private var backgroundOpacity: CGFloat = 0.0
++
++    @Binding var presentingState: ContextMenuPresentingState
++    @SwiftUI.State private var messageShadow: CGFloat = 0.00 // TODO pass from above
++
++    @SwiftUI.State private var emojiPaletteButtonOpacity: Double = 0
++    @SwiftUI.State private var emojiPaletteButtonOffset: Double = -12
++    
++    @SwiftUI.State private var isCompactModeEnabled = true
++    
++    var body: some View {
++        ScrollView(.horizontal) {
++            HStack {
++                // add the emojipalette button with a plus sign
++                ZStack {
++                    Button(action: {
++                        cxModel.isEmojiPickerPresented.toggle()
++                    }) {
++                        Image(systemName: "plus.circle.fill")
++                            .font(.largeTitle)
++                            .foregroundColor(Color(cxModel.presentingMessage.model.preferencesColor))
++                    }.emojiPicker(
++                        isPresented: $cxModel.isEmojiPickerPresented,
++                        selectedEmoji: $cxModel.selectedEmoji
++                    )
++                }
++                .opacity(emojiPaletteButtonOpacity)
++                .offset(x: emojiPaletteButtonOffset)
++                .onAppear(perform: {
++                    withAnimation(.easeOut(duration: 0.3).delay(0.1), {
++                        emojiPaletteButtonOffset = 8
++                        emojiPaletteButtonOpacity = 1
++                    })
++                })
++                
++                // then add defaults/favorites
++                ForEach(cxModel.preferredUserReactions.indices, id: \.self) { index in
++                    EmojiBarItemView(
++                        cxModel: cxModel,
++                        emoji: cxModel.preferredUserReactions[index],
++                        presentingState: $presentingState,
++                        elementOpacity: 1.0 as CGFloat,
++                        delayIn: 0.03 * Double(index),
++                        elementRotation: Angle(degrees: 45)
++                    )
++                }
++
++                // then add scrollable revokes not in the defaults
++                // TODO move this calc into cxModel
++                let uniqueAuthoredReactions: [String] = Array(Set(cxModel.presentingMessage.messageModel.reactionsModel.message.reactions.filter({ item in cxModel.myAuthoredReactionIds.contains(item.id) }).map({ item in item.content })).subtracting(cxModel.preferredUserReactions))
++                
++                ForEach(uniqueAuthoredReactions.indices, id: \.self) { index in
++                    EmojiBarItemView(
++                        cxModel: cxModel,
++                        emoji: uniqueAuthoredReactions[index],
++                        presentingState: $presentingState,
++                        elementOpacity: 1.0 as CGFloat,
++                        delayIn: 0.03 * Double(index),
++                        elementRotation: Angle(degrees: 45)
++                    )
++                }
++                Spacer().frame(width: 2)
++            }
++            .frame(height: cxModel.emojiBarHeight)
++        }
++        .frame(width: cxModel.emojiBarMaxWidth, height: cxModel.emojiBarHeight)
++        .opacity(1.0)
++        .padding(.vertical, 1)
++        .padding(.horizontal, 8)
++        .background(Color(UIColor.secondarySystemBackground))
++        .cornerRadius(radius: 32, corners: .allCorners)
++        .shadow(color: Color(cxModel.shadowColor), radius: messageShadow)
++    }
++
+ }
+ 
+ struct EmojiBarItemView: View {
+-    var model: ContextMenuVM
++    var cxModel: ContextMenuVM
+     var emoji: String
+     @Binding var presentingState: ContextMenuPresentingState
+     @SwiftUI.State var elementOpacity: CGFloat
+@@ -323,22 +395,23 @@ struct EmojiBarItemView: View {
+     @SwiftUI.State private var hightligthColor: UIColor = UIColor.defaultSwarmColor
+ 
+     var body: some View {
+-        let emojiActive = model.localUserAuthoredReaction(emoji: emoji)
++        let emojiActive = cxModel.localUserAuthoredReaction(emoji: emoji)
+         VStack {
+             Text(verbatim: emoji)
+                 .font(.title2)
+                 .opacity(elementOpacity)
+                 .rotationEffect(elementRotation)
+-                .padding(8)
++                .padding(.horizontal, 8)
++                .padding(.vertical, 1)
+                 .overlay(
+                     Rectangle()
+                         .fill(Color(hightligthColor))
+                         .opacity(emojiActive ? elementOpacity : 0)
+-                        .frame(width: enabledNotifierLength, height: 3, alignment: .center)
++                        .frame(width: enabledNotifierLength, height: 2.5, alignment: .center)
+                         .cornerRadius(8)
+-                        .offset(y: 20)
++                        .offset(y: 18)
+                         .onAppear(perform: {
+-                            hightligthColor = model.presentingMessage.model.preferencesColor
++                            hightligthColor = cxModel.presentingMessage.model.preferencesColor
+                             withAnimation(.spring(response: 0.4, dampingFraction: 0.3, blendDuration: 0.9).delay(delayIn + 0.5)) {
+                                 enabledNotifierLength = 20
+                             }
+@@ -351,18 +424,17 @@ struct EmojiBarItemView: View {
+                 DispatchQueue.main.async {
+                     switch emojiActive {
+                     case false:
+-                        model.sendReaction(value: emoji)
++                        cxModel.sendReaction(value: emoji)
+                     case true:
+                         let reactionMsgId: String =
+-                            model.presentingMessage.model.message.reactions.first(where: {
+-                                item in item.author == model.currentJamiAccountId && item.content == emoji
++                            cxModel.presentingMessage.model.message.reactions.first(where: {
++                                item in item.author == cxModel.currentJamiAccountId && item.content == emoji
+                             })!.id
+-                        model.revokeReaction(value: emoji, reactionId: reactionMsgId)
++                        cxModel.revokeReaction(value: emoji, reactionId: reactionMsgId)
+                     }
+                     presentingState = .dismissed
+                 }
+             }))
+-        .padding(4)
+         .onAppear {
+             withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(delayIn)) {
+                 elementOpacity = 1
+diff --git a/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift b/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift
+index 4916154f..b50f8ed6 100644
+--- a/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift
++++ b/Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift
+@@ -102,6 +102,11 @@ struct MessagesListView: View {
+                         self.shouldHideActiveKeyboard = false
+                     }
+                 }
++                .onReceive(NotificationCenter.default.publisher(for: .emojiReactionEvent)) { notification in
++                    if let event = notification.object as? EmojiReactionEvent {
++                        contextMenuPresentingState = .dismissed
++                    }
++                }
+                 .onAppear(perform: {
+                     screenHeight = UIScreen.main.bounds.size.height
+                 })
+@@ -350,3 +355,18 @@ func topVC() -> UIViewController? {
+ 
+     return nil
+ }
++struct EmojiReactionEvent {}
++
++extension Notification.Name {
++    static let emojiReactionEvent = Notification.Name("EmojiReactionEvent")
++}
++
++class EmojiReactionNotifier {
++    static let shared = EmojiReactionNotifier()
++    
++    private init() {}
++    
++    func notifyEmojiReaction(event: EmojiReactionEvent) {
++        NotificationCenter.default.post(name: .emojiReactionEvent, object: event)
++    }
++}
+diff --git a/Ring/Ring/Models/MessageModel.swift b/Ring/Ring/Models/MessageModel.swift
+index ab2056ae..e996e5c4 100644
+--- a/Ring/Ring/Models/MessageModel.swift
++++ b/Ring/Ring/Models/MessageModel.swift
+@@ -266,4 +266,8 @@ public class MessageModel {
+             self.editions.insert(MessageAction(withInfo: edition))
+         }
+     }
++
++    func reactionsMessageIdsBySender(accountId: String) -> [String] {
++        return Array(self.reactions.filter({ item in item.author == accountId }).map({ item in item.id }))
++    }
+ }
+diff --git a/TODO_KESS.md b/TODO_KESS.md
+new file mode 100644
+index 00000000..4bbb8006
+--- /dev/null
++++ b/TODO_KESS.md
+@@ -0,0 +1,5 @@
++TODO
++1. push this to gerrit for demo
++2. add emojibar close with `onChange(){}` function to `MCEmojiPicker`
++3. add fade-in animation to `MCEmojiPicker`
++4. ...
