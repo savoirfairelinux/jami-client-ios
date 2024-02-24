@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdbb47da_79ecb457",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-02-24T03:00:46Z",
+      "side": 1,
+      "message": "(for Monday) a demo if you want to check out the patch",
+      "revId": "c899d0e6e5013e33dd5d69718a8af6e8a5767132",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
