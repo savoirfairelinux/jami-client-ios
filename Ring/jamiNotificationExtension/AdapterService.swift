@@ -112,6 +112,9 @@ class AdapterService {
         guard let peerId = result?.keys.first,
               let type = result?.values.first else {
             return .unknown}
+        if type.contains("application/im-gitmessage-id") {
+            return PeerConnectionRequestType.gitMessage
+        }
         switch type {
         case "videoCall":
             return PeerConnectionRequestType.call(peerId: peerId, isVideo: true)
