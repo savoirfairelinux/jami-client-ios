@@ -350,12 +350,17 @@ class MessagesListVM: ObservableObject {
                 if let self = self, !event.isEmpty {
                     switch event["action"] {
                     case ReactionCommand.apply.toString():
-                        if let dat = event["data"], let mId = event["messageId"] {
+                        if let dat = event["data"], let mId = event["parentMessageId"] {
                             self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: dat, parentId: mId)
+                        } else {
+                            // TODO log issue invalid req
                         }
                     case ReactionCommand.revoke.toString():
                         if let rId = event["reactionId"] {
                             self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: rId)
+                        } else {
+                            // TODO log issue with invalid request
+                            print("KESS: invalid reacitonId")
                         }
                     default: break
                     }
