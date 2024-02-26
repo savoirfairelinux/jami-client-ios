@@ -31,6 +31,7 @@
 #define MSGPACK_DISABLE_LEGACY_NIL
 #import "opendht/crypto.h"
 #import "opendht/default_types.h"
+#import "dhtnet/fileutils.h"
 #import "yaml-cpp/yaml.h"
 
 #import "json/json.h"
@@ -63,6 +64,7 @@ NSString* const nameCache = @"namecache";
 NSString* const defaultNameServer = @"ns.jami.net";
 std::string const nameServerConfiguration = "RingNS.uri";
 NSString* const accountConfig = @"config.yml";
+constexpr auto ID_TIMEOUT = std::chrono::hours(24);
 
 std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 std::map<std::string, std::string> cachedNames;
@@ -263,7 +265,7 @@ std::map<std::string, std::string> nameServers;
             }
             return {};
         }
-        if (isMessageTreated(peerCR.id, [treatedMessagesPath UTF8String])) {
+        if (isTreated(peerCR.id, [treatedMessagesPath UTF8String])) {
             return {};
         }
 
@@ -727,6 +729,44 @@ fast_validate_len(const char* str, ssize_t max_len)
     }
 
     return p;
+}
+
+std::map<uint64_t, std::chrono::system_clock::time_point>
+load(const std::string& path)
+{
+    std::map<uint64_t, std::chrono::system_clock::time_point> valid_ids;
+    auto now = std::chrono::system_clock::now();
+    auto timeout = now - ID_TIMEOUT;
+
+    try {
+        std::ifstream file(path, std::ios::binary);
+        if (!file.is_open()) {
+            throw std::runtime_error("Unable to open file.");
+        }
+
+        msgpack::unpacker unp;
+        while (!file.eof()) {
+            unp.reserve_buffer(8 * 1024);
+            file.read(unp.buffer(), unp.buffer_capacity());
+            unp.buffer_consumed(file.gcount());
+
+            msgpack::unpacked result;
+            while (unp.next(result)) {
+                auto kv = result.get().as<std::pair<uint64_t, std::chrono::system_clock::time_point>>();
+                if (kv.second > timeout) {
+                    valid_ids.insert(std::move(kv));
+                }
+            }
+        }
+    } catch (const std::exception& e) {}
+
+    return valid_ids;
+}
+
+bool
+isTreated(uint64_t id, const std::string& path) {
+    auto ids = load(path);
+    return ids.find(id) != ids.end();
 }
 
 @end
