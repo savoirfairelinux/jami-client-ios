@@ -19,6 +19,7 @@
  */
 
 import SwiftUI
+import MCEmojiPicker
 
 enum ContextMenuPresentingState {
     case none
@@ -43,7 +44,7 @@ struct VisualEffect: UIViewRepresentable {
 }
 
 struct ContextMenuView: View {
-    var model: ContextMenuVM
+    @SwiftUI.StateObject var model: ContextMenuVM
     @Binding var presentingState: ContextMenuPresentingState
     // animations
     @SwiftUI.State private var blurAmount = 0.0
@@ -113,20 +114,24 @@ struct ContextMenuView: View {
                         Spacer()
                             .frame(height: model.defaultVerticalPadding)
                     }
-                    // actions (reply, fwd, etc.)
-                    HStack {
-                        if !model.isOurMsg! {
-                            Spacer()
-                                .frame(width: model.incomingMessageMarginSize)
+
+                    ZStack {
+                        // actions (reply, fwd, etc.)
+                        HStack {
+                            if !model.isOurMsg! {
+                                Spacer()
+                                    .frame(width: model.incomingMessageMarginSize)
+                            }
+                            makeActions()
+                                .opacity(actionsOpacity)
+                                .scaleEffect(actionsScale, anchor: model.actionsAnchor)
+                                .frame(width: model.menuSize.width)
+                            if model.isOurMsg! {
+                                Spacer()
+                                    .frame(width: 10)
+                            }
                         }
-                        makeActions()
-                            .opacity(actionsOpacity)
-                            .scaleEffect(actionsScale, anchor: model.actionsAnchor)
-                            .frame(width: model.menuSize.width)
-                        if model.isOurMsg! {
-                            Spacer()
-                                .frame(width: 10)
-                        }
+                        .frame(width: screenWidth, alignment: model.isOurMsg! ? .trailing : .leading)
                     }
                     .frame(width: UIScreen.main.bounds.size.width, alignment: model.isOurMsg! ? .trailing : .leading)
                 }
@@ -154,6 +159,7 @@ struct ContextMenuView: View {
                 cornerRadius = 0
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.42) {
+                model.isEmojiPickerPresented = false
                 presentingState = .dismissed
             }
         }
@@ -221,6 +227,7 @@ struct ContextMenuView: View {
                         cornerRadius = 0
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        model.isEmojiPickerPresented = false
                         presentingState = .dismissed
                     }
                 }
@@ -241,32 +248,6 @@ struct ContextMenuView: View {
                 .opacity(backgroundOpacity)
         }
         .edgesIgnoringSafeArea(.all)
-    }
-
-    func makeEmojiBar() -> some View {
-        HStack {
-            let defaultReactionEmojis: [String] = [
-                0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
-            ].map { String(UnicodeScalar($0)!) }
-
-            ForEach(defaultReactionEmojis.indices, id: \.self) { index in
-                EmojiBarItemView(
-                    model: model,
-                    emoji: defaultReactionEmojis[index],
-                    presentingState: $presentingState,
-                    elementOpacity: 0.0 as CGFloat,
-                    delayIn: 0.03 * Double(index),
-                    elementRotation: Angle(degrees: 45.0)
-                )
-            }
-
-        }
-        .opacity(actionsOpacity)
-        .padding(.vertical, 3)
-        .padding(.horizontal, 8)
-        .background(Color(UIColor.secondarySystemBackground))
-        .cornerRadius(radius: 32, corners: .allCorners)
-        .shadow(color: Color(model.shadowColor), radius: messageShadow)
     }
 
     func makeActions() -> some View {
@@ -310,35 +291,130 @@ struct ContextMenuView: View {
         .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
         .cornerRadius(radius: model.menuCornerRadius, corners: .allCorners)
     }
+
+    func makeEmojiBar() -> some View {
+        EmojiBarView(cxModel: model, presentingState: $presentingState)
+            .background(GeometryReader { geometry in
+                Color.clear
+                    .onAppear {
+                        model.updateEmojiBarSize(size: geometry.size)
+                    }
+            })
+    }
+}
+
+struct EmojiBarView: View {
+    @SwiftUI.StateObject var cxModel: ContextMenuVM
+    @SwiftUI.State private var backgroundOpacity: CGFloat = 0.0
+    @Binding var presentingState: ContextMenuPresentingState
+    @SwiftUI.State private var messageShadow: CGFloat = 0.00
+    @SwiftUI.State private var emojiPaletteButtonOpacity: Double = 0
+    @SwiftUI.State private var emojiPaletteButtonOffset: Double = -12
+
+    var emojipalette: some View {
+        ZStack {
+            Button(action: {
+                cxModel.isEmojiPickerPresented.toggle()
+            }) {
+                Image(systemName: "plus.circle.fill")
+                    .font(.largeTitle)
+                    .foregroundColor(Color(cxModel.presentingMessage.model.preferencesColor))
+            }.emojiPicker(
+                isPresented: $cxModel.isEmojiPickerPresented,
+                selectedEmoji: $cxModel.selectedEmoji
+            )
+        }
+        .opacity(emojiPaletteButtonOpacity)
+        .offset(x: emojiPaletteButtonOffset)
+        .onAppear(perform: {
+            cxModel.selectedEmoji = ""
+            withAnimation(.easeOut(duration: 0.3).delay(0.1), {
+                emojiPaletteButtonOffset = 8
+                emojiPaletteButtonOpacity = 1
+            })
+        })
+        .onChange(of: cxModel.selectedEmoji, perform: { newValue in
+            if newValue != "" {
+                cxModel.handleUpdatedReaction()
+                presentingState = .willDismissWithAction
+                presentingState = .dismissed
+            }
+        })
+    }
+
+    var body: some View {
+        ScrollView(.horizontal) {
+            HStack {
+                // add the emojipalette button with a plus sign
+                emojipalette
+                // then add defaults/favorites
+                ForEach(cxModel.preferredUserReactions.indices, id: \.self) { index in
+                    EmojiBarItemView(
+                        cxModel: cxModel,
+                        emoji: cxModel.preferredUserReactions[index],
+                        presentingState: $presentingState,
+                        elementOpacity: 1.0 as CGFloat,
+                        delayIn: 0.03 * Double(index),
+                        elementRotation: Angle(degrees: 45)
+                    )
+                }
+                // then add scrollable revokes not in the defaults
+                ForEach(cxModel.uniqueAuthoredReactions.indices, id: \.self) { index in
+                    EmojiBarItemView(
+                        cxModel: cxModel,
+                        emoji: cxModel.uniqueAuthoredReactions[index],
+                        presentingState: $presentingState,
+                        elementOpacity: 1.0 as CGFloat,
+                        delayIn: 0.03 * Double(index),
+                        elementRotation: Angle(degrees: 45)
+                    )
+                }
+                Spacer().frame(width: 2)
+            }
+            .frame(height: cxModel.emojiBarHeight)
+        }
+        .frame(width: cxModel.emojiBarMaxWidth, height: cxModel.emojiBarHeight)
+        .opacity(1.0)
+        .padding(.vertical, 1)
+        .padding(.horizontal, 8)
+        .background(Color(UIColor.secondarySystemBackground))
+        .cornerRadius(radius: 32, corners: .allCorners)
+        .shadow(color: Color(cxModel.shadowColor), radius: messageShadow)
+        .onAppear(perform: {
+            withAnimation(.easeOut(duration: 0.3)) {
+                messageShadow = 2
+            }
+        })
+    }
+
 }
 
 struct EmojiBarItemView: View {
-    var model: ContextMenuVM
+    var cxModel: ContextMenuVM
     var emoji: String
     @Binding var presentingState: ContextMenuPresentingState
     @SwiftUI.State var elementOpacity: CGFloat
     @SwiftUI.State var delayIn: Double
     @SwiftUI.State var elementRotation: Angle
     @SwiftUI.State private var enabledNotifierLength: CGFloat = 0
-    @SwiftUI.State private var hightligthColor: UIColor = UIColor.defaultSwarmColor
 
     var body: some View {
-        let emojiActive = model.localUserAuthoredReaction(emoji: emoji)
+        let emojiActive = cxModel.localUserAuthoredReaction(emoji: emoji)
         VStack {
             Text(verbatim: emoji)
                 .font(.title2)
                 .opacity(elementOpacity)
                 .rotationEffect(elementRotation)
-                .padding(8)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 1)
                 .overlay(
                     Rectangle()
-                        .fill(Color(hightligthColor))
+                        .fill(Color(cxModel.presentingMessage.model.preferencesColor))
                         .opacity(emojiActive ? elementOpacity : 0)
-                        .frame(width: enabledNotifierLength, height: 3, alignment: .center)
+                        .frame(width: enabledNotifierLength, height: 2.5, alignment: .center)
                         .cornerRadius(8)
-                        .offset(y: 20)
+                        .offset(y: 18)
                         .onAppear(perform: {
-                            hightligthColor = model.presentingMessage.model.preferencesColor
                             withAnimation(.spring(response: 0.4, dampingFraction: 0.3, blendDuration: 0.9).delay(delayIn + 0.5)) {
                                 enabledNotifierLength = 20
                             }
@@ -346,23 +422,15 @@ struct EmojiBarItemView: View {
                 )
         }
         .simultaneousGesture(
-            // handles adding or removing the default reactions from a message
+            // handles adding or removing the reaction from the ReactionRow for the displayed message
             TapGesture().onEnded({ _ in
                 DispatchQueue.main.async {
-                    switch emojiActive {
-                    case false:
-                        model.sendReaction(value: emoji)
-                    case true:
-                        let reactionMsgId: String =
-                            model.presentingMessage.model.message.reactions.first(where: {
-                                item in item.author == model.currentJamiAccountId && item.content == emoji
-                            })!.id
-                        model.revokeReaction(value: emoji, reactionId: reactionMsgId)
-                    }
+                    cxModel.selectedEmoji = emoji
+                    cxModel.isEmojiPickerPresented = false
+                    presentingState = .willDismissWithAction
                     presentingState = .dismissed
                 }
             }))
-        .padding(4)
         .onAppear {
             withAnimation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0.2).delay(delayIn)) {
                 elementOpacity = 1
