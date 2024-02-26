@@ -21,8 +21,12 @@
 import Foundation
 import SwiftUI
 import RxRelay
+import SwiftyBeaver
 
-class ContextMenuVM {
+class ContextMenuVM: ObservableObject {
+    
+    private let log = SwiftyBeaver.self
+    
     var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
     @Published var menuItems = [ContextualMenuItem]()
     var presentingMessage: MessageBubbleView! {
@@ -32,6 +36,8 @@ class ContextMenuVM {
             messsageAnchor = presentingMessage.model.message.incoming ? .bottomLeading : .bottomTrailing
             updateContextMenuSize()
             isOurMsg = !presentingMessage.model.message.incoming
+            myAuthoredReactionIds = presentingMessage.messageModel.message.reactionsMessageIdsBySender(accountId: currentJamiAccountId!)
+            uniqueAuthoredReactions = Array(Set(presentingMessage.messageModel.reactionsModel.message.reactions.filter({ item in myAuthoredReactionIds.contains(item.id) }).map({ item in item.content })).subtracting(preferredUserReactions))
         }
     }
     var messageFrame: CGRect = CGRect.zero {
@@ -65,9 +71,16 @@ class ContextMenuVM {
             isShortMsg = messageHeight < screenHeight / 4.0
         }
     }
+    
+    // TODO remove this var and just use emojiBarHeight
     var emojiVerticalPadding: CGFloat = 6
+    var emojiBarHeight: CGFloat = 68 {
+       didSet {
+           updateSizes()
+       }
+    }
+    var emojiBarMaxWidth: CGFloat = max(0, min(screenWidth - 20, 62 * 5))
 
-    var emojiBarHeight: CGFloat = 68
     var isShortMsg: Bool = true
     var incomingMessageMarginSize: CGFloat = 58
     var isOurMsg: Bool?
@@ -77,7 +90,38 @@ class ContextMenuVM {
     }
 
     var currentJamiAccountId: String?
+    var myAuthoredReactionIds: [String] = [] // list of MessageIds for local user's authored reactions
+    var preferredUserReactions: [String] = [
+        0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
+    ].map { String(UnicodeScalar($0)!) }
+    var uniqueAuthoredReactions: [String] = []
 
+    private var emojiQueued = false
+    @Published var selectedEmoji: String = "" {
+        didSet {
+            switch emojiQueued {
+            case false:
+                self.log.debug("ContextMenuVM: sending \(selectedEmoji)")
+                sendReaction(value: selectedEmoji)
+                // hide reaction view
+                EmojiReactionNotifier.shared.notifyEmojiReaction(event: .init())
+                // hide MCEmojiPicker
+                self.isEmojiPickerPresented = false
+                // clear the emoji from MCEmojiPicker
+                emojiQueued = true
+                selectedEmoji = ""
+                emojiQueued = false
+            case true:
+                // locked on emojiQueued... do nothing
+                return
+            }
+        }
+    }
+    @Published var isEmojiPickerPresented: Bool = false
+
+    var currScreenWidth = UIScreen.main.bounds.size.width // updates w screen rotation
+    var currScreenHeight = UIScreen.main.bounds.size.height // updates w screen rotation
+    
     func updateContextMenuSize() {
         let height: CGFloat = CGFloat(menuItems.count) * itemHeight + menuPadding * 2
         let fontAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]
@@ -92,6 +136,11 @@ class ContextMenuVM {
         let newHeight: CGFloat = min(height, UIScreen.main.bounds.height - screenPadding)
         let newWidth: CGFloat = min(width, UIScreen.main.bounds.width - screenPadding)
         menuSize = CGSize(width: newWidth, height: newHeight)
+    }
+    
+    func updateEmojiBarSize(size: CGSize) {
+        self.log.debug("ContentMenuVM: updated emojibarheight to \(size.height)")
+        emojiBarHeight = size.height
     }
 
     func updateSizes() {

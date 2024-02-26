@@ -102,6 +102,11 @@ struct MessagesListView: View {
                         self.shouldHideActiveKeyboard = false
                     }
                 }
+                .onReceive(NotificationCenter.default.publisher(for: .emojiReactionEvent)) { notification in
+                    if let event = notification.object as? EmojiReactionEvent {
+                        contextMenuPresentingState = .dismissed
+                    }
+                }
                 .onAppear(perform: {
                     screenHeight = UIScreen.main.bounds.size.height
                 })
@@ -349,4 +354,20 @@ func topVC() -> UIViewController? {
     }
 
     return nil
+}
+// stuff for hiding ContextMenuView after using MCEmojiPicker
+struct EmojiReactionEvent {}
+
+extension Notification.Name {
+    static let emojiReactionEvent = Notification.Name("EmojiReactionEvent")
+}
+
+class EmojiReactionNotifier {
+    static let shared = EmojiReactionNotifier()
+    
+    private init() {}
+    
+    func notifyEmojiReaction(event: EmojiReactionEvent) {
+        NotificationCenter.default.post(name: .emojiReactionEvent, object: event)
+    }
 }
