@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-
 //Log View
 "logView.title" = "రోగ నిర్ధారణ";
 "logView.description" = "రోగ నిర్ధారణ లాగ్ సెట్టింగులను తెరవండి";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "మీ ఖాతాను వలస చేయడంలో విఫలమైంది. మీరు మీ ఖాతాను మళ్లీ ప్రయత్నించవచ్చు లేదా తొలగించవచ్చు.";
 "migrateAccount.migrating" = "వలసలు.";
 "migrateAccount.migrateAnother" = "మరొక ఖాతాను బదిలీ చేయండి";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "Contribute";
+"aboutJami.feedback" = "Feedback";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+

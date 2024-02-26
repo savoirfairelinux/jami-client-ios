@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-
 //Log View
 "logView.title" = "நோயறிதல்";
 "logView.description" = "திறந்த நோயறிதல் பதிவு அமைப்புகள்";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "உங்கள் கணக்கை நகர்த்த முடியவில்லை. நீங்கள் மீண்டும் முயற்சி செய்யலாம் அல்லது உங்கள் கணக்கை நீக்கலாம்.";
 "migrateAccount.migrating" = "புலம்பெயர்.";
 "migrateAccount.migrateAnother" = "மற்றொரு கணக்கை நகர்த்தவும்";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "Contribute";
+"aboutJami.feedback" = "Feedback";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+

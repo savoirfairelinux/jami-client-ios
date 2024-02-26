@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-
 //Log View
 "logView.title" = "Diagnostik";
 "logView.description" = "Buka pengaturan log diagnostik";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "Gagal memigrasikan akun Anda. Anda dapat mencoba kembali atau menghapus akun Anda.";
 "migrateAccount.migrating" = "Memigrasikan...";
 "migrateAccount.migrateAnother" = "Migrasi akun lainnya";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "Contribute";
+"aboutJami.feedback" = "Feedback";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+

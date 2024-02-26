@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Campaña de doazóns";
 "generalSettings.enableDonationCampaign" = "Activar campaña de doazóns";
 
-
 //Log View
 "logView.title" = "Diagnósticos";
 "logView.description" = "Abrir axustes do rexistro dos diagnósticos";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "Non puido migrar a súa conta. Pode intentar de novo ou borrar a súa conta.";
 "migrateAccount.migrating" = "Migrando...";
 "migrateAccount.migrateAnother" = "Migración a outra conta";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "Contribute";
+"aboutJami.feedback" = "Feedback";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+
