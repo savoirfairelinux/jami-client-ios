@@ -324,4 +324,8 @@ public class MessageModel {
                 return false
         }
     }
+
+    func reactionsMessageIdsBySender(jamiId: String) -> [String] {
+        return Array(self.reactions.filter({ item in item.author == jamiId }).map({ item in item.id }))
+    }
 }

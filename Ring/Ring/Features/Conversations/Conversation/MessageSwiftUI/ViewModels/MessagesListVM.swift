@@ -27,6 +27,7 @@ import RxSwift
 import RxRelay
 import RxCocoa
 import SwiftUI
+import SwiftyBeaver
 
 enum MessageInfo: State {
     case updateAvatar(jamiId: String)
@@ -116,6 +117,7 @@ class MessagesListVM: ObservableObject {
     @Published var shouldShowMap: Bool = false
     @Published var coordinates = [LocationSharingAnnotation]()
     @Published var locationSharingiewModel: LocationSharingViewModel = LocationSharingViewModel()
+    private let log = SwiftyBeaver.self
     var contactAvatar: UIImage = UIImage()
     var currentAccountAvatar: UIImage = UIImage()
     var myContactsLocation: CLLocationCoordinate2D?
@@ -369,12 +371,16 @@ class MessagesListVM: ObservableObject {
                 if let self = self, !event.isEmpty {
                     switch event["action"] {
                     case ReactionCommand.apply.toString():
-                        if let dat = event["data"], let mId = event["messageId"] {
+                        if let dat = event["data"], let mId = event["parentMessageId"] {
                             self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: dat, parentId: mId)
+                        } else {
+                            log.error("[MessagesListVM] Invalid data provided while trying to add a reaction a message.")
                         }
                     case ReactionCommand.revoke.toString():
                         if let rId = event["reactionId"] {
                             self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: rId)
+                        } else {
+                            log.error("[MessagesListVM] Invalid message ID provided while trying to revoke a reaction from a message.")
                         }
                     default: break
                     }
