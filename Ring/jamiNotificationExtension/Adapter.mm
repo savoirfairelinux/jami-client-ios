@@ -63,6 +63,7 @@ NSString* const nameCache = @"namecache";
 NSString* const defaultNameServer = @"ns.jami.net";
 std::string const nameServerConfiguration = "RingNS.uri";
 NSString* const accountConfig = @"config.yml";
+constexpr auto ID_TIMEOUT = std::chrono::hours(24);
 
 std::map<std::string, std::shared_ptr<CallbackWrapperBase>> confHandlers;
 std::map<std::string, std::string> cachedNames;
@@ -390,28 +391,36 @@ std::string getNameServer(std::string accountId) {
     val <<= 6; \
     val |= (*(unsigned char*) p) & 0x3f;
 
-template<typename ID = dht::Value::Id>
 bool
-isMessageTreated(ID messageId, const std::string& path)
+isMessageTreated(uint64_t id, const std::string& path)
 {
-    std::ifstream file = std::ifstream(path, std::ios_base::in);
-    if (!file.is_open()) {
-        return false;
-    }
-    std::set<ID, std::less<>> treatedMessages;
-    std::string line;
-    while (std::getline(file, line)) {
-        if constexpr (std::is_same<ID, std::string>::value) {
-            treatedMessages.emplace(std::move(line));
-        } else if constexpr (std::is_integral<ID>::value) {
-            ID vid;
-            if (auto [p, ec] = std::from_chars(line.data(), line.data() + line.size(), vid, 16);
-                ec == std::errc()) {
-                treatedMessages.emplace(vid);
+    std::map<uint64_t, std::chrono::system_clock::time_point> valid_ids;
+    auto now = std::chrono::system_clock::now();
+    auto timeout = now - ID_TIMEOUT;
+
+    try {
+        std::ifstream file(path, std::ios::binary);
+        if (!file.is_open()) {
+            throw std::runtime_error("Unable to open file.");
+        }
+
+        msgpack::unpacker unp;
+        while (!file.eof()) {
+            unp.reserve_buffer(8 * 1024);
+            file.read(unp.buffer(), unp.buffer_capacity());
+            unp.buffer_consumed(file.gcount());
+
+            msgpack::unpacked result;
+            while (unp.next(result)) {
+                auto kv = result.get().as<std::pair<uint64_t, std::chrono::system_clock::time_point>>();
+                if (kv.second > timeout) {
+                    valid_ids.insert(std::move(kv));
+                }
             }
         }
-    }
-    return treatedMessages.find(messageId) != treatedMessages.end();
+    } catch (const std::exception& e) {}
+
+    return valid_ids.find(id) != valid_ids.end();
 }
 
 std::string
