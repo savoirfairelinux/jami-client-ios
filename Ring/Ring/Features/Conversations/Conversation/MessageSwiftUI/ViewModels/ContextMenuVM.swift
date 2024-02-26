@@ -21,8 +21,12 @@
 import Foundation
 import SwiftUI
 import RxRelay
+import SwiftyBeaver
 
-class ContextMenuVM {
+class ContextMenuVM: ObservableObject {
+    
+    private let log = SwiftyBeaver.self
+    
     var sendEmojiUpdate = BehaviorRelay(value: [String: String]())
     @Published var menuItems = [ContextualMenuItem]()
     var presentingMessage: MessageBubbleView! {
@@ -32,6 +36,12 @@ class ContextMenuVM {
             messsageAnchor = presentingMessage.model.message.incoming ? .bottomLeading : .bottomTrailing
             updateContextMenuSize()
             isOurMsg = !presentingMessage.model.message.incoming
+            if let currentAccountId = currentJamiAccountId {
+                myAuthoredReactionIds = presentingMessage.messageModel.message.reactionsMessageIdsBySender(accountId: currentAccountId)
+            } else {
+                log.warning("[ContextMenu] Error loading the current Jami ID for authoring reactions.")
+            }
+            uniqueAuthoredReactions = Array(Set(presentingMessage.messageModel.reactionsModel.message.reactions.filter({ item in myAuthoredReactionIds.contains(item.id) }).map({ item in item.content })).subtracting(preferredUserReactions))
         }
     }
     var messageFrame: CGRect = CGRect.zero {
@@ -65,9 +75,12 @@ class ContextMenuVM {
             isShortMsg = messageHeight < screenHeight / 4.0
         }
     }
+    
+    // TODO remove this var and just use emojiBarHeight
     var emojiVerticalPadding: CGFloat = 6
-
     var emojiBarHeight: CGFloat = 68
+    var emojiBarMaxWidth: CGFloat = max(0, min(screenWidth - 20, 62 * 5))
+
     var isShortMsg: Bool = true
     var incomingMessageMarginSize: CGFloat = 58
     var isOurMsg: Bool?
@@ -77,6 +90,39 @@ class ContextMenuVM {
     }
 
     var currentJamiAccountId: String?
+    var myAuthoredReactionIds: [String] = [] // list of MessageIds for local user's authored reactions
+    var preferredUserReactions: [String] = [
+        0x1F44D, 0x1F44E, 0x1F606, 0x1F923, 0x1F615
+    ].map { String(UnicodeScalar($0)!) }
+    var uniqueAuthoredReactions: [String] = [] // list of reaction (values, not msgId) for local user that excludes defaults
+                                               // using a [String] ensures multi-character emoji support (as opposed to String)
+
+    private var emojiQueued = false { // whether or not an emoji reaction needs to be sent to Jami Core
+        didSet {
+            // TODO maybe move logic here from selectedEmoji::didSet
+        }
+    }
+    @Published var selectedEmoji: String = "" {
+        didSet {
+            switch emojiQueued {
+            case false:
+                self.log.debug("ContextMenuVM: sending \(selectedEmoji)")
+                sendReaction(value: selectedEmoji)
+                // hide reaction view
+                EmojiReactionNotifier.shared.notifyEmojiReaction(event: .init())
+                // hide MCEmojiPicker
+                self.isEmojiPickerPresented = false
+                // clear the emoji from MCEmojiPicker
+                emojiQueued = true
+                selectedEmoji = ""
+                emojiQueued = false
+            case true:
+                // locked on emojiQueued... do nothing
+                return
+            }
+        }
+    }
+    @Published var isEmojiPickerPresented: Bool = false
 
     func updateContextMenuSize() {
         let height: CGFloat = CGFloat(menuItems.count) * itemHeight + menuPadding * 2
@@ -92,6 +138,11 @@ class ContextMenuVM {
         let newHeight: CGFloat = min(height, UIScreen.main.bounds.height - screenPadding)
         let newWidth: CGFloat = min(width, UIScreen.main.bounds.width - screenPadding)
         menuSize = CGSize(width: newWidth, height: newHeight)
+    }
+    
+    func updateEmojiBarSize(size: CGSize) {
+        self.log.debug("ContentMenuVM: updated emojibarheight to \(size.height)")
+        emojiBarHeight = size.height
     }
 
     func updateSizes() {
@@ -130,11 +181,27 @@ class ContextMenuVM {
         }
     }
 
+    func revokeReactionForCurrentUser(value: String) {
+        if let msg = self.presentingMessage {
+            if let reactionMsg: MessageAction =
+                presentingMessage.model.message.reactions.first(where: {
+                    item in item.author == currentJamiAccountId && item.content == value
+                }) {
+                self.sendEmojiUpdate.accept(["reactionId": reactionMsg.id, "author": reactionMsg.author, "action": ReactionCommand.revoke.toString()])
+            } else {
+                log.warning("[ContextMenu] Failed to find and revoke reaction based on messageId.")
+            }
+        }
+    }
+    
+    // unused
+    /*
     func revokeReaction(value: String, reactionId: String) {
         if let msg = self.presentingMessage {
             self.sendEmojiUpdate.accept(["reactionId": reactionId, "author": msg.messageModel.message.authorId, "data": value, "action": ReactionCommand.revoke.toString()])
         }
     }
+    */
 
     func localUserAuthoredReaction(emoji: String) -> Bool {
         if let sender = self.currentJamiAccountId {

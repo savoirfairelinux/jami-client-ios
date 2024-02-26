@@ -354,8 +354,8 @@ class MessagesListVM: ObservableObject {
                             self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: dat, parentId: mId)
                         }
                     case ReactionCommand.revoke.toString():
-                        if let rId = event["reactionId"] {
-                            self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: rId)
+                        if let rId = event["reactionId"], uId = event["author"] {
+                            self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: uId, message: "", parentId: rId)
                         }
                     default: break
                     }
