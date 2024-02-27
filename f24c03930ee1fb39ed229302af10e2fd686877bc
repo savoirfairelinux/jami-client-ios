@@ -16,6 +16,363 @@
       "message": "for review and merge",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69a17d71_2ac75334",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "use soft unwrap for currentJamiAccountId",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e343588_24909f94",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "do we need updateSizes() when changing emojiBarHeight?",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0245137b_40d0f286",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "add comment what is uniqueAuthoredReactions",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dd03071_d381cc21",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "what is the purpose of emojiQueued?",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ec0cdc_87c95b87",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "context menu presentation should be handled by contextMenuPresentingState, we do not need additional notifications",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "847614da_44671172",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "why do we need this?",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68892a2f_300610f2",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa25de10_7e88618a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c530ee9f_02ec428b",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "UIScreen.main.bounds.size.width",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73657943_d18dcb7f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "commented code",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3867f184_0979f996",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "we do not need this, we implicitly set EmojiBarView height to emojiBarHeight. So geometry will just return emojiBarHeight + padding",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92c72075_fb318010",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "elementOpacity always 1, do we need it?",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "485451c8_882bd683",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "elementOpacity always 1, do we need it?",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "635d74bd_1cc2705a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "we could observe cxModel.selectedEmoji changed, to check when context menu should be hidden",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ddb7dc_e49c03b2",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "opacity by default is 1",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd12a8d8_c5c5c5eb",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "Overlaying with a constant offset number will not work for different font sizes. It would be better to use two elements in a VStack so that the padding is always respected.",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eaf8feb_7bed0bbf",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "it should be done in the view model",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63bd7583_3d905180",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "first we need to call presentingState \u003d .willDismiss, so view could handle keyboard if need",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec907c9e_1b95f51a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "we only should use contextMenuPresentingState to manage context menu presentation.",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "066a36ba_93c78f7f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "not need",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c812c808_a977057d",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-02-27T14:15:42Z",
+      "side": 1,
+      "message": "it should jamiId, not accountId",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
