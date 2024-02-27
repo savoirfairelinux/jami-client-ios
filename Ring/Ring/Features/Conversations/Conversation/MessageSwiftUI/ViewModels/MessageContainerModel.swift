@@ -173,10 +173,7 @@ class MessageContainerModel: Identifiable {
             if self.stackViewModel.shouldDisplayName && self.message.incoming {
                 self.stackViewModel.username = name
             }
-            if self.message.type == .contact && self.message.incoming {
-                self.contactViewModel.username = name
-            }
-
+            self.contactViewModel.updateUsername(name: name, jamiId: jamiId)
             if self.replyTarget.target != nil {
                 self.replyTarget.updateUsername(name: name, jamiId: jamiId)
             }

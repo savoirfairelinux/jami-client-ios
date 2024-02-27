@@ -42,5 +42,8 @@ struct ContactMessageView: View {
         }
         .padding(.horizontal, model.inset)
         .frame(minHeight: model.height)
+        .onAppear {
+            model.updateContact()
+        }
     }
 }

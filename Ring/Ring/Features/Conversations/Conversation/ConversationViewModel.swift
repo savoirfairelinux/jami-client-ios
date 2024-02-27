@@ -280,11 +280,19 @@ class ConversationViewModel: Stateable, ViewModel {
             .disposed(by: self.disposeBag)
     }
 
+    private func buildLastDisplayMessge(message: MessageModel) -> String {
+        if message.type != .contact || !message.incoming {
+            return message.content
+        }
+        let name = ((self.displayName.value ?? "").isEmpty ? self.userName.value : self.displayName.value) ?? ""
+        return name + " " + message.content
+    }
+
     private func subscribeLastMessagesUpdate() {
         conversation.value.newMessages
             .subscribe { [weak self] _ in
                 guard let self = self, let lastMessage = self.conversation.value.lastMessage else { return }
-                self.lastMessage.accept(lastMessage.content)
+                self.lastMessage.accept(buildLastDisplayMessge(message: lastMessage))
                 let lastMessageDate = lastMessage.receivedDate
                 let dateToday = Date()
                 var dateString = ""

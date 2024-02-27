@@ -37,10 +37,7 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
     var message: MessageModel
     var username = "" {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.content = self.username + " " + self.message.content
-            }
+            self.content = self.username + " " + self.message.content
         }
     }
     var infoState: PublishSubject<State>
@@ -57,7 +54,10 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
             self.styling.textFont = self.styling.secondaryFont
             self.styling.textColor = self.styling.defaultSecondaryTextColor
         }
-        if message.type == .contact && message.incoming {
+    }
+
+    func updateContact() {
+        if message.type == .contact {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             self.infoState.onNext(MessageInfo.updateAvatar(jamiId: jamiId))
             self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
@@ -69,5 +69,11 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
             guard let self = self else { return }
             self.borderColor = self.message.type != .initial ? Color(color) : Color(UIColor.clear)
         }
+    }
+
+    func updateUsername(name: String, jamiId: String) {
+        let jamiIdForMessage = message.uri.isEmpty ? message.authorId : message.uri
+        guard jamiIdForMessage == jamiId, !name.isEmpty else { return }
+        self.username = name
     }
 }
