@@ -44,6 +44,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     private let sipAccountCredentialsCell = "sipAccountCredentialsCell"
     private let jamiIDCell = "jamiIDCell"
+    private let turnCell = "turnCell"
     private let jamiUserNameCell = "jamiUserNameCell"
     private let accountStateCell = "accountStateCell"
     var loadingViewPresenter = LoadingViewPresenter()
@@ -67,6 +68,12 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                          selector: #selector(preferredContentSizeChanged(_:)),
                          name: UIContentSizeCategory.didChangeNotification,
                          object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleContentSizeCategoryDidChange),
+            name: UIContentSizeCategory.didChangeNotification,
+            object: nil
+        )
     }
 
     @objc
@@ -781,14 +788,16 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     func configureTurnCell(cellType: SettingsSection.SectionRow,
                            value: String) -> UITableViewCell {
-        let cell = DisposableCell(style: .value1, reuseIdentifier: accountStateCell)
-        cell.selectionStyle = .none
         let textField = UITextField()
-        textField.tag = self.sipCredentialsTAG
         textField.font = UIFont.preferredFont(forTextStyle: .callout)
         textField.returnKeyType = .done
         textField.text = value
         textField.sizeToFit()
+
+        let style: UITableViewCell.CellStyle = self.settingsTable.frame.width - self.connectivityMargin - 40 < textField.frame.size.width ? .subtitle : .value1
+
+        let cell = EditableDetailTableViewCell(style: style, reuseIdentifier: turnCell)
+        cell.selectionStyle = .none
         textField.rx.controlEvent(.editingDidEndOnExit)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
@@ -830,33 +839,13 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.sizeToFit()
         cell.sizeToFit()
-        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
-        cell.detailTextLabel?.textColor = UIColor.clear
-
-        var frame = CGRect(x: self.connectivityMargin, y: 0,
-                           width: self.settingsTable.frame.width - self.connectivityMargin,
-                           height: cell.frame.height)
-        if cell.isRightToLeft {
-            frame = CGRect(x: 0, y: 0,
-                           width: self.settingsTable.frame.width - self.connectivityMargin - 10,
-                           height: cell.frame.height)
-        }
-
-        if self.settingsTable.frame.width - self.connectivityMargin < textField.frame.size.width {
-            let origin = CGPoint(x: 10, y: cell.textLabel!.frame.size.height + 25)
-            let size = textField.frame.size
-            frame.origin = origin
-            frame.size = size
-            cell.detailTextLabel?.text = value
-        } else {
-            cell.detailTextLabel?.text = ""
-        }
-        cell.detailTextLabel?.sizeToFit()
-        textField.frame = frame
-        cell.contentView.addSubview(textField)
-        cell.sizeToFit()
+        cell.setEditText(withTitle: value)
 
         return cell
+    }
+
+    @objc func handleContentSizeCategoryDidChange(notification: Notification) {
+        self.settingsTable.reloadData()
     }
 
     func configureSipCredentialsCell(cellType: SettingsSection.SectionRow,

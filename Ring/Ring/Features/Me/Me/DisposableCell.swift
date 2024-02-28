@@ -30,3 +30,37 @@ class DisposableCell: UITableViewCell {
         self.disposeBag = DisposeBag()
     }
 }
+
+class EditableDetailTableViewCell: DisposableCell {
+    let editableTextField = UITextField()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupTextField()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    private func setupTextField() {
+        editableTextField.font = UIFont.preferredFont(forTextStyle: .callout)
+        editableTextField.returnKeyType = .done
+        self.contentView.addSubview(editableTextField)
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        detailTextLabel?.textColor = .clear
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let detailTextFrame = detailTextLabel?.frame {
+            editableTextField.frame = detailTextFrame
+        }
+    }
+
+    func setEditText(withTitle title: String) {
+        detailTextLabel?.text = title
+        editableTextField.text = title
+    }
+}
