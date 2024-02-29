@@ -93,7 +93,7 @@ public class MessageModel {
     /// jamiId for sender. For outgoing message authorId is empty
     var authorId: String = ""
     var uri: String = ""
-    var status: MessageStatus = .unknown
+    var status: MessageStatus = .sending
     var transferStatus: DataTransferStatus = .unknown
     var incoming: Bool
     var parentId: String = ""
@@ -104,6 +104,7 @@ public class MessageModel {
     var parents = [String]()
     var reactions = Set<MessageAction>()
     var editions = Set<MessageAction>()
+    var statusForParticipnt = [String: MessageStatus]()
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -121,7 +122,29 @@ public class MessageModel {
         for edition in swarmMessage.editions {
             self.editions.insert(MessageAction(withInfo: edition))
         }
+
+        self.updateStatus(with: swarmMessage, accountJamiId: accountJamiId)
     }
+
+    func updateStatus(with swarmMessage: SwarmMessageWrap, accountJamiId: String) {
+        let filteredStatus = swarmMessage.status.filter { $0.key != accountJamiId }
+
+        for messageStatus in filteredStatus {
+            if let status = MessageStatus(rawValue: messageStatus.value.int32Value) {
+                statusForParticipnt[messageStatus.key] = status
+            }
+        }
+
+        for status in filteredStatus.values {
+            if status.int32Value == MessageStatus.displayed.rawValue {
+                self.status = .displayed
+                return
+            } else if self.status != .displayed && status.int32Value == MessageStatus.sent.rawValue {
+                self.status = .sent
+            }
+        }
+    }
+
     // swiftlint:disable:next cyclomatic_complexity
     init(withInfo info: [String: String], accountJamiId: String) {
         if let interactionId = info[MessageAttributes.interactionId.rawValue] {
@@ -255,7 +278,7 @@ public class MessageModel {
         return !self.editions.isEmpty
     }
 
-    func messageUpdated(message: SwarmMessageWrap) {
+    func messageUpdated(message: SwarmMessageWrap, accountJamiId: String) {
         self.editions = Set<MessageAction>()
         self.reactions = Set<MessageAction>()
         self.updateFrom(info: message.body)
@@ -265,5 +288,13 @@ public class MessageModel {
         for edition in message.editions {
             self.editions.insert(MessageAction(withInfo: edition))
         }
+        self.updateStatus(with: message, accountJamiId: accountJamiId)
+    }
+
+    func messageStatusUpdated(status: MessageStatus, messageId: String, jamiId: String) {
+            self.statusForParticipnt[jamiId] = status
+            if status.rawValue <= MessageStatus.displayed.rawValue && self.status.rawValue < status.rawValue {
+                self.status = status
+            }
     }
 }

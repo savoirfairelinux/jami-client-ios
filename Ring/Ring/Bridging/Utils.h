@@ -51,5 +51,6 @@ typedef struct {
                      angle:(int)angle;
 +(UIImageOrientation)uimageOrientationFromRotation:(double)rotation;
 +(CGImagePropertyOrientation)ciimageOrientationFromRotation:(double)rotation;
++ (NSMutableDictionary*)mapToDictionnaryWithInt:(const std::map<std::string, int32_t>&)map;
 
 @end
