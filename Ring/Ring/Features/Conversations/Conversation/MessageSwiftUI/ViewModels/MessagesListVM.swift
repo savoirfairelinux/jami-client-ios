@@ -157,6 +157,7 @@ class MessagesListVM: ObservableObject {
     // dictionary of message id and array of participants for whom the message is last read
     var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
                                        dictionary: [String: [String: UIImage]]())
+    var lastSent: MessageContainerModel?
     var conversation: ConversationModel {
         didSet {
             messagesDisposeBag = DisposeBag()
@@ -209,7 +210,6 @@ class MessagesListVM: ObservableObject {
     init (injectionBag: InjectionBag, conversation: ConversationModel, transferHelper: TransferHelper, bestName: Observable<String>) {
         defer {
             self.conversation = conversation
-            self.subscribeMessagesStatus()
             self.subscribeSwarmPreferences()
             self.updateColorPreference()
             self.subscribeUserAvatarForLocationSharing()
@@ -375,6 +375,8 @@ class MessagesListVM: ObservableObject {
 
     func messageUpdated(messageId: String) {
         guard let message = self.getMessage(messageId: messageId) else { return }
+        self.updateLastRead(message: message)
+        updateLastDelivered(message: message)
         message.messageUpdated()
         self.computeSequencing()
     }
@@ -423,10 +425,57 @@ class MessagesListVM: ObservableObject {
         } else {
             self.messagesModels.insert(container, at: 0)
         }
+        self.updateLastRead(message: container)
+        self.updateLastDelivered(message: container)
         if newMessage.isReply() {
             self.receiveReply(newMessage: container, fromHistory: fromHistory)
         }
         return true
+    }
+
+    func updateLastDelivered(message: MessageContainerModel) {
+        if message.message.type != .fileTransfer && message.message.type != .text { return }
+        if !message.message.incoming && (message.message.status == .displayed || message.message.status == .sent || message.message.transferStatus == .success) {
+            if let lastSent = self.lastSent {
+                if let index = self.messagesModels.firstIndex(where: { messageModel in
+                    messageModel.id == message.id
+                }), let lastSentIndex = self.messagesModels.firstIndex(where: { messageModel in
+                    messageModel.id == lastSent.id
+                }), index < lastSentIndex {
+                    lastSent.displayLastSent(state: false)
+                    self.lastSent = message
+                    self.lastSent!.displayLastSent(state: true)
+                }
+            } else {
+                self.lastSent = message
+                self.lastSent!.displayLastSent(state: true)
+            }
+        }
+    }
+
+    private func updateLastRead(message: MessageContainerModel, participantId: String) {
+        guard !message.message.incoming, message.message.status == .displayed else { return }
+
+        if let currentLastReadMessageId = self.lastReadMessageForParticipant.get(key: participantId) as? String,
+           let currentIndex = self.messagesModels.firstIndex(where: { $0.id == currentLastReadMessageId }),
+           let newIndex = self.messagesModels.firstIndex(where: { $0.id == message.id }), newIndex < currentIndex,
+           let currentRead = self.getMessage(messageId: currentLastReadMessageId) {
+            updateLastReadForParticipant(message: message, participantId: participantId)
+            self.updateLastRead(messageId: currentLastReadMessageId, messageModel: currentRead)
+        } else if self.lastReadMessageForParticipant.get(key: participantId) == nil {
+            updateLastReadForParticipant(message: message, participantId: participantId)
+        }
+    }
+
+    private func updateLastRead(message: MessageContainerModel) {
+        for status in message.message.statusForParticipnt {
+            updateLastRead(message: message, participantId: status.key)
+        }
+    }
+
+    private func updateLastReadForParticipant(message: MessageContainerModel, participantId: String) {
+        self.lastReadMessageForParticipant.set(value: message.id, for: participantId)
+        self.updateLastRead(messageId: message.id, messageModel: message)
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -594,39 +643,6 @@ class MessagesListVM: ObservableObject {
     }
 
     // MARK: last read message
-
-    private func subscribeMessagesStatus() {
-        self.conversationService
-            .sharedResponseStream
-            .filter({ messageUpdateEvent in
-                return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged
-            })
-            .subscribe(onNext: { [weak self] messageUpdateEvent in
-                if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {
-                    if status == .displayed, let jamiId: String = messageUpdateEvent.getEventInput(.uri),
-                       let messageId: String = messageUpdateEvent.getEventInput(.messageId),
-                       let localParticipant = self?.conversation.getLocalParticipants(),
-                       localParticipant.jamiId != jamiId {
-                        var currentid: String?
-                        if let current = self?.lastReadMessageForParticipant.get(key: jamiId) as? String {
-                            currentid = current
-                        }
-                        self?.lastReadMessageForParticipant.set(value: messageId, for: jamiId)
-                        if let model = self?.messagesModels.filter({ message in
-                            message.id == messageId
-                        }).first, !model.message.incoming {
-                            self?.updateLastRead(messageId: messageId, messageModel: model)
-                        }
-                        if let currentid = currentid, let message1 = self?.messagesModels.filter({ message2 in
-                            message2.id == currentid
-                        }).first, !message1.message.incoming {
-                            self?.updateLastRead(messageId: message1.id, messageModel: message1)
-                        }
-                    }
-                }
-            })
-            .disposed(by: self.disposeBag)
-    }
 
     private func updateLastDisplayed() {
         for participant in self.conversation.getParticipants() {
@@ -855,12 +871,13 @@ class MessagesListVM: ObservableObject {
         }) as? [String: String] else { return }
         var images = [String: UIImage]()
         lastRead.set(value: images, for: messageId)
+        var contacts = [String]()
         for participant in participants {
             if let avatar = self.avatars.get(key: participant.key) as? UIImage {
                 images[participant.key] = avatar
             } else {
                 images[participant.key] = UIImage()
-                self.getInformationForContact(id: participant.key, message: messageModel)
+                contacts.append(participant.key)
             }
         }
         lastRead.set(value: images, for: messageId)
@@ -869,6 +886,9 @@ class MessagesListVM: ObservableObject {
         }
         let newValue = values.isEmpty ? nil : values
         messageModel.updateRead(avatars: newValue)
+        for contact in contacts {
+            self.getInformationForContact(id: contact, message: messageModel)
+        }
     }
 }
 
