@@ -52,6 +52,19 @@ extern "C" {
   return resDictionnary;
 }
 
++ (NSMutableDictionary*)mapToDictionnaryWithInt:(const std::map<std::string, int32_t>&)map
+{
+    NSMutableDictionary* resDictionnary = [NSMutableDictionary new];
+
+    std::for_each(map.begin(), map.end(), ^(std::pair<std::string, int32_t> keyValue) {
+        id key = [NSString stringWithUTF8String:keyValue.first.c_str()];
+        id value = [NSNumber numberWithInt:keyValue.second];
+        [resDictionnary setObject:value forKey:key];
+    });
+
+    return resDictionnary;
+}
+
 + (std::map<std::string, std::string>)dictionnaryToMap:(NSDictionary*)dict {
   std::map<std::string, std::string> resMap;
   for (id key in dict)

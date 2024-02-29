@@ -113,19 +113,6 @@ class MessageViewModel {
             self.conversationsService
                 .sharedResponseStream
                 .filter({ [weak self] messageUpdateEvent in
-                    return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged &&
-                        messageUpdateEvent.getEventInput(.messageId) == self?.messageId &&
-                        !(self?.message.incoming ?? false)
-                })
-                .subscribe(onNext: { [weak self] messageUpdateEvent in
-                    if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {
-                        self?.status.onNext(status)
-                    }
-                })
-                .disposed(by: self.disposeBag)
-            self.conversationsService
-                .sharedResponseStream
-                .filter({ [weak self] messageUpdateEvent in
                     let event = messageUpdateEvent.eventType == ServiceEventType.lastDisplayedMessageUpdated
                     let message = messageUpdateEvent
                         .getEventInput(.oldDisplayedMessage) == self?.message.id ||
