@@ -86,41 +86,55 @@ struct MessageRowView: View {
             } else if model.incoming {
                 HStack(alignment: .bottom) {
                     if let avatar = model.avatarImage {
+                        Spacer()
+                            .frame(width: 10)
                         Image(uiImage: avatar)
                             .resizable()
                             .scaledToFill()
                             .frame(width: 30, height: 30)
                             .cornerRadius(15)
+                        Spacer()
+                            .frame(width: 10)
                     } else {
                         Spacer()
                             .frame(width: model.leadingSpace)
                     }
-                    Spacer()
-                        .frame(width: 10)
                     MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
                 }.padding(.trailing, 50)
             } else {
-                HStack(alignment: .bottom) {
+                HStack(alignment: .bottom, spacing: 2) {
                     Spacer()
                     MessageStackView(messageModel: messageModel, onLongPress: onLongPress, showReactionsView: showReactionsView)
+                    if model.showReciveIndicator {
+                        Image("message_sent_indicator")
+                            .resizable()
+                            .background(Circle().fill(Color.clear))
+                            .frame(width: 13, height: 13)
+                    } else if model.showSentIndicator {
+                        Circle()
+                            .strokeBorder(Color.gray, lineWidth: 1)
+                            .background(Circle().fill(Color.white))
+                            .frame(width: 12, height: 12)
+                    } else {
+                        Spacer()
+                            .frame(width: 13, height: 13)
+
+                    }
                 }.padding(.leading, 50)
             }
             if let readImages = model.read, !readImages.isEmpty {
-                Spacer()
-                    .frame(height: 10)
                 HStack(alignment: .top, spacing: -3) {
                     Spacer()
                     ForEach(0..<readImages.count, id: \.self) { index in
                         Image(uiImage: readImages[index])
                             .resizable()
-                            .frame(width: 15, height: 15)
+                            .frame(width: 20, height: 20)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(model.readBorderColor, lineWidth: 2))
                             .zIndex(Double(readImages.count - index))
                     }
                 }
-                Spacer()
-                    .frame(height: 10)
+                .offset(x: 1)
             }
             Spacer()
                 .frame(height: model.bottomSpace)
@@ -129,7 +143,7 @@ struct MessageRowView: View {
         })
         .padding(.top, 1)
         .padding(.bottom, 1)
-        .padding(.leading, 15)
-        .padding(.trailing, 15)
+        .padding(.leading, 5)
+        .padding(.trailing, 5)
     }
 }

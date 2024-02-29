@@ -157,6 +157,7 @@ class MessagesListVM: ObservableObject {
     // dictionary of message id and array of participants for whom the message is last read
     var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
                                        dictionary: [String: [String: UIImage]]())
+    var lastSent: MessageContainerModel?
     var conversation: ConversationModel {
         didSet {
             messagesDisposeBag = DisposeBag()
@@ -375,6 +376,7 @@ class MessagesListVM: ObservableObject {
 
     func messageUpdated(messageId: String) {
         guard let message = self.getMessage(messageId: messageId) else { return }
+        updateLastDelivered(message: message)
         message.messageUpdated()
         self.computeSequencing()
     }
@@ -423,10 +425,31 @@ class MessagesListVM: ObservableObject {
         } else {
             self.messagesModels.insert(container, at: 0)
         }
+
+        self.updateLastDelivered(message: container)
         if newMessage.isReply() {
             self.receiveReply(newMessage: container, fromHistory: fromHistory)
         }
         return true
+    }
+
+    func updateLastDelivered(message: MessageContainerModel) {
+        if !message.message.incoming && (message.message.status == .displayed || message.message.status == .sent) {
+            if let lastSent = self.lastSent {
+                if let index = self.messagesModels.firstIndex(where: { messageModel in
+                    messageModel.id == message.id
+                }), let lastSentIndex = self.messagesModels.firstIndex(where: { messageModel in
+                    messageModel.id == lastSent.id
+                }), index < lastSentIndex {
+                    lastSent.displayLastSent(state: false)
+                    self.lastSent = message
+                    self.lastSent!.displayLastSent(state: true)
+                }
+            } else {
+                self.lastSent = message
+                self.lastSent!.displayLastSent(state: true)
+            }
+        }
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -602,27 +625,32 @@ class MessagesListVM: ObservableObject {
                 return messageUpdateEvent.eventType == ServiceEventType.messageStateChanged
             })
             .subscribe(onNext: { [weak self] messageUpdateEvent in
+                guard let self = self else { return }
                 if let status: MessageStatus = messageUpdateEvent.getEventInput(.messageStatus) {
                     if status == .displayed, let jamiId: String = messageUpdateEvent.getEventInput(.uri),
                        let messageId: String = messageUpdateEvent.getEventInput(.messageId),
-                       let localParticipant = self?.conversation.getLocalParticipants(),
+                       let localParticipant = self.conversation.getLocalParticipants(),
                        localParticipant.jamiId != jamiId {
                         var currentid: String?
-                        if let current = self?.lastReadMessageForParticipant.get(key: jamiId) as? String {
+                        if let current = self.lastReadMessageForParticipant.get(key: jamiId) as? String {
                             currentid = current
                         }
-                        self?.lastReadMessageForParticipant.set(value: messageId, for: jamiId)
-                        if let model = self?.messagesModels.filter({ message in
+                        self.lastReadMessageForParticipant.set(value: messageId, for: jamiId)
+                        if let model = self.messagesModels.filter({ message in
                             message.id == messageId
                         }).first, !model.message.incoming {
-                            self?.updateLastRead(messageId: messageId, messageModel: model)
+                            self.updateLastRead(messageId: messageId, messageModel: model)
                         }
-                        if let currentid = currentid, let message1 = self?.messagesModels.filter({ message2 in
+                        if let currentid = currentid, let message1 = self.messagesModels.filter({ message2 in
                             message2.id == currentid
                         }).first, !message1.message.incoming {
-                            self?.updateLastRead(messageId: message1.id, messageModel: message1)
+                            self.updateLastRead(messageId: message1.id, messageModel: message1)
                         }
                     }
+                }
+                if let messageId: String = messageUpdateEvent.getEventInput(.messageId),
+                   let message = self.getMessage(messageId: messageId) {
+                    self.updateLastDelivered(message: message)
                 }
             })
             .disposed(by: self.disposeBag)

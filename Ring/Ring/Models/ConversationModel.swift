@@ -441,9 +441,9 @@ class ConversationModel: Equatable {
         reactionsUpdated.onNext(messageId)
     }
 
-    func messageUpdated(swarmMessage: SwarmMessageWrap) {
+    func messageUpdated(swarmMessage: SwarmMessageWrap, accountJamiId: String) {
         guard let message = self.getMessage(messageId: swarmMessage.id) else { return }
-        message.messageUpdated(message: swarmMessage)
+        message.messageUpdated(message: swarmMessage, accountJamiId: accountJamiId)
         messageUpdated.onNext(swarmMessage.id)
     }
 }
