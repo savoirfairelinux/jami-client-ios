@@ -25,7 +25,8 @@ typedef NS_ENUM(int, MessageStatus)  {
     MessageStatusSending,
     MessageStatusSent,
     MessageStatusDisplayed,
-    MessageStatusFailure
+    MessageStatusFailure,
+    MessageStatusCanceled
 };
 
 @interface SwarmMessageWrap : NSObject
@@ -36,6 +37,7 @@ typedef NS_ENUM(int, MessageStatus)  {
 @property (nonatomic, strong) NSDictionary<NSString *, NSString *>* body;
 @property (nonatomic, strong) NSArray<NSDictionary<NSString *, NSString *> *>* reactions;
 @property (nonatomic, strong) NSArray<NSDictionary<NSString *, NSString *> *>* editions;
+@property (nonatomic, strong) NSDictionary<NSString *, NSNumber* >* status;
 
 @end
 
@@ -48,7 +50,6 @@ typedef NS_ENUM(int, MessageStatus)  {
 - (NSUInteger)sendMessageWithContent:(NSDictionary*)content withAccountId:(NSString*)accountId
                        to:(NSString*)toAccountId flag:(int)flag;
 
-- (MessageStatus)statusForMessageId:(uint64_t)messageId;
 - (void)setComposingMessageTo:(NSString*)peer
                    fromAccount:(NSString*)accountID
                    isComposing:(BOOL)isComposing;

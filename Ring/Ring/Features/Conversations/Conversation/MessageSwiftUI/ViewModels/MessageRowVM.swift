@@ -34,6 +34,8 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
     @Published var bottomSpace: CGFloat = 0
     @Published var leadingSpace: CGFloat = 0
     @Published var readBorderColor: Color
+    @Published var showSentIndicator: Bool = false
+    @Published var showReciveIndicator: Bool = false
     var styling: MessageStyling = MessageStyling()
     var incoming: Bool
     var infoState: PublishSubject<State>
@@ -83,6 +85,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
         self.centeredMessage = message.type == .contact || message.type == .initial
         self.readBorderColor = Color(UIColor.systemBackground)
         self.timeString = getTimeLabelString()
+        self.updateMessageStatus()
     }
 
     func getTimeLabelString() -> String {
@@ -121,6 +124,20 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func shouldDisplayContactInfoForConversation(state: Bool) {
-        leadingSpace = state ? 30 : 0
+        leadingSpace = state ? 50 : 12
+    }
+
+    func updateMessageStatus() {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            self.showSentIndicator = self.message.isSending()
+        }
+    }
+
+    func displayLastSent(state: Bool)  {
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            self.showReciveIndicator = state
+        }
     }
 }

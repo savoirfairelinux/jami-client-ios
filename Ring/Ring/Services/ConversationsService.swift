@@ -77,10 +77,6 @@ class ConversationsService {
      Called when application starts and when  account changed
      */
     func getConversationsForAccount(accountId: String, accountURI: String) {
-        /* if we don't have conversation that could mean the app
-         just launched and we need symchronize messages status
-         */
-        let shouldUpdateMessagesStatus = self.conversations.value.first == nil
         var currentConversations = [ConversationModel]()
         self.conversations.accept(currentConversations)
         var conversationToLoad = [String]() // list of swarm conversation we need to load first message
@@ -109,9 +105,6 @@ class ConversationsService {
                 .filter { conversation in
                     guard let jamiId = conversation.getParticipants().first?.jamiId else { return true }
                     return !oneToOne.contains(jamiId)
-                }
-                if shouldUpdateMessagesStatus {
-                    self?.updateMessagesStatus(accountId: accountId, conversations: &conversationsFromDB)
                 }
                 currentConversations.append(contentsOf: conversationsFromDB)
                 self?.sortAndUpdate(conversations: &currentConversations)
@@ -329,9 +322,6 @@ class ConversationsService {
         }
         var newMessages = [MessageModel]()
         filtered.forEach { newMessage in
-            if fromLoaded {
-                newMessage.status = .displayed
-            }
             newMessages.append(newMessage)
             guard let lastMessage = conversation.lastMessage,
                   lastMessage.receivedDate > newMessage.receivedDate else {
@@ -463,9 +453,9 @@ class ConversationsService {
         conversation.reactionRemoved(messageId: messageId, reactionId: reactionId)
     }
 
-    func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap) {
+    func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap, localJamiId: String) {
         guard let conversation = self.getConversationForId(conversationId: conversationId, accountId: accountId) else { return }
-        conversation.messageUpdated(swarmMessage: message)
+        conversation.messageUpdated(swarmMessage: message, localJamiId: localJamiId)
     }
 
     // MARK: conversations management
@@ -479,58 +469,6 @@ class ConversationsService {
     }
 
     // MARK: legacy support for non swarm conversations
-
-    private func updateMessagesStatus(accountId: String, conversations: inout [ConversationModel]) {
-        /**
-         If the app was closed prior to messages receiving a "stable"
-         status, incorrect status values will remain in the database.
-         Get updated message status from the daemon for each
-         message as conversations are loaded from the database.
-         Only sent messages having an 'unknown' or 'sending' status
-         are considered for updating.
-         */
-        for conversation in conversations where !conversation.isSwarm() {
-            var updatedMessages = 0
-            for message in (conversation.messages) {
-                if !message.daemonId.isEmpty && (message.status == .unknown || message.status == .sending ) {
-                    let updatedMessageStatus = self.status(forMessageId: message.daemonId)
-                    if (updatedMessageStatus.rawValue > message.status.rawValue && updatedMessageStatus != .failure) ||
-                        (updatedMessageStatus == .failure && message.status == .sending && message.type == .text) {
-                        updatedMessages += 1
-                        message.status = updatedMessageStatus
-                        self.dbManager.updateMessageStatus(daemonID: message.daemonId,
-                                                           withStatus: InteractionStatus(status: updatedMessageStatus),
-                                                           accountId: accountId)
-                            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                            .subscribe(onCompleted: { [] in
-                                print("Message status updated - load")
-                            })
-                            .disposed(by: self.disposeBag)
-                    }
-                }
-                if !message.daemonId.isEmpty && message.type == .fileTransfer &&
-                    (message.transferStatus == .ongoing ||
-                        message.transferStatus == .created ||
-                        message.transferStatus == .awaiting ||
-                        message.transferStatus == .unknown) {
-                    updatedMessages += 1
-                    let updatedMessageStatus: DataTransferStatus = .error
-                    message.transferStatus = updatedMessageStatus
-                    self.dbManager.updateMessageStatus(daemonID: message.daemonId,
-                                                       withStatus: InteractionStatus(status: updatedMessageStatus),
-                                                       accountId: accountId)
-                        .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                        .subscribe()
-                        .disposed(by: self.disposeBag)
-                }
-            }
-        }
-    }
-
-    private func status(forMessageId messageId: String) -> MessageStatus {
-        guard let status = UInt64(messageId) else { return .unknown }
-        return self.conversationsAdapter.status(forMessageId: status)
-    }
 
     private func saveMessageModelToDb(message: MessageModel,
                                       toConversationWith recipientURI: String,
@@ -958,34 +896,7 @@ class ConversationsService {
             return conversation.getParticipants().first?.jamiId == jamiId &&
                 conversation.accountId == accountId
         }).first else { return }
-
-        /// Find message
-        if let message: MessageModel = conversation.messages.filter({ (message) -> Bool in
-            let messageIDSame = !conversation.isSwarm() ? !message.daemonId.isEmpty && message.daemonId == messageId : message.id == messageId
-            return messageIDSame
-                &&
-                ((status.rawValue > message.status.rawValue && status != .failure) ||
-                    (status == .failure && message.status == .sending))
-        }).first {
-            message.status = status
-            self.updateUnreadMessages(conversationId: conversationId, accountId: accountId)
-            var event = ServiceEvent(withEventType: .messageStateChanged)
-            event.addEventInput(.messageStatus, value: status)
-            event.addEventInput(.messageId, value: messageId)
-            event.addEventInput(.id, value: accountId)
-            event.addEventInput(.uri, value: jamiId)
-            self.responseStream.onNext(event)
-            log.debug("messageStatusChanged: \(status.rawValue) for: \(messageId) from: \(accountId) to: \(jamiId)")
-            /// for non swarm conversation we need to save status to db
-            if conversation.isSwarm() { return }
-            self.dbManager
-                .updateMessageStatus(daemonID: message.daemonId,
-                                     withStatus: InteractionStatus(status: status),
-                                     accountId: accountId)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe()
-                .disposed(by: self.disposeBag)
-        }
+        conversation.messageStatusUpdated(status: status, messageId: messageId, jamiId: jamiId)
     }
 
     func conversationProfileUpdated(conversationId: String, accountId: String, profile: [String: String]) {

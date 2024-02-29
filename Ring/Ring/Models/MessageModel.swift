@@ -93,7 +93,7 @@ public class MessageModel {
     /// jamiId for sender. For outgoing message authorId is empty
     var authorId: String = ""
     var uri: String = ""
-    var status: MessageStatus = .unknown
+    var status: MessageStatus = .sending
     var transferStatus: DataTransferStatus = .unknown
     var incoming: Bool
     var parentId: String = ""
@@ -104,6 +104,7 @@ public class MessageModel {
     var parents = [String]()
     var reactions = Set<MessageAction>()
     var editions = Set<MessageAction>()
+    var statusForParticipant = [String: MessageStatus]()
 
     init(withId id: String, receivedDate: Date, content: String, authorURI: String, incoming: Bool) {
         self.daemonId = id
@@ -113,21 +114,44 @@ public class MessageModel {
         self.incoming = incoming
     }
 
-    convenience init (with swarmMessage: SwarmMessageWrap, accountJamiId: String) {
-        self.init(withInfo: swarmMessage.body, accountJamiId: accountJamiId)
+    convenience init (with swarmMessage: SwarmMessageWrap, localJamiId: String) {
+        self.init(withInfo: swarmMessage.body, localJamiId: localJamiId)
         for reaction in swarmMessage.reactions {
             self.reactions.insert(MessageAction(withInfo: reaction))
         }
         for edition in swarmMessage.editions {
             self.editions.insert(MessageAction(withInfo: edition))
         }
+
+        self.updateStatus(with: swarmMessage, localJamiId: localJamiId)
     }
+
+    func updateStatus(with swarmMessage: SwarmMessageWrap, localJamiId: String) {
+        let filteredStatus = swarmMessage.status.filter { $0.key != localJamiId }
+
+        for (key, value) in filteredStatus {
+            if let status = MessageStatus(rawValue: value.int32Value) {
+                statusForParticipant[key] = status
+                /*
+                 The message status is set to 'displayed' if at least one participant
+                 has seen the message, and it is set to 'sent' if at least one participant
+                 has received the message.
+                 */
+                if status == .displayed {
+                    self.status = .displayed
+                } else if status == .sent && self.status != .displayed {
+                    self.status = .sent
+                }
+            }
+        }
+    }
+
     // swiftlint:disable:next cyclomatic_complexity
-    init(withInfo info: [String: String], accountJamiId: String) {
+    init(withInfo info: [String: String], localJamiId: String) {
         if let interactionId = info[MessageAttributes.interactionId.rawValue] {
             self.id = interactionId
         }
-        if let author = info[MessageAttributes.author.rawValue], author != accountJamiId {
+        if let author = info[MessageAttributes.author.rawValue], author != localJamiId {
             self.authorId = author
         }
         if let uri = info[MessageAttributes.uri.rawValue] {
@@ -146,7 +170,7 @@ public class MessageModel {
         if let react = info[MessageAttributes.react.rawValue] {
             self.react = react
         }
-        incoming = self.uri.isEmpty ? !self.authorId.isEmpty : self.uri != accountJamiId
+        incoming = self.uri.isEmpty ? !self.authorId.isEmpty : self.uri != localJamiId
         if let parent = info[MessageAttributes.parent.rawValue] {
             self.parentId = parent
         }
@@ -255,7 +279,7 @@ public class MessageModel {
         return !self.editions.isEmpty
     }
 
-    func messageUpdated(message: SwarmMessageWrap) {
+    func messageUpdated(message: SwarmMessageWrap, localJamiId: String) {
         self.editions = Set<MessageAction>()
         self.reactions = Set<MessageAction>()
         self.updateFrom(info: message.body)
@@ -264,6 +288,40 @@ public class MessageModel {
         }
         for edition in message.editions {
             self.editions.insert(MessageAction(withInfo: edition))
+        }
+        self.updateStatus(with: message, localJamiId: localJamiId)
+    }
+
+    func messageStatusUpdated(status: MessageStatus, messageId: String, jamiId: String) {
+        self.statusForParticipant[jamiId] = status
+        if status.rawValue <= MessageStatus.displayed.rawValue && self.status.rawValue < status.rawValue {
+            self.status = status
+        }
+    }
+
+    func isSending() -> Bool {
+        guard !self.incoming else { return false }
+
+        switch self.type {
+            case .text:
+                return self.status == .sending
+            case .fileTransfer:
+                return ![.success, .canceled, .error].contains(self.transferStatus)
+            default:
+                return false
+        }
+    }
+
+    func isDelivered() -> Bool {
+        guard !self.incoming else { return false }
+
+        switch self.type {
+            case .text:
+                return self.status == .sent || self.status == .displayed
+            case .fileTransfer:
+                return [.success].contains(self.transferStatus)
+            default:
+                return false
         }
     }
 }
