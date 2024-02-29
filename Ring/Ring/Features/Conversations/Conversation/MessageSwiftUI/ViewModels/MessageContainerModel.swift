@@ -197,6 +197,12 @@ class MessageContainerModel: Identifiable {
 
     func messageUpdated() {
         self.messageContent.updateMessageEditions()
+        self.messageRow.updateMessageStatus()
+    }
+
+    func displayLastSent(state: Bool) {
+        self.messageContent.updateMessageEditions()
+        self.messageRow.displayLastSent(state: state)
     }
 
     func hasReactions() -> Bool {

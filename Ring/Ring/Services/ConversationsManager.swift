@@ -484,6 +484,11 @@ class ConversationsManager {
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
                               to jamiId: String, in conversationId: String) {
+        guard let localJamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId else { return }
+        if localJamiId == jamiId {
+            // This is request from self. Should not display.
+            return
+        }
         self.conversationService.messageStatusChanged(status,
                                                       for: messageId,
                                                       from: accountId,
@@ -591,7 +596,8 @@ extension  ConversationsManager: MessagesAdapterDelegate {
     }
 
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap) {
-        self.conversationService.messageUpdated(conversationId: conversationId, accountId: accountId, message: message)
+        guard let jamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId else { return }
+        self.conversationService.messageUpdated(conversationId: conversationId, accountId: accountId, message: message, accountJamiId: jamiId)
     }
 
     func isDownloadingEnabled(for size: Int) -> Bool {
