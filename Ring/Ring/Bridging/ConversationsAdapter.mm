@@ -36,6 +36,7 @@
         self.body = [Utils mapToDictionnary: message.body];
         self.reactions = [Utils vectorOfMapsToArray: message.reactions];
         self.editions = [Utils vectorOfMapsToArray: message.editions];
+        self.status = [Utils mapToDictionnaryWithInt: message.status];
     }
     return self;
 }
@@ -222,10 +223,6 @@ static id <MessagesAdapterDelegate> _messagesDelegate;
     return (NSUInteger) sendAccountTextMessage(std::string([accountId UTF8String]),
                            std::string([toAccountId UTF8String]),
                            [Utils dictionnaryToMap:content], flag);
-}
-
-- (MessageStatus)statusForMessageId:(uint64_t)messageId {
-    return (MessageStatus)getMessageStatus(messageId);
 }
 
 - (void)setComposingMessageTo:(NSString*)peer

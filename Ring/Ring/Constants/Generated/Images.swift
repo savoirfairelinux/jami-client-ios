@@ -72,6 +72,7 @@ internal enum Asset {
   internal static let jamiGnupackage = ImageAsset(name: "jami_gnupackage")
   internal static let leftArrow = ImageAsset(name: "left_arrow")
   internal static let messageBackgroundColor = ColorAsset(name: "message_background_color")
+  internal static let messageSentIndicator = ImageAsset(name: "message_sent_indicator")
   internal static let moderator = ImageAsset(name: "moderator")
   internal static let moreSettings = ImageAsset(name: "more_settings")
   internal static let myLocation = ImageAsset(name: "my_location")
