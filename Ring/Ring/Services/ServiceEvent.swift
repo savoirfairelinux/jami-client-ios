@@ -29,7 +29,6 @@ enum ServiceEventType {
     case accountsChanged
     case registrationStateChanged
     case presenceUpdated
-    case messageStateChanged
     case knownDevicesChanged
     case exportOnRingEnded
     case contactAdded
