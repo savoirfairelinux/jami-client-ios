@@ -36,7 +36,7 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol {
     var replyUserName = ""
     var localJamiId: String
     var replyAuthorJamiId: String
-    var infoState: PublishSubject<State>
+    private var infoState: PublishSubject<State>?
 
     var alignment: HorizontalAlignment = .center
 
@@ -54,13 +54,16 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol {
 
     var contextMenuState: PublishSubject<State>
 
-    init(infoState: PublishSubject<State>, contextMenuState: PublishSubject<State>, localJamiId: String, replyAuthorJamiId: String, isIncoming: Bool) {
-        self.infoState = infoState
+    init(contextMenuState: PublishSubject<State>, localJamiId: String, replyAuthorJamiId: String, isIncoming: Bool) {
         self.localJamiId = localJamiId
         self.replyAuthorJamiId = replyAuthorJamiId
         self.isIncoming = isIncoming
         self.alignment = isIncoming ? .leading : .trailing
         self.contextMenuState = contextMenuState
+    }
+
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
     }
 
     func updateUsername(name: String, jamiId: String) {
@@ -86,13 +89,13 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol {
 
     private func updateUsernameForReply() {
         if replyIsIncoming() { return }
-        self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: replyAuthorJamiId))
+        // self.infoState?.onNext(MessageInfo.updateDisplayname(jamiId: replyAuthorJamiId))
     }
 
     private func updateUsernameForTargetReply() {
         guard let target = target, !targetReplyIsIncoming() else { return }
         let jamiId = target.message.authorId
-        self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
+        // self.infoState?.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
     }
 
     private func getInReplyMessage() -> String {
