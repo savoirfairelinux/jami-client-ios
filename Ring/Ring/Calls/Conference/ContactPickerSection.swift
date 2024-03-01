@@ -29,7 +29,7 @@ class Contact {
     var hash: String
     let disposeBag = DisposeBag()
 
-    lazy var presenceStatus: BehaviorRelay<Bool>? = {
+    lazy var presenceStatus: BehaviorRelay<PresenceStatus>? = {
         self.presenceService
             .getSubscriptionsForContact(contactId: self.hash)
     }()

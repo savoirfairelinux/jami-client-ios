@@ -22,11 +22,17 @@ import SwiftyBeaver
 import RxSwift
 import RxCocoa
 
+enum PresenceStatus: Int {
+    case offline
+    case available
+    case connected
+}
+
 class PresenceService {
 
     private let presenceAdapter: PresenceAdapter
     private let log = SwiftyBeaver.self
-    private var contactPresence: [String: BehaviorRelay<Bool>]
+    private var contactPresence: [String: BehaviorRelay<PresenceStatus>]
     private let presenceQueue = DispatchQueue(label: "com.presenceQueue", qos: .background) // used to protect access to contactPresence[]
 
     private let responseStream = PublishSubject<ServiceEvent>()
@@ -35,15 +41,15 @@ class PresenceService {
     private let disposeBag = DisposeBag()
 
     init(withPresenceAdapter presenceAdapter: PresenceAdapter) {
-        self.contactPresence = [String: BehaviorRelay<Bool>]()
+        self.contactPresence = [String: BehaviorRelay<PresenceStatus>]()
         self.presenceAdapter = presenceAdapter
         self.responseStream.disposed(by: disposeBag)
         self.sharedResponseStream = responseStream.share()
         PresenceAdapter.delegate = self
     }
 
-    func getSubscriptionsForContact(contactId: String) -> BehaviorRelay<Bool>? {
-        var value: BehaviorRelay<Bool>?
+    func getSubscriptionsForContact(contactId: String) -> BehaviorRelay<PresenceStatus>? {
+        var value: BehaviorRelay<PresenceStatus>?
         presenceQueue.sync {[weak self] in
             value = self?.contactPresence[contactId]
         }
@@ -75,10 +81,10 @@ class PresenceService {
                 return
             }
             if let presenceForContact = self.contactPresence[uri] {
-                presenceForContact.accept(false)
+                presenceForContact.accept(.offline)
                 return
             }
-            let observableValue = BehaviorRelay<Bool>(value: false)
+            let observableValue = BehaviorRelay<PresenceStatus>(value: .offline)
             self.contactPresence[uri] = observableValue
             DispatchQueue.global(qos: .background).async {
                 var event = ServiceEvent(withEventType: .presenseSubscribed)
@@ -97,12 +103,12 @@ extension PresenceService: PresenceAdapterDelegate {
                               withLineStatus lineStatus: String) {
         presenceQueue.async {[weak self] in
             guard let self = self else { return }
-            let value = status > 0 ? true : false
+            guard let presenceStatus = PresenceStatus(rawValue: status) else { return}
             if let presenceForContact = self.contactPresence[uri] {
-                presenceForContact.accept(value)
+                presenceForContact.accept(presenceStatus)
                 return
             }
-            let observableValue = BehaviorRelay<Bool>(value: value)
+            let observableValue = BehaviorRelay<PresenceStatus>(value: presenceStatus)
             self.contactPresence[uri] = observableValue
         }
     }
