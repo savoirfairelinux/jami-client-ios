@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619cc2b0_3bf815a9",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-03-01T15:36:01Z",
+      "side": 1,
+      "message": "when user select emoji from the picker and than open and closed contact menu, emoji picker appear again. It could be fixed by having @State presented in the view, rather than bind it to $cxModel.isEmojiPickerPresented",
+      "revId": "6302a94f097e43ee16c6647ca28a26f6cbed00c9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5be3bf0_01bc5a02",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-03-01T15:36:01Z",
+      "side": 1,
+      "message": "there should be some time between willDismissWithAction and dismissed state. Check usage in other parts of code",
+      "revId": "6302a94f097e43ee16c6647ca28a26f6cbed00c9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
