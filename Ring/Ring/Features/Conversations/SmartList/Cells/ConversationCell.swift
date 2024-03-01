@@ -124,13 +124,20 @@ class ConversationCell: UITableViewCell, NibReusable {
                 .bind(to: unreadMessagesIndicator.rx.isHidden)
                 .disposed(by: self.disposeBag)
         }
-
         // presence
         if self.presenceIndicator != nil {
             item.contactPresence.asObservable()
                 .observe(on: MainScheduler.instance)
-                .map { value in !value }
-                .bind(to: self.presenceIndicator!.rx.isHidden)
+                .startWith(item.contactPresence.value)
+                .subscribe(onNext: { [weak self] presenceStatus in
+                    guard let self = self else { return }
+                    self.presenceIndicator?.isHidden = presenceStatus == .offline
+                    if presenceStatus == .connected {
+                        self.presenceIndicator?.backgroundColor = .onlinePresenceColor
+                    } else if presenceStatus == .available {
+                        self.presenceIndicator?.backgroundColor = .availablePresenceColor
+                    }
+                })
                 .disposed(by: self.disposeBag)
         }
 

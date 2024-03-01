@@ -114,7 +114,7 @@ class ConversationViewModel: Stateable, ViewModel {
     /// My profile's image data
     var myOwnProfileImageData: Data?
 
-    var contactPresence = BehaviorRelay<Bool>(value: false)
+    var contactPresence = BehaviorRelay<PresenceStatus>(value: .offline)
     var swarmInfo: SwarmInfoProtocol?
 
     required init(with injectionBag: InjectionBag) {
@@ -604,7 +604,7 @@ extension ConversationViewModel {
         if let jamiId = self.conversation.value.getParticipants().first?.jamiId, let contactPresence = self.presenceService.getSubscriptionsForContact(contactId: jamiId) {
             self.contactPresence = contactPresence
         } else {
-            self.contactPresence.accept(false)
+            self.contactPresence.accept(.offline)
             self.presenceService
                 .sharedResponseStream
                 .filter({ [weak self] serviceEvent in
@@ -637,7 +637,7 @@ extension ConversationViewModel {
             .getSubscriptionsForContact(contactId: jamiId) {
             self.contactPresence = contactPresence
         } else {
-            self.contactPresence.accept(false)
+            self.contactPresence.accept(.offline)
         }
     }
 

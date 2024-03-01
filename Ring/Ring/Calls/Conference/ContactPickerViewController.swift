@@ -271,8 +271,13 @@ class ContactPickerViewController: UIViewController, StoryboardBased, ViewModelB
                 .asObservable()
                 .observe(on: MainScheduler.instance)
                 .startWith(status.value)
-                .subscribe(onNext: { precence in
-                    cell.presenceIndicator?.isHidden = !precence
+                .subscribe(onNext: { presenceStatus in
+                    cell.presenceIndicator?.isHidden = presenceStatus == .offline
+                    if presenceStatus == .connected {
+                        cell.presenceIndicator?.backgroundColor = .onlinePresenceColor
+                    } else if presenceStatus == .available {
+                        cell.presenceIndicator?.backgroundColor = .availablePresenceColor
+                    }
                 })
                 .disposed(by: cell.disposeBag)
         }
