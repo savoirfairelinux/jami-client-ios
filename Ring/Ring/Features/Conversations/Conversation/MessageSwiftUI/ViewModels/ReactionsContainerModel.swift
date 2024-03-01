@@ -50,13 +50,16 @@ class ReactionsContainerModel: ObservableObject {
     @Published var reactionsRow = [ReactionsRowViewModel]()
     @Published var displayValue: String = ""
     let message: MessageModel
-    let infoState: PublishSubject<State>
+    private var infoState: PublishSubject<State>?
     var reactionsRowCreated = false
 
-    init(message: MessageModel, infoState: PublishSubject<State>) {
+    init(message: MessageModel) {
         self.message = message
-        self.infoState = infoState
         self.updateDisplayValue()
+    }
+
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
     }
 
     func onAppear() {
@@ -99,8 +102,8 @@ class ReactionsContainerModel: ObservableObject {
 
     private func addReaction(reaction: MessageAction) {
         self.reactionsRow.append(ReactionsRowViewModel(reaction: reaction))
-        self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: reaction.author))
-        self.infoState.onNext(MessageInfo.updateAvatar(jamiId: reaction.author))
+        self.infoState?.onNext(MessageInfo.updateDisplayname(jamiId: reaction.author))
+        self.infoState?.onNext(MessageInfo.updateAvatar(jamiId: reaction.author))
     }
 
     private func update() {

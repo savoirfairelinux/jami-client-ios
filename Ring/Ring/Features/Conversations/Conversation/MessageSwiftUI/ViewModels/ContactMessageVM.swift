@@ -37,17 +37,13 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
     var message: MessageModel
     var username = "" {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.content = self.username + " " + self.message.content
-            }
+            self.content = self.username.isEmpty ? self.message.content : self.username + " " + self.message.content
         }
     }
-    var infoState: PublishSubject<State>
+    private var infoState: PublishSubject<State>?
 
-    init(message: MessageModel, infoState: PublishSubject<State>) {
+    init(message: MessageModel) {
         self.message = message
-        self.infoState = infoState
         self.backgroundColor = Color(UIColor.clear)
         self.inset = message.type == .initial ? 0 : 7
         self.height = message.type == .initial ? 25 : 45
@@ -57,10 +53,14 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
             self.styling.textFont = self.styling.secondaryFont
             self.styling.textColor = self.styling.defaultSecondaryTextColor
         }
+    }
+
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
         if message.type == .contact && message.incoming {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
-            self.infoState.onNext(MessageInfo.updateAvatar(jamiId: jamiId))
-            self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
+            self.infoState?.onNext(MessageInfo.updateAvatar(jamiId: jamiId))
+            self.infoState?.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
         }
     }
 
@@ -69,5 +69,17 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
             guard let self = self else { return }
             self.borderColor = self.message.type != .initial ? Color(color) : Color(UIColor.clear)
         }
+    }
+
+    func updateUsername(name: String, jamiId: String) {
+        let jamiIdForMessage = message.uri.isEmpty ? message.authorId : message.uri
+        guard jamiIdForMessage == jamiId, !name.isEmpty, message.incoming, message.type == .contact else { return }
+        self.username = name
+    }
+
+    func updateAvatar(image: UIImage, jamiId: String) {
+        let jamiIdForMessage = message.uri.isEmpty ? message.authorId : message.uri
+        guard jamiIdForMessage == jamiId, message.incoming, message.type == .contact else { return }
+        self.avatarImage = image
     }
 }

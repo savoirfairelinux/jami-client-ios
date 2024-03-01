@@ -149,7 +149,7 @@ class MessagesListVM: ObservableObject {
 
     var loading = true // to avoid a new loading while previous one still executing
     var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: UIImage]())
-    var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: UIImage]())
+    var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: String]())
     // last read
     // dictionary of participant id and last read message Id
     var lastReadMessageForParticipant = ConcurentDictionary(name: "com.ReadMessageForParticipantAccesDictionary",
@@ -157,6 +157,8 @@ class MessagesListVM: ObservableObject {
     // dictionary of message id and array of participants for whom the message is last read
     var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
                                        dictionary: [String: [String: UIImage]]())
+    var nameRequested = ConcurentDictionary(name: "com.PendingsNamesAccesDictionary", dictionary: [String: [String]]()) // dictionary of participant id, and array of messagesId that waiting for name updates
+    var imageRequested = ConcurentDictionary(name: "com.PendingAvatarsAccesDictionary", dictionary: [String: [String]]()) // dictionary of participant id, and array of messagesId that waiting for avatar updates
     var lastDelivered: MessageContainerModel? {
         didSet {
             if let previous = oldValue {
@@ -452,7 +454,7 @@ class MessagesListVM: ObservableObject {
          or if this message precedes the current 'lastDelivered' in the messages list.
          */
         if let lastDelivered = self.lastDelivered {
-            guard let index = self.messagesModels.firstIndex(where: { $0.id == message.id}),
+            guard let index = self.messagesModels.firstIndex(where: { $0.id == message.id }),
                   let lastDelivered = self.lastDelivered,
                   let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }),
                   index < lastDeliveredIndex else { return }
@@ -529,11 +531,7 @@ class MessagesListVM: ObservableObject {
                     self.updateLastReadAvatars(messageId: messageId, messageModel: container)
                 }
             case .updateDisplayname(let jamiId):
-                if let name = self.names.get(key: jamiId) as? String {
-                    container.updateUsername(name: name, jamiId: jamiId)
-                } else {
-                    self.getInformationForContact(id: jamiId, message: container)
-                }
+                self.getName(jamiId: jamiId, message: container)
             }
         } onError: { _ in
         }
@@ -564,6 +562,7 @@ class MessagesListVM: ObservableObject {
         } onError: { _ in
         }
         .disposed(by: container.disposeBag)
+        container.listenerForInfoStateAdded()
     }
 
     private func subscribeSwarmPreferences() {
@@ -786,6 +785,7 @@ class MessagesListVM: ObservableObject {
     private func updateName(name: String, id: String, message: MessageContainerModel) {
         self.names.set(value: name, for: id)
         message.updateUsername(name: name, jamiId: id)
+        self.updatePendingNames(name: name, jamiId: id)
         self.messagePanel.updateUsername(name: name, jamiId: id)
     }
 
@@ -793,6 +793,7 @@ class MessagesListVM: ObservableObject {
         self.avatars.set(value: image, for: id)
         self.updateContacLocationSharingImage()
         message.updateAvatar(image: image, jamiId: id)
+        updatePendingAvatars(image: image, jamiId: id)
         if var lastReadAvatars = self.lastRead.get(key: message.id) as? [String: UIImage] {
             if var _ = lastReadAvatars[id] {
                 lastReadAvatars[id] = image
@@ -804,6 +805,26 @@ class MessagesListVM: ObservableObject {
                 message.updateRead(avatars: newValue)
             }
         }
+    }
+
+    private func updatePendingAvatars(image: UIImage, jamiId: String) {
+        guard let pending = imageRequested.get(key: jamiId) as? [String] else { return }
+        for messagiId in pending {
+            if let message = getMessage(messageId: messagiId) {
+                message.updateAvatar(image: image, jamiId: jamiId)
+            }
+        }
+        imageRequested.removeValueForKey(key: jamiId)
+    }
+
+    private func updatePendingNames(name: String, jamiId: String) {
+        guard let pending = imageRequested.get(key: jamiId) as? [String] else { return }
+        for messagiId in pending {
+            if let message = getMessage(messageId: messagiId) {
+                message.updateUsername(name: name, jamiId: jamiId)
+            }
+        }
+        nameRequested.removeValueForKey(key: jamiId)
     }
 
     private func nameLookup(id: String, message: MessageContainerModel) {
@@ -871,7 +892,27 @@ class MessagesListVM: ObservableObject {
             // check if we need avatar for local account
         } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId, accountJamiId == jamiId {
             message.updateAvatar(image: self.currentAccountAvatar, jamiId: jamiId)
+        } else if var messages = nameRequested.get(key: jamiId) as? [String] {
+            // image already requested. Wait for profile fetch and username lookup
+            messages.append(message.id)
+            imageRequested.set(value: messages, for: jamiId)
+            return
         } else {
+            imageRequested.set(value: [message.id], for: jamiId)
+            self.getInformationForContact(id: jamiId, message: message)
+        }
+    }
+
+    private func getName(jamiId: String, message: MessageContainerModel) {
+        if let name = self.names.get(key: jamiId) as? String {
+            message.updateUsername(name: name, jamiId: jamiId)
+        } else if var messages = nameRequested.get(key: jamiId) as? [String] {
+            // name already requested. Wait for profile fetch and username lookup
+            messages.append(message.id)
+            nameRequested.set(value: messages, for: jamiId)
+            return
+        } else {
+            nameRequested.set(value: [message.id], for: jamiId)
             self.getInformationForContact(id: jamiId, message: message)
         }
     }
@@ -900,7 +941,7 @@ class MessagesListVM: ObservableObject {
         }
         let newValue = values.isEmpty ? nil : values
         messageModel.updateRead(avatars: newValue)
-        for contact in contacts {
+        for contact in contacts where imageRequested.get(key: contact) == nil {
             self.getInformationForContact(id: contact, message: messageModel)
         }
     }

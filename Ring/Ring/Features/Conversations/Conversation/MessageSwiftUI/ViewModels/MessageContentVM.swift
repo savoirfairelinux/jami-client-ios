@@ -176,13 +176,12 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     // state
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
-    var infoState: PublishSubject<State>
+    private var infoState: PublishSubject<State>?
     var preferencesColor: UIColor
 
-    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, infoState: PublishSubject<State>, isHistory: Bool, preferencesColor: UIColor) {
+    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, isHistory: Bool, preferencesColor: UIColor) {
         self.contextMenuState = contextMenuState
         self.transferState = transferState
-        self.infoState = infoState
         self.message = message
         self.type = message.type
         self.isIncoming = message.incoming
@@ -200,6 +199,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         }
         self.updateMessageEditions()
         self.fetchMetadata()
+    }
+
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
     }
 
     private func updateMessageStyle() {
@@ -465,8 +468,8 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
                 self.updateMessageStyle()
             }
         }
-        if self.message.isMessageDeleted() {
-            self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: self.message.authorId))
+        if self.message.isMessageDeleted(), let infoState = self.infoState {
+            infoState.onNext(MessageInfo.updateDisplayname(jamiId: self.message.authorId))
         }
     }
 

@@ -32,24 +32,27 @@ class MessageStackVM: MessageAppearanceProtocol {
     }
     var message: MessageModel
 
-    var infoState: PublishSubject<State>
+    private var infoState: PublishSubject<State>?
 
     var styling: MessageStyling = MessageStyling()
 
     @Published var shouldDisplayName = false {
         didSet {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
-            if shouldDisplayName {
-                self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
+            if shouldDisplayName, let infoState = self.infoState {
+                infoState.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
             } else {
                 self.username = ""
             }
         }
     }
 
-    init(message: MessageModel, infoState: PublishSubject<State>) {
+    init(message: MessageModel) {
         self.message = message
-        self.infoState = infoState
+    }
+
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
     }
 
 }
