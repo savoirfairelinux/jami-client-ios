@@ -126,15 +126,15 @@ struct MessagesListView: View {
                 }
             }
         }
-        .onChange(of: model.screenTapped, perform: { state in
+        .onChange(of: model.screenTapped, perform: { _ in
             /* We cannot use SwiftUI's onTapGesture here because it would
              interfere with the interactions of the buttons in the player view.
              Instead, we are using UITapGestureRecognizer from UIView.
              */
             if model.screenTapped {
                 showReactionsView = false
-                                reactionsForMessage = nil
-                                hideKeyboard()
+                reactionsForMessage = nil
+                hideKeyboard()
                 // reset to inital state
                 model.screenTapped = false
             }

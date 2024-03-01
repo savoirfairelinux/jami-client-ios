@@ -22,12 +22,12 @@ import Foundation
 import SwiftUI
 import RxSwift
 
-class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
-
+class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver, NameObserver {
     @Published var avatarImage: UIImage?
     @Published var content: String
     @Published var borderColor: Color
     @Published var backgroundColor: Color
+    var disposeBag = DisposeBag()
     let cornerRadius: CGFloat = 20
     let avatarSize: CGFloat = 15
     var inset: CGFloat
@@ -37,17 +37,13 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
     var message: MessageModel
     var username = "" {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.content = self.username + " " + self.message.content
-            }
+            self.content = self.username.isEmpty ? self.message.content : self.username + " " + self.message.content
         }
     }
-    var infoState: PublishSubject<State>
+    var infoState: PublishSubject<State>?
 
-    init(message: MessageModel, infoState: PublishSubject<State>) {
+    init(message: MessageModel) {
         self.message = message
-        self.infoState = infoState
         self.backgroundColor = Color(UIColor.clear)
         self.inset = message.type == .initial ? 0 : 7
         self.height = message.type == .initial ? 25 : 45
@@ -57,10 +53,14 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol {
             self.styling.textFont = self.styling.secondaryFont
             self.styling.textColor = self.styling.defaultSecondaryTextColor
         }
+    }
+
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
         if message.type == .contact && message.incoming {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
-            self.infoState.onNext(MessageInfo.updateAvatar(jamiId: jamiId))
-            self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
+            requestAvatar(jamiId: jamiId)
+            requestName(jamiId: jamiId)
         }
     }
 
