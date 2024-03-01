@@ -30,9 +30,9 @@ import SwiftUI
 import SwiftyBeaver
 
 enum MessageInfo: State {
-    case updateAvatar(jamiId: String)
-    case updateRead(messageId: String)
-    case updateDisplayname(jamiId: String)
+    case updateAvatar(jamiId: String, message: AvatarImageObserver)
+    case updateRead(messageId: String, message: MessageReadObserver)
+    case updateDisplayname(jamiId: String, message: NameObserver)
 }
 
 enum MessagePanelState: State {
@@ -151,15 +151,15 @@ class MessagesListVM: ObservableObject {
     var lastMessageBeforeScroll: String?
 
     var loading = true // to avoid a new loading while previous one still executing
-    var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: UIImage]())
-    var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: UIImage]())
+    var avatars = ConcurentDictionary(name: "com.AvatarsAccesDictionary", dictionary: [String: BehaviorRelay<UIImage?>]())
+    var names = ConcurentDictionary(name: "com.NamesAccesDictionary", dictionary: [String: String]())
     // last read
     // dictionary of participant id and last read message Id
     var lastReadMessageForParticipant = ConcurentDictionary(name: "com.ReadMessageForParticipantAccesDictionary",
                                                             dictionary: [String: String]())
     // dictionary of message id and array of participants for whom the message is last read
     var lastRead = ConcurentDictionary(name: "com.lastReadAccesDictionary",
-                                       dictionary: [String: [String: UIImage]]())
+                                       dictionary: [String: BehaviorRelay<[String: UIImage]?>]())
     var lastDelivered: MessageContainerModel? {
         didSet {
             if let previous = oldValue {
@@ -464,15 +464,16 @@ class MessagesListVM: ObservableObject {
          Update 'lastDelivered' with this message if no previous 'lastDelivered' exists,
          or if this message precedes the current 'lastDelivered' in the messages list.
          */
-        if let lastDelivered = self.lastDelivered {
-            guard let index = self.messagesModels.firstIndex(where: { $0.id == message.id}),
-                  let lastDelivered = self.lastDelivered,
-                  let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }),
-                  index < lastDeliveredIndex else { return }
+
+        guard self.lastDelivered != nil else {
             self.lastDelivered = message
-        } else {
-            self.lastDelivered = message
+            return
         }
+        guard let index = self.messagesModels.firstIndex(where: { $0.id == message.id }),
+              let lastDelivered = self.lastDelivered,
+              let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }),
+              index < lastDeliveredIndex else { return }
+        self.lastDelivered = message
     }
 
     private func updateLastRead(message: MessageContainerModel, participantId: String) {
@@ -484,13 +485,16 @@ class MessagesListVM: ObservableObject {
          and update it accordingly.
          */
         if self.lastReadMessageForParticipant.get(key: participantId) == nil {
-            setLastRead(message: message, participantId: participantId)
+            self.lastReadMessageForParticipant.set(value: message.id, for: participantId)
+            self.updateSubscriptionLastRead(messageId: message.id)
         } else if let currentLastReadMessageId = self.lastReadMessageForParticipant.get(key: participantId) as? String,
                   let currentIndex = self.messagesModels.firstIndex(where: { $0.id == currentLastReadMessageId }),
-                  let newIndex = self.messagesModels.firstIndex(where: { $0.id == message.id }), newIndex < currentIndex,
-                  let currentRead = self.getMessage(messageId: currentLastReadMessageId) {
-            self.setLastRead(message: message, participantId: participantId)
-            self.updateLastReadAvatars(messageId: currentLastReadMessageId, messageModel: currentRead)
+                  let newIndex = self.messagesModels.firstIndex(where: { $0.id == message.id }), newIndex < currentIndex {
+            self.lastReadMessageForParticipant.set(value: message.id, for: participantId)
+            // remove last read indicator from previous last read message
+            self.updateSubscriptionLastRead(messageId: currentLastReadMessageId)
+            // add last read indicator to new last read message
+            self.updateSubscriptionLastRead(messageId: message.id)
         }
     }
 
@@ -498,11 +502,6 @@ class MessagesListVM: ObservableObject {
         for status in message.message.statusForParticipant {
             updateLastRead(message: message, participantId: status.key)
         }
-    }
-
-    private func setLastRead(message: MessageContainerModel, participantId: String) {
-        self.lastReadMessageForParticipant.set(value: message.id, for: participantId)
-        self.updateLastReadAvatars(messageId: message.id, messageModel: message)
     }
 
     // swiftlint:disable cyclomatic_complexity
@@ -529,24 +528,12 @@ class MessagesListVM: ObservableObject {
         container.messageInfoState.subscribe { [weak self, weak container] state in
             guard let self = self, let container = container, let state = state as? MessageInfo else { return }
             switch state {
-            case .updateAvatar(let jamiId):
-                self.getAvatar(jamiId: jamiId, message: container)
-            case .updateRead(let messageId):
-                if let lastReadAvatars = self.lastRead.get(key: messageId) as? [String: UIImage] {
-                    let values: [UIImage] = lastReadAvatars.map { value in
-                        return value.value
-                    }
-                    let newValue = values.isEmpty ? nil : values
-                    container.updateRead(avatars: newValue)
-                } else {
-                    self.updateLastReadAvatars(messageId: messageId, messageModel: container)
-                }
-            case .updateDisplayname(let jamiId):
-                if let name = self.names.get(key: jamiId) as? String {
-                    container.updateUsername(name: name, jamiId: jamiId)
-                } else {
-                    self.getInformationForContact(id: jamiId, message: container)
-                }
+            case .updateAvatar(let jamiId, let message):
+                self.getAvatar(jamiId: jamiId, message: message, messageId: container.id)
+            case .updateRead(let messageId, let message):
+                self.getLastRead(message: message, messageId: messageId)
+            case .updateDisplayname(let jamiId, let message):
+                self.getName(jamiId: jamiId, message: message, messageId: container.id)
             }
         } onError: { _ in
         }
@@ -577,6 +564,7 @@ class MessagesListVM: ObservableObject {
         } onError: { _ in
         }
         .disposed(by: container.disposeBag)
+        container.listenerForInfoStateAdded()
     }
 
     private func subscribeSwarmPreferences() {
@@ -662,10 +650,8 @@ class MessagesListVM: ObservableObject {
             self.messagePanel.updateUsername(name: L10n.Conversation.yourself, jamiId: jamiId)
             return
         }
-        if let name = self.names.get(key: jamiId) as? String {
-            self.messagePanel.updateUsername(name: name, jamiId: jamiId)
-        } else if let container = self.getMessage(messageId: jamiId) {
-            self.getInformationForContact(id: jamiId, message: container)
+        if let name = self.names.get(key: jamiId) as? BehaviorRelay<String> {
+            self.messagePanel.updateUsername(name: name.value, jamiId: jamiId)
         }
     }
 
@@ -796,30 +782,29 @@ class MessagesListVM: ObservableObject {
 
     // MARK: participant information
 
-    private func updateName(name: String, id: String, message: MessageContainerModel) {
-        self.names.set(value: name, for: id)
-        message.updateUsername(name: name, jamiId: id)
-        self.messagePanel.updateUsername(name: name, jamiId: id)
-    }
-
-    private func updateAvatar(image: UIImage, id: String, message: MessageContainerModel) {
-        self.avatars.set(value: image, for: id)
-        self.updateContacLocationSharingImage()
-        message.updateAvatar(image: image, jamiId: id)
-        if var lastReadAvatars = self.lastRead.get(key: message.id) as? [String: UIImage] {
-            if var _ = lastReadAvatars[id] {
-                lastReadAvatars[id] = image
-                self.lastRead.set(value: lastReadAvatars, for: message.id)
-                let values: [UIImage] = lastReadAvatars.map { value in
-                    return value.value
-                }
-                let newValue = values.isEmpty ? nil : values
-                message.updateRead(avatars: newValue)
-            }
+    private func updateName(name: String, jamiId: String) {
+        if let nameObservable = self.names.get(key: jamiId) as? BehaviorRelay<String> {
+            nameObservable.accept(name)
         }
     }
 
-    private func nameLookup(id: String, message: MessageContainerModel) {
+    private func updateAvatar(image: UIImage, jamiId: String) {
+        // Update the avatar observable if it exists
+        if let avatarObservable = avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
+            avatarObservable.accept(image)
+        }
+
+        // Update the last read avatars if applicable
+        guard let lastReadMessageId = lastReadMessageForParticipant.get(key: jamiId) as? String,
+              let lastReadAvatars = lastRead.get(key: lastReadMessageId) as? BehaviorRelay<[String: UIImage]> else {
+            return
+        }
+        var value = lastReadAvatars.value
+        value[jamiId] = image
+        lastReadAvatars.accept(value)
+    }
+
+    private func nameLookup(id: String) {
         self.nameService.usernameLookupStatus
             .filter({ lookupNameResponse in
                 return lookupNameResponse.address != nil &&
@@ -827,95 +812,139 @@ class MessagesListVM: ObservableObject {
             })
             .asObservable()
             .take(1)
-            .subscribe(onNext: { [weak self, weak message] lookupNameResponse in
-                guard let self = self, let message = message else { return }
-                // if we have a registered name then we should update the value for it
+            .subscribe(onNext: { [weak self] lookupNameResponse in
+                guard let self = self else { return }
+                // Update name
                 if let name = lookupNameResponse.name, !name.isEmpty {
-                    self.updateName(name: name, id: id, message: message)
+                    self.updateName(name: name, jamiId: id)
                 } else {
-                    self.updateName(name: id, id: id, message: message)
+                    self.updateName(name: id, jamiId: id)
                 }
-                if let username = self.names.get(key: id) as? String,
-                   (self.avatars.get(key: id) as? UIImage) == nil {
-                    let image = UIImage.createContactAvatar(username: username, size: CGSize(width: 30, height: 30))
-                    self.updateAvatar(image: image, id: id, message: message)
-                }
+                // Create an avatar if it has not been set yet.
+                self.setAvatarIfNeededFor(jamiId: id, withDefault: true)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         self.nameService.lookupAddress(withAccount: self.conversation.accountId, nameserver: "", address: id)
     }
 
-    private func getInformationForContact(id: String, message: MessageContainerModel) {
-        guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
-        if self.contactsService.contact(withHash: id) == nil {
-            self.updateName(name: id, id: id, message: message)
-            self.nameLookup(id: id, message: message)
-            return
+    private func getInformationForContact(id: String) {
+        DispatchQueue.global(qos: .background).async {[weak self] in
+            guard let self = self else { return }
+            guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
+            if self.contactsService.contact(withHash: id) == nil {
+                self.updateName(name: id, jamiId: id)
+                self.nameLookup(id: id)
+                return
+            }
+            let schema: URIType = account.type == .sip ? .sip : .ring
+            guard let contactURI = JamiURI(schema: schema, infoHash: id).uriString else { return }
+            self.profileService
+                .getProfile(uri: contactURI,
+                            createIfNotexists: false,
+                            accountId: account.id)
+                .subscribe(onNext: { [weak self] profile in
+                    guard let self = self else { return }
+                    // Set name
+                    if let profileName = profile.alias, !profileName.isEmpty {
+                        self.updateName(name: profileName, jamiId: id)
+                    }
+                    // Set avatar
+                    if let photo = profile.photo,
+                       let image = photo.createImage() {
+                        self.updateAvatar(image: image, jamiId: id)
+                    } else {
+                        self.setAvatarIfNeededFor(jamiId: id, withDefault: false)
+                    }
+                    // Perform a name lookup if the profile does not have a name
+                    let name = (self.names.get(key: id) as? BehaviorRelay<String>)?.value
+                    if name?.isEmpty ?? true {
+                        self.nameLookup(id: id)
+                    }
+                })
+                .disposed(by: self.disposeBag)
         }
-        let schema: URIType = account.type == .sip ? .sip : .ring
-        guard let contactURI = JamiURI(schema: schema, infoHash: id).uriString else { return }
-        self.profileService
-            .getProfile(uri: contactURI,
-                        createIfNotexists: false,
-                        accountId: account.id)
-            .subscribe(onNext: { [weak self, weak message] profile in
-                guard let self = self, let message = message else { return }
-                if let photo = profile.photo,
-                   let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?,
-                   let image = UIImage(data: data) {
-                    self.updateAvatar(image: image, id: id, message: message)
-                } else if let username = self.names.get(key: id) as? String, (self.avatars.get(key: id) as? UIImage) == nil {
-                    let image = UIImage.createContactAvatar(username: username, size: CGSize(width: 30, height: 30))
-                    self.updateAvatar(image: image, id: id, message: message)
-                }
-                if let name = profile.alias, !name.isEmpty {
-                    self.updateName(name: name, id: id, message: message)
-                } else if (self.names.get(key: id) as? String) == nil {
-                    self.nameLookup(id: id, message: message)
-                }
-            })
-            .disposed(by: message.disposeBag)
     }
 
-    private func getAvatar(jamiId: String, message: MessageContainerModel) {
+    private func setAvatarIfNeededFor(jamiId: String, withDefault: Bool) {
+        // Attempt to retrieve the observable avatar and proceed only if it's nil (no image set yet).
+        guard let observableAvatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?>,
+              observableAvatar.value == nil else { return }
+
+        // Retrieve the name associated with the jamiId, defaulting to an empty string if not found.
+        let name = (self.names.get(key: jamiId) as? BehaviorRelay<String>)?.value ?? ""
+
+        // If the name is empty and a default avatar is not requested, exit early.
+        if name.isEmpty && !withDefault { return }
+
+        let avatarImage = UIImage.createContactAvatar(username: name, size: CGSize(width: 30, height: 30))
+        self.updateAvatar(image: avatarImage, jamiId: jamiId)
+    }
+
+    private func getAvatar(jamiId: String, message: AvatarImageObserver, messageId: String) {
         // check if we already have the avatar for a contact
-        if let avatar = self.avatars.get(key: jamiId) as? UIImage {
-            message.updateAvatar(image: avatar, jamiId: jamiId)
+        if let avatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
+            message.subscribeToAvatarObservable(avatar)
             // check if we need avatar for local account
         } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId, accountJamiId == jamiId {
-            message.updateAvatar(image: self.currentAccountAvatar, jamiId: jamiId)
+            message.subscribeToAvatarObservable(BehaviorRelay(value: self.currentAccountAvatar))
         } else {
-            self.getInformationForContact(id: jamiId, message: message)
+            // create entrance for participant and start contact fetching
+            let imageObservable = BehaviorRelay<UIImage?>(value: nil)
+            self.avatars.set(value: imageObservable, for: jamiId)
+            if let avatar = self.avatars.get(key: jamiId) as? BehaviorRelay<UIImage?> {
+                message.subscribeToAvatarObservable(avatar)
+            }
+            self.getInformationForContact(id: jamiId)
         }
     }
 
-    private func updateLastReadAvatars(messageId: String, messageModel: MessageContainerModel) {
+    private func getName(jamiId: String, message: NameObserver, messageId: String) {
+        if let name = self.names.get(key: jamiId) as? BehaviorRelay<String> {
+            message.subscribeToNameObservable(name)
+        } else if let accountJamiId = self.accountService.getAccount(fromAccountId: conversation.accountId)?.jamiId, accountJamiId == jamiId {
+            message.subscribeToNameObservable(BehaviorRelay(value: L10n.Account.me))
+        } else {
+            let nameObservable = BehaviorRelay(value: "")
+            self.names.set(value: nameObservable, for: jamiId)
+            message.subscribeToNameObservable(nameObservable)
+            self.getInformationForContact(id: jamiId)
+        }
+    }
+
+    private func getLastRead(message: MessageReadObserver, messageId: String) {
+        if let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> {
+            message.subscribeToReadObservable(lastReadAvatars)
+        } else {
+            let observableValue = BehaviorRelay(value: [String: UIImage]())
+            self.lastRead.set(value: observableValue, for: messageId)
+            message.subscribeToReadObservable(observableValue)
+            self.updateSubscriptionLastRead(messageId: messageId)
+        }
+    }
+
+    private func updateSubscriptionLastRead(messageId: String) {
+        guard let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> else { return }
+        // check if have participant why read this message last
         guard let participants = self.lastReadMessageForParticipant.filter({ participant in
             if let id = participant.value as? String {
                 return id == messageId
             }
             return false
         }) as? [String: String] else { return }
+
+        // get avatar images for last read
         var images = [String: UIImage]()
-        lastRead.set(value: images, for: messageId)
-        var contacts = [String]()
         for participant in participants {
             if let avatar = self.avatars.get(key: participant.key) as? UIImage {
                 images[participant.key] = avatar
             } else {
                 images[participant.key] = UIImage()
-                contacts.append(participant.key)
+                let imageObservable = BehaviorRelay<UIImage?>(value: nil)
+                self.avatars.set(value: imageObservable, for: participant.key)
+                self.getInformationForContact(id: participant.key)
             }
         }
-        lastRead.set(value: images, for: messageId)
-        let values: [UIImage] = images.map { value in
-            return value.value
-        }
-        let newValue = values.isEmpty ? nil : values
-        messageModel.updateRead(avatars: newValue)
-        for contact in contacts {
-            self.getInformationForContact(id: contact, message: messageModel)
-        }
+        lastReadAvatars.accept(images)
     }
 }
 
