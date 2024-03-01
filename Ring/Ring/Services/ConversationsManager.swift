@@ -484,6 +484,10 @@ class ConversationsManager {
 
     func messageStatusChanged(_ status: MessageStatus, for messageId: String, from accountId: String,
                               to jamiId: String, in conversationId: String) {
+        guard let localJamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId else { return }
+        if localJamiId == jamiId {
+            return
+        }
         self.conversationService.messageStatusChanged(status,
                                                       for: messageId,
                                                       from: accountId,
@@ -563,7 +567,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         // convert array of dictionaries to messages
         let messagesModels = messages.map { dictionary -> MessageModel in
-            let newMessage = MessageModel(withInfo: dictionary, accountJamiId: account.jamiId)
+            let newMessage = MessageModel(withInfo: dictionary, localJamiId: account.jamiId)
             updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
             return newMessage
         }
@@ -575,7 +579,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
         // convert array of dictionaries to messages
         let messagesModels = messages.map { wrapInfo -> MessageModel in
-            let newMessage = MessageModel(with: wrapInfo, accountJamiId: account.jamiId)
+            let newMessage = MessageModel(with: wrapInfo, localJamiId: account.jamiId)
             updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
             return newMessage
         }
@@ -591,7 +595,8 @@ extension  ConversationsManager: MessagesAdapterDelegate {
     }
 
     func messageUpdated(conversationId: String, accountId: String, message: SwarmMessageWrap) {
-        self.conversationService.messageUpdated(conversationId: conversationId, accountId: accountId, message: message)
+        guard let jamiId = self.accountsService.getAccount(fromAccountId: accountId)?.jamiId else { return }
+        self.conversationService.messageUpdated(conversationId: conversationId, accountId: accountId, message: message, localJamiId: jamiId)
     }
 
     func isDownloadingEnabled(for size: Int) -> Bool {
@@ -605,7 +610,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
 
     func newInteraction(conversationId: String, accountId: String, message: SwarmMessageWrap) {
         guard let account = self.accountsService.getAccount(fromAccountId: accountId) else { return }
-        let newMessage = MessageModel(with: message, accountJamiId: account.jamiId)
+        let newMessage = MessageModel(with: message, localJamiId: account.jamiId)
         if newMessage.type == .fileTransfer {
             newMessage.transferStatus = newMessage.incoming ? .awaiting : .success
         }
