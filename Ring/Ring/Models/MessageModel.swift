@@ -303,12 +303,12 @@ public class MessageModel {
         guard !self.incoming else { return false }
 
         switch self.type {
-            case .text:
-                return self.status == .sending
-            case .fileTransfer:
-                return ![.success, .canceled, .error].contains(self.transferStatus)
-            default:
-                return false
+        case .text:
+            return self.status == .sending
+        case .fileTransfer:
+            return ![.success, .canceled, .error].contains(self.transferStatus)
+        default:
+            return false
         }
     }
 
@@ -316,12 +316,12 @@ public class MessageModel {
         guard !self.incoming else { return false }
 
         switch self.type {
-            case .text:
-                return self.status == .sent || self.status == .displayed
-            case .fileTransfer:
-                return [.success].contains(self.transferStatus)
-            default:
-                return false
+        case .text:
+            return self.status == .sent || self.status == .displayed
+        case .fileTransfer:
+            return [.success].contains(self.transferStatus)
+        default:
+            return false
         }
     }
 }
