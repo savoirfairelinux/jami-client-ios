@@ -263,7 +263,7 @@ struct ContextMenuView: View {
         .background(VisualEffect(style: .systemChromeMaterial, withVibrancy: false))
         .cornerRadius(radius: model.menuCornerRadius, corners: .allCorners)
     }
-    
+
     func makeWithSpacers(elementForAlignment: some View) -> some View {
         HStack {
             if !model.isOurMsg! {

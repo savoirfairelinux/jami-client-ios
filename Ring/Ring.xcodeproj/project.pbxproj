@@ -222,6 +222,7 @@
 		263F61762B45BBA100240AEE /* ReactionsContainerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F61752B45BBA100240AEE /* ReactionsContainerModel.swift */; };
 		263F61782B45E8FD00240AEE /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F61772B45E8FD00240AEE /* MessageBubbleView.swift */; };
 		264002462A9ECE6300949B2F /* PendingConferenceCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264002452A9ECE6300949B2F /* PendingConferenceCall.swift */; };
+		2640BA9A2B974E4B006D189A /* MessageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640BA992B974E4B006D189A /* MessageProtocols.swift */; };
 		26454FB72B7FDCB200CFF06C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FB62B7FDCB200CFF06C /* AboutViewController.swift */; };
 		26454FB92B7FDCE400CFF06C /* AboutViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26454FB82B7FDCE400CFF06C /* AboutViewController.storyboard */; };
 		26454FBD2B7FDED400CFF06C /* AboutSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26454FBC2B7FDED400CFF06C /* AboutSwiftUIView.swift */; };
@@ -850,6 +851,7 @@
 		263F61752B45BBA100240AEE /* ReactionsContainerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsContainerModel.swift; sourceTree = "<group>"; };
 		263F61772B45E8FD00240AEE /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubbleView.swift; sourceTree = "<group>"; };
 		264002452A9ECE6300949B2F /* PendingConferenceCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingConferenceCall.swift; sourceTree = "<group>"; };
+		2640BA992B974E4B006D189A /* MessageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageProtocols.swift; sourceTree = "<group>"; };
 		26454FB62B7FDCB200CFF06C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		26454FB82B7FDCE400CFF06C /* AboutViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AboutViewController.storyboard; sourceTree = "<group>"; };
 		26454FBC2B7FDED400CFF06C /* AboutSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSwiftUIView.swift; sourceTree = "<group>"; };
@@ -2330,6 +2332,7 @@
 				BB06BD8029D491F80064F0FC /* CustomAnnotationModel.swift */,
 				263F61752B45BBA100240AEE /* ReactionsContainerModel.swift */,
 				2625814F2B4EF15D00314C42 /* MessagePanelVM.swift */,
+				2640BA992B974E4B006D189A /* MessageProtocols.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2904,6 +2907,7 @@
 				26EF35E728E3401800D97E14 /* ReplyHistory.swift in Sources */,
 				1A2D18DD1F29192D00B2C785 /* MessableBubble.swift in Sources */,
 				260C73F329196C6C005C513F /* MessageStackVM.swift in Sources */,
+				2640BA9A2B974E4B006D189A /* MessageProtocols.swift in Sources */,
 				0E96ED77225D06380016C07D /* GeneralSettingsViewController.swift in Sources */,
 				263F61782B45E8FD00240AEE /* MessageBubbleView.swift in Sources */,
 				264FB66229775B1C00BEFBBF /* SystemService.swift in Sources */,
