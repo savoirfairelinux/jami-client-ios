@@ -103,7 +103,7 @@ enum ContextualMenuItem: Identifiable {
 }
 
 // swiftlint:disable type_body_length
-class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerDelegate, MessageAppearanceProtocol {
+class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerDelegate, MessageAppearanceProtocol, NameObserver {
 
     @Published var content = ""
     @Published var metadata: LPLinkMetadata?
@@ -145,6 +145,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     var isHistory: Bool
     var type: MessageType = .text
     var maxImageSize: CGFloat = 300
+    var disposeBag = DisposeBag()
 
     private var sequencing: MessageSequencing = .unknown {
         didSet {
@@ -164,7 +165,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         return URL(string: withPrefix)
     }
 
-    var username = "" {
+    @Published var username = "" {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -176,13 +177,12 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     // state
     var contextMenuState: PublishSubject<State>
     var transferState: PublishSubject<State>
-    var infoState: PublishSubject<State>
+    var infoState: PublishSubject<State>?
     var preferencesColor: UIColor
 
-    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, infoState: PublishSubject<State>, isHistory: Bool, preferencesColor: UIColor) {
+    required init(message: MessageModel, contextMenuState: PublishSubject<State>, transferState: PublishSubject<State>, isHistory: Bool, preferencesColor: UIColor) {
         self.contextMenuState = contextMenuState
         self.transferState = transferState
-        self.infoState = infoState
         self.message = message
         self.type = message.type
         self.isIncoming = message.incoming
@@ -200,6 +200,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         }
         self.updateMessageEditions()
         self.fetchMetadata()
+    }
+
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
     }
 
     private func updateMessageStyle() {
@@ -466,7 +470,13 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
             }
         }
         if self.message.isMessageDeleted() {
-            self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: self.message.authorId))
+            self.requestName(jamiId: self.message.authorId)
+        }
+    }
+
+    func updateUserName() {
+        if !self.message.authorId.isEmpty {
+            self.requestName(jamiId: self.message.authorId)
         }
     }
 
