@@ -26,7 +26,7 @@ struct ReactionRowView: View {
 
     var body: some View {
         HStack {
-            reaction.image
+            Image(uiImage: reaction.avatarImage!)
                 .resizable()
                 .scaledToFill()
                 .frame(width: 40, height: 40)
@@ -35,7 +35,7 @@ struct ReactionRowView: View {
             Spacer()
                 .frame(width: padding)
 
-            Text(reaction.name)
+            Text(reaction.username)
                 .font(.callout)
                 .lineLimit(1)
                 .truncationMode(.tail)
