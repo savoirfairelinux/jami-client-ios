@@ -21,18 +21,21 @@
 import SwiftUI
 import RxSwift
 
-class ReactionsRowViewModel: Identifiable, ObservableObject {
+class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver, NameObserver {
     let jamiId: String
     let messageId: String
-    @Published var image: Image
-    @Published var name: String = ""
+    @Published var avatarImage: UIImage?
+    @Published var username: String = ""
     @Published var content = [String: String]()
+    var disposeBag = DisposeBag()
+
+    var infoState: PublishSubject<State>?
 
     init(reaction: MessageAction) {
         self.jamiId = reaction.author
-        self.name = self.jamiId
+        self.username = self.jamiId
         self.messageId = reaction.id
-        self.image = Image(uiImage: UIImage())
+        self.avatarImage = UIImage()
         self.content[reaction.id] = reaction.content
     }
 
@@ -44,35 +47,37 @@ class ReactionsRowViewModel: Identifiable, ObservableObject {
     func toString() -> String {
         return content.values.joined(separator: " ")
     }
+
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
+        requestAvatar(jamiId: jamiId)
+        requestName(jamiId: jamiId)
+    }
 }
 
 class ReactionsContainerModel: ObservableObject {
     @Published var reactionsRow = [ReactionsRowViewModel]()
     @Published var displayValue: String = ""
     let message: MessageModel
-    let infoState: PublishSubject<State>
+    private var infoState: PublishSubject<State>?
     var reactionsRowCreated = false
 
-    init(message: MessageModel, infoState: PublishSubject<State>) {
+    init(message: MessageModel) {
         self.message = message
-        self.infoState = infoState
         self.updateDisplayValue()
+    }
+
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
+        reactionsRow.forEach { reaction in
+            reaction.setInfoState(state: state)
+        }
     }
 
     func onAppear() {
         if self.reactionsRowCreated { return }
         self.reactionsRowCreated.toggle()
         self.update()
-    }
-
-    func updateUsername(name: String, jamiId: String) {
-        guard let reaction = self.getReaction(jamiId: jamiId), !name.isEmpty else { return }
-        reaction.name = name
-    }
-
-    func updateImage(image: UIImage, jamiId: String) {
-        guard let reaction = self.getReaction(jamiId: jamiId) else { return }
-        reaction.image = Image(uiImage: image)
     }
 
     func reactionsUpdated() {
@@ -98,9 +103,11 @@ class ReactionsContainerModel: ObservableObject {
     }
 
     private func addReaction(reaction: MessageAction) {
-        self.reactionsRow.append(ReactionsRowViewModel(reaction: reaction))
-        self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: reaction.author))
-        self.infoState.onNext(MessageInfo.updateAvatar(jamiId: reaction.author))
+        let reactionRow = ReactionsRowViewModel(reaction: reaction)
+        self.reactionsRow.append(reactionRow)
+        if let state = self.infoState {
+            reactionRow.setInfoState(state: state)
+        }
     }
 
     private func update() {

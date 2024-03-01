@@ -93,7 +93,7 @@ class ContextMenuVM: ObservableObject {
     var uniqueAuthoredReactions: [String] = [] // a list of emojis (excluding defaults) that can be revoked via tap in emojibar
     @Published var selectedEmoji: String = ""
     @Published var isEmojiPickerPresented: Bool = false
-    
+
     func updateContextMenuSize() {
         let height: CGFloat = CGFloat(menuItems.count) * itemHeight + menuPadding * 2
         let fontAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .callout)]

@@ -25,8 +25,7 @@ import Foundation
 import RxSwift
 import SwiftUI
 
-class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
-
+class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObserver, AvatarImageObserver {
     @Published var avatarImage: UIImage?
     @Published var read: [UIImage]?
     @Published var timeString: String = ""
@@ -38,10 +37,11 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
     @Published var showReciveIndicator: Bool = false
     var styling: MessageStyling = MessageStyling()
     var incoming: Bool
-    var infoState: PublishSubject<State>
+    var infoState: PublishSubject<State>?
     var centeredMessage: Bool
 
     var message: MessageModel
+    var disposeBag = DisposeBag()
 
     var shouldShowTimeString = false {
         didSet {
@@ -53,7 +53,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
         didSet {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
             if self.shouldDisplayAavatar {
-                self.infoState.onNext(MessageInfo.updateAvatar(jamiId: jamiId))
+                self.requestAvatar(jamiId: jamiId)
             } else {
                 self.avatarImage = nil
             }
@@ -75,17 +75,20 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
     }
 
     func fetchLastRead() {
-        self.infoState.onNext(MessageInfo.updateRead(messageId: self.message.id))
+        self.requestReadStatus(messageId: self.message.id)
     }
 
-    init(message: MessageModel, infoState: PublishSubject<State>) {
+    init(message: MessageModel) {
         self.message = message
         self.incoming = message.incoming
-        self.infoState = infoState
         self.centeredMessage = message.type == .contact || message.type == .initial
         self.readBorderColor = Color(UIColor.systemBackground)
         self.timeString = getTimeLabelString()
         self.updateMessageStatus()
+    }
+
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
     }
 
     func getTimeLabelString() -> String {
@@ -134,7 +137,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol {
         }
     }
 
-    func displayLastSent(state: Bool)  {
+    func displayLastSent(state: Bool) {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             self.showReciveIndicator = state
