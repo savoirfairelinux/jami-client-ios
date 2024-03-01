@@ -21,8 +21,15 @@
 import Foundation
 import SwiftUI
 import RxSwift
+import Combine
 
-class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol {
+class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver, NameObserver {
+    @Published var username: String = "" {
+        didSet {
+            updateInReplyMessage()
+        }
+    }
+
     var styling: MessageStyling = MessageStyling()
 
     @Published var avatarImage: UIImage?
@@ -33,29 +40,34 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol {
     let sizeIndex: CGFloat = 0.5
 
     var targetReplyUsername = ""
-    var replyUserName = ""
     var localJamiId: String
     var replyAuthorJamiId: String
-    var infoState: PublishSubject<State>
+    private var infoState: PublishSubject<State>?
 
     var alignment: HorizontalAlignment = .center
 
     var isIncoming: Bool
 
+    var disposeBag = DisposeBag()
+
     var target: MessageContentVM? {
         didSet {
             if target != nil {
-                updateUsernameForTargetReply()
+                subscription = target!.$username.sink { [weak self] newValue in
+                    self?.targetReplyUsername = newValue
+                    self?.updateInReplyMessage()
+                }
+                target!.updateUserName()
                 updateUsernameForReply()
                 updateInReplyMessage()
             }
         }
     }
+    var subscription: AnyCancellable?
 
     var contextMenuState: PublishSubject<State>
 
-    init(infoState: PublishSubject<State>, contextMenuState: PublishSubject<State>, localJamiId: String, replyAuthorJamiId: String, isIncoming: Bool) {
-        self.infoState = infoState
+    init(contextMenuState: PublishSubject<State>, localJamiId: String, replyAuthorJamiId: String, isIncoming: Bool) {
         self.localJamiId = localJamiId
         self.replyAuthorJamiId = replyAuthorJamiId
         self.isIncoming = isIncoming
@@ -63,16 +75,20 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol {
         self.contextMenuState = contextMenuState
     }
 
-    func updateUsername(name: String, jamiId: String) {
-        guard let target = self.target, !name.isEmpty else { return }
-        if target.message.authorId == jamiId {
-            targetReplyUsername = name
-        }
-        if replyAuthorJamiId == jamiId {
-            replyUserName = name
-        }
-        updateInReplyMessage()
+    func setInfoState(state: PublishSubject<State>) {
+        self.infoState = state
     }
+
+//    func updateUsername(name: String, jamiId: String) {
+//        guard let target = self.target, !name.isEmpty else { return }
+//        if target.message.authorId == jamiId {
+//            targetReplyUsername = name
+//        }
+//        if replyAuthorJamiId == jamiId {
+//            replyUserName = name
+//        }
+//        updateInReplyMessage()
+//    }
 
     private func replyIsIncoming() -> Bool {
         return replyAuthorJamiId == localJamiId || replyAuthorJamiId.isEmpty
@@ -86,20 +102,14 @@ class MessageReplyTargetVM: ObservableObject, MessageAppearanceProtocol {
 
     private func updateUsernameForReply() {
         if replyIsIncoming() { return }
-        self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: replyAuthorJamiId))
-    }
-
-    private func updateUsernameForTargetReply() {
-        guard let target = target, !targetReplyIsIncoming() else { return }
-        let jamiId = target.message.authorId
-        self.infoState.onNext(MessageInfo.updateDisplayname(jamiId: jamiId))
+        self.infoState?.onNext(MessageInfo.updateDisplayname(jamiId: replyAuthorJamiId, message: self))
     }
 
     private func getInReplyMessage() -> String {
         let inReplyToSelf = L10n.Conversation.inReplyTo + " \(L10n.Account.me)"
         let inReplyToOther = L10n.Conversation.inReplyTo + " \(targetReplyUsername)"
-        let repliedByOtherToSelf = "\(replyUserName) " + L10n.Conversation.repliedTo + " \(L10n.Account.me)"
-        let repliedByOtherToOther = "\(replyUserName) " + L10n.Conversation.repliedTo + " \(targetReplyUsername)"
+        let repliedByOtherToSelf = "\(username) " + L10n.Conversation.repliedTo + " \(L10n.Account.me)"
+        let repliedByOtherToOther = "\(username) " + L10n.Conversation.repliedTo + " \(targetReplyUsername)"
 
         switch (replyIsIncoming(), targetReplyIsIncoming()) {
         case (true, true):

@@ -42,6 +42,12 @@ class ConcurentDictionary {
         }
     }
 
+    func removeValueForKey(key: AnyHashable) {
+        queue.sync(flags: .barrier) {[weak self] in
+            self?.internalDictionary[key] = nil
+        }
+    }
+
     func filter(_ isIncluded: @escaping (Dictionary<AnyHashable, Any>.Element) throws -> Bool) rethrows -> [AnyHashable: Any]? {
         return try? self.internalDictionary.filter(isIncluded)
     }

@@ -111,16 +111,26 @@ class MessageContainerModel: Identifiable {
         self.id = message.id
         self.message = message
         self.preferencesColor = preferencesColor
-        self.stackViewModel = MessageStackVM(message: message, infoState: self.infoSubject)
-        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, infoState: self.infoSubject, isHistory: isHistory, preferencesColor: preferencesColor)
-        self.messageRow = MessageRowVM(message: message, infoState: self.infoSubject)
-        self.contactViewModel = ContactMessageVM(message: message, infoState: self.infoSubject)
-        self.replyTarget = MessageReplyTargetVM(infoState: self.infoSubject, contextMenuState: contextMenuState, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
-        self.reactionsModel = ReactionsContainerModel(message: message, infoState: self.infoSubject)
+        self.stackViewModel = MessageStackVM(message: message)
+        self.messageContent = MessageContentVM(message: message, contextMenuState: contextMenuState, transferState: self.transferSubject, isHistory: isHistory, preferencesColor: preferencesColor)
+        self.messageRow = MessageRowVM(message: message)
+        self.contactViewModel = ContactMessageVM(message: message)
+        self.replyTarget = MessageReplyTargetVM(contextMenuState: contextMenuState, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
+        self.reactionsModel = ReactionsContainerModel(message: message)
+    }
+
+    func listenerForInfoStateAdded() {
+        self.stackViewModel.setInfoState(state: self.infoSubject)
+        self.messageContent.setInfoState(state: self.infoSubject)
+        self.messageRow.setInfoState(state: self.infoSubject)
+        self.contactViewModel.setInfoState(state: self.infoSubject)
+        self.replyTarget.setInfoState(state: self.infoSubject)
+        self.reactionsModel.setInfoState(state: self.infoSubject)
     }
 
     func setReplyTarget(message: MessageModel) {
-        let target = MessageContentVM(message: message, contextMenuState: PublishSubject<State>(), transferState: self.transferSubject, infoState: self.infoSubject, isHistory: false, preferencesColor: preferencesColor)
+        let target = MessageContentVM(message: message, contextMenuState: PublishSubject<State>(), transferState: self.transferSubject, isHistory: false, preferencesColor: preferencesColor)
+        target.setInfoState(state: self.infoSubject)
         self.replyTarget.target = target
     }
 
@@ -138,52 +148,8 @@ class MessageContainerModel: Identifiable {
         }
     }
 
-    func updateRead(avatars: [UIImage]?) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.messageRow.read = avatars
-        }
-    }
-
-    func updateAvatar(image: UIImage, jamiId: String) {
-        DispatchQueue.main.async { [weak self, weak image] in
-            guard let self = self, let image = image else { return }
-            if self.messageRow.shouldDisplayAavatar && self.message.incoming {
-                self.messageRow.updateImage(image: image, jamiId: jamiId)
-            }
-            if self.message.type == .contact && self.message.incoming {
-                self.contactViewModel.avatarImage = image
-            }
-
-            if self.replyTarget.target != nil {
-                self.replyTarget.avatarImage = image
-            }
-
-            self.reactionsModel.updateImage(image: image, jamiId: jamiId)
-        }
-    }
-
     func startTargetReplyAnimation() {
         self.messageContent.startTargetReplyAnimation()
-    }
-
-    func updateUsername(name: String, jamiId: String) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            if self.stackViewModel.shouldDisplayName && self.message.incoming {
-                self.stackViewModel.username = name
-            }
-            if self.message.type == .contact && self.message.incoming {
-                self.contactViewModel.username = name
-            }
-
-            if self.replyTarget.target != nil {
-                self.replyTarget.updateUsername(name: name, jamiId: jamiId)
-            }
-            self.messageContent.updateUsername(name: name, jamiId: jamiId)
-
-            self.reactionsModel.updateUsername(name: name, jamiId: jamiId)
-        }
     }
 
     func swarmColorUpdated(color: UIColor) {
