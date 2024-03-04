@@ -118,9 +118,7 @@ class ReactionsContainerModel: ObservableObject {
     }
 
     private func getReaction(jamiId: String) -> ReactionsRowViewModel? {
-        return self.reactionsRow.filter({ reaction in
-            reaction.jamiId == jamiId
-        }).first
+        return self.reactionsRow.first(where: { reaction in reaction.jamiId == jamiId }) ?? nil
     }
 
     private func toString() -> String {
