@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ae28617_3aba2213",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-03-04T19:12:02Z",
+      "side": 1,
+      "message": "UIScreen.main.bounds.size.width",
+      "revId": "d8e2bc3090ceb3261ffdbadba98a9bfd7d1632af",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13b62d4d_1621475d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-03-04T19:12:02Z",
+      "side": 1,
+      "message": "space",
+      "revId": "d8e2bc3090ceb3261ffdbadba98a9bfd7d1632af",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a4862be_7cdd410a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-03-04T19:12:02Z",
+      "side": 1,
+      "message": ".offset(y: 18) would not work for any font size. Either use vStack or set constant size for emoji text",
+      "revId": "d8e2bc3090ceb3261ffdbadba98a9bfd7d1632af",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
