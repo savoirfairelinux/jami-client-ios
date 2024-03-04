@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Campagne de donation";
 "generalSettings.enableDonationCampaign" = "Activer la campagne de dons";
 
-
 //Log View
 "logView.title" = "Diagnostiques";
 "logView.description" = "Ouvrir les paramètres  des journaux de diagnostiques";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "Échec de la migration. Réessayer en pressant Ok ou supprimer ce compte.";
 "migrateAccount.migrating" = "Migration du compte…";
 "migrateAccount.migrateAnother" = "Migrer d'une autre compte";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, un paquetage GNU, est un logiciel de communication pair à pair universel et distribué qui respecte la liberté et la vie privée de ses utilisateurs. Visitez ";
+"aboutJami.declaration2" = "pour plus d'informations";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "Contribuez";
+"aboutJami.feedback" = "Commentaires";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+

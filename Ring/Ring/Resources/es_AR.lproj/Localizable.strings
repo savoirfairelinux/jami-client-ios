@@ -46,10 +46,10 @@
 "global.reply" = "Responder";
 "global.search" = "Buscando...";
 "global.donate" = "Donar";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Eliminar mensaje";
+"global.deleteFile" = "Eliminar archivo del dispositivo";
+"global.editMessage" = "Editar mensaje";
+"global.editing" = "Editando";
 
 // Scan
 "scan.badQrCode" = "Código QR erróneo";
@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "Si disfruta usando Jami y cree en nuestra misión, ¿le gustaría hacer una donación?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to";
+"conversation.messagePlaceholder" = "Escribir a";
 "conversation.explanationSendingLocationTo" = "Estás compartiendo tu ubicación con";
 "conversation.explanationReceivingLocationFrom" = "Estás recibiendo una ubicación en vivo de";
 "conversation.errorSavingImage" = "No se pudo guardar la imagen en la galería";
@@ -116,10 +116,10 @@
 "conversation.synchronizationTitle" = "Has aceptado la solicitud de conversación.";
 "conversation.synchronizationMessage" = "Esperando a que %@ se conecte para sincronizar la conversación.";
 "conversation.inReplyTo" = "En respuesta a";
-"conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.repliedTo" = "responder a";
+"conversation.yourself" = "tú mismo";
+"conversation.edited" = "editado";
+"conversation.deletedMessage" = "Eliminar mensaje";
 
 //Invitations
 "invitations.noInvitations" = "Sin invitaciones";
@@ -172,7 +172,7 @@
 "linkToAccount.linkDeviceMessage" = "Elija \"Enlazar un nuevo dispositivo\" desde otra aplicación Jami para mostrar el código QR o el PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Introducir PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Para generar el código PIN, ve a la configuración de administración de la cuenta en el dispositivo que contiene la cuenta que deseas vincular. Selecciona \"Vincular nuevo dispositivo\". Recibirás el PIN necesario para completar este formulario. El PIN solo es válido durante 10 minutos.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Registrarse";
@@ -388,9 +388,8 @@
 "generalSettings.acceptTransferLimitDescription" = "(in MB, 0 = unlimited)";
 "generalSettings.limitLocationSharingDuration" = "Limitar la duración del uso compartido de la ubicación";
 "generalSettings.locationSharingDuration" = "Duración del tiempo compartido";
-"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.donationCampaign" = "Campaña de donación";
 "generalSettings.enableDonationCampaign" = "Habilitar campaña de donación";
-
 
 //Log View
 "logView.title" = "Diagnósticos";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "Falló la migración de tu cuenta. Podés volver a intentar o eliminar tu cuenta.";
 "migrateAccount.migrating" = "Migrando...";
 "migrateAccount.migrateAnother" = "Migrar otra cuenta";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, un paquete GNU, es un software para comunicación universal y distribuida entre pares que respeta la libertad y privacidad de sus usuarios. Visita";
+"aboutJami.declaration2" = "para saber más.";
+"aboutJami.noWarranty1" = "Este programa viene con absolutamente ninguna garantía. Ver";
+"aboutJami.noWarranty2" = "versión 3 o posterior para más detalles.";
+"aboutJami.contribute" = "Contribuya";
+"aboutJami.feedback" = "Comentarios";
+"aboutJami.createdBy" = "Creado por";
+"aboutJami.artworkBy" = "Ilustraciones realizadas por";
+
+

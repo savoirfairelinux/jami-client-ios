@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-
 //Log View
 "logView.title" = "ರೋಗನಿರ್ಣಯ";
 "logView.description" = "ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ಲಾಗ್ ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ತೆರೆಯಿರಿ";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಸ್ಥಳಾಂತರಿಸಲು ವಿಫಲವಾಗಿದೆ. ನೀವು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಬಹುದು ಅಥವಾ ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಅಳಿಸಬಹುದು.";
 "migrateAccount.migrating" = "ವಲಸೆ ಹೋಗುವುದು.";
 "migrateAccount.migrateAnother" = "ಮತ್ತೊಂದು ಖಾತೆಯನ್ನು ವಲಸೆ";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "ಕೊಡುಗೆ";
+"aboutJami.feedback" = "ಪ್ರತಿಕ್ರಿಯೆ";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+

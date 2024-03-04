@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-
 //Log View
 "logView.title" = "진단";
 "logView.description" = "진단 로그 열 설정";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "계정을 마이그레이션하지 못했어요. 다시 시도하거나 삭제할 수 있습니다.";
 "migrateAccount.migrating" = "이주하는 것...";
 "migrateAccount.migrateAnother" = "다른 계정 을 마이그레이션";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "기여";
+"aboutJami.feedback" = "피드백";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+

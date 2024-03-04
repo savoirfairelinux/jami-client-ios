@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-
 //Log View
 "logView.title" = "Utambuzi";
 "logView.description" = "Mipangilio ya wazi ya rekodi ya uchunguzi";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "Usikose kuhamisha akaunti yako. Unaweza kujaribu tena au kufuta akaunti yako.";
 "migrateAccount.migrating" = "Kuhamia...";
 "migrateAccount.migrateAnother" = "Hesabu Nyingine";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "Shiriki";
+"aboutJami.feedback" = "Maoni ya kurudia";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+
