@@ -35,6 +35,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b67bc9ac_38864ae8",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "69a17d71_2ac75334",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e343588_24909f94",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-02-27T14:15:42Z",
       "side": 1,
       "message": "do we need updateSizes() when changing emojiBarHeight?",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b2e6cb0_f5ce5093",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4e343588_24909f94",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -69,6 +105,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29623327_b4e04886",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0245137b_40d0f286",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dd03071_d381cc21",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-02-27T14:15:42Z",
       "side": 1,
       "message": "what is the purpose of emojiQueued?",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94981317_ec680e4c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5dd03071_d381cc21",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -103,6 +175,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d69a6f4_9dd1862a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "How can I access contextMenuPresentingState from here?",
+      "parentUuid": "c2ec0cdc_87c95b87",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "847614da_44671172",
@@ -116,6 +206,24 @@
       "writtenOn": "2024-02-27T14:15:42Z",
       "side": 1,
       "message": "why do we need this?",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aa4ebdf_ec266919",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "847614da_44671172",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -137,6 +245,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b33dfc2_3289380a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "68892a2f_300610f2",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa25de10_7e88618a",
@@ -150,6 +276,24 @@
       "writtenOn": "2024-02-27T14:15:42Z",
       "side": 1,
       "message": "not used",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73615486_965b217e",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/ContextMenuVM.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fa25de10_7e88618a",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -171,6 +315,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c896c41_045458d1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c530ee9f_02ec428b",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73657943_d18dcb7f",
@@ -184,6 +346,24 @@
       "writtenOn": "2024-02-27T14:15:42Z",
       "side": 1,
       "message": "commented code",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3bcbeb7_aaa2cee1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "73657943_d18dcb7f",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -205,6 +385,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db184cd8_822fc43d",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3867f184_0979f996",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92c72075_fb318010",
@@ -218,6 +416,24 @@
       "writtenOn": "2024-02-27T14:15:42Z",
       "side": 1,
       "message": "elementOpacity always 1, do we need it?",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a81d1aa1_3588fa57",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "92c72075_fb318010",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -239,6 +455,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c19cc5b_01dbf865",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "485451c8_882bd683",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "635d74bd_1cc2705a",
@@ -252,6 +486,24 @@
       "writtenOn": "2024-02-27T14:15:42Z",
       "side": 1,
       "message": "we could observe cxModel.selectedEmoji changed, to check when context menu should be hidden",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe9fc2a_6b17499a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "635d74bd_1cc2705a",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -273,6 +525,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8edb50de_3dc8aae6",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e6ddb7dc_e49c03b2",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd12a8d8_c5c5c5eb",
@@ -286,6 +556,24 @@
       "writtenOn": "2024-02-27T14:15:42Z",
       "side": 1,
       "message": "Overlaying with a constant offset number will not work for different font sizes. It would be better to use two elements in a VStack so that the padding is always respected.",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc446b1_720758d1",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "That is a good suggestion. I will try and implement this.",
+      "parentUuid": "bd12a8d8_c5c5c5eb",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -307,6 +595,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eb1d085_bdc845ab",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1eaf8feb_7bed0bbf",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63bd7583_3d905180",
@@ -320,6 +626,24 @@
       "writtenOn": "2024-02-27T14:15:42Z",
       "side": 1,
       "message": "first we need to call presentingState \u003d .willDismiss, so view could handle keyboard if need",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b099ada_93a45bc8",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ContextMenuView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "63bd7583_3d905180",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -341,6 +665,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87d4d8e8_0d5202df",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ec907c9e_1b95f51a",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "066a36ba_93c78f7f",
@@ -358,6 +700,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dc18767_8cca04a4",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "066a36ba_93c78f7f",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c812c808_a977057d",
@@ -371,6 +731,24 @@
       "writtenOn": "2024-02-27T14:15:42Z",
       "side": 1,
       "message": "it should jamiId, not accountId",
+      "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fe6b62f_09f3bba0",
+        "filename": "Ring/Ring/Models/MessageModel.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1024
+      },
+      "writtenOn": "2024-03-04T17:44:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c812c808_a977057d",
       "revId": "f24c03930ee1fb39ed229302af10e2fd686877bc",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
