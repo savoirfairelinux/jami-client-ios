@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-
 //Log View
 "logView.title" = "রোগ নির্ণয়";
 "logView.description" = "খোলা ডায়াগনস্টিক লগ সেটিংস";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "আপনার অ্যাকাউন্ট মাইগ্রেশন করতে ব্যর্থ হয়েছে। আপনি আবার চেষ্টা করতে পারেন অথবা আপনার অ্যাকাউন্ট মুছে ফেলতে পারেন।";
 "migrateAccount.migrating" = "মাইগ্রেশন...";
 "migrateAccount.migrateAnother" = "অন্য অ্যাকাউন্ট স্থানান্তর করুন";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "অবদান";
+"aboutJami.feedback" = "প্রতিক্রিয়া";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+

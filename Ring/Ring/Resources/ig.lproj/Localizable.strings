@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-
 //Log View
 "logView.title" = "Ihe ndị e ji amata ọrịa";
 "logView.description" = "Mbido ndekọ ndekọ nchọpụta na-emeghe";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "Ị nwere ike gbalịa ọzọ ma ọ bụ ihichapụ akaụntụ gị.";
 "migrateAccount.migrating" = "Ịkwaga ebe ọzọ...";
 "migrateAccount.migrateAnother" = "Kpọrọ Akaụntụ Ọzọ";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "Nye aka";
+"aboutJami.feedback" = "Nzaghachi";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+

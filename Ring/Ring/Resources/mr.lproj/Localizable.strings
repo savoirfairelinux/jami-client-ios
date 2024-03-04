@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
-
 //Log View
 "logView.title" = "निदान";
 "logView.description" = "उघड डायग्नोस्टिक लॉग सेटिंग्ज";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "तुमचे खाते स्थलांतरित करण्यात अपयश आले. तुम्ही पुन्हा प्रयत्न करू शकता किंवा तुमचे खाते हटवू शकता.";
 "migrateAccount.migrating" = "स्थलांतर.";
 "migrateAccount.migrateAnother" = "दुसर्या खात्यात स्थलांतर करा";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "योगदान";
+"aboutJami.feedback" = "अभिप्राय";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+

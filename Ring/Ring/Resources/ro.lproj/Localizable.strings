@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Campania de donare";
 "generalSettings.enableDonationCampaign" = "Activează campania de donare";
 
-
 //Log View
 "logView.title" = "Diagnoză";
 "logView.description" = "Deschide reglările diagnozei";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "Transferul contului tău nu a reușit. Poți încerca din nou sau șterge acest cont.";
 "migrateAccount.migrating" = "Se transferă...";
 "migrateAccount.migrateAnother" = "Transferă alt cont";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, un pachet GNU, este un program pentru comunicare distribuită și universală care respectă libertatea și intimitatea utilizatorilor săi. Vezi";
+"aboutJami.declaration2" = "pentru a afla mai multe.";
+"aboutJami.noWarranty1" = "Acest program nu oferă absolut nicio garanție. Vezi";
+"aboutJami.noWarranty2" = "versiunea 3 sau ulterioară pentru detalii.";
+"aboutJami.contribute" = "Contribuie";
+"aboutJami.feedback" = "Părere";
+"aboutJami.createdBy" = "Creat de";
+"aboutJami.artworkBy" = "Grafică de";
+
+

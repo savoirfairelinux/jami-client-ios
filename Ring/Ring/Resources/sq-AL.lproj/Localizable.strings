@@ -103,7 +103,7 @@
 "smartlist.donationExplanation" = "Nëse ju shijon të përdorni Jami-n dhe besoni në misionin tonë, a do të bënit një dhurim?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to";
+"conversation.messagePlaceholder" = "Shkruajini";
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
 "conversation.errorSavingImage" = "S’u arrit të ruhej figurë te galeri";
@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Fushatë dhurimesh";
 "generalSettings.enableDonationCampaign" = "Aktivizo fushatë dhurimesh";
 
-
 //Log View
 "logView.title" = "Diagnostikime";
 "logView.description" = "Hapni rregullime regjistrash diagnostikimi";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "S’u arrit të migrohej llogaria juaj. Mund të riprovoni ose të fshini llogarinë tuaj.";
 "migrateAccount.migrating" = "Po migrohet…";
 "migrateAccount.migrateAnother" = "Migroni Llogari Tjetër";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, një paketë GNU, është software i lirë për komunikim universal dhe të shpërndarë “peer-to-peer”, që respekton liritë dhe privatësinë e përdoruesve të tij. Vizitoni";
+"aboutJami.declaration2" = "që të mësoni më tepër.";
+"aboutJami.noWarranty1" = "Ky program vjen absolutisht pa asnjë garanci. Për hollësi, shihni";
+"aboutJami.noWarranty2" = "version 3, ose të mëvonshëm.";
+"aboutJami.contribute" = "Kontribuoni";
+"aboutJami.feedback" = "Përshtypje";
+"aboutJami.createdBy" = "Krijuar nga";
+"aboutJami.artworkBy" = "Ana grafike nga";
+
+

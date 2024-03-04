@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Donation campaign";
 "generalSettings.enableDonationCampaign" = "Включить кампанию по пожертвованиям";
 
-
 //Log View
 "logView.title" = "Диагностика";
 "logView.description" = "Открыть настройки диагностических логов";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "Ошибка при переносе Вашего аккаунта. Вы можете попробовать повторно или удалить Ваш аккаунт.";
 "migrateAccount.migrating" = "Перенос...";
 "migrateAccount.migrateAnother" = "Перенос другого аккаунта";
+
+//About Jami
+"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration2" = "to learn more.";
+"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
+"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.contribute" = "Помочь проекту";
+"aboutJami.feedback" = "Обратная связь";
+"aboutJami.createdBy" = "Created by";
+"aboutJami.artworkBy" = "Artwork by";
+
+

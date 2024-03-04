@@ -391,7 +391,6 @@
 "generalSettings.donationCampaign" = "Adományozási kampány";
 "generalSettings.enableDonationCampaign" = "Adományozási kampány engedélyezése";
 
-
 //Log View
 "logView.title" = "Diagnosztika";
 "logView.description" = "Diagnosztikai naplóbeállítások megnyitása";
@@ -408,3 +407,15 @@
 "migrateAccount.error" = "Fiókáttelepítés nem sikerült. Megpróbálhatja újra vagy törölheti fiókját.";
 "migrateAccount.migrating" = "Áttelepítése…";
 "migrateAccount.migrateAnother" = "Másik fiókáttelepítés";
+
+//About Jami
+"aboutJami.declaration1" = "A Jami, egy GNU-csomag, az univerzális és elosztott társ-társ kommunikációt szolgáló szoftver, amely tiszteletben tartja a felhasználók szabadságát és magánéletét. Látogatás";
+"aboutJami.declaration2" = "további tájékoztatásért.";
+"aboutJami.noWarranty1" = "Ehhez a programhoz semmilyen garancia nem jár. Látogatás";
+"aboutJami.noWarranty2" = "3-as vagy újabb verziót a részletekért.";
+"aboutJami.contribute" = "Közreműködés";
+"aboutJami.feedback" = "Visszajelzés";
+"aboutJami.createdBy" = "Készítette";
+"aboutJami.artworkBy" = "Művész";
+
+
