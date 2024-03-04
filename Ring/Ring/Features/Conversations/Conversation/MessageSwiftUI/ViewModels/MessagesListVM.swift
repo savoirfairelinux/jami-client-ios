@@ -116,7 +116,9 @@ class MessagesListVM: ObservableObject {
     @Published var shouldShowMap: Bool = false
     @Published var coordinates = [LocationSharingAnnotation]()
     @Published var locationSharingiewModel: LocationSharingViewModel = LocationSharingViewModel()
+    
     private let log = SwiftyBeaver.self
+    
     var contactAvatar: UIImage = UIImage()
     var currentAccountAvatar: UIImage = UIImage()
     var myContactsLocation: CLLocationCoordinate2D?
@@ -337,7 +339,7 @@ class MessagesListVM: ObservableObject {
             })
             .disposed(by: self.disposeBag)
     }
-
+    
     func subscribeReactions() {
         self.conversation.reactionsUpdated
             .subscribe(onNext: { [weak self] messageId in

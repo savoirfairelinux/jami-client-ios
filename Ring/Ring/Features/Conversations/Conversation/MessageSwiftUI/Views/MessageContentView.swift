@@ -119,7 +119,6 @@ struct MessageContentView: View {
     @StateObject var reactionsModel: ReactionsContainerModel
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     let padding: CGFloat = 12
-    var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
     @SwiftUI.State private var messageWidth: CGFloat = 0
     @SwiftUI.State private var reactionsHeight: CGFloat = 20
     @SwiftUI.State private var reactionsWidth: CGFloat = 0
@@ -143,11 +142,11 @@ struct MessageContentView: View {
                             self.updateAlignment()
                         }
                     })
+                //ReactionStickerView(messageModel: messageModel, reactionsModel: reactionsModel, msgModel: model)
+                ExpandableReactionOverlayView(currentDisplayValue: reactionsModel.displayValue, backgroundColor: model.backgroundColor)
             }
             .padding(.bottom, !messageModel.hasReactions() ? 0 : reactionsHeight - 6)
-            if messageModel.hasReactions() {
-                renderReactions()
-            }
+            // lets create an element that has a state and can be updated with animations instead of rerendering without animations
         }
         .onPreferenceChange(SizePreferenceKey.self) { preferences in
             self.reactionsHeight = preferences.height
@@ -176,31 +175,5 @@ struct MessageContentView: View {
                 Spacer().frame(width: padding)
             }
         }
-    }
-
-    private func renderReactions() -> some View {
-        Text(reactionsModel.displayValue)
-            .font(.callout)
-            .fontWeight(.regular)
-            .lineLimit(nil)
-            .lineSpacing(5)
-            .padding(5)
-            .background(Color(UIColor.systemBackground))
-            .cornerRadius(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(model.backgroundColor, lineWidth: 0.8)
-            )
-            .padding(.trailing, 10)
-            .padding(.leading, 30)
-            .shadowForConversation()
-            .measureSize()
-            .onLongPressGesture(minimumDuration: 0.5) {
-                self.showReactionsView(reactionsModel)
-            }
-            .onAppear {
-                self.messageModel.reactionsModel.onAppear()
-            }
-            .padding(.bottom, 2)
     }
 }

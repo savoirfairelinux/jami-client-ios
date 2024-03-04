@@ -40,8 +40,7 @@ struct MessageStackView: View {
             MessageContentView(messageModel: messageModel,
                                model: messageModel.messageContent,
                                reactionsModel: messageModel.reactionsModel,
-                               onLongPress: onLongPress,
-                               showReactionsView: showReactionsView)
+                               onLongPress: onLongPress)
                 .frame(maxWidth: .infinity, alignment: model.alignment)
         }
     }
