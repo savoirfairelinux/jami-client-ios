@@ -112,6 +112,7 @@ class MessagesListVM: ObservableObject {
         }
     }
     @Published var numberOfNewMessages: Int = 0
+    @Published var screenTapped: Bool = false
     @Published var shouldShowMap: Bool = false
     @Published var coordinates = [LocationSharingAnnotation]()
     @Published var locationSharingiewModel: LocationSharingViewModel = LocationSharingViewModel()
@@ -219,7 +220,7 @@ class MessagesListVM: ObservableObject {
         }
     }
 
-    init (injectionBag: InjectionBag, conversation: ConversationModel, transferHelper: TransferHelper, bestName: Observable<String>) {
+    init (injectionBag: InjectionBag, conversation: ConversationModel, transferHelper: TransferHelper, bestName: Observable<String>, screenTapped: Observable<Bool>) {
         defer {
             self.conversation = conversation
             self.subscribeSwarmPreferences()
@@ -241,6 +242,12 @@ class MessagesListVM: ObservableObject {
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject, bestName: bestName)
         self.subscribeLocationEvents()
+        screenTapped
+            .subscribe(onNext: { [weak self] event in
+                guard let self = self else { return }
+                self.screenTapped = event
+            })
+            .disposed(by: self.disposeBag)
     }
 
     func receiveReply(newMessage: MessageContainerModel, fromHistory: Bool) {

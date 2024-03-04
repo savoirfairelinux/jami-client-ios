@@ -117,7 +117,8 @@ class ConversationViewController: UIViewController,
         let swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
                                           conversation: self.viewModel.conversation.value,
                                           transferHelper: transferHelper,
-                                          bestName: self.viewModel.bestName)
+                                          bestName: self.viewModel.bestName,
+                                          screenTapped: tapAction.asObservable())
         swiftUIModel.hideNavigationBar
             .subscribe(onNext: { [weak self] (hide) in
                 guard let self = self else { return }
@@ -192,7 +193,7 @@ class ConversationViewController: UIViewController,
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
-        let messageListView = MessagesListView(model: swiftUIModel, screenTapped: tapAction.asObservable())
+        let messageListView = MessagesListView(model: swiftUIModel)
         let swiftUIView = UIHostingController(rootView: messageListView)
         addChild(swiftUIView)
         swiftUIView.view.frame = self.view.frame
