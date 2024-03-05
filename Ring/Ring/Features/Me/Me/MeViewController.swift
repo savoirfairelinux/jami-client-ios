@@ -1027,8 +1027,9 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     func changePassword(title: String) {
+        let message = L10n.AccountPage.createPasswordExplanation
         let controller = UIAlertController(title: title,
-                                           message: nil,
+                                           message: message,
                                            preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: L10n.Global.cancel,
                                          style: .cancel)
