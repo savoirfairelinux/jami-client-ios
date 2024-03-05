@@ -374,13 +374,13 @@ class MessagesListVM: ObservableObject {
                         if let dat = event["data"], let mId = event["parentMessageId"] {
                             self.conversationService.sendEmojiReactionMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: dat, parentId: mId)
                         } else {
-                            log.error("[MessagesListVM] Invalid data provided while trying to add a reaction a message.")
+                            self.log.error("[MessagesListVM] Invalid data provided while trying to add a reaction a message.")
                         }
                     case ReactionCommand.revoke.toString():
                         if let rId = event["reactionId"] {
                             self.conversationService.editSwarmMessage(conversationId: self.conversation.id, accountId: self.conversation.accountId, message: "", parentId: rId)
                         } else {
-                            log.error("[MessagesListVM] Invalid message ID provided while trying to revoke a reaction from a message.")
+                            self.log.error("[MessagesListVM] Invalid message ID provided while trying to revoke a reaction from a message.")
                         }
                     default: break
                     }
