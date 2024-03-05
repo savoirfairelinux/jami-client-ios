@@ -89,8 +89,10 @@ internal enum L10n {
     }
     /// Contact me on Jami!
     internal static let contactMeOnJamiTitle = L10n.tr("Localizable", "accountPage.contactMeOnJamiTitle", fallback: "Contact me on Jami!")
-    /// Create password
-    internal static let createPassword = L10n.tr("Localizable", "accountPage.createPassword", fallback: "Create password")
+    /// Encrypt account
+    internal static let createPassword = L10n.tr("Localizable", "accountPage.createPassword", fallback: "Encrypt account")
+    /// Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.
+    internal static let createPasswordExplanation = L10n.tr("Localizable", "accountPage.createPasswordExplanation", fallback: "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.")
     /// Account Details
     internal static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader", fallback: "Account Details")
     /// Device revocation error
@@ -125,8 +127,8 @@ internal enum L10n {
     internal static let newPasswordConfirmPlaceholder = L10n.tr("Localizable", "accountPage.newPasswordConfirmPlaceholder", fallback: "Confirm new password")
     /// Enter new password
     internal static let newPasswordPlaceholder = L10n.tr("Localizable", "accountPage.newPasswordPlaceholder", fallback: "Enter new password")
-    /// To enable Booth mode you need to create account password first.
-    internal static let noBoothMode = L10n.tr("Localizable", "accountPage.noBoothMode", fallback: "To enable Booth mode you need to create account password first.")
+    /// To enable Booth mode encrypt your account first.
+    internal static let noBoothMode = L10n.tr("Localizable", "accountPage.noBoothMode", fallback: "To enable Booth mode encrypt your account first.")
     /// Your device won't receive notifications when proxy is disabled
     internal static let noProxyExplanationLabel = L10n.tr("Localizable", "accountPage.noProxyExplanationLabel", fallback: "Your device won't receive notifications when proxy is disabled")
     /// Notifications
