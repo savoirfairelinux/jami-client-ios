@@ -23,7 +23,7 @@ import SwiftUI
 struct ReactionsView: View {
     @StateObject var model: ReactionsContainerModel
     @SwiftUI.State private var contentHeight: CGFloat = 100
-    let defailtSize: CGFloat = 300
+    let size: CGSize = CGSize(width: 100, height: 100)
 
     var body: some View {
         ScrollView {
@@ -45,6 +45,6 @@ struct ReactionsView: View {
         .background(Color(UIColor.systemBackground))
         .cornerRadius(15)
         .shadowForConversation()
-        .frame(maxWidth: defailtSize, maxHeight: min(contentHeight, defailtSize), alignment: .center)
+        .frame(maxWidth: size.width, maxHeight: min(contentHeight, size.height), alignment: .center)
     }
 }
