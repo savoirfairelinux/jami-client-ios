@@ -118,7 +118,7 @@ struct MessagesListView: View {
             }
             if showReactionsView {
                 if let reactions = reactionsForMessage {
-                    ReactionsView(model: reactions)
+                    ReactionsView(currentJamiId: model.accountService.selectedAccountID, model: reactions)
                         .onTapGesture {
                             self.showReactionsView = false
                             reactionsForMessage = nil

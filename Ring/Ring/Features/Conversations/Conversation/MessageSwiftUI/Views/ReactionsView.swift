@@ -21,15 +21,21 @@
 import SwiftUI
 
 struct ReactionsView: View {
+    var currentJamiId: String
     @StateObject var model: ReactionsContainerModel
     @SwiftUI.State private var contentHeight: CGFloat = 100
-    let defailtSize: CGFloat = 300
+    let defaultSize: CGSize = CGSize(width: 300, height: 300)
 
     var body: some View {
         ScrollView {
             VStack {
-                ForEach(model.reactionsRow) { reaction in
-                    ReactionRowView(reaction: reaction)
+                ForEach(model.reactionsRow.indices) { index in
+                    if index != 0 {
+                        Divider()
+                    }
+                    let rowIn = model.reactionsRow[index]
+                    ReactionRowView(doButtons: rowIn.jamiId == self.currentJamiId, author: rowIn.username, avatarImg: rowIn.avatarImage, parentMsg: rowIn.messageId, reactions: model.reactionsRow[index].content.map({ key, value in ReactionRowViewData(msgId: key, textValue: value) }))
+//                    ReactionRowView(doButtons: model.reactionsRow[index].jamiId == self.currentJamiId, reaction: model.reactionsRow[index])
                 }
             }
             .padding(.vertical)
@@ -45,6 +51,6 @@ struct ReactionsView: View {
         .background(Color(UIColor.systemBackground))
         .cornerRadius(15)
         .shadowForConversation()
-        .frame(maxWidth: defailtSize, maxHeight: min(contentHeight, defailtSize), alignment: .center)
+        .frame(maxWidth: defaultSize.width, maxHeight: min(contentHeight, defaultSize.height), alignment: .center)
     }
 }
