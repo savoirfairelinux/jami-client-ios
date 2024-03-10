@@ -195,22 +195,26 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     lazy var unhandeledRequests: Observable<Int> = {[weak self] in
-        guard let self = self else {
+        guard let self = self,
+        let account = self.accountsService.currentAccount else {
             return Observable.just(0)
         }
-        return self.requestsService.requests
-            .asObservable()
-            .map({ [weak self] requests -> Int in
-                guard let self = self,
-                      let account = self.accountsService.currentAccount else {
-                    return 0
-                }
-                // filter out existing conversations
-                let conversationIds = self.conversationViewModels.map({ conversationVM in
-                    return conversationVM.conversation.value.id
-                })
-                return requests.filter { $0.accountId == account.id && !conversationIds.contains($0.conversationId) }.count
-            })
+        let accountId = account.id
+        let requestObservable = self.requestsService.requests.asObservable()
+        let conversationObservable = self.conversationsService
+            .conversations
+            .share()
+            .startWith(self.conversationsService.conversations.value)
+
+        return  Observable.combineLatest(requestObservable,
+                                         conversationObservable) {(requests, conversations) -> Int in
+            // filter out existing conversations
+            let conversationIds = conversations.map { $0.id }
+            let filteredRequests = requests.filter {
+                $0.accountId == accountId && !conversationIds.contains($0.conversationId)
+            }
+            return filteredRequests.count
+        }
     }()
 
     typealias BageValues = (messages: Int, requests: Int)
