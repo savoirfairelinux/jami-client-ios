@@ -195,11 +195,9 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     lazy var unhandeledRequests: Observable<Int> = {[weak self] in
-        guard let self = self,
-        let account = self.accountsService.currentAccount else {
+        guard let self = self else {
             return Observable.just(0)
         }
-        let accountId = account.id
         let requestObservable = self.requestsService.requests.asObservable()
         let conversationObservable = self.conversationsService
             .conversations
@@ -207,11 +205,15 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             .startWith(self.conversationsService.conversations.value)
 
         return  Observable.combineLatest(requestObservable,
-                                         conversationObservable) {(requests, conversations) -> Int in
+                                         conversationObservable) { [weak self] (requests, conversations) -> Int in
+            guard let self = self,
+                  let account = self.accountsService.currentAccount else {
+                return 0
+            }
             // filter out existing conversations
             let conversationIds = conversations.map { $0.id }
             let filteredRequests = requests.filter {
-                $0.accountId == accountId && !conversationIds.contains($0.conversationId)
+                $0.accountId == account.id && !conversationIds.contains($0.conversationId)
             }
             return filteredRequests.count
         }
