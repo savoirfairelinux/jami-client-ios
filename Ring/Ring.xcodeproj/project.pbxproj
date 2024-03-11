@@ -4136,8 +4136,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/izyumkin/MCEmojiPicker";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.3;
+				kind = exactVersion;
+				version = 1.2.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
