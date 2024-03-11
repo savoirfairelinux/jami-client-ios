@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Regisztráció…";
 "accountPage.usernameRegisterAction" = "Regisztráció";
 "accountPage.usernameRegistrationFailed" = "Bejegyeztetés sikertelen. Kérjük, ellenőrizze a jelszót.";
-"accountPage.createPassword" = "Jelszó létrehozása";
+"accountPage.createPassword" = "Fiók titkosítása";
+"accountPage.createPasswordExplanation" = "Ez a Jami-fiók csak ezen az eszközön van regisztrálva a fiók kulcsait tartalmazó archívumként. Az archívumhoz való hozzáférés jelszóval védhető.";
 "accountPage.changePassword" = "Jelszó megváltoztatása";
 "accountPage.oldPasswordPlaceholder" = "Adja meg a régi jelszót";
 "accountPage.newPasswordPlaceholder" = "Adja meg az új jelszót";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Fülke üzemmód letiltása";
 "accountPage.disableBoothModeExplanation" = "Fiók jelszavának megadása";
 "accountPage.boothModeExplanation" = "A fülke üzemmódban a beszélgetési előzmények nem kerülnek mentésre, és a Jami funkcionalitása korlátozott a kimenő hívások kezdeményezésekor. Ha a fülke üzemmód engedélyezve van, az összes beszélgetés törlődik.";
-"accountPage.noBoothMode" = "A fülke üzemmód engedélyezéséhez először létre kell hoznia egy fiók jelszavát.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "A fülke üzemmód engedélyezése után az összes beszélgetés eltávolításra kerül.";
 "accountPage.peerDiscovery" = "Ónműködő csatlakozás helyi hálózaton";
 "accountPage.autoRegistration" = "Önműködő bejegyzése a lejárat után";

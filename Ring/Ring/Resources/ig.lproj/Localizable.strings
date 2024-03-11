@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Ndebanye aha";
 "accountPage.usernameRegisterAction" = "Debanye aha";
 "accountPage.usernameRegistrationFailed" = "Ndebanye aha ahụ adaala, biko chọpụta paswọọdụ.";
-"accountPage.createPassword" = "Mepụta paswọọdụ";
+"accountPage.createPassword" = "Akụkọ e debere";
+"accountPage.createPasswordExplanation" = "Akaụntụ Jami gị edebanye aha naanị na ngwaọrụ a dị ka ihe nchekwa nke nwere igodo nke akaụntụ gị. Enwere ike iji paswọọdụ chebe ohere na ihe nchekwa a.";
 "accountPage.changePassword" = "Gbanwee paswọọdụ";
 "accountPage.oldPasswordPlaceholder" = "Tinye paswọọdụ ochie";
 "accountPage.newPasswordPlaceholder" = "Tinye paswọọdụ ọhụrụ";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Gbanyụọ Booth Mode";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Na booth mode mkparịta ụka akụkọ ihe mere eme na-adịghị echekwara na jami ọrụ nanị site na-eme na-aga na oku. Mgbe ị na-enyere booth mode niile gị mkparịta ụka ga-ehichapụ.";
-"accountPage.noBoothMode" = "Iji mee ka ọnọdụ Booth rụọ ọrụ, ị ga-ebu ụzọ mepụta paswọọdụ akaụntụ.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Mgbe i mebisịrị ọnọdụ ụlọ, a ga-ewepụ mkparịta ụka gị niile.";
 "accountPage.peerDiscovery" = "Akpaghị aka jikọọ na netwọk mpaghara";
 "accountPage.autoRegistration" = "Nchịkọta akpaaka mgbe oge expired gasịrị";

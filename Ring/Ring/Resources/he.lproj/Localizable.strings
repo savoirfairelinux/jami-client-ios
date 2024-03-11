@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "רישום";
 "accountPage.usernameRegisterAction" = "הירשם";
 "accountPage.usernameRegistrationFailed" = "ההרשמה נכשלה, אנא בדוק את הסיסמה.";
-"accountPage.createPassword" = "ליצור סיסמה";
+"accountPage.createPassword" = "חשבון מוצפן";
+"accountPage.createPasswordExplanation" = "חשבון ג'מי שלך רשום רק במכשיר זה כאריכיון המכיל את המפתחות של החשבון שלך. גישה לאריכיון זה יכולה להיות מוגנת באמצעות סיסמה.";
 "accountPage.changePassword" = "לשנות סיסמה";
 "accountPage.oldPasswordPlaceholder" = "הכניסו סיסמה ישנה";
 "accountPage.newPasswordPlaceholder" = "הכניסו סיסמה חדשה";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "תבטל מצב הדלת";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "במצב הקו לא נשמרת היסטוריית השיחה והפונקציונליות של ג'אמי מוגבלת על ידי שיחות יוצאות.";
-"accountPage.noBoothMode" = "כדי להפעיל מצב בוט, אתה צריך ליצור קודם סיסמה לחשבון.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "לאחר שתפעיל את מצב הקו, כל השיחות שלך ימחקו.";
 "accountPage.peerDiscovery" = "חיבור אוטומטי ברשת מקומית";
 "accountPage.autoRegistration" = "רישום אוטומטי לאחר תקופת הגבלת הפסקות";

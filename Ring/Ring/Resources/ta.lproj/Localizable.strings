@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "பதிவு";
 "accountPage.usernameRegisterAction" = "பதிவு";
 "accountPage.usernameRegistrationFailed" = "பதிவு தோல்வியடைந்தது. தயவுசெய்து கடவுச்சொல்லை சரிபார்க்கவும்.";
-"accountPage.createPassword" = "கடவுச்சொல்லை உருவாக்கவும்";
+"accountPage.createPassword" = "குறியாக்கம் கணக்கு";
+"accountPage.createPasswordExplanation" = "உங்கள் ஜாமி கணக்கு இந்த சாதனத்தில் மட்டுமே பதிவு செய்யப்பட்டுள்ளது. உங்கள் கணக்கின் விசைகளை உள்ளடக்கிய ஒரு காப்பகமாக. இந்த காப்பகத்திற்கான அணுகலை கடவுச்சொல் மூலம் பாதுகாக்க முடியும்.";
 "accountPage.changePassword" = "கடவுச்சொல்லை மாற்றவும்";
 "accountPage.oldPasswordPlaceholder" = "பழைய கடவுச்சொல்லை உள்ளிடவும்";
 "accountPage.newPasswordPlaceholder" = "புதிய கடவுச்சொல்லை உள்ளிடவும்";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "புத் பயன்முறையை முடக்கு";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "ஸ்டேஷன் பயன்முறையில் உரையாடல் வரலாறு சேமிக்கப்படவில்லை மற்றும் ஜாமி செயல்பாடு புறப்படும் அழைப்புகளைச் செய்வதன் மூலம் வரையறுக்கப்பட்டுள்ளது. நீங்கள் ஸ்டேஷன் பயன்முறையை இயக்கும்போது உங்கள் உரையாடல்கள் அனைத்தும் நீக்கப்படும்.";
-"accountPage.noBoothMode" = "பூத் பயன்முறையை இயக்குவதற்கு நீங்கள் முதலில் கணக்கு கடவுச்சொல்லை உருவாக்க வேண்டும்.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "ஸ்டேஷன் பயன்முறையை இயக்கிய பிறகு உங்கள் உரையாடல்கள் அனைத்தும் நீக்கப்படும்.";
 "accountPage.peerDiscovery" = "உள்ளூர் நெட்வொர்க்கில் தானியங்கி இணைப்பு";
 "accountPage.autoRegistration" = "காலாவதிக்குப் பிறகு தானியங்கி பதிவு";

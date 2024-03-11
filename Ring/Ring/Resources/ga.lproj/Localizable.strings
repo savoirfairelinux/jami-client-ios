@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Cláir";
 "accountPage.usernameRegisterAction" = "Clár";
 "accountPage.usernameRegistrationFailed" = "Fág freagra ar 'An t-ainm atá ar an gcluiche'";
-"accountPage.createPassword" = "Creat pasfhocal";
+"accountPage.createPassword" = "Cunntas criptithe";
+"accountPage.createPasswordExplanation" = "Tá do chuntas Jami cláraithe ach ar an gléas seo mar archiv a bhfuil do chléasanna ar do chuntas. Is féidir rochtain ar an gcuntas seo a chosaint le pasfhocal.";
 "accountPage.changePassword" = "Pasfhocal a athrú";
 "accountPage.oldPasswordPlaceholder" = "Cuir isteach an t-ardphasfhocal";
 "accountPage.newPasswordPlaceholder" = "Cluiche Pasfhocal nua";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Cinntí an modh Booth";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "I modh booth, ní shábháil go bhfuil stair comhrá agus cumaíocht jami teoranta ag glaochanna amach. Nuair a chuireann tú ar chumas modh booth, déanfar do chuid comhráite go léir a bhaint.";
-"accountPage.noBoothMode" = "Chun an modh Booth a chumasú, ní mór duit pasfhocal cuntas a chruthú ar dtús.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Tar éis do modh booth a chumasú, déanfar do chuid comhráite go léir a bhaint.";
 "accountPage.peerDiscovery" = "Déan nasc uathoibríoch ar líonra áitiúil";
 "accountPage.autoRegistration" = "Údarás na hIarscríbhneacha";

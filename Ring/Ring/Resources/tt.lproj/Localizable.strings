@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Теркәлү";
 "accountPage.usernameRegisterAction" = "Теркәлү";
 "accountPage.usernameRegistrationFailed" = "Теркәү уңышсыз булды. Шифрны тикшерегез.";
-"accountPage.createPassword" = "Пароль булдыру";
+"accountPage.createPassword" = "Шифрланган хисап";
+"accountPage.createPasswordExplanation" = "Сезнең Jami хисабыгыз бу җайланмада гына теркәлгән, ул сезнең хисабыгыз ачкычларын үз эченә алган архив буларак.";
 "accountPage.changePassword" = "Парольне үзгәртү";
 "accountPage.oldPasswordPlaceholder" = "Иске шифәрне кертү";
 "accountPage.newPasswordPlaceholder" = "Яңа шифәрне кертү";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Бут режимын гамәлдән чыгару";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Буут режимында сөйләшү тарихы сакланып калмаган һәм Jami функциясе чикле булган, читтән баручы шалтыратулар ясаганда.";
-"accountPage.noBoothMode" = "Бут режимын булдыру өчен башта хисап паролен булдырырга кирәк.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Бут режимын кушкач, барлык сөйләшүләрегез дә бетереләчәк.";
 "accountPage.peerDiscovery" = "Җирле челтәрдә автомат тоташтыру";
 "accountPage.autoRegistration" = "Вакыт узгач, автореестр";

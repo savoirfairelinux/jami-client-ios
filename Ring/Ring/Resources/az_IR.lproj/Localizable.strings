@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "ثبت";
 "accountPage.usernameRegisterAction" = "ثبت";
 "accountPage.usernameRegistrationFailed" = "ثبت نام ناکام اولدو. لطفا رمزونو چک کنید.";
-"accountPage.createPassword" = "رمز یازارلیق";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "رمز لرینده یئنی دن";
 "accountPage.oldPasswordPlaceholder" = "کؤنول رمز دن یئری";
 "accountPage.newPasswordPlaceholder" = "تزه رمز دن یاز";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "بوث مودونو غیر فعال ات";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "بوخ مودوندا مکالمه تاریخ سی ساقلانیلمیر و Jami فعالیتلری چیخیشلار وئرمکله محدود اولور. بوخ مودوندا بوتون مکالمه لرین چئوریلیر.";
-"accountPage.noBoothMode" = "بوث مودونو فعال اتمک اوچون اوّل حساب رمزي یاراتماليسينيز.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "بوخ موودی فعال ائدن سونرا بوتون دانیشیقلارینیز آرادان آپاراجاق.";
 "accountPage.peerDiscovery" = "یئرلی شبکه ده اوتوماتیک باغلانیش";
 "accountPage.autoRegistration" = "موتر ثبت ائتمه دن سونرا";

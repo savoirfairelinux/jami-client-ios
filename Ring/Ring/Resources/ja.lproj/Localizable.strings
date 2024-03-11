@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "登録";
 "accountPage.usernameRegisterAction" = "登録";
 "accountPage.usernameRegistrationFailed" = "登録失敗.パスワードを確認してください.";
-"accountPage.createPassword" = "パスワードを作成する";
+"accountPage.createPassword" = "暗号化アカウント";
+"accountPage.createPasswordExplanation" = "あなたのJamiアカウントは,このデバイスであなたのアカウントの鍵を含むアーカイブとしてのみ登録されています.このアーカイブへのアクセスはパスワードで保護できます.";
 "accountPage.changePassword" = "パスワードを変更";
 "accountPage.oldPasswordPlaceholder" = "現在のパスワードを入力";
 "accountPage.newPasswordPlaceholder" = "新しいパスワードを入力";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "ブースモードを無効にする";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "ブルースモードでは会話履歴が保存されず,Jami機能は出かけ通話によって制限されます.ブルースモードを有効にすると,すべての会話が削除されます.";
-"accountPage.noBoothMode" = "起動するには,まずアカウントパスワードを作成する必要があります.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "スタンドモードを有効にした後,すべての会話が削除されます.";
 "accountPage.peerDiscovery" = "局所通信網に自動的に接続";
 "accountPage.autoRegistration" = "期限切れ後自動登録";

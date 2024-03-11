@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registrerer";
 "accountPage.usernameRegisterAction" = "Registrer";
 "accountPage.usernameRegistrationFailed" = "Registrering mislyktes. Vennligst kontroller passord.";
-"accountPage.createPassword" = "Opprett passord";
+"accountPage.createPassword" = "Kryptet konto";
+"accountPage.createPasswordExplanation" = "Din Jami-konto er registrert bare på denne enheten som et arkiv som inneholder nøklene til kontoen din.";
 "accountPage.changePassword" = "Endre passord";
 "accountPage.oldPasswordPlaceholder" = "Tast inn gammelt passord";
 "accountPage.newPasswordPlaceholder" = "Tast inn nytt passord";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Deaktiver messemodus";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "I messemodus lagres ikke samtalelogg og jami funksjonaliteten begrenses ved utgående samtaler. Når du aktiverer messemodus vil alle dine samtaler bli slettet.";
-"accountPage.noBoothMode" = "For å aktivere messemodus må du opprette et kontopassord først.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Etter å ha aktiver messemodus vil alle dine samtaler bli slettet.";
 "accountPage.peerDiscovery" = "Koble automatisk til lokalt nettverk";
 "accountPage.autoRegistration" = "Automatisk registrering etter utløp";

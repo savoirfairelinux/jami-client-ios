@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registruje se";
 "accountPage.usernameRegisterAction" = "Zaregistrovat";
 "accountPage.usernameRegistrationFailed" = "Registrace selhala. Prosím zkontrolujte heslo.";
-"accountPage.createPassword" = "Vytvořit heslo";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "Změnit heslo";
 "accountPage.oldPasswordPlaceholder" = "Zadejte staré heslo.";
 "accountPage.newPasswordPlaceholder" = "Zadejte nové heslo.";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Znemožnit režim budky";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "V režimu budky není historie konverzace ukládána a funkce Jami jsou omezeny na uskutečňování odchozích hovorů. Umožnění režimu budky odstraní všechny vaše konverzace.";
-"accountPage.noBoothMode" = "Pro umožnění režimu budky je nejdříve potřeba vytvořit heslo účtu.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Po umožnění režimu budky budou všechny vaše konverzace odstraněny.";
 "accountPage.peerDiscovery" = "Automatické připojení na místní síti";
 "accountPage.autoRegistration" = "Automatická registrace po vypršení platnosti";

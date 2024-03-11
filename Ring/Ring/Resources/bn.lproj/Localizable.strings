@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "নিবন্ধন";
 "accountPage.usernameRegisterAction" = "নিবন্ধন";
 "accountPage.usernameRegistrationFailed" = "নিবন্ধন ব্যর্থ হয়েছে, পাসওয়ার্ড চেক করুন।";
-"accountPage.createPassword" = "পাসওয়ার্ড তৈরি করুন";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "পাসওয়ার্ড পরিবর্তন করুন";
 "accountPage.oldPasswordPlaceholder" = "পুরানো পাসওয়ার্ড লিখুন";
 "accountPage.newPasswordPlaceholder" = "নতুন পাসওয়ার্ড লিখুন";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "বুথ মোড অক্ষম করুন";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "বুথ মোডে কথোপকথনের ইতিহাস সংরক্ষিত নয় এবং বহিরাগত কল করার মাধ্যমে Jami কার্যকারিতা সীমিত। যখন আপনি বুথ মোড সক্ষম করবেন তখন আপনার সমস্ত কথোপকথন মুছে ফেলা হবে।";
-"accountPage.noBoothMode" = "বুথ মোড সক্ষম করতে আপনাকে প্রথমে অ্যাকাউন্ট পাসওয়ার্ড তৈরি করতে হবে।";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "বুথ মোড চালু করার পর আপনার সমস্ত কথোপকথন মুছে ফেলা হবে।";
 "accountPage.peerDiscovery" = "স্থানীয় নেটওয়ার্কে স্বয়ংক্রিয় সংযোগ";
 "accountPage.autoRegistration" = "মেয়াদ শেষ হওয়ার পর অটো রেজিস্টার";

@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Регистрация";
 "accountPage.usernameRegisterAction" = "Зарегистрировать";
 "accountPage.usernameRegistrationFailed" = "Ошибка регистрации. Пожалуйста, проверьте пароль.";
-"accountPage.createPassword" = "Создать пароль";
+"accountPage.createPassword" = "Зашифровать аккаунт";
+"accountPage.createPasswordExplanation" = "Ваш аккаунт Jami зарегистрирован только на этом устройстве как архив, содержащий ключи от вашего аккаунта.";
 "accountPage.changePassword" = "Изменить пароль";
 "accountPage.oldPasswordPlaceholder" = "Введите старый пароль";
 "accountPage.newPasswordPlaceholder" = "Введите новый пароль";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Выключить режим кабинки";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "В режиме кабинки история разговоров не сохраняется, а функциональность Jami ограничена исходящими звонками. Когда вы включите режим кабинки, все ваши разговоры будут удалены.";
-"accountPage.noBoothMode" = "Для включения режима Кабинки необходимо сначала создать пароль аккаунту.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "После включения режима кабинки все ваши разговоры будут удалены.";
 "accountPage.peerDiscovery" = "Авто-подключение к локальной сети";
 "accountPage.autoRegistration" = "Автоматическая регистрация после истечения срока действия";

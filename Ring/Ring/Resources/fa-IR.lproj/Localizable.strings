@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "ثبت‌نام";
 "accountPage.usernameRegisterAction" = "ثبت‌نام";
 "accountPage.usernameRegistrationFailed" = "انتقال ناموفق بود، لطفا گذرواژه را بررسی کنید.";
-"accountPage.createPassword" = "ایجاد گذرواژه";
+"accountPage.createPassword" = "حساب رمزگذاری";
+"accountPage.createPasswordExplanation" = "حساب جمی شما فقط در این دستگاه به عنوان یک آرشیو ثبت شده که حاوی کلید حساب شما است. دسترسی به این آرشیو می تواند با رمز عبور محافظت شود.";
 "accountPage.changePassword" = "تغییر گذرواژه";
 "accountPage.oldPasswordPlaceholder" = "گذرواژه قدیمی را وارد کنید";
 "accountPage.newPasswordPlaceholder" = "گذرواژه جدید را وارد کنید";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "غیر‌فعال‌سازی حالت غرفه";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "در حالت غرفه سابقه گفتگو ذخیره نمی‌شود و عملکرد جمی به برقراری تماس‌های خروجی محدود می‌شود. وقتی حالت غرفه را فعال کنید، تمامی گفتگو‌های شما حذف می‌شوند.";
-"accountPage.noBoothMode" = "برای فعال‌سازی حالت غرفه ابتدا باید گذرواژه حساب ایجاد کنید.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "بعد از فعال‌سازی حالت غرفه، تمامی گفتگوهای شما حذف می‌شوند.";
 "accountPage.peerDiscovery" = "اتصال خودکار در شبکه محلی";
 "accountPage.autoRegistration" = "ثبت‌نام خودکار پس از انقضا";

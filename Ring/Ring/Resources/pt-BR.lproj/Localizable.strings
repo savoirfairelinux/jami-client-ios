@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registrando";
 "accountPage.usernameRegisterAction" = "Registrar";
 "accountPage.usernameRegistrationFailed" = "O registro falhou. Por favor, verifique a senha.";
-"accountPage.createPassword" = "Criar uma senha";
+"accountPage.createPassword" = "Conta criptografada";
+"accountPage.createPasswordExplanation" = "A sua conta Jami é registrada apenas neste dispositivo como um arquivo contendo as chaves da sua conta.";
 "accountPage.changePassword" = "Mudar senha";
 "accountPage.oldPasswordPlaceholder" = "Digite a senha antiga";
 "accountPage.newPasswordPlaceholder" = "Digite a nova senha";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Desativar o Modo Booth";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Em modo Booth, o histórico de conversas não é salvado e a funcionalidade de Jami é limitada a realização de chamadas de saída. Quando você ativa o modo Booth, todas as suas conversas serão removidas.";
-"accountPage.noBoothMode" = "Para ativar o modo Booth você precisa primeiro criar a senha de conta.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Depois de ativar o modo Booth, todas as suas conversas serão removidas.";
 "accountPage.peerDiscovery" = "Conexão automática na rede local";
 "accountPage.autoRegistration" = "Registro automático após expiração";

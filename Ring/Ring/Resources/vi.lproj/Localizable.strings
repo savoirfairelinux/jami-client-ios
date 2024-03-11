@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Đăng ký";
 "accountPage.usernameRegisterAction" = "Register";
 "accountPage.usernameRegistrationFailed" = "Đăng ký thất bại, xin vui lòng kiểm tra mật khẩu.";
-"accountPage.createPassword" = "Tạo mật khẩu";
+"accountPage.createPassword" = "Tài khoản mã hóa";
+"accountPage.createPasswordExplanation" = "Tài khoản Jami của bạn chỉ được đăng ký trên thiết bị này như một tệp chứa chìa khóa của tài khoản của bạn.";
 "accountPage.changePassword" = "Thay đổi mật khẩu";
 "accountPage.oldPasswordPlaceholder" = "Nhập mật khẩu cũ";
 "accountPage.newPasswordPlaceholder" = "Nhập mật khẩu mới";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Thiết lập chế độ Booth";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Trong chế độ booth lịch sử cuộc trò chuyện không được lưu và chức năng jami bị hạn chế bằng cách thực hiện cuộc gọi ra ngoài. Khi bạn bật chế độ booth tất cả các cuộc trò chuyện của bạn sẽ bị xóa.";
-"accountPage.noBoothMode" = "Để kích hoạt chế độ Booth, bạn cần tạo mật khẩu tài khoản trước.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Sau khi bật chế độ phòng, tất cả các cuộc trò chuyện của bạn sẽ bị xóa.";
 "accountPage.peerDiscovery" = "Kết nối tự động trên mạng địa phương";
 "accountPage.autoRegistration" = "Đăng ký tự động sau khi hết hạn";

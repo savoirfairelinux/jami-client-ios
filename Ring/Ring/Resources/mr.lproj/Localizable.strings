@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "नोंदणी";
 "accountPage.usernameRegisterAction" = "नोंदणी";
 "accountPage.usernameRegistrationFailed" = "नोंदणी अपयशी झाली आहे. कृपया पासवर्ड तपासा.";
-"accountPage.createPassword" = "पासवर्ड तयार करा";
+"accountPage.createPassword" = "कूटबद्ध खाते";
+"accountPage.createPasswordExplanation" = "तुमच्या अकाऊंटची चावी असलेल्या संग्रहण म्हणून तुमच्या अकाऊंटची नोंद केवळ या डिव्हाइसवर आहे. या संग्रहणाचा प्रवेश संकेतशब्दाने संरक्षित केला जाऊ शकतो.";
 "accountPage.changePassword" = "पासवर्ड बदला";
 "accountPage.oldPasswordPlaceholder" = "जुने संकेतशब्द प्रविष्ट करा";
 "accountPage.newPasswordPlaceholder" = "नवीन संकेतशब्द प्रविष्ट करा";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "बूट मोड अक्षम करा";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "बूट मोडमध्ये संभाषण इतिहास जतन केला नाही आणि जामी कार्यक्षमता बाहेर जाणाऱ्या कॉलद्वारे मर्यादित आहे. जेव्हा तुम्ही बूट मोड सक्षम कराल तेव्हा सर्व संभाषणे हटविली जातील.";
-"accountPage.noBoothMode" = "बूथ मोड सक्षम करण्यासाठी तुम्हाला प्रथम खाते संकेतशब्द तयार करणे आवश्यक आहे.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "बूथ मोड सक्षम केल्यानंतर तुमच्या सर्व संभाषणे हटविली जातील.";
 "accountPage.peerDiscovery" = "स्थानिक नेटवर्कवर स्वयंचलित कनेक्ट";
 "accountPage.autoRegistration" = "कालावधी संपल्यानंतर ऑटो रजिस्टर";

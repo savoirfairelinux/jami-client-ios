@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Реєстрація";
 "accountPage.usernameRegisterAction" = "Зареєструватися";
 "accountPage.usernameRegistrationFailed" = "Зареєстрація не вдалося. Прошу перевірити пароль.";
-"accountPage.createPassword" = "Створити пароль";
+"accountPage.createPassword" = "Зашифрований рахунок";
+"accountPage.createPasswordExplanation" = "Ваш акаунт Jami зареєстрований тільки на цьому пристрої як архів, що містить ключі вашого акаунту.";
 "accountPage.changePassword" = "Змінити пароль";
 "accountPage.oldPasswordPlaceholder" = "Введіть старий пароль";
 "accountPage.newPasswordPlaceholder" = "Введіть новий пароль";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Виключити режим бути";
 "accountPage.disableBoothModeExplanation" = "Будь ласка, надайте свій пароль для облікового запису";
 "accountPage.boothModeExplanation" = "У режимі кабіни історія розмов не збереглася і функціонал Jami обмежений виходячими дзвінками.";
-"accountPage.noBoothMode" = "Щоб вчинити режим Бут, спочатку потрібно створити пароль рахунку.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Після включення режиму \"бути\" всі ваші розмови будуть видалені.";
 "accountPage.peerDiscovery" = "Автополучається в локальній мережі";
 "accountPage.autoRegistration" = "Автореєстр після закінчення терміну дії";

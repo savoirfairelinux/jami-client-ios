@@ -46,8 +46,8 @@
 "global.reply" = "Odgovori";
 "global.search" = "Трагајући...";
 "global.donate" = "Doniraj";
-"global.deleteMessage" = "Избриши поруку";
-"global.deleteFile" = "Избриши датотеку са уређаја";
+"global.deleteMessage" = "Izbriši poruku";
+"global.deleteFile" = "Izbriši datoteku sa uređaja";
 "global.editMessage" = "Уреди поруку";
 "global.editing" = "Уређивање";
 
@@ -111,15 +111,15 @@
 "conversation.incomingRequest" = "Послао је захтев за разговор.";
 "conversation.requestMessage" = "Здраво, да ли би се придружила разговору?";
 "conversation.notContact" = "%@ is not in your contact list.";
-"conversation.sendRequest" = "Пошаљи му/јој захтев за контакт како би могли да разменимо заједно";
-"conversation.sendRequestTitle" = "Пошаљи захтев за контакт";
+"conversation.sendRequest" = "Pošaljite mu/joj zahtev za kontakt da biste mogli da razmenjujete zajedno";
+"conversation.sendRequestTitle" = "Pošalji zahtev za kontakt";
 "conversation.synchronizationTitle" = "Прихваташ захтев за разговор.";
 "conversation.synchronizationMessage" = "Чекамо %@ везе да синхронизују разговор.";
 "conversation.inReplyTo" = "У одговору на";
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
-"conversation.deletedMessage" = "обрисао поруку";
+"conversation.deletedMessage" = "obrisao poruku";
 
 //Invitations
 "invitations.noInvitations" = "Нема покана";
@@ -128,7 +128,7 @@
 
 //Welcome Screen
 "welcome.title" = "Share, freely and privately with Jami";
-"welcome.text" = "Џами је бесплатна и универзална комуникацијска платформа која чува приватност и слободе корисника";
+"welcome.text" = "Jami je besplatna i univerzalna komunikaciona platforma koja čuva privatnost i slobode korisnika";
 "welcome.haveAccount" = "Уже имам рачун.";
 "welcome.linkDevice" = "Увоз из другог уређаја";
 "welcome.linkBackup" = "Импорт из архивног резервног копија";
@@ -192,10 +192,10 @@
 "alerts.accountLinkedTitle" = "У везивање рачуна";
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Молимо вас да затворите пријаву и покушате да је поново отворите.";
-"alerts.confirmBlockContact" = "Да ли сте сигурни да желите да блокирате овај контакт?";
-"alerts.confirmDeleteConversation" = "Сигуран си да желиш да заувек избришиш овај разговор?";
-"alerts.confirmDeleteConversationFromContact" = "Да ли сте сигурни да желите да избришете разговор са овим контактом?";
-"alerts.confirmDeleteConversationTitle" = "Убриши разговор";
+"alerts.confirmBlockContact" = "Da li ste sigurni da želite da blokirate ovaj kontakt? Istorija razgovora sa ovim kontaktom će takođe biti trajno izbrisana.";
+"alerts.confirmDeleteConversation" = "Da li ste sigurni da želite da trajno izbrišete ovu konverzaciju?";
+"alerts.confirmDeleteConversationFromContact" = "Da li ste sigurni da želite da izbrišete konverzaciju sa ovim kontaktom?";
+"alerts.confirmDeleteConversationTitle" = "Izbriši razgovor";
 "alerts.confirmClearConversation" = "Сигуран си да желиш да очистиш разговор са овим контактом?";
 "alerts.confirmClearConversationTitle" = "Чиста разговора";
 "alerts.noMediaPermissionsTitle" = "Медијски дозволу није додељено";
@@ -252,10 +252,10 @@
 "accountPage.credentialsHeader" = "Детаљи рачуна";
 "accountPage.blockedContacts" = "Blokirani kontakti";
 "accountPage.unblockContact" = "УБЛОК";
-"accountPage.proxyAddressAlert" = "Устави прокси адресу";
+"accountPage.proxyAddressAlert" = "Navedite adresu proksija";
 "accountPage.noProxyExplanationLabel" = "Улазак неће добити обавештења када је прокси онемогућен";
 "accountPage.proxyPaceholder" = "Прокси адреса";
-"accountPage.enableNotifications" = "Омогућивање обавештења";
+"accountPage.enableNotifications" = "Omogući obaveštenja";
 "accountPage.proxyDisabledAlertTitle" = "Прокси сервер је деактивисан";
 "accountPage.proxyDisabledAlertBody" = "Да бисте добили обавештења, молим вас да укључите прокси";
 "accountPage.revokeDeviceTitle" = "Opozvati uređaj";
@@ -271,7 +271,7 @@
 "accountPage.deviceRevocationError" = "Грешка повлачења уређаја";
 "accountPage.linkDeviceTitle" = "Сврнути још један уређај";
 "accountPage.other" = "Други";
-"accountPage.removeAccountMessage" = "Кликнући на \"Убришите\" уклоните овај рачун на овом уређају!";
+"accountPage.removeAccountMessage" = "Klikom na „Ukloni“ uklonićete ovaj nalog na ovom uređaju! Ova radnja se ne može opozvati. Takođe, vaše registrovano ime može biti izgubljeno.";
 "accountPage.removeAccountButton" = "Увајање";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Контактирај ме на Џами!";
@@ -281,8 +281,9 @@
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "Регистрација";
 "accountPage.usernameRegisterAction" = "Registruj se";
-"accountPage.usernameRegistrationFailed" = "Регистрација није успела. Проверите лозинку.";
-"accountPage.createPassword" = "Стварити лозинку";
+"accountPage.usernameRegistrationFailed" = "Registracija nije uspela. Molimo proverite lozinku.";
+"accountPage.createPassword" = "Криптован рачун";
+"accountPage.createPasswordExplanation" = "Vaš Jami nalog je registrovan samo na ovom uređaju kao arhiva koja sadrži ključeve vašeg naloga. Pristup ovoj arhivi može biti zaštićen lozinkom.";
 "accountPage.changePassword" = "Променити лозинку";
 "accountPage.oldPasswordPlaceholder" = "Уведите стару лозинку";
 "accountPage.newPasswordPlaceholder" = "Унесите нову лозинку";
@@ -292,12 +293,12 @@
 "accountPage.disableBoothMode" = "Деактивирајте режим бута";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "У режиму бух, историја разговора није спасана и функционалност Jami ограничена правећи исходяће позиве.";
-"accountPage.noBoothMode" = "Да бисте омогућили Бут режим, прво морате направити лозинку рачуна.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Након укључивања режима кабина, сви ваши разговори ће бити уклоњени.";
 "accountPage.peerDiscovery" = "Автоматска повезаност на локалној мрежи";
 "accountPage.autoRegistration" = "Авторегистар након истека времена";
 "accountPage.connectivityHeader" = "Спрема";
-"accountPage.turnEnabled" = "Омогућивање ТУРН";
+"accountPage.turnEnabled" = "Omogući TURN";
 "accountPage.turnServer" = "Адреса ТУРН";
 "accountPage.turnUsername" = "TURN korisničko ime";
 "accountPage.turnPassword" = "TURN lozinka";
@@ -316,7 +317,7 @@
 "account.serverLabel" = "Уведите адресу";
 "account.portLabel" = "Унесите број порта";
 "account.accountStatus" = "Статус рачуна";
-"account.enableAccount" = "Омогућивање рачуна";
+"account.enableAccount" = "Omogući nalog";
 "account.statusOnline" = "Na vezi";
 "account.statusOffline" = "Nije na vezi";
 "account.statusConnecting" = "Povezivanje";
@@ -333,13 +334,13 @@
 "linkDevice.passwordError" = "Лозинка коју сте увели не отвара овај рачун";
 "linkDevice.networkError" = "A network error occurred during the export";
 "linkDevice.defaultError" = "An error occurred during the export";
-"linkDevice.explanationMessage" = "Да бисте завршили процес, морате отворити Џами на новом уређају и изабрати опцију \"Поврзајте овај уређај на рачун\".";
+"linkDevice.explanationMessage" = "Da biste dovršili proces, potrebno je da otvorite Jami na novom uređaju i izaberete opciju „Poveži ovaj uređaj sa nalogom“. Vaš pin važi 10 minuta";
 "linkDevice.hudMessage" = "Проверка";
 
 //Contact Page
 "contactPage.startAudioCall" = "Почне аудио позив";
 "contactPage.startVideoCall" = "Почне видео позив";
-"contactPage.sendMessage" = "Пошаљите поруку";
+"contactPage.sendMessage" = "Pošalji poruku";
 "contactPage.clearConversation" = "Чисти разговор";
 "contactPage.removeConversation" = "Устрани разговор";
 
@@ -360,7 +361,7 @@
 "notifications.locationSharingStopped" = "Улазну локацију подељено је заустављено";
 "dataTransfer.readableStatusRefuse" = "Odbij";
 "dataTransfer.readableStatusAccept" = "Prihvati";
-"dataTransfer.infoMessage" = "Преси да почнете са снимањем";
+"dataTransfer.infoMessage" = "Pritisnite za početak snimanja";
 "dataTransfer.sendMessage" = "Pošalji";
 
 
@@ -380,7 +381,7 @@
 
 //General Settings
 "generalSettings.videoSettings" = "Постављања видео";
-"generalSettings.videoAcceleration" = "Омогућити убрзање видео";
+"generalSettings.videoAcceleration" = "Omogući video ubrzanje";
 "generalSettings.fileTransfer" = "Prenos podatka";
 "generalSettings.locationSharing" = "Поделивање локација";
 "generalSettings.automaticAcceptIncomingFiles" = "Автоматски прихватају долазне датотеке";
@@ -392,8 +393,8 @@
 "generalSettings.enableDonationCampaign" = "Enable donation campaign";
 
 //Log View
-"logView.title" = "Дијагностике";
-"logView.description" = "Очињени дијагностички дневник";
+"logView.title" = "Dijagnostika";
+"logView.description" = "Otvorite podešavanja dijagnostičkog dnevnika";
 "logView.startLogging" = "Почни са раседањем";
 "logView.stopLogging" = "Престани са дрвова";
 "logView.saveError" = "Не успео да се спаси датотека";
@@ -404,12 +405,12 @@
 "migrateAccount.migrateButton" = "Миграциони рачун";
 "migrateAccount.explanation" = "Овај рачун мора бити мигриран.";
 "migrateAccount.passwordExplanation" = "Да бисте наставили са миграцијом, морате увести лозинку која је коришћена за овај рачун";
-"migrateAccount.error" = "Не успео да мигрира рачуна. Можете поново покушати или избрисати свој рачуна.";
+"migrateAccount.error" = "Migriranje naloga nije uspelo. Možete pokušati ponovo ili izbrisati svoj nalog.";
 "migrateAccount.migrating" = "Миграција...";
 "migrateAccount.migrateAnother" = "Миграција на други рачун";
 
 //About Jami
-"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration1" = "Jami, GNU paket, je softver za univerzalnu i distribuiranu ravnopravnu komunikaciju koja poštuje slobodu i privatnost svojih korisnika. Posetite";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
 "aboutJami.noWarranty2" = "version 3 or later for details.";

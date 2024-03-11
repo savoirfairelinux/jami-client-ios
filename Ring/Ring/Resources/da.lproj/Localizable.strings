@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registrering";
 "accountPage.usernameRegisterAction" = "Registrér";
 "accountPage.usernameRegistrationFailed" = "Registrering mislykkedes.";
-"accountPage.createPassword" = "Oprette adgangskode";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "Skift adgangskode";
 "accountPage.oldPasswordPlaceholder" = "Indtaster gammelt adgangskode";
 "accountPage.newPasswordPlaceholder" = "Indtaster nyt adgangskode";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Sluk op på standmodus";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "I stand-modus er samtalehistorien ikke gemt og Jami-funktionen begrænset ved at foretage udgående opkald.";
-"accountPage.noBoothMode" = "For at aktivere Booth-modus skal du oprette kontopassord først.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Efter at have aktiveret stand-modus, fjernes alle dine samtaler.";
 "accountPage.peerDiscovery" = "Automatisk forbindelse på lokalt netværk";
 "accountPage.autoRegistration" = "Autorejser efter udløbet";

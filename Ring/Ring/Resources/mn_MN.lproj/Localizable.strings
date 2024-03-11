@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Төгсгөл";
 "accountPage.usernameRegisterAction" = "Тэтгэврийн";
 "accountPage.usernameRegistrationFailed" = "Тэнд бүртгэл алдаатай. Хууль нууц товчлуулъя.";
-"accountPage.createPassword" = "Хууль нууц товчлуул";
+"accountPage.createPassword" = "Хилдчилсэн данс";
+"accountPage.createPasswordExplanation" = "Таны Jami-ийн дансыг зөвхөн энэ төхөөрөмж дээр бүртгэж, дансныхаа ачкысыг хадгалах архив гэж үздэг.";
 "accountPage.changePassword" = "Хууль нууц товг өөрчлөх";
 "accountPage.oldPasswordPlaceholder" = "Эртний нууц үг оруулах";
 "accountPage.newPasswordPlaceholder" = "Шинэ нууц үг оруулах";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Бутын хэв маяг гараагүй болгох";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Бут режимд ярианы түүх хадгалан үлдээгүй бөгөөд Jami-ийн функц-ийн үйл ажиллагааг гадаад дуудлага хийхээр хязгаарлагджээ. Бут режимд хангахдаа бүх яриаг нь хасна.";
-"accountPage.noBoothMode" = "Бутын хэв маяг идэвхжүүлэхийн тулд та эхлээд дансны нууц үг үүсгэх хэрэгтэй.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Бут режимыг идэвхжүүлсний дараа бүх яриагаа устгасан болно.";
 "accountPage.peerDiscovery" = "Орон нутгийн сүлжээний авто холболт";
 "accountPage.autoRegistration" = "Авто тэтгэврийн бүртгэл хугацаа дууссан дараа";

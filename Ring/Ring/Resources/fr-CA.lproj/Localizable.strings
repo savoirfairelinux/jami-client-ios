@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Inscription";
 "accountPage.usernameRegisterAction" = "Inscription";
 "accountPage.usernameRegistrationFailed" = "L'enregistrement a échoué. Veuillez vérifier le mot de passe.";
-"accountPage.createPassword" = "Créer mot de passe";
+"accountPage.createPassword" = "Chiffrer votre compte";
+"accountPage.createPasswordExplanation" = "Votre compte Jami est enregistré uniquement sur cet appareil en tant qu'archive contenant les clés de votre compte. L'accès à cette archive peut être protégé par un mot de passe.";
 "accountPage.changePassword" = "Changer mot de passe";
 "accountPage.oldPasswordPlaceholder" = "Entrer votre ancien mot de passe";
 "accountPage.newPasswordPlaceholder" = "Entrer le nouveau mot de passe";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Désactiver le mode Kiosque";
 "accountPage.disableBoothModeExplanation" = "Entrer le mot de passe de votre compte";
 "accountPage.boothModeExplanation" = "Dans le mode Kiosque, l'historique n'est pas sauvegardé et les fonctions de Jami sont limités à faire des appels. Si vous activez le mode Kiosque, toutes vos conversations seront supprimées.";
-"accountPage.noBoothMode" = "Pour activer le mode Kiosque, vous devez d'abord créer un mot de passe.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Après avoir activé le mode Kiosque, toutes vos conversations seront supprimées.";
 "accountPage.peerDiscovery" = "Connexion automatique sur réseau local";
 "accountPage.autoRegistration" = "Réenregistrement automatique après expiration";
@@ -411,11 +412,11 @@
 //About Jami
 "aboutJami.declaration1" = "Jami, un paquetage GNU, est un logiciel de communication pair à pair universel et distribué qui respecte la liberté et la vie privée de ses utilisateurs.";
 "aboutJami.declaration2" = "pour plus d'informations";
-"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
-"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.noWarranty1" = "Ce programme est fourni sans garantie aucune. Voir la ";
+"aboutJami.noWarranty2" = "version 3 ou supérieure pour plus de détails.";
 "aboutJami.contribute" = "Contribuer";
 "aboutJami.feedback" = "Commentaires";
-"aboutJami.createdBy" = "Created by";
-"aboutJami.artworkBy" = "Artwork by";
+"aboutJami.createdBy" = "Créés par";
+"aboutJami.artworkBy" = "Création graphique";
 
 

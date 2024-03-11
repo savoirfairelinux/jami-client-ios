@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "पंजीकरण";
 "accountPage.usernameRegisterAction" = "पंजी करें";
 "accountPage.usernameRegistrationFailed" = "पंजीकरण विफल रहा. कृपया पासवर्ड की जाँच करें.";
-"accountPage.createPassword" = "पासवर्ड बनाएं";
+"accountPage.createPassword" = "एन्क्रिप्टेड खाता";
+"accountPage.createPasswordExplanation" = "आपका जेमी खाता केवल इस डिवाइस पर आपके खाते की चाबियों वाले अभिलेखागार के रूप में पंजीकृत है। इस अभिलेखागार तक पहुंच पासवर्ड से संरक्षित की जा सकती है।";
 "accountPage.changePassword" = "पासवर्ड बदलें";
 "accountPage.oldPasswordPlaceholder" = "पुराना पासवर्ड दर्ज करें";
 "accountPage.newPasswordPlaceholder" = "नया पासवर्ड दर्ज करें";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "बूथ मोड को अक्षम करें";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "बूथ मोड में वार्तालाप इतिहास नहीं सहेजा गया है और जामी कार्यक्षमता आउटगोइंग कॉल करने से सीमित है. जब आप बूथ मोड सक्षम करेंगे तो आपकी सभी वार्तालाप हटा दी जाएगी।";
-"accountPage.noBoothMode" = "बूथ मोड को सक्षम करने के लिए आपको पहले खाता पासवर्ड बनाना होगा।";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "बूथ मोड सक्षम करने के बाद, आपकी सभी बातचीत हटा दी जाएगी।";
 "accountPage.peerDiscovery" = "स्थानीय नेटवर्क पर ऑटो कनेक्ट";
 "accountPage.autoRegistration" = "समाप्ति के बाद ऑटो रजिस्टर";

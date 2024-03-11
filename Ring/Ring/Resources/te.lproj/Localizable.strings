@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "నమోదు";
 "accountPage.usernameRegisterAction" = "నమోదు";
 "accountPage.usernameRegistrationFailed" = "నమోదు విఫలమైంది. దయచేసి పాస్వర్డ్ను తనిఖీ చేయండి.";
-"accountPage.createPassword" = "పాస్వర్డ్ను సృష్టించు";
+"accountPage.createPassword" = "ఎన్క్రిప్ట్ ఖాతా";
+"accountPage.createPasswordExplanation" = "మీ జమీ ఖాతా ఈ పరికరంలో మాత్రమే మీ ఖాతా కీలను కలిగి ఉన్న ఆర్కైవ్గా నమోదు చేయబడుతుంది. ఈ ఆర్కైవ్కు ప్రాప్యత పాస్వర్డ్ ద్వారా రక్షించబడుతుంది.";
 "accountPage.changePassword" = "పాస్వర్డ్ మార్చు";
 "accountPage.oldPasswordPlaceholder" = "పాత పాస్వర్డ్ను నమోదు చేయండి";
 "accountPage.newPasswordPlaceholder" = "కొత్త పాస్వర్డ్ను నమోదు చేయండి";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "బూత్ మోడ్ను నిలిపివేయండి";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "బూత్ మోడ్లో సంభాషణ చరిత్ర సేవ్ చేయబడలేదు మరియు అవుట్గోయింగ్ కాల్స్ చేయడం ద్వారా Jami కార్యాచరణ పరిమితం చేయబడింది. మీరు బూత్ మోడ్ను ప్రారంభించినప్పుడు మీ సంభాషణలు తొలగించబడతాయి.";
-"accountPage.noBoothMode" = "బూత్ మోడ్ను ప్రారంభించడానికి మీరు మొదట ఖాతా పాస్వర్డ్ను సృష్టించాలి.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "బూత్ మోడ్ను ప్రారంభించిన తర్వాత మీ సంభాషణలన్నీ తొలగించబడతాయి.";
 "accountPage.peerDiscovery" = "స్థానిక నెట్వర్క్లో ఆటో కనెక్ట్";
 "accountPage.autoRegistration" = "గడువు ముగిసిన తర్వాత ఆటో రిజిస్టర్";

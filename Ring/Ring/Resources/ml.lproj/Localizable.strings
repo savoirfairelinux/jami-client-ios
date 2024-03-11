@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "രജിസ്ട്രേഷൻ";
 "accountPage.usernameRegisterAction" = "രജിസ്റ്റർ ചെയ്യുക";
 "accountPage.usernameRegistrationFailed" = "രജിസ്ട്രേഷൻ പരാജയപ്പെട്ടു. പാസ്വേഡ് പരിശോധിക്കുക.";
-"accountPage.createPassword" = "പാസ്വേഡ് സൃഷ്ടിക്കുക";
+"accountPage.createPassword" = "എൻക്രിപ്റ്റ് ചെയ്ത അക്കൌണ്ട്";
+"accountPage.createPasswordExplanation" = "നിങ്ങളുടെ ജാമി അക്കൌണ്ട് ഈ ഉപകരണത്തിൽ മാത്രമേ നിങ്ങളുടെ അക്കൌണ്ടിന്റെ കീകൾ അടങ്ങിയിരിക്കുന്ന ഒരു ആർക്കൈവായി രജിസ്റ്റർ ചെയ്തിട്ടുള്ളൂ. ഈ ആർക്കൈവിലേക്കുള്ള ആക്സസ് പാസ്വേഡ് ഉപയോഗിച്ച് സംരക്ഷിക്കാവുന്നതാണ്.";
 "accountPage.changePassword" = "പാസ്വേഡ് മാറ്റുക";
 "accountPage.oldPasswordPlaceholder" = "പഴയ പാസ്വേഡ് നൽകുക";
 "accountPage.newPasswordPlaceholder" = "പുതിയ പാസ്വേഡ് നൽകുക";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "ബൂത്ത് മോഡ് പ്രവർത്തനരഹിതമാക്കുക";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "ബൂത്ത് മോഡിൽ സംഭാഷണ ചരിത്രം സംരക്ഷിക്കപ്പെടുന്നില്ല, പുറത്തെ കോളുകൾ വിളിക്കുന്നതിലൂടെ ജാമി പ്രവർത്തനം പരിമിതപ്പെടുത്തിയിരിക്കുന്നു. ബൂത്ത് മോഡ് പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ നിങ്ങളുടെ എല്ലാ സംഭാഷണങ്ങളും നീക്കംചെയ്യപ്പെടും.";
-"accountPage.noBoothMode" = "ബൂത്ത് മോഡ് പ്രവർത്തനക്ഷമമാക്കുന്നതിന് ആദ്യം അക്കൌണ്ട് പാസ്വേഡ് സൃഷ്ടിക്കേണ്ടതുണ്ട്.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "ബൂത്ത് മോഡ് പ്രവർത്തനക്ഷമമാക്കിയ ശേഷം നിങ്ങളുടെ എല്ലാ സംഭാഷണങ്ങളും നീക്കം ചെയ്യും.";
 "accountPage.peerDiscovery" = "ലോക്കൽ നെറ്റ്വർക്കിൽ ഓട്ടോ കണക്ട്";
 "accountPage.autoRegistration" = "കാലഹരണപ്പെട്ട ശേഷം ഓട്ടോ രജിസ്റ്റർ ചെയ്യുക";

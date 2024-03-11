@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registro";
 "accountPage.usernameRegisterAction" = "Rexistro";
 "accountPage.usernameRegistrationFailed" = "Non se rexistrou, por favor, verifique a contrasinal.";
-"accountPage.createPassword" = "Crear contrasinal";
+"accountPage.createPassword" = "Conta encriptada";
+"accountPage.createPasswordExplanation" = "A súa conta Jami está rexistrada só neste dispositivo como un arquivo que contén as chaves da súa conta.";
 "accountPage.changePassword" = "Cambiar contrasinal";
 "accountPage.oldPasswordPlaceholder" = "Introduza contrasinal antigo";
 "accountPage.newPasswordPlaceholder" = "Introduza unha nova contrasinal";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Desactivar o modo de Booth";
 "accountPage.disableBoothModeExplanation" = "Escribe o contrasinal da túa conta";
 "accountPage.boothModeExplanation" = "No modo de cabina non se guarda o historial de conversación e a funcionalidade de Jami limitada por facer chamadas saindo.";
-"accountPage.noBoothMode" = "Para activar o modo Booth, primeiro ten que crear a contrasinal da conta.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Despois de activar o modo de cabina todas as súas conversacións serán eliminadas.";
 "accountPage.peerDiscovery" = "Autoconectar en rede local";
 "accountPage.autoRegistration" = "Registro automático despois da caducidade";

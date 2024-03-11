@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "注册中";
 "accountPage.usernameRegisterAction" = "註冊";
 "accountPage.usernameRegistrationFailed" = "注册失败。请检查密码。";
-"accountPage.createPassword" = "创建密码";
+"accountPage.createPassword" = "加密账户";
+"accountPage.createPasswordExplanation" = "您的Jami帐户仅在此设备上注册,作为包含您的帐户密钥的档案库.";
 "accountPage.changePassword" = "變更密碼";
 "accountPage.oldPasswordPlaceholder" = "输入旧密码";
 "accountPage.newPasswordPlaceholder" = "输入新密码";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "禁用话亭模式";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "话亭模式中，不会保存会话历史，且 jami 的功能会受限为外拨电话。启用话亭模式后，现有会话将全部被删除。";
-"accountPage.noBoothMode" = "要使用话亭模式，您需要先设置账户密码。";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "启用话亭模式后，您的现有会话都将被删除。";
 "accountPage.peerDiscovery" = "在本地网络自动连接";
 "accountPage.autoRegistration" = "过期后自动注册";

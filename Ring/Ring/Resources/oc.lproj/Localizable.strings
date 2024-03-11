@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registracion";
 "accountPage.usernameRegisterAction" = "Registrament";
 "accountPage.usernameRegistrationFailed" = "L'inscripcion fallís. Verifiquètz la contraròtle.";
-"accountPage.createPassword" = "Creacion de contraròtle";
+"accountPage.createPassword" = "Compte encriptat";
+"accountPage.createPasswordExplanation" = "Lo compte Jami es enregistrat solament sus aqueste dispositiu coma un archiu contenent las claus de vòstre compte.";
 "accountPage.changePassword" = "Cambiar senhal";
 "accountPage.oldPasswordPlaceholder" = "Introducir un pasbre ancian";
 "accountPage.newPasswordPlaceholder" = "Introducir una nòva contraròtle";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Desactivar lo mòde de botiga";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "En mòde de cabina l'istòria de conversacion es pas salvada e la foncionalitat jami limitada per far de trucas sortentas.";
-"accountPage.noBoothMode" = "Per activar lo mòde Booth cal crear d'en primièr la contraròtle del compte.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Après aver activat lo mòde de cabina totas las vosas conversas seràn eliminadas.";
 "accountPage.peerDiscovery" = "Connexion auto a la ret locala";
 "accountPage.autoRegistration" = "Registre automatic après l'expiracion";

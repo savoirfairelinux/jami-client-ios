@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Գրանցում";
 "accountPage.usernameRegisterAction" = "Գրանցվել";
 "accountPage.usernameRegistrationFailed" = "Անվանումը ձախողվել է, խնդրում ենք ստուգել գաղտնաբառը:";
-"accountPage.createPassword" = "Ստեղծեք գաղտնաբառ";
+"accountPage.createPassword" = "Գաղտնի հաշիվ";
+"accountPage.createPasswordExplanation" = "Ձեր Jami հաշիվը գրանցվում է միայն այս սարքում որպես արխիվ, որը պարունակում է ձեր հաշիվի բանալիները: Այս արխիվի մուտքը կարող է պաշտպանվել գաղտնաբառով:";
 "accountPage.changePassword" = "Փոխել գաղտնաբառը";
 "accountPage.oldPasswordPlaceholder" = "Ներբեռնեք հին գաղտնաբառը";
 "accountPage.newPasswordPlaceholder" = "Ներբեռնեք նոր գաղտնաբառ";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Հեռացնել բուշի մոդը";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Բուդի ռեժիմում զրույցի պատմությունը չի պահպանվում եւ Jami ֆունկցիոնալությունը սահմանափակվում է ելող զանգերի կատարմամբ: Երբ դուք ակտիվացնում եք բուդի ռեժիմը, ձեր բոլոր զրույցները կվերացվեն:";
-"accountPage.noBoothMode" = "Բուտ մոդի ակտիվացնելու համար նախ պետք է ստեղծել հաշիվի գաղտնաբառը:";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Երբ ակտիվացնեք բուդի մոդը, ձեր բոլոր զրույցները կվերացվեն:";
 "accountPage.peerDiscovery" = "Տեղական ցանցում ավտոմատ կապ";
 "accountPage.autoRegistration" = "Ավտոմեքենայի գրանցում ժամկետը լրանալուց հետո";

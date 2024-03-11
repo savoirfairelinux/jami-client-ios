@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registre";
 "accountPage.usernameRegisterAction" = "Registra";
 "accountPage.usernameRegistrationFailed" = "La inscripció no va funcionar.";
-"accountPage.createPassword" = "Crea la contrasenya";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "Canvia la contrasenya";
 "accountPage.oldPasswordPlaceholder" = "Introdueix una contrasenya antiga";
 "accountPage.newPasswordPlaceholder" = "Introdueix una nova contrasenya";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Desactivar el mode de l'estamp";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "En mode cabina no s'ha guardat el historial de conversa i la funcionalitat jami limitada per fer trucades sortents.";
-"accountPage.noBoothMode" = "Per activar el mode Booth cal crear primer la contrasenya de compte.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Després d'activar el mode cabina totes les converses seran eliminades.";
 "accountPage.peerDiscovery" = "Connecta automàticament a la xarxa local";
 "accountPage.autoRegistration" = "Registre automàtic després de la expiració";

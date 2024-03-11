@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "નોંધણી";
 "accountPage.usernameRegisterAction" = "નોંધણી";
 "accountPage.usernameRegistrationFailed" = "નોંધણી નિષ્ફળ ગઈ. કૃપા કરીને પાસવર્ડ તપાસો.";
-"accountPage.createPassword" = "પાસવર્ડ બનાવો";
+"accountPage.createPassword" = "એન્ક્રિપ્ટ એકાઉન્ટ";
+"accountPage.createPasswordExplanation" = "તમારા જમ્મી એકાઉન્ટને ફક્ત આ ઉપકરણ પર જ તમારા એકાઉન્ટની કીઓ ધરાવતી આર્કાઇવ તરીકે નોંધવામાં આવે છે. આ આર્કાઇવની ઍક્સેસ પાસવર્ડ દ્વારા સુરક્ષિત કરી શકાય છે.";
 "accountPage.changePassword" = "પાસવર્ડ બદલો";
 "accountPage.oldPasswordPlaceholder" = "જૂના પાસવર્ડ દાખલ કરો";
 "accountPage.newPasswordPlaceholder" = "નવું પાસવર્ડ દાખલ કરો";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "બુથ મોડને અક્ષમ કરો";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "બૂથ મોડમાં વાતચીત ઇતિહાસ સાચવવામાં આવ્યો નથી અને બહાર નીકળીને કોલ્સ કરીને જમા કાર્યક્ષમતા મર્યાદિત છે. જ્યારે તમે બૂથ મોડને સક્ષમ કરો છો ત્યારે તમારી બધી વાતચીત દૂર કરવામાં આવશે.";
-"accountPage.noBoothMode" = "બુથ મોડને સક્ષમ કરવા માટે તમારે પહેલા એકાઉન્ટ પાસવર્ડ બનાવવાની જરૂર છે.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "બૂથ મોડને સક્ષમ કર્યા પછી તમારી બધી વાતચીત દૂર કરવામાં આવશે.";
 "accountPage.peerDiscovery" = "સ્થાનિક નેટવર્ક પર સ્વયંસંચાલિત કનેક્ટ";
 "accountPage.autoRegistration" = "સમાપ્તિ પછી ઓટો રજિસ્ટર";

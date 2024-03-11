@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Тіркеу";
 "accountPage.usernameRegisterAction" = "Тіркеу";
 "accountPage.usernameRegistrationFailed" = "Тіркеу сәтсіз аяқталды.";
-"accountPage.createPassword" = "Парольді құру";
+"accountPage.createPassword" = "Шифрланған шот";
+"accountPage.createPasswordExplanation" = "Jami тіркелгіңіз осы құрылғыда ғана тіркеледі.";
 "accountPage.changePassword" = "Парольді өзгерту";
 "accountPage.oldPasswordPlaceholder" = "Ескі парольді келтіріңіз";
 "accountPage.newPasswordPlaceholder" = "Жаңа парольді келтіріңіз";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Бут режимін өшіру";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Бут режиміне қосылғанда барлық әңгімелеріңіз алынып тасталады.";
-"accountPage.noBoothMode" = "Booth режимін қосу үшін алдымен тіркелгі паролін құру керек.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Кабина режимін қосудан кейін барлық әңгімелеріңіз алынып тасталады.";
 "accountPage.peerDiscovery" = "Жергілікті желіде автоматты қосылу";
 "accountPage.autoRegistration" = "Күші жойылды деп танылған";

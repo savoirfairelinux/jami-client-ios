@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registruje sa";
 "accountPage.usernameRegisterAction" = "Registrovať";
 "accountPage.usernameRegistrationFailed" = "Registrácia zlyhala. Skontrolujte prosím heslo.";
-"accountPage.createPassword" = "Vytvoriť heslo";
+"accountPage.createPassword" = "Zšifrovaný účet";
+"accountPage.createPasswordExplanation" = "Váš účet Jami je registrovaný iba na tomto zariadení ako archív obsahujúci kľúče vášho účtu.";
 "accountPage.changePassword" = "Zmeniť heslo";
 "accountPage.oldPasswordPlaceholder" = "Vložte starý heslo";
 "accountPage.newPasswordPlaceholder" = "Vložte nový heslo";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Zmazať režim kabíny";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "V režime kabíny nie je uložená historika konverzácií a funkcia Jami je obmedzená výstupnými hovormi.";
-"accountPage.noBoothMode" = "Ak chcete aktivovať režim Booth, musíte najprv vytvoriť heslo účtu.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Po spustení režimu stanky sa všetky vaše konverzácie odstránia.";
 "accountPage.peerDiscovery" = "Automatické pripojenie v lokálnej sieti";
 "accountPage.autoRegistration" = "Autoregistrácia po uplynutí platnosti";

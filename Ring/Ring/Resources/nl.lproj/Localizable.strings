@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registratie";
 "accountPage.usernameRegisterAction" = "Registreren";
 "accountPage.usernameRegistrationFailed" = "Registratie mislukt.";
-"accountPage.createPassword" = "Creëren van wachtwoord";
+"accountPage.createPassword" = "Gecodeerd account";
+"accountPage.createPasswordExplanation" = "Uw Jami-account is alleen geregistreerd op dit apparaat als een archief met de sleutels van uw account.";
 "accountPage.changePassword" = "Wachtwoord wijzigen";
 "accountPage.oldPasswordPlaceholder" = "Voer het oude wachtwoord in";
 "accountPage.newPasswordPlaceholder" = "Voer een nieuw wachtwoord in";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "De booth-modus uitschakelen";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "In de standmodus is de gesprekshistorie niet opgeslagen en de Jami-functionaliteit beperkt door uitgaande gesprekken te maken.";
-"accountPage.noBoothMode" = "Om de booth-modus in te schakelen moet je eerst het wachtwoord van het account maken.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Nadat je de stand-modus hebt ingeschakeld, worden al je gesprekken verwijderd.";
 "accountPage.peerDiscovery" = "Automatisch verbinden op lokaal netwerk";
 "accountPage.autoRegistration" = "Auto-register na verval";

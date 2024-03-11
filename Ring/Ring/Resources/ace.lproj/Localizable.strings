@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "ڤرجالنن";
 "accountPage.usernameRegisterAction" = "ڤمباچ";
 "accountPage.usernameRegistrationFailed" = "ڤرجالنن تله دڤرچايا?? ي.";
-"accountPage.createPassword" = "ڤڠڬونا ڤرسود";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "مڠهادڤي ڤرسود";
 "accountPage.oldPasswordPlaceholder" = "ممبري ڤرسود ڤريڠکت";
 "accountPage.newPasswordPlaceholder" = "مڠهادڤي ڤرسودن بارو";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "مڠمبيل مود بوث";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "دالم مود بوته سياستن ڤرساتوان تيدق دڤرچايا?? ي دان ڤڠونجوڠ jami دڤرچايا?? ي دڠن ممبنتو ڤرساتوان يڠ برمولا.";
-"accountPage.noBoothMode" = "اونتوق ممبنتو مود بوث، تومبوهن ڤرلو ممبنتو ڤرسود ايكونت.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "بعد از فعال کردن حالت كوتاه تمام مکالمه هاتون حذف ميشه";
 "accountPage.peerDiscovery" = "ڤڠاجين اوتوماتيك دالم نيترۏيك لوكالي";
 "accountPage.autoRegistration" = "ڤرجالنن اوتوماتيك سهيڠڬ ڤڠڬيلن";

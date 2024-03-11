@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "दर्ता";
 "accountPage.usernameRegisterAction" = "दर्ता";
 "accountPage.usernameRegistrationFailed" = "दर्ता असफल भयो कृपया पासवर्ड जाँच गर्नुहोस्।";
-"accountPage.createPassword" = "पासवर्ड सिर्जना गर्नुहोस्";
+"accountPage.createPassword" = "खाता एन्क्रिप्टेड";
+"accountPage.createPasswordExplanation" = "तपाईंको जेमी खाता यस उपकरणमा मात्र तपाईंको खाताको कुञ्जीहरू समावेश गर्ने अभिलेखको रूपमा दर्ता गरिएको छ। यस अभिलेखमा पहुँच पासवर्डद्वारा सुरक्षित गर्न सकिन्छ।";
 "accountPage.changePassword" = "पासवर्ड परिवर्तन गर्नुहोस्";
 "accountPage.oldPasswordPlaceholder" = "पुरानो पासवर्ड प्रविष्ट गर्नुहोस्";
 "accountPage.newPasswordPlaceholder" = "नयाँ पासवर्ड प्रविष्ट गर्नुहोस्";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "बुथ मोड अक्षम गर्नुहोस्";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "बूथ मोडमा वार्तालाप इतिहास बचत गरिएको छैन र जमी कार्यक्षमता बाहिर जाने कलहरू गरेर सीमित छ। जब तपाईं बूथ मोड सक्षम गर्नुहुन्छ सबै तपाईंको कुराकानीहरू हटाइनेछ।";
-"accountPage.noBoothMode" = "बुथ मोड सक्षम गर्न तपाईंले पहिले खाता पासवर्ड सिर्जना गर्नु पर्छ।";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "बूथ मोड सक्षम भएपछि सबै कुराकानी हटाइनेछ।";
 "accountPage.peerDiscovery" = "स्थानीय नेटवर्कमा स्वचालित जडान";
 "accountPage.autoRegistration" = "म्याद सकिएपछि स्वतः दर्ता";

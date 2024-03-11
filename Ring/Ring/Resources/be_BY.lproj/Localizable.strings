@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Рэгістрацыя";
 "accountPage.usernameRegisterAction" = "Рэгістрацыя";
 "accountPage.usernameRegistrationFailed" = "Рэгістрацыя не атрымалася. Калі ласка, праверце пароль.";
-"accountPage.createPassword" = "Стварэнне пароля";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "Змяніць пароль";
 "accountPage.oldPasswordPlaceholder" = "Увядзіце стары пароль";
 "accountPage.newPasswordPlaceholder" = "Увядзіце новы пароль";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Адключыць рэжым бута";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "У рэжыме кабіны гісторыя размоў не захаваная і функцыянальнасць Jami абмежаваны выхаду званкі.";
-"accountPage.noBoothMode" = "Каб уключыць рэжым Бута, спачатку трэба стварыць пароль уліковага запісу.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Пасля таго, як вы ўключыце рэжым кабіны, усе вашыя размовы будуць выдаленыя.";
 "accountPage.peerDiscovery" = "Аўтаматычнае падключэнне ў мясцовай сетцы";
 "accountPage.autoRegistration" = "Аўтамабільны рэгістр пасля заканчэння тэрміну";

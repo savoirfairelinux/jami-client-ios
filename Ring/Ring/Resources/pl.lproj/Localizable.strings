@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Rejestracja";
 "accountPage.usernameRegisterAction" = "Zarejestruj";
 "accountPage.usernameRegistrationFailed" = "Rejestracja nie powiodła się. Sprawdź swoje hasło.";
-"accountPage.createPassword" = "Utwórz hasło";
+"accountPage.createPassword" = "Konto szyfrowane";
+"accountPage.createPasswordExplanation" = "Konto Jami jest zarejestrowane tylko na tym urządzeniu jako archiwum zawierający klucze do konta.";
 "accountPage.changePassword" = "Zmień hasło";
 "accountPage.oldPasswordPlaceholder" = "Wprowadź stare hasło";
 "accountPage.newPasswordPlaceholder" = "Wprowadź nowe hasło";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Wyłącz tryb budki";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "W trybie booth historia rozmowy nie jest zapisana i funkcjonalność jami ograniczona przez wykonywanie wychodzących połączeń.";
-"accountPage.noBoothMode" = "Aby włączyć tryb Booth, musisz najpierw utworzyć hasło konta.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Po włączeniu trybu kabiny wszystkie rozmowy zostaną usunięte.";
 "accountPage.peerDiscovery" = "Automatycznie łącz się w sieci lokalnej";
 "accountPage.autoRegistration" = "Automatyczna rejestracja po wygaśnięciu";

@@ -193,7 +193,7 @@
 "alerts.dbFailedTitle" = "An error happened when launching Jami";
 "alerts.dbFailedMessage" = "Молимо вас да затворите пријаву и покушате да је поново отворите.";
 "alerts.confirmBlockContact" = "Да ли сте сигурни да желите да блокирате овај контакт? Историја разговора са овим контактом ће такође бити трајно избрисана.";
-"alerts.confirmDeleteConversation" = "Сигуран си да желиш да заувек избришиш овај разговор?";
+"alerts.confirmDeleteConversation" = "Да ли сте сигурни да желите да трајно избришете ову конверзацију?";
 "alerts.confirmDeleteConversationFromContact" = "Да ли сте сигурни да желите да избришете разговор са овим контактом?";
 "alerts.confirmDeleteConversationTitle" = "Избриши разговор";
 "alerts.confirmClearConversation" = "Сигуран си да желиш да очистиш разговор са овим контактом?";
@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Регистрација";
 "accountPage.usernameRegisterAction" = "Registruj se";
 "accountPage.usernameRegistrationFailed" = "Регистрација није успела. Проверите лозинку.";
-"accountPage.createPassword" = "Стварити лозинку";
+"accountPage.createPassword" = "Криптован рачун";
+"accountPage.createPasswordExplanation" = "Ваш рачун Jami је регистровано само на овом уређају као архив који садржи кључеве вашег рачун.";
 "accountPage.changePassword" = "Променити лозинку";
 "accountPage.oldPasswordPlaceholder" = "Уведите стару лозинку";
 "accountPage.newPasswordPlaceholder" = "Унесите нову лозинку";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Деактивирајте режим бута";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "У режиму бух, историја разговора није спасана и функционалност Jami ограничена правећи исходяће позиве.";
-"accountPage.noBoothMode" = "Да бисте омогућили Бут режим, прво морате направити лозинку рачуна.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Након укључивања режима кабина, сви ваши разговори ће бити уклоњени.";
 "accountPage.peerDiscovery" = "Автоматска повезаност на локалној мрежи";
 "accountPage.autoRegistration" = "Авторегистар након истека времена";
@@ -404,12 +405,12 @@
 "migrateAccount.migrateButton" = "Миграциони рачун";
 "migrateAccount.explanation" = "Овај рачун мора бити мигриран.";
 "migrateAccount.passwordExplanation" = "Да бисте наставили са миграцијом, морате увести лозинку која је коришћена за овај рачун";
-"migrateAccount.error" = "Не успео да мигрира рачуна. Можете поново покушати или избрисати свој рачуна.";
+"migrateAccount.error" = "Мигрирање налога није успело. Можете покушати поново или избрисати свој налог.";
 "migrateAccount.migrating" = "Миграција...";
 "migrateAccount.migrateAnother" = "Миграција на други рачун";
 
 //About Jami
-"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
+"aboutJami.declaration1" = "Jami, GNU paket, je softver za univerzalnu i distribuiranu ravnopravnu komunikaciju koja poštuje slobodu i privatnost svojih korisnika. Posetite";
 "aboutJami.declaration2" = "to learn more.";
 "aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
 "aboutJami.noWarranty2" = "version 3 or later for details.";

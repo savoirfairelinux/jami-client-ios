@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Benutzername wird registriert...";
 "accountPage.usernameRegisterAction" = "Registrieren";
 "accountPage.usernameRegistrationFailed" = "Registrierung fehlgeschlagen. Bitte Passwort überprüfen.";
-"accountPage.createPassword" = "Passwort erstellen";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "Passwort ändern";
 "accountPage.oldPasswordPlaceholder" = "Altes Passwort eingeben";
 "accountPage.newPasswordPlaceholder" = "Neues Passwort eingeben";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Geheim-Modus deaktivieren";
 "accountPage.disableBoothModeExplanation" = "Bitte geben Sie Ihr Kontopasswort ein";
 "accountPage.boothModeExplanation" = "Im Geheim-Modus wird der Gesprächsverlauf nicht gespeichert und die Jami-Funktionalität durch ausgehende Anrufe eingeschränkt. Wenn Sie den Geheim-Modus aktivieren, werden alle Ihre Gespräche entfernt.";
-"accountPage.noBoothMode" = "Um den Geheim-Modus zu aktivieren, müssen Sie zuerst ein Passwort für Ihr Konto erstellen.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Nach der Aktivierung des Geheim-Modus werden alle Ihre Gespräche entfernt.";
 "accountPage.peerDiscovery" = "In lokalem Netzwerk automatisch verbinden";
 "accountPage.autoRegistration" = "Automatische Registrierung nach Ablauf";
@@ -409,13 +410,13 @@
 "migrateAccount.migrateAnother" = "Anderes Konto migrieren";
 
 //About Jami
-"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
-"aboutJami.declaration2" = "to learn more.";
-"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
-"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.declaration1" = "Jami, ein GNU-Paket, ist eine Software für die universelle und verteilte Peer-to-Peer-Kommunikation, die die Freiheit und Privatsphäre ihrer Benutzer respektiert. Besuchen Sie";
+"aboutJami.declaration2" = "um mehr zu lernen.";
+"aboutJami.noWarranty1" = "Für dieses Programm wird keinerlei Garantie übernommen. Siehe";
+"aboutJami.noWarranty2" = "Version 3 oder höher für Details.";
 "aboutJami.contribute" = "Beitragen";
 "aboutJami.feedback" = "Feedback";
-"aboutJami.createdBy" = "Created by";
-"aboutJami.artworkBy" = "Artwork by";
+"aboutJami.createdBy" = "Erstellt von";
+"aboutJami.artworkBy" = "Visuelle Gestaltung von";
 
 

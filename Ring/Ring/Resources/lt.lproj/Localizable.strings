@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registravimas";
 "accountPage.usernameRegisterAction" = "Registruoti";
 "accountPage.usernameRegistrationFailed" = "Registracija nesilaukė, prašome patikrinti slaptažodį.";
-"accountPage.createPassword" = "Sukurti slaptažodį";
+"accountPage.createPassword" = "Šifruotas paskyras";
+"accountPage.createPasswordExplanation" = "Jūsų \"Jami\" paskyras yra registruotas tik šiame įrenginyje kaip archyvas, kuriame yra jūsų paskyros raktų.";
 "accountPage.changePassword" = "Pakeisti slaptažodį";
 "accountPage.oldPasswordPlaceholder" = "Įveskite seną slaptažodį";
 "accountPage.newPasswordPlaceholder" = "Įveskite naują slaptažodį";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Išjungti statinio režimą";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Kai įjungsite \"Booth\" režimą, jūsų pokalbių istorija nebus išsaugota ir \"Jami\" funkcija bus apribota išvykstančiais skambučiais.";
-"accountPage.noBoothMode" = "Norėdami įjungti \"Booth\" režimą, pirmiausia turite sukurti paskyros slaptažodį.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Kai įjungsite kabino režimą, visi jūsų pokalbis bus pašalintas.";
 "accountPage.peerDiscovery" = "Automatiškai prisijungti vietiniame tinkle";
 "accountPage.autoRegistration" = "Autoriškas registruotojas po galiojimo termino";

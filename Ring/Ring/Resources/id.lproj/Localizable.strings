@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Mendaftarkan";
 "accountPage.usernameRegisterAction" = "Daftar";
 "accountPage.usernameRegistrationFailed" = "Pendaftaran gagal. Silakan periksa kata sandi.";
-"accountPage.createPassword" = "Buat kata sandi";
+"accountPage.createPassword" = "Akun Enkripsi";
+"accountPage.createPasswordExplanation" = "Akun Jami Anda hanya terdaftar di perangkat ini sebagai arsip yang berisi kunci akun Anda. Akses ke arsip ini dapat dilindungi dengan kata sandi.";
 "accountPage.changePassword" = "Ubah kata sandi";
 "accountPage.oldPasswordPlaceholder" = "Masukkan kata sandi lama";
 "accountPage.newPasswordPlaceholder" = "Masukan kata sandi baru";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Nonaktifkan Mode Booth";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Dalam mode booth riwayat percakapan tidak disimpan dan fungsi jami dibatasi dengan melakukan panggilan keluar. Ketika Anda mengaktifkan mode booth semua percakapan Anda akan dihapus.";
-"accountPage.noBoothMode" = "Untuk mengaktifkan mode Booth, Anda harus membuat kata sandi akun terlebih dahulu.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Setelah mengaktifkan mode booth, semua percakapan Anda akan dihapus.";
 "accountPage.peerDiscovery" = "Terhubung otomatis pada jaringan lokal";
 "accountPage.autoRegistration" = "Daftar otomatis setelah kedaluwarsa";

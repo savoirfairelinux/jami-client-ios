@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registrerar";
 "accountPage.usernameRegisterAction" = "Registrera";
 "accountPage.usernameRegistrationFailed" = "Registrering misslyckade. Kontrollera lösenord. ";
-"accountPage.createPassword" = "Skapa lösenord";
+"accountPage.createPassword" = "Kryptat konto";
+"accountPage.createPasswordExplanation" = "Ditt Jami-konto registreras endast på den här enheten som ett arkiv som innehåller dina nycklar.";
 "accountPage.changePassword" = "Byt lösenord";
 "accountPage.oldPasswordPlaceholder" = "Ange gammalt lösenord";
 "accountPage.newPasswordPlaceholder" = "Ange nytt lösenord";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Avaktivera uppstartsläge";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "I uppstartsläge sparas inte konversationshistorik och Jami begränsas genom utgående samtal. I uppstartsläge raderas alla dina konversationer. ";
-"accountPage.noBoothMode" = "Uppstartsläge kräver du skapar ett kontolösenord. ";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "När uppstartsläge är aktiverat försvinner tidigare konversationer. ";
 "accountPage.peerDiscovery" = "Anslut automatiskt på lokalt nätverk";
 "accountPage.autoRegistration" = "Registrera automatiskt efter tiden går ut";

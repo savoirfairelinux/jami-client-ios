@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registriĝo";
 "accountPage.usernameRegisterAction" = "Registri";
 "accountPage.usernameRegistrationFailed" = "Registro malsukcesis. Bonvolu kontroli la pasvorton.";
-"accountPage.createPassword" = "Krei pasvorton";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "Ŝanĝu pasvorton";
 "accountPage.oldPasswordPlaceholder" = "Enigu malnovan pasvorton";
 "accountPage.newPasswordPlaceholder" = "Enigu novan pasvorton";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Malŝaltu la buŝan reĝimon";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "En la stand-modo konversacia historio ne estas savita kaj la funkcio de Jami limigita per farante elirantaj alvokojn. Kiam vi aktivigas stand-modo ĉiuj viaj konversacioj estos forigitaj.";
-"accountPage.noBoothMode" = "Por aktivigi la buŝan reĝimon vi devas unue krei la pasvorton de la konto.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Post aktivigo de la stand-modo ĉiuj viaj konversacioj estos forigitaj.";
 "accountPage.peerDiscovery" = "Aŭtomata konekto en loka reto";
 "accountPage.autoRegistration" = "Aŭtorejestro post eksvalido";

@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Uvod u registraciju";
 "accountPage.usernameRegisterAction" = "Registriraj";
 "accountPage.usernameRegistrationFailed" = "Registracija je propala.";
-"accountPage.createPassword" = "Napraviti lozinku";
+"accountPage.createPassword" = "Kriptirani račun";
+"accountPage.createPasswordExplanation" = "Vaš nalog Jami je registriran samo na ovom uređaju kao arhiv koji sadrži ključeve vašeg računa.";
 "accountPage.changePassword" = "Promjena lozinke";
 "accountPage.oldPasswordPlaceholder" = "Ubaci stari lozinku";
 "accountPage.newPasswordPlaceholder" = "Ubaci novu lozinku";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Odričaj način štampa";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "U režimu kabine povijest razgovora nije spisana i funkcionalnost jami ograničena odlaska pozive.";
-"accountPage.noBoothMode" = "Da biste omogućili režim Booth, prvo morate stvoriti lozinku računa.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Nakon uključivanja stand modu, svi razgovori će biti uklonjeni.";
 "accountPage.peerDiscovery" = "Automatsko povezivanje na lokalnoj mreži";
 "accountPage.autoRegistration" = "Autoreski registr nakon isteka";

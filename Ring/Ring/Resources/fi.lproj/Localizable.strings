@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Rekisteröidään";
 "accountPage.usernameRegisterAction" = "Rekistöröi";
 "accountPage.usernameRegistrationFailed" = "Rekisteröinti epäonnistui. Tarkista salasana.";
-"accountPage.createPassword" = "Luo salasana";
+"accountPage.createPassword" = "Salaistettu tili";
+"accountPage.createPasswordExplanation" = "Jami-tilisi on rekisteröity vain tässä laitteessa arkistoon, jossa on tiliäsi avaimet.";
 "accountPage.changePassword" = "Vaihda salasana";
 "accountPage.oldPasswordPlaceholder" = "Anna vanha salasana";
 "accountPage.newPasswordPlaceholder" = "Anna uusi salasana";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Poista kioskitila";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Kioskitilassa keskusteluhistoriaa ei tallenneta ja jamin toimintoja rajoitettu lähtevien puheluiden osalta. Kun otat kioskitilan käyttöön, kaikki keskustelusi poistetaan.";
-"accountPage.noBoothMode" = "Voit ottaa kioskitilan käyttöön luomalla ensin tilin salasanan.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Kun kioskitila on otettu käyttöön, kaikki keskustelut poistetaan.";
 "accountPage.peerDiscovery" = "Automaattinen yhteys paikallisessa verkossa";
 "accountPage.autoRegistration" = "Automaattinen rekisteröinti vanhentumisen jälkeen";

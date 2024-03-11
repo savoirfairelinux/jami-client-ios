@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Регистрация";
 "accountPage.usernameRegisterAction" = "Регистриране";
 "accountPage.usernameRegistrationFailed" = "Регистрацията не е успела, проверете паролата.";
-"accountPage.createPassword" = "Създаване на парола";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "Промяна на парола";
 "accountPage.oldPasswordPlaceholder" = "Введете старата парола";
 "accountPage.newPasswordPlaceholder" = "Введете нов парол";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Отключете режим на бута";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "В режим \"бух\" не е запазено историята на разговора и функциите на Jami са ограничени от изходящи обаждания.";
-"accountPage.noBoothMode" = "За да активирате режим Бут, първо трябва да създадете парола на профила.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "След като включите режим \"бух\", всички разговори ще бъдат премахнати.";
 "accountPage.peerDiscovery" = "Автоматично свързване на локалната мрежа";
 "accountPage.autoRegistration" = "Авторегистър след изтичане на срока";

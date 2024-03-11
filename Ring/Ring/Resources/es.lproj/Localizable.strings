@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registrando";
 "accountPage.usernameRegisterAction" = "Registrar";
 "accountPage.usernameRegistrationFailed" = "El registro ha fallado. Por favor, compruebe la contraseña.";
-"accountPage.createPassword" = "Crear contraseña";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "Cambiar contraseña";
 "accountPage.oldPasswordPlaceholder" = "Ingrese su contraseña anterior";
 "accountPage.newPasswordPlaceholder" = "Ingrese su nueva contraseña";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Deshabilitar modo reservado";
 "accountPage.disableBoothModeExplanation" = "Por favor Introduzca la contraseña de su cuenta";
 "accountPage.boothModeExplanation" = "En el modo de conversación reservada, el historial de conversaciones no se guarda y la funcionalidad de Jami se limita al realizar llamadas salientes. Cuando habilite el modo de conversación reservada, se eliminarán todas sus conversaciones.";
-"accountPage.noBoothMode" = "Para habilitar el modo reservado, primero debe crear una contraseña de cuenta.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Después de habilitar el modo reservado, se eliminarán todas sus conversaciones.";
 "accountPage.peerDiscovery" = "Auto conectar en red local";
 "accountPage.autoRegistration" = "Registrar automáticamente luego de la expiración";

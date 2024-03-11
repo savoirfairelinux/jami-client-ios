@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Se înscrie";
 "accountPage.usernameRegisterAction" = "Înscrie-te";
 "accountPage.usernameRegistrationFailed" = "Înscrierea a eșuat. Verifică parola.";
-"accountPage.createPassword" = "Creează parola";
+"accountPage.createPassword" = "Cifrează contul";
+"accountPage.createPasswordExplanation" = "Contul tău Jami este înregistrat doar în acest aparat ca o arhivă care conține cheile contului tău. Accesul la această arhivă poate fi protejat cu o parolă.";
 "accountPage.changePassword" = "Schimbă parola";
 "accountPage.oldPasswordPlaceholder" = "Introdu parola veche";
 "accountPage.newPasswordPlaceholder" = "Introdu parola nouă";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Dezactivează „Modul Cabină”";
 "accountPage.disableBoothModeExplanation" = "Introdu parola contului tău";
 "accountPage.boothModeExplanation" = "În „Modul Cabină” cronologia conversațiilor nu e salvată și Jami este limitat la efectuarea de apeluri. Dacă activezi „Modul Cabină”, toate conversațiile tale vor fi șterse.";
-"accountPage.noBoothMode" = "Pentru a activa „Modul Cabină”, trebuie mai întâi să creezi parola contului.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "După activarea modului cabină, toate conversațiile tale vor fi șterse.";
 "accountPage.peerDiscovery" = "Conectare automată la rețeaua locală";
 "accountPage.autoRegistration" = "Înscriere automată după expirare";

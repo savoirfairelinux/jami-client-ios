@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "التسجيل";
 "accountPage.usernameRegisterAction" = "سجل";
 "accountPage.usernameRegistrationFailed" = "التسجيل فشل، من فضلك تحقق من كلمة المرور";
-"accountPage.createPassword" = "إنشاء كلمة مرور";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "تغيير كلمة المرور";
 "accountPage.oldPasswordPlaceholder" = "إدخال كلمة المرور القديمة";
 "accountPage.newPasswordPlaceholder" = "إدخال كلمة مرور جديدة";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "إيقاف وضع المرفق";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "في وضع الكشك لا يتم حفظ تاريخ المحادثات و وظائف jami محدودة من خلال إجراء المكالمات الخارجة. عندما تمكن من وضع الكشك سيتم إزالة جميع المحادثات الخاصة بك.";
-"accountPage.noBoothMode" = "لتشغيل وضع \"بوث\" عليك إنشاء كلمة المرور أولاً.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "بعد تمكين وضع الكشك سيتم إزالة جميع محادثاتك";
 "accountPage.peerDiscovery" = "الاتصال التلقائي على الشبكة المحلية";
 "accountPage.autoRegistration" = "سجل السيارات بعد انتهاء الصلاحية";

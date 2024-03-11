@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "การลงทะเบียน";
 "accountPage.usernameRegisterAction" = "ลงทะเบียน";
 "accountPage.usernameRegistrationFailed" = "การลงทะเบียนล้มเหลว ขอเช็คปัสริด";
-"accountPage.createPassword" = "สร้างป้ายรหัส";
+"accountPage.createPassword" = "บัญชีรหัส";
+"accountPage.createPasswordExplanation" = "การเข้าใช้งานของบัญชี Jami ของคุณ จะถูกลงทะเบียนในอุปกรณ์นี้เท่านั้น เป็นอาร์คไฮฟ ที่มีกุญแจของบัญชีของคุณ";
 "accountPage.changePassword" = "เปลี่ยนปัสผ่าน";
 "accountPage.oldPasswordPlaceholder" = "กรอกรหัสผ่านเก่า";
 "accountPage.newPasswordPlaceholder" = "กรอกรหัสผ่านใหม่";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "ปิดโหมด Booth";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "ในโหมดบูธ ประวัติการพูดคุยไม่ได้บันทึก และการทํางานของ Jami มีขัดขวางโดยการทําการโทรออก เมื่อคุณเปิดโหมดบูธทั้งหมดการพูดคุยของคุณจะถูกลบ";
-"accountPage.noBoothMode" = "เพื่อเปิดโหมด Booth คุณต้องสร้างรหัสผ่านบัญชีก่อน";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "หลังจากเปิดโหมดบูธแล้ว การพูดคุยทั้งหมดของคุณจะถูกลบ";
 "accountPage.peerDiscovery" = "การเชื่อมต่ออัตโนมัติในเครือข่ายท้องถิ่น";
 "accountPage.autoRegistration" = "รีสเตอร์รถยนต์หลังหมดอายุ";

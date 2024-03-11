@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registrazione";
 "accountPage.usernameRegisterAction" = "Registrati";
 "accountPage.usernameRegistrationFailed" = "Registrazione fallita. Si prega di controllare la password.";
-"accountPage.createPassword" = "Crea password";
+"accountPage.createPassword" = "Cifrare l'account";
+"accountPage.createPasswordExplanation" = "Il tuo account Jami è registrato solo su questo dispositivo come archivio contenente le chiavi del proprio account. L'accesso a questo archivio può essere protetto da una password.";
 "accountPage.changePassword" = "Cambia password";
 "accountPage.oldPasswordPlaceholder" = "Inserire la vecchia password";
 "accountPage.newPasswordPlaceholder" = "Inserire la nuova password";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Disattiva Modalità Cabina";
 "accountPage.disableBoothModeExplanation" = "Fornisci la password del tuo account";
 "accountPage.boothModeExplanation" = "In Modalità Cabina la cronologia delle conversazioni non viene salvata e la funzionalità di Jami è limitata a fare chiamate. Se attivi la Modalità Cabina tutte le tue conversazioni saranno eliminate.";
-"accountPage.noBoothMode" = "Per attivare la Modalità Cabina devi prima creare la password dell'account.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Dopo aver attivato la Modalità Cabina, tutte le tue conversazioni saranno eliminate.";
 "accountPage.peerDiscovery" = "Connessione automatica sulla rete locale";
 "accountPage.autoRegistration" = "Registrazione automatica dopo la scadenza";

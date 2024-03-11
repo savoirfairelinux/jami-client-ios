@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Καταχώριση";
 "accountPage.usernameRegisterAction" = "Εγγραφή";
 "accountPage.usernameRegistrationFailed" = "Η εγγραφή απέτυχε. Παρακαλώ ελέγξτε το κωδικό πρόσβασης.";
-"accountPage.createPassword" = "Δημιουργήστε κωδικό πρόσβασης";
+"accountPage.createPassword" = "Encrypt account";
+"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
 "accountPage.changePassword" = "Αλλαγή κωδικού";
 "accountPage.oldPasswordPlaceholder" = "Εισάγετε παλιό κωδικό πρόσβασης";
 "accountPage.newPasswordPlaceholder" = "Εισαγωγή νέου κωδικού";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Απαλείψτε τη λειτουργία Booth";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Στην κατάσταση του μπουθ, το ιστορικό συνομιλιών δεν έχει αποθηκευτεί και η λειτουργία του Jami περιορίζεται από τις εξόδους κλήσεων.";
-"accountPage.noBoothMode" = "Για να ενεργοποιήσετε τη λειτουργία Booth πρέπει πρώτα να δημιουργήσετε κωδικό πρόσβασης λογαριασμού.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Αφού ενεργοποιήσεις τη λειτουργία του θάλαμου, όλες οι συνομιλίες σου θα αφαιρεθούν.";
 "accountPage.peerDiscovery" = "Αυτοσυνδέστε το τοπικό δίκτυο";
 "accountPage.autoRegistration" = "Μητρώο αυτοκινήτου μετά την λήξη ισχύος";

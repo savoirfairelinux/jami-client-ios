@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Erregistroa";
 "accountPage.usernameRegisterAction" = "Erregistratu";
 "accountPage.usernameRegistrationFailed" = "Erregistroak huts egin du.";
-"accountPage.createPassword" = "Pasahitza sortu";
+"accountPage.createPassword" = "Kontu enkriptatua";
+"accountPage.createPasswordExplanation" = "Zure Jami kontua bakarrik erregistratzen da zure kontuan gakoak dituen artxibo gisa.";
 "accountPage.changePassword" = "Aldatu pasahitza";
 "accountPage.oldPasswordPlaceholder" = "Sartu pasahitza zaharra";
 "accountPage.newPasswordPlaceholder" = "Sartu pasahitz berria";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Desaktibatu Booth Modua";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Talde moduko elkarrizketa historia ez da gorde eta jami funtzionalitatea mugatuta irteten deiak eginez.";
-"accountPage.noBoothMode" = "Booth modua aktibatu ahal izateko, lehenik kontuaren pasahitza sortu behar da.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Kabina-moduan jarri ondoren, zure elkarrizketa guztiak ezabatuko dira.";
 "accountPage.peerDiscovery" = "Autokonta bat tokiko sarean";
 "accountPage.autoRegistration" = "Autokartze-registroa iraungitzearen ondoren";

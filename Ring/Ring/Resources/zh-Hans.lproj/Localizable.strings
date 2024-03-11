@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "正在註冊";
 "accountPage.usernameRegisterAction" = "註冊";
 "accountPage.usernameRegistrationFailed" = "註冊失敗。請檢查密碼。";
-"accountPage.createPassword" = "建立密碼";
+"accountPage.createPassword" = "加密账户";
+"accountPage.createPasswordExplanation" = "您的Jami帐户仅在此设备上注册,作为包含您的帐户密钥的档案库.";
 "accountPage.changePassword" = "變更密碼";
 "accountPage.oldPasswordPlaceholder" = "輸入舊密碼";
 "accountPage.newPasswordPlaceholder" = "輸入新密碼";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "停用展示模式";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "在展示模式下，不會儲存對話歷史，Jami 的功能也僅限撥出通話。當您啟用展示模式時，您所有的對話都會被移除。";
-"accountPage.noBoothMode" = "要啟用展示模式，您必須先建立帳號密碼。";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "在啟用展示模式後，所有的對話都會被移除。";
 "accountPage.peerDiscovery" = "在區域網路上自動連線";
 "accountPage.autoRegistration" = "過期後自動註冊";

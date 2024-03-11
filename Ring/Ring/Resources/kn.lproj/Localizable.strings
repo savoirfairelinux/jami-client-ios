@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "ನೋಂದಣಿ";
 "accountPage.usernameRegisterAction" = "ನೋಂದಣಿ";
 "accountPage.usernameRegistrationFailed" = "ನೋಂದಣಿ ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಪಾಸ್ವರ್ಡ್ ಪರಿಶೀಲಿಸಿ.";
-"accountPage.createPassword" = "ಪಾಸ್ವರ್ಡ್ ರಚಿಸಿ";
+"accountPage.createPassword" = "ಎನ್ಕ್ರಿಪ್ಟ್ ಖಾತೆ";
+"accountPage.createPasswordExplanation" = "ನಿಮ್ಮ ಜಾಮಿ ಖಾತೆಯನ್ನು ಈ ಸಾಧನದಲ್ಲಿ ಮಾತ್ರ ನಿಮ್ಮ ಖಾತೆಯ ಕೀಲಿಗಳನ್ನು ಒಳಗೊಂಡಿರುವ ಆರ್ಕೈವ್ ಆಗಿ ನೋಂದಾಯಿಸಲಾಗಿದೆ. ಈ ಆರ್ಕೈವ್ಗೆ ಪ್ರವೇಶವನ್ನು ಪಾಸ್ವರ್ಡ್ ಮೂಲಕ ರಕ್ಷಿಸಬಹುದು.";
 "accountPage.changePassword" = "ಪಾಸ್ವರ್ಡ್ ಬದಲಾಯಿಸಿ";
 "accountPage.oldPasswordPlaceholder" = "ಹಳೆಯ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";
 "accountPage.newPasswordPlaceholder" = "ಹೊಸ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "ಬೂತ್ ಮೋಡ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "ಬೂತ್ ಮೋಡ್ನಲ್ಲಿ ಸಂವಾದದ ಇತಿಹಾಸವನ್ನು ಉಳಿಸಲಾಗುವುದಿಲ್ಲ ಮತ್ತು ಹೊರಹೋಗುವ ಕರೆಗಳನ್ನು ಮಾಡುವ ಮೂಲಕ Jami ಕಾರ್ಯವನ್ನು ಸೀಮಿತಗೊಳಿಸಲಾಗುತ್ತದೆ. ನೀವು ಬೂತ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ ನಿಮ್ಮ ಎಲ್ಲಾ ಸಂಭಾಷಣೆಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ.";
-"accountPage.noBoothMode" = "ಬೂತ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ನೀವು ಮೊದಲು ಖಾತೆಯ ಪಾಸ್ವರ್ಡ್ ಅನ್ನು ರಚಿಸಬೇಕಾಗುತ್ತದೆ.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "ಬೂತ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದ ನಂತರ ನಿಮ್ಮ ಎಲ್ಲಾ ಸಂಭಾಷಣೆಗಳನ್ನು ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ.";
 "accountPage.peerDiscovery" = "ಸ್ಥಳೀಯ ನೆಟ್ವರ್ಕ್ನಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತ ಸಂಪರ್ಕ";
 "accountPage.autoRegistration" = "ಅವಧಿ ಮುಗಿದ ನಂತರದ ಸ್ವಯಂ ನೋಂದಣಿ";

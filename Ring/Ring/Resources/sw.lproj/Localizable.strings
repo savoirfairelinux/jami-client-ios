@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Kujiandikisha";
 "accountPage.usernameRegisterAction" = "Kujiandikisha";
 "accountPage.usernameRegistrationFailed" = "Usajili umeshindwa Tafadhali angalia password.";
-"accountPage.createPassword" = "Unda nenosiri";
+"accountPage.createPassword" = "Akaunti ya encrypted";
+"accountPage.createPasswordExplanation" = "Akaunti yako ya Jami imeandikishwa tu kwenye kifaa hiki kama kumbukumbu inayojumuisha funguo za akaunti yako.";
 "accountPage.changePassword" = "Badilisha password";
 "accountPage.oldPasswordPlaceholder" = "Ingiza nenosiri la zamani";
 "accountPage.newPasswordPlaceholder" = "Ingiza nywila mpya";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Kulemaza Mode Booth";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Katika hali ya jengo mazungumzo historia si kuhifadhiwa na utendaji jami mdogo kwa kufanya wito outgoing.";
-"accountPage.noBoothMode" = "Ili kuwezesha hali Booth unahitaji kuunda password akaunti kwanza.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Baada ya kuamsha mode ya jengo mazungumzo yako yote itaondolewa.";
 "accountPage.peerDiscovery" = "Moja kwa moja kuunganisha kwenye mtandao wa ndani";
 "accountPage.autoRegistration" = "Usajili wa magari baada ya kumalizika";

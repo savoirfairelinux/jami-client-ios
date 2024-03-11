@@ -282,7 +282,8 @@
 "accountPage.usernameRegistering" = "Registreerimine";
 "accountPage.usernameRegisterAction" = "Registreerimine";
 "accountPage.usernameRegistrationFailed" = "Registreerimine ebaõnnestunud.";
-"accountPage.createPassword" = "Loe parool";
+"accountPage.createPassword" = "Salastatud konto";
+"accountPage.createPasswordExplanation" = "Teie Jami konto registreeritakse ainult sellel seadmel, kui arhiiv, mis sisaldab teie konto võtmeid.";
 "accountPage.changePassword" = "Paraku pardale";
 "accountPage.oldPasswordPlaceholder" = "Sisesta vana parool";
 "accountPage.newPasswordPlaceholder" = "Sisesta uus parool";
@@ -292,7 +293,7 @@
 "accountPage.disableBoothMode" = "Püüa peatada laua";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
 "accountPage.boothModeExplanation" = "Booth-režiimis ei salvestata vestlushistoriat ja Jami funktsioon on piiratud väljapääsude tegemisega.";
-"accountPage.noBoothMode" = "Et võimaldada Booth-režiimi, peate kõigepealt luua konto parool.";
+"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
 "accountPage.boothModeAlertMessage" = "Pärast kabinimoodi aktiveerimist kustutatakse kõik teie vestlused.";
 "accountPage.peerDiscovery" = "Automaatne ühendus kohaliku võrguga";
 "accountPage.autoRegistration" = "Autoreegister pärast kehtivusaja lõppu";
