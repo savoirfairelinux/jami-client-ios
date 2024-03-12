@@ -107,4 +107,15 @@ class SwarmCreationUIModel: ObservableObject {
         _ = self.swarmCreated(conversationId, accountId)
     }
 
+    func getParticipant(id: String) -> ParticipantRow? {
+        return participantsRows.first { participant in
+            participant.id == id
+        }
+    }
+
+    func cleanProfileData() {
+        self.image = nil
+        self.swarmName = ""
+        self.swarmDescription = ""
+    }
 }
