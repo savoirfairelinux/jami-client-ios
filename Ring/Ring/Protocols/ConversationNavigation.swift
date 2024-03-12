@@ -172,6 +172,10 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                      withAnimation: true,
                      withStateable: scanViewController.viewModel)
     }
+
+    func openNewMessage() {
+
+    }
     func createSwarm() {
         let swarmCreationViewController = SwarmCreationViewController.instantiate(with: self.injectionBag)
         self.present(viewController: swarmCreationViewController,

@@ -754,10 +754,18 @@ internal enum L10n {
     internal static let adminInvitesOnly = L10n.tr("Localizable", "swarm.adminInvitesOnly", fallback: "Admin invites only")
     /// Banned
     internal static let banned = L10n.tr("Localizable", "swarm.banned", fallback: "Banned")
+    /// Change swarm picture
+    internal static let changePicture = L10n.tr("Localizable", "swarm.changePicture", fallback: "Change swarm picture")
     /// Choose a color
     internal static let chooseColor = L10n.tr("Localizable", "swarm.chooseColor", fallback: "Choose a color")
     /// Are you sure you want to leave this swarm?
     internal static let confirmLeaveSwarm = L10n.tr("Localizable", "swarm.confirmLeaveSwarm", fallback: "Are you sure you want to leave this swarm?")
+    /// Customize swarm
+    internal static let customize = L10n.tr("Localizable", "swarm.customize", fallback: "Customize swarm")
+    /// Customize swarm's profile
+    internal static let customizeProfile = L10n.tr("Localizable", "swarm.customizeProfile", fallback: "Customize swarm's profile")
+    /// You can add or invite members at any time after the swarm has been created
+    internal static let explanationText = L10n.tr("Localizable", "swarm.explanationText", fallback: "You can add or invite members at any time after the swarm has been created")
     /// Identifier
     internal static let identifier = L10n.tr("Localizable", "swarm.identifier", fallback: "Identifier")
     /// Ignore the swarm
@@ -774,6 +782,8 @@ internal enum L10n {
     internal static let member = L10n.tr("Localizable", "swarm.member", fallback: "Member")
     /// Members
     internal static let members = L10n.tr("Localizable", "swarm.members", fallback: "Members")
+    /// Swarm's name
+    internal static let namePlaceholder = L10n.tr("Localizable", "swarm.namePlaceholder", fallback: "Swarm's name")
     /// New swarm
     internal static let newSwarm = L10n.tr("Localizable", "swarm.newSwarm", fallback: "New swarm")
     /// Private swarm
