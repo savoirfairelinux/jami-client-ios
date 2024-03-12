@@ -80,29 +80,29 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
         var systemImageName: String {
             switch self {
-                case .addressBook: return "book.circle"
-                case .openDialpad: return "square.grid.3x3.topleft.filled"
-                case .newContact: return "qrcode"
-                case .newSwarm: return "person.2"
+            case .addressBook: return "book.circle"
+            case .openDialpad: return "square.grid.3x3.topleft.filled"
+            case .newContact: return "qrcode"
+            case .newSwarm: return "person.2"
             }
         }
 
         var title: String {
             switch self {
-                case .addressBook: return "Address Book"
-                case .openDialpad: return "Open Dialpad"
-                case .newContact: return "New Contact"
-                case .newSwarm: return "New Swarm"
+            case .addressBook: return "Address Book"
+            case .openDialpad: return "Open Dialpad"
+            case .newContact: return "New Contact"
+            case .newSwarm: return "New Swarm"
             }
         }
 
         // Define a method to provide the action associated with each button type
         func action(viewController: SmartlistViewController) -> () -> Void {
             switch self {
-                case .addressBook: return { viewController.presentContactPicker() }
-                case .openDialpad: return { viewController.viewModel.showDialpad() }
-                case .newContact: return { viewController.viewModel.showQRCode() }
-                case .newSwarm: return { viewController.viewModel.createGroup() }
+            case .addressBook: return { viewController.presentContactPicker() }
+            case .openDialpad: return { viewController.viewModel.showDialpad() }
+            case .newContact: return { viewController.viewModel.showQRCode() }
+            case .newSwarm: return { viewController.viewModel.createGroup() }
             }
         }
     }
@@ -127,10 +127,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.viewModel.closeAllPlayers()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.viewModel.updateDonationBunnerVisiblity()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
     }
 
     func setupTableViewHeader(for tableView: UITableView) {

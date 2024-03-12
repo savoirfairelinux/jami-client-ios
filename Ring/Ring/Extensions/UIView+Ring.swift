@@ -263,4 +263,3 @@ enum GradientOrientation {
         }
     }
 }
-
