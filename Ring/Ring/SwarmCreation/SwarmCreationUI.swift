@@ -48,82 +48,92 @@ struct ParticipantListCell: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
                 Spacer()
-                HStack {
-                    if self.isSelected {
-                        Image(systemName: "checkmark")
-                            .frame(width: 20, height: 20, alignment: .trailing)
-                    }
+                if isSelected {
+                    Image("message_sent_indicator")
+                        .resizable()
+                        .background(Circle().fill(Color.clear))
+                        .frame(width: 15, height: 15)
+                } else {
+                    Circle()
+                        .strokeBorder(Color.gray, lineWidth: 1)
+                    .background(Circle().fill(isSelected ? Color.green : Color.clear))
+                    .frame(width: 15, height: 15)
                 }
             }
         }
     }
 }
+
+struct SelectedParticipantItem: View {
+    @StateObject var participant: ParticipantRow
+    var action: () -> Void
+
+    @ViewBuilder
+    var body: some View {
+        Button(action: self.action) {
+            VStack(alignment: .center, spacing: nil) {
+                ZStack(alignment: .topTrailing) {
+                    Image(uiImage: participant.imageDataFinal)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 50, height: 50, alignment: .center)
+                        .clipShape(Circle())
+                    Image(systemName: "xmark")
+                        .resizable()
+                        .foregroundColor(Color(UIColor.label))
+                        .frame(width: 6, height: 6, alignment: .center)
+                        .padding(4)
+                        .background(Color(UIColor.systemBackground))
+                        .clipShape(Circle())
+                }
+                Text(participant.name)
+                    .foregroundColor(Color(UIColor.label))
+                    .font(.caption)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+            }
+            .frame(width: 50)
+        }
+    }
+}
+
 struct SwarmCreationUI: View {
-    @StateObject var list: SwarmCreationUIModel
-    @SwiftUI.State private var showingOptions = false
+    @ObservedObject var list: SwarmCreationUIModel
     @SwiftUI.State private var showingType: PhotoSheetType?
     @SwiftUI.State private var swarmImage: UIImage = UIImage(asset: Asset.editSwarmImage)!
+    @SwiftUI.State private var isPresentingProfile = false
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Spacer()
-                .frame(height: 10)
-            HStack(alignment: .center, spacing: 10) {
-                Button(action: {
-                    self.hideKeyboard()
-                    showingOptions = true
-                }) {
-                    if let image = list.image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    } else {
-                        Image(uiImage: swarmImage)
-                            .resizable()
-                            .renderingMode(.template)
-                            .aspectRatio(contentMode: .fill)
-                            .foregroundColor(Color.white)
-                            .frame(width: 30, height: 30, alignment: .center)
-                    }
-                }
-                .frame(width: 70, height: 70, alignment: .center)
-                .background(Color(UIColor.jamiButtonDark))
-                .clipShape(Circle())
-                .padding(.leading, 20)
-                .actionSheet(isPresented: $showingOptions) {
-                    ActionSheet(
-                        title: Text(""),
-                        buttons: [
-                            .default(Text(L10n.Alerts.profileTakePhoto)) {
-                                showingType = .picture
-                            },
-                            .default(Text(L10n.Alerts.profileUploadPhoto)) {
-                                showingType = .gallery
-                            },
-                            .cancel()
-                        ]
-                    )
-                }
-                .sheet(item: $showingType) { type in
-                    if type == .gallery {
-                        ImagePicker(sourceType: .photoLibrary, showingType: $showingType, image: $list.image)
-                    } else {
-                        ImagePicker(sourceType: .camera, showingType: $showingType, image: $list.image)
-
-                    }
-                }
-                VStack {
-                    TextField(L10n.Global.name, text: $list.swarmName)
-                        .font(.system(size: 17.0, weight: .semibold, design: .default))
-                    TextField(L10n.Swarmcreation.addADescription, text: $list.swarmDescription)
-                        .font(.system(size: 15.0, weight: .regular, design: .default))
-                }
-                Spacer()
+        VStack(alignment: .center, spacing: 0) {
+            Button(action: {
+                isPresentingProfile = true
+            }, label: {
+                Text("Customize swarm")
+                    .padding(.vertical, 8)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(UIColor(named: "donationBanner")!))
+                    .cornerRadius(8)
+                    .padding(.horizontal)
+            })
+            .sheet(isPresented: $isPresentingProfile) {
+                SwarmProfile(model: list, isPresentingProfile: $isPresentingProfile)
             }
-        }.onTapGesture {
-            self.hideKeyboard()
-        }
-        ZStack(alignment: .bottomTrailing) {
+            if list.selections.count > 0 {
+                Spacer()
+                    .frame(height: 15)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 15) {
+                        ForEach(list.selections, id: \.self) { selection in
+                            if let participant = list.getParticipant(id: selection) {
+                                SelectedParticipantItem(participant: participant) {
+                                    list.selections.removeAll(where: { $0 == selection })
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+            }
             List {
                 ForEach(list.participantsRows) { contact in
                     ParticipantListCell(participant: contact, isSelected: list.selections.contains(contact.id)) {
@@ -132,24 +142,15 @@ struct SwarmCreationUI: View {
                         } else {
                             list.selections.append(contact.id)
                         }
-                        self.hideKeyboard()
                     }
-                }
-                if #available(iOS 15.0, *) {
-                    Spacer()
-                        .frame(height: 60)
-                        .listRowSeparator(.hidden)
-                } else {
-                    Spacer()
-                        .frame(height: 60)
                 }
             }
             .listStyle(PlainListStyle())
             .frame(width: nil, height: nil, alignment: .leading)
             .accentColor(Color.black)
-
-            createTheSwarmButtonView()
+            .padding(.vertical, 5)
         }
+        .background(Color(UIColor.systemBackground))
     }
 
     func createTheSwarmButtonView() -> some View {
