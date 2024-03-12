@@ -18,9 +18,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-vE-7T5">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-vE-7T5">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAj-ma-QAT">
+                                        <rect key="frame" x="0.0" y="-10" width="375" height="10"/>
+                                        <subviews>
+                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="351-F1-lWh" userLabel="searchModeStackView">
+                                                <rect key="frame" x="20" y="5" width="335" height="0.0"/>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="351-F1-lWh" firstAttribute="top" secondItem="jAj-ma-QAT" secondAttribute="top" constant="5" id="ZFJ-Yc-BQQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="351-F1-lWh" secondAttribute="bottom" constant="5" id="gKt-Mj-QQd"/>
+                                            <constraint firstItem="351-F1-lWh" firstAttribute="leading" secondItem="jAj-ma-QAT" secondAttribute="leading" constant="20" id="iXs-jD-Jhf"/>
+                                            <constraint firstAttribute="trailing" secondItem="351-F1-lWh" secondAttribute="trailing" constant="20" id="r3J-mh-3D5"/>
+                                        </constraints>
+                                    </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="searching" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sy4-4D-ah4">
                                         <rect key="frame" x="0.0" y="-40" width="375" height="40"/>
                                         <constraints>
@@ -103,16 +118,16 @@
                                                                         <rect key="frame" x="60" y="0.0" width="273" height="75"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJA-F7-jD1">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="273" height="45"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="273" height="44"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ViS-TN-KCr">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="45"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="12" height="44"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" constant="12" id="gxG-cu-hKy"/>
                                                                                         </constraints>
                                                                                     </view>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you enjoy using Jami and believe in our mission, would you make a donation?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zuu-Bz-eqP">
-                                                                                        <rect key="frame" x="12" y="0.0" width="261" height="45"/>
+                                                                                        <rect key="frame" x="12" y="0.0" width="261" height="44"/>
                                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -123,24 +138,24 @@
                                                                                 </constraints>
                                                                             </stackView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="rLw-rO-feu">
-                                                                                <rect key="frame" x="0.0" y="45" width="146" height="30"/>
+                                                                                <rect key="frame" x="0.0" y="44" width="156" height="31"/>
                                                                                 <subviews>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nki-qc-gWk">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="73" height="30"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="78" height="31"/>
                                                                                         <state key="normal" title="Button"/>
                                                                                         <buttonConfiguration key="configuration" style="plain">
                                                                                             <attributedString key="attributedTitle">
                                                                                                 <fragment content="Not now">
                                                                                                     <attributes>
                                                                                                         <color key="NSColor" systemColor="systemGrayColor"/>
-                                                                                                        <font key="NSFont" size="14" name=".SFNS-Regular"/>
+                                                                                                        <font key="NSFont" metaFont="system" size="14"/>
                                                                                                     </attributes>
                                                                                                 </fragment>
                                                                                             </attributedString>
                                                                                         </buttonConfiguration>
                                                                                     </button>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riP-u7-388">
-                                                                                        <rect key="frame" x="81.5" y="0.0" width="64.5" height="30"/>
+                                                                                        <rect key="frame" x="85.5" y="0.0" width="70.5" height="31"/>
                                                                                         <state key="normal" title="Button"/>
                                                                                         <buttonConfiguration key="configuration" style="plain">
                                                                                             <attributedString key="attributedTitle">
@@ -269,6 +284,8 @@
                         <outlet property="networkAlertLabel" destination="gFu-6Z-dl9" id="NJF-MK-pWj"/>
                         <outlet property="networkAlertView" destination="fK7-Ou-K2i" id="amM-wV-HA8"/>
                         <outlet property="noConversationLabel" destination="uHt-ds-l8p" id="tYK-67-lg5"/>
+                        <outlet property="searchModeActionsContainer" destination="jAj-ma-QAT" id="viL-hP-t9l"/>
+                        <outlet property="searchModeActionsStack" destination="351-F1-lWh" id="bsx-Gh-g1L"/>
                         <outlet property="searchView" destination="Y4B-5f-ij4" id="FtS-9R-atZ"/>
                         <outlet property="settingsButton" destination="aUA-Rj-5gi" id="CeY-yv-WaH"/>
                         <outlet property="widgetsTopConstraint" destination="8Jx-Gx-TIM" id="Zil-5y-R8j"/>
@@ -290,13 +307,13 @@
         <image name="donation" width="130" height="160"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
         <namedColor name="donationBanner">
-            <color red="0.83529411764705885" green="0.89411764705882346" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.83529411764705885" green="0.89411764705882357" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

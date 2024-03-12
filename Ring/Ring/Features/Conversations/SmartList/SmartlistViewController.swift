@@ -54,6 +54,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var donateButton: UIButton!
     @IBOutlet weak var disableDonationButton: UIButton!
     @IBOutlet weak var donationLabel: UILabel!
+    @IBOutlet weak var searchModeActionsContainer: UIView!
+    @IBOutlet weak var searchModeActionsStack: UIStackView!
 
     // account selection
     private var accounPicker = UIPickerView()
@@ -83,6 +85,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: false, delegate: viewModel)
         if !self.viewModel.isSipAccount() {
             self.setUpContactRequest()
+            self.setupUIForNonSipAccount()
         }
     }
 
@@ -198,15 +201,16 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     private func configureCustomNavBar(usingCustomSize: Bool) {
-        guard let customNavBar = navigationController?.navigationBar as? SmartListNavigationBar else { return }
-
-        if usingCustomSize {
-            self.updateSearchBarIfActive()
-            customNavBar.usingCustomSize = true
-        } else {
-            customNavBar.removeTopView()
-            customNavBar.usingCustomSize = false
-        }
+//        return
+//        guard let customNavBar = navigationController?.navigationBar as? SmartListNavigationBar else { return }
+//
+//        if usingCustomSize {
+//            self.updateSearchBarIfActive()
+//            customNavBar.usingCustomSize = true
+//        } else {
+//            customNavBar.removeTopView()
+//            customNavBar.usingCustomSize = false
+//        }
     }
 
     private func applyL10n() {
@@ -247,12 +251,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 }
             })
             .disposed(by: self.disposeBag)
-        self.viewModel.currentAccountChanged
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.searchBarNotActive()
-            })
-            .disposed(by: disposeBag)
+//        self.viewModel.currentAccountChanged
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] _ in
+//                self?.searchBarNotActive()
+//            })
+//            .disposed(by: disposeBag)
         // create account button
         let accountButton = UIButton(type: .custom)
         self.viewModel.profileImage.bind(to: accountButton.rx.image(for: .normal))
@@ -466,8 +470,8 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
 
     func setupSearchBar() {
         searchController.delegate = self
-        let navBar = SmartListNavigationBar()
-        self.navigationController?.setValue(navBar, forKey: "navigationBar")
+//        let navBar = SmartListNavigationBar()
+//        self.navigationController?.setValue(navBar, forKey: "navigationBar")
 
         navigationItem.searchController = searchController
         if #available(iOS 16.0, *) {
@@ -483,14 +487,25 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: disposeBag)
     }
 
+    func animateHorizontalStackView(shouldAppear: Bool) {
+        self.searchModeActionsStack.isHidden = !shouldAppear
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            guard let self = self else { return}
+            self.searchModeActionsContainer.isHidden = !shouldAppear
+            self.view.layoutIfNeeded()
+        })
+    }
+
     func willPresentSearchController(_ searchController: UISearchController) {
-        self.searchBarActive()
+        animateHorizontalStackView(shouldAppear: true)
+       // self.searchButtons.isHidden = false
+        //self.searchBarActive()
     }
 
     func updateSearchBarIfActive() {
-        if searchController.isActive {
-            searchBarActive()
-        }
+//        if searchController.isActive {
+//            searchBarActive()
+//        }
     }
 
     func updateNetworkUI() {
@@ -499,71 +514,95 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.view.layoutIfNeeded()
     }
 
-    func searchBarNotActive() {
-        guard let customNavBar = self.navigationController?.navigationBar as? SmartListNavigationBar else { return }
-        self.navigationItem.title = selectedSegmentIndex.value == 0 ?
-            L10n.Smartlist.conversations : L10n.Smartlist.invitations
-        self.widgetsTopConstraint.constant = 0
-        updateNetworkUI()
-        customNavBar.customHeight = 44
-        customNavBar.searchActive = false
-        customNavBar.removeTopView()
-    }
+//    func searchBarNotActive() {
+//        return
+//        guard let customNavBar = self.navigationController?.navigationBar as? SmartListNavigationBar else { return }
+//        self.navigationItem.title = selectedSegmentIndex.value == 0 ?
+//            L10n.Smartlist.conversations : L10n.Smartlist.invitations
+//        self.widgetsTopConstraint.constant = 0
+//        updateNetworkUI()
+//        customNavBar.customHeight = 44
+//        customNavBar.searchActive = false
+//        customNavBar.removeTopView()
+//    }
 
-    func searchBarActive() {
-        guard let customNavBar = navigationController?.navigationBar as? SmartListNavigationBar else { return }
+//    func searchBarActive() {
+//        return
+//        guard let customNavBar = navigationController?.navigationBar as? SmartListNavigationBar else { return }
+//
+//        setupCommonUI(customNavBar: customNavBar)
+//
+//        if viewModel.isSipAccount() {
+//            setupUIForSipAccount(customNavBar: customNavBar)
+//        } else {
+//            setupUIForNonSipAccount(customNavBar: customNavBar)
+//        }
+//    }
 
-        setupCommonUI(customNavBar: customNavBar)
+//    private func setupCommonUI(customNavBar: SmartListNavigationBar) {
+//        navigationItem.title = ""
+//        widgetsTopConstraint.constant = 42
+//        customNavBar.customHeight = 70
+//        customNavBar.searchActive = true
+//    }
 
-        if viewModel.isSipAccount() {
-            setupUIForSipAccount(customNavBar: customNavBar)
-        } else {
-            setupUIForNonSipAccount(customNavBar: customNavBar)
-        }
-    }
+//    private func setupUIForSipAccount(customNavBar: SmartListNavigationBar) {
+//        let bookButton = createSearchBarButtonWithImage(named: "book.circle", weight: .regular, width: 27)
+//        bookButton.setImage(UIImage(asset: Asset.phoneBook), for: .normal)
+//        bookButton.rx.tap
+//            .subscribe(onNext: { [weak self] in
+//                self?.presentContactPicker()
+//            })
+//            .disposed(by: customNavBar.disposeBag)
+//
+//        let dialpadCodeButton = createSearchBarButtonWithImage(named: "square.grid.3x3.topleft.filled", weight: .regular, width: 25)
+//        dialpadCodeButton.rx.tap
+//            .subscribe(onNext: { [weak self] in
+//                self?.viewModel.showDialpad()
+//            })
+//            .disposed(by: customNavBar.disposeBag)
+//
+//        customNavBar.addTopView(with: [bookButton, dialpadCodeButton])
+//    }
+//
+    private func setupUIForNonSipAccount() {
+        let qrCodeButton = UIButton(type: .system)
+        qrCodeButton.setImage(UIImage(systemName: "qrcode"), for: .normal)
+        qrCodeButton.setTitle("Add Contact", for: .normal)
+        qrCodeButton.tintColor = .jamiButtonDark
+        let spacing: CGFloat = 5
+        qrCodeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing, bottom: 0, right: spacing)
+        qrCodeButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: -spacing)
+        qrCodeButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
 
-    private func setupCommonUI(customNavBar: SmartListNavigationBar) {
-        navigationItem.title = ""
-        widgetsTopConstraint.constant = 42
-        customNavBar.customHeight = 70
-        customNavBar.searchActive = true
-    }
+        qrCodeButton.layer.borderColor = UIColor.lightGray.cgColor
+        qrCodeButton.layer.borderWidth = 1.0
+        qrCodeButton.layer.cornerRadius = 10.0
+        qrCodeButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+                qrCodeButton.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.viewModel.showQRCode()
+                    })
+                    .disposed(by: self.disposeBag)
+        let swarmButton = UIButton(type: .system)
+        swarmButton.setImage(UIImage(systemName: "person.2"), for: .normal)
+        swarmButton.setTitle("Add Contact", for: .normal)
+        swarmButton.tintColor = .jamiButtonDark
+        swarmButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing, bottom: 0, right: spacing)
+        swarmButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: -spacing)
+        swarmButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
 
-    private func setupUIForSipAccount(customNavBar: SmartListNavigationBar) {
-        let bookButton = createSearchBarButtonWithImage(named: "book.circle", weight: .regular, width: 27)
-        bookButton.setImage(UIImage(asset: Asset.phoneBook), for: .normal)
-        bookButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.presentContactPicker()
-            })
-            .disposed(by: customNavBar.disposeBag)
-
-        let dialpadCodeButton = createSearchBarButtonWithImage(named: "square.grid.3x3.topleft.filled", weight: .regular, width: 25)
-        dialpadCodeButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.showDialpad()
-            })
-            .disposed(by: customNavBar.disposeBag)
-
-        customNavBar.addTopView(with: [bookButton, dialpadCodeButton])
-    }
-
-    private func setupUIForNonSipAccount(customNavBar: SmartListNavigationBar) {
-        let qrCodeButton = createSearchBarButtonWithImage(named: "qrcode", weight: .medium, width: 25)
-        qrCodeButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.showQRCode()
-            })
-            .disposed(by: customNavBar.disposeBag)
-
-        let swarmButton = createSearchBarButtonWithImage(named: "person.2", weight: .medium, width: 32)
+        swarmButton.layer.borderColor = UIColor.lightGray.cgColor
+        swarmButton.layer.borderWidth = 1.0
+        swarmButton.layer.cornerRadius = 10.0
+        swarmButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         swarmButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.createGroup()
-            })
-            .disposed(by: customNavBar.disposeBag)
-
-        customNavBar.addTopView(with: [qrCodeButton, swarmButton])
+                    .subscribe(onNext: { [weak self] in
+                        self?.viewModel.createGroup()
+                    })
+                    .disposed(by: self.disposeBag)
+        searchModeActionsStack.addArrangedSubview(qrCodeButton)
+        searchModeActionsStack.addArrangedSubview(swarmButton)
     }
 
     private func presentContactPicker() {
@@ -583,7 +622,9 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func willDismissSearchController(_ searchController: UISearchController) {
-        searchBarNotActive()
+        animateHorizontalStackView(shouldAppear: false)
+        //searchButtons.isHidden = true
+        //searchBarNotActive()
     }
 
     func startAccountCreation() {
