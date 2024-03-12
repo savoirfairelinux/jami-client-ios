@@ -48,12 +48,16 @@ struct ParticipantListCell: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
                 Spacer()
-                HStack {
-                    if self.isSelected {
-                        Image(systemName: "checkmark")
-                            .frame(width: 20, height: 20, alignment: .trailing)
-                    }
-                }
+                Circle()
+                    .strokeBorder(Color.gray, lineWidth: 1) // Border for the circle
+                    .background(Circle().fill(isSelected ? Color.green : Color.clear)) // Fill circle if selected
+                    .frame(width: 20, height: 20)
+//                HStack {
+//                    if self.isSelected {
+//                        Image(systemName: "checkmark")
+//                            .frame(width: 20, height: 20, alignment: .trailing)
+//                    }
+//                }
             }
         }
     }
@@ -148,7 +152,7 @@ struct SwarmCreationUI: View {
             .frame(width: nil, height: nil, alignment: .leading)
             .accentColor(Color.black)
 
-            createTheSwarmButtonView()
+            //createTheSwarmButtonView()
         }
     }
 
