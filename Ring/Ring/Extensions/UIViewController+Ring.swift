@@ -168,7 +168,7 @@ extension UIViewController {
         // Explicitly set shadow properties to none
         appearance.shadowColor = .clear
         appearance.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = UIColor.jamiButtonDark
+        navigationController?.navigationBar.tintColor = UIColor.jamiMain
         self.navigationController?.navigationBar.layer.shadowOpacity = 0
 
         // Apply the appearance configuration
