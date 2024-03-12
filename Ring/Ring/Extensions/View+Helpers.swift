@@ -111,6 +111,7 @@ struct PlatformAdaptiveNavView<Content: View>: View {
             NavigationView {
                 content()
             }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }

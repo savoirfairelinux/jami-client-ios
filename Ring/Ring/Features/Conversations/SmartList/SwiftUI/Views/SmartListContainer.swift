@@ -43,13 +43,19 @@ struct NewMessageView: View {
             SearchableConversationsView(model: model, isSearchBarActive: $isSearchBarActive)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle(L10n.Smartlist.newMessage)
-                .navigationBarItems(leading: Button(L10n.Global.cancel) {
-                    model.slideDirectionUp = false
-                    withAnimation {
-                        model.navigationTarget = .smartList
-                    }
-                })
+                .navigationBarItems(leading: leadingBarItem)
+        }
+    }
 
+    private var leadingBarItem: some View {
+        Button(action: {
+            model.slideDirectionUp = false
+            withAnimation {
+                model.navigationTarget = .smartList
+            }
+        }) {
+            Text(L10n.Global.cancel)
+                .foregroundColor(Color.jamiColor)
         }
     }
 }

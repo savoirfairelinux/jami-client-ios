@@ -39,7 +39,14 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
     }()
 
     override func viewDidLoad() {
-        self.navigationItem.title = L10n.Swarmcreation.createTheSwarm
+        self.navigationItem.title = L10n.Swarm.selectContacts
+        let backButton = UIBarButtonItem(title: L10n.Global.cancel, style: .plain, target: self, action: #selector(backButtonTapped))
+
+        self.navigationItem.leftBarButtonItem = backButton
+
+        let continueButton = UIBarButtonItem(title: L10n.Global.create, style: .plain, target: self, action: #selector(backButtonTapped))
+
+        self.navigationItem.rightBarButtonItem = continueButton
         super.viewDidLoad()
         guard let accountId = self.viewModel.currentAccount?.id else { return }
 
@@ -56,7 +63,14 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
         contentView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         self.configureNavigationBar()
         self.setupSearchBar()
+        continueButton.rx.tap
+            .subscribe(onNext: { [weak model] in
+                guard let model = model else { return }
+                model.createTheSwarm()
+            })
+            .disposed(by: self.disposeBag)
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
@@ -82,18 +96,28 @@ class SwarmCreationViewController: UIViewController, ViewModelBased, StoryboardB
         }
         super.viewWillTransition(to: size, with: coordinator)
     }
+
     override func viewDidAppear(_ animated: Bool) {
         self.searchController.sizeChanged(to: self.view.frame.size.width, totalItems: 0.0)
         super.viewDidAppear(animated)
     }
+
     func setupSearchBar() {
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = L10n.Swarmcreation.searchBar
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
+
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
         self.strSearchText.accept(searchText)
+    }
+
+    @objc
+    func backButtonTapped() {
+        // Handle the back action
+        // For instance, pop the current view controller from the navigation stack
+        self.navigationController?.popViewController(animated: true)
     }
 }
