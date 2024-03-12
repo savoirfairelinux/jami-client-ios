@@ -51,10 +51,15 @@ class JamiSearchView: NSObject {
         configureSearchResult()
         configureSearchBar()
     }
-    private func cancelSearch() {
+
+    func cancelSearch() {
         self.searchBar.text = ""
         self.searchBar.resignFirstResponder()
         self.searchResultsTableView.isHidden = true
+    }
+
+    func startSearch() {
+        self.searchBar.becomeFirstResponder()
     }
 
     private func configureSearchResult() {
@@ -125,6 +130,7 @@ class JamiSearchView: NSObject {
 
     private func configureSearchBar() {
         self.searchBar.rx.text.orEmpty
+            .distinctUntilChanged()
             .debounce(Durations.textFieldThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
             .bind(to: self.viewModel.searchBarText)
             .disposed(by: disposeBag)
