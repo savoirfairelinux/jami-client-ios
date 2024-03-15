@@ -76,7 +76,7 @@ class SmartListHeaderView: UIView {
 
         UIGraphicsBeginImageContextWithOptions(roundedRectSize, false, UIScreen.main.scale)
 
-        let roundedRectPath = UIBezierPath(roundedRect: CGRect(origin: .zero, size: roundedRectSize), cornerRadius: roundedRectSize.height / 2)
+        let roundedRectPath = UIBezierPath(roundedRect: CGRect(origin: .zero, size: roundedRectSize), cornerRadius: 4)
         UIColor.jamiButtonDark.setFill()
         roundedRectPath.fill()
 

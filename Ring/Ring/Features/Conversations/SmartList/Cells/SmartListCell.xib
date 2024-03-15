@@ -58,10 +58,10 @@
                                         </constraints>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="JTE-eF-Y5s">
-                                        <rect key="frame" x="51" y="13" width="14" height="14"/>
+                                        <rect key="frame" x="47" y="13" width="18" height="14"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5S-4k-0yx">
-                                                <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
+                                                <rect key="frame" x="2" y="1" width="14" height="12"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="14" id="VEi-Hm-z85"/>
                                                 </constraints>
@@ -72,15 +72,16 @@
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="P5S-4k-0yx" firstAttribute="top" secondItem="JTE-eF-Y5s" secondAttribute="top" id="BH8-rD-0Oo"/>
+                                            <constraint firstItem="P5S-4k-0yx" firstAttribute="top" secondItem="JTE-eF-Y5s" secondAttribute="top" constant="1" id="BH8-rD-0Oo"/>
                                             <constraint firstAttribute="height" constant="14" id="Qxc-Mv-ssH"/>
-                                            <constraint firstItem="P5S-4k-0yx" firstAttribute="leading" secondItem="JTE-eF-Y5s" secondAttribute="leading" id="ZE1-mR-DoI"/>
-                                            <constraint firstAttribute="trailing" secondItem="P5S-4k-0yx" secondAttribute="trailing" id="a9D-mE-0qK"/>
-                                            <constraint firstAttribute="bottom" secondItem="P5S-4k-0yx" secondAttribute="bottom" id="qMW-uw-IoS"/>
+                                            <constraint firstItem="P5S-4k-0yx" firstAttribute="leading" secondItem="JTE-eF-Y5s" secondAttribute="leading" constant="2" id="ZE1-mR-DoI"/>
+                                            <constraint firstAttribute="trailing" secondItem="P5S-4k-0yx" secondAttribute="trailing" constant="2" id="a9D-mE-0qK"/>
+                                            <constraint firstAttribute="bottom" secondItem="P5S-4k-0yx" secondAttribute="bottom" constant="1" id="qMW-uw-IoS"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="6"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="3"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
