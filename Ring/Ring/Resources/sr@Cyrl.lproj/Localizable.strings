@@ -381,7 +381,7 @@
 
 //General Settings
 "generalSettings.videoSettings" = "Постављања видео";
-"generalSettings.videoAcceleration" = "Омогућити убрзање видео";
+"generalSettings.videoAcceleration" = "Omogućite video ubrzanje";
 "generalSettings.fileTransfer" = "Prenos podatka";
 "generalSettings.locationSharing" = "Поделивање локација";
 "generalSettings.automaticAcceptIncomingFiles" = "Автоматски прихватају долазне датотеке";
@@ -395,8 +395,8 @@
 //Log View
 "logView.title" = "Дијагностике";
 "logView.description" = "Очињени дијагностички дневник";
-"logView.startLogging" = "Почни са раседањем";
-"logView.stopLogging" = "Престани са дрвова";
+"logView.startLogging" = "Započni evidentiranje";
+"logView.stopLogging" = "Zaustavi evidentiranje";
 "logView.saveError" = "Не успео да се спаси датотека";
 "logView.shareError" = "Не успео да се деле датотеке";
 

@@ -293,7 +293,7 @@
 "accountPage.disableBoothMode" = "Disabilita Modalità Cabina";
 "accountPage.disableBoothModeExplanation" = "Fornisci la password del tuo account";
 "accountPage.boothModeExplanation" = "In Modalità Cabina, la cronologia non viene salvata e le funzioni di Jami sono limitate alle chiamate. Se attivi la Modalità Cabina, tutte le tue conversazioni verranno eliminate.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
+"accountPage.noBoothMode" = "Cifrare il proprio account prima di attivare la \"Modalità Cabina\".";
 "accountPage.boothModeAlertMessage" = "Dopo aver abilitato la Modalità Cabina, tutte le tue conversazioni verranno eliminate.";
 "accountPage.peerDiscovery" = "Connessione automatica sulla rete locale";
 "accountPage.autoRegistration" = "Registrazione automatica dopo la scadenza";
