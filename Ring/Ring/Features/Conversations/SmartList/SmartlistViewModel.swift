@@ -151,18 +151,18 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                     .compactMap({ conversationModel in
                         var conversationViewModel: ConversationViewModel?
                         if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
-                            return conversationViewModel.conversation.value == conversationModel
+                            return conversationViewModel.conversation == conversationModel
                         }).first {
                             conversationViewModel = foundConversationViewModel
-                            conversationViewModel?.conversation.accept(conversationModel)
-                        } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation.value == conversationModel {
+                            conversationViewModel?.conversation = conversationModel
+                        } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation == conversationModel {
                             conversationViewModel = contactFound
-                            conversationViewModel?.conversation = BehaviorRelay(value: conversationModel)
+                            conversationViewModel?.conversation = conversationModel
                             conversationViewModel?.conversationCreated.accept(true)
                             self.conversationViewModels.append(contactFound)
                         } else {
                             conversationViewModel = ConversationViewModel(with: self.injectionBag)
-                            conversationViewModel?.conversation = BehaviorRelay<ConversationModel>(value: conversationModel)
+                            conversationViewModel?.conversation = conversationModel
                             if let conversation = conversationViewModel {
                                 self.conversationViewModels
                                     .append(conversation)
@@ -297,7 +297,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 guard let conversationId: String = event.getEventInput(.conversationId),
                       let accountId: String = event.getEventInput(.accountId) else { return }
                 guard let index = self?.conversationViewModels.firstIndex(where: { conversationModel in
-                    conversationModel.conversation.value.id == conversationId && conversationModel.conversation.value.accountId == accountId
+                    conversationModel.conversation.id == conversationId && conversationModel.conversation.accountId == accountId
                 }) else { return }
                 self?.conversationViewModels.remove(at: index)
             })
@@ -319,10 +319,10 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     func delete(conversationViewModel: ConversationViewModel) {
         conversationViewModel.closeAllPlayers()
-        let accountId = conversationViewModel.conversation.value.accountId
-        let conversationId = conversationViewModel.conversation.value.id
-        if conversationViewModel.conversation.value.isCoredialog(),
-           let participantId = conversationViewModel.conversation.value.getParticipants().first?.jamiId {
+        let accountId = conversationViewModel.conversation.accountId
+        let conversationId = conversationViewModel.conversation.id
+        if conversationViewModel.conversation.isCoredialog(),
+           let participantId = conversationViewModel.conversation.getParticipants().first?.jamiId {
             self.contactsService
                 .removeContact(withId: participantId,
                                ban: false,
@@ -331,7 +331,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 .subscribe(onCompleted: { [weak self, weak conversationViewModel] in
                     guard let conversationViewModel = conversationViewModel else { return }
                     self?.conversationsService
-                        .removeConversationFromDB(conversation: conversationViewModel.conversation.value,
+                        .removeConversationFromDB(conversation: conversationViewModel.conversation,
                                                   keepConversation: false)
                 })
                 .disposed(by: self.disposeBag)
@@ -342,10 +342,10 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     func blockConversationsContact(conversationViewModel: ConversationViewModel) {
         conversationViewModel.closeAllPlayers()
-        let accountId = conversationViewModel.conversation.value.accountId
-        let conversationId = conversationViewModel.conversation.value.id
-        if conversationViewModel.conversation.value.isCoredialog(),
-           let participantId = conversationViewModel.conversation.value.getParticipants().first?.jamiId {
+        let accountId = conversationViewModel.conversation.accountId
+        let conversationId = conversationViewModel.conversation.id
+        if conversationViewModel.conversation.isCoredialog(),
+           let participantId = conversationViewModel.conversation.getParticipants().first?.jamiId {
             self.contactsService
                 .removeContact(withId: participantId,
                                ban: true,
@@ -354,7 +354,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 .subscribe(onCompleted: { [weak self, weak conversationViewModel] in
                     guard let conversationViewModel = conversationViewModel else { return }
                     self?.conversationsService
-                        .removeConversationFromDB(conversation: conversationViewModel.conversation.value,
+                        .removeConversationFromDB(conversation: conversationViewModel.conversation,
                                                   keepConversation: false)
                 })
                 .disposed(by: self.disposeBag)
@@ -391,7 +391,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                                              hash: number)
         conversation.type = .sip
         let newConversation = ConversationViewModel(with: self.injectionBag)
-        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+        newConversation.conversation = conversation
         self.stateSubject
             .onNext(ConversationState
                         .conversationDetail(conversationViewModel:

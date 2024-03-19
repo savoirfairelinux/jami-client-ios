@@ -346,7 +346,7 @@ class JamiSearchViewModel {
         } else {
             newConversation.userName.accept(hash)
         }
-        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+        newConversation.conversation = conversation
         return newConversation
     }
 
@@ -359,7 +359,7 @@ class JamiSearchViewModel {
         conversation.type = .sip
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.userName.accept(trimmed)
-        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+        newConversation.conversation = conversation
         return newConversation
     }
 
