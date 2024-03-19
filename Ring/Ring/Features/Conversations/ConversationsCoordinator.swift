@@ -206,7 +206,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         let conversation = ConversationModel(withParticipantUri: uri,
                                              accountId: account.id)
         let newConversation = ConversationViewModel(with: self.injectionBag)
-        newConversation.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+        newConversation.conversation = conversation
         self.showConversation(withConversationViewModel: newConversation)
     }
 
@@ -293,7 +293,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         let controllers = navigationController.children
         for controller in controllers
         where controller.isKind(of: (ConversationViewController).self) {
-            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation.value == conversationModel {
+            if let conversationController = controller as? ConversationViewController, conversationController.viewModel.conversation == conversationModel {
                 navigationController.popToViewController(conversationController, animated: true)
                 conversationController.becomeFirstResponder()
                 return
@@ -311,7 +311,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         } else if let request = self.requestsService.getRequest(withId: conversationId, accountId: accountId) {
             let conversationViewModel = ConversationViewModel(with: self.injectionBag)
             let conversation = ConversationModel(request: request)
-            conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+            conversationViewModel.conversation =  conversation
             conversationViewModel.request = request
             self.showConversation(withConversationViewModel: conversationViewModel)
         }
@@ -339,7 +339,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             return
         }
         let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-        conversationViewModel.conversation = BehaviorRelay<ConversationModel>(value: conversation)
+        conversationViewModel.conversation = conversation
         self.showConversation(withConversationViewModel: conversationViewModel)
     }
 
@@ -372,7 +372,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         for controller in viewControllers {
             if let smartController = controller as? SmartlistViewController {
                 for model in smartController.viewModel.conversationViewModels where
-                    model.conversation.value.isCoredialog() && model.conversation.value.getParticipants().first?.jamiId == jamiId {
+                model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId {
                     return model
                 }
             }
@@ -385,7 +385,7 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         for controller in viewControllers {
             if let smartController = controller as? SmartlistViewController {
                 for model in smartController.viewModel.conversationViewModels where
-                    model.conversation.value.id == conversationId {
+                model.conversation.id == conversationId {
                     return model
                 }
             }
