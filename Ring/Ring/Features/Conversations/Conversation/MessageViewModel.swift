@@ -276,16 +276,16 @@ class MessageViewModel {
             return playerModel
         }
         let transferInfo = transferFileData
-        let name = !conversationViewModel.conversation.value.isSwarm() ? transferInfo.fileName : self.message.daemonId
+        let name = !conversationViewModel.conversation.isSwarm() ? transferInfo.fileName : self.message.daemonId
         guard let fileExtension = NSURL(fileURLWithPath: name).pathExtension else {
             return nil
         }
         if fileExtension.isMediaExtension() {
-            if conversationViewModel.conversation.value.isSwarm() {
+            if conversationViewModel.conversation.isSwarm() {
                 let path = self.dataTransferService
                     .getFileUrlForSwarm(fileName: self.message.daemonId,
-                                        accountID: conversationViewModel.conversation.value.accountId,
-                                        conversationID: conversationViewModel.conversation.value.id)
+                                        accountID: conversationViewModel.conversation.accountId,
+                                        conversationID: conversationViewModel.conversation.id)
                 let pathString = path?.path ?? ""
                 if pathString.isEmpty {
                     return nil
@@ -299,8 +299,8 @@ class MessageViewModel {
             var path = self.dataTransferService
                 .getFileUrlNonSwarm(fileName: name,
                                     inFolder: folderName,
-                                    accountID: conversationViewModel.conversation.value.accountId,
-                                    conversationID: conversationViewModel.conversation.value.id)
+                                    accountID: conversationViewModel.conversation.accountId,
+                                    conversationID: conversationViewModel.conversation.id)
             var pathString = path?.path ?? ""
             if pathString.isEmpty && self.message.incoming {
                 return nil
@@ -309,8 +309,8 @@ class MessageViewModel {
                 path = self.dataTransferService
                     .getFileUrlNonSwarm(fileName: name,
                                         inFolder: Directories.downloads.rawValue,
-                                        accountID: conversationViewModel.conversation.value.accountId,
-                                        conversationID: conversationViewModel.conversation.value.id)
+                                        accountID: conversationViewModel.conversation.accountId,
+                                        conversationID: conversationViewModel.conversation.id)
                 pathString = path?.path ?? ""
                 if pathString.isEmpty {
                     return nil

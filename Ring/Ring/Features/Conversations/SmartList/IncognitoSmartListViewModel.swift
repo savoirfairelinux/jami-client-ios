@@ -85,7 +85,7 @@ class IncognitoSmartListViewModel: Stateable, ViewModel, FilterConversationDataS
     }
 
     func startCall(audioOnly: Bool) {
-        guard let conversation = self.temporaryConversation.value?.conversation.value,
+        guard let conversation = self.temporaryConversation.value?.conversation,
               let participantId = conversation.getParticipants().first?.jamiId,
               let username = self.temporaryConversation.value?.userName.value else {
             return

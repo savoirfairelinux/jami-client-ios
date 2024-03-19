@@ -115,7 +115,7 @@ class ConversationViewController: UIViewController,
         let transferHelper = TransferHelper(dataTransferService: self.viewModel.dataTransferService,
                                             conversationViewModel: self.viewModel)
         let swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
-                                          conversation: self.viewModel.conversation.value,
+                                          conversation: self.viewModel.conversation,
                                           transferHelper: transferHelper,
                                           bestName: self.viewModel.bestName,
                                           screenTapped: tapAction.asObservable())
@@ -189,7 +189,7 @@ class ConversationViewController: UIViewController,
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self, weak swiftUIModel] update in
                 guard let self = self, let swiftUIModel = swiftUIModel, update else { return }
-                swiftUIModel.conversation = self.viewModel.conversation.value
+                swiftUIModel.conversation = self.viewModel.conversation
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
@@ -550,7 +550,7 @@ class ConversationViewController: UIViewController,
 
     private func setRightNavigationButtons() {
         // do not show call buttons for swarm with multiple participants
-        if self.viewModel.conversation.value.getParticipants().count > 1 {
+        if self.viewModel.conversation.getParticipants().count > 1 {
             return
         }
         let audioCallItem = UIBarButtonItem()
@@ -633,7 +633,7 @@ class ConversationViewController: UIViewController,
                 self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(nameNSString)
             })
             .disposed(by: self.disposeBag)
-        self.conversationInSyncLabel.backgroundColor = UIColor(hexString: self.viewModel.conversation.value.preferences.color)
+        self.conversationInSyncLabel.backgroundColor = UIColor(hexString: self.viewModel.conversation.preferences.color)
     }
 
     func placeCall() {

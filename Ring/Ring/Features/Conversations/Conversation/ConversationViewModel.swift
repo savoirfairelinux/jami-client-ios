@@ -82,8 +82,8 @@ class ConversationViewModel: Stateable, ViewModel {
             .sharedResponseStream
             .filter({ [weak self] (event) -> Bool in
                 return event.eventType == ServiceEventType.messageTypingIndicator &&
-                    event.getEventInput(ServiceEventInput.accountId) == self?.conversation.value.accountId &&
-                    event.getEventInput(ServiceEventInput.peerUri) == self?.conversation.value.hash
+                event.getEventInput(ServiceEventInput.accountId) == self?.conversation.accountId &&
+                event.getEventInput(ServiceEventInput.peerUri) == self?.conversation.hash
             })
             .map({ (event) -> Bool in
                 if let status: Int = event.getEventInput(ServiceEventInput.state), status == 1 {
@@ -93,7 +93,7 @@ class ConversationViewModel: Stateable, ViewModel {
             })
     }()
 
-    private var isJamsAccount: Bool { self.accountService.isJams(for: self.conversation.value.accountId) }
+    private var isJamsAccount: Bool { self.accountService.isJams(for: self.conversation.accountId) }
 
     var isAccountSip: Bool = false
 
@@ -131,11 +131,11 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     private func setConversation(_ conversation: ConversationModel) {
-        if self.conversation != nil {
-            self.conversation.accept(conversation)
-        } else {
-            self.conversation = BehaviorRelay(value: conversation)
-        }
+       // if self.conversation != nil {
+            self.conversation = conversation
+//        } else {
+//            self.conversation = BehaviorRelay(value: conversation)
+//        }
     }
 
     convenience init(with injectionBag: InjectionBag, conversation: ConversationModel, user: JamiSearchViewModel.JamsUserSearchModel) {
@@ -154,20 +154,20 @@ class ConversationViewModel: Stateable, ViewModel {
         }
     }
 
-    var conversation: BehaviorRelay<ConversationModel>! {
+    var conversation: ConversationModel! {
         didSet {
             self.subscribeUnreadMessages()
             self.subscribeProfileServiceMyPhoto()
 
-            guard let account = self.accountService.getAccount(fromAccountId: self.conversation.value.accountId) else { return }
+            guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
             if account.type == AccountType.sip {
-                self.userName.accept(self.conversation.value.hash)
+                self.userName.accept(self.conversation.hash)
                 self.isAccountSip = true
                 self.subscribeLastMessagesUpdate()
                 return
             }
             ///
-            let showInv = self.request != nil || self.conversation.value.id.isEmpty
+            let showInv = self.request != nil || self.conversation.id.isEmpty
             if self.showInvitation.value != showInv {
                 self.showInvitation.accept(showInv)
             }
@@ -176,22 +176,22 @@ class ConversationViewModel: Stateable, ViewModel {
             if self.shouldCreateSwarmInfo() {
                 self.createSwarmInfo()
             } else {
-                let filterParicipants = conversation.value.getParticipants()
+                let filterParicipants = conversation.getParticipants()
                 if let participantId = filterParicipants.first?.jamiId,
                    let contact = self.contactsService.contact(withHash: participantId) {
                     self.subscribeNonSwarmProfiles(uri: "ring:" + participantId,
-                                                   accountId: self.conversation.value.accountId)
+                                                   accountId: self.conversation.accountId)
                     if let contactUserName = contact.userName {
                         self.userName.accept(contactUserName)
                     } else if self.userName.value.isEmpty {
                         self.userName.accept(filterParicipants.first?.jamiId ?? "")
                         self.subscribeUserServiceLookupStatus()
-                        self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
+                        self.nameService.lookupAddress(withAccount: self.conversation.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
                     }
                 } else {
                     self.userName.accept(filterParicipants.first?.jamiId ?? "")
                     self.subscribeUserServiceLookupStatus()
-                    self.nameService.lookupAddress(withAccount: self.conversation.value.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
+                    self.nameService.lookupAddress(withAccount: self.conversation.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
                 }
                 /*
                  By default, a conversation is created as non-swarm. Upon receiving the conversationReady
@@ -211,8 +211,8 @@ class ConversationViewModel: Stateable, ViewModel {
             let innerObservable = conversation.synchronizing
             return innerObservable
         }
-        syncObservable
-            .startWith(self.conversation.value.synchronizing.value)
+        syncObservable?
+            .startWith(self.conversation.synchronizing.value)
             .subscribe { [weak self] synchronizing in
                 guard let self = self else { return }
                 self.synchronizing.accept(synchronizing)
@@ -229,7 +229,7 @@ class ConversationViewModel: Stateable, ViewModel {
                  Check if the conversation, originally created as non-swarm,
                  becomes a swarm after an update. If so, update the relevant information.
                  */
-                if conversationId == self.conversation.value.id {
+                if conversationId == self.conversation.id {
                     if self.shouldCreateSwarmInfo() {
                         self.createSwarmInfo()
                     }
@@ -240,11 +240,11 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func shouldCreateSwarmInfo() -> Bool {
-        return self.conversation.value.isSwarm() && self.swarmInfo == nil && !self.conversation.value.id.isEmpty
+        return self.conversation.isSwarm() && self.swarmInfo == nil && !self.conversation.id.isEmpty
     }
 
     func createSwarmInfo() {
-        self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation.value)
+        self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation)
         self.swarmInfo!.finalAvatar.share()
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] image in
@@ -281,9 +281,9 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     private func subscribeLastMessagesUpdate() {
-        conversation.value.newMessages
+        conversation.newMessages
             .subscribe { [weak self] _ in
-                guard let self = self, let lastMessage = self.conversation.value.lastMessage else { return }
+                guard let self = self, let lastMessage = self.conversation.lastMessage else { return }
                 self.lastMessage.accept(lastMessage.content)
                 let lastMessageDate = lastMessage.receivedDate
                 let dateToday = Date()
@@ -331,15 +331,16 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var hideNewMessagesLabel = BehaviorRelay<Bool>(value: true)
 
-    var hideDate: Bool { self.conversation.value.messages.isEmpty }
+    var hideDate: Bool { self.conversation.messages.isEmpty }
 
     func editMessage(content: String, messageId: String) {
-        let conversation = self.conversation.value
+        guard let conversation = self.conversation else { return }
         self.conversationsService.editSwarmMessage(conversationId: conversation.id, accountId: conversation.accountId, message: content, parentId: messageId)
     }
 
     func sendMessage(withContent content: String, parentId: String = "", contactURI: String? = nil, conversationModel: ConversationModel? = nil) {
-        let conversation = conversationModel ?? self.conversation.value
+        let conversation = conversationModel ?? self.conversation
+        guard let conversation = conversation else { return }
         if !conversation.isSwarm() {
             /// send not swarm message
             guard let participantJamiId = conversation.getParticipants().first?.jamiId,
@@ -370,7 +371,7 @@ class ConversationViewModel: Stateable, ViewModel {
         guard let account = self.accountService.currentAccount,
               let ringId = AccountModelHelper(withAccount: account).ringId else { return }
         self.conversationsService
-            .setMessagesAsRead(forConversation: self.conversation.value,
+            .setMessagesAsRead(forConversation: self.conversation,
                                accountId: account.id,
                                accountURI: ringId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -382,20 +383,20 @@ class ConversationViewModel: Stateable, ViewModel {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }
             self.conversationsService
-                .setMessageAsRead(conversation: self.conversation.value,
+                .setMessageAsRead(conversation: self.conversation,
                                   messageId: messageId,
                                   daemonId: daemonId)
         }
     }
 
     func startCall() {
-        guard let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
         self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: jamiId, userName: self.displayName.value ?? self.userName.value))
     }
 
     func startAudioCall() {
-        guard let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
         self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: jamiId, userName: self.displayName.value ?? self.userName.value))
     }
@@ -405,13 +406,13 @@ class ConversationViewModel: Stateable, ViewModel {
             return
         }
         self.closeAllPlayers()
-        let isSwarmConversation = conversation.value.type != .nonSwarm && conversation.value.type != .sip
+        let isSwarmConversation = conversation.type != .nonSwarm && conversation.type != .sip
         if isSwarmConversation {
             if let swarmInfo = self.swarmInfo {
                 self.stateSubject.onNext(ConversationState.presentSwarmInfo(swarmInfo: swarmInfo))
             }
         } else {
-            self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation.value))
+            self.stateSubject.onNext(ConversationState.contactDetail(conversationViewModel: self.conversation))
         }
     }
 
@@ -419,7 +420,7 @@ class ConversationViewModel: Stateable, ViewModel {
         closeAllPlayers()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: false))
+            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation, audioOnly: false))
         }
     }
 
@@ -427,16 +428,16 @@ class ConversationViewModel: Stateable, ViewModel {
         closeAllPlayers()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation.value, audioOnly: true))
+            self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation, audioOnly: true))
         }
     }
 
     func haveCurrentCall() -> Bool {
-        if !self.conversation.value.isDialog() {
+        if !self.conversation.isDialog() {
             return false
         }
-        guard let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return false }
-        return self.callService.call(participantHash: jamiId, accountID: self.conversation.value.accountId) != nil
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return false }
+        return self.callService.call(participantHash: jamiId, accountID: self.conversation.accountId) != nil
     }
 
     lazy var showCallButton: Observable<Bool> = {
@@ -446,12 +447,12 @@ class ConversationViewModel: Stateable, ViewModel {
             .asObservable()
             .filter({ [weak self] (call) -> Bool in
                 guard let self = self else { return false }
-                if !self.conversation.value.isDialog() {
+                if !self.conversation.isDialog() {
                     return false
                 }
-                guard let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return false }
+                guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return false }
                 return call.paricipantHash() == jamiId
-                    && call.accountId == self.conversation.value.accountId
+                    && call.accountId == self.conversation.accountId
             })
             .map({ [weak self]  call in
                 guard let self = self else { return false }
@@ -484,8 +485,8 @@ class ConversationViewModel: Stateable, ViewModel {
 
     func openCall() {
         guard let call = self.callService
-                .call(participantHash: self.conversation.value.getParticipants().first?.jamiId ?? "",
-                      accountID: self.conversation.value.accountId) else { return }
+                .call(participantHash: self.conversation.getParticipants().first?.jamiId ?? "",
+                      accountID: self.conversation.accountId) else { return }
 
         self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
     }
@@ -501,7 +502,7 @@ class ConversationViewModel: Stateable, ViewModel {
         //        composingMessage = isComposing
         //        guard let account = self.accountService.currentAccount else { return }
         //        conversationsService
-        //            .setIsComposingMsg(to: self.conversation.value.participantUri,
+        //            .setIsComposingMsg(to: self.conversation.participantUri,
         //                               from: account.id,
         //                               isComposing: isComposing)
     }
@@ -515,7 +516,7 @@ class ConversationViewModel: Stateable, ViewModel {
         //        let msgModel = MessageModel(withId: "",
         //                                    receivedDate: Date(),
         //                                    content: "       ",
-        //                                    authorURI: self.conversation.value.participantUri,
+        //                                    authorURI: self.conversation.participantUri,
         //                                    incoming: true)
         //        let composingIndicator = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel, isLastDisplayed: false)
         //        composingIndicator.isComposingIndicator = true
@@ -551,13 +552,13 @@ class ConversationViewModel: Stateable, ViewModel {
         let name = self.displayName.value?.isEmpty ?? true ? self.userName.value : self.displayName.value ?? ""
         let handler: ((String) -> Void) = { [weak self] conversationId in
             guard let self = self else { return }
-            guard let conversation = self.conversationsService.getConversationForId(conversationId: conversationId, accountId: self.conversation.value.accountId),
+            guard let conversation = self.conversationsService.getConversationForId(conversationId: conversationId, accountId: self.conversation.accountId),
                   !conversationId.isEmpty else {
                 self.shouldDismiss.accept(true)
                 return
             }
             self.request = nil
-            self.conversation.accept(conversation)
+            self.conversation = conversation
             self.conversationCreated.accept(true)
             if self.showInvitation.value {
                 self.showInvitation.accept(false)
@@ -566,13 +567,13 @@ class ConversationViewModel: Stateable, ViewModel {
         if let request = self.request {
             // show incoming request
             self.stateSubject.onNext(ConversationState.openIncomingInvitationView(displayName: name, request: request, parentView: parentView, invitationHandeledCB: handler))
-        } else if self.conversation.value.id.isEmpty {
+        } else if self.conversation.id.isEmpty {
             // send invitation for search result
-            let alias = (self.conversation.value.type == .jams ? self.displayName.value : "") ?? ""
+            let alias = (self.conversation.type == .jams ? self.displayName.value : "") ?? ""
             self.stateSubject.onNext(ConversationState
                                         .openOutgoingInvitationView(displayName: name, alias: alias, avatar: self.profileImageData.value,
-                                                                    contactJamiId: self.conversation.value.hash,
-                                                                    accountId: self.conversation.value.accountId,
+                                                                    contactJamiId: self.conversation.hash,
+                                                                    accountId: self.conversation.accountId,
                                                                     parentView: parentView,
                                                                     invitationHandeledCB: handler))
         }
@@ -597,11 +598,11 @@ extension ConversationViewModel {
     }
 
     private func subscribePresenceServiceContactPresence() {
-        if !self.conversation.value.isDialog() {
+        if !self.conversation.isDialog() {
             return
         }
         // subscribe to presence updates for the conversation's associated contact
-        if let jamiId = self.conversation.value.getParticipants().first?.jamiId, let contactPresence = self.presenceService.getSubscriptionsForContact(contactId: jamiId) {
+        if let jamiId = self.conversation.getParticipants().first?.jamiId, let contactPresence = self.presenceService.getSubscriptionsForContact(contactId: jamiId) {
             self.contactPresence = contactPresence
         } else {
             self.contactPresence.accept(.offline)
@@ -609,19 +610,20 @@ extension ConversationViewModel {
                 .sharedResponseStream
                 .filter({ [weak self] serviceEvent in
                     guard let uri: String = serviceEvent.getEventInput(ServiceEventInput.uri),
-                          let accountID: String = serviceEvent.getEventInput(ServiceEventInput.accountId) else { return false }
-                    return uri == self?.conversation.value.getParticipants().first?.jamiId && accountID == self?.conversation.value.accountId
+                          let accountID: String = serviceEvent.getEventInput(ServiceEventInput.accountId),
+                    let conversation = self?.conversation else { return false }
+                    return uri == conversation.getParticipants().first?.jamiId && accountID == conversation.accountId
                 })
                 .subscribe(onNext: { [weak self] _ in
                     self?.subscribePresence()
                 })
                 .disposed(by: self.disposeBag)
-            self.presenceService.subscribeBuddy(withAccountId: self.conversation.value.accountId, withUri: self.conversation.value.getParticipants().first!.jamiId, withFlag: true)
+            self.presenceService.subscribeBuddy(withAccountId: self.conversation.accountId, withUri: self.conversation.getParticipants().first!.jamiId, withFlag: true)
         }
     }
 
     private func subscribeUnreadMessages() {
-        self.conversation.value.numberOfUnreadMessages
+        self.conversation.numberOfUnreadMessages
             .subscribe { [weak self] unreadMessages in
                 guard let self = self else { return }
                 self.hideNewMessagesLabel.accept(unreadMessages == 0)
@@ -632,7 +634,7 @@ extension ConversationViewModel {
     }
 
     private func subscribePresence() {
-        guard let jamiId = self.conversation.value.getParticipants().first?.jamiId, self.conversation.value.isDialog() else { return }
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId, self.conversation.isDialog() else { return }
         if let contactPresence = self.presenceService
             .getSubscriptionsForContact(contactId: jamiId) {
             self.contactPresence = contactPresence
@@ -642,15 +644,15 @@ extension ConversationViewModel {
     }
 
     private func subscribeUserServiceLookupStatus() {
-        let contact = self.contactsService.contact(withHash: self.conversation.value.getParticipants().first?.jamiId ?? "")
+        let contact = self.contactsService.contact(withHash: self.conversation.getParticipants().first?.jamiId ?? "")
 
         // Return an observer for the username lookup
         self.nameService
             .usernameLookupStatus
             .filter({ [weak self] lookupNameResponse in
                 return lookupNameResponse.address != nil &&
-                    (lookupNameResponse.address == self?.conversation.value.getParticipants().first?.jamiId ||
-                        lookupNameResponse.address == self?.conversation.value.getParticipants().first?.jamiId)
+                (lookupNameResponse.address == self?.conversation.getParticipants().first?.jamiId ||
+                 lookupNameResponse.address == self?.conversation.getParticipants().first?.jamiId)
             })
             .subscribe(onNext: { [weak self] lookupNameResponse in
                 if let name = lookupNameResponse.name, !name.isEmpty {
@@ -680,22 +682,22 @@ extension ConversationViewModel {
 extension ConversationViewModel {
 
     func isAlreadySharingLocation() -> Bool {
-        guard let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
-        let accountId = self.conversation.value.accountId
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
+        let accountId = self.conversation.accountId
         return self.locationSharingService.isAlreadySharing(accountId: accountId,
                                                             contactUri: jamiId)
     }
 
     func isAlreadySharingMyLocation() -> Bool {
-        guard let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return true }
-        let accountId = self.conversation.value.accountId
+        guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return true }
+        let accountId = self.conversation.accountId
         return self.locationSharingService.isAlreadySharingMyLocation(accountId: accountId,
                                                                       contactUri: jamiId)
     }
 
     func startSendingLocation(duration: TimeInterval? = nil) {
         guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
+              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
         self.locationSharingService.startSharingLocation(from: account.id,
                                                          to: jamiId,
                                                          duration: duration)
@@ -703,13 +705,13 @@ extension ConversationViewModel {
 
     func stopSendingLocation() {
         guard let account = self.accountService.currentAccount,
-              let jamiId = self.conversation.value.getParticipants().first?.jamiId else { return }
+              let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
         self.locationSharingService.stopSharingLocation(accountId: account.id,
                                                         contactUri: jamiId)
     }
 
     func model() -> ConversationModel {
-        return self.conversation.value
+        return self.conversation
     }
 
     func subscribeLocationEvents() {
@@ -745,19 +747,19 @@ extension ConversationViewModel {
 
     private func changeConversationIfNeeded(items: [String]) {
         guard let accountId = self.accountService.currentAccount?.id else { return }
-        if items.contains(where: { $0 == self.conversation.value.id }) { return } // if items contains the current conversation, we do not need to change it
+        if items.contains(where: { $0 == self.conversation.id }) { return } // if items contains the current conversation, we do not need to change it
         guard let selectedConversationId = items.first else { return }
         self.stateSubject.onNext(ConversationState.openConversationForConversationId(conversationId: selectedConversationId, accountId: accountId, shouldOpenSmarList: true))
     }
 
     private func shareMessage(message: MessageContentVM, with conversationId: String, fileURL: URL?, fileName: String) {
         guard let accountId = self.accountService.currentAccount?.id else { return }
-        let conversationModel = self.conversationsService.getConversationForId(conversationId: conversationId, accountId: accountId) ?? self.conversation.value
+        let conversationModel = self.conversationsService.getConversationForId(conversationId: conversationId, accountId: accountId) ?? self.conversation
         if message.type != .fileTransfer {
             self.sendMessage(withContent: message.content, conversationModel: conversationModel)
             return
         }
-        if let url = fileURL {
+        if let url = fileURL, let conversationModel = conversationModel {
             if conversationModel.messages.contains(where: { $0.content == message.content }) {
                 self.sendFile(filePath: url.path, displayName: fileName, conversationModel: conversationModel)
             } else if let data = FileManager.default.contents(atPath: url.path) {
@@ -795,18 +797,18 @@ extension ConversationViewModel {
 extension ConversationViewModel {
 
     func sendFile(filePath: String, displayName: String, localIdentifier: String? = nil, conversationModel: ConversationModel? = nil) {
-        let conversation = conversationModel ?? self.conversation.value
+        guard let conversation = (conversationModel ?? self.conversation) else { return }
         self.dataTransferService.sendFile(conversation: conversation, filePath: filePath, displayName: displayName, localIdentifier: localIdentifier)
     }
 
     func sendAndSaveFile(displayName: String, imageData: Data, conversationModel: ConversationModel? = nil) {
-        let conversation = conversationModel ?? self.conversation.value
+        guard let conversation = (conversationModel ?? self.conversation) else { return }
         self.dataTransferService.sendAndSaveFile(displayName: displayName, conversation: conversation, imageData: imageData)
     }
 }
 
 extension ConversationViewModel: Equatable {
     static func == (lhs: ConversationViewModel, rhs: ConversationViewModel) -> Bool {
-        lhs.conversation.value == rhs.conversation.value
+        lhs.conversation == rhs.conversation
     }
 }
