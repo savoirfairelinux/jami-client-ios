@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2021 Savoir-faire Linux Inc.
+ *  Copyright (C) 2017-2024 Savoir-faire Linux Inc.
  *
  *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
@@ -26,10 +26,40 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SwiftyBeaver
+import SwiftUI
+
+enum MessageSequencing {
+    case singleMessage
+    case firstOfSequence
+    case lastOfSequence
+    case middleOfSequence
+    case unknown
+}
+
+enum GeneratedMessageType: String {
+    case receivedContactRequest = "Contact request received"
+    case contactAdded = "Contact added"
+    case missedIncomingCall = "Missed incoming call"
+    case missedOutgoingCall = "Missed outgoing call"
+    case incomingCall = "Incoming call"
+    case outgoingCall = "Outgoing call"
+}
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class ConversationViewModel: Stateable, ViewModel {
+class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiable {
+
+    @Published var avatar: UIImage?
+    @Published var name: String = ""
+    @Published var lastMessage: String = ""
+    @Published var lastMessageDate: String = ""
+    @Published var unreadMessages: Int = 0
+    @Published var presence: PresenceStatus = .offline
+    @Published var isSynchronizing: Bool = false
+
+    func getDefaultAvatar() -> UIImage {
+        return UIImage.createContactAvatar(username: (self.displayName.value?.isEmpty ?? true) ? self.userName.value : self.displayName.value!)
+    }
 
     /// Logger
     private let log = SwiftyBeaver.self
@@ -55,6 +85,7 @@ class ConversationViewModel: Stateable, ViewModel {
         return players[messageID]
     }
     func setPlayer(messageID: String, player: PlayerViewModel) { players[messageID] = player }
+
     func closeAllPlayers() {
         let queue = DispatchQueue.global(qos: .default)
         queue.sync {
@@ -65,7 +96,7 @@ class ConversationViewModel: Stateable, ViewModel {
         }
     }
 
-    let showInvitation = BehaviorRelay<Bool>(value: false)
+    let isTemporary = BehaviorRelay<Bool>(value: false)
 
     let showIncomingLocationSharing = BehaviorRelay<Bool>(value: false)
     let showOutgoingLocationSharing = BehaviorRelay<Bool>(value: false)
@@ -77,24 +108,6 @@ class ConversationViewModel: Stateable, ViewModel {
 
     var synchronizing = BehaviorRelay<Bool>(value: false)
 
-    lazy var typingIndicator: Observable<Bool> = {
-        return self.conversationsService
-            .sharedResponseStream
-            .filter({ [weak self] (event) -> Bool in
-                return event.eventType == ServiceEventType.messageTypingIndicator &&
-                event.getEventInput(ServiceEventInput.accountId) == self?.conversation.accountId &&
-                event.getEventInput(ServiceEventInput.peerUri) == self?.conversation.hash
-            })
-            .map({ (event) -> Bool in
-                if let status: Int = event.getEventInput(ServiceEventInput.state), status == 1 {
-                    return true
-                }
-                return false
-            })
-    }()
-
-    private var isJamsAccount: Bool { self.accountService.isJams(for: self.conversation.accountId) }
-
     var isAccountSip: Bool = false
 
     var displayName = BehaviorRelay<String?>(value: nil)
@@ -104,15 +117,14 @@ class ConversationViewModel: Stateable, ViewModel {
             .combineLatest(userName.asObservable(),
                            displayName.asObservable(),
                            resultSelector: {(userName, displayname) in
-                            guard let displayname = displayname, !displayname.isEmpty else { return userName }
+                            guard let displayname = displayname, !displayname.isEmpty else {
+                                return userName }
                             return displayname
                            })
     }()
 
     /// Group's image data
     var profileImageData = BehaviorRelay<Data?>(value: nil)
-    /// My profile's image data
-    var myOwnProfileImageData: Data?
 
     var contactPresence = BehaviorRelay<PresenceStatus>(value: .offline)
     var swarmInfo: SwarmInfoProtocol?
@@ -128,14 +140,69 @@ class ConversationViewModel: Stateable, ViewModel {
         self.dataTransferService = injectionBag.dataTransferService
         self.callService = injectionBag.callService
         self.locationSharingService = injectionBag.locationSharingService
+        let transferHelper = TransferHelper(injectionBag: injectionBag)
+
+        swiftUIModel = MessagesListVM(injectionBag: self.injectionBag,
+                                      transferHelper: transferHelper)
+        swiftUIModel.subscribeBestName(bestName: self.bestName)
+        self.bestName
+            .share()
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .startWith((self.displayName.value?.isEmpty ?? true) ? self.userName.value : self.displayName.value!)
+            .subscribe(onNext: { [weak self] bestName in
+                let name = bestName.replacingOccurrences(of: "\0", with: "")
+                guard !name.isEmpty else { return }
+                self?.name = name
+                self?.swiftUIModel.name = name
+            })
+            .disposed(by: self.disposeBag)
+
+        self.profileImageData
+            .share()
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .startWith(self.profileImageData.value)
+            .subscribe(onNext: { [weak self] imageData in
+                if let imageData = imageData, !imageData.isEmpty {
+                    if let image = UIImage(data: imageData) {
+                        self?.avatar = image
+                    }
+                }
+            })
+            .disposed(by: self.disposeBag)
+
+        self.lastMessageObservable
+            .share()
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .startWith(swiftUIModel.lastMessage.value)
+            .subscribe(onNext: { [weak self] mesage in
+                self?.lastMessage = mesage
+            })
+            .disposed(by: self.disposeBag)
+
+        self.lastMessageDateObservable
+            .share()
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .startWith(swiftUIModel.lastMessageDate.value)
+            .subscribe(onNext: { [weak self] mesageDate in
+                self?.lastMessageDate = mesageDate
+            })
+            .disposed(by: self.disposeBag)
+
+        self.isTemporary
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] show in
+                self?.swiftUIModel.isTemporary = show
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
     }
 
     private func setConversation(_ conversation: ConversationModel) {
-       // if self.conversation != nil {
-            self.conversation = conversation
-//        } else {
-//            self.conversation = BehaviorRelay(value: conversation)
-//        }
+        self.conversation = conversation
     }
 
     convenience init(with injectionBag: InjectionBag, conversation: ConversationModel, user: JamiSearchViewModel.JamsUserSearchModel) {
@@ -143,35 +210,32 @@ class ConversationViewModel: Stateable, ViewModel {
         self.userName.accept(user.username)
         self.displayName.accept(user.firstName + " " + user.lastName)
         self.profileImageData.accept(user.profilePicture)
+        self.swiftUIModel.jamsAvatarData = user.profilePicture
+        self.swiftUIModel.jamsName = user.firstName + " " + user.lastName
         self.setConversation(conversation) // required to trigger the didSet
     }
 
-    var request: RequestModel? {
-        didSet {
-            if request != nil && !self.showInvitation.value {
-                self.showInvitation.accept(true)
-            }
-        }
+    var swiftUIModel: MessagesListVM
+
+    var lastMessageObservable: Observable <String> {
+        return swiftUIModel.lastMessage.asObservable()
+    }
+
+    var lastMessageDateObservable: Observable <String> {
+        return swiftUIModel.lastMessageDate.asObservable()
     }
 
     var conversation: ConversationModel! {
         didSet {
             self.subscribeUnreadMessages()
-            self.subscribeProfileServiceMyPhoto()
+            self.swiftUIModel.conversation = conversation
 
             guard let account = self.accountService.getAccount(fromAccountId: self.conversation.accountId) else { return }
             if account.type == AccountType.sip {
                 self.userName.accept(self.conversation.hash)
                 self.isAccountSip = true
-                self.subscribeLastMessagesUpdate()
                 return
             }
-            ///
-            let showInv = self.request != nil || self.conversation.id.isEmpty
-            if self.showInvitation.value != showInv {
-                self.showInvitation.accept(showInv)
-            }
-
             self.subscribePresenceServiceContactPresence()
             if self.shouldCreateSwarmInfo() {
                 self.createSwarmInfo()
@@ -199,10 +263,8 @@ class ConversationViewModel: Stateable, ViewModel {
                  */
                 subscribeConversationReady()
             }
-            subscribeLastMessagesUpdate()
             subscribeConversationSynchronization()
             subscribeLocationEvents()
-            // self.subscribeConversationServiceTypingIndicator()
         }
     }
 
@@ -216,6 +278,7 @@ class ConversationViewModel: Stateable, ViewModel {
             .subscribe { [weak self] synchronizing in
                 guard let self = self else { return }
                 self.synchronizing.accept(synchronizing)
+                self.isSynchronizing = synchronizing
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
@@ -246,7 +309,6 @@ class ConversationViewModel: Stateable, ViewModel {
     func createSwarmInfo() {
         self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation)
         self.swarmInfo!.finalAvatar.share()
-            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] image in
                 self?.profileImageData.accept(image.pngData())
             } onError: { _ in
@@ -279,59 +341,6 @@ class ConversationViewModel: Stateable, ViewModel {
             }
             .disposed(by: self.disposeBag)
     }
-
-    private func subscribeLastMessagesUpdate() {
-        conversation.newMessages
-            .subscribe { [weak self] _ in
-                guard let self = self, let lastMessage = self.conversation.lastMessage else { return }
-                self.lastMessage.accept(lastMessage.content)
-                let lastMessageDate = lastMessage.receivedDate
-                let dateToday = Date()
-                var dateString = ""
-                let todayWeekOfYear = Calendar.current.component(.weekOfYear, from: dateToday)
-                let todayDay = Calendar.current.component(.day, from: dateToday)
-                let todayMonth = Calendar.current.component(.month, from: dateToday)
-                let todayYear = Calendar.current.component(.year, from: dateToday)
-                let weekOfYear = Calendar.current.component(.weekOfYear, from: lastMessageDate)
-                let day = Calendar.current.component(.day, from: lastMessageDate)
-                let month = Calendar.current.component(.month, from: lastMessageDate)
-                let year = Calendar.current.component(.year, from: lastMessageDate)
-                if todayDay == day && todayMonth == month && todayYear == year {
-                    dateString = self.hourFormatter.string(from: lastMessageDate)
-                } else if day == todayDay - 1 {
-                    dateString = L10n.Smartlist.yesterday
-                } else if todayYear == year && todayWeekOfYear == weekOfYear {
-                    dateString = lastMessageDate.dayOfWeek()
-                } else {
-                    dateString = self.dateFormatter.string(from: lastMessageDate)
-                }
-                self.lastMessageReceivedDate.accept(dateString)
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
-    }
-
-    /// Displays the entire date ( for messages received before the current week )
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        return formatter
-    }()
-    /// Displays the hour of the message reception ( for messages received today )
-    private lazy var hourFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter
-    }()
-
-    var unreadMessages = BehaviorRelay<String>(value: "")
-
-    var lastMessage = BehaviorRelay<String>(value: "")
-    var lastMessageReceivedDate = BehaviorRelay<String>(value: "")
-
-    var hideNewMessagesLabel = BehaviorRelay<Bool>(value: true)
-
-    var hideDate: Bool { self.conversation.messages.isEmpty }
 
     func editMessage(content: String, messageId: String) {
         guard let conversation = self.conversation else { return }
@@ -402,7 +411,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func showContactInfo() {
-        if self.showInvitation.value {
+        if self.isTemporary.value {
             return
         }
         self.closeAllPlayers()
@@ -495,50 +504,6 @@ class ConversationViewModel: Stateable, ViewModel {
         self.closeAllPlayers()
     }
 
-    func setIsComposingMsg(isComposing: Bool) {
-        //        if composingMessage == isComposing {
-        //            return
-        //        }
-        //        composingMessage = isComposing
-        //        guard let account = self.accountService.currentAccount else { return }
-        //        conversationsService
-        //            .setIsComposingMsg(to: self.conversation.participantUri,
-        //                               from: account.id,
-        //                               isComposing: isComposing)
-    }
-
-    func addComposingIndicatorMsg() {
-        //        if peerComposingMessage {
-        //            return
-        //        }
-        //        peerComposingMessage = true
-        //        var messagesValue = self.messages.value
-        //        let msgModel = MessageModel(withId: "",
-        //                                    receivedDate: Date(),
-        //                                    content: "       ",
-        //                                    authorURI: self.conversation.participantUri,
-        //                                    incoming: true)
-        //        let composingIndicator = MessageViewModel(withInjectionBag: self.injectionBag, withMessage: msgModel, isLastDisplayed: false)
-        //        composingIndicator.isComposingIndicator = true
-        //        messagesValue.append(composingIndicator)
-        //        self.messages.accept(messagesValue)
-    }
-
-    var composingMessage: Bool = false
-    // var peerComposingMessage: Bool = false
-
-    func removeComposingIndicatorMsg() {
-        //        if !peerComposingMessage {
-        //            return
-        //        }
-        //        peerComposingMessage = false
-        //        let messagesValue = self.messages.value
-        //        let conversationsMsg = messagesValue.filter { (messageModel) -> Bool in
-        //            !messageModel.isComposingIndicator
-        //        }
-        //        self.messages.accept(conversationsMsg)
-    }
-
     var myContactsLocation = BehaviorSubject<CLLocationCoordinate2D?>(value: nil)
     let shouldDismiss = BehaviorRelay<Bool>(value: false)
 
@@ -547,55 +512,10 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     var conversationCreated = BehaviorRelay(value: true)
-
-    func openInvitationView(parentView: UIViewController) {
-        let name = self.displayName.value?.isEmpty ?? true ? self.userName.value : self.displayName.value ?? ""
-        let handler: ((String) -> Void) = { [weak self] conversationId in
-            guard let self = self else { return }
-            guard let conversation = self.conversationsService.getConversationForId(conversationId: conversationId, accountId: self.conversation.accountId),
-                  !conversationId.isEmpty else {
-                self.shouldDismiss.accept(true)
-                return
-            }
-            self.request = nil
-            self.conversation = conversation
-            self.conversationCreated.accept(true)
-            if self.showInvitation.value {
-                self.showInvitation.accept(false)
-            }
-        }
-        if let request = self.request {
-            // show incoming request
-            self.stateSubject.onNext(ConversationState.openIncomingInvitationView(displayName: name, request: request, parentView: parentView, invitationHandeledCB: handler))
-        } else if self.conversation.id.isEmpty {
-            // send invitation for search result
-            let alias = (self.conversation.type == .jams ? self.displayName.value : "") ?? ""
-            self.stateSubject.onNext(ConversationState
-                                        .openOutgoingInvitationView(displayName: name, alias: alias, avatar: self.profileImageData.value,
-                                                                    contactJamiId: self.conversation.hash,
-                                                                    accountId: self.conversation.accountId,
-                                                                    parentView: parentView,
-                                                                    invitationHandeledCB: handler))
-        }
-    }
 }
 
 // MARK: Conversation didSet functions
 extension ConversationViewModel {
-
-    private func subscribeProfileServiceMyPhoto() {
-        guard let account = self.accountService.currentAccount else { return }
-        self.profileService
-            .getAccountProfile(accountId: account.id)
-            .subscribe(onNext: { [weak self] profile in
-                guard let self = self else { return }
-                if let photo = profile.photo,
-                   let data = NSData(base64Encoded: photo, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data? {
-                    self.myOwnProfileImageData = data
-                }
-            })
-            .disposed(by: self.disposeBag)
-    }
 
     private func subscribePresenceServiceContactPresence() {
         if !self.conversation.isDialog() {
@@ -611,7 +531,7 @@ extension ConversationViewModel {
                 .filter({ [weak self] serviceEvent in
                     guard let uri: String = serviceEvent.getEventInput(ServiceEventInput.uri),
                           let accountID: String = serviceEvent.getEventInput(ServiceEventInput.accountId),
-                    let conversation = self?.conversation else { return false }
+                          let conversation = self?.conversation else { return false }
                     return uri == conversation.getParticipants().first?.jamiId && accountID == conversation.accountId
                 })
                 .subscribe(onNext: { [weak self] _ in
@@ -620,14 +540,21 @@ extension ConversationViewModel {
                 .disposed(by: self.disposeBag)
             self.presenceService.subscribeBuddy(withAccountId: self.conversation.accountId, withUri: self.conversation.getParticipants().first!.jamiId, withFlag: true)
         }
+        self.contactPresence
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] presence in
+                self?.presence = presence
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
     }
 
     private func subscribeUnreadMessages() {
         self.conversation.numberOfUnreadMessages
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] unreadMessages in
                 guard let self = self else { return }
-                self.hideNewMessagesLabel.accept(unreadMessages == 0)
-                self.unreadMessages.accept(String(unreadMessages.description))
+                self.unreadMessages = unreadMessages
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
@@ -651,8 +578,8 @@ extension ConversationViewModel {
             .usernameLookupStatus
             .filter({ [weak self] lookupNameResponse in
                 return lookupNameResponse.address != nil &&
-                (lookupNameResponse.address == self?.conversation.getParticipants().first?.jamiId ||
-                 lookupNameResponse.address == self?.conversation.getParticipants().first?.jamiId)
+                    (lookupNameResponse.address == self?.conversation.getParticipants().first?.jamiId ||
+                        lookupNameResponse.address == self?.conversation.getParticipants().first?.jamiId)
             })
             .subscribe(onNext: { [weak self] lookupNameResponse in
                 if let name = lookupNameResponse.name, !name.isEmpty {
@@ -663,18 +590,6 @@ extension ConversationViewModel {
                 }
             })
             .disposed(by: disposeBag)
-    }
-
-    private func subscribeConversationServiceTypingIndicator() {
-        self.typingIndicator
-            .subscribe(onNext: { [weak self] (typing) in
-                if typing {
-                    self?.addComposingIndicatorMsg()
-                } else {
-                    self?.removeComposingIndicatorMsg()
-                }
-            })
-            .disposed(by: self.disposeBag)
     }
 }
 
