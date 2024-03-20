@@ -109,21 +109,6 @@ class ConversationCell: UITableViewCell, NibReusable {
             })
             .disposed(by: self.disposeBag)
 
-        // unread messages
-        if let unreadMessages = self.newMessagesLabel {
-            item.unreadMessages
-                .observe(on: MainScheduler.instance)
-                .startWith(item.unreadMessages.value)
-                .bind(to: unreadMessages.rx.text)
-                .disposed(by: self.disposeBag)
-        }
-        if let unreadMessagesIndicator = self.newMessagesIndicator {
-            item.hideNewMessagesLabel
-                .observe(on: MainScheduler.instance)
-                .startWith(item.hideNewMessagesLabel.value)
-                .bind(to: unreadMessagesIndicator.rx.isHidden)
-                .disposed(by: self.disposeBag)
-        }
         // presence
         if self.presenceIndicator != nil {
             item.contactPresence.asObservable()
@@ -147,21 +132,13 @@ class ConversationCell: UITableViewCell, NibReusable {
             .bind(to: self.nameLabel.rx.text)
             .disposed(by: self.disposeBag)
         self.nameLabel.lineBreakMode = .byTruncatingTail
-        // last message date
-        if let lastMessageTime = self.lastMessageDateLabel {
-            item.lastMessageReceivedDate
-                .observe(on: MainScheduler.instance)
-                .startWith(item.lastMessageReceivedDate.value)
-                .bind(to: lastMessageTime.rx.text)
-                .disposed(by: self.disposeBag)
-        }
 
         // last message preview
         if let lastMessage = self.lastMessagePreviewLabel {
             lastMessage.lineBreakMode = .byTruncatingTail
-            item.lastMessage
+            item.lastMessageObservable
                 .observe(on: MainScheduler.instance)
-                .startWith(item.lastMessage.value)
+                .startWith(item.lastMessage)
                 .bind(to: lastMessage.rx.text)
                 .disposed(by: self.disposeBag)
         }
