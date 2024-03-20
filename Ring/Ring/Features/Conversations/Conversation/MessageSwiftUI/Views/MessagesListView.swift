@@ -46,7 +46,7 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
 }
 
 struct MessagesListView: View {
-    @StateObject var model: MessagesListVM
+    @ObservedObject var model: MessagesListVM
     @SwiftUI.State var showScrollToLatestButton = false
     let scrollReserved = UIScreen.main.bounds.height * 1.5
 
@@ -124,6 +124,9 @@ struct MessagesListView: View {
                             reactionsForMessage = nil
                         }
                 }
+            }
+            if model.isTemporary {
+                temporaryConversationView()
             }
         }
         .onChange(of: model.screenTapped, perform: { _ in
@@ -266,6 +269,36 @@ struct MessagesListView: View {
         .padding(.bottom, 35)
         .ignoresSafeArea(.container, edges: [])
         .shadowForConversation()
+    }
+
+    func temporaryConversationView() -> some View {
+        ZStack {
+            Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
+            VStack {
+                VStack {
+                    Text(model.name + " " + L10n.Conversation.notContactLabel)
+                        .frame(maxWidth: .infinity)
+                        .multilineTextAlignment(.center)
+                    Text(L10n.Conversation.addToContactsLabel)
+                }
+                .padding()
+                .background(Color(UIColor.secondarySystemBackground))
+                Spacer()
+                Button(action: {
+                    model.sendRequest()
+                }) {
+                    Text(L10n.Conversation.addToContactsButton)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                }
+                Spacer()
+                    .frame(height: 20)
+            }
+        }
     }
 
     private func hideKeyboardIfNeed() {

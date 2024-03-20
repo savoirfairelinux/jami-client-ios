@@ -191,7 +191,6 @@ class ContactRequestsViewModel: Stateable, ViewModel {
         conversationViewModel.displayName.accept(name)
         conversationViewModel.profileImageData.accept(item.profileImageData.value)
         conversationViewModel.conversation = conversation
-        conversationViewModel.request = item.request
         self.stateSubject.onNext(ConversationState.conversationDetail(conversationViewModel: conversationViewModel))
     }
 }

@@ -77,7 +77,7 @@ final class JamiSearchViewModelTests: XCTestCase {
         conversationVM = ConversationViewModel(with: injectionBag)
         conversationVM.conversation = ConversationModel()
         dataSource = TestableFilteredDataSource(conversations: [conversationVM])
-        searchViewModel = JamiSearchViewModel(with: injectionBag, source: dataSource)
+        searchViewModel = JamiSearchViewModel(with: injectionBag, source: dataSource, searchOnlyExistingConversations: false)
     }
 
     override func tearDownWithError() throws {
