@@ -66,8 +66,6 @@ class RequestModel {
             }
             if let name = profile.alias {
                 self.name = name
-            } else {
-                self.name = jamiId
             }
         }
     }
@@ -87,8 +85,6 @@ class RequestModel {
                 }
                 if let name = profile.alias {
                     self.name = name
-                } else {
-                    self.name = jamiId
                 }
             }
             if let receivedDateString = dictionary[RequestKey.received.rawValue],
@@ -132,6 +128,14 @@ class RequestModel {
     convenience init(withDictionary dictionary: [String: String], accountId: String, type: RequestType, conversationId: String) {
         self.init(withDictionary: dictionary, accountId: accountId, type: type)
         self.conversationId = conversationId
+    }
+
+    func getIdentifier() -> String {
+        if self.type == .conversation {
+            return conversationId
+        } else {
+            return self.participants.first?.jamiId ?? ""
+        }
     }
 
     func isCoredialog() -> Bool {

@@ -86,3 +86,9 @@ extension Color: RawRepresentable {
         }
     }
 }
+
+extension Color {
+    static let jamiPrimaryControl = Color("jamiPrimaryControl")
+    static let jamiSecondaryControl = Color("jamiSecondaryControl")
+    static let jamiTertiaryControl = Color("jamiTertiaryControl")
+}
