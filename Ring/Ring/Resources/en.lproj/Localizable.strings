@@ -85,6 +85,8 @@
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Conversations";
+"smartlist.accounts" = "Accounts";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
@@ -101,6 +103,7 @@
 "smartlist.accounts" = "Account list";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write to";
@@ -123,6 +126,11 @@
 
 //Invitations
 "invitations.noInvitations" = "No invitations";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

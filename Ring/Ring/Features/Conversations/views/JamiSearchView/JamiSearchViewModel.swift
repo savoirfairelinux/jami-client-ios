@@ -24,19 +24,29 @@ import RxSwift
 import RxCocoa
 import SwiftyBeaver
 
+
 enum SearchStatus {
     case notSearching
+    case foundTemporary
+    case foundJams
     case searching
     case noResult
+    case invalidId
 
     func toString() -> String {
         switch self {
-        case .notSearching:
-            return ""
-        case .searching:
-            return L10n.Global.search
-        case .noResult:
-            return L10n.Smartlist.noResults
+            case .notSearching:
+                return ""
+            case .searching:
+                return L10n.Global.search
+            case .noResult:
+                return "Username not found"
+            case .invalidId:
+                return "Invalid id"
+            case .foundTemporary:
+                return ""
+            case .foundJams:
+                return ""
         }
     }
 }
@@ -71,17 +81,17 @@ class JamiSearchViewModel {
                            self.filteredResults.asObservable(),
                            self.jamsTemporaryResults.asObservable(),
                            resultSelector: { temporaryConversation, filteredResults, jamsTemporaryResults in
-                            var sections = [ConversationSection]()
-                            if !jamsTemporaryResults.isEmpty {
-                                sections.append(ConversationSection(header: L10n.Smartlist.results, items: jamsTemporaryResults))
-                            } else if let temporaryConversation = temporaryConversation {
-                                sections.append(ConversationSection(header: L10n.Smartlist.results, items: [temporaryConversation]))
-                            }
-                            if !filteredResults.isEmpty {
-                                sections.append(ConversationSection(header: L10n.Smartlist.conversations, items: filteredResults))
-                            }
-                            return sections
-                           })
+                var sections = [ConversationSection]()
+                if !jamsTemporaryResults.isEmpty {
+                    sections.append(ConversationSection(header: L10n.Smartlist.results, items: jamsTemporaryResults))
+                } else if let temporaryConversation = temporaryConversation {
+                    sections.append(ConversationSection(header: L10n.Smartlist.results, items: [temporaryConversation]))
+                }
+                if !filteredResults.isEmpty {
+                    sections.append(ConversationSection(header: L10n.Smartlist.conversations, items: filteredResults))
+                }
+                return sections
+            })
             .observe(on: MainScheduler.instance)
     }()
 
@@ -92,22 +102,25 @@ class JamiSearchViewModel {
      Existing conversations with the title containing search result or one of
      the participant's name containing search result.
      */
-    private var filteredResults = BehaviorRelay(value: [ConversationViewModel]())
+    var filteredResults = BehaviorRelay(value: [ConversationViewModel]())
 
     // Jams temporary conversations created when perform search for a new contact
-    private let jamsTemporaryResults = BehaviorRelay<[ConversationViewModel]>(value: [])
+    let jamsTemporaryResults = BehaviorRelay<[ConversationViewModel]>(value: [])
 
     let searchBarText = BehaviorRelay<String>(value: "")
     var isSearching: Observable<Bool>!
     var searchStatus = PublishSubject<SearchStatus>()
     private let dataSource: FilterConversationDataSource
+    // Indicates if the search should be limited to only existing conversations.
+    private let searchOnlyExistingConversations: Bool
     private weak var delegate: FilterConversationDelegate?
 
-    init(with injectionBag: InjectionBag, source: FilterConversationDataSource) {
+    init(with injectionBag: InjectionBag, source: FilterConversationDataSource, searchOnlyExistingConversations: Bool) {
         self.nameService = injectionBag.nameService
         self.accountsService = injectionBag.accountService
         self.injectionBag = injectionBag
         self.dataSource = source
+        self.searchOnlyExistingConversations = searchOnlyExistingConversations
 
         // Observes if the user is searching.
         self.isSearching = searchBarText.asObservable()
@@ -121,6 +134,13 @@ class JamiSearchViewModel {
             .observe(on: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
+                guard let account = self?.accountsService.currentAccount else { return }
+                if text.isEmpty {
+                    self?.searchStatus.onNext(.notSearching)
+                }
+                if text.count < 3 && text.count > 0  && !account.isJams {
+                    self?.searchStatus.onNext(.invalidId)
+                }
                 self?.search(withText: text)
             })
             .disposed(by: disposeBag)
@@ -133,7 +153,7 @@ class JamiSearchViewModel {
     }
 
     func updateSearchStatus() {
-        if self.filteredResults.value.isEmpty && self.jamsTemporaryResults.value.isEmpty && self.temporaryConversation.value == nil {
+        if self.jamsTemporaryResults.value.isEmpty && self.temporaryConversation.value == nil {
             self.searchStatus.onNext(.noResult)
         } else {
             self.searchStatus.onNext(.notSearching)
@@ -170,13 +190,13 @@ class JamiSearchViewModel {
                 participantHashContainsText = hash.containsCaseInsensitive(string: searchQuery)
             }
             return conversation.userName.value.containsCaseInsensitive(string: searchQuery) ||
-                displayNameContainsText || participantHashContainsText
+            displayNameContainsText || participantHashContainsText
         }
     }
 
     private func getFilteredConversations(for searchQuery: String) -> [ConversationViewModel]? {
         let conversations =
-            self.dataSource.conversationViewModels
+        self.dataSource.conversationViewModels
             .filter({[weak self] conversation in
                 guard let self = self else { return false }
                 return self.isConversation(conversation, contains: searchQuery)
@@ -213,10 +233,10 @@ class JamiSearchViewModel {
 
     private func createTemporaryConversation(searchQuery: String, account: AccountModel) -> ConversationViewModel {
         switch account.type {
-        case .sip:
-            return self.createTemporarySipConversation(with: searchQuery, account: account)
-        case .ring:
-            return self.createTemporarySwarmConversation(with: searchQuery, accountId: account.id)
+            case .sip:
+                return self.createTemporarySipConversation(with: searchQuery, account: account)
+            case .ring:
+                return self.createTemporarySwarmConversation(with: searchQuery, accountId: account.id)
         }
     }
 
@@ -226,6 +246,10 @@ class JamiSearchViewModel {
         if searchQuery.isEmpty { return }
         if let filteredConversations = getFilteredConversations(for: searchQuery) {
             self.filteredResults.accept(filteredConversations)
+        }
+        // not need to searh on network
+        if searchOnlyExistingConversations || searchQuery.count < 3 {
+            return
         }
         self.addTemporaryConversationsIfNeed(searchQuery: searchQuery)
     }
@@ -301,7 +325,7 @@ class JamiSearchViewModel {
                 let users = results.map { result in
                     return ContactsUtils.deserializeUser(dictionary: result)
                 }
-                .compactMap { $0 }
+                    .compactMap { $0 }
                 // Create temporary conversations for search results.
                 var jamsSearch = self.convertToConversations(from: users, accountId: account.id)
                 // Filter out existing conversations (filtered results).
@@ -347,6 +371,7 @@ class JamiSearchViewModel {
             newConversation.userName.accept(hash)
         }
         newConversation.conversation = conversation
+        newConversation.isTemporary.accept(true)
         return newConversation
     }
 
@@ -378,4 +403,5 @@ class JamiSearchViewModel {
             delegate.showConversation(withConversationViewModel: conversation)
         }
     }
+
 }

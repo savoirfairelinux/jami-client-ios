@@ -87,22 +87,35 @@ class ConversationViewController: UIViewController,
 
     private lazy var locationManager: CLLocationManager = { return CLLocationManager() }()
 
-    func setIsComposing(isComposing: Bool) {
-        self.viewModel.setIsComposingMsg(isComposing: isComposing)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureNavigationBar()
         self.setupUI()
         self.setupBindings()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(applicationWillResignActive),
-                                               name: UIApplication.willResignActiveNotification,
-                                               object: nil)
         screenTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         self.view.addGestureRecognizer(screenTapRecognizer)
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !self.swiftUIViewAdded {
+            self.addSwiftUIView()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0
+        self.viewModel.setMessagesAsRead()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
+                           displayName: self.viewModel.displayName.value,
+                           username: self.viewModel.userName.value)
+        self.updateNavigationBarShadow()
     }
 
     @objc
@@ -112,14 +125,7 @@ class ConversationViewController: UIViewController,
 
     private func addSwiftUIView() {
         swiftUIViewAdded = true
-        let transferHelper = TransferHelper(dataTransferService: self.viewModel.dataTransferService,
-                                            conversationViewModel: self.viewModel)
-        let swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
-                                          conversation: self.viewModel.conversation,
-                                          transferHelper: transferHelper,
-                                          bestName: self.viewModel.bestName,
-                                          screenTapped: tapAction.asObservable())
-        swiftUIModel.hideNavigationBar
+        self.viewModel.swiftUIModel.hideNavigationBar
             .subscribe(onNext: { [weak self] (hide) in
                 guard let self = self else { return }
                 if self.navigationItem.rightBarButtonItems?.isEmpty == hide { return }
@@ -139,7 +145,9 @@ class ConversationViewController: UIViewController,
             })
             .disposed(by: self.disposeBag)
 
-        swiftUIModel.messagePanelState
+        self.viewModel.swiftUIModel.subscribeScreenTapped(screenTapped: tapAction.asObservable())
+
+        self.viewModel.swiftUIModel.messagePanelState
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? MessagePanelState else { return }
                 switch state {
@@ -162,7 +170,7 @@ class ConversationViewController: UIViewController,
                 }
             })
             .disposed(by: self.disposeBag)
-        swiftUIModel.contextMenuState
+        self.viewModel.swiftUIModel.contextMenuState
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ContextMenu else { return }
                 switch state {
@@ -187,13 +195,13 @@ class ConversationViewController: UIViewController,
             .disposed(by: self.disposeBag)
         self.viewModel.conversationCreated
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self, weak swiftUIModel] update in
-                guard let self = self, let swiftUIModel = swiftUIModel, update else { return }
-                swiftUIModel.conversation = self.viewModel.conversation
+            .subscribe { [weak self] update in
+                guard let self = self, update else { return }
+                self.viewModel.swiftUIModel.conversation = self.viewModel.conversation
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
-        let messageListView = MessagesListView(model: swiftUIModel)
+        let messageListView = MessagesListView(model: self.viewModel.swiftUIModel)
         let swiftUIView = UIHostingController(rootView: messageListView)
         addChild(swiftUIView)
         swiftUIView.view.frame = self.view.frame
@@ -209,19 +217,6 @@ class ConversationViewController: UIViewController,
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[weak self] in
             self?.messagesLoadingFinished()
         }
-    }
-
-    @objc
-    private func applicationWillResignActive() {
-        self.viewModel.setIsComposingMsg(isComposing: false)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setupNavTitle(profileImageData: self.viewModel.profileImageData.value,
-                           displayName: self.viewModel.displayName.value,
-                           username: self.viewModel.userName.value)
-        self.updateNavigationBarShadow()
     }
 
     private func importDocument() {
@@ -644,21 +639,6 @@ class ConversationViewController: UIViewController,
         self.viewModel.startAudioCall()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if !self.swiftUIViewAdded {
-            self.addSwiftUIView()
-        }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0
-        self.viewModel.setIsComposingMsg(isComposing: false)
-        self.viewModel.setMessagesAsRead()
-    }
-
     private func messagesLoadingFinished() {
         self.spinnerView.isHidden = true
     }
@@ -669,22 +649,6 @@ class ConversationViewController: UIViewController,
             .subscribe { [weak self] dismiss in
                 guard let self = self, dismiss else { return }
                 _ = self.navigationController?.popViewController(animated: true)
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
-        self.viewModel.showInvitation
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] show in
-                guard let self = self else { return }
-                if show {
-                    if self.view.window?.rootViewController is InvitationViewController {
-                        return
-                    }
-                    self.navigationItem.rightBarButtonItems = []
-                    self.viewModel.openInvitationView(parentView: self)
-                } else {
-                    self.setRightNavigationButtons()
-                }
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)

@@ -46,7 +46,7 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
 }
 
 struct MessagesListView: View {
-    @StateObject var model: MessagesListVM
+    @ObservedObject var model: MessagesListVM
     @SwiftUI.State var showScrollToLatestButton = false
     let scrollReserved = UIScreen.main.bounds.height * 1.5
 
@@ -60,6 +60,7 @@ struct MessagesListView: View {
     @SwiftUI.State private var shouldHideActiveKeyboard = false
     @SwiftUI.State var isMessageBarFocused: Bool = false
     @SwiftUI.State var keyboardHeight: CGFloat = 0
+    @Environment(\.presentationMode) var presentationMode
 
     // reactions
     @SwiftUI.State private var reactionsForMessage: ReactionsContainerModel?
@@ -125,7 +126,42 @@ struct MessagesListView: View {
                         }
                 }
             }
+            if model.isTemporary {
+                Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
+                VStack {
+                    VStack {
+                        Spacer()
+                            .frame(height: 20)
+                        Text(model.name + " is not in your contact list")
+                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        Text("Add to contacts?")
+                    }
+                    .background(Color(UIColor.secondarySystemBackground))
+                    Spacer()
+                        Button("Add to Contacts") {
+                            model.sendRequest()
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                    Spacer()
+                        .frame(height: 20)
+                }
+            }
         }
+        .navigationTitle("Conversation") // Hides the title
+        .navigationBarTitleDisplayMode(.inline) // Makes the navigation bar smaller
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Text("") // Intentionally left blank for minimal appearance
+            }
+        }
+        .navigationBarBackButtonHidden(false)
         .onChange(of: model.screenTapped, perform: { _ in
             /* We cannot use SwiftUI's onTapGesture here because it would
              interfere with the interactions of the buttons in the player view.
