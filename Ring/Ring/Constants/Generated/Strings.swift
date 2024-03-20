@@ -331,6 +331,10 @@ internal enum L10n {
     internal static let startVideoCall = L10n.tr("Localizable", "contactPage.startVideoCall", fallback: "Start Video Call")
   }
   internal enum Conversation {
+    /// Add to Contacts
+    internal static let addToContactsButton = L10n.tr("Localizable", "conversation.addToContactsButton", fallback: "Add to Contacts")
+    /// Add to contacts?
+    internal static let addToContactsLabel = L10n.tr("Localizable", "conversation.addToContactsLabel", fallback: "Add to contacts?")
     /// deleted a message
     internal static let deletedMessage = L10n.tr("Localizable", "conversation.deletedMessage", fallback: "deleted a message")
     /// edited
@@ -351,6 +355,8 @@ internal enum L10n {
     internal static func notContact(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.notContact", String(describing: p1), fallback: "%@ is not in your contact list.")
     }
+    /// is not in your contact list
+    internal static let notContactLabel = L10n.tr("Localizable", "conversation.notContactLabel", fallback: "is not in your contact list")
     /// %@ sent you a request for a conversation.
     internal static func receivedRequest(_ p1: Any) -> String {
       return L10n.tr("Localizable", "conversation.receivedRequest", String(describing: p1), fallback: "%@ sent you a request for a conversation.")
@@ -586,8 +592,18 @@ internal enum L10n {
     internal static let username = L10n.tr("Localizable", "global.username", fallback: "Username")
   }
   internal enum Invitations {
+    /// accepted
+    internal static let accepted = L10n.tr("Localizable", "invitations.accepted", fallback: "accepted")
+    /// banned
+    internal static let banned = L10n.tr("Localizable", "invitations.banned", fallback: "banned")
+    /// Invitations received
+    internal static let list = L10n.tr("Localizable", "invitations.list", fallback: "Invitations received")
     /// No invitations
     internal static let noInvitations = L10n.tr("Localizable", "invitations.noInvitations", fallback: "No invitations")
+    /// pending
+    internal static let pending = L10n.tr("Localizable", "invitations.pending", fallback: "pending")
+    /// refused
+    internal static let refused = L10n.tr("Localizable", "invitations.refused", fallback: "refused")
   }
   internal enum LinkDevice {
     /// An error occurred during the export
@@ -688,12 +704,24 @@ internal enum L10n {
     internal static let disableDonation = L10n.tr("Localizable", "smartlist.disableDonation", fallback: "Not now")
     /// If you enjoy using Jami and believe in our mission, would you make a donation?
     internal static let donationExplanation = L10n.tr("Localizable", "smartlist.donationExplanation", fallback: "If you enjoy using Jami and believe in our mission, would you make a donation?")
+    /// conversation in synchronization
+    internal static let inSynchronization = L10n.tr("Localizable", "smartlist.inSynchronization", fallback: "conversation in synchronization")
+    /// Invitations received
+    internal static let invitationReceived = L10n.tr("Localizable", "smartlist.invitationReceived", fallback: "Invitations received")
     /// Invitations
     internal static let invitations = L10n.tr("Localizable", "smartlist.invitations", fallback: "Invitations")
     /// Invite friends
     internal static let inviteFriends = L10n.tr("Localizable", "smartlist.inviteFriends", fallback: "Invite friends")
+    /// New Contact
+    internal static let newContact = L10n.tr("Localizable", "smartlist.newContact", fallback: "New Contact")
+    /// New Message
+    internal static let newMessage = L10n.tr("Localizable", "smartlist.newMessage", fallback: "New Message")
+    /// New Swarm
+    internal static let newSwarm = L10n.tr("Localizable", "smartlist.newSwarm", fallback: "New Swarm")
     /// No conversations
     internal static let noConversation = L10n.tr("Localizable", "smartlist.noConversation", fallback: "No conversations")
+    /// No conversations match your search
+    internal static let noConversationsFound = L10n.tr("Localizable", "smartlist.noConversationsFound", fallback: "No conversations match your search")
     /// No network connectivity
     internal static let noNetworkConnectivity = L10n.tr("Localizable", "smartlist.noNetworkConnectivity", fallback: "No network connectivity")
     /// Selected contact does not have any number
