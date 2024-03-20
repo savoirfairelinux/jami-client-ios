@@ -62,7 +62,7 @@ class MessageContainerModel: Identifiable {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.stackViewModel.shouldDisplayName = self.shouldDisplayContactInfo
-                self.messageRow.shouldDisplayAavatar = self.shouldDisplayContactInfo
+                self.messageRow.shouldDisplayAvatar = self.shouldDisplayContactInfo
             }
         }
     }
@@ -94,7 +94,7 @@ class MessageContainerModel: Identifiable {
         self.messageRow = MessageRowVM(message: message)
         self.contactViewModel = ContactMessageVM(message: message)
         self.replyTarget = MessageReplyTargetVM(contextMenuState: contextMenuState, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
-        self.reactionsModel = ReactionsContainerModel(message: message)
+        self.reactionsModel = ReactionsContainerModel(message: message, swarmColor: preferencesColor, localJamiId: localJamiId)
     }
 
     func listenerForInfoStateAdded() {
