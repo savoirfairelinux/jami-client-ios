@@ -19,32 +19,63 @@
  */
 
 import SwiftUI
+import SwiftyBeaver
 
 struct ReactionsView: View {
-    @StateObject var model: ReactionsContainerModel
-    @SwiftUI.State private var contentHeight: CGFloat = 100
-    let defailtSize: CGFloat = 300
+
+    let log = SwiftyBeaver.self
+
+    @ObservedObject var model: ReactionsContainerModel
+    @SwiftUI.State private var contentSize = CGSize(width: 300, height: 150)
+    let defaultSizePortrait: CGSize = CGSize(width: 300, height: 600)
+    let defaultSizeLandscape: CGSize = CGSize(width: 600, height: 300)
+    //    let defaultSize: CGSize = CGSize(width: UIDevice.current.orientation.isPortrait ? 300 : 600, height: UIDevice.current.orientation.isPortrait ? 600 : 300)
+
+    func makeReactionRows(numRows: Int) -> some View {
+        let indiciesArr: [Int] = Array(0..<(numRows - 1).advanced(by: 1))
+        return VStack {
+            // divider + given users reaction list
+            ForEach(indiciesArr.indices, id: \.self) { indexIn in
+                if indexIn != 0 {
+                    Rectangle()
+                        .fill(Color.gray)
+                        .opacity(0.65)
+                        .frame(width: 100, height: 0.75)
+                }
+                let rowIn = model.reactionsRow[indexIn]
+                let doButtons = rowIn.jamiId == model.localJamiId
+                ReactionRowView(doButtons: doButtons, model: rowIn)
+            }
+        }
+    }
 
     var body: some View {
         ScrollView {
-            VStack {
-                ForEach(model.reactionsRow) { reaction in
-                    ReactionRowView(reaction: reaction)
-                }
-            }
-            .padding(.vertical)
-            .background(
-                GeometryReader { proxy -> Color in
-                    DispatchQueue.main.async {
-                        self.contentHeight = proxy.size.height
+            makeReactionRows(numRows: model.reactionsRow.count)
+                .padding(.vertical, 4)
+                .padding(.horizontal, 4)
+                .background(
+                    // this will dynamically adjust the height of reactionrowview fullscreen view in order to better show cases in which the number of users who have added reactions is greater than 1
+                    GeometryReader { proxy -> Color in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            withAnimation(.easeOut(duration: 0.15)) {
+                                self.contentSize = proxy.size
+                            }
+                        }
+                        return Color.clear
                     }
-                    return Color.clear
-                }
-            )
+                )
         }
-        .background(Color(UIColor.systemBackground))
-        .cornerRadius(15)
+        .background(
+            ZStack {
+                Color(UIColor.systemBackground)
+                    .opacity(1)
+                VisualEffect(style: .regular, withVibrancy: true)
+                    .opacity(1)
+            }
+        ) // TODO ZStack a gradient with swarm color on this
+        .cornerRadius(16)
         .shadowForConversation()
-        .frame(maxWidth: defailtSize, maxHeight: min(contentHeight, defailtSize), alignment: .center)
+        .frame(maxWidth: contentSize.width, maxHeight: contentSize.height, alignment: .center)
     }
 }

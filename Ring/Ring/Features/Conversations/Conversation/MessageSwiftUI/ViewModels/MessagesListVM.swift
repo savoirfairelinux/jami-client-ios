@@ -206,6 +206,7 @@ class MessagesListVM: ObservableObject {
         self.subscribeForNewMessages()
         self.subscribeMessageUpdates()
         self.subscribeReactions()
+        self.subscribeUserAvatarForLocationSharing()
     }
 
     init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
@@ -223,7 +224,6 @@ class MessagesListVM: ObservableObject {
         self.contextMenuModel.currentJamiAccountId = self.accountService.currentAccount?.jamiId
         self.subscribeLocationEvents()
         self.subscribeSwarmPreferences()
-        self.subscribeUserAvatarForLocationSharing()
         self.subscribeReplyTarget()
         self.subscribeMessagesActions()
         self.subscribeContextMenu()
