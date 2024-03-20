@@ -112,14 +112,15 @@ class ConversationViewController: UIViewController,
 
     private func addSwiftUIView() {
         swiftUIViewAdded = true
-        let transferHelper = TransferHelper(dataTransferService: self.viewModel.dataTransferService,
-                                            conversationViewModel: self.viewModel)
-        let swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
-                                          conversation: self.viewModel.conversation,
-                                          transferHelper: transferHelper,
-                                          bestName: self.viewModel.bestName,
-                                          screenTapped: tapAction.asObservable())
-        swiftUIModel.hideNavigationBar
+      //  guard let swiftUIModel = self.viewModel.swiftUIModel else { return}
+//        let transferHelper = TransferHelper(dataTransferService: self.viewModel.dataTransferService,
+//                                            conversationViewModel: self.viewModel)
+//        let swiftUIModel = MessagesListVM(injectionBag: self.viewModel.injectionBag,
+//                                          conversation: self.viewModel.conversation,
+//                                          transferHelper: transferHelper,
+//                                          bestName: self.viewModel.bestName,
+//                                          screenTapped: tapAction.asObservable())
+        self.viewModel.swiftUIModel.hideNavigationBar
             .subscribe(onNext: { [weak self] (hide) in
                 guard let self = self else { return }
                 if self.navigationItem.rightBarButtonItems?.isEmpty == hide { return }
@@ -139,7 +140,7 @@ class ConversationViewController: UIViewController,
             })
             .disposed(by: self.disposeBag)
 
-        swiftUIModel.messagePanelState
+        self.viewModel.swiftUIModel.messagePanelState
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? MessagePanelState else { return }
                 switch state {
@@ -162,7 +163,7 @@ class ConversationViewController: UIViewController,
                 }
             })
             .disposed(by: self.disposeBag)
-        swiftUIModel.contextMenuState
+        self.viewModel.swiftUIModel.contextMenuState
             .subscribe(onNext: { [weak self] (state) in
                 guard let self = self, let state = state as? ContextMenu else { return }
                 switch state {
@@ -187,13 +188,13 @@ class ConversationViewController: UIViewController,
             .disposed(by: self.disposeBag)
         self.viewModel.conversationCreated
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self, weak swiftUIModel] update in
-                guard let self = self, let swiftUIModel = swiftUIModel, update else { return }
-                swiftUIModel.conversation = self.viewModel.conversation
+            .subscribe { [weak self] update in
+                guard let self = self, update else { return }
+                self.viewModel.swiftUIModel.conversation = self.viewModel.conversation
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
-        let messageListView = MessagesListView(model: swiftUIModel)
+        let messageListView = MessagesListView(model: self.viewModel.swiftUIModel)
         let swiftUIView = UIHostingController(rootView: messageListView)
         addChild(swiftUIView)
         swiftUIView.view.frame = self.view.frame
@@ -669,22 +670,6 @@ class ConversationViewController: UIViewController,
             .subscribe { [weak self] dismiss in
                 guard let self = self, dismiss else { return }
                 _ = self.navigationController?.popViewController(animated: true)
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
-        self.viewModel.showInvitation
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] show in
-                guard let self = self else { return }
-                if show {
-                    if self.view.window?.rootViewController is InvitationViewController {
-                        return
-                    }
-                    self.navigationItem.rightBarButtonItems = []
-                    self.viewModel.openInvitationView(parentView: self)
-                } else {
-                    self.setRightNavigationButtons()
-                }
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
