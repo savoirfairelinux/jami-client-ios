@@ -37,6 +37,27 @@ extension View {
     }
 }
 
+struct InvertedListModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .gesture(DragGesture().onChanged { value in
+                if value.translation.height > 0 {
+                    // Scrolling down (towards newer messages)
+                    print("Scrolling down")
+                } else {
+                    // Scrolling up (towards older messages)
+                    print("Scrolling up")
+                }
+            })
+    }
+}
+
+extension View {
+    func invertedListBehavior() -> some View {
+        self.modifier(InvertedListModifier())
+    }
+}
+
 struct ScrollViewOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat?
 
@@ -45,8 +66,15 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
     }
 }
 
+struct ViewOffsetKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value += nextValue()
+    }
+}
+
 struct MessagesListView: View {
-    @StateObject var model: MessagesListVM
+    @ObservedObject var model: MessagesListVM
     @SwiftUI.State var showScrollToLatestButton = false
     let scrollReserved = UIScreen.main.bounds.height * 1.5
 
@@ -66,79 +94,83 @@ struct MessagesListView: View {
     @SwiftUI.State private var showReactionsView = false
 
     var body: some View {
-        ZStack {
-            ZStack(alignment: .top) {
-                ZStack(alignment: .bottom) {
-                    ZStack(alignment: .bottomTrailing) {
-                        createMessagesStackView()
-                            .flipped()
-                        if !model.atTheBottom {
-                            createScrollToBottmView()
-                        }
-                    }
-                    .layoutPriority(1)
-                    .padding(.bottom, shouldHideActiveKeyboard ? keyboardHeight : messageContainerHeight - 30)
-                    MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
-                        .alignmentGuide(VerticalAlignment.center) { dimensions in
-                            DispatchQueue.main.async {
-                                self.messageContainerHeight = dimensions.height
+        NavigationView {
+            ZStack {
+                ZStack(alignment: .top) {
+                    ZStack(alignment: .bottom) {
+                        ZStack(alignment: .bottomTrailing) {
+                            createMessagesStackView()
+                                .flipped()
+                            if !model.atTheBottom {
+                                createScrollToBottmView()
                             }
-                            return dimensions[VerticalAlignment.center]
                         }
-                }
-                .overlay(contextMenuPresentingState == .shouldPresent && model.contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
-                // hide navigation bar when presenting context menu
-                .onChange(of: contextMenuPresentingState) { newValue in
-                    let shouldHide = newValue == .shouldPresent
-                    model.hideNavigationBar.accept(shouldHide)
-                }
-                // hide context menu overly when device is rotated
-                .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
-                            screenHeight = UIScreen.main.bounds.size.height
-                            contextMenuPresentingState = .dismissed
-                            self.shouldHideActiveKeyboard = false
+                        .layoutPriority(1)
+                        .padding(.bottom, shouldHideActiveKeyboard ? keyboardHeight : messageContainerHeight - 30)
+                        MessagePanelView(model: model.messagePanel, isFocused: $isMessageBarFocused)
+                            .alignmentGuide(VerticalAlignment.center) { dimensions in
+                                DispatchQueue.main.async {
+                                    self.messageContainerHeight = dimensions.height
+                                }
+                                return dimensions[VerticalAlignment.center]
+                            }
+                    }
+                    .overlay(contextMenuPresentingState == .shouldPresent && model.contextMenuModel.presentingMessage != nil ? makeOverlay() : nil)
+                    // hide navigation bar when presenting context menu
+                    .onChange(of: contextMenuPresentingState) { newValue in
+                        let shouldHide = newValue == .shouldPresent
+                        model.hideNavigationBar.accept(shouldHide)
+                    }
+                    // hide context menu overly when device is rotated
+                    .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
+                                screenHeight = UIScreen.main.bounds.size.height
+                                contextMenuPresentingState = .dismissed
+                                self.shouldHideActiveKeyboard = false
+                            }
                         }
                     }
-                }
-                .onAppear(perform: {
-                    screenHeight = UIScreen.main.bounds.size.height
-                })
+                    .onAppear(perform: {
+                        screenHeight = UIScreen.main.bounds.size.height
+                    })
 
-                .onChange(of: contextMenuPresentingState, perform: { state in
-                    contextMenuPresentingStateChanged(state)
-                })
-                .onReceive(Publishers.keyboardHeight) { height in
-                    handleKeyboardHeightChange(height)
+                    .onChange(of: contextMenuPresentingState, perform: { state in
+                        contextMenuPresentingStateChanged(state)
+                    })
+                    .onReceive(Publishers.keyboardHeight) { height in
+                        handleKeyboardHeightChange(height)
+                    }
+                    if model.shouldShowMap {
+                        LocationSharingView(model: model)
+                    }
                 }
-                if model.shouldShowMap {
-                    LocationSharingView(model: model)
+                if showReactionsView {
+                    if let reactions = reactionsForMessage {
+                        ReactionsView(model: reactions)
+                            .onTapGesture {
+                                self.showReactionsView = false
+                                reactionsForMessage = nil
+                            }
+                    }
                 }
             }
-            if showReactionsView {
-                if let reactions = reactionsForMessage {
-                    ReactionsView(model: reactions)
-                        .onTapGesture {
-                            self.showReactionsView = false
-                            reactionsForMessage = nil
-                        }
+            .onChange(of: model.screenTapped, perform: { _ in
+                /* We cannot use SwiftUI's onTapGesture here because it would
+                 interfere with the interactions of the buttons in the player view.
+                 Instead, we are using UITapGestureRecognizer from UIView.
+                 */
+                if model.screenTapped {
+                    showReactionsView = false
+                    reactionsForMessage = nil
+                    hideKeyboard()
+                    // reset to inital state
+                    model.screenTapped = false
                 }
-            }
+            })
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("New Message")
         }
-        .onChange(of: model.screenTapped, perform: { _ in
-            /* We cannot use SwiftUI's onTapGesture here because it would
-             interfere with the interactions of the buttons in the player view.
-             Instead, we are using UITapGestureRecognizer from UIView.
-             */
-            if model.screenTapped {
-                showReactionsView = false
-                reactionsForMessage = nil
-                hideKeyboard()
-                // reset to inital state
-                model.screenTapped = false
-            }
-        })
     }
 
     func makeOverlay() -> some View {
@@ -188,6 +220,7 @@ struct MessagesListView: View {
                     }
                 })
             }
+            .invertedListBehavior()
             .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
                 DispatchQueue.main.async {
                     let scrollOffset = value ?? 0

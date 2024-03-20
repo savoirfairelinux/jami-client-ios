@@ -21,10 +21,15 @@
 import Foundation
 import SwiftUI
 import RxSwift
+import RxRelay
 
 class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImageObserver, NameObserver {
     @Published var avatarImage: UIImage?
-    @Published var content: String
+    @Published var content: String {
+        didSet {
+            self.observableContent.accept(content)
+        }
+    }
     @Published var borderColor: Color
     @Published var backgroundColor: Color
     var disposeBag = DisposeBag()
@@ -33,6 +38,7 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImage
     var inset: CGFloat
     var height: CGFloat
     var styling: MessageStyling = MessageStyling()
+    var observableContent = BehaviorRelay<String>(value: "")
 
     var message: MessageModel
     var username = "" {
@@ -49,6 +55,7 @@ class ContactMessageVM: ObservableObject, MessageAppearanceProtocol, AvatarImage
         self.height = message.type == .initial ? 25 : 45
         self.borderColor = message.type == .initial ? Color(UIColor.clear) : Color(UIColor.secondaryLabel)
         self.content = message.content
+        self.observableContent.accept(message.content)
         if message.type != .initial {
             self.styling.textFont = self.styling.secondaryFont
             self.styling.textColor = self.styling.defaultSecondaryTextColor

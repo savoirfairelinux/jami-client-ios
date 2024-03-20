@@ -96,6 +96,10 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.openConversation(conversationId: conversationId, accountId: accountId, shouldOpenSmarList: shouldOpenSmarList)
                 case .openConversationFromCall(let conversation):
                     self.openConversationFromCall(conversationModel: conversation)
+                    case .presentNewMessage(let model):
+                        self.presentNewMessageVC(model: model)
+                    case .presentRequestsController:
+                        self.openConversationRequestController()
                 default:
                     break
                 }
@@ -110,6 +114,23 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             })
             .disposed(by: self.disposeBag)
         self.callbackPlaceCall()
+    }
+
+    func presentNewMessageVC(model: ConversationsViewModel) {
+        let newMessageViewController = NewMessageVC.instantiate()
+        newMessageViewController.model = model
+        self.present(viewController: newMessageViewController, withStyle: .present, withAnimation: true, disposeBag: self.disposeBag)
+//        if !inCall {
+//            self.present(viewController: dialpadViewController,
+//                         withStyle: .present,
+//                         withAnimation: true,
+//                         withStateable: dialpadViewController.viewModel)
+//            return
+//        }
+//        if let controller = self.navigationViewController.visibleViewController as? CallViewController {
+//            controller.present(dialpadViewController, animated: true, completion: nil)
+//        }
+
     }
 
     func needToOnboard() {
@@ -352,19 +373,22 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             return
         }
         let smartViewController = SmartlistViewController.instantiate(with: self.injectionBag)
-        let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
-        contactRequestsViewController.viewModel.state.take(until: contactRequestsViewController.rx.deallocated)
-            .subscribe(onNext: { [weak self] (state) in
-                self?.stateSubject.onNext(state)
-            })
-            .disposed(by: self.disposeBag)
-        smartViewController.addContactRequestVC(controller: contactRequestsViewController)
         self.present(viewController: smartViewController, withStyle: .show, withAnimation: true, withStateable: smartViewController.viewModel)
         smartListViewController = smartViewController
     }
 
     func setNavigationController(controller: UINavigationController) {
         navigationViewController = controller
+    }
+
+    func openConversationRequestController() {
+        let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
+        contactRequestsViewController.viewModel.state.take(until: contactRequestsViewController.rx.deallocated)
+            .subscribe(onNext: { [weak self] (state) in
+                self?.stateSubject.onNext(state)
+            })
+            .disposed(by: self.disposeBag)
+        self.present(viewController: contactRequestsViewController, withStyle: .present, withAnimation: true, withStateable: contactRequestsViewController.viewModel)
     }
 
     func getConversationViewModelForParticipant(jamiId: String) -> ConversationViewModel? {

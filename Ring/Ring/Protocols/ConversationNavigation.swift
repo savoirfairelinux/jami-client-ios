@@ -26,6 +26,8 @@ enum ConversationState: State {
     case startCall(contactRingId: String, userName: String)
     case startAudioCall(contactRingId: String, userName: String)
     case conversationDetail(conversationViewModel: ConversationViewModel)
+    case presentNewMessage(model: ConversationsViewModel)
+    case presentRequestsController
     case contactDetail(conversationViewModel: ConversationModel)
     case qrCode
     case createSwarm
