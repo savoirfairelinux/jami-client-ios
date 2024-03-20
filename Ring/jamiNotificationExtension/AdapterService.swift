@@ -108,6 +108,10 @@ class AdapterService {
     }
 
     func decrypt(keyPath: String, accountId: String, messagesPath: String, value: [String: Any]) -> PeerConnectionRequestType {
+        if self.adapter == nil {
+            print("$$$$$$$$$$$ OOPS")
+            return .unknown
+        }
         let result = adapter.decrypt(keyPath, accountId: accountId, treated: messagesPath, value: value)
         guard let peerId = result?.keys.first,
               let type = result?.values.first else {
@@ -116,6 +120,7 @@ class AdapterService {
          Extracts the conversation ID from type formatted as "application/im-gitmessage-id/conversationId".
          This type is used for connections requests for messages.
          */
+        print("$$$$$$$$$$ received notification of type \(type)")
         if type.contains("application/im-gitmessage-id") {
             let components = type.components(separatedBy: "/")
             if let last = components.last, components.count > 2 {
