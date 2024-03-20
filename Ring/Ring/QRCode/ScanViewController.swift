@@ -32,6 +32,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
     @IBOutlet weak var bottomMarginTitleConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomCloseButtonConstraint: NSLayoutConstraint!
     let disposeBag = DisposeBag()
+    var onCodeScanned: ((String) -> Void)?
 
     // MARK: variables
     let systemSoundId: SystemSoundID = 1016
@@ -180,8 +181,7 @@ class ScanViewController: UIViewController, StoryboardBased, AVCaptureMetadataOu
             if jamiId.isSHA1() {
                 AudioServicesPlayAlertSound(systemSoundId)
                 print("jamiId : " + jamiId)
-                self.dismiss(animated: true, completion: nil)
-                self.viewModel.openConversation(jamiId: jamiId)
+                onCodeScanned?(jamiId)
                 self.scannedQrCode = true
             } else {
                 let alert = UIAlertController(title: L10n.Scan.badQrCode, message: "", preferredStyle: .alert)

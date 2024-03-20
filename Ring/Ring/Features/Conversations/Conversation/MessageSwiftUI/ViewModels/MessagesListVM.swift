@@ -117,11 +117,16 @@ class MessagesListVM: ObservableObject {
     @Published var shouldShowMap: Bool = false
     @Published var coordinates = [LocationSharingAnnotation]()
     @Published var locationSharingiewModel: LocationSharingViewModel = LocationSharingViewModel()
+    @Published var isTemporary: Bool = false
+    @Published var name: String = ""
     private let log = SwiftyBeaver.self
     var contactAvatar: UIImage = UIImage()
     var currentAccountAvatar: UIImage = UIImage()
     var myContactsLocation: CLLocationCoordinate2D?
     var myCoordinate: CLLocationCoordinate2D?
+    // jams
+    var jamsAvatarData: Data?
+    var jamsName: String = ""
 
     var accountService: AccountsService
     var profileService: ProfilesService
@@ -130,6 +135,7 @@ class MessagesListVM: ObservableObject {
     var conversationService: ConversationsService
     var contactsService: ContactsService
     var nameService: NameService
+    var requestsService: RequestsService
     var transferHelper: TransferHelper
     var messagePanel: MessagePanelVM
 
@@ -143,6 +149,10 @@ class MessagesListVM: ObservableObject {
     lazy var messagePanelState: Observable<State> = {
         return self.messagePanelStateSubject.asObservable()
     }()
+
+    var lastMessage = BehaviorRelay<String>(value: "")
+    var lastMessageDate = BehaviorRelay<String>(value: "")
+    var lastMessageDisposeBag = DisposeBag()
 
     var hideNavigationBar = BehaviorRelay(value: false)
     let disposeBag = DisposeBag()
@@ -173,7 +183,7 @@ class MessagesListVM: ObservableObject {
             }
         }
     }
-    var conversation: ConversationModel {
+    var conversation: ConversationModel! {
         didSet {
             messagesDisposeBag = DisposeBag()
             conversation.newMessages.share()
@@ -219,12 +229,6 @@ class MessagesListVM: ObservableObject {
                 }
                 .disposed(by: self.messagesDisposeBag)
             self.updateLastDisplayed()
-        }
-    }
-
-    init (injectionBag: InjectionBag, conversation: ConversationModel, transferHelper: TransferHelper, bestName: Observable<String>, screenTapped: Observable<Bool>) {
-        defer {
-            self.conversation = conversation
             self.subscribeSwarmPreferences()
             self.updateColorPreference()
             self.subscribeUserAvatarForLocationSharing()
@@ -233,6 +237,10 @@ class MessagesListVM: ObservableObject {
             self.subscribeMessageUpdates()
             self.subscribeMessagesActions()
         }
+    }
+
+    init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
+        self.requestsService = injectionBag.requestsService
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
         self.profileService = injectionBag.profileService
@@ -242,12 +250,40 @@ class MessagesListVM: ObservableObject {
         self.nameService = injectionBag.nameService
         self.transferHelper = transferHelper
         self.locationSharingService = injectionBag.locationSharingService
-        self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject, bestName: bestName)
+        self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject)
         self.subscribeLocationEvents()
+    }
+
+    func subscribeScreenTapped(screenTapped: Observable<Bool>) {
         screenTapped
             .subscribe(onNext: { [weak self] event in
                 guard let self = self else { return }
                 self.screenTapped = event
+            })
+            .disposed(by: self.disposeBag)
+    }
+
+    func subscribeBestName(bestName: Observable<String>) {
+        self.messagePanel.subscribeBestName(bestName: bestName)
+    }
+
+    func sendRequest() {
+        guard let conversation = self.conversation,
+        let jamiId = conversation.getParticipants().first?.jamiId else { return }
+        var avatar: String?
+        if let avatarData = self.jamsAvatarData {
+            avatar = String(data: avatarData, encoding: .utf8)
+        }
+        self.requestsService
+            .sendContactRequest(to: jamiId,
+                                withAccountId: conversation.accountId,
+                                avatar: avatar,
+                                alias: jamsName)
+            .subscribe(onCompleted: { [weak self] in
+                self?.isTemporary = false
+                self?.log.info("contact request sent")
+            }, onError: { [weak self] (_) in
+                self?.log.error("error sending contact request")
             })
             .disposed(by: self.disposeBag)
     }
@@ -455,8 +491,28 @@ class MessagesListVM: ObservableObject {
         if newMessage.isReply() {
             self.receiveReply(newMessage: container, fromHistory: fromHistory)
         }
+
+        if self.messagesModels.count > 1 && fromHistory {
+            return true
+        }
+        lastMessageDisposeBag = DisposeBag()
+        self.lastMessageDate.accept(newMessage.receivedDate.conversationTimestamp())
+        if newMessage.type != .contact {
+            self.lastMessage.accept(newMessage.content)
+        } else {
+            container.contactViewModel.observableContent
+                .startWith( container.contactViewModel.observableContent.value)
+                .subscribe { [weak self] content in
+                    guard let self = self else { return }
+                    self.lastMessage.accept(content)
+                } onError: { _ in
+                }
+                .disposed(by: lastMessageDisposeBag)
+        }
         return true
     }
+
+
 
     func updateLastDelivered(message: MessageContainerModel) {
         guard message.message.isDelivered() else { return }
