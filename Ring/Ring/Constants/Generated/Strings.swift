@@ -586,8 +586,18 @@ internal enum L10n {
     internal static let username = L10n.tr("Localizable", "global.username", fallback: "Username")
   }
   internal enum Invitations {
+    /// accepted
+    internal static let accepted = L10n.tr("Localizable", "invitations.accepted", fallback: "accepted")
+    /// banned
+    internal static let banned = L10n.tr("Localizable", "invitations.banned", fallback: "banned")
+    /// Invitations received
+    internal static let list = L10n.tr("Localizable", "invitations.list", fallback: "Invitations received")
     /// No invitations
     internal static let noInvitations = L10n.tr("Localizable", "invitations.noInvitations", fallback: "No invitations")
+    /// pending
+    internal static let pending = L10n.tr("Localizable", "invitations.pending", fallback: "pending")
+    /// refused
+    internal static let refused = L10n.tr("Localizable", "invitations.refused", fallback: "refused")
   }
   internal enum LinkDevice {
     /// An error occurred during the export
@@ -688,6 +698,8 @@ internal enum L10n {
     internal static let disableDonation = L10n.tr("Localizable", "smartlist.disableDonation", fallback: "Not now")
     /// If you enjoy using Jami and believe in our mission, would you make a donation?
     internal static let donationExplanation = L10n.tr("Localizable", "smartlist.donationExplanation", fallback: "If you enjoy using Jami and believe in our mission, would you make a donation?")
+    /// Invitations received
+    internal static let invitationReceived = L10n.tr("Localizable", "smartlist.invitationReceived", fallback: "Invitations received")
     /// Invitations
     internal static let invitations = L10n.tr("Localizable", "smartlist.invitations", fallback: "Invitations")
     /// Invite friends

@@ -26,6 +26,7 @@ enum ConversationState: State {
     case startCall(contactRingId: String, userName: String)
     case startAudioCall(contactRingId: String, userName: String)
     case conversationDetail(conversationViewModel: ConversationViewModel)
+    case presentRequestsController
     case contactDetail(conversationViewModel: ConversationModel)
     case qrCode
     case createSwarm
@@ -217,7 +218,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         conversationViewController.viewModel = conversationViewModel
         self.present(viewController: conversationViewController,
                      withStyle: .show,
-                     withAnimation: true,
+                     withAnimation: false,
                      withStateable: conversationViewController.viewModel,
                      lockWhilePresenting: VCType.conversation.rawValue)
     }
