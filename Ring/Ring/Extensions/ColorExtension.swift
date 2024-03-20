@@ -86,3 +86,13 @@ extension Color: RawRepresentable {
         }
     }
 }
+
+extension Color {
+    static let jamiPrimaryControl = Color("jamiPrimaryControl")
+    static let jamiSecondaryControl = Color("jamiSecondaryControl")
+    static let jamiTertiaryControl = Color("jamiTertiaryControl")
+    static let jamiRequestsColor = Color("jamiRequestsColor")
+    static let jamiColor = Color("jami")
+    static let availablePresenceColor = Color(UIColor.availablePresenceColor)
+    static let onlinePresenceColor = Color(UIColor.onlinePresenceColor)
+}

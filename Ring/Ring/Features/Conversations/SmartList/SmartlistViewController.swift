@@ -28,6 +28,7 @@ import Reusable
 import SwiftyBeaver
 import ContactsUI
 import QuartzCore
+import SwiftUI
 
 // Constants
 struct SmartlistConstants {
@@ -41,268 +42,162 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     private let log = SwiftyBeaver.self
 
     // MARK: outlets
-    @IBOutlet weak var conversationsTableView: UITableView!
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var noConversationLabel: UILabel!
-    @IBOutlet weak var networkAlertLabel: UILabel!
-    @IBOutlet weak var cellularAlertLabel: UILabel!
-    @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var widgetsTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var networkAlertView: UIView!
-    @IBOutlet weak var searchView: JamiSearchView!
-    @IBOutlet weak var donationBaner: UIView!
-    @IBOutlet weak var donateButton: UIButton!
-    @IBOutlet weak var disableDonationButton: UIButton!
-    @IBOutlet weak var donationLabel: UILabel!
+//    @IBOutlet weak var conversationsTableView: UITableView!
+//    @IBOutlet weak var containerView: UIView!
+//    @IBOutlet weak var noConversationLabel: UILabel!
+//    @IBOutlet weak var networkAlertLabel: UILabel!
+//    @IBOutlet weak var cellularAlertLabel: UILabel!
+//    @IBOutlet weak var settingsButton: UIButton!
+//    @IBOutlet weak var widgetsTopConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var networkAlertView: UIView!
+//    @IBOutlet weak var donationBaner: UIView!
+//    @IBOutlet weak var donateButton: UIButton!
+//    @IBOutlet weak var disableDonationButton: UIButton!
+//    @IBOutlet weak var donationLabel: UILabel!
 
     // account selection
-    private var accounPicker = UIPickerView()
-    private let accountPickerTextView = UITextField(frame: CGRect.zero)
-    private let accountsAdapter = AccountPickerAdapter()
-    private var accountsDismissTapRecognizer: UITapGestureRecognizer!
+//    private var accounPicker = UIPickerView()
+//    private let accountPickerTextView = UITextField(frame: CGRect.zero)
+//    private let accountsAdapter = AccountPickerAdapter()
+//    private var accountsDismissTapRecognizer: UITapGestureRecognizer!
 
-    private var selectedSegmentIndex = BehaviorRelay<Int>(value: 0)
     var viewModel: SmartlistViewModel!
     private let disposeBag = DisposeBag()
 
     private let contactPicker = CNContactPickerViewController()
-    private var headerView: SmartListHeaderView?
 
-    private var contactRequestVC: ContactRequestsViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupDataSources()
-        self.setupTableView()
-        self.setupUI()
+       // self.setupUI()
         self.applyL10n()
-        self.configureNavigationBar()
-        self.confugureAccountPicker()
-        accountsDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        self.setupSearchBar()
-        searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: false, delegate: viewModel)
-        if !self.viewModel.isSipAccount() {
-            self.setUpContactRequest()
-        }
+       // self.configureNavigationBar()
+       // self.confugureAccountPicker()
+      //  accountsDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let contentView = CustomHostingController(rootView: SmartListContainer(model: viewModel.conversationsModel))
+        addChild(contentView)
+        view.addSubview(contentView.view)
+        contentView.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        contentView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        contentView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.viewModel.closeAllPlayers()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        configureCustomNavBar(usingCustomSize: true)
         self.viewModel.updateDonationBunnerVisiblity()
+       self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        configureCustomNavBar(usingCustomSize: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    func setupTableViewHeader(for tableView: UITableView) {
-        guard let headerView = loadHeaderView() else { return }
-
-        setupHeaderViewConstraints(headerView, in: tableView)
-        bindSegmentControlActions(headerView)
-        bindViewModelUpdates(to: headerView, in: tableView)
-    }
-
-    private func loadHeaderView() -> SmartListHeaderView? {
-        let nib = UINib(nibName: "SmartListHeaderView", bundle: nil)
-        return nib.instantiate(withOwner: nil, options: nil).first as? SmartListHeaderView
-    }
-
-    private func setupHeaderViewConstraints(_ headerView: SmartListHeaderView, in tableView: UITableView) {
-        tableView.tableHeaderView = headerView
-        NSLayoutConstraint.activate([
-            headerView.widthAnchor.constraint(equalTo: tableView.widthAnchor, constant: -30),
-            headerView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor)
-        ])
-    }
-
-    private func bindSegmentControlActions(_ headerView: SmartListHeaderView) {
-        headerView.conversationsSegmentControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
-
-        self.selectedSegmentIndex.subscribe { [weak headerView] index in
-            headerView?.conversationsSegmentControl.selectedSegmentIndex = index
-        }
-        .disposed(by: self.disposeBag)
-    }
-
-    private func bindViewModelUpdates(to headerView: SmartListHeaderView, in tableView: UITableView) {
-        self.viewModel.updateSegmentControl
-            .subscribe { [weak headerView, weak tableView, weak self] (messages, requests) in
-                guard let headerView = headerView, let tableView = tableView else { return }
-
-                let height: CGFloat = requests == 0 ? 0 : 32
-                var frame = headerView.frame
-                frame.size.height = height
-                headerView.frame = frame
-
-                headerView.setUnread(messages: messages, requests: requests)
-
-                if requests == 0 {
-                    headerView.conversationsSegmentControl.selectedSegmentIndex = 0
-                    self?.navigationItem.title = L10n.Smartlist.conversations
-                }
-
-                // Resetting the header after adjusting its frame.
-                tableView.tableHeaderView = headerView
-            }
-            .disposed(by: self.disposeBag)
-    }
-
-    @objc
-    func segmentAction(_ segmentedControl: UISegmentedControl) {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            contactRequestVC?.view.isHidden = true
-            searchView.showSearchResult = true
-            self.navigationItem.title = L10n.Smartlist.conversations
-        case 1:
-            contactRequestVC?.view.isHidden = false
-            searchView.showSearchResult = false
-            self.navigationItem.title = L10n.Smartlist.invitations
-        default:
-            break
-        }
-        self.selectedSegmentIndex.accept(segmentedControl.selectedSegmentIndex)
-    }
-
-    func addContactRequestVC(controller: ContactRequestsViewController) {
-        contactRequestVC = controller
-    }
-
-    private func setUpContactRequest() {
-        guard let controller = contactRequestVC else { return }
-        addChild(controller)
-
-        // make sure that the child view controller's view is the right size
-        controller.view.frame = containerView.bounds
-        containerView.addSubview(controller.view)
-
-        // you must call this at the end per Apple's documentation
-        controller.didMove(toParent: self)
-        controller.view.isHidden = true
-        self.setupTableViewHeader(for: controller.tableView)
-        self.searchView.searchBar.rx.text.orEmpty
-            .debounce(Durations.textFieldThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
-            .bind(to: (self.contactRequestVC?.viewModel.filter)!)
-            .disposed(by: disposeBag)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+       // self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     @objc
     func dismissKeyboard() {
-        accountPickerTextView.resignFirstResponder()
-        view.removeGestureRecognizer(accountsDismissTapRecognizer)
-    }
-
-    private func configureCustomNavBar(usingCustomSize: Bool) {
-        guard let customNavBar = navigationController?.navigationBar as? SmartListNavigationBar else { return }
-
-        if usingCustomSize {
-            self.updateSearchBarIfActive()
-            customNavBar.usingCustomSize = true
-        } else {
-            customNavBar.removeTopView()
-            customNavBar.usingCustomSize = false
-        }
+//        accountPickerTextView.resignFirstResponder()
+//        view.removeGestureRecognizer(accountsDismissTapRecognizer)
     }
 
     private func applyL10n() {
-        self.navigationItem.title = L10n.Smartlist.conversations
-        self.noConversationLabel.text = L10n.Smartlist.noConversation
-        self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
-        self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
-
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.jamiButtonDark,
-            .font: UIFont.systemFont(ofSize: 14)]
-        let disableDonationTitle = NSAttributedString(string: L10n.Smartlist.disableDonation, attributes: attributes)
-        let donateTitle = NSAttributedString(string: L10n.Global.donate, attributes: attributes)
-
-        self.disableDonationButton.setAttributedTitle(disableDonationTitle, for: .normal)
-        self.donateButton.setAttributedTitle(donateTitle, for: .normal)
-        self.donationLabel.text = L10n.Smartlist.donationExplanation
+//        self.navigationItem.title = L10n.Smartlist.conversations
+//        self.noConversationLabel.text = L10n.Smartlist.noConversation
+//        self.networkAlertLabel.text = L10n.Smartlist.noNetworkConnectivity
+//        self.cellularAlertLabel.text = L10n.Smartlist.cellularAccess
+//
+//        let attributes: [NSAttributedString.Key: Any] = [
+//            .foregroundColor: UIColor.jamiButtonDark,
+//            .font: UIFont.systemFont(ofSize: 14)]
+//        let disableDonationTitle = NSAttributedString(string: L10n.Smartlist.disableDonation, attributes: attributes)
+//        let donateTitle = NSAttributedString(string: L10n.Global.donate, attributes: attributes)
+//
+//        self.disableDonationButton.setAttributedTitle(disableDonationTitle, for: .normal)
+//        self.donateButton.setAttributedTitle(donateTitle, for: .normal)
+//        self.donationLabel.text = L10n.Smartlist.donationExplanation
     }
 
     private func setupUI() {
-        self.viewModel.hideNoConversationsMessage
-            .bind(to: self.noConversationLabel.rx.isHidden)
-            .disposed(by: disposeBag)
-        self.viewModel.connectionState
-            .observe(on: MainScheduler.instance)
-            .startWith(self.viewModel.networkConnectionState())
-            .subscribe(onNext: { [weak self] _ in
-                self?.updateNetworkUI()
-            })
-            .disposed(by: self.disposeBag)
-
-        self.settingsButton.backgroundColor = nil
-        self.settingsButton.setTitle("", for: .normal)
-        self.settingsButton.rx.tap
-            .subscribe(onNext: { _ in
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    UIApplication.shared.open(url, completionHandler: nil)
-                }
-            })
-            .disposed(by: self.disposeBag)
-        self.viewModel.currentAccountChanged
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.searchBarNotActive()
-            })
-            .disposed(by: disposeBag)
-        // create account button
-        let accountButton = UIButton(type: .custom)
-        self.viewModel.profileImage.bind(to: accountButton.rx.image(for: .normal))
-            .disposed(by: disposeBag)
-        accountButton.roundedCorners = true
-        accountButton.clipsToBounds = true
-        accountButton.imageView?.contentMode = .scaleAspectFill
-        accountButton.cornerRadius = smartListAccountSize * 0.5
-        accountButton.frame = CGRect(x: 0, y: 0, width: smartListAccountSize, height: smartListAccountSize)
-        accountButton.imageEdgeInsets = UIEdgeInsets(top: -smartListAccountMargin, left: -smartListAccountMargin, bottom: -smartListAccountMargin, right: -smartListAccountMargin)
-        let accountButtonItem = UIBarButtonItem(customView: accountButton)
-        accountButtonItem
-            .customView?
-            .translatesAutoresizingMaskIntoConstraints = false
-        accountButtonItem.customView?
-            .heightAnchor
-            .constraint(equalToConstant: smartListAccountSize).isActive = true
-        accountButtonItem.customView?
-            .widthAnchor
-            .constraint(equalToConstant: smartListAccountSize).isActive = true
-        accountButton.rx.tap
-            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.openAccountsList()
-            })
-            .disposed(by: self.disposeBag)
-        self.navigationItem.leftBarButtonItem = accountButtonItem
-        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        space.width = 20
-        self.navigationItem.rightBarButtonItems = [createSearchButton(), space, createMenuButton()]
-        self.conversationsTableView.tableFooterView = UIView()
-        self.viewModel.donationBannerVisible
-            .observe(on: MainScheduler.instance)
-            .startWith(self.viewModel.donationBannerVisible.value)
-            .map { !$0 }
-            .bind(to: self.donationBaner.rx.isHidden)
-            .disposed(by: disposeBag)
-        self.donateButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                SharedActionsPresenter.openDonationLink()
-                self.viewModel.temporaryDisableDonationCampaign()
-            })
-            .disposed(by: self.disposeBag)
-        self.disableDonationButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                self.viewModel.temporaryDisableDonationCampaign()
-            })
-            .disposed(by: self.disposeBag)
+//        self.viewModel.connectionState
+//            .observe(on: MainScheduler.instance)
+//            .startWith(self.viewModel.networkConnectionState())
+//            .subscribe(onNext: { [weak self] _ in
+//                self?.updateNetworkUI()
+//            })
+//            .disposed(by: self.disposeBag)
+//
+//        self.settingsButton.backgroundColor = nil
+//        self.settingsButton.setTitle("", for: .normal)
+//        self.settingsButton.rx.tap
+//            .subscribe(onNext: { _ in
+//                if let url = URL(string: UIApplication.openSettingsURLString) {
+//                    UIApplication.shared.open(url, completionHandler: nil)
+//                }
+//            })
+//            .disposed(by: self.disposeBag)
+//        // create account button
+//        let accountButton = UIButton(type: .custom)
+////        self.viewModel.profileImage.bind(to: accountButton.rx.image(for: .normal))
+////            .disposed(by: disposeBag)
+//        accountButton.roundedCorners = true
+//        accountButton.clipsToBounds = true
+//        accountButton.imageView?.contentMode = .scaleAspectFill
+//        accountButton.cornerRadius = smartListAccountSize * 0.5
+//        accountButton.frame = CGRect(x: 0, y: 0, width: smartListAccountSize, height: smartListAccountSize)
+//        accountButton.imageEdgeInsets = UIEdgeInsets(top: -smartListAccountMargin, left: -smartListAccountMargin, bottom: -smartListAccountMargin, right: -smartListAccountMargin)
+//        let accountButtonItem = UIBarButtonItem(customView: accountButton)
+//        accountButtonItem
+//            .customView?
+//            .translatesAutoresizingMaskIntoConstraints = false
+//        accountButtonItem.customView?
+//            .heightAnchor
+//            .constraint(equalToConstant: smartListAccountSize).isActive = true
+//        accountButtonItem.customView?
+//            .widthAnchor
+//            .constraint(equalToConstant: smartListAccountSize).isActive = true
+//        accountButton.rx.tap
+//            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] in
+//                self?.openAccountsList()
+//            })
+//            .disposed(by: self.disposeBag)
+//        self.navigationItem.leftBarButtonItem = accountButtonItem
+//        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+//        space.width = 20
+//        self.navigationItem.rightBarButtonItems = [createSearchButton(), space, createMenuButton()]
+//        self.conversationsTableView.tableFooterView = UIView()
+//        self.viewModel.donationBannerVisible
+//            .observe(on: MainScheduler.instance)
+//            .startWith(self.viewModel.donationBannerVisible.value)
+//            .map { !$0 }
+//            .bind(to: self.donationBaner.rx.isHidden)
+//            .disposed(by: disposeBag)
+//        self.donateButton.rx.tap
+//            .subscribe(onNext: { [weak self] _ in
+//                guard let self = self else { return }
+//                SharedActionsPresenter.openDonationLink()
+//                self.viewModel.temporaryDisableDonationCampaign()
+//            })
+//            .disposed(by: self.disposeBag)
+//        self.disableDonationButton.rx.tap
+//            .subscribe(onNext: { [weak self] _ in
+//                guard let self = self else { return }
+//                self.viewModel.temporaryDisableDonationCampaign()
+//            })
+//            .disposed(by: self.disposeBag)
     }
 
     private func createSearchButton() -> UIBarButtonItem {
@@ -311,11 +206,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         generalSettingsButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         generalSettingsButton.setImage(imageSettings, for: .normal)
         generalSettingsButton.tintColor = .jamiButtonDark
-        generalSettingsButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.searchController.isActive = true
-            })
-            .disposed(by: self.disposeBag)
         return UIBarButtonItem(customView: generalSettingsButton)
     }
 
@@ -346,206 +236,93 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func confugureAccountPicker() {
-        accountPickerTextView.inputView = accounPicker
-        view.addSubview(accountPickerTextView)
-
-        accounPicker.backgroundColor = .jamiBackgroundSecondaryColor
-        self.viewModel.accounts
-            .observe(on: MainScheduler.instance)
-            .bind(to: accounPicker.rx.items(adapter: accountsAdapter))
-            .disposed(by: disposeBag)
-        if let account = self.viewModel.currentAccount,
-           let row = accountsAdapter.rowForAccountId(account: account) {
-            accounPicker.selectRow(row, inComponent: 0, animated: true)
-        }
-        self.viewModel.currentAccountChanged
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] currentAccount in
-                guard let self = self else { return }
-                if let account = currentAccount,
-                   let row = self.accountsAdapter.rowForAccountId(account: account) {
-                    self.accounPicker.selectRow(row, inComponent: 0, animated: true)
-                }
-            })
-            .disposed(by: disposeBag)
-        accounPicker.rx.modelSelected(AccountItem.self)
-            .subscribe(onNext: { [weak self] model in
-                let account = model[0].account
-                self?.viewModel.changeCurrentAccount(accountId: account.id)
-            })
-            .disposed(by: disposeBag)
-        let accountsLabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.view.frame.width, height: 40))
-        accountsLabel.text = L10n.Smartlist.accountsTitle
-        accountsLabel.font = UIFont.systemFont(ofSize: 25, weight: .light)
-        accountsLabel.textColor = .jamiSecondary
-        accountsLabel.textAlignment = .center
-        let addAccountButton = UIButton(type: .custom)
-        addAccountButton.frame = CGRect(x: 0, y: 0, width: 250, height: 40)
-        addAccountButton.contentHorizontalAlignment = .right
-        addAccountButton.setTitle(L10n.Smartlist.addAccountButton, for: .normal)
-        addAccountButton.setTitleColor(.jamiButtonDark, for: .normal)
-        addAccountButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 23)
-
-        // Enable auto-shrink
-        addAccountButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        addAccountButton.titleLabel?.minimumScaleFactor = 0.5 // The minimum scale factor for the font size
-        addAccountButton.sizeToFit()
-
-        let flexibleBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
-        let addBarButton = UIBarButtonItem(customView: addAccountButton)
-        let toolbar = UIToolbar()
-        toolbar.barTintColor = .jamiBackgroundSecondaryColor
-        toolbar.isTranslucent = false
-
-        toolbar.sizeToFit()
-        toolbar.center = CGPoint(x: self.view.frame.width * 0.5, y: 200)
-
-        toolbar.items = [flexibleBarButton, addBarButton]
-        accountPickerTextView.inputAccessoryView = toolbar
-        addAccountButton.rx.tap
-            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.startAccountCreation()
-            })
-            .disposed(by: self.disposeBag)
-    }
-
-    func setupDataSources() {
-        // Configure cells closure for the datasources
-        let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item)
-            -> UITableViewCell = {
-                (   _: TableViewSectionedDataSource<ConversationSection>,
-                    tableView: UITableView,
-                    indexPath: IndexPath,
-                    conversationItem: ConversationSection.Item) in
-
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
-                cell.configureFromItem(conversationItem)
-                return cell
-            }
-
-        // Create DataSources for conversations and filtered conversations
-        let conversationsDataSource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
-        // Allows to delete
-        conversationsDataSource.canEditRowAtIndexPath = { _, _  in
-            return true
-        }
-
-        // Bind TableViews to DataSources
-        self.viewModel.conversations
-            .bind(to: self.conversationsTableView.rx.items(dataSource: conversationsDataSource))
-            .disposed(by: disposeBag)
-    }
-
-    func setupTableView() {
-        // Set row height
-        self.conversationsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
-
-        // Register Cell
-        self.conversationsTableView.register(cellType: SmartListCell.self)
-        // Deselect the rows
-        self.conversationsTableView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                self?.conversationsTableView.deselectRow(at: indexPath, animated: true)
-            })
-            .disposed(by: disposeBag)
-
-        self.conversationsTableView.rx.setDelegate(self).disposed(by: disposeBag)
-
-        // table header
-        setupTableViewHeader(for: self.conversationsTableView)
-    }
-
-    let searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.definesPresentationContext = true
-        searchController.hidesNavigationBarDuringPresentation = true
-        return searchController
-    }()
-
-    func setupSearchBar() {
-        searchController.delegate = self
-        let navBar = SmartListNavigationBar()
-        self.navigationController?.setValue(navBar, forKey: "navigationBar")
-
-        navigationItem.searchController = searchController
-        if #available(iOS 16.0, *) {
-            navigationItem.preferredSearchBarPlacement = .stacked
-        }
-
-        navigationItem.hidesSearchBarWhenScrolling = false
-        searchView.searchBar = searchController.searchBar
-        self.searchView.editSearch
-            .subscribe(onNext: {[weak self] (editing) in
-                self?.viewModel.searching.onNext(editing)
-            })
-            .disposed(by: disposeBag)
-    }
-
-    func willPresentSearchController(_ searchController: UISearchController) {
-        self.searchBarActive()
-    }
-
-    func updateSearchBarIfActive() {
-        if searchController.isActive {
-            searchBarActive()
-        }
+//        accountPickerTextView.inputView = accounPicker
+//        view.addSubview(accountPickerTextView)
+//
+//        accounPicker.backgroundColor = .jamiBackgroundSecondaryColor
+//        self.viewModel.accounts
+//            .observe(on: MainScheduler.instance)
+//            .bind(to: accounPicker.rx.items(adapter: accountsAdapter))
+//            .disposed(by: disposeBag)
+//        if let account = self.viewModel.currentAccount,
+//           let row = accountsAdapter.rowForAccountId(account: account) {
+//            accounPicker.selectRow(row, inComponent: 0, animated: true)
+//        }
+//        self.viewModel.currentAccountChanged
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] currentAccount in
+//                guard let self = self else { return }
+//                if let account = currentAccount,
+//                   let row = self.accountsAdapter.rowForAccountId(account: account) {
+//                    self.accounPicker.selectRow(row, inComponent: 0, animated: true)
+//                }
+//            })
+//            .disposed(by: disposeBag)
+//        accounPicker.rx.modelSelected(AccountItem.self)
+//            .subscribe(onNext: { [weak self] model in
+//                let account = model[0].account
+//                self?.viewModel.changeCurrentAccount(accountId: account.id)
+//            })
+//            .disposed(by: disposeBag)
+//        let accountsLabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.view.frame.width, height: 40))
+//        accountsLabel.text = L10n.Smartlist.accountsTitle
+//        accountsLabel.font = UIFont.systemFont(ofSize: 25, weight: .light)
+//        accountsLabel.textColor = .jamiSecondary
+//        accountsLabel.textAlignment = .center
+//        let addAccountButton = UIButton(type: .custom)
+//        addAccountButton.frame = CGRect(x: 0, y: 0, width: 250, height: 40)
+//        addAccountButton.contentHorizontalAlignment = .right
+//        addAccountButton.setTitle(L10n.Smartlist.addAccountButton, for: .normal)
+//        addAccountButton.setTitleColor(.jamiButtonDark, for: .normal)
+//        addAccountButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 23)
+//
+//        // Enable auto-shrink
+//        addAccountButton.titleLabel?.adjustsFontSizeToFitWidth = true
+//        addAccountButton.titleLabel?.minimumScaleFactor = 0.5 // The minimum scale factor for the font size
+//        addAccountButton.sizeToFit()
+//
+//        let flexibleBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+//        let addBarButton = UIBarButtonItem(customView: addAccountButton)
+//        let toolbar = UIToolbar()
+//        toolbar.barTintColor = .jamiBackgroundSecondaryColor
+//        toolbar.isTranslucent = false
+//
+//        toolbar.sizeToFit()
+//        toolbar.center = CGPoint(x: self.view.frame.width * 0.5, y: 200)
+//
+//        toolbar.items = [flexibleBarButton, addBarButton]
+//        accountPickerTextView.inputAccessoryView = toolbar
+//        addAccountButton.rx.tap
+//            .throttle(Durations.halfSecond.toTimeInterval(), scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] in
+//                self?.startAccountCreation()
+//            })
+//            .disposed(by: self.disposeBag)
     }
 
     func updateNetworkUI() {
-        let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
-        self.networkAlertView.isHidden = isHidden
-        self.view.layoutIfNeeded()
-    }
-
-    func searchBarNotActive() {
-        guard let customNavBar = self.navigationController?.navigationBar as? SmartListNavigationBar else { return }
-        self.navigationItem.title = selectedSegmentIndex.value == 0 ?
-            L10n.Smartlist.conversations : L10n.Smartlist.invitations
-        self.widgetsTopConstraint.constant = 0
-        updateNetworkUI()
-        customNavBar.customHeight = 44
-        customNavBar.searchActive = false
-        customNavBar.removeTopView()
-    }
-
-    func searchBarActive() {
-        guard let customNavBar = navigationController?.navigationBar as? SmartListNavigationBar else { return }
-
-        setupCommonUI(customNavBar: customNavBar)
-
-        if viewModel.isSipAccount() {
-            setupUIForSipAccount(customNavBar: customNavBar)
-        } else {
-            setupUIForNonSipAccount(customNavBar: customNavBar)
-        }
-    }
-
-    private func setupCommonUI(customNavBar: SmartListNavigationBar) {
-        navigationItem.title = ""
-        widgetsTopConstraint.constant = 42
-        customNavBar.customHeight = 70
-        customNavBar.searchActive = true
+//        let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
+//        self.networkAlertView.isHidden = isHidden
+//        self.view.layoutIfNeeded()
     }
 
     private func setupUIForSipAccount(customNavBar: SmartListNavigationBar) {
-        let bookButton = createSearchBarButtonWithImage(named: "book.circle", weight: .regular, width: 27)
-        bookButton.setImage(UIImage(asset: Asset.phoneBook), for: .normal)
-        bookButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.presentContactPicker()
-            })
-            .disposed(by: customNavBar.disposeBag)
-
-        let dialpadCodeButton = createSearchBarButtonWithImage(named: "square.grid.3x3.topleft.filled", weight: .regular, width: 25)
-        dialpadCodeButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.showDialpad()
-            })
-            .disposed(by: customNavBar.disposeBag)
-
-        customNavBar.addTopView(with: [bookButton, dialpadCodeButton])
+//        let bookButton = createSearchBarButtonWithImage(named: "book.circle", weight: .regular, width: 27)
+//        bookButton.setImage(UIImage(asset: Asset.phoneBook), for: .normal)
+//        bookButton.rx.tap
+//            .subscribe(onNext: { [weak self] in
+//                self?.presentContactPicker()
+//            })
+//            .disposed(by: customNavBar.disposeBag)
+//
+//        let dialpadCodeButton = createSearchBarButtonWithImage(named: "square.grid.3x3.topleft.filled", weight: .regular, width: 25)
+//        dialpadCodeButton.rx.tap
+//            .subscribe(onNext: { [weak self] in
+//                self?.viewModel.showDialpad()
+//            })
+//            .disposed(by: customNavBar.disposeBag)
+//
+//        customNavBar.addTopView(with: [bookButton, dialpadCodeButton])
     }
 
     private func setupUIForNonSipAccount(customNavBar: SmartListNavigationBar) {
@@ -582,51 +359,44 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         return button
     }
 
-    func willDismissSearchController(_ searchController: UISearchController) {
-        searchBarNotActive()
-    }
-
     func startAccountCreation() {
-        accountPickerTextView.resignFirstResponder()
+        //accountPickerTextView.resignFirstResponder()
         self.viewModel.createAccount()
     }
 
     func openAccountsList() {
-        if searchView.searchBar.isFirstResponder {
-            return
-        }
-        if accountPickerTextView.isFirstResponder {
-            accountPickerTextView.resignFirstResponder()
-            return
-        }
-        accountPickerTextView.becomeFirstResponder()
-        self.view.addGestureRecognizer(accountsDismissTapRecognizer)
+//        if accountPickerTextView.isFirstResponder {
+//            accountPickerTextView.resignFirstResponder()
+//            return
+//        }
+//        accountPickerTextView.becomeFirstResponder()
+//        self.view.addGestureRecognizer(accountsDismissTapRecognizer)
     }
 
     private func showRemoveConversationConfirmation(atIndex: IndexPath) {
-        let alert = UIAlertController(title: L10n.Alerts.confirmDeleteConversationTitle, message: L10n.Alerts.confirmDeleteConversation, preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction, style: .destructive) { (_: UIAlertAction!) -> Void in
-            if let convToDelete: ConversationViewModel = try? self.conversationsTableView.rx.model(at: atIndex) {
-                self.viewModel.delete(conversationViewModel: convToDelete)
-            }
-        }
-        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
-        alert.addAction(deleteAction)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: L10n.Alerts.confirmDeleteConversationTitle, message: L10n.Alerts.confirmDeleteConversation, preferredStyle: .alert)
+//        let deleteAction = UIAlertAction(title: L10n.Actions.deleteAction, style: .destructive) { (_: UIAlertAction!) -> Void in
+//            if let convToDelete: ConversationViewModel = try? self.conversationsTableView.rx.model(at: atIndex) {
+//                self.viewModel.delete(conversationViewModel: convToDelete)
+//            }
+//        }
+//        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
+//        alert.addAction(deleteAction)
+//        alert.addAction(cancelAction)
+//        self.present(alert, animated: true, completion: nil)
     }
 
     private func showBlockContactConfirmation(atIndex: IndexPath) {
-        let alert = UIAlertController(title: L10n.Global.blockContact, message: L10n.Alerts.confirmBlockContact, preferredStyle: .alert)
-        let blockAction = UIAlertAction(title: L10n.Global.block, style: .destructive) { (_: UIAlertAction!) -> Void in
-            if let conversation: ConversationViewModel = try? self.conversationsTableView.rx.model(at: atIndex) {
-                self.viewModel.blockConversationsContact(conversationViewModel: conversation)
-            }
-        }
-        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
-        alert.addAction(blockAction)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: L10n.Global.blockContact, message: L10n.Alerts.confirmBlockContact, preferredStyle: .alert)
+//        let blockAction = UIAlertAction(title: L10n.Global.block, style: .destructive) { (_: UIAlertAction!) -> Void in
+//            if let conversation: ConversationViewModel = try? self.conversationsTableView.rx.model(at: atIndex) {
+//                self.viewModel.blockConversationsContact(conversationViewModel: conversation)
+//            }
+//        }
+//        let cancelAction = UIAlertAction(title: L10n.Global.cancel, style: .default) { (_: UIAlertAction!) -> Void in }
+//        alert.addAction(blockAction)
+//        alert.addAction(cancelAction)
+//        self.present(alert, animated: true, completion: nil)
     }
 }
 

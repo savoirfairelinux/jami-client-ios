@@ -99,6 +99,56 @@ struct ConditionalCornerRadius: ViewModifier {
     }
 }
 
+struct PlatformAdaptiveNavView<Content: View>: View {
+    let content: () -> Content
+
+    var body: some View {
+        if #available(iOS 16.0, *) {
+            NavigationStack {
+                content()
+            }
+        } else {
+            NavigationView {
+                content()
+            }
+        }
+    }
+}
+
+struct SlideTransition: ViewModifier {
+    let directionUp: Bool
+
+    func body(content: Content) -> some View {
+        content
+            .transition(.asymmetric(
+                insertion: .move(edge: directionUp ? .bottom : .top),
+                removal: .move(edge: directionUp ? .top : .bottom)
+            ))
+    }
+}
+
+extension View {
+    func applySlideTransition(directionUp: Bool) -> some View {
+        self.modifier(SlideTransition(directionUp: directionUp))
+    }
+}
+struct RowSeparatorHiddenModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 15.0, *) {
+            content
+                .listRowSeparator(.hidden)
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    func hideRowSeparator() -> some View {
+        self.modifier(RowSeparatorHiddenModifier())
+    }
+}
+
 extension Publishers {
     static var keyboardHeight: AnyPublisher<CGFloat, Never> {
         let willShow = NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)
