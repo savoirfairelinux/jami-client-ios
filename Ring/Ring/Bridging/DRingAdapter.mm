@@ -45,7 +45,7 @@ using namespace libjami;
 
 - (BOOL) initDaemonInternal {
 #if DEBUG
-    int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG;
+    int flag = 0;
 #else
     int flag = 0;
 #endif
