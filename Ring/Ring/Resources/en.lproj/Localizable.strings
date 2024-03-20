@@ -85,6 +85,7 @@
 "smartlist.yesterday" = "Yesterday";
 "smartlist.results" = "Public Directory";
 "smartlist.conversations" = "Conversations";
+"smartlist.accounts" = "Accounts";
 "smartlist.noResults" = "No results";
 "smartlist.noConversation" = "No conversations";
 "smartlist.searchBarPlaceholder" = "Enter name...";
