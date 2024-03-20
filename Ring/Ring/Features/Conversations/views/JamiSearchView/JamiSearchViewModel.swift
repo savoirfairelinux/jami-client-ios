@@ -92,22 +92,25 @@ class JamiSearchViewModel {
      Existing conversations with the title containing search result or one of
      the participant's name containing search result.
      */
-    private var filteredResults = BehaviorRelay(value: [ConversationViewModel]())
+    var filteredResults = BehaviorRelay(value: [ConversationViewModel]())
 
     // Jams temporary conversations created when perform search for a new contact
-    private let jamsTemporaryResults = BehaviorRelay<[ConversationViewModel]>(value: [])
+    let jamsTemporaryResults = BehaviorRelay<[ConversationViewModel]>(value: [])
 
     let searchBarText = BehaviorRelay<String>(value: "")
     var isSearching: Observable<Bool>!
     var searchStatus = PublishSubject<SearchStatus>()
     private let dataSource: FilterConversationDataSource
+    // Indicates if the search should be limited to only existing conversations.
+    private let searchOnlyExistingConversations: Bool
     private weak var delegate: FilterConversationDelegate?
 
-    init(with injectionBag: InjectionBag, source: FilterConversationDataSource) {
+    init(with injectionBag: InjectionBag, source: FilterConversationDataSource, searchOnlyExistingConversations: Bool) {
         self.nameService = injectionBag.nameService
         self.accountsService = injectionBag.accountService
         self.injectionBag = injectionBag
         self.dataSource = source
+        self.searchOnlyExistingConversations = searchOnlyExistingConversations
 
         // Observes if the user is searching.
         self.isSearching = searchBarText.asObservable()
@@ -226,6 +229,10 @@ class JamiSearchViewModel {
         if searchQuery.isEmpty { return }
         if let filteredConversations = getFilteredConversations(for: searchQuery) {
             self.filteredResults.accept(filteredConversations)
+        }
+        // not need to searh on network
+        if searchOnlyExistingConversations {
+            return
         }
         self.addTemporaryConversationsIfNeed(searchQuery: searchQuery)
     }
