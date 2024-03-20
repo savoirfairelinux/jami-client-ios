@@ -144,6 +144,9 @@ class MessagesListVM: ObservableObject {
         return self.messagePanelStateSubject.asObservable()
     }()
 
+    var lastMessage = BehaviorRelay<String>(value: "")
+    var lastMessageDisposeBag = DisposeBag()
+
     var hideNavigationBar = BehaviorRelay(value: false)
     let disposeBag = DisposeBag()
     var messagesDisposeBag = DisposeBag()
@@ -173,7 +176,7 @@ class MessagesListVM: ObservableObject {
             }
         }
     }
-    var conversation: ConversationModel {
+    var conversation: ConversationModel! {
         didSet {
             messagesDisposeBag = DisposeBag()
             conversation.newMessages.share()
@@ -219,12 +222,6 @@ class MessagesListVM: ObservableObject {
                 }
                 .disposed(by: self.messagesDisposeBag)
             self.updateLastDisplayed()
-        }
-    }
-
-    init (injectionBag: InjectionBag, conversation: ConversationModel, transferHelper: TransferHelper, bestName: Observable<String>, screenTapped: Observable<Bool>) {
-        defer {
-            self.conversation = conversation
             self.subscribeSwarmPreferences()
             self.updateColorPreference()
             self.subscribeUserAvatarForLocationSharing()
@@ -232,6 +229,19 @@ class MessagesListVM: ObservableObject {
             self.subscribeReactions()
             self.subscribeMessageUpdates()
             self.subscribeMessagesActions()
+        }
+    }
+
+    init (injectionBag: InjectionBag, transferHelper: TransferHelper, bestName: Observable<String>, screenTapped: Observable<Bool>) {
+        defer {
+           // self.conversation = conversation
+//            self.subscribeSwarmPreferences()
+//            self.updateColorPreference()
+//            self.subscribeUserAvatarForLocationSharing()
+//            self.subscribeReplyTarget()
+//            self.subscribeReactions()
+//            self.subscribeMessageUpdates()
+//            self.subscribeMessagesActions()
         }
         self.conversation = ConversationModel()
         self.accountService = injectionBag.accountService
@@ -455,8 +465,27 @@ class MessagesListVM: ObservableObject {
         if newMessage.isReply() {
             self.receiveReply(newMessage: container, fromHistory: fromHistory)
         }
+
+        if self.messagesModels.count > 1 && fromHistory {
+            return true
+        }
+        lastMessageDisposeBag = DisposeBag()
+        if newMessage.type != .contact {
+            self.lastMessage.accept(newMessage.content)
+        } else {
+            container.contactViewModel.observableContent
+                .startWith( container.contactViewModel.observableContent.value)
+                .subscribe { [weak self] content in
+                    guard let self = self else { return }
+                    self.lastMessage.accept(content)
+                } onError: { _ in
+                }
+                .disposed(by: lastMessageDisposeBag)
+        }
         return true
     }
+
+
 
     func updateLastDelivered(message: MessageContainerModel) {
         guard message.message.isDelivered() else { return }

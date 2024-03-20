@@ -58,20 +58,6 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
 
     private var contactFoundConversation = BehaviorRelay<ConversationViewModel?>(value: nil)
 
-    lazy var hideNoConversationsMessage: Observable<Bool> = {
-        return Observable<Bool>
-            .combineLatest(self.conversations,
-                           self.searching.asObservable().startWith(false),
-                           resultSelector: {(conversations, searching) -> Bool in
-                            if searching { return true }
-                            if let convf = conversations.first {
-                                return !convf.items.isEmpty
-                            }
-                            return false
-                           })
-            .observe(on: MainScheduler.instance)
-    }()
-
     var connectionState = PublishSubject<ConnectionType>()
     lazy var accounts: Observable<[AccountItem]> = {
         return self.accountsService
@@ -100,145 +86,46 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     // Values need to be updated when selected account changed
     var profileImageForCurrentAccount = PublishSubject<Profile>()
 
-    lazy var profileImage: Observable<UIImage> = { [weak self] in
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
-            if let self = self, let account = self.accountsService.currentAccount {
-                self.profileService.getAccountProfile(accountId: account.id)
-                    .subscribe(onNext: { profile in
-                        self.profileImageForCurrentAccount.onNext(profile)
-                    })
-                    .disposed(by: self.tempBag)
-            }
-        })
-        return profileImageForCurrentAccount.share()
-            .map({ profile in
-                let size = smartListAccountSize - (smartListAccountMargin * 3)
-                if let photo = profile.photo,
-                   let data = NSData(base64Encoded: photo,
-                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?,
-                   let image = UIImage(data: data) {
-                    return image
-                }
-                return UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: self?.accountsService.currentAccount, size: size)
-            })
-            .startWith(UIImage(asset: Asset.icContactPicture)!)
-    }()
-    lazy var accountName: Observable<String> = { [weak self] in
-        return profileImageForCurrentAccount.share()
-            .map({ profile in
-                if let alias = profile.alias {
-                    if !alias.isEmpty { return alias }
-                }
-                guard let account = self?.accountsService.currentAccount else {
-                    return ""
-                }
-                return account.registeredName.isEmpty ? account.jamiId : account.registeredName
-            })
-            .startWith("")
-    }()
-
-    lazy var conversations: Observable<[ConversationSection]> = { [weak self] in
-        guard let self = self else { return Observable.empty() }
-        return self.conversationsService
-            .conversations
-            .share()
-            .startWith(self.conversationsService.conversations.value)
-            .map({ (conversations) in
-                if conversations.isEmpty {
-                    self.conversationViewModels = [ConversationViewModel]()
-                }
-                return conversations
-                    .compactMap({ conversationModel in
-                        var conversationViewModel: ConversationViewModel?
-                        if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
-                            return conversationViewModel.conversation == conversationModel
-                        }).first {
-                            conversationViewModel = foundConversationViewModel
-                            conversationViewModel?.conversation = conversationModel
-                        } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation == conversationModel {
-                            conversationViewModel = contactFound
-                            conversationViewModel?.conversation = conversationModel
-                            conversationViewModel?.conversationCreated.accept(true)
-                            self.conversationViewModels.append(contactFound)
-                        } else {
-                            conversationViewModel = ConversationViewModel(with: self.injectionBag)
-                            conversationViewModel?.conversation = conversationModel
-                            if let conversation = conversationViewModel {
-                                self.conversationViewModels
-                                    .append(conversation)
-                            }
-                        }
-                        return conversationViewModel
-                    })
-            })
-            .map({ conversationsViewModels in
-                return [ConversationSection(header: "", items: conversationsViewModels)]
-            })
-    }()
-
-    lazy var unreadMessages: Observable<Int> = {[weak self] in
-        guard let self = self else {
-            return Observable.just(0)
-        }
-        return self.conversationsService.conversations
-            .share()
-            .flatMap { conversations -> Observable<[Int]> in
-                return Observable.combineLatest(conversations.map({ $0.numberOfUnreadMessages }))
-            }
-            .map { unreadMessages in
-                return unreadMessages.reduce(0, +)
-            }
-    }()
+//    lazy var profileImage: Observable<UIImage> = { [weak self] in
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
+//            if let self = self, let account = self.accountsService.currentAccount {
+//                self.profileService.getAccountProfile(accountId: account.id)
+//                    .subscribe(onNext: { profile in
+//                        self.profileImageForCurrentAccount.onNext(profile)
+//                    })
+//                    .disposed(by: self.tempBag)
+//            }
+//        })
+//        return profileImageForCurrentAccount.share()
+//            .map({ profile in
+//                let size = smartListAccountSize - (smartListAccountMargin * 3)
+//                if let photo = profile.photo,
+//                   let data = NSData(base64Encoded: photo,
+//                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as Data?,
+//                   let image = UIImage(data: data) {
+//                    return image
+//                }
+//                return UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: self?.accountsService.currentAccount, size: size)
+//            })
+//            .startWith(UIImage(asset: Asset.icContactPicture)!)
+//    }()
+//    lazy var accountName: Observable<String> = { [weak self] in
+//        return profileImageForCurrentAccount.share()
+//            .map({ profile in
+//                if let alias = profile.alias {
+//                    if !alias.isEmpty { return alias }
+//                }
+//                guard let account = self?.accountsService.currentAccount else {
+//                    return ""
+//                }
+//                return account.registeredName.isEmpty ? account.jamiId : account.registeredName
+//            })
+//            .startWith("")
+//    }()
 
     var accountInfoToShare: [Any]? {
         return self.accountsService.accountInfoToShare
     }
-
-    lazy var unhandeledRequests: Observable<Int> = {[weak self] in
-        guard let self = self else {
-            return Observable.just(0)
-        }
-        let requestObservable = self.requestsService.requests.asObservable()
-        let conversationObservable = self.conversationsService
-            .conversations
-            .share()
-            .startWith(self.conversationsService.conversations.value)
-
-        return  Observable.combineLatest(requestObservable,
-                                         conversationObservable) { [weak self] (requests, conversations) -> Int in
-            guard let self = self,
-                  let account = self.accountsService.currentAccount else {
-                return 0
-            }
-            // filter out existing conversations
-            let conversationIds = conversations.map { $0.id }
-            let filteredRequests = requests.filter {
-                $0.accountId == account.id && !conversationIds.contains($0.conversationId)
-            }
-            return filteredRequests.count
-        }
-    }()
-
-    typealias BageValues = (messages: Int, requests: Int)
-
-    lazy var updateSegmentControl: ReplaySubject<BageValues> = {
-        let subject = ReplaySubject<BageValues>.create(bufferSize: 1)
-
-        Observable.combineLatest(self.unreadMessages, self.unhandeledRequests) { (messages, requests) -> BageValues in
-            return (messages, requests)
-        }
-        .observe(on: MainScheduler.instance)
-        .subscribe(onNext: { values in
-            subject.onNext(values)
-        }, onError: { error in
-            subject.onError(error)
-        }, onCompleted: {
-            subject.onCompleted()
-        })
-        .disposed(by: self.disposeBag)
-
-        return subject
-    }()
 
     func reloadDataFor(accountId: String) {
         tempBag = DisposeBag()
@@ -253,6 +140,8 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         return self.accountsService.currentAccountChanged.asObservable()
     }()
 
+    let conversationsModel: ConversationsViewModel
+
     required init(with injectionBag: InjectionBag) {
         self.conversationsService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
@@ -263,6 +152,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         self.callService = injectionBag.callService
         self.requestsService = injectionBag.requestsService
         self.injectionBag = injectionBag
+        self.conversationsModel = ConversationsViewModel(injectionBag: injectionBag, stateSubject: self.stateSubject)
         self.updateDonationBunnerVisiblity()
 
         self.callService.newCall
@@ -287,21 +177,6 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 self?.connectionState.onNext(value)
             })
             .disposed(by: self.disposeBag)
-
-        // Observe conversation removed
-        self.conversationsService.sharedResponseStream
-            .filter({ event in
-                event.eventType == .conversationRemoved && event.getEventInput(.accountId) == self.currentAccount?.id
-            })
-            .subscribe(onNext: { [weak self] event in
-                guard let conversationId: String = event.getEventInput(.conversationId),
-                      let accountId: String = event.getEventInput(.accountId) else { return }
-                guard let index = self?.conversationViewModels.firstIndex(where: { conversationModel in
-                    conversationModel.conversation.id == conversationId && conversationModel.conversation.accountId == accountId
-                }) else { return }
-                self?.conversationViewModels.remove(at: index)
-            })
-            .disposed(by: self.disposeBag)
     }
 
     func getDonationBunnerVisiblity() -> Bool {
@@ -318,7 +193,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     func delete(conversationViewModel: ConversationViewModel) {
-        conversationViewModel.closeAllPlayers()
+        //conversationViewModel.closeAllPlayers()
         let accountId = conversationViewModel.conversation.accountId
         let conversationId = conversationViewModel.conversation.id
         if conversationViewModel.conversation.isCoredialog(),
@@ -341,7 +216,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     func blockConversationsContact(conversationViewModel: ConversationViewModel) {
-        conversationViewModel.closeAllPlayers()
+       // conversationViewModel.closeAllPlayers()
         let accountId = conversationViewModel.conversation.accountId
         let conversationId = conversationViewModel.conversation.id
         if conversationViewModel.conversation.isCoredialog(),
@@ -368,9 +243,9 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     func closeAllPlayers() {
-        self.conversationViewModels.forEach { conversationModel in
-            conversationModel.closeAllPlayers()
-        }
+//        self.conversationViewModels.forEach { conversationModel in
+//            conversationModel.closeAllPlayers()
+//        }
     }
 
     func isSipAccount() -> Bool {
