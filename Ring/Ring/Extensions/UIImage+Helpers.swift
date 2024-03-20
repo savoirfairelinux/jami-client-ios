@@ -265,6 +265,10 @@ extension UIImage {
 
     func fillJamiBackgroundColor(inset: CGFloat) -> UIImage {
         let color = UIColor.jamiMain
+        return self.fillBackgroundColor(color: color, inset: inset)
+    }
+
+    func fillBackgroundColor(color: UIColor,inset: CGFloat) -> UIImage {
         let newSize = CGSize(width: self.size.width + 2 * inset, height: self.size.height + 2 * inset)
         let drawingRect = CGRect(x: inset, y: inset, width: self.size.width, height: self.size.height)
 
@@ -376,6 +380,17 @@ extension UIImage {
                     return masked
                 }
             }
+        }
+        return image
+    }
+
+    class func createSwarmAvatar(convId: String, size: CGSize) -> UIImage {
+        let image = UIImage(systemName: "person.2")!
+        let scanner = Scanner(string: convId.toMD5HexString().prefixString())
+        var index: UInt64 = 0
+        if scanner.scanHexInt64(&index) {
+            let fbaBGColor = avatarColors[Int(index)]
+            return image.fillBackgroundColor(color: fbaBGColor, inset: 10)
         }
         return image
     }
