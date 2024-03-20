@@ -71,6 +71,67 @@ class NotificationService: UNNotificationServiceExtension {
     private var pendingLocalNotifications = [String: [LocalNotification]]() /// local notification waiting for name lookup
     private var pendingCalls = [String: [AnyHashable: Any]]() /// calls waiting for name lookup
     private var names = [String: String]() /// map of peerId and best name
+
+    // A private class used to encapsulate logic for reading HTTP streams
+    class HTTPStreamHandler: NSObject, URLSessionDataDelegate {
+        lazy var session: URLSession = {
+            let config = URLSessionConfiguration.default
+            config.timeoutIntervalForRequest = 10
+            config.timeoutIntervalForResource = 10
+            config.requestCachePolicy = .reloadIgnoringLocalCacheData
+            return URLSession(configuration: config, delegate: self, delegateQueue: nil)
+        }()
+
+        // A some state variables used to block until some data is received
+        private let semaphore = DispatchSemaphore(value: 0)
+        private var streamingDone = false
+        private var streamData: String?
+        private var streamError: Error?
+
+        func startStreaming(from url: URL) -> String? {
+            let task = session.dataTask(with: url)
+            // Start the data task
+            task.resume()
+            // Wait here until the first chunk of data is received
+            semaphore.wait()
+            // Cancel the task from processing any more data (if it hasn't already been queued)
+            task.cancel()
+            // If an error occurred, print it and return nil
+            if let error = streamError {
+                print("HTTP Stream error: \(error)")
+                return nil
+            }
+            // Return the data
+            return streamData
+        }
+
+        // Delegate method called when data is received
+        func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+            if let dataString = String(data: data, encoding: .utf8), !streamingDone {
+                // Make the data available for return from `startStreaming`
+                streamData = dataString
+                // Prevent this method from processing any more data
+                streamingDone = true
+                // Signal the semaphore to unblock
+                semaphore.signal()
+            }
+        }
+
+        // Handle task completion, including errors
+        func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+            if let error = error {
+                // Handle the error, for example, by setting an error property
+                streamError = error
+                if !streamingDone {
+                    // If streaming is not marked as done, signal the semaphore to unblock
+                    // This is important to handle cases where data may not be received due to the error
+                    streamingDone = true
+                    semaphore.signal()
+                }
+            }
+        }
+    }
+
     // swiftlint:disable cyclomatic_complexity
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
@@ -98,26 +159,21 @@ class NotificationService: UNNotificationServiceExtension {
               let url = getRequestURL(data: requestData, path: proxyURL) else {
             return
         }
-        tasksGroup.enter()
-        let defaultSession = URLSession(configuration: .default)
-        let task = defaultSession.dataTask(with: url) {[weak self] (data, _, _) in
-            guard let self = self,
-                  let data = data else {
-                self?.verifyTasksStatus()
-                return
-            }
-            let str = String(decoding: data, as: UTF8.self)
-            let lines = str.split(whereSeparator: \.isNewline)
+
+        print("$$$$$$$$$$ [\(Thread.current)] NOTIF HTTPStreamHandler start URL: \(url)")
+        let httpStreamHandler = HTTPStreamHandler()
+        if let data = httpStreamHandler.startStreaming(from: url) {
+            print("$$$$$$$$$$ [\(Thread.current)] NOTIF HTTPStreamHandler got answer +++")
+            let lines = data.split(whereSeparator: \.isNewline)
             for line in lines {
                 do {
                     guard let jsonData = line.data(using: .utf8),
                           let map = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any],
-                          let keyPath = self.getKeyPath(data: requestData),
-                          let treatedMessages = self.getTreatedMessagesPath(data: requestData) else {
-                        self.verifyTasksStatus()
+                          let keyPath = getKeyPath(data: requestData),
+                          let treatedMessages = getTreatedMessagesPath(data: requestData) else {
                         return
                     }
-                    let result = self.adapterService.decrypt(keyPath: keyPath.path, accountId: self.accountId, messagesPath: treatedMessages.path, value: map)
+                    let result = adapterService.decrypt(keyPath: keyPath.path, accountId: accountId, messagesPath: treatedMessages.path, value: map)
                     let handleCall: (String, String) -> Void = { [weak self] (peerId, hasVideo) in
                         guard let self = self else {
                             return
@@ -154,17 +210,90 @@ class NotificationService: UNNotificationServiceExtension {
                         break
                     }
                 } catch {
-                    print("serialization failed , \(error)")
+                    print("$$$$$$$$$$ [\(Thread.current)] HTTPStreamHandler stream decoding error , \(error)")
                 }
             }
-            self.verifyTasksStatus()
+        } else {
+            print("$$$$$$$$$$ [\(Thread.current)] HTTPStreamHandler didn't get answer ---")
         }
-        task.resume()
-        _ = tasksGroup.wait(timeout: .now() + notificationTimeout)
+
+        // serialization failed , Error Domain=NSCocoaErrorDomain Code=3840 "Unterminated string around line 1, column 10." UserInfo={NSDebugDescription=Unterminated string around line 1, column 10., NSJSONSerializationErrorIndex=10}
+
+        //        tasksGroup.enter()
+        //        let defaultSession = URLSession(configuration: .default)
+        //        print("$$$$$$$$$$ [\(Thread.current)] URLSession start")
+        //        let task = defaultSession.dataTask(with: url) {[weak self] (data, _, error) in
+        //            if let error = error {
+        //                print("$$$$$$$$$$ [\(Thread.current)] URLSession error: \(error.localizedDescription)")
+        //                self?.verifyTasksStatus()
+        //                return
+        //            }
+        //            print("$$$$$$$$$$ [\(Thread.current)] URLSession got answer +++")
+        //            guard let self = self,
+        //                  let data = data else {
+        //                self?.verifyTasksStatus()
+        //                return
+        //            }
+        //            let str = String(decoding: data, as: UTF8.self)
+        //            let lines = str.split(whereSeparator: \.isNewline)
+        //            for line in lines {
+        //                do {
+        //                    guard let jsonData = line.data(using: .utf8),
+        //                          let map = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as? [String: Any],
+        //                          let keyPath = self.getKeyPath(data: requestData),
+        //                          let treatedMessages = self.getTreatedMessagesPath(data: requestData) else {
+        //                        self.verifyTasksStatus()
+        //                        return
+        //                    }
+        //                    let result = self.adapterService.decrypt(keyPath: keyPath.path, accountId: self.accountId, messagesPath: treatedMessages.path, value: map)
+        //                    let handleCall: (String, String) -> Void = { [weak self] (peerId, hasVideo) in
+        //                        guard let self = self else {
+        //                            return
+        //                        }
+        //                        var info = request.content.userInfo
+        //                        info["peerId"] = peerId
+        //                        info["hasVideo"] = hasVideo
+        //                        let name = self.bestName(accountId: self.accountId, contactId: peerId)
+        //                        /// jami will be started. Set accounts to not active state
+        //                        if self.accountIsActive {
+        //                            self.accountIsActive = false
+        //                            self.adapterService.stop(accountId: self.accountId)
+        //                        }
+        //                        if name.isEmpty {
+        //                            info["displayName"] = peerId
+        //                            self.pendingCalls[peerId] = info
+        //                            self.startAddressLookup(address: peerId, accountId: self.accountId)
+        //                            return
+        //                        }
+        //                        info["displayName"] = name
+        //                        self.presentCall(info: info)
+        //                    }
+        //                    switch result {
+        //                    case .call(let peerId, let hasVideo):
+        //                        handleCall(peerId, "\(hasVideo)")
+        //                        return
+        //                    case .gitMessage(let convId):
+        //                        self.handleGitMessage(convId: convId, loadAll: convId.isEmpty)
+        //                    case .clone:
+        //                        // Should start daemon and wait until clone completed
+        //                        self.waitForCloning = true
+        //                        self.handleGitMessage(convId: "", loadAll: false)
+        //                    case .unknown:
+        //                        break
+        //                    }
+        //                } catch {
+        //                    print("serialization failed , \(error)")
+        //                }
+        //            }
+        //            self.verifyTasksStatus()
+        //        }
+        //        task.resume()
+        //        _ = tasksGroup.wait(timeout: .now() + notificationTimeout)
     }
 
     override func serviceExtensionTimeWillExpire() {
         if !self.tasksCompleted {
+            print("$$$$$$$$$$ [\(Thread.current)] URLSession failed --- done")
             self.tasksCompleted = true
             self.tasksGroup.leave()
         }
@@ -188,10 +317,15 @@ class NotificationService: UNNotificationServiceExtension {
         /// check if account already acive
         guard !self.accountIsActive else { return }
         self.accountIsActive = true
+
+        print("$$$$$$$$$$ [\(Thread.current)] handleGitMessage 1")
         self.adapterService.startAccountsWithListener(accountId: self.accountId, convId: convId, loadAll: loadAll) { [weak self] event, eventData in
             guard let self = self else {
                 return
             }
+
+            print("$$$$$$$$$$ [\(Thread.current)] handleGitMessage 2 \(event)")
+
             switch event {
             case .message:
                 self.conversationUpdated(conversationId: eventData.conversationId, accountId: self.accountId)
@@ -236,6 +370,7 @@ class NotificationService: UNNotificationServiceExtension {
         /// 1. we did not start account we are not waiting for the signals from the daemon
         /// 2. conversation synchronization completed and all files downloaded
         if !self.accountIsActive || (self.syncCompleted && self.numberOfFiles == 0 && self.numberOfMessages == 0 && !self.waitForCloning) {
+            print("$$$$$$$$$$ [\(Thread.current)] URLSession finished --- done")
             self.tasksCompleted = true
             self.tasksGroup.leave()
         }
@@ -339,6 +474,7 @@ class NotificationService: UNNotificationServiceExtension {
     private func requestToDictionary(request: UNNotificationRequest) -> [String: String] {
         var dictionary = [String: String]()
         let userInfo = request.content.userInfo
+        // print("$$$$$$$$$$ start NOTIF")
         for key in userInfo.keys {
             /// "aps" is a field added for alert notification type, so it could be received in the extension. This field is not needed by dht
             if String(describing: key) == NotificationField.aps.rawValue {
@@ -347,6 +483,7 @@ class NotificationService: UNNotificationServiceExtension {
             if let value = userInfo[key] {
                 let keyString = String(describing: key)
                 let valueString = String(describing: value)
+                // print("$$$$$$$$$$ \(keyString) - \(valueString)")
                 dictionary[keyString] = valueString
             }
         }
