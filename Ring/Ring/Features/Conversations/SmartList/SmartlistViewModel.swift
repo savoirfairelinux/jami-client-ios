@@ -137,6 +137,44 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
             .startWith("")
     }()
 
+    lazy var conv: Observable<[ConversationViewModel]> = { [weak self] in
+        guard let self = self else { return Observable.empty() }
+        return self.conversationsService
+            .conversations
+            .share()
+            .startWith(self.conversationsService.conversations.value)
+            .map({ (conversations) in
+                if conversations.isEmpty {
+                    self.conversationViewModels = [ConversationViewModel]()
+                }
+                return conversations
+                    .compactMap({ conversationModel in
+                        var conversationViewModel: ConversationViewModel?
+                        // if it isexisting convrsation, just return it so array order could be updated
+                        if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
+                            return conversationViewModel.conversation == conversationModel
+                        }).first {
+                            conversationViewModel = foundConversationViewModel
+                           // if it is temporary conversation created during search update it
+                        } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation == conversationModel {
+                            conversationViewModel = contactFound
+                            conversationViewModel?.conversation = conversationModel
+                            conversationViewModel?.conversationCreated.accept(true)
+                            self.conversationViewModels.append(contactFound)
+                            // otherwise create a new conversation
+                        } else {
+                            conversationViewModel = ConversationViewModel(with: self.injectionBag)
+                            conversationViewModel?.conversation = conversationModel
+                            if let conversation = conversationViewModel {
+                                self.conversationViewModels
+                                    .append(conversation)
+                            }
+                        }
+                        return conversationViewModel
+                    })
+            })
+    }()
+
     lazy var conversations: Observable<[ConversationSection]> = { [weak self] in
         guard let self = self else { return Observable.empty() }
         return self.conversationsService
@@ -154,7 +192,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                             return conversationViewModel.conversation == conversationModel
                         }).first {
                             conversationViewModel = foundConversationViewModel
-                            conversationViewModel?.conversation = conversationModel
+//                            conversationViewModel?.conversation = conversationModel
                         } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation == conversationModel {
                             conversationViewModel = contactFound
                             conversationViewModel?.conversation = conversationModel
@@ -253,6 +291,8 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         return self.accountsService.currentAccountChanged.asObservable()
     }()
 
+    let conversationsModel: ConversationsViewModel
+
     required init(with injectionBag: InjectionBag) {
         self.conversationsService = injectionBag.conversationsService
         self.nameService = injectionBag.nameService
@@ -263,6 +303,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
         self.callService = injectionBag.callService
         self.requestsService = injectionBag.requestsService
         self.injectionBag = injectionBag
+        self.conversationsModel = ConversationsViewModel(injectionBag: injectionBag, stateSubject: self.stateSubject)
         self.updateDonationBunnerVisiblity()
 
         self.callService.newCall
@@ -302,6 +343,45 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
                 self?.conversationViewModels.remove(at: index)
             })
             .disposed(by: self.disposeBag)
+        self.subscribeConversations()
+    }
+
+    func subscribeConversations() {
+        let convObs = self.conversationsService
+            .conversations
+            .share()
+            .startWith(self.conversationsService.conversations.value)
+            .map({ (conversations) in
+                if conversations.isEmpty {
+                    self.conversationViewModels = [ConversationViewModel]()
+                }
+                return conversations
+                    .compactMap({ conversationModel in
+                        var conversationViewModel: ConversationViewModel?
+                        // if it isexisting convrsation, just return it so array order could be updated
+                        if let foundConversationViewModel = self.conversationViewModels.filter({ conversationViewModel in
+                            return conversationViewModel.conversation == conversationModel
+                        }).first {
+                            conversationViewModel = foundConversationViewModel
+                            // if it is temporary conversation created during search update it
+                        } else if let contactFound = self.contactFoundConversation.value, contactFound.conversation == conversationModel {
+                            conversationViewModel = contactFound
+                            conversationViewModel?.conversation = conversationModel
+                            conversationViewModel?.conversationCreated.accept(true)
+                            self.conversationViewModels.append(contactFound)
+                            // otherwise create a new conversation
+                        } else {
+                            conversationViewModel = ConversationViewModel(with: self.injectionBag)
+                            conversationViewModel?.conversation = conversationModel
+                            if let conversation = conversationViewModel {
+                                self.conversationViewModels
+                                    .append(conversation)
+                            }
+                        }
+                        return conversationViewModel
+                    })
+            })
+        conversationsModel.subscribe(conversations: convObs)
     }
 
     func getDonationBunnerVisiblity() -> Bool {
@@ -318,7 +398,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     func delete(conversationViewModel: ConversationViewModel) {
-        conversationViewModel.closeAllPlayers()
+        //conversationViewModel.closeAllPlayers()
         let accountId = conversationViewModel.conversation.accountId
         let conversationId = conversationViewModel.conversation.id
         if conversationViewModel.conversation.isCoredialog(),
@@ -341,7 +421,7 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     func blockConversationsContact(conversationViewModel: ConversationViewModel) {
-        conversationViewModel.closeAllPlayers()
+       // conversationViewModel.closeAllPlayers()
         let accountId = conversationViewModel.conversation.accountId
         let conversationId = conversationViewModel.conversation.id
         if conversationViewModel.conversation.isCoredialog(),
@@ -368,9 +448,9 @@ class SmartlistViewModel: Stateable, ViewModel, FilterConversationDataSource {
     }
 
     func closeAllPlayers() {
-        self.conversationViewModels.forEach { conversationModel in
-            conversationModel.closeAllPlayers()
-        }
+//        self.conversationViewModels.forEach { conversationModel in
+//            conversationModel.closeAllPlayers()
+//        }
     }
 
     func isSipAccount() -> Bool {
