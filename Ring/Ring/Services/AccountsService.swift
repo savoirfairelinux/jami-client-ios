@@ -163,7 +163,7 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
-    var accountInfoToShare: [Any]? {
+    var accountInfoToShare: [String]? {
         var info = [String]()
         guard let account = self.currentAccount else { return nil }
         var nameToContact = ""

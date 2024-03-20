@@ -86,3 +86,18 @@ extension Color: RawRepresentable {
         }
     }
 }
+
+extension Color {
+    static let jamiPrimaryControl = Color("jamiPrimaryControl")
+    static let jamiSecondaryControl = Color("jamiSecondaryControl")
+    static let jamiTertiaryControl = Color("jamiTertiaryControl")
+    static let jamiRequestsColor = Color("jamiRequestsColor")
+    static let jamiColor = Color("jami")
+    static let availablePresenceColor = Color(UIColor.availablePresenceColor)
+    static let onlinePresenceColor = Color(UIColor.onlinePresenceColor)
+    static let unreadMessageColorText = Color(UIColor(hexString: "CC0022")!)
+    static let unreadMessageBackground = Color(UIColor(hexString: "EED4D8")!)
+    static let networkAlertBackground = Color(UIColor(red: 245, green: 110, blue: 88, alpha: 1))
+    static let requestBadgeForeground = Color("requestBadgeForeground")
+    static let requestsBadgeBackground = Color("requestsBadgeBackground")
+}
