@@ -50,10 +50,10 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
         }
     }
 
-    var shouldDisplayAavatar = false {
+    var shouldDisplayAvatar = false {
         didSet {
             let jamiId = message.uri.isEmpty ? message.authorId : message.uri
-            if self.shouldDisplayAavatar {
+            if self.shouldDisplayAvatar {
                 self.requestAvatar(jamiId: jamiId)
             } else {
                 self.avatarImage = nil
