@@ -179,10 +179,9 @@ std::map<std::string, std::string> nameServers;
         loadAccountAndConversation(std::string([accountId UTF8String]), loadAll, std::string([convId UTF8String]));
         return true;
     }
-#if DEBUG
-    int flag = LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG | LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO | LIBJAMI_FLAG_NO_AUTOLOAD;
-#else
     int flag = LIBJAMI_FLAG_IOS_EXTENSION | LIBJAMI_FLAG_NO_AUTOSYNC | LIBJAMI_FLAG_NO_LOCAL_AUDIO | LIBJAMI_FLAG_NO_AUTOLOAD;
+#if DEBUG
+    //flag |= LIBJAMI_FLAG_CONSOLE_LOG | LIBJAMI_FLAG_DEBUG;
 #endif
     if (![[NSThread currentThread] isMainThread]) {
         __block bool success;
@@ -236,6 +235,7 @@ std::map<std::string, std::string> nameServers;
         return {};
     }
 
+    // Build the key using the key path argument
     NSData* data = [[NSFileManager defaultManager] contentsAtPath:keyPath];
     const uint8_t* bytes = (const uint8_t*) [data bytes];
     dht::crypto::PrivateKey dhtKey(bytes, [data length], "");
