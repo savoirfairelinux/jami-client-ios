@@ -34,12 +34,30 @@ enum TransferState: State {
 }
 
 class TransferHelper {
+    let injectionBag: InjectionBag
     let dataTransferService: DataTransferService
-    let conversationViewModel: ConversationViewModel
 
-    init (dataTransferService: DataTransferService, conversationViewModel: ConversationViewModel) {
-        self.dataTransferService = dataTransferService
-        self.conversationViewModel = conversationViewModel
+    private var players = [String: PlayerViewModel]()
+
+    func getPlayer(messageID: String) -> PlayerViewModel? {
+        return players[messageID]
+    }
+
+    func setPlayer(messageID: String, player: PlayerViewModel) { players[messageID] = player }
+
+    func closeAllPlayers() {
+        let queue = DispatchQueue.global(qos: .default)
+        queue.sync {
+            self.players.values.forEach { (player) in
+                player.closePlayer()
+            }
+            self.players.removeAll()
+        }
+    }
+
+    init (injectionBag: InjectionBag) {
+        self.dataTransferService = injectionBag.dataTransferService
+        self.injectionBag = injectionBag
     }
 
     func acceptTransfer(conversation: ConversationModel, message: MessageModel) -> NSDataTransferError {
@@ -99,7 +117,7 @@ class TransferHelper {
             return nil
         }
 
-        if let playerModel = conversationViewModel.getPlayer(messageID: String(message.id)) {
+        if let playerModel = self.getPlayer(messageID: String(message.id)) {
             return playerModel
         }
         let transferInfo = self.getTransferFileData(content: message.content)
@@ -117,8 +135,8 @@ class TransferHelper {
                 if pathString.isEmpty {
                     return nil
                 }
-                let model = PlayerViewModel(injectionBag: conversationViewModel.injectionBag, path: pathString)
-                conversationViewModel.setPlayer(messageID: String(message.id), player: model)
+                let model = PlayerViewModel(injectionBag: self.injectionBag, path: pathString)
+                self.setPlayer(messageID: String(message.id), player: model)
                 return model
             }
             // first search for incoming video in downloads folder and for outgoing in recorded
@@ -143,8 +161,8 @@ class TransferHelper {
                     return nil
                 }
             }
-            let model = PlayerViewModel(injectionBag: conversationViewModel.injectionBag, path: pathString)
-            conversationViewModel.setPlayer(messageID: String(message.id), player: model)
+            let model = PlayerViewModel(injectionBag: self.injectionBag, path: pathString)
+            self.setPlayer(messageID: String(message.id), player: model)
             return model
         }
         return nil

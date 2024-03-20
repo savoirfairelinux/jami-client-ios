@@ -36,8 +36,11 @@ class MessagePanelVM: ObservableObject, MessageAppearanceProtocol {
 
     let disposeBag = DisposeBag()
 
-    init(messagePanelState: PublishSubject<State>, bestName: Observable<String>) {
+    init(messagePanelState: PublishSubject<State>) {
         self.messagePanelState = messagePanelState
+    }
+
+    func subscribeBestName(bestName: Observable<String>) {
         bestName
             .share()
             .asObservable()
