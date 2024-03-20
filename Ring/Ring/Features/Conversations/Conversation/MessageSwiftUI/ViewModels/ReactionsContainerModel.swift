@@ -21,7 +21,7 @@
 import SwiftUI
 import RxSwift
 
-class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver, NameObserver {
+class ReactionsRowVM: Identifiable, ObservableObject, AvatarImageObserver, NameObserver {
     let jamiId: String
     let messageId: String
     @Published var avatarImage: UIImage?
@@ -56,14 +56,24 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver
 }
 
 class ReactionsContainerModel: ObservableObject {
-    @Published var reactionsRow = [ReactionsRowViewModel]()
+    @Published var reactionsRow = [ReactionsRowVM]()
     @Published var displayValue: String = ""
+    var swarmColor: UIColor = UIColor.defaultSwarmColor
     let message: MessageModel
     private var infoState: PublishSubject<State>?
     var reactionsRowCreated = false
+    var localJamiId: String
 
-    init(message: MessageModel) {
+    init(message: MessageModel, localJamiId: String) {
         self.message = message
+        self.localJamiId = localJamiId
+        self.updateDisplayValue()
+    }
+
+    init(message: MessageModel, swarmColor: UIColor, localJamiId: String) {
+        self.swarmColor = swarmColor
+        self.message = message
+        self.localJamiId = localJamiId
         self.updateDisplayValue()
     }
 
@@ -103,7 +113,7 @@ class ReactionsContainerModel: ObservableObject {
     }
 
     private func addReaction(reaction: MessageAction) {
-        let reactionRow = ReactionsRowViewModel(reaction: reaction)
+        let reactionRow = ReactionsRowVM(reaction: reaction)
         self.reactionsRow.append(reactionRow)
         if let state = self.infoState {
             reactionRow.setInfoState(state: state)
@@ -111,13 +121,13 @@ class ReactionsContainerModel: ObservableObject {
     }
 
     private func update() {
-        self.reactionsRow = [ReactionsRowViewModel]()
+        self.reactionsRow = [ReactionsRowVM]()
         self.message.reactions.forEach { reaction in
             self.updateReaction(reaction: reaction)
         }
     }
 
-    private func getReaction(jamiId: String) -> ReactionsRowViewModel? {
+    private func getReaction(jamiId: String) -> ReactionsRowVM? {
         return self.reactionsRow.filter({ reaction in
             reaction.jamiId == jamiId
         }).first
