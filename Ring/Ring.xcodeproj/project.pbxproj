@@ -456,6 +456,7 @@
 		5557FD4A1E81AE850043E394 /* AccountModelHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FD491E81AE850043E394 /* AccountModelHelperTests.swift */; };
 		557086521E8ADB9D001A7CE4 /* SystemAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 557086511E8ADB9D001A7CE4 /* SystemAdapter.mm */; };
 		5593D7D32B7FE00A00DA109C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5593D7D22B7FE00A00DA109C /* MCEmojiPicker */; };
+		55EC01BC2B9A380200B966D3 /* ReactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC01BB2B9A380200B966D3 /* ReactionRowView.swift */; };
 		56308BA71EA00E5700660275 /* NameRegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56308BA61EA00E5700660275 /* NameRegistrationResponse.m */; };
 		563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 563AEC761EA664C0003A5641 /* RegistrationResponse.m */; };
 		564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564C445A1E8EA44E000F92B1 /* Durations.swift */; };
@@ -3181,6 +3182,7 @@
 				1A2D18A41F27EF5200B2C785 /* AppCoordinator.swift in Sources */,
 				26D87CEB2BBB4A5F0086E4AA /* AccountsViewModel.swift in Sources */,
 				1A2D18C31F29180700B2C785 /* AccountModel.swift in Sources */,
+				55EC01BC2B9A380200B966D3 /* ReactionRowView.swift in Sources */,
 				62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */,
 				02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */,
 				62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */,

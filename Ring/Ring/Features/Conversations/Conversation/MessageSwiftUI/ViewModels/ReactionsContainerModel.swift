@@ -21,12 +21,13 @@
 import SwiftUI
 import RxSwift
 
-class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver, NameObserver {
+class ReactionsRowVM: Identifiable, ObservableObject, AvatarImageObserver, NameObserver {
     let jamiId: String
     let messageId: String
     @Published var avatarImage: UIImage?
     @Published var username: String = ""
     @Published var content = [String: String]()
+    @Published var isPortrait: Bool = true
     var disposeBag = DisposeBag()
 
     var infoState: PublishSubject<State>?
@@ -37,7 +38,28 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver
         self.messageId = reaction.id
         self.avatarImage = UIImage()
         self.content[reaction.id] = reaction.content
+        self.setupOrientation()
     }
+    
+    func setupOrientation() {
+        NotificationCenter.default.rx
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] (_) in
+                guard let self = self,
+                      UIDevice.current.portraitOrLandscape else { return }
+                self.updateOrientation(isPortrait: UIDevice.current.orientation.isPortrait)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func updateOrientation(isPortrait: Bool) {
+        print("KESS: \(isPortrait)")
+        self.isPortrait = isPortrait
+//        self.numCols = ...
+//        self.defaultSize = ...
+    }
+
 
     func addReaction(reaction: MessageAction) {
         if self.content.keys.contains(reaction.id) { return }
@@ -56,15 +78,48 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver
 }
 
 class ReactionsContainerModel: ObservableObject {
-    @Published var reactionsRow = [ReactionsRowViewModel]()
+    @Published var reactionsRow = [ReactionsRowVM]()
     @Published var displayValue: String = ""
+    var swarmColor: UIColor = UIColor.defaultSwarmColor
     let message: MessageModel
     private var infoState: PublishSubject<State>?
     var reactionsRowCreated = false
+    var localJamiId: String
+    @Published var isPortrait = true
 
-    init(message: MessageModel) {
+    init(message: MessageModel, localJamiId: String) {
         self.message = message
+        self.localJamiId = localJamiId
         self.updateDisplayValue()
+        self.setupOrientation()
+    }
+
+    init(message: MessageModel, swarmColor: UIColor, localJamiId: String) {
+        self.swarmColor = swarmColor
+        self.message = message
+        self.localJamiId = localJamiId
+        self.updateDisplayValue()
+        self.setupOrientation()
+    }
+    
+    let disposeBag = DisposeBag()
+    
+    func setupOrientation() {
+        NotificationCenter.default.rx
+            .notification(UIDevice.orientationDidChangeNotification)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] (_) in
+                guard let self = self,
+                      UIDevice.current.portraitOrLandscape else { return }
+                self.updateOrientation(isPortrait: UIDevice.current.orientation.isPortrait)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func updateOrientation(isPortrait: Bool) {
+        self.isPortrait = isPortrait
+//        self.numCols = ...
+//        self.defaultSize = ...
     }
 
     func setInfoState(state: PublishSubject<State>) {
@@ -103,7 +158,7 @@ class ReactionsContainerModel: ObservableObject {
     }
 
     private func addReaction(reaction: MessageAction) {
-        let reactionRow = ReactionsRowViewModel(reaction: reaction)
+        let reactionRow = ReactionsRowVM(reaction: reaction)
         self.reactionsRow.append(reactionRow)
         if let state = self.infoState {
             reactionRow.setInfoState(state: state)
@@ -111,13 +166,13 @@ class ReactionsContainerModel: ObservableObject {
     }
 
     private func update() {
-        self.reactionsRow = [ReactionsRowViewModel]()
+        self.reactionsRow = [ReactionsRowVM]()
         self.message.reactions.forEach { reaction in
             self.updateReaction(reaction: reaction)
         }
     }
 
-    private func getReaction(jamiId: String) -> ReactionsRowViewModel? {
+    private func getReaction(jamiId: String) -> ReactionsRowVM? {
         return self.reactionsRow.filter({ reaction in
             reaction.jamiId == jamiId
         }).first
