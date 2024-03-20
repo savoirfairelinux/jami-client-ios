@@ -111,9 +111,9 @@ class ConversationCell: UITableViewCell, NibReusable {
 
         // unread messages
         if let unreadMessages = self.newMessagesLabel {
-            item.unreadMessages
+            item.unreadMessagesObservable
                 .observe(on: MainScheduler.instance)
-                .startWith(item.unreadMessages.value)
+                .startWith(item.unreadMessagesObservable.value)
                 .bind(to: unreadMessages.rx.text)
                 .disposed(by: self.disposeBag)
         }
@@ -159,9 +159,9 @@ class ConversationCell: UITableViewCell, NibReusable {
         // last message preview
         if let lastMessage = self.lastMessagePreviewLabel {
             lastMessage.lineBreakMode = .byTruncatingTail
-            item.lastMessage
+            item.lastMessageObservable
                 .observe(on: MainScheduler.instance)
-                .startWith(item.lastMessage.value)
+                .startWith(item.lastMessage)
                 .bind(to: lastMessage.rx.text)
                 .disposed(by: self.disposeBag)
         }
