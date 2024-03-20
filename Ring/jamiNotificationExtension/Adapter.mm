@@ -236,6 +236,7 @@ std::map<std::string, std::string> nameServers;
         return {};
     }
 
+    // Build the key using the key path argument
     NSData* data = [[NSFileManager defaultManager] contentsAtPath:keyPath];
     const uint8_t* bytes = (const uint8_t*) [data bytes];
     dht::crypto::PrivateKey dhtKey(bytes, [data length], "");
