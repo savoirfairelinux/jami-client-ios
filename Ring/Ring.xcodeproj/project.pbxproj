@@ -457,6 +457,7 @@
 		5CE66F761FBF769B00EE9291 /* InitialLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE66F741FBF769B00EE9291 /* InitialLoadingViewController.swift */; };
 		62006E04203F4DD6003C3197 /* UITextField+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62006E03203F4DD6003C3197 /* UITextField+Helpers.swift */; };
 		621231F91F880EDF009B86F0 /* UILabel+Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621231F81F880EDF009B86F0 /* UILabel+Ring.swift */; };
+		623196862BAE498900C2252C /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 623196852BAE498900C2252C /* Atomics */; };
 		623660AA20092081002598C1 /* src in Resources */ = {isa = PBXBuildFile; fileRef = 623660A920092081002598C1 /* src */; };
 		627F11F120348FBF006560B5 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627F11F020348FBF006560B5 /* AvatarView.swift */; };
 		62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62A88D361F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift */; };
@@ -1286,6 +1287,7 @@
 				269DA02E28D0D2E5007D51D6 /* libgmp.a in Frameworks */,
 				269DA07F28D0D5D0007D51D6 /* libgit2.a in Frameworks */,
 				269DA02B28D0D2E5007D51D6 /* libavformat.a in Frameworks */,
+				623196862BAE498900C2252C /* Atomics in Frameworks */,
 				26A88C7826700B7500888EED /* libc++.tbd in Frameworks */,
 				269DA03E28D0D2E5007D51D6 /* libpjsip-simple.a in Frameworks */,
 				26CA4C592AB23C4100AEF8F5 /* libixml.a in Frameworks */,
@@ -2574,6 +2576,9 @@
 			dependencies = (
 			);
 			name = jamiNotificationExtension;
+			packageProductDependencies = (
+				623196852BAE498900C2252C /* Atomics */,
+			);
 			productName = jamiNotificationExtension;
 			productReference = 26A88C04266FFFC800888EED /* jamiNotificationExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -2692,6 +2697,7 @@
 			mainGroup = 043999EA1D1C2D9D00E99CD9;
 			packageReferences = (
 				5593D7D12B7FE00A00DA109C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
+				623196842BAE498900C2252C /* XCRemoteSwiftPackageReference "swift-atomics" */,
 			);
 			productRefGroup = 043999F41D1C2D9D00E99CD9 /* Products */;
 			projectDirPath = "";
@@ -4140,6 +4146,14 @@
 				minimumVersion = 1.2.3;
 			};
 		};
+		623196842BAE498900C2252C /* XCRemoteSwiftPackageReference "swift-atomics" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-atomics.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -4147,6 +4161,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5593D7D12B7FE00A00DA109C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
 			productName = MCEmojiPicker;
+		};
+		623196852BAE498900C2252C /* Atomics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 623196842BAE498900C2252C /* XCRemoteSwiftPackageReference "swift-atomics" */;
+			productName = Atomics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
