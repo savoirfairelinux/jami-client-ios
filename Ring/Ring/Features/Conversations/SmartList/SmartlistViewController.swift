@@ -28,6 +28,7 @@ import Reusable
 import SwiftyBeaver
 import ContactsUI
 import QuartzCore
+import SwiftUI
 
 // Constants
 struct SmartlistConstants {
@@ -49,7 +50,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var widgetsTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var networkAlertView: UIView!
-    @IBOutlet weak var searchView: JamiSearchView!
     @IBOutlet weak var donationBaner: UIView!
     @IBOutlet weak var donateButton: UIButton!
     @IBOutlet weak var disableDonationButton: UIButton!
@@ -61,152 +61,56 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     private let accountsAdapter = AccountPickerAdapter()
     private var accountsDismissTapRecognizer: UITapGestureRecognizer!
 
-    private var selectedSegmentIndex = BehaviorRelay<Int>(value: 0)
     var viewModel: SmartlistViewModel!
     private let disposeBag = DisposeBag()
 
     private let contactPicker = CNContactPickerViewController()
-    private var headerView: SmartListHeaderView?
 
-    private var contactRequestVC: ContactRequestsViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupDataSources()
-        self.setupTableView()
         self.setupUI()
         self.applyL10n()
         self.configureNavigationBar()
         self.confugureAccountPicker()
         accountsDismissTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        self.setupSearchBar()
-        searchView.configure(with: viewModel.injectionBag, source: viewModel, isIncognito: false, delegate: viewModel)
-        if !self.viewModel.isSipAccount() {
-            self.setUpContactRequest()
-        }
+        let contentView = UIHostingController(rootView: SmartListView(model: viewModel.conversationsModel))
+        addChild(contentView)
+        view.addSubview(contentView.view)
+        contentView.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        contentView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        contentView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.viewModel.closeAllPlayers()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        configureCustomNavBar(usingCustomSize: true)
         self.viewModel.updateDonationBunnerVisiblity()
+       self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        configureCustomNavBar(usingCustomSize: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    func setupTableViewHeader(for tableView: UITableView) {
-        guard let headerView = loadHeaderView() else { return }
-
-        setupHeaderViewConstraints(headerView, in: tableView)
-        bindSegmentControlActions(headerView)
-        bindViewModelUpdates(to: headerView, in: tableView)
-    }
-
-    private func loadHeaderView() -> SmartListHeaderView? {
-        let nib = UINib(nibName: "SmartListHeaderView", bundle: nil)
-        return nib.instantiate(withOwner: nil, options: nil).first as? SmartListHeaderView
-    }
-
-    private func setupHeaderViewConstraints(_ headerView: SmartListHeaderView, in tableView: UITableView) {
-        tableView.tableHeaderView = headerView
-        NSLayoutConstraint.activate([
-            headerView.widthAnchor.constraint(equalTo: tableView.widthAnchor, constant: -30),
-            headerView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor)
-        ])
-    }
-
-    private func bindSegmentControlActions(_ headerView: SmartListHeaderView) {
-        headerView.conversationsSegmentControl.addTarget(self, action: #selector(segmentAction), for: .valueChanged)
-
-        self.selectedSegmentIndex.subscribe { [weak headerView] index in
-            headerView?.conversationsSegmentControl.selectedSegmentIndex = index
-        }
-        .disposed(by: self.disposeBag)
-    }
-
-    private func bindViewModelUpdates(to headerView: SmartListHeaderView, in tableView: UITableView) {
-        self.viewModel.updateSegmentControl
-            .subscribe { [weak headerView, weak tableView, weak self] (messages, requests) in
-                guard let headerView = headerView, let tableView = tableView else { return }
-
-                let height: CGFloat = requests == 0 ? 0 : 32
-                var frame = headerView.frame
-                frame.size.height = height
-                headerView.frame = frame
-
-                headerView.setUnread(messages: messages, requests: requests)
-
-                if requests == 0 {
-                    headerView.conversationsSegmentControl.selectedSegmentIndex = 0
-                    self?.navigationItem.title = L10n.Smartlist.conversations
-                }
-
-                // Resetting the header after adjusting its frame.
-                tableView.tableHeaderView = headerView
-            }
-            .disposed(by: self.disposeBag)
-    }
-
-    @objc
-    func segmentAction(_ segmentedControl: UISegmentedControl) {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            contactRequestVC?.view.isHidden = true
-            searchView.showSearchResult = true
-            self.navigationItem.title = L10n.Smartlist.conversations
-        case 1:
-            contactRequestVC?.view.isHidden = false
-            searchView.showSearchResult = false
-            self.navigationItem.title = L10n.Smartlist.invitations
-        default:
-            break
-        }
-        self.selectedSegmentIndex.accept(segmentedControl.selectedSegmentIndex)
-    }
-
-    func addContactRequestVC(controller: ContactRequestsViewController) {
-        contactRequestVC = controller
-    }
-
-    private func setUpContactRequest() {
-        guard let controller = contactRequestVC else { return }
-        addChild(controller)
-
-        // make sure that the child view controller's view is the right size
-        controller.view.frame = containerView.bounds
-        containerView.addSubview(controller.view)
-
-        // you must call this at the end per Apple's documentation
-        controller.didMove(toParent: self)
-        controller.view.isHidden = true
-        self.setupTableViewHeader(for: controller.tableView)
-        self.searchView.searchBar.rx.text.orEmpty
-            .debounce(Durations.textFieldThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
-            .bind(to: (self.contactRequestVC?.viewModel.filter)!)
-            .disposed(by: disposeBag)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+       // self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     @objc
     func dismissKeyboard() {
         accountPickerTextView.resignFirstResponder()
         view.removeGestureRecognizer(accountsDismissTapRecognizer)
-    }
-
-    private func configureCustomNavBar(usingCustomSize: Bool) {
-        guard let customNavBar = navigationController?.navigationBar as? SmartListNavigationBar else { return }
-
-        if usingCustomSize {
-            self.updateSearchBarIfActive()
-            customNavBar.usingCustomSize = true
-        } else {
-            customNavBar.removeTopView()
-            customNavBar.usingCustomSize = false
-        }
     }
 
     private func applyL10n() {
@@ -227,9 +131,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     private func setupUI() {
-        self.viewModel.hideNoConversationsMessage
-            .bind(to: self.noConversationLabel.rx.isHidden)
-            .disposed(by: disposeBag)
         self.viewModel.connectionState
             .observe(on: MainScheduler.instance)
             .startWith(self.viewModel.networkConnectionState())
@@ -247,12 +148,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
                 }
             })
             .disposed(by: self.disposeBag)
-        self.viewModel.currentAccountChanged
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.searchBarNotActive()
-            })
-            .disposed(by: disposeBag)
         // create account button
         let accountButton = UIButton(type: .custom)
         self.viewModel.profileImage.bind(to: accountButton.rx.image(for: .normal))
@@ -311,11 +206,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         generalSettingsButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         generalSettingsButton.setImage(imageSettings, for: .normal)
         generalSettingsButton.tintColor = .jamiButtonDark
-        generalSettingsButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.searchController.isActive = true
-            })
-            .disposed(by: self.disposeBag)
         return UIBarButtonItem(customView: generalSettingsButton)
     }
 
@@ -410,123 +300,10 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
             .disposed(by: self.disposeBag)
     }
 
-    func setupDataSources() {
-        // Configure cells closure for the datasources
-        let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item)
-            -> UITableViewCell = {
-                (   _: TableViewSectionedDataSource<ConversationSection>,
-                    tableView: UITableView,
-                    indexPath: IndexPath,
-                    conversationItem: ConversationSection.Item) in
-
-                let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SmartListCell.self)
-                cell.configureFromItem(conversationItem)
-                return cell
-            }
-
-        // Create DataSources for conversations and filtered conversations
-        let conversationsDataSource = RxTableViewSectionedReloadDataSource<ConversationSection>(configureCell: configureCell)
-        // Allows to delete
-        conversationsDataSource.canEditRowAtIndexPath = { _, _  in
-            return true
-        }
-
-        // Bind TableViews to DataSources
-        self.viewModel.conversations
-            .bind(to: self.conversationsTableView.rx.items(dataSource: conversationsDataSource))
-            .disposed(by: disposeBag)
-    }
-
-    func setupTableView() {
-        // Set row height
-        self.conversationsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
-
-        // Register Cell
-        self.conversationsTableView.register(cellType: SmartListCell.self)
-        // Deselect the rows
-        self.conversationsTableView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                self?.conversationsTableView.deselectRow(at: indexPath, animated: true)
-            })
-            .disposed(by: disposeBag)
-
-        self.conversationsTableView.rx.setDelegate(self).disposed(by: disposeBag)
-
-        // table header
-        setupTableViewHeader(for: self.conversationsTableView)
-    }
-
-    let searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.definesPresentationContext = true
-        searchController.hidesNavigationBarDuringPresentation = true
-        return searchController
-    }()
-
-    func setupSearchBar() {
-        searchController.delegate = self
-        let navBar = SmartListNavigationBar()
-        self.navigationController?.setValue(navBar, forKey: "navigationBar")
-
-        navigationItem.searchController = searchController
-        if #available(iOS 16.0, *) {
-            navigationItem.preferredSearchBarPlacement = .stacked
-        }
-
-        navigationItem.hidesSearchBarWhenScrolling = false
-        searchView.searchBar = searchController.searchBar
-        self.searchView.editSearch
-            .subscribe(onNext: {[weak self] (editing) in
-                self?.viewModel.searching.onNext(editing)
-            })
-            .disposed(by: disposeBag)
-    }
-
-    func willPresentSearchController(_ searchController: UISearchController) {
-        self.searchBarActive()
-    }
-
-    func updateSearchBarIfActive() {
-        if searchController.isActive {
-            searchBarActive()
-        }
-    }
-
     func updateNetworkUI() {
         let isHidden = self.viewModel.networkConnectionState() == .none ? false : true
         self.networkAlertView.isHidden = isHidden
         self.view.layoutIfNeeded()
-    }
-
-    func searchBarNotActive() {
-        guard let customNavBar = self.navigationController?.navigationBar as? SmartListNavigationBar else { return }
-        self.navigationItem.title = selectedSegmentIndex.value == 0 ?
-            L10n.Smartlist.conversations : L10n.Smartlist.invitations
-        self.widgetsTopConstraint.constant = 0
-        updateNetworkUI()
-        customNavBar.customHeight = 44
-        customNavBar.searchActive = false
-        customNavBar.removeTopView()
-    }
-
-    func searchBarActive() {
-        guard let customNavBar = navigationController?.navigationBar as? SmartListNavigationBar else { return }
-
-        setupCommonUI(customNavBar: customNavBar)
-
-        if viewModel.isSipAccount() {
-            setupUIForSipAccount(customNavBar: customNavBar)
-        } else {
-            setupUIForNonSipAccount(customNavBar: customNavBar)
-        }
-    }
-
-    private func setupCommonUI(customNavBar: SmartListNavigationBar) {
-        navigationItem.title = ""
-        widgetsTopConstraint.constant = 42
-        customNavBar.customHeight = 70
-        customNavBar.searchActive = true
     }
 
     private func setupUIForSipAccount(customNavBar: SmartListNavigationBar) {
@@ -582,19 +359,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         return button
     }
 
-    func willDismissSearchController(_ searchController: UISearchController) {
-        searchBarNotActive()
-    }
-
     func startAccountCreation() {
         accountPickerTextView.resignFirstResponder()
         self.viewModel.createAccount()
     }
 
     func openAccountsList() {
-        if searchView.searchBar.isFirstResponder {
-            return
-        }
         if accountPickerTextView.isFirstResponder {
             accountPickerTextView.resignFirstResponder()
             return
