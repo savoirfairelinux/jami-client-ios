@@ -46,7 +46,7 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
 }
 
 struct MessagesListView: View {
-    @StateObject var model: MessagesListVM
+    @ObservedObject var model: MessagesListVM
     @SwiftUI.State var showScrollToLatestButton = false
     let scrollReserved = UIScreen.main.bounds.height * 1.5
 
