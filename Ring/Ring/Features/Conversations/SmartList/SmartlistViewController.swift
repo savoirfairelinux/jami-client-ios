@@ -28,6 +28,7 @@ import Reusable
 import SwiftyBeaver
 import ContactsUI
 import QuartzCore
+import SwiftUI
 
 // Constants
 struct SmartlistConstants {
@@ -84,6 +85,14 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         if !self.viewModel.isSipAccount() {
             self.setUpContactRequest()
         }
+        let contentView = UIHostingController(rootView: SmartListView(model: viewModel.conversationsModel))
+        addChild(contentView)
+        view.addSubview(contentView.view)
+        contentView.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        contentView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        contentView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +101,12 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         configureCustomNavBar(usingCustomSize: true)
         self.viewModel.updateDonationBunnerVisiblity()
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -411,6 +426,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func setupDataSources() {
+        return
         // Configure cells closure for the datasources
         let configureCell: (TableViewSectionedDataSource, UITableView, IndexPath, ConversationSection.Item)
             -> UITableViewCell = {
@@ -438,6 +454,7 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     }
 
     func setupTableView() {
+        return
         // Set row height
         self.conversationsTableView.rowHeight = SmartlistConstants.smartlistRowHeight
 
