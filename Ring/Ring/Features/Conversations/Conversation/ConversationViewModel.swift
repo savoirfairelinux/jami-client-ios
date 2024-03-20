@@ -26,10 +26,44 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SwiftyBeaver
+import SwiftUI
+
+enum BubblePosition {
+    case received
+    case sent
+    case generated
+}
+
+enum MessageSequencing {
+    case singleMessage
+    case firstOfSequence
+    case lastOfSequence
+    case middleOfSequence
+    case unknown
+}
+
+enum GeneratedMessageType: String {
+    case receivedContactRequest = "Contact request received"
+    case contactAdded = "Contact added"
+    case missedIncomingCall = "Missed incoming call"
+    case missedOutgoingCall = "Missed outgoing call"
+    case incomingCall = "Incoming call"
+    case outgoingCall = "Outgoing call"
+}
 
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
-class ConversationViewModel: Stateable, ViewModel {
+class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiable {
+
+    @Published var avatar: UIImage?
+    @Published var name: String = ""
+    @Published var lastMessage: String = ""
+    @Published var unreadMessages: Int = 0
+    @Published var presence: Int = 0
+
+    func getDefaultAvatar() -> UIImage {
+        return UIImage.createContactAvatar(username: (self.displayName.value?.isEmpty ?? true) ? self.userName.value : self.displayName.value!)
+    }
 
     /// Logger
     private let log = SwiftyBeaver.self
@@ -49,21 +83,21 @@ class ConversationViewModel: Stateable, ViewModel {
 
     internal let disposeBag = DisposeBag()
 
-    private var players = [String: PlayerViewModel]()
-
-    func getPlayer(messageID: String) -> PlayerViewModel? {
-        return players[messageID]
-    }
-    func setPlayer(messageID: String, player: PlayerViewModel) { players[messageID] = player }
-    func closeAllPlayers() {
-        let queue = DispatchQueue.global(qos: .default)
-        queue.sync {
-            self.players.values.forEach { (player) in
-                player.closePlayer()
-            }
-            self.players.removeAll()
-        }
-    }
+//    private var players = [String: PlayerViewModel]()
+//
+//    func getPlayer(messageID: String) -> PlayerViewModel? {
+//        return players[messageID]
+//    }
+//    func setPlayer(messageID: String, player: PlayerViewModel) { players[messageID] = player }
+//    func closeAllPlayers() {
+//        let queue = DispatchQueue.global(qos: .default)
+//        queue.sync {
+//            self.players.values.forEach { (player) in
+//                player.closePlayer()
+//            }
+//            self.players.removeAll()
+//        }
+//    }
 
     let showInvitation = BehaviorRelay<Bool>(value: false)
 
@@ -104,7 +138,8 @@ class ConversationViewModel: Stateable, ViewModel {
             .combineLatest(userName.asObservable(),
                            displayName.asObservable(),
                            resultSelector: {(userName, displayname) in
-                            guard let displayname = displayname, !displayname.isEmpty else { return userName }
+                            guard let displayname = displayname, !displayname.isEmpty else { 
+                                return userName }
                             return displayname
                            })
     }()
@@ -128,6 +163,61 @@ class ConversationViewModel: Stateable, ViewModel {
         self.dataTransferService = injectionBag.dataTransferService
         self.callService = injectionBag.callService
         self.locationSharingService = injectionBag.locationSharingService
+        let transferHelper = TransferHelper(injectionBag: injectionBag)
+
+        swiftUIModel = MessagesListVM(injectionBag: self.injectionBag,
+                                      transferHelper: transferHelper,
+                                      bestName: BehaviorRelay<String>(value: "").asObservable(),
+                                      screenTapped: BehaviorRelay<Bool>(value: false).asObservable())
+        self.bestName
+            .share()
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .startWith((self.displayName.value?.isEmpty ?? true) ? self.userName.value : self.displayName.value!)
+            .subscribe(onNext: { [weak self] bestName in
+                let name = bestName.replacingOccurrences(of: "\0", with: "")
+                guard !name.isEmpty else { return }
+                self?.name = name
+//                let nameNSString = name as NSString
+//                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(nameNSString)
+            })
+            .disposed(by: self.disposeBag)
+
+        self.profileImageData
+            .share()
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .startWith(self.profileImageData.value)
+            .subscribe(onNext: { [weak self] imageData in
+                if let imageData = imageData, !imageData.isEmpty {
+                    if let image = UIImage(data: imageData) {
+                        self?.avatar = image
+                    } else {
+                        print("*****could not create image")
+                    }
+                }
+//                let name = bestName.replacingOccurrences(of: "\0", with: "")
+//                guard !name.isEmpty else { return }
+//                self?.name = name
+                //                let nameNSString = name as NSString
+                //                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(nameNSString)
+            })
+            .disposed(by: self.disposeBag)
+
+        self.lastMessageObservable
+            .share()
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .startWith(swiftUIModel.lastMessage.value)
+            .subscribe(onNext: { [weak self] mesage in
+                self?.lastMessage = mesage
+                //                let name = bestName.replacingOccurrences(of: "\0", with: "")
+                //                guard !name.isEmpty else { return }
+                //                self?.name = name
+                //                let nameNSString = name as NSString
+                //                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(nameNSString)
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func setConversation(_ conversation: ConversationModel) {
@@ -154,6 +244,12 @@ class ConversationViewModel: Stateable, ViewModel {
         }
     }
 
+    var swiftUIModel: MessagesListVM
+
+    var lastMessageObservable: Observable <String> {
+        return swiftUIModel.lastMessage.asObservable()
+    }
+
     var conversation: ConversationModel! {
         didSet {
             self.subscribeUnreadMessages()
@@ -166,12 +262,12 @@ class ConversationViewModel: Stateable, ViewModel {
                 self.subscribeLastMessagesUpdate()
                 return
             }
+            self.swiftUIModel.conversation = conversation
             ///
             let showInv = self.request != nil || self.conversation.id.isEmpty
             if self.showInvitation.value != showInv {
                 self.showInvitation.accept(showInv)
             }
-
             self.subscribePresenceServiceContactPresence()
             if self.shouldCreateSwarmInfo() {
                 self.createSwarmInfo()
@@ -189,6 +285,7 @@ class ConversationViewModel: Stateable, ViewModel {
                         self.nameService.lookupAddress(withAccount: self.conversation.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
                     }
                 } else {
+                    print("&&&&&&& not contact not swarm. lookup\(filterParicipants.first?.jamiId ?? "")")
                     self.userName.accept(filterParicipants.first?.jamiId ?? "")
                     self.subscribeUserServiceLookupStatus()
                     self.nameService.lookupAddress(withAccount: self.conversation.accountId, nameserver: "", address: filterParicipants.first?.jamiId ?? "")
@@ -244,6 +341,8 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func createSwarmInfo() {
+        let partString: String =  self.conversation.getParticipants().first?.jamiId ?? ""
+        print("&&&&&&& create swarm info \(partString)")
         self.swarmInfo = SwarmInfo(injectionBag: self.injectionBag, conversation: self.conversation)
         self.swarmInfo!.finalAvatar.share()
             .observe(on: MainScheduler.instance)
@@ -262,6 +361,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     private func subscribeNonSwarmProfiles(uri: String, accountId: String) {
+        print("&&&&&&& subscribe not swarm profile \(uri)")
         self.profileService
             .getProfile(uri: uri, createIfNotexists: false, accountId: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -284,7 +384,7 @@ class ConversationViewModel: Stateable, ViewModel {
         conversation.newMessages
             .subscribe { [weak self] _ in
                 guard let self = self, let lastMessage = self.conversation.lastMessage else { return }
-                self.lastMessage.accept(lastMessage.content)
+                //self.lastMessage.accept(lastMessage.content)
                 let lastMessageDate = lastMessage.receivedDate
                 let dateToday = Date()
                 var dateString = ""
@@ -324,9 +424,9 @@ class ConversationViewModel: Stateable, ViewModel {
         return formatter
     }()
 
-    var unreadMessages = BehaviorRelay<String>(value: "")
+    var unreadMessagesObservable = BehaviorRelay<String>(value: "")
 
-    var lastMessage = BehaviorRelay<String>(value: "")
+   // var lastMessage = BehaviorRelay<String>(value: "")
     var lastMessageReceivedDate = BehaviorRelay<String>(value: "")
 
     var hideNewMessagesLabel = BehaviorRelay<Bool>(value: true)
@@ -391,13 +491,13 @@ class ConversationViewModel: Stateable, ViewModel {
 
     func startCall() {
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        self.closeAllPlayers()
+       // self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startCall(contactRingId: jamiId, userName: self.displayName.value ?? self.userName.value))
     }
 
     func startAudioCall() {
         guard let jamiId = self.conversation.getParticipants().first?.jamiId else { return }
-        self.closeAllPlayers()
+       // self.closeAllPlayers()
         self.stateSubject.onNext(ConversationState.startAudioCall(contactRingId: jamiId, userName: self.displayName.value ?? self.userName.value))
     }
 
@@ -405,7 +505,7 @@ class ConversationViewModel: Stateable, ViewModel {
         if self.showInvitation.value {
             return
         }
-        self.closeAllPlayers()
+        //self.closeAllPlayers()
         let isSwarmConversation = conversation.type != .nonSwarm && conversation.type != .sip
         if isSwarmConversation {
             if let swarmInfo = self.swarmInfo {
@@ -417,7 +517,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func recordVideoFile() {
-        closeAllPlayers()
+       // closeAllPlayers()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation, audioOnly: false))
@@ -425,7 +525,7 @@ class ConversationViewModel: Stateable, ViewModel {
     }
 
     func recordAudioFile() {
-        closeAllPlayers()
+       // closeAllPlayers()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.stateSubject.onNext(ConversationState.recordFile(conversation: self.conversation, audioOnly: true))
@@ -491,9 +591,9 @@ class ConversationViewModel: Stateable, ViewModel {
         self.stateSubject.onNext(ConversationState.navigateToCall(call: call))
     }
 
-    deinit {
-        self.closeAllPlayers()
-    }
+//    deinit {
+//        self.closeAllPlayers()
+//    }
 
     func setIsComposingMsg(isComposing: Bool) {
         //        if composingMessage == isComposing {
@@ -627,7 +727,7 @@ extension ConversationViewModel {
             .subscribe { [weak self] unreadMessages in
                 guard let self = self else { return }
                 self.hideNewMessagesLabel.accept(unreadMessages == 0)
-                self.unreadMessages.accept(String(unreadMessages.description))
+               // self.unreadMessages.accept(String(unreadMessages.description))
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
