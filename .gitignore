@@ -24,3 +24,6 @@ Ring/Build/
 
 # Carthage
 Ring/Carthage/
+
+# VSCode
+.vscode/
