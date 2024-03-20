@@ -46,7 +46,8 @@ struct ScrollViewOffsetPreferenceKey: PreferenceKey {
 }
 
 struct MessagesListView: View {
-    @ObservedObject var model: MessagesListVM
+    @SwiftUI.State private var anims: [String: CGFloat] = [:]
+    @StateObject var model: MessagesListVM
     @SwiftUI.State var showScrollToLatestButton = false
     let scrollReserved = UIScreen.main.bounds.height * 1.5
 
@@ -73,7 +74,7 @@ struct MessagesListView: View {
                         createMessagesStackView()
                             .flipped()
                         if !model.atTheBottom {
-                            createScrollToBottmView()
+                            createScrollToBottomView()
                         }
                     }
                     .layoutPriority(1)
@@ -92,7 +93,7 @@ struct MessagesListView: View {
                     let shouldHide = newValue == .shouldPresent
                     model.hideNavigationBar.accept(shouldHide)
                 }
-                // hide context menu overly when device is rotated
+                // hide context menu overlay when device is rotated
                 .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         if screenHeight != UIScreen.main.bounds.size.height && screenHeight != 0 {
@@ -120,13 +121,14 @@ struct MessagesListView: View {
                     syncView()
                 }
             }
-            if showReactionsView {
-                if let reactions = reactionsForMessage {
-                    ReactionsView(model: reactions)
-                        .onTapGesture {
-                            self.showReactionsView = false
-                            reactionsForMessage = nil
-                        }
+            if let reactions = reactionsForMessage {
+                ZStack {
+                    if showReactionsView {
+                        makeReactionsViewBackground()
+                    ReactionsView(currentJamiId: self.model.accountService.currentAccount?.jamiId ?? model.accountService.selectedAccountID, model: reactions, closeCb: closeReactionWindow)
+                            .transition(.scale)
+                    }
+                    
                 }
             }
             if model.isTemporary {
@@ -139,13 +141,31 @@ struct MessagesListView: View {
              Instead, we are using UITapGestureRecognizer from UIView.
              */
             if model.screenTapped {
-                showReactionsView = false
-                reactionsForMessage = nil
+                closeReactionWindow()
                 hideKeyboard()
                 // reset to inital state
                 model.screenTapped = false
             }
         })
+    }
+
+    func closeReactionWindow() {
+        withAnimation(.easeOut(duration: 0.2)) {
+            showReactionsView = false
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            reactionsForMessage = nil
+        }
+    }
+
+    func makeReactionsViewBackground() -> some View {
+        ZStack {
+            Color(UIColor.black)
+                .opacity(0.25)
+            VisualEffect(style: .systemThinMaterial, withVibrancy: false)
+                .opacity(0.15)
+        }
+        .edgesIgnoringSafeArea(.all)
     }
 
     func makeOverlay() -> some View {
@@ -228,11 +248,13 @@ struct MessagesListView: View {
             contextMenuPresentingState = .shouldPresent
         }, showReactionsView: {message in
             reactionsForMessage = message
-            showReactionsView.toggle()
+            withAnimation(.bouncy(duration: 0.35)) {
+                showReactionsView.toggle()
+            }
         }, model: message.messageRow)
     }
 
-    func createScrollToBottmView() -> some View {
+    func createScrollToBottomView() -> some View {
         return VStack(alignment: .trailing, spacing: -10) {
             if model.numberOfNewMessages > 0 {
                 Text("\(model.numberOfNewMessages)")
