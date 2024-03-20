@@ -196,7 +196,9 @@ struct MessageContentView: View {
             .shadowForConversation()
             .measureSize()
             .onLongPressGesture(minimumDuration: 0.5) {
-                self.showReactionsView(reactionsModel)
+                withAnimation(.bouncy(duration: 0.55)) {
+                    self.showReactionsView(reactionsModel)
+                }
             }
             .onAppear {
                 self.messageModel.reactionsModel.onAppear()

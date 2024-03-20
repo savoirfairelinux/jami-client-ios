@@ -19,32 +19,90 @@
  */
 
 import SwiftUI
+import SwiftyBeaver
+
+// TODO add ReactionsPreview class for swarm settings page
 
 struct ReactionsView: View {
-    @StateObject var model: ReactionsContainerModel
-    @SwiftUI.State private var contentHeight: CGFloat = 100
-    let defailtSize: CGFloat = 300
 
-    var body: some View {
+    let log = SwiftyBeaver.self
+
+    var currentJamiId: String
+    @StateObject var model: ReactionsContainerModel
+    @SwiftUI.State private var contentHeight: CGFloat = 150
+    var closeCb: (() -> Void)
+    let defaultSize: CGSize = CGSize(width: 300, height: 600)
+
+    var content: some View {
         ScrollView {
             VStack {
-                ForEach(model.reactionsRow) { reaction in
-                    ReactionRowView(reaction: reaction)
+                ForEach(model.reactionsRow.indices) { index in
+                    // divider + given users reaction list
+                    if index != 0 {
+                        Rectangle()
+                            .fill(Color.gray)
+                            .opacity(0.65)
+                            .frame(width: 100, height: 0.75)
+                    }
+                    let rowIn = model.reactionsRow[index]
+                    let doButtons = rowIn.jamiId == self.currentJamiId
+                    ReactionRowView(doButtons: doButtons,
+                                    author: rowIn.username,
+                                    avatarImg: rowIn.avatarImage,
+                                    swarmColor: model.swarmColor,
+                                    parentMsg: rowIn.messageId,
+                                    reactions: model.reactionsRow[index].content.map({ key, value in ReactionRowViewData(msgId: key, textValue: value) })
+                    )
                 }
             }
             .padding(.vertical)
+            .padding(.horizontal, 4)
             .background(
+                // this will dynamically adjust the height of reactionrowview fullscreen view in order to better show cases in which the number of users who have added reactions is greater than 1
                 GeometryReader { proxy -> Color in
-                    DispatchQueue.main.async {
-                        self.contentHeight = proxy.size.height
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        withAnimation(.easeOut(duration: 0.15)) {
+                            self.contentHeight = round(proxy.size.height)
+                        }
                     }
                     return Color.clear
                 }
             )
         }
-        .background(Color(UIColor.systemBackground))
-        .cornerRadius(15)
+        .background(
+            ZStack {
+                Color(UIColor.systemBackground)
+                    .opacity(1)
+                VisualEffect(style: .regular, withVibrancy: true)
+                    .opacity(1)
+            }
+        ) // TODO ZStack a gradient with swarm color on this
+        .overlay(
+                Button(action: {
+                    closeCb()
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.system(size: 22))
+                        .foregroundColor(Color(model.swarmColor))
+                }
+                .padding(6)
+                .frame(width: 300, height: contentHeight, alignment: .topTrailing)
+                .opacity(0.75)
+        )
+        .cornerRadius(16)
         .shadowForConversation()
-        .frame(maxWidth: defailtSize, maxHeight: min(contentHeight, defailtSize), alignment: .center)
+        .frame(maxWidth: defaultSize.width, maxHeight: min(contentHeight, defaultSize.height), alignment: .center)
+    }
+
+    var body: some View {
+        ZStack(alignment: .center) {
+            VisualEffect(style: .regular, withVibrancy: true)
+                .opacity(0.15)
+            Color(UIColor.systemBackground)
+                .opacity(0.15)
+            content
+            ZStack(alignment: .topTrailing) {
+            }
+        }
     }
 }
