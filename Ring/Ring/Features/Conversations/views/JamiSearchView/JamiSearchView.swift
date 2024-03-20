@@ -41,7 +41,7 @@ class JamiSearchView: NSObject {
     var showSearchResult: Bool = true
 
     func configure(with injectionBag: InjectionBag, source: FilterConversationDataSource, isIncognito: Bool, delegate: FilterConversationDelegate?) {
-        self.viewModel = JamiSearchViewModel(with: injectionBag, source: source)
+        self.viewModel = JamiSearchViewModel(with: injectionBag, source: source, searchOnlyExistingConversations: true)
         self.viewModel.setDelegate(delegate: delegate)
         self.isIncognito = isIncognito
         self.setUpView()
