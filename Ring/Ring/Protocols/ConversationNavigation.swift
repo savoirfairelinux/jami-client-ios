@@ -217,7 +217,7 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         conversationViewController.viewModel = conversationViewModel
         self.present(viewController: conversationViewController,
                      withStyle: .show,
-                     withAnimation: true,
+                     withAnimation: false,
                      withStateable: conversationViewController.viewModel,
                      lockWhilePresenting: VCType.conversation.rawValue)
     }

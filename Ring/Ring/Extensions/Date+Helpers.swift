@@ -43,4 +43,38 @@ extension Date {
         string += String(format: "%02d:%02d", min, Int(sec))
         return string
     }
+
+    func conversationTimestamp() -> String {
+        var dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            return formatter
+        }()
+        var hourFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            return formatter
+        }()
+        let dateToday = Date()
+        var dateString = ""
+        let todayWeekOfYear = Calendar.current.component(.weekOfYear, from: dateToday)
+        let todayDay = Calendar.current.component(.day, from: dateToday)
+        let todayMonth = Calendar.current.component(.month, from: dateToday)
+        let todayYear = Calendar.current.component(.year, from: dateToday)
+        let weekOfYear = Calendar.current.component(.weekOfYear, from: self)
+        let day = Calendar.current.component(.day, from: self)
+        let month = Calendar.current.component(.month, from: self)
+        let year = Calendar.current.component(.year, from: self)
+        if todayDay == day && todayMonth == month && todayYear == year {
+            dateString = hourFormatter.string(from: self)
+        } else if day == todayDay - 1 {
+            dateString = L10n.Smartlist.yesterday
+        } else if todayYear == year && todayWeekOfYear == weekOfYear {
+            dateString = self.dayOfWeek()
+        } else {
+            dateString = dateFormatter.string(from: self)
+        }
+
+        return dateString
+    }
 }

@@ -308,12 +308,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         }
         if let model = getConversationViewModelForId(conversationId: conversationId) {
             self.showConversation(withConversationViewModel: model)
-        } else if let request = self.requestsService.getRequest(withId: conversationId, accountId: accountId) {
-            let conversationViewModel = ConversationViewModel(with: self.injectionBag)
-            let conversation = ConversationModel(request: request)
-            conversationViewModel.conversation =  conversation
-            conversationViewModel.request = request
-            self.showConversation(withConversationViewModel: conversationViewModel)
         }
         if !shouldOpenSmarList {
             let viewControllers = navigationViewController.viewControllers
@@ -351,14 +345,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
             smartListViewController = smartViewController
             return
         }
+        //        let smartViewController = SwarmCreationViewController.instantiate(with: self.injectionBag)
         let smartViewController = SmartlistViewController.instantiate(with: self.injectionBag)
-        let contactRequestsViewController = ContactRequestsViewController.instantiate(with: self.injectionBag)
-        contactRequestsViewController.viewModel.state.take(until: contactRequestsViewController.rx.deallocated)
-            .subscribe(onNext: { [weak self] (state) in
-                self?.stateSubject.onNext(state)
-            })
-            .disposed(by: self.disposeBag)
-        smartViewController.addContactRequestVC(controller: contactRequestsViewController)
         self.present(viewController: smartViewController, withStyle: .show, withAnimation: true, withStateable: smartViewController.viewModel)
         smartListViewController = smartViewController
     }
@@ -371,8 +359,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         let viewControllers = self.navigationViewController.children
         for controller in viewControllers {
             if let smartController = controller as? SmartlistViewController {
-                for model in smartController.viewModel.conversationViewModels where
-                model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId {
+                for model in smartController.viewModel.conversationsModel.conversationViewModels where
+                    model.conversation.isCoredialog() && model.conversation.getParticipants().first?.jamiId == jamiId {
                     return model
                 }
             }
@@ -384,8 +372,8 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         let viewControllers = self.navigationViewController.children
         for controller in viewControllers {
             if let smartController = controller as? SmartlistViewController {
-                for model in smartController.viewModel.conversationViewModels where
-                model.conversation.id == conversationId {
+                for model in smartController.viewModel.conversationsModel.conversationViewModels where
+                    model.conversation.id == conversationId {
                     return model
                 }
             }
@@ -398,3 +386,5 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         presentingVC[VCType.conversation.rawValue] = false
     }
 }
+// swiftlint:enable cyclomatic_complexity
+// swiftlint:enable type_body_length

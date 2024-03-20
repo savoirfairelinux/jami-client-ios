@@ -110,12 +110,12 @@ class ConversationsService {
                 self?.sortAndUpdate(conversations: &currentConversations)
                 // load one message for each swarm conversation
                 for swarmId in conversationToLoad {
-                    self?.conversationsAdapter.loadConversationMessages(accountId, conversationId: swarmId, from: "", size: 1)
+                    self?.loadConversationMessages(conversationId: swarmId, accountId: accountId, from: "", size: 1)
                 }
             }, onError: { [weak self] _ in
                 self?.conversations.accept(currentConversations)
                 for swarmId in conversationToLoad {
-                    self?.conversationsAdapter.loadConversationMessages(accountId, conversationId: swarmId, from: "", size: 1)
+                    self?.loadConversationMessages(conversationId: swarmId, accountId: accountId, from: "", size: 1)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -173,10 +173,6 @@ class ConversationsService {
                 conversation.updatePreferences(preferences: prefsInfo)
             }
             conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
-            if let lastRead = conversation.getLastReadMessage() {
-                let unreadInteractions = conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: accountURI)
-                conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
-            }
             conversations.append(conversation)
         }
     }
@@ -226,8 +222,10 @@ class ConversationsService {
 
     // MARK: swarm interactions management
 
-    func loadConversationMessages(conversationId: String, accountId: String, from: String) {
-        self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: 40)
+    func loadConversationMessages(conversationId: String, accountId: String, from: String, size: Int = 40) {
+        DispatchQueue.global(qos: .background).async {
+            self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: from, size: size)
+        }
     }
 
     func loadMessagesUntil(messageId: String, conversationId: String, accountId: String, from: String) {
@@ -376,7 +374,7 @@ class ConversationsService {
             data[ConversationNotificationsKeys.conversationId.rawValue] = conversationId
             data[ConversationNotificationsKeys.accountId.rawValue] = accountId
             NotificationCenter.default.post(name: NSNotification.Name(ConversationNotifications.conversationReady.rawValue), object: nil, userInfo: data)
-            self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 2)
+            self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: "", size: 2)
             self.sortIfNeeded()
             self.conversationReady.accept(conversationId)
             return
@@ -392,7 +390,7 @@ class ConversationsService {
                 let unreadInteractions = conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: accountURI)
                 conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
             }
-            self.conversationsAdapter.loadConversationMessages(accountId, conversationId: conversationId, from: "", size: 1)
+            self.loadConversationMessages(conversationId: conversationId, accountId: accountId, from: "", size: 2)
             self.sortIfNeeded()
         }
         self.conversationReady.accept(conversationId)
