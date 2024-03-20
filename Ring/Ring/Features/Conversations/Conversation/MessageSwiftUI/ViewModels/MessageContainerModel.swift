@@ -94,7 +94,7 @@ class MessageContainerModel: Identifiable {
         self.messageRow = MessageRowVM(message: message)
         self.contactViewModel = ContactMessageVM(message: message)
         self.replyTarget = MessageReplyTargetVM(contextMenuState: contextMenuState, localJamiId: localJamiId, replyAuthorJamiId: message.authorId, isIncoming: message.incoming)
-        self.reactionsModel = ReactionsContainerModel(message: message)
+        self.reactionsModel = ReactionsContainerModel(message: message, swarmColor: preferencesColor)
     }
 
     func listenerForInfoStateAdded() {

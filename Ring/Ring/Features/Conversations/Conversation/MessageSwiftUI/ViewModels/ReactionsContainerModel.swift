@@ -58,11 +58,18 @@ class ReactionsRowViewModel: Identifiable, ObservableObject, AvatarImageObserver
 class ReactionsContainerModel: ObservableObject {
     @Published var reactionsRow = [ReactionsRowViewModel]()
     @Published var displayValue: String = ""
+    var swarmColor: UIColor = UIColor.defaultSwarmColor
     let message: MessageModel
     private var infoState: PublishSubject<State>?
     var reactionsRowCreated = false
 
     init(message: MessageModel) {
+        self.message = message
+        self.updateDisplayValue()
+    }
+
+    init(message: MessageModel, swarmColor: UIColor) {
+        self.swarmColor = swarmColor
         self.message = message
         self.updateDisplayValue()
     }
