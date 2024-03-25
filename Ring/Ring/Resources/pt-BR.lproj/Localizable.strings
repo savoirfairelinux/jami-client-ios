@@ -45,8 +45,8 @@
 "global.copy" = "Copiar";
 "global.reply" = "Responder";
 "global.search" = "Buscando...";
-"global.donate" = "Donate";
-"global.deleteMessage" = "Delete Message";
+"global.donate" = "Doar";
+"global.deleteMessage" = "Apagar mensagem";
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
@@ -99,8 +99,8 @@
 "smartlist.aboutJami" = "Sobre Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Account list";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.disableDonation" = "Não agora";
+"smartlist.donationExplanation" = "Se você está gostando do Jami e acredita na nossa missão, gostaria de fazer uma doação?";
 
 //Conversation
 "conversation.messagePlaceholder" = "Write to";
@@ -119,7 +119,7 @@
 "conversation.repliedTo" = "replied to";
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.deletedMessage" = "Apagar a mensagem";
 
 //Invitations
 "invitations.noInvitations" = "Sem convites";

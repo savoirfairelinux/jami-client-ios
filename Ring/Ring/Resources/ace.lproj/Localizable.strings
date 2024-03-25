@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "ڤرجالنن";
 "accountPage.usernameRegisterAction" = "ڤمباچ";
 "accountPage.usernameRegistrationFailed" = "ڤرجالنن تله دڤرچايا?? ي.";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "حساب ڤڠڬيلن";
+"accountPage.createPasswordExplanation" = "ايكوتا Jami-تاو دڤرجواڠكن سهيڠڬ دالم ڤرودوک اين سباڬاي ارشيڤ يڠ ممڤوپا?? ي کليد ايكوتاڽ. ڤرودوک ايكوتا اين بوليه دڤرچايا?? ي دڠن ڤاسر.";
 "accountPage.changePassword" = "مڠهادڤي ڤرسود";
 "accountPage.oldPasswordPlaceholder" = "ممبري ڤرسود ڤريڠکت";
 "accountPage.newPasswordPlaceholder" = "مڠهادڤي ڤرسودن بارو";

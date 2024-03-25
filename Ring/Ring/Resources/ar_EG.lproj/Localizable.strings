@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "التسجيل";
 "accountPage.usernameRegisterAction" = "سجل";
 "accountPage.usernameRegistrationFailed" = "التسجيل فشل، من فضلك تحقق من كلمة المرور";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "تشفير الحساب";
+"accountPage.createPasswordExplanation" = "يتم تسجيل حساب جامي الخاص بك فقط على هذا الجهاز كملف يحتوي على مفاتيح حسابك. يمكن حماية الوصول إلى هذا الملف بواسطة كلمة مرور.";
 "accountPage.changePassword" = "تغيير كلمة المرور";
 "accountPage.oldPasswordPlaceholder" = "إدخال كلمة المرور القديمة";
 "accountPage.newPasswordPlaceholder" = "إدخال كلمة مرور جديدة";

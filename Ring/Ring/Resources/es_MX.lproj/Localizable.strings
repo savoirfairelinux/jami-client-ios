@@ -293,7 +293,7 @@
 "accountPage.disableBoothMode" = "Deshabilitar modo reservado";
 "accountPage.disableBoothModeExplanation" = "Por favor Introduzca la contraseña de su cuenta";
 "accountPage.boothModeExplanation" = "En el modo de conversación reservada, el historial de conversaciones no se guarda y la funcionalidad de Jami se limita al realizar llamadas salientes. Cuando habilite el modo de conversación reservada, se eliminarán todas sus conversaciones.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
+"accountPage.noBoothMode" = "Para habilitar el modo Booth,  primero cifre su cuenta.";
 "accountPage.boothModeAlertMessage" = "Después de habilitar el modo de conversación reservada, se eliminarán todas sus conversaciones.";
 "accountPage.peerDiscovery" = "Conectarse automáticamente en red local";
 "accountPage.autoRegistration" = "Registrar automáticamente luego de la expiración";
