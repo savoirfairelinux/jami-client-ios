@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "Регистрация";
 "accountPage.usernameRegisterAction" = "Регистриране";
 "accountPage.usernameRegistrationFailed" = "Регистрацията не е успела, проверете паролата.";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "Криптоварен акаунт";
+"accountPage.createPasswordExplanation" = "Вашият акаунт Jami е регистриран само на това устройство като архив, съдържащ ключовете на вашия акаунт.";
 "accountPage.changePassword" = "Промяна на парола";
 "accountPage.oldPasswordPlaceholder" = "Введете старата парола";
 "accountPage.newPasswordPlaceholder" = "Введете нов парол";

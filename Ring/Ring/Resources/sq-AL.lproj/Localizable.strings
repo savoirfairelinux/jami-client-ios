@@ -293,7 +293,7 @@
 "accountPage.disableBoothMode" = "Çaktivizo Mënyrën Kabinë";
 "accountPage.disableBoothModeExplanation" = "Ju lutemi, jepni fjalëkalimin e llogarisë tuaj";
 "accountPage.boothModeExplanation" = "Në mënyrën kabinë, historiku i bisedës s’ruhet dhe funksionet e Jami-t kufizohen në bërje thirrjesh. Kur aktivizoni mënyrën kabinë, krejt bisedat tuaja do të hiqen.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
+"accountPage.noBoothMode" = "Që të aktivizoni mënyrën Kabinë, së pari fshehtëzoni llogarinë tuaj.";
 "accountPage.boothModeAlertMessage" = "Pas aktivizimit të mënyrës Kabinë, krej bisedat tuaja do të hiqen.";
 "accountPage.peerDiscovery" = "Vetëlidhu në rrjet vendor";
 "accountPage.autoRegistration" = "Regjistrohu automatikisht pas skadimit";

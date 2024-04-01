@@ -19,17 +19,17 @@
  */
 
 // Global
-"global.accountSettings" = "Постављања рачуна";
-"global.advancedSettings" = "Насочни настройки";
+"global.accountSettings" = "Podešavanja naloga";
+"global.advancedSettings" = "Napredna podešavanja";
 "global.username" = "Korisničko ime";
 "global.recommended" = "Preporučeno";
 "global.password" = "Šifra";
-"global.registerAUsername" = "Регистрирајте корисничко име";
-"global.enterPassword" = "Уведите лозинку";
-"global.enterUsername" = "Унесите Име корисника";
+"global.registerAUsername" = "Registruj korisničko ime";
+"global.enterPassword" = "Unesi lozinku";
+"global.enterUsername" = "Unesi korisničko ime";
 "global.cancel" = "Otkaži";
-"global.blockContact" = "Блоковање контакта";
-"global.removeAccount" = "Увајање рачуна";
+"global.blockContact" = "Blokiraj kontakt";
+"global.removeAccount" = "Ukloni nalog";
 "global.incomingCall" = "Dolazeći poziv";
 "global.ok" = "U redu";
 "global.close" = "У близини";

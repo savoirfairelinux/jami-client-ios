@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "নিবন্ধন";
 "accountPage.usernameRegisterAction" = "নিবন্ধন";
 "accountPage.usernameRegistrationFailed" = "নিবন্ধন ব্যর্থ হয়েছে, পাসওয়ার্ড চেক করুন।";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "এনক্রিপ্ট অ্যাকাউন্ট";
+"accountPage.createPasswordExplanation" = "আপনার জামি অ্যাকাউন্ট শুধুমাত্র এই ডিভাইসে একটি সংরক্ষণাগার হিসাবে নিবন্ধিত হয় যা আপনার অ্যাকাউন্টের চাবি ধারণ করে। এই সংরক্ষণাগার অ্যাক্সেস একটি পাসওয়ার্ড দ্বারা সুরক্ষিত করা যেতে পারে।";
 "accountPage.changePassword" = "পাসওয়ার্ড পরিবর্তন করুন";
 "accountPage.oldPasswordPlaceholder" = "পুরানো পাসওয়ার্ড লিখুন";
 "accountPage.newPasswordPlaceholder" = "নতুন পাসওয়ার্ড লিখুন";

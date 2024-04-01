@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "Registrering";
 "accountPage.usernameRegisterAction" = "Registrér";
 "accountPage.usernameRegistrationFailed" = "Registrering mislykkedes.";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "Kryptering af konto";
+"accountPage.createPasswordExplanation" = "Din Jami-konto er registreret kun på denne enhed som et arkiv, der indeholder nøglerne til din konto.";
 "accountPage.changePassword" = "Skift adgangskode";
 "accountPage.oldPasswordPlaceholder" = "Indtaster gammelt adgangskode";
 "accountPage.newPasswordPlaceholder" = "Indtaster nyt adgangskode";

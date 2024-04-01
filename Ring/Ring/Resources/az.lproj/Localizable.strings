@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "ثبت";
 "accountPage.usernameRegisterAction" = "ثبت";
 "accountPage.usernameRegistrationFailed" = "ثبت نام ناکام اولدو. لطفا رمزونو چک کنید.";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "رمزلشدیرمه حساب";
+"accountPage.createPasswordExplanation" = "Jami حسابينيز آنجاق بو آلینادا حسابينيزين آچیق لاريني اولان آرکائیو اولاراق ثبت اولونور.";
 "accountPage.changePassword" = "رمز لرینده یئنی دن";
 "accountPage.oldPasswordPlaceholder" = "کؤنول رمز دن یئری";
 "accountPage.newPasswordPlaceholder" = "تزه رمز دن یاز";

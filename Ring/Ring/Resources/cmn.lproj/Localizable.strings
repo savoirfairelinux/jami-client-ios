@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "注册中";
 "accountPage.usernameRegisterAction" = "註冊";
 "accountPage.usernameRegistrationFailed" = "注册失败。请检查密码。";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "加密账户";
+"accountPage.createPasswordExplanation" = "您的Jami帐户仅在此设备上注册,作为包含您的帐户密钥的档案库.";
 "accountPage.changePassword" = "變更密碼";
 "accountPage.oldPasswordPlaceholder" = "输入旧密码";
 "accountPage.newPasswordPlaceholder" = "输入新密码";

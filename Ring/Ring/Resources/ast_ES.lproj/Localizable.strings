@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "El rexistru";
 "accountPage.usernameRegisterAction" = "El rexistru";
 "accountPage.usernameRegistrationFailed" = "La inscripción fallaron.";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "Encriptación de cuenta";
+"accountPage.createPasswordExplanation" = "La so cuenta Jami ye rexistrada solamente nun dispositivu como un archivu que contenga les llaves de la so cuenta.";
 "accountPage.changePassword" = "Cambiar contraseña";
 "accountPage.oldPasswordPlaceholder" = "Introducir una contraseña vieya";
 "accountPage.newPasswordPlaceholder" = "Introducir una contraseña nueva";

@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "Registruje se";
 "accountPage.usernameRegisterAction" = "Zaregistrovat";
 "accountPage.usernameRegistrationFailed" = "Registrace selhala. Prosím zkontrolujte heslo.";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "Šifrování účtu";
+"accountPage.createPasswordExplanation" = "Váš účet Jami je registrován pouze v tomto zařízení jako archiv obsahující klíče k vašemu účtu. Přístup k tomuto archivu může být chráněn heslem.";
 "accountPage.changePassword" = "Změnit heslo";
 "accountPage.oldPasswordPlaceholder" = "Zadejte staré heslo.";
 "accountPage.newPasswordPlaceholder" = "Zadejte nové heslo.";

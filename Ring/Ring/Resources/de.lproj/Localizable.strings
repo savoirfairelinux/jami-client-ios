@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "Benutzername wird registriert...";
 "accountPage.usernameRegisterAction" = "Registrieren";
 "accountPage.usernameRegistrationFailed" = "Registrierung fehlgeschlagen. Bitte Passwort überprüfen.";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "Konto verschlüsseln";
+"accountPage.createPasswordExplanation" = "Ihr Jami-Konto wird nur auf diesem Gerät als Archiv registriert, das die Schlüssel Ihres Kontos enthält. Der Zugriff auf dieses Archiv kann durch ein Passwort geschützt werden.";
 "accountPage.changePassword" = "Passwort ändern";
 "accountPage.oldPasswordPlaceholder" = "Altes Passwort eingeben";
 "accountPage.newPasswordPlaceholder" = "Neues Passwort eingeben";

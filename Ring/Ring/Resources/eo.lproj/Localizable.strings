@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "Registriĝo";
 "accountPage.usernameRegisterAction" = "Registri";
 "accountPage.usernameRegistrationFailed" = "Registro malsukcesis. Bonvolu kontroli la pasvorton.";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "Enkripti konto";
+"accountPage.createPasswordExplanation" = "Via konto Jami estas registrita nur sur ĉi tiu aparato kiel arkivo enhavanta la ŝlosilojn de via konto. Aliro al tiu arkivo povas esti protektita per pasvorto.";
 "accountPage.changePassword" = "Ŝanĝu pasvorton";
 "accountPage.oldPasswordPlaceholder" = "Enigu malnovan pasvorton";
 "accountPage.newPasswordPlaceholder" = "Enigu novan pasvorton";

@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "Registre";
 "accountPage.usernameRegisterAction" = "Registra";
 "accountPage.usernameRegistrationFailed" = "La inscripció no va funcionar.";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "Conta encriptada";
+"accountPage.createPasswordExplanation" = "El teu compte Jami està registrat només en aquest dispositiu com un arxiu que conté les claus del teu compte.";
 "accountPage.changePassword" = "Canvia la contrasenya";
 "accountPage.oldPasswordPlaceholder" = "Introdueix una contrasenya antiga";
 "accountPage.newPasswordPlaceholder" = "Introdueix una nova contrasenya";

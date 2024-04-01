@@ -282,8 +282,8 @@
 "accountPage.usernameRegistering" = "Καταχώριση";
 "accountPage.usernameRegisterAction" = "Εγγραφή";
 "accountPage.usernameRegistrationFailed" = "Η εγγραφή απέτυχε. Παρακαλώ ελέγξτε το κωδικό πρόσβασης.";
-"accountPage.createPassword" = "Encrypt account";
-"accountPage.createPasswordExplanation" = "Your Jami account is registered only on this device as an archive containing the keys of your account. Access to this archive can be protected by a password.";
+"accountPage.createPassword" = "Κρυπτογραφημένο λογαριασμό";
+"accountPage.createPasswordExplanation" = "Το λογαριασμό Jami σας καταχωρίζεται μόνο σε αυτή τη συσκευή ως αρχείο που περιέχει τα κλειδιά του λογαριασμού σας.";
 "accountPage.changePassword" = "Αλλαγή κωδικού";
 "accountPage.oldPasswordPlaceholder" = "Εισάγετε παλιό κωδικό πρόσβασης";
 "accountPage.newPasswordPlaceholder" = "Εισαγωγή νέου κωδικού";
