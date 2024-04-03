@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b68fa4_f1a398c6",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-04-03T13:56:40Z",
+      "side": 1,
+      "message": "notificationTimeout 25 seconds",
+      "revId": "4ab85f5d33b8dfcae63cecb074f6d369c4b2eb5f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00ff8800_228ee155",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-04-03T13:56:40Z",
+      "side": 1,
+      "message": "move to Constants file",
+      "revId": "4ab85f5d33b8dfcae63cecb074f6d369c4b2eb5f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "855702a4_278a3703",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-04-03T13:56:40Z",
+      "side": 1,
+      "message": "should we check if task already exists?",
+      "revId": "4ab85f5d33b8dfcae63cecb074f6d369c4b2eb5f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c99fb923_08646df3",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-04-03T13:56:40Z",
+      "side": 1,
+      "message": "First, the task is initiated, and then an observable is returned. However, there is no guarantee that the event will not be emitted before subscription, potentially resulting in a missed event",
+      "revId": "4ab85f5d33b8dfcae63cecb074f6d369c4b2eb5f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47b445c2_347393fa",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-04-03T13:56:40Z",
+      "side": 1,
+      "message": "// MARK: URLSessionDataDelegate",
+      "revId": "4ab85f5d33b8dfcae63cecb074f6d369c4b2eb5f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1822c86f_e9bc9499",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-04-03T13:56:40Z",
+      "side": 1,
+      "message": "Should not be running in completion callback. If it to verify task we could use taskIdentifier.",
+      "revId": "4ab85f5d33b8dfcae63cecb074f6d369c4b2eb5f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a852db_8895dd68",
+        "filename": "Ring/jamiNotificationExtension/NotificationService.swift",
+        "patchSetId": 10
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-04-03T13:56:40Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "4ab85f5d33b8dfcae63cecb074f6d369c4b2eb5f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
