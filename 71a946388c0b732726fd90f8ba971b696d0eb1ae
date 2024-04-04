@@ -22,6 +22,30 @@
       },
       "revId": "71a946388c0b732726fd90f8ba971b696d0eb1ae",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023d577c_d4d89684",
+        "filename": "Ring/Ring/Features/Me/Me/MeViewController.swift",
+        "patchSetId": 9
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-04-04T18:13:10Z",
+      "side": 1,
+      "message": "dhtProxyListUrl is set to empty string when we set custom proxy address",
+      "parentUuid": "b970f979_9784a3ae",
+      "range": {
+        "startLine": 495,
+        "startChar": 26,
+        "endLine": 495,
+        "endChar": 31
+      },
+      "revId": "71a946388c0b732726fd90f8ba971b696d0eb1ae",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
   ]
 }
