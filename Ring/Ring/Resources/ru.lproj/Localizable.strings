@@ -40,15 +40,15 @@
 "global.preview" = "Предпросмотр";
 "global.accept" = "Принять";
 "global.block" = "Заблокировать";
-"global.refuse" = "Отказать";
+"global.refuse" = "Отклонить";
 "global.name" = "Имя";
 "global.copy" = "Копировать";
 "global.reply" = "Ответить";
 "global.search" = "Поиск…";
 "global.donate" = "Пожертвование";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
+"global.deleteMessage" = "Удалить сообщение";
+"global.deleteFile" = "Удалить файл с устройства";
+"global.editMessage" = "Изменить сообщение";
 "global.editing" = "Edititing";
 
 // Scan
@@ -59,64 +59,64 @@
 "swarmcreation.createTheSwarm" = "Создать группу";
 "swarmcreation.addADescription" = "Добавить описание";
 // Swarm
-"swarm.ignoreSwarm" = "Игнорируйте ров";
-"swarm.leaveConversation" = "Оставьте разговор.";
+"swarm.ignoreSwarm" = "Игнорировать группу";
+"swarm.leaveConversation" = "Покинуть беседу";
 "swarm.chooseColor" = "Выбрать цвет";
 "swarm.typeOfSwarm" = "Тип роя";
 "swarm.identifier" = "Идентификатор";
 "swarm.about" = "О программе";
-"swarm.members" = "Члены";
+"swarm.members" = "Участники";
 "swarm.addDescription" = "Добавить описание";
 "swarm.oneToOne" = "Частный рой";
-"swarm.adminInvitesOnly" = "Администратор приглашает только";
+"swarm.adminInvitesOnly" = "Только по приглашению администратора";
 "swarm.invitesOnly" = "Частный рой";
-"swarm.publicChat" = "Общественный ров";
+"swarm.publicChat" = "Общественный рой";
 "swarm.others" = "Другие";
 "swarm.member" = "Участник";
 "swarm.invited" = "Приглашен(а)";
 "swarm.admin" = "Администратор";
 "swarm.banned" = "Заблокирован";
 "swarm.unknown" = "Неизвестный";
-"swarm.addMember" = "Добавить член";
-"swarm.confirmLeaveSwarm" = "Ты уверен, что хочешь покинуть этот рог?";
+"swarm.addMember" = "Добавить участника";
+"swarm.confirmLeaveSwarm" = "Вы уверены, что хотите покинуть этот рой?";
 "swarm.Leave" = "Покинуть";
-"swarm.newSwarm" = "New swarm";
+"swarm.newSwarm" = "Новый рой";
 // Smartlist
 "smartlist.yesterday" = "Вчера";
-"smartlist.results" = "Публичный Каталог";
+"smartlist.results" = "Публичный каталог";
 "smartlist.conversations" = "Разговоры";
 "smartlist.noResults" = "Нет результатов";
 "smartlist.noConversation" = "Нет разговоров";
 "smartlist.searchBarPlaceholder" = "Введите имя...";
-"smartlist.searchBar" = "Поиск:";
+"smartlist.searchBar" = "Поиск";
 "smartlist.noNetworkConnectivity" = "Нет подключения к сети";
-"smartlist.cellularAccess" = "Убедитесь, что доступ через сеть сотовой связи разрешен";
+"smartlist.cellularAccess" = "Убедитесь, что доступ через сеть сотовой связи разрешён в настройках устройства";
 "smartlist.accountsTitle" = "Аккаунты";
 "smartlist.addAccountButton" = "+ Добавить аккаунт";
-"smartlist.noNumber" = "Выбранный контакт не имеет никакого номера";
+"smartlist.noNumber" = "У выбранного контакта нет номера";
 "smartlist.selectOneNumber" = "Выберите один из номеров";
 "smartlist.invitations" = "Приглашения";
 "smartlist.aboutJami" = "О программе Jami";
-"smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.inviteFriends" = "Пригласить друзей";
+"smartlist.accounts" = "Список аккаунтов";
 "smartlist.disableDonation" = "Не сейчас";
 "smartlist.donationExplanation" = "Если Вам нравится использовать Jami и Вы верите в нашу миссию, Вы бы сделали пожертвование?";
 
 //Conversation
-"conversation.messagePlaceholder" = "Write to";
+"conversation.messagePlaceholder" = "Написать сообщение";
 "conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
 "conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
-"conversation.errorSavingImage" = "Failed to save image to gallery";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.errorSavingImage" = "Не удалось сохранить изображение в галерею";
+"conversation.receivedRequest" = "%@ отправил вам запрос на беседу.";
 "conversation.incomingRequest" = "Я отправил вам запрос на разговор.";
-"conversation.requestMessage" = "Привет,\nВы хотите присоединиться к разговору?";
-"conversation.notContact" = "%@ is not in your contact list.";
-"conversation.sendRequest" = "Отправьте ему/ей запрос контакта, чтобы иметь возможность совместного обмена";
-"conversation.sendRequestTitle" = "Посылать запрос на контакт";
+"conversation.requestMessage" = "Здравствуйте, не хотели бы вы присоединиться к беседе?";
+"conversation.notContact" = "Пользователя «%@» нет в вашем списке контактов.";
+"conversation.sendRequest" = "Отправьте собеседнику запрос на добавление контакта, чтобы обмениваться";
+"conversation.sendRequestTitle" = "Отправить запрос на добавление в контакты";
 "conversation.synchronizationTitle" = "Вы приняли запрос на беседу.";
-"conversation.synchronizationMessage" = "Мы ожидаем пока %@ подключиться для синхронизации беседы.";
+"conversation.synchronizationMessage" = "Мы ожидаем, пока %@ подключится, чтобы синхронизировать разговор.";
 "conversation.inReplyTo" = "В ответ на";
-"conversation.repliedTo" = "replied to";
+"conversation.repliedTo" = "в ответ на";
 "conversation.yourself" = "yourself";
 "conversation.edited" = "edited";
 "conversation.deletedMessage" = "удалённое сообщение";
@@ -127,13 +127,13 @@
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
-"welcome.text" = "Jami - это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
+"welcome.title" = "Общайтесь свободно и конфиденциально с Джами";
+"welcome.text" = "Jami — это свободная универсальная коммуникационная платформа, уважающая свободу и конфиденциальность пользователей.";
 "welcome.haveAccount" = "У меня уже есть аккаунт";
 "welcome.linkDevice" = "Импортировать с другого устройства";
 "welcome.linkBackup" = "Импортировать из резервной копии";
 "welcome.createAccount" = "Присоединиться";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.connectToManager" = "Подключиться к серверу управления учётными записями Джами";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Пропустить";
@@ -146,7 +146,7 @@
 
 //Create Account form
 "createAccount.createAccountFormTitle" = "Присоединиться к Jami";
-"createAccount.chooseStrongPassword" = "Выберите надёжный пароль, который вы запомните, чтобы защитить ваш аккаунт Jami.";
+"createAccount.chooseStrongPassword" = "Выберите надёжный пароль, который вы сможете запомнить, чтобы защитить ваш аккаунт Jami.";
 "createAccount.repeatPasswordPlaceholder" = "Подтверждение пароля";
 "createAccount.passwordCharactersNumberError" = "Минимум 6 символов";
 "createAccount.passwordNotMatchingError" = "Пароли не совпадают";
@@ -159,7 +159,7 @@
 "createAccount.ChooseAPassword" = "Зашифровать мой аккаунт";
 "createAccount.PasswordInformation" = "Выберите пароль для шифрования вашего локального аккаунта. Не забывайте его или вы не сможете восстановить свой аккаунт";
 "createAccount.EnableNotifications" = "Уведомления";
-"createAccount.Recommended" = "(Рекомендовано)";
+"createAccount.Recommended" = "(Рекомендуется)";
 "createAccount.UsernameNotRegisteredTitle" = "Ошибка сети";
 "createAccount.UsernameNotRegisteredMessage" = "Аккаунт был создан но имя пользователя не было зарегистрировано";
 "createAccount.timeoutTitle" = "Аккаунт создан";
@@ -168,11 +168,11 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Соединение аккаунта";
 "linkToAccount.linkButtonTitle" = "Привязать";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Привязать устройство";
+"linkToAccount.linkDeviceMessage" = "Выберите «Привязать новое устройство» в другом приложении Джами, чтобы показать QR-код или PIN-код";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Введите PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Чтобы получить PIN-код, перейдите в настройки управления аккаунтом на устройстве, где уже подключён необходимый вам аккаунт. В настройках привязанных устройств выберите «Привязать другое устройство к этому аккаунту». Вы получите PIN, необходимый для завершения процедуры. PIN будет действителен в течение 10 минут.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Войти";
@@ -190,7 +190,7 @@
 "alerts.profileTakePhoto" = "Сфотографировать";
 "alerts.profileUploadPhoto" = "Загрузка фотографии";
 "alerts.accountLinkedTitle" = "Аккаунт соединяется";
-"alerts.dbFailedTitle" = "An error happened when launching Jami";
+"alerts.dbFailedTitle" = "Произошла ошибка при запуске Jami";
 "alerts.dbFailedMessage" = "Пожалуйста, закройте приложение и попробуйте открыть его снова";
 "alerts.confirmBlockContact" = "Вы уверены, что хотите заблокировать этот контакт? История разговоров с этим контактом также будет безвозвратно удалена.";
 "alerts.confirmDeleteConversation" = "Вы уверены, что хотите безвозвратно удалить этот разговор?";
@@ -223,8 +223,8 @@
 "actions.doneAction" = "Готово";
 "alerts.incomingCallAllertTitle" = "Входящий вызов от";
 "alerts.incomingCallButtonIgnore" = "Игнорировать";
-"actions.startAudioCall" = "Голосовой звонок";
-"actions.startVideoCall" = "Видео звонок";
+"actions.startAudioCall" = "Аудиовызов";
+"actions.startVideoCall" = "Видеовызов";
 "actions.goToSettings" = "Перейти к настройкам";
 "actions.stopLocationSharing" = "Остановить трансляцию";
 
@@ -273,12 +273,12 @@
 "accountPage.other" = "Другой";
 "accountPage.removeAccountMessage" = "Нажав кнопку «Удалить», вы удалите этот аккаунт на этом устройстве! Это действие не может быть отменено. Кроме того, ваше зарегистрированное имя может быть утеряно.";
 "accountPage.removeAccountButton" = "Удалить";
-"accountPage.inviteFriends" = "Invite friends";
+"accountPage.inviteFriends" = "Пригласить друзей";
 "accountPage.contactMeOnJamiTitle" = "Свяжитесь со мной в Jami!";
 "accountPage.contactMeOnJamiContant" = "Свяжитесь со мной, используя \"%s\" на распределенной коммуникационной платформе Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Введите пароль вашего аккаунта";
 "accountPage.usernamePlaceholder" = "Введите желаемое имя пользователя";
-"accountPage.registerNameErrorMessage" = "Chosen username is not available";
+"accountPage.registerNameErrorMessage" = "Выбранное имя пользователя недоступно";
 "accountPage.usernameRegistering" = "Регистрация";
 "accountPage.usernameRegisterAction" = "Зарегистрировать";
 "accountPage.usernameRegistrationFailed" = "Ошибка регистрации. Пожалуйста, проверьте пароль.";
@@ -291,9 +291,9 @@
 "accountPage.changePasswordError" = "Пароль неверный ";
 "accountPage.enableBoothMode" = "Включить режим кабинки";
 "accountPage.disableBoothMode" = "Выключить режим кабинки";
-"accountPage.disableBoothModeExplanation" = "Please provide your account password";
+"accountPage.disableBoothModeExplanation" = "Пожалуйста, укажите пароль вашей учётной записи";
 "accountPage.boothModeExplanation" = "В режиме кабинки история разговоров не сохраняется, а функциональность Jami ограничена исходящими звонками. Когда вы включите режим кабинки, все ваши разговоры будут удалены.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
+"accountPage.noBoothMode" = "Для включения режима кабинки необходимо сначала защитить ваш аккаунт паролем.";
 "accountPage.boothModeAlertMessage" = "После включения режима кабинки все ваши разговоры будут удалены.";
 "accountPage.peerDiscovery" = "Авто-подключение к локальной сети";
 "accountPage.autoRegistration" = "Автоматическая регистрация после истечения срока действия";
@@ -332,14 +332,14 @@
 //Link New Device
 "linkDevice.title" = "Привязать новое устройство";
 "linkDevice.passwordError" = "Введенный пароль не подходит к этому аккаунту";
-"linkDevice.networkError" = "A network error occurred during the export";
-"linkDevice.defaultError" = "An error occurred during the export";
+"linkDevice.networkError" = "Во время экспорта произошла ошибка сети";
+"linkDevice.defaultError" = "Во время экспорта произошла ошибка";
 "linkDevice.explanationMessage" = "Для завершения процесса Вам необходимо запустить Jami на новом устройстве и выбрать пункт \"Привязать это устройство к аккаунту\". Ваш PIN действителен в течение 10 минут";
 "linkDevice.hudMessage" = "Проверка";
 
 //Contact Page
-"contactPage.startAudioCall" = "Сделать аудиозвонок";
-"contactPage.startVideoCall" = "Сделать видеозвонок";
+"contactPage.startAudioCall" = "Начать голосовой вызов";
+"contactPage.startVideoCall" = "Начать видеовызов";
 "contactPage.sendMessage" = "Отправить сообщение";
 "contactPage.clearConversation" = "Очистить чат";
 "contactPage.removeConversation" = "Удалить диалог";
@@ -374,8 +374,8 @@
 "generatedMessage.contactBanned" = "был выбит";
 "generatedMessage.contactReAdded" = "был передобавлен";
 "generatedMessage.outgoingCall" = "Исходящий вызов";
-"generatedMessage.missedOutgoingCall" = "Непринятый исходящий звонок";
-"generatedMessage.missedIncomingCall" = "Пропущенный входящий звонок";
+"generatedMessage.missedOutgoingCall" = "Непринятый исходящий вызов";
+"generatedMessage.missedIncomingCall" = "Пропущенный входящий вызов";
 "generatedMessage.liveLocationSharing" = "Совместное использование местоположения в реальном времени";
 "generatedMessage.contactLeftConversation" = "левый";
 
@@ -388,8 +388,8 @@
 "generalSettings.acceptTransferLimit" = "Принять лимит на передачу";
 "generalSettings.acceptTransferLimitDescription" = "(в МБ, 0 = неограниченный)";
 "generalSettings.limitLocationSharingDuration" = "Ограничить продолжительность совместного размещения";
-"generalSettings.locationSharingDuration" = "Продолжительность позиционных акций";
-"generalSettings.donationCampaign" = "Donation campaign";
+"generalSettings.locationSharingDuration" = "Продолжительность трансляции местоположения";
+"generalSettings.donationCampaign" = "Кампания по пожертвованиям";
 "generalSettings.enableDonationCampaign" = "Включить кампанию по пожертвованиям";
 
 //Log View
@@ -410,13 +410,13 @@
 "migrateAccount.migrateAnother" = "Перенос другого аккаунта";
 
 //About Jami
-"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
-"aboutJami.declaration2" = "to learn more.";
-"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
-"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.declaration1" = "Джами (программный пакет проекта GNU) — универсальная программа для распределённого децентрализованного общения, которая уважает свободу и конфиденциальность своих пользователей. Посетите";
+"aboutJami.declaration2" = "чтобы узнать больше.";
+"aboutJami.noWarranty1" = "Эта программа поставляется без каких-либо гарантий. См.";
+"aboutJami.noWarranty2" = "версии 3 или более поздней, чтобы узнать больше.";
 "aboutJami.contribute" = "Помочь проекту";
 "aboutJami.feedback" = "Обратная связь";
-"aboutJami.createdBy" = "Created by";
-"aboutJami.artworkBy" = "Artwork by";
+"aboutJami.createdBy" = "Авторы:";
+"aboutJami.artworkBy" = "Художник:";
 
 

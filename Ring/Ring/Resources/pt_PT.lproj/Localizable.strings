@@ -104,14 +104,14 @@
 
 //Conversation
 "conversation.messagePlaceholder" = "Write to";
-"conversation.explanationSendingLocationTo" = "Atualmente você está compartilhando sua localização com";
+"conversation.explanationSendingLocationTo" = "Está atualmente a partilhar a sua localização com";
 "conversation.explanationReceivingLocationFrom" = "Você está recebendo atualmente uma localização real de";
 "conversation.errorSavingImage" = "Failed to save image to gallery";
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Enviei-lhe um pedido para uma conversa.";
 "conversation.requestMessage" = "Olá,\nVocê gostaria de entrar na conversação?";
 "conversation.notContact" = "%@ is not in your contact list.";
-"conversation.sendRequest" = "Envie para ele/ela o seu pedido de contato, para que vocês possam interagir";
+"conversation.sendRequest" = "Envie-lhe um pedido de contacto para poderem trocar impressões";
 "conversation.sendRequestTitle" = "Enviar um pedido de contacto";
 "conversation.synchronizationTitle" = "Você aceitou o pedido de conversa.";
 "conversation.synchronizationMessage" = "Estamos aguardando por %@ para sincronizar a conversa.";
@@ -153,7 +153,7 @@
 "createAccount.lookingForUsernameAvailability" = "a procurar pela disponibilidade…";
 "createAccount.invalidUsername" = "nome de utilizador inválido";
 "createAccount.usernameAlreadyTaken" = "o nome de utilizador já existe";
-"createAccount.usernameValid" = "Nome de usuário está disponível";
+"createAccount.usernameValid" = "o nome de utilizador está disponível";
 "createAccount.loading" = "A carregar";
 "createAccount.waitCreateAccountTitle" = "Adicionar conta";
 "createAccount.ChooseAPassword" = "Encriptar a minha conta";
@@ -207,9 +207,9 @@
 "alerts.uploadFile" = "Enviar ficheiro";
 "alerts.uploadPhoto" = "Abrir galeria";
 "alerts.locationServiceIsDisabled" = "Ative os \"Serviços de Localização\" para permitir que \"Jami\" determine sua localização.";
-"alerts.locationSharing" = "Compartilhar minha localização";
-"alerts.alreadylocationSharing" = "Já compartilhando localização com este usuário";
-"alerts.locationSharingDurationTitle" = "Por quanto tempo deve ser compartilhada a localização?";
+"alerts.locationSharing" = "Partilhar minha localização";
+"alerts.alreadylocationSharing" = "Já partilha a localização com este utilizador";
+"alerts.locationSharingDurationTitle" = "Qual deve ser a duração da partilha da localização?";
 "alerts.locationSharingDuration10min" = "10 min";
 "alerts.locationSharingDuration1hour" = "1 hora";
 "alerts.mapInformation" = "Informações do mapa";
@@ -275,28 +275,28 @@
 "accountPage.removeAccountButton" = "Remover";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Contacte-me no Jami!";
-"accountPage.contactMeOnJamiContant" = "Entre em contato comigo usando \"%s\" no Jami, plataforma de comunicação distribuída: https://jami.net";
+"accountPage.contactMeOnJamiContant" = "Contacte-me utilizando \"%s\" na plataforma de comunicação distribuída Jami: https://jami.net";
 "accountPage.passwordPlaceholder" = "Introduza a palavra-chave da conta";
 "accountPage.usernamePlaceholder" = "Introduza o nome de utilizador que deseja";
 "accountPage.registerNameErrorMessage" = "Chosen username is not available";
 "accountPage.usernameRegistering" = "A registar";
 "accountPage.usernameRegisterAction" = "Registar";
 "accountPage.usernameRegistrationFailed" = "Falha ao registar. Por favor verifique a palavra-chave.";
-"accountPage.createPassword" = "Conta criptografada";
-"accountPage.createPasswordExplanation" = "A sua conta Jami é registrada apenas neste dispositivo como um arquivo contendo as chaves da sua conta.";
+"accountPage.createPassword" = "Encriptar conta";
+"accountPage.createPasswordExplanation" = "A sua conta Jami está registada apenas neste dispositivo como um ficheiro que contém as chaves da sua conta. O acesso a este ficheiro pode ser protegido por uma palavra-passe.";
 "accountPage.changePassword" = "Alterar palavra-chave";
-"accountPage.oldPasswordPlaceholder" = "Digite a senha antiga";
-"accountPage.newPasswordPlaceholder" = "Digite a nova senha";
-"accountPage.newPasswordConfirmPlaceholder" = "Confirmar nova senha";
-"accountPage.changePasswordError" = "A senha incorreta";
-"accountPage.enableBoothMode" = "Ativar o Modo Booth";
-"accountPage.disableBoothMode" = "Desativar o Modo Booth";
+"accountPage.oldPasswordPlaceholder" = "Introduzir a palavra-passe antiga";
+"accountPage.newPasswordPlaceholder" = "Introduzir a nova palavra-passe";
+"accountPage.newPasswordConfirmPlaceholder" = "Confirmar a nova palavra-passe";
+"accountPage.changePasswordError" = "Palavra-passe incorreta";
+"accountPage.enableBoothMode" = "Ativar o modo cabine";
+"accountPage.disableBoothMode" = "Desativar o modo cabine";
 "accountPage.disableBoothModeExplanation" = "Please provide your account password";
-"accountPage.boothModeExplanation" = "Em modo Booth, o histórico de conversas não é salvado e a funcionalidade de Jami é limitada a realização de chamadas de saída. Quando você ativa o modo Booth, todas as suas conversas serão removidas.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
-"accountPage.boothModeAlertMessage" = "Depois de ativar o modo Booth, todas as suas conversas serão removidas.";
+"accountPage.boothModeExplanation" = "No modo cabine, o histórico de conversações não é guardado e a funcionalidade do Jami está limitada à realização de chamadas. Quando ativar o modo cabine, todas as suas conversas serão removidas.";
+"accountPage.noBoothMode" = "Para ativar o modo cabine, encripte primeiro a sua conta.";
+"accountPage.boothModeAlertMessage" = "Depois de ativado o modo de cabine, todas as suas conversas serão removidas.";
 "accountPage.peerDiscovery" = "Conectar automaticamente na rede local";
-"accountPage.autoRegistration" = "Registro automático após expiração";
+"accountPage.autoRegistration" = "Registo automático após a expiração";
 "accountPage.connectivityHeader" = "Conectividade";
 "accountPage.turnEnabled" = "Ativar TURN";
 "accountPage.turnServer" = "Endereço TURN";
@@ -357,8 +357,8 @@
 //Notifications
 "notifications.missedCall" = "Chamada perdida";
 "notifications.newFile" = "Novo ficheiro";
-"notifications.locationSharingStarted" = "Compartilhamento de localização efectuada";
-"notifications.locationSharingStopped" = "Compartilhamento de localização terminada";
+"notifications.locationSharingStarted" = "Iniciada a partilha de localização de entrada";
+"notifications.locationSharingStopped" = "Terminada a partilha de localização de entrada";
 "dataTransfer.readableStatusRefuse" = "Recusar";
 "dataTransfer.readableStatusAccept" = "Aceitar";
 "dataTransfer.infoMessage" = "Clique para iniciar a gravação";
@@ -376,7 +376,7 @@
 "generatedMessage.outgoingCall" = "Chamada efetuada";
 "generatedMessage.missedOutgoingCall" = "Chamadas efetuadas perdidas";
 "generatedMessage.missedIncomingCall" = "Chamadas recebidas perdidas";
-"generatedMessage.liveLocationSharing" = "Compartilhamento de localização atual";
+"generatedMessage.liveLocationSharing" = "Partilha de localização em tempo real";
 "generatedMessage.contactLeftConversation" = "esquerda";
 
 //General Settings
@@ -384,7 +384,7 @@
 "generalSettings.videoAcceleration" = "Ativar aceleração de vídeo";
 "generalSettings.fileTransfer" = "Transferência de ficheiro";
 "generalSettings.locationSharing" = "Partilha de localização";
-"generalSettings.automaticAcceptIncomingFiles" = "Aceitar automaticamente os novos arquivos ";
+"generalSettings.automaticAcceptIncomingFiles" = "Aceitar automaticamente ficheiros recebidos";
 "generalSettings.acceptTransferLimit" = "Aceitar o limite de transferência";
 "generalSettings.acceptTransferLimitDescription" = "(em MB, 0 = ilimitado)";
 "generalSettings.limitLocationSharingDuration" = "Limitar a duração da partilha de localização";
@@ -397,15 +397,15 @@
 "logView.description" = "Abrir as configurações dos logs de diagnóstico";
 "logView.startLogging" = "Começar a logar";
 "logView.stopLogging" = "Parem de explorar";
-"logView.saveError" = "Falhou em salvar arquivo";
-"logView.shareError" = "Falhou em compartilhar arquivo";
+"logView.saveError" = "Falha ao guardar o ficheiro";
+"logView.shareError" = "Falha ao partilhar o ficheiro";
 
 //Migrate Account
 "migrateAccount.title" = "Migração de conta";
 "migrateAccount.migrateButton" = "Migrar a conta";
 "migrateAccount.explanation" = "Esta conta precisa de ser migrada";
-"migrateAccount.passwordExplanation" = "Para prosseguir com a migração, você precisa digitar uma senha que foi utilizada para esta conta";
-"migrateAccount.error" = "Falha na migração de sua conta. Você pode tentar novamente ou excluir sua conta.";
+"migrateAccount.passwordExplanation" = "Para prosseguir com a migração, é necessário introduzir uma palavra-passe que foi utilizada para esta conta";
+"migrateAccount.error" = "Não foi possível migrar a sua conta. Pode tentar novamente ou eliminar a sua conta.";
 "migrateAccount.migrating" = "Migrando...";
 "migrateAccount.migrateAnother" = "Migrar Outra Conta";
 
