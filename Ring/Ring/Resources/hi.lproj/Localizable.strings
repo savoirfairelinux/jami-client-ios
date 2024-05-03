@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "कल";
 "smartlist.results" = "सार्वजनिक निर्देशिका";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "वार्तालाप";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "खाते";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "कोई परिणाम नहीं";
 "smartlist.noConversation" = "कोई बातचीत नहीं";
 "smartlist.searchBarPlaceholder" = "नाम दर्ज करें...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "आमंत्रण";
 "smartlist.aboutJami" = "जामी के बारे में";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "खाते";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "संपर्क जोड़ें?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "आप वर्तमान में अपने स्थान को साझा कर रहे हैं ";
 "conversation.explanationReceivingLocationFrom" = "आप वर्तमान में एक लाइव स्थान प्राप्त कर रहे हैं ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "कोई निमंत्रण नहीं";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

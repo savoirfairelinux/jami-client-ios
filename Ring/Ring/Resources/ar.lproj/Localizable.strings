@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "البارحة";
 "smartlist.results" = "الإرشاد العام";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "محادثات";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Accounts";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "لا يوجد نتائج";
 "smartlist.noConversation" = "لا يوجد محادثات";
 "smartlist.searchBarPlaceholder" = "ادخال اسم...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "الدعوات";
 "smartlist.aboutJami" = "حول جامي";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Accounts";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Add to contacts?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "أنت تشارك موقعك حاليًا مع";
 "conversation.explanationReceivingLocationFrom" = "أنت تتلقى حاليًا موقعًا مباشرًا من";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "لم تــرد أي دعوة";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

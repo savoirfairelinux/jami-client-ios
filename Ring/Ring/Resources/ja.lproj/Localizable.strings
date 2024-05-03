@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "昨日";
 "smartlist.results" = "公開ディレクトリー";
+"smartlist.jamsResults" = "検索結果";
 "smartlist.conversations" = "会話";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "新しい連絡先";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "アカウント";
+"smartlist.invitationReceived" = "招待を受信しました";
 "smartlist.noResults" = "検索結果はありません";
 "smartlist.noConversation" = "会話はありません";
 "smartlist.searchBarPlaceholder" = "名前を入力...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "招待";
 "smartlist.aboutJami" = "Jamiについて";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "アカウント";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "連絡先を追加しますか？";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "現在地の共有相手: ";
 "conversation.explanationReceivingLocationFrom" = "現在地を受信している相手: ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "招待はありません";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "招待を受信しました";
 
 // Walkthrough
 

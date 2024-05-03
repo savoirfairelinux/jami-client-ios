@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Kemarin";
 "smartlist.results" = "Direktori Publik";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Obrolan";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Kontak Baru";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Akun";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Tidak ketemu";
 "smartlist.noConversation" = "Tidak ada obrolan";
 "smartlist.searchBarPlaceholder" = "Masukkan nama...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Undangan";
 "smartlist.aboutJami" = "Tentang Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Akun";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Tambah ke kontak?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Anda saat ini berbagi lokasi Anda dengan";
 "conversation.explanationReceivingLocationFrom" = "Saat ini Anda sedang menerima lokasi langsung dari";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Tidak ada undangan";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

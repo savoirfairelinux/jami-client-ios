@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Ontem";
 "smartlist.results" = "Diretório público";
+"smartlist.jamsResults" = "Resultado da Busca";
 "smartlist.conversations" = "Conversas";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Novo Contato";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Contas";
+"smartlist.invitationReceived" = "Convites recebidos";
 "smartlist.noResults" = "Nenhum resultado";
 "smartlist.noConversation" = "Nenhuma conversa";
 "smartlist.searchBarPlaceholder" = "Insira o nome...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Convites";
 "smartlist.aboutJami" = "Sobre Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Contas";
 "smartlist.disableDonation" = "Não agora";
 "smartlist.donationExplanation" = "Se você está gostando do Jami e acredita na nossa missão, gostaria de fazer uma doação?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Adicionar aos contatos?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Atualmente você está compartilhando sua localização com";
 "conversation.explanationReceivingLocationFrom" = "Você está recebendo atualmente uma localização real de";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Sem convites";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banido";
+"invitations.list" = "Convites recebidos";
 
 // Walkthrough
 

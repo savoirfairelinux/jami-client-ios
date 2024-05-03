@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Jana";
 "smartlist.results" = "Orodha ya Umma";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Mazungumzo";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Malipo";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Hakuna matokeo";
 "smartlist.noConversation" = "Hakuna mazungumzo";
 "smartlist.searchBarPlaceholder" = "Ingiza jina...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Maombi";
 "smartlist.aboutJami" = "Kuhusu Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Malipo";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Kuongeza mawasiliano?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Kwa sasa unashiriki eneo lako na ";
 "conversation.explanationReceivingLocationFrom" = "Kwa sasa unapata eneo moja kwa moja kutoka ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Hakuna mwaliko";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

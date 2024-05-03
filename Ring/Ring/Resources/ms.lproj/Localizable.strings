@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Semalam";
 "smartlist.results" = "പൊതുവായ ഡയറക്ടറി";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "സംഭാഷണങ്ങൾ";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Akaun";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ഫലങ്ങളില്ല";
 "smartlist.noConversation" = "സംഭാഷണം വേണ്ട";
 "smartlist.searchBarPlaceholder" = "പേര് നൽകുക.";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "ക്ഷണങ്ങള്";
 "smartlist.aboutJami" = "ജാമിയെ കുറിച്ച്";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Akaun";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "ബന്ധുക്കളെ കൂട്ടിച്ചേർക്കണോ?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "നിങ്ങൾ നിലവിൽ നിങ്ങളുടെ സ്ഥാനം പങ്കുവെക്കുന്നു ";
 "conversation.explanationReceivingLocationFrom" = "∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙ ∙";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "ക്ഷണങ്ങളില്ല";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

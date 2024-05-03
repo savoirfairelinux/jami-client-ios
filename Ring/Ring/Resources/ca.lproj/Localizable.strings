@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Ahir";
 "smartlist.results" = "Directori públic";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Converses";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Accounts";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Sense resultats";
 "smartlist.noConversation" = "No hi ha converses.";
 "smartlist.searchBarPlaceholder" = "Introdueix el nom...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Invitacions";
 "smartlist.aboutJami" = "Sobre Jami...";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Accounts";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Add to contacts?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Actualment estàs compartint la teva ubicació amb ";
 "conversation.explanationReceivingLocationFrom" = "Actualment estàs recebint una ubicació en directe de ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "No hi ha invitacions";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

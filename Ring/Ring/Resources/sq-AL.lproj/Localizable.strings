@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori Publike";
+"smartlist.jamsResults" = "Përfundime Kërkimi";
 "smartlist.conversations" = "Biseda";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Kontakt i Ri";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Llogari";
+"smartlist.invitationReceived" = "Ftesat u morën";
 "smartlist.noResults" = "S’ka përfundime";
 "smartlist.noConversation" = "S’ka biseda";
 "smartlist.searchBarPlaceholder" = "Jepni emrin…";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Ftesa";
 "smartlist.aboutJami" = "Mbi Jami-n";
 "smartlist.inviteFriends" = "Ftoni shokë";
-"smartlist.accounts" = "Listë llogarish";
+"smartlist.accounts" = "Llogari";
 "smartlist.disableDonation" = "Jo tani";
 "smartlist.donationExplanation" = "Nëse ju shijon të përdorni Jami-n dhe besoni në misionin tonë, a do të bënit një dhurim?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Të shtohet te kontaktet?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Shkruajini";
 "conversation.explanationSendingLocationTo" = "Aktualisht e ndani vendndodhjen tuaj me ";
 "conversation.explanationReceivingLocationFrom" = "Aktualisht merrni drejtpërdrejt vendndodhje nga";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "S’ka ftesa";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Ftesat u morën";
 
 // Walkthrough
 

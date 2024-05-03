@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Учора";
 "smartlist.results" = "Публічний каталог";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Групові чати";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Новий контакт";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Облікові записи";
+"smartlist.invitationReceived" = "Запрошення отримані";
 "smartlist.noResults" = "Ніяких результатів";
 "smartlist.noConversation" = "Ніяких розмов";
 "smartlist.searchBarPlaceholder" = "Введіть ім'я...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Запрошення";
 "smartlist.aboutJami" = "Про Jami";
 "smartlist.inviteFriends" = "Запросити друзів";
-"smartlist.accounts" = "Список облікових записів";
+"smartlist.accounts" = "Облікові записи";
 "smartlist.disableDonation" = "Не зараз";
 "smartlist.donationExplanation" = "Якщо вам подобається Jami і ви вірите в нашу місію, чи не зробили б ви пожертву?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Додати до контактів?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Ви зараз ділитеся своїм місцем розташуванням з ";
 "conversation.explanationReceivingLocationFrom" = "Ви зараз отримуєте пряму локацію від ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Ніяких запрошень";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "заблокований";
+"invitations.list" = "Запрошення отримані";
 
 // Walkthrough
 

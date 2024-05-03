@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "ನಿನ್ನೆ";
 "smartlist.results" = "ಸಾರ್ವಜನಿಕ ಡೈರೆಕ್ಟರಿ";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "ಸಂಭಾಷಣೆ";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "ಖಾತೆಗಳು";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ಫಲಿತಾಂಶಗಳಿಲ್ಲ";
 "smartlist.noConversation" = "ಯಾವುದೇ ಸಂಭಾಷಣೆಗಳಿಲ್ಲ";
 "smartlist.searchBarPlaceholder" = "ಹೆಸರು ನಮೂದಿಸಿ.";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "ಆಹ್ವಾನಗಳು";
 "smartlist.aboutJami" = "ಜಾಮಿ ಬಗ್ಗೆ";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "ಖಾತೆಗಳು";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "ಸಂಪರ್ಕಗಳಿಗೆ ಸೇರಿಸುವುದೇ?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "ನೀವು ಪ್ರಸ್ತುತ ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಹಂಚಿಕೊಳ್ಳುತ್ತಿದ್ದೀರಿ ";
 "conversation.explanationReceivingLocationFrom" = "ನೀವು ಪ್ರಸ್ತುತ ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "ಆಹ್ವಾನಗಳಿಲ್ಲ";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

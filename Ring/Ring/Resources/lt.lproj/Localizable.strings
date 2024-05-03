@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Vakar";
 "smartlist.results" = "Visuomenė direktorija";
+"smartlist.jamsResults" = "Paieškos rezultatas";
 "smartlist.conversations" = "Pokalbiai";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Naujas adresatas";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Paskyros";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Jokių rezultatų";
 "smartlist.noConversation" = "Pokalbių nėra";
 "smartlist.searchBarPlaceholder" = "Įveskite vardą...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Pakvietimai";
 "smartlist.aboutJami" = "Apie Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Paskyros";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Pridėti prie adresatų?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Šiuo metu daliniesi savo buveine su ";
 "conversation.explanationReceivingLocationFrom" = "Šiuo metu gavote gyvą vietą iš ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Pakvietimų nėra";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

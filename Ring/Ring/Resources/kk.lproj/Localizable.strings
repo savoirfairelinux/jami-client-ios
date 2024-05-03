@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Келесі күні";
 "smartlist.results" = "Қоғамдық кітапша";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Әңгіме";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Есеп айырысу";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Нәтиже жоқ";
 "smartlist.noConversation" = "Әңгіме жоқ";
 "smartlist.searchBarPlaceholder" = "Аты-жөніңізді келтіріңіз...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Шақырулар";
 "smartlist.aboutJami" = "Жами туралы";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Есеп айырысу";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Байланыстарға қосыл?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Сіз қазір орналасқан жеріңізді ";
 "conversation.explanationReceivingLocationFrom" = "Сіз қазір ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Шақыру жоқ";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

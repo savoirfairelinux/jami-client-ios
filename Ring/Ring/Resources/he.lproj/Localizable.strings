@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "אתמול";
 "smartlist.results" = "תיקון ציבורי";
+"smartlist.jamsResults" = "תוצאת חיפוש";
 "smartlist.conversations" = "דיונים";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "איש קשר חדש";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "חשבונות";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "אין תוצאות";
 "smartlist.noConversation" = "אין דיונים";
 "smartlist.searchBarPlaceholder" = "יש להזין שם...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "הזמנות";
 "smartlist.aboutJami" = "על אודות Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "חשבונות";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Add to contacts?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "אתה חולק את המיקום שלך עם ";
 "conversation.explanationReceivingLocationFrom" = "אתה מקבל כרגע מיקום חי מ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "אין הזמנות";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

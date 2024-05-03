@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Публичный Каталог";
+"smartlist.jamsResults" = "Результаты поиска";
 "smartlist.conversations" = "Разговоры";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Новый контакт";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Учетные записи";
+"smartlist.invitationReceived" = "Приглашения получены";
 "smartlist.noResults" = "Нет результатов";
 "smartlist.noConversation" = "Нет разговоров";
 "smartlist.searchBarPlaceholder" = "Введите имя...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Приглашения";
 "smartlist.aboutJami" = "О Jami";
 "smartlist.inviteFriends" = "Пригласить друзей";
-"smartlist.accounts" = "Список аккаунтов";
+"smartlist.accounts" = "Учетные записи";
 "smartlist.disableDonation" = "Не сейчас";
 "smartlist.donationExplanation" = "Если Вам нравится использовать Jami и Вы верите в нашу миссию, Вы бы сделали пожертвование?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Добавить в контакты? ";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Написать сообщение";
 "conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
 "conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Приглашений нет";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "запрещен";
+"invitations.list" = "Приглашения получены";
 
 // Walkthrough
 

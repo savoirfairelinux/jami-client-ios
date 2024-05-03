@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "நேற்று";
 "smartlist.results" = "பொதுப் பட்டியல்";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "உரையாடல்கள்";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "கணக்குகள்";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "முடிவுகள் இல்லை";
 "smartlist.noConversation" = "எந்த உரையாடலும் இல்லை";
 "smartlist.searchBarPlaceholder" = "பெயர் உள்ளிடவும்...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "அழைப்பிதழ்கள்";
 "smartlist.aboutJami" = "ஜாமி பற்றி";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "கணக்குகள்";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "தொடர்புகளை சேர்க்க?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "நீங்கள் தற்போது உங்கள் இருப்பிடத்தை பகிர்ந்துகொள்கிறீர்கள் ";
 "conversation.explanationReceivingLocationFrom" = "நீங்கள் தற்போது ல் இருந்து ஒரு நேரடி இருப்பிடத்தை பெறுகிறீர்கள்";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "அழைப்பிதழ்கள் இல்லை";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

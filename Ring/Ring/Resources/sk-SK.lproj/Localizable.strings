@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Včera";
 "smartlist.results" = "Verejný zoznam";
+"smartlist.jamsResults" = "Výsledky vyhľadávania";
 "smartlist.conversations" = "Konverzácie";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Nový kontakt";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Nastavenie účtov";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Žiadne výsledky";
 "smartlist.noConversation" = "Žiadne konverzácie";
 "smartlist.searchBarPlaceholder" = "Zadajte meno...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Pozvánky";
 "smartlist.aboutJami" = "O programe Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Nastavenie účtov";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Pridať do kontaktov?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "V súčasnosti zdieľate svoju polohu s ";
 "conversation.explanationReceivingLocationFrom" = "Momentálne dostávate živú lokalitu od ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Žiadne pozvánky";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

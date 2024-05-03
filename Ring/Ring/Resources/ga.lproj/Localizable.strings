@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "An-dè";
 "smartlist.results" = "Taispeántas poiblí";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Conversations";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Contae";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ní raibh aon torthaí";
 "smartlist.noConversation" = "Ní raibh aon comhráite";
 "smartlist.searchBarPlaceholder" = "Cuir isteach ainm...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Ceiliúradh";
 "smartlist.aboutJami" = "Maidir le Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Contae";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Add to contacts?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Tá tú ag roinnt do shuíomh faoi láthair le ";
 "conversation.explanationReceivingLocationFrom" = "Tá tú ag fáil suíomh beo faoi láthair ó ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Ní iarratais";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

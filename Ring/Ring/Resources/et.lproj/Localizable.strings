@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Eile.";
 "smartlist.results" = "Avalik direktorium";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Vestlused";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Accounts";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ei tulemusi";
 "smartlist.noConversation" = "Mitte kõnelusi.";
 "smartlist.searchBarPlaceholder" = "Sisestage nimi...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Kutsed";
 "smartlist.aboutJami" = "Jami kohta";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Accounts";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Lisada kontaktis?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Sa jagad praegu oma asukoha ";
 "conversation.explanationReceivingLocationFrom" = "Saate praegu otse-eeskirja ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Pole kutsu.";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

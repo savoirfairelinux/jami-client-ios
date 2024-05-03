@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "నిన్న";
 "smartlist.results" = "పబ్లిక్ డైరెక్టరీ";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "సంభాషణలు";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "ఖాతాలు";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ఫలితాలు లేవు";
 "smartlist.noConversation" = "చర్చలు లేవు";
 "smartlist.searchBarPlaceholder" = "పేరు నమోదు చేయండి.";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "ఆహ్వానాలు";
 "smartlist.aboutJami" = "జామి గురించి";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "ఖాతాలు";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "పరిచయాలకు జోడించండి?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "మీరు ప్రస్తుతం మీ స్థానాన్ని పంచుకుంటున్నారు ";
 "conversation.explanationReceivingLocationFrom" = "మీరు ప్రస్తుతం  నుండి ఒక ప్రత్యక్ష స్థానం అందుకుంటున్న";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "ఆహ్వానాలు లేవు";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

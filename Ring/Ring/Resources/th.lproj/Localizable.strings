@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "เมื่อวาน";
 "smartlist.results" = "คู่มือสาธารณะ";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "บทสนทนา";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "ผู้ติดต่อใหม่";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "บัญชี";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "ไม่มีผลลัพธ์";
 "smartlist.noConversation" = "ไม่มีการพูดคุย";
 "smartlist.searchBarPlaceholder" = "ใส่ชื่อ...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "คำเชิญ";
 "smartlist.aboutJami" = "เกี่ยวกับ Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "บัญชี";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "เพิ่มในรายชื่อติดต่อไหม";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "คุณกําลังแบ่งปันสถานที่ของคุณกับ ";
 "conversation.explanationReceivingLocationFrom" = "คุณกําลังรับข้อมูลที่ตั้งสดจาก ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "ไม่มีการเชิญ";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

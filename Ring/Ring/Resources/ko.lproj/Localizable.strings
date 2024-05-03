@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "어제";
 "smartlist.results" = "공공 디렉토리";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "대화";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "새 연락처";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "회계";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "결과도 없습니다";
 "smartlist.noConversation" = "대화가 없다";
 "smartlist.searchBarPlaceholder" = "이름 입력하세요...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "초대";
 "smartlist.aboutJami" = "자미 에 관한 것";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "회계";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "연락처를 추가할 수 있을까요?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "현재 위치와 공유하고 있습니다.";
 "conversation.explanationReceivingLocationFrom" = "현재 ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "초대도 없습니다";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

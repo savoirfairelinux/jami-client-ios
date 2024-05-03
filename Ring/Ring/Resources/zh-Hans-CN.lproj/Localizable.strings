@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公共目录";
+"smartlist.jamsResults" = "搜索结果";
 "smartlist.conversations" = "会话";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "新联系人";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "账户";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "无结果";
 "smartlist.noConversation" = "没有会话";
 "smartlist.searchBarPlaceholder" = "输入名字";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "邀请";
 "smartlist.aboutJami" = "关于 Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "账户";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "如果您喜欢使用 Jami 并相信我们的使命，您愿意捐款吗？";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "添加至通讯录吗？";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "您当前正在分享实时位置到";
 "conversation.explanationReceivingLocationFrom" = "您当前正在接收实时位置，来自";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "没有邀请";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

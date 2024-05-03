@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Публичный каталог";
+"smartlist.jamsResults" = "Результаты поиска";
 "smartlist.conversations" = "Разговоры";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Новый Контакт";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Аккаунты";
+"smartlist.invitationReceived" = "Приглашения получены";
 "smartlist.noResults" = "Нет результатов";
 "smartlist.noConversation" = "Нет разговоров";
 "smartlist.searchBarPlaceholder" = "Введите имя...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Приглашения";
 "smartlist.aboutJami" = "О программе Jami";
 "smartlist.inviteFriends" = "Пригласить друзей";
-"smartlist.accounts" = "Список аккаунтов";
+"smartlist.accounts" = "Аккаунты";
 "smartlist.disableDonation" = "Не сейчас";
 "smartlist.donationExplanation" = "Если Вам нравится использовать Jami и Вы верите в нашу миссию, Вы бы сделали пожертвование?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Добавить в контакты?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Написать сообщение";
 "conversation.explanationSendingLocationTo" = "В настоящее время вы делитесь своим местоположением с";
 "conversation.explanationReceivingLocationFrom" = "В настоящее время вы получаете текущее местоположение от";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Приглашений нет";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "запрещен";
+"invitations.list" = "Приглашения получены";
 
 // Walkthrough
 
@@ -161,7 +177,7 @@
 "createAccount.EnableNotifications" = "Уведомления";
 "createAccount.Recommended" = "(Рекомендуется)";
 "createAccount.UsernameNotRegisteredTitle" = "Ошибка сети";
-"createAccount.UsernameNotRegisteredMessage" = "Аккаунт был создан но имя пользователя не было зарегистрировано";
+"createAccount.UsernameNotRegisteredMessage" = "Аккаунт был создан, но имя пользователя не было зарегистрировано";
 "createAccount.timeoutTitle" = "Аккаунт создан";
 "createAccount.timeoutMessage" = "Регистрация имени пользователя в процессе.... Это может занять некоторое время.";
 
@@ -236,8 +252,8 @@
 "calls.callFinished" = "Вызов завершен";
 "calls.currentCallWith" = "Вызов с";
 "calls.haghUp" = "повесить трубку";
-"calls.maximize" = "максимизировать";
-"calls.minimize" = "минимизировать";
+"calls.maximize" = "развернуть";
+"calls.minimize" = "свернуть";
 "calls.setModerator" = "установить модератора";
 "calls.removeModerator" = "отключить модератора";
 "calls.muteAudio" = "отключить звук";
@@ -396,7 +412,7 @@
 "logView.title" = "Диагностика";
 "logView.description" = "Открыть настройки диагностических логов";
 "logView.startLogging" = "Начать логирование";
-"logView.stopLogging" = "Перестаньте лесозаготовку";
+"logView.stopLogging" = "Остановить логирование";
 "logView.saveError" = "Не удалось сохранить файл";
 "logView.shareError" = "Не удалось поделиться файлом";
 

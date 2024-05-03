@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "I går";
 "smartlist.results" = "Fellesregister";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Samtal";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Rekontering";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ingen resultat";
 "smartlist.noConversation" = "Ingen samtal";
 "smartlist.searchBarPlaceholder" = "Skriv inn namnet...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Invitasjonar";
 "smartlist.aboutJami" = "Om Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Rekontering";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Legg til kontakt?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Du delar no med deg av plasseringa med ";
 "conversation.explanationReceivingLocationFrom" = "Du får for tiden ein live-platsing frå ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Ingen invitasjonar";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

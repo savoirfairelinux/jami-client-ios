@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Dün";
 "smartlist.results" = "Genel Dizin";
+"smartlist.jamsResults" = "Arama Sonucu";
 "smartlist.conversations" = "Görüşmeler";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Yeni Kişi";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Hesaplar";
+"smartlist.invitationReceived" = "Alınan davetler";
 "smartlist.noResults" = "Sonuç yok";
 "smartlist.noConversation" = "Görüşme yok";
 "smartlist.searchBarPlaceholder" = "Ad girin...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Davetiyeler";
 "smartlist.aboutJami" = "Jami Hakkında";
 "smartlist.inviteFriends" = "Arkadaşlarını davet et";
-"smartlist.accounts" = "Hesap listesi";
+"smartlist.accounts" = "Hesaplar";
 "smartlist.disableDonation" = "Şimdi değil";
 "smartlist.donationExplanation" = "Jami'yi kullanmaktan hoşlanıyor ve misyonumuza inanıyorsan bağış yapmak ister misin?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Kişilere eklensin mi?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Şu anda konum bilginizi şu kişiyle paylaşıyorsunuz:";
 "conversation.explanationReceivingLocationFrom" = "Şu anda şu kişiden canlı konum alıyorsunuz:";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Davetiye yok";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "engellendi";
+"invitations.list" = "Alınan davetler";
 
 // Walkthrough
 

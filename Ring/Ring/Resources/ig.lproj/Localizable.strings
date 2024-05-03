@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "N'ụbọchị gara aga";
 "smartlist.results" = "Akwụkwọ ndekọ ọha";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Mkparịta ụka";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Ihe ndekọ";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Enweghị nsonaazụ";
 "smartlist.noConversation" = "Enweghị mkparịta ụka";
 "smartlist.searchBarPlaceholder" = "Tinye aha...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Akwụkwọ ịkpọ òkù";
 "smartlist.aboutJami" = "Banyere Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Ihe ndekọ";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Add to contacts?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Ị na-ekere òkè ugbu a na ọnọdụ gị na ";
 "conversation.explanationReceivingLocationFrom" = "Ị na-enweta ugbu a a a ndụ ọnọdụ site ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Enweghị akwụkwọ ịkpọ òkù";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

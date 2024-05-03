@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Երեկ";
 "smartlist.results" = "Հանրային ցուցակ";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Զրույցներ";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Հաշվետոմսեր";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ոչ մի արդյունք";
 "smartlist.noConversation" = "Ոչ մի խոսակցություն";
 "smartlist.searchBarPlaceholder" = "Գտեք անուն...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "հրավիրումներ";
 "smartlist.aboutJami" = "Ջամիի մասին";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Հաշվետոմսեր";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Բարձրացնել կոնտակտներին:";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Դուք ներկայումս կիսում եք ձեր գտնվելու վայրը ";
 "conversation.explanationReceivingLocationFrom" = "Դուք ներկայումս ստանում եք կենդանի տեղակայման ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Ոչ մի հրավիրում";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

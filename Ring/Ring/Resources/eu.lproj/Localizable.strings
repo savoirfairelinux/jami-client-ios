@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Atzo";
 "smartlist.results" = "Zerrenda publikoa";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Elkarrizketak";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Kontaktu berria";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Accounts";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Emaitzarik ez";
 "smartlist.noConversation" = "Ez dago elkarrizketarik.";
 "smartlist.searchBarPlaceholder" = "Sartu izena...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Gonbidapenak";
 "smartlist.aboutJami" = "Jamiri buruz";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Accounts";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Gehitu kontaktuetara?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Orain zure kokapena partekatzen ari zara.";
 "conversation.explanationReceivingLocationFrom" = "Oraintxe bertan, zuzenean ari zara entzuten.";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Ez dago gonbidapenik.";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 

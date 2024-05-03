@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Учерашњи";
 "smartlist.results" = "Јавни справочник";
+"smartlist.jamsResults" = "Search Result";
 "smartlist.conversations" = "Konverzacija";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "New Contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Nalozi";
+"smartlist.invitationReceived" = "Pozivnice primljene";
 "smartlist.noResults" = "Нису резултати";
 "smartlist.noConversation" = "Никакве разговоре";
 "smartlist.searchBarPlaceholder" = "Унесите име...";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Позивања";
 "smartlist.aboutJami" = "O Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Листа налога";
+"smartlist.accounts" = "Nalozi";
 "smartlist.disableDonation" = "Ne sada";
 "smartlist.donationExplanation" = "Ako uživate u korišćenju Jami-ja i verujete u našu misiju, da li biste dali donaciju?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Dodaj u kontakte?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "У овом тренутку делите своју локацију са ";
 "conversation.explanationReceivingLocationFrom" = "У овом тренутку добијате живо место од ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Нема покана";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Pozivnice primljene";
 
 // Walkthrough
 

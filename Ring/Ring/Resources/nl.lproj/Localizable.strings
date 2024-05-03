@@ -84,7 +84,13 @@
 // Smartlist
 "smartlist.yesterday" = "Gisteren";
 "smartlist.results" = "Openbare directory";
+"smartlist.jamsResults" = "Zoekresultaat";
 "smartlist.conversations" = "Gesprekken";
+"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.newContact" = "Nieuw contact";
+"smartlist.newSwarm" = "New Swarm";
+"smartlist.accounts" = "Accounts";
+"smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Geen resultaten";
 "smartlist.noConversation" = "Geen gesprekken";
 "smartlist.searchBarPlaceholder" = "Voer naam in…";
@@ -98,11 +104,16 @@
 "smartlist.invitations" = "Uitnodigingen";
 "smartlist.aboutJami" = "Over Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Account list";
+"smartlist.accounts" = "Accounts";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.inSynchronization" = "conversation in synchronization";
+"smartlist.newMessage" = "New Message";
 
 //Conversation
+"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsLabel" = "Toevoegen aan contacten?";
+"conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "U deelt uw locatie momenteel met ";
 "conversation.explanationReceivingLocationFrom" = "U ontvangt momenteel een live locatie van ";
@@ -123,6 +134,11 @@
 
 //Invitations
 "invitations.noInvitations" = "Geen uitnodigingen";
+"invitations.pending" = "pending";
+"invitations.accepted" = "accepted";
+"invitations.refused" = "refused";
+"invitations.banned" = "banned";
+"invitations.list" = "Invitations received";
 
 // Walkthrough
 
