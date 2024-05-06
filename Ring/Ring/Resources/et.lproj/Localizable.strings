@@ -89,7 +89,7 @@
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New Contact";
 "smartlist.newSwarm" = "New Swarm";
-"smartlist.accounts" = "Accounts";
+"smartlist.accounts" = "Arvestused";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Ei tulemusi";
 "smartlist.noConversation" = "Mitte kõnelusi.";
@@ -104,7 +104,7 @@
 "smartlist.invitations" = "Kutsed";
 "smartlist.aboutJami" = "Jami kohta";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Accounts";
+"smartlist.accounts" = "Arvestused";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";

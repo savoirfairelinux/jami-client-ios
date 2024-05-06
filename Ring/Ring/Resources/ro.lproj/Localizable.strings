@@ -86,9 +86,9 @@
 "smartlist.results" = "Lista publică";
 "smartlist.jamsResults" = "Rezultatele căutării";
 "smartlist.conversations" = "Conversații";
-"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.noConversationsFound" = "Nicio conversație nu corespunde căutării";
 "smartlist.newContact" = "Contact nou";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newSwarm" = "Grup nou";
 "smartlist.accounts" = "Conturi";
 "smartlist.invitationReceived" = "Invitații primite";
 "smartlist.noResults" = "Niciun rezultat";
@@ -107,13 +107,13 @@
 "smartlist.accounts" = "Conturi";
 "smartlist.disableDonation" = "Nu acum";
 "smartlist.donationExplanation" = "Dacă îți place să folosești Jami și crezi că misiunea noastră este importantă, poți face o donație?";
-"smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.inSynchronization" = "se sincronizează conversația";
+"smartlist.newMessage" = "Mesaj nou";
 
 //Conversation
-"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsButton" = "Adaugă la contacte";
 "conversation.addToContactsLabel" = "Adaugi la contacte?";
-"conversation.notContactLabel" = "is not in your contact list";
+"conversation.notContactLabel" = "nu e în contactele tale";
 "conversation.messagePlaceholder" = "Scrie pentru";
 "conversation.explanationSendingLocationTo" = "Acum, poziția ta este distribuită către ";
 "conversation.explanationReceivingLocationFrom" = "Acum, primești poziția în direct de la ";
@@ -134,10 +134,10 @@
 
 //Invitations
 "invitations.noInvitations" = "Nicio invitație";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.pending" = "în așteptare";
+"invitations.accepted" = "acceptat";
+"invitations.refused" = "refuzat";
+"invitations.banned" = "blocat";
 "invitations.list" = "Invitații primite";
 
 // Walkthrough

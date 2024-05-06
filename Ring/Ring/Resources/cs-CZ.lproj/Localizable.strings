@@ -87,9 +87,9 @@
 "smartlist.jamsResults" = "Výsledky hledání";
 "smartlist.conversations" = "Konverzace";
 "smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
+"smartlist.newContact" = "Nový kontakt";
 "smartlist.newSwarm" = "New Swarm";
-"smartlist.accounts" = "Accounts";
+"smartlist.accounts" = "Účty";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "Žádné výsledky";
 "smartlist.noConversation" = "Žádné konverzace";
@@ -104,7 +104,7 @@
 "smartlist.invitations" = "Pozvání";
 "smartlist.aboutJami" = "O Jami";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Accounts";
+"smartlist.accounts" = "Účty";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
@@ -112,7 +112,7 @@
 
 //Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
-"conversation.addToContactsLabel" = "Add to contacts?";
+"conversation.addToContactsLabel" = "Přidat do kontaktů?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "Právě sdílíte svou polohu s ";
@@ -137,7 +137,7 @@
 "invitations.pending" = "pending";
 "invitations.accepted" = "accepted";
 "invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.banned" = "zakázaný";
 "invitations.list" = "Invitations received";
 
 // Walkthrough

@@ -86,9 +86,9 @@
 "smartlist.results" = "Nyilvános címtár";
 "smartlist.jamsResults" = "Keresési eredmény";
 "smartlist.conversations" = "Beszélgetések";
-"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.noConversationsFound" = "Nincs a keresésnek megfelelő beszélgetés";
 "smartlist.newContact" = "Új kapcsolat";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newSwarm" = "Új rajcsoport";
 "smartlist.accounts" = "Fiókok";
 "smartlist.invitationReceived" = "Meghívások megérkeztek";
 "smartlist.noResults" = "Nincs eredmény";
@@ -107,13 +107,13 @@
 "smartlist.accounts" = "Fiókok";
 "smartlist.disableDonation" = "Máskor";
 "smartlist.donationExplanation" = "Ha hisz a küldetésünkben, adományozna?";
-"smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.inSynchronization" = "beszélgetés összehangolásában";
+"smartlist.newMessage" = "Új üzenet";
 
 //Conversation
-"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsButton" = "Hozzáadás a kapcsolatokhoz";
 "conversation.addToContactsLabel" = "Hozzáadja a kapcsolatokhoz?";
-"conversation.notContactLabel" = "is not in your contact list";
+"conversation.notContactLabel" = "nem szerepel a kapcsolatlistában";
 "conversation.messagePlaceholder" = "Írj a következő(k)nek:";
 "conversation.explanationSendingLocationTo" = "Ön megosztja valós idejű helyét a következővel:";
 "conversation.explanationReceivingLocationFrom" = "Jelenleg valós idejű helyet kap a következőtől:";
@@ -134,10 +134,10 @@
 
 //Invitations
 "invitations.noInvitations" = "Nincs meghívás";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.pending" = "függőben levő…";
+"invitations.accepted" = "elfogadott";
+"invitations.refused" = "elutasítva";
+"invitations.banned" = "letiltva";
 "invitations.list" = "Meghívások megérkeztek";
 
 // Walkthrough

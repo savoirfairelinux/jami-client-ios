@@ -89,7 +89,7 @@
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "New Contact";
 "smartlist.newSwarm" = "New Swarm";
-"smartlist.accounts" = "Accounts";
+"smartlist.accounts" = "অ্যাকাউন্ট";
 "smartlist.invitationReceived" = "Invitations received";
 "smartlist.noResults" = "কোন ফলাফল নেই";
 "smartlist.noConversation" = "কোন কথোপকথন নেই";
@@ -104,7 +104,7 @@
 "smartlist.invitations" = "আমন্ত্রণ";
 "smartlist.aboutJami" = "জামি সম্পর্কে";
 "smartlist.inviteFriends" = "Invite friends";
-"smartlist.accounts" = "Accounts";
+"smartlist.accounts" = "অ্যাকাউন্ট";
 "smartlist.disableDonation" = "Not now";
 "smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
 "smartlist.inSynchronization" = "conversation in synchronization";
@@ -112,7 +112,7 @@
 
 //Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
-"conversation.addToContactsLabel" = "Add to contacts?";
+"conversation.addToContactsLabel" = "পরিচিতি যোগ করা?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Write to";
 "conversation.explanationSendingLocationTo" = "আপনি বর্তমানে আপনার অবস্থান শেয়ার করছেন ";

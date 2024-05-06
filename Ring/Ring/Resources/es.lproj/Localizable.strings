@@ -89,7 +89,7 @@
 "smartlist.noConversationsFound" = "No conversations match your search";
 "smartlist.newContact" = "Nuevo Contacto";
 "smartlist.newSwarm" = "New Swarm";
-"smartlist.accounts" = "Accounts";
+"smartlist.accounts" = "Cuentas";
 "smartlist.invitationReceived" = "Invitaciones recibidas";
 "smartlist.noResults" = "Sin resultados";
 "smartlist.noConversation" = "No hay conversaciones";
@@ -104,7 +104,7 @@
 "smartlist.invitations" = "Invitaciones";
 "smartlist.aboutJami" = "Acerca de Jami";
 "smartlist.inviteFriends" = "Invitar amigos";
-"smartlist.accounts" = "Accounts";
+"smartlist.accounts" = "Cuentas";
 "smartlist.disableDonation" = "Ahora no";
 "smartlist.donationExplanation" = "Si disfruta usando Jami y cree en nuestra misión, ¿le gustaría hacer una donación?";
 "smartlist.inSynchronization" = "conversation in synchronization";
@@ -112,7 +112,7 @@
 
 //Conversation
 "conversation.addToContactsButton" = "Add to Contacts";
-"conversation.addToContactsLabel" = "Add to contacts?";
+"conversation.addToContactsLabel" = "¿Añadir a contactos?";
 "conversation.notContactLabel" = "is not in your contact list";
 "conversation.messagePlaceholder" = "Escribir a";
 "conversation.explanationSendingLocationTo" = "Estás compartiendo tu ubicación con";
@@ -138,7 +138,7 @@
 "invitations.accepted" = "accepted";
 "invitations.refused" = "refused";
 "invitations.banned" = "baneado";
-"invitations.list" = "Invitations received";
+"invitations.list" = "Invitaciones recibidas";
 
 // Walkthrough
 
