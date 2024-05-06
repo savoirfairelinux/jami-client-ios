@@ -261,6 +261,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             return innerObservable
         }
         syncObservable?
+            .observe(on: MainScheduler.instance)
             .startWith(self.conversation.synchronizing.value)
             .subscribe { [weak self] synchronizing in
                 guard let self = self else { return }

@@ -139,7 +139,6 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                     // Check for temporary conversation
                     else if let tempConversation = self.temporaryConversation, tempConversation.conversation == conversationModel {
                         tempConversation.conversation = conversationModel
-                        self.conversationViewModels.append(tempConversation)
                         tempConversation.isTemporary.accept(false)
                         tempConversation.conversationCreated.accept(true)
                         self.conversationFromTemporaryCreated(conversation: conversationModel)
@@ -148,7 +147,6 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                         jams.conversation == conversationModel
                     }) {
                         jamsConversation.conversation = conversationModel
-                        self.conversationViewModels.append(jamsConversation)
                         jamsConversation.isTemporary.accept(false)
                         jamsConversation.conversationCreated.accept(true)
                         self.conversationFromTemporaryCreated(conversation: conversationModel)
@@ -158,7 +156,6 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                     else {
                         let newViewModel = ConversationViewModel(with: self.injectionBag)
                         newViewModel.conversation = conversationModel
-                        self.conversationViewModels.append(newViewModel)
                         return newViewModel
                     }
                 }
@@ -196,7 +193,12 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
             .subscribe(onNext: { [weak self] conversations in
                 guard let self = self else { return }
                 let filteredConv = conversations.isEmpty && searchQuery.isEmpty ? nil : conversations
-                self.updateConversations(with: filteredConv)
+                // Add a delay before displaying the filtered conversation
+                // to avoid interference with the animation for the search results.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                    guard let self = self else { return }
+                    self.updateConversations(with: filteredConv)
+                }
             })
             .disposed(by: self.disposeBag)
 
@@ -234,10 +236,8 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     private func updateConversations(with filtered: [ConversationViewModel]? = nil) {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            withAnimation {
-                // Use filtered conversations if provided; otherwise, fall back to all conversationViewModels
-                self.conversations = filtered ?? self.conversationViewModels
-            }
+            // Use filtered conversations if provided; otherwise, fall back to all conversationViewModels
+            self.conversations = filtered ?? self.conversationViewModels
         }
     }
 
