@@ -35,10 +35,15 @@ struct Avatar: View {
     var size: CGFloat = avatarSize
     @ObservedObject var participant: ParticipantViewModel
     var body: some View {
-        Image(uiImage: participant.avatar)
+        Image(systemName: "person")
             .resizable()
-            .aspectRatio(contentMode: .fill)
+           // .aspectRatio(contentMode: .fill)
+            .foregroundColor(.white)
+           // .background(Color.blue)
+            .padding(40)
+
             .frame(width: size, height: size)
+            .background(Color.blue)
             .clipShape(Circle())
     }
 }

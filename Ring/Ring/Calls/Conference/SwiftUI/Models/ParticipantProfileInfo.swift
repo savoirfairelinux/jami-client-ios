@@ -32,7 +32,7 @@ class ParticipantProfileInfo {
 
     let avatar = BehaviorRelay<UIImage?>(value: nil)
     let displayName = BehaviorRelay<String>(value: "")
-    let avatarSize = CGSize(width: 40, height: 40)
+    let avatarSize = CGSize(width: 200, height: 200)
 
     init(injectionBag: InjectionBag, info: ConferenceParticipant) {
         self.callsSercive = injectionBag.callService

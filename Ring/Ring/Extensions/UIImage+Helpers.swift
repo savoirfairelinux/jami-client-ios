@@ -366,7 +366,8 @@ extension UIImage {
     }
 
     class func createContactAvatar(username: String, size: CGSize) -> UIImage {
-        let image = UIImage(asset: Asset.fallbackAvatar)!
+        let config = UIImage.SymbolConfiguration(scale: .large)
+        let image = UIImage(systemName: "person", withConfiguration: config)!
         let scanner = Scanner(string: username.toMD5HexString().prefixString())
         var index: UInt64 = 0
         if scanner.scanHexInt64(&index) {
@@ -376,9 +377,14 @@ extension UIImage {
                     return avatar
                 }
             } else {
-                if let masked = image.maskWithColor(color: fbaBGColor, size: size) {
-                    return masked
-                }
+//                var index: UInt64 = 0
+//                if scanner.scanHexInt64(&index) {
+                    let fbaBGColor = avatarColors[Int(index)]
+                    return image.fillBackgroundColor(color: fbaBGColor, inset: 10)
+//                }
+//                if let masked = image.maskWithColor(color: fbaBGColor, size: size) {
+//                    return masked
+//                }
             }
         }
         return image
