@@ -58,7 +58,11 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     @Published var isSynchronizing: Bool = false
 
     func getDefaultAvatar() -> UIImage {
-        return UIImage.createContactAvatar(username: (self.displayName.value?.isEmpty ?? true) ? self.userName.value : self.displayName.value!)
+        if let conversation = self.conversation,
+            !conversation.isDialog() {
+            return UIImage.createSwarmAvatar(convId: conversation.id, size: CGSize(width: 55, height: 55))
+        }
+        return UIImage.createContactAvatar(username: (self.displayName.value?.isEmpty ?? true) ? self.userName.value : self.displayName.value!, size: CGSize(width: 55, height: 55))
     }
 
     /// Logger
