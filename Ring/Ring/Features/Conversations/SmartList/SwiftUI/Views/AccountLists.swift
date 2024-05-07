@@ -23,6 +23,7 @@ import SwiftUI
 struct AccountLists: View {
     @ObservedObject var model: AccountsViewModel
     var createAccountCallback: (() -> Void)
+    var accountSelectedCallback: (() -> Void)
     let verticalSpacing: CGFloat = 15
     let maxHeight: CGFloat = 300
     let cornerRadius: CGFloat = 16
@@ -75,7 +76,7 @@ struct AccountLists: View {
         ScrollView {
             VStack {
                 ForEach(model.accountsRows, id: \.id) { accountRow in
-                    AccountRowView(accountRow: accountRow, model: model)
+                    AccountRowView(accountRow: accountRow, model: model, accountSelectedCallback: accountSelectedCallback)
                 }
             }
             .frame(minHeight: 0, maxHeight: .infinity)
@@ -87,6 +88,7 @@ struct AccountLists: View {
 struct AccountRowView: View {
     @ObservedObject var accountRow: AccountRow
     @ObservedObject var model: AccountsViewModel
+    var accountSelectedCallback: (() -> Void)
     let cornerRadius: CGFloat = 8
     var body: some View {
         HStack(spacing: 0) {
@@ -107,6 +109,7 @@ struct AccountRowView: View {
         .contentShape(Rectangle())
         .background(backgroundForAccountRow())
         .onTapGesture {
+            accountSelectedCallback()
             model.changeCurrentAccount(accountId: accountRow.id)
         }
     }

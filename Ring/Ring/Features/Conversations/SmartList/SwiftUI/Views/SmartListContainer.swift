@@ -110,10 +110,12 @@ struct SmartListView: View {
 
     @ViewBuilder
     private func accountListsView() -> some View {
-        AccountLists(model: model.accountsModel) {
+        AccountLists(model: model.accountsModel, createAccountCallback: {
             toggleAccountList()
             model.createAccount()
-        }
+        }, accountSelectedCallback: {
+            showAccountList.toggle()
+        })
         .zIndex(1)
         .transition(.move(edge: .bottom))
         .animation(.easeOut, value: showAccountList)
