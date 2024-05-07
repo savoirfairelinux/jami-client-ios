@@ -108,21 +108,21 @@ extension UIImage {
         return copied
     }
 
-    class func createContactAvatar(username: String) -> UIImage {
-        let image = UIImage(asset: Asset.icContactPicture)!
-            .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
-        let scanner = Scanner(string: username.toMD5HexString().prefixString())
-        var index: UInt64 = 0
-        if scanner.scanHexInt64(&index) {
-            let fbaBGColor = avatarColors[Int(index)]
-            if !username.isSHA1() && !username.isEmpty {
-                if let avatar = image.drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: CGSize(width: 40, height: 40)) {
-                    return avatar
-                }
-            }
-        }
-        return image
-    }
+//    class func createContactAvatar(username: String) -> UIImage {
+//        let image = UIImage(asset: Asset.icContactPicture)!
+//            .withAlignmentRectInsets(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+//        let scanner = Scanner(string: username.toMD5HexString().prefixString())
+//        var index: UInt64 = 0
+//        if scanner.scanHexInt64(&index) {
+//            let fbaBGColor = avatarColors[Int(index)]
+//            if !username.isSHA1() && !username.isEmpty {
+//                if let avatar = image.drawText(text: username.prefixString().capitalized, backgroundColor: fbaBGColor, textColor: UIColor.white, size: CGSize(width: 40, height: 40)) {
+//                    return avatar
+//                }
+//            }
+//        }
+//        return image
+//    }
 
     func convertToData(ofMaxSize maxSize: Int) -> Data? {
         var imageData = self.jpegData(compressionQuality: 1)
@@ -366,7 +366,8 @@ extension UIImage {
     }
 
     class func createContactAvatar(username: String, size: CGSize) -> UIImage {
-        let image = UIImage(asset: Asset.fallbackAvatar)!
+        let config = UIImage.SymbolConfiguration(scale: .large)
+        let image = UIImage(systemName: "person", withConfiguration: config)!
         let scanner = Scanner(string: username.toMD5HexString().prefixString())
         var index: UInt64 = 0
         if scanner.scanHexInt64(&index) {
@@ -376,9 +377,7 @@ extension UIImage {
                     return avatar
                 }
             } else {
-                if let masked = image.maskWithColor(color: fbaBGColor, size: size) {
-                    return masked
-                }
+                return image.fillBackgroundColor(color: fbaBGColor, inset: 10)
             }
         }
         return image
