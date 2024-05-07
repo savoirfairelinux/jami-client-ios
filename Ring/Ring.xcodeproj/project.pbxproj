@@ -244,6 +244,7 @@
 		265DFB09292FD25000834B97 /* DefaultTransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFB08292FD25000834B97 /* DefaultTransferView.swift */; };
 		265DFB0B292FD41100834B97 /* MessageSwiftUIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFB0A292FD41100834B97 /* MessageSwiftUIViews.swift */; };
 		265DFB1129302A8700834B97 /* ContactMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265DFB1029302A8700834B97 /* ContactMessageView.swift */; };
+		26600A992BEA855900EFCFD1 /* ThreadSafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */; };
 		26625BB52BA9DF67009D2DDB /* ConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB42BA9DF67009D2DDB /* ConversationsView.swift */; };
 		26625BB72BA9DF81009D2DDB /* ConversationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB62BA9DF81009D2DDB /* ConversationsViewModel.swift */; };
 		26625BB92BA9FEFC009D2DDB /* SmartListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */; };
@@ -884,6 +885,7 @@
 		265DFB0A292FD41100834B97 /* MessageSwiftUIViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSwiftUIViews.swift; sourceTree = "<group>"; };
 		265DFB1029302A8700834B97 /* ContactMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageView.swift; sourceTree = "<group>"; };
 		265E976226E8F610008801C0 /* NotificationService-debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-debug.entitlements"; sourceTree = "<group>"; };
+		26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThreadSafeArray.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ThreadSafeArray.swift; sourceTree = SOURCE_ROOT; };
 		26625BB42BA9DF67009D2DDB /* ConversationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationsView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/ConversationsView.swift; sourceTree = SOURCE_ROOT; };
 		26625BB62BA9DF81009D2DDB /* ConversationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConversationsViewModel.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Models/ConversationsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		26625BB82BA9FEFC009D2DDB /* SmartListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SmartListContentView.swift; path = Ring/Features/Conversations/SmartList/SwiftUI/Views/SmartListContentView.swift; sourceTree = SOURCE_ROOT; };
@@ -2372,6 +2374,7 @@
 				26625BB62BA9DF81009D2DDB /* ConversationsViewModel.swift */,
 				26D87CEA2BBB4A5F0086E4AA /* AccountsViewModel.swift */,
 				26E081232BC07824001B4C18 /* RequestsViewModel.swift */,
+				26600A982BEA855900EFCFD1 /* ThreadSafeArray.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2919,6 +2922,7 @@
 				1AABA7461F0FE9C000739605 /* UIColor+Ring.swift in Sources */,
 				1A5DC0201F355DCF0075E8EF /* ContactsService.swift in Sources */,
 				26A5CE3B26BD00E700E147EA /* Array+Helper.swift in Sources */,
+				26600A992BEA855900EFCFD1 /* ThreadSafeArray.swift in Sources */,
 				1DF75ABE296E07890055EA87 /* Text+Helpers.swift in Sources */,
 				BB06BD8529D4C1210064F0FC /* DurationPicker.swift in Sources */,
 				0ECB4E2822B2D4840097CD7B /* CallsProviderService.swift in Sources */,
