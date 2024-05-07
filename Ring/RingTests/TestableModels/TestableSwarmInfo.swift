@@ -32,7 +32,7 @@ class TestableSwarmInfo: SwarmInfoProtocol {
     var participantsNames: BehaviorRelay<[String]> = BehaviorRelay(value: [""])
     var participantsAvatars: BehaviorRelay<[UIImage]> = BehaviorRelay(value: [UIImage()])
 
-    var avatarHeight: CGFloat = 40
+    var avatarHeight: CGFloat = 55
     var avatarSpacing: CGFloat = 2
     lazy var id: String = {
         return conversation?.id ?? ""

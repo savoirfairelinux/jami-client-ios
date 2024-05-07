@@ -146,6 +146,7 @@ struct ConversationRowView: View {
                     } else {
                         Image(uiImage: model.getDefaultAvatar())
                             .resizable()
+                            .aspectRatio(contentMode: .fill)
                             .frame(width: 55, height: 55, alignment: .center)
                             .clipShape(Circle())
                     }
