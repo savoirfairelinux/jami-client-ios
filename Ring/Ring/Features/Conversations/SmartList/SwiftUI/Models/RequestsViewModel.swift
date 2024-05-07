@@ -235,7 +235,6 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
     static func == (lhs: RequestRowViewModel, rhs: RequestRowViewModel) -> Bool {
         return lhs.id == rhs.id
     }
-
 }
 
 class RequestsViewModel: ObservableObject {
@@ -243,7 +242,7 @@ class RequestsViewModel: ObservableObject {
     @Published var requestNames = ""
     @Published var unreadRequests = 0
     @Published var requestViewOpened = false
-    var requestsNameResolvers = [RequestNameResolver]() // requests and resolved name
+    var requestsNameResolvers = ThreadSafeArray<RequestNameResolver>(label: "com.requestsNameResolvers")// requests and resolved name
     var title = L10n.Smartlist.invitationReceived
 
     let requestsService: RequestsService
@@ -344,7 +343,7 @@ class RequestsViewModel: ObservableObject {
     }
 
     private func updateUnreadCount() {
-        self.unreadRequests = self.requestsNameResolvers.count
+        self.unreadRequests = self.requestsNameResolvers.count()
     }
 
     private func observeRequestNames() {
