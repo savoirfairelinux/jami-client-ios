@@ -35,19 +35,19 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     @Published var jamsSearchResult = [ConversationViewModel]() {
         didSet { updateSearchStatusIfNeeded() }
     }
+    @Published var publicDirectoryTitle = L10n.Smartlist.results
+    @Published var searchingLabel = ""
+    @Published var connectionState: ConnectionType = .none
+    @Published var searchQuery: String = ""
+    @Published var conversationCreated: String = ""
+    @Published var searchStatus: SearchStatus = .notSearching
+
     // all conversations
     var conversationViewModels = [ConversationViewModel]() {
         didSet {
             self.updateConversations()
         }
     }
-
-    @Published var publicDirectoryTitle = L10n.Smartlist.results
-
-    @Published var selectedSegment = 0
-    @Published var unreadMessages = 0
-    @Published var searchingLabel = ""
-    @Published var connectionState: ConnectionType = .none
     var disposeBag = DisposeBag()
     let conversationsService: ConversationsService
     let requestsService: RequestsService
@@ -57,9 +57,6 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     let injectionBag: InjectionBag
     var searchModel: JamiSearchViewModel?
     var requestsModel: RequestsViewModel
-    @Published var searchQuery: String = ""
-    @Published var conversationCreated: String = ""
-    @Published var searchStatus: SearchStatus = .notSearching
     let jamiImage = UIImage(asset: Asset.jamiIcon)!.resizeImageWith(newSize: CGSize(width: 20, height: 20), opaque: false)!
 
     var accountsModel: AccountsViewModel
@@ -105,15 +102,18 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     }
 
     func conversationFromTemporaryCreated(conversation: ConversationModel) {
-        // If conversation created from temporary navigate back to smart list
-        if self.presentedConversation.isTemporaryPresented() {
-            navigationTarget = .smartList
-            self.presentedConversation.resetPresentedConversation()
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            // If conversation created from temporary navigate back to smart list
+            if self.presentedConversation.isTemporaryPresented() {
+                navigationTarget = .smartList
+                self.presentedConversation.resetPresentedConversation()
+            }
+            // cleanup search
+            self.performSearch(query: "")
+            // disable search bar
+            conversationCreated = conversation.id
         }
-        // cleanup search
-        self.performSearch(query: "")
-        // disable search bar
-        conversationCreated = conversation.id
     }
 
     private func subscribeConversations() {
