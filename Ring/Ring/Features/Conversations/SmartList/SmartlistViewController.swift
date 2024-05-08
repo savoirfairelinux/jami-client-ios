@@ -42,7 +42,6 @@ class SmartlistViewController: UIViewController, StoryboardBased, ViewModelBased
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.viewModel.closeAllPlayers()
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 

@@ -62,9 +62,6 @@ class ConversationViewController: UIViewController,
 
     let log = SwiftyBeaver.self
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var spinnerView: UIView!
-
     var viewModel: ConversationViewModel!
     var isExecutingDeleteMessage: Bool = false
     private var isLocationSharingDurationLimited: Bool {
@@ -79,7 +76,6 @@ class ConversationViewController: UIViewController,
     @IBOutlet weak var conversationInSyncLabel: UILabel!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
-    var swiftUIViewAdded: Bool = false
     var currentDocumentPickerMode: DocumentPickerMode = .none
 
     let tapAction = BehaviorRelay<Bool>(value: false)
@@ -94,13 +90,7 @@ class ConversationViewController: UIViewController,
         self.setupBindings()
         screenTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         self.view.addGestureRecognizer(screenTapRecognizer)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if !self.swiftUIViewAdded {
-            self.addSwiftUIView()
-        }
+        self.addSwiftUIView()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -108,6 +98,7 @@ class ConversationViewController: UIViewController,
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layer.shadowOpacity = 0
         self.viewModel.setMessagesAsRead()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -124,7 +115,6 @@ class ConversationViewController: UIViewController,
     }
 
     private func addSwiftUIView() {
-        swiftUIViewAdded = true
         self.viewModel.swiftUIModel.hideNavigationBar
             .subscribe(onNext: { [weak self] (hide) in
                 guard let self = self else { return }
@@ -214,9 +204,6 @@ class ConversationViewController: UIViewController,
         swiftUIView.didMove(toParent: self)
         self.view.backgroundColor = UIColor.systemBackground
         self.view.sendSubviewToBack(swiftUIView.view)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[weak self] in
-            self?.messagesLoadingFinished()
-        }
     }
 
     private func importDocument() {
@@ -573,8 +560,7 @@ class ConversationViewController: UIViewController,
     }
 
     func setupUI() {
-        spinnerView.backgroundColor = UIColor.jamiMsgBackground
-        self.view.backgroundColor = UIColor.jamiMsgTextFieldBackground
+        self.view.backgroundColor = UIColor.systemBackground
 
         Observable<(Data?, String?, String)>.combineLatest(self.viewModel.profileImageData.asObservable(),
                                                            self.viewModel.displayName.asObservable(),
@@ -637,10 +623,6 @@ class ConversationViewController: UIViewController,
 
     func placeAudioOnlyCall() {
         self.viewModel.startAudioCall()
-    }
-
-    private func messagesLoadingFinished() {
-        self.spinnerView.isHidden = true
     }
 
     func setupBindings() {
