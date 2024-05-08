@@ -108,12 +108,10 @@ struct MessageRowView: View {
                     if model.showReciveIndicator {
                         Image("message_sent_indicator")
                             .resizable()
-                            .background(Circle().fill(Color.clear))
                             .frame(width: 13, height: 13)
                     } else if model.showSentIndicator {
                         Circle()
                             .strokeBorder(Color.gray, lineWidth: 1)
-                            .background(Circle().fill(Color.white))
                             .frame(width: 12, height: 12)
                     } else {
                         Spacer()
