@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "建立";
 
 // Scan
 "scan.badQrCode" = "不正確的 QR code";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "你确定你想离开这个群体吗?";
 "swarm.Leave" = "离开";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "Swarm的名字";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "昨天";
 "smartlist.results" = "公開目錄";

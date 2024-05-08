@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "Luo";
 
 // Scan
 "scan.badQrCode" = "Väärä QR-koodi";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Oletko varma, että haluat lähteä?";
 "swarm.Leave" = "Lähdetään";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "Swarm'n nimi";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Eilen";
 "smartlist.results" = "Julkinen kansio";

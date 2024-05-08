@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "Mepụta";
 
 // Scan
 "scan.badQrCode" = "Usoro QR na-adịghị mma";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Ì ji n'aka na ị chọrọ ịhapụ ìgwè a?";
 "swarm.Leave" = "Hapụ ya";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "Aha Swarm";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "N'ụbọchị gara aga";
 "smartlist.results" = "Akwụkwọ ndekọ ọha";

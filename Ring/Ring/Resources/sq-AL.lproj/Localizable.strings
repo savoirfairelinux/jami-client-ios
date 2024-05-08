@@ -50,6 +50,7 @@
 "global.deleteFile" = "Fshije Kartelën prej pajisjeje";
 "global.editMessage" = "Përpunoni Mesazh";
 "global.editing" = "Po përpunohet";
+"global.create" = "Krijoje";
 
 // Scan
 "scan.badQrCode" = "Kod QR i gabuar";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Jeni i sigurt se doni të braktisni këtë zgjua?";
 "swarm.Leave" = "Braktise";
 "swarm.newSwarm" = "Zgjua i ri";
+"swarm.namePlaceholder" = "Emër zgjoi";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Dje";
 "smartlist.results" = "Drejtori Publike";

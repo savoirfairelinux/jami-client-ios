@@ -50,6 +50,7 @@
 "global.deleteFile" = "Șterge fișierul din aparat";
 "global.editMessage" = "Modifică mesajul";
 "global.editing" = "Modificare";
+"global.create" = "Creează";
 
 // Scan
 "scan.badQrCode" = "Codul QR e greșit";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Sigur vrei să părăsești acest grup?";
 "swarm.Leave" = "Părăsește";
 "swarm.newSwarm" = "Grup nou";
+"swarm.namePlaceholder" = "Numele grupului";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Ieri";
 "smartlist.results" = "Lista publică";

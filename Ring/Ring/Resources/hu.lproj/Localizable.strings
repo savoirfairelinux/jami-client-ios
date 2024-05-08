@@ -50,6 +50,7 @@
 "global.deleteFile" = "Fájl törlése az eszközről";
 "global.editMessage" = "Üzenet szerkesztése";
 "global.editing" = "Szerkesztés";
+"global.create" = "Létrehozás";
 
 // Scan
 "scan.badQrCode" = "Rossz QR-kód";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Biztos, hogy kilép ebből a rajcsoportból?";
 "swarm.Leave" = "Elhagyás";
 "swarm.newSwarm" = "Új rajcsoport";
+"swarm.namePlaceholder" = "Rajcsoport neve";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Tegnap";
 "smartlist.results" = "Nyilvános címtár";

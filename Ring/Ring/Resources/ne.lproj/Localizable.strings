@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "सिर्जना गर्नुहोस्";
 
 // Scan
 "scan.badQrCode" = "खराब QR कोड";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "के तपाई निश्चित हुनुहुन्छ कि तपाई यो झुण्ड छोड्न चाहानुहुन्छ?";
 "swarm.Leave" = "छोड्नु";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "सवारको नाम";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "हिजो";
 "smartlist.results" = "सार्वजनिक निर्देशिका";

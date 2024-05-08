@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "Ստեղծել";
 
 // Scan
 "scan.badQrCode" = "Չար QR կոդ";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Համոզված ես, որ ուզում ես լքել այս ցավը:";
 "swarm.Leave" = "Գնացեք";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "Սավրոնի անունը";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Երեկ";
 "smartlist.results" = "Հանրային ցուցակ";

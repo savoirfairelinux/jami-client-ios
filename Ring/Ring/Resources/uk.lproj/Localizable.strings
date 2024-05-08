@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "Створити";
 
 // Scan
 "scan.badQrCode" = "Неприйнятний QR-код";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Ти впевнений, що хочеш покинути цей рій?";
 "swarm.Leave" = "Піти";
 "swarm.newSwarm" = "Новий рій";
+"swarm.namePlaceholder" = "Назва Сварма";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Учора";
 "smartlist.results" = "Публічний каталог";

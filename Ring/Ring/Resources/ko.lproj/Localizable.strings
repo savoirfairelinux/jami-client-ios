@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "생성하기";
 
 // Scan
 "scan.badQrCode" = "나쁜 QR 코드";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "이 무리를 떠나고 싶다는 확신이 있나?";
 "swarm.Leave" = "떠나";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "스와르름의 이름은";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "어제";
 "smartlist.results" = "공공 디렉토리";

@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "作成";
 
 // Scan
 "scan.badQrCode" = "誤ったQRコード";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "この群れを離れたいのか?";
 "swarm.Leave" = "出て行こう";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "Swarmの名前";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "昨日";
 "smartlist.results" = "公開ディレクトリー";

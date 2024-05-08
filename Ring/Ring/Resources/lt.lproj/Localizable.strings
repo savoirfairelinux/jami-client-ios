@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "Sukurti";
 
 // Scan
 "scan.badQrCode" = "Blogas QR kodas";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Ar tikrai nori palikti šį sraudą?";
 "swarm.Leave" = "Išvykite.";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "Šarmo vardas";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Vakar";
 "smartlist.results" = "Visuomenė direktorija";

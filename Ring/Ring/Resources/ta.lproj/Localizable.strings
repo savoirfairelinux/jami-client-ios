@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "உருவாக்கு";
 
 // Scan
 "scan.badQrCode" = "கெட்ட QR குறியீடு";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "நீங்கள் இந்த குளத்தில் இருந்து வெளியேற வேண்டும் என்று உறுதியாக இருக்கிறீர்களா?";
 "swarm.Leave" = "வெளியேறு";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "ஸ்வாமின் பெயர்";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "நேற்று";
 "smartlist.results" = "பொதுப் பட்டியல்";

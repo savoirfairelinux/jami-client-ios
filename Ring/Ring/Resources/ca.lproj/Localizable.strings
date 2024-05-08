@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "Crear";
 
 // Scan
 "scan.badQrCode" = "Mal codi QR";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Tens la certeza que vols deixar aquest enjame?";
 "swarm.Leave" = "Deixar";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "El nom de l'espars";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Ahir";
 "smartlist.results" = "Directori públic";

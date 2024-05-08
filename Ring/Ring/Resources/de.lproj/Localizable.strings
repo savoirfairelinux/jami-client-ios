@@ -50,6 +50,7 @@
 "global.deleteFile" = "Datei vom Gerät löschen";
 "global.editMessage" = "Nachricht bearbeiten";
 "global.editing" = "Bearbeitung";
+"global.create" = "Erstellen";
 
 // Scan
 "scan.badQrCode" = "QR-Code ungültig";
@@ -81,14 +82,21 @@
 "swarm.confirmLeaveSwarm" = "Sind Sie sicher, dass Sie diesen Schwarm verlassen möchten?";
 "swarm.Leave" = "Verlassen";
 "swarm.newSwarm" = "Neuer Schwarm";
+"swarm.namePlaceholder" = "Name des Schwarms";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Gestern";
 "smartlist.results" = "Öffentliches Verzeichnis";
 "smartlist.jamsResults" = "Suchergebnis";
 "smartlist.conversations" = "Unterhaltungen";
-"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.noConversationsFound" = "Keine Unterhaltungen entsprechen Ihrer Suche";
 "smartlist.newContact" = "Neuer Kontakt";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newSwarm" = "Neuer Schwarm";
 "smartlist.accounts" = "Konten";
 "smartlist.invitationReceived" = "Einladungen erhalten";
 "smartlist.noResults" = "Keine Ergebnisse";
@@ -107,13 +115,13 @@
 "smartlist.accounts" = "Konten";
 "smartlist.disableDonation" = "Nicht jetzt";
 "smartlist.donationExplanation" = "Wenn Sie gerne Jami nutzen und an unsere Mission glauben, würden Sie dann spenden?";
-"smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.inSynchronization" = "Synchronisierung der Unterhaltung";
+"smartlist.newMessage" = "Neue Nachricht";
 
 //Conversation
-"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsButton" = "Zu Kontakten hinzufügen";
 "conversation.addToContactsLabel" = "Zu Kontakten hinzufügen?";
-"conversation.notContactLabel" = "is not in your contact list";
+"conversation.notContactLabel" = "befindet sich nicht in Ihrer Kontaktliste.";
 "conversation.messagePlaceholder" = "Schreiben an";
 "conversation.explanationSendingLocationTo" = "Sie teilen Ihren Standort derzeit mit";
 "conversation.explanationReceivingLocationFrom" = "Sie erhalten derzeit einen Live-Standort von";
@@ -134,9 +142,9 @@
 
 //Invitations
 "invitations.noInvitations" = "Keine Einladungen";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
+"invitations.pending" = "ausstehend";
+"invitations.accepted" = "angenommen";
+"invitations.refused" = "abgelehnt";
 "invitations.banned" = "gesperrt";
 "invitations.list" = "Einladungen erhalten";
 
@@ -309,7 +317,7 @@
 "accountPage.disableBoothMode" = "Geheim-Modus deaktivieren";
 "accountPage.disableBoothModeExplanation" = "Bitte geben Sie Ihr Kontopasswort ein";
 "accountPage.boothModeExplanation" = "Im Geheim-Modus wird der Gesprächsverlauf nicht gespeichert und die Jami-Funktionalität durch ausgehende Anrufe eingeschränkt. Wenn Sie den Geheim-Modus aktivieren, werden alle Ihre Gespräche entfernt.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
+"accountPage.noBoothMode" = "Um den Booth-Modus zu aktivieren, verschlüsseln Sie zunächst Ihr Konto.";
 "accountPage.boothModeAlertMessage" = "Nach der Aktivierung des Geheim-Modus werden alle Ihre Gespräche entfernt.";
 "accountPage.peerDiscovery" = "In lokalem Netzwerk automatisch verbinden";
 "accountPage.autoRegistration" = "Automatische Registrierung nach Ablauf";

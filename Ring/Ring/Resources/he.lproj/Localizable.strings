@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "צור";
 
 // Scan
 "scan.badQrCode" = "קוד QR גרוע";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "אתה בטוח שאתה רוצה לעזוב את הסוואר הזה?";
 "swarm.Leave" = "עזוב";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "שם הסווארם";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "אתמול";
 "smartlist.results" = "תיקון ציבורי";

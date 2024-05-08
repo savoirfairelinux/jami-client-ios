@@ -50,6 +50,7 @@
 "global.deleteFile" = "Izbriši datoteko z naprave";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "Ustvari";
 
 // Scan
 "scan.badQrCode" = "Napačna QR-koda";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Ali ste prepričani, da želite zapustiti ta roj?";
 "swarm.Leave" = "Zapusti";
 "swarm.newSwarm" = "Nov roj";
+"swarm.namePlaceholder" = "Ime roja";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Včeraj";
 "smartlist.results" = "Javni imenik";

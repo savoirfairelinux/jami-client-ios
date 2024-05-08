@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "Opprett";
 
 // Scan
 "scan.badQrCode" = "Ugyldig QR kode";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Er du sikker på at du vil forlate denne sjarmen?";
 "swarm.Leave" = "Gå bort";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "Swarm's navn";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Igår";
 "smartlist.results" = "Offentlig katalog";

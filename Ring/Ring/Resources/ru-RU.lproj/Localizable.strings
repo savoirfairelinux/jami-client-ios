@@ -50,6 +50,7 @@
 "global.deleteFile" = "Удалить файл с устройства";
 "global.editMessage" = "Изменить сообщение";
 "global.editing" = "Edititing";
+"global.create" = "Создать";
 
 // Scan
 "scan.badQrCode" = "Плохой QR-code";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Ты уверен, что хочешь покинуть этот рог?";
 "swarm.Leave" = "Покинуть";
 "swarm.newSwarm" = "Новый рой";
+"swarm.namePlaceholder" = "Имя роя";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Вчера";
 "smartlist.results" = "Публичный Каталог";

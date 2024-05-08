@@ -50,6 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
+"global.create" = "Жарату";
 
 // Scan
 "scan.badQrCode" = "Жаман QR код";
@@ -81,6 +82,13 @@
 "swarm.confirmLeaveSwarm" = "Бұл тобырдан кетуіңізге сенімдісіз бе?";
 "swarm.Leave" = "Кетіңіздер";
 "swarm.newSwarm" = "New swarm";
+"swarm.namePlaceholder" = "Свармның аты";
+"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
+"swarm.customizeProfile" = "Customize swarm's profile";
+"swarm.changePicture" = "Change swarm picture";
+"swarm.customize" = "Customize swarm";
+"swarm.selectContacts" = "Select Contacts";
+
 // Smartlist
 "smartlist.yesterday" = "Келесі күні";
 "smartlist.results" = "Қоғамдық кітапша";
