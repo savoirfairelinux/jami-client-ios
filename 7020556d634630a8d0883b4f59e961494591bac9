@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c00f495_47ae4e3c",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-10T16:21:59Z",
+      "side": 1,
+      "message": "model.accountService.selectedAccountID is just const string for key, not currentJamiId itself. and if we need it we could pass it directly to reactions model",
+      "revId": "7020556d634630a8d0883b4f59e961494591bac9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57eced0f_7a43eb6f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionsView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-10T16:21:59Z",
+      "side": 1,
+      "message": "just pass rowIn as a parameter. It will be shorter and it could be @ObservedObject in ReactionRowView. Otherwise avatar, name, ect would not be updated",
+      "revId": "7020556d634630a8d0883b4f59e961494591bac9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2b07448_fed86332",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionsView.swift",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-10T16:21:59Z",
+      "side": 1,
+      "message": "also ReactionRowViewData should be created in the model",
+      "revId": "7020556d634630a8d0883b4f59e961494591bac9",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
