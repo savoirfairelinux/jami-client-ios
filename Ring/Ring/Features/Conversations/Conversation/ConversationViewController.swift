@@ -820,8 +820,13 @@ extension ConversationViewController {
     }
 
     func saveFileToDocuments(fileURL: URL) {
+        guard FileManager.default.fileExists(atPath: fileURL.path) else {
+            print("File does not exist at path: \(fileURL.path)")
+            return
+        }
+
         currentDocumentPickerMode = .saving
-        let documentPicker = UIDocumentPickerViewController(forExporting: [fileURL])
+        let documentPicker = UIDocumentPickerViewController(forExporting: [fileURL], asCopy: true)
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
         self.present(documentPicker, animated: true, completion: nil)
