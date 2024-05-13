@@ -83,11 +83,11 @@
 "swarm.Leave" = "Quitter";
 "swarm.newSwarm" = "Nouveau Swarm";
 "swarm.namePlaceholder" = "Nom du swarm";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.explanationText" = "Vous pouvez rajouter d'autres membres après la création du Swarm";
+"swarm.customizeProfile" = "Paramétrer le profile du Swarm";
+"swarm.changePicture" = "Modifier l’icône du Swarm";
+"swarm.customize" = "Paramétrer le Swarm";
+"swarm.selectContacts" = "Choisir les contacts";
 
 // Smartlist
 "smartlist.yesterday" = "Hier";

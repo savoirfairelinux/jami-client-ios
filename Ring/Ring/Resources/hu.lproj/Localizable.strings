@@ -83,11 +83,11 @@
 "swarm.Leave" = "Elhagyás";
 "swarm.newSwarm" = "Új rajcsoport";
 "swarm.namePlaceholder" = "Rajcsoport neve";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.explanationText" = "Tagok a rajcsoport létrehozása után bármikor meghívhatók és hozzáadhatók";
+"swarm.customizeProfile" = "Rajcsoport-névjegy testreszabása";
+"swarm.changePicture" = "Rajcsoportkép megváltoztatása";
+"swarm.customize" = "Rajcsoport testreszabása";
+"swarm.selectContacts" = "Kapcsolatok kijelölése";
 
 // Smartlist
 "smartlist.yesterday" = "Tegnap";

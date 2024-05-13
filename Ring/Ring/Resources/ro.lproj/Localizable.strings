@@ -83,11 +83,11 @@
 "swarm.Leave" = "Părăsește";
 "swarm.newSwarm" = "Grup nou";
 "swarm.namePlaceholder" = "Numele grupului";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.explanationText" = "Poți să adaugi sau să inviți membri în orice moment după ce a fost creat grupul";
+"swarm.customizeProfile" = "Personalizează profilul grupului";
+"swarm.changePicture" = "Schimbă poza grupului";
+"swarm.customize" = "Personalizează grupul";
+"swarm.selectContacts" = "Alege contacte";
 
 // Smartlist
 "smartlist.yesterday" = "Ieri";

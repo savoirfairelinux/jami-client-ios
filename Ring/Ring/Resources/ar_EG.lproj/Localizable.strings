@@ -50,7 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
-"global.create" = "Create";
+"global.create" = "إنشاء";
 
 // Scan
 "scan.badQrCode" = "رمز QR غير صالح";
@@ -82,7 +82,7 @@
 "swarm.confirmLeaveSwarm" = "هل أنت متأكد أنك تريد ترك هذه السلالة؟";
 "swarm.Leave" = "إرحل";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm's name";
+"swarm.namePlaceholder" = "اسم السحرة";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
 "swarm.customizeProfile" = "Customize swarm's profile";
 "swarm.changePicture" = "Change swarm picture";
