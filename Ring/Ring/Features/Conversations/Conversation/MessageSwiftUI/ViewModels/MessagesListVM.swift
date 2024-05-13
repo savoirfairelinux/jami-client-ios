@@ -765,10 +765,12 @@ class MessagesListVM: ObservableObject {
             if index == self.messagesModels.count - 1 {
                 // always show first message's time
                 model.shouldShowTimeString = true
-            } else {
+            } else if let last = lastMessageTime {
                 // only show time for new messages if beyond an arbitrary time frame from the previously shown time
-                let timeDifference = currentMessageTime.timeIntervalSinceReferenceDate - lastMessageTime!.timeIntervalSinceReferenceDate
+                let timeDifference = currentMessageTime.timeIntervalSinceReferenceDate - last.timeIntervalSinceReferenceDate
                 model.shouldShowTimeString = Int(timeDifference) < messageGroupingInterval ? false : true
+            } else {
+                model.shouldShowTimeString = false
             }
             lastMessageTime = currentMessageTime
         }
