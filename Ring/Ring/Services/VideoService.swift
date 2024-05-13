@@ -121,7 +121,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 } catch {
                     print("Could not lock device for configuration: \(error)")
                 }
-
                 return
             }
         }
@@ -190,7 +189,8 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     func stopCapturing() {
         sessionQueue.async { [weak self] in
-            self?.captureSession.stopRunning()
+            guard let self = self else { return }
+            self.captureSession.stopRunning()
         }
     }
 
@@ -214,48 +214,75 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func configureSession(withPosition position: AVCaptureDevice.Position,
-                          withOrientation orientation: AVCaptureVideoOrientation) throws {
-        captureSession.beginConfiguration()
-        guard self.permissionGranted.value else {
+                          withOrientation orientation: AVCaptureVideoOrientation) {
+        sessionQueue.sync { [weak self] in
+            guard let self = self else { return }
+            do {
+                try self.performConfiguration(withPosition: position, withOrientation: orientation)
+            } catch {
+                print("Error configuring session: \(error)")
+            }
+        }
+    }
+
+    private func performConfiguration(withPosition position: AVCaptureDevice.Position,
+                                      withOrientation orientation: AVCaptureVideoOrientation) throws {
+        self.captureSession.beginConfiguration()
+        defer { self.captureSession.commitConfiguration() }
+
+        guard permissionGranted.value else {
             throw VideoError.needPermission
         }
-        captureSession.sessionPreset = quality
+
+        self.captureSession.sessionPreset = quality
+
         guard let captureDevice = selectCaptureDevice(withPosition: position) else {
             throw VideoError.selectDeviceFailed
         }
-        self.observeSystemPressureChanges(captureDevice: captureDevice)
+
+        observeSystemPressureChanges(captureDevice: captureDevice)
+
         if #available(iOS 16.0, *) {
-            if captureSession.isMultitaskingCameraAccessSupported {
-                captureSession.isMultitaskingCameraAccessEnabled = true
+            if self.captureSession.isMultitaskingCameraAccessSupported {
+                self.captureSession.isMultitaskingCameraAccessEnabled = true
             }
         }
+
         let captureDeviceInput = try AVCaptureDeviceInput(device: captureDevice)
-        guard captureSession.canAddInput(captureDeviceInput) else {
+
+        guard self.captureSession.canAddInput(captureDeviceInput) else {
             throw VideoError.setupInputDeviceFailed
         }
-        captureSession.addInput(captureDeviceInput)
+        self.captureSession.addInput(captureDeviceInput)
+
         let videoOutput = AVCaptureVideoDataOutput()
         let types = videoOutput.availableVideoPixelFormatTypes
+
         if types.contains(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange) {
             let settings = [kCVPixelBufferPixelFormatTypeKey as NSString: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange]
             videoOutput.videoSettings = settings as [String: Any]
         }
+
         videoOutput.setSampleBufferDelegate(self, queue: sessionQueue)
-        guard captureSession.canAddOutput(videoOutput) else {
+
+        guard self.captureSession.canAddOutput(videoOutput) else {
             throw VideoError.setupOutputDeviceFailed
         }
-        captureSession.addOutput(videoOutput)
-        guard let connection = videoOutput.connection(with: AVFoundation.AVMediaType.video) else {
+        self.captureSession.addOutput(videoOutput)
+
+        guard let connection = videoOutput.connection(with: .video) else {
             throw VideoError.getConnectionFailed
         }
+
         guard connection.isVideoOrientationSupported else {
             throw VideoError.unsupportedParameter
         }
+
         guard connection.isVideoMirroringSupported else {
             throw VideoError.unsupportedParameter
         }
+
         connection.videoOrientation = orientation
-        captureSession.commitConfiguration()
     }
 
     func selectCaptureDevice(withPosition position: AVCaptureDevice.Position) -> AVCaptureDevice? {
@@ -265,57 +292,74 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     func switchCamera() -> Completable {
         return Completable.create { [weak self] completable in
-            guard let self = self else { return Disposables.create { } }
-            self.captureSession.beginConfiguration()
-            guard let currentCameraInput: AVCaptureInput = self.captureSession.inputs.first else {
-                completable(.error(VideoError.switchCameraFailed))
-                return Disposables.create {}
-            }
-            self.captureSession.removeInput(currentCameraInput)
-            var newCamera: AVCaptureDevice! = nil
-            if let input = currentCameraInput as? AVCaptureDeviceInput {
-                if input.device.position == .back {
-                    newCamera = self.selectCaptureDevice(withPosition: .front)
-                } else {
-                    newCamera = self.selectCaptureDevice(withPosition: .back)
+            self?.sessionQueue.async { [weak self] in
+                guard let self = self else {
+                    completable(.error(VideoError.switchCameraFailed))
+                    return
                 }
-                self.observeSystemPressureChanges(captureDevice: newCamera)
+                self.performSwitchCamera(completable: completable)
+            }
+            return Disposables.create()
+        }
+    }
 
-                self.delegate!.updateDevicePosition(position: newCamera.position)
-            }
-            var newVideoInput: AVCaptureDeviceInput!
-            do {
-                newVideoInput = try AVCaptureDeviceInput(device: newCamera)
-            } catch {
-                completable(.error(VideoError.switchCameraFailed))
-                return Disposables.create { }
-            }
+    private func performSwitchCamera(completable: @escaping (CompletableEvent) -> Void) {
+        self.captureSession.beginConfiguration()
+        defer { self.captureSession.commitConfiguration() }
+
+        guard let currentCameraInput = self.captureSession.inputs.first as? AVCaptureDeviceInput else {
+            completable(.error(VideoError.switchCameraFailed))
+            return
+        }
+
+        self.captureSession.removeInput(currentCameraInput)
+        guard let newCamera = selectNewCamera(currentCameraInput: currentCameraInput) else {
+            completable(.error(VideoError.switchCameraFailed))
+            return
+        }
+
+        observeSystemPressureChanges(captureDevice: newCamera)
+        delegate?.updateDevicePosition(position: newCamera.position)
+
+        do {
+            let newVideoInput = try AVCaptureDeviceInput(device: newCamera)
             if self.captureSession.canAddInput(newVideoInput) {
                 self.captureSession.addInput(newVideoInput)
-                guard let currentCameraOutput: AVCaptureOutput = self.captureSession.outputs.first else {
-                    completable(.error(VideoError.switchCameraFailed))
-                    return Disposables.create {}
-                }
-                guard let connection = currentCameraOutput.connection(with: AVFoundation.AVMediaType.video) else {
-                    completable(.error(VideoError.switchCameraFailed))
-                    return Disposables.create {}
-                }
-                guard connection.isVideoOrientationSupported else {
-                    completable(.error(VideoError.switchCameraFailed))
-                    return Disposables.create {}
-                }
-                guard connection.isVideoMirroringSupported else {
-                    completable(.error(VideoError.switchCameraFailed))
-                    return Disposables.create {}
-                }
-                connection.videoOrientation = self.orientation
-                self.captureSession.commitConfiguration()
-                completable(.completed)
             } else {
                 completable(.error(VideoError.switchCameraFailed))
+                return
             }
-            return Disposables.create { }
+        } catch {
+            completable(.error(VideoError.switchCameraFailed))
+            return
         }
+
+        guard configureOutputConnection() else {
+            completable(.error(VideoError.switchCameraFailed))
+            return
+        }
+
+        completable(.completed)
+    }
+
+    private func selectNewCamera(currentCameraInput: AVCaptureDeviceInput) -> AVCaptureDevice? {
+        if currentCameraInput.device.position == .back {
+            return selectCaptureDevice(withPosition: .front)
+        } else {
+            return selectCaptureDevice(withPosition: .back)
+        }
+    }
+
+    private func configureOutputConnection() -> Bool {
+        guard let currentCameraOutput = captureSession.outputs.first,
+              let connection = currentCameraOutput.connection(with: .video),
+              connection.isVideoOrientationSupported,
+              connection.isVideoMirroringSupported else {
+            return false
+        }
+
+        connection.videoOrientation = orientation
+        return true
     }
 
     // MARK: Sample buffer to UIImage conversion
@@ -402,7 +446,7 @@ class VideoService: FrameExtractorDelegate {
 
     func enumerateVideoInputDevices() {
         do {
-            try camera.configureSession(withPosition: AVCaptureDevice.Position.front, withOrientation: camera.getOrientation)
+            camera.configureSession(withPosition: AVCaptureDevice.Position.front, withOrientation: camera.getOrientation)
             self.log.debug("Camera successfully configured")
             let highResolutionDevice: [String: String] = try camera
                 .getDeviceInfo(forPosition: AVCaptureDevice.Position.front,
