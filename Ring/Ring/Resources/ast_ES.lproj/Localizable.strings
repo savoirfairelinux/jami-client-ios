@@ -50,7 +50,7 @@
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
-"global.create" = "Create";
+"global.create" = "Crear";
 
 // Scan
 "scan.badQrCode" = "Un codiciu QR malo";
@@ -82,7 +82,7 @@
 "swarm.confirmLeaveSwarm" = "¿Seguru que quieres salir de la masa?";
 "swarm.Leave" = "La so primer apaición foi nel estrenu de la cuarta temporada.";
 "swarm.newSwarm" = "New swarm";
-"swarm.namePlaceholder" = "Swarm's name";
+"swarm.namePlaceholder" = "El nome de la maraña";
 "swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
 "swarm.customizeProfile" = "Customize swarm's profile";
 "swarm.changePicture" = "Change swarm picture";

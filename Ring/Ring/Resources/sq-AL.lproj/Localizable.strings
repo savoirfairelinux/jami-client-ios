@@ -83,11 +83,11 @@
 "swarm.Leave" = "Braktise";
 "swarm.newSwarm" = "Zgjua i ri";
 "swarm.namePlaceholder" = "Emër zgjoi";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.explanationText" = "Mundeni të shtoni, ose ftoni anëtarë në çfarëdo kohe pasi zgjoi të jetë krijuar";
+"swarm.customizeProfile" = "Përshtatni profil zgjoi";
+"swarm.changePicture" = "Ndryshoni foto zgjoi";
+"swarm.customize" = "Përshtatni zgjua";
+"swarm.selectContacts" = "Përzgjidhni Kontakte";
 
 // Smartlist
 "smartlist.yesterday" = "Dje";
