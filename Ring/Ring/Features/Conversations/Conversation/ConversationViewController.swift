@@ -73,7 +73,6 @@ class ConversationViewController: UIViewController,
 
     @IBOutlet weak var currentCallButton: UIButton!
     @IBOutlet weak var currentCallLabel: UILabel!
-    @IBOutlet weak var conversationInSyncLabel: UILabel!
     @IBOutlet weak var scanButtonLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var callButtonHeightConstraint: NSLayoutConstraint!
     var currentDocumentPickerMode: DocumentPickerMode = .none
@@ -602,18 +601,6 @@ class ConversationViewController: UIViewController,
                 self?.viewModel.openCall()
             })
             .disposed(by: self.disposeBag)
-        viewModel.bestName
-            .share()
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] bestName in
-                let name = bestName.replacingOccurrences(of: "\0", with: "")
-                guard !name.isEmpty else { return }
-                let nameNSString = name as NSString
-                self?.conversationInSyncLabel.text = L10n.Conversation.synchronizationMessage(nameNSString)
-            })
-            .disposed(by: self.disposeBag)
-        self.conversationInSyncLabel.backgroundColor = UIColor(hexString: self.viewModel.conversation.preferences.color)
     }
 
     func placeCall() {
@@ -630,15 +617,6 @@ class ConversationViewController: UIViewController,
             .subscribe { [weak self] dismiss in
                 guard let self = self, dismiss else { return }
                 _ = self.navigationController?.popViewController(animated: true)
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
-        self.viewModel.synchronizing
-            .startWith(self.viewModel.synchronizing.value)
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] synchronizing in
-                guard let self = self else { return }
-                self.conversationInSyncLabel.isHidden = !synchronizing
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)

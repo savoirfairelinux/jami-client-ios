@@ -55,7 +55,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     @Published var lastMessageDate: String = ""
     @Published var unreadMessages: Int = 0
     @Published var presence: PresenceStatus = .offline
-    @Published var isSynchronizing: Bool = false
 
     func getDefaultAvatar() -> UIImage {
         if let conversation = self.conversation,
@@ -96,8 +95,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     lazy var state: Observable<State> = {
         return self.stateSubject.asObservable()
     }()
-
-    var synchronizing = BehaviorRelay<Bool>(value: false)
 
     var isAccountSip: Bool = false
 
@@ -269,8 +266,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             .startWith(self.conversation.synchronizing.value)
             .subscribe { [weak self] synchronizing in
                 guard let self = self else { return }
-                self.synchronizing.accept(synchronizing)
-                self.isSynchronizing = synchronizing
+                self.swiftUIModel.isSyncing = synchronizing
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)

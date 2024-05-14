@@ -115,6 +115,10 @@ struct MessagesListView: View {
                 if model.shouldShowMap {
                     LocationSharingView(model: model)
                 }
+
+                if model.isSyncing {
+                    syncView()
+                }
             }
             if showReactionsView {
                 if let reactions = reactionsForMessage {
@@ -299,6 +303,16 @@ struct MessagesListView: View {
                     .frame(height: 20)
             }
         }
+    }
+
+    func syncView() -> some View {
+        VStack {
+            Text(model.syncMessage)
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
+        }
+        .padding()
+        .background(Color(UIColor.secondarySystemBackground))
     }
 
     private func hideKeyboardIfNeed() {

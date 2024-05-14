@@ -170,7 +170,7 @@ struct ConversationRowView: View {
                                 .font(.footnote)
                                 .lineLimit(1)
                         }
-                    } else if model.isSynchronizing {
+                    } else if model.swiftUIModel.isSyncing {
                         Spacer()
                             .frame(height: 5)
                         Text(L10n.Smartlist.inSynchronization)

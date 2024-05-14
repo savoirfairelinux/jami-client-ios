@@ -32,33 +32,20 @@
                                 <color key="tintColor" red="0.1215686275" green="0.28627450980000002" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Navigate to call"/>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading conversation from peer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04J-Zf-h3H">
-                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="750" constant="60" id="0kN-bl-82z"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mrp-Ty-hZO"/>
                         <constraints>
                             <constraint firstItem="ehB-ol-cdx" firstAttribute="leading" secondItem="lhx-ny-Zct" secondAttribute="leading" id="AUO-95-xlZ"/>
-                            <constraint firstItem="04J-Zf-h3H" firstAttribute="trailing" secondItem="ehB-ol-cdx" secondAttribute="trailing" id="HZL-ep-59G"/>
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="leading" secondItem="ehB-ol-cdx" secondAttribute="leading" id="ZMK-xT-VM8"/>
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="trailing" secondItem="ehB-ol-cdx" secondAttribute="trailing" id="adg-fs-d5i"/>
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="top" secondItem="ehB-ol-cdx" secondAttribute="top" id="bMn-Xz-w1J"/>
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="bottom" secondItem="ehB-ol-cdx" secondAttribute="bottom" id="bi2-5t-Ueh"/>
-                            <constraint firstItem="04J-Zf-h3H" firstAttribute="top" secondItem="5cj-ge-3dv" secondAttribute="top" id="e8r-Nh-OCt"/>
-                            <constraint firstItem="04J-Zf-h3H" firstAttribute="leading" secondItem="ehB-ol-cdx" secondAttribute="leading" id="f4Y-Wq-YiD"/>
                             <constraint firstAttribute="trailing" secondItem="ehB-ol-cdx" secondAttribute="trailing" id="hsT-qM-JJP"/>
                             <constraint firstItem="5cj-ge-3dv" firstAttribute="top" secondItem="mrp-Ty-hZO" secondAttribute="top" id="ucp-wl-kSP"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="callButtonHeightConstraint" destination="e7R-TC-NQ2" id="5uM-Sy-1EZ"/>
-                        <outlet property="conversationInSyncLabel" destination="04J-Zf-h3H" id="4J6-cN-Jg9"/>
                         <outlet property="currentCallButton" destination="ehB-ol-cdx" id="hXv-aJ-8DN"/>
                         <outlet property="currentCallLabel" destination="5cj-ge-3dv" id="HaN-nP-GKW"/>
                     </connections>

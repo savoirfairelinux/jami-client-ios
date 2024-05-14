@@ -118,7 +118,13 @@ class MessagesListVM: ObservableObject {
     @Published var coordinates = [LocationSharingAnnotation]()
     @Published var locationSharingiewModel: LocationSharingViewModel = LocationSharingViewModel()
     @Published var isTemporary: Bool = false
-    @Published var name: String = ""
+    @Published var name: String = "" {
+        didSet {
+            updateSyncMessageIfNeeded()
+        }
+    }
+    @Published var isSyncing: Bool = false
+    @Published var syncMessage = ""
     private let log = SwiftyBeaver.self
     var contactAvatar: UIImage = UIImage()
     var currentAccountAvatar: UIImage = UIImage()
@@ -265,6 +271,11 @@ class MessagesListVM: ObservableObject {
 
     func subscribeBestName(bestName: Observable<String>) {
         self.messagePanel.subscribeBestName(bestName: bestName)
+    }
+
+    func updateSyncMessageIfNeeded() {
+        if name.isEmpty { return }
+        self.syncMessage = L10n.Conversation.synchronizationMessage(name)
     }
 
     func sendRequest() {
