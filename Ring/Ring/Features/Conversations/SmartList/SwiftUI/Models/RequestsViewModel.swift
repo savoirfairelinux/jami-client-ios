@@ -304,6 +304,12 @@ class RequestsViewModel: ObservableObject {
         self.sortRequestsByReceivedDate()
 
         self.updateUnreadCount()
+        if requestsNameResolvers.count() == 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                guard let self = self else { return }
+                requestViewOpened = false
+            }
+        }
         if newItems.isEmpty && outdatedItems.isEmpty {
             // Skip updating requestNames if there are no new or outdated items.
             return
