@@ -89,7 +89,7 @@ struct ReactionRowView: View {
 
     func reactionGridView() -> some View {
         let reactions: [ReactionRowViewData] = model.content.map({ key, value in ReactionRowViewData(msgId: key, textValue: value) })
-        let stepSize = 4 // TODO can use this to make dynamic on rotation
+        let stepSize = 3 // TODO can use this to make dynamic on rotation
         let indices = Array(stride(from: 0, to: reactions.count, by: stepSize)) // Use `to` instead of `through`
 
         return VStack(alignment: .center) {
