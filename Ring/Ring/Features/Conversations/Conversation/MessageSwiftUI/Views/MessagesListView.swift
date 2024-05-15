@@ -135,12 +135,8 @@ struct MessagesListView: View {
              interfere with the interactions of the buttons in the player view.
              Instead, we are using UITapGestureRecognizer from UIView.
              */
-            // TODO KESS figure this out
             if model.screenTapped {
-//                reactionsForMessage = nil
-//                withAnimation(.bouncy(duration: 0.55)) {
-//                    showReactionsView = false
-//                }
+                closeReactionWindow()
                 hideKeyboard()
                 // reset to inital state
                 model.screenTapped = false
