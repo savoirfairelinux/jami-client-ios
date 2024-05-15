@@ -93,7 +93,7 @@ struct ReactionRowView: View {
         let indices = Array(stride(from: 0, to: reactions.count, by: stepSize)) // Use `to` instead of `through`
 
         return VStack(alignment: .center) {
-            let useGridAlignment = reactions.count >= 4
+            let useGridAlignment = reactions.count >= stepSize
             ForEach(indices, id: \.self) { baseIndex in
                 HStack { // Create HStack to hold each row of reactions
                     ForEach(baseIndex..<min(baseIndex + stepSize, reactions.count), id: \.self) { index in
