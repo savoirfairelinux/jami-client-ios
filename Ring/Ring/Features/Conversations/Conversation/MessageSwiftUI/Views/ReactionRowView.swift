@@ -96,7 +96,7 @@ struct ReactionRowView: View {
             ForEach(indices, id: \.self) { baseIndex in
                 HStack { // Create HStack to hold each row of reactions
                     ForEach(baseIndex..<min(baseIndex + stepSize, reactions.count), id: \.self) { index in
-                        ReactionView(reactionIn: reactions[index].textValue, doAnimations: true, reactionFontSize: 28, callback: doButtons ? ({ print("KESS: \(reactions[index].textValue)") }) : nil)
+                        ReactionView(reactionIn: reactions[index].textValue, doAnimations: true, reactionFontSize: 28, callback: doButtons ? ({ /*print("access the text value like such \(reactions[index].textValue)") */}) : nil)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 4)
                             .frame(width: 44, height: 44)
