@@ -71,14 +71,9 @@ struct ReactionRowView: View {
     var doButtons: Bool
     private let log = SwiftyBeaver.self
     let model: ReactionsRowViewModel
-    //    var author: String
-    //    var avatarImg: UIImage?
-    //    var swarmColor: UIColor = UIColor.defaultSwarmColor
-    //    var parentMsg: String?
 
     // TODO: unified application font set
     // @SwiftUI.ObservedObject var convoSizes: JamiSizesSingleton
-//    var reactions: [ReactionRowViewData]
     private let viewPadding: CGSize = CGSize(width: 0, height: 0)
     private let innerViewPadding: CGSize = CGSize(width: 0, height: 0)
     private let iconSize: CGSize = CGSize(width: 32, height: 32)
