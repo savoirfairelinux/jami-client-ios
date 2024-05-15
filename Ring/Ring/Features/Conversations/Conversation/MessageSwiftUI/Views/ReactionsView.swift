@@ -21,8 +21,6 @@
 import SwiftUI
 import SwiftyBeaver
 
-// TODO add ReactionsPreview class for swarm settings page
-
 struct ReactionsView: View {
 
     let log = SwiftyBeaver.self
@@ -46,15 +44,7 @@ struct ReactionsView: View {
                     }
                     let rowIn = model.reactionsRow[index]
                     let doButtons = rowIn.jamiId == self.currentJamiId
-                    //                    model.reactionsRow2[rowIn.jamiId] = model.reactionsRow[index].content.map({ key, value in ReactionRowViewData(msgId: key, textValue: value) }) // do this temporarily
                     ReactionRowView(doButtons: doButtons, model: rowIn)
-                    //                    ReactionRowView(doButtons: doButtons,
-                    //                                    author: rowIn.username,
-                    //                                    avatarImg: rowIn.avatarImage,
-                    //                                    swarmColor: model.swarmColor,
-                    //                                    parentMsg: rowIn.messageId,
-                    //                                    reactions: model.reactionsRow[index].content.map({ key, value in ReactionRowViewData(msgId: key, textValue: value) })
-                    //                    )
                 }
             }
             .padding(.vertical)

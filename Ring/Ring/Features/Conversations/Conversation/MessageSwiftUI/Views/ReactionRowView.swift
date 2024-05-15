@@ -77,7 +77,6 @@ struct ReactionRowView: View {
     private let viewPadding: CGSize = CGSize(width: 0, height: 0)
     private let innerViewPadding: CGSize = CGSize(width: 0, height: 0)
     private let iconSize: CGSize = CGSize(width: 32, height: 32)
-    @SwiftUI.State private var meRadius: CGFloat = 0 // identify currentUser reaction section among others
 
     private let columns = [
         GridItem(.adaptive(minimum: 42))
