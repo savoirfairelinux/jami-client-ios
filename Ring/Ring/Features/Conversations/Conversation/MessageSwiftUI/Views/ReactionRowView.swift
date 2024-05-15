@@ -123,7 +123,7 @@ struct ReactionRowView: View {
             }
             // TODO: Unify font sizes with singleton fontset
             // shows username next to reactions & bold if current user
-            let author = model.jamiId
+            let author = model.username
             if #available(iOS 16.0, *) {
                 Text(author)
                     .font(.callout)
