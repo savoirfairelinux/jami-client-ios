@@ -38,12 +38,12 @@ struct ReactionsView: View {
             VStack {
                 ForEach(model.reactionsRow.indices) { index in
                     // divider + given users reaction list
-//                    if index != 0 {
-//                        Rectangle()
-//                            .fill(Color.gray)
-//                            .opacity(0.65)
-//                            .frame(width: 100, height: 0.75)
-//                    }
+                    if index != 0 {
+                        Rectangle()
+                            .fill(Color.gray)
+                            .opacity(0.65)
+                            .frame(width: 100, height: 0.75)
+                    }
                     let rowIn = model.reactionsRow[index]
                     let doButtons = rowIn.jamiId == self.currentJamiId
                     //                    model.reactionsRow2[rowIn.jamiId] = model.reactionsRow[index].content.map({ key, value in ReactionRowViewData(msgId: key, textValue: value) }) // do this temporarily
