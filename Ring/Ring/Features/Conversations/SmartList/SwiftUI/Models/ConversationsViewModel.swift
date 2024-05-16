@@ -417,7 +417,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
     private func updateSearchStatus(with status: SearchStatus? = nil) {
         if let status = status {
             switch status {
-            case .searching:
+            case .searching, .notSearching, .invalidId:
                 searchStatus = status
             default:
                 evaluateSearchResults()

@@ -276,7 +276,7 @@ struct SearchableConversationsView: View {
         SmartListContentView(model: model, mode: model.navigationTarget, requestsModel: model.requestsModel, isSearchBarActive: $isSearchBarActive)
             .navigationBarSearch(self.$searchText, isActive: $isSearchBarActive, isSearchBarDisabled: $isSearchBarDisabled)
             .onChange(of: searchText) { _ in
-                model.performSearch(query: searchText)
+                model.performSearch(query: searchText.lowercased())
             }
             .onChange(of: model.conversationCreated) { _ in
                 if model.conversationCreated.isEmpty { return }
