@@ -291,8 +291,10 @@ class MessagesListVM: ObservableObject {
                                 avatar: avatar,
                                 alias: jamsName)
             .subscribe(onCompleted: { [weak self] in
-                self?.isTemporary = false
-                self?.log.info("contact request sent")
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.isTemporary = false
+                }
             }, onError: { [weak self] (_) in
                 self?.log.error("error sending contact request")
             })
