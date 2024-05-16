@@ -290,6 +290,7 @@ class MessagesListVM: ObservableObject {
                                 withAccountId: conversation.accountId,
                                 avatar: avatar,
                                 alias: jamsName)
+            .observe(on: MainScheduler.instance)
             .subscribe(onCompleted: { [weak self] in
                 self?.isTemporary = false
                 self?.log.info("contact request sent")
