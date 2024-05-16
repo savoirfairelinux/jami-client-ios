@@ -225,7 +225,7 @@ class SwarmInfo: SwarmInfoProtocol {
 
     func hasParticipantWithRegisteredName(name: String) -> Bool {
         return !self.participants.value.filter { participant in
-            participant.registeredName.value == name
+            participant.registeredName.value == name.lowercased()
         }.isEmpty
     }
 

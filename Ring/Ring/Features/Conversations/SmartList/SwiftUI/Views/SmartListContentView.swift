@@ -179,7 +179,7 @@ struct SmartListContentView: View {
     }
 
     @ViewBuilder private var publicDirectorySearchView: some View {
-        if isSearchBarActive && !model.searchQuery.isEmpty {
+        if isSearchBarActive && !model.searchQuery.isEmpty && model.searchStatus != .notSearching {
             Text(model.publicDirectoryTitle)
                 .fontWeight(.semibold)
                 .hideRowSeparator()

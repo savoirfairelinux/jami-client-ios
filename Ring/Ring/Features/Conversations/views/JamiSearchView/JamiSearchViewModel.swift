@@ -133,14 +133,8 @@ class JamiSearchViewModel {
             .observe(on: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
-                guard let account = self?.accountsService.currentAccount else { return }
-                if text.isEmpty {
-                    self?.searchStatus.onNext(.notSearching)
-                }
-                if text.count < 3 && !account.isJams {
-                    self?.searchStatus.onNext(.invalidId)
-                }
-                self?.search(withText: text)
+                guard let self = self else { return }
+                self.search(withText: text)
             })
             .disposed(by: disposeBag)
     }
@@ -152,10 +146,12 @@ class JamiSearchViewModel {
     }
 
     func updateSearchStatus() {
-        if self.jamsTemporaryResults.value.isEmpty && self.temporaryConversation.value == nil {
-            self.searchStatus.onNext(.noResult)
+        if !self.jamsTemporaryResults.value.isEmpty {
+            self.searchStatus.onNext(.foundJams)
+        } else if self.temporaryConversation.value != nil {
+            self.searchStatus.onNext(.foundTemporary)
         } else {
-            self.searchStatus.onNext(.notSearching)
+            self.searchStatus.onNext(.noResult)
         }
     }
 
@@ -242,12 +238,21 @@ class JamiSearchViewModel {
     // Filter existing conversations, perform name lookup and create temporary conversations.
     private func search(withText searchQuery: String) {
         self.cleanUpPreviousSearch()
-        if searchQuery.isEmpty { return }
+        if searchQuery.isEmpty {
+            self.searchStatus.onNext(.notSearching)
+            return
+        }
         if let filteredConversations = getFilteredConversations(for: searchQuery) {
             self.filteredResults.accept(filteredConversations)
         }
+        guard let account = self.accountsService.currentAccount else { return }
+        if searchQuery.count < 3 && !account.isJams {
+            self.searchStatus.onNext(.invalidId)
+            return
+        }
         // not need to searh on network
         if searchOnlyExistingConversations {
+            self.searchStatus.onNext(.notSearching)
             return
         }
         self.addTemporaryConversationsIfNeed(searchQuery: searchQuery)
@@ -267,6 +272,7 @@ class JamiSearchViewModel {
         }
         // If conversation already exists we do not need to create temporary conversation.
         if self.isConversationExists(for: searchQuery) {
+            self.searchStatus.onNext(.notSearching)
             return
         }
         /*
