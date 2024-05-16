@@ -98,15 +98,16 @@ struct RequestsView: View {
     }
 
     private var requestsList: some View {
-        List(model.requestsRow) { request in
-            RequestsRowView(requestRow: request, nameResolver: request.nameResolver, listModel: model)
-                .listRowBackground(Color.jamiRequestsColor)
-                .hideRowSeparator()
+        ScrollView {
+            ForEach(model.requestsRow) { request in
+                RequestsRowView(requestRow: request, nameResolver: request.nameResolver, listModel: model)
+                    .hideRowSeparator()
+                    .transition(.slide)
+            }
+            .hideRowSeparator()
+            .edgesIgnoringSafeArea(.all)
+            .background(Color.jamiRequestsColor)
         }
-        .hideRowSeparator()
-        .listStyle(PlainListStyle())
-        .edgesIgnoringSafeArea(.all)
-        .background(Color.jamiRequestsColor)
     }
 }
 
@@ -114,25 +115,78 @@ struct RequestsRowView: View {
     @ObservedObject var requestRow: RequestRowViewModel
     @ObservedObject var nameResolver: RequestNameResolver
     var listModel: RequestsViewModel
+    @SwiftUI.State private var rotationDegrees: Double = 0
+    private var scaleFactor: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 1.05 : 1.1
+    }
 
     // Constants
     private let actionIconSize: CGFloat = 20
     private let spacerWidth: CGFloat = 15
     private let spacerHeight: CGFloat = 20
     private let buttonPadding: CGFloat = 10
-    private let dividerOpacity: Double = 0.1
+    private let dividerOpacity: Double = 0.2
     private let cornerRadius: CGFloat = 12
     private let foregroundColor: Color = Color(UIColor.systemBackground)
 
     var body: some View {
         VStack(spacing: 0) {
+            Spacer().frame(height: requestRow.markedToRemove ? 30 : spacerHeight)
             userInfoView
             Spacer().frame(height: spacerHeight)
             actionButtonsView
-            Spacer().frame(height: spacerHeight)
+            Spacer().frame(height: requestRow.markedToRemove ? 30 : spacerHeight)
             Divider()
-                .background(Color(UIColor.systemBackground).opacity(dividerOpacity))
+                .background(Color(UIColor.systemBackground).opacity(requestRow.markedToRemove ? 0 : dividerOpacity))
         }
+        .padding(.horizontal, spacerWidth)
+        .background(backgroundView)
+        .scaleEffect(requestRow.markedToRemove ? scaleFactor : 1)
+        .zIndex(requestRow.markedToRemove ? 1 : 0)
+        .rotationEffect(.degrees(rotationDegrees))
+        .padding(.horizontal, requestRow.markedToRemove ? 22 : 0)
+        .onChange(of: requestRow.markedToRemove) { newValue in
+            self.handleMarkedToRemoveChange(newValue)
+        }
+    }
+
+    private func handleMarkedToRemoveChange(_ newValue: Bool) {
+        if newValue {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                bounceAnimation()
+            }
+        } else {
+            withAnimation(.easeInOut(duration: 0.5)) {
+                rotationDegrees = 0
+            }
+        }
+    }
+
+    private var backgroundView: some View {
+        Color.jamiRequestsColor
+            .clipShape(RoundedRectangle(cornerRadius: 15))
+            .shadow(color: .black.opacity(requestRow.markedToRemove ? 0.9 : 0), radius: requestRow.markedToRemove ? 2 : 0)
+    }
+
+    private func bounceAnimation() {
+        let animationDuration = 0.1
+        let springAnimation = Animation.interpolatingSpring(stiffness: 120, damping: 35)
+
+        let rotations: [CGFloat] = [5, -5, 5, -5, 0]
+
+        func animateRotation(index: Int) {
+            guard index < rotations.count else { return }
+
+            withAnimation(springAnimation) {
+                rotationDegrees = rotations[index]
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
+                animateRotation(index: index + 1)
+            }
+        }
+
+        animateRotation(index: 0)
     }
 
     private var userInfoView: some View {
@@ -149,7 +203,6 @@ struct RequestsRowView: View {
             }
             Spacer()
             Text(requestRow.status.toString())
-                .font(.footnote)
                 .padding(.horizontal, buttonPadding)
                 .foregroundColor(requestRow.status.color())
         }

@@ -172,6 +172,7 @@ class RequestRowViewModel: ObservableObject, Identifiable, Hashable {
     @Published var avatar: UIImage?
     @Published var receivedDate: String
     @Published var status: RequestStatus = .pending
+    @Published var markedToRemove: Bool = false
     let avatarSize: CGFloat = 55
     let request: RequestModel
     let id: String
@@ -332,6 +333,27 @@ class RequestsViewModel: ObservableObject {
     private func removeOutdatedItems(_ items: [RequestNameResolver]) {
         let identifiers = Set(items.map { $0.request.getIdentifier() })
         self.requestsNameResolvers.removeAll { identifiers.contains($0.request.getIdentifier()) }
+        self.markRowsForRemoval(with: identifiers)
+    }
+
+    private func markRowsForRemoval(with identifiers: Set<String>) {
+        identifiers.forEach { identifier in
+            for row in requestsRow where row.request.getIdentifier() == identifier {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    row.markedToRemove = true
+                }
+                self.scheduleRowRemoval(identifier)
+            }
+        }
+    }
+
+    private func scheduleRowRemoval(_ identifier: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+            guard let self = self else { return }
+            withAnimation(.easeInOut(duration: 0.5)) {
+                self.requestsRow.removeAll { $0.request.getIdentifier() == identifier }
+            }
+        }
     }
 
     private func addNewRequests(_ newRequests: [RequestModel]) {
