@@ -136,10 +136,15 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
             .startWith(accountService.currentAccount)
             .compactMap { $0 }
             .subscribe(onNext: { [weak self] account in
-                guard let self = self else { return }
-                self.selectedAccount = account.id
-                self.registeredName = self.resolveAccountName(from: account)
-                self.updateProfileDetails(account: account)
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.selectedAccount = account.id
+                    self.registeredName = self.resolveAccountName(from: account)
+                    DispatchQueue.global(qos: .background).async { [weak self] in
+                        guard let self = self else { return }
+                        self.updateProfileDetails(account: account)
+                    }
+                }
             })
             .disposed(by: disposeBag)
     }
