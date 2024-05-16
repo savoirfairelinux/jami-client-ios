@@ -86,8 +86,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.swiftUIModel.transferHelper.closeAllPlayers()
     }
 
-    let isTemporary = BehaviorRelay<Bool>(value: false)
-
     let showIncomingLocationSharing = BehaviorRelay<Bool>(value: false)
     let showOutgoingLocationSharing = BehaviorRelay<Bool>(value: false)
 
@@ -179,14 +177,6 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 self?.lastMessageDate = mesageDate
             })
             .disposed(by: self.disposeBag)
-
-        self.isTemporary
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] show in
-                self?.swiftUIModel.isTemporary = show
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
     }
 
     private func setConversation(_ conversation: ConversationModel) {
@@ -262,11 +252,12 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             return innerObservable
         }
         syncObservable?
-            .observe(on: MainScheduler.instance)
             .startWith(self.conversation.synchronizing.value)
             .subscribe { [weak self] synchronizing in
-                guard let self = self else { return }
-                self.swiftUIModel.isSyncing = synchronizing
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.swiftUIModel.isSyncing = synchronizing
+                }
             } onError: { _ in
             }
             .disposed(by: self.disposeBag)
@@ -399,7 +390,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     func showContactInfo() {
-        if self.isTemporary.value {
+        if self.swiftUIModel.isTemporary {
             return
         }
         self.closeAllPlayers()

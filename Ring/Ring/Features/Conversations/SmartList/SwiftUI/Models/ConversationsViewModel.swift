@@ -139,7 +139,6 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                     // Check for temporary conversation
                     else if let tempConversation = self.temporaryConversation, tempConversation.conversation == conversationModel {
                         tempConversation.conversation = conversationModel
-                        tempConversation.isTemporary.accept(false)
                         tempConversation.conversationCreated.accept(true)
                         self.conversationFromTemporaryCreated(conversation: conversationModel)
                         return tempConversation
@@ -147,7 +146,6 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
                         jams.conversation == conversationModel
                     }) {
                         jamsConversation.conversation = conversationModel
-                        jamsConversation.isTemporary.accept(false)
                         jamsConversation.conversationCreated.accept(true)
                         self.conversationFromTemporaryCreated(conversation: conversationModel)
                         return jamsConversation
@@ -162,9 +160,14 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
             }
 
         conersationViewModels
-            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] updatedViewModels in
-                self?.conversationViewModels = updatedViewModels
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    for conversation in updatedViewModels {
+                        conversation.swiftUIModel.isTemporary = false
+                    }
+                    self.conversationViewModels = updatedViewModels
+                }
             })
             .disposed(by: self.disposeBag)
 
@@ -276,7 +279,7 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
         let newConversation = ConversationViewModel(with: self.injectionBag)
         newConversation.userName.accept(hash)
         newConversation.conversation = conversation
-        newConversation.isTemporary.accept(true)
+        newConversation.swiftUIModel.isTemporary = true
         return newConversation
     }
 
