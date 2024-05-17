@@ -181,14 +181,6 @@ class ConversationViewController: UIViewController,
                 }
             })
             .disposed(by: self.disposeBag)
-        self.viewModel.conversationCreated
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] update in
-                guard let self = self, update else { return }
-                self.viewModel.swiftUIModel.conversation = self.viewModel.conversation
-            } onError: { _ in
-            }
-            .disposed(by: self.disposeBag)
         let messageListView = MessagesListView(model: self.viewModel.swiftUIModel)
         let swiftUIView = UIHostingController(rootView: messageListView)
         addChild(swiftUIView)

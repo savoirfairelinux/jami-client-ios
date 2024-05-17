@@ -177,6 +177,16 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                 self?.lastMessageDate = mesageDate
             })
             .disposed(by: self.disposeBag)
+        self.conversationCreated
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] update in
+                guard let self = self, update else { return }
+                if self.conversation != nil {
+                    self.swiftUIModel.conversation = self.conversation
+                }
+            } onError: { _ in
+            }
+            .disposed(by: self.disposeBag)
     }
 
     private func setConversation(_ conversation: ConversationModel) {

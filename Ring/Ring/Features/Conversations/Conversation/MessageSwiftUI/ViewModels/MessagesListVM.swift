@@ -161,7 +161,7 @@ class MessagesListVM: ObservableObject {
     var lastMessageDisposeBag = DisposeBag()
 
     var hideNavigationBar = BehaviorRelay(value: false)
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     var messagesDisposeBag = DisposeBag()
 
     var lastMessageBeforeScroll: String?
@@ -234,6 +234,7 @@ class MessagesListVM: ObservableObject {
 
                 }
                 .disposed(by: self.messagesDisposeBag)
+            disposeBag = DisposeBag()
             self.updateLastDisplayed()
             self.subscribeSwarmPreferences()
             self.updateColorPreference()
