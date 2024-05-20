@@ -84,18 +84,20 @@ struct ConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
     @SwiftUI.State private var searchText = ""
     var body: some View {
-        ForEach(model.conversations) { conversation in
-            Button(action: {
-                model.showConversation(withConversationViewModel: conversation)
-            }) {
-                ConversationRowView(model: conversation)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
-            }
-            .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+        ForEach(model.conversations) { [weak model] conversation in
+            ConversationRowView(model: conversation)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .onTapGesture { [weak conversation, weak model] in
+                    guard let conversation = conversation, let model = model else { return }
+                    model.showConversation(withConversationViewModel: conversation)
+                }
+                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+                .transition(.opacity)
         }
         .hideRowSeparator()
         .navigationBarBackButtonHidden(true)
+        .transition(.opacity)
     }
 }
 
@@ -103,14 +105,15 @@ struct TempConversationsView: View {
     @ObservedObject var model: ConversationsViewModel
     var body: some View {
         if let conversation = model.temporaryConversation {
-            Button(action: {
-                model.showConversation(withConversationViewModel: conversation)
-            }) {
-                ConversationRowView(model: conversation, withSeparator: false)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
-            }
-            .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+            ConversationRowView(model: conversation, withSeparator: false)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .onTapGesture { [weak conversation, weak model] in
+                    guard let conversation = conversation, let model = model else { return }
+                    model.showConversation(withConversationViewModel: conversation)
+                }
+                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+                .transition(.opacity)
         }
     }
 }
@@ -119,13 +122,16 @@ struct JamsSearchResultView: View {
     @ObservedObject var model: ConversationsViewModel
     var body: some View {
         ForEach(model.jamsSearchResult) { conversation in
-            Button(action: {
-                model.showConversation(withConversationViewModel: conversation)
-            }) {
-                ConversationRowView(model: conversation, withSeparator: true)
-                    .contentShape(Rectangle())
-            }
-            .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+            ConversationRowView(model: conversation, withSeparator: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                .onTapGesture { [weak conversation, weak model] in
+                    guard let conversation = conversation, let model = model else { return }
+                    model.showConversation(withConversationViewModel: conversation)
+                }
+                .transition(.opacity)
+                .listRowInsets(EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15))
+                .transition(.opacity)
         }
     }
 }
@@ -196,6 +202,7 @@ struct ConversationRowView: View {
                     .padding(.leading, 55)
             }
         }
+        .transition(.opacity)
     }
 
     private var presenceIndicator: some View {
