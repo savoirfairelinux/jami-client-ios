@@ -108,8 +108,9 @@ struct AccountRowView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .contentShape(Rectangle())
         .background(backgroundForAccountRow())
-        .onTapGesture {
+        .onTapGesture { [weak model] in
             accountSelectedCallback()
+            guard let model = model else { return }
             model.changeCurrentAccount(accountId: accountRow.id)
         }
     }

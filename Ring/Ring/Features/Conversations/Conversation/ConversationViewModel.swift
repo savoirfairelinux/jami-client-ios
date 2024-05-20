@@ -316,7 +316,8 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.profileService
             .getProfile(uri: uri, createIfNotexists: false, accountId: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe { profile in
+            .subscribe {[weak self] profile in
+                guard let self = self else { return }
                 if let alias = profile.alias, let photo = profile.photo {
                     if !alias.isEmpty {
                         self.displayName.accept(alias)
