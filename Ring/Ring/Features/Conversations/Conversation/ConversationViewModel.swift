@@ -490,6 +490,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     deinit {
+        if self.conversation != nil {
+            print("******** deinit conversation model \(conversation.id)")
+        }
         self.closeAllPlayers()
     }
 
