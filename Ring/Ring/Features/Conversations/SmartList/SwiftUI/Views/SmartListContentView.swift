@@ -28,24 +28,37 @@ struct SmartListContentView: View {
     @Binding var isSearchBarActive: Bool
     @SwiftUI.State var currentSearchBarStatus: Bool = false
     @SwiftUI.State var isShowingScanner: Bool = false
-    @SwiftUI.State var isShowingNewMessageTop: Bool = true
+    @SwiftUI.State var isShowingTopView: Bool = true
+
     var body: some View {
-        List {
-            publicDirectorySearchView
-            if !hideTopView {
-                if mode == .smartList {
-                    smartListTopView
-                        .transition(.opacity)
-                } else {
-                    newMessageTopView
-                        .transition(.opacity)
+        // Use ScrollView instead of List to prevent memory leaks when using a conversation model inside ForEach.
+        ScrollView {
+            VStack(alignment: .leading) {
+                publicDirectorySearchView
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                if !hideTopView {
+                    if mode == .smartList {
+                        smartListTopView
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
+                    } else {
+                        newMessageTopView
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
+                    }
                 }
+                conversationsSearchHeaderView
+                    .hideRowSeparator()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                ConversationsView(model: model)
             }
-            conversationsSearchHeaderView
-                .hideRowSeparator()
-            ConversationsView(model: model)
+            .padding(.horizontal, 15)
         }
-        .onAppear {
+        .transition(.opacity)
+        .onAppear { [weak model] in
+            guard let model = model else { return }
             // If there was an active search before presenting the conversation, the search results should remain the same upon returning to the page.
             if model.presentedConversation.hasPresentedConversation() && !model.searchQuery.isEmpty {
                 isSearchBarActive = true
@@ -55,9 +68,13 @@ struct SmartListContentView: View {
             hideTopView = false
         }
         .onChange(of: isSearchBarActive) { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation {
-                    isShowingNewMessageTop = !isSearchBarActive
+            if isSearchBarActive {
+                isShowingTopView = false
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    withAnimation {
+                        isShowingTopView = !isSearchBarActive
+                    }
                 }
             }
         }
@@ -67,28 +84,35 @@ struct SmartListContentView: View {
             RequestsView(model: requestsModel)
         }
         .sheet(isPresented: $isShowingScanner) {
-            ScanView(onCodeScanned: { code in
+            ScanView(onCodeScanned: { [weak model] code in
+                defer {
+                    isShowingScanner = false
+                }
+                guard let model = model else { return }
                 model.showConversationFromQRCode(jamiId: code)
-                isShowingScanner = false
             }, injectionBag: model.injectionBag)
         }
     }
 
     @ViewBuilder private var smartListTopView: some View {
-        if  !isSearchBarActive && (requestsModel.unreadRequests > 0 || model.connectionState == .none) {
+        if isShowingTopView && (requestsModel.unreadRequests > 0 || model.connectionState == .none) {
             VStack {
                 if model.connectionState == .none {
                     networkSettingsButton()
+                        .transition(.opacity)
                 }
                 if requestsModel.unreadRequests > 0 {
                     RequestsIndicatorView(model: requestsModel)
-                        .onTapGesture {
-                            requestsModel.presentRequests()
+                        .onTapGesture { [weak requestsModel] in
+                            requestsModel?.presentRequests()
                         }
+                        .transition(.opacity)
                 }
             }
+            .padding(.bottom)
             .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 5, trailing: 15))
             .hideRowSeparator()
+            .transition(.opacity)
         }
     }
 
@@ -133,7 +157,7 @@ struct SmartListContentView: View {
     @ViewBuilder private var newMessageTopView: some View {
         if !isSearchBarActive {
             VStack {
-                if isShowingNewMessageTop {
+                if isShowingTopView {
                     HStack {
                         actionItem(icon: "qrcode", title: L10n.Smartlist.newContact, action: { isShowingScanner.toggle() })
                         Spacer()
@@ -142,8 +166,10 @@ struct SmartListContentView: View {
                     .hideRowSeparator()
                 }
             }
+            .padding(.bottom)
             .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom: 5, trailing: 15))
             .hideRowSeparator()
+            .transition(.opacity)
         }
     }
 
@@ -166,25 +192,39 @@ struct SmartListContentView: View {
     }
 
     @ViewBuilder private var conversationsSearchHeaderView: some View {
-        if !model.searchQuery.isEmpty {
-            Text(L10n.Smartlist.conversations)
-                .fontWeight(.semibold)
-                .hideRowSeparator()
-            if model.conversations.isEmpty {
-                Text(L10n.Smartlist.noConversationsFound)
-                    .font(.callout)
+        VStack(alignment: .leading) {
+            if isSearchBarActive {
+                Spacer()
+                    .frame(height: 10)
+            }
+            if !model.searchQuery.isEmpty {
+                Text(L10n.Smartlist.conversations)
+                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.leading)
                     .hideRowSeparator()
+                    .padding(.bottom, 3)
+                if model.conversations.isEmpty {
+                    Text(L10n.Smartlist.noConversationsFound)
+                        .font(.callout)
+                        .multilineTextAlignment(.leading)
+                        .hideRowSeparator()
+                }
             }
         }
     }
 
     @ViewBuilder private var publicDirectorySearchView: some View {
-        if isSearchBarActive && !model.searchQuery.isEmpty && model.searchStatus != .notSearching {
-            Text(model.publicDirectoryTitle)
-                .fontWeight(.semibold)
-                .hideRowSeparator()
-            searchResultView
-                .hideRowSeparator()
+        if isSearchBarActive && !model.searchQuery.isEmpty {
+            VStack(alignment: .leading) {
+                Text(model.publicDirectoryTitle)
+                    .fontWeight(.semibold)
+                    .hideRowSeparator()
+                    .padding(.top)
+                searchResultView
+                    .hideRowSeparator()
+                    .padding(.bottom)
+                    .padding(.top, 3)
+            }
         }
     }
 

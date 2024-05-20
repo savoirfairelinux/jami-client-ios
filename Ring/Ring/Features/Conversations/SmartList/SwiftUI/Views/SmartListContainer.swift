@@ -50,7 +50,8 @@ struct NewMessageView: View {
     private var leadingBarItem: some View {
         Button(action: {
             model.slideDirectionUp = false
-            withAnimation {
+            withAnimation { [weak model] in
+                guard let model = model else { return }
                 model.navigationTarget = .smartList
             }
         }) {
@@ -71,6 +72,7 @@ struct SmartListView: View {
     @SwiftUI.State  var showingPicker = false
     // share account info
     @SwiftUI.State private var isSharing = false
+    @SwiftUI.State private var isMenuOpen = false
     var body: some View {
         PlatformAdaptiveNavView {
             ZStack(alignment: .bottom) {
@@ -86,7 +88,8 @@ struct SmartListView: View {
             }
         }
         .sheet(isPresented: $showingPicker) {
-            ContactPicker { contact in
+            ContactPicker { [weak model] contact in
+                guard let model = model else { return }
                 model.showSipConversation(withNumber: contact)
                 showingPicker = false
             }
@@ -94,10 +97,21 @@ struct SmartListView: View {
         .onChange(of: isSearchBarActive) { _ in
             showAccountList = false
         }
+        .overlay(isMenuOpen ? makeOverlay() : nil)
+    }
+
+    func makeOverlay() -> some View {
+        return Color.white.opacity(0.001)
+            .ignoresSafeArea()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onTapGesture {
+                isMenuOpen = false
+            }
     }
 
     private var leadingBarItems: some View {
         Button(action: {
+            isMenuOpen = false
             toggleAccountList()
         }) {
             CurrentAccountButton(model: model.accountsModel)
@@ -166,7 +180,10 @@ struct SmartListView: View {
     }
 
     private var bookButton: some View {
-        Button(action: { showingPicker.toggle() }) {
+        Button(action: {
+            isMenuOpen = false
+            showingPicker.toggle()
+        }) {
             if let uiImage = UIImage(asset: Asset.phoneBook) {
                 Image(uiImage: uiImage)
                     .foregroundColor(Color.jamiColor)
@@ -175,7 +192,11 @@ struct SmartListView: View {
     }
 
     private var diapladButton: some View {
-        Button(action: { model.showDialpad() }) {
+        Button(action: { [weak model] in
+            isMenuOpen = false
+            guard let model = model else { return }
+            model.showDialpad()
+        }) {
             Image(systemName: "square.grid.3x3.topleft.filled")
                 .foregroundColor(Color.jamiColor)
         }
@@ -198,17 +219,27 @@ struct SmartListView: View {
             Image(systemName: "ellipsis.circle")
                 .foregroundColor(Color.jamiColor)
         }
+        .onTapGesture {
+            isMenuOpen = true
+        }
     }
 
     private var composeButton: some View {
-        Button(action: triggerNewMessageAnimation) {
+        Button(action: {
+            isMenuOpen = false
+            triggerNewMessageAnimation()
+        }) {
             Image(systemName: "square.and.pencil")
                 .foregroundColor(Color.jamiColor)
         }
     }
 
     private var createSwarmButton: some View {
-        Button(action: model.createSwarm) {
+        Button(action: { [weak model] in
+            isMenuOpen = false
+            guard let model = model else { return }
+            model.createSwarm()
+        }) {
             Label(L10n.Swarm.newSwarm, systemImage: "person.2")
         }
     }
@@ -221,35 +252,57 @@ struct SmartListView: View {
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(8)
+                .onTapGesture {
+                    isMenuOpen = false
+                }
         }
     }
 
     private var accountsButton: some View {
-        Button(action: toggleAccountList) {
+        Button(action: {
+            isMenuOpen = false
+            toggleAccountList()
+        }) {
             Label(L10n.Smartlist.accounts, systemImage: "list.bullet")
         }
     }
 
     private var settingsButton: some View {
-        Button(action: model.openSettings) {
+        Button(action: {[weak model] in
+            isMenuOpen = false
+            guard let model = model else { return }
+            model.openSettings()
+        }) {
             Label(L10n.Global.accountSettings, systemImage: "person.circle")
         }
     }
 
     private var generalSettingsButton: some View {
-        Button(action: model.showGeneralSettings) {
+        Button(action: {[weak model] in
+            isMenuOpen = false
+            guard let model = model else { return }
+            model.showGeneralSettings()
+        }) {
             Label(L10n.Global.advancedSettings, systemImage: "gearshape")
         }
     }
 
     private var donateButton: some View {
-        Button(action: model.donate) {
+        Button(action: {[weak model] in
+            isMenuOpen = false
+            guard let model = model else { return }
+            model.donate()
+        }) {
             Label(L10n.Global.donate, systemImage: "heart")
         }
     }
 
     private var aboutJamiButton: some View {
-        Button(action: model.openAboutJami) {
+        Button(action: {[weak model] in
+            isMenuOpen = false
+            guard let model = model else { return }
+            model.openAboutJami()
+        }) {
             Label {
                 Text(L10n.Smartlist.aboutJami)
             } icon: {
@@ -260,7 +313,8 @@ struct SmartListView: View {
 
     private func triggerNewMessageAnimation() {
         model.slideDirectionUp = true
-        withAnimation {
+        withAnimation { [weak model] in
+            guard let model = model else { return }
             model.navigationTarget = .newMessage
         }
     }
@@ -275,10 +329,12 @@ struct SearchableConversationsView: View {
     var body: some View {
         SmartListContentView(model: model, mode: model.navigationTarget, requestsModel: model.requestsModel, isSearchBarActive: $isSearchBarActive)
             .navigationBarSearch(self.$searchText, isActive: $isSearchBarActive, isSearchBarDisabled: $isSearchBarDisabled)
-            .onChange(of: searchText) { _ in
+            .onChange(of: searchText) {[weak model] _ in
+                guard let model = model else { return }
                 model.performSearch(query: searchText.lowercased())
             }
-            .onChange(of: model.conversationCreated) { _ in
+            .onChange(of: model.conversationCreated) {[weak model] _ in
+                guard let model = model else { return }
                 if model.conversationCreated.isEmpty { return }
                 isSearchBarDisabled = true
                 searchText = ""
@@ -308,13 +364,5 @@ struct CurrentAccountButton: View {
         .transaction { transaction in
             transaction.animation = nil
         }
-    }
-}
-
-class CustomHostingController: UIHostingController<SmartListContainer> {
-
-    // Override supported interface orientations
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all // Customize this based on your app's needs
     }
 }
