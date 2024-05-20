@@ -45,7 +45,7 @@
 "global.copy" = "Koopiat";
 "global.reply" = "Vastust";
 "global.search" = "Otsime...";
-"global.donate" = "Donate";
+"global.donate" = "Toeta meid";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
@@ -98,7 +98,7 @@
 "smartlist.newContact" = "New Contact";
 "smartlist.newSwarm" = "New Swarm";
 "smartlist.accounts" = "Arvestused";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "Sulle on kutseid";
 "smartlist.noResults" = "Ei tulemusi";
 "smartlist.noConversation" = "Mitte kõnelusi.";
 "smartlist.searchBarPlaceholder" = "Sisestage nimi...";
@@ -113,8 +113,8 @@
 "smartlist.aboutJami" = "Jami kohta";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Arvestused";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.disableDonation" = "Mitte praegu";
+"smartlist.donationExplanation" = "Kui sulle Jami meeldib ja sa usud meie visiooni, siis kas sa oleksid nõus meid rahaliselt toetama?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
@@ -146,7 +146,7 @@
 "invitations.accepted" = "accepted";
 "invitations.refused" = "refused";
 "invitations.banned" = "banned";
-"invitations.list" = "Invitations received";
+"invitations.list" = "Sulle on kutseid";
 
 // Walkthrough
 
