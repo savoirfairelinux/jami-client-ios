@@ -50,7 +50,8 @@ struct NewMessageView: View {
     private var leadingBarItem: some View {
         Button(action: {
             model.slideDirectionUp = false
-            withAnimation {
+            withAnimation { [weak model] in
+                guard let model = model else { return }
                 model.navigationTarget = .smartList
             }
         }) {
@@ -71,6 +72,7 @@ struct SmartListView: View {
     @SwiftUI.State  var showingPicker = false
     // share account info
     @SwiftUI.State private var isSharing = false
+    @SwiftUI.State private var isMenuOpen = false
     var body: some View {
         PlatformAdaptiveNavView {
             ZStack(alignment: .bottom) {
@@ -86,7 +88,8 @@ struct SmartListView: View {
             }
         }
         .sheet(isPresented: $showingPicker) {
-            ContactPicker { contact in
+            ContactPicker { [weak model] contact in
+                guard let model = model else { return }
                 model.showSipConversation(withNumber: contact)
                 showingPicker = false
             }
@@ -94,6 +97,16 @@ struct SmartListView: View {
         .onChange(of: isSearchBarActive) { _ in
             showAccountList = false
         }
+        .overlay(isMenuOpen ? makeOverlay() : nil)
+    }
+
+    func makeOverlay() -> some View {
+        return Color.white.opacity(0.001)
+            .ignoresSafeArea()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onTapGesture {
+                isMenuOpen = false
+            }
     }
 
     private var leadingBarItems: some View {
@@ -198,6 +211,9 @@ struct SmartListView: View {
             Image(systemName: "ellipsis.circle")
                 .foregroundColor(Color.jamiColor)
         }
+        .onTapGesture {
+            isMenuOpen = true
+        }
     }
 
     private var composeButton: some View {
@@ -260,7 +276,8 @@ struct SmartListView: View {
 
     private func triggerNewMessageAnimation() {
         model.slideDirectionUp = true
-        withAnimation {
+        withAnimation { [weak model] in
+            guard let model = model else { return }
             model.navigationTarget = .newMessage
         }
     }
@@ -275,10 +292,12 @@ struct SearchableConversationsView: View {
     var body: some View {
         SmartListContentView(model: model, mode: model.navigationTarget, requestsModel: model.requestsModel, isSearchBarActive: $isSearchBarActive)
             .navigationBarSearch(self.$searchText, isActive: $isSearchBarActive, isSearchBarDisabled: $isSearchBarDisabled)
-            .onChange(of: searchText) { _ in
+            .onChange(of: searchText) {[weak model] _ in
+                guard let model = model else { return }
                 model.performSearch(query: searchText.lowercased())
             }
-            .onChange(of: model.conversationCreated) { _ in
+            .onChange(of: model.conversationCreated) {[weak model] _ in
+                guard let model = model else { return }
                 if model.conversationCreated.isEmpty { return }
                 isSearchBarDisabled = true
                 searchText = ""
@@ -308,13 +327,5 @@ struct CurrentAccountButton: View {
         .transaction { transaction in
             transaction.animation = nil
         }
-    }
-}
-
-class CustomHostingController: UIHostingController<SmartListContainer> {
-
-    // Override supported interface orientations
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all // Customize this based on your app's needs
     }
 }

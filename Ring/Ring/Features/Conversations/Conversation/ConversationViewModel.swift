@@ -250,6 +250,7 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
                  notification, we need to verify whether it is a swarm or not
                  */
                 subscribeConversationReady()
+
             }
             subscribeConversationSynchronization()
             subscribeLocationEvents()
@@ -316,7 +317,8 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.profileService
             .getProfile(uri: uri, createIfNotexists: false, accountId: accountId)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .subscribe { profile in
+            .subscribe {[weak self] profile in
+                guard let self = self else { return }
                 if let alias = profile.alias, let photo = profile.photo {
                     if !alias.isEmpty {
                         self.displayName.accept(alias)
@@ -490,6 +492,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
     }
 
     deinit {
+        if self.conversation != nil {
+            print("******** deinit conversation model \(conversation.id)")
+        }
         self.closeAllPlayers()
     }
 
