@@ -151,7 +151,7 @@ static id <CallsAdapterDelegate> _delegate;
         }
     }));
 
-    callHandlers.insert(exportable_callback<CallSignal::ConferenceCreated>([&](const std::string& accountId, const std::string& confId) {
+    callHandlers.insert(exportable_callback<CallSignal::ConferenceCreated>([&](const std::string& accountId, const std::string& conversationId, const std::string& confId) {
         if (CallsAdapter.delegate) {
             NSString* confIdString = [NSString stringWithUTF8String:confId.c_str()];
             [CallsAdapter.delegate conferenceCreatedWithConference: confIdString accountId:[NSString stringWithUTF8String:accountId.c_str()] ];
