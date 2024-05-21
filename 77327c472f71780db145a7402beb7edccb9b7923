@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb5fca8c_a4b050f6",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContainerModel.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-21T15:54:45Z",
+      "side": 1,
+      "message": "could also pass localJamiId, because it is used in ReactionsContainerModel",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55228ea5_a90da793",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-21T15:54:45Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d200fdb_59390761",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-21T15:54:45Z",
+      "side": 1,
+      "message": "@StateObject should be used when model created by the view, that is not current case. should be @ObservedObject",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe9cc4c_68901a94",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-21T15:54:45Z",
+      "side": 1,
+      "message": "no point to use model.accountService.selectedAccountID. We should pass jamiId for account to ReactionsContainerModel",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e4fb567_c7ce88bd",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-21T15:54:45Z",
+      "side": 1,
+      "message": "@ObservedObject let model: ReactionsRowViewModel",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5be4144e_96b0df85",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-21T15:54:45Z",
+      "side": 1,
+      "message": "when peer sends reaction, avatars disappear",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea876dd_5a609ac8",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionsView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-21T15:54:45Z",
+      "side": 1,
+      "message": "currentJamiId should be in the model",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "838565f6_8ff6dfda",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionsView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-21T15:54:45Z",
+      "side": 1,
+      "message": "@ObservedObject",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
