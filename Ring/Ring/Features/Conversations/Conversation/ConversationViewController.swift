@@ -96,7 +96,7 @@ class ConversationViewController: UIViewController,
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layer.shadowOpacity = 0
-        self.viewModel.setMessagesAsRead()
+        self.viewModel.setMessagesAsRead(update: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +105,11 @@ class ConversationViewController: UIViewController,
                            displayName: self.viewModel.displayName.value,
                            username: self.viewModel.userName.value)
         self.updateNavigationBarShadow()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.viewModel.setMessagesAsRead(update: true)
     }
 
     @objc
@@ -194,6 +199,16 @@ class ConversationViewController: UIViewController,
         swiftUIView.didMove(toParent: self)
         self.view.backgroundColor = UIColor.systemBackground
         self.view.sendSubviewToBack(swiftUIView.view)
+
+        self.viewModel.lastMessageObservable
+            .share()
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] mesage in
+                guard let self = self else { return }
+                self.viewModel.messageDisplayed()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func importDocument() {

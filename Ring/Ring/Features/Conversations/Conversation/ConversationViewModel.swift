@@ -366,25 +366,22 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
         self.conversationsService.sendSwarmMessage(conversationId: conversation.id, accountId: conversation.accountId, message: content, parentId: parentId)
     }
 
-    func setMessagesAsRead() {
+    func setMessagesAsRead(update: Bool) {
         guard let account = self.accountService.currentAccount,
               let ringId = AccountModelHelper(withAccount: account).ringId else { return }
         self.conversationsService
             .setMessagesAsRead(forConversation: self.conversation,
                                accountId: account.id,
-                               accountURI: ringId)
+                               accountURI: ringId,
+                               update: update)
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe()
             .disposed(by: self.disposeBag)
     }
 
-    func setMessageAsRead(daemonId: String, messageId: String) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let self = self else { return }
-            self.conversationsService
-                .setMessageAsRead(conversation: self.conversation,
-                                  messageId: messageId,
-                                  daemonId: daemonId)
+    func messageDisplayed() {
+        if let message = self.swiftUIModel.messagesModels.first, message.message.incoming {
+            self.setMessagesAsRead(update: false)
         }
     }
 
