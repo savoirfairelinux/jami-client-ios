@@ -161,8 +161,9 @@ class MessagesListVM: ObservableObject {
     var lastMessageDisposeBag = DisposeBag()
 
     var hideNavigationBar = BehaviorRelay(value: false)
-    var disposeBag = DisposeBag()
+    var conversationDisposeBag = DisposeBag()
     var messagesDisposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
 
     var lastMessageBeforeScroll: String?
 
@@ -237,21 +238,17 @@ class MessagesListVM: ObservableObject {
                 .disposed(by: self.messagesDisposeBag)
             subscriptionQueue.async { [weak self] in
                 guard let self = self else { return }
-                self.invalidateAndSetupSubscriptions()
+                self.invalidateAndSetupConversationSubscriptions()
             }
+            self.updateColorPreference()
+            self.updateLastDisplayed()
         }
     }
 
-    func invalidateAndSetupSubscriptions() {
-        self.disposeBag = DisposeBag()
-        self.updateLastDisplayed()
-        self.subscribeSwarmPreferences()
-        self.updateColorPreference()
-        self.subscribeUserAvatarForLocationSharing()
-        self.subscribeReplyTarget()
-        self.subscribeReactions()
+    func invalidateAndSetupConversationSubscriptions() {
+        self.conversationDisposeBag = DisposeBag()
         self.subscribeMessageUpdates()
-        self.subscribeMessagesActions()
+        self.subscribeReactions()
     }
 
     init (injectionBag: InjectionBag, transferHelper: TransferHelper) {
@@ -266,8 +263,13 @@ class MessagesListVM: ObservableObject {
         self.transferHelper = transferHelper
         self.locationSharingService = injectionBag.locationSharingService
         self.messagePanel = MessagePanelVM(messagePanelState: self.messagePanelStateSubject)
-        self.subscribeLocationEvents()
         self.contextMenuModel.currentJamiAccountId = self.accountService.currentAccount?.jamiId
+        self.subscribeLocationEvents()
+        self.subscribeSwarmPreferences()
+        self.subscribeUserAvatarForLocationSharing()
+        self.subscribeReplyTarget()
+        self.subscribeMessagesActions()
+        self.subscribeContextMenu()
     }
 
     func subscribeScreenTapped(screenTapped: Observable<Bool>) {
@@ -422,8 +424,10 @@ class MessagesListVM: ObservableObject {
                 guard let self = self else { return }
                 self.reactionsUpdated(messageId: messageId)
             })
-            .disposed(by: self.disposeBag)
-        //   setup subscription for emoji picker
+            .disposed(by: self.conversationDisposeBag)
+    }
+
+    func subscribeContextMenu() {
         self.contextMenuModel.sendEmojiUpdate
             .subscribe(onNext: { [weak self] event in
                 if let self = self, !event.isEmpty {
@@ -453,7 +457,7 @@ class MessagesListVM: ObservableObject {
                 guard let self = self else { return }
                 self.messageUpdated(messageId: messageId)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: self.conversationDisposeBag)
     }
 
     func messageUpdated(messageId: String) {
