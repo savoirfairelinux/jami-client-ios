@@ -348,10 +348,7 @@ class ConversationModel: Equatable {
         unreadMessages.forEach { message in
             message.status = .displayed
         }
-        if !self.isSwarm() {
-            let number = self.messages.filter({ $0.status != .displayed && $0.type == .text && $0.incoming }).count
-            self.numberOfUnreadMessages.accept(number)
-        }
+        self.numberOfUnreadMessages.accept(0)
     }
 
     func updateLastDisplayedMessage(participantsInfo: [[String: String]]) {
@@ -451,5 +448,11 @@ class ConversationModel: Equatable {
         guard let message = self.getMessage(messageId: messageId) else { return }
         message.messageStatusUpdated(status: status, messageId: messageId, jamiId: jamiId)
         messageUpdated.onNext(messageId)
+    }
+
+    func updateUnreadMessages(count: Int) {
+        var unreadMessages = numberOfUnreadMessages.value
+        unreadMessages += count
+        numberOfUnreadMessages.accept(unreadMessages)
     }
 }
