@@ -107,6 +107,11 @@ class ConversationViewController: UIViewController,
         self.updateNavigationBarShadow()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.viewModel.setMessagesAsRead()
+    }
+
     @objc
     func screenTapped() {
         tapAction.accept(true)
@@ -194,6 +199,16 @@ class ConversationViewController: UIViewController,
         swiftUIView.didMove(toParent: self)
         self.view.backgroundColor = UIColor.systemBackground
         self.view.sendSubviewToBack(swiftUIView.view)
+
+        self.viewModel.lastMessageObservable
+            .share()
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] mesage in
+                guard let self = self else { return }
+                self.viewModel.messageDisplayed()
+            })
+            .disposed(by: self.disposeBag)
     }
 
     private func importDocument() {
