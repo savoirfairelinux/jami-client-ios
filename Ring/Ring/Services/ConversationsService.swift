@@ -173,6 +173,11 @@ class ConversationsService {
                 conversation.updatePreferences(preferences: prefsInfo)
             }
             conversation.addParticipantsFromArray(participantsInfo: participantsInfo, accountURI: accountURI)
+            conversation.updateLastDisplayedMessage(participantsInfo: participantsInfo)
+            if let lastRead = conversation.getLastReadMessage(), let jamiId = conversation.getLocalParticipants()?.jamiId {
+                let unreadInteractions = self.conversationsAdapter.countInteractions(accountId, conversationId: conversationId, from: lastRead, to: "", authorUri: jamiId)
+                conversation.numberOfUnreadMessages.accept(Int(unreadInteractions))
+            }
             conversations.append(conversation)
         }
     }
@@ -333,8 +338,10 @@ class ConversationsService {
             conversation.messages.insert(contentsOf: newMessages, at: 0)
         }
         sortIfNeeded()
+        if !fromLoaded {
+            conversation.updateUnreadMessages(count: newMessages.count)
+        }
         conversation.newMessages.accept(LoadedMessages(messages: newMessages, fromHistory: fromLoaded))
-        self.updateUnreadMessages(conversationId: conversationId, accountId: accountId)
         return true
     }
 
@@ -809,58 +816,22 @@ class ConversationsService {
         }
     }
 
-    // MARK: interaction status
-
-    func setMessageAsRead(conversation: ConversationModel, messageId: String, daemonId: String) {
-        guard let conversationURI = conversation.getConversationURI() else { return }
-        let messageToUpdate = !conversation.isSwarm() ? daemonId : messageId
-        self.conversationsAdapter
-            .setMessageDisplayedFrom(conversationURI,
-                                     byAccount: conversation.accountId,
-                                     messageId: messageToUpdate,
-                                     status: .displayed)
-        conversation.setMessageAsRead(messageId: messageId, daemonId: daemonId)
-        if !conversation.isSwarm() {
-            self.dbManager
-                .setMessagesAsRead(messagesIDs: [messageId],
-                                   withStatus: .displayed,
-                                   accountId: conversation.accountId)
-                .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-                .subscribe()
-                .disposed(by: self.disposeBag)
-        } else {
-            self.updateUnreadMessages(conversationId: conversation.id, accountId: conversation.accountId)
-        }
-    }
-
     func setMessagesAsRead(forConversation conversation: ConversationModel, accountId: String, accountURI: String) -> Completable {
         return Completable.create(subscribe: { [weak self] completable in
             guard let self = self,
                   let conversationURI = conversation.getConversationURI() else { return Disposables.create { } }
 
-            /// Filter out read, outgoing, and transfer messages
-            let unreadMessages = conversation.messages.filter({ messages in
-                return messages.status != .displayed && messages.incoming && messages.type == .text
-            })
+            var lastUnreadMessageId: String?
 
-            /// notify contacts that message was read
-            let messagesIds = unreadMessages.map({ $0.id }).filter({ !$0.isEmpty })
-            let idsToUpdate = unreadMessages
-                .map({ message in
-                        return !conversation.isSwarm() ? message.daemonId : message.id})
-                .filter({ !$0.isEmpty })
-            idsToUpdate.forEach { (msgId) in
-                self.conversationsAdapter
-                    .setMessageDisplayedFrom(conversationURI,
-                                             byAccount: accountId,
-                                             messageId: msgId,
-                                             status: .displayed)
-            }
-            /// update messages  status localy
-            conversation.setAllMessagesAsRead()
-
-            /// for non swarm update db
-            if !conversation.isSwarm() {
+            if conversation.isSwarm() {
+                let lastMessage = conversation.messages.first
+                lastUnreadMessageId = lastMessage?.id
+            } else {
+                // Filter out read, outgoing, and transfer messages
+                let unreadMessages = conversation.messages.filter({ messages in
+                    return messages.status != .displayed && messages.incoming && messages.type == .text
+                })
+                let messagesIds = unreadMessages.map({ $0.id }).filter({ !$0.isEmpty })
                 self.dbManager
                     .setMessagesAsRead(messagesIDs: messagesIds,
                                        withStatus: .displayed,
@@ -868,16 +839,18 @@ class ConversationsService {
                     .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
                     .subscribe()
                     .disposed(by: self.disposeBag)
-            } else {
-                /// for swarm set last message displayed, to get right number of unread messages
-                if let lastId = conversation.lastMessage?.id {
-                    self.conversationsAdapter
-                        .setMessageDisplayedFrom(conversationURI,
-                                                 byAccount: accountId,
-                                                 messageId: lastId,
-                                                 status: .displayed)
-                }
-                self.updateUnreadMessages(conversationId: conversation.id, accountId: conversation.accountId)
+                lastUnreadMessageId = unreadMessages.last?.id
+            }
+
+            // update messages  status localy
+            conversation.setAllMessagesAsRead()
+
+            if let lastUnreadMessageId = lastUnreadMessageId {
+                self.conversationsAdapter
+                    .setMessageDisplayedFrom(conversationURI,
+                                             byAccount: accountId,
+                                             messageId: lastUnreadMessageId,
+                                             status: .displayed)
             }
             completable(.completed)
             return Disposables.create { }

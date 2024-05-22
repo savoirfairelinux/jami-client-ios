@@ -378,13 +378,9 @@ class ConversationViewModel: Stateable, ViewModel, ObservableObject, Identifiabl
             .disposed(by: self.disposeBag)
     }
 
-    func setMessageAsRead(daemonId: String, messageId: String) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let self = self else { return }
-            self.conversationsService
-                .setMessageAsRead(conversation: self.conversation,
-                                  messageId: messageId,
-                                  daemonId: daemonId)
+    func messageDisplayed() {
+        if let message = self.swiftUIModel.messagesModels.first, message.message.incoming {
+            self.setMessagesAsRead()
         }
     }
 
