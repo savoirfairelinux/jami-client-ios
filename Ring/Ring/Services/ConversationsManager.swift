@@ -571,7 +571,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
             updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
             return newMessage
         }
-        _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, conversationId: conversationId, fromLoaded: true)
+        _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: true)
 
     }
 
@@ -583,7 +583,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
             updateTransferInfoIfNeed(newMessage: newMessage, conversationId: conversationId, accountId: accountId)
             return newMessage
         }
-        _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, conversationId: conversationId, fromLoaded: true)
+        _ = self.conversationService.insertMessages(messages: messagesModels, accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: true)
     }
 
     func reactionAdded(conversationId: String, accountId: String, messageId: String, reaction: [String: String]) {
@@ -614,7 +614,7 @@ extension  ConversationsManager: MessagesAdapterDelegate {
         if newMessage.type == .fileTransfer {
             newMessage.transferStatus = newMessage.incoming ? .awaiting : .success
         }
-        if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, conversationId: conversationId, fromLoaded: false) {
+        if self.conversationService.insertMessages(messages: [newMessage], accountId: accountId, localJamiId: account.jamiId, conversationId: conversationId, fromLoaded: false) {
             let incoming = message.body[MessageAttributes.author.rawValue] != account.jamiId
             if incoming {
                 if newMessage.transferStatus != .awaiting || !isDownloadingEnabled(for: newMessage.totalSize) {

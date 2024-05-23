@@ -290,7 +290,7 @@ class ConversationsService {
      @param fromLoaded. Indicates where it is a new received interactions or existiong interactions from loaded conversatio
      @return inserted. Returns true if at least one message was inserted.
      */
-    func insertMessages(messages: [MessageModel], accountId: String, conversationId: String, fromLoaded: Bool) -> Bool {
+    func insertMessages(messages: [MessageModel], accountId: String, localJamiId: String, conversationId: String, fromLoaded: Bool) -> Bool {
         guard let conversation = self.conversations.value
                 .filter({ conversation in
                     return conversation.id == conversationId && conversation.accountId == accountId
@@ -327,7 +327,8 @@ class ConversationsService {
         }
         sortIfNeeded()
         if !fromLoaded {
-            conversation.updateUnreadMessages(count: newMessages.count)
+            let incomingMessages = newMessages.filter({ $0.authorId != localJamiId && !$0.authorId.isEmpty })
+            conversation.updateUnreadMessages(count: incomingMessages.count)
         }
         conversation.newMessages.accept(LoadedMessages(messages: newMessages, fromHistory: fromLoaded))
         return true
