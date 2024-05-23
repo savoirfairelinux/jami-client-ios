@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be71f497_b6ee17ba",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-23T14:54:04Z",
+      "side": 1,
+      "message": "@ObservedObject",
+      "revId": "4ba21c890ec4c23d44f8d804887a4d5fbeafdac7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e62a979_5161c868",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-23T14:54:04Z",
+      "side": 1,
+      "message": "username is @published property. Creating a new variable will downgrade benefits of @published.",
+      "revId": "4ba21c890ec4c23d44f8d804887a4d5fbeafdac7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e1e09b_0aaa6950",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionsView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-23T14:54:04Z",
+      "side": 1,
+      "message": "this is view body",
+      "revId": "4ba21c890ec4c23d44f8d804887a4d5fbeafdac7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b44c0855_3fb03888",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionsView.swift",
+        "patchSetId": 13
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-23T14:54:04Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "4ba21c890ec4c23d44f8d804887a4d5fbeafdac7",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}

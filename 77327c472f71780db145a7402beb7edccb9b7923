@@ -18,6 +18,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bfbf8b2_a4386376",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/ViewModels/MessageContainerModel.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-23T14:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb5fca8c_a4b050f6",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55228ea5_a90da793",
@@ -69,6 +87,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f478fcbd_5ac6b2cc",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-23T14:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfe9cc4c_68901a94",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e4fb567_c7ce88bd",
@@ -116,6 +152,24 @@
       "writtenOn": "2024-05-21T15:54:45Z",
       "side": 1,
       "message": "currentJamiId should be in the model",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84d79059_cbca0cec",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionsView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-05-23T14:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ea876dd_5a609ac8",
       "revId": "77327c472f71780db145a7402beb7edccb9b7923",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
