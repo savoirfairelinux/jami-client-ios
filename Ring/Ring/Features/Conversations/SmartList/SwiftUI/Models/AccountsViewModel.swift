@@ -29,15 +29,23 @@ protocol AccountProfileObserver: AnyObject {
     var bestName: String { get set }
     var disposeBag: DisposeBag { get }
     var profileService: ProfilesService { get }
+    var selectedAccount: String? { get }
 }
 
 extension AccountProfileObserver {
     func updateProfileDetails(account: AccountModel) {
         profileService.getAccountProfile(accountId: account.id)
+            .take(1)
             .subscribe(onNext: { profile in
                 let avatar = profile.photo?.createImage() ?? UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 17)
                 DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
+                    /*
+                     Profile updates might be received in a different order than
+                     they were called. Verify that the id for the profile
+                     matches the selected account.
+                     */
+                    guard let self = self, account.id == self.selectedAccount else { return
+                    }
                     self.avatar = avatar
                     self.profileName = profile.alias ?? ""
                     self.updateBestName()
@@ -76,6 +84,7 @@ class AccountRow: ObservableObject, Hashable, Identifiable, AccountProfileObserv
     @Published var registeredName: String = ""
     @Published var bestName: String = ""
     @Published var needMigrate: String?
+    var selectedAccount: String? // Not used. Added to conform to the AccountProfileObserver protocol.
 
     var dimensions = AccountRowSizes()
 
@@ -85,6 +94,7 @@ class AccountRow: ObservableObject, Hashable, Identifiable, AccountProfileObserv
 
     init(account: AccountModel, profileService: ProfilesService) {
         self.id = account.id
+        self.selectedAccount = account.id
         self.profileService = profileService
         self.account = account
         if account.status == .errorNeedMigration {
