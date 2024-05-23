@@ -262,7 +262,9 @@ struct SmartListContentView: View {
     }
 
     private var jamsSearchResultContainerView: some View {
-        JamsSearchResultView(model: model)
+        VStack(alignment: .leading) {
+            JamsSearchResultView(model: model)
+        }
     }
 
     private var noResultView: some View {
