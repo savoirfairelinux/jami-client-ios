@@ -145,6 +145,10 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
     var isHistory: Bool
     var type: MessageType = .text
     var maxImageSize: CGFloat = 300
+    let screenScale: CGFloat = UIScreen.main.scale
+    var imageSize: CGFloat {
+        return maxImageSize * screenScale
+    }
     var disposeBag = DisposeBag()
 
     private var sequencing: MessageSequencing = .unknown {
@@ -344,7 +348,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         }
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            _ = self.getImage(maxSize: self.maxImageSize)
+            _ = self.getImage(maxSize: self.imageSize)
         }
     }
 
@@ -560,7 +564,7 @@ class MessageContentVM: ObservableObject, PreviewViewControllerDelegate, PlayerD
         if self.type == .fileTransfer {
             self.transferState.onNext(TransferState.getPlayer(viewModel: self))
             self.transferState.onNext(TransferState.getURL(viewModel: self))
-            _ = getImage(maxSize: self.maxImageSize)
+            _ = getImage(maxSize: self.imageSize)
         }
         updateMenuitems()
     }
