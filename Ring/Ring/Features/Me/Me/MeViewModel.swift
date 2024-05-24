@@ -362,8 +362,9 @@ class MeViewModel: ViewModel, Stateable {
     lazy var sipSettings: Observable<[SettingsSection]> = {
         Observable.combineLatest(sipCredentials,
                                  donationsSettings,
-                                 otherSipSettings) { (credentials, donate, other) in
-            return [credentials, donate, other]
+                                 otherSipSettings,
+                                 removeAccountSettings) { (credentials, donate, other, removeAccount) in
+            return [credentials, donate, other, removeAccount]
         }
     }()
 
