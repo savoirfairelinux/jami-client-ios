@@ -162,7 +162,6 @@ class MessagesListVM: ObservableObject {
 
     var hideNavigationBar = BehaviorRelay(value: false)
     var conversationDisposeBag = DisposeBag()
-    var messagesDisposeBag = DisposeBag()
     let disposeBag = DisposeBag()
 
     var lastMessageBeforeScroll: String?
@@ -193,49 +192,6 @@ class MessagesListVM: ObservableObject {
     }
     var conversation: ConversationModel! {
         didSet {
-            messagesDisposeBag = DisposeBag()
-            conversation.newMessages.share()
-                .startWith(LoadedMessages(messages: conversation.messages, fromHistory: true))
-                .observe(on: MainScheduler.instance)
-                .subscribe { [weak self] messages in
-                    guard let self = self else { return }
-                    if self.conversation.messages.isEmpty {
-                        self.messagesModels = [MessageContainerModel]()
-                        return
-                    }
-                    var insertionCount = 0
-                    for newMessage in messages.messages where self.insert(newMessage: newMessage, fromHistory: messages.fromHistory) == true {
-                        insertionCount += 1
-                    }
-                    if insertionCount == 0 {
-                        return
-                    }
-                    // load more messages if conversation just opened for first time
-                    if self.messagesModels.count < 40 && !self.allLoaded() {
-                        if let messageId = self.messagesModels.last?.id {
-                            self.conversationService
-                                .loadConversationMessages(conversationId: self.conversation.id,
-                                                          accountId: self.conversation.accountId,
-                                                          from: messageId)
-                            return
-                        }
-                    }
-                    self.computeSequencing()
-                    self.updateNumberOfNewMessages()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                        guard let self = self else {return }
-                        self.loading = false
-                        // check if we have reply target to scroll to.
-                        if let tempTarget = self.temporaryReplyTarget,
-                           self.getMessage(messageId: tempTarget) != nil {
-                            self.scrollToReplyTarget = tempTarget
-                            self.temporaryReplyTarget = nil
-                        }
-                    }
-                } onError: { _ in
-
-                }
-                .disposed(by: self.messagesDisposeBag)
             subscriptionQueue.async { [weak self] in
                 guard let self = self else { return }
                 self.invalidateAndSetupConversationSubscriptions()
@@ -247,6 +203,7 @@ class MessagesListVM: ObservableObject {
 
     func invalidateAndSetupConversationSubscriptions() {
         self.conversationDisposeBag = DisposeBag()
+        self.subscribeForNewMessages()
         self.subscribeMessageUpdates()
         self.subscribeReactions()
     }
@@ -457,6 +414,51 @@ class MessagesListVM: ObservableObject {
                 guard let self = self else { return }
                 self.messageUpdated(messageId: messageId)
             })
+            .disposed(by: self.conversationDisposeBag)
+    }
+
+    func subscribeForNewMessages() {
+        conversation.newMessages.share()
+            .startWith(LoadedMessages(messages: conversation.messages, fromHistory: true))
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] messages in
+                guard let self = self else { return }
+                if self.conversation.messages.isEmpty {
+                    self.messagesModels = [MessageContainerModel]()
+                    return
+                }
+                var insertionCount = 0
+                for newMessage in messages.messages where self.insert(newMessage: newMessage, fromHistory: messages.fromHistory) == true {
+                    insertionCount += 1
+                }
+                if insertionCount == 0 {
+                    return
+                }
+                // load more messages if conversation just opened for first time
+                if self.messagesModels.count < 40 && !self.allLoaded() {
+                    if let messageId = self.messagesModels.last?.id {
+                        self.conversationService
+                            .loadConversationMessages(conversationId: self.conversation.id,
+                                                      accountId: self.conversation.accountId,
+                                                      from: messageId)
+                        return
+                    }
+                }
+                self.computeSequencing()
+                self.updateNumberOfNewMessages()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                    guard let self = self else {return }
+                    self.loading = false
+                    // check if we have reply target to scroll to.
+                    if let tempTarget = self.temporaryReplyTarget,
+                       self.getMessage(messageId: tempTarget) != nil {
+                        self.scrollToReplyTarget = tempTarget
+                        self.temporaryReplyTarget = nil
+                    }
+                }
+            } onError: { _ in
+
+            }
             .disposed(by: self.conversationDisposeBag)
     }
 
