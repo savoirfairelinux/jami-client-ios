@@ -496,7 +496,8 @@ class CallsService: CallsAdapterDelegate, VCardSender {
         if let callDictionary = self.callsAdapter.callDetails(withCallId: callId, accountId: accountId) {
             // Add or update new call
             var call = self.calls.value[callId]
-            call?.state = CallState(rawValue: state) ?? CallState.unknown
+            var callState = CallState(rawValue: state) ?? CallState.unknown
+            call?.state = callState
             // Remove from the cache if the call is over and save message to history
             if call?.state == .over || call?.state == .failure {
                 guard let finishedCall = call else { return }
@@ -534,6 +535,9 @@ class CallsService: CallsAdapterDelegate, VCardSender {
             }
             let mediaList = [[String: String]]()
             if call == nil {
+                if !callState.isActive() {
+                    return
+                }
                 call = CallModel(withCallId: callId, callDetails: callDictionary, withMedia: mediaList)
                 var values = self.calls.value
                 values[callId] = call

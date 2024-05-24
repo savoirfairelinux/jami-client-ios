@@ -47,6 +47,10 @@ enum CallState: String {
             return ""
         }
     }
+
+    func isActive() -> Bool {
+        return self == .incoming || self == .connecting || self == .ringing || self == .current || self == .hold || self == .unhold
+    }
 }
 
 enum CallType: Int {
