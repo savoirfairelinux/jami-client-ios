@@ -156,7 +156,7 @@
 "welcome.haveAccount" = "J'ai déjà un compte";
 "welcome.linkDevice" = "Importer d'un autre appareil";
 "welcome.linkBackup" = "Importer à partir d'une sauvegarde";
-"welcome.createAccount" = "Rejoindre un appel";
+"welcome.createAccount" = "Rejoindre";
 "welcome.connectToManager" = "Se connecter à un serveur JAMS";
 
 //Creation Profile Screen

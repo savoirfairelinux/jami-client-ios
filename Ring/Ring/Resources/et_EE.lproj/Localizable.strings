@@ -46,10 +46,10 @@
 "global.reply" = "Vastust";
 "global.search" = "Otsime...";
 "global.donate" = "Toeta meid";
-"global.deleteMessage" = "Delete Message";
-"global.deleteFile" = "Delete File from device";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.deleteMessage" = "Kustuta sõnum";
+"global.deleteFile" = "Kustuta fail seadmest";
+"global.editMessage" = "Muuda sõnumit";
+"global.editing" = "Muudame sõnumit";
 "global.create" = "Looda";
 
 // Scan
@@ -81,22 +81,22 @@
 "swarm.addMember" = "Lisada liikme";
 "swarm.confirmLeaveSwarm" = "Oled kindel, et tahad siit rohvast lahkuda?";
 "swarm.Leave" = "Lähen ära.";
-"swarm.newSwarm" = "New swarm";
+"swarm.newSwarm" = "Uus vestlusrühm";
 "swarm.namePlaceholder" = "Swarm'i nimi";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.explanationText" = "Peale vestlusrühma loomist saad igal ajal siia liikmeid lisada või neile kutse saata";
+"swarm.customizeProfile" = "Kohanda vestlusrühma profiili";
+"swarm.changePicture" = "Muuda vestlusrühma pilti";
+"swarm.customize" = "Kohanda vestlusrühma";
+"swarm.selectContacts" = "Vali kontaktid";
 
 // Smartlist
 "smartlist.yesterday" = "Eile.";
 "smartlist.results" = "Avalik direktorium";
-"smartlist.jamsResults" = "Search Result";
+"smartlist.jamsResults" = "Otsingutulemus";
 "smartlist.conversations" = "Vestlused";
-"smartlist.noConversationsFound" = "No conversations match your search";
-"smartlist.newContact" = "New Contact";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.noConversationsFound" = "Ühtegi vestlust ei vasta sinu otsingule";
+"smartlist.newContact" = "Uus kontakt";
+"smartlist.newSwarm" = "Uus vestlusrühm";
 "smartlist.accounts" = "Arvestused";
 "smartlist.invitationReceived" = "Sulle on kutseid";
 "smartlist.noResults" = "Ei tulemusi";
@@ -111,58 +111,58 @@
 "smartlist.selectOneNumber" = "Vali üks numbritest";
 "smartlist.invitations" = "Kutsed";
 "smartlist.aboutJami" = "Jami kohta";
-"smartlist.inviteFriends" = "Invite friends";
+"smartlist.inviteFriends" = "Kutsu sõpru";
 "smartlist.accounts" = "Arvestused";
 "smartlist.disableDonation" = "Mitte praegu";
 "smartlist.donationExplanation" = "Kui sulle Jami meeldib ja sa usud meie visiooni, siis kas sa oleksid nõus meid rahaliselt toetama?";
-"smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.inSynchronization" = "vestlus on sünkroniseerimisel";
+"smartlist.newMessage" = "Uus sõnum";
 
 //Conversation
-"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsButton" = "Lisa kontaktitele";
 "conversation.addToContactsLabel" = "Lisada kontaktis?";
-"conversation.notContactLabel" = "is not in your contact list";
-"conversation.messagePlaceholder" = "Write to";
+"conversation.notContactLabel" = "ei leidu sinu kontaktides";
+"conversation.messagePlaceholder" = "Kirjuta kasutajale";
 "conversation.explanationSendingLocationTo" = "Sa jagad praegu oma asukoha ";
 "conversation.explanationReceivingLocationFrom" = "Saate praegu otse-eeskirja ";
-"conversation.errorSavingImage" = "Failed to save image to gallery";
-"conversation.receivedRequest" = "%@ sent you a request for a conversation.";
+"conversation.errorSavingImage" = "Pildi salvestamine galeriisse ei õnnestunud";
+"conversation.receivedRequest" = "%@ saatis sulle vestluse kutse";
 "conversation.incomingRequest" = "Saatsin sulle kõne taotlus.";
 "conversation.requestMessage" = "Tere, kas sa sooviksid meiega rääkida?";
-"conversation.notContact" = "%@ is not in your contact list.";
+"conversation.notContact" = "%@ ei leidu sinu kontaktide loendis.";
 "conversation.sendRequest" = "Küsi talle kontaktnõue, et saaksid koos vahetada";
 "conversation.sendRequestTitle" = "Küsi kontaktnõue";
 "conversation.synchronizationTitle" = "Sa oled nõus vestlusnõuega.";
 "conversation.synchronizationMessage" = "Ootame %@ ühendust, et konverents sünkroniseerida.";
 "conversation.inReplyTo" = "Vastavalt";
-"conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.repliedTo" = "vastus kasutajale";
+"conversation.yourself" = "iseendale";
+"conversation.edited" = "muudetud";
+"conversation.deletedMessage" = "kustutas sõnumi";
 
 //Invitations
 "invitations.noInvitations" = "Pole kutsu.";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.pending" = "ootel";
+"invitations.accepted" = "vastuvõetud";
+"invitations.refused" = "tagasilükatud";
+"invitations.banned" = "suhtluskeeluga";
 "invitations.list" = "Sulle on kutseid";
 
 // Walkthrough
 
 //Welcome Screen
-"welcome.title" = "Share, freely and privately with Jami";
+"welcome.title" = "Jaga vabalt ja privaatselt Jamiga";
 "welcome.text" = "Jami on vaba ja universaalne sideplatvorm, mis kaitseb kasutajate privaatsust ja vabadusi";
 "welcome.haveAccount" = "Mul on juba konto.";
 "welcome.linkDevice" = "Impordi muudest seadmetest";
 "welcome.linkBackup" = "Importida arhiivist varustust";
-"welcome.createAccount" = "Join";
-"welcome.connectToManager" = "Connect to a Jami Account Manager Server";
+"welcome.createAccount" = "Liitu";
+"welcome.connectToManager" = "Loo ühendust Jami Kontohaldusserveriga";
 
 //Creation Profile Screen
 "createProfile.skipCreateProfile" = "Lööge";
 "createProfile.profileCreated" = "Järgmine";
-"createProfile.title" = "Personalize your profile";
+"createProfile.title" = "Isikupärasta oma profiili";
 "createProfile.enterNameLabel" = "Sisesta näite nimi";
 "createProfile.enterNamePlaceholder" = "Sisestage nimi";
 "createProfile.subtitle" = "Teie profiil jagatakse teie kontakttega.";
@@ -192,8 +192,8 @@
 //Link To Account form
 "linkToAccount.waitLinkToAccountTitle" = "Kontode sidemine";
 "linkToAccount.linkButtonTitle" = "Liin";
-"linkToAccount.linkDeviceTitle" = "Link Device";
-"linkToAccount.linkDeviceMessage" = "Choose “Link a new device” from the other Jami app to show the QR code or PIN";
+"linkToAccount.linkDeviceTitle" = "Seo seade";
+"linkToAccount.linkDeviceMessage" = "Oma teisest Jami rakendusest vali „Seo uus seade“ ning kuva QR-koodi või sisesta PIN-kood";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Sisesta PIN-aeg";
 "linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
@@ -285,7 +285,7 @@
 "accountPage.revokeDeviceTitle" = "Kinnitusseadmed";
 "accountPage.revokeDeviceMessage" = "Kas sa tahad selle seadme tagasi võtta?";
 "accountPage.revokeDeviceButton" = "Kinnitamine";
-"accountPage.revokeDevicePlaceholder" = "Enter your password";
+"accountPage.revokeDevicePlaceholder" = "Sisesta oma salasõna";
 "accountPage.deviceRevoked" = "seadme tagasivõtmine lõpetatud";
 "accountPage.deviceRevocationProgress" = "- Kinnitamine...";
 "accountPage.deviceRevocationSuccess" = "Seadme tühistati.";
@@ -297,7 +297,7 @@
 "accountPage.other" = "muud";
 "accountPage.removeAccountMessage" = "Kui klikkate \"Kõikada\", siis kustutate selle konto seadmel!";
 "accountPage.removeAccountButton" = "Võtke välja";
-"accountPage.inviteFriends" = "Invite friends";
+"accountPage.inviteFriends" = "Kutsu sõpru";
 "accountPage.contactMeOnJamiTitle" = "Võta ühendust Jamiga!";
 "accountPage.contactMeOnJamiContant" = "Võta ühendust minuga Jami jaotatud sideplatvormis \"%s\" kasutades: https://jami.net";
 "accountPage.passwordPlaceholder" = "Kirjuta konto parool";
