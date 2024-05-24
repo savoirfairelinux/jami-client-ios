@@ -19,7 +19,7 @@
  */
 
 // Global
-"global.accountSettings" = "Paramètres Compte Jami";
+"global.accountSettings" = "Paramètres du compte";
 "global.advancedSettings" = "Paramètres avancés";
 "global.username" = "Nom d'utilisateur";
 "global.recommended" = "Recommandé";
