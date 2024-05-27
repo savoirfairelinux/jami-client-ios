@@ -45,7 +45,7 @@
 "global.copy" = "Kopiëren";
 "global.reply" = "Beantwoorden";
 "global.search" = "Bezig met zoeken…";
-"global.donate" = "Donate";
+"global.donate" = "Doneren";
 "global.deleteMessage" = "Delete Message";
 "global.deleteFile" = "Delete File from device";
 "global.editMessage" = "Edit Message";
@@ -98,7 +98,7 @@
 "smartlist.newContact" = "Nieuw contact";
 "smartlist.newSwarm" = "New Swarm";
 "smartlist.accounts" = "Accounts";
-"smartlist.invitationReceived" = "Invitations received";
+"smartlist.invitationReceived" = "Uitnodigingen ontvangen";
 "smartlist.noResults" = "Geen resultaten";
 "smartlist.noConversation" = "Geen gesprekken";
 "smartlist.searchBarPlaceholder" = "Voer naam in…";
@@ -113,8 +113,8 @@
 "smartlist.aboutJami" = "Over Jami";
 "smartlist.inviteFriends" = "Invite friends";
 "smartlist.accounts" = "Accounts";
-"smartlist.disableDonation" = "Not now";
-"smartlist.donationExplanation" = "If you enjoy using Jami and believe in our mission, would you make a donation?";
+"smartlist.disableDonation" = "Niet nu";
+"smartlist.donationExplanation" = "Als u van Jami geniet en in onze missie gelooft, zou u een donatie wilen doen?";
 "smartlist.inSynchronization" = "conversation in synchronization";
 "smartlist.newMessage" = "New Message";
 
@@ -146,7 +146,7 @@
 "invitations.accepted" = "accepted";
 "invitations.refused" = "refused";
 "invitations.banned" = "banned";
-"invitations.list" = "Invitations received";
+"invitations.list" = "Uitnodigingen ontvangen";
 
 // Walkthrough
 

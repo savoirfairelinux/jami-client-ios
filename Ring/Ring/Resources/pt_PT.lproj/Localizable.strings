@@ -398,8 +398,8 @@
 "generatedMessage.contactBanned" = "foi expulso";
 "generatedMessage.contactReAdded" = "foi adicionado novamente";
 "generatedMessage.outgoingCall" = "Chamada efetuada";
-"generatedMessage.missedOutgoingCall" = "Chamadas efetuadas perdidas";
-"generatedMessage.missedIncomingCall" = "Chamadas recebidas perdidas";
+"generatedMessage.missedOutgoingCall" = "Chamada efetuada perdida";
+"generatedMessage.missedIncomingCall" = "Chamada recebida perdida";
 "generatedMessage.liveLocationSharing" = "Partilha de localização em tempo real";
 "generatedMessage.contactLeftConversation" = "saiu";
 
