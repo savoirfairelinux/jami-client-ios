@@ -167,5 +167,5 @@ public class Constants: NSObject {
                                                "#607D8B"]
     public static let MAX_PROFILE_IMAGE_SIZE: CGFloat = 512
 
-    public static let versionName = "Eleutheria"
+    public static let versionName = "Astarte"
 }
