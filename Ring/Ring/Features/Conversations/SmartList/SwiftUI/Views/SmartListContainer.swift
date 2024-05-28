@@ -81,7 +81,7 @@ struct SmartListView: View {
                     .navigationBarTitle("", displayMode: .inline)
                     .navigationBarItems(leading: leadingBarItems, trailing: trailingBarItems)
                     .zIndex(0)
-                    .accessibility(identifier: AccessibilityIdentifiers.conversationView)
+                    .accessibility(identifier: SmartListAccessibilityIdentifiers.conversationView)
                 if showAccountList {
                     backgroundCover()
                     accountListsView()
@@ -117,7 +117,7 @@ struct SmartListView: View {
         }) {
             CurrentAccountButton(model: model.accountsModel)
         }
-        .accessibility(identifier: AccessibilityIdentifiers.openAccountsButton)
+        .accessibility(identifier: SmartListAccessibilityIdentifiers.openAccountsButton)
     }
 
     @ViewBuilder
@@ -128,6 +128,7 @@ struct SmartListView: View {
             .onTapGesture {
                 toggleAccountList()
             }
+            .accessibility(identifier: SmartListAccessibilityIdentifiers.backgroundCover)
     }
 
     @ViewBuilder
@@ -141,6 +142,7 @@ struct SmartListView: View {
         .zIndex(1)
         .transition(.move(edge: .bottom))
         .animation(.easeOut, value: showAccountList)
+        .accessibility(identifier: SmartListAccessibilityIdentifiers.accountListView)
     }
 
     private func toggleAccountList() {
@@ -189,6 +191,7 @@ struct SmartListView: View {
             if let uiImage = UIImage(asset: Asset.phoneBook) {
                 Image(uiImage: uiImage)
                     .foregroundColor(Color.jamiColor)
+                    .accessibility(identifier: SmartListAccessibilityIdentifiers.bookButton)
             }
         }
     }
@@ -220,7 +223,7 @@ struct SmartListView: View {
         } label: {
             Image(systemName: "ellipsis.circle")
                 .foregroundColor(Color.jamiColor)
-                .accessibility(identifier: AccessibilityIdentifiers.openMenuInSmartList)
+                .accessibility(identifier: SmartListAccessibilityIdentifiers.openMenuInSmartList)
         }
         .onTapGesture {
             isMenuOpen = true
