@@ -43,7 +43,7 @@ struct Base64VCard {
     var partsReceived: Int
 }
 
-class ProfilesService: ProfilesAdapterDelegate {
+class ProfilesService {
 
     private let ringVCardMIMEType = "x-ring/ring.profile.vcard;"
     private var base64VCards = [Int: Base64VCard]()
@@ -66,7 +66,6 @@ class ProfilesService: ProfilesAdapterDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.contactAdded(_:)),
                                                name: NSNotification.Name(rawValue: ProfileNotifications.contactAdded.rawValue),
                                                object: nil)
-        ProfilesAdapter.delegate = self
     }
 
     func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
@@ -245,6 +244,10 @@ extension ProfilesService {
                 profileObservable.onNext(Profile(uri: "", alias: nil, photo: nil, type: ""))
             })
             .disposed(by: self.disposeBag)
+    }
+
+    func accountProfileUpdated(accountId: String) {
+        self.triggerAccountProfileSignal(accountId: accountId)
     }
 
     func updateAccountProfile(accountId: String, alias: String?, photo: String?, accountURI: String) {

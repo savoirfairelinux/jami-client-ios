@@ -850,31 +850,6 @@ class AccountsService: AccountAdapterDelegate {
         self.responseStream.onNext(event)
     }
 
-    func receivedAccountProfile(for account: String, displayName: String, photo: String) {
-        do {
-            if try !self.dbManager.createDatabaseForAccount(accountId: account) {
-                return
-            }
-        } catch {
-            return
-        }
-        var name = displayName
-        if name.isEmpty {
-            let accountDetails = getAccountDetails(fromAccountId: account)
-            name = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName))
-        }
-
-        self.getAccountFromDaemon(fromAccountId: account)
-            .subscribe(onSuccess: { [weak self] accountToUpdate in
-                guard let self = self, let accountURI = AccountModelHelper
-                        .init(withAccount: accountToUpdate).uri else {
-                    return
-                }
-                _ = self.dbManager.saveAccountProfile(alias: name, photo: photo, accountId: account, accountURI: accountURI)
-            })
-            .disposed(by: self.disposeBag)
-    }
-
     // MARK: Push Notifications
 
     func setPushNotificationToken(token: String) {

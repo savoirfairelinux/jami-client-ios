@@ -54,7 +54,7 @@ static id <ProfilesAdapterDelegate> _delegate;
     registerSignalHandlers(confHandlers);
 }
 
-#pragma mark AccountAdapterDelegate
+#pragma mark ProfilesAdapterDelegate
 
 + (id <ProfilesAdapterDelegate>)delegate {
     return _delegate;
