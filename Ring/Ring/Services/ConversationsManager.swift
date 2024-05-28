@@ -40,6 +40,7 @@ class ConversationsManager {
     private let locationSharingService: LocationSharingService
     private let callsProvider: CallsProviderService
     private let requestService: RequestsService
+    private let profileService: ProfilesService
 
     private let disposeBag = DisposeBag()
     private let textPlainMIMEType = "text/plain"
@@ -58,7 +59,8 @@ class ConversationsManager {
          locationSharingService: LocationSharingService,
          contactsService: ContactsService,
          callsProvider: CallsProviderService,
-         requestsService: RequestsService) {
+         requestsService: RequestsService,
+         profileService: ProfilesService) {
         self.conversationService = conversationService
         self.accountsService = accountsService
         self.nameService = nameService
@@ -68,6 +70,8 @@ class ConversationsManager {
         self.contactsService = contactsService
         self.callsProvider = callsProvider
         self.requestService = requestsService
+        self.profileService = profileService
+        ProfilesAdapter.delegate = self
 
         ConversationsAdapter.messagesDelegate = self
         RequestsAdapter.delegate = self
@@ -660,6 +664,17 @@ extension  ConversationsManager: RequestsAdapterDelegate {
         }
         self.requestService.conversationRequestReceived(conversationId: conversationId, accountId: accountId, metadata: metadata)
 
+    }
+}
+
+extension ConversationsManager: ProfilesAdapterDelegate {
+    func profileReceived(contact uri: String, withAccountId accountId: String, path: String) {
+        if let account = self.accountsService.getAccount(fromAccountId: accountId),
+           account.jamiId == uri {
+            self.profileService.accountProfileUpdated(accountId: accountId)
+        } else {
+            self.profileService.profileReceived(contact: uri, withAccountId: accountId, path: path)
+        }
     }
 }
 // swiftlint:enable type_body_length
