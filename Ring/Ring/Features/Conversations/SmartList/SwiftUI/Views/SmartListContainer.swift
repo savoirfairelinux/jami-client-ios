@@ -83,7 +83,7 @@ struct SmartListView: View {
                     .navigationBarTitle("", displayMode: .inline)
                     .navigationBarItems(leading: leadingBarItems, trailing: trailingBarItems)
                     .zIndex(0)
-                    .accessibility(identifier: AccessibilityIdentifiers.conversationView)
+                    .accessibility(identifier: SmartListAccessibilityIdentifiers.conversationView)
                 if showAccountList {
                     backgroundCover()
                     accountListsView()
@@ -111,6 +111,7 @@ struct SmartListView: View {
                 model.showSipConversation(withNumber: contact)
                 showingPicker = false
             }
+            .accessibility(identifier: SmartListAccessibilityIdentifiers.contactPicker)
         }
         .onChange(of: isSearchBarActive) { _ in
             showAccountList = false
@@ -125,6 +126,7 @@ struct SmartListView: View {
             .onTapGesture {
                 isMenuOpen = false
             }
+            .accessibility(identifier: SmartListAccessibilityIdentifiers.overlay)
     }
 
     private var leadingBarItems: some View {
@@ -134,7 +136,7 @@ struct SmartListView: View {
         }) {
             CurrentAccountButton(model: model.accountsModel)
         }
-        .accessibility(identifier: AccessibilityIdentifiers.openAccountsButton)
+        .accessibility(identifier: SmartListAccessibilityIdentifiers.openAccountsButton)
     }
 
     @ViewBuilder
@@ -145,6 +147,7 @@ struct SmartListView: View {
             .onTapGesture {
                 toggleAccountList()
             }
+            .accessibility(identifier: SmartListAccessibilityIdentifiers.backgroundCover)
     }
 
     @ViewBuilder
@@ -208,6 +211,7 @@ struct SmartListView: View {
                     .foregroundColor(Color.jamiColor)
             }
         }
+        .accessibility(identifier: SmartListAccessibilityIdentifiers.bookButton)
     }
 
     private var diapladButton: some View {
@@ -236,7 +240,7 @@ struct SmartListView: View {
         } label: {
             Image(systemName: "ellipsis.circle")
                 .foregroundColor(Color.jamiColor)
-                .accessibility(identifier: AccessibilityIdentifiers.openMenuInSmartList)
+                .accessibility(identifier: SmartListAccessibilityIdentifiers.openMenuInSmartList)
         }
         .onTapGesture {
             isMenuOpen = true
