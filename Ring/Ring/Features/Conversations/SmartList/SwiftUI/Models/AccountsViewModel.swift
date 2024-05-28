@@ -27,15 +27,15 @@ protocol AccountProfileObserver: AnyObject {
     var profileName: String { get set }
     var registeredName: String { get set }
     var bestName: String { get set }
-    var disposeBag: DisposeBag { get }
+    var profileDisposeBag: DisposeBag { get set }
     var profileService: ProfilesService { get }
     var selectedAccount: String? { get }
 }
 
 extension AccountProfileObserver {
     func updateProfileDetails(account: AccountModel) {
+        profileDisposeBag = DisposeBag()
         profileService.getAccountProfile(accountId: account.id)
-            .take(1)
             .subscribe(onNext: { profile in
                 let avatar = profile.photo?.createImage() ?? UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 17)
                 DispatchQueue.main.async { [weak self] in
@@ -51,7 +51,7 @@ extension AccountProfileObserver {
                     self.updateBestName()
                 }
             })
-            .disposed(by: disposeBag)
+            .disposed(by: profileDisposeBag)
     }
 
     func resolveAccountName(from account: AccountModel) -> String {
@@ -89,6 +89,7 @@ class AccountRow: ObservableObject, Hashable, Identifiable, AccountProfileObserv
     var dimensions = AccountRowSizes()
 
     var disposeBag = DisposeBag()
+    var profileDisposeBag = DisposeBag()
     var profileService: ProfilesService
     var account: AccountModel
 
@@ -130,6 +131,7 @@ class AccountsViewModel: ObservableObject, AccountProfileObserver {
     let profileService: ProfilesService
     let nameService: NameService
     var disposeBag = DisposeBag()
+    var profileDisposeBag = DisposeBag()
     let stateSubject: PublishSubject<State>
 
     init(accountService: AccountsService, profileService: ProfilesService, nameService: NameService, stateSubject: PublishSubject<State>) {
