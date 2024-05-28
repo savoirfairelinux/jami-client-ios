@@ -73,6 +73,7 @@ private struct SearchBar: UIViewControllerRepresentable {
             searchController.searchBar.searchTextField.addTarget(self, action: #selector(searchBarTextDidEndEditing(_:)), for: .editingDidEnd)
             searchController.hidesNavigationBarDuringPresentation = true
             searchController.obscuresBackgroundDuringPresentation = false
+            searchController.searchBar.searchTextField.accessibilityIdentifier = SmartListAccessibilityIdentifiers.searchBarTextField
 
             self.searchController.searchBar.text = self.text
             searchController.delegate = self

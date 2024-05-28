@@ -45,14 +45,13 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
             return
         }
 
-        let conversationWindow = app.otherElements[AccessibilityIdentifiers.conversationView]
-
+        let conversationWindow = app.otherElements[SmartListAccessibilityIdentifiers.conversationView]
         if !conversationWindow.exists {
             return
         }
-        let accountsButton = XCUIApplication().navigationBars.buttons[AccessibilityIdentifiers.openAccountsButton]
+        let accountsButton = XCUIApplication().navigationBars.buttons[SmartListAccessibilityIdentifiers.openAccountsButton]
         accountsButton.tap()
-        let addAccount = app.buttons[AccessibilityIdentifiers.addAccountButton]
+        let addAccount = app.buttons[SmartListAccessibilityIdentifiers.addAccountButton]
         waitForElementToAppear(addAccount)
         if addAccount.exists {
             addAccount.tap()
@@ -175,7 +174,7 @@ final class AccountCreationTest: JamiBaseNoAccountUITest {
         let joinButton = app.buttons[AccessibilityIdentifiers.joinButton]
         joinButton.tap()
 
-        let conversationWindow = app.otherElements[AccessibilityIdentifiers.conversationView]
+        let conversationWindow = app.otherElements[SmartListAccessibilityIdentifiers.conversationView]
         waitForSeconds(3)
         handleNotificationAlertIfPresent()
         waitForElementToAppear(conversationWindow, timeout: 10)
