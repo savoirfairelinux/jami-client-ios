@@ -21,13 +21,9 @@
 import Foundation
 
 struct AccessibilityIdentifiers {
-    static let openAccountsButton = "accountsInformationIdentifier"
-    static let addAccountButton = "addAccountButtonIdentifier"
     static let joinJamiButton = "joinJamiButtonIdentifier"
-    static let openMenuInSmartList = "openMenuInSmartList"
     static let usernameTextField = "usernameTextField"
     static let joinButton = "joinButton"
-    static let conversationView = "conversationView"
     static let accountRegisteredName = "accountRegisteredName"
     static let accountJamiId = "accountJamiId"
     static let cancelCreatingAccount = "cancelCreatingAccount"
@@ -36,4 +32,17 @@ struct AccessibilityIdentifiers {
     static let createAccountUserNameLabel = "createAccountUserNameLabel"
     static let createAccountErrorLabel = "createAccountErrorLabel"
     static let welcomeWindow = "welcomeWindow"
+}
+
+struct SmartListAccessibilityIdentifiers {
+    static let openAccountsButton = "accountsInformationIdentifier"
+    static let addAccountButton = "addAccountButtonIdentifier"
+    static let openMenuInSmartList = "openMenuInSmartList"
+    static let conversationView = "conversationView"
+    static let backgroundCover = "backgroundCover"
+    static let accountListView = "accountListView"
+    static let overlay = "overlay"
+    static let bookButton = "bookButtonIdentifier"
+    static let searchBarTextField = "searchBarTextField"
+    static let contactPicker = "contactPicker"
 }

@@ -33,6 +33,8 @@ struct AccountLists: View {
             accountsView()
             newAccountButton()
         }
+        .accessibilityElement(children: .contain)
+        .accessibility(identifier: SmartListAccessibilityIdentifiers.accountListView)
         .padding(.horizontal, 5)
     }
 
@@ -69,7 +71,7 @@ struct AccountLists: View {
         .frame(minWidth: 100, maxWidth: .infinity)
         .cornerRadius(cornerRadius)
         .shadow(radius: shadowRadius)
-        .accessibility(identifier: AccessibilityIdentifiers.addAccountButton)
+        .accessibility(identifier: SmartListAccessibilityIdentifiers.addAccountButton)
     }
 
     @ViewBuilder
