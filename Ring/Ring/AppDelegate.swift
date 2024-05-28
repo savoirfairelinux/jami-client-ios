@@ -182,7 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                                                         dataTransferService: self.dataTransferService,
                                                         callService: self.callService,
                                                         locationSharingService: self.locationSharingService, contactsService: self.contactsService,
-                                                        callsProvider: self.callsProvider, requestsService: self.requestsService)
+                                                        callsProvider: self.callsProvider, requestsService: self.requestsService, profileService: self.profileService)
         self.videoManager = VideoManager(with: self.callService, videoService: self.videoService)
         self.window?.rootViewController = self.appCoordinator.rootViewController
         self.window?.makeKeyAndVisible()

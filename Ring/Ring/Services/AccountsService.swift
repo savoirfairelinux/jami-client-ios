@@ -2,7 +2,7 @@
  *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
  *
  *  Authors: Edric Ladent-Milaret <edric.ladent-milaret@savoirfairelinux.com>
- *           Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
+ *  Romain Bertozzi <romain.bertozzi@savoirfairelinux.com>
  *  Author: Quentin Muret <quentin.muret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -370,13 +370,10 @@ class AccountsService: AccountAdapterDelegate {
                 guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
                     throw AddAccountError.unknownError
                 }
-                // create database for account and save account profile
+                // create database for account
                 if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
                     throw AddAccountError.unknownError
                 }
-                let uri = JamiURI(schema: URIType.ring, infoHash: accountModel.jamiId)
-                let uriString = uri.uriString ?? ""
-                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id, accountURI: uriString)
                 self.loadAccountsFromDaemon()
                 return accountModel
             }
@@ -450,13 +447,10 @@ class AccountsService: AccountAdapterDelegate {
                 guard accountModel.id == serviceEvent.getEventInput(ServiceEventInput.accountId) else {
                     throw AddAccountError.unknownError
                 }
-                // create database for account and save account profile
+                // create database for account
                 if try !self.dbManager.createDatabaseForAccount(accountId: accountModel.id) {
                     throw AddAccountError.unknownError
                 }
-                let uri = JamiURI(schema: URIType.ring, infoHash: accountModel.jamiId)
-                let uriString = uri.uriString ?? ""
-                _ = self.dbManager.saveAccountProfile(alias: nil, photo: nil, accountId: accountModel.id, accountURI: uriString)
                 self.loadAccountsFromDaemon()
                 return accountModel
             }
@@ -848,31 +842,6 @@ class AccountsService: AccountAdapterDelegate {
         event.addEventInput(.state, value: state)
         event.addEventInput(.deviceId, value: deviceId)
         self.responseStream.onNext(event)
-    }
-
-    func receivedAccountProfile(for account: String, displayName: String, photo: String) {
-        do {
-            if try !self.dbManager.createDatabaseForAccount(accountId: account) {
-                return
-            }
-        } catch {
-            return
-        }
-        var name = displayName
-        if name.isEmpty {
-            let accountDetails = getAccountDetails(fromAccountId: account)
-            name = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.displayName))
-        }
-
-        self.getAccountFromDaemon(fromAccountId: account)
-            .subscribe(onSuccess: { [weak self] accountToUpdate in
-                guard let self = self, let accountURI = AccountModelHelper
-                        .init(withAccount: accountToUpdate).uri else {
-                    return
-                }
-                _ = self.dbManager.saveAccountProfile(alias: name, photo: photo, accountId: account, accountURI: accountURI)
-            })
-            .disposed(by: self.disposeBag)
     }
 
     // MARK: Push Notifications
