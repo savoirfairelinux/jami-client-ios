@@ -91,15 +91,6 @@ static id <AccountAdapterDelegate> _delegate;
     }));
 
     confHandlers
-    .insert(exportable_callback<ConfigurationSignal::AccountProfileReceived>([&](const std::string& account_id, const std::string& displayName, const std::string& photo) {
-        if (AccountAdapter.delegate) {
-            NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
-            NSString* avatarPhoto = [NSString stringWithUTF8String:photo.c_str()];
-            NSString* name = [NSString stringWithUTF8String:displayName.c_str()];
-            [AccountAdapter.delegate receivedAccountProfileFor:accountId displayName: name photo:avatarPhoto];
-        }
-    }));
-    confHandlers
        .insert(exportable_callback<ConfigurationSignal::MigrationEnded>([&](const std::string& account_id, const std::string& status) {
            if (AccountAdapter.delegate) {
                NSString* accountId = [NSString stringWithUTF8String:account_id.c_str()];
