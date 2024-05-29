@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "ТУРН паролі";
 "accountPage.turnRealm" = "ТУРН әлемі";
 "accountPage.upnpEnabled" = "UPnP- ды қолдану";
+"accountPage.security" = "Қауіпсіздік";
+"accountPage.enableSRTP" = "Кіпшелеу медиа ағындары (SRTP)";
 
 //Account
 "account.sipUsername" = "Пайдаланушы атауы";

@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN 비밀번호";
 "accountPage.turnRealm" = "스 영역";
 "accountPage.upnpEnabled" = "UPnP를 사용";
+"accountPage.security" = "보안";
+"accountPage.enableSRTP" = "미디어 스트림을 암호화 (SRTP)";
 
 //Account
 "account.sipUsername" = "사용자 이름";

@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "টার্ন পাসওয়ার্ড";
 "accountPage.turnRealm" = "টার্ন রিয়াল";
 "accountPage.upnpEnabled" = "UPnP ব্যবহার করুন";
+"accountPage.security" = "Security";
+"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
 
 //Account
 "account.sipUsername" = "ব্যবহারকারীর নাম";

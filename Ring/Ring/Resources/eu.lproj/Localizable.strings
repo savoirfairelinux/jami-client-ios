@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN pasahitza";
 "accountPage.turnRealm" = "-TURN erreinua.";
 "accountPage.upnpEnabled" = "Erabili UPnP";
+"accountPage.security" = "Segurtasuna";
+"accountPage.enableSRTP" = "Kodeatu komunikabideak (SRTP)";
 
 //Account
 "account.sipUsername" = "Erabiltzaile izena";

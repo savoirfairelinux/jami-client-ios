@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Пароль TURN";
 "accountPage.turnRealm" = "РАЗВАЛЬНАе царства";
 "accountPage.upnpEnabled" = "Выкарыстоўвайце UPnP";
+"accountPage.security" = "Security";
+"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
 
 //Account
 "account.sipUsername" = "Назва карыстальніка";

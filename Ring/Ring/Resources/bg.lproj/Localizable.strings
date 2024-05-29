@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Парола за TURN";
 "accountPage.turnRealm" = "СВЕЗНИЦА";
 "accountPage.upnpEnabled" = "Използвайте UPnP";
+"accountPage.security" = "Security";
+"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
 
 //Account
 "account.sipUsername" = "Потребителско име";

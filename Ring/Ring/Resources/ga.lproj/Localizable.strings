@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Códchlár TURN";
 "accountPage.turnRealm" = "RIMHÍON";
 "accountPage.upnpEnabled" = "Úsáid UPnP";
+"accountPage.security" = "Slándáil";
+"accountPage.enableSRTP" = "Criosadh srutháin meán (SRTP)";
 
 //Account
 "account.sipUsername" = "Ainm úsáideora";

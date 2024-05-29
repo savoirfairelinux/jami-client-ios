@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Kata sandi TURN";
 "accountPage.turnRealm" = "TURN realm";
 "accountPage.upnpEnabled" = "Gunakan UPnP";
+"accountPage.security" = "Keamanan";
+"accountPage.enableSRTP" = "Enkripsi media stream (SRTP)";
 
 //Account
 "account.sipUsername" = "Nama Pengguna";

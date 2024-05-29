@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Heslo TURN";
 "accountPage.turnRealm" = "Oblast TURN";
 "accountPage.upnpEnabled" = "Použít UPnP";
+"accountPage.security" = "Security";
+"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
 
 //Account
 "account.sipUsername" = "Uživatelské jméno";

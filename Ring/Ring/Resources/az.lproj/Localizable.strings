@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "تورن رمز";
 "accountPage.turnRealm" = "تورن دؤولت";
 "accountPage.upnpEnabled" = "UPnP- نی ائشلشدیر";
+"accountPage.security" = "Security";
+"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
 
 //Account
 "account.sipUsername" = "ایستیفاده چی آد";

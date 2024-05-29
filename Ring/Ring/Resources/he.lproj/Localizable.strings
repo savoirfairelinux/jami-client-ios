@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "סיסמה TURN";
 "accountPage.turnRealm" = "ממלכת טורן";
 "accountPage.upnpEnabled" = "השתמשו UPnP";
+"accountPage.security" = "אבטחה";
+"accountPage.enableSRTP" = "הצפנת זרמי מדיה (SRTP)";
 
 //Account
 "account.sipUsername" = "שם המשתמש";

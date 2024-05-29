@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Passord til TURN";
 "accountPage.turnRealm" = "DER er det ikkje";
 "accountPage.upnpEnabled" = "Bruk UPnP";
+"accountPage.security" = "Tryggleik";
+"accountPage.enableSRTP" = "Kryptar mediastrøymer (SRTP)";
 
 //Account
 "account.sipUsername" = "Nøme til brukaren";

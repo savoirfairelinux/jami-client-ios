@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN jelszó";
 "accountPage.turnRealm" = "TURN tartomány";
 "accountPage.upnpEnabled" = "UPnP használata";
+"accountPage.security" = "Biztonság";
+"accountPage.enableSRTP" = "Média-adatfolyamok titkosítása (SRTP)";
 
 //Account
 "account.sipUsername" = "Felhasználónév";

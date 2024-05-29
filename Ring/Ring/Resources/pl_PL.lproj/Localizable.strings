@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Hasło TURN";
 "accountPage.turnRealm" = "Sfera TURN";
 "accountPage.upnpEnabled" = "Użyj UPnP";
+"accountPage.security" = "Zabezpieczenia";
+"accountPage.enableSRTP" = "Szyfrowanie strumieni multimedialnych (SRTP)";
 
 //Account
 "account.sipUsername" = "Nazwa Użytkownika";

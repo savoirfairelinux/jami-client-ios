@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "كلمة المرور لبروتوكول TURN";
 "accountPage.turnRealm" = "حقل بروتوكول TURN";
 "accountPage.upnpEnabled" = "استخدم UPnP";
+"accountPage.security" = "Security";
+"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
 
 //Account
 "account.sipUsername" = "اسم المستخدم";

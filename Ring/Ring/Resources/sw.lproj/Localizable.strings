@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Password TURN";
 "accountPage.turnRealm" = "Ulimwengu wa TURN";
 "accountPage.upnpEnabled" = "Tumia UPnP";
+"accountPage.security" = "Usalama";
+"accountPage.enableSRTP" = "Encrypt media mito (SRTP)";
 
 //Account
 "account.sipUsername" = "Jina la mtumiaji";

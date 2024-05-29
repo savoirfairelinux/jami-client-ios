@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Contraseña TURN";
 "accountPage.turnRealm" = "Dominio TURN";
 "accountPage.upnpEnabled" = "Usar UPnP";
+"accountPage.security" = "Seguridad";
+"accountPage.enableSRTP" = "Flujo de medio cifrado (SRTP)";
 
 //Account
 "account.sipUsername" = "Nombre de usuario";

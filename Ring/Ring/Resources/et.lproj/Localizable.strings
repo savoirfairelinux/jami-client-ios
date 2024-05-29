@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN-serveri salasõna";
 "accountPage.turnRealm" = "TURN-serveri mõjuala";
 "accountPage.upnpEnabled" = "Kasuta UPnP'd";
+"accountPage.security" = "Turvalisus";
+"accountPage.enableSRTP" = "Krüpti meediavood (SRTP)";
 
 //Account
 "account.sipUsername" = "Kasutajanimi";

@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Κωδικός TURN";
 "accountPage.turnRealm" = "Το βασίλειο ΤΟΥΡΝ";
 "accountPage.upnpEnabled" = "Χρήση UPnP";
+"accountPage.security" = "Security";
+"accountPage.enableSRTP" = "Κρυπτογράφηση ροών μέσων (SRTP)";
 
 //Account
 "account.sipUsername" = "Όνομα Χρήστη";

@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN գաղտնաբառ";
 "accountPage.turnRealm" = "ՏՈՐՆԻՍՏԵՐ";
 "accountPage.upnpEnabled" = "Օգտագործեք UPnP";
+"accountPage.security" = "Անվտանգություն";
+"accountPage.enableSRTP" = "ԶԼՄ-ների հոսքերը կոդավորեք (SRTP)";
 
 //Account
 "account.sipUsername" = "Օգտագործողի անունը";

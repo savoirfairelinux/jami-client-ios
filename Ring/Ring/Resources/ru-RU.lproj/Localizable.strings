@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Пароль";
 "accountPage.turnRealm" = "Домен TURN";
 "accountPage.upnpEnabled" = "Использовать UPnP";
+"accountPage.security" = "Безопасность";
+"accountPage.enableSRTP" = "Шифровать медиа потоки (SRTP)";
 
 //Account
 "account.sipUsername" = "Имя пользователя";

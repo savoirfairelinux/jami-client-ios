@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN slaptažodis";
 "accountPage.turnRealm" = "TURN sritis";
 "accountPage.upnpEnabled" = "Naudoti UPnP";
+"accountPage.security" = "Saugumas";
+"accountPage.enableSRTP" = "Šifruoti medija srautus (SRTP)";
 
 //Account
 "account.sipUsername" = "Naudotojo vardas";

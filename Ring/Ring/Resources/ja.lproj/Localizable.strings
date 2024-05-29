@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURNの暗証語";
 "accountPage.turnRealm" = "TURNレルム";
 "accountPage.upnpEnabled" = "UPnPを使用";
+"accountPage.security" = "セキュリティ";
+"accountPage.enableSRTP" = "メディアストリームを暗号化 (SRTP)";
 
 //Account
 "account.sipUsername" = "ユーザー名";

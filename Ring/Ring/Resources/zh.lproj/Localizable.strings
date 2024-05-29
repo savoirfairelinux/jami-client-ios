@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN 密码";
 "accountPage.turnRealm" = "TURN 域";
 "accountPage.upnpEnabled" = "使用 UPnP";
+"accountPage.security" = "安全";
+"accountPage.enableSRTP" = "對影音串流加密 (SRTP)";
 
 //Account
 "account.sipUsername" = "用户名";

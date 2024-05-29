@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN lozinka";
 "accountPage.turnRealm" = "СВЕТИЦА СВЕТ";
 "accountPage.upnpEnabled" = "Користе UPnP";
+"accountPage.security" = "Bezbednost";
+"accountPage.enableSRTP" = "Šifruj medijski strim (SRTP)";
 
 //Account
 "account.sipUsername" = "Име корисника";
