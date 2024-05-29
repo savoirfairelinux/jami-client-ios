@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Password TURN";
 "accountPage.turnRealm" = "REMIÓRR";
 "accountPage.upnpEnabled" = "Utilizar UPnP";
+"accountPage.security" = "Seguretat";
+"accountPage.enableSRTP" = "Encripar los flums de mèdia (SRTP)";
 
 //Account
 "account.sipUsername" = "Nom d’utilizaire";

@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "ڤاسر TURN";
 "accountPage.turnRealm" = "كراجأن TURN";
 "accountPage.upnpEnabled" = "مڠڬوناكن UPnP";
+"accountPage.security" = "Security";
+"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
 
 //Account
 "account.sipUsername" = "نام ڤڠڬونا";

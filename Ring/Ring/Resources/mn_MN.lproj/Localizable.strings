@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN нууц үг";
 "accountPage.turnRealm" = "ТУРН-ийн ертөнц";
 "accountPage.upnpEnabled" = "UPnP-ийг ашигла";
+"accountPage.security" = "Аюулгүй байдал";
+"accountPage.enableSRTP" = "Хэвлэл мэдээллийн урсгалыг шифрлах (SRTP)";
 
 //Account
 "account.sipUsername" = "Хэрэглэгчийн нэр";

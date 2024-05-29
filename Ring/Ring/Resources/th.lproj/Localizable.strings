@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "ปรสิต TURN";
 "accountPage.turnRealm" = "สาขา TURN";
 "accountPage.upnpEnabled" = "ใช้ UPnP";
+"accountPage.security" = "ความปลอดภัย";
+"accountPage.enableSRTP" = "รายการการเอกสาร (SRTP)";
 
 //Account
 "account.sipUsername" = "ชื่อผู้ใช้งาน";

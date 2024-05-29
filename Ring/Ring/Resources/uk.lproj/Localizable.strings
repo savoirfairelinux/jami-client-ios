@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Обрати пароль";
 "accountPage.turnRealm" = "Простір TURN";
 "accountPage.upnpEnabled" = "Використовувати UPnP";
+"accountPage.security" = "Безпека";
+"accountPage.enableSRTP" = "Кодування потоку (SRTP)";
 
 //Account
 "account.sipUsername" = "Ім'я користувача";

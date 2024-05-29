@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Geslo TURN";
 "accountPage.turnRealm" = "Območje TURN";
 "accountPage.upnpEnabled" = "Uporabi UPnP";
+"accountPage.security" = "Varnost";
+"accountPage.enableSRTP" = "Šifriranje pretoka podatkov (SRTP)";
 
 //Account
 "account.sipUsername" = "Uporabniško ime";

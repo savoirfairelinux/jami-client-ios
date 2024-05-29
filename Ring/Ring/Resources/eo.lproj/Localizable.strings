@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN pasvorto";
 "accountPage.turnRealm" = "RON regno";
 "accountPage.upnpEnabled" = "Uzu UPnP";
+"accountPage.security" = "Sekuro";
+"accountPage.enableSRTP" = "Ĉifri aŭdvidfuojn (SRTP)";
 
 //Account
 "account.sipUsername" = "Uzanto";

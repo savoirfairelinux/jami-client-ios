@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "گذرواژه TURN";
 "accountPage.turnRealm" = "قلمرو TURN";
 "accountPage.upnpEnabled" = "استفاده از UPnP";
+"accountPage.security" = "امنیت";
+"accountPage.enableSRTP" = "رمزگذاری جریان‌های مدیا (SRTP)";
 
 //Account
 "account.sipUsername" = "نام کاربر";

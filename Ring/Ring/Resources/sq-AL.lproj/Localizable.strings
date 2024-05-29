@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Fjalëkalim TURN";
 "accountPage.turnRealm" = "TURN realm";
 "accountPage.upnpEnabled" = "Përdor UPnP";
+"accountPage.security" = "Siguri";
+"accountPage.enableSRTP" = "Fshehtëzo rrjedha media (SRTP)";
 
 //Account
 "account.sipUsername" = "Emër Përdoruesi";

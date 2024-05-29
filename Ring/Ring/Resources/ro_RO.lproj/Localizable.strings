@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Parola TURN";
 "accountPage.turnRealm" = "Domeniul TURN";
 "accountPage.upnpEnabled" = "Folosește UPnP";
+"accountPage.security" = "Protecție";
+"accountPage.enableSRTP" = "Cifrează fluxurile Media (SRTP)";
 
 //Account
 "account.sipUsername" = "Nume de utilizator";

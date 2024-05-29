@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "टर्न संकेतशब्द";
 "accountPage.turnRealm" = "टर्न क्षेत्र";
 "accountPage.upnpEnabled" = "UPnP वापरा";
+"accountPage.security" = "सुरक्षा";
+"accountPage.enableSRTP" = "एन्क्रिप्टेड मीडिया स्ट्रीम (SRTP)";
 
 //Account
 "account.sipUsername" = "वापरकर्तानाव";

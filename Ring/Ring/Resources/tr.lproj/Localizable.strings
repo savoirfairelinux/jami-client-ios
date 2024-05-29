@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "TURN parolası";
 "accountPage.turnRealm" = "TURN yetki alanı";
 "accountPage.upnpEnabled" = "UpnP kullan";
+"accountPage.security" = "Güvenlik";
+"accountPage.enableSRTP" = "Ortam akışlarını şifrele (SRTP)";
 
 //Account
 "account.sipUsername" = "Kullanıcı Adı";

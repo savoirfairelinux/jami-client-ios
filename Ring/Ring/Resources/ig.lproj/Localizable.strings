@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Paswọdu TURN";
 "accountPage.turnRealm" = "Ala nke TORN";
 "accountPage.upnpEnabled" = "Jiri UPnP";
+"accountPage.security" = "Nchebe";
+"accountPage.enableSRTP" = "Encrypt media iyi (SRTP)";
 
 //Account
 "account.sipUsername" = "Aha onye ọrụ";

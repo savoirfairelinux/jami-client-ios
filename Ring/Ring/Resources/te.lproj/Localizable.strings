@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "టర్న్ పాస్వర్డ్";
 "accountPage.turnRealm" = "టర్న్ రాజ్యం";
 "accountPage.upnpEnabled" = "UPnP ను ఉపయోగించండి";
+"accountPage.security" = "భద్రత";
+"accountPage.enableSRTP" = "మీడియా స్ట్రీమ్లను (SRTP) గుప్తీకరించండి";
 
 //Account
 "account.sipUsername" = "వాడుకరి పేరు";

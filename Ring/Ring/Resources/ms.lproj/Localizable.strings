@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Kata laluan TURN";
 "accountPage.turnRealm" = "ടര് ൻ മേഖല";
 "accountPage.upnpEnabled" = "UPnP ഉപയോഗിക്കുക";
+"accountPage.security" = "Penyulitan";
+"accountPage.enableSRTP" = "മീഡിയ സ്ട്രീമുകൾ എൻക്രിപ്റ്റ് ചെയ്യുക (SRTP)";
 
 //Account
 "account.sipUsername" = "ഉപയോക്തൃനാമം";

@@ -328,6 +328,8 @@
 "accountPage.turnPassword" = "Mật khẩu TURN";
 "accountPage.turnRealm" = "Vị trí của TURN";
 "accountPage.upnpEnabled" = "Sử dụng UPnP";
+"accountPage.security" = "An ninh";
+"accountPage.enableSRTP" = "Các dòng truyền thông mã hóa (SRTP)";
 
 //Account
 "account.sipUsername" = "Tên người dùng";
