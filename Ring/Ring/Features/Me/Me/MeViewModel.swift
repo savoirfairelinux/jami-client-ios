@@ -39,6 +39,7 @@ enum SettingsSection: SectionModelType {
     case otherSettings(items: [SectionRow])
     case donations(items: [SectionRow])
     case removeAccountSettings(items: [SectionRow])
+    case sipSecuritySettings(items: [SectionRow])
 
     enum SectionRow {
         case device(device: DeviceModel)
@@ -71,6 +72,8 @@ enum SettingsSection: SectionModelType {
         case upnpEnabled
         case donationCampaign
         case donate
+        // Sip Security Settings
+        case enableSRTP
     }
 
     var items: [SectionRow] {
@@ -82,7 +85,8 @@ enum SettingsSection: SectionModelType {
              .credentials(let items),
              .otherSettings(items: let items),
              .accountSettings(items: let items),
-             .donations(items: let items):
+             .donations(items: let items),
+             .sipSecuritySettings(items: let items):
             return items
         }
     }
@@ -105,6 +109,8 @@ enum SettingsSection: SectionModelType {
             return L10n.Global.donate
         case .accountSettings:
             return nil
+        case .sipSecuritySettings:
+            return L10n.AccountPage.security
         }
     }
 
@@ -126,6 +132,8 @@ enum SettingsSection: SectionModelType {
             self = .removeAccountSettings(items: items)
         case .donations(items: let items):
             self = .donations(items: items)
+        case .sipSecuritySettings(items: let items):
+            self = .sipSecuritySettings(items: items)
         }
     }
 }
@@ -359,12 +367,18 @@ class MeViewModel: ViewModel, Stateable {
         }
     }()
 
+    lazy var sipSecurity: Observable<SettingsSection> = {
+        return Observable
+            .just(.sipSecuritySettings(items: [.enableSRTP]))
+    }()
+
     lazy var sipSettings: Observable<[SettingsSection]> = {
         Observable.combineLatest(sipCredentials,
                                  donationsSettings,
+                                 sipSecurity,
                                  otherSipSettings,
-                                 removeAccountSettings) { (credentials, donate, other, removeAccount) in
-            return [credentials, donate, other, removeAccount]
+                                 removeAccountSettings) { (credentials, donate, sipSecurity, other, removeAccount) in
+            return [credentials, donate, sipSecurity, other, removeAccount]
         }
     }()
 
@@ -911,6 +925,25 @@ class MeViewModel: ViewModel, Stateable {
             return
         }
         self.accountService.setTurnSettings(accountId: account.id, server: turnServer.value, username: turnUsername.value, password: turnPassword.value, realm: turnRealm.value)
+    }
+
+    // MARK: Sip Security
+    lazy var SRTPEnabled: BehaviorRelay<Bool> = {
+        if let account = self.accountService.currentAccount,
+           let details = account.details {
+            let value = details.get(withConfigKeyModel:
+                                        ConfigKeyModel.init(withKey: .srtpKeyExchange))
+            let enable = value == "sdes"
+            return BehaviorRelay<Bool>(value: enable)
+        }
+        return BehaviorRelay<Bool>(value: true)
+    }()
+
+    func enableSRTP(enable: Bool) {
+        guard self.SRTPEnabled.value != enable,
+              let account = self.accountService.currentAccount else { return }
+        self.accountService.enableSRTP(enable: enable, accountId: account.id)
+        SRTPEnabled.accept(enable)
     }
 
     // MARK: Sip Credentials

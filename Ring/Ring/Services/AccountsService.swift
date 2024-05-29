@@ -952,6 +952,15 @@ class AccountsService: AccountAdapterDelegate {
         self.switchAccountPropertyTo(state: enable, accountId: accountId, property: ConfigKeyModel(withKey: ConfigKey.accountUpnpEnabled))
     }
 
+    func enableSRTP(enable: Bool, accountId: String) {
+        let newValue = enable ? "sdes" : ""
+        let accountDetails = self.getAccountDetails(fromAccountId: accountId)
+        let property = ConfigKeyModel(withKey: ConfigKey.srtpKeyExchange)
+        guard accountDetails.get(withConfigKeyModel: property) != newValue else { return }
+        accountDetails.set(withConfigKeyModel: property, withValue: newValue)
+        self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
+    }
+
     func setTurnSettings(accountId: String, server: String, username: String, password: String, realm: String) {
         let details = self.getAccountDetails(fromAccountId: accountId)
         details.set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.turnServer), withValue: server)
@@ -970,6 +979,9 @@ class AccountsService: AccountAdapterDelegate {
         guard accountDetails.get(withConfigKeyModel: property) != state.toString() else { return }
         accountDetails.set(withConfigKeyModel: property, withValue: state.toString())
         self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
+        let result = accountDetails.get(withConfigKeyModel: property)
+        print("888 state \(result)")
+        print("55555")
     }
 
     func setAccountsActive(active: Bool) {
