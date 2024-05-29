@@ -318,6 +318,31 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         })
                         .disposed(by: cell.disposeBag)
                     return cell
+                case .enableSRTP:
+                    let cell = DisposableCell()
+                    cell.textLabel?.text = L10n.AccountPage.enableSRTP
+                    cell.textLabel?.numberOfLines = 0
+                    let switchView = UISwitch()
+                    switchView.onTintColor = .jamiButtonDark
+                    cell.selectionStyle = .none
+                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                    cell.accessoryView = switchView
+                    self.viewModel.SRTPEnabled
+                        .asObservable()
+                        .startWith(self.viewModel.SRTPEnabled.value)
+                        .observe(on: MainScheduler.instance)
+                        .bind(to: switchView.rx.value)
+                        .disposed(by: cell.disposeBag)
+                    switchView.rx
+                        .isOn.changed
+                        .debounce(Durations.switchThrottlingDuration.toTimeInterval(), scheduler: MainScheduler.instance)
+                        .distinctUntilChanged()
+                        .asObservable()
+                        .subscribe(onNext: {[weak self] enable in
+                            self?.viewModel.enableSRTP(enable: enable)
+                        })
+                        .disposed(by: cell.disposeBag)
+                    return cell
                 case .device(let device):
                     let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeviceCell.self)
                     cell.deviceIdLabel.text = device.deviceId
