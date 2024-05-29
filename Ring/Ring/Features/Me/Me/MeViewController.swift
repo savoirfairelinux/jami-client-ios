@@ -591,42 +591,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                         })
                         .disposed(by: cell.disposeBag)
                     return cell
-                case .boothMode:
-                    let cell = DisposableCell(style: .subtitle, reuseIdentifier: self.jamiIDCell)
-                    cell.textLabel?.text = L10n.AccountPage.enableBoothMode
-                    cell.textLabel?.numberOfLines = 0
-                    cell.textLabel?.sizeToFit()
-                    let switchView = UISwitch()
-                    switchView.onTintColor = .jamiButtonDark
-                    cell.selectionStyle = .none
-                    cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                    cell.accessoryView = switchView
-                    cell.detailTextLabel?.text = self.viewModel.hasPassword() ?
-                        L10n.AccountPage.boothModeExplanation : L10n.AccountPage.noBoothMode
-                    cell.detailTextLabel?.lineBreakMode = .byWordWrapping
-                    cell.detailTextLabel?.numberOfLines = 0
-                    cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
-                    cell.sizeToFit()
-                    cell.layoutIfNeeded()
-                    self.viewModel.switchBoothModeState
-                        .observe(on: MainScheduler.instance)
-                        .bind(to: switchView.rx.value)
-                        .disposed(by: self.disposeBag)
-                    switchView.rx
-                        .isOn.changed
-                        .subscribe(onNext: {[weak self] enable in
-                            if !enable {
-                                return
-                            }
-                            self?.viewModel.switchBoothModeState.onNext(enable)
-                            self?.confirmBoothModeAlert()
-                        })
-                        .disposed(by: self.disposeBag)
-                    cell.isUserInteractionEnabled = self.viewModel.hasPassword()
-                    cell.textLabel?.isEnabled = self.viewModel.hasPassword()
-                    cell.detailTextLabel?.isEnabled = self.viewModel.hasPassword()
-                    switchView.isEnabled = self.viewModel.hasPassword()
-                    return cell
                 case .enableAccount:
                     let cell = DisposableCell()
                     cell.textLabel?.text = L10n.Account.enableAccount
@@ -1059,13 +1023,6 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
 
     let boothConfirmation = ConfirmationAlert()
 
-    func confirmBoothModeAlert() {
-        boothConfirmation.configure(title: L10n.AccountPage.enableBoothMode,
-                                    msg: L10n.AccountPage.boothModeAlertMessage,
-                                    enable: true, presenter: self,
-                                    disposeBag: self.disposeBag)
-    }
-
     func changePassword(title: String) {
         let message = L10n.AccountPage.createPasswordExplanation
         let controller = UIAlertController(title: title,
@@ -1409,16 +1366,6 @@ extension MeViewController: UITableViewDelegate {
             contentOffset.y = -self.stretchyHeader.minimumContentHeight
         }
         self.settingsTable.setContentOffset(contentOffset, animated: true)
-    }
-}
-
-extension MeViewController: BoothModeConfirmationPresenter {
-    func enableBoothMode(enable: Bool, password: String) -> Bool {
-        return self.viewModel.enableBoothMode(enable: enable, password: password)
-    }
-
-    func switchBoothModeState(state: Bool) {
-        self.viewModel.switchBoothModeState.onNext(state)
     }
 
     internal func stopLoadingView() {

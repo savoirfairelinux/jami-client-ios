@@ -59,7 +59,6 @@ enum SettingsSection: SectionModelType {
         case accountState(state: BehaviorRelay<String>)
         case enableAccount
         case changePassword
-        case boothMode
         case peerDiscovery
         case autoRegistration
         // Connectivity Settings
@@ -274,8 +273,7 @@ class MeViewModel: ViewModel, Stateable {
                                                    SettingsSection.SectionRow
                                                     .accountState(state: self.accountStatus),
                                                    .enableAccount,
-                                                   .changePassword,
-                                                   .boothMode]
+                                                   .changePassword]
 
         return Observable.combineLatest(Observable.just(items),
                                         self.accountService.currentAccountChanged.asObservable().startWith(nil),
@@ -283,7 +281,6 @@ class MeViewModel: ViewModel, Stateable {
                                             var items = items
                                             if let currentAccount = self.accountService.currentAccount,
                                                self.accountService.isJams(for: currentAccount.id) {
-                                                items.remove(at: items.count - 2) // remove .boothMode
                                                 items.remove(at: items.count - 2) // remove .changePassword
                                             }
                                             return SettingsSection.otherSettings(items: items)
@@ -540,22 +537,6 @@ class MeViewModel: ViewModel, Stateable {
         }
         return self.accountService
             .changePassword(forAccount: accountId, password: oldPassword, newPassword: newPassword)
-    }
-
-    var switchBoothModeState = PublishSubject<Bool>()
-
-    func enableBoothMode(enable: Bool, password: String) -> Bool {
-        guard let accountId = self.accountService.currentAccount?.id else {
-            return false
-        }
-        let result = self.accountService.setBoothMode(forAccount: accountId, enable: enable, password: password)
-        if !result {
-            return false
-        }
-        self.stateSubject.onNext(MeState.accountModeChanged)
-        self.presenceService.subscribeBuddies(withAccount: accountId, withContacts: self.contactService.contacts.value, subscribe: false)
-        self.contactService.removeAllContacts(for: accountId)
-        return true
     }
 
     func revokeDevice(deviceId: String, accountPassword password: String) {
