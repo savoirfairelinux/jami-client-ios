@@ -979,9 +979,6 @@ class AccountsService: AccountAdapterDelegate {
         guard accountDetails.get(withConfigKeyModel: property) != state.toString() else { return }
         accountDetails.set(withConfigKeyModel: property, withValue: state.toString())
         self.setAccountDetails(forAccountId: accountId, withDetails: accountDetails)
-        let result = accountDetails.get(withConfigKeyModel: property)
-        print("888 state \(result)")
-        print("55555")
     }
 
     func setAccountsActive(active: Bool) {
