@@ -434,16 +434,6 @@ class MessagesListVM: ObservableObject {
                 if insertionCount == 0 {
                     return
                 }
-                // load more messages if conversation just opened for first time
-                if self.messagesModels.count < 40 && !self.allLoaded() {
-                    if let messageId = self.messagesModels.last?.id {
-                        self.conversationService
-                            .loadConversationMessages(conversationId: self.conversation.id,
-                                                      accountId: self.conversation.accountId,
-                                                      from: messageId)
-                        return
-                    }
-                }
                 self.computeSequencing()
                 self.updateNumberOfNewMessages()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
