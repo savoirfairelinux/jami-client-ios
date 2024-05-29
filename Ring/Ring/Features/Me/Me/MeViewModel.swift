@@ -275,24 +275,24 @@ class MeViewModel: ViewModel, Stateable {
             proxyServer = details.get(withConfigKeyModel: ConfigKeyModel.init(withKey: ConfigKey.proxyServer))
             self.proxyAddress.accept(proxyServer)
         }
-        let items: [SettingsSection.SectionRow] = [.peerDiscovery,
+        var items: [SettingsSection.SectionRow] = [.peerDiscovery,
                                                    .blockedList,
                                                    .proxy,
                                                    SettingsSection.SectionRow
                                                     .accountState(state: self.accountStatus),
                                                    .enableAccount,
                                                    .changePassword]
-
-        return Observable.combineLatest(Observable.just(items),
-                                        self.accountService.currentAccountChanged.asObservable().startWith(nil),
-                                        resultSelector: { (items, _) in
-                                            var items = items
-                                            if let currentAccount = self.accountService.currentAccount,
-                                               self.accountService.isJams(for: currentAccount.id) {
-                                                items.remove(at: items.count - 2) // remove .changePassword
-                                            }
-                                            return SettingsSection.otherSettings(items: items)
-                                        })
+        if let currentAccount = self.accountService.currentAccount,
+           self.accountService.isJams(for: currentAccount.id) {
+            items = [.peerDiscovery,
+                     .blockedList,
+                     .proxy,
+                     SettingsSection.SectionRow
+                        .accountState(state: self.accountStatus),
+                     .enableAccount]
+        }
+        return Observable
+            .just(SettingsSection.otherSettings(items: items))
     }()
 
     func hasPassword() -> Bool {
