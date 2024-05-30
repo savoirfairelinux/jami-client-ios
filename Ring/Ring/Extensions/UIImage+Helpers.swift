@@ -207,10 +207,17 @@ extension UIImage {
     }
 
     func resizeImageWith(newSize: CGSize, opaque: Bool = true) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(newSize, opaque, 0)
-        draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: newSize))
+        let aspectWidth = newSize.width / self.size.width
+        let aspectHeight = newSize.height / self.size.height
+        let aspectRatio = min(aspectWidth, aspectHeight)
+
+        let scaledSize = CGSize(width: self.size.width * aspectRatio, height: self.size.height * aspectRatio)
+
+        UIGraphicsBeginImageContextWithOptions(scaledSize, opaque, 0)
+        self.draw(in: CGRect(origin: .zero, size: scaledSize))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+
         return newImage
     }
 
