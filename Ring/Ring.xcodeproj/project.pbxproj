@@ -396,9 +396,6 @@
 		26CA4C592AB23C4100AEF8F5 /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABD1D1C341A00E99CD9 /* libixml.a */; };
 		26CA4C5A2AB23CCF00AEF8F5 /* libixml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ABD1D1C341A00E99CD9 /* libixml.a */; };
 		26CA4C5B2AB23CCF00AEF8F5 /* libupnp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399ADD1D1C341A00E99CD9 /* libupnp.a */; };
-		26D08AB12693474300E37574 /* InvitationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26D08AB02693474300E37574 /* InvitationViewController.storyboard */; };
-		26D08AB52693480200E37574 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08AB42693480200E37574 /* InvitationViewController.swift */; };
-		26D08AB72693481C00E37574 /* InvitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08AB62693481C00E37574 /* InvitationViewModel.swift */; };
 		26D08AB9269628F400E37574 /* RequestsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08AB8269628F400E37574 /* RequestsService.swift */; };
 		26D08ABB2696293100E37574 /* RequestsAdapterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */; };
 		26D08ABE2696296300E37574 /* RequestsAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 26D08ABD2696296300E37574 /* RequestsAdapter.mm */; };
@@ -1008,9 +1005,6 @@
 		26C6A25F2927EC4E007786B8 /* SwarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmInfo.swift; sourceTree = "<group>"; };
 		26C92D2626F6AA1100DEEF75 /* NotificationPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationPrefixHeader.pch; sourceTree = "<group>"; };
 		26CA4C562AB23A9200AEF8F5 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
-		26D08AB02693474300E37574 /* InvitationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InvitationViewController.storyboard; sourceTree = "<group>"; };
-		26D08AB42693480200E37574 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
-		26D08AB62693481C00E37574 /* InvitationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewModel.swift; sourceTree = "<group>"; };
 		26D08AB8269628F400E37574 /* RequestsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsService.swift; sourceTree = "<group>"; };
 		26D08ABA2696293100E37574 /* RequestsAdapterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsAdapterDelegate.swift; sourceTree = "<group>"; };
 		26D08ABC2696296300E37574 /* RequestsAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestsAdapter.h; sourceTree = "<group>"; };
@@ -2108,9 +2102,6 @@
 				1A2D18B21F2915C500B2C785 /* ConversationViewController.storyboard */,
 				1A2D18CC1F29182500B2C785 /* ConversationViewController.swift */,
 				1A5DC02D1F3565640075E8EF /* ConversationViewModel.swift */,
-				26D08AB02693474300E37574 /* InvitationViewController.storyboard */,
-				26D08AB42693480200E37574 /* InvitationViewController.swift */,
-				26D08AB62693481C00E37574 /* InvitationViewModel.swift */,
 			);
 			path = Conversation;
 			sourceTree = "<group>";
@@ -2826,7 +2817,6 @@
 				0EABD3852303600B00DE7ACF /* default.wav in Resources */,
 				26AF9F3D2977126500C7069A /* LogViewController.storyboard in Resources */,
 				1A2D18ED1F2919D800B2C785 /* MeViewController.storyboard in Resources */,
-				26D08AB12693474300E37574 /* InvitationViewController.storyboard in Resources */,
 				6613A612214AFF4700B497D1 /* ScanViewController.storyboard in Resources */,
 				1A20417E1F1E8DDA00C08435 /* CreateProfileViewController.storyboard in Resources */,
 				BB6690082A99069900875848 /* WelcomeViewController.storyboard in Resources */,
@@ -2985,7 +2975,6 @@
 				267AD77E252B979F00047593 /* ConferenceParticipant.swift in Sources */,
 				0E49097A1FEAC9E1005CAA50 /* CallViewController.swift in Sources */,
 				1A5DC0241F3564360075E8EF /* RequestModel.swift in Sources */,
-				26D08AB52693480200E37574 /* InvitationViewController.swift in Sources */,
 				0E4909701FEAC1C6005CAA50 /* CallModel.swift in Sources */,
 				1A5DC03F1F35678D0075E8EF /* ContactRequestsViewController.swift in Sources */,
 				0E3BD4282044784000A50DDF /* ContactViewController.swift in Sources */,
@@ -3119,7 +3108,6 @@
 				563AEC771EA664C0003A5641 /* RegistrationResponse.m in Sources */,
 				265DFB0B292FD41100834B97 /* MessageSwiftUIViews.swift in Sources */,
 				564C445B1E8EA44E000F92B1 /* Durations.swift in Sources */,
-				26D08AB72693481C00E37574 /* InvitationViewModel.swift in Sources */,
 				26625BB92BA9FEFC009D2DDB /* SmartListContentView.swift in Sources */,
 				26074FD924F7FF9500374570 /* PreviewViewController.swift in Sources */,
 				0E320D54224ADFD00070B515 /* DialpadViewModel.swift in Sources */,

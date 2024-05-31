@@ -40,13 +40,6 @@ enum ConversationState: State {
     case accountModeChanged
     case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate)
     case openIncomingInvitationView(displayName: String, request: RequestModel, parentView: UIViewController, invitationHandeledCB: ((_ conversationId: String) -> Void))
-    case openOutgoingInvitationView(displayName: String,
-                                    alias: String,
-                                    avatar: Data?,
-                                    contactJamiId: String,
-                                    accountId: String,
-                                    parentView: UIViewController,
-                                    invitationHandeledCB: ((_ conversationId: String) -> Void))
     case showAccountSettings
     case accountRemoved
     case needToOnboard
@@ -94,16 +87,6 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
                     self.migrateAccount(accountId: accountId)
                 case .openFullScreenPreview(let parentView, let viewModel, let image, let initialFrame, let delegate):
                     self.openFullScreenPreview(parentView: parentView, viewModel: viewModel, image: image, initialFrame: initialFrame, delegate: delegate)
-                case .openIncomingInvitationView(let displayName, let request, let parentView, let invitationHandeledCB):
-                    self.openIncomingInvitationView(displayName: displayName, request: request, parentView: parentView, invitationHandeledCB: invitationHandeledCB)
-                case .openOutgoingInvitationView(let displayName, let alias, let avatar, let contactJamiId, let accountId, let parentView, let invitationHandeledCB):
-                    self.openOutgoingInvitationView(displayName: displayName,
-                                                    alias: alias,
-                                                    avatar: avatar,
-                                                    contactJamiId: contactJamiId,
-                                                    accountId: accountId,
-                                                    parentView: parentView,
-                                                    invitationHandeledCB: invitationHandeledCB)
                 case .presentSwarmInfo(let swarmInfo):
                     self.presentSwarmInfo(swarmInfo: swarmInfo)
                 case .openConversationForConversationId:
@@ -146,23 +129,6 @@ extension ConversationNavigation where Self: Coordinator, Self: StateableRespons
         }
         parentView.addChildController(previewController, initialFrame: initialFrame)
         previewController.playerView?.sizeMode = .fullScreen
-    }
-
-    func openIncomingInvitationView(displayName: String, request: RequestModel, parentView: UIViewController, invitationHandeledCB: @escaping ((_ conversationId: String) -> Void)) {
-        let invitationVC = InvitationViewController.instantiate(with: self.injectionBag)
-        invitationVC.viewModel.setInfoForRequest(request: request, displayName: displayName, invitationHandeledCB: invitationHandeledCB)
-        parentView.addChildController(invitationVC, initialFrame: parentView.view.bounds)
-    }
-
-    func openOutgoingInvitationView(displayName: String, alias: String, avatar: Data?, contactJamiId: String, accountId: String, parentView: UIViewController, invitationHandeledCB: @escaping ((_ conversationId: String) -> Void)) {
-        let invitationVC = InvitationViewController.instantiate(with: self.injectionBag)
-        invitationVC.viewModel.setInfoForSearchResult(contactJamiId: contactJamiId,
-                                                      accountId: accountId,
-                                                      displayName: displayName,
-                                                      alias: alias,
-                                                      avatar: avatar,
-                                                      invitationHandeledCB: invitationHandeledCB)
-        parentView.addChildController(invitationVC, initialFrame: parentView.view.bounds)
     }
 
     func openQRCode () {

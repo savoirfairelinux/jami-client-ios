@@ -137,7 +137,7 @@ class HTTPStreamHandler: NSObject, URLSessionDataDelegate {
     private var task: URLSessionDataTask?
     private var subject = PublishSubject<String>()
     private let taskQueue = DispatchQueue(label: Constants.appIdentifier + ".HTTPStreamHandler.queue")
-    
+
     func invalidateAndCancelSession() {
         session.invalidateAndCancel()
     }
@@ -243,7 +243,7 @@ class NotificationService: UNNotificationServiceExtension {
     private var pendingCalls = [String: [AnyHashable: Any]]() // calls waiting for name lookup
     private var names = [String: String]() // map of peerId and best name
     private let thumbnailSize = 100
-    
+
     deinit {
         httpStreamHandler.invalidateAndCancelSession()
     }
