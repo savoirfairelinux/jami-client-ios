@@ -55,7 +55,7 @@ extension AvatarImageObserver {
 
 protocol MessageReadObserver: AnyObject {
     var read: [UIImage]? { get set }
-    var disposeBag: DisposeBag { get }
+    var readDisposeBag: DisposeBag { get  set }
     var infoState: PublishSubject<State>? { get set }
 
     func subscribeToReadObservable(_ imagesObservable: BehaviorRelay<[String: UIImage]>)
@@ -64,6 +64,7 @@ protocol MessageReadObserver: AnyObject {
 
 extension MessageReadObserver {
     func subscribeToReadObservable(_ imagesObservable: BehaviorRelay<[String: UIImage]>) {
+        readDisposeBag = DisposeBag()
         imagesObservable
             .startWith(imagesObservable.value)
             .subscribe(onNext: { [weak self] lastReadAvatars in
@@ -72,10 +73,11 @@ extension MessageReadObserver {
                         return value.value
                     }
                     let newValue = values.isEmpty ? nil : values
+                    print("&&&&&&&& update last read for \(lastReadAvatars.keys) for values: \(newValue) ")
                     self?.read = newValue
                 }
             })
-            .disposed(by: disposeBag)
+            .disposed(by: readDisposeBag)
     }
 
     func requestReadStatus(messageId: String) {

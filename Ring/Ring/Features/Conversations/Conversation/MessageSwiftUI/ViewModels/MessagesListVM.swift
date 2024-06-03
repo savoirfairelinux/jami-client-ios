@@ -541,15 +541,80 @@ class MessagesListVM: ObservableObject {
          or if this message precedes the current 'lastDelivered' in the messages list.
          */
 
+        // get indeces of last read messages
+        var lastReadInd: [Int?]?
+        if let lastRead = self.lastReadMessageForParticipant.values().filter({ messageId in
+            if let messageIdStr = messageId as? String {
+                return !messageIdStr.isEmpty
+            }
+            return false
+        }) as? [String] {
+            lastReadInd = lastRead.map { messageId in
+                return self.messagesModels.firstIndex(where: { $0.id == messageId })
+            }
+        }
+        var lastReadIndex: [Int]?
+
+        if let lastReadInd = lastReadInd {
+            lastReadIndex = lastReadInd.compactMap { $0 }
+        }
+
+        print("&&&&&&&&& lastReadIndex: \(lastReadIndex)")
+
         guard self.lastDelivered != nil else {
-            self.lastDelivered = message
+            if let lastReadIndex = lastReadIndex {
+                if let index = self.messagesModels.firstIndex(where: { $0.id == message.id }) {
+                    let isSmaller = lastReadIndex.allSatisfy { index < $0 }
+                    if isSmaller {
+                        self.lastDelivered = message
+                    }
+                }
+            } else {
+                self.lastDelivered = message
+            }
             return
         }
-        guard let index = self.messagesModels.firstIndex(where: { $0.id == message.id }),
-              let lastDelivered = self.lastDelivered,
-              let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }),
-              index < lastDeliveredIndex else { return }
-        self.lastDelivered = message
+        guard let index = self.messagesModels.firstIndex(where: { $0.id == message.id }) else { return }
+
+        guard let lastDelivered = self.lastDelivered,
+              let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }) else { return }
+
+        if index < lastDeliveredIndex {
+            self.lastDelivered = message
+            if let lastReadIndex = lastReadIndex {
+                let isSmaller = lastReadIndex.allSatisfy { index < $0 }
+                if !isSmaller {
+                    self.lastDelivered = nil
+                    print("&&&&&&&&& lastDelivered: \(index)")
+                }
+            }
+        } else {
+            if let lastReadIndex = lastReadIndex {
+                let isSmaller = lastReadIndex.allSatisfy { lastDeliveredIndex < $0 }
+                if !isSmaller {
+                    self.lastDelivered = nil
+                    print("&&&&&&&&& lastDelivered 1: \(lastDeliveredIndex)")
+                }
+            }
+        }
+//        if let lastReadIndex = lastReadIndex {
+//            let isSmaller = lastReadIndex.allSatisfy { index < $0 }
+//            if !isSmaller {
+//                self.lastDelivered = message
+//            }
+//            self.lastDelivered = nil
+//        }
+//        guard let lastDelivered = self.lastDelivered,
+//              let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }),
+//              index < lastDeliveredIndex else { return }
+//        if let lastReadIndex = lastReadIndex {
+//            let isSmaller = lastReadIndex.allSatisfy { index < $0 }
+//            if isSmaller {
+//                self.lastDelivered = message
+//            }
+//            self.lastDelivered = nil
+//        }
+//        self.lastDelivered = message
     }
 
     private func updateLastRead(message: MessageContainerModel, participantId: String) {
@@ -571,6 +636,36 @@ class MessagesListVM: ObservableObject {
             self.updateSubscriptionLastRead(messageId: currentLastReadMessageId)
             // add last read indicator to new last read message
             self.updateSubscriptionLastRead(messageId: message.id)
+        }
+
+        guard let lastDelivered = self.lastDelivered,
+              let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }) else { return }
+
+        // get indeces of last read messages
+        var lastReadInd: [Int?]?
+        if let lastRead = self.lastReadMessageForParticipant.values().filter({ messageId in
+            if let messageIdStr = messageId as? String {
+                return !messageIdStr.isEmpty
+            }
+            return false
+        }) as? [String] {
+            lastReadInd = lastRead.map { messageId in
+                return self.messagesModels.firstIndex(where: { $0.id == messageId })
+            }
+        }
+        var lastReadIndex: [Int]?
+
+        if let lastReadInd = lastReadInd {
+            lastReadIndex = lastReadInd.compactMap { $0 }
+        }
+
+        print("&&&&&&&&& lastReadIndex in read: \(lastReadIndex)")
+        if let lastReadIndex = lastReadIndex {
+            let lastDeliveredIndexSmaller = lastReadIndex.allSatisfy { lastDeliveredIndex < $0 }
+            if !lastDeliveredIndexSmaller {
+                self.lastDelivered = nil
+                print("&&&&&&&&& lastDelivered in read: \(lastDeliveredIndex)")
+            }
         }
     }
 

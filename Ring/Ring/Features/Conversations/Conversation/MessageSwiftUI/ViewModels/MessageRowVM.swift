@@ -27,7 +27,13 @@ import SwiftUI
 
 class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObserver, AvatarImageObserver {
     @Published var avatarImage: UIImage?
-    @Published var read: [UIImage]?
+    @Published var read: [UIImage]? {
+        didSet {
+            if let read = read {
+                print("***** set read aatar for \(self.message.id) for \(self.message.content)")
+            }
+        }
+    }
     @Published var timeString: String = ""
     @Published var topSpace: CGFloat = 0
     @Published var bottomSpace: CGFloat = 0
@@ -42,6 +48,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
 
     var message: MessageModel
     var disposeBag = DisposeBag()
+    var readDisposeBag = DisposeBag()
 
     var shouldShowTimeString = false {
         didSet {

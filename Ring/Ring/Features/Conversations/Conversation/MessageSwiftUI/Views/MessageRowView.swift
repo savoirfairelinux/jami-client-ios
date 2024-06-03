@@ -126,6 +126,7 @@ struct MessageRowView: View {
                     ForEach(0..<readImages.count, id: \.self) { index in
                         Image(uiImage: readImages[index])
                             .resizable()
+                            .scaledToFill()
                             .frame(width: 20, height: 20)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(model.readBorderColor, lineWidth: 2))

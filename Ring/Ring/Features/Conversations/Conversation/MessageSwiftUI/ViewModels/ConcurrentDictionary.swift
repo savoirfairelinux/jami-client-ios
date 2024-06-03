@@ -42,6 +42,16 @@ class ConcurentDictionary {
         }
     }
 
+    func values() -> [Any] {
+        var returnValue: [Any] = []
+        queue.sync(flags: .barrier) { [weak self] in
+            if let values = self?.internalDictionary.values {
+                returnValue = Array(values)
+            }
+        }
+        return returnValue
+    }
+
     func filter(_ isIncluded: @escaping (Dictionary<AnyHashable, Any>.Element) throws -> Bool) rethrows -> [AnyHashable: Any]? {
         return try? self.internalDictionary.filter(isIncluded)
     }
