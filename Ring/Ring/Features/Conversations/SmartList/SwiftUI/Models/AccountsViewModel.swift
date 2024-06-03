@@ -36,7 +36,7 @@ extension AccountProfileObserver {
     func updateProfileDetails(account: AccountModel) {
         profileDisposeBag = DisposeBag()
         profileService.getAccountProfile(accountId: account.id)
-            .subscribe(onNext: { profile in
+            .subscribe(onNext: { [weak self] profile in
                 let avatar = profile.photo?.createImage() ?? UIImage.defaultJamiAvatarFor(profileName: profile.alias, account: account, size: 17)
                 DispatchQueue.main.async { [weak self] in
                     /*
