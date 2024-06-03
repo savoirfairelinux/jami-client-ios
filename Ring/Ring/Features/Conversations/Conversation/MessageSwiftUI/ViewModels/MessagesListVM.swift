@@ -534,6 +534,21 @@ class MessagesListVM: ObservableObject {
         return true
     }
 
+    func getLastReadIndices() -> [Int]? {
+        var lastReadIndices: [Int]?
+
+        let lastReadMessages = self.lastReadMessageForParticipant.values().compactMap({ $0 as? String }).filter({ !$0.isEmpty })
+        lastReadIndices = lastReadMessages.compactMap { messageId in
+            self.messagesModels.firstIndex { $0.id == messageId }
+        }
+        return lastReadIndices
+    }
+
+    private func areDeliveredIndexesSmallerThanRead(deliveredMessageIndex: Int, lastReadIndices: [Int]?) -> Bool {
+        guard let lastReadIndices = lastReadIndices else { return true }
+        return lastReadIndices.allSatisfy { deliveredMessageIndex < $0 }
+    }
+
     func updateLastDelivered(message: MessageContainerModel) {
         guard message.message.isDelivered() else { return }
         /*
@@ -541,15 +556,28 @@ class MessagesListVM: ObservableObject {
          or if this message precedes the current 'lastDelivered' in the messages list.
          */
 
-        guard self.lastDelivered != nil else {
-            self.lastDelivered = message
+        // get indeces of last read messages
+        let lastReadIndices = getLastReadIndices()
+
+        guard let index = self.messagesModels.firstIndex(where: { $0.id == message.id }) else { return }
+
+        guard let lastDelivered = self.lastDelivered,
+              let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }) else {
+            if areDeliveredIndexesSmallerThanRead(deliveredMessageIndex: index, lastReadIndices: lastReadIndices) {
+                self.lastDelivered = message
+            }
             return
         }
-        guard let index = self.messagesModels.firstIndex(where: { $0.id == message.id }),
-              let lastDelivered = self.lastDelivered,
-              let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }),
-              index < lastDeliveredIndex else { return }
-        self.lastDelivered = message
+
+        let newDeliveredIndex = min(index, lastDeliveredIndex)
+
+        // if read message is latest than delivered, remove indicator for read from previous delivered
+        if !areDeliveredIndexesSmallerThanRead(deliveredMessageIndex: newDeliveredIndex, lastReadIndices: lastReadIndices) {
+            self.lastDelivered = nil
+        } else if index < lastDeliveredIndex {
+            // otherwise update last delivered message
+            self.lastDelivered = message
+        }
     }
 
     private func updateLastRead(message: MessageContainerModel, participantId: String) {
@@ -571,6 +599,14 @@ class MessagesListVM: ObservableObject {
             self.updateSubscriptionLastRead(messageId: currentLastReadMessageId)
             // add last read indicator to new last read message
             self.updateSubscriptionLastRead(messageId: message.id)
+        }
+
+        // check if delivered status should be removed
+        guard let lastDelivered = self.lastDelivered,
+              let lastDeliveredIndex = self.messagesModels.firstIndex(where: { $0.id == lastDelivered.id }) else { return }
+        let lastReadIndices = getLastReadIndices()
+        if !areDeliveredIndexesSmallerThanRead(deliveredMessageIndex: lastDeliveredIndex, lastReadIndices: lastReadIndices) {
+            self.lastDelivered = nil
         }
     }
 
@@ -1002,17 +1038,26 @@ class MessagesListVM: ObservableObject {
     }
 
     private func updateSubscriptionLastRead(messageId: String) {
-        guard let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> else { return }
-        // check if have participant why read this message last
+        // get avatar images for last read
+        var images = [String: UIImage]()
+
         guard let participants = self.lastReadMessageForParticipant.filter({ participant in
             if let id = participant.value as? String {
                 return id == messageId
             }
             return false
-        }) as? [String: String] else { return }
+        }) as? [String: String], !participants.isEmpty else {
+            if let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> {
+                lastReadAvatars.accept(images)
+            }
+            return
+        }
 
-        // get avatar images for last read
-        var images = [String: UIImage]()
+        if  (self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> == nil) {
+            let observableValue = BehaviorRelay(value: [String: UIImage]())
+            self.lastRead.set(value: observableValue, for: messageId)
+        }
+        guard let lastReadAvatars = self.lastRead.get(key: messageId) as? BehaviorRelay<[String: UIImage]> else { return }
         for participant in participants {
             if let avatar = self.avatars.get(key: participant.key) as? UIImage {
                 images[participant.key] = avatar
