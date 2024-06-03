@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4c078fb_29bf634a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-03T19:43:04Z",
+      "side": 1,
+      "message": "should be added when implemented",
+      "revId": "c74cecfbf3b0ed5ce700f03f4a29a30b56f246d4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "583902bd_8653252a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-03T19:43:04Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "c74cecfbf3b0ed5ce700f03f4a29a30b56f246d4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5594534c_ee972a5f",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-03T19:43:04Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "c74cecfbf3b0ed5ce700f03f4a29a30b56f246d4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d948f2d_843d3306",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-03T19:43:04Z",
+      "side": 1,
+      "message": "model.username already handle it",
+      "revId": "c74cecfbf3b0ed5ce700f03f4a29a30b56f246d4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8d69fa_3b86be8a",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-03T19:43:04Z",
+      "side": 1,
+      "message": "not used",
+      "revId": "c74cecfbf3b0ed5ce700f03f4a29a30b56f246d4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07509ee5_8dd7c5c2",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionsView.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-03T19:43:04Z",
+      "side": 1,
+      "message": "closeCb not called",
+      "revId": "c74cecfbf3b0ed5ce700f03f4a29a30b56f246d4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e6ebdd4_ab4bb215",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionsView.swift",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-03T19:43:04Z",
+      "side": 1,
+      "message": "not needed",
+      "revId": "c74cecfbf3b0ed5ce700f03f4a29a30b56f246d4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
