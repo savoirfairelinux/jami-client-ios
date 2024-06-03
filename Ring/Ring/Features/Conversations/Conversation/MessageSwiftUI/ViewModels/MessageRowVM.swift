@@ -42,6 +42,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
 
     var message: MessageModel
     var disposeBag = DisposeBag()
+    var readDisposeBag = DisposeBag()
 
     var shouldShowTimeString = false {
         didSet {
@@ -74,10 +75,6 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
         }
     }
 
-    func fetchLastRead() {
-        self.requestReadStatus(messageId: self.message.id)
-    }
-
     init(message: MessageModel) {
         self.message = message
         self.incoming = message.incoming
@@ -89,6 +86,7 @@ class MessageRowVM: ObservableObject, MessageAppearanceProtocol, MessageReadObse
 
     func setInfoState(state: PublishSubject<State>) {
         self.infoState = state
+        self.requestReadStatus(messageId: self.message.id)
     }
 
     func getTimeLabelString() -> String {
