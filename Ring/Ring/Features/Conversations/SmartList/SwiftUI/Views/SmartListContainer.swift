@@ -351,6 +351,7 @@ struct CurrentAccountButton: View {
         HStack(spacing: 0) {
             Image(uiImage: model.avatar)
                 .resizable()
+                .scaledToFill()
                 .frame(width: model.dimensions.imageSize, height: model.dimensions.imageSize)
                 .clipShape(Circle())
             Spacer()

@@ -68,7 +68,7 @@ struct MessageRowView: View {
     let messageModel: MessageContainerModel
     var onLongPress: (_ frame: CGRect, _ message: MessageBubbleView) -> Void
     var showReactionsView: (_ message: ReactionsContainerModel?) -> Void
-    @StateObject var model: MessageRowVM
+    @ObservedObject var model: MessageRowVM
     var body: some View {
         VStack(alignment: .leading) {
             if model.shouldShowTimeString {
@@ -126,6 +126,7 @@ struct MessageRowView: View {
                     ForEach(0..<readImages.count, id: \.self) { index in
                         Image(uiImage: readImages[index])
                             .resizable()
+                            .scaledToFill()
                             .frame(width: 20, height: 20)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(model.readBorderColor, lineWidth: 2))
@@ -136,9 +137,7 @@ struct MessageRowView: View {
             }
             Spacer()
                 .frame(height: model.bottomSpace)
-        }.onAppear(perform: {
-            model.fetchLastRead()
-        })
+        }
         .padding(.top, 1)
         .padding(.bottom, 1)
         .padding(.leading, 5)
