@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Mi sendis al vi peton por konversacio.";
 "conversation.requestMessage" = "Saluton, ĉu vi ŝatus aliĝi al la konversacio?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Sendu al li/ŝi kontaktpeto por ke ili povu interŝanĝi kune";
 "conversation.sendRequestTitle" = "Sendu kontaktan peton";
 "conversation.synchronizationTitle" = "Vi akceptis la interparolan peton.";

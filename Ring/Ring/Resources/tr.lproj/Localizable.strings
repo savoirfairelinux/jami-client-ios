@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@size bir görüşme isteği gönderdi.";
 "conversation.incomingRequest" = "Sana bir görüşme isteği gönderdim.";
 "conversation.requestMessage" = "Merhaba,\nGörüşmeye katılmak ister misin?";
-"conversation.notContact" = "%@ kişi listenizde yok.";
 "conversation.sendRequest" = "Birlikte iletişim kurmak için ona bir kişi isteği gönderin";
 "conversation.sendRequestTitle" = "İletişim İsteği Gönder";
 "conversation.synchronizationTitle" = "Görüşme isteğini kabul ettin.";

@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ saatis sulle vestluse kutse";
 "conversation.incomingRequest" = "Saatis sulle vestluse kutse.";
 "conversation.requestMessage" = "Tere, kas sa sooviksid liituda vestlusega?";
-"conversation.notContact" = "%@ ei leidu sinu kontaktide loendis.";
 "conversation.sendRequest" = "Et saaksite omavahel suhelda, saada talle palve kontaktide vahetamiseks";
 "conversation.sendRequestTitle" = "Saada palve kontaktide vahetamiseks";
 "conversation.synchronizationTitle" = "Sa oled nõustunud vestluskutsega.";

@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ hat Ihnen eine Unterhaltungsanfrage gesendet.";
 "conversation.incomingRequest" = "Hat Ihnen eine Unterhaltungsanfrage gesendet.";
 "conversation.requestMessage" = "Hallo,\nMöchten Sie der Unterhaltung beitreten?";
-"conversation.notContact" = "%@ befindet sich nicht in Ihrer Kontaktliste.";
 "conversation.sendRequest" = "Senden Sie ihm/ihr eine Kontaktanfrage, um sich gemeinsam austauschen zu können";
 "conversation.sendRequestTitle" = "Kontaktanfrage senden";
 "conversation.synchronizationTitle" = "Sie haben die Unterhaltungsanfrage angenommen.";
@@ -328,7 +327,7 @@
 "accountPage.turnPassword" = "TURN-Passwort";
 "accountPage.turnRealm" = "TURN-Realm";
 "accountPage.upnpEnabled" = " UPnP benutzen";
-"accountPage.security" = "Security";
+"accountPage.security" = "Sicherheit";
 "accountPage.enableSRTP" = "Medienströme verschlüsseln (SRTP)";
 
 //Account

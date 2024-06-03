@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "会話の要請を送った";
 "conversation.requestMessage" = "こんにちは\n会話に参加しませんか？";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "連絡を依頼して一緒に交換できる";
 "conversation.sendRequestTitle" = "連絡を要請する";
 "conversation.synchronizationTitle" = "会話への参加が許可されました";

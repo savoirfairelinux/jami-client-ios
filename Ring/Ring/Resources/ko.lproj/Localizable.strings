@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "대화 요청을 보냈어요";
 "conversation.requestMessage" = "안녕하세요, 대화에 참여하고 싶으세요?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "함께 교환할 수 있도록 연락 요청을 보내십시오";
 "conversation.sendRequestTitle" = "연락 요청 을 보내십시오";
 "conversation.synchronizationTitle" = "대화 요청을 받아들였습니다.";

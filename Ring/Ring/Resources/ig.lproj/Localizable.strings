@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "M zigara gị arịrịọ maka mkparịta ụka.";
 "conversation.requestMessage" = "Ndewo, ị̀ ga-achọ isonyere anyị ná mkparịta ụka ahụ?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Ziga ya arịrịọ ịkpọtụrụ ya ka o nwee ike ịkekọrịta ọnụ";
 "conversation.sendRequestTitle" = "Ziga Arịrịọ Kpọtụrụ";
 "conversation.synchronizationTitle" = "Ị nabatawo arịrịọ ahụ e nyere gị ka gị na ya kwurịta okwu.";

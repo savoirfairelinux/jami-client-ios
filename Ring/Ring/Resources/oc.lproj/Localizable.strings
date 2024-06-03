@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Vos ai mandat una peticion per una conversacion.";
 "conversation.requestMessage" = "Bonjour, voldràs venir a la conversacion?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Enviar una demanda de contacte per poder escambiar amb ela";
 "conversation.sendRequestTitle" = "Enviar una peticion de contacte";
 "conversation.synchronizationTitle" = "Avètz acceptat la peticion de conversacion.";

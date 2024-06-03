@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Таныг ярилцлага явуулах хүсэлт ирүүлсэн.";
 "conversation.requestMessage" = "Та яриадаа нэгдэх үү?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Хамтарсан харилцах боломжтой байхын тулд түүнд / түүнд холбогдох хүсэлт хүргүүлнэ";
 "conversation.sendRequestTitle" = "Байлдан авах хүсэлтгээ илгээ";
 "conversation.synchronizationTitle" = "Та ярилцлагын хүсэлтийг хүлээн зөвшөөрсөн.";

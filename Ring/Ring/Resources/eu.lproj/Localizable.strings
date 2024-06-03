@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Elkarrizketa baterako eskaera bidali dizut.";
 "conversation.requestMessage" = "Kaixo, elkarrizketara etorri nahi duzu?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Bidaliko diozu kontaktu-eskaera, elkarrekin truke egiteko.";
 "conversation.sendRequestTitle" = "Bidali kontaktu eskaera";
 "conversation.synchronizationTitle" = "Onartu duzu elkarrizketa eskaera.";

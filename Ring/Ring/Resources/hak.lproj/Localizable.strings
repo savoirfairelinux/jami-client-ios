@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "发给你一个谈话请求.";
 "conversation.requestMessage" = "您好，\n您想要加入会话吗？";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "向他/她发送联系人请求以开始互相交流";
 "conversation.sendRequestTitle" = "发送联系请求";
 "conversation.synchronizationTitle" = "您已接受会话请求。";

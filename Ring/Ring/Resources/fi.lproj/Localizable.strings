@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Lähetin pyynnön juttelemaan.";
 "conversation.requestMessage" = "Hei,\nHaluatko liittyä keskusteluun?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Lähetä hänelle yhteydenottopyyntö, jotta hän voi vaihtaa tietoja.";
 "conversation.sendRequestTitle" = "Lähetä yhteydenpitoa";
 "conversation.synchronizationTitle" = "Olet hyväksynyt keskustelupyynnön.";

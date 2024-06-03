@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "ஒரு உரையாடல் கோரிக்கை அனுப்பிய.";
 "conversation.requestMessage" = "வணக்கம், நீங்கள் உரையாடலில் சேர விரும்புகிறீர்களா?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "அவருடன் தொடர்பு கொள்ளும் கோரிக்கையை அனுப்புங்கள்.";
 "conversation.sendRequestTitle" = "தொடர்பு கோரிக்கை அனுப்புதல்";
 "conversation.synchronizationTitle" = "நீங்கள் உரையாடல் கோரிக்கையை ஏற்றுக்கொண்டீர்கள்.";

@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Us ha enviat una petició per a una conversa.";
 "conversation.requestMessage" = "Hola, t'agradaria unir-te a la conversa?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Enviar-li una petició de contacte per poder intercanviar junts";
 "conversation.sendRequestTitle" = "Enviar sol·licitud de contacte";
 "conversation.synchronizationTitle" = "Has acceptat la petició de conversa.";
@@ -328,8 +327,8 @@
 "accountPage.turnPassword" = "Contrasenya de TURN";
 "accountPage.turnRealm" = "REMIÓ DE VURT";
 "accountPage.upnpEnabled" = "Utilitza UPnP";
-"accountPage.security" = "Security";
-"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.security" = "Seguretat";
+"accountPage.enableSRTP" = "Xifra el flux de mitjans (SRTP)";
 
 //Account
 "account.sipUsername" = "Nome d'usuari";

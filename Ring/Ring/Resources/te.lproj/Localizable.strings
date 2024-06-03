@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "మీరు ఒక సంభాషణ కోసం ఒక అభ్యర్థనను పంపారు.";
 "conversation.requestMessage" = "హలో, మీరు సంభాషణ చేరాలనుకుంటున్నారా?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "కలిసి మార్పిడి చేసుకోగలమని అతనికి/ఆమెకు సంప్రదింపు అభ్యర్థన పంపండి";
 "conversation.sendRequestTitle" = "సంప్రదింపు అభ్యర్థనను పంపండి";
 "conversation.synchronizationTitle" = "మీరు సంభాషణ అభ్యర్థనను అంగీకరించారు.";

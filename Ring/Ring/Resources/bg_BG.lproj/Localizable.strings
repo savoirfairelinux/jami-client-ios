@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Изпратих ви молба за разговор.";
 "conversation.requestMessage" = "Здравейте, бихте ли се присъединили към разговора?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Изпратете му/тя искане за контакт, за да може да обменя заедно";
 "conversation.sendRequestTitle" = "Изпратете запитване за контакт";
 "conversation.synchronizationTitle" = "Приехте молбата за разговор.";
@@ -328,8 +327,8 @@
 "accountPage.turnPassword" = "Парола за TURN";
 "accountPage.turnRealm" = "СВЕЗНИЦА";
 "accountPage.upnpEnabled" = "Използвайте UPnP";
-"accountPage.security" = "Security";
-"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.security" = "Сигурност";
+"accountPage.enableSRTP" = "Криптирайте медийните потоци (SRTP)";
 
 //Account
 "account.sipUsername" = "Потребителско име";

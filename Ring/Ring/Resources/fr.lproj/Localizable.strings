@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ vous a envoyé une invitation.";
 "conversation.incomingRequest" = "vous a envoyé une demande de conversation.";
 "conversation.requestMessage" = "Bonjour,\nSouhaitez-vous rejoindre la conversation ?";
-"conversation.notContact" = " %@ ne fait pas partie de vos contacts.";
 "conversation.sendRequest" = "Envoyer lui une demande de contact afin de pouvoir discuter ensemble";
 "conversation.sendRequestTitle" = "Envoyer une invitation";
 "conversation.synchronizationTitle" = "Vous avez accepté la demande de conversation";

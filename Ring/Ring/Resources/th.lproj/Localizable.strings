@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "ส่งคําขอให้คุยกัน";
 "conversation.requestMessage" = "สวัสดีครับ คุณอยากเข้าร่วมการพูดคุยกันไหม";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "ส่งคําขอติดต่อให้เขา/เธอ เพื่อสามารถแลกเปลี่ยนด้วยกัน";
 "conversation.sendRequestTitle" = "ส่ง คํา สนใจ";
 "conversation.synchronizationTitle" = "คุณยอมรับคําขอคุย";

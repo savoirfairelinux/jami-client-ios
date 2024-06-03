@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Паслаў вам просьбу аб размове.";
 "conversation.requestMessage" = "Прывітанне, вы хацелі б далучыцца да размовы?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Пашляце яму / ёй кантактны запыт, каб быць у стане абмен разам";
 "conversation.sendRequestTitle" = "Пашляце просьбу аб кантактным злучэнні";
 "conversation.synchronizationTitle" = "Вы прынялі просьбу аб размове.";
@@ -328,8 +327,8 @@
 "accountPage.turnPassword" = "Пароль TURN";
 "accountPage.turnRealm" = "РАЗВАЛЬНАе царства";
 "accountPage.upnpEnabled" = "Выкарыстоўвайце UPnP";
-"accountPage.security" = "Security";
-"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.security" = "Бяспека";
+"accountPage.enableSRTP" = "Зашыфраваць медыя-патокі (SRTP)";
 
 //Account
 "account.sipUsername" = "Назва карыстальніка";

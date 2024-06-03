@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ kérelmet küldött Önnek egy beszélgetésre.";
 "conversation.incomingRequest" = "Beszélgetési kérelmet küldött.";
 "conversation.requestMessage" = "Üdv!\nSzeretne csatlakozni a beszélgetéshez?";
-"conversation.notContact" = "%@ nem szerepel a kapcsolatlistában.";
 "conversation.sendRequest" = "Kapcsolatfelvételi kérelem elküldése, hogy együtt képesek legyenek megosztani.";
 "conversation.sendRequestTitle" = "Kapcsolatfelvételi kérelem küldése";
 "conversation.synchronizationTitle" = "Elfogadta a beszélgetési kérelmet.";

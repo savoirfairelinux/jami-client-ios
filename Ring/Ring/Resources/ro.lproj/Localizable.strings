@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ ți-a trimis o invitație la conversație.";
 "conversation.incomingRequest" = "Ți-a trimis o invitație la conversație.";
 "conversation.requestMessage" = "Vrei să participi la conversație?";
-"conversation.notContact" = "%@ nu este în contactele tale.";
 "conversation.sendRequest" = "Trimite-i o cerere de contact pentru a conversa împreună.";
 "conversation.sendRequestTitle" = "Trimite o cerere de contact";
 "conversation.synchronizationTitle" = "Ai acceptat invitația la conversație.";

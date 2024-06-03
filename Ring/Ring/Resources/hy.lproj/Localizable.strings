@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Ձեզ ուղարկել է հարցազրույցի խնդրանք:";
 "conversation.requestMessage" = "Բարեւ, կցանկանայի՞ք միանալ զրույցին:";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Նրան/այնին ուղարկեք կապի խնդրանք, որպեսզի կարողանաք փոխանակել միասին";
 "conversation.sendRequestTitle" = "Հեռախոսազրույց ուղարկել";
 "conversation.synchronizationTitle" = "Դուք ընդունել եք զրուցի խնդրանքը:";

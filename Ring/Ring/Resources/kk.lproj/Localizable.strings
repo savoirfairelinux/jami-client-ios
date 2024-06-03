@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Сізге әңгімелесуді сұрап жібердім.";
 "conversation.requestMessage" = "Сәлем, әңгімеге қосылғыңыз келе ме?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Бірге алмасу үшін оған байланыс сұрауыңызды жіберіңіз";
 "conversation.sendRequestTitle" = "Байланыс сұрауыңызды жіберіңіз";
 "conversation.synchronizationTitle" = "Сіз әңгімелесу сұрағын қабылдадыңыз.";

@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "שלחתי לך בקשה לשיחה.";
 "conversation.requestMessage" = "שלום, תרצה להצטרף לשיחה?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "שלח לו/ה בקשה ליצור קשר כדי שנוכל להחליף יחד";
 "conversation.sendRequestTitle" = "שלח בקשה ליצור קשר";
 "conversation.synchronizationTitle" = "אתה קיבלת את בקשת השיחה.";

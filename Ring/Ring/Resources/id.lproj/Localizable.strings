@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Mengirimkan permintaan untuk percakapan.";
 "conversation.requestMessage" = "Halo, \nApakah Anda ingin bergabung dalam percakapan?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Kirimkan permintaan kontak kepadanya agar Anda bisa saling bertukar pikiran.";
 "conversation.sendRequestTitle" = "Kirim permintaan kontak";
 "conversation.synchronizationTitle" = "Anda telah menerima permintaan percakapan.";

@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ te mandó una solicitud de conversación.";
 "conversation.incomingRequest" = "Te envió una solicitud de conversación.";
 "conversation.requestMessage" = "Hola,\n¿Te gustaría unirte a la conversación?";
-"conversation.notContact" = "%@no está en su lista de contactos.";
 "conversation.sendRequest" = "Enviarle una solicitud de contacto para poder interactuar";
 "conversation.sendRequestTitle" = "Enviar solicitud de contacto";
 "conversation.synchronizationTitle" = "Has aceptado la solicitud de conversación.";

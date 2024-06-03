@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Wysłałem ci prośbę o rozmowę.";
 "conversation.requestMessage" = "- Cześć, chciałbyś dołączyć do rozmowy?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Wysyłać mu/jej prośbę o kontakt, aby mogli wspólnie wymieniać się";
 "conversation.sendRequestTitle" = "Wysyłaj wniosek o kontakt";
 "conversation.synchronizationTitle" = "Przyjąłeś prośbę o rozmowę.";

@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Nilituma ombi la mazungumzo.";
 "conversation.requestMessage" = "Halo, ungependa kujiunga na mazungumzo?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Kumtumia ombi la kuwasiliana ili waweze kubadilishana pamoja";
 "conversation.sendRequestTitle" = "Tuma Ombi la Wasiliana";
 "conversation.synchronizationTitle" = "Umeikubali ombi la mazungumzo.";

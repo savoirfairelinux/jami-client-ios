@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "ഒരു സംഭാഷണം നടത്താന് ഒരു അഭ്യർത്ഥന അയച്ചു.";
 "conversation.requestMessage" = "ഹലോ, നിങ്ങള് ക്ക് സംഭാഷണത്തില് പങ്കെടുക്കാന് താല്പര്യം ഉണ്ടോ?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "ഒരുമിച്ച് കൈമാറ്റം ചെയ്യാന് ഒരു കോൺടാക്റ്റ് അഭ്യർത്ഥന അയയ്ക്കുക";
 "conversation.sendRequestTitle" = "ബന്ധപ്പെടാനുള്ള അപേക്ഷ അയയ്ക്കുക";
 "conversation.synchronizationTitle" = "നിങ്ങള് സംഭാഷണ അഭ്യർത്ഥന അംഗീകരിച്ചു.";

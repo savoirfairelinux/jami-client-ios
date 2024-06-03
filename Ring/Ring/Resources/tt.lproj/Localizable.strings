@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Сезгә сөйләшү өчен үтенеч җибәрдем.";
 "conversation.requestMessage" = "Сәлам, әңгәмәгә кушылырга телисезме?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Бергәләп алмашу өчен, аңа мөрәҗәгать итү соравы җибәр";
 "conversation.sendRequestTitle" = "Контактны сорап җибәрү";
 "conversation.synchronizationTitle" = "Сез сөйләшү үтенечен кабул иттегез.";

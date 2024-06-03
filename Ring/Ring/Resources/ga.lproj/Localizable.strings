@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Chuir mé iarratas ar chuntas duit le haghaidh comhrá.";
 "conversation.requestMessage" = "Halo, ba mhaith leat a bheith páirteach sa comhrá?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Cuir iarratas a dhéanamh ar an gcaidreamh leis nó léi chun a bheith in ann malartú le chéile";
 "conversation.sendRequestTitle" = "Cuir iarratas a dhéanamh ar an teagmháil";
 "conversation.synchronizationTitle" = "Tá tú glacadh leis an iarraidh comhrá.";

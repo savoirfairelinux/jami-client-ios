@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Poslala sam ti zahtjev za razgovor.";
 "conversation.requestMessage" = "-Hello, želiš li se pridružiti razgovoru?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Poslati mu/oni zahtjev za kontakt kako bi mogli razmijeniti zajedno";
 "conversation.sendRequestTitle" = "Pošaljite zahtjev za kontakt";
 "conversation.synchronizationTitle" = "Prihvatili ste zahtjev za razgovor.";

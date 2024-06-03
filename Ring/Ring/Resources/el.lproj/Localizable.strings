@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "Ο χρήστης %@ σας έστειλε αίτημα συνομιλίας.";
 "conversation.incomingRequest" = "Σου έστειλα αίτημα για συζήτηση.";
 "conversation.requestMessage" = "Γεια σας, θα θέλατε να συμμετάσχετε στη συζήτηση;";
-"conversation.notContact" = "Ο χρήστης %@ δεν βρίσκεται στη λίστα επαφών σας.";
 "conversation.sendRequest" = "Να του στείλετε αίτηση επικοινωνίας για να μπορέσουν να ανταλλάξουν μαζί";
 "conversation.sendRequestTitle" = "Στείλτε αίτηση επικοινωνίας";
 "conversation.synchronizationTitle" = "- Δέχτηκες την αίτηση συζήτησης.";
@@ -328,7 +327,7 @@
 "accountPage.turnPassword" = "Κωδικός TURN";
 "accountPage.turnRealm" = "Το βασίλειο ΤΟΥΡΝ";
 "accountPage.upnpEnabled" = "Χρήση UPnP";
-"accountPage.security" = "Security";
+"accountPage.security" = "Ασφάλεια";
 "accountPage.enableSRTP" = "Κρυπτογράφηση ροών μέσων (SRTP)";
 
 //Account

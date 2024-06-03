@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Sent you a request for a conversation.";
 "conversation.requestMessage" = "Hello,\nWould you like to join the conversation?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Send him/her a contact request to be able to exchange together";
 "conversation.sendRequestTitle" = "Send Contact Request";
 "conversation.synchronizationTitle" = "You have accepted the conversation request.";

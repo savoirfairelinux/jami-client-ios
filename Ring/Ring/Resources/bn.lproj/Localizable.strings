@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "আপনাকে কথোপকথনের জন্য অনুরোধ পাঠিয়েছি।";
 "conversation.requestMessage" = "হ্যালো, আপনি কি কথোপকথনে যোগ দিতে চান?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "তাকে/তাকে যোগাযোগের অনুরোধ পাঠান যাতে তারা একসঙ্গে বিনিময় করতে পারে";
 "conversation.sendRequestTitle" = "যোগাযোগের অনুরোধ পাঠান";
 "conversation.synchronizationTitle" = "আপনি কথোপকথনের অনুরোধ গ্রহণ করেছেন।";
@@ -328,8 +327,8 @@
 "accountPage.turnPassword" = "টার্ন পাসওয়ার্ড";
 "accountPage.turnRealm" = "টার্ন রিয়াল";
 "accountPage.upnpEnabled" = "UPnP ব্যবহার করুন";
-"accountPage.security" = "Security";
-"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.security" = "নিরাপত্তা";
+"accountPage.enableSRTP" = "এনক্রিপ্ট মিডিয়া স্ট্রিম (SRTP)";
 
 //Account
 "account.sipUsername" = "ব্যবহারকারীর নাম";

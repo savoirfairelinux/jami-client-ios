@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "منولقكن كيت ڤرلو مڠهادڤكن.";
 "conversation.requestMessage" = "سلام، آيا ميخواي به اين مکالمه ملحق بشي؟";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "مڠهادڤكن كڤدڽ كڤد ڤرلو مڠمبيلكن كڤدڽ اونتوق مڠمبيلكن كڤدڽ";
 "conversation.sendRequestTitle" = "مڠهادڤكن ڤرليندوڠن ڤڠاجرن";
 "conversation.synchronizationTitle" = "تو قبول کردي درخواست صحبت";
@@ -328,8 +327,8 @@
 "accountPage.turnPassword" = "ڤاسر TURN";
 "accountPage.turnRealm" = "كراجأن TURN";
 "accountPage.upnpEnabled" = "مڠڬوناكن UPnP";
-"accountPage.security" = "Security";
-"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.security" = "سيڠڬوڠ";
+"accountPage.enableSRTP" = "مڠمبيل ميديا سست (SRTP)";
 
 //Account
 "account.sipUsername" = "نام ڤڠڬونا";

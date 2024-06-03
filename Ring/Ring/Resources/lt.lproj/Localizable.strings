@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Siuntė jums prašymą apie pokalbį.";
 "conversation.requestMessage" = "Sveiki,\nAr norėtumėte prisijungti prie pokalbio?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Siųskite jam (iš) kontaktinį prašymą, kad galėtumėte kartu keistis";
 "conversation.sendRequestTitle" = "Siųskite kontaktinį prašymą";
 "conversation.synchronizationTitle" = "Jūs priėmėte pokalbį.";

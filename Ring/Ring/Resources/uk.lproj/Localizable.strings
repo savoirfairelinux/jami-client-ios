@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ пропонує почати розмову.";
 "conversation.incomingRequest" = "Посилала прохання про розмову.";
 "conversation.requestMessage" = "Привіт, чи не хочеш приєднатися до розмови?";
-"conversation.notContact" = "%@ немає в контактах.";
 "conversation.sendRequest" = "Відправить йому/їй запит на контакт, щоб вони могли обмінюватися разом";
 "conversation.sendRequestTitle" = "Відправляйте запит на зв'язок";
 "conversation.synchronizationTitle" = "Ви прийняли запит на розмову.";

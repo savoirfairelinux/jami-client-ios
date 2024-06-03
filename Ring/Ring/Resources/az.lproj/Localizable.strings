@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "سنه مکالمه اوچون درخواست گؤندردئم.";
 "conversation.requestMessage" = "سلام، گئجه جکسن؟";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "اونا بیرلیکده آچیقلاماق اوچون تماس طلبی گؤندره";
 "conversation.sendRequestTitle" = "تماس طلبی بفرستید";
 "conversation.synchronizationTitle" = "دانیشما طلبئني قبول ائتدین.";
@@ -328,8 +327,8 @@
 "accountPage.turnPassword" = "تورن رمز";
 "accountPage.turnRealm" = "تورن دؤولت";
 "accountPage.upnpEnabled" = "UPnP- نی ائشلشدیر";
-"accountPage.security" = "Security";
-"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.security" = "امنیت";
+"accountPage.enableSRTP" = "رمزلشدیرمه میدیال جریانلاری (SRTP)";
 
 //Account
 "account.sipUsername" = "ایستیفاده چی آد";

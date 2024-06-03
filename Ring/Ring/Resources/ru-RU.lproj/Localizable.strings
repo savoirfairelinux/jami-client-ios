@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ отправил вам запрос на беседу.";
 "conversation.incomingRequest" = "Я отправил вам запрос на разговор.";
 "conversation.requestMessage" = "Привет,\nВы хотите присоединиться к разговору?";
-"conversation.notContact" = "Пользователя «%@» нет в вашем списке контактов.";
 "conversation.sendRequest" = "Отправьте ему/ей запрос контакта, чтобы иметь возможность совместного обмена";
 "conversation.sendRequestTitle" = "Посылать запрос на контакт";
 "conversation.synchronizationTitle" = "Вы приняли запрос на беседу.";

@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Poslal jsem vám žádost o konverzaci.";
 "conversation.requestMessage" = "Dobrý den,\nChcete se připojit ke konverzaci?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Pošlete mu/jí žádost o kontakt, abyste si mohli společně vyměňovat.";
 "conversation.sendRequestTitle" = "Odeslat žádost o kontakt";
 "conversation.synchronizationTitle" = "Přijali jste žádost o konverzaci.";
@@ -328,8 +327,8 @@
 "accountPage.turnPassword" = "Heslo TURN";
 "accountPage.turnRealm" = "Oblast TURN";
 "accountPage.upnpEnabled" = "Použít UPnP";
-"accountPage.security" = "Security";
-"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.security" = "Zabezpečení";
+"accountPage.enableSRTP" = "Šifrovat datový tok (SRTP)";
 
 //Account
 "account.sipUsername" = "Uživatelské jméno";

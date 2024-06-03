@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Eg sende deg ein forespørsel om ein samtale.";
 "conversation.requestMessage" = "Helt godt, vil du koma med på samtalen?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Send han/hau ein kontaktforfrågan for å kunne bytte saman";
 "conversation.sendRequestTitle" = "Send kontaktforfrågingar";
 "conversation.synchronizationTitle" = "Du har akseptert forespørselen om samtale.";

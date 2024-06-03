@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Ik heb je een verzoek gestuurd.";
 "conversation.requestMessage" = "Wil je meedoen aan het gesprek?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Stuur hem/haar een contactverzoek om samen te kunnen uitwisselen";
 "conversation.sendRequestTitle" = "Verzend contactverzoek";
 "conversation.synchronizationTitle" = "Je hebt het gesprek geaccepteerd.";

@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "أرسلت لك طلباً للحديث";
 "conversation.requestMessage" = "مرحباً، هل تودين الانضمام إلى المحادثة؟";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "إرسال طلب اتصال له لكي يتمكنوا من التبادل معاً";
 "conversation.sendRequestTitle" = "أرسل طلب الاتصال";
 "conversation.synchronizationTitle" = "لقد قبلت طلب المحادثة";
@@ -328,8 +327,8 @@
 "accountPage.turnPassword" = "كلمة المرور لبروتوكول TURN";
 "accountPage.turnRealm" = "حقل بروتوكول TURN";
 "accountPage.upnpEnabled" = "استخدم UPnP";
-"accountPage.security" = "Security";
-"accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.security" = "تأمين";
+"accountPage.enableSRTP" = "نظام تشفير تدفق الوسائط ﴿SRTP﴾";
 
 //Account
 "account.sipUsername" = "اسم المستخدم";

@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Poslal som vám žiadosť o rozhovor.";
 "conversation.requestMessage" = "Ahoj, chcela by si sa pripojiť k rozhovore?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Posielajte mu/jej kontaktnú žiadosť, aby mohli spolu vymieňať";
 "conversation.sendRequestTitle" = "Pošlite žiadosť o kontakt";
 "conversation.synchronizationTitle" = "Prijal si žiadosť o rozhovor.";

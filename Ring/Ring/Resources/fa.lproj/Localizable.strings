@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "بهتون درخواست مکالمه رو فرستادم";
 "conversation.requestMessage" = "درود،\nمی‌خواهید به گفت‌وگو بپیوندید؟";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "برای او درخواست ارتباط بفرستید تا بتواند با هم تبادل کنید";
 "conversation.sendRequestTitle" = "درخواست تماس ارسال کنید";
 "conversation.synchronizationTitle" = "شما درخواست مکالمه را پذیرفته‌اید.";

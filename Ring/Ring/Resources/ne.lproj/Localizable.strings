@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "मैले तपाईंलाई कुराकानीको लागि अनुरोध पठाएँ।";
 "conversation.requestMessage" = "नमस्कार, के तपाई वार्तालापमा सहभागी हुन चाहनुहुन्छ?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "उसलाई/उनलाई सम्पर्क अनुरोध पठाउनुहोस् ताकि उनीहरू सँगै आदानप्रदान गर्न सक्दछन्";
 "conversation.sendRequestTitle" = "सम्पर्क अनुरोध पठाउनुहोस्";
 "conversation.synchronizationTitle" = "तपाईंले वार्तालाप अनुरोध स्वीकार गर्नुभयो।";

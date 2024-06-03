@@ -129,7 +129,6 @@
 "conversation.receivedRequest" = "%@ sent you a request for a conversation.";
 "conversation.incomingRequest" = "Tôi đã gửi cho anh một yêu cầu để nói chuyện.";
 "conversation.requestMessage" = "Chào, anh có muốn tham gia cuộc trò chuyện không?";
-"conversation.notContact" = "%@ is not in your contact list.";
 "conversation.sendRequest" = "Gửi cho anh ta/cô ấy một yêu cầu liên lạc để có thể trao đổi cùng nhau";
 "conversation.sendRequestTitle" = "Gửi yêu cầu liên lạc";
 "conversation.synchronizationTitle" = "Ông đã chấp nhận yêu cầu nói chuyện.";

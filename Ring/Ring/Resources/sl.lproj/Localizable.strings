@@ -48,8 +48,8 @@
 "global.donate" = "Donirajte";
 "global.deleteMessage" = "Izbriši sporočilo";
 "global.deleteFile" = "Izbriši datoteko z naprave";
-"global.editMessage" = "Edit Message";
-"global.editing" = "Edititing";
+"global.editMessage" = "Uredi sporočilo";
+"global.editing" = "Urejanje";
 "global.create" = "Ustvari";
 
 // Scan
@@ -83,20 +83,20 @@
 "swarm.Leave" = "Zapusti";
 "swarm.newSwarm" = "Nov roj";
 "swarm.namePlaceholder" = "Ime roja";
-"swarm.explanationText" = "You can add or invite members at any time after the swarm has been created";
-"swarm.customizeProfile" = "Customize swarm's profile";
-"swarm.changePicture" = "Change swarm picture";
-"swarm.customize" = "Customize swarm";
-"swarm.selectContacts" = "Select Contacts";
+"swarm.explanationText" = "Kadarkoli po stvaritvi roja lahko dodate ali povabite člane";
+"swarm.customizeProfile" = "Prilagodi profil roja";
+"swarm.changePicture" = "Prilagodi sliko roja";
+"swarm.customize" = "Prilagodi roj";
+"swarm.selectContacts" = "Izberite stike";
 
 // Smartlist
 "smartlist.yesterday" = "Včeraj";
 "smartlist.results" = "Javni imenik";
 "smartlist.jamsResults" = "Rezultati iskanja";
 "smartlist.conversations" = "Pogovori";
-"smartlist.noConversationsFound" = "No conversations match your search";
+"smartlist.noConversationsFound" = "Noben pogovor se ne ujema z vašim iskanim nizom";
 "smartlist.newContact" = "Nov stik";
-"smartlist.newSwarm" = "New Swarm";
+"smartlist.newSwarm" = "Nov roj";
 "smartlist.accounts" = "Računi";
 "smartlist.invitationReceived" = "Prejetih povabil";
 "smartlist.noResults" = "Ni zadetkov";
@@ -115,37 +115,36 @@
 "smartlist.accounts" = "Računi";
 "smartlist.disableDonation" = "Ne zdaj";
 "smartlist.donationExplanation" = "Če vam je všeč Jami in verjamete v naše poslanstvo - bi prispevali projektu?";
-"smartlist.inSynchronization" = "conversation in synchronization";
-"smartlist.newMessage" = "New Message";
+"smartlist.inSynchronization" = "pogovor v usklajevanju";
+"smartlist.newMessage" = "Novo sporočilo";
 
 //Conversation
-"conversation.addToContactsButton" = "Add to Contacts";
+"conversation.addToContactsButton" = "Dodaj med stike";
 "conversation.addToContactsLabel" = "Dodam med stike?";
-"conversation.notContactLabel" = "is not in your contact list";
-"conversation.messagePlaceholder" = "Write to";
+"conversation.notContactLabel" = "ni na seznamu vaših stikov";
+"conversation.messagePlaceholder" = "Piši";
 "conversation.explanationSendingLocationTo" = "Trenutno v živo delite svojo lokacijo z ";
 "conversation.explanationReceivingLocationFrom" = "Trenutno v živo pridobivate podatek o lokaciji od";
 "conversation.errorSavingImage" = "Shranjevanje slike v galerijo je spodletelo";
 "conversation.receivedRequest" = "%@ vam je poslal_a zahtevo za pogovor.";
 "conversation.incomingRequest" = "Vam je poslal zahtevo za pogovor.";
 "conversation.requestMessage" = "Pozdravljeni, \nse želite pridružiti pogovoru?";
-"conversation.notContact" = "%@ ni na seznamu vaših stikov.";
 "conversation.sendRequest" = "Pošljite ji/mu zahtevo za stik, da si bosta lahko medsebojno izmenjevala.";
 "conversation.sendRequestTitle" = "Pošlji zahtevo za stik";
 "conversation.synchronizationTitle" = "Sprejeli ste zahtevo za pogovor.";
 "conversation.synchronizationMessage" = "Čakamo, da se %@ poveže, da sinhroniziramo pogovor.";
 "conversation.inReplyTo" = "Kot odgovor";
-"conversation.repliedTo" = "replied to";
-"conversation.yourself" = "yourself";
-"conversation.edited" = "edited";
-"conversation.deletedMessage" = "deleted a message";
+"conversation.repliedTo" = "je odgovoril_a";
+"conversation.yourself" = "vam";
+"conversation.edited" = "urejen";
+"conversation.deletedMessage" = "je izbrisal/a sporočilo";
 
 //Invitations
 "invitations.noInvitations" = "Ni povabil";
-"invitations.pending" = "pending";
-"invitations.accepted" = "accepted";
-"invitations.refused" = "refused";
-"invitations.banned" = "banned";
+"invitations.pending" = "na čakanju";
+"invitations.accepted" = "sprejet";
+"invitations.refused" = "zavrnjen";
+"invitations.banned" = "prepovedan";
 "invitations.list" = "Prejetih povabil";
 
 // Walkthrough
@@ -196,7 +195,7 @@
 "linkToAccount.linkDeviceMessage" = "Izberite \"Poveži novo napravo\" v drugem programu Jami, da prikažete QR-kodo ali PIN";
 "linkToAccount.pinPlaceholder" = "PIN";
 "linkToAccount.pinLabel" = "Vnesite PIN";
-"linkToAccount.explanationPinMessage" = "To generate the PIN code, go to the account management settings on the device containing the account you want to link to. Select \"Link new device\". You will receive the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"linkToAccount.explanationPinMessage" = "Za generiranje PIN-kode pojdite v nastavitve računa na napravi, ki ima račun, s katerim se želite povezati. Izberite \"Poveži novo napravo\". Prejeli boste potreben PIN za vnos v ta obrazec. PIN velja le 10 minut.";
 
 //Link To Account Manager form
 "linkToAccountManager.signIn" = "Vpis";
@@ -317,7 +316,7 @@
 "accountPage.disableBoothMode" = "Izklopi način govorilnice";
 "accountPage.disableBoothModeExplanation" = "Vnesite geslo svojega računa";
 "accountPage.boothModeExplanation" = "V načinu govorilnice se zgodvina pogovora ne shranjuje, funkcionalnost Jamija pa je omejena na odhodne klice. Ob vklopu tega načina se odstranijo vsi pogovori.";
-"accountPage.noBoothMode" = "To enable Booth mode encrypt your account first.";
+"accountPage.noBoothMode" = "Za vklop načina govorilnice morate najprej šifrirati svoj račun.";
 "accountPage.boothModeAlertMessage" = "Ob vklopu načina govorilnice bodo odstranjeni vsi vaši pogovori.";
 "accountPage.peerDiscovery" = "Samodejno povezovanje v krajevnem omrežju";
 "accountPage.autoRegistration" = "Samodejna registracija po izteku";
@@ -436,13 +435,13 @@
 "migrateAccount.migrateAnother" = "Preseli še en račun";
 
 //About Jami
-"aboutJami.declaration1" = "Jami, a GNU package, is software for universal and distributed peer-to-peer communication that respects the freedom and privacy of its users. Visit";
-"aboutJami.declaration2" = "to learn more.";
-"aboutJami.noWarranty1" = "This program comes with absolutely no warranty. See the";
-"aboutJami.noWarranty2" = "version 3 or later for details.";
+"aboutJami.declaration1" = "Jami je prost in brezplačen program za univerzalno in porazdeljeno komunikacijo P2P, ki spoštuje svobodo in zasebnost svojih uporabnikov. Obiščite";
+"aboutJami.declaration2" = ", da izveste več.";
+"aboutJami.noWarranty1" = "Ta program nima nikakršne garancije. Glejte";
+"aboutJami.noWarranty2" = "različico 3 ali novejše za podrobnosti.";
 "aboutJami.contribute" = "Prispevaj";
 "aboutJami.feedback" = "Povratna informacija";
-"aboutJami.createdBy" = "Created by";
-"aboutJami.artworkBy" = "Artwork by";
+"aboutJami.createdBy" = "Ustvaril/a";
+"aboutJami.artworkBy" = "Grafična podoba";
 
 
