@@ -20,13 +20,46 @@
 
 import Foundation
 
+enum TestEnvironmentConst: String {
+    case serverAddress
+    case isRunningTest
+    case createFirstAccount
+    case createSecondAccount
+}
+
 class TestEnvironment {
     static let shared = TestEnvironment()
 
     var nameServerURI: String?
 
+    var isRunningTest: Bool = false
+
+    var createFirstAccount: Bool = false
+
+    var createSecondAccount: Bool = false
+
+    var firstAccountId: String?
+
+    var secondAccountId: String?
+
     private init() {
         // For UI test we set local host as server address
-        nameServerURI = ProcessInfo.processInfo.environment["SERVER_ADDRESS"]
+        nameServerURI = ProcessInfo.processInfo.environment[TestEnvironmentConst.serverAddress.rawValue]
+
+        if let isRunningTestString = ProcessInfo.processInfo.environment[TestEnvironmentConst.isRunningTest.rawValue],
+           let isRunningTestBool = Bool(isRunningTestString), isRunningTestBool {
+            isRunningTest = true
+
+            // Check if we need to create account.
+            if let createFirstAccountString = ProcessInfo.processInfo.environment[TestEnvironmentConst.createFirstAccount.rawValue],
+               let createFirstAccountBool = Bool(createFirstAccountString), createFirstAccountBool {
+                createFirstAccount = true
+            }
+
+            if let createSecondAccountString = ProcessInfo.processInfo.environment[TestEnvironmentConst.createSecondAccount.rawValue],
+               let createSecondAccountBool = Bool(createSecondAccountString), createSecondAccountBool {
+                createSecondAccount = true
+            }
+        }
     }
 }
