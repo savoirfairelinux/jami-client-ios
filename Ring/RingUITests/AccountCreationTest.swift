@@ -20,26 +20,23 @@
 
 import XCTest
 
-final class AccountCreationTest: XCTestCase {
+final class AccountCreationTest: JamiBaseNoAccountUITest {
 
-    let app = XCUIApplication()
+    private static var isAppLaunched = false
 
-    override class func setUp() {
-        super.setUp()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
 
-        let app = XCUIApplication()
+        if !AccountCreationTest.isAppLaunched {
+            if let serverAddress = ProcessInfo.processInfo.environment["TEST_SERVER_ADDRESS"] {
+                app.launchEnvironment["SERVER_ADDRESS"] = serverAddress
+            } else {
+                app.launchEnvironment["SERVER_ADDRESS"] = "https://ns-test.jami.net"
+            }
 
-        if let serverAddress = ProcessInfo.processInfo.environment["TEST_SERVER_ADDRESS"] {
-            app.launchEnvironment["SERVER_ADDRESS"] = serverAddress
-        } else {
-            app.launchEnvironment["SERVER_ADDRESS"] = "https://ns-test.jami.net"
+            app.launch()
+            AccountCreationTest.isAppLaunched = true
         }
-        app.launch()
-    }
-
-    override func setUp() {
-        super.setUp()
-        continueAfterFailure = false
     }
 
     func openWelcomeViewFromConversation() {
@@ -85,7 +82,7 @@ final class AccountCreationTest: XCTestCase {
     }
 
     func getRandomName() -> String {
-        let randomInt = Int.random(in: 1...10000)
+        let randomInt = Int.random(in: 1...100000)
 
         let nameToRegister = "test\(randomInt)"
         return nameToRegister
@@ -179,8 +176,10 @@ final class AccountCreationTest: XCTestCase {
         joinButton.tap()
 
         let conversationWindow = app.otherElements[AccessibilityIdentifiers.conversationView]
-        waitForElementToAppear(conversationWindow, timeout: 5)
-        waitForSeconds(5)
+        waitForSeconds(3)
+        handleNotificationAlertIfPresent()
+        waitForElementToAppear(conversationWindow, timeout: 10)
+        waitForSeconds(2)
 
         // try to create account with registered name
         openAccountCreation()
@@ -196,5 +195,17 @@ final class AccountCreationTest: XCTestCase {
         // Verify the state of the "Join" button
         XCTAssertFalse(joinButton.isEnabled, "The Join button is enabled")
         closeAccountCreationView()
+    }
+
+    func handleNotificationAlertIfPresent() {
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let allowButton = springboard.buttons["Allow"]
+        let okButton = springboard.buttons["OK"]
+
+        if allowButton.waitForExistence(timeout: 5) {
+            allowButton.tap()
+        } else if okButton.waitForExistence(timeout: 5) {
+            okButton.tap()
+        }
     }
 }
