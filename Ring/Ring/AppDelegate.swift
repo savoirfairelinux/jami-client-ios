@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private lazy var callService: CallsService = {
         CallsService(withCallsAdapter: CallsAdapter(), dbManager: self.dBManager)
     }()
-    private lazy var accountService: AccountsService = {
+    internal lazy var accountService: AccountsService = {
         AccountsService(withAccountAdapter: AccountAdapter(), dbManager: self.dBManager)
     }()
     private lazy var contactsService: ContactsService = {
@@ -151,6 +151,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         // starts the daemon
         self.startDaemon()
+
+        self.setUpTestDataIfNeed()
 
         // requests permission to use the camera
         // will enumerate and add devices once permission has been granted
@@ -378,6 +380,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationWillTerminate(_ application: UIApplication) {
         self.callsProvider.stopAllUnhandeledCalls()
+        self.cleanTestDataIfNeed()
         self.stopDaemon()
     }
 

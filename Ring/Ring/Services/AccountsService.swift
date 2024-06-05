@@ -232,6 +232,10 @@ class AccountsService: AccountAdapterDelegate {
         }
     }
 
+    func getAccountsId() -> [String]? {
+        return self.accountAdapter.getAccountList() as? [String]
+    }
+
     func initialAccountsLoading() -> Completable {
         return Completable.create { [weak self] completable in
             guard let self = self else { return Disposables.create {} }
@@ -780,6 +784,26 @@ class AccountsService: AccountAdapterDelegate {
                 .appendingPathComponent(id)
             try? FileManager.default.removeItem(atPath: recordingsURL.path)
         }
+    }
+
+    func removeAccountAndWaitForCompletion(id: String) -> Observable<Bool> {
+        let initialAccountCount = self.getAccountsId()?.count ?? 0
+
+        let removeAccount: Single<Bool> = Single.create { single in
+            self.accountAdapter.removeAccount(id)
+            single(.success(true))
+            return Disposables.create()
+        }
+
+        let accountsChangedSignal = self.sharedResponseStream
+            .filter { $0.eventType == .accountsChanged }
+
+        return Observable
+            .combineLatest(removeAccount.asObservable(), accountsChangedSignal.asObservable())
+            .map { _ in
+                let currentAccountCount = self.getAccountsId()?.count ?? 0
+                return currentAccountCount < initialAccountCount
+            }
     }
 
     // MARK: - AccountAdapterDelegate
