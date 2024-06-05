@@ -152,6 +152,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // starts the daemon
         self.startDaemon()
 
+        self.setUpTestDataIfNeed()
+
         // requests permission to use the camera
         // will enumerate and add devices once permission has been granted
         self.videoService.setupInputs()
@@ -378,7 +380,73 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationWillTerminate(_ application: UIApplication) {
         self.callsProvider.stopAllUnhandeledCalls()
+        self.cleanTestDataIfNeed()
         self.stopDaemon()
+    }
+
+    func setUpTestDataIfNeed() {
+        if TestEnvironment.shared.isRunningTest {
+
+            // Remove all existing accounts.
+            if let accountIds = self.accountService.getAccountsId() {
+                let dispatchGroup = DispatchGroup()
+                for accountId in accountIds {
+                    dispatchGroup.enter()
+                    self.accountService.removeAccountAndWaitForCompletion(id: accountId)
+                        .subscribe(onNext: { _ in
+                            dispatchGroup.leave()
+                        })
+                        .disposed(by: self.disposeBag)
+                }
+                dispatchGroup.wait()
+                sleep(2)
+            }
+
+            // Check if accounts needs to be added and wait to answer.
+            let dispatchGroup = DispatchGroup()
+            if TestEnvironment.shared.createFirstAccount {
+                dispatchGroup.enter()
+                self.accountService.addJamiAccount(username: "", password: "", enable: false)
+                    .subscribe(onNext: { account in
+                        TestEnvironment.shared.firstAccountId = account.id
+                        dispatchGroup.leave()
+                    })
+                    .disposed(by: self.disposeBag)
+                sleep(1)
+            }
+
+            if TestEnvironment.shared.createSecondAccount {
+                dispatchGroup.enter()
+                self.accountService.addJamiAccount(username: "", password: "", enable: false)
+                    .subscribe(onNext: { account in
+                        TestEnvironment.shared.secondAccountId = account.id
+                        dispatchGroup.leave()
+                    })
+                    .disposed(by: self.disposeBag)
+                sleep(1)
+            }
+
+            dispatchGroup.wait()
+        }
+    }
+
+    func cleanTestDataIfNeed() {
+        if TestEnvironment.shared.isRunningTest {
+            // Remove all existing accounts.
+            if let accountIds = self.accountService.getAccountsId() {
+                let dispatchGroup = DispatchGroup()
+                for accountId in accountIds {
+                    dispatchGroup.enter()
+                    self.accountService.removeAccountAndWaitForCompletion(id: accountId)
+                        .subscribe(onNext: { _ in
+                            dispatchGroup.leave()
+                        })
+                        .disposed(by: self.disposeBag)
+                }
+                dispatchGroup.wait()
+                sleep(2)
+            }
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
