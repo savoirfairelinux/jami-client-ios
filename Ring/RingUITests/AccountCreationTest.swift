@@ -21,25 +21,22 @@
 import XCTest
 import Embassy
 
-final class AccountCreationTest: XCTestCase {
+final class AccountCreationTest: JamiBaseUITest {
 
-    let app = XCUIApplication()
     var nameServer: MockNameServer!
 
     override func setUp() {
         super.setUp()
+
         // Create and start name server
         nameServer = MockNameServer()
-        app.launchEnvironment["SERVER_ADDRESS"] = "\(nameServer.localServer):\(nameServer.port)"
+        app.launchEnvironment[TestEnvironmentConst.serverAddress.rawValue] = "\(nameServer.localServer):\(nameServer.port)"
         try! nameServer.start()
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-        app.launch()
     }
 
     override func tearDown() {
         nameServer.stop()
+        super.tearDown()
     }
 
     func openWelcomeViewFromConversation() {
@@ -59,7 +56,6 @@ final class AccountCreationTest: XCTestCase {
     }
 
     func openAccountCreation() {
-        openWelcomeViewFromConversation()
         app.scrollViews.otherElements.buttons[AccessibilityIdentifiers.joinJamiButton].tap()
 
         let createAccountWindow = app.otherElements[AccessibilityIdentifiers.createAccountView]
@@ -74,11 +70,12 @@ final class AccountCreationTest: XCTestCase {
     }
 
     func testCancelJoinJami() {
+        startWithoutAccount()
         openAccountCreation()
 
         // Verify the state of the "Cancel" button
         let cancelButton = app.buttons[AccessibilityIdentifiers.cancelCreatingAccount]
-        XCTAssertTrue(cancelButton.isEnabled, "The Join button is not enabled")
+        XCTAssertTrue(cancelButton.isEnabled, "The Cancel button is not enabled")
         cancelButton.tap()
 
         // Verify that account creation view dismissed
@@ -92,6 +89,7 @@ final class AccountCreationTest: XCTestCase {
     }
 
     func testJoinTitle() {
+        startWithoutAccount()
         openAccountCreation()
         let title = app.staticTexts[AccessibilityIdentifiers.createAccountTitle]
         let expectedText = "Join Jami"
@@ -101,6 +99,7 @@ final class AccountCreationTest: XCTestCase {
     }
 
     func testMessageOnValidName() {
+        startWithoutAccount()
         openAccountCreation()
 
         let nameToRegister = nameServer.getNotRegisteredName()
@@ -118,6 +117,7 @@ final class AccountCreationTest: XCTestCase {
     }
 
     func testErrorMessageOnAlreadyRegisteredName() {
+        startWithoutAccount()
         openAccountCreation()
 
         let nameToRegister = nameServer.getRegisteredName()
@@ -135,6 +135,7 @@ final class AccountCreationTest: XCTestCase {
     }
 
     func testJoinButtonEnabledOnValidName() {
+        startWithoutAccount()
         openAccountCreation()
 
         let nameToRegister = nameServer.getNotRegisteredName()
@@ -148,6 +149,7 @@ final class AccountCreationTest: XCTestCase {
     }
 
     func testJoinButtonEnabledOnEmptyName() {
+        startWithoutAccount()
         openAccountCreation()
         // Verify the state of the "Join" button
         let joinButton = app.buttons[AccessibilityIdentifiers.joinButton]
@@ -155,6 +157,7 @@ final class AccountCreationTest: XCTestCase {
     }
 
     func testCreateButtonDisabledOnInvalidName() {
+        startWithoutAccount()
         openAccountCreation()
 
         let nameToRegister = nameServer.getRegisteredName()
