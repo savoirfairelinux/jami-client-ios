@@ -53,6 +53,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81a6725a_b7b186a9",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-07T14:26:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55228ea5_a90da793",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d200fdb_59390761",
@@ -66,6 +84,24 @@
       "writtenOn": "2024-05-21T15:54:45Z",
       "side": 1,
       "message": "@StateObject should be used when model created by the view, that is not current case. should be @ObservedObject",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0975874c_c902d3cf",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/MessagesListView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-07T14:26:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d200fdb_59390761",
       "revId": "77327c472f71780db145a7402beb7edccb9b7923",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
@@ -223,6 +259,24 @@
       "writtenOn": "2024-05-21T15:54:45Z",
       "side": 1,
       "message": "@ObservedObject",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d050df1f_a5ab7fff",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionsView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-07T14:26:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "838565f6_8ff6dfda",
       "revId": "77327c472f71780db145a7402beb7edccb9b7923",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     }
