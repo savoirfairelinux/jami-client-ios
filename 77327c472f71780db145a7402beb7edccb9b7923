@@ -122,6 +122,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99b3297e_7dfd76ff",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-07T14:25:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e4fb567_c7ce88bd",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5be4144e_96b0df85",
@@ -135,6 +153,24 @@
       "writtenOn": "2024-05-21T15:54:45Z",
       "side": 1,
       "message": "when peer sends reaction, avatars disappear",
+      "revId": "77327c472f71780db145a7402beb7edccb9b7923",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a9601c5_139fa431",
+        "filename": "Ring/Ring/Features/Conversations/Conversation/MessageSwiftUI/Views/ReactionRowView.swift",
+        "patchSetId": 11
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-07T14:25:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5be4144e_96b0df85",
       "revId": "77327c472f71780db145a7402beb7edccb9b7923",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
