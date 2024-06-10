@@ -435,7 +435,7 @@
 "migrateAccount.migrateAnother" = "Migrar outra conta";
 
 //About Jami
-"aboutJami.declaration1" = "Jami, um pacote GNU, é um software para comunicação ponto-a-ponto universal e distribuída que respeita a liberdade e a privacidade dos seus utilizadores. Visite";
+"aboutJami.declaration1" = "Jami, um pacote GNU, é um software para comunicação ponto a ponto universal e distribuída que respeita a liberdade e a privacidade dos seus utilizadores. Visite";
 "aboutJami.declaration2" = "para saber mais.";
 "aboutJami.noWarranty1" = "Este programa não tem qualquer garantia. Ver";
 "aboutJami.noWarranty2" = "versão 3 ou posterior para mais pormenores.";
