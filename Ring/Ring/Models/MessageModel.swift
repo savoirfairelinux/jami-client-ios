@@ -218,7 +218,7 @@ public class MessageModel {
                 case .remove:
                     self.content = L10n.GeneratedMessage.contactLeftConversation
                 case.banned:
-                    self.content = L10n.GeneratedMessage.contactBanned
+                    self.content = L10n.GeneratedMessage.contactBlocked
                 case .unban:
                     self.content = L10n.GeneratedMessage.contactReAdded
                 }
