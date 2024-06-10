@@ -153,6 +153,8 @@ internal enum L10n {
     internal static let proxyPaceholder = L10n.tr("Localizable", "accountPage.proxyPaceholder", fallback: "Proxy address")
     /// Chosen username is not available
     internal static let registerNameErrorMessage = L10n.tr("Localizable", "accountPage.registerNameErrorMessage", fallback: "Chosen username is not available")
+    /// Register a username to help others more easily to find anr reach you on Jami.
+    internal static let registerNameExplanation = L10n.tr("Localizable", "accountPage.registerNameExplanation", fallback: "Register a username to help others more easily to find anr reach you on Jami.")
     /// Remove
     internal static let removeAccountButton = L10n.tr("Localizable", "accountPage.removeAccountButton", fallback: "Remove")
     /// By clicking "Remove" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.
