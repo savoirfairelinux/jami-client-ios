@@ -73,6 +73,8 @@ struct SmartListView: View {
     // share account info
     @SwiftUI.State private var isSharing = false
     @SwiftUI.State private var isMenuOpen = false
+
+    @SwiftUI.State private var isNavigatingToSettings = false
     var body: some View {
         PlatformAdaptiveNavView {
             ZStack(alignment: .bottom) {
@@ -86,6 +88,18 @@ struct SmartListView: View {
                     backgroundCover()
                     accountListsView()
                 }
+
+                NavigationLink(
+                    destination: LazyView {
+                        AccountSummaryView(injectionBag: self.model.injectionBag,
+                                           account: self.model.accountsService.currentAccount!, stateSubject: model.stateSubject
+                        )
+                    },
+                    isActive: $isNavigatingToSettings
+                ) {
+                    EmptyView()
+                }
+                .animation(.none)
             }
         }
         .sheet(isPresented: $showingPicker) {
@@ -214,7 +228,6 @@ struct SmartListView: View {
             }
             accountsButton
             settingsButton
-            generalSettingsButton
             donateButton
             aboutJamiButton
         } label: {
@@ -271,22 +284,13 @@ struct SmartListView: View {
     }
 
     private var settingsButton: some View {
-        Button(action: {[weak model] in
+        Button(action: {
             isMenuOpen = false
-            guard let model = model else { return }
-            model.openSettings()
+            withAnimation(.none) {
+                isNavigatingToSettings = true
+            }
         }) {
-            Label(L10n.Global.accountSettings, systemImage: "person.circle")
-        }
-    }
-
-    private var generalSettingsButton: some View {
-        Button(action: {[weak model] in
-            isMenuOpen = false
-            guard let model = model else { return }
-            model.showGeneralSettings()
-        }) {
-            Label(L10n.Global.advancedSettings, systemImage: "gearshape")
+            Label(L10n.AccountPage.settingsHeader, systemImage: "person.circle")
         }
     }
 
@@ -368,5 +372,17 @@ struct CurrentAccountButton: View {
         .transaction { transaction in
             transaction.animation = nil
         }
+    }
+}
+
+struct LazyView<Content: View>: View {
+    let build: () -> Content
+
+    init(_ build: @escaping () -> Content) {
+        self.build = build
+    }
+
+    var body: some View {
+        build()
     }
 }
