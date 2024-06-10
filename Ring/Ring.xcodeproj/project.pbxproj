@@ -273,6 +273,8 @@
 		2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */; };
 		2685F90E2A1698B400BFCDA3 /* VideoInputsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2685F90D2A1698B400BFCDA3 /* VideoInputsManager.swift */; };
 		268AA5C12472D42700B654A0 /* ConfirmationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */; };
+		268C87E42C1793E300593D7C /* NameRegistrationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C87E32C1793E300593D7C /* NameRegistrationVM.swift */; };
+		268C87E62C17945C00593D7C /* NameRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C87E52C17945C00593D7C /* NameRegistrationView.swift */; };
 		26929FD425659E5F0052A601 /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 26929FD125659E5F0052A601 /* cacert.pem */; };
 		269DA02728D0D2E5007D51D6 /* libargon2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BBC9D31EDC7A6D00CDAF8B /* libargon2.a */; };
 		269DA02828D0D2E5007D51D6 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04399AB21D1C341A00E99CD9 /* libavcodec.a */; };
@@ -419,6 +421,8 @@
 		26EF35E928E3847100D97E14 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35E828E3847100D97E14 /* MessageContentView.swift */; };
 		26EF35EB28E38DA200D97E14 /* MessageContentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */; };
 		26EF35EF29075A5300D97E14 /* MessageStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EF35EE29075A5300D97E14 /* MessageStackView.swift */; };
+		26FDF43D2C1353A9009D036B /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF43C2C1353A9009D036B /* AccountView.swift */; };
+		26FDF43F2C1353BA009D036B /* AccountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FDF43E2C1353BA009D036B /* AccountVM.swift */; };
 		4430A66B236CBA7D00747177 /* ContactPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66A236CBA7D00747177 /* ContactPickerSection.swift */; };
 		4430A66D236CBC5900747177 /* ContactPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */; };
 		4430A66F236CBC6900747177 /* ContactPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430A66E236CBC6900747177 /* ContactPickerViewController.swift */; };
@@ -919,6 +923,8 @@
 		2682CC6C25110E36003E65E1 /* ContactPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerDelegate.swift; sourceTree = "<group>"; };
 		2685F90D2A1698B400BFCDA3 /* VideoInputsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInputsManager.swift; sourceTree = "<group>"; };
 		268AA5C02472D42700B654A0 /* ConfirmationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlert.swift; sourceTree = "<group>"; };
+		268C87E32C1793E300593D7C /* NameRegistrationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRegistrationVM.swift; sourceTree = "<group>"; };
+		268C87E52C17945C00593D7C /* NameRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRegistrationView.swift; sourceTree = "<group>"; };
 		26929FD125659E5F0052A601 /* cacert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cacert.pem; sourceTree = "<group>"; };
 		269B849326151AC10015BC72 /* libgit2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgit2.a; path = ../DEPS/arm64/lib/libgit2.a; sourceTree = "<group>"; };
 		269DA04F28D0D2E6007D51D6 /* libyuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyuv.a; path = ../fat/lib/libyuv.a; sourceTree = "<group>"; };
@@ -1030,6 +1036,8 @@
 		26EF35EA28E38DA200D97E14 /* MessageContentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentVM.swift; sourceTree = "<group>"; };
 		26EF35EE29075A5300D97E14 /* MessageStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStackView.swift; sourceTree = "<group>"; };
 		26F5E11A26F91D98001BECCE /* NotificationService-release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NotificationService-release.entitlements"; sourceTree = "<group>"; };
+		26FDF43C2C1353A9009D036B /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		26FDF43E2C1353BA009D036B /* AccountVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVM.swift; sourceTree = "<group>"; };
 		4430A66A236CBA7D00747177 /* ContactPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerSection.swift; sourceTree = "<group>"; };
 		4430A66C236CBC5900747177 /* ContactPickerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactPickerViewController.storyboard; sourceTree = "<group>"; };
 		4430A66E236CBC6900747177 /* ContactPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactPickerViewController.swift; sourceTree = "<group>"; };
@@ -2127,6 +2135,7 @@
 		1A2D18D91F2918F300B2C785 /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				26FDF4392C135384009D036B /* SwiftUI */,
 				0E36979B20322D4D009A68CA /* BlockList */,
 				0E5AFE0A1F8EBC040040D539 /* Cells */,
 				1A2D18EC1F2919D800B2C785 /* MeViewController.storyboard */,
@@ -2452,6 +2461,33 @@
 				2657CBA92B8595F80078D6B1 /* XCTestCase + Helpers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		26FDF4392C135384009D036B /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				26FDF43B2C135398009D036B /* Views */,
+				26FDF43A2C13538C009D036B /* Models */,
+			);
+			name = SwiftUI;
+			sourceTree = "<group>";
+		};
+		26FDF43A2C13538C009D036B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				26FDF43E2C1353BA009D036B /* AccountVM.swift */,
+				268C87E32C1793E300593D7C /* NameRegistrationVM.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		26FDF43B2C135398009D036B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26FDF43C2C1353A9009D036B /* AccountView.swift */,
+				268C87E52C17945C00593D7C /* NameRegistrationView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		4430A669236CB9F600747177 /* Conference */ = {
@@ -2954,6 +2990,7 @@
 				1A2D18C71F29180700B2C785 /* DeviceModel.swift in Sources */,
 				26BCBBD52A965EFC0001EE38 /* PictureInPictureManager.swift in Sources */,
 				1A20418F1F1EAC0E00C08435 /* Coordinator.swift in Sources */,
+				268C87E62C17945C00593D7C /* NameRegistrationView.swift in Sources */,
 				0E49097C1FEACA4B005CAA50 /* CallViewModel.swift in Sources */,
 				6661C73A216D2EA300E48D94 /* Gif+Helpers.swift in Sources */,
 				1A2D18A11F27A6D600B2C785 /* LinkDeviceViewController.swift in Sources */,
@@ -3171,6 +3208,7 @@
 				0EDE34C91F8691BB00FFA15C /* EditProfileViewModel.swift in Sources */,
 				04399AAD1D1C304300E99CD9 /* DRingAdapter.mm in Sources */,
 				1A2D18D11F29182500B2C785 /* ConversationViewController.swift in Sources */,
+				26FDF43F2C1353BA009D036B /* AccountVM.swift in Sources */,
 				0EE1B5501F75AD4700BA98EE /* VCardUtils.swift in Sources */,
 				26454FBF2B7FDEE900CFF06C /* AboutSwiftUIVM.swift in Sources */,
 				2682CC6D25110E36003E65E1 /* ContactPickerDelegate.swift in Sources */,
@@ -3182,6 +3220,7 @@
 				26D87CEB2BBB4A5F0086E4AA /* AccountsViewModel.swift in Sources */,
 				1A2D18C31F29180700B2C785 /* AccountModel.swift in Sources */,
 				62A88D371F6C2ED400F8AB18 /* PresenceAdapterDelegate.swift in Sources */,
+				268C87E42C1793E300593D7C /* NameRegistrationVM.swift in Sources */,
 				02B22DFF1DF755DB000358C9 /* AccountsService.swift in Sources */,
 				62E55B6F1F793ADE00D3FEF4 /* AvatarsColors.swift in Sources */,
 				BB06BD8129D491F80064F0FC /* CustomAnnotationModel.swift in Sources */,
@@ -3191,6 +3230,7 @@
 				1A5DC0301F3565AE0075E8EF /* SmartlistViewController.swift in Sources */,
 				BB1E8C7529159DFC005AE1D6 /* SettingsView.swift in Sources */,
 				1A2D18A21F27A6D600B2C785 /* LinkDeviceViewModel.swift in Sources */,
+				26FDF43D2C1353A9009D036B /* AccountView.swift in Sources */,
 				564C44601E943C37000F92B1 /* NameRegistrationAdapter.mm in Sources */,
 				26BCBBD32A964ABC0001EE38 /* ConferenceActionsModel.swift in Sources */,
 				0E6F5453223C3C7500ECC3CE /* AccountItemView.swift in Sources */,

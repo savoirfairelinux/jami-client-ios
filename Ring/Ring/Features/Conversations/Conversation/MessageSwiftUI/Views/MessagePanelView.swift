@@ -172,7 +172,7 @@ struct MessagePanelView: View {
 
                 Spacer()
                     .frame(width: 5)
-                UITextViewWrapper(text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
+                UITextViewWrapper(withBackground: true, text: $text, isFocused: $isFocused, dynamicHeight: $textHeight)
                     .frame(minHeight: textHeight, maxHeight: textHeight)
                     .cornerRadius(18)
                     .placeholder(when: text.isEmpty, alignment: .leading) {
