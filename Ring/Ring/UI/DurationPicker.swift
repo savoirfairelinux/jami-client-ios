@@ -29,7 +29,7 @@ class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
         }
     }
     let maxHours: Int
-    weak var viewModel: GeneralSettingsViewModel!
+    var onDurationChanged: ((Int) -> Void)?
 
     init(maxHours: Int, duration: Int) {
         self.maxHours = maxHours
@@ -81,7 +81,7 @@ class DurationPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate
             pickerView.selectRow(1, inComponent: 1, animated: true)
             duration = 1
         }
-        viewModel?.changeLocationSharingDuration(value: duration)
+        onDurationChanged?(duration)
     }
 
     func setupPickerWithDuration() {

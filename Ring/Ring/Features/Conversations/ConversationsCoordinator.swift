@@ -70,8 +70,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.createNewAccount()
                 case .showDialpad(let inCall):
                     self.showDialpad(inCall: inCall)
-                case .showGeneralSettings:
-                    self.showGeneralSettings()
                 case .openAboutJami:
                     self.openAboutJami()
                 case .navigateToCall(let call):
@@ -265,20 +263,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     func openAboutJami() {
         let aboutJamiController = AboutViewController.instantiate()
         self.present(viewController: aboutJamiController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
-    }
-
-    func showGeneralSettings() {
-        let generalSettingsCoordinator = GeneralSettingsCoordinator(with: self.injectionBag)
-        generalSettingsCoordinator.parentCoordinator = self
-        generalSettingsCoordinator.setNavigationController(controller: self.navigationViewController)
-        self.addChildCoordinator(childCoordinator: generalSettingsCoordinator)
-        generalSettingsCoordinator.start()
-        self.smartListViewController.rx.viewWillAppear
-            .take(1)
-            .subscribe(onNext: { [weak self, weak generalSettingsCoordinator] (_) in
-                self?.removeChildCoordinator(childCoordinator: generalSettingsCoordinator)
-            })
-            .disposed(by: self.disposeBag)
     }
 
     func popToSmartList() {

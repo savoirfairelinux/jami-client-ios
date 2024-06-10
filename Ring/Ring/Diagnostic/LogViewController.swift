@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2023 Savoir-faire Linux Inc.
  *
- *  Author: Silbino Gonçalves Matado <silbino.gmatado@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,24 +18,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class DeviceModel: Hashable {
+import UIKit
+import RxSwift
+import RxCocoa
+import SwiftyBeaver
+import Reusable
+import SwiftUI
 
-    @objc dynamic var deviceId = ""
-    @objc dynamic var deviceName: String?
-    @objc dynamic var isCurrent = false
-
-    convenience init(withDeviceId deviceId: String, deviceName: String?, isCurrent: Bool) {
-        self.init()
-        self.deviceId = deviceId
-        self.deviceName = deviceName
-        self.isCurrent = isCurrent
-    }
-
-    static func == (lhs: DeviceModel, rhs: DeviceModel) -> Bool {
-        return lhs.deviceId == rhs.deviceId
-    }
-
-    func hash(into hasher: inout Hasher) {
-        return hasher.combine(deviceId)
-    }
+class LogViewController: UIViewController, ViewModelBased, StoryboardBased {
+    var viewModel: LogViewModel!
 }

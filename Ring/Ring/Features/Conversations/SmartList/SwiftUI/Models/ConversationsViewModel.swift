@@ -460,10 +460,6 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
         self.stateSubject.onNext(ConversationState.qrCode)
     }
 
-    func showGeneralSettings() {
-        self.stateSubject.onNext(ConversationState.showGeneralSettings)
-    }
-
     func openAboutJami() {
         self.stateSubject.onNext(ConversationState.openAboutJami)
     }

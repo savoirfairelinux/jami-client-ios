@@ -31,7 +31,6 @@ enum ConversationState: State {
     case createSwarm
     case createNewAccount
     case showDialpad(inCall: Bool)
-    case showGeneralSettings
     case recordFile(conversation: ConversationModel, audioOnly: Bool)
     case navigateToCall(call: CallModel)
     case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?, conversationSelectedCB: ((_ conversaionIds: [String]?) -> Void)?)
