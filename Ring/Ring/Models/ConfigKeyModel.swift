@@ -76,6 +76,7 @@ enum ConfigKey: String {
     case tlsVerifyClient = "TLS.verifyClient"
     case tlsRequireClientCertificate = "TLS.requireClientCertificate"
     case tlsNegociationTimeoutSec = "TLS.negotiationTimeoutSec"
+    case disableSecureDlgCheck = "TLS.disableSecureDlgCheck"
     case accountRegisteredName = "Account.registeredName"
     case accountRegistrationStatus = "Account.registrationStatus"
     case accountRegistrationStateCode = "Account.registrationCode"
