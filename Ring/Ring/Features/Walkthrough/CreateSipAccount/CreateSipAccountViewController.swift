@@ -213,7 +213,7 @@ class CreateSipAccountViewController: UIViewController, StoryboardBased, ViewMod
         self.passwordLabel.text = L10n.Global.enterPassword
         self.serverLabel.text = L10n.Account.serverLabel
         self.passwordTextField.placeholder = L10n.Global.password
-        self.userNameTextField.placeholder = L10n.Account.sipUsername
+        self.userNameTextField.placeholder = L10n.Global.username
         self.serverTextField.placeholder = L10n.Account.sipServer
     }
 }

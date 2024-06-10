@@ -73,6 +73,10 @@ struct LogUI: View {
     @SwiftUI.State private var filePath: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     @SwiftUI.State private var showButtons = false
 
+    init(injectiomBag: InjectionBag) {
+        _model = StateObject(wrappedValue: LogUIViewModel(injectionBag: injectiomBag))
+    }
+
     var body: some View {
         ZStack(alignment: .bottom) {
             VStack {
@@ -115,6 +119,9 @@ struct LogUI: View {
             }
             .swarmButtonStyle()
         }
+        .navigationTitle(L10n.LogView.title)
+        .navigationBarItems(trailing: trailingBarItems)
+        .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $model.showPicker) {
             DocumentPicker(fileURL: $filePath)
         }
@@ -134,6 +141,37 @@ struct LogUI: View {
         })
         .onChange(of: filePath) { _ in
             model.saveLogTo(path: filePath)
+        }
+    }
+
+    private var trailingBarItems: some View {
+        HStack {
+            shareButton
+            saveButton
+        }
+    }
+
+    private var shareButton: some View {
+        Button(action: {
+            model.openShareWindow()
+        }) {
+            if let uiImage = UIImage(systemName: "square.and.arrow.up") {
+                Image(uiImage: uiImage)
+                    .padding(5)
+                    .foregroundColor(Color.jamiColor)
+            }
+        }
+    }
+
+    private var saveButton: some View {
+        Button(action: {
+            model.openDocumentBrowser()
+        }) {
+            if let uiImage = UIImage(systemName: "arrow.down.circle") {
+                Image(uiImage: uiImage)
+                    .padding(5)
+                    .foregroundColor(Color.jamiColor)
+            }
         }
     }
 
