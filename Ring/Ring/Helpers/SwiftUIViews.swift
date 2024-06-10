@@ -63,6 +63,7 @@ struct MeasureSizeModifier: ViewModifier {
 }
 
 struct UITextViewWrapper: UIViewRepresentable {
+    let withBackground: Bool
     @Binding var text: String
     @Binding var isFocused: Bool
     @Binding var dynamicHeight: CGFloat
@@ -74,8 +75,10 @@ struct UITextViewWrapper: UIViewRepresentable {
         textView.textAlignment = .left
         textView.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle: .callout).pointSize)
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        textView.backgroundColor = UIColor.secondarySystemBackground
-        textView.layer.cornerRadius = 18
+        if withBackground {
+            textView.backgroundColor = UIColor.secondarySystemBackground
+            textView.layer.cornerRadius = 18
+        }
         textView.clipsToBounds = true
         textView.delegate = context.coordinator
         return textView

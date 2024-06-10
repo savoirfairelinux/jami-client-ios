@@ -51,6 +51,8 @@
 "global.editMessage" = "Edit Message";
 "global.editing" = "Edititing";
 "global.create" = "Create";
+"global.edit" = "Edit";
+"global.remove" = "Remove";
 
 // Scan
 "scan.badQrCode" = "Bad QR code";
@@ -281,13 +283,13 @@
 "accountPage.enableNotifications" = "Enable Notifications";
 "accountPage.proxyDisabledAlertTitle" = "Proxy Server Disabled";
 "accountPage.proxyDisabledAlertBody" = "In order to receive notifications, please enable proxy";
-"accountPage.revokeDeviceTitle" = "Revoke device";
+"accountPage.revokeDeviceTitle" = "Remove device";
 "accountPage.revokeDeviceMessage" = "Are you sure you want to revoke this device? This action could not be undone.";
 "accountPage.revokeDeviceButton" = "Revoke";
 "accountPage.revokeDevicePlaceholder" = "Enter your password";
 "accountPage.deviceRevoked" = "Device revocation completed";
-"accountPage.deviceRevocationProgress" = "Revoking...";
-"accountPage.deviceRevocationSuccess" = "Device was revoked";
+"accountPage.deviceRevocationProgress" = "Removing...";
+"accountPage.deviceRevocationSuccess" = "Device removed";
 "accountPage.deviceRevocationTryAgain" = "Try again";
 "accountPage.deviceRevocationWrongPassword" = "Incorrect password";
 "accountPage.deviceRevocationUnknownDevice" = "Unknown device";
@@ -295,7 +297,6 @@
 "accountPage.linkDeviceTitle" = "Link another device";
 "accountPage.other" = "Other";
 "accountPage.removeAccountMessage" = "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-"accountPage.removeAccountButton" = "Remove";
 "accountPage.inviteFriends" = "Invite friends";
 "accountPage.contactMeOnJamiTitle" = "Contact me on Jami!";
 "accountPage.contactMeOnJamiContant" = "Contact me using \"%s\" on the Jami distributed communication platform: https://jami.net";
@@ -329,6 +330,30 @@
 "accountPage.upnpEnabled" = "Use UPnP";
 "accountPage.security" = "Security";
 "accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily to find and reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileImage" = "Profile Image";
+"accountPage.profileName" = "Profile Name";
+"accountPage.profileNamePlaceholder" = "Enter your profile name";
+"accountPage.editProfile" = "Edit Profile";
+"accountPage.manageAccount" = "Manage Account";
+"accountPage.encryptAccount" = "Encrypt account with a password";
+"accountPage.passwordExplanation" = "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.";
+"accountPage.passwordsDoNotMatch" = "Passwords do not match";
+"accountPage.passwordCreated" = "Password created";
+"accountPage.passwordUpdated" = "Password updated";
+"accountPage.linkedDevices" = "Linked devices";
+"accountPage.unlink" = "Unlink";
+"accountPage.generatingPin" = "Generating PIN...";
+"accountPage.passwordForPin" = "This account is password encrypted, enter a password to genrate PIN code";
+"accountPage.pinExplanationTitle" = "On another device";
+"accountPage.pinExplanationMessage" = "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.";
+"accountPage.pinError" = "Failed to generate PIN";
+"accountPage.notificationTitle" = "Notifications";
+"accountPage.notificationErrorPart1" = "Notifications for Jami are disabled. Please enable them in your";
+"accountPage.notificationErrorPart2" = "device settings";
 
 //Account
 "account.sipUsername" = "User Name";

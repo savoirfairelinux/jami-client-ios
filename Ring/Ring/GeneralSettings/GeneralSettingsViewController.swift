@@ -322,7 +322,6 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
 
         let durationPicker = DurationPicker(maxHours: 10, duration: viewModel.locationSharingDuration.value)
         durationPicker.translatesAutoresizingMaskIntoConstraints = false
-        durationPicker.viewModel = viewModel
         textField.inputView = durationPicker
         stackView.addArrangedSubview(textField)
 
