@@ -448,20 +448,12 @@ class ConversationsViewModel: ObservableObject, FilterConversationDataSource {
 
     // MARK: - menu settings
 
-    func openSettings() {
-        self.stateSubject.onNext(ConversationState.showAccountSettings)
-    }
-
     func createSwarm() {
         self.stateSubject.onNext(ConversationState.createSwarm)
     }
 
     func scanQRCode() {
         self.stateSubject.onNext(ConversationState.qrCode)
-    }
-
-    func showGeneralSettings() {
-        self.stateSubject.onNext(ConversationState.showGeneralSettings)
     }
 
     func openAboutJami() {

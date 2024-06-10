@@ -47,8 +47,6 @@ class LogUIViewModel: ObservableObject {
     var errorText = ""
 
     let systemService: SystemService
-    let openDocumentBrowser = BehaviorRelay(value: false)
-    let openShareMenu = BehaviorRelay(value: false)
     let disposeBag = DisposeBag()
     let queue = DispatchQueue(label: "UpdateSystemLog", qos: .background, attributes: .concurrent)
 
@@ -58,26 +56,6 @@ class LogUIViewModel: ObservableObject {
         self.systemService = injectionBag.systemService
         self.systemService.clearLog()
         self.parceCurrentLog()
-        openDocumentBrowser
-            .asObservable()
-            .subscribe(onNext: { [weak self] openBrowser in
-                guard let self = self else { return }
-                self.showPicker = openBrowser && !self.systemService.currentLog.isEmpty
-            })
-            .disposed(by: self.disposeBag)
-
-        openShareMenu
-            .asObservable()
-            .subscribe(onNext: { [weak self] openShare in
-                guard let self = self else { return }
-                guard openShare && !self.systemService.currentLog.isEmpty else { return }
-                if self.prepareFileToShare() {
-                    self.showShare = true
-                } else {
-                    self.showShareError()
-                }
-            })
-            .disposed(by: self.disposeBag)
         self.systemService.isMonitoring
             .asObservable()
             .observe(on: MainScheduler.instance)
@@ -99,6 +77,20 @@ class LogUIViewModel: ObservableObject {
                 }
             })
             .disposed(by: self.disposeBag)
+    }
+
+    func openShareWindow() {
+        if self.systemService.currentLog.isEmpty { return }
+        if self.prepareFileToShare() {
+            self.showShare = true
+        } else {
+            self.showShareError()
+        }
+    }
+
+    func openDocumentBrowser() {
+        if self.systemService.currentLog.isEmpty { return }
+        self.showPicker = true
     }
 
     private func insertNewLog(log: String) {

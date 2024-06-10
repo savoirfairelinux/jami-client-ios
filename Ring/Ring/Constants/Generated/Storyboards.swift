@@ -50,11 +50,6 @@ internal extension UIViewController {
 
 // swiftlint:disable explicit_type_interface identifier_name line_length type_body_length type_name
 internal enum StoryboardScene {
-  internal enum BlockListViewController: StoryboardType {
-    internal static let storyboardName = "BlockListViewController"
-
-    internal static let initialScene = InitialSceneType<Ring.BlockListViewController>(storyboard: BlockListViewController.self)
-  }
   internal enum CallViewController: StoryboardType {
     internal static let storyboardName = "CallViewController"
 
@@ -108,16 +103,7 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<Ring.LinkDeviceViewController>(storyboard: LinkDeviceViewController.self)
   }
-  internal enum LinkNewDeviceViewController: StoryboardType {
-    internal static let storyboardName = "LinkNewDeviceViewController"
 
-    internal static let initialScene = InitialSceneType<Ring.LinkNewDeviceViewController>(storyboard: LinkNewDeviceViewController.self)
-  }
-  internal enum MeViewController: StoryboardType {
-    internal static let storyboardName = "MeViewController"
-
-    internal static let initialScene = InitialSceneType<Ring.MeViewController>(storyboard: MeViewController.self)
-  }
   internal enum ScanViewController: StoryboardType {
     internal static let storyboardName = "ScanViewController"
 
