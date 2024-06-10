@@ -18,7 +18,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class DeviceModel {
+class DeviceModel: Hashable {
 
     @objc dynamic var deviceId = ""
     @objc dynamic var deviceName: String?
@@ -29,5 +29,13 @@ class DeviceModel {
         self.deviceId = deviceId
         self.deviceName = deviceName
         self.isCurrent = isCurrent
+    }
+
+    static func == (lhs: DeviceModel, rhs: DeviceModel) -> Bool {
+        return lhs.deviceId == rhs.deviceId
+    }
+
+    func hash(into hasher: inout Hasher) {
+        return hasher.combine(deviceId)
     }
 }
