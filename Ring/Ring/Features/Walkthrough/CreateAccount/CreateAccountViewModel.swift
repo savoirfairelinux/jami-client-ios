@@ -71,6 +71,15 @@ enum UsernameValidationState {
         }
     }
 
+    var isVerifying: Bool {
+        switch self {
+            case .lookingForAvailibility(_):
+                return true
+            default:
+                return false
+        }
+    }
+
     var message: String {
         switch self {
         case .unknown:
@@ -83,6 +92,21 @@ enum UsernameValidationState {
             return message
         case .unavailable(let message):
             return message
+        }
+    }
+
+    var textColor: UIColor {
+        switch self {
+            case .unknown:
+                return .clear
+            case .available(_):
+                return .jamiSuccess
+            case .lookingForAvailibility(_):
+                return .clear
+            case .invalid(_):
+                return .jamiFailure
+            case .unavailable(_):
+                return .jamiFailure
         }
     }
 }
