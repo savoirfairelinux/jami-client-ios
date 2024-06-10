@@ -73,6 +73,10 @@ struct LogUI: View {
     @SwiftUI.State private var filePath: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     @SwiftUI.State private var showButtons = false
 
+    init(injectiomBag: InjectionBag) {
+        _model = StateObject(wrappedValue: LogUIViewModel(injectionBag: injectiomBag))
+    }
+
     var body: some View {
         ZStack(alignment: .bottom) {
             VStack {
