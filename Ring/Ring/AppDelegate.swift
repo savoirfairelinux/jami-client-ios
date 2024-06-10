@@ -193,6 +193,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         NotificationCenter.default.addObserver(self, selector: #selector(registerNotifications),
                                                name: NSNotification.Name(rawValue: NotificationName.enablePushNotifications.rawValue),
                                                object: nil)
+        // Unregister from VOIP notifications when all accounts have notifications disabled.
+        NotificationCenter.default.addObserver(self, selector: #selector(unregisterNotifications),
+                                               name: NSNotification.Name(rawValue: NotificationName.disablePushNotifications.rawValue),
+                                               object: nil)
+
         self.clearBadgeNumber()
         if let path = self.certificatePath() {
             setenv("CA_ROOT_FILE", path, 1)
@@ -472,6 +477,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.voipRegistry.desiredPushTypes = Set([PKPushType.voIP])
     }
 
+    @objc
     private func unregisterNotifications() {
         DispatchQueue.main.async {
             UIApplication.shared.unregisterForRemoteNotifications()

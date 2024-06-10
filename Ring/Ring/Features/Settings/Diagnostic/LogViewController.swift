@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2018-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2023-2024 Savoir-faire Linux Inc.
  *
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
@@ -18,13 +18,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-class BannedContactItem {
+import UIKit
+import RxSwift
+import RxCocoa
+import SwiftyBeaver
+import Reusable
+import SwiftUI
 
-    let contact: ContactModel
-    var image: Data?
-    var displayName: String?
-
-    init(withContact contact: ContactModel) {
-        self.contact = contact
-    }
+class LogViewController: UIViewController, ViewModelBased, StoryboardBased {
+    var viewModel: LogViewModel!
 }

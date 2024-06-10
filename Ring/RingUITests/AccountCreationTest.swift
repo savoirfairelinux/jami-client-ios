@@ -94,7 +94,7 @@ final class AccountCreationTest: XCTestCase {
     func testJoinTitle() {
         openAccountCreation()
         let title = app.staticTexts[AccessibilityIdentifiers.createAccountTitle]
-        let expectedText = "Join Jami"
+        let expectedText = L10n.CreateAccount.createAccountFormTitle
 
         // Check the title of the navigation bar
         XCTAssertEqual(title.label, expectedText, "Navigation title is not correct")
@@ -111,7 +111,7 @@ final class AccountCreationTest: XCTestCase {
         // Verify the text
         let label = app.staticTexts[AccessibilityIdentifiers.createAccountErrorLabel]
 
-        let expectedText = "username is available"
+        let expectedText = L10n.CreateAccount.usernameValid
 
         // Check the label's text
         XCTAssertEqual(label.label, expectedText, "Explanation lable is not correct")
@@ -128,7 +128,7 @@ final class AccountCreationTest: XCTestCase {
         // Verify the text
         let label = app.staticTexts[AccessibilityIdentifiers.createAccountErrorLabel]
 
-        let expectedText = "username already taken"
+        let expectedText = L10n.CreateAccount.usernameAlreadyTaken
 
         // Check the label's text
         XCTAssertEqual(label.label, expectedText, "Explanation lable is not correct")
