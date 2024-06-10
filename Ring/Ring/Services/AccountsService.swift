@@ -309,6 +309,14 @@ class AccountsService: AccountAdapterDelegate {
         return true
     }
 
+    func setDeviceName(accountId: String, deviceName: String) {
+        let details = self.getAccountDetails(fromAccountId: accountId)
+        details
+            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountDeviceName),
+                 withValue: deviceName)
+        setAccountDetails(forAccountId: accountId, withDetails: details)
+    }
+
     func getAccountProfile(accountId: String) -> Profile? {
         return self.dbManager.accountProfile(for: accountId)
     }
@@ -655,7 +663,7 @@ class AccountsService: AccountAdapterDelegate {
 
         var devices = [DeviceModel]()
 
-        let accountDetails = self.getAccountDetails(fromAccountId: id)
+        let accountDetails = self.getVolatileAccountDetails(fromAccountId: id)
         let currentDeviceId = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountDeviceId))
 
         for key in knownRingDevices.allKeys {
