@@ -1255,7 +1255,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
     }
 
     func confirmRevokeDeviceAlert(deviceID: String) {
-        let alert = UIAlertController(title: L10n.AccountPage.revokeDeviceTitle,
+        let alert = UIAlertController(title: L10n.AccountPage.removeDeviceTitle,
                                       message: L10n.AccountPage.revokeDeviceMessage,
                                       preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: L10n.Global.cancel,
@@ -1304,7 +1304,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                       preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: L10n.Global.cancel,
                                          style: .cancel)
-        let actionConfirm = UIAlertAction(title: L10n.AccountPage.removeAccountButton,
+        let actionConfirm = UIAlertAction(title: L10n.Global.remove,
                                           style: .destructive) { [weak self] _ in
             self?.viewModel.startAccountRemoving()
         }

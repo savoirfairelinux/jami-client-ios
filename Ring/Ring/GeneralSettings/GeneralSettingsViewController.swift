@@ -36,7 +36,6 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         super.viewDidLoad()
         view.backgroundColor = UIColor.jamiBackgroundColor
         settingsTable.backgroundColor = UIColor.jamiBackgroundColor
-        self.applyL10n()
         self.setUpTable()
     }
 
@@ -58,10 +57,6 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
         self.settingsTable.rowHeight = UITableView.automaticDimension
         self.settingsTable.tableFooterView = UIView()
         self.setUpDataSource()
-    }
-
-    func applyL10n() {
-        self.navigationItem.title = L10n.Global.advancedSettings
     }
 
     private func setUpDataSource() {
@@ -322,7 +317,6 @@ class GeneralSettingsViewController: UIViewController, StoryboardBased, ViewMode
 
         let durationPicker = DurationPicker(maxHours: 10, duration: viewModel.locationSharingDuration.value)
         durationPicker.translatesAutoresizingMaskIntoConstraints = false
-        durationPicker.viewModel = viewModel
         textField.inputView = durationPicker
         stackView.addArrangedSubview(textField)
 
