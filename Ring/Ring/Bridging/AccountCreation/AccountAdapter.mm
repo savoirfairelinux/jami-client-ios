@@ -161,7 +161,7 @@ static id <AccountAdapterDelegate> _delegate;
             password:(NSString *)password
             deviceId:(NSString *)deviceId
 {
-    return revokeDevice(std::string([accountID UTF8String]), std::string([deviceId UTF8String]), std::string([password UTF8String]));
+    return revokeDevice(std::string([accountID UTF8String]), std::string([deviceId UTF8String]), "password", std::string([password UTF8String]));
 }
 
 #pragma mark -

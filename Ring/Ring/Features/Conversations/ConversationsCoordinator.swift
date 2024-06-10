@@ -70,16 +70,12 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
                     self.createNewAccount()
                 case .showDialpad(let inCall):
                     self.showDialpad(inCall: inCall)
-                case .showGeneralSettings:
-                    self.showGeneralSettings()
                 case .openAboutJami:
                     self.openAboutJami()
                 case .navigateToCall(let call):
                     self.navigateToCall(call: call)
                 case .showContactPicker(let callID, let contactCallBack, let conversationCallBack):
                     self.showContactPicker(callId: callID, contactSelectedCB: contactCallBack, conversationSelectedCB: conversationCallBack)
-                case .showAccountSettings:
-                    self.showAccountSettings()
                 case .accountRemoved:
                     self.popToSmartList()
                 case .needToOnboard:
@@ -126,20 +122,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
         if let parent = self.parentCoordinator as? AppCoordinator {
             parent.stateSubject.onNext(AppState.needAccountMigration(accountId: accountId))
         }
-    }
-
-    func showAccountSettings() {
-        let meCoordinator = MeCoordinator(with: self.injectionBag)
-        meCoordinator.parentCoordinator = self
-        meCoordinator.setNavigationController(controller: self.navigationViewController)
-        self.addChildCoordinator(childCoordinator: meCoordinator)
-        meCoordinator.start()
-        self.smartListViewController.rx.viewWillAppear
-            .take(1)
-            .subscribe(onNext: { [weak self, weak meCoordinator] (_) in
-                self?.removeChildCoordinator(childCoordinator: meCoordinator)
-            })
-            .disposed(by: self.disposeBag)
     }
 
     func showIncomingCall(call: CallModel) {
@@ -265,20 +247,6 @@ class ConversationsCoordinator: Coordinator, StateableResponsive, ConversationNa
     func openAboutJami() {
         let aboutJamiController = AboutViewController.instantiate()
         self.present(viewController: aboutJamiController, withStyle: .show, withAnimation: true, disposeBag: self.disposeBag)
-    }
-
-    func showGeneralSettings() {
-        let generalSettingsCoordinator = GeneralSettingsCoordinator(with: self.injectionBag)
-        generalSettingsCoordinator.parentCoordinator = self
-        generalSettingsCoordinator.setNavigationController(controller: self.navigationViewController)
-        self.addChildCoordinator(childCoordinator: generalSettingsCoordinator)
-        generalSettingsCoordinator.start()
-        self.smartListViewController.rx.viewWillAppear
-            .take(1)
-            .subscribe(onNext: { [weak self, weak generalSettingsCoordinator] (_) in
-                self?.removeChildCoordinator(childCoordinator: generalSettingsCoordinator)
-            })
-            .disposed(by: self.disposeBag)
     }
 
     func popToSmartList() {
