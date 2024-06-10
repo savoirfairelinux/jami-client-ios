@@ -31,7 +31,6 @@ enum ConversationState: State {
     case createSwarm
     case createNewAccount
     case showDialpad(inCall: Bool)
-    case showGeneralSettings
     case recordFile(conversation: ConversationModel, audioOnly: Bool)
     case navigateToCall(call: CallModel)
     case showContactPicker(callID: String, contactSelectedCB: ((_ contact: [ConferencableItem]) -> Void)?, conversationSelectedCB: ((_ conversaionIds: [String]?) -> Void)?)
@@ -40,7 +39,6 @@ enum ConversationState: State {
     case accountModeChanged
     case openFullScreenPreview(parentView: UIViewController, viewModel: PlayerViewModel?, image: UIImage?, initialFrame: CGRect, delegate: PreviewViewControllerDelegate)
     case openIncomingInvitationView(displayName: String, request: RequestModel, parentView: UIViewController, invitationHandeledCB: ((_ conversationId: String) -> Void))
-    case showAccountSettings
     case accountRemoved
     case needToOnboard
     case returnToSmartList
