@@ -22,6 +22,7 @@
 
 import Foundation
 import MobileCoreServices
+import CoreImage.CIFilterBuiltins
 
 extension String {
     func createImage() -> UIImage? {
@@ -169,5 +170,26 @@ extension String {
 
     func containsCaseInsensitive(string: String) -> Bool {
         return self.range(of: string, options: .caseInsensitive) != nil
+    }
+
+    func generateQRCode() -> UIImage? {
+        let filter = CIFilter.qrCodeGenerator()
+        let context = CIContext()
+        let data = Data(self.utf8)
+
+        filter.setValue(data, forKey: "inputMessage")
+
+        if let outputImage = filter.outputImage {
+            // Scale the image to a higher resolution
+            let transform = CGAffineTransform(scaleX: 100, y: 100)
+            let scaledQRImage = outputImage.transformed(by: transform)
+
+            // Render the CIImage to CGImage
+            if let cgImage = context.createCGImage(scaledQRImage, from: scaledQRImage.extent) {
+                return UIImage(cgImage: cgImage)
+            }
+        }
+
+        return nil
     }
 }

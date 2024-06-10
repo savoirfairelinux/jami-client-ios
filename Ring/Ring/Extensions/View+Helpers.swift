@@ -170,3 +170,75 @@ extension Notification {
         (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
     }
 }
+
+struct TextSelectionModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 15.0, *) {
+            content.textSelection(.enabled)
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    func conditionalTextSelection() -> some View {
+        self.modifier(TextSelectionModifier())
+    }
+}
+
+struct OptionalMediumPresentationDetents: ViewModifier {
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if #available(iOS 16.0, *) {
+            content.presentationDetents([.medium])
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    func optionalMediumPresentationDetents() -> some View {
+        self.modifier(OptionalMediumPresentationDetents())
+    }
+}
+
+struct OptionalRowSeparator: ViewModifier {
+    let hidden: Bool
+
+    func body(content: Content) -> some View {
+        if #available(iOS 15.0, *) {
+            content
+                .listRowSeparator(hidden ? .hidden : .visible)
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    func optionalRowSeparator(hidden: Bool) -> some View {
+        self.modifier(OptionalRowSeparator(hidden: hidden))
+    }
+}
+
+
+struct OptionalListSectionSpacing: ViewModifier {
+    let spacing: CGFloat
+
+    func body(content: Content) -> some View {
+        if #available(iOS 17.0, *) {
+            content
+                .listSectionSpacing(spacing)
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    func optionalListSectionSpacing(_ spacing: CGFloat) -> some View {
+        self.modifier(OptionalListSectionSpacing(spacing: spacing))
+    }
+}
