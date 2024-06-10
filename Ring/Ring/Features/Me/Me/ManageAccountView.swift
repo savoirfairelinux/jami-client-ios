@@ -1,0 +1,81 @@
+/*
+ *  Copyright (C) 2024 Savoir-faire Linux Inc.
+ *
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+import SwiftUI
+
+struct ManageAccountView: View {
+    @ObservedObject var model: AccountVM
+    @Environment(\.presentationMode) var presentation
+    @SwiftUI.State private var showRemovalAlert = false
+    var body: some View {
+        Form {
+            Section {
+                NavigationLink(destination: BlockedContactsView(account: model.account, injectionBag: model.injectionBag)) {
+                    HStack {
+                        Text(L10n.AccountPage.blockedContacts)
+                    }
+                }
+                NavigationLink(destination: EncryptAccount()) {
+                    HStack {
+                        Text("Encrypt account with a passord")
+                    }
+                }
+            }
+
+            Section {
+                Button {
+                    showRemovalAlert = true
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text(L10n.Global.removeAccount)
+                            .foregroundColor(Color(UIColor.jamiFailure))
+                        Spacer()
+                    }
+                }
+                .alert(isPresented: $showRemovalAlert) {
+                    Alert(
+                        title: Text(L10n.Global.removeAccount),
+                        message: Text(L10n.AccountPage.removeAccountMessage),
+                        primaryButton: .destructive(Text(L10n.AccountPage.removeAccountButton)) {
+                            model.startAccountRemoving()
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(L10n.AccountPage.manageAccount)
+        .navigationBarItems(leading:
+                                Button(action: {
+            presentation.wrappedValue.dismiss()
+        }) {
+            HStack {
+                Group {
+                    Image(systemName: "chevron.backward")
+                    Text(L10n.AccountPage.accountHeader)
+                }
+                .foregroundColor(.jamiColor)
+            }
+        })
+        .navigationBarBackButtonHidden(true)
+    }
+}
