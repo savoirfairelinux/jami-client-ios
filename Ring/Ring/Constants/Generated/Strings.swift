@@ -69,6 +69,8 @@ internal enum L10n {
     internal static let statusUnknown = L10n.tr("Localizable", "account.statusUnknown", fallback: "Unknown")
   }
   internal enum AccountPage {
+    /// Account
+    internal static let accountHeader = L10n.tr("Localizable", "accountPage.accountHeader", fallback: "Account")
     /// Auto register after expiration
     internal static let autoRegistration = L10n.tr("Localizable", "accountPage.autoRegistration", fallback: "Auto register after expiration")
     /// Blocked contacts
@@ -97,10 +99,10 @@ internal enum L10n {
     internal static let credentialsHeader = L10n.tr("Localizable", "accountPage.credentialsHeader", fallback: "Account Details")
     /// Device revocation error
     internal static let deviceRevocationError = L10n.tr("Localizable", "accountPage.deviceRevocationError", fallback: "Device revocation error")
-    /// Revoking...
-    internal static let deviceRevocationProgress = L10n.tr("Localizable", "accountPage.deviceRevocationProgress", fallback: "Revoking...")
-    /// Device was revoked
-    internal static let deviceRevocationSuccess = L10n.tr("Localizable", "accountPage.deviceRevocationSuccess", fallback: "Device was revoked")
+    /// Removing...
+    internal static let deviceRevocationProgress = L10n.tr("Localizable", "accountPage.deviceRevocationProgress", fallback: "Removing...")
+    /// Device removed
+    internal static let deviceRevocationSuccess = L10n.tr("Localizable", "accountPage.deviceRevocationSuccess", fallback: "Device removed")
     /// Try again
     internal static let deviceRevocationTryAgain = L10n.tr("Localizable", "accountPage.deviceRevocationTryAgain", fallback: "Try again")
     /// Unknown device
@@ -115,16 +117,26 @@ internal enum L10n {
     internal static let disableBoothMode = L10n.tr("Localizable", "accountPage.disableBoothMode", fallback: "Disable Booth Mode")
     /// Please provide your account password
     internal static let disableBoothModeExplanation = L10n.tr("Localizable", "accountPage.disableBoothModeExplanation", fallback: "Please provide your account password")
+    /// Edit Profile
+    internal static let editProfile = L10n.tr("Localizable", "accountPage.editProfile", fallback: "Edit Profile")
     /// Enable Booth Mode
     internal static let enableBoothMode = L10n.tr("Localizable", "accountPage.enableBoothMode", fallback: "Enable Booth Mode")
     /// Enable Notifications
     internal static let enableNotifications = L10n.tr("Localizable", "accountPage.enableNotifications", fallback: "Enable Notifications")
     /// Encrypt media streams (SRTP)
     internal static let enableSRTP = L10n.tr("Localizable", "accountPage.enableSRTP", fallback: "Encrypt media streams (SRTP)")
+    /// Encrypt account with a password
+    internal static let encryptAccount = L10n.tr("Localizable", "accountPage.encryptAccount", fallback: "Encrypt account with a password")
+    /// Generating PIN...
+    internal static let generatingPin = L10n.tr("Localizable", "accountPage.generatingPin", fallback: "Generating PIN...")
     /// Invite friends
     internal static let inviteFriends = L10n.tr("Localizable", "accountPage.inviteFriends", fallback: "Invite friends")
     /// Link another device
     internal static let linkDeviceTitle = L10n.tr("Localizable", "accountPage.linkDeviceTitle", fallback: "Link another device")
+    /// Linked devices
+    internal static let linkedDevices = L10n.tr("Localizable", "accountPage.linkedDevices", fallback: "Linked devices")
+    /// Manage Account
+    internal static let manageAccount = L10n.tr("Localizable", "accountPage.manageAccount", fallback: "Manage Account")
     /// Confirm new password
     internal static let newPasswordConfirmPlaceholder = L10n.tr("Localizable", "accountPage.newPasswordConfirmPlaceholder", fallback: "Confirm new password")
     /// Enter new password
@@ -139,10 +151,36 @@ internal enum L10n {
     internal static let oldPasswordPlaceholder = L10n.tr("Localizable", "accountPage.oldPasswordPlaceholder", fallback: "Enter old password")
     /// Other
     internal static let other = L10n.tr("Localizable", "accountPage.other", fallback: "Other")
+    /// Password created
+    internal static let passwordCreated = L10n.tr("Localizable", "accountPage.passwordCreated", fallback: "Password created")
+    /// Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.
+    internal static let passwordExplanation = L10n.tr("Localizable", "accountPage.passwordExplanation", fallback: "Your Jami account is only stored locally on this device as an archive containing your accoutn keys. Access to this archive can be protected by a password.")
+    /// This account is password encrypted, enter a password to genrate PIN code
+    internal static let passwordForPin = L10n.tr("Localizable", "accountPage.passwordForPin", fallback: "This account is password encrypted, enter a password to genrate PIN code")
     /// Enter account password
     internal static let passwordPlaceholder = L10n.tr("Localizable", "accountPage.passwordPlaceholder", fallback: "Enter account password")
+    /// Passwords do not match
+    internal static let passwordsDoNotMatch = L10n.tr("Localizable", "accountPage.passwordsDoNotMatch", fallback: "Passwords do not match")
+    /// Password updated
+    internal static let passwordUpdated = L10n.tr("Localizable", "accountPage.passwordUpdated", fallback: "Password updated")
     /// Auto connect on local network
     internal static let peerDiscovery = L10n.tr("Localizable", "accountPage.peerDiscovery", fallback: "Auto connect on local network")
+    /// Failed to generate PIN
+    internal static let pinError = L10n.tr("Localizable", "accountPage.pinError", fallback: "Failed to generate PIN")
+    /// Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.
+    internal static let pinExplanationMessage = L10n.tr("Localizable", "accountPage.pinExplanationMessage", fallback: "Install and launch Jami, select import from another device and scan QR code or manually enter the PIN.")
+    /// On another device
+    internal static let pinExplanationTitle = L10n.tr("Localizable", "accountPage.pinExplanationTitle", fallback: "On another device")
+    /// Profile
+    internal static let profileHeader = L10n.tr("Localizable", "accountPage.profileHeader", fallback: "Profile")
+    /// Profile Image
+    internal static let profileImage = L10n.tr("Localizable", "accountPage.profileImage", fallback: "Profile Image")
+    /// Profile Name
+    internal static let profileName = L10n.tr("Localizable", "accountPage.profileName", fallback: "Profile Name")
+    /// Name not selected
+    internal static let profileNameNotSelected = L10n.tr("Localizable", "accountPage.profileNameNotSelected", fallback: "Name not selected")
+    /// Enter your profile name
+    internal static let profileNamePlaceholder = L10n.tr("Localizable", "accountPage.profileNamePlaceholder", fallback: "Enter your profile name")
     /// Provide proxy address
     internal static let proxyAddressAlert = L10n.tr("Localizable", "accountPage.proxyAddressAlert", fallback: "Provide proxy address")
     /// In order to receive notifications, please enable proxy
@@ -153,8 +191,8 @@ internal enum L10n {
     internal static let proxyPaceholder = L10n.tr("Localizable", "accountPage.proxyPaceholder", fallback: "Proxy address")
     /// Chosen username is not available
     internal static let registerNameErrorMessage = L10n.tr("Localizable", "accountPage.registerNameErrorMessage", fallback: "Chosen username is not available")
-    /// Remove
-    internal static let removeAccountButton = L10n.tr("Localizable", "accountPage.removeAccountButton", fallback: "Remove")
+    /// Register a username to help others more easily to find and reach you on Jami.
+    internal static let registerNameExplanation = L10n.tr("Localizable", "accountPage.registerNameExplanation", fallback: "Register a username to help others more easily to find and reach you on Jami.")
     /// By clicking "Remove" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.
     internal static let removeAccountMessage = L10n.tr("Localizable", "accountPage.removeAccountMessage", fallback: "By clicking \"Remove\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.")
     /// Revoke
@@ -163,8 +201,8 @@ internal enum L10n {
     internal static let revokeDeviceMessage = L10n.tr("Localizable", "accountPage.revokeDeviceMessage", fallback: "Are you sure you want to revoke this device? This action could not be undone.")
     /// Enter your password
     internal static let revokeDevicePlaceholder = L10n.tr("Localizable", "accountPage.revokeDevicePlaceholder", fallback: "Enter your password")
-    /// Revoke device
-    internal static let revokeDeviceTitle = L10n.tr("Localizable", "accountPage.revokeDeviceTitle", fallback: "Revoke device")
+    /// Remove device
+    internal static let revokeDeviceTitle = L10n.tr("Localizable", "accountPage.revokeDeviceTitle", fallback: "Remove device")
     /// Security
     internal static let security = L10n.tr("Localizable", "accountPage.security", fallback: "Security")
     /// Settings
@@ -181,6 +219,8 @@ internal enum L10n {
     internal static let turnUsername = L10n.tr("Localizable", "accountPage.turnUsername", fallback: "TURN username")
     /// UNBLOCK
     internal static let unblockContact = L10n.tr("Localizable", "accountPage.unblockContact", fallback: "UNBLOCK")
+    /// Unlink
+    internal static let unlink = L10n.tr("Localizable", "accountPage.unlink", fallback: "Unlink")
     /// Use UPnP
     internal static let upnpEnabled = L10n.tr("Localizable", "accountPage.upnpEnabled", fallback: "Use UPnP")
     /// username: not registered
@@ -552,6 +592,8 @@ internal enum L10n {
     internal static let deleteMessage = L10n.tr("Localizable", "global.deleteMessage", fallback: "Delete Message")
     /// Donate
     internal static let donate = L10n.tr("Localizable", "global.donate", fallback: "Donate")
+    /// Edit
+    internal static let edit = L10n.tr("Localizable", "global.edit", fallback: "Edit")
     /// Edititing
     internal static let editing = L10n.tr("Localizable", "global.editing", fallback: "Edititing")
     /// Edit Message
@@ -578,6 +620,8 @@ internal enum L10n {
     internal static let refuse = L10n.tr("Localizable", "global.refuse", fallback: "Refuse")
     /// Register a username
     internal static let registerAUsername = L10n.tr("Localizable", "global.registerAUsername", fallback: "Register a username")
+    /// Remove
+    internal static let remove = L10n.tr("Localizable", "global.remove", fallback: "Remove")
     /// Remove account
     internal static let removeAccount = L10n.tr("Localizable", "global.removeAccount", fallback: "Remove account")
     /// Reply
