@@ -463,13 +463,13 @@ class MeViewModel: ViewModel, Stateable {
                 self?.currentAccountDevices.onNext(devices)
             })
             .disposed(by: self.tempBag)
-        self.accountService.proxyEnabled(accountID: account.id)
-            .asObservable()
-            .subscribe(onNext: { [weak self] enable in
-                self?.notificationsEnabled = enable
-                self?.currentAccountProxy.onNext(enable)
-            })
-            .disposed(by: self.tempBag)
+//        self.accountService.proxyEnabled(accountID: account.id)
+//            .asObservable()
+//            .subscribe(onNext: { [weak self] enable in
+//                self?.notificationsEnabled = enable
+//                self?.currentAccountProxy.onNext(enable)
+//            })
+//            .disposed(by: self.tempBag)
     }
 
     func userNameForAccount(account: AccountModel) -> String {
@@ -687,14 +687,14 @@ class MeViewModel: ViewModel, Stateable {
     lazy var proxyEnabled: Observable<Bool> = { [weak self] in
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
             if let self = self, let account = self.accountService.currentAccount {
-                self.accountService.proxyEnabled(accountID: account.id)
-                    .asObservable()
-                    .take(1)
-                    .subscribe(onNext: { [weak self] enable in
-                        self?.currentAccountProxy.onNext(enable)
-                        self?.notificationsEnabled = enable
-                    })
-                    .disposed(by: self.disposeBag)
+//                self.accountService.proxyEnabled(accountID: account.id)
+//                    .asObservable()
+//                    .take(1)
+//                    .subscribe(onNext: { [weak self] enable in
+//                        self?.currentAccountProxy.onNext(enable)
+//                        self?.notificationsEnabled = enable
+//                    })
+//                    .disposed(by: self.disposeBag)
             }
         })
         return currentAccountProxy.share()

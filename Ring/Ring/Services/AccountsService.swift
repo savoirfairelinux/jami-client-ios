@@ -309,6 +309,14 @@ class AccountsService: AccountAdapterDelegate {
         return true
     }
 
+    func setDeviceName(accountId: String, deviceName: String) {
+        let details = self.getAccountDetails(fromAccountId: accountId)
+        details
+            .set(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountDeviceName),
+                 withValue: deviceName)
+        setAccountDetails(forAccountId: accountId, withDetails: details)
+    }
+
     func getAccountProfile(accountId: String) -> Profile? {
         return self.dbManager.accountProfile(for: accountId)
     }
@@ -655,7 +663,7 @@ class AccountsService: AccountAdapterDelegate {
 
         var devices = [DeviceModel]()
 
-        let accountDetails = self.getAccountDetails(fromAccountId: id)
+        let accountDetails = self.getVolatileAccountDetails(fromAccountId: id)
         let currentDeviceId = accountDetails.get(withConfigKeyModel: ConfigKeyModel(withKey: ConfigKey.accountDeviceId))
 
         for key in knownRingDevices.allKeys {
@@ -837,6 +845,7 @@ class AccountsService: AccountAdapterDelegate {
     }
 
     func deviceRevocationEnded(for account: String, state: Int, deviceId: String) {
+        reloadAccounts()
         var event = ServiceEvent(withEventType: .deviceRevocationEnded)
         event.addEventInput(.id, value: account)
         event.addEventInput(.state, value: state)
@@ -873,25 +882,6 @@ class AccountsService: AccountAdapterDelegate {
             proxyEnabled = true
         }
         return proxyEnabled
-    }
-
-    func proxyEnabled(accountID: String) -> BehaviorRelay<Bool> {
-        let variable = BehaviorRelay<Bool>(value: getCurrentProxyState(accountID: accountID))
-        self.sharedResponseStream
-            .filter({ event -> Bool in
-                if let accountId: String = event.getEventInput(.accountId) {
-                    return event.eventType == ServiceEventType.proxyEnabled
-                        && accountId == accountID
-                }
-                return false
-            })
-            .subscribe(onNext: { (event) in
-                if let state: Bool = event.getEventInput(.state) {
-                    variable.accept(state)
-                }
-            })
-            .disposed(by: self.disposeBag)
-        return variable
     }
 
     func changeProxyStatus(accountID: String, enable: Bool) {

@@ -1304,7 +1304,7 @@ class MeViewController: EditProfileViewController, StoryboardBased, ViewModelBas
                                       preferredStyle: .alert)
         let actionCancel = UIAlertAction(title: L10n.Global.cancel,
                                          style: .cancel)
-        let actionConfirm = UIAlertAction(title: L10n.AccountPage.removeAccountButton,
+        let actionConfirm = UIAlertAction(title: L10n.Global.remove,
                                           style: .destructive) { [weak self] _ in
             self?.viewModel.startAccountRemoving()
         }
