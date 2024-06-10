@@ -329,6 +329,14 @@
 "accountPage.upnpEnabled" = "Use UPnP";
 "accountPage.security" = "Security";
 "accountPage.enableSRTP" = "Encrypt media streams (SRTP)";
+"accountPage.registerNameExplanation" = "Register a username to help others more easily to find anr reach you on Jami.";
+"accountPage.profileHeader" = "Profile";
+"accountPage.profileNameNotSelected" = "Name not selected";
+"accountPage.accountHeader" = "Account";
+"accountPage.profileImage" = "Profile Image";
+"accountPage.profileName" = "Profile Name";
+"accountPage.profileNamePlaceholder" = "Enter your profile name";
+"accountPage.editProfile" = "Edit Profile";
 
 //Account
 "account.sipUsername" = "User Name";
