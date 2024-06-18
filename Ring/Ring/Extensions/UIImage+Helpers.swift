@@ -61,10 +61,14 @@ extension UIImage {
         ] as CFDictionary
 
         guard let imageSource = CGImageSourceCreateWithURL(fileURL as CFURL, nil),
-              let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options) else {
+              let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options),
+              let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [CFString: Any],
+              let orientationRawValue = imageProperties[kCGImagePropertyOrientation] as? UInt32 else {
             return nil
         }
-        return UIImage(cgImage: downsampledImage)
+        let orientation = getImageOrientation(from: orientationRawValue)
+
+        return UIImage(cgImage: downsampledImage, scale: UIScreen.main.scale, orientation: orientation)
     }
 
     func setRoundCorner(radius: CGFloat, offset: CGFloat) -> UIImage? {
@@ -487,5 +491,28 @@ extension UIImage {
     func cropImage(to rect: CGRect) -> UIImage? {
         guard let cgImage = self.cgImage?.cropping(to: rect) else { return nil }
         return UIImage(cgImage: cgImage)
+    }
+}
+
+func getImageOrientation(from orientationRawValue: UInt32) -> UIImage.Orientation {
+    switch orientationRawValue {
+    case 1:
+        return .up
+    case 2:
+        return .upMirrored
+    case 3:
+        return .down
+    case 4:
+        return .downMirrored
+    case 5:
+        return .leftMirrored
+    case 6:
+        return .right
+    case 7:
+        return .rightMirrored
+    case 8:
+        return .left
+    default:
+        return .up
     }
 }
