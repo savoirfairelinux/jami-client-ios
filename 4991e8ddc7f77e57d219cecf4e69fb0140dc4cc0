@@ -1,0 +1,878 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184510e1_09d43da0",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change `\u0026` to `and`? Thank you",
+      "range": {
+        "startLine": 95,
+        "startChar": 146,
+        "endLine": 95,
+        "endChar": 147
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e52784_77707e0b",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Remove the escape characters `\\` and change plain quotes \"…\" to smart quotes “…”? Thank you",
+      "range": {
+        "startLine": 100,
+        "startChar": 106,
+        "endLine": 100,
+        "endChar": 112
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ea5fc0_a5737008",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change 3-character ellipsis `...` to 1-character ellipsis `…`? Thank you",
+      "range": {
+        "startLine": 113,
+        "startChar": 133,
+        "endLine": 113,
+        "endChar": 136
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ff9af0e_7452f5bd",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change 3-character ellipsis `...` to 1-character ellipsis `…`? Thank you",
+      "range": {
+        "startLine": 142,
+        "startChar": 22,
+        "endLine": 142,
+        "endChar": 25
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ca9615_37c29e6d",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change 3-character ellipsis `...` to 1-character ellipsis `…`? Thank you",
+      "range": {
+        "startLine": 143,
+        "startChar": 117,
+        "endLine": 143,
+        "endChar": 120
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecb0fc04_2c064e69",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case, i.e. \"Manage account\"?\n\nPlease ignore if the current string follows the iOS operating system convention.\n\nThank you",
+      "range": {
+        "startLine": 151,
+        "startChar": 103,
+        "endLine": 151,
+        "endChar": 117
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88759afa_536419a3",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Can these 2 string be converted to 1 string as better translations are possible if it is one string.\n\nPlease advise if these 2 string are automatically seen as 1 string in Transifex.\n\nThank you",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 138
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67a9006e_c77ad1d5",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change `by` to `with`? Thank you",
+      "range": {
+        "startLine": 174,
+        "startChar": 148,
+        "endLine": 174,
+        "endChar": 150
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc5409ad_2435d016",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change `by` to `with`? Thank you",
+      "range": {
+        "startLine": 175,
+        "startChar": 255,
+        "endLine": 175,
+        "endChar": 257
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e25807_d04d0f42",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Typo: `genrate`? Should it be `generate`? Thank you",
+      "range": {
+        "startLine": 176,
+        "startChar": 64,
+        "endLine": 176,
+        "endChar": 71
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06aea301_21d7da66",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Typo: `genrate`? Should it be `generate`? Thank you",
+      "range": {
+        "startLine": 177,
+        "startChar": 161,
+        "endLine": 177,
+        "endChar": 168
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78cd236a_0cc8309a",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "In qt client, has `import from another device` been changed to “Link new device”. Should `import from another device` this be changed to `“Link new device”`? Thank you",
+      "range": {
+        "startLine": 189,
+        "startChar": 151,
+        "endLine": 189,
+        "endChar": 177
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b584458_1963ddb0",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case? Thank you",
+      "range": {
+        "startLine": 194,
+        "startChar": 8,
+        "endLine": 194,
+        "endChar": 21
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2a44c93_2fb92a2a",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case? Thank you",
+      "range": {
+        "startLine": 195,
+        "startChar": 101,
+        "endLine": 195,
+        "endChar": 114
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7f45a4_eb033d56",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case? Thank you",
+      "range": {
+        "startLine": 196,
+        "startChar": 8,
+        "endLine": 196,
+        "endChar": 20
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e297fae1_c310cb19",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case? Thank you",
+      "range": {
+        "startLine": 197,
+        "startChar": 99,
+        "endLine": 197,
+        "endChar": 111
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec01467b_e0fd0164",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be `Enter profile name` as tech support might be setting up the account for user? Thank you",
+      "range": {
+        "startLine": 200,
+        "startChar": 8,
+        "endLine": 200,
+        "endChar": 31
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1111e569_bbb3cb89",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be `Enter profile name` as tech support might be setting up the account for user? Thank you",
+      "range": {
+        "startLine": 201,
+        "startChar": 121,
+        "endLine": 201,
+        "endChar": 144
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc05bce2_e0274a9c",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Remove `to `? Thank you",
+      "range": {
+        "startLine": 212,
+        "startChar": 55,
+        "endLine": 212,
+        "endChar": 58
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d611a212_b4407d54",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Remove `to `? Thank you",
+      "range": {
+        "startLine": 213,
+        "startChar": 170,
+        "endLine": 213,
+        "endChar": 173
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91b16592_315c423f",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change plain quotes \"…\" to smart quotes “…”? Thank you",
+      "range": {
+        "startLine": 214,
+        "startChar": 20,
+        "endLine": 214,
+        "endChar": 28
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "554026d5_c5569b7e",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change `can not` to `cannot`? Thank you",
+      "range": {
+        "startLine": 215,
+        "startChar": 197,
+        "endLine": 215,
+        "endChar": 204
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "553990ed_3ea9b115",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change `can` to `may`? Thank you",
+      "range": {
+        "startLine": 215,
+        "startChar": 243,
+        "endLine": 215,
+        "endChar": 246
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "859e80ea_2b7ec69a",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Remove the escape character `\\` and change plain quotes \"…\" to smart quotes “…”? Thank you",
+      "range": {
+        "startLine": 215,
+        "startChar": 129,
+        "endLine": 215,
+        "endChar": 139
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6769c5f0_7947c9b0",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change `Select` to `Set`? Thank you",
+      "range": {
+        "startLine": 226,
+        "startChar": 8,
+        "endLine": 226,
+        "endChar": 14
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cac26fbb_ecde9200",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Change `Select` to `Set`? Thank you",
+      "range": {
+        "startLine": 227,
+        "startChar": 123,
+        "endLine": 227,
+        "endChar": 129
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6f6cda_c869c649",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Typo: `Requere`? `Request`, `Require`, or something else? Thank you",
+      "range": {
+        "startLine": 234,
+        "startChar": 8,
+        "endLine": 234,
+        "endChar": 15
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c19113_7f4ea472",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Typo: `Requere`? `Request`, `Require`, or something else? Thank you",
+      "range": {
+        "startLine": 235,
+        "startChar": 125,
+        "endLine": 235,
+        "endChar": 132
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15a53807_ac94892c",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case? Thank you",
+      "range": {
+        "startLine": 631,
+        "startChar": 8,
+        "endLine": 631,
+        "endChar": 21
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6ad908c_047f3824",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case? Thank you",
+      "range": {
+        "startLine": 632,
+        "startChar": 96,
+        "endLine": 632,
+        "endChar": 109
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5e20e39_665315f5",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case? Thank you",
+      "range": {
+        "startLine": 633,
+        "startChar": 8,
+        "endLine": 633,
+        "endChar": 22
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f4f4192_265bac67",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case? Thank you",
+      "range": {
+        "startLine": 634,
+        "startChar": 98,
+        "endLine": 634,
+        "endChar": 112
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8e5f1f0_b444a4b7",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case? Thank you",
+      "range": {
+        "startLine": 635,
+        "startChar": 8,
+        "endLine": 635,
+        "endChar": 22
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b21f1f_2483ed1b",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be sentence case? Thank you",
+      "range": {
+        "startLine": 636,
+        "startChar": 98,
+        "endLine": 636,
+        "endChar": 112
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4832b2bd_008c0017",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be `OK`? Thank you",
+      "range": {
+        "startLine": 643,
+        "startChar": 8,
+        "endLine": 643,
+        "endChar": 10
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67f8354c_a75b8afc",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should this be `OK`? Thank you",
+      "range": {
+        "startLine": 644,
+        "startChar": 76,
+        "endLine": 644,
+        "endChar": 78
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08dbbca9_7b7cd32a",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should `a ` be removed? Thank you",
+      "range": {
+        "startLine": 653,
+        "startChar": 17,
+        "endLine": 653,
+        "endChar": 19
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf132e9_30646ddf",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-20T22:24:20Z",
+      "side": 1,
+      "message": "Should `a ` be removed? Thank you",
+      "range": {
+        "startLine": 654,
+        "startChar": 115,
+        "endLine": 654,
+        "endChar": 117
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
