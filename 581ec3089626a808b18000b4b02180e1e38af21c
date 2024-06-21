@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16c59cb3_5b5318a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Hope you are okay with these comments.\n\nIf you are going to make a new patch with the updates, please feel free to add ovari as a reviewer or CC.\n\nThank you once again",
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f911e1a_7259fa4d",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 23
@@ -72,6 +89,144 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d3d091a_2afd58e3",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Can this string include the variable for the contact/swarm, i.e. `Incoming call from @`? It may help with providing better translations. Thank you",
+      "range": {
+        "startLine": 252,
+        "startChar": 36,
+        "endLine": 252,
+        "endChar": 55
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d13c4be3_55166d53",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `C` to `c`? Thank you",
+      "range": {
+        "startLine": 254,
+        "startChar": 36,
+        "endLine": 254,
+        "endChar": 37
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23765c12_d08f561c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `C` to `c`? Thank you",
+      "range": {
+        "startLine": 255,
+        "startChar": 36,
+        "endLine": 255,
+        "endChar": 37
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d728a5_719b8a7c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "The qt-client string is `Open settings`, and when Settings are open then `Close settings` are shown on the tooltip.\n\nShould this string be changed to `Open settings`?\n\nThank you",
+      "range": {
+        "startLine": 256,
+        "startChar": 26,
+        "endLine": 256,
+        "endChar": 40
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09feae29_3e350341",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "`openSettings`",
+      "range": {
+        "startLine": 256,
+        "startChar": 9,
+        "endLine": 256,
+        "endChar": 21
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57936dc7_282c94b9",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Should this be `Stop location sharing` as screen sharing is also possible? May help with screen readers. Thank you",
+      "range": {
+        "startLine": 257,
+        "startChar": 33,
+        "endLine": 257,
+        "endChar": 45
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8958478_a166c946",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 23
@@ -95,6 +250,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2115d104_6de254a0",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "1. Change `to you` to `with you`?\n2. Can this string include the variable for the contact/swarm as it may help with providing better translations?\n3. Should there be a full stop `.`?\n\nSuggestion:\n`@ wants to talk with you.`\n\nThank you",
+      "range": {
+        "startLine": 260,
+        "startChar": 28,
+        "endLine": 260,
+        "endChar": 48
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25c287e8_647a4029",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 23
@@ -111,6 +289,52 @@
         "startChar": 19,
         "endLine": 261,
         "endChar": 27
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e04ff147_672a2e99",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "`Call ended`",
+      "range": {
+        "startLine": 263,
+        "startChar": 24,
+        "endLine": 263,
+        "endChar": 37
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cdbf16c_ce2d247c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "`callEnded`",
+      "range": {
+        "startLine": 263,
+        "startChar": 7,
+        "endLine": 263,
+        "endChar": 19
       },
       "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
@@ -686,6 +910,259 @@
         "startChar": 13,
         "endLine": 301,
         "endChar": 33
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f13738e_02ae613d",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `P` to `p`? Thank you",
+      "range": {
+        "startLine": 341,
+        "startChar": 34,
+        "endLine": 341,
+        "endChar": 35
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd4dadfb_628370aa",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Typo: `accoutn`? Change to `account`? Thank you",
+      "range": {
+        "startLine": 344,
+        "startChar": 123,
+        "endLine": 344,
+        "endChar": 130
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "150f62a5_056be76c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Change `your` to `the` as tech support might be setting this up? Thank you",
+      "range": {
+        "startLine": 344,
+        "startChar": 118,
+        "endLine": 344,
+        "endChar": 122
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c45e79b_d026dba7",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Change `by` to `with`? Thank you",
+      "range": {
+        "startLine": 344,
+        "startChar": 177,
+        "endLine": 344,
+        "endChar": 179
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f3f86f9_c2bf7f8b",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Change `Your` to `This` as tech support might be setting this up? Thank you",
+      "range": {
+        "startLine": 344,
+        "startChar": 37,
+        "endLine": 344,
+        "endChar": 41
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a704d0ed_ca4aff92",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "`Install and launch Jami, select “Import from another device” and scan QR code or manually enter the PIN.`",
+      "range": {
+        "startLine": 353,
+        "startChar": 39,
+        "endLine": 353,
+        "endChar": 141
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a0bed06_35277ca1",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Should `PIN` always have ` code`, i.e. `PIN code`? Thank you",
+      "range": {
+        "startLine": 354,
+        "startChar": 45,
+        "endLine": 354,
+        "endChar": 48
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dfb171d_6d6d3c55",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "1. End with a full stop `.`?\n2. Remove `your`?\n\n`Notifications are disabled for Jami. Please enable them in order to use this feature in the device settings.`",
+      "range": {
+        "startLine": 356,
+        "startChar": 35,
+        "endLine": 356,
+        "endChar": 114
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0cbe338_2d7564ee",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Should this string end with a full stop `.`?\n\n`These settings only apply to this account.`\n\nThank you",
+      "range": {
+        "startLine": 358,
+        "startChar": 44,
+        "endLine": 358,
+        "endChar": 91
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec9c630_1923760f",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Unfortunately, cannot make sense of this string. Hopefully the text below makes sense.\n\n1. If `all` then does `application` need to be in plural form, i.e. `applications`\n2. Can `the` be removed?\n3. Should this string end with a full stop `.`?\n\n`These settings apply to all applications.`\n\nThank you",
+      "range": {
+        "startLine": 360,
+        "startChar": 40,
+        "endLine": 360,
+        "endChar": 88
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e3e0988_53135c30",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T23:20:46Z",
+      "side": 1,
+      "message": "Should `configurations` be singular, i.e. `configuration`, as you can only configure your account one way. The 1 configuration (one set) group is singular which might have many settings inside the one group; however, the configuration is only 1.\n\nhttps://learn.microsoft.com/en-us/visualstudio/ide/how-to-create-and-edit-configurations?view\u003dvs-2022",
+      "range": {
+        "startLine": 361,
+        "startChar": 63,
+        "endLine": 361,
+        "endChar": 77
       },
       "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
