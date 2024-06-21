@@ -279,6 +279,190 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e890ef3d_d3494085",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `m` to `M`? Thank you",
+      "range": {
+        "startLine": 270,
+        "startChar": 21,
+        "endLine": 270,
+        "endChar": 22
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7bc833_a679a7eb",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `u` to `U`? Thank you",
+      "range": {
+        "startLine": 271,
+        "startChar": 23,
+        "endLine": 271,
+        "endChar": 24
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16082bf2_06337505",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `l` to `L`? Thank you",
+      "range": {
+        "startLine": 272,
+        "startChar": 21,
+        "endLine": 272,
+        "endChar": 22
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf5270a7_332ddf29",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "After `//` should there be a space ` `?",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 2
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9b9ec8e_e1ea8d0e",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `P` to `p`? Thank you",
+      "range": {
+        "startLine": 274,
+        "startChar": 10,
+        "endLine": 274,
+        "endChar": 11
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "102a5e8b_481b8e7b",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `u` to `U`? Thank you",
+      "range": {
+        "startLine": 278,
+        "startChar": 39,
+        "endLine": 278,
+        "endChar": 40
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e5cd22a_13429817",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `D` to `d`? Thank you",
+      "range": {
+        "startLine": 279,
+        "startChar": 43,
+        "endLine": 279,
+        "endChar": 44
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a0e8248_8d33d68e",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Can this be sentence case, i.e. \"Unblock\"? Thank you",
+      "range": {
+        "startLine": 281,
+        "startChar": 32,
+        "endLine": 281,
+        "endChar": 39
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "174debed_bbddb52c",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 23
@@ -647,6 +831,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e26fe12d_055570a6",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "What is being connect to?\n\n`An error occurred while connecting to ….`",
+      "range": {
+        "startLine": 387,
+        "startChar": 35,
+        "endLine": 387,
+        "endChar": 51
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08f59c69_c6b93fb1",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Should `e` be `E`? Thank you",
+      "range": {
+        "startLine": 387,
+        "startChar": 25,
+        "endLine": 387,
+        "endChar": 26
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23ef8603_47696627",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `a` to `A`?\n\nor `@ account needs to be migrated.`?\n\nThank you",
+      "range": {
+        "startLine": 388,
+        "startChar": 27,
+        "endLine": 388,
+        "endChar": 28
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8132e3e2_127bc345",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Change `need` to `needs`?\n\nOr `requires` and then `migrated` changes to `migration`.\n\n`Account requires migration.`\nor\n`@ account require migration.`\n\nThank you",
+      "range": {
+        "startLine": 388,
+        "startChar": 35,
+        "endLine": 388,
+        "endChar": 39
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c89be15_64317cdc",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 23
@@ -693,6 +969,121 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b2c09a6_fb61e5a6",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "`A network error occurred while exporting the account.`\n\nIgnore the full stop `.` if not required.\n\nThank you",
+      "range": {
+        "startLine": 397,
+        "startChar": 29,
+        "endLine": 397,
+        "endChar": 71
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ba26dd2_42363e8a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "`An error occurred while exporting the account.`\n\nIgnore the full stop `.` if not required.\n\nThank you",
+      "range": {
+        "startLine": 398,
+        "startChar": 29,
+        "endLine": 398,
+        "endChar": 64
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb7f43f2_c6f6bc5d",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Change `pin` to `PIN`? Thank you",
+      "range": {
+        "startLine": 399,
+        "startChar": 163,
+        "endLine": 399,
+        "endChar": 166
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1ea9205_66ec6b24",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Change quotes `\"…\"` to smart quotes `“…”`? Thank you",
+      "range": {
+        "startLine": 399,
+        "startChar": 122,
+        "endLine": 399,
+        "endChar": 157
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a92a1e6_d2974d12",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "End sentence with a full stop `.`? Thank you",
+      "range": {
+        "startLine": 399,
+        "startChar": 189,
+        "endLine": 399,
+        "endChar": 190
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ddec3be_7608b43a",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 23
@@ -709,6 +1100,121 @@
         "startChar": 0,
         "endLine": 402,
         "endChar": 2
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4141359_92746d60",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `Start Audio Call` to `Start audio call`? Thank you",
+      "range": {
+        "startLine": 403,
+        "startChar": 32,
+        "endLine": 403,
+        "endChar": 48
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb83b971_0ddbe775",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `Start Video Call` to `Start video call`? Thank you",
+      "range": {
+        "startLine": 404,
+        "startChar": 32,
+        "endLine": 404,
+        "endChar": 48
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db6a13d2_1cd61f79",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `M` to `m`? Thank you",
+      "range": {
+        "startLine": 405,
+        "startChar": 34,
+        "endLine": 405,
+        "endChar": 35
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed354a5_5155e52b",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `C` to `c`? Thank you",
+      "range": {
+        "startLine": 406,
+        "startChar": 41,
+        "endLine": 406,
+        "endChar": 42
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9803d593_5a027276",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `C` to `c`? Thank you",
+      "range": {
+        "startLine": 407,
+        "startChar": 43,
+        "endLine": 407,
+        "endChar": 44
       },
       "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
@@ -739,6 +1245,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c25e936_715c8055",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "End sentence with a full stop `.`? Thank you",
+      "range": {
+        "startLine": 417,
+        "startChar": 179,
+        "endLine": 417,
+        "endChar": 180
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d27a7c9_906f655a",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 23
@@ -755,6 +1284,29 @@
         "startChar": 0,
         "endLine": 419,
         "endChar": 2
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04bf7d9d_3f6610dc",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `C` to `c`? Thank you",
+      "range": {
+        "startLine": 420,
+        "startChar": 37,
+        "endLine": 420,
+        "endChar": 38
       },
       "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
@@ -1100,6 +1652,75 @@
         "startChar": 0,
         "endLine": 465,
         "endChar": 2
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2619349_6cf5531c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "Convert to sentence case, i.e. change `A` to `a`? Thank you",
+      "range": {
+        "startLine": 467,
+        "startChar": 42,
+        "endLine": 467,
+        "endChar": 43
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d03fd68_74837f0c",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "`This account requires migration.`",
+      "range": {
+        "startLine": 468,
+        "startChar": 32,
+        "endLine": 468,
+        "endChar": 65
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "111e92c2_e0cfa262",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-21T22:33:43Z",
+      "side": 1,
+      "message": "`To proceed with the migration, enter account password.`\n\nor\n\n`To proceed with the migration, please enter account password.`\n\nThank you",
+      "range": {
+        "startLine": 469,
+        "startChar": 40,
+        "endLine": 469,
+        "endChar": 130
       },
       "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
