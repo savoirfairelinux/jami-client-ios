@@ -24,6 +24,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83adbf2f_7ab1d75e",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 17
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-21T15:28:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8125d338_5e9e2f23",
+      "range": {
+        "startLine": 286,
+        "startChar": 13,
+        "endLine": 286,
+        "endChar": 19
+      },
+      "revId": "c1d26b4fd6bf7588b647cb0f2897ca43eb7dda00",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7940b78e_d04e8bb6",
@@ -65,6 +89,54 @@
         "startChar": 62,
         "endLine": 287,
         "endChar": 68
+      },
+      "revId": "c1d26b4fd6bf7588b647cb0f2897ca43eb7dda00",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b611cfc4_147ca98e",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 17
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-21T15:28:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "916db15f_fcbcc85f",
+      "range": {
+        "startLine": 287,
+        "startChar": 62,
+        "endLine": 287,
+        "endChar": 68
+      },
+      "revId": "c1d26b4fd6bf7588b647cb0f2897ca43eb7dda00",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3b64ae4_8d4cbb6e",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 17
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-21T15:28:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7940b78e_d04e8bb6",
+      "range": {
+        "startLine": 287,
+        "startChar": 94,
+        "endLine": 287,
+        "endChar": 103
       },
       "revId": "c1d26b4fd6bf7588b647cb0f2897ca43eb7dda00",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
