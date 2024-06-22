@@ -543,6 +543,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cfa884e_8a89b822",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-22T05:02:17Z",
+      "side": 1,
+      "message": "Thanks for your reply.\n\nSuggestions:\n1. Add smart quotes and start with a capital `I` for `import`\n2. Add ` code` after PIN. \n\n`Install and launch Jami, select “Import from another device” and scan QR code or manually enter the PIN code.`",
+      "parentUuid": "8c8b8d31_9a99293c",
+      "range": {
+        "startLine": 189,
+        "startChar": 151,
+        "endLine": 189,
+        "endChar": 177
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b584458_1963ddb0",
         "filename": "Ring/Ring/Constants/Generated/Strings.swift",
         "patchSetId": 19
@@ -625,6 +649,30 @@
       "side": 1,
       "message": "note. These are generated files, Ring/Ring/Resources/en.lproj/Localizable.strings is source file",
       "parentUuid": "a2a44c93_2fb92a2a",
+      "range": {
+        "startLine": 195,
+        "startChar": 101,
+        "endLine": 195,
+        "endChar": 114
+      },
+      "revId": "4991e8ddc7f77e57d219cecf4e69fb0140dc4cc0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c49e6489_c9e732c7",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 19
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-22T05:02:17Z",
+      "side": 1,
+      "message": "It is understood that correct. Thank you",
+      "parentUuid": "d17fc822_5d3d8ffd",
       "range": {
         "startLine": 195,
         "startChar": 101,
