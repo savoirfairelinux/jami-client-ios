@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "368fc789_f3f4f0ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-23T23:44:26Z",
+      "side": 1,
+      "message": "The discussion thread is at https://git.jami.net/savoirfairelinux/jami-client-qt/-/issues/1730#note_51835",
+      "parentUuid": "367b6eb1_e034355a",
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f911e1a_7259fa4d",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 23
