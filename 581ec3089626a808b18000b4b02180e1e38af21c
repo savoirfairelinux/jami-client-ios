@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c593f1eb_f0f3348f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-23T09:24:50Z",
+      "side": 1,
+      "message": "Sorry, we were wrong. It seems `remove` is incorrect and `revoke` is correct.\n\n1. Visit https://learn.microsoft.com/en-us/globalization/reference/microsoft-language-resources#ui-strings\n2. Click \"Microsoft UI String Search\"\nhttps://msit.powerbi.com/view?r\u003deyJrIjoiMmE2NjJhMDMtNTY3MC00MmI2LWFmOWUtYWM5YTVjODI5MjQwIiwidCI6IjcyZjk4OGJmLTg2ZjEtNDFhZi05MWFiLTJkN2NkMDExZGI0NyIsImMiOjV9\n3. Search Source String \u003d `revoke`\n\nSorry once again.",
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f911e1a_7259fa4d",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 23
@@ -749,6 +766,30 @@
         "startChar": 13,
         "endLine": 292,
         "endChar": 26
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ea0daa_16c5cb02",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-23T09:24:50Z",
+      "side": 1,
+      "message": "Sorry, we were wrong. It seems `remove` is incorrect and `revoke` is correct.\n\n1. Visit https://learn.microsoft.com/en-us/globalization/reference/microsoft-language-resources#ui-strings\n2. Click \"Microsoft UI String Search\"\nhttps://msit.powerbi.com/view?r\u003deyJrIjoiMmE2NjJhMDMtNTY3MC00MmI2LWFmOWUtYWM5YTVjODI5MjQwIiwidCI6IjcyZjk4OGJmLTg2ZjEtNDFhZi05MWFiLTJkN2NkMDExZGI0NyIsImMiOjV9\n3. Search Source String \u003d `revoke`",
+      "parentUuid": "527f9861_e21cec3a",
+      "range": {
+        "startLine": 292,
+        "startChar": 38,
+        "endLine": 292,
+        "endChar": 48
       },
       "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
