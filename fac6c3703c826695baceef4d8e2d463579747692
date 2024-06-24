@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ba75ec1_0b3465c5",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 26
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-24T21:50:22Z",
+      "side": 1,
+      "message": "Change `for` to `to`? Thank you",
+      "range": {
+        "startLine": 74,
+        "startChar": 39,
+        "endLine": 74,
+        "endChar": 42
+      },
+      "revId": "fac6c3703c826695baceef4d8e2d463579747692",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "289512db_89bc49cc",
+        "filename": "Ring/Ring/Constants/Generated/Strings.swift",
+        "patchSetId": 26
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-24T21:50:22Z",
+      "side": 1,
+      "message": "Change `for` to `to`? Thank you",
+      "range": {
+        "startLine": 75,
+        "startChar": 160,
+        "endLine": 75,
+        "endChar": 163
+      },
+      "revId": "fac6c3703c826695baceef4d8e2d463579747692",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    }
+  ]
+}
