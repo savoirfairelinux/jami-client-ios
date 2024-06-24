@@ -856,6 +856,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bbfc836_a40c99ca",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-24T22:25:55Z",
+      "side": 1,
+      "message": "Perhaps `Unlinking` should be used?",
+      "parentUuid": "23002d7c_be70c28b",
+      "range": {
+        "startLine": 293,
+        "startChar": 19,
+        "endLine": 293,
+        "endChar": 29
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e9d40ad3_973e7239",
         "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
         "patchSetId": 23
@@ -982,6 +1006,30 @@
       "writtenOn": "2024-06-21T22:13:04Z",
       "side": 1,
       "message": "Should `removeAccountMessage` be changed to `accountRemovalMessage` for consistence with `deviceRevocation…`/`deviceRemoval…`? Thank you",
+      "range": {
+        "startLine": 301,
+        "startChar": 13,
+        "endLine": 301,
+        "endChar": 33
+      },
+      "revId": "581ec3089626a808b18000b4b02180e1e38af21c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c296616_4682771a",
+        "filename": "Ring/Ring/Resources/en.lproj/Localizable.strings",
+        "patchSetId": 23
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 938
+      },
+      "writtenOn": "2024-06-24T22:25:55Z",
+      "side": 1,
+      "message": "Perhaps `Unlinking` should be used?",
+      "parentUuid": "92acd35d_f40c8bb4",
       "range": {
         "startLine": 301,
         "startChar": 13,
