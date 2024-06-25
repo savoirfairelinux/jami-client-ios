@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bba3e0b_e407b6a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-25T13:13:49Z",
+      "side": 1,
+      "message": "Modifications to the strings will be done in a separate commit.https://git.jami.net/savoirfairelinux/jami-client-ios/-/issues/382",
+      "revId": "fac6c3703c826695baceef4d8e2d463579747692",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ba75ec1_0b3465c5",
