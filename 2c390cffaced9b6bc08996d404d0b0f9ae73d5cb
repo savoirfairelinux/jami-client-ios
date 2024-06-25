@@ -41,6 +41,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1b2461f_3dfab13b",
+        "filename": "Ring/Ring/AppDelegate.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-25T20:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86852e5f_1fd897bc",
+      "range": {
+        "startLine": 197,
+        "startChar": 8,
+        "endLine": 199,
+        "endChar": 59
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fef81b53_1baa3459",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-06-25T19:16:09Z",
       "side": 1,
       "message": "2024",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61b6af7b_41ac425f",
+        "filename": "Ring/Ring/Features/Settings/Diagnostic/LogViewController.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-25T20:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fef81b53_1baa3459",
       "range": {
         "startLine": 2,
         "startChar": 18,
@@ -110,6 +158,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bfaaf00_211d0f88",
+        "filename": "Ring/Ring/Features/Settings/Me/BlockedContactsView.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-25T20:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "361d818e_6da9fdeb",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "535739fa_84d7b764",
@@ -127,6 +199,24 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1f80b8_e5657bca",
+        "filename": "Ring/Ring/Features/Settings/Me/LinkedDevicesView.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-25T20:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "535739fa_84d7b764",
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a248457e_f0caff6c",
@@ -140,6 +230,30 @@
       "writtenOn": "2024-06-25T19:16:09Z",
       "side": 1,
       "message": "fix page transition issue",
+      "range": {
+        "startLine": 51,
+        "startChar": 44,
+        "endLine": 51,
+        "endChar": 60
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2520a199_4d59ff8a",
+        "filename": "Ring/Ring/Features/Settings/Me/ManageSipAccountView.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-25T20:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a248457e_f0caff6c",
       "range": {
         "startLine": 51,
         "startChar": 44,
@@ -173,6 +287,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9b601b4_cbe8b710",
+        "filename": "Ring/Ring/Features/Settings/Me/ManageSipAccountView.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-25T20:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47315de1_b46dbadc",
+      "range": {
+        "startLine": 54,
+        "startChar": 100,
+        "endLine": 54,
+        "endChar": 103
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce0437d3_775181b7",
@@ -196,6 +334,30 @@
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d846c9_fc70bd1d",
+        "filename": "Ring/Ring/Features/Settings/Me/NameRegistrationVM.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-25T20:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce0437d3_775181b7",
+      "range": {
+        "startLine": 93,
+        "startChar": 9,
+        "endLine": 93,
+        "endChar": 30
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6442690e_bc2bce29",
@@ -209,6 +371,30 @@
       "writtenOn": "2024-06-25T19:16:09Z",
       "side": 1,
       "message": "??",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 2
+      },
+      "revId": "2c390cffaced9b6bc08996d404d0b0f9ae73d5cb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e5d555e_0571e256",
+        "filename": "Ring/Ring/Features/Settings/SwiftUI/Model/AccountPage.swift",
+        "patchSetId": 28
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2024-06-25T20:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6442690e_bc2bce29",
       "range": {
         "startLine": 1,
         "startChar": 0,
